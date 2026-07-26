@@ -139,7 +139,7 @@ describe('canonical Talents V2 row registry', () => {
           'Increases all threat you generate by 30% and your armor by 10%. Vanguard: your Stamina is increased by 40% and you gain armor equal to 70% of your Strength.',
         effect: {
           global: { threatPct: 0.3 },
-          stats: { armorPct: 0.1, staPct: 0.4, armorFromStrPct: 0.7 },
+          stats: { armorPct: 0.1, vitPct: 0.4, armorFromStrPct: 0.7 },
         },
       },
     });

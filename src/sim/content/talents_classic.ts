@@ -341,7 +341,7 @@ const WARLOCK_SPECS: SpecDef[] = [
     'metamorphosis',
     'Fiendlore',
     '20% of damage you take is redirected to your demon. Increases Stamina by 10%.',
-    { global: { petDmgSharePct: 0.2 }, stats: { staPct: 0.1 } },
+    { global: { petDmgSharePct: 0.2 }, stats: { vitPct: 0.1 } },
   ),
   spec(
     'destruction',

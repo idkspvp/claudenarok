@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
 import { MOBS } from '../src/sim/data';
-import { createMob } from '../src/sim/entity';
+import { createMob, statusMagicPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import {
   abilityScalingPower,
@@ -10,7 +10,7 @@ import {
   dotTickBonus,
 } from '../src/sim/spell_scaling';
 import type { Entity, PlayerClass } from '../src/sim/types';
-import { MAX_LEVEL, SPELL_POWER_PER_INT } from '../src/sim/types';
+import { MAX_LEVEL } from '../src/sim/types';
 
 function leveled(cls: PlayerClass, level = MAX_LEVEL) {
   const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
@@ -34,11 +34,19 @@ function spawnDummy(sim: Sim, target: Entity): Entity {
 }
 
 describe('Spell Power derivation', () => {
-  it('a caster derives spellPower = round(int * SPELL_POWER_PER_INT)', () => {
+  it('a caster derives spellPower from statusMagicPower(int), not a flat rate', () => {
+    // The flat SPELL_POWER_PER_INT conversion is gone: MATK carries a squared
+    // per-INT term, so the last points of a 99 are worth far more than the first.
     const { p } = leveled('mage');
     expect(p.stats.int).toBeGreaterThan(0);
-    expect(p.spellPower).toBe(Math.round(p.stats.int * SPELL_POWER_PER_INT));
+    expect(p.spellPower).toBe(Math.round(statusMagicPower(p.stats.int)));
     expect(p.spellPower).toBeGreaterThan(0);
+    // Per POINT, not in total: the first fifty points buy more MATK outright
+    // (there are five times as many of them), but each of the last ten is worth
+    // several of them. That is what makes a 99 in INT a commitment.
+    const perPointEarly = (statusMagicPower(50) - statusMagicPower(0)) / 50;
+    const perPointLate = (statusMagicPower(99) - statusMagicPower(89)) / 10;
+    expect(perPointLate).toBeGreaterThan(perPointEarly * 2);
   });
 
   it('grows with level (more int -> more spell power)', () => {

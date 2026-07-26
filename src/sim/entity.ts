@@ -22,11 +22,10 @@ import {
   cloneItemInstancePayload,
   critFractionFromRating,
   ENRAGE_HASTE_PCT,
+  emptyStatAllocation,
   hasteFractionFromRating,
   hitFractionFromRating,
-  emptyStatAllocation,
   SHIELD_BLOCK_BASE,
-  SPELL_POWER_PER_INT,
   type StatAllocation,
 } from './types';
 
@@ -237,8 +236,9 @@ export type PlayerEquipment = Partial<Record<EquipSlot, string>>;
 // The shapes below are Ragnarok's, taken from the documented pre-renewal status
 // formulas and written here in our own terms:
 //
-//   ATK   = STR + floor(STR/10)^2 + floor(DEX/5) + floor(LUK/5)
-//   MATK  = INT + floor(INT/7)^2
+//   ATK   = STR + floor(STR/10)^2 + floor(DEX/5) + floor(LUK/5)   (melee)
+//   ATK   = DEX + floor(DEX/10)^2 + floor(STR/5) + floor(LUK/5)   (bows)
+//   MATK  = INT + floor(INT/7)^2 .. INT + floor(INT/5)^2          (a range)
 //   HP    = class pool x (1 + VIT/100)
 //   SP    = class pool x (1 + INT/100)
 //   CRIT  = 1% + LUK x 0.3%
@@ -250,16 +250,41 @@ export type PlayerEquipment = Partial<Record<EquipSlot, string>>;
 //
 // Everything is floored at 0 so a draining debuff can never invert a pool.
 
-/** Status ATK: the melee attack contribution of STR, DEX and LUK. */
+/** Status ATK for a melee weapon: STR leads and carries the squared term, with
+ *  DEX and LUK contributing a fifth of their value each. */
 export function statusAttackPower(str: number, dex: number, luk: number): number {
   const s = Math.max(0, str);
-  return s + Math.floor(s / 10) ** 2 + Math.floor(Math.max(0, dex) / 5) + Math.floor(Math.max(0, luk) / 5);
+  return (
+    s +
+    Math.floor(s / 10) ** 2 +
+    Math.floor(Math.max(0, dex) / 5) +
+    Math.floor(Math.max(0, luk) / 5)
+  );
 }
 
-/** Status MATK: the magic attack contribution of INT. */
+/** Status ATK for a bow. The same shape with DEX and STR swapped: DEX leads and
+ *  takes the squared term, STR drops to a fifth. Passing DEX in twice — which is
+ *  what a careless reuse of the melee helper does — silently pays a bow user for
+ *  DEX a second time instead of for their STR. */
+export function statusRangedAttackPower(str: number, dex: number, luk: number): number {
+  const d = Math.max(0, dex);
+  return (
+    d +
+    Math.floor(d / 10) ** 2 +
+    Math.floor(Math.max(0, str) / 5) +
+    Math.floor(Math.max(0, luk) / 5)
+  );
+}
+
+/** Status MATK is a RANGE in Ragnarok, not a number: the two ends use different
+ *  divisors, and a cast rolls between them. This engine's spellPower is a single
+ *  value, so it carries the MIDPOINT — the average of the two ends — rather than
+ *  silently picking the low one and making INT read weaker than it is. */
 export function statusMagicPower(int: number): number {
   const i = Math.max(0, int);
-  return i + Math.floor(i / 7) ** 2;
+  const min = i + Math.floor(i / 7) ** 2;
+  const max = i + Math.floor(i / 5) ** 2;
+  return Math.round((min + max) / 2);
 }
 
 /** The VIT multiplier on the class HP pool (1.0 at VIT 0, 1.99 at VIT 99). */
@@ -382,7 +407,7 @@ export function recalcPlayerStats(
   // then folded multiplicatively at the relevant derivation step below.
   let allStatsPct = 0;
   let intPct = 0;
-  let staPct = 0;
+  let vitPct = 0;
   let buffArmorPct = 0;
   let buffApPct = 0;
   let maxHpPctAura = 0;
@@ -428,7 +453,7 @@ export function recalcPlayerStats(
     // integer-rounding talent value multiplier; converted to a fraction here.
     else if (a.kind === 'buff_stats_pct') allStatsPct += a.value / 100;
     else if (a.kind === 'buff_int_pct') intPct += a.value / 100;
-    else if (a.kind === 'buff_sta_pct') staPct += a.value / 100;
+    else if (a.kind === 'buff_sta_pct') vitPct += a.value / 100;
     else if (a.kind === 'buff_armor_pct') buffArmorPct += a.value / 100;
     else if (a.kind === 'buff_ap_pct') buffApPct += a.value / 100;
     // Avatar: the colossus transform grows the body by the fixed scale (its
@@ -454,26 +479,31 @@ export function recalcPlayerStats(
     s.agi += m.agi;
     s.vit += m.vit;
     s.int += m.int;
+    s.dex += m.dex;
     s.luk += m.luk;
     s.armor += m.armor;
     bonusAp += m.ap;
     bonusDodge += m.dodge;
-    if (m.staPct) s.vit = Math.round(s.vit * (1 + m.staPct));
+    if (m.vitPct) s.vit = Math.round(s.vit * (1 + m.vitPct));
     // Primary-attribute multipliers, applied to the fully-summed attribute. agiPct lands
     // before the agi-derived armor/dodge below so the percentage flows into them.
     if (m.strPct) s.str = Math.round(s.str * (1 + m.strPct));
     if (m.agiPct) s.agi = Math.round(s.agi * (1 + m.agiPct));
     if (m.intPct) s.int = Math.round(s.int * (1 + m.intPct));
-    if (m.spiPct) s.luk = Math.round(s.luk * (1 + m.spiPct));
+    if (m.dexPct) s.dex = Math.round(s.dex * (1 + m.dexPct));
+    if (m.lukPct) s.luk = Math.round(s.luk * (1 + m.lukPct));
   }
   // Percent stat raid buffs, folded multiplicatively on the computed (base + gear +
-  // flat + talent) primary stats so they feed every downstream derivation (AP from
-  // str/agi, Spell Power from int, HP from sta, crit/dodge from agi).
-  if (allStatsPct || intPct || staPct) {
+  // flat + talent) primary stats so they feed every downstream derivation (melee ATK
+  // from str/dex/luk, ranged ATK from dex, MATK from int, HP from vit, evasion from
+  // agi, crit from luk). DEX is listed here explicitly: it was the one attribute an
+  // all-stats buff skipped, which quietly made the buff worthless to a bow user.
+  if (allStatsPct || intPct || vitPct) {
     s.str = Math.round(s.str * (1 + allStatsPct));
     s.agi = Math.round(s.agi * (1 + allStatsPct));
-    s.vit = Math.round(s.vit * (1 + allStatsPct + staPct));
+    s.vit = Math.round(s.vit * (1 + allStatsPct + vitPct));
     s.int = Math.round(s.int * (1 + allStatsPct + intPct));
+    s.dex = Math.round(s.dex * (1 + allStatsPct));
     s.luk = Math.round(s.luk * (1 + allStatsPct));
   }
   // Floor Agility at 0 so a draining debuff (negative buff_agi) can never push the
@@ -598,7 +628,7 @@ export function recalcPlayerStats(
       ? Math.max(
           0,
           Math.round(
-            (statusAttackPower(s.dex, s.dex, s.luk) + bonusAp) *
+            (statusRangedAttackPower(s.str, s.dex, s.luk) + bonusAp) *
               (1 + (mods?.stats.apPct ?? 0) + buffApPct),
           ),
         )

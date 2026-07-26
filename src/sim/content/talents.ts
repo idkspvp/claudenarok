@@ -45,20 +45,22 @@ export interface StatModEffect {
   agi?: number;
   vit?: number;
   int?: number;
+  dex?: number;
   luk?: number;
   armor?: number;
   ap?: number;
   crit?: number;
   dodge?: number;
   apPct?: number;
-  staPct?: number;
+  vitPct?: number;
   armorPct?: number;
   armorFromStrPct?: number;
   maxHpPct?: number;
   strPct?: number;
   agiPct?: number;
   intPct?: number;
-  spiPct?: number;
+  dexPct?: number;
+  lukPct?: number;
 }
 
 export interface AbilityModEffect {
@@ -478,20 +480,22 @@ function zeroStats(): Required<StatModEffect> {
     agi: 0,
     vit: 0,
     int: 0,
+    dex: 0,
     luk: 0,
     armor: 0,
     ap: 0,
     crit: 0,
     dodge: 0,
     apPct: 0,
-    staPct: 0,
+    vitPct: 0,
     armorPct: 0,
     armorFromStrPct: 0,
     maxHpPct: 0,
     strPct: 0,
     agiPct: 0,
     intPct: 0,
-    spiPct: 0,
+    dexPct: 0,
+    lukPct: 0,
   };
 }
 
@@ -581,20 +585,22 @@ export function accumulateTalentEffect(
     target.agi += (source.agi ?? 0) * multiplier;
     target.vit += (source.vit ?? 0) * multiplier;
     target.int += (source.int ?? 0) * multiplier;
+    target.dex += (source.dex ?? 0) * multiplier;
     target.luk += (source.luk ?? 0) * multiplier;
     target.armor += (source.armor ?? 0) * multiplier;
     target.ap += (source.ap ?? 0) * multiplier;
     target.crit += (source.crit ?? 0) * multiplier;
     target.dodge += (source.dodge ?? 0) * multiplier;
     target.apPct += (source.apPct ?? 0) * multiplier;
-    target.staPct += (source.staPct ?? 0) * multiplier;
+    target.vitPct += (source.vitPct ?? 0) * multiplier;
     target.armorPct += (source.armorPct ?? 0) * multiplier;
     target.armorFromStrPct += (source.armorFromStrPct ?? 0) * multiplier;
     target.maxHpPct += (source.maxHpPct ?? 0) * multiplier;
     target.strPct += (source.strPct ?? 0) * multiplier;
     target.agiPct += (source.agiPct ?? 0) * multiplier;
     target.intPct += (source.intPct ?? 0) * multiplier;
-    target.spiPct += (source.spiPct ?? 0) * multiplier;
+    target.dexPct += (source.dexPct ?? 0) * multiplier;
+    target.lukPct += (source.lukPct ?? 0) * multiplier;
   }
   if (effect.global) {
     const target = modifiers.global;

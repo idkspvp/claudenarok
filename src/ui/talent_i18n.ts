@@ -107,12 +107,12 @@ const NON_DISPLAY_GLOBALS = new Set<GlobalKey>([
 ]);
 
 export interface TalentLocaleText {
-  // Primary-attribute multipliers (strPct/agiPct/intPct/spiPct) reuse their base stat
+  // Primary-attribute multipliers (strPct/agiPct/intPct/dexPct/lukPct) reuse their base stat
   // label ("+10% Agility"), so locales don't repeat them here. armorFromStrPct is
   // likewise excluded: it appears only in the Protection mastery, which carries its
   // own written description, so no auto-generated stat label is ever needed for it.
   statLabels: Record<
-    | Exclude<StatKey, 'strPct' | 'agiPct' | 'intPct' | 'spiPct' | 'armorFromStrPct'>
+    | Exclude<StatKey, 'strPct' | 'agiPct' | 'intPct' | 'dexPct' | 'lukPct' | 'armorFromStrPct'>
     | DisplayGlobalKey
     | 'damage'
     | 'cost'
@@ -157,15 +157,16 @@ const enText: TalentLocaleText = {
   statLabels: {
     str: 'Strength',
     agi: 'Agility',
-    vit: 'Stamina',
-    int: 'Intellect',
-    luk: 'Spirit',
+    vit: 'Vitality',
+    int: 'Intelligence',
+    dex: 'Dexterity',
+    luk: 'Luck',
     armor: 'armor',
     ap: 'attack power',
     crit: 'critical strike chance',
     dodge: 'dodge chance',
     apPct: 'attack power',
-    staPct: 'Stamina',
+    vitPct: 'Vitality',
     armorPct: 'armor',
     maxHpPct: 'maximum health',
     meleeDmgPct: 'melee ability damage',
@@ -614,11 +615,12 @@ function effectDescription(
   }
 
   const stats = effect.stats ?? {};
-  const PRIMARY_PCT: Partial<Record<StatKey, 'str' | 'agi' | 'int' | 'luk'>> = {
+  const PRIMARY_PCT: Partial<Record<StatKey, 'str' | 'agi' | 'int' | 'dex' | 'luk'>> = {
     strPct: 'str',
     agiPct: 'agi',
     intPct: 'int',
-    spiPct: 'luk',
+    dexPct: 'dex',
+    lukPct: 'luk',
   };
   for (const [key, value] of Object.entries(stats) as [StatKey, number][]) {
     if (value === undefined || value === 0) continue;

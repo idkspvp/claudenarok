@@ -98,7 +98,7 @@ describe('spec masteries', () => {
     });
     expect(TALENTS.warlock?.specs.find((s) => s.id === 'demonology')?.mastery.effect).toEqual({
       global: { petDmgSharePct: 0.2 },
-      stats: { staPct: 0.1 },
+      stats: { vitPct: 0.1 },
     });
   });
 

@@ -575,7 +575,9 @@ export const BASE_STAT = 1;
 export const MAX_STAT = 99;
 export const CREATION_STATUS_POINTS = 48;
 
-/** Points granted for reaching `level` from the level below it. */
+/** Points granted for LEAVING `level` — that is, for the step from `level` to
+ *  `level + 1`. The distinction is not cosmetic: reading it as the level being
+ *  REACHED puts the 1-to-99 total at 1,244 instead of Ragnarok's 1,225. */
 export function statusPointsForLevel(level: number): number {
   return Math.floor(level / 5) + 3;
 }
@@ -590,10 +592,16 @@ export function statRaiseCost(current: number): number {
   return Math.floor(current / 10) + 2;
 }
 
-/** Total points a character has ever been granted at `level`, creation included. */
+/** Total points a character has ever been granted at `level`, creation included.
+ *
+ *  At base level 99 this is 1,273: Ragnarok's 1,225 earned plus the 48 handed out
+ *  at creation. That figure is worth keeping honest, because raising two separate
+ *  attributes to 99 costs 1,274 — one point more than the game ever gives you.
+ *  Being one short is the whole reason job bonuses matter there, and a rounding
+ *  error here would quietly erase that. */
 export function totalStatusPointsAt(level: number): number {
   let total = CREATION_STATUS_POINTS;
-  for (let l = 2; l <= level; l++) total += statusPointsForLevel(l);
+  for (let l = 1; l < level; l++) total += statusPointsForLevel(l);
   return total;
 }
 
@@ -612,10 +620,7 @@ export function emptyStatAllocation(): StatAllocation {
 
 // The attributes authored in content (items, enchants, set bonuses). WARFARE
 // fractions are derived from ratings at runtime and are never authored.
-export type CoreStats = Pick<
-  Stats,
-  'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor'
->;
+export type CoreStats = Pick<Stats, 'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor'>;
 
 export interface WeaponInfo {
   min: number;
@@ -5010,10 +5015,12 @@ export function armorReduction(armor: number, attackerLevel: number): number {
 // Attack Power, mirroring the physical attack-power path. The pure coefficient
 // helpers live in src/sim/spell_scaling.ts; these are the tuning knobs.
 // ---------------------------------------------------------------------------
-// Spell Power gained per point of Intellect (1 Spell Power per 2 Intellect). Tuned
-// (see tests/spell_power.test.ts) so a fully-leveled caster gets a meaningful but
-// not dominant damage lift, scaling further as caster gear adds Int + Spell Power.
-export const SPELL_POWER_PER_INT = 0.5;
+// Intellect no longer converts to Spell Power at a flat rate: `statusMagicPower`
+// (src/sim/entity.ts) is the derivation now, and its squared per-INT term means the
+// conversion is not a per-point constant any more. A caster's Spell Power is that
+// value plus flat gear and buff bonuses. There is deliberately no knob here to
+// replace the old SPELL_POWER_PER_INT: a tuning constant nothing reads is a
+// constant that quietly starts lying.
 // Direct nuke coefficient = clamp(castTime, MIN, MAX) / DIVISOR (classic-era 3.5). The
 // max equals the divisor so the direct coefficient caps at 1.0 (a 3.5s+ cast gets
 // full Spell Power; a 6s Pyroblast does not exceed it).

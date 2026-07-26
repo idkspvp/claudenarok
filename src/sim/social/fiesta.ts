@@ -131,13 +131,13 @@ export function mergeAugmentMods(base: TalentModifiers, augIds: string[]): Talen
       s.crit += e.crit ?? 0;
       s.dodge += e.dodge ?? 0;
       s.apPct += e.apPct ?? 0;
-      s.staPct += e.staPct ?? 0;
+      s.vitPct += e.vitPct ?? 0;
       s.armorPct += e.armorPct ?? 0;
       s.maxHpPct += e.maxHpPct ?? 0;
       s.strPct += e.strPct ?? 0;
       s.agiPct += e.agiPct ?? 0;
       s.intPct += e.intPct ?? 0;
-      s.spiPct += e.spiPct ?? 0;
+      s.lukPct += e.lukPct ?? 0;
     }
     if (eff.global) {
       const g = m.global,

@@ -13,16 +13,21 @@
 
 import { CLASSES } from '../sim/data';
 import {
-  BASE_STAT,
+  intManaMultiplier,
+  statusAttackPower,
+  statusMagicPower,
+  statusRangedAttackPower,
+  vitHealthMultiplier,
+} from '../sim/entity';
+import {
   type AuraKind,
   armorReduction,
+  BASE_STAT,
   type CoreStats,
   type PlayerClass,
-  SPELL_POWER_PER_INT,
   type Stats,
   type WeaponInfo,
 } from '../sim/types';
-import { intManaMultiplier, statusAttackPower, vitHealthMultiplier } from '../sim/entity';
 
 // The unarmed default weapon the sim falls back to (src/sim/entity.ts recalcPlayerStats),
 // so an unarmed character still reads its real fist damage instead of a flat 0.
@@ -228,9 +233,9 @@ export function restingHealthPer5s(vit: number): number {
   return Math.round(Math.round(Math.max(0, vit) * 0.3 + 2) * REGEN_TICKS_PER_5S);
 }
 
-/** Out-of-combat mana regen, per 5 sec (sim.ts updateRegen, five-second rule:
- *  mana gains round(spi / 3 + 4 + floor(level / 5)) every 2s). Per-tick rounded
- *  first to match the engine, then scaled by 2.5 ticks. */
+/** Out-of-combat mana regen, per 5 sec (combat/auras.ts updateRegen, five-second
+ *  rule: mana gains round(int / 3 + 4 + floor(level / 5)) every 2s). Per-tick
+ *  rounded first to match the engine, then scaled by 2.5 ticks. */
 export function restingManaPer5s(int: number, level: number): number {
   return Math.round(
     Math.round(Math.max(0, int) / 3 + 4 + Math.floor(level / 5)) * REGEN_TICKS_PER_5S,
@@ -268,7 +273,9 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.str;
       effects.push({
         kind: 'attackPower',
-        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(0, stats.dex, stats.luk),
+        value:
+          statusAttackPower(stats.str, stats.dex, stats.luk) -
+          statusAttackPower(0, stats.dex, stats.luk),
       });
       break;
     }
@@ -282,12 +289,14 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.dex;
       effects.push({
         kind: 'attackPower',
-        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(stats.str, 0, stats.luk),
+        value:
+          statusAttackPower(stats.str, stats.dex, stats.luk) -
+          statusAttackPower(stats.str, 0, stats.luk),
       });
       if (cls === 'hunter') {
         effects.push({
           kind: 'rangedAttackPower',
-          value: statusAttackPower(stats.dex, stats.dex, stats.luk),
+          value: statusRangedAttackPower(stats.str, stats.dex, stats.luk),
         });
       }
       break;
@@ -302,6 +311,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.int;
       if (mana) {
         effects.push({ kind: 'maxManaPct', value: (intManaMultiplier(stats.int) - 1) * 100 });
+        effects.push({ kind: 'manaRegen', value: restingManaPer5s(stats.int, level) });
         effects.push({ kind: 'spellCritPct', value: stats.int * INT_SPELLCRIT_PER_POINT * 100 });
       } else {
         minorForClass = true;
@@ -313,7 +323,9 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       effects.push({ kind: 'critPct', value: stats.luk * LUK_CRIT_PER_POINT * 100 });
       effects.push({
         kind: 'attackPower',
-        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(stats.str, stats.dex, 0),
+        value:
+          statusAttackPower(stats.str, stats.dex, stats.luk) -
+          statusAttackPower(stats.str, stats.dex, 0),
       });
       break;
     }
@@ -517,7 +529,7 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
       return finish(input.attackPower, 1);
     }
     case 'spellPower': {
-      const fromInt = Math.round(stats.int * SPELL_POWER_PER_INT);
+      const fromInt = Math.round(statusMagicPower(stats.int));
       sources.push({ kind: 'attributes', value: fromInt, fromStat: 'int' });
       const g = gearTotal(gear, 'spellPower');
       if (g !== 0) sources.push({ kind: 'gear', value: g });

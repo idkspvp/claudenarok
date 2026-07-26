@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
-import { recalcPlayerStats } from '../src/sim/entity';
+import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import { ALL_CLASSES, armorReduction, type PlayerClass } from '../src/sim/types';
 import {
@@ -63,17 +63,25 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
     for (const level of LEVELS) {
       it(`${cls} L${level}: attack power breakdown sums to entity.attackPower`, () => {
         const p = freshPlayer(cls, level);
+        // Three attributes feed melee ATK now, and each tooltip line states that
+        // attribute's contribution in isolation, so the three still reconcile to
+        // the sheet's number. AGI no longer feeds it at all.
         const strAp = statEffectVal(cls, p, 'str', 'attackPower') ?? 0;
-        const agiAp = statEffectVal(cls, p, 'agi', 'attackPower') ?? 0; // present for rogue/hunter only
-        expect(strAp + agiAp).toBe(p.attackPower);
+        const dexAp = statEffectVal(cls, p, 'dex', 'attackPower') ?? 0;
+        const lukAp = statEffectVal(cls, p, 'luk', 'attackPower') ?? 0;
+        expect(statEffectVal(cls, p, 'agi', 'attackPower')).toBeUndefined();
+        expect(strAp + dexAp + lukAp).toBe(p.attackPower);
       });
 
-      it(`${cls} L${level}: agility crit/dodge match the 5% base + 0.05%/agi curve`, () => {
+      it(`${cls} L${level}: AGI drives dodge and LUK drives crit, off a 1% base`, () => {
         const p = freshPlayer(cls, level);
-        const critPct = statEffectVal(cls, p, 'agi', 'critPct') ?? 0;
+        // The split Ragnarok makes and this game did not: evasion is AGI's, the
+        // critical rate is LUK's, and neither starts at the old 5%.
         const dodgePct = statEffectVal(cls, p, 'agi', 'dodgePct') ?? 0;
-        expect(0.05 + critPct / 100).toBeCloseTo(p.critChance, 6);
-        expect(0.05 + dodgePct / 100).toBeCloseTo(p.dodgeChance, 6);
+        const critPct = statEffectVal(cls, p, 'luk', 'critPct') ?? 0;
+        expect(0.01 + dodgePct / 100).toBeCloseTo(p.dodgeChance, 6);
+        expect(0.01 + critPct / 100).toBeCloseTo(p.critChance, 6);
+        expect(statEffectVal(cls, p, 'agi', 'critPct')).toBeUndefined();
       });
 
       it(`${cls} L${level}: agility armor is the agi*2 portion of total armor`, () => {
@@ -154,53 +162,63 @@ describe('class-aware effect selection', () => {
     }
   });
 
-  it('only hunters get a ranged attack power line from Agility', () => {
+  it('only hunters get a ranged attack power line, and it hangs off Dexterity', () => {
+    // Bows read DEX where a melee weapon reads STR, so the ranged line belongs on
+    // the DEX cell. AGI carries none of it any more, for a hunter or anyone else.
     const hunter = freshPlayer('hunter', 20);
+    const st = hunter.stats;
     const ranged = effect(
-      buildStatTooltip('agi', inputFor('hunter', hunter)).effects,
+      buildStatTooltip('dex', inputFor('hunter', hunter)).effects,
       'rangedAttackPower',
     );
-    expect(ranged?.value).toBe(hunter.stats.agi * 2);
+    expect(ranged?.value).toBe(statusRangedAttackPower(st.str, st.dex, st.luk));
+    expect(
+      effect(buildStatTooltip('agi', inputFor('hunter', hunter)).effects, 'rangedAttackPower'),
+    ).toBeUndefined();
     const warrior = freshPlayer('warrior', 20);
     expect(
-      effect(buildStatTooltip('agi', inputFor('warrior', warrior)).effects, 'rangedAttackPower'),
+      effect(buildStatTooltip('dex', inputFor('warrior', warrior)).effects, 'rangedAttackPower'),
     ).toBeUndefined();
   });
 
-  it('Intellect and Spirit show the minor-benefit note for non-mana classes only', () => {
+  it('only Intellect shows the minor-benefit note, and only for non-mana classes', () => {
     const rogue = freshPlayer('rogue', 20); // energy
     const warrior = freshPlayer('warrior', 20); // rage
     for (const cls of [rogue, warrior]) {
       const c = cls === rogue ? 'rogue' : 'warrior';
       const intM = buildStatTooltip('int', inputFor(c, cls));
-      const spiM = buildStatTooltip('luk', inputFor(c, cls));
       expect(intM.minorForClass).toBe(true);
       expect(intM.effects).toHaveLength(0);
-      expect(spiM.minorForClass).toBe(true);
-      expect(spiM.effects).toHaveLength(0);
+      // LUK is NOT in this club: it buys crit and a slice of ATK for every class,
+      // so a rage or energy class reading its LUK cell must still see real lines.
+      const lukM = buildStatTooltip('luk', inputFor(c, cls));
+      expect(lukM.minorForClass).toBe(false);
+      expect(effect(lukM.effects, 'critPct')).toBeDefined();
+      expect(effect(lukM.effects, 'attackPower')).toBeDefined();
     }
     const mage = freshPlayer('mage', 20);
     const intMage = buildStatTooltip('int', inputFor('mage', mage));
     expect(intMage.minorForClass).toBe(false);
-    expect(effect(intMage.effects, 'maxMana')).toBeDefined();
+    expect(effect(intMage.effects, 'maxManaPct')).toBeDefined();
     expect(effect(intMage.effects, 'spellCritPct')).toBeDefined();
+    expect(effect(intMage.effects, 'manaRegen')).toBeDefined();
     expect(buildStatTooltip('luk', inputFor('mage', mage)).minorForClass).toBe(false);
   });
 
-  it('treats a druid as a mana class in every form (Int/Spirit keep their mana lines)', () => {
-    // A druid is fundamentally a mana class whose Int/Spirit govern the caster-form
-    // mana pool, so its breakdown must NOT collapse to "of little benefit" the way a
+  it('treats a druid as a mana class in every form, so Int keeps its mana lines', () => {
+    // A druid is fundamentally a mana class whose Int governs the caster-form mana
+    // pool, so its breakdown must NOT collapse to "of little benefit" the way a
     // true rage/energy class does, even while shapeshifted. isManaClass keys off the
     // base class (not the transient form resource) on purpose; lock that here.
     expect(isManaClass('druid')).toBe(true);
     const druid = freshPlayer('druid', 20);
     const intDruid = buildStatTooltip('int', inputFor('druid', druid));
     expect(intDruid.minorForClass).toBe(false);
-    expect(effect(intDruid.effects, 'maxMana')).toBeDefined();
+    expect(effect(intDruid.effects, 'maxManaPct')).toBeDefined();
     expect(effect(intDruid.effects, 'spellCritPct')).toBeDefined();
-    const spiDruid = buildStatTooltip('luk', inputFor('druid', druid));
-    expect(spiDruid.minorForClass).toBe(false);
-    expect(effect(spiDruid.effects, 'manaRegen')).toBeDefined();
+    expect(effect(intDruid.effects, 'manaRegen')).toBeDefined();
+    const lukDruid = buildStatTooltip('luk', inputFor('druid', druid));
+    expect(lukDruid.minorForClass).toBe(false);
   });
 
   it('derived cells carry their notes and no header', () => {
@@ -273,9 +291,13 @@ describe('effect wiring reconciles each effect kind with its source', () => {
     expect(effVal('warrior', p, 'vit', 'healthRegen')).toBe(restingHealthPer5s(p.stats.vit));
   });
 
-  it('mana classes wire spirit -> manaRegen and intellect -> spellCritPct', () => {
+  it('mana classes wire intellect to BOTH manaRegen and spellCritPct', () => {
+    // Recovery follows the attribute that owns the pool. It hung off LUK while the
+    // old Spirit stat was being renamed, which paid a caster for an attribute they
+    // had no reason to buy and paid their INT nothing.
     const p = freshPlayer('mage', 20);
-    expect(effVal('mage', p, 'luk', 'manaRegen')).toBe(restingManaPer5s(p.stats.luk, p.level));
+    expect(effVal('mage', p, 'int', 'manaRegen')).toBe(restingManaPer5s(p.stats.int, p.level));
+    expect(effVal('mage', p, 'luk', 'manaRegen')).toBeUndefined();
     // spell crit = 0.05 + int*0.0008 (sim.ts spellCrit); the line shows the int*0.0008 portion as a percent
     expect(effVal('mage', p, 'int', 'spellCritPct')).toBeCloseTo(p.stats.int * 0.0008 * 100, 6);
   });
@@ -378,7 +400,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
     const model = buildStatTooltip('spellPower', inputWithGear(sim, 'mage'));
     const fromInt = model.sources.find((s) => s.kind === 'attributes');
     expect(fromInt?.fromStat).toBe('int');
-    expect(fromInt?.value).toBe(Math.round(p.stats.int * 0.5));
+    expect(fromInt?.value).toBe(Math.round(statusMagicPower(p.stats.int)));
     const sum = model.sources.reduce((acc, s) => acc + s.value, 0);
     expect(sum).toBe(p.spellPower);
     // non-casters get the minor-benefit note on the spell power cell

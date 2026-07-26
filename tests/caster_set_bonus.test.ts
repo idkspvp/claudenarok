@@ -6,9 +6,9 @@
 import { describe, expect, it } from 'vitest';
 import { aggregateSetBonuses, SET_NECROMANCERS } from '../src/sim/content/item_sets';
 import { MOBS } from '../src/sim/data';
-import { createMob, createPlayer, recalcPlayerStats } from '../src/sim/entity';
+import { createMob, createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { type Entity, type PlayerClass, SPELL_POWER_PER_INT } from '../src/sim/types';
+import type { Entity, PlayerClass } from '../src/sim/types';
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -39,9 +39,9 @@ describe('caster set 2-piece bonus', () => {
     // exactly the int-derived term plus the 2-piece flat +20 (an integer, so it
     // commutes with the rounding); a one-piece wearer has no flat term at all.
     // Together these pin that recalcPlayerStats actually folds the set bonus.
-    expect(withSet.spellPower).toBe(Math.round(withSet.stats.int * SPELL_POWER_PER_INT) + 20);
+    expect(withSet.spellPower).toBe(Math.round(statusMagicPower(withSet.stats.int)) + 20);
     const onePiece = statsFor('mage', 20, { chest: 'necromancers_starshroud' });
-    expect(onePiece.spellPower).toBe(Math.round(onePiece.stats.int * SPELL_POWER_PER_INT));
+    expect(onePiece.spellPower).toBe(Math.round(statusMagicPower(onePiece.stats.int)));
   });
 });
 

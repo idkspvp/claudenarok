@@ -17,7 +17,7 @@
 // 2861 armor / 2762 hp, in Defensive Stance (takes 10% less). Derivation:
 // max-armor pick per equip slot over ITEMS via canEquipItemInSlot at
 // requiredLevel <= 20, folded through characterDerivedStats with the prot
-// mastery (armorPct 0.10, staPct 0.40, armorFromStrPct 0.70).
+// mastery (armorPct 0.10, vitPct 0.40, armorFromStrPct 0.70).
 
 import { describe, expect, it } from 'vitest';
 import {

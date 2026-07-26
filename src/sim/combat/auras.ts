@@ -88,11 +88,14 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
   }
   if (p.resourceType === 'mana') {
     if (p.fiveSecondRule >= 5) {
-      // out-of-combat mana regen: faster than before and scales with spirit
-      // (gear/level) plus a small flat per-level floor so low-spirit casters
-      // still recover at a reasonable pace (#103)
+      // Out-of-combat SP regen keys off INT, the attribute that owns the mana
+      // pool. It read LUK until the six-attribute conversion: that was the old
+      // Spirit stat surviving a mechanical rename, and it left a caster's own
+      // INT doing nothing for their recovery while LUK, an attribute they have
+      // no reason to buy, quietly paid for it. The flat per-level floor stays so
+      // a low-INT caster still recovers at a reasonable pace (#103).
       const regen =
-        (p.stats.luk / 3 + 4 + Math.floor(p.level / 5)) *
+        (p.stats.int / 3 + 4 + Math.floor(p.level / 5)) *
         (1 + ctx.playerMods(meta).global.manaRegenPct);
       p.resource = Math.min(p.maxResource, p.resource + Math.round(regen));
     }
@@ -359,7 +362,14 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
   if (statsDirty && e.kind === 'player') {
     const meta = ctx.players.get(e.id);
     if (meta)
-      recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+      recalcPlayerStats(
+        e,
+        meta.cls,
+        meta.equipment,
+        ctx.playerMods(meta),
+        meta.equipmentInstance,
+        meta.statAllocation,
+      );
   }
   e.stealthed = e.auras.some((a) => a.kind === 'stealth');
 }

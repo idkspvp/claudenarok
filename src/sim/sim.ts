@@ -446,6 +446,7 @@ import * as valeCupMod from './social/vale_cup';
 import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
+import { defaultAllocationFor } from './stat_preset';
 import {
   raiseCost,
   raiseStat,
@@ -490,6 +491,7 @@ import {
   type EquipSlot,
   type ErrorReason,
   emptyMoveInput,
+  emptyStatAllocation,
   FAERIE_FIRE_ARMOR_PCT,
   GCD,
   type HonorArenaDailyState,
@@ -505,9 +507,6 @@ import {
   type LootRollPrompt,
   type LootStrategies,
   MAX_LEVEL,
-  emptyStatAllocation,
-  type StatAllocation,
-  type StatusStat,
   type MasterLootThreshold,
   MELEE_RANGE,
   type MobFamily,
@@ -532,7 +531,10 @@ import {
   type SkinCatalog,
   type SkinRank,
   type SportRole,
+  type StatAllocation,
+  type StatusStat,
   SUNDER_ARMOR_PCT_PER_STACK,
+  statusPointsSpent,
   steadyAngleTo,
   swingMissChance,
   type VcBracket,
@@ -2472,7 +2474,14 @@ export class Sim {
     // resolver below consume it (they only ever read these flat numbers).
     meta.talentMods = computeTalentModifiers(cls, meta.talents, player.level);
     this.refreshKnownAbilities(meta, false);
-    recalcPlayerStats(player, cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
+    recalcPlayerStats(
+      player,
+      cls,
+      meta.equipment,
+      meta.talentMods,
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
     if (savedState) {
       player.hp = Math.max(1, Math.min(player.maxHp, savedState.hp));
       player.resource =
@@ -4239,6 +4248,14 @@ export class Sim {
     // (combat/damage.ts grantXp). Without this a level-jumped character keeps the
     // mastery baked at the OLD level.
     r.meta.talentMods = computeTalentModifiers(r.meta.cls, r.meta.talents, r.e.level);
+    // A character who has never spent a point gets the class's suggested spread for
+    // the new level. This is the dev/GM and test path: jumping to level 80 and
+    // handing back someone still at 1 in all six would leave them unable to fight
+    // anything, and the points would sit unspent with no player around to spend
+    // them. A character with ANY deliberate allocation keeps it untouched: their
+    // build is theirs, and the fresh points are theirs to place.
+    if (statusPointsSpent(r.meta.statAllocation) === 0)
+      r.meta.statAllocation = defaultAllocationFor(r.meta.cls, r.e.level);
     recalcPlayerStats(
       r.e,
       r.meta.cls,
@@ -5202,7 +5219,14 @@ export class Sim {
     if (!removed) return;
     this.emit({ type: 'aura', targetId: e.id, name: removed.name, gained: false });
     if (auraAffectsStats(removed)) {
-      recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+      recalcPlayerStats(
+        e,
+        meta.cls,
+        meta.equipment,
+        this.playerMods(meta),
+        meta.equipmentInstance,
+        meta.statAllocation,
+      );
     }
   }
 
@@ -6107,7 +6131,14 @@ export class Sim {
   private recalcPlayer(target: Entity): void {
     const meta = this.players.get(target.id);
     if (meta)
-      recalcPlayerStats(target, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
+      recalcPlayerStats(
+        target,
+        meta.cls,
+        meta.equipment,
+        meta.talentMods,
+        meta.equipmentInstance,
+        meta.statAllocation,
+      );
   }
 
   private updateRangedPetAttack(
