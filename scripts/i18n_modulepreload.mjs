@@ -41,11 +41,15 @@ export function parseSupportedLocales(loadersSource) {
     throw new Error('i18n modulepreload: could not parse SUPPORTED_LANGUAGES from loaders source');
   }
   const codes = [...arrayMatch[1].matchAll(/['"]([^'"]+)['"]/g)].map((m) => m[1]);
-  const locales = codes.filter((code) => code !== 'en');
-  if (locales.length === 0) {
-    throw new Error('i18n modulepreload: parsed an empty non-en locale set from loaders source');
+  // An empty ARRAY means the generator broke and produced nothing; that is still a
+  // hard error. An array holding only 'en' is a different thing entirely: the game
+  // genuinely ships one locale right now, so there are no lazy chunks and nothing
+  // to preload. Conflating the two turned the Ragnarok conversion's cut to
+  // English-only into a build failure.
+  if (codes.length === 0) {
+    throw new Error('i18n modulepreload: parsed an empty locale set from loaders source');
   }
-  return locales;
+  return codes.filter((code) => code !== 'en');
 }
 
 // Build the { locale: hashedChunkUrl } lookup from a parsed Vite manifest. Every expected
@@ -91,7 +95,10 @@ export function templateModulepreload({ root, outDir, base = '/' }) {
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   const loadersSource = readFileSync(path.join(root, GENERATED_DIR, 'loaders.ts'), 'utf8');
   const locales = parseSupportedLocales(loadersSource);
-  const map = localeChunkMap(manifest, locales, base);
+  // With no non-en locales the map is legitimately empty: the sentinel still gets
+  // replaced with `{}` so the inline script finds a literal rather than throwing a
+  // ReferenceError on every page load.
+  const map = locales.length === 0 ? {} : localeChunkMap(manifest, locales, base);
   const htmlPath = path.join(outDir, 'index.html');
   const html = readFileSync(htmlPath, 'utf8');
   writeFileSync(htmlPath, injectLocaleChunkMap(html, map));
