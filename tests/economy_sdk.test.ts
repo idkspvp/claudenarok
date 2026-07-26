@@ -97,5 +97,3 @@ describe('EconomyClient store snapshot', () => {
     expect(snapshot).toEqual({ available: false, balance: 250, items: [] });
   });
 });
-
-describe('EconomyClient pack snapshot', () => {});

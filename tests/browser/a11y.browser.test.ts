@@ -225,8 +225,6 @@ describe('axe: arena window', () => {
 // Quest log (#quest-log-window) - a populated list with selectable rows.
 // ---------------------------------------------------------------------------
 
-describe('axe: quest log window', () => {});
-
 // ---------------------------------------------------------------------------
 // Spellbook (#spellbook) - the class kit rows (locked, so no resolved-ability deps).
 // ---------------------------------------------------------------------------
