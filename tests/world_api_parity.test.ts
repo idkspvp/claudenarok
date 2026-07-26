@@ -49,7 +49,6 @@ import type { IWorldChat } from '../src/world_api/chat';
 import { isOverheadEmoteId, OVERHEAD_EMOTES } from '../src/world_api/chat';
 import type { IWorldCombat } from '../src/world_api/combat';
 import type { IWorldCosmetics } from '../src/world_api/cosmetics';
-import type { IWorldDailyRewards } from '../src/world_api/daily_rewards';
 import type { IWorldDeeds } from '../src/world_api/deeds';
 import type { IWorldDelves } from '../src/world_api/delves';
 import type { IWorldDuelArena } from '../src/world_api/duel_arena';
@@ -318,11 +317,6 @@ export const IWORLD_MEMBERS = [
   { name: 'guildLeaderboard', kind: 'method' }, // async
   { name: 'devLeaderboard', kind: 'method' }, // async
   { name: 'prestige', kind: 'method' },
-  // --- daily WOC-holder rewards (IWorldDailyRewards; all async) ---
-  { name: 'dailyRewards', kind: 'method' },
-  { name: 'dailyRewardLeaderboard', kind: 'method' },
-  { name: 'spinDailyReward', kind: 'method' },
-  { name: 'dailyRewardHistory', kind: 'method' },
   // --- talents & specializations (reads + commands) ---
   { name: 'talents', kind: 'data' },
   { name: 'talentSpec', kind: 'data' },
@@ -1366,16 +1360,6 @@ const FACET_DELVES = [
 ] as const satisfies readonly (keyof IWorldDelves)[];
 type _ExhaustDelves = AssertNever<Exclude<keyof IWorldDelves, (typeof FACET_DELVES)[number]>>;
 
-const FACET_DAILY_REWARDS = [
-  'dailyRewards',
-  'dailyRewardLeaderboard',
-  'spinDailyReward',
-  'dailyRewardHistory',
-] as const satisfies readonly (keyof IWorldDailyRewards)[];
-type _ExhaustDailyRewards = AssertNever<
-  Exclude<keyof IWorldDailyRewards, (typeof FACET_DAILY_REWARDS)[number]>
->;
-
 const FACET_TELEMETRY = ['reportTelemetry'] as const satisfies readonly (keyof IWorldTelemetry)[];
 type _ExhaustTelemetry = AssertNever<
   Exclude<keyof IWorldTelemetry, (typeof FACET_TELEMETRY)[number]>
@@ -1479,7 +1463,6 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   bank: FACET_BANK,
   dungeons: FACET_DUNGEONS,
   delves: FACET_DELVES,
-  dailyRewards: FACET_DAILY_REWARDS,
   telemetry: FACET_TELEMETRY,
   professions: FACET_PROFESSIONS,
   valeCup: FACET_VALE_CUP,

@@ -47,16 +47,9 @@ vi.mock('../../server/discord', () => ({
 }));
 vi.mock('../../server/discord_activity', () => ({ drainActivity: vi.fn() }));
 vi.mock('../../server/discord_relay', () => ({ drainRelay: vi.fn() }));
-vi.mock('../../server/daily_rewards', () => ({
-  dailyRewardService: {
-    discordWinnerAnnouncements: vi.fn(),
-    markDiscordWinnersAnnounced: vi.fn(),
-  },
-}));
 
 import type * as http from 'node:http';
 import { MEMBERS_META_BATCH } from '../../bot/logic';
-import { dailyRewardService } from '../../server/daily_rewards';
 import { pool } from '../../server/db';
 import {
   type DiscordFlex,
@@ -637,52 +630,6 @@ describe('discord/activity', () => {
 // ---------------------------------------------------------------------------
 // 10. discord/daily-rewards-winners (GET limit coercion + POST mark).
 // ---------------------------------------------------------------------------
-
-describe('discord/daily-rewards-winners', () => {
-  it('clamps the GET limit (99 -> 5, absent -> 1, 0 -> 1) and ok-wraps the service return', async () => {
-    process.env.DISCORD_BOT_SECRET = DISCORD_SECRET;
-    const service = vi.mocked(dailyRewardService.discordWinnerAnnouncements);
-    service.mockResolvedValue({ days: [] });
-
-    const r = await runRoute('GET', '/internal/discord/daily-rewards-winners', {
-      url: '/internal/discord/daily-rewards-winners?limit=99',
-      headers: DISCORD_HEADERS,
-    });
-    expect(r.status).toBe(200);
-    expect(r.body).toEqual({ success: true, data: { days: [] }, error: null });
-    expect(service).toHaveBeenLastCalledWith(5);
-
-    await runRoute('GET', '/internal/discord/daily-rewards-winners', { headers: DISCORD_HEADERS });
-    expect(service).toHaveBeenLastCalledWith(1);
-
-    await runRoute('GET', '/internal/discord/daily-rewards-winners', {
-      url: '/internal/discord/daily-rewards-winners?limit=0',
-      headers: DISCORD_HEADERS,
-    });
-    expect(service).toHaveBeenLastCalledWith(1);
-  });
-
-  it('mark returns the service fail body on error and ok-wraps success', async () => {
-    process.env.DISCORD_BOT_SECRET = DISCORD_SECRET;
-    const mark = vi.mocked(dailyRewardService.markDiscordWinnersAnnounced);
-
-    mark.mockResolvedValue({ error: 'nope', status: 400 });
-    const failed = await runRoute('POST', '/internal/discord/daily-rewards-winners/mark', {
-      headers: DISCORD_HEADERS,
-      body: { day: 'not-a-day' },
-    });
-    expect(failed.status).toBe(400);
-    expect(failed.body).toEqual({ success: false, data: null, error: 'nope' });
-
-    mark.mockResolvedValue({ marked: 2 } as unknown as { ok: true });
-    const ok = await runRoute('POST', '/internal/discord/daily-rewards-winners/mark', {
-      headers: DISCORD_HEADERS,
-      body: {},
-    });
-    expect(ok.status).toBe(200);
-    expect(ok.body).toEqual({ success: true, data: { marked: 2 }, error: null });
-  });
-});
 
 // ---------------------------------------------------------------------------
 // 11. discord/members-meta (per-member id/name slice, finite joinedAt, role validation).

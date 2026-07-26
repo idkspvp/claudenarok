@@ -1,4 +1,4 @@
-// Unit coverage for the binary player-card upload route (server/wallet.ts).
+// Unit coverage for the binary player-card upload route (server/player_card_routes.ts).
 //
 // POST /api/card carries a THREE-middleware chain that must run in a load-bearing
 // order: [cardContentLengthGuard, activeGuard, rateLimit(CARD_UPLOAD_POLICY)]. This
@@ -35,12 +35,12 @@ import {
   setRateLimitClock,
 } from '../../server/ratelimit';
 import {
-  configureWalletRuntime,
-  resetWalletDbForTests,
-  resetWalletRuntimeForTests,
+  configurePlayerCardRuntime,
+  resetPlayerCardDbForTests,
+  resetPlayerCardRuntimeForTests,
   routes,
-  setWalletDbForTests,
-} from '../../server/wallet';
+  setPlayerCardDbForTests,
+} from '../../server/player_card_routes';
 import { type FakeRes, fakeCtx } from './helpers';
 
 // Wrap handleCardUpload in a mock whose DEFAULT delegates to the real implementation (so the
@@ -157,9 +157,9 @@ async function runCard(opts: { headers?: Record<string, string>; url?: string } 
 beforeEach(() => {
   // The card level lookup the handler needs (the 400 'character id required' path returns
   // before it is touched, but install it anyway so no test can leak an unconfigured runtime).
-  configureWalletRuntime({ liveLevelForCharacter: () => null });
+  configurePlayerCardRuntime({ liveLevelForCharacter: () => null });
   // The activeGuard db reads: a full-session token for account 7, not moderation-locked.
-  setWalletDbForTests({
+  setPlayerCardDbForTests({
     accountAndScopeForToken: scopeOf('full'),
     moderationStatusForAccount: async () => modStatus(),
   });
@@ -169,8 +169,8 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  resetWalletDbForTests();
-  resetWalletRuntimeForTests();
+  resetPlayerCardDbForTests();
+  resetPlayerCardRuntimeForTests();
   resetCardUploadRateLimits();
   resetRateLimitClock();
 });

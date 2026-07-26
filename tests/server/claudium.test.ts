@@ -32,7 +32,6 @@ import {
   setClaudiumDbForTests,
 } from '../../server/claudium';
 import { claudiumSpend, claudiumStore, claudiumStripeWebhook } from '../../server/claudium_proxy';
-import { desktopWalletHandoffs } from '../../server/desktop_wallet_handoff';
 import { compose } from '../../server/http/compose';
 import {
   CLAUDIUM_CONFIRM_MAX_PER_MINUTE,
@@ -73,7 +72,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  desktopWalletHandoffs.clear();
   resetClaudiumDbForTests();
   resetClaudiumMutationRateLimits();
   vi.unstubAllEnvs();
@@ -701,109 +699,6 @@ describe('Claudium economy-service transport contract', () => {
       stripe: null,
       woc: null,
       reason: 'unknown_sku',
-    });
-  });
-
-  it('preserves authoritative native-quote refusals as ok:false', async () => {
-    vi.stubEnv('WOC_ECONOMY_SERVICE_URL', 'https://economy.example/v1/claudium/');
-    vi.stubEnv('WOC_ECONOMY_INTERNAL_SECRET', 'test-secret');
-    const fetchMock = vi.fn(async (_input: string | URL | Request, _init?: RequestInit) =>
-      Promise.resolve(new Response(JSON.stringify({ reason: 'rail_disabled' }), { status: 200 })),
-    );
-    vi.stubGlobal('fetch', fetchMock);
-    const res = new FakeRes();
-
-    await handleClaudiumApi(
-      makeReq({
-        method: 'POST',
-        url: '/api/claudium/native/quote',
-        body: { rail: 'sol', sku: 'claudium_500', payer: 'payer-address' },
-      }),
-      res as never,
-      7,
-      { rateLimitApplied: true },
-    );
-
-    expect(responseJson(res)).toEqual({
-      ok: false,
-      reference: null,
-      rail: null,
-      claudium: null,
-      amountBase: null,
-      destination: null,
-      mint: null,
-      memo: null,
-      quoteExpiryMs: null,
-      transactionBase64: null,
-      split: null,
-      reason: 'rail_disabled',
-    });
-    expect(fetchMock).toHaveBeenCalledOnce();
-    const request = fetchMock.mock.calls[0]?.[1] as RequestInit;
-    expect(JSON.parse(String(request.body))).toEqual({
-      rail: 'sol',
-      sku: 'claudium_500',
-      payer: 'payer-address',
-      fulfillment: { kind: 'credit', accountId: 7 },
-    });
-  });
-
-  it('accepts USDC as a native quote rail', async () => {
-    vi.stubEnv('WOC_ECONOMY_SERVICE_URL', 'https://economy.example/v1/claudium/');
-    vi.stubEnv('WOC_ECONOMY_INTERNAL_SECRET', 'test-secret');
-    const quoteExpiryMs = Date.now() + 60_000;
-    const fetchMock = vi.fn(
-      async (_input: string | URL | Request, _init?: RequestInit) =>
-        new Response(
-          JSON.stringify({
-            reference: 'CLM_usdc',
-            rail: 'usdc',
-            claudium: 500,
-            amountBase: '4990000',
-            destination: 'treasury-owner',
-            mint: 'usdc-mint',
-            memo: 'CLM_usdc',
-            quoteExpiryMs,
-            transactionBase64: 'transaction',
-          }),
-          { status: 200 },
-        ),
-    );
-    vi.stubGlobal('fetch', fetchMock);
-    const res = new FakeRes();
-
-    await handleClaudiumApi(
-      makeReq({
-        method: 'POST',
-        url: '/api/claudium/native/quote',
-        body: { rail: 'usdc', sku: 'claudium_500', payer: 'payer-address' },
-      }),
-      res as never,
-      7,
-      { rateLimitApplied: true },
-    );
-
-    expect(responseJson(res)).toMatchObject({
-      ok: true,
-      reference: 'CLM_usdc',
-      rail: 'usdc',
-      amountBase: '4990000',
-    });
-    const created = desktopWalletHandoffs.createTransaction(7, '198.51.100.8', {
-      reference: 'CLM_usdc',
-      expectedAddress: 'payer-address',
-    });
-    expect(desktopWalletHandoffs.claim(created.code, '198.51.100.8')).toMatchObject({
-      kind: 'transaction',
-      reference: 'CLM_usdc',
-      transactionBase64: 'transaction',
-      rail: 'usdc',
-    });
-    expect(JSON.parse(String(fetchMock.mock.calls[0]?.[1]?.body))).toEqual({
-      rail: 'usdc',
-      sku: 'claudium_500',
-      payer: 'payer-address',
-      fulfillment: { kind: 'credit', accountId: 7 },
     });
   });
 

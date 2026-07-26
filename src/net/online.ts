@@ -83,10 +83,6 @@ import {
   type CraftingIdentityView,
   type CraftResultView,
   type CupInfo,
-  type DailyRewardHistory,
-  type DailyRewardLeaderboardPage,
-  type DailyRewardSpinResult,
-  type DailyRewardStatus,
   type DeedsLeaderboardPage,
   type DeedsRarity,
   type DelveCompanionInfo,
@@ -4305,68 +4301,6 @@ export class ClientWorld implements IWorld {
     } catch {
       return empty;
     }
-  }
-
-  async dailyRewards(): Promise<DailyRewardStatus> {
-    const res = await fetch(apiUrl('/api/daily-rewards', this.base), {
-      headers: { Authorization: `Bearer ${this.token}` },
-    });
-    if (!res.ok) throw new Error('daily rewards unavailable');
-    return (await res.json()) as DailyRewardStatus;
-  }
-
-  async dailyRewardLeaderboard(
-    page = 0,
-    pageSize = LEADERBOARD_PAGE_SIZE,
-  ): Promise<DailyRewardLeaderboardPage> {
-    const empty: DailyRewardLeaderboardPage = {
-      day: '',
-      leaders: [],
-      page: 0,
-      pageCount: 1,
-      total: 0,
-      pageSize,
-    };
-    try {
-      const res = await fetch(
-        apiUrl(`/api/daily-rewards/leaderboard?page=${page}&pageSize=${pageSize}`, this.base),
-        { headers: { Authorization: `Bearer ${this.token}` } },
-      );
-      if (!res.ok) return empty;
-      const data = await res.json();
-      return {
-        day: data.day ?? '',
-        leaders: data.leaders ?? [],
-        page: data.page ?? page,
-        pageCount: data.pageCount ?? 1,
-        total: data.total ?? data.leaders?.length ?? 0,
-        pageSize: data.pageSize ?? pageSize,
-      };
-    } catch {
-      return empty;
-    }
-  }
-
-  async spinDailyReward(): Promise<DailyRewardSpinResult> {
-    const res = await fetch(apiUrl('/api/daily-rewards/spin', this.base), {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.token}`,
-      },
-      body: '{}',
-    });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.error ?? 'daily spin unavailable');
-    return data as DailyRewardSpinResult;
-  }
-
-  async dailyRewardHistory(): Promise<DailyRewardHistory> {
-    const res = await fetch(apiUrl('/api/daily-rewards/history', this.base), {
-      headers: { Authorization: `Bearer ${this.token}` },
-    });
-    if (!res.ok) return { payouts: [] };
-    return (await res.json()) as DailyRewardHistory;
   }
 
   prestige(): void {

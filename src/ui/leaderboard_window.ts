@@ -19,8 +19,6 @@
 
 import { LEADERBOARD_PAGE_SIZE } from '../sim/leaderboard_page';
 import type {
-  DailyRewardLeaderboardPage,
-  DailyRewardStatus,
   DeedsLeaderboardPage,
   DevLeaderboardPage,
   GuildLeaderboardPage,
@@ -51,7 +49,7 @@ import { svgIcon } from './ui_icons';
 import { formatXp } from './xp_bar';
 
 /** Which high-score board the window is showing. */
-type LeaderboardBoard = 'players' | 'guilds' | 'deeds' | 'devs' | 'daily';
+type LeaderboardBoard = 'players' | 'guilds' | 'deeds' | 'devs';
 
 /**
  * Hud-supplied glue. The leaderboard window renders entirely from IWorld + these
@@ -84,7 +82,7 @@ export class LeaderboardWindow {
   private deedsPage = 0;
   private devPage = 0;
   private dailyPage = 0;
-  // Render epoch (the DailyRewardsWindow renderSeq pattern). The five boards
+  // Render epoch. The four boards
   // share one .lb-body, so every board arm re-checks this after its await: a
   // slow response for an older tab or page must neither repaint the shared
   // body nor mirror its server-clamped page into the now-current board's
@@ -98,7 +96,6 @@ export class LeaderboardWindow {
     if (this.board === 'guilds') return this.guildPage;
     if (this.board === 'deeds') return this.deedsPage;
     if (this.board === 'devs') return this.devPage;
-    if (this.board === 'daily') return this.dailyPage;
     return this.playerPage;
   }
 
@@ -106,7 +103,6 @@ export class LeaderboardWindow {
     if (this.board === 'guilds') this.guildPage = value;
     else if (this.board === 'deeds') this.deedsPage = value;
     else if (this.board === 'devs') this.devPage = value;
-    else if (this.board === 'daily') this.dailyPage = value;
     else this.playerPage = value;
   }
 
@@ -182,10 +178,6 @@ export class LeaderboardWindow {
     }
     if (this.board === 'devs') {
       await this.renderDevBoard(el, world, focus, seq);
-      return;
-    }
-    if (this.board === 'daily') {
-      await this.renderDailyBoard(el, world, focus, seq);
       return;
     }
 
@@ -380,51 +372,6 @@ export class LeaderboardWindow {
     this.wirePager(body as HTMLElement, focus);
   }
 
-  private async renderDailyBoard(
-    el: HTMLElement,
-    world: IWorld,
-    focus: FocusTarget,
-    seq: number,
-  ): Promise<void> {
-    let result: DailyRewardLeaderboardPage | null = null;
-    try {
-      result = await world.dailyRewardLeaderboard(this.page, LEADERBOARD_PAGE_SIZE);
-    } catch {
-      result = null;
-    }
-    if (seq !== this.renderSeq || el.style.display !== 'block') return;
-    const body = el.querySelector('.lb-body');
-    if (!body) return;
-    if (result === null) {
-      body.innerHTML = `<div class="lb-empty lb-error" role="alert">${esc(t('game.leaderboard.retry'))}</div>`;
-      this.focusCloseAfterPage(focus);
-      return;
-    }
-    if (result.leaders.length === 0) {
-      body.innerHTML =
-        this.dailyTotalHtml(result.total) +
-        `<div class="lb-empty">${esc(t('hudChrome.dailyRewards.noLeaders'))}</div>`;
-      this.focusCloseAfterPage(focus);
-      return;
-    }
-    this.page = result.page;
-    body.innerHTML =
-      this.dailyTotalHtml(result.total) +
-      this.dailyHeaderHtml() +
-      result.leaders.map((r) => this.dailyRowHtml(r)).join('') +
-      this.pagerHtml(
-        result.pageCount > 1
-          ? {
-              page: result.page,
-              pageCount: result.pageCount,
-              prevDisabled: result.page <= 0,
-              nextDisabled: result.page >= result.pageCount - 1,
-            }
-          : null,
-      );
-    this.wirePager(body as HTMLElement, focus);
-  }
-
   // ---- HTML builders (the localized DOM the pure view-model drives) ----------
 
   private titleHtml(realm: string): string {
@@ -461,7 +408,6 @@ export class LeaderboardWindow {
       tab('guilds', t('hudChrome.leaderboard.tabGuilds')) +
       tab('deeds', t('hudChrome.deeds.lbTab')) +
       (this.deps.showDevBadges() ? tab('devs', t('hudChrome.leaderboard.tabDevs')) : '') +
-      tab('daily', t('hudChrome.dailyRewards.leaderboard')) +
       `</div>`
     );
   }
@@ -618,29 +564,6 @@ export class LeaderboardWindow {
           })
         : t('hudChrome.deeds.lbSelfRank', { rank, percent });
     return `<div class="lb-self">${esc(line)}</div>`;
-  }
-
-  private dailyHeaderHtml(): string {
-    return (
-      `<div class="lb-row lb-daily lb-head"><span class="lb-rank">${esc(t('game.leaderboard.rank'))}</span>` +
-      `<span class="lb-name">${esc(t('game.leaderboard.name'))}</span>` +
-      `<span class="lb-xp">${esc(t('hudChrome.dailyRewards.score'))}</span></div>`
-    );
-  }
-
-  private dailyTotalHtml(total: number): string {
-    const key =
-      total === 1 ? 'hudChrome.dailyRewards.totalPlayer' : 'hudChrome.dailyRewards.totalPlayers';
-    return `<div class="lb-total">${esc(t(key, { count: formatNumber(total, { maximumFractionDigits: 0 }) }))}</div>`;
-  }
-
-  private dailyRowHtml(r: DailyRewardStatus['leaderboard'][number]): string {
-    const you = r.me ? ` <span class="lb-you">(${esc(t('game.leaderboard.you'))})</span>` : '';
-    return (
-      `<div class="lb-row lb-daily${r.me ? ' lb-mine' : ''}"><span class="lb-rank">${r.rank}</span>` +
-      `<span class="lb-name">${esc(r.name)}${you}</span>` +
-      `<span class="lb-xp">${formatNumber(r.points, { maximumFractionDigits: 0 })}</span></div>`
-    );
   }
 
   private rowHtml(r: LeaderboardRow): string {

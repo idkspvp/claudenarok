@@ -23,7 +23,6 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import type { PoolClient, QueryResult } from 'pg';
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { PgDailyRewardDb } from '../../server/daily_rewards_db';
 import {
   deedsBoardRanked,
   ELIGIBLE_ACCOUNT_SQL,
@@ -178,29 +177,6 @@ describe('every ranked board query embeds the fragment', () => {
     await expect(lifetimeXpRankForCharacter(42)).resolves.toEqual({ rank: 6, total: 10 });
   });
 
-  it('daily rewards: every ranked read agrees on one population', async () => {
-    const db = new PgDailyRewardDb();
-    const day = '2026-07-08';
-    for (const read of [
-      () => db.leaderboardTotal(day),
-      // The board-cache refresh read: every board read a player status
-      // assembles derives from this one snapshot, so it must gate on the
-      // same population as the live total and page reads.
-      () => db.leaderboardSnapshot(day),
-    ]) {
-      const sql = await capturedSql(read);
-      expect(sql).toHaveLength(1);
-      expect(sql[0]).toContain(ELIGIBLE_LITERAL);
-      expect(sql[0]).toContain('a.id = s.account_id');
-    }
-    // leaderboardPage issues the total read then the page read; both embed it.
-    const pageSql = await capturedSql(() => db.leaderboardPage(day, 0, 10));
-    expect(pageSql).toHaveLength(2);
-    for (const text of pageSql) {
-      expect(text).toContain(ELIGIBLE_LITERAL);
-      expect(text).toContain('a.id = s.account_id');
-    }
-  });
 });
 
 // ---------------------------------------------------------------------------

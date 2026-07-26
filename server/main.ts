@@ -87,13 +87,6 @@ import {
   handleClaudiumStripeWebhook,
 } from './claudium';
 import {
-  bustDailyRewardBoardCache,
-  dailyRewardEventsCutoffDay,
-  handleDailyRewardApi,
-  handleDailyRewardInternalApi,
-} from './daily_rewards';
-import { pruneDailyRewardEventsBatch } from './daily_rewards_db';
-import {
   type ArenaLeaderRow,
   accountAndScopeForToken,
   accountById,
@@ -307,19 +300,8 @@ import {
   assetsListMineCore,
   assetUploadCore,
 } from './user_assets_routes';
-import {
-  configureWalletRuntime,
-  handleDesktopWalletHandoffClaim,
-  handleDesktopWalletHandoffComplete,
-  handleDesktopWalletHandoffCreate,
-  handleDesktopWalletHandoffResult,
-  handleWalletChallenge,
-  handleWalletGet,
-  handleWalletLink,
-  handleWalletUnlink,
-} from './wallet';
+import { configurePlayerCardRuntime } from './player_card_routes';
 import { allowedCorsOrigin, isWebClientRequest } from './web_login_guard';
-import { handleWocBalance, parseWocBalanceQuery } from './woc_balance';
 import { createWsAuth } from './ws_auth';
 import { bufferHandshakeMessages } from './ws_buffer';
 
@@ -369,8 +351,6 @@ const STATIC_PAGE_ALIASES = new Map([
   ['/social-media-links/', '/links.html'],
   ['/play', '/play.html'],
   ['/play/', '/play.html'],
-  ['/wallet-handoff', '/wallet-handoff.html'],
-  ['/wallet-handoff/', '/wallet-handoff.html'],
   ['/privacy', '/privacy.html'],
   ['/privacy/', '/privacy.html'],
   ['/terms', '/terms.html'],
@@ -740,7 +720,6 @@ function bustBoardCaches(): void {
   arenaLeaderboardCache['1v1'] = null;
   arenaLeaderboardCache['2v2'] = null;
   deedsBoardCache = null;
-  bustDailyRewardBoardCache();
 }
 setOnAccountModerated(bustBoardCaches);
 
@@ -2123,48 +2102,6 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       const token = new URL(req.url ?? '', 'http://localhost').searchParams.get('token') ?? '';
       return handleEmailUnsubscribe(res, token);
     }
-    // Non-custodial Solana wallet linking, all account-scoped.
-    if (req.method === 'POST' && url === '/api/desktop-wallet/create') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      if (!walletLinkRateLimited(req, accountId).allowed) {
-        return json(res, 429, { error: 'rate limited' });
-      }
-      return handleDesktopWalletHandoffCreate(req, res, accountId);
-    }
-    if (req.method === 'POST' && url === '/api/desktop-wallet/claim') {
-      if (!publicReadRateLimited(req).allowed) return json(res, 429, { error: 'rate_limited' });
-      return handleDesktopWalletHandoffClaim(req, res);
-    }
-    if (req.method === 'POST' && url === '/api/desktop-wallet/complete') {
-      if (!publicReadRateLimited(req).allowed) return json(res, 429, { error: 'rate_limited' });
-      return handleDesktopWalletHandoffComplete(req, res);
-    }
-    if (req.method === 'POST' && url === '/api/desktop-wallet/result') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleDesktopWalletHandoffResult(req, res, accountId);
-    }
-    if (req.method === 'POST' && url === '/api/wallet/link/challenge') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleWalletChallenge(req, res, accountId);
-    }
-    if (req.method === 'POST' && url === '/api/wallet/link') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleWalletLink(req, res, accountId);
-    }
-    if (req.method === 'DELETE' && url === '/api/wallet/link') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleWalletUnlink(req, res, accountId);
-    }
-    if (req.method === 'GET' && url === '/api/wallet') {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleWalletGet(req, res, accountId);
-    }
     if (req.method === 'POST' && url === '/api/auth/apple') {
       return handleAppleLogin(req, res, await readBody(req));
     }
@@ -2261,23 +2198,6 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       if (!githubRateLimited(req, accountId).allowed)
         return json(res, 429, { error: 'rate limited' });
       return handleGitHubUnlink(req, res, accountId);
-    }
-    // $WOC balance proxy, keeps the Solana RPC endpoint (and any key in it)
-    // server-side so it never ships in the client bundle. Public (on-chain
-    // balances are public) but narrow + IP rate-limited + per-wallet cached.
-    if (req.method === 'GET' && url === '/api/woc/balance') {
-      if (!wocBalanceRateLimited(req).allowed) {
-        recordUsageMetric('woc.balance.rate_limited');
-        return json(res, 429, { error: 'rate limited' });
-      }
-      // `fresh=1` is parsed AFTER the IP rate-limit above, so it can't be used to hammer the RPC.
-      const { owner, fresh } = parseWocBalanceQuery(req.url ?? '');
-      return handleWocBalance(res, owner, fresh);
-    }
-    if (url.startsWith('/api/daily-rewards')) {
-      const accountId = await bearerActiveAccount(req, res);
-      if (accountId === null) return;
-      return handleDailyRewardApi(req, res, accountId);
     }
     if (req.method === 'POST' && url === '/api/claudium/stripe/webhook') {
       return handleClaudiumStripeWebhook(req, res);
@@ -2531,13 +2451,12 @@ configureAccountRuntime({
   disconnectAccount: (id, reason) => liveGame().disconnectAccount(id, reason),
 });
 
-// Inject the one main.ts-local singleton the ported wallet handlers
-// (server/wallet.ts) need but cannot import without a cycle: the live
-// authoritative Sim level the /api/card publish reads for an online character.
-// This is the exact (characterId) => game.liveLevelForCharacter(characterId) the
-// legacy /api/card arm passed to handleCardUpload; the legacy wallet/card/referral
-// arms stay intact as the flag-off rollback path.
-configureWalletRuntime({
+// Inject the one main.ts-local singleton the player-card handler
+// (server/player_card_routes.ts) needs but cannot import without a cycle: the
+// live authoritative Sim level the /api/card publish reads for an online
+// character. This is the exact (characterId) => game.liveLevelForCharacter(
+// characterId) the legacy /api/card arm passed to handleCardUpload.
+configurePlayerCardRuntime({
   liveLevelForCharacter: (characterId) => liveGame().liveLevelForCharacter(characterId),
 });
 
@@ -2659,14 +2578,10 @@ let oauthApiEntry: ApiDispatcher = selectApiEntry(
   oauthLegacy,
 );
 
-// The /internal surface's flag-gated dispatcher. The delegate is the EXACT
-// legacy composite from the pre-migration ladder arm: the daily-rewards ops
-// family (/internal/daily-rewards/*, never part of handleInternalApi) is tried
-// first and short-circuits when handled; everything else falls to the legacy
+// The /internal surface's flag-gated dispatcher. Everything falls to the legacy
 // handleInternalApi ladder UNCHANGED (unknown endpoints, wrong methods, HEAD, and
 // the flag-off rollback path).
 const internalLegacy: ApiDelegate = async (req, res) => {
-  if (await handleDailyRewardInternalApi(req, res)) return;
   await handleInternalApi(req, res, liveGame());
 };
 const internalApiDispatcher = createApiDispatcher({
@@ -3040,16 +2955,6 @@ export async function startServer(): Promise<http.Server> {
       {
         name: 'client_perf_reports',
         pruneBatch: (n) => pruneClientPerfReportsBatch(config.perfReportRetentionDays, n),
-      },
-      {
-        name: 'daily_reward_events',
-        pruneBatch: async (n) => {
-          // The reward day rolls at a configured UTC offset, not midnight, so the
-          // cutoff comes from the reward clock (null means retention is off).
-          const cutoff = await dailyRewardEventsCutoffDay(config.dailyRewardEventsRetentionDays);
-          if (cutoff === null) return 0;
-          return pruneDailyRewardEventsBatch(cutoff, n);
-        },
       },
       {
         // The activity day is the UTC calendar day the metrics writers stamp,
