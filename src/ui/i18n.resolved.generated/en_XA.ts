@@ -1204,6 +1204,16 @@ export const en_XA: EnTranslations = {
       "offense": "[Óƒƒéñšé]",
       "defense": "[Ðéƒéñšé]"
     },
+    "statusPoints": {
+      "remaining": "[Šţáţúš Þóíñţš: {points}]",
+      "none": "[Ñó šţáţúš þóíñţš ţó þļáçé]",
+      "raise": "[Ŕáíšé {stat} ƒóŕ {cost} þóíñţš]",
+      "raiseUnaffordable": "[Ŕáíšíñĝ {stat} çóšţš {cost} þóíñţš]",
+      "maxed": "[{stat} íš áţ íţš ɱáẋíɱúɱ]",
+      "reset": "[Ŕéšéţ]",
+      "resetTitle": "[Ŕéţúŕñ éʋéŕý þļáçéð þóíñţ]",
+      "resetConfirm": "[Ŕéţúŕñ éʋéŕý þóíñţ ýóú ĥáʋé þļáçéð? Ýóúŕ áţţŕíƀúţéš ĝó ƀáçķ ţó 1.]"
+    },
     "statInfo": {
       "fromYour": "[Ƒŕóɱ ýóúŕ {value} {stat}:]",
       "names": {

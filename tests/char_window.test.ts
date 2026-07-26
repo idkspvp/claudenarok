@@ -98,6 +98,12 @@ describe('char_window: profession art placements', () => {
       player: { name: 'Aurelia', level: 60, skin: 0 },
       equipment: {},
       honor: 0,
+      // The status-point row reads these; a sheet paints them on every render.
+      statAllocation: { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 },
+      statusPoints: () => 0,
+      statRaiseCost: () => null,
+      raiseStat: () => {},
+      resetStats: () => {},
       archetypeTitle: 'weaponcrafting+armorcrafting' as string | null,
       hobbyCraft: 'jewelcrafting',
       professionsState: {
@@ -115,6 +121,7 @@ describe('char_window: profession art placements', () => {
       world: () => world as never,
       closeOthers: vi.fn(),
       hideTooltip: vi.fn(),
+      confirmDialog: vi.fn((_t, _b, _o, _c, onOk: () => void) => onOk()),
       captureFocus: () => null,
       restoreFocus: vi.fn(),
       slotName: (slot) => slot,
@@ -197,6 +204,12 @@ describe('char_window: profession art placements', () => {
       player: { name: 'Aurelia', level: 60, skin: 0 },
       equipment: {},
       honor: 0,
+      // The status-point row reads these; a sheet paints them on every render.
+      statAllocation: { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 },
+      statusPoints: () => 0,
+      statRaiseCost: () => null,
+      raiseStat: () => {},
+      resetStats: () => {},
       archetypeTitle: null,
       hobbyCraft: 'jewelcrafting',
       professionsState: {
@@ -213,6 +226,7 @@ describe('char_window: profession art placements', () => {
       world: () => world as never,
       closeOthers: vi.fn(),
       hideTooltip: vi.fn(),
+      confirmDialog: vi.fn((_t, _b, _o, _c, onOk: () => void) => onOk()),
       captureFocus: () => null,
       restoreFocus: vi.fn(),
       slotName: (slot) => slot,

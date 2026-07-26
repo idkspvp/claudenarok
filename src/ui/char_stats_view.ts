@@ -27,6 +27,7 @@ export const STAT_GRID: readonly StatId[] = [
   'dps',
   'int',
   'critChance',
+  'dex',
   'luk',
   'dodge',
   'parry',
@@ -37,8 +38,11 @@ export const STAT_GRID: readonly StatId[] = [
   'warfare',
 ];
 
-// The five primary attributes, rendered as large-numeral tiles across one row.
-export const STAT_TILES: readonly StatId[] = ['str', 'agi', 'vit', 'int', 'luk'];
+// The six primary attributes, rendered as large-numeral tiles across one row.
+// Dexterity was missing here entirely: it was added to the sim by the Ragnarok
+// conversion and never to the sheet, so a player could spend points into an
+// attribute they had no way to see.
+export const STAT_TILES: readonly StatId[] = ['str', 'agi', 'vit', 'int', 'dex', 'luk'];
 
 // Offense: attack/spell power, the dps estimate, and the offensive ratings.
 export const STAT_OFFENSE: readonly StatId[] = [

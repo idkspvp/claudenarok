@@ -22,11 +22,11 @@ describe('char_stats_view: the tiles/offense/defense partition of STAT_GRID', ()
     expect(new Set(union)).toEqual(new Set(STAT_GRID));
     // And it is a true repartition (same cardinality as the canonical grid).
     expect(union.length).toBe(STAT_GRID.length);
-    expect(STAT_GRID.length).toBe(16);
+    expect(STAT_GRID.length).toBe(17);
   });
 
-  it('pins the five primary tiles in order (str, agi, sta, int, spi)', () => {
-    expect(STAT_TILES).toEqual(['str', 'agi', 'vit', 'int', 'luk']);
+  it('pins the six primary tiles in order (str, agi, vit, int, dex, luk)', () => {
+    expect(STAT_TILES).toEqual(['str', 'agi', 'vit', 'int', 'dex', 'luk']);
   });
 
   it('pins the Offense group and its heading key', () => {

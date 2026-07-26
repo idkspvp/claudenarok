@@ -1204,6 +1204,16 @@ export const en: EnTranslations = {
       "offense": "Offense",
       "defense": "Defense"
     },
+    "statusPoints": {
+      "remaining": "Status Points: {points}",
+      "none": "No status points to place",
+      "raise": "Raise {stat} for {cost} points",
+      "raiseUnaffordable": "Raising {stat} costs {cost} points",
+      "maxed": "{stat} is at its maximum",
+      "reset": "Reset",
+      "resetTitle": "Return every placed point",
+      "resetConfirm": "Return every point you have placed? Your attributes go back to 1."
+    },
     "statInfo": {
       "fromYour": "From your {value} {stat}:",
       "names": {

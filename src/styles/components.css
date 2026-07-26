@@ -1162,7 +1162,7 @@
     position: relative;
     z-index: 1;
   }
-  /* Stats: five primary attribute tiles, then the Offense and Defense panels. */
+  /* Stats: six primary attribute tiles, then the Offense and Defense panels. */
   .stat-panels {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1175,6 +1175,54 @@
     background: rgba(0, 0, 0, 0.24);
     border: 1px solid var(--color-border-showcase);
     border-radius: 7px;
+  }
+  /* Status points: the unspent pool plus a raise button per attribute and the
+     reset. Sits directly under the stat panels and spans both columns. */
+  .stat-points-row {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    padding: 8px 12px 10px;
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid var(--color-border-showcase);
+    border-radius: 7px;
+  }
+  .sp-heading {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--gold);
+    font-size: 13px;
+    padding-bottom: 6px;
+  }
+  .sp-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .sp-raise,
+  .sp-reset {
+    /* 40x40 is the mobile touch floor (src/ui/CLAUDE.md); these carry two lines
+       of text so the height comes from the content, and the floor is a min. */
+    min-height: 40px;
+    min-width: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    font-size: 12px;
+    line-height: 1.15;
+  }
+  .sp-raise .sp-name {
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+  }
+  .sp-raise .sp-cost {
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+  }
+  .sp-raise[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
   }
   .sp-title {
     font-variant: small-caps;

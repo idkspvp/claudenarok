@@ -1067,6 +1067,18 @@ export const hudChromeStrings = {
     offense: 'Offense',
     defense: 'Defense',
   },
+  // The status-point row on the character sheet: the pool a player has left to
+  // place, the per-attribute raise buttons, and the reset that returns them all.
+  statusPoints: {
+    remaining: 'Status Points: {points}',
+    none: 'No status points to place',
+    raise: 'Raise {stat} for {cost} points',
+    raiseUnaffordable: 'Raising {stat} costs {cost} points',
+    maxed: '{stat} is at its maximum',
+    reset: 'Reset',
+    resetTitle: 'Return every placed point',
+    resetConfirm: 'Return every point you have placed? Your attributes go back to 1.',
+  },
   // Character-screen stat tooltips (hover a stat on the C panel). The stat NAMES
   // reuse itemUi.stats.*; only these descriptions / effect lines / notes are new.
   // The breakdown numbers are recomputed live from the player's current stats

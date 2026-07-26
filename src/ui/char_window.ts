@@ -19,7 +19,7 @@
 
 import { audio } from '../game/audio';
 import { ITEMS } from '../sim/data';
-import type { EquipSlot } from '../sim/types';
+import type { EquipSlot, StatusStat } from '../sim/types';
 import type { IWorld } from '../world_api';
 import { STAT_PANELS } from './char_stats_view';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
@@ -38,6 +38,8 @@ import { archetypeImageUrl, professionImageUrl } from './profession_art';
 import { qualityGlowShadow } from './quality_glow';
 import { tSim } from './sim_i18n';
 import type { StatId } from './stat_tooltip';
+import { statNameKey } from './stat_tooltip_view';
+import { buildStatusPoints } from './status_points_view';
 import { svgIcon } from './ui_icons';
 
 // Quality / empty-slot colors as CSS custom properties: the shared
@@ -127,6 +129,14 @@ export interface CharWindowDeps extends PainterHostPresentation {
   statTooltipHtml(stat: StatId): string;
   talentSummaryHtml(): string;
   progressionHtml(level: number): string;
+  /** Hud.confirmDialog: the single focus-trapped destroy-confirm family. */
+  confirmDialog(
+    title: string,
+    body: string,
+    okText: string,
+    cancelText: string,
+    onOk: () => void,
+  ): void;
   /** Remove the equipped piece in `slot` to bags and repaint bags + the sheet. */
   unequip(slot: EquipSlot): void;
   /** Stage a drag-to-unequip: record the slot HUD-side and reveal the bags drop. */
@@ -236,12 +246,43 @@ export class CharWindow {
       const cls = panel.kind === 'tiles' ? 'stat-panel attrs-tiles' : 'stat-panel';
       return `<div class="${cls}">${title}${cells}</div>`;
     }).join('')}</div>`;
+    html += this.statusPointsHtml(world);
     html += this.deps.talentSummaryHtml();
     html += this.deps.progressionHtml(p.level);
     html += this.gatheringHtml(world);
     html += `<div class="pc-share-row"><button type="button" class="btn pc-share-btn" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div>`;
     el.innerHTML = html;
     hydratePortraits(el);
+    for (const btn of el.querySelectorAll('[data-act="raise-stat"]')) {
+      btn.addEventListener('click', () => {
+        const stat = (btn as HTMLElement).dataset.stat as StatusStat | undefined;
+        if (!stat) return;
+        audio.click();
+        // The world is the authority: it re-checks the budget and the cap, and a
+        // refused spend simply changes nothing. Repaint either way, so the row
+        // always shows what actually happened rather than what was clicked.
+        this.deps.world().raiseStat(stat);
+        this.deps.hideTooltip();
+        this.render();
+      });
+    }
+    el.querySelector('[data-act="reset-stats"]')?.addEventListener('click', () => {
+      audio.click();
+      // Confirm first, through the shared focus-trapped family: a reset undoes
+      // every decision the character has made. The points come back; the build
+      // does not.
+      this.deps.confirmDialog(
+        t('hudChrome.statusPoints.resetTitle'),
+        t('hudChrome.statusPoints.resetConfirm'),
+        t('hudChrome.statusPoints.reset'),
+        t('hud.chat.context.cancel'),
+        () => {
+          this.deps.world().resetStats();
+          this.deps.hideTooltip();
+          this.render();
+        },
+      );
+    });
     el.querySelector('[data-act="prestige"]')?.addEventListener('click', () =>
       this.deps.openPrestige(),
     );
@@ -274,6 +315,49 @@ export class CharWindow {
   // The "Gathering" section (issue 1124): one row per gathering profession, showing
   // the viewer's own proficiency points (IWorldProfessions#professionsState).
   // Data comes from the pure gathering_view.ts core; this painter only formats it.
+  /** The status-point row: the unspent pool, a raise button per attribute, and
+   *  the reset. Hidden entirely when there is nothing to place and nothing to
+   *  return, so a character who has finished spending sees an unchanged sheet.
+   *  The pure core decides every affordance; this only paints them. */
+  private statusPointsHtml(world: IWorld): string {
+    const model = buildStatusPoints(world);
+    if (model.unspent === 0 && !model.canReset) return '';
+    const heading =
+      model.unspent > 0
+        ? t('hudChrome.statusPoints.remaining', { points: formatNumber(model.unspent) })
+        : t('hudChrome.statusPoints.none');
+    const buttons = model.rows
+      .map((row) => {
+        const name = t(statNameKey(row.stat) as TranslationKey);
+        if (row.maxed) {
+          return `<button type="button" class="btn sp-raise" disabled aria-label="${esc(
+            t('hudChrome.statusPoints.maxed', { stat: name }),
+          )}">${esc(name)}</button>`;
+        }
+        if (row.cost === null) return '';
+        const cost = formatNumber(row.cost);
+        const label = row.affordable
+          ? t('hudChrome.statusPoints.raise', { stat: name, cost })
+          : t('hudChrome.statusPoints.raiseUnaffordable', { stat: name, cost });
+        // Unaffordable rows stay VISIBLE and disabled rather than disappearing:
+        // the cost is the information a player needs to decide what to save for.
+        return `<button type="button" class="btn sp-raise" data-act="raise-stat" data-stat="${esc(
+          row.stat,
+        )}"${row.affordable ? '' : ' disabled'} aria-label="${esc(label)}"><span class="sp-name">${esc(
+          name,
+        )}</span><span class="sp-cost">${esc(cost)}</span></button>`;
+      })
+      .join('');
+    const reset = model.canReset
+      ? `<button type="button" class="btn sp-reset" data-act="reset-stats" aria-label="${esc(
+          t('hudChrome.statusPoints.resetTitle'),
+        )}">${esc(t('hudChrome.statusPoints.reset'))}</button>`
+      : '';
+    return `<div class="stat-points-row"><div class="sp-heading">${esc(
+      heading,
+    )}</div><div class="sp-buttons">${buttons}${reset}</div></div>`;
+  }
+
   private gatheringHtml(world: IWorld): string {
     const rows = buildGatheringProficiencyRows(world);
     const items = rows

@@ -3813,6 +3813,8 @@ export class Hud {
     root: () => $('#char-window'),
     world: () => this.sim,
     closeOthers: () => this.closeOtherWindows('#char-window'),
+    confirmDialog: (title, body, okText, cancelText, onOk) =>
+      this.confirmDialog(title, body, okText, cancelText, onOk),
     hideTooltip: () => this.hideTooltip(),
     ...this.windowFocus('#char-window'),
     slotName: (slot) => itemSlotName(slot),
