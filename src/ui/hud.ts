@@ -1865,7 +1865,6 @@ export class Hud {
     $('#mm-spell').addEventListener('click', () => this.toggleSpellbook());
     $('#mm-talents')?.addEventListener('click', () => this.toggleTalents());
     $('#mm-town-focus')?.addEventListener('click', () => this.toggleTownFocus());
-    $('#mm-quest').addEventListener('click', () => this.toggleQuestLog());
     $('#mm-deeds').addEventListener('click', () => this.toggleDeeds());
     $('#mm-professions').addEventListener('click', () => this.toggleProfessions());
     // Collapse/expand the on-screen quest tracker by clicking its header. The
@@ -6325,7 +6324,6 @@ export class Hud {
       ['#mm-char', 'char', 'hud.keybinds.actions.char'],
       ['#mm-spell', 'spellbook', 'abilityUi.spellbook.title'],
       ['#mm-talents', 'talents', 'game.talents.title'],
-      ['#mm-quest', 'questlog', 'questUi.log.title'],
       ['#mm-deeds', 'deeds', 'hudChrome.deeds.title'],
       ['#mm-professions', 'professions', 'hudChrome.professions.title'],
       ['#mm-map', 'map', 'hud.core.mobileMap'],
@@ -12521,14 +12519,6 @@ export class Hud {
   }
 
   // -------------------------------------------------------------------------
-  // Quest log window
-  // -------------------------------------------------------------------------
-
-  // The quest-log window lives in QuestLogWindow (questlog_view.ts core +
-  // questlog_window.ts painter), which owns the selected quest id (read back by the
-  // quest-share command via selectedQuestId) and the abandon / chat-link flows.
-  toggleQuestLog(): void {}
-
   // -------------------------------------------------------------------------
   // Party frames
   // -------------------------------------------------------------------------

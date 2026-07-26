@@ -901,12 +901,6 @@ describe('client HTML shell', () => {
     );
   });
 
-  it('offers the quest log in the mobile controls drawer', () => {
-    expect(html).toContain('id="mobile-extra-controls"');
-    expect(html).toContain('id="mobile-quest"');
-    expect(html).toContain('aria-label="Quest Log"');
-  });
-
   it('offers Discord and Donate entries in the mobile drawer of BOTH entries', () => {
     // Mobile has no keyboard, so the U-key Discord panel toggle is unreachable;
     // this drawer button is the touch path to Discord (the account panel when
@@ -1655,16 +1649,11 @@ describe('client HTML shell', () => {
     expect(mobileControlsTs).toContain("document.body.classList.add('mobile-more-open');");
     expect(mainTs).toContain('watchMobileMoreState(document.body, (open) => {');
     expect(mainTs).toContain('syncCharacterOpenDiagnostics();');
-    expect(mainTs).toContain('syncQuestDialogOpenDiagnostics();');
     expect(mainTs).toContain(
       "entryDiagnostics.checkpoint(optionsOpen ? 'settings-open' : 'settings-closed')",
     );
     expect(mainTs).toContain(
       "entryDiagnostics.checkpoint(characterOpen ? 'character-open' : 'character-closed')",
-    );
-    expect(mainTs).toContain('hud.onQuestDialogStateChange = (open) => {');
-    expect(mainTs).toContain(
-      "entryDiagnostics.checkpoint(open ? 'quest-dialog-open' : 'quest-dialog-closed')",
     );
     expect(mainTs).toContain('hud.syncMobileMoreDialog(open, open || !hud.isWindowOpen());');
     expect(mainTs).toContain('input.setAutorun(false);');
@@ -1885,18 +1874,17 @@ describe('client HTML shell', () => {
       const primaryButtons = [...combatControls.matchAll(/<button class="mobile-btn"/g)];
       const chat = combatControls.indexOf('id="mobile-chat"');
       const social = combatControls.indexOf('id="mobile-social"');
-      const quest = combatControls.indexOf('id="mobile-quest"');
       const settings = combatControls.indexOf('id="mobile-menu"');
       const more = combatControls.indexOf('id="mobile-more"');
       const moreButton = combatControls.slice(more, combatControls.indexOf('</button>', more));
-      // The source order stays the touch row: Chat, Social, Quests, Settings,
-      // More. Portrait gameplay is blocked by the rotate gate, so this row does
-      // not need a second portrait-specific copy in the tray.
-      expect(primaryButtons, name).toHaveLength(5);
+      // The source order stays the touch row: Chat, Social, Settings, More.
+      // Portrait gameplay is blocked by the rotate gate, so this row does not
+      // need a second portrait-specific copy in the tray. Quests sat between
+      // Social and Settings until the quest system went.
+      expect(primaryButtons, name).toHaveLength(4);
       expect(chat, name).toBeGreaterThanOrEqual(0);
       expect(social, name).toBeGreaterThan(chat);
-      expect(quest, name).toBeGreaterThan(social);
-      expect(settings, name).toBeGreaterThan(quest);
+      expect(settings, name).toBeGreaterThan(social);
       expect(more, name).toBeGreaterThan(settings);
       expect(moreButton, name).toContain('data-icon="more"');
       const tray = entry.slice(

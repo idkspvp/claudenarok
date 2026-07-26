@@ -1406,9 +1406,6 @@ async function startGame(
           case 'spellbook':
             hud.toggleSpellbook();
             break;
-          case 'questlog':
-            hud.toggleQuestLog();
-            break;
           case 'map':
             hud.toggleMap();
             break;
@@ -1515,7 +1512,6 @@ async function startGame(
     onArena: () => hud.toggleArena(),
     onDungeonFinder: () => hud.toggleDungeonFinder(),
     onValeCup: () => hud.toggleValeCup(),
-    onQuestLog: () => hud.toggleQuestLog(),
     onCharacter: () => {
       hud.toggleChar();
       syncCharacterOpenDiagnostics();
@@ -1631,9 +1627,6 @@ async function startGame(
         break;
       case 'spellbook':
         hud.toggleSpellbook();
-        break;
-      case 'questlog':
-        hud.toggleQuestLog();
         break;
       case 'map':
         hud.toggleMap();
