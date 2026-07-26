@@ -180,7 +180,7 @@ landed here. The squared terms are the tell.
 - **Attribute magnitudes in content.** Mob affixes, enchants, and item stats were
   authored against a scale where a level-20 character had ~80 in an attribute.
   They have ~16 now. The four attribute-draining affixes were rescaled; the item
-  and enchant tables have not been swept.
+  and enchant tables have not been swept. See "Gear versus points" below.
 
 ### Two deliberate deviations
 
@@ -197,3 +197,37 @@ stat block, which had carried it as a sixth pseudo-attribute, and its absence ma
 a level-1 character lose to the starter wolf. It is not one of the six, so it does
 not compromise the "attributes are the player's to spend" rule, but it is a
 deviation and it should be reconsidered when equipment DEF is retuned.
+
+
+## Gear versus points (measured 2026-07-27)
+
+A fully-geared level-20 character draws **75% of their attributes off their gear**
+(192 points from best-in-slot, against 63 from the points they placed). Ragnarok is
+the reverse: status points ARE the character, and equipment pays in ATK and DEF.
+Left alone, the status-point system is decorative.
+
+The decision is to go to the Ragnarok model (~10%). **It is not reachable by tuning
+`STAT_PER_ILVL`**, and that is the useful finding here. Measured, at level 20:
+
+| `STAT_PER_ILVL` | gear share | state of the item-budget ladder |
+|---|---|---|
+| 0.7 (today) | 75% | intact |
+| 0.2 | 62% | intact (the lowest value that keeps it) |
+| 0.035 | ~13% | collapsed: nearly every budget rounds to 0 |
+
+The ladder is `level x quality x slot x STAT_PER_ILVL`, rounded to an integer per
+slot. Twelve slots cannot sum to ~7 points while each slot still ranks above the
+one below it: at any constant small enough to reach 10%, every budget rounds to 0
+and the quality/slot/level ordering stops existing. That ordering is what
+`tests/itemization_coverage.test.ts`, `tests/item_level.test.ts`, and
+`tests/professions_masterwork.test.ts` assert, about sixty cases in all.
+
+So the Ragnarok model needs the per-slot budget RETIRED, not shrunk: most items
+carry no attribute line at all (a Full Plate is DEF and nothing else), and a
+curated minority carry two to four points. That is a content pass over ~470 items
+plus retiring the budget machinery and the tests that describe it, and it wants to
+be its own change rather than a constant nudged in someone else's.
+
+What does NOT change either way: weapon damage (`weaponDpsBudget`) and item armor
+are separate from the stat budget, so gear keeps its progression through the two
+axes Ragnarok actually uses.
