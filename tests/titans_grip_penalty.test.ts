@@ -26,7 +26,14 @@ function equipLoadout(sim: AnySim, mainhand?: string, offhand?: string): void {
   if (!meta) throw new Error('no player meta');
   meta.equipment.mainhand = mainhand;
   meta.equipment.offhand = offhand;
-  recalcPlayerStats(sim.player, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+  recalcPlayerStats(
+    sim.player,
+    meta.cls,
+    meta.equipment,
+    meta.talentMods,
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
 }
 
 function dummyMob(sim: AnySim): Entity {

@@ -12,8 +12,9 @@ import {
   SET_WYRMSHADOW,
 } from '../src/sim/content/item_sets';
 import { ITEMS, MOBS } from '../src/sim/data';
-import { createMob, createPlayer, recalcPlayerStats } from '../src/sim/entity';
+import { createMob, createPlayer, recalcPlayerStats, statusAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { CAST_PUSHBACK_SEC, CHANNEL_PUSHBACK_FRACTION } from '../src/sim/types';
 import { itemSetMemberCounts, itemSetTooltipModel } from '../src/ui/item_set_tooltip_view';
@@ -23,7 +24,9 @@ const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 function statsFor(cls: PlayerClass, level: number, equipment: Record<string, string>): Entity {
   const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
   e.level = level;
-  recalcPlayerStats(e, cls, equipment as any, undefined, {});
+  // With the class's suggested spread, not bare 1s: a set bonus of +15 Strength
+  // read against a base of 1 tells you nothing about whether it landed correctly.
+  recalcPlayerStats(e, cls, equipment as any, undefined, {}, defaultAllocationFor(cls, level));
   return e;
 }
 
@@ -202,12 +205,14 @@ describe('item set tooltip model', () => {
 describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear)', () => {
   it('Deathlord (t1 strength): flat AP at 2pc, str/sta added at 3pc', () => {
     const base = statsFor('warrior', 20, {});
-    // 2 pieces: +40 AP, no set str yet. Warrior AP = str*2 + bonusAp.
+    // 2 pieces: +40 AP, no set str yet. Melee ATK is the status formula plus the
+    // flat set bonus, not a per-point rate: STR carries a squared term now.
     const two = statsFor('warrior', 20, {
       chest: 'deathlord_warplate',
       legs: 'deathlord_legguards',
     });
-    expect(two.attackPower).toBe(two.stats.str * 2 + 40);
+    const ap = (e: Entity) => statusAttackPower(e.stats.str, e.stats.dex, e.stats.luk);
+    expect(two.attackPower).toBe(ap(two) + 40);
     // 3 pieces: set adds +15 str / +15 sta on top of the item stats.
     const three = statsFor('warrior', 20, {
       chest: 'deathlord_warplate',
@@ -216,7 +221,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     });
     const itemStr = 8 + 8 + 7; // warplate + legguards + sabatons
     expect(three.stats.str).toBe(base.stats.str + itemStr + 15);
-    expect(three.attackPower).toBe(three.stats.str * 2 + 40);
+    expect(three.attackPower).toBe(ap(three) + 40);
   });
 
   it('Wyrmshadow (t1 agility): crit gains 1% at 3pc on top of agi-derived crit', () => {
@@ -225,7 +230,8 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       feet: 'wyrmshadow_treads',
       legs: 'wyrmshadow_legguards',
     });
-    expect(three.critChance).toBeCloseTo(0.05 + three.stats.agi * 0.0005 + 0.01);
+    // Crit is LUK's now, off a 1% base; the set's flat +1% rides on top of it.
+    expect(three.critChance).toBeCloseTo(0.01 + three.stats.luk * 0.003 + 0.01);
   });
 
   it('Crownforged (t2 strength, 4 pieces): the 4-set Hit bonus lands on the equipped hitRating', () => {
@@ -247,8 +253,11 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       helmet: 'nighttalon_crown',
       shoulder: 'nighttalon_shoulderguards',
     });
-    // Rogue AP = str + agi + bonusAp; the only set bonus at 2pc is +40 AP.
-    expect(two.attackPower - (two.stats.str + two.stats.agi)).toBe(40);
+    // The only set bonus at 2pc is +40 AP on top of the status formula. AGI feeds
+    // evasion now, not melee ATK, so it is deliberately absent from the subtraction.
+    expect(two.attackPower - statusAttackPower(two.stats.str, two.stats.dex, two.stats.luk)).toBe(
+      40,
+    );
     expect(two.attackPower).toBeGreaterThan(base.attackPower);
   });
 
@@ -263,8 +272,12 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       gloves: 'soulflame_gloves',
       waist: 'soulflame_cord',
     };
-    const base = statsFor('mage', 20, {});
-    const mixed = statsFor('mage', 20, worn);
+    // Level 30, not 20: the heroic cowl derives a level-27 requirement from its
+    // heroic-dungeon source, and below that recalc treats it as inert. That gate
+    // used to be invisible because clampLevel squashed every requirement to the
+    // level-20 cap; raising the cap to 99 let the real number through.
+    const base = statsFor('mage', 30, {});
+    const mixed = statsFor('mage', 30, worn);
     const pieceInt = Object.values(worn).reduce((s, id) => s + (ITEMS[id].stats?.int ?? 0), 0);
     const pieceSpi = Object.values(worn).reduce((s, id) => s + (ITEMS[id].stats?.luk ?? 0), 0);
     expect(mixed.castPushbackReduction).toBe(1);

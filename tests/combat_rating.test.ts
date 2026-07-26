@@ -67,7 +67,7 @@ describe('combat ratings', () => {
       expect(p.meleeHaste).toBe(0.075);
       expect(p.rangedHaste).toBe(0.075);
       expect(p.spellHaste).toBe(0.075);
-      expect(p.critChance).toBeCloseTo(0.05 + p.stats.agi * 0.0005 + 0.01);
+      expect(p.critChance).toBeCloseTo(0.01 + p.stats.luk * 0.003 + 0.01);
       expect(p.hitBonus).toBeCloseTo(0.2);
     } finally {
       delete ITEMS[itemId];

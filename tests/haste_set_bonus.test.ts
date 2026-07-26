@@ -19,6 +19,7 @@ import {
 import { ITEMS, MOBS } from '../src/sim/data';
 import { createMob, type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, ItemDef, PlayerClass } from '../src/sim/types';
 
 type AnySim = Sim & Record<string, any>;
@@ -116,10 +117,24 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
   it('3 caster kit pieces set all three haste channels from the one stat', () => {
     const { p } = player('mage');
     const [a, b, c] = setMembers(SET_VALE_ARCANIST);
-    recalcPlayerStats(p, 'mage', equipmentOf([a, b]), undefined, {});
+    recalcPlayerStats(
+      p,
+      'mage',
+      equipmentOf([a, b]),
+      undefined,
+      {},
+      defaultAllocationFor('mage', p.level),
+    );
     expect(p.spellHaste).toBe(0);
     expect(p.meleeHaste).toBe(0);
-    recalcPlayerStats(p, 'mage', equipmentOf([a, b, c]), undefined, {});
+    recalcPlayerStats(
+      p,
+      'mage',
+      equipmentOf([a, b, c]),
+      undefined,
+      {},
+      defaultAllocationFor('mage', p.level),
+    );
     expect(p.spellHaste).toBe(SET_HASTE_3PC);
     expect(p.meleeHaste).toBe(SET_HASTE_3PC);
     expect(p.rangedHaste).toBe(SET_HASTE_3PC);
@@ -133,11 +148,12 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
       equipmentOf(setMembers(SET_NIGHTTALON).slice(0, 3)),
       undefined,
       {},
+      defaultAllocationFor('rogue', p.level),
     );
     expect(p.meleeHaste).toBe(SET_HASTE_3PC);
     expect(p.spellHaste).toBe(SET_HASTE_3PC);
     // the pre-existing 3pc payload still applies alongside the haste
-    expect(p.critChance).toBeCloseTo(0.05 + p.stats.agi * 0.0005 + 0.01);
+    expect(p.critChance).toBeCloseTo(0.01 + p.stats.luk * 0.003 + 0.01);
   });
 
   it('the tier-1 Deathlord 3-piece grants no haste', () => {
@@ -148,6 +164,7 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
       equipmentOf(setMembers(SET_DEATHLORD).slice(0, 3)),
       undefined,
       {},
+      defaultAllocationFor('warrior', p.level),
     );
     expect(p.meleeHaste).toBe(0);
     expect(p.spellHaste).toBe(0);

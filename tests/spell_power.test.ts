@@ -60,13 +60,21 @@ describe('Spell Power derivation', () => {
   });
 });
 
-// Balance band: at cap the Spell Power contribution to a flagship spell should be
-// meaningful but not dominant. This pins the tuning of SPELL_POWER_PER_INT and the
-// coefficient so a change that doubles caster damage fails loudly.
-describe('Spell Power balance band (cap)', () => {
+// Balance band: the Spell Power contribution to a flagship spell should be
+// meaningful but not dominant. This pins the tuning of statusMagicPower against the
+// per-spell coefficient, so a change that doubles caster damage fails loudly.
+//
+// Measured at CONTENT_CAP, not MAX_LEVEL. Every ability's flat base damage is tuned
+// for content that ends at level 20; levels 21-99 have nothing in them yet. At 99 a
+// caster's MATK dwarfs a base tuned for 20 and the share reads ~80%, which measures
+// the absence of content rather than the tuning of any. Move this to MAX_LEVEL when
+// the high-level content and its damage numbers actually exist.
+const CONTENT_CAP = 20;
+
+describe('Spell Power balance band (content cap)', () => {
   it('Frostbolt gains a meaningful but bounded share of its hit from Spell Power', () => {
-    const { p } = leveled('mage');
-    const fb = abilitiesKnownAt('mage', MAX_LEVEL).find((k) => k.def.id === 'frostbolt')!;
+    const { p } = leveled('mage', CONTENT_CAP);
+    const fb = abilitiesKnownAt('mage', CONTENT_CAP).find((k) => k.def.id === 'frostbolt')!;
     const dd = fb.effects.find((e) => e.type === 'directDamage') as { min: number; max: number };
     const avgBase = (dd.min + dd.max) / 2;
     const bonus = directHitBonus(p.spellPower, fb.def, fb.castTime);
@@ -76,8 +84,10 @@ describe('Spell Power balance band (cap)', () => {
   });
 
   it('a DoT (Shadow Word: Pain) scales per tick within the band', () => {
-    const { p } = leveled('priest');
-    const swp = abilitiesKnownAt('priest', MAX_LEVEL).find((k) => k.def.id === 'shadow_word_pain')!;
+    const { p } = leveled('priest', CONTENT_CAP);
+    const swp = abilitiesKnownAt('priest', CONTENT_CAP).find(
+      (k) => k.def.id === 'shadow_word_pain',
+    )!;
     const dot = swp.effects.find((e) => e.type === 'dot') as {
       total: number;
       duration: number;

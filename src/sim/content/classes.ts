@@ -32,7 +32,14 @@ export interface ClassDef {
   // of the six and climbs only through points the player spends, which is what
   // makes two Swordmen able to be different characters. What the class still
   // decides is the HP and SP pools below, and the kit.
-  baseHp: number; // class hp before stamina at level 1
+  // The HP and SP pools, at level 1 and per level after it. These now carry the
+  // WHOLE pool: Vitality and Intelligence MULTIPLY it (+1% a point, capped near
+  // 2x at 99) rather than adding a flat 10 or 15 per point on top the way Stamina
+  // and Intellect used to. That inverts which term does the work, so both numbers
+  // were refitted to reproduce the pools a level-1 and a level-20 character had
+  // before the conversion. Anything tuned against a pool size (ability costs, mob
+  // damage, time-to-out-of-mana) reads through here.
+  baseHp: number;
   hpPerLevel: number;
   baseMana: number;
   manaPerLevel: number;
@@ -67,8 +74,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   warrior: {
     id: 'warrior',
     name: 'Warrior',
-    baseHp: 50,
-    hpPerLevel: 18,
+    baseHp: 83,
+    hpPerLevel: 32,
     baseMana: 100, // rage cap
     manaPerLevel: 0,
     resourceType: 'rage',
@@ -125,10 +132,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   mage: {
     id: 'mage',
     name: 'Mage',
-    baseHp: 40,
-    hpPerLevel: 12,
-    baseMana: 100,
-    manaPerLevel: 24,
+    baseHp: 51,
+    hpPerLevel: 17,
+    baseMana: 164,
+    manaPerLevel: 56,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -212,8 +219,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   rogue: {
     id: 'rogue',
     name: 'Rogue',
-    baseHp: 45,
-    hpPerLevel: 15,
+    baseHp: 60,
+    hpPerLevel: 21,
     baseMana: 100, // energy cap
     manaPerLevel: 0,
     resourceType: 'energy',
@@ -251,10 +258,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   paladin: {
     id: 'paladin',
     name: 'Paladin',
-    baseHp: 55,
-    hpPerLevel: 17,
-    baseMana: 80,
-    manaPerLevel: 20,
+    baseHp: 87,
+    hpPerLevel: 31,
+    baseMana: 89,
+    manaPerLevel: 27,
     resourceType: 'mana',
     startWeapon: 'training_mace',
     startChest: 'recruit_tunic',
@@ -283,10 +290,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   hunter: {
     id: 'hunter',
     name: 'Hunter',
-    baseHp: 50,
-    hpPerLevel: 15,
-    baseMana: 80,
-    manaPerLevel: 18,
+    baseHp: 66,
+    hpPerLevel: 32,
+    baseMana: 91,
+    manaPerLevel: 26,
     resourceType: 'mana',
     startWeapon: 'rusty_hatchet',
     startChest: 'footpad_jerkin',
@@ -316,10 +323,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   priest: {
     id: 'priest',
     name: 'Priest',
-    baseHp: 38,
-    hpPerLevel: 11,
-    baseMana: 110,
-    manaPerLevel: 26,
+    baseHp: 48,
+    hpPerLevel: 15,
+    baseMana: 145,
+    manaPerLevel: 46,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -343,10 +350,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   shaman: {
     id: 'shaman',
     name: 'Shaman',
-    baseHp: 48,
-    hpPerLevel: 15,
-    baseMana: 90,
-    manaPerLevel: 22,
+    baseHp: 64,
+    hpPerLevel: 30,
+    baseMana: 102,
+    manaPerLevel: 45,
     resourceType: 'mana',
     startWeapon: 'training_mace',
     startChest: 'footpad_jerkin',
@@ -370,10 +377,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   warlock: {
     id: 'warlock',
     name: 'Warlock',
-    baseHp: 42,
-    hpPerLevel: 12,
-    baseMana: 105,
-    manaPerLevel: 25,
+    baseHp: 54,
+    hpPerLevel: 18,
+    baseMana: 127,
+    manaPerLevel: 57,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -406,10 +413,10 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
   druid: {
     id: 'druid',
     name: 'Druid',
-    baseHp: 45,
-    hpPerLevel: 13,
-    baseMana: 95,
-    manaPerLevel: 22,
+    baseHp: 58,
+    hpPerLevel: 28,
+    baseMana: 106,
+    manaPerLevel: 43,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'footpad_jerkin',

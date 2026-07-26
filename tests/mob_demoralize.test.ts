@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { createMob } from '../src/sim/entity';
 import { MOBS } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 // Demoralizing mobs sap a player victim's attack power on a landed hit
 // (classic Demoralizing Shout / Curse of Weakness), so the damage *they*
@@ -9,7 +9,9 @@ import { MOBS } from '../src/sim/data';
 describe('mob demoralize-on-hit', () => {
   it('the Restless Bones template carries a Withering Wail proc', () => {
     expect(MOBS.restless_bones.demoralize).toMatchObject({
-      ap: 20, duration: 8, name: 'Withering Wail',
+      ap: 4,
+      duration: 8,
+      name: 'Withering Wail',
     });
   });
 
@@ -33,7 +35,13 @@ describe('mob demoralize-on-hit', () => {
     const rng = (sim as any).rng;
     const realNext = rng.next.bind(rng);
     let firstRoll = true;
-    rng.next = () => { if (firstRoll) { firstRoll = false; return 0.999; } return realNext(); };
+    rng.next = () => {
+      if (firstRoll) {
+        firstRoll = false;
+        return 0.999;
+      }
+      return realNext();
+    };
     try {
       (sim as any).mobSwing(bones, victim);
     } finally {
@@ -43,11 +51,11 @@ describe('mob demoralize-on-hit', () => {
     const aura = victim.auras.find((a) => a.name === 'Withering Wail');
     expect(aura).toBeTruthy();
     expect(aura!.kind).toBe('buff_ap');
-    expect(aura!.value).toBe(-20);
+    expect(aura!.value).toBe(-4);
     expect(aura!.duration).toBe(8);
     // The negative buff_ap is consumed by effectiveAttackPower, so the victim
     // now hits for less.
-    expect((sim as any).effectiveAttackPower(victim)).toBe(baseAp - 20);
+    expect((sim as any).effectiveAttackPower(victim)).toBe(baseAp - 4);
   });
 
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
@@ -67,7 +75,7 @@ describe('mob demoralize-on-hit', () => {
 
     const wails = victim.auras.filter((a) => a.name === 'Withering Wail');
     expect(wails.length).toBe(1);
-    expect(wails[0].value).toBe(-20);
+    expect(wails[0].value).toBe(-4);
   });
 
   it('an ordinary mob with no demoralize field never applies the debuff', () => {

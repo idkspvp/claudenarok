@@ -717,10 +717,10 @@ export function runMobSwingAffixes(
   }
 
   // Spirit Siphon: a landed hit can drain a caster's Spirit, slowing their
-  // out-of-combat mana/health regen (updateRegen reads stats.luk). Mana users
+  // out-of-combat mana regen (updateRegen reads stats.int). Mana users
   // only (it does nothing to rage/energy users); hostile mobs only, so a
   // friendly pet (mobSwing's other caller) never debuffs the party. Rides
-  // buff_spi with a negative value, so recalcPlayerStats folds it through with
+  // buff_int with a negative value, so recalcPlayerStats folds it through with
   // no new regen math; it expires like any buff* aura.
   const siphon = MOBS[mob.templateId]?.siphonSpirit;
   if (
@@ -733,10 +733,10 @@ export function runMobSwingAffixes(
     ctx.applyAura(target, {
       id: `siphon_spirit_${mob.templateId}`,
       name: siphon.name,
-      kind: 'buff_spi',
+      kind: 'buff_int',
       remaining: siphon.duration,
       duration: siphon.duration,
-      value: -Math.abs(siphon.luk),
+      value: -Math.abs(siphon.int),
       sourceId: mob.id,
       school: siphon.school ?? 'shadow',
     });

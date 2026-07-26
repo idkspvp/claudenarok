@@ -25,6 +25,8 @@ import { zoneAt } from '../src/sim/data';
 import { completionCounts } from '../src/sim/deeds_completion';
 import { characterDerivedStats } from '../src/sim/entity';
 import type { CharacterState } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
+import { sanitizeStatAllocation } from '../src/sim/status_points';
 import type { PlayerClass } from '../src/sim/types';
 import { virtualLevel, xpToReachLevel } from '../src/sim/types';
 import type { CharacterRow } from './db';
@@ -282,6 +284,14 @@ export function characterSheet(input: CharacterSheetInput): CharacterSheet {
       state.equipment ?? {},
       talentMods(cls, state, level),
       state.equipmentInstance ?? {},
+      // The saved allocation IS the character's attributes now. Without it the
+      // sheet would report 1 in all six for every character it renders. A save
+      // predating the conversion has none, and falls back to the suggested spread
+      // exactly as the sim's own load path does, so the sheet and the live
+      // character never disagree about who that character is.
+      state.statAllocation
+        ? sanitizeStatAllocation(state.statAllocation, level)
+        : defaultAllocationFor(cls, level),
     );
     sheet.stats = { ...derived.stats };
     sheet.vitals = {

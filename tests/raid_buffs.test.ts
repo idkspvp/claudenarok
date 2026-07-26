@@ -135,6 +135,10 @@ describe('standardized percent raid buffs', () => {
     const priest = sim.addPlayer('priest', 'Pia');
     const ally = sim.addPlayer('warrior', 'War');
     formParty(sim, priest, [ally]);
+    // Level the ally first: a level-1 warrior has 5 Vitality, and 5% of 5 rounds
+    // straight back to 5. Percent buffs need an attribute large enough to move,
+    // which on the Ragnarok scale means a character past the first few levels.
+    sim.setPlayerLevel(20, ally);
     const staBefore = sim.entities.get(ally)!.stats.vit;
     const hpBefore = sim.entities.get(ally)!.maxHp;
     ready(sim, priest);

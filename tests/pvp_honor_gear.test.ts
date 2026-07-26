@@ -18,6 +18,7 @@ import {
   primaryStatSum,
 } from '../src/sim/item_level';
 import { pvpFractionsFromRatings } from '../src/sim/pvp';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { EQUIP_SLOTS, type EquipSlot, type PlayerClass } from '../src/sim/types';
 
 const SLOT_PRICES: Record<string, number> = {
@@ -240,7 +241,14 @@ describe('FURY WARFARE item budgets', () => {
     for (const profile of PROFILES) {
       const player = createPlayer(1, profile.classes[0], { x: 0, y: 0, z: 0 }, profile.name);
       player.level = 20;
-      recalcPlayerStats(player, profile.classes[0], equipmentForProfile(profile), undefined, {});
+      recalcPlayerStats(
+        player,
+        profile.classes[0],
+        equipmentForProfile(profile),
+        undefined,
+        {},
+        defaultAllocationFor(profile.classes[0], player.level),
+      );
       expect(player.stats.pvpOffense, `${profile.name} offense`).toBeCloseTo(0.168, 10);
       expect(player.stats.pvpDefense, `${profile.name} defense`).toBeCloseTo(0.168, 10);
     }

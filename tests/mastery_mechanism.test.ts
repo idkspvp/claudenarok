@@ -208,7 +208,14 @@ describe('channeled spell crits take the spell crit-damage mastery', () => {
         // Mutating the mods (not the raw entity field) means any mid-drive recalc
         // re-derives the same bonus instead of wiping it.
         meta.talentMods.global.critDmgSpellPct = 0.5;
-        recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+        recalcPlayerStats(
+          p,
+          meta.cls,
+          meta.equipment,
+          meta.talentMods,
+          meta.equipmentInstance,
+          meta.statAllocation,
+        );
       }
       p.facing = 0;
       p.maxHp = p.hp = 5_000_000; // survive the dummy's melee during the channel

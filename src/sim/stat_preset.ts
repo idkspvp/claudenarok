@@ -20,6 +20,7 @@ import {
   emptyStatAllocation,
   MAX_LEVEL,
   type PlayerClass,
+  STATUS_STATS,
   type StatAllocation,
   type StatusStat,
 } from './types';
@@ -62,6 +63,18 @@ export function defaultAllocationFor(cls: PlayerClass, level: number): StatAlloc
   let alloc = emptyStatAllocation();
   for (let l = 1; l <= target; l++) alloc = spendBudgetAt(alloc, cls, l);
   return alloc;
+}
+
+/** Is this allocation still exactly the suggestion for that level, untouched?
+ *
+ *  The question a level jump has to answer before it re-spreads anything. "Has the
+ *  player spent nothing" cannot answer it, because a new character starts ON the
+ *  suggestion, so from the first moment it has spent everything. This asks the real
+ *  question instead: has the player made a decision here yet. Once they move a
+ *  single point, the answer is no forever, and their build is theirs. */
+export function isSuggestedSpread(alloc: StatAllocation, cls: PlayerClass, level: number): boolean {
+  const suggested = defaultAllocationFor(cls, level);
+  return STATUS_STATS.every((stat) => alloc[stat] === suggested[stat]);
 }
 
 /** Buy until this level's pool can no longer afford anything. The leftover is

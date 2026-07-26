@@ -1780,7 +1780,12 @@ export interface MobTemplate {
   // mobSwing's other caller, never debuffs the party).
   siphonSpirit?: {
     chance: number;
-    luk: number;
+    // INT, not LUK. The affix exists to attack the regen axis, and out-of-combat
+    // SP recovery reads Intelligence; draining Luck stopped touching regen at all
+    // when the six-attribute conversion moved recovery onto the attribute that
+    // owns the pool. It does shrink the pool as well as the trickle, which is a
+    // harsher debuff than before, so the magnitude came down with it.
+    int: number;
     duration: number;
     name: string;
     school?: Aura['school'];

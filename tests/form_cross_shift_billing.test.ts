@@ -35,7 +35,14 @@ function shiftToMoonkin(sim: Sim): void {
     sourceId: p.id,
     school: 'arcane',
   });
-  recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    meta.talentMods,
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
 }
 
 function settle(sim: Sim): void {

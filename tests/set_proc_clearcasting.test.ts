@@ -27,7 +27,14 @@ function equipMournweave(sim: Sim): Entity {
   if (!meta) throw new Error('missing player meta');
   p.level = 20;
   Object.assign(meta.equipment, mournweaveEquipment);
-  recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    meta.talentMods,
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
   return p;
 }
 

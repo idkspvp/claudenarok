@@ -7,6 +7,7 @@ import { spellDamageMultFromAuras, spellHasteMult } from '../src/sim/combat/spel
 import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
@@ -199,6 +200,7 @@ describe('crit-damage masteries', () => {
       (sim as any).players.get(p.id).equipment,
       (sim as any).playerMods((sim as any).players.get(p.id)),
       (sim as any).players.get(p.id).equipmentInstance,
+      defaultAllocationFor('mage', p.level),
     );
     expect(p.critDmgSpellBonus).toBe(0);
   });

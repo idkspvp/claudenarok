@@ -32,6 +32,7 @@ import { emptyModifiers } from '../src/sim/content/talents';
 import { recalcPlayerStats } from '../src/sim/entity';
 import { type ResolvedAbility, Sim } from '../src/sim/sim';
 import { directHealBonus } from '../src/sim/spell_scaling';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { stunDrCategory } from '../src/sim/stun_dr';
 import type { Aura } from '../src/sim/types';
 import { AVATAR_SCALE, SPELL_AOE_COEFF_MULT } from '../src/sim/types';
@@ -59,20 +60,41 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
     if (!meta) throw new Error('missing player metadata');
 
     const base = emptyModifiers();
-    recalcPlayerStats(p, 'warrior', meta.equipment, base, meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      'warrior',
+      meta.equipment,
+      base,
+      meta.equipmentInstance,
+      defaultAllocationFor('warrior', p.level),
+    );
     const armorWithout = p.stats.armor;
     const str = p.stats.str;
 
     const mods = emptyModifiers();
     mods.stats.armorFromStrPct = 0.7;
-    recalcPlayerStats(p, 'warrior', meta.equipment, mods, meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      'warrior',
+      meta.equipment,
+      mods,
+      meta.equipmentInstance,
+      defaultAllocationFor('warrior', p.level),
+    );
     expect(p.stats.armor).toBe(armorWithout + Math.round(str * 0.7));
 
     // The fold lands BEFORE the armorPct multiplier so armorPct amplifies it.
     const both = emptyModifiers();
     both.stats.armorFromStrPct = 0.7;
     both.stats.armorPct = 0.1;
-    recalcPlayerStats(p, 'warrior', meta.equipment, both, meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      'warrior',
+      meta.equipment,
+      both,
+      meta.equipmentInstance,
+      defaultAllocationFor('warrior', p.level),
+    );
     expect(p.stats.armor).toBe(Math.round((armorWithout + Math.round(str * 0.7)) * 1.1));
   });
 });
@@ -111,11 +133,25 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
       school: 'physical',
     };
     p.auras.push(avatar);
-    recalcPlayerStats(p, 'warrior', meta.equipment, emptyModifiers(), meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      'warrior',
+      meta.equipment,
+      emptyModifiers(),
+      meta.equipmentInstance,
+      defaultAllocationFor('warrior', p.level),
+    );
     expect(AVATAR_SCALE).toBeGreaterThan(1);
     expect(p.scale).toBe(AVATAR_SCALE);
     p.auras.length = 0;
-    recalcPlayerStats(p, 'warrior', meta.equipment, emptyModifiers(), meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      'warrior',
+      meta.equipment,
+      emptyModifiers(),
+      meta.equipmentInstance,
+      defaultAllocationFor('warrior', p.level),
+    );
     expect(p.scale).toBe(1);
   });
 });

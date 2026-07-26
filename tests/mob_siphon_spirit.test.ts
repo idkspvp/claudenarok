@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 
 const SEED = 42;
@@ -24,15 +24,16 @@ const spawnNhalia = (sim: Sim) => {
 };
 
 // Spirit regen tick mirror (updateRegen): mana recovers by spi/3 + 4 + lvl/5.
-const spiritRegen = (p: any) => Math.round(p.stats.luk / 3 + 4 + Math.floor(p.level / 5));
+// Mirrors combat/auras.ts updateRegen: recovery reads Intelligence.
+const spiritRegen = (p: any) => Math.round(p.stats.int / 3 + 4 + Math.floor(p.level / 5));
 
-// Swing until the Spirit Siphon (negative buff_spi) debuff lands (a swing can miss/dodge).
+// Swing until the Spirit Siphon (negative buff_int) debuff lands (a swing can miss/dodge).
 const swingUntilSiphoned = (sim: Sim, mob: any, target: any, max = 300) => {
   target.gm = true; // invulnerable so an elite swing can't kill it (applyAura still lands)
   for (let i = 0; i < max; i++) {
     target.hp = target.maxHp; // top up so a hit never kills (death clears auras)
     (sim as any).mobSwing(mob, target);
-    if (target.auras.some((a: any) => a.kind === 'buff_spi' && a.value < 0)) return true;
+    if (target.auras.some((a: any) => a.kind === 'buff_int' && a.value < 0)) return true;
   }
   return false;
 };
@@ -43,7 +44,7 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     expect(MOBS.sister_nhalia.siphonSpirit!.name).toBe('Spirit Siphon');
   });
 
-  it('a landed hit applies a negative buff_spi aura with the template values', () => {
+  it('a landed hit applies a negative buff_int aura with the template values', () => {
     const sim = makeSim();
     const player = sim.player;
     const mob = spawnNhalia(sim);
@@ -55,19 +56,19 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     } finally {
       siphon.chance = old;
     }
-    const aura = player.auras.find((a) => a.kind === 'buff_spi');
+    const aura = player.auras.find((a) => a.kind === 'buff_int');
     expect(aura).toBeDefined();
     expect(aura!.name).toBe('Spirit Siphon');
-    expect(aura!.value).toBe(-siphon.luk); // stored negative
+    expect(aura!.value).toBe(-siphon.int); // stored negative
     expect(aura!.sourceId).toBe(mob.id);
     expect(aura!.school).toBe('shadow');
   });
 
-  it('the siphon lowers Spirit and thus the out-of-combat mana regen rate', () => {
+  it('the siphon lowers Intelligence and thus the out-of-combat mana regen rate', () => {
     const sim = makeSim();
     const player = sim.player;
     const mob = spawnNhalia(sim);
-    const spiBefore = player.stats.luk;
+    const intBefore = player.stats.int;
     const regenBefore = spiritRegen(player);
     const siphon = MOBS.sister_nhalia.siphonSpirit!;
     const old = siphon.chance;
@@ -77,27 +78,27 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     } finally {
       siphon.chance = old;
     }
-    expect(player.stats.luk).toBe(spiBefore - siphon.luk);
+    expect(player.stats.int).toBe(intBefore - siphon.int);
     expect(spiritRegen(player)).toBeLessThan(regenBefore);
   });
 
-  it('Spirit is floored at 0 even if the drain exceeds the victim pool', () => {
+  it('Intelligence is floored at 0 even if the drain exceeds the victim pool', () => {
     const sim = makeSim();
     const player = sim.player;
     const mob = spawnNhalia(sim);
     const siphon = MOBS.sister_nhalia.siphonSpirit!;
     const oldChance = siphon.chance;
-    const oldSpi = siphon.luk;
+    const oldInt = siphon.int;
     siphon.chance = 1;
-    siphon.luk = 100000; // absurd drain
+    siphon.int = 100000; // absurd drain
     try {
       swingUntilSiphoned(sim, mob, player);
     } finally {
       siphon.chance = oldChance;
-      siphon.luk = oldSpi;
+      siphon.int = oldInt;
     }
-    expect(player.stats.luk).toBe(0);
-    expect(player.stats.luk).toBeGreaterThanOrEqual(0);
+    expect(player.stats.int).toBe(0);
+    expect(player.stats.int).toBeGreaterThanOrEqual(0);
   });
 
   it('refreshes a single shared slot instead of stacking', () => {
@@ -112,7 +113,7 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     } finally {
       siphon.chance = old;
     }
-    expect(player.auras.filter((a) => a.kind === 'buff_spi' && a.value < 0).length).toBe(1);
+    expect(player.auras.filter((a) => a.kind === 'buff_int' && a.value < 0).length).toBe(1);
   });
 
   it('never siphons a non-mana victim (warrior uses rage)', () => {
@@ -124,11 +125,14 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     const old = siphon.chance;
     siphon.chance = 1;
     try {
-      for (let i = 0; i < 80; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 80; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       siphon.chance = old;
     }
-    expect(player.auras.some((a) => a.kind === 'buff_spi')).toBe(false);
+    expect(player.auras.some((a) => a.kind === 'buff_int')).toBe(false);
   });
 
   it('a friendly pet never siphons its target (hostile guard)', () => {
@@ -140,10 +144,13 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     const old = siphon.chance;
     siphon.chance = 1;
     try {
-      for (let i = 0; i < 80; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 80; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       siphon.chance = old;
     }
-    expect(player.auras.some((a) => a.kind === 'buff_spi' && a.value < 0)).toBe(false);
+    expect(player.auras.some((a) => a.kind === 'buff_int' && a.value < 0)).toBe(false);
   });
 });

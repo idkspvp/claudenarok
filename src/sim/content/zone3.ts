@@ -200,7 +200,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     color: 0x9c7a3c,
     // Jarring Swing: a heavy mining-pick blow knocks the victim off-balance,
     // cutting their dodge for 8s so the tunneler's strikes land more reliably.
-    staggerHit: { chance: 0.3, dodgeReduction: 0.05, duration: 8, name: 'Off-Balance' },
+    staggerHit: { chance: 0.3, dodgeReduction: 0.018, duration: 8, name: 'Off-Balance' },
   },
   ironvein_foreman: {
     id: 'ironvein_foreman',

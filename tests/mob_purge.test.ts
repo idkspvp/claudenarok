@@ -59,7 +59,14 @@ describe('mob purge affix (Spellgnaw)', () => {
     pushBuff(player, 'buff_armor', 80, 'test_buff_armor');
     // recalc so the pushed buff folds into derived armor (mirrors applyAura).
     const meta = (sim as any).players.get(player.id);
-    recalcPlayerStats(player, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+    recalcPlayerStats(
+      player,
+      meta.cls,
+      meta.equipment,
+      meta.talentMods,
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
     expect(player.stats.armor).toBe(armorBefore + 80);
 
     const purge = MOBS.grubjaw.purgeOnHit!;

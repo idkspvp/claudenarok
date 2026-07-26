@@ -8,6 +8,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { ENCHANTS, type EnchantDef } from '../src/sim/content/enchants';
+import { CLASSES } from '../src/sim/data';
 import { resolveApplyEnchant } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
 import { xpForLevel } from '../src/sim/types';
@@ -124,7 +125,7 @@ describe('enchant table magnitude invariants', () => {
 });
 
 describe('the full stamina path in HP', () => {
-  it('enchanting every stamina slot adds exactly 240 HP on a level-20 pool', () => {
+  it('enchanting every stamina slot adds 24 Vitality, and 24% to the pool', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: false });
     const pid = sim.playerId;
     while (sim.player.level < 20) sim.grantXp(xpForLevel(sim.player.level));
@@ -150,13 +151,21 @@ describe('the full stamina path in HP', () => {
       // countItem scans bags only, so 0 here proves the piece went on.
       expect(sim.countItem(itemId, pid), itemId).toBe(0);
     }
-    const staBefore = sim.player.stats.vit;
+    const vitBefore = sim.player.stats.vit;
     const hpBefore = sim.player.maxHp;
-    // Past the soft knee every further stamina point converts to 10 HP
-    // (hpFromStamina in src/sim/entity.ts), which is why stamina is the most
-    // tightly trimmed axis: the 24-point stack below must land at exactly
-    // plus 240 HP, inside the intended 230 to 250 band.
-    expect(staBefore).toBeGreaterThanOrEqual(20);
+    // Vitality MULTIPLIES the pool at 1% a point (vitHealthMultiplier in
+    // src/sim/entity.ts); it no longer adds a flat 10 HP past a soft knee. So the
+    // 24-point stack is worth 24% of whatever pool the character has, not a fixed
+    // 240 HP, and its value scales with the class and level wearing it. Derive the
+    // expected gain from the pool the character actually has, so the pin survives
+    // a pool retune while still catching a change in the enchant magnitudes.
+    // Read the unmultiplied pool off the class def rather than dividing it back
+    // out of hpBefore: that value is already rounded, and rounding it twice lands
+    // a point off.
+    const def = CLASSES.warrior;
+    const pool = def.baseHp + def.hpPerLevel * (sim.player.level - 1);
+    expect(Math.round(pool * (1 + vitBefore / 100))).toBe(hpBefore);
+    const expectedHp = Math.round(pool * (1 + (vitBefore + 24) / 100));
 
     sim.addItem('arcane_shard', 3, pid);
     sim.addItem('arcane_essence', 8, pid);
@@ -168,8 +177,11 @@ describe('the full stamina path in HP', () => {
       sim.equipItem(itemId);
       expect(sim.countItem(itemId, pid), itemId).toBe(0);
     }
-    expect(sim.player.stats.vit).toBe(staBefore + 24);
-    expect(sim.player.maxHp).toBe(hpBefore + 240);
+    expect(sim.player.stats.vit).toBe(vitBefore + 24);
+    expect(sim.player.maxHp).toBe(expectedHp);
+    // And it is a real, substantial gain, not a rounding artifact: a full stamina
+    // enchant pass is worth roughly a fifth of the character's health.
+    expect(sim.player.maxHp - hpBefore).toBeGreaterThan(hpBefore * 0.15);
   });
 });
 

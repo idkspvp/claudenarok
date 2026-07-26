@@ -33,6 +33,7 @@ import { describe, expect, it } from 'vitest';
 import { ABILITIES, ITEMS, MOBS } from '../src/sim/data';
 import { createMob, type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity } from '../src/sim/types';
 
 const FIGHT_SECONDS = 27; // the reported Nythraxis kill length
@@ -115,6 +116,7 @@ function gearedMage(spec: Spec, seed = 41, rows?: Rows): { sim: Sim; p: Entity }
     meta.equipment,
     ctx.playerMods(meta) as never,
     meta.equipmentInstance as never,
+    defaultAllocationFor(meta.cls as never, p.level),
   );
   p.resource = p.maxResource;
   return { sim, p };

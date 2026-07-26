@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import { characterDerivedStats, createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import { requiredLevelFor } from '../src/sim/item_level_req';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 
 // Gear above the wearer's level is INERT: it stays equipped (still worn and
 // rendered) but contributes no stats, armor, spell power, set pieces, or weapon
@@ -24,7 +25,14 @@ const UNARMED = { min: 1, max: 2, speed: 2 };
 function warrior(level: number, equipment: Record<string, string>) {
   const e = createPlayer(0, 'warrior', { x: 0, y: 0, z: 0 }, 'Tester');
   e.level = level;
-  recalcPlayerStats(e, 'warrior', equipment as Equip, undefined, {});
+  recalcPlayerStats(
+    e,
+    'warrior',
+    equipment as Equip,
+    undefined,
+    {},
+    defaultAllocationFor('warrior', e.level),
+  );
   return e;
 }
 

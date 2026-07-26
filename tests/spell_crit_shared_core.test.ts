@@ -13,6 +13,7 @@ import { SET_CRIT_3PC_RATING, SET_NIGHTTALON } from '../src/sim/content/item_set
 import { ITEMS } from '../src/sim/data';
 import { type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Aura, ItemDef } from '../src/sim/types';
 import { critFractionFromRating } from '../src/sim/types';
 
@@ -99,10 +100,13 @@ describe('spell crit shared core', () => {
       sim.equipItem(itemId);
 
       // Assert: both compositions read the SAME core; the stat channels differ.
-      // This pins melee as unchanged in shape (agi channel intact, no double
-      // count of the shared core, no int leakage into melee).
+      // Melee crit reads LUK now, off a 1% base, and spell crit still reads INT
+      // off 5%. The point of the pin is unchanged: no double count of the shared
+      // core, and no leakage of either stat channel into the other composition.
+      // (Pre-renewal Ragnarok has no spell crit at all; unifying the two bases is
+      // phase-3 combat-model work, not a stat-conversion change.)
       expect(sim.ctx.spellCrit(p)).toBeCloseTo(0.05 + p.stats.int * 0.0008 + p.sharedCritBonus, 10);
-      expect(p.critChance).toBeCloseTo(0.05 + p.stats.agi * 0.0005 + p.sharedCritBonus, 10);
+      expect(p.critChance).toBeCloseTo(0.01 + p.stats.luk * 0.003 + p.sharedCritBonus, 10);
     } finally {
       delete ITEMS[itemId];
     }
@@ -119,7 +123,14 @@ describe('spell crit shared core', () => {
     // Act: inject the talent crit through the mods slot recalcPlayerStats reads
     // (the mastery_mechanism pattern: mutate mods, not the raw entity field).
     meta.talentMods.stats.crit = 0.05;
-    recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+    recalcPlayerStats(
+      p,
+      meta.cls,
+      meta.equipment,
+      meta.talentMods,
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
 
     // Assert
     expect(p.sharedCritBonus).toBeCloseTo(0.05, 10);
@@ -134,12 +145,26 @@ describe('spell crit shared core', () => {
     const p = sim.player;
     const pieces = setMembers(SET_NIGHTTALON);
 
-    recalcPlayerStats(p, 'rogue', equipmentOf(pieces.slice(0, 2)), undefined, {});
+    recalcPlayerStats(
+      p,
+      'rogue',
+      equipmentOf(pieces.slice(0, 2)),
+      undefined,
+      {},
+      defaultAllocationFor('rogue', p.level),
+    );
     expect(p.sharedCritBonus).toBe(0);
     const twoPiece = sim.ctx.spellCrit(p);
 
     // Act
-    recalcPlayerStats(p, 'rogue', equipmentOf(pieces.slice(0, 3)), undefined, {});
+    recalcPlayerStats(
+      p,
+      'rogue',
+      equipmentOf(pieces.slice(0, 3)),
+      undefined,
+      {},
+      defaultAllocationFor('rogue', p.level),
+    );
 
     // Assert: the set rating is the whole core (no mods, no auras), and spell
     // crit moves by exactly the converted rating over the 2-piece baseline.

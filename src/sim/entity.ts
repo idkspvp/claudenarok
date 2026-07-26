@@ -5,6 +5,7 @@ import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
 import { pvpFractionsFromRatings } from './pvp';
+import { defaultAllocationFor } from './stat_preset';
 import type {
   Entity,
   EquipSlot,
@@ -26,6 +27,7 @@ import {
   hasteFractionFromRating,
   hitFractionFromRating,
   SHIELD_BLOCK_BASE,
+  STATUS_STATS,
   type StatAllocation,
 } from './types';
 
@@ -315,7 +317,11 @@ export function recalcPlayerStats(
   equipment: PlayerEquipment,
   mods: TalentModifiers | undefined,
   equipmentInstance: Partial<Record<EquipSlot, ItemInstancePayload>>,
-  alloc: StatAllocation = emptyStatAllocation(),
+  // Required, deliberately not defaulted. Every attribute a character has comes
+  // from here now, so a caller that forgets it does not get a small inaccuracy:
+  // it gets a character with 1 in all six. Making it required turns that into a
+  // compile error instead of a silently gutted stat block.
+  alloc: StatAllocation,
 ): void {
   const def = CLASSES[cls];
   const lvl = e.level;
@@ -506,9 +512,13 @@ export function recalcPlayerStats(
     s.dex = Math.round(s.dex * (1 + allStatsPct));
     s.luk = Math.round(s.luk * (1 + allStatsPct));
   }
-  // Floor Agility at 0 so a draining debuff (negative buff_agi) can never push the
-  // derived armor/dodge below what zero Agility would give.
-  s.agi = Math.max(0, s.agi);
+  // Floor every attribute at 0 so a draining debuff can never push one negative.
+  // Only Agility was floored, because only Agility fed a derivation that visibly
+  // inverted. The others reached the same state silently: a big enough Spirit
+  // Siphon drove Intelligence to -99989, and from there the mana pool, its regen,
+  // and Magic Attack all went with it. A drain can strip an attribute to nothing;
+  // it can never make one worth less than nothing.
+  for (const key of STATUS_STATS) s[key] = Math.max(0, s[key]);
   s.armor += s.agi * 2;
   if (bearForm) {
     // 2.3x (2026-07 tank parity, was 1.9x): leather peaks ~1700-2100 armor
@@ -748,10 +758,21 @@ export function characterDerivedStats(
   equipment: PlayerEquipment,
   mods?: TalentModifiers,
   equipmentInstance?: Partial<Record<EquipSlot, ItemInstancePayload>>,
+  // The character's stored allocation. Omitting it does NOT mean "no allocation":
+  // it means the sheet would report 1 in every attribute for a character who is
+  // nothing of the sort, so a caller with the save in hand must pass it.
+  alloc?: StatAllocation,
 ): DerivedCharacterStats {
   const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
   e.level = Math.max(1, Math.floor(level));
-  recalcPlayerStats(e, cls, equipment, mods, equipmentInstance ?? {});
+  recalcPlayerStats(
+    e,
+    cls,
+    equipment,
+    mods,
+    equipmentInstance ?? {},
+    alloc ?? defaultAllocationFor(cls, e.level),
+  );
   return {
     stats: e.stats,
     maxHp: e.maxHp,

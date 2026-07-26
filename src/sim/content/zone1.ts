@@ -400,7 +400,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     scale: 1.0,
     color: 0xd5dbdb,
     // A grave-cold wail saps the strength from the living it strikes.
-    demoralize: { ap: 20, duration: 8, name: 'Withering Wail' },
+    demoralize: { ap: 4, duration: 8, name: 'Withering Wail' },
     // Grave-touch: a clawing swing may fester a creeping necrotic rot (shadow DoT).
     soulrot: { chance: 0.25, perTick: 4, interval: 3, duration: 12, name: 'Soulrot' },
   },

@@ -337,7 +337,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     aggroRadius: 11,
     // Withering Rot: the troll's fetid claws rot a struck victim's sinews, draining
     // Agility (thinning their armor and dodge) for a few seconds.
-    wither: { chance: 0.3, agi: 18, duration: 8, name: 'Withering Rot', school: 'nature' },
+    wither: { chance: 0.3, agi: 5, duration: 8, name: 'Withering Rot', school: 'nature' },
     loot: [
       { copper: 50, chance: 1 },
       { itemId: 'troll_fetish', chance: 0.6, questId: 'q_troll_fetishes' },
@@ -496,7 +496,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     aoePulse: { min: 18, max: 26, radius: 11, every: 9, name: 'Dirge of Nhalia', school: 'shadow' },
     // Spirit Siphon: the priestess's touch drains a caster's Spirit, choking
     // their out-of-combat mana regen for the duration (see siphonSpirit affix).
-    siphonSpirit: { chance: 0.3, luk: 14, duration: 10, name: 'Spirit Siphon', school: 'shadow' },
+    siphonSpirit: { chance: 0.3, int: 5, duration: 10, name: 'Spirit Siphon', school: 'shadow' },
     // A bone-chilling shriek that sends the living fleeing in terror — her dirge
     // is grief, her wail is dread. Telegraphed: first scream after one interval.
     terrify: { radius: 12, every: 16, duration: 3, name: 'Keening Wail', school: 'shadow' },

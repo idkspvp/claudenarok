@@ -446,7 +446,7 @@ import * as valeCupMod from './social/vale_cup';
 import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
-import { defaultAllocationFor } from './stat_preset';
+import { defaultAllocationFor, isSuggestedSpread } from './stat_preset';
 import {
   raiseCost,
   raiseStat,
@@ -2206,7 +2206,13 @@ export class Sim {
       lastDisenchantResult: null,
       lastEnchantResult: null,
       known: [],
-      statAllocation: emptyStatAllocation(),
+      // A new character starts on the class's suggested spread rather than at 1 in
+      // all six. Ragnarok hands a Novice 48 unspent points, but it also assumes the
+      // player places them before doing anything; here an unallocated character is
+      // simply unable to fight, and the points are the FIRST thing a new player
+      // would have to understand. The spread is a starting build, not a lock: every
+      // point of it is refunded by Reset and re-spendable however they like.
+      statAllocation: defaultAllocationFor(cls, 1),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2291,7 +2297,14 @@ export class Sim {
       // Normalize on load, never crash: a save from before the RO conversion has
       // no allocation, and one that somehow exceeds its level's budget is clamped
       // back rather than trusted. The server re-derives everything from this.
-      meta.statAllocation = sanitizeStatAllocation(s.statAllocation, player.level);
+      // A save from before the RO conversion has no allocation at all. Give it the
+      // suggested spread for its level rather than the empty one it literally
+      // stored: those characters were built under a model where the class supplied
+      // the stats, and handing them back a level-20 body with 1 in every attribute
+      // would be a silent, unexplained gutting of a character someone played.
+      meta.statAllocation = s.statAllocation
+        ? sanitizeStatAllocation(s.statAllocation, player.level)
+        : defaultAllocationFor(meta.cls, player.level);
       player.facing = s.facing;
       player.prevFacing = s.facing;
       meta.xp = s.xp;
@@ -4237,6 +4250,7 @@ export class Sim {
   setPlayerLevel(level: number, pid?: number): void {
     const r = this.resolve(pid);
     if (!r) return;
+    const prevLevel = r.e.level;
     r.e.level = Math.max(1, Math.min(MAX_LEVEL, level));
     // Keep lifetimeXp consistent with the level so post-cap progression starts
     // from a sane baseline (virtualLevel never falls below the real level). Only
@@ -4248,13 +4262,13 @@ export class Sim {
     // (combat/damage.ts grantXp). Without this a level-jumped character keeps the
     // mastery baked at the OLD level.
     r.meta.talentMods = computeTalentModifiers(r.meta.cls, r.meta.talents, r.e.level);
-    // A character who has never spent a point gets the class's suggested spread for
+    // A character still sitting on the untouched suggestion gets the suggestion for
     // the new level. This is the dev/GM and test path: jumping to level 80 and
-    // handing back someone still at 1 in all six would leave them unable to fight
-    // anything, and the points would sit unspent with no player around to spend
-    // them. A character with ANY deliberate allocation keeps it untouched: their
-    // build is theirs, and the fresh points are theirs to place.
-    if (statusPointsSpent(r.meta.statAllocation) === 0)
+    // handing back someone with a level-1 spread would leave them unable to fight
+    // anything, and the new points would sit unspent with no player around to place
+    // them. A character who has moved even one point keeps their build exactly:
+    // it is theirs, and so are the fresh points.
+    if (isSuggestedSpread(r.meta.statAllocation, r.meta.cls, prevLevel))
       r.meta.statAllocation = defaultAllocationFor(r.meta.cls, r.e.level);
     recalcPlayerStats(
       r.e,

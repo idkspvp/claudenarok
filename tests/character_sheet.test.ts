@@ -6,6 +6,7 @@ import { talentsFor } from '../src/sim/content/talents';
 import { zoneAt } from '../src/sim/data';
 import { createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import type { CharacterState } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { type PlayerClass, virtualLevel } from '../src/sim/types';
 
 function makeState(over: Partial<CharacterState> = {}): CharacterState {
@@ -137,7 +138,7 @@ describe('characterSheet: owner variant', () => {
     // Independently derive via the engine's one true function.
     const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
     e.level = level;
-    recalcPlayerStats(e, cls, {}, undefined, {});
+    recalcPlayerStats(e, cls, {}, undefined, {}, defaultAllocationFor(cls, e.level));
     expect(sheet.stats).toEqual({ ...e.stats });
     expect(sheet.vitals!.maxHp).toBe(e.maxHp);
     expect(sheet.vitals!.resource.max).toBe(e.maxResource);

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { createMob } from '../src/sim/entity';
 import { MOBS } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 // Staggering mobs knock a player victim off-balance on a landed hit, cutting
 // their dodge chance for the duration so the attacker (and its pack) land more
@@ -10,7 +10,10 @@ import { MOBS } from '../src/sim/data';
 describe('mob stagger-on-hit', () => {
   it('the Deeprock Tunneler template carries a Jarring Swing proc', () => {
     expect(MOBS.deeprock_kobold.staggerHit).toMatchObject({
-      chance: 0.3, dodgeReduction: 0.05, duration: 8, name: 'Off-Balance',
+      chance: 0.3,
+      dodgeReduction: 0.018,
+      duration: 8,
+      name: 'Off-Balance',
     });
   });
 
@@ -25,7 +28,8 @@ describe('mob stagger-on-hit', () => {
     victim.gm = true; // invulnerable for the test; applyAura still fires
 
     const baseDodge = victim.dodgeChance;
-    expect(baseDodge).toBeGreaterThan(0.05);
+    // A same-level rogue's evasion, which the -1.8% shave has to stay under.
+    expect(baseDodge).toBeGreaterThan(0.018);
 
     const kobold = createMob((sim as any).nextId++, MOBS.deeprock_kobold, 15, { x: 0, y: 0, z: 0 });
     kobold.hostile = true;
@@ -41,10 +45,10 @@ describe('mob stagger-on-hit', () => {
     const aura = victim.auras.find((a) => a.name === 'Off-Balance');
     expect(aura).toBeTruthy();
     expect(aura!.kind).toBe('buff_dodge');
-    expect(aura!.value).toBe(-0.05);
+    expect(aura!.value).toBe(-0.018);
     expect(aura!.duration).toBe(8);
     // recalcPlayerStats already folded the negative buff_dodge into dodgeChance.
-    expect(victim.dodgeChance).toBeCloseTo(Math.max(0, baseDodge - 0.05), 6);
+    expect(victim.dodgeChance).toBeCloseTo(Math.max(0, baseDodge - 0.018), 6);
   });
 
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
@@ -68,7 +72,7 @@ describe('mob stagger-on-hit', () => {
 
     const staggers = victim.auras.filter((a) => a.name === 'Off-Balance');
     expect(staggers.length).toBe(1);
-    expect(staggers[0].value).toBe(-0.05);
+    expect(staggers[0].value).toBe(-0.018);
   });
 
   it('the dodge floor keeps dodgeChance from going negative', () => {
@@ -79,8 +83,14 @@ describe('mob stagger-on-hit', () => {
 
     // A reduction larger than the victim's whole dodge clamps to exactly 0.
     (sim as any).applyAura(victim, {
-      id: 'stagger_test', name: 'Off-Balance', kind: 'buff_dodge',
-      remaining: 8, duration: 8, value: -1, sourceId: victim.id, school: 'physical',
+      id: 'stagger_test',
+      name: 'Off-Balance',
+      kind: 'buff_dodge',
+      remaining: 8,
+      duration: 8,
+      value: -1,
+      sourceId: victim.id,
+      school: 'physical',
     });
     expect(victim.dodgeChance).toBe(0);
   });
