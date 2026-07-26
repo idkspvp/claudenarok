@@ -396,10 +396,6 @@ describe('main /api characterization: bearer-auth denial contracts (no Authoriza
     );
   });
 
-  it('GET /api/wallet without auth is 401', async () => {
-    await characterize('wallet_get_noauth_401', makeReq({ method: 'GET', url: '/api/wallet' }));
-  });
-
   it('GET /api/referrals without auth is 401', async () => {
     await characterize(
       'referrals_get_noauth_401',
@@ -512,26 +508,6 @@ describe('main /api characterization: late-arrival backfill (github + desktop-lo
     );
   });
 
-  it('GET /api/daily-rewards with no auth is the bearer 401 (prefix arm)', async () => {
-    await characterize(
-      'daily_rewards_status_get_noauth_401',
-      makeReq({ method: 'GET', url: '/api/daily-rewards' }),
-    );
-  });
-
-  it('POST /api/daily-rewards/spin with no auth is the bearer 401 (prefix arm)', async () => {
-    await characterize(
-      'daily_rewards_spin_post_noauth_401',
-      makeReq({ method: 'POST', url: '/api/daily-rewards/spin', body: {} }),
-    );
-  });
-
-  it('GET /api/daily-rewards/history with no auth is the bearer 401 (prefix arm)', async () => {
-    await characterize(
-      'daily_rewards_history_get_noauth_401',
-      makeReq({ method: 'GET', url: '/api/daily-rewards/history' }),
-    );
-  });
 });
 
 afterAll(() => {

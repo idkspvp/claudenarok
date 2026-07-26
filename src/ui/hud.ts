@@ -289,7 +289,6 @@ import {
   HOTBAR_ACTION_MIME,
   type HotbarAction,
   handleMobileAttackTap,
-  loadAttackSlotAction,
   loadoutKnownAbilityIds,
   parseHotbarAction,
   placeAbilityOnSlot,

@@ -466,5 +466,4 @@ export class StoreWindow {
   private storeEnabled(): boolean {
     return this.deps.storeEnabled?.() ?? this.deps.storeSnapshot !== undefined;
   }
-
 }

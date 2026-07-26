@@ -339,21 +339,13 @@ describe('ensureSchema wires every schema module at boot', () => {
     expect(carcassCheck).toBeGreaterThan(sessionLock);
     expect(carcassCheck).toBeLessThan(concurrentIndex);
     expect(h.calls.some((sql) => sql.includes('DROP INDEX CONCURRENTLY'))).toBe(false);
-    const rewardEventsIndex = h.calls.findIndex((sql) =>
-      sql.includes(
-        'CREATE INDEX CONCURRENTLY IF NOT EXISTS daily_reward_events_account_day_created_id',
-      ),
-    );
-    expect(rewardEventsIndex).toBeGreaterThan(concurrentIndex);
-    expect(rewardEventsIndex).toBeLessThan(sessionUnlock);
-    expect(h.calls[rewardEventsIndex]).toContain('WHERE points > 0');
     // The open-sessions partial index builds third, still inside the session
     // lock; its partial predicate is what keeps the index tiny (open sessions
     // are a sliver of the table), so pin it alongside the ordering.
     const openIdx = h.calls.findIndex((sql) =>
       sql.includes('CREATE INDEX CONCURRENTLY IF NOT EXISTS play_sessions_open_character'),
     );
-    expect(openIdx).toBeGreaterThan(rewardEventsIndex);
+    expect(openIdx).toBeGreaterThan(concurrentIndex);
     expect(openIdx).toBeLessThan(sessionUnlock);
     expect(h.calls[openIdx]).toContain('WHERE ended_at IS NULL');
     // The client-perf worst-10s ranking index (packet 0 ruling R7) builds
@@ -504,7 +496,6 @@ describe('ensureSchema wires every schema module at boot', () => {
     // append, never reorder.
     expect(CONCURRENT_INDEX_MIGRATIONS.map((m) => m.name)).toEqual([
       'play_sessions_account_started_id',
-      'daily_reward_events_account_day_created_id',
       'play_sessions_open_character',
       'client_perf_reports_worst10s_created',
     ]);

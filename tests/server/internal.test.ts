@@ -101,8 +101,6 @@ const EXPECTED_ROUTES: ReadonlyArray<readonly [Method, string]> = [
   ['POST', '/internal/discord/member'],
   ['GET', '/internal/discord/relay'],
   ['GET', '/internal/discord/activity'],
-  ['GET', '/internal/discord/daily-rewards-winners'],
-  ['POST', '/internal/discord/daily-rewards-winners/mark'],
   ['POST', '/internal/discord/members-meta'],
   ['GET', '/internal/discord/flaired-ids'],
 ];
@@ -236,8 +234,8 @@ afterEach(() => {
 // ---------------------------------------------------------------------------
 
 describe('internal route registration', () => {
-  it('registers exactly 12 routes matching the legacy method+path ladder', () => {
-    expect(routes).toHaveLength(12);
+  it('registers exactly 10 routes matching the legacy method+path ladder', () => {
+    expect(routes).toHaveLength(10);
     const actual = routes.map((r) => `${r.method} ${r.path}`).sort();
     const expected = EXPECTED_ROUTES.map(([m, p]) => `${m} ${p}`).sort();
     expect(actual).toEqual(expected);
@@ -628,7 +626,6 @@ describe('discord/activity', () => {
 });
 
 // ---------------------------------------------------------------------------
-// 10. discord/daily-rewards-winners (GET limit coercion + POST mark).
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------

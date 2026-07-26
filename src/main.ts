@@ -2286,7 +2286,7 @@ async function startGame(
             void hud.refreshClaudium();
           };
           const result = await startClaudiumPurchase(economy, 'stripe', sku, {
-              stripe: (intent) =>
+            stripe: (intent) =>
               openStripeCheckout(
                 intent,
                 {
@@ -6709,7 +6709,7 @@ function wireStartScreens(): void {
     api.saveSession();
     enterLoggedInChrome();
     if (await completeDesktopBrowserLogin()) return;
-      void refreshGithubLinkStatus();
+    void refreshGithubLinkStatus();
     void refreshSteamLinkStatus(api);
     // Mandatory recovery-email capture: block realm entry until a pre-email account
     // sets one (a fresh signup already has it, so this is a no-op there).
@@ -7792,7 +7792,7 @@ function wireStartScreens(): void {
     api.saveSession();
     enterLoggedInChrome();
     if (await completeDesktopBrowserLogin()) return;
-      void refreshGithubLinkStatus();
+    void refreshGithubLinkStatus();
     void refreshSteamLinkStatus(api);
     // A Discord login usually captured the email already, but confirm and prompt
     // if it did not (e.g. the address was missing on the Discord account).
@@ -8069,7 +8069,7 @@ function wireStartScreens(): void {
     // Re-bind the account's linked wallet on a restored session (not just on fresh
     // login), so an auto-reconnected wallet shows verified and is NOT treated as
     // unverified and disconnected (the bug that forced a re-sign on every reload).
-      void refreshGithubLinkStatus();
+    void refreshGithubLinkStatus();
     void refreshSteamLinkStatus(api);
     // (Discord status is refreshed by enterLoggedInChrome above.)
     // A just-completed Discord login lands straight in play; capture a recovery

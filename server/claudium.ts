@@ -31,12 +31,8 @@ import { accountAndScopeForToken, grantAccountWeaponSkins, moderationStatusForAc
 import { ctxAccountId } from './http/context';
 import { type BearerActiveGuardDb, createActiveGuard } from './http/middleware/bearer_active_guard';
 import {
-  CLAUDIUM_CONFIRM_POLICY,
-  CLAUDIUM_CONFIRM_PRE_AUTH_POLICY,
   CLAUDIUM_PURCHASE_POLICY,
   CLAUDIUM_PURCHASE_PRE_AUTH_POLICY,
-  CLAUDIUM_QUOTE_POLICY,
-  CLAUDIUM_QUOTE_PRE_AUTH_POLICY,
   CLAUDIUM_SPEND_POLICY,
   CLAUDIUM_SPEND_PRE_AUTH_POLICY,
   rateLimit,

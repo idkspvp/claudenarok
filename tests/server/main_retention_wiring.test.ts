@@ -30,7 +30,6 @@ describe('retention sweep wiring in server/main.ts', () => {
       'pruneClientPerfReports(',
       'pruneChatLogsBatch(',
       'pruneClientPerfReportsBatch(',
-      'pruneDailyRewardEventsBatch(',
       'prunePlayerActivityDailyBatch(',
       'pruneOnlineSamplesBatch(',
       'pruneSitePresenceSamplesBatch(',
@@ -64,7 +63,6 @@ describe('retention sweep wiring in server/main.ts', () => {
     // One call site each, inside the sweep deps closures: deleting a deps entry
     // silently disables that table's retention with everything else green.
     for (const call of [
-      'pruneDailyRewardEventsBatch(',
       'prunePlayerActivityDailyBatch(',
       'pruneOnlineSamplesBatch(',
       'pruneSitePresenceSamplesBatch(',
@@ -73,21 +71,9 @@ describe('retention sweep wiring in server/main.ts', () => {
       'pruneAccountIpAssociationsBatch(',
       'foldOnlinePeak(',
       'distinctOnlineSampleRealms(',
-      'dailyRewardEventsCutoffDay(',
     ]) {
       expect(count(MAIN, call)).toBe(1);
     }
-  });
-
-  it('derives the daily_reward_events cutoff from the reward clock, behind the keep-forever guard', () => {
-    // The clock-derived cutoff and the keep-forever guard are load-bearing and
-    // live only here. The derivation itself (sign, clamp) is unit-tested in
-    // tests/daily_rewards_cutoff.test.ts; this pin proves main.ts actually
-    // calls it and honors the null (keep forever) contract.
-    expect(MAIN).toContain(
-      'const cutoff = await dailyRewardEventsCutoffDay(config.dailyRewardEventsRetentionDays);',
-    );
-    expect(MAIN).toContain('if (cutoff === null) return 0;');
   });
 
   it('threads each sweep knob from config, never a hardcoded literal', () => {

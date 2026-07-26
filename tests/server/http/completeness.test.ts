@@ -134,7 +134,6 @@ const legacyLadder = SURFACE_INVENTORY.filter(
 // DISPATCHER_SOURCES; extend this list for any future prefix-delegated module).
 const LEGACY_SOURCE_URLS = [
   new URL('../../../server/main.ts', import.meta.url),
-  new URL('../../../server/daily_rewards.ts', import.meta.url),
   new URL('../../../server/claudium.ts', import.meta.url),
 ] as const;
 
@@ -194,21 +193,19 @@ describe('registry completeness: the legacy /api ladder is fully covered', () =>
   });
 });
 
-describe('registry completeness: migrated baseline (public reads + auth + characters + account + wallet + reports/telemetry + discord)', () => {
+describe('registry completeness: migrated baseline (public reads + auth + characters + account + player card + reports/telemetry + discord)', () => {
   // The exact routes migrated onto RouteDefs so far: the public
   // reads (GET, server/leaderboard.ts), the auth credential surface (POST,
   // server/auth_routes.ts), the owner-gated character surface
   // (server/characters.ts: the list pair, create, and the account-owned :id
   // subroutes behind requireOwnedCharacter), the account-portal surface
   // (server/account.ts: the /api/account/* family, the companion-token method trio,
-  // and /api/email/unsubscribe), and the wallet / card / referral surface
-  // (server/wallet.ts: the wallet-link family, GET /api/wallet, the public GET
-  // /api/woc/balance, the binary POST /api/card, and GET /api/referrals). The router
-  // owns each under flag 'new'; their legacy arms stay for rollback. Method-aware,
-  // because a route resolves per method (a POST to a GET-only path resolves
-  // methodNotAllowed, not matched), and both the companion-token path (POST create,
-  // GET list, DELETE revoke) and /api/wallet/link (POST link, DELETE unlink) appear
-  // more than once.
+  // and /api/email/unsubscribe), and the player-card / referral surface
+  // (server/player_card_routes.ts: the binary POST /api/card and GET /api/referrals).
+  // The router owns each under flag 'new'; their legacy arms stay for rollback.
+  // Method-aware, because a route resolves per method (a POST to a GET-only path
+  // resolves methodNotAllowed, not matched), and the companion-token path
+  // (POST create, GET list, DELETE revoke) appears more than once.
   const MIGRATED_ROUTES: readonly LadderRoute[] = [
     { method: 'GET', path: '/api/leaderboard' },
     { method: 'GET', path: '/api/arena/leaderboard' },
@@ -250,11 +247,6 @@ describe('registry completeness: migrated baseline (public reads + auth + charac
     { method: 'POST', path: '/api/account/2fa/disable' },
     { method: 'GET', path: '/api/email/unsubscribe' },
     // The wallet / card / referral surface (server/wallet.ts).
-    { method: 'POST', path: '/api/wallet/link/challenge' },
-    { method: 'POST', path: '/api/wallet/link' },
-    { method: 'DELETE', path: '/api/wallet/link' },
-    { method: 'GET', path: '/api/wallet' },
-    { method: 'GET', path: '/api/woc/balance' },
     { method: 'POST', path: '/api/card' },
     { method: 'GET', path: '/api/referrals' },
     // The reports + telemetry surface (server/reports.ts). All POST; the
@@ -292,13 +284,6 @@ describe('registry completeness: migrated baseline (public reads + auth + charac
     { method: 'DELETE', path: '/api/github' },
     { method: 'POST', path: '/api/desktop-login/create' },
     { method: 'POST', path: '/api/desktop-login/exchange' },
-    { method: 'POST', path: '/api/desktop-wallet/create' },
-    { method: 'POST', path: '/api/desktop-wallet/claim' },
-    { method: 'POST', path: '/api/desktop-wallet/complete' },
-    { method: 'POST', path: '/api/desktop-wallet/result' },
-    { method: 'GET', path: '/api/daily-rewards' },
-    { method: 'POST', path: '/api/daily-rewards/spin' },
-    { method: 'GET', path: '/api/daily-rewards/history' },
     // The deeds family (server/deeds.ts): registry-only routes born AFTER the
     // migration, per the new-route rule (a NEW endpoint is a RouteDef module,
     // never an inline ladder arm), so they have no legacy twin to retain; the
@@ -313,7 +298,6 @@ describe('registry completeness: migrated baseline (public reads + auth + charac
     { method: 'GET', path: '/api/steam/status' },
     // v0.20.0: the paginated daily leaderboard read (the ops-side sibling is
     // asserted with the internal family below).
-    { method: 'GET', path: '/api/daily-rewards/leaderboard' },
     // Claudium (server-authoritative soft currency) proxy family
     // (server/claudium.ts). A brand-new /api/claudium/* prefix with NO legacy
     // ladder twin: registry-only, so every arm is asserted here. price/:rail is a
@@ -322,15 +306,9 @@ describe('registry completeness: migrated baseline (public reads + auth + charac
     { method: 'GET', path: '/api/claudium/balance' },
     { method: 'GET', path: '/api/claudium/price/:rail' },
     { method: 'GET', path: '/api/claudium/skus' },
-    { method: 'GET', path: '/api/claudium/native/rails' },
-    { method: 'GET', path: '/api/claudium/native/price/:rail' },
-    { method: 'GET', path: '/api/claudium/native/balance/sol/:owner' },
-    { method: 'GET', path: '/api/claudium/native/balance/usdc/:owner' },
     { method: 'GET', path: '/api/claudium/store' },
     { method: 'GET', path: '/api/claudium/history' },
     { method: 'POST', path: '/api/claudium/purchase' },
-    { method: 'POST', path: '/api/claudium/native/quote' },
-    { method: 'POST', path: '/api/claudium/native/confirm' },
     { method: 'POST', path: '/api/claudium/spend' },
     // v0.20.0 third slice: the map editor surface, migrated in-merge. The custom
     // map family (server/maps_routes.ts) and the uploaded-GLB family
@@ -497,10 +475,6 @@ describe('registry completeness: admin surface (server/admin.ts)', () => {
     for (const literal of [
       'reactivate',
       'chat-mute',
-      'daily-rewards-ban',
-      'daily-rewards-unban',
-      'daily-rewards-ip-ban',
-      'daily-rewards-ip-unban',
       'lift-mute',
       'note',
       'reset-strikes',
@@ -536,7 +510,7 @@ describe('registry completeness: admin surface (server/admin.ts)', () => {
   });
 });
 
-describe('registry completeness: oauth + internal surfaces (server/oauth.ts, server/internal.ts, server/daily_rewards.ts)', () => {
+describe('registry completeness: oauth + internal surfaces (server/oauth.ts, server/internal.ts)', () => {
   // Both expected sets derive FROM the SURFACE_INVENTORY ladders (the admin-block
   // pattern), so a dropped or added branch reds the gate without a hand-maintained
   // parallel list. The oauth surface migrates ONLY its POST JSON rows: the two GET
@@ -553,20 +527,13 @@ describe('registry completeness: oauth + internal surfaces (server/oauth.ts, ser
   const oauthGetLadder = SURFACE_INVENTORY.filter(
     (r) => r.dispatcher === DISPATCH.oauth && r.method === 'GET',
   );
-  const OPS_FAMILY_PREFIX = '/internal/daily-rewards/';
   const internalLadder = SURFACE_INVENTORY.filter((r) => r.dispatcher === DISPATCH.internal);
-  const opsFamilyRows = SURFACE_INVENTORY.filter(
-    (r) => r.dispatcher === DISPATCH.internal && r.path.startsWith(OPS_FAMILY_PREFIX),
-  );
 
   it('derives the expected non-empty ladders', () => {
     expect(oauthPostLadder.length).toBe(5);
     expect(oauthGetLadder.length).toBe(2);
-    // 19 = the handleInternalApi twelve (restart-countdown + the 11 Discord-bot
-    // routes, flaired-ids included) plus the seven-route payout and moderation ops
-    // family below.
-    expect(internalLadder.length).toBe(19);
-    expect(opsFamilyRows.length).toBe(7);
+    // 12 = restart-countdown plus the 11 Discord-bot routes (flaired ids included).
+    expect(internalLadder.length).toBe(10);
   });
 
   it('registers exactly the oauth POST ladder routes', () => {
@@ -629,19 +596,6 @@ describe('registry completeness: oauth + internal surfaces (server/oauth.ts, ser
     }
   });
 
-  it('registers the /internal/daily-rewards ops family (flips the delegate-only pin)', () => {
-    // These three rows started delegate-only (notFound); the late-arrival pass puts
-    // the family on the table, so each real ops route now resolves matched. The
-    // synthetic never-existing subpaths still resolve notFound and delegate to
-    // the composite (handleDailyRewardInternalApi first), which keeps serving
-    // every off-table shape (unknown subpath, wrong method, HEAD) until the legacy
-    // ladder is removed.
-    for (const r of opsFamilyRows) {
-      expect(apiRegistry.resolve(r.method, r.path).kind, r.path).toBe('matched');
-    }
-    expect(apiRegistry.resolve('POST', '/internal/daily-rewards/run').kind).toBe('notFound');
-    expect(apiRegistry.resolve('GET', '/internal/daily-rewards/status').kind).toBe('notFound');
-  });
 });
 
 describe('registry completeness: the gate is non-vacuous (negative control)', () => {

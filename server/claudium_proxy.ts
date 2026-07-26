@@ -15,7 +15,6 @@
 // The functions mirror the service SDK v1 surface; they do NOT recompute any
 // value, they only pass through what the service returns.
 
-
 const SERVICE_TIMEOUT_MS = 5000;
 const NATIVE_CONFIRM_TIMEOUT_MS = 60_000;
 

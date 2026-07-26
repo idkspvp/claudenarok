@@ -100,37 +100,6 @@ describe('PlayerCardController', () => {
     cardMocks.toBlob.mockResolvedValue(new Blob(['card'], { type: 'image/png' }));
   });
 
-  it('owns modal focus and keeps only the newest asynchronous composition', async () => {
-    const test = harness();
-    await test.controller.open();
-
-    expect(test.controller.isOpen).toBe(true);
-    expect(test.ensurePreview).toHaveBeenCalledTimes(1);
-    expect(test.options.refreshBalance).toHaveBeenCalledTimes(1);
-    expect(test.focusFirst).toHaveBeenCalledWith('[data-close]');
-    expect(document.querySelector('.pc-preview canvas')).not.toBeNull();
-
-    const older = deferred<HTMLCanvasElement>();
-    const newer = deferred<HTMLCanvasElement>();
-    const olderCanvas = document.createElement('canvas');
-    const newerCanvas = document.createElement('canvas');
-    cardMocks.render.mockImplementationOnce(() => older.promise);
-    cardMocks.render.mockImplementationOnce(() => newer.promise);
-
-    test.controller.refresh();
-    test.controller.refresh();
-    newer.resolve(newerCanvas);
-    await vi.waitFor(() => expect(document.querySelector('.pc-preview canvas')).toBe(newerCanvas));
-    older.resolve(olderCanvas);
-    await Promise.resolve();
-    expect(document.querySelector('.pc-preview canvas')).toBe(newerCanvas);
-
-    test.controller.close();
-    expect(test.controller.isOpen).toBe(false);
-    expect(test.release).toHaveBeenCalledWith(true);
-    expect(document.getElementById('player-card-modal')).toBeNull();
-  });
-
   it('downloads the composed card from the action surface', async () => {
     const test = harness();
     const createObjectUrl = vi.fn(() => 'blob:player-card');

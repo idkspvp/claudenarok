@@ -6266,7 +6266,7 @@ export class GameServer {
           practice || [...match.rosterA, ...match.rosterB].some((player) => player.bot);
         if (!match.rated && !matchHasBots) continue;
         if (!ev.won) continue;
-        const completion = this.valeCupRewardCompletion(match);
+        const _completion = this.valeCupRewardCompletion(match);
         if (!match.rated) continue;
         // One card per decided match: every winner's vcupResult lands on the
         // same tick and the match-id dedupe key collapses them, so the first

@@ -95,7 +95,7 @@ describe('leaderboard_window: async + page wiring contracts (the painter half)',
     // an older tab or page never paints the shared body nor mirrors its clamped
     // page into the wrong board's pager state.
     expect(code).toContain('const seq = ++this.renderSeq;');
-    expect(code.match(/seq !== this\.renderSeq/g)?.length).toBe(5);
+    expect(code.match(/seq !== this\.renderSeq/g)?.length).toBe(4);
   });
 
   it('mirrors the server-clamped page back into the pager state', () => {
@@ -132,7 +132,6 @@ describe('leaderboard_window: guild board tab (Players / Guilds)', () => {
     expect(code).toContain("tab('guilds', t('hudChrome.leaderboard.tabGuilds'))");
     expect(code).toContain("tab('deeds', t('hudChrome.deeds.lbTab'))");
     expect(code).toContain("tab('devs', t('hudChrome.leaderboard.tabDevs'))");
-    expect(code).toContain("tab('daily', t('hudChrome.dailyRewards.leaderboard'))");
   });
 
   it('marks the active tab with aria-selected for screen readers', () => {
