@@ -586,5 +586,4 @@ describe('vale cup: online integration (GameServer)', () => {
     const clearedShared = snapsWithSelfKey(fcB, 'vcupb', restoreAt).pop()?.self.vcupb;
     expect(clearedShared?.live).toBeNull();
   });
-
 });

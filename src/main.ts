@@ -204,7 +204,6 @@ import { deleteCharButtonHtml } from './ui/char_delete_button';
 import { loadCharselectNews } from './ui/charselect_news';
 import { ChatCommandMenu } from './ui/chat_command_menu';
 import { CLASS_DETAILS, SIGNATURE_ABILITIES } from './ui/class_details_data';
-import { claudiumBalanceAddress } from './ui/claudium_view';
 import { ensureDeedLocalesLoaded } from './ui/deed_i18n';
 import { isDevGuiCommand } from './ui/dev_command_view';
 import { devTierByIndex, devTierDisplayName } from './ui/dev_tier';
@@ -225,7 +224,6 @@ import {
 import { renderDiscordWidget } from './ui/discord_widget';
 import { classDisplayName, tEntity } from './ui/entity_i18n';
 import { showEntryGuardBanner } from './ui/entry_guard_banner';
-import { FocusManager, type FocusTrapHandle } from './ui/focus_manager';
 import { attachGatherNodeHoverTooltip, gatherNodeToolGateFor } from './ui/gather_node_tooltip';
 import { gatherToolNoNodeKey } from './ui/gathering_view';
 import { type ClaudiumHooks, Hud } from './ui/hud';
@@ -2242,13 +2240,13 @@ async function startGame(
       token: () => api.token,
       base: api.base,
     });
-    const wocBalanceBaseUnits = (balance: number | null): string | null => {
+    const _wocBalanceBaseUnits = (balance: number | null): string | null => {
       if (balance === null || !Number.isFinite(balance) || balance < 0) return null;
       return String(Math.floor(balance * 1_000_000));
     };
     const nativePriceCache = new Map<string, { amountBase: string; atMs: number }>();
     const nativePriceCacheTtlMs = 60_000;
-    const nativeAmountBase = (
+    const _nativeAmountBase = (
       rail: 'sol' | 'usdc' | 'woc',
       sku: string,
       amountBase: string | null | undefined,
@@ -2280,7 +2278,7 @@ async function startGame(
         const { balance, skus } = pack;
         return { available: true, balance, skus };
       },
-      buy: async (rail, sku) => {
+      buy: async (_rail, sku) => {
         await (async () => {
           const refreshClaudiumLater = () => {
             void hud.refreshClaudium();
@@ -6095,7 +6093,7 @@ async function refreshGithubLinkStatus(): Promise<void> {
   } catch (err) {
     console.error('[github] could not load status', err);
   }
-  if (!status || status.enabled !== true) {
+  if (status?.enabled !== true) {
     group.hidden = true;
     return;
   }

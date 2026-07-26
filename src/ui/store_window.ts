@@ -59,7 +59,6 @@ export interface StoreWindowDeps {
 export class StoreWindow {
   private openerFocus: HTMLElement | null = null;
   private poll: number | null = null;
-  private renderSeq = 0;
   private storeBalance: number | null = null;
   private storeItems: WocStoreItemInput[] = [];
   private armorySections: ArmorySection[] = [];

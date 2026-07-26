@@ -472,13 +472,7 @@ describe('registry completeness: admin surface (server/admin.ts)', () => {
   it('the literal moderation action routes win over the :action catch-all', () => {
     // The no-regex restructure only works if the specificity sort orders the literal
     // sibling routes ahead of :action; assert each resolves to its own path.
-    for (const literal of [
-      'reactivate',
-      'chat-mute',
-      'lift-mute',
-      'note',
-      'reset-strikes',
-    ]) {
+    for (const literal of ['reactivate', 'chat-mute', 'lift-mute', 'note', 'reset-strikes']) {
       const match = apiRegistry.resolve('POST', `/admin/api/moderation/accounts/5/${literal}`);
       expect(match.kind).toBe('matched');
       if (match.kind === 'matched') {
@@ -595,7 +589,6 @@ describe('registry completeness: oauth + internal surfaces (server/oauth.ts, ser
       expect(r.meta?.envelope, r.path).toBe('admin');
     }
   });
-
 });
 
 describe('registry completeness: the gate is non-vacuous (negative control)', () => {

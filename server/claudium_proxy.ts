@@ -16,7 +16,7 @@
 // value, they only pass through what the service returns.
 
 const SERVICE_TIMEOUT_MS = 5000;
-const NATIVE_CONFIRM_TIMEOUT_MS = 60_000;
+const _NATIVE_CONFIRM_TIMEOUT_MS = 60_000;
 
 /** Integer Claudium balance for an account, or null when the service is off. */
 export interface ClaudiumBalanceResult {

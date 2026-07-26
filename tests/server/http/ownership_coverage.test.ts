@@ -41,7 +41,6 @@ import { logger } from '../../../server/http/logger';
 import { ADMIN_AUTH_REQUIRED } from '../../../server/http/middleware/require_admin';
 import {
   DAILY_REWARD_SECRET_ENV,
-  DAILY_REWARD_SECRET_HEADER,
   DEPLOY_SECRET_ENV,
   DEPLOY_SECRET_HEADER,
   DISCORD_SECRET_ENV,

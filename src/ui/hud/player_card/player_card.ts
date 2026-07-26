@@ -125,7 +125,7 @@ export const CARD_POSES: readonly CardPose[] = [
 ];
 
 /** Human-readable $WOC amount in the player's current locale. */
-function formatWoc(n: number): string {
+function _formatWoc(n: number): string {
   return formatNumber(n, { maximumFractionDigits: n >= 1 ? 0 : 2 });
 }
 
@@ -169,8 +169,8 @@ function fillTextClamped(
     return;
   }
   let s = text;
-  while (s.length > 1 && ctx.measureText(s + '…').width > maxW) s = s.slice(0, -1);
-  ctx.fillText(s + '…', x, y);
+  while (s.length > 1 && ctx.measureText(`${s}…`).width > maxW) s = s.slice(0, -1);
+  ctx.fillText(`${s}…`, x, y);
 }
 
 const TITLE_FONT = 'Cinzel, Georgia, serif';

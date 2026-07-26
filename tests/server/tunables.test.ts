@@ -724,5 +724,4 @@ describe('no consolidated tunable literal is duplicated at a call site', () => {
     expect(ratelimitSrc).toContain('maxPerMinute = AUTH_MAX_PER_MINUTE');
     expect(ratelimitSrc).not.toContain('maxPerMinute = 20');
   });
-
 });

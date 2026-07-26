@@ -5817,7 +5817,7 @@ export class GameServer {
     // lastSent, so the `sent['vcup'] === undefined` arm re-ships both keys
     // immediately even between due passes (the old per-session negative-init did
     // this; the dueness gate alone would not, so keep this arm).
-    if (vcupDue || sent['vcup'] === undefined) {
+    if (vcupDue || sent.vcup === undefined) {
       const shared = realmReadoutObject(this.realmReadout, this.sim.tickCount, () =>
         this.sim.cupSharedInfoFor(),
       );

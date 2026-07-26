@@ -669,7 +669,6 @@ describeDb('play session retention fold (real Postgres)', () => {
           reason: row.reason,
         })),
       ).toEqual([{ accountId, reason: 'evasion ring' }]);
-
     } finally {
       verify.release();
     }

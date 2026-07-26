@@ -81,7 +81,6 @@ export class LeaderboardWindow {
   private guildPage = 0;
   private deedsPage = 0;
   private devPage = 0;
-  private dailyPage = 0;
   // Render epoch. The four boards
   // share one .lb-body, so every board arm re-checks this after its await: a
   // slow response for an older tab or page must neither repaint the shared
@@ -125,7 +124,6 @@ export class LeaderboardWindow {
     this.guildPage = 0;
     this.deedsPage = 0;
     this.devPage = 0;
-    this.dailyPage = 0;
     this.deps.root().style.display = 'block';
     this.deps.onVisibilityChange?.();
     void this.render('open');

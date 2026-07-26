@@ -507,7 +507,6 @@ describe('main /api characterization: late-arrival backfill (github + desktop-lo
       makeReq({ method: 'POST', url: '/api/desktop-login/exchange', body: { code: 'nope' } }),
     );
   });
-
 });
 
 afterAll(() => {

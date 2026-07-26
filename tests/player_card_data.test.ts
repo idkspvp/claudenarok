@@ -75,7 +75,7 @@ describe('buildPlayerCardData', () => {
 
   it('omits disabled wallet and developer flair while preserving the selected deed title', () => {
     const data = build(world({ activeTitle: 'prog_veteran' }), {
-        showDevBadges: false,
+      showDevBadges: false,
     });
 
     expect(data.titleText).toBeTruthy();

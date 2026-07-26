@@ -437,7 +437,6 @@ describe('async balance reads repaint the FOOTER, not the whole window', () => {
       /claudiumLauncherHtml\(\): string \{[^}]*this\.claudiumBalance\.refresh\(\);/,
     );
   });
-
 });
 
 describe('ClientWorld purse decode (source pin)', () => {

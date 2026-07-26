@@ -36,7 +36,6 @@ import {
 } from './combat/auras';
 import {
   meleeSwing as meleeSwingImpl,
-  rangedSwing as rangedSwingImpl,
   startAutoAttack as startAutoAttackImpl,
   stopAutoAttack as stopAutoAttackImpl,
   updatePlayerAutoAttack as updatePlayerAutoAttackImpl,
@@ -71,7 +70,6 @@ import { frostMageChannelPulse } from './combat/frost_mage';
 import { type FrozenOrbState, tickFrozenOrbs } from './combat/frozen_orb';
 import {
   applyHeal as applyHealImpl,
-  consumeHealAbsorb as consumeHealAbsorbImpl,
   critVulnBonus as critVulnBonusImpl,
   healingTakenMult as healingTakenMultImpl,
   healingThreat as healingThreatImpl,
@@ -225,7 +223,6 @@ import {
   assignMasterLoot as assignMasterLootImpl,
   lootRollGroupStatus as lootRollGroupStatusImpl,
   type PendingLootRoll,
-  partyLootCandidatesForMob as partyLootCandidatesForMobImpl,
   removePlayerFromLootRolls,
   resolveLootRoll as resolveLootRollImpl,
   rollLoot as rollLootImpl,
@@ -235,11 +232,7 @@ import {
 import { type MailSave, PostOffice } from './mail/post_office';
 import { Market, type MarketListing, type MarketSave } from './market';
 import { defaultMarketQuery, type MarketQuery } from './market_query';
-import {
-  mobCombatProfile as mobCombatProfileFn,
-  mobEffectiveMeleeRange as mobEffectiveMeleeRangeFn,
-  tryMobMeleeSwingInRange as tryMobMeleeSwingInRangeFn,
-} from './mob/combat_profile';
+import { mobCombatProfile as mobCombatProfileFn } from './mob/combat_profile';
 import { NYTHRAXIS_SPIRIT_MENDING_CAST_ID } from './mob/healer_channel';
 import * as lifecycle from './mob/lifecycle';
 import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from './mob/locomotion';
@@ -250,10 +243,7 @@ import {
   type MobScanCounters,
   resetMobScanCounters,
 } from './mob/scan_counters';
-import {
-  retargetMob as retargetMobFn,
-  updateMobTarget as updateMobTargetFn,
-} from './mob/targeting';
+import { retargetMob as retargetMobFn } from './mob/targeting';
 import { emitMobYell } from './mob/yells';
 import type { MobCombatProfile } from './mob_combat';
 import {
@@ -3174,7 +3164,7 @@ export class Sim {
    *  re-resolve the active skin against the equipped mainhand. Cosmetic only. */
   setWeaponSkinLoadout(pid: number, loadout: WeaponSkinLoadout): void {
     const e = this.entities.get(pid);
-    if (!e || e.kind !== 'player') return;
+    if (e?.kind !== 'player') return;
     const next: WeaponSkinLoadout = {};
     for (const [t, skinId] of Object.entries(loadout)) {
       if (typeof skinId !== 'string') continue;
@@ -3205,7 +3195,7 @@ export class Sim {
    *  the loadout changed. */
   setWeaponSkin(pid: number, skinId: string | null, weaponType?: WeaponSkinType): boolean {
     const e = this.entities.get(pid);
-    if (!e || e.kind !== 'player') return false;
+    if (e?.kind !== 'player') return false;
     const cls = e.templateId;
     if (skinId !== null) {
       const def = WEAPON_SKINS[skinId];
@@ -4716,12 +4706,6 @@ export class Sim {
   private isNythraxisRaidEnemy(target: Entity): boolean {
     return nythraxis.isNythraxisRaidEnemy(target);
   }
-  // L1 loot distribution moved to loot/loot_roll.ts (behind SimContext). Sim keeps a
-  // thin delegate for partyLootCandidatesForMob because dead_party_loot.test.ts reaches
-  // it via cast; the strategy resolvers it used have no other caller and moved fully.
-  private partyLootCandidatesForMob(mob: Entity): PlayerMeta[] {
-    return partyLootCandidatesForMobImpl(this.ctx, mob);
-  }
   // Body moved to player_motion.ts (MV1). The ghost/aura math is host-agnostic
   // there; only the Fiesta augment needs PlayerMeta, so this delegate feeds it in.
   moveSpeedMult(e: Entity): number {
@@ -5229,10 +5213,6 @@ export class Sim {
     return hexOutputMultImpl(this.ctx, source);
   }
 
-  private consumeHealAbsorb(target: Entity, healed: number): number {
-    return consumeHealAbsorbImpl(this.ctx, target, healed);
-  }
-
   private critVulnBonus(target: Entity): number {
     return critVulnBonusImpl(this.ctx, target);
   }
@@ -5690,14 +5670,6 @@ export class Sim {
     updatePlayerAutoAttackImpl(this.ctx, p, meta);
   }
 
-  private rangedSwing(
-    attacker: Entity,
-    target: Entity,
-    ranged: { min: number; max: number; speed: number; wand?: boolean; school?: string },
-  ): void {
-    rangedSwingImpl(this.ctx, attacker, target, ranged);
-  }
-
   private meleeSwing(
     attacker: Entity,
     target: Entity,
@@ -5881,18 +5853,6 @@ export class Sim {
     retargetMobFn(this.ctx, mob);
   }
 
-  // Nythraxis add-AI (findNythraxisBossForAdd + the fallback-target / despawn-if-reset
-  // pair) moved to encounters/nythraxis.ts (N1). The mob-retarget block in
-  // mob/targeting.ts reaches the pair through ctx.nythraxisAddFallbackTarget /
-  // ctx.scheduleNythraxisAddDespawnIfBossReset (bound to the module in buildSimContext).
-
-  // highestThreatTarget moved to mob/targeting.ts (M1); retargetMob/updateMobTarget
-  // call it there. No Sim delegate: it had no caller outside those two methods.
-
-  private updateMobTarget(mob: Entity): void {
-    updateMobTargetFn(this.ctx, mob);
-  }
-
   // Effective melee reach. Large creatures measure range from their centre, which
   // sits deep inside an oversized body — so a giant (e.g. Nythraxis at scale 3.1)
   // can never close to the flat MELEE_RANGE and barely swings. Scale reach with
@@ -5903,14 +5863,6 @@ export class Sim {
 
   private mobCombatProfile(mob: Entity): MobCombatProfile {
     return mobCombatProfileFn(mob);
-  }
-
-  private mobEffectiveMeleeRange(mob: Entity): number {
-    return mobEffectiveMeleeRangeFn(mob);
-  }
-
-  private tryMobMeleeSwingInRange(mob: Entity, target: Entity): boolean {
-    return tryMobMeleeSwingInRangeFn(this.ctx, mob, target);
   }
 
   aggroMob(mob: Entity, target: Entity, social: boolean): void {

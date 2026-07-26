@@ -99,18 +99,6 @@ const OFF_SPEND: ClaudiumSpend = {
   reason: 'unavailable',
 };
 
-const NATIVE_CONFIRM_RETRY_REASONS = new Set([
-  'not_found_onchain',
-  'not_finalized',
-  'cannot_verify',
-  'unavailable',
-  'processing',
-  'post_verify_failed',
-  'fulfillment_failed',
-]);
-const NATIVE_CONFIRM_RETRY_DELAYS_MS = [1000, 1500, 2500, 4000, 6000, 8000, 10_000];
-const NATIVE_CONFIRM_MAX_RETRY_MS = 12 * 60_000;
-
 export class EconomyClient {
   constructor(private readonly cfg: EconomyClientConfig) {}
 
@@ -222,10 +210,6 @@ export function newIdempotencyKey(): string {
   const c = globalThis.crypto;
   if (c && 'randomUUID' in c) return c.randomUUID();
   return `idem-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-}
-
-function delayMs(ms: number): Promise<void> {
-  return new Promise((resolve) => window.setTimeout(resolve, ms));
 }
 
 /**

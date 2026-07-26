@@ -176,7 +176,6 @@ describe('every ranked board query embeds the fragment', () => {
     spy.mockImplementation(() => Promise.resolve(rankRow(true)) as never);
     await expect(lifetimeXpRankForCharacter(42)).resolves.toEqual({ rank: 6, total: 10 });
   });
-
 });
 
 // ---------------------------------------------------------------------------

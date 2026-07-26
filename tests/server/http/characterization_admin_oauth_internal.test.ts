@@ -86,7 +86,7 @@ const SECRET_ENV = {
 } as const;
 // The daily-reward gate's request header (presented only by the two gate-pass
 // cases below; every reject case omits it, like the other two gates).
-const DAILY_REWARD_HEADER = 'x-woc-daily-reward-secret';
+const _DAILY_REWARD_HEADER = 'x-woc-daily-reward-secret';
 // A non-empty value to turn a secret-gated feature ON without presenting the
 // matching request secret, so the gate answers 401 (not 404 feature-off). The
 // value never reaches the wire, so its content is irrelevant.

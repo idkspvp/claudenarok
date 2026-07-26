@@ -179,7 +179,6 @@ import {
 } from './craft_celebration_view';
 import { buildCraftingView, craftingReagentSig, craftLearnHints } from './crafting_view';
 import { renderCraftingWindow, stationNameText } from './crafting_window';
-import { StoreWindow } from './store_window';
 import { decorativeArtImg } from './decorative_art';
 import {
   deedBroadcastLine,
@@ -482,6 +481,7 @@ import {
 } from './stat_tooltip_view';
 import { mountStorePromoCard, type StorePromoCardController } from './store_promo_card';
 import { recordStoreStackSample } from './store_stack_diag';
+import { StoreWindow } from './store_window';
 import { nearestSubzone } from './subzone';
 import { swingTimerState } from './swing_timer';
 import { SwingTimerPainter } from './swing_timer_painter';
@@ -1434,8 +1434,6 @@ export class Hud {
   // Mobile More-tray entry mirroring the desktop chest button's hidden/spin-ready
   // state (folded off the top-right rail so it never overlaps the buff/debuff bars).
   private mobileDailyRewardsButtonEl: HTMLButtonElement | null = null;
-  private dailyRewardsLauncherSeq = 0;
-  private lastDailyRewardsLauncherRefreshAt = 0;
   // Per-element tier cadence stamps (graphics-tier knobs). Each gates a non-self /
   // canvas redraw to a slower interval on the LOW static preset; on every other tier the
   // interval is 0 (cadenceDue is always true), so these are no-ops and the path is the
@@ -6964,14 +6962,6 @@ export class Hud {
     // showDailyRewardsChestButton preference (which only declutters the rail).
     if (!this.dailyRewardsEnabled())
       this.mobileDailyRewardsButtonEl?.classList.remove('spin-ready');
-  }
-
-  private setDailyRewardsChestButtonPreference(show: boolean): void {
-    if (this.optionsHooks) {
-      this.optionsHooks.onSettingChange('showDailyRewardsChest', show);
-      return;
-    }
-    this.setDailyRewardsChestButtonVisible(show);
   }
 
   setDailyRewardsChestButtonVisible(show: boolean): void {

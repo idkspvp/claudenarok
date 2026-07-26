@@ -241,10 +241,7 @@ export class ClaudiumWindow {
     const body = this.deps.root().querySelector<HTMLElement>('.cl-body');
     if (!body) return;
     body.innerHTML =
-      this.balanceHtml(view) +
-      this.noticeHtml(view) +
-      this.buyHtml(view) +
-      this.disclosureHtml();
+      this.balanceHtml(view) + this.noticeHtml(view) + this.buyHtml(view) + this.disclosureHtml();
     this.wire(body, view);
   }
 

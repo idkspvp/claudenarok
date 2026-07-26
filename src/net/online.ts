@@ -3082,7 +3082,7 @@ export class ClientWorld implements IWorld {
     // computeQuestState here exactly as it does server-side (the offline Sim
     // re-derives the same set from live PlayerMeta.questCadence).
     const cadenceBlocked =
-      identity && identity.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
+      identity?.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
         ? new Set(identity.cadenceBlockedQuests)
         : undefined;
     return optimisticQuestState(

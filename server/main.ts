@@ -253,6 +253,7 @@ import {
   handleCardRoutes,
   handleCardUpload,
 } from './player_card';
+import { configurePlayerCardRuntime } from './player_card_routes';
 import { prunePlayerActivityDailyBatch } from './player_metrics_db';
 import { handleAvatar, handleCharacterSitemap, handleProfilePage } from './profile_page';
 import { recordUsageCacheEvent, recordUsageMetric, setUsageCacheSize } from './provider_usage';
@@ -297,7 +298,6 @@ import {
   assetsListMineCore,
   assetUploadCore,
 } from './user_assets_routes';
-import { configurePlayerCardRuntime } from './player_card_routes';
 import { allowedCorsOrigin, isWebClientRequest } from './web_login_guard';
 import { createWsAuth } from './ws_auth';
 import { bufferHandshakeMessages } from './ws_buffer';
@@ -1401,7 +1401,7 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
       await saveToken(token, account.id);
       // Tell the client whether this (possibly pre-email) account still needs a
       // recovery address, so it can force the mandatory-email prompt on sign-in.
-      const emailMissing = !(account.email && account.email.trim());
+      const emailMissing = !account.email?.trim();
       return json(res, 200, { token, username: account.username, emailMissing });
     }
     if (req.method === 'POST' && url === '/api/desktop-login/create') {

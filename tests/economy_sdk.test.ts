@@ -98,5 +98,4 @@ describe('EconomyClient store snapshot', () => {
   });
 });
 
-describe('EconomyClient pack snapshot', () => {
-});
+describe('EconomyClient pack snapshot', () => {});

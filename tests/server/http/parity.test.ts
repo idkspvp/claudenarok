@@ -1207,9 +1207,9 @@ describe('/internal dispatch parity (legacy flag vs new flag)', () => {
 describe('/api + /internal late-arrival dispatch parity (legacy flag vs new flag)', () => {
   const GITHUB_ID_ENV = 'GITHUB_OAUTH_CLIENT_ID';
   const GITHUB_SECRET_ENV = 'GITHUB_OAUTH_CLIENT_SECRET';
-  const DAILY_ENV = 'WOC_DAILY_REWARD_SERVICE_SECRET';
-  const DAILY_HEADER = 'x-woc-daily-reward-secret';
-  const PARITY_SECRET = 'parity-daily-reward-secret';
+  const _DAILY_ENV = 'WOC_DAILY_REWARD_SERVICE_SECRET';
+  const _DAILY_HEADER = 'x-woc-daily-reward-secret';
+  const _PARITY_SECRET = 'parity-daily-reward-secret';
 
   // The no-auth 401 pins: both paths reject a missing bearer db-free with the
   // legacy { error: 'not authenticated' } body (legacy arm: bearerActiveAccount;
@@ -1315,7 +1315,6 @@ describe('/api + /internal late-arrival dispatch parity (legacy flag vs new flag
     });
     expect(stableStringify(newCap)).toBe(stableStringify(oldCap));
   });
-
 });
 
 // -----------------------------------------------------------------------------

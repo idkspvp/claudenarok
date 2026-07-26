@@ -10,7 +10,7 @@
 
 import { ABILITIES, ITEMS } from '../sim/data';
 import { DEED_IMAGE_IDS } from './deed_image_ids';
-import { PROFESSION_IMAGE_IDS, professionImageUrl } from './profession_art';
+import { professionImageUrl } from './profession_art';
 import { ITEM_WEAPON_VARIANTS } from './weapon_variants';
 
 export { PROFESSION_IMAGE_IDS, professionImageUrl } from './profession_art';

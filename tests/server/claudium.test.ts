@@ -34,9 +34,7 @@ import {
 import { claudiumSpend, claudiumStore, claudiumStripeWebhook } from '../../server/claudium_proxy';
 import { compose } from '../../server/http/compose';
 import {
-  CLAUDIUM_CONFIRM_MAX_PER_MINUTE,
   CLAUDIUM_PURCHASE_MAX_PER_MINUTE,
-  CLAUDIUM_QUOTE_MAX_PER_MINUTE,
   CLAUDIUM_SPEND_MAX_PER_MINUTE,
   resetClaudiumMutationRateLimits,
 } from '../../server/ratelimit';
