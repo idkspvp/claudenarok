@@ -1,0 +1,109 @@
+# RO Classic conversion
+
+**Status:** planning. Nothing below has landed yet.
+**Decided:** 2026-07-26. Target is Ragnarok Online *pre-renewal* ("classic"), not Renewal.
+
+This is the plan for turning SpiritVale's progression from the WoW-shaped one it
+inherited into a classic-Ragnarok one. It records the reference numbers, what the
+codebase looks like today, and the order the work has to happen in — that order is
+not free, and getting it wrong means tuning the same content twice.
+
+## Sourcing rule (this project is commercial)
+
+The open-source Ragnarok emulators (rAthena, Hercules) are **GPL-3.0, repository
+wide, `db/` included**. SpiritVale is MIT and intended to be commercial, so:
+
+- **Formulas and numbers are facts** and carry no copyright. Take them from the
+  documentation — [iRO Wiki](https://irowiki.org/wiki/Stats),
+  [Ragnarök Wiki](https://ragnarok.fandom.com/wiki/Stats_(RO)),
+  [RateMyServer](https://ratemyserver.net/index.php?page=misc_table_exp&op=21) —
+  and cite where each came from.
+- **Reading emulator source to verify a number is fine.** Reading it to model our
+  implementation's shape is not: that is how a derivative work happens without
+  anyone copying a line. When a wiki is ambiguous (rounding order, whether a cap
+  applies before or after a multiplier), check the emulator for *that value only*
+  and write our own code from the answer.
+- **Never** copy code or `db/*.yml` content, and never reuse Gravity's authored
+  data — monster names, item names, the specific numbers attached to them. Those
+  are Gravity's regardless of what licence the emulator carries.
+
+## Reference numbers (pre-renewal)
+
+| | Value |
+| --- | --- |
+| Base level cap | 99 |
+| Job level cap | Novice 10 · 1st job 50 · 2nd job 50 · Transcendent 70 |
+| Status points per base level | `floor(x / 5) + 3` going from level `x` to `x+1` |
+| Status points, level 1 → 99 | 1,225 (plus 48 granted at character creation) |
+| Cost to raise a stat by one | `floor((stat - 1) / 10) + 2` — 2 at 1–9, 3 at 10–19, 4 at 20–29 … |
+| Maximum single stat | 99 |
+| Skill points | 1 per job level (a 1st job at JL50 has 49) |
+| Job change | 1st job at Novice JL10; 2nd job at 1st-job JL40 (most players push to 50) |
+
+Stats are STR / AGI / VIT / INT / DEX / LUK. There is no Spirit.
+
+## What the codebase looks like today
+
+| | Current |
+| --- | --- |
+| `MAX_LEVEL` (`src/sim/types.ts`) | 20, read by 17 files |
+| `XP_TABLE` | 20 entries |
+| Stats | 5 — `str` `agi` `sta` `int` `spi`, on a ~10–60 scale |
+| Levels | one ladder; no job level exists anywhere |
+| Classes | 9 fixed, no tree |
+| Talent rows | a 1-of-3 pick at levels `[5, 8, 11, 14, 17, 20]` |
+
+Level-banded content, by count:
+
+| Field | Occurrences |
+| --- | --- |
+| `learnLevel` (abilities) | 317 |
+| `level:` (mobs and friends) | 346 |
+| `minLevel` (quests) | 156 |
+| `levelRange` (zones) | 3 — `[1,7]`, `[6,13]`, `[13,20]` |
+
+## The constraint that sets the order
+
+**The two games' stat scales do not overlap.** A level-20 warrior here has STR 61
+and STA 60; in Ragnarok every job starts at 1 in everything and climbs toward 99.
+Every derivation in `src/sim/entity.ts` is tuned against the old scale —
+`attackPower = str * 2`, `hpFromStamina(sta)`, `spellPower = int * SPELL_POWER_PER_INT`,
+crit and dodge off `agi` — so moving to Ragnarok's stats invalidates all of them at once.
+
+That means **allocation and the damage formula cannot ship separately.** An earlier
+attempt to land allocation on its own was reverted for exactly this reason: the
+parity gate caught a level-20 character reading level-1 stats, and every honest fix
+for it was really the damage-formula rewrite wearing a disguise.
+
+Nobody is playing the live realm, so there is no migration to preserve and no
+reason to keep the game balanced in between. The conversion is a wipe.
+
+## Order
+
+**Phase 1 — the level ladder and the stat rewrite, together.**
+`MAX_LEVEL` to 99 and a 99-entry `XP_TABLE`; the six stats replacing the five;
+status points and the rising cost curve; and every derivation in `entity.ts` and
+`combat/damage.ts` retuned to the 1–99 scale in the same pass. The 317
+`learnLevel` values and the three zone bands re-spread across the new ladder.
+The game is not balanced during this phase and that is expected.
+
+**Phase 2 — job levels and the job tree.**
+A second XP ladder with its own cap, Novice → 1st → 2nd, job-change gating, and
+skill points replacing the talent-row pick.
+
+**Phase 3 — the Ragnarok combat model.**
+Soft and hard DEF, the element table, size and race modifiers, Flee versus Hit,
+ASPD. Cards and refine land here too: they are itemisation, and itemisation only
+means something once the damage formula reads it.
+
+**Phase 4 — content.**
+Levels 21–99 have nothing to kill. This is the largest piece of work in the
+conversion and the one that cannot be shortcut by a formula.
+
+## Open questions
+
+- Does the 48-point character-creation grant survive, or do all nine starting
+  blocks become 1/1/1/1/1/1 like Ragnarok's?
+- Do we keep nine classes as the 2nd-job tier and invent 1st jobs above them, or
+  re-author the tree from Novice down?
+- Base EXP curve: adopt Ragnarok's shape, or keep this game's and stretch it?
