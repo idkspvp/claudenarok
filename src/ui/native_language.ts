@@ -13,24 +13,11 @@ export interface NativeLanguageEnv {
 const LOCALE_KEY = 'locale';
 const NATIVE_AUTO_LOCALE_KEY = 'woc_native_auto_locale';
 
-const DEFAULT_REGION_BY_LANGUAGE: Readonly<Record<string, SupportedLanguage>> = {
-  cs: 'cs_CZ',
-  da: 'da_DK',
-  de: 'de_DE',
-  fr: 'fr_FR',
-  id: 'id_ID',
-  it: 'it_IT',
-  ja: 'ja_JP',
-  ko: 'ko_KR',
-  nl: 'nl_NL',
-  pl: 'pl_PL',
-  pt: 'pt_BR',
-  ru: 'ru_RU',
-  sv: 'sv_SE',
-  tr: 'tr_TR',
-  vi: 'vi_VN',
-  zh: 'zh_CN',
-};
+// Maps a bare language subtag from the OS locale onto the regional locale we ship
+// for it, so a desktop reporting "de" lands on de_DE. Empty while English is the
+// only locale: `en` needs no mapping, and every other entry pointed at a locale
+// that no longer exists. Add a row here when a locale ships with a region.
+const DEFAULT_REGION_BY_LANGUAGE: Readonly<Record<string, SupportedLanguage>> = {};
 
 function normalizedLocaleCandidates(locale: string): string[] {
   const cleaned = locale.trim().split('.')[0]?.split('@')[0] ?? '';

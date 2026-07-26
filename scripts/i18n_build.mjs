@@ -64,30 +64,14 @@ const KEYS_PATH = process.env.I18N_OUT_DIR
 // the generated `translations`). The generator reads these SOURCE modules directly
 // and never imports src/ui/i18n.ts, so it never depends on the file it generates
 // (no circular import at build time).
-const LOCALES = [
-  'en',
-  'es',
-  'es_ES',
-  'fr_FR',
-  'fr_CA',
-  'en_CA',
-  'it_IT',
-  'de_DE',
-  'zh_CN',
-  'zh_TW',
-  'ko_KR',
-  'ja_JP',
-  'pt_BR',
-  'ru_RU',
-  'cs_CZ',
-  'nl_NL',
-  'pl_PL',
-  'id_ID',
-  'tr_TR',
-  'sv_SE',
-  'vi_VN',
-  'da_DK',
-];
+//
+// SpiritVale ships English only. The upstream project carried 21 further
+// locales; they were removed rather than left to rot because the Ragnarok
+// conversion rewrites the job tree and every piece of content, which would have
+// meant re-translating thousands of keys into 21 languages and then deleting
+// most of them. Thai is the intended second locale and gets added in one pass
+// once the content has settled. See docs/design/ro-classic-conversion.md.
+const LOCALES = ['en'];
 
 // Dialect locales declare a base locale. A dialect's (now
 // divergence-only) overlay is applied ON TOP of its base locale's overlay, which
@@ -97,11 +81,9 @@ const LOCALES = [
 // is the single, data-driven declaration of the dialect graph; the resolver below
 // reads it instead of branching on locale codes inline. A locale absent from this
 // map has no base and is overlaid directly onto `en`, exactly as before.
-const DIALECT_BASE = {
-  es_ES: 'es',
-  fr_CA: 'fr_FR',
-  en_CA: 'en',
-};
+// Empty while English is the only locale. The resolver still reads it, so
+// re-declaring a dialect here is all it takes to bring the graph back.
+const DIALECT_BASE = {};
 
 function sourceModule(lang) {
   return lang === 'en' ? './src/ui/i18n.catalog' : `./src/ui/i18n.locales/${lang}`;
@@ -262,7 +244,18 @@ function emitTranslationKeysModule(enFlatKeys) {
 // imports this module yet - the runtime still static-imports every slice via the
 // barrel for now, so the bundle is unchanged; the async loader wires these in later.
 function emitLoadersModule(locales) {
-  const lines = [fileBanner(), '', 'export const LOCALE_LOADERS = {'];
+  const lines = [fileBanner(), ''];
+  // Explicitly typed rather than inferred. With English as the only locale the map
+  // is EMPTY, and an inferred `{}` makes every indexed read `never`, which red-fails
+  // the loader call in src/ui/i18n.ts. The annotation keeps the lazy-load machinery
+  // compiling through the English-only period so re-adding a locale is a data change.
+  lines.push("import type { EnTranslations } from '../i18n.catalog';");
+  lines.push('');
+  lines.push('type LocaleModule = { default?: EnTranslations } & Record<string, EnTranslations>;');
+  lines.push('');
+  lines.push(
+    'export const LOCALE_LOADERS: Partial<Record<string, () => Promise<LocaleModule>>> = {',
+  );
   for (const lang of locales) {
     if (lang === 'en') continue; // en is eager; en_XA is excluded by construction
     lines.push(`  ${lang}: () => import('./${lang}'),`);

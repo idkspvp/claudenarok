@@ -37,39 +37,18 @@ import {
   tEntity,
 } from '../src/ui/entity_i18n';
 import {
-  cs_CZ,
-  da_DK,
-  de_DE,
   en,
-  en_CA,
   ensureLocaleLoaded,
-  es,
-  es_ES,
   formatDateTime,
   formatMoney,
   formatNumber,
-  fr_CA,
-  fr_FR,
-  id_ID,
   isSupportedLanguage,
-  it_IT,
-  ja_JP,
-  ko_KR,
   languageTag,
-  nl_NL,
-  pl_PL,
-  pt_BR,
-  ru_RU,
   type SupportedLanguage,
   setLanguage,
   supportedLanguages,
-  sv_SE,
   type TranslationKey,
   t,
-  tr_TR,
-  vi_VN,
-  zh_CN,
-  zh_TW,
 } from '../src/ui/i18n';
 import {
   hasTalentTitleOverride,
@@ -78,29 +57,11 @@ import {
   talentTranslationManifest,
 } from '../src/ui/talent_i18n';
 
-const locales: Record<string, typeof en> = {
-  es,
-  es_ES,
-  fr_FR,
-  fr_CA,
-  en_CA,
-  it_IT,
-  de_DE,
-  zh_CN,
-  zh_TW,
-  ko_KR,
-  ja_JP,
-  pt_BR,
-  ru_RU,
-  cs_CZ,
-  nl_NL,
-  pl_PL,
-  id_ID,
-  tr_TR,
-  sv_SE,
-  vi_VN,
-  da_DK,
-};
+// The NON-English resolved tables, keyed by code. Empty while English is the only
+// shipped locale: the per-locale parity loops below iterate nothing, while every
+// test driven by `supportedLanguages` still runs and still proves each key exists,
+// resolves non-empty, and keeps its interpolation tokens — in English.
+const locales: Record<string, typeof en> = {};
 
 // Two-tier gate (see .github/workflows/ci.yml). The release tier runs with
 // I18N_RELEASE_TIER=1. Structural coverage (every key resolves non-empty,
@@ -631,11 +592,6 @@ describe('i18n Localization Key Coverage', () => {
     expect(t('auth.usernamePlaceholder')).toBe('Enter username');
     expect(t('loading.worldProgress', { done: 3, total: 9 })).toBe('Loading world... 3/9');
 
-    setLanguage('es');
-    expect(t('nav.home')).toBe('Inicio');
-    expect(t('auth.usernamePlaceholder')).toBe('Introduce tu usuario');
-    expect(t('character.levelClass', { level: 7, className: 'Maga' })).toBe('Nivel 7 Maga');
-
     setLanguage('en');
   });
 
@@ -653,34 +609,18 @@ describe('i18n Localization Key Coverage', () => {
   });
 
   it('should expose typed locale utilities for shell metadata and formatting', () => {
-    expect(supportedLanguages).toEqual([
-      'en',
-      'es',
-      'es_ES',
-      'fr_FR',
-      'fr_CA',
-      'en_CA',
-      'it_IT',
-      'de_DE',
-      'zh_CN',
-      'zh_TW',
-      'ko_KR',
-      'ja_JP',
-      'pt_BR',
-      'ru_RU',
-      'cs_CZ',
-      'nl_NL',
-      'pl_PL',
-      'id_ID',
-      'tr_TR',
-      'sv_SE',
-      'vi_VN',
-      'da_DK',
-    ]);
-    expect(isSupportedLanguage('de_DE')).toBe(true);
+    expect(supportedLanguages).toEqual(['en']);
+    expect(isSupportedLanguage('en')).toBe(true);
+    expect(isSupportedLanguage('de_DE')).toBe(false);
     expect(isSupportedLanguage('de-DE')).toBe(false);
-    expect(languageTag('fr_CA')).toBe('fr-CA');
-    expect(formatNumber(1234.5, { maximumFractionDigits: 1 }, 'de_DE')).toBe('1.234,5');
+    // languageTag and formatNumber take a tag and hand it to Intl; they are not
+    // limited to shipped locales, and that passthrough is the thing worth pinning.
+    // Cast because SupportedLanguage currently narrows to 'en'.
+    expect(languageTag('fr_CA' as SupportedLanguage)).toBe('fr-CA');
+    expect(formatNumber(1234.5, { maximumFractionDigits: 1 }, 'de_DE' as SupportedLanguage)).toBe(
+      '1.234,5',
+    );
+    expect(formatNumber(1234.5, { maximumFractionDigits: 1 }, 'en')).toBe('1,234.5');
     expect(
       formatDateTime(
         new Date(Date.UTC(2026, 5, 14, 12)),
@@ -807,7 +747,7 @@ describe('i18n Localization Key Coverage', () => {
 
   it('should resolve class and ability text without canonical fallbacks', () => {
     resetEntityTranslationFallbackLog();
-    setLanguage('de_DE');
+    setLanguage('en');
     expect(tEntity({ kind: 'class', id: 'mage', field: 'name' })).toBe(t('classes.mage'));
     expect(entityTranslationFallbackLog()).toHaveLength(0);
 
@@ -819,8 +759,7 @@ describe('i18n Localization Key Coverage', () => {
       field: 'description',
       values: { damage: '11-14' },
     });
-    expect(abilityName).toBe('Feuerball');
-    expect(abilityName).not.toBe(ability.name);
+    expect(abilityName).toBe(ability.name);
     expect(abilityDescription).toContain('11-14');
     expect(abilityDescription).not.toContain('$d');
     expect(abilityDescription).not.toContain('{damage}');
@@ -947,16 +886,6 @@ describe('i18n Localization Key Coverage', () => {
       expect(entityTranslationFallbackLog(), `${lang} fallback log`).toHaveLength(0);
     }
 
-    setLanguage('de_DE');
-    resetEntityTranslationFallbackLog();
-    expect(tEntity({ kind: 'item', id: 'worn_sword', field: 'name' })).toBe(
-      'Abgenutztes Kurzschwert',
-    );
-    expect(tEntity({ kind: 'item', id: 'gravecaller_sigil', field: 'name' })).toBe(
-      'Gravecallers Siegel',
-    );
-    expect(entityTranslationFallbackLog()).toHaveLength(0);
-
     setLanguage('en');
   });
 
@@ -968,7 +897,10 @@ describe('i18n Localization Key Coverage', () => {
     expect(itemSetEntries).toHaveLength(7 * 4 + 3 * 2);
     expect(missingEntityTranslationsForGroups(['itemSet'])).toHaveLength(0);
 
-    for (const lang of ['zh_CN', 'zh_TW', 'ja_JP', 'ko_KR', 'ru_RU'] as const) {
+    // Ran over the non-Latin locales to prove item-set names were really translated
+    // rather than English-filled. Empty until a second locale ships; the manifest
+    // completeness assertions above still run.
+    for (const lang of [] as SupportedLanguage[]) {
       await ensureLocaleLoaded(lang);
       setLanguage(lang);
       resetEntityTranslationFallbackLog();
@@ -995,11 +927,9 @@ describe('i18n Localization Key Coverage', () => {
     expect(source).not.toContain(' to ${primaryEffect.max}');
     expect(source).not.toContain(' plus ${primaryEffect.perCombo} per combo point');
 
-    setLanguage('de_DE');
-    expect(t('abilityUi.tooltip.damageRange', { min: '16', max: '25' })).toBe('16 bis 25');
-    setLanguage('zh_CN');
-    expect(t('abilityUi.tooltip.damageRange', { min: '16', max: '25' })).toBe('16 到 25');
     setLanguage('en');
+    expect(t('abilityUi.tooltip.damageRange', { min: '16', max: '25' })).toContain('16');
+    expect(t('abilityUi.tooltip.damageRange', { min: '16', max: '25' })).toContain('25');
   });
 
   it('should expose no missing entity translations across all entity groups', () => {
@@ -1074,36 +1004,6 @@ describe('i18n Localization Key Coverage', () => {
       expect(entityTranslationFallbackLog(), `${lang} fallback log`).toHaveLength(0);
     }
 
-    setLanguage('de_DE');
-    expect(tEntity({ kind: 'mob', id: 'forest_wolf', field: 'name' })).toBe('Waldwolf');
-    expect(tEntity({ kind: 'quest', id: 'q_wolves', field: 'title' })).toBe('Wölfe vor der Tür');
-    expect(tEntity({ kind: 'zone', id: 'eastbrook_vale', field: 'name' })).toBe('Eastbrook-Tal');
-
-    setLanguage('zh_CN');
-    expect(tEntity({ kind: 'quest', id: 'q_gravewyrm', field: 'title' })).toContain('科祖尔');
-
-    setLanguage('ja_JP');
-    expect(tEntity({ kind: 'dungeon', id: 'hollow_crypt', field: 'name' })).toBe('虚ろの墓所');
-
-    setLanguage('ko_KR');
-    expect(tEntity({ kind: 'mob', id: 'forest_wolf', field: 'name' })).toBe('숲늑대');
-    expect(tEntity({ kind: 'zone', id: 'eastbrook_vale', field: 'name' })).toBe(
-      '이스트브룩 골짜기',
-    );
-
-    setLanguage('it_IT');
-    expect(tEntity({ kind: 'mob', id: 'forest_wolf', field: 'name' })).toBe('Lupo della foresta');
-    expect(tEntity({ kind: 'quest', id: 'q_wolves', field: 'title' })).not.toBe(
-      'Lobos a la puerta',
-    );
-
-    setLanguage('pt_BR');
-    expect(tEntity({ kind: 'quest', id: 'q_wolves', field: 'title' })).toBe('Lobos à porta');
-    expect(tEntity({ kind: 'quest', id: 'q_wolves', field: 'title' })).not.toBe(
-      'Lobos a la puerta',
-    );
-    expect(entityTranslationFallbackLog()).toHaveLength(0);
-
     setLanguage('en');
   });
 
@@ -1136,27 +1036,6 @@ describe('i18n Localization Key Coverage', () => {
   it('renders the mobile Store label in every locale', () => {
     const expected: Record<SupportedLanguage, string> = {
       en: 'Store',
-      en_CA: 'Store',
-      es: 'Tienda',
-      es_ES: 'Tienda',
-      fr_FR: 'Boutique',
-      fr_CA: 'Boutique',
-      it_IT: 'Negozio',
-      de_DE: 'Shop',
-      zh_CN: '商店',
-      zh_TW: '商店',
-      ko_KR: '상점',
-      ja_JP: 'ストア',
-      pt_BR: 'Loja',
-      ru_RU: 'Магазин',
-      cs_CZ: 'Obchod',
-      nl_NL: 'Winkel',
-      pl_PL: 'Sklep',
-      id_ID: 'Toko',
-      tr_TR: 'Mağaza',
-      sv_SE: 'Butik',
-      vi_VN: 'Cửa hàng',
-      da_DK: 'Butik',
     };
     for (const lang of supportedLanguages) {
       setLanguage(lang);
@@ -1211,51 +1090,9 @@ describe('i18n Localization Key Coverage', () => {
       }
     }
 
-    // RELEASE-TIER ONLY: specific real-translation spot-checks (would render the
-    // English fill, not these strings, for an untranslated key on a PR).
-    if (RELEASE_TIER) {
-      const rowEntry = (
-        optionId: string,
-        field: 'name' | 'description',
-      ): TalentTranslationManifestEntry => {
-        const entry = talentEntries.find(
-          (candidate) => candidate.id.endsWith(`.${optionId}`) && candidate.field === field,
-        );
-        if (!entry) throw new Error(`Missing talent manifest entry: ${optionId}.${field}`);
-        return entry;
-      };
-      const requiredTalentEntry = (id: string, field: 'name' | 'description') => {
-        const entry = talentEntries.find(
-          (candidate) => candidate.id === id && candidate.field === field,
-        );
-        if (!entry) throw new Error(`Missing talent manifest entry: ${id}.${field}`);
-        return entry;
-      };
-
-      setLanguage('es');
-      expect(renderTalentManifestEntry(rowEntry('war_row_double_charge', 'name'))).toContain(
-        'Carga doble',
-      );
-      expect(
-        renderTalentManifestEntry(rowEntry('war_row_blood_offering', 'description')),
-      ).toContain('daño');
-
-      setLanguage('zh_CN');
-      expect(renderTalentManifestEntry(rowEntry('war_row_blood_offering', 'name'))).toContain(
-        '战斗精通',
-      );
-
-      setLanguage('ko_KR');
-      expect(renderTalentManifestEntry(rowEntry('war_row_second_wind', 'description'))).toContain(
-        '생명력',
-      );
-      expect(
-        renderTalentManifestEntry(
-          requiredTalentEntry('11.hun_r11_survival_instincts', 'description'),
-        ),
-      ).toContain('생명력');
-    }
-
+    // The release-tier block that stood here spot-checked real translated talent
+    // strings in es / zh_CN / ko_KR. It went with the locale cut; the manifest
+    // completeness loop above is what still runs, in English.
     setLanguage('en');
   });
 
@@ -1368,15 +1205,6 @@ describe('i18n Localization Key Coverage', () => {
 
     // Real-translation spot pins (these would render the English fill if the
     // locale tables were dropped or the language wiring broke).
-    setLanguage('de_DE');
-    expect(deedName('prog_first_steps')).toBe('Erste Schritte');
-    setLanguage('ja_JP');
-    expect(deedName('prog_first_steps')).toBe('はじめの一歩');
-    setLanguage('zh_CN');
-    expect(deedName('prog_first_steps')).toBe('千里之行');
-    setLanguage('ru_RU');
-    expect(deedTitleText('prog_veteran')).toBe('Ветеран');
-
     setLanguage('en');
   });
 
@@ -1467,83 +1295,15 @@ describe('i18n Localization Key Coverage', () => {
     },
   );
 
-  // RELEASE-TIER ONLY: pins specific non-English quest narratives, which
-  // an untranslated (English-filled) overlay would not satisfy on a PR.
-  it.runIf(RELEASE_TIER)(
-    'should keep representative quest narratives translated with quest-specific content',
-    () => {
-      const expectations: Array<
-        readonly [(typeof supportedLanguages)[number], string, 'text' | 'completion', string]
-      > = [
-        ['es', 'q_hollow', 'completion', 'Eastbrook te debe'],
-        ['fr_FR', 'q_idols', 'completion', 'La secte a commencé ici'],
-        ['it_IT', 'q_bastion_door', 'completion', 'corda marcia'],
-        ['de_DE', 'q_wolves', 'text', 'Nordstraße'],
-        ['zh_CN', 'q_wyrm_sigils', 'text', '墓龙科祖尔'],
-        ['zh_TW', 'q_gravewyrm', 'completion', '三地死者'],
-        ['ko_KR', 'q_necromancers', 'completion', '십일조'],
-        ['ja_JP', 'q_mistcaller', 'text', '百人'],
-        ['pt_BR', 'q_drogmar', 'completion', 'comprou um inverno'],
-        ['ru_RU', 'q_gravewyrm', 'text', 'полупроснувшийся Вирм'],
-      ];
-
-      for (const [lang, questId, field, expected] of expectations) {
-        setLanguage(lang);
-        expect(
-          tEntity({ kind: 'quest', id: questId, field, values: { playerName: 'Mira' } }),
-        ).toContain(expected);
-      }
-
-      setLanguage('en');
-    },
-  );
-
-  // Regression: the gravewyrm-arc lore creature "the Wyrm" was once left as the raw
-  // Latin word inside translated quest prose in every non-Latin-script locale, even
-  // though those locales localize "wyrm" in every item/mob/dungeon name. Release-tier
-  // only: a PR-tier English-filled overlay legitimately contains the English word.
-  it.runIf(RELEASE_TIER)(
-    "keeps non-Latin-script quest narratives free of the raw-Latin 'Wyrm'",
-    () => {
-      const nonLatin: Record<string, typeof en> = { zh_CN, zh_TW, ja_JP, ko_KR, ru_RU };
-      const collectStrings = (node: unknown, trail: string, out: Array<[string, string]>): void => {
-        if (typeof node === 'string') {
-          out.push([trail, node]);
-        } else if (node && typeof node === 'object') {
-          for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
-            collectStrings(v, trail ? `${trail}.${k}` : k, out);
-          }
-        }
-      };
-      for (const [lang, data] of Object.entries(nonLatin)) {
-        const quests = (data as { entities?: { quests?: unknown } }).entities?.quests ?? {};
-        const strings: Array<[string, string]> = [];
-        collectStrings(quests, 'entities.quests', strings);
-        for (const [where, value] of strings) {
-          expect(
-            /wyrm/i.test(value),
-            `${lang}.${where} leaks raw-Latin "Wyrm" (should be localized): ${value}`,
-          ).toBe(false);
-        }
-      }
-    },
-  );
+  // A release-tier block stood here pinning real translated quest narratives in ten
+  // locales, and beside it a sweep asserting the non-Latin scripts never left the raw
+  // Latin word "Wyrm" in quest prose. Both needed locales that no longer ship.
 
   it('should keep Traditional Chinese world content out of Simplified-only shortcuts', () => {
     const simplifiedOnlyCharacters =
       /[颚猪网潜强盗宁无钳鱼妇贪鲁唤师执荆军风领热灵蹒垒缚仆骑挥雾维圣卫复这门进队战击个补桥吗块环声钥]/;
     const worldEntries = entityTranslationManifest().filter((entry) => entry.group === 'world');
 
-    setLanguage('zh_TW');
-    for (const entry of worldEntries) {
-      const rendered = tEntity(worldRequest(entry));
-      expect(rendered, `zh_TW.${entry.key}`).not.toMatch(simplifiedOnlyCharacters);
-    }
-
-    expect(t('worldContent.dungeonInstanceBusy', { name: '墓龍聖所' })).toContain('佔用');
-    expect(t('worldContent.dungeonInstanceBusy', { name: '墓龍聖所' })).not.toMatch(
-      simplifiedOnlyCharacters,
-    );
     setLanguage('en');
   });
 
@@ -1701,30 +1461,30 @@ describe('i18n Localization Key Coverage', () => {
     setLanguage('en');
   });
 
+  // These four kept their teeth through the locale cut. They never asserted a
+  // TRANSLATION — they assert that every dynamic value survives interpolation into
+  // the template, which is a property of interpolate(), not of any locale. The
+  // originals switched locale only to prove it held everywhere; English alone still
+  // catches a dropped or renamed token.
   it('should interpolate combat, chat, and log templates without dropping values', () => {
-    setLanguage('de_DE');
+    setLanguage('en');
     expect(
-      t('hud.combat.damageDoneCrit', { ability: 'Feuerball', target: 'Wolf', amount: 42 }),
+      t('hud.combat.damageDoneCrit', { ability: 'Fireball', target: 'Wolf', amount: 42 }),
     ).toContain('42');
     expect(t('hud.errors.chatCooldown', { seconds: 7 })).toContain('7');
 
-    setLanguage('ja_JP');
-    const guildChat = t('hud.chat.templates.guild', { name: 'Aki', message: '集合' });
+    const guildChat = t('hud.chat.templates.guild', { name: 'Aki', message: 'regroup' });
     expect(guildChat).toContain('Aki');
-    expect(guildChat).toContain('集合');
+    expect(guildChat).toContain('regroup');
 
-    setLanguage('zh_CN');
-    expect(t('hud.logs.lootReceiveItem', { item: '粗糙护腕' })).toContain('粗糙护腕');
-
-    setLanguage('en');
+    expect(t('hud.logs.lootReceiveItem', { item: 'Rough Bracers' })).toContain('Rough Bracers');
   });
 
   it('should format ability tooltip templates without dropping dynamic values', () => {
-    setLanguage('de_DE');
+    setLanguage('en');
     expect(t('abilityUi.tooltip.cooldownSeconds', { seconds: 8 })).toContain('8');
     expect(t('abilityUi.spellbook.trainableAtLevel', { level: 10 })).toContain('10');
 
-    setLanguage('ko_KR');
     const knownAbility = t('abilityUi.spellbook.knownAbilityAria', {
       name: 'Fireball',
       rank: 2,
@@ -1733,25 +1493,19 @@ describe('i18n Localization Key Coverage', () => {
     expect(knownAbility).toContain('Fireball');
     expect(knownAbility).toContain('2');
 
-    setLanguage('ja_JP');
     const finisher = t('abilityUi.tooltip.finisherDamage', { base: 14, perCombo: 7 });
     expect(finisher).toContain('14');
     expect(finisher).toContain('7');
-
-    setLanguage('en');
   });
 
   it('should format quest UI templates without dropping dynamic values', () => {
-    setLanguage('de_DE');
+    setLanguage('en');
     expect(t('questUi.log.summary', { active: 3, completed: 8 })).toContain('3');
     expect(t('questUi.log.summary', { active: 3, completed: 8 })).toContain('8');
-
-    setLanguage('fr_FR');
     expect(t('questUi.dialog.availableQuestAria', { name: 'A Swift Response' })).toContain(
       'A Swift Response',
     );
 
-    setLanguage('ja_JP');
     const progress = t('questUi.detail.objectiveProgress', {
       label: 'Forest Wolves slain',
       current: 4,
@@ -1760,32 +1514,26 @@ describe('i18n Localization Key Coverage', () => {
     expect(progress).toContain('Forest Wolves slain');
     expect(progress).toContain('4');
     expect(progress).toContain('8');
-
-    setLanguage('en');
   });
 
   it('should format item UI and money helpers without dropping dynamic values', () => {
-    setLanguage('de_DE');
+    setLanguage('en');
     expect(t('itemUi.vendor.goodsTitle', { name: 'Haldren' })).toContain('Haldren');
     expect(t('itemUi.market.sellNote', { cut: 5, used: 2, max: 12 })).toContain('5');
-    expect(formatMoney(123456)).toBe('12G 34S 56K');
+    // formatMoney splits copper into gold/silver/copper; the shape is locale-aware
+    // but the split is not, so the three components must all survive.
+    const money = formatMoney(123456);
+    expect(money).toContain('12');
+    expect(money).toContain('34');
+    expect(money).toContain('56');
 
-    setLanguage('fr_FR');
-    expect(
-      t('itemUi.logs.sellerSold', {
-        buyer: 'Mira',
-        item: 'Cracked Wolf Fang',
-        money: '1 po',
-        proceeds: '95 pa',
-      }),
-    ).toContain('Mira');
-    expect(formatMoney(10001)).toBe('1po 0pa 1pc');
-
-    setLanguage('ja_JP');
-    expect(t('itemUi.tooltip.useFood', { amount: 61, seconds: 18 })).toContain('61');
-    expect(formatMoney(7)).toBe('7銅');
-
-    setLanguage('en');
+    const sold = t('itemUi.logs.sellerSold', {
+      buyer: 'Mira',
+      item: 'Cracked Wolf Fang',
+      money: '1g',
+    });
+    expect(sold).toContain('Mira');
+    expect(sold).toContain('Cracked Wolf Fang');
   });
 
   it('should expose all supported hreflang alternates in index.html', () => {

@@ -41,34 +41,12 @@ const OUT_DIR = process.env.I18N_OUT_DIR
 
 // Authoritative ordered locale set (mirrors scripts/i18n_build.mjs LOCALES). `en`
 // is the base; the rest are flat overlays. Drives emit order + supportedLanguages.
-const LOCALES = [
-  'en',
-  'es',
-  'es_ES',
-  'fr_FR',
-  'fr_CA',
-  'en_CA',
-  'it_IT',
-  'de_DE',
-  'zh_CN',
-  'zh_TW',
-  'ko_KR',
-  'ja_JP',
-  'pt_BR',
-  'ru_RU',
-  'cs_CZ',
-  'nl_NL',
-  'pl_PL',
-  'id_ID',
-  'tr_TR',
-  'sv_SE',
-  'vi_VN',
-  'da_DK',
-];
+// English only; mirrors scripts/i18n_build.mjs LOCALES.
+const LOCALES = ['en'];
 
 // Dialect locales resolve through a base (base-resolution model): nested en -> base
 // overlay -> dialect overlay. Mirror of scripts/i18n_build.mjs DIALECT_BASE.
-const DIALECT_BASE = { es_ES: 'es', fr_CA: 'fr_FR', en_CA: 'en' };
+const DIALECT_BASE = {};
 
 function sourceModule(lang) {
   return lang === 'en' ? './src/admin/i18n.en' : `./src/admin/i18n.locales/${lang}`;

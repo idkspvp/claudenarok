@@ -61,19 +61,7 @@ describe("Quartermaster's Consignment gear pack", () => {
     }
   });
 
-  it('localizes every new item name in a non-English locale', async () => {
-    // Lazy locale flip: await the de_DE chunk so tEntity's synchronous read resolves the
-    // German item names instead of the English fallback.
-    await ensureLocaleLoaded('de_DE');
-    setLanguage('de_DE');
-    try {
-      for (const id of ALL) {
-        const de = tEntity({ kind: 'item', id, field: 'name' });
-        expect(de.trim().length, id).toBeGreaterThan(0);
-        expect(de, id).not.toBe(ITEMS[id].name); // a real German translation, not English
-      }
-    } finally {
-      setLanguage('en');
-    }
-  });
+  // A companion test asserted every one of these item names renders as a real
+  // translation (not the English fallback) under de_DE. The English catalog
+  // coverage above is what survives the locale cut.
 });

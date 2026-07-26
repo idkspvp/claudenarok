@@ -265,12 +265,14 @@ describe('active-world noticeboard service', () => {
     hud.prevCraftSkills = null;
     hud.craftTierUpDrains = 0;
 
-    await ensureLocaleLoaded('ja_JP');
-    setLanguage('ja_JP');
+    // The locale switch that stood here (ja_JP) proved banner and log agree on the
+    // SAME localized string rather than one reading English. With one locale that
+    // half is unprovable, but the once-only delivery below is the real subject and
+    // still regresses if the HUD double-renders a personal event.
+    setLanguage('en');
     hud.handleEvents([{ ...EMPTY_NOTICEBOARD_EVENT, pid: 17 }]);
 
     const message = t('hudChrome.noticeboard.empty');
-    expect(message).toBe('何も貼られていないようだ。');
     expect(hud.showBanner).toHaveBeenCalledTimes(1);
     expect(hud.showBanner).toHaveBeenCalledWith(message);
     expect(hud.log).toHaveBeenCalledTimes(1);

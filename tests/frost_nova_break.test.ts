@@ -62,23 +62,9 @@ describe('Icebind damage break', () => {
         values: { damage: '6 to 7' },
       }),
     ).toBe(description.replace('$d', '6 to 7'));
-
-    await ensureLocaleLoaded('es');
-    setLanguage('es');
-    try {
-      expect(
-        tEntity({
-          kind: 'ability',
-          id: 'frost_nova',
-          field: 'description',
-          values: { damage: '6 a 7' },
-        }),
-      ).toBe(
-        'Congela a todos los enemigos cercanos en el sitio durante hasta 8 s e inflige 6 a 7 de daño de Escarcha. El enraizamiento se rompe tras recibir daño acumulado equivalente al 15 % de la salud máxima del objetivo, con un mínimo de 20 y un máximo de 60 de daño.',
-      );
-    } finally {
-      setLanguage('en');
-    }
+    // The Spanish arm that used to follow went with the locale cut. What it proved
+    // — that $d substitution survives translation — needs a second locale to mean
+    // anything; the English pin above is the half that still has teeth.
   });
 
   it('breaks after cumulative damage equal to 15% max health', () => {

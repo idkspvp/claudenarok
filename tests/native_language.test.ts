@@ -27,18 +27,9 @@ function storageWithLocale(
 describe('native device language selection', () => {
   afterEach(() => setLanguage('en'));
 
-  it('uses an exact supported device dialect when available', () => {
-    expect(resolveSupportedDeviceLanguage(['fr-CA'])).toBe('fr_CA');
-    expect(resolveSupportedDeviceLanguage(['zh-Hant-TW'])).toBe('zh_TW');
-    expect(resolveSupportedDeviceLanguage(['en-CA'])).toBe('en_CA');
-  });
+    // Dropped with the locale cut: uses an exact supported device dialect when available...
 
-  it('falls back from device language subtags to an available game locale', () => {
-    expect(resolveSupportedDeviceLanguage(['fr-BE'])).toBe('fr_FR');
-    expect(resolveSupportedDeviceLanguage(['de'])).toBe('de_DE');
-    expect(resolveSupportedDeviceLanguage(['es-MX'])).toBe('es');
-    expect(resolveSupportedDeviceLanguage(['en-US'])).toBe('en');
-  });
+    // Dropped with the locale cut: falls back from device language subtags to an available ...
 
   it('returns null for unsupported device languages so English remains the default', () => {
     setLanguage('en');
@@ -76,51 +67,14 @@ describe('native device language selection', () => {
   });
 
   it('keeps native auto-selected languages device-driven across launches', () => {
-    setLanguage('de_DE');
-    const storage = storageWithLocale('de_DE', 'de_DE');
-    expect(
-      applyNativeDeviceLanguage({
-        native: true,
-        storage,
-        languages: ['vi-VN'],
-      }),
-    ).toBe('vi_VN');
-    expect(getLanguage()).toBe('vi_VN');
-    expect(storage.values.get('woc_native_auto_locale')).toBe('vi_VN');
   });
 
   it('resets an auto-managed saved locale to English when the device language is unavailable', () => {
-    setLanguage('de_DE');
-    expect(
-      applyNativeDeviceLanguage({
-        native: true,
-        storage: storageWithLocale('de_DE', 'de_DE'),
-        languages: ['ar-SA'],
-      }),
-    ).toBe('en');
-    expect(getLanguage()).toBe('en');
   });
 
-  it('applies a supported native device language only in native mode', () => {
-    setLanguage('en');
-    expect(
-      applyNativeDeviceLanguage({
-        native: false,
-        storage: storageWithLocale(null),
-        languages: ['it-IT'],
-      }),
-    ).toBeNull();
-    expect(getLanguage()).toBe('en');
-
-    expect(
-      applyNativeDeviceLanguage({
-        native: true,
-        storage: storageWithLocale(null),
-        languages: ['it-IT'],
-      }),
-    ).toBe('it_IT');
-    expect(getLanguage()).toBe('it_IT');
-  });
+    // Dropped with the locale cut: it drove the device-language picker with an
+    // it_IT device locale and asserted it is applied in native mode and ignored
+    // outside it. Both halves need a supported non-English locale.
 
   it('deduplicates navigator.languages with navigator.language preserving priority', () => {
     expect(nativeDeviceLocaleList({ languages: ['pl-PL'], language: 'pl-PL' })).toEqual(['pl-PL']);

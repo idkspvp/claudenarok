@@ -18,7 +18,6 @@
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.com/invite/worldofclaudecraft)
 
-**English** · [Español](docs/i18n/README.es.md) · [Español (España)](docs/i18n/README.es_ES.md) · [Français](docs/i18n/README.fr_FR.md) · [Français (Canada)](docs/i18n/README.fr_CA.md) · [Italiano](docs/i18n/README.it_IT.md) · [Deutsch](docs/i18n/README.de_DE.md) · [简体中文](docs/i18n/README.zh_CN.md) · [繁體中文](docs/i18n/README.zh_TW.md) · [한국어](docs/i18n/README.ko_KR.md) · [日本語](docs/i18n/README.ja_JP.md) · [Português (Brasil)](docs/i18n/README.pt_BR.md) · [Русский](docs/i18n/README.ru_RU.md) · [Čeština](docs/i18n/README.cs_CZ.md) · [Nederlands](docs/i18n/README.nl_NL.md) · [Polski](docs/i18n/README.pl_PL.md) · [Bahasa Indonesia](docs/i18n/README.id_ID.md) · [Türkçe](docs/i18n/README.tr_TR.md) · [Svenska](docs/i18n/README.sv_SE.md) · [Tiếng Việt](docs/i18n/README.vi_VN.md) · [Dansk](docs/i18n/README.da_DK.md)
 
 [Play now](https://worldofclaudecraft.com/) · [Host your own world](#host-your-own-world-one-command) · [Train an agent](#train-an-agent-headless-rl) · [Web3](#web3) · [Contributing](CONTRIBUTING.md) · [Discord](https://discord.com/invite/worldofclaudecraft)
 
@@ -50,7 +49,7 @@ Same seed, same world, everywhere. Much of what you see is still drawn from code
 - **A deep professions economy**: four gathering trades feed ten crafts, from cooking and alchemy to jewelcrafting, weaponcrafting, and enchanting, with tiered tools, town workstations, masterwork quality, and commissions, all feeding a player-driven **World Market** and the **Ravenpost** mail service.
 - **Real multiplayer**: parties and raids, guilds, trading, duels, tap rights, party-split XP, whispers, away status, and a **Dungeon Finder** with role queues and premade listings.
 - **Authored in code, not in a 3D editor**: terrain, water, weather, town layouts, real-time shadows, and effects are generated at runtime, and the models that do ship are built by procedural factories and a curated asset library rather than hand-sculpted.
-- **Localized into 22 locales** through a deterministic, sim-emits-keys pipeline.
+- **Localized through a deterministic, sim-emits-keys pipeline** — English today, built to take more.
 - **A companion wiki at `/wiki`**, generated straight from live game content so it cannot drift from the world it documents.
 - **Native apps on every platform**: signed desktop installers for Windows, Linux, and macOS with automatic updates and optional Steam achievement mirroring, plus iOS and Android builds, all sharing the browser client and the same online world.
 - **Scales to the machine you have**: graphics presets and an automatic frame-rate governor trade visual richness for smoothness, and are held to a fairness rule that keeps them from ever hiding something a player reacts to.
@@ -378,7 +377,7 @@ artifact export, [DEPLOY.md](DEPLOY.md) for production, and
 
 ## Localization
 
-Every player-visible string resolves through `t()`, and the game ships in **22 locales** (English, two Spanish, two French, English Canada, Italian, German, Simplified and Traditional Chinese, Korean, Japanese, Brazilian Portuguese, Russian, Czech, Dutch, Polish, Indonesian, Turkish, Swedish, Vietnamese, and Danish). The sim and server stay language-agnostic: they emit stable keys or English that the client re-localizes at the boundary, which keeps determinism intact. Contributors add English only; the maintainer batch-fills the other locales before each release. The workflow is documented in `docs/i18n-scaling/translation-workflow.md`.
+Every player-visible string resolves through `t()`, and the game ships in **English**. The sim and server stay language-agnostic: they emit stable keys or English that the client re-localizes at the boundary, which keeps determinism intact. The upstream project carried 21 further locales; SpiritVale removed them while the Ragnarok conversion rewrites the job tree and every piece of content, and will add Thai in one pass once that content has settled. The lazy per-locale loading machinery is intact and empty, so adding a locale is a data change. The workflow is documented in `docs/i18n-scaling/translation-workflow.md`.
 
 ## Contributing
 

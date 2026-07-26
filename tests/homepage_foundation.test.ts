@@ -36,52 +36,9 @@ describe('i18n Translation Foundation', () => {
     expect(t('game.talents.comingSoonBody')).toContain('does not have talent trees yet');
   });
 
-  it('updates language and retrieves Spanish translations', async () => {
-    // Lazy locale flip: await the es chunk so the synchronous t() reads below resolve the
-    // Spanish table (the bootstrap/picker await the same way before rendering).
-    await ensureLocaleLoaded('es');
-    setLanguage('es');
-    expect(getLanguage()).toBe('es');
-    expect(t('nav.home')).toBe('Inicio');
-    expect(t('stats.playersOnline')).toBe('Jugadores en Línea');
-    expect(t('footer.copyright')).toBe('2026 World of ClaudeCraft');
-    expect(t('footer.githubLabel')).toBe('Proyecto de Código Abierto');
-    expect(t('nav.highscores')).toBe('Clasificaciones');
-    expect(t('nav.wiki')).toBe('Wiki');
-    expect(t('nav.news')).toBe('Noticias');
-    expect(t('nav.download')).toBe('Descargar');
-    expect(t('nav.loginRegister')).toBe('Iniciar Sesión/Registrarse');
-    expect(t('highscores.title')).toBe('Clasificaciones de Puntuación');
-    expect(t('wiki.title')).toBe('Wiki y Guía del Juego');
-    expect(t('news.title')).toBe('Noticias y Actualizaciones');
-    expect(t('download.title')).toBe('Descargar Lanzador de Escritorio');
-  });
+  // A Spanish-value test stood here, and beside it a sweep asserting nav.play
+  // renders each locale’s own word. Both needed the locales the cut removed.
 
-  it('supports and retrieves translations for all newly added locales', async () => {
-    const additionalLanguages = [
-      { code: 'es_ES', play: 'Jugar' },
-      { code: 'fr_FR', play: 'Jouer' },
-      { code: 'fr_CA', play: 'Jouer' },
-      { code: 'en_CA', play: 'Play' },
-      { code: 'it_IT', play: 'Gioca' },
-      { code: 'de_DE', play: 'Spielen' },
-      { code: 'zh_CN', play: '开始游戏' },
-      { code: 'zh_TW', play: '開始遊戲' },
-      { code: 'ko_KR', play: '플레이' },
-      { code: 'ja_JP', play: 'プレイ' },
-      { code: 'pt_BR', play: 'Jogar' },
-      { code: 'ru_RU', play: 'Играть' },
-    ] as const;
-
-    for (const lang of additionalLanguages) {
-      // Lazy locale flip: await each locale chunk before the synchronous t() read so it
-      // resolves the now-resident locale table instead of the English fallback.
-      await ensureLocaleLoaded(lang.code);
-      setLanguage(lang.code as any);
-      expect(getLanguage()).toBe(lang.code);
-      expect(t('nav.play')).toBe(lang.play);
-    }
-  });
 
   it('persists language selection in localStorage when available', () => {
     const mockStorage: Record<string, string> = {};
@@ -99,8 +56,8 @@ describe('i18n Translation Foundation', () => {
       configurable: true,
     });
 
-    setLanguage('es');
-    expect(global.localStorage.getItem('locale')).toBe('es');
+    setLanguage('en');
+    expect(global.localStorage.getItem('locale')).toBe('en');
 
     // Restore original localStorage
     if (originalLocalStorage) {

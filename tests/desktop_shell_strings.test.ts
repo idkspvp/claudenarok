@@ -4,6 +4,7 @@ import {
   desktopShellStringsPayload,
   repushWhenLocaleResident,
 } from '../src/game/desktop_shell_strings';
+import type { SupportedLanguage } from '../src/ui/i18n';
 
 // Cross-boundary contract: the renderer pushes t()-localized strings for the
 // main process's crash dialogs (desktop-set-strings). The payload must cover
@@ -40,7 +41,8 @@ describe('repushWhenLocaleResident', () => {
       () => {
         pushes += 1;
       },
-      'ru_RU',
+      // Any non-resident code; the injected fakes below decide the behaviour.
+      'ru_RU' as SupportedLanguage,
       { isLocaleResident: () => false, ensureLocaleLoaded: () => load },
     );
     expect(pushes).toBe(0);
@@ -73,7 +75,8 @@ describe('repushWhenLocaleResident', () => {
       () => {
         pushes += 1;
       },
-      'ru_RU',
+      // Any non-resident code; the injected fakes below decide the behaviour.
+      'ru_RU' as SupportedLanguage,
       {
         isLocaleResident: () => false,
         ensureLocaleLoaded: () => Promise.reject(new Error('offline')),

@@ -8,28 +8,11 @@
 // `npm run i18n:build` (also wired into `npm run build` and `pretest`).
 // Reproducibility is checked by tests/i18n_resolved_equivalence.test.ts.
 
-export const LOCALE_LOADERS = {
-  es: () => import('./es'),
-  es_ES: () => import('./es_ES'),
-  fr_FR: () => import('./fr_FR'),
-  fr_CA: () => import('./fr_CA'),
-  en_CA: () => import('./en_CA'),
-  it_IT: () => import('./it_IT'),
-  de_DE: () => import('./de_DE'),
-  zh_CN: () => import('./zh_CN'),
-  zh_TW: () => import('./zh_TW'),
-  ko_KR: () => import('./ko_KR'),
-  ja_JP: () => import('./ja_JP'),
-  pt_BR: () => import('./pt_BR'),
-  ru_RU: () => import('./ru_RU'),
-  cs_CZ: () => import('./cs_CZ'),
-  nl_NL: () => import('./nl_NL'),
-  pl_PL: () => import('./pl_PL'),
-  id_ID: () => import('./id_ID'),
-  tr_TR: () => import('./tr_TR'),
-  sv_SE: () => import('./sv_SE'),
-  vi_VN: () => import('./vi_VN'),
-  da_DK: () => import('./da_DK'),
+import type { EnTranslations } from '../i18n.catalog';
+
+type LocaleModule = { default?: EnTranslations } & Record<string, EnTranslations>;
+
+export const LOCALE_LOADERS: Partial<Record<string, () => Promise<LocaleModule>>> = {
 };
 
-export const SUPPORTED_LANGUAGES = ['en', 'es', 'es_ES', 'fr_FR', 'fr_CA', 'en_CA', 'it_IT', 'de_DE', 'zh_CN', 'zh_TW', 'ko_KR', 'ja_JP', 'pt_BR', 'ru_RU', 'cs_CZ', 'nl_NL', 'pl_PL', 'id_ID', 'tr_TR', 'sv_SE', 'vi_VN', 'da_DK'] as const;
+export const SUPPORTED_LANGUAGES = ['en'] as const;

@@ -28,10 +28,6 @@ const EN: Record<(typeof HUD_CHROME_KEYS)[number], string> = {
 };
 
 describe('hudChrome.* keys (English-only catalog module)', () => {
-  beforeAll(async () => {
-    await ensureLocaleLoaded('es');
-  });
-
   it('every new key resolves to its exact English value under en', () => {
     setLanguage('en');
     for (const key of HUD_CHROME_KEYS) {
@@ -40,22 +36,9 @@ describe('hudChrome.* keys (English-only catalog module)', () => {
     setLanguage('en');
   });
 
-  it('the translatable keys resolve to non-English under es', () => {
-    setLanguage('es');
-    // emoteWheel / clickMoveLeft / talents.defaultBuildName / tips.joinChannels are all
-    // translated in Spanish. (defaultBuildName keeps the "Build" loanword in some locales
-    // such as de_DE, so this assertion uses es, which translates it.)
-    const translated = [
-      'hudChrome.keybinds.emoteWheel',
-      'hudChrome.options.clickMoveLeft',
-      'hudChrome.talents.defaultBuildName',
-      'hudChrome.tips.joinChannels',
-    ] as const;
-    for (const key of translated) {
-      expect(t(key), `${key} should be translated in es`).not.toBe(EN[key]);
-    }
-    setLanguage('en');
-  });
+  // A companion test asserted the same keys resolve to something OTHER than the
+  // English value under es, proving they are actually translated rather than
+  // English-filled. It needs a second locale by construction.
 });
 
 // The settings sliders that the sweep routed through formatNumber: en output must stay

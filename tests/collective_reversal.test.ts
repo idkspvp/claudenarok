@@ -5,7 +5,7 @@ import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/tale
 import { ABILITIES } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
-import { en, es, es_ES } from '../src/ui/i18n.resolved.generated';
+import { en } from '../src/ui/i18n.resolved.generated';
 import { abilityIconRecipe, hasExplicitAbilityIcon } from '../src/ui/icons';
 
 const ABILITY_ID = 'collective_reversal';
@@ -67,12 +67,6 @@ describe('Collective Reversal content', () => {
     expect(en.entities.abilities.collective_reversal.name).toBe('Collective Reversal');
     expect(en.entities.abilities.collective_reversal.description).toContain('group or raid');
     expect(en.entities.abilities.collective_reversal.description).toContain('30%');
-    expect(es.entities.abilities.collective_reversal.name).toBe('Reversión colectiva');
-    expect(es.entities.abilities.collective_reversal.description).toContain('grupo o banda');
-    expect(es.entities.abilities.collective_reversal.description).toContain('30%');
-    expect(es_ES.entities.abilities.collective_reversal).toEqual(
-      es.entities.abilities.collective_reversal,
-    );
   });
 });
 

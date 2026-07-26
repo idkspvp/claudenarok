@@ -8,34 +8,13 @@ import { ABILITIES, ITEMS } from '../src/sim/data';
 import { itemDisplayName } from '../src/ui/entity_i18n';
 import { Hud } from '../src/ui/hud';
 import {
-  cs_CZ,
-  da_DK,
-  de_DE,
   en,
-  en_CA,
   ensureLocaleLoaded,
-  es,
-  es_ES,
   formatMoney as formatLocalizedMoney,
   formatNumber,
-  fr_CA,
-  fr_FR,
-  id_ID,
-  it_IT,
-  ja_JP,
-  ko_KR,
-  nl_NL,
-  pl_PL,
-  pt_BR,
-  ru_RU,
   setLanguage,
   supportedLanguages,
-  sv_SE,
   t,
-  tr_TR,
-  vi_VN,
-  zh_CN,
-  zh_TW,
 } from '../src/ui/i18n';
 import { localizeServerText, DICT as serverDICT, tServer } from '../src/ui/server_i18n';
 import { localizeSimAuraName, localizeSimText, DICT as simDICT } from '../src/ui/sim_i18n';
@@ -54,30 +33,11 @@ beforeAll(async () => {
   await Promise.all(supportedLanguages.map((lang) => ensureLocaleLoaded(lang)));
 });
 
-const locales: Record<string, any> = {
-  en,
-  es,
-  es_ES,
-  fr_FR,
-  fr_CA,
-  en_CA,
-  it_IT,
-  de_DE,
-  zh_CN,
-  zh_TW,
-  ko_KR,
-  ja_JP,
-  pt_BR,
-  ru_RU,
-  cs_CZ,
-  nl_NL,
-  pl_PL,
-  id_ID,
-  tr_TR,
-  sv_SE,
-  vi_VN,
-  da_DK,
-};
+// Every resolved locale table, keyed by code. English only after the locale cut;
+// the per-locale DICT-parity and placeholder-integrity loops below therefore run
+// over English alone, which still proves the sim/server matcher DICTs are complete
+// and their placeholders intact — the S3 guard’s actual job.
+const locales: Record<string, any> = { en };
 const ph = (s: string) =>
   [...String(s).matchAll(/\{([A-Za-z0-9_]+)\}/g)]
     .map((m) => m[1])
@@ -188,13 +148,7 @@ describe('L3/L4: additional server-message coverage', () => {
     setLanguage('en');
   });
 
-  it('localizes the (combat) /who status flag', () => {
-    setLanguage('es');
-    const out = localizeServerText('Carl - level 12 warrior - Eastbrook Vale (combat)')!;
-    expect(out).toContain('Carl');
-    expect(out.toLowerCase()).not.toContain('(combat)');
-    setLanguage('en');
-  });
+  // Dropped with the locale cut (needed a non-English locale): localizes the (combat) /who status flag...
 });
 
 // --- H1: talent names never fall to raw word-substitution ---
@@ -215,46 +169,12 @@ describe('H1: every talent name resolves via override or ability name', () => {
     }
   });
 
-  it('CJK talent names contain no leftover Latin words', () => {
-    for (const lang of ['zh_CN', 'zh_TW', 'ja_JP', 'ko_KR'] as const) {
-      setLanguage(lang);
-      for (const e of nameEntries) {
-        const rendered = renderTalentManifestEntry(e);
-        expect(
-          /[A-Za-z]{2,}/.test(rendered),
-          `${lang}: "${e.source}" -> "${rendered}" has leftover English`,
-        ).toBe(false);
-      }
-    }
-    setLanguage('en');
-  });
+  // A CJK leftover-Latin sweep over talent names stood here.
 });
 
-// --- H2: game.* keeps required diacritics ---
-describe('H2: game.* values keep required diacritics', () => {
-  const stripped: Record<string, RegExp> = {
-    es: /\b(Clasificacion|posicion|Campeon|Mitico|Especializacion|Maestria|Configuracion|Dano|cosmetica|maximo|proximamente|actualizacion|arbol|arboles|Aun)\b/,
-    es_ES:
-      /\b(Clasificacion|posicion|Campeon|Mitico|Especializacion|Maestria|Configuracion|Dano|cosmetica|maximo|proximamente|actualizacion|arbol|arboles|Aun)\b/,
-    fr_FR: /\b(debloque|Reessayez|Eternel|Specialisation|Depenses|sauvegardee)\b/,
-    fr_CA: /\b(debloque|Reessayez|Eternel|Specialisation|Depenses|sauvegardee)\b/,
-    pt_BR: /\b(Posicao|Classificacao|Especializacao|Nivel|Voce|Funcao|nao)\b/,
-    de_DE: /(naechsten|erhoeht|zurueck|Ueberschuss|Verfuegbar)/,
-    // Italian: each listed form REQUIRES a final/internal accent in correct Italian
-    // and has NO unaccented homograph, so a match means the diacritic was stripped.
-    // (Deliberately excludes ambiguous forms like "abilita"/"necessita", which are
-    // also valid unaccented 3rd-person verbs — "abilita il PvP" = "enables PvP".)
-    it_IT:
-      /\b(perche|piu|gia|citta|qualita|velocita|liberta|cosi|puo|universita|attivita|possibilita)\b/,
-  };
-  it('no accent-stripped forms remain in the game.* subtree', () => {
-    for (const [lang, re] of Object.entries(stripped)) {
-      const flat = JSON.stringify(locales[lang].game);
-      const m = flat.match(re);
-      expect(m, `${lang}: stripped form "${m?.[0]}" still present`).toBeNull();
-    }
-  });
-});
+// H2 scanned the game.* subtree of every non-English table for accent-stripped
+// forms (Espanol for Espanol with a tilde, and so on). English has no diacritics
+// to strip.
 
 // --- M1: quest narratives preserve {playerName} ---
 describe('M1: quest narratives preserve {playerName}', () => {
@@ -536,20 +456,10 @@ describe('S1: sim event-text pipeline is localized in every locale', () => {
     setLanguage('en');
   });
 
-  it('localizes embedded item and mob names inside sim text', () => {
-    setLanguage('de_DE');
-    expect(localizeSimText('Equipped Pitted Shortsword.')).not.toContain('Pitted Shortsword');
-    expect(localizeSimText('Forest Wolf dies.')).not.toContain('Forest Wolf');
-    setLanguage('en');
-  });
+  // A de_DE test stood here proving embedded item and mob names inside sim text are
+  // swapped for their localized forms rather than left English.
 
-  it('localizes the flavor aura name Tamed and reuses talent/ability titles', () => {
-    setLanguage('de_DE');
-    expect(localizeSimAuraName('Tamed')).not.toBeNull();
-    expect(localizeSimAuraName('Tamed')).not.toBe('Tamed');
-    expect(localizeSimAuraName('not-an-aura')).toBeNull();
-    setLanguage('en');
-  });
+  // Ditto for the flavour aura name Tamed and the talent/ability title reuse.
 
   it('every delve mob aura-emitting proc name resolves through the aura matcher', () => {
     // These five template fields all push a named, player-visible aura (a channel
@@ -557,7 +467,7 @@ describe('S1: sim event-text pipeline is localized in every locale', () => {
     // renders raw English in every non-English locale: the exact Litany Pulse /
     // Web Snare / Silt Hide / Frenzy drift class, which occurred four ways in one
     // delve. Scan the content records so a rename on either side reddens this.
-    setLanguage('zh_CN');
+    setLanguage('en');
     const names: string[] = [];
     for (const tmpl of Object.values(DELVE_MOBS)) {
       for (const proc of [
@@ -584,24 +494,7 @@ describe('S1: sim event-text pipeline is localized in every locale', () => {
     setLanguage('en');
   });
 
-  it('helper-returned pet error strings resolve through the matcher (the S3 scanner cannot see them)', () => {
-    // noPetError (src/sim/pet/pet_commands.ts) builds its string inside a ternary,
-    // and the delve arm 'Pets are not allowed inside the delves.' is a literal in
-    // the HELPER, never a direct ctx.error(...) argument. The S3 emit scanner only
-    // enumerates literals at the emit call site, so it is structurally blind to
-    // these: pin them here explicitly so a future delve pet-error added the same
-    // way still needs a matcher row.
-    setLanguage('es');
-    for (const emitted of [
-      'You have no pet.',
-      'You have no living pet.',
-      'You have no living demon.',
-      'Pets are not allowed inside the delves.',
-    ]) {
-      expect(localizeSimText(emitted), `no sim matcher row for '${emitted}'`).not.toBe(emitted);
-    }
-    setLanguage('en');
-  });
+  // Dropped with the locale cut (needed a non-English locale): helper-returned pet error strings resolve through th...
 });
 
 // --- S2: sim_i18n DICT parity (typed, but assert at runtime too) ---
@@ -1206,11 +1099,11 @@ describe('S3: every sim.ts emit is recognized (drift guard)', () => {
     expect(leaks, 'unregistered sim emit strings (add a key/RULE to sim_i18n.ts)').toEqual([]);
   });
 
-  // RELEASE TIER: the same coverage across all 21 locales, and where a real matcher
+  // RELEASE TIER: the same coverage across every shipped locale, and where a real matcher
   // resolves the string, its localized form is not raw English in any translated
   // locale (no silently-shipped English).
   it.runIf(RELEASE_TIER)(
-    's3_localized: every emit is recognized in all 21 locales and not left English where a matcher resolves it',
+    's3_localized: every emit is recognized in every shipped locale and not left English where a matcher resolves it',
     () => {
       const cands = candidateStrings();
       expect(cands.length, 'sanity: should enumerate many emit sites').toBeGreaterThan(80);
@@ -1320,17 +1213,9 @@ describe('server restart-countdown announcements are localized (broadcastSystem 
     expect(steps).toContain('Server restarting now.');
   });
 
-  it('every restart step is recognized and not left English in es/de_DE', () => {
-    for (const lang of ['es', 'de_DE'] as const) {
-      setLanguage(lang);
-      for (const s of steps) {
-        const out = localizeServerText(s);
-        expect(out, `${lang}: "${s}" should be recognized by localizeServerText`).not.toBeNull();
-        expect(out, `${lang}: "${s}" should not stay English`).not.toBe(s);
-      }
-    }
-    setLanguage('en');
-  });
+  // A test asserting each restart step localizes away from English in es/de_DE
+  // stood here. The recognition half — that localizeServerText matches every step
+  // at all — is covered by the English-source arm above.
 });
 
 // --- S3 meta-guard: the scan LIST itself. PR 2039 closed the quest_commands
@@ -1378,24 +1263,7 @@ describe('elixir aura names stay wired to the sim aura matcher', () => {
     }
   });
 
-  it('the renamed Vipersear Vigor aura localizes on every non-Latin surface', async () => {
-    const expected: Record<string, string> = {
-      zh_CN: '蝰灼之力',
-      zh_TW: '蝰灼之力',
-      ko_KR: '살무사 작열의 활력',
-      ja_JP: '蝮灼の活力',
-      ru_RU: 'Мощь Гадючьего Жара',
-    };
-    try {
-      for (const [locale, value] of Object.entries(expected)) {
-        await ensureLocaleLoaded(locale as Parameters<typeof ensureLocaleLoaded>[0]);
-        setLanguage(locale as Parameters<typeof setLanguage>[0]);
-        expect(localizeSimAuraName('Vipersear Vigor'), locale).toBe(value);
-      }
-    } finally {
-      setLanguage('en');
-    }
-  });
+  // Dropped with the locale cut (needed a non-English locale): the renamed Vipersear Vigor aura localizes on every ...
 
   it('the pre-rename aura string keeps a legacy alias for the deploy window', () => {
     setLanguage('en');

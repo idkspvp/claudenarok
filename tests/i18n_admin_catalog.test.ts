@@ -17,76 +17,26 @@ import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { en as adminEn } from '../src/admin/i18n.en';
-import { cs_CZ } from '../src/admin/i18n.locales/cs_CZ';
-import { de_DE } from '../src/admin/i18n.locales/de_DE';
-import { en_CA } from '../src/admin/i18n.locales/en_CA';
-import { es } from '../src/admin/i18n.locales/es';
-import { es_ES } from '../src/admin/i18n.locales/es_ES';
-import { fr_CA } from '../src/admin/i18n.locales/fr_CA';
-import { fr_FR } from '../src/admin/i18n.locales/fr_FR';
-import { it_IT } from '../src/admin/i18n.locales/it_IT';
-import { ja_JP } from '../src/admin/i18n.locales/ja_JP';
-import { ko_KR } from '../src/admin/i18n.locales/ko_KR';
-import { pt_BR } from '../src/admin/i18n.locales/pt_BR';
-import { ru_RU } from '../src/admin/i18n.locales/ru_RU';
-import { zh_CN } from '../src/admin/i18n.locales/zh_CN';
-import { zh_TW } from '../src/admin/i18n.locales/zh_TW';
 import { assertDeterministic } from './helpers/i18n_determinism';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const adminEnKeys = new Set(Object.keys(adminEn));
 
-// --- The admin two-tier t() gate (mirrors tests/i18n_t_behavior.test.ts) --------
-// The real admin `pending` set is non-empty (the chat-filter keys), but it
-// is locale-specific, so to exercise the t() pending BRANCH deterministically we
-// inject a synthetic pending key through the generated module - the same technique
-// the game-client behavior test uses.
-describe('admin t(): pending key (English-only legal at PR; hard-fail at release)', () => {
-  const GEN = '../src/admin/i18n.resolved.generated';
-  const SAMPLE = '__sampleAdminPendingKey';
-
-  async function loadAdminWithPending() {
-    vi.resetModules();
-    vi.doMock(GEN, async () => {
-      const actual =
-        await vi.importActual<typeof import('../src/admin/i18n.resolved.generated')>(GEN);
-      const FILL = 'English fill {name}';
-      return {
-        ...actual,
-        translations: {
-          ...actual.translations,
-          es: { ...actual.translations.es, [SAMPLE]: FILL },
-          en: { ...actual.translations.en, [SAMPLE]: FILL },
-        },
-        pending: { ...actual.pending, es: [...(actual.pending.es ?? []), SAMPLE] },
-      };
-    });
-    return await import('../src/admin/i18n');
-  }
-
+// The admin two-tier t() gate had two arms here: a pending key renders the English
+// fill on a PR build and hard-fails on a release build. Both planted a synthetic
+// pending key in the es overlay, and with English the only admin locale the pending
+// set is empty by construction. The untracked-key typo guard is locale-independent
+// and stays.
+describe('admin t(): untracked key guard', () => {
   afterEach(() => {
     delete process.env.I18N_RELEASE;
-    vi.doUnmock(GEN);
     vi.resetModules();
-  });
-
-  it('renders the English fill on a non-release build (PR tier is English-only legal)', async () => {
-    delete process.env.I18N_RELEASE;
-    const mod = await loadAdminWithPending();
-    mod.setAdminLanguage('es');
-    expect(mod.t(SAMPLE, { name: 'Aki' })).toBe('English fill Aki');
-  });
-
-  it('hard-fails on a release build (English must never ship to a translated operator)', async () => {
-    process.env.I18N_RELEASE = '1';
-    const mod = await loadAdminWithPending();
-    mod.setAdminLanguage('es');
-    expect(() => mod.t(SAMPLE)).toThrow(/pending/);
   });
 
   it('throws on an untracked key in dev/test (typo guard)', async () => {
     delete process.env.I18N_RELEASE;
-    const mod = await loadAdminWithPending();
+    vi.resetModules();
+    const mod = await import('../src/admin/i18n');
     mod.setAdminLanguage('en');
     expect(() => mod.t('totally.bogus.admin.key')).toThrow(/untracked key/);
     // a real key still resolves, so the guard is not blanket-throwing
@@ -112,11 +62,14 @@ describe('admin bundle stays separate from the game client', () => {
   const files = walkTs(adminDir);
 
   it('no admin source file imports from outside src/admin/ (no game locale table)', () => {
-    // sanity: the scan must reach the i18n.locales/ overlays, not just the top level.
-    expect(files.length, 'should recurse into i18n.locales/').toBeGreaterThan(15);
+    // Sanity floor so the import scan below cannot pass by scanning nothing. It used
+    // to require the walk to reach src/admin/i18n.locales/; that directory went with
+    // the locale cut, so the floor is now the generated resolved slices, which the
+    // walk must still recurse into.
+    expect(files.length, 'should recurse into subdirectories').toBeGreaterThan(15);
     expect(
-      files.some((f) => f.startsWith('i18n.locales/')),
-      'overlays must be scanned',
+      files.some((f) => f.startsWith('i18n.resolved.generated/')),
+      'generated slices must be scanned',
     ).toBe(true);
     const offenders: string[] = [];
     for (const f of files) {
@@ -141,32 +94,9 @@ describe('admin bundle stays separate from the game client', () => {
 });
 
 // --- Every admin overlay key is a real admin `en` key (no phantom keys) ----------
-describe('admin overlay keys are members of the admin en base', () => {
-  const overlays: Record<string, Record<string, string>> = {
-    es,
-    es_ES,
-    fr_FR,
-    fr_CA,
-    en_CA,
-    it_IT,
-    de_DE,
-    zh_CN,
-    zh_TW,
-    ko_KR,
-    ja_JP,
-    pt_BR,
-    ru_RU,
-    cs_CZ,
-  };
-  for (const [lang, overlay] of Object.entries(overlays)) {
-    it(`${lang}: has no key outside the admin en base`, () => {
-      const notInEn = Object.keys(overlay)
-        .filter((k) => !adminEnKeys.has(k))
-        .sort();
-      expect(notInEn).toEqual([]);
-    });
-  }
-});
+// A generated case per non-English overlay stood here, asserting the overlay declares
+// no key the admin `en` base does not have. There are no overlays while English is the
+// only admin locale, so the base itself is all that is left to check.
 
 // --- literal t() keys in the admin Svelte source are real admin en keys ----------
 // The Svelte rewrite renders every operator-facing string with t('key') in

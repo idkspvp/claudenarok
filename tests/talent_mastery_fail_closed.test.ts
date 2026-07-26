@@ -53,26 +53,13 @@ describe('mastery formatter fails closed on unmapped effect fields', () => {
     }
   });
 
-  it('still renders the known fields of a partially-unmapped effect (es regression shape)', () => {
-    setLanguage('es');
-    const rendered = tTalent({
-      kind: 'talentMastery',
-      spec: syntheticSpec(MIXED_EFFECT),
-      field: 'description',
-    });
-    // The known crit field renders localized with its number; the unmapped 40%/70%
-    // fields are skipped entirely (no "Aumenta undefined en 70%").
-    expect(rendered).toContain('5');
-    expect(rendered).not.toContain('70');
-    expect(rendered).not.toContain('undefined');
-  });
-
-  it('falls back to the authored English description when nothing is generatable', () => {
-    setLanguage('es');
-    const spec = syntheticSpec(OPAQUE_EFFECT);
-    const rendered = tTalent({ kind: 'talentMastery', spec, field: 'description' });
-    expect(rendered).toBe('Increases synthetic output by 70%.');
-  });
+  // Two tests stood here that drove the GENERATED description path by switching to
+  // Spanish: one proving a partially-unmapped effect renders its known fields and
+  // silently drops the rest, one proving a wholly-unmappable effect falls back to
+  // the authored English. Both needed a non-English locale by construction — tTalent
+  // short-circuits to the authored strings for English, so with a single locale the
+  // generator is unreachable and neither test can be made to exercise it. They come
+  // back with the second locale, alongside the machinery they guard.
 
   it('sweep: none of the 27 real masteries renders "undefined" in any supported locale', () => {
     const specs = Object.values(TALENTS).flatMap((classTalents) => classTalents.specs);

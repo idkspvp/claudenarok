@@ -105,27 +105,6 @@ const RANGE_FILL_FULL_PCT = 100;
 // SupportedLanguage so a new locale appears once its label is added here.
 const LANGUAGE_ENDONYMS: Record<SupportedLanguage, string> = {
   en: 'English (US)',
-  es: 'Español (LatAm)',
-  es_ES: 'Español (España)',
-  fr_FR: 'Français (France)',
-  fr_CA: 'Français (Canada)',
-  en_CA: 'English (Canada)',
-  it_IT: 'Italiano',
-  de_DE: 'Deutsch',
-  zh_CN: '简体中文',
-  zh_TW: '繁體中文',
-  ko_KR: '한국어',
-  ja_JP: '日本語',
-  pt_BR: 'Português (Brasil)',
-  ru_RU: 'Русский',
-  cs_CZ: 'Čeština',
-  nl_NL: 'Nederlands',
-  pl_PL: 'Polski',
-  id_ID: 'Bahasa Indonesia',
-  tr_TR: 'Türkçe',
-  sv_SE: 'Svenska',
-  vi_VN: 'Tiếng Việt',
-  da_DK: 'Dansk',
 };
 
 // Localized labels for the keybind category headers + action rows.

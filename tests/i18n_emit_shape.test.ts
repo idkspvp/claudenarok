@@ -38,30 +38,10 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 // The authoritative ordered locale set both build scripts emit (LOCALES). en + 21.
-const ALL_LOCALES = [
-  'en',
-  'es',
-  'es_ES',
-  'fr_FR',
-  'fr_CA',
-  'en_CA',
-  'it_IT',
-  'de_DE',
-  'zh_CN',
-  'zh_TW',
-  'ko_KR',
-  'ja_JP',
-  'pt_BR',
-  'ru_RU',
-  'cs_CZ',
-  'nl_NL',
-  'pl_PL',
-  'id_ID',
-  'tr_TR',
-  'sv_SE',
-  'vi_VN',
-  'da_DK',
-];
+// The authoritative ordered locale set both build scripts emit (their LOCALES).
+// English only: the upstream 21 further locales were removed with the cut to an
+// English-only catalog. Adding a locale means adding it here and to BOTH scripts.
+const ALL_LOCALES = ['en'];
 // The lazy/pending set: every locale except `en` (and never the en_XA pseudo).
 const NON_EN_LOCALES = ALL_LOCALES.filter((l) => l !== 'en');
 
@@ -74,7 +54,7 @@ function assertEmitSurface(
   loaders: Record<string, () => Promise<unknown>>,
   supported: readonly string[],
 ) {
-  // Barrel translations map: exactly the 21 locales, in emit order, en_XA EXCLUDED.
+  // Barrel translations map: exactly the shipped locales, in emit order, en_XA EXCLUDED.
   expect(Object.keys(translations), `${label}: translations key set`).toEqual(ALL_LOCALES);
   expect('en_XA' in translations, `${label}: en_XA must NOT be in translations`).toBe(false);
   expect(translations.en, `${label}: en present`).toBeTypeOf('object');
@@ -116,11 +96,12 @@ describe('i18n emit-split surface (game table)', () => {
     expect([...uiSupported]).toEqual(uiRuntimeSupported);
   });
 
-  it('each LOCALE_LOADERS thunk lazily resolves its own dense slice', async () => {
-    const es = (await uiLoaders.es()) as Record<string, unknown>;
-    expect(es.es, 'ui loader resolves the es slice').toBeTypeOf('object');
-    const ruRu = (await uiLoaders.ru_RU()) as Record<string, unknown>;
-    expect(ruRu.ru_RU, 'ui loader resolves the ru_RU slice').toBeTypeOf('object');
+  it('declares a loader for every supported language except the eager English base', () => {
+    // With English the only locale this map is empty, and that emptiness IS the
+    // assertion: English must never get a thunk, because it is statically bundled.
+    const withLoaders = Object.keys(uiLoaders).sort();
+    const expected = uiRuntimeSupported.filter((lang) => lang !== 'en').sort();
+    expect(withLoaders).toEqual(expected);
   });
 });
 
@@ -136,9 +117,10 @@ describe('i18n emit-split surface (admin table)', () => {
     );
   });
 
-  it('each admin LOCALE_LOADERS thunk lazily resolves its own slice', async () => {
-    const es = (await adminLoaders.es()) as Record<string, unknown>;
-    expect(es.es, 'admin loader resolves the es slice').toBeTypeOf('object');
+  it('declares an admin loader for every supported language except English', () => {
+    const withLoaders = Object.keys(adminLoaders).sort();
+    const expected = adminSupported.filter((lang: string) => lang !== 'en').sort();
+    expect(withLoaders).toEqual(expected);
   });
 });
 

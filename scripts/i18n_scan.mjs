@@ -79,30 +79,8 @@ function atomicWriteFileSync(filePath, contents) {
 // The authoritative ordered locale set (mirrors scripts/i18n_build.mjs). `en` is
 // the nested base; the rest are flat dotted-key overlays. The registry tracks the
 // 13 NON-`en` locales per key (`en` is the authoritative source, never "pending").
-const LOCALES = [
-  'en',
-  'es',
-  'es_ES',
-  'fr_FR',
-  'fr_CA',
-  'en_CA',
-  'it_IT',
-  'de_DE',
-  'zh_CN',
-  'zh_TW',
-  'ko_KR',
-  'ja_JP',
-  'pt_BR',
-  'ru_RU',
-  'cs_CZ',
-  'nl_NL',
-  'pl_PL',
-  'id_ID',
-  'tr_TR',
-  'sv_SE',
-  'vi_VN',
-  'da_DK',
-];
+// English only; mirrors scripts/i18n_build.mjs LOCALES.
+const LOCALES = ['en'];
 const NON_EN = LOCALES.filter((l) => l !== 'en');
 
 // Dialect locales resolve through a base locale: a key the dialect
@@ -110,7 +88,7 @@ const NON_EN = LOCALES.filter((l) => l !== 'en');
 // "provides" a key if its own overlay OR its base chain provides it. en_CA's base
 // is `en` itself, so it provides every key (an English dialect intentionally
 // shows English where it does not diverge). Mirror of i18n_build's DIALECT_BASE.
-const DIALECT_BASE = { es_ES: 'es', fr_CA: 'fr_FR', en_CA: 'en' };
+const DIALECT_BASE = {};
 
 // The four key namespaces. `main` = the resolved-table en leaves; `sim`/`server`
 // = the client matcher DICTs (sim_i18n / server_i18n); `admin` = the admin DICT.

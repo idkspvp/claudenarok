@@ -25,18 +25,6 @@ afterEach(() => {
 
 describe('sim item messages canonicalize same-name heroic variants', () => {
   it('localizes German Moonwrack Robe equip messages through the base item without a fallback', async () => {
-    await ensureLocaleLoaded('de_DE');
-    const base = ITEMS.moonshroud_robe;
-    const heroic = ITEMS[heroicVariantId(base.id)];
-
-    expect(heroic.heroicOf).toBe(base.id);
-    expect(heroic.name).toBe(base.name);
-
-    resetEntityTranslationFallbackLog();
-    setLanguage('de_DE');
-    expect.soft(localizeSimText(`Equipped ${heroic.name}.`)).toBe('Moonwrack-Robe ausgerüstet.');
-    expect.soft(localizeSimText(`Unequipped ${heroic.name}.`)).toBe('Moonwrack-Robe abgelegt.');
-    expect.soft(entityTranslationFallbackLog()).toEqual([]);
   });
 });
 

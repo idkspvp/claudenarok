@@ -32,15 +32,12 @@ const FAILED_PREFIX = 'too many failed attempts';
 const ATTEMPTS_COMMA = 'too many attempts, wait a minute and try again';
 const FAILED_COMMA = 'too many failed attempts, wait a few minutes and try again';
 
-const TARGET_FILES = [
-  'server/main.ts',
-  'src/main.ts',
-  'src/admin/i18n.locales/en_CA.ts',
-  'src/admin/i18n.resolved.generated/en_CA.ts',
-];
+// The admin en_CA overlay and its generated slice were the other two files this
+// swap touched; both went with the cut to an English-only locale set.
+const TARGET_FILES = ['server/main.ts', 'src/main.ts'];
 
 describe('rate-limit copy: no em dash', () => {
-  it('none of the four touched files contains a U+2014 em dash', () => {
+  it('none of the touched files contains a U+2014 em dash', () => {
     for (const rel of TARGET_FILES) {
       expect(read(rel).includes(EM_DASH), `${rel} still contains an em dash`).toBe(false);
     }
@@ -57,11 +54,8 @@ describe('rate-limit copy: no em dash', () => {
     expect(auth).toContain(FAILED_COMMA);
   });
 
-  it('the admin en_CA tooManyAttempts copy is the comma form', () => {
-    expect(read('src/admin/i18n.locales/en_CA.ts')).toContain(
-      `'error.tooManyAttempts': '${ATTEMPTS_COMMA}'`,
-    );
-  });
+  // A companion case pinned the admin en_CA overlay's tooManyAttempts copy to the
+  // same comma form. That overlay no longer exists.
 });
 
 describe('rate-limit copy: matcher-safe (prefix before the comma)', () => {

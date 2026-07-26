@@ -58,23 +58,10 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const localesDir = path.join(root, 'src/ui/i18n.locales');
 const keysPath = path.join(root, 'src/ui/i18n.catalog/translation_keys.generated.ts');
 
-describe('overlay typing teeth', () => {
-  it('every locale overlay declares the Partial<Record<TranslationKey, string>> annotation', () => {
-    // The annotation is what routes each overlay through the excess-property
-    // check against the flat union; a merge that drops or widens one silences
-    // tsc for that overlay while every other gate stays green.
-    const files = readdirSync(localesDir)
-      .filter((f) => f.endsWith('.ts'))
-      .sort();
-    expect(files.length).toBeGreaterThan(0);
-    for (const f of files) {
-      const src = readFileSync(path.join(localesDir, f), 'utf8');
-      expect(src, `${f} must be typed against the flat union`).toMatch(
-        /: Partial<Record<TranslationKey, string>> =/,
-      );
-    }
-  });
-});
+// The 'overlay typing teeth' block scanned src/ui/i18n.locales/ asserting each
+// overlay declares Partial<Record<TranslationKey, string>>, the annotation that
+// makes the generated key union load-bearing. The directory went with the locale
+// cut; restore this beside the first new overlay.
 
 describe('generated key union line-item shape (decision D6)', () => {
   it('is sorted, unique, one quoted literal per line, no widening member, no metadata', () => {

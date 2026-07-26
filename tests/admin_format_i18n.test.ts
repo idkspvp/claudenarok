@@ -18,13 +18,9 @@ describe("admin fmtBytes", () => {
     setAdminLanguage("en");
   });
 
-  it("localizes the decimal separator under es / de_DE (and does not throw)", () => {
-    setAdminLanguage("es");
-    expect(fmtBytes(2 * GiB)).toBe("2,00 GB");
-    setAdminLanguage("de_DE");
-    expect(fmtBytes(2 * GiB)).toBe("2,00 GB"); // would RangeError without the BCP-47 normalization
-    setAdminLanguage("en");
-  });
+    // Dropped with the locale cut: it asserted fmtBytes renders "2,00 GB" under
+    // es/de_DE. English uses the same separator as the code default, so there is no
+    // longer a locale whose separator differs.
 
   it("sources the unit from the bytes.* admin keys", () => {
     expect(DICT.en["bytes.gigabytes"]).toBe("{n} GB");
@@ -45,14 +41,5 @@ describe("admin fmtDate", () => {
     setAdminLanguage("en");
   });
 
-  it("renders a locale-specific form (en differs from de_DE)", () => {
-    setAdminLanguage("en");
-    const en = fmtDate(iso);
-    setAdminLanguage("de_DE");
-    const de = fmtDate(iso);
-    setAdminLanguage("en");
-    // Same instant + runner timezone, so any difference is locale formatting
-    // (month order/abbreviation/separators) - proves the locale tag reaches Intl.
-    expect(de).not.toBe(en);
-  });
+    // Ditto: fmtDate needed two locales to differ from each other.
 });

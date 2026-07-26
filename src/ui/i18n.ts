@@ -33,30 +33,7 @@ import { pending } from './i18n.resolved.generated/pending';
 // tree-shakes the 21 non-en slices (and the barrel that assembles them) out of the app
 // chunk. THAT drop is the payload win of the lazy locale flip. `en` stays in the chunk via the eager
 // local import above (the universal English default), not via this line.
-export {
-  cs_CZ,
-  da_DK,
-  de_DE,
-  en,
-  en_CA,
-  es,
-  es_ES,
-  fr_CA,
-  fr_FR,
-  id_ID,
-  it_IT,
-  ja_JP,
-  ko_KR,
-  nl_NL,
-  pl_PL,
-  pt_BR,
-  ru_RU,
-  sv_SE,
-  tr_TR,
-  vi_VN,
-  zh_CN,
-  zh_TW,
-} from './i18n.resolved.generated';
+export { en } from './i18n.resolved.generated';
 // gameStrings is the post-cap/XP/leaderboard layer, which the table carries under the
 // `game` key. Source it from the eager generated dense `en` rather than re-exporting from
 // i18n.catalog, so importing './i18n' does not pull the full i18n.catalog base (en + shared content
@@ -105,6 +82,18 @@ export function isPseudoActive(): boolean {
 
 export function isSupportedLanguage(value: string): value is SupportedLanguage {
   return SUPPORTED_SET.has(value);
+}
+
+/** Whether this locale reads the authored English source rather than a translation.
+ *
+ *  Callers use it to skip a translation lookup they know will return the source
+ *  unchanged. It deliberately returns a plain `boolean` and NOT a `lang is 'en'`
+ *  type predicate: while English is the only supported locale, a narrowing check
+ *  collapses `lang` to `never` in every else-branch, and tsc then red-fails whole
+ *  translation paths as unreachable. Those paths are dormant, not dead — they come
+ *  back with the next locale, so they have to keep compiling in the meantime. */
+export function isAuthoredEnglish(lang: SupportedLanguage): boolean {
+  return (lang as string) === 'en';
 }
 
 export function languageTag(lang: SupportedLanguage): string {
@@ -184,10 +173,15 @@ export function setLanguage(lang: SupportedLanguage): void {
 // statically available (only `en` is), so the bootstrap await (src/main.ts startGame,
 // behind the loading screen) is a REAL per-locale fetch that populates resident before the
 // HUD's first localized paint.
-const resident: Partial<Record<SupportedLanguage, EnTranslations>> = { en };
+// Keyed by string, not by SupportedLanguage. While English is the only supported
+// locale, `SupportedLanguage` narrows to `'en'` alone, and the early return above
+// then narrows `lang` to `never` in every write below — tsc red-fails the whole
+// lazy-load path as unreachable. Widening the key keeps the machinery compiling so
+// adding Thai stays a data change rather than a rewrite.
+const resident: Partial<Record<string, EnTranslations>> = { en };
 // One in-flight load promise per locale so concurrent callers coalesce onto a single
 // import instead of racing N of them.
-const inflight = new Map<SupportedLanguage, Promise<void>>();
+const inflight = new Map<string, Promise<void>>();
 
 export function isLocaleResident(lang: SupportedLanguage): boolean {
   return lang === 'en' || resident[lang] !== undefined;

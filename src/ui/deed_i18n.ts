@@ -8,7 +8,7 @@
 // English (clean English is preferable to a broken guess).
 
 import { DEEDS } from '../sim/content/deeds';
-import { getLanguage, isPseudoActive, type SupportedLanguage, t } from './i18n';
+import { getLanguage, isAuthoredEnglish, isPseudoActive, type SupportedLanguage, t } from './i18n';
 
 export type DeedTranslationField = 'name' | 'desc' | 'title';
 
@@ -42,58 +42,23 @@ export interface DeedLocaleModule {
   dialects?: Record<string, DeedLocaleTable>;
 }
 
-type DeedBaseLocale =
-  | 'cs_CZ'
-  | 'da_DK'
-  | 'de_DE'
-  | 'es'
-  | 'fr_FR'
-  | 'id_ID'
-  | 'it_IT'
-  | 'ja_JP'
-  | 'ko_KR'
-  | 'nl_NL'
-  | 'pl_PL'
-  | 'pt_BR'
-  | 'ru_RU'
-  | 'sv_SE'
-  | 'tr_TR'
-  | 'vi_VN'
-  | 'zh_CN'
-  | 'zh_TW';
+// Locales that ship their own deed-name chunk. English is never a member: its
+// deed text is the authored source read straight from the content table, so it
+// needs no chunk. The union is empty while English is the only locale, which
+// makes DEED_LOCALE_LOADERS an empty map — the loader path stays intact and a
+// new locale rejoins by adding its code here and its chunk beside it.
+type DeedBaseLocale = never;
 
 // The per-locale dynamic-import thunks (the LOCALE_LOADERS shape scoped to the
 // Book of Deeds): each base locale is its own content-hashed chunk. Production
 // never reassigns the map; tests spy a single locale's thunk (vi.spyOn) to assert
 // per-locale fetch counts and simulate a failed chunk fetch. Read at call time in
 // ensureDeedLocalesLoaded (never captured) so a spy replacement is honored.
-export const DEED_LOCALE_LOADERS: Record<DeedBaseLocale, () => Promise<DeedLocaleModule>> = {
-  cs_CZ: () => import('./deed_i18n.locales/cs_CZ'),
-  da_DK: () => import('./deed_i18n.locales/da_DK'),
-  de_DE: () => import('./deed_i18n.locales/de_DE'),
-  es: () => import('./deed_i18n.locales/es'),
-  fr_FR: () => import('./deed_i18n.locales/fr_FR'),
-  id_ID: () => import('./deed_i18n.locales/id_ID'),
-  it_IT: () => import('./deed_i18n.locales/it_IT'),
-  ja_JP: () => import('./deed_i18n.locales/ja_JP'),
-  ko_KR: () => import('./deed_i18n.locales/ko_KR'),
-  nl_NL: () => import('./deed_i18n.locales/nl_NL'),
-  pl_PL: () => import('./deed_i18n.locales/pl_PL'),
-  pt_BR: () => import('./deed_i18n.locales/pt_BR'),
-  ru_RU: () => import('./deed_i18n.locales/ru_RU'),
-  sv_SE: () => import('./deed_i18n.locales/sv_SE'),
-  tr_TR: () => import('./deed_i18n.locales/tr_TR'),
-  vi_VN: () => import('./deed_i18n.locales/vi_VN'),
-  zh_CN: () => import('./deed_i18n.locales/zh_CN'),
-  zh_TW: () => import('./deed_i18n.locales/zh_TW'),
-};
+export const DEED_LOCALE_LOADERS: Partial<Record<string, () => Promise<DeedLocaleModule>>> = {};
 
 // Dialect locales ride their base locale's chunk (es_ES over es, fr_CA over
 // fr_FR); the base chunk co-locates the override layer under `dialects`.
-const DEED_DIALECT_BASE: Partial<Record<SupportedLanguage, DeedBaseLocale>> = {
-  es_ES: 'es',
-  fr_CA: 'fr_FR',
-};
+const DEED_DIALECT_BASE: Partial<Record<SupportedLanguage, DeedBaseLocale>> = {};
 
 // The assembled deed table per LANGUAGE (es and es_ES tracked separately), each
 // resident once its own chunk resolves. Absent until then: a non-en read falls
@@ -111,7 +76,7 @@ const inflightDeedLocales = new Map<SupportedLanguage, Promise<void>>();
  *  owns the UI, English keeps rendering) and clears the in-flight slot so a
  *  retry can start a fresh import. */
 export async function ensureDeedLocalesLoaded(lang: SupportedLanguage): Promise<void> {
-  if (lang === 'en' || lang === 'en_CA') return;
+  if (isAuthoredEnglish(lang)) return;
   if (residentDeedLocales[lang]) return;
   const existing = inflightDeedLocales.get(lang);
   if (existing) return existing;
@@ -234,7 +199,7 @@ function maybePseudo(s: string): string {
 
 function localeEntry(id: string): DeedLocaleEntry | undefined {
   const lang = getLanguage();
-  if (lang === 'en' || lang === 'en_CA') return undefined;
+  if (isAuthoredEnglish(lang)) return undefined;
   return residentDeedLocales[lang]?.[id];
 }
 
