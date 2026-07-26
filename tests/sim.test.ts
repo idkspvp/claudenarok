@@ -15,6 +15,7 @@ import { Sim } from '../src/sim/sim';
 import {
   dist2d,
   FISHING_CAST_ID,
+  KILLS_PER_LEVEL,
   MAX_LEVEL,
   meleeMissChance,
   mobXpValue,
@@ -155,14 +156,24 @@ describe('classic formulas', () => {
     expect(rageFromTaking(30, 20)).toBeCloseTo(1, 5);
   });
 
-  it('mob xp follows the 45+5L rule with gray cutoffs', () => {
-    expect(mobXpValue(1, 1)).toBe(50);
-    expect(mobXpValue(3, 1)).toBe(Math.round(60 * 1.1));
-    // gray: 5 levels below a level-7 player
+  it('mob xp is one fortieth of the level it belongs to, with gray cutoffs', () => {
+    // The payout is derived from the curve now, not from the old 45+5L line: a kill
+    // is worth roughly 1/KILLS_PER_LEVEL of the level the MOB sits at, so the grind
+    // stays the same length whether that level costs 10 XP or 64 million.
+    for (const level of [20, 40, 60, 80]) {
+      expect(mobXpValue(level, level), `level ${level} same-level kill`).toBe(
+        Math.round(xpForLevel(level) / KILLS_PER_LEVEL),
+      );
+    }
+    // Never rounds down to nothing, however cheap the early levels get.
+    expect(mobXpValue(1, 1)).toBeGreaterThan(0);
+    // A mob above you pays its own level's rate plus the con bonus, capped at +4.
+    expect(mobXpValue(3, 1)).toBe(Math.round(mobXpValue(3, 3) * 1.1));
+
+    // The gray bands are unchanged: 5 levels below a level-7 player is worthless…
     expect(mobXpValue(2, 7)).toBe(0);
-    // not gray yet at level 6
+    // …but not yet at level 6, and ZD widens to 6 at player level 8.
     expect(mobXpValue(2, 6)).toBeGreaterThan(0);
-    // ZD widens to 6 at player level 8
     expect(mobXpValue(3, 8)).toBeGreaterThan(0);
     expect(mobXpValue(2, 8)).toBe(0);
   });

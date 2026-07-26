@@ -433,9 +433,21 @@ describe('persistence', () => {
 
 describe('xp-bar label states', () => {
   it('pre-cap shows the level bar', () => {
-    const v = xpBarView({ level: 5, xp: 1000, lifetimeXp: 0, showOverflow: true });
+    // Level 40 rather than 5: the RO curve makes the first levels cost tens of XP,
+    // so a fixed 1,000 XP there overfills the bar and the percentage stops being a
+    // meaningful check on the formatting. Read the denominator off the curve so the
+    // case keeps testing the label rather than one particular step size.
+    const level = 40;
+    const need = xpForLevel(level);
+    const earned = Math.floor(need * 0.35);
+    const v = xpBarView({ level, xp: earned, lifetimeXp: 0, showOverflow: true });
     expect(v.postCap).toBe(false);
-    expect(v.label).toBe('1,000 / 2,800 XP (35%)');
+    // Both operands formatted, and the fraction between them, in one label. The
+    // percent is asserted through fillFrac rather than spelled into the string so
+    // the case does not hinge on which way the display rounds.
+    expect(v.label).toContain(`${formatXp(earned)} / ${formatXp(need)} XP`);
+    expect(v.label).toMatch(/\(3[45]%\)$/);
+    expect(v.fillFrac).toBeCloseTo(0.35, 2);
   });
 
   it('at-cap with overflow shows the virtual-level bar starting at +0', () => {

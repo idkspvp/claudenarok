@@ -10,7 +10,7 @@ import {
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import type { AbilityEffect, Entity, PlayerClass } from '../src/sim/types';
+import { type AbilityEffect, type Entity, type PlayerClass, xpForLevel } from '../src/sim/types';
 
 function alloc(spec: string): TalentAllocation {
   return { spec, rows: {} };
@@ -340,8 +340,12 @@ describe('spec masteries', () => {
 
     // Ding through grantXp (the live level-up path), NOT setPlayerLevel/setSpec:
     // the ding itself must re-bake talentMods at the new level.
+    // One level's worth at a time, read off the curve. A flat 5,000 overshot 20 on
+    // the Ragnarok ladder, where levels in the teens cost a few hundred.
     const grant = (sim as unknown as { grantXp(amount: number): void }).grantXp.bind(sim);
-    for (let i = 0; i < 200 && sim.player.level < 20; i++) grant(5000);
+    for (let i = 0; i < 200 && sim.player.level < 20; i++) {
+      grant(xpForLevel(sim.player.level) - sim.xp);
+    }
     expect(sim.player.level).toBe(20);
     const at20 = metaOf(sim, sim.player).talentMods.global.hotHealPct;
     expect(at20).toBeCloseTo(0.25, 10);

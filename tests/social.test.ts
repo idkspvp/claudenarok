@@ -20,6 +20,7 @@ import {
   INTERACT_RANGE,
   type LootSlot,
   MAX_LEVEL,
+  mobXpValue,
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import type { PartyMemberInfo } from '../src/world_api';
@@ -649,7 +650,10 @@ describe('parties', () => {
     // both got xp (half of solo, with 1.166 duo bonus applied)
     expect(metaA.xp).toBeGreaterThan(0);
     expect(metaB.xp).toBeGreaterThan(0);
-    expect(metaA.xp).toBe(Math.round((50 * 1.166) / 2));
+    // Solo value read off the curve, not a literal: mob XP is now derived from the
+    // level ladder, so 50 was only ever the forest wolf's worth under the old one.
+    const solo = mobXpValue(wolf.level, sim.entities.get(a)!.level);
+    expect(metaA.xp).toBe(Math.round((solo * 1.166) / 2));
     // both got quest credit
     expect(metaA.questLog.get('q_wolves')?.counts[0]).toBe(1);
     expect(metaB.questLog.get('q_wolves')?.counts[0]).toBe(1);

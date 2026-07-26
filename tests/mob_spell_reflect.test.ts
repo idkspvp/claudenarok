@@ -3,13 +3,18 @@
 // reflect lives in dealDamage, the single funnel every damage instance passes
 // through, so driving dealDamage directly exercises the exact production path.
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { createMob } from '../src/sim/entity';
 import { MOBS } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
+// Level 30, not 1. These cases hand-set player.maxHp to survive scripted hits, and
+// a level-up re-derives maxHp from class and level, silently wiping that setup. The
+// mobs here are level 19, so at 30 the killing blow is grey and pays no XP.
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'mage', autoEquip: true });
+  const sim = new Sim({ seed: 42, playerClass: 'mage', autoEquip: true });
+  sim.setPlayerLevel(30);
+  return sim;
 }
 
 function spawnMob(sim: Sim, templateId: string, level: number): Entity {

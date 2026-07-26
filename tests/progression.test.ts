@@ -352,17 +352,38 @@ describe('xp pacing budget (no forced grinding)', () => {
     expect(MAX_LEVEL).toBe(99);
   });
 
-  // The Ragnarok conversion raised the cap to 99 by APPENDING to the curve. Every
-  // zone budget above, all 317 ability learn levels, and 156 quest minLevels are
-  // tuned against the original 1..20 steps, so those twenty numbers are the thing
-  // that must not move — re-generating them would silently re-tune the whole
-  // shipped game. Pinned to literals, not to XP_TABLE itself, so an accidental
-  // edit to the generator cannot make this test agree with it.
-  it('leaves the shipped level 1-20 steps untouched', () => {
-    expect(XP_TABLE.slice(0, 20)).toEqual([
-      400, 900, 1400, 2100, 2800, 3600, 4500, 5400, 6500, 7600, 8800, 10100, 11400, 12900, 14400,
-      16000, 17700, 19400, 21300, 23200,
-    ]);
+  // The curve's SHAPE is the thing worth pinning, not its 99 values: it is generated
+  // from growth bands, so asserting the output against itself would prove nothing.
+  // Each assertion below names a property of classic Ragnarok pacing that a careless
+  // edit to the bands would break, and each is stated as a literal so the test cannot
+  // drift along with the generator.
+  const total = XP_TABLE.slice(0, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
+
+  it('opens with the near-free early levels of the RO curve', () => {
+    // Levels 1 to 20 are minutes of play there, not the hours the old 107,795-XP
+    // curve charged. If this creeps back into five figures the early game has
+    // silently become a grind again.
+    expect(XP_TABLE[0]).toBe(10);
+    const throughTwenty = XP_TABLE.slice(0, 19).reduce((a, b) => a + b, 0);
+    expect(throughTwenty).toBeLessThan(10_000);
+    expect(throughTwenty / total).toBeLessThan(0.001);
+  });
+
+  it('puts the difficulty budget in the last fifteen levels', () => {
+    // The signature of the curve: the wall opens around 90 and steepens again at 95.
+    // Levels 85 to 99 must carry most of the whole climb, or the endgame is not
+    // Ragnarok's endgame regardless of what the cap says.
+    const lastFifteen = XP_TABLE.slice(84, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
+    expect(lastFifteen / total).toBeGreaterThan(0.6);
+    // …without becoming the ONLY thing that costs anything.
+    expect(lastFifteen / total).toBeLessThan(0.95);
+  });
+
+  it('spans six orders of magnitude from the first level to the last', () => {
+    const first = XP_TABLE[0];
+    const last = XP_TABLE[MAX_LEVEL - 2];
+    expect(last / first).toBeGreaterThan(1_000_000);
+    expect(last / first).toBeLessThan(20_000_000);
   });
 
   it('never gets cheaper as levels climb', () => {

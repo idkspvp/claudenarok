@@ -4375,48 +4375,71 @@ export function normAngle(a: number): number {
 // Classic progression formulas
 // ---------------------------------------------------------------------------
 
-// The 1..20 steps this game shipped with. They stay untouched by the Ragnarok
-// conversion: 317 ability `learnLevel`s, 346 mobs, 156 quests and all three zone
-// bands are tuned against exactly these numbers, so re-scaling them would mean
-// re-tuning the whole existing game to buy nothing.
-const SHIPPED_XP_STEPS = [
-  400, 900, 1400, 2100, 2800, 3600, 4500, 5400, 6500, 7600, 8800, 10100, 11400, 12900, 14400, 16000,
-  17700, 19400, 21300, 23200,
-];
-
-// Per-level growth for the new 20..99 stretch, expressed as "up to level N, each
-// level costs G times the one before".
+// The whole 1..99 ladder runs on classic Ragnarok's pacing, including the first
+// twenty levels. An earlier pass kept this game's original 1..20 steps because the
+// abilities, mobs and quests were tuned against them; quests are gone and the
+// ability ladder is being re-authored with the job tree, so nothing is left holding
+// the old numbers in place.
 //
-// The shape is classic Ragnarok's, and only the shape: the flat run through the
-// 40s and 50s, the dip through the 60s, and the wall that opens at 90 and steepens
-// again at 95. It is what the published pre-renewal anchors imply — base EXP to
-// leave level 9 is 200, level 19 is 1,260, 29 is 4,474, 39 is 21,773, 49 is 75,973,
-// 59 is 255,341, 69 is 740,988, 79 is 2,713,878, 89 is 7,121,664, 94 is 18,339,300,
-// and 98 is 58,135,000 (dbc.reborn.cz, "Base Normal") — divided out level by level.
+// The first twenty levels are now nearly free (about 7,700 XP end to end, where the
+// old curve charged 107,795). That is not a mistake and it is not a scale error: in
+// Ragnarok the early levels take minutes, and the game's whole difficulty budget
+// sits in the last fifteen. Mob XP values are still tuned to the old curve and will
+// blow through these levels; retuning them belongs with the content pass.
+//
+// The per-level growth below is what the published pre-renewal base-EXP anchors
+// imply, divided out band by band. Twenty-five anchors, taken from the "Base Normal"
+// table at dbc.reborn.cz: leaving level 1 costs 9, level 9 costs 200, then 19: 1,260
+// · 24: 2,240 · 29: 4,474 · 34: 11,748 · 39: 21,773 · 44: 46,323 · 49: 75,973 ·
+// 54: 157,528 · 59: 255,341 · 64: 482,590 · 69: 740,988 · 74: 1,848,355 ·
+// 79: 2,713,878 · 84: 4,744,680 · 89: 7,121,664 · 91: 9,738,720 · 92: 11,649,960 ·
+// 93: 13,643,520 · 94: 18,339,300 · 95: 23,836,800 · 96: 35,658,000 ·
+// 97: 48,687,000 · 98: 58,135,000. Anchoring every five levels rather than every ten
+// matters: the curve is not smooth between them, and a coarse fit flattens the
+// mid-game the shape depends on.
 //
 // We take the curve and generate our own values from it rather than copying the
 // table. A difficulty curve is a design decision; the 99 numbers Gravity chose to
-// express it are their data. See docs/design/ro-classic-conversion.md.
+// express it are their data. Our base is 10 rather than their 9, and the result
+// tracks their per-level cost within about 11% the whole way up. See
+// docs/design/ro-classic-conversion.md.
+const XP_BASE_STEP = 10;
 const XP_GROWTH_BANDS: ReadonlyArray<readonly [throughLevel: number, growth: number]> = [
-  [29, 1.14],
-  [39, 1.17],
-  [49, 1.133],
-  [59, 1.128],
-  [69, 1.113],
-  [79, 1.14],
-  [89, 1.101],
-  [94, 1.209],
-  [98, 1.336],
+  [8, 1.4735],
+  [18, 1.2021],
+  [23, 1.122],
+  [28, 1.1484],
+  [33, 1.213],
+  [38, 1.1313],
+  [43, 1.163],
+  [48, 1.104],
+  [53, 1.157],
+  [58, 1.1014],
+  [63, 1.1358],
+  [68, 1.0895],
+  [73, 1.2006],
+  [78, 1.0798],
+  [83, 1.1182],
+  [88, 1.0846],
+  [90, 1.1694],
+  [91, 1.1963],
+  [92, 1.1711],
+  [93, 1.3442],
+  [94, 1.2998],
+  [95, 1.4959],
+  [96, 1.3654],
+  [97, 1.1941],
 ];
 
-// XP required to go from level L to L+1, indexed by L-1.
+// XP required to go from level L to L+1, indexed by L-1. The last entry is the
+// step out of the cap, which no character takes: it is the post-cap prestige unit.
 export const XP_TABLE: readonly number[] = (() => {
-  const table = SHIPPED_XP_STEPS.slice();
-  let step = SHIPPED_XP_STEPS[SHIPPED_XP_STEPS.length - 1];
-  for (let lvl = 20; lvl <= 98; lvl++) {
-    const band = XP_GROWTH_BANDS.find(([through]) => lvl <= through);
-    step *= band ? band[1] : 1;
+  const table: number[] = [];
+  let step = XP_BASE_STEP;
+  for (let lvl = 1; lvl <= 99; lvl++) {
     table.push(Math.round(step));
+    const band = XP_GROWTH_BANDS.find(([through]) => lvl <= through);
+    step *= band ? band[1] : XP_GROWTH_BANDS[XP_GROWTH_BANDS.length - 1][1];
   }
   return table;
 })();
@@ -4767,16 +4790,42 @@ export function zeroDiff(playerLevel: number): number {
   return 8;
 }
 
-// Classic-era mob XP: base = 45 + 5 * mobLevel, scaled by level difference.
+// Roughly how many same-level kills one level costs. Ragnarok's real figure is not
+// constant (it climbs, and the map you pick moves it further), but a constant is the
+// honest starting point: it makes the grind legible and leaves one number to tune.
+export const KILLS_PER_LEVEL = 40;
+
+// Mob XP is DERIVED FROM THE LEVEL CURVE, not from a formula of its own.
+//
+// It used to be `45 + 5 * mobLevel`, a straight line. That worked against the old
+// quadratic 1..20 ladder and became nonsense the moment the ladder went Ragnarok:
+// a level-1 kill paid 50 XP into a level that cost 10, so one wolf was five levels.
+// A linear payout cannot track a curve that multiplies, and pinning the two together
+// is the only thing that keeps kills-per-level stable across all 99 levels instead of
+// collapsing at the bottom and stalling at the top.
+//
+// The floor of 1 matters at the very bottom, where a level costs less than 40 XP and
+// the division would otherwise round a kill down to nothing.
+export function mobXpBase(mobLevel: number): number {
+  const level = Math.max(1, Math.min(MAX_LEVEL, Math.floor(mobLevel)));
+  return Math.max(1, Math.round(xpForLevel(level) / KILLS_PER_LEVEL));
+}
+
+// Mob XP scaled by level difference (the classic con-colour bands).
 export function mobXpValue(mobLevel: number, playerLevel: number): number {
-  const base = 45 + 5 * mobLevel;
+  const base = mobXpBase(mobLevel);
   const diff = mobLevel - playerLevel;
   if (diff >= 0) {
     return Math.round(base * (1 + 0.05 * Math.min(diff, 4)));
   }
   const zd = zeroDiff(playerLevel);
   if (-diff >= zd) return 0; // gray
-  return Math.round(base * (1 - -diff / zd));
+  // Floored at 1 rather than allowed to round away. Gray is the ONLY way a kill is
+  // worth nothing, and it is a deliberate band with its own rule above. Down here
+  // the early levels are cheap enough that the base is already 1, so any con
+  // penalty at all would round a perfectly good kill to zero and make the first few
+  // levels look broken.
+  return Math.max(1, Math.round(base * (1 - -diff / zd)));
 }
 
 // Rage conversion constant (classic-era): c = 0.0091 L^2 + 3.23 L + 4.27

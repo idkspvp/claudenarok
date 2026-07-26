@@ -4,18 +4,29 @@
 // 1.5-level cap, kill-XP consumption (2x, kills only — not quests), the xp-bar
 // rested overlay fraction, and CharacterState persistence round-trip.
 import { describe, expect, it } from 'vitest';
+import { PROPS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import { DT, xpForLevel } from '../src/sim/types';
-import { PROPS } from '../src/sim/data';
-import { xpBarView } from '../src/ui/xp_bar';
 import { terrainHeight } from '../src/sim/world';
+import { xpBarView } from '../src/ui/xp_bar';
+
+// Level 30, not 1. The consumption cases below award a flat 100 XP and read the
+// bar afterwards, and on the Ragnarok curve a level costs 10 XP at level 1 — the
+// award dings ten times over and the bar shows a remainder instead of the sum.
+// At 30 a level costs a few thousand, so 100 XP stays inside one level and the
+// arithmetic these cases assert is visible again.
+const TEST_LEVEL = 30;
 
 function makeSim(): Sim {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  sim.setPlayerLevel(TEST_LEVEL);
+  return sim;
 }
 
 function teleport(sim: Sim, e: any, x: number, z: number) {
-  e.pos.x = x; e.pos.z = z; e.pos.y = terrainHeight(x, z, sim.cfg.seed);
+  e.pos.x = x;
+  e.pos.z = z;
+  e.pos.y = terrainHeight(x, z, sim.cfg.seed);
   e.prevPos = { ...e.pos };
 }
 
@@ -76,12 +87,16 @@ describe('rested XP — consumption', () => {
   it('keeps lifetime XP integral when consuming fractional rested XP', () => {
     const sim = makeSim();
     const meta = sim.meta(sim.playerId)!;
+    const lifeBefore = meta.lifetimeXp;
     meta.restedXp = 48.00625;
 
     sim.grantXp(100, meta, { fromKill: true });
     const state = sim.serializeCharacter(sim.playerId)!;
 
-    expect(state.lifetimeXp).toBe(148);
+    // Asserted as a DELTA: starting at level 30 seeds a real lifetime total, so the
+    // absolute value is no longer the award. 100 base + 48 rested, the fraction of
+    // a point left in the pool rather than leaking into an integer counter.
+    expect((state.lifetimeXp ?? 0) - lifeBefore).toBe(148);
     expect(Number.isInteger(state.lifetimeXp)).toBe(true);
     expect(() => BigInt(String(state.lifetimeXp))).not.toThrow();
     expect(meta.restedXp).toBeCloseTo(0.00625, 5);
@@ -113,14 +128,26 @@ describe('rested XP — consumption', () => {
 describe('rested XP — xp-bar overlay', () => {
   it('reports a rested overlay fraction ahead of the fill', () => {
     const need = xpForLevel(1);
-    const view = xpBarView({ level: 1, xp: need * 0.2, lifetimeXp: 0, restedXp: need * 0.3, showOverflow: false });
+    const view = xpBarView({
+      level: 1,
+      xp: need * 0.2,
+      lifetimeXp: 0,
+      restedXp: need * 0.3,
+      showOverflow: false,
+    });
     expect(view.fillFrac).toBeCloseTo(0.2, 5);
     expect(view.restedFrac).toBeCloseTo(0.3, 5);
   });
 
   it('clamps the overlay to the end of the bar', () => {
     const need = xpForLevel(1);
-    const view = xpBarView({ level: 1, xp: need * 0.8, lifetimeXp: 0, restedXp: need * 0.9, showOverflow: false });
+    const view = xpBarView({
+      level: 1,
+      xp: need * 0.8,
+      lifetimeXp: 0,
+      restedXp: need * 0.9,
+      showOverflow: false,
+    });
     expect(view.restedFrac).toBeCloseTo(0.2, 5); // 0.8 + 0.9 clamps to 1.0
   });
 

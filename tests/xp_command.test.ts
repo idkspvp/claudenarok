@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { MAX_LEVEL, SimEvent, xpForLevel } from '../src/sim/types';
+import { MAX_LEVEL, type SimEvent, xpForLevel } from '../src/sim/types';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
@@ -23,8 +23,11 @@ describe('/xp command', () => {
     const a = sim.addPlayer('warrior', 'Aleph');
     const bystander = sim.addPlayer('mage', 'Bet');
     const meta = sim.players.get(a)!;
-    sim.entities.get(a)!.level = 7;
-    meta.xp = 1240;
+    sim.entities.get(a)!.level = 40;
+    // Just under half a level, taken from the curve rather than a literal: the old
+    // 1,240 was a sensible mid-bar figure at level 7 on the previous ladder and is
+    // more than a whole level there now.
+    meta.xp = Math.floor(xpForLevel(40) * 0.4);
     sim.tick();
 
     sim.chat('/xp', a);
@@ -33,14 +36,15 @@ describe('/xp command', () => {
     expect(chatEvents(events)).toHaveLength(0);
     expect(events.some((e) => e.type === 'error' && e.pid === bystander)).toBe(false);
 
-    const need = xpForLevel(7); // total XP to reach level 8
-    const pct = Math.floor((1240 / need) * 100);
+    const earned = meta.xp;
+    const need = xpForLevel(40); // total XP to reach level 41
+    const pct = Math.floor((earned / need) * 100);
     const text = errorFor(events, a)!;
-    expect(text).toContain('Level 7');
-    expect(text).toContain('1,240');
+    expect(text).toContain('Level 40');
+    expect(text).toContain(earned.toLocaleString('en-US'));
     expect(text).toContain(need.toLocaleString('en-US'));
     expect(text).toContain(`${pct}%`);
-    expect(text).toContain((need - 1240).toLocaleString('en-US')); // remaining
+    expect(text).toContain((need - earned).toLocaleString('en-US')); // remaining
   });
 
   it('aliases /exp and /experience behave the same', () => {
