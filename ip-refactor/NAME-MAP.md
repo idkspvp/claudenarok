@@ -1157,3 +1157,36 @@ coverage with zero residual:
 - **Three WoW-adjacent mob names KEPT** by operator (generic/original, whole-value clears them):
   Static Charge, Blood Frenzy, Deathstalker Cleave (mob `deathstalker_voss`).
 The scanner is GREEN after this change - the whole IP scrub is verified complete.
+
+---
+
+## POST-LOCK APPENDIX: v0.30.0 gap rows (SpiritVale RO conversion, M1a)
+
+Twelve ability display names were never on this map and so were never armed by
+G0: the campaign locked on 2026-07-02, and these arrived with the v0.26 warrior
+redesign and the later mage rows. They still read exactly as WoW spells them.
+Renamed here under the same house style, each screened through the G0 scanner
+(`tests/ip_scrub.test.ts`) before landing. `Riposte` was the first proposal for
+`revenge` and the scanner rejected it as verbatim WoW; `Comeuppance` replaced it.
+
+Ability ids stay frozen, so saves, wire tokens, and icon recipes do not move.
+
+| id (frozen) | old | new | kind | flag |
+| --- | --- | --- | --- | --- |
+| `bladestorm` | Bladestorm | Rending Cyclone | ability | rename |
+| `recklessness` | Recklessness | Abandon | ability | rename |
+| `heroic_leap` | Heroic Leap | Warleap | ability | rename |
+| `intimidating_shout` | Intimidating Shout | Rout | ability | rename |
+| `frozen_orb` | Frozen Orb | Rimeglobe | ability | rename |
+| `rings_of_frost` | Ring of Frost | Hoarfrost Ring | ability | rename |
+| `victory_rush` | Victory Rush | Killing High | ability | rename |
+| `berserker_stance` | Berserker Stance | Reckless Stance | ability | rename |
+| `battle_stance` | Battle Stance | Warring Stance | ability | rename |
+| `revenge` | Revenge | Comeuppance | ability | rename |
+| `avatar` | Avatar | Ironshape | ability | rename |
+| `meteor` | Meteor | Emberfall | ability | rename |
+
+Cascaded pairings: the warrior talent rows named after their granted ability
+(`war_row_victory_rush`, the Abandon and Rending Cyclone rows), the mage choice
+row for Hoarfrost Ring, and the `Killing High` literal the on-kill heal event
+spells in `combat/damage.ts`.

@@ -1193,7 +1193,7 @@ describe('i18n Localization Key Coverage', () => {
         }
         // Talent NAMES must not leak English either. A name may legitimately equal
         // English only when it is a deliberate cross-language cognate recorded as an
-        // explicit titleOverride (e.g. French "Riposte", Spanish "Vigor"); a name that
+        // explicit titleOverride (e.g. French "Comeuppance", Spanish "Vigor"); a name that
         // matches English WITHOUT such an override is an accidental leak (e.g. a new
         // talent whose vocabulary the translation tables do not yet cover).
         if (

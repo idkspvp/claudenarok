@@ -790,7 +790,7 @@ const classAbilityNamesEn = {
       [
         'blizzard',
         'Blizzard',
-        'Calls an ice storm onto the target area for 6 sec, dealing {damage} Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Frozen Orb, up to 3 sec per cast. (Frost)',
+        'Calls an ice storm onto the target area for 6 sec, dealing {damage} Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Rimeglobe, up to 3 sec per cast. (Frost)',
       ],
       [
         'glacial_spike',
@@ -1601,7 +1601,7 @@ const classAbilityNamesEn = {
       ],
       [
         'revenge',
-        'Riposte',
+        'Comeuppance',
         'Attack in a wide arc, dealing 18 to 24 Physical damage to all enemies in front of you. Above 5 targets the damage is reduced. When you dodge or parry, your next Revenge may cost no rage. (Protection)',
       ],
       [

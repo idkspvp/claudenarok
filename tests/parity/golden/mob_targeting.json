@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "5414f549",
+      "state": "c0fd44e7",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -207,7 +207,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -427,7 +427,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e304683a",
+      "state": "ebd9b1d4",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -603,7 +603,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -823,7 +823,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "348f4bfa",
+      "state": "895a8e30",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -999,7 +999,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -1219,7 +1219,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "d6226eed",
+      "state": "e5ef1de3",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1395,7 +1395,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -1615,7 +1615,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "37a03787",
+      "state": "3fc50a1d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1791,7 +1791,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -2013,7 +2013,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "2ae91a53",
+      "state": "8d93a9f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2189,7 +2189,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -2411,7 +2411,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "3dbcc42c",
+      "state": "d38f2f06",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2587,7 +2587,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -2808,7 +2808,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "6657c2d2",
+      "state": "def36d18",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2984,7 +2984,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -3205,7 +3205,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "d3ef8fb1",
+      "state": "01130a5b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3381,7 +3381,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -3587,7 +3587,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "d3ef8fb1",
+      "state": "01130a5b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3763,7 +3763,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415

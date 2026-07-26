@@ -305,7 +305,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "revenge",
-        "name": "Riposte"
+        "name": "Comeuppance"
       },
       {
         "id": "battle_shout",
@@ -331,7 +331,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "revenge",
-        "name": "Riposte"
+        "name": "Comeuppance"
       },
       {
         "id": "battle_shout",

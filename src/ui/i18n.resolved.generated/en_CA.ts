@@ -1593,8 +1593,8 @@ export const en_CA: EnTranslations = {
       "dmgDoneReduce": "Reduces damage dealt by {pct}%",
       "heatingUp": "Your next consecutive Fire builder critical strike grants Hot Streak; a non-critical builder removes Heating Up",
       "elementalConvergencePrimed": "Your next spell from the other elemental school grants Elemental Convergence",
-      "battleStance": "Battle Stance: 10% more rage generation",
-      "berserkerStance": "Berserker Stance: crits 3% more often and hit 3% harder",
+      "battleStance": "Warring Stance: 10% more rage generation",
+      "berserkerStance": "Reckless Stance: crits 3% more often and hit 3% harder",
       "crit": "Increases critical strike chance by {pct}%",
       "rageGen": "Increases Rage generation by {pct}%",
       "reckless": "Increases critical strike chance by {pct}% and Rage generation by {ragePct}%",
@@ -1604,7 +1604,7 @@ export const en_CA: EnTranslations = {
       "sanguine": "Increases attack speed by {hastePct}% and damage dealt by {dmgPct}%",
       "battleTrance": "Your next Reaver Strike or Brute Swing costs no Rage",
       "revengeFree": "Your next Revenge costs no Rage",
-      "victoryRush": "Victory Rush is ready",
+      "victoryRush": "Killing High is ready",
       "maxHpPct": "Increases maximum health by {pct}%",
       "temporalHourglass": "Immune and unable to act; restores health and accelerates cooldown recovery. Right-click to cancel.",
       "tongues": "Increases casting time by {pct}%",
@@ -7003,7 +7003,7 @@ export const en_CA: EnTranslations = {
       },
       "blizzard": {
         "name": "Blizzard",
-        "description": "Calls an ice storm onto the target area for 6 sec, dealing {damage} Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Frozen Orb, up to 3 sec per cast. (Frost)"
+        "description": "Calls an ice storm onto the target area for 6 sec, dealing {damage} Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Rimeglobe, up to 3 sec per cast. (Frost)"
       },
       "glacial_spike": {
         "name": "Glacial Spike",
@@ -7750,7 +7750,7 @@ export const en_CA: EnTranslations = {
         "description": "A terrifying shout that sends up to 5 enemies within 8 yards fleeing in fear for 8 sec. Damage may break the effect."
       },
       "revenge": {
-        "name": "Riposte",
+        "name": "Comeuppance",
         "description": "Attack in a wide arc, dealing 18 to 24 Physical damage to all enemies in front of you. Above 5 targets the damage is reduced. When you dodge or parry, your next Revenge may cost no rage. (Protection)"
       },
       "heroic_leap": {

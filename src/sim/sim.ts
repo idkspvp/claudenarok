@@ -70,6 +70,7 @@ import { frostMageChannelPulse } from './combat/frost_mage';
 import { type FrozenOrbState, tickFrozenOrbs } from './combat/frozen_orb';
 import {
   applyHeal as applyHealImpl,
+  consumeHealAbsorb as consumeHealAbsorbImpl,
   critVulnBonus as critVulnBonusImpl,
   healingTakenMult as healingTakenMultImpl,
   healingThreat as healingThreatImpl,
@@ -223,6 +224,7 @@ import {
   assignMasterLoot as assignMasterLootImpl,
   lootRollGroupStatus as lootRollGroupStatusImpl,
   type PendingLootRoll,
+  partyLootCandidatesForMob as partyLootCandidatesForMobImpl,
   removePlayerFromLootRolls,
   resolveLootRoll as resolveLootRollImpl,
   rollLoot as rollLootImpl,
@@ -232,7 +234,11 @@ import {
 import { type MailSave, PostOffice } from './mail/post_office';
 import { Market, type MarketListing, type MarketSave } from './market';
 import { defaultMarketQuery, type MarketQuery } from './market_query';
-import { mobCombatProfile as mobCombatProfileFn } from './mob/combat_profile';
+import {
+  mobCombatProfile as mobCombatProfileFn,
+  mobEffectiveMeleeRange as mobEffectiveMeleeRangeFn,
+  tryMobMeleeSwingInRange as tryMobMeleeSwingInRangeFn,
+} from './mob/combat_profile';
 import { NYTHRAXIS_SPIRIT_MENDING_CAST_ID } from './mob/healer_channel';
 import * as lifecycle from './mob/lifecycle';
 import { resetEvadingMob as resetEvadingMobFn, updateMob as updateMobFn } from './mob/locomotion';
@@ -243,7 +249,11 @@ import {
   type MobScanCounters,
   resetMobScanCounters,
 } from './mob/scan_counters';
-import { retargetMob as retargetMobFn } from './mob/targeting';
+import {
+  isTrivialTo as isTrivialToFn,
+  retargetMob as retargetMobFn,
+  updateMobTarget as updateMobTargetFn,
+} from './mob/targeting';
 import { emitMobYell } from './mob/yells';
 import type { MobCombatProfile } from './mob_combat';
 import {
@@ -5853,6 +5863,14 @@ export class Sim {
     retargetMobFn(this.ctx, mob);
   }
 
+  private updateMobTarget(mob: Entity): void {
+    updateMobTargetFn(this.ctx, mob);
+  }
+
+  private isTrivialTo(mob: Entity, player: Entity): boolean {
+    return isTrivialToFn(mob, player);
+  }
+
   // Effective melee reach. Large creatures measure range from their centre, which
   // sits deep inside an oversized body — so a giant (e.g. Nythraxis at scale 3.1)
   // can never close to the flat MELEE_RANGE and barely swings. Scale reach with
@@ -5863,6 +5881,30 @@ export class Sim {
 
   private mobCombatProfile(mob: Entity): MobCombatProfile {
     return mobCombatProfileFn(mob);
+  }
+
+  // The mob melee swing gate (mob/combat_profile.ts). Same thin-delegate reason as
+  // the targeting trio above: the reach rules it enforces are behaviour foreign
+  // callers reach for on the facade, so the seam keeps a named entry point.
+  // The reach a swing actually uses: the profile range, plus the one-yard grace a
+  // mob earns only while it is genuinely pursuing. mobMeleeRange above is the
+  // ungraced profile value, so the two are deliberately distinct entry points.
+  private mobEffectiveMeleeRange(mob: Entity): number {
+    return mobEffectiveMeleeRangeFn(mob);
+  }
+
+  // Loot eligibility and the heal-absorb drain both live in their own modules but
+  // stay reachable on the facade: each is a rule foreign callers assert against.
+  private partyLootCandidatesForMob(mob: Entity): PlayerMeta[] {
+    return partyLootCandidatesForMobImpl(this.ctx, mob);
+  }
+
+  private consumeHealAbsorb(target: Entity, healed: number): number {
+    return consumeHealAbsorbImpl(this.ctx, target, healed);
+  }
+
+  private tryMobMeleeSwingInRange(mob: Entity, target: Entity): boolean {
+    return tryMobMeleeSwingInRangeFn(this.ctx, mob, target);
   }
 
   aggroMob(mob: Entity, target: Entity, social: boolean): void {

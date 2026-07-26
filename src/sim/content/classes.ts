@@ -1180,7 +1180,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   // make the next cast free (the revenge_free proc, applied in mobSwing).
   revenge: {
     id: 'revenge',
-    name: 'Riposte',
+    name: 'Comeuppance',
     class: 'warrior',
     learnLevel: 7,
     specs: ['prot'],
@@ -1635,7 +1635,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Conjures an ice storm at the target area: after a 2 sec cast it rages for 6 sec, dealing 12 to 16 Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Frozen Orb, up to 3 sec per cast. (Frost)',
+      'Conjures an ice storm at the target area: after a 2 sec cast it rages for 6 sec, dealing 12 to 16 Frost damage each second and slowing enemies by 40%. Each enemy struck shaves 0.5 sec off Rimeglobe, up to 3 sec per cast. (Frost)',
   },
   // Frente Glacial: Frost's hold-to-charge cone. The 2.4 sec cast is the
   // authoritative maximum charge clock; releasing earlier selects one of the

@@ -1615,8 +1615,8 @@ export const hudChromeStrings = {
       'Your next consecutive Fire builder critical strike grants Hot Streak; a non-critical builder removes Heating Up',
     elementalConvergencePrimed:
       'Your next spell from the other elemental school grants Elemental Convergence',
-    battleStance: 'Battle Stance: 10% more rage generation',
-    berserkerStance: 'Berserker Stance: crits 3% more often and hit 3% harder',
+    battleStance: 'Warring Stance: 10% more rage generation',
+    berserkerStance: 'Reckless Stance: crits 3% more often and hit 3% harder',
     crit: 'Increases critical strike chance by {pct}%',
     rageGen: 'Increases Rage generation by {pct}%',
     reckless: 'Increases critical strike chance by {pct}% and Rage generation by {ragePct}%',
@@ -1628,7 +1628,7 @@ export const hudChromeStrings = {
     // here; each fill uses its locale's translated names).
     battleTrance: 'Your next Reaver Strike or Brute Swing costs no Rage',
     revengeFree: 'Your next Revenge costs no Rage',
-    victoryRush: 'Victory Rush is ready',
+    victoryRush: 'Killing High is ready',
     maxHpPct: 'Increases maximum health by {pct}%',
     temporalHourglass:
       'Immune and unable to act; restores health and accelerates cooldown recovery. Right-click to cancel.',
