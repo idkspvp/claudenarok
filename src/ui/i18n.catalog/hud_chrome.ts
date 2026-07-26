@@ -1067,6 +1067,18 @@ export const hudChromeStrings = {
     offense: 'Offense',
     defense: 'Defense',
   },
+  // The counters an NPC fronts, listed when one NPC offers more than one. A
+  // station master runs a shop, a training counter, and the unbind service, so
+  // they need naming; every other NPC in the world opens its one servicedirectly.
+  npcServices: {
+    vendor: 'Browse goods',
+    market: 'Open the market',
+    bank: 'Open your strongbox',
+    heroicVendor: 'Spend heroic marks',
+    cardDuel: 'Play a card duel',
+    train: 'Learn a recipe',
+    unbind: "Unbind a maker's mark",
+  },
   // The status-point row on the character sheet: the pool a player has left to
   // place, the per-attribute raise buttons, and the reset that returns them all.
   statusPoints: {

@@ -25,7 +25,9 @@ export interface NearbyInteractionWorld {
 
 export interface NearbyInteractionHud {
   openMailbox(): void;
-  openQuestDialog(npcId: number): void;
+  /** Open whatever counters this NPC fronts. The keyboard path carries no
+   *  screen point, so a multi-service picker centres itself. */
+  openNpcServices(npcId: number, at?: { x: number; y: number }): void;
   openDelveBoard(npcId: number): void;
   showError(text: string): void;
   requestSpiritHealerResurrect(): void;
@@ -152,7 +154,7 @@ export function tryNearbyInteraction(
     } else if (npc.templateId === 'brother_halven' || npc.templateId === 'brother_halven_marsh') {
       hud.openDelveBoard(bestNpc);
     } else {
-      hud.openQuestDialog(bestNpc);
+      hud.openNpcServices(bestNpc);
     }
     return true;
   }

@@ -400,6 +400,7 @@ import { type MobTooltipI18n, type MobTooltipModel, mobTooltipHtml } from './mob
 import { isMobileFullscreenWindowOpen } from './mobile_fullscreen_window_core';
 import { MobileMoreDialogController } from './mobile_more_dialog';
 import { MovableFrame } from './movable_frame';
+import { type NpcServiceId, npcServiceLabelKey, npcServicesFor } from './npc_services_view';
 import { OptionsWindow } from './options_window';
 import { makeWriterFacet, type PainterHostPresentation } from './painter_host';
 import { PartyBelowTargetPainter } from './party_below_target_painter';
@@ -2622,9 +2623,6 @@ export class Hud {
         break;
       case 'loot-window':
         this.closeLoot();
-        break;
-      case 'quest-dialog':
-        this.closeQuestDialog();
         break;
       case 'delve-board':
         this.closeDelveBoard();
@@ -11065,17 +11063,105 @@ export class Hud {
   }
 
   // -------------------------------------------------------------------------
-  // Quest dialog (gossip)
+  // NPC services
   // -------------------------------------------------------------------------
 
-  openQuestDialog(npcId: number): void {}
+  // The one door to every NPC service. It replaced the gossip dialog, which was
+  // that door until the quest system took it, leaving vendors, the bank, the
+  // market, the quartermaster, the Card Master, training, and unbind all
+  // unreachable: talking to an NPC did nothing at all.
+  //
+  // One service opens directly. A menu of one item is a worse door than no menu,
+  // and almost every NPC in the world fronts exactly one thing.
+  openNpcServices(npcId: number, at?: { x: number; y: number }): void {
+    const npc = this.sim.entities.get(npcId);
+    if (!npc?.templateId) return;
+    const def = NPCS[npc.templateId];
+    const services = npcServicesFor(def, {
+      stationMasterIds: new Set(this.sim.stationPlacements.map((s) => s.masterNpcId)),
+      hasBoundItems: this.hasBoundItems(),
+    });
+    if (services.length === 0) {
+      // Not a mistake and not an error toast: plenty of NPCs are scenery with a
+      // line of flavor. Say what they say and leave it there. The greeting goes
+      // through the entity resolver like every other authored NPC string.
+      const player = this.sim.player;
+      if (def && player)
+        this.log(
+          `${entityDisplayName(npc)}: ${npcGreeting(def.id, this.sim.cfg.playerClass, player.name)}`,
+        );
+      return;
+    }
+    if (services.length === 1) {
+      this.runNpcService(services[0], npcId);
+      return;
+    }
+    this.openNpcServiceMenu(npcId, services, at);
+  }
 
-  // Open the read-only quest detail for a chat-link click. Shows Accept only when the
-  // viewer is in the link author's party AND the quest is available; the server
-  // re-validates on accept. Non-party / ineligible viewers see view-only info.
-  openLinkedQuestDialog(questId: string, fromPid?: number): void {}
+  /** The picker for an NPC that fronts several counters. Rides the ONE shared
+   *  context-menu family (#ctx-menu + bindContextMenuActions), so it inherits
+   *  its keyboard stops, placement, and on-screen clamping rather than growing
+   *  a second menu with its own accessibility story. */
+  private openNpcServiceMenu(
+    npcId: number,
+    services: readonly NpcServiceId[],
+    at?: { x: number; y: number },
+  ): void {
+    const npc = this.sim.entities.get(npcId);
+    const el = $('#ctx-menu');
+    let html = `<div class="ctx-title">${esc(npc ? entityDisplayName(npc) : '')}</div>`;
+    for (const service of services) {
+      html += `<div class="ctx-item" data-act="npcsvc:${esc(service)}">${esc(
+        t(npcServiceLabelKey(service) as TranslationKey),
+      )}</div>`;
+    }
+    el.innerHTML = html;
+    el.style.display = 'block';
+    // At the click when there was one; centred when the interact came from the
+    // keyboard, which carries no coordinates.
+    const x = at?.x ?? Math.round(window.innerWidth / 2);
+    const y = at?.y ?? Math.round(window.innerHeight / 2);
+    this.placePopupAt(el, x, y, 190, 80 + services.length * 32);
+    this.keepPopupOnScreen(el);
+    this.bindContextMenuActions((act) => {
+      if (!act.startsWith('npcsvc:')) return;
+      this.runNpcService(act.slice('npcsvc:'.length) as NpcServiceId, npcId);
+    });
+  }
 
-  closeQuestDialog(restoreFocus = true): void {}
+  private runNpcService(service: NpcServiceId, npcId: number): void {
+    switch (service) {
+      case 'vendor':
+        this.openVendor(npcId);
+        return;
+      case 'market':
+        this.openMarket();
+        return;
+      case 'bank':
+        this.openBank();
+        return;
+      case 'heroicVendor':
+        this.openHeroicVendor(npcId);
+        return;
+      case 'cardDuel':
+        this.cardDuelWindow.toggle();
+        return;
+      case 'train':
+        this.openTrain(npcId);
+        return;
+      case 'unbind':
+        this.openUnbind(npcId);
+        return;
+    }
+  }
+
+  /** Does the viewer hold anything a station master could unbind? Drives whether
+   *  the unbind counter is offered at all, so the service never opens empty. */
+  private hasBoundItems(): boolean {
+    for (const slot of this.sim.inventory) if (slot?.instance?.boundTo !== undefined) return true;
+    return false;
+  }
 
   // -------------------------------------------------------------------------
   // Loot window

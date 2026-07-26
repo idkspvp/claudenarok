@@ -1204,6 +1204,15 @@ export const en: EnTranslations = {
       "offense": "Offense",
       "defense": "Defense"
     },
+    "npcServices": {
+      "vendor": "Browse goods",
+      "market": "Open the market",
+      "bank": "Open your strongbox",
+      "heroicVendor": "Spend heroic marks",
+      "cardDuel": "Play a card duel",
+      "train": "Learn a recipe",
+      "unbind": "Unbind a maker's mark"
+    },
     "statusPoints": {
       "remaining": "Status Points: {points}",
       "none": "No status points to place",

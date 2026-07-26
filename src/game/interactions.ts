@@ -30,7 +30,9 @@ export interface PickInteractionWorld {
 
 export interface PickInteractionHud {
   openLoot(mobId: number, screenX: number, screenY: number): void;
-  openQuestDialog(npcId: number): void;
+  /** Open whatever counters this NPC fronts (vendor, bank, training, ...).
+   *  `at` is the click point, so a multi-service picker lands under the cursor. */
+  openNpcServices(npcId: number, at?: { x: number; y: number }): void;
   openDelveBoard(npcId: number): void;
   openMailbox(): void;
   showError(text: string): void;
@@ -238,12 +240,12 @@ export function handlePickedEntity(
           }
         } else if (world.player.dead) {
           // Dead players and ghosts cannot talk to NPCs (the server refuses the
-          // command too); do not open the quest dialog client-side.
+          // command too); do not open anything client-side.
           hud.showError(tSim('error.cantWhileDead'));
           return false;
         } else if (e.templateId === 'brother_halven' || e.templateId === 'brother_halven_marsh')
           hud.openDelveBoard(id);
-        else hud.openQuestDialog(id);
+        else hud.openNpcServices(id, { x: screenX, y: screenY });
         return true;
       }
       hud.showError(t('questUi.errors.tooFar'));
@@ -298,12 +300,12 @@ export function handlePickedEntity(
       // left-click talks too — Mac trackpads make right-click a chore;
       // out of range it just targets (no error spam while exploring)
       const d = dist2d(world.player.pos, e.pos);
-      // No quest dialog while dead (the server refuses quest talk too); a ghost
+      // Nothing opens while dead (the server refuses NPC talk too); a ghost
       // takes the Spirit Healer res via right-click or the death panel button.
       if (d <= INTERACT_RANGE + 2 && !world.player.dead) {
         if (e.templateId === 'brother_halven' || e.templateId === 'brother_halven_marsh')
           hud.openDelveBoard(id);
-        else hud.openQuestDialog(id);
+        else hud.openNpcServices(id, { x: screenX, y: screenY });
         return true;
       }
     }

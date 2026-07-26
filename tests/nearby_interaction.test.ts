@@ -61,7 +61,7 @@ function rig(targets: Entity[] = [], nodes: GatherNodeDef[] = []) {
   };
   const hud = {
     openMailbox: () => calls.push('mailbox'),
-    openQuestDialog: (id: number) => calls.push(`quest:${id}`),
+    openNpcServices: (id: number) => calls.push(`quest:${id}`),
     openDelveBoard: (id: number) => calls.push(`board:${id}`),
     showError: (text: string) => calls.push(`error:${text}`),
     requestSpiritHealerResurrect: () => calls.push('requestResurrect'),

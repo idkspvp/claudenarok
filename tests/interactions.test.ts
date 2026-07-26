@@ -295,12 +295,14 @@ describe('handlePickedEntity', () => {
       targetEntity: () => {},
     } as unknown as Parameters<typeof handlePickedEntity>[0];
     const hud = {
-      openQuestDialog: vi.fn(),
+      openNpcServices: vi.fn(),
       closeContextMenu: () => {},
     } as unknown as Parameters<typeof handlePickedEntity>[1];
 
     expect(handlePickedEntity(world, hud, 2, 0, 10, 20)).toBe(true);
-    expect(hud.openQuestDialog).toHaveBeenCalledWith(2);
+    // The click point rides along so a station master's multi-counter picker
+    // lands under the cursor rather than in the middle of the screen.
+    expect(hud.openNpcServices).toHaveBeenCalledWith(2, { x: 10, y: 20 });
 
     npc.pos = { x: 99, y: 0, z: 0 };
     expect(handlePickedEntity(world, hud, 2, 0, 10, 20)).toBe(false);
@@ -539,7 +541,7 @@ describe('handlePickedEntity', () => {
     };
     const hud = {
       openLoot: () => {},
-      openQuestDialog: () => {},
+      openNpcServices: () => {},
       openDelveBoard: () => {},
       openMailbox: () => {},
       showError: () => {},
@@ -579,7 +581,7 @@ describe('handlePickedEntity', () => {
     };
     const hud = {
       openLoot: () => {},
-      openQuestDialog: () => {},
+      openNpcServices: () => {},
       openDelveBoard: () => {},
       openMailbox: () => {},
       showError: () => {},
@@ -626,7 +628,7 @@ describe('handlePickedEntity while dead (the ghost/death loop)', () => {
     };
     const hud = {
       openLoot: () => calls.push('openLoot'),
-      openQuestDialog: () => calls.push('openQuestDialog'),
+      openNpcServices: () => calls.push('openNpcServices'),
       openDelveBoard: () => calls.push('openDelveBoard'),
       openMailbox: () => calls.push('openMailbox'),
       showError: () => calls.push('showError'),
@@ -642,7 +644,7 @@ describe('handlePickedEntity while dead (the ghost/death loop)', () => {
   it('a ghost right-clicking a quest NPC does not open the quest dialog', () => {
     const { world, hud, calls } = rig({ dead: true, ghost: true }, questNpc());
     expect(handlePickedEntity(world, hud, 2, 2, 10, 20)).toBe(false);
-    expect(calls).not.toContain('openQuestDialog');
+    expect(calls).not.toContain('openNpcServices');
     expect(calls).not.toContain('openDelveBoard');
     expect(calls).toContain('showError');
   });
@@ -650,14 +652,14 @@ describe('handlePickedEntity while dead (the ghost/death loop)', () => {
   it('a ghost left-clicking a quest NPC does not open the quest dialog', () => {
     const { world, hud, calls } = rig({ dead: true, ghost: true }, questNpc());
     expect(handlePickedEntity(world, hud, 2, 0, 10, 20)).toBe(false);
-    expect(calls).not.toContain('openQuestDialog');
+    expect(calls).not.toContain('openNpcServices');
     expect(calls).not.toContain('openDelveBoard');
   });
 
   it('a dead-unreleased player clicking a quest NPC does not open the quest dialog', () => {
     const { world, hud, calls } = rig({ dead: true, ghost: false }, questNpc());
     expect(handlePickedEntity(world, hud, 2, 2, 10, 20)).toBe(false);
-    expect(calls).not.toContain('openQuestDialog');
+    expect(calls).not.toContain('openNpcServices');
   });
 
   it('a ghost clicking a dungeon door does not dispatch a no-op interaction', () => {
@@ -701,7 +703,7 @@ describe('handlePickedEntity while dead (the ghost/death loop)', () => {
     // it must never send the resurrect command directly.
     expect(calls).toContain('requestSpiritHealerResurrect');
     expect(calls).not.toContain('resurrectAtSpiritHealer');
-    expect(calls).not.toContain('openQuestDialog');
+    expect(calls).not.toContain('openNpcServices');
   });
 
   it('a ghost clicking a mailbox does not open it', () => {
@@ -722,7 +724,7 @@ describe('handlePickedEntity while dead (the ghost/death loop)', () => {
   it('an alive player clicking a quest NPC still opens the quest dialog', () => {
     const { world, hud, calls } = rig({}, questNpc());
     expect(handlePickedEntity(world, hud, 2, 2, 10, 20)).toBe(true);
-    expect(calls).toContain('openQuestDialog');
+    expect(calls).toContain('openNpcServices');
   });
 });
 

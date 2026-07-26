@@ -1204,6 +1204,15 @@ export const en_XA: EnTranslations = {
       "offense": "[Óƒƒéñšé]",
       "defense": "[Ðéƒéñšé]"
     },
+    "npcServices": {
+      "vendor": "[Ɓŕóŵšé ĝóóðš]",
+      "market": "[Óþéñ ţĥé ɱáŕķéţ]",
+      "bank": "[Óþéñ ýóúŕ šţŕóñĝƀóẋ]",
+      "heroicVendor": "[Šþéñð ĥéŕóíç ɱáŕķš]",
+      "cardDuel": "[Þļáý á çáŕð ðúéļ]",
+      "train": "[Ļéáŕñ á ŕéçíþé]",
+      "unbind": "[Úñƀíñð á ɱáķéŕ'š ɱáŕķ]"
+    },
     "statusPoints": {
       "remaining": "[Šţáţúš Þóíñţš: {points}]",
       "none": "[Ñó šţáţúš þóíñţš ţó þļáçé]",
