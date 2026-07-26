@@ -9,14 +9,14 @@
     "victory rush on-kill window + selfHealPctMax",
     "bladestorm self-centered channel ticks"
   ],
-  "draws": 459,
-  "drawDigest": "0ebea550",
+  "draws": 461,
+  "drawDigest": "6deb577c",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0ec9c7e5",
+      "state": "3fce2ee1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -72,6 +72,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 8,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -81,7 +88,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 10,
           "auras": [
             {
               "duration": 3600,
@@ -97,17 +104,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.022,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -126,14 +133,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 20,
-            "armor": 144,
-            "int": 10,
-            "spi": 11,
-            "sta": 23,
-            "str": 23
+            "agi": 4,
+            "armor": 122,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -148,7 +156,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "858ab33f",
+      "state": "c904bb9a",
       "events": "42764e8f",
       "rng": {
         "draws": 0,
@@ -159,7 +167,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "9c55f703",
+      "state": "8e6748ce",
       "events": "5c687645",
       "rng": {
         "draws": 2,
@@ -170,7 +178,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "fdf78fc9",
+      "state": "48b862a6",
       "events": "3e99d104",
       "rng": {
         "draws": 2,
@@ -282,6 +290,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 230,
+          "statAllocation": {
+            "agi": 36,
+            "dex": 52,
+            "luk": 21,
+            "str": 87,
+            "vit": 70
+          },
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -314,7 +329,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 438,
+          "attackPower": 166,
           "auras": [
             {
               "duration": 3600,
@@ -343,9 +358,9 @@
               14.6
             ]
           ],
-          "critChance": 0.109,
+          "critChance": 0.076,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.109,
+          "dodgeChance": 0.121,
           "facing": 1.570796,
           "fallStartY": -3.015092,
           "fiveSecondRule": 99.4,
@@ -375,14 +390,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 118,
-            "armor": 1516,
-            "int": 10,
-            "spi": 11,
-            "sta": 219,
-            "str": 219
+            "agi": 37,
+            "armor": 1424,
+            "dex": 53,
+            "int": 1,
+            "luk": 22,
+            "str": 88,
+            "vit": 72
           },
           "targetId": 417,
           "templateId": "warrior",
@@ -529,7 +545,7 @@
       "tick": 12,
       "time": 0.6,
       "nextId": 418,
-      "state": "ed919d7c",
+      "state": "23b46839",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -540,7 +556,7 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "7c452984",
+      "state": "ec6f3523",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -551,7 +567,7 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "02969054",
+      "state": "22849dc5",
       "events": "ee63b6c3",
       "rng": {
         "draws": 5,
@@ -663,6 +679,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 230,
+          "statAllocation": {
+            "agi": 36,
+            "dex": 52,
+            "luk": 21,
+            "str": 87,
+            "vit": 70
+          },
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -695,7 +718,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 438,
+          "attackPower": 166,
           "auras": [
             {
               "duration": 3600,
@@ -728,9 +751,9 @@
               120
             ]
           ],
-          "critChance": 0.109,
+          "critChance": 0.076,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.109,
+          "dodgeChance": 0.121,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 99.8,
@@ -761,14 +784,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 118,
-            "armor": 1516,
-            "int": 10,
-            "spi": 11,
-            "sta": 219,
-            "str": 219
+            "agi": 37,
+            "armor": 1424,
+            "dex": 53,
+            "int": 1,
+            "luk": 22,
+            "str": 88,
+            "vit": 72
           },
           "targetId": 417,
           "templateId": "warrior",
@@ -940,8 +964,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "40d8bc3a",
-      "events": "ee5d4088",
+      "state": "ec23873e",
+      "events": "932c9f94",
       "rng": {
         "draws": 9,
         "digest": "88aac2f9"
@@ -951,7 +975,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 418,
-      "state": "77b89803",
+      "state": "4be15b07",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -962,8 +986,8 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 420,
-      "state": "da6e4628",
-      "events": "5fb1414e",
+      "state": "ac271dbe",
+      "events": "2da99f6d",
       "rng": {
         "draws": 18,
         "digest": "e122dc22"
@@ -986,14 +1010,14 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1195,
+            "damageDealt": 1291,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1195,
+              "damageDealt": 1291,
               "kills": 1
             },
             "dungeonClears": {},
@@ -1083,6 +1107,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 230,
+          "statAllocation": {
+            "agi": 36,
+            "dex": 52,
+            "luk": 21,
+            "str": 87,
+            "vit": 70
+          },
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -1115,7 +1146,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 438,
+          "attackPower": 166,
           "auras": [
             {
               "duration": 3600,
@@ -1141,20 +1172,20 @@
               119.6
             ]
           ],
-          "critChance": 0.109,
+          "critChance": 0.076,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.109,
+          "dodgeChance": 0.121,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 100.2,
           "gcdRemaining": 1.5,
-          "hp": 3059,
+          "hp": 4429,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 3824,
+          "maxHp": 5537,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1167,21 +1198,22 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 51.277742,
+          "resource": 52.236048,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 118,
-            "armor": 1516,
-            "int": 10,
-            "spi": 11,
-            "sta": 219,
-            "str": 219
+            "agi": 37,
+            "armor": 1424,
+            "dex": 53,
+            "int": 1,
+            "luk": 22,
+            "str": 88,
+            "vit": 72
           },
           "swingTimer": 1.65,
           "targetId": 419,
@@ -1263,7 +1295,7 @@
           "threat": [
             [
               415,
-              106.625
+              149.375
             ]
           ],
           "weapon": {
@@ -1287,7 +1319,7 @@
             },
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1536,
+              "breakThreshold": 1488,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -1318,7 +1350,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7936,
+          "hp": 7888,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -1354,7 +1386,7 @@
           "threat": [
             [
               415,
-              171.625
+              262.375
             ]
           ],
           "weapon": {
@@ -1429,7 +1461,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8923,
+          "hp": 8875,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -1464,7 +1496,7 @@
           "threat": [
             [
               415,
-              173.625
+              264.375
             ]
           ],
           "weapon": {
@@ -1479,7 +1511,7 @@
       "tick": 28,
       "time": 1.4,
       "nextId": 420,
-      "state": "e14894dc",
+      "state": "9869e9b3",
       "events": "2118b121",
       "rng": {
         "draws": 19,
@@ -1490,7 +1522,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 420,
-      "state": "31a1357c",
+      "state": "d812509b",
       "events": "741638a5",
       "rng": {
         "draws": 19,
@@ -1501,7 +1533,7 @@
       "tick": 36,
       "time": 1.8,
       "nextId": 420,
-      "state": "292f5c3d",
+      "state": "68f0fff8",
       "events": "741638a5",
       "rng": {
         "draws": 19,
@@ -1512,7 +1544,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "4d521b01",
+      "state": "0dcaded2",
       "events": "741638a5",
       "rng": {
         "draws": 19,
@@ -1523,8 +1555,8 @@
       "tick": 44,
       "time": 2.2,
       "nextId": 420,
-      "state": "f9861418",
-      "events": "16f101c1",
+      "state": "4a55b8b4",
+      "events": "e188aa04",
       "rng": {
         "draws": 35,
         "digest": "c36f580d"
@@ -1534,7 +1566,7 @@
       "tick": 48,
       "time": 2.4,
       "nextId": 420,
-      "state": "7520075d",
+      "state": "e194f089",
       "events": "741638a5",
       "rng": {
         "draws": 53,
@@ -1545,7 +1577,7 @@
       "tick": 52,
       "time": 2.6,
       "nextId": 420,
-      "state": "ec842e27",
+      "state": "aa8420bb",
       "events": "741638a5",
       "rng": {
         "draws": 63,
@@ -1556,7 +1588,7 @@
       "tick": 56,
       "time": 2.8,
       "nextId": 420,
-      "state": "1da61b66",
+      "state": "ca27aee2",
       "events": "741638a5",
       "rng": {
         "draws": 77,
@@ -1567,7 +1599,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "b58c89f9",
+      "state": "44dd69f5",
       "events": "741638a5",
       "rng": {
         "draws": 94,
@@ -1578,8 +1610,8 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 420,
-      "state": "9fc107c3",
-      "events": "4c510cfc",
+      "state": "b265431f",
+      "events": "7317b51a",
       "rng": {
         "draws": 122,
         "digest": "c8b26db2"
@@ -1589,8 +1621,8 @@
       "tick": 68,
       "time": 3.4,
       "nextId": 420,
-      "state": "c0f398e1",
-      "events": "83e90224",
+      "state": "92c022e1",
+      "events": "7b84fcf0",
       "rng": {
         "draws": 139,
         "digest": "70f7a704"
@@ -1600,7 +1632,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 420,
-      "state": "8ca286f7",
+      "state": "74dabf61",
       "events": "741638a5",
       "rng": {
         "draws": 154,
@@ -1611,7 +1643,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 420,
-      "state": "bf03972a",
+      "state": "d1cea300",
       "events": "741638a5",
       "rng": {
         "draws": 171,
@@ -1622,7 +1654,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "2ac0e8a5",
+      "state": "e7aff05b",
       "events": "741638a5",
       "rng": {
         "draws": 185,
@@ -1633,8 +1665,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 420,
-      "state": "ac10ee90",
-      "events": "9f9abe12",
+      "state": "1de30ad7",
+      "events": "987b26cf",
       "rng": {
         "draws": 194,
         "digest": "6d726594"
@@ -1644,7 +1676,7 @@
       "tick": 88,
       "time": 4.4,
       "nextId": 420,
-      "state": "8a426091",
+      "state": "b498031e",
       "events": "741638a5",
       "rng": {
         "draws": 219,
@@ -1655,7 +1687,7 @@
       "tick": 92,
       "time": 4.6,
       "nextId": 420,
-      "state": "43e84bd4",
+      "state": "e4d04203",
       "events": "741638a5",
       "rng": {
         "draws": 251,
@@ -1666,7 +1698,7 @@
       "tick": 96,
       "time": 4.8,
       "nextId": 420,
-      "state": "2dd2806c",
+      "state": "41a4bdb2",
       "events": "7b84fcf0",
       "rng": {
         "draws": 280,
@@ -1677,7 +1709,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "f934a107",
+      "state": "1a5a2f27",
       "events": "741638a5",
       "rng": {
         "draws": 301,
@@ -1688,8 +1720,8 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 420,
-      "state": "c76af9d1",
-      "events": "305a0fc2",
+      "state": "48e27dd7",
+      "events": "38881db7",
       "rng": {
         "draws": 316,
         "digest": "9a65d9e2"
@@ -1699,7 +1731,7 @@
       "tick": 108,
       "time": 5.4,
       "nextId": 420,
-      "state": "f60c2301",
+      "state": "80fd789d",
       "events": "741638a5",
       "rng": {
         "draws": 337,
@@ -1710,7 +1742,7 @@
       "tick": 112,
       "time": 5.6,
       "nextId": 420,
-      "state": "0ab811eb",
+      "state": "ea71c197",
       "events": "741638a5",
       "rng": {
         "draws": 369,
@@ -1721,7 +1753,7 @@
       "tick": 116,
       "time": 5.8,
       "nextId": 420,
-      "state": "73e765f1",
+      "state": "dc25cd65",
       "events": "741638a5",
       "rng": {
         "draws": 399,
@@ -1732,7 +1764,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "2322b267",
+      "state": "65ae3297",
       "events": "741638a5",
       "rng": {
         "draws": 412,
@@ -1743,7 +1775,7 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "9d02ea08",
+      "state": "888c269a",
       "events": "741638a5",
       "rng": {
         "draws": 434,
@@ -1754,7 +1786,7 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "9d02ea08",
+      "state": "888c269a",
       "events": "741638a5",
       "rng": {
         "draws": 434,
@@ -1778,15 +1810,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1436,
-            "damageTaken": 6,
+            "damageDealt": 1462,
+            "damageTaken": 10,
             "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1436,
+              "damageDealt": 1462,
               "kills": 2
             },
             "dungeonClears": {},
@@ -1880,6 +1912,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 235,
+          "statAllocation": {
+            "agi": 36,
+            "dex": 52,
+            "luk": 21,
+            "str": 87,
+            "vit": 70
+          },
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -1912,7 +1951,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 438,
+          "attackPower": 166,
           "auras": [
             {
               "duration": 3600,
@@ -1955,19 +1994,19 @@
               114.6
             ]
           ],
-          "critChance": 0.109,
+          "critChance": 0.076,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.109,
+          "dodgeChance": 0.121,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 105.2,
-          "hp": 3053,
+          "hp": 4419,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 3824,
+          "maxHp": 5537,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1980,21 +2019,22 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 75.825,
+          "resource": 76.375,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 118,
-            "armor": 1516,
-            "int": 10,
-            "spi": 11,
-            "sta": 219,
-            "str": 219
+            "agi": 37,
+            "armor": 1424,
+            "dex": 53,
+            "int": 1,
+            "luk": 22,
+            "str": 88,
+            "vit": 72
           },
           "targetId": 419,
           "templateId": "warrior",
@@ -2010,7 +2050,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1568,
+              "breakThreshold": 1578,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2041,7 +2081,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7968,
+          "hp": 7978,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -2076,7 +2116,7 @@
           "threat": [
             [
               415,
-              138.625
+              171.375
             ]
           ],
           "weapon": {
@@ -2091,7 +2131,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1536,
+              "breakThreshold": 1488,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2122,7 +2162,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7936,
+          "hp": 7888,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -2158,7 +2198,7 @@
           "threat": [
             [
               415,
-              171.625
+              262.375
             ]
           ],
           "weapon": {
@@ -2247,7 +2287,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8784,
+          "hp": 8776,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -2283,7 +2323,7 @@
           "threat": [
             [
               415,
-              312.625
+              363.375
             ]
           ],
           "weapon": {
@@ -2298,22 +2338,22 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "4759c486",
-      "events": "244d6cff",
+      "state": "07bdf852",
+      "events": "83e90224",
       "rng": {
-        "draws": 459,
-        "digest": "0ebea550"
+        "draws": 461,
+        "digest": "6deb577c"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "4759c486",
+      "state": "07bdf852",
       "events": "741638a5",
       "rng": {
-        "draws": 459,
-        "digest": "0ebea550"
+        "draws": 461,
+        "digest": "6deb577c"
       },
       "label": "final",
       "players": [
@@ -2333,15 +2373,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1436,
-            "damageTaken": 6,
+            "damageDealt": 1462,
+            "damageTaken": 11,
             "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1436,
+              "damageDealt": 1462,
               "kills": 2
             },
             "dungeonClears": {},
@@ -2435,6 +2475,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 235,
+          "statAllocation": {
+            "agi": 36,
+            "dex": 52,
+            "luk": 21,
+            "str": 87,
+            "vit": 70
+          },
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -2467,7 +2514,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 438,
+          "attackPower": 166,
           "auras": [
             {
               "duration": 3600,
@@ -2494,7 +2541,7 @@
           "channelTickEvery": 1,
           "channelTickTimer": 1,
           "chargeTimeLeft": 2.55,
-          "combatTimer": 1.25,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "cooldowns": [
             [
@@ -2510,19 +2557,19 @@
               114.4
             ]
           ],
-          "critChance": 0.109,
+          "critChance": 0.076,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.109,
+          "dodgeChance": 0.121,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 105.4,
-          "hp": 3053,
+          "hp": 4418,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 3824,
+          "maxHp": 5537,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2535,21 +2582,22 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 75.825,
+          "resource": 76.5125,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 118,
-            "armor": 1516,
-            "int": 10,
-            "spi": 11,
-            "sta": 219,
-            "str": 219
+            "agi": 37,
+            "armor": 1424,
+            "dex": 53,
+            "int": 1,
+            "luk": 22,
+            "str": 88,
+            "vit": 72
           },
           "targetId": 419,
           "templateId": "warrior",
@@ -2565,7 +2613,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1568,
+              "breakThreshold": 1578,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2596,7 +2644,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7968,
+          "hp": 7978,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -2631,7 +2679,7 @@
           "threat": [
             [
               415,
-              138.625
+              171.375
             ]
           ],
           "weapon": {
@@ -2646,7 +2694,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1536,
+              "breakThreshold": 1488,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2677,7 +2725,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7936,
+          "hp": 7888,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -2713,7 +2761,7 @@
           "threat": [
             [
               415,
-              171.625
+              262.375
             ]
           ],
           "weapon": {
@@ -2793,7 +2841,7 @@
               "value": 1.3
             }
           ],
-          "combatTimer": 1.25,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -2802,7 +2850,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8784,
+          "hp": 8776,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -2838,7 +2886,7 @@
           "threat": [
             [
               415,
-              312.625
+              363.375
             ]
           ],
           "weapon": {

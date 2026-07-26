@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0ec9c7e5",
+      "state": "3fce2ee1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -72,6 +72,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 8,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -81,7 +88,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 10,
           "auras": [
             {
               "duration": 3600,
@@ -97,17 +104,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.022,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -126,14 +133,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 20,
-            "armor": 144,
-            "int": 10,
-            "spi": 11,
-            "sta": 23,
-            "str": 23
+            "agi": 4,
+            "armor": 122,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -148,7 +156,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "b0733613",
+      "state": "7349c9a5",
       "events": "0180c56c",
       "rng": {
         "draws": 7,
@@ -159,7 +167,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "28407fd3",
+      "state": "e097d341",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -170,7 +178,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "0a08985d",
+      "state": "f47cc97d",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -181,7 +189,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "c4905d42",
+      "state": "5d5eb380",
       "events": "fcb0555f",
       "rng": {
         "draws": 7,
@@ -192,7 +200,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "1fa387d2",
+      "state": "8d61e348",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -203,7 +211,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "557ef805",
+      "state": "dd5a1d97",
       "events": "a3319371",
       "rng": {
         "draws": 10,
@@ -214,7 +222,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "4509fe1b",
+      "state": "58d95193",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -225,7 +233,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "56593b87",
+      "state": "d26567f7",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -236,7 +244,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "56593b87",
+      "state": "d26567f7",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -306,6 +314,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
+          },
           "talents": {
             "rows": {}
           },
@@ -315,7 +330,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 70,
+          "attackPower": 14,
           "auras": [
             {
               "duration": 3600,
@@ -331,9 +346,9 @@
           "blockValue": 6,
           "combatTimer": 101,
           "comboUntil": -1,
-          "critChance": 0.063,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.063,
+          "dodgeChance": 0.025,
           "fiveSecondRule": 101,
           "hp": 50000,
           "id": 415,
@@ -359,14 +374,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 26,
-            "armor": 228,
-            "int": 10,
-            "spi": 11,
-            "sta": 35,
-            "str": 35
+            "agi": 5,
+            "armor": 198,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 12,
+            "vit": 11
           },
           "targetId": 421,
           "templateId": "warrior",
@@ -478,7 +494,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 425,
-      "state": "a448f884",
+      "state": "c17ab7d2",
       "events": "77392800",
       "rng": {
         "draws": 12,
@@ -548,6 +564,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
+          },
           "talents": {
             "rows": {}
           },
@@ -557,7 +580,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 70,
+          "attackPower": 14,
           "auras": [
             {
               "duration": 3600,
@@ -573,9 +596,9 @@
           "blockValue": 6,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.063,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.063,
+          "dodgeChance": 0.025,
           "fallStartY": 55.720563,
           "fiveSecondRule": 101.05,
           "hp": 29000,
@@ -602,14 +625,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 26,
-            "armor": 228,
-            "int": 10,
-            "spi": 11,
-            "sta": 35,
-            "str": 35
+            "agi": 5,
+            "armor": 198,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 12,
+            "vit": 11
           },
           "targetId": 421,
           "templateId": "warrior",
@@ -721,7 +745,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "d8b6145e",
+      "state": "079e1f82",
       "events": "741638a5",
       "rng": {
         "draws": 12,
@@ -732,7 +756,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 425,
-      "state": "26c5f041",
+      "state": "af35c36f",
       "events": "741638a5",
       "rng": {
         "draws": 12,
@@ -802,6 +826,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
+          },
           "talents": {
             "rows": {}
           },
@@ -811,7 +842,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 70,
+          "attackPower": 14,
           "auras": [
             {
               "duration": 3600,
@@ -827,9 +858,9 @@
           "blockValue": 6,
           "combatTimer": 101.45,
           "comboUntil": -1,
-          "critChance": 0.063,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.063,
+          "dodgeChance": 0.025,
           "fallStartY": 55.2043,
           "fiveSecondRule": 101.45,
           "hp": 29000,
@@ -855,14 +886,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 26,
-            "armor": 228,
-            "int": 10,
-            "spi": 11,
-            "sta": 35,
-            "str": 35
+            "agi": 5,
+            "armor": 198,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 12,
+            "vit": 11
           },
           "templateId": "warrior",
           "weapon": {
@@ -918,7 +950,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "18bd45b9",
+      "state": "004da0a5",
       "events": "741638a5",
       "rng": {
         "draws": 12,
@@ -929,7 +961,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "beaddd4e",
+      "state": "455d8bd0",
       "events": "741638a5",
       "rng": {
         "draws": 12,
@@ -999,6 +1031,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
+          },
           "talents": {
             "rows": {}
           },
@@ -1008,7 +1047,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 70,
+          "attackPower": 14,
           "auras": [
             {
               "duration": 3600,
@@ -1024,9 +1063,9 @@
           "blockValue": 6,
           "combatTimer": 101.55,
           "comboUntil": -1,
-          "critChance": 0.063,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.063,
+          "dodgeChance": 0.025,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
           "hp": 29000,
@@ -1052,14 +1091,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 26,
-            "armor": 228,
-            "int": 10,
-            "spi": 11,
-            "sta": 35,
-            "str": 35
+            "agi": 5,
+            "armor": 198,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 12,
+            "vit": 11
           },
           "templateId": "warrior",
           "weapon": {
@@ -1116,7 +1156,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "beaddd4e",
+      "state": "455d8bd0",
       "events": "741638a5",
       "rng": {
         "draws": 12,
@@ -1186,6 +1226,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
+          },
           "talents": {
             "rows": {}
           },
@@ -1195,7 +1242,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 70,
+          "attackPower": 14,
           "auras": [
             {
               "duration": 3600,
@@ -1211,9 +1258,9 @@
           "blockValue": 6,
           "combatTimer": 101.55,
           "comboUntil": -1,
-          "critChance": 0.063,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.063,
+          "dodgeChance": 0.025,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
           "hp": 29000,
@@ -1239,14 +1286,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 26,
-            "armor": 228,
-            "int": 10,
-            "spi": 11,
-            "sta": 35,
-            "str": 35
+            "agi": 5,
+            "armor": 198,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 12,
+            "vit": 11
           },
           "templateId": "warrior",
           "weapon": {

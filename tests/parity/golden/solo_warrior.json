@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0ec9c7e5",
+      "state": "3fce2ee1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -73,6 +73,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 8,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -82,7 +89,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 10,
           "auras": [
             {
               "duration": 3600,
@@ -98,17 +105,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.022,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -127,14 +134,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 20,
-            "armor": 144,
-            "int": 10,
-            "spi": 11,
-            "sta": 23,
-            "str": 23
+            "agi": 4,
+            "armor": 122,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -149,8 +157,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "52ad5b28",
-      "events": "dcbab560",
+      "state": "fec774f0",
+      "events": "b4ab04ea",
       "rng": {
         "draws": 7,
         "digest": "101398c0"
@@ -160,7 +168,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "63d00c7c",
+      "state": "a169563a",
       "events": "741638a5",
       "rng": {
         "draws": 7,
@@ -171,8 +179,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "8cc992e8",
-      "events": "0025cdf4",
+      "state": "755dd7a8",
+      "events": "05f2185b",
       "rng": {
         "draws": 98,
         "digest": "92f0a886"
@@ -182,7 +190,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "0ce0080e",
+      "state": "15e46e7c",
       "events": "f740fdd2",
       "rng": {
         "draws": 154,
@@ -206,15 +214,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7073,
-            "damageTaken": 3,
+            "damageDealt": 7071,
+            "damageTaken": 4,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7073,
+              "damageDealt": 7071,
               "kills": 1
             },
             "dungeonClears": {},
@@ -264,6 +272,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 5,
+            "dex": 7,
+            "luk": 2,
+            "str": 13,
+            "vit": 10
+          },
           "talents": {
             "rows": {}
           },
@@ -273,7 +288,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 82,
+          "attackPower": 16,
           "auras": [
             {
               "duration": 3600,
@@ -288,13 +303,13 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.0645,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0645,
+          "dodgeChance": 0.028,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "hp": 49997,
+          "hp": 49996,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -320,14 +335,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 29,
-            "armor": 270,
-            "int": 10,
-            "spi": 11,
-            "sta": 41,
-            "str": 41
+            "agi": 6,
+            "armor": 236,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 14,
+            "vit": 12
           },
           "swingTimer": 0.45,
           "targetId": 416,
@@ -403,7 +419,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "61b04bcd",
+      "state": "d0b2a77d",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 172,
@@ -427,15 +443,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7073,
-            "damageTaken": 3,
+            "damageDealt": 7071,
+            "damageTaken": 4,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7073,
+              "damageDealt": 7071,
               "kills": 1
             },
             "dungeonClears": {},
@@ -489,6 +505,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 25,
+          "statAllocation": {
+            "agi": 5,
+            "dex": 7,
+            "luk": 2,
+            "str": 13,
+            "vit": 10
+          },
           "talents": {
             "rows": {}
           },
@@ -498,7 +521,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 82,
+          "attackPower": 16,
           "auras": [
             {
               "duration": 3600,
@@ -514,13 +537,13 @@
           "blockValue": 6,
           "combatTimer": 0.2,
           "comboUntil": -1,
-          "critChance": 0.0645,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0645,
+          "dodgeChance": 0.028,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.8,
-          "hp": 49997,
+          "hp": 49996,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -546,14 +569,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 29,
-            "armor": 270,
-            "int": 10,
-            "spi": 11,
-            "sta": 41,
-            "str": 41
+            "agi": 6,
+            "armor": 236,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 14,
+            "vit": 12
           },
           "swingTimer": 0.25,
           "targetId": 416,

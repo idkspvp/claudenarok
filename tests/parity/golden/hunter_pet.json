@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "7642597e",
+      "state": "827e701a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -74,6 +74,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 7,
+            "dex": 9,
+            "int": 1,
+            "luk": 1,
+            "str": 3,
+            "vit": 3
+          },
           "talents": {
             "rows": {}
           },
@@ -83,12 +91,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 39,
+          "attackPower": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0625,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0625,
+          "dodgeChance": 0.034,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
@@ -108,7 +116,7 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "rangedPower": 50,
+          "rangedPower": 11,
           "resource": 93,
           "resourceType": "mana",
           "spawnPos": {
@@ -116,14 +124,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 7,
+          "spellPower": 2,
           "stats": {
-            "agi": 25,
-            "armor": 109,
-            "int": 13,
-            "spi": 14,
-            "sta": 19,
-            "str": 14
+            "agi": 8,
+            "armor": 67,
+            "dex": 10,
+            "int": 2,
+            "luk": 2,
+            "str": 4,
+            "vit": 4
           },
           "templateId": "hunter",
           "weapon": {
@@ -138,8 +147,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "06e72c82",
-      "events": "28d2141c",
+      "state": "1f5af3c4",
+      "events": "58d279cf",
       "rng": {
         "draws": 10,
         "digest": "3a534bbe"
@@ -149,7 +158,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "748cf579",
+      "state": "7adbbb0f",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -160,8 +169,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "140afd91",
-      "events": "16c09823",
+      "state": "70b45939",
+      "events": "b4a46250",
       "rng": {
         "draws": 105,
         "digest": "aeef14bf"
@@ -171,7 +180,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "f1c4ace6",
+      "state": "1019778c",
       "events": "741638a5",
       "rng": {
         "draws": 202,
@@ -182,8 +191,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "f2fee79b",
-      "events": "b4893bed",
+      "state": "bf705c8a",
+      "events": "4a8422ac",
       "rng": {
         "draws": 303,
         "digest": "15399310"
@@ -193,7 +202,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "a2295748",
+      "state": "c09365f3",
       "events": "741638a5",
       "rng": {
         "draws": 406,
@@ -204,7 +213,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "a2295748",
+      "state": "c09365f3",
       "events": "741638a5",
       "rng": {
         "draws": 406,
@@ -228,14 +237,14 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 48,
+            "damageDealt": 32,
             "damageTaken": 53
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 48
+              "damageDealt": 32
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -287,6 +296,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 14,
+            "int": 2,
+            "luk": 2,
+            "str": 6,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -296,13 +313,13 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 83,
+          "attackPower": 10,
           "autoAttack": true,
           "combatTimer": 1.35,
           "comboUntil": -1,
-          "critChance": 0.079,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.079,
+          "dodgeChance": 0.049,
           "fallStartY": 1.5,
           "fiveSecondRule": 105,
           "hp": 49947,
@@ -312,7 +329,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 358,
+          "maxResource": 388,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -323,22 +340,23 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "rangedPower": 116,
-          "resource": 358,
+          "rangedPower": 17,
+          "resource": 388,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
+          "spellPower": 3,
           "stats": {
-            "agi": 58,
-            "armor": 263,
-            "int": 24,
-            "spi": 25,
-            "sta": 41,
-            "str": 25
+            "agi": 13,
+            "armor": 159,
+            "dex": 15,
+            "int": 3,
+            "luk": 3,
+            "str": 7,
+            "vit": 6
           },
           "swingTimer": 0.9,
           "targetId": 417,
@@ -406,7 +424,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 49905,
+          "hp": 49921,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -443,7 +461,7 @@
           "threat": [
             [
               415,
-              48
+              32
             ],
             [
               416,

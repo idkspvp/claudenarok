@@ -9,14 +9,14 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:warrior"
   ],
-  "draws": 71,
-  "drawDigest": "60069de6",
+  "draws": 74,
+  "drawDigest": "81422271",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0ec9c7e5",
+      "state": "3fce2ee1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -72,6 +72,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 8,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -81,7 +88,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 10,
           "auras": [
             {
               "duration": 3600,
@@ -97,17 +104,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.022,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -126,14 +133,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 20,
-            "armor": 144,
-            "int": 10,
-            "spi": 11,
-            "sta": 23,
-            "str": 23
+            "agi": 4,
+            "armor": 122,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -148,8 +156,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "9deb0c25",
-      "events": "d00e7413",
+      "state": "55fd0199",
+      "events": "9d919df8",
       "rng": {
         "draws": 14,
         "digest": "97283cfb"
@@ -159,22 +167,22 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "96494158",
-      "events": "2ab30f36",
+      "state": "175b3c8d",
+      "events": "eaa8d36f",
       "rng": {
-        "draws": 28,
-        "digest": "9c413583"
+        "draws": 31,
+        "digest": "87048847"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "89409fcb",
-      "events": "3363be73",
+      "state": "c5ae0e72",
+      "events": "30acd8bb",
       "rng": {
-        "draws": 57,
-        "digest": "390c5ea3"
+        "draws": 60,
+        "digest": "fb86ef2e"
       },
       "label": "taunt",
       "players": [
@@ -195,7 +203,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 190
+            "damageTaken": 230
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -250,6 +258,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 6,
+            "dex": 8,
+            "luk": 2,
+            "str": 15,
+            "vit": 12
+          },
           "talents": {
             "rows": {}
           },
@@ -259,7 +274,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 94,
+          "attackPower": 18,
           "auras": [
             {
               "duration": 3600,
@@ -292,18 +307,18 @@
               10
             ]
           ],
-          "critChance": 0.066,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.066,
+          "dodgeChance": 0.031,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.5,
-          "hp": 405,
+          "hp": 342,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 556,
+          "maxHp": 532,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -316,21 +331,22 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 19.503846,
+          "resource": 22.888462,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 32,
-            "armor": 312,
-            "int": 10,
-            "spi": 11,
-            "sta": 47,
-            "str": 47
+            "agi": 7,
+            "armor": 276,
+            "dex": 9,
+            "int": 1,
+            "luk": 3,
+            "str": 16,
+            "vit": 14
           },
           "targetId": 416,
           "templateId": "warrior",
@@ -464,11 +480,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "916b0352",
+      "state": "caa7dd3b",
       "events": "741638a5",
       "rng": {
-        "draws": 71,
-        "digest": "60069de6"
+        "draws": 74,
+        "digest": "81422271"
       },
       "label": "final",
       "players": [
@@ -489,7 +505,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 190
+            "damageTaken": 230
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -544,6 +560,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 6,
+            "dex": 8,
+            "luk": 2,
+            "str": 15,
+            "vit": 12
+          },
           "talents": {
             "rows": {}
           },
@@ -553,7 +576,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 94,
+          "attackPower": 18,
           "auras": [
             {
               "duration": 3600,
@@ -587,18 +610,18 @@
               9.8
             ]
           ],
-          "critChance": 0.066,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.066,
+          "dodgeChance": 0.031,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.7,
-          "hp": 405,
+          "hp": 342,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 556,
+          "maxHp": 532,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -611,21 +634,22 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 19.503846,
+          "resource": 22.888462,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 32,
-            "armor": 312,
-            "int": 10,
-            "spi": 11,
-            "sta": 47,
-            "str": 47
+            "agi": 7,
+            "armor": 276,
+            "dex": 9,
+            "int": 1,
+            "luk": 3,
+            "str": 16,
+            "vit": 14
           },
           "targetId": 416,
           "templateId": "warrior",

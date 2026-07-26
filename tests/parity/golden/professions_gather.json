@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0ec9c7e5",
+      "state": "3fce2ee1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -77,6 +77,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 8,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -86,7 +93,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 10,
           "auras": [
             {
               "duration": 3600,
@@ -102,17 +109,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.022,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -131,14 +138,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 20,
-            "armor": 144,
-            "int": 10,
-            "spi": 11,
-            "sta": 23,
-            "str": 23
+            "agi": 4,
+            "armor": 122,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -153,7 +161,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 416,
-      "state": "3d411e44",
+      "state": "a786336f",
       "events": "e7b86907",
       "rng": {
         "draws": 2,
@@ -256,6 +264,13 @@
           },
           "recipesGrandfathered": true,
           "renown": 15,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 9,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -266,7 +281,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 50,
+          "attackPower": 12,
           "auras": [
             {
               "duration": 3600,
@@ -283,17 +298,17 @@
           "castTotal": 2.5,
           "combatTimer": 101.55,
           "comboUntil": -1,
-          "critChance": 0.0605,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0605,
+          "dodgeChance": 0.022,
           "fallStartY": -1.407651,
           "fiveSecondRule": 101.55,
-          "hp": 138,
+          "hp": 125,
           "id": 415,
           "kind": "player",
           "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 138,
+          "maxHp": 125,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -312,14 +327,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 21,
-            "armor": 158,
-            "int": 10,
-            "spi": 11,
-            "sta": 25,
-            "str": 25
+            "agi": 4,
+            "armor": 134,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 10,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -334,7 +350,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 416,
-      "state": "161f6ce3",
+      "state": "a3c38be0",
       "events": "fbab41e3",
       "rng": {
         "draws": 4,
@@ -457,6 +473,13 @@
           },
           "recipesGrandfathered": true,
           "renown": 30,
+          "statAllocation": {
+            "agi": 3,
+            "dex": 5,
+            "luk": 1,
+            "str": 10,
+            "vit": 7
+          },
           "talents": {
             "rows": {}
           },
@@ -467,7 +490,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 54,
+          "attackPower": 13,
           "auras": [
             {
               "duration": 3600,
@@ -484,17 +507,17 @@
           "castTotal": 2.35,
           "combatTimer": 104.2,
           "comboUntil": -1,
-          "critChance": 0.061,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.061,
+          "dodgeChance": 0.022,
           "fallStartY": -2.328903,
           "fiveSecondRule": 104.2,
-          "hp": 176,
+          "hp": 160,
           "id": 415,
           "kind": "player",
           "level": 3,
           "lootFfaTimer": "Infinity",
-          "maxHp": 176,
+          "maxHp": 160,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -513,14 +536,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 22,
-            "armor": 172,
-            "int": 10,
-            "spi": 11,
-            "sta": 27,
-            "str": 27
+            "agi": 4,
+            "armor": 146,
+            "dex": 6,
+            "int": 1,
+            "luk": 2,
+            "str": 11,
+            "vit": 9
           },
           "templateId": "warrior",
           "weapon": {
@@ -535,7 +559,7 @@
       "tick": 500,
       "time": 25,
       "nextId": 416,
-      "state": "0558f54a",
+      "state": "c2adefa6",
       "events": "a03fc69b",
       "rng": {
         "draws": 18,
@@ -546,7 +570,7 @@
       "tick": 1000,
       "time": 50,
       "nextId": 416,
-      "state": "b74c2b49",
+      "state": "459c3687",
       "events": "b1ec90c1",
       "rng": {
         "draws": 38,
@@ -557,7 +581,7 @@
       "tick": 1500,
       "time": 75,
       "nextId": 416,
-      "state": "1fb554e7",
+      "state": "7474e7e0",
       "events": "2961d098",
       "rng": {
         "draws": 58,
@@ -568,7 +592,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 416,
-      "state": "6309689c",
+      "state": "79d2c0ed",
       "events": "a3cc9f09",
       "rng": {
         "draws": 78,
@@ -579,7 +603,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 416,
-      "state": "ab932f9e",
+      "state": "dd7e7ebf",
       "events": "e559297f",
       "rng": {
         "draws": 96,
@@ -590,7 +614,7 @@
       "tick": 3000,
       "time": 150,
       "nextId": 416,
-      "state": "acb8937b",
+      "state": "1a437f2f",
       "events": "ac00e1cf",
       "rng": {
         "draws": 116,
@@ -601,7 +625,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 416,
-      "state": "50cb74c4",
+      "state": "0b551c80",
       "events": "86d29dfd",
       "rng": {
         "draws": 136,
@@ -612,7 +636,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 416,
-      "state": "f41081fb",
+      "state": "8e8d79bf",
       "events": "c0982447",
       "rng": {
         "draws": 156,
@@ -623,7 +647,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 416,
-      "state": "fb7e8e0b",
+      "state": "72a67459",
       "events": "f460621d",
       "rng": {
         "draws": 176,
@@ -634,7 +658,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 416,
-      "state": "40080d34",
+      "state": "eda54044",
       "events": "1854a740",
       "rng": {
         "draws": 194,
@@ -645,7 +669,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 416,
-      "state": "646d5f9d",
+      "state": "34003d8b",
       "events": "4f44fcfa",
       "rng": {
         "draws": 204,
@@ -793,6 +817,13 @@
           },
           "recipesGrandfathered": true,
           "renown": 45,
+          "statAllocation": {
+            "agi": 5,
+            "dex": 7,
+            "luk": 2,
+            "str": 12,
+            "vit": 10
+          },
           "talents": {
             "rows": {}
           },
@@ -803,7 +834,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 78,
+          "attackPower": 15,
           "auras": [
             {
               "duration": 3600,
@@ -820,17 +851,17 @@
           "castTotal": 2.5,
           "combatTimer": 359.3,
           "comboUntil": -1,
-          "critChance": 0.064,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.064,
+          "dodgeChance": 0.028,
           "fallStartY": -5.25,
           "fiveSecondRule": 359.3,
-          "hp": 404,
+          "hp": 380,
           "id": 415,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 404,
+          "maxHp": 380,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -849,14 +880,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 28,
-            "armor": 256,
-            "int": 10,
-            "spi": 11,
-            "sta": 39,
-            "str": 39
+            "agi": 6,
+            "armor": 224,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 13,
+            "vit": 12
           },
           "templateId": "warrior",
           "weapon": {
@@ -871,7 +903,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 416,
-      "state": "c7e8f5b8",
+      "state": "27af4f02",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -1019,6 +1051,13 @@
           },
           "recipesGrandfathered": true,
           "renown": 45,
+          "statAllocation": {
+            "agi": 5,
+            "dex": 7,
+            "luk": 2,
+            "str": 12,
+            "vit": 10
+          },
           "talents": {
             "rows": {}
           },
@@ -1029,7 +1068,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 78,
+          "attackPower": 15,
           "auras": [
             {
               "duration": 3600,
@@ -1046,17 +1085,17 @@
           "castTotal": 2.5,
           "combatTimer": 359.4,
           "comboUntil": -1,
-          "critChance": 0.064,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.064,
+          "dodgeChance": 0.028,
           "fallStartY": -5.25,
           "fiveSecondRule": 359.4,
-          "hp": 404,
+          "hp": 380,
           "id": 415,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 404,
+          "maxHp": 380,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1075,14 +1114,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 1,
           "stats": {
-            "agi": 28,
-            "armor": 256,
-            "int": 10,
-            "spi": 11,
-            "sta": 39,
-            "str": 39
+            "agi": 6,
+            "armor": 224,
+            "dex": 8,
+            "int": 1,
+            "luk": 3,
+            "str": 13,
+            "vit": 12
           },
           "templateId": "warrior",
           "weapon": {

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "153900ab",
+      "state": "52014435",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -75,6 +75,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 2,
+            "dex": 8,
+            "int": 9,
+            "luk": 1,
+            "vit": 4
+          },
           "talents": {
             "rows": {}
           },
@@ -84,12 +91,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.056,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.056,
+          "dodgeChance": 0.019,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 54,
@@ -98,7 +105,7 @@
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 54,
-          "maxResource": 195,
+          "maxResource": 182,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -109,21 +116,22 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 195,
+          "resource": 182,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 13,
+          "spellPower": 14,
           "stats": {
-            "agi": 12,
-            "armor": 57,
-            "int": 25,
-            "spi": 22,
-            "sta": 14,
-            "str": 10
+            "agi": 3,
+            "armor": 43,
+            "dex": 9,
+            "int": 11,
+            "luk": 2,
+            "str": 1,
+            "vit": 5
           },
           "templateId": "mage",
           "weapon": {
@@ -138,8 +146,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "83f3ae0b",
-      "events": "5c2e2049",
+      "state": "838030ff",
+      "events": "dab18aca",
       "rng": {
         "draws": 1,
         "digest": "e1d88b80"
@@ -149,8 +157,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "0c257c4d",
-      "events": "441bad5c",
+      "state": "2e8c5667",
+      "events": "f7152ad1",
       "rng": {
         "draws": 2,
         "digest": "5ab9e87d"
@@ -160,8 +168,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "d64d434c",
-      "events": "9a15373c",
+      "state": "6caf4f90",
+      "events": "40c3c8b1",
       "rng": {
         "draws": 82,
         "digest": "a2a056cd"
@@ -171,8 +179,8 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "af351ce4",
-      "events": "bd2d3911",
+      "state": "1dec3fe0",
+      "events": "7900256a",
       "rng": {
         "draws": 152,
         "digest": "a592d606"
@@ -182,8 +190,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "5fdf9026",
-      "events": "c711fca1",
+      "state": "be7cd61a",
+      "events": "974197bc",
       "rng": {
         "draws": 180,
         "digest": "1a2d5a02"
@@ -206,13 +214,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 207
+            "damageDealt": 200
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 207
+              "dummyDamage": 200
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -280,6 +288,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 18,
+            "int": 21,
+            "luk": 4,
+            "vit": 9
+          },
           "talents": {
             "rows": {},
             "spec": "frost"
@@ -290,7 +305,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 5,
           "auras": [
             {
               "duration": 30,
@@ -331,19 +346,19 @@
               40.8
             ]
           ],
-          "critChance": 0.056,
+          "critChance": 0.025,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.056,
+          "dodgeChance": 0.025,
           "fallStartY": 1.5,
           "fiveSecondRule": 0.25,
-          "hp": 418,
+          "hp": 411,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 418,
-          "maxResource": 1506,
+          "maxHp": 411,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -354,21 +369,22 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 1436,
+          "resource": 1440,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 36,
           "stats": {
-            "agi": 12,
-            "armor": 146,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
-            "str": 10
+            "agi": 5,
+            "armor": 142,
+            "dex": 19,
+            "int": 23,
+            "luk": 5,
+            "str": 1,
+            "vit": 10
           },
           "targetId": 416,
           "templateId": "mage",
@@ -410,7 +426,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499793,
+          "hp": 499800,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -442,7 +458,7 @@
           "threat": [
             [
               415,
-              207
+              200
             ]
           ],
           "weapon": {
@@ -455,7 +471,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "5fdf9026",
+      "state": "be7cd61a",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -479,13 +495,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 207
+            "damageDealt": 200
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 207
+              "dummyDamage": 200
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -553,6 +569,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 18,
+            "int": 21,
+            "luk": 4,
+            "vit": 9
+          },
           "talents": {
             "rows": {},
             "spec": "frost"
@@ -563,7 +586,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 5,
           "auras": [
             {
               "duration": 30,
@@ -604,19 +627,19 @@
               40.8
             ]
           ],
-          "critChance": 0.056,
+          "critChance": 0.025,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.056,
+          "dodgeChance": 0.025,
           "fallStartY": 1.5,
           "fiveSecondRule": 0.25,
-          "hp": 418,
+          "hp": 411,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 418,
-          "maxResource": 1506,
+          "maxHp": 411,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -627,21 +650,22 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "resource": 1436,
+          "resource": 1440,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 36,
           "stats": {
-            "agi": 12,
-            "armor": 146,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
-            "str": 10
+            "agi": 5,
+            "armor": 142,
+            "dex": 19,
+            "int": 23,
+            "luk": 5,
+            "str": 1,
+            "vit": 10
           },
           "targetId": 416,
           "templateId": "mage",
@@ -683,7 +707,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 499793,
+          "hp": 499800,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -715,7 +739,7 @@
           "threat": [
             [
               415,
-              207
+              200
             ]
           ],
           "weapon": {

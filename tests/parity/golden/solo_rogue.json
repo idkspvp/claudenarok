@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "99088268",
+      "state": "e0a1c0e8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -70,6 +70,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 4,
+            "luk": 3,
+            "str": 6,
+            "vit": 3
+          },
           "talents": {
             "rows": {}
           },
@@ -79,12 +86,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 42,
+          "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0625,
+          "critChance": 0.022,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0625,
+          "dodgeChance": 0.037,
           "dualWielding": true,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -119,14 +126,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 1,
           "stats": {
-            "agi": 25,
-            "armor": 104,
-            "int": 11,
-            "spi": 12,
-            "sta": 17,
-            "str": 17
+            "agi": 9,
+            "armor": 62,
+            "dex": 5,
+            "int": 1,
+            "luk": 4,
+            "str": 7,
+            "vit": 4
           },
           "templateId": "rogue",
           "weapon": {
@@ -142,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "0d369676",
-      "events": "68a6cefc",
+      "state": "37443b8c",
+      "events": "838f4619",
       "rng": {
         "draws": 12,
         "digest": "69c49488"
@@ -153,8 +161,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "b58171ac",
-      "events": "ccf5de8e",
+      "state": "bf900210",
+      "events": "7cddb665",
       "rng": {
         "draws": 21,
         "digest": "6b9fce63"
@@ -164,8 +172,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "d888ef47",
-      "events": "09043b1b",
+      "state": "3015174e",
+      "events": "cbc998a5",
       "rng": {
         "draws": 98,
         "digest": "dcfe7e75"
@@ -175,7 +183,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "acb2287f",
+      "state": "a533d8fa",
       "events": "741638a5",
       "rng": {
         "draws": 151,
@@ -199,15 +207,14 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 111,
-            "damageTaken": 26
+            "damageDealt": 89,
+            "damageTaken": 28
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "crits": 1,
-              "damageDealt": 111
+              "damageDealt": 89
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -255,6 +262,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 7,
+            "luk": 4,
+            "str": 10,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -264,19 +278,19 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 78,
+          "attackPower": 14,
           "autoAttack": true,
           "combatTimer": 1.2,
           "comboPoints": 3,
           "comboUntil": 32.4,
-          "critChance": 0.076,
+          "critChance": 0.025,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.076,
+          "dodgeChance": 0.049,
           "dualWielding": true,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "hp": 49974,
+          "hp": 49972,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -309,14 +323,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 1,
           "stats": {
-            "agi": 52,
-            "armor": 230,
-            "int": 11,
-            "spi": 12,
-            "sta": 26,
-            "str": 26
+            "agi": 13,
+            "armor": 138,
+            "dex": 8,
+            "int": 1,
+            "luk": 5,
+            "str": 11,
+            "vit": 6
           },
           "swingTimer": 0.05,
           "targetId": 416,
@@ -340,7 +355,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8889,
+          "hp": 8911,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -377,7 +392,7 @@
           "threat": [
             [
               415,
-              112
+              90
             ]
           ],
           "weapon": {

@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "7642597e",
+      "state": "827e701a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -76,6 +76,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 7,
+            "dex": 9,
+            "int": 1,
+            "luk": 1,
+            "str": 3,
+            "vit": 3
+          },
           "talents": {
             "rows": {}
           },
@@ -85,12 +93,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 39,
+          "attackPower": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0625,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0625,
+          "dodgeChance": 0.034,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
@@ -110,7 +118,7 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
-          "rangedPower": 50,
+          "rangedPower": 11,
           "resource": 93,
           "resourceType": "mana",
           "spawnPos": {
@@ -118,14 +126,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 7,
+          "spellPower": 2,
           "stats": {
-            "agi": 25,
-            "armor": 109,
-            "int": 13,
-            "spi": 14,
-            "sta": 19,
-            "str": 14
+            "agi": 8,
+            "armor": 67,
+            "dex": 10,
+            "int": 2,
+            "luk": 2,
+            "str": 4,
+            "vit": 4
           },
           "templateId": "hunter",
           "weapon": {
@@ -140,8 +149,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "bfae9e4b",
-      "events": "d16d4265",
+      "state": "80d47fff",
+      "events": "faadea7c",
       "rng": {
         "draws": 14,
         "digest": "547eb3f4"
@@ -151,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "a3bd52af",
+      "state": "bcba50c3",
       "events": "741638a5",
       "rng": {
         "draws": 14,
@@ -162,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "b99839af",
+      "state": "104d0cd2",
       "events": "6eb2c7c8",
       "rng": {
         "draws": 109,
@@ -173,7 +182,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "c140bed4",
+      "state": "faff1517",
       "events": "741638a5",
       "rng": {
         "draws": 187,
@@ -184,7 +193,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "16bf55ab",
+      "state": "5671c6c7",
       "events": "13e77651",
       "rng": {
         "draws": 306,
@@ -195,7 +204,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "4ace814e",
+      "state": "8dad5998",
       "events": "741638a5",
       "rng": {
         "draws": 426,
@@ -206,7 +215,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "96ffc418",
+      "state": "02862cde",
       "events": "741638a5",
       "rng": {
         "draws": 426,
@@ -230,13 +239,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 20
+            "damageDealt": 14
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 20
+              "damageDealt": 14
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -285,6 +294,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 14,
+            "int": 2,
+            "luk": 2,
+            "str": 6,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -294,13 +311,13 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 83,
+          "attackPower": 10,
           "autoAttack": true,
           "combatTimer": 5.7,
           "comboUntil": -1,
-          "critChance": 0.079,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.079,
+          "dodgeChance": 0.049,
           "fallStartY": 57.44792,
           "fiveSecondRule": 105,
           "hp": 50000,
@@ -310,7 +327,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 358,
+          "maxResource": 388,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -321,22 +338,23 @@
             "z": -1000
           },
           "potionCooldownUntil": -1,
-          "rangedPower": 116,
-          "resource": 358,
+          "rangedPower": 17,
+          "resource": 388,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
+          "spellPower": 3,
           "stats": {
-            "agi": 58,
-            "armor": 263,
-            "int": 24,
-            "spi": 25,
-            "sta": 41,
-            "str": 25
+            "agi": 13,
+            "armor": 159,
+            "dex": 15,
+            "int": 3,
+            "luk": 3,
+            "str": 7,
+            "vit": 6
           },
           "targetId": 419,
           "templateId": "hunter",
@@ -512,7 +530,7 @@
           "fiveSecondRule": 99,
           "forcedTargetTimer": -0.05,
           "hostile": true,
-          "hp": 49944,
+          "hp": 49950,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -549,11 +567,11 @@
           "threat": [
             [
               415,
-              20
+              14
             ],
             [
               418,
-              56
+              50
             ]
           ],
           "weapon": {
@@ -568,7 +586,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 420,
-      "state": "faaa6d98",
+      "state": "7ba58cfd",
       "events": "741638a5",
       "rng": {
         "draws": 517,
@@ -579,7 +597,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 420,
-      "state": "45855cd9",
+      "state": "ed8376ae",
       "events": "741638a5",
       "rng": {
         "draws": 638,
@@ -590,7 +608,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "be6a6914",
+      "state": "6682a305",
       "events": "741638a5",
       "rng": {
         "draws": 771,
@@ -601,7 +619,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "be6a6914",
+      "state": "6682a305",
       "events": "741638a5",
       "rng": {
         "draws": 771,
@@ -625,13 +643,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 20
+            "damageDealt": 14
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 20
+              "damageDealt": 14
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -680,6 +698,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 14,
+            "int": 2,
+            "luk": 2,
+            "str": 6,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -689,13 +715,13 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 83,
+          "attackPower": 10,
           "autoAttack": true,
           "combatTimer": 8.7,
           "comboUntil": -1,
-          "critChance": 0.079,
+          "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.079,
+          "dodgeChance": 0.049,
           "fallStartY": 57.44792,
           "fiveSecondRule": 108,
           "hp": 50000,
@@ -704,7 +730,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 358,
+          "maxResource": 388,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -715,22 +741,23 @@
             "z": -1000
           },
           "potionCooldownUntil": -1,
-          "rangedPower": 116,
-          "resource": 358,
+          "rangedPower": 17,
+          "resource": 388,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 12,
+          "spellPower": 3,
           "stats": {
-            "agi": 58,
-            "armor": 263,
-            "int": 24,
-            "spi": 25,
-            "sta": 41,
-            "str": 25
+            "agi": 13,
+            "armor": 159,
+            "dex": 15,
+            "int": 3,
+            "luk": 3,
+            "str": 7,
+            "vit": 6
           },
           "targetId": 419,
           "templateId": "hunter",
@@ -894,7 +921,7 @@
           "fallStartY": 57.351926,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 49944,
+          "hp": 49950,
           "id": 419,
           "inCombat": true,
           "kind": "mob",

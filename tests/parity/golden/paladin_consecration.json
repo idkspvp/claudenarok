@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c11c69bd",
+      "state": "faff907a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -74,6 +74,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 1,
+            "dex": 3,
+            "int": 3,
+            "luk": 1,
+            "str": 8,
+            "vit": 8
+          },
           "talents": {
             "rows": {}
           },
@@ -83,12 +91,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 44,
+          "attackPower": 9,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0585,
+          "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0585,
+          "dodgeChance": 0.016,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 95,
@@ -115,14 +123,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 7,
+          "spellPower": 4,
           "stats": {
-            "agi": 17,
-            "armor": 99,
-            "int": 13,
-            "spi": 14,
-            "sta": 22,
-            "str": 22
+            "agi": 2,
+            "armor": 83,
+            "dex": 4,
+            "int": 4,
+            "luk": 2,
+            "str": 9,
+            "vit": 9
           },
           "templateId": "paladin",
           "weapon": {
@@ -137,8 +146,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "51c90d95",
-      "events": "ee312c82",
+      "state": "dc25a1ee",
+      "events": "2d6f8587",
       "rng": {
         "draws": 4,
         "digest": "e457e920"
@@ -148,7 +157,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "0d236572",
+      "state": "2ba15ffb",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -159,8 +168,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "76f52a5d",
-      "events": "55404e76",
+      "state": "f98db460",
+      "events": "c1306d25",
       "rng": {
         "draws": 80,
         "digest": "ae0d25c6"
@@ -170,7 +179,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "9e2abff0",
+      "state": "cfae1ebb",
       "events": "741638a5",
       "rng": {
         "draws": 170,
@@ -181,8 +190,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "29639a7f",
-      "events": "c42eb4a4",
+      "state": "b66fe6e0",
+      "events": "03f8030a",
       "rng": {
         "draws": 270,
         "digest": "afc4bc0b"
@@ -192,7 +201,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "11e64294",
+      "state": "512e7b98",
       "events": "741638a5",
       "rng": {
         "draws": 387,
@@ -203,8 +212,8 @@
       "tick": 140,
       "time": 7,
       "nextId": 417,
-      "state": "6e47e4b3",
-      "events": "75a4e964",
+      "state": "bf82f5bb",
+      "events": "6ee6abc9",
       "rng": {
         "draws": 501,
         "digest": "9e9280f3"
@@ -214,7 +223,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 417,
-      "state": "66a078bd",
+      "state": "02eaa83c",
       "events": "741638a5",
       "rng": {
         "draws": 627,
@@ -225,8 +234,8 @@
       "tick": 180,
       "time": 9,
       "nextId": 417,
-      "state": "e243fe32",
-      "events": "2f266e06",
+      "state": "599714f0",
+      "events": "eb58203f",
       "rng": {
         "draws": 765,
         "digest": "84d7375c"
@@ -236,7 +245,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 417,
-      "state": "3d74436b",
+      "state": "244ac790",
       "events": "741638a5",
       "rng": {
         "draws": 931,
@@ -247,7 +256,7 @@
       "tick": 201,
       "time": 10.05,
       "nextId": 417,
-      "state": "9b0cf465",
+      "state": "d69a3336",
       "events": "741638a5",
       "rng": {
         "draws": 932,
@@ -271,14 +280,14 @@
           "cls": "paladin",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 164,
+            "damageDealt": 159,
             "damageTaken": 22
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 164
+              "damageDealt": 159
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -342,6 +351,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 55,
+          "statAllocation": {
+            "agi": 4,
+            "dex": 7,
+            "int": 7,
+            "luk": 3,
+            "str": 19,
+            "vit": 18
+          },
           "talents": {
             "rows": {}
           },
@@ -351,12 +368,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 120,
+          "attackPower": 25,
           "combatTimer": 1.95,
           "comboUntil": -1,
-          "critChance": 0.068,
+          "critChance": 0.022,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.068,
+          "dodgeChance": 0.025,
           "fallStartY": 1.5,
           "fiveSecondRule": 10,
           "hp": 49978,
@@ -366,7 +383,7 @@
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 660,
+          "maxResource": 650,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -377,21 +394,22 @@
             "z": -1
           },
           "potionCooldownUntil": -1,
-          "resource": 657,
+          "resource": 623,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 16,
+          "spellPower": 9,
           "stats": {
-            "agi": 36,
-            "armor": 365,
-            "int": 32,
-            "spi": 33,
-            "sta": 60,
-            "str": 60
+            "agi": 5,
+            "armor": 331,
+            "dex": 8,
+            "int": 8,
+            "luk": 4,
+            "str": 20,
+            "vit": 19
           },
           "targetId": 416,
           "templateId": "paladin",
@@ -413,7 +431,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 39836,
+          "hp": 39841,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -449,7 +467,7 @@
           "threat": [
             [
               415,
-              165
+              160
             ]
           ],
           "wanderTarget": {

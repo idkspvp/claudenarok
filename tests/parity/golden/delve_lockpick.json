@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "99088268",
+      "state": "e0a1c0e8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -71,6 +71,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 4,
+            "luk": 3,
+            "str": 6,
+            "vit": 3
+          },
           "talents": {
             "rows": {}
           },
@@ -80,12 +87,12 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 42,
+          "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0625,
+          "critChance": 0.022,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0625,
+          "dodgeChance": 0.037,
           "dualWielding": true,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -120,14 +127,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 1,
           "stats": {
-            "agi": 25,
-            "armor": 104,
-            "int": 11,
-            "spi": 12,
-            "sta": 17,
-            "str": 17
+            "agi": 9,
+            "armor": 62,
+            "dex": 5,
+            "int": 1,
+            "luk": 4,
+            "str": 7,
+            "vit": 4
           },
           "templateId": "rogue",
           "weapon": {
@@ -143,7 +151,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 429,
-      "state": "7ff6dc18",
+      "state": "35a17cb5",
       "events": "ee4c51f1",
       "rng": {
         "draws": 7,
@@ -154,7 +162,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 429,
-      "state": "8e00c398",
+      "state": "db2ba67f",
       "events": "fcb0555f",
       "rng": {
         "draws": 7,
@@ -165,7 +173,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 429,
-      "state": "5ec74bd5",
+      "state": "60f565c2",
       "events": "0afc805e",
       "rng": {
         "draws": 10,
@@ -176,7 +184,7 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 431,
-      "state": "757f319a",
+      "state": "f21b1a3a",
       "events": "601aed6e",
       "rng": {
         "draws": 13,
@@ -283,6 +291,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 7,
+            "luk": 4,
+            "str": 10,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -293,21 +308,21 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 78,
+          "attackPower": 14,
           "combatTimer": 0.4,
           "comboUntil": -1,
-          "critChance": 0.076,
+          "critChance": 0.025,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.076,
+          "dodgeChance": 0.049,
           "dualWielding": true,
           "fiveSecondRule": 100.9,
-          "hp": 260,
+          "hp": 264,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
-          "maxHp": 260,
+          "maxHp": 264,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -332,14 +347,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 1,
           "stats": {
-            "agi": 52,
-            "armor": 230,
-            "int": 11,
-            "spi": 12,
-            "sta": 26,
-            "str": 26
+            "agi": 13,
+            "armor": 138,
+            "dex": 8,
+            "int": 1,
+            "luk": 5,
+            "str": 11,
+            "vit": 6
           },
           "targetId": 425,
           "templateId": "rogue",
@@ -490,7 +506,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "2c0258d2",
+      "state": "c967cd00",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -501,7 +517,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "2c0258d2",
+      "state": "c967cd00",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -608,6 +624,13 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "statAllocation": {
+            "agi": 12,
+            "dex": 7,
+            "luk": 4,
+            "str": 10,
+            "vit": 5
+          },
           "talents": {
             "rows": {}
           },
@@ -618,21 +641,21 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 78,
+          "attackPower": 14,
           "combatTimer": 0.5,
           "comboUntil": -1,
-          "critChance": 0.076,
+          "critChance": 0.025,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.076,
+          "dodgeChance": 0.049,
           "dualWielding": true,
           "fiveSecondRule": 101,
-          "hp": 260,
+          "hp": 264,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
-          "maxHp": 260,
+          "maxHp": 264,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -657,14 +680,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 1,
           "stats": {
-            "agi": 52,
-            "armor": 230,
-            "int": 11,
-            "spi": 12,
-            "sta": 26,
-            "str": 26
+            "agi": 13,
+            "armor": 138,
+            "dex": 8,
+            "int": 1,
+            "luk": 5,
+            "str": 11,
+            "vit": 6
           },
           "targetId": 425,
           "templateId": "rogue",
