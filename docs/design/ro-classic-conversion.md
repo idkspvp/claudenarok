@@ -100,10 +100,36 @@ means something once the damage formula reads it.
 Levels 21–99 have nothing to kill. This is the largest piece of work in the
 conversion and the one that cannot be shortcut by a formula.
 
-## Open questions
+## Decisions (2026-07-26)
 
-- Does the 48-point character-creation grant survive, or do all nine starting
-  blocks become 1/1/1/1/1/1 like Ragnarok's?
-- Do we keep nine classes as the 2nd-job tier and invent 1st jobs above them, or
-  re-author the tree from Novice down?
-- Base EXP curve: adopt Ragnarok's shape, or keep this game's and stretch it?
+**Starting stats: Ragnarok's.** Every job begins at 1/1/1/1/1/1 with the 48-point
+creation grant. The nine per-class starting blocks are retired — class identity
+moves entirely into the job tree and its skills, which is where Ragnarok keeps it.
+
+**Job tree: re-authored from Novice down.** Not the nine current classes promoted
+to 2nd job. The shape is Ragnarok's: one Novice tier, six 1st jobs, twelve 2nd jobs
+(each 1st job branching two ways). The 317 existing abilities get re-homed onto
+that tree.
+
+**Base EXP: Ragnarok's pacing.** See the caveat below — the pacing is the target,
+not the literal table.
+
+## Two constraints these decisions create
+
+**Job names have to be ours.** The structure — Novice, six branches, two per
+branch, the JL10/JL40 gates — is a design pattern and free to use. The *names*
+Gravity attached to it are not, and the repo already has a scanner that would
+catch them: `tests/ip_scrub.test.ts` rejected a proposed ability name as verbatim
+WoW earlier in this work, and `ip-refactor/NAME-MAP.md` is where each new name gets
+recorded. Twelve 2nd jobs and six 1st jobs is eighteen names to coin and screen.
+
+**The EXP table is authored data, not a formula.** Unlike the stat cost curve
+(`floor((stat-1)/10) + 2`, a rule) the 99 base-EXP values are numbers Gravity
+chose. Copying the list verbatim reproduces their dataset. So: fit our own curve
+to the published *shape* — the early-level ramp, the mid-game wall, the 90s grind —
+and generate our numbers from it. Same pacing, our data.
+
+The nine current classes do not map cleanly onto six Ragnarok branches: there is
+no Merchant equivalent here, and Shaman, Warlock, and Druid have no counterpart
+there. Re-homing 317 abilities across eighteen jobs is the largest single piece of
+phase 2 and needs its own pass.
