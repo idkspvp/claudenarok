@@ -57,7 +57,7 @@ import {
   xpForLevel,
 } from '../types';
 import { WORLD_BOSS_CORPSE_SECONDS, worldBossLootContributors } from '../world_boss';
-import { isUnbreakableControlAura } from './cc';
+import { isInvulnerable, isUnbreakableControlAura } from './cc';
 import { chronomancyConvertArcaneDamage, stripTemporalEchoes } from './chronomancy';
 import { recordDamageTaken } from './damage_history';
 import {
@@ -134,6 +134,11 @@ export function dealDamage(
   // damage (owner 2026-07-13), so nothing gets through until it is cancelled or
   // expires. Every damage path funnels here, so this covers melee, spells, and DoTs.
   if (target.auras.some((a) => a.kind === 'stasis')) return;
+  // Dodge-roll i-frames: the same total damage denial as Ice Block above, but
+  // without its control lockout, so the roller stays mobile through the window.
+  // It sits on the same choke point, so it covers melee, spells, DoT ticks, and
+  // telegraphed AoE alike: rolling THROUGH a landing nova takes zero.
+  if (isInvulnerable(target)) return;
   // A wild mob that broke leash is in 'evade': it has dropped its hate table
   // and walks home without fighting back, healing to full only on arrival.
   // Classic mechanics make it immune while it retreats, so it can't be chipped

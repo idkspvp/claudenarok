@@ -8017,6 +8017,42 @@ export const vi_VN: EnTranslations = {
         "name": "Yến Tiệc Hư Không",
         "description": "Nuốt một hiệu ứng phép thuật (hiệu ứng có lợi từ kẻ địch hoặc có hại từ đồng minh) và hồi cho bạn 6% máu tối đa."
       },
+      "bracing_roll": {
+        "name": "Bracing Roll",
+        "description": "Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec."
+      },
+      "shadowslip": {
+        "name": "Shadowslip",
+        "description": "Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec."
+      },
+      "wildstep": {
+        "name": "Wildstep",
+        "description": "Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "phase_tumble": {
+        "name": "Phase Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec."
+      },
+      "veilstep": {
+        "name": "Veilstep",
+        "description": "Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec."
+      },
+      "sanctified_sidestep": {
+        "name": "Sanctified Sidestep",
+        "description": "Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec."
+      },
+      "galestep": {
+        "name": "Galestep",
+        "description": "Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "dreadstep": {
+        "name": "Dreadstep",
+        "description": "Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec."
+      },
+      "feral_tumble": {
+        "name": "Feral Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
       "bear_charge": {
         "name": "Cú Lao Bruin",
         "description": "Lao vào kẻ địch, tạo 9 nộ khí và làm choáng nó trong 1 giây. Tầm 8-25 thước. Chỉ dùng được ở Bruin Form."

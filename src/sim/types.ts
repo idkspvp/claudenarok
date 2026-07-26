@@ -283,6 +283,16 @@ export type AuraKind =
   // enemy hit is denied in damage.ts and the wearer is restored by value (a
   // fraction of max health, e.g. 0.35 = 35%) before the ward is consumed.
   | 'guardian_ward'
+  // Dodge-roll invulnerability frames: while it rides, EVERY incoming damage
+  // path is denied outright in damage.ts (melee, spells, DoT ticks, environment),
+  // exactly like 'stasis'. The difference is the lockout: 'stasis' is also a
+  // total-control aura (isStunned in combat/cc.ts freezes movement, casts, and
+  // swings, the Ice Block shape), while this kind carries NO control component at
+  // all, so the roller keeps moving, casting, and swinging through the window.
+  // That makes it far stronger per second than Ice Block: keep the durations
+  // short and the cooldowns honest (baseline roll: 1 s window, 12 s cooldown).
+  // Value is unused (1); the window is the aura's duration.
+  | 'invuln'
   | 'buff_sta'
   | 'buff_allstats'
   // Percentage drain on the whole stat block (value is a signed fraction, e.g.

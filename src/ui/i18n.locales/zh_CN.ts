@@ -8732,4 +8732,28 @@ export const zh_CN: Partial<Record<TranslationKey, string>> = {
   'devCommand.itemUnknown': '没有该 ID 对应的物品。',
   'devCommand.kitCurrentSpec': '当前专精',
   'hudChrome.enchanting.wornTag': '已装备（{slot}）',
+  'entities.abilities.bracing_roll.name': '稳步翻滚',
+  'entities.abilities.bracing_roll.description':
+    '向前翻滚 8 码，挣脱定身，并在 1 秒内免疫所有伤害。',
+  'entities.abilities.shadowslip.name': '暗影疾滑',
+  'entities.abilities.shadowslip.description': '向前滑行 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
+  'entities.abilities.wildstep.name': '野性疾步',
+  'entities.abilities.wildstep.description': '向前跃出 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
+  'entities.abilities.phase_tumble.name': '相位翻滚',
+  'entities.abilities.phase_tumble.description':
+    '向前翻滚 8 码，挣脱定身，并在 1 秒内相位偏移，避开所有伤害。',
+  'entities.abilities.veilstep.name': '帷幕之步',
+  'entities.abilities.veilstep.description':
+    '隐入帷幕向前迈出 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
+  'entities.abilities.sanctified_sidestep.name': '圣化闪步',
+  'entities.abilities.sanctified_sidestep.description':
+    '向前闪步 8 码，挣脱定身，并在 1 秒内挡开所有伤害。',
+  'entities.abilities.galestep.name': '驭风疾步',
+  'entities.abilities.galestep.description': '乘风向前 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
+  'entities.abilities.dreadstep.name': '惧影之步',
+  'entities.abilities.dreadstep.description':
+    '穿过黑暗向前踏出 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
+  'entities.abilities.feral_tumble.name': '野性翻滚',
+  'entities.abilities.feral_tumble.description':
+    '向前翻滚 8 码，挣脱定身，并在 1 秒内不受任何伤害。',
 };

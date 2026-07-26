@@ -8017,6 +8017,42 @@ export const pt_BR: EnTranslations = {
         "name": "Banquete do Vazio",
         "description": "Devora um efeito mágico (um benéfico de um inimigo ou um nocivo de um aliado) e cura você em 6% da vida máxima."
       },
+      "bracing_roll": {
+        "name": "Bracing Roll",
+        "description": "Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec."
+      },
+      "shadowslip": {
+        "name": "Shadowslip",
+        "description": "Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec."
+      },
+      "wildstep": {
+        "name": "Wildstep",
+        "description": "Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "phase_tumble": {
+        "name": "Phase Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec."
+      },
+      "veilstep": {
+        "name": "Veilstep",
+        "description": "Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec."
+      },
+      "sanctified_sidestep": {
+        "name": "Sanctified Sidestep",
+        "description": "Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec."
+      },
+      "galestep": {
+        "name": "Galestep",
+        "description": "Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "dreadstep": {
+        "name": "Dreadstep",
+        "description": "Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec."
+      },
+      "feral_tumble": {
+        "name": "Feral Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
       "bear_charge": {
         "name": "Investida de Bruin",
         "description": "Investe contra um inimigo, gera 9 de raiva e o atordoa por 1 s. Alcance de 8 a 25 m. Apenas Forma de Bruin."

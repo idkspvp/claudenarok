@@ -118,6 +118,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'sweeping_strikes',
       'deep_wounds',
       'enrage_passive',
+      'bracing_roll',
     ],
     color: 0xd67a54,
   },
@@ -206,6 +207,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'temporal_acceleration',
       'perfect_moment',
       'fireball_form',
+      'phase_tumble',
     ],
     color: 0x33c1f1,
   },
@@ -246,6 +248,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'blind',
       'stealth',
       'kick',
+      'shadowslip',
     ],
     color: 0xfcee58,
   },
@@ -279,6 +282,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'retribution_aura',
       'rebuke',
       'sacred_bulwark',
+      'sanctified_sidestep',
     ],
     color: 0xf58ca0,
   },
@@ -313,6 +317,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'rapid_fire',
       'volley',
       'counter_shot',
+      'wildstep',
     ],
     color: 0xa6d84f,
   },
@@ -341,6 +346,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'heal',
       'mind_flay',
       'flash_heal',
+      'veilstep',
     ],
     color: 0xc6d4f0,
   },
@@ -369,6 +375,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'frostbrand_weapon',
       'ghost_wolf',
       'earthquake',
+      'galestep',
     ],
     color: 0x4e8aea,
   },
@@ -406,6 +413,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'summon_doomguard',
       'rain_of_fire',
       'spell_lock',
+      'dreadstep',
     ],
     color: 0xa785e6,
   },
@@ -462,6 +470,7 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'hurricane',
       'skull_bash',
       'primal_reflexes',
+      'feral_tumble',
     ],
     color: 0xff8c1a,
   },
@@ -6222,6 +6231,188 @@ export const ABILITIES: Record<string, AbilityDef> = {
     effects: [{ type: 'interrupt', lockout: 5 }],
     description:
       'Interrupts spellcasting and prevents any spell in that school from being cast for 5 sec. (Warlock talent)',
+  },
+
+  // Baseline dodge roll: every class trains one at 10, the same way every
+  // caster-pressuring class trains its interrupt (see tests/baseline_interrupts.
+  // test.ts for that family). Nine per-class ids rather than one shared id
+  // because `AbilityDef.class` is single-valued and talent_save_migration's
+  // isMainBarAbility gates action-bar seeding on it, so a shared id would only
+  // auto-place for one class.
+  //
+  // Shape is identical across the nine and deliberately so: an 8 yd forward roll
+  // that breaks roots, plus a 1 s 'invuln' window (see the AuraKind comment in
+  // types.ts, and the damage gate in combat/damage.ts). Only the name and the
+  // flavor differ. School is 'physical' on ALL nine, including the casters, so a
+  // silence can never lock the roll out; that mirrors the warlock's Gag Order
+  // above, which is physical for the same reason.
+  //
+  // Balance note (owner decision 2026-07-26): 1 s of damage immunity that does
+  // NOT lock the roller is stronger per second than Ice Block's 8 s, which
+  // freezes the mage solid. The 12 s cooldown is what prices it. Retune the
+  // cooldown here, not the window: shortening the window below ~0.5 s makes the
+  // roll feel unresponsive at 20 Hz plus a round trip.
+  bracing_roll: {
+    id: 'bracing_roll',
+    name: 'Bracing Roll',
+    class: 'warrior',
+    learnLevel: 10,
+    cost: 10,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec. (Warrior talent)',
+  },
+  shadowslip: {
+    id: 'shadowslip',
+    name: 'Shadowslip',
+    class: 'rogue',
+    learnLevel: 10,
+    cost: 20,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec. (Rogue talent)',
+  },
+  wildstep: {
+    id: 'wildstep',
+    name: 'Wildstep',
+    class: 'hunter',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec. (Hunter talent)',
+  },
+  phase_tumble: {
+    id: 'phase_tumble',
+    name: 'Phase Tumble',
+    class: 'mage',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec. (Mage talent)',
+  },
+  veilstep: {
+    id: 'veilstep',
+    name: 'Veilstep',
+    class: 'priest',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec. (Priest talent)',
+  },
+  sanctified_sidestep: {
+    id: 'sanctified_sidestep',
+    name: 'Sanctified Sidestep',
+    class: 'paladin',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec. (Paladin talent)',
+  },
+  galestep: {
+    id: 'galestep',
+    name: 'Galestep',
+    class: 'shaman',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec. (Shaman talent)',
+  },
+  dreadstep: {
+    id: 'dreadstep',
+    name: 'Dreadstep',
+    class: 'warlock',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec. (Warlock talent)',
+  },
+  feral_tumble: {
+    id: 'feral_tumble',
+    name: 'Feral Tumble',
+    class: 'druid',
+    learnLevel: 10,
+    cost: 30,
+    castTime: 0,
+    cooldown: 12,
+    range: 0,
+    school: 'physical',
+    requiresTarget: false,
+    effects: [
+      { type: 'blinkForward', distance: 8, breakRoots: true },
+      { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
+    ],
+    description:
+      'Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec. (Druid talent)',
   },
 
   // Canonical Talents V2 active grants. These are absent from baseline class kits

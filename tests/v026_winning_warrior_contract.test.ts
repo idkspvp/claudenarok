@@ -45,6 +45,9 @@ const WINNING_WARRIOR_KIT = [
   'sweeping_strikes',
   'deep_wounds',
   'enrage_passive',
+  // The warrior's share of the baseline dodge roll every class trains at 10
+  // (tests/dodge_roll.test.ts owns that family's contract).
+  'bracing_roll',
 ] as const;
 
 function known(spec: 'arms' | 'fury' | 'prot', abilityId: string) {

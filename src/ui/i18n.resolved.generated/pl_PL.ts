@@ -8017,6 +8017,42 @@ export const pl_PL: EnTranslations = {
         "name": "Uczta Pustki",
         "description": "Pożera efekt magiczny (korzystny z wroga albo szkodliwy z sojusznika) i leczy cię o 6% maksymalnego zdrowia."
       },
+      "bracing_roll": {
+        "name": "Bracing Roll",
+        "description": "Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec."
+      },
+      "shadowslip": {
+        "name": "Shadowslip",
+        "description": "Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec."
+      },
+      "wildstep": {
+        "name": "Wildstep",
+        "description": "Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "phase_tumble": {
+        "name": "Phase Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec."
+      },
+      "veilstep": {
+        "name": "Veilstep",
+        "description": "Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec."
+      },
+      "sanctified_sidestep": {
+        "name": "Sanctified Sidestep",
+        "description": "Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec."
+      },
+      "galestep": {
+        "name": "Galestep",
+        "description": "Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "dreadstep": {
+        "name": "Dreadstep",
+        "description": "Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec."
+      },
+      "feral_tumble": {
+        "name": "Feral Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
       "bear_charge": {
         "name": "Szarża Bruina",
         "description": "Szarżuj na wroga, generując 9 wściekłości i ogłuszając go na 1 sek. Zasięg 8-25 jardów. Tylko w postaci Bruina."

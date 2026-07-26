@@ -8017,6 +8017,42 @@ export const ko_KR: EnTranslations = {
         "name": "공허의 포식",
         "description": "마법 효과 하나(적의 이로운 효과 또는 아군의 해로운 효과)를 삼키고 최대 생명력의 6%를 회복합니다."
       },
+      "bracing_roll": {
+        "name": "방어 구르기",
+        "description": "앞으로 8미터 구르며 속박을 풀고 1초 동안 모든 피해를 무시합니다."
+      },
+      "shadowslip": {
+        "name": "그림자 미끄러짐",
+        "description": "앞으로 8미터 미끄러지며 속박을 풀고 1초 동안 모든 피해를 스쳐 지나갑니다."
+      },
+      "wildstep": {
+        "name": "야생의 도약",
+        "description": "앞으로 8미터 도약하며 속박을 풀고 1초 동안 피해를 받지 않습니다."
+      },
+      "phase_tumble": {
+        "name": "위상 구르기",
+        "description": "앞으로 8미터 구르며 속박을 풀고 1초 동안 위상을 어긋내어 모든 피해를 피합니다."
+      },
+      "veilstep": {
+        "name": "장막 걸음",
+        "description": "장막 너머로 8미터 내디디며 속박을 풀고 1초 동안 피해를 받지 않습니다."
+      },
+      "sanctified_sidestep": {
+        "name": "신성한 곁걸음",
+        "description": "앞으로 8미터 비껴 나아가 속박을 풀고 1초 동안 모든 피해를 흘려냅니다."
+      },
+      "galestep": {
+        "name": "질풍 걸음",
+        "description": "질풍을 타고 앞으로 8미터 나아가 속박을 풀고 1초 동안 피해를 받지 않습니다."
+      },
+      "dreadstep": {
+        "name": "공포의 걸음",
+        "description": "어둠을 가르며 앞으로 8미터 나아가 속박을 풀고 1초 동안 피해를 받지 않습니다."
+      },
+      "feral_tumble": {
+        "name": "야성의 구르기",
+        "description": "앞으로 8미터 구르며 속박을 풀고 1초 동안 피해를 받지 않습니다."
+      },
       "bear_charge": {
         "name": "큰곰 돌진",
         "description": "적에게 돌진하여 분노 9를 생성하고 1초 동안 기절시킵니다. 사거리 8-25yd. 큰곰 변신 상태에서만 사용 가능."

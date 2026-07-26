@@ -2930,6 +2930,21 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   frenzied_regeneration: r('nature', 'blood', ['heart', { p: 'paw', ...BR }], ['glow']),
   berserk: r('fury', 'blood', ['paw', { p: 'fist', ...BR }], ['glow']),
   tranquility: r('nature', 'silverWhite', ['heart', { p: 'leaf', ...BR }], ['sparkle']),
+  // Baseline dodge roll, one per class (src/sim/content/classes.ts). The family
+  // reads as one verb: a 'boot' over each class's own background and palette,
+  // with the corner primitive carrying the flavor and 'motion' marking the dash.
+  // The corner prim is what keeps the nine distinct from each other and from
+  // Flickerstep / Curse of Exhaustion, which already own boot+lightning and
+  // boot+skull (tests/ability_icons.test.ts pins the no-collision rule).
+  bracing_roll: r('fury', 'steel', ['boot', { p: 'shield', ...TR }], ['motion']),
+  shadowslip: r('shadow', 'venom', ['boot', { p: 'dagger', ...TR }], ['motion']),
+  wildstep: r('nature', 'leafGreen', ['boot', { p: 'paw', ...TR }], ['motion']),
+  phase_tumble: r('arcane', 'arcanePink', ['boot', { p: 'gem', ...TR }], ['motion']),
+  veilstep: r('shadow', 'bone', ['boot', { p: 'moon', ...TR }], ['motion']),
+  sanctified_sidestep: r('holy', 'holyGold', ['boot', { p: 'wing', ...TR }], ['motion']),
+  galestep: r('storm', 'sky', ['boot', { p: 'lightning', ...TR }], ['motion']),
+  dreadstep: r('shadow', 'blood', ['boot', { p: 'tendrils', ...TR }], ['motion']),
+  feral_tumble: r('nature', 'blood', ['boot', { p: 'claw_slash', ...TR }], ['motion']),
 };
 
 const ITEM_RECIPES: Record<string, IconRecipe> = {

@@ -68,6 +68,7 @@ const PARTY_FRAME_HELPFUL_KINDS: ReadonlySet<AuraKind> = new Set<AuraKind>([
   'buff_dr',
   'buff_maxhp_pct',
   'stasis',
+  'invuln', // dodge-roll i-frames: a major defensive, worth a party-frame pip
 ]);
 
 // Evasion and Deterrence share buff_dodge with long-lived maintenance buffs, so

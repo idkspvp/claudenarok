@@ -9148,4 +9148,31 @@ export const ko_KR: Partial<Record<TranslationKey, string>> = {
   'devCommand.itemUnknown': '해당 ID를 가진 아이템이 없습니다.',
   'devCommand.kitCurrentSpec': '현재 전문화',
   'hudChrome.enchanting.wornTag': '착용 중 ({slot})',
+  'entities.abilities.bracing_roll.name': '방어 구르기',
+  'entities.abilities.bracing_roll.description':
+    '앞으로 8미터 구르며 속박을 풀고 1초 동안 모든 피해를 무시합니다.',
+  'entities.abilities.shadowslip.name': '그림자 미끄러짐',
+  'entities.abilities.shadowslip.description':
+    '앞으로 8미터 미끄러지며 속박을 풀고 1초 동안 모든 피해를 스쳐 지나갑니다.',
+  'entities.abilities.wildstep.name': '야생의 도약',
+  'entities.abilities.wildstep.description':
+    '앞으로 8미터 도약하며 속박을 풀고 1초 동안 피해를 받지 않습니다.',
+  'entities.abilities.phase_tumble.name': '위상 구르기',
+  'entities.abilities.phase_tumble.description':
+    '앞으로 8미터 구르며 속박을 풀고 1초 동안 위상을 어긋내어 모든 피해를 피합니다.',
+  'entities.abilities.veilstep.name': '장막 걸음',
+  'entities.abilities.veilstep.description':
+    '장막 너머로 8미터 내디디며 속박을 풀고 1초 동안 피해를 받지 않습니다.',
+  'entities.abilities.sanctified_sidestep.name': '신성한 곁걸음',
+  'entities.abilities.sanctified_sidestep.description':
+    '앞으로 8미터 비껴 나아가 속박을 풀고 1초 동안 모든 피해를 흘려냅니다.',
+  'entities.abilities.galestep.name': '질풍 걸음',
+  'entities.abilities.galestep.description':
+    '질풍을 타고 앞으로 8미터 나아가 속박을 풀고 1초 동안 피해를 받지 않습니다.',
+  'entities.abilities.dreadstep.name': '공포의 걸음',
+  'entities.abilities.dreadstep.description':
+    '어둠을 가르며 앞으로 8미터 나아가 속박을 풀고 1초 동안 피해를 받지 않습니다.',
+  'entities.abilities.feral_tumble.name': '야성의 구르기',
+  'entities.abilities.feral_tumble.description':
+    '앞으로 8미터 구르며 속박을 풀고 1초 동안 피해를 받지 않습니다.',
 };

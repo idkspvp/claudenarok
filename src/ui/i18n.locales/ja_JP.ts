@@ -9162,4 +9162,31 @@ export const ja_JP: Partial<Record<TranslationKey, string>> = {
   'devCommand.itemUnknown': 'そのIDのアイテムはありません。',
   'devCommand.kitCurrentSpec': '現在のスペック',
   'hudChrome.enchanting.wornTag': '装備中 ({slot})',
+  'entities.abilities.bracing_roll.name': 'ブレイスロール',
+  'entities.abilities.bracing_roll.description':
+    '前方へ8ヤード転がり、拘束を解除し、1秒間すべてのダメージを無効化する。',
+  'entities.abilities.shadowslip.name': 'シャドウスリップ',
+  'entities.abilities.shadowslip.description':
+    '前方へ8ヤード滑り込み、拘束を解除し、1秒間あらゆるダメージをすり抜ける。',
+  'entities.abilities.wildstep.name': 'ワイルドステップ',
+  'entities.abilities.wildstep.description':
+    '前方へ8ヤード跳躍し、拘束を解除し、1秒間ダメージを受けない。',
+  'entities.abilities.phase_tumble.name': 'フェイズタンブル',
+  'entities.abilities.phase_tumble.description':
+    '前方へ8ヤード転がり、拘束を解除し、1秒間位相をずらしてすべてのダメージを回避する。',
+  'entities.abilities.veilstep.name': 'ヴェイルステップ',
+  'entities.abilities.veilstep.description':
+    '帳の向こうへ8ヤード踏み込み、拘束を解除し、1秒間ダメージを受けない。',
+  'entities.abilities.sanctified_sidestep.name': '聖別のサイドステップ',
+  'entities.abilities.sanctified_sidestep.description':
+    '前方へ8ヤード踏み出し、拘束を解除し、1秒間すべてのダメージを受け流す。',
+  'entities.abilities.galestep.name': 'ゲイルステップ',
+  'entities.abilities.galestep.description':
+    '疾風に乗って前方へ8ヤード進み、拘束を解除し、1秒間ダメージを受けない。',
+  'entities.abilities.dreadstep.name': 'ドレッドステップ',
+  'entities.abilities.dreadstep.description':
+    '闇を抜けて前方へ8ヤード踏み出し、拘束を解除し、1秒間ダメージを受けない。',
+  'entities.abilities.feral_tumble.name': 'フェラルタンブル',
+  'entities.abilities.feral_tumble.description':
+    '前方へ8ヤード転がり、拘束を解除し、1秒間ダメージを受けない。',
 };

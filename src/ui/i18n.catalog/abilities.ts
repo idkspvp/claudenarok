@@ -1907,6 +1907,54 @@ const classAbilityNamesEn = {
         'Voidfeast',
         'Devours a magic effect (a beneficial one from an enemy, or a harmful one from an ally) and heals you for 6% of your maximum health. Only usable when there is an effect to devour.',
       ],
+      // The baseline dodge roll, one per class (src/sim/content/classes.ts). Their
+      // non-English text lives in the sparse overlays like every other entity string;
+      // the per-locale blocks below this map are legacy the build never reads.
+      [
+        'bracing_roll',
+        'Bracing Roll',
+        'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec.',
+      ],
+      [
+        'shadowslip',
+        'Shadowslip',
+        'Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec.',
+      ],
+      [
+        'wildstep',
+        'Wildstep',
+        'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec.',
+      ],
+      [
+        'phase_tumble',
+        'Phase Tumble',
+        'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec.',
+      ],
+      [
+        'veilstep',
+        'Veilstep',
+        'Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec.',
+      ],
+      [
+        'sanctified_sidestep',
+        'Sanctified Sidestep',
+        'Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec.',
+      ],
+      [
+        'galestep',
+        'Galestep',
+        'Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec.',
+      ],
+      [
+        'dreadstep',
+        'Dreadstep',
+        'Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec.',
+      ],
+      [
+        'feral_tumble',
+        'Feral Tumble',
+        'Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec.',
+      ],
     ]),
   },
 };

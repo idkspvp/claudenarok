@@ -9332,4 +9332,31 @@ export const ru_RU: Partial<Record<TranslationKey, string>> = {
   'devCommand.itemUnknown': 'Нет предмета с таким идентификатором.',
   'devCommand.kitCurrentSpec': 'Текущая специализация',
   'hudChrome.enchanting.wornTag': 'Надето ({slot})',
+  'entities.abilities.bracing_roll.name': 'Защитный перекат',
+  'entities.abilities.bracing_roll.description':
+    'Перекат на 8 м вперёд снимает обездвиживание и делает вас невосприимчивым ко всему урону на 1 сек.',
+  'entities.abilities.shadowslip.name': 'Теневое скольжение',
+  'entities.abilities.shadowslip.description':
+    'Скольжение на 8 м вперёд снимает обездвиживание и позволяет 1 сек. проходить сквозь любой урон.',
+  'entities.abilities.wildstep.name': 'Дикий скачок',
+  'entities.abilities.wildstep.description':
+    'Прыжок на 8 м вперёд снимает обездвиживание и защищает от любого урона на 1 сек.',
+  'entities.abilities.phase_tumble.name': 'Фазовый кувырок',
+  'entities.abilities.phase_tumble.description':
+    'Кувырок на 8 м вперёд снимает обездвиживание и выводит вас из фазы, поглощая весь урон на 1 сек.',
+  'entities.abilities.veilstep.name': 'Шаг за завесу',
+  'entities.abilities.veilstep.description':
+    'Шаг на 8 м вперёд за завесу снимает обездвиживание и защищает от любого урона на 1 сек.',
+  'entities.abilities.sanctified_sidestep.name': 'Освящённый уход',
+  'entities.abilities.sanctified_sidestep.description':
+    'Уход на 8 м вперёд снимает обездвиживание и отводит весь урон на 1 сек.',
+  'entities.abilities.galestep.name': 'Шаг вихря',
+  'entities.abilities.galestep.description':
+    'Порыв ветра несёт вас на 8 м вперёд, снимает обездвиживание и защищает от любого урона на 1 сек.',
+  'entities.abilities.dreadstep.name': 'Шаг ужаса',
+  'entities.abilities.dreadstep.description':
+    'Рывок сквозь тьму на 8 м вперёд снимает обездвиживание и защищает от любого урона на 1 сек.',
+  'entities.abilities.feral_tumble.name': 'Звериный кувырок',
+  'entities.abilities.feral_tumble.description':
+    'Кувырок на 8 м вперёд снимает обездвиживание и защищает от любого урона на 1 сек.',
 };

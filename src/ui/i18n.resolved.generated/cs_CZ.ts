@@ -8017,6 +8017,42 @@ export const cs_CZ: EnTranslations = {
         "name": "Hostina prázdnoty",
         "description": "Pohltí magický účinek (prospěšný z nepřítele nebo škodlivý ze spojence) a vyléčí vás o 6 % maximálního zdraví."
       },
+      "bracing_roll": {
+        "name": "Bracing Roll",
+        "description": "Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec."
+      },
+      "shadowslip": {
+        "name": "Shadowslip",
+        "description": "Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec."
+      },
+      "wildstep": {
+        "name": "Wildstep",
+        "description": "Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "phase_tumble": {
+        "name": "Phase Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec."
+      },
+      "veilstep": {
+        "name": "Veilstep",
+        "description": "Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec."
+      },
+      "sanctified_sidestep": {
+        "name": "Sanctified Sidestep",
+        "description": "Sidesteps 8 yards forward, breaking roots, and turns aside all damage for 1 sec."
+      },
+      "galestep": {
+        "name": "Galestep",
+        "description": "Rides the gale 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
+      "dreadstep": {
+        "name": "Dreadstep",
+        "description": "Lurches 8 yards forward through the dark, breaking roots, and takes no damage for 1 sec."
+      },
+      "feral_tumble": {
+        "name": "Feral Tumble",
+        "description": "Tumbles 8 yards forward, breaking roots, and takes no damage for 1 sec."
+      },
       "bear_charge": {
         "name": "Medvědí výpad",
         "description": "Vyrazí k nepříteli, vygeneruje 9 vzteku a omráčí ho na 1 s. Dosah 8-25 yardů. Pouze v medvědí podobě."

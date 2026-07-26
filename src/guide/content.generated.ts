@@ -480,6 +480,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "enrage_passive",
         "name": "Mayhem"
+      },
+      {
+        "id": "bracing_roll",
+        "name": "Bracing Roll"
       }
     ],
     "model": "player_warrior",
@@ -604,6 +608,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "sacred_bulwark",
         "name": "Sacred Bulwark"
+      },
+      {
+        "id": "sanctified_sidestep",
+        "name": "Sanctified Sidestep"
       }
     ],
     "model": "player_paladin",
@@ -726,6 +734,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "counter_shot",
         "name": "Hushing Shot"
+      },
+      {
+        "id": "wildstep",
+        "name": "Wildstep"
       }
     ],
     "model": "player_hunter",
@@ -872,6 +884,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "kick",
         "name": "Boot"
+      },
+      {
+        "id": "shadowslip",
+        "name": "Shadowslip"
       }
     ],
     "model": "player_rogue",
@@ -971,6 +987,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "flash_heal",
         "name": "Urgent Prayer"
+      },
+      {
+        "id": "veilstep",
+        "name": "Veilstep"
       }
     ],
     "model": "player_priest",
@@ -1075,6 +1095,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "earthquake",
         "name": "Earthquake"
+      },
+      {
+        "id": "galestep",
+        "name": "Galestep"
       }
     ],
     "model": "player_shaman",
@@ -1319,6 +1343,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "fireball_form",
         "name": "Ember Form"
+      },
+      {
+        "id": "phase_tumble",
+        "name": "Phase Tumble"
       }
     ],
     "model": "player_mage",
@@ -1453,6 +1481,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "spell_lock",
         "name": "Gag Order"
+      },
+      {
+        "id": "dreadstep",
+        "name": "Dreadstep"
       }
     ],
     "model": "player_warlock",
@@ -1650,6 +1682,10 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       {
         "id": "primal_reflexes",
         "name": "Primal Reflexes"
+      },
+      {
+        "id": "feral_tumble",
+        "name": "Feral Tumble"
       }
     ],
     "model": "player_druid",

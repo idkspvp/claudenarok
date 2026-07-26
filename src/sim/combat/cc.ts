@@ -59,6 +59,15 @@ export function isInStasis(e: Entity): boolean {
   return e.auras.some((a) => a.kind === 'stasis');
 }
 
+// Invulnerability frames (the baseline dodge roll). Damage-immune but NOT
+// controlled: deliberately absent from isStunned/isRooted above, so a rolling
+// player keeps moving, casting, and swinging. Read only by the damage gate in
+// combat/damage.ts; nothing else may key on it without an owner decision, or the
+// "immune but free" contract quietly turns into a second stasis.
+export function isInvulnerable(e: Pick<Entity, 'auras'>): boolean {
+  return e.auras.some((a) => a.kind === 'invuln');
+}
+
 export function isRooted(e: Entity): boolean {
   return isStunned(e) || e.auras.some((a) => a.kind === 'root');
 }

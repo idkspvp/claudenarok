@@ -8017,6 +8017,42 @@ export const zh_TW: EnTranslations = {
         "name": "虛空盛宴",
         "description": "吞噬一個魔法效果（敵人的增益或盟友的減益），並恢復你最大生命值的6%。"
       },
+      "bracing_roll": {
+        "name": "穩步翻滾",
+        "description": "向前翻滾 8 碼，掙脫定身，並在 1 秒內免疫所有傷害。"
+      },
+      "shadowslip": {
+        "name": "暗影疾滑",
+        "description": "向前滑行 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
+      "wildstep": {
+        "name": "野性疾步",
+        "description": "向前躍出 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
+      "phase_tumble": {
+        "name": "相位翻滾",
+        "description": "向前翻滾 8 碼，掙脫定身，並在 1 秒內相位偏移，避開所有傷害。"
+      },
+      "veilstep": {
+        "name": "帷幕之步",
+        "description": "隱入帷幕向前邁出 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
+      "sanctified_sidestep": {
+        "name": "聖化閃步",
+        "description": "向前閃步 8 碼，掙脫定身，並在 1 秒內擋開所有傷害。"
+      },
+      "galestep": {
+        "name": "馭風疾步",
+        "description": "乘風向前 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
+      "dreadstep": {
+        "name": "懼影之步",
+        "description": "穿過黑暗向前踏出 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
+      "feral_tumble": {
+        "name": "野性翻滾",
+        "description": "向前翻滾 8 碼，掙脫定身，並在 1 秒內不受任何傷害。"
+      },
       "bear_charge": {
         "name": "巨熊衝鋒",
         "description": "向敵人衝鋒，產生 9 點怒氣並將其昏迷 1 秒。射程 8-25 公尺。僅限巨熊形態。"
