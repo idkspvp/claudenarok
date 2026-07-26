@@ -4737,7 +4737,7 @@ export interface DeedStats {
 // be spammed from a hacked client to inflate the (leaderboard-visible) rank —
 // the server caps rank at maxPrestigeRank(lifetimeXp) regardless of how many
 // prestige commands arrive.
-export const PRESTIGE_XP_PER_RANK = xpForLevel(MAX_LEVEL); // = 23,200
+export const PRESTIGE_XP_PER_RANK = xpForLevel(MAX_LEVEL); // one cap-level step
 
 // Highest prestige rank the given lifetime XP can support (post-cap XP / cost).
 export function maxPrestigeRank(lifetimeXp: number): number {

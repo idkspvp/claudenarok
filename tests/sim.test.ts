@@ -24,6 +24,7 @@ import {
   type SimEvent,
   spellHitChance,
   xpForLevel,
+  xpToReachLevel,
 } from '../src/sim/types';
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
 import { placePlayerInOpenField } from './helpers/open_field';
@@ -1544,7 +1545,9 @@ describe('leveling', () => {
 
   it('caps at max level', () => {
     const sim = makeSim('warrior');
-    (sim as any).grantXp(999999);
+    // Enough to overshoot the whole curve however long it is. A literal sized for
+    // the old 20-cap stopped reaching the ceiling the moment it moved to 99.
+    (sim as any).grantXp(xpToReachLevel(MAX_LEVEL) * 2);
     expect(sim.player.level).toBe(MAX_LEVEL);
   });
 });

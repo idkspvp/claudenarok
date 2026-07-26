@@ -69,7 +69,13 @@ export function xpBarView(input: XpBarInput): XpBarView {
 
   // At/after the cap with overflow on: fill toward the next virtual level.
   const prog = virtualLevelProgress(lifetimeXp);
-  const extra = prog.level - MAX_LEVEL;
+  // Floored at 0. `prog.level` is derived from lifetime XP while the character's
+  // real level is authoritative, and the two can disagree: a character granted its
+  // level directly (/dev level, a GM grant) sits at the cap holding far less XP
+  // than the curve says the cap costs, and the raw subtraction then renders
+  // "Lv 99 (+-72)". Raising the cap to 99 made that gap the common case rather
+  // than a corner, but the bar was always one such character away from it.
+  const extra = Math.max(0, prog.level - MAX_LEVEL);
   // FR-3.3 format: "Lv 20 (+7)  ·  1,284,500 total XP  ·  62% to next"
   const label =
     `${t('game.xp.lv')} ${MAX_LEVEL} (+${extra})  ·  ` +

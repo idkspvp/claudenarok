@@ -25,7 +25,11 @@ describe('requiredLevelFor', () => {
     expect(requiredLevelFor(gear('uncommon'))).toBe(1);
     expect(requiredLevelFor(gear('rare'))).toBe(12);
     expect(requiredLevelFor(gear('epic'))).toBe(18);
-    expect(requiredLevelFor(gear('legendary'))).toBe(MAX_LEVEL);
+    // 20, not MAX_LEVEL. The fallback band is deliberately pinned to the ceiling of
+    // AUTHORED content, which still ends at 20, so the four Nythraxis legendaries
+    // that land on it stay equippable after the cap moved to 99.
+    expect(requiredLevelFor(gear('legendary'))).toBe(20);
+    expect(requiredLevelFor(gear('legendary'))).toBeLessThan(MAX_LEVEL);
   });
 
   it('treats a missing quality as common (ungated)', () => {

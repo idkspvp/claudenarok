@@ -141,9 +141,13 @@ describe('solo grantXp at the cap', () => {
     const sim = makeSim('warrior');
     sim.setPlayerLevel(MAX_LEVEL);
     let expected = sim.lifetimeXp;
+    // Sized from the curve, not a literal: one post-cap virtual level split into
+    // 50 awards. A hardcoded amount silently stops crossing a virtual level the
+    // moment the cap moves, which is exactly what happened at 20 -> 99.
+    const award = Math.ceil((xpToReachLevel(MAX_LEVEL + 1) - xpToReachLevel(MAX_LEVEL)) / 50) + 1;
     for (let i = 0; i < 50; i++) {
-      sim.grantXp(1000);
-      expected += 1000;
+      sim.grantXp(award);
+      expected += award;
     }
     expect(sim.lifetimeXp).toBe(expected);
     expect(virtualLevel(sim.lifetimeXp)).toBeGreaterThan(MAX_LEVEL);
@@ -164,10 +168,11 @@ describe('solo grantXp at the cap', () => {
     const sim = makeSim('warrior');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.events.length = 0;
-    sim.grantXp(xpToReachLevel(22)); // jump well past the cap
+    // Two full virtual levels past the cap, measured off the curve.
+    sim.grantXp(xpToReachLevel(MAX_LEVEL + 2) - xpToReachLevel(MAX_LEVEL));
     const vlevels = sim.events.filter((e) => e.type === 'virtualLevelUp').map((e: any) => e.level);
-    expect(vlevels).toContain(21);
-    expect(vlevels).toContain(22);
+    expect(vlevels).toContain(MAX_LEVEL + 1);
+    expect(vlevels).toContain(MAX_LEVEL + 2);
   });
 });
 
@@ -294,7 +299,7 @@ describe('prestige', () => {
   it('resets the level bar and bumps rank but never lifetimeXp', () => {
     const sim = makeSim('warrior');
     sim.setPlayerLevel(MAX_LEVEL);
-    sim.grantXp(800_000); // build a real lifetime total
+    sim.grantXp(PRESTIGE_XP_PER_RANK); // exactly one rank's worth of post-cap XP
     const m = sim.meta(sim.playerId)!;
     m.xp = 123; // simulate stray bar XP to prove the reset clears it
     const lifeBefore = sim.lifetimeXp;
@@ -393,7 +398,7 @@ describe('persistence', () => {
   it('round-trips lifetimeXp, prestigeRank, and milestones', () => {
     const sim = makeSim('warrior');
     sim.setPlayerLevel(MAX_LEVEL);
-    sim.grantXp(MILESTONES[0].lifetimeXp + 5);
+    sim.grantXp(Math.max(MILESTONES[0].lifetimeXp + 5, PRESTIGE_XP_PER_RANK));
     sim.tick(); // milestone deeds grant (and dual-write the legacy set) at the tick tail
     sim.prestige();
     const state = sim.serializeCharacter(sim.playerId)!;
@@ -442,20 +447,22 @@ describe('xp-bar label states', () => {
     });
     expect(v.postCap).toBe(true);
     expect(v.label).toBe(
-      `Lv 20 (+0)  ·  ${formatXp(xpToReachLevel(MAX_LEVEL))} total XP  ·  0% to next`,
+      `Lv ${MAX_LEVEL} (+0)  ·  ${formatXp(xpToReachLevel(MAX_LEVEL))} total XP  ·  0% to next`,
     );
   });
 
   it('post-cap shows virtual level, total, and percent to next', () => {
-    const lifetime = xpToReachLevel(27); // start of virtual level 27
+    // Seven virtual levels past the cap, measured off the curve rather than named
+    // as a literal level so the case survives the cap moving.
+    const lifetime = xpToReachLevel(MAX_LEVEL + 7);
     const v = xpBarView({ level: MAX_LEVEL, xp: 0, lifetimeXp: lifetime, showOverflow: true });
     expect(v.postCap).toBe(true);
-    expect(v.label).toBe(`Lv 20 (+7)  ·  ${formatXp(lifetime)} total XP  ·  0% to next`);
+    expect(v.label).toBe(`Lv ${MAX_LEVEL} (+7)  ·  ${formatXp(lifetime)} total XP  ·  0% to next`);
   });
 
   it('post-cap fill fraction advances within the virtual level', () => {
-    const base = xpToReachLevel(27);
-    const span = xpToReachLevel(28) - xpToReachLevel(27);
+    const base = xpToReachLevel(MAX_LEVEL + 7);
+    const span = xpToReachLevel(MAX_LEVEL + 8) - xpToReachLevel(MAX_LEVEL + 7);
     const v = xpBarView({
       level: MAX_LEVEL,
       xp: 0,
@@ -463,7 +470,12 @@ describe('xp-bar label states', () => {
       showOverflow: true,
     });
     expect(v.fillFrac).toBeCloseTo(0.5, 1);
-    expect(v.label).toMatch(/Lv 20 \(\+7\) {2}· {2}.* total XP {2}· {2}\d+% to next/);
+    // Asserted in parts rather than one regex: the label interpolates MAX_LEVEL,
+    // and a template-built pattern needs its backslashes doubled, which is how the
+    // previous version of this line silently became an invalid expression.
+    expect(v.label).toContain(`Lv ${MAX_LEVEL} (+7)`);
+    expect(v.label).toContain('total XP');
+    expect(v.label).toMatch(/\d+% to next$/);
   });
 
   it('classic "MAX LEVEL" when overflow display is turned off', () => {
@@ -529,7 +541,10 @@ describe('online ClientWorld path', () => {
     if ('error' in session) throw new Error(session.error);
 
     server.sim.setPlayerLevel(MAX_LEVEL, session.pid);
-    server.sim.grantXp(xpToReachLevel(23), server.sim.meta(session.pid)!);
+    server.sim.grantXp(
+      xpToReachLevel(MAX_LEVEL + 3) - xpToReachLevel(MAX_LEVEL),
+      server.sim.meta(session.pid)!,
+    );
     server.sim.prestige(session.pid);
 
     (server as any).broadcastSnapshots();
