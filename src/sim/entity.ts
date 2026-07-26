@@ -219,6 +219,13 @@ export function createPlayer(id: number, cls: PlayerClass, pos: Vec3, name: stri
   e.templateId = cls;
   e.name = name;
   e.level = 1;
+  // A player is Demi-Human, Neutral, and Medium in Ragnarok, which is why a
+  // demi-human card is the one every player fears in PvP and why no weapon class
+  // is sharply better against another player.
+  e.race = 'demihuman';
+  e.element = 'neutral';
+  e.elementLevel = 1;
+  e.size = 'medium';
   e.resourceType = def.resourceType;
   e.color = def.color;
   // Warriors begin in the spec-agnostic default. The tick reconciliation moves
@@ -793,6 +800,13 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   e.name = template.name;
   e.level = level;
   e.hostile = true;
+  // Carry the template's Ragnarok classifications onto the entity so combat and
+  // the online client both have them without a table lookup. Unauthored fields
+  // stay undefined and read as the even trade at the chart.
+  e.race = template.race;
+  e.element = template.element;
+  e.elementLevel = template.elementLevel;
+  e.size = template.size;
   // Elite scaling, classic-style: ~2.3x health, ~1.5x damage.
   const hpMult = template.elite ? 2.3 : 1;
   const dmgMult = template.elite ? 1.5 : 1;

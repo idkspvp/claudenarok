@@ -52,6 +52,7 @@ import {
   type WeaponInfo,
 } from '../types';
 import { drawWeapon } from '../weapon_stow';
+import { attributeDamageMultiplier } from './attribute_damage';
 import { applyRageSpendCooldownRefund, spendResource } from './casting_lifecycle';
 import { blindMissBonus, isDisarmed, isInStasis, isStunned } from './cc';
 import { consumeNextAttackCrit } from './empower_next';
@@ -493,6 +494,17 @@ export function meleeSwing(
       mult +
     bonus +
     imbueBonus;
+  // The Ragnarok classifications: the weapon's class against the target's size,
+  // and the swing's attribute against what the target is made of. Both default
+  // to the even trade, so a target whose template has not been authored yet
+  // takes exactly what it took before the chart existed.
+  dmg *= attributeDamageMultiplier({
+    attackElement: weapon.element,
+    weaponType: weapon.weaponType,
+    defenderElement: target.element,
+    defenderElementLevel: target.elementLevel,
+    defenderSize: target.size,
+  });
   const critChance = Math.max(
     0.005,
     attacker.critChance +

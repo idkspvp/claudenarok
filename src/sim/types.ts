@@ -1,6 +1,7 @@
 // Core shared types for the simulation. The sim layer has zero DOM/rendering deps.
 
 import type { ChatSenderFlair, StreamerLinks } from './account_flair';
+import type { Element, ElementLevel, Race, Size } from './combat/elements';
 import type { GatheringProfessionId } from './content/professions';
 import type { LockSession, LootTier, PickAction, StepResult, VisibleCell } from './lockpick';
 
@@ -620,6 +621,32 @@ export function emptyStatAllocation(): StatAllocation {
 
 // The attributes authored in content (items, enchants, set bonuses). WARFARE
 // fractions are derived from ratings at runtime and are never authored.
+// The element / race / size vocabulary lives in its own leaf (combat/elements.ts)
+// so the chart has no dependency on this file, and is re-exported here because
+// every consumer already reaches for types.ts.
+export type { Element, ElementLevel, Race, Size } from './combat/elements';
+
+/** The Ragnarok weapon classes. Each has its own size table and its own ASPD. */
+export type WeaponType =
+  | 'dagger'
+  | 'sword'
+  | 'twohand_sword'
+  | 'spear'
+  | 'twohand_spear'
+  | 'axe'
+  | 'twohand_axe'
+  | 'mace'
+  | 'rod'
+  | 'bow'
+  | 'katar'
+  | 'book'
+  | 'knuckle'
+  | 'instrument'
+  | 'whip';
+
+/** Weapon level 1 to 4: the refine ladder a weapon sits on, not its item level. */
+export type WeaponLevel = 1 | 2 | 3 | 4;
+
 export type CoreStats = Pick<Stats, 'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor'>;
 
 export interface WeaponInfo {
@@ -627,6 +654,18 @@ export interface WeaponInfo {
   max: number;
   speed: number; // seconds per swing
   dagger?: boolean; // backstab requires a dagger
+  // Which Ragnarok weapon class this is. Drives the size table (a dagger is
+  // brutal on small targets and feeble on large ones; a spear is the reverse),
+  // and is the reason a player carries more than one weapon. Optional so the
+  // existing tables keep compiling; an unmarked weapon is treated as a sword,
+  // the even-trade shape (see combat/weapon_size.ts).
+  weaponType?: WeaponType;
+  // Weapon level 1 to 4. NOT item level: it sets how much attack power each
+  // refine adds and where the safe refine limit falls (combat/refine.ts).
+  weaponLevel?: WeaponLevel;
+  // The attribute the swing carries. Neutral unless the weapon is elemental or
+  // has been endowed.
+  element?: Element;
 }
 
 export type WeaponHand = 'mainhand' | 'onehand' | 'twohand';
@@ -1151,6 +1190,20 @@ export interface MobTemplate {
   minLevel: number;
   maxLevel: number;
   family: MobFamily;
+  // The three Ragnarok classifications. Optional so the existing 119 templates
+  // keep compiling while they are authored one at a time; the defaults are the
+  // even trade, so an unmarked monster behaves exactly as it does today.
+  //   race    what it IS, for the cards and skills that key off a race
+  //   element what it is MADE of, plus the attribute level that sharpens the
+  //           chart in both directions (combat/elements.ts)
+  //   size    what shape it is, which is what weapon class keys off
+  // `family` is the pre-conversion fantasy grouping and is display-only: nothing
+  // reads it for damage. Race replaces it as the mechanical one; do not grow a
+  // second set of rules on family.
+  race?: Race;
+  element?: Element;
+  elementLevel?: ElementLevel;
+  size?: Size;
   hpPerLevel: number;
   hpBase: number;
   dmgBase: number; // min dmg at level 1
@@ -2847,6 +2900,16 @@ export interface Entity {
   name: string;
   level: number;
   guild: string;
+  // The Ragnarok classifications, resolved onto the ENTITY rather than looked up
+  // from the template at each hit. Combat needs them every swing, and the online
+  // client mirrors entities and never sees the template table, so a lookup would
+  // work server-side and leave the client unable to show why a hit landed for
+  // what it did. Defaults are the even trade (neutral / medium), so an entity
+  // whose template has not been authored yet fights exactly as it does today.
+  race?: Race;
+  element?: Element;
+  elementLevel?: ElementLevel;
+  size?: Size;
   // Book of Deeds display title: a deed id (never display text), null/absent
   // for untitled players and every mob/npc. Written by the sim title setter
   // (src/sim/deeds.ts setActiveTitle) and player spawn from persisted state;
