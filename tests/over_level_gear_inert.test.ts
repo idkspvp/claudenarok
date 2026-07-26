@@ -52,7 +52,8 @@ describe('over-level gear is inert', () => {
   it('reactivates once the wearer reaches the required level', () => {
     const active = characterDerivedStats('warrior', LEGS_REQ, { legs: LEGS } as Equip);
     const bare = characterDerivedStats('warrior', LEGS_REQ, {} as Equip);
-    expect(active.stats.armor).toBe(bare.stats.armor + 95);
+    // 95 from the piece, plus 2 armor for each of the 4 Vitality it carries.
+    expect(active.stats.armor).toBe(bare.stats.armor + 95 + 8);
     expect(active.stats.vit).toBe(bare.stats.vit + 4);
     expect(active.maxHp).toBeGreaterThan(bare.maxHp);
   });

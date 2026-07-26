@@ -243,7 +243,8 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     expect(meta.equipment.legs).toBe('cryptbone_greaves');
     expect(meta.equipmentInstance?.legs).toEqual({ rolled: { quality: 'rare' } });
     const after = sim.entities.get(sim.playerId)!.stats;
-    expect(after.armor - before.armor).toBe(48);
+    // 48 from the piece, plus 2 armor for each of the 2 Vitality it rolled.
+    expect(after.armor - before.armor).toBe(48 + 4);
     expect(after.vit - before.vit).toBe(2);
 
     const plain = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });

@@ -64,9 +64,8 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
       m.stats.agiPct = 0.1;
     });
     expect(buffed.agi).toBe(Math.round(base.agi * 1.1));
-    // Armor adds exactly 2 per Agility point (armorPct is 0 here, no form), so the delta
-    // must equal the added Agility times 2: proves agiPct lands before the armor derivation.
-    expect(buffed.armor - base.armor).toBe((buffed.agi - base.agi) * 2);
+    // Armor is Vitality's, so an Agility multiplier must not move it at all.
+    expect(buffed.armor).toBe(base.armor);
     expect(buffed.dodge).toBeGreaterThan(base.dodge);
     // AGI's reach STOPS at armor and evasion now. Crit belongs to LUK and ranged
     // attack power to DEX, so an Agility multiplier must leave both untouched:

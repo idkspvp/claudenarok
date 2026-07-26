@@ -108,7 +108,7 @@ describe('item level: showcase tiers are normalized to budget', () => {
   it('normalization preserved each piece stat identity (no attribute swapped in/out)', () => {
     const ident = (id: string) =>
       PRIMARY_STATS.filter((k) => (ITEMS[id].stats?.[k] ?? 0) > 0).sort();
-    expect(ident('hollowbone_hauberk')).toEqual(['vit', 'str']);
+    expect(ident('hollowbone_hauberk')).toEqual(['str', 'vit']);
     expect(ident('gravewoven_raiment')).toEqual(['int', 'luk']);
     expect(ident('cryptstalker_jerkin')).toEqual(['agi', 'vit']);
     expect(ident('gravecaller_staff')).toEqual(['int', 'luk']);

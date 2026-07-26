@@ -2678,9 +2678,20 @@ describe('The Drowned Litany (Phase 7 heroic affixes)', () => {
       p.pos.x = run.origin.x + h.x;
       p.pos.z = run.origin.z + zBase + h.z;
       p.prevPos = { ...p.pos };
-      const hp0 = p.hp;
-      for (let i = 0; i < 20; i++) sim.tick();
-      return hp0 - p.hp;
+      // Sum the BLACKWATER damage specifically, off the events, rather than
+      // reading the health bar at the end. Something else in the baptistry also
+      // hits for a fixed amount inside this window, and it lands identically in
+      // both runs, so folding it into the total drags a clean 1.35 down to 1.19.
+      let taken = 0;
+      for (let i = 0; i < 20; i++) {
+        for (const ev of sim.tick()) {
+          if (ev.type === 'damage' && ev.ability === 'Blackwater' && ev.targetId === p.id)
+            taken += ev.amount;
+        }
+        p.hp = p.maxHp;
+        p.dead = false;
+      }
+      return taken;
     };
     const base = pulse([]);
     const flooded = pulse(['high_water']);

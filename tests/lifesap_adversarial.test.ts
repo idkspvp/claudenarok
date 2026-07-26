@@ -175,7 +175,7 @@ describe('Lifesap adversarial balance checks', () => {
     // warrior mints damage / attackerLevel instead, and the comparison lands
     // at ~11x.
     //
-    // The 7.7 measured there became 8.91 with the Ragnarok stat conversion: armor
+    // The 7.7 measured there became 7.92 with the Ragnarok stat conversion: armor
     // is still 2 per point of Agility, but a level-20 warrior now has around 8
     // Agility instead of around 40, so the same five swings land harder and mint
     // more rage. That is armor tuning left over from the old attribute scale, not
@@ -190,7 +190,7 @@ describe('Lifesap adversarial balance checks', () => {
     wolf.facing = Math.atan2(p.pos.x - wolf.pos.x, p.pos.z - wolf.pos.z);
     for (let i = 0; i < 5; i++) (warrior as unknown as SimInternals).mobSwing(wolf, p);
 
-    expect(p.resource).toBeCloseTo(8.91);
+    expect(p.resource).toBeCloseTo(7.92);
     expect(measureLifesapPotential('bear_form')).toBeGreaterThanOrEqual(p.resource * 11);
   });
 

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { baseSwingSpeed, ROGUE_BASE_SWING_SPEED } from '../src/sim/combat/form_swing';
 import { CLASSES, ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
-import { type AuraKind, armorReduction } from '../src/sim/types';
+import { type AuraKind, armorReduction, STATUS_AP_PER_DPS } from '../src/sim/types';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
@@ -100,8 +100,10 @@ describe('Wolf Form swing speed', () => {
   }
 
   it('Wolf Form normalizes swing DAMAGE to the rogue cadence (no AP double-dip)', () => {
+    // The player scale, not the mob one: a druid's attack power is the Ragnarok
+    // status number, so its swing contribution divides by STATUS_AP_PER_DPS.
     const expectAt = (ap: number, speed: number, dr: number) =>
-      Math.max(1, Math.round((ap / 14) * speed * (1 - dr)));
+      Math.max(1, Math.round((ap / STATUS_AP_PER_DPS) * speed * (1 - dr)));
 
     const sim = makeWorld();
     const a = sim.addPlayer('druid', 'Feral');
