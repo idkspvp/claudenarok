@@ -13,8 +13,8 @@
     "Final Stand enrage at 5% + grantNythraxisLockout (raidLockouts) + onBossDeath death dialogue",
     "class:warrior"
   ],
-  "draws": 3303,
-  "drawDigest": "fac81e6c",
+  "draws": 3269,
+  "drawDigest": "f3872d73",
   "frames": [
     {
       "tick": 0,
@@ -34,11 +34,11 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 425,
-      "state": "5483d3da",
-      "events": "09dcb256",
+      "state": "470e166f",
+      "events": "a4f4461b",
       "rng": {
-        "draws": 4,
-        "digest": "9c74b095"
+        "draws": 3,
+        "digest": "273f0132"
       },
       "label": "engage",
       "players": [
@@ -56,9 +56,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 1759
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -79,7 +77,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -95,11 +101,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -124,19 +142,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -173,7 +198,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -189,7 +222,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -217,15 +262,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -262,7 +314,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -278,7 +338,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -306,15 +378,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -351,7 +430,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -367,7 +454,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -395,15 +494,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -440,7 +546,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -456,7 +570,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -484,21 +610,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -512,16 +645,17 @@
           ],
           "blockChance": 0.05,
           "blockValue": 6,
+          "combatTimer": 99.05,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 99.05,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -535,7 +669,6 @@
             "z": -1160
           },
           "potionCooldownUntil": -1,
-          "resource": 96.745,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -544,12 +677,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -570,10 +703,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -583,20 +716,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -618,10 +751,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -631,20 +764,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -666,10 +799,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -679,20 +812,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -714,10 +847,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -727,20 +860,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -753,6 +886,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
+          "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -815,55 +949,55 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "e1b95bd0",
+      "state": "e2d07315",
       "events": "741638a5",
       "rng": {
-        "draws": 4,
-        "digest": "9c74b095"
+        "draws": 3,
+        "digest": "273f0132"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "59853075",
+      "state": "06aad300",
       "events": "d25ba3b3",
       "rng": {
-        "draws": 4,
-        "digest": "9c74b095"
+        "draws": 3,
+        "digest": "273f0132"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "21738a69",
+      "state": "83b75a18",
       "events": "741638a5",
       "rng": {
-        "draws": 4,
-        "digest": "9c74b095"
+        "draws": 3,
+        "digest": "273f0132"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "26706fea",
+      "state": "28095263",
       "events": "741638a5",
       "rng": {
-        "draws": 4,
-        "digest": "9c74b095"
+        "draws": 3,
+        "digest": "273f0132"
       }
     },
     {
       "tick": 42,
       "time": 2.1,
       "nextId": 427,
-      "state": "080782ad",
+      "state": "549f621c",
       "events": "a47b3d27",
       "rng": {
-        "draws": 10,
-        "digest": "2c0596f1"
+        "draws": 9,
+        "digest": "ee7aec3d"
       },
       "label": "phase1-adds",
       "players": [
@@ -881,9 +1015,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 1759
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -904,7 +1036,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -920,11 +1060,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -949,19 +1101,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -998,7 +1157,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1014,7 +1181,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1042,15 +1221,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -1087,7 +1273,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1103,7 +1297,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1131,15 +1337,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -1176,7 +1389,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1192,7 +1413,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1220,15 +1453,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -1265,7 +1505,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1281,7 +1529,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1309,21 +1569,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -1337,17 +1604,17 @@
           ],
           "blockChance": 0.05,
           "blockValue": 6,
-          "combatTimer": 2.05,
+          "combatTimer": 101.1,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 101.1,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -1361,7 +1628,6 @@
             "z": -1160
           },
           "potionCooldownUntil": -1,
-          "resource": 96.745,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -1370,12 +1636,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -1396,10 +1662,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1409,20 +1675,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -1444,10 +1710,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1457,20 +1723,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -1492,10 +1758,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1505,20 +1771,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -1540,10 +1806,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1553,20 +1819,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -1579,7 +1845,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 2.05,
+          "combatTimer": 101.1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1753,11 +2019,11 @@
       "tick": 43,
       "time": 2.15,
       "nextId": 428,
-      "state": "98618193",
+      "state": "8219911e",
       "events": "e5643833",
       "rng": {
-        "draws": 14,
-        "digest": "54cd818c"
+        "draws": 13,
+        "digest": "f6645142"
       },
       "label": "transition",
       "players": [
@@ -1775,9 +2041,7 @@
           "bank": {},
           "cls": "warrior",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 1759
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -1798,7 +2062,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1814,11 +2086,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1843,19 +2127,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -1892,7 +2183,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1908,7 +2207,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -1936,15 +2247,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -1981,7 +2299,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1997,7 +2323,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -2025,15 +2363,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -2070,7 +2415,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -2086,7 +2439,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -2114,15 +2479,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -2159,7 +2531,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -2175,7 +2555,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -2203,21 +2595,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -2241,17 +2640,17 @@
           ],
           "blockChance": 0.05,
           "blockValue": 6,
-          "combatTimer": 2.1,
+          "combatTimer": 101.15,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 101.15,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -2265,7 +2664,6 @@
             "z": -1160
           },
           "potionCooldownUntil": -1,
-          "resource": 96.745,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -2274,12 +2672,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -2312,10 +2710,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2325,20 +2723,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -2372,10 +2770,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2385,20 +2783,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -2432,10 +2830,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2445,20 +2843,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -2492,10 +2890,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2505,20 +2903,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -2542,7 +2940,7 @@
               "sourceId": 420
             }
           ],
-          "combatTimer": 2.1,
+          "combatTimer": 101.15,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -2927,18 +3325,18 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 428,
-      "state": "7e1bdc0c",
+      "state": "3fe7877b",
       "events": "741638a5",
       "rng": {
-        "draws": 36,
-        "digest": "0671d8d9"
+        "draws": 35,
+        "digest": "81adf9b3"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 428,
-      "state": "3a534e5a",
+      "state": "f9d0d6df",
       "events": "741638a5",
       "rng": {
         "draws": 74,
@@ -2949,165 +3347,165 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 428,
-      "state": "05a6177d",
+      "state": "43e9e2c0",
       "events": "741638a5",
       "rng": {
-        "draws": 116,
-        "digest": "ce0ca413"
+        "draws": 110,
+        "digest": "faae3233"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "41d04de2",
-      "events": "0eb2c4db",
+      "state": "04611862",
+      "events": "611eb867",
       "rng": {
-        "draws": 169,
-        "digest": "b9bf1b26"
+        "draws": 167,
+        "digest": "797877b8"
       }
     },
     {
       "tick": 90,
       "time": 4.5,
       "nextId": 428,
-      "state": "7e03b788",
-      "events": "55e9d6ee",
+      "state": "c28d7ea1",
+      "events": "6af451d8",
       "rng": {
-        "draws": 216,
-        "digest": "9a7243f7"
+        "draws": 223,
+        "digest": "eed31058"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 428,
-      "state": "96942706",
+      "state": "dbdaabcb",
       "events": "741638a5",
       "rng": {
-        "draws": 273,
-        "digest": "f15b421a"
+        "draws": 280,
+        "digest": "21f4a80b"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
       "nextId": 428,
-      "state": "81a36c40",
+      "state": "d60d7127",
       "events": "741638a5",
       "rng": {
-        "draws": 329,
-        "digest": "99d6df17"
+        "draws": 335,
+        "digest": "9bd394aa"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 428,
-      "state": "ec522dde",
+      "state": "0b7b428d",
       "events": "741638a5",
       "rng": {
-        "draws": 388,
-        "digest": "48c69fb1"
+        "draws": 382,
+        "digest": "a009be71"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
       "nextId": 428,
-      "state": "5d074575",
-      "events": "1278beae",
+      "state": "77502e26",
+      "events": "0609154f",
       "rng": {
-        "draws": 454,
-        "digest": "120c8ea4"
+        "draws": 444,
+        "digest": "c61d6aef"
       }
     },
     {
       "tick": 140,
       "time": 7,
       "nextId": 428,
-      "state": "ee1300d8",
-      "events": "c894bdcb",
+      "state": "99930be0",
+      "events": "0975dbf4",
       "rng": {
-        "draws": 516,
-        "digest": "63711eb2"
+        "draws": 507,
+        "digest": "429ada5c"
       }
     },
     {
       "tick": 150,
       "time": 7.5,
       "nextId": 428,
-      "state": "9c2567df",
+      "state": "06d29788",
       "events": "741638a5",
       "rng": {
-        "draws": 554,
-        "digest": "1fc735cf"
+        "draws": 547,
+        "digest": "11cb75e9"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 428,
-      "state": "c53ba256",
+      "state": "52c7460a",
       "events": "741638a5",
       "rng": {
-        "draws": 604,
-        "digest": "8ce7008e"
+        "draws": 598,
+        "digest": "5c191098"
       }
     },
     {
       "tick": 170,
       "time": 8.5,
       "nextId": 428,
-      "state": "087780bc",
-      "events": "b16bed6e",
+      "state": "932081ac",
+      "events": "5b56469a",
       "rng": {
-        "draws": 680,
-        "digest": "eeb751b4"
+        "draws": 675,
+        "digest": "ec94d61b"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 428,
-      "state": "0e32e9f6",
-      "events": "944fee14",
+      "state": "0e2a7932",
+      "events": "29b7639c",
       "rng": {
-        "draws": 759,
-        "digest": "682fafed"
+        "draws": 761,
+        "digest": "727bc7f8"
       }
     },
     {
       "tick": 190,
       "time": 9.5,
       "nextId": 428,
-      "state": "b7546757",
-      "events": "73adee42",
+      "state": "fc3266aa",
+      "events": "79bbd80b",
       "rng": {
-        "draws": 848,
-        "digest": "e059acb8"
+        "draws": 833,
+        "digest": "058b0c86"
       }
     },
     {
       "tick": 200,
       "time": 10,
       "nextId": 428,
-      "state": "b1d1278b",
+      "state": "ce28471c",
       "events": "741638a5",
       "rng": {
-        "draws": 913,
-        "digest": "7da9db93"
+        "draws": 900,
+        "digest": "b9fb88f0"
       }
     },
     {
       "tick": 203,
       "time": 10.15,
       "nextId": 428,
-      "state": "223869d6",
+      "state": "97041991",
       "events": "741638a5",
       "rng": {
-        "draws": 927,
-        "digest": "ba62c6a1"
+        "draws": 908,
+        "digest": "e35e96f9"
       },
       "label": "phase2",
       "players": [
@@ -3126,7 +3524,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 7777
+            "damageTaken": 2625
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3148,7 +3546,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -3164,11 +3570,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -3193,19 +3611,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -3242,7 +3667,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -3258,7 +3691,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -3286,15 +3731,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -3331,7 +3783,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -3347,7 +3807,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -3375,15 +3847,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -3420,7 +3899,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -3436,7 +3923,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -3464,15 +3963,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -3509,7 +4015,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -3525,7 +4039,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -3553,21 +4079,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -3577,30 +4110,21 @@
               "remaining": 3589.85,
               "school": "physical",
               "sourceId": 415
-            },
-            {
-              "duration": 10,
-              "id": "revenge_free",
-              "kind": "revenge_free",
-              "name": "Revenge!",
-              "remaining": 8.9,
-              "school": "physical",
-              "sourceId": 415
             }
           ],
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 1.35,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 109.15,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -3623,18 +4147,66 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
             "max": 5,
             "min": 2,
             "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 10,
+          "combatTimer": 109.15,
+          "comboUntil": -1,
+          "critChance": 0.056,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.056,
+          "fiveSecondRule": 109.15,
+          "hp": 50000,
+          "id": 416,
+          "kind": "player",
+          "level": 99,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "maxResource": 6957,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 3898.5,
+            "z": -1174
+          },
+          "potionCooldownUntil": -1,
+          "resource": 6957,
+          "resourceType": "mana",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 160,
+          "stats": {
+            "agi": 12,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
+            "str": 10
+          },
+          "templateId": "mage",
+          "weapon": {
+            "max": 6,
+            "min": 3,
+            "speed": 2.9
           }
         },
         {
@@ -3658,60 +4230,12 @@
           "dodgeChance": 0.056,
           "fiveSecondRule": 109.15,
           "hp": 50000,
-          "id": 416,
-          "kind": "player",
-          "level": 20,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "maxResource": 1506,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 3898.5,
-            "z": -1174
-          },
-          "potionCooldownUntil": -1,
-          "resource": 1506,
-          "resourceType": "mana",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 41,
-          "stats": {
-            "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
-            "str": 10
-          },
-          "templateId": "mage",
-          "weapon": {
-            "max": 6,
-            "min": 3,
-            "speed": 2.9
-          }
-        },
-        {
-          "aiState": "idle",
-          "attackPower": 10,
-          "combatTimer": 109.15,
-          "comboUntil": -1,
-          "critChance": 0.056,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.056,
-          "fiveSecondRule": 109.15,
-          "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3721,20 +4245,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -3767,10 +4291,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3780,20 +4304,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -3826,10 +4350,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3839,20 +4363,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -3865,7 +4389,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 3.75,
+          "combatTimer": 6.4,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -3887,18 +4411,19 @@
             "deathlessTimer": 999,
             "dialogueBusyUntil": 10.8,
             "dialogueToken": 3,
-            "gravebreakerCasts": 2,
+            "gravebreakerCasts": 1,
+            "gravebreakerCharged": true,
             "gravebreakerTimer": 8.05,
             "introSpoken": true,
             "phase": 2,
             "raiseFallenTimer": 30,
             "soulRendMarks": [
               {
-                "playerId": 419,
+                "playerId": 417,
                 "remaining": 6.05
               },
               {
-                "playerId": 416,
+                "playerId": 419,
                 "remaining": 6.05
               },
               {
@@ -4242,11 +4767,11 @@
       "tick": 204,
       "time": 10.2,
       "nextId": 428,
-      "state": "5037183e",
-      "events": "8a2f6f46",
+      "state": "4d027399",
+      "events": "328f5fea",
       "rng": {
-        "draws": 934,
-        "digest": "0c057cfb"
+        "draws": 913,
+        "digest": "7da9db93"
       },
       "label": "soulrend",
       "players": [
@@ -4265,7 +4790,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 7777
+            "damageTaken": 2625
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -4287,7 +4812,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -4303,11 +4836,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -4332,19 +4877,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -4381,7 +4933,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -4397,7 +4957,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -4425,15 +4997,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -4470,7 +5049,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -4486,7 +5073,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -4514,15 +5113,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -4559,7 +5165,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -4575,7 +5189,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -4603,15 +5229,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -4648,7 +5281,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -4664,7 +5305,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -4692,21 +5345,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -4716,30 +5376,21 @@
               "remaining": 3589.8,
               "school": "physical",
               "sourceId": 415
-            },
-            {
-              "duration": 10,
-              "id": "revenge_free",
-              "kind": "revenge_free",
-              "name": "Revenge!",
-              "remaining": 8.85,
-              "school": "physical",
-              "sourceId": 415
             }
           ],
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 1.4,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 109.2,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -4762,12 +5413,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -4799,10 +5450,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4812,20 +5463,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -4838,6 +5489,17 @@
         {
           "aiState": "idle",
           "attackPower": 10,
+          "auras": [
+            {
+              "duration": 8,
+              "id": "nythraxis_soul_rend",
+              "kind": "vulnerability",
+              "name": "Soul Rend",
+              "remaining": 8,
+              "school": "shadow",
+              "sourceId": 420
+            }
+          ],
           "combatTimer": 109.2,
           "comboUntil": -1,
           "critChance": 0.056,
@@ -4847,10 +5509,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4860,20 +5522,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -4906,10 +5568,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4919,20 +5581,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -4951,7 +5613,7 @@
               "id": "nythraxis_soul_rend",
               "kind": "vulnerability",
               "name": "Soul Rend",
-              "remaining": 8,
+              "remaining": 6,
               "school": "shadow",
               "sourceId": 420
             }
@@ -4965,10 +5627,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4978,20 +5640,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -5004,7 +5666,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 3.8,
+          "combatTimer": 6.45,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -5026,14 +5688,15 @@
             "deathlessTimer": 998.95,
             "dialogueBusyUntil": 12.8,
             "dialogueToken": 4,
-            "gravebreakerCasts": 2,
+            "gravebreakerCasts": 1,
+            "gravebreakerCharged": true,
             "gravebreakerTimer": 8,
             "introSpoken": true,
             "phase": 2,
             "raiseFallenTimer": 30,
             "soulRendMarks": [
               {
-                "playerId": 416,
+                "playerId": 417,
                 "remaining": 8
               },
               {
@@ -5041,7 +5704,7 @@
                 "remaining": 8
               },
               {
-                "playerId": 419,
+                "playerId": 416,
                 "remaining": 8
               }
             ],
@@ -5381,209 +6044,209 @@
       "tick": 210,
       "time": 10.5,
       "nextId": 428,
-      "state": "55389b2f",
+      "state": "9b04d080",
       "events": "741638a5",
       "rng": {
-        "draws": 951,
-        "digest": "55e0275a"
+        "draws": 932,
+        "digest": "fdaae409"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 428,
-      "state": "879c62ac",
-      "events": "b13d3b8a",
+      "state": "d66694d7",
+      "events": "3444825a",
       "rng": {
-        "draws": 1000,
-        "digest": "e0cbfe3d"
+        "draws": 988,
+        "digest": "09650e36"
       }
     },
     {
       "tick": 230,
       "time": 11.5,
       "nextId": 428,
-      "state": "a924298b",
+      "state": "f9718697",
       "events": "741638a5",
       "rng": {
-        "draws": 1036,
-        "digest": "57b21823"
+        "draws": 1024,
+        "digest": "7b278cab"
       }
     },
     {
       "tick": 240,
       "time": 12,
       "nextId": 428,
-      "state": "095640fd",
-      "events": "f5bd69b6",
+      "state": "81b9f78a",
+      "events": "5fb9ce21",
       "rng": {
-        "draws": 1076,
-        "digest": "68c0465c"
+        "draws": 1073,
+        "digest": "cd0ba54b"
       }
     },
     {
       "tick": 250,
       "time": 12.5,
       "nextId": 428,
-      "state": "6c6b8730",
+      "state": "0706bc95",
       "events": "741638a5",
       "rng": {
-        "draws": 1130,
-        "digest": "ca64a887"
+        "draws": 1115,
+        "digest": "a23ab088"
       }
     },
     {
       "tick": 260,
       "time": 13,
       "nextId": 428,
-      "state": "e4165b58",
+      "state": "d67618a7",
       "events": "741638a5",
       "rng": {
-        "draws": 1177,
-        "digest": "3a6ff71b"
+        "draws": 1155,
+        "digest": "9c711a2c"
       }
     },
     {
       "tick": 270,
       "time": 13.5,
       "nextId": 428,
-      "state": "99679372",
-      "events": "d073127b",
+      "state": "71dedea5",
+      "events": "ede92518",
       "rng": {
-        "draws": 1219,
-        "digest": "e4c278dd"
+        "draws": 1209,
+        "digest": "b54f727e"
       }
     },
     {
       "tick": 280,
       "time": 14,
       "nextId": 428,
-      "state": "ee2bfc37",
+      "state": "23117be6",
       "events": "741638a5",
       "rng": {
-        "draws": 1265,
-        "digest": "7c121013"
+        "draws": 1257,
+        "digest": "c21a7230"
       }
     },
     {
       "tick": 290,
       "time": 14.5,
       "nextId": 428,
-      "state": "b3fb3de4",
-      "events": "b5ce14c0",
+      "state": "fbf0525d",
+      "events": "ad1b9e65",
       "rng": {
-        "draws": 1336,
-        "digest": "be0b8be2"
+        "draws": 1318,
+        "digest": "1d8a4cf7"
       }
     },
     {
       "tick": 300,
       "time": 15,
       "nextId": 428,
-      "state": "11fbdcf1",
+      "state": "1b06acd0",
       "events": "741638a5",
       "rng": {
-        "draws": 1387,
-        "digest": "50611ba3"
+        "draws": 1358,
+        "digest": "aea8d300"
       }
     },
     {
       "tick": 310,
       "time": 15.5,
       "nextId": 428,
-      "state": "11de0c23",
-      "events": "c20e2ed9",
+      "state": "7ab79741",
+      "events": "11bcbc17",
       "rng": {
-        "draws": 1440,
-        "digest": "54f0e379"
+        "draws": 1404,
+        "digest": "8aeea021"
       }
     },
     {
       "tick": 320,
       "time": 16,
       "nextId": 428,
-      "state": "29701086",
+      "state": "67b1d379",
       "events": "741638a5",
       "rng": {
-        "draws": 1508,
-        "digest": "9f2b4e10"
+        "draws": 1465,
+        "digest": "7d8deffc"
       }
     },
     {
       "tick": 330,
       "time": 16.5,
       "nextId": 428,
-      "state": "c75aa446",
-      "events": "741638a5",
+      "state": "831cccd5",
+      "events": "6b094422",
       "rng": {
-        "draws": 1541,
-        "digest": "f1940dae"
+        "draws": 1511,
+        "digest": "1b7a219a"
       }
     },
     {
       "tick": 340,
       "time": 17,
       "nextId": 428,
-      "state": "9fbf0744",
-      "events": "7c483057",
+      "state": "a9088c53",
+      "events": "0609154f",
       "rng": {
-        "draws": 1611,
-        "digest": "c1e5b6b6"
+        "draws": 1569,
+        "digest": "743cc832"
       }
     },
     {
       "tick": 350,
       "time": 17.5,
       "nextId": 428,
-      "state": "fff2ab26",
+      "state": "ec28fd4b",
       "events": "741638a5",
       "rng": {
-        "draws": 1661,
-        "digest": "01fda289"
+        "draws": 1628,
+        "digest": "a831150a"
       }
     },
     {
       "tick": 360,
       "time": 18,
       "nextId": 428,
-      "state": "66169efe",
-      "events": "0a9319e8",
+      "state": "6d86d1ca",
+      "events": "e9136774",
       "rng": {
-        "draws": 1715,
-        "digest": "368f48eb"
+        "draws": 1672,
+        "digest": "4427a4e2"
       }
     },
     {
       "tick": 370,
       "time": 18.5,
       "nextId": 428,
-      "state": "67a50a2d",
-      "events": "bfa5358c",
+      "state": "a1c9a307",
+      "events": "16f7162c",
       "rng": {
-        "draws": 1768,
-        "digest": "cb211288"
+        "draws": 1718,
+        "digest": "c5ee3de5"
       }
     },
     {
       "tick": 380,
       "time": 19,
       "nextId": 428,
-      "state": "e10e3e10",
+      "state": "21bec7af",
       "events": "741638a5",
       "rng": {
-        "draws": 1816,
-        "digest": "8363beeb"
+        "draws": 1765,
+        "digest": "2158d1fa"
       }
     },
     {
       "tick": 386,
       "time": 19.3,
       "nextId": 428,
-      "state": "49dcd38c",
-      "events": "1ebbcffb",
+      "state": "515e11f0",
+      "events": "be35bb99",
       "rng": {
-        "draws": 1851,
-        "digest": "2a71fcbf"
+        "draws": 1787,
+        "digest": "c1f98e22"
       },
       "label": "deathless-start",
       "players": [
@@ -5603,9 +6266,8 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 19098,
-            "kills": 2,
-            "xpGained": 166
+            "damageTaken": 6410,
+            "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5633,7 +6295,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -5649,11 +6319,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -5678,19 +6360,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 75,
+          "renown": 235,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -5707,8 +6396,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5730,7 +6418,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -5746,7 +6442,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -5774,15 +6482,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -5799,7 +6514,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5821,7 +6536,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -5837,7 +6560,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -5865,15 +6600,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -5890,8 +6632,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5913,7 +6654,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -5929,7 +6678,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -5957,15 +6718,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -5981,10 +6749,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -6005,7 +6770,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -6021,7 +6794,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -6049,21 +6834,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -6073,21 +6865,30 @@
               "remaining": 3580.7,
               "school": "physical",
               "sourceId": 415
+            },
+            {
+              "duration": 10,
+              "id": "revenge_free",
+              "kind": "revenge_free",
+              "name": "Revenge!",
+              "remaining": 6.1,
+              "school": "physical",
+              "sourceId": 415
             }
           ],
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 0.1,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 118.3,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -6110,12 +6911,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -6137,10 +6938,10 @@
           "id": 416,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6150,20 +6951,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -6176,7 +6977,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 118.3,
+          "combatTimer": 1.05,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -6184,11 +6985,12 @@
           "fiveSecondRule": 118.3,
           "hp": 50000,
           "id": 417,
+          "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6198,20 +7000,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -6234,10 +7036,10 @@
           "id": 418,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6247,20 +7049,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -6273,7 +7075,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 1.05,
+          "combatTimer": 118.3,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -6281,12 +7083,11 @@
           "fiveSecondRule": 118.3,
           "hp": 50000,
           "id": 419,
-          "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6296,20 +7097,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -6709,143 +7510,143 @@
       "tick": 390,
       "time": 19.5,
       "nextId": 428,
-      "state": "d8c081ab",
+      "state": "c8312442",
       "events": "9ee00894",
       "rng": {
-        "draws": 1862,
-        "digest": "4f755bb2"
+        "draws": 1813,
+        "digest": "143782fa"
       }
     },
     {
       "tick": 400,
       "time": 20,
       "nextId": 428,
-      "state": "b279703b",
+      "state": "c612e3d3",
       "events": "59aacef7",
       "rng": {
-        "draws": 1918,
-        "digest": "2106eb9a"
+        "draws": 1872,
+        "digest": "234b2c13"
       }
     },
     {
       "tick": 410,
       "time": 20.5,
       "nextId": 428,
-      "state": "c7f16028",
+      "state": "8769b188",
       "events": "59aacef7",
       "rng": {
-        "draws": 1948,
-        "digest": "91a7ef2b"
+        "draws": 1933,
+        "digest": "51adee78"
       }
     },
     {
       "tick": 420,
       "time": 21,
       "nextId": 428,
-      "state": "4970f3da",
+      "state": "a5c2f663",
       "events": "59aacef7",
       "rng": {
-        "draws": 1998,
-        "digest": "c1fe1c79"
+        "draws": 1970,
+        "digest": "d60d8c81"
       }
     },
     {
       "tick": 430,
       "time": 21.5,
       "nextId": 428,
-      "state": "32da2d8a",
+      "state": "23e128f1",
       "events": "59aacef7",
       "rng": {
-        "draws": 2060,
-        "digest": "5b9d5da3"
+        "draws": 2018,
+        "digest": "67b2ed5e"
       }
     },
     {
       "tick": 440,
       "time": 22,
       "nextId": 428,
-      "state": "9c8c744a",
+      "state": "1256cd0c",
       "events": "59aacef7",
       "rng": {
-        "draws": 2111,
-        "digest": "6b0d8329"
+        "draws": 2062,
+        "digest": "8663f27a"
       }
     },
     {
       "tick": 450,
       "time": 22.5,
       "nextId": 428,
-      "state": "3af5ebfa",
+      "state": "750d2e70",
       "events": "59aacef7",
       "rng": {
-        "draws": 2170,
-        "digest": "09feb30d"
+        "draws": 2105,
+        "digest": "160bc8e4"
       }
     },
     {
       "tick": 460,
       "time": 23,
       "nextId": 428,
-      "state": "9ec145ce",
+      "state": "de7b773d",
       "events": "59aacef7",
       "rng": {
-        "draws": 2202,
-        "digest": "8343b836"
+        "draws": 2160,
+        "digest": "a0abe2f3"
       }
     },
     {
       "tick": 470,
       "time": 23.5,
       "nextId": 428,
-      "state": "6d339891",
+      "state": "8bfafeb2",
       "events": "59aacef7",
       "rng": {
-        "draws": 2244,
-        "digest": "f6ee0604"
+        "draws": 2212,
+        "digest": "562cf550"
       }
     },
     {
       "tick": 480,
       "time": 24,
       "nextId": 428,
-      "state": "3ae079e9",
+      "state": "0c2158d3",
       "events": "59aacef7",
       "rng": {
-        "draws": 2301,
-        "digest": "8131049e"
+        "draws": 2253,
+        "digest": "676d3b29"
       }
     },
     {
       "tick": 490,
       "time": 24.5,
       "nextId": 428,
-      "state": "0596d360",
+      "state": "53a03cd4",
       "events": "89d01f58",
       "rng": {
-        "draws": 2357,
-        "digest": "d52cf8b4"
+        "draws": 2305,
+        "digest": "e8334d0d"
       }
     },
     {
       "tick": 500,
       "time": 25,
       "nextId": 428,
-      "state": "c602fdc1",
+      "state": "c7b3d7fc",
       "events": "741638a5",
       "rng": {
-        "draws": 2407,
-        "digest": "29558514"
+        "draws": 2346,
+        "digest": "2ab6e343"
       }
     },
     {
       "tick": 506,
       "time": 25.3,
       "nextId": 428,
-      "state": "865bacaa",
+      "state": "dabee878",
       "events": "741638a5",
       "rng": {
-        "draws": 2429,
-        "digest": "2f2f3d27"
+        "draws": 2386,
+        "digest": "b6d3f391"
       },
       "label": "deathless-interrupt",
       "players": [
@@ -6865,9 +7666,8 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 19098,
-            "kills": 2,
-            "xpGained": 166
+            "damageTaken": 6410,
+            "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -6895,7 +7695,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -6911,11 +7719,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -6940,19 +7760,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 75,
+          "renown": 235,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -6969,8 +7796,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -6992,7 +7818,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -7008,7 +7842,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -7036,15 +7882,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -7061,7 +7914,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -7083,7 +7936,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -7099,7 +7960,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -7127,15 +8000,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -7152,8 +8032,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -7175,7 +8054,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -7191,7 +8078,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -7219,15 +8118,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -7243,10 +8149,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -7267,7 +8170,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -7283,7 +8194,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -7311,21 +8234,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -7335,21 +8265,30 @@
               "remaining": 3574.7,
               "school": "physical",
               "sourceId": 415
+            },
+            {
+              "duration": 10,
+              "id": "revenge_free",
+              "kind": "revenge_free",
+              "name": "Revenge!",
+              "remaining": 0.1,
+              "school": "physical",
+              "sourceId": 415
             }
           ],
           "blockChance": 0.05,
           "blockValue": 6,
           "combatTimer": 6.1,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 124.3,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -7372,12 +8311,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -7399,10 +8338,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7412,20 +8351,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -7439,7 +8378,7 @@
           "aiState": "idle",
           "attackPower": 10,
           "channelTickTimer": -5.05,
-          "combatTimer": 124.3,
+          "combatTimer": 7.05,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -7448,10 +8387,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7461,20 +8400,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -7497,10 +8436,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7510,20 +8449,20 @@
             "z": -1187
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -7536,7 +8475,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 7.05,
+          "combatTimer": 124.3,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -7545,10 +8484,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7558,20 +8497,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -7982,143 +8921,143 @@
       "tick": 510,
       "time": 25.5,
       "nextId": 428,
-      "state": "e5458901",
-      "events": "741638a5",
+      "state": "636d3b53",
+      "events": "820c6a7b",
       "rng": {
-        "draws": 2447,
-        "digest": "6947fe40"
+        "draws": 2406,
+        "digest": "cb7ccaa1"
       }
     },
     {
       "tick": 520,
       "time": 26,
       "nextId": 428,
-      "state": "f84043ec",
+      "state": "7a76ede2",
       "events": "741638a5",
       "rng": {
-        "draws": 2486,
-        "digest": "711e4fb7"
+        "draws": 2455,
+        "digest": "18e9e491"
       }
     },
     {
       "tick": 530,
       "time": 26.5,
       "nextId": 428,
-      "state": "d7a1569a",
+      "state": "fb8054ca",
       "events": "741638a5",
       "rng": {
-        "draws": 2555,
-        "digest": "2e04d124"
+        "draws": 2501,
+        "digest": "907af604"
       }
     },
     {
       "tick": 540,
       "time": 27,
       "nextId": 428,
-      "state": "12c9be9b",
+      "state": "e67cd7eb",
       "events": "741638a5",
       "rng": {
-        "draws": 2601,
-        "digest": "e1985855"
+        "draws": 2542,
+        "digest": "90a4e78e"
       }
     },
     {
       "tick": 550,
       "time": 27.5,
       "nextId": 428,
-      "state": "22d5512b",
+      "state": "4c5dab4d",
       "events": "741638a5",
       "rng": {
-        "draws": 2633,
-        "digest": "313ff32d"
+        "draws": 2593,
+        "digest": "7f83589b"
       }
     },
     {
       "tick": 560,
       "time": 28,
       "nextId": 428,
-      "state": "31fed536",
+      "state": "755c54cc",
       "events": "741638a5",
       "rng": {
-        "draws": 2670,
-        "digest": "2ae78825"
+        "draws": 2626,
+        "digest": "a4377ca8"
       }
     },
     {
       "tick": 570,
       "time": 28.5,
       "nextId": 428,
-      "state": "5bb9519a",
+      "state": "2f9ca66c",
       "events": "741638a5",
       "rng": {
-        "draws": 2715,
-        "digest": "db7e6b40"
+        "draws": 2672,
+        "digest": "7f7259f8"
       }
     },
     {
       "tick": 580,
       "time": 29,
       "nextId": 428,
-      "state": "d1eec7c5",
+      "state": "96550103",
       "events": "741638a5",
       "rng": {
-        "draws": 2782,
-        "digest": "0bc2665d"
+        "draws": 2727,
+        "digest": "dab9d3ff"
       }
     },
     {
       "tick": 590,
       "time": 29.5,
       "nextId": 428,
-      "state": "3586728b",
+      "state": "42d5d5f7",
       "events": "aad79240",
       "rng": {
-        "draws": 2837,
-        "digest": "9e1ea336"
+        "draws": 2769,
+        "digest": "d5220889"
       }
     },
     {
       "tick": 600,
       "time": 30,
       "nextId": 428,
-      "state": "a591e815",
-      "events": "8ee47204",
+      "state": "c2ff5059",
+      "events": "3feddb79",
       "rng": {
-        "draws": 2889,
-        "digest": "5bd508b3"
+        "draws": 2825,
+        "digest": "995314f6"
       }
     },
     {
       "tick": 610,
       "time": 30.5,
       "nextId": 428,
-      "state": "f8519188",
+      "state": "94840cfe",
       "events": "741638a5",
       "rng": {
-        "draws": 2940,
-        "digest": "f105e1f8"
+        "draws": 2880,
+        "digest": "29ed22d2"
       }
     },
     {
       "tick": 620,
       "time": 31,
       "nextId": 428,
-      "state": "92fe50a9",
+      "state": "fea01c41",
       "events": "741638a5",
       "rng": {
-        "draws": 2994,
-        "digest": "8e396817"
+        "draws": 2925,
+        "digest": "71a4449e"
       }
     },
     {
       "tick": 627,
       "time": 31.35,
       "nextId": 428,
-      "state": "82397d02",
+      "state": "f309cf8c",
       "events": "4c932e6f",
       "rng": {
-        "draws": 3019,
-        "digest": "680382e6"
+        "draws": 2957,
+        "digest": "2e220812"
       },
       "label": "finalstand",
       "players": [
@@ -8138,9 +9077,8 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 20542,
-            "kills": 2,
-            "xpGained": 166
+            "damageTaken": 7464,
+            "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -8168,7 +9106,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -8184,11 +9130,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -8213,19 +9171,26 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
             "q_nythraxis_bound_guardian"
           ],
           "recipesGrandfathered": true,
-          "renown": 75,
+          "renown": 235,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -8242,8 +9207,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -8265,7 +9229,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -8281,7 +9253,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -8309,15 +9293,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -8334,7 +9325,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -8356,7 +9347,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -8372,7 +9371,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -8400,15 +9411,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -8425,8 +9443,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -8448,7 +9465,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -8464,7 +9489,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -8492,15 +9529,22 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -8516,10 +9560,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 16667,
-            "xpGained": 166
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -8540,7 +9581,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -8556,7 +9605,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -8584,21 +9645,28 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167366,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 60,
+          "renown": 220,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -8614,15 +9682,15 @@
           "blockValue": 6,
           "combatTimer": 1.55,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 130.35,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -8645,12 +9713,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -8672,10 +9740,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -8685,20 +9753,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -8712,7 +9780,7 @@
           "aiState": "idle",
           "attackPower": 10,
           "channelTickTimer": -5.05,
-          "combatTimer": 130.35,
+          "combatTimer": 13.1,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -8721,10 +9789,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -8734,20 +9802,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -8770,10 +9838,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -8783,20 +9851,20 @@
             "z": -1187
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -8809,7 +9877,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 13.1,
+          "combatTimer": 130.35,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -8818,10 +9886,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -8831,20 +9899,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -9256,11 +10324,11 @@
       "tick": 628,
       "time": 31.4,
       "nextId": 428,
-      "state": "2b180ea6",
-      "events": "90b86b6a",
+      "state": "659b769f",
+      "events": "fff730ea",
       "rng": {
-        "draws": 3027,
-        "digest": "f551924e"
+        "draws": 2972,
+        "digest": "7e8f9d3a"
       },
       "label": "death",
       "players": [
@@ -9280,9 +10348,8 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 11076,
-            "damageTaken": 20542,
-            "kills": 3,
-            "xpGained": 249
+            "damageTaken": 7464,
+            "kills": 3
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -9325,7 +10392,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -9341,11 +10416,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -9370,7 +10457,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
@@ -9383,12 +10470,19 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 135,
+          "renown": 295,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -9405,8 +10499,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -9443,7 +10536,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -9459,7 +10560,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -9487,7 +10600,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -9497,11 +10610,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -9518,7 +10638,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -9555,7 +10675,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -9571,7 +10699,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -9599,7 +10739,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -9609,11 +10749,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -9630,8 +10777,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -9668,7 +10814,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -9684,7 +10838,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -9712,7 +10878,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -9722,11 +10888,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -9742,10 +10915,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -9781,7 +10951,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -9797,7 +10975,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -9825,7 +11015,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -9835,17 +11025,24 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -9861,15 +11058,15 @@
           "blockValue": 6,
           "combatTimer": 0.05,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 130.4,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -9892,12 +11089,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -9919,10 +11116,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9932,20 +11129,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -9959,7 +11156,7 @@
           "aiState": "idle",
           "attackPower": 10,
           "channelTickTimer": -5.05,
-          "combatTimer": 130.4,
+          "combatTimer": 13.15,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -9968,10 +11165,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9981,20 +11178,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -10017,10 +11214,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10030,20 +11227,20 @@
             "z": -1187
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -10056,7 +11253,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 13.15,
+          "combatTimer": 130.4,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -10065,10 +11262,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10078,20 +11275,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -10122,23 +11319,27 @@
           },
           "level": 20,
           "loot": {
-            "copper": 178597,
+            "copper": 202632,
             "items": [
               {
                 "count": 1,
-                "itemId": "deathless_heartwood"
-              },
-              {
-                "count": 1,
-                "itemId": "stormcallers_spaulders"
-              },
-              {
-                "count": 1,
-                "itemId": "soulflame_mantle"
+                "itemId": "crownforged_dreadhelm"
               },
               {
                 "count": 1,
                 "itemId": "nighttalon_crown"
+              },
+              {
+                "count": 1,
+                "itemId": "nighttalon_shoulderguards"
+              },
+              {
+                "count": 1,
+                "itemId": "crownforged_warspaulders"
+              },
+              {
+                "count": 1,
+                "itemId": "maul_of_the_scourged_wilds"
               }
             ]
           },
@@ -10520,77 +11721,77 @@
       "tick": 630,
       "time": 31.5,
       "nextId": 428,
-      "state": "37ed3008",
+      "state": "90b0e38d",
       "events": "741638a5",
       "rng": {
-        "draws": 3040,
-        "digest": "4e3ace8f"
+        "draws": 2987,
+        "digest": "1ab1695f"
       }
     },
     {
       "tick": 640,
       "time": 32,
       "nextId": 428,
-      "state": "1d998218",
+      "state": "6d70bfe7",
       "events": "741638a5",
       "rng": {
-        "draws": 3082,
-        "digest": "128fe66d"
+        "draws": 3028,
+        "digest": "524cc13a"
       }
     },
     {
       "tick": 650,
       "time": 32.5,
       "nextId": 428,
-      "state": "3ed406d4",
+      "state": "e4dc5255",
       "events": "741638a5",
       "rng": {
-        "draws": 3134,
-        "digest": "ee8f6a22"
+        "draws": 3073,
+        "digest": "02847784"
       }
     },
     {
       "tick": 660,
       "time": 33,
       "nextId": 428,
-      "state": "31d32300",
+      "state": "baa4c95b",
       "events": "741638a5",
       "rng": {
-        "draws": 3177,
-        "digest": "3e13c7e1"
+        "draws": 3126,
+        "digest": "f752434d"
       }
     },
     {
       "tick": 670,
       "time": 33.5,
       "nextId": 428,
-      "state": "0be83e88",
+      "state": "9b8e8881",
       "events": "741638a5",
       "rng": {
-        "draws": 3231,
-        "digest": "f93be7cf"
+        "draws": 3167,
+        "digest": "d672e9e9"
       }
     },
     {
       "tick": 680,
       "time": 34,
       "nextId": 428,
-      "state": "95f42358",
+      "state": "6746e86f",
       "events": "741638a5",
       "rng": {
-        "draws": 3281,
-        "digest": "c0e43925"
+        "draws": 3219,
+        "digest": "fd1593e8"
       }
     },
     {
       "tick": 688,
       "time": 34.4,
       "nextId": 428,
-      "state": "66457c5e",
+      "state": "75b00eef",
       "events": "e3560676",
       "rng": {
-        "draws": 3303,
-        "digest": "fac81e6c"
+        "draws": 3269,
+        "digest": "f3872d73"
       },
       "label": "final",
       "players": [
@@ -10610,9 +11811,8 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 11076,
-            "damageTaken": 20542,
-            "kills": 3,
-            "xpGained": 249
+            "damageTaken": 7464,
+            "kills": 3
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -10655,7 +11855,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -10671,11 +11879,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_specialized",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -10700,7 +11920,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
@@ -10713,12 +11933,19 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 135,
+          "renown": 295,
           "talents": {
             "rows": {},
             "spec": "prot"
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -10735,8 +11962,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -10773,7 +11999,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -10789,7 +12023,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -10817,7 +12063,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -10827,11 +12073,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -10848,7 +12101,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -10885,7 +12138,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -10901,7 +12162,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -10929,7 +12202,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -10939,11 +12212,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -10960,8 +12240,7 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
+            "damageTaken": 16667
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -10998,7 +12277,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -11014,7 +12301,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -11042,7 +12341,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -11052,11 +12351,18 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         },
         {
           "activeLoadout": -1,
@@ -11072,10 +12378,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "damageTaken": 16667,
-            "xpGained": 249
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -11111,7 +12414,15 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -11127,7 +12438,19 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ],
             [
@@ -11155,7 +12478,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 167449,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "raidLockouts": [
@@ -11165,17 +12488,24 @@
             ]
           ],
           "recipesGrandfathered": true,
-          "renown": 120,
+          "renown": 280,
           "talents": {
             "rows": {}
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -11191,15 +12521,15 @@
           "blockValue": 6,
           "combatTimer": 3.05,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fiveSecondRule": 133.4,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -11222,12 +12552,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 498,
+            "agi": 118,
+            "armor": 1836,
             "int": 10,
             "spi": 11,
-            "sta": 85,
-            "str": 61
+            "sta": 307,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -11249,10 +12579,10 @@
           "hp": 50000,
           "id": 416,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -11262,20 +12592,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -11289,7 +12619,7 @@
           "aiState": "idle",
           "attackPower": 10,
           "channelTickTimer": -5.05,
-          "combatTimer": 133.4,
+          "combatTimer": 16.15,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -11298,10 +12628,10 @@
           "hp": 50000,
           "id": 417,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -11311,20 +12641,20 @@
             "z": -1171
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -11347,10 +12677,10 @@
           "hp": 50000,
           "id": 418,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -11360,20 +12690,20 @@
             "z": -1187
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -11386,7 +12716,7 @@
         {
           "aiState": "idle",
           "attackPower": 10,
-          "combatTimer": 16.15,
+          "combatTimer": 133.4,
           "comboUntil": -1,
           "critChance": 0.056,
           "detonateTimer": "Infinity",
@@ -11395,10 +12725,10 @@
           "hp": 50000,
           "id": 419,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 1506,
+          "maxResource": 6957,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -11408,20 +12738,20 @@
             "z": -1174
           },
           "potionCooldownUntil": -1,
-          "resource": 1506,
+          "resource": 6957,
           "resourceType": "mana",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 41,
+          "spellPower": 160,
           "stats": {
             "agi": 12,
-            "armor": 133,
-            "int": 82,
-            "spi": 60,
-            "sta": 33,
+            "armor": 449,
+            "int": 319,
+            "spi": 218,
+            "sta": 112,
             "str": 10
           },
           "templateId": "mage",
@@ -11452,23 +12782,27 @@
           },
           "level": 20,
           "loot": {
-            "copper": 178597,
+            "copper": 202632,
             "items": [
               {
                 "count": 1,
-                "itemId": "deathless_heartwood"
-              },
-              {
-                "count": 1,
-                "itemId": "stormcallers_spaulders"
-              },
-              {
-                "count": 1,
-                "itemId": "soulflame_mantle"
+                "itemId": "crownforged_dreadhelm"
               },
               {
                 "count": 1,
                 "itemId": "nighttalon_crown"
+              },
+              {
+                "count": 1,
+                "itemId": "nighttalon_shoulderguards"
+              },
+              {
+                "count": 1,
+                "itemId": "crownforged_warspaulders"
+              },
+              {
+                "count": 1,
+                "itemId": "maul_of_the_scourged_wilds"
               }
             ]
           },

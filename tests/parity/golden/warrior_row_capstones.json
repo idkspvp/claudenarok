@@ -9,8 +9,8 @@
     "victory rush on-kill window + selfHealPctMax",
     "bladestorm self-centered channel ticks"
   ],
-  "draws": 460,
-  "drawDigest": "53589cea",
+  "draws": 459,
+  "drawDigest": "0ebea550",
   "frames": [
     {
       "tick": 0,
@@ -148,8 +148,8 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "969d344f",
-      "events": "9d45360c",
+      "state": "a66b9cd2",
+      "events": "42764e8f",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -159,7 +159,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "16dbf91f",
+      "state": "b1662bae",
       "events": "5c687645",
       "rng": {
         "draws": 2,
@@ -170,7 +170,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "b129efc5",
+      "state": "0fa7dda4",
       "events": "3e99d104",
       "rng": {
         "draws": 2,
@@ -212,11 +212,19 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_deep_roots",
               ""
             ],
             [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -232,11 +240,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_talented",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ]
           ],
@@ -257,11 +277,11 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -270,7 +290,14 @@
               "20": "war_row_bladestorm"
             }
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
@@ -287,7 +314,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -316,9 +343,9 @@
               14.6
             ]
           ],
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "facing": 1.570796,
           "fallStartY": -3.015092,
           "fiveSecondRule": 99.4,
@@ -326,7 +353,7 @@
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -350,12 +377,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "targetId": 417,
           "templateId": "warrior",
@@ -502,7 +529,7 @@
       "tick": 12,
       "time": 0.6,
       "nextId": 418,
-      "state": "36775ef2",
+      "state": "097ba353",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -513,7 +540,7 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "7b469236",
+      "state": "05a77c0b",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -524,7 +551,7 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "f4e44c3e",
+      "state": "9923079b",
       "events": "ee63b6c3",
       "rng": {
         "draws": 5,
@@ -566,11 +593,19 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_deep_roots",
               ""
             ],
             [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -586,11 +621,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_talented",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ]
           ],
@@ -611,11 +658,11 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -624,7 +671,14 @@
               "20": "war_row_bladestorm"
             }
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
@@ -641,7 +695,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -674,9 +728,9 @@
               120
             ]
           ],
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 99.8,
@@ -685,7 +739,7 @@
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
           "maxResource": 100,
@@ -709,12 +763,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "targetId": 417,
           "templateId": "warrior",
@@ -886,8 +940,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "20c1a768",
-      "events": "85acc9d4",
+      "state": "53330e49",
+      "events": "ee5d4088",
       "rng": {
         "draws": 9,
         "digest": "88aac2f9"
@@ -897,7 +951,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 418,
-      "state": "6a5bac31",
+      "state": "0da99eae",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -908,8 +962,8 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 420,
-      "state": "a778ba1d",
-      "events": "a271debd",
+      "state": "b697f717",
+      "events": "5fb1414e",
       "rng": {
         "draws": 18,
         "digest": "e122dc22"
@@ -932,14 +986,14 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1104,
+            "damageDealt": 1195,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1104,
+              "damageDealt": 1195,
               "kills": 1
             },
             "dungeonClears": {},
@@ -959,11 +1013,19 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_deep_roots",
               ""
             ],
             [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -979,11 +1041,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_talented",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ]
           ],
@@ -1004,11 +1078,11 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 70,
+          "renown": 230,
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -1017,7 +1091,14 @@
               "20": "war_row_bladestorm"
             }
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
@@ -1034,7 +1115,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -1060,20 +1141,20 @@
               119.6
             ]
           ],
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 100.2,
           "gcdRemaining": 1.5,
-          "hp": 657,
+          "hp": 3059,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1086,7 +1167,7 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 52.161771,
+          "resource": 51.277742,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -1095,12 +1176,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "swingTimer": 1.65,
           "targetId": 419,
@@ -1182,7 +1263,7 @@
           "threat": [
             [
               415,
-              31.5
+              106.625
             ]
           ],
           "weapon": {
@@ -1206,7 +1287,7 @@
             },
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1581,
+              "breakThreshold": 1536,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -1237,7 +1318,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7981,
+          "hp": 7936,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -1273,7 +1354,7 @@
           "threat": [
             [
               415,
-              51.5
+              171.625
             ]
           ],
           "weapon": {
@@ -1348,7 +1429,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8969,
+          "hp": 8923,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -1383,7 +1464,7 @@
           "threat": [
             [
               415,
-              52.5
+              173.625
             ]
           ],
           "weapon": {
@@ -1398,150 +1479,150 @@
       "tick": 28,
       "time": 1.4,
       "nextId": 420,
-      "state": "6051a0b6",
-      "events": "5eb4f0ac",
+      "state": "db939add",
+      "events": "2118b121",
       "rng": {
-        "draws": 21,
-        "digest": "f8002f39"
+        "draws": 19,
+        "digest": "483a339f"
       }
     },
     {
       "tick": 32,
       "time": 1.6,
       "nextId": 420,
-      "state": "2634305c",
+      "state": "e5be877d",
       "events": "741638a5",
       "rng": {
-        "draws": 21,
-        "digest": "f8002f39"
+        "draws": 19,
+        "digest": "483a339f"
       }
     },
     {
       "tick": 36,
       "time": 1.8,
       "nextId": 420,
-      "state": "42bc9a1b",
+      "state": "bce75a4e",
       "events": "741638a5",
       "rng": {
-        "draws": 21,
-        "digest": "f8002f39"
+        "draws": 19,
+        "digest": "483a339f"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "ae996d4b",
+      "state": "af32b67a",
       "events": "741638a5",
       "rng": {
-        "draws": 21,
-        "digest": "f8002f39"
+        "draws": 19,
+        "digest": "483a339f"
       }
     },
     {
       "tick": 44,
       "time": 2.2,
       "nextId": 420,
-      "state": "2ba8a860",
-      "events": "479b9c84",
+      "state": "0860eca1",
+      "events": "16f101c1",
       "rng": {
-        "draws": 37,
-        "digest": "5e5b3764"
+        "draws": 35,
+        "digest": "c36f580d"
       }
     },
     {
       "tick": 48,
       "time": 2.4,
       "nextId": 420,
-      "state": "f8851d15",
+      "state": "35dc89ee",
       "events": "741638a5",
       "rng": {
-        "draws": 55,
-        "digest": "2a55b750"
+        "draws": 53,
+        "digest": "654a9600"
       }
     },
     {
       "tick": 52,
       "time": 2.6,
       "nextId": 420,
-      "state": "d2a6da3b",
+      "state": "16530210",
       "events": "741638a5",
       "rng": {
-        "draws": 65,
-        "digest": "1791656d"
+        "draws": 63,
+        "digest": "f8c73462"
       }
     },
     {
       "tick": 56,
       "time": 2.8,
       "nextId": 420,
-      "state": "144add54",
+      "state": "7bc46ce7",
       "events": "741638a5",
       "rng": {
-        "draws": 80,
-        "digest": "a89538c2"
+        "draws": 77,
+        "digest": "ead6723c"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "7220366f",
+      "state": "2e7bd322",
       "events": "741638a5",
       "rng": {
-        "draws": 96,
-        "digest": "f9b9ed83"
+        "draws": 94,
+        "digest": "26fa2dc7"
       }
     },
     {
       "tick": 64,
       "time": 3.2,
       "nextId": 420,
-      "state": "a45430fc",
-      "events": "6e295e62",
+      "state": "9c9a06d4",
+      "events": "4c510cfc",
       "rng": {
-        "draws": 125,
-        "digest": "0bc9e966"
+        "draws": 122,
+        "digest": "c8b26db2"
       }
     },
     {
       "tick": 68,
       "time": 3.4,
       "nextId": 420,
-      "state": "22f8d376",
-      "events": "244d6cff",
+      "state": "ded61f5a",
+      "events": "83e90224",
       "rng": {
-        "draws": 141,
-        "digest": "989e7718"
+        "draws": 139,
+        "digest": "70f7a704"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 420,
-      "state": "a4634b76",
+      "state": "6ddfc4a0",
       "events": "741638a5",
       "rng": {
-        "draws": 157,
-        "digest": "60dc2214"
+        "draws": 154,
+        "digest": "67c7648a"
       }
     },
     {
       "tick": 76,
       "time": 3.8,
       "nextId": 420,
-      "state": "ef3de1ab",
+      "state": "300748c3",
       "events": "741638a5",
       "rng": {
-        "draws": 173,
-        "digest": "cf2daa24"
+        "draws": 171,
+        "digest": "c9c01224"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "675659d0",
+      "state": "30fa1a26",
       "events": "741638a5",
       "rng": {
         "draws": 185,
@@ -1552,18 +1633,18 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 420,
-      "state": "d261f31c",
-      "events": "6c8a01d5",
+      "state": "0caa06a9",
+      "events": "9f9abe12",
       "rng": {
-        "draws": 195,
-        "digest": "415fa7f1"
+        "draws": 194,
+        "digest": "6d726594"
       }
     },
     {
       "tick": 88,
       "time": 4.4,
       "nextId": 420,
-      "state": "6456979b",
+      "state": "14c6114a",
       "events": "741638a5",
       "rng": {
         "draws": 219,
@@ -1574,110 +1655,110 @@
       "tick": 92,
       "time": 4.6,
       "nextId": 420,
-      "state": "0200d132",
+      "state": "9c765085",
       "events": "741638a5",
       "rng": {
-        "draws": 246,
-        "digest": "6e0f8657"
+        "draws": 251,
+        "digest": "c5f58b3b"
       }
     },
     {
       "tick": 96,
       "time": 4.8,
       "nextId": 420,
-      "state": "cc568a55",
-      "events": "a279131f",
+      "state": "b8d62c6d",
+      "events": "7b84fcf0",
       "rng": {
-        "draws": 275,
-        "digest": "e90a861c"
+        "draws": 280,
+        "digest": "78ecae1c"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "5f089c24",
+      "state": "8d1183f0",
       "events": "741638a5",
       "rng": {
-        "draws": 296,
-        "digest": "247e62a8"
+        "draws": 301,
+        "digest": "2a647e33"
       }
     },
     {
       "tick": 104,
       "time": 5.2,
       "nextId": 420,
-      "state": "36c91f9d",
-      "events": "44ddeac1",
+      "state": "fcffa00a",
+      "events": "305a0fc2",
       "rng": {
-        "draws": 314,
-        "digest": "f88df9e7"
+        "draws": 316,
+        "digest": "9a65d9e2"
       }
     },
     {
       "tick": 108,
       "time": 5.4,
       "nextId": 420,
-      "state": "a8afe573",
+      "state": "4c0d4e7a",
       "events": "741638a5",
       "rng": {
-        "draws": 333,
-        "digest": "506e52db"
+        "draws": 337,
+        "digest": "d595dd6b"
       }
     },
     {
       "tick": 112,
       "time": 5.6,
       "nextId": 420,
-      "state": "c07131b3",
+      "state": "ebdf144c",
       "events": "741638a5",
       "rng": {
-        "draws": 363,
-        "digest": "c2e1faf2"
+        "draws": 369,
+        "digest": "04d6568e"
       }
     },
     {
       "tick": 116,
       "time": 5.8,
       "nextId": 420,
-      "state": "cef16f87",
+      "state": "9199dcaa",
       "events": "741638a5",
       "rng": {
-        "draws": 397,
-        "digest": "f8050682"
+        "draws": 399,
+        "digest": "972c081e"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "9764b717",
+      "state": "71f9c2d0",
       "events": "741638a5",
       "rng": {
-        "draws": 410,
-        "digest": "c7fd4b52"
+        "draws": 412,
+        "digest": "9f4b1578"
       }
     },
     {
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "359f6d74",
+      "state": "40afa791",
       "events": "741638a5",
       "rng": {
-        "draws": 433,
-        "digest": "278b8caf"
+        "draws": 434,
+        "digest": "e6d3f30f"
       }
     },
     {
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "359f6d74",
+      "state": "40afa791",
       "events": "741638a5",
       "rng": {
-        "draws": 433,
-        "digest": "278b8caf"
+        "draws": 434,
+        "digest": "e6d3f30f"
       },
       "label": "bladestorm-done",
       "players": [
@@ -1697,15 +1778,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1263,
-            "damageTaken": 16,
+            "damageDealt": 1436,
+            "damageTaken": 6,
             "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1263,
+              "damageDealt": 1436,
               "kills": 2
             },
             "dungeonClears": {},
@@ -1729,11 +1810,19 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_deep_roots",
               ""
             ],
             [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -1749,11 +1838,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_talented",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ]
           ],
@@ -1774,11 +1875,11 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 75,
+          "renown": 235,
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -1787,7 +1888,14 @@
               "20": "war_row_bladestorm"
             }
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
@@ -1804,7 +1912,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -1847,19 +1955,19 @@
               114.6
             ]
           ],
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 105.2,
-          "hp": 641,
+          "hp": 3053,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1872,7 +1980,7 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 77.2,
+          "resource": 75.825,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -1881,12 +1989,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "targetId": 419,
           "templateId": "warrior",
@@ -1902,7 +2010,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1574,
+              "breakThreshold": 1568,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -1933,7 +2041,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7974,
+          "hp": 7968,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -1968,7 +2076,7 @@
           "threat": [
             [
               415,
-              57.5
+              138.625
             ]
           ],
           "weapon": {
@@ -1983,7 +2091,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1581,
+              "breakThreshold": 1536,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2014,7 +2122,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7981,
+          "hp": 7936,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -2050,7 +2158,7 @@
           "threat": [
             [
               415,
-              51.5
+              171.625
             ]
           ],
           "weapon": {
@@ -2139,7 +2247,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8878,
+          "hp": 8784,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -2175,7 +2283,7 @@
           "threat": [
             [
               415,
-              143.5
+              312.625
             ]
           ],
           "weapon": {
@@ -2190,22 +2298,22 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "cd3d7b50",
-      "events": "5a5bc3cb",
+      "state": "a3dc6487",
+      "events": "244d6cff",
       "rng": {
-        "draws": 460,
-        "digest": "53589cea"
+        "draws": 459,
+        "digest": "0ebea550"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "cd3d7b50",
+      "state": "a3dc6487",
       "events": "741638a5",
       "rng": {
-        "draws": 460,
-        "digest": "53589cea"
+        "draws": 459,
+        "digest": "0ebea550"
       },
       "label": "final",
       "players": [
@@ -2225,15 +2333,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 1263,
-            "damageTaken": 16,
+            "damageDealt": 1436,
+            "damageTaken": 6,
             "kills": 2
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 1263,
+              "damageDealt": 1436,
               "kills": 2
             },
             "dungeonClears": {},
@@ -2257,11 +2365,19 @@
               ""
             ],
             [
+              "prog_champion",
+              ""
+            ],
+            [
               "prog_deep_roots",
               ""
             ],
             [
               "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_eternal",
               ""
             ],
             [
@@ -2277,11 +2393,23 @@
               ""
             ],
             [
+              "prog_mythic",
+              ""
+            ],
+            [
+              "prog_paragon",
+              ""
+            ],
+            [
               "prog_talented",
               ""
             ],
             [
               "prog_the_long_middle",
+              ""
+            ],
+            [
+              "prog_veteran",
               ""
             ]
           ],
@@ -2302,11 +2430,11 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 75,
+          "renown": 235,
           "talents": {
             "rows": {
               "5": "war_row_double_charge",
@@ -2315,7 +2443,14 @@
               "20": "war_row_bladestorm"
             }
           },
-          "townFocus": {}
+          "townFocus": {},
+          "unlockedMilestones": [
+            "champion",
+            "eternal",
+            "mythic",
+            "paragon",
+            "veteran"
+          ]
         }
       ],
       "entities": [
@@ -2332,7 +2467,7 @@
             }
           },
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -2375,19 +2510,19 @@
               114.4
             ]
           ],
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "facing": 1.570796,
           "fallStartY": -2.570818,
           "fiveSecondRule": 105.4,
-          "hp": 641,
+          "hp": 3053,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2400,7 +2535,7 @@
             "z": 54.896638
           },
           "potionCooldownUntil": -1,
-          "resource": 77.2,
+          "resource": 75.825,
           "resourceType": "rage",
           "spawnPos": {
             "x": 2,
@@ -2409,12 +2544,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "targetId": 419,
           "templateId": "warrior",
@@ -2430,7 +2565,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1574,
+              "breakThreshold": 1568,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2461,7 +2596,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7974,
+          "hp": 7968,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -2496,7 +2631,7 @@
           "threat": [
             [
               415,
-              57.5
+              138.625
             ]
           ],
           "weapon": {
@@ -2511,7 +2646,7 @@
           "auras": [
             {
               "breakChanceScale": 0.1,
-              "breakThreshold": 1581,
+              "breakThreshold": 1536,
               "breaksOnDamage": true,
               "duration": 8,
               "id": "fear_incap",
@@ -2542,7 +2677,7 @@
           "fallStartY": -2.462107,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 7981,
+          "hp": 7936,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -2578,7 +2713,7 @@
           "threat": [
             [
               415,
-              51.5
+              171.625
             ]
           ],
           "weapon": {
@@ -2667,7 +2802,7 @@
           "fallStartY": -2.570818,
           "fiveSecondRule": 99,
           "hostile": true,
-          "hp": 8878,
+          "hp": 8784,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -2703,7 +2838,7 @@
           "threat": [
             [
               415,
-              143.5
+              312.625
             ]
           ],
           "weapon": {

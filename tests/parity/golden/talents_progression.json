@@ -149,7 +149,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "9814a11f",
+      "state": "01d8343b",
       "events": "dfb18311",
       "rng": {
         "draws": 0,
@@ -202,7 +202,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -219,7 +219,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -235,17 +235,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -266,12 +266,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -286,7 +286,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f8327b1a",
+      "state": "35e03a16",
       "events": "e4ae8916",
       "rng": {
         "draws": 0,
@@ -339,7 +339,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -353,7 +353,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -369,17 +369,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -400,12 +400,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -420,7 +420,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "27c4ed8b",
+      "state": "8620e41f",
       "events": "16269b07",
       "rng": {
         "draws": 0,
@@ -472,7 +472,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "loadouts": [
             {
               "alloc": {
@@ -504,7 +504,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -520,17 +520,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -551,12 +551,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -571,7 +571,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a1564480",
+      "state": "d666a5ec",
       "events": "995cddae",
       "rng": {
         "draws": 0,
@@ -623,7 +623,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "loadouts": [
             {
               "alloc": {
@@ -655,7 +655,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 122,
+          "attackPower": 438,
           "auras": [
             {
               "duration": 3600,
@@ -671,17 +671,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.0695,
+          "critChance": 0.109,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -702,12 +702,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -722,7 +722,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "3c3cb9c0",
+      "state": "28435c6d",
       "events": "d88804d2",
       "rng": {
         "draws": 0,
@@ -774,7 +774,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "loadouts": [
             {
               "alloc": {
@@ -806,7 +806,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 132,
+          "attackPower": 448,
           "auras": [
             {
               "duration": 3600,
@@ -822,17 +822,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.1195,
+          "critChance": 0.159,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -853,12 +853,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
@@ -873,7 +873,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "3c3cb9c0",
+      "state": "28435c6d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -925,7 +925,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 167200,
+          "lifetimeXp": 4537882597,
           "loadouts": [
             {
               "alloc": {
@@ -957,7 +957,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 132,
+          "attackPower": 448,
           "auras": [
             {
               "duration": 3600,
@@ -973,17 +973,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.1195,
+          "critChance": 0.159,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0695,
+          "dodgeChance": 0.109,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 822,
+          "hp": 3824,
           "id": 415,
           "kind": "player",
-          "level": 20,
+          "level": 99,
           "lootFfaTimer": "Infinity",
-          "maxHp": 822,
+          "maxHp": 3824,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1004,12 +1004,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 39,
-            "armor": 410,
+            "agi": 118,
+            "armor": 1516,
             "int": 10,
             "spi": 11,
-            "sta": 61,
-            "str": 61
+            "sta": 219,
+            "str": 219
           },
           "templateId": "warrior",
           "weapon": {
