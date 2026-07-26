@@ -226,12 +226,9 @@ describe('entry HTMLs', () => {
     for (const html of [indexHtml, playHtml]) {
       expect(html).toMatch(/id="mm-deeds"[^>]*data-icon="book"/);
       expect(html).toMatch(/id="mm-deeds"[^>]*data-i18n-title="hudChrome\.deeds\.title"/);
-      // Dock order: quest log, then deeds, then map.
-      const quest = html.indexOf('id="mm-quest"');
+      // Dock order: deeds, then map. The quest log used to lead this run.
       const deeds = html.indexOf('id="mm-deeds"');
       const map = html.indexOf('id="mm-map"');
-      expect(quest).toBeGreaterThan(-1);
-      expect(deeds).toBeGreaterThan(quest);
       expect(map).toBeGreaterThan(deeds);
     }
     // hud.ts binds the click and repaints the keycap from the live binding.

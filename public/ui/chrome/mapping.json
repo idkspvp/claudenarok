@@ -18,7 +18,6 @@
     { "icon": "leaderboard", "motif": "Three-step podium under a crown" },
     { "icon": "map", "motif": "Rolled parchment map with a drawn compass" },
     { "icon": "professions", "motif": "Stone mortar and pestle with herb leaves" },
-    { "icon": "questlog", "motif": "Unrolled scroll with a wax seal and a quill" },
     { "icon": "social", "motif": "Two figures shoulder to shoulder before a banner" },
     { "icon": "spellbook", "motif": "Open spellbook with an arcane glow" },
     { "icon": "talents", "motif": "Talent tree, three gems joined by branches" }
