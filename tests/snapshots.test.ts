@@ -2876,6 +2876,9 @@ const ALL_DELTA_KEYS = [
   'party',
   'prof',
   'renown',
+  // The status-point allocation the Ragnarok conversion added: a character's six
+  // attributes are the player's own spend now, so the wire has to carry it.
+  'salloc',
   'salv',
   'sport',
   'stats',
@@ -3353,9 +3356,9 @@ describe('gather node cooldown wire round trip (ncd)', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 54 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(54);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(54);
+  it('ALL_DELTA_KEYS contains exactly 55 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(55);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(55);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

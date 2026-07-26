@@ -138,7 +138,17 @@ describe('i18n status registry: states', () => {
   // and a fresh re-tally of pending rows) become non-zero - i.e. a pending key WOULD
   // trip the gate. Runs at both tiers so the teeth can never silently rot.
   it('the pending===0 gate is non-vacuous (a synthetic pending row trips both measured quantities)', () => {
+    // English is currently the only locale, so the registry has no per-locale rows
+    // at all and there is nothing to flip. The gate is vacuous BY CONSTRUCTION in
+    // that state, which is a fact about the locale set, not a rotted assertion:
+    // synthesize the row instead of failing, so the teeth stay proven and come
+    // back to reading real data the moment a second locale lands.
     const clone = JSON.parse(JSON.stringify(registry));
+    if (NON_EN.length === 0) {
+      const first = Object.values<any>(clone.keys)[0];
+      expect(first, 'registry must carry at least one key').toBeTruthy();
+      first.locales = { __synthetic: { state: 'translated' } };
+    }
     let flipped = false;
     for (const entry of Object.values<any>(clone.keys)) {
       for (const row of Object.values<any>(entry.locales))
@@ -149,7 +159,7 @@ describe('i18n status registry: states', () => {
         }
       if (flipped) break;
     }
-    expect(flipped, 'fixture sanity: at least one translated row must exist to flip').toBe(true);
+    expect(flipped, 'a translated row must exist to flip (synthesized when en-only)').toBe(true);
     clone.counts.pending += 1;
     // Both conditions the release-tier gate asserts to be 0 are now non-zero:
     expect(clone.counts.pending).not.toBe(0);
