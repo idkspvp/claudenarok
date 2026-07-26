@@ -349,6 +349,28 @@ describe('xp pacing budget (no forced grinding)', () => {
 
   it('XP table reaches the level cap', () => {
     expect(XP_TABLE.length).toBeGreaterThanOrEqual(MAX_LEVEL);
-    expect(MAX_LEVEL).toBe(20);
+    expect(MAX_LEVEL).toBe(99);
+  });
+
+  // The Ragnarok conversion raised the cap to 99 by APPENDING to the curve. Every
+  // zone budget above, all 317 ability learn levels, and 156 quest minLevels are
+  // tuned against the original 1..20 steps, so those twenty numbers are the thing
+  // that must not move — re-generating them would silently re-tune the whole
+  // shipped game. Pinned to literals, not to XP_TABLE itself, so an accidental
+  // edit to the generator cannot make this test agree with it.
+  it('leaves the shipped level 1-20 steps untouched', () => {
+    expect(XP_TABLE.slice(0, 20)).toEqual([
+      400, 900, 1400, 2100, 2800, 3600, 4500, 5400, 6500, 7600, 8800, 10100, 11400, 12900, 14400,
+      16000, 17700, 19400, 21300, 23200,
+    ]);
+  });
+
+  it('never gets cheaper as levels climb', () => {
+    for (let i = 1; i < XP_TABLE.length; i++) {
+      expect(
+        XP_TABLE[i],
+        `level ${i + 1}->${i + 2} costs less than the level before`,
+      ).toBeGreaterThan(XP_TABLE[i - 1]);
+    }
   });
 });

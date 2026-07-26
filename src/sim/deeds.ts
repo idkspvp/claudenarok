@@ -42,6 +42,7 @@ import {
   dist2d,
   type Entity,
   type EquipSlot,
+  FIRST_ERA_LEVEL_CAP,
   type ItemDef,
   MAX_LEVEL,
   NYTHRAXIS_ROOM_RADIUS,
@@ -749,7 +750,13 @@ const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
   // Era feats are minted per era; this one is satisfiable only while the
   // launch era is current (DEEDS_ERA is bumped by the maintainer at era
   // boundaries, at which point the deed stays visible as a history marker).
-  firstEraCap: (_m, e) => DEEDS_ERA === 'first_era' && e.level >= MAX_LEVEL,
+  //
+  // Pinned to 20, NOT to MAX_LEVEL. The deed commemorates the First Era's cap,
+  // and the First Era's cap was 20 — that is what its own name and description
+  // claim ("Reached level 20 while the First Era was current"). Tracking the
+  // live constant would have silently re-priced a shipped feat of strength at
+  // 99 the moment the Ragnarok conversion raised the ceiling.
+  firstEraCap: (_m, e) => DEEDS_ERA === 'first_era' && e.level >= FIRST_ERA_LEVEL_CAP,
 };
 
 function dungeonClearCount(

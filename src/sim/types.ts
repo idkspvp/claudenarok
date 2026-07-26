@@ -4375,12 +4375,57 @@ export function normAngle(a: number): number {
 // Classic progression formulas
 // ---------------------------------------------------------------------------
 
-// XP required to go from level L to L+1 (classic-era curve values, levels 1..20)
-export const XP_TABLE = [
+// The 1..20 steps this game shipped with. They stay untouched by the Ragnarok
+// conversion: 317 ability `learnLevel`s, 346 mobs, 156 quests and all three zone
+// bands are tuned against exactly these numbers, so re-scaling them would mean
+// re-tuning the whole existing game to buy nothing.
+const SHIPPED_XP_STEPS = [
   400, 900, 1400, 2100, 2800, 3600, 4500, 5400, 6500, 7600, 8800, 10100, 11400, 12900, 14400, 16000,
   17700, 19400, 21300, 23200,
 ];
-export const MAX_LEVEL = 20;
+
+// Per-level growth for the new 20..99 stretch, expressed as "up to level N, each
+// level costs G times the one before".
+//
+// The shape is classic Ragnarok's, and only the shape: the flat run through the
+// 40s and 50s, the dip through the 60s, and the wall that opens at 90 and steepens
+// again at 95. It is what the published pre-renewal anchors imply — base EXP to
+// leave level 9 is 200, level 19 is 1,260, 29 is 4,474, 39 is 21,773, 49 is 75,973,
+// 59 is 255,341, 69 is 740,988, 79 is 2,713,878, 89 is 7,121,664, 94 is 18,339,300,
+// and 98 is 58,135,000 (dbc.reborn.cz, "Base Normal") — divided out level by level.
+//
+// We take the curve and generate our own values from it rather than copying the
+// table. A difficulty curve is a design decision; the 99 numbers Gravity chose to
+// express it are their data. See docs/design/ro-classic-conversion.md.
+const XP_GROWTH_BANDS: ReadonlyArray<readonly [throughLevel: number, growth: number]> = [
+  [29, 1.14],
+  [39, 1.17],
+  [49, 1.133],
+  [59, 1.128],
+  [69, 1.113],
+  [79, 1.14],
+  [89, 1.101],
+  [94, 1.209],
+  [98, 1.336],
+];
+
+// XP required to go from level L to L+1, indexed by L-1.
+export const XP_TABLE: readonly number[] = (() => {
+  const table = SHIPPED_XP_STEPS.slice();
+  let step = SHIPPED_XP_STEPS[SHIPPED_XP_STEPS.length - 1];
+  for (let lvl = 20; lvl <= 98; lvl++) {
+    const band = XP_GROWTH_BANDS.find(([through]) => lvl <= through);
+    step *= band ? band[1] : 1;
+    table.push(Math.round(step));
+  }
+  return table;
+})();
+export const MAX_LEVEL = 99;
+
+// The cap the First Era shipped with, frozen as history. The `feat_era_cap` deed
+// commemorates reaching it, so it must keep meaning 20 no matter where the live
+// cap moves. Nothing else should read this.
+export const FIRST_ERA_LEVEL_CAP = 20;
 
 // Shared sim constants relocated here (C1) so both sim.ts and the extracted damage
 // core (src/sim/combat/damage.ts) can import them without a sim.ts cycle.
