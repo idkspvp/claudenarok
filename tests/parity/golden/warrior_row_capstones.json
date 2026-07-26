@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "28f12f87",
+      "state": "0ec9c7e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -87,7 +87,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -148,8 +148,8 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "b5e5fd2b",
-      "events": "ab06b7f1",
+      "state": "969d344f",
+      "events": "9d45360c",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -159,7 +159,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "259c8533",
+      "state": "16dbf91f",
       "events": "5c687645",
       "rng": {
         "draws": 2,
@@ -170,7 +170,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 418,
-      "state": "473c7b29",
+      "state": "b129efc5",
       "events": "3e99d104",
       "rng": {
         "draws": 2,
@@ -293,7 +293,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.6,
               "school": "physical",
               "sourceId": 415
@@ -502,7 +502,7 @@
       "tick": 12,
       "time": 0.6,
       "nextId": 418,
-      "state": "a8f301f4",
+      "state": "36775ef2",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -513,7 +513,7 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "efa897a4",
+      "state": "7b469236",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -524,8 +524,8 @@
       "tick": 16,
       "time": 0.8,
       "nextId": 418,
-      "state": "9a7d1a08",
-      "events": "a7215ec1",
+      "state": "f4e44c3e",
+      "events": "ee63b6c3",
       "rng": {
         "draws": 5,
         "digest": "ca7bbe9c"
@@ -647,7 +647,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.2,
               "school": "physical",
               "sourceId": 415
@@ -744,7 +744,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 8,
               "school": "physical",
               "sourceId": 415,
@@ -821,7 +821,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 8,
               "school": "physical",
               "sourceId": 415,
@@ -886,7 +886,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "5ef8925a",
+      "state": "20c1a768",
       "events": "85acc9d4",
       "rng": {
         "draws": 9,
@@ -897,7 +897,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 418,
-      "state": "3088f993",
+      "state": "6a5bac31",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -908,8 +908,8 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 420,
-      "state": "fe5392b7",
-      "events": "6b7ca5d5",
+      "state": "a778ba1d",
+      "events": "a271debd",
       "rng": {
         "draws": 18,
         "digest": "e122dc22"
@@ -1040,7 +1040,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3598.8,
               "school": "physical",
               "sourceId": 415
@@ -1122,7 +1122,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 7.6,
               "school": "physical",
               "sourceId": 415,
@@ -1211,7 +1211,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 7.6,
               "school": "physical",
               "sourceId": 415,
@@ -1398,7 +1398,7 @@
       "tick": 28,
       "time": 1.4,
       "nextId": 420,
-      "state": "f2b3bd6c",
+      "state": "6051a0b6",
       "events": "5eb4f0ac",
       "rng": {
         "draws": 21,
@@ -1409,7 +1409,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 420,
-      "state": "6d08ba84",
+      "state": "2634305c",
       "events": "741638a5",
       "rng": {
         "draws": 21,
@@ -1420,7 +1420,7 @@
       "tick": 36,
       "time": 1.8,
       "nextId": 420,
-      "state": "81087ca3",
+      "state": "42bc9a1b",
       "events": "741638a5",
       "rng": {
         "draws": 21,
@@ -1431,7 +1431,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "992705eb",
+      "state": "ae996d4b",
       "events": "741638a5",
       "rng": {
         "draws": 21,
@@ -1442,8 +1442,8 @@
       "tick": 44,
       "time": 2.2,
       "nextId": 420,
-      "state": "42038a40",
-      "events": "7c296a99",
+      "state": "2ba8a860",
+      "events": "479b9c84",
       "rng": {
         "draws": 37,
         "digest": "5e5b3764"
@@ -1453,7 +1453,7 @@
       "tick": 48,
       "time": 2.4,
       "nextId": 420,
-      "state": "a433c131",
+      "state": "f8851d15",
       "events": "741638a5",
       "rng": {
         "draws": 55,
@@ -1464,7 +1464,7 @@
       "tick": 52,
       "time": 2.6,
       "nextId": 420,
-      "state": "56f9029d",
+      "state": "d2a6da3b",
       "events": "741638a5",
       "rng": {
         "draws": 65,
@@ -1475,7 +1475,7 @@
       "tick": 56,
       "time": 2.8,
       "nextId": 420,
-      "state": "47ac9b8e",
+      "state": "144add54",
       "events": "741638a5",
       "rng": {
         "draws": 80,
@@ -1486,7 +1486,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "e4c3b571",
+      "state": "7220366f",
       "events": "741638a5",
       "rng": {
         "draws": 96,
@@ -1497,8 +1497,8 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 420,
-      "state": "b5181496",
-      "events": "6784a6de",
+      "state": "a45430fc",
+      "events": "6e295e62",
       "rng": {
         "draws": 125,
         "digest": "0bc9e966"
@@ -1508,7 +1508,7 @@
       "tick": 68,
       "time": 3.4,
       "nextId": 420,
-      "state": "b9653b30",
+      "state": "22f8d376",
       "events": "244d6cff",
       "rng": {
         "draws": 141,
@@ -1519,7 +1519,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 420,
-      "state": "92335f96",
+      "state": "a4634b76",
       "events": "741638a5",
       "rng": {
         "draws": 157,
@@ -1530,7 +1530,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 420,
-      "state": "fca52a67",
+      "state": "ef3de1ab",
       "events": "741638a5",
       "rng": {
         "draws": 173,
@@ -1541,7 +1541,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "4b890360",
+      "state": "675659d0",
       "events": "741638a5",
       "rng": {
         "draws": 185,
@@ -1552,8 +1552,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 420,
-      "state": "d9b0d964",
-      "events": "5a2564c4",
+      "state": "d261f31c",
+      "events": "6c8a01d5",
       "rng": {
         "draws": 195,
         "digest": "415fa7f1"
@@ -1563,7 +1563,7 @@
       "tick": 88,
       "time": 4.4,
       "nextId": 420,
-      "state": "15e35497",
+      "state": "6456979b",
       "events": "741638a5",
       "rng": {
         "draws": 219,
@@ -1574,7 +1574,7 @@
       "tick": 92,
       "time": 4.6,
       "nextId": 420,
-      "state": "5d306fa0",
+      "state": "0200d132",
       "events": "741638a5",
       "rng": {
         "draws": 246,
@@ -1585,7 +1585,7 @@
       "tick": 96,
       "time": 4.8,
       "nextId": 420,
-      "state": "ab323a6b",
+      "state": "cc568a55",
       "events": "a279131f",
       "rng": {
         "draws": 275,
@@ -1596,7 +1596,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "de0168ba",
+      "state": "5f089c24",
       "events": "741638a5",
       "rng": {
         "draws": 296,
@@ -1607,8 +1607,8 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 420,
-      "state": "51a3d5f3",
-      "events": "e219af08",
+      "state": "36c91f9d",
+      "events": "44ddeac1",
       "rng": {
         "draws": 314,
         "digest": "f88df9e7"
@@ -1618,7 +1618,7 @@
       "tick": 108,
       "time": 5.4,
       "nextId": 420,
-      "state": "515aaef1",
+      "state": "a8afe573",
       "events": "741638a5",
       "rng": {
         "draws": 333,
@@ -1629,7 +1629,7 @@
       "tick": 112,
       "time": 5.6,
       "nextId": 420,
-      "state": "6f4725a5",
+      "state": "c07131b3",
       "events": "741638a5",
       "rng": {
         "draws": 363,
@@ -1640,7 +1640,7 @@
       "tick": 116,
       "time": 5.8,
       "nextId": 420,
-      "state": "11704a1d",
+      "state": "cef16f87",
       "events": "741638a5",
       "rng": {
         "draws": 397,
@@ -1651,7 +1651,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "fb0abb35",
+      "state": "9764b717",
       "events": "741638a5",
       "rng": {
         "draws": 410,
@@ -1662,7 +1662,7 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "bfcff2ca",
+      "state": "359f6d74",
       "events": "741638a5",
       "rng": {
         "draws": 433,
@@ -1673,7 +1673,7 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 420,
-      "state": "bfcff2ca",
+      "state": "359f6d74",
       "events": "741638a5",
       "rng": {
         "draws": 433,
@@ -1810,7 +1810,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.8,
               "school": "physical",
               "sourceId": 415
@@ -1819,7 +1819,7 @@
               "duration": 20,
               "id": "victory_rush",
               "kind": "victory_rush",
-              "name": "Victory Rush",
+              "name": "Killing High",
               "remaining": 16.95,
               "school": "physical",
               "sourceId": 415
@@ -1907,7 +1907,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 2.6,
               "school": "physical",
               "sourceId": 415,
@@ -1988,7 +1988,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 2.6,
               "school": "physical",
               "sourceId": 415,
@@ -2190,7 +2190,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "23dae5e2",
+      "state": "cd3d7b50",
       "events": "5a5bc3cb",
       "rng": {
         "draws": 460,
@@ -2201,7 +2201,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 420,
-      "state": "23dae5e2",
+      "state": "cd3d7b50",
       "events": "741638a5",
       "rng": {
         "draws": 460,
@@ -2338,7 +2338,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.6,
               "school": "physical",
               "sourceId": 415
@@ -2347,7 +2347,7 @@
               "duration": 20,
               "id": "victory_rush",
               "kind": "victory_rush",
-              "name": "Victory Rush",
+              "name": "Killing High",
               "remaining": 16.75,
               "school": "physical",
               "sourceId": 415
@@ -2435,7 +2435,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 2.4,
               "school": "physical",
               "sourceId": 415,
@@ -2516,7 +2516,7 @@
               "duration": 8,
               "id": "fear_incap",
               "kind": "incapacitate",
-              "name": "Intimidating Shout",
+              "name": "Rout",
               "remaining": 2.4,
               "school": "physical",
               "sourceId": 415,

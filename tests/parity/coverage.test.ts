@@ -55,7 +55,7 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(notes.sawBrainFreeze).toBe(true);
     expect(
       (rec.allEvents as Ev[]).some(
-        (event) => event.type === 'damage' && event.ability === 'Frozen Orb',
+        (event) => event.type === 'damage' && event.ability === 'Rimeglobe',
       ),
     ).toBe(true);
   });
@@ -939,7 +939,7 @@ describe('coverage: each scenario fires its subsystem', () => {
       true,
     );
     // Bladestorm: the self-centered channel pulsed damage.
-    expect(ev.some((e) => e.type === 'damage' && e.ability === 'Bladestorm')).toBe(true);
+    expect(ev.some((e) => e.type === 'damage' && e.ability === 'Rending Cyclone')).toBe(true);
   });
 
   it('professions_craft: denial draws nothing, each craft draws once, and the vestments proc mints + surfaces a masterwork', () => {

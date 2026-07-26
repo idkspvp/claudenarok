@@ -128,7 +128,7 @@ describe('warrior stances in the live sim', () => {
     const crit0 = sim.player.critChance;
     (sim as unknown as { applyAura: (p: unknown, a: unknown) => void }).applyAura(sim.player, {
       id: 'berserker_stance',
-      name: 'Berserker Stance',
+      name: 'Reckless Stance',
       kind: 'berserker_stance',
       remaining: 3600,
       duration: 3600,

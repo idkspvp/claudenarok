@@ -245,7 +245,7 @@ function runShortFight(spec: Spec, seconds: number, seed = 41, rows?: Rows): Bur
         if (e.ability === 'Ignite') ignitePaid += e.amount;
         else if (e.school === 'fire' && e.sourceId === p.id) {
           if (e.crit) igniteBanked += Math.round(e.amount * 0.4);
-          else if (e.ability === 'Meteor') igniteBanked += Math.round(e.amount * 0.4);
+          else if (e.ability === 'Emberfall') igniteBanked += Math.round(e.amount * 0.4);
         }
       }
     }

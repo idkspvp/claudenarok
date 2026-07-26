@@ -49,8 +49,8 @@ describe('auraGainLogKeyFor', () => {
 
 describe('findAuraForGainEvent', () => {
   it('matches by name when no auraKind is supplied', () => {
-    const auras = [aura({ name: 'Battle Stance', kind: 'defensive_stance' })];
-    expect(findAuraForGainEvent(auras, 'Battle Stance')?.kind).toBe('defensive_stance');
+    const auras = [aura({ name: 'Warring Stance', kind: 'defensive_stance' })];
+    expect(findAuraForGainEvent(auras, 'Warring Stance')?.kind).toBe('defensive_stance');
   });
 
   it('matches by name and kind when both are supplied', () => {

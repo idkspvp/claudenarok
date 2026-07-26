@@ -80,8 +80,9 @@ describe('v0.26 winning Warrior release contracts', () => {
   });
 
   it('keeps winning row presentation names out of the displaced Warrior vocabulary', () => {
-    expect(ABILITIES.avatar.name).toBe('Avatar');
-    expect(ABILITIES.bladestorm.name).toBe('Bladestorm');
+    // Renamed off the WoW spellbook in the RO conversion's M1 naming pass.
+    expect(ABILITIES.avatar.name).toBe('Ironshape');
+    expect(ABILITIES.bladestorm.name).toBe('Rending Cyclone');
     const reachableText = CLASSES.warrior.abilities
       .map((id) => `${ABILITIES[id].name}\n${ABILITIES[id].description}`)
       .join('\n');

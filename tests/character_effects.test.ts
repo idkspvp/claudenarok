@@ -111,7 +111,7 @@ describe('character visual effects', () => {
     } as const;
     const reckless = {
       id: 'recklessness',
-      name: 'Recklessness',
+      name: 'Abandon',
       kind: 'buff_reckless',
       remaining: 10,
       duration: 10,

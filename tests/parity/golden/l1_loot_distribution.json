@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "88e6d73c",
+      "state": "f1302862",
       "events": "0efe4389",
       "rng": {
         "draws": 1,
@@ -228,7 +228,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -459,7 +459,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "dcf32892",
+      "state": "abe636b8",
       "events": "be00f09c",
       "rng": {
         "draws": 3,
@@ -683,7 +683,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.95,
               "school": "physical",
               "sourceId": 415
@@ -920,7 +920,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "4199b31c",
+      "state": "acc69186",
       "events": "880460b2",
       "rng": {
         "draws": 3,
@@ -1153,7 +1153,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.95,
               "school": "physical",
               "sourceId": 415
@@ -1374,7 +1374,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 419,
-      "state": "4c38f4d9",
+      "state": "51061fef",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -1607,7 +1607,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.85,
               "school": "physical",
               "sourceId": 415

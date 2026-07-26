@@ -513,7 +513,7 @@ describe('playtest round five (owner hotfixes)', () => {
   });
 });
 
-describe('Meteor', () => {
+describe('Emberfall', () => {
   it('falls after a delay, then its impact damages and Ignites the area', () => {
     const { sim, p } = mageWithSpec('fire');
     const mob = addDummy(sim, 15);

@@ -4414,7 +4414,7 @@ describe('Ring of Frost snapshot parity', () => {
       interval: 10,
       tickTimer: 10,
       school: 'frost',
-      ability: 'Ring of Frost',
+      ability: 'Hoarfrost Ring',
       frostRing: {
         id: `${caster.id}:10`,
         abilityId: 'rings_of_frost',

@@ -20,7 +20,11 @@ export const TEMPORAL_HOURGLASS_ALLY_COOLDOWN_RATE = 1.75;
 export const RUN_SPEED = 7; // yards/sec, classic run speed
 export const TURN_SPEED = Math.PI; // rad/sec keyboard turning
 export const MELEE_RANGE = 5; // yards
-export const MELEE_ARC = 2.2; // radians half-arc within which melee swings connect
+// Radians of half-arc for the FRONTAL AoE variant (combat/effect_dispatch.ts).
+// It no longer gates ordinary swings or abilities: facing stopped being a hit
+// requirement in the RO conversion, where where you look never decides whether
+// you connect. Only a deliberately directional cone still reads it.
+export const MELEE_ARC = 2.2;
 export const INTERACT_RANGE = 5;
 // /yell broadcast radius and ground-object respawn delay: neutral consts shared by
 // code that stays on Sim (the chat router, pickUpObject) and an extracted slice (the

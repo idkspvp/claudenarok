@@ -35,8 +35,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 422,
-      "state": "dedd0a59",
-      "events": "db942aa5",
+      "state": "69ba5309",
+      "events": "158b4c3d",
       "rng": {
         "draws": 2,
         "digest": "68f9f3dd"
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 422,
-      "state": "dd687508",
+      "state": "bd2e7f78",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 422,
-      "state": "f190e1a0",
+      "state": "e6f0e150",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "d8788115",
+      "state": "be967205",
       "events": "5636db41",
       "rng": {
         "draws": 2,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 422,
-      "state": "18d5b379",
+      "state": "24bab069",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 422,
-      "state": "14337183",
+      "state": "50aaf413",
       "events": "b1e513e5",
       "rng": {
         "draws": 2,
@@ -101,7 +101,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 422,
-      "state": "f9d724fb",
+      "state": "aa07fa4b",
       "events": "5c5a36ff",
       "rng": {
         "draws": 4,
@@ -621,7 +621,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3598.4,
               "school": "physical",
               "sourceId": 415
@@ -1018,7 +1018,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 422,
-      "state": "216e9d18",
+      "state": "21213a48",
       "events": "22113634",
       "rng": {
         "draws": 4,
@@ -1029,7 +1029,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "d333f911",
+      "state": "5db16ae1",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -1040,7 +1040,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 422,
-      "state": "e3a9e050",
+      "state": "d9abcdc0",
       "events": "741638a5",
       "rng": {
         "draws": 36,
@@ -1051,7 +1051,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 422,
-      "state": "1b901d6c",
+      "state": "812cc2dc",
       "events": "741638a5",
       "rng": {
         "draws": 50,
@@ -1062,7 +1062,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 422,
-      "state": "71dc1ba0",
+      "state": "cec7af90",
       "events": "741638a5",
       "rng": {
         "draws": 66,
@@ -1073,7 +1073,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "7880b184",
+      "state": "463f7994",
       "events": "741638a5",
       "rng": {
         "draws": 80,
@@ -1084,7 +1084,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 422,
-      "state": "eaadc0f4",
+      "state": "1be2fc44",
       "events": "741638a5",
       "rng": {
         "draws": 101,
@@ -1095,7 +1095,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 422,
-      "state": "eac593a6",
+      "state": "5c174976",
       "events": "741638a5",
       "rng": {
         "draws": 127,
@@ -1106,7 +1106,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 422,
-      "state": "a2f12eef",
+      "state": "36d9dbbf",
       "events": "741638a5",
       "rng": {
         "draws": 152,
@@ -1117,7 +1117,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 422,
-      "state": "518d962f",
+      "state": "1cf616df",
       "events": "741638a5",
       "rng": {
         "draws": 174,
@@ -1128,7 +1128,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 422,
-      "state": "33186a8a",
+      "state": "0eaf621a",
       "events": "741638a5",
       "rng": {
         "draws": 203,
@@ -1139,7 +1139,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 422,
-      "state": "5abbe558",
+      "state": "89c35928",
       "events": "741638a5",
       "rng": {
         "draws": 230,
@@ -1150,7 +1150,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 422,
-      "state": "10794174",
+      "state": "18318244",
       "events": "741638a5",
       "rng": {
         "draws": 253,
@@ -1161,7 +1161,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "625ea512",
+      "state": "5010d082",
       "events": "741638a5",
       "rng": {
         "draws": 276,
@@ -1172,7 +1172,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 422,
-      "state": "80622264",
+      "state": "65b3dcf4",
       "events": "741638a5",
       "rng": {
         "draws": 304,
@@ -1183,7 +1183,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 422,
-      "state": "481e43e9",
+      "state": "3998d339",
       "events": "741638a5",
       "rng": {
         "draws": 328,
@@ -1194,7 +1194,7 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 422,
-      "state": "9cf414ca",
+      "state": "3aa9e49a",
       "events": "741638a5",
       "rng": {
         "draws": 360,
@@ -1205,7 +1205,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "d7e801aa",
+      "state": "e58b43da",
       "events": "741638a5",
       "rng": {
         "draws": 388,
@@ -1216,7 +1216,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 422,
-      "state": "46fafbaa",
+      "state": "f53dd2ba",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -1227,7 +1227,7 @@
       "tick": 130,
       "time": 6.5,
       "nextId": 422,
-      "state": "628ce60a",
+      "state": "8c49e09a",
       "events": "741638a5",
       "rng": {
         "draws": 435,
@@ -1238,7 +1238,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 423,
-      "state": "be40bb9a",
+      "state": "daba20ca",
       "events": "c09e532d",
       "rng": {
         "draws": 445,
@@ -1758,7 +1758,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -2155,7 +2155,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 424,
-      "state": "39d6500b",
+      "state": "da68c31b",
       "events": "b143e666",
       "rng": {
         "draws": 446,
@@ -2675,7 +2675,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -3141,7 +3141,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 426,
-      "state": "90493b67",
+      "state": "a862d237",
       "events": "e25d0965",
       "rng": {
         "draws": 448,
@@ -3666,7 +3666,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -4240,7 +4240,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 427,
-      "state": "93fa62d8",
+      "state": "286be8c8",
       "events": "e3444394",
       "rng": {
         "draws": 453,
@@ -4769,7 +4769,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -5416,7 +5416,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 428,
-      "state": "bcdb8b8f",
+      "state": "5f6da19f",
       "events": "762a231a",
       "rng": {
         "draws": 454,
@@ -5949,7 +5949,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -6672,7 +6672,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "3966049c",
+      "state": "a2f663cc",
       "events": "a867c74e",
       "rng": {
         "draws": 454,
@@ -7205,7 +7205,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415
@@ -7982,7 +7982,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "3966049c",
+      "state": "a2f663cc",
       "events": "741638a5",
       "rng": {
         "draws": 454,
@@ -8515,7 +8515,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3593.35,
               "school": "physical",
               "sourceId": 415

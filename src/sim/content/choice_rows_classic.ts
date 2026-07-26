@@ -146,7 +146,7 @@ export const MAGE_CHOICE_ROWS: ClassChoiceRows = {
       options: [
         {
           id: 'mag_r11_rings_of_frost',
-          name: 'Ring of Frost',
+          name: 'Hoarfrost Ring',
           description:
             'Grants Ring of Frost: its perimeter persists for 10 sec and freezes enemies that cross it for 4 sec.',
           icon: 'rings_of_frost',

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "28f12f87",
+      "state": "0ec9c7e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -87,7 +87,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -148,7 +148,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 418,
-      "state": "5bbe0da0",
+      "state": "c21bee3e",
       "events": "c11309ec",
       "rng": {
         "draws": 4,
@@ -159,7 +159,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "901126c9",
+      "state": "20b0a02f",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -170,7 +170,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "8e729175",
+      "state": "5b11746b",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -257,7 +257,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.75,
               "school": "physical",
               "sourceId": 415
@@ -611,8 +611,8 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 418,
-      "state": "19c39af0",
-      "events": "2156c4fb",
+      "state": "ac7fca80",
+      "events": "5123ef0d",
       "rng": {
         "draws": 4,
         "digest": "7ba9533d"
@@ -622,7 +622,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 418,
-      "state": "2ef68fc5",
+      "state": "a923de33",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -719,7 +719,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.9,
               "school": "physical",
               "sourceId": 415

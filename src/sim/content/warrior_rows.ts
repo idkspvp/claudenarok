@@ -74,7 +74,7 @@ export const WARRIOR_ROWS: RowTree = [
       },
       {
         id: 'war_row_victory_rush',
-        name: 'Victory Rush',
+        name: 'Killing High',
         description:
           'Grants Victory Rush: after killing an enemy, your next strike heals you for 20% of your maximum health.',
         // LIVE: grants the strike; the on-kill window aura is applied by
@@ -150,7 +150,7 @@ export const WARRIOR_ROWS: RowTree = [
     options: [
       {
         id: 'war_row_recklessness',
-        name: 'Recklessness',
+        name: 'Abandon',
         description:
           'Enrage: increase all your rage generation by 50% and gain 20% additional critical strike chance for 12 sec.',
         // LIVE: grants the enrage (one buff_reckless aura: +20% crit, +50% rage gen).
@@ -158,7 +158,7 @@ export const WARRIOR_ROWS: RowTree = [
       },
       {
         id: 'war_row_avatar',
-        name: 'Avatar',
+        name: 'Ironshape',
         description:
           'Transform into a colossus for 20 sec, breaking enemy control effects on you (boss control is unaffected) and increasing your damage dealt by 20%.',
         // LIVE: grants the transform (breakControl + damage amp + colossus scale).
@@ -190,7 +190,7 @@ export const WARRIOR_ROWS: RowTree = [
       },
       {
         id: 'war_row_bladestorm',
-        name: 'Bladestorm',
+        name: 'Rending Cyclone',
         description:
           'Become a whirling storm of steel, striking all enemies within 8 yards every second for 4 sec.',
         // LIVE: grants the self-centered position channel (the storm follows

@@ -759,7 +759,7 @@ const classAbilityNamesEn = {
       ],
       [
         'rings_of_frost',
-        'Ring of Frost',
+        'Hoarfrost Ring',
         'Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec. (Mage talent)',
       ],
       [
@@ -784,7 +784,7 @@ const classAbilityNamesEn = {
       ],
       [
         'frozen_orb',
-        'Frozen Orb',
+        'Rimeglobe',
         'Release an orb of swirling frost that drifts forward for 8 sec, dealing {damage} Frost damage each second to nearby enemies and slowing them by 30%. Each striking pulse generates one Icicle. (Frost)',
       ],
       [
@@ -1471,12 +1471,12 @@ const classAbilityNamesEn = {
       ],
       [
         'battle_stance',
-        'Battle Stance',
+        'Warring Stance',
         'An aggressive combat stance: you generate 10% more rage. The default stance for Arms and Protection.',
       ],
       [
         'berserker_stance',
-        'Berserker Stance',
+        'Reckless Stance',
         'A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury warrior always fights in this stance.',
       ],
       [
@@ -1581,7 +1581,7 @@ const classAbilityNamesEn = {
       ],
       [
         'recklessness',
-        'Recklessness',
+        'Abandon',
         'Enrage: your rage generation increases by 50% and your critical strike chance by 20% for 12 sec.',
       ],
       [
@@ -1591,22 +1591,22 @@ const classAbilityNamesEn = {
       ],
       [
         'victory_rush',
-        'Victory Rush',
+        'Killing High',
         'Strike for weapon damage plus {damage} and heal 20% of your maximum health. Only usable within 20 sec of killing an enemy.',
       ],
       [
         'intimidating_shout',
-        'Intimidating Shout',
+        'Rout',
         'A terrifying shout that sends up to 5 enemies within 8 yards fleeing in fear for 8 sec. Damage may break the effect.',
       ],
       [
         'revenge',
-        'Revenge',
+        'Riposte',
         'Attack in a wide arc, dealing 18 to 24 Physical damage to all enemies in front of you. Above 5 targets the damage is reduced. When you dodge or parry, your next Revenge may cost no rage. (Protection)',
       ],
       [
         'heroic_leap',
-        'Heroic Leap',
+        'Warleap',
         'Leap to the target area, dealing {damage} damage to nearby enemies on landing.',
       ],
       [
@@ -1621,7 +1621,7 @@ const classAbilityNamesEn = {
       ],
       [
         'avatar',
-        'Avatar',
+        'Ironshape',
         'Transform into a colossus for 20 sec, breaking enemy control effects on you (boss control is unaffected) and increasing your damage dealt by 20%.',
       ],
       [
@@ -1632,7 +1632,7 @@ const classAbilityNamesEn = {
       ['berserk', 'Red Haze', 'Increases attack power by 70 for 15 sec. (Druid talent)'],
       [
         'bladestorm',
-        'Bladestorm',
+        'Rending Cyclone',
         'Become a whirling storm of steel, striking all enemies within 6 yards for {damage} every second for 4 sec.',
       ],
       ['blink', 'Flickerstep', 'Teleports you 15 yd forward and breaks roots. (Mage talent)'],

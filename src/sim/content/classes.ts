@@ -1180,7 +1180,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   // make the next cast free (the revenge_free proc, applied in mobSwing).
   revenge: {
     id: 'revenge',
-    name: 'Revenge',
+    name: 'Riposte',
     class: 'warrior',
     learnLevel: 7,
     specs: ['prot'],
@@ -1202,7 +1202,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   // Berserker for Fury only.
   battle_stance: {
     id: 'battle_stance',
-    name: 'Battle Stance',
+    name: 'Warring Stance',
     class: 'warrior',
     learnLevel: 1,
     excludeSpecs: ['fury'],
@@ -1220,7 +1220,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   berserker_stance: {
     id: 'berserker_stance',
-    name: 'Berserker Stance',
+    name: 'Reckless Stance',
     class: 'warrior',
     learnLevel: 5,
     specs: ['fury'],
@@ -1537,7 +1537,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   // shortens its cooldown (below).
   frozen_orb: {
     id: 'frozen_orb',
-    name: 'Frozen Orb',
+    name: 'Rimeglobe',
     class: 'mage',
     learnLevel: 15,
     specs: ['frost'],
@@ -5113,7 +5113,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   heroic_leap: {
     id: 'heroic_leap',
-    name: 'Heroic Leap',
+    name: 'Warleap',
     class: 'warrior',
     learnLevel: 6,
     cost: 0,
@@ -5167,7 +5167,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   intimidating_shout: {
     id: 'intimidating_shout',
     castFx: 'shout',
-    name: 'Intimidating Shout',
+    name: 'Rout',
     class: 'warrior',
     learnLevel: 14,
     // Free in every spec (owner 2026-07-08): the panic/CC horn should never be
@@ -5186,7 +5186,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   bladestorm: {
     id: 'bladestorm',
-    name: 'Bladestorm',
+    name: 'Rending Cyclone',
     class: 'warrior',
     learnLevel: 20,
     cost: 25,
@@ -5211,7 +5211,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   victory_rush: {
     id: 'victory_rush',
-    name: 'Victory Rush',
+    name: 'Killing High',
     class: 'warrior',
     learnLevel: 8,
     cost: 0,
@@ -5268,7 +5268,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   recklessness: {
     id: 'recklessness',
-    name: 'Recklessness',
+    name: 'Abandon',
     class: 'warrior',
     learnLevel: 17,
     cost: 0,
@@ -5284,7 +5284,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   avatar: {
     id: 'avatar',
-    name: 'Avatar',
+    name: 'Ironshape',
     class: 'warrior',
     learnLevel: 17,
     cost: 0,
@@ -5880,7 +5880,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   meteor: {
     id: 'meteor',
-    name: 'Meteor',
+    name: 'Emberfall',
     class: 'mage',
     learnLevel: 16,
     specs: ['fire'],
@@ -5966,7 +5966,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   rings_of_frost: {
     id: 'rings_of_frost',
-    name: 'Ring of Frost',
+    name: 'Hoarfrost Ring',
     class: 'mage',
     learnLevel: 11,
     cost: 60,

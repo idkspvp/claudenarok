@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "28f12f87",
+      "state": "0ec9c7e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -88,7 +88,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
               "sourceId": 415
@@ -149,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "c7cdf8f1",
+      "state": "2d39bdc5",
       "events": "5ee35338",
       "rng": {
         "draws": 52,
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "b62c9c07",
+      "state": "78a9c0e3",
       "events": "ee3c3f34",
       "rng": {
         "draws": 93,
@@ -171,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "1f292f50",
+      "state": "4fb6271c",
       "events": "bf19d948",
       "rng": {
         "draws": 224,
@@ -182,7 +182,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "56380931",
+      "state": "84b3fcdd",
       "events": "741638a5",
       "rng": {
         "draws": 224,
@@ -278,7 +278,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3597,
               "school": "physical",
               "sourceId": 415
@@ -700,7 +700,7 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 422,
-      "state": "41756bd8",
+      "state": "4da161a4",
       "events": "741638a5",
       "rng": {
         "draws": 245,
@@ -796,7 +796,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3596.8,
               "school": "physical",
               "sourceId": 415

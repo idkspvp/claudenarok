@@ -138,8 +138,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "daad9d41",
-      "events": "b3bf3c94",
+      "state": "d0efc0b8",
+      "events": "5c2e2049",
       "rng": {
         "draws": 1,
         "digest": "e1d88b80"
@@ -149,8 +149,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "4b9b99df",
-      "events": "a0731888",
+      "state": "4dcf04b6",
+      "events": "441bad5c",
       "rng": {
         "draws": 2,
         "digest": "5ab9e87d"
@@ -160,8 +160,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "048aec94",
-      "events": "5e74ed68",
+      "state": "1d46bcdb",
+      "events": "9a15373c",
       "rng": {
         "draws": 82,
         "digest": "a2a056cd"
@@ -171,8 +171,8 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "37f98030",
-      "events": "7d892437",
+      "state": "e4779a73",
+      "events": "bd2d3911",
       "rng": {
         "draws": 152,
         "digest": "a592d606"
@@ -182,7 +182,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "58660c6e",
+      "state": "0dfdff99",
       "events": "c711fca1",
       "rng": {
         "draws": 180,
@@ -385,7 +385,7 @@
               "duration": 2.5,
               "id": "frozen_orb_slow",
               "kind": "slow",
-              "name": "Frozen Orb",
+              "name": "Rimeglobe",
               "remaining": 2.25,
               "school": "frost",
               "sourceId": 415,
@@ -455,7 +455,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "58660c6e",
+      "state": "0dfdff99",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -658,7 +658,7 @@
               "duration": 2.5,
               "id": "frozen_orb_slow",
               "kind": "slow",
-              "name": "Frozen Orb",
+              "name": "Rimeglobe",
               "remaining": 2.25,
               "school": "frost",
               "sourceId": 415,

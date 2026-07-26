@@ -1283,7 +1283,7 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
       ) {
         ctx.applyAura(creditEntity, {
           id: 'victory_rush',
-          name: 'Victory Rush',
+          name: 'Killing High',
           kind: 'victory_rush',
           value: 0,
           remaining: VICTORY_RUSH_WINDOW,

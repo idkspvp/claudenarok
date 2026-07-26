@@ -80,7 +80,7 @@ describe('AoE content defs', () => {
   it('pins Frozen Orb: level 15, instant, 45s cooldown, frost-gated, orb effect', () => {
     const def = ABILITIES.frozen_orb;
     expect(def).toBeDefined();
-    expect(def.name).toBe('Frozen Orb');
+    expect(def.name).toBe('Rimeglobe');
     expect(def.learnLevel).toBe(15);
     expect(def.specs).toEqual(['frost']);
     expect(def.castTime).toBe(0);
@@ -188,7 +188,7 @@ describe('Frozen Orb in combat', () => {
     expect(orbState().z).toBe(zHeld);
     // The owner's rule verbatim: if the pulses are hitting someone, the orb is
     // stopped; the held second pulses the prey while the position stays pinned.
-    expect(damageEvents(held, 'Frozen Orb').length).toBeGreaterThanOrEqual(1);
+    expect(damageEvents(held, 'Rimeglobe').length).toBeGreaterThanOrEqual(1);
     // Kill the prey: the next tick frees the orb and it drifts on.
     prey.hp = 1;
     (sim as any).dealDamage(p, prey, 5, false, 'frost', null, 'hit', true);
@@ -220,7 +220,7 @@ describe('Frozen Orb in combat', () => {
     p.resource = p.maxResource;
     sim.castAbility('frozen_orb');
     const events = tickFor(sim, 1.5); // first pulse fires at ~1s
-    const hits = damageEvents(events, 'Frozen Orb');
+    const hits = damageEvents(events, 'Rimeglobe');
     expect(hits.length).toBeGreaterThanOrEqual(1);
     expect(hits[0].targetId).toBe(near.id);
     const slow = near.auras.find((a) => a.id === 'frozen_orb_slow');
@@ -242,9 +242,9 @@ describe('Frozen Orb in combat', () => {
     // seconds of travel before the pulse can touch the dummy.
     const travelNeeded = (14 - 6) / FROZEN_ORB_SPEED;
     const early = tickFor(sim, travelNeeded - 1);
-    expect(damageEvents(early, 'Frozen Orb')).toHaveLength(0);
+    expect(damageEvents(early, 'Rimeglobe')).toHaveLength(0);
     const late = tickFor(sim, 3);
-    expect(damageEvents(late, 'Frozen Orb').length).toBeGreaterThanOrEqual(1);
+    expect(damageEvents(late, 'Rimeglobe').length).toBeGreaterThanOrEqual(1);
   });
 
   it('expires after its 8s life, caps Icicles, and never grants Fingers', () => {
@@ -257,7 +257,7 @@ describe('Frozen Orb in combat', () => {
     let total = 0;
     for (let i = 0; i < 20 * 9; i++) {
       const events = sim.tick();
-      total += damageEvents(events, 'Frozen Orb').length;
+      total += damageEvents(events, 'Rimeglobe').length;
       const icicles = p.auras.find((a) => a.kind === 'icicles');
       if (icicles) expect(icicles.stacks ?? 1).toBeLessThanOrEqual(ICICLE_MAX);
       expect(p.auras.some((a) => a.kind === 'fingers_of_frost')).toBe(false);
@@ -265,7 +265,7 @@ describe('Frozen Orb in combat', () => {
     expect(total).toBeGreaterThan(0);
     // Life over: two more seconds add nothing.
     const after = tickFor(sim, 2);
-    expect(damageEvents(after, 'Frozen Orb')).toHaveLength(0);
+    expect(damageEvents(after, 'Rimeglobe')).toHaveLength(0);
   });
 
   it('same seed, same casts: identical orb pulse sequence (determinism)', () => {
@@ -276,7 +276,7 @@ describe('Frozen Orb in combat', () => {
       sim.drainEvents();
       p.resource = p.maxResource;
       sim.castAbility('frozen_orb');
-      return damageEvents(tickFor(sim, 9), 'Frozen Orb').map((e) => e.amount);
+      return damageEvents(tickFor(sim, 9), 'Rimeglobe').map((e) => e.amount);
     };
     const first = run();
     expect(first.length).toBeGreaterThan(0);

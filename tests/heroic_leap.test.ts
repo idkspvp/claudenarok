@@ -162,7 +162,7 @@ describe('Heroic Leap: lifecycle resets', () => {
       duration: 0.6,
       apex: 5,
       landingAoe: { min: 24, max: 32, radius: 6 },
-      abilityName: 'Heroic Leap',
+      abilityName: 'Warleap',
       school: 'physical',
     };
     const ghostPos = { ...p.pos };

@@ -42,7 +42,6 @@ import {
   DT,
   dist2d,
   type Entity,
-  MELEE_ARC,
   MELEE_RANGE,
   normAngle,
   STANCE_MASTERY_BERSERKER_HASTE,
@@ -164,8 +163,6 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   if (isStunned(p)) return;
   if (isDisarmed(p)) return; // weapon knocked away: no auto-attack swings
   const d = dist2d(p.pos, t.pos);
-  const facingDiff = Math.abs(normAngle(angleTo(p.pos, t.pos) - p.facing));
-  if (facingDiff > MELEE_ARC) return;
 
   // ranged auto-attack: hunters (auto shot, dead zone inside minRange) and
   // casters (wand-style, no dead zone so they don't run into melee, #94).

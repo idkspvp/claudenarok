@@ -102,7 +102,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
     if (!meta) throw new Error('missing player metadata');
     const avatar: Aura = {
       id: 'avatar',
-      name: 'Avatar',
+      name: 'Ironshape',
       kind: 'buff_avatar',
       remaining: 20,
       duration: 20,
@@ -177,7 +177,7 @@ describe('offhand surfacing (paperdoll, player card, chat readout)', () => {
       p.auras.length = 0;
       p.auras.push({
         id: kind,
-        name: kind === 'battle_stance' ? 'Battle Stance' : 'Berserker Stance',
+        name: kind === 'battle_stance' ? 'Warring Stance' : 'Reckless Stance',
         kind,
         remaining: 3600,
         duration: 3600,
@@ -186,7 +186,7 @@ describe('offhand surfacing (paperdoll, player card, chat readout)', () => {
         school: 'physical',
       });
       expect(formReadout(p)).toContain(
-        kind === 'battle_stance' ? 'Battle Stance' : 'Berserker Stance',
+        kind === 'battle_stance' ? 'Warring Stance' : 'Reckless Stance',
       );
     }
     p.auras.length = 0;

@@ -73,7 +73,7 @@ describe('every row-granted spell casts on its class', () => {
           // on-kill aura handleDeath opens; seed it as a fresh killing blow would.
           sim.ctx.applyAura(p, {
             id: 'victory_rush',
-            name: 'Victory Rush',
+            name: 'Killing High',
             kind: 'victory_rush',
             value: 0,
             remaining: 20,

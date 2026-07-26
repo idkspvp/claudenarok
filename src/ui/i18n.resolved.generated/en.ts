@@ -6978,7 +6978,7 @@ export const en: EnTranslations = {
         "description": "Your next direct spell repeats at 50% power on the same target. Lasts 10 sec. (Mage talent)"
       },
       "rings_of_frost": {
-        "name": "Ring of Frost",
+        "name": "Hoarfrost Ring",
         "description": "Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec. (Mage talent)"
       },
       "rune_of_power": {
@@ -6998,7 +6998,7 @@ export const en: EnTranslations = {
         "description": "Loose three icy bolts for {damage} Frost damage each and plant Winter's Chill on the target: its next 2 incoming compatible spells treat it as frozen. Brain Freeze makes Winterlash instant and skips its cooldown. (Frost)"
       },
       "frozen_orb": {
-        "name": "Frozen Orb",
+        "name": "Rimeglobe",
         "description": "Release an orb of swirling frost that drifts forward for 8 sec, dealing {damage} Frost damage each second to nearby enemies and slowing them by 30%. Each striking pulse generates one Icicle. (Frost)"
       },
       "blizzard": {
@@ -7646,11 +7646,11 @@ export const en: EnTranslations = {
         "description": "Binds a Wraithborn to your will — an elite demon that rains heavy Shadow damage from afar. A long cooldown gates its devastating power. Summoning a new demon dismisses your current one. You may have one demon at a time."
       },
       "battle_stance": {
-        "name": "Battle Stance",
+        "name": "Warring Stance",
         "description": "An aggressive combat stance: you generate 10% more rage. The default stance for Arms and Protection."
       },
       "berserker_stance": {
-        "name": "Berserker Stance",
+        "name": "Reckless Stance",
         "description": "A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury warrior always fights in this stance."
       },
       "sweeping_strikes": {
@@ -7734,7 +7734,7 @@ export const en: EnTranslations = {
         "description": "Defensive cooldown: for 8 sec you take 30% less damage and dodge far more attacks."
       },
       "recklessness": {
-        "name": "Recklessness",
+        "name": "Abandon",
         "description": "Enrage: your rage generation increases by 50% and your critical strike chance by 20% for 12 sec."
       },
       "sanguine_aura": {
@@ -7742,19 +7742,19 @@ export const en: EnTranslations = {
         "description": "Imbue your weapon with the blood of your foes: you and your melee allies gain 10% attack speed and 10% damage for 20 sec."
       },
       "victory_rush": {
-        "name": "Victory Rush",
+        "name": "Killing High",
         "description": "Strike for weapon damage plus {damage} and heal 20% of your maximum health. Only usable within 20 sec of killing an enemy."
       },
       "intimidating_shout": {
-        "name": "Intimidating Shout",
+        "name": "Rout",
         "description": "A terrifying shout that sends up to 5 enemies within 8 yards fleeing in fear for 8 sec. Damage may break the effect."
       },
       "revenge": {
-        "name": "Revenge",
+        "name": "Riposte",
         "description": "Attack in a wide arc, dealing 18 to 24 Physical damage to all enemies in front of you. Above 5 targets the damage is reduced. When you dodge or parry, your next Revenge may cost no rage. (Protection)"
       },
       "heroic_leap": {
-        "name": "Heroic Leap",
+        "name": "Warleap",
         "description": "Leap to the target area, dealing {damage} damage to nearby enemies on landing."
       },
       "rallying_cry": {
@@ -7766,7 +7766,7 @@ export const en: EnTranslations = {
         "description": "Inspires allies within 30 yd with wild strength, increasing attack power by 45 and attack speed by 5% for 5 min. (Hunter talent)"
       },
       "avatar": {
-        "name": "Avatar",
+        "name": "Ironshape",
         "description": "Transform into a colossus for 20 sec, breaking enemy control effects on you (boss control is unaffected) and increasing your damage dealt by 20%."
       },
       "avenging_wrath": {
@@ -7778,7 +7778,7 @@ export const en: EnTranslations = {
         "description": "Increases attack power by 70 for 15 sec. (Druid talent)"
       },
       "bladestorm": {
-        "name": "Bladestorm",
+        "name": "Rending Cyclone",
         "description": "Become a whirling storm of steel, striking all enemies within 6 yards for {damage} every second for 4 sec."
       },
       "blink": {

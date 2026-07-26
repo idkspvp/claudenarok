@@ -47,14 +47,14 @@ describe('/form command', () => {
     const sim = makeWorld();
     const a = sim.addPlayer('warrior', 'Aleph');
     sim.tick();
-    expect(lastReply(sim, '/form', a)).toBe('You are in Battle Stance.');
+    expect(lastReply(sim, '/form', a)).toBe('You are in Warring Stance.');
   });
 
   it('names a warrior defensive stance', () => {
     const sim = makeWorld();
     const a = sim.addPlayer('warrior', 'Aleph');
     sim.tick();
-    // Arms may hold Guarded Stance; swap the auto-worn Battle Stance for it so
+    // Arms may hold Guarded Stance; swap the auto-worn Warring Stance for it so
     // the per-tick stance reconcile leaves the pushed aura in place.
     sim.setPlayerLevel(10, a);
     expect(sim.setSpec('arms', a)).toBe(true);

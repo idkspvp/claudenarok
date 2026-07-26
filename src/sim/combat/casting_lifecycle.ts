@@ -54,7 +54,6 @@ import {
   GATHER_CAST_ID,
   isFormAuraKind,
   isNonSpellCast,
-  MELEE_ARC,
   MELEE_RANGE,
   MIN_GCD,
   normAngle,
@@ -801,11 +800,6 @@ export function castAbility(
     }
     if (ctx.lineOfSightBlocked(p, target, ability)) {
       ctx.error(p.id, 'Line of sight.');
-      return;
-    }
-    const facingDiff = Math.abs(normAngle(angleTo(p.pos, target.pos) - p.facing));
-    if (facingDiff > MELEE_ARC) {
-      ctx.error(p.id, 'You must be facing your target.');
       return;
     }
     // execute-style gate: only usable while the target is nearly dead

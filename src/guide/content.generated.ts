@@ -305,7 +305,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "revenge",
-        "name": "Revenge"
+        "name": "Riposte"
       },
       {
         "id": "battle_shout",
@@ -331,7 +331,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "revenge",
-        "name": "Revenge"
+        "name": "Riposte"
       },
       {
         "id": "battle_shout",
@@ -399,7 +399,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "heroic_leap",
-        "name": "Heroic Leap"
+        "name": "Warleap"
       },
       {
         "id": "cleave",
@@ -419,11 +419,11 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "battle_stance",
-        "name": "Battle Stance"
+        "name": "Warring Stance"
       },
       {
         "id": "berserker_stance",
-        "name": "Berserker Stance"
+        "name": "Reckless Stance"
       },
       {
         "id": "defensive_stance",
@@ -435,7 +435,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "intimidating_shout",
-        "name": "Intimidating Shout"
+        "name": "Rout"
       },
       {
         "id": "sunder_armor",
@@ -1202,7 +1202,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "meteor",
-        "name": "Meteor"
+        "name": "Emberfall"
       },
       {
         "id": "combustion",
@@ -1258,7 +1258,7 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
       },
       {
         "id": "frozen_orb",
-        "name": "Frozen Orb"
+        "name": "Rimeglobe"
       },
       {
         "id": "blizzard",

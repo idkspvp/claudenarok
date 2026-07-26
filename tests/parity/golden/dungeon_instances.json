@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 431,
-      "state": "bc2e3048",
+      "state": "15a9fc06",
       "events": "9bb7b95a",
       "rng": {
         "draws": 39,
@@ -174,7 +174,7 @@
               "duration": 3600,
               "id": "battle_stance",
               "kind": "battle_stance",
-              "name": "Battle Stance",
+              "name": "Warring Stance",
               "remaining": 3599.9,
               "school": "physical",
               "sourceId": 415
