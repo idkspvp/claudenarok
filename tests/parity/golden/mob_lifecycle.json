@@ -31,8 +31,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "d3e34ef7",
-      "events": "92ba87c8",
+      "state": "a240c436",
+      "events": "ced02719",
       "rng": {
         "draws": 5,
         "digest": "ca7bbe9c"
@@ -56,7 +56,7 @@
           "counters": {
             "damageDealt": 1096,
             "kills": 1,
-            "xpGained": 84
+            "xpGained": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -90,7 +90,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 84,
+          "lifetimeXp": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -98,7 +98,7 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 84
+          "xp": 1
         }
       ],
       "entities": [
@@ -400,8 +400,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "46cd9767",
-      "events": "9822b965",
+      "state": "6fe13420",
+      "events": "9affbed3",
       "rng": {
         "draws": 8,
         "digest": "cac7cfb2"
@@ -425,7 +425,7 @@
           "counters": {
             "damageDealt": 2293,
             "kills": 2,
-            "xpGained": 198
+            "xpGained": 9
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -465,7 +465,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 198,
+          "lifetimeXp": 9,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -474,7 +474,7 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 198
+          "xp": 9
         }
       ],
       "entities": [
@@ -829,7 +829,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "51c44640",
+      "state": "9a5d840f",
       "events": "8dcbe5d5",
       "rng": {
         "draws": 9,
@@ -855,7 +855,7 @@
             "damageDealt": 2293,
             "damageTaken": 18,
             "kills": 2,
-            "xpGained": 198
+            "xpGained": 9
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -895,7 +895,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 198,
+          "lifetimeXp": 9,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -904,7 +904,7 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 198
+          "xp": 9
         }
       ],
       "entities": [
@@ -1260,8 +1260,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 423,
-      "state": "07578a9c",
-      "events": "f3c1a51c",
+      "state": "5a319ac0",
+      "events": "d0921473",
       "rng": {
         "draws": 15,
         "digest": "ca70052b"
@@ -1286,7 +1286,8 @@
             "damageDealt": 3389,
             "damageTaken": 18,
             "kills": 3,
-            "xpGained": 282
+            "levelUps": 1,
+            "xpGained": 10
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1326,7 +1327,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 282,
+          "lifetimeXp": 10,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1334,14 +1335,13 @@
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 282
+          "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 50,
           "auras": [
             {
               "duration": 3600,
@@ -1356,18 +1356,18 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0605,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0605,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 999982,
+          "hp": 138,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 1,
+          "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 138,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1389,12 +1389,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 21,
+            "armor": 158,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 25,
+            "str": 25
           },
           "templateId": "warrior",
           "weapon": {
@@ -1734,8 +1734,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "1b252d5a",
-      "events": "2ffe2a19",
+      "state": "df310450",
+      "events": "c107d698",
       "rng": {
         "draws": 20,
         "digest": "e612091c"
@@ -1760,7 +1760,8 @@
             "damageDealt": 4485,
             "damageTaken": 18,
             "kills": 4,
-            "xpGained": 366
+            "levelUps": 1,
+            "xpGained": 11
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1804,7 +1805,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 366,
+          "lifetimeXp": 11,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1813,13 +1814,13 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 366
+          "xp": 1
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 50,
           "auras": [
             {
               "duration": 3600,
@@ -1834,18 +1835,18 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0605,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0605,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 999982,
+          "hp": 138,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 1,
+          "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 138,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1867,12 +1868,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 21,
+            "armor": 158,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 25,
+            "str": 25
           },
           "templateId": "warrior",
           "weapon": {
@@ -2273,7 +2274,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "1b252d5a",
+      "state": "df310450",
       "events": "741638a5",
       "rng": {
         "draws": 20,
@@ -2299,7 +2300,8 @@
             "damageDealt": 4485,
             "damageTaken": 18,
             "kills": 4,
-            "xpGained": 366
+            "levelUps": 1,
+            "xpGained": 11
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2343,7 +2345,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 366,
+          "lifetimeXp": 11,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2352,13 +2354,13 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 366
+          "xp": 1
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 50,
           "auras": [
             {
               "duration": 3600,
@@ -2373,18 +2375,18 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0605,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0605,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 999982,
+          "hp": 138,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 1,
+          "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 138,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2406,12 +2408,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 21,
+            "armor": 158,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 25,
+            "str": 25
           },
           "templateId": "warrior",
           "weapon": {

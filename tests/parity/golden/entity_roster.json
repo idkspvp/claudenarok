@@ -148,7 +148,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 418,
-      "state": "c21bee3e",
+      "state": "bdf71594",
       "events": "c11309ec",
       "rng": {
         "draws": 4,
@@ -159,7 +159,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "20b0a02f",
+      "state": "462efce1",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -170,7 +170,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "5b11746b",
+      "state": "0f4180cd",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -237,7 +237,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -318,7 +318,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "6aed7190",
+      "state": "d52ae9b2",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -385,7 +385,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -462,7 +462,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "9e2e9a97",
+      "state": "e55984e9",
       "events": "1372ec7a",
       "rng": {
         "draws": 4,
@@ -529,7 +529,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -611,7 +611,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 418,
-      "state": "ac7fca80",
+      "state": "44ea0ee2",
       "events": "5123ef0d",
       "rng": {
         "draws": 4,
@@ -622,7 +622,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 418,
-      "state": "a923de33",
+      "state": "49f287d5",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -689,7 +689,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

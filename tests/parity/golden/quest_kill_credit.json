@@ -148,7 +148,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "8154b9f4",
+      "state": "6853dc7e",
       "events": "9b7e48a7",
       "rng": {
         "draws": 0,
@@ -201,7 +201,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questLog": [
@@ -296,7 +296,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 424,
-      "state": "5ef6c8d0",
+      "state": "a79d5262",
       "events": "90016984",
       "rng": {
         "draws": 40,
@@ -378,7 +378,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questLog": [
@@ -475,7 +475,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 424,
-      "state": "b0f16a01",
+      "state": "43eee146",
       "events": "6df26093",
       "rng": {
         "draws": 40,
@@ -560,7 +560,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27850,
+          "lifetimeXp": 920,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [
@@ -646,7 +646,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 424,
-      "state": "49366890",
+      "state": "674470df",
       "events": "741638a5",
       "rng": {
         "draws": 40,
@@ -731,7 +731,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 27850,
+          "lifetimeXp": 920,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "questsDone": [

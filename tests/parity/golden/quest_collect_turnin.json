@@ -752,8 +752,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "31248a59",
-      "events": "e0fa6fa7",
+      "state": "8dfbe5e0",
+      "events": "50488fa5",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -776,6 +776,7 @@
           "companionUpgrades": {},
           "copper": 120,
           "counters": {
+            "levelUps": 7,
             "questProgress": 6,
             "questsCompleted": 1,
             "xpGained": 350
@@ -821,13 +822,13 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 350
+          "xp": 53
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 74,
           "auras": [
             {
               "duration": 3600,
@@ -843,17 +844,17 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0635,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0635,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "hp": 100,
+          "hp": 366,
           "id": 415,
           "kind": "player",
-          "level": 1,
+          "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 366,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -874,12 +875,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 27,
+            "armor": 242,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 37,
+            "str": 37
           },
           "templateId": "warrior",
           "weapon": {
@@ -894,8 +895,8 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 416,
-      "state": "aad7578d",
-      "events": "741638a5",
+      "state": "8652b7d0",
+      "events": "d24c51cd",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -918,6 +919,7 @@
           "companionUpgrades": {},
           "copper": 120,
           "counters": {
+            "levelUps": 7,
             "questProgress": 6,
             "questsCompleted": 1,
             "xpGained": 350
@@ -935,6 +937,16 @@
               "worn_sword"
             ]
           },
+          "deedsEarned": [
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ]
+          ],
           "delveClears": {},
           "delveDaily": {},
           "entityId": 415,
@@ -959,17 +971,18 @@
             "q_boars"
           ],
           "recipesGrandfathered": true,
+          "renown": 10,
           "talents": {
             "rows": {}
           },
           "townFocus": {},
-          "xp": 350
+          "xp": 53
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 74,
           "auras": [
             {
               "duration": 3600,
@@ -985,17 +998,17 @@
           "blockValue": 6,
           "combatTimer": 99.1,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0635,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0635,
           "fallStartY": 1.5,
           "fiveSecondRule": 99.1,
-          "hp": 100,
+          "hp": 366,
           "id": 415,
           "kind": "player",
-          "level": 1,
+          "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 366,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1016,12 +1029,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 27,
+            "armor": 242,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 37,
+            "str": 37
           },
           "templateId": "warrior",
           "weapon": {

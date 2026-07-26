@@ -146,7 +146,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "614ddd8b",
+      "state": "6ce6f059",
       "events": "dc0dea30",
       "rng": {
         "draws": 0,
@@ -202,7 +202,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -311,7 +311,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "b7f830eb",
+      "state": "704ebdb9",
       "events": "f8ec86ea",
       "rng": {
         "draws": 0,
@@ -367,7 +367,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -490,7 +490,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "886bf8e8",
+      "state": "a3264b62",
       "events": "48f168e3",
       "rng": {
         "draws": 0,
@@ -501,7 +501,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "60e84e76",
+      "state": "3d0872b0",
       "events": "8caaa753",
       "rng": {
         "draws": 0,
@@ -512,7 +512,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "132f7ad0",
+      "state": "2ea39e6a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -585,7 +585,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -771,7 +771,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "09f97509",
+      "state": "c6dbc761",
       "events": "0f25af7e",
       "rng": {
         "draws": 0,
@@ -844,7 +844,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -969,7 +969,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "d10fdc11",
+      "state": "022fdfc9",
       "events": "252febab",
       "rng": {
         "draws": 0,
@@ -1042,7 +1042,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1208,7 +1208,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "f04857ed",
+      "state": "a5ec2f55",
       "events": "61f1164e",
       "rng": {
         "draws": 0,
@@ -1281,7 +1281,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1447,7 +1447,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "09f97509",
+      "state": "c6dbc761",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1520,7 +1520,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1645,7 +1645,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "09f97509",
+      "state": "c6dbc761",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1718,7 +1718,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1843,7 +1843,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "6c1c68d4",
+      "state": "8b580fe2",
       "events": "7c671d97",
       "rng": {
         "draws": 0,
@@ -1916,7 +1916,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1973,7 +1973,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2194,7 +2194,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "7d98c53b",
+      "state": "3317420b",
       "events": "41786f3a",
       "rng": {
         "draws": 82,
@@ -2205,7 +2205,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "63511167",
+      "state": "e0dbcd97",
       "events": "4a119102",
       "rng": {
         "draws": 158,
@@ -2216,7 +2216,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "63511167",
+      "state": "e0dbcd97",
       "events": "741638a5",
       "rng": {
         "draws": 158,
@@ -2291,7 +2291,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2362,7 +2362,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2593,7 +2593,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "c90a20f3",
+      "state": "064e91c3",
       "events": "3c0a5f6e",
       "rng": {
         "draws": 158,
@@ -2668,7 +2668,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2739,7 +2739,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2970,7 +2970,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "cdbb2aee",
+      "state": "50784042",
       "events": "0fcaa395",
       "rng": {
         "draws": 158,
@@ -3045,7 +3045,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3116,7 +3116,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3356,7 +3356,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "cdbb2aee",
+      "state": "50784042",
       "events": "741638a5",
       "rng": {
         "draws": 158,
@@ -3431,7 +3431,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3502,7 +3502,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 44000,
+          "lifetimeXp": 1258,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

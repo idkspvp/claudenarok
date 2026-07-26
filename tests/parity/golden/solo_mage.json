@@ -137,7 +137,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "c507ba4a",
+      "state": "fc8baf20",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -148,7 +148,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "d27ece6e",
+      "state": "83b1c2c4",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -159,7 +159,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "be08b716",
+      "state": "8398122c",
       "events": "03347af7",
       "rng": {
         "draws": 76,
@@ -170,7 +170,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "34fa8f4b",
+      "state": "f4418f2d",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -181,7 +181,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "7a6e1c93",
+      "state": "414b1ab5",
       "events": "4c449292",
       "rng": {
         "draws": 268,
@@ -192,7 +192,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "b6368f51",
+      "state": "de072e27",
       "events": "0f43d64a",
       "rng": {
         "draws": 386,
@@ -203,7 +203,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "c3b504e4",
+      "state": "628c84b6",
       "events": "422fb47c",
       "rng": {
         "draws": 425,
@@ -279,7 +279,7 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 27600,
+          "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

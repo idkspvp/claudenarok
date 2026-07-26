@@ -149,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "49e594c0",
+      "state": "4a94fb2f",
       "events": "0df2785f",
       "rng": {
         "draws": 0,
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "3890f05f",
+      "state": "b0610bf0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -171,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "8d905b46",
+      "state": "2ad4e90b",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -182,7 +182,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "8d905b46",
+      "state": "2ad4e90b",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -245,7 +245,7 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 5,
-          "restedXp": 0.125,
+          "restedXp": 0.003125,
           "talents": {
             "rows": {}
           },
@@ -322,8 +322,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "06c60df9",
-      "events": "11d554da",
+      "state": "3ab4cc7e",
+      "events": "e69ea5db",
       "rng": {
         "draws": 75,
         "digest": "cc652885"
@@ -346,6 +346,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
+            "levelUps": 5,
             "xpGained": 160
           },
           "craftSkills": {},
@@ -393,13 +394,13 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 160
+          "xp": 34
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 46,
+          "attackPower": 66,
           "auras": [
             {
               "duration": 3600,
@@ -415,17 +416,17 @@
           "blockValue": 6,
           "combatTimer": 102,
           "comboUntil": -1,
-          "critChance": 0.06,
+          "critChance": 0.0625,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.06,
+          "dodgeChance": 0.0625,
           "fallStartY": 1.584521,
           "fiveSecondRule": 102,
-          "hp": 100,
+          "hp": 290,
           "id": 415,
           "kind": "player",
-          "level": 1,
+          "level": 6,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 290,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -446,12 +447,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 20,
-            "armor": 144,
+            "agi": 25,
+            "armor": 214,
             "int": 10,
             "spi": 11,
-            "sta": 23,
-            "str": 23
+            "sta": 33,
+            "str": 33
           },
           "templateId": "warrior",
           "weapon": {
@@ -466,8 +467,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "01f2eef8",
-      "events": "45d45865",
+      "state": "a3cbe816",
+      "events": "c984d4ba",
       "rng": {
         "draws": 75,
         "digest": "cc652885"
@@ -490,8 +491,8 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "levelUps": 1,
-            "xpGained": 610
+            "levelUps": 6,
+            "xpGained": 279
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -528,7 +529,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 610,
+          "lifetimeXp": 279,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -538,13 +539,13 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 210
+          "xp": 84
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 50,
+          "attackPower": 70,
           "auras": [
             {
               "duration": 3600,
@@ -560,17 +561,17 @@
           "blockValue": 6,
           "combatTimer": 102,
           "comboUntil": -1,
-          "critChance": 0.0605,
+          "critChance": 0.063,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.0605,
+          "dodgeChance": 0.063,
           "fallStartY": 1.584521,
           "fiveSecondRule": 102,
-          "hp": 138,
+          "hp": 328,
           "id": 415,
           "kind": "player",
-          "level": 2,
+          "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 138,
+          "maxHp": 328,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -591,12 +592,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 21,
-            "armor": 158,
+            "agi": 26,
+            "armor": 228,
             "int": 10,
             "spi": 11,
-            "sta": 25,
-            "str": 25
+            "sta": 35,
+            "str": 35
           },
           "templateId": "warrior",
           "weapon": {
@@ -611,8 +612,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "5734efc1",
-      "events": "65b8ebe3",
+      "state": "21ae7e7d",
+      "events": "72e0d7f3",
       "rng": {
         "draws": 75,
         "digest": "cc652885"
@@ -635,8 +636,8 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "levelUps": 1,
-            "xpGained": 1119479463
+            "levelUps": 6,
+            "xpGained": 77127933
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -673,7 +674,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 5657361450,
+          "lifetimeXp": 414197750,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -683,7 +684,7 @@
             "rows": {}
           },
           "townFocus": {},
-          "xp": 210
+          "xp": 84
         }
       ],
       "entities": [
@@ -756,7 +757,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "50b9830e",
+      "state": "40fccd1f",
       "events": "f92c18e2",
       "rng": {
         "draws": 75,
@@ -780,8 +781,8 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "levelUps": 1,
-            "xpGained": 1119479463
+            "levelUps": 6,
+            "xpGained": 77127933
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -818,7 +819,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 5657361450,
+          "lifetimeXp": 414197750,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
@@ -901,7 +902,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "50b9830e",
+      "state": "40fccd1f",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -925,8 +926,8 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "levelUps": 1,
-            "xpGained": 1119479463
+            "levelUps": 6,
+            "xpGained": 77127933
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -963,7 +964,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 5657361450,
+          "lifetimeXp": 414197750,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "prestigeRank": 1,
@@ -1046,7 +1047,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "50b9830e",
+      "state": "40fccd1f",
       "events": "741638a5",
       "rng": {
         "draws": 75,
@@ -1070,8 +1071,8 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "levelUps": 1,
-            "xpGained": 1119479463
+            "levelUps": 6,
+            "xpGained": 77127933
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1108,7 +1109,7 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 5657361450,
+          "lifetimeXp": 414197750,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "prestigeRank": 1,

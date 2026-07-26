@@ -4586,8 +4586,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "f859fe02",
-      "events": "4da97b96",
+      "state": "3870a5e5",
+      "events": "262d9c40",
       "rng": {
         "draws": 5,
         "digest": "f6cccac2"
@@ -4610,8 +4610,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 1068,
-            "kills": 1,
-            "xpGained": 26
+            "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -4646,15 +4645,13 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         },
         {
           "activeLoadout": -1,
@@ -4670,9 +4667,7 @@
           "bank": {},
           "cls": "priest",
           "companionUpgrades": {},
-          "counters": {
-            "xpGained": 26
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -4707,15 +4702,13 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         },
         {
           "activeLoadout": -1,
@@ -4731,9 +4724,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "xpGained": 26
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -4768,15 +4759,13 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         }
       ],
       "entities": [
@@ -5100,7 +5089,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "f859fe02",
+      "state": "3870a5e5",
       "events": "741638a5",
       "rng": {
         "draws": 5,
@@ -5124,8 +5113,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 1068,
-            "kills": 1,
-            "xpGained": 26
+            "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5160,15 +5148,13 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         },
         {
           "activeLoadout": -1,
@@ -5184,9 +5170,7 @@
           "bank": {},
           "cls": "priest",
           "companionUpgrades": {},
-          "counters": {
-            "xpGained": 26
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -5221,15 +5205,13 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         },
         {
           "activeLoadout": -1,
@@ -5245,9 +5227,7 @@
           "bank": {},
           "cls": "mage",
           "companionUpgrades": {},
-          "counters": {
-            "xpGained": 26
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
@@ -5282,15 +5262,13 @@
               "itemId": "spring_water"
             }
           ],
-          "lifetimeXp": 26,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "talents": {
             "rows": {}
           },
-          "townFocus": {},
-          "xp": 26
+          "townFocus": {}
         }
       ],
       "entities": [
