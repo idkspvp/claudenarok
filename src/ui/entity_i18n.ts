@@ -16,7 +16,6 @@ import {
   ITEMS,
   MOBS,
   NPCS,
-  QUESTS,
   ZONES,
 } from '../sim/data';
 import type { ItemDef, PlayerClass } from '../sim/types';
@@ -38,8 +37,6 @@ export type EntityTranslationKind =
   | 'item'
   | 'mob'
   | 'npc'
-  | 'quest'
-  | 'questObjective'
   | 'zone'
   | 'zonePoi'
   | 'dungeon'
@@ -76,19 +73,6 @@ export type EntityTranslationRequest =
     }
   | { kind: 'mob'; id: string; field: 'name'; values?: InterpolationValues }
   | { kind: 'npc'; id: string; field: 'name' | 'title' | 'greeting'; values?: InterpolationValues }
-  | {
-      kind: 'quest';
-      id: string;
-      field: 'title' | 'text' | 'completion';
-      values?: InterpolationValues;
-    }
-  | {
-      kind: 'questObjective';
-      questId: string;
-      objectiveIndex: number;
-      field: 'label';
-      values?: InterpolationValues;
-    }
   | { kind: 'zone'; id: string; field: 'name' | 'welcome'; values?: InterpolationValues }
   | {
       kind: 'zonePoi';
@@ -251,18 +235,6 @@ function canonicalEntityText(request: EntityTranslationRequest): string {
       if (request.field === 'greeting') return npc.greeting;
       return npc.name;
     }
-    case 'quest': {
-      const quest = QUESTS[request.id];
-      if (!quest) return request.id;
-      if (request.field === 'text') return quest.text;
-      if (request.field === 'completion') return quest.completionText;
-      return quest.name;
-    }
-    case 'questObjective':
-      return (
-        QUESTS[request.questId]?.objectives[request.objectiveIndex]?.label ??
-        `${request.questId}.${request.objectiveIndex}`
-      );
     case 'zone': {
       const zone = ZONES.find((candidate) => candidate.id === request.id);
       if (!zone) return request.id;
@@ -312,10 +284,6 @@ export function entityTranslationKey(request: EntityTranslationRequest): string 
       return `entities.mobs.${entityPathSegment(request.id)}.name`;
     case 'npc':
       return `entities.npcs.${entityPathSegment(request.id)}.${request.field}`;
-    case 'quest':
-      return `entities.quests.${entityPathSegment(request.id)}.${request.field}`;
-    case 'questObjective':
-      return `entities.quests.${entityPathSegment(request.questId)}.objectives.${request.objectiveIndex}.label`;
     case 'zone':
       return `entities.zones.${entityPathSegment(request.id)}.${request.field}`;
     case 'zonePoi':
@@ -330,12 +298,7 @@ export function entityTranslationKey(request: EntityTranslationRequest): string 
 }
 
 function requestManifestEntry(request: EntityTranslationRequest): EntityTranslationManifestEntry {
-  const id =
-    request.kind === 'questObjective'
-      ? `${request.questId}.objectives.${request.objectiveIndex}`
-      : request.kind === 'zonePoi'
-        ? `${request.zoneId}.pois.${request.poiIndex}`
-        : request.id;
+  const id = request.kind === 'zonePoi' ? `${request.zoneId}.pois.${request.poiIndex}` : request.id;
   const group: EntityTranslationGroup =
     request.kind === 'class' || request.kind === 'ability'
       ? 'classAbility'
@@ -525,55 +488,6 @@ export function entityTranslationManifest(): EntityTranslationManifestEntry[] {
         entityTranslationKey({ kind: 'npc', id: npc.id, field: 'greeting' }),
       ),
     );
-  }
-  for (const quest of Object.values(QUESTS).sort(compareById)) {
-    entries.push(
-      entry(
-        'quest',
-        quest.id,
-        'title',
-        quest.name,
-        'world',
-        entityTranslationKey({ kind: 'quest', id: quest.id, field: 'title' }),
-      ),
-    );
-    entries.push(
-      entry(
-        'quest',
-        quest.id,
-        'text',
-        quest.text,
-        'world',
-        entityTranslationKey({ kind: 'quest', id: quest.id, field: 'text' }),
-      ),
-    );
-    entries.push(
-      entry(
-        'quest',
-        quest.id,
-        'completion',
-        quest.completionText,
-        'world',
-        entityTranslationKey({ kind: 'quest', id: quest.id, field: 'completion' }),
-      ),
-    );
-    quest.objectives.forEach((objective, objectiveIndex) => {
-      entries.push(
-        entry(
-          'questObjective',
-          `${quest.id}.objectives.${objectiveIndex}`,
-          'label',
-          objective.label,
-          'world',
-          entityTranslationKey({
-            kind: 'questObjective',
-            questId: quest.id,
-            objectiveIndex,
-            field: 'label',
-          }),
-        ),
-      );
-    });
   }
   for (const zone of [...ZONES].sort(compareById)) {
     entries.push(

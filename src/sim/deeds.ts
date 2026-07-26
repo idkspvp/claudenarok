@@ -621,8 +621,6 @@ export function narrowKeysForTrigger(trigger: DeedTrigger): readonly string[] {
       return METER_DIRTY_KEYS[trigger.meter];
     case 'level':
     case 'lifetimeXp':
-    case 'quest':
-    case 'quests':
     case 'delveClears':
     case 'arenaRating':
     case 'craftSkill':
@@ -803,10 +801,6 @@ export function checkDeedTrigger(meta: PlayerMeta, e: Entity, trigger: DeedTrigg
       return e.level >= trigger.level;
     case 'lifetimeXp':
       return meta.lifetimeXp >= trigger.amount;
-    case 'quest':
-      return meta.questsDone.has(trigger.questId);
-    case 'quests':
-      return trigger.questIds.every((q) => meta.questsDone.has(q));
     case 'stat':
       return meta.deedStats.counters[trigger.stat] >= trigger.count;
     case 'dungeonClears':
@@ -844,10 +838,7 @@ export function checkDeedTrigger(meta: PlayerMeta, e: Entity, trigger: DeedTrigg
       return have >= need;
     }
     case 'meta':
-      return (
-        trigger.deedIds.every((id) => meta.deedsEarned.has(id)) &&
-        (trigger.questIds ?? []).every((q) => meta.questsDone.has(q))
-      );
+      return trigger.deedIds.every((id) => meta.deedsEarned.has(id));
     case 'meter':
       return METERS[trigger.meter](meta) >= trigger.amount;
     case 'flag':
@@ -1095,13 +1086,6 @@ export function retroFallbackGrants(ctx: SimContext, meta: PlayerMeta, player: E
   // stranded (attunement can be once-ever for a player who never switches).
   if (meta.archetype.attunedPairs.length > 0) {
     grantDeed(ctx, meta, 'prog_guildsworn', { retro: true });
-  }
-  // Proof: every ground object is a quest item whose pickup is denied unless
-  // its quest is active (interaction.ts), so a done proving quest can only
-  // have been completed through the pickup path. The counter itself stays
-  // honest at whatever the character actually accrued since the rollout.
-  if (GROUND_PICKUP_PROVING_QUESTS.some((q) => meta.questsDone.has(q))) {
-    grantDeed(ctx, meta, 'exp_something_shiny', { retro: true });
   }
   // Stranded: once no creditable mob can sit five levels up (the heroic pin
   // is the ceiling), the killing blow is permanently out of reach; a level

@@ -614,7 +614,6 @@ describe('parties', () => {
   it('blocks raid groups from standard dungeons while requiring raid groups for Nythraxis entry', () => {
     const sim = makeWorld();
     const leader = sim.addPlayer('warrior', 'Leader');
-    sim.players.get(leader)?.questsDone.add('q_nythraxis_bound_guardian');
     sim.enterDungeon('nythraxis_boss_arena', leader);
     expect(sim.entities.get(leader)?.pos.x).toBeLessThan(DUNGEON_X_THRESHOLD);
 
@@ -624,39 +623,6 @@ describe('parties', () => {
     expect(sim.entities.get(leader)?.pos.x).toBeLessThan(DUNGEON_X_THRESHOLD);
     sim.enterDungeon('nythraxis_boss_arena', leader);
     expect(dungeonAt(mustEntity(sim, leader).pos.x)?.id).toBe('nythraxis_boss_arena');
-  });
-
-  it('party members share kill xp with the group bonus and quest credit', () => {
-    const { sim, a, b } = makeDuo();
-    // both accept the wolf quest
-    teleport(sim, a, 4, 4);
-    teleport(sim, b, 4, 5);
-    sim.acceptQuest('q_wolves', a);
-    sim.acceptQuest('q_wolves', b);
-    const wolf = nearestMob(sim, 'forest_wolf');
-    wolf.hp = 1;
-    teleport(sim, a, wolf.pos.x + 2, wolf.pos.z);
-    teleport(sim, b, wolf.pos.x - 2, wolf.pos.z);
-    sim.targetEntity(wolf.id, a);
-    face(sim, a, wolf.id);
-    sim.startAutoAttack(a);
-    for (let i = 0; i < 20 * 20 && !wolf.dead; i++) {
-      face(sim, a, wolf.id);
-      sim.tick();
-    }
-    expect(wolf.dead).toBe(true);
-    const metaA = sim.meta(a)!;
-    const metaB = sim.meta(b)!;
-    // both got xp (half of solo, with 1.166 duo bonus applied)
-    expect(metaA.xp).toBeGreaterThan(0);
-    expect(metaB.xp).toBeGreaterThan(0);
-    // Solo value read off the curve, not a literal: mob XP is now derived from the
-    // level ladder, so 50 was only ever the forest wolf's worth under the old one.
-    const solo = mobXpValue(wolf.level, sim.entities.get(a)!.level);
-    expect(metaA.xp).toBe(Math.round((solo * 1.166) / 2));
-    // both got quest credit
-    expect(metaA.questLog.get('q_wolves')?.counts[0]).toBe(1);
-    expect(metaB.questLog.get('q_wolves')?.counts[0]).toBe(1);
   });
 
   it("party members may loot each other's tapped kills and split copper", () => {
@@ -1259,19 +1225,6 @@ describe('the Hollow Crypt', () => {
       if (ea.dead) break;
     }
     expect(pulsed).toBe(true);
-  });
-
-  it('the storyline chain gates the dungeon quest', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior' });
-    expect(sim.questState('q_whispers')).toBe('unavailable'); // needs q_bones
-    expect(sim.questState('q_rite')).toBe('unavailable');
-    expect(sim.questState('q_hollow')).toBe('unavailable');
-    sim.questsDone.add('q_bones');
-    expect(sim.questState('q_whispers')).toBe('available');
-    sim.questsDone.add('q_whispers');
-    expect(sim.questState('q_rite')).toBe('available');
-    sim.questsDone.add('q_rite');
-    expect(sim.questState('q_hollow')).toBe('available');
   });
 });
 

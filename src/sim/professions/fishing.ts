@@ -112,15 +112,6 @@ function isAtDeepfenShallowsFishingSpot(p: Entity): boolean {
   return d <= DEEPFEN_SHALLOWS_LAKE.radius + DEEPFEN_FISHING_SHORE_MARGIN;
 }
 
-function shouldCatchCodfather(ctx: SimContext, p: Entity, meta: PlayerMeta): boolean {
-  const qp = meta.questLog.get(THE_CODFATHER_QUEST_ID);
-  return (
-    qp?.state === 'active' &&
-    ctx.countItem(THE_CODFATHER_ITEM_ID, meta.entityId) === 0 &&
-    isAtDeepfenShallowsFishingSpot(p)
-  );
-}
-
 export function startFishing(ctx: SimContext, p: Entity, meta: PlayerMeta): void {
   if (p.dead) {
     ctx.error(meta.entityId, "You can't do that while dead.");
@@ -209,13 +200,6 @@ export function startFishing(ctx: SimContext, p: Entity, meta: PlayerMeta): void
 }
 
 export function completeFishing(ctx: SimContext, p: Entity, meta: PlayerMeta): void {
-  if (shouldCatchCodfather(ctx, p, meta)) {
-    // Deliberately NOT capacity-gated: this once-ever quest catch is guarded
-    // to a single copy by shouldCatchCodfather, and losing it to full bags
-    // could soft-lock the quest chain. Force-add (over-capacity tolerated).
-    ctx.addItem(THE_CODFATHER_ITEM_ID, 1, meta.entityId);
-    return;
-  }
   // The catch depends on which zone's water you're fishing and how skilled you
   // are: each zone has its own weighted table per rarity band, and the player's
   // fishing proficiency picks the band (fishingBandFor). Band selection is pure

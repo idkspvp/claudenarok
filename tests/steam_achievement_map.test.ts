@@ -9,10 +9,10 @@ import { DEEDS } from '../src/sim/content/deeds';
 const ACH_NAME_RE = /^ACH_[A-Z0-9_]+$/;
 
 describe('Steam achievement map', () => {
-  it('has exactly the 75 registered entries (68 launch + 4 catalog refresh + 3 professions marquee)', () => {
+  it('has exactly the 71 registered entries (75 minus the four quest-deed achievements)', () => {
     // The three Professions 2.0 marquee deeds
     // (prog_guildsworn, prog_masterwright, prog_master_angler) join the map.
-    expect(Object.keys(ACHIEVEMENT_MAP).length).toBe(75);
+    expect(Object.keys(ACHIEVEMENT_MAP).length).toBe(71);
   });
 
   it('stays within the App Admin cap', () => {
@@ -60,7 +60,6 @@ describe('Steam achievement map', () => {
     expect(ACHIEVEMENT_MAP.prog_first_steps).toBe('ACH_FIRST_STEPS');
     expect(ACHIEVEMENT_MAP.dgn_deepward).toBe('ACH_DEEPWARD');
     expect(ACHIEVEMENT_MAP.pvp_vcup_golden_goal).toBe('ACH_VCUP_GOLDEN_GOAL');
-    expect(ACHIEVEMENT_MAP.prog_crown_below).toBe('ACH_CROWN_BELOW');
     expect(ACHIEVEMENT_MAP.prog_guildsworn).toBe('ACH_GUILDSWORN');
   });
 
@@ -78,8 +77,6 @@ describe('Steam achievement map', () => {
       prog_eternal: 'ACH_ETERNAL',
       prog_prestige: 'ACH_PRESTIGE',
       prog_master_gatherer: 'ACH_MASTER_GATHERER',
-      prog_crown_below: 'ACH_CROWN_BELOW',
-      prog_mere_at_rest: 'ACH_MERE_AT_REST',
       prog_tools_of_the_trade: 'ACH_TOOLS_OF_THE_TRADE',
       prog_guildsworn: 'ACH_GUILDSWORN',
       prog_masterwright: 'ACH_MASTERWRIGHT',
@@ -93,7 +90,6 @@ describe('Steam achievement map', () => {
       dgn_gravewyrm_sanctum: 'ACH_GRAVEWYRM_SANCTUM',
       dgn_nythraxis: 'ACH_NYTHRAXIS',
       dgn_nythraxis_heroic: 'ACH_NYTHRAXIS_HEROIC',
-      dgn_nythraxis_crypt: 'ACH_NYTHRAXIS_CRYPT',
       dgn_thornpeak_rounds: 'ACH_THORNPEAK_ROUNDS',
       dgn_deepward: 'ACH_DEEPWARD',
       dgn_mark_circuit: 'ACH_MARK_CIRCUIT',
@@ -143,7 +139,6 @@ describe('Steam achievement map', () => {
       hid_fall_death: 'ACH_FALL_DEATH',
       hid_roll_hundred: 'ACH_ROLL_HUNDRED',
       hid_bountiful_coffer: 'ACH_BOUNTIFUL_COFFER',
-      hid_codfather: 'ACH_CODFATHER',
     });
   });
 });

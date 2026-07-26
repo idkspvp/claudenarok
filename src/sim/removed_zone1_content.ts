@@ -57,33 +57,14 @@ export function sanitizeRemovedZone1Content(state: CharacterState): {
   state: CharacterState;
   changed: boolean;
 } {
-  const questLog = state.questLog
-    .filter((quest) => !REMOVED_QUESTS.has(quest.questId))
-    .map((quest) => ({
-      questId: quest.questId,
-      counts: [...quest.counts],
-      state: quest.state,
-      ...(quest.selection === undefined ? {} : { selection: quest.selection }),
-      ...(quest.resolvedCounts === undefined ? {} : { resolvedCounts: [...quest.resolvedCounts] }),
-    }));
-  const questsDone = state.questsDone.filter((questId) => !REMOVED_QUESTS.has(questId));
+  // The quest-log and questsDone arms of this sanitizer went with the quest system;
+  // what remains is the objective ITEMS, which are still sitting in old saves and
+  // still need sweeping out of bags and buyback.
   const inventory = state.inventory.filter(keepItem).map((slot) => ({ ...slot }));
   const vendorBuyback = state.vendorBuyback?.filter(keepItem).map((slot) => ({ ...slot }));
 
   const changed =
-    questLog.length !== state.questLog.length ||
-    questsDone.length !== state.questsDone.length ||
-    !sameSlots(inventory, state.inventory) ||
-    !sameSlots(vendorBuyback, state.vendorBuyback);
+    !sameSlots(inventory, state.inventory) || !sameSlots(vendorBuyback, state.vendorBuyback);
 
-  return {
-    changed,
-    state: {
-      ...state,
-      inventory,
-      vendorBuyback,
-      questLog,
-      questsDone,
-    },
-  };
+  return { changed, state: { ...state, inventory, vendorBuyback } };
 }

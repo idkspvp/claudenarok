@@ -28,7 +28,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "d6691d51",
+      "state": "2815cb13",
       "events": "ff8ad631",
       "rng": {
         "draws": 0,
@@ -84,9 +84,6 @@
           ],
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
-          "questsDone": [
-            "q_nythraxis_bound_guardian"
-          ],
           "raidLockouts": [
             [
               "nythraxis_boss_arena",
@@ -598,7 +595,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "d6691d51",
+      "state": "2815cb13",
       "events": "06f30890",
       "rng": {
         "draws": 0,
@@ -654,9 +651,6 @@
           ],
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
-          "questsDone": [
-            "q_nythraxis_bound_guardian"
-          ],
           "raidLockouts": [
             [
               "nythraxis_boss_arena",
@@ -1168,7 +1162,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 420,
-      "state": "f5049cd9",
+      "state": "1205c1e7",
       "events": "343b7d59",
       "rng": {
         "draws": 0,
@@ -1230,9 +1224,6 @@
           ],
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
-          "questsDone": [
-            "q_nythraxis_bound_guardian"
-          ],
           "raidLockouts": [
             [
               "nythraxis_boss_arena",

@@ -678,7 +678,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['exp_vale_wayfarer', 'chr_vale_gatherer', 'chr_vale_first_cast'],
-      questIds: ['q_wolves', 'q_boars', 'q_spiders', 'q_greyjaw'],
     },
   },
   chr_vale_chapter_ii: {
@@ -690,7 +689,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['chr_vale_packbreaker', 'chr_vale_cup_debut', 'dlv_reliquary'],
-      questIds: ['q_murlocs', 'q_supplies', 'q_bandits', 'q_ringleader', 'q_mine', 'q_bones'],
     },
   },
   chr_vale_chapter_iii: {
@@ -702,16 +700,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['chr_vale_chapter_i', 'chr_vale_chapter_ii', 'chr_vale_rares', 'dgn_hollow_crypt'],
-      questIds: [
-        'q_whispers',
-        'q_names_of_the_dead',
-        'q_silence_the_call',
-        'q_rite',
-        'q_sexton',
-        'q_hollow',
-        'q_gravecallers_trail',
-        'q_mogger',
-      ],
     },
     reward: { kind: 'title', text: 'of the Vale' },
   },
@@ -780,13 +768,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['exp_marsh_wayfarer', 'chr_marsh_gatherer'],
-      questIds: [
-        'q_fenbridge_muster',
-        'q_prowlers',
-        'q_prowler_pelts',
-        'q_fen_supplies',
-        'q_deepfen',
-      ],
     },
   },
   chr_marsh_chapter_ii: {
@@ -798,16 +779,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['chr_marsh_unburst', 'dlv_litany'],
-      questIds: [
-        'q_idols',
-        'q_deepfen_purge',
-        'q_widows',
-        'q_broodmother',
-        'q_drowned',
-        'q_drowned_censers',
-        'q_no_rest',
-        'q_the_codfather',
-      ],
     },
   },
   chr_marsh_chapter_iii: {
@@ -824,17 +795,6 @@ export const DEEDS: Record<string, DeedDef> = {
         'chr_marsh_hush_the_mending',
         'chr_marsh_rares',
         'dgn_sunken_bastion',
-      ],
-      questIds: [
-        'q_trolls',
-        'q_troll_fetishes',
-        'q_grubjaw',
-        'q_cult_camp',
-        'q_summoners',
-        'q_deacon',
-        'q_bastion_door',
-        'q_olen',
-        'q_mistcaller',
       ],
     },
     reward: { kind: 'title', text: 'of the Mirefen' },
@@ -894,16 +854,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['exp_peaks_wayfarer', 'chr_peaks_sparring'],
-      questIds: [
-        'q_highwatch_summons',
-        'q_stalkers',
-        'q_stalker_pelts',
-        'q_stalkers_return',
-        'q_stalker_cloaks',
-        'q_old_cragmaw',
-        'q_kobold_tunnels',
-        'q_glowing_wax',
-      ],
     },
   },
   chr_peaks_chapter_ii: {
@@ -915,18 +865,6 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: {
       kind: 'meta',
       deedIds: ['chr_peaks_glimmer_cast', 'chr_peaks_moongate', 'chr_peaks_waking_witness'],
-      questIds: [
-        'q_ogre_edges',
-        'q_ogre_totems',
-        'q_ogre_bounty',
-        'q_crushers',
-        'q_drogmar',
-        'q_elementals',
-        'q_shard_cores',
-        'q_kazzix',
-        'q_glimmermere_light',
-        'q_tarn_waders',
-      ],
     },
   },
   chr_peaks_chapter_iii: {
@@ -943,20 +881,6 @@ export const DEEDS: Record<string, DeedDef> = {
         'chr_peaks_rares',
         'dgn_gravewyrm_sanctum',
         'cmb_thunzharr',
-      ],
-      questIds: [
-        'q_zealots',
-        'q_cult_orders',
-        'q_necromancers',
-        'q_revenants',
-        'q_revenant_vanguard',
-        'q_wyrm_sigils',
-        'q_breaking_the_seal',
-        'q_voice_below',
-        'q_sanctum_gate',
-        'q_korgath',
-        'q_velkhar',
-        'q_gravewyrm',
       ],
     },
     reward: { kind: 'title', text: 'of Thornpeak' },
@@ -1893,55 +1817,7 @@ export const DEEDS: Record<string, DeedDef> = {
     trigger: { kind: 'manual' },
     hidden: true,
   },
-  hid_codfather: {
-    id: 'hid_codfather',
-    name: 'Joined the Family',
-    desc: 'Dragged The Codfather out of the Deepfen Shallows.',
-    category: 'hidden',
-    renown: 10,
-    trigger: { kind: 'quest', questId: 'q_the_codfather' },
-    hidden: true,
-  },
 
-  // Post-launch additions land at the table END regardless of category (the
-  // append-only header contract: DEED_ORDER derives from table order), grouped
-  // by category within this tail block only.
-  prog_crown_below: {
-    id: 'prog_crown_below',
-    name: 'The Crown Below',
-    desc: "Follow the crown from the restless bonefields to the tomb of King Nythraxis and see Scourge's End through.",
-    category: 'progression',
-    renown: 25,
-    trigger: {
-      kind: 'quests',
-      questIds: [
-        'q_nythraxis_restless_dead',
-        'q_nythraxis_graves',
-        'q_nythraxis_sealed_crypt',
-        'q_nythraxis_bound_guardian',
-        'q_nythraxis_scourges_end',
-      ],
-    },
-  },
-  prog_mere_at_rest: {
-    id: 'prog_mere_at_rest',
-    name: 'The Mere at Rest',
-    desc: "See Tidewatcher Ondrel's watch through to the end: the choir silenced, the Palecoil slain, and the Drowned Moon put to rest.",
-    category: 'progression',
-    renown: 25,
-    trigger: {
-      kind: 'quests',
-      questIds: ['q_drowned_choir', 'q_palecoil', 'q_silence_the_choir', 'q_drowned_moon'],
-    },
-  },
-  prog_callused_hands: {
-    id: 'prog_callused_hands',
-    name: 'Callused Hands',
-    desc: "Complete A Trade for Every Hand and earn your first callus in Eastbrook's trades.",
-    category: 'progression',
-    renown: 5,
-    trigger: { kind: 'quest', questId: 'q_prof_intro' },
-  },
   // Reagent sourcing: every toolworks recipe requires one of the six tier
   // 4/5 reagents (thorium_ore, arcanite_bar, ashwood_log, elderwood_log,
   // goldleaf_herb, sunpetal_herb), sold by Quartermaster Bree at the
@@ -1960,14 +1836,6 @@ export const DEEDS: Record<string, DeedDef> = {
     category: 'progression',
     renown: 10,
     trigger: { kind: 'stat', stat: 'hubCraftsPerformed', count: 1 },
-  },
-  dgn_nythraxis_crypt: {
-    id: 'dgn_nythraxis_crypt',
-    name: 'What the Crypt Kept',
-    desc: 'Brave the Abandoned Crypt and recover both keystone halves and the ancient diary from its guardians.',
-    category: 'dungeon',
-    renown: 10,
-    trigger: { kind: 'quest', questId: 'q_nythraxis_sealed_crypt' },
   },
   chr_marsh_first_cast: {
     id: 'chr_marsh_first_cast',

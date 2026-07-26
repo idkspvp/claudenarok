@@ -43,7 +43,6 @@ function formRaid(sim: Sim, leaderPid: number) {
 }
 
 function enterRaid(sim: Sim, pid: number) {
-  sim.players.get(pid)!.questsDone.add('q_nythraxis_bound_guardian');
   formRaid(sim, pid);
   sim.enterDungeon('nythraxis_boss_arena', pid);
   const p = sim.entities.get(pid)!;

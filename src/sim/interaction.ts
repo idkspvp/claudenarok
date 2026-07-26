@@ -27,13 +27,9 @@ import { bagCapacity, canGrantItemInstance, fitsAll } from './bags';
 import { type NoticeboardDef, noticeboardDefByEntityId } from './content/noticeboards';
 import { HARVEST_COMPONENT_SPECIMENS, monsterMaterialTierFor } from './content/professions';
 import { corpseInteractionAvailability } from './corpse_interaction';
-import { ITEMS, MOBS, QUESTS, SPIRIT_HEALER_NPC_ID } from './data';
+import { ITEMS, MOBS, SPIRIT_HEALER_NPC_ID } from './data';
 import * as deedsMod from './deeds';
-import {
-  activateNythraxisRelic,
-  interactObjectForQuests,
-  tryStartNythraxisWardChannel,
-} from './encounters/nythraxis';
+import { activateNythraxisRelic, tryStartNythraxisWardChannel } from './encounters/nythraxis';
 import { isInRaidInstance } from './instances/dungeons';
 import { hasSharedLootRights as computeSharedLootRights, lootHasGoneFfa } from './loot/loot_ffa';
 import {
@@ -481,34 +477,7 @@ export function pickUpObject(
   if (activateNythraxisRelic(ctx, obj, meta)) {
     return obj.lootable !== beforeRelicLootable || ctx.nextId !== beforeRelicNextId;
   }
-  const beforeQuestProgress = meta.counters.questProgress;
-  const beforeQuestNextId = ctx.nextId;
-  if (interactObjectForQuests(ctx, obj, meta)) {
-    return meta.counters.questProgress !== beforeQuestProgress || ctx.nextId !== beforeQuestNextId;
-  }
   const def = ITEMS[objectItemId];
-  if (def?.questId) {
-    const qp = meta.questLog.get(def.questId);
-    if (!qp || (qp.state !== 'active' && qp.state !== 'ready')) {
-      ctx.error(meta.entityId, def.pickupDeny ?? `You cannot take the ${def.name} yet.`);
-      return false;
-    }
-    const quest = QUESTS[def.questId];
-    const objIdx = quest.objectives.findIndex(
-      (o) => o.type === 'collect' && o.itemId === objectItemId,
-    );
-    if (objIdx < 0) {
-      ctx.error(meta.entityId, def.pickupEnough ?? `${def.name} offers nothing more.`);
-      return false;
-    }
-    if (
-      objIdx >= 0 &&
-      ctx.countItem(objectItemId, meta.entityId) >= quest.objectives[objIdx].count
-    ) {
-      ctx.error(meta.entityId, def.pickupEnough ?? 'You have enough of those.');
-      return false;
-    }
-  }
   if (!ctx.canAddItem(objectItemId, 1, meta.entityId)) {
     ctx.error(meta.entityId, 'Your bags are full.');
     return false;
@@ -593,7 +562,7 @@ export function interact(
         ctx.emit({ type: 'bank', pid: p.id });
         return;
       }
-      if (ctx.isQuestInteractionEntity(target)) {
+      if (target.kind === 'npc') {
         ctx.talkToNpc(target.id, p.id);
         return;
       }
@@ -622,7 +591,7 @@ export function interact(
         bestObjD2 = d2;
       }
     }
-    if (ctx.isQuestInteractionEntity(e) && d2 < bestQuestD2) {
+    if (e.kind === 'npc' && d2 < bestQuestD2) {
       bestQuestEntity = e;
       bestQuestD2 = d2;
     }

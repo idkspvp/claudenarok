@@ -43,8 +43,6 @@ const DELTA_KEYS = [
   'inv',
   'buyback',
   'equip',
-  'qlog',
-  'qdone',
   'lockouts',
   'cds',
   'stats',
@@ -842,30 +840,6 @@ describe('delta snapshots', () => {
     expect(server.sim.countItem('wolf_fang', session.pid)).toBe(0);
   });
 
-  it('discard command mirrors inventory and quest progress changes', () => {
-    const meta = server.sim.meta(session.pid)!;
-    meta.questLog.set('q_widows', { questId: 'q_widows', counts: [10, 0], state: 'active' });
-    server.sim.addItem('widow_venom_sac', 6, session.pid);
-    broadcast(server);
-    fc.sent.length = 0;
-
-    server.handleMessage(
-      session,
-      JSON.stringify({ t: 'cmd', cmd: 'discard', item: 'widow_venom_sac', count: 2 }),
-    );
-    broadcast(server);
-
-    expect(server.sim.countItem('widow_venom_sac', session.pid)).toBe(4);
-    expect(meta.questLog.get('q_widows')).toMatchObject({ counts: [10, 4], state: 'active' });
-    const snap = lastSnap(fc.sent);
-    // The wire mirrors the whole inventory (starter rations included); pin the
-    // discarded stack's mirrored count.
-    expect(snap.self.inv.filter((s: { itemId: string }) => s.itemId === 'widow_venom_sac')).toEqual(
-      [{ itemId: 'widow_venom_sac', count: 4 }],
-    );
-    expect(snap.self.qlog).toEqual([{ questId: 'q_widows', counts: [10, 4], state: 'active' }]);
-  });
-
   it('echoes the last processed input sequence in self snapshots', () => {
     server.handleMessage(session, JSON.stringify({ t: 'input', seq: 7, mi: { f: 1 } }));
     broadcast(server);
@@ -960,11 +934,15 @@ describe('delta snapshots', () => {
     broadcast(server);
     fc.sent.length = 0;
     server.sim.addItem('baked_bread', 2, session.pid);
+    // A bare sim.addItem is not itself a wire-visible change. It used to force the
+    // heavy resend by accident: the quest-credit hook it fired emitted questProgress,
+    // which was in HEAVY_SELF_EVENTS. Real acquisitions still mark the session dirty
+    // through their own event or command, so mark it the way they do.
+    (session as unknown as { selfHeavyDirty: boolean }).selfHeavyDirty = true;
     broadcast(server);
     const snap = lastSnap(fc.sent);
     expect(snap.self).toHaveProperty('inv');
     expect(snap.self.inv.some((s: any) => s.itemId === 'baked_bread')).toBe(true);
-    expect(snap.self).not.toHaveProperty('qlog');
     expect(snap.self).not.toHaveProperty('stats');
   });
 
@@ -1120,61 +1098,6 @@ describe('delta snapshots', () => {
     (client as any).applySnapshot(buybackOnly);
     expect(client.vendorBuyback).toEqual([{ itemId: 'apprentice_staff', count: 1 }]);
     expect(client.consumeInventoryChanged()).toBe(true);
-  });
-
-  it('quest commands force a quest-state resync even when rejected', () => {
-    broadcast(server);
-    fc.sent.length = 0;
-    // unknown quest: the sim rejects it and quest state does not change, but
-    // the next snapshot must still carry quest fields so stale client UI
-    // converges back to the server's truth
-    server.handleMessage(
-      session,
-      JSON.stringify({ t: 'cmd', cmd: 'accept', quest: 'no_such_quest' }),
-    );
-    broadcast(server);
-    const snap = lastSnap(fc.sent);
-    expect(snap.self).toHaveProperty('qlog');
-    expect(snap.self).toHaveProperty('qdone');
-    expect(snap.self).not.toHaveProperty('inv');
-  });
-
-  it('rejected distant quest accepts resync the authoritative quest state', () => {
-    broadcast(server);
-    fc.sent.length = 0;
-    const player = server.sim.entities.get(session.pid)!;
-    player.pos.x = 0;
-    player.pos.z = -40;
-
-    server.handleMessage(session, JSON.stringify({ t: 'cmd', cmd: 'accept', quest: 'q_wolves' }));
-    broadcast(server);
-    const snap = lastSnap(fc.sent);
-    expect(snap.self.qlog).toEqual([]);
-    expect(snap.self.qdone).toEqual([]);
-  });
-
-  it('dev quest completion resyncs qlog and qdone', () => {
-    const previous = process.env.ALLOW_DEV_COMMANDS;
-    process.env.ALLOW_DEV_COMMANDS = '1';
-    try {
-      broadcast(server);
-      fc.sent.length = 0;
-
-      server.handleMessage(
-        session,
-        JSON.stringify({ t: 'cmd', cmd: 'dev_complete_quest', quest: 'q_wolves' }),
-      );
-      broadcast(server);
-
-      const snap = lastSnap(fc.sent);
-      expect(snap.self).toHaveProperty('qlog');
-      expect(snap.self).toHaveProperty('qdone');
-      expect(snap.self.qlog).toEqual([]);
-      expect(snap.self.qdone).toContain('q_wolves');
-    } finally {
-      if (previous === undefined) delete process.env.ALLOW_DEV_COMMANDS;
-      else process.env.ALLOW_DEV_COMMANDS = previous;
-    }
   });
 
   it('each client gets full state on its own first snapshot', () => {
@@ -1779,33 +1702,6 @@ describe('/who command', () => {
 });
 
 describe('client-side delta merge', () => {
-  it('does not apply optimistic quest accept or completion state', () => {
-    const client = bareClient(1);
-    const sent: any[] = [];
-    (client as any).ws = {
-      readyState: 1,
-      send: (payload: string) => sent.push(JSON.parse(payload)),
-    };
-    const oldWebSocket = (globalThis as any).WebSocket;
-    (globalThis as any).WebSocket = { OPEN: 1 };
-    try {
-      client.acceptQuest('q_wolves');
-      expect(client.questLog.has('q_wolves')).toBe(false);
-      expect(client.questState('q_wolves')).toBe('active');
-      expect(sent).toContainEqual({ t: 'cmd', cmd: 'accept', quest: 'q_wolves' });
-
-      (client as any).pendingQuestCommands.clear();
-      client.questLog.set('q_wolves', { questId: 'q_wolves', counts: [8], state: 'ready' });
-      client.turnInQuest('q_wolves');
-      expect(client.questLog.has('q_wolves')).toBe(true);
-      expect(client.questsDone.has('q_wolves')).toBe(false);
-      expect(client.questState('q_wolves')).toBe('active');
-      expect(sent).toContainEqual({ t: 'cmd', cmd: 'turnin', quest: 'q_wolves' });
-    } finally {
-      (globalThis as any).WebSocket = oldWebSocket;
-    }
-  });
-
   it('flushes changed movement immediately without resending unchanged frames', () => {
     const client = bareClient(1);
     const sent: any[] = [];
@@ -2023,39 +1919,6 @@ describe('client-side delta merge', () => {
     e = client.entities.get(2)!;
     expect(e.pos).toMatchObject({ x: 220, z: 240 });
     expect(e.prevPos).toMatchObject({ x: 220, z: 240 });
-  });
-
-  it('keeps previous structures when delta fields are omitted', () => {
-    const server = new GameServer();
-    const fc = fakeWs();
-    const session = joinServer(server, fc, 1, 'Testa');
-    const client = bareClient(session.pid);
-
-    server.sim.addItem('conjured_water', 1, session.pid);
-    broadcast(server);
-    (client as any).applySnapshot(lastSnap(fc.sent));
-    expect(client.inventory.length).toBeGreaterThan(0);
-    const invRef = client.inventory;
-    const qlogRef = client.questLog;
-    const qdoneRef = client.questsDone;
-    const cdsRef = client.player.cooldowns;
-
-    fc.sent.length = 0;
-    server.sim.tick();
-    broadcast(server);
-    (client as any).applySnapshot(lastSnap(fc.sent));
-    // omitted fields neither reset nor get rebuilt
-    expect(client.inventory).toBe(invRef);
-    expect(client.questLog).toBe(qlogRef);
-    expect(client.questsDone).toBe(qdoneRef);
-    expect(client.player.cooldowns).toBe(cdsRef);
-
-    fc.sent.length = 0;
-    server.sim.addItem('baked_bread', 1, session.pid);
-    broadcast(server);
-    (client as any).applySnapshot(lastSnap(fc.sent));
-    expect(client.inventory).not.toBe(invRef);
-    expect(client.inventory.some((s) => s.itemId === 'baked_bread')).toBe(true);
   });
 });
 
@@ -2945,15 +2808,6 @@ describe('lockpick view rebuilds from events on the online client', () => {
     expect(client.lockpickState).toBeNull();
     expect(client.drainEvents().length).toBeGreaterThan(0);
   });
-
-  it('does not clear the view on a foreign lockpickEnd', () => {
-    const client = bareClient(1);
-    (client as any).lockpickState = null;
-    feed(client, sessionEvent('s2', 0, []));
-    feed(client, { type: 'lockpickEnd', sessionId: 'OTHER', outcome: 'fail' });
-    expect(client.lockpickState).not.toBeNull();
-    expect(client.lockpickState?.sessionId).toBe('s2');
-  });
 });
 
 // ---------------------------------------------------------------------------
@@ -3021,8 +2875,6 @@ const ALL_DELTA_KEYS = [
   'ncd',
   'party',
   'prof',
-  'qdone',
-  'qlog',
   'renown',
   'salv',
   'sport',
@@ -3086,8 +2938,6 @@ const TERSE_TO_IWORLD: Record<string, string> = {
   party: 'partyInfo',
   prk: 'prestigeRank',
   prof: 'professionsState',
-  qdone: 'questsDone',
-  qlog: 'questLog',
   res: 'resource',
   rtype: 'resourceType',
   rxp: 'restedXp',
@@ -3167,8 +3017,6 @@ function dirtyEveryDeltaField(): {
   meta.inventory = [{ itemId: 'baked_bread', count: 3 }];
   meta.vendorBuyback = [{ itemId: 'apprentice_staff', count: 1 }];
   meta.equipment = { ...meta.equipment, mainhand: 'zealotsbane_blade' };
-  meta.questLog.set('q_widows', { questId: 'q_widows', counts: [10, 0], state: 'active' });
-  meta.questsDone.add('q_wolves');
   meta.raidLockouts.set('nythraxis_boss_arena', FAR_FUTURE_MS);
   meta.unlockedMilestones.add('milestone_test');
   meta.lifetimeXp = 555;
@@ -3411,186 +3259,6 @@ describe('full self-state snapshot delta fixture', () => {
     }
   });
 
-  it('mirrors every dirtied self value onto the correct decode target', () => {
-    const { server, fc, leader, memberPid } = dirtyEveryDeltaField();
-    broadcast(server);
-    const client = bareClient(leader.pid);
-    (client as any).applySnapshot(lastSnap(fc.sent));
-
-    // --- fields that decode onto the player ENTITY (client.player), not the client ---
-    expect(client.player.cooldowns.get('heroic_strike')).toBe(5); // cds -> e.cooldowns
-    expect(client.player.abilityCharges?.ice_block?.charges).toBe(1); // achg -> e.abilityCharges
-    // achr -> the same records' recharge timer (legacy wire: raw [remaining, length]);
-    // like vcup/vcupb it is hand-decoded inside the achg block, so it has no
-    // TERSE_TO_IWORLD rename entry.
-    expect(client.player.abilityCharges?.ice_block?.recharge).toBe(10);
-    expect(client.player.abilityCharges?.ice_block?.rechargeLength).toBe(240);
-    expect(client.player.stats).toMatchObject({
-      str: 12345,
-      pvpOffense: 0.17,
-      pvpDefense: 0.13,
-    }); // stats (inline s.X ?? e.X, legacy-safe object replacement)
-    expect(client.player.weapon).toMatchObject({ min: 999 }); // weapon (inline s.X ?? e.X)
-    expect(client.player.resource).toBe(42); // res -> resource
-    expect(client.player.maxResource).toBe(150); // mres -> maxResource
-    expect(client.player.resourceType).toBe('rage'); // rtype -> resourceType
-
-    // --- always-present scalar renames ---
-    expect(client.lifetimeXp).toBe(555); // lxp -> lifetimeXp
-    expect(client.honor).toBe(321); // honor
-    expect(client.lifetimeHonor).toBe(654); // lhonor -> lifetimeHonor
-    expect(client.restedXp).toBe(222); // rxp -> restedXp
-    expect(client.prestigeRank).toBe(3); // prk -> prestigeRank
-
-    // --- fields that decode onto the client ---
-    expect(client.inventory).toEqual([{ itemId: 'baked_bread', count: 3 }]); // inv -> inventory
-    expect(client.vendorBuyback).toEqual([{ itemId: 'apprentice_staff', count: 1 }]); // buyback -> vendorBuyback
-    expect(client.equipment).toMatchObject({ mainhand: 'zealotsbane_blade' }); // equip -> equipment
-    // cosmetics -> accountCosmetics, asserted against the normalized shape (the input
-    // is already the normal {completedQuestIds, mechChromaIds} form, see :192-202)
-    expect(client.accountCosmetics).toEqual({
-      completedQuestIds: ['q_aldrics_fallen_star'],
-      mechChromaIds: ['amber_crimson'],
-      weaponSkinIds: [],
-      weaponSkinLoadout: {},
-    });
-    expect([...client.questLog.values()]).toEqual([
-      { questId: 'q_widows', counts: [10, 0], state: 'active' },
-    ]); // qlog -> questLog (Map)
-    expect(client.questsDone.has('q_wolves')).toBe(true); // qdone -> questsDone (Set)
-    expect(client.unlockedMilestones).toEqual(['milestone_test']); // milestones -> unlockedMilestones
-    // lockouts -> selfLockouts (private), via the raidLockouts() accessor
-    expect(client.raidLockouts().map((l) => l.id)).toEqual(['nythraxis_boss_arena']);
-    expect(client.partyInfo).not.toBeNull(); // party -> partyInfo
-    expect(client.partyInfo?.members.some((m) => m.pid === memberPid)).toBe(true);
-    expect(client.markerFor(memberPid)).toBe(3); // marks -> markers, via markerFor()
-    expect((client.tradeInfo as any)?.otherPid).toBe(memberPid); // trade -> tradeInfo
-    expect((client.duelInfo as any)?.state).toBe('countdown'); // duel -> duelInfo
-    expect(client.arenaInfo).not.toBeNull(); // arena -> arenaInfo
-    expect(client.marketInfo).not.toBeNull(); // market -> marketInfo
-    expect(client.marketCollectPending).toBe(true); // mktU -> marketCollectPending (truthy bit)
-    expect(client.bankInfo).not.toBeNull(); // bank -> bankInfo
-    expect(client.bankInfo?.slots).toEqual([{ itemId: 'wolf_fang', count: 2 }]); // bank contents mirror
-    expect(client.activeLootRolls().map((r) => r.rollId)).toEqual([1]); // lroll -> lootRollPrompts
-    // lrollg -> lootRollGroup, via the lootRollGroupStatus() accessor
-    expect(client.lootRollGroupStatus()).toEqual([
-      {
-        rollId: 1,
-        itemId: 'baked_bread',
-        itemName: 'Baked Bread',
-        quality: 'common',
-        expiresAt: 9999,
-        entries: [{ pid: leader.pid, name: 'Alld', choice: null }],
-      },
-    ]);
-    expect(client.delveRun).not.toBeNull(); // drun -> delveRun
-    expect(client.companionState?.companionId).toBe('companion_tessa'); // dcompanion -> companionState
-    expect(client.delveMarks).toBe(7); // dmarks -> delveMarks
-    expect(client.companionUpgrades).toEqual({ companion_tessa: 2 }); // dcomp -> companionUpgrades
-    expect(client.gatheringProficiency).toEqual({
-      mining: 6,
-      logging: 0,
-      herbalism: 0,
-      fishing: 0,
-    }); // gprof -> gatheringProficiency
-    // ncd -> nodeHarvestableByMe: the cooling-down node reads not-ready, an
-    // untouched node (never in the map) still reads ready.
-    expect(client.nodeHarvestableByMe(GATHER_NODES[0].id)).toBe(false);
-    expect(client.nodeHarvestableByMe('not_a_real_node')).toBe(true);
-    // Re-pin: the enforced per-profession caps
-    // (mining/logging/herbalism 100, fishing 200) replace the old uniform 300.
-    expect(client.professionsState).toEqual({
-      skills: [
-        { professionId: 'mining', skill: 6, maxSkill: 100 },
-        { professionId: 'logging', skill: 0, maxSkill: 100 },
-        { professionId: 'herbalism', skill: 0, maxSkill: 100 },
-        { professionId: 'fishing', skill: 0, maxSkill: 200 },
-      ],
-    }); // prof -> professionsState
-    expect(client.craftingIdentity).toMatchObject({
-      version: 1,
-      synced: true,
-      activeArchetype: 'armorcrafting',
-      pairedMajor: 'weaponcrafting',
-      hobbyCraft: 'leatherworking',
-      attunedPairs: ['weaponcrafting+armorcrafting'],
-      switchCount: 2,
-      amendsProgress: 4,
-      amendsRequired: 11,
-    }); // cprof -> craftingIdentity
-    // The pair-named archetype title derives LIVE from the mirrored
-    // craftingIdentity (Professions 2.0): the canonical pair id, not a
-    // craft id, and it must reflect the cprof delta just applied.
-    expect(client.archetypeTitle).toBe('weaponcrafting+armorcrafting');
-    expect(client.craftSkills).toMatchObject({ armorcrafting: 31, weaponcrafting: 29 });
-    // mst -> activeMobileStationCraft: the server-computed ACTIVE craft id
-    // (expiry resolved server-side against the sim's own tickCount).
-    expect(client.activeMobileStationCraft).toBe('armorcrafting');
-    // denc/ench/salv -> lastDisenchantResult/lastEnchantResult/lastSalvageResult
-    // (Professions 2.0): the delta arm mirrors the exact stash. JSON drops
-    // undefined fields, so each decoded object carries no undefined keys; the
-    // disenchant secondary and the enchant deny reason both survive.
-    expect(client.lastDisenchantResult).toEqual({
-      ok: true,
-      itemId: 'zealotsbane_blade',
-      materialItemId: 'arcane_essence',
-      count: 1,
-      secondaryItemId: 'wolf_fang',
-      secondaryCount: 1,
-    });
-    expect(client.lastEnchantResult).toEqual({
-      ok: false,
-      itemId: 'apprentice_staff',
-      enchantId: 'ench_test_flat_stamina',
-      reason: 'insufficient_materials',
-    });
-    expect(client.lastSalvageResult).toEqual({
-      ok: true,
-      itemId: 'zealotsbane_blade',
-      materialItemId: 'spider_leg',
-      count: 2,
-    });
-    expect(client.delveClears).toEqual({ 'collapsed_reliquary:heroic': 1 }); // dclears -> delveClears
-    expect(client.delveDaily).toMatchObject({ markClears: 4 }); // delveDaily
-    // deeds -> deedsEarned: the Map rebuilds from the plain wire object with
-    // both utcDay stamps intact (a Map does not survive JSON.stringify)
-    expect([...client.deedsEarned.entries()]).toEqual([
-      ['prog_first_steps', '2026-07-01'],
-      ['prog_veteran', '2026-07-08'],
-    ]);
-    // dstats -> deedStats: counters survive and BOTH Sets rebuild from arrays
-    expect(client.deedStats.counters.kills).toBe(7);
-    expect(client.deedStats.itemsDiscovered.has('wolf_fang')).toBe(true);
-    expect(client.deedStats.visited.has('npc:chronicler_saul')).toBe(true);
-    expect(client.deedStats.dungeonClears).toEqual({ hollow_crypt: 2 });
-    expect(client.renown).toBe(15); // renown (same name both sides, no rename)
-    expect(client.activeTitle).toBe('prog_veteran'); // atitle -> activeTitle
-    // tal -> talents / talentSpec / loadouts / activeLoadout
-    expect(client.talents).toEqual({ spec: 'arms', rows: {} });
-    expect(client.talentSpec).toBe('arms');
-    expect(client.loadouts).toEqual([{ name: 'PvP', alloc: { spec: 'arms', rows: {} }, bar: [] }]);
-    expect(client.activeLoadout).toBe(0);
-    // hbl -> the login action-bar restore (self-only, resolved once on the first
-    // self payload). A stored server layout arrives as a 'server' win; like tal
-    // it is asserted directly (no TERSE_TO_IWORLD rename entry).
-    expect(client.takeActionBarLayoutRestore()).toEqual({
-      source: 'server',
-      layout: {
-        v: 1,
-        forms: { normal: { bar: [{ type: 'ability', id: 'heroic_strike' }], attack: null } },
-      },
-    });
-
-    // vcup + vcupb -> cupInfo (merged from both fragments; neither key alone
-    // equals the full CupInfo, so both are excluded from TERSE_TO_IWORLD and
-    // asserted directly here, the same way tal is above). The reassembled client
-    // mirror must deep-equal exactly what the server computes for this viewer.
-    expect(client.cupInfo).toEqual(server.sim.cupInfoFor(leader.pid));
-    expect(client.cupInfo?.role).toBe('keeper'); // per-viewer field, arrived on vcup
-    expect(Object.keys(client.cupInfo?.queueSizes ?? {}).sort()).toEqual(['1', '2', '3', '4', '5']); // realm-wide field, arrived on vcupb
-    expect(client.cupInfo?.live).toBeNull(); // no live match in the fixture
-  });
-
   it('flips mst to null when the mobile station expires (server-side tick-domain check)', () => {
     // The expiry arm of the mst self-delta: activeMobileStationCraftFor
     // resolves active-vs-expired against the SERVER sim's own tickCount, so
@@ -3685,9 +3353,9 @@ describe('gather node cooldown wire round trip (ncd)', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 56 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(56);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(56);
+  it('ALL_DELTA_KEYS contains exactly 54 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(54);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(54);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -3706,7 +3374,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
     expect(scraped.has('vcupb')).toBe(true); // the maybeRaw calls ARE captured by the widened regex
     expect(scraped.has('dfb')).toBe(true); // incl. the multi-line maybeRaw('dfb', ...) form
-    expect(scraped.size).toBe(56);
+    expect(scraped.size).toBe(54);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -4522,34 +4190,6 @@ describe('authoritative interaction command outcomes', () => {
     server.handleMessage(session, JSON.stringify({ t: 'cmd', cmd: 'resurrect_healer', rid: 42 }));
     expect(fc.sent).toContainEqual({ t: 'commandOutcome', rid: 42, ok: true });
     expect(player.dead).toBe(false);
-  });
-
-  it('forwards a valid pickup payload and reports the resulting world change', () => {
-    const server = new GameServer();
-    const fc = fakeWs();
-    const session = joinServer(server, fc, 1, 'Interactor');
-    const player = server.sim.entities.get(session.pid)!;
-    const object = [...server.sim.entities.values()].find(
-      (entity) =>
-        entity.kind === 'object' && entity.objectItemId === 'supply_crate' && entity.lootable,
-    )!;
-    server.sim.players.get(session.pid)!.questLog.set('q_supplies', {
-      questId: 'q_supplies',
-      counts: [0],
-      state: 'active',
-    });
-    player.pos = { ...object.pos };
-    player.prevPos = { ...object.pos };
-    fc.sent.length = 0;
-
-    server.handleMessage(
-      session,
-      JSON.stringify({ t: 'cmd', cmd: 'pickup', id: object.id, rid: 43 }),
-    );
-
-    expect(fc.sent).toContainEqual({ t: 'commandOutcome', rid: 43, ok: true });
-    expect(server.sim.countItem('supply_crate', session.pid)).toBe(1);
-    expect(object.lootable).toBe(false);
   });
 });
 

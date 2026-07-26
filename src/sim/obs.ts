@@ -1,5 +1,5 @@
 import { noticeboardDefByEntityId } from './content/noticeboards';
-import { CLASSES, ITEMS, QUEST_ORDER, QUESTS, WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z } from './data';
+import { CLASSES, ITEMS, WORLD_MAX_X, WORLD_MAX_Z, WORLD_MIN_Z } from './data';
 import type { Sim } from './sim';
 import {
   angleTo,
@@ -135,7 +135,10 @@ export function applyAction(sim: Sim, action: number): void {
 const NEARBY_MOBS = 5;
 
 export function obsSize(): number {
-  return 16 + ABILITY_SLOTS * 2 + 9 + NEARBY_MOBS * 6 + 5 + QUEST_ORDER.length * 2;
+  // The trailing `QUEST_ORDER.length * 2` quest slots are gone with the quest
+  // system. This SHRINKS the observation vector, so any trained policy or replay
+  // buffer sized against the old layout has to be regenerated — see python/.
+  return 16 + ABILITY_SLOTS * 2 + 9 + NEARBY_MOBS * 6 + 5;
 }
 
 export function encodeObs(sim: Sim): number[] {
@@ -261,26 +264,6 @@ export function encodeObs(sim: Sim): number[] {
     obs.push(1, clamp(d / 40, 0, 1.5), Math.sin(rel), Math.cos(rel), best.type);
   } else {
     obs.push(0, 1.5, 0, 0, 0);
-  }
-
-  // --- quests (10 x 2 = 20) ---
-  for (const qid of QUEST_ORDER) {
-    const state = sim.questState(qid);
-    obs.push(state === 'done' ? 1 : state === 'ready' ? 0.66 : state === 'active' ? 0.33 : 0);
-    const qp = sim.questLog.get(qid);
-    if (qp) {
-      const quest = QUESTS[qid];
-      let total = 0,
-        have = 0;
-      quest.objectives.forEach((_objective, i) => {
-        const required = questObjectiveRequired(quest, qp, i);
-        total += required;
-        have += Math.min(qp.counts[i], required);
-      });
-      obs.push(total > 0 ? have / total : 0);
-    } else {
-      obs.push(state === 'done' ? 1 : 0);
-    }
   }
 
   return obs;

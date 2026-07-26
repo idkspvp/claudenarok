@@ -293,11 +293,6 @@ function codfatherSim(): { sim: Sim; meta: PlayerMeta } {
   // (#2343) needs tackle in bags. The pole is not a gatherTool (tier still
   // floors to 1), so it changes no draw and no deadline.
   sim.addItem('simple_fishing_pole', 1);
-  meta.questLog.set('q_the_codfather', {
-    questId: 'q_the_codfather',
-    counts: [0],
-    state: 'active',
-  });
   teleportToDeepfenShore(sim, meta);
   return { sim, meta };
 }
@@ -437,49 +432,6 @@ describe('fishing draw contract (pin 2, the bite-and-reel shape)', () => {
     expect(meta.pendingGatherGrants).toHaveLength(0);
     sim.tick();
     expect(meta.gatheringProficiency.fishing).toBe(0);
-  });
-
-  it('codfather session: one draw at the cast, zero at the reel, the quest fish force-lands', () => {
-    const { sim, meta } = codfatherSim();
-    sim.events = [];
-    let draws = 0;
-    sim.rng.setObserver(() => draws++);
-    try {
-      const p = sim.player;
-      startFishing(sim.ctx, p, meta);
-      // The SHIPPED codfather choice (state.md): the cast still rolls its one
-      // hidden bite delay (startFishing has no quest special-case) and the
-      // reel's completeFishing early return rolls NO table draw.
-      expect(draws).toBe(1);
-      sim.tickCount = p.fishBiteAtTick;
-      updateCasting(sim.ctx, p, meta);
-      startFishing(sim.ctx, p, meta); // the reel
-      expect(draws).toBe(1);
-    } finally {
-      sim.rng.setObserver(null);
-    }
-    expect(sim.countItem('the_codfather')).toBe(1);
-    expect(fishingResultsIn(sim.events)).toHaveLength(0);
-    expect(meta.pendingGatherGrants).toHaveLength(0);
-    sim.tick();
-    expect(meta.gatheringProficiency.fishing).toBe(0);
-  });
-
-  it('codfather force-lands even with full bags (over-capacity tolerated, the soft-lock defense)', () => {
-    // The codfather branch deliberately skips the capacity gate: losing the
-    // once-ever quest fish to full bags could soft-lock the quest chain. A
-    // well-meaning "consistency" change adding a canAddItem gate here would
-    // keep every other pin green while recreating the soft-lock; this pin is
-    // the tooth.
-    const { sim, meta } = codfatherSim();
-    meta.inventory = Array.from({ length: bagCapacity(meta.bags) }, () => ({
-      itemId: 'simple_fishing_pole',
-      count: 1,
-    }));
-    sim.events = [];
-    completeFishing(sim.ctx, sim.player, meta);
-    expect(sim.countItem('the_codfather')).toBe(1);
-    expect(sim.events.filter((e) => (e as { type: string }).type === 'error')).toHaveLength(0);
   });
 });
 

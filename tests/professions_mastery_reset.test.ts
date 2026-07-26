@@ -53,7 +53,6 @@ const RESET_SAVE = {
   ],
   bank: { inventory: [{ itemId: 'roasted_boar', count: 1 }], purchasedSlots: 0, bonusSlots: 0 },
   questLog: [{ questId: 'q_wolves', counts: [3], state: 'active' }],
-  questsDone: ['q_greyjaw'],
   craftSkills: { armorcrafting: 80, enchanting: 10 },
   gatheringProficiency: { mining: 100, fishing: 30 },
   knownRecipes: ['recipe_tough_jerky'],
@@ -215,10 +214,6 @@ describe('the keep ledger (one decisive pin per row)', () => {
   it('level and XP KEPT', () => {
     expect(sim.entities.get(pid)?.level).toBe(15);
     expect(meta.xp).toBe(1234);
-  });
-  it('quest state KEPT', () => {
-    expect(meta.questLog.get('q_wolves')?.counts).toEqual([3]);
-    expect(meta.questsDone.has('q_greyjaw')).toBe(true);
   });
   it('mail state KEPT (no second welcome letter)', () => {
     expect(meta.mailWelcomed).toBe(true);

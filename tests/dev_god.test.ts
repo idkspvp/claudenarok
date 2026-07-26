@@ -77,29 +77,6 @@ describe('/dev god cheat', () => {
 });
 
 describe('/dev attune + /dev raid cheats', () => {
-  it('/dev attune marks every quest done, opening the raid attunement gate', () => {
-    const { sim, pid } = godSim();
-    sim.chat('/dev attune', pid);
-    const meta = sim.players.get(pid)!;
-    expect(meta.questsDone.has('q_nythraxis_bound_guardian')).toBe(true);
-  });
-
-  it('/dev attune does NOT wipe the in-progress quest log', () => {
-    const { sim, pid } = godSim();
-    const meta = sim.players.get(pid)!;
-    const hadQuests = meta.questLog.size;
-    sim.chat('/dev attune', pid);
-    // Stamps questsDone but leaves any in-progress quest tracker intact.
-    expect(meta.questLog.size).toBe(hadQuests);
-  });
-
-  it('is gated: without dev commands, /dev attune does nothing', () => {
-    const { sim, pid } = godSim(false);
-    const meta = sim.players.get(pid)!;
-    sim.chat('/dev attune', pid);
-    expect(meta.questsDone.has('q_nythraxis_bound_guardian')).toBe(false);
-  });
-
   it('/dev raid heroic zones a lone player into the heroic Nythraxis arena', () => {
     const { sim, pid } = godSim();
     sim.chat('/dev raid heroic', pid);

@@ -19,16 +19,7 @@ import {
   talentPointsAtLevel,
   talentsFor,
 } from '../content/talents';
-import {
-  ABILITIES,
-  abilitiesKnownAt,
-  CLASSES,
-  DUNGEON_LIST,
-  ITEMS,
-  QUESTS,
-  ZONES,
-  zoneAt,
-} from '../data';
+import { ABILITIES, abilitiesKnownAt, CLASSES, DUNGEON_LIST, ITEMS, ZONES, zoneAt } from '../data';
 import { formatMoney } from '../format_money';
 import { MARKET_MAX_LISTINGS } from '../market';
 import * as petCommands from '../pet/pet_commands';
@@ -202,15 +193,6 @@ export function poisReadout(self: Entity): string {
     .sort((a, b) => a.d - b.d)
     .map((p) => `${p.label} (${Math.round(p.d)}yd)`);
   return `Landmarks in ${zone.name} (${parts.length}): ${parts.join(', ')}.`;
-}
-// Readout for "/completed": the quests you have turned in, in completion
-// order (questsDone is a Set whose insertion order is preserved on save/load).
-// Reads only PlayerMeta.questsDone + the QUESTS registry for names (no new
-// fields); distinct from /quest, which lists the active log.
-export function completedReadout(meta: PlayerMeta): string {
-  const names = [...meta.questsDone].map((id) => QUESTS[id]?.name ?? id);
-  if (names.length === 0) return 'You have not completed any quests yet.';
-  return `Completed quests (${names.length}): ${names.join(', ')}.`;
 }
 // Readout for "/listings": your own active World Market listings (house stock
 // and other sellers excluded), each with item, asking price, and time left
@@ -414,26 +396,6 @@ export function cooldownsReadout(e: Entity): string {
     .sort((a, b) => a[1] - b[1])
     .map(([id, remaining]) => `${ABILITIES[id]?.name ?? id} (${Math.ceil(remaining)}s)`);
   return `Abilities on cooldown (${parts.length}): ${parts.join(', ')}.`;
-}
-// Self-only readout of the active quest log: one entry per tracked quest with
-// per-objective progress. questLog only ever holds 'active'/'ready' quests
-// (turn-in deletes the entry), so iterating it gives exactly what to show.
-export function questReadout(meta: PlayerMeta): string {
-  const lines: string[] = [];
-  for (const [qid, qp] of meta.questLog) {
-    const quest = QUESTS[qid];
-    if (!quest) continue;
-    const objs = quest.objectives
-      .map((o, i) => {
-        const required = questObjectiveRequired(quest, qp, i);
-        return `${o.label} ${Math.min(qp.counts[i] ?? 0, required)}/${required}`;
-      })
-      .join(', ');
-    const tag = qp.state === 'ready' ? ' (ready)' : '';
-    lines.push(`${quest.name}${tag} — ${objs}`);
-  }
-  if (lines.length === 0) return 'Your quest log is empty.';
-  return `Quest log (${lines.length}): ${lines.join(' | ')}.`;
 }
 // Self-only readout of equipped items, walked in a fixed slot order so the
 // line is stable and empty slots are visible (the point of a gear check).

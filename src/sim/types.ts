@@ -4686,9 +4686,6 @@ export type DeedTrigger =
   | { kind: 'level'; level: number }
   // PlayerMeta.lifetimeXp at or above (the milestone unification kind).
   | { kind: 'lifetimeXp'; amount: number }
-  // Membership in questsDone (all of, for the plural form).
-  | { kind: 'quest'; questId: string }
-  | { kind: 'quests'; questIds: string[] }
   // A lifetime counter from deedStats at or above count.
   | { kind: 'stat'; stat: DeedStatKey; count: number }
   // deedStats.dungeonClears (keys '<dungeonId>' and '<dungeonId>:heroic');
@@ -4712,9 +4709,8 @@ export type DeedTrigger =
   // 'poi:eastbrook_vale:eastbrook'; every mark is fed by an explicit site).
   | { kind: 'visit'; markId: string }
   | { kind: 'visits'; markIds: string[]; count?: number }
-  // All listed deeds earned, plus (optionally) all listed quests done. The
-  // quest arm exists for the Chronicle chapters, which mix both.
-  | { kind: 'meta'; deedIds: string[]; questIds?: string[] }
+  // All listed deeds earned. The optional quest arm went with the quest system.
+  | { kind: 'meta'; deedIds: string[] }
   // A numeric reading over persisted state at or above amount.
   | { kind: 'meter'; meter: DeedMeterId; amount: number }
   // A boolean predicate over persisted state.

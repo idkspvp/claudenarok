@@ -64,7 +64,6 @@ import type { IWorldParty } from '../src/world_api/party';
 import type { IWorldPet } from '../src/world_api/pet';
 import type { IWorldProfessions } from '../src/world_api/professions';
 import type { IWorldProgressionXp } from '../src/world_api/progression_xp';
-import type { IWorldQuests } from '../src/world_api/quests';
 import type { IWorldSocialGraph } from '../src/world_api/social_graph';
 import type { IWorldTalents } from '../src/world_api/talents';
 import type { IWorldTargeting } from '../src/world_api/targeting';
@@ -106,10 +105,7 @@ export const IWORLD_MEMBERS = [
   { name: 'known', kind: 'data' },
   { name: 'activeFrostRings', kind: 'data' },
   { name: 'activeTemporalHourglasses', kind: 'data' },
-  { name: 'questLog', kind: 'data' },
-  { name: 'questsDone', kind: 'data' },
   // --- commands + read-returning methods ---
-  { name: 'questState', kind: 'method' }, // read-returning (1/6)
   { name: 'castAbility', kind: 'method' },
   { name: 'castAbilityAt', kind: 'method' },
   { name: 'castAbilityBySlot', kind: 'method' },
@@ -132,11 +128,7 @@ export const IWORLD_MEMBERS = [
   { name: 'pickUpObject', kind: 'method' },
   { name: 'townFocus', kind: 'data' },
   { name: 'setTownFocus', kind: 'method' },
-  { name: 'acceptQuest', kind: 'method' },
-  { name: 'turnInQuest', kind: 'method' },
   { name: 'reportTelemetry', kind: 'method' },
-  { name: 'abandonQuest', kind: 'method' },
-  { name: 'acceptLinkedQuest', kind: 'method' },
   { name: 'equipItem', kind: 'method' },
   { name: 'equipItemToSlot', kind: 'method' },
   { name: 'moveInventoryItem', kind: 'method' },
@@ -461,9 +453,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // plus the release's Card Duel facet, the Professions 2.0 identity
     // surface, the mobile-station pair (placeMobileStation +
     // activeMobileStationCraft), and the commissions unbindItem command.
-    expect(IWORLD_MEMBERS.length).toBe(252);
-    expect(DATA_MEMBERS.length).toBe(69);
-    expect(METHOD_MEMBERS.length).toBe(183);
+    // Down 7 from 252/69/183: the quest facet's two data members (questLog,
+    // questsDone) and five methods (questState, acceptQuest, turnInQuest,
+    // abandonQuest, acceptLinkedQuest) went with the quest system.
+    expect(IWORLD_MEMBERS.length).toBe(245);
+    expect(DATA_MEMBERS.length).toBe(67);
+    expect(METHOD_MEMBERS.length).toBe(178);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -475,9 +470,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
   it('the full sorted member set is exactly the pinned list', () => {
     expect(IWORLD_MEMBERS.map((m) => m.name).sort()).toEqual([
       'abandonPet',
-      'abandonQuest',
-      'acceptLinkedQuest',
-      'acceptQuest',
       'accountCosmetics',
       'accountFlair',
       'activeFrostRings',
@@ -654,9 +646,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'prestige',
       'prestigeRank',
       'professionsState',
-      'questLog',
-      'questState',
-      'questsDone',
       'raidLockouts',
       'readyCheckRespond',
       'realm',
@@ -711,7 +700,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeRequest',
       'tradeSetOffer',
       'trainRecipe',
-      'turnInQuest',
       'unbindItem',
       'unequipBag',
       'unequipItem',
@@ -784,8 +772,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playerId',
       'prestigeRank',
       'professionsState',
-      'questLog',
-      'questsDone',
       'realm',
       'recipeList',
       'renown',
@@ -806,9 +792,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
   it('the sorted method-kind set is exactly the pinned list', () => {
     expect(METHOD_MEMBERS.map((m) => m.name).sort()).toEqual([
       'abandonPet',
-      'abandonQuest',
-      'acceptLinkedQuest',
-      'acceptQuest',
       'accountFlair',
       'activeLootRolls',
       'applyEnchant',
@@ -932,7 +915,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playCardInDuel',
       'playEmote',
       'prestige',
-      'questState',
       'raidLockouts',
       'readyCheckRespond',
       'releaseEmpoweredAbility',
@@ -976,7 +958,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'tradeRequest',
       'tradeSetOffer',
       'trainRecipe',
-      'turnInQuest',
       'unbindItem',
       'unequipBag',
       'unequipItem',
@@ -1142,17 +1123,6 @@ const FACET_COSMETICS = [
 type _ExhaustCosmetics = AssertNever<
   Exclude<keyof IWorldCosmetics, (typeof FACET_COSMETICS)[number]>
 >;
-
-const FACET_QUESTS = [
-  'questLog',
-  'questsDone',
-  'questState',
-  'acceptQuest',
-  'turnInQuest',
-  'abandonQuest',
-  'acceptLinkedQuest',
-] as const satisfies readonly (keyof IWorldQuests)[];
-type _ExhaustQuests = AssertNever<Exclude<keyof IWorldQuests, (typeof FACET_QUESTS)[number]>>;
 
 const FACET_PROGRESSION_XP = [
   'xp',
@@ -1440,7 +1410,6 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   loot: FACET_LOOT,
   inventory: FACET_INVENTORY,
   cosmetics: FACET_COSMETICS,
-  quests: FACET_QUESTS,
   progressionXp: FACET_PROGRESSION_XP,
   talents: FACET_TALENTS,
   pet: FACET_PET,
@@ -1463,9 +1432,10 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   actionBar: FACET_ACTION_BAR,
 };
 
-describe('W1: aggregate IWorld member set equals the disjoint union of the 28 facets', () => {
-  it('pins the facet count at 28', () => {
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(28);
+describe('W1: aggregate IWorld member set equals the disjoint union of the 27 facets', () => {
+  it('pins the facet count at 27', () => {
+    // 28 before the quest facet went.
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(27);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -1493,8 +1463,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 28 fa
 
   it('the union of the facets equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(252);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(252);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(245);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(245);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

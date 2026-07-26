@@ -135,10 +135,6 @@ export function removePreferFungible(
     if (s.count <= 0) meta.inventory.splice(i, 1);
   }
   // Same post-removal hook the inventory hub's removeItem fires. Optional-called
-  // so a decoupled test ctx that models inventory but omits the hook (its own
-  // removeItem does the same) is not forced to stub it; the live SimContext
-  // always provides it.
-  ctx.onInventoryChangedForQuests?.(meta);
   return consumed;
 }
 
@@ -782,7 +778,6 @@ export function buyBackItem(ctx: SimContext, itemId: string, pid?: number): void
   // The silent add bypasses the inventory hub, so credit the discovery
   // ledger here (an acquisition like any other; the mark is idempotent).
   ctx.markItemDiscovered(meta, itemId);
-  ctx.onInventoryChangedForQuests(meta);
   ctx.emit({ type: 'vendor', action: 'buyback', itemId, pid: meta.entityId });
   ctx.emit({
     type: 'loot',

@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { AUGMENTS } from '../src/sim/content/augments';
 import { CHOICE_ROWS } from '../src/sim/content/choice_rows';
 import { ROW_TREES, TALENTS } from '../src/sim/content/talents';
-import { ABILITIES, DUNGEONS, ITEM_SETS, ITEMS, MOBS, NPCS, QUESTS, ZONES } from '../src/sim/data';
+import { ABILITIES, DUNGEONS, ITEM_SETS, ITEMS, MOBS, NPCS, ZONES } from '../src/sim/data';
 import { en } from '../src/ui/i18n.resolved.generated/en';
 
 // The de-IP gate (session G0 of the IP pivot, ip-refactor/G0-deip-gates.md).
@@ -403,16 +403,10 @@ function collectViolations(): Violation[] {
     scanNameValue(`augments.${aug.id}.name`, aug.id, aug.name, false, out);
   }
 
-  // World: NPC names/titles, quest names + objective labels, dungeons, zones.
+  // World: NPC names/titles, dungeons, zones.
   for (const [id, npc] of Object.entries(NPCS)) {
     scanNameValue(`npcs.${id}.name`, id, npc.name, false, out);
     scanNameValue(`npcs.${id}.title`, id, npc.title, false, out);
-  }
-  for (const [id, quest] of Object.entries(QUESTS)) {
-    scanNameValue(`quests.${id}.name`, id, quest.name, false, out);
-    quest.objectives.forEach((obj, i) => {
-      scanNameValue(`quests.${id}.objectives.${i}.label`, id, obj.label, false, out);
-    });
   }
   for (const [id, dungeon] of Object.entries(DUNGEONS)) {
     scanNameValue(`dungeons.${id}.name`, id, dungeon.name, false, out);
@@ -426,14 +420,7 @@ function collectViolations(): Violation[] {
     });
   }
 
-  // The explicit C1 prose fields (quest/greeting prose ONLY - see PROSE_SCAN).
-  for (const [id, quest] of Object.entries(QUESTS)) {
-    scanProseValue(`quests.${id}.text`, id, quest.text, out);
-    scanProseValue(`quests.${id}.completionText`, id, quest.completionText, out);
-    quest.objectives.forEach((obj, i) => {
-      scanProseValue(`quests.${id}.objectives.${i}.label`, id, obj.label, out);
-    });
-  }
+  // The explicit C1 prose fields (greeting prose ONLY - see PROSE_SCAN).
   for (const [id, npc] of Object.entries(NPCS)) {
     scanProseValue(`npcs.${id}.greeting`, id, npc.greeting, out);
   }

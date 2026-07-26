@@ -20,7 +20,7 @@ import {
   moveBetweenContainers,
   sanitizeBankState,
 } from '../src/sim/bank';
-import { ITEMS, QUESTS } from '../src/sim/data';
+import { ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import type { Entity, InvSlot, ItemInstancePayload, SimEvent } from '../src/sim/types';
 
@@ -296,33 +296,6 @@ describe('deposit rules', () => {
     expect(m.bank.inventory).toEqual(bankBefore);
     expect(m.copper).toBe(copperBefore);
   });
-
-  it('un-credits an active collect objective when its counted item is deposited', () => {
-    // Every content collect item is quest-kind today (and deposit denies those), so
-    // the deposit -> onInventoryChangedForQuests wiring is defensive for future
-    // content; pin it with a synthetic collect quest over a plain fungible.
-    const sim = makeSim();
-    const m = meta(sim);
-    QUESTS.__bank_uncredit = {
-      ...QUESTS.q_widows,
-      id: '__bank_uncredit',
-      objectives: [{ type: 'collect', itemId: 'wolf_fang', count: 5, label: 'Wolf Fang' }],
-    };
-    try {
-      m.questLog.set('__bank_uncredit', {
-        questId: '__bank_uncredit',
-        counts: [0],
-        state: 'active',
-      });
-      sim.addItem('wolf_fang', 5); // the add-side recompute credits and readies it
-      expect(m.questLog.get('__bank_uncredit')).toMatchObject({ counts: [5], state: 'ready' });
-      sim.bankDeposit(m.inventory.findIndex((s) => s.itemId === 'wolf_fang'));
-      expect(sim.countItem('wolf_fang')).toBe(0);
-      expect(m.questLog.get('__bank_uncredit')).toMatchObject({ counts: [0], state: 'active' });
-    } finally {
-      delete QUESTS.__bank_uncredit;
-    }
-  });
 });
 
 // ---------------------------------------------------------------------------
@@ -376,20 +349,6 @@ describe('withdraw rules', () => {
     expect(m.bank.inventory).toEqual(bankBefore);
     expect(m.inventory).toEqual(bagBefore);
     expect(m.copper).toBe(copperBefore);
-  });
-
-  it('re-credits an active collect objective when its quest item is withdrawn', () => {
-    // A quest item can only reach the bank via a legacy/tampered save (deposit denies
-    // quest-kind); withdrawing it back into bags must re-run the quest-inventory
-    // recompute. This pins the withdraw -> onInventoryChangedForQuests wiring.
-    const sim = makeSim();
-    const m = meta(sim);
-    m.questLog.set('q_widows', { questId: 'q_widows', counts: [10, 0], state: 'active' });
-    m.bank.inventory = [{ itemId: 'widow_venom_sac', count: 6 }];
-    expect(m.questLog.get('q_widows')).toMatchObject({ counts: [10, 0], state: 'active' });
-    sim.bankWithdraw(0);
-    expect(sim.countItem('widow_venom_sac')).toBe(6);
-    expect(m.questLog.get('q_widows')).toMatchObject({ counts: [10, 6], state: 'ready' });
   });
 });
 

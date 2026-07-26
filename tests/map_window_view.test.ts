@@ -9,15 +9,7 @@
 // getComputedStyle and are covered by the no-magic-values source guard instead.
 
 import { describe, expect, it } from 'vitest';
-import {
-  CAMPS,
-  DUNGEON_LIST,
-  PROPS,
-  QUESTS,
-  WORLD_MAX_X,
-  WORLD_MIN_X,
-  ZONES,
-} from '../src/sim/data';
+import { CAMPS, DUNGEON_LIST, PROPS, WORLD_MAX_X, WORLD_MIN_X, ZONES } from '../src/sim/data';
 import { EASTBROOK_LAYOUT } from '../src/sim/eastbrook_layout';
 import {
   emptyZoneProps,
@@ -35,31 +27,12 @@ import {
   mapWindowMode,
   npcMarkerAt,
   type OverworldMapInput,
-  questAreaObjectivesAt,
 } from '../src/ui/map_window_view';
 import type { IWorld } from '../src/world_api';
 
 const ZONE = ZONES[0];
 const ZONE_CZ = (ZONE.zMin + ZONE.zMax) / 2; // a z inside the committed zone band
 const CANVAS = 560;
-// A quest giver with a real giverNpcId, so the npc-marker branch exercises real
-// content rather than an undefined === undefined accident.
-function requireQuestWithGiver() {
-  const quest = Object.values(QUESTS).find((q) => q.giverNpcId);
-  if (!quest) throw new Error('expected a quest with a giverNpcId');
-  return quest;
-}
-const GIVER_QUEST = requireQuestWithGiver();
-// A quest whose giver is also a turn-in npc, so a single npc can carry a 'ready'
-// turn-in (the '?' glyph branch the painter renders, distinct from '!').
-function requireReadyQuest() {
-  const quest = Object.values(QUESTS).find(
-    (q) => q.giverNpcId && isQuestTurnInNpc(q, q.giverNpcId),
-  );
-  if (!quest) throw new Error('expected a quest whose giver is also a turn-in npc');
-  return quest;
-}
-const READY_QUEST = requireReadyQuest();
 
 // One scenario as plain data, so we can build two structurally-distinct IWorld
 // stubs (a "Sim-shaped" one carrying extra sim-only fields the core must ignore,
@@ -82,8 +55,7 @@ function makeOverworldWorld(
     id: 2,
     kind: 'npc',
     name: 'Giver',
-    templateId: GIVER_QUEST.giverNpcId,
-    questIds: [GIVER_QUEST.id],
+    templateId: 'marshal_redbrook',
     pos: { x: 10, z: ZONE_CZ },
     ...simJunk,
   };
@@ -107,8 +79,6 @@ function makeOverworldWorld(
     delveRun: null,
     cfg: { seed: 42, playerClass: 'warrior' },
     playerId: 1,
-    questState: (q: string) => (q === GIVER_QUEST.id ? 'available' : 'unavailable'),
-    questLog,
   } as unknown as IWorld;
 }
 
@@ -121,7 +91,6 @@ function makeDelveWorld(shape: 'sim' | 'client'): IWorld {
     delveRun: { delveId: 'd', modules: ['m'], moduleIndex: 0, origin: { x: 5000, z: 0 } },
     cfg: { seed: 42, playerClass: 'warrior' },
     playerId: 1,
-    questState: () => 'unavailable',
     questLog: new Map(),
   } as unknown as IWorld;
 }
@@ -333,17 +302,6 @@ describe('buildOverworldMapModel (pure draw model)', () => {
     ]);
   });
 
-  it('emits a player arrow at -facing and one quest-giver glyph', () => {
-    const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
-    expect(model.player).not.toBeNull();
-    expect(model.player?.angle).toBe(-0.5);
-    // the npc has an available quest from its own giver -> one '!' (not ready) glyph
-    expect(model.npcs).toHaveLength(1);
-    expect(model.npcs[0].ready).toBe(false);
-    // the glyph carries its quest identity for the hover tooltip
-    expect(model.npcs[0].quests).toEqual([{ questId: GIVER_QUEST.id, ready: false }]);
-  });
-
   it('hit-tests the nearest glyph within the hover radius (and misses outside it)', () => {
     const model = buildOverworldMapModel(input(makeOverworldWorld('sim'), 1));
     const glyph = model.npcs[0];
@@ -351,23 +309,6 @@ describe('buildOverworldMapModel (pure draw model)', () => {
     expect(npcMarkerAt(model.npcs, glyph.mx + 5, glyph.my - 5)).toBe(glyph); // slack
     expect(npcMarkerAt(model.npcs, glyph.mx + 500, glyph.my)).toBeNull();
     expect(npcMarkerAt([], glyph.mx, glyph.my)).toBeNull();
-  });
-
-  it("marks the glyph ready when a turn-in is ready (the '?' branch, not '!')", () => {
-    const world = makeOverworldWorld('client') as unknown as {
-      entities: Map<number, { templateId: string; questIds: string[] }>;
-      questState: (q: string) => string;
-    };
-    // Re-point the in-zone npc (id 2) at a quest whose giver is its turn-in npc,
-    // and make that quest ready: hasReady wins, so the painter draws '?' not '!'.
-    const npc = world.entities.get(2);
-    if (!npc) throw new Error('expected the seeded in-zone npc');
-    npc.templateId = READY_QUEST.giverNpcId as string;
-    npc.questIds = [READY_QUEST.id];
-    world.questState = (q) => (q === READY_QUEST.id ? 'ready' : 'unavailable');
-    const model = buildOverworldMapModel(input(world as unknown as IWorld, 1));
-    expect(model.npcs).toHaveLength(1);
-    expect(model.npcs[0].ready).toBe(true);
   });
 
   it('projects zone POIs and the in-band dungeon portals into the model', () => {
@@ -410,86 +351,5 @@ describe('buildOverworldMapModel (pure draw model)', () => {
 
   it('exposes the zoom ceiling used by the zoom control', () => {
     expect(MAP_MAX_ZOOM).toBeGreaterThan(1);
-  });
-});
-
-describe('active-quest objective areas (the classic POI blobs)', () => {
-  // A kill quest whose target mob camps inside the committed zone band, so the
-  // quest-area branch exercises real content rather than a synthetic fixture.
-  function requireKillQuestInZone() {
-    for (const q of Object.values(QUESTS)) {
-      for (const obj of q.objectives) {
-        if (obj.type !== 'kill') continue;
-        const camp = CAMPS.find(
-          (c) => c.mobId === obj.targetMobId && c.center.z >= ZONE.zMin && c.center.z < ZONE.zMax,
-        );
-        if (camp) return { quest: q, camp };
-      }
-    }
-    throw new Error('expected a kill quest with a camp in the first zone');
-  }
-  const { quest } = requireKillQuestInZone();
-  const activeLog = (): Map<string, QuestProgress> =>
-    new Map([
-      [
-        quest.id,
-        { questId: quest.id, counts: quest.objectives.map(() => 0), state: 'active' as const },
-      ],
-    ]);
-
-  it('plots a blob over the target camp for an active kill quest (both shapes, identical)', () => {
-    const sim = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 1));
-    const client = buildOverworldMapModel(input(makeOverworldWorld('client', activeLog()), 1));
-    expect(sim.questAreas.length).toBeGreaterThan(0);
-    expect(client.questAreas).toEqual(sim.questAreas);
-    for (const a of sim.questAreas) {
-      expect(a.radius).toBeGreaterThan(0);
-      expect(Number.isFinite(a.mx)).toBe(true);
-      expect(Number.isFinite(a.my)).toBe(true);
-    }
-  });
-
-  it('plots nothing with an empty quest log or once the quest is turn-in ready', () => {
-    expect(buildOverworldMapModel(input(makeOverworldWorld('sim'), 1)).questAreas).toEqual([]);
-    const readyLog: Map<string, QuestProgress> = new Map([
-      [
-        quest.id,
-        {
-          questId: quest.id,
-          counts: quest.objectives.map((o) => o.count),
-          state: 'ready' as const,
-        },
-      ],
-    ]);
-    expect(
-      buildOverworldMapModel(input(makeOverworldWorld('sim', readyLog), 1)).questAreas,
-    ).toEqual([]);
-  });
-
-  it('scales the blob radius with the zoom level', () => {
-    const z1 = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 1));
-    const z2 = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 2));
-    expect(z2.questAreas[0].radius).toBeCloseTo(z1.questAreas[0].radius * 2, 5);
-  });
-
-  it('numbers areas by the quest log acceptance order', () => {
-    const model = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 1));
-    // single-quest log: every area carries badge number 1
-    for (const a of model.questAreas) expect(a.numbers).toEqual([1]);
-  });
-
-  it('hit-tests a hovered point to the objective identities under it (deduped)', () => {
-    const model = buildOverworldMapModel(input(makeOverworldWorld('sim', activeLog()), 1));
-    const a = model.questAreas[0];
-    // the blob carries its objective identity for the tooltip
-    expect(a.objectives.length).toBeGreaterThan(0);
-    const inside = questAreaObjectivesAt(model.questAreas, a.mx, a.my);
-    expect(inside.length).toBeGreaterThan(0);
-    expect(inside.some((r) => r.questId === quest.id)).toBe(true);
-    // far outside every blob: nothing under the cursor
-    expect(questAreaObjectivesAt(model.questAreas, -10_000, -10_000)).toEqual([]);
-    // overlapping duplicates never repeat a ref
-    const dup = questAreaObjectivesAt([...model.questAreas, ...model.questAreas], a.mx, a.my);
-    expect(dup).toEqual(inside);
   });
 });

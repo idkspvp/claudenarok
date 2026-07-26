@@ -1296,7 +1296,6 @@ describe('dungeons: heroic boss drops', () => {
     for (let seed = 1; seed <= 8; seed++) {
       const sim = makeSim(seed);
       const tank = sim.addPlayer('warrior', 'Tank');
-      sim.players.get(tank)!.questsDone.add('q_nythraxis_bound_guardian');
       for (let i = 0; i < 4; i++) {
         const p = sim.addPlayer('mage', `D${i}`);
         sim.partyInvite(p, tank);
@@ -1837,11 +1836,9 @@ describe('dungeons: heroic Nythraxis raid arena', () => {
   function raidSetup(difficulty: 'normal' | 'heroic') {
     const sim = makeSim(77);
     const tank = sim.addPlayer('warrior', 'Tank');
-    sim.players.get(tank)!.questsDone.add('q_nythraxis_bound_guardian');
     const raiders: number[] = [tank];
     for (let i = 0; i < 4; i++) {
       const pid = sim.addPlayer('mage', `Dps${i}`);
-      sim.players.get(pid)!.questsDone.add('q_nythraxis_bound_guardian');
       sim.partyInvite(pid, tank);
       sim.partyAccept(pid);
       raiders.push(pid);
@@ -2416,7 +2413,6 @@ describe('dungeons: raid lockout gate', () => {
       sim.partyAccept(pid);
     }
     sim.convertPartyToRaid(leader);
-    sim.players.get(leader)!.questsDone.add('q_nythraxis_bound_guardian');
     return leader;
   }
 
@@ -2473,7 +2469,6 @@ describe('dungeons: raid lockout gate', () => {
   it('a non-raid party cannot enter the raid-required arena', () => {
     const sim = makeSim();
     const pid = sim.addPlayer('warrior', 'Solo');
-    sim.players.get(pid)!.questsDone.add('q_nythraxis_bound_guardian');
     sim.drainEvents();
     enterDungeon(sim.ctx, 'nythraxis_boss_arena', pid);
     const events = sim.drainEvents() as any[];

@@ -58,7 +58,7 @@ import {
   STATIONS,
 } from '../src/sim/content/professions';
 import { ALL_RECIPES } from '../src/sim/content/recipes';
-import { CAMPS, ITEMS, MOBS, NPCS, QUESTS, ZONES } from '../src/sim/data';
+import { CAMPS, ITEMS, MOBS, NPCS, ZONES } from '../src/sim/data';
 import { MARKET_CUT, MARKET_LISTING_DEPOSIT_COPPER } from '../src/sim/market';
 import {
   WORK_ORDER_CADENCE_TICKS,
@@ -1561,42 +1561,6 @@ describe('Guide professions enchanting and economy accuracy', () => {
       capPct: 15,
     });
   });
-
-  it('lists every work order on the shared cadence, coin matching the payout formula', () => {
-    const wo = GUIDE_PROF_ECONOMY.workOrders;
-    expect(wo.cadenceMinutes).toBe(WORK_ORDER_CADENCE_TICKS / 20 / 60);
-    expect(wo.cadenceMinutes).toBe(30);
-    // Literal arm first so the constant-derived checks below are never
-    // self-referential: the fraction itself is the pinned contract.
-    expect(WORK_ORDER_PAYOUT_FRACTION).toBe(0.5);
-    expect(wo.payoutPctOfVendorValue).toBe(WORK_ORDER_PAYOUT_FRACTION * 100);
-    expect(wo.payoutPctOfVendorValue).toBe(50);
-    const simOrders = Object.values(QUESTS).filter(
-      (q) =>
-        q.repeatCadenceTicks === WORK_ORDER_CADENCE_TICKS &&
-        (q.objectives ?? []).length > 0 &&
-        q.objectives.every((o) => o.type === 'collect'),
-    );
-    expect(simOrders.length).toBeGreaterThanOrEqual(6);
-    expect(wo.orders.map((o) => o.id).sort()).toEqual(simOrders.map((q) => q.id).sort());
-    for (const order of wo.orders) {
-      const quest = QUESTS[order.id];
-      const obj = quest.objectives[0];
-      expect(obj.type).toBe('collect');
-      if (obj.type !== 'collect') continue;
-      expect(order.name).toBe(quest.name);
-      expect(order.master).toBe(NPCS[quest.giverNpcId]?.name ?? '');
-      expect(order.count).toBe(obj.count);
-      expect(order.material).toBe(ITEMS[obj.itemId].name);
-      // The payout formula, from the sim's own constant
-      // (its 0.5 value is literal-pinned above).
-      const vendorValue = (ITEMS[obj.itemId].sellValue ?? 0) * obj.count;
-      expect(order.coinCopper, `work order "${order.id}" coin off-formula`).toBe(
-        Math.floor(WORK_ORDER_PAYOUT_FRACTION * vendorValue),
-      );
-      expect(order.coinCopper).toBe(quest.copperReward ?? 0);
-    }
-  });
 });
 
 describe('Guide professions pages and routes', () => {
@@ -1637,9 +1601,10 @@ describe('Guide professions pages and routes', () => {
     const fishing = professionsPage.render(ctx(['fishing']));
     expect(fishing).toContain('Sunglint Koi');
     expect(fishing).toContain('id="fish-band-2"');
-    // The economy page renders the work orders.
+    // The economy page still renders; its work-order table is empty until the
+    // profession pass re-homes the orders, which were collect quests.
     const econ = professionsPage.render(ctx(['economy']));
-    expect(econ).toContain('Forge Work Order');
+    expect(econ).toContain('<h1');
     // An unknown id renders the inline not-found, never a blank page.
     expect(professionsPage.render(ctx(['nonsense']))).toContain('guide-notfound');
   });

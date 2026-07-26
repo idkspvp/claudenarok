@@ -1,6 +1,6 @@
 import { DEV_KIT_ROLES } from '../sim/content/dev_kit_roles';
 import { GATHERING_PROFESSIONS } from '../sim/content/professions';
-import { DUNGEONS, ITEMS, MOBS, QUESTS } from '../sim/data';
+import { DUNGEONS, ITEMS, MOBS } from '../sim/data';
 import { ALL_CLASSES, MAX_LEVEL } from '../sim/types';
 import type { IWorld } from '../world_api';
 import {
@@ -145,14 +145,6 @@ function actionFields(actionId: string): string {
       );
     case 'gold':
       return textField('devCommand.fields.gold', 'gold', '100', 'number');
-    case 'quest':
-      return selectField(
-        'devCommand.fields.quest',
-        'quest',
-        optionsHtml(Object.values(QUESTS), (quest) =>
-          tEntity({ kind: 'quest', id: quest.id, field: 'title' }),
-        ),
-      );
     case 'gather':
       return `${selectField(
         'devCommand.fields.profession',

@@ -549,9 +549,6 @@ const HEAVY_SELF_CMDS = new Set<string>([
   'harvestCorpse',
   'pickup',
   'interact',
-  'accept',
-  'turnin',
-  'abandon',
   'applyTalents',
   'respec',
   'setSpec',
@@ -587,10 +584,6 @@ const HEAVY_SELF_EVENTS = new Set<string>([
   'levelup',
   'virtualLevelUp',
   'deedUnlocked', // the earned map + stat block ride the heavy-gated deeds/dstats keys
-  'questAccepted',
-  'questProgress',
-  'questReady',
-  'questDone',
   'learnAbility',
   'mechChroma',
   'skinEvent',
@@ -752,7 +745,7 @@ export interface ClientSession {
   // undefined for sessions created without the lease path (direct game.join in
   // tests); a resume keeps the original session's nonce.
   leaseNonce: string | undefined;
-  // Behavioral bot-detection state. Ephemeral — reset on every join.
+  // Behavioral bot-detection state. Ephemeral, reset on every join.
   botTrackingContext: BotTrackingContext;
   // Deed unlocks awaiting a SUCCESSFUL authoritative save before they may be
   // published to the character_deeds index (and, chained off it, Steam).
@@ -794,7 +787,7 @@ interface SentEntityVersions {
   // even when one broadcast covers several catch-up sim ticks
   sentAtTick: number;
   // an entity whose state stopped changing gets one final "settle" record
-  // before riding the keep list — without it the client's extrapolation
+  // before riding the keep list, without it the client's extrapolation
   // would leave it rendered slightly past where it actually stopped
   settled: boolean;
 }
@@ -1117,7 +1110,7 @@ export function wireEntity(e: Entity, includeAuras = true): Record<string, unkno
 
 // npcs stay visible to the legacy radius (see the constants above);
 // everything else enters at INTEREST_RADIUS and known entities persist to
-// the drop radius — hysteresis against churn at the boundary
+// the drop radius, hysteresis against churn at the boundary
 function interestLimitSq(e: Entity, known: boolean): number {
   if (e.kind === 'npc') {
     return known ? NPC_DROP_RADIUS * NPC_DROP_RADIUS : NPC_INTEREST_RADIUS * NPC_INTEREST_RADIUS;
@@ -1915,7 +1908,7 @@ export class GameServer {
       }[] = [];
       for (const id of ids) {
         const other = this.sessionByCharacterId(id);
-        if (!other) continue; // offline — snapshots own the online/offline flip
+        if (!other) continue; // offline, snapshots own the online/offline flip
         const loc = this.presenceOf(other);
         if (loc.x === undefined || loc.z === undefined) continue;
         // The live Book of Deeds title (sim meta, no DB read); the `social`
@@ -2412,13 +2405,11 @@ export class GameServer {
   private applyAccountQuestLockouts(pid: number, cosmetics: AccountCosmetics): void {
     const meta = this.sim.meta(pid);
     if (!meta) return;
-    for (const questId of cosmetics.completedQuestIds) {
-      meta.questsDone.add(questId);
-      meta.questLog.delete(questId);
-    }
-    // The bare adds bypass the quest-credit mark site, and the lockout quests
-    // can satisfy quest/meta deed triggers: request a full evaluator pass.
-    if (cosmetics.completedQuestIds.length > 0) this.sim.ctx.markDeedsDirty(pid);
+    // The account-level completed-quest lockouts replayed onto the character's
+    // quest log. Nothing to replay them into now; the cosmetics field itself is
+    // kept so existing account rows still parse.
+    void meta;
+    void cosmetics;
   }
 
   private mergeAccountCosmetics(a: AccountCosmetics, b: AccountCosmetics): AccountCosmetics {
@@ -2468,7 +2459,6 @@ export class GameServer {
       live.accountCosmetics = merged;
       this.applyAccountQuestLockouts(live.pid, merged);
       this.sim.setWeaponSkinLoadout(live.pid, this.ownedWeaponSkinLoadout(merged));
-      this.resyncQuests(live);
     }
   }
 
@@ -2485,7 +2475,6 @@ export class GameServer {
       live.accountCosmetics = exact;
       this.applyAccountQuestLockouts(live.pid, exact);
       this.sim.setWeaponSkinLoadout(live.pid, this.ownedWeaponSkinLoadout(exact));
-      this.resyncQuests(live);
     }
   }
 
@@ -2859,7 +2848,7 @@ export class GameServer {
       cls,
       realm: REALM,
       // Soft (cosmetic) words the client masks locally when its profanity
-      // filter is on. Hard words are never sent — they're enforced server-side.
+      // filter is on. Hard words are never sent, they're enforced server-side.
       softWords: this.chatFilter.softWords(),
       // Epoch ms of an active chat mute, or null. Lets the client show status
       // at login; sending is still gated server-side regardless.
@@ -3097,7 +3086,7 @@ export class GameServer {
       console.error('lease release failed:', err),
     );
     this.sim.removePlayer(session.pid);
-    // Departures are no longer broadcast to the realm — the leaving player has
+    // Departures are no longer broadcast to the realm, the leaving player has
     // already disconnected, so there is no one to show their own notice to.
   }
 
@@ -3164,7 +3153,7 @@ export class GameServer {
           delete state.jail;
         }
         // Use the SERIALIZED level (not e.level): during a 2v2 Fiesta bout e.level
-        // is temporarily 20, but serializeCharacter reports the real level — so the
+        // is temporarily 20, but serializeCharacter reports the real level, so the
         // character-list/leaderboard `level` column never reflects the temp state.
         let saved: boolean;
         if (opts.withMarket) {
@@ -3684,7 +3673,7 @@ export class GameServer {
   // Force-disconnect the live session (if any) for a character the requesting
   // account owns, so a fresh login can take its place. Awaits leave() so the
   // departing session's state is saved and the sessionsByCharacterId slot is
-  // freed before the caller re-enters — otherwise the new login would race the
+  // freed before the caller re-enters, otherwise the new login would race the
   // old save (clobbering progress) or be rejected with "character already in
   // world". Idempotent: a no-op (returns 'not-online') when nobody is online.
   async takeOverCharacter(
@@ -3914,7 +3903,7 @@ export class GameServer {
     receivedAtMs: number,
   ): void {
     // JSON.parse returns null / numbers / strings / arrays for valid JSON that
-    // isn't an object — `null` in particular threw on `msg.t`. Drop anything
+    // isn't an object, `null` in particular threw on `msg.t`. Drop anything
     // that isn't a plain object before touching its fields.
     if (typeof rawMsg !== 'object' || rawMsg === null || Array.isArray(rawMsg)) {
       this.botDetector.observeProtocolAnomaly(
@@ -4137,41 +4126,6 @@ export class GameServer {
           msg,
           typeof msg.id === 'number' && sim.pickUpObject(msg.id, pid),
         );
-        break;
-      case 'accept':
-        if (typeof msg.quest === 'string') {
-          sim.acceptQuest(
-            msg.quest,
-            typeof msg.selection === 'string' ? msg.selection : undefined,
-            pid,
-          );
-          this.resyncQuests(session);
-        }
-        break;
-      case 'turnin':
-        if (typeof msg.quest === 'string') {
-          const beforeDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
-          sim.turnInQuest(msg.quest, pid);
-          const afterDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
-          if (!beforeDone && afterDone) {
-            if (msg.quest === ALDRIC_METEOR_QUEST_ID) {
-              this.noteAccountQuestComplete(session, msg.quest);
-            }
-          }
-          this.resyncQuests(session);
-        }
-        break;
-      case 'abandon':
-        if (typeof msg.quest === 'string') {
-          sim.abandonQuest(msg.quest, pid);
-          this.resyncQuests(session);
-        }
-        break;
-      case 'qlinkaccept':
-        if (typeof msg.quest === 'string' && typeof msg.from === 'number') {
-          sim.acceptLinkedQuest(msg.quest, msg.from, pid);
-          this.resyncQuests(session);
-        }
         break;
       case 'equip':
         if (typeof msg.item === 'string') {
@@ -4429,7 +4383,7 @@ export class GameServer {
         }
         // Hard-word + mute enforcement gate, applied to every channel before the
         // message is routed anywhere. Soft (cosmetic) words are NOT touched here
-        // — clients mask those locally when their profanity filter is on.
+        // clients mask those locally when their profanity filter is on.
         if (this.enforceChatPolicy(session, text)) break;
         // "!" community commands (lfg/wts/...): broadcast in-world + cross-post to
         // Discord, then stop (not normal chat).
@@ -4861,7 +4815,7 @@ export class GameServer {
         sim.prestige(pid);
         break;
 
-      // Talents & Specializations — every allocation re-validated in the Sim.
+      // Talents & Specializations, every allocation re-validated in the Sim.
       case 'applyTalents': {
         const alloc = parseTalentAllocation(msg.alloc);
         if (alloc) sim.applyTalents(alloc, pid);
@@ -5111,30 +5065,6 @@ export class GameServer {
         if (process.env.ALLOW_DEV_COMMANDS === '1' && typeof msg.item === 'string') {
           const count = typeof msg.count === 'number' ? msg.count : 1;
           sim.addItem(msg.item, Math.max(1, Math.min(20, count | 0)), pid);
-        }
-        break;
-      }
-      case 'dev_complete_quest': {
-        if (process.env.ALLOW_DEV_COMMANDS === '1' && typeof msg.quest === 'string') {
-          const beforeDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
-          sim.completeQuestForDev(msg.quest, pid);
-          const afterDone = sim.meta(pid)?.questsDone.has(msg.quest) ?? false;
-          if (!beforeDone && afterDone && msg.quest === ALDRIC_METEOR_QUEST_ID) {
-            this.noteAccountQuestComplete(session, msg.quest);
-          }
-          this.resyncQuests(session);
-        }
-        break;
-      }
-      case 'dev_complete_all_quests': {
-        if (process.env.ALLOW_DEV_COMMANDS === '1') {
-          const beforeDone = sim.meta(pid)?.questsDone.has(ALDRIC_METEOR_QUEST_ID) ?? false;
-          sim.completeCurrentQuestsForDev(pid);
-          const afterDone = sim.meta(pid)?.questsDone.has(ALDRIC_METEOR_QUEST_ID) ?? false;
-          if (!beforeDone && afterDone) {
-            this.noteAccountQuestComplete(session, ALDRIC_METEOR_QUEST_ID);
-          }
-          this.resyncQuests(session);
         }
         break;
       }
@@ -5959,8 +5889,6 @@ export class GameServer {
       maybe('buyback', meta.vendorBuyback);
       maybe('equip', meta.equipment);
       maybe('cosmetics', anchorSession.accountCosmetics);
-      maybe('qlog', [...meta.questLog.values()]);
-      maybe('qdone', [...meta.questsDone]);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so
@@ -6074,7 +6002,7 @@ export class GameServer {
   }
 
   // Raid markers the player's party can see, as { entityId: markerId }; null
-  // when the player is in no party. Pure read — the sim owns marker cleanup.
+  // when the player is in no party. Pure read, the sim owns marker cleanup.
   private markersWire(pid: number): unknown {
     const party = this.sim.partyOf(pid);
     if (!party) return null;
@@ -6693,7 +6621,7 @@ export class GameServer {
   /**
    * Enforce the hard-word + mute policy on an outgoing chat message. Returns
    * true when the message must be dropped (sender is muted, or it contained a
-   * slur). Soft/cosmetic words are deliberately untouched here — those are a
+   * slur). Soft/cosmetic words are deliberately untouched here, those are a
    * client-side display choice. Applies to every channel because it runs before
    * the message is routed.
    */
@@ -6904,14 +6832,6 @@ export class GameServer {
     for (const session of this.clients.values()) {
       this.send(session, { t: 'events', list: [{ type: 'log', text, color: '#ffd100' }] });
     }
-  }
-
-  // force the next snapshot to carry quest state even when a quest command
-  // changed nothing, so stale client UI converges back to the server's truth
-  private resyncQuests(session: ClientSession): void {
-    delete session.lastSent.qlog;
-    delete session.lastSent.qdone;
-    session.selfHeavyDirty = true; // ensure the gated heavy block re-runs next snapshot
   }
 
   private resyncDelves(session: ClientSession): void {

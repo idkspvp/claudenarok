@@ -6,10 +6,11 @@ import type { SimEvent } from '../src/sim/types';
 
 // knight_commanders_greaves is a rare, cloth-armor legs piece (any class can
 // wear cloth) with NO class restriction, so it isolates the level gate from
-// the proficiency gate. Its required level is derived from where it actually
-// drops (a level-13 quest reward), not a flat quality band.
+// the proficiency gate. Its required level used to derive from a level-13 quest
+// reward; with quests gone it falls back to the `rare` quality band, which is
+// what the gate is really being tested against.
 const HELM = 'knight_commanders_greaves';
-const REQUIRED_LEVEL = 13;
+const REQUIRED_LEVEL = 12;
 
 function freshWarrior(level: number) {
   const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true, autoEquip: false });

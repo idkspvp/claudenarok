@@ -22,8 +22,6 @@ export const ACHIEVEMENT_MAP: Record<string, string> = {
   prog_eternal: 'ACH_ETERNAL',
   prog_prestige: 'ACH_PRESTIGE',
   prog_master_gatherer: 'ACH_MASTER_GATHERER',
-  prog_crown_below: 'ACH_CROWN_BELOW',
-  prog_mere_at_rest: 'ACH_MERE_AT_REST',
   prog_tools_of_the_trade: 'ACH_TOOLS_OF_THE_TRADE',
   // Professions 2.0 marquee deeds: the
   // three titled milestones join the mirror. Partner-site registration of
@@ -40,7 +38,6 @@ export const ACHIEVEMENT_MAP: Record<string, string> = {
   dgn_gravewyrm_sanctum: 'ACH_GRAVEWYRM_SANCTUM',
   dgn_nythraxis: 'ACH_NYTHRAXIS',
   dgn_nythraxis_heroic: 'ACH_NYTHRAXIS_HEROIC',
-  dgn_nythraxis_crypt: 'ACH_NYTHRAXIS_CRYPT',
   dgn_thornpeak_rounds: 'ACH_THORNPEAK_ROUNDS',
   dgn_deepward: 'ACH_DEEPWARD',
   dgn_mark_circuit: 'ACH_MARK_CIRCUIT',
@@ -90,7 +87,6 @@ export const ACHIEVEMENT_MAP: Record<string, string> = {
   hid_fall_death: 'ACH_FALL_DEATH',
   hid_roll_hundred: 'ACH_ROLL_HUNDRED',
   hid_bountiful_coffer: 'ACH_BOUNTIFUL_COFFER',
-  hid_codfather: 'ACH_CODFATHER',
 };
 
 export const MAX_STEAM_ACHIEVEMENTS = 100;

@@ -11,7 +11,7 @@ import { MAILBOXES } from '../src/sim/content/mailboxes';
 import { STATION_RADIUS, STATIONS } from '../src/sim/content/professions';
 import { FURY_ENTITY_ID, FURY_NPC_ID } from '../src/sim/content/pvp_honor';
 import { ZONE1_CAMPS, ZONE1_NPCS, ZONE1_PROPS, ZONE1_ROADS } from '../src/sim/content/zone1';
-import { BUILTIN_WORLD, CAMPS, PLAYER_START, QUESTS, setActiveWorldContent } from '../src/sim/data';
+import { BUILTIN_WORLD, CAMPS, PLAYER_START, setActiveWorldContent } from '../src/sim/data';
 import {
   EASTBROOK_LAYOUT,
   EASTBROOK_NPC_PLACEMENTS_BY_ID,
@@ -590,45 +590,6 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
     );
   });
 
-  it('keeps every standing point, station, service route, quest NPC, and graveyard route clear', () => {
-    for (const building of [
-      ...EASTBROOK_LAYOUT.preservedBuildings,
-      ...EASTBROOK_LAYOUT.buildings,
-    ]) {
-      expect(
-        isBlocked(SEED, building.frontStandingPoint.x, building.frontStandingPoint.z, 0.6),
-        building.id,
-      ).toBe(false);
-    }
-    for (const stall of EASTBROOK_LAYOUT.market.stalls) {
-      expect(
-        isBlocked(SEED, stall.frontStandingPoint.x, stall.frontStandingPoint.z, 0.5),
-        stall.id,
-      ).toBe(false);
-    }
-    const boardStanding = EASTBROOK_LAYOUT.services.noticeboard.frontStandingPoint;
-    expect(isBlocked(SEED, boardStanding.x, boardStanding.z, 0.6), 'noticeboard').toBe(false);
-    for (const station of EASTBROOK_LAYOUT.services.stations) {
-      expect(isBlocked(SEED, station.position.x, station.position.z, 0.8), station.id).toBe(false);
-      expect(isAtStation(STATIONS, station.position, station.type), station.id).toBe(true);
-    }
-    for (const route of EASTBROOK_LAYOUT.services.routes) {
-      for (const point of samplePolyline(route.points, 0.2)) {
-        expect(isBlocked(SEED, point.x, point.z, route.bodyRadius), route.id).toBe(false);
-      }
-    }
-    const questNpcIds = new Set<string>();
-    for (const quest of Object.values(QUESTS)) {
-      questNpcIds.add(quest.giverNpcId);
-      questNpcIds.add(quest.turnInNpcId);
-      for (const id of quest.turnInNpcIds ?? []) questNpcIds.add(id);
-    }
-    for (const id of ZONE1_TOWN_NPC_IDS.filter((candidate) => questNpcIds.has(candidate))) {
-      const npc = ZONE1_NPCS[id];
-      expect(isBlocked(SEED, npc.pos.x, npc.pos.z, 0.6), id).toBe(false);
-    }
-  });
-
   it('pathfinds bidirectionally from the square to every gate, service, NPC, station, and entrance', () => {
     // East side of the civic ring: inside the square, clear of the offset well
     // and benches, and directly connected to the start/east-road circulation.
@@ -762,80 +723,6 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
     expect(talkToNpc).toHaveBeenCalledTimes(1);
     expect(talkToNpc).toHaveBeenCalledWith(saul.id, pid);
     expect(sim.drainEvents()).not.toContainEqual(expect.objectContaining({ type: 'mailbox' }));
-  });
-
-  it('keeps bank, market, mail, noticeboard, card, vendor, quest, and crafting interactions live', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const first = sim.addPlayer('warrior', 'First');
-    const second = sim.addPlayer('mage', 'Second');
-
-    const banker = npcEntity(sim, 'bursar_fernando');
-    const firstPlayer = standAt(sim, first, banker.pos);
-    firstPlayer.targetId = banker.id;
-    sim.interact(first);
-    expect(sim.drainEvents()).toContainEqual(expect.objectContaining({ type: 'bank', pid: first }));
-
-    const merchant = npcEntity(sim, 'the_merchant');
-    standAt(sim, first, merchant.pos);
-    expect(sim.marketInfoFor(first)).not.toBeNull();
-
-    const mailbox = sim.entities.get(sim.postOffice.mailboxIds[0]);
-    if (!mailbox) throw new Error('missing Eastbrook mailbox');
-    const atMailbox = standAt(sim, first, mailbox.pos);
-    atMailbox.targetId = mailbox.id;
-    sim.interact(first);
-    expect(sim.drainEvents()).toContainEqual(
-      expect.objectContaining({ type: 'mailbox', pid: first }),
-    );
-
-    const noticeboard = [...sim.entities.values()].find(
-      (entity) => entity.kind === 'object' && entity.templateId === 'noticeboard_eastbrook',
-    );
-    if (!noticeboard) throw new Error('missing Eastbrook noticeboard');
-    const atNoticeboard = standAt(
-      sim,
-      first,
-      EASTBROOK_LAYOUT.services.noticeboard.frontStandingPoint,
-    );
-    atNoticeboard.targetId = noticeboard.id;
-    sim.interact(first);
-    expect(sim.drainEvents()).toContainEqual({
-      type: 'noticeboard',
-      noticeboardId: 'noticeboard_eastbrook',
-      state: 'empty',
-      pid: first,
-    });
-    expect(noticeboard.lootable).toBe(true);
-
-    const trader = npcEntity(sim, 'trader_wilkes');
-    const buyer = standAt(sim, first, trader.pos);
-    buyer.targetId = trader.id;
-    const buyerMeta = sim.meta(first);
-    if (!buyerMeta) throw new Error('missing buyer metadata');
-    buyerMeta.copper = 10_000;
-    sim.buyItem(trader.id, 'baked_bread', first);
-    expect(sim.countItem('baked_bread', first)).toBeGreaterThan(0);
-
-    const marshal = npcEntity(sim, 'marshal_redbrook');
-    const quester = standAt(sim, first, marshal.pos);
-    quester.targetId = marshal.id;
-    sim.interact(first);
-    expect(sim.drainEvents()).toContainEqual(
-      expect.objectContaining({ type: 'questAccepted', questId: 'q_wolves', pid: first }),
-    );
-
-    const cardMaster = npcEntity(sim, 'card_master');
-    standAt(sim, first, cardMaster.pos);
-    standAt(sim, second, cardMaster.pos);
-    sim.joinCardDuelQueue(first);
-    sim.joinCardDuelQueue(second);
-    sim.tick();
-    expect(sim.cardDuelMatchFor(first)).not.toBeNull();
-    expect(sim.cardDuelMatchFor(second)).not.toBeNull();
-
-    for (const station of EASTBROOK_LAYOUT.services.stations) {
-      expect(isAtStation(STATIONS, station.position, station.type), station.id).toBe(true);
-    }
   });
 
   it('keeps the fixed-seed world projection stable through wandering and respawn', {

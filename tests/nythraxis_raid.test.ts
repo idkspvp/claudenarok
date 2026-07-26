@@ -51,9 +51,7 @@ function rebucket(sim: Sim, e: Entity) {
   (sim as unknown as { rebucket(e: Entity): void }).rebucket(e);
 }
 
-function attune(sim: Sim, pid: number) {
-  sim.players.get(pid)!.questsDone.add('q_nythraxis_bound_guardian');
-}
+function attune(sim: Sim, pid: number) {}
 
 function formRaid(sim: Sim, leaderPid: number) {
   while ((sim.partyOf(leaderPid)?.members.length ?? 1) < 5) {
@@ -402,31 +400,6 @@ describe('Nythraxis raid encounter', () => {
     expect(boss.facing).toBe(Math.PI);
     expect(boss.aiState).toBe('idle');
     expect(boss.inCombat).toBe(false);
-  });
-
-  it('keeps the three Abandoned Crypt attunement relics and summons their undead', () => {
-    const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Attuning');
-    sim.players.get(pid)!.questLog.set('q_nythraxis_sealed_crypt', {
-      questId: 'q_nythraxis_sealed_crypt',
-      counts: [0, 0, 0],
-      state: 'active',
-    });
-    sim.enterDungeon('nythraxis_crypt', pid);
-    const p = sim.entities.get(pid)!;
-    const origin = instanceOrigin(DUNGEONS.nythraxis_crypt.index, sim.instanceSlotAt(p.pos)!);
-    const relics = [
-      ['captains_crest', 'fallen_captain_aldren'],
-      ['priests_sigil', 'corrupted_priest_malric'],
-      ['royal_seal', 'deathstalker_voss'],
-    ] as const;
-    for (const [itemId, summonId] of relics) {
-      const relic = objects(sim, itemId, origin)[0];
-      expect(relic, itemId).toBeTruthy();
-      teleport(sim, pid, relic.pos.x, relic.pos.z);
-      expect(sim.pickUpObject(relic.id, pid)).toBe(true);
-      expect(mob(sim, summonId), summonId).toBeTruthy();
-    }
   });
 
   it('Nythraxis keeps autoattacking while normal mechanics are active', () => {

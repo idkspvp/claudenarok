@@ -75,15 +75,8 @@ const CALLBACK_KEYS = [
   'removeFromParty',
   'dropPartyMarkers',
   'formDungeonFinderGroup',
-  // Quest-credit callbacks + the countItem the collect arm consumes.
-  'onMobKilledForQuests',
-  'onRecipeCraftedForQuests',
-  'onNodeGatheredForQuests',
-  'onInventoryChangedForQuests',
-  'checkQuestReady',
+  // The countItem the collect arm used to consume.
   'countItem',
-  'completeQuestForDev',
-  'completeCurrentQuestsForDev',
   // E1 entity-roster surface.
   'addEntity',
   'dropEntity',
@@ -217,7 +210,6 @@ const CALLBACK_KEYS = [
   'isSwimming',
   // W3 interaction: the two still-on-Sim quest-NPC delegates the moved interact dispatches to.
   'talkToNpc',
-  'isQuestInteractionEntity',
   // W5 chat router/readouts reach-backs.
   'targetEntity',
   'partyCapacity',
@@ -372,17 +364,10 @@ function makeFakeHost() {
     removeFromParty: vi.fn(),
     dropPartyMarkers: vi.fn(),
     formDungeonFinderGroup: vi.fn(() => null),
-    onMobKilledForQuests: vi.fn(),
-    onRecipeCraftedForQuests: vi.fn(),
-    onNodeGatheredForQuests: vi.fn(),
-    onInventoryChangedForQuests: vi.fn(),
-    checkQuestReady: vi.fn(),
     countItem: vi.fn(() => 0),
     countFungibleItem: vi.fn(() => 0),
     countEnchantableItem: vi.fn(() => 0),
     removeEnchantableItem: vi.fn(),
-    completeQuestForDev: vi.fn(() => false),
-    completeCurrentQuestsForDev: vi.fn(() => 0),
     lockoutNowMs: vi.fn(() => 0),
     raidResetMs: vi.fn((nowMs: number) => nowMs),
     instanceKeyFor: vi.fn(() => 'solo:0'),
@@ -514,7 +499,6 @@ function makeFakeHost() {
     isSwimming: vi.fn(() => false),
     // W3 interaction: the two still-on-Sim quest-NPC delegates the moved interact dispatches to.
     talkToNpc: vi.fn(),
-    isQuestInteractionEntity: vi.fn(() => false),
     // W5 chat router/readouts reach-backs.
     targetEntity: vi.fn(),
     partyCapacity: vi.fn(() => 5),

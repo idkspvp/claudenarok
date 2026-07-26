@@ -25,7 +25,7 @@
 
 import { HEROIC_BOSS_LOOT } from '../content/heroic_loot';
 import { heroicVariantId } from '../content/heroic_variants';
-import { ITEMS, MOBS, QUESTS } from '../data';
+import { ITEMS, MOBS } from '../data';
 import { formatMoney } from '../format_money';
 import { itemLevel } from '../item_level';
 import { effectiveMasterLooter, meetsMasterThreshold } from '../loot_master';
@@ -170,19 +170,13 @@ export function pickRollGroupWinner(
   return null;
 }
 
-function needsQuestDrop(ctx: SimContext, entry: LootEntry, meta: PlayerMeta): boolean {
-  if (!entry.questId || !entry.itemId) return false;
-  const qp = meta.questLog.get(entry.questId);
-  if (qp?.state !== 'active') return false;
-  const quest = QUESTS[entry.questId];
-  const objIdx = quest.objectives.findIndex(
-    (o) => o.type === 'collect' && o.itemId === entry.itemId,
-  );
-  // A quest-gated drop is only "needed" while the player has an actual collect
-  // objective for this item that is still short of its required count. If the
-  // quest has no matching collect objective, the player never needs the item,
-  // so it must not drop (fail closed rather than dropping unconditionally).
-  return objIdx >= 0 && ctx.countItem(entry.itemId, meta.entityId) < quest.objectives[objIdx].count;
+// A loot entry carrying a `questId` existed to feed a collect objective. With no
+// quests there is no objective to feed and no reason for the item to drop, so the
+// gate now fails closed for everyone. The entries stay in the mob tables as inert
+// data rather than being stripped from 346 records; the content pass decides
+// whether each item earns a place of its own.
+function needsQuestDrop(_ctx: SimContext, entry: LootEntry, _meta: PlayerMeta): boolean {
+  return !entry.questId && false;
 }
 
 export function rollLoot(

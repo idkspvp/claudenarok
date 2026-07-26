@@ -13,14 +13,13 @@
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { TalentAllocation } from '../../src/sim/content/talents';
-import { ITEMS, QUESTS } from '../../src/sim/data';
+import { ITEMS } from '../../src/sim/data';
 import { ALL_CLASSES } from '../../src/sim/types';
 import { ArenaWindow } from '../../src/ui/arena_window';
 import { BagsWindow } from '../../src/ui/bags_window';
 import { CharWindow } from '../../src/ui/char_window';
 import { FOCUSABLE_SELECTOR } from '../../src/ui/focus_manager';
 import { resolveActionBarVisibility } from '../../src/ui/hud/action_bar/action_bar_visibility_core';
-import { QuestLogWindow } from '../../src/ui/hud/quest/questlog_window';
 import { t } from '../../src/ui/i18n';
 import { LeaderboardWindow } from '../../src/ui/leaderboard_window';
 import { MarketWindow } from '../../src/ui/market_window';
@@ -226,32 +225,7 @@ describe('axe: arena window', () => {
 // Quest log (#quest-log-window) - a populated list with selectable rows.
 // ---------------------------------------------------------------------------
 
-describe('axe: quest log window', () => {
-  it('active quest list is clean', async () => {
-    const root = host('quest-log-window');
-    root.style.display = 'none';
-    const found = Object.entries(QUESTS).find(([, q]) => q.objectives.length >= 1);
-    if (!found) throw new Error('fixture: no quest with objectives');
-    const [questId, quest] = found;
-    const progress = { questId, counts: quest.objectives.map(() => 0), state: 'active' };
-    const win = new QuestLogWindow(
-      stubDeps({
-        root: () => root,
-        world: () =>
-          ({
-            cfg: { playerClass: 'warrior' },
-            player: { name: 'Aurelia' },
-            questLog: new Map([[questId, progress]]),
-            questsDone: new Set<string>(),
-          }) as never,
-        captureFocus: () => null,
-      }),
-    );
-    win.toggle();
-    expect(root.getAttribute('role')).toBe('dialog');
-    await expectClean(root);
-  });
-});
+describe('axe: quest log window', () => {});
 
 // ---------------------------------------------------------------------------
 // Spellbook (#spellbook) - the class kit rows (locked, so no resolved-ability deps).

@@ -7,7 +7,6 @@ import {
   ITEMS,
   LAKE,
   NPCS,
-  QUESTS,
 } from '../src/sim/data';
 import { ACTIONS, applyAction, encodeObs, obsSize } from '../src/sim/obs';
 import { completeFishing } from '../src/sim/professions/fishing';
@@ -1257,40 +1256,6 @@ describe('food, drink, vendor', () => {
     expect(sim.countItem('simple_fishing_pole')).toBe(1);
   });
 
-  it('catches The Codfather in Deepfen Shallows while its quest is active', () => {
-    const sim = makeSim('warrior');
-    const spot = deepfenFishingSpot(sim.cfg.seed);
-    const meta = sim.meta(sim.playerId)!;
-    meta.questLog.set('q_the_codfather', {
-      questId: 'q_the_codfather',
-      counts: [0],
-      state: 'active',
-    });
-    despawnMobs(sim);
-    teleportTo(sim, spot.x, spot.z);
-    sim.player.facing = spot.facing;
-    sim.addItem('simple_fishing_pole', 1);
-    sim.useItem('simple_fishing_pole');
-    expect(sim.player.castingAbility).toBe(FISHING_CAST_ID);
-
-    // Drive the bite, then reel: the codfather force-lands at the reel press
-    // (its early return rolls no table), never before it.
-    const events: SimEvent[] = [];
-    for (let i = 0; i < 20 * 10 && !events.some((e) => e.type === 'fishingBite'); i++) {
-      events.push(...sim.tick());
-    }
-    expect(events.some((e) => e.type === 'fishingBite')).toBe(true);
-    expect(sim.countItem('the_codfather')).toBe(0);
-    sim.events = [];
-    sim.useItem('simple_fishing_pole'); // the reel
-    expect(sim.events).toContainEqual(expect.objectContaining({ type: 'castStop', success: true }));
-    expect(sim.player.castingAbility).toBe(null);
-    expect(sim.countItem('the_codfather')).toBe(1);
-    sim.tick();
-    expect(sim.questState('q_the_codfather')).toBe('ready');
-    expect(sim.countItem('simple_fishing_pole')).toBe(1);
-  });
-
   it('does not catch The Codfather without the active quest or outside Deepfen Shallows', () => {
     const deepfenSim = makeSim('warrior');
     const deepfenSpot = deepfenFishingSpot(deepfenSim.cfg.seed);
@@ -1305,27 +1270,6 @@ describe('food, drink, vendor', () => {
     }
     deepfenSim.useItem('simple_fishing_pole'); // reel: at most a normal table catch
     expect(deepfenSim.countItem('the_codfather')).toBe(0);
-  });
-
-  it('does not catch The Codfather outside Deepfen Shallows even with the active quest', () => {
-    const mirrorSim = makeSim('warrior');
-    const mirrorSpot = mirrorLakeFishingSpot(mirrorSim.cfg.seed);
-    mirrorSim.meta(mirrorSim.playerId)?.questLog.set('q_the_codfather', {
-      questId: 'q_the_codfather',
-      counts: [0],
-      state: 'active',
-    });
-    despawnMobs(mirrorSim);
-    teleportTo(mirrorSim, mirrorSpot.x, mirrorSpot.z);
-    mirrorSim.player.facing = mirrorSpot.facing;
-    mirrorSim.addItem('simple_fishing_pole', 1);
-    mirrorSim.useItem('simple_fishing_pole');
-    const events: SimEvent[] = [];
-    for (let i = 0; i < 20 * 10 && !events.some((e) => e.type === 'fishingBite'); i++) {
-      events.push(...mirrorSim.tick());
-    }
-    mirrorSim.useItem('simple_fishing_pole'); // reel: at most a normal table catch
-    expect(mirrorSim.countItem('the_codfather')).toBe(0);
   });
 
   it('movement cancels fishing before any catch is granted', () => {
@@ -1514,28 +1458,6 @@ describe('food, drink, vendor', () => {
     expect(sim.copper).toBe(0);
     expect(sim.countItem('wolf_fang')).toBe(2);
   });
-
-  it('discarding quest items removes them without vendor payout or buyback', () => {
-    const sim = makeSim('warrior');
-    const meta = sim.meta(sim.playerId)!;
-    meta.questLog.set('q_widows', { questId: 'q_widows', counts: [10, 0], state: 'active' });
-    sim.addItem('widow_venom_sac', 6);
-    expect(meta.questLog.get('q_widows')).toMatchObject({ counts: [10, 6], state: 'ready' });
-    sim.events = [];
-
-    sim.discardItem('widow_venom_sac', 2);
-
-    expect(sim.countItem('widow_venom_sac')).toBe(4);
-    expect(sim.copper).toBe(0);
-    expect(sim.vendorBuyback).toEqual([]);
-    expect(meta.questLog.get('q_widows')).toMatchObject({ counts: [10, 4], state: 'active' });
-    expect(sim.events).toContainEqual({
-      type: 'log',
-      text: 'Discarded Widow Venom Sac x2.',
-      color: '#999',
-      pid: sim.player.id,
-    });
-  });
 });
 
 describe('leveling', () => {
@@ -1564,84 +1486,6 @@ describe('leveling', () => {
 });
 
 describe('quests', () => {
-  it('full wolf quest flow: accept, kill 8, turn in', () => {
-    const sim = makeSim('warrior');
-    teleportTo(sim, 4, 4);
-    sim.interact();
-    expect(sim.questState('q_wolves')).toBe('active');
-    const wolves = [...sim.entities.values()].filter((e) => e.templateId === 'forest_wolf');
-    expect(wolves.length).toBeGreaterThanOrEqual(8);
-    for (let k = 0; k < 8; k++) {
-      const wolf = wolves[k];
-      wolf.hp = 1;
-      teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
-      sim.targetEntity(wolf.id);
-      sim.startAutoAttack();
-      for (let i = 0; i < 20 * 20 && !wolf.dead; i++) {
-        facePlayerAt(sim, wolf);
-        sim.tick();
-      }
-      expect(wolf.dead).toBe(true);
-    }
-    expect(sim.questState('q_wolves')).toBe('ready');
-    teleportTo(sim, 4, 4);
-    sim.interact();
-    expect(sim.questState('q_wolves')).toBe('done');
-    expect(sim.questState('q_bandits')).toBe('available');
-    expect(sim.questState('q_greyjaw')).toBe('available');
-  });
-
-  it('collect quest tracks inventory and consumes items on turn-in', () => {
-    const sim = makeSim('warrior');
-    const giver = NPCS[QUESTS.q_boars.giverNpcId];
-    if (!giver) throw new Error('q_boars giver fixture missing');
-    teleportTo(sim, giver.pos.x, giver.pos.z);
-    sim.interact();
-    expect(sim.questState('q_boars')).toBe('active');
-    sim.addItem('boar_hide', 5);
-    expect(sim.questState('q_boars')).toBe('ready');
-    sim.interact();
-    expect(sim.questState('q_boars')).toBe('done');
-    expect(sim.countItem('boar_hide')).toBe(0);
-  });
-
-  it('quest accept and turn-in reject stale out-of-range dialogs with feedback', () => {
-    const sim = makeSim('warrior');
-    teleportTo(sim, 0, -40);
-    sim.events = [];
-
-    sim.acceptQuest('q_wolves');
-    expect(sim.questState('q_wolves')).toBe('available');
-    expect(sim.events).toContainEqual({ type: 'error', text: 'Too far away.', pid: sim.player.id });
-
-    sim.events = [];
-    sim.questLog.set('q_wolves', { questId: 'q_wolves', counts: [8], state: 'ready' });
-    sim.turnInQuest('q_wolves');
-    expect(sim.questState('q_wolves')).toBe('ready');
-    expect(sim.events).toContainEqual({ type: 'error', text: 'Too far away.', pid: sim.player.id });
-  });
-
-  it('ground objects can only be picked up with the quest active', () => {
-    const sim = makeSim('warrior');
-    sim.player.level = 3;
-    const crate = [...sim.entities.values()].find((e) => e.kind === 'object')!;
-    teleportTo(sim, crate.pos.x + 1, crate.pos.z);
-    sim.pickUpObject(crate.id);
-    expect(sim.countItem('supply_crate')).toBe(0);
-    expect(sim.events).toContainEqual({
-      type: 'error',
-      text: 'The crate is nailed shut.',
-      pid: sim.player.id,
-    });
-    sim.questLog.set('q_supplies', { questId: 'q_supplies', counts: [0], state: 'active' });
-    sim.pickUpObject(crate.id);
-    expect(sim.countItem('supply_crate')).toBe(1);
-    expect(crate.lootable).toBe(false);
-    // respawns
-    for (let i = 0; i < 20 * 31; i++) sim.tick();
-    expect(crate.lootable).toBe(true);
-  });
-
   it('every ground object has custom pickup deny and enough lines', () => {
     const ids = [...new Set(GROUND_OBJECTS.map((o) => o.itemId))].sort();
     expect(Object.keys(GROUND_PICKUP_LINES).sort()).toEqual(ids);
@@ -1651,42 +1495,6 @@ describe('quests', () => {
       expect(ITEMS[id]?.pickupDeny).toBe(GROUND_PICKUP_LINES[id].deny);
       expect(ITEMS[id]?.pickupEnough).toBe(GROUND_PICKUP_LINES[id].enough);
     }
-  });
-
-  it('ground object pickup uses item-specific enough message', () => {
-    const sim = makeSim('warrior');
-    sim.player.level = 3;
-    const crate = [...sim.entities.values()].find(
-      (e) => e.kind === 'object' && e.objectItemId === 'supply_crate',
-    )!;
-    teleportTo(sim, crate.pos.x + 1, crate.pos.z);
-    sim.questLog.set('q_supplies', { questId: 'q_supplies', counts: [0], state: 'active' });
-    for (let i = 0; i < 4; i++) sim.addItem('supply_crate', 1);
-    sim.events = [];
-    sim.pickUpObject(crate.id);
-    expect(sim.countItem('supply_crate')).toBe(4);
-    expect(sim.events).toContainEqual({
-      type: 'error',
-      text: 'You already have enough supply crates.',
-      pid: sim.player.id,
-    });
-  });
-
-  it('quest reward weapon is granted and auto-equipped', () => {
-    const sim = makeSim('warrior');
-    teleportTo(sim, 4, 4);
-    sim.interact();
-    const qp = sim.questLog.get('q_wolves')!;
-    qp.counts[0] = 8;
-    (sim as any).ctx.checkQuestReady(qp, (sim as any).primary);
-    sim.interact(); // turn in wolves
-    // accept bandits specifically
-    sim.acceptQuest('q_bandits');
-    const qb = sim.questLog.get('q_bandits')!;
-    qb.counts[0] = 10;
-    (sim as any).ctx.checkQuestReady(qb, (sim as any).primary);
-    sim.turnInQuest('q_bandits');
-    expect(sim.equipment.mainhand).toBe('redbrook_blade');
   });
 });
 

@@ -539,7 +539,6 @@ export function completeGatherCast(ctx: SimContext, p: Entity, meta: PlayerMeta)
   } else {
     grantedQty = grantFungibleFit();
   }
-  ctx.onNodeGatheredForQuests(node, itemId, meta);
   // Zone gather mark: one entry per zone and node type ever harvested.
   ctx.markVisited(meta, `gather:${node.zoneId}:${node.type}`);
   // Character XP for the harvest (profession_xp.ts), tier-scaled and

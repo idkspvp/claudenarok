@@ -456,11 +456,6 @@ export interface SimContextCallbacks {
   // mutates nothing) when a source roster no longer matches live party state.
   // Consumed by social/dungeon_finder.ts.
   formDungeonFinderGroup(units: FinderFormationUnit[], opts: { raid: boolean }): Party | null;
-  onMobKilledForQuests(mob: Entity, meta: PlayerMeta): void;
-  onRecipeCraftedForQuests(recipeId: string, meta: PlayerMeta): void;
-  onNodeGatheredForQuests(node: GatherNodeDef, itemId: string, meta: PlayerMeta): void;
-  onInventoryChangedForQuests(meta: PlayerMeta): void;
-  checkQuestReady(qp: QuestProgress, meta: PlayerMeta): void;
   countItem(itemId: string, pid?: number): number;
   // Fungible-only count (excludes per-instance slots, #1165); market.ts uses this
   // instead of countItem so an instanced copy is never listed as a plain stack member.
@@ -478,8 +473,6 @@ export interface SimContextCallbacks {
   // and masterwork bonus into the freshly-enchanted instance instead of
   // dropping them.
   removeEnchantableItem(itemId: string, count: number, pid?: number): ItemInstancePayload[];
-  completeQuestForDev(questId: string, pid?: number): boolean;
-  completeCurrentQuestsForDev(pid?: number): number;
 
   // T1 player target selection consumes isHostileTo/isFriendlyTo/pvpController/stopFollow;
   // all already on the seam (C4a added the first two + stopFollow, C1 added pvpController)
@@ -786,13 +779,10 @@ export interface SimContextCallbacks {
   openSkinSelect(meta: PlayerMeta, catalog: SkinCatalog, itemId: string): void;
   isSwimming(e: Entity): boolean;
 
-  // W3 interaction (src/sim/interaction.ts): the moved `interact` dispatcher fans into
-  // the quest-NPC surface that STAYS on Sim (W4 owns talkToNpc / interactNpcForQuests /
-  // isQuestInteractionEntity). These two callbacks are thin late-bound delegates to the
-  // still-on-Sim methods; W4 later re-points them into the quests module WITHOUT renaming
-  // (append-only). talkToNpc MUST stay a resolvable Sim delegate (external test call sites).
+  // W3 interaction (src/sim/interaction.ts): the moved `interact` dispatcher fans out
+  // to talkToNpc, which stays on Sim. It MUST stay a resolvable Sim delegate (external
+  // test call sites). The quest-NPC arm that sat beside it went with the quest system.
   talkToNpc(npcId: number, pid?: number): void;
-  isQuestInteractionEntity(e: Entity): boolean;
 
   // W5 chat router/readouts (src/sim/social/chat.ts + chat_readouts.ts): the three
   // reach-backs the moved code CONSUMES that stay on Sim / a sibling machine.
@@ -1149,15 +1139,8 @@ export function createSimContext(host: SimContextHost): SimContext {
     removeFromParty: host.removeFromParty,
     dropPartyMarkers: host.dropPartyMarkers,
     formDungeonFinderGroup: host.formDungeonFinderGroup,
-    onMobKilledForQuests: host.onMobKilledForQuests,
-    onRecipeCraftedForQuests: host.onRecipeCraftedForQuests,
-    onNodeGatheredForQuests: host.onNodeGatheredForQuests,
-    onInventoryChangedForQuests: host.onInventoryChangedForQuests,
-    checkQuestReady: host.checkQuestReady,
     countItem: host.countItem,
     countFungibleItem: host.countFungibleItem,
-    completeQuestForDev: host.completeQuestForDev,
-    completeCurrentQuestsForDev: host.completeCurrentQuestsForDev,
     addEntity: host.addEntity,
     dropEntity: host.dropEntity,
     rebucket: host.rebucket,
@@ -1277,7 +1260,6 @@ export function createSimContext(host: SimContextHost): SimContext {
     isSwimming: host.isSwimming,
     // W3 interaction: the two still-on-Sim quest-NPC delegates the moved interact dispatches to.
     talkToNpc: host.talkToNpc,
-    isQuestInteractionEntity: host.isQuestInteractionEntity,
     // W5 chat router/readouts reach-backs (targetEntity/partyCapacity/marketListingBelongsTo).
     targetEntity: host.targetEntity,
     partyCapacity: host.partyCapacity,

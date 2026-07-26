@@ -9,7 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { DEEDS } from '../src/sim/content/deeds';
 import { ENCHANTS } from '../src/sim/content/enchants';
 import { TOOL_EFFECTS } from '../src/sim/content/professions';
-import { ZONE3_NPCS, ZONE3_QUESTS } from '../src/sim/content/zone3';
+import { ZONE3_NPCS } from '../src/sim/content/zone3';
 import { ITEMS } from '../src/sim/data';
 
 describe('originality-sweep display literals stay renamed', () => {
@@ -18,8 +18,9 @@ describe('originality-sweep display literals stay renamed', () => {
     expect(ENCHANTS.enchant_chest_runeweave.name).toBe('Enchant Chest - Runed Weave');
   });
 
-  it('pins the renamed quest, deed, and tool-effect names', () => {
-    expect(ZONE3_QUESTS.q_stalker_pelts.name).toBe('First Frost at Highwatch');
+  it('pins the renamed deed and tool-effect names', () => {
+    // The quest name that led this list ("First Frost at Highwatch") went with the
+    // quest system; the rename it recorded lives on in ip-refactor/NAME-MAP.md.
     expect(DEEDS.exp_first_ore.name).toBe('Pick Meets Stone');
     expect(TOOL_EFFECTS.quickening_charm.name).toBe('Springback Charm');
   });

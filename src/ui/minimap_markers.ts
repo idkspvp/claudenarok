@@ -31,7 +31,7 @@
 // to a color, never the resolved color.
 
 import type { GatheringProfessionId } from '../sim/content/professions';
-import { GATHER_NODES, isDelvePos, isYumiMazePos, QUESTS, zoneAt } from '../sim/data';
+import { GATHER_NODES, isDelvePos, isYumiMazePos, zoneAt } from '../sim/data';
 import { NODE_HARVEST_TABLE } from '../sim/professions/gathering';
 import { canGatherTier } from '../sim/professions/tools';
 import { isQuestTurnInNpc } from '../sim/types';
@@ -168,13 +168,7 @@ export function createMinimapMarkers(): MinimapMarkers {
             markers.push({ kind: 'ally', mx, my, ally: isFriend ? 'friend' : 'guild' });
           }
         } else if (e.kind === 'npc') {
-          const hasAvail = e.questIds.some(
-            (q) => QUESTS[q].giverNpcId === e.templateId && world.questState(q) === 'available',
-          );
-          const hasReady = e.questIds.some(
-            (q) => isQuestTurnInNpc(QUESTS[q], e.templateId) && world.questState(q) === 'ready',
-          );
-          markers.push({ kind: 'npc', mx, my, glyph: hasReady ? '?' : hasAvail ? '!' : '•' });
+          markers.push({ kind: 'npc', mx, my, glyph: '•' });
         } else if (
           e.kind === 'object' &&
           (e.templateId === 'dungeon_door' || e.templateId === 'dungeon_exit')

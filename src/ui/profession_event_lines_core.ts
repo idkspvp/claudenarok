@@ -18,21 +18,11 @@
 // tests/profession_event_lines_core.test.ts drives it directly. Registered in
 // the UI_PURE_CORES allowlist (tests/architecture.test.ts).
 
-import { QUESTS } from '../sim/data';
-
-// pairId (ARCHETYPE_PAIR_TARGETS) -> the NPC template id of the master whose
-// attunement acceptance quest names that pair. Built once from the attunePair
-// 'new' quests in content, so exactly the four wave-one pairs are present.
-const ATTUNEMENT_MASTER_BY_PAIR: Record<string, string> = (() => {
-  const map: Record<string, string> = {};
-  for (const quest of Object.values(QUESTS)) {
-    const effect = quest.completionEffect;
-    if (effect?.type === 'attunePair' && effect.mode === 'new' && effect.pairId) {
-      map[effect.pairId] = quest.giverNpcId;
-    }
-  }
-  return map;
-})();
+// pairId (ARCHETYPE_PAIR_TARGETS) -> the NPC template id of the master who seats
+// that pair. It used to be derived from the attunement acceptance QUESTS; with
+// quests gone there is nothing left to derive it from, so every pair reads as
+// unseated until the profession pass gives the masters another anchor.
+const ATTUNEMENT_MASTER_BY_PAIR: Record<string, string> = {};
 
 /** The NPC template id of the anchor master whose attunement quest offers
  *  `pairId`, or null when this pair has no seated master yet (the six ring

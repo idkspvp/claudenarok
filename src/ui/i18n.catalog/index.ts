@@ -1375,11 +1375,6 @@ export const en = {
       water_elemental: { name: 'Water Elemental' },
     },
     npcs: { ...worldNames.en.entities.npcs, ...mergeExtra.en.npcs },
-    quests: {
-      ...worldNames.en.entities.quests,
-      ...mergeEntities.en.quests,
-      ...mergeExtra.en.quests,
-    },
     dungeons: { ...worldNames.en.entities.dungeons, ...mergeExtra.en.dungeons },
     delves: { ...worldNames.en.entities.delves },
     letters: { ...worldNames.en.entities.letters },

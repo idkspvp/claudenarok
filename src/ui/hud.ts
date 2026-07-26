@@ -49,7 +49,6 @@ import {
   ITEMS,
   MOBS,
   NPCS,
-  QUESTS,
   WORLD_MAX_X,
   WORLD_MAX_Z,
   WORLD_MIN_X,
@@ -66,7 +65,6 @@ import type { Ante, PickAction } from '../sim/lockpick';
 import { FOCUS_POINT_BUDGET, isInTownZone } from '../sim/professions/focus';
 import { inRangeStationTypes, stationTypesSignature } from '../sim/professions/stations';
 import { TIER_SKILL_STEP, tierForSkill } from '../sim/professions/wheel';
-import { type QuestObjectiveRef, questObjectivesForMob } from '../sim/quest_targets';
 import type { ResolvedAbility } from '../sim/sim';
 import type {
   AbilityDef,
@@ -314,6 +312,7 @@ import {
   chatRoleTagEl,
   chatStreamerBadgeEl,
 } from './hud/chat/chat_line';
+import { parseChatSegments } from './hud/chat/chat_link';
 import { type ChatClock, clampChatClock, formatChatTimestamp } from './hud/chat/chat_timestamp';
 import { ChatWindowController } from './hud/chat/chat_window_controller';
 import { SkinEventController } from './hud/cosmetics/skin_event_controller';
@@ -328,11 +327,6 @@ import { lootSettingsView } from './hud/loot/loot_settings_view';
 import { renderLootSettingsWindow } from './hud/loot/loot_settings_window';
 import { LootWindowController } from './hud/loot/loot_window_controller';
 import { PlayerCardController } from './hud/player_card/player_card_controller';
-import { QuestDialogController } from './hud/quest/quest_dialog_controller';
-import { parseChatSegments } from './hud/quest/quest_link';
-import { QuestProgressBanner } from './hud/quest/quest_progress_banner';
-import { QuestTrackerController } from './hud/quest/quest_tracker_controller';
-import { QuestLogWindow } from './hud/quest/questlog_window';
 import { buildHeroicVendorView } from './hud/vendor/heroic_vendor_view';
 import { renderHeroicVendorWindow } from './hud/vendor/heroic_vendor_window';
 import { TrainLearnTracker } from './hud/vendor/train_learn_core';
@@ -379,13 +373,7 @@ import { bindMapPinchZoom, finishMapTap, mapTapReleaseFromPointer } from './map_
 import { MAP_TAP_MOVE_TOLERANCE_PX, nextMapZoom } from './map_pinch_zoom_core';
 import { type MapRegion, mapCanvasHeight, paintTerrainRows } from './map_terrain';
 import { MapWindowPainter } from './map_window_painter';
-import {
-  type MapNpcMarker,
-  type MapQuestAreaMarker,
-  mapWindowMode,
-  npcMarkerAt,
-  questAreaObjectivesAt,
-} from './map_window_view';
+import { type MapNpcMarker, mapWindowMode, npcMarkerAt } from './map_window_view';
 import { marketCollectIndicatorView } from './market_view';
 import { MarketWindow } from './market_window';
 import { materialHintLine } from './material_hint_view';
@@ -455,7 +443,6 @@ import {
 import { buildProfessionTutorialModel } from './profession_tutorial_view';
 import { renderProfessionTutorial } from './profession_tutorial_window';
 import { ProfessionsWindow } from './professions_window';
-import { questProgressEventText } from './quest_progress_text';
 import { lockoutParts, lockoutShape } from './raid_lockout';
 import { type RaidLockoutI18n, raidLockoutPanelHtml } from './raid_lockout_view';
 import { restView } from './rest_indicator';
@@ -496,7 +483,6 @@ import { TOOLTIP_PEEK_MS, TouchPeekGuard } from './touch_peek';
 import { bindTouchDoubleTap, bindTouchTap, CLICK_SUPPRESS_MS, TAP_SLOP_PX } from './touch_tap';
 import { buildTownFocusView, stepTownFocus } from './town_focus_view';
 import { renderTownFocusWindow } from './town_focus_window';
-import { TutorialOverlay } from './tutorial';
 import { svgIcon } from './ui_icons';
 import { getUiScale } from './ui_scale';
 import { type UnitFrameDescriptor, unitFrameView } from './unit_frame';
@@ -1104,10 +1090,6 @@ export class Hud {
   private ctxMenuOpener: HTMLElement | null = null;
   private errorEl = $('#error-msg');
   private bannerEl = $('#banner');
-  // The WoW-style quest-progress flash (quest_progress_banner.ts): yellow
-  // top-center lines fed by the questProgress event, aria-hidden decoration
-  // (the chat log + live region carry the announced copy).
-  private readonly questBanner = new QuestProgressBanner($('#quest-banner'));
   private subzoneEl = $('#subzone-banner');
   private tooltipEl = $('#tooltip');
   // Which element last painted the shared #tooltip box, so a hovered slot can
@@ -1338,10 +1320,6 @@ export class Hud {
   private readonly delveTracker: DelveTrackerController;
   private readonly lockpickController: LockpickController;
   private readonly riteController: RiteController;
-  private readonly questTracker: QuestTrackerController;
-  private readonly questDialog: QuestDialogController;
-  // swing timer: the period is captured from the reset edge (swingTimer jumping
-  // up), so the bar tracks real swing speed including haste / ranged weapons.
   private swingPeriod = 0;
   private lastSwingTimer = 0;
   private lastLowResourceSig = '';
@@ -1410,7 +1388,6 @@ export class Hud {
   } | null = null;
   // The quest-objective areas of the last overworld map paint (canvas-pixel
   // space), kept for the hover tooltip's hit-test. Empty in delve mode.
-  private mapQuestAreas: MapQuestAreaMarker[] = [];
   // The quest-giver glyphs of the last overworld map paint, for the hover
   // tooltip's hit-test (quest names + level requirements). Empty in delve mode.
   private mapNpcMarkers: MapNpcMarker[] = [];
@@ -1466,7 +1443,6 @@ export class Hud {
   // The first-tier tutorial modal's focus trap (#profession-tutorial).
   private professionTutorialTrap: FocusTrapHandle | null = null;
   private meters: Meters;
-  private tutorial = new TutorialOverlay();
   private lastPetBarSig = '';
   // Value-diffed body-class flag: true while a live pet bar is shown. The mobile
   // top-band layout reads body.mobile-pet-active to yield the top-centre line to the
@@ -1565,64 +1541,6 @@ export class Hud {
       random: Math.random,
       schedule: (callback, delayMs) => {
         window.setTimeout(callback, delayMs);
-      },
-    });
-    this.questTracker = new QuestTrackerController({
-      element: $('#quest-tracker'),
-      document,
-      world: () => this.sim,
-      settings: {
-        available: () => this.optionsHooks !== null,
-        collapsed: () =>
-          (this.optionsHooks?.settings.get('questTrackerCollapsed') ?? false) === true,
-        setCollapsed: (collapsed) => {
-          this.optionsHooks?.settings.set('questTrackerCollapsed', collapsed);
-        },
-      },
-      questTitle,
-      objectiveLabel: questObjectiveLabel,
-      click: () => audio.click(),
-    });
-    this.questDialog = new QuestDialogController({
-      element: $('#quest-dialog'),
-      document,
-      world: () => this.sim,
-      now: () => performance.now(),
-      text: {
-        npcName: npcDisplayName,
-        mobName: mobDisplayName,
-        npcTitle: npcDisplayTitle,
-        npcGreeting,
-        delveName: delveDisplayName,
-        questTitle,
-        questNarrative,
-        objectiveLabel: questObjectiveLabel,
-        number: (value) => this.questNumber(value),
-        progress: (label, current, total) => this.questProgressText(label, current, total),
-        suggestedPlayers: (count) => this.questSuggestedPlayersHtml(count),
-        money: (copper) => this.moneyHtml(copper),
-      },
-      openFocusTrap: (root) => this.focusManager.open({ root }),
-      closeTransient: () => this.closeOtherWindows('#quest-dialog'),
-      hideTooltip: () => this.hideTooltip(),
-      itemIcon: (item) => this.itemIcon(item),
-      itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
-      attachTooltip: (element, html) => this.attachTooltip(element, html),
-      openChronicles: () => this.openDeeds('chronicle'),
-      openVendor: (npcId) => this.openVendor(npcId),
-      openHeroicVendor: (npcId) => this.openHeroicVendor(npcId),
-      openTrain: (npcId) => this.openTrain(npcId),
-      openUnbind: (npcId) => this.openUnbind(npcId),
-      openMarket: () => this.openMarket(),
-      openDelveBoard: (npcId) => this.openDelveBoard(npcId),
-      openValeCup: () => this.toggleValeCup(),
-      openCardDuel: () => this.toggleCardDuel(),
-      onOpenChange: (open) => this.onQuestDialogStateChange?.(open),
-      voice: {
-        play: (key) => voice.play(key),
-        isPlaying: () => voice.isPlaying(),
-        setDistance: (distance) =>
-          voice.setDistanceGain(distance === null ? 0 : voiceDistanceGain(distance)),
       },
     });
     this.lootWindow = new LootWindowController({
@@ -1732,9 +1650,6 @@ export class Hud {
         const item = ITEMS[itemId];
         return item ? itemDisplayName(item) : null;
       },
-      questTitle,
-      selectedQuestId: () => this.questlogWindow.selectedQuestId,
-      hasQuest: (questId) => this.sim.questLog.has(questId),
       showError: (text) => this.showError(text),
     });
     this.chatWindow.init();
@@ -1960,7 +1875,6 @@ export class Hud {
       if ((e.target as HTMLElement).closest('.qt-header')) this.toggleQuestTrackerCollapsed();
       // A quest row jumps to that quest's detail in the quest log window.
       const row = (e.target as HTMLElement).closest<HTMLElement>('.qt-title');
-      if (row?.dataset.quest) this.questlogWindow.openWithQuest(row.dataset.quest);
     });
     // Keyboard activation: handle Enter/Space here and stop the event before it
     // bubbles to the window-level game keybinds (Enter is bound to Open Chat,
@@ -1983,7 +1897,6 @@ export class Hud {
       if (row?.dataset.quest) {
         e.preventDefault();
         e.stopPropagation();
-        this.questlogWindow.openWithQuest(row.dataset.quest);
       }
     });
     // Collapse/expand the deed tracker from its header (the quest tracker
@@ -2109,14 +2022,14 @@ export class Hud {
     // report whether one was shown (the attachTooltip idiom: map into author
     // space, then clamp the tooltip box against the viewport).
     const showMapTipAt = (clientX: number, clientY: number): boolean => {
-      if (this.mapQuestAreas.length === 0 && this.mapNpcMarkers.length === 0) return false;
+      if (this.mapNpcMarkers.length === 0) return false;
       const rect = mapCanvas.getBoundingClientRect();
       const cx = ((clientX - rect.left) * mapCanvas.width) / rect.width;
       const cy = ((clientY - rect.top) * mapCanvas.height) / rect.height;
-      const glyph = npcMarkerAt(this.mapNpcMarkers, cx, cy);
-      const html = glyph
-        ? this.questGiverTooltipHtml(glyph)
-        : this.questAreaTooltipHtml(questAreaObjectivesAt(this.mapQuestAreas, cx, cy));
+      // The glyph tooltip named the quests behind a '!'/'?'; with none left there
+      // is nothing to say about an NPC pin, so the hit-test stands down.
+      if (npcMarkerAt(this.mapNpcMarkers, cx, cy) === null) return false;
+      const html = '';
       if (!html) return false;
       // Same as desktop hover: paint the tip at the pointer (a tap on touch, the
       // cursor on mouse). paintTooltipAt clamps the box on-screen either way.
@@ -2741,7 +2654,6 @@ export class Hud {
         this.spellbookWindow.close();
         break;
       case 'quest-log-window':
-        this.questlogWindow.close();
         break;
       case 'leaderboard-window':
         this.leaderboardWindow.close();
@@ -2935,20 +2847,12 @@ export class Hud {
     return this.chatWindow.composeSend(typed);
   }
 
-  insertQuestChatLink(questId: string): void {
-    this.chatWindow.insertQuestLink(questId);
-  }
-
   insertItemChatLink(itemId: string): void {
     this.chatWindow.insertItemLink(itemId);
   }
 
   clearPendingChatLinks(): void {
     this.chatWindow.clearPendingLinks();
-  }
-
-  maybeHandleQuestShareCommand(raw: string): boolean {
-    return this.chatWindow.maybeHandleQuestShareCommand(raw);
   }
 
   activeChatPlaceholder(): string {
@@ -4139,24 +4043,6 @@ export class Hud {
     },
     clearActionDropTargets: () => this.clearActionDropTargets(),
   });
-  // Quest-log window painter (questlog_view.ts core + questlog_window.ts painter).
-  // It composes the presentation bag (icon/money/tooltip) for the reward row and
-  // owns the selected quest id (Hud's quest-share command reads it back); the
-  // abandon / chat-link / confirm seams route through these lazy closures.
-  private readonly questlogWindow = new QuestLogWindow({
-    ...this.presentationBag,
-    root: () => $('#quest-log-window'),
-    world: () => this.sim,
-    closeOthers: () => this.closeOtherWindows('#quest-log-window'),
-    ...this.windowFocus('#quest-log-window'),
-    hideTooltip: () => this.hideTooltip(),
-    focusFirstInteractive: (root, preferredSelector) =>
-      this.focusManager.focusFirst(root, preferredSelector),
-    onVisibilityChange: () => this.syncAnyWindowOpenState(),
-    confirmDialog: (title, body, okText, cancelText, onOk) =>
-      this.confirmDialog(title, body, okText, cancelText, onOk),
-    insertQuestChatLink: (questId) => this.insertQuestChatLink(questId),
-  });
 
   private drawPlayerFramePortrait(): void {
     this.portraits.drawClass(
@@ -4512,13 +4398,7 @@ export class Hud {
   // of the overhead nameplate bands (mobNameColor). Shown at a fixed spot (the
   // bottom-right corner, see paintMobTooltipBottomRight) rather than following the cursor.
   showMobHoverTooltip(entity: Entity, pvpOpponents: ReadonlySet<number>): void {
-    // Questie-style quest lines: the objectives this mob advances, with live
-    // counts. They ride the rebuild key so a kill mid-hover repaints 3/8 -> 4/8.
-    const mobQuests = questObjectivesForMob(this.sim.questLog, entity.templateId);
-    const questKey = mobQuests
-      .map((q) => `${q.questId}#${q.objectiveIndex}:${q.current}/${q.total}`)
-      .join(',');
-    const key = `mob:${entity.id}:${entity.level}:${entity.hostile ? 1 : 0}:${this.sim.player.level}:${questKey}`;
+    const key = `mob:${entity.id}:${entity.level}:${entity.hostile ? 1 : 0}:${this.sim.player.level}`;
     if (key === this.lastHoverTooltipId) return;
     this.lastHoverTooltipId = key;
     const template = MOBS[entity.templateId];
@@ -4538,13 +4418,9 @@ export class Hud {
       familyLabel,
       color: mobTooltipConColor(diff, entity.dead, friendlyPet),
       hostile: entity.hostile,
-      quests: mobQuests.map((q) => ({
-        title: questTitle(q.questId),
-        progress: this.questProgressText(
-          questObjectiveLabel(q.questId, q.objectiveIndex),
-          q.current,
-          q.total,
-        ),
+      quests: [].map(() => ({
+        title: '',
+        progress: '',
       })),
     };
     this.paintMobTooltipBottomRight(mobTooltipHtml(model, MOB_TOOLTIP_VIEW_DEPS));
@@ -4967,7 +4843,6 @@ export class Hud {
     this.targetFrameMover?.relocalize();
     this.playerFrameMover?.relocalize();
     this.partyFrameMover?.relocalize();
-    if (this.questlogWindow.isOpen) this.questlogWindow.render();
     if ($('#bags').style.display !== 'none') this.renderBags();
     if (this.openVendorNpcId !== null && $('#vendor-window').style.display === 'block')
       this.renderVendor();
@@ -4999,7 +4874,6 @@ export class Hud {
     this.vcupMatchHud.relocalize();
     this.vcupBriefing.relocalize();
     this.vcupCharge.relocalize();
-    this.questDialog.relocalize();
   }
 
   // Prefers the live resolved entry when the player already knows it (rank +
@@ -6994,10 +6868,8 @@ export class Hud {
     // chat burst on the fast tier once chat goes quiet.
     if (fastHud) this.chatAnnouncer.flush(now);
 
-    this.questDialog.updateVoice();
     this.meters.update();
     this.lockpickController.repaintIfChanged();
-    this.tutorial.update(sim, this.renderer, this.keybinds);
     this.lootRolls.update(now);
     if (slowHud) this.updateRaidLockoutBadge();
     this.maybeRestoreActionBarLayout();
@@ -7585,7 +7457,6 @@ export class Hud {
         const npc = sim.entities.get(this.openUnbindNpcId);
         if (!npc || dist2d(p.pos, npc.pos) > 8) this.closeUnbind();
       }
-      this.questDialog.updateProximity();
     }
 
     // when a bout begins, get the queue panel out of the way for the fight. Route through
@@ -7637,7 +7508,6 @@ export class Hud {
     if (slowHud && this.professionsWindow.isOpen) this.professionsWindow.refreshIfChanged();
     // The gossip dialog's intro hint row watches the same online cprof edge:
     // attunement retires it, and no quest event fires for that flip.
-    if (slowHud) this.questDialog.refreshIfChanged();
     // The deed tracker is always-on chrome (not gated on a window): watched
     // progress climbs from normal play, and earned deeds drop off.
     if (slowHud) this.updateDeedTracker();
@@ -7802,15 +7672,11 @@ export class Hud {
     }
   }
 
-  private updateQuestTracker(): void {
-    this.questTracker.update();
-  }
+  private updateQuestTracker(): void {}
 
   /** Flip the persisted tracker-collapsed preference (the header click/keyboard
    *  activation), preserving keyboard focus across the innerHTML rebuild. */
-  private toggleQuestTrackerCollapsed(): void {
-    this.questTracker.toggleCollapsed();
-  }
+  private toggleQuestTrackerCollapsed(): void {}
 
   // -------------------------------------------------------------------------
   // Delve board & tracker
@@ -8318,7 +8184,6 @@ export class Hud {
     if (mapWindowMode(this.sim) === 'delve') {
       // The delve painter owns the full world-map schematic render (the area
       // title is drawn on-canvas, since the world map has no DOM zone label).
-      this.mapQuestAreas = [];
       this.mapNpcMarkers = [];
       this.delvePainter.paintWorldMapDelve(ctx, this.sim, S);
       const run = this.sim.delveRun;
@@ -8345,61 +8210,9 @@ export class Hud {
       ping: this.mapPing,
     });
     this.mapView = result.view;
-    this.mapQuestAreas = result.questAreas;
     this.mapNpcMarkers = result.npcs;
     if (!this.mapDrag) canvas.style.cursor = result.cursor;
     this.setText(summaryEl, t('hud.core.mapSummary', { zone: zoneDisplayName(zone.id) }));
-  }
-
-  // Tooltip body for a hovered quest-giver glyph on the world map: each quest
-  // behind the '!'/'?' shows its title (with the ready-to-turn-in tag on '?'
-  // quests) plus its level requirement when the quest declares one, all through
-  // existing questUi keys (no new i18n surface).
-  private questGiverTooltipHtml(marker: MapNpcMarker): string {
-    let html = '';
-    for (const ref of marker.quests) {
-      const quest = QUESTS[ref.questId];
-      if (!quest) continue;
-      const readyTag = ref.ready
-        ? ` <span class="quest-complete">(${esc(t('questUi.log.readyStatus'))})</span>`
-        : '';
-      html += `<div class="tt-title">${esc(questTitle(ref.questId))}${readyTag}</div>`;
-      if (quest.minLevel) {
-        html += `<div class="tt-quest-req">${esc(
-          t('questUi.detail.requiresLevel', { level: this.questNumber(quest.minLevel) }),
-        )}</div>`;
-      }
-    }
-    return html;
-  }
-
-  // Tooltip body for hovered quest-objective areas on the world map: per quest,
-  // its title plus each hovered objective's tracker-style "label current/total"
-  // line, all through the existing questUi keys + formatters (no new i18n
-  // surface). Empty string when nothing under the cursor resolves.
-  private questAreaTooltipHtml(refs: readonly QuestObjectiveRef[]): string {
-    const byQuest = new Map<string, number[]>();
-    for (const ref of refs) {
-      const list = byQuest.get(ref.questId);
-      if (list) list.push(ref.objectiveIndex);
-      else byQuest.set(ref.questId, [ref.objectiveIndex]);
-    }
-    let html = '';
-    for (const [questId, objectiveIndexes] of byQuest) {
-      const quest = QUESTS[questId];
-      const qp = this.sim.questLog.get(questId);
-      if (!quest || !qp) continue;
-      let lines = '';
-      for (const i of objectiveIndexes) {
-        const obj = quest.objectives[i];
-        if (!obj) continue;
-        const required = questObjectiveRequired(quest, qp, i);
-        const current = Math.min(qp.counts[i] ?? 0, required);
-        lines += `<div>${esc(this.questProgressText(questObjectiveLabel(questId, i), current, required))}</div>`;
-      }
-      if (lines) html += `<div class="tt-title">${esc(questTitle(questId))}</div>${lines}`;
-    }
-    return html;
   }
 
   // -------------------------------------------------------------------------
@@ -9459,34 +9272,6 @@ export class Hud {
         case 'error':
           this.showError(this.localizeErrorText(ev.text));
           break;
-        case 'questAccepted':
-          sfx.playUi('quest_accept');
-          this.questDialog.refresh();
-          break;
-        case 'questProgress': {
-          const progressText = questProgressEventText(ev);
-          this.log(progressText, '#dcd29f');
-          // The classic yellow top-center flash ("Forest Wolf slain: 3/8"); the
-          // log line above stays the durable, announced copy.
-          this.questBanner.show(progressText);
-          this.questDialog.refresh();
-          break;
-        }
-        case 'questReady': {
-          this.showBanner(
-            t('questUi.logs.ready', {
-              name: questTitle(ev.questId),
-              status: t('questUi.log.readyStatus'),
-            }),
-          );
-          sfx.playUi('quest_ready');
-          this.questDialog.refresh();
-          break;
-        }
-        case 'questDone':
-          sfx.playUi('quest_complete');
-          this.questDialog.refresh();
-          break;
         case 'chat': {
           // OFFLINE ONLY. Online, the server drops an ignored player's public chat
           // before it reaches us (and honours the whisper/roll carve-outs), so
@@ -9662,7 +9447,6 @@ export class Hud {
               voice.play(voiced.state.key, { gain: voicedYellGain(ev.from) });
               // A distinct overheard yell, not a dialogue: do not let the per-frame
               // distance fade attenuate it by a talked-to NPC's position.
-              this.questDialog.clearVoiceSource();
             }
           }
           break;
@@ -10461,7 +10245,6 @@ export class Hud {
         // so refresh immediately. If online cprof lands later, the slow-band
         // signature above catches that second edge and converges then.
         this.refreshOpenProfessionSurfacesIfChanged();
-        this.questDialog.refreshIfChanged();
         break;
       }
     }
@@ -10566,7 +10349,6 @@ export class Hud {
   }
 
   private logZoneWelcome(zone: ZoneDef): void {
-    if (zone.welcomeQuestId && this.sim.questState(zone.welcomeQuestId) !== 'available') return;
     this.log(zoneWelcome(zone.id), '#ffd100');
   }
 
@@ -10671,28 +10453,7 @@ export class Hud {
         if (seg.value) parent.append(document.createTextNode(this.maskChat(seg.value)));
         continue;
       }
-      if (seg.kind === 'item') {
-        this.appendChatItemLink(parent, seg.itemId);
-        continue;
-      }
-      const quest = QUESTS[seg.questId];
-      if (!quest) {
-        parent.append(document.createTextNode(this.maskChat('[?]')));
-        continue;
-      }
-      const link = document.createElement('span');
-      link.className = 'chat-quest-link';
-      link.textContent = `[${questTitle(seg.questId)}]`;
-      link.setAttribute('role', 'button');
-      link.tabIndex = 0;
-      const open = (): void => this.openLinkedQuestDialog(seg.questId, fromPid);
-      link.addEventListener('click', open);
-      link.addEventListener('keydown', (ev) => {
-        if (ev.key !== 'Enter' && ev.key !== ' ') return;
-        ev.preventDefault();
-        open();
-      });
-      parent.append(link);
+      this.appendChatItemLink(parent, seg.itemId);
     }
   }
 
@@ -10724,7 +10485,7 @@ export class Hud {
           const item = ITEMS[s.itemId];
           return `[${item ? itemDisplayName(item) : '?'}]`;
         }
-        return `[${QUESTS[s.questId] ? questTitle(s.questId) : '?'}]`;
+        return '[?]';
       })
       .join('');
   }
@@ -10992,20 +10753,6 @@ export class Hud {
     if (match) return t('hud.logs.friendOnline', { name: match[1] });
     match = /^(.+) has gone offline\.$/.exec(text);
     if (match) return t('hud.logs.friendOffline', { name: match[1] });
-    match = /^Quest accepted: (.+)$/.exec(text);
-    if (match) return t('questUi.logs.accepted', { name: questTitleFromSource(match[1]) });
-    match = /^Quest abandoned: (.+)$/.exec(text);
-    if (match) return t('questUi.logs.abandoned', { name: questTitleFromSource(match[1]) });
-    match = /^Quest completed: (.+)$/.exec(text);
-    if (match) return t('questUi.logs.completed', { name: questTitleFromSource(match[1]) });
-    match = /^(.+) accepted your shared quest\.$/.exec(text);
-    if (match) return t('hudChrome.questShare.accepted', { name: match[1] });
-    match = /^(.+) \(Complete\)$/.exec(text);
-    if (match)
-      return t('questUi.logs.ready', {
-        name: questTitleFromSource(match[1]),
-        status: t('questUi.log.readyStatus'),
-      });
     match = /^Your market listing of (.+) expired and waits at the Merchant\.$/.exec(text);
     if (match)
       return t('itemUi.logs.expiredListing', { item: itemDisplayNameFromSource(match[1]) });
@@ -11181,10 +10928,6 @@ export class Hud {
     if (el === this.chatLogEl && text.includes('[[i:')) {
       for (const seg of parseChatSegments(text)) {
         if (seg.kind === 'item') this.appendChatItemLink(div, seg.itemId);
-        else if (seg.kind === 'quest')
-          div.append(
-            document.createTextNode(`[${QUESTS[seg.questId] ? questTitle(seg.questId) : '?'}]`),
-          );
         else div.append(document.createTextNode(seg.value));
       }
     } else {
@@ -11325,20 +11068,14 @@ export class Hud {
   // Quest dialog (gossip)
   // -------------------------------------------------------------------------
 
-  openQuestDialog(npcId: number): void {
-    this.questDialog.open(npcId);
-  }
+  openQuestDialog(npcId: number): void {}
 
   // Open the read-only quest detail for a chat-link click. Shows Accept only when the
   // viewer is in the link author's party AND the quest is available; the server
   // re-validates on accept. Non-party / ineligible viewers see view-only info.
-  openLinkedQuestDialog(questId: string, fromPid?: number): void {
-    this.questDialog.openLinked(questId, fromPid);
-  }
+  openLinkedQuestDialog(questId: string, fromPid?: number): void {}
 
-  closeQuestDialog(restoreFocus = true): void {
-    this.questDialog.close(restoreFocus);
-  }
+  closeQuestDialog(restoreFocus = true): void {}
 
   // -------------------------------------------------------------------------
   // Loot window
@@ -12790,9 +12527,7 @@ export class Hud {
   // The quest-log window lives in QuestLogWindow (questlog_view.ts core +
   // questlog_window.ts painter), which owns the selected quest id (read back by the
   // quest-share command via selectedQuestId) and the abandon / chat-link flows.
-  toggleQuestLog(): void {
-    this.questlogWindow.toggle();
-  }
+  toggleQuestLog(): void {}
 
   // -------------------------------------------------------------------------
   // Party frames
@@ -13914,10 +13649,6 @@ export class Hud {
     return this.charWindow.isOpen;
   }
 
-  get questDialogOpen(): boolean {
-    return this.questDialog.isOpen;
-  }
-
   // True while a menu that should pause character movement is up.
   isModalOpen(): boolean {
     return (
@@ -14119,23 +13850,6 @@ function npcGreeting(npcId: string, playerClass: PlayerClass, playerName: string
     field: 'greeting',
     values: { className, classNameLower: className.toLocaleLowerCase(), playerName },
   });
-}
-
-function questTitle(questId: string): string {
-  return tEntity({ kind: 'quest', id: questId, field: 'title' });
-}
-
-function questNarrative(questId: string, field: 'text' | 'completion', playerName: string): string {
-  return tEntity({ kind: 'quest', id: questId, field, values: { playerName } });
-}
-
-function questObjectiveLabel(questId: string, objectiveIndex: number): string {
-  return tEntity({ kind: 'questObjective', questId, objectiveIndex, field: 'label' });
-}
-
-function questTitleFromSource(name: string): string {
-  const quest = Object.values(QUESTS).find((candidate) => candidate.name === name);
-  return quest ? questTitle(quest.id) : name;
 }
 
 function zoneWelcome(zoneId: string): string {

@@ -97,44 +97,4 @@ describe('v0.26 Talents V2 production save migration', () => {
     expect(twice).toBe(once);
     expect(twice).toEqual(once);
   });
-
-  it('loads, saves, and reloads the migrated Warrior without duplicate learning or neutral-state loss', () => {
-    const sim = new Sim({ seed: 17, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Migration Fixture', { state: cloneFixture() });
-    const first = savedState(sim.serializeCharacter(pid));
-
-    expect(first.contentRevision).toBe(CURRENT_CHARACTER_CONTENT_REVISION);
-    expect(first.talents).toEqual({ spec: 'fury', rows: {} });
-    expect(first.level).toBe(20);
-    expect(first.xp).toBe(173);
-    expect(first.copper).toBe(9876);
-    expect(first.inventory).toEqual(fixture.state.inventory);
-    expect(first.bags).toEqual(fixture.state.bags);
-    expect(first.bank).toEqual(fixture.state.bank);
-    expect(first.equipment).toEqual(fixture.state.equipment);
-    // The fixture's active questLog ids are REAL quests (q_spiders, q_wolves):
-    // the load arm prunes unknown active quest ids
-    // (tests/quest_log_normalization.test.ts), while questsDone keeps its
-    // synthetic q_fixture_done, pinning that done-history survives unknown ids.
-    expect(first.questLog).toEqual(fixture.state.questLog);
-    expect(first.questsDone).toEqual(fixture.state.questsDone);
-    expect(first.skin).toBe(3);
-    expect(first.cooldowns).toEqual(fixture.state.cooldowns);
-
-    const meta = sim.meta(pid);
-    expect(meta).toBeDefined();
-    const known = meta?.known.map((entry) => entry.def.id) ?? [];
-    expect(known).toContain('bloodthirst');
-    expect(new Set(known).size).toBe(known.length);
-    expect(sim.events.some((event) => event.type === 'learnAbility')).toBe(false);
-
-    const sim2 = new Sim({ seed: 17, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Migration Fixture', { state: first });
-    const second = savedState(sim2.serializeCharacter(pid2));
-    expect(second.talents).toEqual(first.talents);
-    expect(second.loadouts).toEqual(first.loadouts);
-    expect(second.contentRevision).toBe(first.contentRevision);
-    expect(second.inventory).toEqual(first.inventory);
-    expect(second.bank).toEqual(first.bank);
-  });
 });

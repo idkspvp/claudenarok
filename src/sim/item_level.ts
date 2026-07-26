@@ -27,7 +27,7 @@ import {
 } from './content/heroic_loot';
 import { HEROIC_VENDOR_STOCK } from './content/heroic_vendor';
 import { FURY_STOCK, WARFARE_SOURCE_LEVEL } from './content/pvp_honor';
-import { ALL_RECIPES, DUNGEONS, ITEMS, MOBS, QUESTS } from './data';
+import { ALL_RECIPES, DUNGEONS, ITEMS, MOBS } from './data';
 // The pure budget primitives live in the leaf module ./item_budget (no ./data
 // import, so content/heroic_variants.ts can share them at data-eval time without a
 // cycle). Imported for internal use and re-exported so every existing importer of
@@ -127,30 +127,6 @@ function buildSourceIndex(): Map<string, ItemSource> {
     if (!mob.loot) continue;
     const raid = isRaidMob(mob.id);
     for (const entry of mob.loot) bump(entry.itemId, mob.maxLevel, raid);
-  }
-  // Quest rewards: gated behind the quest's hardest combat source: direct kill
-  // objectives, or collected quest items traced back to the mob that drops them.
-  // Fall back to the quest's own minLevel when no concrete source exists.
-  for (const quest of Object.values(QUESTS)) {
-    let source: ItemSource | undefined;
-    const consider = (level: number | undefined, raid: boolean): void => {
-      if (level === undefined) return;
-      if (source === undefined || level > source.level)
-        source = { level, raid: raid || (source?.raid ?? false) };
-      else if (raid && !source.raid) source = { ...source, raid: true };
-    };
-    for (const objective of quest.objectives) {
-      if (objective.type === 'kill' && objective.targetMobId) {
-        const mob = MOBS[objective.targetMobId];
-        consider(mob?.maxLevel, mob ? isRaidMob(mob.id) : false);
-      } else if (objective.type === 'collect' && objective.itemId) {
-        const collectedSource = idx.get(objective.itemId);
-        consider(collectedSource?.level, collectedSource?.raid ?? false);
-      }
-    }
-    consider(quest.minLevel, false);
-    for (const itemId of Object.values(quest.itemRewards))
-      bump(itemId, source?.level, source?.raid ?? false);
   }
   // Heroic Quartermaster stock: the marks-vendor jewelry never drops from a mob,
   // but it IS level-20 heroic content (Heroic Marks only come from heroic final

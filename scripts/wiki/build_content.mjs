@@ -24,7 +24,7 @@ const entrySource = `
   export { CLASSES, ABILITIES } from './src/sim/content/classes.ts';
   export { TALENTS } from './src/sim/content/talents.ts';
   export { ALL_CLASSES, FISHING_SESSION_CAP_SEC } from './src/sim/types.ts';
-  export { ZONES, DUNGEONS, MOBS, CAMPS, DELVE_LIST, NPCS, ITEMS, QUESTS } from './src/sim/data.ts';
+  export { ZONES, DUNGEONS, MOBS, CAMPS, DELVE_LIST, NPCS, ITEMS } from './src/sim/data.ts';
   export { WARLOCK_PET_MOBS } from './src/sim/content/warlock_pets.ts';
   export { ZONE1_MOBS } from './src/sim/content/zone1.ts';
   export { ZONE2_MOBS } from './src/sim/content/zone2.ts';
@@ -116,7 +116,6 @@ const {
   visualKeyFor,
   FISHING_SESSION_CAP_SEC,
   ITEMS,
-  QUESTS,
   CRAFT_RING,
   STATIONS,
   STATION_TYPE_BY_CRAFT,
@@ -801,28 +800,10 @@ const profMasterwork = {
   capPct: pct(MASTERWORK_CHANCE_CAP),
 };
 
-// Economy: fees, sinks, the shared action throttle, and the repeatable work
-// orders (every collect quest on the shared work-order cadence).
-const workOrders = Object.values(QUESTS)
-  .filter(
-    (q) =>
-      q.repeatCadenceTicks === WORK_ORDER_CADENCE_TICKS &&
-      (q.objectives ?? []).length > 0 &&
-      q.objectives.every((o) => o.type === 'collect'),
-  )
-  .map((q) => {
-    const npc = npcById.get(q.giverNpcId);
-    const obj = q.objectives[0];
-    return {
-      id: q.id,
-      name: q.name,
-      master: npc?.name ?? '',
-      hub: npc ? hubNameForZ(npc.pos.z) : '',
-      material: itemName(obj.itemId),
-      count: obj.count,
-      coinCopper: q.copperReward ?? 0,
-    };
-  });
+// Economy: fees, sinks, and the shared action throttle. The repeatable work
+// orders that used to fill this list were collect QUESTS on the shared cadence,
+// so the list is empty until the profession pass re-homes them.
+const workOrders = [];
 const profEconomy = {
   craftFeeCopperPerBudgetPoint: CRAFT_GOLD_SINK_COPPER_PER_BUDGET,
   actionThrottle: {

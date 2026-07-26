@@ -433,62 +433,6 @@ describe('coverage: each scenario fires its subsystem', () => {
     );
   });
 
-  it('quest_kill_credit: kill credit accrues and the quest promotes to ready then turns in', () => {
-    const rec = run('quest_kill_credit');
-    const ev = rec.allEvents as Ev[];
-    // onMobKilledForQuests bumped progress on each forest_wolf death.
-    expect(
-      ev.filter((e) => e.type === 'questProgress' && e.questId === 'q_wolves').length,
-    ).toBeGreaterThanOrEqual(8);
-    // checkQuestReady promoted active -> ready, and the quest was turned in.
-    expect(ev.some((e) => e.type === 'questReady' && e.questId === 'q_wolves')).toBe(true);
-    expect(ev.some((e) => e.type === 'questDone' && e.questId === 'q_wolves')).toBe(true);
-    expect(
-      (rec.sim as any).players.get((rec.sim as any).playerId)?.questsDone?.has('q_wolves'),
-    ).toBe(true);
-  });
-
-  it('quest_collect_turnin: collect credit promotes, demotes on item loss, and turns in', () => {
-    const rec = run('quest_collect_turnin');
-    const ev = rec.allEvents as Ev[];
-    // onInventoryChangedForQuests fired progress as hides were collected.
-    expect(ev.some((e) => e.type === 'questProgress' && e.questId === 'q_boars')).toBe(true);
-    // checkQuestReady's promotion arm.
-    expect(ev.some((e) => e.type === 'questReady' && e.questId === 'q_boars')).toBe(true);
-    // The demotion arm fired at least once (a 'questProgress' below target after a
-    // 'questReady') — the dropped hide and the turn-in removal both demote ready -> active.
-    const readyIdx = ev.findIndex((e) => e.type === 'questReady' && e.questId === 'q_boars');
-    expect(
-      ev.slice(readyIdx + 1).some((e) => e.type === 'questProgress' && e.questId === 'q_boars'),
-    ).toBe(true);
-    expect(ev.some((e) => e.type === 'questDone' && e.questId === 'q_boars')).toBe(true);
-  });
-
-  it('quest_link_abandon: party gate rejects then shares the quest, and abandon clears it', () => {
-    const rec = run('quest_link_abandon');
-    const ev = rec.allEvents as Ev[];
-    const a = rec.notes.a as number;
-    const b = rec.notes.b as number;
-    // The party gate rejected the pre-party linked accept.
-    expect(
-      ev.some((e) => e.type === 'error' && e.pid === b && /party to accept/.test(String(e.text))),
-    ).toBe(true);
-    // Once partied, finalizeQuestAccept ran for B (questAccepted + the sharer notice to A).
-    expect(
-      ev.some((e) => e.type === 'questAccepted' && e.questId === 'q_wolves' && e.pid === b),
-    ).toBe(true);
-    expect(
-      ev.some(
-        (e) => e.type === 'log' && e.pid === a && /accepted your shared quest/.test(String(e.text)),
-      ),
-    ).toBe(true);
-    // abandonQuest emitted its log and cleared B's quest log entry.
-    expect(
-      ev.some((e) => e.type === 'log' && e.pid === b && /^Quest abandoned:/.test(String(e.text))),
-    ).toBe(true);
-    expect((rec.sim as any).players.get(b)?.questLog?.has('q_wolves')).toBe(false);
-  });
-
   it('talents_progression: applyTalents/respec/loadout/setSpec fire and bake the flat struct', () => {
     const rec = run('talents_progression');
     const pid = (rec.sim as any).playerId;

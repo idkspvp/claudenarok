@@ -1,11 +1,11 @@
 // The Ravenpost (src/sim/mail/post_office.ts): welcome letter, player-to-player
 // sending with coin/parcel escrow, raven delivery delay, mailbox proximity
-// gating, take/delete rules, quest thank-you letters, persistence round-trip,
+// gating, take/delete rules, persistence round-trip,
 // and rename rekeying. Pure sim tests: construct a Sim, advance fixed ticks.
 
 import { describe, expect, it } from 'vitest';
 import { HEROIC_MARK_ITEM_ID } from '../src/sim/content/dungeon_difficulty';
-import { HEROIC_MARK_LETTER, QUEST_LETTERS, WELCOME_LETTER } from '../src/sim/content/letters';
+import { HEROIC_MARK_LETTER, WELCOME_LETTER } from '../src/sim/content/letters';
 import { MAILBOXES } from '../src/sim/content/mailboxes';
 import {
   MAIL_ATTACHMENT_EXPIRY_SECONDS,
@@ -472,21 +472,8 @@ describe('unread index equivalence (finding 4)', () => {
   });
 });
 
-describe('quest thank-you letters', () => {
-  it('the giver writes after an authored quest turn-in', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', devCommands: true });
-    const pid = sim.primaryId;
-    expect(QUEST_LETTERS.q_wolves).toBeDefined();
-    expect(sim.completeQuestForDev('q_wolves', pid)).toBe(true);
-    tickFor(sim, (QUEST_LETTERS.q_wolves.delaySeconds ?? 0) + 2);
-    moveToMailbox(sim, pid);
-    const info = sim.mailInfoFor(pid);
-    const letter = info?.messages.find((m) => m.letterId === QUEST_LETTERS.q_wolves.letterId);
-    expect(letter).toBeDefined();
-    expect(letter?.kind).toBe('npc');
-    expect(letter?.copper).toBe(QUEST_LETTERS.q_wolves.copper);
-  });
-});
+// A 'quest thank-you letters' suite stood here: the giver mailed a follow-up
+// after an authored turn-in. It went with the quest system.
 
 describe('the Heroic Marks reward letter (mailHeroicMarks)', () => {
   it('books a system letter carrying the exact mark count as its attachment', () => {

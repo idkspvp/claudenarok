@@ -27,7 +27,6 @@ import {
   buildOverworldMapModel,
   type MapDetail,
   type MapNpcMarker,
-  type MapQuestAreaMarker,
   type MapViewRect,
   type OverworldMapModel,
 } from './map_window_view';
@@ -116,13 +115,11 @@ export interface MapPaintOptions {
   ping?: { x: number; z: number } | null;
 }
 
-/** What the painter reports back so Hud can update its drag state + cursor,
- *  plus the painted quest areas for the hover tooltip's hit-test. */
+/** What the painter reports back so Hud can update its drag state + cursor. */
 export interface MapPaintResult {
   view: MapViewRect;
   cursor: 'grab' | 'default';
-  questAreas: MapQuestAreaMarker[];
-  /** The quest-giver glyphs of this paint, for the hover tooltip's hit-test. */
+  /** The NPC glyphs of this paint, for the hover tooltip's hit-test. */
   npcs: MapNpcMarker[];
 }
 
@@ -170,7 +167,6 @@ export class MapWindowPainter {
     return {
       view: model.view,
       cursor: model.cursor,
-      questAreas: model.questAreas,
       npcs: model.npcs,
     };
   }
@@ -197,45 +193,6 @@ export class MapWindowPainter {
     );
 
     if (model.detail) this.drawDetail(ctx, model.detail, colors);
-
-    // Active-quest objective areas: translucent blue blobs (classic quest-POI
-    // style) over where each objective's targets live, drawn under the title /
-    // POI / glyph layers so their text stays readable on top.
-    if (model.questAreas.length > 0) {
-      ctx.fillStyle = colors.questAreaFill;
-      ctx.strokeStyle = colors.questAreaStroke;
-      ctx.lineWidth = QUEST_AREA_LINE_WIDTH;
-      for (const area of model.questAreas) {
-        ctx.beginPath();
-        ctx.arc(area.mx, area.my, area.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.stroke();
-      }
-      // Numbered badges: one gold circle per quest served by the area, its
-      // number matching the quest side list (acceptance order). Centered on
-      // the blob, laid out side by side when one camp serves several quests.
-      ctx.font = QUEST_BADGE_FONT;
-      ctx.textAlign = 'center';
-      ctx.lineWidth = QUEST_BADGE_LINE_WIDTH;
-      ctx.strokeStyle = colors.outline;
-      for (const area of model.questAreas) {
-        const n = area.numbers.length;
-        for (let i = 0; i < n; i++) {
-          const bx = area.mx + (i - (n - 1) / 2) * (QUEST_BADGE_RADIUS * 2 + QUEST_BADGE_GAP);
-          ctx.fillStyle = colors.questBadgeFill;
-          ctx.beginPath();
-          ctx.arc(bx, area.my, QUEST_BADGE_RADIUS, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-          ctx.fillStyle = colors.questBadgeText;
-          ctx.fillText(
-            formatNumber(area.numbers[i], { maximumFractionDigits: 0 }),
-            bx,
-            area.my + QUEST_BADGE_TEXT_LIFT,
-          );
-        }
-      }
-    }
 
     // Zone title (drawn on-canvas; the world map has no DOM zone label).
     ctx.font = TITLE_FONT;

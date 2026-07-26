@@ -39,8 +39,6 @@ function strandedState(): CharacterState {
     facing: 0,
     equipment: {},
     inventory: [],
-    questLog: [],
-    questsDone: [],
     gatheringProficiency: { fishing: 99.5, mining: 99.75 },
     // A curve-era blob (Professions 2.0): without this flag the one-time
     // mastery reset zeroes the skill maps at load, BEFORE the heal and the

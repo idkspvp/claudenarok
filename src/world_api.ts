@@ -21,7 +21,6 @@
 //   loot.ts             IWorldLoot           need/greed loot rolls
 //   inventory.ts        IWorldInventory      bags, equipment, vendor, copper
 //   cosmetics.ts        IWorldCosmetics      account skins + mech chroma
-//   quests.ts           IWorldQuests         quest log + accept/turn-in/abandon
 //   progression_xp.ts   IWorldProgressionXp  xp/lifetimeXp/prestige/rested/leaderboard
 //   talents.ts          IWorldTalents        talents, specs, loadouts
 //   pet.ts              IWorldPet            hunter-pet command surface
@@ -77,7 +76,6 @@ import type { IWorldParty } from './world_api/party';
 import type { IWorldPet } from './world_api/pet';
 import type { IWorldProfessions } from './world_api/professions';
 import type { IWorldProgressionXp } from './world_api/progression_xp';
-import type { IWorldQuests } from './world_api/quests';
 import type { IWorldSocialGraph } from './world_api/social_graph';
 import type { IWorldTalents } from './world_api/talents';
 import type { IWorldTargeting } from './world_api/targeting';
@@ -225,7 +223,6 @@ export interface IWorld
     IWorldLoot,
     IWorldInventory,
     IWorldCosmetics,
-    IWorldQuests,
     IWorldProgressionXp,
     IWorldTalents,
     IWorldPet,
@@ -282,10 +279,6 @@ export const COMMAND_NAMES = [
   'harvestCorpse',
   'lootRoll',
   'pickup',
-  'accept',
-  'turnin',
-  'abandon',
-  'qlinkaccept',
   'equip',
   'inv_move',
   'unequip_item',
@@ -376,8 +369,6 @@ export const COMMAND_NAMES = [
   'dev_level',
   'dev_teleport',
   'dev_give',
-  'dev_complete_quest',
-  'dev_complete_all_quests',
   'enter_crypt',
   'enter_dungeon',
   'leave_crypt',
@@ -472,8 +463,6 @@ export const DISPATCH_ONLY_COMMANDS = [
   'dev_level',
   'dev_teleport',
   'dev_give',
-  'dev_complete_quest',
-  'dev_complete_all_quests',
   'enter_crypt',
   'leave_crypt',
   'social_refresh',
@@ -505,7 +494,6 @@ export type WorldFacet =
   | 'IWorldLoot'
   | 'IWorldInventory'
   | 'IWorldCosmetics'
-  | 'IWorldQuests'
   | 'IWorldProgressionXp'
   | 'IWorldTalents'
   | 'IWorldPet'

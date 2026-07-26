@@ -11,9 +11,11 @@ import { requiredLevelFor } from '../src/sim/item_level_req';
 
 type Equip = Parameters<typeof characterDerivedStats>[2];
 
-// knight_commanders_greaves: rare cloth legs, stats { armor: 95, sta: 4 }, req level 13.
+// knight_commanders_greaves: rare cloth legs, stats { armor: 95, sta: 4 }. Its
+// required level used to derive from a level-13 quest reward; with quests gone it
+// falls back to the `rare` quality band at 12.
 const LEGS = 'knight_commanders_greaves';
-const LEGS_REQ = 13;
+const LEGS_REQ = 12;
 // moggers_shiv: rare dagger, weapon { min: 6, max: 11, speed: 1.7, dagger: true }, req level 6.
 const DAGGER = 'moggers_shiv';
 const DAGGER_REQ = 6;

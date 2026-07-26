@@ -81,101 +81,6 @@ function expectJoined(result: ClientSession | { error: string }): ClientSession 
 }
 
 describe('GameServer sessions', () => {
-  it('keeps dev quest completion commands gated behind ALLOW_DEV_COMMANDS', () => {
-    const previous = process.env.ALLOW_DEV_COMMANDS;
-    delete process.env.ALLOW_DEV_COMMANDS;
-    try {
-      const server = new GameServer();
-      const session = expectJoined(server.join(fakeWs(), 11, 101, 'Nodev', 'warrior', null));
-
-      server.handleMessage(
-        session,
-        JSON.stringify({ t: 'cmd', cmd: 'dev_complete_quest', quest: 'q_wolves' }),
-      );
-
-      expect(server.sim.meta(session.pid)?.questsDone.has('q_wolves')).toBe(false);
-      expect(server.sim.meta(session.pid)?.questLog.has('q_wolves')).toBe(false);
-    } finally {
-      if (previous === undefined) delete process.env.ALLOW_DEV_COMMANDS;
-      else process.env.ALLOW_DEV_COMMANDS = previous;
-    }
-  });
-
-  it('applies account-wide quest lockouts when a character joins', () => {
-    const server = new GameServer();
-    const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Lockedout', 'warrior', null, false, {
-        accountCosmetics: {
-          completedQuestIds: ['q_aldrics_fallen_star'],
-          mechChromaIds: [],
-          weaponSkinIds: [],
-          weaponSkinLoadout: {},
-        },
-      }),
-    );
-
-    expect(server.sim.questState('q_aldrics_fallen_star', session.pid)).toBe('done');
-    expect(server.sim.meta(session.pid)?.questsDone.has('q_aldrics_fallen_star')).toBe(true);
-  });
-
-  it('marks Aldric quest completion account-wide when a character turns it in', () => {
-    markAccountQuestComplete.mockClear();
-    const server = new GameServer();
-    const session = expectJoined(server.join(fakeWs(), 11, 101, 'Aldricdone', 'warrior', null));
-    const meta = server.sim.meta(session.pid)!;
-    const player = server.sim.entities.get(session.pid)!;
-    const aldric = [...server.sim.entities.values()].find(
-      (e) => e.kind === 'npc' && e.templateId === 'brother_aldric_fen',
-    )!;
-    const pos = server.sim.groundPos(aldric.pos.x + 1, aldric.pos.z);
-    player.pos = { ...pos };
-    player.prevPos = { ...pos };
-    meta.questLog.set('q_aldrics_fallen_star', {
-      questId: 'q_aldrics_fallen_star',
-      counts: [1],
-      state: 'ready',
-    });
-    server.sim.addItem('unknown_alien_weaponry', 1, session.pid);
-
-    server.handleMessage(
-      session,
-      JSON.stringify({ t: 'cmd', cmd: 'turnin', quest: 'q_aldrics_fallen_star' }),
-    );
-
-    expect(markAccountQuestComplete).toHaveBeenCalledWith(11, 'q_aldrics_fallen_star');
-    expect(session.accountCosmetics.completedQuestIds).toContain('q_aldrics_fallen_star');
-    expect(server.sim.meta(session.pid)?.questsDone.has('q_aldrics_fallen_star')).toBe(true);
-  });
-
-  it('marks Aldric quest completion account-wide through the dev quest command', () => {
-    const previous = process.env.ALLOW_DEV_COMMANDS;
-    process.env.ALLOW_DEV_COMMANDS = '1';
-    try {
-      markAccountQuestComplete.mockClear();
-      const server = new GameServer();
-      const session = expectJoined(server.join(fakeWs(), 11, 101, 'Aldricdev', 'warrior', null));
-      const meta = server.sim.meta(session.pid)!;
-      meta.questLog.set('q_aldrics_fallen_star', {
-        questId: 'q_aldrics_fallen_star',
-        counts: [1],
-        state: 'ready',
-      });
-      server.sim.addItem('unknown_alien_weaponry', 1, session.pid);
-
-      server.handleMessage(
-        session,
-        JSON.stringify({ t: 'cmd', cmd: 'dev_complete_quest', quest: 'q_aldrics_fallen_star' }),
-      );
-
-      expect(markAccountQuestComplete).toHaveBeenCalledWith(11, 'q_aldrics_fallen_star');
-      expect(session.accountCosmetics.completedQuestIds).toContain('q_aldrics_fallen_star');
-      expect(server.sim.meta(session.pid)?.questsDone.has('q_aldrics_fallen_star')).toBe(true);
-    } finally {
-      if (previous === undefined) delete process.env.ALLOW_DEV_COMMANDS;
-      else process.env.ALLOW_DEV_COMMANDS = previous;
-    }
-  });
-
   it('stores the mech chroma on the account after claiming from the Aldric spinner item', () => {
     grantAccountMechChroma.mockClear();
     const server = new GameServer();
@@ -718,9 +623,7 @@ describe('GameServer sessions', () => {
     await vi.waitFor(() => {
       expect(saveCharacterState).toHaveBeenCalledTimes(1);
     });
-    expect(vi.mocked(saveCharacterState).mock.calls[0][2].questsDone).not.toContain('q_wolves');
 
-    server.sim.meta(session.pid)!.questsDone.add('q_wolves');
     const second = server.saveCharacter(session);
     await Promise.resolve();
     expect(saveCharacterState).toHaveBeenCalledTimes(1);
@@ -730,7 +633,6 @@ describe('GameServer sessions', () => {
     await second;
 
     expect(saveCharacterState).toHaveBeenCalledTimes(2);
-    expect(vi.mocked(saveCharacterState).mock.calls[1][2].questsDone).toContain('q_wolves');
   });
 
   it('closes the play session even when the open insert lands after the player has left', async () => {

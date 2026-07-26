@@ -127,7 +127,6 @@ import type {
 import { computeBackoffDelay } from './backoff';
 import { INPUT_SEND_TIMER_INTERVAL_MS, inputFlushGateOpen } from './input_send_cadence';
 import { createNetPipelineStats, type NetPipelineStats } from './net_pipeline_stats';
-import { optimisticQuestState } from './quest_state_optimistic';
 import { isTransientReconnectRejection, isTransientTimeoutRejection } from './reconnect_policy';
 import {
   type SnapshotTimerWireMode,
@@ -628,7 +627,7 @@ export class Api {
   // characters live on other realm processes would not be torn down immediately
   // (they still lose auth at the DB on the next token check). Routing these
   // account-wide calls to a canonical account origin needs a new client/server
-  // seam (the client has no realm directory today) — deferred to multi-realm
+  // seam (the client has no realm directory today), deferred to multi-realm
   // rollout. See server/realm.ts REALM_DIRECTORY / REALM_ORIGINS.
   async getAccount(): Promise<AccountInfo> {
     return this.get('/api/account');
@@ -809,7 +808,7 @@ export class Api {
   }
 
   // News & Updates feed for the home page, mirrored from GitHub Releases by the
-  // server. Not realm-scoped — always read from the page's own origin.
+  // server. Not realm-scoped, always read from the page's own origin.
   async releases(limit = 20): Promise<ReleaseEntry[]> {
     try {
       const res = await fetch(apiUrl(`/api/releases?limit=${limit}`));
@@ -1047,13 +1046,13 @@ function copyPos(
 
 // A single position update never moves an entity more than a few yards by
 // walking; anything past this is a teleport (arena pit, dungeon portal,
-// graveyard release). Those are snapped, not interpolated — see applyWire.
+// graveyard release). Those are snapped, not interpolated, see applyWire.
 const TELEPORT_SNAP_DIST_SQ = 40 * 40;
 
 // Despawn grace (anti-flicker, entity-map churn). The server keeps known
 // entities in interest out to a drop radius (100yd players / 130yd npcs) that is
-// wider than the add radius, but a wandering entity riding that boundary — or a
-// single late/dropped frame — can still fall out of one snapshot without truly
+// wider than the add radius, but a wandering entity riding that boundary, or a
+// single late/dropped frame, can still fall out of one snapshot without truly
 // leaving. (Distance-tier-throttled entities are NOT a source here: the server
 // lists them in `keep`, so they count as seen and are never missing.) Deleting a
 // briefly-absent entity that frame, then re-creating it the next, churns the
@@ -1088,7 +1087,7 @@ const INCOMPATIBLE_WORLD_VERSION_ERROR = ONLINE_WORLD_INCOMPATIBLE_MESSAGE;
 // that churn happens. A close-range disappearance is intentional (an enemy going
 // stealth) and must hide at once, so anything nearer than this drops immediately.
 // Note the converse: an out-leveled stealther seen at >=70yd now lingers up to
-// DESPAWN_GRACE_MS before vanishing — acceptable, since you can only see a
+// DESPAWN_GRACE_MS before vanishing, acceptable, since you can only see a
 // stealthed unit at that range when far out-leveling it.
 const DESPAWN_GRACE_MIN_DIST_SQ = 70 * 70;
 // How many self snapshots a pending target echo may hold the optimistic value
@@ -1330,8 +1329,6 @@ export class ClientWorld implements IWorld {
   talentRole: Role | null = null;
   loadouts: SavedLoadout[] = [];
   activeLoadout = -1;
-  questLog = new Map<string, QuestProgress>();
-  questsDone = new Set<string>();
   // --- IWorldParty: party/raid roster, mirrored from the snapshot self (`party`).
   // The raid-target markers ride the `markers` map below; IWorldPet keeps no mirror
   // field (pet state lives on the owned-mob entity wire). ---
@@ -1573,7 +1570,7 @@ export class ClientWorld implements IWorld {
   activeFrostRings: ActiveFrostRing[] = [];
   activeTemporalHourglasses: ActiveTemporalHourglass[] = [];
   // inventory deltas arrive in snapshots, separate from the event frames the
-  // HUD redraws on — the frame loop polls this so open panels re-render
+  // HUD redraws on, the frame loop polls this so open panels re-render
   private invChanged = false;
   private cosmeticsChanged = false;
   // IWorldActionBar: the login-time reconciliation, resolved once from the first
@@ -1590,7 +1587,6 @@ export class ClientWorld implements IWorld {
   // chat locally when the player's filter is on. Hard words never arrive here.
   profanityWords: string[] = [];
   private profanityDirty = false;
-  private pendingQuestCommands = new Map<string, 'accept' | 'turnin'>();
   // Pending-target echo protection, the same sanctioned display-only-optimism
   // idiom as pendingQuestCommands / quest_state_optimistic.ts. targetEntity
   // writes the optimistic targetId locally, but a snapshot the server generated
@@ -1933,7 +1929,7 @@ export class ClientWorld implements IWorld {
     this.pendingCommandOutcomes.clear();
   }
 
-  /** Raw WS command — used by dev scripts and browser console when online. */
+  /** Raw WS command, used by dev scripts and browser console when online. */
   devCmd(payload: Record<string, unknown>): void {
     this.rawCmd(payload);
   }
@@ -2094,7 +2090,7 @@ export class ClientWorld implements IWorld {
     }
     if (msg.t === 'socialpos') {
       // live position refresh for friends/guildmates (drives the world map);
-      // merge into the existing roster in place — snapshots own online/offline.
+      // merge into the existing roster in place, snapshots own online/offline.
       if (this.socialInfo && Array.isArray(msg.list)) {
         const byId = new Map<
           number,
@@ -2435,7 +2431,7 @@ export class ClientWorld implements IWorld {
         }
       }
       // interpolation bases: re-anchor at the pose the renderer last drew,
-      // not at the previous server pose — when a frame extrapolated past the
+      // not at the previous server pose, when a frame extrapolated past the
       // last update, restarting from the server pose snapped entities
       // backwards every snapshot (visible rubber-banding while running).
       // Non-self entities are drawn on their per-entity clock (renderer.sync),
@@ -2457,7 +2453,7 @@ export class ClientWorld implements IWorld {
       const entFacingAlpha = Math.min(1, entAlpha);
       // per-entity update clock: distant entities are sent below snapshot
       // rate, so each one interpolates over its own measured cadence. Only
-      // gaps within the slowest legitimate cadence count — records also
+      // gaps within the slowest legitimate cadence count, records also
       // pause while an entity's state is unchanged, and folding an idle
       // period into the estimate would smear its next steps in slow motion
       if (prevUpdatedAt !== undefined) {
@@ -2469,7 +2465,7 @@ export class ClientWorld implements IWorld {
       e.netUpdatedAt = now;
       // A teleport (arena pit, dungeon portal, graveyard release) jumps an
       // entity far further than any single walking update could. Interpolating
-      // across that gap streaks it across the map — and when its per-entity
+      // across that gap streaks it across the map, and when its per-entity
       // interpolation clock isn't established yet, the renderer falls back to
       // the global alpha and the entity sticks at its old pose until its next
       // real update (e.g. taking damage). Snap both poses to the destination so
@@ -2630,7 +2626,7 @@ export class ClientWorld implements IWorld {
       if (applyWire(w) !== null) seen.add(w.id);
     }
     // entities listed in keep are alive but unchanged (or not due an update
-    // at their distance tier this snapshot) — just protect them from pruning
+    // at their distance tier this snapshot), just protect them from pruning
     for (const id of snap.keep ?? []) {
       seen.add(id);
     }
@@ -2874,12 +2870,8 @@ export class ClientWorld implements IWorld {
         this.accountCosmetics = normalizeAccountCosmetics(s.cosmetics);
         this.cosmeticsChanged = true;
       }
-      if (s.qlog !== undefined)
-        this.questLog = new Map((s.qlog as QuestProgress[]).map((q) => [q.questId, q]));
-      if (s.qdone !== undefined) this.questsDone = new Set(s.qdone);
       if (s.lockouts !== undefined) this.selfLockouts = s.lockouts as Record<string, number>;
       if (s.ddiff === 'normal' || s.ddiff === 'heroic') this.selectedDungeonDifficulty = s.ddiff;
-      if (s.qlog !== undefined || s.qdone !== undefined) this.pendingQuestCommands?.clear();
       // IWorldTalents facet (W7) self-decode: tal is delta-guarded (omitted keeps
       // the prior mirror); the known rebuild below is display-only (re-renders what
       // the server already decided), not client authority.
@@ -3076,38 +3068,6 @@ export class ClientWorld implements IWorld {
   // IWorld commands -> network
   // -----------------------------------------------------------------------
 
-  questState(questId: string): QuestState {
-    const identity = this.craftingIdentity;
-    // The server-computed work-order cooldown set rides cprof and gates
-    // computeQuestState here exactly as it does server-side (the offline Sim
-    // re-derives the same set from live PlayerMeta.questCadence).
-    const cadenceBlocked =
-      identity?.cadenceBlockedQuests && identity.cadenceBlockedQuests.length > 0
-        ? new Set(identity.cadenceBlockedQuests)
-        : undefined;
-    return optimisticQuestState(
-      questId,
-      this.questLog,
-      this.questsDone,
-      this.pendingQuestCommands,
-      this.player.level,
-      // The guard looks dead (craftingIdentity is initialized at declaration)
-      // but is load-bearing for prototype-built instances: the bareClient test
-      // idiom (Object.create(ClientWorld.prototype)) skips field initializers.
-      identity
-        ? {
-            activeArchetype: identity.activeArchetype,
-            pairedMajor: identity.pairedMajor,
-            hobbyCraft: identity.hobbyCraft,
-            attunedPairs: [...identity.attunedPairs],
-            switchCount: identity.switchCount,
-            amendsProgress: identity.amendsProgress,
-          }
-        : undefined,
-      cadenceBlocked,
-    );
-  }
-
   consumeInventoryChanged(): boolean {
     const v = this.invChanged;
     this.invChanged = false;
@@ -3149,7 +3109,7 @@ export class ClientWorld implements IWorld {
   // locally authoritative state, so it only drops casts the server would reject
   // anyway. The exception is a same-id revive (graveyard release, Fiesta respawn)
   // that flips a known-dead target back to alive without clearing attackers'
-  // targetId — there the client can drop one hostile cast for a snapshot+RTT and
+  // targetId, there the client can drop one hostile cast for a snapshot+RTT and
   // self-heals on the next GCD. (Mob respawn clears attackers' targetId, so it
   // has no such window.)
   private deadTargetCast(def: ResolvedAbility['def'] | undefined): boolean {
@@ -3325,25 +3285,6 @@ export class ClientWorld implements IWorld {
   }
   pickUpObject(id: number): Promise<boolean> {
     return this.cmdWithOutcome({ cmd: 'pickup', id });
-  }
-  acceptQuest(questId: string, selection?: string): void {
-    if (!this.canSendCommand()) return;
-    this.pendingQuestCommands.set(questId, 'accept');
-    this.cmd({ cmd: 'accept', quest: questId, selection });
-  }
-  turnInQuest(questId: string): void {
-    if (!this.canSendCommand()) return;
-    this.pendingQuestCommands.set(questId, 'turnin');
-    this.cmd({ cmd: 'turnin', quest: questId });
-  }
-  abandonQuest(questId: string): void {
-    if (!this.canSendCommand()) return;
-    this.questLog.delete(questId);
-    this.pendingQuestCommands.delete(questId);
-    this.cmd({ cmd: 'abandon', quest: questId });
-  }
-  acceptLinkedQuest(questId: string, fromPid: number): void {
-    this.cmd({ cmd: 'qlinkaccept', quest: questId, from: fromPid });
   }
   // IWorldInventory facet (W2): the eight item/vendor command senders. Each is a thin
   // cmd() emit whose offline counterpart is the moved src/sim/items.ts body resolved on
