@@ -124,6 +124,20 @@ describe('normalizePrimaryStats', () => {
     expect((out.agi ?? 0) + (out.vit ?? 0)).toBe(6);
   });
 
+  it('carries Dexterity like any other attribute, instead of silently dropping it', () => {
+    // The bug this pins: the output is built from PRIMARY_STATS, so an attribute
+    // missing from that list vanishes on normalization and its points are handed
+    // to the others. Dexterity was missing, in a game where it drives bow attack
+    // power, so no item could carry it and an authored dex line quietly became
+    // more Strength.
+    const out = normalizePrimaryStats({ dex: 4, str: 2 }, 9);
+    expect(out.dex).toBe(6);
+    expect(out.str).toBe(3);
+    expect((out.dex ?? 0) + (out.str ?? 0)).toBe(9);
+    // Alone on an item it takes the whole budget, rather than returning nothing.
+    expect(normalizePrimaryStats({ dex: 3 }, 7)).toEqual({ dex: 7 });
+  });
+
   it('only touches the attributes already present and passes armor through', () => {
     const out = normalizePrimaryStats({ armor: 38, int: 4, luk: 3 }, 6);
     expect(out.armor).toBe(38);

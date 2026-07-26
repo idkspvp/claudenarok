@@ -6,9 +6,15 @@
 // this math without an import cycle. item_level.ts re-exports these for back-compat.
 import type { CoreStats, ItemDef, ItemSlot } from './types';
 
-// The five primary attributes an item can carry (armor is handled separately: it
+// The six primary attributes an item can carry (armor is handled separately: it
 // is an armor-class/slot property, not part of the comparable stat budget).
-export const PRIMARY_STATS = ['str', 'agi', 'vit', 'int', 'luk'] as const;
+//
+// Dexterity was missing here, which was not a cosmetic omission: normalizePrimaryStats
+// below builds its output from THIS list, so an authored `dex` line was silently
+// dropped on normalization and its points redistributed to the other attributes. No
+// item could carry Dexterity at all, in a game where it drives bow attack power and
+// will drive accuracy.
+export const PRIMARY_STATS = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 export type PrimaryStat = (typeof PRIMARY_STATS)[number];
 
 // A rarer item "punches above" the level of the content that drops it. Grounded in

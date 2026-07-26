@@ -42,7 +42,6 @@ const GROUPS: Group[] = [
       { keys: ['Esc'], label: 'guide.controls.gameMenu' },
       { keys: ['C'], label: 'controls.charPane' },
       { keys: ['P'], label: 'controls.spellbook' },
-      { keys: ['L'], label: 'controls.questLog' },
       { keys: ['M'], label: 'controls.worldMap' },
       { keys: ['B'], label: 'controls.bags' },
       { keys: ['N'], label: 'guide.controls.talents' },

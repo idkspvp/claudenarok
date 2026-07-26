@@ -57,7 +57,10 @@ export const DEEDS: Record<string, DeedDef> = {
   prog_level_cap: {
     id: 'prog_level_cap',
     name: 'The View From the Top',
-    desc: 'Reach level 20, the level cap.',
+    // 20 is no longer the cap (99 is), but it IS still the end of the road: levels
+    // 21 and up have nothing in them yet. The trigger stays at 20 on purpose, so
+    // nobody loses a deed they earned; only the claim about the cap is retired.
+    desc: 'Reach level 20, as far as the road has yet been cut.',
     category: 'progression',
     renown: 25,
     trigger: { kind: 'level', level: 20 },

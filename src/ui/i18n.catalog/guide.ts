@@ -1,6 +1,6 @@
 // i18n source catalog - the public Guide (docs/wiki) surface served at /wiki. A curated,
 // branded front-of-house that explains the game, teaches the basics, and showcases
-// classes, the bestiary, quests, and group content (the standalone MediaWiki redirect
+// classes, the bestiary, and group content (the standalone MediaWiki redirect
 // it replaced is retired). English values only; the locale translations live in
 // src/ui/i18n.locales/<lang>.ts (the runtime-authoritative overlays), filled by the
 // maintainer at release.
@@ -35,7 +35,6 @@ export const guideStrings = {
     stats: 'Character & Stats',
     progression: 'Leveling & Progression',
     world: 'World',
-    quests: 'Quests',
     dungeons: 'Dungeons & Raids',
     delves: 'Delves',
     reference: 'Reference',
@@ -88,7 +87,7 @@ export const guideStrings = {
   // Footer.
   footer: {
     blurb:
-      'An open-source, classic-style micro-MMO. Quest, group up, and explore a hand-built world, right in your browser.',
+      'An open-source, classic-style micro-MMO. Hunt, group up, and explore a hand-built world, right in your browser.',
     playNow: 'Play Now',
     github: 'Source on GitHub',
     discord: 'Join the Discord',
@@ -123,7 +122,7 @@ export const guideStrings = {
   home: {
     eyebrow: 'Classic-style browser MMO',
     title: 'World of ClaudeCraft',
-    subtitle: 'Quest, group up, and explore a hand-built world, free in your browser.',
+    subtitle: 'Hunt, group up, and explore a hand-built world, free in your browser.',
     ctaPlay: 'Play Now',
     ctaLearn: 'How to Play',
 
@@ -185,7 +184,7 @@ export const guideStrings = {
       q3: 'Can I play offline?',
       a3: 'Yes. There is an instant single-player mode in your browser, plus the shared online world.',
       q4: 'How long to reach max level?',
-      a4: 'The cap is level {cap}, reached across three zones of quests, dungeons, and exploration.',
+      a4: 'The cap is level {cap}, climbed by hunting across three zones, running dungeons, and exploring.',
     },
 
     // Community call to action.
@@ -201,26 +200,26 @@ export const guideStrings = {
   // How to Play / Basics (the newcomer tutorial page).
   howToPlay: {
     intro:
-      'New to this kind of game? You will be questing in minutes. Here is the short version, one step at a time.',
+      'New to this kind of game? You will be fighting in minutes. Here is the short version, one step at a time.',
     firstHeading: 'Your first 15 minutes',
     step1Title: 'Make a character',
     step1Body:
       'Pick a class and a look, give your hero a name, and enter the world. You can make more characters later.',
-    step2Title: 'Find your first quest',
+    step2Title: 'Place your first points',
     step2Body:
-      'Marshal Redbrook is waiting in the starting town with Wolves at the Door, and Foreman Odell nearby has work too. Talk to either to take your first quest.',
+      'Open your character sheet with C. A new hero holds status points to place across Strength, Agility, Vitality, Intelligence, Dexterity, and Luck. They are what make two heroes of the same class different, and you can always take them back and spend them again.',
     step3Title: 'Move and look around',
     step3Body:
       'Move with W, A, S, D. Hold the right mouse button and drag to look around. That is most of it.',
     step4Title: 'Fight something',
     step4Body:
       'Press Tab to target the nearest enemy, then press your abilities on the bar (keys 1 through 0) to attack.',
-    step5Title: 'Turn it in',
+    step5Title: 'Take what it drops',
     step5Body:
-      'Finish the objective, return to the quest giver (look for the marker on your map), and collect your reward.',
+      'Press F on a fallen enemy to loot it. Coin, gear, and crafting materials all come off the things you kill.',
     step6Title: 'Keep going',
     step6Body:
-      'You just hit level 2. Follow the quest trail out of town and the world opens up from there.',
+      'You just hit level 2. Head out of town, hunt what you can handle, and the world opens up from there. Every level hands you more points to place.',
     basicsHeading: 'The basics',
     resourcesTitle: 'Resources',
     resourcesBody:
@@ -228,15 +227,15 @@ export const guideStrings = {
     targetingTitle: 'Targeting and your bar',
     targetingBody:
       'Tab cycles enemies, F interacts and loots, and your action bar holds the abilities you have learned. Drag spells onto it from your spellbook.',
-    questsTitle: 'Quests',
-    questsBody:
-      'Accept quests from people with a marker over their head, complete the objective, and turn them in for experience, coin, and gear. The tracker on screen keeps your goals in view.',
+    statusPointsTitle: 'Status points',
+    statusPointsBody:
+      'Every level grants points to place across the six attributes, and the cost of a point rises as an attribute climbs. That price is the whole game of building a hero: nobody can afford to be good at everything, so what you leave behind matters as much as what you take.',
     deathTitle: 'Death is not the end',
     deathBody:
       'If you fall, your body stays where it dropped and you rise as a ghost at the nearest graveyard. Run your spirit back to your body to revive on the spot, penalty free, or accept the Pale Keeper at the graveyard for an instant raise at the cost of a passing weakness. Brand-new heroes are spared the weakness entirely, and nothing you own or have earned is ever lost.',
     groupingTitle: 'Playing together',
     groupingBody:
-      'Invite others to a party to share quest credit and take on dungeons. Most of the world is soloable, so grouping is a choice, not a chore.',
+      'Invite others to a party to share kill credit and take on dungeons. Most of the world is soloable, so grouping is a choice, not a chore.',
     onlineTitle: 'Online or offline',
     onlineBody:
       'Play the shared online world with everyone else, or start an instant offline world in your browser to learn the ropes.',
@@ -397,7 +396,7 @@ export const guideStrings = {
       'Warriors build Rage in the thick of a fight, rogues spend Energy that steadily returns, and casters manage a pool of Mana. Learning your resource is half of playing your class well.',
     growTitle: 'You grow stronger every level',
     growBody:
-      'Each level makes you tougher and unlocks new abilities, all the way to the cap of level {cap}. Questing is the fastest way up; hunting, dungeon runs, and delves round it out.',
+      'Each level makes you tougher, unlocks new abilities, and hands you status points to place, all the way to the cap of level {cap}. Hunting is the way up; dungeon runs and delves round it out.',
     // Status effects: buffs, debuffs, damage over time, crowd control with diminishing returns.
     effectsTitle: 'Buffs, debuffs, and crowd control',
     effectsBody:
@@ -527,7 +526,7 @@ export const guideStrings = {
     q5: 'How many classes are there?',
     a5: 'Nine, covering the classic tank, healer, and damage roles, each with a resource system (rage, mana, or energy) and its own signature abilities.',
     q6: 'What is the level cap?',
-    a6: 'Level {cap}, reached across three connected zones of quests, dungeons, and exploration.',
+    a6: 'Level {cap}, climbed across three connected zones of hunting, dungeons, and exploration.',
     q7: 'Will my character be saved?',
     a7: 'Online characters are saved on the server automatically. Offline characters live in your browser for quick sessions and testing.',
     q8: 'Can I host my own copy?',
@@ -788,7 +787,7 @@ export const guideStrings = {
     hub: 'Home base',
     mapHeading: 'The road north',
     mapSub:
-      'Three zones, south to north, each a step higher in level. Follow the quest trail and the land carries you from the valley to the peaks.',
+      'Three zones, south to north, each a step higher in level. Follow the road north and the land carries you from the valley to the peaks.',
     places: 'Notable places',
     residents: 'Who you will meet',
     valeBlurb:
@@ -828,75 +827,6 @@ export const guideStrings = {
     worldBossTitle: 'When the peak wakes: the world boss',
     worldBossBody:
       'High on Thornpeak, the storm over Stormcrag sometimes gathers a shape. Thunzharr, the Waking Peak rises there on a steady rhythm, a raid-strength elemental fought in the open world by whoever answers the call, and he grows mightier the more challengers stand against him. Everyone who joins the fight earns their own roll of his spoils, honored on raid-lockout terms, and his fall lingers long enough for the fallen to run back and claim their due. Gather more swords than you think you need.',
-  },
-
-  // Quests.
-  questsPage: {
-    heading: 'Quests',
-    intro: 'Quests are the heart of the world and the fastest way to level. Here is how they work.',
-    acceptTitle: 'Finding and accepting',
-    acceptBody:
-      'People with a marker over their head have work for you. Talk to them to accept a quest. In Eastbrook, Marshal Redbrook is waiting with Wolves at the Door, one of the first quests you can take.',
-    objectivesTitle: 'Objectives',
-    objectivesBody:
-      'Slay certain enemies, gather items, or interact with something in the world. The on-screen tracker counts your progress as you go. If you change your mind, you can drop a quest from your quest log and pick it up again from its giver later.',
-    turninTitle: 'Turning in',
-    turninBody:
-      'Take a finished quest to its turn-in marker, the map shows you where, for experience, coin, and often a piece of gear chosen to suit your class. That is usually the one who gave it to you, though some quests send you on to someone else.',
-    partyTitle: 'Questing in a group',
-    partyBody:
-      'Party members nearby share kill and objective credit, so questing together is faster, never slower. You can also share a quest with your group: post it to chat as a clickable link with the /share command, and any member who qualifies can pick up the same quest in one click.',
-    storyTitle: 'A thread runs through it all',
-    storyBody:
-      'From your first errands in Eastbrook, something is wrong with the dead. A cult is at work, and the trail leads north through every zone. Follow it to learn who stands behind it.',
-    soloNote:
-      "The main story is soloable right up to each chapter's finale, which is a five-player dungeon.",
-
-    // Quest types section: the shapes an objective can take.
-    typesTitle: 'The kinds of quest you will see',
-    typesBody:
-      'Most quests are one of a few familiar shapes. The on-screen tracker spells out exactly what each one wants, so you are never left guessing.',
-    typeSlayTitle: 'Slay',
-    typeSlayBody:
-      "Thin out a pack of beasts or break a cult's hold by defeating a set number of a marked enemy. One of your first quests, clearing wolves off the Eastbrook road, is one of these.",
-    typeGatherTitle: 'Gather',
-    typeGatherBody:
-      "Collect items from the world or from what enemies drop: herbs, ore, a cult's grim reagents. Some pieces only fall from a particular foe, so the hunt and the haul go together.",
-    typeInteractTitle: 'Interact',
-    typeInteractBody:
-      'Use, cleanse, or read something fixed in the world: a defiled grave, a warning carved on a shore-rock, a sealed crypt door. Walk up to the marker and act on it.',
-    typeMusterTitle: 'Muster the defense',
-    typeMusterBody:
-      'Some quests have you rally a town before a push north: thin the threat at the gates and gather what the defenders need. These are slay and gather objectives in service of the people whose story you are in, and they keep you moving with them.',
-    typeGroupTitle: 'Group finales',
-    typeGroupBody:
-      "Each chapter of the main story ends at a dungeon door. The lead-in is soloable, but the final blow against a chapter's villain is meant for a party of five.",
-
-    // The villain-ladder saga, teased as a trail north. No endings, no boss names.
-    sagaTitle: 'Follow the trail north',
-    sagaBody:
-      "The main story is one long chase. A death-cult is at work on the realm's graves, and every chapter you close points one zone further up the road. You never fight the whole conspiracy at once; you pull one thread, and it leads to the next hand holding it.",
-    sagaValeTitle: 'The Vale: a name on a sigil',
-    sagaValeBody:
-      'In Eastbrook the dead will not rest, and the mark behind it belongs to a sect long thought gone. Trace it to a Gravecaller working the chapel crypt, and his own papers point you toward the fen in the north.',
-    sagaMarshTitle: 'The marsh: a tithe of souls',
-    sagaMarshBody:
-      'In Mirefen the drownings are no accident. Someone is filling the fen like a tithing box, raising obedient dead from every traveler the water takes. Chase the orders up the chain to a Fogbinder in the drowned bastion, whose last words name something older still, stirring beneath the peaks.',
-    sagaPeaksTitle: 'The peaks: what the tithe was for',
-    sagaPeaksBody:
-      "On Thornpeak the whole scheme comes clear. Every soul stolen since the Vale was a tithe poured toward the cult's grim work in the mountain's heart. The trail that began in a chapel yard ends here, in a five-player descent to face the hand behind it all. We will let you find out who waits at the bottom.",
-
-    // Side-chains, called out as optional threads alongside the main story.
-    sideTitle: 'Threads off the main road',
-    sideWardenTitle: 'Earning your name',
-    sideWardenBody:
-      "Alongside the story, the marshals and wardens of the Vale and the fen hand out a standing bounty ladder. Work your way up it, foe by foe, the way every bounty hunter before you earned their place. It is honest leveling and a tour of each zone's worst troublemakers.",
-    sideCryptTitle: 'The forgotten king',
-    sideCryptBody:
-      "High on the peaks runs a quieter mystery: old graves marked with a crown no record remembers. Read the dead, gather what they guarded, and unseal a tomb that was meant to stay shut. It is a detective's trail that opens the way to the realm's ten-player endgame raid.",
-    sideTempleTitle: 'The drowned temple',
-    sideTempleBody:
-      'A gate of pale light on a high tarn in the peaks opens onto a sunken shrine where a drowned cult still sings. Its short chain stands apart from the main story, a self-contained mystery for anyone who climbs to the shore, reads the warnings carved on the rocks, and goes down to see what they were for.',
   },
 
   // Recurring characters and in-world voices, shared across the World and Quests pages.

@@ -1,11 +1,11 @@
 // How to Play / Basics: the low-density newcomer tutorial. Steps mirror the in-game
 // New-Adventurer flow (Marshal Redbrook, Wolves at the Door). Spoiler-free.
 
-import { t } from '../../ui/i18n';
 import { esc } from '../../ui/esc';
+import { t } from '../../ui/i18n';
 import { hrefFor } from '../routes';
-import { lead, related } from './ui';
 import type { GuidePage } from './types';
+import { lead, related } from './ui';
 
 const STEPS = [
   ['guide.howToPlay.step1Title', 'guide.howToPlay.step1Body'],
@@ -19,7 +19,7 @@ const STEPS = [
 const BASICS = [
   ['guide.howToPlay.resourcesTitle', 'guide.howToPlay.resourcesBody'],
   ['guide.howToPlay.targetingTitle', 'guide.howToPlay.targetingBody'],
-  ['guide.howToPlay.questsTitle', 'guide.howToPlay.questsBody'],
+  ['guide.howToPlay.statusPointsTitle', 'guide.howToPlay.statusPointsBody'],
   ['guide.howToPlay.deathTitle', 'guide.howToPlay.deathBody'],
   ['guide.howToPlay.groupingTitle', 'guide.howToPlay.groupingBody'],
   ['guide.howToPlay.onlineTitle', 'guide.howToPlay.onlineBody'],
@@ -28,12 +28,13 @@ const BASICS = [
 export const howToPlay: GuidePage = {
   titleKey: 'guide.nav.howToPlay',
   render() {
-    const steps = STEPS
-      .map(([title, body]) => `<li><h3>${esc(t(title))}</h3><p>${esc(t(body))}</p></li>`)
-      .join('');
-    const basics = BASICS
-      .map(([title, body]) => `<div class="guide-basic"><h3>${esc(t(title))}</h3><p>${esc(t(body))}</p></div>`)
-      .join('');
+    const steps = STEPS.map(
+      ([title, body]) => `<li><h3>${esc(t(title))}</h3><p>${esc(t(body))}</p></li>`,
+    ).join('');
+    const basics = BASICS.map(
+      ([title, body]) =>
+        `<div class="guide-basic"><h3>${esc(t(title))}</h3><p>${esc(t(body))}</p></div>`,
+    ).join('');
     return `
       <article class="guide-article">
         <h1>${esc(t('guide.nav.howToPlay'))}</h1>

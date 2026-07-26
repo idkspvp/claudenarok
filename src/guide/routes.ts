@@ -127,13 +127,6 @@ export const GUIDE_ROUTES: GuideRoute[] = [
     descKey: 'guide.economy.intro',
   },
   {
-    id: 'quests',
-    sub: 'quests',
-    navKey: 'guide.nav.quests',
-    group: 'compendium',
-    descKey: 'guide.questsPage.intro',
-  },
-  {
     id: 'dungeons',
     sub: 'dungeons',
     navKey: 'guide.nav.dungeons',

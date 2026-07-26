@@ -21,7 +21,6 @@ import { howToPlay } from './how_to_play';
 import { models } from './models';
 import { professions } from './professions';
 import { progression } from './progression';
-import { quests } from './quests';
 import { settings } from './settings';
 import { social } from './social';
 import { stats } from './stats';
@@ -45,7 +44,6 @@ const PAGES: Record<string, GuidePage> = {
   gear,
   professions,
   economy,
-  quests,
   dungeons,
   delves,
   arena,
