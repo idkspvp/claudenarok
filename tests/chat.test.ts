@@ -1217,10 +1217,7 @@ describe('chat module (direct, no Sim)', () => {
     expect(purse.copper).toBe(250 * 10000);
     expect(chatMod.handleDevChat(ctx, '/dev gold 9999999', 1)).toBe(null);
     expect(purse.copper).toBe(250 * 10000 + 100000 * 10000); // clamped to 100000g
-    expect(chatMod.handleDevChat(ctx, '/dev quest q_wolves', 1)).toBe(null);
-    expect(calls).toContainEqual(['quest', 'q_wolves', 1]);
-    expect(chatMod.handleDevChat(ctx, '/dev quests', 1)).toBe(null);
-    expect(calls).toContainEqual(['quests', 1]);
+    // `/dev quest` and `/dev quests` went with the quest system.
     expect(chatMod.handleDevChat(ctx, '/dev bot ASASAS', 1)).toBe(null);
     expect(calls).toContainEqual(['bot', 'ASASAS']);
     expect(chatMod.handleDevChat(ctx, 'hello world', 1)).toBe(undefined);
