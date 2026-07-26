@@ -8,7 +8,6 @@ import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-// @ts-expect-error - shared zero-dep JS build tool (no .d.ts); same pattern as the registry test importing scripts/i18n_hash.mjs.
 import {
   GENERATED_DIR,
   injectLocaleChunkMap,
@@ -16,6 +15,8 @@ import {
   PLACEHOLDER,
   parseSupportedLocales,
   templateModulepreload,
+  // @ts-expect-error - shared zero-dep JS build tool (no .d.ts); same pattern as
+  // the registry test importing scripts/i18n_hash.mjs.
 } from '../scripts/i18n_modulepreload.mjs';
 import { LOCALE_LOADERS, SUPPORTED_LANGUAGES } from '../src/ui/i18n.resolved.generated/loaders';
 
