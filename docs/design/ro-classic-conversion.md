@@ -133,3 +133,67 @@ The nine current classes do not map cleanly onto six Ragnarok branches: there is
 no Merchant equivalent here, and Shaman, Warlock, and Druid have no counterpart
 there. Re-homing 317 abilities across eighteen jobs is the largest single piece of
 phase 2 and needs its own pass.
+
+## Fidelity check (2026-07-27)
+
+Everything below was checked against published pre-renewal figures, pinned in
+`tests/ro_stat_fidelity.test.ts`. That file is the only place those numbers appear
+as literals, so drift shows up there as a named failure.
+
+**A note on which Ragnarok.** *Pre-renewal* and *Classic* are the same era; the
+squared per-10-attribute terms in ATK and MATK belong to it and to nothing else.
+*Renewal* (2010+) dropped them and rebuilt ATK around `BaseLevel/4 + STR + DEX/5
++ LUK/3`. *Revo-Classic* servers run Renewal formulas over classic-era content, so
+they look like our target and compute like Renewal's. A search for "Ragnarok ATK
+formula" returns the Renewal one by default; that is how the wrong formula nearly
+landed here. The squared terms are the tell.
+
+### Matches
+
+| | Ragnarok pre-renewal | Ours |
+|---|---|---|
+| Status points, levels 1–99 | 1,225 earned, +48 at creation | 1,273 |
+| Stat cost | `floor(stat/10) + 2` | same |
+| Two 99s | costs 1,274 against a 1,273 budget | one point short, exactly |
+| Melee ATK | `STR + floor(STR/10)² + floor(DEX/5) + floor(LUK/5)` | same |
+| Bow ATK | DEX leads, STR pays a fifth | same |
+| MATK | `INT + floor(INT/7)²` to `INT + floor(INT/5)²` | the midpoint |
+| MaxHP / MaxSP | `× (1 + VIT/100)` / `× (1 + INT/100)` | same |
+| Crit | `1 + LUK × 0.3` | same |
+| SP recovery | driven by INT | same |
+| Defence | VIT, never AGI | same |
+
+### Not yet matched
+
+- **HIT against FLEE.** Ragnarok resolves a swing as a contest:
+  `HIT = 175 + BaseLv + DEX + floor(LUK/3)` against
+  `FLEE = 100 + BaseLv + AGI + floor(LUK/5)`. We still roll a flat dodge fraction,
+  and DEX buys accuracy nowhere. Phase 3.
+- **The damage formula itself.** Ragnarok has no attack-power divisor: damage is
+  weapon ATK plus status ATK against the target's DEF. `STATUS_AP_PER_DPS` is
+  calibration holding the old balance in place, not the model. Phase 3.
+- **Spell crit.** Pre-renewal magic cannot crit at all. Ours can, off a 5% base
+  while melee crit sits at 1%. Phase 3.
+- **Soft DEF.** `vitSoftDefence` (`floor(VIT/2)`, a flat subtraction) is written
+  and unused: our `armor` is a percentage system, which maps to equipment DEF, and
+  the flat half has nowhere to go until the damage formula exists. Phase 3.
+- **Attribute magnitudes in content.** Mob affixes, enchants, and item stats were
+  authored against a scale where a level-20 character had ~80 in an attribute.
+  They have ~16 now. The four attribute-draining affixes were rescaled; the item
+  and enchant tables have not been swept.
+
+### Two deliberate deviations
+
+**A new character starts on the class's suggested spread**, not on 1/1/1/1/1/1
+with 48 points in hand. Ragnarok assumes the player places them before doing
+anything; here an unallocated character cannot fight and there is no allocation
+window yet. Every point is refunded by Reset, and the spread stops following a
+character the moment they move a single point of it. Revisit once the status
+window ships.
+
+**Classes carry their own armor** (`baseArmor`/`armorPerLevel`), which Ragnarok
+does not: there, DEF is overwhelmingly equipment. Ours went missing with the old
+stat block, which had carried it as a sixth pseudo-attribute, and its absence made
+a level-1 character lose to the starter wolf. It is not one of the six, so it does
+not compromise the "attributes are the player's to spend" rule, but it is a
+deviation and it should be reconsidered when equipment DEF is retuned.
