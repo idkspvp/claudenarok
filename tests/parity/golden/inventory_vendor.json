@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a922956b",
+      "state": "ea8f75aa",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -126,6 +126,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
@@ -146,7 +148,9 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -175,7 +179,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "47114e3a",
+      "state": "4183914b",
       "events": "7db794b1",
       "rng": {
         "draws": 0,
@@ -276,6 +280,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
@@ -296,7 +302,9 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -325,7 +333,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "d630bc5a",
+      "state": "947f7e61",
       "events": "aced36d1",
       "rng": {
         "draws": 0,
@@ -433,6 +441,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 93,
@@ -453,7 +463,9 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -482,7 +494,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "e3257a48",
+      "state": "2268f97b",
       "events": "7b632ab5",
       "rng": {
         "draws": 0,
@@ -590,6 +602,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 92,
@@ -610,7 +624,9 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -639,7 +655,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c71d47b8",
+      "state": "5e6127b9",
       "events": "d7e42320",
       "rng": {
         "draws": 0,
@@ -750,6 +766,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
@@ -770,7 +788,9 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -799,7 +819,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f7272118",
+      "state": "4e3c002d",
       "events": "d37a7dbf",
       "rng": {
         "draws": 0,
@@ -922,6 +942,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
@@ -942,8 +964,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -972,7 +996,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a19217b1",
+      "state": "20209896",
       "events": "7787b44e",
       "rng": {
         "draws": 0,
@@ -1091,6 +1115,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 90,
@@ -1111,8 +1137,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1141,7 +1169,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b7e5cc3b",
+      "state": "be7554e4",
       "events": "700fff02",
       "rng": {
         "draws": 0,
@@ -1271,6 +1299,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -1291,8 +1321,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1321,7 +1353,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "2ea4528c",
+      "state": "a94a1d35",
       "events": "0d8a0109",
       "rng": {
         "draws": 0,
@@ -1455,6 +1487,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -1475,8 +1509,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1505,7 +1541,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "afed7c0d",
+      "state": "892e49ce",
       "events": "5917907c",
       "rng": {
         "draws": 0,
@@ -1644,6 +1680,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -1664,8 +1702,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1694,7 +1734,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "79485e3c",
+      "state": "de0eaba9",
       "events": "43fbfed4",
       "rng": {
         "draws": 0,
@@ -1839,6 +1879,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -1859,8 +1901,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1889,7 +1933,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a7dcdb1b",
+      "state": "a7ca863c",
       "events": "a5ebc92c",
       "rng": {
         "draws": 0,
@@ -2039,6 +2083,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -2059,8 +2105,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2089,7 +2137,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "369d8ae4",
+      "state": "84562d41",
       "events": "6787cd59",
       "rng": {
         "draws": 0,
@@ -2235,6 +2283,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -2255,8 +2305,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2285,7 +2337,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "369d8ae4",
+      "state": "84562d41",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2431,6 +2483,8 @@
             "kind": "food",
             "remaining": 18
           },
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 100,
@@ -2451,8 +2505,10 @@
             "z": 0.812357
           },
           "potionCooldownUntil": 120,
+          "race": "demihuman",
           "resourceType": "rage",
           "sitting": true,
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,

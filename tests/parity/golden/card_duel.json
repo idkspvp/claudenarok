@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "df8e89c5",
+      "state": "d9e22405",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "161a971c",
+      "state": "626e64f8",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "2a35868c",
+      "state": "d2c16b64",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "b68f2c51",
+      "state": "a3b0cc21",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "dd772294",
+      "state": "ab79f8c4",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "8d01c0af",
+      "state": "17723d73",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "19f06019",
+      "state": "099456f5",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "c150baa6",
+      "state": "59905f66",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "9a83b211",
+      "state": "0b3928b9",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -275,6 +275,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.05,
           "hp": 90,
@@ -295,7 +297,9 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -326,6 +330,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.019,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.05,
           "hp": 54,
@@ -345,8 +351,10 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resource": 182,
           "resourceType": "mana",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,

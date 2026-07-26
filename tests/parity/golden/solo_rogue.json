@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "e0a1c0e8",
+      "state": "35460e3d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -93,6 +93,8 @@
           "detonateTimer": "Infinity",
           "dodgeChance": 0.037,
           "dualWielding": true,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 62,
@@ -119,8 +121,10 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resource": 100,
           "resourceType": "energy",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -150,7 +154,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "37443b8c",
+      "state": "5c6aa293",
       "events": "838f4619",
       "rng": {
         "draws": 12,
@@ -161,7 +165,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "bf900210",
+      "state": "ff9a9255",
       "events": "7cddb665",
       "rng": {
         "draws": 21,
@@ -172,7 +176,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "3015174e",
+      "state": "745cf207",
       "events": "cbc998a5",
       "rng": {
         "draws": 98,
@@ -183,7 +187,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "a533d8fa",
+      "state": "50f1237d",
       "events": "741638a5",
       "rng": {
         "draws": 151,
@@ -287,6 +291,8 @@
           "detonateTimer": "Infinity",
           "dodgeChance": 0.049,
           "dualWielding": true,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
@@ -316,8 +322,10 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resource": 100,
           "resourceType": "energy",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,

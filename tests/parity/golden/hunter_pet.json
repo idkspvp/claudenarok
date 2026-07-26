@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "827e701a",
+      "state": "6d3dd53f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -97,6 +97,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.034,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "hp": 69,
@@ -116,9 +118,11 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "rangedPower": 11,
           "resource": 93,
           "resourceType": "mana",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -147,7 +151,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "1f5af3c4",
+      "state": "e1596adf",
       "events": "58d279cf",
       "rng": {
         "draws": 10,
@@ -158,7 +162,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "7adbbb0f",
+      "state": "908e09ee",
       "events": "741638a5",
       "rng": {
         "draws": 10,
@@ -169,7 +173,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "70b45939",
+      "state": "5ef89b06",
       "events": "b4a46250",
       "rng": {
         "draws": 105,
@@ -180,7 +184,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "1019778c",
+      "state": "1afdca81",
       "events": "741638a5",
       "rng": {
         "draws": 202,
@@ -191,7 +195,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "bf705c8a",
+      "state": "2cbcb439",
       "events": "4a8422ac",
       "rng": {
         "draws": 303,
@@ -202,7 +206,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "c09365f3",
+      "state": "b31c507e",
       "events": "741638a5",
       "rng": {
         "draws": 406,
@@ -213,7 +217,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "c09365f3",
+      "state": "b31c507e",
       "events": "741638a5",
       "rng": {
         "draws": 406,
@@ -320,6 +324,8 @@
           "critChance": 0.019,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.049,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 105,
           "hp": 49947,
@@ -340,9 +346,11 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "rangedPower": 17,
           "resource": 388,
           "resourceType": "mana",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,

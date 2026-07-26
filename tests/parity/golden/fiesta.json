@@ -30,7 +30,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "c1d1d4e7",
+      "state": "4c206547",
       "events": "bf99070b",
       "rng": {
         "draws": 0,
@@ -41,7 +41,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "58aa76bc",
+      "state": "4cfffdec",
       "events": "2624f545",
       "rng": {
         "draws": 36,
@@ -52,7 +52,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "65e596dc",
+      "state": "d553d008",
       "events": "92dd922d",
       "rng": {
         "draws": 120,
@@ -63,7 +63,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "5ff37c65",
+      "state": "2690ac55",
       "events": "547fbe65",
       "rng": {
         "draws": 231,
@@ -74,7 +74,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "e23bc238",
+      "state": "f72f6e60",
       "events": "31e02e8b",
       "rng": {
         "draws": 385,
@@ -85,7 +85,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 419,
-      "state": "f3d101ad",
+      "state": "58e4c855",
       "events": "741638a5",
       "rng": {
         "draws": 537,
@@ -96,7 +96,7 @@
       "tick": 163,
       "time": 8.15,
       "nextId": 419,
-      "state": "65b3a422",
+      "state": "00238606",
       "events": "ec02393c",
       "rng": {
         "draws": 606,
@@ -436,6 +436,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.022,
+          "element": "neutral",
+          "elementLevel": 1,
           "fiveSecondRule": 107.15,
           "hp": 753,
           "id": 415,
@@ -454,7 +456,9 @@
             "z": -1268
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resourceType": "rage",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -485,6 +489,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.019,
+          "element": "neutral",
+          "elementLevel": 1,
           "fiveSecondRule": 107.15,
           "hp": 393,
           "id": 416,
@@ -502,8 +508,10 @@
             "z": -1268
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resource": 1431,
           "resourceType": "mana",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -535,6 +543,8 @@
           "detonateTimer": "Infinity",
           "dodgeChance": 0.037,
           "dualWielding": true,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 107.15,
           "hp": 477,
@@ -560,8 +570,10 @@
             "z": -1228
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "resource": 100,
           "resourceType": "energy",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -593,6 +605,8 @@
           "critChance": 0.016,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.034,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 107.15,
           "hp": 757,
@@ -611,9 +625,11 @@
             "z": -1228
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
           "rangedPower": 35,
           "resource": 597,
           "resourceType": "mana",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
