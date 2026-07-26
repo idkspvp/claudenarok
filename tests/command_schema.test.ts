@@ -31,8 +31,11 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // place_mobile_station, train_recipe, the three enchanting actions
 // (disenchant_item, apply_enchant, salvage_item), and unbind_item (the
 // Maker's Bond unbind service).
-const EXPECTED_SEND_COUNT = 160;
-const EXPECTED_DISPATCH_COUNT = 167;
+// Plus the two status-point commands the Ragnarok conversion added, raise_stat
+// and reset_stats: a character's attributes are the player's to spend now, so
+// both spend verbs cross the wire and the server owns the budget check.
+const EXPECTED_SEND_COUNT = 162;
+const EXPECTED_DISPATCH_COUNT = 169;
 const EXPECTED_DISPATCH_ONLY_COUNT = 7;
 
 // The chat sub-channel routing switch (server/game.ts `switch

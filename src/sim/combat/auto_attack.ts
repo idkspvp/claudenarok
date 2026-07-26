@@ -43,8 +43,10 @@ import {
   dist2d,
   type Entity,
   MELEE_RANGE,
+  MOB_AP_PER_DPS,
   normAngle,
   STANCE_MASTERY_BERSERKER_HASTE,
+  STATUS_AP_PER_DPS,
   swingMissChance,
   type WeaponHand,
   type WeaponInfo,
@@ -87,6 +89,14 @@ function mainhandAutoAttackHand(attacker: Entity): AutoAttackHand {
   const item = attacker.mainhandItemId ? ITEMS[attacker.mainhandItemId] : undefined;
   if (item?.kind !== 'weapon') return 'onehand';
   return weaponHand(item) === 'twohand' ? 'twohand' : 'onehand';
+}
+
+// Which attack-power scale is this attacker on? A player (and anything deriving
+// its stats from recalcPlayerStats, which is the pet and the delve companion)
+// carries the Ragnarok status number; a mob carries its template's pre-conversion
+// one. Getting this backwards is a 4-to-5x damage error in either direction.
+function apDivisorFor(attacker: Entity): number {
+  return attacker.kind === 'mob' ? MOB_AP_PER_DPS : STATUS_AP_PER_DPS;
 }
 
 export function startAutoAttack(ctx: SimContext, pid?: number): void {
@@ -354,7 +364,7 @@ export function rangedSwing(
     const weaponRoll = ctx.rng.range(ranged.min, ranged.max);
     let dmg =
       (ranged.wand ? weaponRoll : weaponRoll * RANGED_WEAPON_COEFF) +
-      (atk.rangedPower / 14) * ranged.speed;
+      (atk.rangedPower / apDivisorFor(atk)) * ranged.speed;
     // ranged white hits suffer the same higher-level crit suppression as melee
     const critChance = Math.max(0.005, atk.critChance - Math.max(0, tgt.level - atk.level) * 0.002);
     const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, atk) ? 1 : critChance);
@@ -479,7 +489,7 @@ export function meleeSwing(
       // fires at: Wolf Form swings at the rogue speed (baseSwingSpeed), so its
       // AP-per-swing must use that speed too, not the slow staff's, or feral
       // would double-dip (fast swings AND heavy slow-weapon AP weighting).
-      (ctx.effectiveAttackPower(attacker) / 14) * apSwingSpeed) *
+      (ctx.effectiveAttackPower(attacker) / apDivisorFor(attacker)) * apSwingSpeed) *
       mult +
     bonus +
     imbueBonus;

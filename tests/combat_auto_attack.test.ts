@@ -18,7 +18,13 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { advancePendingProjectiles } from '../src/sim/projectile_travel';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
-import type { Aura, Entity, PlayerClass, SimEvent } from '../src/sim/types';
+import {
+  type Aura,
+  type Entity,
+  type PlayerClass,
+  type SimEvent,
+  STATUS_AP_PER_DPS,
+} from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
 
 type DamageEvent = Extract<SimEvent, { type: 'damage' }>;
@@ -660,7 +666,14 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     const { sim, p } = makeSim('hunter', 20);
     const mob = spawnDummy(sim, p, 5, 8);
     mob.stats = { ...mob.stats, armor: 0 }; // no armor mitigation: keeps the hit exact
-    p.rangedPower = 140; // AP term: (140 / 14) x speed 2 = 20
+    // AP term: (140 / STATUS_AP_PER_DPS) x speed 2. A player's attack power is on
+    // the Ragnarok status scale now, which is a much smaller number, so the swing
+    // formula divides it by less: 140 here stands in for a far higher old-scale
+    // attack power than it used to.
+    // 141, not 140: divisible by STATUS_AP_PER_DPS, so the AP term is a whole
+    // number and the expected damage below needs no rounding fudge.
+    p.rangedPower = 141;
+    const apTerm = (141 / STATUS_AP_PER_DPS) * 2;
     const events = capture(sim);
     for (let i = 0; i < 60; i++) rangedSwing(sim.ctx, p, mob, { min: 100, max: 100, speed: 2 });
     for (let i = 0; i < 400 && sim.ctx.pendingProjectiles.length > 0; i++)
@@ -670,14 +683,17 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     );
     expect(hits.length).toBeGreaterThan(10);
     expect(hits.some((h) => !h.crit)).toBe(true);
-    // 0.6 x 100 + 20 = 80 (would be 120 with the coefficient dropped)
-    for (const h of hits) expect(h.amount).toBe(h.crit ? 160 : 80);
+    // 0.6 x 100 + the AP term (would be the FULL 100 with the coefficient dropped)
+    const shot = 0.6 * 100 + apTerm;
+    for (const h of hits) expect(h.amount).toBe(h.crit ? shot * 2 : shot);
+    expect(shot).toBeLessThan(100 + apTerm); // the coefficient really is applied
   });
 
   it('a wand bolt lands at the FULL weapon roll (no coefficient)', () => {
     const { sim, p } = makeSim('mage', 20);
     const mob = spawnDummy(sim, p, 5, 8);
-    p.rangedPower = 140; // same AP term as above, isolating the coefficient arm
+    p.rangedPower = 141; // same AP term as above, isolating the coefficient arm
+    const apTerm = (141 / STATUS_AP_PER_DPS) * 2;
     const events = capture(sim);
     for (let i = 0; i < 60; i++)
       rangedSwing(sim.ctx, p, mob, { min: 100, max: 100, speed: 2, wand: true, school: 'arcane' });
@@ -688,8 +704,10 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     );
     expect(hits.length).toBeGreaterThan(10);
     expect(hits.some((h) => !h.crit)).toBe(true);
-    // 100 + 20 = 120 (would be 80 if the 0.6 leaked onto wands)
-    for (const h of hits) expect(h.amount).toBe(h.crit ? 240 : 120);
+    // the FULL roll plus the AP term (would carry the 0.6 if it leaked onto wands)
+    const bolt = 100 + apTerm;
+    for (const h of hits) expect(h.amount).toBe(h.crit ? bolt * 2 : bolt);
+    expect(bolt).toBeGreaterThan(0.6 * 100 + apTerm);
   });
 });
 

@@ -3374,7 +3374,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
     expect(scraped.has('vcupb')).toBe(true); // the maybeRaw calls ARE captured by the widened regex
     expect(scraped.has('dfb')).toBe(true); // incl. the multi-line maybeRaw('dfb', ...) form
-    expect(scraped.size).toBe(54);
+    expect(scraped.size).toBe(55);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

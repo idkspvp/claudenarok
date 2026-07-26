@@ -519,7 +519,12 @@ export function recalcPlayerStats(
   // and Magic Attack all went with it. A drain can strip an attribute to nothing;
   // it can never make one worth less than nothing.
   for (const key of STATUS_STATS) s[key] = Math.max(0, s[key]);
-  s.armor += s.agi * 2;
+  // Armor comes from the class and from Vitality, never from Agility. Agility
+  // buys evasion in Ragnarok and no defence at all; it fed armor here only
+  // because the pre-conversion Agility was also the generic "light armor" stat.
+  // Vitality is the attribute that makes a character hard to kill, so it is the
+  // one that reduces damage as well as raising the pool.
+  s.armor += def.baseArmor + def.armorPerLevel * (lvl - 1) + s.vit * 2;
   if (bearForm) {
     // 2.3x (2026-07 tank parity, was 1.9x): leather peaks ~1700-2100 armor
     // vs the warrior's 2861, so the form multiplier fakes the missing plate

@@ -5051,6 +5051,31 @@ export const MELEE_SPELL_AP_SCALE = 0.15;
 // Sunder Armor reduces 2% per stack (5 stacks = 10%); Faerie Fire reduces a flat
 // 10%. They do NOT stack with each other: effectiveArmor takes the larger percent.
 // Mob corrosion (kind 'corrode') is a separate FLAT shred, subtracted before these.
+// ---------------------------------------------------------------------------
+// Attack power to per-swing damage.
+//
+// A swing adds `attackPower / divisor * weaponSpeed` on top of its weapon roll.
+// There are TWO divisors because there are two attack-power scales in the world:
+//
+//   MOB_AP_PER_DPS   mob templates still carry attack power on the pre-conversion
+//                    scale, where a level-20 attacker had a few hundred. Rescaling
+//                    every mob record is content work, so their divisor is
+//                    unchanged and their damage is unchanged with it.
+//   STATUS_AP_PER_DPS a player's attack power is the Ragnarok status formula now,
+//                    which is a much smaller number: a level-1 Swordman went from
+//                    46 to 10. At the old divisor they could not kill the starter
+//                    wolf; it killed them. This divisor is set so a character's
+//                    per-swing contribution matches what it was before the
+//                    conversion, at level 1 and at level 20 alike.
+//
+// This is calibration, not the Ragnarok damage model. That model has no divisor at
+// all: damage is weapon ATK plus status ATK against the target's DEF, and building
+// it is the phase-3 combat work. Until then these keep the game playable without
+// pretending the formula changed.
+// ---------------------------------------------------------------------------
+export const MOB_AP_PER_DPS = 14;
+export const STATUS_AP_PER_DPS = 3;
+
 export const SUNDER_ARMOR_PCT_PER_STACK = 0.02;
 export const FAERIE_FIRE_ARMOR_PCT = 0.1;
 

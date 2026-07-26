@@ -85,20 +85,22 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
         expect(statEffectVal(cls, p, 'agi', 'critPct')).toBeUndefined();
       });
 
-      it(`${cls} L${level}: agility armor is the agi*2 portion of total armor`, () => {
+      it(`${cls} L${level}: vitality armor is the vit*2 portion of total armor`, () => {
         const sim = new Sim({ seed: 1, playerClass: cls });
         sim.setPlayerLevel(level);
         const p = sim.player;
         const def = CLASSES[cls];
         // Players keep their class starting chest even with autoEquip off, so total
-        // armor = class growth + that gear's armor + agility*2. Isolate the agi part.
+        // armor = the class's own armor + that gear's armor + vitality*2. Isolate
+        // the attribute part. Agility contributes nothing: it buys evasion.
         let gearArmor = 0;
         for (const id of Object.values(sim.equipment))
           gearArmor += (id && ITEMS[id]?.stats?.armor) || 0;
-        const baseArmor = 0; // a class no longer carries base armour
-        const agiArmor = statEffectVal(cls, p, 'agi', 'armor') ?? 0;
-        expect(agiArmor).toBe(p.stats.armor - baseArmor - gearArmor); // proves the sim adds agi*2
-        expect(agiArmor).toBe(p.stats.agi * 2); // proves the tooltip matches
+        const classArmor = def.baseArmor + def.armorPerLevel * (level - 1);
+        const vitArmor = statEffectVal(cls, p, 'vit', 'armor') ?? 0;
+        expect(vitArmor).toBe(p.stats.armor - classArmor - gearArmor);
+        expect(vitArmor).toBe(p.stats.vit * 2); // proves the tooltip matches
+        expect(statEffectVal(cls, p, 'agi', 'armor')).toBeUndefined();
       });
 
       it(`${cls} L${level}: stamina max-health contribution matches entity.maxHp`, () => {
@@ -419,7 +421,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
     );
   });
 
-  it('cat-form druid attributes armor to the Agility that fed it (before the form bonus)', () => {
+  it('cat-form druid keeps its armor on Vitality, which the form does not touch', () => {
     const sim = new Sim({ seed: 1, playerClass: 'druid' });
     sim.setPlayerLevel(20);
     const p = sim.player;
@@ -442,11 +444,12 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
       defaultAllocationFor('druid', p.level),
     );
     const armor = buildStatTooltip('armor', inputWithGear(sim, 'druid'));
-    // recalc adds armor from Agility BEFORE Cat Form raises Agility (max(2, floor(lvl/2))),
-    // so the "From Agility" line must exclude that bonus - and the lines still reconcile.
-    const catBonus = Math.max(2, Math.floor(20 / 2));
-    const fromAgi = armor.sources.find((s) => s.kind === 'attributes');
-    expect(fromAgi?.value).toBe((p.stats.agi - catBonus) * 2);
+    // Cat Form raises Agility, and Agility no longer feeds armor, so the form's
+    // bonus cannot reach the armor breakdown at all. The attribute line is
+    // Vitality's, untouched by the shift, and the lines still reconcile.
+    const fromVit = armor.sources.find((s) => s.kind === 'attributes');
+    expect(fromVit?.fromStat).toBe('vit');
+    expect(fromVit?.value).toBe(p.stats.vit * 2);
     expect(armor.sources.reduce((acc, s) => acc + s.value, 0)).toBe(armor.statValue);
   });
 });

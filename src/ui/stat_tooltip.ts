@@ -179,7 +179,7 @@ export interface StatTooltipInput {
 }
 
 // --- coefficients, mirroring src/sim/entity.ts recalcPlayerStats ------------
-const AGI_ARMOR_PER_POINT = 2; // entity.ts: s.armor += s.agi * 2
+const VIT_ARMOR_PER_POINT = 2; // entity.ts: s.armor += ... + s.vit * 2
 const AGI_DODGE_PER_POINT = 0.003; // entity.ts: dodgeChance = 0.01 + s.agi * 0.003
 const LUK_CRIT_PER_POINT = 0.003; // entity.ts: critChance = 0.01 + s.luk * 0.003
 const STR_PARRY_PER_POINT = 0.0005; // warrior_hit_table.ts: parry = 0.05 + str * 0.0005
@@ -282,7 +282,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     case 'agi': {
       statValue = stats.agi;
       effects.push({ kind: 'dodgePct', value: stats.agi * AGI_DODGE_PER_POINT * 100 });
-      effects.push({ kind: 'armor', value: stats.agi * AGI_ARMOR_PER_POINT });
+
       break;
     }
     case 'dex': {
@@ -304,6 +304,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     case 'vit': {
       statValue = stats.vit;
       effects.push({ kind: 'maxHealthPct', value: (vitHealthMultiplier(stats.vit) - 1) * 100 });
+      effects.push({ kind: 'armor', value: stats.vit * VIT_ARMOR_PER_POINT });
       effects.push({ kind: 'healthRegen', value: restingHealthPer5s(stats.vit) });
       break;
     }
@@ -438,11 +439,15 @@ const PRIMARY_BUFF_KINDS: Record<
 
 /** Base value of a primary attribute (or armor) from class + level, before any
  *  gear / buff / talent layer. Mirrors recalcPlayerStats' opening derivation. */
-function basePrimary(_cls: PlayerClass, key: keyof CoreStats, _level: number): number {
+function basePrimary(cls: PlayerClass, key: keyof CoreStats, level: number): number {
   // A class no longer carries a stat block and level grants no attributes: the
   // base is 1 in each of the six, and everything above that is the player's own
-  // spend, which arrives through the allocation rather than through here.
-  return key === 'armor' ? 0 : BASE_STAT;
+  // spend, which arrives through the allocation rather than through here. Armor
+  // is the exception, and deliberately so: it is not one of the six, so the class
+  // still supplies its own (entity.ts baseArmor + armorPerLevel).
+  if (key !== 'armor') return BASE_STAT;
+  const def = CLASSES[cls];
+  return def.baseArmor + def.armorPerLevel * (Math.max(1, level) - 1);
 }
 
 /** Sum the contribution of one attribute (or spellPower) across equipped gear. */
@@ -499,16 +504,11 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
     }
     case 'armor': {
       sources.push({ kind: 'base', value: basePrimary(cls, 'armor', level) });
-      // recalcPlayerStats adds armor from Agility (agi * 2) BEFORE druid Cat Form raises
-      // Agility, so the Agility that actually feeds armor excludes the Cat Form bonus
-      // (entity.ts). Subtract it when shifted so the "From Agility" line is honest; the Cat
-      // Form bonus still shows in the remainder of the Agility cell's own breakdown. (Crit
-      // and dodge read Agility AFTER the form bonus, so they need no such adjustment.)
-      const catAgiBonus = buffs.some((b) => b.kind === 'form_cat')
-        ? Math.max(2, Math.floor(level / 2))
-        : 0;
-      const fromAgi = (stats.agi - catAgiBonus) * AGI_ARMOR_PER_POINT;
-      if (fromAgi !== 0) sources.push({ kind: 'attributes', value: fromAgi, fromStat: 'agi' });
+      // Armor comes from Vitality, not Agility: Agility buys evasion and no
+      // defence. The Cat Form adjustment that used to live here went with it,
+      // since the form raises Agility and Agility no longer feeds armor.
+      const fromVit = stats.vit * VIT_ARMOR_PER_POINT;
+      if (fromVit !== 0) sources.push({ kind: 'attributes', value: fromVit, fromStat: 'vit' });
       const g = gearTotal(gear, 'armor');
       if (g !== 0) sources.push({ kind: 'gear', value: g });
       sources.push(...buffLines(buffs, PRIMARY_BUFF_KINDS.armor));

@@ -87,7 +87,12 @@ describe('warrior Direhowl', () => {
     sim.setPlayerLevel(20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
-    expect(before).toBeGreaterThan(30);
+    // Derive the drain from the target instead of pinning 30. The ability itself
+    // is a 20% reduction and scales fine; only this synthetic aura carried an
+    // absolute number, and on the Ragnarok attribute scale a level-20 warrior's
+    // attack power is smaller than the 30 it assumed.
+    expect(before).toBeGreaterThan(4);
+    const drain = Math.floor(before / 3);
 
     (sim as any).applyAura(victim, {
       id: 'demoralizing_shout_ap',
@@ -95,12 +100,12 @@ describe('warrior Direhowl', () => {
       kind: 'debuff_ap',
       remaining: 30,
       duration: 30,
-      value: 30,
+      value: drain,
       sourceId: casterId,
       school: 'physical',
     });
 
-    expect(victim.attackPower).toBe(before - 30);
+    expect(victim.attackPower).toBe(before - drain);
   });
 
   it('restores enemy player attack power when the debuff expires', () => {
@@ -113,6 +118,7 @@ describe('warrior Direhowl', () => {
     sim.setPlayerLevel(20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
+    const drain = Math.floor(before / 3);
 
     (sim as any).applyAura(victim, {
       id: 'demoralizing_shout_ap',
@@ -120,11 +126,11 @@ describe('warrior Direhowl', () => {
       kind: 'debuff_ap',
       remaining: 1,
       duration: 1,
-      value: 30,
+      value: drain,
       sourceId: casterId,
       school: 'physical',
     });
-    expect(victim.attackPower).toBe(before - 30);
+    expect(victim.attackPower).toBe(before - drain);
 
     for (let i = 0; i < 25 && victim.auras.some((a) => a.kind === 'debuff_ap'); i++) sim.tick();
 

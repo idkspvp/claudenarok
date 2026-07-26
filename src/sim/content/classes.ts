@@ -43,6 +43,14 @@ export interface ClassDef {
   hpPerLevel: number;
   baseMana: number;
   manaPerLevel: number;
+  // The class's own armor, at level 1 and per level after it. This is what a
+  // plate class survives on before gear, and it is NOT an attribute: the six are
+  // the player's to spend, and how much punishment the class itself shrugs off is
+  // not one of the things they spend them on. It went missing with the old stat
+  // block, which had carried it as a sixth pseudo-attribute, and a level-1
+  // Swordman went from 90 armor to 10 and started losing to the starter wolf.
+  baseArmor: number;
+  armorPerLevel: number;
   resourceType: 'rage' | 'mana' | 'energy';
   startWeapon: string;
   startOffhand?: string;
@@ -78,6 +86,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 32,
     baseMana: 100, // rage cap
     manaPerLevel: 0,
+    baseArmor: 50,
+    armorPerLevel: 12,
     resourceType: 'rage',
     startWeapon: 'worn_sword',
     startOffhand: 'eastbrook_buckler',
@@ -136,6 +146,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 17,
     baseMana: 164,
     manaPerLevel: 56,
+    baseArmor: 25,
+    armorPerLevel: 4,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -223,6 +235,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 21,
     baseMana: 100, // energy cap
     manaPerLevel: 0,
+    baseArmor: 40,
+    armorPerLevel: 8,
     resourceType: 'energy',
     startWeapon: 'rusty_dagger',
     startOffhand: 'rusty_dagger',
@@ -262,6 +276,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 31,
     baseMana: 89,
     manaPerLevel: 27,
+    baseArmor: 45,
+    armorPerLevel: 12,
     resourceType: 'mana',
     startWeapon: 'training_mace',
     startChest: 'recruit_tunic',
@@ -294,6 +310,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 32,
     baseMana: 91,
     manaPerLevel: 26,
+    baseArmor: 45,
+    armorPerLevel: 8,
     resourceType: 'mana',
     startWeapon: 'rusty_hatchet',
     startChest: 'footpad_jerkin',
@@ -327,6 +345,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 15,
     baseMana: 145,
     manaPerLevel: 46,
+    baseArmor: 20,
+    armorPerLevel: 4,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -354,6 +374,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 30,
     baseMana: 102,
     manaPerLevel: 45,
+    baseArmor: 40,
+    armorPerLevel: 10,
     resourceType: 'mana',
     startWeapon: 'training_mace',
     startChest: 'footpad_jerkin',
@@ -381,6 +403,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 18,
     baseMana: 127,
     manaPerLevel: 57,
+    baseArmor: 22,
+    armorPerLevel: 4,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
@@ -417,6 +441,8 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     hpPerLevel: 28,
     baseMana: 106,
     manaPerLevel: 43,
+    baseArmor: 30,
+    armorPerLevel: 6,
     resourceType: 'mana',
     startWeapon: 'gnarled_staff',
     startChest: 'footpad_jerkin',

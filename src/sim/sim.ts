@@ -509,6 +509,7 @@ import {
   MAX_LEVEL,
   type MasterLootThreshold,
   MELEE_RANGE,
+  MOB_AP_PER_DPS,
   type MobFamily,
   type MoveInput,
   type NoticeboardDef,
@@ -6098,7 +6099,7 @@ export class Sim {
     }
     let dmg =
       this.rng.range(mob.weapon.min, mob.weapon.max) +
-      (this.effectiveAttackPower(mob) / 14) * mob.weapon.speed;
+      (this.effectiveAttackPower(mob) / MOB_AP_PER_DPS) * mob.weapon.speed;
     // Tank crit immunity: the 5% roll is still DRAWN (stream position), a
     // committed tank just never suffers it (combat/tank_crit_immunity.ts).
     const critRoll = this.rng.chance(0.05);

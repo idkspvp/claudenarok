@@ -312,7 +312,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     lifeleech: { healFrac: 0.5, chance: 0.35, name: 'Drowning Grasp' },
     // A clammy, fevered touch that rots the living from within, wasting away
     // their constitution (Stamina) and shrinking their health pool.
-    plague: { chance: 0.3, vit: 12, duration: 12, name: 'Bog Rot' },
+    plague: { chance: 0.3, vit: 3, duration: 12, name: 'Bog Rot' },
     loot: [
       { copper: 42, chance: 1 },
       { itemId: 'bone_fragments', chance: 0.5 },
