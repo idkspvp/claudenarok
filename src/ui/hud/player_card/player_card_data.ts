@@ -45,9 +45,9 @@ export function buildPlayerCardData(world: IWorld, input: PlayerCardDataInput): 
   const primaryStats: PlayerCardStat[] = [
     { label: t('itemUi.stats.str'), value: number(player.stats.str) },
     { label: t('itemUi.stats.agi'), value: number(player.stats.agi) },
-    { label: t('itemUi.stats.sta'), value: number(player.stats.sta) },
+    { label: t('itemUi.stats.vit'), value: number(player.stats.vit) },
     { label: t('itemUi.stats.int'), value: number(player.stats.int) },
-    { label: t('itemUi.stats.spi'), value: number(player.stats.spi) },
+    { label: t('itemUi.stats.luk'), value: number(player.stats.luk) },
     { label: t('itemUi.stats.armor'), value: number(player.stats.armor) },
   ];
   const combatStats: PlayerCardStat[] = [

@@ -99,7 +99,7 @@ describe('enchant_apply_view: effect facts on the pick row', () => {
     const rows = enchantsForReagent([{ itemId: 'arcane_dust', count: 99 }], 'arcane_dust');
     const fortitude = rows.find((r) => r.enchantId === 'enchant_helmet_fortitude');
     expect(fortitude?.effects).toEqual([
-      { stat: 'sta', value: ENCHANTS.enchant_helmet_fortitude.statBonus.sta },
+      { stat: 'vit', value: ENCHANTS.enchant_helmet_fortitude.statBonus.vit },
     ]);
     // Not a hardcoded 3: the row must track the live table.
     expect(fortitude?.effects[0].value).toBe(3);
@@ -361,10 +361,10 @@ describe('enchant_apply_view: enchantTargets', () => {
 
   it('a LEGACY pre-marker copy carries its raw doomed stats instead of an enchant id', () => {
     const inventory: InvSlot[] = [
-      { itemId: chestId, count: 1, instance: { rolled: { stats: { sta: 4 } } } },
+      { itemId: chestId, count: 1, instance: { rolled: { stats: { vit: 4 } } } },
     ];
     expect(enchantTargets(inventory, 'enchant_chest_spirit')).toEqual([
-      { itemId: chestId, count: 1, replace: { stats: { sta: 4 }, sameEnchant: false } },
+      { itemId: chestId, count: 1, replace: { stats: { vit: 4 }, sameEnchant: false } },
     ]);
   });
 

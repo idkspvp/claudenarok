@@ -41,22 +41,22 @@ describe('itemInstancePayloadsEqual', () => {
   it('the nested rolled record compares per-key: quality, stats, masterwork all participate', () => {
     const mw: ItemInstancePayload = {
       signer: 'Ana',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     };
     expect(
       itemInstancePayloadsEqual(mw, {
         signer: 'Ana',
-        rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+        rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
       }),
     ).toBe(true);
     expect(
       itemInstancePayloadsEqual(mw, {
         signer: 'Ana',
-        rolled: { masterwork: true, stats: { int: 2, spi: 2 } },
+        rolled: { masterwork: true, stats: { int: 2, luk: 2 } },
       }),
     ).toBe(false);
     expect(
-      itemInstancePayloadsEqual(mw, { signer: 'Ana', rolled: { stats: { int: 2, spi: 1 } } }),
+      itemInstancePayloadsEqual(mw, { signer: 'Ana', rolled: { stats: { int: 2, luk: 1 } } }),
     ).toBe(false);
     expect(
       itemInstancePayloadsEqual({ rolled: { quality: 'rare' } }, { rolled: { quality: 'epic' } }),

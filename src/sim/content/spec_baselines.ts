@@ -95,7 +95,7 @@ export const SPEC_BASELINES: SpecBaselineTable = {
   },
   priest: {
     discipline: {
-      stats: { sta: 6, int: 3, spi: 6 },
+      stats: { vit: 6, int: 3, luk: 6 },
       ability: [
         { ability: 'lesser_heal', costPct: -0.16 },
         { ability: 'heal', costPct: -0.16 },
@@ -104,7 +104,7 @@ export const SPEC_BASELINES: SpecBaselineTable = {
       ],
     },
     holy: {
-      stats: { int: 3, spi: 3 },
+      stats: { int: 3, luk: 3 },
       global: { healPct: 0.08 },
       ability: [
         { ability: 'lesser_heal', dmgPct: 0.18, costPct: -0.16 },
@@ -166,7 +166,7 @@ export const SPEC_BASELINES: SpecBaselineTable = {
       // +15, Sta +8%, Armor +6%). Demonology stays bulky but gains its damage
       // stat. Pet armour/health is not a modifier the engine exposes (only pet
       // damage), so that direction would be a separate feature, not this pass.
-      stats: { sta: 8, armorPct: 0.06, int: 6 },
+      stats: { vit: 8, armorPct: 0.06, int: 6 },
       ability: [
         { ability: 'shadow_bolt', costPct: -0.08 },
         { ability: 'immolate', costPct: -0.08 },
@@ -174,7 +174,7 @@ export const SPEC_BASELINES: SpecBaselineTable = {
       ],
     },
     destruction: {
-      stats: { sta: 6 },
+      stats: { vit: 6 },
       ability: [
         { ability: 'shadow_bolt', costPct: -0.23, castPct: -0.03 },
         { ability: 'immolate', costPct: -0.23, castPct: -0.03 },
@@ -209,7 +209,7 @@ export const SPEC_BASELINES: SpecBaselineTable = {
     restoration: {
       // v0.28.x stat-identity pass: add Int for healing throughput; keep some
       // Spirit for mana longevity (acceptable on a healer, unlike a DPS).
-      stats: { int: 3, spi: 3 },
+      stats: { int: 3, luk: 3 },
       global: { healPct: 0.08 },
       ability: [
         { ability: 'entangling_roots', costPct: -0.18 },

@@ -674,20 +674,20 @@ function statScore(item: ItemDef, spec: Spec): number {
   const weapon = item.weapon ? (item.weapon.min + item.weapon.max) / 2 / item.weapon.speed : 0;
   if (spec.kind === 'healer')
     return (
-      weapon + (s.int ?? 0) * 5.4 + (s.spi ?? 0) * 4.4 + (s.sta ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
+      weapon + (s.int ?? 0) * 5.4 + (s.luk ?? 0) * 4.4 + (s.vit ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
     );
   if (spec.kind === 'caster')
     return (
       weapon * 2 +
       (s.int ?? 0) * 4.6 +
-      (s.spi ?? 0) * 1.8 +
-      (s.sta ?? 0) * 0.6 +
+      (s.luk ?? 0) * 1.8 +
+      (s.vit ?? 0) * 0.6 +
       (s.armor ?? 0) * 0.003
     );
   if (spec.kind === 'tank')
     return (
       weapon * 5 +
-      (s.sta ?? 0) * 5 +
+      (s.vit ?? 0) * 5 +
       (s.str ?? 0) * 3 +
       (s.agi ?? 0) * 2 +
       (s.int ?? 0) * (spec.cls === 'paladin' || spec.cls === 'druid' ? 1.2 : 0) +
@@ -697,7 +697,7 @@ function statScore(item: ItemDef, spec: Spec): number {
     weapon * 8 +
     (s.str ?? 0) * 3 +
     (s.agi ?? 0) * 3 +
-    (s.sta ?? 0) +
+    (s.vit ?? 0) +
     (s.int ?? 0) * (spec.cls === 'paladin' || spec.cls === 'shaman' ? 1.5 : 0) +
     (s.armor ?? 0) * 0.01
   );

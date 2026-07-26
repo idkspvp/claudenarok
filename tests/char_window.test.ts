@@ -250,11 +250,11 @@ describe('char_window: paperdoll core + HUD-owned preview boundary', () => {
       'armor',
       'agi',
       'attackPower',
-      'sta',
+      'vit',
       'dps',
       'int',
       'critChance',
-      'spi',
+      'luk',
       'dodge',
       'parry',
     ]) {

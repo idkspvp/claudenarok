@@ -587,7 +587,7 @@ describe('applyEnchant on a masterwork copy', () => {
   // baked bonus stats, no rolled.quality, no enchant marker.
   const MASTERWORK_PAYLOAD = {
     signer: 'Tester',
-    rolled: { masterwork: true, stats: { str: 2, sta: 1 } },
+    rolled: { masterwork: true, stats: { str: 2, vit: 1 } },
   };
 
   it('a masterwork instance is enchantable: baked and enchant stats both survive, additively', () => {
@@ -608,7 +608,7 @@ describe('applyEnchant on a masterwork copy', () => {
     // enchant_weapon_might is +2 str (pinned to a literal earlier in this
     // file): the baked str 2 and the enchant str 2 SUM, and the baked sta 1
     // (untouched by the enchant) rides along, not overwritten.
-    expect(slot?.instance?.rolled?.stats).toEqual({ str: 4, sta: 1 });
+    expect(slot?.instance?.rolled?.stats).toEqual({ str: 4, vit: 1 });
     expect(slot?.instance?.rolled?.masterwork).toBe(true);
     expect(slot?.instance?.signer).toBe('Tester');
     expect(slot?.instance?.enchant).toBe('enchant_weapon_might');
@@ -649,7 +649,7 @@ describe('applyEnchant on a masterwork copy', () => {
     // (item_level_req.ts): level to the cap first so the equip gate passes.
     while (sim.player.level < 20) sim.grantXp(xpForLevel(sim.player.level));
     const baseStr = sim.player.stats.str;
-    const baseSta = sim.player.stats.sta;
+    const baseSta = sim.player.stats.vit;
     sim.ctx.addItemInstance('moggers_copper_cudgel', structuredClone(MASTERWORK_PAYLOAD), pid);
     sim.addItem('arcane_dust', 5, pid);
     expect(
@@ -657,11 +657,11 @@ describe('applyEnchant on a masterwork copy', () => {
     ).toBe(true);
     // Pin the def's own contribution so the +10/+3 breakdowns below stay
     // honest against a content re-tune.
-    expect(ITEMS.moggers_copper_cudgel.stats).toEqual({ str: 3, sta: 2 });
+    expect(ITEMS.moggers_copper_cudgel.stats).toEqual({ str: 3, vit: 2 });
     sim.equipItem('moggers_copper_cudgel');
-    // str: def 3 + baked masterwork 2 + enchant 2; sta: def 2 + baked 1.
+    // str: def 3 + baked masterwork 2 + enchant 2; vit: def 2 + baked 1.
     expect(sim.player.stats.str).toBe(baseStr + 7);
-    expect(sim.player.stats.sta).toBe(baseSta + 3);
+    expect(sim.player.stats.vit).toBe(baseSta + 3);
   });
 
   it('a legacy enchanted copy (bare rolled.stats, no marker) is still excluded from a plain re-enchant', () => {
@@ -706,7 +706,7 @@ describe('ENCHANTS table integrity', () => {
     'feet',
     'ring',
   ]);
-  const VALID_STAT_KEYS = new Set(['str', 'agi', 'sta', 'int', 'spi', 'armor']);
+  const VALID_STAT_KEYS = new Set(['str', 'agi', 'vit', 'int', 'luk', 'armor']);
 
   it('every enchant is well-formed: id matches its key, a valid slot, real reagents, a real bonus', () => {
     for (const [key, e] of Object.entries(ENCHANTS)) {
@@ -1128,7 +1128,7 @@ describe('replacing an enchant behind explicit confirmation (#2415)', () => {
       SWORD,
       {
         signer: 'Tester',
-        rolled: { masterwork: true, stats: { str: 3, sta: 1 } },
+        rolled: { masterwork: true, stats: { str: 3, vit: 1 } },
         boundTo: 42,
         bindOnTrade: true,
       },
@@ -1148,7 +1148,7 @@ describe('replacing an enchant behind explicit confirmation (#2415)', () => {
     // Pin the Greater magnitude once (the literal-pin idiom above), then the
     // exact swap: masterwork str 3 + greater 5, the might +2 subtracted out.
     expect(ENCHANTS[GREATER].statBonus).toEqual({ str: 5 });
-    expect(slot?.instance?.rolled?.stats).toEqual({ str: 8, sta: 1 });
+    expect(slot?.instance?.rolled?.stats).toEqual({ str: 8, vit: 1 });
     expect(slot?.instance?.enchant).toBe(GREATER);
     // The untouched layers, byte-identical.
     expect(slot?.instance?.signer).toBe('Tester');
@@ -1319,7 +1319,7 @@ describe('replacing an enchant behind explicit confirmation (#2415)', () => {
     // rolled.stats (the old enchant, whole) plus legacy rolled.quality.
     sim.ctx.addItemInstance(
       SWORD,
-      { signer: 'Old', rolled: { quality: 'rare', stats: { str: 5, sta: 3 } } },
+      { signer: 'Old', rolled: { quality: 'rare', stats: { str: 5, vit: 3 } } },
       pid,
     );
     sim.addItem('arcane_dust', 5, pid);
@@ -1327,7 +1327,7 @@ describe('replacing an enchant behind explicit confirmation (#2415)', () => {
     expect(result.ok).toBe(true);
     const slot = sim.ctx.resolve(pid)!.meta.inventory.find((s) => s.itemId === SWORD);
     // Wholesale: on a pre-marker copy the whole stats map IS the old enchant
-    // (applyEnchant was its only writer), so nothing of {str:5, sta:3} survives.
+    // (applyEnchant was its only writer), so nothing of {str:5, vit:3} survives.
     expect(slot?.instance?.rolled?.stats).toEqual({ str: 2 });
     expect(slot?.instance?.enchant).toBe(MIGHT);
     expect(slot?.instance?.signer).toBe('Old');
@@ -1644,14 +1644,14 @@ describe('replacedEnchantPayloadFor prune arm (corrupt under-baked marker)', () 
     // exactly would leave -4.
     const victim = {
       enchant: 'enchant_weapon_greater_might',
-      rolled: { stats: { str: 1, sta: 2 } },
+      rolled: { stats: { str: 1, vit: 2 } },
     };
     const out = replacedEnchantPayloadFor(victim, ENCHANTS.enchant_weapon_agility);
     // str is GONE, not negative; the unrelated sta rides through; the new
     // bonus lands on top.
-    expect(out.rolled?.stats).toEqual({ sta: 2, agi: 2 });
+    expect(out.rolled?.stats).toEqual({ vit: 2, agi: 2 });
     expect(out.enchant).toBe('enchant_weapon_agility');
     // The victim itself is never mutated (clone-first contract).
-    expect(victim.rolled.stats).toEqual({ str: 1, sta: 2 });
+    expect(victim.rolled.stats).toEqual({ str: 1, vit: 2 });
   });
 });

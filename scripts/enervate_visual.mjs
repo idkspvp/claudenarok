@@ -60,7 +60,7 @@ const result = await page.evaluate(async () => {
   mob.hostile = true;
   mob.level = 18;
   mob.pos.x = p.pos.x + 3; mob.pos.z = p.pos.z; mob.pos.y = p.pos.y;
-  const staBefore = p.stats.sta, maxHpBefore = p.maxHp;
+  const staBefore = p.stats.vit, maxHpBefore = p.maxHp;
   let drained = false;
   for (let i = 0; i < 400 && !drained; i++) {
     p.hp = p.maxHp; // never let the swing kill us
@@ -70,7 +70,7 @@ const result = await page.evaluate(async () => {
   // Set HP to ~70% of the (now-smaller) pool so the red HP bar reads clearly.
   p.hp = Math.round(p.maxHp * 0.7);
   return {
-    ok: drained, staBefore, staAfter: p.stats.sta,
+    ok: drained, staBefore, staAfter: p.stats.vit,
     maxHpBefore, maxHpAfter: p.maxHp,
     aura: p.auras.find((a) => a.kind === 'buff_sta' && a.value < 0)?.name ?? null,
   };

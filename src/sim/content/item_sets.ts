@@ -57,7 +57,7 @@ export const SET_GREYJAW_STALKER = 'greyjaw_stalker'; // leather, marksman
 // gloves/belts from the Thunzharr world boss (content/zone3.ts).
 const STRENGTH_T1_BONUSES: SetBonusTier[] = [
   { pieces: 2, effect: { ap: 40 }, text: 'Increases attack power by 40.' },
-  { pieces: 3, effect: { str: 15, sta: 15 }, text: 'Increases Strength by 15 and Stamina by 15.' },
+  { pieces: 3, effect: { str: 15, vit: 15 }, text: 'Increases Strength by 15 and Stamina by 15.' },
   {
     pieces: 4,
     effect: {
@@ -108,7 +108,7 @@ const CASTER_T1_BONUSES: SetBonusTier[] = [
   },
   {
     pieces: 3,
-    effect: { int: 10, sta: 10 },
+    effect: { int: 10, vit: 10 },
     text: 'Increases Intellect by 10 and Stamina by 10.',
   },
   {
@@ -132,7 +132,7 @@ const STRENGTH_T2_BONUSES: SetBonusTier[] = [
   { pieces: 2, effect: { ap: 40 }, text: 'Increases attack power by 40.' },
   {
     pieces: 3,
-    effect: { str: 15, sta: 15, hasteRating: SET_HASTE_3PC_RATING },
+    effect: { str: 15, vit: 15, hasteRating: SET_HASTE_3PC_RATING },
     text: 'Increases Strength by 15, Stamina by 15, and attack and casting speed by 7.5%.',
   },
   {
@@ -201,7 +201,7 @@ const CASTER_T2_BONUSES: SetBonusTier[] = [
   },
   {
     pieces: 3,
-    effect: { int: 15, spi: 15, hasteRating: SET_HASTE_3PC_RATING },
+    effect: { int: 15, luk: 15, hasteRating: SET_HASTE_3PC_RATING },
     text: 'Increases Intellect by 15, Spirit by 15, and attack and casting speed by 7.5%.',
   },
   {
@@ -281,9 +281,9 @@ export const ITEM_SETS: Record<string, ItemSet> = {
 export interface AggregatedSetEffect {
   str: number;
   agi: number;
-  sta: number;
+  vit: number;
   int: number;
-  spi: number;
+  luk: number;
   ap: number;
   sp: number;
   crit: number;
@@ -300,9 +300,9 @@ function zeroEffect(): AggregatedSetEffect {
   return {
     str: 0,
     agi: 0,
-    sta: 0,
+    vit: 0,
     int: 0,
-    spi: 0,
+    luk: 0,
     ap: 0,
     sp: 0,
     crit: 0,
@@ -330,9 +330,9 @@ export function aggregateSetBonuses(counts: Map<string, number>): AggregatedSetE
       const e: SetBonusEffect = tier.effect;
       out.str += e.str ?? 0;
       out.agi += e.agi ?? 0;
-      out.sta += e.sta ?? 0;
+      out.vit += e.vit ?? 0;
       out.int += e.int ?? 0;
-      out.spi += e.spi ?? 0;
+      out.luk += e.luk ?? 0;
       out.ap += e.ap ?? 0;
       out.sp += e.sp ?? 0;
       out.crit += e.crit ?? 0;

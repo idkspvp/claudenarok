@@ -12,8 +12,8 @@ import { resolveApplyEnchant } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
 import { xpForLevel } from '../src/sim/types';
 
-type Axis = 'str' | 'agi' | 'sta' | 'int' | 'spi' | 'armor';
-const AXES: readonly Axis[] = ['str', 'agi', 'sta', 'int', 'spi', 'armor'];
+type Axis = 'str' | 'agi' | 'vit' | 'int' | 'luk' | 'armor';
+const AXES: readonly Axis[] = ['str', 'agi', 'vit', 'int', 'luk', 'armor'];
 
 // Tier identity is derived from the reagent contract, exactly the doctrine the
 // table's section comments state: Greater is the arcane_shard consumer, Runed
@@ -67,13 +67,13 @@ describe('enchant table magnitude invariants', () => {
     // layer lands at roughly 15 to 25 percent of that budget per axis, the
     // "finishing bonus" target, instead of the pre-trim 30 to 43 percent.
     expect(bestPerSlotTotal('int')).toBe(24); // 20 percent of the 120 int budget
-    expect(bestPerSlotTotal('sta')).toBe(24); // 21 percent of the 113 sta budget; the HP pin below covers the x10 conversion
+    expect(bestPerSlotTotal('vit')).toBe(24); // 21 percent of the 113 sta budget; the HP pin below covers the x10 conversion
     expect(bestPerSlotTotal('agi')).toBe(25); // 19 percent of the 130 agi budget
     expect(bestPerSlotTotal('str')).toBe(19); // 15 percent of the 125 str budget
     // Spirit rides only neck, chest, and the two rings, so its stack sits
     // below the band by construction; accepted and recorded rather than
     // padded with new enchants.
-    expect(bestPerSlotTotal('spi')).toBe(12); // 13 percent of the 93 spi budget
+    expect(bestPerSlotTotal('luk')).toBe(12); // 13 percent of the 93 spi budget
     expect(bestPerSlotTotal('armor')).toBe(35); // helmet 15 plus chest 20, the halved reinforcement pair
   });
 
@@ -118,7 +118,7 @@ describe('enchant table magnitude invariants', () => {
     // relational sweep above cannot see them regress: chest spirit has no
     // Greater (runeweave is the chest spirit ceiling) and legs agility has no
     // sibling at all. Pin their magnitudes as literals.
-    expect(ENCHANTS.enchant_chest_runeweave.statBonus).toEqual({ spi: 5 });
+    expect(ENCHANTS.enchant_chest_runeweave.statBonus).toEqual({ luk: 5 });
     expect(ENCHANTS.enchant_legs_runed_hide.statBonus).toEqual({ agi: 4 });
   });
 });
@@ -150,7 +150,7 @@ describe('the full stamina path in HP', () => {
       // countItem scans bags only, so 0 here proves the piece went on.
       expect(sim.countItem(itemId, pid), itemId).toBe(0);
     }
-    const staBefore = sim.player.stats.sta;
+    const staBefore = sim.player.stats.vit;
     const hpBefore = sim.player.maxHp;
     // Past the soft knee every further stamina point converts to 10 HP
     // (hpFromStamina in src/sim/entity.ts), which is why stamina is the most
@@ -168,7 +168,7 @@ describe('the full stamina path in HP', () => {
       sim.equipItem(itemId);
       expect(sim.countItem(itemId, pid), itemId).toBe(0);
     }
-    expect(sim.player.stats.sta).toBe(staBefore + 24);
+    expect(sim.player.stats.vit).toBe(staBefore + 24);
     expect(sim.player.maxHp).toBe(hpBefore + 240);
   });
 });
@@ -192,16 +192,16 @@ describe('frozen enchant magnitudes (the #2415 replace-exactness premise)', () =
     expect(all).toEqual({
       enchant_weapon_might: { str: 2 },
       enchant_weapon_intellect: { int: 2 },
-      enchant_helmet_fortitude: { sta: 3 },
-      enchant_neck_spirit: { spi: 3 },
+      enchant_helmet_fortitude: { vit: 3 },
+      enchant_neck_spirit: { luk: 3 },
       enchant_shoulder_agility: { agi: 2 },
-      enchant_chest_stamina: { sta: 4 },
-      enchant_waist_stamina: { sta: 3 },
-      enchant_legs_stamina: { sta: 3 },
+      enchant_chest_stamina: { vit: 4 },
+      enchant_waist_stamina: { vit: 3 },
+      enchant_legs_stamina: { vit: 3 },
       enchant_gloves_agility: { agi: 3 },
       enchant_gloves_intellect: { int: 3 },
       enchant_feet_agility: { agi: 2 },
-      enchant_ring_spirit: { spi: 2 },
+      enchant_ring_spirit: { luk: 2 },
       enchant_weapon_agility: { agi: 2 },
       enchant_helmet_intellect: { int: 4 },
       enchant_helmet_armor: { armor: 15 },
@@ -209,28 +209,28 @@ describe('frozen enchant magnitudes (the #2415 replace-exactness premise)', () =
       enchant_neck_agility: { agi: 2 },
       enchant_shoulder_strength: { str: 2 },
       enchant_shoulder_intellect: { int: 2 },
-      enchant_chest_spirit: { spi: 4 },
+      enchant_chest_spirit: { luk: 4 },
       enchant_chest_armor: { armor: 20 },
       enchant_waist_strength: { str: 3 },
       enchant_waist_agility: { agi: 3 },
       enchant_legs_intellect: { int: 4 },
       enchant_gloves_strength: { str: 3 },
       enchant_feet_strength: { str: 2 },
-      enchant_feet_stamina: { sta: 2 },
+      enchant_feet_stamina: { vit: 2 },
       enchant_ring_strength: { str: 2 },
       enchant_ring_agility: { agi: 2 },
       enchant_ring_intellect: { int: 2 },
       enchant_weapon_greater_might: { str: 5 },
       enchant_weapon_greater_spellpower: { int: 5 },
-      enchant_helmet_greater_fortitude: { sta: 6 },
-      enchant_chest_greater_stamina: { sta: 7 },
-      enchant_legs_greater_stamina: { sta: 6 },
+      enchant_helmet_greater_fortitude: { vit: 6 },
+      enchant_chest_greater_stamina: { vit: 7 },
+      enchant_legs_greater_stamina: { vit: 6 },
       enchant_gloves_greater_agility: { agi: 6 },
       enchant_weapon_runed_edge: { str: 3 },
       enchant_weapon_runed_focus: { int: 3 },
-      enchant_chest_runeweave: { spi: 5 },
+      enchant_chest_runeweave: { luk: 5 },
       enchant_legs_runed_hide: { agi: 4 },
-      enchant_helmet_runed_links: { sta: 5 },
+      enchant_helmet_runed_links: { vit: 5 },
     });
   });
 });

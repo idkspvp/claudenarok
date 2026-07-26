@@ -1378,6 +1378,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
             channelMeta.equipment,
             ctx.playerMods(channelMeta),
             channelMeta.equipmentInstance,
+            channelMeta.statAllocation,
           );
         }
       }

@@ -23,9 +23,9 @@ const ITEM_STAT_LABEL_KEYS: Partial<Record<keyof Stats, TranslationKey>> = {
   armor: 'itemUi.stats.armor',
   str: 'itemUi.stats.str',
   agi: 'itemUi.stats.agi',
-  sta: 'itemUi.stats.sta',
+  vit: 'itemUi.stats.vit',
   int: 'itemUi.stats.int',
-  spi: 'itemUi.stats.spi',
+  luk: 'itemUi.stats.luk',
 };
 
 function cap(s: string): string {

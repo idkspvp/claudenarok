@@ -18,7 +18,7 @@ function tankEhp(cls: PlayerClass, spec: string, form?: string): number {
   sim.setPlayerLevel(20, pid);
   sim.applyTalents({ spec, rows: {} }, pid);
   const p = sim.entities.get(pid)!;
-  const score = (i: ItemDef) => (i.stats?.sta ?? 0) * 100 + (i.stats?.armor ?? 0) * 0.1;
+  const score = (i: ItemDef) => (i.stats?.vit ?? 0) * 100 + (i.stats?.armor ?? 0) * 0.1;
   for (const slot of [
     'helmet',
     'neck',

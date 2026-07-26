@@ -108,7 +108,7 @@ describe('bag_instance_glyph_view: kind priority', () => {
         signer: 'Anna',
         enchant: 'enchant_chest_stamina',
         bindOnTrade: true,
-        rolled: { masterwork: true, stats: { sta: 4 } },
+        rolled: { masterwork: true, stats: { vit: 4 } },
       }),
     ).toBe('masterwork');
   });
@@ -155,7 +155,7 @@ describe('bags grid instanced-slot marker', () => {
       {
         itemId: 'copper_ore',
         count: 1,
-        instance: { rolled: { masterwork: true, stats: { sta: 1 } } },
+        instance: { rolled: { masterwork: true, stats: { vit: 1 } } },
       },
       { itemId: 'copper_ore', count: 1 },
     ]);
@@ -209,7 +209,7 @@ describe('bags grid instanced-slot marker', () => {
       {
         itemId: 'copper_ore',
         count: 1,
-        instance: { signer: 'Anna', rolled: { masterwork: true, stats: { sta: 1 } } },
+        instance: { signer: 'Anna', rolled: { masterwork: true, stats: { vit: 1 } } },
       },
     ]);
     const cell = root.querySelector('button.bag-item');
@@ -229,7 +229,7 @@ describe('bags grid instanced-slot marker', () => {
       {
         itemId: 'copper_ore',
         count: 2,
-        instance: { rolled: { masterwork: true, stats: { sta: 1 } } },
+        instance: { rolled: { masterwork: true, stats: { vit: 1 } } },
       },
     ]);
     const cell = root.querySelector('button.bag-item');

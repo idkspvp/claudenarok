@@ -26,7 +26,7 @@ describe('Plague Stamina-drain affix (Bog Rot)', () => {
     // A disease-free twin in an identical sim — same seed/class/level, so its
     // recalculated maxHp is exactly what ours would be without the plague.
     const cleanMaxHp = makeSim().entities.get(sim.playerId)!.maxHp;
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
     const tmpl = MOBS.drowned_dead;
     const saved = tmpl.plague!.chance;
     tmpl.plague!.chance = 1; // force the proc; misses/dodges still possible
@@ -38,7 +38,7 @@ describe('Plague Stamina-drain affix (Bog Rot)', () => {
       expect(a.value).toBe(-12);
       expect(a.school).toBe('nature');
       // Stamina and the health pool both shrank under the disease.
-      expect(p.stats.sta).toBe(baseSta - 12);
+      expect(p.stats.vit).toBe(baseSta - 12);
       expect(p.maxHp).toBeLessThan(cleanMaxHp);
     } finally {
       tmpl.plague!.chance = saved;
@@ -48,18 +48,18 @@ describe('Plague Stamina-drain affix (Bog Rot)', () => {
   it('the drained Stamina is restored when the disease expires', () => {
     const sim = makeSim();
     const p = sim.entities.get(sim.playerId)!;
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
     const tmpl = MOBS.drowned_dead;
     const saved = tmpl.plague!.chance;
     tmpl.plague!.chance = 1;
     try {
       const a = forcePlague(sim, p, createMob(910701, tmpl, 10, { x: 0, y: 0, z: 0 }));
       expect(a).toBeDefined();
-      expect(p.stats.sta).toBe(baseSta - 12);
+      expect(p.stats.vit).toBe(baseSta - 12);
       a.remaining = 0; // let this tick expire it
       sim.tick();
       expect(p.auras.some((x) => x.id === 'plague_drowned_dead')).toBe(false);
-      expect(p.stats.sta).toBe(baseSta); // Stamina fully restored
+      expect(p.stats.vit).toBe(baseSta); // Stamina fully restored
     } finally {
       tmpl.plague!.chance = saved;
     }

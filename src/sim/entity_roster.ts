@@ -288,7 +288,7 @@ export function releaseSpiritInDelve(ctx: SimContext, pid: number): void {
   // other aura clears on respawn.
   p.auras = aurasSurvivingDeath(p.auras);
   p.ccDr.clear();
-  recalcPlayerStats(p, r.meta.cls, r.meta.equipment, r.meta.talentMods, r.meta.equipmentInstance);
+  recalcPlayerStats(p, r.meta.cls, r.meta.equipment, r.meta.talentMods, r.meta.equipmentInstance, r.meta.statAllocation);
   p.hp = Math.max(1, Math.round(p.maxHp * 0.5));
   p.resource =
     p.resourceType === 'mana'

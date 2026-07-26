@@ -36,7 +36,9 @@ const GAIN_KINDS: ReadonlySet<StatEffectKind> = new Set<StatEffectKind>([
   'dodgePct',
   'armor',
   'maxHealth',
+  'maxHealthPct',
   'maxMana',
+  'maxManaPct',
   'spellCritPct',
 ]);
 
@@ -63,6 +65,10 @@ export function statEffectText(e: StatEffect, deps: StatTooltipI18n): string {
     case 'dodgePct':
     case 'spellCritPct':
     case 'dpsFromAp':
+    // VIT and INT scale their pools by a percentage now, not a flat per-point
+    // grant, so they read with the other one-decimal percentage lines.
+    case 'maxHealthPct':
+    case 'maxManaPct':
       return deps.t(key, { value: dec1(deps, e.value) });
     case 'damageReduction':
       return deps.t(key, { level: int0(deps, e.level ?? 0), value: dec1(deps, e.value) });

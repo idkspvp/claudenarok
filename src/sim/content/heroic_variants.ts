@@ -60,7 +60,7 @@ function applyRaidVariantRatings(variant: ItemDef, base: ItemDef): void {
   // stats (strength/agility). It only carries Hit when the authored base explicitly
   // seeds Hit, which distinguishes caster-DPS pieces from throughput/healer pieces.
   const spellFacing =
-    ((s?.int ?? 0) > 0 || (s?.spi ?? 0) > 0 || (base.spellPower ?? 0) > 0) &&
+    ((s?.int ?? 0) > 0 || (s?.luk ?? 0) > 0 || (base.spellPower ?? 0) > 0) &&
     (s?.str ?? 0) === 0 &&
     (s?.agi ?? 0) === 0;
   const baseRatingKey = RAID_RATING_KEYS.find((k) => (base[k] ?? 0) > 0);

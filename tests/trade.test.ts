@@ -359,7 +359,7 @@ describe('trade module (direct, no Sim)', () => {
     const instB = {
       signer: 'Borin',
       charges: { warmth: 5 },
-      rolled: { stats: { sta: 2 }, masterwork: true },
+      rolled: { stats: { vit: 2 }, masterwork: true },
       enchant: 'hearth_ward',
     };
     const { ctx, players } = makeInstancedTradeCtx(

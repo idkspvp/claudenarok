@@ -9,9 +9,9 @@ export type CompareStat =
   | 'armor'
   | 'str'
   | 'agi'
-  | 'sta'
+  | 'vit'
   | 'int'
-  | 'spi'
+  | 'luk'
   | 'warfare'
   | 'hitRating'
   | 'critRating'
@@ -35,7 +35,7 @@ export function itemStatDeltas(item: ItemDef, equipped: ItemDef): StatDelta[] {
   const dpsDelta = weaponDps(item.weapon) - weaponDps(equipped.weapon);
   if (Math.abs(dpsDelta) >= 0.05) out.push({ stat: 'dps', delta: dpsDelta, decimals: 1 });
 
-  const stats: Array<keyof CoreStats & CompareStat> = ['armor', 'str', 'agi', 'sta', 'int', 'spi'];
+  const stats: Array<keyof CoreStats & CompareStat> = ['armor', 'str', 'agi', 'vit', 'int', 'luk'];
   for (const k of stats) {
     const delta = (item.stats?.[k] ?? 0) - (equipped.stats?.[k] ?? 0);
     if (Math.abs(delta) >= 0.5) out.push({ stat: k, delta, decimals: 0 });

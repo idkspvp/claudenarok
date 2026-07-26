@@ -57,7 +57,7 @@ function selfWire(over: Record<string, unknown> = {}): Record<string, unknown> {
     qdone: [],
     cds: {},
     gcd: 0,
-    stats: { str: 1, agi: 1, sta: 1, int: 1, spi: 1, armor: 0 },
+    stats: { str: 1, agi: 1, vit: 1, int: 1, luk: 1, armor: 0 },
     weapon: { min: 1, max: 2, speed: 2 },
     ...over,
   };

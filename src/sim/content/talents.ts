@@ -43,9 +43,9 @@ export type Role = 'tank' | 'healer' | 'dps';
 export interface StatModEffect {
   str?: number;
   agi?: number;
-  sta?: number;
+  vit?: number;
   int?: number;
-  spi?: number;
+  luk?: number;
   armor?: number;
   ap?: number;
   crit?: number;
@@ -476,9 +476,9 @@ function zeroStats(): Required<StatModEffect> {
   return {
     str: 0,
     agi: 0,
-    sta: 0,
+    vit: 0,
     int: 0,
-    spi: 0,
+    luk: 0,
     armor: 0,
     ap: 0,
     crit: 0,
@@ -579,9 +579,9 @@ export function accumulateTalentEffect(
     const source = effect.stats;
     target.str += (source.str ?? 0) * multiplier;
     target.agi += (source.agi ?? 0) * multiplier;
-    target.sta += (source.sta ?? 0) * multiplier;
+    target.vit += (source.vit ?? 0) * multiplier;
     target.int += (source.int ?? 0) * multiplier;
-    target.spi += (source.spi ?? 0) * multiplier;
+    target.luk += (source.luk ?? 0) * multiplier;
     target.armor += (source.armor ?? 0) * multiplier;
     target.ap += (source.ap ?? 0) * multiplier;
     target.crit += (source.crit ?? 0) * multiplier;

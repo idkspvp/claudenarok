@@ -43,7 +43,7 @@ function world(): IWorld {
       name: 'Card Tester',
       color: 0x123456,
       level: 20,
-      stats: { str: 12, agi: 9, sta: 14, int: 5, spi: 6, armor: 80 },
+      stats: { str: 12, agi: 9, vit: 14, int: 5, luk: 6, armor: 80 },
       attackPower: 42,
       critChance: 0.125,
       dodgeChance: 0.075,

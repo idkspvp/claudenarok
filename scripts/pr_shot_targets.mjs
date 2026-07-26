@@ -628,7 +628,7 @@ export const TARGETS = [
               // aria-label lookup below is unambiguous.
               game?.sim?.addItemInstance('gravewyrm_gauntlets', {
                 signer: 'Thorgar',
-                rolled: { masterwork: true, stats: { str: 2, sta: 1 } },
+                rolled: { masterwork: true, stats: { str: 2, vit: 1 } },
               });
             }
           } catch {}
@@ -3103,14 +3103,14 @@ export const TARGETS = [
     variants: [
       {
         key: 'enchanted',
-        instance: { enchant: 'enchant_chest_stamina', rolled: { stats: { sta: 4 } } },
+        instance: { enchant: 'enchant_chest_stamina', rolled: { stats: { vit: 4 } } },
       },
       {
         key: 'enchanted-masterwork',
         instance: {
           signer: 'Aldric',
           enchant: 'enchant_chest_stamina',
-          rolled: { masterwork: true, stats: { sta: 7 } },
+          rolled: { masterwork: true, stats: { vit: 7 } },
         },
       },
     ],
@@ -3161,7 +3161,7 @@ export const TARGETS = [
         sim.addItemInstance('copper_ore', { signer: 'Aldric' }, undefined, 4);
         sim.addItemInstance('militia_vest', {
           enchant: 'enchant_chest_stamina',
-          rolled: { stats: { sta: 4 } },
+          rolled: { stats: { vit: 4 } },
         });
         sim.addItemInstance('resonant_steel', { bindOnTrade: true }, undefined, 2);
         sim.addItemInstance('worn_sword', {

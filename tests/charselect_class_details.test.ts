@@ -62,7 +62,7 @@ describe('specialization card metadata', () => {
       for (const spec of classTalents.specs) {
         const card = SPEC_CARD_INFO[cls][spec.id];
         expect(card, `missing spec card for ${cls}:${spec.id}`).toBeTruthy();
-        expect(['str', 'agi', 'int', 'spi', 'sta'], `${cls}:${spec.id}`).toContain(
+        expect(['str', 'agi', 'int', 'luk', 'vit'], `${cls}:${spec.id}`).toContain(
           card.primaryStat,
         );
         expect(['low', 'medium', 'high'], `${cls}:${spec.id}`).toContain(card.complexity);

@@ -110,7 +110,7 @@ describe('statNameKey', () => {
 
 describe('statSourceText', () => {
   it('renders base without a sign, other lines with an explicit + / − sign', () => {
-    const m = model({ stat: 'sta' });
+    const m = model({ stat: 'vit' });
     expect(statSourceText({ kind: 'base', value: 40 }, m, deps)).toBe(
       'hudChrome.statInfo.sources.base(value=40)',
     );
@@ -123,7 +123,7 @@ describe('statSourceText', () => {
   });
 
   it('names the buff and the deriving attribute', () => {
-    const m = model({ stat: 'sta' });
+    const m = model({ stat: 'vit' });
     expect(statSourceText({ kind: 'buff', value: 12, name: 'Mark of the Wild' }, m, deps)).toBe(
       'hudChrome.statInfo.sources.buff(name=Mark of the Wild,value=+12)',
     );
@@ -192,7 +192,7 @@ describe('statTooltipHtml', () => {
   it('classifies informational effects (regen / damage reduction / dps) as neutral tt-stat', () => {
     const html = statTooltipHtml(
       model({
-        stat: 'sta',
+        stat: 'vit',
         effects: [
           { kind: 'maxHealth', value: 100 },
           { kind: 'healthRegen', value: 20 },
@@ -305,9 +305,9 @@ describe('statTooltipAria', () => {
   });
 
   it('starts with the description and omits the stat name (the cell already names it)', () => {
-    const aria = statTooltipAria(model({ stat: 'spi', effects: [], minorForClass: true }), deps);
-    expect(aria.startsWith('hudChrome.statInfo.desc.spi')).toBe(true);
-    expect(aria).not.toContain('itemUi.stats.spi');
+    const aria = statTooltipAria(model({ stat: 'luk', effects: [], minorForClass: true }), deps);
+    expect(aria.startsWith('hudChrome.statInfo.desc.luk')).toBe(true);
+    expect(aria).not.toContain('itemUi.stats.luk');
   });
 });
 

@@ -244,7 +244,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     expect(meta.equipmentInstance?.legs).toEqual({ rolled: { quality: 'rare' } });
     const after = sim.entities.get(sim.playerId)!.stats;
     expect(after.armor - before.armor).toBe(48);
-    expect(after.sta - before.sta).toBe(2);
+    expect(after.vit - before.vit).toBe(2);
 
     const plain = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
     plain.addItem('cryptbone_greaves', 1, plain.playerId);
@@ -258,7 +258,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
-      { signer: 'Aldric', rolled: { masterwork: true, stats: { int: 2, spi: 1 } } },
+      { signer: 'Aldric', rolled: { masterwork: true, stats: { int: 2, luk: 1 } } },
       sim.playerId,
     );
 
@@ -266,7 +266,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     const saved = state.inventory.find((s) => s.itemId === 'apprentice_staff')!;
     expect(saved.instance).toEqual({
       signer: 'Aldric',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     });
 
     const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
@@ -274,7 +274,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff');
     expect(loaded?.instance).toEqual({
       signer: 'Aldric',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     });
 
     // Non-aliasing: stripping the snapshot's masterwork marker or zeroing its
@@ -291,7 +291,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
   it('cloneItemInstancePayload deep-clones the masterwork marker alongside its stats', () => {
     const src: ItemInstancePayload = {
       signer: 'Aldric',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     };
     const clone = cloneItemInstancePayload(src);
     expect(clone).toEqual(src);
@@ -346,7 +346,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
       {
         signer: 'Aldric',
         enchant: 'enchant_weapon_might',
-        rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+        rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
       },
       sim.playerId,
     );
@@ -361,7 +361,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     expect(loaded?.instance).toEqual({
       signer: 'Aldric',
       enchant: 'enchant_weapon_might',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     });
     // The reloaded copy still reads as already enchanted, so the double-enchant
     // guard holds across a save/load cycle.

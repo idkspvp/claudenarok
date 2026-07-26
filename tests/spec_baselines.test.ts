@@ -83,7 +83,7 @@ const EXPECTED_BASELINES: Record<string, BaselineSnapshot> = {
     },
   },
   'priest/discipline': {
-    stats: { sta: 6, int: 3, spi: 6 },
+    stats: { vit: 6, int: 3, luk: 6 },
     abilities: {
       lesser_heal: { costPct: -0.16 },
       heal: { costPct: -0.16 },
@@ -92,7 +92,7 @@ const EXPECTED_BASELINES: Record<string, BaselineSnapshot> = {
     },
   },
   'priest/holy': {
-    stats: { int: 3, spi: 3 },
+    stats: { int: 3, luk: 3 },
     global: { healPct: 0.08 },
     abilities: {
       lesser_heal: { dmgPct: 0.18, costPct: -0.16 },
@@ -138,7 +138,7 @@ const EXPECTED_BASELINES: Record<string, BaselineSnapshot> = {
     },
   },
   'warlock/demonology': {
-    stats: { sta: 8, armorPct: 0.06, int: 6 },
+    stats: { vit: 8, armorPct: 0.06, int: 6 },
     abilities: {
       shadow_bolt: { costPct: -0.08 },
       immolate: { costPct: -0.08 },
@@ -146,7 +146,7 @@ const EXPECTED_BASELINES: Record<string, BaselineSnapshot> = {
     },
   },
   'warlock/destruction': {
-    stats: { sta: 6 },
+    stats: { vit: 6 },
     abilities: {
       shadow_bolt: { costPct: -0.23, castPct: -0.03 },
       immolate: { costPct: -0.23, castPct: -0.03 },
@@ -172,7 +172,7 @@ const EXPECTED_BASELINES: Record<string, BaselineSnapshot> = {
     },
   },
   'druid/restoration': {
-    stats: { int: 3, spi: 3 },
+    stats: { int: 3, luk: 3 },
     global: { healPct: 0.08 },
     abilities: {
       entangling_roots: { costPct: -0.18 },

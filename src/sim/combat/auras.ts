@@ -92,7 +92,7 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
       // (gear/level) plus a small flat per-level floor so low-spirit casters
       // still recover at a reasonable pace (#103)
       const regen =
-        (p.stats.spi / 3 + 4 + Math.floor(p.level / 5)) *
+        (p.stats.luk / 3 + 4 + Math.floor(p.level / 5)) *
         (1 + ctx.playerMods(meta).global.manaRegenPct);
       p.resource = Math.min(p.maxResource, p.resource + Math.round(regen));
     }
@@ -105,7 +105,7 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
     p.resource = Math.max(0, p.resource - 2);
   }
   if (!p.inCombat && p.hp < p.maxHp && !p.eating) {
-    const regen = p.stats.sta * 0.3 + 2;
+    const regen = p.stats.vit * 0.3 + 2;
     p.hp = Math.min(p.maxHp, p.hp + Math.round(regen));
   }
   const secondWindPct = ctx.playerMods(meta).global.secondWindPctPerSec;
@@ -359,7 +359,7 @@ export function updateAuras(ctx: SimContext, e: Entity): void {
   if (statsDirty && e.kind === 'player') {
     const meta = ctx.players.get(e.id);
     if (meta)
-      recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance);
+      recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
   }
   e.stealthed = e.auras.some((a) => a.kind === 'stealth');
 }

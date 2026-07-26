@@ -543,12 +543,17 @@ export interface CrowdControlDrState {
   resetAt: number;
 }
 
+// Ragnarok's six. STR/AGI/INT keep their names and roughly their jobs; VIT
+// replaces Stamina (health and defence) and LUK replaces Spirit (crit and the
+// luck-ish odds). DEX is new and has no predecessor here: it drives hit, cast
+// speed and ranged attack.
 export interface Stats {
   str: number;
   agi: number;
-  sta: number;
+  vit: number;
   int: number;
-  spi: number;
+  dex: number;
+  luk: number;
   armor: number;
   // Fractions derived from PvP ratings on equipped gear. They affect hostile
   // player-vs-player damage only; PvE never reads them.
@@ -556,10 +561,61 @@ export interface Stats {
   pvpDefense: number;
 }
 
-// The six class/item attributes authored in content. WARFARE fractions are
-// derived from ratings at runtime and are never authored as base growth or
-// direct item stats.
-export type CoreStats = Pick<Stats, 'str' | 'agi' | 'sta' | 'int' | 'spi' | 'armor'>;
+/** The six status attributes a player spends points on, in display order. */
+export const STATUS_STATS = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
+export type StatusStat = (typeof STATUS_STATS)[number];
+/** Points spent per attribute. Every attribute starts at BASE_STAT. */
+export type StatAllocation = Record<StatusStat, number>;
+
+// Every character starts with 1 in each of the six and 48 points to place, and
+// no attribute climbs past 99. Ragnarok's numbers, and the reason the nine
+// per-class starting blocks this game shipped with are gone: a job's identity
+// lives in its skills, not in a stat block handed out at creation.
+export const BASE_STAT = 1;
+export const MAX_STAT = 99;
+export const CREATION_STATUS_POINTS = 48;
+
+/** Points granted for reaching `level` from the level below it. */
+export function statusPointsForLevel(level: number): number {
+  return Math.floor(level / 5) + 3;
+}
+
+/** What raising an attribute from `current` by one costs. 2 through the single
+ *  digits, 3 through the teens, 4 through the twenties, and so on: the cost step
+ *  is what makes a 99 in anything a commitment rather than a cap you drift into.
+ *
+ *  The band boundary sits ON the round number (10 already costs 3, not 2), which
+ *  is where a `(current - 1)` version of this quietly went wrong. */
+export function statRaiseCost(current: number): number {
+  return Math.floor(current / 10) + 2;
+}
+
+/** Total points a character has ever been granted at `level`, creation included. */
+export function totalStatusPointsAt(level: number): number {
+  let total = CREATION_STATUS_POINTS;
+  for (let l = 2; l <= level; l++) total += statusPointsForLevel(l);
+  return total;
+}
+
+/** Points already spent on an allocation (each attribute costed step by step). */
+export function statusPointsSpent(alloc: StatAllocation): number {
+  let spent = 0;
+  for (const stat of STATUS_STATS) {
+    for (let v = BASE_STAT; v < BASE_STAT + alloc[stat]; v++) spent += statRaiseCost(v);
+  }
+  return spent;
+}
+
+export function emptyStatAllocation(): StatAllocation {
+  return { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
+}
+
+// The attributes authored in content (items, enchants, set bonuses). WARFARE
+// fractions are derived from ratings at runtime and are never authored.
+export type CoreStats = Pick<
+  Stats,
+  'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor'
+>;
 
 export interface WeaponInfo {
   min: number;
@@ -778,9 +834,9 @@ export interface SetProc {
 export interface SetBonusEffect {
   str?: number;
   agi?: number;
-  sta?: number;
+  vit?: number;
   int?: number;
-  spi?: number;
+  luk?: number;
   ap?: number; // flat attack power
   sp?: number; // flat spell power (mirrors `ap` for the caster archetype)
   crit?: number; // flat crit chance, 0..1
@@ -1603,7 +1659,7 @@ export interface MobTemplate {
   // Affects every class (all players have Stamina), unlike enfeeble (mana only).
   enervate?: {
     chance: number;
-    sta: number;
+    vit: number;
     duration: number;
     name: string;
     school?: Aura['school'];
@@ -1614,7 +1670,7 @@ export interface MobTemplate {
   // down with the shrunken pool), so there is no new HP math. Rides the existing
   // buff_sta aura with a NEGATIVE value. Unlike enfeeble (casters only) it
   // afflicts everyone, since Stamina matters to every class.
-  plague?: { chance: number; sta: number; duration: number; name: string; school?: Aura['school'] };
+  plague?: { chance: number; vit: number; duration: number; name: string; school?: Aura['school'] };
   // On-hit curse: a landed melee swing has `chance` to wither the victim's sinews,
   // draining `agi` Agility for `duration`. Agility is a derived-stat hub — it feeds
   // armor (agi*2), dodge and crit — so a single drain shreds both the victim's
@@ -1711,7 +1767,7 @@ export interface MobTemplate {
   demoralize?: { ap: number; duration: number; chance?: number; name?: string };
   // On-hit curse: a landed melee swing has `chance` to siphon the victim's
   // Spirit for `duration`, slowing their out-of-combat mana/health regen
-  // (updateRegen reads `stats.spi`). Rides a `buff_spi` aura with a NEGATIVE
+  // (updateRegen reads `stats.luk`). Rides a `buff_spi` aura with a NEGATIVE
   // value — recalcPlayerStats folds it and floors Spirit at 0, so there is no
   // new regen math. Distinct from manaBurn (one-shot mana drain) and enfeeble
   // (Intellect → mana-pool size): this attacks the REGEN axis. Only meaningful
@@ -1719,7 +1775,7 @@ export interface MobTemplate {
   // mobSwing's other caller, never debuffs the party).
   siphonSpirit?: {
     chance: number;
-    spi: number;
+    luk: number;
     duration: number;
     name: string;
     school?: Aura['school'];

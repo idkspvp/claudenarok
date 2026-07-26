@@ -138,7 +138,7 @@ describe('eqi over a real server broadcast into applySnapshot (liveness, not sha
 
     // The server mints the instance (the only place payloads are born); the
     // client only sends the plain equip command by item id.
-    const minted = { rolled: { masterwork: true, stats: { int: 3, spi: 1 } }, signer: 'Crafter' };
+    const minted = { rolled: { masterwork: true, stats: { int: 3, luk: 1 } }, signer: 'Crafter' };
     server.sim.addItemInstance(ITEM_ID, structuredClone(minted), a.pid);
     cmd(server, a, { cmd: 'equip', item: ITEM_ID });
     fcB.sent.length = 0;

@@ -54,7 +54,7 @@ export interface EnchantDef {
   name: string;
   itemSlot: ItemSlot;
   reagents: readonly EnchantReagent[];
-  statBonus: Partial<Record<'str' | 'agi' | 'sta' | 'int' | 'spi' | 'armor', number>>;
+  statBonus: Partial<Record<'str' | 'agi' | 'vit' | 'int' | 'luk' | 'armor', number>>;
 }
 
 export const ENCHANTS: Record<string, EnchantDef> = {
@@ -80,14 +80,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
     name: 'Enchant Helmet - Fortitude',
     itemSlot: 'helmet',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
-    statBonus: { sta: 3 },
+    statBonus: { vit: 3 },
   },
   enchant_neck_spirit: {
     id: 'enchant_neck_spirit',
     name: 'Enchant Necklace - Spirit',
     itemSlot: 'neck',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
-    statBonus: { spi: 3 },
+    statBonus: { luk: 3 },
   },
   enchant_shoulder_agility: {
     id: 'enchant_shoulder_agility',
@@ -104,14 +104,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_dust', count: 3 },
       { itemId: 'arcane_essence', count: 2 },
     ],
-    statBonus: { sta: 4 },
+    statBonus: { vit: 4 },
   },
   enchant_waist_stamina: {
     id: 'enchant_waist_stamina',
     name: 'Enchant Belt - Stamina',
     itemSlot: 'waist',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
-    statBonus: { sta: 3 },
+    statBonus: { vit: 3 },
   },
   enchant_legs_stamina: {
     id: 'enchant_legs_stamina',
@@ -121,7 +121,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_dust', count: 3 },
       { itemId: 'arcane_essence', count: 2 },
     ],
-    statBonus: { sta: 3 },
+    statBonus: { vit: 3 },
   },
   enchant_gloves_agility: {
     id: 'enchant_gloves_agility',
@@ -149,7 +149,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
     name: 'Enchant Ring - Spirit',
     itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
-    statBonus: { spi: 2 },
+    statBonus: { luk: 2 },
   },
 
   // --- Base-tier variety: extra stat-axis options so every build has a
@@ -224,7 +224,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_dust', count: 3 },
       { itemId: 'arcane_essence', count: 2 },
     ],
-    statBonus: { spi: 4 },
+    statBonus: { luk: 4 },
   },
   enchant_chest_armor: {
     id: 'enchant_chest_armor',
@@ -283,7 +283,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
     name: 'Enchant Boots - Stamina',
     itemSlot: 'feet',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
-    statBonus: { sta: 2 },
+    statBonus: { vit: 2 },
   },
   // Ring: str/agi/int options beside Spirit (a ring takes exactly one, and
   // ItemDef.slot 'ring' covers both ring1 and ring2 via resolveEquipSlot).
@@ -340,7 +340,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_shard', count: 1 },
       { itemId: 'arcane_essence', count: 2 },
     ],
-    statBonus: { sta: 6 },
+    statBonus: { vit: 6 },
   },
   enchant_chest_greater_stamina: {
     id: 'enchant_chest_greater_stamina',
@@ -350,7 +350,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_shard', count: 1 },
       { itemId: 'arcane_essence', count: 3 },
     ],
-    statBonus: { sta: 7 },
+    statBonus: { vit: 7 },
   },
   enchant_legs_greater_stamina: {
     id: 'enchant_legs_greater_stamina',
@@ -360,7 +360,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_shard', count: 1 },
       { itemId: 'arcane_essence', count: 3 },
     ],
-    statBonus: { sta: 6 },
+    statBonus: { vit: 6 },
   },
   enchant_gloves_greater_agility: {
     id: 'enchant_gloves_greater_agility',
@@ -409,7 +409,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_essence', count: 2 },
       { itemId: 'resonant_thread', count: 1 },
     ],
-    statBonus: { spi: 5 },
+    statBonus: { luk: 5 },
   },
   enchant_legs_runed_hide: {
     id: 'enchant_legs_runed_hide',
@@ -429,6 +429,6 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_essence', count: 2 },
       { itemId: 'resonant_links', count: 1 },
     ],
-    statBonus: { sta: 5 },
+    statBonus: { vit: 5 },
   },
 };

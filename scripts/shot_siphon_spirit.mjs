@@ -54,10 +54,10 @@ const result = await page.evaluate(() => {
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
 
-  const spiBefore = p.stats.spi;
+  const spiBefore = p.stats.luk;
   for (let i = 0; i < 5; i++) sim.mobSwing(mob, p);
   const siphon = p.auras.find((a) => a.name === 'Spirit Siphon');
-  return { spiBefore, spiAfter: p.stats.spi, hasSiphon: !!siphon, value: siphon?.value, remaining: siphon?.remaining };
+  return { spiBefore, spiAfter: p.stats.luk, hasSiphon: !!siphon, value: siphon?.value, remaining: siphon?.remaining };
 });
 console.log('siphon result:', JSON.stringify(result));
 

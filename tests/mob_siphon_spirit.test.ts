@@ -24,7 +24,7 @@ const spawnNhalia = (sim: Sim) => {
 };
 
 // Spirit regen tick mirror (updateRegen): mana recovers by spi/3 + 4 + lvl/5.
-const spiritRegen = (p: any) => Math.round(p.stats.spi / 3 + 4 + Math.floor(p.level / 5));
+const spiritRegen = (p: any) => Math.round(p.stats.luk / 3 + 4 + Math.floor(p.level / 5));
 
 // Swing until the Spirit Siphon (negative buff_spi) debuff lands (a swing can miss/dodge).
 const swingUntilSiphoned = (sim: Sim, mob: any, target: any, max = 300) => {
@@ -58,7 +58,7 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     const aura = player.auras.find((a) => a.kind === 'buff_spi');
     expect(aura).toBeDefined();
     expect(aura!.name).toBe('Spirit Siphon');
-    expect(aura!.value).toBe(-siphon.spi); // stored negative
+    expect(aura!.value).toBe(-siphon.luk); // stored negative
     expect(aura!.sourceId).toBe(mob.id);
     expect(aura!.school).toBe('shadow');
   });
@@ -67,7 +67,7 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     const sim = makeSim();
     const player = sim.player;
     const mob = spawnNhalia(sim);
-    const spiBefore = player.stats.spi;
+    const spiBefore = player.stats.luk;
     const regenBefore = spiritRegen(player);
     const siphon = MOBS.sister_nhalia.siphonSpirit!;
     const old = siphon.chance;
@@ -77,7 +77,7 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     } finally {
       siphon.chance = old;
     }
-    expect(player.stats.spi).toBe(spiBefore - siphon.spi);
+    expect(player.stats.luk).toBe(spiBefore - siphon.luk);
     expect(spiritRegen(player)).toBeLessThan(regenBefore);
   });
 
@@ -87,17 +87,17 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     const mob = spawnNhalia(sim);
     const siphon = MOBS.sister_nhalia.siphonSpirit!;
     const oldChance = siphon.chance;
-    const oldSpi = siphon.spi;
+    const oldSpi = siphon.luk;
     siphon.chance = 1;
-    siphon.spi = 100000; // absurd drain
+    siphon.luk = 100000; // absurd drain
     try {
       swingUntilSiphoned(sim, mob, player);
     } finally {
       siphon.chance = oldChance;
-      siphon.spi = oldSpi;
+      siphon.luk = oldSpi;
     }
-    expect(player.stats.spi).toBe(0);
-    expect(player.stats.spi).toBeGreaterThanOrEqual(0);
+    expect(player.stats.luk).toBe(0);
+    expect(player.stats.luk).toBeGreaterThanOrEqual(0);
   });
 
   it('refreshes a single shared slot instead of stacking', () => {

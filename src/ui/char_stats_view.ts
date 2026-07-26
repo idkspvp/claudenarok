@@ -23,11 +23,11 @@ export const STAT_GRID: readonly StatId[] = [
   'armor',
   'agi',
   'attackPower',
-  'sta',
+  'vit',
   'dps',
   'int',
   'critChance',
-  'spi',
+  'luk',
   'dodge',
   'parry',
   'spellPower',
@@ -38,7 +38,7 @@ export const STAT_GRID: readonly StatId[] = [
 ];
 
 // The five primary attributes, rendered as large-numeral tiles across one row.
-export const STAT_TILES: readonly StatId[] = ['str', 'agi', 'sta', 'int', 'spi'];
+export const STAT_TILES: readonly StatId[] = ['str', 'agi', 'vit', 'int', 'luk'];
 
 // Offense: attack/spell power, the dps estimate, and the offensive ratings.
 export const STAT_OFFENSE: readonly StatId[] = [

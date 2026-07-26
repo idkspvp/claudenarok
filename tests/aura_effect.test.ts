@@ -130,7 +130,7 @@ describe('auraEffectDescriptor', () => {
       nums: { pct: 10 },
     });
     expect(desc({ kind: 'buff_sta_pct', value: 5 })).toEqual({
-      key: 'hudChrome.auraEffect.increasePct.sta',
+      key: 'hudChrome.auraEffect.increasePct.vit',
       nums: { pct: 5 },
     });
   });

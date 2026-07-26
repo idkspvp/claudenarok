@@ -23,7 +23,7 @@ export interface DevKitRole {
   // Spec id exactly as declared in talents.ts. Equip legality is evaluated under this
   // spec, so dual-wield and Titan's Grip rules resolve correctly.
   spec: string;
-  weights: Partial<Record<'str' | 'agi' | 'sta' | 'int' | 'spi', number>>;
+  weights: Partial<Record<'str' | 'agi' | 'vit' | 'int' | 'luk', number>>;
   // Melee specs value weapon dps far more than casters, who mostly want the stats on
   // the stick. Drives the weapon term in the scorer.
   melee: boolean;
@@ -34,15 +34,15 @@ export interface DevKitRole {
 }
 
 // Physical damage: strength or agility leads, stamina is a real but secondary term.
-const PHYS_STR = { str: 1, agi: 0.5, sta: 0.6 } as const;
-const PHYS_AGI = { agi: 1, str: 0.4, sta: 0.6 } as const;
+const PHYS_STR = { str: 1, agi: 0.5, vit: 0.6 } as const;
+const PHYS_AGI = { agi: 1, str: 0.4, vit: 0.6 } as const;
 // Tanks: survivability first. Stamina leads outright.
-const TANK_STR = { sta: 1, str: 0.7, agi: 0.4 } as const;
-const TANK_AGI = { sta: 1, agi: 0.8, str: 0.3 } as const;
+const TANK_STR = { vit: 1, str: 0.7, agi: 0.4 } as const;
+const TANK_AGI = { vit: 1, agi: 0.8, str: 0.3 } as const;
 // Casters: intellect leads; a little spirit for regen, a little stamina to live.
-const CASTER = { int: 1, spi: 0.35, sta: 0.4 } as const;
+const CASTER = { int: 1, luk: 0.35, vit: 0.4 } as const;
 // Healers: intellect still leads but spirit matters far more than for a nuker.
-const HEALER = { int: 1, spi: 0.7, sta: 0.4 } as const;
+const HEALER = { int: 1, luk: 0.7, vit: 0.4 } as const;
 
 export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>> = Object.freeze({
   warrior: [

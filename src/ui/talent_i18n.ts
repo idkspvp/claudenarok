@@ -157,9 +157,9 @@ const enText: TalentLocaleText = {
   statLabels: {
     str: 'Strength',
     agi: 'Agility',
-    sta: 'Stamina',
+    vit: 'Stamina',
     int: 'Intellect',
-    spi: 'Spirit',
+    luk: 'Spirit',
     armor: 'armor',
     ap: 'attack power',
     crit: 'critical strike chance',
@@ -614,11 +614,11 @@ function effectDescription(
   }
 
   const stats = effect.stats ?? {};
-  const PRIMARY_PCT: Partial<Record<StatKey, 'str' | 'agi' | 'int' | 'spi'>> = {
+  const PRIMARY_PCT: Partial<Record<StatKey, 'str' | 'agi' | 'int' | 'luk'>> = {
     strPct: 'str',
     agiPct: 'agi',
     intPct: 'int',
-    spiPct: 'spi',
+    spiPct: 'luk',
   };
   for (const [key, value] of Object.entries(stats) as [StatKey, number][]) {
     if (value === undefined || value === 0) continue;

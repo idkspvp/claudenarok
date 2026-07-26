@@ -135,9 +135,9 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
     case 'buff_agi':
       return flatStat('agi', a.value);
     case 'buff_sta':
-      return flatStat('sta', a.value);
+      return flatStat('vit', a.value);
     case 'buff_spi':
-      return flatStat('spi', a.value);
+      return flatStat('luk', a.value);
     case 'buff_allstats':
       return flatStat('allStats', a.value);
     case 'buff_allstats_pct':
@@ -150,7 +150,7 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
     case 'buff_int_pct':
       return { key: `${KEY}.increasePct.int`, nums: { pct: round(a.value) } };
     case 'buff_sta_pct':
-      return { key: `${KEY}.increasePct.sta`, nums: { pct: round(a.value) } };
+      return { key: `${KEY}.increasePct.vit`, nums: { pct: round(a.value) } };
     case 'buff_armor_pct':
       return { key: `${KEY}.increasePct.armor`, nums: { pct: round(a.value) } };
     case 'buff_ap_pct':

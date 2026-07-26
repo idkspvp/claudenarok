@@ -181,7 +181,7 @@ export function roleItemScore(role: DevKitRole, item: ItemDef): number {
   let score = 0;
   let identity = 0;
   for (const [stat, weight] of Object.entries(role.weights)) {
-    const value = item.stats?.[stat as 'str' | 'agi' | 'sta' | 'int' | 'spi'] ?? 0;
+    const value = item.stats?.[stat as 'str' | 'agi' | 'vit' | 'int' | 'luk'] ?? 0;
     score += value * (weight ?? 0);
     identity += value;
   }

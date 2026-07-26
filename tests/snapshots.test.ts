@@ -198,7 +198,7 @@ describe('self stat wire round-trip', () => {
         f: 0,
         hp: 100,
         mhp: 100,
-        stats: { str: 40, agi: 25, sta: 38, int: 10, spi: 12, armor: 300 },
+        stats: { str: 40, agi: 25, vit: 38, int: 10, luk: 12, armor: 300 },
       },
     });
     expect(client.player.stats).toMatchObject({
@@ -1026,7 +1026,7 @@ describe('delta snapshots', () => {
     const masterwork = {
       signer: 'Testa',
       enchant: 'enchant_chest_stamina',
-      rolled: { masterwork: true, stats: { int: 2, spi: 1 } },
+      rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     };
     const legacy = { signer: 'Oldhand', rolled: { quality: 'rare' as const } };
     server.sim.addItemInstance('eastbrook_ritual_vestments', masterwork, session.pid);
@@ -2515,7 +2515,7 @@ describe('weapon skin wire (weaponSkinId)', () => {
 // pins delta keys + self scalars only). End-to-end GameServer liveness plus
 // clone-not-alias live in tests/inspect_instances.test.ts.
 describe('equipped instance wire (eqi)', () => {
-  const inst = { rolled: { masterwork: true, stats: { int: 3, spi: 1 } }, signer: 'Aldric' };
+  const inst = { rolled: { masterwork: true, stats: { int: 3, luk: 1 } }, signer: 'Aldric' };
 
   it('carries eqi through wireEntity only while an instanced piece is worn', () => {
     const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });

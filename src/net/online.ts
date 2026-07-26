@@ -62,6 +62,9 @@ import {
   type MoveInput,
   type PlayerClass,
   type QuestProgress,
+  emptyStatAllocation,
+  type StatAllocation,
+  type StatusStat,
   type QuestState,
   type RiteIntensity,
   type SimEvent,
@@ -70,6 +73,7 @@ import {
   type VcNationId,
   type WeaponSkinType,
 } from '../sim/types';
+import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
 import {
   type AccountCosmetics,
   type ActiveFrostRing,
@@ -1138,9 +1142,10 @@ function blankEntity(id: number): Entity {
     stats: {
       str: 0,
       agi: 0,
-      sta: 0,
+      vit: 0,
       int: 0,
-      spi: 0,
+      dex: 0,
+      luk: 0,
       armor: 0,
       pvpOffense: 0,
       pvpDefense: 0,
@@ -2837,6 +2842,14 @@ export class ClientWorld implements IWorld {
       this.lifetimeXp = s.lxp ?? 0;
       this.restedXp = s.rxp ?? 0;
       this.prestigeRank = s.prk ?? 0;
+      // Sanitized on the way in exactly as it is on the way out of the database:
+      // the client mirror is display state, and a malformed field must degrade to
+      // an unspent character rather than render nonsense next to a spend button.
+      if (s.salloc !== undefined)
+        this.statAllocation = sanitizeStatAllocation(
+          s.salloc as Record<string, unknown>,
+          this.entities.get(this.playerId)?.level ?? 1,
+        );
       if (s.milestones !== undefined) this.unlockedMilestones = s.milestones;
       // IWorldInventory facet (W2) self-decode: copper rides every self-frame (?? 0);
       // inv/buyback/equip are delta-guarded (a missing field keeps the prior mirror).
@@ -4249,6 +4262,30 @@ export class ClientWorld implements IWorld {
   }
   // --- IWorldTalents: talentPoints is a local display compute; every mutation
   // is sent to the authoritative server and mirrors only from a later snapshot. ---
+  // --- IWorldStatusPoints: the six attributes. The mirror is server-written
+  // (the `salloc` self field); the two reads below re-derive the pool with the
+  // SAME pure functions the server uses, so the number under the spend button
+  // matches what the server will charge. ---
+  statAllocation: StatAllocation = emptyStatAllocation();
+
+  statusPoints(): number {
+    const level = this.entities.get(this.playerId)?.level ?? 1;
+    return unspentStatusPoints(this.statAllocation, level);
+  }
+
+  statRaiseCost(stat: StatusStat): number | null {
+    const level = this.entities.get(this.playerId)?.level ?? 1;
+    return raiseCost(this.statAllocation, level, stat);
+  }
+
+  raiseStat(stat: StatusStat): void {
+    this.cmd({ cmd: 'raiseStat', stat });
+  }
+
+  resetStats(): void {
+    this.cmd({ cmd: 'resetStats' });
+  }
+
   talentPoints(): { total: number; spent: number } {
     const level = this.entities.get(this.playerId)?.level ?? 1;
     return { total: rowsUnlockedAtLevel(level), spent: rowsPicked(this.talents) };

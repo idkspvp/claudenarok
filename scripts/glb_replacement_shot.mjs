@@ -245,7 +245,7 @@ async function spawnDelveProp(page, kind, x, z) {
         overheadEmoteId: null,
         overheadEmoteUntil: 0,
         overheadEmoteSeq: 0,
-        stats: { str: 0, agi: 0, sta: 0, int: 0, spi: 0, armor: 0 },
+        stats: { str: 0, agi: 0, vit: 0, int: 0, luk: 0, armor: 0 },
         weapon: { min: 1, max: 2, speed: 2 },
         attackPower: 0,
         rangedPower: 0,

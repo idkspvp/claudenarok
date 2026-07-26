@@ -5212,34 +5212,6 @@ function renderClassDetails(
   // Bind class color as a custom property for clean styling
   panel.style.setProperty('--class-color', classColorHex);
 
-  const statsList: {
-    nameKey: TranslationKey;
-    key: keyof typeof classDef.baseStats;
-  }[] = [
-    { nameKey: 'classDetails.labels.strength', key: 'str' },
-    { nameKey: 'classDetails.labels.agility', key: 'agi' },
-    { nameKey: 'classDetails.labels.stamina', key: 'sta' },
-    { nameKey: 'classDetails.labels.intellect', key: 'int' },
-    { nameKey: 'classDetails.labels.spirit', key: 'spi' },
-  ];
-
-  const statBarsHtml = statsList
-    .map((s) => {
-      const statLabel = t(s.nameKey);
-      const val = classDef.baseStats[s.key];
-      const pct = Math.min(100, Math.round((val / 25) * 100));
-      return `
-      <div class="details-stat-bar-row">
-        <span class="details-stat-label">${escapeHtml(statLabel)}</span>
-        <div class="details-stat-bar-track" aria-label="${escapeHtml(t('classDetails.statBarAria', { stat: statLabel, value: val }))}">
-          <div class="details-stat-bar-fill" style="width: 0%;" data-target-width="${pct}%"></div>
-        </div>
-        <span class="details-stat-val">${val}</span>
-      </div>
-    `;
-    })
-    .join('');
-
   const spells = SIGNATURE_ABILITIES[className];
   const spellsHtml = spells
     .map((spellId) => {
@@ -5329,10 +5301,6 @@ function renderClassDetails(
         </div>
         <p class="class-details-lore">${escapeHtml(classDisplayDescription(className))}</p>
         <div class="class-details-grid">
-          <div class="class-details-stats-col">
-            <h4 class="details-section-title">${escapeHtml(t('classDetails.sections.startingStats'))}</h4>
-            ${statBarsHtml}
-          </div>
           <div class="class-details-gear-col">
             <h4 class="details-section-title">${escapeHtml(t('classDetails.sections.equipment'))}</h4>
             <div class="details-gear-row"><strong>${escapeHtml(t('classDetails.labels.resource'))}:</strong> <span class="badge badge-resource resource-${classDef.resourceType}">${escapeHtml(resourceLabel)}</span></div>
@@ -5355,11 +5323,6 @@ function renderClassDetails(
       t('classDetails.aria', {
         className: classLabel,
         role: roleLabel,
-        str: classDef.baseStats.str,
-        agi: classDef.baseStats.agi,
-        sta: classDef.baseStats.sta,
-        int: classDef.baseStats.int,
-        spi: classDef.baseStats.spi,
       }),
     );
 

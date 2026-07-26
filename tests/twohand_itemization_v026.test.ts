@@ -35,7 +35,7 @@ describe('v0.26 two-handed greatblade itemization', () => {
       slot: 'offhand',
       shield: true,
       blockValue: 14,
-      stats: { armor: 112, sta: 2 },
+      stats: { armor: 112, vit: 2 },
       requiredClass: ['warrior', 'paladin', 'shaman'],
     });
     expect(canEquipItem('warrior', wallshield)).toBe(true);
@@ -51,14 +51,14 @@ describe('v0.26 two-handed greatblade itemization', () => {
     const wyrmfang = weapon('wyrmfang_greatblade');
     expect(wyrmfang.hand).toBe('twohand');
     expect(itemLevel(wyrmfang)).toBe(26);
-    expect(wyrmfang.stats).toMatchObject({ str: 14, sta: 9 });
+    expect(wyrmfang.stats).toMatchObject({ str: 14, vit: 9 });
     expect(primaryStatSum(wyrmfang)).toBe(23);
     expect(expectedStatBudget(wyrmfang)).toBe(23);
 
     const deathless = weapon('deathless_greatblade');
     expect(deathless.hand).toBe('twohand');
     expect(itemLevel(deathless)).toBe(33);
-    expect(deathless.stats).toMatchObject({ str: 18, sta: 12 });
+    expect(deathless.stats).toMatchObject({ str: 18, vit: 12 });
     expect(primaryStatSum(deathless)).toBe(30);
     expect(expectedStatBudget(deathless)).toBe(30);
   });

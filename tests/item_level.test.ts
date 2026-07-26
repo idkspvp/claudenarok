@@ -108,27 +108,27 @@ describe('item level: showcase tiers are normalized to budget', () => {
   it('normalization preserved each piece stat identity (no attribute swapped in/out)', () => {
     const ident = (id: string) =>
       PRIMARY_STATS.filter((k) => (ITEMS[id].stats?.[k] ?? 0) > 0).sort();
-    expect(ident('hollowbone_hauberk')).toEqual(['sta', 'str']);
-    expect(ident('gravewoven_raiment')).toEqual(['int', 'spi']);
-    expect(ident('cryptstalker_jerkin')).toEqual(['agi', 'sta']);
-    expect(ident('gravecaller_staff')).toEqual(['int', 'spi']);
+    expect(ident('hollowbone_hauberk')).toEqual(['vit', 'str']);
+    expect(ident('gravewoven_raiment')).toEqual(['int', 'luk']);
+    expect(ident('cryptstalker_jerkin')).toEqual(['agi', 'vit']);
+    expect(ident('gravecaller_staff')).toEqual(['int', 'luk']);
   });
 });
 
 describe('normalizePrimaryStats', () => {
   it('scales to the exact integer budget while keeping the input ratio', () => {
-    expect(normalizePrimaryStats({ str: 3, sta: 2 }, 7)).toEqual({ str: 4, sta: 3 });
-    expect(normalizePrimaryStats({ int: 4, spi: 2 }, 7)).toEqual({ int: 5, spi: 2 });
+    expect(normalizePrimaryStats({ str: 3, vit: 2 }, 7)).toEqual({ str: 4, vit: 3 });
+    expect(normalizePrimaryStats({ int: 4, luk: 2 }, 7)).toEqual({ int: 5, luk: 2 });
     // sum is always exactly the budget.
-    const out = normalizePrimaryStats({ agi: 4, sta: 2 }, 6);
-    expect((out.agi ?? 0) + (out.sta ?? 0)).toBe(6);
+    const out = normalizePrimaryStats({ agi: 4, vit: 2 }, 6);
+    expect((out.agi ?? 0) + (out.vit ?? 0)).toBe(6);
   });
 
   it('only touches the attributes already present and passes armor through', () => {
-    const out = normalizePrimaryStats({ armor: 38, int: 4, spi: 3 }, 6);
+    const out = normalizePrimaryStats({ armor: 38, int: 4, luk: 3 }, 6);
     expect(out.armor).toBe(38);
     expect(out.str).toBeUndefined();
-    expect((out.int ?? 0) + (out.spi ?? 0)).toBe(6);
+    expect((out.int ?? 0) + (out.luk ?? 0)).toBe(6);
   });
 
   it('is deterministic (ties resolved by a stable order) and idempotent at budget', () => {
@@ -137,7 +137,7 @@ describe('normalizePrimaryStats', () => {
     expect(a).toEqual(b);
     expect((a.str ?? 0) + (a.agi ?? 0)).toBe(3);
     // re-normalizing an already-on-budget item is a no-op.
-    expect(normalizePrimaryStats({ str: 4, sta: 3 }, 7)).toEqual({ str: 4, sta: 3 });
+    expect(normalizePrimaryStats({ str: 4, vit: 3 }, 7)).toEqual({ str: 4, vit: 3 });
   });
 
   it('drops all primary stats at a zero budget but keeps armor', () => {
@@ -156,7 +156,7 @@ describe('itemScore', () => {
         slot: 'chest',
         armorType: 'mail',
         sellValue: 0,
-        stats: { str: 4, sta: 3 },
+        stats: { str: 4, vit: 3 },
       }),
     ).toBe(7);
     // Armor converts at ARMOR_PER_POINT (12): 24 armor -> 2 points.

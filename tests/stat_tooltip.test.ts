@@ -8,9 +8,9 @@ import { ALL_CLASSES, armorReduction, type PlayerClass } from '../src/sim/types'
 import {
   agiMeleeApPerPoint,
   buildStatTooltip,
-  healthFromStamina,
+  healthMultiplierFromVit,
   isManaClass,
-  manaFromIntellect,
+  manaMultiplierFromInt,
   restingHealthPer5s,
   restingManaPer5s,
   type StatEffect,
@@ -86,7 +86,7 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
         let gearArmor = 0;
         for (const id of Object.values(sim.equipment))
           gearArmor += (id && ITEMS[id]?.stats?.armor) || 0;
-        const baseArmor = def.baseStats.armor + def.statsPerLevel.armor * (level - 1);
+        const baseArmor = 0; // a class no longer carries base armour
         const agiArmor = statEffectVal(cls, p, 'agi', 'armor') ?? 0;
         expect(agiArmor).toBe(p.stats.armor - baseArmor - gearArmor); // proves the sim adds agi*2
         expect(agiArmor).toBe(p.stats.agi * 2); // proves the tooltip matches
@@ -96,9 +96,11 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
         const p = freshPlayer(cls, level);
         const def = CLASSES[cls];
         const base = def.baseHp + def.hpPerLevel * (level - 1);
-        const maxHealth = statEffectVal(cls, p, 'sta', 'maxHealth') ?? 0;
-        expect(maxHealth).toBe(p.maxHp - base);
-        expect(maxHealth).toBe(healthFromStamina(p.stats.sta));
+        // VIT scales the pool now rather than adding to it, so the tooltip line
+        // is a percentage and the check is the multiplier, not a difference.
+        const pct = statEffectVal(cls, p, 'vit', 'maxHealthPct') ?? 0;
+        expect(pct).toBeCloseTo((healthMultiplierFromVit(p.stats.vit) - 1) * 100, 6);
+        expect(p.maxHp).toBe(Math.round(base * healthMultiplierFromVit(p.stats.vit)));
       });
 
       it(`${cls} L${level}: armor cell damage reduction matches armorReduction()`, () => {
@@ -116,9 +118,9 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
       const p = freshPlayer(cls, 20);
       const def = CLASSES[cls];
       const base = def.baseMana + def.manaPerLevel * (20 - 1);
-      const maxMana = statEffectVal(cls, p, 'int', 'maxMana') ?? 0;
-      expect(maxMana).toBe(p.maxResource - base);
-      expect(maxMana).toBe(manaFromIntellect(p.stats.int));
+      const pct = statEffectVal(cls, p, 'int', 'maxManaPct') ?? 0;
+      expect(pct).toBeCloseTo((manaMultiplierFromInt(p.stats.int) - 1) * 100, 6);
+      expect(p.maxResource).toBe(Math.round(base * manaMultiplierFromInt(p.stats.int)));
     }
   });
 });
@@ -171,7 +173,7 @@ describe('class-aware effect selection', () => {
     for (const cls of [rogue, warrior]) {
       const c = cls === rogue ? 'rogue' : 'warrior';
       const intM = buildStatTooltip('int', inputFor(c, cls));
-      const spiM = buildStatTooltip('spi', inputFor(c, cls));
+      const spiM = buildStatTooltip('luk', inputFor(c, cls));
       expect(intM.minorForClass).toBe(true);
       expect(intM.effects).toHaveLength(0);
       expect(spiM.minorForClass).toBe(true);
@@ -182,7 +184,7 @@ describe('class-aware effect selection', () => {
     expect(intMage.minorForClass).toBe(false);
     expect(effect(intMage.effects, 'maxMana')).toBeDefined();
     expect(effect(intMage.effects, 'spellCritPct')).toBeDefined();
-    expect(buildStatTooltip('spi', inputFor('mage', mage)).minorForClass).toBe(false);
+    expect(buildStatTooltip('luk', inputFor('mage', mage)).minorForClass).toBe(false);
   });
 
   it('treats a druid as a mana class in every form (Int/Spirit keep their mana lines)', () => {
@@ -196,7 +198,7 @@ describe('class-aware effect selection', () => {
     expect(intDruid.minorForClass).toBe(false);
     expect(effect(intDruid.effects, 'maxMana')).toBeDefined();
     expect(effect(intDruid.effects, 'spellCritPct')).toBeDefined();
-    const spiDruid = buildStatTooltip('spi', inputFor('druid', druid));
+    const spiDruid = buildStatTooltip('luk', inputFor('druid', druid));
     expect(spiDruid.minorForClass).toBe(false);
     expect(effect(spiDruid.effects, 'manaRegen')).toBeDefined();
   });
@@ -218,17 +220,16 @@ describe('class-aware effect selection', () => {
 });
 
 describe('pure regen / pool helpers', () => {
-  it('health from stamina uses the 20-point pivot (1 then 10 per point)', () => {
-    expect(healthFromStamina(0)).toBe(0);
-    expect(healthFromStamina(20)).toBe(20);
-    expect(healthFromStamina(28)).toBe(20 + 8 * 10); // 100
-    expect(healthFromStamina(-5)).toBe(0);
-  });
-
-  it('mana from intellect uses the 20-point pivot (1 then 15 per point)', () => {
-    expect(manaFromIntellect(20)).toBe(20);
-    expect(manaFromIntellect(24)).toBe(20 + 4 * 15); // 80
-    expect(manaFromIntellect(-5)).toBe(0);
+  it('VIT and INT scale their pools by a percentage, floored at the base', () => {
+    // Ragnarok's shape: 1% a point, so a 99 in either just about doubles the pool.
+    // The floor at 0 is what keeps a draining debuff from inverting it.
+    expect(healthMultiplierFromVit(0)).toBe(1);
+    expect(healthMultiplierFromVit(50)).toBeCloseTo(1.5, 10);
+    expect(healthMultiplierFromVit(99)).toBeCloseTo(1.99, 10);
+    expect(healthMultiplierFromVit(-5)).toBe(1);
+    expect(manaMultiplierFromInt(0)).toBe(1);
+    expect(manaMultiplierFromInt(99)).toBeCloseTo(1.99, 10);
+    expect(manaMultiplierFromInt(-5)).toBe(1);
   });
 
   it('resting regen rounds the per-tick amount first (as the sim does), then scales to per-5s', () => {
@@ -269,12 +270,12 @@ describe('effect wiring reconciles each effect kind with its source', () => {
 
   it('stamina cell wires healthRegen = restingHealthPer5s(sta)', () => {
     const p = freshPlayer('warrior', 20);
-    expect(effVal('warrior', p, 'sta', 'healthRegen')).toBe(restingHealthPer5s(p.stats.sta));
+    expect(effVal('warrior', p, 'vit', 'healthRegen')).toBe(restingHealthPer5s(p.stats.vit));
   });
 
   it('mana classes wire spirit -> manaRegen and intellect -> spellCritPct', () => {
     const p = freshPlayer('mage', 20);
-    expect(effVal('mage', p, 'spi', 'manaRegen')).toBe(restingManaPer5s(p.stats.spi, p.level));
+    expect(effVal('mage', p, 'luk', 'manaRegen')).toBe(restingManaPer5s(p.stats.luk, p.level));
     // spell crit = 0.05 + int*0.0008 (sim.ts spellCrit); the line shows the int*0.0008 portion as a percent
     expect(effVal('mage', p, 'int', 'spellCritPct')).toBeCloseTo(p.stats.int * 0.0008 * 100, 6);
   });
@@ -316,9 +317,9 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
   const STATS: StatId[] = [
     'str',
     'agi',
-    'sta',
+    'vit',
     'int',
-    'spi',
+    'luk',
     'armor',
     'attackPower',
     'spellPower',
@@ -362,7 +363,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
     });
     recalcPlayerStats(p, 'warrior', sim.equipment, undefined, {});
     const input = inputWithGear(sim, 'warrior');
-    const sta = buildStatTooltip('sta', input);
+    const sta = buildStatTooltip('vit', input);
     const buffLine = sta.sources.find((s) => s.kind === 'buff');
     expect(buffLine?.name).toBe('Power Word: Fortitude');
     expect(buffLine?.value).toBe(20);

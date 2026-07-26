@@ -17,14 +17,17 @@ import type {
 import {
   ALL_EQUIP_SLOTS,
   AVATAR_SCALE,
+  BASE_STAT,
   BERSERKER_CRIT_CHANCE,
   cloneItemInstancePayload,
   critFractionFromRating,
   ENRAGE_HASTE_PCT,
   hasteFractionFromRating,
   hitFractionFromRating,
+  emptyStatAllocation,
   SHIELD_BLOCK_BASE,
   SPELL_POWER_PER_INT,
+  type StatAllocation,
 } from './types';
 
 function baseEntity(id: number, pos: Vec3): Entity {
@@ -55,9 +58,10 @@ function baseEntity(id: number, pos: Vec3): Entity {
     stats: {
       str: 0,
       agi: 0,
-      sta: 0,
+      vit: 0,
       int: 0,
-      spi: 0,
+      dex: 0,
+      luk: 0,
       armor: 0,
       pvpOffense: 0,
       pvpDefense: 0,
@@ -227,19 +231,50 @@ export function createPlayer(id: number, cls: PlayerClass, pos: Vec3, name: stri
 
 export type PlayerEquipment = Partial<Record<EquipSlot, string>>;
 
-// Classic-era rules: first 20 stamina gives 1 hp each, the rest 10 hp each.
-// First 20 intellect gives 1 mana each, the rest 15 mana each.
-function hpFromStamina(sta: number): number {
-  // Floor at 0 so a Stamina-draining debuff (negative buff_sta) can never push
-  // the HP pool below its level-based base into negative territory.
-  const s = Math.max(0, sta);
-  return Math.min(s, 20) + Math.max(0, s - 20) * 10;
+// Ragnarok's stat derivations. These replace the old flat-per-point rules, which
+// were tuned against a 10-to-60 stat scale and became nonsense against 1-to-99.
+//
+// The shapes below are Ragnarok's, taken from the documented pre-renewal status
+// formulas and written here in our own terms:
+//
+//   ATK   = STR + floor(STR/10)^2 + floor(DEX/5) + floor(LUK/5)
+//   MATK  = INT + floor(INT/7)^2
+//   HP    = class pool x (1 + VIT/100)
+//   SP    = class pool x (1 + INT/100)
+//   CRIT  = 1% + LUK x 0.3%
+//   DEF   = floor(VIT/2) soft defence on top of gear armour
+//
+// The squared terms are the point: they are why a build that commits to one
+// attribute beats one that spreads, and why the last ten points of a 99 are
+// worth more than the first ten. A linear rule cannot express that.
+//
+// Everything is floored at 0 so a draining debuff can never invert a pool.
+
+/** Status ATK: the melee attack contribution of STR, DEX and LUK. */
+export function statusAttackPower(str: number, dex: number, luk: number): number {
+  const s = Math.max(0, str);
+  return s + Math.floor(s / 10) ** 2 + Math.floor(Math.max(0, dex) / 5) + Math.floor(Math.max(0, luk) / 5);
 }
-function manaFromIntellect(int: number): number {
-  // Floor at 0 so an Intellect-draining debuff (negative buff_int) can never push
-  // the mana pool below its level-based base into negative territory.
+
+/** Status MATK: the magic attack contribution of INT. */
+export function statusMagicPower(int: number): number {
   const i = Math.max(0, int);
-  return Math.min(i, 20) + Math.max(0, i - 20) * 15;
+  return i + Math.floor(i / 7) ** 2;
+}
+
+/** The VIT multiplier on the class HP pool (1.0 at VIT 0, 1.99 at VIT 99). */
+export function vitHealthMultiplier(vit: number): number {
+  return 1 + Math.max(0, vit) / 100;
+}
+
+/** The INT multiplier on the class SP pool. */
+export function intManaMultiplier(int: number): number {
+  return 1 + Math.max(0, int) / 100;
+}
+
+/** Soft defence from VIT, added to gear armour. */
+export function vitSoftDefence(vit: number): number {
+  return Math.floor(Math.max(0, vit) / 2);
 }
 
 export function pctValue(value: number): number {
@@ -255,16 +290,21 @@ export function recalcPlayerStats(
   equipment: PlayerEquipment,
   mods: TalentModifiers | undefined,
   equipmentInstance: Partial<Record<EquipSlot, ItemInstancePayload>>,
+  alloc: StatAllocation = emptyStatAllocation(),
 ): void {
   const def = CLASSES[cls];
   const lvl = e.level;
+  // Base 1 in each of the six, plus whatever the player has spent. Level itself
+  // adds nothing: it buys POINTS, and the points are the growth. This is the
+  // whole reason the nine per-class stat blocks are gone.
   const s: Stats = {
-    str: def.baseStats.str + def.statsPerLevel.str * (lvl - 1),
-    agi: def.baseStats.agi + def.statsPerLevel.agi * (lvl - 1),
-    sta: def.baseStats.sta + def.statsPerLevel.sta * (lvl - 1),
-    int: def.baseStats.int + def.statsPerLevel.int * (lvl - 1),
-    spi: def.baseStats.spi + def.statsPerLevel.spi * (lvl - 1),
-    armor: def.baseStats.armor + def.statsPerLevel.armor * (lvl - 1),
+    str: BASE_STAT + alloc.str,
+    agi: BASE_STAT + alloc.agi,
+    vit: BASE_STAT + alloc.vit,
+    int: BASE_STAT + alloc.int,
+    dex: BASE_STAT + alloc.dex,
+    luk: BASE_STAT + alloc.luk,
+    armor: 0,
     pvpOffense: 0,
     pvpDefense: 0,
   };
@@ -296,9 +336,9 @@ export function recalcPlayerStats(
     if (item.stats) {
       s.str += item.stats.str ?? 0;
       s.agi += item.stats.agi ?? 0;
-      s.sta += item.stats.sta ?? 0;
+      s.vit += item.stats.vit ?? 0;
       s.int += item.stats.int ?? 0;
-      s.spi += item.stats.spi ?? 0;
+      s.luk += item.stats.luk ?? 0;
       s.armor += item.stats.armor ?? 0;
     }
     // Instance stat bonus: additive on top of the item's own base stats, from
@@ -312,9 +352,9 @@ export function recalcPlayerStats(
     if (enchantStats) {
       s.str += enchantStats.str ?? 0;
       s.agi += enchantStats.agi ?? 0;
-      s.sta += enchantStats.sta ?? 0;
+      s.vit += enchantStats.vit ?? 0;
       s.int += enchantStats.int ?? 0;
-      s.spi += enchantStats.spi ?? 0;
+      s.luk += enchantStats.luk ?? 0;
       s.armor += enchantStats.armor ?? 0;
     }
   }
@@ -324,9 +364,9 @@ export function recalcPlayerStats(
   const setEff = aggregateSetBonuses(setCounts);
   s.str += setEff.str;
   s.agi += setEff.agi;
-  s.sta += setEff.sta;
+  s.vit += setEff.vit;
   s.int += setEff.int;
-  s.spi += setEff.spi;
+  s.luk += setEff.luk;
   bonusSp += setEff.sp; // caster set 2-piece spell power (mirrors setEff.ap for melee)
   // Buff auras
   let bonusAp = setEff.ap;
@@ -355,14 +395,14 @@ export function recalcPlayerStats(
     else if (a.kind === 'buff_armor') s.armor += a.value;
     else if (a.kind === 'buff_int') s.int += a.value;
     else if (a.kind === 'buff_agi') s.agi += a.value;
-    else if (a.kind === 'buff_spi') s.spi += a.value;
-    else if (a.kind === 'buff_sta') s.sta += a.value;
+    else if (a.kind === 'buff_spi') s.luk += a.value;
+    else if (a.kind === 'buff_sta') s.vit += a.value;
     else if (a.kind === 'buff_allstats') {
       s.str += a.value;
       s.agi += a.value;
-      s.sta += a.value;
+      s.vit += a.value;
       s.int += a.value;
-      s.spi += a.value;
+      s.luk += a.value;
     } else if (a.kind === 'buff_spellpower') bonusSp += a.value;
     else if (a.kind === 'buff_crit' || a.kind === 'buff_reckless' || a.kind === 'bloodbath')
       bonusCrit += a.value;
@@ -377,9 +417,9 @@ export function recalcPlayerStats(
       const m = 1 + a.value;
       s.str = Math.round(s.str * m);
       s.agi = Math.round(s.agi * m);
-      s.sta = Math.round(s.sta * m);
+      s.vit = Math.round(s.vit * m);
       s.int = Math.round(s.int * m);
-      s.spi = Math.round(s.spi * m);
+      s.luk = Math.round(s.luk * m);
     } else if (a.kind === 'buff_dodge') bonusDodge += a.value;
     else if (a.kind === 'buff_scale') scaleMul *= a.value;
     // Metamorphosis: a temporary demon transform that also makes the caster larger.
@@ -412,19 +452,19 @@ export function recalcPlayerStats(
     const m = mods.stats;
     s.str += m.str;
     s.agi += m.agi;
-    s.sta += m.sta;
+    s.vit += m.vit;
     s.int += m.int;
-    s.spi += m.spi;
+    s.luk += m.luk;
     s.armor += m.armor;
     bonusAp += m.ap;
     bonusDodge += m.dodge;
-    if (m.staPct) s.sta = Math.round(s.sta * (1 + m.staPct));
+    if (m.staPct) s.vit = Math.round(s.vit * (1 + m.staPct));
     // Primary-attribute multipliers, applied to the fully-summed attribute. agiPct lands
     // before the agi-derived armor/dodge below so the percentage flows into them.
     if (m.strPct) s.str = Math.round(s.str * (1 + m.strPct));
     if (m.agiPct) s.agi = Math.round(s.agi * (1 + m.agiPct));
     if (m.intPct) s.int = Math.round(s.int * (1 + m.intPct));
-    if (m.spiPct) s.spi = Math.round(s.spi * (1 + m.spiPct));
+    if (m.spiPct) s.luk = Math.round(s.luk * (1 + m.spiPct));
   }
   // Percent stat raid buffs, folded multiplicatively on the computed (base + gear +
   // flat + talent) primary stats so they feed every downstream derivation (AP from
@@ -432,9 +472,9 @@ export function recalcPlayerStats(
   if (allStatsPct || intPct || staPct) {
     s.str = Math.round(s.str * (1 + allStatsPct));
     s.agi = Math.round(s.agi * (1 + allStatsPct));
-    s.sta = Math.round(s.sta * (1 + allStatsPct + staPct));
+    s.vit = Math.round(s.vit * (1 + allStatsPct + staPct));
     s.int = Math.round(s.int * (1 + allStatsPct + intPct));
-    s.spi = Math.round(s.spi * (1 + allStatsPct));
+    s.luk = Math.round(s.luk * (1 + allStatsPct));
   }
   // Floor Agility at 0 so a draining debuff (negative buff_agi) can never push the
   // derived armor/dodge below what zero Agility would give.
@@ -460,8 +500,8 @@ export function recalcPlayerStats(
   if (mods?.stats.armorPct) s.armor = Math.round(s.armor * (1 + mods.stats.armorPct));
   if (buffArmorPct) s.armor = Math.round(s.armor * (1 + buffArmorPct)); // Devotion Aura
   // Floor Spirit at 0 so a Spirit-siphoning debuff (negative buff_spi) can never
-  // drive out-of-combat regen (updateRegen reads stats.spi) below zero.
-  s.spi = Math.max(0, s.spi);
+  // drive out-of-combat regen (updateRegen reads stats.luk) below zero.
+  s.luk = Math.max(0, s.luk);
 
   e.stats = s;
   const warfare = pvpFractionsFromRatings(bonusPvpOffenseRating, bonusPvpDefenseRating);
@@ -539,12 +579,11 @@ export function recalcPlayerStats(
     : {};
   // Melee AP by class (classic-era-ish): warriors/paladins/shamans/druids 2/str,
   // rogues str+agi, hunters str+agi, pure casters str.
-  const apFromStats =
-    cls === 'warrior' || cls === 'paladin' || cls === 'shaman' || cls === 'druid'
-      ? s.str * 2
-      : cls === 'rogue' || cls === 'hunter'
-        ? s.str + s.agi
-        : s.str;
+  // One formula for every class. The old per-class multipliers (2x STR for the
+  // plate wearers, STR+AGI for the leather ones) existed to make a class feel
+  // different from a stat block it no longer has; the difference now comes from
+  // where the player spends, and from the kit.
+  const apFromStats = statusAttackPower(s.str, s.dex, s.luk);
   // Floor at 0 so a heavy debuff_ap stack can never bake a negative attack power
   // (mirrors effectiveAttackPower's mob floor and the agi/spi floors above).
   // buffApPct (Battle Shout / Blessing of Might) folds into the same AP multiplier.
@@ -552,14 +591,21 @@ export function recalcPlayerStats(
     0,
     Math.round((apFromStats + bonusAp) * (1 + (mods?.stats.apPct ?? 0) + buffApPct)),
   );
-  // Hunters: ranged AP = 2/agi (classic-era value)
+  // Ranged attack keys off DEX rather than AGI, which is Ragnarok's split: AGI
+  // buys attack SPEED and evasion, DEX buys accuracy and bow damage.
   e.rangedPower =
     cls === 'hunter'
-      ? Math.max(0, Math.round((s.agi * 2 + bonusAp) * (1 + (mods?.stats.apPct ?? 0) + buffApPct)))
+      ? Math.max(
+          0,
+          Math.round(
+            (statusAttackPower(s.dex, s.dex, s.luk) + bonusAp) *
+              (1 + (mods?.stats.apPct ?? 0) + buffApPct),
+          ),
+        )
       : 0;
-  // Spell Power: Intellect converted via SPELL_POWER_PER_INT plus flat Spell Power
-  // from gear/buffs. Floored at 0 so an Intellect-draining debuff can't go negative.
-  e.spellPower = Math.max(0, Math.round(s.int * SPELL_POWER_PER_INT + bonusSp));
+  // Magic attack from INT with the same squared term the melee side gets, plus
+  // flat Spell Power from gear and buffs.
+  e.spellPower = Math.max(0, Math.round(statusMagicPower(s.int) + bonusSp));
   e.critRating = bonusCritRating + setEff.critRating;
   e.hasteRating = bonusHasteRating + setEff.hasteRating;
   // Hit rating (gear + set bonuses) folds into a hit fraction that combat subtracts
@@ -585,10 +631,11 @@ export function recalcPlayerStats(
   // crit talents were dead weight to casters).
   e.sharedCritBonus =
     bonusCrit + (mods?.stats.crit ?? 0) + setEff.crit + critFractionFromRating(e.critRating);
-  // Crit: ~1% per 20 agi at low level
+  // Crit is LUK's job now, not AGI's: 1% base and 0.3% a point, so a 99 LUK build
+  // crits about a third of the time off stats alone. AGI moved to evasion.
   e.critChance =
-    0.05 +
-    s.agi * 0.0005 +
+    0.01 +
+    s.luk * 0.003 +
     e.sharedCritBonus +
     (e.auras.some((a) => a.kind === 'berserker_stance') ? BERSERKER_CRIT_CHANCE : 0);
   // Extra crit damage from a spec mastery, per output channel (e.g. Fire mage: SPELL
@@ -601,10 +648,18 @@ export function recalcPlayerStats(
   e.castPushbackReduction = setEff.castPushbackReduction;
   e.knockbackResistance = setEff.knockbackResistance;
   // Floored at 0: an off-balance debuff (negative buff_dodge) can drive dodge to nothing.
-  e.dodgeChance = Math.max(0, 0.05 + s.agi * 0.0005 + bonusDodge);
+  // AGI evasion, at the same rate LUK buys crit. This is an INTERIM shape: in
+  // Ragnarok evasion is Flee contested against the attacker's Hit, not a flat
+  // chance, and that contest arrives with the combat model in phase 3. What
+  // matters here is that AGI is worth points on the 1-99 scale.
+  e.dodgeChance = Math.max(0, 0.01 + s.agi * 0.003 + bonusDodge);
 
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
-  e.maxHp = def.baseHp + def.hpPerLevel * (lvl - 1) + hpFromStamina(s.sta);
+  // Ragnarok's shape: VIT is a PERCENTAGE on the class pool, not a flat per-point
+  // grant. At VIT 99 a character carries just under double the pool a VIT 1
+  // character does — decisive, but it never dwarfs the class and level base the
+  // way a flat +10/point did once the scale ran to 99.
+  e.maxHp = Math.round((def.baseHp + def.hpPerLevel * (lvl - 1)) * vitHealthMultiplier(s.vit));
   if (bearForm) e.maxHp = Math.round(e.maxHp * 1.15);
   if (mods?.stats.maxHpPct) e.maxHp = Math.round(e.maxHp * (1 + mods.stats.maxHpPct));
   if (maxHpPctAura !== 0) e.maxHp = Math.max(1, Math.round(e.maxHp * (1 + maxHpPctAura)));
@@ -629,7 +684,8 @@ export function recalcPlayerStats(
     const manaFrac = e.maxResource > 0 ? e.resource / e.maxResource : 1;
     e.resourceType = 'mana';
     e.maxResource = Math.round(
-      (def.baseMana + def.manaPerLevel * (lvl - 1) + manaFromIntellect(s.int)) *
+      (def.baseMana + def.manaPerLevel * (lvl - 1)) *
+        intManaMultiplier(s.int) *
         (1 + (mods?.global.manaPct ?? 0)),
     );
     e.resource = cameFromForm

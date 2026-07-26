@@ -61,9 +61,9 @@ export interface MoneySplit {
 export interface SheetStats {
   str: number;
   agi: number;
-  sta: number;
+  vit: number;
   int: number;
-  spi: number;
+  luk: number;
   armor: number;
   pvpOffense: number;
   pvpDefense: number;

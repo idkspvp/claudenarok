@@ -70,6 +70,7 @@ import {
   emptyMoveInput,
   isDungeonDifficulty,
   MAX_LEVEL,
+  STATUS_STATS,
   type MobFamily,
   RUN_SPEED,
   type SimEvent,
@@ -4824,6 +4825,21 @@ export class GameServer {
       case 'respec':
         sim.respec(pid);
         break;
+      // Status points. The client stages nothing: it names an attribute and the
+      // Sim re-derives the budget, so a forged spend costs the same as a real one
+      // and is refused by the same rule.
+      case 'raiseStat': {
+        const stat = STATUS_STATS.find((s) => s === msg.stat);
+        if (stat) {
+          sim.raiseStat(stat, pid);
+          session.selfHeavyDirty = true;
+        }
+        break;
+      }
+      case 'resetStats':
+        sim.resetStats(pid);
+        session.selfHeavyDirty = true;
+        break;
       case 'setSpec': {
         const spec = parseTalentOptionId(msg.spec);
         if (spec !== undefined) sim.setSpec(spec, pid);
@@ -5889,6 +5905,7 @@ export class GameServer {
       maybe('buyback', meta.vendorBuyback);
       maybe('equip', meta.equipment);
       maybe('cosmetics', anchorSession.accountCosmetics);
+      maybe('salloc', { ...meta.statAllocation });
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so

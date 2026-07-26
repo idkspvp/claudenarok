@@ -885,7 +885,7 @@ describe('snapshot interpolation continuity', () => {
       qdone: [],
       cds: {},
       gcd: 0,
-      stats: { str: 1, agi: 1, sta: 1, int: 1, spi: 1, armor: 0 },
+      stats: { str: 1, agi: 1, vit: 1, int: 1, luk: 1, armor: 0 },
       weapon: { min: 1, max: 2, speed: 2 },
     });
     c.applySnapshot({ t: 'snap', tick: 1, time: 0, self: self(0), ents: [] });
@@ -920,7 +920,7 @@ describe('snapshot interpolation continuity', () => {
       qdone: [],
       cds: {},
       gcd: 0,
-      stats: { str: 1, agi: 1, sta: 1, int: 1, spi: 1, armor: 0 },
+      stats: { str: 1, agi: 1, vit: 1, int: 1, luk: 1, armor: 0 },
       weapon: { min: 1, max: 2, speed: 2 },
     });
     c.applySnapshot({ t: 'snap', tick: 1, time: 0, self: self('laugh', 4), ents: [] });

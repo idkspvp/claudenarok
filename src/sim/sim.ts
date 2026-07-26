@@ -446,6 +446,13 @@ import * as valeCupMod from './social/vale_cup';
 import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
+import {
+  raiseCost,
+  raiseStat,
+  resetStatAllocation,
+  sanitizeStatAllocation,
+  unspentStatusPoints,
+} from './status_points';
 import { isStunDrCategory } from './stun_dr';
 import { Targeting } from './targeting';
 import {
@@ -498,6 +505,9 @@ import {
   type LootRollPrompt,
   type LootStrategies,
   MAX_LEVEL,
+  emptyStatAllocation,
+  type StatAllocation,
+  type StatusStat,
   type MasterLootThreshold,
   MELEE_RANGE,
   type MobFamily,
@@ -1032,6 +1042,12 @@ export interface PlayerMeta {
   lastDisenchantResult: DisenchantResult | null;
   lastEnchantResult: ApplyEnchantResult | null;
   known: ResolvedAbility[];
+  // The six status attributes, as points SPENT above the base of 1. The unspent
+  // pool is derived, never stored: totalStatusPointsAt(level) minus what this
+  // allocation costs. Storing only the spend keeps a level-up from having to
+  // find and top up a second counter, and makes an out-of-budget save
+  // self-evident instead of silently authoritative.
+  statAllocation: StatAllocation;
   counters: RewardCounters;
   autoEquip: boolean;
   // sim.time when this character entered the world; powers /played. Session-only
@@ -1240,6 +1256,9 @@ export interface CharacterState {
   contentRevision?: number;
   level: number;
   xp: number;
+  // Points spent per status attribute. Optional: a save written before the RO
+  // conversion has none, and loads as an unspent character.
+  statAllocation?: StatAllocation;
   // Post-cap progression. All optional so characters saved before the Max-Level
   // XP Overflow system load cleanly (addPlayer backfills lifetimeXp from level).
   lifetimeXp?: number;
@@ -2185,6 +2204,7 @@ export class Sim {
       lastDisenchantResult: null,
       lastEnchantResult: null,
       known: [],
+      statAllocation: emptyStatAllocation(),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2266,6 +2286,10 @@ export class Sim {
     if (savedState) {
       const s = savedState;
       player.level = Math.max(1, Math.min(MAX_LEVEL, s.level));
+      // Normalize on load, never crash: a save from before the RO conversion has
+      // no allocation, and one that somehow exceeds its level's budget is clamped
+      // back rather than trusted. The server re-derives everything from this.
+      meta.statAllocation = sanitizeStatAllocation(s.statAllocation, player.level);
       player.facing = s.facing;
       player.prevFacing = s.facing;
       meta.xp = s.xp;
@@ -2448,7 +2472,7 @@ export class Sim {
     // resolver below consume it (they only ever read these flat numbers).
     meta.talentMods = computeTalentModifiers(cls, meta.talents, player.level);
     this.refreshKnownAbilities(meta, false);
-    recalcPlayerStats(player, cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+    recalcPlayerStats(player, cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
     if (savedState) {
       player.hp = Math.max(1, Math.min(player.maxHp, savedState.hp));
       player.resource =
@@ -2928,6 +2952,7 @@ export class Sim {
       contentRevision: CURRENT_CHARACTER_CONTENT_REVISION,
       level: restore ? restore.level : e.level,
       xp: restore ? restore.xp : meta.xp,
+      statAllocation: { ...meta.statAllocation },
       lifetimeXp: meta.lifetimeXp,
       ...(meta.honor || meta.lifetimeHonor
         ? { honor: meta.honor, lifetimeHonor: meta.lifetimeHonor }
@@ -4220,6 +4245,7 @@ export class Sim {
       r.meta.equipment,
       this.playerMods(r.meta),
       r.meta.equipmentInstance,
+      r.meta.statAllocation,
     );
     r.e.hp = r.e.maxHp;
     if (r.e.resourceType === 'mana') r.e.resource = r.e.maxResource;
@@ -4238,6 +4264,59 @@ export class Sim {
   // talent-facing getters (talents/talentSpec/talentRole/loadouts/activeLoadout) and
   // playerMods (the Fiesta overlay) stay on Sim.
   // -------------------------------------------------------------------------
+
+  // -------------------------------------------------------------------------
+  // Status points (IWorldStatusPoints)
+  // -------------------------------------------------------------------------
+  // Thin delegates over the pure rules in status_points.ts. The Sim is
+  // authoritative here exactly as the server is online: both call the same
+  // functions, so an offline spend and an online one cannot disagree.
+
+  get statAllocation(): StatAllocation {
+    return this.primary.statAllocation;
+  }
+
+  statusPoints(pid?: number): number {
+    const r = this.resolve(pid);
+    return r ? unspentStatusPoints(r.meta.statAllocation, r.e.level) : 0;
+  }
+
+  statRaiseCost(stat: StatusStat, pid?: number): number | null {
+    const r = this.resolve(pid);
+    return r ? raiseCost(r.meta.statAllocation, r.e.level, stat) : null;
+  }
+
+  raiseStat(stat: StatusStat, pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    const next = raiseStat(r.meta.statAllocation, r.e.level, stat);
+    if (!next) return;
+    r.meta.statAllocation = next;
+    this.refreshPlayerStats(r.meta);
+  }
+
+  resetStats(pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    r.meta.statAllocation = resetStatAllocation();
+    this.refreshPlayerStats(r.meta);
+  }
+
+  // One place that re-derives a player's stats after an allocation change, so a
+  // spend and a reset can never drift apart in what they refresh.
+  private refreshPlayerStats(meta: PlayerMeta): void {
+    const e = this.entities.get(meta.entityId);
+    if (!e) return;
+    recalcPlayerStats(
+      e,
+      meta.cls,
+      meta.equipment,
+      this.playerMods(meta),
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
+    meta.wireRev++;
+  }
 
   talentPoints(pid?: number): { total: number; spent: number } {
     return talentPointBudget(this.ctx, pid);
@@ -5123,7 +5202,7 @@ export class Sim {
     if (!removed) return;
     this.emit({ type: 'aura', targetId: e.id, name: removed.name, gained: false });
     if (auraAffectsStats(removed)) {
-      recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta), meta.equipmentInstance);
+      recalcPlayerStats(e, meta.cls, meta.equipment, this.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
     }
   }
 
@@ -5282,6 +5361,7 @@ export class Sim {
           meta.equipment,
           this.playerMods(meta),
           meta.equipmentInstance,
+          meta.statAllocation,
         );
     }
   }
@@ -6027,7 +6107,7 @@ export class Sim {
   private recalcPlayer(target: Entity): void {
     const meta = this.players.get(target.id);
     if (meta)
-      recalcPlayerStats(target, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+      recalcPlayerStats(target, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
   }
 
   private updateRangedPetAttack(
@@ -7786,6 +7866,7 @@ export class Sim {
           meta.equipment,
           this.playerMods(meta),
           meta.equipmentInstance,
+          meta.statAllocation,
         );
     }
   }

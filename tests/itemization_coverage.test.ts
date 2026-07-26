@@ -97,7 +97,7 @@ function authoredCasterPieces(
   return Object.values(ITEMS).filter((item) => {
     if (item.heroicOf) return false; // generated variants: pin authored coverage
     if (item.kind !== 'armor' || item.armorType !== armorType) return false;
-    if ((item.stats?.int ?? 0) <= 0 || (item.stats?.spi ?? 0) <= 0) return false;
+    if ((item.stats?.int ?? 0) <= 0 || (item.stats?.luk ?? 0) <= 0) return false;
     const level = itemLevel(item);
     if (level === undefined || level < minIlvl || level > maxIlvl) return false;
     return canEquipItem(cls, item);
@@ -174,7 +174,7 @@ describe('itemization coverage: the druid caster leather line', () => {
         item.kind === 'armor' &&
         item.armorType === 'leather' &&
         (item.stats?.int ?? 0) > 0 &&
-        (item.stats?.spi ?? 0) > 0 &&
+        (item.stats?.luk ?? 0) > 0 &&
         !item.heroicOf &&
         itemSourceLevel(item.id) !== undefined,
     );
@@ -264,7 +264,7 @@ describe('itemization coverage: the int/spi shield and the low-level held offhan
   it('pearlward_aegis is the first caster shield (paladin + shaman only)', () => {
     const shield = ITEMS.pearlward_aegis;
     expect(isShieldItem(shield)).toBe(true);
-    expect((shield.stats?.int ?? 0) > 0 && (shield.stats?.spi ?? 0) > 0).toBe(true);
+    expect((shield.stats?.int ?? 0) > 0 && (shield.stats?.luk ?? 0) > 0).toBe(true);
     expect(canEquipItem('paladin', shield)).toBe(true);
     expect(canEquipItem('shaman', shield)).toBe(true);
     expect(canEquipItem('warrior', shield)).toBe(false);

@@ -946,7 +946,7 @@ describe('food, drink, vendor', () => {
     sim.player.inCombat = false;
     sim.player.combatTimer = 0;
     sim.player.fiveSecondRule = 99; // out of combat, past the 5s rule
-    const spi = sim.player.stats.spi;
+    const spi = sim.player.stats.luk;
     const oldRatePer2s = spi / 4 + 2;
     for (let i = 0; i < 20 * 2; i++) sim.tick(); // one 2s regen tick
     expect(sim.player.resource).toBeGreaterThan(oldRatePer2s); // faster than before

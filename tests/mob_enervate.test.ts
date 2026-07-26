@@ -50,7 +50,7 @@ describe('mob vitality drain (Soul Siphon)', () => {
     const aura = player.auras.find((a) => a.kind === 'buff_sta');
     expect(aura).toBeDefined();
     expect(aura!.name).toBe('Soul Siphon');
-    expect(aura!.value).toBe(-enervate.sta); // stored negative
+    expect(aura!.value).toBe(-enervate.vit); // stored negative
     expect(aura!.sourceId).toBe(mob.id);
     expect(aura!.school).toBe('shadow');
   });
@@ -59,7 +59,7 @@ describe('mob vitality drain (Soul Siphon)', () => {
     const sim = makeSim();
     const player = sim.player;
     const mob = spawnRevenant(sim);
-    const staBefore = player.stats.sta;
+    const staBefore = player.stats.vit;
     const maxHpBefore = player.maxHp;
     const enervate = MOBS.boneclad_revenant.enervate!;
     const old = enervate.chance;
@@ -69,7 +69,7 @@ describe('mob vitality drain (Soul Siphon)', () => {
     } finally {
       enervate.chance = old;
     }
-    expect(player.stats.sta).toBe(staBefore - enervate.sta);
+    expect(player.stats.vit).toBe(staBefore - enervate.vit);
     expect(player.maxHp).toBeLessThan(maxHpBefore);
   });
 

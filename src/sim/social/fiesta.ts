@@ -123,9 +123,9 @@ export function mergeAugmentMods(base: TalentModifiers, augIds: string[]): Talen
         e = eff.stats;
       s.str += e.str ?? 0;
       s.agi += e.agi ?? 0;
-      s.sta += e.sta ?? 0;
+      s.vit += e.vit ?? 0;
       s.int += e.int ?? 0;
-      s.spi += e.spi ?? 0;
+      s.luk += e.luk ?? 0;
       s.armor += e.armor ?? 0;
       s.ap += e.ap ?? 0;
       s.crit += e.crit ?? 0;
@@ -197,7 +197,7 @@ export function fiestaApplyAugments(meta: PlayerMeta, e: Entity): void {
   meta.fiestaSpecial = sp;
   meta.known = abilitiesKnownAt(meta.cls, e.level, meta.fiestaMods);
   const frac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
-  recalcPlayerStats(e, meta.cls, meta.equipment, meta.fiestaMods, meta.equipmentInstance);
+  recalcPlayerStats(e, meta.cls, meta.equipment, meta.fiestaMods, meta.equipmentInstance, meta.statAllocation);
   e.hp = e.dead ? 0 : Math.max(1, Math.round(e.maxHp * frac));
 }
 
@@ -215,7 +215,7 @@ export function clearFiestaAugments(meta: PlayerMeta, e: Entity): void {
   meta.fiestaMods = null;
   meta.fiestaSpecial = {};
   meta.known = abilitiesKnownAt(meta.cls, e.level, meta.talentMods);
-  recalcPlayerStats(e, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+  recalcPlayerStats(e, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
 }
 
 // Standardize a fighter to a balanced level-20 build for the bout. The
@@ -231,7 +231,7 @@ export function fiestaStandardize(ctx: SimContext, meta: PlayerMeta, e: Entity):
   meta.talentMods = computeTalentModifiers(meta.cls, meta.talents, e.level);
   meta.known = abilitiesKnownAt(meta.cls, e.level, ctx.playerMods(meta));
   meta.wireRev++; // talents/loadouts swapped for the bout, refresh the wire promptly
-  recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance);
+  recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
 }
 
 // Undo fiestaStandardize: restore the player's real level/xp/talents.
@@ -245,7 +245,7 @@ export function fiestaRestoreChar(meta: PlayerMeta, e: Entity): void {
   meta.fiestaRestore = null;
   meta.known = abilitiesKnownAt(meta.cls, e.level, meta.talentMods);
   meta.wireRev++; // real talents restored, refresh the wire promptly
-  recalcPlayerStats(e, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance);
+  recalcPlayerStats(e, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, meta.statAllocation);
 }
 
 // Player command: lock in one of the augments currently on offer.

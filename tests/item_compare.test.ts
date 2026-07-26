@@ -38,13 +38,13 @@ function weapon(id: string, min: number, max: number, speed: number): ItemDef {
 
 describe('itemStatDeltas', () => {
   it('reports positive deltas for an upgrade and negative for a downgrade', () => {
-    const candidate = armor('better', { armor: 50, str: 5, sta: 3 });
-    const equipped = armor('worse', { armor: 40, str: 2, sta: 8 });
+    const candidate = armor('better', { armor: 50, str: 5, vit: 3 });
+    const equipped = armor('worse', { armor: 40, str: 2, vit: 8 });
     const deltas = itemStatDeltas(candidate, equipped);
     const byStat = Object.fromEntries(deltas.map((d) => [d.stat, d.delta]));
     expect(byStat.armor).toBe(10);
     expect(byStat.str).toBe(3);
-    expect(byStat.sta).toBe(-5);
+    expect(byStat.vit).toBe(-5);
     expect(byStat.agi).toBeUndefined(); // unchanged stats are omitted
   });
 

@@ -135,11 +135,11 @@ describe('standardized percent raid buffs', () => {
     const priest = sim.addPlayer('priest', 'Pia');
     const ally = sim.addPlayer('warrior', 'War');
     formParty(sim, priest, [ally]);
-    const staBefore = sim.entities.get(ally)!.stats.sta;
+    const staBefore = sim.entities.get(ally)!.stats.vit;
     const hpBefore = sim.entities.get(ally)!.maxHp;
     ready(sim, priest);
     sim.castAbility('power_word_fortitude', priest);
-    expect(sim.entities.get(ally)!.stats.sta).toBe(Math.round(staBefore * 1.05));
+    expect(sim.entities.get(ally)!.stats.vit).toBe(Math.round(staBefore * 1.05));
     expect(sim.entities.get(ally)!.maxHp).toBeGreaterThan(hpBefore);
   });
 
@@ -153,7 +153,7 @@ describe('standardized percent raid buffs', () => {
     sim.castAbility('mark_of_the_wild', druid);
     const after = sim.entities.get(ally)!.stats;
     expect(after.int).toBe(Math.round(before.int * 1.05));
-    expect(after.sta).toBe(Math.round(before.sta * 1.05));
+    expect(after.vit).toBe(Math.round(before.vit * 1.05));
     expect(after.str).toBe(Math.round(before.str * 1.05));
   });
 

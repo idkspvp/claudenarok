@@ -38,7 +38,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'legs',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 315, str: 11, sta: 9 },
+    stats: { armor: 315, str: 11, vit: 9 },
     sellValue: 13_000,
     requiredClass: ['warrior', 'paladin', 'shaman'],
   },
@@ -50,7 +50,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 172, agi: 12, sta: 10 },
+    stats: { armor: 172, agi: 12, vit: 10 },
     sellValue: 14_000,
     requiredClass: ['rogue', 'hunter', 'druid'],
   },
@@ -62,7 +62,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 335, int: 12, spi: 10 },
+    stats: { armor: 335, int: 12, luk: 10 },
     sellValue: 14_000,
     requiredClass: ['paladin', 'shaman'],
   },
@@ -74,7 +74,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'helmet',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 76, int: 10, spi: 8 },
+    stats: { armor: 76, int: 10, luk: 8 },
     sellValue: 12_000,
     requiredClass: ['mage', 'priest', 'warlock', 'druid'],
   },
@@ -158,7 +158,7 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     });
     expect(equipped.entity.equippedItems).toEqual({ chest: 'scourgehide_carapace' });
     expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + 12);
-    expect(equipped.entity.stats.sta).toBe(unequipped.entity.stats.sta + 10);
+    expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + 10);
     expect(equipped.entity.stats.armor).toBe(unequipped.entity.stats.armor + 196);
     expect(equipped.entity.maxHp).toBe(unequipped.entity.maxHp + 100);
 

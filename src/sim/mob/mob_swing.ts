@@ -659,7 +659,7 @@ export function runMobSwingAffixes(
       kind: 'buff_sta',
       remaining: enervate.duration,
       duration: enervate.duration,
-      value: -Math.abs(enervate.sta),
+      value: -Math.abs(enervate.vit),
       sourceId: mob.id,
       school: enervate.school ?? 'shadow',
     });
@@ -685,7 +685,7 @@ export function runMobSwingAffixes(
       kind: 'buff_sta',
       remaining: plague.duration,
       duration: plague.duration,
-      value: -Math.abs(plague.sta),
+      value: -Math.abs(plague.vit),
       sourceId: mob.id,
       school: plague.school ?? 'nature',
     });
@@ -717,7 +717,7 @@ export function runMobSwingAffixes(
   }
 
   // Spirit Siphon: a landed hit can drain a caster's Spirit, slowing their
-  // out-of-combat mana/health regen (updateRegen reads stats.spi). Mana users
+  // out-of-combat mana/health regen (updateRegen reads stats.luk). Mana users
   // only (it does nothing to rage/energy users); hostile mobs only, so a
   // friendly pet (mobSwing's other caller) never debuffs the party. Rides
   // buff_spi with a negative value, so recalcPlayerStats folds it through with
@@ -736,7 +736,7 @@ export function runMobSwingAffixes(
       kind: 'buff_spi',
       remaining: siphon.duration,
       duration: siphon.duration,
-      value: -Math.abs(siphon.spi),
+      value: -Math.abs(siphon.luk),
       sourceId: mob.id,
       school: siphon.school ?? 'shadow',
     });

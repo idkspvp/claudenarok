@@ -8,7 +8,7 @@ import type { CoreStats, ItemDef, ItemSlot } from './types';
 
 // The five primary attributes an item can carry (armor is handled separately: it
 // is an armor-class/slot property, not part of the comparable stat budget).
-export const PRIMARY_STATS = ['str', 'agi', 'sta', 'int', 'spi'] as const;
+export const PRIMARY_STATS = ['str', 'agi', 'vit', 'int', 'luk'] as const;
 export type PrimaryStat = (typeof PRIMARY_STATS)[number];
 
 // A rarer item "punches above" the level of the content that drops it. Grounded in

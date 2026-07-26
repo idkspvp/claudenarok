@@ -13,6 +13,7 @@
 
 import { CLASSES } from '../sim/data';
 import {
+  BASE_STAT,
   type AuraKind,
   armorReduction,
   type CoreStats,
@@ -21,6 +22,7 @@ import {
   type Stats,
   type WeaponInfo,
 } from '../sim/types';
+import { intManaMultiplier, statusAttackPower, vitHealthMultiplier } from '../sim/entity';
 
 // The unarmed default weapon the sim falls back to (src/sim/entity.ts recalcPlayerStats),
 // so an unarmed character still reads its real fist damage instead of a flat 0.
@@ -39,9 +41,10 @@ export function weaponDps(weapon: WeaponInfo | null | undefined, attackPower: nu
 export type StatId =
   | 'str'
   | 'agi'
-  | 'sta'
+  | 'vit'
   | 'int'
-  | 'spi'
+  | 'dex'
+  | 'luk'
   | 'armor'
   | 'attackPower'
   | 'spellPower'
@@ -63,7 +66,9 @@ export type StatEffectKind =
   | 'dodgePct'
   | 'armor'
   | 'maxHealth'
+  | 'maxHealthPct'
   | 'maxMana'
+  | 'maxManaPct'
   | 'spellCritPct'
   | 'healthRegen'
   | 'manaRegen'
@@ -170,8 +175,8 @@ export interface StatTooltipInput {
 
 // --- coefficients, mirroring src/sim/entity.ts recalcPlayerStats ------------
 const AGI_ARMOR_PER_POINT = 2; // entity.ts: s.armor += s.agi * 2
-const AGI_CRIT_PER_POINT = 0.0005; // entity.ts: critChance = 0.05 + s.agi * 0.0005
-const AGI_DODGE_PER_POINT = 0.0005; // entity.ts: dodgeChance = 0.05 + s.agi * 0.0005
+const AGI_DODGE_PER_POINT = 0.003; // entity.ts: dodgeChance = 0.01 + s.agi * 0.003
+const LUK_CRIT_PER_POINT = 0.003; // entity.ts: critChance = 0.01 + s.luk * 0.003
 const STR_PARRY_PER_POINT = 0.0005; // warrior_hit_table.ts: parry = 0.05 + str * 0.0005
 const HUNTER_RANGED_AP_PER_AGI = 2; // entity.ts: rangedPower = s.agi * 2 (hunter)
 const INT_SPELLCRIT_PER_POINT = 0.0008; // sim.ts spellCrit(): 0.05 + int * 0.0008
@@ -205,32 +210,30 @@ export function agiMeleeApPerPoint(cls: PlayerClass): number {
   return cls === 'rogue' || cls === 'hunter' ? 1 : 0;
 }
 
-/** First 20 stamina give 1 hp each, the rest 10 (entity.ts hpFromStamina). */
-export function healthFromStamina(sta: number): number {
-  const s = Math.max(0, sta);
-  return Math.min(s, 20) + Math.max(0, s - 20) * 10;
+/** The VIT multiplier the HP pool carries (entity.ts vitHealthMultiplier). */
+export function healthMultiplierFromVit(vit: number): number {
+  return vitHealthMultiplier(vit);
 }
 
-/** First 20 intellect give 1 mana each, the rest 15 (entity.ts manaFromIntellect). */
-export function manaFromIntellect(int: number): number {
-  const i = Math.max(0, int);
-  return Math.min(i, 20) + Math.max(0, i - 20) * 15;
+/** The INT multiplier the SP pool carries (entity.ts intManaMultiplier). */
+export function manaMultiplierFromInt(int: number): number {
+  return intManaMultiplier(int);
 }
 
 /** Out-of-combat health regen, expressed per 5 sec (sim.ts updateRegen: hp gains
  *  round(sta * 0.3 + 2) every 2s). Note this game derives health regen from Stamina.
  *  We round the PER-TICK amount first (as the engine does), then scale by 2.5 ticks,
  *  so the displayed figure tracks what the sim actually adds. */
-export function restingHealthPer5s(sta: number): number {
-  return Math.round(Math.round(Math.max(0, sta) * 0.3 + 2) * REGEN_TICKS_PER_5S);
+export function restingHealthPer5s(vit: number): number {
+  return Math.round(Math.round(Math.max(0, vit) * 0.3 + 2) * REGEN_TICKS_PER_5S);
 }
 
 /** Out-of-combat mana regen, per 5 sec (sim.ts updateRegen, five-second rule:
  *  mana gains round(spi / 3 + 4 + floor(level / 5)) every 2s). Per-tick rounded
  *  first to match the engine, then scaled by 2.5 ticks. */
-export function restingManaPer5s(spi: number, level: number): number {
+export function restingManaPer5s(int: number, level: number): number {
   return Math.round(
-    Math.round(Math.max(0, spi) / 3 + 4 + Math.floor(level / 5)) * REGEN_TICKS_PER_5S,
+    Math.round(Math.max(0, int) / 3 + 4 + Math.floor(level / 5)) * REGEN_TICKS_PER_5S,
   );
 }
 
@@ -257,46 +260,61 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
   let warfareDamageReduction: number | undefined;
 
   switch (stat) {
+    // Each arm below states the attribute's contribution in ISOLATION: what the
+    // sheet loses if this attribute drops to zero, holding the others still. The
+    // squared terms mean these are not per-point rates any more, so each one is
+    // the real derivation evaluated twice rather than a constant times the stat.
     case 'str': {
       statValue = stats.str;
-      effects.push({ kind: 'attackPower', value: stats.str * strApPerPoint(cls) });
+      effects.push({
+        kind: 'attackPower',
+        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(0, stats.dex, stats.luk),
+      });
       break;
     }
     case 'agi': {
       statValue = stats.agi;
-      const meleeAp = agiMeleeApPerPoint(cls);
-      if (meleeAp) effects.push({ kind: 'attackPower', value: stats.agi * meleeAp });
-      if (cls === 'hunter') {
-        effects.push({ kind: 'rangedAttackPower', value: stats.agi * HUNTER_RANGED_AP_PER_AGI });
-      }
-      effects.push({ kind: 'critPct', value: stats.agi * AGI_CRIT_PER_POINT * 100 });
       effects.push({ kind: 'dodgePct', value: stats.agi * AGI_DODGE_PER_POINT * 100 });
       effects.push({ kind: 'armor', value: stats.agi * AGI_ARMOR_PER_POINT });
       break;
     }
-    case 'sta': {
-      statValue = stats.sta;
-      effects.push({ kind: 'maxHealth', value: healthFromStamina(stats.sta) });
-      effects.push({ kind: 'healthRegen', value: restingHealthPer5s(stats.sta) });
+    case 'dex': {
+      statValue = stats.dex;
+      effects.push({
+        kind: 'attackPower',
+        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(stats.str, 0, stats.luk),
+      });
+      if (cls === 'hunter') {
+        effects.push({
+          kind: 'rangedAttackPower',
+          value: statusAttackPower(stats.dex, stats.dex, stats.luk),
+        });
+      }
+      break;
+    }
+    case 'vit': {
+      statValue = stats.vit;
+      effects.push({ kind: 'maxHealthPct', value: (vitHealthMultiplier(stats.vit) - 1) * 100 });
+      effects.push({ kind: 'healthRegen', value: restingHealthPer5s(stats.vit) });
       break;
     }
     case 'int': {
       statValue = stats.int;
       if (mana) {
-        effects.push({ kind: 'maxMana', value: manaFromIntellect(stats.int) });
+        effects.push({ kind: 'maxManaPct', value: (intManaMultiplier(stats.int) - 1) * 100 });
         effects.push({ kind: 'spellCritPct', value: stats.int * INT_SPELLCRIT_PER_POINT * 100 });
       } else {
         minorForClass = true;
       }
       break;
     }
-    case 'spi': {
-      statValue = stats.spi;
-      if (mana) {
-        effects.push({ kind: 'manaRegen', value: restingManaPer5s(stats.spi, level) });
-      } else {
-        minorForClass = true;
-      }
+    case 'luk': {
+      statValue = stats.luk;
+      effects.push({ kind: 'critPct', value: stats.luk * LUK_CRIT_PER_POINT * 100 });
+      effects.push({
+        kind: 'attackPower',
+        value: statusAttackPower(stats.str, stats.dex, stats.luk) - statusAttackPower(stats.str, stats.dex, 0),
+      });
       break;
     }
     case 'armor': {
@@ -391,20 +409,28 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
 // Primary attributes (str/agi/sta/int/spi) have no flat per-class buff aura except
 // agi/sta/int/spi/armor and the all-stats buff; Strength is only ever raised by the
 // all-stats buff. This maps each primary to the aura kinds that feed it directly.
-const PRIMARY_BUFF_KINDS: Record<'str' | 'agi' | 'sta' | 'int' | 'spi' | 'armor', AuraKind[]> = {
+const PRIMARY_BUFF_KINDS: Record<
+  'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor',
+  AuraKind[]
+> = {
   str: ['buff_allstats'],
   agi: ['buff_agi', 'buff_allstats'],
-  sta: ['buff_sta', 'buff_allstats'],
+  vit: ['buff_sta', 'buff_allstats'],
   int: ['buff_int', 'buff_allstats'],
-  spi: ['buff_spi', 'buff_allstats'],
+  // DEX has no dedicated buff aura yet: nothing in content grants one, so only
+  // the all-stats buffs reach it.
+  dex: ['buff_allstats'],
+  luk: ['buff_spi', 'buff_allstats'],
   armor: ['buff_armor'],
 };
 
 /** Base value of a primary attribute (or armor) from class + level, before any
  *  gear / buff / talent layer. Mirrors recalcPlayerStats' opening derivation. */
-function basePrimary(cls: PlayerClass, key: keyof CoreStats, level: number): number {
-  const def = CLASSES[cls];
-  return def.baseStats[key] + def.statsPerLevel[key] * (level - 1);
+function basePrimary(_cls: PlayerClass, key: keyof CoreStats, _level: number): number {
+  // A class no longer carries a stat block and level grants no attributes: the
+  // base is 1 in each of the six, and everything above that is the player's own
+  // spend, which arrives through the allocation rather than through here.
+  return key === 'armor' ? 0 : BASE_STAT;
 }
 
 /** Sum the contribution of one attribute (or spellPower) across equipped gear. */
@@ -449,9 +475,10 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
   switch (stat) {
     case 'str':
     case 'agi':
-    case 'sta':
+    case 'vit':
     case 'int':
-    case 'spi': {
+    case 'dex':
+    case 'luk': {
       sources.push({ kind: 'base', value: basePrimary(cls, stat, level) });
       const g = gearTotal(gear, stat);
       if (g !== 0) sources.push({ kind: 'gear', value: g });
@@ -498,13 +525,13 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
       return finish(input.spellPower, 1);
     }
     case 'critChance': {
-      sources.push({ kind: 'base', value: 5 });
-      const fromAgi = stats.agi * AGI_CRIT_PER_POINT * 100;
-      if (fromAgi !== 0) sources.push({ kind: 'attributes', value: fromAgi, fromStat: 'agi' });
+      sources.push({ kind: 'base', value: 1 });
+      const fromLuk = stats.luk * LUK_CRIT_PER_POINT * 100;
+      if (fromLuk !== 0) sources.push({ kind: 'attributes', value: fromLuk, fromStat: 'luk' });
       return finish(input.critChance * 100, 0.1);
     }
     case 'dodge': {
-      sources.push({ kind: 'base', value: 5 });
+      sources.push({ kind: 'base', value: 1 });
       const fromAgi = stats.agi * AGI_DODGE_PER_POINT * 100;
       if (fromAgi !== 0) sources.push({ kind: 'attributes', value: fromAgi, fromStat: 'agi' });
       for (const b of buffLines(buffs, ['buff_dodge'])) {

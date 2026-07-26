@@ -11,7 +11,7 @@ import { requiredLevelFor } from '../src/sim/item_level_req';
 
 type Equip = Parameters<typeof characterDerivedStats>[2];
 
-// knight_commanders_greaves: rare cloth legs, stats { armor: 95, sta: 4 }. Its
+// knight_commanders_greaves: rare cloth legs, stats { armor: 95, vit: 4 }. Its
 // required level used to derive from a level-13 quest reward; with quests gone it
 // falls back to the `rare` quality band at 12.
 const LEGS = 'knight_commanders_greaves';
@@ -45,7 +45,7 @@ describe('over-level gear is inert', () => {
     const active = characterDerivedStats('warrior', LEGS_REQ, { legs: LEGS } as Equip);
     const bare = characterDerivedStats('warrior', LEGS_REQ, {} as Equip);
     expect(active.stats.armor).toBe(bare.stats.armor + 95);
-    expect(active.stats.sta).toBe(bare.stats.sta + 4);
+    expect(active.stats.vit).toBe(bare.stats.vit + 4);
     expect(active.maxHp).toBeGreaterThan(bare.maxHp);
   });
 

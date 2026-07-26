@@ -13,7 +13,7 @@ interface Derived {
   str: number;
   agi: number;
   int: number;
-  spi: number;
+  luk: number;
   armor: number;
   attackPower: number;
   rangedPower: number;
@@ -35,7 +35,7 @@ function derive(cls: PlayerClass, level: number, mut?: (m: TalentModifiers) => v
     str: e.stats.str,
     agi: e.stats.agi,
     int: e.stats.int,
-    spi: e.stats.spi,
+    luk: e.stats.luk,
     armor: e.stats.armor,
     attackPower: e.attackPower,
     rangedPower: e.rangedPower,
@@ -85,7 +85,7 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
     const buffed = derive('priest', 40, (m) => {
       m.stats.spiPct = 0.15;
     });
-    expect(buffed.spi).toBe(Math.round(base.spi * 1.15));
-    expect(buffed.spi).toBeGreaterThan(base.spi);
+    expect(buffed.luk).toBe(Math.round(base.luk * 1.15));
+    expect(buffed.luk).toBeGreaterThan(base.luk);
   });
 });

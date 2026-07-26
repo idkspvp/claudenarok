@@ -22,6 +22,7 @@
 //   inventory.ts        IWorldInventory      bags, equipment, vendor, copper
 //   cosmetics.ts        IWorldCosmetics      account skins + mech chroma
 //   progression_xp.ts   IWorldProgressionXp  xp/lifetimeXp/prestige/rested/leaderboard
+//   status_points.ts    IWorldStatusPoints   the six status attributes
 //   talents.ts          IWorldTalents        talents, specs, loadouts
 //   pet.ts              IWorldPet            hunter-pet command surface
 //   party.ts            IWorldParty          party/raid + raid-target markers
@@ -77,6 +78,7 @@ import type { IWorldPet } from './world_api/pet';
 import type { IWorldProfessions } from './world_api/professions';
 import type { IWorldProgressionXp } from './world_api/progression_xp';
 import type { IWorldSocialGraph } from './world_api/social_graph';
+import type { IWorldStatusPoints } from './world_api/status_points';
 import type { IWorldTalents } from './world_api/talents';
 import type { IWorldTargeting } from './world_api/targeting';
 import type { IWorldTelemetry } from './world_api/telemetry';
@@ -224,6 +226,7 @@ export interface IWorld
     IWorldInventory,
     IWorldCosmetics,
     IWorldProgressionXp,
+    IWorldStatusPoints,
     IWorldTalents,
     IWorldPet,
     IWorldParty,
@@ -356,6 +359,8 @@ export const COMMAND_NAMES = [
   'card_forfeit',
   'prestige',
   'applyTalents',
+  'raiseStat',
+  'resetStats',
   'respec',
   'setSpec',
   'saveLoadout',
@@ -495,6 +500,7 @@ export type WorldFacet =
   | 'IWorldInventory'
   | 'IWorldCosmetics'
   | 'IWorldProgressionXp'
+  | 'IWorldStatusPoints'
   | 'IWorldTalents'
   | 'IWorldPet'
   | 'IWorldParty'

@@ -209,20 +209,20 @@ function statScore(item: ItemDef, spec: Spec): number {
   const weapon = item.weapon ? (item.weapon.min + item.weapon.max) / 2 / item.weapon.speed : 0;
   if (spec.kind === 'healer')
     return (
-      weapon + (s.int ?? 0) * 5.4 + (s.spi ?? 0) * 4.4 + (s.sta ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
+      weapon + (s.int ?? 0) * 5.4 + (s.luk ?? 0) * 4.4 + (s.vit ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
     );
   if (spec.kind === 'caster')
     return (
       weapon * 2 +
       (s.int ?? 0) * 4.6 +
-      (s.spi ?? 0) * 1.8 +
-      (s.sta ?? 0) * 0.6 +
+      (s.luk ?? 0) * 1.8 +
+      (s.vit ?? 0) * 0.6 +
       (s.armor ?? 0) * 0.003
     );
   // Tank: max-EHP pick (stamina first, armor as tiebreak). Reproduces the
   // floors-test reference warrior kit (2861 armor / 2762 hp base); the old
   // armor-heavy weights traded 310 hp away for armor the fights never repaid.
-  return (s.sta ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
+  return (s.vit ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
 }
 
 const ARMOR_SLOTS: EquipSlot[] = [
@@ -441,7 +441,7 @@ type HealerProfile = {
   maxHp: number;
   spellPower: number;
   int: number;
-  spi: number;
+  luk: number;
 };
 
 function runHealerBench(spec: Spec, seed: number): { run: HealerBenchRun; profile: HealerProfile } {
@@ -474,7 +474,7 @@ function runHealerBench(spec: Spec, seed: number): { run: HealerBenchRun; profil
       maxHp: healer.maxHp,
       spellPower: healer.spellPower,
       int: healer.stats.int,
-      spi: healer.stats.spi,
+      luk: healer.stats.luk,
     };
     const known = sim.meta(healerPid)?.known ?? [];
     const minCost = Math.min(

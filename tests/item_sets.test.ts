@@ -47,9 +47,9 @@ describe('aggregateSetBonuses (pure resolver)', () => {
     expect(eff).toEqual({
       str: 0,
       agi: 0,
-      sta: 0,
+      vit: 0,
       int: 0,
-      spi: 0,
+      luk: 0,
       ap: 0,
       sp: 0,
       crit: 0,
@@ -70,7 +70,7 @@ describe('aggregateSetBonuses (pure resolver)', () => {
     const three = aggregateSetBonuses(counts({ [SET_DEATHLORD]: 3 }));
     expect(three.ap).toBe(40); // 2pc bonus still active
     expect(three.str).toBe(15);
-    expect(three.sta).toBe(15);
+    expect(three.vit).toBe(15);
   });
 
   it('agility set: 2pc grants AP, 3pc additionally grants agi+crit', () => {
@@ -88,23 +88,23 @@ describe('aggregateSetBonuses (pure resolver)', () => {
     const necro = aggregateSetBonuses(counts({ [SET_NECROMANCERS]: 3 }));
     expect(necro.castPushbackReduction).toBe(1);
     expect(necro.int).toBe(10);
-    expect(necro.sta).toBe(10);
-    expect(necro.spi).toBe(0);
+    expect(necro.vit).toBe(10);
+    expect(necro.luk).toBe(0);
     expect(necro.knockbackResistance).toBe(0);
 
     const soulflame = aggregateSetBonuses(counts({ [SET_SOULFLAME]: 3 }));
     expect(soulflame.castPushbackReduction).toBe(1);
     expect(soulflame.knockbackResistance).toBe(0);
     expect(soulflame.int).toBe(15);
-    expect(soulflame.spi).toBe(15);
-    expect(soulflame.sta).toBe(0);
+    expect(soulflame.luk).toBe(15);
+    expect(soulflame.vit).toBe(0);
 
     const stormcallers = aggregateSetBonuses(counts({ [SET_STORMCALLERS]: 3 }));
     expect(stormcallers.castPushbackReduction).toBe(1);
     expect(stormcallers.knockbackResistance).toBe(0);
     expect(stormcallers.int).toBe(15);
-    expect(stormcallers.spi).toBe(15);
-    expect(stormcallers.sta).toBe(0);
+    expect(stormcallers.luk).toBe(15);
+    expect(stormcallers.vit).toBe(0);
   });
 
   it('pushback reduction max-combines across met tiers and clamps to 0..1', () => {
@@ -266,10 +266,10 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     const base = statsFor('mage', 20, {});
     const mixed = statsFor('mage', 20, worn);
     const pieceInt = Object.values(worn).reduce((s, id) => s + (ITEMS[id].stats?.int ?? 0), 0);
-    const pieceSpi = Object.values(worn).reduce((s, id) => s + (ITEMS[id].stats?.spi ?? 0), 0);
+    const pieceSpi = Object.values(worn).reduce((s, id) => s + (ITEMS[id].stats?.luk ?? 0), 0);
     expect(mixed.castPushbackReduction).toBe(1);
     expect(mixed.stats.int).toBe(base.stats.int + pieceInt + 15); // +15 = 3pc Wraithfire int
-    expect(mixed.stats.spi).toBe(base.stats.spi + pieceSpi + 15); // +15 = 3pc Wraithfire spi
+    expect(mixed.stats.luk).toBe(base.stats.luk + pieceSpi + 15); // +15 = 3pc Wraithfire spi
   });
 
   it("Necromancer's (t1 caster): cast-pushback immunity at 2pc, int/sta added at 3pc", () => {
@@ -290,7 +290,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     expect(three.castPushbackReduction).toBe(1);
     expect(three.knockbackResistance).toBe(0);
     expect(three.stats.int).toBe(base.stats.int + 11 + 8 + 13 + 10);
-    expect(three.stats.sta).toBe(base.stats.sta + 10);
+    expect(three.stats.vit).toBe(base.stats.vit + 10);
   });
 
   it('Soulflame and Stormcaller (t2 caster): int/spi added at 3pc', () => {
@@ -302,7 +302,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     });
     expect(soulflame.castPushbackReduction).toBe(1);
     expect(soulflame.stats.int).toBe(mageBase.stats.int + 11 + 9 + 8 + 15);
-    expect(soulflame.stats.spi).toBe(mageBase.stats.spi + 15);
+    expect(soulflame.stats.luk).toBe(mageBase.stats.luk + 15);
 
     const shamanBase = statsFor('shaman', 20, {});
     const stormcallers = statsFor('shaman', 20, {
@@ -312,7 +312,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     });
     expect(stormcallers.castPushbackReduction).toBe(1);
     expect(stormcallers.stats.int).toBe(shamanBase.stats.int + 10 + 8 + 8 + 15);
-    expect(stormcallers.stats.spi).toBe(shamanBase.stats.spi + 15);
+    expect(stormcallers.stats.luk).toBe(shamanBase.stats.luk + 15);
   });
 });
 

@@ -166,7 +166,7 @@ describe('masterworkBumpedQuality (the one-tier ladder)', () => {
 });
 
 describe('masterworkBonusStats (the baked tier-delta budget)', () => {
-  // The real crafted uncommon caster piece: chest, {armor: 30, int: 2, spi: 1},
+  // The real crafted uncommon caster piece: chest, {armor: 30, int: 2, luk: 1},
   // baked at its recipe's own level (the level item_level.ts registers the
   // output at).
   const vestments = ITEMS.eastbrook_ritual_vestments;
@@ -182,7 +182,7 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
     });
     // Literal pin: the 2-point delta lands one point on each profile stat
     // (largest-remainder over the def's int 2 / spi 1 identity).
-    expect(record).toEqual({ int: 1, spi: 1 });
+    expect(record).toEqual({ int: 1, luk: 1 });
     // The record sums to EXACTLY the budget delta from the shared budget
     // primitives, with both sides of the delta pinned as literals so a drift
     // in either the baker or the budget curve trips this test.
@@ -204,9 +204,9 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
       level: 10,
       quality: 'common',
       slot: 'chest',
-      stats: { armor: 40, str: 2, sta: 2 },
+      stats: { armor: 40, str: 2, vit: 2 },
     });
-    expect(record).toEqual({ str: 2, sta: 2 });
+    expect(record).toEqual({ str: 2, vit: 2 });
     expect(record).not.toHaveProperty('armor');
   });
 
@@ -489,8 +489,8 @@ describe('draw-order determinism over a real Sim', () => {
     expect(a.inventory.vestments).toBe(3);
     expect(a.instances).toEqual([
       null,
-      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, spi: 1 } } },
-      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, spi: 1 } } },
+      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, luk: 1 } } },
+      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, luk: 1 } } },
     ]);
   });
 });

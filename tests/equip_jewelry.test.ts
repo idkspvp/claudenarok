@@ -86,11 +86,11 @@ describe('jewelry equip flow', () => {
     const sim = makeSim();
     const pid = addCapped(sim, 'warrior', 'Statty');
     const p = sim.entities.get(pid) as AnyEntity;
-    const before = { str: p.stats.str, sta: p.stats.sta };
+    const before = { str: p.stats.str, vit: p.stats.vit };
     sim.addItem('seal_of_the_nine_oaths', 1, pid);
     sim.equipItem('seal_of_the_nine_oaths', pid);
     expect(p.stats.str).toBe(before.str + 7);
-    expect(p.stats.sta).toBe(before.sta + 4);
+    expect(p.stats.vit).toBe(before.vit + 4);
   });
 
   it('lets any class wear jewelry (no armorType gate)', () => {

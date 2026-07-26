@@ -32,7 +32,7 @@ const dataUrl = `data:text/javascript;base64,${Buffer.from(bundled).toString('ba
 const { ALL_CLASSES, CLASSES, GROUND_OBJECTS, ITEMS, MOBS, NPCS, QUESTS, REWARD_ARCHETYPE } =
   await import(dataUrl);
 
-const statKeys = ['str', 'agi', 'sta', 'int', 'spi', 'armor'];
+const statKeys = ['str', 'agi', 'vit', 'int', 'luk', 'armor'];
 const NEW_LOOT_ADDED = [
   {
     itemId: 'valeborn_spellblade',
@@ -304,9 +304,9 @@ function itemBase(item) {
     stats: statsText(item),
     str: item.stats?.str ?? '',
     agi: item.stats?.agi ?? '',
-    sta: item.stats?.sta ?? '',
+    vit: item.stats?.vit ?? '',
     int: item.stats?.int ?? '',
-    spi: item.stats?.spi ?? '',
+    luk: item.stats?.luk ?? '',
     armor: item.stats?.armor ?? '',
     weapon: weaponText(item),
     weapon_min: item.weapon?.min ?? '',

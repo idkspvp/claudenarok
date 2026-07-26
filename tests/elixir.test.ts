@@ -82,7 +82,7 @@ describe('battle elixir (Elixir of the Bear)', () => {
 describe('same-stat elixirs are exclusive, last drunk wins', () => {
   it('Bear then Serpent leaves exactly one stamina elixir aura at +12, not +24', () => {
     const { sim, pid, p } = playerWorld();
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
     const baseMaxHp = p.maxHp;
 
     drink(sim, pid, 'elixir_of_the_bear');
@@ -93,14 +93,14 @@ describe('same-stat elixirs are exclusive, last drunk wins', () => {
     expect(auras.length, 'one stamina elixir aura').toBe(1);
     expect(auras[0].id).toBe('elixir_buff_sta');
     expect(auras[0].name).toBe('Might of the Serpent');
-    expect(p.stats.sta, 'stamina reflects one +12 elixir').toBe(baseSta + 12);
+    expect(p.stats.vit, 'stamina reflects one +12 elixir').toBe(baseSta + 12);
     expect(p.maxHp, 'HP pool reflects one elixir, not two').toBe(oneElixirMaxHp);
     expect(p.maxHp).toBeGreaterThan(baseMaxHp);
   });
 
   it('ladder up: Boar then Bear is one aura at +12 with Bear duration', () => {
     const { sim, pid, p } = playerWorld();
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
 
     drink(sim, pid, 'elixir_of_the_boar');
     for (let i = 0; i < 20 * 5; i++) sim.tick(); // tick the Boar buff down ~5s
@@ -111,12 +111,12 @@ describe('same-stat elixirs are exclusive, last drunk wins', () => {
     expect(auras[0].value).toBe(12);
     expect(auras[0].name).toBe('Might of the Bear');
     expect(auras[0].remaining, "Bear's own 900s timer, not Boar's").toBeGreaterThan(890);
-    expect(p.stats.sta).toBe(baseSta + 12);
+    expect(p.stats.vit).toBe(baseSta + 12);
   });
 
   it('ladder down: Bear then Boar is one aura at +6 (classic overwrite, weaker wins)', () => {
     const { sim, pid, p } = playerWorld();
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
 
     drink(sim, pid, 'elixir_of_the_bear');
     drink(sim, pid, 'elixir_of_the_boar');
@@ -125,12 +125,12 @@ describe('same-stat elixirs are exclusive, last drunk wins', () => {
     expect(auras.length).toBe(1);
     expect(auras[0].value).toBe(6);
     expect(auras[0].name).toBe('Might of the Boar');
-    expect(p.stats.sta).toBe(baseSta + 6);
+    expect(p.stats.vit).toBe(baseSta + 6);
   });
 
   it('a percent stamina class buff (Fortitude-shaped) stacks with an elixir', () => {
     const { sim, pid, p } = playerWorld();
-    const baseSta = p.stats.sta;
+    const baseSta = p.stats.vit;
 
     drink(sim, pid, 'elixir_of_the_bear');
     applyAuraOn(sim, p, {
@@ -146,7 +146,7 @@ describe('same-stat elixirs are exclusive, last drunk wins', () => {
 
     expect(p.auras.some((a) => a.id === 'elixir_buff_sta')).toBe(true);
     expect(p.auras.some((a) => a.id === 'power_word_fortitude')).toBe(true);
-    expect(p.stats.sta, 'flat elixir then +10% fold').toBe(Math.round((baseSta + 12) * 1.1));
+    expect(p.stats.vit, 'flat elixir then +10% fold').toBe(Math.round((baseSta + 12) * 1.1));
   });
 
   it('a negative buff_sta drain debuff and an elixir coexist in both orders', () => {
@@ -163,23 +163,23 @@ describe('same-stat elixirs are exclusive, last drunk wins', () => {
     // Drain first, then drink: the elixir must not displace the debuff.
     {
       const { sim, pid, p } = playerWorld();
-      const baseSta = p.stats.sta;
+      const baseSta = p.stats.vit;
       applyAuraOn(sim, p, { ...drain, sourceId: 999999 } as Aura);
       drink(sim, pid, 'elixir_of_the_bear');
       expect(p.auras.some((a) => a.id === 'enervate_test_mob')).toBe(true);
       expect(p.auras.some((a) => a.id === 'elixir_buff_sta')).toBe(true);
-      expect(p.stats.sta).toBe(baseSta + 12 - 5);
+      expect(p.stats.vit).toBe(baseSta + 12 - 5);
     }
 
     // Drink first, then the drain lands: the debuff must not displace the elixir.
     {
       const { sim, pid, p } = playerWorld();
-      const baseSta = p.stats.sta;
+      const baseSta = p.stats.vit;
       drink(sim, pid, 'elixir_of_the_bear');
       applyAuraOn(sim, p, { ...drain, sourceId: 999999 } as Aura);
       expect(p.auras.some((a) => a.id === 'elixir_buff_sta')).toBe(true);
       expect(p.auras.some((a) => a.id === 'enervate_test_mob')).toBe(true);
-      expect(p.stats.sta).toBe(baseSta + 12 - 5);
+      expect(p.stats.vit).toBe(baseSta + 12 - 5);
     }
   });
 

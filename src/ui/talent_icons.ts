@@ -18,14 +18,14 @@ const TALENT_STAT_CREST: Record<string, string> = {
   crit: 'talent_crit',
   spellPower: 'talent_crit',
   int: 'talent_crit',
-  spi: 'talent_crit',
+  luk: 'talent_crit',
   dodge: 'talent_dodge',
   agi: 'talent_dodge',
   ap: 'talent_ap',
   apPct: 'talent_ap',
   str: 'talent_ap',
   maxHpPct: 'talent_health',
-  sta: 'talent_health',
+  vit: 'talent_health',
   haste: 'talent_haste',
 };
 

@@ -26,7 +26,7 @@ describe('char_stats_view: the tiles/offense/defense partition of STAT_GRID', ()
   });
 
   it('pins the five primary tiles in order (str, agi, sta, int, spi)', () => {
-    expect(STAT_TILES).toEqual(['str', 'agi', 'sta', 'int', 'spi']);
+    expect(STAT_TILES).toEqual(['str', 'agi', 'vit', 'int', 'luk']);
   });
 
   it('pins the Offense group and its heading key', () => {

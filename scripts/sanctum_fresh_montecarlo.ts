@@ -164,11 +164,11 @@ function statScore(item: ItemDef, spec: Spec): number {
   const weapon = item.weapon ? (item.weapon.min + item.weapon.max) / 2 / item.weapon.speed : 0;
   if (spec.kind === 'healer')
     return (
-      weapon + (s.int ?? 0) * 5.4 + (s.spi ?? 0) * 4.4 + (s.sta ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
+      weapon + (s.int ?? 0) * 5.4 + (s.luk ?? 0) * 4.4 + (s.vit ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
     );
   // Tank: max-EHP pick (stamina first, armor as tiebreak), the same weighting
   // that reproduces the floors-test reference warrior at the 'bis' tier.
-  return (s.sta ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
+  return (s.vit ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
 }
 
 const ARMOR_SLOTS: EquipSlot[] = [
@@ -578,7 +578,7 @@ function main() {
       profiles[`${spec.key}__${tier}`] = {
         maxHp: tank.maxHp,
         armor: tank.stats.armor,
-        sta: tank.stats.sta,
+        vit: tank.stats.vit,
       };
       console.log(
         `P ${spec.key.padEnd(20)} ${tier.padEnd(5)} hp ${String(tank.maxHp).padStart(5)} ` +

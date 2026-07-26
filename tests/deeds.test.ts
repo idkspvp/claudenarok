@@ -501,7 +501,7 @@ describe('retro on join', () => {
             count: 1,
             instance: {
               signer: 'MasterVet',
-              rolled: { masterwork: true, stats: { int: 1, spi: 1 } },
+              rolled: { masterwork: true, stats: { int: 1, luk: 1 } },
             },
           },
         ],
@@ -676,7 +676,7 @@ describe('masterwork instance discovery (Professions 2.0)', () => {
     const { meta: mwMeta } = primary(viaMasterwork);
     viaMasterwork.addItemInstance(
       'boundstone_helm',
-      { signer: mwMeta.name, rolled: { masterwork: true, stats: { sta: 2, str: 1 } } },
+      { signer: mwMeta.name, rolled: { masterwork: true, stats: { vit: 2, str: 1 } } },
       viaMasterwork.playerId,
     );
     viaMasterwork.tick();
@@ -698,7 +698,7 @@ describe('masterwork instance discovery (Professions 2.0)', () => {
     const { meta } = primary(sim);
     sim.addItemInstance(
       'eastbrook_ritual_vestments',
-      { signer: meta.name, rolled: { masterwork: true, stats: { int: 1, spi: 1 } } },
+      { signer: meta.name, rolled: { masterwork: true, stats: { int: 1, luk: 1 } } },
       sim.playerId,
     );
     sim.tick();

@@ -104,7 +104,7 @@ export const SIGNATURE_ABILITIES: Record<PlayerClass, string[]> = {
 // the basic card (icon + name + role) with no detail rows, so coverage must stay total.
 export type SpecComplexity = 'low' | 'medium' | 'high';
 export interface SpecCardInfo {
-  primaryStat: 'str' | 'agi' | 'int' | 'spi' | 'sta';
+  primaryStat: 'str' | 'agi' | 'int' | 'luk' | 'vit';
   complexity: SpecComplexity;
   examples: string[];
 }
