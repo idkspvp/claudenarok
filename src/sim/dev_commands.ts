@@ -6,7 +6,6 @@ import { createMob } from './entity';
 import { enterDungeon } from './instances/dungeons';
 import { isGatheringProfessionId, queueGatheringGrant } from './professions/gathering';
 import { placeMobileStationForPlayer } from './professions/mobile_station';
-import { completeAllQuestsForDev } from './quests/dev_quest_commands';
 import type { SentChat } from './sim';
 import type { SimContext } from './sim_context';
 import { revivePlayerAt } from './spirit';
@@ -235,16 +234,6 @@ export function handleDevChat(
     return null;
   }
 
-  const questMatch = /^\/(?:dev\s+quest|devquest)\s+(\S+)\s*$/i.exec(raw);
-  if (questMatch) {
-    ctx.completeQuestForDev(questMatch[1], pid);
-    return null;
-  }
-  if (/^\/(?:dev\s+(?:quests|questall)|devquestall)\s*$/i.test(raw)) {
-    ctx.completeCurrentQuestsForDev(pid);
-    return null;
-  }
-
   const gatherMatch = /^\/(?:dev\s+gather|devgather)\s+(\S+)(?:\s+(\d+))?\s*$/i.exec(raw);
   if (gatherMatch) {
     const professionId = gatherMatch[1].toLowerCase();
@@ -295,11 +284,6 @@ export function handleDevChat(
           : `[dev] Spawned ${result.spawned} finder bots (${mode}).`;
     if (result.note === 'ok') emitDevLog(ctx, pid, text);
     else ctx.error(pid, text);
-    return null;
-  }
-
-  if (/^\/(?:dev\s+attune|devattune)\s*$/i.test(raw)) {
-    completeAllQuestsForDev(ctx, pid);
     return null;
   }
 

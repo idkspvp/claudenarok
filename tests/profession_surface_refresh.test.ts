@@ -136,13 +136,6 @@ describe('Hud profession-surface convergence wiring', () => {
     expect(bystander).not.toContain('this.refreshOpenProfessionSurfacesIfChanged()');
   });
 
-  it('watches the gossip intro hint on the same slow band and attunement probe', () => {
-    // The open gossip dialog's intro hint row is the one identity-driven quest
-    // surface: the online cprof mirror can land after it opened, so it rides
-    // the same two convergence edges as the profession windows.
-    expect(hud).toContain('if (slowHud) this.questDialog.refreshIfChanged();');
-    const personalStart = hud.indexOf("case 'attunement': {");
-    const personal = hud.slice(personalStart, hud.indexOf('\n      }', personalStart));
-    expect(personal).toContain('this.questDialog.refreshIfChanged()');
-  });
+  // A source pin stood here: watches the gossip intro hint on the same slow band and ...
+  // Its subject went with the quest dialog; see the re-wiring task.
 });

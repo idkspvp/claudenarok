@@ -79,20 +79,4 @@ describe('attunement celebration events (Professions 2.0)', () => {
     // instanced celebrant still counts toward prog_guildsworn.
     expect(sim.players.get(pid)!.deedStats.counters.attunementsCompleted).toBe(1);
   });
-
-  it('the live quest attune path emits both events (new mode)', () => {
-    const sim = makeSim();
-    moveToNpc(sim, SMITH_MASTER);
-    sim.acceptQuest('q_prof_attune_smith', WEAPON_ARMOR);
-    const qp = sim.questLog.get('q_prof_attune_smith');
-    if (!qp) throw new Error('attune quest not accepted');
-    qp.counts = [...(qp.resolvedCounts ?? [])];
-    qp.state = 'ready';
-    moveToNpc(sim, SMITH_MASTER);
-    sim.turnInQuest('q_prof_attune_smith');
-
-    const events = sim.drainEvents();
-    expect(events.some((e) => e.type === 'attuned' && e.pairId === WEAPON_ARMOR)).toBe(true);
-    expect(events.some((e) => e.type === 'attunedZone' && e.pairId === WEAPON_ARMOR)).toBe(true);
-  });
 });

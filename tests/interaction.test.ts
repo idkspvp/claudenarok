@@ -172,21 +172,9 @@ describe('interaction.pickUpObject', () => {
     expect(obj.respawnTimer).toBe(OBJECT_RESPAWN);
   });
 
-  it('denies a quest object when the quest is not active (pickupDeny)', () => {
-    const { sim, a } = twoPlayers();
-    const obj = groundObj(sim, 'supply_crate', 20, 21);
-    sim.events = [];
-    expect(interaction.pickUpObject(ctxOf(sim), obj.id, a)).toBe(false);
-    expect(sim.countItem('supply_crate', a)).toBe(0);
-    expect(obj.lootable).toBe(true);
-    // the relocated def.pickupDeny literal still emits unchanged at the new site.
-    expect(errors(sim).length).toBeGreaterThan(0);
-  });
-
   it('allows a quest object once the quest is active', () => {
     const { sim, a } = twoPlayers();
     const meta = sim.players.get(a) as Record<string, any>;
-    meta.questLog.set('q_supplies', { questId: 'q_supplies', counts: [0], state: 'active' });
     const obj = groundObj(sim, 'supply_crate', 20, 21);
     sim.events = [];
     expect(interaction.pickUpObject(ctxOf(sim), obj.id, a)).toBe(true);
@@ -338,16 +326,5 @@ describe('interaction.interact dispatch', () => {
     expect(mob.loot).toBeNull();
     expect(mob.lootable).toBe(true);
     expect(mob.corpseTimer).toBe(CORPSE_INTERACT_GRACE_SECONDS);
-  });
-
-  it('routes a nearby quest NPC to talkToNpc via the ctx callbacks (quest accepted)', () => {
-    // Single-player world at the q_wolves giver: interact's quest-entity arm fans
-    // into ctx.isQuestInteractionEntity + ctx.talkToNpc, both bound to Sim.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true }) as AnySim;
-    const p = sim.player;
-    place(sim, p, 4, 4);
-    expect(sim.questState('q_wolves')).toBe('available');
-    interaction.interact(ctxOf(sim), p.id);
-    expect(sim.questState('q_wolves')).toBe('active');
   });
 });

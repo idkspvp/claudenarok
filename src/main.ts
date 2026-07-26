@@ -1327,10 +1327,9 @@ async function startGame(
       // the active channel tab supplies the send prefix, so plain text goes to
       // that channel without the player retyping "/world" etc.
       const raw = chatInput.value;
-      // "/share" links the selected quest into party chat; skip the normal send path.
       if (hud.devCommandsAvailable && isDevGuiCommand(raw)) {
         hud.toggleDevCommandWindow();
-      } else if (!hud.maybeHandleQuestShareCommand(raw)) {
+      } else {
         const text = hud.composeChatSend(raw);
         if (text) {
           world.chat(text);
@@ -1493,20 +1492,12 @@ async function startGame(
 
   let lastOptionsOpen = hud.optionsOpen;
   let lastCharacterOpen = hud.characterOpen;
-  let lastQuestDialogOpen = hud.questDialogOpen;
   const syncCharacterOpenDiagnostics = (): void => {
     const characterOpen = hud.characterOpen;
     if (characterOpen === lastCharacterOpen) return;
     lastCharacterOpen = characterOpen;
     entryDiagnostics.checkpoint(characterOpen ? 'character-open' : 'character-closed');
     console.info(`[entry-diag] character ${characterOpen ? 'opened' : 'closed'}`);
-  };
-  const syncQuestDialogOpenDiagnostics = (): void => {
-    const questDialogOpen = hud.questDialogOpen;
-    if (questDialogOpen === lastQuestDialogOpen) return;
-    lastQuestDialogOpen = questDialogOpen;
-    entryDiagnostics.checkpoint(questDialogOpen ? 'quest-dialog-open' : 'quest-dialog-closed');
-    console.info(`[entry-diag] quest dialog ${questDialogOpen ? 'opened' : 'closed'}`);
   };
 
   const mobileControls = new MobileControls(input, {
@@ -1559,19 +1550,12 @@ async function startGame(
   mobileControls.start();
   const syncOverlayDiagnostics = (): void => {
     syncCharacterOpenDiagnostics();
-    syncQuestDialogOpenDiagnostics();
     const optionsOpen = hud.optionsOpen;
     if (optionsOpen !== lastOptionsOpen) {
       lastOptionsOpen = optionsOpen;
       entryDiagnostics.checkpoint(optionsOpen ? 'settings-open' : 'settings-closed');
       console.info(`[entry-diag] settings ${optionsOpen ? 'opened' : 'closed'}`);
     }
-  };
-  hud.onQuestDialogStateChange = (open) => {
-    lastQuestDialogOpen = open;
-    entryDiagnostics.checkpoint(open ? 'quest-dialog-open' : 'quest-dialog-closed');
-    console.info(`[entry-diag] quest dialog ${open ? 'opened' : 'closed'}`);
-    syncOverlayDiagnostics();
   };
   stopMobileMoreDiagnostics?.();
   stopMobileMoreDiagnostics = watchMobileMoreState(document.body, (open) => {
@@ -5734,7 +5718,7 @@ async function loadHighscores(): Promise<void> {
       const cls = CLASSES[r.cls];
       const star =
         r.prestigeRank > 0
-          ? `<span class="hs-prestige" title="${t('game.prestige.rank')} ${r.prestigeRank}">★${r.prestigeRank}</span>`
+          ? `<span class="hs-prestige" title="${t('game.prestige.rank')} ${r.prestigeRank}">\u2605${r.prestigeRank}</span>`
           : '';
       return (
         `<div class="hs-row${r.rank <= 3 ? ' hs-top' : ''}">` +

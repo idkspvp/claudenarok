@@ -7,7 +7,7 @@ import {
   QUEST_LETTERS,
   WELCOME_LETTER,
 } from '../sim/content/letters';
-import { DELVES, DUNGEONS, MOBS, NPCS, QUESTS, ZONES } from '../sim/data';
+import { DELVES, DUNGEONS, MOBS, NPCS, ZONES } from '../sim/data';
 
 // English world-entity names + narratives (mobs, NPCs, quests, zones, dungeons).
 //
@@ -156,99 +156,6 @@ const NPC_IDS = [
   'alchemist_verane', // crafting-station master: apothecary (Highwatch, zone 3)
 ] as const;
 
-const QUEST_IDS = [
-  'q_prof_intro',
-  'q_wolves',
-  'q_greyjaw',
-  'q_boars',
-  'q_spiders',
-  'q_murlocs',
-  'q_mine',
-  'q_bones',
-  'q_supplies',
-  'q_whispers',
-  'q_names_of_the_dead',
-  'q_silence_the_call',
-  'q_rite',
-  'q_hollow',
-  'q_sexton',
-  'q_gravecallers_trail',
-  'q_bandits',
-  'q_ringleader',
-  'q_fenbridge_muster',
-  'q_prowlers',
-  'q_prowler_pelts',
-  'q_fen_supplies',
-  'q_deepfen',
-  'q_idols',
-  'q_aldrics_fallen_star',
-  'q_deepfen_purge',
-  'q_widows',
-  'q_broodmother',
-  'q_drowned',
-  'q_drowned_censers',
-  'q_no_rest',
-  'q_trolls',
-  'q_troll_fetishes',
-  'q_grubjaw',
-  'q_cult_camp',
-  'q_summoners',
-  'q_deacon',
-  'q_bastion_door',
-  'q_olen',
-  'q_mistcaller',
-  'q_highwatch_summons',
-  'q_stalkers',
-  'q_stalker_pelts',
-  'q_stalkers_return',
-  'q_stalker_cloaks',
-  'q_old_cragmaw',
-  'q_kobold_tunnels',
-  'q_glowing_wax',
-  'q_ogre_edges',
-  'q_ogre_totems',
-  'q_ogre_bounty',
-  'q_crushers',
-  'q_drogmar',
-  'q_elementals',
-  'q_shard_cores',
-  'q_kazzix',
-  'q_zealots',
-  'q_cult_orders',
-  'q_necromancers',
-  'q_revenants',
-  'q_revenant_vanguard',
-  'q_wyrm_sigils',
-  'q_breaking_the_seal',
-  'q_voice_below',
-  'q_sanctum_gate',
-  'q_korgath',
-  'q_velkhar',
-  'q_gravewyrm',
-  'q_the_codfather',
-  'q_nythraxis_restless_dead',
-  'q_nythraxis_graves',
-  'q_nythraxis_sealed_crypt',
-  'q_nythraxis_bound_guardian',
-  'q_nythraxis_scourges_end',
-  'q_mogger',
-  'q_prof_attune_smith',
-  'q_prof_attune_outfitter',
-  'q_prof_attune_apothecary',
-  'q_prof_attune_bombardier',
-  'q_prof_amends_smith',
-  'q_prof_amends_outfitter',
-  'q_prof_amends_apothecary',
-  'q_prof_amends_bombardier',
-  'q_prof_workorder_forge',
-  'q_prof_workorder_kitchens',
-  'q_prof_workorder_loom',
-  'q_prof_workorder_toolworks',
-  'q_prof_workorder_tannery',
-  'q_prof_workorder_apothecary',
-  'q_prof_hobby_switch',
-] as const;
-
 const ZONE_IDS = ['eastbrook_vale', 'mirefen_marsh', 'thornpeak_heights'] as const;
 const DUNGEON_IDS = [
   'hollow_crypt',
@@ -307,7 +214,6 @@ const LETTER_IDS = [
 
 type MobId = (typeof MOB_IDS)[number];
 type NpcId = (typeof NPC_IDS)[number];
-type QuestId = (typeof QUEST_IDS)[number];
 type ZoneId = (typeof ZONE_IDS)[number];
 type DungeonId = (typeof DUNGEON_IDS)[number];
 type DelveId = (typeof DELVE_IDS)[number];
@@ -315,13 +221,6 @@ type LetterId = (typeof LETTER_IDS)[number];
 
 type MobTranslations = Record<MobId, { name: string }>;
 type NpcTranslations = Record<NpcId, { name: string; title: string; greeting: string }>;
-type QuestTranslation = {
-  title: string;
-  text: string;
-  completion: string;
-  objectives: Record<number, { label: string }>;
-};
-type QuestTranslations = Record<QuestId, QuestTranslation>;
 type ZoneTranslations = Record<
   ZoneId,
   { name: string; welcome: string; pois: Record<number, { label: string }> }
@@ -353,7 +252,6 @@ type WorldEntityTranslations = {
   entities: {
     mobs: MobTranslations;
     npcs: NpcTranslations;
-    quests: QuestTranslations;
     zones: ZoneTranslations;
     dungeons: DungeonTranslations;
     delves: DelveTranslations;
@@ -388,20 +286,6 @@ function makeEnglishWorldEntities(): WorldEntityTranslations {
       name: npc.name,
       title: npc.title,
       greeting: normalizeSourceText(npc.greeting),
-    };
-  });
-
-  const quests = {} as QuestTranslations;
-  orderedValues(QUEST_IDS, QUESTS).forEach((quest) => {
-    const objectiveRecord = {} as Record<number, { label: string }>;
-    quest.objectives.forEach((objective, objectiveIndex) => {
-      objectiveRecord[objectiveIndex] = { label: objective.label };
-    });
-    quests[quest.id as QuestId] = {
-      title: quest.name,
-      text: normalizeSourceText(quest.text),
-      completion: normalizeSourceText(quest.completionText),
-      objectives: objectiveRecord,
     };
   });
 
@@ -472,7 +356,7 @@ function makeEnglishWorldEntities(): WorldEntityTranslations {
       mailboxName: 'Mailbox',
       noticeboardName: 'Notice Board',
     },
-    entities: { mobs, npcs, quests, zones, dungeons, delves, letters },
+    entities: { mobs, npcs, zones, dungeons, delves, letters },
   };
 }
 

@@ -1,7 +1,6 @@
 import { CTX_MENU_PICKER_CLASS } from '../../bag_item_action_menu';
 import { esc } from '../../esc';
 import { type TranslationKey, t } from '../../i18n';
-import { encodeItemLink, encodeQuestLink } from '../quest/quest_link';
 import {
   CHANNEL_LABEL_KEYS,
   CHAT_TAB_CHANNELS,
@@ -22,6 +21,7 @@ import {
   WHISPER_TAB,
   WHISPER_TAB_LABEL_KEY,
 } from './chat_channels';
+import { encodeItemLink } from './chat_link';
 
 const CHAT_TABS_KEY = 'woc_chat_tabs';
 const CHAT_ACTIVE_TAB_KEY = 'woc_chat_active_tab';
@@ -52,9 +52,6 @@ export interface ChatWindowControllerDeps {
   sendChat(line: string): void;
   isMobileLayout(): boolean;
   itemDisplayName(itemId: string): string | null;
-  questTitle(questId: string): string;
-  selectedQuestId(): string | null;
-  hasQuest(questId: string): boolean;
   showError(text: string): void;
 }
 
@@ -142,10 +139,6 @@ export class ChatWindowController {
     return composeChatLine(target, withLinks);
   }
 
-  insertQuestLink(questId: string): void {
-    this.insertLink(`[${this.deps.questTitle(questId)}]`, encodeQuestLink(questId));
-  }
-
   insertItemLink(itemId: string): void {
     const displayName = this.deps.itemDisplayName(itemId);
     if (displayName === null) return;
@@ -154,17 +147,6 @@ export class ChatWindowController {
 
   clearPendingLinks(): void {
     this.pendingLinks = [];
-  }
-
-  maybeHandleQuestShareCommand(raw: string): boolean {
-    if (!/^\/share(?:\s|$)/i.test(raw.trim())) return false;
-    const questId = this.deps.selectedQuestId();
-    if (!questId || !this.deps.hasQuest(questId)) {
-      this.deps.showError(t('hudChrome.questShare.noQuestSelected'));
-      return true;
-    }
-    this.deps.sendChat(`/p ${encodeQuestLink(questId)}`);
-    return true;
   }
 
   // Placeholder for the chat input reflecting the active tab and sticky target.

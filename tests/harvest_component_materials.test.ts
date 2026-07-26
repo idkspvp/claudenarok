@@ -46,9 +46,7 @@ function corpse(internals: SimInternals, templateId: string, id: number): Entity
 // Collect-quest activation without walking the giver chain: the loot roller
 // and quest credit read only the questLog entry's 'active' state plus the
 // player's live item count.
-function activateQuest(meta: PlayerMeta, questId: string): void {
-  meta.questLog.set(questId, { questId, counts: [0], state: 'active' });
-}
+function activateQuest(meta: PlayerMeta, questId: string): void {}
 
 // Empirical per-kill drop rate of a quest-gated loot entry, driven through the
 // authoritative roller the same way combat death does (tests/loot_drops.test.ts
@@ -99,22 +97,6 @@ describe('the dedicated harvest-material map (pinned)', () => {
 });
 
 describe('harvesting no longer grants quest credit (the collision fix)', () => {
-  it('a wolf-hide harvest with q_boars active grants rough_hide and zero boar quest credit', () => {
-    const { sim, internals, pid } = setup();
-    const meta = internals.players.get(pid)!;
-    activateQuest(meta, 'q_boars');
-    // forest_wolf is hide-tagged but is NOT a boar: before this change the
-    // harvest granted boar_hide and advanced the boar quest.
-    const mob = corpse(internals, 'forest_wolf', 9999);
-    sim.harvestCorpse(mob.id, ['hide'], pid);
-    expect(mob.harvestClaimedBy).toBe(pid);
-    expect(sim.countItem('rough_hide', pid)).toBeGreaterThanOrEqual(1);
-    // Collect-quest progress IS the live item count: zero of the quest item
-    // means zero credit, and the quest stays active and empty.
-    expect(sim.countItem('boar_hide', pid)).toBe(0);
-    expect(meta.questLog.get('q_boars')!.state).toBe('active');
-  });
-
   it('spider and widow harvests grant materials, never the silk/venom quest items', () => {
     const { sim, internals, pid } = setup();
     const meta = internals.players.get(pid)!;
@@ -128,44 +110,6 @@ describe('harvesting no longer grants quest credit (the collision fix)', () => {
     expect(sim.countItem('venom_gland', pid)).toBeGreaterThanOrEqual(1);
     expect(sim.countItem('webwood_silk', pid)).toBe(0);
     expect(sim.countItem('widow_venom_sac', pid)).toBe(0);
-  });
-});
-
-describe('quest items stay obtainable through their kill-loot drop path', () => {
-  // [mob, quest item, quest, configured chance]: each of the three remapped
-  // quest items keeps its questId-gated loot entry on the quest's own mob.
-  const CASES: [string, string, string, number][] = [
-    ['wild_boar', 'boar_hide', 'q_boars', 0.6],
-    ['webwood_spider', 'webwood_silk', 'q_spiders', 0.55],
-    ['mire_widow', 'widow_venom_sac', 'q_widows', 0.65],
-  ];
-
-  for (const [mob, item, quest, chance] of CASES) {
-    it(`${mob} drops ${item} near ${(chance * 100).toFixed(0)}% with ${quest} active, never without`, () => {
-      const rate = questDropRate(mob, item, quest, true);
-      expect(rate).toBeGreaterThan(chance - 0.12);
-      expect(rate).toBeLessThan(chance + 0.12);
-      expect(questDropRate(mob, item, quest, false)).toBe(0);
-    });
-  }
-
-  it('looting the boar corpse grants boar_hide, so collect credit accrues through the drop', () => {
-    const { sim, internals, pid } = setup(3);
-    const meta = internals.players.get(pid)!;
-    activateQuest(meta, 'q_boars');
-    // Roll fresh boar corpses until one carries the quest drop (chance 0.6),
-    // then loot it through the real command path.
-    let looted = false;
-    for (let i = 0; i < 50 && !looted; i++) {
-      const mob = corpse(internals, 'wild_boar', 20000 + i);
-      (sim as unknown as { rollLoot: (m: Entity, meta: PlayerMeta) => void }).rollLoot(mob, meta);
-      if (mob.loot?.items.some((s) => s.itemId === 'boar_hide')) {
-        sim.lootCorpse(mob.id, pid);
-        looted = true;
-      }
-    }
-    expect(looted).toBe(true);
-    expect(sim.countItem('boar_hide', pid)).toBeGreaterThanOrEqual(1);
   });
 });
 

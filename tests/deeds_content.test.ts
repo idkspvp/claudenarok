@@ -19,16 +19,7 @@ import {
 } from '../src/sim/content/professions';
 import { WARLOCK_PET_MOBS } from '../src/sim/content/warlock_pets';
 import { YUMI_TEMPLATE_ID } from '../src/sim/content/yumi';
-import {
-  DELVES,
-  DUNGEONS,
-  GROUND_OBJECTS,
-  ITEMS,
-  MOBS,
-  NPCS,
-  QUESTS,
-  ZONES,
-} from '../src/sim/data';
+import { DELVES, DUNGEONS, GROUND_OBJECTS, ITEMS, MOBS, NPCS, ZONES } from '../src/sim/data';
 import {
   GROUND_PICKUP_PROVING_QUESTS,
   MAX_CREDITABLE_MOB_LEVEL,
@@ -54,18 +45,21 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 219 deeds worth 2710 total Renown', () => {
-    expect(DEED_ORDER.length).toBe(219);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2710);
+  it('ships exactly 214 deeds worth 2635 total Renown', () => {
+    // Down from 219 / 2,710: five quest-triggered deeds went with the quest system
+    // (dgn_nythraxis_crypt, prog_callused_hands, prog_mere_at_rest, prog_crown_below,
+    // hid_codfather).
+    expect(DEED_ORDER.length).toBe(214);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2635);
   });
 
   it('ships the audited per-category counts', () => {
     const byCategory: Record<string, number> = {};
     for (const d of ALL) byCategory[d.category] = (byCategory[d.category] ?? 0) + 1;
     expect(byCategory).toEqual({
-      progression: 50,
+      progression: 47,
       combat: 10,
-      dungeon: 27,
+      dungeon: 26,
       delve: 13,
       chronicle: 24,
       collection: 28,
@@ -73,20 +67,19 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       social: 18,
       exploration: 9,
       feat: 3,
-      hidden: 9,
+      hidden: 8,
     });
   });
 
   it('pins the catalog-refresh additions: ids, order, and renown literals', () => {
-    // The refresh tail appends AFTER the 186-deed launch set; both the launch
-    // block and the tail are order-pinned so any insertion or reorder reds.
-    expect(DEED_ORDER[185]).toBe('hid_codfather');
-    expect(DEED_ORDER.slice(186)).toEqual([
-      'prog_crown_below',
-      'prog_mere_at_rest',
-      'prog_callused_hands',
+    // The refresh tail appends AFTER the launch set; both the launch block and
+    // the tail are order-pinned so any insertion or reorder reds. The quest
+    // removal deleted four entries from this stretch (hid_codfather closed the
+    // launch block; prog_crown_below, prog_mere_at_rest, prog_callused_hands and
+    // dgn_nythraxis_crypt opened the tail), so both indices shift by one.
+    expect(DEED_ORDER[184]).toBe('hid_companion_save');
+    expect(DEED_ORDER.slice(185)).toEqual([
       'prog_tools_of_the_trade',
-      'dgn_nythraxis_crypt',
       'chr_marsh_first_cast',
       'pvp_card_duel_first_win',
       // Professions 2.0 tail (order-pinned like the block above).
@@ -117,11 +110,7 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       'soc_first_salvage',
       'soc_salvage_50',
     ]);
-    expect(DEEDS.prog_crown_below.renown).toBe(25);
-    expect(DEEDS.prog_mere_at_rest.renown).toBe(25);
-    expect(DEEDS.prog_callused_hands.renown).toBe(5);
     expect(DEEDS.prog_tools_of_the_trade.renown).toBe(10);
-    expect(DEEDS.dgn_nythraxis_crypt.renown).toBe(10);
     expect(DEEDS.chr_marsh_first_cast.renown).toBe(5);
     expect(DEEDS.pvp_card_duel_first_win.renown).toBe(5);
     expect(DEEDS.pvp_card_duel_first_win.trigger).toEqual({
@@ -131,32 +120,10 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     });
     // Full trigger literals: the evaluator's .every() is proven elsewhere, but
     // only a literal pin catches a quest id quietly dropped from a chain list.
-    expect(DEEDS.prog_crown_below.trigger).toEqual({
-      kind: 'quests',
-      questIds: [
-        'q_nythraxis_restless_dead',
-        'q_nythraxis_graves',
-        'q_nythraxis_sealed_crypt',
-        'q_nythraxis_bound_guardian',
-        'q_nythraxis_scourges_end',
-      ],
-    });
-    expect(DEEDS.prog_mere_at_rest.trigger).toEqual({
-      kind: 'quests',
-      questIds: ['q_drowned_choir', 'q_palecoil', 'q_silence_the_choir', 'q_drowned_moon'],
-    });
-    expect(DEEDS.prog_callused_hands.trigger).toEqual({
-      kind: 'quest',
-      questId: 'q_prof_intro',
-    });
     expect(DEEDS.prog_tools_of_the_trade.trigger).toEqual({
       kind: 'stat',
       stat: 'hubCraftsPerformed',
       count: 1,
-    });
-    expect(DEEDS.dgn_nythraxis_crypt.trigger).toEqual({
-      kind: 'quest',
-      questId: 'q_nythraxis_sealed_crypt',
     });
     expect(DEEDS.chr_marsh_first_cast.trigger).toEqual({
       kind: 'visit',
@@ -313,7 +280,10 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // milestones, the rare-find quartet, and the salvage pair). No shipped
   // trigger or renown changed; prog_master_gatherer had only its English desc
   // reworded, which this digest deliberately does not cover.
-  const FROZEN_CATALOG_SHA256 = '059694159a630369a4f9536f741dff8128f04ced50b8eb11a3a9edfde65e996a';
+  // Re-baselined for the quest removal: five quest-triggered deeds were deleted
+  // (the `quest`/`quests` trigger kinds no longer exist) and eleven meta deeds
+  // dropped their optional questIds arm. No surviving trigger was retro-edited.
+  const FROZEN_CATALOG_SHA256 = 'cc3914d64a8779d768d0449988a5aafcb4aa750a8f8de125f8771a01b2c5f148';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(
@@ -331,52 +301,6 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
 });
 
 describe('retro fallback proof sets stay anchored to the real tables', () => {
-  it('the ground-pickup proving quests are exactly the single-source collect quests', () => {
-    // A quest proves a sparkle pickup only when its collect objective's item
-    // can come from nowhere but the ground pickup path: any mob-loot or
-    // vendor source would break the inference, and interact objectives never
-    // bump the counter at all. Re-derive that set from the live tables and
-    // hold the pin to it, so a new ground object, loot entry, or vendor row
-    // forces a conscious re-decision here.
-    const groundItemIds = new Set(GROUND_OBJECTS.map((g) => g.itemId));
-    const lootItemIds = new Set(
-      Object.values(MOBS).flatMap((m) => (m.loot ?? []).map((l) => l.itemId)),
-    );
-    const vendorItemIds = new Set(Object.values(NPCS).flatMap((n) => n.vendorItems ?? []));
-    const derived: string[] = [];
-    for (const [questId, quest] of Object.entries(QUESTS)) {
-      const proves = quest.objectives.some(
-        (obj) =>
-          obj.type === 'collect' &&
-          groundItemIds.has(obj.itemId) &&
-          !lootItemIds.has(obj.itemId) &&
-          !vendorItemIds.has(obj.itemId),
-      );
-      if (proves) derived.push(questId);
-    }
-    expect([...GROUND_PICKUP_PROVING_QUESTS].sort()).toEqual(derived.sort());
-    // The pickup gate itself requires the item def to carry the quest id, so
-    // every proving quest's evidence chain resolves end to end.
-    for (const questId of GROUND_PICKUP_PROVING_QUESTS) {
-      const quest = QUESTS[questId];
-      expect(quest, questId).toBeDefined();
-      const collect = quest.objectives.find(
-        (o) => o.type === 'collect' && groundItemIds.has(o.itemId),
-      );
-      expect(collect, questId).toBeDefined();
-      const item = ITEMS[(collect as { itemId: string }).itemId];
-      // kind 'quest' is also the non-transferability guarantee: trade
-      // (social/trade.ts), mail (mail/post_office.ts), and the market
-      // (market.ts) all hard-block that kind, so questsDone proves THIS
-      // character performed the pickup, not a trading partner.
-      expect(item?.kind, questId).toBe('quest');
-      expect(item?.questId, questId).toBe(questId);
-      // A repeatable proving quest would weaken nothing, but none exists; a
-      // future one should be reconsidered here rather than slip in.
-      expect(quest.repeatable ?? false, questId).toBe(false);
-    }
-  });
-
   it('the Craftsworn proof (attunedPairs) is written only by the archetype module', () => {
     // The prog_guildsworn retro arm infers a pre-counter attunement from a
     // non-empty ArchetypeState.attunedPairs. That inference holds only while
@@ -498,52 +422,6 @@ describe('table shape', () => {
 });
 
 describe('trigger references resolve against the real content tables', () => {
-  it('quest, dungeon, delve, item, craft, and profession references all exist', () => {
-    for (const def of ALL) {
-      const t = def.trigger;
-      switch (t.kind) {
-        case 'quest':
-          expect(QUESTS[t.questId], `${def.id}: ${t.questId}`).toBeDefined();
-          break;
-        case 'quests':
-          for (const q of t.questIds) expect(QUESTS[q], `${def.id}: ${q}`).toBeDefined();
-          break;
-        case 'dungeonClears':
-          expect(DUNGEONS[t.dungeonId], `${def.id}: ${t.dungeonId}`).toBeDefined();
-          break;
-        case 'delveClears':
-          if (t.delveId !== undefined) {
-            expect(DELVES[t.delveId], `${def.id}: ${t.delveId}`).toBeDefined();
-          }
-          break;
-        case 'collectItems':
-          for (const itemId of t.itemIds) {
-            expect(ITEMS[itemId], `${def.id}: ${itemId}`).toBeDefined();
-          }
-          break;
-        case 'craftSkill':
-          if (t.craftId !== undefined) {
-            expect(
-              CRAFT_RING.some((c) => c.id === t.craftId),
-              `${def.id}: ${t.craftId}`,
-            ).toBe(true);
-          }
-          break;
-        case 'gathering':
-          if (t.professionId !== undefined) {
-            expect(GATHERING_PROFESSION_IDS, `${def.id}`).toContain(t.professionId);
-          }
-          break;
-        case 'meta':
-          for (const dep of t.deedIds) expect(DEEDS[dep], `${def.id}: ${dep}`).toBeDefined();
-          for (const q of t.questIds ?? []) expect(QUESTS[q], `${def.id}: ${q}`).toBeDefined();
-          break;
-        default:
-          break;
-      }
-    }
-  });
-
   it('meta dependencies are acyclic (the fixpoint pass terminates by granting)', () => {
     const visiting = new Set<string>();
     const done = new Set<string>();

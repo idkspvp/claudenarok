@@ -33,7 +33,6 @@ function setup(opts: { difficulty?: 'normal' | 'heroic'; dpsCount?: number } = {
   const { difficulty = 'normal', dpsCount = 4 } = opts;
   const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
   const tankPid = sim.addPlayer('warrior', 'Tank') as number;
-  sim.players.get(tankPid)!.questsDone.add('q_nythraxis_bound_guardian');
   const dpsPids: number[] = [];
   for (let i = 0; i < dpsCount; i++) {
     const pid = sim.addPlayer('mage', `Dps${i}`) as number;

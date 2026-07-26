@@ -323,8 +323,6 @@ function buildCorpus(): { id: string; state: CharacterState }[] {
     facing: 0,
     equipment: {},
     inventory: [],
-    questLog: [],
-    questsDone: [],
     craftSkills: { cooking: 12 },
     professions: { herbalism: 8 },
     deeds: { prog_first_craft: '', prog_first_harvest: '', exp_first_herb: '' },

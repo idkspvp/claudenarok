@@ -448,13 +448,8 @@ export class DungeonFinderWindow {
               ? t('hudChrome.finder.lockoutDaily')
               : t('hudChrome.finder.lockoutNone'),
           );
-    const attunement = d.attunementQuestId
-      ? `<div class="df-meta-row">${esc(
-          t('hudChrome.finder.attunement', {
-            quest: tEntity({ kind: 'quest', id: d.attunementQuestId, field: 'title' }),
-          }),
-        )}</div>`
-      : '';
+    // The attunement row named a quest; the gate went with the quest system.
+    const attunement = '';
     const marks =
       d.heroicMarks > 0
         ? `<div class="df-meta-row">${esc(t('hudChrome.finder.heroicMarks', { count: num(d.heroicMarks) }))}</div>`

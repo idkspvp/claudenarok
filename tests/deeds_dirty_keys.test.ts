@@ -193,28 +193,6 @@ describe('same-tick grant parity for narrow marks', () => {
     expect(meta.deedsEarned.has('cmb_heavy_hitter')).toBe(true);
     expect(meta.deedsEarned.has('col_glimmerfin')).toBe(true);
   });
-
-  it('a visited mark grants a visit deed and its meta deed in the SAME pass', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    // chr_peaks_chapter_ii is the meta over three Peaks chronicle deeds plus
-    // ten quests; stage everything except chr_peaks_waking_witness, then let
-    // the witness mark arrive as a narrow 'visited' mark: the visit deed must
-    // grant, and the fixpoint must widen to the earned bucket and grant the
-    // chapter on the same tick, exactly like the old full pass.
-    const chapter = DEEDS.chr_peaks_chapter_ii.trigger;
-    if (chapter.kind !== 'meta') throw new Error('chapter ii is no longer a meta deed');
-    for (const dep of chapter.deedIds) {
-      if (dep !== 'chr_peaks_waking_witness') grantDeed(sim.ctx, meta, dep);
-    }
-    for (const q of chapter.questIds ?? []) meta.questsDone.add(q);
-    sim.tick(); // settle the staging marks; the chapter must still wait
-    expect(meta.deedsEarned.has('chr_peaks_chapter_ii')).toBe(false);
-    markVisited(sim.ctx, meta, 'witness:thunzharr_waking_peak');
-    sim.tick();
-    expect(meta.deedsEarned.has('chr_peaks_waking_witness')).toBe(true);
-    expect(meta.deedsEarned.has('chr_peaks_chapter_ii')).toBe(true);
-  });
 });
 
 describe('mark escalation (a full pass always wins)', () => {

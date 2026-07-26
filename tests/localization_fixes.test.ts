@@ -176,27 +176,7 @@ describe('H1: every talent name resolves via override or ability name', () => {
 // forms (Espanol for Espanol with a tilde, and so on). English has no diacritics
 // to strip.
 
-// --- M1: quest narratives preserve {playerName} ---
-describe('M1: quest narratives preserve {playerName}', () => {
-  it('every locale keeps {playerName} wherever English uses it', () => {
-    const enQuests = en.entities.quests as Record<string, any>;
-    for (const lang of supportedLanguages) {
-      const locQuests = locales[lang].entities.quests as Record<string, any>;
-      for (const qid of Object.keys(enQuests)) {
-        for (const field of ['text', 'completion'] as const) {
-          const ev = enQuests[qid]?.[field];
-          if (typeof ev === 'string' && ev.includes('{playerName}')) {
-            const lv = locQuests[qid]?.[field];
-            expect(
-              typeof lv === 'string' && lv.includes('{playerName}'),
-              `${lang}.${qid}.${field} dropped {playerName}`,
-            ).toBe(true);
-          }
-        }
-      }
-    }
-  });
-});
+// An M1 suite stood here pinning {playerName} through quest narratives.
 
 // --- H3: server_i18n + admin DICT completeness (the Record<string,string> dicts lack : typeof en) ---
 describe('H3: DICT key parity, non-empty values, placeholder integrity', () => {
@@ -356,12 +336,6 @@ describe('M1c: entity strings preserve every placeholder (incl {className})', ()
       }
     }
   }
-  it('quests keep text/completion placeholders', () => {
-    checkFields(en.entities.quests as any, (l) => locales[l].entities.quests as any, 'quest', [
-      'text',
-      'completion',
-    ]);
-  });
   it('NPC greetings keep {className}/{playerName}', () => {
     checkFields(en.entities.npcs as any, (l) => locales[l].entities.npcs as any, 'npc', [
       'greeting',
@@ -932,13 +906,6 @@ describe('S3: every sim.ts emit is recognized (drift guard)', () => {
     // Scanned so any future inline emit lands under the drift guard from day
     // one.
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/professions/commission.ts'), 'utf8'),
-    // #2033 (PR 2039): the quest command bodies (accept/share/abandon/turn-in guards +
-    // the accepted/abandoned/completed logs). The two profession-choice denials
-    // ("That profession choice is not available." / "... no longer available.") have
-    // their ONLY emitter occurrences here; the file's other emits are byte-identical
-    // to literals the hud quest matchers already recognize, so a rewording of THIS
-    // file's sites was invisible to the guard before this entry.
-    fs.readFileSync(path.resolve(process.cwd(), 'src/sim/quests/quest_commands.ts'), 'utf8'),
     // Bank system: the pooled bank deposit/withdraw/buy-slots command bodies
     // emit the quest-item/full/afford/max-slots refusals + the purchase notice.
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/bank.ts'), 'utf8'),
@@ -1218,31 +1185,8 @@ describe('server restart-countdown announcements are localized (broadcastSystem 
   // at all — is covered by the English-source arm above.
 });
 
-// --- S3 meta-guard: the scan LIST itself. PR 2039 closed the quest_commands
-// blind spot by adding src/sim/quests/quest_commands.ts to the simSrc scan
-// list above; the profession-choice denial strings have their only emitter
-// occurrences there, so dropping the entry silently reopens the blind spot
-// while the gate stays green. This reads THIS test file's own source and fails
-// if the entry ever leaves the list. The marker strings are concatenated at
-// runtime so this guard can never match its own source instead of the list. ---
-describe('S3 meta-guard: quest_commands.ts stays on the simSrc scan list', () => {
-  it('keeps src/sim/quests/quest_commands.ts in the S3 scan list', () => {
-    const self = fs.readFileSync(
-      path.resolve(process.cwd(), 'tests/localization_fixes.test.ts'),
-      'utf8',
-    );
-    const listStart = self.indexOf(['const simSrc', '= ['].join(' '));
-    expect(listStart, 'the simSrc scan-list declaration should exist').toBeGreaterThan(-1);
-    const listEnd = self.indexOf([']', 'join'].join('.'), listStart);
-    expect(listEnd, 'the simSrc scan list should close with a join').toBeGreaterThan(listStart);
-    const listBlock = self.slice(listStart, listEnd);
-    const entry = ['src/sim/quests', 'quest_commands.ts'].join('/');
-    expect(
-      listBlock.includes(`'${entry}'`),
-      `${entry} must stay in the S3 simSrc scan list (the PR 2039 blind-spot fix)`,
-    ).toBe(true);
-  });
-});
+// An S3 meta-guard stood here pinning src/sim/quests/quest_commands.ts onto the
+// simSrc scan list. Both the file and the blind spot it guarded are gone.
 
 // --- Elixir aura names must round-trip the AURA_NAME_KEY reverse map. The
 // aura string is authored twice (the item def's elixir.aura and the sim_i18n

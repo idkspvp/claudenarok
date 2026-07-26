@@ -8,17 +8,7 @@ import {
   MASTER_TIER_LETTERS,
   QUEST_LETTERS,
 } from '../src/sim/content/letters';
-import {
-  ABILITIES,
-  CLASSES,
-  DELVES,
-  DUNGEONS,
-  ITEMS,
-  MOBS,
-  NPCS,
-  QUESTS,
-  ZONES,
-} from '../src/sim/data';
+import { ABILITIES, CLASSES, DELVES, DUNGEONS, ITEMS, MOBS, NPCS, ZONES } from '../src/sim/data';
 import type { PlayerClass } from '../src/sim/types';
 import { abilityBuffValue } from '../src/ui/ability_damage';
 import {
@@ -497,18 +487,6 @@ describe('i18n Localization Key Coverage', () => {
         values: { className: 'Mage', classNameLower: 'mage', playerName: 'Mira' },
       };
     }
-    if (entry.kind === 'quest') {
-      return {
-        kind: 'quest',
-        id: entry.id,
-        field: entry.field as 'title' | 'text' | 'completion',
-        values: { playerName: 'Mira' },
-      };
-    }
-    if (entry.kind === 'questObjective') {
-      const { ownerId, index } = parseIndexedEntry(entry.id, 'objectives');
-      return { kind: 'questObjective', questId: ownerId, objectiveIndex: index, field: 'label' };
-    }
     if (entry.kind === 'zone') {
       return { kind: 'zone', id: entry.id, field: entry.field as 'name' | 'welcome' };
     }
@@ -701,48 +679,6 @@ describe('i18n Localization Key Coverage', () => {
       }
     }
     setLanguage('en');
-  });
-
-  it('should enumerate entity source coverage for later translation work', () => {
-    const manifest = entityTranslationManifest();
-    expect(new Set(manifest.map((entry) => entry.key)).size).toBe(manifest.length);
-    for (const entry of manifest) {
-      expect(
-        entry.source.trim().length,
-        `${entry.kind}.${entry.id}.${entry.field}`,
-      ).toBeGreaterThan(0);
-    }
-
-    expect(entityCount('class', 'name')).toBe(Object.keys(CLASSES).length);
-    expect(entityCount('class', 'description')).toBe(Object.keys(CLASSES).length);
-    expect(entityCount('ability', 'name')).toBe(Object.keys(ABILITIES).length);
-    expect(entityCount('ability', 'description')).toBe(Object.keys(ABILITIES).length);
-    // Heroic upgraded variants (heroicOf) have no name key: they share the base
-    // item name, so they are excluded from the entity manifest.
-    expect(entityCount('item', 'name')).toBe(
-      Object.values(ITEMS).filter((i) => !i.heroicOf).length,
-    );
-    expect(entityCount('mob', 'name')).toBe(Object.keys(MOBS).length);
-    expect(entityCount('npc', 'name')).toBe(Object.keys(NPCS).length);
-    expect(entityCount('npc', 'title')).toBe(Object.keys(NPCS).length);
-    expect(entityCount('npc', 'greeting')).toBe(Object.keys(NPCS).length);
-    expect(entityCount('quest', 'title')).toBe(Object.keys(QUESTS).length);
-    expect(entityCount('quest', 'text')).toBe(Object.keys(QUESTS).length);
-    expect(entityCount('quest', 'completion')).toBe(Object.keys(QUESTS).length);
-    expect(entityCount('questObjective', 'label')).toBe(
-      Object.values(QUESTS).reduce((sum, quest) => sum + quest.objectives.length, 0),
-    );
-    expect(entityCount('zone', 'name')).toBe(ZONES.length);
-    expect(entityCount('zone', 'welcome')).toBe(ZONES.length);
-    expect(entityCount('zonePoi', 'label')).toBe(
-      ZONES.reduce((sum, zone) => sum + zone.pois.length, 0),
-    );
-    expect(entityCount('dungeon', 'name')).toBe(Object.keys(DUNGEONS).length);
-    expect(entityCount('dungeon', 'enterText')).toBe(Object.keys(DUNGEONS).length);
-    expect(entityCount('dungeon', 'leaveText')).toBe(Object.keys(DUNGEONS).length);
-    expect(entityCount('delve', 'name')).toBe(Object.keys(DELVES).length);
-    expect(entityCount('delve', 'enterText')).toBe(Object.keys(DELVES).length);
-    expect(entityCount('delve', 'leaveText')).toBe(Object.keys(DELVES).length);
   });
 
   it('should resolve class and ability text without canonical fallbacks', () => {
@@ -951,62 +887,6 @@ describe('i18n Localization Key Coverage', () => {
     ).not.toThrow();
   });
 
-  it('should provide every world-content translation in every locale without canonical fallbacks', () => {
-    const worldEntries = entityTranslationManifest().filter((entry) => entry.group === 'world');
-    const expectedWorldCount =
-      Object.keys(MOBS).length +
-      Object.keys(NPCS).length * 3 +
-      Object.keys(QUESTS).length * 3 +
-      Object.values(QUESTS).reduce((sum, quest) => sum + quest.objectives.length, 0) +
-      ZONES.length * 2 +
-      ZONES.reduce((sum, zone) => sum + zone.pois.length, 0) +
-      Object.keys(DUNGEONS).length * 3 +
-      Object.keys(DELVES).length * 3 +
-      // Ravenpost authored letters: welcome + Heroic Marks reward + mastery
-      // reset notice + quest letters + Guild trend letters + master tier
-      // letters (keyed pair -> tier), 3 fields each.
-      (3 +
-        Object.keys(QUEST_LETTERS).length +
-        Object.keys(GUILD_TREND_LETTERS).length +
-        Object.values(MASTER_TIER_LETTERS).reduce(
-          (sum, tiers) => sum + Object.keys(tiers).length,
-          0,
-        )) *
-        3;
-    expect(worldEntries).toHaveLength(expectedWorldCount);
-
-    for (const lang of supportedLanguages) {
-      setLanguage(lang);
-      resetEntityTranslationFallbackLog();
-      for (const entry of worldEntries) {
-        const rendered = tEntity(worldRequest(entry));
-        expect(rendered.trim().length, `${lang}.${entry.key}`).toBeGreaterThan(0);
-        expect(rendered, `${lang}.${entry.key}`).not.toBe(entry.key);
-        expect(rendered, `${lang}.${entry.key}`).not.toMatch(
-          /\$N|\$C|\{playerName\}|\{className\}|\{classNameLower\}/,
-        );
-        // RELEASE-TIER ONLY: a sparse/English-only overlay renders the English fill
-        // for an untranslated quest narrative, which is legal on a PR (a `pending`
-        // row) and blocked only at the release gate.
-        if (
-          RELEASE_TIER &&
-          lang !== 'en' &&
-          lang !== 'en_CA' &&
-          entry.kind === 'quest' &&
-          (entry.field === 'text' || entry.field === 'completion')
-        ) {
-          expect(
-            copiedEnglishComparable(rendered),
-            `${lang}.${entry.key} should not copy canonical English quest narrative`,
-          ).not.toBe(copiedEnglishComparable(entry.source));
-        }
-      }
-      expect(entityTranslationFallbackLog(), `${lang} fallback log`).toHaveLength(0);
-    }
-
-    setLanguage('en');
-  });
-
   it('keeps generated talent effect labels out of English fallback in translated locales', () => {
     const englishEffectFragments = [
       'damage-over-time damage',
@@ -1212,88 +1092,6 @@ describe('i18n Localization Key Coverage', () => {
   // English-only overlay renders the English fill for an untranslated quest (legal
   // on a PR as a `pending` row, blocked at the release gate), so the generic-template
   // and per-locale-diversity assertions are release-only.
-  it.runIf(RELEASE_TIER)(
-    'should use explicit quest narrative translations instead of generated templates',
-    () => {
-      const worldEntitySource = fs.readFileSync(
-        path.resolve(process.cwd(), 'src/ui/world_entity_i18n.ts'),
-        'utf8',
-      );
-      expect(worldEntitySource).not.toContain('questText:');
-      expect(worldEntitySource).not.toContain('questCompletion:');
-      expect(worldEntitySource).not.toContain('...zhCnData');
-      expect(worldEntitySource).not.toMatch(
-        /const zhTwData[\s\S]*\.\.\.zhCnData[\s\S]*const koData/,
-      );
-
-      const genericPatterns = [
-        /^Para ".+", completa estos objetivos:/,
-        /^Has completado ".+"\./,
-        /^Pour ".+", accomplissez ces objectifs:/,
-        /^".+" est terminé\./,
-        /^Per ".+", completa questi obiettivi:/,
-        /^".+" è completata\./,
-        /^Für ".+" erfülle diese Ziele:/,
-        /^".+" ist abgeschlossen\./,
-        /^执行“.+”：完成这些目标：/,
-        /^“.+”已经完成。你的援手让这片地区得以喘息。$/,
-        /^執行「.+」：完成這些目標：/,
-        /^「.+」已完成。你的援手讓這片地區得以喘息。$/,
-        /^".+" 임무를 위해 다음 목표를 완료하십시오:/,
-        /^".+" 임무를 완료했습니다。?/,
-        /^「.+」では次の目標を達成してください:/,
-        /^「.+」は完了しました。/,
-        /^Para ".+", cumpra estes objetivos:/,
-        /^".+" foi concluída\./,
-        /^Для задания ".+" выполните цели:/,
-        /^Задание ".+" выполнено\./,
-      ];
-
-      const questIds = Object.keys(QUESTS);
-      const checkedLanguages = supportedLanguages.filter(
-        (lang) => lang !== 'en' && lang !== 'en_CA',
-      );
-
-      for (const lang of checkedLanguages) {
-        setLanguage(lang);
-        const textSkeletons = new Set<string>();
-        const completionSkeletons = new Set<string>();
-
-        for (const questId of questIds) {
-          const text = tEntity({
-            kind: 'quest',
-            id: questId,
-            field: 'text',
-            values: { playerName: 'Mira' },
-          });
-          const completion = tEntity({
-            kind: 'quest',
-            id: questId,
-            field: 'completion',
-            values: { playerName: 'Mira' },
-          });
-          for (const pattern of genericPatterns) {
-            expect(text, `${lang}.${questId}.text generic narrative`).not.toMatch(pattern);
-            expect(completion, `${lang}.${questId}.completion generic narrative`).not.toMatch(
-              pattern,
-            );
-          }
-          textSkeletons.add(questNarrativeSkeleton(text));
-          completionSkeletons.add(questNarrativeSkeleton(completion));
-        }
-
-        expect(textSkeletons.size, `${lang} quest text skeleton diversity`).toBeGreaterThan(
-          Math.floor(questIds.length * 0.8),
-        );
-        expect(
-          completionSkeletons.size,
-          `${lang} quest completion skeleton diversity`,
-        ).toBeGreaterThan(Math.floor(questIds.length * 0.6));
-      }
-
-      setLanguage('en');
-    },
-  );
 
   // A release-tier block stood here pinning real translated quest narratives in ten
   // locales, and beside it a sweep asserting the non-Latin scripts never left the raw

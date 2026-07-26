@@ -181,7 +181,6 @@ export function bankDeposit(
     return;
   }
   if (result.refusal) return; // 'invalid': malformed input (cheat/desync), no player line
-  ctx.onInventoryChangedForQuests(meta);
   // A completed deposit is banker business; the gate above guarantees a banker.
   const bankerId = nearBankerTemplateId(ctx, p);
   if (bankerId) deedsMod.onBankerBusinessForDeeds(ctx, meta, bankerId);
@@ -219,7 +218,6 @@ export function bankWithdraw(
     return;
   }
   if (result.refusal) return; // 'invalid': malformed input (cheat/desync), no player line
-  ctx.onInventoryChangedForQuests(meta);
   // A completed withdrawal is banker business; the gate above guarantees a banker.
   const bankerId = nearBankerTemplateId(ctx, p);
   if (bankerId) deedsMod.onBankerBusinessForDeeds(ctx, meta, bankerId);

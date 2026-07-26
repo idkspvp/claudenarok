@@ -22,7 +22,6 @@ function makeState(over: Partial<CharacterState> = {}): CharacterState {
     equipment: {},
     inventory: [{ itemId: 'wolf_pelt', qty: 3 } as any],
     questLog: [{ questId: 'q1', counts: [1], state: 'active' }],
-    questsDone: [],
     arena1v1Rating: 1600,
     arena1v1Wins: 10,
     arena1v1Losses: 4,

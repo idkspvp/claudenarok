@@ -26,7 +26,7 @@
 // through the seam.
 
 import { isStunned, isUnbreakableControlAura } from '../combat/cc';
-import { ITEMS, MOBS, NPCS, QUESTS } from '../data';
+import { ITEMS, MOBS, NPCS } from '../data';
 import * as deedsMod from '../deeds';
 import { createMob, createNpc } from '../entity';
 import { applyDungeonMobTuning, mobTemplateForDungeonDifficulty } from '../instances/difficulty';
@@ -1348,120 +1348,14 @@ export function activateNythraxisRelic(ctx: SimContext, obj: Entity, meta: Playe
   if (!obj.objectItemId) return false;
   const mobId = NYTHRAXIS_RELIC_SUMMONS[obj.objectItemId];
   if (!mobId) return false;
-  const qp = meta.questLog.get('q_nythraxis_sealed_crypt');
-  if (qp?.state !== 'active') {
-    const def = ITEMS[obj.objectItemId];
-    ctx.error(meta.entityId, def?.pickupDeny ?? 'The relic is bound by the sealed crypt.');
-    return true;
-  }
-  const quest = QUESTS.q_nythraxis_sealed_crypt;
-  const objectiveIndex = quest.objectives.findIndex(
-    (o) => o.type === 'collect' && o.itemId === obj.objectItemId,
-  );
-  if (
-    objectiveIndex >= 0 &&
-    ctx.countItem(obj.objectItemId, meta.entityId) >= quest.objectives[objectiveIndex].count
-  ) {
-    const def = ITEMS[obj.objectItemId];
-    ctx.error(meta.entityId, def?.pickupEnough ?? 'You have already recovered this relic.');
-    return true;
-  }
+  // The relic used to be gated on the sealed-crypt quest being active, and on not
+  // already holding enough copies. With quests gone the relic is simply activatable;
+  // it still summons its guardian and still goes on respawn, so the encounter beat
+  // survives even though the chain around it does not.
   summonQuestMob(ctx, mobId, obj.pos, meta.entityId);
   obj.lootable = false;
   obj.respawnTimer = OBJECT_RESPAWN;
   return true;
-}
-
-export function interactObjectForQuests(ctx: SimContext, obj: Entity, meta: PlayerMeta): boolean {
-  if (!obj.objectItemId) return false;
-  let handled = false;
-  for (const qp of meta.questLog.values()) {
-    if (qp.state !== 'active') continue;
-    const quest = QUESTS[qp.questId];
-    quest.objectives.forEach((objective, objectiveIndex) => {
-      if (objective.type !== 'interact' || objective.targetObjectItemId !== obj.objectItemId)
-        return;
-      handled = true;
-      const isRitual = obj.objectItemId === 'crypt_ritual_circle';
-      if (isRitual && !ctx.countItem('crypt_keystone', meta.entityId)) {
-        ctx.error(meta.entityId, 'The ritual circle is silent without the Crypt Keystone.');
-        return;
-      }
-      // Re-summon the Bound Guardian whenever the player still owes the kill.
-      // The interact objective is one-shot, but a guardian lost to the idle
-      // despawn (leash, wipe) must stay reachable or the kill/collect/signet
-      // dead-ends with no way to retry. summonQuestMob no-ops if one is alive.
-      if (isRitual) {
-        const killIdx = quest.objectives.findIndex(
-          (o) => o.type === 'kill' && o.targetMobId === 'bound_guardian',
-        );
-        if (killIdx >= 0 && qp.counts[killIdx] < questObjectiveRequired(quest, qp, killIdx)) {
-          summonQuestMob(ctx, 'bound_guardian', obj.pos, meta.entityId);
-        }
-      }
-      // The interact objective itself (and its one-time vision) only credits once.
-      if (qp.counts[objectiveIndex] >= questObjectiveRequired(quest, qp, objectiveIndex)) return;
-      const shared = sharedNythraxisObjectParticipants(ctx, meta, obj, qp.questId, objectiveIndex);
-      for (const member of shared) {
-        const memberQp = member.questLog.get(qp.questId);
-        if (memberQp?.state !== 'active') continue;
-        const required = questObjectiveRequired(quest, memberQp, objectiveIndex);
-        if (memberQp.counts[objectiveIndex] >= required) continue;
-        memberQp.counts[objectiveIndex]++;
-        member.counters.questProgress++;
-        ctx.emit({
-          type: 'questProgress',
-          questId: memberQp.questId,
-          objectiveIndex,
-          current: memberQp.counts[objectiveIndex],
-          required,
-          text: `${objective.label}: ${memberQp.counts[objectiveIndex]}/${required}`,
-          pid: member.entityId,
-        });
-        ctx.checkQuestReady(memberQp, member);
-      }
-      const visionId = summonQuestVision(ctx, obj.objectItemId, obj.pos);
-      emitQuestObjectVision(
-        ctx,
-        obj.objectItemId,
-        shared.map((m) => m.entityId),
-        visionId,
-      );
-    });
-  }
-  return handled;
-}
-
-export function sharedNythraxisObjectParticipants(
-  ctx: SimContext,
-  actor: PlayerMeta,
-  obj: Entity,
-  questId: string,
-  objectiveIndex: number,
-): PlayerMeta[] {
-  if (
-    obj.objectItemId !== 'grave_sir_aldren' &&
-    obj.objectItemId !== 'grave_high_priest_malric' &&
-    obj.objectItemId !== 'grave_captain_voss' &&
-    obj.objectItemId !== 'crypt_ritual_circle'
-  ) {
-    return [actor];
-  }
-  const quest = QUESTS[questId];
-  const objective = quest.objectives[objectiveIndex];
-  const party = ctx.partyOf(actor.entityId);
-  const members = party ? party.members : [actor.entityId];
-  const eligible: PlayerMeta[] = [];
-  for (const pid of members) {
-    const member = ctx.players.get(pid);
-    const entity = ctx.entities.get(pid);
-    const memberQp = member?.questLog.get(questId);
-    if (!member || !entity || entity.dead || !memberQp || memberQp.state !== 'active') continue;
-    if (memberQp.counts[objectiveIndex] >= objective.count) continue;
-    if (dist2d(entity.pos, obj.pos) > NYTHRAXIS_PARTY_INTERACT_RANGE) continue;
-    eligible.push(member);
-  }
-  return eligible.some((member) => member.entityId === actor.entityId) ? eligible : [actor];
 }
 
 export function emitQuestObjectVision(

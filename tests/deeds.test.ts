@@ -6,7 +6,7 @@ import { bagCapacity } from '../src/sim/bags';
 import { dealDamage } from '../src/sim/combat/damage';
 import { DEED_ORDER, DEEDS } from '../src/sim/content/deeds';
 import { emptyAllocation, type TalentAllocation } from '../src/sim/content/talents';
-import { ITEMS, MOBS, QUESTS, ZONES } from '../src/sim/data';
+import { ITEMS, MOBS, ZONES } from '../src/sim/data';
 import {
   bumpDeedStat,
   checkDeedTrigger,
@@ -25,7 +25,6 @@ import { createMob } from '../src/sim/entity';
 import { announceAttunement } from '../src/sim/professions/attunement_events';
 import { BATTLEFIELD_XP_TRICKLE } from '../src/sim/professions/battlefield_xp';
 import { queueGatheringGrant } from '../src/sim/professions/gathering';
-import { turnInQuestCore } from '../src/sim/quests/quest_commands';
 import { type ArenaMatch, type CharacterState, Sim } from '../src/sim/sim';
 import * as duelMod from '../src/sim/social/duel';
 import { type Entity, MAX_LEVEL, MILESTONES, type SimEvent } from '../src/sim/types';
@@ -250,83 +249,6 @@ describe('trigger kinds grant once, with negatives', () => {
     expect(meta.deedsEarned.has('prog_mining_100')).toBe(true);
   });
 
-  it('quest: an unrelated questsDone set does not grant; the exact quest does', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    meta.questsDone.add('q_some_other_quest');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('hid_codfather')).toBe(false);
-    meta.questsDone.add('q_the_codfather');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('hid_codfather')).toBe(true);
-  });
-
-  it('quests (plural): every listed quest must be done', () => {
-    // The chain deeds below drive the shipped evaluator path; keep the direct
-    // branch check for arbitrary id lists too.
-    const sim = makeSim();
-    const { meta, e } = primary(sim);
-    meta.questsDone.add('qa');
-    expect(checkDeedTrigger(meta, e, { kind: 'quests', questIds: ['qa', 'qb'] })).toBe(false);
-    meta.questsDone.add('qb');
-    expect(checkDeedTrigger(meta, e, { kind: 'quests', questIds: ['qa', 'qb'] })).toBe(true);
-  });
-
-  it('quests (plural): the Thornpeak chain needs all five, the crypt deed its one', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    meta.questsDone.add('q_nythraxis_restless_dead');
-    meta.questsDone.add('q_nythraxis_graves');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    // The certifying crypt quest is not among them yet.
-    expect(meta.deedsEarned.has('dgn_nythraxis_crypt')).toBe(false);
-    expect(meta.deedsEarned.has('prog_crown_below')).toBe(false);
-
-    meta.questsDone.add('q_nythraxis_sealed_crypt');
-    meta.questsDone.add('q_nythraxis_bound_guardian');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    // Four of five: the chain boundary negative; the crypt deed lands alone.
-    expect(meta.deedsEarned.has('dgn_nythraxis_crypt')).toBe(true);
-    expect(meta.deedsEarned.has('prog_crown_below')).toBe(false);
-
-    meta.questsDone.add('q_nythraxis_scourges_end');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_crown_below')).toBe(true);
-  });
-
-  it('quests (plural): the temple back half needs all four devotions', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    for (const q of ['q_drowned_choir', 'q_palecoil', 'q_silence_the_choir']) {
-      meta.questsDone.add(q);
-    }
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_mere_at_rest')).toBe(false);
-    meta.questsDone.add('q_drowned_moon');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_mere_at_rest')).toBe(true);
-  });
-
-  it('quest: the professions intro grants prog_callused_hands, not its neighbor', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    meta.questsDone.add('q_mine'); // the same giver's other quest never counts
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_callused_hands')).toBe(false);
-    meta.questsDone.add('q_prof_intro');
-    sim.ctx.markDeedsDirty(meta.entityId);
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_callused_hands')).toBe(true);
-  });
-
   it('visit: a Marsh catch marks fish:mirefen_marsh and grants chr_marsh_first_cast', () => {
     const sim = makeSim();
     const { meta } = primary(sim);
@@ -468,8 +390,6 @@ describe('retro on join', () => {
       facing: 0,
       equipment: {},
       inventory: [{ itemId: 'glimmerfin_koi', count: 1 }],
-      questLog: [],
-      questsDone: ['q_the_codfather'],
       arena1v1Rating: 1650,
       delveClears: { 'collapsed_reliquary:normal': 2 },
       craftSkills: { cooking: 3 },
@@ -492,7 +412,6 @@ describe('retro on join', () => {
       'prog_first_steps',
       'prog_double_digits', // level 12
       'prog_veteran', // lifetimeXp 260k
-      'hid_codfather', // questsDone
       'dlv_reliquary', // persisted delve clears
       'pvp_arena_1v1_1600', // persisted rating
       'prog_first_craft', // retro fallback: craft skill only comes from crafts
@@ -525,59 +444,6 @@ describe('retro on join', () => {
       state: { ...veteranState(), craftSkills: { enchanting: 5, cooking: 1 } },
     });
     expect(sim.players.get(pid2)!.deedsEarned.has('prog_first_craft')).toBe(true);
-  });
-
-  it('the quest-chain deeds retro-grant for an attuned veteran on first login', () => {
-    const sim = makeSim();
-    const state = veteranState();
-    state.questsDone = [
-      'q_prof_intro',
-      'q_nythraxis_restless_dead',
-      'q_nythraxis_graves',
-      'q_nythraxis_sealed_crypt',
-      'q_nythraxis_bound_guardian',
-      'q_nythraxis_scourges_end',
-      'q_drowned_choir',
-      'q_palecoil',
-      'q_silence_the_choir',
-      'q_drowned_moon',
-    ];
-    const pid = sim.addPlayer('warrior', 'Attuned', { state });
-    const meta = sim.players.get(pid)!;
-    for (const id of [
-      'prog_crown_below',
-      'prog_mere_at_rest',
-      'prog_callused_hands',
-      'dgn_nythraxis_crypt',
-    ]) {
-      expect(meta.deedsEarned.has(id), id).toBe(true);
-    }
-    // The hub-craft counter starts at zero like every lifetime counter.
-    expect(meta.deedsEarned.has('prog_tools_of_the_trade')).toBe(false);
-    expect(meta.deedStats.counters.hubCraftsPerformed).toBe(0);
-    const evs = deedEvents(sim.tick());
-    const crownEv = evs.find((ev) => ev.deedId === 'prog_crown_below');
-    expect(crownEv?.retro).toBe(true);
-    expect(crownEv?.pid).toBe(pid);
-
-    // A partial chain retro-grants nothing (missing-quest boundaries).
-    const partial = makeSim();
-    const pstate = veteranState();
-    pstate.questsDone = [
-      'q_nythraxis_restless_dead',
-      'q_nythraxis_graves',
-      'q_nythraxis_bound_guardian',
-      'q_nythraxis_scourges_end',
-      'q_drowned_choir',
-      'q_palecoil',
-      'q_silence_the_choir',
-    ];
-    const ppid = partial.addPlayer('warrior', 'Partway', { state: pstate });
-    const pmeta = partial.players.get(ppid)!;
-    expect(pmeta.deedsEarned.has('prog_crown_below')).toBe(false);
-    expect(pmeta.deedsEarned.has('prog_mere_at_rest')).toBe(false);
-    // q_nythraxis_sealed_crypt is the one missing certifier.
-    expect(pmeta.deedsEarned.has('dgn_nythraxis_crypt')).toBe(false);
   });
 
   it('an equipped instance with a rolled quality seeds the quality-first marks on join', () => {
@@ -676,33 +542,6 @@ describe('retro on join', () => {
     );
   });
 
-  it('a done ground-pickup quest proves the sparkle and heals Something Shiny', () => {
-    // Every ground object is a quest item whose pickup is denied once its
-    // quest is done, so an all-quests-done veteran can never bump the counter
-    // again; the done proving quest is itself the evidence the pickup
-    // happened before the counter existed.
-    const sim = makeSim();
-    const state = veteranState();
-    state.questsDone = ['q_supplies'];
-    const pid = sim.addPlayer('warrior', 'Supplier', { state });
-    const meta = sim.players.get(pid)!;
-    expect(meta.deedsEarned.has('exp_something_shiny')).toBe(true);
-    // The heal grants the deed; the lifetime counter stays honest at zero.
-    expect(meta.deedStats.counters.groundObjectsLooted).toBe(0);
-    const evs = deedEvents(sim.tick());
-    const ev = evs.find((e) => e.deedId === 'exp_something_shiny');
-    expect(ev?.retro).toBe(true);
-    expect(ev?.pid).toBe(pid);
-
-    // Interact-objective chains and mob-drop collect chains prove nothing:
-    // those routes return before the counter bump, so they must not heal.
-    const sim2 = makeSim();
-    const s2 = veteranState();
-    s2.questsDone = ['q_nythraxis_graves', 'q_nythraxis_sealed_crypt', 'q_the_codfather'];
-    const pid2 = sim2.addPlayer('warrior', 'Interactor', { state: s2 });
-    expect(sim2.players.get(pid2)!.deedsEarned.has('exp_something_shiny')).toBe(false);
-  });
-
   it('Giantslayer heals exactly where no mob can sit five levels up', () => {
     // The heroic pin (level 22) is the highest creditable spawn in the game,
     // so level 18 is the first permanently stranded level and 17 the last
@@ -729,7 +568,8 @@ describe('retro on join', () => {
     // The motivating payoff: when the three healed deeds were the last holes
     // in a veteran's book, the meta pass that runs right after the fallback
     // arms must complete the feat on the SAME login, not one login later.
-    const healed = ['exp_something_shiny', 'cmb_giantslayer', 'prog_well_rested'];
+    // exp_something_shiny's retro heal keyed off a done ground-pickup quest.
+    const healed = ['cmb_giantslayer', 'prog_well_rested'];
     const bookIds = (DEEDS.feat_book_complete.trigger as { deedIds: string[] }).deedIds;
     const deeds: Record<string, string> = {};
     for (const id of bookIds) {
@@ -740,7 +580,6 @@ describe('retro on join', () => {
       ...veteranState(),
       level: MAX_LEVEL,
       restedXp: 0,
-      questsDone: ['q_supplies'],
       deeds,
     };
     const pid = sim.addPlayer('warrior', 'Completionist', { state });
@@ -887,8 +726,6 @@ describe('milestone unification', () => {
           facing: 0,
           equipment: {},
           inventory: [],
-          questLog: [],
-          questsDone: [],
         },
         lifetimeXp: 100000,
         unlockedMilestones: ['veteran'],
@@ -977,8 +814,6 @@ describe('persistence', () => {
       facing: 0,
       equipment: {},
       inventory: [],
-      questLog: [],
-      questsDone: [],
     };
     const sim = makeSim();
     const pid = sim.addPlayer('warrior', 'Bare', { state: bare });
@@ -1025,8 +860,6 @@ describe('persistence', () => {
       facing: 0,
       equipment: {},
       inventory: [{ itemId: 'heroic_boundstone_helm', count: 1 }],
-      questLog: [],
-      questsDone: [],
       deedStats: { itemsDiscovered: ['heroic_boundstone_helm'] },
     };
     const sim2 = makeSim();
@@ -1048,8 +881,6 @@ describe('persistence', () => {
       facing: 0,
       equipment: {},
       inventory: [],
-      questLog: [],
-      questsDone: [],
       vendorBuyback: [{ itemId: 'wolf_fang', count: 1 }],
     };
     const pid = sim.addPlayer('warrior', 'BuybackVet', { state });
@@ -1286,8 +1117,6 @@ describe('meter triggers (negative then positive per resolver)', () => {
         facing: 0,
         equipment: {},
         inventory: [],
-        questLog: [],
-        questsDone: [],
       },
     });
     const meta = sim.players.get(pid)!;
@@ -1404,30 +1233,8 @@ describe('flag triggers (one negative and one positive per predicate)', () => {
   });
 });
 
-describe('fixpoint across the authored order', () => {
-  it('a chapter meta whose deed dependency sits LATER in DEED_ORDER still lands in one evaluation', () => {
-    const sim = makeSim();
-    const { meta, e } = primary(sim);
-    // chr_vale_chapter_i (chronicles) requires exp_vale_wayfarer, which is
-    // authored AFTER it in DEED_ORDER, so a single forward pass cannot grant
-    // the chapter: only the fixpoint re-iteration can.
-    const chapter = DEEDS.chr_vale_chapter_i.trigger;
-    if (chapter.kind !== 'meta') throw new Error('fixture drift');
-    expect(DEED_ORDER.indexOf('exp_vale_wayfarer') > DEED_ORDER.indexOf('chr_vale_chapter_i')).toBe(
-      true,
-    );
-    for (const q of chapter.questIds ?? []) meta.questsDone.add(q);
-    for (const dep of chapter.deedIds) {
-      const t = DEEDS[dep].trigger;
-      if (t.kind === 'visits') for (const mark of t.markIds) markVisited(sim.ctx, meta, mark);
-      else if (t.kind === 'visit') markVisited(sim.ctx, meta, t.markId);
-      else grantDeed(sim.ctx, meta, dep);
-    }
-    evaluateDeedsFor(sim.ctx, meta, e, false);
-    expect(meta.deedsEarned.has('exp_vale_wayfarer')).toBe(true);
-    expect(meta.deedsEarned.has('chr_vale_chapter_i')).toBe(true);
-  });
-});
+// A 'fixpoint across the authored order' suite stood here. Its only case drove
+// the quest-chain retro grants for an attuned veteran on first login.
 
 describe('bounded sets on load', () => {
   it('restoreDeedStats drops marks outside the authored namespaces and unknown item ids', () => {
@@ -1772,25 +1579,6 @@ describe('deedsRarity (offline facet arm)', () => {
 // at the NEXT login, so a broken live site keeps state-poke tests green while
 // the in-the-moment unlock silently disappears; these tests red instead.
 describe('live sites grant in the same run (retro cannot mask a broken site)', () => {
-  it('quest turn-in: turnInQuestCore itself makes the quest deed land in-tick', () => {
-    const sim = makeSim();
-    const { meta } = primary(sim);
-    const quest = QUESTS.q_prof_intro; // prog_callused_hands, {kind:'quest'}
-    expect(quest).toBeDefined();
-    meta.questLog.set('q_prof_intro', { questId: 'q_prof_intro', counts: [5], state: 'ready' });
-    // The live turn-in path
-    // carries two independent full marks (grantXp marks on every xp grant,
-    // and turnInQuestCore marks explicitly for xp-less future quests); this
-    // test guards the path as a whole, so it reds only when the in-the-moment
-    // grant is actually broken, never on a refactor that keeps either mark.
-    expect(meta.deedsEarned.has('prog_callused_hands')).toBe(false);
-    turnInQuestCore(sim.ctx, 'q_prof_intro', quest, meta);
-    expect(meta.questsDone.has('q_prof_intro')).toBe(true);
-    expect(meta.deedsEarned.has('prog_callused_hands')).toBe(false); // grants at the tick tail
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_callused_hands')).toBe(true);
-  });
-
   it('gathering: a queued grant drains in the tick and the proficiency deed lands in-tick', () => {
     const sim = makeSim();
     const { meta } = primary(sim);

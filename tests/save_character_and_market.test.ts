@@ -37,8 +37,6 @@ function clientStub() {
 
 const STATE = {
   level: 7,
-  questLog: [],
-  questsDone: [],
   inventory: [],
 } as unknown as CharacterState;
 const MARKET = { listings: [], collections: {} } as unknown as MarketSave;

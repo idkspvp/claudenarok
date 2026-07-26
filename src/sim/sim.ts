@@ -151,7 +151,6 @@ import {
   isArenaPos,
   isDelvePos,
   MOBS,
-  QUESTS,
   SPIRIT_HEALER_NPC_ID,
   zoneAt,
 } from './data';
@@ -408,21 +407,6 @@ import {
   updateInstances as updateInstancesImpl,
 } from './instances/dungeons';
 import { buyHeroicVendorItem as buyHeroicVendorItemImpl } from './instances/heroic_vendor';
-import * as questCommands from './quests/quest_commands';
-import {
-  checkQuestReady,
-  onInventoryChangedForQuests,
-  onMobKilledForQuests,
-  onNodeGatheredForQuests,
-  onRecipeCraftedForQuests,
-} from './quests/quest_credit';
-
-// computeQuestState (the pure quest-state fn) moved to quests/quest_commands.ts (W4);
-// re-export it here so ClientWorld's `import { computeQuestState } from '../sim/sim'`
-// (online.ts) stays byte-identical.
-export { computeQuestState } from './quests/quest_commands';
-
-import { completeCurrentQuestsForDev, completeQuestForDev } from './quests/dev_quest_commands';
 import * as arenaMod from './social/arena';
 import { clearAfkOnMove } from './social/away';
 import type { CardDuelMatch } from './social/card_duel';
@@ -1048,8 +1032,6 @@ export interface PlayerMeta {
   lastDisenchantResult: DisenchantResult | null;
   lastEnchantResult: ApplyEnchantResult | null;
   known: ResolvedAbility[];
-  questLog: Map<string, QuestProgress>;
-  questsDone: Set<string>;
   counters: RewardCounters;
   autoEquip: boolean;
   // sim.time when this character entered the world; powers /played. Session-only
@@ -1301,8 +1283,6 @@ export interface CharacterState {
   // load path (never destroys items; tolerates an over-capacity inventory).
   bank?: BankState;
   vendorBuyback?: InvSlot[];
-  questLog: QuestProgress[];
-  questsDone: string[];
   // Legacy arenaRating/Wins/Losses are treated as 1v1 data. The explicit
   // 1v1 fields are written by new saves, while old saves fall back cleanly.
   arenaRating?: number;
@@ -1460,10 +1440,6 @@ export interface PendingMobRespawn {
   dungeonId: string | null;
   timer: number;
 }
-
-// computeQuestState (the pure quest-state fn) moved to quests/quest_commands.ts (W4),
-// re-exported from sim.ts (see the import region) so the ClientWorld import stays
-// byte-identical.
 
 // copyPos moved to entity_roster.ts (used only by the despawn prologue).
 
@@ -2209,8 +2185,6 @@ export class Sim {
       lastDisenchantResult: null,
       lastEnchantResult: null,
       known: [],
-      questLog: new Map(),
-      questsDone: new Set(),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2354,24 +2328,6 @@ export class Sim {
       // Bank sanitizes on load (never destroys items; a pre-bank save has no `bank`
       // field and sanitizes to an empty bank). See bank.ts sanitizeBankState.
       meta.bank = sanitizeBankState(s.bank);
-      for (const q of s.questLog) {
-        // Prune unknown quest ids at load (normalize on load, never crash): a save
-        // mid a since-deleted quest (e.g. the retirement of
-        // q_archetype_acceptance / q_prof_make_amends) must not leave a live
-        // questLog entry whose id is absent from QUESTS, or the next quest-touching
-        // tick op dereferences QUESTS[qp.questId].objectives and TypeErrors inside
-        // the server tick (quest_credit.ts + interactNpcForQuests). questsDone is
-        // membership-only (never dereferenced), so it is preserved as history below.
-        if (q.state !== 'done' && QUESTS[q.questId])
-          meta.questLog.set(q.questId, {
-            questId: q.questId,
-            counts: [...q.counts],
-            state: q.state,
-            ...(q.selection === undefined ? {} : { selection: q.selection }),
-            ...(q.resolvedCounts === undefined ? {} : { resolvedCounts: [...q.resolvedCounts] }),
-          });
-      }
-      for (const q of s.questsDone) meta.questsDone.add(q);
       if (s.talents)
         // Revalidate the persisted build against the current rules + level budget
         // before it is baked into the flat mods below. A stored allocation replays
@@ -3032,14 +2988,6 @@ export class Sim {
         bonusSlots: meta.bank.bonusSlots,
       },
       vendorBuyback: meta.vendorBuyback.map(cloneInvSlot),
-      questLog: [...meta.questLog.values()].map((q) => ({
-        questId: q.questId,
-        counts: [...q.counts],
-        state: q.state,
-        ...(q.selection === undefined ? {} : { selection: q.selection }),
-        ...(q.resolvedCounts === undefined ? {} : { resolvedCounts: [...q.resolvedCounts] }),
-      })),
-      questsDone: [...meta.questsDone],
       arenaRating: meta.arenaRating,
       arenaWins: meta.arenaWins,
       arenaLosses: meta.arenaLosses,
@@ -3488,14 +3436,8 @@ export class Sim {
   get known(): ResolvedAbility[] {
     return this.primary.known;
   }
-  get questLog(): Map<string, QuestProgress> {
-    return this.primary.questLog;
-  }
-  get questsDone(): Set<string> {
-    return this.primary.questsDone;
-  }
   // --- IWorldDeeds: the Book of Deeds read surface + title selection. The
-  // reads expose the live per-player state (the questLog precedent above);
+  // reads expose the live per-player state;
   // the facet types them Readonly so no seam consumer mutates them. ---
   get deedsEarned(): ReadonlyMap<string, string> {
     return this.primary.deedsEarned;
@@ -3956,20 +3898,8 @@ export class Sim {
       // isFriendlyTo/pvpController/stopFollow, which are already bound above (C4a/C1) and
       // stay on Sim.
       dropPartyMarkers: (partyId: number) => sim.targeting.dropPartyMarkers(partyId),
-      // Q1 quest-credit trio now lives in quests/quest_credit.ts; the callbacks route
-      // through `sim.ctx` (lazily read at call time, after the ctor sets it). countItem
-      // stays on Sim (L2 inventory hub) and is consumed by the collect updater.
-      onMobKilledForQuests: (mob, meta) => onMobKilledForQuests(sim.ctx, mob, meta),
-      onRecipeCraftedForQuests: (recipeId, meta) =>
-        onRecipeCraftedForQuests(sim.ctx, recipeId, meta),
-      onNodeGatheredForQuests: (node, itemId, meta) =>
-        onNodeGatheredForQuests(sim.ctx, node, itemId, meta),
-      onInventoryChangedForQuests: (meta) => onInventoryChangedForQuests(sim.ctx, meta),
-      checkQuestReady: (qp, meta) => checkQuestReady(sim.ctx, qp, meta),
       countItem: sim.countItem.bind(sim),
       countFungibleItem: sim.countFungibleItem.bind(sim),
-      completeQuestForDev: (questId, pid) => completeQuestForDev(sim.ctx, questId, pid),
-      completeCurrentQuestsForDev: (pid) => completeCurrentQuestsForDev(sim.ctx, pid),
       // I1 dungeon instancing now lives in instances/dungeons.ts; these route through
       // the same-named Sim delegates (foreign callers use this.X). lockoutNowMs is the
       // shared raid-lockout clock that stays on Sim (N1 also writes through it);
@@ -4188,7 +4118,6 @@ export class Sim {
       // a test that reassigns sim.talkToNpc is honored. talkToNpc is public; isQuestInteractionEntity
       // is private on Sim. Both MUST keep talkToNpc a resolvable Sim delegate (W4 contract).
       talkToNpc: (npcId, pid) => sim.talkToNpc(npcId, pid),
-      isQuestInteractionEntity: (e) => sim.isQuestInteractionEntity(e),
       // W5 chat router/readouts reach-backs. Late-bound arrows (call-time lookup): the
       // /assist branch routes through Sim's targetEntity delegate (-> targeting.ts);
       // partyReadout reads the cap off the party machine; the /listings readout asks the
@@ -6754,7 +6683,6 @@ export class Sim {
       // dragging goldens with no professions content into every regen.
       ...(opts?.silent ? { silent: true } : {}),
     });
-    this.ctx.onInventoryChangedForQuests(meta);
     if (
       meta.autoEquip &&
       (def?.kind === 'weapon' || def?.kind === 'armor' || def?.kind === 'held_offhand')
@@ -6814,7 +6742,6 @@ export class Sim {
       // Conditional, see the matching comment in addItem above.
       ...(opts?.silent ? { silent: true } : {}),
     });
-    this.ctx.onInventoryChangedForQuests(meta);
   }
 
   // Returns the `instance` payload of every instanced UNIT actually consumed
@@ -6848,7 +6775,6 @@ export class Sim {
       count -= take;
       if (s.count <= 0) meta.inventory.splice(i, 1);
     }
-    this.ctx.onInventoryChangedForQuests(meta);
     return consumedInstances;
   }
 
@@ -6867,7 +6793,6 @@ export class Sim {
       count -= take;
       if (s.count <= 0) meta.inventory.splice(i, 1);
     }
-    this.ctx.onInventoryChangedForQuests(meta);
   }
 
   // Enchanting-eligible count for `itemId` (#1712 review): a plain fungible
@@ -6933,7 +6858,6 @@ export class Sim {
       count -= take;
       if (s.count <= 0) meta.inventory.splice(i, 1);
     }
-    this.ctx.onInventoryChangedForQuests(meta);
     return consumedInstances;
   }
 
@@ -7389,106 +7313,12 @@ export class Sim {
     // Book of Deeds: chronicler talks feed their visited mark; talking to any
     // other NPC resets the Saul consecutive-talk counter.
     deedsMod.onNpcTalkedForDeeds(this.ctx, meta, npc.templateId);
-    if (this.interactNpcForQuests(npc, meta)) return;
-    for (const qid of npc.questIds) {
-      const quest = QUESTS[qid];
-      if (
-        quest &&
-        isQuestTurnInNpc(quest, npc.templateId) &&
-        meta.questLog.get(qid)?.state === 'ready'
-      ) {
-        this.turnInQuest(qid, meta.entityId);
-        return;
-      }
-    }
-    for (const qid of npc.questIds) {
-      if (
-        QUESTS[qid].giverNpcId === npc.templateId &&
-        !QUESTS[qid].completionEffect &&
-        this.questState(qid, meta.entityId) === 'available'
-      ) {
-        this.acceptQuest(qid, meta.entityId);
-        return;
-      }
-    }
   }
 
-  private interactNpcForQuests(npc: Entity, meta: PlayerMeta): boolean {
-    let progressed = false;
-    for (const qp of meta.questLog.values()) {
-      if (qp.state !== 'active') continue;
-      const quest = QUESTS[qp.questId];
-      quest.objectives.forEach((objective, objectiveIndex) => {
-        if (objective.type !== 'interact' || objective.targetNpcId !== npc.templateId) return;
-        const required = questObjectiveRequired(quest, qp, objectiveIndex);
-        if (qp.counts[objectiveIndex] >= required) return;
-        qp.counts[objectiveIndex]++;
-        progressed = true;
-        meta.counters.questProgress++;
-        this.emit({
-          type: 'questProgress',
-          questId: qp.questId,
-          objectiveIndex,
-          current: qp.counts[objectiveIndex],
-          required,
-          text: `${objective.label}: ${qp.counts[objectiveIndex]}/${required}`,
-          pid: meta.entityId,
-        });
-        this.ctx.checkQuestReady(qp, meta);
-      });
-    }
-    return progressed;
-  }
-
-  // -------------------------------------------------------------------------
-  // Quests
-  // -------------------------------------------------------------------------
-
-  // The quest command surface (questState + acceptQuest/acceptLinkedQuest/abandonQuest/
-  // turnInQuest, plus the private helpers questNpcFor/finalizeQuestAccept and the pure
-  // computeQuestState) moved to quests/quest_commands.ts (W4) behind SimContext. Sim
-  // keeps these thin same-named PUBLIC delegates (the widened `pid?` overload preserved)
-  // so the IWorld surface, server/game.ts, and the in-file interaction path (talkToNpc
-  // above) resolve them on the Sim facade unchanged; each forwards via this.ctx. The
-  // moved questNpcFor reaches the still-on-Sim isQuestInteractionEntity predicate via the
-  // ctx.isQuestInteractionEntity callback.
-  questState(questId: string, pid?: number): QuestState {
-    return questCommands.questState(this.ctx, questId, pid);
-  }
-
-  acceptQuest(questId: string, selectionOrPid?: string | number, pid?: number): void {
-    questCommands.acceptQuest(this.ctx, questId, selectionOrPid, pid);
-  }
-
-  acceptLinkedQuest(questId: string, sharerPid: number, pid?: number): void {
-    questCommands.acceptLinkedQuest(this.ctx, questId, sharerPid, pid);
-  }
-
-  abandonQuest(questId: string, pid?: number): void {
-    questCommands.abandonQuest(this.ctx, questId, pid);
-  }
-
-  turnInQuest(questId: string, pid?: number): void {
-    questCommands.turnInQuest(this.ctx, questId, pid);
-  }
-
-  completeQuestForDev(questId: string, pid?: number): boolean {
-    return completeQuestForDev(this.ctx, questId, pid);
-  }
-
-  completeCurrentQuestsForDev(pid?: number): number {
-    return completeCurrentQuestsForDev(this.ctx, pid);
-  }
-
-  // No-op in offline mode
+  // No-op offline: telemetry is a server-side concern. Lives here because the
+  // IWorld surface requires it of both worlds. (It sat inside the Quests banner
+  // purely by accident of history and came back when that section was deleted.)
   reportTelemetry(): void {}
-
-  // Quest-credit math (onMobKilledForQuests / onInventoryChangedForQuests /
-  // checkQuestReady) moved to quests/quest_credit.ts (Q1) behind SimContext. Foreign
-  // callers reach the trio via this.ctx.<name>: the handleDeath party loop calls
-  // ctx.onMobKilledForQuests, the inventory hub (addItem/removeItem/buyBackItem) and
-  // finalizeQuestAccept call ctx.onInventoryChangedForQuests, and interactNpcForQuests
-  // plus the N1 crypt interactObjectForQuests call ctx.checkQuestReady.
 
   // -------------------------------------------------------------------------
   // Player death / respawn

@@ -39,9 +39,6 @@ describe('item links in a chat draft', () => {
         const item = ITEMS[itemId];
         return item ? itemDisplayName(item) : null;
       },
-      questTitle: (questId) => questId,
-      selectedQuestId: () => null,
-      hasQuest: () => false,
       showError: () => {},
     });
     controller.init();

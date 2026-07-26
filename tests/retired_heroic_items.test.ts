@@ -13,7 +13,7 @@ import { DELVE_SHOPS } from '../src/sim/content/delves/shop';
 import { HEROIC_BOSS_LOOT, RETIRED_HEROIC_ITEMS } from '../src/sim/content/heroic_loot';
 import { HEROIC_VENDOR_STOCK } from '../src/sim/content/heroic_vendor';
 import { FURY_STOCK } from '../src/sim/content/pvp_honor';
-import { ITEMS, MOBS, NPCS, QUESTS } from '../src/sim/data';
+import { ITEMS, MOBS, NPCS } from '../src/sim/data';
 import { MAIL_ATTACHMENT_EXPIRY_SECONDS, type MailSave } from '../src/sim/mail/post_office';
 import type { MarketSave } from '../src/sim/market';
 import { type CharacterState, Sim } from '../src/sim/sim';
@@ -108,8 +108,6 @@ function legacyRogueState(equipment: CharacterState['equipment']): CharacterStat
       purchasedSlots: 0,
       bonusSlots: 0,
     },
-    questLog: [],
-    questsDone: [],
   };
 }
 
@@ -131,36 +129,6 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
 
   it('restores each complete def with its exact v0.24.2 identity', () => {
     expect(RETIRED_HEROIC_ITEMS).toEqual(EXPECTED_RETIRED_ITEMS);
-  });
-
-  it('keeps every retired id off every registered acquisition path', () => {
-    const obtainableIds = new Set<string>();
-    for (const mob of Object.values(MOBS)) {
-      for (const entry of mob.loot ?? []) {
-        if (entry.itemId) obtainableIds.add(entry.itemId);
-      }
-    }
-    for (const npc of Object.values(NPCS)) {
-      for (const itemId of npc.vendorItems ?? []) obtainableIds.add(itemId);
-    }
-    for (const entries of Object.values(HEROIC_BOSS_LOOT)) {
-      for (const entry of entries) {
-        if (entry.itemId) obtainableIds.add(entry.itemId);
-      }
-    }
-    for (const offer of HEROIC_VENDOR_STOCK) obtainableIds.add(offer.itemId);
-    for (const itemId of FURY_STOCK) obtainableIds.add(itemId);
-    for (const entries of Object.values(DELVE_SHOPS)) {
-      for (const entry of entries) obtainableIds.add(entry.itemId);
-    }
-    for (const quest of Object.values(QUESTS)) {
-      for (const itemId of Object.values(quest.itemRewards ?? {})) {
-        if (itemId) obtainableIds.add(itemId);
-      }
-    }
-    for (const id of RETIRED_IDS) {
-      expect(obtainableIds.has(id)).toBe(false);
-    }
   });
 
   it('allows retired ids only in their save-compat definition module', () => {

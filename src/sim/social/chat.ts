@@ -520,10 +520,6 @@ export function chat(ctx: SimContext, text: string, pid?: number): SentChat | nu
     ctx.error(r.meta.entityId, readouts.bagsReadout(r.meta));
     return null;
   }
-  if (/^\/(?:quests?|ql)(?:\s|$)/i.test(raw)) {
-    ctx.error(r.meta.entityId, readouts.questReadout(r.meta));
-    return null;
-  }
   if (/^\/(?:gear|equip|equipment)(?:\s|$)/i.test(raw)) {
     ctx.error(r.meta.entityId, readouts.gearReadout(r.meta));
     return null;
@@ -608,10 +604,6 @@ export function chat(ctx: SimContext, text: string, pid?: number): SentChat | nu
   }
   if (/^\/(?:pois|poi|landmarks)(?:\s|$)/i.test(raw)) {
     ctx.error(r.meta.entityId, readouts.poisReadout(r.e));
-    return null;
-  }
-  if (/^\/(?:completed|questsdone|qdone)(?:\s|$)/i.test(raw)) {
-    ctx.error(r.meta.entityId, readouts.completedReadout(r.meta));
     return null;
   }
   if (/^\/(?:listings|mylistings|auctions)(?:\s|$)/i.test(raw)) {

@@ -1,49 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { QUESTS } from '../src/sim/data';
-import {
-  attunementMasterForPair,
-  planProfessionEvent,
-} from '../src/ui/profession_event_lines_core';
+import { planProfessionEvent } from '../src/ui/profession_event_lines_core';
 
-describe('attunementMasterForPair', () => {
-  it('resolves each wave-one pair to its attunement quest giver', () => {
-    expect(attunementMasterForPair('weaponcrafting+armorcrafting')).toBe('forgemistress_darva');
-    expect(attunementMasterForPair('leatherworking+tailoring')).toBe('weaver_ottilie');
-    expect(attunementMasterForPair('alchemy+cooking')).toBe('cook_marlow');
-    expect(attunementMasterForPair('engineering+alchemy')).toBe('tinker_gizzel');
-  });
-
-  it('returns null for a ring pair with no seated master', () => {
-    // jewelcrafting+weaponcrafting is a real ring pair (a Guild trend letter and
-    // a title exist), but no wave-one master offers its attunement quest.
-    expect(attunementMasterForPair('jewelcrafting+weaponcrafting')).toBeNull();
-    expect(attunementMasterForPair('not-a-pair')).toBeNull();
-  });
-
-  it('stays derived from the attunePair-new quest content (no drift)', () => {
-    // Every mapping must come from a real attunePair 'new' quest, and the giver
-    // it names must be that quest's actual giver.
-    const master = attunementMasterForPair('alchemy+cooking');
-    const quest = Object.values(QUESTS).find(
-      (q) =>
-        q.completionEffect?.type === 'attunePair' &&
-        q.completionEffect.mode === 'new' &&
-        q.completionEffect.pairId === 'alchemy+cooking',
-    );
-    expect(quest).toBeTruthy();
-    expect(master).toBe(quest?.giverNpcId);
-  });
-});
+// An attunementMasterForPair suite stood here. The map it read was derived from
+// the attunement acceptance QUESTS, so with no quests every pair reads unseated.
 
 describe('planProfessionEvent', () => {
-  it('plans the trend nudge with its anchor master, or the no-master variant', () => {
-    expect(
-      planProfessionEvent({ type: 'profTrendNudge', pairId: 'engineering+alchemy' }, false),
-    ).toEqual({
-      kind: 'trendNudge',
-      pairId: 'engineering+alchemy',
-      masterNpcId: 'tinker_gizzel',
-    });
+  it('plans the trend nudge with the no-master variant', () => {
+    // Every pair reads unseated now: the master map was derived from the
+    // attunement acceptance quests, so the anchor-master arm of this case has
+    // nothing to resolve until the profession pass gives the masters a new anchor.
     expect(
       planProfessionEvent(
         { type: 'profTrendNudge', pairId: 'jewelcrafting+weaponcrafting' },

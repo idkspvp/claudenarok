@@ -61,8 +61,6 @@ import {
   TEMPLE_NPCS,
   TEMPLE_OBJECTS,
   TEMPLE_PROPS,
-  TEMPLE_QUEST_ORDER,
-  TEMPLE_QUESTS,
 } from './content/temple';
 import { VALE_CUP_BALL_MOB, VALE_CUP_BALL_TEMPLATE_ID } from './content/vale_cup';
 import { WARLOCK_PET_MOBS } from './content/warlock_pets';
@@ -77,8 +75,6 @@ import {
   ZONE1_NPCS,
   ZONE1_OBJECTS,
   ZONE1_PROPS,
-  ZONE1_QUEST_ORDER,
-  ZONE1_QUESTS,
   ZONE1_ROADS,
   ZONE1_ZONE,
 } from './content/zone1';
@@ -90,8 +86,6 @@ import {
   ZONE2_NPCS,
   ZONE2_OBJECTS,
   ZONE2_PROPS,
-  ZONE2_QUEST_ORDER,
-  ZONE2_QUESTS,
   ZONE2_ROADS,
   ZONE2_ZONE,
 } from './content/zone2';
@@ -102,8 +96,6 @@ import {
   ZONE3_NPCS,
   ZONE3_OBJECTS,
   ZONE3_PROPS,
-  ZONE3_QUEST_ORDER,
-  ZONE3_QUESTS,
   ZONE3_ROADS,
   ZONE3_ZONE,
 } from './content/zone3';
@@ -219,20 +211,6 @@ export const NPCS: Record<string, NpcDef> = {
 // whole death-loop data surface from this one merge module.
 export { type GraveyardDef, OVERWORLD_GRAVEYARDS, SPIRIT_HEALER, SPIRIT_HEALER_NPC_ID };
 
-export const QUESTS: Record<string, QuestDef> = {
-  ...ZONE1_QUESTS,
-  ...ZONE2_QUESTS,
-  ...ZONE3_QUESTS,
-  ...TEMPLE_QUESTS,
-};
-
-export const QUEST_ORDER: string[] = [
-  ...ZONE1_QUEST_ORDER,
-  ...ZONE2_QUEST_ORDER,
-  ...ZONE3_QUEST_ORDER,
-  ...TEMPLE_QUEST_ORDER,
-];
-
 // The Book of Deeds catalog (content/deeds.ts) is deliberately NOT re-exported
 // here: this merge module sits on the guide entry's static import graph (via
 // icons.ts and the entity localizers), and a re-export would color the deeds
@@ -312,17 +290,6 @@ export const REWARD_ARCHETYPE: Record<PlayerClass, PlayerClass> = {
   warlock: 'mage',
   druid: 'mage',
 };
-
-// Resolve the item a quest awards a given class: a class-specific reward if the
-// quest lists one, else the reward for the class's archetype (rewards are
-// authored per archetype — warrior/rogue/mage). The dialog preview and the
-// turn-in grant MUST both call this so what the player is shown matches what
-// they receive. Returns undefined when the quest has no item reward.
-export function questRewardItem(quest: QuestDef, cls: PlayerClass): string | undefined {
-  return quest.itemRewards[cls] ?? quest.itemRewards[REWARD_ARCHETYPE[cls]];
-}
-
-export const questRewardItemId = questRewardItem;
 
 // Classic-era group XP multipliers by party size (1-5).
 export const GROUP_XP_BONUS = [1, 1, 1.166, 1.3, 1.43];

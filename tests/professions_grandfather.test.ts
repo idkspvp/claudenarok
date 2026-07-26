@@ -54,8 +54,6 @@ const LEGACY_SAVE = {
   facing: 0,
   equipment: {},
   inventory: [],
-  questLog: [],
-  questsDone: [],
   craftSkills: { armorcrafting: 30 },
   knownRecipes: [],
 } as unknown as CharacterState;

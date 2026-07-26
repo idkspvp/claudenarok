@@ -17,7 +17,7 @@
 // ui_tier_knobs.nameplateIntervalSec), which the renderer reads, not the painter.
 
 import * as THREE from 'three';
-import { ABILITIES, MOBS, QUESTS } from '../sim/data';
+import { ABILITIES, MOBS } from '../sim/data';
 import { specialRoleColor } from '../sim/discord_roles';
 import { type Entity, GATHER_CAST_ID, isQuestTurnInNpc } from '../sim/types';
 import { deedTitleText } from '../ui/deed_i18n';
@@ -309,27 +309,8 @@ export class NameplatePainter {
           e.kind === 'npc'
             ? npcDisplayName(e.templateId)
             : tEntity({ kind: 'mob', id: e.templateId, field: 'name' });
-        let marker = '';
-        let cls = '';
-        // role-aware: '!' only at the quest's giver, '?' only at its turn-in
-        // NPC (gray while in progress), matching the gossip dialog
-        for (const qid of e.questIds) {
-          const quest = QUESTS[qid];
-          if (!quest) continue;
-          const st = world.questState(qid);
-          if (st === 'ready' && isQuestTurnInNpc(quest, e.templateId)) {
-            marker = '?';
-            cls = 'ready';
-            break;
-          }
-          if (st === 'available' && quest.giverNpcId === e.templateId) {
-            marker = '!';
-            cls = 'avail';
-          } else if (st === 'active' && isQuestTurnInNpc(quest, e.templateId) && !marker) {
-            marker = '?';
-            cls = 'active';
-          }
-        }
+        const marker = '';
+        const cls = '';
         const markerClass = cls ? `np-marker ${cls}` : 'np-marker';
         this.setNameplateStatic(
           v,

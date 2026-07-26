@@ -706,7 +706,6 @@ function resolveReplaceEnchantBagged(
   // mint, losing the item rather than duping it. Any such change has to keep
   // the removal and the mint atomic here, not lean on this line.
   if (!consumed) return { ok: false, itemId, enchantId, reason: 'not_held' };
-  ctx.onInventoryChangedForQuests(meta);
   for (const reagent of enchant.reagents) ctx.removeItem(reagent.itemId, reagent.count, pid);
   // silent, exactly like the plain apply mint below: the enchantResult event
   // fires its own dedicated cue (audio.enchant in src/game/audio.ts), so the

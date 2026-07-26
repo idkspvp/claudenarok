@@ -164,8 +164,6 @@ describe('reconcile through GameServer.join', () => {
       facing: 0,
       equipment: {},
       inventory: [],
-      questLog: [],
-      questsDone: [],
       deeds: { prog_veteran: '2026-01-01', prog_first_steps: '2026-01-02' },
     };
     const fc = fakeWs();
@@ -209,8 +207,6 @@ describe('reconcile through GameServer.join', () => {
       facing: 0,
       equipment: {},
       inventory: [],
-      questLog: [],
-      questsDone: [],
       craftSkills: { leatherworking: 5 },
       // A curve-era blob: without the flag the 12c mastery reset zeroes
       // craftSkills BEFORE the retro sweep reads them, and the inference this
@@ -313,8 +309,6 @@ describe('reconcile through GameServer.join', () => {
       facing: 0,
       equipment: {},
       inventory: [],
-      questLog: [],
-      questsDone: [],
       deeds: { prog_veteran: '2026-01-01' },
     };
     const fc = fakeWs();

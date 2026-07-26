@@ -67,8 +67,6 @@ function preCurveState() {
     facing: 0,
     equipment: {},
     inventory: [],
-    questLog: [],
-    questsDone: [],
     craftSkills: { armorcrafting: 80, cooking: 30 },
     gatheringProficiency: { mining: 90 },
     professions: { mining: 90 },

@@ -15,20 +15,11 @@
 // Markers carry the identity (zoneId / poiIndex / dungeonId / cls)
 // the painter needs to resolve their localized text, never the resolved string.
 
-import {
-  DUNGEON_LIST,
-  isDelvePos,
-  QUESTS,
-  WORLD_MAX_X,
-  WORLD_MIN_X,
-  type ZoneDef,
-} from '../sim/data';
-import { type QuestObjectiveRef, questObjectiveAreas } from '../sim/quest_targets';
+import { DUNGEON_LIST, isDelvePos, WORLD_MAX_X, WORLD_MIN_X, type ZoneDef } from '../sim/data';
 import { isQuestTurnInNpc, type ZonePropsDef } from '../sim/types';
 import type { Decoration } from '../sim/world';
 import type { FriendInfo, IWorld } from '../world_api';
 import { overworldDungeonPortals } from './map_dungeon_portals';
-import { questNumbersByLog } from './map_quest_list_view';
 
 // World-map zoom band: 1 = the whole committed zone, up to MAP_MAX_ZOOM.
 export const MAP_MAX_ZOOM = 6;
@@ -100,14 +91,12 @@ export interface MapNpcQuestRef {
   ready: boolean;
 }
 
-/** A quest-giver glyph: '?' (turn-in ready) wins over '!' (available). Carries
- *  the quest identities behind the glyph so the hover tooltip can resolve
- *  their localized titles + level requirements (this core stays i18n-free). */
+/** An NPC glyph on the map. It used to carry the '?'/'!' quest-giver state and
+ *  the quest identities behind it; with no quests every NPC plots the same. */
 export interface MapNpcMarker {
   mx: number;
   my: number;
   ready: boolean;
-  quests: MapNpcQuestRef[];
 }
 
 /** The glyph hit radius for the map hover tooltip, in canvas px: the '?'/'!'
@@ -133,45 +122,6 @@ export function npcMarkerAt(
     }
   }
   return best;
-}
-
-/** A translucent active-quest objective area (the classic quest-POI blob):
- *  canvas-pixel center + radius over where the objective's targets live, plus
- *  the objective identities it stands for (the hover tooltip resolves their
- *  localized labels + live counts; this core stays i18n-free). */
-export interface MapQuestAreaMarker {
-  mx: number;
-  my: number;
-  radius: number;
-  objectives: QuestObjectiveRef[];
-  /** Distinct 1-based quest numbers (acceptance order) of the objectives
-   *  here, ascending: the painter draws one numbered badge per entry, and the
-   *  same numbers head the map's quest side list. */
-  numbers: number[];
-}
-
-/** The distinct objectives under a canvas point, across every quest area that
- *  contains it (overlapping blobs merge into one tooltip). Pure hit-test the
- *  hover handler calls with the last painted model's areas. */
-export function questAreaObjectivesAt(
-  areas: readonly MapQuestAreaMarker[],
-  mx: number,
-  my: number,
-): QuestObjectiveRef[] {
-  const refs: QuestObjectiveRef[] = [];
-  const seen = new Set<string>();
-  for (const a of areas) {
-    const dx = mx - a.mx;
-    const dy = my - a.my;
-    if (dx * dx + dy * dy > a.radius * a.radius) continue;
-    for (const ref of a.objectives) {
-      const key = `${ref.questId}#${ref.objectiveIndex}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      refs.push(ref);
-    }
-  }
-  return refs;
 }
 
 /** The local player's facing arrow (canvas rotation matches -facing). */
@@ -246,7 +196,6 @@ export interface OverworldMapModel {
   pois: MapPoiMarker[];
   portals: MapPortalMarker[];
   npcs: MapNpcMarker[];
-  questAreas: MapQuestAreaMarker[];
   player: MapPlayerMarker | null;
   allies: MapAllyMarker[];
   /** The zoomed-detail overlay, or null below MAP_DETAIL_ZOOM. */
@@ -352,27 +301,6 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     return { mx, my, zoneId: zone.id, poiIndex };
   });
 
-  // Active-quest objective areas (the classic "your targets live here" blobs),
-  // derived from the static content tables (camps / ground objects / NPCs), so
-  // the online interest radius never hides a far-away camp. Filtered to the
-  // committed zone's band like every other marker; radius scales with the zoom.
-  // Each area carries its quests' acceptance-order numbers for the badges.
-  const questNumbers = questNumbersByLog(world.questLog);
-  const questAreas: MapQuestAreaMarker[] = [];
-  for (const area of questObjectiveAreas(world.questLog)) {
-    if (area.center.z < zone.zMin || area.center.z >= zone.zMax) continue;
-    const objectives = area.objectives;
-    if (objectives.length === 0) continue;
-    const numbers: number[] = [];
-    for (const ref of objectives) {
-      const n = questNumbers.get(ref.questId);
-      if (n !== undefined && !numbers.includes(n)) numbers.push(n);
-    }
-    numbers.sort((a, b) => a - b);
-    const { mx, my } = toMap(area.center.x, area.center.z);
-    questAreas.push({ mx, my, radius: (area.radius / spanX) * S, objectives, numbers });
-  }
-
   const portals: MapPortalMarker[] = overworldDungeonPortals(
     DUNGEON_LIST,
     zone.zMin,
@@ -386,25 +314,8 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
   for (const e of world.entities.values()) {
     if (e.kind !== 'npc') continue;
     if (e.pos.z < zone.zMin || e.pos.z >= zone.zMax) continue;
-    const avail = e.questIds.filter(
-      (q) => QUESTS[q].giverNpcId === e.templateId && world.questState(q) === 'available',
-    );
-    const readyQuests = e.questIds.filter(
-      (q) => isQuestTurnInNpc(QUESTS[q], e.templateId) && world.questState(q) === 'ready',
-    );
-    if (avail.length > 0 || readyQuests.length > 0) {
-      const { mx, my } = toMap(e.pos.x, e.pos.z);
-      npcs.push({
-        mx,
-        my,
-        ready: readyQuests.length > 0,
-        // turn-ins first: the '?' state wins the glyph, so its quests lead the tooltip
-        quests: [
-          ...readyQuests.map((questId) => ({ questId, ready: true })),
-          ...avail.map((questId) => ({ questId, ready: false })),
-        ],
-      });
-    }
+    const { mx, my } = toMap(e.pos.x, e.pos.z);
+    npcs.push({ mx, my, ready: false });
   }
 
   let player: MapPlayerMarker | null = null;
@@ -447,7 +358,6 @@ export function buildOverworldMapModel(input: OverworldMapInput): OverworldMapMo
     pois,
     portals,
     npcs,
-    questAreas,
     player,
     allies,
     detail,

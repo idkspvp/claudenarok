@@ -390,8 +390,11 @@ export function enterDungeon(
   return true;
 }
 
-function canEnterNythraxisRaid(meta: PlayerMeta): boolean {
-  return meta.questsDone.has('q_nythraxis_bound_guardian');
+// The raid used to be gated behind a quest turn-in. With quests gone the door is
+// open; a level or attunement gate can take its place when the content pass gets
+// there. Kept as a predicate so the call site does not need to change shape.
+function canEnterNythraxisRaid(_meta: PlayerMeta): boolean {
+  return true;
 }
 
 function isRaidLocked(ctx: SimContext, meta: PlayerMeta, dungeonId: string): boolean {

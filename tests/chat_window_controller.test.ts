@@ -69,9 +69,6 @@ function makeHarness(
     sendChat: (line) => sent.push(line),
     isMobileLayout: () => false,
     itemDisplayName: (itemId) => (itemId === 'sword' ? 'Iron Sword' : null),
-    questTitle: (questId) => (questId === 'q_wolves' ? 'Thin the Pack' : questId),
-    selectedQuestId: () => selectedQuest,
-    hasQuest: (questId) => questId === 'q_wolves',
     showError: (text) => errors.push(text),
   });
   return { controller, document, input, chatLog, combatLog, storage, sent, errors };
@@ -110,35 +107,6 @@ describe('ChatWindowController', () => {
     expect(harness.sent).toEqual([]);
     expect(harness.storage.getItem('woc_chat_tabs')).toBe('["world"]');
     expect(harness.controller.composeSend('hello')).toBe('/say hello');
-  });
-
-  it('converts inserted quest and item labels once, then clears the draft mapping', () => {
-    const harness = makeHarness();
-    harness.controller.init();
-    harness.controller.insertQuestLink('q_wolves');
-    harness.controller.insertItemLink('sword');
-    harness.controller.insertItemLink('missing');
-
-    expect(harness.input.value).toBe('[Thin the Pack] [Iron Sword]');
-    expect(harness.input.focused).toBe(true);
-    expect(harness.controller.composeSend(harness.input.value)).toBe(
-      '/say [[q:q_wolves]] [[i:sword]]',
-    );
-    expect(harness.controller.composeSend('[Thin the Pack]')).toBe('/say [Thin the Pack]');
-  });
-
-  it('handles quest sharing through the injected authoritative quest state', () => {
-    const missing = makeHarness();
-    missing.controller.init();
-    expect(missing.controller.maybeHandleQuestShareCommand('/share')).toBe(true);
-    expect(missing.sent).toEqual([]);
-    expect(missing.errors).toHaveLength(1);
-
-    const selected = makeHarness({}, 'q_wolves');
-    selected.controller.init();
-    expect(selected.controller.maybeHandleQuestShareCommand('/share now')).toBe(true);
-    expect(selected.sent).toEqual(['/p [[q:q_wolves]]']);
-    expect(selected.controller.maybeHandleQuestShareCommand('/party hello')).toBe(false);
   });
 
   it('composes plain text as a reply on a restored whisper tab', () => {

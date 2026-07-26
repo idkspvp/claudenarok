@@ -1062,7 +1062,6 @@ describe('hunter pets', () => {
 
   it('pet taunts do not force bosses onto the pet', () => {
     const { sim, wolf: pet } = tamedSetup();
-    sim.players.get(sim.playerId)!.questsDone.add('q_nythraxis_bound_guardian');
     while ((sim.partyOf(sim.playerId)?.members.length ?? 1) < 5) {
       const fill = sim.addPlayer('priest', `RaidFill${sim.players.size}`);
       sim.partyInvite(fill);

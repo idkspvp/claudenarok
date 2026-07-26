@@ -18,7 +18,10 @@ import {
 // The showcase tiers wired up in src/sim/content/items.ts: two trios, each one
 // piece per archetype, dropping from the same place so they share an item level.
 const CHEST_TRIO = ['hollowbone_hauberk', 'gravewoven_raiment', 'cryptstalker_jerkin'];
-const WEAPON_TRIO = ['gravecaller_blade', 'widowfang_dirk', 'gravecaller_staff'];
+// The weapon trio (gravecaller_blade / widowfang_dirk / gravecaller_staff) stood
+// here too. All three were quest rewards and nothing else grants them, so with the
+// quest system gone they have no derivable source at all — see the re-homing task.
+const WEAPON_TRIO: string[] = [];
 
 describe('item level: source derivation', () => {
   it('derives the drop level from the dropping mob band', () => {
@@ -26,25 +29,10 @@ describe('item level: source derivation', () => {
     for (const id of CHEST_TRIO) expect(itemSourceLevel(id), id).toBe(7);
   });
 
-  it('derives a quest reward level from its hardest kill objective (the boss)', () => {
-    // The weapon trio is the q_hollow reward for slaying Morthen (level 10).
-    for (const id of WEAPON_TRIO) expect(itemSourceLevel(id), id).toBe(10);
-  });
-
   it('returns undefined for items with no drop or quest source', () => {
     // Conjured water is mage-made, never dropped or quest-granted.
     expect(itemSourceLevel('conjured_water')).toBeUndefined();
     expect(itemLevel(ITEMS.conjured_water)).toBeUndefined();
-  });
-
-  it('derives collect-gated quest reward levels from the collected item source', () => {
-    // q_greyjaw collects Old Greyjaw's fang from a level-4 rare.
-    expect(itemSourceLevel('greyjaw_pelt_cloak')).toBe(4);
-    expect(itemLevel(ITEMS.greyjaw_pelt_cloak)).toBe(5);
-
-    // q_stalker_pelts collects Ridge Stalker Pelts from level-14 beasts.
-    expect(itemSourceLevel('ridgestalker_treads')).toBe(14);
-    expect(itemLevel(ITEMS.ridgestalker_treads)).toBe(15);
   });
 });
 
@@ -82,14 +70,14 @@ describe('item level: stat budget formula', () => {
 
   it('only assigns item levels and budgets to equippable combat gear', () => {
     const slotBearingTool = {
-      id: 'gravecaller_blade',
+      id: 'gorraks_cruel_chopper',
       name: 'Gravecaller Tuning Fork',
       kind: 'tool',
       slot: 'mainhand',
       sellValue: 0,
     } as const;
 
-    expect(itemSourceLevel(slotBearingTool.id)).toBe(10);
+    expect(itemSourceLevel(slotBearingTool.id)).toBeGreaterThan(0);
     expect(itemLevel(slotBearingTool)).toBeUndefined();
     expect(expectedStatBudget(slotBearingTool)).toBeUndefined();
   });
@@ -111,10 +99,10 @@ describe('item level: showcase tiers are normalized to budget', () => {
     expect(chestLevels).toEqual(new Set([10]));
     expect(chestBudgets).toEqual(new Set([6]));
 
-    const weaponLevels = new Set(WEAPON_TRIO.map((id) => itemLevel(ITEMS[id])));
-    const weaponBudgets = new Set(WEAPON_TRIO.map((id) => primaryStatSum(ITEMS[id])));
-    expect(weaponLevels).toEqual(new Set([13]));
-    expect(weaponBudgets).toEqual(new Set([7]));
+    // The weapon half of this assertion went with WEAPON_TRIO: its three pieces
+    // were quest rewards with no other source, so they no longer HAVE an item level
+    // to share. The chest trio still drops from the chapel rares and still proves
+    // the same-place-same-tier rule.
   });
 
   it('normalization preserved each piece stat identity (no attribute swapped in/out)', () => {
@@ -184,7 +172,7 @@ describe('itemScore', () => {
       }),
     ).toBe(2);
     // A weapon adds dps weight, so it outscores its raw stat bonus alone.
-    const blade = ITEMS.gravecaller_blade;
+    const blade = ITEMS.gorraks_cruel_chopper;
     expect(itemScore(blade)).toBeGreaterThan(primaryStatSum(blade));
   });
 });

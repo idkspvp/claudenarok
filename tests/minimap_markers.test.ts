@@ -10,7 +10,7 @@
 // canvas no-magic-values guard is in tests/minimap_painter.test.ts.
 
 import { describe, expect, it } from 'vitest';
-import { QUESTS, STATIONS } from '../src/sim/data';
+import { STATIONS } from '../src/sim/data';
 import { isQuestTurnInNpc } from '../src/sim/types';
 import { createMinimapMarkers, type MinimapMarker, minimapMode } from '../src/ui/minimap_markers';
 import type { IWorld } from '../src/world_api';
@@ -18,20 +18,6 @@ import { assertAllocationStable } from './util/alloc_probe';
 
 // A real quest whose giver is also a turn-in npc, so a single npc can carry both the
 // 'available' ('!') and 'ready' ('?') glyph branches against real content.
-function requireQuestWithGiver() {
-  const quest = Object.values(QUESTS).find((q) => q.giverNpcId);
-  if (!quest) throw new Error('expected a quest with a giverNpcId');
-  return quest;
-}
-function requireReadyQuest() {
-  const quest = Object.values(QUESTS).find(
-    (q) => q.giverNpcId && isQuestTurnInNpc(q, q.giverNpcId),
-  );
-  if (!quest) throw new Error('expected a quest whose giver is also a turn-in npc');
-  return quest;
-}
-const GIVER_QUEST = requireQuestWithGiver();
-const READY_QUEST = requireReadyQuest();
 
 const S = 162;
 const PPY = 1.7; // base scale at zoom 1
@@ -66,8 +52,7 @@ function makeWorld(shape: 'sim' | 'client'): IWorld {
         id: 6,
         kind: 'npc',
         name: 'Giver',
-        templateId: GIVER_QUEST.giverNpcId,
-        questIds: [GIVER_QUEST.id],
+        templateId: 'marshal_redbrook',
         pos: { x: 8, z: PZ },
       }),
     ],
@@ -106,7 +91,6 @@ function makeWorld(shape: 'sim' | 'client'): IWorld {
     cfg: { seed: 42, playerClass: 'warrior' },
     playerId: 1,
     stationPlacements: STATIONS,
-    questState: (q: string) => (q === GIVER_QUEST.id ? 'available' : 'unavailable'),
   } as unknown as IWorld;
 }
 
@@ -169,37 +153,6 @@ describe('createMinimapMarkers: the discriminated union per draw kind', () => {
       { kind: 'ally' }
     >[];
     expect(allies.map((a) => a.ally)).toEqual(['friend', 'guild']);
-  });
-
-  it('marks the aggroed mob and the available-quest npc glyph', () => {
-    const markers = buildMarkers(makeWorld('sim'));
-    const mobs = markers.filter((m) => m.kind === 'mob') as Extract<
-      MinimapMarker,
-      { kind: 'mob' }
-    >[];
-    expect(mobs.map((m) => m.aggro)).toEqual([true, false]);
-    const npcs = markers.filter((m) => m.kind === 'npc') as Extract<
-      MinimapMarker,
-      { kind: 'npc' }
-    >[];
-    // The giver has an available (not ready) quest -> '!'; the quiet npc -> '•'.
-    expect(npcs.map((n) => n.glyph)).toEqual(['!', '•']);
-  });
-
-  it("renders the '?' glyph when an npc has a ready turn-in (distinct from '!')", () => {
-    const world = makeWorld('client') as unknown as {
-      entities: Map<number, { templateId: string; questIds: string[] }>;
-      questState: (q: string) => string;
-    };
-    const npc = world.entities.get(6);
-    if (!npc) throw new Error('expected the seeded giver npc');
-    npc.templateId = READY_QUEST.giverNpcId as string;
-    npc.questIds = [READY_QUEST.id];
-    world.questState = (q) => (q === READY_QUEST.id ? 'ready' : 'unavailable');
-    const npcs = buildMarkers(world as unknown as IWorld).filter(
-      (m) => m.kind === 'npc',
-    ) as Extract<MinimapMarker, { kind: 'npc' }>[];
-    expect(npcs[0].glyph).toBe('?');
   });
 
   it('classifies party members: an on-map disc (alive -> pip) and an off-map arrow (dead)', () => {
@@ -295,7 +248,6 @@ describe('station markers (Professions 2.0)', () => {
       cfg: { seed: 42, playerClass: 'warrior' },
       playerId: 1,
       stationPlacements: STATIONS,
-      questState: () => 'unavailable',
       nodeHarvestableByMe: () => true,
       ...over,
     } as unknown as IWorld;
@@ -357,7 +309,6 @@ describe('station markers (Professions 2.0)', () => {
     // Differing quest/social/profession state (another viewer, effectively):
     // the station layer must not read ANY of it.
     const busy = makeStationWorld('client', {
-      questState: () => 'available',
       nodeHarvestableByMe: () => false,
       socialInfo: {
         friends: [{ id: 20, name: 'Friend', online: true }],
@@ -434,7 +385,6 @@ describe('gather-node markers: the locked dimension', () => {
       stationPlacements: STATIONS,
       inventory: opts.inventory ?? [],
       nodeHarvestableByMe: opts.harvestable ?? (() => true),
-      questState: () => 'unavailable',
     } as unknown as IWorld;
   }
 

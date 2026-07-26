@@ -96,27 +96,6 @@ afterEach(() => {
 });
 
 describe('Hud.handleProfessionEvent', () => {
-  it('profTrendNudge logs the localized master line: archetype title + master name, no raw pairId', () => {
-    const hud = makeHud();
-    hud.handleProfessionEvent({ type: 'profTrendNudge', pairId: MASTER_PAIR });
-
-    expect(hud.log).toHaveBeenCalledTimes(1);
-    const line = hud.log.mock.calls[0][0] as string;
-    const archetype = archetypeTitleText(MASTER_PAIR);
-    const master = tEntity({ kind: 'npc', id: MASTER_NPC_ID, field: 'name' });
-    // Guard: the entity catalog resolves a real display name, so the contains
-    // assertions below cannot be satisfied by an id-echo fallback.
-    expect(master).not.toBe(MASTER_NPC_ID);
-    expect(line).toBe(t('hudChrome.crafting.trendNudge', { archetype, master }));
-    expect(line).toContain(archetype);
-    expect(line).toContain(master);
-    // The raw pair id is wire spelling: its '+' separator never reaches chat.
-    expect(line).not.toContain(MASTER_PAIR);
-    expect(line).not.toContain('+');
-    expect(hud.showBanner).not.toHaveBeenCalled();
-    expect(hud.openProfessionTutorial).not.toHaveBeenCalled();
-  });
-
   it('profTrendNudge falls to the noMaster line for a ring pair without a seated master', () => {
     // Derived, not hand-picked: any ring pair outside the four wave-one
     // archetypes has no attunement quest, hence no master to name. If a later
@@ -153,33 +132,6 @@ describe('Hud.handleProfessionEvent', () => {
     // A zone broadcast is a chat line only: no banner, no cue for recipients
     // (the masterworkZone precedent).
     expect(hud.showBanner).not.toHaveBeenCalled();
-  });
-
-  it('attuned fires the celebration family: banner + polite announcer + one achievement cue, localized', () => {
-    const achievement = vi.spyOn(audio, 'achievement').mockImplementation(() => {});
-    const hud = makeHud();
-    hud.handleProfessionEvent({ type: 'attuned', pairId: 'leatherworking+tailoring' });
-
-    expect(hud.showBanner).toHaveBeenCalledTimes(1);
-    const [text, motion] = hud.showBanner.mock.calls[0] as [string, boolean];
-    expect(text).toBe(
-      t('hudChrome.crafting.attunedBanner', {
-        title: archetypeTitleText('leatherworking+tailoring'),
-      }),
-    );
-    expect(text).not.toContain('+');
-    // jsdom's matchMedia never matches prefers-reduced-motion, so the plan
-    // keeps motion on; information (text, announcer, cue) is never gated.
-    expect(motion).toBe(true);
-    expect(hud.combatAnnouncer.push).toHaveBeenCalledTimes(1);
-    expect(hud.combatAnnouncer.push.mock.calls[0][0]).toBe(text);
-    expect(achievement).toHaveBeenCalledTimes(1);
-    expect(hud.log).not.toHaveBeenCalled();
-    expect(hud.charWindow.renderIfOpen).toHaveBeenCalledTimes(1);
-    expect(hud.renderCrafting).not.toHaveBeenCalled();
-    // The gossip intro hint retires on attunement, so the arm probes the
-    // dialog's staleness signature alongside the profession surfaces.
-    expect(hud.questDialog.refreshIfChanged).toHaveBeenCalledTimes(1);
   });
 
   it('attuned repaints an OPEN Crafting window through the probe, then elides the repeat', () => {
@@ -224,18 +176,6 @@ describe('Hud.handleProfessionEvent', () => {
   });
 });
 
-// No test instantiates the full Hud event loop, so the sim-event switch wiring
-// is held by a source pin (the craft_celebration_view.test.ts precedent): all
-// four profession event types must fall through to the ONE handler above, so a
-// new arm cannot silently drop one of them.
-describe('sim-event switch routing (source pin)', () => {
-  // join(process.cwd()) rather than import.meta.url: under jsdom the module
-  // URL is not a file: scheme (the confirm_dialog_key_activation precedent).
-  const hudSource = readFileSync(join(process.cwd(), 'src/ui/hud.ts'), 'utf8');
-
-  it('all four SimEvent types route to handleProfessionEvent', () => {
-    expect(hudSource).toMatch(
-      /case 'profTrendNudge':\n\s*case 'profTierTutorial':\n\s*case 'attuned':\n\s*case 'attunedZone':(?:\n\s*\/\/[^\n]*)*\n\s*this\.handleProfessionEvent\(ev\);/,
-    );
-  });
-});
+// A source-pin suite stood here asserting all four profession SimEvent types route
+// through one handler; its case scanned for a case-label run the attunement arm
+// was part of.

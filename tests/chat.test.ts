@@ -1198,8 +1198,6 @@ describe('chat module (direct, no Sim)', () => {
       setPlayerLevel: (lvl: number, pid?: number) => calls.push(['level', lvl, pid]),
       players: new Map([[1, purse]]),
       addItem: (id: string, n: number, pid?: number) => calls.push(['item', id, n, pid]),
-      completeQuestForDev: (questId: string, pid?: number) => calls.push(['quest', questId, pid]),
-      completeCurrentQuestsForDev: (pid?: number) => calls.push(['quests', pid]),
       spawnDevBot: (name: string) => {
         calls.push(['bot', name]);
         return 7;

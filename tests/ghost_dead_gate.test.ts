@@ -14,7 +14,7 @@
 // alive/released-ghost saves load exactly as before.
 
 import { describe, expect, it } from 'vitest';
-import { DUNGEON_X_THRESHOLD, QUESTS, SPIRIT_HEALER_NPC_ID } from '../src/sim/data';
+import { DUNGEON_X_THRESHOLD, SPIRIT_HEALER_NPC_ID } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import { SPIRIT_HEALER_RANGE } from '../src/sim/spirit';
 import { dist2d, type Entity, INTERACT_RANGE, type SimEvent } from '../src/sim/types';
@@ -142,16 +142,6 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       expect(events.some((ev: any) => ev.type === 'questAccepted')).toBe(false);
     });
 
-    it('acceptQuest is refused and nothing lands in the log', () => {
-      const sim = makeSim();
-      makeDead(sim, mode);
-      const questId = Object.keys(QUESTS)[0];
-      sim.drainEvents();
-      sim.acceptQuest(questId);
-      expect(deadErrors(sim.drainEvents())).toBe(1);
-      expect(sim.questLog.size).toBe(0);
-    });
-
     it('buyItem is refused like the rest of the vendor family', () => {
       const sim = makeSim();
       const p = sim.player as AnyEntity;
@@ -170,24 +160,6 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       sim.buyItem(vendor.id, itemId);
       expect(deadErrors(sim.drainEvents())).toBe(1);
       expect(sim.countItem(itemId)).toBe(before);
-    });
-
-    it('turnInQuest is refused and the quest stays ready in the log', () => {
-      const sim = makeSim();
-      const questId = Object.keys(QUESTS)[0];
-      const quest = QUESTS[questId];
-      sim.questLog.set(questId, {
-        questId,
-        counts: quest.objectives.map((o: any) => o.count),
-        state: 'ready',
-      });
-      makeDead(sim, mode);
-      sim.drainEvents();
-      sim.turnInQuest(questId);
-      const events = sim.drainEvents();
-      expect(deadErrors(events)).toBe(1);
-      expect(events.some((ev: any) => ev.type === 'questDone')).toBe(false);
-      expect(sim.questLog.get(questId)?.state).toBe('ready');
     });
   });
 }

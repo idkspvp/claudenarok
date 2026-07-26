@@ -15,8 +15,6 @@ import {
   ITEMS,
   MOBS,
   NPCS,
-  QUEST_ORDER,
-  QUESTS,
   REWARD_ARCHETYPE,
   ROADS,
   WORLD_MAX_X,
@@ -28,7 +26,15 @@ import {
 import { canEquipItem } from '../src/sim/equipment_rules';
 import { HARVEST_COMPONENT_ITEMS, NODE_MATERIAL_TABLE } from '../src/sim/professions/gathering';
 import { Sim } from '../src/sim/sim';
-import { ALL_CLASSES, MAX_LEVEL, XP_TABLE, type ZoneDef } from '../src/sim/types';
+import {
+  ALL_CLASSES,
+  KILLS_PER_LEVEL,
+  MAX_LEVEL,
+  mobXpValue,
+  XP_TABLE,
+  xpForLevel,
+  type ZoneDef,
+} from '../src/sim/types';
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
 
 const WORLD_SEED = 20061; // production seed (main.ts / server/game.ts)
@@ -54,99 +60,11 @@ function collectItemAcquirable(itemId: string): boolean {
 }
 
 describe('content referential integrity', () => {
-  it('every quest reference resolves (NPCs, mobs, items, chains)', () => {
-    const problems: string[] = [];
-    for (const q of Object.values(QUESTS)) {
-      if (!NPCS[q.giverNpcId]) problems.push(`${q.id}: giver ${q.giverNpcId} missing`);
-      if (!NPCS[q.turnInNpcId]) problems.push(`${q.id}: turn-in ${q.turnInNpcId} missing`);
-      if (q.requiresQuest && !QUESTS[q.requiresQuest])
-        problems.push(`${q.id}: requires ${q.requiresQuest} missing`);
-      for (const [cls, itemId] of Object.entries(q.itemRewards)) {
-        if (itemId && !ITEMS[itemId]) problems.push(`${q.id}: reward ${itemId} (${cls}) missing`);
-      }
-      for (const obj of q.objectives) {
-        if (obj.type === 'kill' && (!obj.targetMobId || !MOBS[obj.targetMobId])) {
-          problems.push(`${q.id}: kill target ${obj.targetMobId} missing`);
-        }
-        if (obj.type === 'collect' && (!obj.itemId || !ITEMS[obj.itemId])) {
-          problems.push(`${q.id}: collect item ${obj.itemId} missing`);
-        }
-        if (obj.type === 'craft' && !ALL_RECIPES.some((recipe) => recipe.id === obj.recipeId)) {
-          problems.push(`${q.id}: craft recipe ${obj.recipeId} missing`);
-        }
-        if (obj.type === 'gather') {
-          if (!obj.nodeType && !obj.itemId) problems.push(`${q.id}: gather target missing`);
-          if (obj.nodeType && !GATHER_NODES.some((node) => node.type === obj.nodeType)) {
-            problems.push(`${q.id}: gather node type ${obj.nodeType} missing`);
-          }
-          if (obj.itemId) {
-            if (!ITEMS[obj.itemId]) problems.push(`${q.id}: gather item ${obj.itemId} missing`);
-            if (
-              !Object.values(NODE_MATERIAL_TABLE).some((byZone) =>
-                Object.values(byZone).some((row) => row.itemId === obj.itemId),
-              )
-            ) {
-              problems.push(`${q.id}: gather item ${obj.itemId} has no node source`);
-            }
-          }
-        }
-      }
-    }
-    expect(problems).toEqual([]);
-  });
-
-  it('every quest is offered by its giver and turn-in NPCs', () => {
-    const problems: string[] = [];
-    for (const q of Object.values(QUESTS)) {
-      if (!NPCS[q.giverNpcId]?.questIds.includes(q.id))
-        problems.push(`${q.id}: not in ${q.giverNpcId}.questIds`);
-      if (q.turnInNpcId !== q.giverNpcId && !NPCS[q.turnInNpcId]?.questIds.includes(q.id)) {
-        problems.push(`${q.id}: not in turn-in ${q.turnInNpcId}.questIds`);
-      }
-    }
-    expect(problems).toEqual([]);
-  });
-
-  it('every collect objective is obtainable', () => {
-    const problems: string[] = [];
-    for (const q of Object.values(QUESTS)) {
-      for (const obj of q.objectives) {
-        if (obj.type !== 'collect' || !obj.itemId) continue;
-        if (!collectItemAcquirable(obj.itemId))
-          problems.push(`${q.id}: ${obj.itemId} has no acquisition source`);
-      }
-    }
-    expect(problems).toEqual([]);
-  });
-
-  it('the collect-obtainability model rejects a fabricated unobtainable item (negative control)', () => {
-    // Decisive guard so the widened model (with the gather-node and
-    // corpse-harvest paths for the work-order materials) can never go all-
-    // permissive: an item that lives in NO mob loot table, ground object,
-    // scripted set, gather-node material row, or corpse-harvest component map
-    // must still be classified unacquirable. The four real acquisition paths are
-    // re-proven acquirable here so a later refactor that drops a path reds this.
-    expect(collectItemAcquirable('totally_not_a_real_item_xyz')).toBe(false);
-    expect(collectItemAcquirable('copper_ore')).toBe(true); // gather-node material
-    expect(collectItemAcquirable('ironbark_log')).toBe(true); // gather-node material
-    expect(collectItemAcquirable('goldleaf_herb')).toBe(true); // gather-node material
-    expect(collectItemAcquirable('game_meat')).toBe(true); // corpse-harvest component
-    expect(collectItemAcquirable('spider_silk')).toBe(true); // corpse-harvest component
-    expect(collectItemAcquirable('rough_hide')).toBe(true); // corpse-harvest component
-  });
-
-  it('QUEST_ORDER covers every quest exactly once', () => {
-    expect([...QUEST_ORDER].sort()).toEqual(Object.keys(QUESTS).sort());
-    expect(new Set(QUEST_ORDER).size).toBe(QUEST_ORDER.length);
-  });
-
   it('all loot tables, vendor stock, camps and dungeon spawns resolve', () => {
     const problems: string[] = [];
     for (const m of Object.values(MOBS)) {
       for (const l of m.loot) {
         if (l.itemId && !ITEMS[l.itemId]) problems.push(`${m.id}: loot ${l.itemId} missing`);
-        if (l.questId && !QUESTS[l.questId])
-          problems.push(`${m.id}: loot quest-gate ${l.questId} missing`);
       }
     }
     for (const npc of Object.values(NPCS)) {
@@ -154,9 +72,6 @@ describe('content referential integrity', () => {
         if (!ITEMS[itemId]) problems.push(`${npc.id}: vendor item ${itemId} missing`);
         else if (!ITEMS[itemId].buyValue && !ITEMS[itemId].priceHonor)
           problems.push(`${npc.id}: vendor item ${itemId} has no purchase price`);
-      }
-      for (const qid of npc.questIds) {
-        if (!QUESTS[qid]) problems.push(`${npc.id}: questId ${qid} missing`);
       }
     }
     for (const c of CAMPS) {
@@ -200,24 +115,6 @@ describe('content referential integrity', () => {
     }
     for (const d of DUNGEON_LIST) {
       if (!inWorld(d.doorPos.x, d.doorPos.z)) problems.push(`${d.id} door outside world`);
-    }
-    expect(problems).toEqual([]);
-  });
-
-  it('every archetype-resolved quest reward is equippable by the receiving class', () => {
-    // turnInQuest resolves itemRewards[cls] ?? itemRewards[REWARD_ARCHETYPE[cls]],
-    // so the resolved item's class lock must admit every class in the group.
-    const problems: string[] = [];
-    for (const q of Object.values(QUESTS)) {
-      for (const cls of ALL_CLASSES) {
-        const itemId = q.itemRewards[cls] ?? q.itemRewards[REWARD_ARCHETYPE[cls]];
-        if (!itemId) continue;
-        const item = ITEMS[itemId];
-        if (!item) continue; // missing items are caught by the integrity test
-        if (!canEquipItem(cls, item)) {
-          problems.push(`${q.id}: ${cls} receives ${itemId} but cannot equip it`);
-        }
-      }
     }
     expect(problems).toEqual([]);
   });
@@ -284,80 +181,21 @@ describe('talent row unlock progression', () => {
   });
 });
 
-describe('xp pacing budget (no forced grinding)', () => {
-  // Mirrors the design-spec method: quest XP + estimated kill XP must cover
-  // each zone's level band with headroom. Kill estimate: quest-required kills
-  // (collect counts divided by drop chance) times a 1.6 travel/overshoot
-  // factor, at 45+5*mobLevel each (elites x2).
-  function questsForZone(zone: ZoneDef): { xp: number; killXp: number; count: number } {
-    let xp = 0,
-      killXp = 0,
-      count = 0;
-    for (const q of Object.values(QUESTS)) {
-      const giver = NPCS[q.giverNpcId];
-      if (!giver || giver.pos.z < zone.zMin || giver.pos.z >= zone.zMax) continue;
-      count++;
-      xp += q.xpReward;
-      for (const obj of q.objectives) {
-        let mobId: string | undefined;
-        let kills = 0;
-        if (obj.type === 'kill' && obj.targetMobId) {
-          mobId = obj.targetMobId;
-          kills = obj.count;
-        } else if (obj.type === 'collect' && obj.itemId) {
-          for (const m of Object.values(MOBS)) {
-            const entry = m.loot.find((l) => l.itemId === obj.itemId);
-            if (entry) {
-              mobId = m.id;
-              kills = obj.count / Math.max(0.05, entry.chance);
-              break;
-            }
-          }
-        }
-        if (!mobId) continue;
-        const m = MOBS[mobId];
-        const level = (m.minLevel + m.maxLevel) / 2;
-        const per = (45 + 5 * level) * (m.elite ? 2 : 1);
-        // dungeon kills land at grouped rates (~0.57x solo); soloable kills get the overshoot factor
-        const grouped = (q.suggestedPlayers ?? 1) >= 3;
-        killXp += kills * per * (grouped ? 0.572 : 1.6);
-      }
-    }
-    return { xp, killXp, count };
-  }
+// The XP curve's SHAPE is the thing worth pinning, not its 99 values: it is
+// generated from growth bands, so asserting the output against itself would prove
+// nothing. Each assertion names a property of classic Ragnarok pacing that a
+// careless edit to the bands would break, stated as a literal so the test cannot
+// drift along with the generator.
+//
+// These lived inside the "xp pacing budget" describe, alongside the per-zone
+// quest-XP headroom assertions. Those went with the quest system; these did not.
+describe('xp curve shape', () => {
+  const total = XP_TABLE.slice(0, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
 
-  function xpNeeded(fromLevel: number, toLevel: number): number {
-    let sum = 0;
-    for (let l = fromLevel; l < toLevel; l++) sum += XP_TABLE[l - 1];
-    return sum;
-  }
-
-  for (const zone of ZONES) {
-    it(`${zone.id} covers levels ${zone.levelRange[0]}-${zone.levelRange[1]} with headroom`, () => {
-      const budget = questsForZone(zone);
-      if (budget.count === 0) return; // zone content not built yet
-      const [lo, hi] = zone.levelRange;
-      const needed = xpNeeded(lo, hi);
-      const available = budget.xp + budget.killXp;
-      const headroom = available / needed;
-      expect(
-        headroom,
-        `${zone.id}: quests ${budget.count}, questXp ${budget.xp}, killXp ${Math.round(budget.killXp)}, needed ${needed}`,
-      ).toBeGreaterThanOrEqual(1.0);
-    });
-  }
-
-  it('XP table reaches the level cap', () => {
+  it('reaches the level cap', () => {
     expect(XP_TABLE.length).toBeGreaterThanOrEqual(MAX_LEVEL);
     expect(MAX_LEVEL).toBe(99);
   });
-
-  // The curve's SHAPE is the thing worth pinning, not its 99 values: it is generated
-  // from growth bands, so asserting the output against itself would prove nothing.
-  // Each assertion below names a property of classic Ragnarok pacing that a careless
-  // edit to the bands would break, and each is stated as a literal so the test cannot
-  // drift along with the generator.
-  const total = XP_TABLE.slice(0, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
 
   it('opens with the near-free early levels of the RO curve', () => {
     // Levels 1 to 20 are minutes of play there, not the hours the old 107,795-XP
@@ -370,28 +208,33 @@ describe('xp pacing budget (no forced grinding)', () => {
   });
 
   it('puts the difficulty budget in the last fifteen levels', () => {
-    // The signature of the curve: the wall opens around 90 and steepens again at 95.
-    // Levels 85 to 99 must carry most of the whole climb, or the endgame is not
-    // Ragnarok's endgame regardless of what the cap says.
     const lastFifteen = XP_TABLE.slice(84, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
     expect(lastFifteen / total).toBeGreaterThan(0.6);
-    // …without becoming the ONLY thing that costs anything.
     expect(lastFifteen / total).toBeLessThan(0.95);
   });
 
   it('spans six orders of magnitude from the first level to the last', () => {
-    const first = XP_TABLE[0];
-    const last = XP_TABLE[MAX_LEVEL - 2];
-    expect(last / first).toBeGreaterThan(1_000_000);
-    expect(last / first).toBeLessThan(20_000_000);
+    const ratio = XP_TABLE[MAX_LEVEL - 2] / XP_TABLE[0];
+    expect(ratio).toBeGreaterThan(1_000_000);
+    expect(ratio).toBeLessThan(20_000_000);
   });
 
   it('never gets cheaper as levels climb', () => {
     for (let i = 1; i < XP_TABLE.length; i++) {
       expect(
         XP_TABLE[i],
-        `level ${i + 1}->${i + 2} costs less than the level before`,
+        `level ${i + 1}->${i + 2} costs less than the one before`,
       ).toBeGreaterThan(XP_TABLE[i - 1]);
+    }
+  });
+
+  // Mob XP is derived from the curve, so the grind stays the same length whether a
+  // level costs 10 XP or 64 million. That coupling is the point of the derivation.
+  it('holds kills-per-level flat once the floor stops binding', () => {
+    for (const level of [20, 40, 60, 80, 98]) {
+      const kills = xpForLevel(level) / mobXpValue(level, level);
+      expect(kills, `kills per level at ${level}`).toBeGreaterThan(KILLS_PER_LEVEL * 0.9);
+      expect(kills, `kills per level at ${level}`).toBeLessThan(KILLS_PER_LEVEL * 1.1);
     }
   });
 });

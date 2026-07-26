@@ -699,7 +699,6 @@ export function craftItem(
     }
     // The dirty mark also covers the craft-skill gain the resolve applied.
     ctx.markDeedsDirty(r.meta.entityId);
-    ctx.onRecipeCraftedForQuests(recipeId, r.meta);
   }
   return result;
 }

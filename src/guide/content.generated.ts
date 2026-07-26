@@ -3733,44 +3733,12 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "crest": "/ui/deeds/feat_brightwood_relic.webp"
   },
   {
-    "id": "prog_crown_below",
-    "name": "The Crown Below",
-    "category": "progression",
-    "renown": 25,
-    "feat": false,
-    "crest": "/ui/deeds/prog_crown_below.webp"
-  },
-  {
-    "id": "prog_mere_at_rest",
-    "name": "The Mere at Rest",
-    "category": "progression",
-    "renown": 25,
-    "feat": false,
-    "crest": "/ui/deeds/prog_mere_at_rest.webp"
-  },
-  {
-    "id": "prog_callused_hands",
-    "name": "Callused Hands",
-    "category": "progression",
-    "renown": 5,
-    "feat": false,
-    "crest": "/ui/deeds/prog_callused_hands.webp"
-  },
-  {
     "id": "prog_tools_of_the_trade",
     "name": "Tools of the Trade",
     "category": "progression",
     "renown": 10,
     "feat": false,
     "crest": "/ui/deeds/prog_tools_of_the_trade.webp"
-  },
-  {
-    "id": "dgn_nythraxis_crypt",
-    "name": "What the Crypt Kept",
-    "category": "dungeon",
-    "renown": 10,
-    "feat": false,
-    "crest": "/ui/deeds/dgn_nythraxis_crypt.webp"
   },
   {
     "id": "chr_marsh_first_cast",
@@ -8653,62 +8621,7 @@ export const GUIDE_PROF_ECONOMY: GuideProfEconomy = {
   "workOrders": {
     "cadenceMinutes": 30,
     "payoutPctOfVendorValue": 50,
-    "orders": [
-      {
-        "id": "q_prof_workorder_forge",
-        "name": "Forge Work Order",
-        "master": "Forgemistress Darva",
-        "hub": "Eastbrook",
-        "material": "Copper Ore",
-        "count": 8,
-        "coinCopper": 16
-      },
-      {
-        "id": "q_prof_workorder_kitchens",
-        "name": "Kitchens Work Order",
-        "master": "Cook Marlow",
-        "hub": "Eastbrook",
-        "material": "Game Meat",
-        "count": 8,
-        "coinCopper": 16
-      },
-      {
-        "id": "q_prof_workorder_loom",
-        "name": "Loom Work Order",
-        "master": "Weaver Ottilie",
-        "hub": "Eastbrook",
-        "material": "Spider Silk",
-        "count": 6,
-        "coinCopper": 15
-      },
-      {
-        "id": "q_prof_workorder_toolworks",
-        "name": "Toolworks Work Order",
-        "master": "Tinker Gizzel",
-        "hub": "Eastbrook",
-        "material": "Ironbark Log",
-        "count": 8,
-        "coinCopper": 16
-      },
-      {
-        "id": "q_prof_workorder_tannery",
-        "name": "Tannery Work Order",
-        "master": "Tanner Hesk",
-        "hub": "Fenbridge",
-        "material": "Rough Hide",
-        "count": 8,
-        "coinCopper": 20
-      },
-      {
-        "id": "q_prof_workorder_apothecary",
-        "name": "Apothecary Work Order",
-        "master": "Alchemist Verane",
-        "hub": "Highwatch",
-        "material": "Goldleaf Herb",
-        "count": 6,
-        "coinCopper": 45
-      }
-    ]
+    "orders": []
   }
 };
 
