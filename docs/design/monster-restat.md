@@ -146,19 +146,50 @@ around them, not to a first pass.
   task on the twelve existing builds, so it costs no art, but it is a separate
   piece of work and pretending the current roster stretches that far would make
   every area thin.
-- **Drop tables and cards.** `B5` and `B4`, and they come AFTER this pass rather
-  than with it, for a reason worth stating. The mechanism already exists:
-  `MobTemplate.loot` is a `LootEntry[]` with a chance, a money arm and exclusive
-  `rollGroup` partitioning. What is missing is Ragnarok's shape on top of it,
-  per-mille rates and a card slot, and a card IS a monster's identity: it names
-  the monster and carries an effect keyed to race, element or size. Authoring one
-  against a stat block that has not settled is authoring it twice.
-
-  There is a second reason to keep drops as their own pass, and it is not on the
-  roadmap: **deleting the quest system orphaned about 130 items**, which now have
-  no source in the world at all. Drop tables are where most of them have to land,
-  so `B5` is really two jobs wearing one name, and sizing it as "add loot to
-  thirty-one monsters" would undercount it badly.
+- **Cards and rare drops.** `B4` and the rest of `B5`. See the drop model below:
+  the material arm is authored HERE, the other two arms are not.
 - **`MOB_AP_PER_DPS`.** It exists only because monster attack power is on the
   pre-conversion scale. Retiring it is `C6` and it becomes possible the moment
   the blocks above are authored, not before.
+
+## The drop model, in three arms
+
+Settled here rather than deferred, because one of the three arms has to be
+authored in the SAME pass as the stat blocks: a material keyed to an area is one
+more line on a record we are already editing, and revisiting thirty-one records
+to add it later is pure waste.
+
+The mechanism needs nothing new. `MobTemplate.loot` is already a `LootEntry[]`
+with a chance, a money arm and exclusive `rollGroup` partitioning, and crafting
+already exists as a whole subsystem (`src/sim/professions/crafting.ts` against
+`src/sim/content/recipes.ts`).
+
+| Arm | What drops | Rate | When |
+|---|---|---|---|
+| **material** | one or two per AREA, from most things in it | common, above 50% | **this pass** |
+| **rare** | a finished piece, from a specific monster | 0.1% to a few percent | `B5` |
+| **card** | the monster's own card | 0.01% to 0.05% | `B4` |
+
+The three exist to do different jobs and dropping any of them collapses the
+economy into something duller.
+
+**Materials are the floor.** An area's material is what makes the area worth
+standing in, and taking it to an NPC to craft that area's gear is what turns
+"I killed things here" into a reward you chose rather than one you rolled for.
+It also solves a problem sitting in the tree right now that has nothing to do
+with Ragnarok: **deleting the quest system orphaned about 130 items**, which have
+no source in the world at all any more. Scattering 130 items across drop tables
+would turn every table into noise; making them craft OUTPUTS is a list, and each
+one lands somewhere on purpose.
+
+**Rare drops and cards are the ceiling**, and the reason not to stop at the floor.
+A purely deterministic material-to-craft loop has no moment in it. Ragnarok's drop
+rates are deliberately spread across four orders of magnitude: 12% of its drops
+are above 50% and 22% are below 0.1%, which is the same table holding both the
+thing you always get and the thing you tell people about.
+
+**Not every monster gets a card, and the rate is brutal.** Only 52% of
+pre-renewal monsters carry one, at a median rate of 0.01%. That rarity IS the
+system: a roster where all thirty-one drop cards at a comfortable rate is one a
+player completes in a week, after which the cards mean nothing. About half the
+roster, at 0.01% to 0.05%, keeps a card an event.
