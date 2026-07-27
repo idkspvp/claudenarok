@@ -44,7 +44,7 @@
 | `slam` | 16 | 15 | 1.5s cast | weaponStrike +25 |
 | `cleave` | 18 | 20 | inst | aoeDamage 20 to 26, radius 5 (caster-centered) |
 
-**Sanity**, L14: white ~28 + HS R3 (+32) ≈ 60/swing → 292 hp in ~5 offensive swings + Rend (~12s) ✓. L20: white ~38 + HS R4 (+44) ≈ 82 → 400 hp in ~5 swings, Execute finishes the last 20% ✓.
+**Sanity**, L14: white ~28 + HS R3 (+32) ≈ 60/swing → 292 hp in ~5 offensive swings + Rend (~12s) OK. L20: white ~38 + HS R4 (+44) ≈ 82 → 400 hp in ~5 swings, Execute finishes the last 20% OK.
 
 ---
 
@@ -89,7 +89,7 @@
 | `temporal_barrier` | 5 (R2 12, R3 18) | 50 / 75 / 105 | inst, 12cd | absorb 55 / 100 / 160 + 25% Spell Power, 10s (friendly) |
 | `pyroblast` | 20 | 125 | 6.0s cast | directDamage 75 to 100 + dot 24/12s (6×4), big nuke + burn |
 
-**Sanity**, L14: Fireball R3 avg 42 (+6 dot) ≈ 48/cast → 292 hp ≈ 6.1 casts ✓. L20: FB R4 avg 68 (+12) = 80 → 400 hp = 5 casts (+Fire Blast R3 trims one) ✓.
+**Sanity**, L14: Fireball R3 avg 42 (+6 dot) ≈ 48/cast → 292 hp ≈ 6.1 casts OK. L20: FB R4 avg 68 (+12) = 80 → 400 hp = 5 casts (+Fire Blast R3 trims one) OK.
 
 ---
 
@@ -119,7 +119,7 @@
 | `ambush` | 16 | 60 |, | weaponStrike weaponMult 2.5, +28, requiresBehind, dagger, awardsCombo 1 |
 | `adrenaline_rush` | 20 | 0 | 180s, offGcd | gainResource 60 (energy) |
 
-**Sanity**, L14: SS R3 special ≈ 40 to 45; 5 builders (~210) + Eviscerate R2 (~68) + white ≈ 292 hp in ~8 actions ✓. L20: SS R4 ≈ 55 to 60; 5 SS (~285) + Evisc R3 (~105) = 390 + white ≥ 400 ✓.
+**Sanity**, L14: SS R3 special ≈ 40 to 45; 5 builders (~210) + Eviscerate R2 (~68) + white ≈ 292 hp in ~8 actions OK. L20: SS R4 ≈ 55 to 60; 5 SS (~285) + Evisc R3 (~105) = 390 + white ≥ 400 OK.
 
 ---
 
@@ -156,7 +156,7 @@
 | `exorcism` | 14 | 55 | inst, 15cd, 30yd | directDamage 46 to 56 (holy nuke; undead-only restriction omitted, no such flag) |
 | `consecration` | 18 | 60 | inst, 8cd | aoeDamage 28 to 34, radius 8 (caster-centered) |
 
-**Sanity**, L14: swing ~26 + Seal R2 (+7) ≈ 33, + Judgement R2 (~23/10s) + Exorcism (~51/15s) → 292 hp ≈ 9 to 10 swings, ~20s ✓ (hybrid pace). L20: swing ~42 w/ Seal R3, judge ~37 → 400 hp ≈ 8 swings ✓.
+**Sanity**, L14: swing ~26 + Seal R2 (+7) ≈ 33, + Judgement R2 (~23/10s) + Exorcism (~51/15s) → 292 hp ≈ 9 to 10 swings, ~20s OK (hybrid pace). L20: swing ~42 w/ Seal R3, judge ~37 → 400 hp ≈ 8 swings OK.
 
 ---
 
@@ -190,7 +190,7 @@
 | `aimed_shot` | 16 | 50 | 3.0s cast, 6cd, 8 to 35yd | directDamage 50 to 62 |
 | `rapid_fire` | 20 | 0 | inst, 300cd, offGcd | selfBuff buff_haste 1.4, 15s |
 
-**Sanity**, L14: auto ~17/2.3s + Arcane R2 (~27/6s) + Sting R2 (35) → 292 hp ≈ 8 autos + 3 arcanes + sting, ~18s ✓. L20: Aimed (~56) + Arcane R3 (~43) + Sting R3 (55) + ~7 autos (~170) ≈ 400 ✓.
+**Sanity**, L14: auto ~17/2.3s + Arcane R2 (~27/6s) + Sting R2 (35) → 292 hp ≈ 8 autos + 3 arcanes + sting, ~18s OK. L20: Aimed (~56) + Arcane R3 (~43) + Sting R3 (55) + ~7 autos (~170) ≈ 400 OK.
 
 ---
 
@@ -229,7 +229,7 @@
 | `mind_flay` | 16 | 45 | 3s channel ×3 ticks | drainTick 12 to 12 `healFrac: 0` + slow 0.5/3s (reuses drainTick, no new type) |
 | `flash_heal` | 20 | 75 | 1.5s | heal 120 to 142 |
 
-**Sanity**, L14: SWP R2 (54) + Smite R3 avg 47 ×5 ≈ 289 → ~6 casts ✓. L20: SWP R3 (84) + MB R3 (~90) + 3× Smite R4 (~213) ≈ 387 + wand-less white → ~5 to 6 GCDs ✓.
+**Sanity**, L14: SWP R2 (54) + Smite R3 avg 47 ×5 ≈ 289 → ~6 casts OK. L20: SWP R3 (84) + MB R3 (~90) + 3× Smite R4 (~213) ≈ 387 + wand-less white → ~5 to 6 GCDs OK.
 
 ---
 
@@ -266,7 +266,7 @@
 | `ghost_wolf` | 16 | 35 | 2.0s cast | selfBuff buff_speed 1.4, 10min |
 | `stormstrike` | 20 | 40 | inst, 12cd | weaponStrike +26 |
 
-**Sanity**, L14: LB R3 avg 48 → 292/48 ≈ 6.1 casts ✓ (the brief's own anchor). L20: LB R4 avg 80 → 5 casts, or shock-weave melee w/ Rockbiter R3 ✓.
+**Sanity**, L14: LB R3 avg 48 → 292/48 ≈ 6.1 casts OK (the brief's own anchor). L20: LB R4 avg 80 → 5 casts, or shock-weave melee w/ Rockbiter R3 OK.
 
 ---
 
@@ -305,7 +305,7 @@
 | `searing_pain` | 16 | 35 | 1.5s | directDamage 30 to 38 |
 | `shadowburn` | 20 | 70 | inst, 15cd | directDamage 56 to 66 |
 
-**Sanity**, L14: Corruption R2 (72) + CoA R2 (72) + 3× SB R3 (~143) ≈ 287 + Drain ✓ (~6 GCDs, dot-and-drain pace). L20: Corruption R3 + CoA R3 (220 over time) + 2 to 3 SB R4 (~152 to 228) ≥ 400 ✓.
+**Sanity**, L14: Corruption R2 (72) + CoA R2 (72) + 3× SB R3 (~143) ≈ 287 + Drain OK (~6 GCDs, dot-and-drain pace). L20: Corruption R3 + CoA R3 (220 over time) + 2 to 3 SB R4 (~152 to 228) ≥ 400 OK.
 
 ---
 
@@ -361,7 +361,7 @@
 | `tigers_fury` | 20 | 30 | inst | Cat | selfBuff buff_ap +40, 6s |
 | `rip` | 20 | 30 | inst | Cat | dot 60/12s finisher (spendsCombo) |
 
-**Sanity**, L14: Moonfire R2 open (19+24) + 6× Wrath R3 (avg 41.5 → 249) ≈ 292 in ~7 casts ✓. L20: Wrath R4 avg 65.5 → 400/65.5 ≈ 6.1 casts (Starfire/Moonfire R3 trims to ~5) ✓.
+**Sanity**, L14: Moonfire R2 open (19+24) + 6× Wrath R3 (avg 41.5 → 249) ≈ 292 in ~7 casts OK. L20: Wrath R4 avg 65.5 → 400/65.5 ≈ 6.1 casts (Starfire/Moonfire R3 trims to ~5) OK.
 
 ---
 
