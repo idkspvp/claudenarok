@@ -1,4 +1,4 @@
-# SESSION W2 — Mob mechanic / aura name rename (+ the S3 matcher)
+# SESSION W2, Mob mechanic / aura name rename (+ the S3 matcher)
 
 > Model: Fable 5 / Opus 4.8, xhigh effort. Harness: Claude Code. Branch: `feature/ip-pivot` (World track worktree, runs AFTER W1). Mode: plain (verify).
 > READ FIRST: `00-SHARED-CONVENTIONS.md` (the two English source layers, the regen sequence, the contracts/gates, the standard session loop, the validation commands) AND the LOCKED `NAME-MAP.md` (apply it verbatim, never invent a name off-map). Do not re-derive them.
@@ -11,11 +11,11 @@ Rename the 4 verbatim WoW mob-mechanic display names and update their `sim_i18n`
 
 ## Scope (verified)
 Edit the inline `name:` string on each mob mechanic object AND its matching `AURA_NAME_KEY` entry in `src/ui/sim_i18n.ts`, per the NAME-MAP. Confirm the CURRENT line numbers / surrounding mechanic keys with ONE Explore agent this session (the numbers below are audit-captured on v0.18.0 and may drift; never read `dungeons.ts`/`zone2.ts`/`zone3.ts`/`sim_i18n.ts` whole).
-- `src/sim/content/dungeons.ts` — Bastion Revenant on-hit `mortalStrike` mechanic, `name:'Mortal Strike'` -> `Maiming Strike` (matches the V1 warrior ability rename for the shared string).
-- `src/sim/content/zone2/` — Grubjaw purge mechanic, `name:'Devour Magic'` -> `Rend Enchantment`.
-- `src/sim/content/zone3/` — Corrupted Priest `petSpell` mechanic, `name:'Mind Blast'` -> `Psychic Lash`.
-- `src/sim/content/dungeons.ts` — Korgath stomp mechanic, `name:'War Stomp'` -> `Ground Slam` (peers already use Ground Slam / Skull Smash).
-- `src/ui/sim_i18n.ts` — the 4 matching `AURA_NAME_KEY` entries: swap each `old` English string to the `new` string so `localizeSimText` still resolves the mechanic name to its key.
+- `src/sim/content/dungeons.ts`, Bastion Revenant on-hit `mortalStrike` mechanic, `name:'Mortal Strike'` -> `Maiming Strike` (matches the V1 warrior ability rename for the shared string).
+- `src/sim/content/zone2/`, Grubjaw purge mechanic, `name:'Devour Magic'` -> `Rend Enchantment`.
+- `src/sim/content/zone3/`, Corrupted Priest `petSpell` mechanic, `name:'Mind Blast'` -> `Psychic Lash`.
+- `src/sim/content/dungeons.ts`, Korgath stomp mechanic, `name:'War Stomp'` -> `Ground Slam` (peers already use Ground Slam / Skull Smash).
+- `src/ui/sim_i18n.ts`, the 4 matching `AURA_NAME_KEY` entries: swap each `old` English string to the `new` string so `localizeSimText` still resolves the mechanic name to its key.
 
 These are `src/sim/` content records: single English source is the inline `.name` (no catalog duplicate to keep byte-identical here). Then regen if the resolved table changes (`i18n:gen` + `i18n:hash -- --write` + `wiki:content`).
 
@@ -52,8 +52,8 @@ Note the current `ip_scrub` failures for Mortal Strike / Devour Magic / Mind Bla
 - **src/sim purity:** the content edits stay DOM/Three/rng-free (`tests/architecture.test.ts`).
 
 ## Out of scope
-- Any mechanic BEHAVIOR or value (cooldown, damage, chance, radius, trigger, affix wiring) — display string only.
-- Player ABILITY names — those are V1 (`content/classes.ts` + `i18n.catalog/abilities.ts`). W2 touches only the mob-side inline mechanic `name` and its matcher.
+- Any mechanic BEHAVIOR or value (cooldown, damage, chance, radius, trigger, affix wiring), display string only.
+- Player ABILITY names, those are V1 (`content/classes.ts` + `i18n.catalog/abilities.ts`). W2 touches only the mob-side inline mechanic `name` and its matcher.
 - Talent names (V2), item names (W1), creature families / demon pets (C1/C2).
 - The locale overlays and any "improvement" or reordering of the touched content records.
 

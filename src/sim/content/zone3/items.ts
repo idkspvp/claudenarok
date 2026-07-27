@@ -1,4 +1,4 @@
-// Zone 3 — Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
+// Zone 3, Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
 // the Gravewyrm, an ancient dragon sealed beneath the peaks. Highwatch holds
 // the wall against ogres, waking elementals, and the open chanting of the
 // Wyrmcult at the Gravewyrm Sanctum gates.
@@ -337,7 +337,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     sellValue: 1050,
     requiredClass: ['warrior', 'paladin', 'shaman'],
   },
-  // Brutok Skullsmasher (rare ogre) — guaranteed trophy + warbelt
+  // Brutok Skullsmasher (rare ogre), guaranteed trophy + warbelt
   skullsmasher_warbelt: {
     id: 'skullsmasher_warbelt',
     name: "Skullsmasher's Warbelt",

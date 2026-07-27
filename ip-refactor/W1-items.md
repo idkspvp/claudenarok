@@ -1,7 +1,7 @@
-# SESSION W1 — Item / set / augment display rename
+# SESSION W1, Item / set / augment display rename
 
 > Model: Fable 5 / Opus 4.8, xhigh effort. Harness: Claude Code. Branch: `feature/ip-pivot` (World track worktree). Mode: plain.
-> READ FIRST: `00-SHARED-CONVENTIONS.md` (in this folder) — the two English source layers, the byte-identical rule for items, the regen sequence, the contracts/gates, the standard session loop, the validation commands. And the LOCKED `NAME-MAP.md` (the Items section is your only source of new strings; apply it verbatim, never invent a name). Do not re-derive them.
+> READ FIRST: `00-SHARED-CONVENTIONS.md` (in this folder), the two English source layers, the byte-identical rule for items, the regen sequence, the contracts/gates, the standard session loop, the validation commands. And the LOCKED `NAME-MAP.md` (the Items section is your only source of new strings; apply it verbatim, never invent a name). Do not re-derive them.
 
 ## What we are doing
 We are stripping every player-visible Blizzard / WoW IP name out of the game and replacing it with the game's own original vocabulary, WITHOUT changing any mechanic, save format, wire protocol, or RL action space (a rename, not a rewrite). This slice (W1, the World track's first) renames the ~16 flagged verbatim item / set / augment DISPLAY names to their locked NAME-MAP values and FREEZES every item id. It is display-only: item ids are persisted in equipment / inventory / market listings, so a name change touches no saved state.
@@ -12,12 +12,12 @@ Rename the ~16 flagged item / set / augment display names to their NAME-MAP valu
 ## Scope (verified)
 Edit ONLY display `name` strings; NEVER an item `id`. Items are the DUPLICATED-English family, so every rename edits BOTH copies byte-identical (the sim record AND the catalog):
 - **Sim records** (`ITEMS[id].name` and the zone/temple item tables):
-  - `src/sim/content/items.ts` — base `ITEMS[id].name`.
-  - `src/sim/content/zone2/` + `src/sim/content/zone3/` — `ZONE2_ITEMS` / `ZONE3_ITEMS` `.name`.
-  - `src/sim/content/temple.ts` — temple item `.name`.
-- **Set names:** `src/sim/content/item_sets.ts` — set display `name`. The 7 tier-sets are naming-convention-only (none verbatim WoW per the audit): apply ONLY the operator's `generic-keep?` decisions as recorded in the LOCKED NAME-MAP; if a tier-set row is `generic-keep?` and the operator kept it, leave it byte-identical.
-- **Augments:** `src/sim/content/augments.ts` — rename the flagged augment (`lightwell` -> the NAME-MAP value).
-- **Catalog English (the second copy, MUST match byte for byte):** `src/ui/i18n.catalog/items.ts` — `itemNamesEn` (`entities.items.<id>.name`) for every renamed item, plus any set / augment names surfaced there.
+  - `src/sim/content/items.ts`, base `ITEMS[id].name`.
+  - `src/sim/content/zone2/` + `src/sim/content/zone3/`, `ZONE2_ITEMS` / `ZONE3_ITEMS` `.name`.
+  - `src/sim/content/temple.ts`, temple item `.name`.
+- **Set names:** `src/sim/content/item_sets.ts`, set display `name`. The 7 tier-sets are naming-convention-only (none verbatim WoW per the audit): apply ONLY the operator's `generic-keep?` decisions as recorded in the LOCKED NAME-MAP; if a tier-set row is `generic-keep?` and the operator kept it, leave it byte-identical.
+- **Augments:** `src/sim/content/augments.ts`, rename the flagged augment (`lightwell` -> the NAME-MAP value).
+- **Catalog English (the second copy, MUST match byte for byte):** `src/ui/i18n.catalog/items.ts`, `itemNamesEn` (`entities.items.<id>.name`) for every renamed item, plus any set / augment names surfaced there.
 - Then REGEN (`i18n:gen`, `i18n:hash -- --write`, `wiki:content`) and commit the artifacts.
 
 ## The mapping (apply NAME-MAP verbatim)
@@ -52,11 +52,11 @@ Items are display-only, so the sim does not move an inch. BEFORE renaming a sing
 
 ## Out of scope
 - **C1's two items:** `Slimy Murloc Scale` and `Bristleback Maul` (owned by the Creatures track). Leave them exactly as-is.
-- **Item / set / augment IDS** — frozen. No id renames in W1.
-- **Item STATS, drop tables, vendor prices, set bonuses, augment effects** — mechanics are untouched; this is a display rename only.
+- **Item / set / augment IDS**, frozen. No id renames in W1.
+- **Item STATS, drop tables, vendor prices, set bonuses, augment effects**, mechanics are untouched; this is a display rename only.
 - **Any item NOT flagged by the scanner** (the ~118 already-original items). Do not "improve" a clean name.
 - **The locale overlays and the release-tier locale fill** (handed off in Z1).
-- **Abilities, talents, creatures, mob-mechanic names, de-brand text** — other slices (V1/V2/C1/C2/W2/T1).
+- **Abilities, talents, creatures, mob-mechanic names, de-brand text**, other slices (V1/V2/C1/C2/W2/T1).
 
 ## Verify
 ```
@@ -74,7 +74,7 @@ npm run wiki:content
 ```
 
 ## Review
-- Run a COVERAGE reviewer (the `code-reviewer` / domain reviewer) on the diff; prompt it for COVERAGE (report EVERY correctness / requirement gap with confidence + severity), NOT filtering — filtering is a later pass. Focus points: both English copies edited byte-identical for every renamed item; ZERO item id touched; `Slimy Murloc Scale` / `Bristleback Maul` untouched; every new name matches the LOCKED NAME-MAP exactly; tier-set decisions match the operator's `generic-keep?` calls.
+- Run a COVERAGE reviewer (the `code-reviewer` / domain reviewer) on the diff; prompt it for COVERAGE (report EVERY correctness / requirement gap with confidence + severity), NOT filtering, filtering is a later pass. Focus points: both English copies edited byte-identical for every renamed item; ZERO item id touched; `Slimy Murloc Scale` / `Bristleback Maul` untouched; every new name matches the LOCKED NAME-MAP exactly; tier-set decisions match the operator's `generic-keep?` calls.
 - Confirm the diff is source-rename + regenerated artifacts ONLY (no locale overlay edits, no golden edits).
 
 ## Acceptance criteria

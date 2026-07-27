@@ -1,4 +1,4 @@
-// Zone 1 — Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
+// Zone 1, Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
 // wolves and boars, the bandit camp, and Brother Aldric's Gravecaller chain
 // leading to the Hollow Crypt.
 
@@ -26,7 +26,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     questIds: [],
     market: true,
     greeting:
-      'Welcome to the World Market, $C. Buy from every adventurer in the realm — or set out your own wares and let coin find you.',
+      'Welcome to the World Market, $C. Buy from every adventurer in the realm, or set out your own wares and let coin find you.',
   },
   marshal_redbrook: {
     id: 'marshal_redbrook',
@@ -131,7 +131,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     color: 0x2471a3,
     questIds: ['q_murlocs'],
     vendorItems: ['simple_fishing_pole'],
-    greeting: 'Blrb-glub— sorry, been listening to those fish-men too long.',
+    greeting: 'Blrb-glub, sorry, been listening to those fish-men too long.',
   },
   foreman_odell: {
     id: 'foreman_odell',

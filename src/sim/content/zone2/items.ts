@@ -1,4 +1,4 @@
-// Zone 2 — Mirefen Marsh (levels 6-13). Brother Aldric follows the
+// Zone 2, Mirefen Marsh (levels 6-13). Brother Aldric follows the
 // Gravecaller trail north of the causeway: drowned dead rise from the fen,
 // trolls dig into barrow-mounds, and Vael the Fogbinder waits in the
 // Sunken Bastion.

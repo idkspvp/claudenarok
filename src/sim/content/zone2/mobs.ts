@@ -1,4 +1,4 @@
-// Zone 2 — Mirefen Marsh (levels 6-13). Brother Aldric follows the
+// Zone 2, Mirefen Marsh (levels 6-13). Brother Aldric follows the
 // Gravecaller trail north of the causeway: drowned dead rise from the fen,
 // trolls dig into barrow-mounds, and Vael the Fogbinder waits in the
 // Sunken Bastion.
@@ -76,7 +76,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
       school: 'nature',
     },
     // Tide Cadence: a snapper drums up the school, quickening the whole pack's
-    // bites — the swarm's signature pressure when you pull more than one.
+    // bites, the swarm's signature pressure when you pull more than one.
     warcry: {
       radius: 12,
       every: 10,
@@ -160,7 +160,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     aggroRadius: 14,
     // Tidal Sweep: a wide gaff-swing that splashes onto allies near the target.
     cleave: { radius: 8, mult: 0.5, name: 'Tidal Sweep' },
-    // Drowning Resurgence: the drowned do not stay dead — one desperate surge of brine
+    // Drowning Resurgence: the drowned do not stay dead, one desperate surge of brine
     // heals the tyrant the first time it is brought low.
     desperateHeal: { belowHpPct: 0.3, healPct: 0.25 },
     loot: [
@@ -327,7 +327,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     armorPerLevel: 20,
     moveSpeed: 7,
     aggroRadius: 11,
-    // The cultist's hex leaves the victim taking more damage from everyone —
+    // The cultist's hex leaves the victim taking more damage from everyone,
     // a soft-up that rewards a group focusing the cursed player's target down.
     vulnerability: {
       chance: 0.2,
@@ -391,8 +391,8 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 12,
     // Grave Mending: keeps its cultist pack alive, knitting every wounded ally's
-    // wounds shut on a slow cadence. Pull it away from the camp — or drop it
-    // first — or the fight never ends.
+    // wounds shut on a slow cadence. Pull it away from the camp, or drop it
+    // first, or the fight never ends.
     mendAlly: {
       healMin: 26,
       healMax: 38,
@@ -436,7 +436,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     // Spirit Siphon: the priestess's touch drains a caster's Spirit, choking
     // their out-of-combat mana regen for the duration (see siphonSpirit affix).
     siphonSpirit: { chance: 0.3, int: 5, duration: 10, name: 'Spirit Siphon', school: 'shadow' },
-    // A bone-chilling shriek that sends the living fleeing in terror — her dirge
+    // A bone-chilling shriek that sends the living fleeing in terror, her dirge
     // is grief, her wail is dread. Telegraphed: first scream after one interval.
     terrify: { radius: 12, every: 16, duration: 3, name: 'Keening Wail', school: 'shadow' },
     summonAdds: { mobId: 'nhalia_mourner', count: 2, atHpPct: [0.65, 0.35] },
@@ -519,7 +519,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 6,
     aggroRadius: 10,
     // A swollen marsh gas-bag: when slain its corpse swells for 1.5s, then
-    // bursts in a cloud of caustic spores — get clear or share the blast.
+    // bursts in a cloud of caustic spores, get clear or share the blast.
     deathThroes: {
       min: 14,
       max: 22,

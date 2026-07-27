@@ -1,4 +1,4 @@
-// Zone 3 — Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
+// Zone 3, Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
 // the Gravewyrm, an ancient dragon sealed beneath the peaks. Highwatch holds
 // the wall against ogres, waking elementals, and the open chanting of the
 // Wyrmcult at the Gravewyrm Sanctum gates.
@@ -67,7 +67,7 @@ export const ZONE3_ROADS: { x: number; z: number }[][] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Mobs (overworld only — the Gravewyrm Sanctum mobs live in content/dungeons)
+// Mobs (overworld only, the Gravewyrm Sanctum mobs live in content/dungeons)
 // ---------------------------------------------------------------------------
 
 export const ZONE3_CAMPS: CampDef[] = [

@@ -1,4 +1,4 @@
-// Zone 1 — Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
+// Zone 1, Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
 // wolves and boars, the bandit camp, and Brother Aldric's Gravecaller chain
 // leading to the Hollow Crypt.
 
@@ -252,7 +252,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     componentTags: ['gills', 'hide'],
     // Mudfin Hex: the skulker's oracle-chant briefly turns a foe into a critter.
     // Low chance and it breaks the instant the victim takes damage (the murloc's
-    // own next bite ends it), so it's a brief flavor incap — but a murloc pack
+    // own next bite ends it), so it's a brief flavor incap, but a murloc pack
     // can chain it just long enough to make a careless pull dangerous.
     polymorphHex: { chance: 0.12, duration: 4, name: 'Mudfin Hex', school: 'nature' },
   },
@@ -306,7 +306,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     loot: [
       { copper: 150, chance: 1 },
       { itemId: 'tallow_candle', chance: 1 },
-      // The hoarder's stash — a guaranteed step up the potion ladder this early.
+      // The hoarder's stash, a guaranteed step up the potion ladder this early.
       { itemId: 'lesser_healing_potion', chance: 1 },
       { itemId: 'tunnelkings_spade', chance: 0.3 },
       { itemId: 'moggers_copper_cudgel', chance: 0.25, rollGroup: 'grix_tunnelking_chase' },
@@ -368,7 +368,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     soulrot: { chance: 0.25, perTick: 4, interval: 3, duration: 12, name: 'Soulrot' },
   },
   captain_verlan: {
-    // A rare named undead champion risen among the ruins' Restless Bones —
+    // A rare named undead champion risen among the ruins' Restless Bones,
     // the undead family's rare elite, filling the gap beside Old Greyjaw
     // (beast), Elder Bristleback (beast), Sableweb Matriarch (spider) and
     // Mogger (humanoid). A heavy, slow striker that erupts in a shadow nova

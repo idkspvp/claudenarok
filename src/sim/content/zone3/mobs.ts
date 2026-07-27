@@ -1,4 +1,4 @@
-// Zone 3 — Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
+// Zone 3, Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
 // the Gravewyrm, an ancient dragon sealed beneath the peaks. Highwatch holds
 // the wall against ogres, waking elementals, and the open chanting of the
 // Wyrmcult at the Gravewyrm Sanctum gates.
@@ -252,7 +252,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 12,
     // Disarming Smash: a war-camp crusher's two-handed blow can batter the weapon
-    // from your grip, cutting off auto-attack for a few seconds — a real threat to
+    // from your grip, cutting off auto-attack for a few seconds, a real threat to
     // a tank holding the pack. The inverse of the Summoner's Silencing Shriek.
     disarm: { chance: 0.25, duration: 6, name: 'Disarming Smash', school: 'physical' },
     loot: [
@@ -295,7 +295,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     color: 0x8c3b2e,
   },
   brutok_skullsmasher: {
-    // The ogre family's rare elite — a hulking two-fisted mauler that prowls
+    // The ogre family's rare elite, a hulking two-fisted mauler that prowls
     // the crags above the Crusher warbands. Slow, heavily armored and brutal:
     // it slams the ground in a physical shockwave and goes berserk when low.
     // Fills the ogre rare gap beside Ironvein Foreman (kobold), Shardlord
@@ -365,7 +365,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     // chance to slow the victim to half speed for a few seconds.
     chillOnHit: { chance: 0.35, mult: 0.5, duration: 6, name: 'Numbing Chill' },
     // Static Charge: the elemental's storm clings to whatever it strikes, leaving
-    // the victim conductive so every spell that lands on them bites deeper —
+    // the victim conductive so every spell that lands on them bites deeper,
     // +18% magic damage taken from all attackers for a while.
     spellVuln: { chance: 0.3, amp: 0.18, duration: 10, name: 'Static Charge', school: 'nature' },
   },
@@ -456,7 +456,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     ],
     manaBurn: { chance: 0.3, amount: 80, name: 'Mana Sear', school: 'shadow' },
     // Spectral Ward: a shroud of dark wards that lashes back at any caster whose
-    // spell strikes the necromancer — the magic-school twin of melee thorns.
+    // spell strikes the necromancer, the magic-school twin of melee thorns.
     spellReflect: { value: 9, name: 'Spectral Ward', school: 'shadow' },
     scale: 1.0,
     color: 0x533566,
@@ -745,7 +745,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     scale: 1.0,
     color: 0xc9c2b5,
   },
-  // Voskar the Emberwing — a young drake the Wyrmcult chained above the Sanctum
+  // Voskar the Emberwing, a young drake the Wyrmcult chained above the Sanctum
   // and starved into a weapon. The only dragonkin rare on the peaks: it breathes
   // fire in a wide cone, and its searing bite leaves wounds that refuse to close.
   voskar_emberwing: {

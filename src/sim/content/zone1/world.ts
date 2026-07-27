@@ -1,4 +1,4 @@
-// Zone 1 — Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
+// Zone 1, Eastbrook Vale (levels 1-7). The starter zone: town of Eastbrook,
 // wolves and boars, the bandit camp, and Brother Aldric's Gravecaller chain
 // leading to the Hollow Crypt.
 
@@ -63,7 +63,7 @@ export const ZONE1_CAMPS: CampDef[] = [
   { mobId: 'mogger', center: { x: 118, z: -26 }, radius: 5, count: 1 },
   // Spiders: western woods
   { mobId: 'webwood_spider', center: { x: -60, z: 5 }, radius: 22, count: 7 },
-  // Murlocs: lake shore northwest — camp straddles the waterline
+  // Murlocs: lake shore northwest, camp straddles the waterline
   { mobId: 'mudfin_murloc', center: { x: -75, z: 57 }, radius: 14, count: 8 },
   // Kobolds: mine southwest
   { mobId: 'tunnel_rat', center: { x: -82, z: -62 }, radius: 20, count: 9 },
@@ -77,7 +77,7 @@ export const ZONE1_CAMPS: CampDef[] = [
 ];
 
 // Spawned LAST in the merged CAMPS array (see data.ts) so these appended draws
-// fall after every other zone's camp spawns — and the camp loop is the final
+// fall after every other zone's camp spawns, and the camp loop is the final
 // RNG consumer at construction (ground objects, dungeon doors and addPlayer draw
 // none). Keeping the rare elite at the tail means adding it shifts no other
 // content's deterministic spawn rolls, so fixed-seed tests stay stable.
@@ -124,8 +124,8 @@ export const ZONE1_OBJECTS: GroundObjectDef[] = [
   },
 ];
 
-// Roads from town toward each hub — used for terrain painting and the map.
-// Roads from town toward each hub — used for terrain painting and the map.
+// Roads from town toward each hub, used for terrain painting and the map.
+// Roads from town toward each hub, used for terrain painting and the map.
 export const ZONE1_ROADS: { x: number; z: number }[][] = [
   [...EASTBROOK_LAYOUT.roads[0].points, { x: -8, z: 30 }, { x: -15, z: 55 }, { x: -2, z: 78 }], // north to wolves
   [...EASTBROOK_LAYOUT.roads[1].points, { x: 30, z: 8 }, { x: 55, z: 12 }], // east to boars

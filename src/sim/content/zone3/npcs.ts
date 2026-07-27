@@ -1,4 +1,4 @@
-// Zone 3 — Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
+// Zone 3, Thornpeak Heights (levels 13-20). The Gravecallers serve Korzul
 // the Gravewyrm, an ancient dragon sealed beneath the peaks. Highwatch holds
 // the wall against ogres, waking elementals, and the open chanting of the
 // Wyrmcult at the Gravewyrm Sanctum gates.
@@ -36,7 +36,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'q_revenant_vanguard',
     ],
     greeting:
-      'Two hundred years this wall has held, $C. It will not break on my watch — but it groans.',
+      'Two hundred years this wall has held, $C. It will not break on my watch, but it groans.',
   },
   brother_aldric_highwatch: {
     id: 'brother_aldric_highwatch',
@@ -67,7 +67,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
   // Spawned dynamically inside the Crypt of Nythraxis encounter (see
   // spawnNythraxisAldric in sim.ts); `dynamic` keeps the world loader from
   // surface-placing him while still letting the client mirror him as a quest
-  // turn-in NPC. pos/facing are unused — the encounter sets his position.
+  // turn-in NPC. pos/facing are unused, the encounter sets his position.
   brother_aldric_raid: {
     id: 'brother_aldric_raid',
     name: 'Brother Aldric',
@@ -138,7 +138,7 @@ export const ZONE3_NPCS: Record<string, NpcDef> = {
       'sunpetal_herb',
     ],
     greeting:
-      'Wool, hardtack, and steel-shod boots — Highwatch runs on all three, and I am short of everything.',
+      'Wool, hardtack, and steel-shod boots, Highwatch runs on all three, and I am short of everything.',
   },
   armorer_hode: {
     id: 'armorer_hode',

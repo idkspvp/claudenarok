@@ -1,4 +1,4 @@
-// Zone 2 — Mirefen Marsh (levels 6-13). Brother Aldric follows the
+// Zone 2, Mirefen Marsh (levels 6-13). Brother Aldric follows the
 // Gravecaller trail north of the causeway: drowned dead rise from the fen,
 // trolls dig into barrow-mounds, and Vael the Fogbinder waits in the
 // Sunken Bastion.
@@ -44,7 +44,7 @@ export const ZONE2_ZONE: ZoneDef = {
 
 // Causeway north from Eastbrook to Fenbridge, then spokes to each hub.
 // The Drowned Chapel spoke rounds the lake at (60,380) along its western
-// shore via Widow Thicket — the whole polyline stays clear of the lake carve
+// shore via Widow Thicket, the whole polyline stays clear of the lake carve
 // so the road never dips under the waterline (tests/progression.test.ts
 // samples every road against the heightfield to lock this in).
 export const ZONE2_ROADS: { x: number; z: number }[][] = [
@@ -75,14 +75,14 @@ export const ZONE2_ROADS: { x: number; z: number }[][] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Mobs (overworld only — the Sunken Bastion's mobs live in content/dungeons)
+// Mobs (overworld only, the Sunken Bastion's mobs live in content/dungeons)
 // ---------------------------------------------------------------------------
 
 export const ZONE2_CAMPS: CampDef[] = [
   // Prowlers: reed beds flanking the causeway south of town
   { mobId: 'mire_prowler', center: { x: -40, z: 230 }, radius: 22, count: 7 },
   { mobId: 'mire_prowler', center: { x: 35, z: 225 }, radius: 20, count: 6 },
-  // Murlocs: shores of the big east lake — camps straddle the waterline
+  // Murlocs: shores of the big east lake, camps straddle the waterline
   { mobId: 'deepfen_murloc', center: { x: -82, z: 273 }, radius: 15, count: 8 },
   { mobId: 'deepfen_murloc', center: { x: -120, z: 350 }, radius: 13, count: 6 },
   { mobId: 'mirejaw_the_ravenous', center: { x: -132, z: 333 }, radius: 5, count: 1 },

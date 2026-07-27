@@ -1,4 +1,4 @@
-// Zone 2 — Mirefen Marsh (levels 6-13). Brother Aldric follows the
+// Zone 2, Mirefen Marsh (levels 6-13). Brother Aldric follows the
 // Gravecaller trail north of the causeway: drowned dead rise from the fen,
 // trolls dig into barrow-mounds, and Vael the Fogbinder waits in the
 // Sunken Bastion.
@@ -54,7 +54,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'q_highwatch_summons',
     ],
     greeting:
-      'The Light keep you above the water, $N. The dead in this fen do not sleep — they wade.',
+      'The Light keep you above the water, $N. The dead in this fen do not sleep, they wade.',
   },
   provisioner_hale: {
     id: 'provisioner_hale',
@@ -91,7 +91,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
       'simple_fishing_pole',
     ],
     greeting:
-      'Dry boots, dry bread, dry powder — at Fenbridge you get two of the three on a good day.',
+      'Dry boots, dry bread, dry powder, at Fenbridge you get two of the three on a good day.',
   },
   herbalist_yara: {
     id: 'herbalist_yara',
@@ -112,7 +112,7 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
     color: 0x7d6608,
     questIds: ['q_troll_fetishes', 'q_cult_camp', 'q_olen'],
     greeting:
-      'Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.',
+      'Quiet feet and a short blade keep you breathing out here. Speak quick, I am due back in the reeds.',
   },
   bursar_petra_vell: {
     id: 'bursar_petra_vell',
@@ -173,5 +173,5 @@ export const ZONE2_NPCS: Record<string, NpcDef> = {
 
 // ---------------------------------------------------------------------------
 // World layout. Fenbridge sits at (0,300); +z north (deeper fen), +x west
-// (east is -x — see the zone1 layout note).
+// (east is -x, see the zone1 layout note).
 // ---------------------------------------------------------------------------
