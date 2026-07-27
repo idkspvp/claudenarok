@@ -17,6 +17,11 @@ import type { ChatLogRow } from './chat_log';
 import { CONCURRENT_INDEX_MIGRATIONS } from './concurrent_indexes';
 import type { RankedDeedsAccount } from './deeds_board';
 import { DISCORD_SCHEMA } from './discord_db';
+import {
+  FIRST_JOBS_ARCHIVE_SCHEMA,
+  FIRST_JOBS_ARCHIVE_SQL,
+  FIRST_JOBS_RENAME_SQL,
+} from './first_jobs_migration_db';
 import { GITHUB_SCHEMA } from './github_db';
 import { isUniqueViolation } from './http_util';
 import { MAPS_SCHEMA } from './maps_db';
@@ -1100,6 +1105,15 @@ export async function ensureSchema(): Promise<void> {
     // unconditionally (idempotent), like the other schema modules.
     await client.query(MAPS_SCHEMA);
     await client.query(USER_ASSETS_SCHEMA);
+    // D1 (first jobs): the saved-character class list moved from nine ids to
+    // five. The archive table FK-references accounts(id), so it is created after
+    // SCHEMA; the rename and the archive move then run in this same transaction,
+    // so a failure between the copy and the delete cannot lose a character. All
+    // three are idempotent, so every later boot is a no-op. See
+    // server/first_jobs_migration_db.ts.
+    await client.query(FIRST_JOBS_ARCHIVE_SCHEMA);
+    await client.query(FIRST_JOBS_RENAME_SQL);
+    await client.query(FIRST_JOBS_ARCHIVE_SQL);
     // Seed the chat-filter word lists + config on first boot only (idempotent).
     // Runs under the same advisory lock so concurrent realm boots don't race.
     await seedChatFilterDefaults(client);
