@@ -210,6 +210,7 @@ import { deleteCharButtonHtml } from './ui/char_delete_button';
 import { loadCharselectNews } from './ui/charselect_news';
 import { ChatCommandMenu } from './ui/chat_command_menu';
 import { CLASS_DETAILS, SIGNATURE_ABILITIES } from './ui/class_details_data';
+import { renderClassPickers } from './ui/class_picker';
 import { ensureDeedLocalesLoaded } from './ui/deed_i18n';
 import { isDevGuiCommand } from './ui/dev_command_view';
 import { devTierByIndex, devTierDisplayName } from './ui/dev_tier';
@@ -6562,6 +6563,10 @@ function applyLandingBackdrop(highContrast: boolean): void {
 }
 
 function wireStartScreens(): void {
+  // Build the class pickers from the job table BEFORE the first translation pass
+  // and before the chip click handlers below query them, so a chip exists to be
+  // localized, decorated with its portrait, and wired exactly once.
+  renderClassPickers();
   // Initial page translation and stats load. Lazy locale flip: a stored non-en locale is now
   // a real chunk fetch, and the homepage IS the first paint (there is no loading screen to sit
   // behind), so we localize-then-reveal to prevent an English flash + text swap. The start

@@ -43,6 +43,7 @@
 
 import type * as http from 'node:http';
 import { rekeyInstanceSigner } from '../src/sim/character_rename';
+import { startableJobs } from '../src/sim/content/jobs';
 import { resolveActiveWeaponSkin } from '../src/sim/content/weapon_skin_rules';
 import type { CharacterState } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
@@ -125,18 +126,10 @@ const DELETE_CONFIRM = {
 const CHARACTER_RESOURCE = 'character';
 /** Per-account character cap (mirrors the legacy createCharacterCapped default). */
 const CHARACTER_LIMIT = 10;
-/** The nine playable classes accepted by create (mirrors the legacy inline list). */
-const VALID_CLASSES: readonly string[] = [
-  'swordman',
-  'paladin',
-  'archer',
-  'thief',
-  'acolyte',
-  'shaman',
-  'mage',
-  'warlock',
-  'druid',
-];
+/** The classes create accepts, DERIVED from the job table rather than restated,
+ *  so this list and the character-creation picker cannot drift apart. The legacy
+ *  handler in main.ts reads the same helper. */
+const VALID_CLASSES: readonly string[] = startableJobs().map((j) => j.id);
 /** Highest selectable skin index (mirrors the legacy Math.min(7, ...) clamp). */
 const MAX_SKIN = 7;
 const BEARER_PATTERN = /^Bearer ([a-f0-9]{64})$/;

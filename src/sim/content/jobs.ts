@@ -38,6 +38,12 @@ export interface JobDef {
   /** The job this one advances from, or null for a first job, which is a root:
    *  characters pick one at creation and there is no Novice state before it. */
   from: string | null;
+  /** Offered on the character-creation screen. Deliberately its own flag rather
+   *  than `tier === 'first'`: the two say different things (what a job IS versus
+   *  whether a new character may pick it), and keeping them apart is what lets a
+   *  first job ship unstartable while its kit is authored. The picker and both
+   *  server validation lists read THIS, so adding a startable job is one row. */
+  startable?: boolean;
 }
 
 /** The five first jobs and their ten second jobs, in tree order.
@@ -49,11 +55,11 @@ export interface JobDef {
  *  the Novice as a 2-1), and MERCHANT with both of its branches, Blacksmith and
  *  Alchemist. */
 export const JOBS: readonly JobDef[] = [
-  { id: 'swordman', name: 'Swordman', tier: 'first', from: null },
-  { id: 'mage', name: 'Mage', tier: 'first', from: null },
-  { id: 'archer', name: 'Archer', tier: 'first', from: null },
-  { id: 'acolyte', name: 'Acolyte', tier: 'first', from: null },
-  { id: 'thief', name: 'Thief', tier: 'first', from: null },
+  { id: 'swordman', name: 'Swordman', tier: 'first', from: null, startable: true },
+  { id: 'mage', name: 'Mage', tier: 'first', from: null, startable: true },
+  { id: 'archer', name: 'Archer', tier: 'first', from: null, startable: true },
+  { id: 'acolyte', name: 'Acolyte', tier: 'first', from: null, startable: true },
+  { id: 'thief', name: 'Thief', tier: 'first', from: null, startable: true },
 
   { id: 'knight', name: 'Knight', tier: 'second_1', from: 'swordman' },
   { id: 'crusader', name: 'Crusader', tier: 'second_2', from: 'swordman' },
@@ -80,6 +86,17 @@ export function jobById(id: string): JobDef | undefined {
 /** The five starting professions, in the source's own order. */
 export function firstJobs(): readonly JobDef[] {
   return JOBS.filter((j) => j.tier === 'first');
+}
+
+/** The jobs a new character may actually pick, in tree order. The ONE source the
+ *  character-creation picker and both server validation lists derive from. */
+export function startableJobs(): readonly JobDef[] {
+  return JOBS.filter((j) => j.startable === true);
+}
+
+/** Whether `id` names a job a new character may be created as. */
+export function isStartableJob(id: string): boolean {
+  return BY_ID.get(id)?.startable === true;
 }
 
 /** Both advancements a first job offers, 2-1 first. */
