@@ -14,6 +14,7 @@
 // so the armor step passes ~44.2% and the stance cut leaves ~39.8%.
 
 import { describe, expect, it } from 'vitest';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 import {
   HEROIC_DUNGEON_TUNING,
   NORMAL_DUNGEON_TUNING,
@@ -25,7 +26,6 @@ import {
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
 import type { DungeonDifficulty } from '../src/sim/types';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 
 const REF_ARMOR = 2861;
 const DEFENSIVE_STANCE_TAKEN = 0.9;

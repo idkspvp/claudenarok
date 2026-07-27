@@ -705,10 +705,7 @@ export function nythraxisGravebreakerOnMobSwing(
     if (d > NYTHRAXIS_GRAVEBREAKER_RANGE) continue;
     const delta = Math.abs(normAngle(angleTo(boss.pos, p.pos) - boss.facing));
     if (delta > NYTHRAXIS_GRAVEBREAKER_HALF_ARC) continue;
-    const mitigated = ctx.applyDefence(
-      splashBasis * NYTHRAXIS_GRAVEBREAKER_SPLASH_MULT,
-      p,
-    );
+    const mitigated = ctx.applyDefence(splashBasis * NYTHRAXIS_GRAVEBREAKER_SPLASH_MULT, p);
     ctx.dealDamage(
       boss,
       p,

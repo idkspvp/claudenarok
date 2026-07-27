@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { ITEMS } from '../src/sim/data';
 import { canEquipItem } from '../src/sim/equipment_rules';
 import { Sim } from '../src/sim/sim';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import type { EquipSlot, ItemDef, PlayerClass } from '../src/sim/types';
 
 // Tank parity (2026-07): the three committed tanks land within a band of each

@@ -275,8 +275,9 @@ describe('auto_attack meleeSwing: landed talent procs resolve before retaliation
     expect(thornsIndex).toBeGreaterThan(healIndex);
     expect(p.dead).toBe(false);
     expect(p.hp).toBeGreaterThan(0);
-    // Hit table, weapon roll, swing crit, then Lifeblood's normal heal-crit roll.
-    expect(draws).toHaveLength(4);
+    // Hit table, weapon roll, swing crit, the soft-DEF roll every physical hit
+    // takes, then Lifeblood's normal heal-crit roll.
+    expect(draws).toHaveLength(5);
   });
 
   it.each([
@@ -328,8 +329,10 @@ describe('auto_attack meleeSwing: landed talent procs resolve before retaliation
     const baseline = run(false);
     const active = run(true);
     expect(active.valueAtRetaliation).toBe(testCase.expected);
+    // The claim is the line above: the refund adds no draw of its own. The count
+    // is hit table, weapon roll, swing crit, and the physical soft-DEF roll.
     expect(active.draws).toEqual(baseline.draws);
-    expect(active.draws).toHaveLength(3);
+    expect(active.draws).toHaveLength(4);
   });
 
   it('Venom Dividend rolls its chance before thorns and pays only on success', () => {

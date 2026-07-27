@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
 import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import { defaultAllocationFor } from '../src/sim/stat_preset';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
   agiMeleeApPerPoint,

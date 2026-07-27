@@ -71,3 +71,27 @@ LUK/5`, with NO baseline terms; hit chance is `80 + HIT - FLEE` clamped to
 5..100%, and perfect dodge is `1 + LUK x 0.1` percent rolled separately. This one
 was shipped wrong first (invented `+175` / `+100` baselines) and corrected after
 verification.
+
+**The post-defence floor is 1, not 0** (`battle_calc_attack_post_defense`).
+Damage is allowed to go NEGATIVE after DEF, the weapon's refine bonus is added
+against that negative value, and only the total is capped to 1. Digging out of a
+negative is what makes over-refining worth anything against a high-DEF target.
+Flooring at 0 instead let soft DEF absorb a whole hit, which is how a druid's
+Swipe on an arena opponent resolved to exactly no damage; `combat/defence.ts`
+holds the floor until refining becomes a term in the physical pipeline.
+
+## Open items this reference has surfaced
+
+- **`statusRangedAttackPower` is invented.** There is no separate bow ATK formula
+  in the source. Bows scale through the weapon-damage FLOOR instead: `atkmin =
+  DEX x (80 + weaponLevel x 20) / 100`, then for bows `atkmin = atkmin x atkmax /
+  100`. Belongs to the C2 damage-formula pass.
+- **Three heroic difficulty floors now fall about 1.3% short** (`hollow_crypt`
+  494 against 500, `sunken_bastion` 148 against 150, the Nythraxis heroic boss
+  988 against 1000; `tests/heroic_difficulty_floors.test.ts`). Cause: the old
+  armour curve normalized by the ATTACKER's level, so a level-22 heroic mob used
+  to punch through the reference tank's armour harder than a level-20 one. It
+  does not any more, which is the correction, not a regression. Restoring the
+  floors means scaling the heroic damage dials by about 1.5%, which cascades into
+  a dozen derived tuning pins; deliberately NOT done here, because the monster
+  records are being rebuilt for Ragnarok anyway and retuning them twice is waste.

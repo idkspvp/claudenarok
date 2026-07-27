@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { baseSwingSpeed, ROGUE_BASE_SWING_SPEED } from '../src/sim/combat/form_swing';
 import { CLASSES, ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { type AuraKind, STATUS_AP_PER_DPS } from '../src/sim/types';
 
 function makeWorld() {

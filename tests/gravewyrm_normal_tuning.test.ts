@@ -20,6 +20,7 @@
 // mastery (armorPct 0.10, vitPct 0.40, armorFromStrPct 0.70).
 
 import { describe, expect, it } from 'vitest';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 import {
   NORMAL_DUNGEON_TUNING,
   type NormalDungeonTuning,
@@ -31,7 +32,6 @@ import {
   applyDungeonMobTuning,
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 
 const SANCTUM = 'gravewyrm_sanctum';
 const REF_ARMOR = 2861; // max-armor BiS prot warrior, level 20 (see header)

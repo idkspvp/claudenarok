@@ -259,8 +259,7 @@ describe('statTooltipHtml', () => {
       'spellCritPct',
     ]);
     for (const kind of ALL_KINDS) {
-      const e: StatEffect =
-        kind === 'damageReduction' ? { kind, value: 12.5 } : { kind, value: 7 };
+      const e: StatEffect = kind === 'damageReduction' ? { kind, value: 12.5 } : { kind, value: 7 };
       const html = statTooltipHtml(model({ stat: 'agi', effects: [e] }), deps);
       const cls = EXPECTED_GREEN.has(kind) ? 'tt-green' : 'tt-stat';
       expect(html, kind).toContain(`<div class="${cls}">hudChrome.statInfo.effects.${kind}(`);

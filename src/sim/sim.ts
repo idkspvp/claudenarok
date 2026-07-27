@@ -63,8 +63,8 @@ import {
   grantXp as grantXpImpl,
   handleDeath as handleDeathImpl,
 } from './combat/damage';
-import { applyDefence } from './combat/defence';
 import { damageTakenWithin } from './combat/damage_history';
+import { applyDefence } from './combat/defence';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
 import { applyIgnite } from './combat/fire_mage';
 import { frostMageChannelPulse } from './combat/frost_mage';
