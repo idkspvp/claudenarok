@@ -22,7 +22,7 @@ import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 // ENCOUNTER rather than whatever gear happened to be lying around.
 
 // The dev-kit spec labels used to mirror the talent trees; the trees are retired
-// (Phase D0) and DEV_KIT_ROLES is now the standalone source of the 27 pairs.
+// (Phase D0) and DEV_KIT_ROLES is now the standalone source of the 15 pairs.
 function everySpec(): { cls: PlayerClass; spec: string }[] {
   const out: { cls: PlayerClass; spec: string }[] = [];
   for (const cls of ALL_CLASSES) {
@@ -32,7 +32,7 @@ function everySpec(): { cls: PlayerClass; spec: string }[] {
 }
 
 describe('dev kit role table', () => {
-  it('covers all 27 class-and-spec pairs', () => {
+  it('covers all 15 class-and-spec pairs', () => {
     expect(everySpec()).toHaveLength(DEV_KIT_ROLE_COUNT);
     const missing = everySpec().filter(({ cls, spec }) => devKitRole(cls, spec) === null);
     expect(missing).toEqual([]);

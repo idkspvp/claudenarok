@@ -32,7 +32,7 @@ describe('avatarPng', () => {
   });
 
   it('differs across class and across skin', () => {
-    expect(avatarPng('mage', 2).equals(avatarPng('mage', 2))).toBe(false);
+    expect(avatarPng('mage', 2).equals(avatarPng('acolyte', 2))).toBe(false);
     expect(avatarPng('mage', 2).equals(avatarPng('mage', 5))).toBe(false);
   });
 

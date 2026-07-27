@@ -12,7 +12,7 @@ import {
 import type { Entity } from '../src/sim/types';
 import { dist2d, SUNDER_ARMOR_PCT_PER_STACK } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
-import { fundCasts } from './helpers/sp';
+import { fundCasts, raisePool } from './helpers/sp';
 
 function makeSim(cls: Parameters<typeof simClass>[0] = 'swordman', seed = 42) {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
@@ -159,6 +159,9 @@ describe('healing threat', () => {
     const wolf = nearestMob(sim, 'forest_wolf', tank);
     beefUp(wolf);
     hit(sim, tank, wolf, 50); // social aggro: nearby packmates join in too
+    // The D1 HP curve left a level-1 pool smaller than the heal under test, so the
+    // 50 would be clipped by missing health and the threat would read the clip.
+    tank.maxHp = Math.max(tank.maxHp, 500);
     tank.hp = 1;
     (sim as any).applyHeal(healer, tank, 50, 'Solemn Prayer');
     // the healer's threat across ALL aware mobs sums to healed * 0.5
@@ -667,7 +670,7 @@ describe('archer pets', () => {
     const acolyteId = sim.addPlayer('acolyte', 'Acolyte');
     const acolyte = sim.entities.get(acolyteId)!;
     teleport(sim, acolyte, pet.pos.x + 5, pet.pos.z);
-    fundCasts(acolyte);
+    raisePool(acolyte);
     const maxHpBefore = pet.maxHp;
 
     // Power Word: Fortitude is a percent Stamina raid buff; on a pet that share
@@ -680,7 +683,7 @@ describe('archer pets', () => {
     pet.hp = pet.maxHp - 40;
     const damagedHp = pet.hp;
     for (let i = 0; i < 20 * 2; i++) sim.tick();
-    fundCasts(acolyte);
+    raisePool(acolyte);
     sim.targetEntity(pet.id, acolyteId);
     sim.castAbility('lesser_heal', acolyteId);
     for (let i = 0; i < 20 * 3; i++) sim.tick();
@@ -769,7 +772,7 @@ describe('archer pets', () => {
     const priestId = sim.addPlayer('acolyte', 'Priest');
     const acolyte = sim.entities.get(priestId)!;
     teleport(sim, acolyte, wolf.pos.x + 5, wolf.pos.z);
-    fundCasts(acolyte);
+    raisePool(acolyte);
     const maxHpBefore = wolf.maxHp;
     sim.targetEntity(wolf.id, priestId);
     sim.castAbility('power_word_fortitude', priestId);
@@ -819,7 +822,7 @@ describe('archer pets', () => {
     const events = sim.tick();
     expect(events.some((e) => e.type === 'error' && /already have a pet/.test(e.text))).toBe(true);
 
-    fundCasts(sim.player);
+    raisePool(sim.player);
     sim.castAbility('revive_pet');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(pet.dead).toBe(false);
@@ -853,7 +856,7 @@ describe('archer pets', () => {
     expect(pet.petAutoTaunt).toBe(true);
     expect(pet.ownerId).toBe(pid);
 
-    restored.entities.get(pid)!.resource = restored.entities.get(pid)!.maxResource;
+    raisePool(restored.entities.get(pid)!);
     restored.castAbility('revive_pet', pid);
     for (let i = 0; i < 20 * 4; i++) restored.tick();
     expect(pet.dead).toBe(false);

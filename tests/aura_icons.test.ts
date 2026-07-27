@@ -14,20 +14,14 @@ import { iconDataUrl } from '../src/ui/icons';
 
 // A representative DoT (debuff) per applicable class plus a few persistent buffs,
 // every id below is in ABILITY_IMAGE_IDS, so it has a shipped WebP icon.
+// The Warlock, Druid, and Shaman DoTs that used to head this list went with
+// their classes in D1, and so did Mark of the Wild.
 const IMAGE_AURA_IDS = [
-  'corruption',
-  'curse_of_agony',
-  'immolate', // warlock DoTs
   'serpent_sting', // archer DoT
-  'moonfire',
-  'insect_swarm',
-  'rip', // druid DoTs
-  'flame_shock', // shaman DoT
   'shadow_word_pain', // acolyte DoT
   'rupture',
   'garrote', // thief DoTs
   'arcane_intellect',
-  'mark_of_the_wild', // buffs
   'battle_shout',
   'power_word_fortitude', // buffs
 ];

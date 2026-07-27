@@ -3,14 +3,16 @@ import { Sim } from '../src/sim/sim';
 import { dist2d } from '../src/sim/types';
 
 // Regression for the "no passive health regen while not in combat" report
-// (imdutha / ruanhx): a warlock standing idle with a summoned Pyre Colossus could not
+// (imdutha / ruanhx): an owner standing idle with a summoned pet could not
 // regenerate health. The owner stayed flagged `inCombat` because the pet held a
 // target it was not actually fighting, while mana kept regenerating on its own
 // 5-second rule. Out-of-combat health regen must resume once the pet stops
 // actively trading blows; a pet that IS fighting still keeps its owner in combat.
 
-function makeWarlock(seed = 7) {
-  const sim = new Sim({ seed, playerClass: 'warlock' as any, autoEquip: true });
+// The Warlock this was reported on was cut in D1; the Mage is the surviving job
+// that commands a summoned pet, and the bug was never about the class.
+function makeSummoner(seed = 7) {
+  const sim = new Sim({ seed, playerClass: 'mage', autoEquip: true });
   const p: any = sim.player;
   p.level = 20;
   return { sim, p };
@@ -39,7 +41,7 @@ function firstWildMob(sim: Sim) {
 
 describe('pet-held combat does not block owner health regen', () => {
   it('an idle pet (not trading blows) lets the owner regen health', () => {
-    const { sim, p } = makeWarlock();
+    const { sim, p } = makeSummoner();
     const pet = summonInfernal(sim, p);
     const mob = firstWildMob(sim);
 
@@ -69,7 +71,7 @@ describe('pet-held combat does not block owner health regen', () => {
   });
 
   it('a pet actively trading blows still keeps its owner in combat (no regen)', () => {
-    const { sim, p } = makeWarlock();
+    const { sim, p } = makeSummoner();
     const pet = summonInfernal(sim, p);
     const mob = firstWildMob(sim);
 

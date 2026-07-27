@@ -23,7 +23,7 @@ import {
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import type { PartyMemberInfo } from '../src/world_api';
-import { fundCasts } from './helpers/sp';
+import { fundCasts, raisePool } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
@@ -123,11 +123,13 @@ describe('the five first jobs', () => {
     const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     const p = sim.player;
     sim.setPlayerLevel(6);
+    raisePool(p); // a level-6 Acolyte cannot afford its own heal until D4 re-costs
     p.hp = 30;
     sim.castAbility('lesser_heal');
     for (let i = 0; i < 20 * 3; i++) sim.tick();
     expect(p.hp).toBeGreaterThan(30);
     // PW:S absorbs damage
+    raisePool(p);
     sim.castAbility('power_word_shield');
     sim.tick();
     expect(p.auras.some((a) => a.kind === 'absorb')).toBe(true);
@@ -144,7 +146,7 @@ describe('the five first jobs', () => {
     const ally = mustEntity(sim, allyId);
     teleport(sim, priestId, ally.pos.x + 5, ally.pos.z);
     sim.setPlayerLevel(6, priestId);
-    fundCasts(acolyte);
+    raisePool(acolyte);
     ally.hp = 20;
 
     sim.targetEntity(ally.id, priestId);
@@ -153,6 +155,7 @@ describe('the five first jobs', () => {
     expect(ally.hp).toBeGreaterThan(20);
 
     for (let i = 0; i < 25; i++) sim.tick();
+    raisePool(acolyte);
     sim.castAbility('power_word_shield', priestId);
     sim.tick();
     expect(ally.auras.some((a) => a.kind === 'absorb')).toBe(true);

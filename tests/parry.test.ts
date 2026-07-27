@@ -55,7 +55,7 @@ describe('parry: who gets a parry chance (swordman-only redesign)', () => {
     expect(forWarrior.parryChance).toBeCloseTo(warriorParryChance(sim.player.stats.str), 8);
     expect(forWarrior.parryChance).toBeGreaterThan(0);
 
-    for (const cls of ['swordman', 'thief', 'mage', 'acolyte'] as PlayerClass[]) {
+    for (const cls of ['thief', 'archer', 'mage', 'acolyte'] as PlayerClass[]) {
       const other = makeSim(cls);
       const otherMob = spawnMobInFront(other);
       other.player.facing = 0;
@@ -110,7 +110,7 @@ describe('parry: the one-roll mob-swing hit table', () => {
   });
 
   it('a non-swordman facing the attacker never parries on the same roll', () => {
-    const sim = makeSim('swordman');
+    const sim = makeSim('thief');
     const mob = spawnMobInFront(sim);
     const p = sim.player;
     p.dodgeChance = 0;
