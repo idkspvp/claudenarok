@@ -1257,6 +1257,8 @@ export const en_XA: EnTranslations = {
         "rangedAttackPower": "[+{value} Ŕáñĝéð Áţţáçķ Þóŵéŕ]",
         "critPct": "[+{value}% Çŕíţíçáļ Šţŕíķé]",
         "dodgePct": "[+{value}% Ðóðĝé]",
+        "hit": "[{value} Ĥíţ, ýóúŕ áççúŕáçý áĝáíñšţ á ţáŕĝéţ Ƒļéé]",
+        "flee": "[{value} Ƒļéé, ŵĥáţ á šŵíñĝ ɱúšţ ƀéáţ ţó ŕéáçĥ ýóú]",
         "armor": "[+{value} Áŕɱóŕ]",
         "maxHealth": "[+{value} Ɱáẋíɱúɱ Ĥéáļţĥ]",
         "maxHealthPct": "[+{value}% Ɱáẋíɱúɱ Ĥéáļţĥ]",

@@ -15,6 +15,7 @@
 //     Revo-Classic and Renewal both dropped them; we are neither.
 
 import { describe, expect, it } from 'vitest';
+import { fleeRating, hitRating, perfectDodgeChance } from '../src/sim/combat/hit_flee';
 import {
   intManaMultiplier,
   statusAttackPower,
@@ -120,15 +121,29 @@ describe('the derivations match Ragnarok', () => {
   });
 });
 
-describe('what we have NOT matched yet', () => {
-  it('records the two combat numbers still missing', () => {
-    // Ragnarok resolves a swing as HIT against FLEE, not as a flat dodge chance:
-    //   HIT  = 175 + BaseLv + DEX + floor(LUK/3)
-    //   FLEE = 100 + BaseLv + AGI + floor(LUK/5)
-    // Neither exists here yet, the engine still rolls a flat dodge fraction, and
-    // DEX buys accuracy nowhere. Both arrive with the combat model in phase 3.
-    // This case exists so that work cannot be forgotten quietly: it is a standing
-    // note, and it should be DELETED, not adjusted, when the contest lands.
-    expect(true).toBe(true);
+describe('the accuracy contest matches Ragnarok', () => {
+  it('reads HIT off level, DEX, and a third of LUK', () => {
+    // 175 + BaseLv + DEX + floor(LUK/3). The published figures, pinned here as
+    // literals because this is the only file that states them.
+    expect(hitRating(1, 0, 0)).toBe(176);
+    expect(hitRating(50, 30, 30)).toBe(175 + 50 + 30 + 10);
+  });
+
+  it('reads FLEE off level, AGI, and a fifth of LUK', () => {
+    // 100 + BaseLv + AGI + floor(LUK/5).
+    expect(fleeRating(1, 0, 0)).toBe(101);
+    expect(fleeRating(50, 30, 30)).toBe(100 + 50 + 30 + 6);
+  });
+
+  it('leaves the attacker 75 ahead at parity, which is why fights connect', () => {
+    // The gap between the two baselines is the reason a same-level fight lands
+    // most of its blows: evasion has to be BOUGHT before it starts refusing hits.
+    expect(hitRating(20, 0, 0) - fleeRating(20, 0, 0)).toBe(75);
+  });
+
+  it('gives Luck a flat dodge that accuracy cannot answer', () => {
+    // 1 + LUK x 0.1 percent, rolled apart from the contest.
+    expect(perfectDodgeChance(0)).toBeCloseTo(0.01, 10);
+    expect(perfectDodgeChance(50)).toBeCloseTo(0.06, 10);
   });
 });

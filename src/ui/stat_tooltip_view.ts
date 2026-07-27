@@ -34,6 +34,8 @@ const GAIN_KINDS: ReadonlySet<StatEffectKind> = new Set<StatEffectKind>([
   'rangedAttackPower',
   'critPct',
   'dodgePct',
+  'flee',
+  'hit',
   'armor',
   'maxHealth',
   'maxHealthPct',
@@ -60,6 +62,10 @@ export function statEffectText(e: StatEffect, deps: StatTooltipI18n): string {
     case 'maxMana':
     case 'healthRegen':
     case 'manaRegen':
+    // The two sides of the accuracy contest are ratings, not percentages: a
+    // player compares them against a target's, so they read as whole numbers.
+    case 'flee':
+    case 'hit':
       return deps.t(key, { value: int0(deps, e.value) });
     case 'critPct':
     case 'dodgePct':

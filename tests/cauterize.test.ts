@@ -58,10 +58,15 @@ describe('Cauterize', () => {
 
   it('the burn ticks 5% max HP per second while it rides', () => {
     const { sim, p } = mage('fire');
-    hit(sim, enemy(sim), p, 999_999);
-    const afterSave = p.hp; // 2500
+    // No attacker: the burn is what this measures, and a live wolf's swings land
+    // inside the same twenty ticks. It used to whiff through them; under the
+    // accuracy contest a level-20 monster connects with a level-20 character
+    // every time, and clearing its aggro flags mid-fight does not stop it
+    // re-acquiring on the next tick.
+    hit(sim, null, p, 999_999);
+    const afterSave = p.hp;
     for (let i = 0; i < 20; i++) sim.tick(); // 1 second -> one 5% tick
-    expect(afterSave - p.hp).toBe(Math.round(p.maxHp * 0.05)); // 500 burned
+    expect(afterSave - p.hp).toBe(Math.round(p.maxHp * 0.05));
   });
 
   it('grants +12% Fire damage to enemies while burning, but never to the self-burn', () => {

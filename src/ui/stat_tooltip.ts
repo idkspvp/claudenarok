@@ -11,6 +11,7 @@
 // tests/stat_tooltip.test.ts cross-checks this module against real
 // recalcPlayerStats output so the numbers cannot silently drift.
 
+import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
 import {
   intManaMultiplier,
@@ -69,6 +70,8 @@ export type StatEffectKind =
   | 'rangedAttackPower'
   | 'critPct'
   | 'dodgePct'
+  | 'flee'
+  | 'hit'
   | 'armor'
   | 'maxHealth'
   | 'maxHealthPct'
@@ -180,7 +183,7 @@ export interface StatTooltipInput {
 
 // --- coefficients, mirroring src/sim/entity.ts recalcPlayerStats ------------
 const VIT_ARMOR_PER_POINT = 2; // entity.ts: s.armor += ... + s.vit * 2
-const AGI_DODGE_PER_POINT = 0.003; // entity.ts: dodgeChance = 0.01 + s.agi * 0.003
+const LUK_PERFECT_DODGE_PER_POINT = 0.001; // hit_flee.ts: (1 + LUK * 0.1) percent
 const LUK_CRIT_PER_POINT = 0.003; // entity.ts: critChance = 0.01 + s.luk * 0.003
 const STR_PARRY_PER_POINT = 0.0005; // warrior_hit_table.ts: parry = 0.05 + str * 0.0005
 const HUNTER_RANGED_AP_PER_AGI = 2; // entity.ts: rangedPower = s.agi * 2 (hunter)
@@ -281,7 +284,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     }
     case 'agi': {
       statValue = stats.agi;
-      effects.push({ kind: 'dodgePct', value: stats.agi * AGI_DODGE_PER_POINT * 100 });
+      effects.push({ kind: 'flee', value: fleeRating(level, stats.agi, stats.luk) });
 
       break;
     }
@@ -293,6 +296,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
           statusAttackPower(stats.str, stats.dex, stats.luk) -
           statusAttackPower(stats.str, 0, stats.luk),
       });
+      effects.push({ kind: 'hit', value: hitRating(level, stats.dex, stats.luk) });
       if (cls === 'hunter') {
         effects.push({
           kind: 'rangedAttackPower',
@@ -544,8 +548,12 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
     }
     case 'dodge': {
       sources.push({ kind: 'base', value: 1 });
-      const fromAgi = stats.agi * AGI_DODGE_PER_POINT * 100;
-      if (fromAgi !== 0) sources.push({ kind: 'attributes', value: fromAgi, fromStat: 'agi' });
+      // Dodge is Ragnarok's perfect dodge now: flat, from Luck, and separate
+      // from the HIT/FLEE contest that Agility feeds. Agility contributes
+      // nothing here, and showing it would tell a player the wrong stat to buy.
+      const fromLukDodge = stats.luk * LUK_PERFECT_DODGE_PER_POINT * 100;
+      if (fromLukDodge !== 0)
+        sources.push({ kind: 'attributes', value: fromLukDodge, fromStat: 'luk' });
       for (const b of buffLines(buffs, ['buff_dodge'])) {
         sources.push({ ...b, value: b.value * 100 });
       }

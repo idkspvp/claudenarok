@@ -420,6 +420,7 @@ import * as yumiMod from './social/yumi';
 // public path `import { Sim, eloDelta } from './sim'` (tests/arena.test.ts) holds.
 export { eloDelta } from './social/arena';
 
+import { missChanceFromContest } from './combat/hit_flee';
 import { FINDER_ACTIVITIES, type FinderListingTag } from './content/dungeon_finder';
 import {
   partyFrameAbsorb,
@@ -510,6 +511,7 @@ import {
   type MasterLootThreshold,
   MELEE_RANGE,
   MOB_AP_PER_DPS,
+  MOB_VS_PLAYER_MAX_MISS,
   type MobFamily,
   type MoveInput,
   type NoticeboardDef,
@@ -6052,8 +6054,14 @@ export class Sim {
   }
 
   mobSwing(mob: Entity, target: Entity): void {
-    const missChance = swingMissChance(mob, target);
-    const dodgeChance = target.kind === 'player' ? target.dodgeChance : 0.05;
+    // A monster swings through the same contest a player does. Its accuracy comes
+    // from its level until its record carries real attributes, so a high-Agility
+    // player genuinely evades rather than shaving a flat percentage.
+    const missChance = Math.min(
+      MOB_VS_PLAYER_MAX_MISS,
+      missChanceFromContest(mob.hit, target.flee),
+    );
+    const dodgeChance = target.dodgeChance;
     const { parryChance, blockChance } = warriorMeleeDefense(target, mob);
     const roll = this.rng.next();
     if (roll < missChance) {

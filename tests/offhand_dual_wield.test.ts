@@ -6,7 +6,12 @@
 // decisively, and tests/v026_winning_warrior_contract.test.ts pins the
 // canDualWield / canDualWieldTwoHand policy table.
 import { describe, expect, it } from 'vitest';
-import { meleeSwing, updatePlayerAutoAttack } from '../src/sim/combat/auto_attack';
+import {
+  DUAL_WIELD_WHITE_MISS_PENALTY,
+  meleeSwing,
+  updatePlayerAutoAttack,
+} from '../src/sim/combat/auto_attack';
+import { missChanceFromContest } from '../src/sim/combat/hit_flee';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
@@ -118,8 +123,12 @@ describe('offhand combat rules', () => {
     p.attackPower = 0;
     target.stats.armor = 0;
     target.dodgeChance = 0;
-    // 0.12 sits between the base 5% miss and the dual-wield-penalized 15% miss.
-    sim.rng.next = () => 0.12;
+    // The roll must sit between the plain miss chance and the dual-wield-penalized
+    // one. Miss is the accuracy contest's complement now, so read the band off the
+    // contest rather than assuming the old flat 5%.
+    // Land the roll squarely inside the penalized band and outside the plain one.
+    const plainMiss = missChanceFromContest(p.hit, target.flee);
+    sim.rng.next = () => plainMiss + DUAL_WIELD_WHITE_MISS_PENALTY / 2;
     sim.drainEvents();
     expect(meleeSwing(sim.ctx, p, target, 0, null, { cannotBeDodged: true })).toBe(true);
     expect(

@@ -74,14 +74,19 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
         expect(strAp + dexAp + lukAp).toBe(p.attackPower);
       });
 
-      it(`${cls} L${level}: AGI drives dodge and LUK drives crit, off a 1% base`, () => {
+      it(`${cls} L${level}: AGI drives Flee, DEX drives Hit, LUK drives crit and dodge`, () => {
         const p = freshPlayer(cls, level);
-        // The split Ragnarok makes and this game did not: evasion is AGI's, the
-        // critical rate is LUK's, and neither starts at the old 5%.
-        const dodgePct = statEffectVal(cls, p, 'agi', 'dodgePct') ?? 0;
+        // Ragnarok's split, and the reason a dodge PERCENTAGE was the wrong
+        // model: Agility buys a Flee RATING that an attacker's Hit is measured
+        // against, Dexterity buys the accuracy on the other side of that
+        // contest, and what is left as a flat dodge chance belongs to Luck.
+        expect(statEffectVal(cls, p, 'agi', 'flee')).toBe(p.flee);
+        expect(statEffectVal(cls, p, 'dex', 'hit')).toBe(p.hit - Math.round(p.hitBonus * 100));
         const critPct = statEffectVal(cls, p, 'luk', 'critPct') ?? 0;
-        expect(0.01 + dodgePct / 100).toBeCloseTo(p.dodgeChance, 6);
         expect(0.01 + critPct / 100).toBeCloseTo(p.critChance, 6);
+        // Agility no longer shows a dodge line at all: pointing a player at it
+        // would send them to buy the wrong attribute.
+        expect(statEffectVal(cls, p, 'agi', 'dodgePct')).toBeUndefined();
         expect(statEffectVal(cls, p, 'agi', 'critPct')).toBeUndefined();
       });
 

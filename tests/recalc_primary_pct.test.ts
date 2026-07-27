@@ -29,6 +29,8 @@ interface Derived {
   spellPower: number;
   crit: number;
   dodge: number;
+  flee: number;
+  hit: number;
 }
 
 function derive(cls: PlayerClass, level: number, mut?: (m: TalentModifiers) => void): Derived {
@@ -54,6 +56,8 @@ function derive(cls: PlayerClass, level: number, mut?: (m: TalentModifiers) => v
     spellPower: e.spellPower,
     crit: e.critChance,
     dodge: e.dodgeChance,
+    flee: e.flee,
+    hit: e.hit,
   };
 }
 
@@ -66,7 +70,11 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
     expect(buffed.agi).toBe(Math.round(base.agi * 1.1));
     // Armor is Vitality's, so an Agility multiplier must not move it at all.
     expect(buffed.armor).toBe(base.armor);
-    expect(buffed.dodge).toBeGreaterThan(base.dodge);
+    // Agility buys Flee, a rating contested against the attacker's Hit, not a
+    // dodge percentage. The flat dodge left on the sheet is Luck's perfect
+    // dodge, which an Agility multiplier must not touch.
+    expect(buffed.flee).toBeGreaterThan(base.flee);
+    expect(buffed.dodge).toBe(base.dodge);
     // AGI's reach STOPS at armor and evasion now. Crit belongs to LUK and ranged
     // attack power to DEX, so an Agility multiplier must leave both untouched:
     // a bow user is paid for their Dexterity, not twice for their Agility.
@@ -74,13 +82,17 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
     expect(buffed.rangedPower).toBe(base.rangedPower);
   });
 
-  it('dexPct scales Dexterity and the ranged attack power it feeds', () => {
+  it('dexPct scales Dexterity, the ranged attack power AND the accuracy it feeds', () => {
     const base = derive('hunter', 40);
     const buffed = derive('hunter', 40, (m) => {
       m.stats.dexPct = 0.1;
     });
     expect(buffed.dex).toBe(Math.round(base.dex * 1.1));
     expect(buffed.rangedPower).toBeGreaterThan(base.rangedPower);
+    // Dexterity is accuracy as well as damage now, which is the reason a bow
+    // build is a build rather than a damage stat with a range attached.
+    expect(buffed.hit).toBeGreaterThan(base.hit);
+    expect(buffed.flee).toBe(base.flee);
   });
 
   it('lukPct scales Luck and the critical rate it feeds', () => {

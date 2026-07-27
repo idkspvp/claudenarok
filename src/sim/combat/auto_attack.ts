@@ -59,6 +59,7 @@ import { consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
 import { baseSwingSpeed, rangedAutoProfile } from './form_swing';
 import { isTravelFormAuraKind } from './forms';
+import { missChanceFromContest } from './hit_flee';
 import { rangedShotProfile } from './ranged_shot';
 import { onCastCompleted, onMeleeSwing } from './talent_procs';
 import { applyThornsReaction } from './thorns_charge';
@@ -71,7 +72,7 @@ import { warriorMeleeDefense } from './warrior_hit_table';
 // agility-driven ranged attack-power term is unaffected, and wands (the caster
 // sidearm, fixed class damage) are exempt.
 const RANGED_WEAPON_COEFF = 0.6;
-const DUAL_WIELD_WHITE_MISS_PENALTY = 0.1;
+export const DUAL_WIELD_WHITE_MISS_PENALTY = 0.1;
 const SUDDEN_DEATH_CHANCE = 0.1;
 const SUDDEN_DEATH_DURATION = 10;
 const ONE_HAND_AUTO_ATTACK_BASE_SPEED = 2;
@@ -343,7 +344,9 @@ export function rangedSwing(
   // The shot/bolt is in flight: its miss roll and damage land when it reaches the
   // target (projectile_travel), and fizzle if the target dies before impact.
   scheduleProjectile(ctx, attacker, target, (atk, tgt) => {
-    const missChance = swingMissChance(atk, tgt) + blindMissBonus(atk);
+    // Same contest as the melee swing: a bow user's Dexterity is their accuracy
+    // as well as their damage, which is the whole shape of the class in Ragnarok.
+    const missChance = missChanceFromContest(atk.hit, tgt.flee) + blindMissBonus(atk);
     if (ctx.rng.chance(missChance)) {
       ctx.emit({
         type: 'damage',
@@ -420,15 +423,18 @@ export function meleeSwing(
     whiteDualWieldPenalty?: boolean;
   },
 ): boolean {
+  // Ragnarok resolves a swing as HIT against FLEE, so the miss roll is the
+  // contest's complement rather than a level-difference curve. Dexterity buys
+  // accuracy and Agility buys evasion, neither of which they did before: the old
+  // model read only the level gap, so two same-level fighters missed identically
+  // no matter how either had built.
   const missChance =
-    swingMissChance(attacker, target) +
+    missChanceFromContest(attacker.hit, target.flee) +
     blindMissBonus(attacker) +
     (opts.whiteDualWieldPenalty ? DUAL_WIELD_WHITE_MISS_PENALTY : 0);
-  const dodgeChance = opts.cannotBeDodged
-    ? 0
-    : target.kind === 'player'
-      ? target.dodgeChance
-      : 0.05 + Math.max(0, target.level - attacker.level) * 0.005;
+  // What is left on dodgeChance is perfect dodge: flat, from Luck, and the one
+  // avoidance the attacker's accuracy cannot answer.
+  const dodgeChance = opts.cannotBeDodged ? 0 : target.dodgeChance;
   const { parryChance, blockChance } = warriorMeleeDefense(target, attacker);
   const roll = ctx.rng.next();
   if (roll < missChance) {

@@ -64,7 +64,7 @@ describe('mob withering curse (Withering Rot)', () => {
     const mob = spawnTroll(sim);
     const agiBefore = player.stats.agi;
     const armorBefore = player.stats.armor;
-    const dodgeBefore = player.dodgeChance;
+    const fleeBefore = player.flee;
     const wither = MOBS.fen_troll.wither!;
     expect(agiBefore).toBeGreaterThan(wither.agi); // precondition: no floor
     (sim as any).applyAura(player, {
@@ -81,7 +81,9 @@ describe('mob withering curse (Withering Rot)', () => {
     // The curse thins evasion, not armor: Agility stopped feeding armor when
     // defence moved to Vitality, so a pure Agility drain leaves it untouched.
     expect(player.stats.armor).toBe(armorBefore);
-    expect(player.dodgeChance).toBeLessThan(dodgeBefore);
+    // Agility feeds FLEE now, so the curse thins the rating a swing is measured
+    // against rather than a flat dodge percentage.
+    expect(player.flee).toBeLessThan(fleeBefore);
   });
 
   it('refreshes a single shared slot instead of stacking', () => {

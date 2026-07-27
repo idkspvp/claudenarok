@@ -259,6 +259,9 @@ export type AuraKind =
   | 'buff_int'
   | 'buff_agi'
   | 'buff_dodge'
+  // Flat FLEE, granted or drained. The evasion side of the accuracy contest,
+  // distinct from buff_dodge, which is Luck's flat slice.
+  | 'buff_flee'
   | 'buff_speed'
   | 'buff_haste'
   | 'buff_spellpower'
@@ -1644,10 +1647,13 @@ export interface MobTemplate {
     school?: Aura['school'];
   };
   // Melee mechanic: a landed swing has `chance` to knock the victim off-balance,
-  // cutting their dodge chance by `dodgeReduction` (a flat fraction, e.g. 0.05)
-  // for `duration` seconds, so the attacker (and everyone else) lands more hits.
-  // Rides the existing buff_dodge aura with a NEGATIVE value; no new aura kind.
-  staggerHit?: { chance: number; dodgeReduction: number; duration: number; name: string };
+  // cutting their FLEE by `fleeReduction` (flat rating points) for `duration`
+  // seconds, so the attacker and everyone else lands more hits. It reduces
+  // evasion rather than Luck's flat dodge, because being knocked off balance is
+  // about failing to get out of the way, and because a rating the attacker's
+  // accuracy is measured against is a debuff a build can actually feel.
+  // Rides a buff_flee aura with a NEGATIVE value.
+  staggerHit?: { chance: number; fleeReduction: number; duration: number; name: string };
   // On-hit web mechanic: a landed melee swing has `chance` to ensnare the struck
   // player in place, a `root` aura for `duration`s (naga/spider snares). Rides the
   // existing root aura + crowd-control DR; no new aura kind. Players only; rooting a
@@ -2970,6 +2976,15 @@ export interface Entity {
   critDmgSpellBonus: number;
   critDmgPhysBonus: number;
   critDmgHealBonus: number;
+  // The two sides of Ragnarok's accuracy contest (combat/hit_flee.ts). Derived,
+  // never authored: a player's from recalcPlayerStats, a monster's from its level
+  // until its record carries real attributes. Kept on the entity rather than
+  // recomputed per swing because the online client mirrors entities and has to be
+  // able to show a player WHY they keep missing.
+  hit: number;
+  flee: number;
+  // Flat avoidance from Luck, rolled separately from the contest and untouched by
+  // the attacker's accuracy. Auras that grant "dodge" add here.
   dodgeChance: number;
   blockChance: number; // 0..1: shield block chance, consumed by Warrior combat
   blockValue: number; // flat physical damage prevented by a successful block

@@ -1143,6 +1143,8 @@ export const hudChromeStrings = {
       rangedAttackPower: '+{value} Ranged Attack Power',
       critPct: '+{value}% Critical Strike',
       dodgePct: '+{value}% Dodge',
+      hit: '{value} Hit, your accuracy against a target Flee',
+      flee: '{value} Flee, what a swing must beat to reach you',
       armor: '+{value} Armor',
       maxHealth: '+{value} Maximum Health',
       maxHealthPct: '+{value}% Maximum Health',

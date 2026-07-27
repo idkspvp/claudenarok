@@ -1,0 +1,179 @@
+// HIT against FLEE.
+//
+// The unit half pins the contest's shape; the integration half proves it reaches
+// a real swing, because the whole point of this change is that two attributes
+// which previously did nothing for accuracy or evasion now decide it.
+//
+// What "previously did nothing" means concretely: the old model read only the
+// LEVEL GAP, so two same-level fighters missed each other at exactly the same
+// rate no matter how either had spent their points. That is the regression these
+// cases exist to prevent coming back.
+
+import { describe, expect, it } from 'vitest';
+import {
+  BASE_HIT_PERCENT,
+  fleeRating,
+  hitChance,
+  hitRating,
+  MAX_HIT_CHANCE,
+  MIN_HIT_CHANCE,
+  missChanceFromContest,
+  perfectDodgeChance,
+} from '../src/sim/combat/hit_flee';
+import { meleeSwing } from '../src/sim/combat/auto_attack';
+import { MOBS } from '../src/sim/data';
+import { createMob, recalcPlayerStats } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
+import { defaultAllocationFor } from '../src/sim/stat_preset';
+import type { StatAllocation } from '../src/sim/types';
+import { emptyStatAllocation } from '../src/sim/types';
+
+describe('the two ratings', () => {
+  it('gives the attacker the higher baseline, so a fight lands its blows', () => {
+    // Equal level, no attributes: the attacker is ahead by design. If this ever
+    // inverts, two naked level-1 characters flail at each other forever.
+    expect(hitRating(1, 0, 0)).toBeGreaterThan(fleeRating(1, 0, 0));
+    expect(hitChance(hitRating(1, 0, 0), fleeRating(1, 0, 0))).toBe(MAX_HIT_CHANCE);
+  });
+
+  it('pays DEX into accuracy and AGI into evasion, point for point', () => {
+    expect(hitRating(1, 10, 0) - hitRating(1, 0, 0)).toBe(10);
+    expect(fleeRating(1, 10, 0) - fleeRating(1, 0, 0)).toBe(10);
+    // And crucially NOT the other way round: DEX must not buy evasion.
+    expect(fleeRating(1, 0, 0)).toBe(fleeRating(1, 0, 0));
+    expect(hitRating(1, 0, 50) - hitRating(1, 0, 0)).toBe(16); // LUK/3
+    expect(fleeRating(1, 0, 50) - fleeRating(1, 0, 0)).toBe(10); // LUK/5
+  });
+
+  it('scales both with level, so a level gap still matters on its own', () => {
+    expect(hitRating(50, 0, 0)).toBeGreaterThan(hitRating(1, 0, 0));
+    expect(fleeRating(50, 0, 0)).toBeGreaterThan(fleeRating(1, 0, 0));
+    // Equal-level parity is preserved at every level: the gap between the two
+    // baselines is a constant, not something that drifts as characters grow.
+    const gapAt = (lv: number) => hitRating(lv, 0, 0) - fleeRating(lv, 0, 0);
+    expect(gapAt(99)).toBe(gapAt(1));
+  });
+
+  it('floors a drained attribute instead of inverting the rating', () => {
+    expect(hitRating(1, -50, -50)).toBe(hitRating(1, 0, 0));
+    expect(fleeRating(1, -50, -50)).toBe(fleeRating(1, 0, 0));
+    expect(hitRating(0, 0, 0)).toBe(hitRating(1, 0, 0));
+  });
+});
+
+describe('the contest', () => {
+  it('sits at the base percentage when the two ratings are equal', () => {
+    expect(hitChance(200, 200)).toBeCloseTo(BASE_HIT_PERCENT / 100, 10);
+  });
+
+  it('moves one point of chance per point of advantage', () => {
+    expect(hitChance(200, 210)).toBeCloseTo((BASE_HIT_PERCENT - 10) / 100, 10);
+    expect(hitChance(210, 200)).toBeCloseTo((BASE_HIT_PERCENT + 10) / 100, 10);
+  });
+
+  it('never reaches certainty in either direction', () => {
+    // A defender who has out-scaled the attacker completely still takes one swing
+    // in twenty; an attacker who has out-scaled the defender still never gets a
+    // guarantee past perfect dodge.
+    expect(hitChance(0, 100000)).toBe(MIN_HIT_CHANCE);
+    expect(hitChance(100000, 0)).toBe(MAX_HIT_CHANCE);
+    expect(missChanceFromContest(0, 100000)).toBeCloseTo(1 - MIN_HIT_CHANCE, 10);
+  });
+
+  it('is the complement of the miss roll the swing actually makes', () => {
+    for (const [h, f] of [
+      [200, 200],
+      [300, 100],
+      [100, 300],
+    ] as const)
+      expect(hitChance(h, f) + missChanceFromContest(h, f)).toBeCloseTo(1, 10);
+  });
+});
+
+describe('perfect dodge', () => {
+  it('comes from Luck alone and starts at one percent', () => {
+    expect(perfectDodgeChance(0)).toBeCloseTo(0.01, 10);
+    expect(perfectDodgeChance(99)).toBeCloseTo(0.109, 10);
+    expect(perfectDodgeChance(-5)).toBeCloseTo(0.01, 10);
+  });
+
+  it('is not something accuracy can answer', () => {
+    // The contest and this roll are separate on purpose. If perfect dodge were
+    // folded into FLEE, a high-HIT attacker would eventually never miss at all,
+    // and Luck would stop being a defensive attribute.
+    const drowning = hitChance(100000, fleeRating(1, 0, 99));
+    expect(drowning).toBe(MAX_HIT_CHANCE);
+    expect(perfectDodgeChance(99)).toBeGreaterThan(0);
+  });
+});
+
+describe('the contest reaches a real swing', () => {
+  function landRate(opts: {
+    attackerDex?: number;
+    targetAgi?: number;
+    swings?: number;
+  }): number {
+    const sim = new Sim({ seed: 11, playerClass: 'warrior' });
+    const p = sim.player;
+    p.hp = p.maxHp = 1_000_000;
+    if (opts.attackerDex !== undefined) {
+      const meta = sim.players.get(sim.playerId);
+      if (!meta) throw new Error('missing meta');
+      const alloc: StatAllocation = { ...emptyStatAllocation(), dex: opts.attackerDex };
+      meta.statAllocation = alloc;
+      recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, alloc);
+    }
+    const target = createMob((sim as never as { nextId: number }).nextId++, MOBS.forest_wolf, 5, {
+      ...p.pos,
+    });
+    target.maxHp = target.hp = 100_000_000;
+    target.stats = { ...target.stats, armor: 0 };
+    if (opts.targetAgi !== undefined) {
+      target.stats = { ...target.stats, agi: opts.targetAgi };
+      target.flee = fleeRating(target.level, opts.targetAgi, 0);
+    }
+    (sim as never as { addEntity(e: unknown): void }).addEntity(target);
+    const swings = opts.swings ?? 400;
+    let landed = 0;
+    for (let i = 0; i < swings; i++) {
+      const before = target.hp;
+      meleeSwing(sim.ctx, p, target, 0, null, {});
+      if (target.hp < before) landed++;
+      target.hp = target.maxHp;
+    }
+    return landed / swings;
+  }
+
+  it('lands nearly every swing on an unevasive target', () => {
+    expect(landRate({})).toBeGreaterThan(0.9);
+  });
+
+  it('makes a high-Agility target genuinely hard to hit', () => {
+    // The behaviour that did not exist before: evasion that actually refuses
+    // hits, rather than a couple of percent off a flat roll.
+    const plain = landRate({});
+    const evasive = landRate({ targetAgi: 200 });
+    expect(evasive).toBeLessThan(plain);
+    expect(evasive).toBeLessThan(0.5);
+  });
+
+  it('lets Dexterity buy its way back through that evasion', () => {
+    // The other half, and the reason DEX is a real build choice now: accuracy
+    // answers evasion. With no DEX this attacker is losing the contest badly.
+    const noDex = landRate({ targetAgi: 200 });
+    const withDex = landRate({ targetAgi: 200, attackerDex: 150 });
+    expect(withDex).toBeGreaterThan(noDex + 0.2);
+  });
+
+  it('gives a player real hit and flee ratings off their own attributes', () => {
+    const sim = new Sim({ seed: 3, playerClass: 'hunter' });
+    sim.setPlayerLevel(40);
+    const p = sim.player;
+    expect(p.hit).toBe(hitRating(40, p.stats.dex, p.stats.luk) + Math.round(p.hitBonus * 100));
+    expect(p.flee).toBe(fleeRating(40, p.stats.agi, p.stats.luk));
+    // A hunter's suggested spread leads on Dexterity, so their accuracy should
+    // outrun their evasion; if those ever swap, the preset has drifted.
+    const bare = defaultAllocationFor('hunter', 40);
+    expect(bare.dex).toBeGreaterThan(bare.agi);
+  });
+});

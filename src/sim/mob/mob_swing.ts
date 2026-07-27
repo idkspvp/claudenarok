@@ -446,10 +446,10 @@ export function runMobSwingAffixes(
     ctx.applyAura(target, {
       id: `stagger_${mob.templateId}`,
       name: stagger.name,
-      kind: 'buff_dodge',
+      kind: 'buff_flee',
       remaining: stagger.duration,
       duration: stagger.duration,
-      value: -stagger.dodgeReduction,
+      value: -stagger.fleeReduction,
       sourceId: mob.id,
       school: 'physical',
     });

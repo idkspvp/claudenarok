@@ -1,3 +1,4 @@
+import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
 import type { TalentModifiers } from './content/talents';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
@@ -86,6 +87,8 @@ function baseEntity(id: number, pos: Vec3): Entity {
     critDmgSpellBonus: 0,
     critDmgPhysBonus: 0,
     critDmgHealBonus: 0,
+    hit: 0,
+    flee: 0,
     dodgeChance: 0.05,
     blockChance: 0,
     blockValue: 0,
@@ -409,6 +412,12 @@ export function recalcPlayerStats(
   // Buff auras
   let bonusAp = setEff.ap;
   let bonusDodge = 0;
+  // Flat FLEE granted or drained by auras. Separate from bonusDodge because the
+  // two are different mechanics now: a stagger knocks you off balance (evasion,
+  // contested against the attacker's accuracy), while a dodge grant is the flat
+  // slice Luck owns. Folding them together would let an accuracy build shrug off
+  // a stagger, which is exactly backwards.
+  let bonusFlee = 0;
   let bonusCrit = 0;
   let bonusHaste = 0;
   let bearForm = false;
@@ -459,6 +468,7 @@ export function recalcPlayerStats(
       s.int = Math.round(s.int * m);
       s.luk = Math.round(s.luk * m);
     } else if (a.kind === 'buff_dodge') bonusDodge += a.value;
+    else if (a.kind === 'buff_flee') bonusFlee += a.value;
     else if (a.kind === 'buff_scale') scaleMul *= a.value;
     // Metamorphosis: a temporary demon transform that also makes the caster larger.
     else if (a.kind === 'form_metamorph') scaleMul *= 1.35;
@@ -704,7 +714,14 @@ export function recalcPlayerStats(
   // Ragnarok evasion is Flee contested against the attacker's Hit, not a flat
   // chance, and that contest arrives with the combat model in phase 3. What
   // matters here is that AGI is worth points on the 1-99 scale.
-  e.dodgeChance = Math.max(0, 0.01 + s.agi * 0.003 + bonusDodge);
+  // Agility buys FLEE now, not a dodge percentage, and Dexterity buys accuracy,
+  // which it bought nowhere before. What is left on dodgeChance is Ragnarok's
+  // perfect dodge: flat, from Luck, and the one avoidance an attacker's accuracy
+  // cannot answer. Aura grants (buff_dodge and the mob stagger debuff) still land
+  // here, so their sign and magnitude are unchanged.
+  e.hit = hitRating(lvl, s.dex, s.luk) + Math.round(e.hitBonus * 100);
+  e.flee = Math.max(0, fleeRating(lvl, s.agi, s.luk) + bonusFlee);
+  e.dodgeChance = Math.max(0, perfectDodgeChance(s.luk) + bonusDodge);
 
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
   // Ragnarok's shape: VIT is a PERCENTAGE on the class pool, not a flat per-point
@@ -819,6 +836,28 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
     speed: template.attackSpeed,
   };
   // Armor scales from level 1 like hp/dmg above: a template has no armorBase,
+  // A monster's accuracy and evasion, from its LEVEL alone until its record
+  // carries real attributes (authoring those is its own pass, and it needs the
+  // monsters named first). Reading zero for AGI and DEX is the honest default:
+  // it makes a monster hittable and unevasive, which is what an unauthored one
+  // should be, and it means every number here gets better rather than different
+  // when the records land.
+  // A monster's Agility tracks its level until its record carries a real one.
+  // Reading zero looks like the honest default and is not: HIT and FLEE both
+  // gain a point per level, so a zero-Agility monster's evasion never outruns
+  // any attacker's accuracy, and a level-12 character lands every swing on a
+  // level-60 elite. Agility is what makes a monster hard to hit in Ragnarok, and
+  // an unauthored one needs enough of it for the level gap to mean something.
+  // Agility tracks level; Dexterity does NOT, and the asymmetry is the point.
+  // Agility is what makes a monster hard to hit, so a zero-Agility one lets a
+  // level-12 character land every swing on a level-60 elite. Dexterity is what
+  // makes a monster hard to DODGE, and giving it the same level scaling puts an
+  // unauthored monster's accuracy permanently ahead of any player's evasion:
+  // a 99-Agility character would never dodge anything, which deletes a whole
+  // build from the game. Both become authored numbers when the records land.
+  e.hit = hitRating(level, 0, 0);
+  e.flee = fleeRating(level, level, 0);
+  e.dodgeChance = perfectDodgeChance(0);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
   e.stats.armor = Math.round(template.armorPerLevel * (level - 1));
   e.moveSpeed = template.moveSpeed;

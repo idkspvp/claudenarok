@@ -5,19 +5,19 @@ import { Sim } from '../src/sim/sim';
 
 // Staggering mobs knock a player victim off-balance on a landed hit, cutting
 // their dodge chance for the duration so the attacker (and its pack) land more
-// of their swings. It rides the existing buff_dodge aura with a NEGATIVE value,
+// of their swings. It rides the existing buff_flee aura with a NEGATIVE value,
 // so recalcPlayerStats folds it straight into the victim's dodgeChance.
 describe('mob stagger-on-hit', () => {
   it('the Deeprock Tunneler template carries a Jarring Swing proc', () => {
     expect(MOBS.deeprock_kobold.staggerHit).toMatchObject({
       chance: 0.3,
-      dodgeReduction: 0.018,
+      fleeReduction: 20,
       duration: 8,
       name: 'Off-Balance',
     });
   });
 
-  it('a landed swing cuts the victim dodge via a negative buff_dodge aura', () => {
+  it('a landed swing cuts the victim Flee via a negative buff_flee aura', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Staggered');
     sim.setPlayerLevel(15);
@@ -27,9 +27,9 @@ describe('mob stagger-on-hit', () => {
     victim.hp = 100000;
     victim.gm = true; // invulnerable for the test; applyAura still fires
 
-    const baseDodge = victim.dodgeChance;
+    const baseFlee = victim.flee;
     // A same-level rogue's evasion, which the -1.8% shave has to stay under.
-    expect(baseDodge).toBeGreaterThan(0.018);
+    expect(baseFlee).toBeGreaterThan(0.018);
 
     const kobold = createMob((sim as any).nextId++, MOBS.deeprock_kobold, 15, { x: 0, y: 0, z: 0 });
     kobold.hostile = true;
@@ -44,11 +44,11 @@ describe('mob stagger-on-hit', () => {
 
     const aura = victim.auras.find((a) => a.name === 'Off-Balance');
     expect(aura).toBeTruthy();
-    expect(aura!.kind).toBe('buff_dodge');
-    expect(aura!.value).toBe(-0.018);
+    expect(aura!.kind).toBe('buff_flee');
+    expect(aura!.value).toBe(-20);
     expect(aura!.duration).toBe(8);
-    // recalcPlayerStats already folded the negative buff_dodge into dodgeChance.
-    expect(victim.dodgeChance).toBeCloseTo(Math.max(0, baseDodge - 0.018), 6);
+    // recalcPlayerStats already folded the negative buff_flee into dodgeChance.
+    expect(victim.flee).toBeCloseTo(Math.max(0, baseFlee - 20), 6);
   });
 
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
@@ -72,27 +72,29 @@ describe('mob stagger-on-hit', () => {
 
     const staggers = victim.auras.filter((a) => a.name === 'Off-Balance');
     expect(staggers.length).toBe(1);
-    expect(staggers[0].value).toBe(-0.018);
+    expect(staggers[0].value).toBe(-20);
   });
 
-  it('the dodge floor keeps dodgeChance from going negative', () => {
+  it('the flee floor keeps Flee from going negative', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Floored');
     sim.setPlayerLevel(15);
     const victim = sim.entities.get(pid)!;
 
-    // A reduction larger than the victim's whole dodge clamps to exactly 0.
+    // A reduction larger than the victim's whole Flee clamps to exactly 0: a
+    // negative rating would INVERT the contest and make them easier to hit than
+    // a rock, which is worse than merely undodgeable.
     (sim as any).applyAura(victim, {
       id: 'stagger_test',
       name: 'Off-Balance',
-      kind: 'buff_dodge',
+      kind: 'buff_flee',
       remaining: 8,
       duration: 8,
-      value: -1,
+      value: -100000,
       sourceId: victim.id,
       school: 'physical',
     });
-    expect(victim.dodgeChance).toBe(0);
+    expect(victim.flee).toBe(0);
   });
 
   it('an ordinary mob with no staggerHit field never applies the debuff', () => {

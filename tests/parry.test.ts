@@ -5,12 +5,13 @@
 // no entity.parryChance field anymore; the payload's every-weapon-class parry
 // expectation is intentionally superseded by the warrior-only redesign.
 import { describe, expect, it } from 'vitest';
+import { missChanceFromContest } from '../src/sim/combat/hit_flee';
 import { warriorMeleeDefense, warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, PlayerClass, SimEvent } from '../src/sim/types';
-import { swingMissChance } from '../src/sim/types';
+import { MOB_VS_PLAYER_MAX_MISS } from '../src/sim/types';
 
 type AnySim = Sim & {
   nextId: number;
@@ -78,7 +79,14 @@ describe('parry: who gets a parry chance (warrior-only redesign)', () => {
 describe('parry: the one-roll mob-swing hit table', () => {
   // Force the single table roll into the parry window [miss, miss + parry).
   function parryRoll(sim: AnySim, mob: Entity): number {
-    const missChance = swingMissChance(mob, sim.player);
+    // The parry band sits directly above the miss band, and miss is the accuracy
+    // contest's complement now rather than a level-difference curve. Reading it
+    // from the contest keeps the roll inside the band whatever the two sides'
+    // Dexterity and Agility happen to be.
+    const missChance = Math.min(
+      MOB_VS_PLAYER_MAX_MISS,
+      missChanceFromContest(mob.hit, sim.player.flee),
+    );
     return missChance + warriorParryChance(sim.player.stats.str) / 2;
   }
 
@@ -107,7 +115,9 @@ describe('parry: the one-roll mob-swing hit table', () => {
     const p = sim.player;
     p.dodgeChance = 0;
     // The roll a warrior of this Strength WOULD parry: for a paladin it connects.
-    const roll = swingMissChance(mob, p) + warriorParryChance(p.stats.str) / 2;
+    const roll =
+      Math.min(MOB_VS_PLAYER_MAX_MISS, missChanceFromContest(mob.hit, p.flee)) +
+      warriorParryChance(p.stats.str) / 2;
     sim.rng.next = () => roll;
     p.facing = 0;
     sim.drainEvents();
