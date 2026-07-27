@@ -62,12 +62,57 @@ counts compress by about a third.
 | level spread per area | **about 13, overlapping** | 7 to 8, contiguous |
 | areas serving any 10-level window | **2 to 3** | 1 |
 | boss sub-area per area | yes | dungeons only |
-| fields dominate | 1 to 50 | n/a |
-| dungeons dominate | 50 to 99 | n/a |
+| areas carry the whole 1 to 99 grind | yes | n/a |
+| dungeons | about 5, at roughly 25/45/65/85/100 | 3 plus one raid |
 
 The overlap is the part that is easy to drop and expensive to add back. Three
 areas whose bands are 1-13, 14-26 and 27-39 is a corridor; three whose bands are
 1-13, 8-21 and 16-29 is a choice. Author the second.
+
+Note where this DIVERGES from Ragnarok, deliberately. Ragnarok hands the late
+game to dungeons: above level 70 it has no field maps at all. Here the areas
+carry the grind the whole way to 99 and dungeons are occasional milestones
+instead of the endgame. That is an owner decision, not an oversight, and it is
+why the field/dungeon split measured above is recorded but not adopted.
+
+## Islands on one coordinate space
+
+Areas are ISLANDS in a single coordinate space, spaced further apart than the
+interest radius and joined only by teleports. Not a graph of separate coordinate
+spaces, and not the contiguous strip the three zones form today.
+
+This is the cheap way to get the thing that actually matters, which is **hard
+theme boundaries**. The heightfield blends biomes at a boundary on purpose
+(`src/sim/world.ts`, the `BIOME_SHAPE` blend), so on a contiguous world a desert
+cannot sit beside a snowfield without a graded transition between them. Islands
+have no shared boundary to blend, so each one can commit to its biome. Meanwhile
+terrain, water, decorations, collision and the rim wall all keep working on the
+one coordinate space they already assume, which is what a true map graph would
+have forced a rewrite of.
+
+Three record types, all of them pure data plus a teleport:
+
+| | What it is |
+|---|---|
+| `AreaDef` | name, bounds, level band, biome, spawn table. Generalizes `ZoneDef`, which is the same idea restricted to a z-slice of one strip |
+| `WarpDef` | area + point + radius, to area + point. The edge portals that make the progression walkable, one island to the next |
+| `WaypointDef` | a warp stone inside an area, usable only once touched. The fast-travel network, so returning to town is not a walk back through ten islands |
+
+The two teleport kinds answer different problems and both are needed: portals
+are the world's STRUCTURE, waypoints are convenience. Ragnarok separates them the
+same way (map-edge portals against the Kafra service).
+
+Spacing islands beyond the interest radius (about 120 yards) means a player never
+sees the neighbouring island across the gap, so each reads as its own place
+despite sharing a coordinate space with everything else.
+
+**One thing this does NOT get for free: tick cost.** The server's per-entity loop
+is linear in total world population, measured at roughly 2.6ms per tick at 457
+entities and 48ms at 6,457, against a 50ms budget at 20 Hz. Thirty populated
+islands land in the thousands, so areas with no player near them have to stop
+ticking their monsters. A true map graph would get that as a side effect of
+having separate spaces; here it is explicit work, and it is required rather than
+optional.
 
 ## The monster record
 
@@ -91,18 +136,45 @@ existing monsters has an authored race, element or size**, so the element chart,
 the size table and the whole card system currently have nothing to act on. B1 is
 the largest single piece of work in the conversion and this is why.
 
+## Order of work
+
+The existing monsters are the reason this can start now. All of them already
+carry names cleared through the `NAME-MAP.md` campaign, and all of them are drawn
+from **twelve** shared visual builds (`MobFamily` against
+`src/render/characters/manifest.ts`), separated only by the `scale` and `color`
+hints on the record. So a new monster is a data row on an existing build, not an
+art task, and redistributing the ones already here needs no new name at all.
+
+**That takes A2 off the critical path**, which is the opposite of what the
+roadmap currently assumes.
+
+| Phase | Work | Blocked by |
+|---|---|---|
+| 1 | Restat the existing monsters onto fixed blocks with race, element and size, and spread them across 1 to 99 | nothing |
+| 2 | `AreaDef` islands, the two teleport kinds, and the idle-area tick skip | nothing |
+| 3 | Grow the roster on the twelve builds, author the remaining dungeons, name what is new (A2) | 1 and 2 |
+
+Phase 1 alone makes the game playable to 99, which it is not today: every
+monster in the tree sits at level 20 or below.
+
+Phase 1 is also what unblocks `C6` (retiring `MOB_AP_PER_DPS`, which exists only
+because monster attack power is on the pre-conversion scale) and `C7` (the three
+heroic difficulty floors).
+
 ## What this does not decide
 
-- **Names.** A2 and A5 still own every monster and place name, and each goes
-  through `tests/ip_scrub.test.ts` and `ip-refactor/NAME-MAP.md`. Nothing here
-  proposes a name, and SpiritVale's names are its own.
-- **The world stays continuous.** The recommendation in
-  `ro-weapons-maps-monsters.md` (option A) is unchanged: areas are regions of one
-  heightfield plus the existing far-off instance origins, not a graph of separate
-  coordinate spaces. "32 to 35 areas" means named regions with their own spawn
-  tables, not 35 loading screens.
+- **Names for anything NEW.** A2 and A5 still own every new monster and place
+  name, and each goes through `tests/ip_scrub.test.ts` and
+  `ip-refactor/NAME-MAP.md`. Nothing here proposes a name, and SpiritVale's names
+  are its own.
+- **How many monsters an island holds.** A fixed stat block gives a monster one
+  level, so the existing roster spreads to roughly one monster per one and a half
+  levels: enough for about a dozen islands, not thirty. Phase 3 sizes that.
 - **Balance numbers.** Per-monster values land with B1, against the formulas in
   `ro-reference-source.md`.
+- **The single coordinate space stays.** The recommendation in
+  `ro-weapons-maps-monsters.md` (option A over a rebuilt map graph) is unchanged;
+  islands are how its cost is paid while still getting discrete-feeling places.
 
 ## Sources, and one that was wrong
 
