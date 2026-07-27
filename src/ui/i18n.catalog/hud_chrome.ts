@@ -76,9 +76,7 @@ export const hudChromeStrings = {
     disabled:
       'Daily Rewards is currently disabled. We will announce updates to this feature in the Discord channel.',
     intro:
-      'Hold enough WOC in your verified wallet to unlock daily rewards. Earn points with one daily spin and rotating tasks, then climb the daily leaderboard for a share of the prize pool.',
-    disclaimer:
-      'WOC price can move quickly. We recommend holding more than the $20 USD minimum so normal price swings do not lock you out. This is not financial advice.',
+      'Earn points with one daily spin and rotating tasks. The top scorers of the day share the prize pool.',
     prize: 'Prize Pool',
     reset: 'Reset',
     endsIn: 'Ends in {time}',
@@ -87,9 +85,7 @@ export const hudChromeStrings = {
     remainingHoursMinutes: '{hours}h {minutes}m',
     remainingDaysHours: '{days}d {hours}h',
     score: 'Score',
-    walletValue: 'Wallet Value (WOC)',
     usd: '{amount} USD',
-    sol: '{amount} SOL',
     unknown: 'Unknown',
     spinTitle: 'Daily Spin',
     spinDialogTitle: 'Daily Reward Spin',
@@ -115,30 +111,21 @@ export const hudChromeStrings = {
     history: 'Past Winners',
     noLeaders: 'No points yet.',
     noHistory: 'No payouts yet.',
-    walletConnectTitle: 'Verify Wallet',
-    walletConnectBody: 'Verify a Solana wallet with WOC to unlock daily rewards.',
-    walletConnectButton: 'Verify Wallet',
-    walletHoldTitle: 'Hold WOC',
-    walletHoldBody: 'Hold at least {amount} USD in WOC to unlock daily rewards.',
-    walletPriceBody: 'WOC pricing is unavailable right now. Check back shortly.',
     reason: {
       eligible: 'Rewards unlocked.',
-      no_wallet: 'Connect a wallet with at least $20 USD in WOC.',
-      under_minimum: 'Wallet is below the $20 USD WOC minimum.',
-      price_unavailable: 'WOC price is unavailable, rewards are temporarily locked.',
       banned: 'You are banned from Daily Rewards. Reason: {reason}',
       bannedUntil:
         'You are banned from Daily Rewards for another {remaining}. Access returns {until}. Reason: {reason}',
     },
   },
   wocStore: {
-    title: 'WOC Store',
-    close: 'Close WOC Store',
-    tabsLabel: 'WOC Store sections',
+    title: 'CO Store',
+    close: 'Close CO Store',
+    tabsLabel: 'CO Store sections',
     storeTab: 'Store',
     rewardsTab: 'Daily Rewards',
-    loading: 'Loading WOC Store...',
-    error: 'The WOC Store is unavailable right now. Please try again shortly.',
+    loading: 'Loading CO Store...',
+    error: 'The CO Store is unavailable right now. Please try again shortly.',
     balance: 'Claudium Balance',
     buyClaudium: 'Purchase Claudium',
     owned: 'Owned',
@@ -239,7 +226,6 @@ export const hudChromeStrings = {
     railUsdc: 'USDC',
     railWoc: 'WOC',
     railWocDiscount: '20% off',
-    railWocUnavailable: 'WOC pricing is unavailable right now.',
     railNativeUnavailable: 'Crypto off.',
     amountLabel: 'Amount',
     showAmounts: 'Show all Claudium amounts',
@@ -1307,7 +1293,6 @@ export const hudChromeStrings = {
     loggedOutPrompt: 'Log in to manage your account.',
     memberSince: 'Member since {date}',
     sectionSettings: 'Account Settings',
-    sectionWallet: '$WOC Wallet',
     sectionCharacters: 'Characters',
     sectionDanger: 'Danger Zone',
     // Change password
@@ -1339,8 +1324,6 @@ export const hudChromeStrings = {
     charactersCount: 'Characters: {count}',
     goToCharacters: 'View Characters',
     // Wallet
-    walletSummary: 'Verify a Solana wallet to show holder flair on your player card.',
-    manageWallet: 'Manage Wallet',
     // Deactivate
     deactivate: 'Deactivate Account',
     deactivateWarning:
