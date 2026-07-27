@@ -143,22 +143,6 @@ export const hudChromeStrings = {
     armoryTitle: 'The Armory',
     armoryBody:
       'Limited weapon skins from the Season 1 Armory. Account-wide, purely cosmetic, and shown to everyone around you.',
-    wallet: {
-      title: 'Solana wallet',
-      unlinked:
-        'Connect a wallet app, then sign once to link its public address to your WoC account. We never receive your recovery phrase or private key.',
-      connectedUnlinked:
-        'The wallet app is connected to this browser, but its public address is not linked to your WoC account yet.',
-      linkedDisconnected:
-        'Your public address is linked. Reconnect that wallet app when you want to pay with SOL or WOC.',
-      linkedConnected: 'Your linked wallet app is connected and ready for SOL or WOC purchases.',
-      mismatched:
-        'A different wallet is connected. Verify it to replace the linked address, or reconnect the linked wallet.',
-      connect: 'Connect wallet',
-      verify: 'Verify and link',
-      reconnect: 'Reconnect wallet',
-      manage: 'Manage wallet',
-    },
     collectionLine: '{collection} Collection',
     collections: armoryCollectionStrings,
     skins: armorySkinStrings,
@@ -239,8 +223,6 @@ export const hudChromeStrings = {
     checkoutPendingButton: 'Processing',
     checkoutFailed: 'Checkout could not be loaded. Please try again.',
     checkoutUnavailable: 'That Claudium purchase is not available right now.',
-    checkoutWalletRequired: 'Connect a Solana wallet before buying Claudium with crypto.',
-    checkoutWalletUnsupported: 'This wallet cannot sign and send Solana transactions.',
     checkoutNotSettled:
       'The transaction was sent but Claudium was not credited yet. Please try again shortly.',
   },
@@ -820,8 +802,6 @@ export const hudChromeStrings = {
     lockCursorOnRotate: 'Lock Cursor While Rotating',
     keybindHelpLockCursorOnRotate:
       'Keeps the mouse cursor inside the window while you drag to rotate the camera, so it cannot reach the screen edge or move to another monitor. Turn off if you prefer a free cursor.',
-    showWalletOnCharacterScreen: 'Show Wallet on Character Screen',
-    showWalletOnPlayerCard: 'Show Wallet on Player Card',
     // Interface panel toggle: nameplate glyph/outline, inspect block, player
     // card, and the Developers leaderboard tab (on by default).
     showDevBadges: 'Show Developer Badges',

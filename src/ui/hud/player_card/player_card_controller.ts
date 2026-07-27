@@ -335,7 +335,6 @@ export class PlayerCardController {
     return t('playerCard.shareText', {
       level: formatNumber(data.level, { maximumFractionDigits: 0 }),
       className: data.className,
-      tierBit: '',
     });
   }
 }

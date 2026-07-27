@@ -430,18 +430,6 @@ export const en: EnTranslations = {
       "armoryEyebrow": "Season 1",
       "armoryTitle": "The Armory",
       "armoryBody": "Limited weapon skins from the Season 1 Armory. Account-wide, purely cosmetic, and shown to everyone around you.",
-      "wallet": {
-        "title": "Solana wallet",
-        "unlinked": "Connect a wallet app, then sign once to link its public address to your WoC account. We never receive your recovery phrase or private key.",
-        "connectedUnlinked": "The wallet app is connected to this browser, but its public address is not linked to your WoC account yet.",
-        "linkedDisconnected": "Your public address is linked. Reconnect that wallet app when you want to pay with SOL or WOC.",
-        "linkedConnected": "Your linked wallet app is connected and ready for SOL or WOC purchases.",
-        "mismatched": "A different wallet is connected. Verify it to replace the linked address, or reconnect the linked wallet.",
-        "connect": "Connect wallet",
-        "verify": "Verify and link",
-        "reconnect": "Reconnect wallet",
-        "manage": "Manage wallet"
-      },
       "collectionLine": "{collection} Collection",
       "collections": {
         "guildmark": "Guildmark",
@@ -668,8 +656,6 @@ export const en: EnTranslations = {
       "checkoutPendingButton": "Processing",
       "checkoutFailed": "Checkout could not be loaded. Please try again.",
       "checkoutUnavailable": "That Claudium purchase is not available right now.",
-      "checkoutWalletRequired": "Connect a Solana wallet before buying Claudium with crypto.",
-      "checkoutWalletUnsupported": "This wallet cannot sign and send Solana transactions.",
       "checkoutNotSettled": "The transaction was sent but Claudium was not credited yet. Please try again shortly."
     },
     "theme": {
@@ -1027,8 +1013,6 @@ export const en: EnTranslations = {
       "clickFeedback": "Click Marker",
       "lockCursorOnRotate": "Lock Cursor While Rotating",
       "keybindHelpLockCursorOnRotate": "Keeps the mouse cursor inside the window while you drag to rotate the camera, so it cannot reach the screen edge or move to another monitor. Turn off if you prefer a free cursor.",
-      "showWalletOnCharacterScreen": "Show Wallet on Character Screen",
-      "showWalletOnPlayerCard": "Show Wallet on Player Card",
       "showDevBadges": "Show Developer Badges",
       "showOwnNameplate": "Show My Nameplate",
       "showPlayerNameplates": "Show Player Nameplates",
@@ -4738,8 +4722,7 @@ export const en: EnTranslations = {
     "footerHandleWithRecruits": "@{handle} - {recruited}",
     "footerCta": "Forge your legend: {siteUrl}",
     "arenaStat": "Arena",
-    "shareTierBit": ", {tier}-rank $WOC holder",
-    "shareText": "I'm forging my legend in Claudenarok Online: Level {level} {className}{tierBit}. Join my world:",
+    "shareText": "I'm forging my legend in Claudenarok Online: Level {level} {className}. Join my world:",
     "nativeShareTitle": "Claudenarok Online",
     "fileNameFallback": "player",
     "actionShareX": "Share to X",

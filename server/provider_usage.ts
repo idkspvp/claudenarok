@@ -10,10 +10,6 @@ export const USAGE_WINDOWS = [
 ] as const;
 
 const USAGE_METRICS = [
-  { key: 'woc.balance.api', labelKey: 'usage.metric.wocBalanceApi' },
-  { key: 'woc.balance.rate_limited', labelKey: 'usage.metric.wocBalanceRateLimited' },
-  { key: 'woc.balance.rpc', labelKey: 'usage.metric.wocBalanceRpc' },
-  { key: 'woc.balance.rpc.failure', labelKey: 'usage.metric.wocBalanceRpcFailure' },
   { key: 'turnstile.verify', labelKey: 'usage.metric.turnstileVerify' },
   { key: 'turnstile.verify.failure', labelKey: 'usage.metric.turnstileVerifyFailure' },
   { key: 'github.releases.api', labelKey: 'usage.metric.githubReleasesApi' },
@@ -38,7 +34,6 @@ const USAGE_METRICS = [
 ] as const;
 
 const USAGE_CACHES = [
-  { key: 'woc.balance', labelKey: 'usage.cache.wocBalance' },
   { key: 'github.releases', labelKey: 'usage.cache.githubReleases' },
   { key: 'github.contributors', labelKey: 'usage.cache.githubContributors' },
 ] as const;

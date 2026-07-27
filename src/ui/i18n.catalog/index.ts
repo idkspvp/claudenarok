@@ -416,9 +416,8 @@ export const en = {
     footerHandleWithRecruits: '@{handle} - {recruited}',
     footerCta: 'Forge your legend: {siteUrl}',
     arenaStat: 'Arena',
-    shareTierBit: ', {tier}-rank $WOC holder',
     shareText:
-      "I'm forging my legend in Claudenarok Online: Level {level} {className}{tierBit}. Join my world:",
+      "I'm forging my legend in Claudenarok Online: Level {level} {className}. Join my world:",
     nativeShareTitle: 'Claudenarok Online',
     fileNameFallback: 'player',
     actionShareX: 'Share to X',
