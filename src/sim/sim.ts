@@ -4262,7 +4262,7 @@ export class Sim {
   }
 
   // Threat modifier including the flat threat modifier (a tank role bonus, say).
-  // Reads the precomputed flat threatPct — no tree walk.
+  // Reads the precomputed flat threatPct, never a tree walk.
   private threatMod(source: Entity, school: string): number {
     let m = threatModifier(source, school);
     if (source.kind === 'player') {
