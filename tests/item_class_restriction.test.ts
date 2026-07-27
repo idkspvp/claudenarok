@@ -50,7 +50,10 @@ describe('requiredClassesForTooltip', () => {
       sellValue: 1,
     } satisfies ItemDef;
 
-    expect(canEquipItem('swordman', item)).toBe(false);
+    // A shield equips by its literal list, so the Swordman on the list CAN wear it
+    // and every other job cannot. The tooltip still names the list either way.
+    expect(canEquipItem('swordman', item)).toBe(true);
+    expect(canEquipItem('acolyte', item)).toBe(false);
     expect(requiredClassesForTooltip(item)).toEqual(['swordman']);
   });
 
@@ -64,21 +67,23 @@ describe('requiredClassesForTooltip', () => {
     }
   });
 
-  it('names the classes for a swordman/swordman/acolyte mail chest (Deathlord Warplate)', () => {
+  it('names the class for a mail chest (Barrowlord Warplate)', () => {
+    // The Paladin and the Shaman shared this plate line and were cut in D1, so the
+    // Swordman is the whole list now.
     const item = ITEMS.deathlord_warplate;
     expect(item).toBeDefined();
     expect(canEquipItem('mage', item)).toBe(false);
-    expect(requiredClassesForTooltip(item)).toEqual(['swordman', 'swordman', 'acolyte']);
+    expect(requiredClassesForTooltip(item)).toEqual(['swordman']);
   });
 
   it('does not claim a restriction armor does not enforce (Shadowstitch Jerkin)', () => {
     // canEquipItem short-circuits leather armor on weight: every leather AND mail
-    // class can wear it, so a acolyte (a leather class) can equip it even though
+    // class can wear it, so the Swordman (mail) can equip it even though
     // requiredClass only names thief/archer. requiredClass here is loot-targeting
     // metadata, not an enforced restriction, so the tooltip must stay silent.
     const item = ITEMS.shadow_jerkin;
     expect(item).toBeDefined();
-    expect(canEquipItem('acolyte', item)).toBe(true);
+    expect(canEquipItem('swordman', item)).toBe(true);
     expect(requiredClassesForTooltip(item)).toBeNull();
   });
 

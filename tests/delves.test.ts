@@ -1,6 +1,7 @@
 // Delve system, spatial band, lifecycle, death rules, and pet stow (Phase 1).
 
 import { describe, expect, it } from 'vitest';
+import { raisePool } from './helpers/sp';
 import { DELVE_AFFIXES } from '../src/sim/content/delves/affixes';
 import { delveChestItemsForTier } from '../src/sim/content/delves/lockpick_tiers';
 import {
@@ -79,6 +80,7 @@ function enterLitany(sim: Sim, tier: 'normal' | 'heroic' = 'normal') {
 }
 
 function castAndFinish(sim: Sim, id: string) {
+  raisePool(sim.player);
   sim.castAbility(id);
 
   for (let i = 0; i < 20 * 12 && sim.player.castingAbility; i++) sim.tick();
@@ -396,10 +398,12 @@ describe('delve death rules', () => {
 });
 
 describe('delve pet stow', () => {
-  it('stows mage demon on enter and restores on leave', () => {
+  it('stows a summoned pet on enter and restores it on leave', () => {
+    // The Warlock's Imp was cut in D1; the Mage's Water Elemental is the
+    // surviving summon, so it is what the stow round trip runs on.
     const sim = makeSim('mage');
-    sim.setPlayerLevel(10);
-    castAndFinish(sim, 'summon_imp');
+    sim.setPlayerLevel(12);
+    castAndFinish(sim, 'summon_water_elemental');
     expect(sim.petOf(sim.playerId)).not.toBeNull();
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
@@ -407,13 +411,13 @@ describe('delve pet stow', () => {
     expect(sim.petOf(sim.playerId)).toBeNull();
     sim.leaveDelve();
     expect(sim.petOf(sim.playerId)).not.toBeNull();
-    expect(sim.petOf(sim.playerId)?.templateId).toBe('emberkin');
+    expect(sim.petOf(sim.playerId)?.templateId).toBe('water_elemental');
   });
 
   it('trying to summon a stowed pet inside a delve explains why, instead of "you have no pet"', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(10);
-    castAndFinish(sim, 'summon_imp');
+    sim.setPlayerLevel(12);
+    castAndFinish(sim, 'summon_water_elemental');
     expect(sim.petOf(sim.playerId)).not.toBeNull();
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
@@ -450,8 +454,8 @@ describe('delve pet stow', () => {
 
   it('restorePetFromDelveStash keeps the stash entry if the owner entity is not yet registered', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(10);
-    castAndFinish(sim, 'summon_imp');
+    sim.setPlayerLevel(12);
+    castAndFinish(sim, 'summon_water_elemental');
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
     sim.enterDelve('collapsed_reliquary', 'normal');
