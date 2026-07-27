@@ -38,14 +38,16 @@ export interface JobVitals {
   spFactor: number;
 }
 
-/** Ragnarok's pre-renewal coefficients for the first jobs.
+/** Ragnarok's pre-renewal coefficients for the five first jobs.
+ *
+ *  No Novice row: this game has no Novice state, characters pick a first job at
+ *  creation, so a Novice curve is a row nothing would ever evaluate.
  *
  *  Three things are worth reading off this table rather than assuming:
  *  `hpIncrease` is 500 for EVERY job, so it separates nothing; `spFactor` is 0
  *  for every first job, so SP is purely linear; and Thief and Archer are
  *  identical, which is a real property of the era and not a copy-paste slip. */
 export const JOB_VITALS: Readonly<Record<string, JobVitals>> = {
-  novice: { hpIncrease: 500, hpFactor: 0, spIncrease: 100, spFactor: 0 },
   swordman: { hpIncrease: 500, hpFactor: 70, spIncrease: 200, spFactor: 0 },
   thief: { hpIncrease: 500, hpFactor: 50, spIncrease: 200, spFactor: 0 },
   archer: { hpIncrease: 500, hpFactor: 50, spIncrease: 200, spFactor: 0 },

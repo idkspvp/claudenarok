@@ -77,11 +77,17 @@ describe('the roster is spread the way Ragnarok spreads it', () => {
     expect(JOB_VITALS.thief).toEqual(JOB_VITALS.archer);
   });
 
-  it('leaves the Novice behind everything, with no quadratic term at all', () => {
-    expect(JOB_VITALS.novice.hpFactor).toBe(0);
-    for (const id of ['swordman', 'thief', 'archer', 'acolyte', 'mage']) {
-      expect(baseHpAt(JOB_VITALS[id], 99), id).toBeGreaterThan(baseHpAt(JOB_VITALS.novice, 99));
-    }
+  it('carries no Novice row, because there is no Novice to carry one for', () => {
+    // Characters pick a first job at creation, so a Novice curve is a row that
+    // nothing would ever evaluate.
+    expect(JOB_VITALS.novice).toBeUndefined();
+    expect(Object.keys(JOB_VITALS).sort()).toEqual([
+      'acolyte',
+      'archer',
+      'mage',
+      'swordman',
+      'thief',
+    ]);
   });
 });
 
@@ -89,7 +95,6 @@ describe('the endpoints', () => {
   // Computed from the source formula, stated as literals in exactly one place so
   // a change to the curve has to come here and be looked at.
   const HP_AT_99: Record<string, number> = {
-    novice: 530,
     swordman: 3997,
     thief: 3029,
     archer: 3029,
@@ -97,7 +102,6 @@ describe('the endpoints', () => {
     mage: 2020,
   };
   const SP_AT_99: Record<string, number> = {
-    novice: 109,
     swordman: 208,
     thief: 208,
     archer: 208,
