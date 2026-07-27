@@ -1190,3 +1190,39 @@ Cascaded pairings: the warrior talent rows named after their granted ability
 (`war_row_victory_rush`, the Abandon and Rending Cyclone rows), the mage choice
 row for Hoarfrost Ring, and the `Killing High` literal the on-kill heal event
 spells in `combat/damage.ts`.
+
+## POST-LOCK APPENDIX: v0.30.0 class ids (SpiritVale RO conversion, D1 first jobs)
+
+The class list collapsed from the inherited nine onto Ragnarok's five FIRST
+JOBS. These rows are recorded here for the same reason the v0.30.0 gap rows
+are: the strings are player-visible display names, and every one of them went
+through the G0 scanner (`tests/ip_scrub.test.ts`) before landing.
+
+Unlike every other row on this map, the class ids are NOT frozen. A class id is
+the `PlayerClass` union member, so the id and the name moved together; saved
+characters are migrated by `server/first_jobs_migration_db.ts` and the render
+visual keys (`player_<id>`) and skill-icon folders (`public/ui/skills/<id>/`)
+moved with them.
+
+`Swordman` keeps Ragnarok's own non-standard spelling: the tree is being
+matched, not paraphrased.
+
+| id (old -> new) | old | new | kind | flag |
+| --- | --- | --- | --- | --- |
+| `warrior` -> `swordman` | Warrior | Swordman | class | rename |
+| `hunter` -> `archer` | Hunter | Archer | class | rename |
+| `priest` -> `acolyte` | Priest | Acolyte | class | rename |
+| `rogue` -> `thief` | Rogue | Thief | class | rename |
+| `mage` (unchanged) | Mage | Mage | class | generic-keep |
+
+Three of those NEW ids are simultaneously SECOND-job ids that already existed in
+`src/sim/content/jobs.ts` under their old names: Hunter is the 2-1 of Archer,
+Rogue the 2-2 of Thief, Priest the 2-1 of Acolyte. The namespaces stay separate
+on purpose, `PlayerClass` only ever holds first-job ids, so a rename pass over
+the tree must exclude `src/sim/content/jobs.ts` and `tests/jobs.test.ts` or it
+overwrites the job tree with the class list.
+
+Cut outright, no new name: `paladin`, `shaman`, `warlock`, `druid`. Paladin
+returns as **Crusader** (already a row in the job tree) when second jobs land;
+the other three are deferred by decision. Their characters are archived rather
+than renamed.
