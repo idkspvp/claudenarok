@@ -25,7 +25,7 @@ import {
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
 import type { DungeonDifficulty } from '../src/sim/types';
-import { armorReduction } from '../src/sim/types';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 
 const REF_ARMOR = 2861;
 const DEFENSIVE_STANCE_TAKEN = 0.9;
@@ -71,7 +71,7 @@ function minSwing(
   const template = mobTemplateForDungeonDifficulty(MOBS[mobId], dungeonId, difficulty, role);
   const level = levelOverride ?? template.maxLevel;
   const mob = createMob(1, template, level, { x: 0, y: 0, z: 0 });
-  const afterArmor = Math.round(mob.weapon.min * (1 - armorReduction(REF_ARMOR, level)));
+  const afterArmor = Math.round(mob.weapon.min * hardDefMultiplier(REF_ARMOR));
   return Math.round(afterArmor * DEFENSIVE_STANCE_TAKEN);
 }
 

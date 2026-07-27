@@ -77,7 +77,7 @@ export function statEffectText(e: StatEffect, deps: StatTooltipI18n): string {
     case 'maxManaPct':
       return deps.t(key, { value: dec1(deps, e.value) });
     case 'damageReduction':
-      return deps.t(key, { level: int0(deps, e.level ?? 0), value: dec1(deps, e.value) });
+      return deps.t(key, { value: dec1(deps, e.value) });
   }
 }
 

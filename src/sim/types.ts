@@ -5085,10 +5085,12 @@ export function swingMissChance(attacker: Entity, target: Entity): number {
   return Math.max(0, miss - attacker.hitBonus);
 }
 
-export function armorReduction(armor: number, attackerLevel: number): number {
-  const a = Math.max(0, armor);
-  return Math.min(0.75, a / (a + 85 * attackerLevel + 400));
-}
+// The single armour curve this game shipped with is gone. Ragnarok's defence is
+// two layers (a capped equipment percentage, then a flat Vitality subtraction)
+// and lives in `src/sim/combat/defence.ts`. The old curve had neither the flat
+// layer nor the cap, and it normalized by the ATTACKER's level, so the same
+// armour was worth less against a higher-level enemy, which Ragnarok never does.
+// Nothing here replaces it: physical damage sites call `ctx.applyDefence`.
 
 // ---------------------------------------------------------------------------
 // Spell Power: caster damage scaling (classic-style cast-time / DoT-duration

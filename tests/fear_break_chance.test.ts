@@ -99,7 +99,10 @@ describe('G5: damage-scaled fear break', () => {
   it('Harrow applies a chance-scaled fear', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warlock', autoEquip: true });
     sim.setPlayerLevel(14);
-    const mob = addTarget(sim, 3);
+    // Level-matched on purpose. Fear rolls to land, and a six-level gap gives the
+    // target a real resist chance, so a level-20 target made this a seeded
+    // coin-flip that any change to the shared rng draw order could turn over.
+    const mob = addTarget(sim, 3, 14);
     sim.player.resource = sim.player.maxResource;
     sim.castAbility('fear');
     // 1.5s cast, then the fear rides a projectile (spellfx projectile) and

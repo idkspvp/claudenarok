@@ -36,7 +36,6 @@ import type { SimContext } from '../sim_context';
 import { addThreat } from '../threat';
 import {
   angleTo,
-  armorReduction,
   BATTLE_TRANCE_CHANCE,
   BATTLE_TRANCE_DURATION,
   DT,
@@ -374,7 +373,7 @@ export function rangedSwing(
     const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, atk) ? 1 : critChance);
     if (crit) dmg *= 2 + atk.critDmgPhysBonus;
     // wand bolts are magic — armor doesn't apply; physical auto shot is mitigated
-    if (!ranged.wand) dmg *= 1 - armorReduction(ctx.effectiveArmor(tgt), atk.level);
+    if (!ranged.wand) dmg = ctx.applyDefence(dmg, tgt);
     ctx.dealDamage(
       atk,
       tgt,
@@ -521,7 +520,7 @@ export function meleeSwing(
     ctx.rng.chance(consumeNextAttackCrit(ctx, attacker) ? 1 : critChance) ||
     opts.forceCrit === true;
   if (crit) dmg *= 2 + attacker.critDmgPhysBonus;
-  dmg *= 1 - armorReduction(ctx.effectiveArmor(target), attacker.level);
+  dmg = ctx.applyDefence(dmg, target);
   if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
     dmg = Math.max(1, dmg - target.blockValue);
   }

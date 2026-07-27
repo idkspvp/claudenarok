@@ -31,7 +31,7 @@ import {
   applyDungeonMobTuning,
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
-import { armorReduction } from '../src/sim/types';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
 
 const SANCTUM = 'gravewyrm_sanctum';
 const REF_ARMOR = 2861; // max-armor BiS prot warrior, level 20 (see header)
@@ -78,7 +78,7 @@ function sanctumTuning(): NormalDungeonTuning {
 function minSwingOnReferenceWarrior(mobId: string, level: number): number {
   const template = mobTemplateForDungeonDifficulty(MOBS[mobId], SANCTUM, 'normal');
   const mob = createMob(1, template, level, { x: 0, y: 0, z: 0 });
-  const afterArmor = Math.round(mob.weapon.min * (1 - armorReduction(REF_ARMOR, level)));
+  const afterArmor = Math.round(mob.weapon.min * hardDefMultiplier(REF_ARMOR));
   return Math.round(afterArmor * DEFENSIVE_STANCE_TAKEN);
 }
 

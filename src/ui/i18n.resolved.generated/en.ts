@@ -1267,7 +1267,7 @@ export const en: EnTranslations = {
         "spellCritPct": "+{value}% Spell Critical Strike",
         "healthRegen": "About {value} health every 5 sec while resting",
         "manaRegen": "About {value} mana every 5 sec while resting",
-        "damageReduction": "Damage reduction against a level {level} attacker: {value}%",
+        "damageReduction": "Damage reduction from equipment: {value}%",
         "dpsFromAp": "Adds {value} damage per second to your attacks"
       },
       "notes": {

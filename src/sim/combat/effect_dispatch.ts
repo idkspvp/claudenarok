@@ -9,7 +9,7 @@
 // caller. The C1/C2 damage/heal primitives, the shared aura/CC helpers, the P1 pet
 // hooks, and the shared `pulseGroundAoE`/`applyTaunt`/`meleeSwing` entry points all
 // STAY on Sim and are consumed via the seam. The pure module fns/consts the switch
-// uses (preservesStealth, armorReduction, recalcPlayerStats, addThreat,
+// uses (preservesStealth, recalcPlayerStats, addThreat,
 // swingMissChance, CHARGE_MAX_DURATION) are imported/inlined directly.
 //
 // `src/sim`-pure: no DOM/Three, no Math.random/Date.now; all randomness is the
@@ -37,7 +37,6 @@ import { addThreat } from '../threat';
 import type { AbilityDef, Entity } from '../types';
 import {
   angleTo,
-  armorReduction,
   DT,
   ENRAGE_DMG_DONE,
   isNonSpellCast,
@@ -402,7 +401,7 @@ export function runEffects(
         if (sureCrit) sureCritRolled = true;
         if (crit) dmg *= (isSpell ? 1.5 : 2) + (isSpell ? p.critDmgSpellBonus : p.critDmgPhysBonus);
         if (isSpell) dmg *= spellDamageMultFromAuras(p);
-        if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(target), p.level);
+        if (!isSpell) dmg = ctx.applyDefence(dmg, target);
         // Aether Surge (Chronomancy Phase 3): each held Arcane Charge scales the
         // FULL post-spell-power, post-crit damage. The extra damage is what feeds
         // more Temporal Echo healing (no hidden heal bonus). Deterministic; reads
@@ -501,7 +500,7 @@ export function runEffects(
           fireGuaranteedCrit(ctx, p, ability.id, ability.school, target ?? null);
         if (sureCrit) sureCritRolled = true;
         if (crit) dmg *= 2 + p.critDmgPhysBonus;
-        dmg *= 1 - armorReduction(ctx.effectiveArmor(target), p.level);
+        dmg = ctx.applyDefence(dmg, target);
         ctx.dealDamage(
           p,
           target,
@@ -1374,7 +1373,7 @@ export function runEffects(
           // Armor only mitigates physical damage, mirroring the single-target
           // path above — spell-school AoE (Arcane Explosion, Consecration) is
           // not reduced by the target's armor.
-          if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(m), p.level);
+          if (!isSpell) dmg = ctx.applyDefence(dmg, m);
           // Soft-cap scale (Revenge above 5 targets): applied after the roll and
           // armor so the total, not any single hit, is what the cap bounds.
           dmg *= capScale;
@@ -1485,7 +1484,7 @@ export function runEffects(
           });
           let dmg = baseAmount * eff.falloff ** i;
           if (isSpell) dmg *= spellDamageMultFromAuras(p);
-          else dmg *= 1 - armorReduction(ctx.effectiveArmor(m), p.level);
+          else dmg = ctx.applyDefence(dmg, m);
           ctx.dealDamage(
             p,
             m,
@@ -2128,7 +2127,7 @@ export function runEffects(
           if (sureCrit) sureCritRolled = true;
           if (crit)
             dmg *= (isSpell ? 1.5 : 2) + (isSpell ? p.critDmgSpellBonus : p.critDmgPhysBonus);
-          if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(target), p.level);
+          if (!isSpell) dmg = ctx.applyDefence(dmg, target);
           if (isSpell) noteSpellHit(ctx, p, crit, ability.id);
           ctx.dealDamage(
             p,

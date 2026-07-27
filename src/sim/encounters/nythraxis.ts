@@ -37,7 +37,6 @@ import { addThreat, clearThreat, SUMMONED_ADD_THREAT_SEED, threatEntries } from 
 import {
   type AuraKind,
   angleTo,
-  armorReduction,
   DT,
   dist2d,
   type Entity,
@@ -706,10 +705,10 @@ export function nythraxisGravebreakerOnMobSwing(
     if (d > NYTHRAXIS_GRAVEBREAKER_RANGE) continue;
     const delta = Math.abs(normAngle(angleTo(boss.pos, p.pos) - boss.facing));
     if (delta > NYTHRAXIS_GRAVEBREAKER_HALF_ARC) continue;
-    const mitigated =
-      splashBasis *
-      NYTHRAXIS_GRAVEBREAKER_SPLASH_MULT *
-      (1 - armorReduction(ctx.effectiveArmor(p), boss.level));
+    const mitigated = ctx.applyDefence(
+      splashBasis * NYTHRAXIS_GRAVEBREAKER_SPLASH_MULT,
+      p,
+    );
     ctx.dealDamage(
       boss,
       p,

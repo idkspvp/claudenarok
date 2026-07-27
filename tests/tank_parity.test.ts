@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { ITEMS } from '../src/sim/data';
 import { canEquipItem } from '../src/sim/equipment_rules';
 import { Sim } from '../src/sim/sim';
-import { armorReduction, type EquipSlot, type ItemDef, type PlayerClass } from '../src/sim/types';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
+import type { EquipSlot, ItemDef, PlayerClass } from '../src/sim/types';
 
 // Tank parity (2026-07): the three committed tanks land within a band of each
 // other in effective HP against a level-22 heroic mob, each with a distinct
@@ -62,7 +63,7 @@ function tankEhp(cls: PlayerClass, spec: string, form?: string): number {
     expect(p.auras.some((a) => a.kind === 'form_bear')).toBe(true);
   }
   sim.ctx.recalcPlayer(p);
-  const pass = 1 - armorReduction(sim.ctx.effectiveArmor(p), 22);
+  const pass = hardDefMultiplier(sim.ctx.effectiveArmor(p));
   const stance = cls === 'warrior' ? 0.9 : 1;
   return Math.round(p.maxHp / (pass * stance));
 }

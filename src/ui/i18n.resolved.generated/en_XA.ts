@@ -1267,7 +1267,7 @@ export const en_XA: EnTranslations = {
         "spellCritPct": "[+{value}% Šþéļļ Çŕíţíçáļ Šţŕíķé]",
         "healthRegen": "[Áƀóúţ {value} ĥéáļţĥ éʋéŕý 5 šéç ŵĥíļé ŕéšţíñĝ]",
         "manaRegen": "[Áƀóúţ {value} ɱáñá éʋéŕý 5 šéç ŵĥíļé ŕéšţíñĝ]",
-        "damageReduction": "[Ðáɱáĝé ŕéðúçţíóñ áĝáíñšţ á ļéʋéļ {level} áţţáçķéŕ: {value}%]",
+        "damageReduction": "[Ðáɱáĝé ŕéðúçţíóñ ƒŕóɱ éɋúíþɱéñţ: {value}%]",
         "dpsFromAp": "[Áððš {value} ðáɱáĝé þéŕ šéçóñð ţó ýóúŕ áţţáçķš]"
       },
       "notes": {

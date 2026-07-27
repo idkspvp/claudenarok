@@ -54,6 +54,9 @@ describe('shield block', () => {
     player.blockChance = 1;
     player.blockValue = 6;
     player.stats.armor = 0;
+    // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
+    // alone no longer isolates the mechanic under test.
+    player.stats.vit = 0;
     mob.weapon = { min: 20, max: 20, speed: 2 };
     mob.attackPower = 0;
     // One-roll table: 0.9 clears miss (~5%) and the warrior parry band (~5.5%),
@@ -86,6 +89,9 @@ describe('shield block', () => {
     attacker.attackPower = 0;
     attacker.critChance = 0;
     defender.stats.armor = 0;
+    // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
+    // alone no longer isolates the mechanic under test.
+    defender.stats.vit = 0;
     defender.dodgeChance = 0;
     defender.blockChance = 1;
     defender.blockValue = 6;

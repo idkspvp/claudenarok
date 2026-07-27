@@ -11,6 +11,7 @@
 // tests/stat_tooltip.test.ts cross-checks this module against real
 // recalcPlayerStats output so the numbers cannot silently drift.
 
+import { hardDefMultiplier } from '../sim/combat/defence';
 import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
 import {
@@ -22,7 +23,6 @@ import {
 } from '../sim/entity';
 import {
   type AuraKind,
-  armorReduction,
   BASE_STAT,
   type CoreStats,
   type PlayerClass,
@@ -86,8 +86,6 @@ export type StatEffectKind =
 export interface StatEffect {
   kind: StatEffectKind;
   value: number;
-  /** Only set for `damageReduction`: the reference attacker level. */
-  level?: number;
 }
 
 // --- upstream source breakdown ("what FEEDS this stat") ---------------------
@@ -339,8 +337,10 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.armor;
       effects.push({
         kind: 'damageReduction',
-        value: armorReduction(stats.armor, level) * 100,
-        level,
+        // Ragnarok's hard DEF: a flat percentage from equipment that does NOT
+        // depend on who is attacking. The old curve normalized by the ATTACKER's
+        // level, so this line used to name one; there is no such reference now.
+        value: (1 - hardDefMultiplier(stats.armor)) * 100,
       });
       break;
     }

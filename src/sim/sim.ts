@@ -63,6 +63,7 @@ import {
   grantXp as grantXpImpl,
   handleDeath as handleDeathImpl,
 } from './combat/damage';
+import { applyDefence } from './combat/defence';
 import { damageTakenWithin } from './combat/damage_history';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
 import { applyIgnite } from './combat/fire_mage';
@@ -474,7 +475,6 @@ import {
   type Aura,
   type AuraKind,
   angleTo,
-  armorReduction,
   assertCanonicalEastbrookNoticeboardDef,
   type CrowdControlDrCategory,
   type CrowdControlDrState,
@@ -4050,6 +4050,8 @@ export class Sim {
       // the devour recalc wrapper. Both stay on Sim; the cascade reaches them via ctx.
       effectiveArmor: sim.effectiveArmor.bind(sim),
       recalcPlayer: sim.recalcPlayer.bind(sim),
+      // C3: the shared two-layer defence entry point (see the SimContext decl).
+      applyDefence: sim.applyDefence.bind(sim),
       // I2a delve run lifecycle now lives in src/sim/delves/runs.ts; the moved module
       // reaches the still-on-Sim helpers / gate predicates / pet seam / I2b lockpick /
       // I2c companion through these delegates. The five reach-in callbacks resolve back
@@ -4798,6 +4800,29 @@ export class Sim {
         reductionPct = Math.max(reductionPct, FAERIE_FIRE_ARMOR_PCT);
     }
     return Math.max(0, armor * (1 - reductionPct));
+  }
+
+  // Ragnarok's two defence layers applied to one physical hit: the capped
+  // equipment percentage, then Vitality's flat subtraction (combat/defence.ts).
+  // This replaced the single level-normalized `armorReduction` curve, which was
+  // the wrong shape in both directions: it had no flat component at all, so
+  // Vitality bought nothing against being chipped, and it normalized by the
+  // ATTACKER's level, so the same armour was worth less against a higher-level
+  // enemy. Ragnarok's DEF does neither.
+  //
+  // The soft-DEF roll is drawn here, unconditionally, so the global draw order
+  // stays independent of the defender's Vitality: making the draw conditional on
+  // a non-empty random span (which is what the formula's floor terms imply below
+  // roughly 60 Vitality) would make the rng stream depend on stat values, and a
+  // gear change would silently fork the world.
+  private applyDefence(damage: number, target: Entity): number {
+    const roll = this.rng.next();
+    return applyDefence(damage, {
+      armor: this.effectiveArmor(target),
+      vit: target.stats.vit,
+      isMonster: target.kind !== 'player',
+      roll,
+    });
   }
 
   private effectiveAttackPower(e: Entity): number {
@@ -6117,7 +6142,7 @@ export class Sim {
     if (mob.enraged && enrage) dmg *= enrage.dmgMult;
     dmg *= this.petDamageMult(mob);
     const rawDmg = dmg; // pre-armor, post-crit/enrage — basis for cleave splash
-    dmg *= 1 - armorReduction(this.effectiveArmor(target), mob.level);
+    dmg = this.applyDefence(dmg, target);
     if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
       dmg = Math.max(1, dmg - target.blockValue);
     }

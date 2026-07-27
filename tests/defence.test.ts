@@ -12,6 +12,7 @@ import {
   hardDefFrom,
   hardDefMultiplier,
   MAX_HARD_DEF,
+  MIN_DAMAGE_AFTER_DEF,
   monsterSoftDef,
   playerSoftDef,
   REACHABLE_ARMOR_CEILING,
@@ -131,8 +132,14 @@ describe('applyDefence: the order of the two layers', () => {
     );
   });
 
-  it('floors at zero rather than healing the target', () => {
-    expect(applyDefence(5, { armor: heavyArmor, vit: 99, roll: 1 })).toBe(0);
+  it('floors at 1, so a landed hit always takes something off', () => {
+    // Ragnarok caps post-defence damage to 1, not 0. Flooring at 0 instead would
+    // make a high-Vitality target unhittable by a weak attacker, since soft DEF
+    // is a flat subtraction with nothing else stopping it from exceeding the
+    // whole hit. This shipped wrong once: a druid's Swipe on an arena opponent
+    // resolved to exactly no damage at all.
+    expect(applyDefence(5, { armor: heavyArmor, vit: 99, roll: 1 })).toBe(MIN_DAMAGE_AFTER_DEF);
+    expect(applyDefence(0, { armor: 0, vit: 0, roll: 0 })).toBe(MIN_DAMAGE_AFTER_DEF);
   });
 
   it('makes the flat layer matter more against small hits than large ones', () => {

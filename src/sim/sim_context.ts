@@ -615,6 +615,14 @@ export interface SimContextCallbacks {
   // the module never touches the map directly).
   effectiveArmor(e: Entity): number;
   recalcPlayer(target: Entity): void;
+  // Ragnarok's two defence layers (hard DEF percentage, then soft DEF flat) for
+  // one physical hit. STAYS on Sim: it is a shared entry point, reached from
+  // auto-attack, casting, effect dispatch, the mob swing shell, and the raid
+  // encounter, and it reads `effectiveArmor` and DRAWS from the shared rng, so no
+  // single slice can own it. Every physical damage site routes through this
+  // rather than multiplying by an armour fraction itself, which is what keeps the
+  // flat Vitality layer from being silently skipped somewhere.
+  applyDefence(damage: number, target: Entity): number;
   // I2a delve run lifecycle (delves/runs.ts). The reach-in callbacks delveRunForMob/
   // onDelveBossDefeated/delveDetectMult are declared above (C1/M2 stubs; I2a flips
   // points-at to delves/runs via the Sim delegate); startDelveRaiseDeadChannel is the
@@ -1200,6 +1208,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     // M3 mob-swing affix cascade seam.
     effectiveArmor: host.effectiveArmor,
     recalcPlayer: host.recalcPlayer,
+    applyDefence: host.applyDefence,
     // I2a delve run lifecycle bindings. grantXp/despawnPet/delveRunForMob/
     // onDelveBossDefeated/delveDetectMult are bound above (C1/M2/C3); deduped here.
     partyMembersForKey: host.partyMembersForKey,

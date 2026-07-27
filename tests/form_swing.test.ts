@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { baseSwingSpeed, ROGUE_BASE_SWING_SPEED } from '../src/sim/combat/form_swing';
 import { CLASSES, ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
-import { type AuraKind, armorReduction, STATUS_AP_PER_DPS } from '../src/sim/types';
+import { hardDefMultiplier } from '../src/sim/combat/defence';
+import { type AuraKind, STATUS_AP_PER_DPS } from '../src/sim/types';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
@@ -92,7 +93,7 @@ describe('Wolf Form swing speed', () => {
       if (hit && hit.type === 'damage') {
         // biome-ignore lint/suspicious/noExplicitAny: reach private helpers for an exact expectation
         const s = sim as any;
-        const dr = armorReduction(s.effectiveArmor(dummy), p.level);
+        const dr = 1 - hardDefMultiplier(s.effectiveArmor(dummy));
         return { amount: hit.amount, ap: s.effectiveAttackPower(p), dr };
       }
     }

@@ -96,6 +96,9 @@ describe('offhand combat rules', () => {
     p.attackPower = 0;
     p.critChance = 0;
     target.stats.armor = 0;
+    // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
+    // alone no longer isolates the mechanic under test.
+    target.stats.vit = 0;
     target.dodgeChance = 0;
     sim.rng.next = () => 0.9; // clears the miss band; min = max keeps damage fixed
     sim.drainEvents();
@@ -122,6 +125,9 @@ describe('offhand combat rules', () => {
     p.critChance = 0;
     p.attackPower = 0;
     target.stats.armor = 0;
+    // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
+    // alone no longer isolates the mechanic under test.
+    target.stats.vit = 0;
     target.dodgeChance = 0;
     // The roll must sit between the plain miss chance and the dual-wield-penalized
     // one. Miss is the accuracy contest's complement now, so read the band off the

@@ -41,7 +41,6 @@ import { abilityScalingPower, channelTickBonus } from '../spell_scaling';
 import type { AbilityDef, Entity, Vec3 } from '../types';
 import {
   angleTo,
-  armorReduction,
   CAST_COMPLETE_EPS,
   CAST_PUSHBACK_SEC,
   CAST_QUEUE_WINDOW_SEC,
@@ -1284,7 +1283,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
         let dmg = ctx.rng.range(eff.min, eff.max) + channelSp;
         // physical channels (Volley) are mitigated by armor; spell-school rain is not,
         // mirroring the instant aoeDamage path in effect_dispatch.
-        if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(m), p.level);
+        if (!isSpell) dmg = ctx.applyDefence(dmg, m);
         ctx.dealDamage(p, m, Math.round(dmg), false, res.def.school, res.def.name, 'hit');
         struck++;
       }
@@ -1334,7 +1333,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
       for (const m of ctx.hostilesInRadius(p, p.pos, eff.radius)) {
         if (!ctx.hasLineOfSight(p, m)) continue;
         let dmg = ctx.rng.range(eff.min, eff.max) + channelSp;
-        if (!isSpell) dmg *= 1 - armorReduction(ctx.effectiveArmor(m), p.level);
+        if (!isSpell) dmg = ctx.applyDefence(dmg, m);
         ctx.dealDamage(p, m, Math.round(dmg), false, res.def.school, res.def.name, 'hit');
       }
     }

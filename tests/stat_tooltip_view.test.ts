@@ -64,9 +64,11 @@ describe('statEffectText number formatting + key selection', () => {
     }
   });
 
-  it('damage reduction splices both the reference level (integer) and the percent (one decimal)', () => {
-    expect(statEffectText({ kind: 'damageReduction', value: 33.3, level: 20 }, deps)).toBe(
-      'hudChrome.statInfo.effects.damageReduction(level=20,value=33.3)',
+  it('damage reduction splices the percent alone, with no reference attacker level', () => {
+    // Ragnarok's hard DEF does not depend on who is attacking, so this line lost
+    // the {level} placeholder the old attacker-normalized curve needed.
+    expect(statEffectText({ kind: 'damageReduction', value: 33.3 }, deps)).toBe(
+      'hudChrome.statInfo.effects.damageReduction(value=33.3)',
     );
   });
 });
@@ -91,7 +93,7 @@ describe('statBreakdownHeader', () => {
         model({
           stat: 'armor',
           isPrimary: false,
-          effects: [{ kind: 'damageReduction', value: 1, level: 1 }],
+          effects: [{ kind: 'damageReduction', value: 1 }],
         }),
         deps,
       ),
@@ -231,7 +233,7 @@ describe('statTooltipHtml', () => {
     // The class decision (GAIN_KINDS) is the one piece of logic the view adds over
     // the model, so pin it for ALL kinds, not just a sample. EXPECTED_GREEN states the
     // contract independently of the source set, so moving any kind across the partition
-    // (or mis-rendering the two-placeholder damageReduction line) fails here.
+    // (or mis-rendering the damageReduction line) fails here.
     const ALL_KINDS: StatEffect['kind'][] = [
       'attackPower',
       'rangedAttackPower',
@@ -258,7 +260,7 @@ describe('statTooltipHtml', () => {
     ]);
     for (const kind of ALL_KINDS) {
       const e: StatEffect =
-        kind === 'damageReduction' ? { kind, value: 12.5, level: 20 } : { kind, value: 7 };
+        kind === 'damageReduction' ? { kind, value: 12.5 } : { kind, value: 7 };
       const html = statTooltipHtml(model({ stat: 'agi', effects: [e] }), deps);
       const cls = EXPECTED_GREEN.has(kind) ? 'tt-green' : 'tt-stat';
       expect(html, kind).toContain(`<div class="${cls}">hudChrome.statInfo.effects.${kind}(`);
@@ -267,13 +269,13 @@ describe('statTooltipHtml', () => {
     const drModel = model({
       stat: 'armor',
       isPrimary: false,
-      effects: [{ kind: 'damageReduction', value: 12.5, level: 20 }],
+      effects: [{ kind: 'damageReduction', value: 12.5 }],
     });
     expect(statTooltipHtml(drModel, deps)).toContain(
-      '<div class="tt-stat">hudChrome.statInfo.effects.damageReduction(level=20,value=12.5)</div>',
+      '<div class="tt-stat">hudChrome.statInfo.effects.damageReduction(value=12.5)</div>',
     );
     expect(statTooltipAria(drModel, deps)).toContain(
-      'hudChrome.statInfo.effects.damageReduction(level=20,value=12.5)',
+      'hudChrome.statInfo.effects.damageReduction(value=12.5)',
     );
   });
 });

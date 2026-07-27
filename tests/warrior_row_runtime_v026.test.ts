@@ -154,7 +154,11 @@ describe('v0.26 winning Warrior authored row and mastery runtime', () => {
       ]),
     );
     expect(player.resource).toBeCloseTo(6 * 1.05 * 1.1);
-    expect(draws).toBe(1);
+    // Two draws for the one target hit: the damage roll and the soft-DEF roll
+    // every physical hit now takes. The point of the pin is that Anger
+    // Management itself adds NO draw, which the two rage-gain blocks above (0
+    // draws each) are what actually prove.
+    expect(draws).toBe(2);
     sim.ctx.rng.setObserver(null);
   });
 
