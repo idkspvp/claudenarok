@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
@@ -165,7 +165,7 @@ describe('duel: PvP combat affordances', () => {
     expect(mage.resource).toBeGreaterThan(manaBeforeTap);
 
     mage.gcdRemaining = 0;
-    fundCasts(mage);
+    raisePool(mage);
     sim.castAbility('curse_of_agony', a);
     // The curse is a projectile now: it applies when the bolt reaches the swordman
     // (projectile_travel), a few ticks after the cast, so let it land.
@@ -173,7 +173,7 @@ describe('duel: PvP combat affordances', () => {
     expect(swordman.auras.some((aura) => aura.id === 'curse_of_agony')).toBe(true);
 
     mage.gcdRemaining = 0;
-    fundCasts(mage);
+    raisePool(mage);
     const warriorHpBeforeDrain = swordman.hp;
     const warlockHpBeforeDrain = mage.hp;
     sim.castAbility('drain_life', a);

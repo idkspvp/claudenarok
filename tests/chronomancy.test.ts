@@ -10,14 +10,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  fundCasts(p);
+  raisePool(p);
   return { sim, p };
 }
 
@@ -187,7 +187,7 @@ describe('Temporal Barrier', () => {
     // A same-caster recast REPLACES to full (the documented absorb rule).
     p.cooldowns.delete('temporal_barrier');
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
-    fundCasts(p);
+    raisePool(p);
     sim.castAbility('temporal_barrier');
     sim.tick();
     const shields = p.auras.filter((a) => a.id === 'temporal_barrier');

@@ -3,6 +3,7 @@
 // persistence back-compat, and the entity-wire `ws` bit end to end
 // (server encode -> ClientWorld decode).
 import { describe, expect, it, vi } from 'vitest';
+import { raisePool } from './helpers/sp';
 
 // Mock the db layer so no Postgres is needed; wire/dispatch logic is under test.
 vi.mock('../server/db', () => ({
@@ -37,7 +38,9 @@ import { drawWeapon, toggleWeaponStow } from '../src/sim/weapon_stow';
 import { terrainHeight } from '../src/sim/world';
 
 function makeSim(cls: 'swordman' | 'mage' = 'swordman', seed = 42) {
-  return new Sim({ seed, playerClass: cls, autoEquip: true });
+  const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
+  raisePool(sim.player); // a level-1 pool no longer funds a single spell
+  return sim;
 }
 
 function nearestMob(sim: Sim, templateId?: string) {

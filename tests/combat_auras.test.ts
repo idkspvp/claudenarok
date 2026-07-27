@@ -266,6 +266,9 @@ describe('auras: updateRegen', () => {
     const p = sim.player;
     const meta = sim.players.get(p.id) as PlayerMeta;
     p.inCombat = false;
+    // The D1 HP curve left a level-1 pool smaller than the 90 hp this eats back,
+    // so the deficit is opened explicitly and the bar really does never cap.
+    p.maxHp = Math.max(p.maxHp, 1000);
     p.hp = Math.max(1, p.maxHp - 500);
     p.eating = {
       itemId: 'food',

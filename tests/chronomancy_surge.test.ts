@@ -18,14 +18,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, SimEvent } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  fundCasts(p);
+  raisePool(p);
   return { sim, p };
 }
 
@@ -69,7 +69,7 @@ function withCharges(n: number): Entity {
 // Cast an ability at a target and tick past its completion so a cast-time
 // projectile:false spell resolves its damage and banks/consumes charges.
 function castResolve(sim: Sim, p: Entity, id: string, targetId: number, seconds = 2.3): SimEvent[] {
-  fundCasts(p);
+  raisePool(p);
   (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
   sim.targetEntity(targetId);
   sim.castAbility(id);
@@ -224,7 +224,7 @@ describe('Aether Darts consumes the charges', () => {
     const mob = addHostile(sim);
     p.auras = p.auras.filter((a) => a.id !== 'arcane_surge');
     p.auras.push(chargeAura(4));
-    fundCasts(p);
+    raisePool(p);
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
     sim.targetEntity(mob.id);
     sim.castAbility('arcane_missiles');

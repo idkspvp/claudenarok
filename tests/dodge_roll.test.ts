@@ -12,7 +12,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 const ROLLS: Record<PlayerClass, string> = {
   swordman: 'bracing_roll',
@@ -30,7 +30,7 @@ function rig(cls: PlayerClass) {
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  fundCasts(p);
+  raisePool(p);
   p.gcdRemaining = 0;
   return { sim, p };
 }
@@ -179,7 +179,7 @@ describe('baseline dodge roll: casting it', () => {
     const { sim, p } = rig('acolyte');
     p.auras.push(aura('root'));
     expect(isRooted(p)).toBe(true);
-    sim.castAbility('feral_tumble');
+    sim.castAbility('veilstep');
     sim.tick();
     expect(p.auras.some((a) => a.kind === 'root')).toBe(false);
     expect(isInvulnerable(p)).toBe(true);

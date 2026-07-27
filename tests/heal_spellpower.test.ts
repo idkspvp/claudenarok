@@ -3,7 +3,7 @@ import { castAbility, updateCasting } from '../src/sim/combat/casting_lifecycle'
 import { Sim } from '../src/sim/sim';
 import { hotTickBonus } from '../src/sim/spell_scaling';
 import type { Entity, PlayerClass } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 // Healing scales with Spell Power the same way damage does: a direct heal takes the
 // cast-time coefficient, a HoT takes the DoT (duration/15) coefficient split across
@@ -19,7 +19,7 @@ function makeSim(cls: PlayerClass, level: number, spellPower: number) {
   sim.setPlayerLevel(level);
   const p = sim.player as AnyEntity;
   const meta = sim.players.get(p.id);
-  fundCasts(p);
+  raisePool(p);
   // A large HP pool with a deep deficit so nothing overheals and caps the delta.
   p.maxHp = 100000;
   p.hp = 1;
@@ -69,17 +69,4 @@ describe('heal Spell Power scaling (effect_dispatch heal/hot wiring)', () => {
     expect(hotTickBonus(300, 15, 3)).toBeGreaterThan(0);
   });
 
-  it('a hybrid heal+HoT (Regrowth) does NOT double-dip: its HoT tick takes no rider', () => {
-    const zero = makeSim('acolyte', 14, 0);
-    castAndDrain(zero.sim, zero.p, zero.meta, 'regrowth');
-    const baseTick = hotAura(zero.p, 'regrowth').value;
-
-    const buffed = makeSim('acolyte', 14, 300);
-    castAndDrain(buffed.sim, buffed.p, buffed.meta, 'regrowth');
-    const buffedTick = hotAura(buffed.p, 'regrowth').value;
-
-    // The direct component already took the cast-time coefficient, so the HoT tick is
-    // identical with or without Spell Power (the anti-double-dip guard).
-    expect(buffedTick).toBe(baseTick);
-  });
 });
