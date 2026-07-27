@@ -212,9 +212,6 @@ export const hudChromeStrings = {
     loading: 'Loading Claudium...',
     balanceLabel: 'Balance',
     balanceUnit: '{amount} Claudium',
-    solBalance: 'SOL: {amount}',
-    usdcBalance: 'USDC: {amount}',
-    wocBalance: 'WOC: {amount}',
     unavailable:
       'The Claudium store is unavailable right now. Your balance and purchases are unaffected; please check back shortly.',
     disclosure:
@@ -222,11 +219,6 @@ export const hudChromeStrings = {
     buyTitle: 'Buy Claudium',
     railLabel: 'Payment method',
     railStripe: 'Card',
-    railSol: 'SOL',
-    railUsdc: 'USDC',
-    railWoc: 'WOC',
-    railWocDiscount: '20% off',
-    railNativeUnavailable: 'Crypto off.',
     amountLabel: 'Amount',
     showAmounts: 'Show all Claudium amounts',
     hideAmounts: 'Hide extra Claudium amounts',

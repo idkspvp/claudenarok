@@ -240,20 +240,6 @@ function nativeSnapshot(): ClaudiumSnapshot {
   return {
     balance: 500,
     skus: [{ sku: 'claudium_500', usd: 4.99, claudium: 500 }],
-    nativeRails: { sol: true, usdc: true, woc: true },
-    walletBalances: {
-      solLamports: '1000000000',
-      usdcBaseUnits: '12345678',
-      wocBaseUnits: '500000000',
-    },
-    nativePrices: [
-      {
-        sku: 'claudium_500',
-        solAmountBase: '10000000',
-        usdcAmountBase: '4990000',
-        wocAmountBase: '4000000',
-      },
-    ],
   };
 }
 
@@ -269,18 +255,22 @@ afterEach(() => {
 });
 
 describe('ClaudiumWindow refresh stability', () => {
-  it('renders Card, WOC, USDC, and SOL in order and purchases USDC with its wallet balance', async () => {
+  it('renders the card rail alone and purchases through it', async () => {
+    // The window once painted four rails (card plus SOL, USDC and a community
+    // token) and this case pinned their order and their brand icons. Those rails
+    // are gone, so what is worth pinning is that exactly ONE remains, that it
+    // carries no brand image, and that a purchase reports it.
     vi.stubGlobal('document', fakeDocument);
     const root = new FakeRoot();
     root.style.display = 'block';
     const purchase = deferred<void>();
-    const buys: Array<{ rail: string; sku: string }> = [];
+    const buys: { rail: string; sku: string }[] = [];
     const deps: ClaudiumWindowDeps = {
       root: () => asHtml(root),
       closeOthers: () => {},
       captureFocus: () => null,
       restoreFocus: () => {},
-      snapshot: () => Promise.resolve(nativeSnapshot()),
+      snapshot: async () => nativeSnapshot(),
       buy: (rail, sku) => {
         buys.push({ rail, sku });
         return purchase.promise;
@@ -291,21 +281,14 @@ describe('ClaudiumWindow refresh stability', () => {
     await window.render();
 
     const html = root.body.innerHTML;
-    const railOrder = ['stripe', 'woc', 'usdc', 'sol'].map((rail) =>
-      html.indexOf(`data-rail="${rail}"`),
-    );
-    expect(railOrder).toEqual([...railOrder].sort((left, right) => left - right));
-    expect(html).toContain('src="/claudium/icons/solana-icon.webp"');
-    expect(html).toContain('src="/claudium/icons/usdc-icon.webp"');
-    expect(html).toContain('USDC: 12.35');
-
-    root.body.rail('usdc').click();
-    expect(root.body.innerHTML).toContain('4.99 USDC');
-    expect(root.body.rail('usdc').getAttribute('aria-pressed')).toBe('true');
+    expect(html.match(/data-rail=/g)).toHaveLength(1);
+    expect(html).toContain('data-rail="stripe"');
+    expect(html).not.toContain('cl-rail-brand');
+    expect(root.body.rail('stripe').getAttribute('aria-pressed')).toBe('true');
 
     root.body.sku().click();
     await flushMicrotasks();
-    expect(buys).toEqual([{ rail: 'usdc', sku: 'claudium_500' }]);
+    expect(buys).toEqual([{ rail: 'stripe', sku: 'claudium_500' }]);
   });
 
   it('does not rebuild pack nodes for an unchanged successful refresh', async () => {
@@ -371,7 +354,6 @@ describe('ClaudiumWindow refresh stability', () => {
       available: false,
       balance: null,
       skus: [],
-      nativeRails: { sol: false, usdc: false, woc: false },
     });
     await refresh;
     expect(root.body.innerHTML).toBe(settledHtml);
@@ -437,7 +419,6 @@ describe('ClaudiumWindow refresh stability', () => {
       available: false,
       balance: null,
       skus: [],
-      nativeRails: { sol: false, usdc: false, woc: false },
     });
     await failingRefresh;
     await flushMicrotasks();
@@ -473,7 +454,6 @@ describe('ClaudiumWindow refresh stability', () => {
       available: false,
       balance: null,
       skus: [],
-      nativeRails: { sol: false, usdc: false, woc: false },
     });
     await flushMicrotasks();
 

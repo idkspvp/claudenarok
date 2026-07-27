@@ -3949,7 +3949,6 @@ export class Hud {
         ({
           balance: null,
           skus: [],
-          nativeRails: { sol: false, usdc: false, woc: false },
         } satisfies ClaudiumSnapshot);
       this.claudiumBalance.set(snapshot.balance);
       return snapshot;

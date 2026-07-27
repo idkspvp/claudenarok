@@ -10,6 +10,12 @@
 //
 // The one non-negotiable: when the balance is null (the service is off) the model
 // is a clean disabled/empty state, NEVER an error crash.
+//
+// Card is the ONLY rail. This core once modelled three more (SOL, USDC and a
+// community token) with wallet balances and per-SKU native quotes; the rails were
+// switched off, the server stopped offering them, and the scaffolding sat here
+// dead. It is gone rather than pinned to false, because dead scaffolding is what
+// let the removal look finished while the surface was still shipping.
 
 /** A price rung as returned by the service (usd + Claudium credited). */
 export interface ClaudiumSkuInput {
@@ -20,27 +26,11 @@ export interface ClaudiumSkuInput {
   stripeConfigured?: boolean;
 }
 
-export interface ClaudiumWalletBalancesInput {
-  solLamports: string | null;
-  usdcBaseUnits: string | null;
-  wocBaseUnits: string | null;
-}
-
-export interface ClaudiumNativeSkuPriceInput {
-  sku: string;
-  solAmountBase?: string | null;
-  usdcAmountBase?: string | null;
-  wocAmountBase?: string | null;
-}
-
 /** The raw inputs, all sourced from the service via the SDK. */
 export interface ClaudiumViewInput {
   /** Integer Claudium balance, or null when the service is off. */
   balance: number | null;
   skus: readonly ClaudiumSkuInput[];
-  nativeRails?: Partial<Record<'sol' | 'usdc' | 'woc', boolean>>;
-  walletBalances?: ClaudiumWalletBalancesInput;
-  nativePrices?: readonly ClaudiumNativeSkuPriceInput[];
 }
 
 /** One buy-picker row: the money label and the Claudium credited, both from the service. */
@@ -49,24 +39,12 @@ export interface ClaudiumBuyRow {
   usd: number;
   claudium: number;
   stripeConfigured: boolean;
-  solAffordable: boolean;
-  usdcAffordable: boolean;
-  wocAffordable: boolean;
-  solAmountBase: string | null;
-  usdcAmountBase: string | null;
-  wocAmountBase: string | null;
 }
 
-/** Which purchase rails the window may enable. */
+/** Which purchase rails the window may enable. Card is the only one. */
 export interface ClaudiumRailAvailability {
   /** Stripe is available when there is at least one SKU rung to buy. */
   stripe: boolean;
-  /** SOL is available when the native SOL rail is configured in the economy service. */
-  sol: boolean;
-  /** USDC is available when the stablecoin rail and SKU quote are both present. */
-  usdc: boolean;
-  /** WOC is available only when the oracle price (base units per Claudium) is present. */
-  woc: boolean;
 }
 
 export interface ClaudiumView {
@@ -76,45 +54,19 @@ export interface ClaudiumView {
   hasBalance: boolean;
   /** The integer balance to render, or null in the disabled state. */
   balance: number | null;
-  walletBalances: ClaudiumWalletBalancesInput;
   buyRows: ClaudiumBuyRow[];
   rails: ClaudiumRailAvailability;
-  /** True when neither rail can transact (nothing to buy or oracle down + no skus). */
+  /** True when there is nothing purchasable at all. */
   buyDisabled: boolean;
-}
-
-/**
- * Pick the wallet address the window reads its crypto-rail balances from.
- *
- * The actively connected session wallet always wins. With nothing connected this
- * session, fall back to the account's server-verified LINKED wallet, so a
- * linked-but-disconnected player still sees live buy-button affordability (the
- * buy click then surfaces the existing "connect a wallet first" prompt to sign).
- * With neither, return null: the caller skips the balance reads entirely.
- */
-export function claudiumBalanceAddress(
-  connectedAddress: string | null,
-  linkedWalletPubkey: string | null,
-): string | null {
-  return connectedAddress ?? linkedWalletPubkey;
-}
-
-function affordable(balance: string | null | undefined, cost: string | null | undefined): boolean {
-  if (!balance || !cost) return false;
-  try {
-    return BigInt(balance) >= BigInt(cost);
-  } catch {
-    return false;
-  }
 }
 
 /**
  * Project the service payloads into the render model.
  *
  * Disabled state: a null balance means the service is off, so every buy row
- * is dropped and every rail is unavailable, a clean empty state (not an error).
- * Funded state: buy rows mirror the SKU ladder verbatim. Card is available when
- * its configured SKU ladder is non-empty; each native rail also requires a quote.
+ * is dropped and the rail is unavailable, a clean empty state (not an error).
+ * Funded state: buy rows mirror the SKU ladder verbatim, and card is available
+ * when at least one of them is configured.
  */
 export function buildClaudiumView(input: ClaudiumViewInput): ClaudiumView {
   if (input.balance === null) {
@@ -122,53 +74,25 @@ export function buildClaudiumView(input: ClaudiumViewInput): ClaudiumView {
       disabled: true,
       hasBalance: false,
       balance: null,
-      walletBalances: { solLamports: null, usdcBaseUnits: null, wocBaseUnits: null },
       buyRows: [],
-      rails: { stripe: false, sol: false, usdc: false, woc: false },
+      rails: { stripe: false },
       buyDisabled: true,
     };
   }
 
-  const balance = input.balance;
-  const nativePriceBySku = new Map(input.nativePrices?.map((p) => [p.sku, p]) ?? []);
-  const walletBalances = input.walletBalances ?? {
-    solLamports: null,
-    usdcBaseUnits: null,
-    wocBaseUnits: null,
-  };
   const buyRows: ClaudiumBuyRow[] = input.skus.map((s) => ({
     sku: s.sku,
     usd: s.usd,
     claudium: s.claudium,
     stripeConfigured: s.stripeConfigured !== false,
-    solAmountBase: nativePriceBySku.get(s.sku)?.solAmountBase ?? null,
-    usdcAmountBase: nativePriceBySku.get(s.sku)?.usdcAmountBase ?? null,
-    wocAmountBase: nativePriceBySku.get(s.sku)?.wocAmountBase ?? null,
-    solAffordable: affordable(
-      walletBalances.solLamports,
-      nativePriceBySku.get(s.sku)?.solAmountBase,
-    ),
-    usdcAffordable: affordable(
-      walletBalances.usdcBaseUnits,
-      nativePriceBySku.get(s.sku)?.usdcAmountBase,
-    ),
-    wocAffordable: affordable(
-      walletBalances.wocBaseUnits,
-      nativePriceBySku.get(s.sku)?.wocAmountBase,
-    ),
   }));
   const stripe = buyRows.some((row) => row.stripeConfigured);
-  const sol = input.nativeRails?.sol === true && buyRows.some((row) => row.solAmountBase !== null);
-  const usdc =
-    input.nativeRails?.usdc === true && buyRows.some((row) => row.usdcAmountBase !== null);
-  const woc = input.nativeRails?.woc === true && buyRows.some((row) => row.wocAmountBase !== null);
   return {
     disabled: false,
     hasBalance: true,
-    balance,
-    walletBalances,
+    balance: input.balance,
     buyRows,
-    rails: { stripe, sol, usdc, woc },
-    buyDisabled: !stripe && !sol && !usdc && !woc,
+    rails: { stripe },
+    buyDisabled: !stripe,
   };
 }
