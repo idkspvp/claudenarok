@@ -122,23 +122,31 @@ describe('the derivations match Ragnarok', () => {
 });
 
 describe('the accuracy contest matches Ragnarok', () => {
-  it('reads HIT off level, DEX, and a third of LUK, with no baseline', () => {
-    // BaseLv + DEX + floor(LUK/3). Verified against the published pre-renewal
-    // figures; this is the only file that states them as literals.
-    expect(hitRating(1, 0, 0)).toBe(1);
-    expect(hitRating(50, 30, 30)).toBe(50 + 30 + 10);
+  it('reads HIT off level and DEX alone, with no LUK term and no baseline', () => {
+    // BaseLv + DEX, full stop. Read off the pre-renewal arm of rAthena's
+    // status_calc_bl_main; this is the only file that states it as a literal.
+    expect(hitRating(1, 0)).toBe(1);
+    expect(hitRating(50, 30)).toBe(50 + 30);
   });
 
-  it('reads FLEE off level, AGI, and a fifth of LUK, with no baseline', () => {
-    // BaseLv + AGI + floor(LUK/5).
-    expect(fleeRating(1, 0, 0)).toBe(1);
-    expect(fleeRating(50, 30, 30)).toBe(50 + 30 + 6);
+  it('reads FLEE off level and AGI alone, with no LUK term and no baseline', () => {
+    // BaseLv + AGI, full stop.
+    expect(fleeRating(1, 0)).toBe(1);
+    expect(fleeRating(50, 30)).toBe(50 + 30);
+  });
+
+  it('gives LUCK no say in accuracy at all', () => {
+    // The luk/3 and luk/5 terms belong to Renewal, on the same lines as the
+    // +175 and +100 baselines. Pinned as an absence: Luck buys criticals,
+    // denies them, and grants perfect dodge, and that is its whole job.
+    expect(hitRating(50, 30)).toBe(50 + 30);
+    expect(fleeRating(50, 30)).toBe(50 + 30);
   });
 
   it('meets at parity, so an even fight misses one swing in five', () => {
     // Neither side starts ahead. The 80% base is the whole of it, which is why
     // Dexterity is something a character has to actually buy.
-    expect(hitRating(20, 0, 0)).toBe(fleeRating(20, 0, 0));
+    expect(hitRating(20, 0)).toBe(fleeRating(20, 0));
   });
 
   it('gives Luck a flat dodge that accuracy cannot answer', () => {

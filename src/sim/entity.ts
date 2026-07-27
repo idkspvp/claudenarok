@@ -722,8 +722,8 @@ export function recalcPlayerStats(
   // perfect dodge: flat, from Luck, and the one avoidance an attacker's accuracy
   // cannot answer. Aura grants (buff_dodge and the mob stagger debuff) still land
   // here, so their sign and magnitude are unchanged.
-  e.hit = hitRating(lvl, s.dex, s.luk) + Math.round(e.hitBonus * 100);
-  e.flee = Math.max(0, fleeRating(lvl, s.agi, s.luk) + bonusFlee);
+  e.hit = hitRating(lvl, s.dex) + Math.round(e.hitBonus * 100);
+  e.flee = Math.max(0, fleeRating(lvl, s.agi) + bonusFlee);
   e.dodgeChance = Math.max(0, perfectDodgeChance(s.luk) + bonusDodge);
 
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
@@ -867,8 +867,8 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   e.stats.dex = monsterAttribute;
   e.stats.vit = monsterAttribute;
   e.stats.luk = monsterAttribute;
-  e.hit = hitRating(level, e.stats.dex, e.stats.luk);
-  e.flee = fleeRating(level, e.stats.agi, e.stats.luk);
+  e.hit = hitRating(level, e.stats.dex);
+  e.flee = fleeRating(level, e.stats.agi);
   e.dodgeChance = perfectDodgeChance(e.stats.luk);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
   e.stats.armor = Math.round(template.armorPerLevel * (level - 1));

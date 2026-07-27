@@ -8,8 +8,8 @@
 //
 // Three numbers, and they are deliberately separate:
 //
-//   HIT   what the attacker brings. Rises with level and DEX, a little with LUK.
-//   FLEE  what the defender brings. Rises with level and AGI, a little with LUK.
+//   HIT   what the attacker brings. Level and DEX, and nothing else.
+//   FLEE  what the defender brings. Level and AGI, and nothing else.
 //   PERFECT DODGE  a flat chance from LUK alone that HIT cannot overcome. This is
 //                  why a high-HIT attacker still never lands every blow, and it is
 //                  the only avoidance in the model that does not scale against
@@ -18,27 +18,36 @@
 // SOURCING: a reimplementation of a published mechanic, authored from the
 // documented relationships. Nothing copied from a GPL server's db/.
 //
-// VERIFIED against published references (iRO Wiki and the pre-renewal accuracy
-// documentation) rather than reconstructed from memory. The first pass of this
-// file carried a +175 baseline on HIT and +100 on FLEE, which handed every
+// VERIFIED against the pre-renewal arm of rAthena's `status_calc_bl_main`,
+// which guards its two eras at lines 2617 (`#ifdef RENEWAL`), 2700 (`#else`)
+// and 2720 (`#endif`). This file has now been corrected twice off that one
+// pair of lines, and both errors came from reading the RENEWAL arm:
+//
+//   RENEWAL       hit  += level + dex + (PC ? luk/3 + 175 : 150)
+//                 flee += level + agi + (PC ? luk/5 : 0) + 100
+//   PRE-RENEWAL   hit  += level + dex
+//                 flee += level + agi
+//
+// The first pass carried the +175 and +100 baselines, which handed every
 // attacker a permanent 75-point advantage and made two equally built characters
-// of the same level connect every single time. There are no baselines: the
-// ratings are level plus the attribute, and the 80% base is what an even fight
-// trades at. Checking was worth it, and the named constants below are what made
-// the correction a three-line change.
+// of the same level connect every single time. Removing them was right but only
+// half the line: the `luk/3` and `luk/5` terms are Renewal's too, and they
+// survived the first correction. LUCK IS NOT AN ACCURACY STAT in pre-renewal. It
+// buys criticals, denies them (combat/crit.ts), and grants perfect dodge below.
+// That is the whole of its job.
 
-/** Attacker accuracy: level, Dexterity, and a third of Luck. No baseline term:
- *  the 80% floor in the contest below is what carries an even fight, and adding
- *  one here would hand the attacker a permanent free advantage. */
-export function hitRating(level: number, dex: number, luk: number): number {
-  return Math.max(1, Math.floor(level)) + Math.max(0, dex) + Math.floor(Math.max(0, luk) / 3);
+/** Attacker accuracy: level and Dexterity. No Luck term and no baseline: the
+ *  80% floor in the contest below is what carries an even fight, and adding
+ *  either here would hand the attacker a permanent free advantage. */
+export function hitRating(level: number, dex: number): number {
+  return Math.max(1, Math.floor(level)) + Math.max(0, dex);
 }
 
-/** Defender evasion: level, Agility, and a fifth of Luck. Symmetric with HIT, so
- *  two equally built characters of the same level meet at the 80% base rather
- *  than one of them starting ahead. */
-export function fleeRating(level: number, agi: number, luk: number): number {
-  return Math.max(1, Math.floor(level)) + Math.max(0, agi) + Math.floor(Math.max(0, luk) / 5);
+/** Defender evasion: level and Agility. Symmetric with HIT, so two equally
+ *  built characters of the same level meet at the 80% base rather than one of
+ *  them starting ahead. */
+export function fleeRating(level: number, agi: number): number {
+  return Math.max(1, Math.floor(level)) + Math.max(0, agi);
 }
 
 /** The floor and ceiling on the contest. Nothing is ever unhittable and nothing
