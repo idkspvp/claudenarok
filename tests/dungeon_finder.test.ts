@@ -4,7 +4,6 @@
 // multi-player Sim, per docs/prd/dungeon-finder.md.
 
 import { describe, expect, it } from 'vitest';
-import { ALL_CLASSES } from '../src/sim/types';
 import {
   FINDER_ACTIVITIES,
   FINDER_CLASS_ROLES,
@@ -21,6 +20,7 @@ import {
   normalizeFinderSelection,
 } from '../src/sim/social/dungeon_finder';
 import type { PlayerClass, SimEvent } from '../src/sim/types';
+import { ALL_CLASSES } from '../src/sim/types';
 
 const FIVE = { tank: 1, healer: 1, dps: 3 };
 const TEN = { tank: 2, healer: 2, dps: 6 };

@@ -157,11 +157,11 @@ await browser.close();
 console.log('\n=== console / page errors ===');
 if (pageErrors.length) {
   console.log(`${pageErrors.length} page error(s):`);
-  pageErrors.slice(0, 10).forEach((e) => console.log('  ' + e));
+  for (const e of pageErrors.slice(0, 10)) console.log(`  ${e}`);
 }
 if (consoleErrors.length) {
   console.log(`${consoleErrors.length} console error(s) (informational):`);
-  consoleErrors.slice(0, 10).forEach((e) => console.log('  ' + e));
+  for (const e of consoleErrors.slice(0, 10)) console.log(`  ${e}`);
 }
 if (!pageErrors.length && !consoleErrors.length) console.log('none');
 check(pageErrors.length === 0, `no uncaught page errors (got ${pageErrors.length})`);

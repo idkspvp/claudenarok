@@ -68,5 +68,4 @@ describe('heal Spell Power scaling (effect_dispatch heal/hot wiring)', () => {
     expect(buffedTick - baseTick).toBe(hotTickBonus(300, 15, 3));
     expect(hotTickBonus(300, 15, 3)).toBeGreaterThan(0);
   });
-
 });

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { raisePool } from './helpers/sp';
 import { GROUND_PICKUP_LINES } from '../src/sim/content/ground_pickup_lines';
 import {
   abilitiesKnownAt,
@@ -30,6 +29,7 @@ import {
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
 import { levelWithStats } from './helpers/alloc';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { raisePool } from './helpers/sp';
 
 function makeSim(cls: 'swordman' | 'mage' | 'thief' = 'swordman', seed = 42) {
   const sim = new Sim({ seed, playerClass: cls, autoEquip: true });

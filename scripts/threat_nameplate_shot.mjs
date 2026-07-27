@@ -57,7 +57,8 @@ const placed = await page.evaluate(() => {
     dz = Math.cos(p.facing);
   mob.pos = { x: p.pos.x + dx * 7, y: p.pos.y, z: p.pos.z + dz * 7 };
   mob.aggroTargetId = null;
-  sim.targetEntity ? sim.targetEntity(mob.id) : (p.targetId = mob.id);
+  if (sim.targetEntity) sim.targetEntity(mob.id);
+  else p.targetId = mob.id;
   window.__mobId = mob.id;
   return true;
 });

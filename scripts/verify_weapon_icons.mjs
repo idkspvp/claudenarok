@@ -74,5 +74,5 @@ console.log('inventory:', result.inv.join(', '));
 console.log('icon imgs:', imgInfo.total, '| weapon-jpg imgs:', imgInfo.weaponSrcs);
 console.log('sample (filename, naturalWidth>0 = loaded):', JSON.stringify(imgInfo.sample));
 console.log('errors:', errs.length);
-errs.slice(0, 6).forEach((e) => console.log(' ', e));
+for (const e of errs.slice(0, 6)) console.log(' ', e);
 await browser.close();

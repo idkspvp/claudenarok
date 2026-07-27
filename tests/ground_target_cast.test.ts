@@ -216,8 +216,10 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
     for (let i = 0; i < 60; i++) sim.tick();
     const zones = (sim as unknown as { groundAoEs: GroundAoE[] }).groundAoEs;
     const zone = zones.find((z) => Math.abs(z.pos.x - 16) < 1 && Math.abs(z.pos.z) < 1);
-    expect(zone, `no zone at the aimed point; saw ${zones.map((z) => z.ability).join(', ')}`)
-      .toBeDefined();
+    expect(
+      zone,
+      `no zone at the aimed point; saw ${zones.map((z) => z.ability).join(', ')}`,
+    ).toBeDefined();
     expect(zone?.radius).toBe(7);
   });
 });

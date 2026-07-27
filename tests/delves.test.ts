@@ -1,7 +1,6 @@
 // Delve system, spatial band, lifecycle, death rules, and pet stow (Phase 1).
 
 import { describe, expect, it } from 'vitest';
-import { raisePool } from './helpers/sp';
 import { DELVE_AFFIXES } from '../src/sim/content/delves/affixes';
 import { delveChestItemsForTier } from '../src/sim/content/delves/lockpick_tiers';
 import {
@@ -41,6 +40,7 @@ import { Rng } from '../src/sim/rng';
 import { DELVE_IMPLEMENTED_AFFIXES, Sim } from '../src/sim/sim';
 import { DT } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
+import { raisePool } from './helpers/sp';
 
 function makeSim(cls: 'swordman' | 'mage' = 'swordman', seed = 42) {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
