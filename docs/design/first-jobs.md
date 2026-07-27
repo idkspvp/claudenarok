@@ -29,8 +29,8 @@ of Acolyte). This is the single biggest hazard in the rename: see below.
 - **`src/sim/job_vitals.ts`** carries Ragnarok's real HP and SP curves and their
   per-job coefficients, with tests. HP is QUADRATIC in level and SP is linear;
   the universal floors are 35 HP and 10 SP, which is why every character has
-  exactly 40 HP at level 1 whatever they picked. Not yet wired: `ClassDef` still
-  carries the old linear `baseHp`/`hpPerLevel` pair.
+  exactly 40 HP at level 1 whatever they picked. WIRED (D1.2): `recalcPlayerStats`
+  reads both curves by job id and `ClassDef` no longer carries a vitals pair.
 - **`content/jobs.ts`** is down to fifteen: five first jobs, each a ROOT with
   `from: null`, and their ten second jobs. Novice, Super Novice, and the whole
   Merchant branch are gone, and one test pins all five as absent.
@@ -63,54 +63,110 @@ ids, and second jobs live in `jobs.ts` as an advancement, not as class members.
 That is what keeps every `Record<PlayerClass, X>` table at five entries forever
 instead of growing to fifteen.
 
-## Remaining work, in order
+## D1, as landed
 
-1. **The rename and the union collapse.** `PlayerClass` to the five ids; every
-   `Record<PlayerClass, X>` table (class details, starting gear, icons, colours,
-   i18n catalogs); ability `class:` fields; item `requiredClass`; the three
-   hardcoded HTML pickers and both server validation lists. This is the stretch
-   where the tree does not compile, so do not stop inside it.
-2. **Wire `job_vitals`** into `recalcPlayerStats`, replacing `baseHp +
-   hpPerLevel * (level - 1)` with the quadratic curve. The attribute multipliers
-   (`1 + VIT/100`, `1 + INT/100`) already sit at the call site and stay.
-3. **Remove level-scaled armour.** Both `baseArmor`/`armorPerLevel` AND
-   `s.armor += s.vit * 2`. Ragnarok's hard DEF comes from equipment only, and
-   the Vitality term is a DOUBLE COUNT: Vitality already buys soft DEF, the flat
-   subtraction in `combat/defence.ts`. Expect the reachable armour ceiling to
-   fall from about 4,200 to about 2,560 and a fresh character to sit at 0 DEF,
-   which is correct and will feel very different.
-4. **Character creation** reads `JOBS` instead of the three hardcoded `.mini-class`
-   blocks (`index.html` twice, `play.html` once) and the two hardcoded server
-   lists (`server/characters.ts` `VALID_CLASSES`, `server/main.ts`
-   `validClasses`, which must move in lockstep). Add a `startable` flag to
-   `JobDef` so the picker derives from data and the next job addition is one row.
-5. **Archive the cut classes' characters.** Move `paladin`/`shaman`/`warlock`/
-   `druid` rows to an archive table with their JSON intact, rather than keeping
-   four dead members in every per-class table. Keeping them in code looks cheaper
-   until the skill re-home (D4) leaves those characters loading with no kit at
-   all, which is broken quietly rather than loudly. DDL is additive and
-   idempotent, per `server/CLAUDE.md`.
-6. **`ip_scrub` and `NAME-MAP.md`.** Every renamed class goes through
-   `tests/ip_scrub.test.ts`, and `ip-refactor/NAME-MAP.md` is append-only.
-7. **Regen and gate.** `npm run wiki:content`, the parity goldens
-   (`UPDATE_PARITY=1`, own commit), then the full suite against the recorded
-   baseline plus `tsc` and `npm run ci:changed`.
+All seven steps are done on `feature/first-jobs`. What each one actually took:
+
+1. **The rename and the union collapse.** About 5,200 sites across `src/`,
+   `server/`, `headless/`, and `tests/`. `PlayerClass` is now the five ids. The
+   four cut classes took their kits with them: 96 ability definitions, their
+   committed skill-icon art (`public/ui/skills/<class>/`), their guide stills,
+   their `player_<class>` render visual keys, and the suites that existed only to
+   exercise them. Demon Heal and the shapeshift bar pages now gate on the PET and
+   the FORM AURA rather than on an owner class id, so both are simply unreachable
+   instead of naming a class that is gone.
+2. **`job_vitals` is wired** into `recalcPlayerStats`, both curves.
+3. **Level-scaled armour and the Vitality double count are gone.**
+   `REACHABLE_ARMOR_CEILING` moved 4,200 to 2,560 and a fresh character sits at 0.
+4. **Character creation reads `JOBS`.** `JobDef.startable` is the flag; the three
+   `.mini-class` blocks are empty containers filled by `src/ui/class_picker.ts`
+   from a DOM-free core, and both server lists derive from `startableJobs()`.
+5. **Saved characters migrate at boot** (`server/first_jobs_migration_db.ts`): the
+   four renamed ids are rewritten in place, the four cut ones move to
+   `archived_characters` with their JSONB intact. Additive, idempotent, and the
+   copy and the delete share the advisory-locked boot transaction.
+6. **`ip_scrub` is green** and `NAME-MAP.md` carries the class-id appendix.
+7. **Regenerated**: wiki content, sitemap, i18n bundles, and the parity goldens
+   (own commit, last on the branch).
+
+## What D1 hands to D4, and why
+
+Two of the three are consequences of step 2 that step 2 could not fix by itself.
+
+- **Ability costs are on the wrong scale, and casters cannot cast.** The SP pool
+  is Ragnarok's now: a level-20 Mage carries 130 SP where it carried 1,228, and a
+  level-6 Acolyte carries 40 against a 45 SP Lesser Heal. The COST table is still
+  authored against the old pool, so the kit has to be re-costed against the real
+  curve. Until then `tests/helpers/sp.ts` `raisePool()` marks every case whose
+  subject is a mechanic rather than a pool; deleting that helper is how D4 knows
+  it is finished. Owner decision (2026-07-28): wire both curves now and take the
+  regression rather than half-wire the module.
+- **Absorb and potion magnitudes are on the wrong scale too**, for the same
+  reason: a rank-1 mage barrier is now worth more than half a level-7 health bar.
+  One ratio assertion in `tests/mage_barrier_scaling.test.ts` is retired in place
+  rather than re-pinned at a number that would pin the mismatch instead of a rule.
+- **Orphaned content keeps its ids.** The feral two-handers, the Stormcaller mail
+  line, and Pearlward Aegis survive with an empty `requiredClass`, which
+  `canEquipItem` reads as nobody rather than everybody. A shipped item id is never
+  deleted or renamed; re-homing them onto a job that can use them is D4 work. Same
+  for the 12 class/spec pairs the dev-kit table lost, and for the demon-pet
+  plumbing (`content/warlock_pets.ts`, `createDemonPet`), unreachable but intact.
+
+Three claims are RETIRED rather than re-pointed, and say so where they lived: no
+live ability folds Spell Power per channel tick, no live ground AoE pulses on
+cast, and the healer mana-efficiency band has no peers left to form a band with.
+
+## Blocked on another branch
+
+`src/sim/job_aspd.ts` lives on `feature/magic-defence`, not here. Its own comment
+asks for `AspdJob` to become an alias of `PlayerClass` once the collapse lands,
+plus a test pinning `ASPD_JOBS` against the class list. The collapse HAS landed,
+so that edit is unblocked the moment the two branches meet; it could not be made
+from this branch without creating a second copy of that file.
 
 ## Known-red, and why
 
-- **`tests/spell_power.test.ts`** asserts things like "a pure-melee rogue has far
-  less spell power than a caster". That is no longer true of anything: class does
-  not determine attributes any more, the player's spending does. Those cases need
-  class-appropriate allocations passed in explicitly, or reframing.
-- **`tests/mob_enervate.test.ts`**, one case. The suite was given
-  `levelWithStats` and the drain still reads as zero; not yet diagnosed.
-- **`tests/ability_tooltip_consistency.test.ts`** is red on `main` too. Ability
-  descriptions cite numbers that the critical-strike and damage changes made
-  stale (for example Berserker Stance still claims criticals "hit for 3% more",
-  and criticals no longer multiply at all). It wants a descriptions sweep, which
-  belongs with the skill re-home.
-- **`tests/heroic_difficulty_floors.test.ts`**, three cases, carried from C3 and
-  recorded in `ro-reference-source.md`.
+The list below was RE-MEASURED at the D1 base commit (`afb1dbf`) by checking that
+commit out in the worktree and running the full suite, rather than carried
+forward. It is 28 files / 109 cases, wider than the four groups this section used
+to name, and D1 leaves it unchanged: every file here is red on the base too.
+
+Take a fresh baseline the same way before judging a later change. `npx vitest run
+--maxWorkers=4` on a detached checkout of the base, then diff the failing-file
+list against the branch; anything not on the base list is yours.
+
+The four originally-recorded groups, all still red for their recorded reasons:
+
+- **`tests/spell_power.test.ts`** (3) asserts things like "a pure-melee thief has
+  far less spell power than a caster". That is no longer true of anything: class
+  does not determine attributes any more, the player's spending does. Those cases
+  need class-appropriate allocations passed in explicitly, or reframing.
+- **`tests/mob_enervate.test.ts`** (1). The suite was given `levelWithStats` and
+  the drain still reads as zero; not yet diagnosed.
+- **`tests/ability_tooltip_consistency.test.ts`** (2) is red on `main` too.
+  Ability descriptions cite numbers the critical-strike and damage changes made
+  stale (Berserker Stance still claims criticals "hit for 3% more", and criticals
+  no longer multiply at all). It wants a descriptions sweep, which belongs with
+  the skill re-home.
+- **`tests/heroic_difficulty_floors.test.ts`** (3), carried from C3 and recorded
+  in `ro-reference-source.md`.
+
+The rest of the base-red set, which the four groups did not mention:
+
+- **The parity goldens** (`tests/parity/parity.test.ts`, 51) are stale ON THE
+  BASE: D0 changed sim behaviour without re-minting them. D1 re-mints, so this
+  group goes green on the branch and is the one place the branch is BETTER than
+  its base. Anything still red there after a re-mint is a real regression.
+- **The asset and tooling suites**: `sfx_studio` (12), `build_assets_cli` (4),
+  `prod_cpu_monitor` (5), `eastbrook_*` (9 across five files),
+  `sfx_export_bundle`, `sfx_overlay`, `sfx_playback_profile`,
+  `render_glb_replacement_assets`, `world_auth_scripts`, `asset_pipeline`,
+  `server/static_sfx_serving` (1 each). These want tooling or generated media the
+  worktree does not have; they are environment-red, not content-red.
+- **`tests/server/new_endpoint.test.ts`** (2), the TypeScript dual-alias pins.
+- **`tests/i18n_status_registry.test.ts`** (2), `tests/localization_fixes.test.ts`
+  (1), `tests/character_sheet.test.ts` (1), `tests/env_protocol.test.ts` (2),
+  `tests/fixes.test.ts` (3).
 
 ## Environment note
 
