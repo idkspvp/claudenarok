@@ -81,7 +81,15 @@ describe('coverage: each scenario fires its subsystem', () => {
     // scenario's own spawn is the one that gets wounded into a frenzy + taunted).
     const greyjaws = entities(rec).filter((e) => e.templateId === 'old_greyjaw');
     const player = (rec.sim as any).player;
-    expect(greyjaws.some((e) => e.auras?.some((a: Ev) => a.id === 'blood_frenzy'))).toBe(true);
+    // Read the PROC off the event stream rather than the final frame: the buff is
+    // short, the scenario keeps ticking after the last hit, and whether it happens
+    // to still be up in the sampled frame is timing, not coverage.
+    const greyjawIds = new Set(greyjaws.map((e: { id: number }) => e.id));
+    expect(
+      (rec.allEvents as Ev[]).some(
+        (e) => e.type === 'aura' && e.name === 'Blood Frenzy' && greyjawIds.has(e.targetId),
+      ),
+    ).toBe(true);
     expect(player.auras?.some((a: Ev) => a.kind === 'dot')).toBe(true);
     // applyTaunt (player cast) forced the greyjaw onto the player.
     expect(greyjaws.some((e) => e.forcedTargetId === pid)).toBe(true);
@@ -180,15 +188,17 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(entities(rec).every((e) => e.aggroTargetId !== petId)).toBe(true);
   });
 
-  it('paladin_consecration: ground AoE pulses fire from BOTH callers (immediate + deferred)', () => {
+  it('paladin_consecration: ground AoE pulses fire from the deferred caller', () => {
     const rec = run('paladin_consecration');
     const hits = (rec.allEvents as Ev[]).filter(
       (e) =>
         e.type === 'damage' &&
         typeof e.ability === 'string' &&
-        e.ability.toLowerCase().includes('holy ground'),
+        e.ability.toLowerCase().includes('blizzard'),
     );
-    // 1 immediate on-cast pulse (~4097) + >=1 deferred interval pulse (~3052).
+    // Consecration was the only ground AoE that pulsed ON CAST, and it went with
+    // the Paladin in D1. Every live one is `delayed`, so what is reachable is the
+    // deferred interval caller (~3052); the immediate arm (~4097) has no caster.
     expect(hits.length).toBeGreaterThanOrEqual(2);
   });
 
@@ -546,7 +556,7 @@ describe('coverage: each scenario fires its subsystem', () => {
           (e) =>
             e.type === 'damage' &&
             typeof e.ability === 'string' &&
-            e.ability.toLowerCase().includes('holy ground'),
+            e.ability.toLowerCase().includes('blizzard'),
         )
         .map((e) => e.targetId),
     );
@@ -557,17 +567,19 @@ describe('coverage: each scenario fires its subsystem', () => {
     const rec = run('c4a_casting_lifecycle');
     const ev = rec.allEvents as Ev[];
     // castAbility started the timed casts + the channel (mage fireball, acolyte heal,
-    // warlock drain_life).
+    // acolyte mind_flay).
     expect(ev.some((e) => e.type === 'castStart')).toBe(true);
     // a timed cast ran to completion (the mage fireball -> updateCasting finish branch).
     expect(ev.some((e) => e.type === 'castStop' && e.success === true)).toBe(true);
-    // an interrupt cancelled a cast (acolyte silence + warlock fishing -> cancelCast).
+    // an interrupt cancelled a cast (acolyte silence + a fishing cast -> cancelCast).
     expect(ev.some((e) => e.type === 'castStop' && e.success === false)).toBe(true);
-    // the warlock drain channel ticked and dealt shadow damage (applyChannelTick).
-    const wl = rec.notes.warlockId as number;
-    expect(ev.some((e) => e.type === 'damage' && e.sourceId === wl && e.school === 'shadow')).toBe(
-      true,
-    );
+    // the channel ticked and dealt shadow damage (applyChannelTick). Drain Life was
+    // the Warlock's and went with the class; Litany of Woe is the surviving
+    // drainTick channel and is the same school.
+    const channeler = rec.notes.channelerId as number;
+    expect(
+      ev.some((e) => e.type === 'damage' && e.sourceId === channeler && e.school === 'shadow'),
+    ).toBe(true);
   });
 
   it('mob_lifecycle: frenzy + death-throes arm/detonate + wild respawn (despawn adds) + dungeon stays dead', () => {
@@ -661,22 +673,24 @@ describe('coverage: each scenario fires its subsystem', () => {
       ev.some((e) => e.type === 'damage' && e.sourceId === thief && e.school === 'physical'),
     ).toBe(true);
     expect(ev.some((e) => e.type === 'comboPoint' && e.pid === thief && e.points === 0)).toBe(true);
-    // paladin judgement: a holy damage from the paladin (the Seal unleashed).
-    const paladin = rec.notes.paladinId as number;
-    expect(
-      ev.some((e) => e.type === 'damage' && e.sourceId === paladin && e.school === 'holy'),
-    ).toBe(true);
-    // paladin consecration: a ground AoE was pushed (on-cast pulse path).
+    // The judgement, imbue-Seal, summonDemon, and form-switch arms all went with
+    // the Paladin, Warlock, and Druid in D1. What replaces them is one live arm per
+    // surviving effect type.
+    // mage blizzard: a ground AoE was pushed.
     expect((rec.sim as any).groundAoEs.length).toBeGreaterThanOrEqual(1);
-    // warlock fear: the incapacitate aura landed on the warlock's mob (fear-angle draw).
-    const warlockMob = ents.find((e) => e.id === rec.notes.warlockMobId);
-    expect(warlockMob?.auras?.some((a: Ev) => a.kind === 'incapacitate')).toBe(true);
-    // warlock summon_imp: a pet now belongs to the warlock (summonDemon -> summonPet).
-    expect(ents.some((e) => e.ownerId === rec.notes.warlockId)).toBe(true);
-    // druid form switch: the LAST form (cat) is active and bear was stripped.
-    const druid = ents.find((e) => e.id === rec.notes.druidId);
-    expect(druid?.auras?.some((a: Ev) => a.kind === 'form_cat')).toBe(true);
-    expect(druid?.auras?.some((a: Ev) => a.kind === 'form_bear')).toBe(false);
+    // mage polymorph: the incapacitate-family aura landed on the mage's mob.
+    const ccMob = ents.find((e) => e.id === rec.notes.mageCcMobId);
+    expect(ccMob?.auras?.some((a: Ev) => a.kind === 'polymorph')).toBe(true);
+    // thief instant_poison: the imbue arm put a weapon buff on the thief.
+    const thiefEnt = ents.find((e) => e.id === thief);
+    expect(thiefEnt?.auras?.some((a: Ev) => a.kind === 'imbue')).toBe(true);
+    // acolyte shadow_word_pain + renew: the dot arm and the hot arm both landed.
+    const acolyte = rec.notes.acolyteId as number;
+    const acolyteEnt = ents.find((e) => e.id === acolyte);
+    expect(acolyteEnt?.auras?.some((a: Ev) => a.kind === 'hot')).toBe(true);
+    expect(
+      ents.some((e) => e.auras?.some((a: Ev) => a.kind === 'dot' && a.sourceId === acolyte)),
+    ).toBe(true);
   });
 
   it('hit_rating_heroic pair: gear changes the threshold, never the RNG draw order', () => {

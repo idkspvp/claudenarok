@@ -42,7 +42,7 @@ import {
 } from '../../src/sim/types';
 import { terrainHeight } from '../../src/sim/world';
 import { OPEN_FIELD } from '../helpers/open_field';
-import { fundCasts } from '../helpers/sp';
+import { fundCasts, raisePool } from '../helpers/sp';
 import type { Recorder, Scenario } from './record';
 
 // ----- shared helpers ---------------------------------------------------------
@@ -293,6 +293,10 @@ function affixMob(): Scenario {
       const stalker = spawnMob(sim, 'ridge_stalker', 13, p.pos.x - 2, p.pos.y, p.pos.z);
       beef(greyjaw, 60000);
       beef(stalker, 60000);
+      // frenzyOnHit only fires on a HOSTILE unowned mob, so say so rather than
+      // relying on the spawn default.
+      greyjaw.hostile = true;
+      stalker.hostile = true;
       aggroOnto(greyjaw, p);
       aggroOnto(stalker, p);
       rec.track(greyjaw.id, stalker.id);
@@ -308,6 +312,12 @@ function affixMob(): Scenario {
         if (greyTrait) greyTrait.chance = 1;
         if (stalkBleed) stalkBleed.chance = 1;
         for (let round = 0; round < 5; round++) {
+          // Keep the player alive across the window. beef() raises maxHp, but a
+          // player recalc puts the pool back on the job curve, and D1 made that
+          // curve small enough that two aggro'd mobs on a 0-armour target finish
+          // the run before the last round. The exerciser is the affix cascade, not
+          // the player's survival.
+          p.hp = p.maxHp;
           // player wounds greyjaw -> frenzyOnHit proc (source !== target)
           sim.dealDamage(p, greyjaw, 40, false, 'physical', null, 'hit', true);
           // stalker swings player -> bleed on-hit affix (direct, the exerciser path)
@@ -480,14 +490,16 @@ function hunterPet(): Scenario {
   };
 }
 
-// Warlock melee pet: summon_voidwalker (melee_tank) swings through the pet arm of
-// mobSwing and taunts via the applyTaunt pet arm.
-function warlockPet(): Scenario {
+// Summoned melee pet: the Water Elemental swings through the pet arm of mobSwing
+// and taunts via the applyTaunt pet arm. This was the Warlock's Voidwalker until
+// D1 cut that class; the Mage's elemental is the surviving summon and runs the
+// same two arms.
+function summonedPet(): Scenario {
   return {
     name: 'warlock_pet',
     coverage: [
       'class:mage (caster)',
-      'mobSwing pet arm (voidwalker melee ~8117)',
+      'mobSwing pet arm (melee pet ~8117)',
       'applyTaunt pet auto-taunt arm (~8110)',
       'applyTaunt pet manual-taunt arm (petTaunt, ~4885)',
     ],
@@ -497,35 +509,36 @@ function warlockPet(): Scenario {
       sim.setPlayerLevel(12);
       const p = sim.player as AnyEntity;
       beef(p);
-      fundCasts(p);
-      sim.castAbility('summon_voidwalker');
-      for (let i = 0; i < 20 * 12 && p.castingAbility; i++) rec.tick(1);
-      const pet = sim.petOf(sim.playerId) as AnyEntity | null;
-      if (pet) {
-        rec.track(pet.id);
-        pet.petMode = 'aggressive';
-        pet.petAutoTaunt = true;
-        pet.petTauntTimer = 0;
-      }
+      // The pet is SPAWNED rather than summoned. The summon that used to open this
+      // scenario was the Warlock's and went with the class; the demon MOB records
+      // are still real content, and the Mage's own summon carries
+      // petCanTaunt:false, so it cannot reach the taunt arms this pins. pet_ai
+      // stands its pets up the same way for the same reason.
+      const pet = spawnMob(sim, 'gloomshade', 12, p.pos.x + 2, p.pos.y, p.pos.z) as AnyEntity;
+      pet.ownerId = p.id;
+      pet.hostile = false;
+      pet.hp = pet.maxHp;
+      rec.track(pet.id);
+      pet.petMode = 'aggressive';
+      pet.petAutoTaunt = true;
+      pet.petTauntTimer = 0;
       const target = spawnMob(sim, 'forest_wolf', 8, p.pos.x + 5, p.pos.y, p.pos.z);
       beef(target);
       aggroOnto(target, p);
-      if (pet) pet.aggroTargetId = target.id;
+      pet.aggroTargetId = target.id;
       rec.track(target.id);
       sim.targetEntity(target.id);
       sim.startAutoAttack();
       rec.tick(120);
       // Manual pet taunt: place the pet in PET_TAUNT_RANGE (5) and command it ->
       // applyTaunt via petTaunt (~4885), distinct from the auto-taunt arm (~8110).
-      if (pet) {
-        pet.pos = { x: target.pos.x - 1, y: target.pos.y, z: target.pos.z };
-        pet.prevPos = { ...pet.pos };
-        sim.rebucket(pet);
-        pet.petTauntTimer = 0;
-        sim.petTaunt();
-        rec.snapshot('pet-taunt');
-        rec.tick(4);
-      }
+      pet.pos = { x: target.pos.x - 1, y: target.pos.y, z: target.pos.z };
+      pet.prevPos = { ...pet.pos };
+      sim.rebucket(pet);
+      pet.petTauntTimer = 0;
+      sim.petTaunt();
+      rec.snapshot('pet-taunt');
+      rec.tick(4);
     },
   };
 }
@@ -754,34 +767,36 @@ function petCommands(): Scenario {
   };
 }
 
-// Paladin Consecration: a ground AoE so updateGroundAoEs (which runs FIRST in the
-// tick) and pulseGroundAoE fire from BOTH callers (the immediate on-cast pulse and
-// the deferred interval pulses).
-function paladinConsecration(): Scenario {
+// A ground AoE, so updateGroundAoEs (which runs FIRST in the tick) and
+// pulseGroundAoE both run. Consecration was the Paladin's and went with the class
+// in D1; Blizzard is the surviving ground AoE, and it is `delayed`, so the
+// IMMEDIATE on-cast pulse arm has no live caster left. What this pins now is the
+// deferred interval arm and the tick-order coupling.
+function groundAoePulses(): Scenario {
   return {
     name: 'paladin_consecration',
     coverage: [
-      'class:swordman',
+      'class:mage',
       'updateGroundAoEs first-in-tick (~2256)',
-      'pulseGroundAoE both callers (immediate ~4097 + deferred ~3052)',
+      'pulseGroundAoE deferred interval caller (~3052)',
     ],
-    build: () => new Sim({ seed: 1007, playerClass: 'swordman', autoEquip: true }),
+    build: () => new Sim({ seed: 1007, playerClass: 'mage', autoEquip: true }),
     drive(rec: Recorder) {
       const sim = rec.sim as AnySim;
-      sim.setPlayerLevel(20); // consecration learnLevel 18
+      sim.setPlayerLevel(20);
       const p = sim.player as AnyEntity;
       beef(p);
       const mob = spawnMob(sim, 'forest_wolf', 5, p.pos.x, p.pos.y, p.pos.z + 3);
       beef(mob, 40000);
       mob.hostile = true;
       rec.track(mob.id);
-      teleport(sim, p, mob.pos.x, mob.pos.z - 2); // mob within the 8yd radius
+      teleport(sim, p, mob.pos.x, mob.pos.z - 2); // mob within the zone radius
       sim.targetEntity(mob.id);
-      fundCasts(p);
+      raisePool(p);
       rec.tick(1);
       p.gcdRemaining = 0;
-      sim.castAbility('consecration'); // pushes the ground AoE; immediate pulse fires
-      rec.tick(20 * 10); // 10s: interval-2 deferred pulses
+      sim.castAbility('blizzard'); // 2s cast, then the zone pulses on its own
+      rec.tick(20 * 12); // let the cast finish and the interval pulses run
     },
   };
 }
@@ -2871,13 +2886,28 @@ function c3AuraRunner(): Scenario {
       for (const m of [a1, a2]) {
         beef(m, 40000);
         m.hostile = true;
+        // Frozen in place so they stay inside the zone: the storm runs longer than
+        // the old Consecration did, and a wolf that starts chasing when the first
+        // wave lands walks out of the radius before the second one does.
+        m.aiState = 'idle';
+        m.moveSpeed = 0;
       }
       rec.track(a1.id, a2.id);
       rec.notes.aoeMobIds = [a1.id, a2.id];
-      fundCasts(p);
-      p.gcdRemaining = 0;
-      sim.castAbility('consecration'); // immediate on-cast pulse + deferred interval pulses
-      rec.tick(20 * 6); // 6s of interval-2 deferred pulses over both mobs
+      // Consecration was the Paladin's and this runner is a Swordman, which owns no
+      // ground AoE, so the zone comes from a Mage standing in the same cluster. The
+      // claim is about pulseGroundAoE iterating hostilesInRadius, not about who cast.
+      const zoneCaster = sim.addPlayer('mage', 'Zone') as number;
+      const zc = sim.entities.get(zoneCaster) as AnyEntity;
+      sim.setPlayerLevel(20, zoneCaster);
+      teleport(sim, zc, p.pos.x, p.pos.z);
+      beef(zc);
+      raisePool(zc);
+      zc.gcdRemaining = 0;
+      // Aim at the cluster centre: a position-targeted zone needs one, and without
+      // it the storm lands wherever the default aim resolves rather than on both mobs.
+      sim.castAbility('blizzard', zoneCaster, { x: p.pos.x, z: p.pos.z });
+      rec.tick(20 * 9); // let the cast land, then 6s+ of interval pulses over both mobs
     },
   };
 }
@@ -3299,7 +3329,16 @@ function c4bEffectDispatch(): Scenario {
       };
 
       // --- mage FIRST (timed casts in a clean environment) ---
-      const mobL = dummy(eMage, 8);
+      // The CC dummy stands well clear of the caster: Polymorph breaks on damage,
+      // and both the storm and the point-blank explosion below are centred on the
+      // mage. Polymorph reaches 30 yards, so 20 is comfortably in range and
+      // comfortably outside every radius in this scenario.
+      const mobL = spawnMob(sim, 'forest_wolf', 8, eMage.pos.x, eMage.pos.y, eMage.pos.z + 20);
+      beef(mobL, 500000);
+      mobL.hostile = true;
+      mobL.aiState = 'idle';
+      mobL.moveSpeed = 0;
+      rec.track(mobL.id);
       rec.notes.mageCcMobId = mobL.id;
       face(eMage, mobL);
       sim.targetEntity(mobL.id, mage);
@@ -3308,7 +3347,7 @@ function c4bEffectDispatch(): Scenario {
       rec.tick(32); // finish polymorph
       rec.snapshot('mage-polymorph');
       ready(eMage);
-      sim.castAbility('blizzard', mage); // 2s cast -> groundAoE on-cast pulse + groundAoEs.push
+      sim.castAbility('blizzard', mage); // 2s cast -> groundAoE push
       rec.tick(45); // finish blizzard
       rec.snapshot('mage-blizzard');
 
@@ -3359,8 +3398,16 @@ function c4bEffectDispatch(): Scenario {
       const mobA = dummy(eAcolyte);
       face(eAcolyte, mobA);
       sim.targetEntity(mobA.id, acolyte);
-      ready(eAcolyte);
-      sim.castAbility('shadow_word_pain', acolyte); // dot
+      // The dot is a PROJECTILE (it applies when the bolt arrives, not at cast
+      // completion) and it can be resisted, so the cast is ticked out and retried
+      // until it sticks. The draw order stays deterministic; it just contains
+      // however many rolls this seed needed.
+      for (let i = 0; i < 12; i++) {
+        ready(eAcolyte);
+        sim.castAbility('shadow_word_pain', acolyte);
+        rec.tick(12); // let the bolt travel and land
+        if (mobA.auras.some((au: { kind: string }) => au.kind === 'dot')) break;
+      }
       ready(eAcolyte);
       eAcolyte.hp = Math.max(1, eAcolyte.maxHp - 1000);
       sim.targetEntity(acolyte, acolyte); // self-target the friendly hot
@@ -4211,10 +4258,10 @@ export const SCENARIOS: Scenario[] = [
   affixMob(),
   mobSwingAffixes(),
   hunterPet(),
-  warlockPet(),
+  summonedPet(),
   petAi(),
   petCommands(),
-  paladinConsecration(),
+  groundAoePulses(),
   arena1v1(),
   cardDuel(),
   fiesta(),
