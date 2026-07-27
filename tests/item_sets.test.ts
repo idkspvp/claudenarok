@@ -14,10 +14,10 @@ import {
 import { ITEMS, MOBS } from '../src/sim/data';
 import { createMob, createPlayer, recalcPlayerStats, statusAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { CAST_PUSHBACK_SEC, CHANNEL_PUSHBACK_FRACTION } from '../src/sim/types';
 import { itemSetMemberCounts, itemSetTooltipModel } from '../src/ui/item_set_tooltip_view';
+import { spreadAllocation } from './helpers/alloc';
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -26,7 +26,7 @@ function statsFor(cls: PlayerClass, level: number, equipment: Record<string, str
   e.level = level;
   // With the class's suggested spread, not bare 1s: a set bonus of +15 Strength
   // read against a base of 1 tells you nothing about whether it landed correctly.
-  recalcPlayerStats(e, cls, equipment as any, undefined, {}, defaultAllocationFor(cls, level));
+  recalcPlayerStats(e, cls, equipment as any, undefined, {}, spreadAllocation(level));
   return e;
 }
 

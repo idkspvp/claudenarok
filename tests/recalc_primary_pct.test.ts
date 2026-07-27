@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
 import { emptyModifiers, type PlayerModifiers } from '../src/sim/player_modifiers';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { PlayerClass } from '../src/sim/types';
+import { spreadAllocation } from './helpers/alloc';
 
 // recalcPlayerStats is the ONE place derived stats are computed (src/sim/CLAUDE.md). These
 // lock the primary-attribute multipliers (strPct/agiPct/intPct/lukPct) in the shared
@@ -41,7 +41,7 @@ function derive(cls: PlayerClass, level: number, mut?: (m: PlayerModifiers) => v
     mods = emptyModifiers();
     mut(mods);
   }
-  recalcPlayerStats(e, cls, {}, mods, {}, defaultAllocationFor(cls, level));
+  recalcPlayerStats(e, cls, {}, mods, {}, spreadAllocation(level));
   return {
     str: e.stats.str,
     agi: e.stats.agi,

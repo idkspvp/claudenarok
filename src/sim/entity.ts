@@ -7,7 +7,6 @@ import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
-import { defaultAllocationFor } from './stat_preset';
 import type {
   Entity,
   EquipSlot,
@@ -803,7 +802,7 @@ export function characterDerivedStats(
     equipment,
     mods,
     equipmentInstance ?? {},
-    alloc ?? defaultAllocationFor(cls, e.level),
+    alloc ?? emptyStatAllocation(),
   );
   return {
     stats: e.stats,

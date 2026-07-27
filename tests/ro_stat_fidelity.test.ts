@@ -51,16 +51,31 @@ describe('the status-point budget matches Ragnarok', () => {
     expect(totalStatusPointsAt(MAX_LEVEL) - CREATION_STATUS_POINTS).not.toBe(earnedAsReached);
   });
 
-  it('leaves a capped character ONE point short of two 99s', () => {
-    // The knife-edge that makes job bonuses matter in Ragnarok: 1,274 to buy two
-    // attributes to 99, and the game only ever gives you 1,273. If a change to
-    // either the curve or the grant lands us on the comfortable side of this, the
-    // build math has quietly stopped being Ragnarok's.
+  it('lets a capped character buy two 99s and keep change', () => {
+    // 1,256 to buy two attributes to 99 against the 1,273 the game grants, so a
+    // level-99 character affords both and keeps 17 over.
+    //
+    // This used to assert the opposite, that two 99s cost one point MORE than a
+    // character is ever given, and a design note was written around the
+    // near-miss. It came from statRaiseCost charging a point too much at every
+    // multiple of ten; Ragnarok's PC_STATUS_POINT_COST does not, and the
+    // knife-edge never existed.
     let oneStatTo99 = 0;
     for (let v = BASE_STAT; v < MAX_STAT; v++) oneStatTo99 += statRaiseCost(v);
-    expect(oneStatTo99).toBe(637);
-    expect(oneStatTo99 * 2).toBe(1274);
-    expect(totalStatusPointsAt(MAX_LEVEL)).toBe(oneStatTo99 * 2 - 1);
+    expect(oneStatTo99).toBe(628);
+    expect(oneStatTo99 * 2).toBe(1256);
+    expect(totalStatusPointsAt(MAX_LEVEL) - oneStatTo99 * 2).toBe(17);
+  });
+
+  it('charges 2 up to and including 10, and 3 only from 11', () => {
+    // The band boundary sits ABOVE the round number. Getting this off by one is
+    // exactly what shipped, and it is invisible in any single raise.
+    expect(statRaiseCost(1)).toBe(2);
+    expect(statRaiseCost(9)).toBe(2);
+    expect(statRaiseCost(10)).toBe(2);
+    expect(statRaiseCost(11)).toBe(3);
+    expect(statRaiseCost(20)).toBe(3);
+    expect(statRaiseCost(21)).toBe(4);
   });
 });
 

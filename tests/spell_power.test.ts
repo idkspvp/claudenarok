@@ -11,11 +11,12 @@ import {
 } from '../src/sim/spell_scaling';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { MAX_LEVEL } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 function leveled(cls: PlayerClass, level = MAX_LEVEL) {
   const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
   const pid = sim.addPlayer(cls, 'Tester');
-  sim.setPlayerLevel(level, pid);
+  levelWithStats(sim, level, pid);
   sim.tick();
   return { sim, pid, p: sim.entities.get(pid)! };
 }

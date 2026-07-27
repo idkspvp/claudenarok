@@ -1,12 +1,14 @@
 // Direhowl is the winning Protection Warrior's defensive area cooldown. The
 // shared `aoeAttackPower` effect carries its percentage damage-done reduction;
 // flat `debuff_ap` coverage below remains for other retained class content.
+
 import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt, CLASSES } from '../src/sim/content/classes';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 function spawnDummy(sim: Sim, target: Entity): Entity {
   const mob = createMob((sim as any).nextId++, MOBS.gravecaller_summoner, 14, {
@@ -55,7 +57,7 @@ describe('warrior Direhowl', () => {
   it('reduces nearby enemies damage dealt by 20% on cast', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
     const p = sim.player;
-    sim.setPlayerLevel(12, p.id);
+    levelWithStats(sim, 12, p.id);
     p.gm = true;
     p.resource = 100; // rage for the shout
     const mob = spawnDummy(sim, p);
@@ -80,7 +82,7 @@ describe('warrior Direhowl', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
     const casterId = sim.addPlayer('warrior', 'Caster');
     const victimId = sim.addPlayer('warrior', 'Victim');
-    sim.setPlayerLevel(20, victimId);
+    levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
     // Derive the drain from the target instead of pinning 30. The ability itself
@@ -111,7 +113,7 @@ describe('warrior Direhowl', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
     const casterId = sim.addPlayer('warrior', 'Caster');
     const victimId = sim.addPlayer('warrior', 'Victim');
-    sim.setPlayerLevel(20, victimId);
+    levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
     const drain = Math.floor(before / 3);
@@ -138,7 +140,7 @@ describe('warrior Direhowl', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
     const casterId = sim.addPlayer('warrior', 'Caster');
     const victimId = sim.addPlayer('warrior', 'Victim');
-    sim.setPlayerLevel(20, victimId);
+    levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
 
     (sim as any).applyAura(victim, {
@@ -158,7 +160,7 @@ describe('warrior Direhowl', () => {
   it('does not touch a far-away enemy', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
     const p = sim.player;
-    sim.setPlayerLevel(12, p.id);
+    levelWithStats(sim, 12, p.id);
     p.gm = true;
     p.resource = 100; // rage for the shout
     const far = spawnDummy(sim, p);

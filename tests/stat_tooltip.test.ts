@@ -5,7 +5,6 @@ import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
 import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
   agiMeleeApPerPoint,
@@ -21,6 +20,7 @@ import {
   strApPerPoint,
   weaponDps,
 } from '../src/ui/stat_tooltip';
+import { spreadAllocation } from './helpers/alloc';
 
 // A gear-free, buff-free, talent-free player: autoEquip defaults to false, so the
 // derived stats are a clean function of class base + per-level growth. That lets
@@ -391,14 +391,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
       sourceId: p.id,
       school: 'holy',
     });
-    recalcPlayerStats(
-      p,
-      'warrior',
-      sim.equipment,
-      undefined,
-      {},
-      defaultAllocationFor('warrior', p.level),
-    );
+    recalcPlayerStats(p, 'warrior', sim.equipment, undefined, {}, spreadAllocation(p.level));
     const input = inputWithGear(sim, 'warrior');
     const sta = buildStatTooltip('vit', input);
     const buffLine = sta.sources.find((s) => s.kind === 'buff');
@@ -440,14 +433,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
       sourceId: p.id,
       school: 'physical',
     });
-    recalcPlayerStats(
-      p,
-      'druid',
-      sim.equipment,
-      undefined,
-      {},
-      defaultAllocationFor('druid', p.level),
-    );
+    recalcPlayerStats(p, 'druid', sim.equipment, undefined, {}, spreadAllocation(p.level));
     const armor = buildStatTooltip('armor', inputWithGear(sim, 'druid'));
     // Cat Form raises Agility, and Agility no longer feeds armor, so the form's
     // bonus cannot reach the armor breakdown at all. The attribute line is

@@ -34,7 +34,6 @@ import { aurasSurvivingDeath } from '../resurrection';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { vcupBothSeated } from '../social/vale_cup';
-import { defaultAllocationFor, isSuggestedSpread } from '../stat_preset';
 import { addThreat, canDetectStealthedTarget, clearThreat } from '../threat';
 import type { Entity } from '../types';
 import {
@@ -1362,13 +1361,8 @@ export function grantXp(
     meta.xp -= xpForLevel(p.level);
     p.level++;
     meta.counters.levelUps++;
-    // A character still sitting on the untouched suggestion carries it forward to
-    // the new level. Once the player has moved a single point the build is theirs
-    // and the ding leaves it alone, handing them the new points to place: the same
-    // rule setPlayerLevel uses, so a character leveled by playing and one leveled
-    // by a GM end up in the same place.
-    if (isSuggestedSpread(meta.statAllocation, meta.cls, p.level - 1))
-      meta.statAllocation = defaultAllocationFor(meta.cls, p.level);
+    // The allocation is untouched by the level-up on purpose: the new points
+    // land unspent and the player places them.
     recalcPlayerStats(
       p,
       meta.cls,

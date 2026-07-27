@@ -27,6 +27,7 @@ import {
   xpToReachLevel,
 } from '../src/sim/types';
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
+import { levelWithStats } from './helpers/alloc';
 import { placePlayerInOpenField } from './helpers/open_field';
 
 function makeSim(cls: 'warrior' | 'mage' | 'rogue' = 'warrior', seed = 42) {
@@ -608,7 +609,7 @@ describe('combat', () => {
 
   it('polymorph sheeps a beast and breaks on damage', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(8);
+    levelWithStats(sim, 8);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 10, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -623,7 +624,7 @@ describe('combat', () => {
 
   it('Redhand is usable without a dodge proc', () => {
     const sim = makeSim('warrior');
-    sim.setPlayerLevel(10);
+    levelWithStats(sim, 10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -638,7 +639,7 @@ describe('combat', () => {
 describe('spell pushback', () => {
   function castingMage(level = 1) {
     const sim = makeSim('mage');
-    if (level > 1) sim.setPlayerLevel(level);
+    if (level > 1) levelWithStats(sim, level);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 15, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -775,7 +776,7 @@ describe('rogue', () => {
 
   it('rogue Vanish moves at 50% speed', () => {
     const sim = makeSim('rogue');
-    sim.setPlayerLevel(20); // Vanish learns at level 18
+    levelWithStats(sim, 20); // Vanish learns at level 18
     sim.castAbility('vanish');
     expect(sim.player.auras.some((a) => a.kind === 'stealth')).toBe(true);
     expect((sim as any).moveSpeedMult(sim.player)).toBeCloseTo(0.5, 5);
@@ -784,11 +785,11 @@ describe('rogue', () => {
   it('rogue Vanish actually covers half normal ground', () => {
     const normal = makeSim('rogue');
     despawnMobs(normal);
-    normal.setPlayerLevel(20);
+    levelWithStats(normal, 20);
 
     const vanished = makeSim('rogue');
     despawnMobs(vanished);
-    vanished.setPlayerLevel(20);
+    levelWithStats(vanished, 20);
     vanished.castAbility('vanish');
     expect(vanished.player.auras.some((a) => a.kind === 'stealth')).toBe(true);
 
@@ -800,7 +801,7 @@ describe('rogue', () => {
 
   it('Sap does not break the caster stealth (issue #1890)', () => {
     const sim = makeSim('rogue');
-    sim.setPlayerLevel(10); // Sap learns at level 10
+    levelWithStats(sim, 10); // Sap learns at level 10
     const mob = nearestMob(sim, 'forest_wolf');
     mob.level = 1;
     mob.inCombat = false;
@@ -819,7 +820,7 @@ describe('rogue', () => {
 
   it('Low Blow (kidney_shot) works while invisible from Vanish (issue #1890)', () => {
     const sim = makeSim('rogue');
-    sim.setPlayerLevel(20); // Vanish (18) and Low Blow (14) both known
+    levelWithStats(sim, 20); // Vanish (18) and Low Blow (14) both known
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 1;
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
@@ -940,7 +941,7 @@ describe('food, drink, vendor', () => {
 
   it('out-of-combat mana regen is brisk and scales past the old spi/4+2 rate (#103)', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(10);
+    levelWithStats(sim, 10);
     sim.player.resource = 0;
     sim.player.inCombat = false;
     sim.player.combatTimer = 0;
@@ -953,7 +954,7 @@ describe('food, drink, vendor', () => {
 
   it('mage conjures water and drinking restores mana', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(4);
+    levelWithStats(sim, 4);
     sim.castAbility('conjure_water');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_water')).toBe(2);
@@ -969,7 +970,7 @@ describe('food, drink, vendor', () => {
 
   it('mage conjures food and eating restores health', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(6);
+    levelWithStats(sim, 6);
     sim.castAbility('conjure_food');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_bread')).toBe(2);
@@ -985,7 +986,7 @@ describe('food, drink, vendor', () => {
 
   it('higher conjure food rank yields the heartier tier', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(18);
+    levelWithStats(sim, 18);
     sim.castAbility('conjure_food');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_bread3')).toBe(2);

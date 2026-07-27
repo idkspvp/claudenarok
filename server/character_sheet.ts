@@ -18,10 +18,9 @@ import { zoneAt } from '../src/sim/data';
 import { completionCounts } from '../src/sim/deeds_completion';
 import { characterDerivedStats } from '../src/sim/entity';
 import type { CharacterState } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { sanitizeStatAllocation } from '../src/sim/status_points';
 import type { PlayerClass } from '../src/sim/types';
-import { virtualLevel, xpToReachLevel } from '../src/sim/types';
+import { emptyStatAllocation, virtualLevel, xpToReachLevel } from '../src/sim/types';
 import type { CharacterRow } from './db';
 
 export type SheetVisibility = 'owner' | 'public';
@@ -260,7 +259,7 @@ export function characterSheet(input: CharacterSheetInput): CharacterSheet {
       // character never disagree about who that character is.
       state.statAllocation
         ? sanitizeStatAllocation(state.statAllocation, level)
-        : defaultAllocationFor(cls, level),
+        : emptyStatAllocation(),
     );
     sheet.stats = { ...derived.stats };
     sheet.vitals = {

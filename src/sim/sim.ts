@@ -420,7 +420,6 @@ import * as valeCupMod from './social/vale_cup';
 import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
-import { defaultAllocationFor, isSuggestedSpread } from './stat_preset';
 import {
   raiseCost,
   raiseStat,
@@ -2178,7 +2177,7 @@ export class Sim {
       // simply unable to fight, and the points are the FIRST thing a new player
       // would have to understand. The spread is a starting build, not a lock: every
       // point of it is refunded by Reset and re-spendable however they like.
-      statAllocation: defaultAllocationFor(cls, 1),
+      statAllocation: emptyStatAllocation(),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2267,7 +2266,7 @@ export class Sim {
       // would be a silent, unexplained gutting of a character someone played.
       meta.statAllocation = s.statAllocation
         ? sanitizeStatAllocation(s.statAllocation, player.level)
-        : defaultAllocationFor(meta.cls, player.level);
+        : emptyStatAllocation();
       player.facing = s.facing;
       player.prevFacing = s.facing;
       meta.xp = s.xp;
@@ -4191,8 +4190,6 @@ export class Sim {
     // anything, and the new points would sit unspent with no player around to place
     // them. A character who has moved even one point keeps their build exactly:
     // it is theirs, and so are the fresh points.
-    if (isSuggestedSpread(r.meta.statAllocation, r.meta.cls, prevLevel))
-      r.meta.statAllocation = defaultAllocationFor(r.meta.cls, r.e.level);
     recalcPlayerStats(
       r.e,
       r.meta.cls,

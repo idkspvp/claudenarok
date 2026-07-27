@@ -9,6 +9,7 @@ import {
   SUNDER_ARMOR_PCT_PER_STACK,
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
+import { levelWithStats } from './helpers/alloc';
 
 // Standardized percent raid buffs (resurrecting PR #1038 on release/v0.21.0): the six
 // iconic buffs are percent, integer-point auras that land on the caster and every
@@ -81,7 +82,7 @@ describe('standardized percent raid buffs', () => {
     const far = sim.addPlayer('rogue', 'Far');
     formParty(sim, mage, [near, far]);
     // The mage rework moved Aether Insight from learnLevel 1 to 3 (e0842ee38).
-    sim.setPlayerLevel(3, mage);
+    levelWithStats(sim, 3, mage);
     teleport(sim, mage, 0, 0);
     teleport(sim, near, 5, 0);
     teleport(sim, far, 500, 500); // hundreds of yards away: still gets the buff
@@ -110,7 +111,7 @@ describe('standardized percent raid buffs', () => {
     const sim = makeWorld();
     const mage = sim.addPlayer('mage', 'Solo');
     // The mage rework moved Aether Insight from learnLevel 1 to 3 (e0842ee38).
-    sim.setPlayerLevel(3, mage);
+    levelWithStats(sim, 3, mage);
     const intBefore = sim.entities.get(mage)!.stats.int;
     ready(sim, mage);
     sim.castAbility('arcane_intellect', mage);
@@ -138,7 +139,7 @@ describe('standardized percent raid buffs', () => {
     // Level the ally first: a level-1 warrior has 5 Vitality, and 5% of 5 rounds
     // straight back to 5. Percent buffs need an attribute large enough to move,
     // which on the Ragnarok scale means a character past the first few levels.
-    sim.setPlayerLevel(20, ally);
+    levelWithStats(sim, 20, ally);
     const staBefore = sim.entities.get(ally)!.stats.vit;
     const hpBefore = sim.entities.get(ally)!.maxHp;
     ready(sim, priest);
@@ -179,8 +180,8 @@ describe('standardized percent raid buffs', () => {
     const second = sim.addPlayer('paladin', 'Borin');
     const targetId = sim.addPlayer('warrior', 'War');
     const target = sim.entities.get(targetId)!;
-    sim.setPlayerLevel(4, first);
-    sim.setPlayerLevel(4, second);
+    levelWithStats(sim, 4, first);
+    levelWithStats(sim, 4, second);
 
     ready(sim, first);
     sim.targetEntity(targetId, first);

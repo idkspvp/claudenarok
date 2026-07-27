@@ -32,11 +32,11 @@ import { recalcPlayerStats } from '../src/sim/entity';
 import { emptyModifiers } from '../src/sim/player_modifiers';
 import { type ResolvedAbility, Sim } from '../src/sim/sim';
 import { directHealBonus } from '../src/sim/spell_scaling';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { stunDrCategory } from '../src/sim/stun_dr';
 import type { Aura } from '../src/sim/types';
 import { AVATAR_SCALE, SPELL_AOE_COEFF_MULT } from '../src/sim/types';
 import { targetOfTargetId } from '../src/ui/target_of_target';
+import { spreadAllocation } from './helpers/alloc';
 
 describe('rogue starting dual wield (classes.ts startOffhand)', () => {
   it('starts rogues with a rusty dagger in BOTH hands', () => {
@@ -66,7 +66,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
       meta.equipment,
       base,
       meta.equipmentInstance,
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     const armorWithout = p.stats.armor;
     const str = p.stats.str;
@@ -79,7 +79,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
       meta.equipment,
       mods,
       meta.equipmentInstance,
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.stats.armor).toBe(armorWithout + Math.round(str * 0.7));
 
@@ -93,7 +93,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
       meta.equipment,
       both,
       meta.equipmentInstance,
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.stats.armor).toBe(Math.round((armorWithout + Math.round(str * 0.7)) * 1.1));
   });
@@ -139,7 +139,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
       meta.equipment,
       emptyModifiers(),
       meta.equipmentInstance,
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     expect(AVATAR_SCALE).toBeGreaterThan(1);
     expect(p.scale).toBe(AVATAR_SCALE);
@@ -150,7 +150,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
       meta.equipment,
       emptyModifiers(),
       meta.equipmentInstance,
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.scale).toBe(1);
   });

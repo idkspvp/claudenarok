@@ -18,8 +18,8 @@ import {
   primaryStatSum,
 } from '../src/sim/item_level';
 import { pvpFractionsFromRatings } from '../src/sim/pvp';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import { EQUIP_SLOTS, type EquipSlot, type PlayerClass } from '../src/sim/types';
+import { spreadAllocation } from './helpers/alloc';
 
 const SLOT_PRICES: Record<string, number> = {
   mainhand: 800,
@@ -247,7 +247,7 @@ describe('FURY WARFARE item budgets', () => {
         equipmentForProfile(profile),
         undefined,
         {},
-        defaultAllocationFor(profile.classes[0], player.level),
+        spreadAllocation(player.level),
       );
       expect(player.stats.pvpOffense, `${profile.name} offense`).toBeCloseTo(0.168, 10);
       expect(player.stats.pvpDefense, `${profile.name} defense`).toBeCloseTo(0.168, 10);

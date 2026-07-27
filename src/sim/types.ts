@@ -586,23 +586,35 @@ export function statusPointsForLevel(level: number): number {
   return Math.floor(level / 5) + 3;
 }
 
-/** What raising an attribute from `current` by one costs. 2 through the single
- *  digits, 3 through the teens, 4 through the twenties, and so on: the cost step
- *  is what makes a 99 in anything a commitment rather than a cap you drift into.
+/** What raising an attribute from `current` by one costs. 2 to take it anywhere
+ *  through 10, 3 through 20, 4 through 30, and so on: the cost step is what makes
+ *  a 99 in anything a commitment rather than a cap you drift into.
  *
- *  The band boundary sits ON the round number (10 already costs 3, not 2), which
- *  is where a `(current - 1)` version of this quietly went wrong. */
+ *  The band boundary sits ABOVE the round number: raising FROM 10 still costs 2,
+ *  and 3 does not start until 11. Ragnarok writes this as
+ *  `1 + (current + 9) / 10` in integer arithmetic (`PC_STATUS_POINT_COST`,
+ *  `pc.cpp`); the form below is the same function.
+ *
+ *  This shipped wrong, one point too expensive at every multiple of ten, and the
+ *  comment that used to sit here asserted the error as the fix. The consequence
+ *  was not cosmetic: it put two capped attributes at 1,274 points against the
+ *  1,273 a character is ever granted, one short, and a whole paragraph of design
+ *  reasoning was built on that near-miss. The real numbers are 1,256 against
+ *  1,273, so Ragnarok leaves 17 points spare and the near-miss never existed. */
 export function statRaiseCost(current: number): number {
-  return Math.floor(current / 10) + 2;
+  return 2 + Math.floor((Math.max(1, current) - 1) / 10);
 }
 
 /** Total points a character has ever been granted at `level`, creation included.
  *
  *  At base level 99 this is 1,273: Ragnarok's 1,225 earned plus the 48 handed out
- *  at creation. That figure is worth keeping honest, because raising two separate
- *  attributes to 99 costs 1,274, one point more than the game ever gives you.
- *  Being one short is the whole reason job bonuses matter there, and a rounding
- *  error here would quietly erase that. */
+ *  at creation, all 48 of which arrive at level 1 rather than trickling in.
+ *
+ *  Two capped attributes cost 1,256, so a level-99 character can buy both and
+ *  keep 17 points over. An earlier version of `statRaiseCost` overcharged by a
+ *  point at every multiple of ten and made that 1,274, one MORE than a character
+ *  is ever granted; the design note that used to sit here treated the near-miss
+ *  as intentional. It was arithmetic. */
 export function totalStatusPointsAt(level: number): number {
   let total = CREATION_STATUS_POINTS;
   for (let l = 1; l < level; l++) total += statusPointsForLevel(l);

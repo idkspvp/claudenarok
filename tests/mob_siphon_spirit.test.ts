@@ -3,13 +3,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 const SEED = 42;
 // A mage so the victim is a mana user; level it up so Sister Nhalia's L12 elite
 // swing never one-shots it (death would clear the aura before we can read it).
 const makeSim = (cls: PlayerClass = 'mage') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
-  sim.setPlayerLevel(20);
+  levelWithStats(sim, 20);
   return sim;
 };
 
