@@ -103,12 +103,34 @@ called it invented, which was wrong. Note the two sets differ: instruments and
 whips swap their attack stats but are not ammunition weapons, so only bows take
 the arrow damage-floor rule.
 
+**The critical strike, whole** (`status_calc_bl_main`, `is_attack_critical`,
+`is_attack_hitting`, `attack_ignores_def`). Rate is `10 + LUK x 10 / 3` in per
+mille, so 1% plus a THIRD of a percent per point; the target's Luck subtracts 2
+per mille per point, or 3 when a monster attacks a player, and the derived stat
+is floored at 1 so it never reaches zero. A critical cannot miss, ignores both
+defence layers, and takes atkmax with no multiplier. Magic never crits: all seven
+`is_attack_critical` call sites are on the weapon path. A SKILL cannot crit
+unless its record carries `NK_CRITICAL`, so the default for every skill is no.
+
+**The job tree** (`e_mapid` in `src/map/map.hpp`). Classic is the Novice, six
+first jobs (Swordman, Mage, Archer, Acolyte, Merchant, Thief), and each one's 2-1
+and 2-2 advancement, plus Super Novice, which the source notes is the 2-1 of the
+NOVICE. Everything transcendent, third, or expanded in that enum is a later era.
+Transcribed to `src/sim/content/jobs.ts`: names and tree only, no stat blocks or
+skill lists.
+
 ## Open items this reference has surfaced
 
-- **Ability criticals still multiply by 2** (`combat/effect_dispatch.ts`), while
-  auto-attacks no longer do. In Ragnarok most skills simply cannot crit at all,
-  and the ones that can use atkmax like any other critical, so the fix is part of
-  authoring the skill list rather than a change to the damage pipeline.
+- **Magic crit is deliberately not converted yet.** Verified that pre-renewal
+  magic cannot crit, but the spell-crit rate is what most of the mage and priest
+  talent trees are built on (Hot Streak, Combustion, Shatter, Ignite, the
+  chronomancy row, the spec masteries) plus every healing critical, and Ragnarok
+  has none of those talents either. Zeroing the rate ahead of the skills that
+  replace them kills the trees without replacing them, so it lands with the skill
+  rebuild in one piece. The finding is recorded at `Sim.spellCrit`.
+- **The live class list is still the inherited nine**, not the Classic tree in
+  `content/jobs.ts`. Attack speed is the system blocked on the migration: it is
+  per JOB and per weapon class.
 - **`MOB_AP_PER_DPS` is the last calibration constant left.** Monster attack power
   is still on the pre-conversion scale, so it is divided down where a player's
   adds raw. It goes away when the monster records carry an authored ATK pair.
