@@ -38,7 +38,7 @@ talk only to the **`SimContext` seam** (`sim_context.ts`).
   each). Append-only: add callbacks, never rename or repurpose one.
 - **`types.ts`**: ALL shared types AND the global tuning constants + classic-era formulas (`TICK_RATE`, `DT`, `GCD`, ranges, `XP_TABLE`, hit/armor/rage math, post-cap `virtualLevel`/prestige). Plus the `SimEvent` union and the `Entity` shape.
 - `data.ts`: merges `content/*` into the flat tables (`ABILITIES`, `MOBS`, `NPCS`, `QUESTS`, `ITEMS`, `CAMPS`, `DUNGEONS`) and owns world-layout consts (`WORLD_SIZE`, `instanceOrigin`, `arenaOrigin`, `zoneAt`, `dungeonAt`).
-- `entity.ts`: `createPlayer/createMob/createNpc/createGroundObject` + `recalcPlayerStats` (the ONE place derived stats are computed from class/level/gear/auras/talent `mods`).
+- `entity.ts`: `createPlayer/createMob/createNpc/createGroundObject` + `recalcPlayerStats` (the ONE place derived stats are computed from class/level/gear/auras/`mods`).
 - `player_motion.ts`: the pure player-movement kernel (`stepPlayerMotion`: turn integration, wish vector, slope gates, swept static collision, the vertical pass) plus `moveSpeedMult`/`jumpMult`/`isSwimming` and the locomotion-feel constants. `Sim.updatePlayerMovement` wraps it behind `PlayerMotionDeps` (fiesta speed, delve-aware `resolveMove`, cast/damage callbacks); the online display-only self extrapolator (`src/render/self_motion.ts`) binds pure/no-op deps so BOTH hosts run the same math, pinned by `tests/player_motion.test.ts` (client-dep-shape vs live-Sim parity, bit for bit). Changing movement here means keeping that parity test green.
 - `entity_roster.ts`: roster ops the coordinator drives: `addEntity`/`dropEntity`/`rebucket`, despawn decay, the delayed-event drain, and the ground-AoE tick. Keeps only the delve release arm (`releaseSpiritInDelve`); the general death/release system is `spirit.ts` (see the module table).
 - `rng.ts`: `class Rng` (mulberry32) + stateless `hash2/noise2/fbm2` for terrain.
@@ -68,7 +68,6 @@ Each module owns the FUNCTIONS for one system; the backing STATE stays on `Sim` 
 | `combat/empower_next.ts` + `combat/thorns_charge.ts` | next-cast empower/free aura consumption; charge-limited thorns |
 | `projectile_travel.ts` | in-flight homing projectiles: `pendingProjectiles` + the prologue `advancePendingProjectiles` phase |
 | `progression/xp.ts` | `prestige`, rested-XP, `isResting` |
-| `progression/talents.ts` | `applyTalents`/`spendTalent`/`setSpec`/`respec`/loadouts/`recomputeTalents` |
 | `mob/targeting.ts` | `updateMobTarget`, `retargetMob`, highest-threat target, trivial-target check |
 | `mob/combat_profile.ts` | mob combat profile selection, effective melee reach, and the general chase/attack profile runner |
 | `mob/locomotion.ts` | `updateMob` dispatcher, `resetEvadingMob`, flee recovery, spawn-block; `onBossDeath` points-at `encounters/nythraxis` |
@@ -188,7 +187,7 @@ not a doc copy. Phase ORDER is rng-draw-order load-bearing (see Determinism); a
 zero-rng phase (Vale Cup) may append, anything else must not reorder.
 
 Beyond `tick()`, `sim.ts` legitimately keeps: the `IWorld` facade delegates, the
-back-compat accessors (`player`/`inventory`/`xp`/`equipment`/`questLog`/`talents`/... that
+back-compat accessors (`player`/`inventory`/`xp`/`equipment`/... that
 delegate to the primary player; per-player state lives in `PlayerMeta`, not the `Entity`),
 a thin `chat()` delegate (the router body lives in `social/chat.ts`), the inventory hub,
 persistence (`serializeCharacter`/`addPlayer`), the shared entry points above, and
@@ -247,4 +246,4 @@ persistence (`serializeCharacter`/`addPlayer`), the shared entry points above, a
 6. Fix bugs test-first: reproduce with a failing Vitest against the owning module (or the `Sim` facade; extract the unit under test into its own leaf if it is buried), then the smallest change that turns it green. A fix touching rng draw sites re-runs `tests/parity`.
 
 ## Never here
-- **Never derive player stats outside `recalcPlayerStats`**, and don't walk the talent tree per-tick: talents are precomputed into the flat `TalentModifiers` at allocation/respec time.
+- **Never derive player stats outside `recalcPlayerStats`**. Player modifiers are read from the precomputed flat `PlayerModifiers` (`player_modifiers.ts`), never re-derived on the hot path.

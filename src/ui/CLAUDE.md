@@ -271,15 +271,13 @@ then `server_i18n.ts` (`localizeServerText`), then `sim_i18n.ts` (`localizeSimTe
 order; the S3 drift guard accepts recognition by any of the three. Dev-channel text
 (`console.*`, thrown errors) stays English and is NOT matched.
 
-**Entity & talent names** localize through their own resolvers, not raw `t()`:
+**Entity names** localize through their own resolvers, not raw `t()`:
 `world_entity_i18n.ts` is the single ENGLISH source for mob/NPC/quest/zone/dungeon names +
 narratives; `entity_i18n.ts` (`tEntity`) localizes them at runtime, with translations in the
 overlays like any other key (the catalog `index.ts` merges `worldEntityText` into `en`).
-Talent text NEVER touches the overlays: `tTalent` (`talent_i18n.ts`) returns the authored
-English for `en`/`en_CA` and GENERATES every other locale (descriptions from effect data,
-titles from the in-file dictionaries plus `talent_i18n.newlocales.ts`), so a new talent needs
-no per-string translation; the `sim_i18n.ts`/`server_i18n.ts` matcher dictionaries likewise
-hold their translations in-file.
+`ability_i18n.ts` (`localizeAbilityTitle`) resolves an English ability name back through the
+same dictionary for the strings the sim emits by NAME (buff-frame auras, combat-log gains);
+the `sim_i18n.ts`/`server_i18n.ts` matcher dictionaries hold their translations in-file.
 
 ## icons.ts: procedural recipes, plus a hand-authored WebP set
 Most icons are composed on a canvas at runtime and cached as data URLs (no asset file).
@@ -367,7 +365,7 @@ header carries its own contract.
   drain-batched unlock moment (banners coalesce, retro grants fold to one summary line);
   the painter is a cold window plus the write-elided HUD watch tracker. `deed_i18n.ts`
   re-localizes deed names/descriptions/titles/broadcast lines from ids (the
-  `talent_i18n.ts` entity-style pattern; per-base-locale release-fill chunks under
+  `entity_i18n.ts` entity-style pattern; per-base-locale release-fill chunks under
   `deed_i18n.locales/` fetched lazily via `DEED_LOCALE_LOADERS`);
   `deeds_leaderboard_view.ts` is the Renown-board tab's pure core.
 - **bank_filter.ts** (with **bank_view.ts** / **bank_window.ts**): the bank search/sort

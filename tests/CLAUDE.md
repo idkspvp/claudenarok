@@ -58,7 +58,7 @@ Postgres is mocked at the top: `vi.mock('../server/db', () => ({ pool, saveChara
 fake socket: `fakeWs()` collects `JSON.parse`'d sends; `server.join(...)`,
 `server.handleMessage(session, JSON.stringify({t:'cmd',...}))`, `(server as any).broadcastSnapshots()`.
 For the online client path, build a `ClientWorld` with `Object.create(ClientWorld.prototype)`
-(see `bareClient` in `snapshots.test.ts`/`talents.test.ts`) and call `applySnapshot(...)`.
+(see `bareClient` in `snapshots.test.ts`) and call `applySnapshot(...)`.
 `server/social.ts` etc. take injected interfaces: implement an in-memory `FakeDb`/
 transport (see `social_system.test.ts`) rather than mocking. REST/RouteDef endpoints
 use the `tests/server/helpers/` fakes (see Map), not a bespoke GameServer rig.

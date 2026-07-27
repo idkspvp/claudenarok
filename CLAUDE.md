@@ -18,7 +18,7 @@ dependency set. The one sanctioned exception is the standalone admin dashboard
 | Path | What it is |
 |---|---|
 | `src/sim/` | **Deterministic game core, the source of truth.** No DOM/Three deps; runs in browser, server, and headless. |
-| `src/sim/content/` | Data-as-code: the 9 classes, abilities, zones, dungeons, items, talents, professions content, deeds. |
+| `src/sim/content/` | Data-as-code: the 9 classes, abilities, zones, dungeons, items, professions content, deeds. |
 | `src/render/` | Three.js renderer (procedural geometry/textures/VFX + curated GLBs). Reads the world; never mutates it. |
 | `src/game/` | Local input, camera, keybinds, gamepad, mobile controls, sampled WebAudio SFX, and procedural music. |
 | `src/ui/` | Classic HUD (frames, windows, tooltips, map, FCT), procedural icons, i18n. |
@@ -188,7 +188,7 @@ directly and leave the coordinator a thin consumer.
   modules. It is the one coordinator with no seam and still accreting; never add a top-level
   function here when a sibling module will do.
 - **Data-as-code is exempt.** Large declarative tables (`src/sim/content/*`,
-  `src/ui/i18n.catalog/*`, `talent_i18n.ts`, `sim_i18n.ts`) are correctly big; module-first is
+  `src/ui/i18n.catalog/*`, `sim_i18n.ts`) are correctly big; module-first is
   about LOGIC, never data. Do not "modularize" a data table.
 
 Use the seams this repo already has, do not invent new ones:

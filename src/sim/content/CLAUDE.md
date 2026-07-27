@@ -6,7 +6,7 @@
 # src/sim/content/ - data-as-code
 
 Plain exported TypeScript records (mobs, npcs, quests, items, abilities, classes,
-dungeons, talents, recipes, gather nodes). **No engine logic lives here.**
+dungeons, recipes, gather nodes). **No engine logic lives here.**
 `sim/data.ts` is the merge point: it spreads the content modules into the flat
 tables the engine reads (`ITEMS`, `MOBS`, `NPCS`, `QUESTS`, `QUEST_ORDER`,
 `CAMPS`, `GROUND_OBJECTS`, `GATHER_NODES`, `ROADS`, `ZONES`, `PROPS`,
@@ -28,14 +28,11 @@ there first if you need one.
 - **New BEHAVIOR reading this data:** never here; a module behind the `SimContext`
   seam (see `src/sim/CLAUDE.md`; profession mechanics: `src/sim/professions/CLAUDE.md`).
 - **Tests:** referential integrity + progression in `tests/progression.test.ts`;
-  domain suites as `tests/<domain>*.test.ts` (exemplars: `tests/talents.test.ts`,
-  `tests/gather_nodes.test.ts`). Bug fix rule: reproduce with a failing test
+  domain suites as `tests/<domain>*.test.ts` (exemplar: `tests/gather_nodes.test.ts`). Bug fix rule: reproduce with a failing test
   first, then the smallest change that turns it green.
 
 ## Map (domain-grouped; `ls src/sim/content/` for the live set)
-- **Classes + talents:** `classes.ts` (`CLASSES`, `ABILITIES`, `abilitiesKnownAt`),
-  `talents.ts` (framework), `talents_warrior.ts`/`talents_classic.ts` (the authored
-  trees; copy `talents_warrior.ts` as the template for a new one).
+- **Classes:** `classes.ts` (`CLASSES`, `ABILITIES`, `abilitiesKnownAt`).
 - **Zones + dungeons:** `zone1/`, `zone2/`, `zone3/`, one DIRECTORY per zone,
   each `world.ts` + `mobs.ts` + `npcs.ts` + `items.ts` behind an `index.ts`
   barrel (`zone1` has no items of its own; its gear is `BASE_ITEMS` in
@@ -128,10 +125,6 @@ guard `tests/localization_fixes.test.ts` enforces it):
   `itemTranslations([...])` list (positional). `tests/localization_coverage.test.ts`
   ("every item translation in every locale") fails on any `ITEMS` entry without one;
   heroic variants are exempt (they share the base name via `heroicOf`).
-- **Talent node/spec/mastery `name`+`description`:** localized via
-  `src/ui/talent_i18n.ts` (reads `TALENTS`/`ABILITIES`); a talent name must be an
-  ability name or get an explicit per-locale title override (guard tests fail
-  otherwise).
 - **Fiesta `AUGMENTS`/`POWERUPS` (augments.ts):** their English `name`/`description`
   are hand-mirrored into the `fiesta.augment.*`/`fiesta.powerup.*` keys in
   `src/ui/i18n.catalog/index.ts`: add the matching key when you add an augment.
@@ -150,7 +143,7 @@ guard `tests/localization_fixes.test.ts` enforces it):
 ## This data also feeds the public Guide/wiki
 The Guide at `/wiki` (`src/guide/`) is generated from THIS directory, so player-facing
 content you add here should reach it in the same change:
-- After adding or renaming a class, ability, talent, zone, dungeon, delve, mob, NPC,
+- After adding or renaming a class, ability, zone, dungeon, delve, mob, NPC,
   warlock pet, or deed, run `npm run wiki:content` and commit the regenerated
   `src/guide/content.generated.ts`. It also runs in `pretest`/`build`, and
   `tests/guide.test.ts` fails CI if the committed file is stale, so a forgotten
@@ -164,27 +157,6 @@ content you add here should reach it in the same change:
   POI labels): no balance numbers, mechanics, loot, the raid boss, or encounter scripts.
 - A brand-new content TYPE or system needs more than a regen (a generator change, a Guide
   page, route, and `guide.*` prose). See `src/guide/CLAUDE.md` for that contract.
-
-## Talents framework (`talents.ts`)
-- **Flat-precompute invariant:** an allocation is resolved **once** via
-  `computeTalentModifiers` into a flat `TalentModifiers` (stats / per-ability mods /
-  global / grants). Hot paths read only those flats: **never walk the tree per tick.**
-- Three hook points consume the flats: `recalcPlayerStats` (entity.ts) for stats,
-  `abilitiesKnownAt`/`applyTalentMods` (classes.ts) for ability mods + `grants`, and
-  the Sim for `global.threatPct`. Add a new effect kind: extend `StatModEffect`/
-  `AbilityModEffect`/`GlobalModEffect`, fold it in `accumulate`, then apply it at a hook.
-- **Authoring a class tree:** copy an existing tree (Class nodes + per-spec nodes
-  with `specId`/`row`/`col`/`requires`/`pointsGate`, `kind: passive|active|choice`,
-  + `SpecDef`s with `signature`/`mastery`), then register it in `TALENTS` in talents.ts.
-  **All 9 classes are already registered** (warrior in `talents_warrior.ts`, the other
-  8 in `talents_classic.ts`). `validateTalentTree` runs at import and **throws on a
-  malformed tree** (dup ids, bad prereqs, cycles, unreachable gates): a broken tree
-  won't load.
-- Build strings (`exportBuild`/`importBuild`, base64), the loadout type
-  (`SavedLoadout`, `MAX_LOADOUTS`), and dormant-node detection live here; the respec
-  and loadout save/delete operations are Sim methods (`respec`/`saveLoadout`/
-  `deleteLoadout` in `sim.ts`). Allocation is **server-authoritative**:
-  `validateAllocation` re-checks on apply regardless of UI.
 
 ## Never do here
 - Never reference a mob/item/npc/quest id that isn't defined. Ids are matched by

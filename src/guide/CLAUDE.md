@@ -21,7 +21,7 @@ sim/render *data*, never the live world or `IWorld`.
   module. `app.ts` is the shell, `router.ts` the SPA router, `head.ts` the per-route
   `<title>`/meta, `search.ts` the client search, `chrome.ts` the nav frame,
   `class_view.ts` the shared class-presentation helpers (crest, spec cards, role
-  badges, feel tags) used by the classes and talents pages.
+  badges, feel tags) used by the classes pages.
 - `class_meta.ts`: curated (NOT generated) class-chooser feel tags; authored presentation
   judgments, so a new class needs a hand-written entry here that no generator produces.
 - `nav_aids.ts`: breadcrumbs, prev/next, and the scrollspy TOC, derived from
@@ -51,7 +51,7 @@ numbers, mechanic names, loot, the raid boss name, or per-encounter scripts. Hid
 deeds are filtered structurally (the def's hidden flag) and never reach
 `content.generated.ts`: no id, name, or desc; public deeds emit no trigger or desc
 either (criteria stay in the in-game Book). Rich
-localized spec/mastery prose resolves live through `src/ui/talent_i18n.ts`, not baked
+no rich prose is resolved live any more (the spec/mastery text went with the talent trees), not baked
 here.
 
 ## i18n: English-only adds, like the rest of the client
@@ -63,7 +63,7 @@ spec NAMES stay English on purpose (proper nouns from the sim).
 ## Keep the wiki in sync (YOU MUST, when you add wiki-worthy content)
 The guide is the game's public reference, so new player-facing content should reach it
 in the SAME change that adds it:
-- **Content the generator already covers** (a class, ability, talent, zone, dungeon,
+- **Content the generator already covers** (a class, ability, zone, dungeon,
   mob, warlock pet, deed, or model): run `npm run wiki:content` and commit the regenerated
   `content.generated.ts`. Add a new descriptive `guide.*` prose key for any copy the
   generator does not derive. **A new (or retinted) model also needs its still rendered**:

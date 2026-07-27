@@ -28,16 +28,17 @@ things can be written rather than built.
 | Weapon class + the size table | why a player carries more than one weapon |
 | Refine ladder | value per weapon level, safe limit, over-refine bonus |
 | Quest system removed | and the public wiki stopped advertising it |
+| **D0 The talent and spec system removed** | 27 specs, masteries, `spec_baselines`, choice rows, loadouts, the proc engine; a class knows its whole list |
 
 ---
 
 ## The blocker in front of everything
 
-**A1 is done**, which clears the item that used to block the most. What now
-blocks the most is not naming at all: it is the **talent and spec system**. All
-nine classes carry three specs, twenty-seven in total, plus masteries and
-`spec_baselines`, and Ragnarok has no equivalent concept. Every class-shaped
-step below has to route around it until it is gone, so it goes first.
+**A1 and D0 are both done.** The talent and spec system that used to block every
+class-shaped step is retired: the 27 specs, their masteries, `spec_baselines`,
+the choice rows, the loadouts and the proc engine are gone, and a class simply
+knows its whole ability list. What blocks the most now is **D1**, collapsing the
+nine classes onto the six first jobs.
 
 **Phase A: naming.** The rest of it still gates Phase B, and it is not
 engineering work.
@@ -93,7 +94,7 @@ single name. **They are the best thing to work on while naming is in flight.**
 
 | # | Step | Size | Needs |
 |---|---|---|---|
-| D0 | **Retire the talent and spec system**: 27 specs, masteries, `spec_baselines`. Ragnarok has no equivalent, and every step below routes around it until it is gone | L | - |
+| D0 | ~~**Retire the talent and spec system**~~ **DONE** (`docs/design/talent-removal.md`) | L | - |
 | D1 | Collapse the nine classes onto the **six first jobs**. `PlayerClass` is referenced in 93 files with 169 hardcoded class literals, so this is the wide one | L | D0 |
 | D2 | Character creation picks a first job. Novice is CUT as a playable state; the picker and both server validation lists derive from `JOBS` instead of the three hardcoded HTML copies | M | D1 |
 | D3 | Job advancement as a FIELD, not a new class: a first job plus an optional 2-1/2-2 that unlocks skills. Keeps every `Record<PlayerClass, X>` table at six entries | M | D1 |
@@ -138,5 +139,5 @@ largest piece in the whole conversion**: three zones, six dungeons, and 119
 monsters were all built for a cap of 20. Everything else makes the existing
 content Ragnarok-shaped; only E6 makes there be more of it.
 
-**Start now, without waiting for a single name:** D0 (the talent teardown),
-then D1 to D3. E1, E2, and F2 are still unblocked and can run beside them.
+**Start now, without waiting for a single name:** D1 to D3 (D0, the talent
+teardown, is done). E1, E2, and F2 are still unblocked and can run beside them.
