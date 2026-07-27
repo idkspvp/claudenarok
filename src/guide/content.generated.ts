@@ -268,7 +268,7 @@ export interface GuideProfStations { radius: number; stations: GuideProfStation[
 
 export const GUIDE_CLASSES: GuideClassInfo[] = [
   {
-    "id": "warrior",
+    "id": "swordman",
     "color": "#d67a54",
     "resource": "rage",
     "roles": [
@@ -475,584 +475,8 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
         "name": "Shieldcrack"
       }
     ],
-    "model": "player_warrior",
-    "still": "/guide-stills/player_warrior.webp"
-  },
-  {
-    "id": "paladin",
-    "color": "#f58ca0",
-    "resource": "mana",
-    "roles": [
-      "tank",
-      "healer",
-      "dps"
-    ],
-    "signatureAbilities": [
-      {
-        "id": "seal_of_righteousness",
-        "name": "Oathbrand"
-      },
-      {
-        "id": "holy_light",
-        "name": "Mending Light"
-      },
-      {
-        "id": "devotion_aura",
-        "name": "Steadfast Aura"
-      },
-      {
-        "id": "judgement",
-        "name": "Verdict"
-      },
-      {
-        "id": "blessing_of_might",
-        "name": "Oath of Iron"
-      },
-      {
-        "id": "divine_protection",
-        "name": "Ward of Faith"
-      }
-    ],
-    "abilities": [
-      {
-        "id": "seal_of_righteousness",
-        "name": "Oathbrand"
-      },
-      {
-        "id": "holy_light",
-        "name": "Mending Light"
-      },
-      {
-        "id": "devotion_aura",
-        "name": "Steadfast Aura"
-      },
-      {
-        "id": "judgement",
-        "name": "Verdict"
-      },
-      {
-        "id": "blessing_of_might",
-        "name": "Oath of Iron"
-      },
-      {
-        "id": "divine_protection",
-        "name": "Ward of Faith"
-      },
-      {
-        "id": "hammer_of_justice",
-        "name": "Sundering Gavel"
-      },
-      {
-        "id": "lay_on_hands",
-        "name": "Last Rite"
-      },
-      {
-        "id": "holy_taunt",
-        "name": "Sacred Goad"
-      },
-      {
-        "id": "flash_of_light",
-        "name": "Lightmend"
-      },
-      {
-        "id": "exorcism",
-        "name": "Rite of Expulsion"
-      },
-      {
-        "id": "consecration",
-        "name": "Holy Ground"
-      },
-      {
-        "id": "righteous_fury",
-        "name": "Burning Oath"
-      },
-      {
-        "id": "retribution_aura",
-        "name": "Requital Aura"
-      },
-      {
-        "id": "rebuke",
-        "name": "Reproach"
-      },
-      {
-        "id": "sacred_bulwark",
-        "name": "Sacred Bulwark"
-      },
-      {
-        "id": "sanctified_sidestep",
-        "name": "Sanctified Sidestep"
-      },
-      {
-        "id": "crusader_strike",
-        "name": "Crusader Strike"
-      },
-      {
-        "id": "holy_shield",
-        "name": "Hallowed Wall"
-      },
-      {
-        "id": "holy_shock",
-        "name": "Holy Shock"
-      }
-    ],
-    "model": "player_paladin",
-    "still": "/guide-stills/player_paladin.webp"
-  },
-  {
-    "id": "hunter",
-    "color": "#a6d84f",
-    "resource": "mana",
-    "roles": [
-      "dps"
-    ],
-    "signatureAbilities": [
-      {
-        "id": "raptor_strike",
-        "name": "Gutting Strike"
-      },
-      {
-        "id": "aspect_of_the_hawk",
-        "name": "Harrier's Guise"
-      },
-      {
-        "id": "serpent_sting",
-        "name": "Venom Barb"
-      },
-      {
-        "id": "arcane_shot",
-        "name": "Fell Shot"
-      },
-      {
-        "id": "concussive_shot",
-        "name": "Rattling Shot"
-      },
-      {
-        "id": "mongoose_bite",
-        "name": "Counterfang"
-      }
-    ],
-    "abilities": [
-      {
-        "id": "raptor_strike",
-        "name": "Gutting Strike"
-      },
-      {
-        "id": "aspect_of_the_hawk",
-        "name": "Harrier's Guise"
-      },
-      {
-        "id": "serpent_sting",
-        "name": "Venom Barb"
-      },
-      {
-        "id": "arcane_shot",
-        "name": "Fell Shot"
-      },
-      {
-        "id": "concussive_shot",
-        "name": "Rattling Shot"
-      },
-      {
-        "id": "mongoose_bite",
-        "name": "Counterfang"
-      },
-      {
-        "id": "wing_clip",
-        "name": "Fettering Slash"
-      },
-      {
-        "id": "tame_beast",
-        "name": "Wildbond"
-      },
-      {
-        "id": "dismiss_pet",
-        "name": "Release Companion"
-      },
-      {
-        "id": "revive_pet",
-        "name": "Patch Up"
-      },
-      {
-        "id": "aspect_of_the_monkey",
-        "name": "Marten's Guise"
-      },
-      {
-        "id": "aspect_of_the_cheetah",
-        "name": "Courser's Guise"
-      },
-      {
-        "id": "aimed_shot",
-        "name": "Long Draw"
-      },
-      {
-        "id": "rapid_fire",
-        "name": "Fevered Draw"
-      },
-      {
-        "id": "volley",
-        "name": "Volley"
-      },
-      {
-        "id": "counter_shot",
-        "name": "Hushing Shot"
-      },
-      {
-        "id": "wildstep",
-        "name": "Wildstep"
-      },
-      {
-        "id": "bestial_wrath",
-        "name": "Howling Rage"
-      },
-      {
-        "id": "trueshot_aura",
-        "name": "Sureflight Aura"
-      },
-      {
-        "id": "wyvern_sting",
-        "name": "Wyvern Sting"
-      }
-    ],
-    "model": "player_hunter",
-    "still": "/guide-stills/player_hunter.webp"
-  },
-  {
-    "id": "rogue",
-    "color": "#fcee58",
-    "resource": "energy",
-    "roles": [
-      "dps"
-    ],
-    "signatureAbilities": [
-      {
-        "id": "sinister_strike",
-        "name": "Wicked Slash"
-      },
-      {
-        "id": "eviscerate",
-        "name": "Dirt Nap"
-      },
-      {
-        "id": "garrote",
-        "name": "Throat Wire"
-      },
-      {
-        "id": "backstab",
-        "name": "Craven Thrust"
-      },
-      {
-        "id": "gouge",
-        "name": "Eye Jab"
-      },
-      {
-        "id": "cheap_shot",
-        "name": "Gut Punch"
-      }
-    ],
-    "abilities": [
-      {
-        "id": "sinister_strike",
-        "name": "Wicked Slash"
-      },
-      {
-        "id": "eviscerate",
-        "name": "Dirt Nap"
-      },
-      {
-        "id": "garrote",
-        "name": "Throat Wire"
-      },
-      {
-        "id": "backstab",
-        "name": "Craven Thrust"
-      },
-      {
-        "id": "gouge",
-        "name": "Eye Jab"
-      },
-      {
-        "id": "cheap_shot",
-        "name": "Gut Punch"
-      },
-      {
-        "id": "evasion",
-        "name": "Ghostfoot"
-      },
-      {
-        "id": "sap",
-        "name": "Sap"
-      },
-      {
-        "id": "slice_and_dice",
-        "name": "Cutthroat Tempo"
-      },
-      {
-        "id": "sprint",
-        "name": "Swift Heels"
-      },
-      {
-        "id": "crippling_poison",
-        "name": "Leaden Venom"
-      },
-      {
-        "id": "kidney_shot",
-        "name": "Low Blow"
-      },
-      {
-        "id": "expose_armor",
-        "name": "Armor Breach"
-      },
-      {
-        "id": "ambush",
-        "name": "Lurker's Strike"
-      },
-      {
-        "id": "rupture",
-        "name": "Bleed Out"
-      },
-      {
-        "id": "vanish",
-        "name": "Smokestep"
-      },
-      {
-        "id": "instant_poison",
-        "name": "Adder's Bite"
-      },
-      {
-        "id": "adrenaline_rush",
-        "name": "Quickened Blood"
-      },
-      {
-        "id": "deadly_poison",
-        "name": "Festering Venom"
-      },
-      {
-        "id": "blind",
-        "name": "Dirt Toss"
-      },
-      {
-        "id": "stealth",
-        "name": "Duskveil"
-      },
-      {
-        "id": "kick",
-        "name": "Boot"
-      },
-      {
-        "id": "shadowslip",
-        "name": "Shadowslip"
-      },
-      {
-        "id": "blade_flurry",
-        "name": "Mirrored Blades"
-      },
-      {
-        "id": "cold_blood",
-        "name": "Killer's Calm"
-      },
-      {
-        "id": "hemorrhage",
-        "name": "Red Ribbon"
-      }
-    ],
-    "model": "player_rogue",
-    "still": "/guide-stills/player_rogue.webp"
-  },
-  {
-    "id": "priest",
-    "color": "#c6d4f0",
-    "resource": "mana",
-    "roles": [
-      "healer",
-      "dps"
-    ],
-    "signatureAbilities": [
-      {
-        "id": "smite",
-        "name": "Smite"
-      },
-      {
-        "id": "lesser_heal",
-        "name": "Whispered Prayer"
-      },
-      {
-        "id": "power_word_fortitude",
-        "name": "Litany of Resolve"
-      },
-      {
-        "id": "shadow_word_pain",
-        "name": "Dirge of Decay"
-      },
-      {
-        "id": "power_word_shield",
-        "name": "Psalm of Warding"
-      },
-      {
-        "id": "renew",
-        "name": "Lingering Grace"
-      }
-    ],
-    "abilities": [
-      {
-        "id": "smite",
-        "name": "Smite"
-      },
-      {
-        "id": "lesser_heal",
-        "name": "Whispered Prayer"
-      },
-      {
-        "id": "power_word_fortitude",
-        "name": "Litany of Resolve"
-      },
-      {
-        "id": "shadow_word_pain",
-        "name": "Dirge of Decay"
-      },
-      {
-        "id": "power_word_shield",
-        "name": "Psalm of Warding"
-      },
-      {
-        "id": "renew",
-        "name": "Lingering Grace"
-      },
-      {
-        "id": "mind_blast",
-        "name": "Mindfracture"
-      },
-      {
-        "id": "heal",
-        "name": "Solemn Prayer"
-      },
-      {
-        "id": "mind_flay",
-        "name": "Litany of Woe"
-      },
-      {
-        "id": "flash_heal",
-        "name": "Urgent Prayer"
-      },
-      {
-        "id": "veilstep",
-        "name": "Veilstep"
-      },
-      {
-        "id": "holy_nova",
-        "name": "Holy Nova"
-      },
-      {
-        "id": "power_infusion",
-        "name": "Anointing"
-      },
-      {
-        "id": "shadowform",
-        "name": "Gloamveil"
-      }
-    ],
-    "model": "player_priest",
-    "tint": "#f0e9d6",
-    "still": "/guide-stills/player_priest__f0e9d6.webp"
-  },
-  {
-    "id": "shaman",
-    "color": "#4e8aea",
-    "resource": "mana",
-    "roles": [
-      "healer",
-      "dps"
-    ],
-    "signatureAbilities": [
-      {
-        "id": "lightning_bolt",
-        "name": "Arc Bolt"
-      },
-      {
-        "id": "rockbiter_weapon",
-        "name": "Stonebound Weapon"
-      },
-      {
-        "id": "healing_wave",
-        "name": "Mending Waters"
-      },
-      {
-        "id": "earth_shock",
-        "name": "Earthen Jolt"
-      },
-      {
-        "id": "lightning_shield",
-        "name": "Thunder Ward"
-      },
-      {
-        "id": "flame_shock",
-        "name": "Cinder Jolt"
-      }
-    ],
-    "abilities": [
-      {
-        "id": "lightning_bolt",
-        "name": "Arc Bolt"
-      },
-      {
-        "id": "rockbiter_weapon",
-        "name": "Stonebound Weapon"
-      },
-      {
-        "id": "healing_wave",
-        "name": "Mending Waters"
-      },
-      {
-        "id": "earth_shock",
-        "name": "Earthen Jolt"
-      },
-      {
-        "id": "lightning_shield",
-        "name": "Thunder Ward"
-      },
-      {
-        "id": "flame_shock",
-        "name": "Cinder Jolt"
-      },
-      {
-        "id": "flametongue_weapon",
-        "name": "Pyrebrand Weapon"
-      },
-      {
-        "id": "frost_shock",
-        "name": "Rime Jolt"
-      },
-      {
-        "id": "frostbrand_weapon",
-        "name": "Rimebound Weapon"
-      },
-      {
-        "id": "ghost_wolf",
-        "name": "Shadewolf"
-      },
-      {
-        "id": "earthquake",
-        "name": "Earthquake"
-      },
-      {
-        "id": "galestep",
-        "name": "Galestep"
-      },
-      {
-        "id": "chain_heal",
-        "name": "Chain Heal"
-      },
-      {
-        "id": "elemental_mastery",
-        "name": "Primal Mastery"
-      },
-      {
-        "id": "stormstrike",
-        "name": "Ancestral Strike"
-      }
-    ],
-    "model": "player_shaman",
-    "tint": "#6f8fc9",
-    "still": "/guide-stills/player_shaman__6f8fc9.webp"
+    "model": "player_swordman",
+    "still": "/guide-stills/player_swordman.webp"
   },
   {
     "id": "mage",
@@ -1297,327 +721,360 @@ export const GUIDE_CLASSES: GuideClassInfo[] = [
     "still": "/guide-stills/player_mage.webp"
   },
   {
-    "id": "warlock",
-    "color": "#a785e6",
+    "id": "archer",
+    "color": "#a6d84f",
     "resource": "mana",
     "roles": [
       "dps"
     ],
     "signatureAbilities": [
       {
-        "id": "shadow_bolt",
-        "name": "Gloom Bolt"
+        "id": "raptor_strike",
+        "name": "Gutting Strike"
       },
       {
-        "id": "summon_imp",
-        "name": "Summon Emberkin"
+        "id": "aspect_of_the_hawk",
+        "name": "Harrier's Guise"
       },
       {
-        "id": "demon_skin",
-        "name": "Fiendhide"
+        "id": "serpent_sting",
+        "name": "Venom Barb"
       },
       {
-        "id": "immolate",
-        "name": "Burning Pact"
+        "id": "arcane_shot",
+        "name": "Fell Shot"
       },
       {
-        "id": "corruption",
-        "name": "Blackrot"
+        "id": "concussive_shot",
+        "name": "Rattling Shot"
       },
       {
-        "id": "life_tap",
-        "name": "Hard Bargain"
+        "id": "mongoose_bite",
+        "name": "Counterfang"
       }
     ],
     "abilities": [
       {
-        "id": "shadow_bolt",
-        "name": "Gloom Bolt"
+        "id": "raptor_strike",
+        "name": "Gutting Strike"
       },
       {
-        "id": "summon_imp",
-        "name": "Summon Emberkin"
+        "id": "aspect_of_the_hawk",
+        "name": "Harrier's Guise"
       },
       {
-        "id": "demon_skin",
-        "name": "Fiendhide"
+        "id": "serpent_sting",
+        "name": "Venom Barb"
       },
       {
-        "id": "immolate",
-        "name": "Burning Pact"
+        "id": "arcane_shot",
+        "name": "Fell Shot"
       },
       {
-        "id": "corruption",
-        "name": "Blackrot"
+        "id": "concussive_shot",
+        "name": "Rattling Shot"
       },
       {
-        "id": "life_tap",
-        "name": "Hard Bargain"
+        "id": "mongoose_bite",
+        "name": "Counterfang"
       },
       {
-        "id": "summon_voidwalker",
-        "name": "Summon Gloomshade"
+        "id": "wing_clip",
+        "name": "Fettering Slash"
       },
       {
-        "id": "curse_of_agony",
-        "name": "Hex of Anguish"
+        "id": "tame_beast",
+        "name": "Wildbond"
       },
       {
-        "id": "drain_life",
-        "name": "Consume"
+        "id": "dismiss_pet",
+        "name": "Release Companion"
       },
       {
-        "id": "fear",
-        "name": "Harrow"
+        "id": "revive_pet",
+        "name": "Patch Up"
       },
       {
-        "id": "searing_pain",
-        "name": "Sear"
+        "id": "aspect_of_the_monkey",
+        "name": "Marten's Guise"
       },
       {
-        "id": "shadowburn",
-        "name": "Duskfire"
+        "id": "aspect_of_the_cheetah",
+        "name": "Courser's Guise"
       },
       {
-        "id": "summon_succubus",
-        "name": "Summon Duskborn"
+        "id": "aimed_shot",
+        "name": "Long Draw"
       },
       {
-        "id": "summon_felhunter",
-        "name": "Summon Spellhound"
+        "id": "rapid_fire",
+        "name": "Fevered Draw"
       },
       {
-        "id": "summon_felguard",
-        "name": "Summon Warfiend"
+        "id": "volley",
+        "name": "Volley"
       },
       {
-        "id": "summon_infernal",
-        "name": "Summon Pyre Colossus"
+        "id": "counter_shot",
+        "name": "Hushing Shot"
       },
       {
-        "id": "summon_doomguard",
-        "name": "Summon Wraithborn"
+        "id": "wildstep",
+        "name": "Wildstep"
       },
       {
-        "id": "rain_of_fire",
-        "name": "Rain of Fire"
+        "id": "bestial_wrath",
+        "name": "Howling Rage"
       },
       {
-        "id": "spell_lock",
-        "name": "Gag Order"
+        "id": "trueshot_aura",
+        "name": "Sureflight Aura"
       },
       {
-        "id": "dreadstep",
-        "name": "Dreadstep"
-      },
-      {
-        "id": "conflagrate",
-        "name": "Conflagrate"
-      },
-      {
-        "id": "metamorphosis",
-        "name": "Dread Aspect"
-      },
-      {
-        "id": "siphon_life",
-        "name": "Veinleech"
+        "id": "wyvern_sting",
+        "name": "Wyvern Sting"
       }
     ],
-    "model": "player_warlock",
-    "tint": "#8d5fd3",
-    "still": "/guide-stills/player_warlock__8d5fd3.webp"
+    "model": "player_archer",
+    "still": "/guide-stills/player_archer.webp"
   },
   {
-    "id": "druid",
-    "color": "#ff8c1a",
+    "id": "acolyte",
+    "color": "#c6d4f0",
     "resource": "mana",
     "roles": [
-      "tank",
       "healer",
       "dps"
     ],
     "signatureAbilities": [
       {
-        "id": "wrath",
-        "name": "Wildbolt"
+        "id": "smite",
+        "name": "Smite"
       },
       {
-        "id": "healing_touch",
-        "name": "Wildmend"
+        "id": "lesser_heal",
+        "name": "Whispered Prayer"
       },
       {
-        "id": "mark_of_the_wild",
-        "name": "Wildward"
+        "id": "power_word_fortitude",
+        "name": "Litany of Resolve"
       },
       {
-        "id": "moonfire",
-        "name": "Lunar Tempest"
+        "id": "shadow_word_pain",
+        "name": "Dirge of Decay"
       },
       {
-        "id": "rejuvenation",
-        "name": "Wildbloom"
+        "id": "power_word_shield",
+        "name": "Psalm of Warding"
       },
       {
-        "id": "thorns",
-        "name": "Briarguard"
+        "id": "renew",
+        "name": "Lingering Grace"
       }
     ],
     "abilities": [
       {
-        "id": "wrath",
-        "name": "Wildbolt"
+        "id": "smite",
+        "name": "Smite"
       },
       {
-        "id": "healing_touch",
-        "name": "Wildmend"
+        "id": "lesser_heal",
+        "name": "Whispered Prayer"
       },
       {
-        "id": "mark_of_the_wild",
-        "name": "Wildward"
+        "id": "power_word_fortitude",
+        "name": "Litany of Resolve"
       },
       {
-        "id": "moonfire",
-        "name": "Lunar Tempest"
+        "id": "shadow_word_pain",
+        "name": "Dirge of Decay"
       },
       {
-        "id": "rejuvenation",
-        "name": "Wildbloom"
+        "id": "power_word_shield",
+        "name": "Psalm of Warding"
       },
       {
-        "id": "thorns",
-        "name": "Briarguard"
+        "id": "renew",
+        "name": "Lingering Grace"
       },
       {
-        "id": "entangling_roots",
-        "name": "Gripping Roots"
+        "id": "mind_blast",
+        "name": "Mindfracture"
       },
       {
-        "id": "bear_form",
-        "name": "Bruin Form"
+        "id": "heal",
+        "name": "Solemn Prayer"
       },
       {
-        "id": "bear_charge",
-        "name": "Bruin Rush"
+        "id": "mind_flay",
+        "name": "Litany of Woe"
       },
       {
-        "id": "maul",
-        "name": "Bonecrush"
+        "id": "flash_heal",
+        "name": "Urgent Prayer"
       },
       {
-        "id": "growl",
-        "name": "Menace"
+        "id": "veilstep",
+        "name": "Veilstep"
       },
       {
-        "id": "demoralizing_roar",
-        "name": "Craven Roar"
+        "id": "holy_nova",
+        "name": "Holy Nova"
       },
       {
-        "id": "cat_form",
-        "name": "Wolf Form"
+        "id": "power_infusion",
+        "name": "Anointing"
       },
       {
-        "id": "prowl",
-        "name": "Stalk"
-      },
-      {
-        "id": "rake",
-        "name": "Flense"
-      },
-      {
-        "id": "claw",
-        "name": "Claw"
-      },
-      {
-        "id": "regrowth",
-        "name": "Second Bloom"
-      },
-      {
-        "id": "ferocious_bite",
-        "name": "Gorebite"
-      },
-      {
-        "id": "barkskin",
-        "name": "Oakhide"
-      },
-      {
-        "id": "swipe",
-        "name": "Sweeping Claws"
-      },
-      {
-        "id": "starfire",
-        "name": "Skyfall"
-      },
-      {
-        "id": "travel_form",
-        "name": "Fleet Form"
-      },
-      {
-        "id": "enrage",
-        "name": "Stoke"
-      },
-      {
-        "id": "bash",
-        "name": "Concuss"
-      },
-      {
-        "id": "faerie_fire",
-        "name": "Witchlight"
-      },
-      {
-        "id": "hibernate",
-        "name": "Slumber"
-      },
-      {
-        "id": "dash",
-        "name": "Dash"
-      },
-      {
-        "id": "pounce",
-        "name": "Slinkstrike"
-      },
-      {
-        "id": "insect_swarm",
-        "name": "Stinging Swarm"
-      },
-      {
-        "id": "tigers_fury",
-        "name": "Wolfsblood"
-      },
-      {
-        "id": "rip",
-        "name": "Rip"
-      },
-      {
-        "id": "hurricane",
-        "name": "Galeheart"
-      },
-      {
-        "id": "skull_bash",
-        "name": "Headbutt"
-      },
-      {
-        "id": "primal_reflexes",
-        "name": "Primal Reflexes"
-      },
-      {
-        "id": "feral_tumble",
-        "name": "Feral Tumble"
-      },
-      {
-        "id": "feral_charge",
-        "name": "Primal Surge"
-      },
-      {
-        "id": "moonkin_form",
-        "name": "Moonwing Form"
-      },
-      {
-        "id": "swiftmend",
-        "name": "Swiftmend"
+        "id": "shadowform",
+        "name": "Gloamveil"
       }
     ],
-    "model": "player_druid",
-    "still": "/guide-stills/player_druid.webp"
+    "model": "player_acolyte",
+    "tint": "#f0e9d6",
+    "still": "/guide-stills/player_acolyte__f0e9d6.webp"
+  },
+  {
+    "id": "thief",
+    "color": "#fcee58",
+    "resource": "energy",
+    "roles": [
+      "dps"
+    ],
+    "signatureAbilities": [
+      {
+        "id": "sinister_strike",
+        "name": "Wicked Slash"
+      },
+      {
+        "id": "eviscerate",
+        "name": "Dirt Nap"
+      },
+      {
+        "id": "garrote",
+        "name": "Throat Wire"
+      },
+      {
+        "id": "backstab",
+        "name": "Craven Thrust"
+      },
+      {
+        "id": "gouge",
+        "name": "Eye Jab"
+      },
+      {
+        "id": "cheap_shot",
+        "name": "Gut Punch"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "sinister_strike",
+        "name": "Wicked Slash"
+      },
+      {
+        "id": "eviscerate",
+        "name": "Dirt Nap"
+      },
+      {
+        "id": "garrote",
+        "name": "Throat Wire"
+      },
+      {
+        "id": "backstab",
+        "name": "Craven Thrust"
+      },
+      {
+        "id": "gouge",
+        "name": "Eye Jab"
+      },
+      {
+        "id": "cheap_shot",
+        "name": "Gut Punch"
+      },
+      {
+        "id": "evasion",
+        "name": "Ghostfoot"
+      },
+      {
+        "id": "sap",
+        "name": "Sap"
+      },
+      {
+        "id": "slice_and_dice",
+        "name": "Cutthroat Tempo"
+      },
+      {
+        "id": "sprint",
+        "name": "Swift Heels"
+      },
+      {
+        "id": "crippling_poison",
+        "name": "Leaden Venom"
+      },
+      {
+        "id": "kidney_shot",
+        "name": "Low Blow"
+      },
+      {
+        "id": "expose_armor",
+        "name": "Armor Breach"
+      },
+      {
+        "id": "ambush",
+        "name": "Lurker's Strike"
+      },
+      {
+        "id": "rupture",
+        "name": "Bleed Out"
+      },
+      {
+        "id": "vanish",
+        "name": "Smokestep"
+      },
+      {
+        "id": "instant_poison",
+        "name": "Adder's Bite"
+      },
+      {
+        "id": "adrenaline_rush",
+        "name": "Quickened Blood"
+      },
+      {
+        "id": "deadly_poison",
+        "name": "Festering Venom"
+      },
+      {
+        "id": "blind",
+        "name": "Dirt Toss"
+      },
+      {
+        "id": "stealth",
+        "name": "Duskveil"
+      },
+      {
+        "id": "kick",
+        "name": "Boot"
+      },
+      {
+        "id": "shadowslip",
+        "name": "Shadowslip"
+      },
+      {
+        "id": "blade_flurry",
+        "name": "Mirrored Blades"
+      },
+      {
+        "id": "cold_blood",
+        "name": "Killer's Calm"
+      },
+      {
+        "id": "hemorrhage",
+        "name": "Red Ribbon"
+      }
+    ],
+    "model": "player_thief",
+    "still": "/guide-stills/player_thief.webp"
   }
 ];
 
@@ -8637,7 +8094,7 @@ export const GUIDE_PROF_PAGES: string[] = [
 ];
 
 export const GUIDE_MODELS: Record<string, GuideModelSpec> = {
-  "player_warrior": {
+  "player_swordman": {
     "url": "models/chars/players/knight.glb",
     "idle": "Idle",
     "height": 2.6,
@@ -8656,82 +8113,6 @@ export const GUIDE_MODELS: Record<string, GuideModelSpec> = {
       }
     ]
   },
-  "player_paladin": {
-    "url": "models/chars/players/paladin.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "attach": [
-      {
-        "url": "models/weapons/axe_1handed.glb",
-        "bone": "handslot.r"
-      },
-      {
-        "url": "models/weapons/shield_square.glb",
-        "bone": "handslot.l"
-      }
-    ]
-  },
-  "player_hunter": {
-    "url": "models/chars/players/ranger.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "attach": [
-      {
-        "url": "models/weapons/crossbow_1handed.glb",
-        "bone": "handslot.r"
-      }
-    ]
-  },
-  "player_rogue": {
-    "url": "models/chars/players/rogue.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "show": [
-      "Rogue_Cape"
-    ],
-    "attach": [
-      {
-        "url": "models/weapons/dagger.glb",
-        "bone": "handslot.r"
-      },
-      {
-        "url": "models/weapons/dagger.glb",
-        "bone": "handslot.l"
-      }
-    ]
-  },
-  "player_priest": {
-    "url": "models/chars/players/mage.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "show": [],
-    "attach": [
-      {
-        "url": "models/weapons/staff.glb",
-        "bone": "handslot.r"
-      }
-    ],
-    "tintStrength": 0.5
-  },
-  "player_shaman": {
-    "url": "models/chars/players/barbarian.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "show": [
-      "Barbarian_BearHat"
-    ],
-    "attach": [
-      {
-        "url": "models/weapons/axe_1handed.glb",
-        "bone": "handslot.r"
-      },
-      {
-        "url": "models/weapons/shield_round.glb",
-        "bone": "handslot.l"
-      }
-    ],
-    "tintStrength": 0.4
-  },
   "player_mage": {
     "url": "models/chars/players/mage.glb",
     "idle": "Idle",
@@ -8746,32 +8127,45 @@ export const GUIDE_MODELS: Record<string, GuideModelSpec> = {
       }
     ]
   },
-  "player_warlock": {
+  "player_archer": {
+    "url": "models/chars/players/ranger.glb",
+    "idle": "Idle",
+    "height": 2.6,
+    "attach": [
+      {
+        "url": "models/weapons/crossbow_1handed.glb",
+        "bone": "handslot.r"
+      }
+    ]
+  },
+  "player_acolyte": {
     "url": "models/chars/players/mage.glb",
     "idle": "Idle",
     "height": 2.6,
     "show": [],
     "attach": [
       {
-        "url": "models/weapons/wand.glb",
+        "url": "models/weapons/staff.glb",
+        "bone": "handslot.r"
+      }
+    ],
+    "tintStrength": 0.5
+  },
+  "player_thief": {
+    "url": "models/chars/players/rogue.glb",
+    "idle": "Idle",
+    "height": 2.6,
+    "show": [
+      "Rogue_Cape"
+    ],
+    "attach": [
+      {
+        "url": "models/weapons/dagger.glb",
         "bone": "handslot.r"
       },
       {
-        "url": "models/weapons/spellbook_open.glb",
-        "bone": "handslot.l",
-        "gripRef": "Spellbook_open"
-      }
-    ],
-    "tintStrength": 0.45
-  },
-  "player_druid": {
-    "url": "models/chars/players/druid.glb",
-    "idle": "Idle",
-    "height": 2.6,
-    "attach": [
-      {
-        "url": "models/weapons/staff.glb",
-        "bone": "handslot.r"
+        "url": "models/weapons/dagger.glb",
+        "bone": "handslot.l"
       }
     ]
   },
