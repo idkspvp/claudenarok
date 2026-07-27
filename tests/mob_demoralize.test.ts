@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { levelWithStats } from './helpers/alloc';
 
 // Demoralizing mobs sap a player victim's attack power on a landed hit
 // (classic Demoralizing Shout / Curse of Weakness), so the damage *they*
@@ -18,6 +19,8 @@ describe('mob demoralize-on-hit', () => {
   it('a landed swing weakens the victim attack power via a negative buff_ap aura', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Weakened');
+    // Attack power to actually drain: a fresh character has every point unspent.
+    levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };
     victim.maxHp = 100000;
@@ -61,6 +64,8 @@ describe('mob demoralize-on-hit', () => {
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
     const sim = new Sim({ seed: 11, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Hounded');
+    // Attack power to actually drain: a fresh character has every point unspent.
+    levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };
     victim.maxHp = 100000;
@@ -81,6 +86,8 @@ describe('mob demoralize-on-hit', () => {
   it('an ordinary mob with no demoralize field never applies the debuff', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
     const pid = sim.addPlayer('warrior', 'Safe');
+    // Attack power to actually drain: a fresh character has every point unspent.
+    levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };
     victim.maxHp = 100000;

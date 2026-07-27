@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
-  const e = events.find((ev): ev is Extract<SimEvent, { type: 'error' }> => ev.type === 'error' && ev.pid === pid);
+  const e = events.find(
+    (ev): ev is Extract<SimEvent, { type: 'error' }> => ev.type === 'error' && ev.pid === pid,
+  );
   return e?.text;
 }
 
@@ -30,7 +32,10 @@ describe('/party readout command', () => {
 
     // Wound Gimel to a known HP% so the readout is deterministic.
     const ce = sim.entities.get(c)!;
-    ce.hp = Math.round(ce.maxHp * 0.4);
+    // A round pool so the percentage is exact: the subject is the readout
+    // format, not how big a level-1 pool happens to be.
+    ce.maxHp = 100;
+    ce.hp = 40;
 
     const sent = sim.chat('/party', a);
     expect(sent).toBeNull(); // self-only readout is never broadcast

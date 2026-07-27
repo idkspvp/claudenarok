@@ -2,9 +2,16 @@ import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { levelWithStats } from './helpers/alloc';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+// A drain affix needs attributes to drain. A fresh character carries 1 in
+// each of the six with every point unspent, so the suite spends them itself.
+const makeSim = () => {
+  const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+  levelWithStats(sim, 20);
+  return sim;
+};
 
 // Force a drowned_dead swing to land its plague, returning the applied aura (or
 // undefined). Resets the player's HP each iteration so a connecting swing never

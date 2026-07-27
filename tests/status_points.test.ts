@@ -33,15 +33,20 @@ const alloc = (over: Partial<StatAllocation> = {}): StatAllocation => ({
 });
 
 describe('the cost curve', () => {
-  it('steps up every ten points, starting at 2', () => {
+  it('steps up every ten points, starting at 2, with the band ABOVE the ten', () => {
     // Pinned to literals: this curve is the reason a 99 in one attribute is a
     // commitment rather than something a character drifts into.
+    //
+    // The boundary placement is the part that shipped wrong. Raising FROM 10
+    // still costs 2, and 3 does not start until 11: Ragnarok's band opens one
+    // above the round number, not on it.
     expect(statRaiseCost(1)).toBe(2);
     expect(statRaiseCost(9)).toBe(2);
-    expect(statRaiseCost(10)).toBe(3);
-    expect(statRaiseCost(19)).toBe(3);
-    expect(statRaiseCost(20)).toBe(4);
-    expect(statRaiseCost(90)).toBe(11);
+    expect(statRaiseCost(10)).toBe(2);
+    expect(statRaiseCost(11)).toBe(3);
+    expect(statRaiseCost(20)).toBe(3);
+    expect(statRaiseCost(21)).toBe(4);
+    expect(statRaiseCost(90)).toBe(10);
     expect(statRaiseCost(98)).toBe(11);
   });
 

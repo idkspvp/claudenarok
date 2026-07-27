@@ -31,7 +31,10 @@ describe('/inspect command', () => {
     const a = sim.addPlayer('warrior', 'Aleph');
     const b = sim.addPlayer('rogue', 'Gimel');
     const e = sim.entities.get(b)!;
-    e.hp = Math.round(e.maxHp * 0.4);
+    // A round pool so the percentage is exact: the subject here is the readout
+    // format, not how big a level-1 pool happens to be.
+    e.maxHp = 100;
+    e.hp = 40;
     expect(inspectReply(sim, a, '/inspect Gimel')).toBe(`Gimel: Level ${e.level} Rogue: HP 40%.`);
 
     e.hp = 0;
