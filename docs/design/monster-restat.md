@@ -1,0 +1,164 @@
+# Restatting the existing roster onto Ragnarok's curve
+
+Phase 1 of `world-shape.md`: take the monsters already in the tree, give them
+fixed Ragnarok stat blocks with race, element and size, and spread them across a
+band of levels that is actually FULL rather than a thin line reaching to 99.
+
+Nothing here needs a new name, a new model, or D1. Every monster in the roster
+already carries a name cleared through `ip-refactor/NAME-MAP.md`, and all of them
+draw on one of twelve shared visual builds.
+
+## What the roster actually is
+
+Counted from `src/sim/content/zone*/mobs.ts`, and the split matters more than the
+total. Of the monsters in the tree, roughly half are named individuals rather
+than things that populate a field:
+
+| | Roughly | Examples |
+|---|---|---|
+| field monsters | 31 | Forest Wolf, Sableweb Lurker, Mire Prowler, Thornpeak Ogre |
+| bosses, rares and dungeon-only | 29 | Old Greyjaw, Sister Nhalia, Voskar the Emberwing, the three Visions, Training Dummy |
+
+Ragnarok's field maps carry a median of **6.9 distinct monsters** each (measured
+over 162 pre-renewal field maps). Thirty-one field monsters therefore fill
+**about six to eight areas properly**, not the thirty in the island plan, and
+certainly not a spread to level 99, which would leave every area with two things
+to fight.
+
+The bosses are not spare. One per area is exactly the shape SpiritVale uses (a
+boss sub-area attached to each map), and eight areas need eight of them; the rest
+belong to the dungeons that already exist.
+
+**So phase 1 covers levels 1 to 30 across the first eight islands.** A complete
+early game, not a hollow whole one.
+
+## The curve
+
+Medians from the pre-renewal monster database, by five-level band. These are
+aggregate statistics used to calibrate our own numbers, not records to copy: our
+monsters are different creatures with different names, and the only thing being
+taken across is the SHAPE of the difficulty ramp. See
+`ro-reference-source.md` for the standing rule on `db/`.
+
+| Level | HP | ATK min-max | DEF | MDEF | AGI | VIT | DEX | LUK |
+|---|---|---|---|---|---|---|---|---|
+| 1-5 | 55 | 1-2 | 20 | 20 | 0 | 0 | 8 | 10 |
+| 6-10 | 182 | 22-28 | 0 | 0 | 9 | 9 | 15 | 15 |
+| 11-15 | 471 | 39-43 | 0 | 10 | 12 | 13 | 35 | 5 |
+| 16-20 | 733 | 64-75 | 5 | 5 | 19 | 25 | 32 | 15 |
+| 21-25 | 1,176 | 118-140 | 10 | 5 | 24 | 25 | 36 | 10 |
+| 26-30 | 2,282 | 150-208 | 5 | 10 | 26 | 29 | 45 | 15 |
+
+Three properties of that table are load-bearing, and each one contradicts an
+assumption the current per-level scaling model makes.
+
+- **Monster STR is zero almost everywhere.** A monster's attack is the authored
+  min-max pair; it is not derived from Strength the way a player's is. That is
+  already what `combat/weapon_damage.ts` implements, and the data confirms it.
+- **DEF is tiny.** The median sits between 0 and 10 across the whole early game.
+  Monsters survive on hit points, not on armour, so the hard-DEF percentage layer
+  barely applies to them and the flat Vitality subtraction does most of the work.
+- **Dexterity is the monster's main attribute**, rising from 8 to 45 while
+  Strength stays at zero. Monsters are accurate. A player who wants to be missed
+  has to buy Agility for it; there is no low-accuracy early monster to coast off.
+
+Our own scale already matches, so the HP column transfers with no adjustment: a
+Swordman has 123 hit points at level 10, 282 at 20 and 3,997 at 99 on the curves
+in `src/sim/job_vitals.ts`, which are Ragnarok's own. A monster of your level
+out-tanking you early is correct rather than a mistake.
+
+## Authoring a block
+
+Do NOT hand-tune thirty-one blocks. Read the base off the band for the monster's
+level, then apply ONE archetype multiplier. That is both how the variation inside
+a Ragnarok band actually reads and the only version of this that stays editable.
+
+| Archetype | HP | ATK | AGI | Reads as |
+|---|---|---|---|---|
+| `standard` | x1 | x1 | x1 | the baseline for the band |
+| `brute` | x1.4 | x0.9 | x0.7 | slow and heavy: ogres, trolls, boars |
+| `swift` | x0.7 | x1.0 | x1.5 | hard to hit, dies fast: wolves, stalkers, spiders |
+| `caster` | x0.8 | x0.7 | x0.9 | fights with magic: cultists, elementals, necromancers |
+| `boss` | x6 | x1.5 | x1 | the area's named individual |
+
+The boss multiplier is a starting point, not a result. A boss is tuned against
+its fight.
+
+## Experience is authored too, and both kinds of it
+
+The same shape mismatch as hit points, in a place that is easy to miss. Our
+experience is DERIVED from the monster's level (`mobXpBase` in `types.ts`, a
+division of the level's own curve), so every monster of a level is worth exactly
+the same. Ragnarok authors it per monster, which is what lets a slow tanky thing
+be worth more than a fast weak one at the same level.
+
+Medians from the same database, and the ratio is the interesting column:
+
+| Level | Base EXP | Job EXP | Job/Base | Base per 100 HP |
+|---|---|---|---|---|
+| 1-5 | 5 | 4 | 0.80 | 6.0 |
+| 6-10 | 23 | 16 | 0.70 | 11.6 |
+| 11-15 | 59 | 40 | 0.68 | 12.5 |
+| 16-20 | 134 | 86 | 0.64 | 18.3 |
+| 21-25 | 264 | 160 | 0.61 | 22.4 |
+| 26-30 | 461 | 266 | 0.58 | 20.2 |
+
+**Job experience settles at about 0.62 of base**, drifting down from 0.8 at the
+very bottom. It is a separate authored number rather than a global percentage,
+but that ratio is the sane default to author against.
+
+The last column is the one that shapes play: experience per hit point RISES with
+level, roughly tripling from the first band to the sixth. A higher-level monster
+is not merely worth more, it is worth more PER SWING, which is why the correct
+answer in Ragnarok is always to fight the strongest thing you can still kill.
+A flat experience-per-effort curve would remove that decision entirely.
+
+**Author `jobExp` in this pass even though nothing reads it yet.** Job levels are
+`D5` and do not exist; the field will sit unused. Authoring it now costs one more
+number per record and saves walking all thirty-one records again later, and the
+0.62 ratio above is not information we will have more of by waiting.
+
+## Assigning the three classifications
+
+Every monster needs `race`, `element` (plus its attribute level) and `size`, and
+**not one of them carries any today**, which is why the element chart, the size
+table and the whole card system currently have nothing to act on.
+
+Assign from what the creature IS, not from where it lives:
+
+- **race** from the family it already has (`beast` to brute, `spider` to insect,
+  `undead` to undead, `humanoid` to demi-human, `elemental` to formless,
+  `troll`/`ogre` to demi-human, `mudfin` to fish, `burrower` to brute,
+  `dragonkin` to dragon, `demon` to demon)
+- **element** from the creature's nature, spread so that no area is single
+  element. Ragnarok's areas mix two or three, which is the entire reason a
+  player carries a second weapon
+- **size** from the model: small for insects and critters, large for ogres,
+  trolls and dragonkin, medium for everything else
+
+Element level starts at 1 for everything in this band. Levels 2 and above sharpen
+the chart in BOTH directions (`combat/elements.ts`) and belong to content built
+around them, not to a first pass.
+
+## What is deliberately left out
+
+- **Levels 31 to 99.** Phase 3 in `world-shape.md`. Growing the roster is a data
+  task on the twelve existing builds, so it costs no art, but it is a separate
+  piece of work and pretending the current roster stretches that far would make
+  every area thin.
+- **Drop tables and cards.** `B5` and `B4`, and they come AFTER this pass rather
+  than with it, for a reason worth stating. The mechanism already exists:
+  `MobTemplate.loot` is a `LootEntry[]` with a chance, a money arm and exclusive
+  `rollGroup` partitioning. What is missing is Ragnarok's shape on top of it,
+  per-mille rates and a card slot, and a card IS a monster's identity: it names
+  the monster and carries an effect keyed to race, element or size. Authoring one
+  against a stat block that has not settled is authoring it twice.
+
+  There is a second reason to keep drops as their own pass, and it is not on the
+  roadmap: **deleting the quest system orphaned about 130 items**, which now have
+  no source in the world at all. Drop tables are where most of them have to land,
+  so `B5` is really two jobs wearing one name, and sizing it as "add loot to
+  thirty-one monsters" would undercount it badly.
+- **`MOB_AP_PER_DPS`.** It exists only because monster attack power is on the
+  pre-conversion scale. Retiring it is `C6` and it becomes possible the moment
+  the blocks above are authored, not before.
