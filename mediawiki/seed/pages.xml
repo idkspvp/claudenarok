@@ -25,7 +25,7 @@
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="10448">/* =========================================================================
-   Claudenarok Online Wiki — &quot;Aged Grimoire&quot; theme for Vector 2022.
+   Claudenarok Online Wiki, &quot;Aged Grimoire&quot; theme for Vector 2022.
    Warm parchment reading surface, deep oak chrome, gold + wax-seal-red
    accents, elegant serif display headings.
    ========================================================================= */
@@ -117,7 +117,7 @@ body {
 }
 
 /* ---- Side columns: dark oak panels ---- */
-/* NB: don&apos;t give .vector-settings panel chrome — an empty collapsed copy of
+/* NB: don&apos;t give .vector-settings panel chrome, an empty collapsed copy of
    it lives in the right column and would render as a stray dark nub. */
 .vector-main-menu,
 .vector-toc,
@@ -201,7 +201,7 @@ body {
 }
 
 /* the header divider under &quot;Contents&quot;/&quot;Appearance&quot; defaults to light grey,
-   which paints a harsh line across the dark oak panels — soften to gold */
+   which paints a harsh line across the dark oak panels, soften to gold */
 .vector-pinnable-header {
   border-bottom: 1px solid rgba(231, 181, 74, 0.22) !important;
 }
@@ -358,7 +358,7 @@ body {
   padding: 8px 12px;
 }
 
-/* column + top headers — light text on oak, now actually visible */
+/* column + top headers, light text on oak, now actually visible */
 .wikitable &gt; * &gt; tr &gt; th,
 .article-facts &gt; * &gt; tr &gt; th {
   color: #fdeec8 !important;
@@ -473,12 +473,12 @@ Claudenarok Online is a browser-playable, WoW-Classic-flavored micro-MMO with on
 &lt;/div&gt;
 &lt;/div&gt;
 == Featured portals ==
-* [[Zones]] — Eastbrook Vale, Mirefen Marsh, Thornpeak Heights.
-* [[Classes]] — all nine playable class kits.
-* [[Quests]] — the full source-defined quest chain.
-* [[Dungeons]] — Hollow Crypt, Sunken Bastion, and Gravewyrm Sanctum.
-* [[Community Lore]] — launch-week player culture from Discord, Reddit, and X.
-* [[Development Timeline]] — issue, PR, and release themes.
+* [[Zones]], Eastbrook Vale, Mirefen Marsh, Thornpeak Heights.
+* [[Classes]], all nine playable class kits.
+* [[Quests]], the full source-defined quest chain.
+* [[Dungeons]], Hollow Crypt, Sunken Bastion, and Gravewyrm Sanctum.
+* [[Community Lore]], launch-week player culture from Discord, Reddit, and X.
+* [[Development Timeline]], issue, PR, and release themes.
 [[Category:Wiki]]
 </text>
     </revision>
@@ -549,9 +549,9 @@ Claudenarok Online is a browser-playable, WoW-Classic-flavored micro-MMO with on
 The main story follows Brother Aldric from restless bones outside Eastbrook to Korzul the Gravewyrm beneath Thornpeak.
 
 == Acts ==
-* [[Eastbrook Vale]] — Morthen the Gravecaller and [[The Hollow Crypt]].
-* [[Mirefen Marsh]] — Vael the Mistcaller and [[The Sunken Bastion]].
-* [[Thornpeak Heights]] — Wyrmcult zealots, Highwatch, and [[Gravewyrm Sanctum]].
+* [[Eastbrook Vale]], Morthen the Gravecaller and [[The Hollow Crypt]].
+* [[Mirefen Marsh]], Vael the Mistcaller and [[The Sunken Bastion]].
+* [[Thornpeak Heights]], Wyrmcult zealots, Highwatch, and [[Gravewyrm Sanctum]].
 [[Category:Lore]]
 [[Category:Quests]]
 </text>
@@ -668,16 +668,16 @@ Recent Reddit threads framed Claudenarok Online as a viral open-source, Fable 5-
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="1103">== Systems index ==
-* [[Combat]] — Vanilla-style combat math, resources, GCD, threat, leashing, death, food, drink, and recovery.
-* [[Parties]] — Five-player grouping, shared tap rights, shared kill credit, XP bonuses, party chat, and shared instances.
-* [[Guilds]] — Guild creation, ranks, roster management, invites, guild chat, and public-discovery roadmap requests.
-* [[Trading]] — Nearby players stage items and copper; both sides accept; walking apart cancels.
-* [[World Market]] — The Merchant runs player listings, purchases, cancellations, and collections.
-* [[Duels]] — Friendly PvP challenges end at 1 HP.
-* [[Ashen Coliseum]] — Ranked 1v1 arena with matchmaking, private arena instances, Elo, ladder, and leaderboard.
-* [[Fishing]] — First professions slice: pole purchase, water checks, casting, and starter catch results.
-* [[Mobile Play]] — Touch controls, joystick fixes, quest-log access, fullscreen polish, and launch-week mobile testing.
-* [[Agents and Bots]] — Headless training environment, Codex/Claude agent culture, and anti-bot roadmap.
+* [[Combat]], Vanilla-style combat math, resources, GCD, threat, leashing, death, food, drink, and recovery.
+* [[Parties]], Five-player grouping, shared tap rights, shared kill credit, XP bonuses, party chat, and shared instances.
+* [[Guilds]], Guild creation, ranks, roster management, invites, guild chat, and public-discovery roadmap requests.
+* [[Trading]], Nearby players stage items and copper; both sides accept; walking apart cancels.
+* [[World Market]], The Merchant runs player listings, purchases, cancellations, and collections.
+* [[Duels]], Friendly PvP challenges end at 1 HP.
+* [[Ashen Coliseum]], Ranked 1v1 arena with matchmaking, private arena instances, Elo, ladder, and leaderboard.
+* [[Fishing]], First professions slice: pole purchase, water checks, casting, and starter catch results.
+* [[Mobile Play]], Touch controls, joystick fixes, quest-log access, fullscreen polish, and launch-week mobile testing.
+* [[Agents and Bots]], Headless training environment, Codex/Claude agent culture, and anti-bot roadmap.
 [[Category:Systems]]
 </text>
     </revision>
@@ -1472,7 +1472,7 @@ Headless training environment, Codex/Claude agent culture, and anti-bot roadmap.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="902">== Overview ==
-Find Marshal Redbrook in town — he has work for you.
+Find Marshal Redbrook in town, he has work for you.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -1607,7 +1607,7 @@ Report to Warden Fenwick at the Fenbridge gate.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="1672">== Overview ==
-Captain Thessaly holds the wall at Highwatch — barely.
+Captain Thessaly holds the wall at Highwatch, barely.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2344,7 +2344,7 @@ Gravewyrm Sanctum is a private party instance with 21 source-defined spawns.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="320">== Greeting ==
-Welcome to the World Market, $C. Buy from every adventurer in the realm — or set out your own wares and let coin find you.
+Welcome to the World Market, $C. Buy from every adventurer in the realm, or set out your own wares and let coin find you.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2593,7 +2593,7 @@ Mind the sparks, $C. Good steel is the difference between a scar and a grave.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="318">== Greeting ==
-Grlmurlgrl— sorry, been listening to those fish-men too long.
+Grlmurlgrl, sorry, been listening to those fish-men too long.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2712,7 +2712,7 @@ Hold at the gate, $C. Past those reeds, the fen does the killing for us.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="510">== Greeting ==
-The Light keep you above the water, $N. The dead in this fen do not sleep — they wade.
+The Light keep you above the water, $N. The dead in this fen do not sleep, they wade.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2756,7 +2756,7 @@ The Light keep you above the water, $N. The dead in this fen do not sleep — th
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="637">== Greeting ==
-Dry boots, dry bread, dry powder — at Fenbridge you get two of the three on a good day.
+Dry boots, dry bread, dry powder, at Fenbridge you get two of the three on a good day.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2847,7 +2847,7 @@ Mind the thicket west of the road. The webs are thick as sailcloth this season.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="372">== Greeting ==
-Quiet feet and a short blade keep you breathing out here. Speak quick — I am due back in the reeds.
+Quiet feet and a short blade keep you breathing out here. Speak quick, I am due back in the reeds.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -2886,7 +2886,7 @@ Quiet feet and a short blade keep you breathing out here. Speak quick — I am d
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="466">== Greeting ==
-Two hundred years this wall has held, $C. It will not break on my watch — but it groans.
+Two hundred years this wall has held, $C. It will not break on my watch, but it groans.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3013,7 +3013,7 @@ I tracked cultists through the fen at your side, and the trail led here. The pea
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="591">== Greeting ==
-Wool, hardtack, and steel-shod boots — Highwatch runs on all three, and I am short of everything.
+Wool, hardtack, and steel-shod boots, Highwatch runs on all three, and I am short of everything.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3210,7 +3210,7 @@ There is one wolf no trap has held: Old Greyjaw. He has taken three hounds and a
 * Old Greyjaw&apos;s Fang: 1
 
 == Completion ==
-So the old devil is dead at last. The stable boy will sleep easier — and so will I.
+So the old devil is dead at last. The stable boy will sleep easier, and so will I.
 
 == Rewards ==
 * [[Greyjaw&apos;s Pelt Leggings]]
@@ -3278,7 +3278,7 @@ Ah, fine bristly hides! These will fetch a good price.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="569">== Quest text ==
-The lurkers in the eastern woods spin a silk I need for my poultices — and they have grown far too numerous besides. Cull 6 Webwood Lurkers and cut 4 silk glands from their bellies.
+The lurkers in the eastern woods spin a silk I need for my poultices, and they have grown far too numerous besides. Cull 6 Webwood Lurkers and cut 4 silk glands from their bellies.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3323,7 +3323,7 @@ Ugh, still twitching. Perfect. Here, you&apos;ve earned this.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="583">== Quest text ==
-Twenty years I have fished Mirror Lake, and never lost a net until those gurgling fish-men crawled out of the shallows. Drive the Mudfin back — slay 8 of them. And watch yourself: where there is one murloc, there are five.
+Twenty years I have fished Mirror Lake, and never lost a net until those gurgling fish-men crawled out of the shallows. Drive the Mudfin back, slay 8 of them. And watch yourself: where there is one murloc, there are five.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3392,7 +3392,7 @@ We struck a fine copper vein and then those kobold vermin came boiling out of th
 * Tunnel Rat Digger slain: 10
 
 == Completion ==
-Ha! Back to work, lads! You have my thanks — and my coin.
+Ha! Back to work, lads! You have my thanks, and my coin.
 [[Category:Quests]]
 [[Category:Eastbrook Vale]]
 </text>
@@ -3411,7 +3411,7 @@ Ha! Back to work, lads! You have my thanks — and my coin.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="572">== Quest text ==
-The old ruin on the northwest hill was a chapel once, and its yard a resting place. Something has stirred the dead from their sleep. Grant them peace, $N — return 8 Restless Bones to the earth.
+The old ruin on the northwest hill was a chapel once, and its yard a resting place. Something has stirred the dead from their sleep. Grant them peace, $N, return 8 Restless Bones to the earth.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3455,7 +3455,7 @@ May they rest now, and may the Light forgive whatever woke them.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="568">== Quest text ==
-Those bandits hit my last wagon and made off with four crates of goods — tools, salt, good Eastbrook linen. The crates are stacked around their camp in the southeast hills. Steal them back for me, would you?
+Those bandits hit my last wagon and made off with four crates of goods, tools, salt, good Eastbrook linen. The crates are stacked around their camp in the southeast hills. Steal them back for me, would you?
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3499,7 +3499,7 @@ My crates! Barely a scratch on them. You are a wonder.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="654">== Quest text ==
-You have laid the dead to rest, but they will not stay resting — something calls them back. Search the chapel ruin for any trace of the one doing the calling. If you find a sigil or seal, bring it to me untouched.
+You have laid the dead to rest, but they will not stay resting, something calls them back. Search the chapel ruin for any trace of the one doing the calling. If you find a sigil or seal, bring it to me untouched.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3543,7 +3543,7 @@ This sigil... it bears the mark of the Gravecallers, a sect I had prayed was ext
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="755">== Quest text ==
-If the Gravecallers raised our dead, I must know whose graves they robbed. The chapel sexton kept a burial ledger, and the wind has scattered its pages across the chapel yard. Gather 3 of them for me, $N — the dead deserve to be called by their names.
+If the Gravecallers raised our dead, I must know whose graves they robbed. The chapel sexton kept a burial ledger, and the wind has scattered its pages across the chapel yard. Gather 3 of them for me, $N, the dead deserve to be called by their names.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3568,7 +3568,7 @@ If the Gravecallers raised our dead, I must know whose graves they robbed. The c
 * Weathered Ledger Page: 3
 
 == Completion ==
-These poor souls... and look here. Sexton Marrow — the chapel&apos;s own living caretaker — his grave the first disturbed. Morthen began with the very man who buried Eastbrook&apos;s dead.
+These poor souls... and look here. Sexton Marrow, the chapel&apos;s own living caretaker, his grave the first disturbed. Morthen began with the very man who buried Eastbrook&apos;s dead.
 [[Category:Quests]]
 [[Category:Eastbrook Vale]]
 </text>
@@ -3612,7 +3612,7 @@ Every name in that ledger is a soul Morthen means to drag from the earth, and th
 * Restless Bones silenced: 12
 
 == Completion ==
-The yard grows quieter — but the calling has not stopped. It rises from below now, $N. From the crypt itself.
+The yard grows quieter, but the calling has not stopped. It rises from below now, $N. From the crypt itself.
 [[Category:Quests]]
 [[Category:Mirefen Marsh]]
 </text>
@@ -3631,7 +3631,7 @@ The yard grows quieter — but the calling has not stopped. It rises from below 
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="777">== Quest text ==
-The crypt beneath the chapel must be unsealed if we are to stop the Gravecaller — but only a binding rite will let the living pass. I need 4 lumps of Blessed Tallow — the kobold diggers hoard candles by the crate — and 6 Ghostly Essences from the restless dead.
+The crypt beneath the chapel must be unsealed if we are to stop the Gravecaller, but only a binding rite will let the living pass. I need 4 lumps of Blessed Tallow, the kobold diggers hoard candles by the crate, and 6 Ghostly Essences from the restless dead.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3676,7 +3676,7 @@ It is done. The way below stands open... and may the Light forgive me for openin
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="777">== Quest text ==
-Morthen the Gravecaller waits at the bottom of the Hollow Crypt, ringed by the elite dead he has raised. He is far beyond any one hero — take four companions, no fewer. End him, and the Vale&apos;s dead will finally sleep.
+Morthen the Gravecaller waits at the bottom of the Hollow Crypt, ringed by the elite dead he has raised. He is far beyond any one hero, take four companions, no fewer. End him, and the Vale&apos;s dead will finally sleep.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3701,7 +3701,7 @@ Morthen the Gravecaller waits at the bottom of the Hollow Crypt, ringed by the e
 * Morthen the Gravecaller slain: 1
 
 == Completion ==
-The whispering has stopped. You have done what the whole Vale could not, $N — the dead sleep, and Eastbrook owes you everything it has.
+The whispering has stopped. You have done what the whole Vale could not, $N, the dead sleep, and Eastbrook owes you everything it has.
 
 == Rewards ==
 * [[Gravecaller&apos;s Broadblade]]
@@ -3725,7 +3725,7 @@ The whispering has stopped. You have done what the whole Vale could not, $N — 
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="797">== Quest text ==
-The ledger named him and the crypt holds him: Sexton Marrow, the chapel&apos;s caretaker, the first man Morthen raised — guarding his master&apos;s door in death as faithfully as he kept the chapel in life. Take four companions into the Hollow Crypt and grant the old sexton the rest he was robbed of, $N.
+The ledger named him and the crypt holds him: Sexton Marrow, the chapel&apos;s caretaker, the first man Morthen raised, guarding his master&apos;s door in death as faithfully as he kept the chapel in life. Take four companions into the Hollow Crypt and grant the old sexton the rest he was robbed of, $N.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3750,7 +3750,7 @@ The ledger named him and the crypt holds him: Sexton Marrow, the chapel&apos;s c
 * Sexton Marrow laid to rest: 1
 
 == Completion ==
-So Marrow is free at last. Ring no bell for him — he heard enough of them in life.
+So Marrow is free at last. Ring no bell for him, he heard enough of them in life.
 
 == Rewards ==
 * [[Marrowtread Boots]]
@@ -3774,7 +3774,7 @@ So Marrow is free at last. Ring no bell for him — he heard enough of them in l
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="752">== Quest text ==
-Morthen is dead, yet a question gnaws at me: a sect that hid for a century does not spend itself on one village chapel. He kept a grimoire — his rites, his correspondence. If anything of it survives, it lies in the vestry of the ruined chapel above the crypt. Search the ruin and bring me whatever remains of his writings, $N.
+Morthen is dead, yet a question gnaws at me: a sect that hid for a century does not spend itself on one village chapel. He kept a grimoire, his rites, his correspondence. If anything of it survives, it lies in the vestry of the ruined chapel above the crypt. Search the ruin and bring me whatever remains of his writings, $N.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3799,7 +3799,7 @@ Morthen is dead, yet a question gnaws at me: a sect that hid for a century does 
 * Morthen&apos;s Grimoire: 1
 
 == Completion ==
-Morthen wrote to a &apos;Mistcaller&apos; in the northern fen. The sect is not dead, $N — it has merely been patient.
+Morthen wrote to a &apos;Mistcaller&apos; in the northern fen. The sect is not dead, $N, it has merely been patient.
 [[Category:Quests]]
 [[Category:Mirefen Marsh]]
 </text>
@@ -3818,7 +3818,7 @@ Morthen wrote to a &apos;Mistcaller&apos; in the northern fen. The sect is not d
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="611">== Quest text ==
-A pack of cutthroats has made camp in the southwest hills. They have robbed three wagons this week. Drive them out — slay 10 Vale Bandits.
+A pack of cutthroats has made camp in the southwest hills. They have robbed three wagons this week. Drive them out, slay 10 Vale Bandits.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -3843,7 +3843,7 @@ A pack of cutthroats has made camp in the southwest hills. They have robbed thre
 * Vale Bandit slain: 10
 
 == Completion ==
-Ten fewer knives in the dark. Take this — you have earned it.
+Ten fewer knives in the dark. Take this, you have earned it.
 
 == Rewards ==
 * [[Redbrook Militia Blade]]
@@ -3941,7 +3941,7 @@ Before you take the road north, Eastbrook has one last thorn in its side: Mogger
 * Wild Boar driven from the trail: 8
 
 == Completion ==
-Those tracks are fresh and deep enough to hold rain. Mogger is no camp tale, $N — and he is close.
+Those tracks are fresh and deep enough to hold rain. Mogger is no camp tale, $N, and he is close.
 [[Category:Quests]]
 [[Category:Mirefen Marsh]]
 </text>
@@ -4009,7 +4009,7 @@ Mogger dead at last. Eastbrook&apos;s fields are safer, and you leave the Vale w
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="697">== Quest text ==
-Morthen&apos;s writings named a master in the northern marsh — a &apos;Mistcaller.&apos; Now Warden Fenwick has sounded the muster horn at Fenbridge, and I do not believe in coincidence, $N. Take the causeway north, pull the muster order from the gatepost, and present it to the Warden.
+Morthen&apos;s writings named a master in the northern marsh, a &apos;Mistcaller.&apos; Now Warden Fenwick has sounded the muster horn at Fenbridge, and I do not believe in coincidence, $N. Take the causeway north, pull the muster order from the gatepost, and present it to the Warden.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4053,7 +4053,7 @@ Aldric&apos;s seal, is it? Then you&apos;ll do. The fen has been swallowing my p
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="627">== Quest text ==
-The mire prowlers have learned what a supply mule sounds like, and now they hunt the causeway itself. Last week they dragged a courier into the reeds not fifty paces from this gate. Thin them out, $N — twelve dead prowlers ought to teach the rest fear.
+The mire prowlers have learned what a supply mule sounds like, and now they hunt the causeway itself. Last week they dragged a courier into the reeds not fifty paces from this gate. Thin them out, $N, twelve dead prowlers ought to teach the rest fear.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4097,7 +4097,7 @@ Twelve, and not a bite on you? The causeway breathes easier tonight.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="628">== Quest text ==
-Every plank of that causeway rests on pilings wrapped in oiled prowler hide — the only thing the rot will not chew through. My stock is gone and the south spans are already sinking. Bring me 8 unspoiled pelts, $N, before we are all wading to Eastbrook.
+Every plank of that causeway rests on pilings wrapped in oiled prowler hide, the only thing the rot will not chew through. My stock is gone and the south spans are already sinking. Bring me 8 unspoiled pelts, $N, before we are all wading to Eastbrook.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4141,7 +4141,7 @@ Good thick pelts, these. The causeway will outlast the both of us now.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="637">== Quest text ==
-A caravan out of Eastbrook went into the mist three days back and never rang the gate bell. The wreck is strewn the whole length of the causeway — crates, casks, the lot, sinking slow. Salvage 5 loads of goods before the marsh finishes the job.
+A caravan out of Eastbrook went into the mist three days back and never rang the gate bell. The wreck is strewn the whole length of the causeway, crates, casks, the lot, sinking slow. Salvage 5 loads of goods before the marsh finishes the job.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4185,7 +4185,7 @@ Waterlogged, but whole. Poor drivers... the fen keeps what it catches, $N. Remem
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="666">== Quest text ==
-The Deepfen murlocs kept to their shallows for twenty years. Now they swarm the east bank like flies on a carcass — and my wardens say they are dragging things up from the lake bed. Whatever has them stirred, I want it stopped. Cull 12 of the snappers.
+The Deepfen murlocs kept to their shallows for twenty years. Now they swarm the east bank like flies on a carcass, and my wardens say they are dragging things up from the lake bed. Whatever has them stirred, I want it stopped. Cull 12 of the snappers.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4229,7 +4229,7 @@ That will push them back to the mud for a while. But something set them digging,
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="720">== Quest text ==
-Fenwick&apos;s wardens say the fish-men dredge idols from the lake bottom and clutch them like holy relics. If those idols are what I fear, I must see them with my own eyes. Take 5 from the Deepfen snappers — they will not part with them kindly.
+Fenwick&apos;s wardens say the fish-men dredge idols from the lake bottom and clutch them like holy relics. If those idols are what I fear, I must see them with my own eyes. Take 5 from the Deepfen snappers, they will not part with them kindly.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4254,7 +4254,7 @@ Fenwick&apos;s wardens say the fish-men dredge idols from the lake bottom and cl
 * Waterlogged Idol: 5
 
 == Completion ==
-Gravecaller work — older than Morthen, older than me. The sect did not begin in Eastbrook, $N. It began here, and the lake has been keeping its secrets.
+Gravecaller work, older than Morthen, older than me. The sect did not begin in Eastbrook, $N. It began here, and the lake has been keeping its secrets.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -4273,7 +4273,7 @@ Gravecaller work — older than Morthen, older than me. The sect did not begin i
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="665">== Quest text ==
-Aldric says those idols are cult-make — which means the murlocs are hauling the marsh&apos;s old evil up one armful at a time. I will not have it washing onto my causeway. Go back to the shallows and break the dredging for good: 14 more snappers.
+Aldric says those idols are cult-make, which means the murlocs are hauling the marsh&apos;s old evil up one armful at a time. I will not have it washing onto my causeway. Go back to the shallows and break the dredging for good: 14 more snappers.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4317,7 +4317,7 @@ Ruthless and thorough. If this marsh ever dries out, there&apos;s warden&apos;s 
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="686">== Quest text ==
-Widow venom is the only thing that draws fen-rot from a wound — I bled a man of it just this morning. But the thicket west of the road has gone from nuisance to horror; the webs are taking deer whole now. Kill 10 widows and cut me 6 venom sacs, whole and unburst.
+Widow venom is the only thing that draws fen-rot from a wound, I bled a man of it just this morning. But the thicket west of the road has gone from nuisance to horror; the webs are taking deer whole now. Kill 10 widows and cut me 6 venom sacs, whole and unburst.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4362,7 +4362,7 @@ Whole sacs, every one. You have steadier hands than half the surgeons in the sou
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="704">== Quest text ==
-You have seen the webs — now ask yourself what spins cables thick as a man&apos;s wrist. The wardens call her the Broodmother, and her clutch hangs over Widow Thicket like a second canopy. Burn through 8 more widows and put the old mother down before that clutch opens.
+You have seen the webs, now ask yourself what spins cables thick as a man&apos;s wrist. The wardens call her the Broodmother, and her clutch hangs over Widow Thicket like a second canopy. Burn through 8 more widows and put the old mother down before that clutch opens.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4407,7 +4407,7 @@ Dead? Truly dead? Then the thicket is just trees again. The Light bless your bla
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="701">== Quest text ==
-Travelers drowned on the causeway are walking out of the lakes, $N — still hung with the weeds they died in. This is no restless haunting. Drowning leaves no marks; it makes obedient corpses. Someone is filling this fen like a tithing box. Return 12 of the Drowned Dead to their rest.
+Travelers drowned on the causeway are walking out of the lakes, $N, still hung with the weeds they died in. This is no restless haunting. Drowning leaves no marks; it makes obedient corpses. Someone is filling this fen like a tithing box. Return 12 of the Drowned Dead to their rest.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4451,7 +4451,7 @@ Each one you fell is a stolen soul set free. But the one who drowned them is sti
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="730">== Quest text ==
-North of the widow lake stands a chapel that drowned with its congregation when the marsh rose. The dead there carry rusted censers — funerary ones, the kind swung at a Gravecaller rite. Gather 4 from the chapel yard and I will read what rite was sung over that water.
+North of the widow lake stands a chapel that drowned with its congregation when the marsh rose. The dead there carry rusted censers, funerary ones, the kind swung at a Gravecaller rite. Gather 4 from the chapel yard and I will read what rite was sung over that water.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4476,7 +4476,7 @@ North of the widow lake stands a chapel that drowned with its congregation when 
 * Rusted Censer: 4
 
 == Completion ==
-As I feared. These censers burned grave-ash, not incense. Someone consecrated that chapel to the drowning — and the rite is signed &apos;Voss.&apos;
+As I feared. These censers burned grave-ash, not incense. Someone consecrated that chapel to the drowning, and the rite is signed &apos;Voss.&apos;
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -4495,7 +4495,7 @@ As I feared. These censers burned grave-ash, not incense. Someone consecrated th
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="825">== Quest text ==
-The rite on those censers binds the drowned to rise wherever the marsh touches them — and the marsh touches everything. There will be no rest in these reeds until the dead outnumber the living. We cannot unmake the rite yet, but we can empty it of soldiers. Lay 14 more of the Drowned Dead to rest.
+The rite on those censers binds the drowned to rise wherever the marsh touches them, and the marsh touches everything. There will be no rest in these reeds until the dead outnumber the living. We cannot unmake the rite yet, but we can empty it of soldiers. Lay 14 more of the Drowned Dead to rest.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4520,7 +4520,7 @@ The rite on those censers binds the drowned to rise wherever the marsh touches t
 * Drowned Dead laid to rest: 14
 
 == Completion ==
-You give the dead more mercy than their masters ever did. Take this — you have more than earned it.
+You give the dead more mercy than their masters ever did. Take this, you have more than earned it.
 
 == Rewards ==
 * [[Drownedguard Breastplate]]
@@ -4544,7 +4544,7 @@ You give the dead more mercy than their masters ever did. Take this — you have
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="690">== Quest text ==
-The Mirefen trolls have torn open the old barrow-mounds east of the far lake — burial mounds, $N, older than any kingdom of men. Whatever gold they think is down there, what they are letting OUT is worse. Drive them off the mounds: 12 trolls dead ought to do it.
+The Mirefen trolls have torn open the old barrow-mounds east of the far lake, burial mounds, $N, older than any kingdom of men. Whatever gold they think is down there, what they are letting OUT is worse. Drive them off the mounds: 12 trolls dead ought to do it.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4569,7 +4569,7 @@ The Mirefen trolls have torn open the old barrow-mounds east of the far lake —
 * Mirefen Troll slain: 12
 
 == Completion ==
-Trolls don&apos;t dig without a reason. Someone told them where to dig — and I&apos;d wager my gate it wears a grey robe.
+Trolls don&apos;t dig without a reason. Someone told them where to dig, and I&apos;d wager my gate it wears a grey robe.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -4588,7 +4588,7 @@ Trolls don&apos;t dig without a reason. Someone told them where to dig — and I
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="803">== Quest text ==
-I crawled the troll mounds two nights past. Those fetishes they plant are not troll-craft — the knots are wrong, the bones are man-bones, and every one points at the open barrows like a signpost. Bring me 8 of them and I will prove to Fenwick who is really paying for this dig.
+I crawled the troll mounds two nights past. Those fetishes they plant are not troll-craft, the knots are wrong, the bones are man-bones, and every one points at the open barrows like a signpost. Bring me 8 of them and I will prove to Fenwick who is really paying for this dig.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4637,7 +4637,7 @@ Same maker as the banners in the cult camp. The trolls are hired shovels, nothin
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="729">== Quest text ==
-There&apos;s one troll the others won&apos;t dig beside — Grubjaw, the Glutton. He ate my last two pack-mules, harness and all, and my insurance man drowned years ago. He prowls the far eastern mounds, $N. Bring me his tusk and I will outfit you proper.
+There&apos;s one troll the others won&apos;t dig beside, Grubjaw, the Glutton. He ate my last two pack-mules, harness and all, and my insurance man drowned years ago. He prowls the far eastern mounds, $N. Bring me his tusk and I will outfit you proper.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4686,7 +4686,7 @@ That tusk is long as my forearm! The mules are avenged, and Fenbridge owes you a
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="668">== Quest text ==
-There — north past the third lake, where the mist never lifts. Grey robes, grey banners: Gravecallers, camped in the open like they already own the fen. They have stopped hiding, $N, which means they think they have already won. Prove them wrong. Cut down 12 of their cultists.
+There, north past the third lake, where the mist never lifts. Grey robes, grey banners: Gravecallers, camped in the open like they already own the fen. They have stopped hiding, $N, which means they think they have already won. Prove them wrong. Cut down 12 of their cultists.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4730,7 +4730,7 @@ Twelve robes face-down in the mud. Now they know the fen watches back.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="735">== Quest text ==
-Maren&apos;s reports name summoners among the cultists — voices that call the drowned up out of the water like hounds to a whistle. Their ciphers will spell out the chain of command. Silence 8 summoners and bring me 4 of their ciphers.
+Maren&apos;s reports name summoners among the cultists, voices that call the drowned up out of the water like hounds to a whistle. Their ciphers will spell out the chain of command. Silence 8 summoners and bring me 4 of their ciphers.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4756,7 +4756,7 @@ Maren&apos;s reports name summoners among the cultists — voices that call the 
 * Gravecaller Cipher: 4
 
 == Completion ==
-Every cipher is countersigned &apos;Deacon Voss&apos; — and addressed onward to a &apos;Mistcaller&apos; in the Bastion. Morthen&apos;s master, $N. We have found him.
+Every cipher is countersigned &apos;Deacon Voss&apos;, and addressed onward to a &apos;Mistcaller&apos; in the Bastion. Morthen&apos;s master, $N. We have found him.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -4775,7 +4775,7 @@ Every cipher is countersigned &apos;Deacon Voss&apos; — and addressed onward t
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="813">== Quest text ==
-So a deacon of the Gravecallers stands at the heart of that camp, singing my drowned wardens up out of the lakes to serve him. His hymn ends today. Take the camp road north, $N, and put Deacon Voss in the ground — deep enough that nobody sings HIM back up.
+So a deacon of the Gravecallers stands at the heart of that camp, singing my drowned wardens up out of the lakes to serve him. His hymn ends today. Take the camp road north, $N, and put Deacon Voss in the ground, deep enough that nobody sings HIM back up.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4800,7 +4800,7 @@ So a deacon of the Gravecallers stands at the heart of that camp, singing my dro
 * Deacon Voss slain: 1
 
 == Completion ==
-Voss is dead and the mist over the camp is already thinning. You have broken their voice in the fen — now only the Bastion remains.
+Voss is dead and the mist over the camp is already thinning. You have broken their voice in the fen, now only the Bastion remains.
 
 == Rewards ==
 * [[Deacon&apos;s Cleaver]]
@@ -4824,7 +4824,7 @@ Voss is dead and the mist over the camp is already thinning. You have broken the
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="698">== Quest text ==
-The Sunken Bastion — a knight&apos;s hold that drowned in the fen a century ago — is where Voss&apos;s letters point, and where this Mistcaller sings his drowning hymns. The cult has warded its door with grave-stones. Bring me one of the ward stones, $N, and I will unweave the seal.
+The Sunken Bastion, a knight&apos;s hold that drowned in the fen a century ago, is where Voss&apos;s letters point, and where this Mistcaller sings his drowning hymns. The cult has warded its door with grave-stones. Bring me one of the ward stones, $N, and I will unweave the seal.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4868,7 +4868,7 @@ The ward parts like rotten rope. The door stands open... and the dark below it i
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="856">== Quest text ==
-Knight-Commander Olen held the Bastion when it sank — drowned at his post rather than abandon it. Every warden learns his name with pride. Now the Mistcaller has raised him as a puppet to guard the very door he died defending. That shame ends, $N. Take four companions below and grant Olen the rest he earned.
+Knight-Commander Olen held the Bastion when it sank, drowned at his post rather than abandon it. Every warden learns his name with pride. Now the Mistcaller has raised him as a puppet to guard the very door he died defending. That shame ends, $N. Take four companions below and grant Olen the rest he earned.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4917,7 +4917,7 @@ Then his watch is finally over. I&apos;ll see his name cut into the gate myself.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="961">== Quest text ==
-At the bottom of the Bastion waits Vael the Mistcaller — Morthen&apos;s master, Voss&apos;s master, the voice that has drowned a hundred travelers to raise itself an army. He is far beyond any one hero: take four companions, no fewer. End him, $N, and the fen&apos;s dead may finally lie still.
+At the bottom of the Bastion waits Vael the Mistcaller, Morthen&apos;s master, Voss&apos;s master, the voice that has drowned a hundred travelers to raise itself an army. He is far beyond any one hero: take four companions, no fewer. End him, $N, and the fen&apos;s dead may finally lie still.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -4942,7 +4942,7 @@ At the bottom of the Bastion waits Vael the Mistcaller — Morthen&apos;s master
 * Vael the Mistcaller slain: 1
 
 == Completion ==
-Vael is dead, and the mist is lifting for the first time in years. But Maren heard his last words, and they freeze my blood: &apos;The Wyrm stirs beneath the peaks.&apos; The sect serves something older than we ever guessed, $N. Rest while you can — the mountains are next.
+Vael is dead, and the mist is lifting for the first time in years. But Maren heard his last words, and they freeze my blood: &apos;The Wyrm stirs beneath the peaks.&apos; The sect serves something older than we ever guessed, $N. Rest while you can, the mountains are next.
 
 == Rewards ==
 * [[Mistcaller&apos;s Edge]]
@@ -4966,7 +4966,7 @@ Vael is dead, and the mist is lifting for the first time in years. But Maren hea
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="731">== Quest text ==
-Vael&apos;s last words have not left me, $N: the Wyrm stirs beneath the peaks. Captain Thessaly commands the wall at Highwatch, at the head of the mountain road north. A summons stands posted at her gate — take it up, and tell her Brother Aldric is climbing the mountain behind you.
+Vael&apos;s last words have not left me, $N: the Wyrm stirs beneath the peaks. Captain Thessaly commands the wall at Highwatch, at the head of the mountain road north. A summons stands posted at her gate, take it up, and tell her Brother Aldric is climbing the mountain behind you.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5010,7 +5010,7 @@ Aldric&apos;s word reaches far. If the priest of the Vale is climbing the mounta
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="573">== Quest text ==
-The ridge cats have come down from the high snows hungry, and my patrols bleed for it. Every stalker you put down is a soldier I keep on the wall. Thin them, $N — twelve, to start.
+The ridge cats have come down from the high snows hungry, and my patrols bleed for it. Every stalker you put down is a soldier I keep on the wall. Thin them, $N, twelve, to start.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5054,7 +5054,7 @@ Twelve fewer shadows on the ridge. The patrols will breathe easier tonight.
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="718">== Quest text ==
-Winter on this mountain does not knock, $N — it kicks the door in. Eight ridge stalker pelts will line enough cloaks to see the wall through the first snows. The beasts prowl the ridges flanking the road south.
+Winter on this mountain does not knock, $N, it kicks the door in. Eight ridge stalker pelts will line enough cloaks to see the wall through the first snows. The beasts prowl the ridges flanking the road south.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5079,7 +5079,7 @@ Winter on this mountain does not knock, $N — it kicks the door in. Eight ridge
 * Ridge Stalker Pelt: 8
 
 == Completion ==
-Thick as my arm, these. The watch will not freeze this year — take these treads for your trouble.
+Thick as my arm, these. The watch will not freeze this year, take these treads for your trouble.
 
 == Rewards ==
 * [[Ridgestalker Treads]]
@@ -5103,7 +5103,7 @@ Thick as my arm, these. The watch will not freeze this year — take these tread
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="660">== Quest text ==
-The kobolds at Deeprock Burrows are digging deeper than any candle-rat has business digging — straight down, as if something were calling them. Their tunnels run beneath our wall, $N. Collapse the matter: kill twelve Deeprock Tunnelers.
+The kobolds at Deeprock Burrows are digging deeper than any candle-rat has business digging, straight down, as if something were calling them. Their tunnels run beneath our wall, $N. Collapse the matter: kill twelve Deeprock Tunnelers.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5128,7 +5128,7 @@ The kobolds at Deeprock Burrows are digging deeper than any candle-rat has busin
 * Deeprock Tunneler slain: 12
 
 == Completion ==
-Straight down, every shaft of it — kobolds do not dig like that on their own. I must consult my books.
+Straight down, every shaft of it, kobolds do not dig like that on their own. I must consult my books.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5147,7 +5147,7 @@ Straight down, every shaft of it — kobolds do not dig like that on their own. 
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="657">== Quest text ==
-Caddis showed me a candle taken off one of those tunnelers — the wax glows, $N, and it is warm as a heartbeat. He wants more for study, and I want it off my requisition list. Bring back six lumps of the glowing wax.
+Caddis showed me a candle taken off one of those tunnelers, the wax glows, $N, and it is warm as a heartbeat. He wants more for study, and I want it off my requisition list. Bring back six lumps of the glowing wax.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5191,7 +5191,7 @@ Still warm. The Loremaster says the glow matches no flame he knows of. I say it 
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="662">== Quest text ==
-The Thornpeak clans never come this far east — yet here they are, camped in the eastern foothills with war paint on. Somebody is paying them, $N, and ogres do not take promises. Cut twelve of them down while I find out who holds the purse.
+The Thornpeak clans never come this far east, yet here they are, camped in the eastern foothills with war paint on. Somebody is paying them, $N, and ogres do not take promises. Cut twelve of them down while I find out who holds the purse.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5235,7 +5235,7 @@ Twelve down, and still they are not pulling back. Whoever bought them paid in so
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="644">== Quest text ==
-Around the war-camp the ogres have raised totems — crude things of hide and skull, but they mark a muster, not a raid. Tear down six of them and bring them to me. Mind the crushers on the perimeter, $N.
+Around the war-camp the ogres have raised totems, crude things of hide and skull, but they mark a muster, not a raid. Tear down six of them and bring them to me. Mind the crushers on the perimeter, $N.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5260,7 +5260,7 @@ Around the war-camp the ogres have raised totems — crude things of hide and sk
 * Ogre War Totem: 6
 
 == Completion ==
-Skull, hide... and look here — wyrm-scale bindings. These totems were gifts, $N. The cult is arming the clans.
+Skull, hide... and look here, wyrm-scale bindings. These totems were gifts, $N. The cult is arming the clans.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5279,7 +5279,7 @@ Skull, hide... and look here — wyrm-scale bindings. These totems were gifts, $
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="629">== Quest text ==
-Maren&apos;s totems tell me all I need to know: the clans are bought, and my wall is their first errand. I will not wait for them to muster. Fourteen more Thornpeak Ogres, $N — and I will pay bounty on every one.
+Maren&apos;s totems tell me all I need to know: the clans are bought, and my wall is their first errand. I will not wait for them to muster. Fourteen more Thornpeak Ogres, $N, and I will pay bounty on every one.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5304,7 +5304,7 @@ Maren&apos;s totems tell me all I need to know: the clans are bought, and my wal
 * Thornpeak Ogre slain: 14
 
 == Completion ==
-Bounty paid in full. The foothills are quieter — now we deal with the ones doing the buying.
+Bounty paid in full. The foothills are quieter, now we deal with the ones doing the buying.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5323,7 +5323,7 @@ Bounty paid in full. The foothills are quieter — now we deal with the ones doi
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="639">== Quest text ==
-Drogmar&apos;s war-camp squats in the eastern crags, and his crushers are the spine of it — each one worth three of my soldiers. Take companions; this is no errand for one blade. Break ten crushers and the warlord&apos;s muster breaks with them.
+Drogmar&apos;s war-camp squats in the eastern crags, and his crushers are the spine of it, each one worth three of my soldiers. Take companions; this is no errand for one blade. Break ten crushers and the warlord&apos;s muster breaks with them.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5348,7 +5348,7 @@ Drogmar&apos;s war-camp squats in the eastern crags, and his crushers are the sp
 * Thornpeak Crusher slain: 10
 
 == Completion ==
-Ten crushers down. The war-camp is a body without a spine — time to take the head.
+Ten crushers down. The war-camp is a body without a spine, time to take the head.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5367,7 +5367,7 @@ Ten crushers down. The war-camp is a body without a spine — time to take the h
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="804">== Quest text ==
-Warlord Drogmar took the Wyrmcult&apos;s coin and swore the clans to the mountain&apos;s waking. He is the hammer they mean to swing at my wall — and when he slams the ground, $N, do not be standing near him. Take your companions into the war-camp and end him, for Highwatch.
+Warlord Drogmar took the Wyrmcult&apos;s coin and swore the clans to the mountain&apos;s waking. He is the hammer they mean to swing at my wall, and when he slams the ground, $N, do not be standing near him. Take your companions into the war-camp and end him, for Highwatch.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5392,7 +5392,7 @@ Warlord Drogmar took the Wyrmcult&apos;s coin and swore the clans to the mountai
 * Warlord Drogmar slain: 1
 
 == Completion ==
-Drogmar, dead in his own camp. The clans will scatter to the high passes — you have bought my wall a winter, $N.
+Drogmar, dead in his own camp. The clans will scatter to the high passes, you have bought my wall a winter, $N.
 
 == Rewards ==
 * [[Drogmar&apos;s Skullcleaver]]
@@ -5416,7 +5416,7 @@ Drogmar, dead in his own camp. The clans will scatter to the high passes — you
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="651">== Quest text ==
-Stormcrag has stood silent a thousand years, and now the very stones of it get up and walk. Elementals do not simply wake, $N — something beneath this mountain is turning in its sleep. Put twelve of them down so I may study what remains.
+Stormcrag has stood silent a thousand years, and now the very stones of it get up and walk. Elementals do not simply wake, $N, something beneath this mountain is turning in its sleep. Put twelve of them down so I may study what remains.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5460,7 +5460,7 @@ The fragments hum like struck bells. The mountain is not angry, $N... it is bein
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="648">== Quest text ==
-At each elemental&apos;s heart sits a storm core — a knot of lightning bound in stone. Six of them, set side by side, will tell me where the disturbance is centered. I suspect I already know, $N, and I dearly hope that I am wrong.
+At each elemental&apos;s heart sits a storm core, a knot of lightning bound in stone. Six of them, set side by side, will tell me where the disturbance is centered. I suspect I already know, $N, and I dearly hope that I am wrong.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5504,7 +5504,7 @@ Each core leans the same way, like iron filings to a lodestone. They point south
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="773">== Quest text ==
-Among the elementals one burns brighter than the rest: Shardlord Kazzix, a storm given shoulders. Its heartshard would anchor every reading I have taken — if you can wrench it from the thing. It walks the far crags west of Stormcrag, beyond the second camp.
+Among the elementals one burns brighter than the rest: Shardlord Kazzix, a storm given shoulders. Its heartshard would anchor every reading I have taken, if you can wrench it from the thing. It walks the far crags west of Stormcrag, beyond the second camp.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5529,7 +5529,7 @@ Among the elementals one burns brighter than the rest: Shardlord Kazzix, a storm
 * Kazzix&apos;s Heartshard: 1
 
 == Completion ==
-The heartshard! Still crackling — magnificent. Take these leggings; I sized them off a guess and a prayer.
+The heartshard! Still crackling, magnificent. Take these leggings; I sized them off a guess and a prayer.
 
 == Rewards ==
 * [[Stormshard Leggings]]
@@ -5553,7 +5553,7 @@ The heartshard! Still crackling — magnificent. Take these leggings; I sized th
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="697">== Quest text ==
-When the wind comes off the southern peaks, $N, it carries chanting. The Wyrmcult no longer hides — they have raised tents below the Sanctum and they sing to what sleeps beneath it. Silence twelve zealots. Every voice stilled buys the mountain another night of sleep.
+When the wind comes off the southern peaks, $N, it carries chanting. The Wyrmcult no longer hides, they have raised tents below the Sanctum and they sing to what sleeps beneath it. Silence twelve zealots. Every voice stilled buys the mountain another night of sleep.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5578,7 +5578,7 @@ When the wind comes off the southern peaks, $N, it carries chanting. The Wyrmcul
 * Wyrmcult Zealot slain: 12
 
 == Completion ==
-The wind is quieter. But what troubles me is not the chanting, $N — it is that something may be chanting back.
+The wind is quieter. But what troubles me is not the chanting, $N, it is that something may be chanting back.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5597,7 +5597,7 @@ The wind is quieter. But what troubles me is not the chanting, $N — it is that
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="743">== Quest text ==
-The zealots move with purpose now — watches set, supplies counted, like soldiers before a siege. Cultists who organize are cultists taking orders, $N. Kill eight more and bring me four sets of their written orders. I would know the hand that commands them.
+The zealots move with purpose now, watches set, supplies counted, like soldiers before a siege. Cultists who organize are cultists taking orders, $N. Kill eight more and bring me four sets of their written orders. I would know the hand that commands them.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5642,7 +5642,7 @@ This script... I last saw its like in Morthen&apos;s grimoire, in Eastbrook. The
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="795">== Quest text ==
-The orders speak of a &quot;ring of phylacteries&quot; — soul-vessels, $N, set about the Sanctum to feed it. The cult&apos;s necromancers carry them like holy relics. Kill eight necromancers and bring me three phylacteries unbroken. I must know what souls they hold.
+The orders speak of a &quot;ring of phylacteries&quot;, soul-vessels, $N, set about the Sanctum to feed it. The cult&apos;s necromancers carry them like holy relics. Kill eight necromancers and bring me three phylacteries unbroken. I must know what souls they hold.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5668,7 +5668,7 @@ The orders speak of a &quot;ring of phylacteries&quot; — soul-vessels, $N, set
 * Ritual Phylactery: 3
 
 == Completion ==
-Light forgive us. These hold the dead of the Vale and the fen — every corpse the Gravecallers ever raised, harvested. They were never building an army, $N. They were gathering a tithe.
+Light forgive us. These hold the dead of the Vale and the fen, every corpse the Gravecallers ever raised, harvested. They were never building an army, $N. They were gathering a tithe.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5687,7 +5687,7 @@ Light forgive us. These hold the dead of the Vale and the fen — every corpse t
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="690">== Quest text ==
-East of the Sanctum road lies an old battlefield — the vanguard of the last army that tried to take this mountain, two hundred years buried. The cult has called them up, bones in rusted plate. Put twelve revenants back in the ground, $N.
+East of the Sanctum road lies an old battlefield, the vanguard of the last army that tried to take this mountain, two hundred years buried. The cult has called them up, bones in rusted plate. Put twelve revenants back in the ground, $N.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5712,7 +5712,7 @@ East of the Sanctum road lies an old battlefield — the vanguard of the last ar
 * Boneclad Revenant slain: 12
 
 == Completion ==
-They were soldiers once, like mine. Whatever called them up has no respect for the dead — or a use for them I do not care to learn.
+They were soldiers once, like mine. Whatever called them up has no respect for the dead, or a use for them I do not care to learn.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5731,7 +5731,7 @@ They were soldiers once, like mine. Whatever called them up has no respect for t
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="772">== Quest text ==
-The revenants are forming ranks, $N — true ranks, shield-lines and columns, drilling with no drummer. They are being mustered for the Sanctum gate. Break fourteen more before that march begins, and Highwatch will owe you its best steel.
+The revenants are forming ranks, $N, true ranks, shield-lines and columns, drilling with no drummer. They are being mustered for the Sanctum gate. Break fourteen more before that march begins, and Highwatch will owe you its best steel.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5756,7 +5756,7 @@ The revenants are forming ranks, $N — true ranks, shield-lines and columns, dr
 * Boneclad Revenant slain: 14
 
 == Completion ==
-The fields lie still again. Take this — it was made for the defenders of the wall, and no one has earned it more.
+The fields lie still again. Take this, it was made for the defenders of the wall, and no one has earned it more.
 
 == Rewards ==
 * [[Boneplate Vest]]
@@ -5780,7 +5780,7 @@ The fields lie still again. Take this — it was made for the defenders of the w
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="766">== Quest text ==
-It is time you knew the whole of it, $N. The Gravecallers serve Korzul the Gravewyrm — an ancient dragon sealed beneath this mountain — and every soul they have stolen since Eastbrook is a tithe poured into its waking. On the Sanctum Approach the cult has laid sigils to thin the seal. Bring me three; I would read the rite they are working.
+It is time you knew the whole of it, $N. The Gravecallers serve Korzul the Gravewyrm, an ancient dragon sealed beneath this mountain, and every soul they have stolen since Eastbrook is a tithe poured into its waking. On the Sanctum Approach the cult has laid sigils to thin the seal. Bring me three; I would read the rite they are working.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5824,7 +5824,7 @@ Yes... a waking-litany, generations in the writing. They are close, $N. Closer t
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="774">== Quest text ==
-The seal on the Sanctum was wrought with mountain-fire, and only mountain-fire will let us pass without tearing it wide open. The stormcrag elementals carry embers of that first forging in their cores. Bring me five Blessed Embers, $N — for if the cult opens that gate first, they will not be careful, and the Wyrm will not wake gently.
+The seal on the Sanctum was wrought with mountain-fire, and only mountain-fire will let us pass without tearing it wide open. The stormcrag elementals carry embers of that first forging in their cores. Bring me five Blessed Embers, $N, for if the cult opens that gate first, they will not be careful, and the Wyrm will not wake gently.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5849,7 +5849,7 @@ The seal on the Sanctum was wrought with mountain-fire, and only mountain-fire w
 * Blessed Embers: 5
 
 == Completion ==
-They burn blue and clean — the mountain remembers its old oath. With these I can unbind the gate for us alone.
+They burn blue and clean, the mountain remembers its old oath. With these I can unbind the gate for us alone.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5868,7 +5868,7 @@ They burn blue and clean — the mountain remembers its old oath. With these I c
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="894">== Quest text ==
-Last night the whole cult camp knelt at once, $N — every zealot, every necromancer, all facing the Sanctum. Korzul speaks to them in their sleep now; Vael heard the same voice in the fen, and Morthen before him. Cut the congregation down — ten zealots, six necromancers — before that voice has hands enough to pull the gate open itself.
+Last night the whole cult camp knelt at once, $N, every zealot, every necromancer, all facing the Sanctum. Korzul speaks to them in their sleep now; Vael heard the same voice in the fen, and Morthen before him. Cut the congregation down, ten zealots, six necromancers, before that voice has hands enough to pull the gate open itself.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5894,7 +5894,7 @@ Last night the whole cult camp knelt at once, $N — every zealot, every necroma
 * Wyrmcult Necromancer slain: 6
 
 == Completion ==
-The kneeling has stopped. We have not silenced the voice, $N — only thinned its choir. It must be enough.
+The kneeling has stopped. We have not silenced the voice, $N, only thinned its choir. It must be enough.
 
 == Rewards ==
 * [[Zealotsbane Blade]]
@@ -5918,7 +5918,7 @@ The kneeling has stopped. We have not silenced the voice, $N — only thinned it
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="821">== Quest text ==
-This is the last threshold, $N. The gate of the Gravewyrm Sanctum was locked with a keystone, and the cult shattered it into shards rather than see it turned against them. The shards lie scattered in the gate plaza, under the eyes of the boneclad dead. Bring me three, and I will open the way the Light intended — quietly.
+This is the last threshold, $N. The gate of the Gravewyrm Sanctum was locked with a keystone, and the cult shattered it into shards rather than see it turned against them. The shards lie scattered in the gate plaza, under the eyes of the boneclad dead. Bring me three, and I will open the way the Light intended, quietly.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5943,7 +5943,7 @@ This is the last threshold, $N. The gate of the Gravewyrm Sanctum was locked wit
 * Sanctum Key Shard: 3
 
 == Completion ==
-The shards sit true... and the gate knows its key. The way below stands open, $N. Gather the strongest companions you can find — what comes next, no one should face alone.
+The shards sit true... and the gate knows its key. The way below stands open, $N. Gather the strongest companions you can find, what comes next, no one should face alone.
 [[Category:Quests]]
 [[Category:Thornpeak Heights]]
 </text>
@@ -5962,7 +5962,7 @@ The shards sit true... and the gate knows its key. The way below stands open, $N
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="906">== Quest text ==
-My last sweep of the Sanctum&apos;s mouth found chains, $N — chains thick as a ship&apos;s mast, and something ogre-shaped straining inside them. The cult bound a champion at the threshold: Korgath, fed on rage for longer than either of us has been alive. Take four companions and put him down — and when the chains come off, do not let him corner you.
+My last sweep of the Sanctum&apos;s mouth found chains, $N, chains thick as a ship&apos;s mast, and something ogre-shaped straining inside them. The cult bound a champion at the threshold: Korgath, fed on rage for longer than either of us has been alive. Take four companions and put him down, and when the chains come off, do not let him corner you.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -5987,7 +5987,7 @@ My last sweep of the Sanctum&apos;s mouth found chains, $N — chains thick as a
 * Korgath the Bound slain: 1
 
 == Completion ==
-Korgath, broken at last. Even his chains deserved a kinder end than that. The wraps are yours — wear them past the threshold he kept.
+Korgath, broken at last. Even his chains deserved a kinder end than that. The wraps are yours, wear them past the threshold he kept.
 
 == Rewards ==
 * [[Korgath&apos;s Chainwraps]]
@@ -6011,7 +6011,7 @@ Korgath, broken at last. Even his chains deserved a kinder end than that. The wr
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="878">== Quest text ==
-Every thread we have followed — Morthen, Vael, the phylacteries — was spun by one hand: Grand Necromancer Velkhar, first of the Gravecallers, keeper of the waking rite. He stands in the ritual vault below, pouring two lands&apos; worth of stolen souls into the Wyrm. End him, $N, and the tithe ends with him.
+Every thread we have followed, Morthen, Vael, the phylacteries, was spun by one hand: Grand Necromancer Velkhar, first of the Gravecallers, keeper of the waking rite. He stands in the ritual vault below, pouring two lands&apos; worth of stolen souls into the Wyrm. End him, $N, and the tithe ends with him.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -6036,7 +6036,7 @@ Every thread we have followed — Morthen, Vael, the phylacteries — was spun b
 * Grand Necromancer Velkhar slain: 1
 
 == Completion ==
-Velkhar is dead, and the rite is headless. But you felt it down there, did you not? The souls are already spent — the Wyrm is no longer asleep.
+Velkhar is dead, and the rite is headless. But you felt it down there, did you not? The souls are already spent, the Wyrm is no longer asleep.
 
 == Rewards ==
 * [[Boneguard Breastplate]]
@@ -6060,7 +6060,7 @@ Velkhar is dead, and the rite is headless. But you felt it down there, did you n
       <model>wikitext</model>
       <format>text/x-wiki</format>
       <text xml:space="preserve" bytes="987">== Quest text ==
-There is no rite left to stop, $N — only the Wyrm itself, half-woken in its hollow, gorged on the dead of the Vale and the fen. If it rises, the wall, the marsh, Eastbrook — everything we have defended falls in a single night. Take your companions into the Wyrm&apos;s Hollow and finish what we began in a chapel yard so long ago. The Light has carried you this far; carry it the rest of the way.
+There is no rite left to stop, $N, only the Wyrm itself, half-woken in its hollow, gorged on the dead of the Vale and the fen. If it rises, the wall, the marsh, Eastbrook, everything we have defended falls in a single night. Take your companions into the Wyrm&apos;s Hollow and finish what we began in a chapel yard so long ago. The Light has carried you this far; carry it the rest of the way.
 
 == Facts ==
 {| class=&quot;wikitable article-facts&quot;
@@ -6085,7 +6085,7 @@ There is no rite left to stop, $N — only the Wyrm itself, half-woken in its ho
 * Korzul the Gravewyrm slain: 1
 
 == Completion ==
-It is over. The dead of three lands may rest, the mountain sleeps unhaunted — and it is your name, $N, that every bell from here to Eastbrook rings tonight.
+It is over. The dead of three lands may rest, the mountain sleeps unhaunted, and it is your name, $N, that every bell from here to Eastbrook rings tonight.
 
 == Rewards ==
 * [[Gravewyrm Scale Hauberk]]

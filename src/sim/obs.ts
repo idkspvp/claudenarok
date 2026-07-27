@@ -137,7 +137,7 @@ const NEARBY_MOBS = 5;
 export function obsSize(): number {
   // The trailing `QUEST_ORDER.length * 2` quest slots are gone with the quest
   // system. This SHRINKS the observation vector, so any trained policy or replay
-  // buffer sized against the old layout has to be regenerated — see python/.
+  // buffer sized against the old layout has to be regenerated, see python/.
   return 16 + ABILITY_SLOTS * 2 + 9 + NEARBY_MOBS * 6 + 5;
 }
 

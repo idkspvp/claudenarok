@@ -1,5 +1,5 @@
 #!/bin/bash
-# Claudenarok Online — EC2 first-boot setup (cloud-init user data).
+# Claudenarok Online, EC2 first-boot setup (cloud-init user data).
 #
 # Target: Ubuntu 24.04 LTS arm64 (t4g.small or similar).
 # Fill in the two variables below, then paste this whole file into the
@@ -14,7 +14,7 @@
 # ---------------------------------------------------------------------------
 # Your game domain with an A record pointing at this instance's Elastic IP,
 # e.g. "play.example.com". Leave empty to serve plain HTTP on port 80 (test
-# by IP first, set the domain later — see DEPLOY.md).
+# by IP first, set the domain later, see DEPLOY.md).
 DOMAIN=""
 
 # Admin dashboard domain (e.g. "admin.worldofclaudecraft.com"), also with an
@@ -156,4 +156,4 @@ ROTATE
 
 echo "=== Claudenarok Online setup finished: $(date -u) ==="
 echo "Game:   http://localhost:8787 (behind Caddy on ${SITE})"
-echo "Status: $(curl -s --max-time 5 http://localhost:8787/api/status || echo 'not up yet — check: docker compose logs game')"
+echo "Status: $(curl -s --max-time 5 http://localhost:8787/api/status || echo 'not up yet, check: docker compose logs game')"

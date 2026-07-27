@@ -1,4 +1,4 @@
-# Claudenarok Online — Graphics Overhaul Implementation Plan ("Minecraft → UE5 showcase")
+# Claudenarok Online, Graphics Overhaul Implementation Plan ("Minecraft → UE5 showcase")
 
 Target: three@0.165 (confirmed; GTAOPass/SSAOPass/SMAAPass/UnrealBloomPass/OutputPass/FXAAShader/VignetteShader all present in `node_modules/three/examples/jsm/`), fully procedural, 60fps on a decent laptop, `?lowgfx` stays playable. Current renderer is a single forward pass, Lambert everywhere, vertex-colored 440-seg terrain, Phong water, canvas sky dome.
 
@@ -6,7 +6,7 @@ Plan is ordered as 11 safe, independently screenshot-verifiable steps. Verify ea
 
 ---
 
-## Step 0 — `src/render/gfx.ts` (NEW, ~120 lines): quality tiers + shared uniforms
+## Step 0, `src/render/gfx.ts` (NEW, ~120 lines): quality tiers + shared uniforms
 
 Everything below keys off one module instead of scattered `LOW_GFX` ternaries.
 
@@ -52,7 +52,7 @@ Renderer ticks `sharedUniforms.uTime.value = this.time` once per frame in `sync(
 
 ---
 
-## Step 1 — `src/render/post.ts` (NEW, ~150 lines) + hookup in `renderer.ts`
+## Step 1, `src/render/post.ts` (NEW, ~150 lines) + hookup in `renderer.ts`
 
 **Chain:** `RenderPass → [GTAOPass] → UnrealBloomPass → OutputPass → GradePass(renderToScreen)`.
 
@@ -81,15 +81,15 @@ export function buildComposer(webgl: THREE.WebGLRenderer, scene: THREE.Scene, ca
   const bloom = new UnrealBloomPass(size, 0.32 /*strength: SUBTLE*/, 0.55 /*radius*/, 0.85 /*threshold*/);
   composer.addPass(bloom);
   composer.addPass(new OutputPass()); // ACES tonemap (reads renderer.toneMapping) + sRGB encode
-  const grade = new ShaderPass(GradeShader); // below — runs in display space, fine for lift/gamma/gain
+  const grade = new ShaderPass(GradeShader); // below, runs in display space, fine for lift/gamma/gain
   composer.addPass(grade);
   return { composer, bloom, gtao, grade };
 }
 ```
 
-**AA tradeoff (decided):** MSAA `samples: 4` on the composer's HalfFloat target. It resolves geometry edges before post, costs ~1ms on integrated GPUs at 1080p×1.75, and unlike FXAA doesn't smear the crisp low-poly silhouettes. FXAA (`ShaderPass(FXAAShader)` appended after grade) only as fallback if `!webgl.capabilities.isWebGL2` (rare). SMAA rejected: 3 extra passes for marginal gain here. lowgfx keeps the current direct `webgl.render()` with built-in `antialias:true` — zero new cost.
+**AA tradeoff (decided):** MSAA `samples: 4` on the composer's HalfFloat target. It resolves geometry edges before post, costs ~1ms on integrated GPUs at 1080p×1.75, and unlike FXAA doesn't smear the crisp low-poly silhouettes. FXAA (`ShaderPass(FXAAShader)` appended after grade) only as fallback if `!webgl.capabilities.isWebGL2` (rare). SMAA rejected: 3 extra passes for marginal gain here. lowgfx keeps the current direct `webgl.render()` with built-in `antialias:true`, zero new cost.
 
-**GradeShader** (inline in post.ts) — lift/gamma/gain + saturation + vignette + faint filmic grain:
+**GradeShader** (inline in post.ts), lift/gamma/gain + saturation + vignette + faint filmic grain:
 
 ```glsl
 uniform sampler2D tDiffuse; uniform float uTime;
@@ -115,7 +115,7 @@ void main() {
 
 ---
 
-## Step 2 — Lighting rebalance + IBL (renderer.ts)
+## Step 2, Lighting rebalance + IBL (renderer.ts)
 
 PBR materials (coming in Steps 4-8) need an environment. Generate it from the procedural sky itself:
 
@@ -135,14 +135,14 @@ Rebalance (IBL now supplies ambient specular/diffuse):
 - `hemi.intensity: 1.0 → 0.45` (keep its ground-bounce green `0x46603a`).
 - `sun.intensity: 2.2 → 2.8`, color `0xfff0cd → 0xffedd0`.
 - Shadows: tighten ortho `S = 75 → 50` (follow-cam already tracks player; 50 covers the 55-unit nameplate range), `normalBias 0.02 → 0.05` (Standard materials show more acne), `shadow.radius = 4` with PCFSoft, mapSize stays 4096 (tier-gated 1024 low).
-- In `updateAmbience()`: when entering dungeon, also drop `scene.environmentIntensity` to 0.15 and `sun.intensity` to 0.3 (restore on exit) — crypt currently leaks full sunlight.
+- In `updateAmbience()`: when entering dungeon, also drop `scene.environmentIntensity` to 0.15 and `sun.intensity` to 0.3 (restore on exit), crypt currently leaks full sunlight.
 - **God rays (optional, cheap):** 3 elongated additive sprites (stretched 1×8 gradient canvas) parented near the camera, aligned to `sunDir`, opacity ∝ `max(0, dot(camForward, sunDir))`, outdoor-only. ~20 lines next to the existing sunSprites code; flag behind `TIER !== 'low'`.
 
 **Screenshot check:** props/characters get subtle sky reflection, shadows still tight and stable.
 
 ---
 
-## Step 3 — `src/render/textures.ts`: procedural normal/roughness generators (+ richer albedo)
+## Step 3, `src/render/textures.ts`: procedural normal/roughness generators (+ richer albedo)
 
 Add a generic height→normal converter, then per-surface generators. All canvas, no assets:
 
@@ -165,22 +165,22 @@ function heightToNormal(heightCanvas: HTMLCanvasElement, strength = 2.0): THREE.
 ```
 
 New exports (each = height canvas drawn with existing `rnd()` patterns, returned as `{ map, normalMap, roughnessMap? }`):
-- `barkMaps()` — vertical ridge height field → strong normal; roughness 0.95.
-- `stoneMaps()` — block pattern height (reuse stoneTexture layout) → mortar grooves.
-- `roofMaps()` — shingle rows → stepped normals.
-- `groundSplatMaps()` — **four tiling albedo+normal pairs**: grass (blade clumps), dirt (pebbles+cracks), rock (fractured), sand (ripples). 256² each.
-- `waterNormalMaps()` — two differently-scaled blobby normal canvases (replace `waterNormalish`, real normal-encoded via heightToNormal).
-- `foliageCardTexture()` — alpha leaf-cluster card (radial leaf strokes, alpha falloff) for tree silhouettes.
+- `barkMaps()`, vertical ridge height field → strong normal; roughness 0.95.
+- `stoneMaps()`, block pattern height (reuse stoneTexture layout) → mortar grooves.
+- `roofMaps()`, shingle rows → stepped normals.
+- `groundSplatMaps()`, **four tiling albedo+normal pairs**: grass (blade clumps), dirt (pebbles+cracks), rock (fractured), sand (ripples). 256² each.
+- `waterNormalMaps()`, two differently-scaled blobby normal canvases (replace `waterNormalish`, real normal-encoded via heightToNormal).
+- `foliageCardTexture()`, alpha leaf-cluster card (radial leaf strokes, alpha falloff) for tree silhouettes.
 
-No visual change yet (consumed by later steps) — verify via a tiny dev page or just compile.
+No visual change yet (consumed by later steps), verify via a tiny dev page or just compile.
 
 ---
 
-## Step 4 — `src/render/terrain.ts` (NEW, extract `buildTerrain` from renderer.ts): splat + chunks + biome hook
+## Step 4, `src/render/terrain.ts` (NEW, extract `buildTerrain` from renderer.ts): splat + chunks + biome hook
 
 **4a. Chunked meshes (this is also the 3x-world enabler).** Replace the single 440² plane with an N×N grid of chunks (chunk size 60 u). Per-chunk `PlaneGeometry` with LOD by distance-at-build from origin hub *ring*: near spacing 1.2u, far 3.5u (vertex counts: ~2500/chunk near, ~300 far). Each chunk gets a correct bounding box → **frustum culling now actually works** (today the whole terrain is one draw, always submitted). 360-world: 6×6 = 36 chunks; 3x-area world (~624): 11×11 = 121 chunks, ~25-40 in frustum. Skirt each chunk edge 0.3u down to hide LOD cracks (cheaper than stitching).
 
-**4b. Splat via `onBeforeCompile` on `MeshStandardMaterial`.** Keep vertex colors as the *tint* layer (this is the biome hook — see 4d). Precompute splat weights on CPU in the existing vertex loop (slope/height/roadDistance already computed there) into a vec4 attribute:
+**4b. Splat via `onBeforeCompile` on `MeshStandardMaterial`.** Keep vertex colors as the *tint* layer (this is the biome hook, see 4d). Precompute splat weights on CPU in the existing vertex loop (slope/height/roadDistance already computed there) into a vec4 attribute:
 
 ```ts
 // in the vertex loop: w = [grass, dirt, rock, sand], normalized
@@ -207,9 +207,9 @@ mat.onBeforeCompile = (sh) => {
 };
 ```
 
-**4c. Terrain normal map (macro relief):** one 2048² DataTexture computed from `terrainHeight` (sample every world/2048 units, same heightToNormal math), applied as `normalMap` with `normalScale (0.6)` in world-planar UV. Per-layer detail normals: only rock gets one (weighted by `vSplat.z` via a second `normal_fragment_maps` injection) — full 4-layer normal blending isn't worth the ALU.
+**4c. Terrain normal map (macro relief):** one 2048² DataTexture computed from `terrainHeight` (sample every world/2048 units, same heightToNormal math), applied as `normalMap` with `normalScale (0.6)` in world-planar UV. Per-layer detail normals: only rock gets one (weighted by `vSplat.z` via a second `normal_fragment_maps` injection), full 4-layer normal blending isn't worth the ALU.
 
-**4d. Biome hook (design for data layer):** terrain.ts consumes exactly one function — `biomeAt(x, z): BiomeDef` — to be exported from `src/sim/world.ts` when zones land:
+**4d. Biome hook (design for data layer):** terrain.ts consumes exactly one function, `biomeAt(x, z): BiomeDef`, to be exported from `src/sim/world.ts` when zones land:
 
 ```ts
 export interface BiomeDef {
@@ -226,7 +226,7 @@ CPU vertex loop calls `biomeAt` for tint colors and splat-weight curve tweaks (m
 
 ---
 
-## Step 5 — `src/render/water.ts` (NEW, ~140 lines): custom ShaderMaterial
+## Step 5, `src/render/water.ts` (NEW, ~140 lines): custom ShaderMaterial
 
 Replace the Phong plane. Keep one plane but with 192×192 segments and a CPU-precomputed per-vertex `aShoreDepth = WATER_LEVEL - terrainHeight(x,z,seed)`:
 
@@ -252,11 +252,11 @@ gl_FragColor = vec4(col, mix(0.78, 0.95, depth));              // transparent ne
 
 Uniforms: the two Step-3 water normal textures, `uSunDir` (from renderer's sunDir), `uSkyColor` matching sky horizon, shared `uTime`. `transparent: true, depthWrite: false`. lowgfx: keep today's Phong path (factory switch in water.ts).
 
-**Screenshot check:** Mirror Lake — foam ring along shore, sun glints streaking, fresnel brightening at grazing angles.
+**Screenshot check:** Mirror Lake, foam ring along shore, sun glints streaking, fresnel brightening at grazing angles.
 
 ---
 
-## Step 6 — Sky & atmosphere (renderer.ts + textures.ts)
+## Step 6, Sky & atmosphere (renderer.ts + textures.ts)
 
 Replace the 4×256 gradient texture with a shader dome (`ShaderMaterial`, `side: BackSide, fog: false, depthWrite: false`):
 
@@ -273,13 +273,13 @@ void main() {
 }
 ```
 
-Horizon colors become a uniform fed from `biomeAt(player).skyHorizon`. Re-run the Step-2 PMREM capture once after the dome material is live (order: build sky → PMREM). Clouds: keep sprites but generate 3 cloud canvas variants instead of 1, scale opacity by altitude, and add a second slow far layer (10 sprites at y≈140, opacity 0.35). Fog: outdoor values move to BiomeDef (vale keeps `0xa6c6e0, 130, 470`); underwater/dungeon presets stay hardcoded. Keep lighting static (no day/night) but bias everything slightly golden-hour: sun elevation already low-ish at (90,140,50) — good as is.
+Horizon colors become a uniform fed from `biomeAt(player).skyHorizon`. Re-run the Step-2 PMREM capture once after the dome material is live (order: build sky → PMREM). Clouds: keep sprites but generate 3 cloud canvas variants instead of 1, scale opacity by altitude, and add a second slow far layer (10 sprites at y≈140, opacity 0.35). Fog: outdoor values move to BiomeDef (vale keeps `0xa6c6e0, 130, 470`); underwater/dungeon presets stay hardcoded. Keep lighting static (no day/night) but bias everything slightly golden-hour: sun elevation already low-ish at (90,140,50), good as is.
 
 **Screenshot check:** horizon no longer a flat gradient stripe; sun side of sky visibly warmer.
 
 ---
 
-## Step 7 — Vegetation: wind, variation, density (extract `buildDecorations`/`buildGrass` → `src/render/foliage.ts`)
+## Step 7, Vegetation: wind, variation, density (extract `buildDecorations`/`buildGrass` → `src/render/foliage.ts`)
 
 **Wind via onBeforeCompile** (shared helper, applied to grass material + pine/oak foliage materials, NOT trunks/rocks):
 
@@ -305,9 +305,9 @@ export function addWind(mat: THREE.Material, strength: number): void {
 
 **instanceColor variation:** after filling matrices, `im.instanceColor = new THREE.InstancedBufferAttribute(...)` with per-instance HSL jitter (`color.offsetHSL((r-0.5)*0.06, (r2-0.5)*0.15, (r3-0.5)*0.08)`) for pine cones, oak blobs, rocks, grass. Free visually-huge win; works with Lambert and Standard automatically.
 
-**Trees:** pines → 8-segment cones with a slight droop (after creating each cone geometry, push rim vertices down: `pos.y -= 0.18 * (radialDist/maxR)^2`, computed once); add one crossed alpha-card ring per pine (2 quads with `foliageCardTexture`, `alphaTest 0.4`) at mid-canopy for a fluffier silhouette — one extra InstancedMesh (2 quads × N). Oaks → 4 blobs instead of 2, each `SphereGeometry(…,8,6)` with one-time per-vertex radial noise (`v *= 0.85 + 0.3*hash(v)`) so they're not perfect spheres.
+**Trees:** pines → 8-segment cones with a slight droop (after creating each cone geometry, push rim vertices down: `pos.y -= 0.18 * (radialDist/maxR)^2`, computed once); add one crossed alpha-card ring per pine (2 quads with `foliageCardTexture`, `alphaTest 0.4`) at mid-canopy for a fluffier silhouette, one extra InstancedMesh (2 quads × N). Oaks → 4 blobs instead of 2, each `SphereGeometry(…,8,6)` with one-time per-vertex radial noise (`v *= 0.85 + 0.3*hash(v)`) so they're not perfect spheres.
 
-**Grass — dense ring with rebuild:** replace whole-world placement with a player-centered ring. One InstancedMesh sized for the max count (`(2*R/step)² * 0.5` ≈ 3000 at R=70/step=1.8); regenerate matrices when player moves >12u from last build origin (deterministic from grid hash, so it's stable — same tufts reappear). Distance fade in the grass material via onBeforeCompile fragment: `diffuseColor.a *= smoothstep(uFadeFar, uFadeFar*0.75, dist(vWPos.xz, uPlayer))` combined with alphaTest. Rebuild cost ~1ms, amortized rare. This is what keeps the **3x world from tripling grass cost — it's O(radius²), not O(world²)**.
+**Grass, dense ring with rebuild:** replace whole-world placement with a player-centered ring. One InstancedMesh sized for the max count (`(2*R/step)² * 0.5` ≈ 3000 at R=70/step=1.8); regenerate matrices when player moves >12u from last build origin (deterministic from grid hash, so it's stable, same tufts reappear). Distance fade in the grass material via onBeforeCompile fragment: `diffuseColor.a *= smoothstep(uFadeFar, uFadeFar*0.75, dist(vWPos.xz, uPlayer))` combined with alphaTest. Rebuild cost ~1ms, amortized rare. This is what keeps the **3x world from tripling grass cost, it's O(radius²), not O(world²)**.
 
 **Decorations at 3x world:** bucket instances into per-region InstancedMeshes (e.g., 9 buckets) so frustum culling drops off-screen forests; tree placement already deterministic per-cell.
 
@@ -315,32 +315,32 @@ export function addWind(mat: THREE.Material, strength: number): void {
 
 ---
 
-## Step 8 — Rigs & props material upgrade (`models.ts`, `props.ts`)
+## Step 8, Rigs & props material upgrade (`models.ts`, `props.ts`)
 
-- `models.ts box()` and all `MeshLambertMaterial` constructions → `surfaceMat()` from Step 0 (Standard, roughness 0.8 skin/cloth, 0.45 + small `metalness 0.6` for blades/mace heads — sword blades will pick up the env map and actually gleam).
-- **Subtle rim:** one shared onBeforeCompile snippet on rig materials: `totalEmissiveRadiance += vec3(0.5,0.6,0.8) * 0.12 * pow(1.0 - saturate(dot(normal, normalize(vViewPosition))), 3.0);` — sells silhouettes against dark ground, costs nothing.
-- **Rounder where cheap:** humanoid torso `BoxGeometry → CapsuleGeometry(0.42, 0.5, 2, 8)` scaled, head box → `SphereGeometry(0.27, 10, 8)` flattened (keep hair caps boxy — reads as stylized, not Minecraft), limbs stay boxes (animation pivots unchanged, `RigParts` untouched). Beasts: keep boxes, they read fine with normals + rim.
-- **Team/class accents:** belt + shoulder pads get `emissive: classColor, emissiveIntensity: 0.25` — bloom gives a faint class-colored glint.
+- `models.ts box()` and all `MeshLambertMaterial` constructions → `surfaceMat()` from Step 0 (Standard, roughness 0.8 skin/cloth, 0.45 + small `metalness 0.6` for blades/mace heads, sword blades will pick up the env map and actually gleam).
+- **Subtle rim:** one shared onBeforeCompile snippet on rig materials: `totalEmissiveRadiance += vec3(0.5,0.6,0.8) * 0.12 * pow(1.0 - saturate(dot(normal, normalize(vViewPosition))), 3.0);`, sells silhouettes against dark ground, costs nothing.
+- **Rounder where cheap:** humanoid torso `BoxGeometry → CapsuleGeometry(0.42, 0.5, 2, 8)` scaled, head box → `SphereGeometry(0.27, 10, 8)` flattened (keep hair caps boxy, reads as stylized, not Minecraft), limbs stay boxes (animation pivots unchanged, `RigParts` untouched). Beasts: keep boxes, they read fine with normals + rim.
+- **Team/class accents:** belt + shoulder pads get `emissive: classColor, emissiveIntensity: 0.25`, bloom gives a faint class-colored glint.
 - **props.ts:** swap materials to Step-3 map+normal pairs (`roofMaps`, `wallMaps` via heightToNormal on the timber pattern, `stoneMaps`, bark). Then **merge static props**: import `mergeGeometries` from `three/examples/jsm/utils/BufferGeometryUtils.js`, bake each prop group's world transform into its geometry, and merge per-material → the ~300 individual prop draws collapse to **~12 draws** (biggest single draw-call win in the whole plan; flames/lights stay separate).
 - **Point-light budget:** keep building all PointLights but each frame set `light.visible = distSq(light, player) < 55²` and cap to nearest `GFX.maxPointLights` (sort is over ~20 lights, trivial). Forward renderer shader cost stays bounded.
 
-**Screenshot check:** town at dusk angle — roofs/walls show relief, blades gleam, fire lights pool correctly.
+**Screenshot check:** town at dusk angle, roofs/walls show relief, blades gleam, fire lights pool correctly.
 
 ---
 
-## Step 9 — VFX bloom tuning (`vfx.ts`, renderer.ts portals/flames)
+## Step 9, VFX bloom tuning (`vfx.ts`, renderer.ts portals/flames)
 
 With threshold 0.85 bloom, push HDR values where glow is wanted (composer target is HalfFloat, colors >1 are preserved):
 - Projectile core spawn: `this.tmpColor.multiplyScalar(2.5)` for the bright core particle (line ~271), 1.4 for trail; nova/impact bursts ×1.6; heal/levelup pillars ×1.8.
-- Points fragment already outputs additive discs — no shader change needed, just HDR colors.
+- Points fragment already outputs additive discs, no shader change needed, just HDR colors.
 - Portal swirl `MeshBasicMaterial.color` ×2 (`setHex(tint)` → `.multiplyScalar(2)`), flame cone emissiveIntensity 1.4 → 2.2, kobold candle 1.2 → 2.0, staff orbs 0.6 → 1.5, sun sprites: drop the big 190-radius halo opacity to 0.35 (bloom now does that job).
-- Selection ring + quest sparkles: ×1.5 — subtle gold glow.
+- Selection ring + quest sparkles: ×1.5, subtle gold glow.
 
 **Screenshot check:** fireball at night-ish dungeon = glowing comet w/ halo; no full-screen white blowout (if so, raise threshold to 0.95 before touching strength).
 
 ---
 
-## Step 10 — Perf budget, lowgfx matrix, verification
+## Step 10, Perf budget, lowgfx matrix, verification
 
 **Frame budget @ 60fps (16.6ms), 1080p × pixelRatio 1.75, decent laptop (Apple M-series/GTX1650-class):**
 
@@ -348,7 +348,7 @@ With threshold 0.85 bloom, push HDR values where glow is wanted (composer target
 |---|---|
 | Scene render (forward, shadows) | ≤ 7ms |
 | Shadow map pass | ≤ 1.5ms (tight 50u ortho, 4096) |
-| GTAO (ultra only) | ≤ 3ms — else cut |
+| GTAO (ultra only) | ≤ 3ms, else cut |
 | Bloom | ≤ 1.2ms |
 | Output + grade | ≤ 0.5ms |
 
@@ -356,13 +356,13 @@ With threshold 0.85 bloom, push HDR values where glow is wanted (composer target
 - Terrain chunks: 36 → 121 built, ~25-40 in frustum; ≤ 350k tris visible.
 - Trees/rocks: 8 instanced draws → ~30 (region buckets); ~150k tris.
 - Grass ring: 1 draw, ~3000 instances × 4 tris = 12k tris (constant regardless of world size).
-- Merged props: ~12 draws; rigs ~60 entities × ~15 meshes ≈ 900 draws worst case in town — material dedupe makes these cheap (same program/uniform sets); if profiling shows CPU-bound, follow-up: per-rig `mergeGeometries` of static parts (out of scope now).
+- Merged props: ~12 draws; rigs ~60 entities × ~15 meshes ≈ 900 draws worst case in town, material dedupe makes these cheap (same program/uniform sets); if profiling shows CPU-bound, follow-up: per-rig `mergeGeometries` of static parts (out of scope now).
 - Water 1, sky 1, sprites ~35, VFX 1. **Total target: < 300 draws typical, < 1.2M tris visible.**
 
 **3x world doesn't 3x cost because:** terrain/tree cost is frustum-culled chunks (camera sees the same area), grass is player-radius, props merge per settlement (each hub ~12 draws, culled by bounding sphere), water plane vertex count fixed, fog far plane 470 unchanged.
 
-**`?lowgfx` (must remain playable on weak iGPUs):** no composer (direct render, MSAA via `antialias:true`), pixelRatio 1, Lambert materials (factory switch — splat/wind/rim/IBL all skipped since they hang off Standard/onBeforeCompile registrations that gfx.ts gates), vertex-color terrain (current look) but still chunked (culling helps low most), 1024 shadows (consider shadows fully off if <50fps), grass R=45 step 3.2, 10 clouds, 3 point lights, Phong water, canvas-gradient sky. Net: lowgfx gets *faster* than today (chunk culling + pixelRatio already 1).
+**`?lowgfx` (must remain playable on weak iGPUs):** no composer (direct render, MSAA via `antialias:true`), pixelRatio 1, Lambert materials (factory switch, splat/wind/rim/IBL all skipped since they hang off Standard/onBeforeCompile registrations that gfx.ts gates), vertex-color terrain (current look) but still chunked (culling helps low most), 1024 shadows (consider shadows fully off if <50fps), grass R=45 step 3.2, 10 clouds, 3 point lights, Phong water, canvas-gradient sky. Net: lowgfx gets *faster* than today (chunk culling + pixelRatio already 1).
 
-**Verification cadence:** every step lands as its own commit; screenshot from 3 fixed vantage points (town center, lake shore, crypt interior — add a tiny `?campos=` dev param to place the camera deterministically for the E2E screenshot script) plus `webgl.info.render` (calls/triangles) logged once on demand via `?gfxstats`. Steps 1-2 before 4-8 so material migration is judged under final lighting; Step 3 is pure additions; each later step touches one file cluster and can be reverted independently.
+**Verification cadence:** every step lands as its own commit; screenshot from 3 fixed vantage points (town center, lake shore, crypt interior, add a tiny `?campos=` dev param to place the camera deterministically for the E2E screenshot script) plus `webgl.info.render` (calls/triangles) logged once on demand via `?gfxstats`. Steps 1-2 before 4-8 so material migration is judged under final lighting; Step 3 is pure additions; each later step touches one file cluster and can be reverted independently.
 
 **Files: new** `src/render/gfx.ts`, `post.ts`, `terrain.ts`, `water.ts`, `foliage.ts`; **modified** `renderer.ts` (slims down: terrain/grass/deco builders move out), `textures.ts`, `models.ts`, `props.ts`, `vfx.ts`. No sim/`src/sim/*` changes except the future `biomeAt()` export hook in `src/sim/world.ts` (zone work owns it; renderer is ready the day it returns more than 'vale').

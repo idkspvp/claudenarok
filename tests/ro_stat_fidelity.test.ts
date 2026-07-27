@@ -125,7 +125,7 @@ describe('what we have NOT matched yet', () => {
     // Ragnarok resolves a swing as HIT against FLEE, not as a flat dodge chance:
     //   HIT  = 175 + BaseLv + DEX + floor(LUK/3)
     //   FLEE = 100 + BaseLv + AGI + floor(LUK/5)
-    // Neither exists here yet — the engine still rolls a flat dodge fraction, and
+    // Neither exists here yet, the engine still rolls a flat dodge fraction, and
     // DEX buys accuracy nowhere. Both arrive with the combat model in phase 3.
     // This case exists so that work cannot be forgotten quietly: it is a standing
     // note, and it should be DELETED, not adjusted, when the contest lands.

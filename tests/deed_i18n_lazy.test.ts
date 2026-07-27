@@ -11,8 +11,8 @@
 //
 // The eager-bundle regression guard below is the one that still earns its place,
 // and it is the most valuable test in the file regardless of locale count: it reads
-// deed_i18n.ts as TEXT, so it catches a static value import of a locale chunk —
-// the mistake that would silently pull a locale table back into the eager renderer
+// deed_i18n.ts as TEXT, so it catches a static value import of a locale chunk.
+// The mistake that would silently pull a locale table back into the eager renderer
 // bundle through hud.ts and render/nameplate_painter.ts. That failure mode is a
 // bundle-size regression with no functional symptom, which is exactly the kind
 // nothing else notices.
@@ -50,7 +50,7 @@ describe('lazy deed locales', () => {
     const src = readFileSync(new URL('../src/ui/deed_i18n.ts', import.meta.url), 'utf8');
     // Only a type-only import (erased at build) or a dynamic import() thunk inside
     // DEED_LOCALE_LOADERS may reference a per-locale chunk. The positive half of
-    // this assertion — that at least one dynamic thunk exists — is dropped while
+    // this assertion, that at least one dynamic thunk exists, is dropped while
     // the loader map is empty; it comes back with the second locale.
     expect(src).not.toMatch(
       /(?:^|\n)\s*(?:import|export)\s+(?!type\b)[^;]*?from\s+'\.\/deed_i18n\.locales\//,

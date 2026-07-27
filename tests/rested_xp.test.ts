@@ -1,7 +1,7 @@
 // Classic Rested XP (#308): inn-rested pool that doubles kill XP until spent.
 //
 // Covers accrual while resting in an inn (and only there, out of combat), the
-// 1.5-level cap, kill-XP consumption (2x, kills only — not quests), the xp-bar
+// 1.5-level cap, kill-XP consumption (2x, kills only, not quests), the xp-bar
 // rested overlay fraction, and CharacterState persistence round-trip.
 import { describe, expect, it } from 'vitest';
 import { PROPS } from '../src/sim/data';
@@ -11,7 +11,7 @@ import { terrainHeight } from '../src/sim/world';
 import { xpBarView } from '../src/ui/xp_bar';
 
 // Level 30, not 1. The consumption cases below award a flat 100 XP and read the
-// bar afterwards, and on the Ragnarok curve a level costs 10 XP at level 1 — the
+// bar afterwards, and on the Ragnarok curve a level costs 10 XP at level 1, the
 // award dings ten times over and the bar shows a remainder instead of the sum.
 // At 30 a level costs a few thousand, so 100 XP stays inside one level and the
 // arithmetic these cases assert is visible again.
@@ -32,7 +32,7 @@ function teleport(sim: Sim, e: any, x: number, z: number) {
 
 const inn = PROPS.buildings.find((b) => b.kind === 'inn')!;
 
-describe('rested XP — accrual', () => {
+describe('rested XP, accrual', () => {
   it('accrues while resting inside an inn footprint', () => {
     const sim = makeSim();
     const meta = sim.meta(sim.playerId)!;
@@ -63,7 +63,7 @@ describe('rested XP — accrual', () => {
   });
 });
 
-describe('rested XP — consumption', () => {
+describe('rested XP, consumption', () => {
   it('doubles kill XP and draws the pool down', () => {
     const sim = makeSim();
     const meta = sim.meta(sim.playerId)!;
@@ -125,7 +125,7 @@ describe('rested XP — consumption', () => {
   });
 });
 
-describe('rested XP — xp-bar overlay', () => {
+describe('rested XP, xp-bar overlay', () => {
   it('reports a rested overlay fraction ahead of the fill', () => {
     const need = xpForLevel(1);
     const view = xpBarView({
@@ -157,7 +157,7 @@ describe('rested XP — xp-bar overlay', () => {
   });
 });
 
-describe('rested XP — persistence', () => {
+describe('rested XP, persistence', () => {
   it('round-trips restedXp through CharacterState', () => {
     const sim = makeSim();
     const meta = sim.meta(sim.playerId)!;

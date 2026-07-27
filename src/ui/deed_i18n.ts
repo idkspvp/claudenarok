@@ -45,7 +45,7 @@ export interface DeedLocaleModule {
 // Locales that ship their own deed-name chunk. English is never a member: its
 // deed text is the authored source read straight from the content table, so it
 // needs no chunk. The union is empty while English is the only locale, which
-// makes DEED_LOCALE_LOADERS an empty map — the loader path stays intact and a
+// makes DEED_LOCALE_LOADERS an empty map, the loader path stays intact and a
 // new locale rejoins by adding its code here and its chunk beside it.
 type DeedBaseLocale = never;
 

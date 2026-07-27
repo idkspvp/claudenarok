@@ -1,5 +1,5 @@
 /* =========================================================================
-   Claudenarok Online Wiki — "Aged Grimoire" theme for Vector 2022.
+   Claudenarok Online Wiki, "Aged Grimoire" theme for Vector 2022.
    Warm parchment reading surface, deep oak chrome, gold + wax-seal-red
    accents, elegant serif display headings.
    ========================================================================= */
@@ -91,7 +91,7 @@ body {
 }
 
 /* ---- Side columns: dark oak panels ---- */
-/* NB: don't give .vector-settings panel chrome — an empty collapsed copy of
+/* NB: don't give .vector-settings panel chrome, an empty collapsed copy of
    it lives in the right column and would render as a stray dark nub. */
 .vector-main-menu,
 .vector-toc,
@@ -175,7 +175,7 @@ body {
 }
 
 /* the header divider under "Contents"/"Appearance" defaults to light grey,
-   which paints a harsh line across the dark oak panels — soften to gold */
+   which paints a harsh line across the dark oak panels, soften to gold */
 .vector-pinnable-header {
   border-bottom: 1px solid rgba(231, 181, 74, 0.22) !important;
 }
@@ -332,7 +332,7 @@ body {
   padding: 8px 12px;
 }
 
-/* column + top headers — light text on oak, now actually visible */
+/* column + top headers, light text on oak, now actually visible */
 .wikitable > * > tr > th,
 .article-facts > * > tr > th {
   color: #fdeec8 !important;

@@ -362,7 +362,7 @@ describe('chat channels', () => {
       expect.objectContaining({
         type: 'error',
         pid: a,
-        text: `You are in ${zone.name} (levels ${lo}–${hi}) at (12, -340).`,
+        text: `You are in ${zone.name} (levels ${lo} to ${hi}) at (12, -340).`,
       }),
     );
   });
@@ -894,7 +894,7 @@ describe('snapshot interpolation continuity', () => {
     c.applySnapshot({ t: 'snap', tick: 2, time: 0.05, self: self(10), ents: [] });
     // third snapshot from x=10 to x=20: prevPos must sit on the segment the
     // renderer was drawing (between 0 and 10, or slightly past 10 when the
-    // frame extrapolated) — never reset all the way back to the old pose
+    // frame extrapolated), never reset all the way back to the old pose
     // unless no time passed at all
     c.applySnapshot({ t: 'snap', tick: 3, time: 0.1, self: self(20), ents: [] });
     expect(e.pos.x).toBe(20);

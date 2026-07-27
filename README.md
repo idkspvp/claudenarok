@@ -49,7 +49,7 @@ Same seed, same world, everywhere. Much of what you see is still drawn from code
 - **A deep professions economy**: four gathering trades feed ten crafts, from cooking and alchemy to jewelcrafting, weaponcrafting, and enchanting, with tiered tools, town workstations, masterwork quality, and commissions, all feeding a player-driven **World Market** and the **Ravenpost** mail service.
 - **Real multiplayer**: parties and raids, guilds, trading, duels, tap rights, party-split XP, whispers, away status, and a **Dungeon Finder** with role queues and premade listings.
 - **Authored in code, not in a 3D editor**: terrain, water, weather, town layouts, real-time shadows, and effects are generated at runtime, and the models that do ship are built by procedural factories and a curated asset library rather than hand-sculpted.
-- **Localized through a deterministic, sim-emits-keys pipeline** — English today, built to take more.
+- **Localized through a deterministic, sim-emits-keys pipeline**, English today, built to take more.
 - **A companion wiki at `/wiki`**, generated straight from live game content so it cannot drift from the world it documents.
 - **Native apps on every platform**: signed desktop installers for Windows, Linux, and macOS with automatic updates and optional Steam achievement mirroring, plus iOS and Android builds, all sharing the browser client and the same online world.
 - **Scales to the machine you have**: graphics presets and an automatic frame-rate governor trade visual richness for smoothness, and are held to a fairness rule that keeps them from ever hiding something a player reacts to.

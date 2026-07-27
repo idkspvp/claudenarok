@@ -1,7 +1,7 @@
 // Death Throes: a volatile mob (the Bog Bloat) does not explode the instant it
 // dies. Its corpse swells for a telegraphed delay, then bursts for area damage
 // to every living player within radius. Killing one next to you should arm the
-// fuse, then hurt you when it pops — but spare anyone who ran clear in time.
+// fuse, then hurt you when it pops, but spare anyone who ran clear in time.
 import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
@@ -10,7 +10,7 @@ import { terrainHeight } from '../src/sim/world';
 
 // Level 20, not 1. The Bog Bloat is level 11, and mob XP is now derived from the
 // mob's OWN level against an exponential curve, so a level-1 character killing it
-// dings on the spot — which is Ragnarok-accurate but re-rolls maxHp mid-test and
+// dings on the spot, which is Ragnarok-accurate but re-rolls maxHp mid-test and
 // hides the thing these cases actually measure. At 20 the kill is grey and pays
 // nothing, leaving HP still.
 const makeSim = () => {
@@ -59,7 +59,7 @@ describe('death throes on a volatile mob', () => {
     });
   });
 
-  it('does not detonate the instant it dies — it arms a fuse', () => {
+  it('does not detonate the instant it dies, it arms a fuse', () => {
     const sim = makeSim();
     const b = bloat(sim);
     place(sim, b, -200, 0);

@@ -750,7 +750,7 @@ const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
   // boundaries, at which point the deed stays visible as a history marker).
   //
   // Pinned to 20, NOT to MAX_LEVEL. The deed commemorates the First Era's cap,
-  // and the First Era's cap was 20 — that is what its own name and description
+  // and the First Era's cap was 20, that is what its own name and description
   // claim ("Reached level 20 while the First Era was current"). Tracking the
   // live constant would have silently re-priced a shipped feat of strength at
   // 99 the moment the Ragnarok conversion raised the ceiling.

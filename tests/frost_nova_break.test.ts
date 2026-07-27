@@ -63,7 +63,7 @@ describe('Icebind damage break', () => {
       }),
     ).toBe(description.replace('$d', '6 to 7'));
     // The Spanish arm that used to follow went with the locale cut. What it proved
-    // — that $d substitution survives translation — needs a second locale to mean
+    //, that $d substitution survives translation, needs a second locale to mean
     // anything; the English pin above is the half that still has teeth.
   });
 

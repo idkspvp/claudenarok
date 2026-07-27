@@ -50,7 +50,7 @@ import {
 // The NON-English resolved tables, keyed by code. Empty while English is the only
 // shipped locale: the per-locale parity loops below iterate nothing, while every
 // test driven by `supportedLanguages` still runs and still proves each key exists,
-// resolves non-empty, and keeps its interpolation tokens — in English.
+// resolves non-empty, and keeps its interpolation tokens, in English.
 const locales: Record<string, typeof en> = {};
 
 // Two-tier gate (see .github/workflows/ci.yml). The release tier runs with
@@ -1259,7 +1259,7 @@ describe('i18n Localization Key Coverage', () => {
   });
 
   // These four kept their teeth through the locale cut. They never asserted a
-  // TRANSLATION — they assert that every dynamic value survives interpolation into
+  // TRANSLATION, they assert that every dynamic value survives interpolation into
   // the template, which is a property of interpolate(), not of any locale. The
   // originals switched locale only to prove it held everywhere; English alone still
   // catches a dropped or renamed token.

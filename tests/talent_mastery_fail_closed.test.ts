@@ -56,7 +56,7 @@ describe('mastery formatter fails closed on unmapped effect fields', () => {
   // Two tests stood here that drove the GENERATED description path by switching to
   // Spanish: one proving a partially-unmapped effect renders its known fields and
   // silently drops the rest, one proving a wholly-unmappable effect falls back to
-  // the authored English. Both needed a non-English locale by construction — tTalent
+  // the authored English. Both needed a non-English locale by construction, tTalent
   // short-circuits to the authored strings for English, so with a single locale the
   // generator is unreachable and neither test can be made to exercise it. They come
   // back with the second locale, alongside the machinery they guard.

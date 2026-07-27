@@ -20,7 +20,7 @@ import {
 const CHEST_TRIO = ['hollowbone_hauberk', 'gravewoven_raiment', 'cryptstalker_jerkin'];
 // The weapon trio (gravecaller_blade / widowfang_dirk / gravecaller_staff) stood
 // here too. All three were quest rewards and nothing else grants them, so with the
-// quest system gone they have no derivable source at all — see the re-homing task.
+// quest system gone they have no derivable source at all, see the re-homing task.
 const WEAPON_TRIO: string[] = [];
 
 describe('item level: source derivation', () => {

@@ -90,7 +90,7 @@ export function isSupportedLanguage(value: string): value is SupportedLanguage {
  *  unchanged. It deliberately returns a plain `boolean` and NOT a `lang is 'en'`
  *  type predicate: while English is the only supported locale, a narrowing check
  *  collapses `lang` to `never` in every else-branch, and tsc then red-fails whole
- *  translation paths as unreachable. Those paths are dormant, not dead — they come
+ *  translation paths as unreachable. Those paths are dormant, not dead, they come
  *  back with the next locale, so they have to keep compiling in the meantime. */
 export function isAuthoredEnglish(lang: SupportedLanguage): boolean {
   return (lang as string) === 'en';
@@ -175,7 +175,7 @@ export function setLanguage(lang: SupportedLanguage): void {
 // HUD's first localized paint.
 // Keyed by string, not by SupportedLanguage. While English is the only supported
 // locale, `SupportedLanguage` narrows to `'en'` alone, and the early return above
-// then narrows `lang` to `never` in every write below — tsc red-fails the whole
+// then narrows `lang` to `never` in every write below, tsc red-fails the whole
 // lazy-load path as unreachable. Widening the key keeps the machinery compiling so
 // adding Thai stays a data change rather than a rewrite.
 const resident: Partial<Record<string, EnTranslations>> = { en };

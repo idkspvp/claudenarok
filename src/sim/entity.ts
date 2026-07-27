@@ -272,8 +272,8 @@ export function statusAttackPower(str: number, dex: number, luk: number): number
 }
 
 /** Status ATK for a bow. The same shape with DEX and STR swapped: DEX leads and
- *  takes the squared term, STR drops to a fifth. Passing DEX in twice — which is
- *  what a careless reuse of the melee helper does — silently pays a bow user for
+ *  takes the squared term, STR drops to a fifth. Passing DEX in twice, which is
+ *  what a careless reuse of the melee helper does, silently pays a bow user for
  *  DEX a second time instead of for their STR. */
 export function statusRangedAttackPower(str: number, dex: number, luk: number): number {
   const d = Math.max(0, dex);
@@ -287,7 +287,7 @@ export function statusRangedAttackPower(str: number, dex: number, luk: number): 
 
 /** Status MATK is a RANGE in Ragnarok, not a number: the two ends use different
  *  divisors, and a cast rolls between them. This engine's spellPower is a single
- *  value, so it carries the MIDPOINT — the average of the two ends — rather than
+ *  value, so it carries the MIDPOINT, the average of the two ends, rather than
  *  silently picking the low one and making INT read weaker than it is. */
 export function statusMagicPower(int: number): number {
   const i = Math.max(0, int);
@@ -317,7 +317,7 @@ export function pctValue(value: number): number {
 
 // Recompute all derived stats for the player from class, level, gear, buffs, and
 // precomputed talent modifiers. `mods` is the flat struct resolved at
-// allocation/respec time (computeTalentModifiers) — this never walks the tree.
+// allocation/respec time (computeTalentModifiers); this never walks the tree.
 export function recalcPlayerStats(
   e: Entity,
   cls: PlayerClass,
@@ -709,8 +709,8 @@ export function recalcPlayerStats(
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
   // Ragnarok's shape: VIT is a PERCENTAGE on the class pool, not a flat per-point
   // grant. At VIT 99 a character carries just under double the pool a VIT 1
-  // character does — decisive, but it never dwarfs the class and level base the
-  // way a flat +10/point did once the scale ran to 99.
+  // character does. That is decisive without ever dwarfing the class and level
+  // base, the way a flat +10/point did once the scale ran to 99.
   e.maxHp = Math.round((def.baseHp + def.hpPerLevel * (lvl - 1)) * vitHealthMultiplier(s.vit));
   if (bearForm) e.maxHp = Math.round(e.maxHp * 1.15);
   if (mods?.stats.maxHpPct) e.maxHp = Math.round(e.maxHp * (1 + mods.stats.maxHpPct));
@@ -723,7 +723,7 @@ export function recalcPlayerStats(
   if (e.kind === 'player') e.scale = scaleMul;
 
   // Druid forms swap the resource bar, classic-style: bear runs on rage
-  // (starts empty, fills from combat), cat on energy (starts full — friendlier
+  // (starts empty, fills from combat), cat on energy (starts full, friendlier
   // than the classic-era 0). Mana is parked in savedMana and restored on shift-out.
   const formResource: 'rage' | 'energy' | null = bearForm ? 'rage' : catForm ? 'energy' : null;
   if (formResource) {
@@ -753,8 +753,8 @@ export function recalcPlayerStats(
 // Derived stats + max vitals for an OFFLINE character (a stored CharacterState),
 // computed by reusing recalcPlayerStats on a throwaway entity rather than
 // re-deriving the numbers. With no auras and no active form, recalcPlayerStats
-// yields exactly the class/level/gear/talent stat block — the same numbers a
-// live player shows — so the character sheet stays in lockstep with the engine.
+// yields exactly the class/level/gear/talent stat block, the same numbers a
+// live player shows, so the character sheet stays in lockstep with the engine.
 // Resource max is the full pool for the class (mana from intellect, or 100 for
 // rage/energy); the sheet pairs it with the stored current value.
 export interface DerivedCharacterStats {

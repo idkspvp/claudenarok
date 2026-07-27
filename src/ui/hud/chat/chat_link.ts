@@ -1,7 +1,7 @@
 // Chat-link token contract. A chat link is a tiny, name-free token the client embeds
 // in chat text; the renderer resolves the localized name from the item table, so a
 // forged label can't misrepresent the target. Pure + host-free (Vitest imports it
-// directly). Only the client uses it — the sim never sees tokens.
+// directly). Only the client uses it, the sim never sees tokens.
 //
 // This was `hud/quest/quest_link.ts` and carried two link kinds, quests ([[q:id]])
 // and items ([[i:id]]), through one parser so a message could mix them. The quest

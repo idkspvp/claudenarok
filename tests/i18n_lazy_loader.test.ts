@@ -5,8 +5,8 @@
 // throwing, and renders synchronously once the chunk is resident.
 //
 // English is currently the only shipped locale, so LOCALE_LOADERS is empty and the
-// interesting half of this seam — the real fetch, the soft rejection, the coalescing
-// of concurrent loads, the once-only prefetch — has nothing to exercise it. Those
+// interesting half of this seam, the real fetch, the soft rejection, the coalescing
+// of concurrent loads, the once-only prefetch, has nothing to exercise it. Those
 // tests were removed rather than pointed at a locale that no longer exists; keeping
 // them green against English would have asserted nothing while looking like coverage.
 //

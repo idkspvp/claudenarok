@@ -5,7 +5,7 @@
 // helpers: the budget is not a stored counter. A character's total points are a
 // function of its level, and its spend is a function of its allocation, so the
 // unspent pool is always derived. Nothing can drift out of sync because there is
-// nothing to sync — but it does mean every read has to cost the allocation, and
+// nothing to sync, but it does mean every read has to cost the allocation, and
 // every write has to prove the result still fits the budget.
 //
 // Pure and host-free: no SimContext, no DOM. Both the offline Sim and the server
@@ -15,11 +15,11 @@
 import {
   BASE_STAT,
   CREATION_STATUS_POINTS,
+  emptyStatAllocation,
   MAX_STAT,
+  STATUS_STATS,
   type StatAllocation,
   type StatusStat,
-  STATUS_STATS,
-  emptyStatAllocation,
   statRaiseCost,
   statusPointsSpent,
   totalStatusPointsAt,
@@ -61,7 +61,7 @@ export function resetStatAllocation(): StatAllocation {
  *
  *  Three things can be wrong with a stored allocation: it can be missing entirely
  *  (a save from before the conversion), it can carry junk for an attribute, or it
- *  can exceed the budget its level affords — a tampered save, or a legitimate one
+ *  can exceed the budget its level affords, a tampered save, or a legitimate one
  *  whose character was de-levelled. The first two are clamped per attribute. The
  *  third is refused WHOLESALE rather than trimmed: there is no honest way to pick
  *  which points to take back, and silently keeping an over-budget build is exactly

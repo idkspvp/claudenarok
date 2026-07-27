@@ -485,7 +485,7 @@ export function chat(ctx: SimContext, text: string, pid?: number): SentChat | nu
     const [lo, hi] = zone.levelRange;
     ctx.error(
       r.meta.entityId,
-      `You are in ${zone.name} (levels ${lo}–${hi}) at (${Math.floor(r.e.pos.x)}, ${Math.floor(r.e.pos.z)}).`,
+      `You are in ${zone.name} (levels ${lo} to ${hi}) at (${Math.floor(r.e.pos.x)}, ${Math.floor(r.e.pos.z)}).`,
     );
     return null;
   }

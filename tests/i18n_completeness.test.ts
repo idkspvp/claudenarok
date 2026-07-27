@@ -7,7 +7,7 @@ import { en, setLanguage, tPlural } from '../src/ui/i18n';
 // token parity, per-locale lazy loadability, locale-aware money grouping, and an
 // English-leak bound on the non-Latin surfaces. With a single locale each of those
 // compares English against itself and passes no matter what breaks, so they are
-// gone rather than left as green decoration — a vacuous guard is worse than none,
+// gone rather than left as green decoration, a vacuous guard is worse than none,
 // because it reads like coverage. They come back with the second locale.
 //
 // CLDR pluralization is the part that still has teeth. tPlural picks a category

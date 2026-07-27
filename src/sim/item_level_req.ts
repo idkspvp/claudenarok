@@ -40,7 +40,7 @@ const QUALITY_REQUIRED_LEVEL: Record<Quality, number> = {
   rare: 12,
   epic: 18,
   // 20, not MAX_LEVEL. All four shipped legendaries are Nythraxis raid drops with
-  // no derivable source level, so they land on this fallback — tracking the live
+  // no derivable source level, so they land on this fallback, tracking the live
   // cap would have made every one of them unequippable the moment the Ragnarok
   // conversion raised it to 99. The whole 12/18/20 ladder is tuned to content
   // that ends at 20 and gets re-spread when levels 21-99 have something in them.
