@@ -19,13 +19,23 @@ checkout is for. Two things are not:
   records, their specific numbers), which is why the sparse checkout deliberately
   excludes it. Mechanics are fair to reimplement; datasets are not.
 
-**One recorded exception, taken on the owner's explicit instruction.** The four
-per-job HP and SP coefficients in `src/sim/job_vitals.ts` were read from
-`db/pre-re/job_stats.yml`. The concern was raised, the owner reaffirmed the
-decision, and it is written down here rather than left as an undocumented
-divergence between this rule and the tree. It stays an exception: the rule above
-is unchanged for everything else, and monster records, item records, and card
-effects are still authored from scratch.
+**Two recorded exceptions, both taken on the owner's explicit instruction.** In
+each case the licensing concern was raised first, the owner reaffirmed, and the
+decision is written down here rather than left as an undocumented divergence
+between this rule and the tree.
+
+| File read | Used by | Scope |
+|---|---|---|
+| `db/pre-re/job_stats.yml` | `src/sim/job_vitals.ts` | the four per-job HP and SP coefficients |
+| `db/pre-re/job_aspd.yml` | `src/sim/job_aspd.ts` | the per-job, per-weapon base attack motions for the five first jobs |
+
+`db/pre-re` is added to the reference clone's sparse checkout so these are
+readable; it stays outside the working tree like everything else there.
+
+**These are exceptions, not a general licence.** The rule above is unchanged for
+everything else: monster records, item records, card effects, and their names and
+numbers are still authored from scratch. Anything further needs its own explicit
+decision and its own row in this table.
 
 Keeping the clone outside the working tree is what stops it becoming part of
 anything this project distributes. Do not move it in, and do not add it as a
@@ -189,12 +199,18 @@ amotion makes every character attack twice as fast as Ragnarok does. Converted i
 - **The live class list is still the inherited nine**, not the Classic tree in
   `content/jobs.ts`. Attack speed is the system blocked on the migration: it is
   per JOB and per weapon class.
-- **The ASPD base table is unwritten, and it is ours to author.** `combat/aspd.ts`
-  takes the base as an argument for two reasons: the table is indexed by the five
-  first jobs, which do not exist as `PlayerClass` members yet, and rAthena's own
-  values live in `db/pre-re/job_stats.yml`, which the rule above puts off limits.
-  Wiring it also retires `WeaponInfo.speed`, since a per-weapon speed cannot
-  express a per-job one, and that changes the cadence of every existing weapon.
+- **The ASPD table is authored but not wired.** `src/sim/job_aspd.ts` carries it
+  (see the exception table above); `combat/aspd.ts` still takes the base as an
+  argument, and nothing calls either yet. Two things block the wiring, and both
+  are real: the table is keyed by the five first jobs, which are not `PlayerClass`
+  members until D1 lands, and wiring it RETIRES `WeaponInfo.speed`, because a
+  per-weapon speed cannot express a per-job one. That last part changes the
+  cadence of every weapon in the game at once, so it wants its own change and its
+  own parity regeneration.
+- **`AspdJob` duplicates the five first-job ids** rather than importing them,
+  because neither `PlayerClass` (still the inherited nine) nor `content/jobs.ts`
+  (still all eighteen on `main`) is a stable key today. When D1 lands, make it an
+  alias of `PlayerClass` and pin the two as identical.
 - **`MOB_AP_PER_DPS` is the last calibration constant left.** Monster attack power
   is still on the pre-conversion scale, so it is divided down where a player's
   adds raw. It goes away when the monster records carry an authored ATK pair.
