@@ -31,16 +31,9 @@ function cast(sim: Sim, p: Entity, ability: string): SimEvent[] {
 const imbues = (p: Entity) => p.auras.filter((a) => a.kind === 'imbue');
 
 describe('weapon imbues are a mutually-exclusive single slot (H2-1)', () => {
-  it('acolyte cannot stack rockbiter + flametongue + frostbrand', () => {
-    const { sim, p } = makePlayer('acolyte', 16);
-    cast(sim, p, 'rockbiter_weapon');
-    cast(sim, p, 'flametongue_weapon');
-    cast(sim, p, 'frostbrand_weapon');
-    // exactly one imbue survives: the most recently applied
-    expect(imbues(p)).toHaveLength(1);
-    expect(imbues(p)[0].id).toBe('frostbrand_weapon');
-  });
-
+  // The Shaman owned the three weapon imbues this suite was built on and was cut
+  // in D1, so the Thief's poisons are the whole live imbue surface. They exercise
+  // the same one-slot rule, which is what is actually under test here.
   it('thief cannot stack instant + deadly poison', () => {
     const { sim, p } = makePlayer('thief', 20);
     cast(sim, p, 'instant_poison');
@@ -52,51 +45,43 @@ describe('weapon imbues are a mutually-exclusive single slot (H2-1)', () => {
   });
 
   it('emits an aura-lost event for the displaced imbue so the old buff icon clears', () => {
-    const { sim, p } = makePlayer('acolyte', 16);
-    cast(sim, p, 'rockbiter_weapon');
-    const events = cast(sim, p, 'flametongue_weapon');
+    const { sim, p } = makePlayer('thief', 20);
+    cast(sim, p, 'instant_poison');
+    const events = cast(sim, p, 'deadly_poison');
     // the replaced imbue is announced lost (this is what clears its client buff icon)
     expect(events).toContainEqual({
       type: 'aura',
       targetId: p.id,
-      name: 'Stonebound Weapon',
+      name: "Adder's Bite",
       gained: false,
     });
     // and the new imbue is announced gained
     expect(events).toContainEqual({
       type: 'aura',
       targetId: p.id,
-      name: 'Pyrebrand Weapon',
+      name: 'Festering Venom',
       gained: true,
     });
   });
 
   it('re-casting the same imbue refreshes in place (still one aura)', () => {
-    const { sim, p } = makePlayer('acolyte', 16);
-    cast(sim, p, 'rockbiter_weapon');
+    const { sim, p } = makePlayer('thief', 20);
+    cast(sim, p, 'instant_poison');
     const dur = imbues(p)[0].remaining;
     // tick a little so the refresh is observable, then re-cast the same one
     for (let i = 0; i < 10; i++) sim.tick();
     expect(imbues(p)[0].remaining).toBeLessThan(dur);
-    cast(sim, p, 'rockbiter_weapon');
+    cast(sim, p, 'instant_poison');
     expect(imbues(p)).toHaveLength(1);
-    expect(imbues(p)[0].id).toBe('rockbiter_weapon');
+    expect(imbues(p)[0].id).toBe('instant_poison');
     expect(imbues(p)[0].remaining).toBe(dur); // refreshed to full
-  });
-
-  it('swordman seal remains a single imbue (unchanged) and still carries judge values', () => {
-    const { sim, p } = makePlayer('swordman', 4);
-    cast(sim, p, 'seal_of_righteousness');
-    expect(imbues(p)).toHaveLength(1);
-    expect(imbues(p)[0].id).toBe('seal_of_righteousness');
-    expect(imbues(p)[0].value2).toBeDefined(); // judge min/max preserved
   });
 
   it('is deterministic: same seed yields the same single-imbue result', () => {
     const run = () => {
-      const { sim, p } = makePlayer('acolyte', 16);
-      cast(sim, p, 'rockbiter_weapon');
-      cast(sim, p, 'flametongue_weapon');
+      const { sim, p } = makePlayer('thief', 20);
+      cast(sim, p, 'instant_poison');
+      cast(sim, p, 'deadly_poison');
       return imbues(p).map((a) => ({ id: a.id, value: a.value }));
     };
     expect(run()).toEqual(run());

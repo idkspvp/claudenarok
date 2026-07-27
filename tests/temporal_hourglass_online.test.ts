@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 vi.mock('../server/db', () => ({
   pool: { query: vi.fn(async () => ({ rows: [] })) },
@@ -41,7 +41,7 @@ describe('Hourglass allied cancellation online', () => {
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');
     place(server, mage, 700);
-    fundCasts(mage);
+    raisePool(mage);
 
     server.handleMessage(
       session,
@@ -66,7 +66,7 @@ describe('Hourglass allied cancellation online', () => {
     if (!mage || !ally) throw new Error('players missing');
     place(server, mage, 700);
     place(server, ally, 708);
-    fundCasts(mage);
+    raisePool(mage);
     server.sim.partyInvite(ally.id, mage.id);
     server.sim.partyAccept(ally.id);
     ally.hp = Math.floor(ally.maxHp * 0.4);

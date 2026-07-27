@@ -139,11 +139,10 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
     return sim;
   }
 
-  const channeled = [
-    { cls: 'mage', spell: 'rain_of_fire' },
-    { cls: 'archer', spell: 'volley' },
-    { cls: 'acolyte', spell: 'hurricane' },
-  ] as const;
+  // Rain of Fire and Hurricane went with the Warlock and the Druid in D1; Volley
+  // is the surviving AIMED channel (Rending Cyclone is a channel too, but it is
+  // self-centred, so it does not exercise the aim clamp this covers).
+  const channeled = [{ cls: 'archer', spell: 'volley' }] as const;
 
   for (const c of channeled) {
     it(`${c.spell} (${c.cls}) begins a channel aimed at the (clamped) point`, () => {
@@ -178,11 +177,11 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
   it('a channeled ground spell damages enemies in the aimed area over its ticks', () => {
     // Flat dungeon-floor band (x > 600) for deterministic clear line-of-sight.
     const FLAT_X = 700;
-    const sim = new Sim({ seed: 7, playerClass: 'mage', noPlayer: true });
-    const pid = sim.addPlayer('mage', 'Lock');
+    const sim = new Sim({ seed: 7, playerClass: 'archer', noPlayer: true });
+    const pid = sim.addPlayer('archer', 'Shooter');
     sim.setPlayerLevel(20, pid);
     const me = sim.entities.get(pid);
-    if (!me) throw new Error('no mage');
+    if (!me) throw new Error('no archer');
     me.resource = 9999;
     place(sim, pid, FLAT_X, 0);
     const mob = createMob(9100, MOBS.forest_wolf, 20, sim.groundPos(FLAT_X + 6, 0));
@@ -190,7 +189,7 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
     sim.entities.set(9100, mob);
     const hp0 = mob.hp;
 
-    sim.castAbility('rain_of_fire', pid, { x: FLAT_X + 6, z: 0 });
+    sim.castAbility('volley', pid, { x: FLAT_X + 6, z: 0 });
     // advance through enough of the 4 s channel for at least one tick to land
     for (let i = 0; i < 40; i++) sim.tick();
 
@@ -198,7 +197,7 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
   });
 
   it('a completed ground-targeted channel clears castAim (always cleared on resolve)', () => {
-    const sim = castGroundSpell('mage', 'rain_of_fire', { x: 16, z: 0 });
+    const sim = castGroundSpell('archer', 'volley', { x: 16, z: 0 });
     const me = sim.entities.get(sim.playerId);
     expect(me?.channeling).toBe(true);
     expect(me?.castAim).not.toBeNull();
@@ -207,15 +206,18 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
     expect(me?.castAim).toBeNull();
   });
 
-  it('earthquake (acolyte) drops a lingering nature zone at the aimed point', () => {
-    const sim = castGroundSpell('acolyte', 'earthquake', { x: 16, z: 0 });
-    const fx = aimedFx(sim);
-    expect(fx?.radius).toBe(8);
-    const zone = (sim as unknown as { groundAoEs: GroundAoE[] }).groundAoEs.find(
-      (z) => z.ability === 'Earthquake',
-    );
-    expect(zone).toBeDefined();
-    expect(zone?.pos.x).toBeCloseTo(16, 1);
-    expect(zone?.pos.z).toBeCloseTo(0, 1);
+  it('blizzard (mage) drops a lingering zone at the aimed point', () => {
+    // Earthquake was the Shaman's and went with the class; Blizzard is the
+    // surviving position-targeted spell that leaves a zone behind it.
+    const sim = castGroundSpell('mage', 'blizzard', { x: 16, z: 0 });
+    // Blizzard is a 2s timed cast, not an instant, so the zone only exists once the
+    // cast completes; it is also `delayed`, so it deliberately emits no on-cast
+    // pulse and the zone itself is the whole claim.
+    for (let i = 0; i < 60; i++) sim.tick();
+    const zones = (sim as unknown as { groundAoEs: GroundAoE[] }).groundAoEs;
+    const zone = zones.find((z) => Math.abs(z.pos.x - 16) < 1 && Math.abs(z.pos.z) < 1);
+    expect(zone, `no zone at the aimed point; saw ${zones.map((z) => z.ability).join(', ')}`)
+      .toBeDefined();
+    expect(zone?.radius).toBe(7);
   });
 });

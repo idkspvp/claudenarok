@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 vi.mock('../server/db', () => ({
   pool: { query: vi.fn(async () => ({ rows: [] })) },
@@ -38,7 +38,7 @@ describe('Collective Reversal authoritative online path', () => {
     const mage = server.sim.entities.get(mageSession.pid);
     const ally = server.sim.entities.get(allySession.pid);
     if (!mage || !ally) throw new Error('players missing');
-    fundCasts(mage);
+    raisePool(mage);
     server.sim.partyInvite(ally.id, mage.id);
     server.sim.partyAccept(ally.id);
     ally.dead = true;

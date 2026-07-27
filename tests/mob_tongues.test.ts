@@ -8,7 +8,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 function makeSim(playerClass: 'swordman' | 'mage' = 'mage') {
   return new Sim({ seed: 7, playerClass, autoEquip: true });
@@ -95,7 +95,7 @@ describe('mob curse of tongues ("Dirge of Tongues")', () => {
     const p = sim.player;
     p.maxHp = 100000;
     p.hp = 100000;
-    fundCasts(p);
+    raisePool(p);
     aimAt(sim, p);
     // Baseline cast time with no curse.
     sim.castAbility('fireball', p.id);
@@ -124,7 +124,7 @@ describe('mob curse of tongues ("Dirge of Tongues")', () => {
     const p = sim.player;
     p.maxHp = 100000;
     p.hp = 100000;
-    fundCasts(p);
+    raisePool(p);
     aimAt(sim, p);
     p.auras.push({
       id: 'tongues_x',

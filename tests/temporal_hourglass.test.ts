@@ -11,7 +11,7 @@ import {
   TEMPORAL_HOURGLASS_DURATION,
   TEMPORAL_HOURGLASS_HEAL_FRACTION,
 } from '../src/sim/types';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 const FLAT_X = 700;
 
@@ -26,7 +26,7 @@ function makeChronomancer(): { sim: Sim; mage: Entity } {
   const mage = sim.player;
   mage.pos = sim.groundPos(FLAT_X, 0);
   mage.prevPos = { ...mage.pos };
-  fundCasts(mage);
+  raisePool(mage);
   (sim as unknown as { rebucket(e: Entity): void }).rebucket(mage);
   return { sim, mage };
 }
@@ -56,7 +56,7 @@ function addAlly(sim: Sim, mage: Entity, x: number, grouped = true): Entity {
 
 function castAt(sim: Sim, mage: Entity, x: number, z = 0): void {
   mage.gcdRemaining = 0;
-  fundCasts(mage);
+  raisePool(mage);
   mage.cooldowns.delete('temporal_hourglass');
   sim.castAbility('temporal_hourglass', mage.id, { x, z });
 }
