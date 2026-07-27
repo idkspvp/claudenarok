@@ -10,8 +10,8 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 172,
-  "drawDigest": "ae90daa0",
+  "draws": 178,
+  "drawDigest": "26f11c05",
   "frames": [
     {
       "tick": 0,
@@ -163,44 +163,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "720c39a4",
-      "events": "b4ab04ea",
+      "state": "3a311236",
+      "events": "a6e6597e",
       "rng": {
-        "draws": 7,
-        "digest": "101398c0"
+        "draws": 9,
+        "digest": "c2dae474"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "8bcffba4",
+      "state": "221c64ee",
       "events": "741638a5",
       "rng": {
-        "draws": 7,
-        "digest": "101398c0"
+        "draws": 9,
+        "digest": "c2dae474"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "248c7360",
-      "events": "05f2185b",
+      "state": "9f168098",
+      "events": "2b2ff28b",
       "rng": {
-        "draws": 98,
-        "digest": "92f0a886"
+        "draws": 105,
+        "digest": "3e0eb09d"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "1229ba5e",
+      "state": "76a56878",
       "events": "f740fdd2",
       "rng": {
-        "draws": 154,
-        "digest": "8ab416f5"
+        "draws": 160,
+        "digest": "2f7654da"
       },
       "label": "kill",
       "players": [
@@ -220,15 +220,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7071,
-            "damageTaken": 4,
+            "damageDealt": 7073,
+            "damageTaken": 2,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7071,
+              "damageDealt": 7073,
               "kills": 1
             },
             "dungeonClears": {},
@@ -319,7 +319,7 @@
           "fiveSecondRule": 102.6,
           "flee": 16,
           "hit": 19,
-          "hp": 49996,
+          "hp": 49998,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -390,7 +390,13 @@
           },
           "level": 2,
           "loot": {
-            "copper": 10
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "milepost_boots"
+              }
+            ]
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
@@ -433,11 +439,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "57ee699b",
+      "state": "83ba7593",
       "events": "ebcfe9d2",
       "rng": {
-        "draws": 172,
-        "digest": "ae90daa0"
+        "draws": 178,
+        "digest": "26f11c05"
       },
       "label": "final",
       "players": [
@@ -457,15 +463,15 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7071,
-            "damageTaken": 4,
+            "damageDealt": 7073,
+            "damageTaken": 2,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7071,
+              "damageDealt": 7073,
               "kills": 1
             },
             "dungeonClears": {},
@@ -561,7 +567,7 @@
           "fiveSecondRule": 102.8,
           "flee": 16,
           "hit": 19,
-          "hp": 49996,
+          "hp": 49998,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -632,7 +638,13 @@
           },
           "level": 2,
           "loot": {
-            "copper": 10
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "milepost_boots"
+              }
+            ]
           },
           "lootFfaTimer": 59.8,
           "lootRecipientIds": [

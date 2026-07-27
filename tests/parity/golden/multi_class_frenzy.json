@@ -9,8 +9,8 @@
     "amp stack + threat handoff + tap rights across multiple attackers",
     "multi-class sources: warrior/mage/rogue"
   ],
-  "draws": 15,
-  "drawDigest": "ca70052b",
+  "draws": 16,
+  "drawDigest": "50064c0d",
   "frames": [
     {
       "tick": 0,
@@ -1954,33 +1954,33 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "3b10f742",
-      "events": "ec5634b4",
+      "state": "0385cd2c",
+      "events": "ba35b95d",
       "rng": {
-        "draws": 15,
-        "digest": "ca70052b"
+        "draws": 16,
+        "digest": "50064c0d"
       }
     },
     {
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "b3bb199c",
+      "state": "dc26dbde",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "ca70052b"
+        "draws": 16,
+        "digest": "50064c0d"
       }
     },
     {
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "b3bb199c",
+      "state": "dc26dbde",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "ca70052b"
+        "draws": 16,
+        "digest": "50064c0d"
       },
       "label": "final",
       "players": [
@@ -2000,7 +2000,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 120,
-            "damageTaken": 13
+            "damageTaken": 9
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2205,7 +2205,7 @@
           "fiveSecondRule": 99.5,
           "flee": 5,
           "hit": 7,
-          "hp": 49987,
+          "hp": 49991,
           "id": 415,
           "inCombat": true,
           "kind": "player",

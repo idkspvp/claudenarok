@@ -9,8 +9,8 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:warrior"
   ],
-  "draws": 71,
-  "drawDigest": "60069de6",
+  "draws": 78,
+  "drawDigest": "509db055",
   "frames": [
     {
       "tick": 0,
@@ -162,33 +162,33 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "165330f0",
-      "events": "13b25635",
+      "state": "01a888e6",
+      "events": "05321230",
       "rng": {
-        "draws": 14,
-        "digest": "97283cfb"
+        "draws": 17,
+        "digest": "0d655f92"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "30bdc3b9",
-      "events": "fad1a5b5",
+      "state": "ce8edc73",
+      "events": "d170f275",
       "rng": {
-        "draws": 28,
-        "digest": "9c413583"
+        "draws": 34,
+        "digest": "14849c77"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "0fa2dacc",
-      "events": "918ee910",
+      "state": "50216089",
+      "events": "5b039776",
       "rng": {
-        "draws": 57,
-        "digest": "390c5ea3"
+        "draws": 64,
+        "digest": "4e1f7fc1"
       },
       "label": "taunt",
       "players": [
@@ -209,7 +209,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 195
+            "damageTaken": 132
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -322,7 +322,7 @@
           "fiveSecondRule": 101.5,
           "flee": 20,
           "hit": 23,
-          "hp": 377,
+          "hp": 434,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -342,7 +342,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.307692,
+          "resource": 11.740385,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -496,11 +496,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "d7c60f75",
+      "state": "6d01b6f0",
       "events": "741638a5",
       "rng": {
-        "draws": 71,
-        "digest": "60069de6"
+        "draws": 78,
+        "digest": "509db055"
       },
       "label": "final",
       "players": [
@@ -521,7 +521,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 195
+            "damageTaken": 132
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -635,7 +635,7 @@
           "fiveSecondRule": 101.7,
           "flee": 20,
           "hit": 23,
-          "hp": 377,
+          "hp": 434,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -655,7 +655,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.307692,
+          "resource": 11.740385,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {

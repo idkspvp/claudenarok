@@ -8,8 +8,8 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 151,
-  "drawDigest": "358c9fed",
+  "draws": 157,
+  "drawDigest": "0b000750",
   "frames": [
     {
       "tick": 0,
@@ -156,44 +156,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "638062b6",
-      "events": "838f4619",
+      "state": "3d4ea7d4",
+      "events": "baf1c877",
       "rng": {
-        "draws": 12,
-        "digest": "69c49488"
+        "draws": 13,
+        "digest": "3fc203d8"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "3eaac5fe",
-      "events": "7cddb665",
+      "state": "462bb85a",
+      "events": "599e7f83",
       "rng": {
-        "draws": 21,
-        "digest": "6b9fce63"
+        "draws": 22,
+        "digest": "e093578a"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "f5caea64",
-      "events": "cbc998a5",
+      "state": "f89f019d",
+      "events": "fa429453",
       "rng": {
-        "draws": 98,
-        "digest": "dcfe7e75"
+        "draws": 101,
+        "digest": "417a5ce3"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "c3a61c4c",
+      "state": "7a871913",
       "events": "741638a5",
       "rng": {
-        "draws": 151,
-        "digest": "358c9fed"
+        "draws": 157,
+        "digest": "0b000750"
       },
       "label": "final",
       "players": [
@@ -213,14 +213,14 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 89,
-            "damageTaken": 28
+            "damageDealt": 71,
+            "damageTaken": 9
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 89
+              "damageDealt": 71
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -300,7 +300,7 @@
           "fiveSecondRule": 102.6,
           "flee": 24,
           "hit": 19,
-          "hp": 49972,
+          "hp": 49991,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -369,7 +369,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8911,
+          "hp": 8929,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -406,7 +406,7 @@
           "threat": [
             [
               415,
-              90
+              72
             ]
           ],
           "weapon": {

@@ -8,8 +8,8 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 425,
-  "drawDigest": "dbff21d9",
+  "draws": 426,
+  "drawDigest": "c0531261",
   "frames": [
     {
       "tick": 0,
@@ -195,33 +195,33 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "c6820475",
-      "events": "1beed8d7",
+      "state": "dc47beb3",
+      "events": "72cf45ae",
       "rng": {
-        "draws": 268,
-        "digest": "3b4abcd9"
+        "draws": 269,
+        "digest": "83efc1aa"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "9bea5744",
-      "events": "6ed33662",
+      "state": "4fcb396f",
+      "events": "cecd4114",
       "rng": {
-        "draws": 386,
-        "digest": "7d3b8b72"
+        "draws": 390,
+        "digest": "4fcb9088"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "cfb811ad",
+      "state": "ef8c2518",
       "events": "422fb47c",
       "rng": {
-        "draws": 425,
-        "digest": "dbff21d9"
+        "draws": 426,
+        "digest": "c0531261"
       },
       "label": "final",
       "players": [
@@ -241,15 +241,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 109,
-            "damageTaken": 9
+            "damageDealt": 84,
+            "damageTaken": 4
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "crits": 1,
-              "damageDealt": 109
+              "damageDealt": 84
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -332,7 +331,7 @@
           "flee": 14,
           "gcdRemaining": 0.7,
           "hit": 23,
-          "hp": 49991,
+          "hp": 49996,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -414,7 +413,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8891,
+          "hp": 8916,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -449,7 +448,7 @@
           "threat": [
             [
               415,
-              110
+              85
             ]
           ],
           "wanderTimer": 2.387434,

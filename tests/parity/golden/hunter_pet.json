@@ -8,8 +8,8 @@
     "updateRangedPetAttack friendly pet arm (~8093/8217)",
     "updateRangedPetAttack hostile-mob arm (~6776)"
   ],
-  "draws": 406,
-  "drawDigest": "001531ed",
+  "draws": 408,
+  "drawDigest": "014ee653",
   "frames": [
     {
       "tick": 0,
@@ -153,77 +153,77 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "16518be1",
-      "events": "58d279cf",
+      "state": "1d68250e",
+      "events": "4e3e2964",
       "rng": {
-        "draws": 10,
-        "digest": "3a534bbe"
+        "draws": 11,
+        "digest": "c55d1f86"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "8646f990",
+      "state": "3044b51b",
       "events": "741638a5",
       "rng": {
-        "draws": 10,
-        "digest": "3a534bbe"
+        "draws": 11,
+        "digest": "c55d1f86"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "9d41347a",
-      "events": "b4a46250",
+      "state": "cb43b14c",
+      "events": "f4928e1a",
       "rng": {
-        "draws": 105,
-        "digest": "aeef14bf"
+        "draws": 102,
+        "digest": "b5b7b15d"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "25b67359",
+      "state": "a60d14d3",
       "events": "741638a5",
       "rng": {
-        "draws": 202,
-        "digest": "0dcb8aa5"
+        "draws": 201,
+        "digest": "f619a30f"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "5586271d",
-      "events": "4a8422ac",
+      "state": "03ca453f",
+      "events": "efdad201",
       "rng": {
-        "draws": 303,
-        "digest": "15399310"
+        "draws": 306,
+        "digest": "1f424e90"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "7dc32586",
+      "state": "1e5aa558",
       "events": "741638a5",
       "rng": {
-        "draws": 406,
-        "digest": "001531ed"
+        "draws": 408,
+        "digest": "014ee653"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "7dc32586",
+      "state": "1e5aa558",
       "events": "741638a5",
       "rng": {
-        "draws": 406,
-        "digest": "001531ed"
+        "draws": 408,
+        "digest": "014ee653"
       },
       "label": "final",
       "players": [
@@ -243,14 +243,14 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 32,
-            "damageTaken": 53
+            "damageDealt": 33,
+            "damageTaken": 15
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 32
+              "damageDealt": 33
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -332,7 +332,7 @@
           "fiveSecondRule": 105,
           "flee": 25,
           "hit": 28,
-          "hp": 49947,
+          "hp": 49985,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -392,7 +392,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 62,
+          "hp": 85,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -440,7 +440,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 49921,
+          "hp": 49918,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -477,11 +477,11 @@
           "threat": [
             [
               415,
-              32
+              33
             ],
             [
               416,
-              47
+              49
             ]
           ],
           "weapon": {

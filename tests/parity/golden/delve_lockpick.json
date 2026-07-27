@@ -9,8 +9,8 @@
     "lockpick minigame (flawless solve)",
     "reward chest + delve marks"
   ],
-  "draws": 13,
-  "drawDigest": "ded57bf5",
+  "draws": 16,
+  "drawDigest": "88fdc798",
   "frames": [
     {
       "tick": 0,
@@ -157,44 +157,44 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 429,
-      "state": "32937e67",
-      "events": "ee4c51f1",
+      "state": "f7960f22",
+      "events": "325e4b68",
       "rng": {
-        "draws": 7,
-        "digest": "30365ad3"
+        "draws": 9,
+        "digest": "1540b9da"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 429,
-      "state": "19702f6b",
+      "state": "aed96ce6",
       "events": "fcb0555f",
       "rng": {
-        "draws": 7,
-        "digest": "30365ad3"
+        "draws": 9,
+        "digest": "1540b9da"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 429,
-      "state": "59890d82",
-      "events": "0afc805e",
+      "state": "71504868",
+      "events": "3a321e6c",
       "rng": {
-        "draws": 10,
-        "digest": "06665a19"
+        "draws": 13,
+        "digest": "ded57bf5"
       }
     },
     {
       "tick": 38,
       "time": 1.9,
       "nextId": 431,
-      "state": "c434d555",
+      "state": "fddaac9e",
       "events": "601aed6e",
       "rng": {
-        "draws": 13,
-        "digest": "ded57bf5"
+        "draws": 16,
+        "digest": "88fdc798"
       },
       "label": "delve-end",
       "players": [
@@ -213,7 +213,7 @@
           "bank": {},
           "cls": "rogue",
           "companionUpgrades": {},
-          "copper": 25,
+          "copper": 24,
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
@@ -389,7 +389,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 5,
-          "hp": 56,
+          "hp": 53,
           "id": 424,
           "kind": "mob",
           "level": 4,
@@ -443,7 +443,7 @@
           },
           "level": 9,
           "loot": {
-            "copper": 434
+            "copper": 257
           },
           "lootFfaTimer": 59.6,
           "lootRecipientIds": [
@@ -522,22 +522,22 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "3f2680e5",
+      "state": "4591725e",
       "events": "741638a5",
       "rng": {
-        "draws": 13,
-        "digest": "ded57bf5"
+        "draws": 16,
+        "digest": "88fdc798"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "3f2680e5",
+      "state": "4591725e",
       "events": "741638a5",
       "rng": {
-        "draws": 13,
-        "digest": "ded57bf5"
+        "draws": 16,
+        "digest": "88fdc798"
       },
       "label": "final",
       "players": [
@@ -556,7 +556,7 @@
           "bank": {},
           "cls": "rogue",
           "companionUpgrades": {},
-          "copper": 25,
+          "copper": 24,
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
@@ -732,7 +732,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 5,
-          "hp": 56,
+          "hp": 53,
           "id": 424,
           "kind": "mob",
           "level": 4,
@@ -786,7 +786,7 @@
           },
           "level": 9,
           "loot": {
-            "copper": 434
+            "copper": 257
           },
           "lootFfaTimer": 59.5,
           "lootRecipientIds": [

@@ -16,8 +16,8 @@
     "petTaunt -> applyTaunt manual arm + PET_GROWL_INTERVAL cooldown",
     "stowPetForDelve/restorePetFromDelveStash (serializePet/restorePet round-trip)"
   ],
-  "draws": 158,
-  "drawDigest": "878ecdcb",
+  "draws": 160,
+  "drawDigest": "83f8a06e",
   "frames": [
     {
       "tick": 0,
@@ -2384,33 +2384,33 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "f67fbfd0",
-      "events": "7d5485ab",
+      "state": "9cfbd148",
+      "events": "283c9aa5",
       "rng": {
-        "draws": 82,
-        "digest": "e2e5902a"
+        "draws": 84,
+        "digest": "dae9f299"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "8a702d60",
+      "state": "db3c9374",
       "events": "4a119102",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 160,
+        "digest": "83f8a06e"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "8a702d60",
+      "state": "db3c9374",
       "events": "741638a5",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 160,
+        "digest": "83f8a06e"
       },
       "label": "demon-heal-tick",
       "players": [
@@ -2430,7 +2430,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 11
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2593,7 +2593,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49989,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -2654,7 +2654,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49976,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -2695,7 +2695,7 @@
             ],
             [
               421,
-              17
+              24
             ]
           ],
           "weapon": {
@@ -2816,11 +2816,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "0711c24e",
+      "state": "89e617e6",
       "events": "3c0a5f6e",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 160,
+        "digest": "83f8a06e"
       },
       "label": "demon-resummoned",
       "players": [
@@ -2840,7 +2840,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 11
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3003,7 +3003,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49989,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3064,7 +3064,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49976,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3105,7 +3105,7 @@
             ],
             [
               421,
-              17
+              24
             ]
           ],
           "weapon": {
@@ -3226,11 +3226,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "dddb3489",
+      "state": "ed73e7cb",
       "events": "0fcaa395",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 160,
+        "digest": "83f8a06e"
       },
       "label": "demon-despawned",
       "players": [
@@ -3250,7 +3250,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 11
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3413,7 +3413,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49989,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3474,7 +3474,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49976,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3515,7 +3515,7 @@
             ],
             [
               421,
-              17
+              24
             ]
           ],
           "weapon": {
@@ -3645,11 +3645,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "dddb3489",
+      "state": "ed73e7cb",
       "events": "741638a5",
       "rng": {
-        "draws": 158,
-        "digest": "878ecdcb"
+        "draws": 160,
+        "digest": "83f8a06e"
       },
       "label": "final",
       "players": [
@@ -3669,7 +3669,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 11
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3832,7 +3832,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49989,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3893,7 +3893,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49983,
+          "hp": 49976,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3934,7 +3934,7 @@
             ],
             [
               421,
-              17
+              24
             ]
           ],
           "weapon": {
