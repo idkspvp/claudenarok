@@ -130,32 +130,32 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
     expect(abilityDamageBonus(barrier, eff, SC)).toBe(absorbBonus(SC.spellPower, 0.5));
   });
 
-  it('a pure HoT folds Spell Power across all its ticks; a hybrid HoT rider does not', () => {
-    const rejuv = known('acolyte', 'rejuvenation');
-    const hot = required(rejuv.effects.find((e) => e.type === 'hot'));
+  it('a pure HoT folds Spell Power across all its ticks', () => {
+    // Rejuvenation and Regrowth went with the Druid in D1; Renew is the surviving
+    // pure HoT. No live kit pairs a HoT rider with a direct heal any more, so the
+    // rider-suppression arm has no ability to exercise it until D4 re-homes one.
+    const renew = known('acolyte', 'renew');
+    const hot = required(renew.effects.find((e) => e.type === 'hot'));
     if (hot.type !== 'hot') throw new Error('expected hot');
     const ticks = hot.duration / hot.interval;
-    expect(abilityDamageBonus(rejuv, hot, SC)).toBe(
+    expect(abilityDamageBonus(renew, hot, SC)).toBe(
       hotTickBonus(SC.spellPower, hot.duration, hot.interval) * ticks,
     );
-    // Regrowth's HoT rides a direct heal: combat suppresses the rider (the
-    // direct part already took the coefficient), so the tooltip must too.
-    const regrowth = known('acolyte', 'regrowth');
-    const rider = required(regrowth.effects.find((e) => e.type === 'hot'));
-    expect(abilityDamageBonus(regrowth, rider, SC)).toBe(0);
   });
 
   it('a ground AoE pulse folds the AoE-penalised direct coefficient (combat spBonus)', () => {
-    const cons = known('swordman', 'consecration');
-    const eff = required(cons.effects.find((e) => e.type === 'groundAoE'));
-    expect(abilityDamageBonus(cons, eff, SC)).toBe(
-      directHitBonus(SC.spellPower, cons.def, cons.castTime, true),
+    // Consecration went with the Paladin; Blizzard is the surviving ground AoE.
+    const bliz = known('mage', 'blizzard');
+    const eff = required(bliz.effects.find((e) => e.type === 'groundAoE'));
+    expect(abilityDamageBonus(bliz, eff, SC)).toBe(
+      directHitBonus(SC.spellPower, bliz.def, bliz.castTime, true),
     );
   });
 
-  it('a channelled AoE (Rain of Fire) uses the per-tick CHANNEL coefficient, not the cast one', () => {
-    const rof = known('mage', 'rain_of_fire');
-    const eff = required(rof.effects.find((e) => e.type === 'aoeDamage'));
-    expect(abilityDamageBonus(rof, eff, SC)).toBe(channelTickBonus(SC.spellPower, rof.def));
-  });
+  // The channelled-AoE case is GONE, not fixed. Rain of Fire was the only spell
+  // that folded Spell Power per channel tick, and it went with the Warlock in D1.
+  // The two channels left are physical (Volley scales off Ranged AP, Rending
+  // Cyclone off melee), so neither reaches channelTickBonus, and substituting one
+  // would pin a different coefficient under the old name. Restore this when D4
+  // re-homes a magic channel.
 });
