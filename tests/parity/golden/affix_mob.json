@@ -9,14 +9,14 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:warrior"
   ],
-  "draws": 74,
-  "drawDigest": "81422271",
+  "draws": 77,
+  "drawDigest": "168312fc",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "15ce4a3c",
+      "state": "f5e76d2d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -106,11 +106,13 @@
           "comboUntil": -1,
           "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.022,
+          "dodgeChance": 0.012,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 105,
+          "hit": 182,
           "hp": 90,
           "id": 415,
           "kind": "player",
@@ -160,33 +162,33 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "fc27d4d4",
-      "events": "9d919df8",
+      "state": "9de5a58e",
+      "events": "920049cc",
       "rng": {
-        "draws": 14,
-        "digest": "97283cfb"
+        "draws": 17,
+        "digest": "0d655f92"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "93e216e2",
-      "events": "eaa8d36f",
+      "state": "c62271a0",
+      "events": "357be310",
       "rng": {
-        "draws": 31,
-        "digest": "87048847"
+        "draws": 34,
+        "digest": "14849c77"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "76d33369",
-      "events": "30acd8bb",
+      "state": "c9d21e2d",
+      "events": "eba06792",
       "rng": {
-        "draws": 60,
-        "digest": "fb86ef2e"
+        "draws": 63,
+        "digest": "72fec67c"
       },
       "label": "taunt",
       "players": [
@@ -207,7 +209,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 230
+            "damageTaken": 253
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -313,12 +315,14 @@
           ],
           "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.031,
+          "dodgeChance": 0.013,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.5,
-          "hp": 342,
+          "flee": 120,
+          "hit": 198,
+          "hp": 319,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -338,7 +342,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 22.888462,
+          "resource": 25.215385,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -385,12 +389,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 108,
           "forcedTargetId": 415,
           "forcedTargetTimer": 3,
+          "hit": 179,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -445,10 +451,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 126,
+          "hit": 188,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -488,11 +496,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "1409c94c",
+      "state": "225eb8d8",
       "events": "741638a5",
       "rng": {
-        "draws": 74,
-        "digest": "81422271"
+        "draws": 77,
+        "digest": "168312fc"
       },
       "label": "final",
       "players": [
@@ -513,7 +521,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 230
+            "damageTaken": 253
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -620,12 +628,14 @@
           ],
           "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.031,
+          "dodgeChance": 0.013,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.7,
-          "hp": 342,
+          "flee": 120,
+          "hit": 198,
+          "hp": 319,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -645,7 +655,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 22.888462,
+          "resource": 25.215385,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -693,12 +703,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 108,
           "forcedTargetId": 415,
           "forcedTargetTimer": 2.8,
+          "hit": 179,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -753,10 +765,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 126,
+          "hit": 188,
           "hostile": true,
           "hp": 60000,
           "id": 417,

@@ -8,14 +8,14 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 425,
-  "drawDigest": "dbff21d9",
+  "draws": 427,
+  "drawDigest": "20ed659b",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "3d414018",
+      "state": "b3f620a7",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -95,11 +95,13 @@
           "comboUntil": -1,
           "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.019,
+          "dodgeChance": 0.012,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 104,
+          "hit": 185,
           "hp": 54,
           "id": 415,
           "kind": "player",
@@ -149,7 +151,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "7e29f044",
+      "state": "dae5a825",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -160,7 +162,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "cd1b3363",
+      "state": "e460f0e4",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -171,7 +173,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "8a331afd",
+      "state": "89e25754",
       "events": "f6dafa5e",
       "rng": {
         "draws": 76,
@@ -182,7 +184,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "d1f6bd42",
+      "state": "97c34c4f",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -193,7 +195,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "24df6799",
+      "state": "deb5328a",
       "events": "1beed8d7",
       "rng": {
         "draws": 268,
@@ -204,7 +206,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "1753cd06",
+      "state": "6c3d4b21",
       "events": "6ed33662",
       "rng": {
         "draws": 386,
@@ -215,11 +217,11 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "fd545963",
-      "events": "422fb47c",
+      "state": "1f190946",
+      "events": "bfdb5897",
       "rng": {
-        "draws": 425,
-        "digest": "dbff21d9"
+        "draws": 427,
+        "digest": "20ed659b"
       },
       "label": "final",
       "players": [
@@ -240,7 +242,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 109,
-            "damageTaken": 9
+            "damageTaken": 19
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -313,22 +315,24 @@
         {
           "aiState": "idle",
           "attackPower": 3,
-          "castRemaining": 1.2,
+          "castRemaining": 1.7,
           "castTargetId": 416,
-          "castTotal": 2,
+          "castTotal": 2.5,
           "castingAbility": "frostbolt",
-          "combatTimer": 1.35,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.019,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.022,
+          "dodgeChance": 0.013,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -0.10184,
           "fallStartY": 59.40092,
           "fiveSecondRule": 1.55,
+          "flee": 114,
           "gcdRemaining": 0.7,
-          "hp": 49991,
+          "hit": 198,
+          "hp": 49981,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -399,14 +403,16 @@
               "value": 0.6
             }
           ],
-          "combatTimer": 1.35,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 3.039753,
           "fallStartY": 59.40092,
           "fiveSecondRule": 99,
+          "flee": 110,
+          "hit": 180,
           "hostile": true,
           "hp": 8891,
           "id": 416,

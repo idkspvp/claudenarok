@@ -10,14 +10,14 @@
     "mobSwing affix cascade: rampage stacking buff_ap (warlord_drogmar self-buff)",
     "friendly-pet mobSwing: mob.hostile=false short-circuits every proc (no debuff on its target)"
   ],
-  "draws": 250,
-  "drawDigest": "569af84e",
+  "draws": 260,
+  "drawDigest": "c62aea8c",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "15ce4a3c",
+      "state": "f5e76d2d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -107,11 +107,13 @@
           "comboUntil": -1,
           "critChance": 0.016,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.022,
+          "dodgeChance": 0.012,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
+          "flee": 105,
+          "hit": 182,
           "hp": 90,
           "id": 415,
           "kind": "player",
@@ -161,44 +163,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "964fea2f",
-      "events": "218c7f1c",
+      "state": "5a011474",
+      "events": "58da59ec",
       "rng": {
-        "draws": 58,
-        "digest": "54c982e9"
+        "draws": 64,
+        "digest": "e3196e8b"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "e0ab078f",
-      "events": "3cd7dfe0",
+      "state": "0b65ddc4",
+      "events": "b570f204",
       "rng": {
-        "draws": 99,
-        "digest": "d7d725bd"
+        "draws": 109,
+        "digest": "bfc0b463"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "6d65d9cc",
-      "events": "e5ec34e5",
+      "state": "e08da02b",
+      "events": "ac18cf7e",
       "rng": {
-        "draws": 229,
-        "digest": "5cad4635"
+        "draws": 239,
+        "digest": "c15de75c"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "b6dd00f2",
+      "state": "29c5ead7",
       "events": "741638a5",
       "rng": {
-        "draws": 229,
-        "digest": "5cad4635"
+        "draws": 239,
+        "digest": "c15de75c"
       },
       "label": "affixes",
       "players": [
@@ -218,7 +220,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1641
+            "damageTaken": 1691
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -303,6 +305,28 @@
               "sourceId": 415
             },
             {
+              "duration": 10,
+              "id": "venom_webwood_spider",
+              "kind": "dot",
+              "name": "Spider Venom",
+              "remaining": 9,
+              "school": "nature",
+              "sourceId": 417,
+              "tickInterval": 2,
+              "tickTimer": 1,
+              "value": 2
+            },
+            {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 9.05,
+              "school": "shadow",
+              "sourceId": 418,
+              "value": 120
+            },
+            {
               "duration": 1,
               "id": "stun_mogger_lackey",
               "kind": "stun",
@@ -312,18 +336,6 @@
               "sourceId": 416
             },
             {
-              "duration": 10,
-              "id": "venom_webwood_spider",
-              "kind": "dot",
-              "name": "Spider Venom",
-              "remaining": 9.5,
-              "school": "nature",
-              "sourceId": 417,
-              "tickInterval": 2,
-              "tickTimer": 1.5,
-              "value": 2
-            },
-            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -331,16 +343,6 @@
               "remaining": 3.5,
               "school": "shadow",
               "sourceId": 418
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 9.5,
-              "school": "shadow",
-              "sourceId": 418,
-              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -349,11 +351,13 @@
           "comboUntil": -1,
           "critChance": 0.022,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.031,
+          "dodgeChance": 0.014,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102,
+          "flee": 123,
+          "hit": 203,
           "hp": 1000000,
           "id": 415,
           "inCombat": true,
@@ -406,12 +410,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
-          "hp": 199990,
+          "hp": 199977,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -448,7 +454,7 @@
           "threat": [
             [
               420,
-              10
+              23
             ]
           ],
           "weapon": {
@@ -460,14 +466,16 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 0.5,
+          "combatTimer": 1,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 417,
@@ -508,10 +516,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 418,
@@ -567,10 +577,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 419,
@@ -614,11 +626,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "hp": 75,
+          "flee": 116,
+          "hit": 183,
+          "hp": 77,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -659,12 +673,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 116,
+          "hit": 183,
           "hostile": true,
-          "hp": 199943,
+          "hp": 199923,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -700,7 +716,7 @@
           "threat": [
             [
               420,
-              58
+              78
             ]
           ],
           "weapon": {
@@ -715,11 +731,11 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 422,
-      "state": "5dbf5835",
+      "state": "3e1b7c03",
       "events": "741638a5",
       "rng": {
-        "draws": 250,
-        "digest": "569af84e"
+        "draws": 260,
+        "digest": "c62aea8c"
       },
       "label": "final",
       "players": [
@@ -739,7 +755,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1641
+            "damageTaken": 1691
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -824,6 +840,28 @@
               "sourceId": 415
             },
             {
+              "duration": 10,
+              "id": "venom_webwood_spider",
+              "kind": "dot",
+              "name": "Spider Venom",
+              "remaining": 8.8,
+              "school": "nature",
+              "sourceId": 417,
+              "tickInterval": 2,
+              "tickTimer": 0.8,
+              "value": 2
+            },
+            {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 8.85,
+              "school": "shadow",
+              "sourceId": 418,
+              "value": 120
+            },
+            {
               "duration": 1,
               "id": "stun_mogger_lackey",
               "kind": "stun",
@@ -833,18 +871,6 @@
               "sourceId": 416
             },
             {
-              "duration": 10,
-              "id": "venom_webwood_spider",
-              "kind": "dot",
-              "name": "Spider Venom",
-              "remaining": 9.3,
-              "school": "nature",
-              "sourceId": 417,
-              "tickInterval": 2,
-              "tickTimer": 1.3,
-              "value": 2
-            },
-            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -852,16 +878,6 @@
               "remaining": 3.3,
               "school": "shadow",
               "sourceId": 418
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 9.3,
-              "school": "shadow",
-              "sourceId": 418,
-              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -870,11 +886,13 @@
           "comboUntil": -1,
           "critChance": 0.022,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.031,
+          "dodgeChance": 0.014,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102.2,
+          "flee": 123,
+          "hit": 203,
           "hp": 1000000,
           "id": 415,
           "inCombat": true,
@@ -927,12 +945,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
-          "hp": 199990,
+          "hp": 199977,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -969,7 +989,7 @@
           "threat": [
             [
               420,
-              10
+              23
             ]
           ],
           "weapon": {
@@ -981,14 +1001,16 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 0.7,
+          "combatTimer": 1.2,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 417,
@@ -1029,10 +1051,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 418,
@@ -1088,10 +1112,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 136,
+          "hit": 193,
           "hostile": true,
           "hp": 200000,
           "id": 419,
@@ -1135,11 +1161,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "hp": 75,
+          "flee": 116,
+          "hit": 183,
+          "hp": 77,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -1180,12 +1208,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.05,
+          "dodgeChance": 0.01,
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
+          "flee": 116,
+          "hit": 183,
           "hostile": true,
-          "hp": 199943,
+          "hp": 199923,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -1221,7 +1251,7 @@
           "threat": [
             [
               420,
-              58
+              78
             ]
           ],
           "weapon": {
