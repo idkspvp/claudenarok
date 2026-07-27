@@ -10,6 +10,7 @@
 // cases exist to prevent coming back.
 
 import { describe, expect, it } from 'vitest';
+import { meleeSwing } from '../src/sim/combat/auto_attack';
 import {
   BASE_HIT_PERCENT,
   fleeRating,
@@ -20,7 +21,6 @@ import {
   missChanceFromContest,
   perfectDodgeChance,
 } from '../src/sim/combat/hit_flee';
-import { meleeSwing } from '../src/sim/combat/auto_attack';
 import { MOBS } from '../src/sim/data';
 import { createMob, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -108,11 +108,7 @@ describe('perfect dodge', () => {
 });
 
 describe('the contest reaches a real swing', () => {
-  function landRate(opts: {
-    attackerDex?: number;
-    targetAgi?: number;
-    swings?: number;
-  }): number {
+  function landRate(opts: { attackerDex?: number; targetAgi?: number; swings?: number }): number {
     const sim = new Sim({ seed: 11, playerClass: 'warrior' });
     const p = sim.player;
     p.hp = p.maxHp = 1_000_000;
@@ -121,7 +117,14 @@ describe('the contest reaches a real swing', () => {
       if (!meta) throw new Error('missing meta');
       const alloc: StatAllocation = { ...emptyStatAllocation(), dex: opts.attackerDex };
       meta.statAllocation = alloc;
-      recalcPlayerStats(p, meta.cls, meta.equipment, meta.talentMods, meta.equipmentInstance, alloc);
+      recalcPlayerStats(
+        p,
+        meta.cls,
+        meta.equipment,
+        meta.talentMods,
+        meta.equipmentInstance,
+        alloc,
+      );
     }
     const target = createMob((sim as never as { nextId: number }).nextId++, MOBS.forest_wolf, 5, {
       ...p.pos,

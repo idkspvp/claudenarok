@@ -33,18 +33,14 @@
 /** Attacker accuracy. The 175 is the baseline every combatant carries, which is
  *  what makes a same-level fight land most of its blows rather than whiff. */
 export function hitRating(level: number, dex: number, luk: number): number {
-  return (
-    175 + Math.max(1, Math.floor(level)) + Math.max(0, dex) + Math.floor(Math.max(0, luk) / 3)
-  );
+  return 175 + Math.max(1, Math.floor(level)) + Math.max(0, dex) + Math.floor(Math.max(0, luk) / 3);
 }
 
 /** Defender evasion. Its baseline is 75 below the attacker's on purpose: at equal
  *  level and equal attributes the attacker is ahead, and FLEE has to be BOUGHT
  *  with Agility before it starts refusing hits. */
 export function fleeRating(level: number, agi: number, luk: number): number {
-  return (
-    100 + Math.max(1, Math.floor(level)) + Math.max(0, agi) + Math.floor(Math.max(0, luk) / 5)
-  );
+  return 100 + Math.max(1, Math.floor(level)) + Math.max(0, agi) + Math.floor(Math.max(0, luk) / 5);
 }
 
 /** The floor and ceiling on the contest. Nothing is ever unhittable and nothing
