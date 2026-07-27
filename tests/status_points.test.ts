@@ -17,13 +17,13 @@ import {
 import {
   BASE_STAT,
   CREATION_STATUS_POINTS,
+  emptyStatAllocation,
   MAX_LEVEL,
   MAX_STAT,
   type StatAllocation,
-  emptyStatAllocation,
   statRaiseCost,
-  statusPointsSpent,
   statusPointsForLevel,
+  statusPointsSpent,
   totalStatusPointsAt,
 } from '../src/sim/types';
 

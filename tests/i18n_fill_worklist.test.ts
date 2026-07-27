@@ -13,7 +13,6 @@
 // scripts/i18n_hash.mjs (pure helpers; the script's main() only runs as a CLI).
 
 import { describe, expect, it } from 'vitest';
-// @ts-ignore - shared zero-dep JS tool (no .d.ts); same pattern as the registry test importing scripts/i18n_hash.mjs. We exercise its exported pure helpers.
 import {
   assertAutoFillableHasNoProse,
   buildWorklistOutputs,
@@ -21,7 +20,7 @@ import {
   expandGlossaryTerms,
   patternToRegExp,
   siblingKeys,
-  // @ts-ignore - shared zero-dep JS tool (no .d.ts); a formatting pass moved the
+  // @ts-expect-error - shared zero-dep JS tool (no .d.ts); a formatting pass moved the
   // directive above the multi-line import, where it applied to nothing.
 } from '../scripts/i18n_fill_worklist.mjs';
 

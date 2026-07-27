@@ -27,9 +27,9 @@ function storageWithLocale(
 describe('native device language selection', () => {
   afterEach(() => setLanguage('en'));
 
-    // Dropped with the locale cut: uses an exact supported device dialect when available...
+  // Dropped with the locale cut: uses an exact supported device dialect when available...
 
-    // Dropped with the locale cut: falls back from device language subtags to an available ...
+  // Dropped with the locale cut: falls back from device language subtags to an available ...
 
   it('returns null for unsupported device languages so English remains the default', () => {
     setLanguage('en');
@@ -66,15 +66,13 @@ describe('native device language selection', () => {
     expect(getLanguage()).toBe('en');
   });
 
-  it('keeps native auto-selected languages device-driven across launches', () => {
-  });
+  it('keeps native auto-selected languages device-driven across launches', () => {});
 
-  it('resets an auto-managed saved locale to English when the device language is unavailable', () => {
-  });
+  it('resets an auto-managed saved locale to English when the device language is unavailable', () => {});
 
-    // Dropped with the locale cut: it drove the device-language picker with an
-    // it_IT device locale and asserted it is applied in native mode and ignored
-    // outside it. Both halves need a supported non-English locale.
+  // Dropped with the locale cut: it drove the device-language picker with an
+  // it_IT device locale and asserted it is applied in native mode and ignored
+  // outside it. Both halves need a supported non-English locale.
 
   it('deduplicates navigator.languages with navigator.language preserving priority', () => {
     expect(nativeDeviceLocaleList({ languages: ['pl-PL'], language: 'pl-PL' })).toEqual(['pl-PL']);

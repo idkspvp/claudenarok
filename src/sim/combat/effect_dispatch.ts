@@ -223,7 +223,14 @@ export function runEffects(
       const lost = p.auras[sf];
       p.auras.splice(sf, 1);
       ctx.emit({ type: 'aura', targetId: p.id, name: lost.name, gained: false });
-      recalcPlayerStats(p, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+      recalcPlayerStats(
+        p,
+        meta.cls,
+        meta.equipment,
+        ctx.playerMods(meta),
+        meta.equipmentInstance,
+        meta.statAllocation,
+      );
     }
   }
   const threatOpts = { flat: res.threatFlat, mult: res.threatMult };

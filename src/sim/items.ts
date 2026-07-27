@@ -278,7 +278,14 @@ export function equipItem(
   }
   // The all-slots deed reads equipment, so re-check this player's triggers.
   ctx.markDeedsDirty(meta.entityId);
-  recalcPlayerStats(p, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    ctx.playerMods(meta),
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
   ctx.emit({ type: 'log', text: `Equipped ${def.name}.`, color: '#8f8', pid: meta.entityId });
 }
 
@@ -301,7 +308,14 @@ export function revalidateOffhandForSpec(ctx: SimContext, pid?: number): void {
   if (instance) meta.inventory.push({ itemId: offhandId, count: 1, instance });
   else addItemSilent(offhandId, 1, meta);
   ctx.markDeedsDirty(meta.entityId);
-  recalcPlayerStats(p, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    ctx.playerMods(meta),
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
   ctx.emit({
     type: 'log',
     text: `Unequipped ${def.name}.`,
@@ -335,7 +349,14 @@ export function unequipItem(ctx: SimContext, slot: EquipSlot, pid?: number): boo
   // enchanted piece gets its own instanced slot instead, so its enchant survives.
   if (instance) meta.inventory.push({ itemId, count: 1, instance });
   else addItemSilent(itemId, 1, meta);
-  recalcPlayerStats(p, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    ctx.playerMods(meta),
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
   const def = ITEMS[itemId];
   ctx.emit({
     type: 'log',

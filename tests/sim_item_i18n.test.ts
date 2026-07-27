@@ -24,8 +24,7 @@ afterEach(() => {
 });
 
 describe('sim item messages canonicalize same-name heroic variants', () => {
-  it('localizes German Moonwrack Robe equip messages through the base item without a fallback', async () => {
-  });
+  it('localizes German Moonwrack Robe equip messages through the base item without a fallback', async () => {});
 });
 
 describe('sim /gear readout is fully localized in every locale', () => {

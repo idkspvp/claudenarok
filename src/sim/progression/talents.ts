@@ -167,7 +167,14 @@ function recomputeTalents(ctx: SimContext, meta: PlayerMeta): void {
   );
   meta.talentMods = computeTalentModifiers(meta.cls, meta.talents, e?.level ?? 20);
   if (e)
-    recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+    recalcPlayerStats(
+      e,
+      meta.cls,
+      meta.equipment,
+      ctx.playerMods(meta),
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
   // Announce newly granted abilities (spec signature, active nodes): emits `learnAbility`
   // (the HUD places it on the bar + spellbook) and a "You have learned" log. This is a
   // LIVE-action path only (apply/spec-pick/respec/loadout-switch); character LOAD resolves
@@ -206,7 +213,14 @@ function stripOrphanedFormAuras(ctx: SimContext, meta: PlayerMeta, e: Entity | u
     }
   }
   if (changed) {
-    recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+    recalcPlayerStats(
+      e,
+      meta.cls,
+      meta.equipment,
+      ctx.playerMods(meta),
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
   }
 }
 

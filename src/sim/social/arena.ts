@@ -926,7 +926,14 @@ export function readyArenaFighter(
   }
   const meta = ctx.players.get(e.id);
   if (meta)
-    recalcPlayerStats(e, meta.cls, meta.equipment, ctx.playerMods(meta), meta.equipmentInstance, meta.statAllocation);
+    recalcPlayerStats(
+      e,
+      meta.cls,
+      meta.equipment,
+      ctx.playerMods(meta),
+      meta.equipmentInstance,
+      meta.statAllocation,
+    );
   e.hp = e.maxHp;
   e.resource = e.resourceType === 'mana' ? e.maxResource : e.resourceType === 'energy' ? 100 : 0;
   // Target retention is a separate concern from clearPrep (clean slate vs

@@ -43,6 +43,7 @@ import { getArchetypeTitle, getHobbyCraft } from '../sim/professions/archetype';
 import type { MaterialRarity } from '../sim/professions/gathering';
 import { emptyCraftSkills } from '../sim/professions/wheel';
 import type { ResolvedAbility } from '../sim/sim';
+import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
 import { parseTalentAllocation } from '../sim/talent_allocation_input';
 import { repairTalentLoadouts } from '../sim/talent_loadouts';
 import {
@@ -53,6 +54,7 @@ import {
   type Entity,
   type EquipSlot,
   emptyMoveInput,
+  emptyStatAllocation,
   type InvSlot,
   type ItemInstancePayload,
   type LootRollChoice,
@@ -62,18 +64,16 @@ import {
   type MoveInput,
   type PlayerClass,
   type QuestProgress,
-  emptyStatAllocation,
-  type StatAllocation,
-  type StatusStat,
   type QuestState,
   type RiteIntensity,
   type SimEvent,
   type SportRole,
+  type StatAllocation,
+  type StatusStat,
   type VcBracket,
   type VcNationId,
   type WeaponSkinType,
 } from '../sim/types';
-import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
 import {
   type AccountCosmetics,
   type ActiveFrostRing,
