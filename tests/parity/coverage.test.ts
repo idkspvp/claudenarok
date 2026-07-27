@@ -453,12 +453,15 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(meta.talentMods.spec).toBe('fury');
   });
 
-  it('multi_class_heal: heals land, a crit fires, absorb is consumed, threat splits across aware mobs, HoT ticks', () => {
+  it('multi_class_heal: heals land, absorb is consumed, threat splits across aware mobs, HoT ticks', () => {
     const rec = run('multi_class_heal');
     const ev = rec.allEvents as Ev[];
     const heals = ev.filter((e) => e.type === 'heal2' && e.amount > 0);
     expect(heals.length).toBeGreaterThan(0); // applyHeal emitted real (non-overheal) heals
-    expect(heals.some((e) => e.crit === true)).toBe(true); // forced-crit *1.5 path fired
+    // No critical heal to look for any more: heals roll against the spell crit
+    // rate, which pre-renewal Ragnarok fixes at zero. The scenario still covers
+    // the rest of the heal path below.
+    expect(heals.every((e) => e.crit === false)).toBe(true);
     // HoT aura-tick heal path (the hot branch -> healingTakenMult + healingThreat).
     const hotAbility = rec.notes.hotAbility as string;
     expect(ev.some((e) => e.type === 'heal2' && e.ability === hotAbility && e.amount > 0)).toBe(
