@@ -180,6 +180,18 @@ function rehearse(state: CharacterState, seed: number, playerClass = 'swordman')
     ) {
       continue; // a default fill any curve-era load produces, reset or not
     }
+    if (
+      row.path === 'hp' &&
+      typeof row.before === 'number' &&
+      typeof row.after === 'number' &&
+      row.after < row.before
+    ) {
+      // The load-time pool clamp. D1 put max HP on Ragnarok's curve, which is far
+      // below the scale these pre-D1 rows were written at, so a stored hp above the
+      // new maximum is clamped down on load. The corpus is deliberately NOT edited
+      // to hide it: a real saved character takes exactly this clamp.
+      continue;
+    }
     violations.push(
       `undocumented delta: ${row.path}: ${JSON.stringify(row.before)} -> ${JSON.stringify(row.after)}`,
     );

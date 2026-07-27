@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { fundCasts } from './helpers/sp';
+import { fundCasts, raisePool } from './helpers/sp';
 
 // Mock the db layer so no Postgres is needed; snapshot logic is under test.
 vi.mock('../server/db', () => ({
@@ -747,26 +747,27 @@ describe('delta snapshots', () => {
   });
 
   it('includes live aura and movement diagnostics in admin online rows', () => {
-    const druidServer = new GameServer();
+    // Fleet Form went with the Druid in D1; the Archer's cheetah aspect is the
+    // surviving speed buff, so it is what the movement diagnostics read here.
+    const speedServer = new GameServer();
     const fc = fakeWs();
-    const acolyte = joinServer(druidServer, fc, 10, 'Newkali', 'acolyte');
-    const player = druidServer.sim.entities.get(acolyte.pid)!;
-    druidServer.sim.setPlayerLevel(20, acolyte.pid);
-    fundCasts(player);
+    const archer = joinServer(speedServer, fc, 10, 'Newkali', 'archer');
+    const player = speedServer.sim.entities.get(archer.pid)!;
+    speedServer.sim.setPlayerLevel(20, archer.pid);
+    raisePool(player);
 
-    druidServer.sim.castAbility('travel_form', acolyte.pid);
-    druidServer.sim.tick();
+    speedServer.sim.castAbility('aspect_of_the_cheetah', archer.pid);
+    speedServer.sim.tick();
 
-    const row = druidServer.liveSessions().find((p) => p.characterId === 10)!;
-    expect(row.moveSpeedMultiplier).toBeCloseTo(1.4);
-    expect(row.runSpeed).toBeCloseTo(9.8);
+    const row = speedServer.liveSessions().find((p) => p.characterId === 10)!;
+    expect(row.moveSpeedMultiplier).toBeCloseTo(1.3);
+    expect(row.runSpeed).toBeCloseTo(9.1);
     expect(row.swimming).toBe(false);
     expect(row.auras).toContainEqual(
       expect.objectContaining({
-        id: 'travel_form',
-        name: 'Fleet Form',
-        kind: 'form_travel',
-        value: 1.4,
+        id: 'aspect_of_the_cheetah',
+        kind: 'buff_speed',
+        value: 1.3,
       }),
     );
   });

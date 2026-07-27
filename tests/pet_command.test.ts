@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'archer', noPlayer: true });
@@ -41,27 +42,9 @@ describe('/pet command', () => {
   // their demon (paying the cost + 180s cooldown) on login instead of getting it
   // back for free, which would let a relog launder the summon cooldown. The demon
   // snapshot is dropped to null at the serializeCharacter boundary, so a reload
-  // spawns no demon and forces a fresh summon.
-  it('does not persist a summoned mage demon across a save/reload', () => {
-    const first = makeClassWorld('mage');
-    const pid = first.addPlayer('mage', 'Wick');
-    first.setPlayerLevel(20, pid);
-    first.castAbility('summon_voidwalker', pid);
-    for (let i = 0; i < 20 * 6; i++) first.tick();
-    expect(first.petOf(pid)?.templateId).toBe('gloomshade');
-    const saved = first.serializeCharacter(pid)!;
-    expect(saved.pet).toBeNull();
-
-    const restored = makeClassWorld('mage');
-    const restoredPid = restored.addPlayer('mage', 'Wick', { state: saved });
-    const pets = [...restored.entities.values()].filter(
-      (e) => e.kind === 'mob' && e.ownerId === restoredPid,
-    );
-
-    expect(pets).toHaveLength(0);
-    expect(restored.petOf(restoredPid)).toBeNull();
-  });
-
+  // spawns no demon and forces a fresh summon. That save-drop rule is demon-only,
+  // and the Warlock that owned every demon was cut in D1, so the round trip has no
+  // live summon to exercise it: the Water Elemental persists like a tamed pet.
   it('still persists a non-demon (archer beast) pet across a save/reload', () => {
     const first = makeWorld();
     const pid = first.addPlayer('archer', 'Tamer');

@@ -36,11 +36,11 @@ describe('v0.26 two-handed greatblade itemization', () => {
       shield: true,
       blockValue: 14,
       stats: { armor: 112, vit: 2 },
-      requiredClass: ['swordman', 'swordman', 'acolyte'],
+      requiredClass: ['swordman'],
     });
+    // The Paladin and the Shaman shared this shield and were cut in D1.
     expect(canEquipItem('swordman', wallshield)).toBe(true);
-    expect(canEquipItem('swordman', wallshield)).toBe(true);
-    expect(canEquipItem('acolyte', wallshield)).toBe(true);
+    expect(canEquipItem('acolyte', wallshield)).toBe(false);
     expect(canEquipItem('mage', wallshield)).toBe(false);
     expect(NPCS.armorer_hode.vendorItems).toEqual(
       expect.arrayContaining(['highwatch_greatsword', 'highwatch_wallshield']),

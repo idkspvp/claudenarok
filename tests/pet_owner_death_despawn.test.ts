@@ -12,7 +12,10 @@ import { fundCasts } from './helpers/sp';
 // hit a dead spot in updatePet (the despawn guard only fires when the owner is ABSENT,
 // and petPickTarget is gated on `!owner.dead`): it could neither acquire targets nor be
 // cleaned up. It sat in the world at full HP, unkillable. The owner's death must now
-// kill the pet too: mage demons unravel and despawn, archer pets leave a revivable
+// kill the pet too: archer pets leave a revivable
+// corpse. The demon arm of this case went with the Warlock in D1; the only live
+// summon is the Mage's Water Elemental, which is family 'elemental' and so follows
+// the tamed-pet rule the case below already covers, not the demon unravel.
 // corpse (classic Revive Pet), so neither stays immortal.
 
 type AnySim = Sim & Record<string, any>;
@@ -58,26 +61,6 @@ describe('a dead owner does not leave an immortal pet', () => {
     expect(corpse).toBeTruthy();
     expect(corpse.id).toBe(pet.id);
     expect(corpse.dead).toBe(true);
-  });
-
-  it('a slain mage unravels their demon (fully despawns), not immortal', () => {
-    const sim = new Sim({ seed: 13, playerClass: 'mage', noPlayer: true }) as AnySim;
-    const wpid = sim.addPlayer('mage', 'Demonist') as number;
-    sim.setPlayerLevel(12, wpid);
-    const mage = sim.entities.get(wpid) as AnyEntity;
-    fundCasts(mage);
-    (sim as any).summonPet(mage, 'emberkin');
-    const imp = petOf(sim.ctx, wpid) as AnyEntity;
-    expect(imp).toBeTruthy();
-    expect(MOBS[imp.templateId].family).toBe('demon');
-
-    killEntity(sim, mage);
-    expect(mage.dead).toBe(true);
-    expect(imp.dead).toBe(true);
-
-    // Brief corpse, then the demon is gone from the world entirely.
-    for (let i = 0; i < 20 * 5; i++) sim.tick();
-    expect(sim.entities.has(imp.id)).toBe(false);
   });
 
   it('is deterministic: the same seed kills the pet identically', () => {

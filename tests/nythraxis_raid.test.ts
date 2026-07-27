@@ -311,7 +311,9 @@ describe('Nythraxis raid encounter', () => {
         expect(total).toBeCloseTo(1, 5);
       }
     }
-    expect(ITEMS.maul_of_the_scourged_wilds.requiredClass).toEqual(['acolyte']);
+    // The feral ladder's owner (the Druid) was cut in D1, so the bonus draw is
+    // still a real drop with a real item id and nobody who can equip it yet.
+    expect(ITEMS.maul_of_the_scourged_wilds.requiredClass).toEqual([]);
 
     for (const itemId of ['deathless_heartwood', 'kingsbane_last_oath']) {
       const item = ITEMS[itemId];
@@ -335,12 +337,14 @@ describe('Nythraxis raid encounter', () => {
       expect(loot.some((entry) => entry.itemId === itemId)).toBe(true);
     }
 
-    expect(ITEMS.crownforged_dreadhelm.requiredClass).toEqual(['swordman', 'swordman']);
-    expect(ITEMS.crownforged_warspaulders.requiredClass).toEqual(['swordman', 'swordman']);
-    expect(ITEMS.soulflame_cowl.requiredClass).toEqual(['mage', 'acolyte', 'mage', 'acolyte']);
-    expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'acolyte', 'mage', 'acolyte']);
-    expect(ITEMS.stormcallers_crown.requiredClass).toEqual(['acolyte']);
-    expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual(['acolyte']);
+    expect(ITEMS.crownforged_dreadhelm.requiredClass).toEqual(['swordman']);
+    expect(ITEMS.crownforged_warspaulders.requiredClass).toEqual(['swordman']);
+    expect(ITEMS.soulflame_cowl.requiredClass).toEqual(['mage', 'acolyte']);
+    expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'acolyte']);
+    // The Stormcaller mail line was the Shaman's, and that class was cut in D1, so
+    // the pieces keep their ids and their stats with nobody on the list.
+    expect(ITEMS.stormcallers_crown.requiredClass).toEqual([]);
+    expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual([]);
   });
 
   it('drops the offhand-slot and two-hander epics at item level 29 (raid source)', () => {

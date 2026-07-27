@@ -45,8 +45,9 @@ describe('over-level gear is inert', () => {
   it('reactivates once the wearer reaches the required level', () => {
     const active = characterDerivedStats('swordman', LEGS_REQ, { legs: LEGS } as Equip);
     const bare = characterDerivedStats('swordman', LEGS_REQ, {} as Equip);
-    // 95 from the piece, plus 2 armor for each of the 4 Vitality it carries.
-    expect(active.stats.armor).toBe(bare.stats.armor + 95 + 8);
+    // 95 from the piece and nothing else: D1 took the Vitality-to-armour term out,
+    // so the four Vitality the piece carries no longer add eight armour on top.
+    expect(active.stats.armor).toBe(bare.stats.armor + 95);
     expect(active.stats.vit).toBe(bare.stats.vit + 4);
     expect(active.maxHp).toBeGreaterThan(bare.maxHp);
   });

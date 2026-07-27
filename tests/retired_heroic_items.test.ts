@@ -41,7 +41,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 315, str: 11, vit: 9 },
     sellValue: 13_000,
-    requiredClass: ['swordman', 'swordman', 'acolyte'],
+    requiredClass: ['swordman'],
   },
   scourgehide_carapace: {
     id: 'scourgehide_carapace',
@@ -53,7 +53,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 172, agi: 12, vit: 10 },
     sellValue: 14_000,
-    requiredClass: ['thief', 'archer', 'acolyte'],
+    requiredClass: ['thief', 'archer'],
   },
   soulforged_warplate: {
     id: 'soulforged_warplate',
@@ -65,7 +65,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 335, int: 12, luk: 10 },
     sellValue: 14_000,
-    requiredClass: ['swordman', 'acolyte'],
+    requiredClass: [],
   },
   soulrend_diadem: {
     id: 'soulrend_diadem',
@@ -77,7 +77,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 76, int: 10, luk: 8 },
     sellValue: 12_000,
-    requiredClass: ['mage', 'acolyte', 'mage', 'acolyte'],
+    requiredClass: ['mage', 'acolyte'],
   },
 };
 
@@ -160,10 +160,10 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     expect(equipped.entity.equippedItems).toEqual({ chest: 'scourgehide_carapace' });
     expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + 12);
     expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + 10);
-    // 172 from the piece itself, plus 2 armor for each of the 10 Vitality it
-    // carries: Vitality reduces damage as well as raising the pool now. Its 12
-    // Agility adds none, where it used to add 24 (the old total was 196).
-    expect(equipped.entity.stats.armor).toBe(unequipped.entity.stats.armor + 172 + 20);
+    // 172 from the piece itself and nothing else. Neither attribute it carries adds
+    // armour any more: Agility never did (it buys evasion), and D1 took the
+    // Vitality term out because Vitality already buys soft DEF.
+    expect(equipped.entity.stats.armor).toBe(unequipped.entity.stats.armor + 172);
     // The 10 Vitality is worth 10% of the pool rather than a flat 100 HP. Read the
     // unmultiplied pool off the class def: maxHp is already rounded, and rounding
     // it twice lands a point off.

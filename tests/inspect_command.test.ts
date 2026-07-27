@@ -35,10 +35,10 @@ describe('/inspect command', () => {
     // format, not how big a level-1 pool happens to be.
     e.maxHp = 100;
     e.hp = 40;
-    expect(inspectReply(sim, a, '/inspect Gimel')).toBe(`Gimel: Level ${e.level} Rogue: HP 40%.`);
+    expect(inspectReply(sim, a, '/inspect Gimel')).toBe(`Gimel: Level ${e.level} Thief: HP 40%.`);
 
     e.hp = 0;
-    expect(inspectReply(sim, a, '/inspect Gimel')).toBe(`Gimel: Level ${e.level} Rogue: HP dead.`);
+    expect(inspectReply(sim, a, '/inspect Gimel')).toBe(`Gimel: Level ${e.level} Thief: HP dead.`);
   });
 
   it('matches names case-insensitively when unambiguous', () => {

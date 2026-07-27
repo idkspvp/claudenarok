@@ -36,9 +36,10 @@ function lastReply(sim: Sim, cmd: string, pid: number): string {
 
 describe('/form command', () => {
   it('reports no form or stance by default', () => {
-    // Warriors now auto-wear a stance, so the no-form default uses a swordman.
+    // The Swordman auto-wears a stance, so the no-form default needs a job that
+    // does not: any of the other four will do.
     const sim = makeWorld();
-    const a = sim.addPlayer('swordman', 'Aleph');
+    const a = sim.addPlayer('mage', 'Aleph');
     sim.tick();
     expect(lastReply(sim, '/form', a)).toBe('You are not in any form or stance.');
   });

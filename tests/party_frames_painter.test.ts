@@ -547,12 +547,12 @@ describe('PartyFramesPainter: keyed pool over the elided writers', () => {
     iconDataUrlSpy.mockClear();
     painter.sync([member({ pid: 2, name: 'Mage', cls: 'mage', hp: 10 })], 1, false);
     expect(iconDataUrlSpy.mock.calls.some((c) => c[1] === 'class_mage')).toBe(false);
-    // The mage leaves; a PRIEST reuses the freed row node. The crest repaints for the
+    // The mage leaves; an ACOLYTE reuses the freed row node. The crest repaints for the
     // NEW class, proving the gate reads the live slot, not a member captured at build.
     painter.sync([], 1, false);
     iconDataUrlSpy.mockClear();
-    painter.sync([member({ pid: 9, name: 'Priest', cls: 'acolyte' })], 1, false);
-    expect(iconDataUrlSpy.mock.calls.some((c) => c[1] === 'class_priest')).toBe(true);
+    painter.sync([member({ pid: 9, name: 'Acolyte', cls: 'acolyte' })], 1, false);
+    expect(iconDataUrlSpy.mock.calls.some((c) => c[1] === 'class_acolyte')).toBe(true);
   });
 
   it('clear() empties the container (no-party transition)', () => {

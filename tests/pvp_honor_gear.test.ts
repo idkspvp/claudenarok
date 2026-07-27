@@ -99,7 +99,8 @@ interface Profile {
 const PROFILES: readonly Profile[] = [
   {
     name: 'Strength mail',
-    classes: ['swordman', 'swordman', 'acolyte'],
+    // The Paladin and the Shaman shared this line and were cut in D1.
+    classes: ['swordman'],
     armor: FURYFORGED,
     neck: 'final_oath_medallion',
     rings: ['iron_vow_band', 'unbroken_circle'],
@@ -107,7 +108,7 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'Agility leather',
-    classes: ['thief', 'archer', 'acolyte'],
+    classes: ['thief', 'archer'],
     armor: ASHSTALKER,
     neck: 'razorwind_torque',
     rings: ['fleetblood_band', 'last_step_signet'],
@@ -115,7 +116,9 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'caster mail',
-    classes: ['swordman', 'acolyte'],
+    // Its wearers were the holy Paladin and the restoration Shaman, both cut, so
+    // the line survives as items with no profile class left to check.
+    classes: [],
     armor: STORMBOUND,
     neck: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],
@@ -123,7 +126,7 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'caster cloth',
-    classes: ['mage', 'acolyte', 'mage', 'acolyte'],
+    classes: ['mage', 'acolyte'],
     armor: CINDERWEAVE,
     neck: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],
@@ -239,11 +242,16 @@ describe('FURY WARFARE item budgets', () => {
 
   it('derives 16.8 percent offense and defense by equipping a complete profile', () => {
     for (const profile of PROFILES) {
-      const player = createPlayer(1, profile.classes[0], { x: 0, y: 0, z: 0 }, profile.name);
+      // The caster-mail line has no wearer left (its two classes were cut in D1),
+      // so there is nobody to equip it on; its budget is still pinned by the
+      // per-item cases above.
+      const cls = profile.classes[0];
+      if (!cls) continue;
+      const player = createPlayer(1, cls, { x: 0, y: 0, z: 0 }, profile.name);
       player.level = 20;
       recalcPlayerStats(
         player,
-        profile.classes[0],
+        cls,
         equipmentForProfile(profile),
         undefined,
         {},
