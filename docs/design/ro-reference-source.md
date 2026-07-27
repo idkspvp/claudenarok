@@ -80,12 +80,38 @@ Flooring at 0 instead let soft DEF absorb a whole hit, which is how a druid's
 Swipe on an arena opponent resolved to exactly no damage; `combat/defence.ts`
 holds the floor until refining becomes a term in the physical pipeline.
 
+**Weapon damage, pre-renewal** (`battle_calc_base_damage`, the PC branch):
+`atkmax` is the weapon's attack power. A player's `atkmin` is NOT a weapon stat:
+it is `DEX x (80 + weaponLevel x 20) / 100`, clamped to atkmax. For a BOW it then
+becomes `atkmin x atkmax / 100`, and if that exceeds atkmax the CEILING rises to
+meet it, so a high-Dexterity archer rolls above the weapon's own attack power. A
+non-critical rolls uniformly over `[atkmin, atkmax)`, excluding the top; a
+critical takes atkmax with no roll and no multiplier (the x1.4 is Renewal's).
+Monsters roll an authored min/max pair with no Dexterity term. Size scales the
+weapon portion only; status ATK is added AFTER it.
+
+**A critical ignores DEF outright** (`attack_ignores_def`, first branch under
+`#ifndef RENEWAL`). That plus taking atkmax is the entire pre-renewal critical.
+Removing the x2 without this would have been a straight nerf; with it, criticals
+are the answer to an armoured target.
+
+**`status_base_atk` has no separate ranged formula.** For the bow family
+(`W_BOW`, `W_MUSICAL`, `W_WHIP`, and the guns) it feeds the SAME formula with STR
+and DEX swapped, so Dexterity leads and takes the squared term. This project's
+`statusRangedAttackPower` already matched that exactly; an earlier note here
+called it invented, which was wrong. Note the two sets differ: instruments and
+whips swap their attack stats but are not ammunition weapons, so only bows take
+the arrow damage-floor rule.
+
 ## Open items this reference has surfaced
 
-- **`statusRangedAttackPower` is invented.** There is no separate bow ATK formula
-  in the source. Bows scale through the weapon-damage FLOOR instead: `atkmin =
-  DEX x (80 + weaponLevel x 20) / 100`, then for bows `atkmin = atkmin x atkmax /
-  100`. Belongs to the C2 damage-formula pass.
+- **Ability criticals still multiply by 2** (`combat/effect_dispatch.ts`), while
+  auto-attacks no longer do. In Ragnarok most skills simply cannot crit at all,
+  and the ones that can use atkmax like any other critical, so the fix is part of
+  authoring the skill list rather than a change to the damage pipeline.
+- **`MOB_AP_PER_DPS` is the last calibration constant left.** Monster attack power
+  is still on the pre-conversion scale, so it is divided down where a player's
+  adds raw. It goes away when the monster records carry an authored ATK pair.
 - **Three heroic difficulty floors now fall about 1.3% short** (`hollow_crypt`
   494 against 500, `sunken_bastion` 148 against 150, the Nythraxis heroic boss
   988 against 1000; `tests/heroic_difficulty_floors.test.ts`). Cause: the old
