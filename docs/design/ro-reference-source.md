@@ -143,6 +143,29 @@ for one while Vitality pays half**, which makes a caster the hardest magic targe
 in the game and the softest to answer with a weapon. Converted in
 `src/sim/combat/magic_defence.ts`.
 
+**Attack speed** (`status_base_amotion_pc` `#else` arm, its clamp in
+`status_calc_pc_`, the auto-attack timer in unit.cpp). The base delay is
+`job->aspd_base[weaponType]`, indexed by JOB and by WEAPON TYPE together, so an
+Archer and an Acolyte holding the same mace swing at different speeds. Attack
+speed is a property of who holds the weapon, which is why this game's authored
+per-weapon `speed` cannot express it. Dual wielding takes `(w1 + w2) x 7 / 10`,
+seven tenths of the two ADDED, not their average, so two one-handers are slower
+than either alone.
+
+Stats then cut a percentage: `amotion -= amotion x (4 x AGI + DEX) / 1000`.
+Agility is worth exactly four Dexterity, with no second term and no curve, and
+the pair caps at a 49.5% reduction at 99 in both, so attributes alone can never
+halve a swing.
+
+Two values that a search or a memory gets wrong. The clamp is **[100, 4000]**
+milliseconds, not 95 at the fast end: 100 is `max_aspd` 190 run through
+`battle_adjust_conf`'s conversion `(2000 - 190 x 10) x 2 = 200` and then halved
+by `AMOTION_DIVIDER_PC`. And the swing interval is **`adelay`, which is twice
+`amotion`**: amotion is the animation and gates movement, while the auto-attack
+timer is scheduled at `attackabletime = tick + adelay`. Reading the interval off
+amotion makes every character attack twice as fast as Ragnarok does. Converted in
+`src/sim/combat/aspd.ts`.
+
 ## Open items this reference has surfaced
 
 - **Magic crit is deliberately not converted yet.** Verified that pre-renewal
@@ -166,6 +189,12 @@ in the game and the softest to answer with a weapon. Converted in
 - **The live class list is still the inherited nine**, not the Classic tree in
   `content/jobs.ts`. Attack speed is the system blocked on the migration: it is
   per JOB and per weapon class.
+- **The ASPD base table is unwritten, and it is ours to author.** `combat/aspd.ts`
+  takes the base as an argument for two reasons: the table is indexed by the five
+  first jobs, which do not exist as `PlayerClass` members yet, and rAthena's own
+  values live in `db/pre-re/job_stats.yml`, which the rule above puts off limits.
+  Wiring it also retires `WeaponInfo.speed`, since a per-weapon speed cannot
+  express a per-job one, and that changes the cadence of every existing weapon.
 - **`MOB_AP_PER_DPS` is the last calibration constant left.** Monster attack power
   is still on the pre-conversion scale, so it is divided down where a player's
   adds raw. It goes away when the monster records carry an authored ATK pair.
