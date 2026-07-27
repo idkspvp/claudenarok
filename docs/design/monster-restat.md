@@ -199,32 +199,12 @@ are deliberately spread across four orders of magnitude: 12% of its drops are
 above 50% and 22% are below 0.1%, which is the same table holding both the thing
 you always get and the thing you tell people about.
 
-### Cards follow SpiritVale, not Ragnarok, and that is a real choice
+### Cards, crafting and refining have their own document
 
-The two designs are not variations on each other, so this is recorded as a
-decision rather than a number.
+The card rates, the rarity tiers, the forge, the crafting stations and the
+refining ladder are all settled, and all of them follow SpiritVale rather than
+Ragnarok. They live in `drops-and-crafting.md` because they are a subsystem
+rather than part of this authoring pass.
 
-| | Ragnarok pre-renewal | SpiritVale, and OURS |
-|---|---|---|
-| card from a normal monster | 0.01% | **1 to 5%** |
-| from an elite | - | 10 to 15% |
-| from a boss | - | **25 to 50%**, never below Uncommon |
-| how you get a better one | you do not, you find it | **combine 5 of a rarity into 1 of the next, always succeeds** |
-| carries a card at all | 52% of monsters | to be decided per monster |
-
-Ragnarok makes a card a lottery ticket: one drop at one in ten thousand, and the
-card you find defines a build. SpiritVale makes it a **currency** you accumulate
-and upgrade through a forge, with rarity tiers doing the work rarity used to.
-
-Taking SpiritVale's numbers means **a card stops being a moment you remember and
-becomes a progression track you advance**. That is a legitimate design and it is
-the one chosen, but it is not the Ragnarok feel and should not be described as
-one later.
-
-Two consequences to carry forward:
-
-- The rarity tiers and the forge are the system. Without them, 1 to 5% drops are
-  simply cards made worthless; the tiers are what absorbs the volume.
-- **SpiritVale unlocks its forge with a level-20 quest, and this project deleted
-  the quest system.** The unlock needs another gate: a plain level requirement,
-  or open from the start. Not yet decided.
+The only arm that belongs HERE is the material one, because it is one more line
+on a record already being edited.
