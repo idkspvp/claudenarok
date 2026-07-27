@@ -136,6 +136,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'deep_wounds',
       'enrage_passive',
       'bracing_roll',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'bloodthirst',
+      'mortal_strike',
+      'shield_slam',
     ],
     color: 0xd67a54,
   },
@@ -225,6 +230,12 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'perfect_moment',
       'fireball_form',
       'phase_tumble',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'frost_nova',
+      'ice_lance',
+      'pyroblast',
+      'temporal_mend',
     ],
     color: 0x33c1f1,
   },
@@ -266,6 +277,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'stealth',
       'kick',
       'shadowslip',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'blade_flurry',
+      'cold_blood',
+      'hemorrhage',
     ],
     color: 0xfcee58,
   },
@@ -300,6 +316,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'rebuke',
       'sacred_bulwark',
       'sanctified_sidestep',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'crusader_strike',
+      'holy_shield',
+      'holy_shock',
     ],
     color: 0xf58ca0,
   },
@@ -335,6 +356,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'volley',
       'counter_shot',
       'wildstep',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'bestial_wrath',
+      'trueshot_aura',
+      'wyvern_sting',
     ],
     color: 0xa6d84f,
   },
@@ -364,6 +390,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'mind_flay',
       'flash_heal',
       'veilstep',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'holy_nova',
+      'power_infusion',
+      'shadowform',
     ],
     color: 0xc6d4f0,
   },
@@ -393,6 +424,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'ghost_wolf',
       'earthquake',
       'galestep',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'chain_heal',
+      'elemental_mastery',
+      'stormstrike',
     ],
     color: 0x4e8aea,
   },
@@ -431,6 +467,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'rain_of_fire',
       'spell_lock',
       'dreadstep',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'conflagrate',
+      'metamorphosis',
+      'siphon_life',
     ],
     color: 0xa785e6,
   },
@@ -488,6 +529,11 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
       'skull_bash',
       'primal_reflexes',
       'feral_tumble',
+      // Spec signatures, re-homed here when the talent system was removed: each
+      // was granted by its spec and had no other acquisition path.
+      'feral_charge',
+      'moonkin_form',
+      'swiftmend',
     ],
     color: 0xff8c1a,
   },
