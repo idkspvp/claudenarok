@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e9e4e432",
+      "state": "00b4368a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -238,7 +238,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -294,7 +294,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -359,7 +359,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -417,7 +417,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -442,7 +442,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -471,7 +475,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "4dd783c3",
+      "state": "db23198d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -678,7 +682,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -734,7 +738,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -799,7 +803,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -857,7 +861,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -882,7 +886,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -911,7 +919,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "ed7d5bb5",
+      "state": "fc8c82dd",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1118,7 +1126,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -1174,7 +1182,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -1239,7 +1247,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -1297,7 +1305,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1322,7 +1330,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -1351,7 +1363,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "1f970870",
+      "state": "f966ce24",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1558,7 +1570,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -1614,7 +1626,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -1679,7 +1691,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -1737,7 +1749,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1762,7 +1774,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -1791,7 +1807,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "953cef1a",
+      "state": "608357ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1998,7 +2014,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -2054,7 +2070,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -2119,7 +2135,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -2177,7 +2193,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2204,7 +2220,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -2233,7 +2253,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "70e412fe",
+      "state": "8af4987e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2440,7 +2460,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -2496,7 +2516,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -2561,7 +2581,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -2619,7 +2639,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2646,7 +2666,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -2675,7 +2699,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "7f8d8c37",
+      "state": "1d63a62d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2882,7 +2906,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -2938,7 +2962,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -3003,7 +3027,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -3061,7 +3085,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -3087,7 +3111,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -3116,7 +3144,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "3c7ba6e9",
+      "state": "a932ed13",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3323,7 +3351,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -3379,7 +3407,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -3444,7 +3472,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -3502,7 +3530,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -3528,7 +3556,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "threat": [
@@ -3557,7 +3589,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "2dbdc3a6",
+      "state": "6276a61a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3764,7 +3796,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -3820,7 +3852,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -3885,7 +3917,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -3942,7 +3974,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -3968,7 +4000,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "weapon": {
@@ -3983,7 +4019,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "2dbdc3a6",
+      "state": "6276a61a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4190,7 +4226,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -4246,7 +4282,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -4311,7 +4347,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -4368,7 +4404,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -4394,7 +4430,11 @@
             "y": 1.5
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "templateId": "forest_wolf",
           "weapon": {

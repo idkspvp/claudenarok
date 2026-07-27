@@ -8,14 +8,14 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 153,
-  "drawDigest": "ded1cbc7",
+  "draws": 159,
+  "drawDigest": "7892bae0",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "2bc1e901",
+      "state": "aac40f8f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -89,7 +89,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -156,44 +156,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "e6bea6f9",
-      "events": "6a83cf70",
+      "state": "01e73ddc",
+      "events": "dbd02e6d",
       "rng": {
-        "draws": 13,
-        "digest": "3fc203d8"
+        "draws": 16,
+        "digest": "ac87be47"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "6ce577c5",
-      "events": "32d624ec",
+      "state": "fc36f9ad",
+      "events": "13b9166b",
       "rng": {
-        "draws": 22,
-        "digest": "e093578a"
+        "draws": 24,
+        "digest": "672bbd02"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "15ad3265",
-      "events": "3f82c231",
+      "state": "684af00c",
+      "events": "7d3bba45",
       "rng": {
-        "draws": 100,
-        "digest": "86e1474f"
+        "draws": 103,
+        "digest": "4bf8fdbd"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "cc66676b",
+      "state": "929f2ea0",
       "events": "741638a5",
       "rng": {
-        "draws": 153,
-        "digest": "ded1cbc7"
+        "draws": 159,
+        "digest": "7892bae0"
       },
       "label": "final",
       "players": [
@@ -213,14 +213,14 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 104,
-            "damageTaken": 18
+            "damageDealt": 93,
+            "damageTaken": 11
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 104
+              "damageDealt": 93
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -287,9 +287,9 @@
           "attackPower": 14,
           "autoAttack": true,
           "combatTimer": 1.2,
-          "comboPoints": 3,
+          "comboPoints": 2,
           "comboUntil": 32.4,
-          "critChance": 0.025,
+          "critChance": 0.026667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.015,
           "dualWielding": true,
@@ -300,7 +300,7 @@
           "fiveSecondRule": 102.6,
           "flee": 24,
           "hit": 19,
-          "hp": 49982,
+          "hp": 49989,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -362,14 +362,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8896,
+          "hp": 8907,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -397,7 +397,11 @@
             "z": -2
           },
           "stats": {
-            "armor": 40
+            "agi": 1,
+            "armor": 40,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "swingTimer": 0.45,
           "tappedById": 415,
@@ -406,7 +410,7 @@
           "threat": [
             [
               415,
-              105
+              94
             ]
           ],
           "weapon": {

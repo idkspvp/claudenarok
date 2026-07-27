@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b1dceb96",
+      "state": "c9dcada9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -104,7 +104,7 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -162,7 +162,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "d96b0b1f",
+      "state": "c19c36c9",
       "events": "7a8dbe7e",
       "rng": {
         "draws": 17,
@@ -173,7 +173,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "b4e7df42",
+      "state": "7425165a",
       "events": "84d62024",
       "rng": {
         "draws": 34,
@@ -184,7 +184,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "ec038fdb",
+      "state": "c0398b95",
       "events": "eba06792",
       "rng": {
         "draws": 64,
@@ -313,7 +313,7 @@
               10
             ]
           ],
-          "critChance": 0.019,
+          "critChance": 0.02,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
           "element": "neutral",
@@ -389,7 +389,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -426,7 +426,11 @@
             "z": -2
           },
           "stats": {
-            "armor": 48
+            "agi": 1,
+            "armor": 48,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "swingTimer": 0.334615,
           "tappedById": 415,
@@ -451,12 +455,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.014,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 17,
-          "hit": 17,
+          "hit": 18,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -479,7 +483,11 @@
             "z": -2
           },
           "stats": {
-            "armor": 168
+            "agi": 4,
+            "armor": 168,
+            "dex": 4,
+            "luk": 4,
+            "vit": 4
           },
           "swingTimer": 1.35,
           "targetId": 415,
@@ -496,7 +504,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "d303c712",
+      "state": "40f9afa4",
       "events": "741638a5",
       "rng": {
         "draws": 78,
@@ -626,7 +634,7 @@
               9.8
             ]
           ],
-          "critChance": 0.019,
+          "critChance": 0.02,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
           "element": "neutral",
@@ -703,7 +711,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -740,7 +748,11 @@
             "z": -2
           },
           "stats": {
-            "armor": 48
+            "agi": 1,
+            "armor": 48,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "swingTimer": 0.134615,
           "tappedById": 415,
@@ -765,12 +777,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.014,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 17,
-          "hit": 17,
+          "hit": 18,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -793,7 +805,11 @@
             "z": -2
           },
           "stats": {
-            "armor": 168
+            "agi": 4,
+            "armor": 168,
+            "dex": 4,
+            "luk": 4,
+            "vit": 4
           },
           "swingTimer": 1.15,
           "targetId": 415,

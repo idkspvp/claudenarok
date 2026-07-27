@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 431,
-      "state": "7630b776",
+      "state": "91293d81",
       "events": "9bb7b95a",
       "rng": {
         "draws": 39,
@@ -198,7 +198,7 @@
           "blockValue": 6,
           "combatTimer": 99.1,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -253,7 +253,7 @@
           "attackPower": 2,
           "combatTimer": 99.1,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -310,7 +310,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 1.225126,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -336,7 +336,11 @@
             "z": -1232
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -356,7 +360,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -2.276039,
           "fiveSecondRule": 99,
           "flee": 9,
@@ -382,7 +386,11 @@
             "z": -1231
           },
           "stats": {
-            "armor": 108
+            "agi": 2,
+            "armor": 108,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -402,7 +410,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 0.176555,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -428,7 +436,11 @@
             "z": -1212
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -448,7 +460,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -1.865185,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -474,7 +486,11 @@
             "z": -1211
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -494,7 +510,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -1.654431,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -520,7 +536,11 @@
             "z": -1196
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -540,7 +560,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 2.35088,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -566,7 +586,11 @@
             "z": -1195
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -586,7 +610,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 2.589984,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -612,7 +636,11 @@
             "z": -1182
           },
           "stats": {
-            "armor": 84
+            "agi": 2,
+            "armor": 84,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -632,11 +660,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": 1.240933,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "hp": 460,
           "id": 424,
@@ -658,7 +686,11 @@
             "z": -1180
           },
           "stats": {
-            "armor": 96
+            "agi": 3,
+            "armor": 96,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -678,11 +710,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": -0.676504,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "hp": 695,
           "id": 425,
@@ -704,7 +736,11 @@
             "z": -1168
           },
           "stats": {
-            "armor": 176
+            "agi": 3,
+            "armor": 176,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "sexton_marrow",
           "wanderTarget": {
@@ -724,7 +760,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -2.177504,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -750,7 +786,11 @@
             "z": -1167
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -770,11 +810,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": -2.544657,
           "fiveSecondRule": 99,
           "flee": 13,
-          "hit": 13,
+          "hit": 14,
           "hostile": true,
           "hp": 1191,
           "id": 427,
@@ -796,7 +836,11 @@
             "z": -1152
           },
           "stats": {
-            "armor": 234
+            "agi": 3,
+            "armor": 234,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "morthen",
           "wanderTarget": {
@@ -816,7 +860,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 1.897485,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -842,7 +886,11 @@
             "z": -1154
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -862,7 +910,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 3.090952,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -888,7 +936,11 @@
             "z": -1154
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -945,7 +997,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 431,
-      "state": "095ae264",
+      "state": "3429b24d",
       "events": "426319d0",
       "rng": {
         "draws": 47,
@@ -1113,7 +1165,7 @@
           "blockValue": 6,
           "combatTimer": 99.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
@@ -1170,7 +1222,7 @@
           "attackPower": 2,
           "combatTimer": 99.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -1227,7 +1279,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 1.225126,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1253,7 +1305,11 @@
             "z": -1232
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1273,7 +1329,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -2.276039,
           "fiveSecondRule": 99,
           "flee": 9,
@@ -1299,7 +1355,11 @@
             "z": -1231
           },
           "stats": {
-            "armor": 108
+            "agi": 2,
+            "armor": 108,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1319,7 +1379,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 0.176555,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1345,7 +1405,11 @@
             "z": -1212
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1365,7 +1429,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -1.865185,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1391,7 +1455,11 @@
             "z": -1211
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1411,7 +1479,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -1.654431,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1437,7 +1505,11 @@
             "z": -1196
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1457,7 +1529,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 2.35088,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1483,7 +1555,11 @@
             "z": -1195
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1503,7 +1579,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 2.589984,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1529,7 +1605,11 @@
             "z": -1182
           },
           "stats": {
-            "armor": 84
+            "agi": 2,
+            "armor": 84,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -1549,11 +1629,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": 1.240933,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "hp": 460,
           "id": 424,
@@ -1575,7 +1655,11 @@
             "z": -1180
           },
           "stats": {
-            "armor": 96
+            "agi": 3,
+            "armor": 96,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -1595,11 +1679,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": -0.676504,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "hp": 695,
           "id": 425,
@@ -1621,7 +1705,11 @@
             "z": -1168
           },
           "stats": {
-            "armor": 176
+            "agi": 3,
+            "armor": 176,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "sexton_marrow",
           "wanderTarget": {
@@ -1641,7 +1729,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": -2.177504,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1667,7 +1755,11 @@
             "z": -1167
           },
           "stats": {
-            "armor": 98
+            "agi": 2,
+            "armor": 98,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1687,11 +1779,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": -2.544657,
           "fiveSecondRule": 99,
           "flee": 13,
-          "hit": 13,
+          "hit": 14,
           "hostile": true,
           "hp": 1191,
           "id": 427,
@@ -1713,7 +1805,11 @@
             "z": -1152
           },
           "stats": {
-            "armor": 234
+            "agi": 3,
+            "armor": 234,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "templateId": "morthen",
           "wanderTarget": {
@@ -1733,7 +1829,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 1.897485,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1759,7 +1855,11 @@
             "z": -1154
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1779,7 +1879,7 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.012,
           "facing": 3.090952,
           "fiveSecondRule": 99,
           "flee": 10,
@@ -1805,7 +1905,11 @@
             "z": -1154
           },
           "stats": {
-            "armor": 126
+            "agi": 2,
+            "armor": 126,
+            "dex": 2,
+            "luk": 2,
+            "vit": 2
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1862,7 +1966,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 431,
-      "state": "6ece8745",
+      "state": "c1d2067e",
       "events": "43cbd350",
       "rng": {
         "draws": 47,
@@ -1873,7 +1977,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 431,
-      "state": "0f601c91",
+      "state": "3fef9280",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1884,7 +1988,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 431,
-      "state": "ac1b4793",
+      "state": "8b2c0136",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1895,7 +1999,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 431,
-      "state": "60a76a3e",
+      "state": "596b9bac",
       "events": "18091e3e",
       "rng": {
         "draws": 47,
@@ -1906,7 +2010,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "c4122226",
+      "state": "42917b2c",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2086,7 +2190,7 @@
           "blockValue": 6,
           "combatTimer": 100.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
@@ -2143,7 +2247,7 @@
           "attackPower": 2,
           "combatTimer": 100.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
@@ -2201,7 +2305,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "c4122226",
+      "state": "42917b2c",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2381,7 +2485,7 @@
           "blockValue": 6,
           "combatTimer": 100.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
@@ -2438,7 +2542,7 @@
           "attackPower": 2,
           "combatTimer": 100.2,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,

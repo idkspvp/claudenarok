@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "2bc1e901",
+      "state": "aac40f8f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -90,7 +90,7 @@
           "attackPower": 8,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.022,
+          "critChance": 0.023333,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
           "dualWielding": true,
@@ -157,8 +157,8 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 429,
-      "state": "bf020fab",
-      "events": "06298eb8",
+      "state": "e192a504",
+      "events": "c40d06d0",
       "rng": {
         "draws": 9,
         "digest": "1540b9da"
@@ -168,7 +168,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 429,
-      "state": "12e662b3",
+      "state": "41622336",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -179,8 +179,8 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 429,
-      "state": "0eb69c5e",
-      "events": "6c054d1f",
+      "state": "94c6a763",
+      "events": "0afc805e",
       "rng": {
         "draws": 13,
         "digest": "ded57bf5"
@@ -190,7 +190,7 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 431,
-      "state": "e71c4dbc",
+      "state": "a610d992",
       "events": "601aed6e",
       "rng": {
         "draws": 16,
@@ -317,7 +317,7 @@
           "attackPower": 14,
           "combatTimer": 0.4,
           "comboUntil": -1,
-          "critChance": 0.025,
+          "critChance": 0.026667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.015,
           "dualWielding": true,
@@ -384,12 +384,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "facing": -1.570796,
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 5,
-          "hp": 64,
+          "hp": 65,
           "id": 424,
           "kind": "mob",
           "level": 4,
@@ -410,7 +410,11 @@
             "z": -1253
           },
           "stats": {
-            "armor": 24
+            "agi": 1,
+            "armor": 24,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "swingTimer": 1.6,
           "templateId": "acolyte_tessa",
@@ -428,11 +432,11 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": 1.570796,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -466,7 +470,11 @@
             "z": -1170
           },
           "stats": {
-            "armor": 160
+            "agi": 3,
+            "armor": 160,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,
@@ -522,7 +530,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "84252158",
+      "state": "eaf1b5c0",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -533,7 +541,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "84252158",
+      "state": "eaf1b5c0",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -660,7 +668,7 @@
           "attackPower": 14,
           "combatTimer": 0.5,
           "comboUntil": -1,
-          "critChance": 0.025,
+          "critChance": 0.026667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.015,
           "dualWielding": true,
@@ -727,12 +735,12 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.011,
           "facing": -1.570796,
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 5,
-          "hp": 64,
+          "hp": 65,
           "id": 424,
           "kind": "mob",
           "level": 4,
@@ -753,7 +761,11 @@
             "z": -1253
           },
           "stats": {
-            "armor": 24
+            "agi": 1,
+            "armor": 24,
+            "dex": 1,
+            "luk": 1,
+            "vit": 1
           },
           "swingTimer": 1.4,
           "templateId": "acolyte_tessa",
@@ -771,11 +783,11 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.013,
           "facing": 1.570796,
           "fiveSecondRule": 99,
           "flee": 12,
-          "hit": 12,
+          "hit": 13,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -809,7 +821,11 @@
             "z": -1170
           },
           "stats": {
-            "armor": 160
+            "agi": 3,
+            "armor": 160,
+            "dex": 3,
+            "luk": 3,
+            "vit": 3
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,

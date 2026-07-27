@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "d1527753",
+      "state": "af533eec",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -94,7 +94,7 @@
           "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016,
+          "critChance": 0.016667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
           "element": "neutral",
@@ -152,7 +152,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "7b88c89d",
+      "state": "4653da1d",
       "events": "dab18aca",
       "rng": {
         "draws": 1,
@@ -163,7 +163,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "b364ec3b",
+      "state": "d2ecf4dd",
       "events": "f7152ad1",
       "rng": {
         "draws": 2,
@@ -174,7 +174,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "b75cb6d6",
+      "state": "759f4066",
       "events": "40c3c8b1",
       "rng": {
         "draws": 82,
@@ -185,7 +185,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "bf0a4cd8",
+      "state": "1be277ce",
       "events": "7900256a",
       "rng": {
         "draws": 152,
@@ -196,7 +196,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "a3b96ec0",
+      "state": "e3b21294",
       "events": "974197bc",
       "rng": {
         "draws": 180,
@@ -352,7 +352,7 @@
               40.8
             ]
           ],
-          "critChance": 0.025,
+          "critChance": 0.026667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.015,
           "element": "neutral",
@@ -434,11 +434,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.016,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 26,
-          "hit": 26,
+          "flee": 27,
+          "hit": 28,
           "hostile": true,
           "hp": 499800,
           "id": 416,
@@ -466,7 +466,12 @@
             "y": 1.5,
             "z": 2
           },
-          "stats": {},
+          "stats": {
+            "agi": 6,
+            "dex": 6,
+            "luk": 6,
+            "vit": 6
+          },
           "tappedById": 415,
           "templateId": "training_dummy",
           "threat": [
@@ -485,7 +490,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "a3b96ec0",
+      "state": "e3b21294",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -641,7 +646,7 @@
               40.8
             ]
           ],
-          "critChance": 0.025,
+          "critChance": 0.026667,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.015,
           "element": "neutral",
@@ -723,11 +728,11 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.016,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 26,
-          "hit": 26,
+          "flee": 27,
+          "hit": 28,
           "hostile": true,
           "hp": 499800,
           "id": 416,
@@ -755,7 +760,12 @@
             "y": 1.5,
             "z": 2
           },
-          "stats": {},
+          "stats": {
+            "agi": 6,
+            "dex": 6,
+            "luk": 6,
+            "vit": 6
+          },
           "tappedById": 415,
           "templateId": "training_dummy",
           "threat": [
