@@ -30,7 +30,7 @@ import {
   FISHING_CAST_ID,
 } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -41,7 +41,7 @@ function makeSim(cls: PlayerClass, level: number): { sim: AnySim; p: AnyEntity; 
   placePlayerInOpenField(sim);
   const p = sim.player as AnyEntity;
   const meta = sim.players.get(p.id);
-  fundCasts(p);
+  raisePool(p);
   return { sim, p, meta };
 }
 
@@ -137,12 +137,12 @@ describe('casting_lifecycle: timed cast start -> progress -> finish', () => {
 
 describe('casting_lifecycle: channel start -> tick -> finish', () => {
   it('starts a channel (channeling, resource spent at START), ticks drain, then finishes', () => {
-    const { sim, p, meta } = makeSim('mage', 12);
+    const { sim, p, meta } = makeSim('acolyte', 14);
     const mob = spawnTarget(sim, p);
     p.hp = Math.max(1, p.maxHp - 300);
     const res0 = p.resource;
-    castAbility(sim.ctx, 'drain_life', p.id);
-    expect(p.castingAbility).toBe('drain_life');
+    castAbility(sim.ctx, 'mind_flay', p.id);
+    expect(p.castingAbility).toBe('mind_flay');
     expect(p.channeling).toBe(true);
     expect(p.resource).toBeLessThan(res0); // channels spend at START
     const mobHp0 = mob.hp;
@@ -156,11 +156,11 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('keeps channel ticks on the target locked at channel start after retargeting', () => {
-    const { sim, p, meta } = makeSim('mage', 12);
+    const { sim, p, meta } = makeSim('acolyte', 14);
     const first = spawnTarget(sim, p, 12, 6);
     const firstHp0 = first.hp;
     sim.drainEvents();
-    castAbility(sim.ctx, 'drain_life', p.id);
+    castAbility(sim.ctx, 'mind_flay', p.id);
     expect(p.channeling).toBe(true);
     expect(p.castTargetId).toBe(first.id);
 
@@ -180,18 +180,18 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('keeps a channel ticking when the current target is cleared mid-channel', () => {
-    const { sim, p, meta } = makeSim('mage', 12);
+    const { sim, p, meta } = makeSim('acolyte', 14);
     const mob = spawnTarget(sim, p, 12, 6);
     const mobHp0 = mob.hp;
     sim.drainEvents();
-    castAbility(sim.ctx, 'drain_life', p.id);
+    castAbility(sim.ctx, 'mind_flay', p.id);
     expect(p.castTargetId).toBe(mob.id);
 
     for (let i = 0; i < 25; i++) updateCasting(sim.ctx, p, meta); // past the 1s tick
     sim.targetEntity(null, p.id); // clear the current target mid-channel
     expect(p.targetId).toBeNull();
     for (let i = 0; i < 25; i++) updateCasting(sim.ctx, p, meta); // crosses the 2s tick
-    expect(p.castingAbility).toBe('drain_life'); // NOT cancelled by the cleared target
+    expect(p.castingAbility).toBe('mind_flay'); // NOT cancelled by the cleared target
     expect(p.channeling).toBe(true);
 
     drainCast(sim, p, meta);
@@ -206,14 +206,14 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('cancels the channel when the locked target dies mid-channel', () => {
-    const { sim, p, meta } = makeSim('mage', 12);
+    const { sim, p, meta } = makeSim('acolyte', 14);
     const mob = spawnTarget(sim, p, 12, 6);
     sim.drainEvents();
-    castAbility(sim.ctx, 'drain_life', p.id);
+    castAbility(sim.ctx, 'mind_flay', p.id);
     expect(p.castTargetId).toBe(mob.id);
 
     for (let i = 0; i < 22; i++) updateCasting(sim.ctx, p, meta); // the 1s tick fired
-    expect(p.castingAbility).toBe('drain_life');
+    expect(p.castingAbility).toBe('mind_flay');
     handleDeath(sim.ctx, mob, p); // the locked target dies mid-channel
     for (let i = 0; i < 25 && p.castingAbility; i++) updateCasting(sim.ctx, p, meta);
 
@@ -271,9 +271,9 @@ describe('casting_lifecycle: pushbackCast', () => {
   });
 
   it('shaves a channel by CHANNEL_PUSHBACK_FRACTION of its total', () => {
-    const { sim, p } = makeSim('mage', 12);
+    const { sim, p } = makeSim('acolyte', 14);
     spawnTarget(sim, p);
-    castAbility(sim.ctx, 'drain_life', p.id);
+    castAbility(sim.ctx, 'mind_flay', p.id);
     const rem0 = p.castRemaining;
     const tot0 = p.castTotal;
     pushbackCast(p);
@@ -509,10 +509,10 @@ describe('casting_lifecycle: force-stop clears drop the queued slot', () => {
 describe('casting_lifecycle: determinism', () => {
   it('same seed + same module-driven sequence -> identical end state', () => {
     const run = () => {
-      const { sim, p, meta } = makeSim('mage', 12);
+      const { sim, p, meta } = makeSim('acolyte', 14);
       const mob = spawnTarget(sim, p);
       p.hp = Math.max(1, p.maxHp - 300);
-      castAbility(sim.ctx, 'drain_life', p.id);
+      castAbility(sim.ctx, 'mind_flay', p.id);
       for (let i = 0; i < 22; i++) updateCasting(sim.ctx, p, meta); // a channel tick fires
       pushbackCast(p); // mid-channel pushback
       drainCast(sim, p, meta); // run to completion

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { raisePool } from './helpers/sp';
 import { GROUND_PICKUP_LINES } from '../src/sim/content/ground_pickup_lines';
 import {
   abilitiesKnownAt,
@@ -31,7 +32,13 @@ import { levelWithStats } from './helpers/alloc';
 import { placePlayerInOpenField } from './helpers/open_field';
 
 function makeSim(cls: 'swordman' | 'mage' | 'thief' = 'swordman', seed = 42) {
-  return new Sim({ seed, playerClass: cls, autoEquip: true });
+  const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
+  // D1 put the SP pool on Ragnarok's curve, an order of magnitude below the scale
+  // the ability costs and the potion values are still authored against (re-costing
+  // the kit is D4). None of the cases in this file are about the pool, so give it
+  // headroom rather than letting a dry bar decide whether a spell went off.
+  raisePool(sim.player);
+  return sim;
 }
 
 function nearestMob(sim: Sim, templateId?: string) {
@@ -216,18 +223,19 @@ describe('classic formulas', () => {
     const hs20 = w20.find((k) => k.def.id === 'heroic_strike')!;
     expect(hs20.rank).toBe(4);
     expect(hs20.effects).toEqual([{ type: 'weaponDamage', bonus: 44 }]);
-    // acolyte: lightning bolt keeps pace — rank 2 at 10, rank 3 at 14, rank 4 at 20
-    const lbAt = (lvl: number) =>
-      abilitiesKnownAt('acolyte', lvl).find((k) => k.def.id === 'lightning_bolt')!;
-    expect(lbAt(10).rank).toBe(2);
-    const lb14 = lbAt(14);
-    expect(lb14.rank).toBe(3);
-    expect(lb14.cost).toBe(40);
-    expect(lb14.castTime).toBe(2.5);
-    const lb20 = lbAt(20);
-    expect(lb20.rank).toBe(4);
-    expect(lb20.cost).toBe(60);
-    expect(lb20.effects).toEqual([{ type: 'directDamage', min: 75, max: 85 }]);
+    // acolyte: Smite keeps pace, rank 2 at 8, rank 3 at 14, rank 4 at 20. It stands
+    // in for Lightning Bolt, which went with the Shaman in D1.
+    const smiteAt = (lvl: number) =>
+      abilitiesKnownAt('acolyte', lvl).find((k) => k.def.id === 'smite')!;
+    expect(smiteAt(8).rank).toBe(2);
+    const smite14 = smiteAt(14);
+    expect(smite14.rank).toBe(3);
+    expect(smite14.cost).toBe(48);
+    expect(smite14.castTime).toBe(2.5);
+    const smite20 = smiteAt(20);
+    expect(smite20.rank).toBe(4);
+    expect(smite20.cost).toBe(70);
+    expect(smite20.effects).toEqual([{ type: 'directDamage', min: 64, max: 78 }]);
     // thief: kidney shot is the finisherStun new ability
     const ks = abilitiesKnownAt('thief', 14).find((k) => k.def.id === 'kidney_shot')!;
     expect(ks.effects).toEqual([{ type: 'finisherStun', base: 1, perCombo: 1 }]);
@@ -960,6 +968,7 @@ describe('food, drink, vendor', () => {
   it('mage conjures water and drinking restores mana', () => {
     const sim = makeSim('mage');
     levelWithStats(sim, 4);
+    raisePool(sim.player); // the level-up recalculated the bar back down
     sim.castAbility('conjure_water');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_water')).toBe(2);
