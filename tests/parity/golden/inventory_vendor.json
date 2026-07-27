@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "391bb653",
+      "state": "ef79e19b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -54,7 +54,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 1000,
           "counters": {},
@@ -90,20 +90,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -119,21 +113,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -156,15 +150,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -177,7 +171,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "6450d236",
+      "state": "7acc12f8",
       "events": "7db794b1",
       "rng": {
         "draws": 0,
@@ -196,7 +190,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -242,20 +236,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -271,21 +259,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -308,15 +296,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -329,7 +317,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "8cc4dba4",
+      "state": "200904d4",
       "events": "aced36d1",
       "rng": {
         "draws": 0,
@@ -348,7 +336,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -401,20 +389,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -430,21 +412,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 93,
+          "flee": 2,
+          "hit": 2,
+          "hp": 42,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 93,
+          "maxHp": 42,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -467,15 +449,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 176,
-            "dex": 6,
+            "agi": 1,
+            "armor": 102,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 12
+            "luk": 1,
+            "str": 1,
+            "vit": 5
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -488,7 +470,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "68a02e6a",
+      "state": "fc6d53c2",
       "events": "7b632ab5",
       "rng": {
         "draws": 0,
@@ -507,7 +489,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -560,20 +542,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -589,21 +565,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 92,
+          "flee": 2,
+          "hit": 2,
+          "hp": 42,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 92,
+          "maxHp": 42,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -626,15 +602,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 171,
-            "dex": 6,
+            "agi": 1,
+            "armor": 99,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 4
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -647,7 +623,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b1356694",
+      "state": "7e071bf2",
       "events": "d7e42320",
       "rng": {
         "draws": 0,
@@ -666,7 +642,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -722,20 +698,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -751,21 +721,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -788,15 +758,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -809,7 +779,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "ca293e4c",
+      "state": "716301f0",
       "events": "d37a7dbf",
       "rng": {
         "draws": 0,
@@ -828,7 +798,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -884,20 +854,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -913,9 +877,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -932,14 +896,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -963,15 +927,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -984,7 +948,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b1266d3b",
+      "state": "4251ac3f",
       "events": "7787b44e",
       "rng": {
         "draws": 0,
@@ -1003,7 +967,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -1055,20 +1019,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1084,9 +1042,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1103,14 +1061,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1134,15 +1092,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1155,7 +1113,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "bcf6a035",
+      "state": "455ccdb4",
       "events": "700fff02",
       "rng": {
         "draws": 0,
@@ -1174,7 +1132,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -1227,20 +1185,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1266,9 +1218,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1285,14 +1237,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1316,15 +1268,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1337,7 +1289,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "d9bbc0b4",
+      "state": "2814962f",
       "events": "0d8a0109",
       "rng": {
         "draws": 0,
@@ -1356,7 +1308,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -1413,20 +1365,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1452,9 +1398,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1471,14 +1417,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1502,15 +1448,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1523,7 +1469,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "808aded1",
+      "state": "0ea12826",
       "events": "5917907c",
       "rng": {
         "draws": 0,
@@ -1542,7 +1488,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 710,
           "counters": {},
@@ -1604,20 +1550,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1643,9 +1583,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1662,14 +1602,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1693,15 +1633,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1714,7 +1654,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "08da4174",
+      "state": "64c1d97f",
       "events": "43fbfed4",
       "rng": {
         "draws": 0,
@@ -1733,7 +1673,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 714,
           "counters": {},
@@ -1795,13 +1735,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -1814,7 +1748,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1840,9 +1774,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -1859,14 +1793,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1890,15 +1824,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1911,7 +1845,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a4b4372f",
+      "state": "40574cc8",
       "events": "a5ebc92c",
       "rng": {
         "draws": 0,
@@ -1930,7 +1864,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 720,
           "counters": {},
@@ -1993,13 +1927,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -2016,7 +1944,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -2042,9 +1970,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -2061,14 +1989,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2092,15 +2020,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -2113,7 +2041,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "190fda50",
+      "state": "dc92d04d",
       "events": "6787cd59",
       "rng": {
         "draws": 0,
@@ -2132,7 +2060,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 716,
           "counters": {},
@@ -2195,13 +2123,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -2214,7 +2136,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -2240,9 +2162,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -2259,14 +2181,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2290,15 +2212,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -2311,7 +2233,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "190fda50",
+      "state": "dc92d04d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2330,7 +2252,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "copper": 716,
           "counters": {},
@@ -2393,13 +2315,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -2412,7 +2328,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -2438,9 +2354,9 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "spring_water",
             "kind": "drink",
@@ -2457,14 +2373,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 100,
+          "flee": 2,
+          "hit": 2,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 100,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2488,15 +2404,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 146,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 21
+            "luk": 1,
+            "str": 1,
+            "vit": 14
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,

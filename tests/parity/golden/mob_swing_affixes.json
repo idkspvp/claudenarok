@@ -10,14 +10,14 @@
     "mobSwing affix cascade: rampage stacking buff_ap (warlord_drogmar self-buff)",
     "friendly-pet mobSwing: mob.hostile=false short-circuits every proc (no debuff on its target)"
   ],
-  "draws": 274,
-  "drawDigest": "be8df9bf",
+  "draws": 293,
+  "drawDigest": "fe7d8afe",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "13ae7fa5",
+      "state": "c7f6f287",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -37,7 +37,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -72,20 +72,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -101,21 +95,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -138,15 +132,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -159,44 +153,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "cffb0dad",
-      "events": "048ffb80",
+      "state": "c572b8d1",
+      "events": "433a0f95",
       "rng": {
-        "draws": 65,
-        "digest": "634b9bae"
+        "draws": 72,
+        "digest": "3a0168ee"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "9c364bb9",
-      "events": "1b5948f1",
+      "state": "4a0c4c5b",
+      "events": "7f6ac682",
       "rng": {
-        "draws": 114,
-        "digest": "38339e76"
+        "draws": 128,
+        "digest": "f58195cc"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "1e9895cb",
-      "events": "bdc9dc04",
+      "state": "97f0b2e3",
+      "events": "48b152e5",
       "rng": {
-        "draws": 251,
-        "digest": "e2b1937b"
+        "draws": 272,
+        "digest": "fd62b7bf"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "c4b9a32d",
+      "state": "fcd6a708",
       "events": "741638a5",
       "rng": {
-        "draws": 251,
-        "digest": "e2b1937b"
+        "draws": 272,
+        "digest": "fd62b7bf"
       },
       "label": "affixes",
       "players": [
@@ -212,10 +206,10 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 922
+            "damageTaken": 1740
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -272,20 +266,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 30,
-          "statAllocation": {
-            "agi": 6,
-            "dex": 10,
-            "luk": 3,
-            "str": 17,
-            "vit": 13
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 21,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -298,15 +286,13 @@
             },
             {
               "duration": 10,
-              "id": "venom_webwood_spider",
-              "kind": "dot",
-              "name": "Spider Venom",
-              "remaining": 9,
-              "school": "nature",
-              "sourceId": 417,
-              "tickInterval": 2,
-              "tickTimer": 1,
-              "value": 2
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 7.5,
+              "school": "shadow",
+              "sourceId": 418,
+              "value": 120
             },
             {
               "duration": 1,
@@ -316,6 +302,27 @@
               "remaining": 0.5,
               "school": "physical",
               "sourceId": 416
+            },
+            {
+              "duration": 10,
+              "id": "venom_webwood_spider",
+              "kind": "dot",
+              "name": "Spider Venom",
+              "remaining": 9.5,
+              "school": "nature",
+              "sourceId": 417,
+              "tickInterval": 2,
+              "tickTimer": 1.5,
+              "value": 2
+            },
+            {
+              "duration": 3,
+              "id": "ensnare_webwood_spider",
+              "kind": "root",
+              "name": "Sticky Web",
+              "remaining": 2.5,
+              "school": "nature",
+              "sourceId": 417
             },
             {
               "duration": 4,
@@ -329,24 +336,24 @@
           ],
           "blockChance": 0.05,
           "blockValue": 6,
-          "combatTimer": 0.5,
+          "combatTimer": 0.3,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102,
-          "flee": 23,
-          "hit": 27,
+          "flee": 17,
+          "hit": 17,
           "hp": 1000000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 647,
+          "maxHp": 214,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -360,7 +367,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 56.344444,
+          "resource": 100,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -370,15 +377,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 7,
-            "armor": 314,
-            "dex": 11,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 18,
-            "vit": 15
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -399,7 +406,7 @@
           "flee": 24,
           "hit": 24,
           "hostile": true,
-          "hp": 199986,
+          "hp": 199973,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -440,7 +447,7 @@
           "threat": [
             [
               420,
-              14
+              27
             ]
           ],
           "weapon": {
@@ -452,7 +459,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 1,
+          "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -560,14 +567,14 @@
               "id": "rampage_warlord_drogmar",
               "kind": "buff_ap",
               "name": "Mounting Rage",
-              "remaining": 9.5,
+              "remaining": 9.65,
               "school": "physical",
               "sourceId": 419,
               "stacks": 5,
               "value": 100
             }
           ],
-          "combatTimer": 0.5,
+          "combatTimer": 0.3,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -620,7 +627,7 @@
         {
           "aggroTargetId": 416,
           "aiState": "idle",
-          "combatTimer": 0.75,
+          "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -630,7 +637,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 74,
+          "hp": 81,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -671,7 +678,7 @@
         {
           "aggroTargetId": 420,
           "aiState": "attack",
-          "combatTimer": 0.75,
+          "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -682,7 +689,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 199942,
+          "hp": 199941,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -722,7 +729,7 @@
           "threat": [
             [
               420,
-              59
+              60
             ]
           ],
           "weapon": {
@@ -737,11 +744,11 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 422,
-      "state": "63eb7c26",
+      "state": "d78c8807",
       "events": "741638a5",
       "rng": {
-        "draws": 274,
-        "digest": "be8df9bf"
+        "draws": 293,
+        "digest": "fe7d8afe"
       },
       "label": "final",
       "players": [
@@ -757,10 +764,10 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 922
+            "damageTaken": 1740
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -817,20 +824,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 30,
-          "statAllocation": {
-            "agi": 6,
-            "dex": 10,
-            "luk": 3,
-            "str": 17,
-            "vit": 13
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 21,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -843,15 +844,13 @@
             },
             {
               "duration": 10,
-              "id": "venom_webwood_spider",
-              "kind": "dot",
-              "name": "Spider Venom",
-              "remaining": 8.8,
-              "school": "nature",
-              "sourceId": 417,
-              "tickInterval": 2,
-              "tickTimer": 0.8,
-              "value": 2
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 7.3,
+              "school": "shadow",
+              "sourceId": 418,
+              "value": 120
             },
             {
               "duration": 1,
@@ -861,6 +860,27 @@
               "remaining": 0.3,
               "school": "physical",
               "sourceId": 416
+            },
+            {
+              "duration": 10,
+              "id": "venom_webwood_spider",
+              "kind": "dot",
+              "name": "Spider Venom",
+              "remaining": 9.3,
+              "school": "nature",
+              "sourceId": 417,
+              "tickInterval": 2,
+              "tickTimer": 1.3,
+              "value": 2
+            },
+            {
+              "duration": 3,
+              "id": "ensnare_webwood_spider",
+              "kind": "root",
+              "name": "Sticky Web",
+              "remaining": 2.3,
+              "school": "nature",
+              "sourceId": 417
             },
             {
               "duration": 4,
@@ -874,24 +894,24 @@
           ],
           "blockChance": 0.05,
           "blockValue": 6,
-          "combatTimer": 0.7,
+          "combatTimer": 0.5,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102.2,
-          "flee": 23,
-          "hit": 27,
+          "flee": 17,
+          "hit": 17,
           "hp": 1000000,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 647,
+          "maxHp": 214,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -905,7 +925,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 56.344444,
+          "resource": 100,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -915,15 +935,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 7,
-            "armor": 314,
-            "dex": 11,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 18,
-            "vit": 15
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -944,7 +964,7 @@
           "flee": 24,
           "hit": 24,
           "hostile": true,
-          "hp": 199986,
+          "hp": 199973,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -985,7 +1005,7 @@
           "threat": [
             [
               420,
-              14
+              27
             ]
           ],
           "weapon": {
@@ -997,7 +1017,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 1.2,
+          "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1105,14 +1125,14 @@
               "id": "rampage_warlord_drogmar",
               "kind": "buff_ap",
               "name": "Mounting Rage",
-              "remaining": 9.3,
+              "remaining": 9.45,
               "school": "physical",
               "sourceId": 419,
               "stacks": 5,
               "value": 100
             }
           ],
-          "combatTimer": 0.7,
+          "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1165,7 +1185,7 @@
         {
           "aggroTargetId": 416,
           "aiState": "idle",
-          "combatTimer": 0.95,
+          "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1175,7 +1195,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 74,
+          "hp": 81,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -1216,7 +1236,7 @@
         {
           "aggroTargetId": 420,
           "aiState": "attack",
-          "combatTimer": 0.95,
+          "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1227,7 +1247,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 199942,
+          "hp": 199941,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -1267,7 +1287,7 @@
           "threat": [
             [
               420,
-              59
+              60
             ]
           ],
           "weapon": {

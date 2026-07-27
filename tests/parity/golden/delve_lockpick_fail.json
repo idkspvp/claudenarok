@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "be14caee",
+      "state": "521a399d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -36,7 +36,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -70,38 +70,32 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 6,
-          "hp": 62,
+          "flee": 2,
+          "hit": 2,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 62,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -131,15 +125,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 62,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -153,7 +147,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 427,
-      "state": "6f0c55b1",
+      "state": "c3e86ac8",
       "events": "47800102",
       "rng": {
         "draws": 3,
@@ -164,7 +158,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 427,
-      "state": "006f2c41",
+      "state": "f27e9ff6",
       "events": "fcb0555f",
       "rng": {
         "draws": 3,
@@ -175,7 +169,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 427,
-      "state": "cc6b80e3",
+      "state": "f5690988",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -186,7 +180,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 427,
-      "state": "cc54d06d",
+      "state": "a2c996a2",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -197,7 +191,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 427,
-      "state": "bbffa80b",
+      "state": "b675b150",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -208,7 +202,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 427,
-      "state": "3a9b360d",
+      "state": "c2533fd6",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -219,7 +213,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 428,
-      "state": "e04e0eab",
+      "state": "f5ac36e8",
       "events": "e8a08ba7",
       "rng": {
         "draws": 3,
@@ -239,7 +233,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 636,
@@ -300,13 +294,7 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 25,
-          "statAllocation": {
-            "agi": 11,
-            "dex": 6,
-            "luk": 4,
-            "str": 8,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {},
           "xp": 14
         }
@@ -314,18 +302,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 11,
+          "attackPower": 1,
           "combatTimer": 3.45,
           "comboUntil": -1,
-          "critChance": 0.026667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.015,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.45,
-          "flee": 19,
-          "hit": 14,
+          "flee": 8,
+          "hit": 8,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
@@ -361,15 +349,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 12,
-            "armor": 112,
-            "dex": 7,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 5,
-            "str": 9,
-            "vit": 5
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -421,7 +409,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 428,
-      "state": "b90b54d3",
+      "state": "7935742c",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -432,7 +420,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 428,
-      "state": "08315e8f",
+      "state": "3f2baf50",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -452,7 +440,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 636,
@@ -513,13 +501,7 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 25,
-          "statAllocation": {
-            "agi": 11,
-            "dex": 6,
-            "luk": 4,
-            "str": 8,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {},
           "xp": 14
         }
@@ -527,18 +509,18 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 11,
+          "attackPower": 1,
           "combatTimer": 3.55,
           "comboUntil": -1,
-          "critChance": 0.026667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.015,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.55,
-          "flee": 19,
-          "hit": 14,
+          "flee": 8,
+          "hit": 8,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
@@ -574,15 +556,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 12,
-            "armor": 112,
-            "dex": 7,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 5,
-            "str": 9,
-            "vit": 5
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,

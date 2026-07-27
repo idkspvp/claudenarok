@@ -2,22 +2,22 @@
   "scenario": "c3_aura_runner",
   "seed": 1017,
   "sampleEvery": 5,
-  "ticks": 182,
+  "ticks": 242,
   "coverage": [
     "updateAuras dot-tick kills target mid-walk -> e.dead guard short-circuits (~3095)",
     "updateAuras aura-expiry statsDirty -> recalcPlayerStats + applyNonPlayerStatAura",
     "updateRegen eat/drink path (ctx.healingTakenMult + 'heal' emit) + out-of-combat regen",
     "pulseGroundAoE over 2+ in-radius hostiles: rng.range per target, stable order",
-    "class:paladin"
+    "class:swordman"
   ],
-  "draws": 796,
-  "drawDigest": "7692ed54",
+  "draws": 1100,
+  "drawDigest": "ebf67579",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "cfd3c9b9",
+      "state": "c7f6f287",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -37,7 +37,7 @@
             null
           ],
           "bank": {},
-          "cls": "paladin",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -47,9 +47,9 @@
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
+              "eastbrook_buckler",
               "recruit_tunic",
-              "spring_water",
-              "training_mace"
+              "worn_sword"
             ]
           },
           "delveClears": {},
@@ -57,7 +57,8 @@
           "entityId": 415,
           "equipment": {
             "chest": "recruit_tunic",
-            "mainhand": "training_mace"
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -66,49 +67,52 @@
             {
               "count": 5,
               "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
             }
           ],
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 1,
-            "dex": 3,
-            "int": 3,
-            "luk": 1,
-            "str": 8,
-            "vit": 8
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 9,
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3600,
+              "school": "physical",
+              "sourceId": 415
+            }
+          ],
+          "blockChance": 0.05,
+          "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 3,
-          "hit": 5,
-          "hp": 95,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 95,
-          "maxResource": 93,
+          "maxHp": 41,
+          "maxResource": 100,
           "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -119,29 +123,28 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 93,
-          "resourceType": "mana",
+          "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 1,
           "stats": {
-            "agi": 2,
-            "armor": 83,
-            "dex": 4,
-            "int": 4,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "paladin",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
-            "speed": 2.6
+            "speed": 2
           }
         }
       ]
@@ -150,7 +153,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 417,
-      "state": "2500b7b6",
+      "state": "4e0faafd",
       "events": "82cbe828",
       "rng": {
         "draws": 2,
@@ -170,7 +173,7 @@
             null
           ],
           "bank": {},
-          "cls": "paladin",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -180,9 +183,9 @@
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
+              "eastbrook_buckler",
               "recruit_tunic",
-              "spring_water",
-              "training_mace"
+              "worn_sword"
             ]
           },
           "deedsEarned": [
@@ -216,7 +219,8 @@
           "entityId": 415,
           "equipment": {
             "chest": "recruit_tunic",
-            "mainhand": "training_mace"
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -225,10 +229,6 @@
             {
               "count": 5,
               "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
             }
           ],
           "lifetimeXp": 7677,
@@ -236,40 +236,47 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 55,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "int": 7,
-            "luk": 3,
-            "str": 19,
-            "vit": 18
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 25,
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3599.9,
+              "school": "physical",
+              "sourceId": 415
+            }
+          ],
+          "blockChance": 0.05,
+          "blockValue": 6,
           "combatTimer": 99.1,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99.1,
-          "flee": 25,
-          "hit": 28,
+          "flee": 21,
+          "hit": 21,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 650,
+          "maxResource": 100,
           "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -280,29 +287,28 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 650,
-          "resourceType": "mana",
+          "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 9,
+          "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 331,
-            "dex": 8,
-            "int": 8,
-            "luk": 4,
-            "str": 20,
-            "vit": 19
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "paladin",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
-            "speed": 2.6
+            "speed": 2
           }
         },
         {
@@ -367,7 +373,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "f44d03c3",
+      "state": "58c3b580",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -378,7 +384,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "3e4182c2",
+      "state": "510a0e42",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -389,7 +395,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "7d7307df",
+      "state": "c7c0f6e5",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -400,7 +406,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "fe8f29ad",
+      "state": "0769692c",
       "events": "fcb0555f",
       "rng": {
         "draws": 2,
@@ -411,7 +417,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "8a0b0267",
+      "state": "bea2e3dd",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -422,7 +428,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "b1c8cc06",
+      "state": "2a833355",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -433,7 +439,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "1a622cb7",
+      "state": "4bec8b13",
       "events": "1cda96ef",
       "rng": {
         "draws": 2,
@@ -444,8 +450,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "5509b99f",
-      "events": "3fd469ec",
+      "state": "9684d497",
+      "events": "069df9f2",
       "rng": {
         "draws": 2,
         "digest": "a0fe8174"
@@ -455,7 +461,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 417,
-      "state": "f52233e5",
+      "state": "46a74d20",
       "events": "741638a5",
       "rng": {
         "draws": 20,
@@ -466,7 +472,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "1567e095",
+      "state": "0c4fc7e9",
       "events": "741638a5",
       "rng": {
         "draws": 44,
@@ -477,7 +483,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 417,
-      "state": "91035e1d",
+      "state": "4584abb1",
       "events": "741638a5",
       "rng": {
         "draws": 62,
@@ -488,7 +494,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "5631fa61",
+      "state": "90a7f54c",
       "events": "741638a5",
       "rng": {
         "draws": 78,
@@ -499,7 +505,7 @@
       "tick": 62,
       "time": 3.1,
       "nextId": 417,
-      "state": "0e0ab3df",
+      "state": "26e43e8c",
       "events": "741638a5",
       "rng": {
         "draws": 85,
@@ -519,7 +525,7 @@
             null
           ],
           "bank": {},
-          "cls": "paladin",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -529,9 +535,9 @@
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
+              "eastbrook_buckler",
               "recruit_tunic",
-              "spring_water",
-              "training_mace"
+              "worn_sword"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -568,7 +574,8 @@
           "entityId": 415,
           "equipment": {
             "chest": "recruit_tunic",
-            "mainhand": "training_mace"
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -577,10 +584,6 @@
             {
               "count": 5,
               "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
             }
           ],
           "lifetimeXp": 7677,
@@ -588,26 +591,32 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 55,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "int": 7,
-            "luk": 3,
-            "str": 19,
-            "vit": 18
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 25,
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3596.9,
+              "school": "physical",
+              "sourceId": 415
+            }
+          ],
+          "blockChance": 0.05,
+          "blockValue": 6,
           "combatTimer": 102,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "drinking": {
             "itemId": "parity_drink",
             "kind": "drink",
@@ -626,16 +635,17 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 102,
-          "flee": 25,
-          "hit": 28,
-          "hp": 804,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 804,
-          "maxResource": 650,
+          "maxHp": 288,
+          "maxResource": 100,
           "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -646,29 +656,28 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 411,
-          "resourceType": "mana",
+          "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 9,
+          "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 331,
-            "dex": 8,
-            "int": 8,
-            "luk": 4,
-            "str": 20,
-            "vit": 19
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "paladin",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
-            "speed": 2.6
+            "speed": 2
           }
         },
         {
@@ -732,276 +741,408 @@
     {
       "tick": 65,
       "time": 3.25,
-      "nextId": 419,
-      "state": "00365434",
-      "events": "1b4c39a2",
+      "nextId": 420,
+      "state": "3d7a441b",
+      "events": "e477c065",
       "rng": {
-        "draws": 108,
-        "digest": "d3d1d290"
+        "draws": 102,
+        "digest": "4f9afb2d"
       }
     },
     {
       "tick": 70,
       "time": 3.5,
-      "nextId": 419,
-      "state": "3f708e77",
+      "nextId": 420,
+      "state": "2927c918",
       "events": "741638a5",
       "rng": {
-        "draws": 129,
-        "digest": "57feb57e"
+        "draws": 123,
+        "digest": "50c0d574"
       }
     },
     {
       "tick": 75,
       "time": 3.75,
-      "nextId": 419,
-      "state": "4c0fd503",
+      "nextId": 420,
+      "state": "ab331321",
       "events": "741638a5",
       "rng": {
-        "draws": 156,
-        "digest": "6a78189c"
+        "draws": 150,
+        "digest": "c1dcedf2"
       }
     },
     {
       "tick": 80,
       "time": 4,
-      "nextId": 419,
-      "state": "e6d450e2",
-      "events": "741638a5",
+      "nextId": 420,
+      "state": "22a31ca5",
+      "events": "f380e333",
       "rng": {
-        "draws": 161,
-        "digest": "a8b17a61"
+        "draws": 154,
+        "digest": "b541a4a8"
       }
     },
     {
       "tick": 85,
       "time": 4.25,
-      "nextId": 419,
-      "state": "5d95ecc6",
+      "nextId": 420,
+      "state": "29785d53",
       "events": "741638a5",
       "rng": {
-        "draws": 196,
-        "digest": "fbe536c6"
+        "draws": 189,
+        "digest": "83ac32c8"
       }
     },
     {
       "tick": 90,
       "time": 4.5,
-      "nextId": 419,
-      "state": "1fc64f3b",
+      "nextId": 420,
+      "state": "fb92ac58",
       "events": "741638a5",
       "rng": {
-        "draws": 222,
-        "digest": "772af51b"
+        "draws": 216,
+        "digest": "9d9c7312"
       }
     },
     {
       "tick": 95,
       "time": 4.75,
-      "nextId": 419,
-      "state": "5d58af0d",
+      "nextId": 420,
+      "state": "64d02fd3",
       "events": "741638a5",
       "rng": {
-        "draws": 265,
-        "digest": "836508e1"
+        "draws": 257,
+        "digest": "ce32395b"
       }
     },
     {
       "tick": 100,
       "time": 5,
-      "nextId": 419,
-      "state": "147dbbcb",
+      "nextId": 420,
+      "state": "c1de5751",
       "events": "741638a5",
       "rng": {
-        "draws": 286,
-        "digest": "97395625"
+        "draws": 280,
+        "digest": "6e3a5a9d"
       }
     },
     {
       "tick": 105,
       "time": 5.25,
-      "nextId": 419,
-      "state": "eac05dbe",
-      "events": "3cf2f1f4",
+      "nextId": 420,
+      "state": "7ffec173",
+      "events": "4d1d7fa5",
       "rng": {
-        "draws": 318,
-        "digest": "6449033e"
+        "draws": 298,
+        "digest": "6278335f"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
-      "nextId": 419,
-      "state": "44ba70c4",
+      "nextId": 420,
+      "state": "877c8637",
       "events": "741638a5",
       "rng": {
-        "draws": 341,
-        "digest": "ad4963e3"
+        "draws": 320,
+        "digest": "b23c9d36"
       }
     },
     {
       "tick": 115,
       "time": 5.75,
-      "nextId": 419,
-      "state": "6d2db3f3",
+      "nextId": 420,
+      "state": "1d605c2f",
       "events": "741638a5",
       "rng": {
-        "draws": 376,
-        "digest": "dc611cf5"
+        "draws": 353,
+        "digest": "52680c38"
       }
     },
     {
       "tick": 120,
       "time": 6,
-      "nextId": 419,
-      "state": "97aa60c9",
-      "events": "741638a5",
+      "nextId": 420,
+      "state": "33ac368c",
+      "events": "c9cff03f",
       "rng": {
-        "draws": 397,
-        "digest": "346ccf17"
+        "draws": 379,
+        "digest": "ade14e80"
       }
     },
     {
       "tick": 125,
       "time": 6.25,
-      "nextId": 419,
-      "state": "24cd32e3",
-      "events": "741638a5",
+      "nextId": 420,
+      "state": "5e238229",
+      "events": "75ce8431",
       "rng": {
-        "draws": 437,
-        "digest": "618d908d"
+        "draws": 421,
+        "digest": "36d7c20a"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
-      "nextId": 419,
-      "state": "a060ba0f",
+      "nextId": 420,
+      "state": "71001b34",
       "events": "741638a5",
       "rng": {
-        "draws": 467,
-        "digest": "051af78b"
+        "draws": 450,
+        "digest": "ecb8d64c"
       }
     },
     {
       "tick": 135,
       "time": 6.75,
-      "nextId": 419,
-      "state": "4b997446",
+      "nextId": 420,
+      "state": "cdb539dd",
       "events": "741638a5",
       "rng": {
-        "draws": 503,
-        "digest": "e8fc4a0a"
+        "draws": 487,
+        "digest": "a709588c"
       }
     },
     {
       "tick": 140,
       "time": 7,
-      "nextId": 419,
-      "state": "f663dec6",
+      "nextId": 420,
+      "state": "9cde0796",
       "events": "741638a5",
       "rng": {
-        "draws": 527,
-        "digest": "0616c11c"
+        "draws": 510,
+        "digest": "8363a859"
       }
     },
     {
       "tick": 145,
       "time": 7.25,
-      "nextId": 419,
-      "state": "5764b8e8",
-      "events": "42b0ebe5",
+      "nextId": 420,
+      "state": "6dab7569",
+      "events": "496d15cf",
       "rng": {
-        "draws": 559,
-        "digest": "055af506"
+        "draws": 540,
+        "digest": "8bf70400"
       }
     },
     {
       "tick": 150,
       "time": 7.5,
-      "nextId": 419,
-      "state": "82d07086",
+      "nextId": 420,
+      "state": "762b685c",
       "events": "741638a5",
       "rng": {
-        "draws": 591,
-        "digest": "16c82b96"
+        "draws": 574,
+        "digest": "4f593508"
       }
     },
     {
       "tick": 155,
       "time": 7.75,
-      "nextId": 419,
-      "state": "3e12d219",
+      "nextId": 420,
+      "state": "b8d02dd5",
       "events": "741638a5",
       "rng": {
-        "draws": 625,
-        "digest": "c1ea52ba"
+        "draws": 611,
+        "digest": "1d5496f4"
       }
     },
     {
       "tick": 160,
       "time": 8,
-      "nextId": 419,
-      "state": "7c81fafb",
+      "nextId": 420,
+      "state": "d975c8da",
       "events": "741638a5",
       "rng": {
-        "draws": 650,
-        "digest": "47f35e62"
+        "draws": 635,
+        "digest": "dae11a28"
       }
     },
     {
       "tick": 165,
       "time": 8.25,
-      "nextId": 419,
-      "state": "ba27df99",
-      "events": "741638a5",
+      "nextId": 420,
+      "state": "17e05860",
+      "events": "f7e32625",
       "rng": {
-        "draws": 674,
-        "digest": "5352dfc4"
+        "draws": 675,
+        "digest": "85f3b183"
       }
     },
     {
       "tick": 170,
       "time": 8.5,
-      "nextId": 419,
-      "state": "ee12a7f1",
+      "nextId": 420,
+      "state": "e6123d40",
       "events": "741638a5",
       "rng": {
-        "draws": 701,
-        "digest": "b59eb326"
+        "draws": 704,
+        "digest": "b14f9cad"
       }
     },
     {
       "tick": 175,
       "time": 8.75,
-      "nextId": 419,
-      "state": "4bce6618",
+      "nextId": 420,
+      "state": "00201ca0",
       "events": "741638a5",
       "rng": {
-        "draws": 739,
-        "digest": "26a076ce"
+        "draws": 738,
+        "digest": "f513a983"
       }
     },
     {
       "tick": 180,
       "time": 9,
-      "nextId": 419,
-      "state": "042bde08",
+      "nextId": 420,
+      "state": "c7c4d4a8",
       "events": "741638a5",
       "rng": {
-        "draws": 782,
-        "digest": "4eb5ce0d"
+        "draws": 787,
+        "digest": "0777e8ad"
       }
     },
     {
-      "tick": 182,
-      "time": 9.1,
-      "nextId": 419,
-      "state": "84b4b9e4",
-      "events": "f04adfc2",
+      "tick": 185,
+      "time": 9.25,
+      "nextId": 420,
+      "state": "b2bb80f4",
+      "events": "9c241792",
       "rng": {
-        "draws": 796,
-        "digest": "7692ed54"
+        "draws": 811,
+        "digest": "bcbc61ad"
+      }
+    },
+    {
+      "tick": 190,
+      "time": 9.5,
+      "nextId": 420,
+      "state": "749eab41",
+      "events": "741638a5",
+      "rng": {
+        "draws": 840,
+        "digest": "4cffa444"
+      }
+    },
+    {
+      "tick": 195,
+      "time": 9.75,
+      "nextId": 420,
+      "state": "9de05558",
+      "events": "741638a5",
+      "rng": {
+        "draws": 868,
+        "digest": "86d0541f"
+      }
+    },
+    {
+      "tick": 200,
+      "time": 10,
+      "nextId": 420,
+      "state": "a209de57",
+      "events": "741638a5",
+      "rng": {
+        "draws": 898,
+        "digest": "cfc08d9d"
+      }
+    },
+    {
+      "tick": 205,
+      "time": 10.25,
+      "nextId": 420,
+      "state": "d2c1411e",
+      "events": "4309d6c1",
+      "rng": {
+        "draws": 932,
+        "digest": "3df24049"
+      }
+    },
+    {
+      "tick": 210,
+      "time": 10.5,
+      "nextId": 420,
+      "state": "ba2e1eca",
+      "events": "741638a5",
+      "rng": {
+        "draws": 955,
+        "digest": "7dedbd6e"
+      }
+    },
+    {
+      "tick": 215,
+      "time": 10.75,
+      "nextId": 420,
+      "state": "88f1c0a6",
+      "events": "741638a5",
+      "rng": {
+        "draws": 973,
+        "digest": "9562e8f7"
+      }
+    },
+    {
+      "tick": 220,
+      "time": 11,
+      "nextId": 420,
+      "state": "1ae3e8e6",
+      "events": "741638a5",
+      "rng": {
+        "draws": 990,
+        "digest": "b241f2cc"
+      }
+    },
+    {
+      "tick": 225,
+      "time": 11.25,
+      "nextId": 420,
+      "state": "223f8e68",
+      "events": "2ae88ffd",
+      "rng": {
+        "draws": 1021,
+        "digest": "9061c0d3"
+      }
+    },
+    {
+      "tick": 230,
+      "time": 11.5,
+      "nextId": 420,
+      "state": "a3b6fe8d",
+      "events": "741638a5",
+      "rng": {
+        "draws": 1044,
+        "digest": "63cd904b"
+      }
+    },
+    {
+      "tick": 235,
+      "time": 11.75,
+      "nextId": 420,
+      "state": "6769a8c4",
+      "events": "741638a5",
+      "rng": {
+        "draws": 1071,
+        "digest": "90a25477"
+      }
+    },
+    {
+      "tick": 240,
+      "time": 12,
+      "nextId": 420,
+      "state": "c01a7de4",
+      "events": "741638a5",
+      "rng": {
+        "draws": 1083,
+        "digest": "222a00ea"
+      }
+    },
+    {
+      "tick": 242,
+      "time": 12.1,
+      "nextId": 420,
+      "state": "c09c9c85",
+      "events": "0cde5425",
+      "rng": {
+        "draws": 1100,
+        "digest": "ebf67579"
       },
       "label": "final",
       "players": [
@@ -1017,24 +1158,19 @@
             null
           ],
           "bank": {},
-          "cls": "paladin",
+          "cls": "swordman",
           "companionUpgrades": {},
-          "counters": {
-            "damageDealt": 256,
-            "damageTaken": 6
-          },
+          "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
-            "counters": {
-              "damageDealt": 256
-            },
+            "counters": {},
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
+              "eastbrook_buckler",
               "recruit_tunic",
-              "spring_water",
-              "training_mace"
+              "worn_sword"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1071,7 +1207,92 @@
           "entityId": 415,
           "equipment": {
             "chest": "recruit_tunic",
-            "mainhand": "training_mace"
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            }
+          ],
+          "lifetimeXp": 7677,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "renown": 55,
+          "statAllocation": {},
+          "townFocus": {}
+        },
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "mage",
+          "companionUpgrades": {},
+          "counters": {
+            "damageDealt": 171,
+            "damageTaken": 50
+          },
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {
+              "damageDealt": 171
+            },
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "feat_era_cap",
+              ""
+            ],
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ],
+            [
+              "prog_level_cap",
+              ""
+            ],
+            [
+              "prog_the_long_middle",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 419,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1091,47 +1312,47 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 55,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "int": 7,
-            "luk": 3,
-            "str": 19,
-            "vit": 18
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 25,
-          "combatTimer": 0.05,
-          "comboUntil": -1,
-          "cooldowns": [
-            [
-              "consecration",
-              2
-            ]
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3587.9,
+              "school": "physical",
+              "sourceId": 415
+            }
           ],
-          "critChance": 0.023333,
+          "blockChance": 0.05,
+          "blockValue": 6,
+          "combatTimer": 111,
+          "comboUntil": -1,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
-          "fiveSecondRule": 6,
-          "flee": 25,
-          "hit": 28,
-          "hp": 798,
+          "fiveSecondRule": 111,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
-          "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 804,
-          "maxResource": 650,
+          "maxHp": 288,
+          "maxResource": 100,
           "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -1142,36 +1363,35 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 590,
-          "resourceType": "mana",
+          "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 9,
+          "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 331,
-            "dex": 8,
-            "int": 8,
-            "luk": 4,
-            "str": 20,
-            "vit": 19
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "paladin",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
-            "speed": 2.6
+            "speed": 2
           }
         },
         {
           "aiState": "dead",
           "combatTimer": 99.05,
           "comboUntil": -1,
-          "corpseTimer": 50.95,
+          "corpseTimer": 47.95,
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
@@ -1197,7 +1417,7 @@
             "z": 39.96508
           },
           "potionCooldownUntil": -1,
-          "respawnTimer": 15.95,
+          "respawnTimer": 12.95,
           "spawnPos": {
             "x": 40,
             "y": 1.5,
@@ -1224,9 +1444,21 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 419,
           "aiState": "attack",
-          "combatTimer": 0.05,
+          "auras": [
+            {
+              "duration": 2,
+              "id": "blizzard_slow",
+              "kind": "slow",
+              "name": "Blizzard",
+              "remaining": 0.95,
+              "school": "frost",
+              "sourceId": 419,
+              "value": 0.6
+            }
+          ],
+          "combatTimer": 1.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1237,7 +1469,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 39869,
+          "hp": 39913,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -1248,7 +1480,6 @@
           "level": 5,
           "lootFfaTimer": "Infinity",
           "maxHp": 40000,
-          "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -1268,15 +1499,21 @@
             "luk": 1,
             "vit": 1
           },
-          "swingTimer": 0.05,
-          "tappedById": 415,
+          "swingTimer": 2,
+          "tappedById": 419,
           "templateId": "forest_wolf",
           "threat": [
             [
-              415,
-              132
+              419,
+              88
             ]
           ],
+          "wanderTarget": {
+            "x": 3.31263,
+            "y": 1.5,
+            "z": 6.63999
+          },
+          "wanderTimer": 27.1,
           "weapon": {
             "max": 12,
             "min": 8,
@@ -1284,9 +1521,20 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 419,
           "aiState": "attack",
-          "combatTimer": 0.05,
+          "auras": [
+            {
+              "duration": 2,
+              "id": "blizzard_slow",
+              "kind": "slow",
+              "name": "Blizzard",
+              "remaining": 0.95,
+              "school": "frost",
+              "sourceId": 419,
+              "value": 0.6
+            }
+          ],
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1297,7 +1545,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 39875,
+          "hp": 39916,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -1308,7 +1556,6 @@
           "level": 5,
           "lootFfaTimer": "Infinity",
           "maxHp": 40000,
-          "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
           "petMode": "defensive",
@@ -1328,19 +1575,90 @@
             "luk": 1,
             "vit": 1
           },
-          "swingTimer": 0.05,
-          "tappedById": 415,
+          "swingTimer": 2,
+          "tappedById": 419,
           "templateId": "forest_wolf",
           "threat": [
             [
-              415,
-              126
+              419,
+              85
             ]
           ],
+          "wanderTarget": {
+            "x": 3.95075,
+            "y": 1.5,
+            "z": -3.764171
+          },
+          "wanderTimer": 27.1,
           "weapon": {
             "max": 12,
             "min": 8,
             "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "blizzardOrbCdr": 3,
+          "castTotal": 2,
+          "comboUntil": -1,
+          "cooldowns": [
+            [
+              "blizzard",
+              0.95
+            ]
+          ],
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 7.05,
+          "flee": 21,
+          "hit": 21,
+          "hp": 49950,
+          "id": 419,
+          "inCombat": true,
+          "kind": "player",
+          "level": 20,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "maxResource": 10000,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 9939,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "templateId": "mage",
+          "weapon": {
+            "max": 6,
+            "min": 3,
+            "speed": 2.9
           }
         }
       ]
