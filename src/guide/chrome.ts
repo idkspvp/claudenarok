@@ -3,6 +3,7 @@
 // the footer. Pure DOM construction; the app owns routing and active-state updates.
 // All player-visible text is a t() key; all interpolated text passes through esc().
 
+import { DISCORD_INVITE } from '../brand';
 import { esc } from '../ui/esc';
 import {
   getLanguage,
@@ -136,7 +137,7 @@ export function buildChrome(
         <nav class="guide-footer-links" aria-label="${esc(t('guide.footer.linksLabel'))}">
           <a class="guide-cta guide-cta-sm" href="/play">${esc(t('guide.footer.playNow'))}</a>
           <a href="https://github.com/levy-street/world-of-claudecraft" target="_blank" rel="noopener">${esc(t('guide.footer.github'))}</a>
-          <a href="https://discord.com/invite/worldofclaudecraft" target="_blank" rel="noopener">${esc(t('guide.footer.discord'))}</a>
+          <a href="${DISCORD_INVITE}" target="_blank" rel="noopener">${esc(t('guide.footer.discord'))}</a>
         </nav>
         <p class="guide-footer-rights">&copy; ${esc(t('guide.footer.rights'))}</p>
       </div>

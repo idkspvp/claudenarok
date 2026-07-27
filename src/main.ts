@@ -2,6 +2,12 @@
 // index.html and play.html both bootstrap through this module, so this one import
 // styles both game entries; admin/guide use their own entries and inline CSS.
 import './styles/index.css';
+import {
+  SITE_ORIGIN as BRAND_SITE_ORIGIN,
+  SITE_URL as BRAND_SITE_URL,
+  DESKTOP_URL_SCHEME,
+  SOCIAL_LINKS,
+} from './brand';
 import { startDiscordLogin } from './discord_login_start';
 import { syncAppViewport as syncAppViewportShared } from './game/app_viewport';
 import { audio } from './game/audio';
@@ -359,7 +365,7 @@ applyNativeDeviceLanguage({
   language: navigator.language,
 });
 
-const SITE_URL = 'https://worldofclaudecraft.com/';
+const SITE_URL = BRAND_SITE_URL;
 
 const RESOURCE_KEYS = {
   mana: 'classDetails.resources.mana',
@@ -4238,7 +4244,7 @@ async function completeDesktopBrowserLogin(): Promise<boolean> {
   try {
     const { code } = await api.createDesktopLoginCode();
     if (!code) throw new Error('missing desktop login code');
-    location.href = `worldofclaudecraft://desktop-login?code=${encodeURIComponent(code)}`;
+    location.href = `${DESKTOP_URL_SCHEME}://desktop-login?code=${encodeURIComponent(code)}`;
   } catch (err) {
     loginError(userFacingApiError(err));
     show('#login-panel');
@@ -5387,42 +5393,34 @@ function updateSeoMetadata(lang: SupportedLanguage): void {
 
   const jsonLd = document.getElementById('structured-data') as HTMLScriptElement | null;
   if (jsonLd) {
-    const sameAs = [
-      'https://github.com/levy-street/world-of-claudecraft',
-      'https://discord.com/invite/worldofclaudecraft',
-      'https://www.youtube.com/@WoClaudeCraft',
-      'https://x.com/WoClaudecraft',
-      'https://www.instagram.com/worldofclaudecraft/',
-      'https://www.tiktok.com/@worldofclaudecraft',
-      'https://www.reddit.com/r/WorldofClaudecraft/',
-    ];
+    const sameAs = SOCIAL_LINKS;
     jsonLd.textContent = JSON.stringify(
       {
         '@context': 'https://schema.org',
         '@graph': [
           {
             '@type': 'WebSite',
-            '@id': 'https://worldofclaudecraft.com/#website',
+            '@id': `${SITE_URL}#website`,
             name: 'World of ClaudeCraft',
             alternateName: 'World of Claudecraft',
             url: canonicalHref,
             inLanguage: languageTag(lang),
             description: t('seo.description'),
             publisher: {
-              '@id': 'https://worldofclaudecraft.com/#organization',
+              '@id': `${SITE_URL}#organization`,
             },
           },
           {
             '@type': 'Organization',
-            '@id': 'https://worldofclaudecraft.com/#organization',
+            '@id': `${SITE_URL}#organization`,
             name: 'World of ClaudeCraft',
-            url: 'https://worldofclaudecraft.com/',
+            url: SITE_URL,
             logo: 'https://worldofclaudecraft.com/woc_logo_square.webp',
             sameAs,
           },
           {
             '@type': 'VideoGame',
-            '@id': 'https://worldofclaudecraft.com/#game',
+            '@id': `${SITE_URL}#game`,
             name: 'World of ClaudeCraft',
             alternateName: 'World of Claudecraft',
             genre: t('seo.genre'),
@@ -5434,7 +5432,7 @@ function updateSeoMetadata(lang: SupportedLanguage): void {
             description: t('seo.description'),
             inLanguage: languageTag(lang),
             publisher: {
-              '@id': 'https://worldofclaudecraft.com/#organization',
+              '@id': `${SITE_URL}#organization`,
             },
             sameAs,
           },

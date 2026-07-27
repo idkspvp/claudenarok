@@ -87,6 +87,7 @@ const mainTs = readFileSync(new URL('../src/main.ts', import.meta.url), 'utf8').
   /\r\n/g,
   '\n',
 );
+const brandTs = readFileSync(new URL('../src/brand.ts', import.meta.url), 'utf8');
 const newsFeedTs = readFileSync(new URL('../src/ui/news_feed.ts', import.meta.url), 'utf8').replace(
   /\r\n/g,
   '\n',
@@ -742,7 +743,11 @@ describe('client HTML shell', () => {
     expect(html).toContain('"alternateName": "World of Claudecraft"');
     expect(html).toContain('"https://github.com/levy-street/world-of-claudecraft"');
     expect(mainTs).toContain("alternateName: 'World of Claudecraft'");
-    expect(mainTs).toContain("'https://github.com/levy-street/world-of-claudecraft'");
+    // The social profiles moved into src/brand.ts, which is the point of that
+    // file: the identity lives in one place instead of at eighty-five call
+    // sites. Scan it there rather than re-inlining the list to keep a source
+    // assertion passing.
+    expect(brandTs).toContain("'https://github.com/levy-street/world-of-claudecraft'");
     expect(robotsTxt.trim()).toBe(
       'User-agent: *\nAllow: /\n\nSitemap: https://worldofclaudecraft.com/sitemap.xml\nSitemap: https://worldofclaudecraft.com/sitemap-characters.xml',
     );
