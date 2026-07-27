@@ -13,7 +13,7 @@ Rename the ~16 flagged item / set / augment display names to their NAME-MAP valu
 Edit ONLY display `name` strings; NEVER an item `id`. Items are the DUPLICATED-English family, so every rename edits BOTH copies byte-identical (the sim record AND the catalog):
 - **Sim records** (`ITEMS[id].name` and the zone/temple item tables):
   - `src/sim/content/items.ts` — base `ITEMS[id].name`.
-  - `src/sim/content/zone2.ts` + `src/sim/content/zone3.ts` — `ZONE2_ITEMS` / `ZONE3_ITEMS` `.name`.
+  - `src/sim/content/zone2/` + `src/sim/content/zone3/` — `ZONE2_ITEMS` / `ZONE3_ITEMS` `.name`.
   - `src/sim/content/temple.ts` — temple item `.name`.
 - **Set names:** `src/sim/content/item_sets.ts` — set display `name`. The 7 tier-sets are naming-convention-only (none verbatim WoW per the audit): apply ONLY the operator's `generic-keep?` decisions as recorded in the LOCKED NAME-MAP; if a tier-set row is `generic-keep?` and the operator kept it, leave it byte-identical.
 - **Augments:** `src/sim/content/augments.ts` — rename the flagged augment (`lightwell` -> the NAME-MAP value).

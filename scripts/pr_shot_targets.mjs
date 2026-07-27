@@ -2652,7 +2652,7 @@ export const TARGETS = [
           if (!p) return;
           const { groundHeight, waterLevelAt } = await import('/src/sim/world.ts');
           const { PLAYER_SWIM_DEPTH } = await import('/src/sim/pathfind.ts');
-          const { LAKE } = await import('/src/sim/content/zone1.ts');
+          const { LAKE } = await import('/src/sim/content/zone1/index.ts');
           const seed = game.world.cfg.seed;
           const dists = [4, 8, 12, 16, 20, 24];
           const fishable = (x, z, facing) => {

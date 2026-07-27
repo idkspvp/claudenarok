@@ -45,7 +45,7 @@ keep working normally. That's why sound kept firing after the "freeze."
 
 `training_dummy` is a zone3 camp near the ogre war-camp
 (`{ mobId: 'training_dummy', center: { x: -40, z: 648 }, radius: 0, count: 1 }`,
-the camp record in `src/sim/content/zone3.ts`), about 54 yards from the
+the camp record in `src/sim/content/zone3/`), about 54 yards from the
 teleport point.
 Its model, `models/creatures/training_dummy.glb`, is deliberately marked
 `lazyPreload: true` in `src/render/characters/manifest.ts` (it appears in

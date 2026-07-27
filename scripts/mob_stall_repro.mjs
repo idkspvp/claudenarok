@@ -159,7 +159,7 @@ const RUN_ID =
 // The spot coordinates are content-coupled: (-15, 55) is the zone1 forest_wolf camp and
 // (110, 760) is the zone3 world boss. If the content moves, the staging assertion fails
 // loudly (STAGING FAILED) instead of silently measuring an empty field; update the spots
-// from src/sim/content/zone1.ts and src/sim/world_boss.ts if that happens.
+// from src/sim/content/zone1/ and src/sim/world_boss.ts if that happens.
 const SCENARIOS = {
   'idle-crowd': {
     level: 18,
@@ -1148,7 +1148,7 @@ async function main() {
       } else {
         console.log(
           '[mob-stall] heartbeats arrived but the scenario signature is missing: the ' +
-            'content may have moved. Re-check the spot against src/sim/content/zone1.ts ' +
+            'content may have moved. Re-check the spot against src/sim/content/zone1/ ' +
             '(forest_wolf camp) and src/sim/world_boss.ts, and update SCENARIOS.',
         );
       }

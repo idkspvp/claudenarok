@@ -51,7 +51,7 @@ PR 2039 changed all of it; none of these statements describe the code at head.
 - `src/sim/professions/archetype.ts` persisted the active/title craft, paired major, switch
   count, and amends progress. It derived the hobby and had no history of previously held
   archetype pairs.
-- The acceptance and make-amends quests in `src/sim/content/zone1.ts` were retired
+- The acceptance and make-amends quests in `src/sim/content/zone1/` were retired
   placeholders and had no completion effects.
 - `QuestObjective` supported only kill, collect, and interact. The profession onboarding
   quest used a gathering-specific quest-item grant instead of a real gather objective.
@@ -153,7 +153,7 @@ a genuine gather objective instead of a special quest-item grant.
 - `src/sim/professions/crafting.ts`: credit only a successful craft.
 - `src/sim/professions/gathering.ts`: credit only a granted harvest.
 - `src/sim/quest_targets.ts`: resolve node-type objectives to map areas.
-- `src/sim/content/zone1.ts`: convert `q_prof_intro` to a gather objective and remove its
+- `src/sim/content/zone1/`: convert `q_prof_intro` to a gather objective and remove its
   workaround dependency.
 - Client localization projection for structured quest-progress data.
 

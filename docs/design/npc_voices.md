@@ -7,7 +7,7 @@ procedurally from a small set of shared GLB player models (knight, mage,
 barbarian, rogue, classic-mage), each tinted with the NPC's signature color and
 given gear (helmet + cape, staff, axe, crossbow). See
 `src/render/characters/manifest.ts` (`NPC_KEYS` → `VISUALS`) and the per-zone
-content files (`src/sim/content/zone1.ts`, `zone2.ts`, `zone3.ts`, `temple.ts`).
+content files (`src/sim/content/zone1/`, `zone2.ts`, `zone3.ts`, `temple.ts`).
 
 Each entry below grounds the voice in what actually defines that NPC's look —
 body archetype, tint color, weapon/silhouette — plus its role and its in-game

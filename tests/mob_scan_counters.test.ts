@@ -148,7 +148,7 @@ describe('mob scan counters: aggro-scan player visits (updateMob idle branch)', 
     const sim = noPlayerSim();
     // A level-5 forest wolf vs a level-1 player has effective aggro radius
     // max(4, min(20, 10 + (5 - 1) * 1.5)) = 16 exactly (aggroRadius 10 in
-    // src/sim/content/zone1.ts; pinned below so the 16 derivation reddens if the
+    // src/sim/content/zone1/; pinned below so the 16 derivation reddens if the
     // content value drifts). A live, non-trivial player at exactly 16 is inside the
     // grid query (visited) but the detection check is strict, so the wolf must stay
     // idle: this pins the strict inequality on the general branch (the Nythraxis case

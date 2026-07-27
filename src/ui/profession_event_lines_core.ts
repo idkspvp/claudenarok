@@ -7,7 +7,7 @@
 // switch cases execute, resolving the localized names themselves.
 //
 // The one real decision here is `attunementMasterForPair`: only the four
-// wave-one archetype pairs have a seated anchor master (content/zone1.ts), so a
+// wave-one archetype pairs have a seated anchor master (content/zone1/), so a
 // trend nudge toward one of the other six ring pairs has no master to name and
 // renders the no-master variant instead. The map is DERIVED from the attunement
 // quest content (never a second hand-kept copy), so it can never drift from

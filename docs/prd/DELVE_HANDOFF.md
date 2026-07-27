@@ -72,9 +72,9 @@ consistent across every reference** — it compiles and the relevant tests pass:
 | NPC spawn | `src/sim/content/delves/index.ts` | `pos: { x: -5, z: -52 }`, `facing: Math.PI` |
 | Delve door | `src/sim/content/delves/collapsed_reliquary.ts:107` | `doorPos: { x: -5, z: -52 }` |
 | Login-eject / leave / fail return | `src/sim/sim.ts:722, 7760, 7921` | uses `delve.doorPos` dynamically (z−4 = −56) |
-| Map label | `src/sim/content/zone1.ts` | `{ x: -5, z: -52, label: 'Reliquary Hill' }` |
-| Dressing | `src/sim/content/zone1.ts` | ruin ring `{-5,-60}`, graveyard `{4,-56}` |
-| World marker prop | `src/sim/content/zone1.ts` + `src/render/props.ts` | `delveMarkers: [{ -5,-52, 'The Collapsed Reliquary' }]` → carved-stone name slab |
+| Map label | `src/sim/content/zone1/` | `{ x: -5, z: -52, label: 'Reliquary Hill' }` |
+| Dressing | `src/sim/content/zone1/` | ruin ring `{-5,-60}`, graveyard `{4,-56}` |
+| World marker prop | `src/sim/content/zone1/` + `src/render/props.ts` | `delveMarkers: [{ -5,-52, 'The Collapsed Reliquary' }]` → carved-stone name slab |
 | Board open hook | `interactions.ts`, `main.ts` | keyed on `templateId === 'brother_halven'` (position-independent) |
 
 **Remaining: visual playtest verification only** (no code expected):

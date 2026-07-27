@@ -234,7 +234,7 @@ export function defaultHobbyForPair(
 
 // Escalation formula for the repeatable "make amends" quest: a modest linear
 // ramp, base 5 (matching the typical zone-1 kill/collect objective count seen in
-// content/zone1.ts) plus 3 more per prior switch, so switching gets meaningfully
+// content/zone1/) plus 3 more per prior switch, so switching gets meaningfully
 // harder each time without inventing an unrelated balance number. switchCount is
 // the number of switches already made BEFORE this attempt (0 for the very first
 // switch away from the acceptance-quest archetype).

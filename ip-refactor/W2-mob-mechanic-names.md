@@ -12,8 +12,8 @@ Rename the 4 verbatim WoW mob-mechanic display names and update their `sim_i18n`
 ## Scope (verified)
 Edit the inline `name:` string on each mob mechanic object AND its matching `AURA_NAME_KEY` entry in `src/ui/sim_i18n.ts`, per the NAME-MAP. Confirm the CURRENT line numbers / surrounding mechanic keys with ONE Explore agent this session (the numbers below are audit-captured on v0.18.0 and may drift; never read `dungeons.ts`/`zone2.ts`/`zone3.ts`/`sim_i18n.ts` whole).
 - `src/sim/content/dungeons.ts` — Bastion Revenant on-hit `mortalStrike` mechanic, `name:'Mortal Strike'` -> `Maiming Strike` (matches the V1 warrior ability rename for the shared string).
-- `src/sim/content/zone2.ts` — Grubjaw purge mechanic, `name:'Devour Magic'` -> `Rend Enchantment`.
-- `src/sim/content/zone3.ts` — Corrupted Priest `petSpell` mechanic, `name:'Mind Blast'` -> `Psychic Lash`.
+- `src/sim/content/zone2/` — Grubjaw purge mechanic, `name:'Devour Magic'` -> `Rend Enchantment`.
+- `src/sim/content/zone3/` — Corrupted Priest `petSpell` mechanic, `name:'Mind Blast'` -> `Psychic Lash`.
 - `src/sim/content/dungeons.ts` — Korgath stomp mechanic, `name:'War Stomp'` -> `Ground Slam` (peers already use Ground Slam / Skull Smash).
 - `src/ui/sim_i18n.ts` — the 4 matching `AURA_NAME_KEY` entries: swap each `old` English string to the `new` string so `localizeSimText` still resolves the mechanic name to its key.
 

@@ -58,9 +58,9 @@ Quests are one-time; dungeons are 25–45 minute social commitments. Players lev
 | Hunter pets | `src/sim/sim.ts` ~4131+ | `updatePet`; `PetState` on `CharacterState` ~398 |
 | IWorld dungeon API | `src/world_api.ts` ~281 | `enterDungeon` / `leaveDungeon` |
 | Server cmd dispatch | `server/game.ts` ~987+ | `enter_dungeon` / `leave_dungeon` |
-| Quest NPCs (no conflict) | `src/sim/content/zone1.ts` ~261 | `brother_aldric` — **do not reuse for delve board** |
+| Quest NPCs (no conflict) | `src/sim/content/zone1/` ~261 | `brother_aldric` — **do not reuse for delve board** |
 | Hollow Crypt boss | `src/sim/content/dungeons.ts` ~29 | `sexton_marrow` — separate from `deacon_varric` |
-| Zone 2 boss (no conflict) | `src/sim/content/zone2.ts` ~202 | `deacon_voss` — different id/zone from `deacon_varric` |
+| Zone 2 boss (no conflict) | `src/sim/content/zone2/` ~202 | `deacon_voss` — different id/zone from `deacon_varric` |
 
 **Gap:** No `DelveRun`, `delveOrigin`, `delveAt`, content registry, wire commands, or UI.
 

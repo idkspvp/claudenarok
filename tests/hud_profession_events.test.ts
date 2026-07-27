@@ -85,7 +85,7 @@ function makeHud(): ProfessionEventHarness {
   return hud;
 }
 
-// A wave-one pair with a seated anchor master (content/zone1.ts
+// A wave-one pair with a seated anchor master (content/zone1/
 // q_prof_attune_smith), so the trendNudge master arm has a real name to
 // resolve.
 const MASTER_PAIR = 'weaponcrafting+armorcrafting';

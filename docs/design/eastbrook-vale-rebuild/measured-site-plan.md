@@ -12,8 +12,8 @@ NPCs, so DO NOT copy coordinates from this file: the shipped literals are owned 
 ## Evidence classes
 
 - **Authored fact** comes from the current data records in
-  [`ZONE1_PROPS`](../../../src/sim/content/zone1.ts),
-  [`ZONE1_NPCS`](../../../src/sim/content/zone1.ts),
+  [`ZONE1_PROPS`](../../../src/sim/content/zone1/index.ts),
+  [`ZONE1_NPCS`](../../../src/sim/content/zone1/index.ts),
   [`STATIONS`](../../../src/sim/content/professions.ts), and
   [`MAILBOXES`](../../../src/sim/content/mailboxes.ts), or from the accepted numeric layout
   contract below.

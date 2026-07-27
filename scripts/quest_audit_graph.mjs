@@ -9,21 +9,21 @@ const sourceModuleDefs = [
   {
     id: 'zone1',
     label: 'Zone 1',
-    path: 'src/sim/content/zone1.ts',
+    path: 'src/sim/content/zone1/',
     questsExport: 'ZONE1_QUESTS',
     orderExport: 'ZONE1_QUEST_ORDER',
   },
   {
     id: 'zone2',
     label: 'Zone 2',
-    path: 'src/sim/content/zone2.ts',
+    path: 'src/sim/content/zone2/',
     questsExport: 'ZONE2_QUESTS',
     orderExport: 'ZONE2_QUEST_ORDER',
   },
   {
     id: 'zone3',
     label: 'Zone 3',
-    path: 'src/sim/content/zone3.ts',
+    path: 'src/sim/content/zone3/',
     questsExport: 'ZONE3_QUESTS',
     orderExport: 'ZONE3_QUEST_ORDER',
   },
@@ -43,9 +43,9 @@ const outDir = path.resolve(
 
 const entrySource = `
   export { QUESTS, QUEST_ORDER, MOBS, NPCS, ITEMS } from './src/sim/data.ts';
-  export { ZONE1_QUESTS, ZONE1_QUEST_ORDER } from './src/sim/content/zone1.ts';
-  export { ZONE2_QUESTS, ZONE2_QUEST_ORDER } from './src/sim/content/zone2.ts';
-  export { ZONE3_QUESTS, ZONE3_QUEST_ORDER } from './src/sim/content/zone3.ts';
+  export { ZONE1_QUESTS, ZONE1_QUEST_ORDER } from './src/sim/content/zone1/index.ts';
+  export { ZONE2_QUESTS, ZONE2_QUEST_ORDER } from './src/sim/content/zone2/index.ts';
+  export { ZONE3_QUESTS, ZONE3_QUEST_ORDER } from './src/sim/content/zone3/index.ts';
   export { TEMPLE_QUESTS, TEMPLE_QUEST_ORDER } from './src/sim/content/temple.ts';
 `;
 

@@ -54,7 +54,7 @@ export const SET_GREYJAW_STALKER = 'greyjaw_stalker'; // leather, marksman
 // max-combine (see the resolver).
 // Every family reaches its 3-piece tier: tier-1 pieces drop in the Gravewyrm
 // Sanctum; tier-2 helms/shoulders drop in the Nythraxis raid and the tier-2
-// gloves/belts from the Thunzharr world boss (content/zone3.ts).
+// gloves/belts from the Thunzharr world boss (content/zone3/).
 const STRENGTH_T1_BONUSES: SetBonusTier[] = [
   { pieces: 2, effect: { ap: 40 }, text: 'Increases attack power by 40.' },
   { pieces: 3, effect: { str: 15, vit: 15 }, text: 'Increases Strength by 15 and Stamina by 15.' },

@@ -36,9 +36,13 @@ there first if you need one.
 - **Classes + talents:** `classes.ts` (`CLASSES`, `ABILITIES`, `abilitiesKnownAt`),
   `talents.ts` (framework), `talents_warrior.ts`/`talents_classic.ts` (the authored
   trees; copy `talents_warrior.ts` as the template for a new one).
-- **Zones + dungeons:** `zone1.ts`/`zone2.ts`/`zone3.ts` (one module per zone;
-  `zone1` items live in `items.ts` as `BASE_ITEMS`, `zone2`/`zone3` export their
-  own `ZONE{N}_ITEMS`), `temple.ts` (the temple zone + dungeon in one module),
+- **Zones + dungeons:** `zone1/`, `zone2/`, `zone3/`, one DIRECTORY per zone,
+  each `world.ts` + `mobs.ts` + `npcs.ts` + `items.ts` behind an `index.ts`
+  barrel (`zone1` has no items of its own; its gear is `BASE_ITEMS` in
+  `items.ts`). Import from the barrel, never a file inside. Split by merge
+  surface so a monster pass and an item pass can run in parallel; see the local
+  `CLAUDE.md` in any of the three. Then `temple.ts` (the temple zone + dungeon
+  in one module),
   `dungeons.ts` (elites, spawn lists, `DUNGEON_DEFS`), `items.ts` (also fishing
   tables + the `WAR`/`MAG`/`ROG` archetype-group class locks).
 - **Delves:** the `delves/` subdirectory (delve defs, `DELVE_MOBS`, companions,

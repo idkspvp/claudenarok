@@ -26,9 +26,9 @@ const entrySource = `
   export { ALL_CLASSES, FISHING_SESSION_CAP_SEC } from './src/sim/types.ts';
   export { ZONES, DUNGEONS, MOBS, CAMPS, DELVE_LIST, NPCS, ITEMS } from './src/sim/data.ts';
   export { WARLOCK_PET_MOBS } from './src/sim/content/warlock_pets.ts';
-  export { ZONE1_MOBS } from './src/sim/content/zone1.ts';
-  export { ZONE2_MOBS } from './src/sim/content/zone2.ts';
-  export { ZONE3_MOBS } from './src/sim/content/zone3.ts';
+  export { ZONE1_MOBS } from './src/sim/content/zone1/index.ts';
+  export { ZONE2_MOBS } from './src/sim/content/zone2/index.ts';
+  export { ZONE3_MOBS } from './src/sim/content/zone3/index.ts';
   export { TEMPLE_MOBS } from './src/sim/content/temple.ts';
   export { DELVE_COMPANIONS, DELVE_AFFIXES } from './src/sim/content/delves/index.ts';
   export { DEEDS, DEED_ORDER } from './src/sim/content/deeds.ts';

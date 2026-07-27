@@ -409,7 +409,7 @@ async function stageView(page, view) {
       const [{ isBlocked }, { groundHeight }, { ZONE1_PROPS }] = await Promise.all([
         import('/src/sim/colliders.ts'),
         import('/src/sim/world.ts'),
-        import('/src/sim/content/zone1.ts'),
+        import('/src/sim/content/zone1/index.ts'),
       ]);
       if (isBlocked(expectedSeed, playerState.x, playerState.z, 0.5)) {
         throw new Error('matched capture player anchor is blocked at body radius 0.5');
@@ -829,7 +829,7 @@ async function readTownPlacementInventory(page, contractId = null) {
   const legacyExpected = expectedTownPlacementInventory(false, contractId).legacy;
   const rebuildExpected = expectedTownPlacementInventory(true, contractId).rebuild;
   const observed = await page.evaluate(async () => {
-    const { ZONE1_PROPS } = await import('/src/sim/content/zone1.ts');
+    const { ZONE1_PROPS } = await import('/src/sim/content/zone1/index.ts');
     const renderer = window.__game.renderer;
     const root = renderer.scene.getObjectByName('eastbrookTownRebuild');
     const close = (left, right) => Math.abs(left - right) < 1e-8;
@@ -1035,7 +1035,7 @@ async function installTownCaptureOverlay(page) {
     const root = renderer.scene.getObjectByName('eastbrookTownRebuild');
     const [{ groundHeight }, { ZONE1_PROPS }, { colliderInternalsForTest }] = await Promise.all([
       import('/src/sim/world.ts'),
-      import('/src/sim/content/zone1.ts'),
+      import('/src/sim/content/zone1/index.ts'),
       import('/src/sim/colliders.ts'),
     ]);
     const obbs = [];

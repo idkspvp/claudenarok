@@ -83,7 +83,7 @@ the fix. This is why running the actual game, not just unit tests, was worth doi
 
 Stage 0 note: `src/render/props.ts` already recolors the Drowned Litany entrance to a
 blue "water" palette (portal shader `uRim` uniform, `drownVeilMaterial` red->blue veil
-recolor, blue backsplash/mouth-light/embers) and `src/sim/content/zone3.ts` registers
+recolor, blue backsplash/mouth-light/embers) and `src/sim/content/zone3/` registers
 its `delveMarkers` entry. Not yet committed.
 
 ---
