@@ -21,7 +21,7 @@ import { PLAYER_BODY_RADIUS } from '../src/sim/pathfind';
 import { eloDelta, Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
-import { fundCasts } from './helpers/sp';
+import { fundCasts, raisePool } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
@@ -186,6 +186,7 @@ describe('arena: a full bout', () => {
   it('keeps buffs cast during the countdown when the fight starts', () => {
     const { sim, b } = queueDuo();
     const mage = sim.entities.get(b)!;
+    raisePool(mage); // Frost Armor costs more than a level-1 mage's whole pool
 
     sim.castAbility('frost_armor', b);
     expect(mage.auras.some((aura) => aura.id === 'frost_armor')).toBe(true);
@@ -666,34 +667,37 @@ describe('arena: 2v2 combat', () => {
 
 describe('arena: crowd control diminishing returns', () => {
   it('shortens repeated roots on the same arena target, then resets', () => {
-    const { sim, a, b } = queueDuo('acolyte', 'swordman');
+    const { sim, a, b } = queueDuo('mage', 'swordman');
     startBout(sim);
-    const acolyte = sim.entities.get(a)!;
+    // Entangling Roots went with the Druid in D1; Icebind is the surviving root,
+    // and it is a self-centred nova, so the caster stands next to the target.
+    const caster = sim.entities.get(a)!;
     const swordman = sim.entities.get(b)!;
     (sim as any).rng.chance = () => true;
     sim.setPlayerLevel(8, a);
-    acolyte.pos.x = swordman.pos.x;
-    acolyte.pos.z = swordman.pos.z - 8;
-    acolyte.targetId = b;
+    caster.pos.x = swordman.pos.x;
+    caster.pos.z = swordman.pos.z - 2;
+    caster.targetId = b;
     face(sim, a, b);
 
     const castRoot = () => {
-      fundCasts(acolyte);
-      acolyte.gcdRemaining = 0;
-      sim.castAbility('entangling_roots', a);
+      raisePool(caster);
+      caster.gcdRemaining = 0;
+      caster.cooldowns.delete('frost_nova');
+      sim.castAbility('frost_nova', a);
       finishCast(sim, a);
     };
 
     castRoot();
-    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(12);
+    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(8);
     swordman.auras = [];
 
     castRoot();
-    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(6);
+    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(4);
     swordman.auras = [];
 
     castRoot();
-    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(3);
+    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(2);
     swordman.auras = [];
 
     castRoot();
@@ -701,7 +705,7 @@ describe('arena: crowd control diminishing returns', () => {
 
     for (let i = 0; i < 20 * 18; i++) sim.tick();
     castRoot();
-    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(12);
+    expect(swordman.auras.find((aura) => aura.kind === 'root')?.duration).toBe(8);
   });
 
   it('lets Frost Nova root arena opponents through the same root category', () => {
@@ -750,18 +754,7 @@ describe('arena: class ability target filters', () => {
         sim.setPlayerLevel(20, pid);
       },
     },
-    { cls: 'swordman', ability: 'consecration', level: 20 },
-    {
-      cls: 'acolyte',
-      ability: 'swipe',
-      level: 20,
-      setup: (sim, pid) => {
-        const acolyte = sim.entities.get(pid)!;
-        sim.castAbility('bear_form', pid);
-        acolyte.gcdRemaining = 0;
-        fundCasts(acolyte);
-      },
-    },
+    // Consecration and Swipe went with the Paladin and the Druid in D1.
   ];
 
   it.each(aoeCases)(

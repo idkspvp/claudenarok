@@ -4,6 +4,7 @@
 // multi-player Sim, per docs/prd/dungeon-finder.md.
 
 import { describe, expect, it } from 'vitest';
+import { ALL_CLASSES } from '../src/sim/types';
 import {
   FINDER_ACTIVITIES,
   FINDER_CLASS_ROLES,
@@ -170,19 +171,17 @@ describe('finder catalogue metadata', () => {
 // every level.
 describe('compatibleFinderRoles', () => {
   it('applies the fixed class table', () => {
+    // One tank and one healer survive the D1 collapse: the Swordman holds the
+    // shield and the Acolyte owns every heal.
     expect(compatibleFinderRoles('swordman')).toEqual(['tank', 'dps']);
-    expect(compatibleFinderRoles('swordman')).toEqual(['tank', 'healer', 'dps']);
-    expect(compatibleFinderRoles('acolyte')).toEqual(['tank', 'healer', 'dps']);
-    expect(compatibleFinderRoles('acolyte')).toEqual(['healer', 'dps']);
     expect(compatibleFinderRoles('acolyte')).toEqual(['healer', 'dps']);
     expect(compatibleFinderRoles('mage')).toEqual(['dps']);
     expect(compatibleFinderRoles('thief')).toEqual(['dps']);
     expect(compatibleFinderRoles('archer')).toEqual(['dps']);
-    expect(compatibleFinderRoles('mage')).toEqual(['dps']);
   });
 
   it('every class can dps (table completeness)', () => {
-    expect(FINDER_CLASS_ROLES.dps).toHaveLength(9);
+    expect([...FINDER_CLASS_ROLES.dps].sort()).toEqual([...ALL_CLASSES].sort());
   });
 });
 
@@ -344,25 +343,25 @@ describe('automatic queue', () => {
 
   it('assigns exactly one role to a multi-role selection (the active spec narrows it)', () => {
     const sim = makeSim();
-    // A acolyte picks both tank and healer below the spec unlock; the sticky
-    // selection survives leveling up, but from level 5 the active spec is the
-    // whole capability set, so it collapses to one role at match time.
-    const acolyte = sim.addPlayer('acolyte', 'P0');
-    sim.setPlayerLevel(4, acolyte);
-    sim.dungeonFinderSetRoles(['tank', 'healer'], acolyte);
-    sim.setPlayerLevel(8, acolyte);
+    // The Swordman is the one multi-role job left after D1 (tank and dps), so it
+    // is what exercises the narrowing: it picks both, and the composition decides
+    // which single role the proposal assigns.
+    const swordman = sim.addPlayer('swordman', 'P0');
+    sim.setPlayerLevel(8, swordman);
+    sim.dungeonFinderSetRoles(['tank', 'dps'], swordman);
     const rest = addPlayers(sim, [
-      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
       { cls: 'mage', roles: ['dps'], level: 8 },
       { cls: 'thief', roles: ['dps'], level: 8 },
       { cls: 'archer', roles: ['dps'], level: 8 },
     ]);
-    const pids = [acolyte, ...rest];
+    const pids = [swordman, ...rest];
     for (const pid of pids) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
     tickAll(sim, 1);
-    // The restoration spec restricts the tank+healer selection to healing.
-    expect(sim.dungeonFinderInfoFor(pids[0])?.proposal?.role).toBe('healer');
-    expect(sim.dungeonFinderInfoFor(pids[1])?.proposal?.role).toBe('tank');
+    // Three dps are already queued, so the group needs the tank, and exactly one
+    // role comes back rather than the pair that was selected.
+    expect(sim.dungeonFinderInfoFor(pids[0])?.proposal?.role).toBe('tank');
+    expect(sim.dungeonFinderInfoFor(pids[1])?.proposal?.role).toBe('healer');
   });
 
   it('a decline returns accepted units to the queue with their original wait and locks out the decliner', () => {

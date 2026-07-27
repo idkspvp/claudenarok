@@ -10,7 +10,7 @@ import {
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import { levelWithStats } from './helpers/alloc';
-import { fundCasts } from './helpers/sp';
+import { raisePool } from './helpers/sp';
 
 // Standardized percent raid buffs (resurrecting PR #1038 on release/v0.21.0): the six
 // iconic buffs are percent, integer-point auras that land on the caster and every
@@ -38,7 +38,9 @@ function formParty(sim: Sim, leader: number, members: number[]) {
 
 const ready = (sim: Sim, pid: number) => {
   const e = sim.entities.get(pid)!;
-  fundCasts(e);
+  // A raid buff costs more than a first job's whole SP pool until D4 re-costs the
+  // kit, and these cases are about the buff's shape, not about affording it.
+  raisePool(e);
 };
 
 const blessingAura = (sourceId: number, value: number, remaining = 1800): Aura => ({
@@ -53,14 +55,14 @@ const blessingAura = (sourceId: number, value: number, remaining = 1800): Aura =
 });
 
 describe('standardized percent raid buffs', () => {
-  it('the six raid-buff abilities carry the percent-point buffTarget shape', () => {
+  it('the surviving raid-buff abilities carry the percent-point buffTarget shape', () => {
+    // Three of the original six (Mark of the Wild, Devotion Aura, Blessing of
+    // Might) went with the Druid and the Paladin in D1. The shape claim is about
+    // the three that are left, one per surviving buffing job.
     const cases: Array<[string, string, number]> = [
       ['battle_shout', 'buff_ap_pct', 10],
       ['arcane_intellect', 'buff_int_pct', 5],
       ['power_word_fortitude', 'buff_sta_pct', 5],
-      ['mark_of_the_wild', 'buff_stats_pct', 5],
-      ['devotion_aura', 'buff_armor_pct', 10],
-      ['blessing_of_might', 'buff_ap_pct', 10],
     ];
     for (const [id, kind, value] of cases) {
       const eff = ABILITIES[id].effects[0] as {
@@ -147,58 +149,6 @@ describe('standardized percent raid buffs', () => {
     sim.castAbility('power_word_fortitude', acolyte);
     expect(sim.entities.get(ally)!.stats.vit).toBe(Math.round(staBefore * 1.05));
     expect(sim.entities.get(ally)!.maxHp).toBeGreaterThan(hpBefore);
-  });
-
-  it('Mark of the Wild raises every primary attribute by 5%', () => {
-    const sim = makeWorld();
-    const acolyte = sim.addPlayer('acolyte', 'Dru');
-    const ally = sim.addPlayer('mage', 'Mag');
-    formParty(sim, acolyte, [ally]);
-    const before = { ...sim.entities.get(ally)!.stats };
-    ready(sim, acolyte);
-    sim.castAbility('mark_of_the_wild', acolyte);
-    const after = sim.entities.get(ally)!.stats;
-    expect(after.int).toBe(Math.round(before.int * 1.05));
-    expect(after.vit).toBe(Math.round(before.vit * 1.05));
-    expect(after.str).toBe(Math.round(before.str * 1.05));
-  });
-
-  it('Devotion Aura raises party armor by 10%', () => {
-    const sim = makeWorld();
-    const pal = sim.addPlayer('swordman', 'Pal');
-    const ally = sim.addPlayer('swordman', 'War');
-    formParty(sim, pal, [ally]);
-    const armorBefore = sim.entities.get(ally)!.stats.armor;
-    ready(sim, pal);
-    sim.castAbility('devotion_aura', pal);
-    expect(sim.entities.get(ally)!.auras.some((a) => a.kind === 'buff_armor_pct')).toBe(true);
-    expect(sim.entities.get(ally)!.stats.armor).toBe(Math.round(armorBefore * 1.1));
-  });
-
-  it('replaces the previous Blessing of Might from another caster', () => {
-    const sim = makeWorld();
-    const first = sim.addPlayer('swordman', 'Ald');
-    const second = sim.addPlayer('swordman', 'Borin');
-    const targetId = sim.addPlayer('swordman', 'War');
-    const target = sim.entities.get(targetId)!;
-    levelWithStats(sim, 4, first);
-    levelWithStats(sim, 4, second);
-
-    ready(sim, first);
-    sim.targetEntity(targetId, first);
-    sim.castAbility('blessing_of_might', first);
-    const firstAura = target.auras.find((a) => a.id === 'blessing_of_might')!;
-    firstAura.remaining = 1200;
-
-    ready(sim, second);
-    sim.targetEntity(targetId, second);
-    sim.castAbility('blessing_of_might', second);
-
-    const blessings = target.auras.filter((a) => a.id === 'blessing_of_might');
-    expect(blessings).toHaveLength(1);
-    expect(blessings[0].sourceId).toBe(second);
-    expect(blessings[0].value).toBe(10);
-    expect(blessings[0].remaining).toBe(1800);
   });
 
   it('does not stack Sureflight Aura from two hunters (same-class group buff)', () => {
