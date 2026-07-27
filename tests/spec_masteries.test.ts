@@ -190,7 +190,8 @@ describe('spec masteries', () => {
   it('applies petDmgPct at BOTH the melee and ranged pet damage sites, not only the helper', () => {
     // Drive the actual damage sites (a regression that drops `dmg *= petDamageMult` at
     // either would still pass a helper-only assertion). Same seed + fixed rolls + an
-    // identical dummy (armor cancels in the ratio) isolate the multiplier: BM's Packbond (petDmgPct 0.35)
+    // identical dummy (the armour PERCENTAGE cancels in the ratio; its Vitality is
+    // zeroed below because the flat layer would not) isolate the multiplier: BM's Packbond (petDmgPct 0.35)
     // must deal exactly 1.35x what a no-pet-mastery spec's identical pet deals.
     const setup = (spec: string) => {
       const sim = new Sim({ seed: 11, playerClass: 'hunter', autoEquip: true });
@@ -207,6 +208,9 @@ describe('spec masteries', () => {
         z: sim.player.pos.z + 2,
       });
       dummy.maxHp = dummy.hp = 100000;
+      // Vitality zeroed: soft DEF is a FLAT subtraction, and a flat term does NOT
+      // cancel in a ratio the way the armour percentage above it does.
+      dummy.stats.vit = 0;
       (sim as unknown as { addEntity(e: Entity): void }).addEntity(dummy);
       return { sim, pet, dummy };
     };

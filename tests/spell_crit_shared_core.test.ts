@@ -8,7 +8,9 @@
 // stay spell-only. The concrete melee values are already pinned elsewhere
 // (combat_rating, haste_set_bonus, warrior_stances, spec_masteries), so the
 // melee side here asserts composition, not new numbers.
+
 import { describe, expect, it } from 'vitest';
+import { critRateFrom } from '../src/sim/combat/crit';
 import { SET_CRIT_3PC_RATING, SET_NIGHTTALON } from '../src/sim/content/item_sets';
 import { ITEMS } from '../src/sim/data';
 import { type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
@@ -106,7 +108,7 @@ describe('spell crit shared core', () => {
       // (Pre-renewal Ragnarok has no spell crit at all; unifying the two bases is
       // phase-3 combat-model work, not a stat-conversion change.)
       expect(sim.ctx.spellCrit(p)).toBeCloseTo(0.05 + p.stats.int * 0.0008 + p.sharedCritBonus, 10);
-      expect(p.critChance).toBeCloseTo(0.01 + p.stats.luk * 0.003 + p.sharedCritBonus, 10);
+      expect(p.critChance).toBeCloseTo(critRateFrom(p.stats.luk, p.sharedCritBonus), 10);
     } finally {
       delete ITEMS[itemId];
     }

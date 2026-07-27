@@ -95,6 +95,25 @@ export function critChance(input: CritInput): number {
   return Math.min(1, Math.max(MIN_CRIT_PERMILLE / 1000, withBonus));
 }
 
+/** The attacker's already-derived rate, reduced by this target's Luck.
+ *
+ *  Split from `critChance` because the rate a character carries is baked once in
+ *  `recalcPlayerStats` (it folds in gear, talents, and auras that this module
+ *  never sees), while the denial depends on who is being hit and so has to be
+ *  applied per swing. */
+export function critAfterTargetLuck(
+  ownRate: number,
+  targetLuk: number,
+  opts: { attackerIsMonster?: boolean; targetIsPlayer?: boolean } = {},
+): number {
+  const denial =
+    opts.attackerIsMonster && opts.targetIsPlayer
+      ? MONSTER_ON_PLAYER_TARGET_LUK_PERMILLE
+      : TARGET_LUK_CRIT_PERMILLE;
+  const reduced = ownRate - (Math.max(0, targetLuk) * denial) / 1000;
+  return Math.min(1, Math.max(MIN_CRIT_PERMILLE / 1000, reduced));
+}
+
 /** Whether a hit of this shape is even allowed to crit. `abilityId` null means
  *  an ordinary weapon swing, which always may; anything else has to opt in. */
 export function canCrit(opts: {

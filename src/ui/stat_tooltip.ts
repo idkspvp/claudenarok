@@ -11,6 +11,7 @@
 // tests/stat_tooltip.test.ts cross-checks this module against real
 // recalcPlayerStats output so the numbers cannot silently drift.
 
+import { LUK_CRIT_PERMILLE } from '../sim/combat/crit';
 import { hardDefMultiplier } from '../sim/combat/defence';
 import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
@@ -182,7 +183,11 @@ export interface StatTooltipInput {
 // --- coefficients, mirroring src/sim/entity.ts recalcPlayerStats ------------
 const VIT_ARMOR_PER_POINT = 2; // entity.ts: s.armor += ... + s.vit * 2
 const LUK_PERFECT_DODGE_PER_POINT = 0.001; // hit_flee.ts: (1 + LUK * 0.1) percent
-const LUK_CRIT_PER_POINT = 0.003; // entity.ts: critChance = 0.01 + s.luk * 0.003
+// Ragnarok's exact term, not the 0.3% it rounds to: the source writes it as
+// `luk * 10 / 3` in integer per mille, and flattening it costs a capped Luck
+// build three full points of critical rate. Sourced from combat/crit.ts so the
+// sheet cannot drift from the formula it is describing.
+const LUK_CRIT_PER_POINT = LUK_CRIT_PERMILLE / 1000;
 const STR_PARRY_PER_POINT = 0.0005; // warrior_hit_table.ts: parry = 0.05 + str * 0.0005
 const HUNTER_RANGED_AP_PER_AGI = 2; // entity.ts: rangedPower = s.agi * 2 (hunter)
 const INT_SPELLCRIT_PER_POINT = 0.0008; // sim.ts spellCrit(): 0.05 + int * 0.0008

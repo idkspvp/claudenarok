@@ -399,9 +399,12 @@ export function runEffects(
           // execute override the OUTCOME; the roll above is still drawn.
           fireGuaranteedCrit(ctx, p, ability.id, ability.school, target);
         if (sureCrit) sureCritRolled = true;
-        if (crit) dmg *= (isSpell ? 1.5 : 2) + (isSpell ? p.critDmgSpellBonus : p.critDmgPhysBonus);
+        // A PHYSICAL critical does not multiply: it is worth the defence it skips
+        // (combat/crit.ts). The spell arm keeps its multiplier until magic crit
+        // goes with the skill rebuild that removes the talents built on it.
+        if (crit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
         if (isSpell) dmg *= spellDamageMultFromAuras(p);
-        if (!isSpell) dmg = ctx.applyDefence(dmg, target);
+        if (!isSpell) dmg = ctx.applyDefence(dmg, target, crit);
         // Aether Surge (Chronomancy Phase 3): each held Arcane Charge scales the
         // FULL post-spell-power, post-crit damage. The extra damage is what feeds
         // more Temporal Echo healing (no hidden heal bonus). Deterministic; reads
@@ -499,8 +502,8 @@ export function runEffects(
           sureCrit ||
           fireGuaranteedCrit(ctx, p, ability.id, ability.school, target ?? null);
         if (sureCrit) sureCritRolled = true;
-        if (crit) dmg *= 2 + p.critDmgPhysBonus;
-        dmg = ctx.applyDefence(dmg, target);
+        // No multiplier; a critical's worth is that it skips defence entirely.
+        dmg = ctx.applyDefence(dmg, target, crit);
         ctx.dealDamage(
           p,
           target,
@@ -1368,12 +1371,11 @@ export function runEffects(
         for (const m of aoeTargets) {
           let dmg = ctx.rng.range(eff.min, eff.max) + aoeSpBonus;
           if (isSpell) dmg *= spellDamageMultFromAuras(p);
-          if (aoeCrit)
-            dmg *= (isSpell ? 1.5 : 2) + (isSpell ? p.critDmgSpellBonus : p.critDmgPhysBonus);
-          // Armor only mitigates physical damage, mirroring the single-target
-          // path above — spell-school AoE (Arcane Explosion, Consecration) is
-          // not reduced by the target's armor.
-          if (!isSpell) dmg = ctx.applyDefence(dmg, m);
+          // A physical critical does not multiply; it skips defence instead. The
+          // spell arm keeps its multiplier for now, and defence never applied to
+          // spell-school AoE (Arcane Explosion, Consecration) anyway.
+          if (aoeCrit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
+          if (!isSpell) dmg = ctx.applyDefence(dmg, m, aoeCrit);
           // Soft-cap scale (Revenge above 5 targets): applied after the roll and
           // armor so the total, not any single hit, is what the cap bounds.
           dmg *= capScale;
@@ -2125,9 +2127,9 @@ export function runEffects(
           const crit =
             ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : ctx.spellCrit(p)) || sureCrit;
           if (sureCrit) sureCritRolled = true;
-          if (crit)
-            dmg *= (isSpell ? 1.5 : 2) + (isSpell ? p.critDmgSpellBonus : p.critDmgPhysBonus);
-          if (!isSpell) dmg = ctx.applyDefence(dmg, target);
+          // A physical critical does not multiply; it skips defence instead.
+          if (crit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
+          if (!isSpell) dmg = ctx.applyDefence(dmg, target, crit);
           if (isSpell) noteSpellHit(ctx, p, crit, ability.id);
           ctx.dealDamage(
             p,

@@ -117,7 +117,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
       const mob = spawnDummy(sim, p, 1);
       p.attackPower = 0;
       p.critChance = 0;
-      mob.stats = { ...mob.stats, armor: 0 };
+      mob.stats = { ...mob.stats, armor: 0, vit: 0 };
       // Dexterity sets a player's damage FLOOR now, so a low-Dexterity
       // character rolls a band under a fixed-damage weapon. Pinning it above
       // the weapon's attack power collapses the roll and isolates the
@@ -152,7 +152,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
       const mob = spawnDummy(sim, p, 1);
       p.attackPower = 0;
       p.critChance = 0;
-      mob.stats = { ...mob.stats, armor: 0 };
+      mob.stats = { ...mob.stats, armor: 0, vit: 0 };
       // Dexterity sets a player's damage FLOOR now, so a low-Dexterity
       // character rolls a band under a fixed-damage weapon. Pinning it above
       // the weapon's attack power collapses the roll and isolates the
@@ -518,7 +518,7 @@ describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', ()
     const shoot = (weaponMin: number, weaponMax: number): number => {
       const { sim, p, meta } = makeSim('hunter', 20, 3);
       const mob = spawnDummy(sim, p, 1, 20); // far below level -> floored miss chance
-      mob.stats = { ...mob.stats, armor: 0 }; // isolate the weapon-damage signal from armor mitigation
+      mob.stats = { ...mob.stats, armor: 0, vit: 0 }; // isolate the weapon-damage signal from armor mitigation
       p.critChance = 0; // no crit variance
       p.weapon = { min: weaponMin, max: weaponMax, speed: 2 };
       p.autoAttack = true;
@@ -672,7 +672,11 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
   it('a hunter shot lands at 0.6 x weapon roll + the AP term', () => {
     const { sim, p } = makeSim('hunter', 20);
     const mob = spawnDummy(sim, p, 5, 8);
-    mob.stats = { ...mob.stats, armor: 0 }; // no armor mitigation: keeps the hit exact
+    // Vitality is zeroed alongside armour: a monster carries a level-scaled
+    // Vitality now, and soft DEF is a FLAT subtraction that zero armour does not
+    // switch off. Left in, it also splits crit from non-crit hits, since a
+    // critical skips defence entirely.
+    mob.stats = { ...mob.stats, armor: 0, vit: 0 };
     p.rangedPower = 141;
     p.stats.dex = 100;
     // Status ATK adds RAW now. It was divided down while a player's attack power
@@ -734,7 +738,7 @@ describe('rangedSwing fires weaponHit procs (Thronebane on a hunter Auto Shot)',
   it('a hunter wielding Thronebane procs Chain Arc off Auto Shot', () => {
     const { sim, p } = makeSim('hunter', 20);
     const mob = spawnDummy(sim, p, 1, 20); // far below level -> floored miss chance
-    mob.stats = { ...mob.stats, armor: 0 };
+    mob.stats = { ...mob.stats, armor: 0, vit: 0 };
     p.mainhandItemId = 'kingsbane_last_oath'; // Thronebane: 10% weaponHit Chain Arc
     p.critChance = 0;
     const events = capture(sim);

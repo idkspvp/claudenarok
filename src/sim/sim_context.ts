@@ -622,7 +622,7 @@ export interface SimContextCallbacks {
   // single slice can own it. Every physical damage site routes through this
   // rather than multiplying by an armour fraction itself, which is what keeps the
   // flat Vitality layer from being silently skipped somewhere.
-  applyDefence(damage: number, target: Entity): number;
+  applyDefence(damage: number, target: Entity, ignore?: boolean): number;
   // I2a delve run lifecycle (delves/runs.ts). The reach-in callbacks delveRunForMob/
   // onDelveBossDefeated/delveDetectMult are declared above (C1/M2 stubs; I2a flips
   // points-at to delves/runs via the Sim delegate); startDelveRaiseDeadChannel is the

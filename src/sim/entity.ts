@@ -1,3 +1,4 @@
+import { critRateFrom } from './combat/crit';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
 import type { TalentModifiers } from './content/talents';
@@ -693,13 +694,15 @@ export function recalcPlayerStats(
   // crit talents were dead weight to casters).
   e.sharedCritBonus =
     bonusCrit + (mods?.stats.crit ?? 0) + setEff.crit + critFractionFromRating(e.critRating);
-  // Crit is LUK's job now, not AGI's: 1% base and 0.3% a point, so a 99 LUK build
-  // crits about a third of the time off stats alone. AGI moved to evasion.
-  e.critChance =
-    0.01 +
-    s.luk * 0.003 +
+  // Crit is LUK's job, not AGI's: 1% base and a THIRD of a percent a point, so a
+  // 99 LUK build crits about a third of the time off attributes alone. AGI moved
+  // to evasion. This is the attacker's own rate; the defender's Luck subtracts
+  // from it at the swing site (combat/crit.ts).
+  e.critChance = critRateFrom(
+    s.luk,
     e.sharedCritBonus +
-    (e.auras.some((a) => a.kind === 'berserker_stance') ? BERSERKER_CRIT_CHANCE : 0);
+      (e.auras.some((a) => a.kind === 'berserker_stance') ? BERSERKER_CRIT_CHANCE : 0),
+  );
   // Extra crit damage from a spec mastery, per output channel (e.g. Fire mage: SPELL
   // crits deal more; Holy paladin: HEAL crits; Subtlety/Arms: PHYSICAL crits). Each
   // channel bonus is added at its matching crit site (spell base 1.5, phys base 2,
@@ -838,25 +841,35 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   // Armor scales from level 1 like hp/dmg above: a template has no armorBase,
   // A monster's accuracy and evasion, from its LEVEL alone until its record
   // carries real attributes (authoring those is its own pass, and it needs the
-  // monsters named first). Reading zero for AGI and DEX is the honest default:
-  // it makes a monster hittable and unevasive, which is what an unauthored one
-  // should be, and it means every number here gets better rather than different
-  // when the records land.
-  // A monster's Agility tracks its level until its record carries a real one.
-  // Reading zero looks like the honest default and is not: HIT and FLEE both
-  // gain a point per level, so a zero-Agility monster's evasion never outruns
-  // any attacker's accuracy, and a level-12 character lands every swing on a
-  // level-60 elite. Agility is what makes a monster hard to hit in Ragnarok, and
-  // an unauthored one needs enough of it for the level gap to mean something.
-  // A third of level for both, which is what Ragnarok's monsters actually carry:
-  // modest attributes, not a level's worth. Zero would let a level-12 character
-  // land every swing on a level-60 elite; a full level's worth swings it the
-  // other way and leaves a capped Agility build unable to dodge and a capped
-  // Dexterity build unable to hit, deleting both archetypes at once. Authored
-  // numbers replace this when the monster records land.
-  e.hit = hitRating(level, Math.floor(level / 3), 0);
-  e.flee = fleeRating(level, Math.floor(level / 3), 0);
-  e.dodgeChance = perfectDodgeChance(0);
+  // A monster's ATTRIBUTES track its level until its record carries real ones.
+  // Reading zero looks like the honest default and is not, because every
+  // Ragnarok mechanic that protects a monster is keyed to an attribute:
+  //
+  //   AGI  evasion. HIT and FLEE both gain a point per level, so a zero-Agility
+  //        monster's evasion never outruns any attacker's accuracy and a
+  //        level-12 character lands every swing on a level-60 elite.
+  //   VIT  soft defence, the flat subtraction. At zero a monster's defence is
+  //        entirely its armour value and Vitality means nothing to it.
+  //   LUK  critical denial, and its own perfect dodge. At zero nothing suppresses
+  //        an attacker's critical rate at all, and the level gap stops mattering.
+  //   DEX  accuracy. Unused for a monster's own damage, which rolls an authored
+  //        pair with no Dexterity term (combat/weapon_damage.ts).
+  //
+  // A third of level for all four, which is the shape Ragnarok's monsters
+  // actually carry: modest attributes, not a level's worth. Zero deletes the
+  // mechanics above; a full level's worth swings it the other way and leaves a
+  // capped Agility build unable to dodge and a capped Dexterity build unable to
+  // hit, deleting both archetypes at once. Authored numbers replace this when
+  // the monster records land, and every number here gets better rather than
+  // different when they do.
+  const monsterAttribute = Math.floor(level / 3);
+  e.stats.agi = monsterAttribute;
+  e.stats.dex = monsterAttribute;
+  e.stats.vit = monsterAttribute;
+  e.stats.luk = monsterAttribute;
+  e.hit = hitRating(level, e.stats.dex, e.stats.luk);
+  e.flee = fleeRating(level, e.stats.agi, e.stats.luk);
+  e.dodgeChance = perfectDodgeChance(e.stats.luk);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
   e.stats.armor = Math.round(template.armorPerLevel * (level - 1));
   e.moveSpeed = template.moveSpeed;

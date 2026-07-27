@@ -4811,13 +4811,16 @@ export class Sim {
   // ATTACKER's level, so the same armour was worth less against a higher-level
   // enemy. Ragnarok's DEF does neither.
   //
-  // The soft-DEF roll is drawn here, unconditionally, so the global draw order
-  // stays independent of the defender's Vitality: making the draw conditional on
-  // a non-empty random span (which is what the formula's floor terms imply below
-  // roughly 60 Vitality) would make the rng stream depend on stat values, and a
-  // gear change would silently fork the world.
-  private applyDefence(damage: number, target: Entity): number {
+  // The soft-DEF roll is drawn here UNCONDITIONALLY, before anything can decide
+  // not to use it, so the global draw order never depends on the outcome of the
+  // hit. Two things would otherwise make it: the defender's Vitality (the
+  // formula's random span is empty below roughly 60, so a conditional draw would
+  // key the stream to a stat, and a gear change would silently fork the world),
+  // and , since a critical bypasses defence entirely and would otherwise
+  // draw one fewer value than an ordinary hit.
+  private applyDefence(damage: number, target: Entity, ignore = false): number {
     const roll = this.rng.next();
+    if (ignore) return damage;
     return applyDefence(damage, {
       armor: this.effectiveArmor(target),
       vit: target.stats.vit,
@@ -5278,6 +5281,17 @@ export class Sim {
   }
 
   private spellCrit(p: Entity): number {
+    // Magic CANNOT crit in pre-renewal Ragnarok: `battle_calc_magic_attack` never
+    // calls `is_attack_critical`, and all seven of its call sites are on the
+    // weapon path (`MAGIC_CAN_CRIT` in combat/crit.ts records the finding).
+    //
+    // This still returns a rate, on purpose and temporarily. Spell crit is what
+    // most of the mage and priest talent trees are BUILT ON (Hot Streak,
+    // Combustion, Shatter, Ignite, the chronomancy row, the spec masteries) plus
+    // every healing critical, and Ragnarok has none of those talents either.
+    // Zeroing the rate ahead of the skills that replace them kills the trees
+    // without replacing them. It goes with the skill rebuild, in one piece.
+    //
     // Base + Intellect + the shared crit core (crit rating, talent/set crit,
     // flat crit auras; recalcPlayerStats) + spell-crit-specific auras.
     return 0.05 + p.stats.int * 0.0008 + (p.sharedCritBonus ?? 0) + spellCritBonusFromAuras(p);
@@ -6155,7 +6169,7 @@ export class Sim {
     if (mob.enraged && enrage) dmg *= enrage.dmgMult;
     dmg *= this.petDamageMult(mob);
     const rawDmg = dmg; // pre-defence, post-crit/enrage: basis for cleave splash
-    if (!crit) dmg = this.applyDefence(dmg, target);
+    dmg = this.applyDefence(dmg, target, crit);
     if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
       dmg = Math.max(1, dmg - target.blockValue);
     }

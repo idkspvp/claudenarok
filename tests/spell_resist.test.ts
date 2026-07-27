@@ -98,10 +98,13 @@ describe('spell_resist: cast outcome labeling', () => {
     const { sim, p, meta } = makeSim('warrior', 12);
     expect(sim.setSpec('prot', p.id)).toBe(true);
     const mob = spawnTarget(sim, p, 60, 2);
-    // meleeSwing draws avoidance from ONE rng.next() roll against stacked
-    // bands (miss first); pin the roll to 0 so it always lands in the miss
-    // band regardless of upstream draw-order changes.
-    sim.rng.next = () => 0;
+    // meleeSwing draws avoidance from ONE rng.next() roll against stacked bands
+    // (miss first). A CRITICAL is now resolved above that table and bypasses it
+    // entirely, so the roll has to clear the critical rate as well as land in the
+    // miss band. Zero no longer works: the derived critical rate is floored at
+    // 0.1% and never reaches zero, so a roll of exactly 0 always crits.
+    p.critChance = 0;
+    sim.rng.next = () => 0.5;
 
     const events: any[] = [];
     sim.ctx.emit = (e: any) => events.push(e);

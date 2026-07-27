@@ -54,6 +54,7 @@ import { attributeMultipliers } from './attribute_damage';
 
 import { applyRageSpendCooldownRefund, spendResource } from './casting_lifecycle';
 import { blindMissBonus, isDisarmed, isInStasis, isStunned } from './cc';
+import { critAfterTargetLuck } from './crit';
 import { consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
 import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing';
@@ -408,11 +409,17 @@ export function rangedSwing(
     // RANGED_WEAPON_COEFF); a wand deals its full fixed damage. The ranged AP term
     // (agility) is unaffected either way.
     // ranged white hits suffer the same higher-level crit suppression as melee
-    const critChance = Math.max(0.005, atk.critChance - Math.max(0, tgt.level - atk.level) * 0.002);
+    // The level gap no longer suppresses criticals: Ragnarok's only suppression
+    // is the TARGET'S Luck, and a monster's Luck tracks its level, so the gap
+    // still tells without an invented term standing in for it.
+    const shotCrit = critAfterTargetLuck(atk.critChance, tgt.stats.luk, {
+      attackerIsMonster: usesMonsterDamageModel(atk),
+      targetIsPlayer: tgt.kind === 'player',
+    });
     // Decided before the roll: a critical picks the top of the range rather than
     // scaling the result, and on a BOW it still runs the Dexterity floor branch,
     // which can push that top above the weapon's own attack power.
-    const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, atk) ? 1 : critChance);
+    const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, atk) ? 1 : shotCrit);
     const weaponRoll = weaponSwingDamage(
       {
         ...weaponRangeFor(atk, ranged, crit),
@@ -427,7 +434,7 @@ export function rangedSwing(
     // Wand bolts are magic, so defence does not apply; a physical auto shot is
     // mitigated unless it CRIT, since a pre-renewal critical ignores defence
     // outright (see the melee path).
-    if (!ranged.wand && !crit) dmg = ctx.applyDefence(dmg, tgt);
+    if (!ranged.wand) dmg = ctx.applyDefence(dmg, tgt, crit);
     ctx.dealDamage(
       atk,
       tgt,
@@ -489,8 +496,27 @@ export function meleeSwing(
   // avoidance the attacker's accuracy cannot answer.
   const dodgeChance = opts.cannotBeDodged ? 0 : target.dodgeChance;
   const { parryChance, blockChance } = warriorMeleeDefense(target, attacker);
+  // The critical is decided FIRST, before the hit table, because a Ragnarok
+  // critical CANNOT MISS: is_attack_hitting returns true for one before the
+  // accuracy contest is ever reached, so Flee, perfect dodge, and parry do not
+  // apply to it. That is most of what a critical is worth against an evasive
+  // target, and it is why the mechanic survives losing its damage multiplier.
+  // The level gap no longer suppresses criticals: Ragnarok's only suppression is
+  // the TARGET'S Luck, and a monster's Luck tracks its level, so the gap still
+  // tells without an invented term standing in for it.
+  const critChance = critAfterTargetLuck(
+    attacker.critChance + (opts.critBonus ?? 0),
+    target.stats.luk,
+    {
+      attackerIsMonster: usesMonsterDamageModel(attacker),
+      targetIsPlayer: target.kind === 'player',
+    },
+  );
+  const crit =
+    ctx.rng.chance(consumeNextAttackCrit(ctx, attacker) ? 1 : critChance) ||
+    opts.forceCrit === true;
   const roll = ctx.rng.next();
-  if (roll < missChance) {
+  if (!crit && roll < missChance) {
     ctx.emit({
       type: 'damage',
       sourceId: attacker.id,
@@ -504,7 +530,7 @@ export function meleeSwing(
     ctx.enterCombat(attacker, target);
     return false;
   }
-  if (roll < missChance + dodgeChance) {
+  if (!crit && roll < missChance + dodgeChance) {
     ctx.emit({
       type: 'damage',
       sourceId: attacker.id,
@@ -519,7 +545,7 @@ export function meleeSwing(
     if (attacker.kind === 'player') attacker.overpowerUntil = ctx.time + 5;
     return false;
   }
-  if (roll < missChance + dodgeChance + parryChance) {
+  if (!crit && roll < missChance + dodgeChance + parryChance) {
     ctx.emit({
       type: 'damage',
       sourceId: attacker.id,
@@ -550,19 +576,9 @@ export function meleeSwing(
   // weapon imbues (seals, rockbiter) add flat damage to every swing
   let imbueBonus = 0;
   for (const a of attacker.auras) if (a.kind === 'imbue') imbueBonus += a.value;
-  // The critical is decided BEFORE the weapon roll, because in Ragnarok it
-  // changes the RANGE rather than scaling the result: a critical takes the top
-  // of the range and skips the roll, and that is its entire bonus. There is no
-  // multiplier (see combat/weapon_damage.ts).
-  const critChance = Math.max(
-    0.005,
-    attacker.critChance +
-      (opts.critBonus ?? 0) -
-      Math.max(0, target.level - attacker.level) * 0.002,
-  );
-  const crit =
-    ctx.rng.chance(consumeNextAttackCrit(ctx, attacker) ? 1 : critChance) ||
-    opts.forceCrit === true;
+  // `crit` was resolved above the hit table, since a critical cannot miss. It
+  // also changes the weapon RANGE rather than scaling the result: it takes the
+  // top and skips the roll (combat/weapon_damage.ts).
   // The Ragnarok classifications: the weapon's class against the target's size,
   // and the swing's attribute against what the target is made of. Both default
   // to the even trade, so a target whose template has not been authored yet
@@ -589,7 +605,7 @@ export function meleeSwing(
   // critical: no multiplier, but armour stops mattering. It is why a critical
   // build is the answer to a heavily armoured target specifically, and why
   // removing the old x2 is not the flat nerf it looks like.
-  if (!crit) dmg = ctx.applyDefence(dmg, target);
+  dmg = ctx.applyDefence(dmg, target, crit);
   if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
     dmg = Math.max(1, dmg - target.blockValue);
   }
