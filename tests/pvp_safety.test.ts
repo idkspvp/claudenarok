@@ -175,13 +175,24 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it.each([
+    // One live owner per control school. Fear, Hammer of Justice, and Entangling
+    // Roots went with the Warlock, Paladin, and Druid in D1; these are the
+    // surviving abilities that reach the same four aura kinds.
     { cls: 'mage', ability: 'polymorph', aura: 'polymorph' },
-    { cls: 'warlock', ability: 'fear', aura: 'incapacitate' },
-    { cls: 'paladin', ability: 'hammer_of_justice', aura: 'stun' },
-    { cls: 'druid', ability: 'entangling_roots', aura: 'root' },
+    { cls: 'thief', ability: 'gouge', aura: 'incapacitate' },
+    { cls: 'thief', ability: 'kidney_shot', aura: 'stun' },
+    { cls: 'mage', ability: 'frost_nova', aura: 'root' },
   ])('$ability works on hostile players', ({ cls, ability, aura }) => {
-    const { sim, aPid, b } = startDuel(cls, 'swordman');
+    const { sim, aPid, a, b } = startDuel(cls, 'swordman');
     if (ability === 'polymorph') b.hp = Math.max(1, b.maxHp - 120);
+    // Icebind is a self-centred nova, not a targeted cast, so the two have to be
+    // inside its radius for the root to reach the opponent at all.
+    if (ability === 'frost_nova') b.pos = { ...a.pos, x: a.pos.x + 2 };
+    // Low Blow is a finisher: it spends combo points, so the pool has to exist.
+    if (ability === 'kidney_shot') {
+      a.comboPoints = 3;
+      a.comboUntil = sim.time + 30;
+    }
 
     sim.castAbility(ability, aPid);
     finishCast(sim, aPid);
@@ -235,56 +246,8 @@ describe('PvP control abilities in active duels', () => {
     expect(castPolymorph()).toBe(10);
   });
 
-  it('makes feared hostile players run in a deterministic panic direction', () => {
-    const { sim, aPid, b } = startDuel('warlock', 'swordman', 20);
-
-    const start = pos(b);
-    sim.castAbility('fear', aPid);
-    finishCast(sim, aPid);
-
-    const fear = b.auras.find((aura) => aura.id === 'fear_incap' && aura.kind === 'incapacitate');
-    expect(fear?.duration).toBe(8);
-
-    for (let i = 0; i < 20; i++) sim.tick();
-
-    expect(dist2d(start, b.pos)).toBeGreaterThan(2);
-    expect(b.auras.some((aura) => aura.id === 'fear_incap')).toBe(true);
-  });
-
-  it('diminishes repeated duel Fears to 8s, 4s, 2s, 1s and resets after 60s', () => {
-    const { sim, aPid, b } = startDuel('warlock', 'swordman', 20);
-
-    const castFear = () => {
-      // A resisted Fear applies nothing and does NOT advance diminishing returns
-      // (the spell-hit roll precedes the DR bookkeeping in applyAbility), so retry
-      // until it lands. This keeps the 8/4/2/1 sequence stable regardless of where
-      // the shared world RNG stream happens to sit (new content shifts it).
-      let dur = 0;
-      for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
-        b.auras = b.auras.filter((aura) => aura.id !== 'fear_incap');
-        const warlock = sim.entities.get(aPid)!;
-        warlock.gcdRemaining = 0;
-        fundCasts(warlock);
-        sim.castAbility('fear', aPid);
-        finishCast(sim, aPid);
-        dur = b.auras.find((aura) => aura.id === 'fear_incap')?.duration ?? 0;
-      }
-      return dur;
-    };
-
-    expect(castFear()).toBe(8);
-    expect(castFear()).toBe(4);
-    expect(castFear()).toBe(2);
-    expect(castFear()).toBe(1);
-
-    b.auras = b.auras.filter((aura) => aura.id !== 'fear_incap');
-    for (let i = 0; i < 20 * 61; i++) sim.tick();
-
-    expect(castFear()).toBe(8);
-  });
-
   it('duel stuns land at full duration on every repeat (stun DR exemption)', () => {
-    const { sim, aPid, b } = startDuel('paladin', 'swordman', 20);
+    const { sim, aPid, b } = startDuel('thief', 'swordman', 20);
 
     // Hammer of Justice at level 20 is rank 2: a 4s instant stun. As with Fear, a
     // resisted stun applies nothing and does NOT advance diminishing returns, so
@@ -292,14 +255,16 @@ describe('PvP control abilities in active duels', () => {
     const castStun = () => {
       let dur: number | null = 0;
       for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
-        b.auras = b.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
-        const pala = sim.entities.get(aPid)!;
-        pala.gcdRemaining = 0;
-        fundCasts(pala);
-        pala.cooldowns.delete('hammer_of_justice');
-        sim.castAbility('hammer_of_justice', aPid);
+        b.auras = b.auras.filter((aura) => aura.id !== 'kidney_shot_stun');
+        const rogueA = sim.entities.get(aPid)!;
+        rogueA.gcdRemaining = 0;
+        fundCasts(rogueA);
+        rogueA.cooldowns.delete('kidney_shot');
+        rogueA.comboPoints = 3; // Low Blow is 1s base + 1s per point = 4s
+        rogueA.comboUntil = sim.time + 30;
+        sim.castAbility('kidney_shot', aPid);
         finishCast(sim, aPid);
-        dur = b.auras.find((aura) => aura.id === 'hammer_of_justice_stun')?.duration ?? 0;
+        dur = b.auras.find((aura) => aura.id === 'kidney_shot_stun')?.duration ?? 0;
       }
       return dur;
     };
@@ -319,7 +284,7 @@ describe('PvP control abilities in active duels', () => {
     // Justice). Simulate a fully diminished OPENER chain on the target, then prove a
     // controlled stun still lands at full duration and diminishes only within its
     // own controlled bucket.
-    const { sim, aPid, b } = startDuel('paladin', 'swordman', 20);
+    const { sim, aPid, b } = startDuel('thief', 'swordman', 20);
 
     // Pretend the target already burned its opener-stun chain to immunity.
     b.ccDr.set('openerStun', { stage: 3, resetAt: sim.time + 18 });
@@ -327,14 +292,16 @@ describe('PvP control abilities in active duels', () => {
     const castStun = () => {
       let dur = 0;
       for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
-        b.auras = b.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
-        const pala = sim.entities.get(aPid)!;
-        pala.gcdRemaining = 0;
-        fundCasts(pala);
-        pala.cooldowns.delete('hammer_of_justice');
-        sim.castAbility('hammer_of_justice', aPid);
+        b.auras = b.auras.filter((aura) => aura.id !== 'kidney_shot_stun');
+        const rogueA = sim.entities.get(aPid)!;
+        rogueA.gcdRemaining = 0;
+        fundCasts(rogueA);
+        rogueA.cooldowns.delete('kidney_shot');
+        rogueA.comboPoints = 3; // Low Blow is 1s base + 1s per point = 4s
+        rogueA.comboUntil = sim.time + 30;
+        sim.castAbility('kidney_shot', aPid);
         finishCast(sim, aPid);
-        dur = b.auras.find((aura) => aura.id === 'hammer_of_justice_stun')?.duration ?? 0;
+        dur = b.auras.find((aura) => aura.id === 'kidney_shot_stun')?.duration ?? 0;
       }
       return dur;
     };
@@ -347,11 +314,11 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it('does not diminish PvE stuns: a stun on a mob keeps full duration on repeat', () => {
-    // DR is duel/PvP only (player source AND player target). A paladin stunning a
+    // DR is duel/PvP only (player source AND player target). A thief stunning a
     // hostile mob must always land the full 4s, no matter how many times in a row.
     const sim = new Sim({
       seed: 7,
-      playerClass: 'paladin' as any,
+      playerClass: 'thief',
       playerName: 'Pala',
       autoEquip: true,
     });
@@ -374,19 +341,23 @@ describe('PvP control abilities in active duels', () => {
     sim.targetEntity(m.id, pid);
 
     const stunMob = () => {
-      m.auras = m.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
+      m.auras = m.auras.filter((aura) => aura.id !== 'kidney_shot_stun');
       p.gcdRemaining = 0;
       fundCasts(p);
-      p.cooldowns.delete('hammer_of_justice');
+      p.cooldowns.delete('kidney_shot');
+      p.comboPoints = 3;
+      p.comboUntil = sim.time + 30;
       let dur = 0;
       for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
-        m.auras = m.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
+        m.auras = m.auras.filter((aura) => aura.id !== 'kidney_shot_stun');
         p.gcdRemaining = 0;
         fundCasts(p);
-        p.cooldowns.delete('hammer_of_justice');
-        sim.castAbility('hammer_of_justice', pid);
+        p.cooldowns.delete('kidney_shot');
+        p.comboPoints = 3;
+        p.comboUntil = sim.time + 30;
+        sim.castAbility('kidney_shot', pid);
         finishCast(sim, pid);
-        dur = m.auras.find((aura) => aura.id === 'hammer_of_justice_stun')?.duration ?? 0;
+        dur = m.auras.find((aura) => aura.id === 'kidney_shot_stun')?.duration ?? 0;
       }
       return dur;
     };

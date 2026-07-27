@@ -1,14 +1,17 @@
 import type { ItemDef, PlayerClass } from '../types';
 
-// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands swordman
-// rewards to paladins/shamans etc., so the lock must admit the whole group).
+// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands a reward to
+// the whole group, so the lock must admit all of it).
 const WAR: PlayerClass[] = ['swordman'];
 const MAG: PlayerClass[] = ['mage', 'acolyte'];
 const ROG: PlayerClass[] = ['thief', 'archer'];
-// Feral druid weapons. A bespoke, druid-only lock: it is NOT one of the three
-// weapon-proficiency groups, so weaponArchetypeForItem returns null and
-// canEquipItem falls through to this literal list (see src/sim/equipment_rules.ts).
-// Bear form swings with the equipped weapon, so these carry real 2H dps + str/agi/sta.
+// The feral two-handers. This was a bespoke Druid-only lock, and the Druid was
+// cut in D1, so the group is now EMPTY and every item carrying it is
+// unequippable by anyone. That is deliberate on both counts: a shipped item id
+// is never deleted or renamed, and an empty list really does mean nobody here
+// rather than everybody, because canEquipItem tests the array's PRESENCE and
+// then its contents (see src/sim/equipment_rules.ts), so no class satisfies it.
+// Re-homing these onto a job that swings a two-hander is D4 work.
 export const FERAL: PlayerClass[] = [];
 // Every caster class, for held-offhand stat sticks (no armor class / weapon
 // proficiency: the literal requiredClass list is the whole rule for held_offhand).
