@@ -1,8 +1,10 @@
-// Fire mage spec mechanics (owner design 2026-07-10, built 2026-07-11): the
-// crit-driven Pyromancy loop, mirroring combat/frost_mage.ts.
+// Fire mage mechanics (owner design 2026-07-10, built 2026-07-11): the
+// crit-driven Pyromancy loop, mirroring combat/frost_mage.ts. They used to be
+// gated on the committed Fire specialization and are now gated on the KNOWN
+// Ignition passive (specs are retired, Phase D0).
 //
-//  - IGNITION (mastery): the fire mage's spell CRITICALS burn the target for
-//    IGNITION_PCT of the damage dealt over IGNITE_DURATION, STACKING by adding
+//  - IGNITION (passive): the fire mage's spell CRITICALS burn the target for
+//    IGNITION_BURN_FRAC of the damage dealt over IGNITE_DURATION, STACKING by adding
 //    into the running burn (igniteOnCrit, hooked in combat/damage.ts). The burn
 //    copies the RESOLVED damage: no new rng is ever drawn.
 //  - HOT STREAK (signature): two consecutive BUILDER crits (Fireball / Fire
@@ -57,6 +59,12 @@ export const COMBUSTION_CDR_PER_CRIT = 1;
 // Instead you heal to 25% max HP and BURN for 6s (5% max HP per second, 30% total),
 // dealing +12% Fire damage to enemies while it rides. 5 minute internal cooldown. It
 // is a gamble: the burn can finish you if no one heals through it.
+// Ignition's burn fraction. It used to be the fire spec MASTERY's scalable axis
+// (a global modifier the tree baked); the masteries went with the talent trees
+// (Phase D0), so the value the Ignition passive's own description promises lives
+// here instead.
+export const IGNITION_BURN_FRAC = 0.4;
+
 export const CAUTERIZE_ICD = 300; // seconds (5 min), worn as the fatigue debuff below
 // The visible 5 min lockout debuff. It gates the save (not a procState icd, which
 // death wipes), SURVIVES death (resurrection.ts aurasSurvivingDeath), and pauses
@@ -86,12 +94,15 @@ export function personalBarrierIdForSpec(spec: string | null): string | null {
   return null;
 }
 
-function fireSpecMods(ctx: SimContext, p: Entity) {
-  if (p.kind !== 'player') return null;
+// The fire kit used to gate on the committed Fire specialization. Specs are
+// retired (Phase D0) and the mage learns the whole fire book, so the gate is the
+// KNOWN Ignition passive that documents these mechanics: the same idiom the
+// frost procs and the warrior's Sudden Death proc use.
+function knowsFireMastery(ctx: SimContext, p: Entity): boolean {
+  if (p.kind !== 'player') return false;
   const meta = ctx.players.get(p.id);
-  if (!meta) return null;
-  const mods = ctx.playerMods(meta);
-  return mods.spec === 'fire' ? mods : null;
+  if (!meta || meta.cls !== 'mage') return false;
+  return meta.known.some((known) => known.def.id === 'ignition' && known.def.passive);
 }
 
 /** Guaranteed-crit override for the fire spec, read at the spell-crit roll
@@ -104,7 +115,7 @@ export function fireGuaranteedCrit(
   target: Entity | null,
 ): boolean {
   if (school !== 'fire') return false;
-  if (!fireSpecMods(ctx, p)) return false;
+  if (!knowsFireMastery(ctx, p)) return false;
   if (p.auras.some((a) => a.kind === 'combustion')) return true;
   if (abilityId === 'fire_blast') return true;
   if (abilityId === 'scorch' && target && target.hp <= target.maxHp * SCORCH_EXECUTE_HP)
@@ -121,10 +132,10 @@ export function fireGuaranteedCrit(
  *  plain +1 grant measured 1.27x the frost comparator at 60s/120s, over the
  *  1.25 gate). No-op at a full bank (the pre-pull case: the charge state
  *  does not even exist until the first press) and for anyone outside the
- *  fire spec. Plain charge-state math; draws no rng. */
+ *  Ignition passive. Plain charge-state math; draws no rng. */
 export function combustionRestokesCinderfall(ctx: SimContext, p: Entity, abilityId: string): void {
   if (abilityId !== 'combustion') return;
-  if (!fireSpecMods(ctx, p)) return;
+  if (!knowsFireMastery(ctx, p)) return;
   const bank = p.abilityCharges?.fire_blast;
   if (!bank || bank.charges >= bank.maxCharges) return; // bank already full
   bank.charges += 1;
@@ -150,7 +161,7 @@ export function fireMageOnSpellHit(
   crit: boolean,
 ): void {
   if (!abilityId || !HOT_STREAK_BUILDERS.includes(abilityId)) return;
-  if (!fireSpecMods(ctx, p)) return;
+  if (!knowsFireMastery(ctx, p)) return;
   const heatingIdx = p.auras.findIndex((a) => a.id === 'heating_up');
   if (!crit) {
     // A non-crit builder breaks the streak.
@@ -234,7 +245,7 @@ export function fireMageCauterize(
   incoming: number,
 ): number | null {
   if (target.kind !== 'player' || target.dead || incoming < target.hp) return null;
-  if (!fireSpecMods(ctx, target)) return null;
+  if (!knowsFireMastery(ctx, target)) return null;
   // The fatigue debuff IS the cooldown: while worn, no second save. An aura (not a
   // procState icd) because procState resets on death, and this lockout must hold
   // through a die-revive-die inside the window (owner 2026-07-13).
@@ -332,9 +343,8 @@ export function igniteOnCrit(
 ): void {
   if (!crit || amount <= 0 || ability === null || school !== 'fire') return;
   if (!source || source.id === target.id) return;
-  const mods = fireSpecMods(ctx, source);
-  if (!mods || mods.global.ignitionPct <= 0) return;
-  applyIgnite(ctx, source, target, Math.round(amount * mods.global.ignitionPct));
+  if (!knowsFireMastery(ctx, source)) return;
+  applyIgnite(ctx, source, target, Math.round(amount * IGNITION_BURN_FRAC));
 }
 
 /** Does this ability id name a mage ability (used by tests and tooling). */

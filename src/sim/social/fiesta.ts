@@ -30,11 +30,11 @@ import {
   type PowerupDef,
   tierForWave,
 } from '../content/augments';
-import type { PlayerModifiers } from '../player_modifiers';
 import { abilitiesKnownAt, arenaOrigin } from '../data';
 import * as deedsMod from '../deeds';
 import { arenaMapForSlot } from '../dungeon_layout';
 import { recalcPlayerStats } from '../entity';
+import type { PlayerModifiers } from '../player_modifiers';
 import { awardFiestaKillHonor } from '../pvp';
 import { Rng } from '../rng';
 import type { ArenaMatch, FiestaPowerup, FiestaState, PlayerMeta } from '../sim';

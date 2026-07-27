@@ -211,9 +211,7 @@ function serve(): void {
               send({ error: reset.error });
               break;
             }
-            send(
-              env.reset(msg.seed ?? 0, playerClass, msg.config ?? {}, reset.playerLevel),
-            );
+            send(env.reset(msg.seed ?? 0, playerClass, msg.config ?? {}, reset.playerLevel));
           }
           break;
         case 'step':

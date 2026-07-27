@@ -451,9 +451,7 @@ export class CharWindow {
     const item = ITEMS[itemId];
     if (!item) return;
     const world = this.deps.world();
-    switch (
-      paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level)
-    ) {
+    switch (paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level)) {
       case 'blockedSlot':
         this.deps.showError(tSim('error.wrongEquipSlot'));
         return;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { emptyModifiers, type PlayerModifiers } from '../src/sim/player_modifiers';
 import { createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
+import { emptyModifiers, type PlayerModifiers } from '../src/sim/player_modifiers';
 import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { PlayerClass } from '../src/sim/types';
 

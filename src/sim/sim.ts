@@ -106,7 +106,6 @@ import {
   rankAllowsSkin,
   rollSkinRank,
 } from './content/skins';
-import { emptyModifiers, type PlayerModifiers, type Role } from './player_modifiers';
 import {
   resolveActiveWeaponSkin,
   weaponSkinTypeMatches,
@@ -252,6 +251,7 @@ import {
 } from './pathfind';
 import * as petAi from './pet/pet_ai';
 import * as petCommands from './pet/pet_commands';
+import { emptyModifiers, type PlayerModifiers, type Role } from './player_modifiers';
 import {
   isSwimming as isSwimmingImpl,
   moveSpeedMult as moveSpeedMultImpl,
@@ -2091,9 +2091,7 @@ export class Sim {
       bankBonus?: { bonusSlots: number; sources: BankBonusSource[] };
     },
   ): number {
-    const savedState = opts?.state
-      ? sanitizeRemovedZone1Content(opts.state).state
-      : undefined;
+    const savedState = opts?.state ? sanitizeRemovedZone1Content(opts.state).state : undefined;
     // Characters saved inside a dungeon instance rejoin at its entrance —
     // their old instance is gone (or belongs to someone else) by now.
     let savedPos = savedState?.pos ?? null;

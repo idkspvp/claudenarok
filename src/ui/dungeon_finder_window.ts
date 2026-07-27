@@ -19,8 +19,8 @@
 
 import { audio } from '../game/audio';
 import type { FinderListingTag } from '../sim/content/dungeon_finder';
-import type { Role } from '../sim/player_modifiers';
 import { ITEMS } from '../sim/data';
+import type { Role } from '../sim/player_modifiers';
 import type { DungeonDifficulty } from '../sim/types';
 import type { DungeonFinderApplicantView, IWorld } from '../world_api';
 import { markDialogRoot } from './dialog_root';

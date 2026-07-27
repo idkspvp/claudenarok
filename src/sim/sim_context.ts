@@ -14,12 +14,12 @@
 
 import type { FrozenOrbState } from './combat/frozen_orb';
 import type { LetterDef } from './content/letters';
-import type { PlayerModifiers } from './player_modifiers';
 import type { DeedRuntime } from './deeds';
 import type { DelayedEvent, GroundAoE } from './entity_roster';
 import type { PendingLootRoll } from './loot/loot_roll';
 import type { MarketListing } from './market';
 import type { MobScanCounters } from './mob/scan_counters';
+import type { PlayerModifiers } from './player_modifiers';
 import type { PendingProjectile } from './projectile_travel';
 import type { Rng } from './rng';
 import type {

@@ -183,9 +183,7 @@ describe('dungeon finder view core', () => {
 
   it('derives Quick Match state: staged checklist, leader gate, and canQueue', () => {
     const staged = live(
-      buildDungeonFinderView(
-        input({ tab: 'queue', stagedActivityIds: ['hollow_crypt_normal'] }),
-      ),
+      buildDungeonFinderView(input({ tab: 'queue', stagedActivityIds: ['hollow_crypt_normal'] })),
     );
     expect(staged.queue.options.find((o) => o.id === 'hollow_crypt_normal')?.checked).toBe(true);
     expect(staged.queue.canQueue).toBe(true);
@@ -252,9 +250,7 @@ describe('dungeon finder view core', () => {
       members: [{ cls: 'warrior' as const, level: 8, role: 'tank' as const }],
     };
     // A tank-only viewer cannot fill the open slots.
-    const tankView = live(
-      buildDungeonFinderView(input({ tab: 'board', board: [listing] })),
-    );
+    const tankView = live(buildDungeonFinderView(input({ tab: 'board', board: [listing] })));
     expect(tankView.board.listings[0].canApply).toBe(false);
     // A dps-capable viewer can.
     const dpsView = live(

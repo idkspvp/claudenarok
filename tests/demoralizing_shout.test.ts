@@ -41,15 +41,15 @@ describe('warrior Direhowl', () => {
   // is the whole rule now.
   it('sits in the warrior learn order and gates on level', () => {
     expect(CLASSES.warrior.abilities).toContain('demoralizing_shout');
-    expect(
-      abilitiesKnownAt('warrior', 11).some((k) => k.def.id === 'demoralizing_shout'),
-    ).toBe(false);
+    expect(abilitiesKnownAt('warrior', 11).some((k) => k.def.id === 'demoralizing_shout')).toBe(
+      false,
+    );
     expect(
       abilitiesKnownAt('warrior', 12).find((k) => k.def.id === 'demoralizing_shout')?.rank,
     ).toBe(1);
-    expect(
-      abilitiesKnownAt('warrior', 20).some((k) => k.def.id === 'demoralizing_shout'),
-    ).toBe(true);
+    expect(abilitiesKnownAt('warrior', 20).some((k) => k.def.id === 'demoralizing_shout')).toBe(
+      true,
+    );
   });
 
   it('reduces nearby enemies damage dealt by 20% on cast', () => {

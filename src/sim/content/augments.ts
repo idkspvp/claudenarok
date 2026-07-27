@@ -16,8 +16,8 @@
 // and shared verbatim by the authoritative Sim and the display-only net client.
 // ---------------------------------------------------------------------------
 
-import type { AuraKind, PlayerClass } from '../types';
 import type { ModifierEffect, Role } from '../player_modifiers';
+import type { AuraKind, PlayerClass } from '../types';
 
 export type AugmentTier = 'silver' | 'gold' | 'prismatic';
 

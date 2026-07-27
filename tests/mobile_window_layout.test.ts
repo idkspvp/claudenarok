@@ -59,21 +59,8 @@ describe('mobile window layout CSS', () => {
     expect(block).toContain('max-width: calc(var(--app-vw) / var(--ui-scale, 1) - 32px);');
   });
 
-  it('shows all three mobile specializations in one compact grid without horizontal drag', () => {
-    expect(mobileCss).not.toMatch(/body\.mobile-touch #talents-window \{[^}]*column-count: 2;/);
-    expect(mobileCss).toMatch(
-      /body\.mobile-touch #talents-window \{[^}]*width: min\(620px,[^}]*transform: translate\(-50%, -50%\);[^}]*overflow-x: hidden;/,
-    );
-    expect(mobileCss).toMatch(
-      /body\.mobile-touch #talents-window \.ts-specs-grid \{[^}]*display: grid;[^}]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/,
-    );
-    expect(mobileCss).not.toMatch(
-      /body\.mobile-touch #talents-window \.ts-specs-grid \{[^}]*flex-direction: column;/,
-    );
-    expect(mobileCss).toMatch(
-      /body\.mobile-touch #talents-window \.ts-panel \{[^}]*min-height: 150px;/,
-    );
-  });
+  // The mobile specialization-grid test that stood here went with the talents
+  // window (Phase D0).
 
   it('scales the vendor window bottom clamp by --window-scale instead of a raw dvh', () => {
     const start = mobileCss.indexOf('body.mobile-touch #vendor-window {\n    max-height:');

@@ -620,8 +620,8 @@ function scanEmitCandidates(simSrc: string, serverSrc: string): Cand[] {
     cands.push({ type: m[1] as Cand['type'], tmpl: unq(m[3]) });
   }
   // `this.error` on Sim, `this.ctx.error` from class modules (A1+ social/*.ts), and
-  // bare `ctx.error` from free-function modules (G1a progression/talents.ts, I1
-  // instances/dungeons.ts, C4a combat/casting_lifecycle.ts, P1b pet/pet_commands.ts) are
+  // bare `ctx.error` from free-function modules (I1 instances/dungeons.ts, C4a
+  // combat/casting_lifecycle.ts, P1b pet/pet_commands.ts) are
   // the same player-facing error sink. `(?:this|ctx)\.error` matches all three (it catches
   // this.ctx.error via the trailing ctx.error).
   const er = new RegExp(`(?:this|ctx)\\.error\\([^,]+,\\s*${lit}\\s*\\)`, 'g');
@@ -689,7 +689,7 @@ describe('S3: every sim.ts emit is recognized (drift guard)', () => {
   // "Invalid attack target." error),
   // A1+ -> src/sim/social/*.ts (the party machine, later duel/arena/fiesta/
   // markers, and G2's player-trade toasts + chat /join /leave notices; the social/*
-  // glob below picks all of them up), G1a -> src/sim/progression/talents.ts (talent validation toasts),
+  // glob below picks all of them up),
   // G1b -> src/sim/progression/xp.ts (the "You have prestiged!" gold log emit),
   // M2 -> src/sim/mob/locomotion.ts (the boss "unleashes" lines), M3 ->
   // src/sim/mob/mob_swing.ts (the knockback "unleashes" line), M4 ->
@@ -721,7 +721,6 @@ describe('S3: every sim.ts emit is recognized (drift guard)', () => {
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/combat/casting_lifecycle.ts'), 'utf8'),
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/combat/effect_dispatch.ts'), 'utf8'),
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/combat/auto_attack.ts'), 'utf8'),
-    fs.readFileSync(path.resolve(process.cwd(), 'src/sim/progression/talents.ts'), 'utf8'),
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/progression/xp.ts'), 'utf8'),
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/mob/locomotion.ts'), 'utf8'),
     fs.readFileSync(path.resolve(process.cwd(), 'src/sim/mob/mob_swing.ts'), 'utf8'),

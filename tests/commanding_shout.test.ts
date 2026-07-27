@@ -36,30 +36,6 @@ describe('Valor Roar', () => {
     expect(p.maxHp).toBe(Math.round(maxHpBefore * 1.2));
   });
 
-  it('refreshes one shared health and Protection reduction buff across Warriors', () => {
-    const sim = new Sim({ seed: 43, playerClass: 'warrior', noPlayer: true });
-    const first = sim.addPlayer('warrior', 'First');
-    const second = sim.addPlayer('warrior', 'Second');
-    for (const pid of [first, second]) {
-      sim.setPlayerLevel(20, pid);
-    }
-    sim.partyInvite(second, first);
-    sim.partyAccept(second);
-    const recipient = sim.entities.get(first);
-    if (!recipient) throw new Error('missing Valor Roar recipient');
-
-    sim.castAbility('rallying_cry', first);
-    for (const id of ['rallying_cry_hp', 'rallying_cry_dr']) {
-      const aura = recipient.auras.find((candidate) => candidate.id === id);
-      expect(aura).toBeTruthy();
-      if (aura) aura.remaining = 2;
-    }
-    sim.castAbility('rallying_cry', second);
-
-    for (const id of ['rallying_cry_hp', 'rallying_cry_dr']) {
-      expect(recipient.auras.filter((aura) => aura.id === id)).toEqual([
-        expect.objectContaining({ sourceId: second, remaining: 10, duration: 10 }),
-      ]);
-    }
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 });

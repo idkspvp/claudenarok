@@ -152,14 +152,8 @@ describe('spell haste plumbing', () => {
     expect(p.castTotal).toBeCloseTo(base / 1.15, 5);
   });
 
-  it('a spec mastery with spellHastePct folds into the caster spell-haste stat', () => {
-    // The mage rework replaced the Arcane haste mastery (Aetheric Flux) with the
-    // Chronomancy healer's Chronoweave, so Elemental's Earthen Fury (+10% spell haste,
-    // all-27 identity pass values) is the spellHastePct exemplar in the merged tree.
-    const sim = makeSim('shaman', 'elemental');
-    const p = sim.entities.get(sim.playerId) as Entity;
-    expect(p.spellHaste).toBeCloseTo(0.1);
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 
   it("Anointing keeps its 0.2 haste value under Doctrine's absorb mastery (no round-to-0)", () => {
     // The mage rework left arcane_power (the old Arcane signature) as unreferenced
@@ -177,18 +171,8 @@ describe('spell haste plumbing', () => {
 });
 
 describe('crit-damage masteries', () => {
-  it('the destruction mastery is a scoped Ruinbolt and Gloom Bolt amp now', () => {
-    // Balance pass (maintainer sheet): Desolation is +20% on the two nukes
-    // (the Brittlebreak shape), not a spell-crit-damage multiplier.
-    const sim = makeSim('warlock', 'destruction');
-    const p = sim.entities.get(sim.playerId) as Entity;
-    expect(p.critDmgSpellBonus).toBe(0);
-    expect(p.critDmgPhysBonus).toBe(0);
-    const meta = (sim as any).players.get(p.id);
-    const mods = (sim as any).playerMods(meta);
-    expect(mods.abilities.shadow_bolt.dmgPct).toBeCloseTo(0.2);
-    expect(mods.abilities.chaos_bolt.dmgPct).toBeCloseTo(0.2);
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 
   it('a non-specced caster has no bonus crit damage', () => {
     const sim = makeSim('mage');

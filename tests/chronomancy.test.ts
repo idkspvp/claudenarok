@@ -155,12 +155,13 @@ describe('Temporal Barrier', () => {
     sim.tick();
     let shield = p.auras.find((a) => a.id === 'temporal_barrier');
     expect(shield?.kind).toBe('absorb');
-    // Rank 3 base 160, scaled by the Chronoweave mastery (x1.15 at level 20) like
-    // the heals, plus 25 percent of the caster's spell power (PR #2154's barrier
-    // scaling). Derived from the caster's live spell power rather than pinned:
-    // Intelligence converts through statusMagicPower now, so the flat 40 the
-    // original literal assumed is no longer a constant of the class.
-    expect(shield?.value).toBe(Math.round(160 * 1.15) + Math.round(p.spellPower * 0.25));
+    // Rank 3 base 160 plus 25 percent of the caster's spell power (PR #2154's
+    // barrier scaling). Derived from the caster's live spell power rather than
+    // pinned: Intelligence converts through statusMagicPower now, so the flat 40
+    // the original literal assumed is no longer a constant of the class. The
+    // Chronoweave mastery x1.15 that used to ride on top went with the spec
+    // masteries (Phase D0).
+    expect(shield?.value).toBe(160 + Math.round(p.spellPower * 0.25));
     // Absorption channels through the normal pipeline: a 100 hit leaves hp
     // untouched and the shell down by exactly what it soaked.
     const shieldBefore = shield?.value ?? 0;

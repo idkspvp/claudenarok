@@ -69,16 +69,14 @@ function advance(sim: Sim, seconds: number): void {
 }
 
 describe('Hourglass of Suspension content', () => {
-  it('belongs only to Chronomancy and uses provisional ground-targeted balance', () => {
+  // Specs are retired (Phase D0), so every mage learns it at its learn level.
+  it('is on the mage kit and uses provisional ground-targeted balance', () => {
     expect(knownIds()).toContain('temporal_hourglass');
-    expect(knownIds()).not.toContain('temporal_hourglass');
-    expect(knownIds()).not.toContain('temporal_hourglass');
 
     const { sim } = makeChronomancer();
     const resolved = sim.resolvedAbility('temporal_hourglass');
     expect(resolved?.def).toMatchObject({
       class: 'mage',
-      specs: ['arcane'],
       targetMode: 'position',
       requiresTarget: false,
       cooldown: 50,

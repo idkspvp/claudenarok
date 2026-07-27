@@ -1,3 +1,4 @@
+import type { PlayerModifiers } from '../player_modifiers';
 import {
   type AbilityDef,
   type AbilityEffect,
@@ -15,7 +16,6 @@ import {
   TEMPORAL_HOURGLASS_SELF_RADIUS,
   type WeaponInfo,
 } from '../types';
-import type { PlayerModifiers } from '../player_modifiers';
 import { SPORT_ABILITIES } from './vale_cup';
 
 // ---------------------------------------------------------------------------

@@ -18,9 +18,7 @@ export function validatePlayerLevel(value: unknown): number | null {
   return value >= 1 && value <= MAX_LEVEL ? value : null;
 }
 
-export type ResetRequest =
-  | { ok: true; playerLevel: number }
-  | { ok: false; error: string };
+export type ResetRequest = { ok: true; playerLevel: number } | { ok: false; error: string };
 
 /** Validate a headless reset request. */
 export function parseResetRequest(value: unknown): ResetRequest {

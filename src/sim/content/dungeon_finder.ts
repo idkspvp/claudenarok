@@ -9,8 +9,8 @@
 //
 // Data-as-code: plain exported records, no engine logic (content CLAUDE.md).
 
-import type { DungeonDifficulty, PlayerClass } from '../types';
 import type { Role } from '../player_modifiers';
+import type { DungeonDifficulty, PlayerClass } from '../types';
 
 // Structured listing tags: the only "description" a premade listing carries.
 // Free-form listing text is deliberately unsupported (no moderation surface).

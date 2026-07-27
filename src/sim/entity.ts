@@ -1,11 +1,11 @@
 import { critRateFrom } from './combat/crit';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
-import type { PlayerModifiers } from './player_modifiers';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
+import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
 import { defaultAllocationFor } from './stat_preset';
 import type {

@@ -81,8 +81,7 @@ function pushAura(e: Entity, aura: Partial<Aura> & Pick<Aura, 'id' | 'name' | 'k
   } as Aura);
 }
 
-const knownIds = (): Set<string> =>
-  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
+const knownIds = (): Set<string> => new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('Glacial Spike content def', () => {
   it('pins the slow, heavy, icicle-gated spender', () => {

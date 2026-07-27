@@ -64,8 +64,7 @@ function tickFor(sim: TestSim, seconds: number): SimEvent[] {
   return events;
 }
 
-const knownIds = (): Set<string> =>
-  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
+const knownIds = (): Set<string> => new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('AoE content defs', () => {
   it('pins Frozen Orb: level 15, instant, 45s cooldown, frost-gated, orb effect', () => {

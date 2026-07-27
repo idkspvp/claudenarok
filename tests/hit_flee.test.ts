@@ -122,14 +122,7 @@ describe('the contest reaches a real swing', () => {
       if (!meta) throw new Error('missing meta');
       const alloc: StatAllocation = { ...emptyStatAllocation(), dex: opts.attackerDex };
       meta.statAllocation = alloc;
-      recalcPlayerStats(
-        p,
-        meta.cls,
-        meta.equipment,
-        meta.mods,
-        meta.equipmentInstance,
-        alloc,
-      );
+      recalcPlayerStats(p, meta.cls, meta.equipment, meta.mods, meta.equipmentInstance, alloc);
     }
     const target = createMob((sim as never as { nextId: number }).nextId++, MOBS.forest_wolf, 5, {
       ...p.pos,

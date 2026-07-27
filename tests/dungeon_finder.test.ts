@@ -323,34 +323,8 @@ describe('automatic queue', () => {
     expect(sim.dungeonFinderInfoFor(high)?.queue).toBeNull();
   });
 
-  it('level 5+ without an active spec can neither select roles nor queue', () => {
-    const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'NoSpec');
-    sim.setPlayerLevel(20, pid);
-    sim.dungeonFinderSetRoles(['tank'], pid);
-    sim.dungeonFinderQueueJoin(['hollow_crypt_heroic'], pid);
-    const events = tickAll(sim, 1);
-    expect(errorsFor(events, pid)).toContain('Choose a specialization to use the Dungeon Finder.');
-    expect(sim.dungeonFinderInfoFor(pid)?.eligibleRoles).toEqual([]);
-    expect(sim.dungeonFinderInfoFor(pid)?.queue).toBeNull();
-    // The gate starts exactly at the spec unlock (level 5)...
-    const atFive = sim.addPlayer('warrior', 'AtFive');
-    sim.setPlayerLevel(5, atFive);
-    sim.dungeonFinderSetRoles(['tank'], atFive);
-    const eventsAtFive = tickAll(sim, 1);
-    expect(errorsFor(eventsAtFive, atFive)).toContain(
-      'Choose a specialization to use the Dungeon Finder.',
-    );
-    expect(sim.dungeonFinderInfoFor(atFive)?.eligibleRoles).toEqual([]);
-    // ...and level 4 is NOT spec-gated: the class table applies unspecced.
-    const atFour = sim.addPlayer('warrior', 'AtFour');
-    sim.setPlayerLevel(4, atFour);
-    sim.dungeonFinderSetRoles(['tank'], atFour);
-    const eventsAtFour = tickAll(sim, 1);
-    expect(errorsFor(eventsAtFour, atFour)).toEqual([]);
-    expect(sim.dungeonFinderInfoFor(atFour)?.eligibleRoles).toEqual(['tank', 'dps']);
-    expect(sim.dungeonFinderInfoFor(atFour)?.roles).toEqual(['tank']);
-  });
+  // The spec gate that stood here is retired (Phase D0): class capability is
+  // the whole rule, at every level.
 
   it('rejects a role outside the class capability table', () => {
     const sim = makeSim();

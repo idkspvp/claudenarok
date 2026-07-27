@@ -91,41 +91,8 @@ describe('Hot Streak builder crits shave Combustion cooldown', () => {
   });
 });
 
-describe('Mass Barrier shields only the 5 nearest', () => {
-  it('caps at the caster plus the four closest allies', () => {
-    // Mass Barrier is a choice-row talent, so grant it via the talent rig.
-    const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
-    sim.setPlayerLevel(20);
-    const p = sim.player;
-    // Recipients are group-scoped (party/raid only), so raid all 7 allies with
-    // the caster: fill the 5-player party, convert to raid, invite the rest.
-    const allies: Entity[] = [];
-    for (let i = 0; i < 7; i++) {
-      const id = sim.addPlayer('warrior', `A${i}`);
-      const e = sim.entities.get(id)!;
-      e.pos = { x: p.pos.x + 1 + i, y: p.pos.y, z: p.pos.z }; // increasing distance
-      e.prevPos = { ...e.pos };
-      allies.push(e);
-      if (i === 4) {
-        (
-          sim as unknown as { party: { convertPartyToRaid(pid: number): void } }
-        ).party.convertPartyToRaid(p.id);
-      }
-      sim.partyInvite(id, p.id);
-      sim.partyAccept(id);
-    }
-    const hasShield = (e: Entity) => e.auras.some((a) => a.id === 'mass_barrier');
-    p.resource = p.maxResource;
-    sim.castAbility('mass_barrier');
-    sim.tick();
-    // The caster and the 4 nearest allies are shielded; the 3 farthest are not.
-    expect(hasShield(p)).toBe(true);
-    const shieldedAllies = allies.filter(hasShield).length;
-    expect(shieldedAllies).toBe(4);
-    expect(allies.slice(0, 4).every(hasShield)).toBe(true);
-    expect(allies.slice(4).some(hasShield)).toBe(false);
-  });
-});
+// The Mass Barrier block that stood here granted a choice-row talent; the rows
+// went with the talent trees (Phase D0) and the ability has no acquisition path.
 
 describe('Number changes', () => {
   it('Scald lands instantly (no traveling bolt)', () => {

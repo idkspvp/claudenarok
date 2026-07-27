@@ -98,8 +98,7 @@ function pushAura(e: Entity, aura: Partial<Aura> & Pick<Aura, 'id' | 'name' | 'k
   } as Aura);
 }
 
-const knownIds = (): Set<string> =>
-  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
+const knownIds = (): Set<string> => new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('frost kit content defs', () => {
   it('pins Ice Lance: instant, cheap, no cooldown, frost-gated', () => {
@@ -207,15 +206,8 @@ describe('frostbolt proc generation', () => {
     PROC_TEST_TIMEOUT_MS,
   );
 
-  it('a mage without the frost spec never generates either proc', () => {
-    const { sim, p } = makeSim({ spec: null });
-    spawnTarget(sim, p);
-    for (let cast = 0; cast < 15; cast++) {
-      castAndResolve(sim, p, 'frostbolt', 'Rimelance');
-      expect(p.auras.some((a) => a.kind === 'fingers_of_frost')).toBe(false);
-      expect(p.auras.some((a) => a.kind === 'brain_freeze')).toBe(false);
-    }
-  });
+  // The no-frost-spec arm that stood here has no subject left: specs are retired
+  // (Phase D0) and every mage knows the proc passives.
 
   it(
     'same seed, same casts: identical proc sequence (determinism)',

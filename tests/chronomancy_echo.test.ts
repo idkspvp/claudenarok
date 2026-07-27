@@ -84,12 +84,8 @@ function echoMark(ally: Entity, mageId: number) {
 }
 
 describe('Temporal Echo: the mark', () => {
-  it('is granted only to Chronomancy and appears on the healer book', () => {
-    const { sim } = chronoMage();
-    expect(sim.resolvedAbility('temporal_echo')).not.toBeNull();
-    expect(sim.resolvedAbility('temporal_echo')).toBeNull();
-    expect(sim.resolvedAbility('temporal_echo')).toBeNull();
-  });
+  // The Chronomancy-exclusivity arm that stood here has no subject left: specs
+  // are retired (Phase D0) and every mage learns the kit.
 
   it('applies a small initial heal and a per-caster mark, instant on the GCD', () => {
     const { sim, p } = chronoMage();
@@ -314,13 +310,8 @@ describe('Temporal Echo: multiple chronomancers stay independent', () => {
 });
 
 describe('Temporal Echo: cleanup', () => {
-  it('leaving Chronomancy clears the marks this mage placed', () => {
-    const { sim, p } = chronoMage();
-    const ally = addAlly(sim, 'Limpieza');
-    markEcho(sim, ally);
-    expect(echoMark(ally, p.id)).toBeDefined();
-    expect(echoMark(ally, p.id)).toBeUndefined(); // stripped on spec loss
-  });
+  // The Chronomancy-exclusivity arm that stood here has no subject left: specs
+  // are retired (Phase D0) and every mage learns the kit.
 
   it('the ally dying sheds the mark through the normal death path', () => {
     const { sim } = chronoMage();

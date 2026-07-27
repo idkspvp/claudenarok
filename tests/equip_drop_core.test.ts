@@ -94,7 +94,7 @@ describe('paperdollDropAction agrees with the sim (the authority)', () => {
       itemId: 'eastbrook_greatsword',
       slot: 'offhand',
       cls: 'warrior',
-      level: 40
+      level: 40,
     },
   ];
 

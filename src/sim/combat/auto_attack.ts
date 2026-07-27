@@ -51,7 +51,7 @@ import {
 } from '../types';
 import { drawWeapon } from '../weapon_stow';
 import { attributeMultipliers } from './attribute_damage';
-
+import { onCastCompleted } from './cast_hooks';
 import { applyRageSpendCooldownRefund, spendResource } from './casting_lifecycle';
 import { blindMissBonus, isDisarmed, isInStasis, isStunned } from './cc';
 import { critAfterTargetLuck } from './crit';
@@ -61,7 +61,6 @@ import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing'
 import { isTravelFormAuraKind } from './forms';
 import { missChanceFromContest } from './hit_flee';
 import { rangedShotProfile } from './ranged_shot';
-import { onCastCompleted } from './cast_hooks';
 import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
 import { weaponSwingDamage } from './weapon_damage';

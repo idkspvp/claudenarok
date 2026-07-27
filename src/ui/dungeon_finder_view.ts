@@ -21,8 +21,8 @@ import {
   finderActivity,
 } from '../sim/content/dungeon_finder';
 import { HEROIC_BOSS_LOOT } from '../sim/content/heroic_loot';
-import type { Role } from '../sim/player_modifiers';
 import { DUNGEONS, ITEMS, MOBS, zoneAt } from '../sim/data';
+import type { Role } from '../sim/player_modifiers';
 import { compatibleFinderRoles } from '../sim/social/dungeon_finder';
 import type { DungeonDifficulty, PlayerClass } from '../sim/types';
 
