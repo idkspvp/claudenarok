@@ -62,7 +62,7 @@ function guideUrl(sub: string): string {
 /**
  * The 14 hreflang alternate hrefs for a guide route path, mirroring index.html's set:
  * en at /guide<path>, the 13 others at /guide<path>?lang=<locale>, plus x-default -> en.
- * `sub` is the route sub-path ('' for home), e.g. 'classes/warrior'.
+ * `sub` is the route sub-path ('' for home), e.g. 'classes/swordman'.
  */
 function guideAlternates(sub: string): { hreflang: string; href: string }[] {
   const base = guideUrl(sub);

@@ -152,11 +152,11 @@ await sleep(2500);
 const scene2 = await page.evaluate(async () => {
   const sim = window.__game.sim;
   const me = sim.player;
-  const rogueId = sim.addPlayer('rogue', 'Kicker');
+  const rogueId = sim.addPlayer('thief', 'Kicker');
   sim.setPlayerLevel(20, rogueId);
-  const rogue = sim.entities.get(rogueId);
-  rogue.pos = { x: me.pos.x + 2, y: me.pos.y, z: me.pos.z + 2 };
-  rogue.prevPos = { ...rogue.pos };
+  const thief = sim.entities.get(rogueId);
+  thief.pos = { x: me.pos.x + 2, y: me.pos.y, z: me.pos.z + 2 };
+  thief.prevPos = { ...thief.pos };
   window.__shot.closeOnWolf();
   me.resource = me.maxResource;
   me.gcdRemaining = 0;
@@ -166,7 +166,7 @@ const scene2 = await page.evaluate(async () => {
     def: {
       id: 'demo_pummel',
       name: 'Pummel',
-      class: 'rogue',
+      class: 'thief',
       learnLevel: 1,
       cost: 0,
       castTime: 0,
@@ -185,7 +185,7 @@ const scene2 = await page.evaluate(async () => {
     threatFlat: 0,
     threatMult: 1,
   };
-  sim.ctx.runEffects(rogue, sim.players.get(rogueId), me, res);
+  sim.ctx.runEffects(thief, sim.players.get(rogueId), me, res);
   const interrupted = me.castingAbility === null;
   const lockout = me.auras.find((a) => a.kind === 'lockout');
   // try to cast into the lockout: the client shows the refusal error

@@ -17,7 +17,7 @@ import { levelWithStats } from './helpers/alloc';
 // (Sunder/Faerie Fire as non-stacking percents, Expose Armor's full-cap finisher).
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, id: number, x: number, z: number) {
@@ -78,8 +78,8 @@ describe('standardized percent raid buffs', () => {
   it('Arcane Intellect buffs the whole party, even a member far out of range', () => {
     const sim = makeWorld();
     const mage = sim.addPlayer('mage', 'Mira');
-    const near = sim.addPlayer('warrior', 'Near');
-    const far = sim.addPlayer('rogue', 'Far');
+    const near = sim.addPlayer('swordman', 'Near');
+    const far = sim.addPlayer('thief', 'Far');
     formParty(sim, mage, [near, far]);
     // The mage rework moved Aether Insight from learnLevel 1 to 3 (e0842ee38).
     levelWithStats(sim, 3, mage);
@@ -121,8 +121,8 @@ describe('standardized percent raid buffs', () => {
 
   it('Battle Shout raises party attack power by 10%', () => {
     const sim = makeWorld();
-    const warr = sim.addPlayer('warrior', 'Bel');
-    const ally = sim.addPlayer('paladin', 'Cal');
+    const warr = sim.addPlayer('swordman', 'Bel');
+    const ally = sim.addPlayer('swordman', 'Cal');
     formParty(sim, warr, [ally]);
     const apBefore = sim.entities.get(ally)!.attackPower;
     ready(sim, warr);
@@ -133,29 +133,29 @@ describe('standardized percent raid buffs', () => {
 
   it('Power Word: Fortitude raises party Stamina (and thus max HP)', () => {
     const sim = makeWorld();
-    const priest = sim.addPlayer('priest', 'Pia');
-    const ally = sim.addPlayer('warrior', 'War');
-    formParty(sim, priest, [ally]);
-    // Level the ally first: a level-1 warrior has 5 Vitality, and 5% of 5 rounds
+    const acolyte = sim.addPlayer('acolyte', 'Pia');
+    const ally = sim.addPlayer('swordman', 'War');
+    formParty(sim, acolyte, [ally]);
+    // Level the ally first: a level-1 swordman has 5 Vitality, and 5% of 5 rounds
     // straight back to 5. Percent buffs need an attribute large enough to move,
     // which on the Ragnarok scale means a character past the first few levels.
     levelWithStats(sim, 20, ally);
     const staBefore = sim.entities.get(ally)!.stats.vit;
     const hpBefore = sim.entities.get(ally)!.maxHp;
-    ready(sim, priest);
-    sim.castAbility('power_word_fortitude', priest);
+    ready(sim, acolyte);
+    sim.castAbility('power_word_fortitude', acolyte);
     expect(sim.entities.get(ally)!.stats.vit).toBe(Math.round(staBefore * 1.05));
     expect(sim.entities.get(ally)!.maxHp).toBeGreaterThan(hpBefore);
   });
 
   it('Mark of the Wild raises every primary attribute by 5%', () => {
     const sim = makeWorld();
-    const druid = sim.addPlayer('druid', 'Dru');
+    const acolyte = sim.addPlayer('acolyte', 'Dru');
     const ally = sim.addPlayer('mage', 'Mag');
-    formParty(sim, druid, [ally]);
+    formParty(sim, acolyte, [ally]);
     const before = { ...sim.entities.get(ally)!.stats };
-    ready(sim, druid);
-    sim.castAbility('mark_of_the_wild', druid);
+    ready(sim, acolyte);
+    sim.castAbility('mark_of_the_wild', acolyte);
     const after = sim.entities.get(ally)!.stats;
     expect(after.int).toBe(Math.round(before.int * 1.05));
     expect(after.vit).toBe(Math.round(before.vit * 1.05));
@@ -164,8 +164,8 @@ describe('standardized percent raid buffs', () => {
 
   it('Devotion Aura raises party armor by 10%', () => {
     const sim = makeWorld();
-    const pal = sim.addPlayer('paladin', 'Pal');
-    const ally = sim.addPlayer('warrior', 'War');
+    const pal = sim.addPlayer('swordman', 'Pal');
+    const ally = sim.addPlayer('swordman', 'War');
     formParty(sim, pal, [ally]);
     const armorBefore = sim.entities.get(ally)!.stats.armor;
     ready(sim, pal);
@@ -176,9 +176,9 @@ describe('standardized percent raid buffs', () => {
 
   it('replaces the previous Blessing of Might from another caster', () => {
     const sim = makeWorld();
-    const first = sim.addPlayer('paladin', 'Ald');
-    const second = sim.addPlayer('paladin', 'Borin');
-    const targetId = sim.addPlayer('warrior', 'War');
+    const first = sim.addPlayer('swordman', 'Ald');
+    const second = sim.addPlayer('swordman', 'Borin');
+    const targetId = sim.addPlayer('swordman', 'War');
     const target = sim.entities.get(targetId)!;
     levelWithStats(sim, 4, first);
     levelWithStats(sim, 4, second);
@@ -201,13 +201,13 @@ describe('standardized percent raid buffs', () => {
   });
 
   it('does not stack Sureflight Aura from two hunters (same-class group buff)', () => {
-    // trueshot_aura (Sureflight Aura) is a talent-granted hunter aura applied as
+    // trueshot_aura (Sureflight Aura) is a talent-granted archer aura applied as
     // `${abilityId}_ap` by aoeAllyAttackPower. Two hunters used to stack two copies
     // on the same target; now the second REPLACES the first (source-independent).
     const sim = makeWorld();
-    const first = sim.addPlayer('hunter', 'Rax');
-    const second = sim.addPlayer('hunter', 'Vess');
-    const target = sim.entities.get(sim.addPlayer('warrior', 'War'))!;
+    const first = sim.addPlayer('archer', 'Rax');
+    const second = sim.addPlayer('archer', 'Vess');
+    const target = sim.entities.get(sim.addPlayer('swordman', 'War'))!;
     const sureflight = (sourceId: number): Aura => ({
       id: 'trueshot_aura_ap',
       name: 'Sureflight Aura',
@@ -231,9 +231,9 @@ describe('standardized percent raid buffs', () => {
 
   it('keeps the newest stronger Blessing of Might value', () => {
     const sim = makeWorld();
-    const first = sim.addPlayer('paladin', 'Ald');
-    const second = sim.addPlayer('paladin', 'Borin');
-    const target = sim.entities.get(sim.addPlayer('warrior', 'War'))!;
+    const first = sim.addPlayer('swordman', 'Ald');
+    const second = sim.addPlayer('swordman', 'Borin');
+    const target = sim.entities.get(sim.addPlayer('swordman', 'War'))!;
 
     (sim as unknown as { applyAura(target: Entity, aura: Aura): void }).applyAura(
       target,

@@ -59,7 +59,7 @@ await page.evaluate(() => {
     n.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 await wait(14000);
 

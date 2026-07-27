@@ -169,7 +169,7 @@ describe('abilityScalingPower', () => {
   it('routes ranged shots to RAP, physical specials to melee AP, spells to SP', () => {
     const e = { spellPower: 120, rangedPower: 350, attackPower: 500 };
     expect(abilityScalingPower(e, def({}))).toBe(120); // fire spell -> Spell Power
-    expect(abilityScalingPower(e, def({ scalesWith: 'ranged' }))).toBe(350); // hunter shot -> RAP
+    expect(abilityScalingPower(e, def({ scalesWith: 'ranged' }))).toBe(350); // archer shot -> RAP
     expect(abilityScalingPower(e, def({ school: 'physical' }))).toBe(500); // melee special -> AP
     // 'ranged' wins even on a physical shot (Aimed Shot / Concussive Shot).
     expect(abilityScalingPower(e, def({ school: 'physical', scalesWith: 'ranged' }))).toBe(350);

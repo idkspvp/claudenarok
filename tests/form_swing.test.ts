@@ -6,7 +6,7 @@ import { Sim } from '../src/sim/sim';
 import type { AuraKind } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // Mirror tests/form_command.ts: forms are a 3600s toggle aura on the player.
@@ -25,43 +25,43 @@ function giveForm(sim: Sim, pid: number, kind: AuraKind, name: string) {
 }
 
 describe('Wolf Form swing speed', () => {
-  it('matches the rogue base weapon speed exactly', () => {
-    const rogueWeapon = ITEMS[CLASSES.rogue.startWeapon].weapon!;
+  it('matches the thief base weapon speed exactly', () => {
+    const rogueWeapon = ITEMS[CLASSES.thief.startWeapon].weapon!;
     expect(ROGUE_BASE_SWING_SPEED).toBe(rogueWeapon.speed);
   });
 
-  it('a druid in Wolf Form swings at the rogue cadence, ignoring its weapon', () => {
+  it('a acolyte in Wolf Form swings at the thief cadence, ignoring its weapon', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('druid', 'Bet');
+    const a = sim.addPlayer('acolyte', 'Bet');
     sim.tick();
-    const druid = sim.entities.get(a)!;
+    const acolyte = sim.entities.get(a)!;
 
-    // The druid's caster weapon is slower than a rogue dagger: that slow speed is
+    // The acolyte's caster weapon is slower than a thief dagger: that slow speed is
     // exactly what used to leak into Wolf Form's auto-attacks (the bug).
-    expect(druid.weapon.speed).toBeGreaterThan(ROGUE_BASE_SWING_SPEED);
+    expect(acolyte.weapon.speed).toBeGreaterThan(ROGUE_BASE_SWING_SPEED);
 
     giveForm(sim, a, 'form_cat', 'Wolf Form');
-    expect(baseSwingSpeed(druid)).toBe(ROGUE_BASE_SWING_SPEED);
+    expect(baseSwingSpeed(acolyte)).toBe(ROGUE_BASE_SWING_SPEED);
   });
 
-  it('a druid out of form swings at its own weapon speed', () => {
+  it('a acolyte out of form swings at its own weapon speed', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('druid', 'Dalet');
+    const a = sim.addPlayer('acolyte', 'Dalet');
     sim.tick();
-    const druid = sim.entities.get(a)!;
-    expect(baseSwingSpeed(druid)).toBe(druid.weapon.speed);
+    const acolyte = sim.entities.get(a)!;
+    expect(baseSwingSpeed(acolyte)).toBe(acolyte.weapon.speed);
   });
 
-  it('a rogue is unaffected (no form aura): own weapon speed', () => {
+  it('a thief is unaffected (no form aura): own weapon speed', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('thief', 'Gimel');
     sim.tick();
-    const rogue = sim.entities.get(a)!;
-    expect(baseSwingSpeed(rogue)).toBe(rogue.weapon.speed);
-    expect(rogue.weapon.speed).toBe(ROGUE_BASE_SWING_SPEED);
+    const thief = sim.entities.get(a)!;
+    expect(baseSwingSpeed(thief)).toBe(thief.weapon.speed);
+    expect(thief.weapon.speed).toBe(ROGUE_BASE_SWING_SPEED);
   });
 
-  // Land the first white-hit auto-attack a druid scores on an immortal,
+  // Land the first white-hit auto-attack a acolyte scores on an immortal,
   // unarmored dummy, returning the dealt amount plus the runtime attack power and
   // hard-DEF reduction in effect, so the test can predict the amount exactly even
   // as recalcPlayerStats refreshes attack power every tick.
@@ -107,7 +107,7 @@ describe('Wolf Form swing speed', () => {
     throw new Error('no white hit landed');
   }
 
-  it('Wolf Form normalizes swing DAMAGE to the rogue cadence (no AP double-dip)', () => {
+  it('Wolf Form normalizes swing DAMAGE to the thief cadence (no AP double-dip)', () => {
     // Status ATK adds RAW and carries no speed factor: Ragnarok has no
     // attack-power-per-second divisor at all. The cadence guard now lives
     // entirely on the WEAPON roll, which is normalized by the speed the swing
@@ -118,26 +118,26 @@ describe('Wolf Form swing speed', () => {
       Math.max(1, Math.round((DUMMY_WEAPON_ATK * (speed / 2) + ap) * (1 - dr)));
 
     const sim = makeWorld();
-    const a = sim.addPlayer('druid', 'Feral');
+    const a = sim.addPlayer('acolyte', 'Feral');
     sim.setPlayerLevel(20, a);
     sim.tick();
     const staffSpeed = sim.entities.get(a)!.weapon.speed;
     giveForm(sim, a, 'form_cat', 'Wolf Form');
     const wolf = firstWhiteHit(sim, a);
 
-    // The control druid on the same staff in BEAR form: a melee shapeshift that
+    // The control acolyte on the same staff in BEAR form: a melee shapeshift that
     // keeps the weapon cadence, so its AP is normalized by the slow staff. (It
-    // used to be an un-shifted druid, but a caster-form druid now auto-attacks
+    // used to be an un-shifted acolyte, but a caster-form acolyte now auto-attacks
     // with the class wand at any range, wand-style, so it never lands a melee
     // white hit; bear form preserves the staff-speed control this test needs.)
     const sim2 = makeWorld();
-    const b = sim2.addPlayer('druid', 'Bruin');
+    const b = sim2.addPlayer('acolyte', 'Bruin');
     sim2.setPlayerLevel(20, b);
     sim2.tick();
     giveForm(sim2, b, 'form_bear', 'Bear Form');
     const staff = firstWhiteHit(sim2, b);
 
-    // Wolf Form's per-swing weapon share uses the rogue speed (1.8); the bear druid's the staff.
+    // Wolf Form's per-swing weapon share uses the thief speed (1.8); the bear acolyte's the staff.
     expect(wolf.amount).toBe(expectAt(wolf.ap, ROGUE_BASE_SWING_SPEED, wolf.dr));
     expect(staff.amount).toBe(expectAt(staff.ap, staffSpeed, staff.dr));
     // The bug would have been Wolf Form normalizing by the slow staff instead: prove

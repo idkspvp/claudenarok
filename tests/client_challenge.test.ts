@@ -50,7 +50,7 @@ describe('challengeResponse server dispatch', () => {
     return { sent, ws: { readyState: 1, send: (p: string) => sent.push(JSON.parse(p)) } };
   }
   function join(server: GameServer, ws: any, id: number, seed: string) {
-    const s = server.join(ws, id, id, `Player${id}`, 'warrior', null, false, { clientSeed: seed });
+    const s = server.join(ws, id, id, `Player${id}`, 'swordman', null, false, { clientSeed: seed });
     if ('error' in s) throw new Error(s.error);
     return s;
   }

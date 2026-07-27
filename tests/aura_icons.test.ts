@@ -18,14 +18,14 @@ const IMAGE_AURA_IDS = [
   'corruption',
   'curse_of_agony',
   'immolate', // warlock DoTs
-  'serpent_sting', // hunter DoT
+  'serpent_sting', // archer DoT
   'moonfire',
   'insect_swarm',
   'rip', // druid DoTs
   'flame_shock', // shaman DoT
-  'shadow_word_pain', // priest DoT
+  'shadow_word_pain', // acolyte DoT
   'rupture',
-  'garrote', // rogue DoTs
+  'garrote', // thief DoTs
   'arcane_intellect',
   'mark_of_the_wild', // buffs
   'battle_shout',

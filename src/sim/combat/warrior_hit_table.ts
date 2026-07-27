@@ -21,7 +21,7 @@ export function warriorParryChance(str: number): number {
 }
 
 export function warriorMeleeDefense(defender: Entity, attacker: Entity): WarriorMeleeDefense {
-  if (defender.kind !== 'player' || defender.templateId !== 'warrior') {
+  if (defender.kind !== 'player' || defender.templateId !== 'swordman') {
     return { parryChance: 0, blockChance: 0 };
   }
   const inFront =

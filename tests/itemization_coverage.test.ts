@@ -1,8 +1,8 @@
 // Itemization gap fill: pins the class/spec coverage this change adds so the
 // gaps cannot silently return. Before it, leather caster armor was two pieces
-// in the whole game (a druid balance/restoration player was forced into
-// cloth), mail caster had no leveling line below item level 23 (holy paladin
-// and elemental/restoration shaman had no on-weight options), and no
+// in the whole game (a acolyte balance/restoration player was forced into
+// cloth), mail caster had no leveling line below item level 23 (holy swordman
+// and elemental/restoration acolyte had no on-weight options), and no
 // two-handed feral weapon existed above item level 16. The pins below are
 // decisive about the new pieces (exact ids, item levels, and budgets) and use
 // existence predicates over the whole table for the per-band coverage, so
@@ -35,7 +35,7 @@ const NEW_ITEMS: ReadonlyArray<readonly [string, number]> = [
   ['thornpeak_wildwraps', 22],
   ['cryptbloom_shoulderguards', 23],
   ['vestments_of_the_waking_grove', 26],
-  // Shaman/paladin caster mail leveling line (int/spi).
+  // Shaman/swordman caster mail leveling line (int/spi).
   ['acolyte_chain_grips', 5],
   ['votive_chain_belt', 7],
   ['fenwarden_sabatons', 11],
@@ -64,7 +64,7 @@ const NEW_ITEMS: ReadonlyArray<readonly [string, number]> = [
   ['stormbark_mantle', 31],
 ];
 
-// The feral two-handed ladder: druid-only weapons with real 2H dps plus
+// The feral two-handed ladder: acolyte-only weapons with real 2H dps plus
 // str/agi/sta, from the zone-1 rare elite up to the raid boss.
 const FERAL_LADDER: ReadonlyArray<readonly [string, number]> = [
   ['briarroot_staff', 8],
@@ -126,22 +126,24 @@ describe('itemization coverage: every new item is sourced, leveled, and on budge
   });
 });
 
-describe('itemization coverage: the druid caster leather line', () => {
-  it('gives druid an on-weight (leather) int/spi option in every item-level band', () => {
+describe('itemization coverage: the acolyte caster leather line', () => {
+  it('gives acolyte an on-weight (leather) int/spi option in every item-level band', () => {
     for (const [min, max] of BANDS) {
-      const pieces = authoredCasterPieces('leather', 'druid', min, max);
+      const pieces = authoredCasterPieces('leather', 'acolyte', min, max);
       expect(pieces.length, `leather caster piece in band ${min}-${max}`).toBeGreaterThanOrEqual(1);
     }
   });
 
   it('covers all seven armor slots across the line', () => {
-    const slots = new Set(authoredCasterPieces('leather', 'druid', 1, 40).map((item) => item.slot));
+    const slots = new Set(
+      authoredCasterPieces('leather', 'acolyte', 1, 40).map((item) => item.slot),
+    );
     for (const slot of ['chest', 'legs', 'helmet', 'shoulder', 'waist', 'gloves', 'feet']) {
       expect(slots.has(slot as ItemDef['slot']), `leather caster ${slot}`).toBe(true);
     }
   });
 
-  it('keeps the line on-weight: every new leather piece equips on a druid', () => {
+  it('keeps the line on-weight: every new leather piece equips on a acolyte', () => {
     const leatherIds = [
       'mosshide_vest',
       'thornling_grips',
@@ -164,7 +166,7 @@ describe('itemization coverage: the druid caster leather line', () => {
     for (const id of leatherIds) {
       const item = ITEMS[id];
       expect(item.armorType, id).toBe('leather');
-      expect(canEquipItem('druid', item), id).toBe(true);
+      expect(canEquipItem('acolyte', item), id).toBe(true);
     }
   });
 
@@ -183,8 +185,8 @@ describe('itemization coverage: the druid caster leather line', () => {
   });
 });
 
-describe('itemization coverage: the shaman/paladin caster mail line', () => {
-  it.each(['shaman', 'paladin'] as const)(
+describe('itemization coverage: the acolyte/swordman caster mail line', () => {
+  it.each(['acolyte', 'swordman'] as const)(
     'gives %s an on-weight (mail) int/spi option in every item-level band',
     (cls) => {
       for (const [min, max] of BANDS) {
@@ -197,7 +199,7 @@ describe('itemization coverage: the shaman/paladin caster mail line', () => {
     },
   );
 
-  it.each(['shaman', 'paladin'] as const)('covers all seven armor slots for %s', (cls) => {
+  it.each(['acolyte', 'swordman'] as const)('covers all seven armor slots for %s', (cls) => {
     const slots = new Set(authoredCasterPieces('mail', cls, 1, 40).map((item) => item.slot));
     for (const slot of ['chest', 'legs', 'helmet', 'shoulder', 'waist', 'gloves', 'feet']) {
       expect(slots.has(slot as ItemDef['slot']), `mail caster ${slot} for ${cls}`).toBe(true);
@@ -207,25 +209,25 @@ describe('itemization coverage: the shaman/paladin caster mail line', () => {
 
 describe('itemization coverage: the feral two-handed weapon ladder', () => {
   it.each(FERAL_LADDER)(
-    '%s: a druid-only two-hander at item level %i on the dps curve',
+    '%s: a acolyte-only two-hander at item level %i on the dps curve',
     (id, ilvl) => {
       const item = ITEMS[id];
       if (item.kind !== 'weapon') throw new Error(`${id} must be a weapon`);
       expect(item.hand, id).toBe('twohand');
-      expect(item.requiredClass, id).toEqual(['druid']);
-      // The bespoke druid-only lock is not a proficiency group, so the archetype
+      expect(item.requiredClass, id).toEqual(['acolyte']);
+      // The bespoke acolyte-only lock is not a proficiency group, so the archetype
       // lookup returns null and equipping falls through to the literal list.
       expect(weaponArchetypeForItem(item), id).toBeNull();
-      expect(canEquipItem('druid', item), `${id} equippable by druid`).toBe(true);
+      expect(canEquipItem('acolyte', item), `${id} equippable by acolyte`).toBe(true);
       for (const denied of [
-        'warrior',
-        'rogue',
-        'hunter',
+        'swordman',
+        'thief',
+        'archer',
         'mage',
-        'priest',
-        'shaman',
-        'paladin',
-        'warlock',
+        'acolyte',
+        'acolyte',
+        'swordman',
+        'mage',
       ] as const) {
         expect(canEquipItem(denied, item), `${id} denied to ${denied}`).toBe(false);
       }
@@ -244,7 +246,7 @@ describe('itemization coverage: the feral two-handed weapon ladder', () => {
   it('ladder spans leveling through the heroic tier (7 rungs, top at item level 31)', () => {
     const ladderLevels = FERAL_LADDER.map(([, ilvl]) => ilvl);
     expect(ladderLevels).toEqual([8, 13, 17, 23, 26, 29, 31]);
-    // The whole table now holds at least the ladder: a druid never again has
+    // The whole table now holds at least the ladder: a acolyte never again has
     // fewer than these seven two-handed feral options.
     const druidTwoHanders = Object.values(ITEMS).filter(
       (item) =>
@@ -252,7 +254,7 @@ describe('itemization coverage: the feral two-handed weapon ladder', () => {
         item.hand === 'twohand' &&
         !item.heroicOf &&
         ((item.stats?.str ?? 0) > 0 || (item.stats?.agi ?? 0) > 0) &&
-        canEquipItem('druid', item),
+        canEquipItem('acolyte', item),
     );
     expect(druidTwoHanders.length).toBeGreaterThanOrEqual(7);
     const endgame = druidTwoHanders.filter((item) => (itemLevel(item) ?? 0) >= 23);
@@ -261,23 +263,23 @@ describe('itemization coverage: the feral two-handed weapon ladder', () => {
 });
 
 describe('itemization coverage: the int/spi shield and the low-level held offhand', () => {
-  it('pearlward_aegis is the first caster shield (paladin + shaman only)', () => {
+  it('pearlward_aegis is the first caster shield (swordman + acolyte only)', () => {
     const shield = ITEMS.pearlward_aegis;
     expect(isShieldItem(shield)).toBe(true);
     expect((shield.stats?.int ?? 0) > 0 && (shield.stats?.luk ?? 0) > 0).toBe(true);
-    expect(canEquipItem('paladin', shield)).toBe(true);
-    expect(canEquipItem('shaman', shield)).toBe(true);
-    expect(canEquipItem('warrior', shield)).toBe(false);
-    expect(canEquipItem('druid', shield)).toBe(false);
+    expect(canEquipItem('swordman', shield)).toBe(true);
+    expect(canEquipItem('acolyte', shield)).toBe(true);
+    expect(canEquipItem('swordman', shield)).toBe(false);
+    expect(canEquipItem('acolyte', shield)).toBe(false);
   });
 
   it('valefire_lantern opens the held-offhand slot below the epic tier', () => {
     const lantern = ITEMS.valefire_lantern;
     expect(lantern.kind).toBe('held_offhand');
-    for (const cls of ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'] as const) {
+    for (const cls of ['mage', 'acolyte', 'mage', 'acolyte', 'swordman', 'acolyte'] as const) {
       expect(canEquipItem(cls, lantern), cls).toBe(true);
     }
-    expect(canEquipItem('warrior', lantern)).toBe(false);
+    expect(canEquipItem('swordman', lantern)).toBe(false);
   });
 });
 

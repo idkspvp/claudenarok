@@ -95,7 +95,7 @@ describe('Temporal Mend', () => {
 
   it('heals a wounded ally and draws healing threat', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Tanque');
+    const ally = sim.addPlayer('swordman', 'Tanque');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 5;
@@ -136,7 +136,7 @@ describe('Temporal Mend', () => {
 
   it('respects range like every other heal', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Lejano');
+    const ally = sim.addPlayer('swordman', 'Lejano');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 50; // beyond the 30yd heal range
@@ -199,7 +199,7 @@ describe('Temporal Barrier', () => {
 
   it('lands on an ally and is instant on the GCD', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Escudado');
+    const ally = sim.addPlayer('swordman', 'Escudado');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 5;

@@ -35,7 +35,7 @@ const page = {
       source: 'account',
       id: 21,
       accountId: 12,
-      username: 'rogue',
+      username: 'thief',
       ip: null,
       action: 'kick',
       reason: 'afk in raid',

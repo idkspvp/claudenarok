@@ -1,6 +1,6 @@
 // Visual proof of the three heroic Nythraxis adds and their models. Boots the
 // offline game and stages each add close to the camera so its model is clear:
-// Aldren the warrior (skel_warrior), Malric the priest (skel_necromancer, with
+// Aldren the swordman (skel_warrior), Malric the acolyte (skel_necromancer, with
 // his heal-channel beam onto a wounded boss), and Voss the stalker (skel_rogue).
 //   PORT=5174 node scripts/heroic_nythraxis_adds_shot.mjs   (needs npm run dev)
 import fs from 'node:fs';
@@ -27,7 +27,7 @@ await new Promise((r) => setTimeout(r, 500));
 await jsClick('#btn-offline');
 await new Promise((r) => setTimeout(r, 300));
 await page.type('#char-name', 'Scout');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 45000 });
 await new Promise((r) => setTimeout(r, 1500));
@@ -60,7 +60,7 @@ async function stageAndShot(tid, file, withBoss) {
       const base = [...ctx.entities.values()].find((e) => e.kind === 'mob');
       if (!base) return false;
       // Pin the player to a fixed origin each stage so all three add shots frame
-      // identically (the warrior otherwise chases the targeted add between shots).
+      // identically (the swordman otherwise chases the targeted add between shots).
       window.__addShotOrigin = window.__addShotOrigin || { x: p.pos.x, y: p.pos.y, z: p.pos.z };
       p.pos = { ...window.__addShotOrigin };
       p.prevPos = { ...p.pos };

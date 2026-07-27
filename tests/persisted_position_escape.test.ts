@@ -16,7 +16,7 @@ import { emptyZoneProps, type WorldContent } from '../src/sim/types';
 const SEED = 2307;
 
 function baseState(): CharacterState {
-  const source = new Sim({ seed: SEED, playerClass: 'warrior' });
+  const source = new Sim({ seed: SEED, playerClass: 'swordman' });
   const state = source.serializeCharacter(source.playerId);
   if (!state) throw new Error('failed to create persisted-position fixture');
   return state;
@@ -29,11 +29,11 @@ function stateAt(position: { x: number; z: number }): CharacterState {
 function loadAt(position: { x: number; z: number }, world?: WorldContent) {
   const sim = new Sim({
     seed: SEED,
-    playerClass: 'warrior',
+    playerClass: 'swordman',
     noPlayer: true,
     ...(world ? { world } : {}),
   });
-  const pid = sim.addPlayer('warrior', 'Saved', { state: stateAt(position) });
+  const pid = sim.addPlayer('swordman', 'Saved', { state: stateAt(position) });
   const player = sim.entities.get(pid);
   if (!player) throw new Error('saved player did not load');
   return { sim, player };
@@ -90,7 +90,7 @@ describe('persisted overworld position escape', () => {
   });
 
   it('keeps fresh starts and dungeon/delve ejection semantics unchanged', () => {
-    const fresh = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const fresh = new Sim({ seed: SEED, playerClass: 'swordman' });
     expect({ x: fresh.player.pos.x, z: fresh.player.pos.z }).toEqual(BUILTIN_WORLD.playerStart);
 
     const dungeon = DUNGEON_LIST[0];

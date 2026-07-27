@@ -77,7 +77,7 @@ class Bot {
     if (!reg.body.token) throw new Error(`reg ${reg.status}`);
     const ch = await api(
       '/api/characters',
-      { name, class: ['warrior', 'mage', 'hunter', 'priest', 'rogue'][this.i % 5] },
+      { name, class: ['swordman', 'mage', 'archer', 'acolyte', 'thief'][this.i % 5] },
       reg.body.token,
       this.ip,
     );
@@ -264,7 +264,7 @@ async function main() {
     const n = document.querySelector('#new-char-name');
     n.value = name;
     n.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('#charcreate-panel .mini-class[data-class="warrior"]').click();
+    document.querySelector('#charcreate-panel .mini-class[data-class="swordman"]').click();
     document.querySelector('#btn-create-char').click();
   }, charName);
   await page.waitForFunction(

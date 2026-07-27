@@ -306,7 +306,7 @@ export const V07_SLASH = [
   'Nobody has any threat on Aki.',
   'Nothing is nearby.',
   'Only mana-using classes park mana; your class never does.',
-  'Overpower is a warrior ability; your class cannot use it.',
+  'Overpower is a swordman ability; your class cannot use it.',
   'Overpower is not available. It opens for 5s after an enemy dodges your attack.',
   'Overpower is ready — strike within Akis (an enemy dodged your attack).',
   'Party (5/Aki): Aki.',

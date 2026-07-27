@@ -46,20 +46,13 @@ const FIVE_MAN_WEAPON_RATING = 50; // 50 rating = 5.0%
 const RAID_WEAPON_PRIMARY_RATING = 65; // 65 rating = 6.5%
 const RAID_SECONDARY_RATING = 20; // 20 rating = 2.0%
 
-const HEAVY = ['warrior', 'paladin', 'shaman'] as ItemDef['requiredClass']; // plate/mail
-const HEAL_MAIL = ['paladin', 'shaman'] as ItemDef['requiredClass']; // int/spi mail wearers
-const HEAL_LEATHER = ['druid'] as ItemDef['requiredClass']; // int/spi leather wearers
-const AGILE = ['rogue', 'hunter'] as ItemDef['requiredClass'];
-const AGILE_WILD = ['rogue', 'hunter', 'druid'] as ItemDef['requiredClass'];
-const CASTER = ['mage', 'priest', 'warlock', 'druid'] as ItemDef['requiredClass'];
-const CASTER_WEAPON_CLASSES = [
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-] as ItemDef['requiredClass'];
+const HEAVY = ['swordman'] as ItemDef['requiredClass']; // plate/mail
+const HEAL_MAIL = [] as ItemDef['requiredClass']; // int/spi mail wearers
+const HEAL_LEATHER = [] as ItemDef['requiredClass']; // int/spi leather wearers
+const AGILE = ['thief', 'archer'] as ItemDef['requiredClass'];
+const AGILE_WILD = ['thief', 'archer'] as ItemDef['requiredClass'];
+const CASTER = ['mage', 'acolyte'] as ItemDef['requiredClass'];
+const CASTER_WEAPON_CLASSES = ['mage', 'acolyte'] as ItemDef['requiredClass'];
 
 export const HEROIC_ITEMS: Record<string, ItemDef> = {
   // ================= Heroic Hollow Crypt: Morthen =================

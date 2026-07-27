@@ -41,7 +41,7 @@ function input(over: Partial<DungeonFinderViewInput> = {}): DungeonFinderViewInp
     info: makeInfo('sim'),
     board: [],
     playerLevel: 8,
-    playerClass: 'warrior',
+    playerClass: 'swordman',
     playerId: 1,
     party: null,
     lockouts: [],
@@ -247,7 +247,7 @@ describe('dungeon finder view core', () => {
       size: 1,
       capacity: 5,
       needed: { tank: 0, healer: 1, dps: 3 },
-      members: [{ cls: 'warrior' as const, level: 8, role: 'tank' as const }],
+      members: [{ cls: 'swordman' as const, level: 8, role: 'tank' as const }],
     };
     // A tank-only viewer cannot fill the open slots.
     const tankView = live(buildDungeonFinderView(input({ tab: 'board', board: [listing] })));

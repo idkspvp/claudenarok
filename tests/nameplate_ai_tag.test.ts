@@ -22,7 +22,7 @@ function entity(over: Partial<Entity> & { id: number }): Entity {
   return {
     kind: 'player',
     name: 'Streamer',
-    templateId: 'warrior',
+    templateId: 'swordman',
     pos: { x: 0, y: 0, z: 0 },
     scale: 1,
     level: 10,

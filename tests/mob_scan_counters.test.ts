@@ -33,14 +33,14 @@ const seedOf = (sim: Sim): number => (sim as unknown as { cfg: { seed: number } 
 const FAR = { x: 500, z: 500 };
 
 function noPlayerSim(): Sim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
-// Add a fresh warrior and teleport it to (FAR.x + dx, FAR.z + dz). Optionally mark it
+// Add a fresh swordman and teleport it to (FAR.x + dx, FAR.z + dz). Optionally mark it
 // dead: the aggro-scan increment runs BEFORE the callback's dead check, so a dead
 // player in radius still counts as a grid visit.
 function addPlayerAt(sim: Sim, name: string, dx: number, dz: number, dead = false): Entity {
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   const e = (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid) as AnyEntity;
   e.pos.x = FAR.x + dx;
   e.pos.z = FAR.z + dz;
@@ -412,7 +412,7 @@ describe('mob scan counters: reading them is a pure observer', () => {
   // comparison covers every gameplay field, not a hand-picked subset.
   const WOLF_ID = 900301;
   const buildRun = (): Sim => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const player = sim.player;
     const pos = {
       x: player.pos.x + 6,

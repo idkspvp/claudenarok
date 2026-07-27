@@ -143,7 +143,7 @@ describe('weapon type classification', () => {
     // The reverse of the check above: an item skinned as a dagger must also set
     // weapon.dagger, the flag Backstab/Ambush (weaponStrike + requiresBehind) gate
     // on in casting_lifecycle. Without it the item renders as a dagger but the
-    // positional rogue abilities reject it with "You must wield a dagger." This
+    // positional thief abilities reject it with "You must wield a dagger." This
     // pins that the two dagger notions never drift apart (regression: mistcallers_fang).
     for (const id of weaponIds) {
       if (weaponTypeForItem(id) !== 'dagger') continue;
@@ -160,31 +160,31 @@ describe('weapon type classification', () => {
 
 describe('skin apply rule', () => {
   it('requires an equipped mainhand weapon', () => {
-    expect(skinnableWeaponTypesFor('warrior', null)).toEqual([]);
-    expect(skinnableWeaponTypesFor('hunter', null)).toEqual([]);
+    expect(skinnableWeaponTypesFor('swordman', null)).toEqual([]);
+    expect(skinnableWeaponTypesFor('archer', null)).toEqual([]);
   });
 
   it('matches the equipped item type for weapon-swapping classes', () => {
-    expect(skinnableWeaponTypesFor('warrior', 'worn_sword')).toEqual(['sword']);
-    expect(skinnableWeaponTypesFor('rogue', 'rusty_dagger')).toEqual(['dagger']);
+    expect(skinnableWeaponTypesFor('swordman', 'worn_sword')).toEqual(['sword']);
+    expect(skinnableWeaponTypesFor('thief', 'rusty_dagger')).toEqual(['dagger']);
     expect(weaponSkinTypeMatches('mage', 'gnarled_staff', 'staff')).toBe(true);
-    expect(weaponSkinTypeMatches('warrior', 'worn_sword', 'axe')).toBe(false);
+    expect(weaponSkinTypeMatches('swordman', 'worn_sword', 'axe')).toBe(false);
   });
 
   it('lets hunters use bow and crossbow skins (class-fixed ranged visual)', () => {
-    expect(skinnableWeaponTypesFor('hunter', 'rusty_hatchet').sort()).toEqual(['bow', 'crossbow']);
+    expect(skinnableWeaponTypesFor('archer', 'rusty_hatchet').sort()).toEqual(['bow', 'crossbow']);
   });
 
   it('offers nothing for polearms', () => {
-    expect(skinnableWeaponTypesFor('warrior', 'tidereaver_gaff')).toEqual([]);
+    expect(skinnableWeaponTypesFor('swordman', 'tidereaver_gaff')).toEqual([]);
   });
 
   it('every paid skin type is reachable by some class and item', () => {
     const reachable = new Set<string>();
     for (const id of Object.keys(WEAPON_TYPE_BY_ITEM)) {
-      for (const t of skinnableWeaponTypesFor('warrior', id)) reachable.add(t);
+      for (const t of skinnableWeaponTypesFor('swordman', id)) reachable.add(t);
     }
-    for (const t of skinnableWeaponTypesFor('hunter', 'worn_sword')) reachable.add(t);
+    for (const t of skinnableWeaponTypesFor('archer', 'worn_sword')) reachable.add(t);
     for (const skin of WEAPON_SKIN_LIST) {
       expect(reachable.has(skin.weaponType), `${skin.id} (${skin.weaponType})`).toBe(true);
     }
@@ -192,8 +192,8 @@ describe('skin apply rule', () => {
 });
 
 describe('offhand weapon-skin mirror rule', () => {
-  it('mirrors the skin onto a matching-type offhand weapon (rogue dual-wield)', () => {
-    // A rogue with two daggers and a dagger skin shows both blades skinned.
+  it('mirrors the skin onto a matching-type offhand weapon (thief dual-wield)', () => {
+    // A thief with two daggers and a dagger skin shows both blades skinned.
     expect(offhandMirrorsWeaponSkin('frostbite_dagger', 'rusty_dagger')).toBe(true);
     expect(offhandMirrorsWeaponSkin('ashspark_dagger', 'keen_dirk')).toBe(true);
     expect(offhandMirrorsWeaponSkin('ice_fang_sword', 'crossroads_saber')).toBe(true);
@@ -201,13 +201,13 @@ describe('offhand weapon-skin mirror rule', () => {
 
   it('mirrors onto a matching-type TWO-HAND offhand weapon (Fury dual-wield pair)', () => {
     // Hand is deliberately not consulted: equipment_rules.canDualWieldTwoHand lets
-    // a Fury warrior offhand a two-hander, and the mainhand rule already skins a
+    // a Fury swordman offhand a two-hander, and the mainhand rule already skins a
     // matching-type two-hander (greatswords classify as 'sword'), so the mirror
     // must treat the offhand the same way or a Fury pair would render a skinned
     // mainhand next to a bare offhand greatsword: the asymmetry this rule removes.
     expect(WEAPON_TYPE_BY_ITEM.eastbrook_greatsword).toBe('sword');
     expect(
-      resolveActiveWeaponSkin('warrior', 'eastbrook_greatsword', { sword: 'ice_fang_sword' }),
+      resolveActiveWeaponSkin('swordman', 'eastbrook_greatsword', { sword: 'ice_fang_sword' }),
     ).toBe('ice_fang_sword');
     expect(offhandMirrorsWeaponSkin('ice_fang_sword', 'eastbrook_greatsword')).toBe(true);
     // A different-type two-hander stays bare, same as the one-hand arm.
@@ -242,7 +242,7 @@ describe('offhand weapon-skin mirror rule', () => {
   });
 });
 
-describe('bow skin attack animation (hunter draw instead of crossbow aim)', () => {
+describe('bow skin attack animation (archer draw instead of crossbow aim)', () => {
   it('starts every typed player ranged shot at launch and suppresses its impact replay', async () => {
     const { playerRangedAttackAlreadyStarted, playerRangedAttackStartsAtLaunch } = await import(
       '../src/render/characters/skin_attack'
@@ -306,7 +306,7 @@ describe('bow skin attack animation (hunter draw instead of crossbow aim)', () =
     expect(weaponSkinOrientPin(null)).toBeNull();
   });
 
-  it('the hunter ships the bow clip via animUrls and the GLB carries it', async () => {
+  it('the archer ships the bow clip via animUrls and the GLB carries it', async () => {
     // Source scan, not an import: pulling the manifest into Node would kick
     // the module-import GLB preloads (assets.ts loading contract).
     const manifestSrc = readFileSync(join(ROOT, 'src/render/characters/manifest.ts'), 'utf8');
@@ -404,9 +404,9 @@ describe('grip override wiring (editor saves reach the game)', () => {
 });
 
 describe('eligible classes per skin type (store card chips)', () => {
-  it('bow and crossbow are hunter-only (class-fixed ranged visual)', () => {
-    expect(eligibleClassesForWeaponSkinType('bow')).toEqual(['hunter']);
-    expect(eligibleClassesForWeaponSkinType('crossbow')).toEqual(['hunter']);
+  it('bow and crossbow are archer-only (class-fixed ranged visual)', () => {
+    expect(eligibleClassesForWeaponSkinType('bow')).toEqual(['archer']);
+    expect(eligibleClassesForWeaponSkinType('crossbow')).toEqual(['archer']);
   });
 
   it('hunters are never eligible for a non-ranged type (mainhand never displays)', () => {
@@ -414,8 +414,8 @@ describe('eligible classes per skin type (store card chips)', () => {
       if (skin.weaponType === 'bow' || skin.weaponType === 'crossbow') continue;
       expect(
         eligibleClassesForWeaponSkinType(skin.weaponType),
-        `${skin.weaponType} must not list hunter`,
-      ).not.toContain('hunter');
+        `${skin.weaponType} must not list archer`,
+      ).not.toContain('archer');
     }
   });
 
@@ -429,8 +429,8 @@ describe('eligible classes per skin type (store card chips)', () => {
   });
 
   it('proficiency groups decide the chips (spot checks against the item data)', () => {
-    expect(eligibleClassesForWeaponSkinType('sword')).toContain('warrior');
-    expect(eligibleClassesForWeaponSkinType('dagger')).toContain('rogue');
+    expect(eligibleClassesForWeaponSkinType('sword')).toContain('swordman');
+    expect(eligibleClassesForWeaponSkinType('dagger')).toContain('thief');
     expect(eligibleClassesForWeaponSkinType('staff')).toContain('mage');
     expect(eligibleClassesForWeaponSkinType('wand')).toContain('mage');
     expect(eligibleClassesForWeaponSkinType('mace')).toContain('paladin');
@@ -448,24 +448,24 @@ describe('active skin resolution', () => {
     // An axe skin stranded under the sword key (a hand-edited save or a
     // catalog re-type) must never render on a sword.
     expect(
-      resolveActiveWeaponSkin('warrior', 'worn_sword', { sword: 'glaciersplit_axe' }),
+      resolveActiveWeaponSkin('swordman', 'worn_sword', { sword: 'glaciersplit_axe' }),
     ).toBeNull();
   });
 
   it('resolves null for a missing loadout or no equipped mainhand', () => {
-    expect(resolveActiveWeaponSkin('warrior', 'worn_sword', null)).toBeNull();
-    expect(resolveActiveWeaponSkin('warrior', 'worn_sword', undefined)).toBeNull();
-    expect(resolveActiveWeaponSkin('warrior', null, { sword: 'ice_fang_sword' })).toBeNull();
+    expect(resolveActiveWeaponSkin('swordman', 'worn_sword', null)).toBeNull();
+    expect(resolveActiveWeaponSkin('swordman', 'worn_sword', undefined)).toBeNull();
+    expect(resolveActiveWeaponSkin('swordman', null, { sword: 'ice_fang_sword' })).toBeNull();
   });
 
   it('prefers the crossbow skin over the bow skin for hunters (native visual)', () => {
     expect(
-      resolveActiveWeaponSkin('hunter', 'rusty_hatchet', {
+      resolveActiveWeaponSkin('archer', 'rusty_hatchet', {
         bow: 'winterbite',
         crossbow: 'cinderlatch_crossbow',
       }),
     ).toBe('cinderlatch_crossbow');
-    expect(resolveActiveWeaponSkin('hunter', 'rusty_hatchet', { bow: 'winterbite' })).toBe(
+    expect(resolveActiveWeaponSkin('archer', 'rusty_hatchet', { bow: 'winterbite' })).toBe(
       'winterbite',
     );
   });

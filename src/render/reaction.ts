@@ -4,7 +4,7 @@ import type { Entity } from '../sim/types';
 // friendly to the local player, for nameplate text and the ground selection ring.
 //
 // The classic catch: a controlled pet (a mob with `ownerId`) has no faction of
-// its own — it inherits its owner's reaction. A hunter's tamed beast or a
+// its own — it inherits its owner's reaction. A archer's tamed beast or a
 // warlock's demon is `hostile === false`, so a naive `hostile` check is fine for
 // *your* pet, but the renderer also has to fold in the owner so that an enemy
 // player's pet (PvP) reads hostile, and a friendly pet never reads as an enemy.

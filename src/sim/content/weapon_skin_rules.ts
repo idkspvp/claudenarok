@@ -158,9 +158,9 @@ export function skinnableWeaponTypesFor(
   mainhandItemId: string | null | undefined,
 ): WeaponSkinType[] {
   if (!mainhandItemId) return [];
-  // Crossbow first: it is the hunter's native visual, so with both types in the
+  // Crossbow first: it is the archer's native visual, so with both types in the
   // loadout the crossbow skin wins resolution deterministically.
-  if (cls === 'hunter') return ['crossbow', 'bow'];
+  if (cls === 'archer') return ['crossbow', 'bow'];
   const t = weaponTypeForItem(mainhandItemId);
   if (!t || t === 'polearm') return [];
   return [t];
@@ -187,12 +187,12 @@ export function resolveActiveWeaponSkin(
 
 /**
  * True when the active weapon skin should also render on the offhand: the
- * offhand holds a WEAPON whose type matches the skin's weaponType (a rogue
+ * offhand holds a WEAPON whose type matches the skin's weaponType (a thief
  * with two daggers and a dagger skin shows both blades skinned). Shields
  * (armor, no weapon type), held offhands (orbs/tomes, no weapon type), and any
  * offhand weapon of a DIFFERENT type resolve to a non-matching weapon type and
  * are excluded, so the equality check is the whole rule. Hand is deliberately
- * NOT consulted: a Fury warrior (equipment_rules.canDualWieldTwoHand) can
+ * NOT consulted: a Fury swordman (equipment_rules.canDualWieldTwoHand) can
  * offhand a two-hander, and the mainhand rule already skins a matching-type
  * two-hander, so the mirror treats both hands the same. Pure and
  * account-cosmetic-only; the offhand keeps its own equipped item id on the wire
@@ -218,7 +218,7 @@ export function weaponSkinTypeMatches(
 
 /**
  * Return a validated loadout with `skinId` applied. Bow and crossbow occupy the
- * same hunter ranged-weapon display slot, so applying either one removes the
+ * same archer ranged-weapon display slot, so applying either one removes the
  * other. Other weapon types remain parked independently for gear swaps.
  */
 export function withWeaponSkinApplied(
@@ -236,24 +236,14 @@ export function withWeaponSkinApplied(
 
 // Canonical class display order for the eligibility chips (the PlayerClass
 // union order in ../types.ts).
-const CLASS_ORDER: readonly PlayerClass[] = [
-  'warrior',
-  'paladin',
-  'hunter',
-  'rogue',
-  'priest',
-  'shaman',
-  'mage',
-  'warlock',
-  'druid',
-];
+const CLASS_ORDER: readonly PlayerClass[] = ['swordman', 'archer', 'thief', 'acolyte', 'mage'];
 
 const eligibleByType = new Map<WeaponSkinType, readonly PlayerClass[]>();
 
 /**
  * Every class that can ever APPLY a skin of this weapon type (the store card
  * eligibility chips). Hunters always display the class ranged weapon, so bow
- * and crossbow are hunter-only and hunters are never eligible for any other
+ * and crossbow are archer-only and hunters are never eligible for any other
  * type. Other types derive from the item data: a class is eligible when it can
  * equip a proficiency-locked weapon of the type (starter weapons carry no
  * class lock and would mark every type all-class, so locked rows decide; a
@@ -265,7 +255,7 @@ export function eligibleClassesForWeaponSkinType(type: WeaponSkinType): readonly
   if (memo) return memo;
   let out: readonly PlayerClass[];
   if (type === 'bow' || type === 'crossbow') {
-    out = ['hunter'];
+    out = ['archer'];
   } else {
     const items = Object.keys(WEAPON_TYPE_BY_ITEM)
       .filter((id) => WEAPON_TYPE_BY_ITEM[id] === type)
@@ -273,7 +263,7 @@ export function eligibleClassesForWeaponSkinType(type: WeaponSkinType): readonly
     const locked = items.filter((item) => item.requiredClass);
     const pool = locked.length ? locked : items;
     out = CLASS_ORDER.filter(
-      (cls) => cls !== 'hunter' && pool.some((item) => canEquipItem(cls, item)),
+      (cls) => cls !== 'archer' && pool.some((item) => canEquipItem(cls, item)),
     );
   }
   eligibleByType.set(type, out);

@@ -37,7 +37,7 @@ function isDamageEvent(event: TickEvent): event is DamageEvent {
 }
 
 function makeWorld(lockoutNowMs?: () => number, raidResetMs?: (nowMs: number) => number) {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true, lockoutNowMs, raidResetMs });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true, lockoutNowMs, raidResetMs });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -56,7 +56,7 @@ function attune(sim: Sim, pid: number) {}
 
 function formRaid(sim: Sim, leaderPid: number) {
   while ((sim.partyOf(leaderPid)?.members.length ?? 1) < 5) {
-    const pid = sim.addPlayer('priest', `RaidFill${sim.players.size}`);
+    const pid = sim.addPlayer('acolyte', `RaidFill${sim.players.size}`);
     sim.partyInvite(pid, leaderPid);
     sim.partyAccept(pid);
   }
@@ -111,7 +111,7 @@ function summonImp(sim: Sim, pid: number): Entity {
       createDemonPet(owner: Entity, mobId: string, emit?: boolean): Entity | null;
     }
   ).createDemonPet(owner, 'emberkin', false);
-  if (!pet) throw new Error('expected warlock imp');
+  if (!pet) throw new Error('expected mage imp');
   return pet;
 }
 
@@ -220,7 +220,7 @@ describe('Nythraxis raid encounter', () => {
     });
 
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Tank');
+    const pid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, pid);
     expect(sim.entities.get(pid)!.pos.x).toBeGreaterThan(3000);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -263,7 +263,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('blocks attuned solo players from the Nythraxis arena until they are in a raid group', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     attune(sim, pid);
     const before = { ...sim.entities.get(pid)!.pos };
 
@@ -274,7 +274,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('automatically pulls Nythraxis when a player enters his aggro radius', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -311,7 +311,7 @@ describe('Nythraxis raid encounter', () => {
         expect(total).toBeCloseTo(1, 5);
       }
     }
-    expect(ITEMS.maul_of_the_scourged_wilds.requiredClass).toEqual(['druid']);
+    expect(ITEMS.maul_of_the_scourged_wilds.requiredClass).toEqual(['acolyte']);
 
     for (const itemId of ['deathless_heartwood', 'kingsbane_last_oath']) {
       const item = ITEMS[itemId];
@@ -335,12 +335,12 @@ describe('Nythraxis raid encounter', () => {
       expect(loot.some((entry) => entry.itemId === itemId)).toBe(true);
     }
 
-    expect(ITEMS.crownforged_dreadhelm.requiredClass).toEqual(['warrior', 'paladin']);
-    expect(ITEMS.crownforged_warspaulders.requiredClass).toEqual(['warrior', 'paladin']);
-    expect(ITEMS.soulflame_cowl.requiredClass).toEqual(['mage', 'priest', 'warlock', 'druid']);
-    expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'priest', 'warlock', 'druid']);
-    expect(ITEMS.stormcallers_crown.requiredClass).toEqual(['shaman']);
-    expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual(['shaman']);
+    expect(ITEMS.crownforged_dreadhelm.requiredClass).toEqual(['swordman', 'swordman']);
+    expect(ITEMS.crownforged_warspaulders.requiredClass).toEqual(['swordman', 'swordman']);
+    expect(ITEMS.soulflame_cowl.requiredClass).toEqual(['mage', 'acolyte', 'mage', 'acolyte']);
+    expect(ITEMS.soulflame_mantle.requiredClass).toEqual(['mage', 'acolyte', 'mage', 'acolyte']);
+    expect(ITEMS.stormcallers_crown.requiredClass).toEqual(['acolyte']);
+    expect(ITEMS.stormcallers_spaulders.requiredClass).toEqual(['acolyte']);
   });
 
   it('drops the offhand-slot and two-hander epics at item level 29 (raid source)', () => {
@@ -368,8 +368,8 @@ describe('Nythraxis raid encounter', () => {
     // + shield marker), the orb the held_offhand kind.
     expect(ITEMS.bonewrought_greatsword).toMatchObject({ hand: 'twohand', slot: 'mainhand' });
     expect(ITEMS.direfang_greatblade).toMatchObject({ hand: 'twohand', slot: 'mainhand' });
-    // A bespoke hunter lock: the agi 2H must never reach the rogue group.
-    expect(ITEMS.direfang_greatblade.requiredClass).toEqual(['hunter']);
+    // A bespoke archer lock: the agi 2H must never reach the thief group.
+    expect(ITEMS.direfang_greatblade.requiredClass).toEqual(['archer']);
     expect(isShieldItem(ITEMS.bonewrought_bulwark)).toBe(true);
     expect(ITEMS.bonewrought_bulwark).toMatchObject({
       kind: 'armor',
@@ -390,7 +390,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('keeps Nythraxis fixed at his throne facing the entrance before pull', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Tank');
+    const pid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, pid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const spawn = { ...boss.spawnPos };
@@ -405,7 +405,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('Nythraxis keeps autoattacking while normal mechanics are active', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -420,7 +420,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('stages Nythraxis opening yells far enough apart for the voice lines to finish', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -449,7 +449,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not interrupt the opening yells with the Gravebreaker voice line', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -495,7 +495,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('only speaks the Gravebreaker line on every third cleave cadence', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -557,10 +557,10 @@ describe('Nythraxis raid encounter', () => {
 
   it('splashes cone bystanders at 150 percent of the swing roll, never the swing target', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const secondaryPid = sim.addPlayer('warrior', 'Secondary');
+    const secondaryPid = sim.addPlayer('swordman', 'Secondary');
     const secondary = sim.entities.get(secondaryPid)!;
     tank.maxHp = 1e7;
     tank.hp = tank.maxHp;
@@ -623,12 +623,12 @@ describe('Nythraxis raid encounter', () => {
 
   it('only splashes players in front of Nythraxis, never the swing target', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const besideTankPid = sim.addPlayer('warrior', 'BesideTank');
+    const besideTankPid = sim.addPlayer('swordman', 'BesideTank');
     const besideTank = sim.entities.get(besideTankPid)!;
-    const behindPid = sim.addPlayer('warrior', 'Behind');
+    const behindPid = sim.addPlayer('swordman', 'Behind');
     const behind = sim.entities.get(behindPid)!;
     for (const p of [tank, besideTank, behind]) {
       p.maxHp = 1e7;
@@ -686,11 +686,11 @@ describe('Nythraxis raid encounter', () => {
 
   it('respects the Gravebreaker cone width at the front-arc boundary', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const insidePid = sim.addPlayer('warrior', 'InsideCone');
-    const outsidePid = sim.addPlayer('warrior', 'OutsideCone');
+    const insidePid = sim.addPlayer('swordman', 'InsideCone');
+    const outsidePid = sim.addPlayer('swordman', 'OutsideCone');
     const inside = sim.entities.get(insidePid)!;
     const outside = sim.entities.get(outsidePid)!;
     for (const p of [tank, inside, outside]) {
@@ -755,7 +755,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('suppresses non-critical Nythraxis dialogue while another dialogue set is active', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -809,7 +809,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('lets Soul Rend callout interrupt an active non-critical dialogue set', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     teleport(sim, tankPid, origin.x, origin.z + 82);
@@ -852,7 +852,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('lets Deathless Rage callout interrupt an active non-critical dialogue set', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     teleport(sim, tankPid, origin.x, origin.z + 82);
@@ -891,7 +891,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('lets Nythraxis immediately swing when his target is inside 8 yards', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -915,7 +915,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('keeps Nythraxis closing to his desired melee band while he can already swing', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -936,7 +936,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('keeps Nythraxis autoattacking while the tank moves around the arena', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -980,7 +980,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('prevents sustained circle-kiting from delaying Nythraxis boss swings', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1044,7 +1044,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('lets Nythraxis adds immediately swing after stepping into melee range', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1093,7 +1093,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('keeps Nythraxis adds closing to their desired melee band while they can already swing', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1142,7 +1142,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('keeps Nythraxis adds autoattacking while their target moves', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1208,7 +1208,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('prevents sustained circle-kiting from delaying Nythraxis add swings', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1272,10 +1272,10 @@ describe('Nythraxis raid encounter', () => {
 
   it('retargets Nythraxis adds to living threat before falling back to the boss target', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const offTankPid = sim.addPlayer('paladin', 'OffTank');
+    const offTankPid = sim.addPlayer('swordman', 'OffTank');
     const offTank = sim.entities.get(offTankPid)!;
     const bossTargetPid = sim.addPlayer('mage', 'BossTarget');
     const bossTarget = sim.entities.get(bossTargetPid)!;
@@ -1326,7 +1326,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('falls Nythraxis adds back to the boss target only when their threat table has no living targets', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const bossTargetPid = sim.addPlayer('mage', 'BossTarget');
@@ -1377,7 +1377,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('despawns Nythraxis adds after 10 seconds only when Nythraxis is out of combat', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     teleport(sim, tankPid, origin.x, origin.z + 82);
@@ -1433,7 +1433,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('prevents external slows and hard CC from affecting Nythraxis', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const controls: Omit<Aura, 'sourceId'>[] = [
@@ -1491,7 +1491,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('prevents external slows and hard CC from affecting Nythraxis adds', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     teleport(sim, tankPid, origin.x, origin.z + 82);
@@ -1573,7 +1573,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('Nythraxis chases back into swing range when his target runs away', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1594,7 +1594,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('forces an engaged but idle Nythraxis into chase and melee swings', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1620,7 +1620,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('raised skeleton adds chase back into swing range', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1660,7 +1660,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('allows the outer crypt but blocks un-attuned players at the inner royal door', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Unready');
+    const pid = sim.addPlayer('swordman', 'Unready');
     sim.enterDungeon('nythraxis_crypt', pid);
     expect(sim.entities.get(pid)!.pos.x).toBeGreaterThan(3000);
     const before = { ...sim.entities.get(pid)!.pos };
@@ -1670,7 +1670,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('transitions at 70 percent, stuns the room, spawns Aldric, and lights wardstones', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -1711,7 +1711,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('stuns active Nythraxis adds for the full Aldric transition', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -1800,10 +1800,10 @@ describe('Nythraxis raid encounter', () => {
 
   it('stuns active pets during the Aldric transition so they cannot keep attacking', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const warlockPid = sim.addPlayer('warlock', 'Warlock');
+    const warlockPid = sim.addPlayer('mage', 'Warlock');
     teleport(sim, warlockPid, origin.x, origin.z + 82);
     const pet = summonImp(sim, warlockPid);
     teleport(sim, pet.id, origin.x + 2, origin.z + 82);
@@ -1832,7 +1832,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('spawns Nythraxis add waves every 30 seconds in phase one', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -1860,7 +1860,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('stages Aldric transition dialogue without interrupting itself before Soul Rend opens phase two after a settle delay', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -1916,7 +1916,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('opens phase two with a 5s settle delay, then Soul Rend and Deathless Rage', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -1961,7 +1961,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not overlap Deathless Rage with active Soul Rend marks', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const tank = sim.entities.get(tankPid)!;
@@ -2009,7 +2009,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('splits Soul Rend among players stacked within 5 yards and kills isolated marks', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const tank = sim.entities.get(tankPid)!;
@@ -2065,7 +2065,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('marks non-tank raid members with Soul Rend and skips the aggro target', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const tank = sim.entities.get(tankPid)!;
@@ -2108,7 +2108,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not mark pets or dead players with Soul Rend', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const tank = sim.entities.get(tankPid)!;
@@ -2123,7 +2123,7 @@ describe('Nythraxis raid encounter', () => {
     teleport(sim, deadPid, origin.x + 8, origin.z + 82);
     deadPlayer.dead = true;
     deadPlayer.hp = 0;
-    const warlockPid = sim.addPlayer('warlock', 'PetOwner');
+    const warlockPid = sim.addPlayer('mage', 'PetOwner');
     teleport(sim, warlockPid, origin.x + 12, origin.z + 82);
     const pet = summonImp(sim, warlockPid);
     teleport(sim, pet.id, origin.x + 14, origin.z + 82);
@@ -2160,7 +2160,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not detonate Soul Rend on pets or dead players even if a stale mark exists', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     const tank = sim.entities.get(tankPid)!;
@@ -2173,7 +2173,7 @@ describe('Nythraxis raid encounter', () => {
     teleport(sim, deadPid, origin.x + 2, origin.z + 82);
     deadPlayer.dead = true;
     deadPlayer.hp = 0;
-    const warlockPid = sim.addPlayer('warlock', 'PetOwner');
+    const warlockPid = sim.addPlayer('mage', 'PetOwner');
     const pet = summonImp(sim, warlockPid);
     teleport(sim, pet.id, origin.x + 4, origin.z + 82);
     pet.hp = pet.maxHp;
@@ -2220,7 +2220,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('interrupts Deathless Rage when three players channel the wardstones', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     engage(boss, sim.entities.get(tankPid)!);
@@ -2249,7 +2249,7 @@ describe('Nythraxis raid encounter', () => {
     const channels = deathlessChannelObjects(sim, origin);
     expect(channels).toHaveLength(3);
     const channelers = channels.map((ward, i) => {
-      const pid = sim.addPlayer('priest', `Ward${i}`);
+      const pid = sim.addPlayer('acolyte', `Ward${i}`);
       teleport(sim, pid, ward.pos.x, ward.pos.z);
       sim.targetEntity(ward.id, pid);
       sim.interact(pid);
@@ -2270,7 +2270,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not reset a wardstone channel when the same player interacts again', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     engage(boss, sim.entities.get(tankPid)!);
@@ -2296,7 +2296,7 @@ describe('Nythraxis raid encounter', () => {
     sim.tick();
 
     const ward = objects(sim, 'bastion_ward_stone', origin)[0];
-    const pid = sim.addPlayer('priest', 'WardSpam');
+    const pid = sim.addPlayer('acolyte', 'WardSpam');
     teleport(sim, pid, ward.pos.x, ward.pos.z);
     sim.targetEntity(ward.id, pid);
     sim.interact(pid);
@@ -2312,7 +2312,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not interrupt Deathless Rage unless all three wardstone channels complete', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -2363,7 +2363,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not interrupt Deathless Rage when one player completes all wardstones', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -2408,7 +2408,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('starts wardstone channels through the object click pickup path', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
     engage(boss, sim.entities.get(tankPid)!);
@@ -2434,7 +2434,7 @@ describe('Nythraxis raid encounter', () => {
     sim.tick();
 
     const ward = objects(sim, 'bastion_ward_stone', origin)[0];
-    const pid = sim.addPlayer('priest', 'Clicker');
+    const pid = sim.addPlayer('acolyte', 'Clicker');
     teleport(sim, pid, ward.pos.x, ward.pos.z);
     expect(sim.pickUpObject(ward.id, pid)).toBe(true);
 
@@ -2450,7 +2450,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('never leashes/resets when kited — keeps chasing instead of evading home', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -2473,7 +2473,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('resets only on a full wipe (every player in the arena dead)', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -2492,7 +2492,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('seals the royal door while engaged and reopens it when Nythraxis dies', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -2520,7 +2520,7 @@ describe('Nythraxis raid encounter', () => {
       () => now,
       (nowMs) => nextRaidResetMs(nowMs),
     );
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -2545,7 +2545,7 @@ describe('Nythraxis raid encounter', () => {
       () => now,
       (nowMs) => nextRaidResetMs(nowMs),
     );
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     // enterRaid moves only the tank through the door: the raid fills stay at the
     // world spawn, outside the arena and the boss room. A member who released
     // (or camped the door) must still be locked by the kill, or one unlocked
@@ -2577,7 +2577,7 @@ describe('Nythraxis raid encounter', () => {
       () => now,
       (nowMs) => nextRaidResetMs(nowMs),
     );
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     // Bring one raider inside and park them in the east wing: inside the arena
     // walls (the 260yd boss room) but OUTSIDE the generic 120-wide instance
@@ -2606,7 +2606,7 @@ describe('Nythraxis raid encounter', () => {
       () => now,
       (nowMs) => nextRaidResetMs(nowMs),
     );
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     attune(sim, tankPid);
     formRaid(sim, tankPid);
     sim.setDungeonDifficulty('heroic', tankPid);
@@ -2650,7 +2650,7 @@ describe('Nythraxis raid encounter', () => {
     // a plain 24h day rather than a realm-local 3 AM reset (the server's behavior).
     const now = 1_000_000;
     const sim = makeWorld(() => now);
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     const boss = mob(sim, 'nythraxis_scourge_of_thornpeak');
@@ -2663,7 +2663,7 @@ describe('Nythraxis raid encounter', () => {
 
   it('does not allow dueling inside the Nythraxis boss arena', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Tank');
+    const a = sim.addPlayer('swordman', 'Tank');
     const b = sim.addPlayer('mage', 'Mage');
     attune(sim, a);
     attune(sim, b);

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function chatEvents(events: SimEvent[]): Extract<SimEvent, { type: 'chat' }>[] {
@@ -20,9 +20,9 @@ function errorText(sim: Sim, cmd: string, pid: number): string | undefined {
 }
 
 describe('/savedmana command', () => {
-  it('reports mana parked while a druid is shapeshifted', () => {
+  it('reports mana parked while a acolyte is shapeshifted', () => {
     const sim = makeWorld();
-    const d = sim.addPlayer('druid', 'Ash');
+    const d = sim.addPlayer('acolyte', 'Ash');
     sim.tick();
     const e = sim.entities.get(d)!;
     // simulate bear form: the mana bar is swapped for rage and the mana pool
@@ -37,7 +37,7 @@ describe('/savedmana command', () => {
 
   it('aliases /parkedmana and /sm work too', () => {
     const sim = makeWorld();
-    const d = sim.addPlayer('druid', 'Ash');
+    const d = sim.addPlayer('acolyte', 'Ash');
     sim.tick();
     const e = sim.entities.get(d)!;
     e.resourceType = 'energy';
@@ -48,9 +48,9 @@ describe('/savedmana command', () => {
     expect(errorText(sim, '/sm', d)).toBe(expected);
   });
 
-  it('explains a druid that is not shapeshifted has no parked mana', () => {
+  it('explains a acolyte that is not shapeshifted has no parked mana', () => {
     const sim = makeWorld();
-    const d = sim.addPlayer('druid', 'Ash');
+    const d = sim.addPlayer('acolyte', 'Ash');
     sim.tick();
     expect(errorText(sim, '/savedmana', d)).toBe(
       'Your mana is not parked — you are not shapeshifted.',
@@ -59,7 +59,7 @@ describe('/savedmana command', () => {
 
   it('reports nothing parked when shifted with an empty saved pool', () => {
     const sim = makeWorld();
-    const d = sim.addPlayer('druid', 'Ash');
+    const d = sim.addPlayer('acolyte', 'Ash');
     sim.tick();
     const e = sim.entities.get(d)!;
     e.resourceType = 'rage';
@@ -70,7 +70,7 @@ describe('/savedmana command', () => {
 
   it('tells non-mana classes the mechanic never applies', () => {
     const sim = makeWorld();
-    const w = sim.addPlayer('warrior', 'Bron');
+    const w = sim.addPlayer('swordman', 'Bron');
     sim.tick();
     expect(errorText(sim, '/savedmana', w)).toBe(
       'Only mana-using classes park mana; your class never does.',

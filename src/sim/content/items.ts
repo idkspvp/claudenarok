@@ -1,33 +1,19 @@
 import type { ItemDef, PlayerClass } from '../types';
 
-// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands warrior
+// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands swordman
 // rewards to paladins/shamans etc., so the lock must admit the whole group).
-const WAR: PlayerClass[] = ['warrior', 'paladin', 'shaman'];
-const MAG: PlayerClass[] = ['mage', 'priest', 'warlock', 'druid'];
-const ROG: PlayerClass[] = ['rogue', 'hunter'];
+const WAR: PlayerClass[] = ['swordman'];
+const MAG: PlayerClass[] = ['mage', 'acolyte'];
+const ROG: PlayerClass[] = ['thief', 'archer'];
 // Feral druid weapons. A bespoke, druid-only lock: it is NOT one of the three
 // weapon-proficiency groups, so weaponArchetypeForItem returns null and
 // canEquipItem falls through to this literal list (see src/sim/equipment_rules.ts).
 // Bear form swings with the equipped weapon, so these carry real 2H dps + str/agi/sta.
-export const FERAL: PlayerClass[] = ['druid'];
+export const FERAL: PlayerClass[] = [];
 // Every caster class, for held-offhand stat sticks (no armor class / weapon
 // proficiency: the literal requiredClass list is the whole rule for held_offhand).
-export const CASTER_ALL: PlayerClass[] = [
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-];
-const CASTER_WEAPON_CLASSES: PlayerClass[] = [
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-];
+export const CASTER_ALL: PlayerClass[] = ['mage', 'acolyte'];
+const CASTER_WEAPON_CLASSES: PlayerClass[] = ['mage', 'acolyte'];
 
 // ---------------------------------------------------------------------------
 // Items
@@ -1062,7 +1048,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 34, vit: 1 },
     sellValue: 130,
     buyValue: 1300,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   eastbrook_chain_vest: {
     id: 'eastbrook_chain_vest',

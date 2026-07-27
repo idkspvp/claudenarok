@@ -236,7 +236,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 170, vit: 5, str: 3 },
     sellValue: 800,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   revenant_silk_robe: {
     id: 'revenant_silk_robe',
@@ -247,7 +247,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 60, int: 5, luk: 3 },
     sellValue: 800,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   nightwalk_jerkin: {
     id: 'nightwalk_jerkin',
@@ -258,7 +258,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 105, agi: 6, vit: 2 },
     sellValue: 800,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   zealotsbane_blade: {
     id: 'zealotsbane_blade',
@@ -269,7 +269,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 18, max: 29, speed: 2.3 },
     stats: { str: 6, vit: 2 },
     sellValue: 900,
-    requiredClass: ['warrior', 'rogue', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'thief', 'archer'],
   },
   emberwood_staff: {
     id: 'emberwood_staff',
@@ -280,7 +280,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 20, max: 33, speed: 3.0 },
     stats: { int: 6, luk: 2 },
     sellValue: 900,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   cultist_flayer: {
     id: 'cultist_flayer',
@@ -291,7 +291,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 12, max: 19, speed: 1.7, dagger: true },
     stats: { agi: 8 },
     sellValue: 900,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   drogmar_warboots: {
     id: 'drogmar_warboots',
@@ -302,7 +302,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 85, str: 3, vit: 4 },
     sellValue: 950,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   ironvein_pickblade: {
     id: 'ironvein_pickblade',
@@ -313,7 +313,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 13, max: 21, speed: 1.8, dagger: true },
     stats: { agi: 7, vit: 2 },
     sellValue: 950,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   ironvein_lantern_staff: {
     id: 'ironvein_lantern_staff',
@@ -324,7 +324,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 19, max: 31, speed: 3.0 },
     stats: { int: 7, luk: 3 },
     sellValue: 950,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   marrowlord_boneboots: {
     id: 'marrowlord_boneboots',
@@ -335,7 +335,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 90, vit: 5, str: 2 },
     sellValue: 1050,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   // Brutok Skullsmasher (rare ogre), guaranteed trophy + warbelt
   skullsmasher_warbelt: {
@@ -365,7 +365,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 120, vit: 6, str: 4 },
     sellValue: 2200,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   emberfang_warblade: {
     id: 'emberfang_warblade',
@@ -376,7 +376,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 26, max: 41, speed: 2.5 },
     stats: { str: 8, vit: 3 },
     sellValue: 2400,
-    requiredClass: ['warrior', 'rogue', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'thief', 'archer'],
   },
   // --- quest & dungeon blues (rare) ---
   // Brutok Skullsmasher chase weapons (mutually exclusive: brutok_chase)
@@ -389,7 +389,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 24, max: 37, speed: 2.7 },
     stats: { str: 8, vit: 3 },
     sellValue: 2000,
-    requiredClass: ['warrior', 'rogue', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'thief', 'archer'],
   },
   crag_warden_cudgel: {
     id: 'crag_warden_cudgel',
@@ -400,7 +400,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 23, max: 36, speed: 3.0 },
     stats: { int: 8, luk: 4 },
     sellValue: 2000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   skullsplitter_dirk: {
     id: 'skullsplitter_dirk',
@@ -411,7 +411,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 15, max: 23, speed: 1.7, dagger: true },
     stats: { agi: 8, vit: 3 },
     sellValue: 2000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   drogmars_skullcleaver: {
     id: 'drogmars_skullcleaver',
@@ -422,7 +422,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 22, max: 35, speed: 2.6 },
     stats: { str: 7, vit: 4 },
     sellValue: 2000,
-    requiredClass: ['warrior', 'rogue', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'thief', 'archer'],
   },
   ogre_bonecharm_staff: {
     id: 'ogre_bonecharm_staff',
@@ -433,7 +433,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 24, max: 38, speed: 3.0 },
     stats: { int: 9, luk: 4 },
     sellValue: 2000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   gutripper_shiv: {
     id: 'gutripper_shiv',
@@ -444,7 +444,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 14, max: 22, speed: 1.7, dagger: true },
     stats: { agi: 8, vit: 3 },
     sellValue: 2000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   stormshard_leggings: {
     id: 'stormshard_leggings',
@@ -475,7 +475,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 210, vit: 8, str: 5 },
     sellValue: 2500,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   staff_of_velkhar: {
     id: 'staff_of_velkhar',
@@ -486,7 +486,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 27, max: 43, speed: 3.0 },
     stats: { int: 9, luk: 4 },
     sellValue: 2500,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   shadowmeld_tunic: {
     id: 'shadowmeld_tunic',
@@ -497,7 +497,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 130, agi: 9, vit: 4 },
     sellValue: 2500,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   gravewyrm_scale_hauberk: {
     id: 'gravewyrm_scale_hauberk',
@@ -508,7 +508,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 230, vit: 8, str: 5 },
     sellValue: 3000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   wyrmcult_grand_robe: {
     id: 'wyrmcult_grand_robe',
@@ -519,7 +519,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 75, int: 9, luk: 4 },
     sellValue: 3000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   wyrmscale_jerkin: {
     id: 'wyrmscale_jerkin',
@@ -530,7 +530,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 145, agi: 9, vit: 4 },
     sellValue: 3000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   gravewyrm_stalkers_treads: {
     id: 'gravewyrm_stalkers_treads',
@@ -541,7 +541,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 105, agi: 5, vit: 3 },
     sellValue: 3200,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   gravewyrm_sabatons: {
     id: 'gravewyrm_sabatons',
@@ -552,7 +552,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 145, str: 4, vit: 4 },
     sellValue: 3200,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   wyrmcult_soulsteps: {
     id: 'wyrmcult_soulsteps',
@@ -563,7 +563,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'rare',
     stats: { armor: 68, int: 5, luk: 3 },
     sellValue: 3200,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   deathlord_warplate: {
     id: 'deathlord_warplate',
@@ -575,7 +575,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 270, str: 8, vit: 10 },
     sellValue: 9000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   necromancers_starshroud: {
     id: 'necromancers_starshroud',
@@ -587,7 +587,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 92, int: 11, luk: 7 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   wyrmshadow_harness: {
     id: 'wyrmshadow_harness',
@@ -599,7 +599,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 170, agi: 12, vit: 6 },
     sellValue: 9000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   deathlord_legguards: {
     id: 'deathlord_legguards',
@@ -611,7 +611,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 240, str: 8, vit: 8 },
     sellValue: 9000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   deathlord_sabatons: {
     id: 'deathlord_sabatons',
@@ -623,7 +623,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 205, str: 7, vit: 8 },
     sellValue: 9000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   necromancers_soulsteps: {
     id: 'necromancers_soulsteps',
@@ -635,7 +635,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 80, int: 8, luk: 4 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   necromancers_legwraps: {
     id: 'necromancers_legwraps',
@@ -647,7 +647,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 86, int: 13, luk: 7 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   wyrmshadow_treads: {
     id: 'wyrmshadow_treads',
@@ -659,7 +659,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 145, agi: 7, vit: 5 },
     sellValue: 9000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   wyrmshadow_legguards: {
     id: 'wyrmshadow_legguards',
@@ -671,7 +671,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 155, agi: 10, vit: 6 },
     sellValue: 9000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   // --- the three epics (Korzul drops) ---
   wyrmfang_greatblade: {
@@ -688,7 +688,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // TWOHAND_STAT_MULT) = 23 points; a 2H's compensation lives on the dps side.
     stats: { str: 14, vit: 9 },
     sellValue: 8000,
-    requiredClass: ['warrior', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'archer'],
   },
   staff_of_the_gravewyrm: {
     id: 'staff_of_the_gravewyrm',
@@ -699,7 +699,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 32, max: 52, speed: 3.0 },
     stats: { int: 12, luk: 6 },
     sellValue: 8000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   fang_of_korzul: {
     id: 'fang_of_korzul',
@@ -710,7 +710,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     weapon: { min: 19, max: 30, speed: 1.7, dagger: true },
     stats: { agi: 12, vit: 6 },
     sellValue: 8000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   // --- Inventory 2.0 epics: one per armor archetype, filling the new slots and
   // named into the existing Barrowlord/Mournweave/Nightfang Korzul epic families.
@@ -726,7 +726,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 245, str: 7, vit: 8 },
     sellValue: 9000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   necromancers_soulspire_mantle: {
     id: 'necromancers_soulspire_mantle',
@@ -738,7 +738,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 70, int: 9, luk: 5 },
     sellValue: 9000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   wyrmshadow_talongrips: {
     id: 'wyrmshadow_talongrips',
@@ -750,7 +750,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 110, agi: 9, vit: 4 },
     sellValue: 9000,
-    requiredClass: ['rogue', 'hunter'],
+    requiredClass: ['thief', 'archer'],
   },
   // --- Thunzharr, the Waking Peak (world boss): epic GLOVES that extend the
   // Tier-2 set families to a third piece. Named and stat-shaped to match each
@@ -764,7 +764,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 180, str: 6, vit: 7 },
     sellValue: 3600,
-    requiredClass: ['warrior', 'paladin'],
+    requiredClass: ['swordman'],
     set: 'crownforged', // 3rd Bonewrought piece, unlocks the set's 3-piece bonus
   },
   nighttalon_grips: {
@@ -776,7 +776,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 110, agi: 8, vit: 5 },
     sellValue: 3600,
-    requiredClass: ['rogue', 'hunter', 'druid'],
+    requiredClass: ['thief', 'archer'],
     set: 'nighttalon', // 3rd Direfang piece, unlocks the set's 3-piece bonus
   },
   soulflame_gloves: {
@@ -788,7 +788,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 60, int: 8, vit: 5 },
     sellValue: 3600,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
     set: 'soulflame', // 3rd Wraithfire piece, unlocks the set's 3-piece bonus
   },
   stormcallers_handguards: {
@@ -800,7 +800,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 130, int: 8, vit: 5 },
     sellValue: 3600,
-    requiredClass: ['shaman'],
+    requiredClass: [],
     set: 'stormcallers', // 3rd Galecall piece, unlocks the set's 3-piece bonus
   },
   // --- Thunzharr, the Waking Peak (world boss): epic BELTS, each family's fourth
@@ -814,7 +814,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 150, str: 7, vit: 6 },
     sellValue: 3600,
-    requiredClass: ['warrior', 'paladin'],
+    requiredClass: ['swordman'],
     set: 'crownforged',
   },
   nighttalon_waistband: {
@@ -826,7 +826,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 95, agi: 8, vit: 5 },
     sellValue: 3600,
-    requiredClass: ['rogue', 'hunter', 'druid'],
+    requiredClass: ['thief', 'archer'],
     set: 'nighttalon',
   },
   soulflame_cord: {
@@ -838,7 +838,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 50, int: 8, luk: 5 },
     sellValue: 3600,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
     set: 'soulflame',
   },
   stormcallers_waistguard: {
@@ -850,7 +850,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     stats: { armor: 110, int: 8, vit: 5 },
     sellValue: 3600,
-    requiredClass: ['shaman'],
+    requiredClass: [],
     set: 'stormcallers',
   },
   deathless_heartwood: {
@@ -867,7 +867,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // mainhand budget.
     stats: { luk: 17, vit: 13, int: 14 },
     sellValue: 25000,
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
     // Life and decay: a damaging spell may fester a nature DoT (Deathbloom); a heal
     // may bloom a nature heal-over-time on its target (Lifebloom).
     weaponProcs: [
@@ -904,19 +904,19 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'legendary',
     weapon: { min: 46, max: 74, speed: 2.8 },
     // Rebalanced into a str/agi/sta hybrid within the fixed 44-pt legendary
-    // mainhand budget: 15 agi makes it a viable hunter ranged weapon (ranged AP +
-    // crit) while it stays usable by its warrior/paladin owners.
+    // mainhand budget: 15 agi makes it a viable archer ranged weapon (ranged AP +
+    // crit) while it stays usable by its swordman/paladin owners.
     stats: { str: 15, agi: 15, vit: 14 },
     sellValue: 25000,
-    requiredClass: ['warrior', 'rogue', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'thief', 'archer'],
     // Thunderfury-style on-hit: a nature arc that blasts the target and chains to
     // nearby foes, and slows the primary target's attack speed.
     weaponProcs: [
       {
         id: 'thronebane_arc',
         name: 'Chain Arc',
-        // Fires on any weapon strike: a melee swing for its warrior/paladin owners,
-        // or a hunter's Auto Shot (which shoots this same weapon).
+        // Fires on any weapon strike: a melee swing for its swordman/paladin owners,
+        // or a archer's Auto Shot (which shoots this same weapon).
         trigger: 'weaponHit',
         chance: 0.1,
         effects: [
@@ -939,7 +939,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // and adds a complementary secondary (heroic_variants.ts). Off the stat budget.
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['warrior', 'paladin'],
+    requiredClass: ['swordman'],
   },
   crownforged_warspaulders: {
     id: 'crownforged_warspaulders',
@@ -952,7 +952,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 260, str: 7, vit: 8 },
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['warrior', 'paladin'],
+    requiredClass: ['swordman'],
   },
   nighttalon_crown: {
     id: 'nighttalon_crown',
@@ -965,7 +965,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 190, agi: 10, vit: 7 },
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['rogue', 'hunter', 'druid'],
+    requiredClass: ['thief', 'archer'],
   },
   nighttalon_shoulderguards: {
     id: 'nighttalon_shoulderguards',
@@ -978,7 +978,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 165, agi: 9, vit: 6 },
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['rogue', 'hunter', 'druid'],
+    requiredClass: ['thief', 'archer'],
   },
   soulflame_cowl: {
     id: 'soulflame_cowl',
@@ -991,7 +991,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 105, int: 11, vit: 6 },
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   soulflame_mantle: {
     id: 'soulflame_mantle',
@@ -1004,7 +1004,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 92, int: 9, vit: 6 },
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   stormcallers_crown: {
     id: 'stormcallers_crown',
@@ -1017,7 +1017,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 225, int: 10, vit: 7 },
     critRating: 20,
     sellValue: 12000,
-    requiredClass: ['shaman'],
+    requiredClass: [],
   },
   stormcallers_spaulders: {
     id: 'stormcallers_spaulders',
@@ -1030,7 +1030,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 190, int: 8, vit: 7 },
     critRating: 20,
     sellValue: 12000,
-    requiredClass: ['shaman'],
+    requiredClass: [],
   },
   // --- Nythraxis raid (normal): the missing offhand-slot + two-hander epics.
   // All four register at item level 29 (source 20 + epic 6 + raid 3), the same
@@ -1053,11 +1053,11 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // Physical melee identity: Hit, like the crownforged pieces.
     hitRating: 20,
     sellValue: 12000,
-    // The warrior weapon group MINUS rogue: rogues never equip two-handers
+    // The swordman weapon group MINUS thief: rogues never equip two-handers
     // (equipment_rules), and requiredClass must honestly list who can equip.
     // The list no longer matches WARRIOR_WEAPON_CLASSES, so it resolves by
     // literal membership.
-    requiredClass: ['warrior', 'hunter', 'shaman', 'paladin'],
+    requiredClass: ['swordman', 'archer'],
   },
   direfang_greatblade: {
     id: 'direfang_greatblade',
@@ -1073,9 +1073,9 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // Physical melee identity: Hit, like the nighttalon pieces.
     hitRating: 20,
     sellValue: 12000,
-    // A bespoke hunter lock (not a proficiency group): the agi identity is the
-    // hunter's, and handing it to the rogue group would trade away dual wield.
-    requiredClass: ['hunter'],
+    // A bespoke archer lock (not a proficiency group): the agi identity is the
+    // archer's, and handing it to the thief group would trade away dual wield.
+    requiredClass: ['archer'],
   },
   bonewrought_bulwark: {
     id: 'bonewrought_bulwark',
@@ -1097,7 +1097,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // Physical tank identity: Hit (threat), like the crownforged pieces.
     hitRating: 20,
     sellValue: 12000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   wraithfire_orb: {
     id: 'wraithfire_orb',
@@ -1115,7 +1115,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     sellValue: 12000,
     // The caster weapon-proficiency group list (CASTER_WEAPON_CLASSES); kind
     // held_offhand equips by the literal requiredClass.
-    requiredClass: ['mage', 'priest', 'warlock', 'shaman', 'paladin', 'druid'],
+    requiredClass: ['mage', 'acolyte'],
   },
   // --- vendor food & drink (Quartermaster Bree) ---
   trail_hardtack: {
@@ -1188,7 +1188,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     stats: { armor: 112, vit: 2 },
     sellValue: 560,
     buyValue: 5600,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman'],
   },
   craghorn_staff: {
     id: 'craghorn_staff',

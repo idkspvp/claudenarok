@@ -19,7 +19,7 @@ import { isSpecialized, tierCapability } from '../src/sim/professions/wheel';
 import { type CharacterState, Sim } from '../src/sim/sim';
 import { samplePlayerMeta } from './parity/trace';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 
 function metaOf(sim: Sim, pid: number) {
   // biome-ignore lint/suspicious/noExplicitAny: test reaches into sim internals
@@ -128,7 +128,7 @@ describe('applyMasteryReset (pure, in place)', () => {
 describe('the reset fires at load-time normalize', () => {
   it('zeroes both maps on a pre-curve save', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Reset', { state: resetSave() });
+    const pid = sim.addPlayer('swordman', 'Reset', { state: resetSave() });
     const meta = metaOf(sim, pid);
     for (const craft of CRAFT_RING) expect(meta.craftSkills[craft.id], craft.id).toBe(0);
     for (const id of GATHERING_PROFESSION_IDS) expect(meta.gatheringProficiency[id], id).toBe(0);
@@ -144,7 +144,7 @@ describe('the reset fires at load-time normalize', () => {
     // biome-ignore lint/suspicious/noExplicitAny: fixture shaping
     delete (s as any).renown;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'NoProof', { state: s });
+    const pid = sim.addPlayer('swordman', 'NoProof', { state: s });
     const meta = metaOf(sim, pid);
     for (const id of [
       'prog_first_craft',
@@ -164,7 +164,7 @@ describe('the reset fires at load-time normalize', () => {
     // biome-ignore lint/suspicious/noExplicitAny: legacy save shape under test
     (s as any).professions = { mining: 60, herbalism: 10 };
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Legacy', { state: s });
+    const pid = sim.addPlayer('swordman', 'Legacy', { state: s });
     const meta = metaOf(sim, pid);
     for (const id of GATHERING_PROFESSION_IDS) expect(meta.gatheringProficiency[id], id).toBe(0);
     for (const craft of CRAFT_RING) expect(meta.craftSkills[craft.id], craft.id).toBe(0);
@@ -173,7 +173,7 @@ describe('the reset fires at load-time normalize', () => {
 
 describe('the keep ledger (one decisive pin per row)', () => {
   const sim = makeSim();
-  const pid = sim.addPlayer('warrior', 'Keeper', { state: resetSave() });
+  const pid = sim.addPlayer('swordman', 'Keeper', { state: resetSave() });
   const meta = metaOf(sim, pid);
 
   it('inventory items KEPT', () => {
@@ -241,7 +241,7 @@ describe('the keep ledger (one decisive pin per row)', () => {
 describe('one-shot: the flag serializes literal true and never re-fires', () => {
   it('round-trips true, and regained skills survive relog, restart, and a later deploy', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Once', { state: resetSave() });
+    const pid = sim.addPlayer('swordman', 'Once', { state: resetSave() });
     const blob = sim.serializeCharacter(pid);
     if (!blob) throw new Error('serializeCharacter returned null');
     expect(blob.masteryResetApplied).toBe(true);
@@ -254,7 +254,7 @@ describe('one-shot: the flag serializes literal true and never re-fires', () => 
     // biome-ignore lint/suspicious/noExplicitAny: the legacy dual-write mirror
     (blob as any).professions = { ...(blob as any).professions, mining: 25 };
     const sim2 = makeSim(43);
-    const pid2 = sim2.addPlayer('warrior', 'Once', { state: blob });
+    const pid2 = sim2.addPlayer('swordman', 'Once', { state: blob });
     const meta2 = metaOf(sim2, pid2);
     expect(meta2.craftSkills.armorcrafting).toBe(40);
     expect(meta2.gatheringProficiency.mining).toBe(25);
@@ -264,7 +264,7 @@ describe('one-shot: the flag serializes literal true and never re-fires', () => 
     if (!blob2) throw new Error('serializeCharacter returned null');
     expect(blob2.masteryResetApplied).toBe(true);
     const sim3 = makeSim(44);
-    const pid3 = sim3.addPlayer('warrior', 'Once', { state: blob2 });
+    const pid3 = sim3.addPlayer('swordman', 'Once', { state: blob2 });
     expect(metaOf(sim3, pid3).craftSkills.armorcrafting).toBe(40);
     expect(metaOf(sim3, pid3).gatheringProficiency.mining).toBe(25);
   });
@@ -277,14 +277,14 @@ describe('one-shot: the flag serializes literal true and never re-fires', () => 
     // makes the acceptance conscious, per the rollback-pin
     // precedent.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Rolled', { state: resetSave() });
+    const pid = sim.addPlayer('swordman', 'Rolled', { state: resetSave() });
     const blob = sim.serializeCharacter(pid);
     if (!blob) throw new Error('serializeCharacter returned null');
     blob.craftSkills = { ...blob.craftSkills, armorcrafting: 40 };
     // biome-ignore lint/performance/noDelete: modeling the pre-reset blob shape
     delete blob.masteryResetApplied;
     const sim2 = makeSim(43);
-    const pid2 = sim2.addPlayer('warrior', 'Rolled', { state: blob });
+    const pid2 = sim2.addPlayer('swordman', 'Rolled', { state: blob });
     expect(metaOf(sim2, pid2).craftSkills.armorcrafting).toBe(0);
     expect(metaOf(sim2, pid2).pendingMasteryResetNotice).toBe(true);
   });
@@ -293,7 +293,7 @@ describe('one-shot: the flag serializes literal true and never re-fires', () => 
 describe('the mail-phase notice letter', () => {
   it('arrives exactly once, on the first tick after the reset load', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Notice', { state: resetSave() });
+    const pid = sim.addPlayer('swordman', 'Notice', { state: resetSave() });
     expect(sim.mailUnreadFor(pid)).toBe(0);
     sim.tick();
     expect(sim.mailUnreadFor(pid)).toBe(1);
@@ -307,19 +307,19 @@ describe('the mail-phase notice letter', () => {
 
   it('a reloaded flag-true character gets no letter at all', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Notice', { state: resetSave() });
+    const pid = sim.addPlayer('swordman', 'Notice', { state: resetSave() });
     sim.tick();
     const blob = sim.serializeCharacter(pid);
     if (!blob) throw new Error('serializeCharacter returned null');
     const sim2 = makeSim(43);
-    const pid2 = sim2.addPlayer('warrior', 'Notice', { state: blob });
+    const pid2 = sim2.addPlayer('swordman', 'Notice', { state: blob });
     for (let i = 0; i < 40; i++) sim2.tick();
     expect(sim2.mailUnreadFor(pid2)).toBe(0);
   });
 
   it('a new character gets no reset and no notice (construction path)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Fresh');
+    const pid = sim.addPlayer('swordman', 'Fresh');
     const meta = metaOf(sim, pid);
     expect(meta.pendingMasteryResetNotice).toBe(false);
     for (let i = 0; i < 40; i++) sim.tick();
@@ -339,7 +339,7 @@ describe('re-crossing the 75/100 thresholds after the reset', () => {
     // biome-ignore lint/suspicious/noExplicitAny: fixture shaping
     delete (s as any).archetype;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Recross', { state: s });
+    const pid = sim.addPlayer('swordman', 'Recross', { state: s });
     const meta = metaOf(sim, pid);
     sim.tick(); // drains the one reset notice letter
     const renownBefore = meta.renown;
@@ -377,7 +377,7 @@ describe('re-crossing the 75/100 thresholds after the reset', () => {
     // biome-ignore lint/suspicious/noExplicitAny: fixture shaping
     (s as any).deeds.prog_grandmaster_armorcrafting = '2026-01-04';
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'CapRecross', { state: s });
+    const pid = sim.addPlayer('swordman', 'CapRecross', { state: s });
     const meta = metaOf(sim, pid);
     sim.tick(); // drains the one reset notice letter
     expect(meta.craftSkills.armorcrafting).toBe(0); // the reset really fired
@@ -403,7 +403,7 @@ describe('re-crossing the 75/100 thresholds after the reset', () => {
     // biome-ignore lint/suspicious/noExplicitAny: fixture shaping
     (s as any).deeds.prog_armorcrafting_50 = '2026-01-03';
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'CapFresh', { state: s });
+    const pid = sim.addPlayer('swordman', 'CapFresh', { state: s });
     const meta = metaOf(sim, pid);
     sim.tick();
     expect(meta.deedsEarned.has('prog_grandmaster_armorcrafting')).toBe(false);
@@ -428,7 +428,7 @@ describe('re-crossing the 75/100 thresholds after the reset', () => {
     // biome-ignore lint/suspicious/noExplicitAny: fixture shaping
     delete (s as any).deeds.prog_mining_100;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'FreshCross', { state: s });
+    const pid = sim.addPlayer('swordman', 'FreshCross', { state: s });
     const meta = metaOf(sim, pid);
     sim.tick();
     expect(meta.deedsEarned.has('prog_mining_100')).toBe(false);
@@ -447,7 +447,7 @@ describe('re-crossing the 75/100 thresholds after the reset', () => {
 describe('parity: zero new sampled PlayerMeta fields', () => {
   it('samplePlayerMeta(fresh meta) contains no one-time load-flag key', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Sampled');
+    const pid = sim.addPlayer('swordman', 'Sampled');
     const sample = samplePlayerMeta(metaOf(sim, pid)) as Record<string, unknown>;
     expect(Object.keys(sample)).not.toContain('pendingMasteryResetNotice');
     expect(Object.keys(sample)).not.toContain('masteryResetApplied');

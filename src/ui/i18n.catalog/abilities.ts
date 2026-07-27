@@ -1477,7 +1477,7 @@ const classAbilityNamesEn = {
       [
         'berserker_stance',
         'Reckless Stance',
-        'A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury warrior always fights in this stance.',
+        'A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury swordman always fights in this stance.',
       ],
       [
         'sweeping_strikes',

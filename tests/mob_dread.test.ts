@@ -4,7 +4,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman' });
 
 // No SHIPPED mob carries `dread` anymore: the Gravecaller Summoner lost its "Wail
 // of the Grave" fear-on-hit in the OP-crowd-control nerf. The fear-on-hit ENGINE

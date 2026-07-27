@@ -17,7 +17,7 @@ const SISTER_NHALIA_ID = 'sister_nhalia_drowned_canticle';
 const DT = 1 / 20;
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 function teleport(sim: Sim, x: number, z: number) {

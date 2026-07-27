@@ -55,7 +55,7 @@ describe('Hourglass allied cancellation online', () => {
   it('routes cancel_aura to the authoritative simulation and stops every benefit', () => {
     const server = new GameServer();
     const mageSession = server.join(fakeWs(), 1, 1, 'Chrona', 'mage', null);
-    const allySession = server.join(fakeWs(), 2, 2, 'Guard', 'warrior', null);
+    const allySession = server.join(fakeWs(), 2, 2, 'Guard', 'swordman', null);
     if ('error' in mageSession || 'error' in allySession) throw new Error('join failed');
 
     server.sim.setPlayerLevel(14, mageSession.pid);

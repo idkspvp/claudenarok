@@ -42,11 +42,11 @@ describe('heal Spell Power scaling (effect_dispatch heal/hot wiring)', () => {
   it('a direct heal (Lesser Heal) heals for more with Spell Power', () => {
     // Two identical seeded sims that differ ONLY by Spell Power (which draws no rng),
     // so the heal roll and crit outcome match; the whole delta is the SP rider.
-    const zero = makeSim('priest', 12, 0);
+    const zero = makeSim('acolyte', 12, 0);
     castAndDrain(zero.sim, zero.p, zero.meta, 'lesser_heal');
     const healedZero = zero.p.hp - 1;
 
-    const buffed = makeSim('priest', 12, 300);
+    const buffed = makeSim('acolyte', 12, 300);
     castAndDrain(buffed.sim, buffed.p, buffed.meta, 'lesser_heal');
     const healedBuffed = buffed.p.hp - 1;
 
@@ -55,11 +55,11 @@ describe('heal Spell Power scaling (effect_dispatch heal/hot wiring)', () => {
   });
 
   it('a pure HoT (Renew) adds the DoT-coefficient rider to each tick', () => {
-    const zero = makeSim('priest', 12, 0);
+    const zero = makeSim('acolyte', 12, 0);
     castAndDrain(zero.sim, zero.p, zero.meta, 'renew');
     const baseTick = hotAura(zero.p, 'renew').value;
 
-    const buffed = makeSim('priest', 12, 300);
+    const buffed = makeSim('acolyte', 12, 300);
     castAndDrain(buffed.sim, buffed.p, buffed.meta, 'renew');
     const buffedTick = hotAura(buffed.p, 'renew').value;
 
@@ -69,11 +69,11 @@ describe('heal Spell Power scaling (effect_dispatch heal/hot wiring)', () => {
   });
 
   it('a hybrid heal+HoT (Regrowth) does NOT double-dip: its HoT tick takes no rider', () => {
-    const zero = makeSim('druid', 14, 0);
+    const zero = makeSim('acolyte', 14, 0);
     castAndDrain(zero.sim, zero.p, zero.meta, 'regrowth');
     const baseTick = hotAura(zero.p, 'regrowth').value;
 
-    const buffed = makeSim('druid', 14, 300);
+    const buffed = makeSim('acolyte', 14, 300);
     castAndDrain(buffed.sim, buffed.p, buffed.meta, 'regrowth');
     const buffedTick = hotAura(buffed.p, 'regrowth').value;
 

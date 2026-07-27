@@ -588,7 +588,7 @@ export const DUNGEON_MOBS: Record<string, MobTemplate> = {
     family: 'undead',
     elite: true,
     // Deliberately CC-able (unlike the other adds): the raid MUST stun/silence him
-    // to break his escalating heal channel. See channelHeal and the priest-add
+    // to break his escalating heal channel. See channelHeal and the acolyte-add
     // exemption in the Nythraxis control-immunity gate (sim.applyAura).
     ccImmune: false,
     // Squishy: low health so a focused raid can burn him, but his heal is strong,

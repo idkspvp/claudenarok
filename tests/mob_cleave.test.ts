@@ -39,9 +39,9 @@ describe('mob cleave', () => {
   });
 
   it('a landed swing splashes onto a second player near the primary target', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const main = sim.addPlayer('warrior', 'Tank');
-    const near = sim.addPlayer('warrior', 'Cleaved');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const main = sim.addPlayer('swordman', 'Tank');
+    const near = sim.addPlayer('swordman', 'Cleaved');
     const olen = spawnOlen(sim);
     const mainE = placePlayer(sim, main, 1, 0); // primary target, in melee
     const nearE = placePlayer(sim, near, 1, 4); // 4yd from primary, within radius 8
@@ -68,9 +68,9 @@ describe('mob cleave', () => {
   });
 
   it('does not splash onto a player outside the cleave radius', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const main = sim.addPlayer('warrior', 'Tank');
-    const far = sim.addPlayer('warrior', 'Safe');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const main = sim.addPlayer('swordman', 'Tank');
+    const far = sim.addPlayer('swordman', 'Safe');
     const olen = spawnOlen(sim);
     const mainE = placePlayer(sim, main, 1, 0);
     const farE = placePlayer(sim, far, 1, 40); // well beyond radius 8
@@ -90,9 +90,9 @@ describe('mob cleave', () => {
   });
 
   it('a non-cleaving mob does not splash', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const main = sim.addPlayer('warrior', 'Tank');
-    const near = sim.addPlayer('warrior', 'Bystander');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const main = sim.addPlayer('swordman', 'Tank');
+    const near = sim.addPlayer('swordman', 'Bystander');
     // A plain wolf has no cleave field.
     const wolf = createMob((sim as any).nextId++, MOBS.forest_wolf, 5, { x: 0, y: 0, z: 0 });
     wolf.hostile = true;

@@ -59,7 +59,7 @@ const LEGACY_SAVE = {
 } as unknown as CharacterState;
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function metaOf(sim: Sim, pid: number) {
@@ -150,7 +150,7 @@ describe('grandfatherKnownRecipes (pure, idempotent)', () => {
 describe('legacy save load (the one-time union) and persistence', () => {
   it('loading a pre-training save unions all 21 ids and persists recipesGrandfathered true', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Legacy', { state: legacySave() });
+    const pid = sim.addPlayer('swordman', 'Legacy', { state: legacySave() });
     const meta = metaOf(sim, pid);
 
     expect(meta.recipesGrandfathered).toBe(true);
@@ -167,11 +167,11 @@ describe('legacy save load (the one-time union) and persistence', () => {
 
   it('re-loading the serialized state changes nothing (round-trip stability)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Legacy', { state: legacySave() });
+    const pid = sim.addPlayer('swordman', 'Legacy', { state: legacySave() });
     const firstState = sim.serializeCharacter(pid)!;
 
     const reloaded = makeSim(7);
-    const reloadedPid = reloaded.addPlayer('warrior', 'Legacy', { state: firstState });
+    const reloadedPid = reloaded.addPlayer('swordman', 'Legacy', { state: firstState });
     const reloadedMeta = metaOf(reloaded, reloadedPid);
     expect([...reloadedMeta.knownRecipes].sort()).toEqual(
       [...(firstState.knownRecipes ?? [])].sort(),
@@ -190,7 +190,7 @@ describe('legacy save load (the one-time union) and persistence', () => {
     const state = legacySave();
     delete (state as { knownRecipes?: string[] }).knownRecipes;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ancient', { state });
+    const pid = sim.addPlayer('swordman', 'Ancient', { state });
     const meta = metaOf(sim, pid);
     expect(meta.recipesGrandfathered).toBe(true);
     for (const id of PRE_TRAINING_RECIPE_IDS) {
@@ -211,7 +211,7 @@ describe('legacy save load (the one-time union) and persistence', () => {
     delete (full as { recipesGrandfathered?: boolean }).recipesGrandfathered;
 
     const back = makeSim(11);
-    const pid = back.addPlayer('warrior', 'Returned', { state: full });
+    const pid = back.addPlayer('swordman', 'Returned', { state: full });
     const meta = metaOf(back, pid);
     expect(meta.recipesGrandfathered).toBe(true);
     for (const recipe of COMBO_RECIPES) {
@@ -225,7 +225,7 @@ describe('legacy save load (the one-time union) and persistence', () => {
     const state = legacySave();
     state.recipesGrandfathered = true;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'PostCut', { state });
+    const pid = sim.addPlayer('swordman', 'PostCut', { state });
     const meta = metaOf(sim, pid);
     expect(meta.recipesGrandfathered).toBe(true);
     expect(meta.knownRecipes.size).toBe(0);

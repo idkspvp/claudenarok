@@ -37,7 +37,7 @@ const browser = await puppeteer.launch({
 
 async function stageScene(page) {
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  const booted = await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar' });
+  const booted = await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar' });
   console.log('offline boot:', booted);
   await page.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
   await sleep(800);
@@ -110,7 +110,7 @@ async function desktopPass() {
   if (MODE === 'base') {
     // Base branch: only the options panel (the row does not exist yet).
     await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-    const booted = await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar' });
+    const booted = await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar' });
     console.log('offline boot:', booted);
     await page.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
     await sleep(800);

@@ -100,7 +100,7 @@ async function openSession() {
     localStorage.setItem('woc_perf_overlay', JSON.stringify({ metrics: { gpu: true } }));
   });
   await page.goto(URL, { waitUntil: 'networkidle0', timeout: 90000 });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Tour', settleMs: 1500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Tour', settleMs: 1500 });
 
   // Skip the first-spawn intro cinematic (game/spawn_cinematic.ts): desktop
   // skips with Escape. No-op once the cinematic has already landed.

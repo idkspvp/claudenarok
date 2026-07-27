@@ -15,10 +15,10 @@ type SimInternals = {
 };
 
 function setup() {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
-  const tapper = sim.addPlayer('warrior', 'Tapper');
-  const stranger = sim.addPlayer('warrior', 'Stranger');
+  const tapper = sim.addPlayer('swordman', 'Tapper');
+  const stranger = sim.addPlayer('swordman', 'Stranger');
   sim.tick();
 
   // Both standing on the corpse so the interact-range gate is satisfied.

@@ -13,21 +13,21 @@ import type { Entity } from '../src/sim/types';
 import { dist2d, SUNDER_ARMOR_PCT_PER_STACK } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-function makeSim(cls: Parameters<typeof simClass>[0] = 'warrior', seed = 42) {
+function makeSim(cls: Parameters<typeof simClass>[0] = 'swordman', seed = 42) {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
 }
 // type helper only — keeps makeSim's signature honest without importing PlayerClass
 function simClass(
   cls:
-    | 'warrior'
+    | 'swordman'
     | 'mage'
-    | 'rogue'
-    | 'druid'
-    | 'hunter'
-    | 'priest'
-    | 'paladin'
-    | 'shaman'
-    | 'warlock',
+    | 'thief'
+    | 'acolyte'
+    | 'archer'
+    | 'acolyte'
+    | 'swordman'
+    | 'acolyte'
+    | 'mage',
 ) {
   return cls;
 }
@@ -108,7 +108,7 @@ describe('dropThreat (single-attacker removal)', () => {
 
 describe('threat from damage', () => {
   it('damage lands on the hate table 1:1 without modifiers (plus the aggro seed)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
     hit(sim, sim.player, wolf, 100);
@@ -117,7 +117,7 @@ describe('threat from damage', () => {
   });
 
   it('defensive stance: -10% damage dealt, x1.3 threat on what lands', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(10);
     sim.castAbility('defensive_stance');
     sim.tick();
@@ -134,7 +134,7 @@ describe('threat from damage', () => {
   });
 
   it('bear form multiplies threat by 1.3', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(10);
     sim.castAbility('bear_form');
     sim.tick();
@@ -145,7 +145,7 @@ describe('threat from damage', () => {
   });
 
   it('righteous fury multiplies HOLY threat by 1.6 and leaves physical alone', () => {
-    const sim = makeSim('paladin');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(16);
     sim.castAbility('righteous_fury');
     sim.tick();
@@ -158,7 +158,7 @@ describe('threat from damage', () => {
   });
 
   it('consecration burns the ground every 2 seconds from 0s to 8s and generates holy threat each pulse', () => {
-    const sim = makeSim('paladin');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(20);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -189,7 +189,7 @@ describe('threat from damage', () => {
   });
 
   it('classic flat threat values resolve per rank (heroic strike 20/39)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     expect(sim.resolvedAbility('heroic_strike')!.threatFlat).toBe(20);
     sim.setPlayerLevel(8);
     expect(sim.resolvedAbility('heroic_strike')!.threatFlat).toBe(39);
@@ -200,9 +200,9 @@ describe('threat from damage', () => {
 
 describe('healing threat', () => {
   function partyOfTwo() {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const tank = sim.addPlayer('warrior', 'Tank');
-    const healer = sim.addPlayer('priest', 'Healer');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.addPlayer('swordman', 'Tank');
+    const healer = sim.addPlayer('acolyte', 'Healer');
     sim.partyInvite(healer, tank);
     sim.partyAccept(healer);
     return { sim, tank: sim.entities.get(tank)!, healer: sim.entities.get(healer)! };
@@ -253,9 +253,9 @@ describe('healing threat', () => {
   });
 
   it('healing a non-party player creates threat on mobs already fighting them', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const tank = sim.entities.get(sim.addPlayer('warrior', 'Tank'))!;
-    const healer = sim.entities.get(sim.addPlayer('priest', 'OutsideHealer'))!;
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.entities.get(sim.addPlayer('swordman', 'Tank'))!;
+    const healer = sim.entities.get(sim.addPlayer('acolyte', 'OutsideHealer'))!;
     const wolf = nearestMob(sim, 'forest_wolf', tank);
     beefUp(wolf);
     hit(sim, tank, wolf, 50);
@@ -277,8 +277,8 @@ describe('healing threat', () => {
 
 describe('classic pull-over rules (110% melee / 130% ranged)', () => {
   function aggroSetup() {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const a = sim.entities.get(sim.addPlayer('warrior', 'A'))!;
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const a = sim.entities.get(sim.addPlayer('swordman', 'A'))!;
     const b = sim.entities.get(sim.addPlayer('mage', 'B'))!;
     const wolf = nearestMob(sim, 'forest_wolf', a);
     teleport(sim, a, wolf.pos.x + 2, wolf.pos.z);
@@ -372,7 +372,7 @@ describe('classic pull-over rules (110% melee / 130% ranged)', () => {
 
   it('when the target dies the mob swings to the next-highest threat, not the nearest', () => {
     const { sim, a, b, wolf } = aggroSetup();
-    const c = sim.entities.get(sim.addPlayer('rogue', 'C'))!;
+    const c = sim.entities.get(sim.addPlayer('thief', 'C'))!;
     teleport(sim, b, wolf.pos.x - 4, wolf.pos.z); // nearer...
     teleport(sim, c, wolf.pos.x + 12, wolf.pos.z); // ...but c has more threat
     wolf.threat.set(b.id, 50);
@@ -400,8 +400,8 @@ describe('classic pull-over rules (110% melee / 130% ranged)', () => {
 
 describe('taunt and growl', () => {
   it('taunt matches the top threat and forces 3 seconds of attention', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const tank = sim.entities.get(sim.addPlayer('warrior', 'Tank'))!;
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.entities.get(sim.addPlayer('swordman', 'Tank'))!;
     const dps = sim.entities.get(sim.addPlayer('mage', 'Dps'))!;
     sim.setPlayerLevel(10, tank.id);
     const wolf = nearestMob(sim, 'forest_wolf', tank);
@@ -423,9 +423,9 @@ describe('taunt and growl', () => {
   });
 
   it('keeps a taunted mob focused through higher-threat pull-over attempts', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const tank = sim.entities.get(sim.addPlayer('warrior', 'Tank'))!;
-    const dps = sim.entities.get(sim.addPlayer('rogue', 'Dps'))!;
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.entities.get(sim.addPlayer('swordman', 'Tank'))!;
+    const dps = sim.entities.get(sim.addPlayer('thief', 'Dps'))!;
     sim.setPlayerLevel(10, tank.id);
     sim.setPlayerLevel(10, dps.id);
     const wolf = nearestMob(sim, 'forest_wolf', tank);
@@ -454,7 +454,7 @@ describe('taunt and growl', () => {
   });
 
   it('level 5 Warrior Goad locks Deeprock Digger focus and expires back to threat', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman' });
     const tank = sim.player;
     const dps = sim.entities.get(sim.addPlayer('mage', 'Dps'))!;
     sim.setPlayerLevel(5, tank.id);
@@ -498,10 +498,10 @@ describe('taunt and growl', () => {
   });
 
   it('level 10 paladins know Sacred Goad and taunt at 30 yards', () => {
-    expect(abilitiesKnownAt('paladin', 10).some((a) => a.def.id === 'holy_taunt')).toBe(true);
+    expect(abilitiesKnownAt('swordman', 10).some((a) => a.def.id === 'holy_taunt')).toBe(true);
 
-    const sim = new Sim({ seed: 42, playerClass: 'paladin', noPlayer: true });
-    const tank = sim.entities.get(sim.addPlayer('paladin', 'Tank'))!;
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.entities.get(sim.addPlayer('swordman', 'Tank'))!;
     const dps = sim.entities.get(sim.addPlayer('mage', 'Dps'))!;
     sim.setPlayerLevel(10, tank.id);
     const wolf = nearestMob(sim, 'forest_wolf', tank);
@@ -523,13 +523,13 @@ describe('taunt and growl', () => {
   });
 
   it('Sacred Goad always lands (never resists), even against a higher-level mob', () => {
-    // The paladin taunt is holy-school (a spell), so on impact it used to roll a full
+    // The swordman taunt is holy-school (a spell), so on impact it used to roll a full
     // resist. A resisted taunt silently breaks tanking, so taunts now skip the roll.
     // Against a +3 mob the old roll would resist a large fraction of the time; across
     // many seeds the taunt must now land every time and never emit a 'resist'.
     for (let seed = 1; seed <= 40; seed++) {
-      const sim = new Sim({ seed, playerClass: 'paladin', noPlayer: true });
-      const tank = sim.entities.get(sim.addPlayer('paladin', 'Tank'))!;
+      const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
+      const tank = sim.entities.get(sim.addPlayer('swordman', 'Tank'))!;
       const dps = sim.entities.get(sim.addPlayer('mage', 'Dps'))!;
       sim.setPlayerLevel(10, tank.id);
       const wolf = nearestMob(sim, 'forest_wolf', tank);
@@ -557,7 +557,7 @@ describe('taunt and growl', () => {
   });
 
   it('growl requires bear form', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 2, wolf.pos.z);
@@ -574,7 +574,7 @@ describe('taunt and growl', () => {
 
 describe('sunder armor', () => {
   it('stacks an armor debuff and generates stance-scaled flat threat', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 2, wolf.pos.z);
@@ -602,9 +602,9 @@ describe('sunder armor', () => {
   });
 });
 
-describe('rogue stealth', () => {
+describe('thief stealth', () => {
   it('shrinks mob detection radius and breaks on damage', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     sim.setPlayerLevel(2);
     const wolf = nearestMob(sim, 'forest_wolf');
     sim.player.level = wolf.level; // no level-difference radius skew
@@ -616,7 +616,7 @@ describe('rogue stealth', () => {
     teleport(sim, sim.player, wolf.pos.x + 6, wolf.pos.z);
     for (let i = 0; i < 20; i++) sim.tick();
     expect(wolf.aiState).toBe('idle');
-    // damage breaks stealth, and the wolf notices an unstealthed rogue at 6yd
+    // damage breaks stealth, and the wolf notices an unstealthed thief at 6yd
     hit(sim, wolf, sim.player, 1);
     expect(sim.player.auras.some((a) => a.kind === 'stealth')).toBe(false);
     teleport(sim, sim.player, wolf.pos.x + 6, wolf.pos.z);
@@ -625,7 +625,7 @@ describe('rogue stealth', () => {
   });
 
   it('scales stealth detection by observer level for creatures', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 10;
@@ -649,29 +649,29 @@ describe('rogue stealth', () => {
     // A stealthed player standing closest shrank the detection radius and, being
     // nearest, was the only candidate considered — so a visible groupmate well
     // inside the normal aggro radius was silently ignored.
-    const sim = new Sim({ seed: 42, playerClass: 'rogue', noPlayer: true });
-    const rogue = sim.entities.get(sim.addPlayer('rogue', 'Sneak'))!;
-    const warrior = sim.entities.get(sim.addPlayer('warrior', 'Visible'))!;
-    sim.setPlayerLevel(5, rogue.id);
-    sim.setPlayerLevel(5, warrior.id);
-    const wolf = nearestMob(sim, 'forest_wolf', rogue);
+    const sim = new Sim({ seed: 42, playerClass: 'thief', noPlayer: true });
+    const thief = sim.entities.get(sim.addPlayer('thief', 'Sneak'))!;
+    const swordman = sim.entities.get(sim.addPlayer('swordman', 'Visible'))!;
+    sim.setPlayerLevel(5, thief.id);
+    sim.setPlayerLevel(5, swordman.id);
+    const wolf = nearestMob(sim, 'forest_wolf', thief);
     wolf.wanderTarget = null;
     // equal levels: no level-difference radius skew (forest_wolf aggroRadius 10,
     // shrunk to ~2.5 while stealthed)
     wolf.level = 5;
-    // rogue is NEAREST (4yd) but stealthed and outside its shrunk radius;
-    // the warrior is visible at 6yd, well inside the wolf's 10yd aggro radius
-    teleport(sim, rogue, wolf.pos.x + 4, wolf.pos.z);
-    teleport(sim, warrior, wolf.pos.x + 6, wolf.pos.z);
-    sim.castAbility('stealth', rogue.id);
-    expect(rogue.auras.some((a) => a.kind === 'stealth')).toBe(true);
+    // thief is NEAREST (4yd) but stealthed and outside its shrunk radius;
+    // the swordman is visible at 6yd, well inside the wolf's 10yd aggro radius
+    teleport(sim, thief, wolf.pos.x + 4, wolf.pos.z);
+    teleport(sim, swordman, wolf.pos.x + 6, wolf.pos.z);
+    sim.castAbility('stealth', thief.id);
+    expect(thief.auras.some((a) => a.kind === 'stealth')).toBe(true);
     for (let i = 0; i < 20 && wolf.aiState === 'idle'; i++) sim.tick();
     expect(wolf.aiState).not.toBe('idle');
-    expect(wolf.aggroTargetId).toBe(warrior.id);
+    expect(wolf.aggroTargetId).toBe(swordman.id);
   });
 
   it('cannot stealth in combat; acting breaks stealth; ambush requires it', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     sim.setPlayerLevel(16);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 2, wolf.pos.z);
@@ -694,7 +694,7 @@ describe('rogue stealth', () => {
   });
 
   it('sprint can be used before or during stealth without breaking stealth', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     sim.setPlayerLevel(10);
 
     sim.castAbility('stealth');
@@ -714,9 +714,9 @@ describe('rogue stealth', () => {
   });
 });
 
-describe('hunter pets', () => {
+describe('archer pets', () => {
   function tamedSetup() {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     const originalWolfId = wolf.id;
@@ -731,15 +731,15 @@ describe('hunter pets', () => {
 
   function activePetDuel() {
     const { sim, wolf: pet } = tamedSetup();
-    const rogueId = sim.addPlayer('rogue', 'Sneak', { autoEquip: true });
-    const rogue = sim.entities.get(rogueId)!;
-    sim.setPlayerLevel(10, rogue.id);
-    teleport(sim, rogue, sim.player.pos.x + 3, sim.player.pos.z);
-    sim.duelRequest(rogue.id, sim.playerId);
-    sim.duelAccept(rogue.id);
+    const rogueId = sim.addPlayer('thief', 'Sneak', { autoEquip: true });
+    const thief = sim.entities.get(rogueId)!;
+    sim.setPlayerLevel(10, thief.id);
+    teleport(sim, thief, sim.player.pos.x + 3, sim.player.pos.z);
+    sim.duelRequest(thief.id, sim.playerId);
+    sim.duelAccept(thief.id);
     for (let i = 0; i < 20 * 5 && sim.duelFor(sim.playerId)?.state !== 'active'; i++) sim.tick();
     expect(sim.duelFor(sim.playerId)?.state).toBe('active');
-    return { sim, pet, rogue };
+    return { sim, pet, thief };
   }
 
   it('tame beast creates a loyal pet copy and temporarily despawns the wild target', () => {
@@ -758,78 +758,59 @@ describe('hunter pets', () => {
   });
 
   it('drops a stale enemy player target when that player stealths out of detection', () => {
-    const { sim, pet, rogue } = activePetDuel();
+    const { sim, pet, thief } = activePetDuel();
     teleport(sim, sim.player, 0, 0);
     teleport(sim, pet, 1, 0);
-    teleport(sim, rogue, 30, 0);
-    pet.aggroTargetId = rogue.id;
+    teleport(sim, thief, 30, 0);
+    pet.aggroTargetId = thief.id;
     pet.inCombat = true;
 
-    sim.castAbility('stealth', rogue.id);
-    expect(rogue.auras.some((a) => a.kind === 'stealth')).toBe(true);
+    sim.castAbility('stealth', thief.id);
+    expect(thief.auras.some((a) => a.kind === 'stealth')).toBe(true);
     sim.tick();
 
     expect(pet.aggroTargetId).toBe(null);
     expect(pet.inCombat).toBe(false);
   });
 
-  it('blocks hunter pet damage against an undetected stealthed enemy player', () => {
-    const { sim, pet, rogue } = activePetDuel();
+  it('blocks archer pet damage against an undetected stealthed enemy player', () => {
+    const { sim, pet, thief } = activePetDuel();
     teleport(sim, pet, 0, 0);
-    teleport(sim, rogue, 30, 0);
-    sim.castAbility('stealth', rogue.id);
-    const stealthedHp = rogue.hp;
+    teleport(sim, thief, 30, 0);
+    sim.castAbility('stealth', thief.id);
+    const stealthedHp = thief.hp;
 
-    hit(sim, pet, rogue, 100);
-    expect(rogue.hp).toBe(stealthedHp);
+    hit(sim, pet, thief, 100);
+    expect(thief.hp).toBe(stealthedHp);
 
-    teleport(sim, rogue, 2, 0);
-    hit(sim, pet, rogue, 100);
-    expect(rogue.hp).toBeLessThan(stealthedHp);
+    teleport(sim, thief, 2, 0);
+    hit(sim, pet, thief, 100);
+    expect(thief.hp).toBeLessThan(stealthedHp);
   });
 
   it('friendly target spells can affect controlled pets', () => {
     const { sim, wolf: pet } = tamedSetup();
-    const druidId = sim.addPlayer('druid', 'Druid');
-    const druid = sim.entities.get(druidId)!;
-    teleport(sim, druid, pet.pos.x + 5, pet.pos.z);
-    druid.resource = druid.maxResource;
+    // The Druid and Paladin arms of this case went with those classes (D1); the
+    // Acolyte owns the surviving targeted friendly buff and the targeted heal.
+    const acolyteId = sim.addPlayer('acolyte', 'Acolyte');
+    const acolyte = sim.entities.get(acolyteId)!;
+    teleport(sim, acolyte, pet.pos.x + 5, pet.pos.z);
+    acolyte.resource = acolyte.maxResource;
     const maxHpBefore = pet.maxHp;
 
-    // Mark of the Wild is now a percent all-attributes raid buff; on a pet its
-    // Stamina share scales the HP pool (pets derive no armor/AP from attributes).
-    sim.targetEntity(pet.id, druidId);
-    sim.castAbility('mark_of_the_wild', druidId);
-    expect(pet.auras.some((a) => a.id === 'mark_of_the_wild')).toBe(true);
+    // Power Word: Fortitude is a percent Stamina raid buff; on a pet that share
+    // scales the HP pool (pets derive no armor/AP from attributes).
+    sim.targetEntity(pet.id, acolyteId);
+    sim.castAbility('power_word_fortitude', acolyteId);
+    expect(pet.auras.some((a) => a.id === 'power_word_fortitude')).toBe(true);
     expect(pet.maxHp).toBeGreaterThan(maxHpBefore);
-
-    const priestId = sim.addPlayer('priest', 'Priest');
-    const priest = sim.entities.get(priestId)!;
-    teleport(sim, priest, pet.pos.x + 6, pet.pos.z);
-    priest.resource = priest.maxResource;
-    const maxHpAfterMotW = pet.maxHp;
-    sim.targetEntity(pet.id, priestId);
-    sim.castAbility('power_word_fortitude', priestId);
-    expect(pet.maxHp).toBeGreaterThan(maxHpAfterMotW);
-
-    const paladinId = sim.addPlayer('paladin', 'Paladin');
-    const paladin = sim.entities.get(paladinId)!;
-    sim.setPlayerLevel(4, paladinId);
-    teleport(sim, paladin, pet.pos.x + 7, pet.pos.z);
-    paladin.resource = paladin.maxResource;
-    // Blessing of Might is now a percent attack-power raid buff. Give the pet a base
-    // AP so the percent has something to scale (tamed pets otherwise deal template
-    // damage with 0 attack power, leaving a percent buff inert).
-    pet.attackPower = 50;
-    const attackPowerBefore = (sim as any).effectiveAttackPower(pet);
-    sim.targetEntity(pet.id, paladinId);
-    sim.castAbility('blessing_of_might', paladinId);
-    expect((sim as any).effectiveAttackPower(pet)).toBeGreaterThan(attackPowerBefore);
 
     pet.hp = pet.maxHp - 40;
     const damagedHp = pet.hp;
     for (let i = 0; i < 20 * 2; i++) sim.tick();
-    sim.castAbility('healing_touch', druidId);
+    acolyte.resource = acolyte.maxResource;
+    sim.targetEntity(pet.id, acolyteId);
+    sim.castAbility('lesser_heal', acolyteId);
     for (let i = 0; i < 20 * 3; i++) sim.tick();
 
     expect(pet.hp).toBeGreaterThan(damagedHp);
@@ -848,7 +829,7 @@ describe('hunter pets', () => {
     const boar = nearestMob(sim, 'wild_boar');
     teleport(sim, sim.player, boar.pos.x + 4, boar.pos.z);
     teleport(sim, pet, boar.pos.x + 5, boar.pos.z);
-    hit(sim, sim.player, boar, 5); // boar comes for the hunter
+    hit(sim, sim.player, boar, 5); // boar comes for the archer
     let petThreat = 0;
     for (let i = 0; i < 20 * 20 && petThreat === 0; i++) {
       sim.tick();
@@ -897,7 +878,7 @@ describe('hunter pets', () => {
     beefUp(boar);
     teleport(sim, sim.player, boar.pos.x + 4, boar.pos.z);
     teleport(sim, pet, boar.pos.x + 5, boar.pos.z);
-    hit(sim, sim.player, boar, 5); // boar comes for the hunter; pet assists
+    hit(sim, sim.player, boar, 5); // boar comes for the archer; pet assists
 
     // let the boar transfer onto the tanking pet
     for (let i = 0; i < 20 * 20 && boar.aggroTargetId !== pet.id; i++) sim.tick();
@@ -913,10 +894,10 @@ describe('hunter pets', () => {
 
   it('dismiss does not release permanent pets back to the wild', () => {
     const { sim, wolf } = tamedSetup();
-    const priestId = sim.addPlayer('priest', 'Priest');
-    const priest = sim.entities.get(priestId)!;
-    teleport(sim, priest, wolf.pos.x + 5, wolf.pos.z);
-    priest.resource = priest.maxResource;
+    const priestId = sim.addPlayer('acolyte', 'Priest');
+    const acolyte = sim.entities.get(priestId)!;
+    teleport(sim, acolyte, wolf.pos.x + 5, wolf.pos.z);
+    acolyte.resource = acolyte.maxResource;
     const maxHpBefore = wolf.maxHp;
     sim.targetEntity(wolf.id, priestId);
     sim.castAbility('power_word_fortitude', priestId);
@@ -932,7 +913,7 @@ describe('hunter pets', () => {
   });
 
   it('a tamed beast that dies stays owned until revived or abandoned', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'hunter', respawnSeconds: 2, autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'archer', respawnSeconds: 2, autoEquip: true });
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     const originalWolfId = wolf.id;
@@ -991,8 +972,8 @@ describe('hunter pets', () => {
       autoTaunt: true,
     });
 
-    const restored = new Sim({ seed: 42, playerClass: 'hunter', noPlayer: true, autoEquip: true });
-    const pid = restored.addPlayer('hunter', 'Hunter', { state });
+    const restored = new Sim({ seed: 42, playerClass: 'archer', noPlayer: true, autoEquip: true });
+    const pid = restored.addPlayer('archer', 'Hunter', { state });
     const pet = restored.petOf(pid, true)!;
     expect(pet).toBeTruthy();
     expect(pet.name).toBe('Barkley');
@@ -1060,7 +1041,7 @@ describe('hunter pets', () => {
   it('pet taunts do not force bosses onto the pet', () => {
     const { sim, wolf: pet } = tamedSetup();
     while ((sim.partyOf(sim.playerId)?.members.length ?? 1) < 5) {
-      const fill = sim.addPlayer('priest', `RaidFill${sim.players.size}`);
+      const fill = sim.addPlayer('acolyte', `RaidFill${sim.players.size}`);
       sim.partyInvite(fill);
       sim.partyAccept(fill);
     }
@@ -1069,7 +1050,7 @@ describe('hunter pets', () => {
     const boss = [...sim.entities.values()].find(
       (e) => e.kind === 'mob' && e.templateId === 'nythraxis_scourge_of_thornpeak' && !e.dead,
     )!;
-    const tankId = sim.addPlayer('warrior', 'Tank');
+    const tankId = sim.addPlayer('swordman', 'Tank');
     const tank = sim.entities.get(tankId)!;
     teleport(sim, tank, boss.pos.x + 3, boss.pos.z);
     teleport(sim, sim.player, boss.pos.x + 8, boss.pos.z);
@@ -1088,7 +1069,7 @@ describe('hunter pets', () => {
     expect(pet.petTauntTimer).toBe(10);
   });
 
-  it('hunter aspects apply to the active pet', () => {
+  it('archer aspects apply to the active pet', () => {
     const { sim, wolf: pet } = tamedSetup();
     const apBefore = (sim as any).effectiveAttackPower(pet);
     sim.castAbility('aspect_of_the_hawk');
@@ -1123,7 +1104,7 @@ describe('hunter pets', () => {
     expect(sim.petOf(sim.playerId, true)).toBe(null);
   });
 
-  it('pets default defensive, level with the hunter, and regenerate health out of combat', () => {
+  it('pets default defensive, level with the archer, and regenerate health out of combat', () => {
     const { sim, wolf: pet } = tamedSetup();
     expect(pet.petMode).toBe('defensive');
     expect(pet.level).toBe(sim.player.level);
@@ -1140,7 +1121,7 @@ describe('hunter pets', () => {
   });
 
   it('tame validation: too-high level and elites are refused', () => {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 11;
@@ -1154,9 +1135,9 @@ describe('hunter pets', () => {
   });
 });
 
-describe('druid forms', () => {
+describe('acolyte forms', () => {
   it('wolf form runs on energy, bear on rage, and mana is restored on shift-out', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(12);
     const manaBefore = sim.player.resource;
     sim.castAbility('cat_form');
@@ -1185,7 +1166,7 @@ describe('druid forms', () => {
   // These apply in recalcPlayerStats; the bug the reporter hit was the missing
   // cat-form *visual* (renderer), but lock the stat math so it can't regress.
   it('bear form raises armor, maximum health, and attack power', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(20);
     sim.tick();
     const armorBefore = sim.player.stats.armor;
@@ -1200,7 +1181,7 @@ describe('druid forms', () => {
   });
 
   it('wolf form raises attack power', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(20);
     sim.tick();
     const apBefore = sim.player.attackPower;
@@ -1211,7 +1192,7 @@ describe('druid forms', () => {
   });
 
   it('bear form generates rage when taking damage from enemy level', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(12);
     sim.castAbility('bear_form');
     sim.tick();
@@ -1226,9 +1207,9 @@ describe('druid forms', () => {
   });
 
   it('bear charge is learned with Bruin Form and only works while shifted', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(10);
-    expect(abilitiesKnownAt('druid', 10).some((a) => a.def.id === 'bear_charge')).toBe(true);
+    expect(abilitiesKnownAt('acolyte', 10).some((a) => a.def.id === 'bear_charge')).toBe(true);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
     teleport(sim, sim.player, wolf.pos.x + 12, wolf.pos.z);
@@ -1252,7 +1233,7 @@ describe('druid forms', () => {
   });
 
   it('claw needs wolf form, builds combo points, and ferocious bite spends them', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(14);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf); // must survive a level-14 cat long enough to be bitten
@@ -1284,7 +1265,7 @@ describe('druid forms', () => {
   });
 
   it('caster spells are locked while shapeshifted', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(10);
     sim.castAbility('bear_form');
     for (let i = 0; i < 32; i++) sim.tick(); // wait out the shapeshift GCD
@@ -1299,7 +1280,7 @@ describe('druid forms', () => {
   });
 
   it('bear and wolf forms can only use their own form kits', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(14);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -1326,7 +1307,7 @@ describe('druid forms', () => {
   });
 
   it('bear form learns demoralizing roar at level 10 and lowers nearby mob attack power', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(10);
     expect(sim.known.map((k) => k.def.id)).toContain('demoralizing_roar');
     const wolf = nearestMob(sim, 'forest_wolf');
@@ -1344,7 +1325,7 @@ describe('druid forms', () => {
   });
 
   it('wolf form gains agility/AP and supports prowl into rake bleed opener', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(12);
     expect(sim.known.map((k) => k.def.id)).toEqual(
       expect.arrayContaining(['cat_form', 'prowl', 'rake']),
@@ -1382,7 +1363,7 @@ describe('druid forms', () => {
   });
 
   it('prowl slows movement without rooting and toggles off', () => {
-    const sim = makeSim('druid');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(12);
     sim.castAbility('cat_form');
     for (let i = 0; i < 32; i++) sim.tick();
@@ -1419,7 +1400,7 @@ describe('untargetable-mob self-heal (#113/#99)', () => {
   });
 
   it('does not flip a tamed pet (owned, intentionally neutral) back to hostile', () => {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 5, wolf.pos.z);
@@ -1473,7 +1454,7 @@ describe('social aggro pull radius (#102)', () => {
 
 describe('caster wand auto-attack (#94)', () => {
   it('does not aggro a hostile mob when melee auto-attack is started out of range', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 35, wolf.pos.z);
@@ -1521,7 +1502,7 @@ describe('caster wand auto-attack (#94)', () => {
 
 describe('on-next-swing cooldowns (#56)', () => {
   it('Gutting Strike applies its 6s cooldown when the queued swing resolves', () => {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleport(sim, sim.player, wolf.pos.x + 2, wolf.pos.z); // inside melee range
@@ -1538,9 +1519,9 @@ describe('on-next-swing cooldowns (#56)', () => {
   });
 });
 
-describe('shaman travel and shock mechanics', () => {
+describe('acolyte travel and shock mechanics', () => {
   it('all shock abilities share one cooldown', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -1566,7 +1547,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf toggles speed and survives damage events', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     sim.player.resource = sim.player.maxResource;
 
@@ -1595,7 +1576,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf does not drop when auto-attack cannot swing yet', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -1618,7 +1599,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf drops when auto-attack actually swings', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -1637,7 +1618,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf stays active while running and jumping', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     sim.player.resource = sim.player.maxResource;
 
@@ -1654,7 +1635,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf stays active through Thunder Ward contact, jump, and respawn cleanup', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     const wolf = nearestMob(sim, 'forest_wolf');
     beefUp(wolf);
@@ -1708,7 +1689,7 @@ describe('shaman travel and shock mechanics', () => {
   });
 
   it('Shadewolf casting is not delayed by incoming damage or standalone jump input', () => {
-    const sim = makeSim('shaman');
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     sim.player.resource = sim.player.maxResource;
     const wolf = nearestMob(sim, 'forest_wolf');
@@ -1730,13 +1711,13 @@ describe('shaman travel and shock mechanics', () => {
     expect(sim.player.auras.some((a) => a.id === 'ghost_wolf')).toBe(true);
   });
 
-  it('Shadewolf drops before casting shaman spells from the same button press', () => {
-    const sim = makeSim('shaman');
+  it('Shadewolf drops before casting acolyte spells from the same button press', () => {
+    const sim = makeSim('acolyte');
     sim.setPlayerLevel(16);
     // This test checks that *casting a spell* auto-cancels Shadewolf form.
     // Taking any damage also breaks the form, so a stray wolf swing landing
     // mid-window would drop it incidentally and make the assertions sensitive
-    // to world RNG. Make the shaman invulnerable to isolate the cast-driven
+    // to world RNG. Make the acolyte invulnerable to isolate the cast-driven
     // cancel; the wolf is still a valid target for the player's own spells.
     sim.player.gm = true;
     const wolf = nearestMob(sim, 'forest_wolf');
@@ -1778,9 +1759,9 @@ describe('shaman travel and shock mechanics', () => {
   });
 });
 
-describe('warlock demon summons', () => {
+describe('mage demon summons', () => {
   it('Summon Emberkin creates a ranged demon that casts Firebolt', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
 
     const imp = summonImp(sim);
     expect(imp.templateId).toBe('emberkin');
@@ -1811,7 +1792,7 @@ describe('warlock demon summons', () => {
   });
 
   it('warlocks heal demons with mana instead of food and cannot abandon them', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     const demon = summonImp(sim);
     demon.hp = Math.max(1, demon.maxHp - 50);
     sim.addItem('baked_bread', 1);
@@ -1841,7 +1822,7 @@ describe('warlock demon summons', () => {
   });
 
   it('Summon Gloomshade replaces the emberkin with a tank demon that Growls', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     sim.setPlayerLevel(10);
     const imp = summonImp(sim);
 
@@ -1874,7 +1855,7 @@ describe('warlock demon summons', () => {
   });
 
   it('recasting the same demon dismisses it and summons a fresh one', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     const demon = summonImp(sim);
     expect(demon.templateId).toBe('emberkin');
 
@@ -1891,7 +1872,7 @@ describe('warlock demon summons', () => {
   });
 
   it('recasting a dead demon resummons it instead of dismissing', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     const deadDemon = summonImp(sim);
     deadDemon.dead = true;
     deadDemon.hp = 0;

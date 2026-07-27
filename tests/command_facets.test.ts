@@ -96,7 +96,7 @@ describe('command facet tags (W7)', () => {
   });
 });
 
-// W8: append the pet + party cluster's tags (hunter pets, party/raid, raid-target
+// W8: append the pet + party cluster's tags (archer pets, party/raid, raid-target
 // markers). The table-consistency invariants in the W6 block above (no orphan tag, no
 // dispatch-only leak) already cover these new entries; this block pins the exact facet
 // per W8 command and that the no-wire reads (partyInfo/markerFor) stay untagged. The

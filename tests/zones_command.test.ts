@@ -1,16 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
 import { ZONES, zoneAt } from '../src/sim/data';
+import { Sim } from '../src/sim/sim';
+import type { SimEvent } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
   const e = sim.entities.get(pid)!;
-  e.pos.x = x; e.pos.z = z;
+  e.pos.x = x;
+  e.pos.z = z;
   e.pos.y = groundHeight(x, z, sim.cfg.seed);
   e.prevPos = { ...e.pos };
 }
@@ -22,7 +23,7 @@ function errorText(events: SimEvent[]): string | undefined {
 describe('/zones command', () => {
   it('is a self-only readout that is neither said nor logged', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(sim.chat('/zones', a)).toBeNull();
     const events = sim.tick();
@@ -33,7 +34,7 @@ describe('/zones command', () => {
 
   it('lists every overworld zone with its level range', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/zones', a);
     const text = errorText(sim.tick())!;
@@ -45,7 +46,7 @@ describe('/zones command', () => {
 
   it('tags the zone the player is currently standing in', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     // Stand deep in the last zone, then read.
     const last = ZONES[ZONES.length - 1];
     teleport(sim, a, 0, last.zMin + 1);
@@ -61,7 +62,7 @@ describe('/zones command', () => {
 
   it('responds the same way to the /zonelist and /worldmap aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     for (const cmd of ['/zonelist', '/worldmap']) {
       sim.chat(cmd, a);

@@ -12,7 +12,7 @@ import {
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function grantItem(sim: Sim, itemId: string, count: number, pid: number) {

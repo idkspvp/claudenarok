@@ -25,7 +25,7 @@ function chronoMage(): { sim: Sim; p: Entity } {
 // are easy to reason about. Returns the entity.
 function addAlly(sim: Sim, name: string, dx: number, dz: number, maxHp = 100_000): Entity {
   const p = sim.player;
-  const id = sim.addPlayer('warrior', name);
+  const id = sim.addPlayer('swordman', name);
   const e = sim.entities.get(id)!;
   e.pos = { x: p.pos.x + dx, y: p.pos.y, z: p.pos.z + dz };
   e.prevPos = { ...e.pos };
@@ -187,7 +187,7 @@ describe('Rewind: targeting', () => {
     const dead = addAlly(sim, 'Dead', 4, 0);
     group(sim, p.id, [near.id, far.id, dead.id]);
     // A non-group player standing in range.
-    const outsiderId = sim.addPlayer('warrior', 'Outsider');
+    const outsiderId = sim.addPlayer('swordman', 'Outsider');
     const outsider = sim.entities.get(outsiderId)!;
     outsider.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };
     outsider.maxHp = 100_000;

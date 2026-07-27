@@ -119,27 +119,19 @@ export interface EntityTranslationFallback extends EntityTranslationManifestEntr
 }
 
 const CLASS_NAME_KEYS: Record<PlayerClass, string> = {
-  warrior: 'classes.warrior',
-  paladin: 'classes.paladin',
-  hunter: 'classes.hunter',
-  rogue: 'classes.rogue',
-  priest: 'classes.priest',
-  shaman: 'classes.shaman',
+  swordman: 'classes.swordman',
+  archer: 'classes.archer',
+  thief: 'classes.thief',
+  acolyte: 'classes.acolyte',
   mage: 'classes.mage',
-  warlock: 'classes.warlock',
-  druid: 'classes.druid',
 };
 
 const CLASS_DESCRIPTION_KEYS: Record<PlayerClass, string> = {
-  warrior: 'classDetails.lore.warrior',
-  paladin: 'classDetails.lore.paladin',
-  hunter: 'classDetails.lore.hunter',
-  rogue: 'classDetails.lore.rogue',
-  priest: 'classDetails.lore.priest',
-  shaman: 'classDetails.lore.shaman',
+  swordman: 'classDetails.lore.swordman',
+  archer: 'classDetails.lore.archer',
+  thief: 'classDetails.lore.thief',
+  acolyte: 'classDetails.lore.acolyte',
   mage: 'classDetails.lore.mage',
-  warlock: 'classDetails.lore.warlock',
-  druid: 'classDetails.lore.druid',
 };
 
 const fallbackLog = new Map<string, EntityTranslationFallback>();

@@ -34,7 +34,7 @@ await new Promise((r) => setTimeout(r, 400));
 await jsClick('#btn-offline');
 await new Promise((r) => setTimeout(r, 300));
 await page.type('#char-name', 'Gatherer');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 40000 });
 await new Promise((r) => setTimeout(r, 2000));

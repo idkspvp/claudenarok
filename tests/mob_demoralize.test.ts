@@ -17,8 +17,8 @@ describe('mob demoralize-on-hit', () => {
   });
 
   it('a landed swing weakens the victim attack power via a negative buff_ap aura', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Weakened');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Weakened');
     // Attack power to actually drain: a fresh character has every point unspent.
     levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;
@@ -62,8 +62,8 @@ describe('mob demoralize-on-hit', () => {
   });
 
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
-    const sim = new Sim({ seed: 11, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Hounded');
+    const sim = new Sim({ seed: 11, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Hounded');
     // Attack power to actually drain: a fresh character has every point unspent.
     levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;
@@ -84,8 +84,8 @@ describe('mob demoralize-on-hit', () => {
   });
 
   it('an ordinary mob with no demoralize field never applies the debuff', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Safe');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Safe');
     // Attack power to actually drain: a fresh character has every point unspent.
     levelWithStats(sim, 20, pid);
     const victim = sim.entities.get(pid)!;

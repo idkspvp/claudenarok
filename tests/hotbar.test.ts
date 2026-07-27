@@ -419,11 +419,11 @@ describe('classes with per-form action bars', () => {
     }
     // the form-bar-only "Reset bar" button must never leak onto these
     for (const id of [
-      'warrior',
+      'swordman',
       'mage',
-      'rogue',
-      'priest',
-      'hunter',
+      'thief',
+      'acolyte',
+      'archer',
       'paladin',
       'shaman',
       'warlock',

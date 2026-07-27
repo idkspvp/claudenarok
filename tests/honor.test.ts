@@ -16,13 +16,13 @@ import * as arena from '../src/sim/social/arena';
 import * as fiesta from '../src/sim/social/fiesta';
 
 function world(): Sim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function liveArena(): { sim: Sim; a: number; b: number; match: ArenaMatch } {
   const sim = world();
   sim.utcDay = '2026-07-11';
-  const a = sim.addPlayer('warrior', 'Aleph', { characterId: 101 });
+  const a = sim.addPlayer('swordman', 'Aleph', { characterId: 101 });
   const b = sim.addPlayer('mage', 'Bet', { characterId: 202 });
   sim.arenaQueueJoin(a);
   sim.arenaQueueJoin(b);
@@ -37,7 +37,7 @@ function liveArena(): { sim: Sim; a: number; b: number; match: ArenaMatch } {
 function liveArena2v2(): { sim: Sim; match: ArenaMatch } {
   const sim = world();
   sim.utcDay = '2026-07-11';
-  const classes = ['warrior', 'mage', 'rogue', 'priest'] as const;
+  const classes = ['swordman', 'mage', 'thief', 'acolyte'] as const;
   const pids = classes.map((cls, i) => sim.addPlayer(cls, `Ranked${i}`, { characterId: 500 + i }));
   for (const pid of pids) sim.arenaQueueJoin(pid, '2v2');
   for (let i = 0; i < 20 * 8; i++) {
@@ -51,7 +51,7 @@ function liveArena2v2(): { sim: Sim; match: ArenaMatch } {
 function liveFiesta(): { sim: Sim; match: ArenaMatch; pids: number[] } {
   const sim = world();
   sim.utcDay = '2026-07-11';
-  const classes = ['warrior', 'mage', 'rogue', 'priest'] as const;
+  const classes = ['swordman', 'mage', 'thief', 'acolyte'] as const;
   const pids = classes.map((cls, i) => sim.addPlayer(cls, `Fiesta${i}`, { characterId: 300 + i }));
   for (const pid of pids) sim.arenaQueueJoin(pid, 'fiesta');
   for (let i = 0; i < 20 * 8; i++) {
@@ -65,7 +65,7 @@ function liveFiesta(): { sim: Sim; match: ArenaMatch; pids: number[] } {
 describe('honor currency', () => {
   it('grants spendable and lifetime honor through one event and round-trips persistence', () => {
     const sim = world();
-    const pid = sim.addPlayer('warrior', 'Saver');
+    const pid = sim.addPlayer('swordman', 'Saver');
     const meta = sim.meta(pid)!;
 
     expect(grantHonor(sim.ctx, meta, 125.9, 'arena_win')).toBe(125);
@@ -81,14 +81,14 @@ describe('honor currency', () => {
     meta.honor -= 25;
     const saved = sim.serializeCharacter(pid)!;
     const loaded = world();
-    const loadedPid = loaded.addPlayer('warrior', 'Saver', { state: saved });
+    const loadedPid = loaded.addPlayer('swordman', 'Saver', { state: saved });
     expect(loaded.meta(loadedPid)!.honor).toBe(100);
     expect(loaded.meta(loadedPid)!.lifetimeHonor).toBe(125);
   });
 
   it('ignores non-positive and non-finite grant amounts', () => {
     const sim = world();
-    const pid = sim.addPlayer('warrior', 'Guarded');
+    const pid = sim.addPlayer('swordman', 'Guarded');
     const meta = sim.meta(pid)!;
     for (const amount of [0, -1, Number.NaN, Number.POSITIVE_INFINITY]) {
       expect(grantHonor(sim.ctx, meta, amount, 'arena_win')).toBe(0);
@@ -100,7 +100,7 @@ describe('honor currency', () => {
 
   it('sanitizes malformed persisted balances and DR counters', () => {
     const seed = world();
-    const seedPid = seed.addPlayer('warrior', 'Seed');
+    const seedPid = seed.addPlayer('swordman', 'Seed');
     const state = seed.serializeCharacter(seedPid)! as unknown as Record<string, unknown>;
     state.honor = Number.NaN;
     state.lifetimeHonor = Number.POSITIVE_INFINITY;
@@ -112,7 +112,7 @@ describe('honor currency', () => {
     };
 
     const loaded = world();
-    const pid = loaded.addPlayer('warrior', 'Seed', { state: state as never });
+    const pid = loaded.addPlayer('swordman', 'Seed', { state: state as never });
     const meta = loaded.meta(pid)!;
     expect(meta.honor).toBe(0);
     expect(meta.lifetimeHonor).toBe(0);
@@ -160,7 +160,7 @@ describe('ranked Arena honor', () => {
   it('applies repeat-opponent DR, the daily taper, and UTC rollover deterministically', () => {
     const sim = world();
     sim.utcDay = '2026-07-11';
-    const pid = sim.addPlayer('warrior', 'Climber');
+    const pid = sim.addPlayer('swordman', 'Climber');
     const meta = sim.meta(pid)!;
 
     const repeat = Array.from({ length: 4 }, () =>
@@ -170,7 +170,7 @@ describe('ranked Arena honor', () => {
 
     const fresh = world();
     fresh.utcDay = '2026-07-11';
-    const freshPid = fresh.addPlayer('warrior', 'Taper');
+    const freshPid = fresh.addPlayer('swordman', 'Taper');
     const freshMeta = fresh.meta(freshPid)!;
     for (let i = 0; i < ARENA_DAILY_TAPER_START; i++) {
       expect(awardRankedArenaWinHonor(fresh.ctx, freshMeta, '1v1', `["character:${i}"]`)).toBe(25);
@@ -184,7 +184,7 @@ describe('ranked Arena honor', () => {
   it('does not reset a persisted daily window when the host has no UTC day', () => {
     const sim = world();
     sim.utcDay = '2026-07-11';
-    const pid = sim.addPlayer('warrior', 'Replay');
+    const pid = sim.addPlayer('swordman', 'Replay');
     const meta = sim.meta(pid)!;
     const key = '["name:opponent"]';
     expect(awardRankedArenaWinHonor(sim.ctx, meta, '1v1', key)).toBe(25);
@@ -216,7 +216,7 @@ describe('Fiesta honor', () => {
   it('applies per-victim kill DR and repeat-opposition completion DR', () => {
     const sim = world();
     sim.utcDay = '2026-07-11';
-    const pid = sim.addPlayer('rogue', 'Fighter');
+    const pid = sim.addPlayer('thief', 'Fighter');
     const meta = sim.meta(pid)!;
     const pairs = new Map<string, number>();
     expect(Array.from({ length: 4 }, () => awardFiestaKillHonor(sim.ctx, meta, 99, pairs))).toEqual(
@@ -243,7 +243,7 @@ describe('Fiesta honor', () => {
     );
     expect(sameTeam.sim.meta(allyKiller)!.honor).toBe(0);
 
-    const practice = new Sim({ seed: 7, playerClass: 'warrior' });
+    const practice = new Sim({ seed: 7, playerClass: 'swordman' });
     expect(practice.startFiestaPractice()).toBe(true);
     let match: ArenaMatch | null = null;
     for (let i = 0; i < 20 * 8; i++) {
@@ -272,9 +272,9 @@ describe('Fiesta honor', () => {
 describe('WARFARE damage', () => {
   it('scales hostile player damage and leaves friendly and PvE paths unchanged', () => {
     const sim = world();
-    const sourcePid = sim.addPlayer('warrior', 'Source');
+    const sourcePid = sim.addPlayer('swordman', 'Source');
     const targetPid = sim.addPlayer('mage', 'Target');
-    const friendlyPid = sim.addPlayer('priest', 'Friendly');
+    const friendlyPid = sim.addPlayer('acolyte', 'Friendly');
     const source = sim.entities.get(sourcePid)!;
     const target = sim.entities.get(targetPid)!;
     const friendly = sim.entities.get(friendlyPid)!;
@@ -303,7 +303,7 @@ describe('WARFARE damage', () => {
 
   it('clamps oversized derived fractions on the applied damage path', () => {
     const sim = world();
-    const sourcePid = sim.addPlayer('warrior', 'Source');
+    const sourcePid = sim.addPlayer('swordman', 'Source');
     const targetPid = sim.addPlayer('mage', 'Target');
     const source = sim.entities.get(sourcePid)!;
     const target = sim.entities.get(targetPid)!;

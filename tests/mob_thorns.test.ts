@@ -7,7 +7,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 
 // drop a fresh mob of `templateId` right next to the player and register it

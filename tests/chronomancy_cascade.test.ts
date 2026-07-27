@@ -56,7 +56,7 @@ function makeRaid(sim: Sim, leader: number, members: number[]): void {
 // Add a player ally at a fixed spot with a huge health pool (so conversion heals
 // never clamp) and, by default, a big chunk of missing health to receive them.
 function addAlly(sim: Sim, x: number, z: number, name: string): Entity {
-  const id = sim.addPlayer('warrior', name);
+  const id = sim.addPlayer('swordman', name);
   const e = sim.entities.get(id)!;
   e.pos.x = x;
   e.pos.z = z;

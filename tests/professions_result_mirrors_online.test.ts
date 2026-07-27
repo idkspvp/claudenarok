@@ -63,7 +63,7 @@ function joinServer(
   id: number,
   name: string,
 ): ClientSession {
-  const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -110,7 +110,7 @@ function eventFrames(sent: WireMsg[], fromIdx = 0): WireMsg[] {
 
 // The tests/snapshots.test.ts bareClient shape (identical to the shipped
 // suites): a ClientWorld without WebSocket plumbing.
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();

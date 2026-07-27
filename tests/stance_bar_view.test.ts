@@ -1,4 +1,4 @@
-// Pure view-core tests for the warrior stance bar (src/ui/stance_bar_view.ts):
+// Pure view-core tests for the swordman stance bar (src/ui/stance_bar_view.ts):
 // the HUD render model that maps the known stance ids + the worn stance to the
 // #stancebar buttons. Node-only, no DOM (UI_PURE_CORES). The sim-side stance
 // behavior (reconcile, exclusive group, stat folds) is pinned in

@@ -128,7 +128,7 @@ async function main() {
   const status = await api('/api/status');
   check('server status', status.status === 200 && status.body.ok);
 
-  // Accounts + characters (warrior starts holding worn_sword).
+  // Accounts + characters (swordman starts holding worn_sword).
   const u1 = `armorya_${uniq}`;
   const u2 = `armoryb_${uniq}`;
   const r1 = await api('/api/register', {
@@ -144,12 +144,12 @@ async function main() {
   const t2 = r2.body.token;
   const c1 = await api(
     '/api/characters',
-    { method: 'POST', body: JSON.stringify({ name: `Solha${alpha}`, class: 'warrior' }) },
+    { method: 'POST', body: JSON.stringify({ name: `Solha${alpha}`, class: 'swordman' }) },
     t1,
   );
   const c2 = await api(
     '/api/characters',
-    { method: 'POST', body: JSON.stringify({ name: `Watchb${alpha}`, class: 'warrior' }) },
+    { method: 'POST', body: JSON.stringify({ name: `Watchb${alpha}`, class: 'swordman' }) },
     t2,
   );
   check('create characters', c1.status === 200 && c2.status === 200);
@@ -180,7 +180,7 @@ async function main() {
   const ice = items.find((i) => i.itemId === 'ice_fang_sword');
   check('Ice Fang SKU (skin, 3000)', ice?.kind === 'skin' && ice?.costClaudium === 3000);
 
-  // Buy two skins: a sword (matches the warrior's worn_sword) and an axe.
+  // Buy two skins: a sword (matches the swordman's worn_sword) and an axe.
   const spend1 = await api(
     '/api/claudium/spend',
     {

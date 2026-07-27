@@ -211,14 +211,14 @@ export const SFX = [
     key: 'player_hurt',
     custom: true,
     duration: 0.6,
-    prompt: 'A human warrior grunting in sudden sharp pain from taking a hit. Single short grunt.',
+    prompt: 'A human swordman grunting in sudden sharp pain from taking a hit. Single short grunt.',
   },
   {
     key: 'player_death',
     custom: true,
     duration: 1.3,
     prompt:
-      "A human warrior's final pained death cry as he collapses to the ground. Single death cry fading out.",
+      "A human swordman's final pained death cry as he collapses to the ground. Single death cry fading out.",
   },
   {
     key: 'player_eat_food',

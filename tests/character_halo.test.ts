@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-// The priest's Light halo: per-visual geometry (PR: halo must not clip the
+// The acolyte's Light halo: per-visual geometry (PR: halo must not clip the
 // canon mage-model hat). Pins the halo.ts cache doctrine (geometry keyed by
 // radius, material keyed by color, both shared and never disposed) and the
 // manifest contract: only player_priest overrides the placement, so every
@@ -49,7 +49,7 @@ describe('class halo geometry', () => {
     // Full-construction check on the real code path (visual.ts must pass the
     // def overrides into buildHalo; dropping an argument there leaves every
     // buildHalo-only test green). Mocked loader serves a minimal rig with a
-    // head bone for every URL, so the priest def resolves without assets.
+    // head bone for every URL, so the acolyte def resolves without assets.
     vi.resetModules();
     const stubGltf = () => {
       const scene = new THREE.Group();
@@ -74,7 +74,7 @@ describe('class halo geometry', () => {
     const halo = visual.root.getObjectByName('class_halo') as THREE.Mesh;
     expect(halo).toBeDefined();
     expect(halo.position.y).toBe(1.45);
-    // no radius override: the priest rides the shared default-size geometry
+    // no radius override: the acolyte rides the shared default-size geometry
     expect((halo.geometry as THREE.PlaneGeometry).parameters.width).toBeCloseTo(1.0);
     // the caster sweeps must not overwrite buildHalo's castShadow = false
     expect(halo.castShadow).toBe(false);
@@ -96,7 +96,7 @@ describe('class halo geometry', () => {
     expect(halo.material).toBe(originalMat);
 
     // a swap DURING an active overlay must not capture the overlay clone as
-    // the halo's "original" (Shadowform is the priest's everyday overlay:
+    // the halo's "original" (Shadowform is the acolyte's everyday overlay:
     // equip something while shadowformed, then drop the form)
     visual.setShadowform(true);
     expect(halo.material).not.toBe(originalMat);
@@ -113,15 +113,15 @@ describe('class halo geometry', () => {
     vi.resetModules();
   });
 
-  it('gives the priest hat clearance and leaves every other visual on defaults', () => {
-    const priest = VISUALS.player_priest;
-    expect(priest.halo).toBe(0xffd766);
+  it('gives the acolyte hat clearance and leaves every other visual on defaults', () => {
+    const acolyte = VISUALS.player_priest;
+    expect(acolyte.halo).toBe(0xffd766);
     // Screenshot-tuned against the mage.glb hat cone; see the manifest comment.
     // Raise-only: the default-size ring clears the cone at tip height, and
     // staying below the hat's bounding-box top keeps portrait framing
     // untouched for priests.
-    expect(priest.haloUpOffset).toBe(1.45);
-    expect(priest.haloRadius).toBeUndefined();
+    expect(acolyte.haloUpOffset).toBe(1.45);
+    expect(acolyte.haloRadius).toBeUndefined();
     for (const [key, def] of Object.entries(VISUALS)) {
       if (key === 'player_priest') continue;
       // placement overrides are meaningless without a halo; a future second

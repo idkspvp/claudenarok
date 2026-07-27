@@ -17,8 +17,8 @@ import type { Entity } from '../src/sim/types';
 const SEED = 4242;
 
 function setup() {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-  const tankPid = sim.addPlayer('warrior', 'Tank');
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+  const tankPid = sim.addPlayer('swordman', 'Tank');
   sim.setPlayerLevel(20, tankPid);
   const tank = sim.entities.get(tankPid)!;
   tank.maxHp = 1e7;
@@ -48,8 +48,8 @@ function setup() {
 
 describe('summon threat seeding', () => {
   it('the raid script waves carry the same seed as spawnBossAdds', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     sim.setPlayerLevel(20, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -86,7 +86,7 @@ describe('summon threat seeding', () => {
 
   it('the healer freely heals through a summon wave without peeling it', () => {
     const { sim, tankPid, tank, adds } = setup();
-    const healerPid = sim.addPlayer('priest', 'Healer');
+    const healerPid = sim.addPlayer('acolyte', 'Healer');
     sim.setPlayerLevel(20, healerPid);
     const healer = sim.entities.get(healerPid)!;
     healer.maxHp = 1e7;

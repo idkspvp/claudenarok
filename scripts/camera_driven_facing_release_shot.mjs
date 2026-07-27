@@ -36,7 +36,7 @@ await page.waitForSelector('#btn-offline', { timeout: 60000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Camdrift');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.hud && window.__game?.renderer, { timeout: 60000 });
 await sleep(2500);

@@ -10,7 +10,7 @@
 //   - AoE:         the direct coeff times an AoE penalty (0.333)
 // Attack-power "attack spells" reuse the same shape, scaled down (RANGED_/
 // MELEE_SPELL_AP_SCALE) because Attack Power is a much larger number than Spell
-// Power: hunter shots use Ranged AP, physical melee specials use melee AP.
+// Power: archer shots use Ranged AP, physical melee specials use melee AP.
 //
 // These functions take plain numbers (and the ability def), never the Sim, so they
 // are unit-tested directly (tests/spell_scaling.test.ts) and reused by the damage
@@ -47,7 +47,7 @@ export function dotTotalCoeff(durationSec: number): number {
   return durationSec / SPELL_DOT_COEFF_DURATION;
 }
 
-// The scaling stat for an ability: Ranged Attack Power for hunter attack-spells,
+// The scaling stat for an ability: Ranged Attack Power for archer attack-spells,
 // melee Attack Power for physical-school specials, otherwise Spell Power. Reads
 // only the three derived combat ratings off the entity.
 export function abilityScalingPower(

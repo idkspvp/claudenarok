@@ -156,7 +156,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   // reachable enchant for each of its slots (see the two-layer note above). ---
 
   // Weapon: an agility option alongside the existing str (Might) and int
-  // (Spellpower), so a rogue/hunter weapon is not stuck taking a str enchant.
+  // (Spellpower), so a thief/archer weapon is not stuck taking a str enchant.
   enchant_weapon_agility: {
     id: 'enchant_weapon_agility',
     name: 'Enchant Weapon - Agility',

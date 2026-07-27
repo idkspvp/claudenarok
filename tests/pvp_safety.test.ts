@@ -8,7 +8,7 @@ import { Sim } from '../src/sim/sim';
 import type { AbilityDef, Entity, Vec3 } from '../src/sim/types';
 import { dist2d } from '../src/sim/types';
 
-function twoPlayers(clsA = 'mage', clsB = 'warrior') {
+function twoPlayers(clsA = 'mage', clsB = 'swordman') {
   const sim = new Sim({
     seed: 42,
     playerClass: clsA as any,
@@ -28,7 +28,7 @@ function twoPlayers(clsA = 'mage', clsB = 'warrior') {
   return { sim, aPid, bPid, a, b };
 }
 
-function startDuel(clsA = 'mage', clsB = 'warrior', level = 20) {
+function startDuel(clsA = 'mage', clsB = 'swordman', level = 20) {
   const setup = twoPlayers(clsA, clsB);
   const { sim, aPid, bPid, a, b } = setup;
   sim.setPlayerLevel(level, aPid);
@@ -66,7 +66,7 @@ function interruptRes(lockout = 8): ResolvedAbility {
   const def: AbilityDef = {
     id: 'test_interrupt',
     name: 'Test Interrupt',
-    class: 'rogue',
+    class: 'thief',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -102,7 +102,7 @@ const hasCc = (e: Entity) =>
 
 describe('PvP safety outside duels (#96)', () => {
   it('a player cannot polymorph another player', () => {
-    const { sim, aPid, bPid, b } = twoPlayers('mage', 'warrior');
+    const { sim, aPid, bPid, b } = twoPlayers('mage', 'swordman');
     sim.targetEntity(bPid, aPid);
     sim.castAbility('polymorph', aPid);
     expect(b.auras.some((au) => au.kind === 'polymorph')).toBe(false);
@@ -110,7 +110,7 @@ describe('PvP safety outside duels (#96)', () => {
   });
 
   it('a player cannot auto-attack another player', () => {
-    const { sim, aPid, bPid, b } = twoPlayers('warrior', 'mage');
+    const { sim, aPid, bPid, b } = twoPlayers('swordman', 'mage');
     const startHp = b.hp;
     sim.targetEntity(bPid, aPid);
     sim.startAutoAttack(aPid);
@@ -119,7 +119,7 @@ describe('PvP safety outside duels (#96)', () => {
   });
 
   it('a player AoE (Frost Nova) does not root or damage a nearby player', () => {
-    const { sim, aPid, b } = twoPlayers('mage', 'warrior');
+    const { sim, aPid, b } = twoPlayers('mage', 'swordman');
     const startHp = b.hp;
     sim.castAbility('frost_nova', aPid); // self-centred AoE root, B is 3yd away
     for (let i = 0; i < 5; i++) sim.tick();
@@ -128,7 +128,7 @@ describe('PvP safety outside duels (#96)', () => {
   });
 
   it('a player interrupt does not cancel or lock out another player', () => {
-    const { sim, a, b } = twoPlayers('rogue', 'mage');
+    const { sim, a, b } = twoPlayers('thief', 'mage');
     b.castingAbility = 'fireball';
     b.castRemaining = 1.25;
     b.castTotal = 1.5;
@@ -141,7 +141,7 @@ describe('PvP safety outside duels (#96)', () => {
   });
 
   it('an accepted duel DOES allow combat between the two players (positive control)', () => {
-    const { sim, aPid, bPid, a, b } = twoPlayers('warrior', 'mage');
+    const { sim, aPid, bPid, a, b } = twoPlayers('swordman', 'mage');
     sim.duelRequest(bPid, aPid);
     sim.duelAccept(bPid);
     // run out the countdown so the duel goes active
@@ -159,7 +159,7 @@ describe('PvP safety outside duels (#96)', () => {
 
 describe('PvP control abilities in active duels', () => {
   it('allows an interrupt between hostile duelists', () => {
-    const { sim, a, b } = startDuel('rogue', 'mage');
+    const { sim, a, b } = startDuel('thief', 'mage');
     b.castingAbility = 'fireball';
     b.castRemaining = 1.25;
     b.castTotal = 1.5;
@@ -179,7 +179,7 @@ describe('PvP control abilities in active duels', () => {
     { cls: 'paladin', ability: 'hammer_of_justice', aura: 'stun' },
     { cls: 'druid', ability: 'entangling_roots', aura: 'root' },
   ])('$ability works on hostile players', ({ cls, ability, aura }) => {
-    const { sim, aPid, b } = startDuel(cls, 'warrior');
+    const { sim, aPid, b } = startDuel(cls, 'swordman');
     if (ability === 'polymorph') b.hp = Math.max(1, b.maxHp - 120);
 
     sim.castAbility(ability, aPid);
@@ -204,7 +204,7 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it('diminishes repeated duel Polymorphs to 10s, 5s, 1s and resets after 60s', () => {
-    const { sim, aPid, b } = startDuel('mage', 'warrior', 20);
+    const { sim, aPid, b } = startDuel('mage', 'swordman', 20);
 
     // Polymorph is now a projectile whose hit roll happens on impact, so it can miss.
     // A miss does not consume a diminishing-returns stage (that only advances on a
@@ -235,7 +235,7 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it('makes feared hostile players run in a deterministic panic direction', () => {
-    const { sim, aPid, b } = startDuel('warlock', 'warrior', 20);
+    const { sim, aPid, b } = startDuel('warlock', 'swordman', 20);
 
     const start = pos(b);
     sim.castAbility('fear', aPid);
@@ -251,7 +251,7 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it('diminishes repeated duel Fears to 8s, 4s, 2s, 1s and resets after 60s', () => {
-    const { sim, aPid, b } = startDuel('warlock', 'warrior', 20);
+    const { sim, aPid, b } = startDuel('warlock', 'swordman', 20);
 
     const castFear = () => {
       // A resisted Fear applies nothing and does NOT advance diminishing returns
@@ -283,7 +283,7 @@ describe('PvP control abilities in active duels', () => {
   });
 
   it('duel stuns land at full duration on every repeat (stun DR exemption)', () => {
-    const { sim, aPid, b } = startDuel('paladin', 'warrior', 20);
+    const { sim, aPid, b } = startDuel('paladin', 'swordman', 20);
 
     // Hammer of Justice at level 20 is rank 2: a 4s instant stun. As with Fear, a
     // resisted stun applies nothing and does NOT advance diminishing returns, so
@@ -318,7 +318,7 @@ describe('PvP control abilities in active duels', () => {
     // Justice). Simulate a fully diminished OPENER chain on the target, then prove a
     // controlled stun still lands at full duration and diminishes only within its
     // own controlled bucket.
-    const { sim, aPid, b } = startDuel('paladin', 'warrior', 20);
+    const { sim, aPid, b } = startDuel('paladin', 'swordman', 20);
 
     // Pretend the target already burned its opener-stun chain to immunity.
     b.ccDr.set('openerStun', { stage: 3, resetAt: sim.time + 18 });

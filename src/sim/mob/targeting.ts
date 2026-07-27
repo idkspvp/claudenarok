@@ -36,7 +36,7 @@ import { DT, dist2d, MELEE_RANGE } from '../types';
 const TRIVIAL_LEVEL_GAP = 10;
 const NYTHRAXIS_HEROIC_ROGUE_ADD_ID = 'nythraxis_heroic_rogue_add';
 const VOSS_TARGET_SHUFFLE_SECONDS = 3;
-const VOSS_FRONTLINE_CLASSES = new Set(['warrior', 'rogue', 'hunter']);
+const VOSS_FRONTLINE_CLASSES = new Set(['swordman', 'thief', 'archer']);
 const MAX_AGGRO_RADIUS = 20;
 
 function mobCanSeeTarget(ctx: SimContext, mob: Entity, target: Entity): boolean {

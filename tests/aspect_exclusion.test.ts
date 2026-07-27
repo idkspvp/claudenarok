@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { ABILITIES } from '../src/sim/content/classes';
 import { Sim } from '../src/sim/sim';
 
-// The three hunter aspects are mutually exclusive: only one may be active at a
+// The three archer aspects are mutually exclusive: only one may be active at a
 // time. They are marked with the shared `exclusiveGroup: 'aspect'` and enforced
 // at the self-buff apply site (effect_dispatch).
 const makeHunter = (seed = 42) => {
-  const sim = new Sim({ seed, playerClass: 'hunter', autoEquip: true });
+  const sim = new Sim({ seed, playerClass: 'archer', autoEquip: true });
   sim.setPlayerLevel(14); // hawk(4) + monkey(10) + cheetah(14) all known
   return sim;
 };
@@ -26,7 +26,7 @@ const castSelfBuff = (sim: Sim, id: string) => {
   for (let i = 0; i < 32; i++) sim.tick();
 };
 
-describe('hunter aspect mutual exclusion', () => {
+describe('archer aspect mutual exclusion', () => {
   it('marks all three aspects with the shared exclusive group', () => {
     expect(ABILITIES.aspect_of_the_hawk.exclusiveGroup).toBe('aspect');
     expect(ABILITIES.aspect_of_the_monkey.exclusiveGroup).toBe('aspect');
@@ -78,7 +78,7 @@ describe('hunter aspect mutual exclusion', () => {
 });
 
 describe('class self-buff mutual exclusion groups', () => {
-  it('marks paladin auras and warrior stances with their own exclusive groups', () => {
+  it('marks swordman auras and swordman stances with their own exclusive groups', () => {
     expect(ABILITIES.devotion_aura.exclusiveGroup).toBe('paladin_aura');
     expect(ABILITIES.retribution_aura.exclusiveGroup).toBe('paladin_aura');
     expect(ABILITIES.battle_stance.exclusiveGroup).toBe('warrior_stance');
@@ -86,8 +86,8 @@ describe('class self-buff mutual exclusion groups', () => {
     expect(ABILITIES.berserker_stance.exclusiveGroup).toBe('warrior_stance');
   });
 
-  it('keeps only one paladin aura active', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'paladin', autoEquip: true });
+  it('keeps only one swordman aura active', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(16); // devotion(1) + retribution(16) known
 
     castSelfBuff(sim, 'devotion_aura');
@@ -101,8 +101,8 @@ describe('class self-buff mutual exclusion groups', () => {
     ]);
   });
 
-  it('keeps only one self-applied warrior stance active', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  it('keeps only one self-applied swordman stance active', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(14);
 
     castSelfBuff(sim, 'battle_stance');

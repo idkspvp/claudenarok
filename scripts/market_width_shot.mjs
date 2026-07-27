@@ -21,7 +21,7 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Trader', settleMs: 2800 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Trader', settleMs: 2800 });
 await sleep(500);
 await page.evaluate(() => {
   document.querySelector('.tut-skip')?.click();
@@ -50,7 +50,7 @@ await page.evaluate(() => {
   ];
   for (let i = 0; i < 10; i++) {
     const pid = sim.addPlayer(
-      ['mage', 'rogue', 'priest', 'hunter'][i % 4],
+      ['mage', 'thief', 'acolyte', 'archer'][i % 4],
       'Seller' + 'ABCDEFGHIJ'[i],
     );
     for (let j = 0; j < 10; j++) {

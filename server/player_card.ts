@@ -76,16 +76,7 @@ export const PUBLIC_CARD_LOCALES = [
 ] as const;
 export type PublicCardLocale = (typeof PUBLIC_CARD_LOCALES)[number];
 
-type PlayerClassKey =
-  | 'warrior'
-  | 'paladin'
-  | 'hunter'
-  | 'rogue'
-  | 'priest'
-  | 'shaman'
-  | 'mage'
-  | 'warlock'
-  | 'druid';
+type PlayerClassKey = 'swordman' | 'mage' | 'archer' | 'acolyte' | 'thief';
 
 export interface PublicCardCopy {
   gameName: string;
@@ -101,15 +92,11 @@ export interface PublicCardCopy {
 }
 
 const EN_CLASSES: Record<PlayerClassKey, string> = {
-  warrior: 'Warrior',
-  paladin: 'Paladin',
-  hunter: 'Hunter',
-  rogue: 'Rogue',
-  priest: 'Priest',
-  shaman: 'Shaman',
+  swordman: 'Swordman',
+  archer: 'Archer',
+  thief: 'Thief',
+  acolyte: 'Acolyte',
   mage: 'Mage',
-  warlock: 'Warlock',
-  druid: 'Druid',
 };
 
 export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
@@ -136,15 +123,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Puede haberse retirado o no haber existido nunca.',
     missingCta: 'Entrar en Claudenarok Online',
     classes: {
-      warrior: 'Guerrero',
-      paladin: 'Paladín',
-      hunter: 'Cazador',
-      rogue: 'Pícaro',
-      priest: 'Sacerdote',
-      shaman: 'Chamán',
+      swordman: 'Guerrero',
+      archer: 'Cazador',
+      thief: 'Pícaro',
+      acolyte: 'Sacerdote',
       mage: 'Mago',
-      warlock: 'Brujo',
-      druid: 'Druida',
     },
   },
   es_ES: {
@@ -158,15 +141,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Puede haberse retirado o no haber existido nunca.',
     missingCta: 'Entrar en Claudenarok Online',
     classes: {
-      warrior: 'Guerrero',
-      paladin: 'Paladín',
-      hunter: 'Cazador',
-      rogue: 'Pícaro',
-      priest: 'Sacerdote',
-      shaman: 'Chamán',
+      swordman: 'Guerrero',
+      archer: 'Cazador',
+      thief: 'Pícaro',
+      acolyte: 'Sacerdote',
       mage: 'Mago',
-      warlock: 'Brujo',
-      druid: 'Druida',
     },
   },
   fr_FR: {
@@ -180,15 +159,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: "Elle a peut-être été retirée ou n'a jamais existé.",
     missingCta: 'Entrer dans Claudenarok Online',
     classes: {
-      warrior: 'Guerrier',
-      paladin: 'Paladin',
-      hunter: 'Chasseur',
-      rogue: 'Voleur',
-      priest: 'Prêtre',
-      shaman: 'Chaman',
+      swordman: 'Guerrier',
+      archer: 'Chasseur',
+      thief: 'Voleur',
+      acolyte: 'Prêtre',
       mage: 'Mage',
-      warlock: 'Démoniste',
-      druid: 'Druide',
     },
   },
   fr_CA: {
@@ -202,15 +177,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: "Elle a peut-être été retirée ou n'a jamais existé.",
     missingCta: 'Entrer dans Claudenarok Online',
     classes: {
-      warrior: 'Guerrier',
-      paladin: 'Paladin',
-      hunter: 'Chasseur',
-      rogue: 'Voleur',
-      priest: 'Prêtre',
-      shaman: 'Chaman',
+      swordman: 'Guerrier',
+      archer: 'Chasseur',
+      thief: 'Voleur',
+      acolyte: 'Prêtre',
       mage: 'Mage',
-      warlock: 'Démoniste',
-      druid: 'Druide',
     },
   },
   en_CA: {
@@ -236,15 +207,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Potrebbe essere stata ritirata o non essere mai esistita.',
     missingCta: 'Entra in Claudenarok Online',
     classes: {
-      warrior: 'Guerriero',
-      paladin: 'Paladino',
-      hunter: 'Cacciatore',
-      rogue: 'Ladro',
-      priest: 'Sacerdote',
-      shaman: 'Sciamano',
+      swordman: 'Guerriero',
+      archer: 'Cacciatore',
+      thief: 'Ladro',
+      acolyte: 'Sacerdote',
       mage: 'Mago',
-      warlock: 'Stregone',
-      druid: 'Druido',
     },
   },
   de_DE: {
@@ -258,15 +225,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Sie wurde vielleicht entfernt oder hat nie existiert.',
     missingCta: 'Claudenarok Online betreten',
     classes: {
-      warrior: 'Krieger',
-      paladin: 'Paladin',
-      hunter: 'Jäger',
-      rogue: 'Schurke',
-      priest: 'Priester',
-      shaman: 'Schamane',
+      swordman: 'Krieger',
+      archer: 'Jäger',
+      thief: 'Schurke',
+      acolyte: 'Priester',
       mage: 'Magier',
-      warlock: 'Hexenmeister',
-      druid: 'Druide',
     },
   },
   zh_CN: {
@@ -280,15 +243,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: '它可能已被撤下，或从未存在。',
     missingCta: '进入 Claudenarok Online',
     classes: {
-      warrior: '战士',
-      paladin: '圣骑士',
-      hunter: '猎人',
-      rogue: '潜行者',
-      priest: '牧师',
-      shaman: '萨满祭司',
+      swordman: '战士',
+      archer: '猎人',
+      thief: '潜行者',
+      acolyte: '牧师',
       mage: '法师',
-      warlock: '术士',
-      druid: '德鲁伊',
     },
   },
   zh_TW: {
@@ -302,15 +261,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: '它可能已被移除，或從未存在。',
     missingCta: '進入 Claudenarok Online',
     classes: {
-      warrior: '戰士',
-      paladin: '聖騎士',
-      hunter: '獵人',
-      rogue: '潛行者',
-      priest: '牧師',
-      shaman: '薩滿',
+      swordman: '戰士',
+      archer: '獵人',
+      thief: '潛行者',
+      acolyte: '牧師',
       mage: '法師',
-      warlock: '術士',
-      druid: '德魯伊',
     },
   },
   ko_KR: {
@@ -325,15 +280,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: '삭제되었거나 존재한 적이 없을 수 있습니다.',
     missingCta: 'Claudenarok Online 입장',
     classes: {
-      warrior: '전사',
-      paladin: '성기사',
-      hunter: '사냥꾼',
-      rogue: '도적',
-      priest: '사제',
-      shaman: '주술사',
+      swordman: '전사',
+      archer: '사냥꾼',
+      thief: '도적',
+      acolyte: '사제',
       mage: '마법사',
-      warlock: '흑마법사',
-      druid: '드루이드',
     },
   },
   ja_JP: {
@@ -347,15 +298,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: '削除されたか、存在しなかった可能性があります。',
     missingCta: 'Claudenarok Online に入る',
     classes: {
-      warrior: '戦士',
-      paladin: 'パラディン',
-      hunter: 'ハンター',
-      rogue: 'ローグ',
-      priest: 'プリースト',
-      shaman: 'シャーマン',
+      swordman: '戦士',
+      archer: 'ハンター',
+      thief: 'ローグ',
+      acolyte: 'プリースト',
       mage: 'メイジ',
-      warlock: 'ウォーロック',
-      druid: 'ドルイド',
     },
   },
   pt_BR: {
@@ -369,15 +316,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Ele pode ter sido removido ou nunca ter existido.',
     missingCta: 'Entrar em Claudenarok Online',
     classes: {
-      warrior: 'Guerreiro',
-      paladin: 'Paladino',
-      hunter: 'Caçador',
-      rogue: 'Ladino',
-      priest: 'Sacerdote',
-      shaman: 'Xamã',
+      swordman: 'Guerreiro',
+      archer: 'Caçador',
+      thief: 'Ladino',
+      acolyte: 'Sacerdote',
       mage: 'Mago',
-      warlock: 'Bruxo',
-      druid: 'Druida',
     },
   },
   ru_RU: {
@@ -391,15 +334,11 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
     missingDescription: 'Она могла быть удалена или никогда не существовала.',
     missingCta: 'Войти в Claudenarok Online',
     classes: {
-      warrior: 'Воин',
-      paladin: 'Паладин',
-      hunter: 'Охотник',
-      rogue: 'Разбойник',
-      priest: 'Жрец',
-      shaman: 'Шаман',
+      swordman: 'Воин',
+      archer: 'Охотник',
+      thief: 'Разбойник',
+      acolyte: 'Жрец',
       mage: 'Маг',
-      warlock: 'Чернокнижник',
-      druid: 'Друид',
     },
   },
   ...PLAYERCARD_NEW,

@@ -1,5 +1,5 @@
 // Glowing head halo (VisualDef.halo): a soft additive ring parented behind the
-// head bone, the priest's Light. Texture, per-color materials, and per-radius
+// head bone, the acolyte's Light. Texture, per-color materials, and per-radius
 // geometries are module-level caches shared by every clone; the mesh itself is
 // per-visual and lives in the model subtree, so LOD/visibility toggles and
 // scene removal need no extra plumbing (geometry/materials are shared caches

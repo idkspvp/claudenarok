@@ -15,7 +15,7 @@ import type { Aura, Entity } from '../src/sim/types';
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 4242): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 // Spawn a hostile mob and register it on the roster (entities + spatial grids).
@@ -252,9 +252,9 @@ describe('combat/damage handleDeath', () => {
   });
 
   it('does not put an enemy-owned pet into evade when its player target dies', () => {
-    const sim = new Sim({ seed: 909, playerClass: 'hunter', noPlayer: true, autoEquip: true });
-    const ownerId = sim.addPlayer('hunter', 'Hunter');
-    const victimId = sim.addPlayer('warrior', 'Victim');
+    const sim = new Sim({ seed: 909, playerClass: 'archer', noPlayer: true, autoEquip: true });
+    const ownerId = sim.addPlayer('archer', 'Hunter');
+    const victimId = sim.addPlayer('swordman', 'Victim');
     sim.setPlayerLevel(10, ownerId);
     sim.setPlayerLevel(10, victimId);
     const owner = sim.entities.get(ownerId) as AnyEntity;

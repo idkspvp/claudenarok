@@ -13,8 +13,9 @@
 //
 // Needs `npm run dev`. Override the port with GAME_URL. Writes:
 //   tmp/selection-ring-before.png, tmp/selection-ring-after.png
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5174';
@@ -29,19 +30,22 @@ const browser = await puppeteer.launch({
 });
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
-page.on('console', (m) => { if (m.type() === 'error') console.log('CONSOLE:', m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') console.log('CONSOLE:', m.text());
+});
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Slopewatch');
 await page.evaluate(() => {
-  const el = document.querySelector('#offline-select .mini-class[data-class="hunter"]');
+  const el = document.querySelector('#offline-select .mini-class[data-class="archer"]');
   if (el) el.click();
 });
 await page.click('#btn-start-offline');
-await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player,
-  { timeout: 30000 });
+await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player, {
+  timeout: 30000,
+});
 await sleep(800);
 
 // Stage the scene and install the "before"/"after" ring toggle.
@@ -70,7 +74,8 @@ const staged = await page.evaluate(async () => {
   let best = null;
   for (let dx = -160; dx <= 160; dx += 4) {
     for (let dz = -160; dz <= 160; dz += 4) {
-      const x = p.pos.x + dx, z = p.pos.z + dz;
+      const x = p.pos.x + dx,
+        z = p.pos.z + dz;
       const h = gh(x, z);
       if (h < 1.5) continue; // well above water so the slope is lit, not a dark shore
       const grad = Math.hypot(gh(x + 2, z) - h, gh(x, z + 2) - h) / 2;
@@ -89,29 +94,38 @@ const staged = await page.evaluate(async () => {
   const up = { x: gx / upLen, z: gz / upLen };
 
   // Mob on the slope; player ~5yd downhill so the slope rises toward the target.
-  target.pos.x = best.x; target.pos.z = best.z; target.pos.y = gh(best.x, best.z);
+  target.pos.x = best.x;
+  target.pos.z = best.z;
+  target.pos.y = gh(best.x, best.z);
   // downhill + lateral offset so the player doesn't occlude the targeted mob.
   const cross = { x: up.z, z: -up.x };
   const px = best.x - up.x * 3.2 + cross.x * 2.6;
   const pz = best.z - up.z * 3.2 + cross.z * 2.6;
-  p.pos.x = px; p.pos.z = pz; p.pos.y = gh(px, pz);
+  p.pos.x = px;
+  p.pos.z = pz;
+  p.pos.y = gh(px, pz);
   p.targetId = target.id;
   // aim the camera from the player toward the target so the mob is in open frame.
-  const dirx = best.x - px, dirz = best.z - pz;
+  const dirx = best.x - px,
+    dirz = best.z - pz;
   p.facing = Math.atan2(dirx, dirz);
   g.renderer.camYaw = Math.atan2(dirx, dirz);
   g.renderer.camPitch = 0.26;
   g.renderer.camDist = 6;
 
   // Pin the mob + target so a few frames of AI can't drift the scene.
-  const tx = target.pos.x, tz = target.pos.z, ty = target.pos.y;
+  const tx = target.pos.x,
+    tz = target.pos.z,
+    ty = target.pos.y;
   g.__ringMode = 'after';
   if (!g.__ringHooked) {
     g.__ringHooked = true;
     const r = g.renderer;
     const origSync = r.sync.bind(r);
     r.sync = (...args) => {
-      target.pos.x = tx; target.pos.z = tz; target.pos.y = ty;
+      target.pos.x = tx;
+      target.pos.z = tz;
+      target.pos.y = ty;
       p.targetId = target.id;
       origSync(...args);
       if (g.__ringMode === 'before' && r.selectionRing.visible) {
@@ -119,7 +133,10 @@ const staged = await page.evaluate(async () => {
         if (tv) {
           // OLD behavior: flat ring anchored to the entity's render Y.
           r.selectionRing.position.set(
-            tv.group.position.x, tv.group.position.y + 0.08, tv.group.position.z);
+            tv.group.position.x,
+            tv.group.position.y + 0.08,
+            tv.group.position.z,
+          );
           const pos = r.selectionRingMesh.geometry.getAttribute('position');
           for (let i = 0; i < pos.count; i++) pos.setY(i, 0);
           pos.needsUpdate = true;
@@ -131,15 +148,22 @@ const staged = await page.evaluate(async () => {
   return { ok: true, best, targetName: target.name, targetId: target.id };
 });
 console.log('staged:', JSON.stringify(staged));
-if (!staged.ok) { await browser.close(); process.exit(1); }
+if (!staged.ok) {
+  await browser.close();
+  process.exit(1);
+}
 
 await sleep(900); // let camera/render settle
 
-await page.evaluate(() => { window.__game.__ringMode = 'before'; });
+await page.evaluate(() => {
+  window.__game.__ringMode = 'before';
+});
 await sleep(500);
 await page.screenshot({ path: 'tmp/selection-ring-before.png' });
 
-await page.evaluate(() => { window.__game.__ringMode = 'after'; });
+await page.evaluate(() => {
+  window.__game.__ringMode = 'after';
+});
 await sleep(500);
 await page.screenshot({ path: 'tmp/selection-ring-after.png' });
 

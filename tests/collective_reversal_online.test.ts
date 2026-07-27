@@ -29,7 +29,7 @@ describe('Collective Reversal authoritative online path', () => {
     const mageWs = fakeWs();
     const allyWs = fakeWs();
     const mageSession = server.join(mageWs, 1, 1, 'Chrona', 'mage', null);
-    const allySession = server.join(allyWs, 2, 2, 'Fallen', 'priest', null);
+    const allySession = server.join(allyWs, 2, 2, 'Fallen', 'acolyte', null);
     if ('error' in mageSession || 'error' in allySession) throw new Error('join failed');
 
     server.sim.setPlayerLevel(10, mageSession.pid);

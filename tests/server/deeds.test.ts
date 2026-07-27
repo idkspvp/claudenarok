@@ -273,7 +273,7 @@ function sheetRow(state: unknown): CharacterRow {
     id: 42,
     account_id: 7,
     name: 'Hilda',
-    class: 'warrior',
+    class: 'swordman',
     level: 12,
     state: state as CharacterRow['state'],
     is_gm: false,

@@ -21,11 +21,11 @@ function spawnDummy(sim: Sim, target: Entity): Entity {
   return mob;
 }
 
-describe('warrior Direhowl', () => {
+describe('swordman Direhowl', () => {
   it('is defined as a level-12 Protection area damage debuff', () => {
     const def = ABILITIES.demoralizing_shout;
     expect(def).toBeTruthy();
-    expect(def.class).toBe('warrior');
+    expect(def.class).toBe('swordman');
     expect(def.learnLevel).toBe(12);
     expect(def.requiresTarget).toBe(false);
     expect(def.cooldown).toBe(45);
@@ -41,21 +41,21 @@ describe('warrior Direhowl', () => {
 
   // The Protection gate went with the specializations (Phase D0); the LEVEL gate
   // is the whole rule now.
-  it('sits in the warrior learn order and gates on level', () => {
-    expect(CLASSES.warrior.abilities).toContain('demoralizing_shout');
-    expect(abilitiesKnownAt('warrior', 11).some((k) => k.def.id === 'demoralizing_shout')).toBe(
+  it('sits in the swordman learn order and gates on level', () => {
+    expect(CLASSES.swordman.abilities).toContain('demoralizing_shout');
+    expect(abilitiesKnownAt('swordman', 11).some((k) => k.def.id === 'demoralizing_shout')).toBe(
       false,
     );
     expect(
-      abilitiesKnownAt('warrior', 12).find((k) => k.def.id === 'demoralizing_shout')?.rank,
+      abilitiesKnownAt('swordman', 12).find((k) => k.def.id === 'demoralizing_shout')?.rank,
     ).toBe(1);
-    expect(abilitiesKnownAt('warrior', 20).some((k) => k.def.id === 'demoralizing_shout')).toBe(
+    expect(abilitiesKnownAt('swordman', 20).some((k) => k.def.id === 'demoralizing_shout')).toBe(
       true,
     );
   });
 
   it('reduces nearby enemies damage dealt by 20% on cast', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const p = sim.player;
     levelWithStats(sim, 12, p.id);
     p.gm = true;
@@ -79,15 +79,15 @@ describe('warrior Direhowl', () => {
     // never folded it, so the shout was a no-op versus players (it only bit mobs,
     // whose AP is folded live in effectiveAttackPower). The aura must lower the
     // target player's baked attackPower.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const casterId = sim.addPlayer('warrior', 'Caster');
-    const victimId = sim.addPlayer('warrior', 'Victim');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const casterId = sim.addPlayer('swordman', 'Caster');
+    const victimId = sim.addPlayer('swordman', 'Victim');
     levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
     // Derive the drain from the target instead of pinning 30. The ability itself
     // is a 20% reduction and scales fine; only this synthetic aura carried an
-    // absolute number, and on the Ragnarok attribute scale a level-20 warrior's
+    // absolute number, and on the Ragnarok attribute scale a level-20 swordman's
     // attack power is smaller than the 30 it assumed.
     expect(before).toBeGreaterThan(4);
     const drain = Math.floor(before / 3);
@@ -110,9 +110,9 @@ describe('warrior Direhowl', () => {
     // The baked-stat path must un-fold debuff_ap on expiry too: updateAuras only
     // re-runs recalcPlayerStats when a stats-affecting aura drops, so debuff_ap
     // has to mark stats dirty or the AP cut would persist forever after fade.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const casterId = sim.addPlayer('warrior', 'Caster');
-    const victimId = sim.addPlayer('warrior', 'Victim');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const casterId = sim.addPlayer('swordman', 'Caster');
+    const victimId = sim.addPlayer('swordman', 'Victim');
     levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
     const before = victim.attackPower;
@@ -137,9 +137,9 @@ describe('warrior Direhowl', () => {
   });
 
   it('floors a debuffed enemy player attack power at zero', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const casterId = sim.addPlayer('warrior', 'Caster');
-    const victimId = sim.addPlayer('warrior', 'Victim');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const casterId = sim.addPlayer('swordman', 'Caster');
+    const victimId = sim.addPlayer('swordman', 'Victim');
     levelWithStats(sim, 20, victimId);
     const victim = sim.entities.get(victimId) as Entity;
 
@@ -158,7 +158,7 @@ describe('warrior Direhowl', () => {
   });
 
   it('does not touch a far-away enemy', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const p = sim.player;
     levelWithStats(sim, 12, p.id);
     p.gm = true;

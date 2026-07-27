@@ -40,14 +40,14 @@ page.on('console', (m) => {
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
-await page.waitForSelector('#offline-select .mini-class[data-class="warrior"]', {
+await page.waitForSelector('#offline-select .mini-class[data-class="swordman"]', {
   visible: true,
   timeout: 20000,
 });
 await wait(200);
 await page.evaluate(() => {
   document.querySelector('#char-name').value = 'Packrat';
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-start-offline').click();
 });
 await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, {
@@ -118,7 +118,7 @@ await page.evaluate(() => {
       const goods = ['wolf_fang', 'wolf_pelt', 'spider_leg', 'keen_dirk', 'oiled_boots'];
       for (let i = 0; i < 6; i++) {
         const pid = sim.addPlayer(
-          ['mage', 'rogue', 'priest', 'hunter'][i % 4],
+          ['mage', 'thief', 'acolyte', 'archer'][i % 4],
           'Seller' + 'ABCDEF'[i],
         );
         for (let j = 0; j < 10; j++) {

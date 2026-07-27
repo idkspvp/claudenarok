@@ -271,7 +271,7 @@ export const guideStrings = {
     arrowKeys: 'Arrow Keys',
     groupPet: 'Pet commands',
     petBar:
-      'Pet bar: Attack, Stop, Taunt, Defensive, Aggressive (with a hunter or warlock pet out)',
+      'Pet bar: Attack, Stop, Taunt, Defensive, Aggressive (with a archer or warlock pet out)',
     attackMoveNote:
       'One more, off by default: enable Attack Move in the options to reserve a key (A, while the option is on) that walks you toward your cursor and opens up on the enemy under it, or the first one met along the way.',
     mobileHeading: 'On mobile',
@@ -488,7 +488,7 @@ export const guideStrings = {
       'Bonus experience your character banks while resting at an inn, out of combat. Your next kills earn extra experience until the pool runs dry.',
     petBarTerm: 'Pet bar',
     petBarDef:
-      'The command row a hunter or warlock pet adds: Attack, Stop, Taunt, Defensive, and Aggressive, bound to Ctrl plus 1 through 5 by default.',
+      'The command row a archer or warlock pet adds: Attack, Stop, Taunt, Defensive, and Aggressive, bound to Ctrl plus 1 through 5 by default.',
     metersTerm: 'Damage meters',
     metersDef:
       'The party scoreboard window for the current fight: damage dealt, healing done, and who holds the most threat, kept per encounter. Open it with its keybind (Shift+H by default).',
@@ -576,11 +576,11 @@ export const guideStrings = {
   // character-creation description (classDetails.lore.*) so there is a single source of
   // truth for each class. Kept only so existing locale overlays stay valid; not rendered.
   classHook: {
-    warrior: 'A relentless front-line fighter who turns every blow taken into fuel for the next.',
-    paladin: 'A holy warrior who can shield allies, mend their wounds, or bring the hammer down.',
-    hunter: 'A ranged marksman with a loyal beast at their side and a trick for every foe.',
-    rogue: 'A master of stealth and poisons who strikes from the shadows and never fights fair.',
-    priest:
+    swordman: 'A relentless front-line fighter who turns every blow taken into fuel for the next.',
+    paladin: 'A holy swordman who can shield allies, mend their wounds, or bring the hammer down.',
+    archer: 'A ranged marksman with a loyal beast at their side and a trick for every foe.',
+    thief: 'A master of stealth and poisons who strikes from the shadows and never fights fair.',
+    acolyte:
       'A devoted healer whose light keeps the party standing, or whose shadow unmakes the enemy.',
     shaman:
       'A spirit-caller who bends storm, fire, and water, and mends allies between the lightning.',
@@ -836,7 +836,7 @@ export const guideStrings = {
       'A handful of people walk the whole road with you. Watch for these names from the valley to the peaks.',
     aldricRole: 'Priest of the Vale',
     aldricBody:
-      'A humble village priest who first names the cult over a defiled grave in Eastbrook, then follows its trail in person through the marsh and up to the wall at Highwatch. He is the steady heart of the whole campaign.',
+      'A humble village acolyte who first names the cult over a defiled grave in Eastbrook, then follows its trail in person through the marsh and up to the wall at Highwatch. He is the steady heart of the whole campaign.',
     marenRole: "The Marshal's Scout",
     marenBody:
       'A low-talking tracker you meet in the reeds of Mirefen, all quiet feet and a short blade. She follows the trail north too, and it is her ear that catches the words that send you to the peaks.',
@@ -1486,7 +1486,7 @@ export const guideStrings = {
           'The craft is worked at the apothecary in Highwatch, home of Alchemist Verane, Master of the Apothecary, who teaches the recipe ladder, sells Glass Vials at 12 copper, and pays coin for herbs through her work order.\n\nOn the craft ring, Alchemy sits with the trial-and-error trades, next to Engineering on one side and Cooking on the other. That gives it two pair identities: the Bombardier (Engineering and Alchemy, taken up before Tinker Gizzel in Eastbrook) and the Apothecary (Alchemy and Cooking, sworn before Cook Marlow). Attune to either pair to make Alchemy a major and open the skill all the way to its cap; until then it works to the rare tier like any undeclared craft.',
         materialsHeading: 'Herbs, glands, and glass',
         materialsBody:
-          "Every draught wants a Glass Vial plus herbs matched to its rung: sheenleaf grows in Eastbrook Vale, goldleaf in Mirefen Marsh, and sunpetal in Thornpeak Heights, one herb per zone, so your bottles climb the world alongside you. Herbalism is the natural partner skill, though buying from gatherers or the market works just as well; deeper zones hold higher-tier patches that ask for a better sickle, so keep your tool current if you pick your own.\n\nThe elixir line adds a hunter's ingredient: Venom Glands harvested from venomous corpses, and the top elixir asks for a Pristine Venom Gland, the signed rare specimen a lucky corpse harvest turns up. If you do not harvest yourself, those are exactly the goods worth asking a hunter friend to bring back.",
+          "Every draught wants a Glass Vial plus herbs matched to its rung: sheenleaf grows in Eastbrook Vale, goldleaf in Mirefen Marsh, and sunpetal in Thornpeak Heights, one herb per zone, so your bottles climb the world alongside you. Herbalism is the natural partner skill, though buying from gatherers or the market works just as well; deeper zones hold higher-tier patches that ask for a better sickle, so keep your tool current if you pick your own.\n\nThe elixir line adds a archer's ingredient: Venom Glands harvested from venomous corpses, and the top elixir asks for a Pristine Venom Gland, the signed rare specimen a lucky corpse harvest turns up. If you do not harvest yourself, those are exactly the goods worth asking a archer friend to bring back.",
         ladderHeading: 'The recipe ladder',
         ladderBody:
           'Everyone knows the Minor Healing Potion from the start and can mix it anywhere, no station needed. The real ladder is nine recipes taught by Verane at the apothecary, three at each rung: the skill 0 recipes are free, the skill 25 rung costs 25 silver per recipe, and the skill 50 rung costs 1 gold per recipe. Each rung is a healing draught, a mana draught, and a stamina elixir, stepping from common sheenleaf bottles (120 health, 160 mana) through uncommon goldleaf (200 health, 260 mana) to rare sunpetal (280 health, 360 mana).\n\nThe elixirs climb the same way: the Elixir of the Boar grants 6 Stamina for 10 minutes, the Vipersear Elixir 9 for 15 minutes, and the Elixir of the Serpent 12 for 15 minutes, brewing two bottles per craft. One more recipe sits off to the side: the Elixir of the Bear, a combination brew Verane teaches for 25 silver once your Alchemy reaches 25, mixable anywhere, but only by an attuned Bombardier with both Alchemy and Engineering at 25.',
@@ -1899,7 +1899,7 @@ export const guideStrings = {
       'Strength raises your melee attack power, so your weapon swings hit harder. It does the most for the heavy melee classes that fight up close.',
     agiTitle: 'Agility',
     agiBody:
-      "Agility sharpens you in several ways: it raises your chance to land a critical hit and your chance to dodge, and it adds a little armor. For rogues and hunters it also feeds attack power, and it drives a hunter's ranged shots.",
+      "Agility sharpens you in several ways: it raises your chance to land a critical hit and your chance to dodge, and it adds a little armor. For rogues and hunters it also feeds attack power, and it drives a archer's ranged shots.",
     staTitle: 'Stamina',
     staBody:
       'Stamina is your staying power. More Stamina means a larger health pool, and it speeds the health you recover while resting out of combat. Every class wants some.',

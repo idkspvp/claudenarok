@@ -128,10 +128,10 @@ describe('Cauterize', () => {
 
   // Cauterize used to be gated on the committed Fire spec; specs are retired
   // (Phase D0) and it is gated on the KNOWN Ignition passive instead, so the
-  // non-fire arm that stood here has no subject left. A warrior still never
+  // non-fire arm that stood here has no subject left. A swordman still never
   // saves: it is not a mage and never learns Ignition.
   it('never triggers for a non-mage', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(20);
     sim.tick();
     const p = sim.player;

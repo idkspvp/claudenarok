@@ -49,8 +49,8 @@ function who(server: any, viewer: FakeClient, filter?: string): string[] {
 }
 
 const ROSTER: [number, string, PlayerClass][] = [
-  [1, 'Mristan', 'warrior'],
-  [2, 'Mrglglgl', 'shaman'],
+  [1, 'Mristan', 'swordman'],
+  [2, 'Mrglglgl', 'acolyte'],
   [3, 'Bobbins', 'mage'],
 ];
 

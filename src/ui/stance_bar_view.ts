@@ -1,4 +1,4 @@
-// Pure view-core for the warrior stance bar: maps the player's known stance
+// Pure view-core for the swordman stance bar: maps the player's known stance
 // abilities plus the currently-worn stance to a small render model the painter
 // (Hud.renderStanceBar) turns into clickable buttons. DOM/i18n/Three-free and
 // instance-agnostic, so a Vitest drives it directly against either world shape.
@@ -21,7 +21,7 @@ export interface StanceSlot {
 }
 
 export interface StanceBarModel {
-  /** False hides the bar entirely (non-warrior, or no stance known yet). */
+  /** False hides the bar entirely (non-swordman, or no stance known yet). */
   visible: boolean;
   slots: StanceSlot[];
   /** Byte-stable rebuild key: the painter skips the DOM rebuild when unchanged. */

@@ -26,17 +26,17 @@ vi.setConfig({ testTimeout: 30000 });
 // No tick fires after setup, so the state is frozen at match-active for the reads.
 function stage() {
   const sim = makeWorld();
-  const a = addAt(sim, 'warrior', 'Aleph', 0, -40);
+  const a = addAt(sim, 'swordman', 'Aleph', 0, -40);
   const b = addAt(sim, 'mage', 'Bet', 4, -40);
   startBout(sim, a, b); // occupies vc.match, runs it to 'active'
   expect(sim.vcup.match?.phase).toBe('active');
   // Spectator in the south stand: inside the Sowfield region, off the physical
   // pitch (so the closed-pitch policing never ejects them), no match of their own.
-  const spec = addAt(sim, 'priest', 'Spectator', PITCH_CENTER.x, PITCH_CENTER.z - 22);
+  const spec = addAt(sim, 'acolyte', 'Spectator', PITCH_CENTER.x, PITCH_CENTER.z - 22);
   // Idle player far from the Sowfield, unqueued: no match, no spectate.
-  const idle = addAt(sim, 'paladin', 'Idler', 0, -300);
+  const idle = addAt(sim, 'swordman', 'Idler', 0, -300);
   // Practicer owning a private practice instance in parallel with the real match.
-  const prac = addAt(sim, 'rogue', 'Practicer', 8, -40);
+  const prac = addAt(sim, 'thief', 'Practicer', 8, -40);
   sim.vcupPracticeStart(2, prac);
   expect(sim.vcup.practices.length).toBe(1);
   return { sim, ctx: sim.ctx, a, b, spec, idle, prac };

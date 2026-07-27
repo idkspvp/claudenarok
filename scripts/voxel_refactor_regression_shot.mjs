@@ -20,7 +20,7 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Regression' });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Regression' });
 await new Promise((r) => setTimeout(r, 1200));
 await page.screenshot({ path: `${OUT}/voxel_refactor_regression_check.png` });
 

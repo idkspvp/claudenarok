@@ -133,12 +133,12 @@ describe('in-game moderation actions', () => {
     const moderatorWs = fakeWs();
     const targetWs = fakeWs();
     const moderator = joined(
-      kickServer.join(moderatorWs, 1, 101, 'Moderator', 'warrior', null, false, {
+      kickServer.join(moderatorWs, 1, 101, 'Moderator', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const target = joined(kickServer.join(targetWs, 2, 102, 'Trouble Maker', 'rogue', null));
+    const target = joined(kickServer.join(targetWs, 2, 102, 'Trouble Maker', 'thief', null));
 
     command(kickServer, moderator, '/kick "Trouble Maker" griefing');
 
@@ -161,7 +161,7 @@ describe('in-game moderation actions', () => {
         adminPermissions: MOD_PERMS,
       }),
     );
-    const victim = joined(killServer.join(victimWs, 4, 104, 'Victim', 'priest', null));
+    const victim = joined(killServer.join(victimWs, 4, 104, 'Victim', 'acolyte', null));
 
     command(killServer, killer, '/kill "Victim" spawn camping');
 
@@ -180,12 +180,12 @@ describe('in-game moderation actions', () => {
     const moderatorWs = fakeWs();
     const targetWs = fakeWs();
     const moderator = joined(
-      server.join(moderatorWs, 10, 110, 'Moderator', 'warrior', null, false, {
+      server.join(moderatorWs, 10, 110, 'Moderator', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const target = joined(server.join(targetWs, 20, 120, 'Target', 'rogue', null));
+    const target = joined(server.join(targetWs, 20, 120, 'Target', 'thief', null));
 
     command(server, moderator, '/mute "Target" 5 spam');
     await vi.waitFor(() => expect(target.chatMutedUntil).not.toBeNull());
@@ -213,12 +213,12 @@ describe('in-game moderation actions', () => {
     const banModeratorWs = fakeWs();
     const banTargetWs = fakeWs();
     const banModerator = joined(
-      banServer.join(banModeratorWs, 50, 150, 'BanMod', 'warrior', null, false, {
+      banServer.join(banModeratorWs, 50, 150, 'BanMod', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    joined(banServer.join(banTargetWs, 60, 160, 'Repeat', 'rogue', null));
+    joined(banServer.join(banTargetWs, 60, 160, 'Repeat', 'thief', null));
     command(banServer, banModerator, '/ban "Repeat" repeat offender');
     await vi.waitFor(() => expect(banTargetWs.close).toHaveBeenCalled());
     expect(moderation.moderateAccount).toHaveBeenCalledWith(
@@ -235,12 +235,12 @@ describe('in-game moderation actions', () => {
     const renameModeratorWs = fakeWs();
     const renameTargetWs = fakeWs();
     const renameModerator = joined(
-      renameServer.join(renameModeratorWs, 30, 130, 'RenameMod', 'warrior', null, false, {
+      renameServer.join(renameModeratorWs, 30, 130, 'RenameMod', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    joined(renameServer.join(renameTargetWs, 40, 140, 'Badname', 'rogue', null));
+    joined(renameServer.join(renameTargetWs, 40, 140, 'Badname', 'thief', null));
     command(renameServer, renameModerator, '/forcerename "Badname" offensive');
 
     await vi.waitFor(() => expect(renameTargetWs.close).toHaveBeenCalled());
@@ -255,7 +255,7 @@ describe('in-game moderation actions', () => {
     const server = new GameServer();
     const playerWs = fakeWs();
     const adminWs = fakeWs();
-    const player = joined(server.join(playerWs, 1, 101, 'Player', 'warrior', null));
+    const player = joined(server.join(playerWs, 1, 101, 'Player', 'swordman', null));
     const admin = joined(
       server.join(adminWs, 2, 102, 'Admin', 'mage', null, false, {
         isAdmin: true,
@@ -266,7 +266,7 @@ describe('in-game moderation actions', () => {
     expect(adminWs.close).not.toHaveBeenCalled();
 
     const selectedWs = fakeWs();
-    const selected = joined(server.join(selectedWs, 4, 104, 'Selected', 'rogue', null));
+    const selected = joined(server.join(selectedWs, 4, 104, 'Selected', 'thief', null));
     entity(server, admin.pid).targetId = selected.pid;
     command(server, admin, '/kick old selected-target reason');
     await Promise.resolve();
@@ -275,7 +275,7 @@ describe('in-game moderation actions', () => {
 
     const otherAdminWs = fakeWs();
     joined(
-      server.join(otherAdminWs, 3, 103, 'Otheradmin', 'priest', null, false, {
+      server.join(otherAdminWs, 3, 103, 'Otheradmin', 'acolyte', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
@@ -292,12 +292,12 @@ describe('in-game moderation actions', () => {
     const moderatorWs = fakeWs();
     const targetWs = fakeWs();
     const moderator = joined(
-      server.join(moderatorWs, 10, 110, 'Jailer', 'warrior', null, false, {
+      server.join(moderatorWs, 10, 110, 'Jailer', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const target = joined(server.join(targetWs, 20, 120, 'Cellmate', 'rogue', null));
+    const target = joined(server.join(targetWs, 20, 120, 'Cellmate', 'thief', null));
     const original = { ...entity(server, target.pid).pos };
 
     command(server, moderator, '/jail "Cellmate" 120');
@@ -342,7 +342,7 @@ describe('in-game moderation actions', () => {
     if (!saved) throw new Error('jailed state was not saved');
 
     const relogServer = new GameServer();
-    const relogged = joined(relogServer.join(fakeWs(), 20, 120, 'Cellmate', 'rogue', saved));
+    const relogged = joined(relogServer.join(fakeWs(), 20, 120, 'Cellmate', 'thief', saved));
     expect(relogged.jailed?.returnPos).toEqual({ x: original.x, z: original.z });
     expect(isInJailCage(entity(relogServer, relogged.pid).pos)).toBe(true);
 
@@ -410,12 +410,12 @@ describe('in-game moderation actions', () => {
 
     const server = new GameServer();
     const moderator = joined(
-      server.join(fakeWs(), 40, 140, 'Gatekeeper', 'warrior', null, false, {
+      server.join(fakeWs(), 40, 140, 'Gatekeeper', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const bystander = joined(server.join(fakeWs(), 41, 141, 'Bystander', 'rogue', null));
+    const bystander = joined(server.join(fakeWs(), 41, 141, 'Bystander', 'thief', null));
 
     // A moderator pressed into the gate from the visitor side lands in the cage.
     const moderatorEntity = entity(server, moderator.pid);
@@ -469,13 +469,13 @@ describe('in-game moderation actions', () => {
   it('blocks jailed players from queueing into instanced content', async () => {
     const server = new GameServer();
     const moderator = joined(
-      server.join(fakeWs(), 50, 150, 'Jailer', 'warrior', null, false, {
+      server.join(fakeWs(), 50, 150, 'Jailer', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
     const inmateWs = fakeWs();
-    const inmate = joined(server.join(inmateWs, 51, 151, 'Inmate', 'rogue', null));
+    const inmate = joined(server.join(inmateWs, 51, 151, 'Inmate', 'thief', null));
 
     // Queued when the jail lands: the queue is drained on the spot.
     server.handleMessage(inmate, JSON.stringify({ t: 'cmd', cmd: 'arena_queue', format: '1v1' }));
@@ -520,12 +520,12 @@ describe('in-game moderation actions', () => {
     const moderatorWs = fakeWs();
     const targetWs = fakeWs();
     const moderator = joined(
-      server.join(moderatorWs, 80, 180, 'Sentencer', 'warrior', null, false, {
+      server.join(moderatorWs, 80, 180, 'Sentencer', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const target = joined(server.join(targetWs, 81, 181, 'Doingtime', 'rogue', null));
+    const target = joined(server.join(targetWs, 81, 181, 'Doingtime', 'thief', null));
     const original = { ...entity(server, target.pid).pos };
 
     const before = Date.now();
@@ -562,12 +562,12 @@ describe('in-game moderation actions', () => {
   it('lets jailed players brawl with each other but never touch a moderator', async () => {
     const server = new GameServer();
     const moderator = joined(
-      server.join(fakeWs(), 70, 170, 'Warden', 'warrior', null, false, {
+      server.join(fakeWs(), 70, 170, 'Warden', 'swordman', null, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    const brawlerA = joined(server.join(fakeWs(), 71, 171, 'Brawlerone', 'rogue', null));
+    const brawlerA = joined(server.join(fakeWs(), 71, 171, 'Brawlerone', 'thief', null));
     const brawlerB = joined(server.join(fakeWs(), 72, 172, 'Brawlertwo', 'mage', null));
     const entityA = entity(server, brawlerA.pid);
     const entityB = entity(server, brawlerB.pid);
@@ -621,9 +621,9 @@ describe('moderator spectate integration', () => {
         adminPermissions: MOD_PERMS,
       }),
     );
-    const suspect = joined(server.join(suspectWs, 2, 102, 'Suspect', 'rogue', null));
+    const suspect = joined(server.join(suspectWs, 2, 102, 'Suspect', 'thief', null));
     const correspondent = joined(
-      server.join(correspondentWs, 3, 103, 'Correspondent', 'priest', null),
+      server.join(correspondentWs, 3, 103, 'Correspondent', 'acolyte', null),
     );
     const moderatorEntity = entity(server, moderator.pid);
     const originalPos = { ...moderatorEntity.pos };
@@ -702,8 +702,8 @@ describe('moderator spectate integration', () => {
         adminPermissions: MOD_PERMS,
       }),
     );
-    joined(server.join(fakeWs(), 2, 102, 'First', 'rogue', null));
-    const second = joined(server.join(fakeWs(), 3, 103, 'Second', 'warrior', null));
+    joined(server.join(fakeWs(), 2, 102, 'First', 'thief', null));
+    const second = joined(server.join(fakeWs(), 3, 103, 'Second', 'swordman', null));
     const original = { ...entity(server, moderator.pid).pos };
 
     command(server, moderator, '/spectate First');
@@ -726,7 +726,7 @@ describe('moderator spectate integration', () => {
         adminPermissions: MOD_PERMS,
       }),
     );
-    const suspect = joined(server.join(fakeWs(), 2, 102, 'Goneplayer', 'rogue', null));
+    const suspect = joined(server.join(fakeWs(), 2, 102, 'Goneplayer', 'thief', null));
     command(server, moderator, '/spectate Goneplayer');
     moderatorWs.send.mockClear();
 
@@ -738,8 +738,8 @@ describe('moderator spectate integration', () => {
     expect(eventTexts(moderatorWs)).toContain('Goneplayer is no longer online; spectate ended.');
 
     const regularWs = fakeWs();
-    const regular = joined(server.join(regularWs, 3, 103, 'Regular', 'warrior', null));
-    joined(server.join(fakeWs(), 4, 104, 'Observed', 'rogue', null));
+    const regular = joined(server.join(regularWs, 3, 103, 'Regular', 'swordman', null));
+    joined(server.join(fakeWs(), 4, 104, 'Observed', 'thief', null));
     const original = { ...entity(server, regular.pid).pos };
     command(server, regular, '/spectate Observed');
     expect(regular.spectating).toBeNull();
@@ -748,7 +748,7 @@ describe('moderator spectate integration', () => {
 
   it('saves the return position during spectate and restores a stowed pet', async () => {
     const server = new GameServer();
-    const seedPid = server.sim.addPlayer('hunter', 'Petseed');
+    const seedPid = server.sim.addPlayer('archer', 'Petseed');
     const state = server.sim.serializeCharacter(seedPid);
     if (!state) throw new Error('seed character state missing');
     server.sim.removePlayer(seedPid);
@@ -762,12 +762,12 @@ describe('moderator spectate integration', () => {
       autoTaunt: false,
     };
     const moderator = joined(
-      server.join(fakeWs(), 1, 101, 'Petwatcher', 'hunter', state, false, {
+      server.join(fakeWs(), 1, 101, 'Petwatcher', 'archer', state, false, {
         isAdmin: true,
         adminPermissions: MOD_PERMS,
       }),
     );
-    joined(server.join(fakeWs(), 2, 102, 'Pettarget', 'warrior', null));
+    joined(server.join(fakeWs(), 2, 102, 'Pettarget', 'swordman', null));
     const original = { ...entity(server, moderator.pid).pos };
     expect(server.sim.petOf(moderator.pid, true)?.name).toBe('Tracker');
 

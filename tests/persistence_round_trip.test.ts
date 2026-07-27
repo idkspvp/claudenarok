@@ -10,13 +10,13 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 
 function makeWorld() {
-  return new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
 }
 
 describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
   it('a fully-populated character round-trips deep-equal through serialize -> load -> serialize', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Saver');
+    const pid = sim.addPlayer('swordman', 'Saver');
     sim.setPlayerLevel(12, pid);
     const meta = sim.meta(pid)!;
     meta.copper = 4242;
@@ -56,7 +56,7 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
 
     const s1 = sim.serializeCharacter(pid)!;
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Saver', { state: s1 });
+    const pid2 = sim2.addPlayer('swordman', 'Saver', { state: s1 });
     const s2 = sim2.serializeCharacter(pid2)!;
     // The Book of Deeds legitimately enriches a save across a load: joining
     // seeds the discovery ledger from held items (the hand-stuffed bank rows
@@ -81,7 +81,7 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
 
   it('a legacy state missing the post-launch fields loads with sane defaults', () => {
     const sim = makeWorld();
-    const seed = sim.addPlayer('warrior', 'Seed');
+    const seed = sim.addPlayer('swordman', 'Seed');
     const full = sim.serializeCharacter(seed)!;
     // simulate an old save: strip the fields added after the field existed.
     const legacy: Record<string, unknown> = { ...full };
@@ -120,7 +120,7 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
     }
 
     const sim2 = makeWorld();
-    const pid = sim2.addPlayer('warrior', 'Legacy', { state: legacy as never });
+    const pid = sim2.addPlayer('swordman', 'Legacy', { state: legacy as never });
     const m = sim2.meta(pid)!;
     expect(m.arena2v2Rating).toBe(m.arenaRating); // both default to ARENA_BASE_RATING
     expect(m.arena2v2Wins).toBe(0);
@@ -145,7 +145,7 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
 
   it('the fiesta snapshot persists the PRE-fiesta level, not the standardized one', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Bouter');
+    const pid = sim.addPlayer('swordman', 'Bouter');
     sim.setPlayerLevel(20, pid); // pretend mid-bout standardization to 20
     const meta = sim.meta(pid)!;
     meta.fiestaRestore = { level: 8, xp: 1234 };

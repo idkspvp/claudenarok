@@ -21,9 +21,9 @@ type SimInternals = {
 const ZONE1 = ZONES[0];
 
 function setup() {
-  const sim = new Sim({ seed: 21, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 21, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
-  const a = sim.addPlayer('warrior', 'Alpha');
+  const a = sim.addPlayer('swordman', 'Alpha');
   sim.tick();
   const e = internals.entities.get(a)!;
   // The zone1 town hub (Eastbrook), per ZONE1.hub.

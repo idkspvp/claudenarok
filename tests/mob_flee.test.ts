@@ -11,7 +11,7 @@ import type { Entity } from '../src/sim/types';
 import { DT, dist2d, RUN_SPEED } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 
 function wildMobs(sim: Sim): Entity[] {

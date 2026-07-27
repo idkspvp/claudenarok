@@ -195,7 +195,7 @@ describe('cross-surface parity', () => {
       id: 42,
       account_id: 7,
       name: 'Hilda',
-      class: 'warrior',
+      class: 'swordman',
       level: 12,
       state: { level: 12, deeds: EARNED, renown: 15 } as CharacterRow['state'],
       is_gm: false,

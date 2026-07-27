@@ -1,7 +1,7 @@
 // Verification + VIDEO harness for "the Esc menu lets an autorun (R) keep running".
 //
 // This is the autorun companion to esc_run_shot.mjs (which covers click-to-move).
-// Boots the offline world as a warrior at max graphics (?gfx=ultra), presses R to
+// Boots the offline world as a swordman at max graphics (?gfx=ultra), presses R to
 // toggle autorun, confirms the player is running, then opens the game menu with
 // Escape (as if to change a keybind or a setting) while the run is in flight. In a
 // classic MMO the world never pauses, so the autorun latch must keep DRIVING the
@@ -46,7 +46,7 @@ await page.waitForSelector('#btn-offline', { timeout: 60000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Autowyn');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.hud && window.__game?.input, { timeout: 60000 });
 await sleep(2000);

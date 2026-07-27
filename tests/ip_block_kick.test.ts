@@ -40,7 +40,7 @@ function fakeWs() {
 }
 
 function join(server: GameServer, ws: any, id: number, ip: string, isAdmin: boolean) {
-  const r = server.join(ws, id, id, `P${id}`, 'warrior', null, false, {
+  const r = server.join(ws, id, id, `P${id}`, 'swordman', null, false, {
     ip,
     userAgent: '',
     isAdmin,

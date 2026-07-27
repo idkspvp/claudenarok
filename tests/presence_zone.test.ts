@@ -19,7 +19,7 @@ import { delveOrigin, instanceOrigin } from '../src/sim/data';
 function makeServerWithPlayer(): { server: any; session: any; entity: any } {
   const server: any = new GameServer();
   const ws = { readyState: 1, send: () => {} };
-  const session = server.join(ws, 1, 1, 'Tester', 'warrior', null);
+  const session = server.join(ws, 1, 1, 'Tester', 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   const entity = server.sim.entities.get(session.pid);

@@ -54,7 +54,7 @@ const damageEffects = new Set([
   'weaponStrike',
 ]);
 const healingEffects = new Set(['aoeHeal', 'heal', 'hot']);
-const healerClasses = new Set(['paladin', 'priest', 'shaman', 'druid', 'hunter']);
+const healerClasses = new Set(['paladin', 'acolyte', 'shaman', 'druid', 'archer']);
 const meleeReach = 2.25;
 const approachSpeed = 7;
 
@@ -131,7 +131,7 @@ function optionIds(build) {
 }
 
 function runBuild(cls, build, seconds) {
-  const sim = new Sim({ seed: 7300, playerClass: 'warrior', noPlayer: true, autoEquip: true });
+  const sim = new Sim({ seed: 7300, playerClass: 'swordman', noPlayer: true, autoEquip: true });
   const pid = sim.addPlayer(cls, 'Sweep');
   sim.setPlayerLevel(MAX_LEVEL, pid);
   const specId = TALENTS[cls].specs[0]?.id ?? null;
@@ -328,7 +328,7 @@ function markdown(data) {
     '- Freeze package: Ice Lance, Shatter, and Deep Freeze are represented in mage row builds. The stationary dummy captures direct rooted damage and stun damage, but it does not value control uptime beyond its damage side effects.',
   );
   lines.push(
-    '- Priest Silence: Silence appears in priest row builds as a control grant. The stationary dummy does not cast, so this sweep does not measure interrupt value.',
+    '- Priest Silence: Silence appears in acolyte row builds as a control grant. The stationary dummy does not cast, so this sweep does not measure interrupt value.',
   );
   lines.push(
     '- Mobile Scorch kite potential: Firestarter makes Scorch castable while moving. This stationary dummy sweep does not measure kite value, so the report should not treat mobile Scorch as only its dummy DPS.',

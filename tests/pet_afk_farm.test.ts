@@ -3,12 +3,12 @@ import { petPickTarget } from '../src/sim/pet/pet_ai';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
-// Anti-AFK gate on aggressive pet auto-pull (hunter/warlock). An aggressive pet
+// Anti-AFK gate on aggressive pet auto-pull (archer/warlock). An aggressive pet
 // proactively pulls nearby hostiles only while the owner is actually playing; an
 // idle owner's pet still DEFENDS (mob attacking owner/pet, or owner attacking a
 // mob) but must not farm the area on its own. See petPickTarget + PET_OWNER_IDLE_TICKS.
 
-const makeWorld = () => new Sim({ seed: 42, playerClass: 'hunter', noPlayer: true });
+const makeWorld = () => new Sim({ seed: 42, playerClass: 'archer', noPlayer: true });
 
 // Adopt a wild mob as the player's pet (mirrors a completed tame).
 function givePet(sim: Sim, ownerPid: number): Entity {
@@ -52,7 +52,7 @@ function pickTarget(sim: Sim, pet: Entity, owner: Entity): Entity | null {
 // is NOT engaging anyone (so only the `aggressive` auto-pull branch can grab it).
 function setup() {
   const sim = makeWorld();
-  const pid = sim.addPlayer('hunter', 'Aleph');
+  const pid = sim.addPlayer('archer', 'Aleph');
   const owner = sim.entities.get(pid)!;
   const pet = givePet(sim, pid);
   sim.setPetMode('aggressive', pid);
@@ -96,7 +96,7 @@ describe('aggressive pet AFK-farm gate', () => {
 describe('aggressive pet AFK-farm gate: activity stamping (end-to-end)', () => {
   function setupE2E() {
     const sim = makeWorld();
-    const pid = sim.addPlayer('hunter', 'Brann');
+    const pid = sim.addPlayer('archer', 'Brann');
     const owner = sim.entities.get(pid)!;
     const pet = givePet(sim, pid);
     sim.setPetMode('aggressive', pid);

@@ -1,18 +1,18 @@
 // Proof + max-graphics capture for the Rogue "Stealth at 50% speed" change.
 //
 // Rogue Stealth (and the in-combat Vanish variant) now apply a stealth aura with
-// value 0.5: the rogue moves at 50% of normal speed while hidden (was 0.7 / 70%).
+// value 0.5: the thief moves at 50% of normal speed while hidden (was 0.7 / 70%).
 // The mechanic lives in the deterministic Sim (moveSpeedMult treats a 'stealth'
 // aura as a slow), so this harness produces two artifacts at MAX graphics
 // (?gfx=ultra):
 //
-//   1) A distance chart driving the REAL offline Sim in-page: a level-20 rogue
+//   1) A distance chart driving the REAL offline Sim in-page: a level-20 thief
 //      runs straight forward for 15s, charting cumulative distance to prove the
 //      stealth slow applies on the player path:
 //        - Normal   (baseline, mult 1.0)
 //        - Stealth  (value 0.5 -> 50% speed)  -> exactly half the distance
 //   2) A real in-game Stealth toggle so the render loop paints the stealthed
-//      (ghosted) rogue moving forward at the reduced speed.
+//      (ghosted) thief moving forward at the reduced speed.
 //
 // Needs `npm run dev` (override with GAME_URL). Writes tmp/stealth-speed-*.png.
 
@@ -48,7 +48,7 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Shadowstep');
 await page.evaluate(() => {
-  const el = document.querySelector('#offline-select .mini-class[data-class="rogue"]');
+  const el = document.querySelector('#offline-select .mini-class[data-class="thief"]');
   if (el) el.click();
 });
 await page.click('#btn-start-offline');
@@ -194,7 +194,7 @@ console.log('wrote tmp/stealth-speed-chart.png');
 
 // --- second artifact: real in-game Stealth at MAX graphics. Toggle Stealth via
 // the real pipeline (value 0.5) then sustain forward movement so the render loop
-// paints the ghosted rogue creeping at the reduced speed.
+// paints the ghosted thief creeping at the reduced speed.
 await page.evaluate(() => {
   const cv = document.querySelector('#st-chart');
   if (cv) cv.remove();

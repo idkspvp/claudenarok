@@ -8,7 +8,7 @@ import type { Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function dummyOf(sim: Sim): Entity {
@@ -18,7 +18,7 @@ function dummyOf(sim: Sim): Entity {
 }
 
 function meleePlayerAt(sim: Sim, x: number, z: number): number {
-  const pid = sim.addPlayer('warrior', 'Tester', { autoEquip: true });
+  const pid = sim.addPlayer('swordman', 'Tester', { autoEquip: true });
   sim.setPlayerLevel(20, pid); // cap level: an even fight with the level-20 dummy
   const e = sim.entities.get(pid)!;
   e.pos.x = x;

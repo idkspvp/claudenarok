@@ -15,7 +15,7 @@ const SEED = 42;
 const CLIMB_LIMIT = 1.5;
 
 function makeSim(): Sim {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
   sim.setPlayerLevel(60); // mobs along the routes must not decide these tests
   return sim;
 }
@@ -195,7 +195,7 @@ describe('player motion kernel parity with the live Sim', () => {
 
   it('routes terrain wall standoff through the collision sweep', () => {
     const standoffSeed = 20061;
-    const sim = new Sim({ seed: standoffSeed, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: standoffSeed, playerClass: 'swordman', autoEquip: true });
     const start = { x: -150, z: 546.75 };
     teleport(sim, start.x, start.z);
     expect(terrainSteepnessAt(start.x, start.z, standoffSeed)).toBeLessThan(1.0);

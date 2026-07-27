@@ -2,8 +2,9 @@
 // Boots the offline game, finds a Stormcrag Elemental, god-modes the player,
 // forces swings until the chill debuff lands, and screenshots the HUD.
 // Needs `npm run dev` (:5173). Writes PNGs to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -22,7 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Frostbit');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -32,24 +33,34 @@ const setup = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  let mob = null, d = 1e9;
+  let mob = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.templateId === 'stormcrag_elemental' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; mob = e; }
+      if (dd < d) {
+        d = dd;
+        mob = e;
+      }
     }
   }
   if (!mob) return { found: false };
-  p.pos.x = mob.pos.x + 2; p.pos.z = mob.pos.z;
+  p.pos.x = mob.pos.x + 2;
+  p.pos.z = mob.pos.z;
   p.pos.y = mob.pos.y;
-  p.maxHp = 100000; p.hp = 100000; // survive the swings
+  p.maxHp = 100000;
+  p.hp = 100000; // survive the swings
   sim.targetEntity(mob.id);
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
   return { found: true, mobId: mob.id, mobLevel: mob.level, mobName: mob.name };
 });
 console.log('setup:', JSON.stringify(setup));
-if (!setup.found) { console.log('No Stormcrag Elemental found in the offline world'); await browser.close(); process.exit(1); }
+if (!setup.found) {
+  console.log('No Stormcrag Elemental found in the offline world');
+  await browser.close();
+  process.exit(1);
+}
 
 // Force swings until the Numbing Chill debuff appears on the player.
 const proc = await page.evaluate((mobId) => {
@@ -63,7 +74,8 @@ const proc = await page.evaluate((mobId) => {
     if (a) {
       // Step clear of the elemental so the live loop stops the beating; the
       // 6-second chill aura rides along and stays on the buff bar for the shot.
-      p.pos.z += 60; p.prevPos = { ...p.pos };
+      p.pos.z += 60;
+      p.prevPos = { ...p.pos };
       return { chilled: true, swings: i + 1, remaining: a.remaining, value: a.value };
     }
   }
@@ -82,9 +94,15 @@ const rect = await page.evaluate(() => {
 });
 console.log('buff-bar rect:', JSON.stringify(rect));
 if (rect && rect.width > 4 && rect.height > 4) {
-  await page.screenshot({ path: 'tmp/chill_hud.png', clip: {
-    x: 1300, y: 0, width: 300, height: 130,
-  } });
+  await page.screenshot({
+    path: 'tmp/chill_hud.png',
+    clip: {
+      x: 1300,
+      y: 0,
+      width: 300,
+      height: 130,
+    },
+  });
 }
 console.log('saved tmp/chill_full.png and tmp/chill_hud.png');
 

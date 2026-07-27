@@ -117,8 +117,8 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     expect(player.auras.filter((a) => a.kind === 'buff_int' && a.value < 0).length).toBe(1);
   });
 
-  it('never siphons a non-mana victim (warrior uses rage)', () => {
-    const sim = makeSim('warrior');
+  it('never siphons a non-mana victim (swordman uses rage)', () => {
+    const sim = makeSim('swordman');
     const player = sim.player;
     expect(player.resourceType).not.toBe('mana');
     const mob = spawnNhalia(sim);

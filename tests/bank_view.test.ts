@@ -445,7 +445,7 @@ describe('planDepositAllMaterials: replays cleanly against a real Sim', () => {
   });
 
   it('deposits every planned stack with zero refusal when the bank has room', () => {
-    const sim = new Sim({ seed: 11, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 11, playerClass: 'swordman', autoEquip: false });
     moveToBanker(sim);
     const m = metaOf(sim);
     m.inventory.length = 0;
@@ -480,7 +480,7 @@ describe('planDepositAllMaterials: replays cleanly against a real Sim', () => {
     // #1145 corpse harvest stamps rare+ materials with an instance payload; the
     // deposit-all plan must carry such a slot through the real sim.bankDeposit as
     // one indivisible unit that never merges into a plain stack of the same id.
-    const sim = new Sim({ seed: 13, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 13, playerClass: 'swordman', autoEquip: false });
     moveToBanker(sim);
     const m = metaOf(sim);
     m.inventory.length = 0;
@@ -515,7 +515,7 @@ describe('planDepositAllMaterials: replays cleanly against a real Sim', () => {
   });
 
   it('replays a mid-run-full plan exactly: only the fitting stacks deposit, none refuse', () => {
-    const sim = new Sim({ seed: 12, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 12, playerClass: 'swordman', autoEquip: false });
     moveToBanker(sim);
     const m = metaOf(sim);
     m.inventory.length = 0;

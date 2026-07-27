@@ -36,7 +36,7 @@ function makeDeps(opts: { joinResult?: any; hasSession?: boolean; acquireResult?
   const character = {
     id: 7,
     name: 'Vaultkeeper',
-    class: 'warrior',
+    class: 'swordman',
     state: null,
     is_gm: false,
     force_rename: false,

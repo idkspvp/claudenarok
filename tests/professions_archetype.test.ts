@@ -34,7 +34,7 @@ import {
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 // Two distinct craft ids from the ten-craft ring, used throughout.
@@ -180,7 +180,7 @@ describe('archetype persistence: pairedMajor round trip and pre-pair save backfi
     sim.acceptArchetypeQuest('armorcrafting');
     const saved = sim.serializeCharacter(sim.playerId);
     const sim2 = makeSim();
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state: saved ?? undefined });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state: saved ?? undefined });
     const archetype = (
       sim2 as unknown as {
         players: Map<

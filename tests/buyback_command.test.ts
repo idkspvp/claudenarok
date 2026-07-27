@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -16,7 +16,7 @@ function errorText(events: SimEvent[], pid: number): string | undefined {
 describe('/buyback command', () => {
   it('reports an empty buyback list', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/buyback', a);
@@ -25,7 +25,7 @@ describe('/buyback command', () => {
 
   it('lists buyback items most-recent first with per-item repurchase price', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     // most-recent-first, as recordVendorBuyback unshifts each sale
     meta.vendorBuyback = [
@@ -42,7 +42,7 @@ describe('/buyback command', () => {
 
   it('ignores stale entries with unknown items or zero count', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.vendorBuyback = [
       { itemId: 'no_such_item', count: 2 },
@@ -59,7 +59,7 @@ describe('/buyback command', () => {
 
   it('is reachable via the /bb and /repurchase aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/bb', a);
@@ -70,7 +70,7 @@ describe('/buyback command', () => {
 
   it('does not broadcast a chat message for the readout', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     const sent = sim.chat('/buyback', a);

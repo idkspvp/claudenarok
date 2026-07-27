@@ -167,7 +167,7 @@ export interface StatTooltipInput {
   hasteRating: number;
   /** entity.hitRating, the accumulated hit rating from gear + set bonuses. */
   hitRating: number;
-  /** The warrior's front-arc parry chance, 0..1 (warriorParryChance from
+  /** The swordman's front-arc parry chance, 0..1 (warriorParryChance from
    *  Strength); every other class stays at 0. */
   parryChance: number;
   /** Weapon damage-per-second exactly as the panel computes it. */
@@ -181,7 +181,6 @@ export interface StatTooltipInput {
 }
 
 // --- coefficients, mirroring src/sim/entity.ts recalcPlayerStats ------------
-const VIT_ARMOR_PER_POINT = 2; // entity.ts: s.armor += ... + s.vit * 2
 const LUK_PERFECT_DODGE_PER_POINT = 0.001; // hit_flee.ts: (1 + LUK * 0.1) percent
 // Ragnarok's exact term, not the 0.3% it rounds to: the source writes it as
 // `luk * 10 / 3` in integer per mille, and flattening it costs a capped Luck
@@ -189,7 +188,7 @@ const LUK_PERFECT_DODGE_PER_POINT = 0.001; // hit_flee.ts: (1 + LUK * 0.1) perce
 // sheet cannot drift from the formula it is describing.
 const LUK_CRIT_PER_POINT = LUK_CRIT_PERMILLE / 1000;
 const STR_PARRY_PER_POINT = 0.0005; // warrior_hit_table.ts: parry = 0.05 + str * 0.0005
-const HUNTER_RANGED_AP_PER_AGI = 2; // entity.ts: rangedPower = s.agi * 2 (hunter)
+const HUNTER_RANGED_AP_PER_AGI = 2; // entity.ts: rangedPower = s.agi * 2 (archer)
 const INT_SPELLCRIT_PER_POINT = 0.0008; // sim.ts spellCrit(): 0.05 + int * 0.0008
 const AP_PER_DPS = 14; // sim.ts: attackPower / 14 = bonus dps
 // updateRegen (sim.ts) ticks every 2s out of combat; 5s is ~2.5 ticks. The "per
@@ -211,14 +210,14 @@ export function isManaClass(cls: PlayerClass): boolean {
 }
 
 /** Melee attack power gained per point of Strength (entity.ts apFromStats):
- *  2 for warrior/paladin/shaman/druid, 1 for everyone else. */
+ *  2 for the swordman, 1 for everyone else. */
 export function strApPerPoint(cls: PlayerClass): number {
-  return cls === 'warrior' || cls === 'paladin' || cls === 'shaman' || cls === 'druid' ? 2 : 1;
+  return cls === 'swordman' ? 2 : 1;
 }
 
-/** Melee attack power gained per point of Agility: 1 for rogue/hunter, else 0. */
+/** Melee attack power gained per point of Agility: 1 for thief/archer, else 0. */
 export function agiMeleeApPerPoint(cls: PlayerClass): number {
-  return cls === 'rogue' || cls === 'hunter' ? 1 : 0;
+  return cls === 'thief' || cls === 'archer' ? 1 : 0;
 }
 
 /** The VIT multiplier the HP pool carries (entity.ts vitHealthMultiplier). */
@@ -300,7 +299,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
           statusAttackPower(stats.str, 0, stats.luk),
       });
       effects.push({ kind: 'hit', value: hitRating(level, stats.dex) });
-      if (cls === 'hunter') {
+      if (cls === 'archer') {
         effects.push({
           kind: 'rangedAttackPower',
           value: statusRangedAttackPower(stats.str, stats.dex, stats.luk),
@@ -311,7 +310,9 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     case 'vit': {
       statValue = stats.vit;
       effects.push({ kind: 'maxHealthPct', value: (vitHealthMultiplier(stats.vit) - 1) * 100 });
-      effects.push({ kind: 'armor', value: stats.vit * VIT_ARMOR_PER_POINT });
+      // No armor line: Vitality buys SOFT DEF (the flat subtraction in
+      // combat/defence.ts), never the hard DEF this cell describes. It used to
+      // push both, which counted the attribute twice.
       effects.push({ kind: 'healthRegen', value: restingHealthPer5s(stats.vit) });
       break;
     }
@@ -382,7 +383,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       break;
     }
     case 'parry': {
-      // Front-only avoidance, shown as a percent like dodge (the warrior starts
+      // Front-only avoidance, shown as a percent like dodge (the swordman starts
       // at a base chance and scales with Strength; other classes stay at 0).
       isPrimary = false;
       statValue = input.parryChance * 100;
@@ -448,15 +449,13 @@ const PRIMARY_BUFF_KINDS: Record<
 
 /** Base value of a primary attribute (or armor) from class + level, before any
  *  gear / buff / talent layer. Mirrors recalcPlayerStats' opening derivation. */
-function basePrimary(cls: PlayerClass, key: keyof CoreStats, level: number): number {
+function basePrimary(_cls: PlayerClass, key: keyof CoreStats, _level: number): number {
   // A class no longer carries a stat block and level grants no attributes: the
   // base is 1 in each of the six, and everything above that is the player's own
   // spend, which arrives through the allocation rather than through here. Armor
-  // is the exception, and deliberately so: it is not one of the six, so the class
-  // still supplies its own (entity.ts baseArmor + armorPerLevel).
-  if (key !== 'armor') return BASE_STAT;
-  const def = CLASSES[cls];
-  return def.baseArmor + def.armorPerLevel * (Math.max(1, level) - 1);
+  // stopped being the exception with the D1 collapse: hard DEF is equipment only,
+  // so neither the class nor the level contributes and a fresh character is at 0.
+  return key === 'armor' ? 0 : BASE_STAT;
 }
 
 /** Sum the contribution of one attribute (or spellPower) across equipped gear. */
@@ -513,11 +512,9 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
     }
     case 'armor': {
       sources.push({ kind: 'base', value: basePrimary(cls, 'armor', level) });
-      // Armor comes from Vitality, not Agility: Agility buys evasion and no
-      // defence. The Cat Form adjustment that used to live here went with it,
-      // since the form raises Agility and Agility no longer feeds armor.
-      const fromVit = stats.vit * VIT_ARMOR_PER_POINT;
-      if (fromVit !== 0) sources.push({ kind: 'attributes', value: fromVit, fromStat: 'vit' });
+      // No attributes line: hard DEF comes off EQUIPMENT and nothing else. Agility
+      // buys evasion, and Vitality buys soft DEF (the flat subtraction in
+      // combat/defence.ts), so neither feeds this cell.
       const g = gearTotal(gear, 'armor');
       if (g !== 0) sources.push({ kind: 'gear', value: g });
       sources.push(...buffLines(buffs, PRIMARY_BUFF_KINDS.armor));

@@ -25,7 +25,7 @@ import { terrainHeight } from '../src/sim/world';
 type AnyEntity = Entity & Record<string, any>;
 type AnySim = Sim & Record<string, any>;
 
-const makeSim = (cls: 'warrior' | 'rogue' | 'mage' = 'warrior', seed = 42): AnySim =>
+const makeSim = (cls: 'swordman' | 'thief' | 'mage' = 'swordman', seed = 42): AnySim =>
   new Sim({ seed, playerClass: cls, autoEquip: true }) as AnySim;
 
 // A Spirit Healer NPC within reach of a position (2D).
@@ -259,8 +259,8 @@ describe("spirit: The Keeper's Toll persistence", () => {
     expect(state.resSickness).toBe(remaining);
 
     // relog: a fresh Sim loads the saved character
-    const sim2 = new Sim({ seed: 99, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Toller', { state });
+    const sim2 = new Sim({ seed: 99, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Toller', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     const toll2 = e2.auras.find((a: any) => a.id === RESURRECTION_SICKNESS_ID);
     expect(toll2).toBeDefined();
@@ -324,7 +324,7 @@ describe('spirit: dungeons', () => {
 
 describe('spirit: delve respawn (unchanged bounded rules)', () => {
   it('first delve death respawns at 50% hp; a second fails the run', () => {
-    const sim = makeSim('rogue', 99);
+    const sim = makeSim('thief', 99);
     const reliquary = DELVES.collapsed_reliquary;
     sim.setPlayerLevel(reliquary.minLevel);
     const p = sim.player as AnyEntity;
@@ -352,7 +352,7 @@ describe('spirit: delve respawn (unchanged bounded rules)', () => {
   });
 
   it('a delve respawn also clears a held movement key (#1651)', () => {
-    const sim = makeSim('rogue', 99);
+    const sim = makeSim('thief', 99);
     const reliquary = DELVES.collapsed_reliquary;
     sim.setPlayerLevel(reliquary.minLevel);
     const p = sim.player as AnyEntity;
@@ -373,7 +373,7 @@ describe('spirit: delve respawn (unchanged bounded rules)', () => {
   });
 
   it('a second delve death (run-failing eject to the door) also clears a held movement key', () => {
-    const sim = makeSim('rogue', 99);
+    const sim = makeSim('thief', 99);
     const reliquary = DELVES.collapsed_reliquary;
     sim.setPlayerLevel(reliquary.minLevel);
     const p = sim.player as AnyEntity;
@@ -486,7 +486,7 @@ describe('spirit: stale movement intent does not survive death (#1651)', () => {
 describe('spirit: determinism', () => {
   it('same seed + same death -> identical ghost outcome', () => {
     const outcome = () => {
-      const sim = makeSim('warrior', 7);
+      const sim = makeSim('swordman', 7);
       sim.setPlayerLevel(10);
       const p = sim.player as AnyEntity;
       p.dead = true;

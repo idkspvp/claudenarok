@@ -58,9 +58,9 @@ describe('mob withering curse (Withering Rot)', () => {
   });
 
   it('the curse lowers the victim Agility and thins their evasion', () => {
-    // A rogue has ample base Agility, so the drain lands without flooring at 0.
+    // A thief has ample base Agility, so the drain lands without flooring at 0.
     // Apply the aura through the normal path (recalcPlayerStats runs on apply).
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     const player = sim.player;
     const mob = spawnTroll(sim);
     const agiBefore = player.stats.agi;

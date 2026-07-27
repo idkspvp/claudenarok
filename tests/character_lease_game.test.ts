@@ -52,7 +52,7 @@ function join(
   leaseNonce?: string,
 ): any {
   const fw = fakeWs();
-  const s = server.join(fw.ws as any, accountId, characterId, name, 'warrior', null, false, {
+  const s = server.join(fw.ws as any, accountId, characterId, name, 'swordman', null, false, {
     leaseNonce,
   }) as any;
   if (!('error' in s)) s.blockListLoaded = true;
@@ -164,7 +164,7 @@ describe('character load lease, GameServer wiring', () => {
     try {
       const server = new GameServer();
       const fw = fakeWs();
-      const s = server.join(fw.ws as any, 100, 7, 'Doomed', 'warrior', null, false, {
+      const s = server.join(fw.ws as any, 100, 7, 'Doomed', 'swordman', null, false, {
         leaseNonce: 'nonce-c',
       }) as any;
       expect('error' in s).toBe(false);

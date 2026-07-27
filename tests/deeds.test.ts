@@ -29,7 +29,7 @@ import * as duelMod from '../src/sim/social/duel';
 import { type Entity, MAX_LEVEL, MILESTONES, type SimEvent } from '../src/sim/types';
 
 function makeSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function primary(sim: Sim) {
@@ -48,12 +48,12 @@ function deedEvents(evs: SimEvent[]): Extract<SimEvent, { type: 'deedUnlocked' }
 // fiesta-takedown arm of dealDamage can be driven directly. Mirrors the
 // startFiesta harness in tests/fiesta.test.ts.
 function startFiestaBout(): { sim: Sim; match: ArenaMatch } {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
   const pids = [
-    sim.addPlayer('warrior', 'P0'),
+    sim.addPlayer('swordman', 'P0'),
     sim.addPlayer('mage', 'P1'),
-    sim.addPlayer('rogue', 'P2'),
-    sim.addPlayer('priest', 'P3'),
+    sim.addPlayer('thief', 'P2'),
+    sim.addPlayer('acolyte', 'P3'),
   ];
   for (const p of pids) sim.arenaQueueJoin(p, 'fiesta');
   sim.tick(); // matchmake
@@ -69,14 +69,14 @@ function startFiestaBout(): { sim: Sim; match: ArenaMatch } {
 // the yumi player-down arm of dealDamage can be driven directly. Mirrors the
 // startYumi3 harness in tests/yumi_match.test.ts.
 function startYumiBout(): { sim: Sim; match: ArenaMatch } {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
   const pids = [
-    sim.addPlayer('warrior', 'P0'),
+    sim.addPlayer('swordman', 'P0'),
     sim.addPlayer('mage', 'P1'),
-    sim.addPlayer('rogue', 'P2'),
-    sim.addPlayer('priest', 'P3'),
-    sim.addPlayer('hunter', 'P4'),
-    sim.addPlayer('druid', 'P5'),
+    sim.addPlayer('thief', 'P2'),
+    sim.addPlayer('acolyte', 'P3'),
+    sim.addPlayer('archer', 'P4'),
+    sim.addPlayer('acolyte', 'P5'),
   ];
   for (const p of pids) sim.arenaQueueJoin(p, 'yumi3');
   sim.tick(); // matchmake
@@ -404,7 +404,7 @@ describe('retro on join', () => {
 
   it('predicates over persisted state grant with retro: true; counters do not', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Returning', { state: veteranState() });
+    const pid = sim.addPlayer('swordman', 'Returning', { state: veteranState() });
     const meta = sim.players.get(pid)!;
     // State predicates back-credit immediately on join.
     for (const id of [
@@ -435,11 +435,11 @@ describe('retro on join', () => {
     // craft (professions/enchanting.ts), so the fallback's proof-of-craft
     // inference must not read that key; any real craft skill still proves it.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Disenchanter', {
+    const pid = sim.addPlayer('swordman', 'Disenchanter', {
       state: { ...veteranState(), craftSkills: { enchanting: 5 } },
     });
     expect(sim.players.get(pid)!.deedsEarned.has('prog_first_craft')).toBe(false);
-    const pid2 = sim.addPlayer('warrior', 'Cook', {
+    const pid2 = sim.addPlayer('swordman', 'Cook', {
       state: { ...veteranState(), craftSkills: { enchanting: 5, cooking: 1 } },
     });
     expect(sim.players.get(pid2)!.deedsEarned.has('prog_first_craft')).toBe(true);
@@ -449,7 +449,7 @@ describe('retro on join', () => {
     // A veteran whose only rare is worn (the crafted instance moved from the
     // bags into equipmentInstance) must keep the rare-first credit at join.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'RolledVet', {
+    const pid = sim.addPlayer('swordman', 'RolledVet', {
       state: {
         ...veteranState(),
         inventory: [],
@@ -470,7 +470,7 @@ describe('retro on join', () => {
     // the seed must credit the rolled quality exactly like bags, bank, and
     // equipment do.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'BuybackVet', {
+    const pid = sim.addPlayer('swordman', 'BuybackVet', {
       state: {
         ...veteranState(),
         inventory: [],
@@ -491,7 +491,7 @@ describe('retro on join', () => {
     // quality. eastbrook_ritual_vestments' def is uncommon: the gameplay bump
     // to rare is a stat-budget fact, never a discovery fact.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'MasterVet', {
+    const pid = sim.addPlayer('swordman', 'MasterVet', {
       state: {
         ...veteranState(),
         inventory: [
@@ -516,7 +516,7 @@ describe('retro on join', () => {
     // Legacy crafted instances (pre-masterwork) persist rolled.quality; their
     // exact old read is unchanged: the rolled quality beats the def.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'LegacyVet', {
+    const pid = sim.addPlayer('swordman', 'LegacyVet', {
       state: {
         ...veteranState(),
         inventory: [
@@ -534,8 +534,8 @@ describe('retro on join', () => {
   it('the retro pass is a pure function of the loaded state and the catalog', () => {
     const a = new Sim({ seed: 7, playerClass: 'mage' });
     const b = new Sim({ seed: 7, playerClass: 'mage' });
-    const pa = a.addPlayer('warrior', 'Same', { state: veteranState() });
-    const pb = b.addPlayer('warrior', 'Same', { state: veteranState() });
+    const pa = a.addPlayer('swordman', 'Same', { state: veteranState() });
+    const pb = b.addPlayer('swordman', 'Same', { state: veteranState() });
     expect([...a.players.get(pa)!.deedsEarned.keys()].sort()).toEqual(
       [...b.players.get(pb)!.deedsEarned.keys()].sort(),
     );
@@ -546,13 +546,13 @@ describe('retro on join', () => {
     // so level 18 is the first permanently stranded level and 17 the last
     // one where the live kill site can still fire.
     const sim = makeSim();
-    const capped = sim.addPlayer('warrior', 'Capped', {
+    const capped = sim.addPlayer('swordman', 'Capped', {
       state: { ...veteranState(), level: 20 },
     });
     expect(sim.players.get(capped)!.deedsEarned.has('cmb_giantslayer')).toBe(true);
-    const edge = sim.addPlayer('warrior', 'Edge', { state: { ...veteranState(), level: 18 } });
+    const edge = sim.addPlayer('swordman', 'Edge', { state: { ...veteranState(), level: 18 } });
     expect(sim.players.get(edge)!.deedsEarned.has('cmb_giantslayer')).toBe(true);
-    const leveler = sim.addPlayer('warrior', 'Leveler', {
+    const leveler = sim.addPlayer('swordman', 'Leveler', {
       state: { ...veteranState(), level: 17 },
     });
     expect(sim.players.get(leveler)!.deedsEarned.has('cmb_giantslayer')).toBe(false);
@@ -581,7 +581,7 @@ describe('retro on join', () => {
       restedXp: 0,
       deeds,
     };
-    const pid = sim.addPlayer('warrior', 'Completionist', { state });
+    const pid = sim.addPlayer('swordman', 'Completionist', { state });
     const meta = sim.players.get(pid)!;
     for (const id of healed) expect(meta.deedsEarned.has(id), id).toBe(true);
     expect(meta.deedsEarned.has('feat_book_complete')).toBe(true);
@@ -592,17 +592,17 @@ describe('retro on join', () => {
     // with an empty pool is permanently stranded; below the cap the pool can
     // still accrue and the deed must stay earned-by-play.
     const sim = makeSim();
-    const dry = sim.addPlayer('warrior', 'CappedDry', {
+    const dry = sim.addPlayer('swordman', 'CappedDry', {
       state: { ...veteranState(), level: MAX_LEVEL, restedXp: 0 },
     });
     expect(sim.players.get(dry)!.deedsEarned.has('prog_well_rested')).toBe(true);
-    const leveling = sim.addPlayer('warrior', 'StillRests', {
+    const leveling = sim.addPlayer('swordman', 'StillRests', {
       state: { ...veteranState(), level: MAX_LEVEL - 1, restedXp: 0 },
     });
     expect(sim.players.get(leveling)!.deedsEarned.has('prog_well_rested')).toBe(false);
     // A frozen nonzero pool retro-grants through the flag predicate already;
     // the heal must not be the only path that covers it.
-    const banked = sim.addPlayer('warrior', 'Banked', {
+    const banked = sim.addPlayer('swordman', 'Banked', {
       state: { ...veteranState(), level: MAX_LEVEL, restedXp: 50 },
     });
     expect(sim.players.get(banked)!.deedsEarned.has('prog_well_rested')).toBe(true);
@@ -615,7 +615,7 @@ describe('retro on join', () => {
     // professions/archetype.ts downstream of a real quest-validated
     // attunement, and KEPT by the 12c mastery reset) is the proof.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Attuned', {
+    const pid = sim.addPlayer('swordman', 'Attuned', {
       state: {
         ...veteranState(),
         archetype: {
@@ -642,9 +642,9 @@ describe('retro on join', () => {
     // state) and the second player pins the explicit empty-history shape, so
     // both the absent and the [] arm stay non-granting.
     const sim = makeSim();
-    const bare = sim.addPlayer('warrior', 'NeverAttuned', { state: veteranState() });
+    const bare = sim.addPlayer('swordman', 'NeverAttuned', { state: veteranState() });
     expect(sim.players.get(bare)!.deedsEarned.has('prog_guildsworn')).toBe(false);
-    const explicit = sim.addPlayer('warrior', 'EmptyHistory', {
+    const explicit = sim.addPlayer('swordman', 'EmptyHistory', {
       state: {
         ...veteranState(),
         archetype: {
@@ -713,7 +713,7 @@ describe('milestone unification', () => {
     // lifetimeXp is deliberately BELOW the veteran threshold so only the
     // legacy-set union (never the retro lifetimeXp predicate) can be the
     // source of the grant; deleting the union must turn this red.
-    const pid = sim.addPlayer('warrior', 'Legacy', {
+    const pid = sim.addPlayer('swordman', 'Legacy', {
       state: {
         ...{
           level: 20,
@@ -764,7 +764,7 @@ describe('milestone unification', () => {
     expect(state.renown).toBe(5);
     const tampered = { ...state, renown: 9999 };
     const sim2 = makeSim();
-    const pid = sim2.addPlayer('warrior', 'Reload', { state: tampered });
+    const pid = sim2.addPlayer('swordman', 'Reload', { state: tampered });
     expect(sim2.players.get(pid)!.renown).toBe(5);
   });
 });
@@ -790,7 +790,7 @@ describe('persistence', () => {
     sim.tick();
     const state = sim.serializeCharacter(sim.playerId)!;
     const sim2 = makeSim();
-    const pid = sim2.addPlayer('warrior', 'Reload', { state });
+    const pid = sim2.addPlayer('swordman', 'Reload', { state });
     const m2 = sim2.players.get(pid)!;
     expect(m2.deedStats.counters.kills).toBe(3);
     expect(m2.deedStats.counters.lootCopper).toBe(12345);
@@ -815,7 +815,7 @@ describe('persistence', () => {
       inventory: [],
     };
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Bare', { state: bare });
+    const pid = sim.addPlayer('swordman', 'Bare', { state: bare });
     const meta = sim.players.get(pid)!;
     expect(meta.deedsEarned.size).toBe(0);
     expect(meta.renown).toBe(0);
@@ -862,7 +862,7 @@ describe('persistence', () => {
       deedStats: { itemsDiscovered: ['heroic_boundstone_helm'] },
     };
     const sim2 = makeSim();
-    const pid = sim2.addPlayer('warrior', 'HeldVariant', { state: held });
+    const pid = sim2.addPlayer('swordman', 'HeldVariant', { state: held });
     const m2 = sim2.players.get(pid)!;
     expect(m2.deedStats.itemsDiscovered.has('heroic_boundstone_helm')).toBe(true);
     expect(m2.deedStats.itemsDiscovered.has('boundstone_helm')).toBe(true);
@@ -882,7 +882,7 @@ describe('persistence', () => {
       inventory: [],
       vendorBuyback: [{ itemId: 'wolf_fang', count: 1 }],
     };
-    const pid = sim.addPlayer('warrior', 'BuybackVet', { state });
+    const pid = sim.addPlayer('swordman', 'BuybackVet', { state });
     const meta = sim.players.get(pid)!;
     // A pre-ledger save whose only copy sits in the buyback list was once
     // possessed: the join seed credits it.
@@ -1105,7 +1105,7 @@ describe('meter triggers (negative then positive per resolver)', () => {
 
   it('the discovery-count meters count the set and its poor-quality slice', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Counter', {
+    const pid = sim.addPlayer('swordman', 'Counter', {
       state: {
         level: 1,
         xp: 0,
@@ -1257,7 +1257,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
   it('a decided duel bumps duelsWon and duelsLost through endDuel', () => {
     const sim = makeSim();
     const a = sim.playerId;
-    const b = sim.addPlayer('warrior', 'Rival');
+    const b = sim.addPlayer('swordman', 'Rival');
     const duel = { a, b, state: 'active' as const, timer: 0 };
     duelMod.endDuel(sim.ctx, duel, a);
     const metaA = sim.players.get(a)!;
@@ -1269,7 +1269,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
     expect(metaA.deedsEarned.has('pvp_duel_first_win')).toBe(true);
     expect(metaB.deedsEarned.has('pvp_duel_grace')).toBe(true);
     // An undecided duel counts nothing.
-    const c = sim.addPlayer('warrior', 'Bystander');
+    const c = sim.addPlayer('swordman', 'Bystander');
     duelMod.endDuel(sim.ctx, { a, b: c, state: 'active', timer: 0 }, null);
     expect(sim.players.get(c)!.deedStats.counters.duelsLost).toBe(0);
   });
@@ -1277,7 +1277,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
   it('a duel finisher through dealDamage counts the clamped terminal hit and its crit', () => {
     const sim = makeSim();
     const a = sim.playerId;
-    const b = sim.addPlayer('warrior', 'Rival');
+    const b = sim.addPlayer('swordman', 'Rival');
     const duel = { a, b, state: 'active' as const, timer: 0 };
     sim.ctx.duels.set(a, duel);
     sim.ctx.duels.set(b, duel);
@@ -1304,7 +1304,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
   it('a ranked-arena elimination through dealDamage counts the terminal hit beside the death', () => {
     const sim = makeSim();
     const a = sim.playerId;
-    const b = sim.addPlayer('warrior', 'Gladiator');
+    const b = sim.addPlayer('swordman', 'Gladiator');
     const match: ArenaMatch = {
       id: 1,
       format: '1v1',
@@ -1404,7 +1404,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
   it('forming a party bumps partiesJoined for inviter and accepter through partyAccept', () => {
     const sim = makeSim();
     const a = sim.playerId;
-    const b = sim.addPlayer('warrior', 'Friend');
+    const b = sim.addPlayer('swordman', 'Friend');
     sim.ctx.partyInvite(b, a);
     sim.partyAccept(b);
     expect(sim.players.get(a)!.deedStats.counters.partiesJoined).toBe(1);
@@ -1416,7 +1416,7 @@ describe('site wiring (real modules, not direct bumps)', () => {
   it('fullPartyDungeonClears needs all five roster members in the kill-credit snapshot', () => {
     const sim = makeSim();
     const a = sim.playerId;
-    const others = ['Ana', 'Bern', 'Cato', 'Dita'].map((n) => sim.addPlayer('warrior', n));
+    const others = ['Ana', 'Bern', 'Cato', 'Dita'].map((n) => sim.addPlayer('swordman', n));
     for (const pid of others) {
       sim.ctx.partyInvite(pid, a);
       sim.partyAccept(pid);
@@ -1517,8 +1517,8 @@ describe('active title selection (setActiveTitle)', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.activeTitle).toBe('prog_veteran');
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Loaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Loaded', { state });
     expect(sim2.players.get(pid)!.activeTitle).toBe('prog_veteran');
     expect(sim2.entities.get(pid)!.title).toBe('prog_veteran');
   });
@@ -1534,8 +1534,8 @@ describe('active title selection (setActiveTitle)', () => {
     const legacy: CharacterState = { ...state };
     delete legacy.activeTitle;
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Legacy', { state: legacy });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Legacy', { state: legacy });
     expect(sim2.players.get(pid)!.activeTitle).toBeNull();
     expect(sim2.entities.get(pid)!.title).toBeNull();
     // the earned record itself still loads
@@ -1552,8 +1552,8 @@ describe('active title selection (setActiveTitle)', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     const tampered: CharacterState = { ...state, deeds: {} }; // the earned record vanished
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Stale', { state: tampered });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Stale', { state: tampered });
     expect(sim2.players.get(pid)!.activeTitle).toBeNull();
     expect(sim2.entities.get(pid)!.title).toBeNull();
   });
@@ -1674,7 +1674,7 @@ describe('exploration poi identity (marks key on the stable id, not the label)',
 describe('trade completion counts only non-empty trades (soc_first_trade)', () => {
   it('an empty double-confirm does not count; a one-item trade unlocks it for both', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     const ea = sim.entities.get(a)!;
     const eb = sim.entities.get(b)!;
@@ -1716,7 +1716,7 @@ describe('trade completion counts only non-empty trades (soc_first_trade)', () =
     // This drives the receiver-copper arm with NO items on either side, so a
     // regression to items-only (or initiator-only) reds here.
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     const ea = sim.entities.get(a)!;
     const eb = sim.entities.get(b)!;

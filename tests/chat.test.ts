@@ -10,7 +10,7 @@ import type { SimEvent } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -28,9 +28,9 @@ function chatEvents(events: SimEvent[]): Extract<SimEvent, { type: 'chat' }>[] {
 describe('chat channels', () => {
   it('say reaches only players within SAY_RANGE and carries the speaker', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const near = sim.addPlayer('mage', 'Bet');
-    const far = sim.addPlayer('rogue', 'Gimel');
+    const far = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, near, 10, -40); // within 25
     teleport(sim, far, 60, -40); // beyond 25
@@ -49,9 +49,9 @@ describe('chat channels', () => {
 
   it('yell carries further than say but not world-wide', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const mid = sim.addPlayer('mage', 'Bet');
-    const far = sim.addPlayer('rogue', 'Gimel');
+    const far = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, mid, 60, -40); // beyond say(25), within yell(100)
     teleport(sim, far, 0, -400); // beyond yell
@@ -67,9 +67,9 @@ describe('chat channels', () => {
 
   it('whisper reaches only the target plus a sender echo', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 0, -900); // whisper ignores distance
     teleport(sim, c, 2, -40);
@@ -90,7 +90,7 @@ describe('chat channels', () => {
 
   it('/r replies to the last player who whispered you', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, b, 0, -900); // reply ignores distance, like whisper
     sim.tick();
@@ -111,7 +111,7 @@ describe('chat channels', () => {
 
   it('/r with no prior whisper errors instead of saying it out loud', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/r hello?', a);
     const events = sim.tick();
@@ -121,9 +121,9 @@ describe('chat channels', () => {
 
   it('/r reply target follows the most recent incoming whisper', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.tick();
 
     sim.chat('/w aleph first', b); // Bet -> Aleph
@@ -138,9 +138,9 @@ describe('chat channels', () => {
 
   it('sending a whisper does not change your own /r target', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    sim.addPlayer('rogue', 'Gimel');
+    sim.addPlayer('thief', 'Gimel');
     sim.tick();
 
     sim.chat('/w aleph incoming', b); // Bet whispers Aleph -> Aleph's reply target is Bet
@@ -155,7 +155,7 @@ describe('chat channels', () => {
 
   it('whisper to an unknown player errors instead of leaking text', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/w nobody hello?', a);
     const events = sim.tick();
@@ -165,7 +165,7 @@ describe('chat channels', () => {
 
   it('whispering yourself is rejected', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/w aleph echo echo', a);
     const events = sim.tick();
@@ -175,7 +175,7 @@ describe('chat channels', () => {
 
   it('general is a single world-wide broadcast without a pid', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const far = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, far, 0, -900);
@@ -191,7 +191,7 @@ describe('chat channels', () => {
 
   it('the /1 shortcut reaches the General channel, like /general', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const far = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, far, 0, -900);
@@ -208,7 +208,7 @@ describe('chat channels', () => {
 
   it('unknown slash commands error instead of being said out loud', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/wiggle', a);
     const events = sim.tick();
@@ -218,7 +218,7 @@ describe('chat channels', () => {
 
   it('/who explains that the roster is online-only in offline sim play', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/who', a);
     const events = sim.tick();
@@ -233,7 +233,7 @@ describe('chat channels', () => {
 
   it('/help lists the chat commands as system notices without sending chat', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/help', a);
     const events = sim.tick();
@@ -250,7 +250,7 @@ describe('chat channels', () => {
 
   it('/? and /commands are aliases for /help', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     for (const cmd of ['/?', '/commands']) {
       sim.chat(cmd, a);
@@ -262,7 +262,7 @@ describe('chat channels', () => {
 
   it('an unknown slash command points the player at /help', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/bogus stuff', a);
     const events = sim.tick();
@@ -274,7 +274,7 @@ describe('chat channels', () => {
 
   it('/played reports zero on a freshly joined character', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('/played', a);
@@ -291,7 +291,7 @@ describe('chat channels', () => {
 
   it('/playtime reports zero on a freshly joined character', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('/playtime', a);
@@ -308,7 +308,7 @@ describe('chat channels', () => {
 
   it('/playtime accumulates as the sim advances, unlike /played it survives a relog', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     // 20 ticks per sim-second; advance just over a minute of world time
     for (let i = 0; i < 20 * 65; i++) sim.tick();
@@ -318,7 +318,7 @@ describe('chat channels', () => {
 
     // Relog: a fresh Sim (server restart resets sim.time to 0) loading the saved state.
     const sim2 = makeWorld();
-    const b = sim2.addPlayer('warrior', 'Aleph', { state: state! });
+    const b = sim2.addPlayer('swordman', 'Aleph', { state: state! });
     teleport(sim2, b, 0, -40);
     sim2.tick();
     sim2.chat('/playtime', b);
@@ -350,7 +350,7 @@ describe('chat channels', () => {
 
   it("/where reports the caller's zone, level range, and coordinates", () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 12, -340);
     sim.tick();
     const zone = zoneAt(-340);
@@ -369,7 +369,7 @@ describe('chat channels', () => {
 
   it('/played accumulates session time as the sim advances', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     // 20 ticks per sim-second; advance just over a minute of world time
     for (let i = 0; i < 20 * 65; i++) sim.tick();
@@ -386,7 +386,7 @@ describe('chat channels', () => {
 
   it('/where accepts the /loc and /zone aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     const expected = `You are in ${zoneAt(-40).name}`;
@@ -400,9 +400,9 @@ describe('chat channels', () => {
 
   it('exact-case whisper wins over a case-variant squatter', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const squatter = sim.addPlayer('mage', 'bet'); // joins first, lowercase
-    const real = sim.addPlayer('rogue', 'Bet'); // the intended target
+    const real = sim.addPlayer('thief', 'Bet'); // the intended target
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('/w Bet exact match', a);
@@ -414,9 +414,9 @@ describe('chat channels', () => {
 
   it('whisper resolves the longest online name so spaced names are not misdelivered', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const short = sim.addPlayer('mage', 'Bob');
-    const spaced = sim.addPlayer('rogue', 'Bob Smith');
+    const spaced = sim.addPlayer('thief', 'Bob Smith');
     teleport(sim, a, 0, -40);
     sim.tick();
 
@@ -433,8 +433,8 @@ describe('chat channels', () => {
 
   it('whisper resolves spaced names case-insensitively only when unambiguous', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const spaced = sim.addPlayer('rogue', 'Bob Smith');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const spaced = sim.addPlayer('thief', 'Bob Smith');
     teleport(sim, a, 0, -40);
     sim.tick();
 
@@ -447,9 +447,9 @@ describe('chat channels', () => {
 
   it('a shorter exact-case name does not intercept a longer spaced case-insensitive match', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const short = sim.addPlayer('mage', 'Bob');
-    const spaced = sim.addPlayer('rogue', 'bob smith');
+    const spaced = sim.addPlayer('thief', 'bob smith');
     teleport(sim, a, 0, -40);
     sim.tick();
 
@@ -464,9 +464,9 @@ describe('chat channels', () => {
 
   it('ambiguous case-insensitive whisper is refused, not misdelivered', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.addPlayer('mage', 'Bet');
-    sim.addPlayer('rogue', 'bet');
+    sim.addPlayer('thief', 'bet');
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('/w BET ambiguous', a); // matches neither exactly
@@ -477,7 +477,7 @@ describe('chat channels', () => {
 
   it('throttles a chat flood after the burst is spent', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     let delivered = 0;
@@ -495,9 +495,9 @@ describe('chat channels', () => {
 
   it('a joined player hears /world only from other joined players', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const outsider = sim.addPlayer('rogue', 'Gimel');
+    const outsider = sim.addPlayer('thief', 'Gimel');
     // distance must not matter for a global channel
     teleport(sim, a, 0, -40);
     teleport(sim, b, 0, -900);
@@ -520,7 +520,7 @@ describe('chat channels', () => {
 
   it('talking in a channel you have not joined errors instead of broadcasting', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/world hello?', a);
     const events = sim.tick();
@@ -532,7 +532,7 @@ describe('chat channels', () => {
 
   it('/leave stops further delivery on that channel', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.chat('/join world', a);
     sim.chat('/join world', b);
@@ -548,7 +548,7 @@ describe('chat channels', () => {
 
   it('world and lfg are independent channels', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.chat('/join world', a);
     sim.chat('/join lfg', a);
@@ -570,7 +570,7 @@ describe('chat channels', () => {
 
   it('/join confirms with a chat-log notice', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/join world', a);
     const events = sim.tick();
@@ -583,7 +583,7 @@ describe('chat channels', () => {
 
   it('/join rejects unknown channels and the always-on general channel', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/join nonsense', a);
     sim.chat('/join general', a);
@@ -597,7 +597,7 @@ describe('chat channels', () => {
 
   it('a player who leaves the game is dropped from channel rosters', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.chat('/join world', a);
     sim.chat('/join world', b);
@@ -611,9 +611,9 @@ describe('chat channels', () => {
 
   it('party channel still works and stays private to the party', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const outsider = sim.addPlayer('rogue', 'Gimel');
+    const outsider = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 2, -40);
     teleport(sim, outsider, 4, -40);
@@ -633,9 +633,9 @@ describe('chat channels', () => {
 
   it('/roll broadcasts a deterministic result in the default 1-100 range to nearby players', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const near = sim.addPlayer('mage', 'Bet');
-    const far = sim.addPlayer('rogue', 'Gimel');
+    const far = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, near, 10, -40); // within SAY_RANGE
     teleport(sim, far, 80, -40); // beyond SAY_RANGE
@@ -659,7 +659,7 @@ describe('chat channels', () => {
 
   it('/roll N rolls within 1-N and /roll M-N within the given bounds', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
 
@@ -680,9 +680,9 @@ describe('chat channels', () => {
 
   it('/roll prefers the party channel when the roller is grouped', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const outsider = sim.addPlayer('rogue', 'Gimel');
+    const outsider = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 0, -900); // out of say range but in the party
     teleport(sim, outsider, 2, -40);
@@ -702,7 +702,7 @@ describe('chat channels', () => {
 
   it('rejects a malformed roll range instead of saying it out loud', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('/roll 60-50', a); // min greater than max
@@ -715,9 +715,9 @@ describe('chat channels', () => {
 describe('emotes', () => {
   it('a predefined emote reaches everyone in say range with third-person text', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const near = sim.addPlayer('mage', 'Bet');
-    const far = sim.addPlayer('rogue', 'Gimel');
+    const far = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, near, 10, -40); // within say range
     teleport(sim, far, 60, -40); // beyond say range
@@ -736,7 +736,7 @@ describe('emotes', () => {
 
   it('a targeted emote names an online player', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 10, -40);
@@ -750,7 +750,7 @@ describe('emotes', () => {
 
   it('a targeted emote falls back to the solo form for an unknown name', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/cheer Nobody', a);
@@ -760,7 +760,7 @@ describe('emotes', () => {
 
   it('emote aliases resolve to the canonical emote', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/hi', a);
@@ -770,7 +770,7 @@ describe('emotes', () => {
 
   it('/me broadcasts freeform action text', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/me ponders the void', a);
@@ -782,7 +782,7 @@ describe('emotes', () => {
 
   it('an empty /me does nothing', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/me   ', a);
@@ -796,7 +796,7 @@ describe('emotes', () => {
 
   it('sets and expires a network-visible overhead emote without chat spam', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.playEmote('laugh', a);
@@ -813,7 +813,7 @@ describe('emotes', () => {
 describe('trade completion event', () => {
   it('emits tradeDone to both sides when the trade executes', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -834,7 +834,7 @@ describe('trade completion event', () => {
 describe('snapshot interpolation continuity', () => {
   function bareClient(pid: number): any {
     const c: any = Object.create(ClientWorld.prototype);
-    c.cfg = { seed: 42, playerClass: 'warrior' };
+    c.cfg = { seed: 42, playerClass: 'swordman' };
     c.entities = new Map();
     c.playerId = pid;
     c.inventory = [];
@@ -859,7 +859,7 @@ describe('snapshot interpolation continuity', () => {
   const wire = (id: number, x: number) => ({
     id,
     k: 'player',
-    tid: 'warrior',
+    tid: 'swordman',
     nm: 'Runner',
     lv: 1,
     x,
@@ -943,7 +943,7 @@ function logEvents(events: SimEvent[]): Extract<SimEvent, { type: 'log' }>[] {
 describe('/afk and /dnd presence', () => {
   it('/afk confirms to the setter and auto-replies to whisperers (still delivering)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
 
@@ -971,7 +971,7 @@ describe('/afk and /dnd presence', () => {
 
   it('/dnd withholds the whisper but still echoes the sender and notifies them', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
 
@@ -993,7 +993,7 @@ describe('/afk and /dnd presence', () => {
 
   it('repeating the bare command toggles the status off', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/afk', a);
@@ -1005,7 +1005,7 @@ describe('/afk and /dnd presence', () => {
 
   it('sending any other chat clears an away status', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/afk', a);
@@ -1017,7 +1017,7 @@ describe('/afk and /dnd presence', () => {
 
   it('/afk sets the entity display flag; /dnd does not; toggling clears it', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
 
@@ -1039,7 +1039,7 @@ describe('/afk and /dnd presence', () => {
 
   it('moving under your own input clears AFK (Do Not Disturb survives)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
 
@@ -1227,8 +1227,8 @@ describe('chat module (direct, no Sim)', () => {
     // Repro for the live bug: /dev gold added the gold AND showed the red
     // "Unknown command" toast, because chat()'s call site only returned early
     // for a non-null SentChat while handleDevChat signals "handled" with null.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true, devCommands: true });
-    const pid = sim.addPlayer('warrior', 'Cheater');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true, devCommands: true });
+    const pid = sim.addPlayer('swordman', 'Cheater');
     sim.drainEvents();
     sim.chat('/dev gold 5', pid);
     const events = sim.drainEvents();
@@ -1259,7 +1259,7 @@ describe('chat module (direct, no Sim)', () => {
 describe('dev bot: a whisperable test dummy', () => {
   it('spawnDevBot adds a unique dummy that a whisper auto-replies to', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const botPid = sim.spawnDevBot('ASASAS');
     expect(botPid).toBeGreaterThanOrEqual(0);
     const botMeta = sim.players.get(botPid)!;
@@ -1288,15 +1288,15 @@ describe('dev bot: a whisperable test dummy', () => {
   });
 
   it('the /dev bot command spawns a bot only when dev commands are on', () => {
-    const on = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true, devCommands: true });
-    const a = on.addPlayer('warrior', 'Aleph');
+    const on = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true, devCommands: true });
+    const a = on.addPlayer('swordman', 'Aleph');
     on.chat('/dev bot ASASAS', a);
     on.tick();
     expect([...on.players.values()].find((m) => m.name === 'ASASAS')?.isDevBot).toBe(true);
 
     // with dev commands off, "/dev bot" is inert (never spawns a player)
     const off = makeWorld();
-    const a2 = off.addPlayer('warrior', 'Aleph');
+    const a2 = off.addPlayer('swordman', 'Aleph');
     off.chat('/dev bot NOPE', a2);
     off.tick();
     expect([...off.players.values()].some((m) => m.name === 'NOPE')).toBe(false);
@@ -1306,7 +1306,7 @@ describe('dev bot: a whisperable test dummy', () => {
 describe('/sit and /stand pose', () => {
   it('/sit seats the player, moving clears it, and /stand stands back up', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Sitter');
+    const a = sim.addPlayer('swordman', 'Sitter');
     teleport(sim, a, 0, -40);
     const e = sim.entities.get(a)!;
     sim.chat('/sit', a);
@@ -1325,7 +1325,7 @@ describe('/sit and /stand pose', () => {
 
   it('a dead player cannot sit', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Ghost');
+    const a = sim.addPlayer('swordman', 'Ghost');
     const e = sim.entities.get(a)!;
     e.dead = true;
     sim.chat('/sit', a);
@@ -1338,7 +1338,7 @@ describe('chat speaker titles (Book of Deeds)', () => {
   // (never display text; the client localizes via deed_i18n). Untitled
   // players omit the key entirely, and mob/boss yells never stamp one.
   function titledSpeaker(sim: Sim, name = 'Aleph') {
-    const pid = sim.addPlayer('warrior', name);
+    const pid = sim.addPlayer('swordman', name);
     const meta = sim.players.get(pid)!;
     grantDeed(sim.ctx, meta, 'prog_veteran'); // reward: title "Veteran"
     sim.setActiveTitle('prog_veteran', pid);
@@ -1378,14 +1378,14 @@ describe('chat speaker titles (Book of Deeds)', () => {
         // does, and for the same reason: the HUD reads it off the event rather
         // than off `IWorld.entities` (interest-scoped online), so a general/
         // world/guild/lfg/whisper sender outside ~120yd still colors correctly.
-        expect(m.classId, channel).toBe('warrior');
+        expect(m.classId, channel).toBe('swordman');
       }
     }
   });
 
   it('omits the key entirely for an untitled speaker', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, -40);
     sim.tick();
     sim.chat('untitled hello', a);
@@ -1394,7 +1394,7 @@ describe('chat speaker titles (Book of Deeds)', () => {
     for (const m of msgs) {
       expect('fromTitle' in m).toBe(false);
       // Unlike the title, class is never optional for a player sender.
-      expect(m.classId).toBe('warrior');
+      expect(m.classId).toBe('swordman');
     }
   });
 
@@ -1445,9 +1445,9 @@ describe('chat speaker titles (Book of Deeds)', () => {
     // classId entirely on this branch rather than passing the sender's own).
     expect(echo.from).toBe('Aleph');
     expect(echo.fromTitle).toBe('prog_veteran');
-    expect(echo.classId).toBe('warrior');
+    expect(echo.classId).toBe('swordman');
     const toTarget = msgs.find((m) => m.pid === b)!;
     expect(toTarget.fromTitle).toBe('prog_veteran');
-    expect(toTarget.classId).toBe('warrior');
+    expect(toTarget.classId).toBe('swordman');
   });
 });

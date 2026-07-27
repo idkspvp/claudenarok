@@ -10,7 +10,7 @@ type TestSim = Sim & {
 };
 
 function makeHunter(rows: Record<number, string> = {}): TestSim {
-  const sim = new Sim({ seed: 2614, playerClass: 'hunter', autoEquip: false }) as TestSim;
+  const sim = new Sim({ seed: 2614, playerClass: 'archer', autoEquip: false }) as TestSim;
   sim.setPlayerLevel(20);
   sim.player.resource = sim.player.maxResource;
   return sim;
@@ -49,7 +49,7 @@ describe('Hunter Patch Up', () => {
   it('heals only the living owned pet for exactly 240 over 12 sec', () => {
     const sim = makeHunter();
     const ownPet = addPet(sim, sim.playerId);
-    const otherPid = sim.addPlayer('hunter', 'Other Hunter');
+    const otherPid = sim.addPlayer('archer', 'Other Hunter');
     const foreignPet = addPet(sim, otherPid);
     sim.player.targetId = foreignPet.id;
 
@@ -91,9 +91,9 @@ describe('Hunter Patch Up', () => {
     ).toBe(false);
   });
 
-  it('does not heal or revive another hunter pet when the caster owns none', () => {
+  it('does not heal or revive another archer pet when the caster owns none', () => {
     const sim = makeHunter();
-    const otherPid = sim.addPlayer('hunter', 'Other Hunter');
+    const otherPid = sim.addPlayer('archer', 'Other Hunter');
     const foreignPet = addPet(sim, otherPid, 0);
     foreignPet.dead = true;
     sim.player.targetId = foreignPet.id;

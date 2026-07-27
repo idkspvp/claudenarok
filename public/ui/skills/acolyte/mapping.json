@@ -1,9 +1,9 @@
 {
-  "class": "priest",
+  "class": "acolyte",
   "license": "CraftPix premium (royalty-free commercial). Icons Purchased by Levy Street Account - callum@levystreet.com",
   "iconSize": 128,
-  "sourcePack": "tmp/asset_src/priest-skill-icons (CraftPix premium)",
-  "runtimeDir": "public/ui/skills/priest",
+  "sourcePack": "tmp/asset_src/acolyte-skill-icons (CraftPix premium)",
+  "runtimeDir": "public/ui/skills/acolyte",
   "abilities": [
     {
       "abilityId": "smite",

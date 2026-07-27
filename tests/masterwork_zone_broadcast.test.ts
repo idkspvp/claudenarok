@@ -66,11 +66,11 @@ const PROC_SEED = 2;
 // player parked in instance space, and a player moved to a different overworld
 // zone. Position pokes happen after all rng-relevant setup and draw nothing.
 function runScenario(opts?: { crafterInInstanceSpace?: boolean }) {
-  const sim = new Sim({ seed: PROC_SEED, playerClass: 'warrior', autoEquip: false });
+  const sim = new Sim({ seed: PROC_SEED, playerClass: 'swordman', autoEquip: false });
   const crafter = sim.playerId;
   const nearby = sim.addPlayer('mage', 'Bystander');
-  const delver = sim.addPlayer('rogue', 'Delver');
-  const farhand = sim.addPlayer('priest', 'Farhand');
+  const delver = sim.addPlayer('thief', 'Delver');
+  const farhand = sim.addPlayer('acolyte', 'Farhand');
   sim.acceptArchetypeQuest('tailoring');
   const meta = (sim as any).players.get(crafter);
   meta.craftSkills.tailoring = 200;
@@ -242,7 +242,7 @@ function joinServer(
   id: number,
   name: string,
 ): ClientSession {
-  const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;

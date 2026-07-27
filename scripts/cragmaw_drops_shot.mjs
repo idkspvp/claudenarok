@@ -37,9 +37,11 @@ await page.waitForSelector('#nav-btn-play', { timeout: 15000 });
 await jsClick('#nav-btn-play');
 await page.waitForSelector('#btn-offline', { timeout: 15000 });
 await jsClick('#btn-offline');
-await page.waitForSelector('#offline-select .mini-class[data-class="warrior"]', { timeout: 15000 });
+await page.waitForSelector('#offline-select .mini-class[data-class="swordman"]', {
+  timeout: 15000,
+});
 await page.type('#char-name', 'Brannok');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim && window.__game.hud, { timeout: 20000 });
 await new Promise((r) => setTimeout(r, 1200));

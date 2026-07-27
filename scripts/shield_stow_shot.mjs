@@ -33,7 +33,7 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await wait(400);
 await page.type('#char-name', 'Sheathe');
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-start-offline').click();
 });
 await page.waitForFunction(() => !!window.__game?.world?.player, { timeout: 90000 });

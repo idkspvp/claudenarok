@@ -64,7 +64,7 @@ interface ClientInternals {
 
 function makeWorld(): { world: ClientWorld; wire: ClientInternals } {
   const world = withDomStubs(() => {
-    const w = new ClientWorld('flair-probe-token', 1, 'warrior', 'http://localhost');
+    const w = new ClientWorld('flair-probe-token', 1, 'swordman', 'http://localhost');
     w.close();
     return w;
   });
@@ -259,7 +259,7 @@ describe('ClientWorld.accountFlair: the wire is never trusted', () => {
 
 describe('Sim.accountFlair: the offline world has no accounts', () => {
   it('is always null', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     expect(sim.accountFlair('ValeQueen')).toBeNull();
   });
 });

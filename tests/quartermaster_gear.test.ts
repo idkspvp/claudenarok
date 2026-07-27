@@ -40,7 +40,7 @@ describe("Quartermaster's Consignment gear pack", () => {
   });
 
   it("stocks the eight consignment pieces on the Merchant's standing market", () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
     const house = sim.marketListings.filter((l) => l.house);
     for (const id of VENDOR) {
       expect(

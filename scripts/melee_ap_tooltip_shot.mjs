@@ -1,5 +1,5 @@
-// Screenshot of a warrior ability tooltip showing live Attack-Power-boosted
-// damage. Boots the offline client, levels a warrior (so it has real melee
+// Screenshot of a swordman ability tooltip showing live Attack-Power-boosted
+// damage. Boots the offline client, levels a swordman (so it has real melee
 // Attack Power), opens the spellbook, and hovers Rend so its tooltip shows the
 // (+N) Attack Power contribution folded into the bleed. Needs `npm run dev`.
 // Writes PNGs to tmp/.
@@ -27,7 +27,7 @@ await page
 await page.waitForSelector('#btn-offline', { timeout: 40000 });
 await wait(300);
 await page.evaluate(() => document.querySelector('#btn-offline')?.click());
-await page.waitForSelector('#offline-select [data-class="warrior"]', { timeout: 15000 });
+await page.waitForSelector('#offline-select [data-class="swordman"]', { timeout: 15000 });
 await page.evaluate(() => {
   const n = document.querySelector('#char-name');
   if (n) {
@@ -36,7 +36,7 @@ await page.evaluate(() => {
   }
 });
 await page.evaluate(() =>
-  document.querySelector('#offline-select [data-class="warrior"]')?.click(),
+  document.querySelector('#offline-select [data-class="swordman"]')?.click(),
 );
 await wait(200);
 await page.evaluate(() => document.querySelector('#btn-start-offline')?.click());

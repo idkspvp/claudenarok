@@ -38,7 +38,7 @@ function stubInfo(over: Partial<NonNullable<ArenaInfo['match']>['yumi']> = {}): 
       map: 'coliseum' as const,
       state: yumi.phase === 'sudden' ? 'active' : (yumi.phase as 'countdown' | 'active' | 'over'),
       oppName: 'Them',
-      oppClass: 'warrior',
+      oppClass: 'swordman',
       oppLevel: 10,
       oppPid: 2,
       allies: [],

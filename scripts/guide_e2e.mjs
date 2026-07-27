@@ -99,7 +99,7 @@ try {
   );
   await page.screenshot({ path: 'tmp/wiki-classes.png', fullPage: true });
 
-  await page.goto(`${BASE}/wiki/classes/warrior`, { waitUntil: 'networkidle0' });
+  await page.goto(`${BASE}/wiki/classes/swordman`, { waitUntil: 'networkidle0' });
   await page.waitForSelector('.guide-class-hero');
   check(
     'class page hero renders',
@@ -108,7 +108,7 @@ try {
   check('class page shows specs', (await page.$$('.guide-spec-card')).length >= 1);
   check('class page shows signature abilities', (await page.$$('.guide-kit-item')).length >= 1);
   check('class page title is the class name', /Warrior/i.test(await page.title()));
-  await page.screenshot({ path: 'tmp/wiki-class-warrior.png', fullPage: true });
+  await page.screenshot({ path: 'tmp/wiki-class-swordman.png', fullPage: true });
 
   await page.goto(`${BASE}/wiki/classes/notaclass`, { waitUntil: 'networkidle0' });
   await page.waitForSelector('.guide-article');
@@ -156,7 +156,7 @@ try {
   check('chooser clear restores all nine', allVisible === 9);
 
   // Site search.
-  await page.type('#guide-search-input', 'warrior');
+  await page.type('#guide-search-input', 'swordman');
   await page.waitForSelector('.guide-search-opt');
   check('search returns results', (await page.$$('.guide-search-opt')).length > 0);
 

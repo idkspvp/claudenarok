@@ -14,7 +14,7 @@ import { terrainHeight } from '../src/sim/world';
 // hides the thing these cases actually measure. At 20 the kill is grey and pays
 // nothing, leaving HP still.
 const makeSim = () => {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
   sim.setPlayerLevel(20);
   return sim;
 };

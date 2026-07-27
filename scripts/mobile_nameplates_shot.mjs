@@ -36,7 +36,7 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
   // Offline flow: Play Offline, name, pick class, Start.
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar', settleMs: 2500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar', settleMs: 2500 });
 
   // Let the world spawn + render a few frames.
   await page.waitForSelector('#mobile-controls', { timeout: 15000 });

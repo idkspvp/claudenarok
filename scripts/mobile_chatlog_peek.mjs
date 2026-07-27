@@ -46,7 +46,7 @@ await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
 await sleep(900);
 
 // Offline entry: Play Offline -> name -> class -> Enter World -> preflight.
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thumbwar', settleMs: 900 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thumbwar', settleMs: 900 });
 await page.evaluate(() => document.querySelector('#mobile-preflight-continue')?.click());
 await page.waitForFunction(() => window.__game?.world?.entities?.size > 0, {
   timeout: 20000,

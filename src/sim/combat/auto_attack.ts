@@ -65,9 +65,9 @@ import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
 import { weaponSwingDamage } from './weapon_damage';
 
-// Fraction of the mainhand weapon's damage a hunter's Auto Shot deals. There is no
+// Fraction of the mainhand weapon's damage a archer's Auto Shot deals. There is no
 // dedicated ranged-weapon slot, so the mainhand doubles as the "bow"; a full melee
-// weapon's damage on ranged would push a fully geared hunter's white DPS well past
+// weapon's damage on ranged would push a fully geared archer's white DPS well past
 // the melee classes (measured ~+30%), so only part of it carries to the shot. The
 // agility-driven ranged attack-power term is unaffected, and wands (the caster
 // sidearm, fixed class damage) are exempt.
@@ -290,7 +290,7 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
     }
     maybeProcBattleTrance(ctx, p, meta, connected);
     maybeProcSuddenDeath(ctx, p, meta, connected);
-    // Wolf Form swings at the rogue's fixed feral cadence, not the carried weapon's
+    // Wolf Form swings at the thief's fixed feral cadence, not the carried weapon's
     // speed (see combat/form_swing.ts); everyone else uses their weapon speed.
     // Melee haste (item sets + Enrage + haste buffs) lives in the ONE additive
     // bucket inside swingIntervalMult (v0.27.1); only the stance-mastery auto
@@ -314,7 +314,7 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
 }
 
 function stanceMasteryAutoHaste(ctx: SimContext, player: Entity, meta: PlayerMeta): number {
-  if (meta.cls !== 'warrior') return 0;
+  if (meta.cls !== 'swordman') return 0;
   if (!player.auras.some((aura) => aura.kind === 'berserker_stance')) return 0;
   return ctx.playerMods(meta).global.stanceMastery > 0 ? STANCE_MASTERY_BERSERKER_HASTE : 0;
 }
@@ -325,7 +325,7 @@ function maybeProcBattleTrance(
   meta: PlayerMeta,
   connected: boolean,
 ): void {
-  if (!connected || meta.cls !== 'warrior') return;
+  if (!connected || meta.cls !== 'swordman') return;
   const proc = ctx.rng.chance(BATTLE_TRANCE_CHANCE);
   if (!proc || ctx.playerMods(meta).spec === 'fury') return;
   ctx.applyAura(player, {
@@ -346,7 +346,7 @@ function maybeProcSuddenDeath(
   meta: PlayerMeta,
   connected: boolean,
 ): void {
-  if (!connected || meta.cls !== 'warrior') return;
+  if (!connected || meta.cls !== 'swordman') return;
   if (ctx.playerMods(meta).spec !== 'arms') return;
   if (!meta.known.some((known) => known.def.id === 'sudden_death' && known.def.passive)) return;
   if (!ctx.rng.chance(SUDDEN_DEATH_CHANCE)) return;
@@ -404,7 +404,7 @@ export function rangedSwing(
       ctx.enterCombat(atk, tgt);
       return;
     }
-    // Only part of a melee weapon's roll carries to a hunter's Auto Shot (see
+    // Only part of a melee weapon's roll carries to a archer's Auto Shot (see
     // RANGED_WEAPON_COEFF); a wand deals its full fixed damage. The ranged AP term
     // (agility) is unaffected either way.
     // ranged white hits suffer the same higher-level crit suppression as melee
@@ -450,7 +450,7 @@ export function rangedSwing(
     // 4-piece set procs keyed to weapon crits (ranged arm). Gated on setProcs
     // inside applySetProcs, so proc-less players draw no rng.
     if (crit && atk.kind === 'player') ctx.applySetProcs(atk, tgt, 'weaponCrit');
-    // Legendary on-hit weapon procs (e.g. Thronebane's Chain Arc) fire on a hunter's
+    // Legendary on-hit weapon procs (e.g. Thronebane's Chain Arc) fire on a archer's
     // Auto Shot too, since it strikes with the equipped mainhand. Wand bolts do not
     // swing the mainhand, so casters never roll it. No-op (no rng draw) unless the
     // shooter wields a proc weapon with a weaponHit proc.
@@ -566,7 +566,7 @@ export function meleeSwing(
   // form is overriding it, otherwise THIS swing's weapon speed, which may be an
   // ability's own weapon rather than the equipped one. Normalizing the weapon
   // roll by it is what stops a druid in Wolf Form collecting the per-swing damage
-  // of the slow staff it is holding while swinging at the rogue cadence. The
+  // of the slow staff it is holding while swinging at the thief cadence. The
   // status ATK term carries no speed factor at all now (Ragnarok has none), so
   // this is the only place that guard still lives.
   const apSwingSpeed = opts.apSwingSpeed ?? formSwingSpeed(attacker) ?? weapon.speed;

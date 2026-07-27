@@ -75,9 +75,9 @@ function pinnedIdleWolfAt(sim: Sim, id: number, dx: number, dz: number): AnyEnti
   return mob;
 }
 
-// Add a warrior and teleport it to (FAR.x + dx, FAR.z + dz), returning its Entity.
+// Add a swordman and teleport it to (FAR.x + dx, FAR.z + dz), returning its Entity.
 function addPlayerAt(sim: Sim, name: string, dx: number, dz: number): Entity {
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   const e = (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid) as AnyEntity;
   e.pos.x = FAR.x + dx;
   e.pos.z = FAR.z + dz;
@@ -103,7 +103,7 @@ function refreshPlayerGrid(sim: Sim): void {
 }
 
 function noPlayerSim(): Sim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // Place WOLVES pinned idle wolves clustered within WOLF_RING of the camp center.

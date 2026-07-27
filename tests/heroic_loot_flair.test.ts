@@ -164,8 +164,8 @@ describe('heroic loot flair: weapon dps tracks item level', () => {
 
 describe('heroic loot flair: the drop swap in a heroic instance', () => {
   function killKorzul(difficulty: 'normal' | 'heroic'): any[] {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid = sim.addPlayer('swordman', 'Solo');
     if (difficulty === 'heroic') sim.setDungeonDifficulty('heroic', pid);
     enterDungeon(sim.ctx, 'gravewyrm_sanctum', pid);
     const inst = (sim.instances as any[]).find(

@@ -223,8 +223,8 @@ describe('handleGatherNodeInteract', () => {
 // on against the real Sim.
 describe('the real harvestNode behind the helper (cast start)', () => {
   it('a successful interact starts the gather cast and returns true before any grant', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Interactor');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Interactor');
     // #2343: bare hands never gather, so the fixture carries the tier-1 pick
     // (addItem draws no rng).
     sim.addItem('copper_mining_pick', 1, pid);

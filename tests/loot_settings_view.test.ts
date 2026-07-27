@@ -5,7 +5,7 @@ import type { PartyInfo, PartyMemberInfo } from '../src/world_api';
 const member = (pid: number, name: string): PartyMemberInfo => ({
   pid,
   name,
-  cls: 'warrior',
+  cls: 'swordman',
   level: 40,
   hp: 100,
   mhp: 100,

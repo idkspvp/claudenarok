@@ -22,7 +22,7 @@ function isDamage(event: TickEvent): event is DamageEvent {
 }
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -35,7 +35,7 @@ function teleport(sim: Sim, pid: number, x: number, z: number) {
 
 function formRaid(sim: Sim, leaderPid: number) {
   while ((sim.partyOf(leaderPid)?.members.length ?? 1) < 5) {
-    const pid = sim.addPlayer('priest', `RaidFill${sim.players.size}`);
+    const pid = sim.addPlayer('acolyte', `RaidFill${sim.players.size}`);
     sim.partyInvite(pid, leaderPid);
     sim.partyAccept(pid);
   }
@@ -114,7 +114,7 @@ function isolatedState(gravebreakerTimer: number): NonNullable<Entity['nythraxis
 describe('Nythraxis Gravebreaker as a charged auto-attack', () => {
   it('has no opener: nothing labeled Gravebreaker lands in the first 11.5s of a natural pull', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
     tank.maxHp = 1e7;
@@ -137,12 +137,12 @@ describe('Nythraxis Gravebreaker as a charged auto-attack', () => {
 
   it('releases on a landed swing: splash on the front bystander only, same tick, 1.5x, charge consumed', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     const origin = enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const bystanderPid = sim.addPlayer('warrior', 'Bystander');
+    const bystanderPid = sim.addPlayer('swordman', 'Bystander');
     const bystander = sim.entities.get(bystanderPid)!;
-    const behindPid = sim.addPlayer('warrior', 'Behind');
+    const behindPid = sim.addPlayer('swordman', 'Behind');
     const behind = sim.entities.get(behindPid)!;
     for (const p of [tank, bystander, behind]) {
       p.maxHp = 1e7;
@@ -203,10 +203,10 @@ describe('Nythraxis Gravebreaker as a charged auto-attack', () => {
 
   it('avoidance holds the charge: a dodging tank delays the release to the next landed swing', () => {
     const sim = makeWorld();
-    const tankPid = sim.addPlayer('warrior', 'Tank');
+    const tankPid = sim.addPlayer('swordman', 'Tank');
     enterRaid(sim, tankPid);
     const tank = sim.entities.get(tankPid)!;
-    const bystanderPid = sim.addPlayer('warrior', 'Bystander');
+    const bystanderPid = sim.addPlayer('swordman', 'Bystander');
     const bystander = sim.entities.get(bystanderPid)!;
     for (const p of [tank, bystander]) {
       p.maxHp = 1e7;

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { createMob } from '../src/sim/entity';
 import { MOBS } from '../src/sim/data';
+import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 import { MELEE_RANGE } from '../src/sim/types';
 
 // Regression for "excessive melee range on monsters": a STATIONARY mob used to gain a
@@ -15,7 +15,7 @@ const SEED = 7788;
 let nextId = 9000;
 
 function makeSim() {
-  const sim: any = new Sim({ seed: SEED, playerClass: 'warrior' });
+  const sim: any = new Sim({ seed: SEED, playerClass: 'swordman' });
   const p = sim.entities.get(sim.playerId)!;
   p.pos = { x: 0, y: 0, z: 0 };
   p.prevPos = { x: -1, y: 0, z: 0 }; // the player moved this tick (the old trigger)

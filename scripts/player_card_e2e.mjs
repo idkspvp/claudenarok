@@ -178,7 +178,7 @@ const cx = await api('/api/characters', {
 const cy = await api('/api/characters', {
   method: 'POST',
   token: tokenA,
-  body: { name: `${cbase}-Zy`, class: 'rogue', skin: 0 },
+  body: { name: `${cbase}-Zy`, class: 'thief', skin: 0 },
 });
 check('collision chars created', cx.status === 200 && cy.status === 200);
 const px = await uploadCard(tokenA, cx.data.id);

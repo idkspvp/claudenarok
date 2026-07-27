@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 
 const SEED = 42;
@@ -37,7 +37,7 @@ describe('mob sap vigor (Sapping Bite)', () => {
   });
 
   it('a landed hit drains the template amount of energy from an energy user', () => {
-    const { sim, player, mob } = setup('rogue');
+    const { sim, player, mob } = setup('thief');
     expect(player.resourceType).toBe('energy');
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
     player.resource = player.maxResource;
@@ -53,7 +53,7 @@ describe('mob sap vigor (Sapping Bite)', () => {
   });
 
   it('drain clamps at zero — it never pushes the resource negative', () => {
-    const { sim, player, mob } = setup('rogue');
+    const { sim, player, mob } = setup('thief');
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
     player.resource = 10; // less than sap.amount (25)
     const old = sap.chance;
@@ -74,7 +74,11 @@ describe('mob sap vigor (Sapping Bite)', () => {
     sap.chance = 1;
     player.resource = player.maxResource;
     try {
-      for (let i = 0; i < 50; i++) { player.maxHp = KEEP_ALIVE; player.hp = KEEP_ALIVE; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 50; i++) {
+        player.maxHp = KEEP_ALIVE;
+        player.hp = KEEP_ALIVE;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       sap.chance = old;
     }
@@ -83,14 +87,18 @@ describe('mob sap vigor (Sapping Bite)', () => {
   });
 
   it('a friendly pet never drains its target (hostile guard)', () => {
-    const { sim, player, mob } = setup('rogue');
+    const { sim, player, mob } = setup('thief');
     mob.hostile = false; // emulate a tamed pet swinging
     player.resource = player.maxResource;
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
     const old = sap.chance;
     sap.chance = 1;
     try {
-      for (let i = 0; i < 50; i++) { player.maxHp = KEEP_ALIVE; player.hp = KEEP_ALIVE; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 50; i++) {
+        player.maxHp = KEEP_ALIVE;
+        player.hp = KEEP_ALIVE;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       sap.chance = old;
     }

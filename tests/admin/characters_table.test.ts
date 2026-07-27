@@ -10,7 +10,7 @@ const rows: CharacterRow[] = [
   {
     id: 1,
     name: 'Aragorn',
-    class: 'warrior',
+    class: 'swordman',
     level: 60,
     accountId: 1,
     username: 'viggo',

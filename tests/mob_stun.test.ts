@@ -5,7 +5,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman' });
 
 describe('Skullthump on-hit stun affix', () => {
   it('the Mogger Lackey carries stunOnHit data tuned to a brief physical stun', () => {

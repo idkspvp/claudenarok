@@ -24,7 +24,7 @@ header comment of `env_server.ts`; that header is the reference, don't restate i
 - `obs` is a plain `number[]` of length `obsSize()` (query it, never hardcode,
   it scales with content). `action` is an int index into `ACTIONS`. Bad JSON, an
   unknown cmd, or a thrown error replies `{error: "..."}`.
-- `player_class` is any `PlayerClass` in `ALL_CLASSES` (default `warrior`);
+- `player_class` is any `PlayerClass` in `ALL_CLASSES` (default `swordman`);
   an unknown class is rejected with `{error: ...}`. The obs/action space is
   identical for every class (ability slots pad to the largest kit), so switching
   `player_class` never changes a trained config's vector shape.

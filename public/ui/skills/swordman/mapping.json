@@ -1,16 +1,16 @@
 {
-  "class": "warrior",
+  "class": "swordman",
   "license": "CraftPix premium (royalty-free commercial). Icons Purchased by Levy Street Account - callum@levystreet.com",
   "iconSize": 128,
   "sourcePacks": [
-    "tmp/asset_src/warrior-skill-icons",
+    "tmp/asset_src/swordman-skill-icons",
     "tmp/asset_src/berserker-skill-icons (fallback for rage/fury)"
   ],
-  "runtimeDir": "public/ui/skills/warrior",
+  "runtimeDir": "public/ui/skills/swordman",
   "abilities": [
     {
       "abilityId": "heroic_strike",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "3.png",
       "output": "heroic_strike.webp"
     },
@@ -76,13 +76,13 @@
     },
     {
       "abilityId": "thunder_clap",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "7.png",
       "output": "thunder_clap.webp"
     },
     {
       "abilityId": "hamstring",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "33.png",
       "output": "hamstring.webp"
     },
@@ -124,7 +124,7 @@
     },
     {
       "abilityId": "slam",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "4.png",
       "output": "slam.webp"
     },
@@ -160,7 +160,7 @@
     },
     {
       "abilityId": "cleave",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "1.png",
       "output": "cleave.webp"
     },
@@ -178,7 +178,7 @@
     },
     {
       "abilityId": "demoralizing_shout",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "36.png",
       "output": "demoralizing_shout.webp"
     },
@@ -214,7 +214,7 @@
     },
     {
       "abilityId": "mortal_strike",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "21.png",
       "output": "mortal_strike.webp"
     },
@@ -304,7 +304,7 @@
     },
     {
       "abilityId": "whirlwind",
-      "sourcePack": "warrior",
+      "sourcePack": "swordman",
       "sourceFile": "13.png",
       "output": "whirlwind.webp"
     },

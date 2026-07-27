@@ -3,9 +3,9 @@ import { ABILITIES } from '../src/sim/data';
 import { hasExplicitAbilityIcon } from '../src/ui/icons';
 import { PET_ACTION_ICONS, petFeedButtonState } from '../src/ui/pet_action_icons';
 
-// Regression guard for "Repeated icons on hunter class": the pet action bar used to pass
+// Regression guard for "Repeated icons on archer class": the pet action bar used to pass
 // class ability ids to the icon resolver, so pet buttons borrowed other classes' spell
-// art (a hunter's aggressive stance == their own Rapid Fire; "Heal Pet" == the druid
+// art (a archer's aggressive stance == their own Rapid Fire; "Heal Pet" == the druid
 // magic heal). Each pet action must have its OWN dedicated icon recipe instead.
 describe('pet action bar icons', () => {
   const iconIds = Object.values(PET_ACTION_ICONS);
@@ -31,7 +31,7 @@ describe('pet action bar icons', () => {
 });
 
 // The Feed Pet button used to look identically clickable whether or not it
-// could actually do anything, so a hunter with a full-health pet or no food
+// could actually do anything, so a archer with a full-health pet or no food
 // saw an inert button with no explanation. petFeedButtonState is the pure
 // decision the button's disabled state and tooltip now render from.
 describe('petFeedButtonState', () => {

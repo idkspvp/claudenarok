@@ -52,13 +52,13 @@ page.on('console', (m) => {
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
 await sleep(800);
 
-// Offline quick-start as priest (a healer, so the own-cat heal check is real).
+// Offline quick-start as acolyte (a healer, so the own-cat heal check is real).
 await page.evaluate(() => {
   document.querySelector('#btn-offline')?.click();
 });
 await sleep(400);
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="priest"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="acolyte"]')?.click();
   const name = document.querySelector('#char-name');
   if (name) name.value = 'Yumitester';
   document.querySelector('#btn-start-offline')?.click();
@@ -70,7 +70,7 @@ check('entered offline world', true);
 const seated = await page.evaluate(() => {
   const sim = window.__game.sim;
   sim.setPlayerLevel(20);
-  const classes = ['warrior', 'mage', 'rogue', 'hunter', 'druid'];
+  const classes = ['swordman', 'mage', 'thief', 'archer', 'druid'];
   const pids = [sim.playerId, ...classes.map((c, i) => sim.addPlayer(c, `Bot${i}`))];
   for (const pid of pids) sim.arenaQueueJoin(pid, 'yumi3');
   return { pids };
@@ -202,7 +202,7 @@ const contained = await page.evaluate(() => {
 });
 check('walls contain real movement', contained.inside, JSON.stringify(contained));
 
-// Heal the own cat as the priest (friendly-target rule end to end).
+// Heal the own cat as the acolyte (friendly-target rule end to end).
 const healed = await page.evaluate(() => {
   const sim = window.__game.sim;
   const m = sim.arenaMatchFor(sim.playerId);

@@ -65,7 +65,7 @@ describe('LeaderboardWindow: stale async board responses', () => {
         {
           rank: 1,
           name: 'Toprank',
-          cls: 'warrior',
+          cls: 'swordman',
           level: 20,
           virtualLevel: 22,
           lifetimeXp: 1_000_000,

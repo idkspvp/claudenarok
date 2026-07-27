@@ -18,7 +18,7 @@ type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 5): AnySim {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, e: AnyEntity, x: number, z: number): void {
@@ -66,7 +66,7 @@ describe('heroic vendor stock: item-level and budget pins', () => {
 describe('heroic vendor buy path', () => {
   it('debits the marks from the bags and grants the item', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Buyer');
+    const pid = sim.addPlayer('swordman', 'Buyer');
     atQuartermaster(sim, pid);
     sim.addItem(HEROIC_MARK_ITEM_ID, 15, pid);
     sim.drainEvents();
@@ -84,7 +84,7 @@ describe('heroic vendor buy path', () => {
 
   it('refuses when the buyer cannot afford the price, without debiting', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Broke');
+    const pid = sim.addPlayer('swordman', 'Broke');
     atQuartermaster(sim, pid);
     sim.addItem(HEROIC_MARK_ITEM_ID, 11, pid);
     sim.drainEvents();
@@ -98,7 +98,7 @@ describe('heroic vendor buy path', () => {
 
   it('refuses away from the quartermaster and for junk item ids', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Faraway');
+    const pid = sim.addPlayer('swordman', 'Faraway');
     sim.addItem(HEROIC_MARK_ITEM_ID, 20, pid);
     sim.drainEvents();
 
@@ -116,7 +116,7 @@ describe('heroic vendor buy path', () => {
 
   it('refuses with full bags and keeps the marks', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Packrat');
+    const pid = sim.addPlayer('swordman', 'Packrat');
     atQuartermaster(sim, pid);
     sim.addItem(HEROIC_MARK_ITEM_ID, 12, pid);
     // Fill every remaining bag slot with non-stacking items.
@@ -170,7 +170,7 @@ describe('heroic mark reward persistence', () => {
   it('persists a kill-time mark and its deed telemetry without depending on the corpse', () => {
     const sim = makeSim(21);
     sim.utcDay = '2026-07-07';
-    const pid = sim.addPlayer('warrior', 'Daily');
+    const pid = sim.addPlayer('swordman', 'Daily');
     const morthen = killHeroicMorthen(sim, pid);
     expect(sim.countItem(HEROIC_MARK_ITEM_ID, pid)).toBe(1);
     expect(
@@ -190,13 +190,13 @@ describe('heroic mark reward persistence', () => {
     let nextReset = DAY_MS;
     const sim = new Sim({
       seed: 22,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       lockoutNowMs: () => now,
       raidResetMs: () => nextReset,
     }) as AnySim;
     sim.utcDay = '2026-07-07';
-    const pid = sim.addPlayer('warrior', 'Resetter');
+    const pid = sim.addPlayer('swordman', 'Resetter');
     const morthen = killHeroicMorthen(sim, pid);
     const meta = sim.players.get(pid)!;
     meta.heroicDaily.marked.add('sunken_bastion');
@@ -214,7 +214,7 @@ describe('heroic mark reward persistence', () => {
 
   it('unlocks the Full Circuit deed from four distinct rewards in one reset window', () => {
     const sim = makeSim(25);
-    const pid = sim.addPlayer('warrior', 'Circuit');
+    const pid = sim.addPlayer('swordman', 'Circuit');
     const meta = sim.players.get(pid)!;
     const circuit = [
       'hollow_crypt',
@@ -246,12 +246,12 @@ describe('heroic mark reward persistence', () => {
 
   it('continues to load and preserve a pre-hotfix heroicDaily payload', () => {
     const sim = makeSim(23);
-    const pid = sim.addPlayer('warrior', 'Saver');
+    const pid = sim.addPlayer('swordman', 'Saver');
     const state = sim.serializeCharacter(pid)!;
     state.heroicDaily = { date: '2026-07-07', marked: ['hollow_crypt'] };
 
     const sim2 = makeSim(24);
-    const pid2 = sim2.addPlayer('warrior', 'Saver', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Saver', { state });
     const meta2 = sim2.players.get(pid2) as any;
     expect(meta2.heroicDaily.date).toBe('2026-07-07');
     expect(meta2.heroicDaily.marked.has('hollow_crypt')).toBe(true);

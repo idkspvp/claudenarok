@@ -207,7 +207,7 @@ export const GUIDE_ROUTES: GuideRoute[] = [
 
 export interface RouteMatch {
   route: GuideRoute;
-  /** Path segments after the matched route, e.g. ['warrior'] for /guide/classes/warrior. */
+  /** Path segments after the matched route, e.g. ['swordman'] for /guide/classes/swordman. */
   params: string[];
 }
 
@@ -223,8 +223,8 @@ export function toSub(pathname: string): string {
 
 /**
  * Match a pathname to a route. Prefers the longest exact sub match; a route may also
- * claim deeper segments as params (e.g. 'classes' matches 'classes/warrior' with
- * params ['warrior']). Returns null when nothing matches (caller renders notFound).
+ * claim deeper segments as params (e.g. 'classes' matches 'classes/swordman' with
+ * params ['swordman']). Returns null when nothing matches (caller renders notFound).
  */
 export function matchRoute(pathname: string): RouteMatch | null {
   const sub = toSub(pathname);

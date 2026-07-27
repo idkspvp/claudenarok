@@ -1,5 +1,5 @@
 // Heroic anti-kite mob charge (MobTemplate.charge + src/sim/mob/charge.ts):
-// the warrior/guard melee mobs of the four heroic five-mans open with an
+// the swordman/guard melee mobs of the four heroic five-mans open with an
 // Onrush-style gap closer (instant 0.5s stun, then a 3x-speed dash to melee).
 // HEROIC-ONLY: the template field is inert until applyDungeonMobTuning stamps
 // Entity.chargeEnabled on a heroic spawn, so normal spawns never charge, and
@@ -22,7 +22,7 @@ const SEED = 61234;
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
-// The nine heroic warrior/guard melee templates that carry the charge, and the
+// The nine heroic swordman/guard melee templates that carry the charge, and the
 // exact record they all share (anti-kite band 5..30yd, 12s cooldown, 0.5s stun).
 const CHARGE_TEMPLATE_IDS = [
   'crypt_shambler',
@@ -69,7 +69,7 @@ const NO_CHARGE_TEMPLATE_IDS = [
 ] as const;
 
 function makeSim(): AnySim {
-  return new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, e: AnyEntity, x: number, z: number): void {
@@ -109,7 +109,7 @@ function engage(mob: AnyEntity, targetId: number): void {
 // An invulnerable (gm) player so heroic swings cannot end the scenario early;
 // gm only no-ops dealDamage, auras (the charge stun) still land.
 function addGmPlayer(sim: AnySim, x: number, z: number): { pid: number; player: AnyEntity } {
-  const pid = sim.addPlayer('warrior', 'Kiter');
+  const pid = sim.addPlayer('swordman', 'Kiter');
   const player = sim.entities.get(pid) as AnyEntity;
   player.gm = true;
   teleport(sim, player, x, z);
@@ -143,7 +143,7 @@ const testRoot = (sourceId: number): Aura => ({
 });
 
 describe('charge template coverage (data contract)', () => {
-  it('exactly the nine warrior/guard melee templates carry the shared charge record', () => {
+  it('exactly the nine swordman/guard melee templates carry the shared charge record', () => {
     for (const id of CHARGE_TEMPLATE_IDS) {
       expect(MOBS[id]?.charge, `${id} carries charge`).toEqual(CHARGE_RECORD);
     }

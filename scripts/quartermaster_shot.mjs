@@ -1,5 +1,5 @@
 // Quartermaster's Consignment screenshots: the 10 new gear pieces in the bags,
-// a warrior wearing the new helmet/shoulder/waist/gloves on the paperdoll, and
+// a swordman wearing the new helmet/shoulder/waist/gloves on the paperdoll, and
 // the eight consignment listings on the Merchant's World Market.
 // Offline flow (no server). Needs `npm run dev`. Writes PNGs to tmp/.
 
@@ -23,7 +23,7 @@ const ALL = [
   'gorraks_cleaver',
   'mossy_handwraps',
 ];
-// warrior-equippable subset, one per new armor slot + the weapon
+// swordman-equippable subset, one per new armor slot + the weapon
 const WORN = {
   helmet: 'roadwardens_helm',
   shoulder: 'reinforced_pauldrons',
@@ -70,7 +70,7 @@ await page.evaluate(() => {
     n.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 await wait(3000);
 
@@ -102,7 +102,7 @@ await page.evaluate(() => {
 });
 await wait(200);
 
-// equip the warrior-wearable subset for the paperdoll shot
+// equip the swordman-wearable subset for the paperdoll shot
 const result = await page.evaluate(
   ({ WORN }) => {
     const sim = window.__game.sim;

@@ -13,12 +13,12 @@ import { attributeFreezes, frameStats, normalizeReport } from './metrics.mjs';
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const CLASSES = [
-  'warrior',
+  'swordman',
   'paladin',
-  'priest',
+  'acolyte',
   'mage',
-  'hunter',
-  'rogue',
+  'archer',
+  'thief',
   'warlock',
   'druid',
   'shaman',
@@ -280,7 +280,7 @@ export class Profiler {
     return tier ? `&gfx=${tier}` : '';
   }
 
-  async enter({ mode = 'offline', cls = 'warrior', tier } = {}) {
+  async enter({ mode = 'offline', cls = 'swordman', tier } = {}) {
     this.mode = mode;
     const page = this.page;
     if (mode === 'offline') {

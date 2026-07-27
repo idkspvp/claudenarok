@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorTextFor(sim: Sim, pid: number): string | undefined {
@@ -17,7 +17,7 @@ function errorTextFor(sim: Sim, pid: number): string | undefined {
 describe('/falling command', () => {
   it('reports solid ground when not airborne', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.onGround = true;
@@ -28,7 +28,7 @@ describe('/falling command', () => {
 
   it('reports rising while ascending (vy > 0)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     const ground = groundHeight(e.pos.x, e.pos.z, sim.cfg.seed);
@@ -43,7 +43,7 @@ describe('/falling command', () => {
 
   it('warns of a dangerous fall when the peak drop exceeds the safe distance', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     const ground = groundHeight(e.pos.x, e.pos.z, sim.cfg.seed);
@@ -60,7 +60,7 @@ describe('/falling command', () => {
 
   it('reports a safe landing for a short fall', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     const ground = groundHeight(e.pos.x, e.pos.z, sim.cfg.seed);

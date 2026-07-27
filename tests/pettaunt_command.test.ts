@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'hunter', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'archer', noPlayer: true });
 }
 
 function errorTexts(events: SimEvent[]): string[] {
@@ -27,7 +27,7 @@ function givePet(sim: Sim, ownerPid: number): Entity {
 describe('/pettaunt command', () => {
   it('reports no pet when the player has none', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     sim.tick();
     sim.chat('/pettaunt', a);
     expect(errorTexts(sim.tick())).toContain('You do not have a pet.');
@@ -35,7 +35,7 @@ describe('/pettaunt command', () => {
 
   it('reports Growl ready when the taunt timer is spent', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     sim.tick();
     const pet = givePet(sim, a);
     pet.petTauntTimer = 0;
@@ -45,7 +45,7 @@ describe('/pettaunt command', () => {
 
   it('reports when Growl autocast is enabled', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     sim.tick();
     const pet = givePet(sim, a);
     pet.petTauntTimer = 0;
@@ -56,7 +56,7 @@ describe('/pettaunt command', () => {
 
   it('reports remaining cooldown rounded up while Growl recharges', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     sim.tick();
     const pet = givePet(sim, a);
     pet.petTauntTimer = 4.2;

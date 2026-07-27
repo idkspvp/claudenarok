@@ -50,7 +50,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -67,7 +67,7 @@ function broadcast(server: GameServer): void {
 // scaffolding).
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.moveInput = {};
@@ -133,7 +133,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
           {
             id: 3,
             name: 'Mate',
-            cls: 'priest',
+            cls: 'acolyte',
             level: 9,
             realm: 'R1',
             online: false,
@@ -156,7 +156,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
           {
             id: 3,
             name: 'Mate',
-            cls: 'priest',
+            cls: 'acolyte',
             level: 9,
             realm: 'R1',
             online: false,
@@ -190,7 +190,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
           {
             id: 3,
             name: 'Seen',
-            cls: 'priest',
+            cls: 'acolyte',
             level: 9,
             realm: 'R1',
             online: false,
@@ -231,7 +231,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
         {
           id: 5,
           name: 'Stale',
-          cls: 'rogue',
+          cls: 'thief',
           level: 3,
           realm: 'R1',
           activeTitle: null,
@@ -240,7 +240,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
         {
           id: 6,
           name: 'Keeper',
-          cls: 'hunter',
+          cls: 'archer',
           level: 7,
           realm: 'R1',
           activeTitle: 'prog_veteran',
@@ -259,7 +259,7 @@ describe('W9 socialInfo via the social/socialpos frames (non-snapshot)', () => {
           {
             id: 4,
             name: 'Mate',
-            cls: 'priest',
+            cls: 'acolyte',
             level: 9,
             realm: 'R1',
             activeTitle: 'prog_veteran',

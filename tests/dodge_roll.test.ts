@@ -14,15 +14,11 @@ import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
 
 const ROLLS: Record<PlayerClass, string> = {
-  warrior: 'bracing_roll',
-  rogue: 'shadowslip',
-  hunter: 'wildstep',
+  swordman: 'bracing_roll',
   mage: 'phase_tumble',
-  priest: 'veilstep',
-  paladin: 'sanctified_sidestep',
-  shaman: 'galestep',
-  warlock: 'dreadstep',
-  druid: 'feral_tumble',
+  archer: 'wildstep',
+  acolyte: 'veilstep',
+  thief: 'shadowslip',
 };
 
 const ROLL_DISTANCE = 8;
@@ -102,7 +98,7 @@ describe('baseline dodge roll: kit coverage', () => {
       expect(known?.def.cooldown).toBe(12);
       expect(known?.def.requiresTarget).toBe(false);
       // Physical school on every class, casters included, so a silence can never
-      // lock the roll out (mirrors the warlock's Gag Order).
+      // lock the roll out (mirrors the mage's Gag Order).
       expect(known?.def.school, `${cls} roll must survive a silence`).toBe('physical');
     }
   });
@@ -110,7 +106,7 @@ describe('baseline dodge roll: kit coverage', () => {
 
 describe("baseline dodge roll: the 'invuln' contract", () => {
   it('denies every incoming damage school while it rides, then stops on expiry', () => {
-    const { sim, p } = rig('warrior');
+    const { sim, p } = rig('swordman');
     p.auras.push(aura('invuln', IFRAME_SECONDS));
     const full = p.hp;
 
@@ -127,7 +123,7 @@ describe("baseline dodge roll: the 'invuln' contract", () => {
   });
 
   it('denies a telegraphed AoE nova the roller is standing inside', () => {
-    const { sim, p } = rig('rogue');
+    const { sim, p } = rig('thief');
     const mob = createMob(9200, MOBS.forest_wolf, 20, { x: p.pos.x, y: p.pos.y, z: p.pos.z + 1 });
     mob.hostile = true;
     (sim as unknown as { addEntity(e: Entity): void }).addEntity(mob);
@@ -161,7 +157,7 @@ describe("baseline dodge roll: the 'invuln' contract", () => {
 describe('baseline dodge roll: casting it', () => {
   it('moves the caster forward and grants the window, and is deterministic', () => {
     const run = () => {
-      const { sim, p } = rig('hunter');
+      const { sim, p } = rig('archer');
       p.facing = 0; // +z
       const from = { x: p.pos.x, z: p.pos.z };
       sim.castAbility('wildstep');
@@ -179,7 +175,7 @@ describe('baseline dodge roll: casting it', () => {
   });
 
   it('breaks a root, so a snared player can still roll clear', () => {
-    const { sim, p } = rig('druid');
+    const { sim, p } = rig('acolyte');
     p.auras.push(aura('root'));
     expect(isRooted(p)).toBe(true);
     sim.castAbility('feral_tumble');

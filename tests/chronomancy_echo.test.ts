@@ -47,10 +47,10 @@ function chronoMage(level = 20) {
   return { sim, p };
 }
 
-/** Add a friendly warrior ally near the mage, and return its entity. */
+/** Add a friendly swordman ally near the mage, and return its entity. */
 function addAlly(sim: Sim, name: string, dist = 5): Entity {
   const p = sim.player;
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   sim.setPlayerLevel(20, pid); // a real level-20 pool, so exact heals never clamp
   const ent = sim.entities.get(pid);
   if (!ent) throw new Error('ally missing');

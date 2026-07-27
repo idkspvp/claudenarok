@@ -47,7 +47,7 @@ function addDummy(sim: Sim, dist = 6): Entity {
 
 function addAlly(sim: Sim): Entity {
   const p = sim.player;
-  const id = sim.addPlayer('warrior', 'Tanque');
+  const id = sim.addPlayer('swordman', 'Tanque');
   const ally = sim.entities.get(id)!;
   ally.pos.x = p.pos.x + 4;
   ally.pos.z = p.pos.z;
@@ -307,7 +307,7 @@ function cascadeAoeHeal(enemyCount: number): CascadeMeasure {
   p.resource = p.maxResource;
   const allyIds: number[] = [];
   for (let i = 0; i < 5; i++) {
-    const id = sim.addPlayer('warrior', `Ally${i}`);
+    const id = sim.addPlayer('swordman', `Ally${i}`);
     const a = sim.entities.get(id)!;
     a.pos.x = p.pos.x + 1 + i * 0.4; // tight cluster (party invites need proximity)
     a.pos.z = p.pos.z;

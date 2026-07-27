@@ -1,9 +1,9 @@
 {
-  "class": "rogue",
+  "class": "thief",
   "license": "CraftPix premium (royalty-free commercial). Icons Purchased by Levy Street Account - callum@levystreet.com",
   "iconSize": 128,
   "sourcePack": "tmp/asset_src/thief-skill-icons (CraftPix premium)",
-  "runtimeDir": "public/ui/skills/rogue",
+  "runtimeDir": "public/ui/skills/thief",
   "abilities": [
     {
       "abilityId": "sinister_strike",

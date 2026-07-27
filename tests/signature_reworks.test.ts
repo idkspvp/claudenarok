@@ -34,14 +34,14 @@ function addAlly(sim: Sim, x: number, z: number, hp = 100): Entity {
 
 describe('reworked signatures', () => {
   it('Conflagrate and Swiftmend use the retuned cooldowns (6s / 8s)', () => {
-    const lock = makeSim('warlock', 'destruction');
+    const lock = makeSim('mage', 'destruction');
     expect(lock.resolvedAbility('conflagrate')?.cooldown).toBe(6);
-    const druid = makeSim('druid', 'restoration');
-    expect(druid.resolvedAbility('swiftmend')?.cooldown).toBe(8);
+    const acolyte = makeSim('acolyte', 'restoration');
+    expect(acolyte.resolvedAbility('swiftmend')?.cooldown).toBe(8);
   });
 
   it('Chain Heal bounces to nearby allies with healing falloff', () => {
-    const sim = makeSim('shaman', 'restoration');
+    const sim = makeSim('acolyte', 'restoration');
     const pid = sim.playerId;
     const p = sim.entities.get(pid) as Entity;
     // Three injured allies in a line off the player's (flat) spawn, each within the 12yd
@@ -63,8 +63,8 @@ describe('reworked signatures', () => {
   });
 
   it('Feral Instinct grants Energy regen in Cat Form and instant Rage in Bear Form', () => {
-    // Cat Form: an energy druid gains a buff_energyregen aura (doubled regen).
-    const cat = makeSim('druid', 'feral');
+    // Cat Form: an energy acolyte gains a buff_energyregen aura (doubled regen).
+    const cat = makeSim('acolyte', 'feral');
     const cp = cat.entities.get(cat.playerId) as Entity;
     cp.auras.push({
       id: 'cat',
@@ -81,8 +81,8 @@ describe('reworked signatures', () => {
     cat.tick();
     expect(cp.auras.some((a) => a.kind === 'buff_energyregen' && a.value === 1)).toBe(true);
 
-    // Bear Form: a rage druid instantly gains 50 Rage.
-    const bear = makeSim('druid', 'feral');
+    // Bear Form: a rage acolyte instantly gains 50 Rage.
+    const bear = makeSim('acolyte', 'feral');
     const bp = bear.entities.get(bear.playerId) as Entity;
     bp.auras.push({
       id: 'bear',
@@ -103,7 +103,7 @@ describe('reworked signatures', () => {
   });
 
   it('Metamorphosis stacks damage AND haste on the caster (no aura eviction)', () => {
-    const sim = makeSim('warlock', 'demonology');
+    const sim = makeSim('mage', 'demonology');
     const p = sim.entities.get(sim.playerId) as Entity;
     sim.castAbility('metamorphosis', sim.playerId);
     sim.tick();
@@ -116,7 +116,7 @@ describe('reworked signatures', () => {
   });
 
   it('Moonkin Form grants +20% spell damage and +50% armor', () => {
-    const sim = makeSim('druid', 'balance');
+    const sim = makeSim('acolyte', 'balance');
     const p = sim.entities.get(sim.playerId) as Entity;
     const armorBefore = p.stats.armor;
     sim.castAbility('moonkin_form', sim.playerId);
@@ -160,7 +160,7 @@ describe('spell haste plumbing', () => {
     // content debt, so Discipline is the fractional-buff exemplar in the merged tree:
     // its absorb mastery (absorbPct 0.3) runs the resolver's effect-scaling pass over
     // the granted Anointing, whose 0.2 haste buff must pass through un-rounded.
-    const sim = makeSim('priest', 'discipline');
+    const sim = makeSim('acolyte', 'discipline');
     const pi = sim.resolvedAbility('power_infusion');
     const haste = (pi?.effects ?? []).find(
       (e: any) => e.type === 'buffTarget' && e.kind === 'buff_spellhaste',

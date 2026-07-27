@@ -85,7 +85,7 @@ try {
       return false;
     }
   };
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Notchy', settleMs: 1200 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Notchy', settleMs: 1200 });
   await click('#mobile-preflight-continue');
   await new Promise((r) => setTimeout(r, 2500));
 

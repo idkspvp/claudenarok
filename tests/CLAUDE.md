@@ -41,7 +41,7 @@ local helpers (cross-suite fakes live in `tests/server/helpers/` and `tests/help
 copy the pattern from `sim.test.ts`:
 
 ```ts
-const makeSim = (cls='warrior', seed=42) => new Sim({ seed, playerClass: cls, autoEquip: true });
+const makeSim = (cls='swordman', seed=42) => new Sim({ seed, playerClass: cls, autoEquip: true });
 // teleport: set pos.{x,z}, then pos.y = terrainHeight(x,z, sim.cfg.seed), then prevPos = {...pos}
 // face a target: sim.player.facing = Math.atan2(t.pos.x-p.pos.x, t.pos.z-p.pos.z)
 for (let i = 0; i < 20 * 120 && !done; i++) sim.tick();  // 20 = ticks/sec (DT=1/20); `20*N` = N seconds

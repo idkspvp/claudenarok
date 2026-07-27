@@ -17,7 +17,7 @@ const SEED = 7788;
 let nextId = 9200;
 
 function makeSim() {
-  const sim: any = new Sim({ seed: SEED, playerClass: 'warrior' });
+  const sim: any = new Sim({ seed: SEED, playerClass: 'swordman' });
   const p = sim.entities.get(sim.playerId)!;
   p.pos = { x: 0, y: 0, z: 0 };
   p.prevPos = { x: 0, y: 0, z: 0 };
@@ -93,7 +93,7 @@ describe('ranged petSpell casters keep the classic caster loop', () => {
     const { sim, p } = makeSim();
     const mob = engageMob(sim, p, 'corrupted_priest_malric', 10, 'attack', { swingTimer: 5 });
     sim.updateMob(mob);
-    expect(mob.pos.x).toBe(10); // a casting priest does not advance
+    expect(mob.pos.x).toBe(10); // a casting acolyte does not advance
     expect(mob.aiState).toBe('attack');
   });
 

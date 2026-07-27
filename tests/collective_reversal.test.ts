@@ -18,7 +18,7 @@ function chronomancer(): { sim: Sim; mage: Entity } {
   return { sim, mage };
 }
 
-function addToGroup(sim: Sim, leader: Entity, cls: 'mage' | 'priest' | 'warrior', name: string) {
+function addToGroup(sim: Sim, leader: Entity, cls: 'mage' | 'acolyte' | 'swordman', name: string) {
   const pid = sim.addPlayer(cls, name);
   sim.partyInvite(pid, leader.id);
   sim.partyAccept(pid);
@@ -64,8 +64,8 @@ describe('Collective Reversal content', () => {
 describe('Collective Reversal behavior', () => {
   it('finishes after seven seconds and offers every dead raid member a resurrection', () => {
     const { sim, mage } = chronomancer();
-    const fallenWarrior = addToGroup(sim, mage, 'warrior', 'Fallen Warrior');
-    const fallenPriest = addToGroup(sim, mage, 'priest', 'Fallen Priest');
+    const fallenWarrior = addToGroup(sim, mage, 'swordman', 'Fallen Warrior');
+    const fallenPriest = addToGroup(sim, mage, 'acolyte', 'Fallen Priest');
     const livingMage = addToGroup(sim, mage, 'mage', 'Living Mage');
     const fallenMage = addToGroup(sim, mage, 'mage', 'Fallen Mage');
     sim.convertPartyToRaid(mage.id);
@@ -80,7 +80,7 @@ describe('Collective Reversal behavior', () => {
     killAt(fallenMage, mage.pos.x - 90, mage.pos.z - 70);
     const livingHp = livingMage.hp;
 
-    const strangerId = sim.addPlayer('priest', 'Stranger');
+    const strangerId = sim.addPlayer('acolyte', 'Stranger');
     const stranger = sim.entities.get(strangerId) as Entity;
     killAt(stranger, mage.pos.x + 1, mage.pos.z + 1);
 
@@ -135,7 +135,7 @@ describe('Collective Reversal behavior', () => {
     expect(mage.castingAbility).toBeNull();
     expect(mage.resource).toBe(mana);
 
-    const fallen = addToGroup(sim, mage, 'warrior', 'Fallen');
+    const fallen = addToGroup(sim, mage, 'swordman', 'Fallen');
     killAt(fallen, mage.pos.x + 2, mage.pos.z);
     mage.inCombat = true;
     sim.castAbility(ABILITY_ID);
@@ -146,7 +146,7 @@ describe('Collective Reversal behavior', () => {
 
   it('cancels authoritatively if the caster enters combat during the cast', () => {
     const { sim, mage } = chronomancer();
-    const fallen = addToGroup(sim, mage, 'warrior', 'Fallen During Pull');
+    const fallen = addToGroup(sim, mage, 'swordman', 'Fallen During Pull');
     killAt(fallen, mage.pos.x + 2, mage.pos.z);
     const mana = mage.resource;
 
@@ -164,7 +164,7 @@ describe('Collective Reversal behavior', () => {
 
   it('cancels cleanly if another source revives every group member first', () => {
     const { sim, mage } = chronomancer();
-    const fallen = addToGroup(sim, mage, 'priest', 'Already Revived');
+    const fallen = addToGroup(sim, mage, 'acolyte', 'Already Revived');
     killAt(fallen, mage.pos.x + 2, mage.pos.z);
 
     sim.castAbility(ABILITY_ID);

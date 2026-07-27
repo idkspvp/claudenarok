@@ -405,7 +405,7 @@ function offhandAttachDef(
   return url ? { url, bone: base.bone } : null;
 }
 
-// Classes without weaponSlots keep a FIXED weapon visual (the hunter's ranged
+// Classes without weaponSlots keep a FIXED weapon visual (the archer's ranged
 // crossbow). A bow/crossbow skin replaces that fixed attach instead of a
 // swappable slot, so those attaches join the swap/stale cycle too.
 const RANGED_SWAP_BASENAMES = new Set(['crossbow_1handed', 'crossbow_2handed']);
@@ -702,8 +702,8 @@ function attachTargetBone(
 // applied weapon skin, which wins); the actual offhand slot takes the equipped
 // offhand's model (or the same skin mirrored onto a matching-type weapon,
 // or nothing while none is equipped); every other attachment is fixed (the warlock's
-// spellbook offhand), except the hunter's fixed RANGED attach, which a bow/crossbow
-// skin replaces in place. The rogue lists both hand slots so a dagger shows in both.
+// spellbook offhand), except the archer's fixed RANGED attach, which a bow/crossbow
+// skin replaces in place. The thief lists both hand slots so a dagger shows in both.
 // A manifest/bone mismatch ships without that prop. Returns the WEAPON payload roots
 // (the swap + ranged-swap ones), plus a skin-mirrored offhand payload, the set
 // rarity VFX and orientation pins ride; a NON-mirrored offhand has its own cycle
@@ -745,8 +745,8 @@ function attachAllProps(
 
 /** Replace the equipped-weapon attachment(s) on an already-assembled model in place,
  *  for a runtime gear swap or a weapon-skin change. Re-attaches every swap slot (the
- *  rogue has two, so both hands update) plus, for classes with a fixed ranged visual
- *  (hunter), the fixed ranged attach that a bow/crossbow skin replaces, honoring an
+ *  thief has two, so both hands update) plus, for classes with a fixed ranged visual
+ *  (archer), the fixed ranged attach that a bow/crossbow skin replaces, honoring an
  *  active sheathe. The actual equipped offhand has a separate replacement cycle
  *  (setHeldOffhand). Returns the attached weapon payload roots so the caller can
  *  hang rarity VFX off them. The caller must re-apply materials and re-snapshot the
@@ -831,7 +831,7 @@ export function weaponSkinDisplayModel(skinId: string): THREE.Object3D | null {
 }
 
 /** Move every held prop (swap slots, the actual equipped offhand, AND fixed
- *  offhands: the rogue's second dagger, the hunter crossbow, the warlock
+ *  offhands: the thief's second dagger, the archer crossbow, the warlock
  *  spellbook) between the hands and the on-back sheathed pose, in place, keeping
  *  any applied weapon skin. Returns the weapon payload roots (same contract as
  *  setHeldWeapon: the caller re-applies materials, re-snapshots originals, and

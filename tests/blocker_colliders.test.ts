@@ -66,7 +66,7 @@ describe('blocker wall colliders', () => {
       blockers: [{ x1: -10, z1: PLAYER_START.z + 4, x2: 10, z2: PLAYER_START.z + 4 }],
     });
     setActiveWorldContent(content);
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', world: content });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', world: content });
     const p = sim.player;
     p.facing = 0; // facing = (sin f, cos f), so 0 walks toward +z
     sim.moveInput.forward = true;

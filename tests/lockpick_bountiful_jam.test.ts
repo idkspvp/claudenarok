@@ -14,7 +14,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 const BOUNTIFUL_STRESS_TIMEOUT_MS = 15_000;
 
 function enterBountifulFinale(sim: Sim) {

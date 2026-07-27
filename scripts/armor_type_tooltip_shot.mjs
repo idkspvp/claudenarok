@@ -40,9 +40,9 @@ await new Promise((r) => setTimeout(r, 2000));
 // One chest of each armor class so the new "slot left / type right" line is obvious.
 const inv = await page.evaluate(() => {
   const sim = window.__game.sim;
-  sim.addItem('militia_vest', 1, sim.player.id); // mail (warrior/paladin/shaman)
-  sim.addItem('shadow_jerkin', 1, sim.player.id); // leather (druid/rogue/hunter)
-  sim.addItem('woven_robe', 1, sim.player.id); // cloth (mage/priest/warlock)
+  sim.addItem('militia_vest', 1, sim.player.id); // mail (swordman/paladin/shaman)
+  sim.addItem('shadow_jerkin', 1, sim.player.id); // leather (druid/thief/archer)
+  sim.addItem('woven_robe', 1, sim.player.id); // cloth (mage/acolyte/warlock)
   return sim.inventory.map((s) => s.itemId);
 });
 console.log('inventory set:', JSON.stringify(inv));

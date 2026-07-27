@@ -306,7 +306,7 @@
     background-position: center;
     filter: drop-shadow(0 0 2px #000) drop-shadow(0 1px 1px #000);
   }
-  /* rogue/druid combo points, a centered row of pips over the nameplate,
+  /* thief/druid combo points, a centered row of pips over the nameplate,
      display toggled in JS so it reserves no space when the player has none. */
   .np-combo {
     display: flex;

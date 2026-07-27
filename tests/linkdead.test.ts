@@ -130,7 +130,7 @@ describe('linkdead grace lifecycle', () => {
     closePlaySession.mockClear();
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Heldin', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Heldin', 'swordman', null));
 
     expect(dropSocket(server, session, ws)).toBe(true);
 
@@ -149,7 +149,7 @@ describe('linkdead grace lifecycle', () => {
   it('zeroes held movement input at grace start', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Runner', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Runner', 'swordman', null));
     server.handleMessage(
       session,
       JSON.stringify({ t: 'input', seq: 1, mi: { f: 1, b: 0, tl: 0, tr: 0, sl: 0, sr: 0, j: 0 } }),
@@ -165,7 +165,7 @@ describe('linkdead grace lifecycle', () => {
     const server = new GameServer();
     const setTrackingConnection = vi.spyOn((server as any).botDetector, 'setTrackingConnection');
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Comeback', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Comeback', 'swordman', null));
     expect(setTrackingConnection).not.toHaveBeenCalled();
     server.handleMessage(
       session,
@@ -183,7 +183,7 @@ describe('linkdead grace lifecycle', () => {
       clientSeed: 'seed-after-resume',
     };
     const resumed = expectJoined(
-      server.join(ws2, 11, 101, 'Comeback', 'warrior', null, false, resumeMeta),
+      server.join(ws2, 11, 101, 'Comeback', 'swordman', null, false, resumeMeta),
     );
 
     expect(resumed).toBe(session);
@@ -206,7 +206,7 @@ describe('linkdead grace lifecycle', () => {
     const hello = ws2.send.mock.calls
       .map((c: any[]) => JSON.parse(c[0]))
       .find((m: any) => m.t === 'hello');
-    expect(hello).toMatchObject({ pid: session.pid, name: 'Comeback', cls: 'warrior' });
+    expect(hello).toMatchObject({ pid: session.pid, name: 'Comeback', cls: 'swordman' });
     // one session, one character: no duplicates were created
     expect(server.clients.size).toBe(1);
   });
@@ -214,10 +214,10 @@ describe('linkdead grace lifecycle', () => {
   it('ignores a late close event from the pre-resume socket', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Latecl', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Latecl', 'swordman', null));
     dropSocket(server, session, ws);
     const ws2 = fakeWs();
-    expectJoined(server.join(ws2, 11, 101, 'Latecl', 'warrior', null));
+    expectJoined(server.join(ws2, 11, 101, 'Latecl', 'swordman', null));
 
     // the old transport's close/error fires after the resume: must be a no-op
     expect(server.socketClosed(session, ws)).toBe(false);
@@ -228,7 +228,7 @@ describe('linkdead grace lifecycle', () => {
   it('does not resurrect a kicked session when its socket close lands afterwards', async () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Kicked', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Kicked', 'swordman', null));
 
     server.disconnectAccount(11, 'moderation action');
     await vi.waitFor(() => {
@@ -244,7 +244,7 @@ describe('linkdead grace lifecycle', () => {
     closePlaySession.mockClear();
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Expired', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Expired', 'swordman', null));
     dropSocket(server, session, ws);
 
     session.graceUntil = Date.now() - 1;
@@ -262,7 +262,7 @@ describe('linkdead grace lifecycle', () => {
   it('leaves a not-yet-expired linkdead session alone on the expiry sweep', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Waiting', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Waiting', 'swordman', null));
     dropSocket(server, session, ws);
 
     (server as any).expireLinkdeadSessions();
@@ -275,7 +275,7 @@ describe('linkdead grace lifecycle', () => {
   it("logging in on a different character displaces the account's linkdead session immediately", async () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const a = expectJoined(server.join(ws, 11, 101, 'Olda', 'warrior', null));
+    const a = expectJoined(server.join(ws, 11, 101, 'Olda', 'swordman', null));
     dropSocket(server, a, ws);
 
     const b = expectJoined(server.join(fakeWs(), 11, 102, 'Newb', 'mage', null));
@@ -292,7 +292,7 @@ describe('linkdead grace lifecycle', () => {
 
   it("still blocks a second character while the first session's socket is live", () => {
     const server = new GameServer();
-    expectJoined(server.join(fakeWs(), 11, 101, 'Livea', 'warrior', null));
+    expectJoined(server.join(fakeWs(), 11, 101, 'Livea', 'swordman', null));
     expect(server.join(fakeWs(), 11, 102, 'Liveb', 'mage', null)).toEqual({
       error: 'too many characters on this account are already in the world',
     });
@@ -301,11 +301,11 @@ describe('linkdead grace lifecycle', () => {
   it('rejects a linkdead character for a different account, but takeover still works', async () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Mine', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Mine', 'swordman', null));
     dropSocket(server, session, ws);
 
     // another account cannot slide into the held session
-    expect(server.join(fakeWs(), 12, 101, 'Mine', 'warrior', null)).toEqual({
+    expect(server.join(fakeWs(), 12, 101, 'Mine', 'swordman', null)).toEqual({
       error: 'character already in world',
     });
 
@@ -314,14 +314,14 @@ describe('linkdead grace lifecycle', () => {
     await vi.waitFor(() => {
       expect((server as any).sessionByCharacterId(101)).toBeNull();
     });
-    expectJoined(server.join(fakeWs(), 11, 101, 'Mine', 'warrior', null));
+    expectJoined(server.join(fakeWs(), 11, 101, 'Mine', 'swordman', null));
   });
 
   it('adjusts per-IP session counts when a resume arrives from a different IP', () => {
     const server = new GameServer();
     const ws = fakeWs();
     const session = expectJoined(
-      server.join(ws, 11, 101, 'Roamer', 'warrior', null, false, { ip: '198.51.100.1' }),
+      server.join(ws, 11, 101, 'Roamer', 'swordman', null, false, { ip: '198.51.100.1' }),
     );
     expect(server.countIpSessions('198.51.100.1')).toBe(1);
     dropSocket(server, session, ws);
@@ -329,7 +329,7 @@ describe('linkdead grace lifecycle', () => {
     expect(server.countIpSessions('198.51.100.1')).toBe(1);
 
     expectJoined(
-      server.join(fakeWs(), 11, 101, 'Roamer', 'warrior', null, false, { ip: '198.51.100.2' }),
+      server.join(fakeWs(), 11, 101, 'Roamer', 'swordman', null, false, { ip: '198.51.100.2' }),
     );
 
     expect(server.countIpSessions('198.51.100.1')).toBe(0);
@@ -339,7 +339,7 @@ describe('linkdead grace lifecycle', () => {
   it('keepalive sweep pings live sessions and holds a pong-silent socket linkdead', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Blackhole', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Blackhole', 'swordman', null));
 
     // first sweep: ping goes out, pong now outstanding
     server.pingLiveSessions();
@@ -365,25 +365,25 @@ describe('linkdead grace lifecycle', () => {
   it('keepalive sweep leaves linkdead sessions alone and resume clears the pong flag', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Pongreset', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Pongreset', 'swordman', null));
     server.pingLiveSessions();
     dropSocket(server, session, ws);
 
     server.pingLiveSessions();
     expect(ws.terminate).not.toHaveBeenCalled();
 
-    const resumed = expectJoined(server.join(fakeWs(), 11, 101, 'Pongreset', 'warrior', null));
+    const resumed = expectJoined(server.join(fakeWs(), 11, 101, 'Pongreset', 'swordman', null));
     expect(resumed.awaitingPong).toBe(false);
   });
 
   it('resume sends no self entered-the-world notice (the player never saw themselves leave)', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Quietback', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Quietback', 'swordman', null));
     dropSocket(server, session, ws);
 
     const ws2 = fakeWs();
-    expectJoined(server.join(ws2, 11, 101, 'Quietback', 'warrior', null));
+    expectJoined(server.join(ws2, 11, 101, 'Quietback', 'swordman', null));
 
     const frames = ws2.send.mock.calls.map((c: any[]) => JSON.parse(c[0]));
     const enteredNotice = frames.find(
@@ -396,7 +396,7 @@ describe('linkdead grace lifecycle', () => {
   it('skips snapshot building for linkdead sessions', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Quiet', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Quiet', 'swordman', null));
     dropSocket(server, session, ws);
     ws.send.mockClear();
 
@@ -525,7 +525,7 @@ describe('deliberate logout skips linkdead grace', () => {
     const server = new GameServer();
     const ws = fakeWs();
     const session = expectJoined(
-      server.join(ws, 11, 101, 'Quitter', 'warrior', null, false, { leaseNonce: 'nonce-logout' }),
+      server.join(ws, 11, 101, 'Quitter', 'swordman', null, false, { leaseNonce: 'nonce-logout' }),
     );
     const release = vi.mocked(releaseCharacterLease);
     release.mockClear();
@@ -561,7 +561,7 @@ describe('deliberate logout skips linkdead grace', () => {
   it('allows a fresh join on the same character after a t:logout', async () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Loggedout', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Loggedout', 'swordman', null));
     server.handleMessage(session, JSON.stringify({ t: 'logout' }));
 
     await vi.waitFor(() => {
@@ -569,7 +569,7 @@ describe('deliberate logout skips linkdead grace', () => {
     });
 
     // no "character already in world" after a deliberate logout
-    const fresh = expectJoined(server.join(fakeWs(), 11, 101, 'Loggedout', 'warrior', null));
+    const fresh = expectJoined(server.join(fakeWs(), 11, 101, 'Loggedout', 'swordman', null));
     expect(fresh.characterId).toBe(101);
     expect(fresh.left).toBe(false);
   });

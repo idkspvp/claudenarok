@@ -1,8 +1,9 @@
 // Offline screenshot of the /talents chat readout for the PR.
 // Boots the game headless, levels to 20, picks Arms + spends points, then
 // types /talents in the real chat box and captures the chat log.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -19,7 +20,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.click('#btn-offline');
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Talia');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -56,7 +57,12 @@ await page.keyboard.press('Enter');
 await new Promise((r) => setTimeout(r, 120));
 const box = await page.evaluate(() => {
   const r = document.querySelector('#error-msg').getBoundingClientRect();
-  return { x: Math.max(0, r.x - 30), y: Math.max(0, r.y - 16), width: Math.min(1600, r.width + 60), height: r.height + 32 };
+  return {
+    x: Math.max(0, r.x - 30),
+    y: Math.max(0, r.y - 16),
+    width: Math.min(1600, r.width + 60),
+    height: r.height + 32,
+  };
 });
 await page.screenshot({ path: 'tmp/talents_command_banner.png', clip: box });
 

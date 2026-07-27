@@ -3,7 +3,7 @@
 // The pet bar renders each button with `iconDataUrl('ability', id)`, which returns a
 // class ability's real art whenever `id` is an ability id. Reusing ability ids here
 // (rejuvenation, defensive_stance, rapid_fire, growl, prowl, drain_life) made the pet
-// buttons borrow other classes' spell art, so a hunter's "aggressive" stance rendered
+// buttons borrow other classes' spell art, so a archer's "aggressive" stance rendered
 // the SAME icon as their own Rapid Fire, and "Heal Pet" showed the druid's green magic
 // heal. These ids are deliberately NOT ability ids; each has its own recipe in
 // `icons.ts` (`ABILITY_RECIPES`). Guarded by `tests/pet_action_icons.test.ts`.
@@ -11,7 +11,7 @@ export const PET_ACTION_ICONS = {
   attack: 'pet_attack',
   taunt: 'pet_growl',
   waterJet: 'pet_water_jet',
-  feed: 'pet_feed', // hunter: feed food to heal the pet (not magic)
+  feed: 'pet_feed', // archer: feed food to heal the pet (not magic)
   healDemon: 'pet_mend', // warlock: mend the demon
   passive: 'pet_passive',
   defensive: 'pet_defensive',
@@ -20,7 +20,7 @@ export const PET_ACTION_ICONS = {
 
 export type PetActionIconKey = keyof typeof PET_ACTION_ICONS;
 
-// Pure decision for the hunter Feed Pet button's disabled state. Previously
+// Pure decision for the archer Feed Pet button's disabled state. Previously
 // the button always looked identically clickable, but clicking it with no
 // eligible food just popped an error toast, and there was no way to tell in
 // advance the pet did not need feeding at all: the button "looked broken"

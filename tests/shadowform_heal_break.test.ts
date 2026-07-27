@@ -1,10 +1,10 @@
-// Casting a healing spell drops a Shadow priest out of Shadowform: the form
+// Casting a healing spell drops a Shadow acolyte out of Shadowform: the form
 // amplifies Shadow damage but forbids healing (classic Shadowform rule).
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 
 function makePriest(): { sim: Sim; p: any } {
-  const sim = new Sim({ seed: 7, playerClass: 'priest', autoEquip: true });
+  const sim = new Sim({ seed: 7, playerClass: 'acolyte', autoEquip: true });
   sim.setPlayerLevel(20);
   const p = sim.entities.get(sim.playerId) as any;
   p.resource = p.maxResource;

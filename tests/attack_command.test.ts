@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -16,7 +16,7 @@ function errorText(events: SimEvent[], pid: number): string | undefined {
 describe('/attack command', () => {
   it('reports auto-attack as off for an idle player', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/attack', a);
     expect(errorText(sim.tick(), a)).toBe('Auto-attack is off.');
@@ -24,7 +24,7 @@ describe('/attack command', () => {
 
   it('reports the target, next swing, and swing interval when engaged', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const target = sim.addPlayer('mage', 'Bet');
     sim.tick();
     const pa = sim.entities.get(a)!;
@@ -33,7 +33,7 @@ describe('/attack command', () => {
     pa.targetId = tb.id;
     pa.swingTimer = 1.2;
     sim.chat('/attack', a);
-    const expected = (pa.weapon.speed).toFixed(1);
+    const expected = pa.weapon.speed.toFixed(1);
     expect(errorText(sim.tick(), a)).toBe(
       `Auto-attack is on against Bet — next swing in 1.2s (${expected}s swing).`,
     );
@@ -41,7 +41,7 @@ describe('/attack command', () => {
 
   it('says "now" when the swing is ready', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const target = sim.addPlayer('mage', 'Bet');
     sim.tick();
     const pa = sim.entities.get(a)!;
@@ -54,7 +54,7 @@ describe('/attack command', () => {
 
   it('reports no valid target when the foe is gone', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const pa = sim.entities.get(a)!;
     pa.autoAttack = true;

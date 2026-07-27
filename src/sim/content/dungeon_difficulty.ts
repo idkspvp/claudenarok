@@ -42,7 +42,7 @@ export interface HeroicDungeonTuning {
 // 22 (two above the level-20 player cap). The calibration target is a FLOOR,
 // not an average: the minimum non-crit swing of EVERY heroic mob (spawn-list
 // trash, boss-summoned adds, and the Nythraxis encounter waves) lands at
-// least 500 post-mitigation on the maximum-mitigation reference warrior, a
+// least 500 post-mitigation on the maximum-mitigation reference swordman, a
 // level-20 prot in the max-armor kit (full heroic plate + shield, prot
 // mastery: 2861 armor) standing in Defensive Stance (takes 10% less), who
 // receives ~39.8% of a raw level-22 swing. Health is DOUBLED versus the
@@ -88,7 +88,7 @@ export interface NormalDungeonTuning {
 // the dungeon without pressure, because its Monte Carlo bench modeled the
 // worst-case healer (autopilot, no cooldowns) and priced the floors so that
 // worst case barely survived. This pass raises the minimum non-crit swing on
-// the reference warrior (level-20 prot in the max-armor kit, 2861 armor,
+// the reference swordman (level-20 prot in the max-armor kit, 2861 armor,
 // Defensive Stance) to at least 100 (trash, lands 103+) and 200 (bosses:
 // Korgath 301 / Korzul 280, ~29-31% of a fresh tank pool per average swing;
 // Velkhar is UNCHANGED at the 200 line, ~21%, because he was already the
@@ -208,10 +208,10 @@ export const HEROIC_DUNGEON_TUNING: Record<string, HeroicDungeonTuning> = {
     marksPerParticipant: 1,
   },
   // The 10-player raid arena. The boss floors at 1200 post-mitigation on the
-  // reference warrior (roughly 43% of his hp per 2.6s swing; a raid brings
+  // reference swordman (roughly 43% of his hp per 2.6s swing; a raid brings
   // two or three healers) via the dungeon-wide multiplier; the encounter-
   // script add waves are held to the five-man 500 line through the per-mob
-  // map, because their base weapon damage spans a 2x spread (the priest add
+  // map, because their base weapon damage spans a 2x spread (the acolyte add
   // swings less than half as hard as a Royal Guard). The percentage
   // mechanics scale on heroic in the encounter script (Soul Rend 1.5x,
   // Deathless Rage lethal on a failed wardstone channel; see

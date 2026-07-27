@@ -1464,11 +1464,11 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
             code: 'character.name_not_allowed',
           });
         const validClasses = [
-          'warrior',
+          'swordman',
           'paladin',
-          'hunter',
-          'rogue',
-          'priest',
+          'archer',
+          'thief',
+          'acolyte',
           'shaman',
           'mage',
           'warlock',

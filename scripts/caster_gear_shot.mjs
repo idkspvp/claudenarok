@@ -1,7 +1,7 @@
 // Visual proof of PR #1965's crafted caster-stat (int/spi) gear: 3 common-tier
 // pieces (Eastbrook Ritual Vestments / Druid's Hide / Warded Leggings) and 3
 // hub-tier rares (Wardweave Cowl, Duskhide Wraps, Kilnscale Mantle). Boots the
-// offline game as a priest (cloth caster), drops all six new items into the
+// offline game as a acolyte (cloth caster), drops all six new items into the
 // bags, hovers each for a tooltip capture (stats visible: int/spi/armor), then
 // equips the hub-tier cowl and shoots the character sheet paperdoll + stat
 // panel to prove the equip path and stat totals both work end to end.
@@ -31,7 +31,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 120000 });
 // Shared entry flow: picks the class, enters the world, and dismisses the intro
 // cinematic, the new-adventurer tutorial, and the camera-mode-choice prompt so
 // every capture below is clean gameplay only (repo house rule).
-await enterOfflineGame(page, { charClass: 'priest', charName: 'Wardweaver', settleMs: 2000 });
+await enterOfflineGame(page, { charClass: 'acolyte', charName: 'Wardweaver', settleMs: 2000 });
 
 const overlayState = await page.evaluate(() => {
   const visible = (el) => !!el && getComputedStyle(el).display !== 'none';

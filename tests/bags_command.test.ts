@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // The self-only readout reuses the 'error' channel, like /who and the other
@@ -17,7 +17,7 @@ function lastReadout(sim: Sim, pid: number): string | undefined {
 describe('/bags command', () => {
   it('reports empty bags with the purse', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(pid)!.copper = 0;
     sim.players.get(pid)!.inventory.length = 0; // shed the starter rations
 
@@ -27,7 +27,7 @@ describe('/bags command', () => {
 
   it('lists items sorted by quality with stack counts and the purse', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(pid)!.copper = 12 * 10000 + 4 * 100 + 5; // 12g 4s 5c
     sim.players.get(pid)!.inventory.length = 0; // shed the starter rations
 
@@ -48,7 +48,7 @@ describe('/bags command', () => {
 
   it('works through the /inv and /inventory aliases', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(pid)!.copper = 0;
     sim.players.get(pid)!.inventory.length = 0; // shed the starter rations
 

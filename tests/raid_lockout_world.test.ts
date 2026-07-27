@@ -6,12 +6,12 @@ const HOUR = 60 * 60 * 1000;
 
 describe('Sim.raidLockouts', () => {
   it('returns nothing when no raid is locked', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     expect(sim.raidLockouts()).toEqual([]);
   });
 
   it('projects a granted lockout as remaining ms, dropping expired ones', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const now = Math.floor(sim.time * 1000);
     const meta = (sim as any).primary;
     meta.raidLockouts.set('nythraxis_boss_arena', now + 5 * HOUR);

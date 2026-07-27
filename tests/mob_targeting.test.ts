@@ -306,14 +306,14 @@ describe('mob/targeting: updateMobTarget forced-target/taunt', () => {
   });
 
   it('lets Voss ignore taunt and prefer a mana-user threat target', () => {
-    const tank = ent(1, { kind: 'player', templateId: 'warrior' } as Partial<Entity>);
+    const tank = ent(1, { kind: 'player', templateId: 'swordman' } as Partial<Entity>);
     const mage = ent(2, { kind: 'player', templateId: 'mage' } as Partial<Entity>);
-    const hunter = ent(3, { kind: 'player', templateId: 'hunter' } as Partial<Entity>);
+    const archer = ent(3, { kind: 'player', templateId: 'archer' } as Partial<Entity>);
     const ctx = fakeCtx(
       new Map([
         [1, tank],
         [2, mage],
-        [3, hunter],
+        [3, archer],
       ]),
     );
     const mob = ent(10, {

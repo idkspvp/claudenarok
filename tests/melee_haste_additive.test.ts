@@ -11,8 +11,8 @@ import { ENRAGE_HASTE_PCT } from '../src/sim/types';
 
 type AnySim = Sim & Record<string, any>;
 
-function warrior(): { sim: AnySim; p: Entity } {
-  const sim = new Sim({ seed: 271, playerClass: 'warrior' }) as AnySim;
+function swordman(): { sim: AnySim; p: Entity } {
+  const sim = new Sim({ seed: 271, playerClass: 'swordman' }) as AnySim;
   sim.setPlayerLevel(20);
   return { sim, p: sim.player };
 }
@@ -36,14 +36,14 @@ function addHaste(sim: AnySim, p: Entity, id: string, mult: number): void {
 
 describe('melee haste is one additive bucket', () => {
   it('a single haste buff is unchanged: interval divides by exactly its value', () => {
-    const { sim, p } = warrior();
+    const { sim, p } = swordman();
     const base = sim.swingIntervalMult(p);
     addHaste(sim, p, 'bloodlust', 1.3);
     expect(sim.swingIntervalMult(p)).toBeCloseTo(base / 1.3, 5);
   });
 
   it('stacked buffs sum instead of compounding: Bloodlust + Wildfang + Enrage = 1.6x', () => {
-    const { sim, p } = warrior();
+    const { sim, p } = swordman();
     const base = sim.swingIntervalMult(p);
     addHaste(sim, p, 'bloodlust', 1.3);
     addHaste(sim, p, 'aspect_of_the_wild', 1.05);
@@ -67,7 +67,7 @@ describe('melee haste is one additive bucket', () => {
   });
 
   it('slows stay on their own axis and still compose with the haste bucket', () => {
-    const { sim, p } = warrior();
+    const { sim, p } = swordman();
     const base = sim.swingIntervalMult(p);
     aura(sim, p, {
       id: 'test_slow',

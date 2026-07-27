@@ -68,8 +68,8 @@ describe('mob chill-on-hit', () => {
   });
 
   it('a landed swing can apply a movement-slowing chill to the victim', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Frostbit');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Frostbit');
     const victim = placePlayer(sim, pid, 1, 0);
     const elemental = spawnElemental(sim);
 
@@ -94,8 +94,8 @@ describe('mob chill-on-hit', () => {
   });
 
   it('an ordinary mob with no chill field never applies the slow', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Safe');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Safe');
     const victim = placePlayer(sim, pid, 1, 0);
     const inner = testSim(sim);
     const wolf = createMob(inner.nextId++, MOBS.forest_wolf, 3, { x: 0, y: 0, z: 0 });

@@ -28,9 +28,9 @@ type TestSim = Sim & {
 };
 
 function makeSim(seed = 31337, spec: 'fury' | 'arms' = 'fury'): { sim: TestSim; p: Entity } {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true }) as TestSim;
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: true }) as TestSim;
   sim.setPlayerLevel(20);
-  // A warrior spawns seeded in Battle Stance; one tick lets the stance reconcile
+  // A swordman spawns seeded in Battle Stance; one tick lets the stance reconcile
   // swap it to Berserker (the Fury default) so rage mints carry no Battle bonus.
   sim.tick();
   return { sim, p: sim.player };

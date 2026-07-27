@@ -21,11 +21,11 @@ export interface EditorPlaytestRequest {
 }
 
 const VALID_CLASSES: ReadonlySet<string> = new Set([
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'mage',
   'warlock',
   'druid',
@@ -74,7 +74,7 @@ export function takeEditorPlaytestRequest(): EditorPlaytestRequest | null {
     const pc =
       typeof obj.playerClass === 'string' && VALID_CLASSES.has(obj.playerClass)
         ? (obj.playerClass as PlayerClass)
-        : 'warrior';
+        : 'swordman';
     const name =
       typeof obj.playerName === 'string' && obj.playerName.trim()
         ? obj.playerName.slice(0, 24)

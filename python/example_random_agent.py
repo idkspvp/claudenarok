@@ -8,7 +8,7 @@ from wow_env import WoWClassicEnv
 
 
 def main() -> None:
-    env = WoWClassicEnv(player_class="warrior", max_steps=2000)
+    env = WoWClassicEnv(player_class="swordman", max_steps=2000)
     obs, info = env.reset(seed=42)
     print(f"obs shape: {obs.shape}, actions: {env.action_space.n}")
     print(f"action names: {env.action_names}")

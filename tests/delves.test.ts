@@ -41,7 +41,7 @@ import { DELVE_IMPLEMENTED_AFFIXES, Sim } from '../src/sim/sim';
 import { DT } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-function makeSim(cls: 'warrior' | 'warlock' = 'warrior', seed = 42) {
+function makeSim(cls: 'swordman' | 'mage' = 'swordman', seed = 42) {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
 }
 
@@ -191,8 +191,8 @@ describe('delve spatial band', () => {
     const state = src.serializeCharacter(src.playerId)!;
     const origin = delveOrigin(0, 0);
     state.pos = { x: origin.x, z: origin.z + 20 }; // deep inside delve slot 0
-    const dst = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true, noPlayer: true });
-    const pid = dst.addPlayer('warrior', 'Relogged', { state });
+    const dst = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true, noPlayer: true });
+    const pid = dst.addPlayer('swordman', 'Relogged', { state });
     const e = (dst as any).entities.get(pid)!;
     const door = DELVES.collapsed_reliquary.doorPos; // Brother Halven board door {-5,-52}
     expect(Math.abs(e.pos.x - door.x)).toBeLessThan(1); // at the board door (-5), NOT a dungeon door (~80)
@@ -248,7 +248,7 @@ describe('delve lifecycle', () => {
     const PARTIES = 8; // was capped at 6 concurrent delve runs before the bump
     const pids = [sim.playerId];
     for (let i = 1; i < PARTIES; i++) {
-      pids.push(sim.addPlayer('warrior', `Delver${i}`));
+      pids.push(sim.addPlayer('swordman', `Delver${i}`));
     }
 
     for (const pid of pids) {
@@ -271,8 +271,8 @@ describe('delve lifecycle', () => {
 
   it('refuses entry to a party of 3+ (delves are solo or duo only)', () => {
     const sim = makeSim();
-    const p2 = sim.addPlayer('warrior', 'Duoist');
-    const p3 = sim.addPlayer('warrior', 'ThirdWheel');
+    const p2 = sim.addPlayer('swordman', 'Duoist');
+    const p3 = sim.addPlayer('swordman', 'ThirdWheel');
     sim.partyInvite(p2, sim.playerId);
     sim.partyAccept(p2);
     sim.partyInvite(p3, sim.playerId);
@@ -289,7 +289,7 @@ describe('delve lifecycle', () => {
 
   it('allows a duo (party of 2) to enter together', () => {
     const sim = makeSim();
-    const p2 = sim.addPlayer('warrior', 'Duoist');
+    const p2 = sim.addPlayer('swordman', 'Duoist');
     sim.partyInvite(p2, sim.playerId);
     sim.partyAccept(p2);
     for (const pid of [sim.playerId, p2]) {
@@ -304,7 +304,7 @@ describe('delve lifecycle', () => {
 
   it('a duo entering the same delve does not land on top of each other', () => {
     const sim = makeSim();
-    const p2 = sim.addPlayer('warrior', 'Duoist');
+    const p2 = sim.addPlayer('swordman', 'Duoist');
     sim.partyInvite(p2, sim.playerId);
     sim.partyAccept(p2);
     for (const pid of [sim.playerId, p2]) {
@@ -319,7 +319,7 @@ describe('delve lifecycle', () => {
 
   it('a party member who never walked through the door is not pulled into the run', () => {
     const sim = makeSim();
-    const afk = sim.addPlayer('warrior', 'AwayFromKeyboard');
+    const afk = sim.addPlayer('swordman', 'AwayFromKeyboard');
     sim.partyInvite(afk, sim.playerId);
     sim.partyAccept(afk);
     // afk stays out in the overworld, never calling enterDelve.
@@ -348,7 +348,7 @@ describe('delve lifecycle', () => {
 
   it('same seed picks the same module order', () => {
     const runModules = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       enterReliquary(sim);
       const run = sim.delveRunForPlayer(sim.playerId);
       if (run === null) {
@@ -396,8 +396,8 @@ describe('delve death rules', () => {
 });
 
 describe('delve pet stow', () => {
-  it('stows warlock demon on enter and restores on leave', () => {
-    const sim = makeSim('warlock');
+  it('stows mage demon on enter and restores on leave', () => {
+    const sim = makeSim('mage');
     sim.setPlayerLevel(10);
     castAndFinish(sim, 'summon_imp');
     expect(sim.petOf(sim.playerId)).not.toBeNull();
@@ -411,7 +411,7 @@ describe('delve pet stow', () => {
   });
 
   it('trying to summon a stowed pet inside a delve explains why, instead of "you have no pet"', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     sim.setPlayerLevel(10);
     castAndFinish(sim, 'summon_imp');
     expect(sim.petOf(sim.playerId)).not.toBeNull();
@@ -431,7 +431,7 @@ describe('delve pet stow', () => {
   });
 
   it('a petless pet command in the overworld still says "You have no pet."', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     sim.setPlayerLevel(10);
     expect(sim.petOf(sim.playerId)).toBeNull();
     sim.drainEvents();
@@ -449,7 +449,7 @@ describe('delve pet stow', () => {
   });
 
   it('restorePetFromDelveStash keeps the stash entry if the owner entity is not yet registered', () => {
-    const sim = makeSim('warlock');
+    const sim = makeSim('mage');
     sim.setPlayerLevel(10);
     castAndFinish(sim, 'summon_imp');
     const door = DELVES.collapsed_reliquary.doorPos;
@@ -471,7 +471,7 @@ describe('delve pet stow', () => {
 describe('delve interactables and affixes', () => {
   it('heroic affix roll is deterministic per seed', () => {
     const affixes = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       enterReliquary(sim, 'heroic');
       const run = sim.delveRunForPlayer(sim.playerId);
       if (run === null) {
@@ -732,7 +732,7 @@ describe('delve interactables and affixes', () => {
     // caught by that affix's own dedicated hook test, e.g. restless_graves above).
     // Try many seeds; every Heroic roll must be an implemented affix.
     for (let seed = 1; seed <= 200; seed++) {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       enterReliquary(sim, 'heroic');
       const run = sim.delveRunForPlayer(sim.playerId)!;
       for (const id of run.affixes) expect(DELVE_IMPLEMENTED_AFFIXES.has(id)).toBe(true);
@@ -923,7 +923,7 @@ describe('delve reward chest + surface exit flow', () => {
   });
 
   it('flawless solve stages class-tuned gear loot and collect grants it to inventory', () => {
-    const sim = makeSim(); // warrior
+    const sim = makeSim(); // swordman
     sim.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);
     const run = enterFinale(sim);
     killBoss(sim, run);
@@ -953,7 +953,7 @@ describe('delve reward chest + surface exit flow', () => {
     // Read the raw roll via enterReliquary (enterFinale pins it false). Same seed
     // ⇒ same outcome; seed 42 is known to roll Bountiful (drives the fixtures above).
     const rollFor = (seed: number) => {
-      const s = makeSim('warrior', seed);
+      const s = makeSim('swordman', seed);
       s.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);
       enterReliquary(s);
       return s.delveRunForPlayer(s.playerId)?.bountiful;
@@ -1013,7 +1013,7 @@ describe('delve reward chest + surface exit flow', () => {
   });
 
   it('a solved Bountiful Coffer guarantees the signature rare plus a premium green', () => {
-    const sim = makeSim(); // warrior
+    const sim = makeSim(); // swordman
     sim.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);
     const run = enterFinale(sim);
     run.bountiful = true;
@@ -1027,14 +1027,14 @@ describe('delve reward chest + surface exit flow', () => {
 
   it('Bountiful loot guarantees the class-appropriate signature rare per archetype', () => {
     const rng = new Rng(99);
-    expect(delveChestItemsForTier('premium', 'warrior', rng, true).map((s) => s.itemId)).toContain(
+    expect(delveChestItemsForTier('premium', 'swordman', rng, true).map((s) => s.itemId)).toContain(
       'deacon_reliquary_helm',
     );
     expect(delveChestItemsForTier('premium', 'mage', rng, true).map((s) => s.itemId)).toContain(
       'varric_shadow_cowl',
     );
-    // Rogue/hunter has no signature rare yet → the two best greens (content gap).
-    expect(delveChestItemsForTier('premium', 'rogue', rng, true).map((s) => s.itemId)).toEqual([
+    // Rogue/archer has no signature rare yet → the two best greens (content gap).
+    expect(delveChestItemsForTier('premium', 'thief', rng, true).map((s) => s.itemId)).toEqual([
       'reliquary_leather_chest',
       'reliquary_gloves_rog',
     ]);
@@ -1229,7 +1229,7 @@ describe('delve reward chest + surface exit flow', () => {
 
 describe('delve Heroic level gate (a L7 cannot run Heroic; L9+ can)', () => {
   function tryEnterHeroic(level: number): Sim {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(level);
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
@@ -1257,7 +1257,7 @@ describe('delve Heroic level gate (a L7 cannot run Heroic; L9+ can)', () => {
   });
 
   it('Normal has no gate above the delve floor, a level 7 enters', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(7);
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
@@ -1268,7 +1268,7 @@ describe('delve Heroic level gate (a L7 cannot run Heroic; L9+ can)', () => {
 
 describe('delve Heroic enemy level (+3 vs Normal +0)', () => {
   it('Heroic trash spawns at template.minLevel + 3', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(9);
     const door = DELVES.collapsed_reliquary.doorPos;
     teleport(sim, door.x, door.z);
@@ -1286,7 +1286,7 @@ describe('delve Heroic enemy level (+3 vs Normal +0)', () => {
   });
 
   it('Normal trash spawns at template.minLevel', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim, 'normal');
     const run = sim.delveRunForPlayer(sim.playerId)!;
     let checked = 0;
@@ -1303,7 +1303,7 @@ describe('delve Heroic enemy level (+3 vs Normal +0)', () => {
 
 describe('Tessa percent-of-health heal + rank cap', () => {
   function healAmountAtRank(rank: number): { amount: number; maxHp: number } {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim); // solo at the delve floor; Tessa auto-spawns
     const run = sim.delveRunForPlayer(sim.playerId)!;
     expect(run.companion).toBeDefined();
@@ -1339,7 +1339,7 @@ describe('Tessa percent-of-health heal + rank cap', () => {
   });
 
   it('caps at rank 3; ranks 2 and 3 cost 3 then 5 Marks (no copper)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim);
     const meta = (sim as any).players.get(sim.playerId);
     meta.delveMarks = 100;
@@ -1383,7 +1383,7 @@ describe('The Drowned Litany (Phase 1 skeleton)', () => {
   });
 
   it('picks exactly 3 of the 6 trash modules with the boss apse always last', () => {
-    const sim = makeSim('warrior', 7);
+    const sim = makeSim('swordman', 7);
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     expect(run.modules.length).toBe(4); // 3 trash + finale
@@ -1395,7 +1395,7 @@ describe('The Drowned Litany (Phase 1 skeleton)', () => {
 
   it('same seed picks the same module order; different seeds can differ', () => {
     const order = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       enterLitany(sim);
       return [...sim.delveRunForPlayer(sim.playerId)!.modules];
     };
@@ -1408,7 +1408,7 @@ describe('The Drowned Litany (Phase 1 skeleton)', () => {
   });
 
   it('enter places the player in the delve band and auto-spawns Edda solo', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     expect(isDelvePos(sim.player.pos.x)).toBe(true);
@@ -1418,20 +1418,20 @@ describe('The Drowned Litany (Phase 1 skeleton)', () => {
   });
 
   it('blocks a level 13 player from Heroic but admits level 14', () => {
-    const blocked = makeSim('warrior');
+    const blocked = makeSim('swordman');
     blocked.setPlayerLevel(13);
     const door = DELVES.drowned_litany.doorPos;
     teleport(blocked, door.x, door.z);
     blocked.enterDelve('drowned_litany', 'heroic');
     expect(blocked.delveRunForPlayer(blocked.playerId)).toBeNull();
 
-    const ok = makeSim('warrior');
+    const ok = makeSim('swordman');
     enterLitany(ok, 'heroic');
     expect(ok.delveRunForPlayer(ok.playerId)?.tierId).toBe('heroic');
   });
 
   it('killing Sister Nhalia in the apse completes the objective and spawns the Drowned Reliquary rite', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.bountiful = false;
@@ -1715,7 +1715,7 @@ describe('The Drowned Litany (Phase 4 enemy kits)', () => {
   });
 
   it('the Reedbound Acolyte fires Rotwater Vials from range and never closes to melee', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     const p = sim.player;
@@ -1744,7 +1744,7 @@ describe('The Drowned Litany (Phase 4 enemy kits)', () => {
   });
 
   it('the Reedbound Acolyte telegraphs its vial: windup event, release exactly windup ticks later, cadence preserved', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     const p = sim.player;
@@ -1823,7 +1823,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   });
 
   it('damages a player standing in a Blackwater zone, but not one standing clear', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     enterModule(sim, 'litany_baptistry');
     const hz = hazardWorld(sim, 'litany_baptistry');
@@ -1851,7 +1851,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   });
 
   it('the apse moat is a true ellipse: rz bounds it tighter than rx, not a circle of radius rx', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     enterModule(sim, 'litany_apse');
     const hz = hazardWorld(sim, 'litany_apse', 0); // shallow: rx 22, rz 17, r 22
@@ -1880,7 +1880,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
 
   it('Heroic Blackwater hits harder than Normal', () => {
     const pulseDamage = (tier: 'normal' | 'heroic') => {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim, tier);
       enterModule(sim, 'litany_baptistry');
       const hz = hazardWorld(sim, 'litany_baptistry');
@@ -1897,7 +1897,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
 
   it('is deterministic: the same seed takes the same Blackwater damage', () => {
     const run = () => {
-      const sim = makeSim('warrior', 909);
+      const sim = makeSim('swordman', 909);
       enterLitany(sim);
       enterModule(sim, 'litany_baptistry');
       const hz = hazardWorld(sim, 'litany_baptistry');
@@ -1927,7 +1927,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   }
 
   it('an airborne (jumping) player dodges the Blackwater tick entirely', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     enterModule(sim, 'litany_baptistry');
     const hz = hazardWorld(sim, 'litany_baptistry');
@@ -1954,7 +1954,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   });
 
   it('standing on a dry island inside a pool takes no damage; beside it, it does', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     enterModule(sim, 'litany_causeway');
     const run = sim.delveRunForPlayer(sim.playerId)!;
@@ -1974,7 +1974,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   });
 
   it('the apse dais is dry ground even though the deep pool radius covers it', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     enterModule(sim, 'litany_apse');
     const run = sim.delveRunForPlayer(sim.playerId)!;
@@ -2003,7 +2003,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
   });
 
   it('the apse outer walkway ring has a dry flank path (no Blackwater on the ring)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim, 'heroic');
     enterModule(sim, 'litany_apse');
     const run = sim.delveRunForPlayer(sim.playerId)!;
@@ -2043,7 +2043,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
       { moduleId: 'litany_choir_loft', dry: [-18, 17], wet: [-12, 22] },
     ];
     for (const c of cases) {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim, 'heroic');
       enterModule(sim, c.moduleId);
       const run = sim.delveRunForPlayer(sim.playerId)!;
@@ -2063,7 +2063,7 @@ describe('The Drowned Litany (Phase 3 static Blackwater hazard)', () => {
 
   it('pins the deep (2.0x) and shallow (0.35x) tier multipliers on the 4% Normal base', () => {
     const pulse = (localX: number, localZ: number) => {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim);
       enterModule(sim, 'litany_sluice');
       const run = sim.delveRunForPlayer(sim.playerId)!;
@@ -2170,7 +2170,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('the exit stays sealed until every puzzle plate is triggered', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_sluice', 'litany_apse'];
@@ -2217,7 +2217,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
     ] as const;
 
     for (const room of rooms) {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim);
       const run = sim.delveRunForPlayer(sim.playerId)!;
       run.modules = [room.moduleId, 'litany_apse'];
@@ -2258,7 +2258,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('the Baptistry wave and egg-sac sequence advances to the next room', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_baptistry', 'litany_apse'];
@@ -2317,7 +2317,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
     // the shell/interior colliders (reachable, not walled off), and not sit under
     // a Blackwater hazard (a submerged or blocked exit reads as "no way forward").
     for (const moduleId of DELVES.drowned_litany.modules) {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim);
       const run = sim.delveRunForPlayer(sim.playerId)!;
       // Two-module run so this module is NOT the finale (the finale has a boss,
@@ -2361,7 +2361,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('bell ropes deal 18 damage to all living Drowned Cantors in combat', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_choir_loft'];
@@ -2401,7 +2401,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('baptistry spawns three waves before egg-sacs appear', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = enterModule(sim, 'litany_baptistry');
     expect(run.litanyBaptistry?.wave).toBe(0);
@@ -2437,7 +2437,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('a spider egg-sac is a real 1hp combat target: one hit kills it and hatches 2 widowlings', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = enterModule(sim, 'litany_baptistry');
     run.litanyBaptistry!.wave = 2; // skip straight past the wave gate
@@ -2468,7 +2468,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('an egg-sac kill pays no XP while the hatched widowlings pay normally', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = enterModule(sim, 'litany_baptistry');
     run.litanyBaptistry!.wave = 2;
@@ -2506,7 +2506,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('hatched widowlings carry the Heroic level bonus like the waves', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim, 'heroic');
     const run = enterModule(sim, 'litany_baptistry');
     run.litanyBaptistry!.wave = 2;
@@ -2529,7 +2529,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('hatched widowlings stay at base level on Normal (the bonus is tier-gated)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = enterModule(sim, 'litany_baptistry');
     run.litanyBaptistry!.wave = 2;
@@ -2552,7 +2552,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('the sealed exit hints to destroy the spider sacs once they are up, generic otherwise', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_baptistry', 'litany_apse'];
@@ -2586,7 +2586,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('the sealed exit hints per blocker: pull the ropes (choir loft) or apply pressure (valves)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_choir_loft', 'litany_apse'];
@@ -2628,7 +2628,7 @@ describe('The Drowned Litany (Phase 5 room puzzles)', () => {
   });
 
   it('the sealed exit hints to apply pressure for walk-on puzzles (sluice valves)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_sluice', 'litany_apse'];
@@ -2667,7 +2667,7 @@ describe('The Drowned Litany (Phase 7 heroic affixes)', () => {
 
   it('high_water increases Blackwater pulse damage by 35%', () => {
     const pulse = (affixes: string[]) => {
-      const sim = makeSim('warrior');
+      const sim = makeSim('swordman');
       enterLitany(sim, 'normal');
       const run = enterModule(sim, 'litany_baptistry');
       run.affixes = affixes;
@@ -2700,7 +2700,7 @@ describe('The Drowned Litany (Phase 7 heroic affixes)', () => {
   });
 
   it('belligerent_dead gives Grave-Silt Bulwark +10% maxHp on spawn', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim, 'heroic');
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.affixes = ['belligerent_dead'];
@@ -2761,7 +2761,7 @@ describe('delve module containment (no backtrack / no out-of-map escape)', () =>
   }
 
   it('cannot walk sideways out through the side walls (no out-of-map escape)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim);
     const b = activeModuleBounds(sim);
     const p = sim.player;
@@ -2772,7 +2772,7 @@ describe('delve module containment (no backtrack / no out-of-map escape)', () =>
   });
 
   it('cannot walk south out of the entrance room into the inter-module gap', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim);
     const b = activeModuleBounds(sim);
     const p = sim.player;
@@ -2782,7 +2782,7 @@ describe('delve module containment (no backtrack / no out-of-map escape)', () =>
   });
 
   it('after transitioning forward, cannot backtrack south into the previous room', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterReliquary(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     // Force-open and advance one module (transition is teleport-based).
@@ -2801,7 +2801,7 @@ describe('delve module containment (no backtrack / no out-of-map escape)', () =>
 
 describe('The Drowned Litany Hunter LOS uses active module order', () => {
   it('blocks LOS with the active Litany module instead of default module order', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     enterLitany(sim);
     const run = sim.delveRunForPlayer(sim.playerId)!;
     run.modules = ['litany_ring', 'litany_apse'];
@@ -2957,7 +2957,7 @@ describe('The Drowned Litany (Phase 6 boss mechanics)', () => {
 
   it('Blackwater Mark timing is deterministic for a fixed seed', () => {
     const runMark = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       const run = enterLitanyApse(sim);
       const boss = nhalia(sim);
       boss.inCombat = true;
@@ -3075,7 +3075,7 @@ describe('The Drowned Litany (Phase 6 boss mechanics)', () => {
 
   it('a player death clearing bells does not perturb the shared rng draw order', () => {
     const runOnce = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       const run = enterLitanyApse(sim);
       const boss = nhalia(sim);
       boss.inCombat = true;
@@ -3252,7 +3252,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
 
   it('generates the same sequence for the same seed + intensity', () => {
     const seqFor = (seed: number) => {
-      const sim = makeSim('warrior', seed);
+      const sim = makeSim('swordman', seed);
       const run = enterLitanyApse(sim);
       killNhalia(sim);
       chooseRite(sim, 'hard');
@@ -3273,7 +3273,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('Hard flawless grants premium loot and completes the run', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     chooseRite(sim, 'hard');
@@ -3291,8 +3291,8 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('rite loot rolls independently per party member, each collecting their own share', () => {
-    const sim = makeSim('warrior');
-    const rival = sim.addPlayer('warrior', 'Duoist');
+    const sim = makeSim('swordman');
+    const rival = sim.addPlayer('swordman', 'Duoist');
     sim.partyInvite(rival, sim.playerId);
     sim.partyAccept(rival);
     const run = enterLitanyApse(sim);
@@ -3330,7 +3330,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('F-interact at the reliquary collects loot stranded by the distance-gated window', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     // Hard flawless guarantees a premium (non-empty) roll, so this isn't seed-flaky.
@@ -3369,7 +3369,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('Easy caps loot at low even with a flawless replay', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     chooseRite(sim, 'easy');
@@ -3379,7 +3379,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('a wrong touch on Hard exhausts the single try and opens on low loot', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     chooseRite(sim, 'hard'); // 1 try, no slack
@@ -3391,7 +3391,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('a wrong touch on Medium replays the sequence and a flawless retry still earns medium', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     chooseRite(sim, 'medium'); // 2 tries
@@ -3407,7 +3407,7 @@ describe('The Drowned Litany (Phase 7 Drowned Reliquary Rite)', () => {
   });
 
   it('using up every try on Medium opens on consolation low-tier loot', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const run = enterLitanyApse(sim);
     killNhalia(sim);
     chooseRite(sim, 'medium'); // 2 tries
@@ -3475,8 +3475,8 @@ describe('delve slot recycle resets the roster watermark (dlv_solo_heroic)', () 
     const sim = makeSim();
     // A duo claims the first Collapsed Reliquary slot on Heroic; the whole-run
     // roster watermark climbs to 2. Then the run is freed back to the pool.
-    const a = sim.addPlayer('warrior', 'DuoA');
-    const b = sim.addPlayer('warrior', 'DuoB');
+    const a = sim.addPlayer('swordman', 'DuoA');
+    const b = sim.addPlayer('swordman', 'DuoB');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     enterHeroicAs(sim, a);
@@ -3508,8 +3508,8 @@ describe('delve slot recycle resets the roster watermark (dlv_solo_heroic)', () 
     (sim as any).freeDelveRun(slot);
 
     // A genuine duo reclaims that same recycled slot; the watermark climbs back to 2.
-    const a = sim.addPlayer('warrior', 'DuoA');
-    const b = sim.addPlayer('warrior', 'DuoB');
+    const a = sim.addPlayer('swordman', 'DuoA');
+    const b = sim.addPlayer('swordman', 'DuoB');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     enterHeroicAs(sim, a);

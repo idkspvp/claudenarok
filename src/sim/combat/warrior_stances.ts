@@ -1,11 +1,11 @@
 // Warrior combat stances: a small, host-agnostic system layered on the existing
-// aura + exclusive-group machinery. Every warrior always lives in exactly one
+// aura + exclusive-group machinery. Every swordman always lives in exactly one
 // stance; the stance is auto-applied by ensureWarriorStance, and the player
 // swaps it by casting a stance ability (the exclusiveGroup 'warrior_stance'
 // cancels the sibling).
 //
 // The three stances used to be spec-gated (Fury lived only in Berserker,
-// Arms/Prot in Battle + Guarded). Specs are gone, so every warrior may wear any
+// Arms/Prot in Battle + Guarded). Specs are gone, so every swordman may wear any
 // of the three, exactly as they may now LEARN all three.
 //
 // The pure decision helpers (which stances exist, which is the default, and
@@ -40,14 +40,14 @@ export function isWarriorStanceKind(kind: AuraKind): boolean {
   return WARRIOR_STANCE_KINDS.has(kind);
 }
 
-// The stance aura kinds a warrior may wear. Every stance the class can learn is
+// The stance aura kinds a swordman may wear. Every stance the class can learn is
 // wearable now that no spec gates the ability defs in classes.ts (a unit test
 // pins the two in sync).
 export function availableWarriorStanceKinds(): AuraKind[] {
   return ['battle_stance', 'defensive_stance', 'berserker_stance'];
 }
 
-// The stance a warrior spawns into. Always a learn-level-1 stance, so it is
+// The stance a swordman spawns into. Always a learn-level-1 stance, so it is
 // always applicable.
 export function defaultWarriorStanceId(): string {
   return BATTLE_STANCE;
@@ -81,7 +81,7 @@ export interface StanceReconcile {
 }
 
 // Pure reconcile: given the stance kinds currently worn, decide whether the
-// warrior already holds a valid stance (no change), or must drop the invalid
+// swordman already holds a valid stance (no change), or must drop the invalid
 // ones and gain the default stance.
 export function warriorStanceReconcile(currentStanceKinds: readonly AuraKind[]): StanceReconcile {
   const available = availableWarriorStanceKinds();
@@ -91,11 +91,11 @@ export function warriorStanceReconcile(currentStanceKinds: readonly AuraKind[]):
   return { removeKinds: [...currentStanceKinds], applyId: defaultWarriorStanceId() };
 }
 
-// Ensure a live warrior wears exactly one stance. A no-op for non-warriors and
-// for a warrior already in a valid stance; on spawn it applies the default.
+// Ensure a live swordman wears exactly one stance. A no-op for non-warriors and
+// for a swordman already in a valid stance; on spawn it applies the default.
 // Draws no rng. Runs once per player-tick.
 export function ensureWarriorStance(ctx: SimContext, p: Entity, meta: PlayerMeta): void {
-  if (meta.cls !== 'warrior') return;
+  if (meta.cls !== 'swordman') return;
   const worn = p.auras.filter((a) => isWarriorStanceKind(a.kind)).map((a) => a.kind);
   const plan = warriorStanceReconcile(worn);
   if (plan.applyId === null) return;

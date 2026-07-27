@@ -9,6 +9,7 @@
 import { describe, expect, it } from 'vitest';
 import { ENCHANTS, type EnchantDef } from '../src/sim/content/enchants';
 import { CLASSES } from '../src/sim/data';
+import { baseHpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { resolveApplyEnchant } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
 import { xpForLevel } from '../src/sim/types';
@@ -126,14 +127,14 @@ describe('enchant table magnitude invariants', () => {
 
 describe('the full stamina path in HP', () => {
   it('enchanting every stamina slot adds 24 Vitality, and 24% to the pool', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     while (sim.player.level < 20) sim.grantXp(xpForLevel(sim.player.level));
     expect(sim.player.level).toBe(20);
 
     // The best stamina path: Greater on helmet, chest, and legs, base on the
     // two slots without a Greater. The gear pieces are ordinary armor a
-    // warrior can wear; their own stats cancel out of the delta below.
+    // swordman can wear; their own stats cancel out of the delta below.
     const GEAR = [
       ['cryptbone_helm', 'helmet', 'enchant_helmet_greater_fortitude'],
       // Not recruit_tunic: the player spawns already wearing one (even with
@@ -162,8 +163,7 @@ describe('the full stamina path in HP', () => {
     // Read the unmultiplied pool off the class def rather than dividing it back
     // out of hpBefore: that value is already rounded, and rounding it twice lands
     // a point off.
-    const def = CLASSES.warrior;
-    const pool = def.baseHp + def.hpPerLevel * (sim.player.level - 1);
+    const pool = baseHpAt(JOB_VITALS.swordman, sim.player.level);
     expect(Math.round(pool * (1 + vitBefore / 100))).toBe(hpBefore);
     const expectedHp = Math.round(pool * (1 + (vitBefore + 24) / 100));
 

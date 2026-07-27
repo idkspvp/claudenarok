@@ -68,7 +68,7 @@ await page.waitForFunction(
 );
 await page.evaluate((name) => {
   document.querySelector('#new-char-name').value = name;
-  document.querySelector('#charselect-panel .mini-class[data-class="warrior"]').click();
+  document.querySelector('#charselect-panel .mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-create-char').click();
 }, CHAR);
 await sleep(700);

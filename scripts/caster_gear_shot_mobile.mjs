@@ -29,7 +29,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 120000 });
 await page.evaluate(() => document.body.classList.add('mobile-touch'));
 // Shared entry flow: dismisses the intro cinematic, the new-adventurer tutorial,
 // and the camera-mode-choice prompt so every capture below is clean gameplay only.
-await enterOfflineGame(page, { charClass: 'priest', charName: 'Wardweavem', settleMs: 2000 });
+await enterOfflineGame(page, { charClass: 'acolyte', charName: 'Wardweavem', settleMs: 2000 });
 
 const overlayState = await page.evaluate(() => {
   const visible = (el) => !!el && getComputedStyle(el).display !== 'none';

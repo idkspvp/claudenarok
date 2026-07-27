@@ -11,7 +11,7 @@ import {
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true, devCommands: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true, devCommands: true });
 }
 
 describe('gathering profession proficiency (#1119)', () => {
@@ -72,8 +72,8 @@ describe('gathering profession proficiency (#1119)', () => {
     expect(state.professions).toEqual({ mining: 7, logging: 0, herbalism: 2, fishing: 0 });
 
     // Fresh Sim, same character, loading the saved state back in.
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const loadedPid = sim2.addPlayer('warrior', 'Loaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const loadedPid = sim2.addPlayer('swordman', 'Loaded', { state });
     const meta2 = (sim2 as any).players.get(loadedPid);
     expect(meta2.gatheringProficiency).toEqual({ mining: 7, logging: 0, herbalism: 2, fishing: 0 });
   });
@@ -98,8 +98,8 @@ describe('gathering profession proficiency (#1119)', () => {
       fishing: 57,
     });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const loadedPid = sim2.addPlayer('warrior', 'RoundTrip', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const loadedPid = sim2.addPlayer('swordman', 'RoundTrip', { state });
     const meta2 = (sim2 as any).players.get(loadedPid);
     expect(meta2.gatheringProficiency).toEqual({
       mining: 7,
@@ -124,8 +124,8 @@ describe('gathering profession proficiency (#1119)', () => {
     delete state.professions.fishing;
     delete state.gatheringProficiency.fishing;
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const loadedPid = sim2.addPlayer('warrior', 'RolledBack', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const loadedPid = sim2.addPlayer('swordman', 'RolledBack', { state });
     const meta2 = (sim2 as any).players.get(loadedPid);
     expect(meta2.gatheringProficiency).toEqual({ mining: 7, logging: 0, herbalism: 0, fishing: 0 });
   });
@@ -138,12 +138,12 @@ describe('gathering profession proficiency (#1119)', () => {
 
     let loadedPid = -1;
     expect(() => {
-      const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-      loadedPid = sim2.addPlayer('warrior', 'Old', { state });
+      const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+      loadedPid = sim2.addPlayer('swordman', 'Old', { state });
     }).not.toThrow();
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    loadedPid = sim2.addPlayer('warrior', 'Old', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    loadedPid = sim2.addPlayer('swordman', 'Old', { state });
     const meta2 = (sim2 as any).players.get(loadedPid);
     expect(meta2.gatheringProficiency).toEqual({ mining: 0, logging: 0, herbalism: 0, fishing: 0 });
   });
@@ -160,8 +160,8 @@ describe('gathering profession proficiency (#1119)', () => {
     delete state.gatheringProficiency;
     expect(state.professions).toEqual({ mining: 6, logging: 0, herbalism: 0, fishing: 0 });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const loadedPid = sim2.addPlayer('warrior', 'PreRename', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const loadedPid = sim2.addPlayer('swordman', 'PreRename', { state });
     const meta2 = (sim2 as any).players.get(loadedPid);
     // Regression pin for the dead reassignments that dropped this fallback:
     // must load the legacy data, not all-zero.
@@ -255,7 +255,7 @@ describe('gathering profession proficiency (#1119)', () => {
   });
 
   it('the /dev gather cheat is gated by devCommands (never a bypass path)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true }); // devCommands off
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true }); // devCommands off
     const pid = sim.playerId;
     sim.chat('/dev gather mining 5', pid);
     sim.tick();

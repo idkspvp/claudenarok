@@ -139,15 +139,11 @@ export interface CharacterSheet {
 }
 
 const CLASS_LABELS: Record<PlayerClass, string> = {
-  warrior: 'Warrior',
-  paladin: 'Paladin',
-  hunter: 'Hunter',
-  rogue: 'Rogue',
-  priest: 'Priest',
-  shaman: 'Shaman',
+  swordman: 'Swordman',
+  archer: 'Archer',
+  thief: 'Thief',
+  acolyte: 'Acolyte',
   mage: 'Mage',
-  warlock: 'Warlock',
-  druid: 'Druid',
 };
 
 export function splitCopper(copper: number): MoneySplit {

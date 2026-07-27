@@ -60,8 +60,8 @@ describe('party chat carries a client-usable bubble anchor without a sim change'
     // entity id (its emit sets fromPid = the player entity). The HUD gate anchors
     // the party bubble on `entityId ?? fromPid`, so party bubbles with no sim or
     // wire change. This pins that the anchor field is actually populated.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 2, -40);

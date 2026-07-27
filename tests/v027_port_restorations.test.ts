@@ -38,14 +38,14 @@ import { AVATAR_SCALE, SPELL_AOE_COEFF_MULT } from '../src/sim/types';
 import { targetOfTargetId } from '../src/ui/target_of_target';
 import { spreadAllocation } from './helpers/alloc';
 
-describe('rogue starting dual wield (classes.ts startOffhand)', () => {
+describe('thief starting dual wield (classes.ts startOffhand)', () => {
   it('starts rogues with a rusty dagger in BOTH hands', () => {
-    expect(CLASSES.rogue.startWeapon).toBe('rusty_dagger');
-    expect(CLASSES.rogue.startOffhand).toBe('rusty_dagger');
+    expect(CLASSES.thief.startWeapon).toBe('rusty_dagger');
+    expect(CLASSES.thief.startOffhand).toBe('rusty_dagger');
   });
 
-  it('equips the starting offhand on a fresh rogue character', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'rogue' });
+  it('equips the starting offhand on a fresh thief character', () => {
+    const sim = new Sim({ seed: 1234, playerClass: 'thief' });
     const meta = sim.meta(sim.playerId);
     if (!meta) throw new Error('missing player metadata');
     expect(meta.equipment.offhand).toBe('rusty_dagger');
@@ -54,7 +54,7 @@ describe('rogue starting dual wield (classes.ts startOffhand)', () => {
 
 describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => {
   it('adds round(str * pct) armor, amplified by armorPct', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     const meta = sim.meta(sim.playerId);
     if (!meta) throw new Error('missing player metadata');
@@ -62,7 +62,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
     const base = emptyModifiers();
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       meta.equipment,
       base,
       meta.equipmentInstance,
@@ -75,7 +75,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
     mods.stats.armorFromStrPct = 0.7;
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       meta.equipment,
       mods,
       meta.equipmentInstance,
@@ -89,7 +89,7 @@ describe('Vanguard armor from Strength (entity.ts armorFromStrPct fold)', () => 
     both.stats.armorPct = 0.1;
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       meta.equipment,
       both,
       meta.equipmentInstance,
@@ -118,7 +118,7 @@ describe('Faultline stun diminishing returns (stun_dr CONTROLLED_STUNS)', () => 
 
 describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
   it('grows the player model by AVATAR_SCALE while the aura is worn', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     const meta = sim.meta(sim.playerId);
     if (!meta) throw new Error('missing player metadata');
@@ -135,7 +135,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
     p.auras.push(avatar);
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       meta.equipment,
       emptyModifiers(),
       meta.equipmentInstance,
@@ -146,7 +146,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
     p.auras.length = 0;
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       meta.equipment,
       emptyModifiers(),
       meta.equipmentInstance,
@@ -158,7 +158,7 @@ describe('Avatar colossus body scale (entity.ts buff_avatar)', () => {
 
 describe('selfHotPctMax effect (effect_dispatch)', () => {
   it('applies a self hot aura totaling pct of max health across its ticks', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     const meta = sim.meta(sim.playerId);
     if (!meta) throw new Error('missing player metadata');
@@ -199,7 +199,7 @@ describe('offhand surfacing (paperdoll, player card, chat readout)', () => {
 
   it('lists the offhand in the chat gear readout', async () => {
     const { gearReadout } = await import('../src/sim/social/chat_readouts');
-    const sim = new Sim({ seed: 1234, playerClass: 'rogue' });
+    const sim = new Sim({ seed: 1234, playerClass: 'thief' });
     const meta = sim.meta(sim.playerId);
     if (!meta) throw new Error('missing player metadata');
     expect(gearReadout(meta)).toContain('Off Hand: Rusty Dagger');
@@ -207,7 +207,7 @@ describe('offhand surfacing (paperdoll, player card, chat readout)', () => {
 
   it('recognizes battle and berserker stances in the form readout', async () => {
     const { formReadout } = await import('../src/sim/social/chat_readouts');
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     for (const kind of ['battle_stance', 'berserker_stance'] as const) {
       p.auras.length = 0;
@@ -236,7 +236,7 @@ describe('parry stat surfacing (stat_tooltip + warrior_hit_table)', () => {
       '../src/sim/combat/warrior_hit_table'
     );
     expect(warriorParryChance(100)).toBeCloseTo(0.05 + 100 * 0.0005, 10);
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     const attacker = { ...p, id: p.id + 1, pos: { ...p.pos, z: p.pos.z + 1 } };
     p.facing = 0; // attacker at +z sits in the frontal arc
@@ -247,10 +247,10 @@ describe('parry stat surfacing (stat_tooltip + warrior_hit_table)', () => {
   it('builds the parry tooltip cell as a percent with a Strength source line', async () => {
     const { buildStatTooltip, buildStatSources } = await import('../src/ui/stat_tooltip');
     const { warriorParryChance } = await import('../src/sim/combat/warrior_hit_table');
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const p = sim.player;
     const input = {
-      cls: 'warrior' as const,
+      cls: 'swordman' as const,
       stats: p.stats,
       level: p.level,
       attackPower: p.attackPower,
@@ -276,8 +276,8 @@ describe('parry stat surfacing (stat_tooltip + warrior_hit_table)', () => {
   });
 });
 
-describe('stance and warrior choice-row aura UI (aura_effect, auras_view, sim_i18n)', () => {
-  it('describes the stances and warrior buffs on the buff tooltip', async () => {
+describe('stance and swordman choice-row aura UI (aura_effect, auras_view, sim_i18n)', () => {
+  it('describes the stances and swordman buffs on the buff tooltip', async () => {
     const { auraEffectDescriptor } = await import('../src/ui/aura_effect');
     const { RECKLESSNESS_RAGE_GEN } = await import('../src/sim/types');
     const d = (kind: string, value = 0, value2?: number) =>
@@ -324,7 +324,7 @@ describe('stance and warrior choice-row aura UI (aura_effect, auras_view, sim_i1
     }
   });
 
-  it('re-localizes the sim-emitted warrior buff names', async () => {
+  it('re-localizes the sim-emitted swordman buff names', async () => {
     const { localizeSimAuraName } = await import('../src/ui/sim_i18n');
     expect(localizeSimAuraName('Bladed Echo')).not.toBeNull();
     expect(localizeSimAuraName('Emboldened')).not.toBeNull();
@@ -344,7 +344,7 @@ describe('passives never auto-place on the action bar', () => {
 
 describe('dev bots auto-accept party invites (party.ts partyInvite)', () => {
   it('forms the party immediately when the invitee is a dev bot', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman' });
     const botPid = sim.spawnDevBot('PartyDummy');
     expect(botPid).toBeGreaterThan(0);
     sim.partyInvite(botPid, sim.playerId);
@@ -355,8 +355,8 @@ describe('dev bots auto-accept party invites (party.ts partyInvite)', () => {
   });
 
   it('still leaves a regular player invite pending until they accept', () => {
-    const sim = new Sim({ seed: 1234, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Aaa');
+    const sim = new Sim({ seed: 1234, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Aaa');
     const b = sim.addPlayer('mage', 'Bbb');
     sim.partyInvite(b, a);
     expect(sim.partyOf(a)).toBeNull();
@@ -376,11 +376,11 @@ describe('dev bots auto-accept party invites (party.ts partyInvite)', () => {
 // to drive the REAL applySnapshot decode directly.
 function bareClient(pid: number): ClientWorld {
   const c = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.sportRole = null;
@@ -431,7 +431,7 @@ describe('mouseover cast settings + server target routing (game.ts case cast)', 
     const server = new GameServer();
     const sent: unknown[] = [];
     const ws = { readyState: 1, send: (payload: string) => sent.push(JSON.parse(payload)) };
-    const session = server.join(ws as never, 9001, 9001, 'Cliquer', 'priest', null);
+    const session = server.join(ws as never, 9001, 9001, 'Cliquer', 'acolyte', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
     const calls: unknown[][] = [];
@@ -483,8 +483,8 @@ describe('target-of-target wire field (dynamicFields tgt) and resolution', () =>
   });
 
   it('carries a player selected target as tgt through wireEntity, absent when null', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Aaa');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Aaa');
     const b = sim.addPlayer('mage', 'Bbb');
     sim.targetEntity(b, a);
     const e = sim.entities.get(a);
@@ -498,8 +498,8 @@ describe('target-of-target wire field (dynamicFields tgt) and resolution', () =>
   });
 
   it('mirrors tgt onto entity.targetId through the real applySnapshot decode', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Aaa');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Aaa');
     const b = sim.addPlayer('mage', 'Bbb');
     sim.targetEntity(b, a);
     const e = sim.entities.get(a);
@@ -521,8 +521,8 @@ describe('target-of-target wire field (dynamicFields tgt) and resolution', () =>
   });
 
   it('carries taunt forced-target state through the entity wire', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const tank = sim.addPlayer('warrior', 'Tank');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const tank = sim.addPlayer('swordman', 'Tank');
     const mob = [...sim.entities.values()].find((e) => e.kind === 'mob');
     if (!mob) throw new Error('missing mob entity');
     mob.forcedTargetId = tank;

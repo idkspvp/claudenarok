@@ -29,7 +29,7 @@ function wireAuras(e: Entity): Record<string, unknown>[] {
 
 describe('wireEntity aura serialization', () => {
   it('omits every optional field when the aura carries only defaults', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const e = sim.player;
     e.auras = [baseAura()];
 
@@ -57,7 +57,7 @@ describe('wireEntity aura serialization', () => {
   });
 
   it('includes every optional field when the aura carries a non-default value', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const e = sim.player;
     e.auras = [
       baseAura({
@@ -106,7 +106,7 @@ describe('wireEntity aura serialization', () => {
   });
 
   it('omits stacks when exactly 1 but includes charges even when exactly 1', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const e = sim.player;
     e.auras = [baseAura({ stacks: 1, charges: 1 })];
 
@@ -120,7 +120,7 @@ describe('wireEntity aura serialization', () => {
     // which are gated on truthiness and legitimately omit 0). A defined 0 must still ride
     // the wire, or a judgement min-range of 0 or a Lightning Shield down to 0 charges would
     // silently vanish and decode back to "absent" on the client.
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const e = sim.player;
     e.auras = [baseAura({ value2: 0, value3: 0, tickInterval: 0, charges: 0 })];
 
@@ -137,7 +137,7 @@ describe('wireEntity aura serialization', () => {
     // w.value = a.value (not round2(a.value)) so a tiny negative survives instead of
     // collapsing to -0 -> 0, which would flip a stat-sap's isAuraDebuff classification
     // on the client. This fails if a future edit swaps in round2(a.value).
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     const e = sim.player;
     e.auras = [baseAura({ value: -0.004 })];
 

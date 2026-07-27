@@ -118,7 +118,7 @@ describe('perfect dodge', () => {
 
 describe('the contest reaches a real swing', () => {
   function landRate(opts: { attackerDex?: number; targetAgi?: number; swings?: number }): number {
-    const sim = new Sim({ seed: 11, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 11, playerClass: 'swordman' });
     const p = sim.player;
     p.hp = p.maxHp = 1_000_000;
     if (opts.attackerDex !== undefined) {
@@ -177,7 +177,7 @@ describe('the contest reaches a real swing', () => {
   });
 
   it('gives a player real hit and flee ratings off their own attributes', () => {
-    const sim = new Sim({ seed: 3, playerClass: 'hunter' });
+    const sim = new Sim({ seed: 3, playerClass: 'archer' });
     sim.setPlayerLevel(40);
     const p = sim.player;
     expect(p.hit).toBe(hitRating(40, p.stats.dex) + Math.round(p.hitBonus * 100));
@@ -185,7 +185,7 @@ describe('the contest reaches a real swing', () => {
     // A fresh character spends none of their own points, so both ratings are
     // level plus 1: the game hands the budget over and the player decides where
     // accuracy and evasion actually come from.
-    const fresh = new Sim({ seed: 3, playerClass: 'hunter' });
+    const fresh = new Sim({ seed: 3, playerClass: 'archer' });
     expect(fresh.player.stats.dex).toBe(BASE_STAT);
     expect(fresh.player.stats.agi).toBe(BASE_STAT);
   });

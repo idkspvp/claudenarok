@@ -46,7 +46,7 @@ talk only to the **`SimContext` seam** (`sim_context.ts`).
 - `voxel.ts` + `voxel_mesh.ts`: the true-3D voxel density field layered over the `world.ts` heightfield, plus its chunked mesher. Tunnels/overhangs come ONLY from hand-authored capsules in `content/tunnels.ts` subtracted from solid terrain; away from a tunnel the field's surface must stay byte-identical to `terrainHeight`, so a heightfield edit is also a voxel edit. Engine-only so far (proven by tests, not yet wired into the renderer; `colliders.ts`/`pathfind.ts` are still heightfield-only).
 - `colliders.ts`: `resolvePosition` (static collision + slide); reads `PROPS` and the dungeon/arena layouts.
 - `dungeon_layout.ts`: plain-number interior layouts; single source for BOTH render geometry and `colliders.ts` interior sets.
-- `pathfind.ts`: local A* (`findPath`); the player-tuned wrapper `findPlayerPath` (body radius, climb, swim) is what warrior Charge calls via `findChargePath`.
+- `pathfind.ts`: local A* (`findPath`); the player-tuned wrapper `findPlayerPath` (body radius, climb, swim) is what swordman Charge calls via `findChargePath`.
 - `threat.ts`: classic-era hate-table math (`addThreat`, `threatModifier`, taunt, stealth detection). Already pure; modules import it directly.
 - `spatial.ts`: `SpatialGrid` entity hash for radius queries; re-bucketed at end of tick. Pure; imported directly.
 - `format_money.ts`: the sim's plain-English money formatter (`"3g 5s"` fragments for loot/quest/vendor/market emit text). A leaf module so `sim.ts`, `market.ts`, and `loot/loot_roll.ts` share it without a value-cycle. NOT the i18n `formatMoney` (see Player-facing text).
@@ -150,7 +150,7 @@ binds every member. The seam carries two kinds of callback:
 foreign hot paths, reachable via `SimContext`):
 - `mobSwing`: base mob hit-table shell on `Sim`; callers in mob combat, profiled mob
   combat, the melee pet attack, and the delve companion attack.
-- `updateRangedPetAttack`: mob ranged path + hunter pet ranged.
+- `updateRangedPetAttack`: mob ranged path + archer pet ranged.
 - `pulseGroundAoE`: the per-tick ground-AoE pulse AND the effect-dispatch on-cast path
   (two callers; the dispatch caller is the easy-to-miss one).
 - `applyTaunt`: player ability/effect, pet, and pet-attack paths.

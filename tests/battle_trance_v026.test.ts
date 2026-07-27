@@ -5,8 +5,8 @@ import { Sim } from '../src/sim/sim';
 import { BATTLE_TRANCE_CHANCE, BATTLE_TRANCE_DURATION, dist2d, MAX_LEVEL } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-function warrior(spec: 'arms' | 'fury' | 'prot' | null = 'arms'): Sim {
-  const sim = new Sim({ seed: 2602, playerClass: 'warrior' });
+function swordman(spec: 'arms' | 'fury' | 'prot' | null = 'arms'): Sim {
+  const sim = new Sim({ seed: 2602, playerClass: 'swordman' });
   sim.setPlayerLevel(MAX_LEVEL);
   return sim;
 }
@@ -61,7 +61,7 @@ function hasTrance(sim: Sim): boolean {
 
 describe('v0.26 Battle Trance', () => {
   it('rolls after every connected Warrior mainhand swing and arms one ten-second aura', () => {
-    const sim = warrior('arms');
+    const sim = swordman('arms');
     const chance = swingOnce(sim);
     expect(chance.mock.calls.filter(([p]: [number]) => p === BATTLE_TRANCE_CHANCE)).toHaveLength(1);
     const auras = sim.player.auras.filter((aura) => aura.kind === 'battle_trance');
@@ -82,7 +82,7 @@ describe('v0.26 Battle Trance', () => {
   });
 
   it('makes Maiming Strike free and consumes exactly one aura', () => {
-    const sim = warrior('arms');
+    const sim = swordman('arms');
     const mob = nearestMob(sim);
     standOff(sim, mob, 2);
     sim.targetEntity(mob.id);
@@ -96,7 +96,7 @@ describe('v0.26 Battle Trance', () => {
   });
 
   it('never pays for Brute Swing or an unrelated rage ability', () => {
-    const sim = warrior('arms');
+    const sim = swordman('arms');
     const mob = nearestMob(sim);
     standOff(sim, mob, 2);
     sim.targetEntity(mob.id);
@@ -111,7 +111,7 @@ describe('v0.26 Battle Trance', () => {
   });
 
   it('moves its free charge onto the queued Reaver Strike', () => {
-    const sim = warrior(null);
+    const sim = swordman(null);
     const mob = nearestMob(sim);
     standOff(sim, mob, 2);
     sim.targetEntity(mob.id);

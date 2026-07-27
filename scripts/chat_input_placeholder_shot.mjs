@@ -30,7 +30,7 @@ await page.evaluate(() => document.getElementById('btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Scribe');
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.getElementById('btn-start-offline').click();
 });
 await page.waitForFunction(() => window.__game && window.__game.hud, { timeout: 30000 });

@@ -233,7 +233,7 @@ function fakeWs() {
 }
 
 function join(server: GameServer, meta?: object): ClientSession {
-  const result = server.join(fakeWs(), 11, 101, 'Lanes', 'warrior', null, false, meta as never);
+  const result = server.join(fakeWs(), 11, 101, 'Lanes', 'swordman', null, false, meta as never);
   if ('error' in result) throw new Error(result.error);
   return result;
 }

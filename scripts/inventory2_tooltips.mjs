@@ -1,10 +1,12 @@
 // Inventory 2.0 tooltip proof: equips each archetype's epic and captures the
 // item tooltip (clipped tight) so the balanced stats are legible.
 // Needs `npm run dev`. Writes PNGs to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -22,9 +24,9 @@ const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), se
 // Left col: helmet(1), shoulder(2), chest(3), mainhand(4).
 // Right col: gloves(1), waist(2), legs(3), feet(4).
 const CASES = [
-  ['warrior', 'deathlords_dread_visage', '#equip-col-left', 1],
+  ['swordman', 'deathlords_dread_visage', '#equip-col-left', 1],
   ['mage', 'necromancers_soulspire_mantle', '#equip-col-left', 2],
-  ['rogue', 'wyrmshadow_talongrips', '#equip-col-right', 1],
+  ['thief', 'wyrmshadow_talongrips', '#equip-col-right', 1],
 ];
 
 async function startAs(cls) {
@@ -33,7 +35,10 @@ async function startAs(cls) {
   await wait(200);
   await page.evaluate(() => {
     const el = document.querySelector('#char-name');
-    if (el) { el.value = 'Tester'; el.dispatchEvent(new Event('input', { bubbles: true })); }
+    if (el) {
+      el.value = 'Tester';
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   });
   await tap(`#offline-select .mini-class[data-class="${cls}"]`);
   await tap('#btn-start-offline');
@@ -45,8 +50,10 @@ for (const [cls, epic, colSel, row] of CASES) {
   await page.evaluate((id) => {
     const sim = window.__game.sim;
     const pid = sim.player.id;
-    sim.player.maxHp = 99999; sim.player.hp = 99999;
-    sim.addItem(id, 1, pid); sim.equipItem(id, pid);
+    sim.player.maxHp = 99999;
+    sim.player.hp = 99999;
+    sim.addItem(id, 1, pid);
+    sim.equipItem(id, pid);
   }, epic);
   await wait(200);
   await page.evaluate(() => window.__game.hud.toggleChar());
@@ -57,8 +64,12 @@ for (const [cls, epic, colSel, row] of CASES) {
     const el = document.querySelector('#tooltip');
     if (!el || el.style.display === 'none') return null;
     const r = el.getBoundingClientRect();
-    return { x: Math.max(0, Math.round(r.x) - 6), y: Math.max(0, Math.round(r.y) - 6),
-      width: Math.round(r.width) + 12, height: Math.round(r.height) + 12 };
+    return {
+      x: Math.max(0, Math.round(r.x) - 6),
+      y: Math.max(0, Math.round(r.y) - 6),
+      width: Math.round(r.width) + 12,
+      height: Math.round(r.height) + 12,
+    };
   });
   if (box && box.width > 0) {
     await page.screenshot({ path: `tmp/inv2_tip_${cls}.png`, clip: box });

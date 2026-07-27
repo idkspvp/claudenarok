@@ -54,11 +54,11 @@ describe('facingAlpha', () => {
 // (the snapshots.test.ts idiom).
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.moveInput = {};
   c.inventory = [];
@@ -105,7 +105,7 @@ describe('ClientWorld gap-resume continuity', () => {
     const self = {
       id: 1,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Watcher',
       lv: 10,
       x: 0,
@@ -182,7 +182,7 @@ describe('ClientWorld prevFacing basis', () => {
     const self = {
       id: 1,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Watcher',
       lv: 10,
       x: 0,

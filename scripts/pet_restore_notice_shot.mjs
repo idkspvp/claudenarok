@@ -48,7 +48,7 @@ async function capture(lang, tag) {
   await sleep(400);
   await page.type('#char-name', 'Houndmaster');
   await page.evaluate(() =>
-    document.querySelector('#offline-select .mini-class[data-class="hunter"]')?.click(),
+    document.querySelector('#offline-select .mini-class[data-class="archer"]')?.click(),
   );
   await sleep(200);
   await page.evaluate(() => document.getElementById('btn-start-offline').click());

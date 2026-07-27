@@ -61,7 +61,7 @@ export async function runJobQa(job) {
           : fail('hud icon', 'icon missing'),
       );
       // Held on EVERY class body, with a mid-attack frame each.
-      const models = ['knight', 'paladin', 'ranger', 'rogue', 'mage', 'barbarian', 'druid'];
+      const models = ['knight', 'paladin', 'ranger', 'thief', 'mage', 'barbarian', 'druid'];
       const missing = models.filter((m) => !existsSync(join(previewDir, `held_${m}_attack.png`)));
       checks.push(
         missing.length === 0

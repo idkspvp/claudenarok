@@ -2,8 +2,9 @@
 // screenshot the new "Footstep Sounds" toggle (off by default). The audio change
 // itself is silent-by-default; the companion spectrogram pair (see
 // scripts/footstep_toggle_spectrogram.mjs) shows what the toggle gates.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -24,7 +25,7 @@ await tap('#btn-offline');
 await wait(200);
 await page.evaluate(() => {
   document.querySelector('#char-name').value = 'Strider';
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click();
 });
 await tap('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.hud, { timeout: 30000 });
@@ -43,9 +44,15 @@ const box = await page.evaluate(() => {
   const el = document.querySelector('#options-menu');
   if (!el) return null;
   const r = el.getBoundingClientRect();
-  return { x: Math.round(r.x), y: Math.round(r.y), width: Math.round(r.width), height: Math.round(r.height) };
+  return {
+    x: Math.round(r.x),
+    y: Math.round(r.y),
+    width: Math.round(r.width),
+    height: Math.round(r.height),
+  };
 });
-if (box && box.width > 0) await page.screenshot({ path: `${OUT}/audio_options_panel.png`, clip: box });
+if (box && box.width > 0)
+  await page.screenshot({ path: `${OUT}/audio_options_panel.png`, clip: box });
 
 // Confirm the default state and the wiring round-trips through the setting.
 const state = await page.evaluate(() => {

@@ -29,7 +29,7 @@ const SMITH_MASTER = 'forgemistress_darva';
 const VESTMENTS_RECIPE = 'recipe_eastbrook_ritual_vestments';
 const KOI = 'glimmerfin_koi';
 
-const sim = new Sim({ seed: PLAYTHROUGH_SEED, playerClass: 'warrior', autoEquip: true });
+const sim = new Sim({ seed: PLAYTHROUGH_SEED, playerClass: 'swordman', autoEquip: true });
 const pid = sim.playerId;
 const meta = sim.players.get(pid) as PlayerMeta;
 const player = sim.entities.get(pid)!;

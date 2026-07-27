@@ -12,8 +12,8 @@
 // so this file also pins the heroic transform literals: a base-template edit
 // cannot slip through either difficulty unnoticed.
 //
-// Reference warrior (the "fully geared" mitigation ceiling): level-20 prot
-// warrior in the max-armor kit (full heroic plate + shield, prot mastery),
+// Reference swordman (the "fully geared" mitigation ceiling): level-20 prot
+// swordman in the max-armor kit (full heroic plate + shield, prot mastery),
 // 2861 armor / 2762 hp, in Defensive Stance (takes 10% less). Derivation:
 // max-armor pick per equip slot over ITEMS via canEquipItemInSlot at
 // requiredLevel <= 20, folded through characterDerivedStats with the prot
@@ -34,7 +34,7 @@ import {
 } from '../src/sim/instances/difficulty';
 
 const SANCTUM = 'gravewyrm_sanctum';
-const REF_ARMOR = 2861; // max-armor BiS prot warrior, level 20 (see header)
+const REF_ARMOR = 2861; // max-armor BiS prot swordman, level 20 (see header)
 const DEFENSIVE_STANCE_TAKEN = 0.9; // dealDamage: Defensive Stance takes 10% less
 // v0.30 pressure pass (2026-07-26): normal Sanctum serves freshly-capped
 // groups in quest greens/blues (1371-1752 hp / 1439-2361 armor across the
@@ -72,7 +72,7 @@ function sanctumTuning(): NormalDungeonTuning {
   return tuning;
 }
 
-// The minimum non-avoided, non-crit melee hit the reference warrior takes from
+// The minimum non-avoided, non-crit melee hit the reference swordman takes from
 // this mob at the given level, replicating the sim's rounding chain:
 // mobSwing rounds after the armor step, dealDamage rounds after the stance cut.
 function minSwingOnReferenceWarrior(mobId: string, level: number): number {
@@ -135,7 +135,7 @@ describe('normal Gravewyrm Sanctum health', () => {
   });
 });
 
-describe('normal Gravewyrm Sanctum melee floors vs the reference warrior', () => {
+describe('normal Gravewyrm Sanctum melee floors vs the reference swordman', () => {
   it('every summoned bonewalker swing lands for at least the 50 add floor', () => {
     for (const id of ADD_IDS) {
       const { minLevel, maxLevel } = MOBS[id];

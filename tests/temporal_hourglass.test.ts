@@ -40,7 +40,7 @@ function addHostile(sim: Sim, x: number, z = 0, template = MOBS.forest_wolf): En
 }
 
 function addAlly(sim: Sim, mage: Entity, x: number, grouped = true): Entity {
-  const allyId = sim.addPlayer('warrior', `Ally-${x}`);
+  const allyId = sim.addPlayer('swordman', `Ally-${x}`);
   const ally = sim.entities.get(allyId);
   if (!ally) throw new Error('ally missing');
   ally.pos = sim.groundPos(x, 0);

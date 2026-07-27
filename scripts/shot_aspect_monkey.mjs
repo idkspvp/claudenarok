@@ -1,11 +1,13 @@
-// Screenshot Aspect of the Monkey (hunter dodge self-buff) in the offline client.
-// Boots the game as a hunter, levels to 10 so the aspect is trained, casts it,
+// Screenshot Aspect of the Monkey (archer dodge self-buff) in the offline client.
+// Boots the game as a archer, levels to 10 so the aspect is trained, casts it,
 // and captures (1) the world scene with the buff active, (2) the buff-bar icon,
 // and (3) the spellbook tooltip.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -22,9 +24,9 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 400));
 await page.type('#char-name', 'Brannok');
-// Pick the hunter; tolerate the auto-select panel where the chip may not be clickable.
+// Pick the archer; tolerate the auto-select panel where the chip may not be clickable.
 await page.evaluate(() => {
-  const chip = document.querySelector('#offline-select .mini-class[data-class="hunter"]');
+  const chip = document.querySelector('#offline-select .mini-class[data-class="archer"]');
   if (chip) chip.click();
 });
 await page.click('#btn-start-offline');
@@ -68,8 +70,10 @@ if (box && box.w > 0) {
   await page.screenshot({
     path: 'tmp/aspect_monkey_buff.png',
     clip: {
-      x: Math.max(0, box.x - pad), y: Math.max(0, box.y - pad),
-      width: box.w + pad * 2, height: box.h + pad * 2,
+      x: Math.max(0, box.x - pad),
+      y: Math.max(0, box.y - pad),
+      width: box.w + pad * 2,
+      height: box.h + pad * 2,
     },
   });
 }
@@ -84,7 +88,8 @@ const target = await page.evaluate(() => {
   for (const el of book.querySelectorAll('*')) {
     if (el.children.length === 0 && /Aspect of the Monkey/.test(el.textContent || '')) {
       const r = el.getBoundingClientRect();
-      if (r.width > 0 && (!best || r.width < best.w)) best = { x: r.left, y: r.top, w: r.width, h: r.height };
+      if (r.width > 0 && (!best || r.width < best.w))
+        best = { x: r.left, y: r.top, w: r.width, h: r.height };
     }
   }
   return best;
@@ -95,5 +100,7 @@ if (target) {
 }
 await page.screenshot({ path: 'tmp/aspect_monkey_spellbook.png' });
 
-console.log('saved tmp/aspect_monkey_scene.png, aspect_monkey_buff.png, aspect_monkey_spellbook.png');
+console.log(
+  'saved tmp/aspect_monkey_scene.png, aspect_monkey_buff.png, aspect_monkey_spellbook.png',
+);
 await browser.close();

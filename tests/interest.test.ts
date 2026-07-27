@@ -38,7 +38,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: 'warrior' | 'rogue' = 'warrior',
+  cls: 'swordman' | 'thief' = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -89,7 +89,7 @@ function besideViewer(viewer: Entity, d: number): { x: number; z: number } {
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.missingSince = new Map(); // despawn-grace bookkeeping (set by the real field initializer)
   c.playerId = pid;
@@ -336,67 +336,67 @@ describe('crowd interest management', () => {
 
   it('hides undetected stealthed players and sends detected ones as translucent stealth', () => {
     const rogueFc = fakeWs();
-    const rogue = joinServer(server, rogueFc, 3, 'Sneaks', 'rogue');
+    const thief = joinServer(server, rogueFc, 3, 'Sneaks', 'thief');
     server.sim.setPlayerLevel(10, viewer.pid);
-    server.sim.setPlayerLevel(10, rogue.pid);
+    server.sim.setPlayerLevel(10, thief.pid);
     const v = server.sim.entities.get(viewer.pid)!;
-    placeAt(server, rogue.pid, v.pos.x + 30, v.pos.z);
-    server.sim.targetEntity(null, rogue.pid);
-    server.sim.castAbility('stealth', rogue.pid);
+    placeAt(server, thief.pid, v.pos.x + 30, v.pos.z);
+    server.sim.targetEntity(null, thief.pid);
+    server.sim.castAbility('stealth', thief.pid);
 
     viewerFc.sent.length = 0;
     broadcast(server);
     let snap = lastSnap(viewerFc.sent);
-    expect(entRecord(snap, rogue.pid)).toBeNull();
-    expect(inKeep(snap, rogue.pid)).toBe(false);
+    expect(entRecord(snap, thief.pid)).toBeNull();
+    expect(inKeep(snap, thief.pid)).toBe(false);
 
     server.sim.setPlayerLevel(15, viewer.pid);
     viewerFc.sent.length = 0;
     step(server);
     snap = lastSnap(viewerFc.sent);
-    const detected = entRecord(snap, rogue.pid);
+    const detected = entRecord(snap, thief.pid);
     expect(detected).not.toBeNull();
     expect(detected.auras.some((a: any) => a.kind === 'stealth')).toBe(true);
   });
 
   it('always sends stealthed party members unless they are dueling the viewer', () => {
     const rogueFc = fakeWs();
-    const rogue = joinServer(server, rogueFc, 3, 'PartySneak', 'rogue');
+    const thief = joinServer(server, rogueFc, 3, 'PartySneak', 'thief');
     server.sim.setPlayerLevel(10, viewer.pid);
-    server.sim.setPlayerLevel(10, rogue.pid);
-    server.sim.partyInvite(rogue.pid, viewer.pid);
-    server.sim.partyAccept(rogue.pid);
+    server.sim.setPlayerLevel(10, thief.pid);
+    server.sim.partyInvite(thief.pid, viewer.pid);
+    server.sim.partyAccept(thief.pid);
     const v = server.sim.entities.get(viewer.pid)!;
-    placeAt(server, rogue.pid, v.pos.x + 30, v.pos.z);
-    server.sim.targetEntity(null, rogue.pid);
-    server.sim.castAbility('stealth', rogue.pid);
+    placeAt(server, thief.pid, v.pos.x + 30, v.pos.z);
+    server.sim.targetEntity(null, thief.pid);
+    server.sim.castAbility('stealth', thief.pid);
 
     viewerFc.sent.length = 0;
     broadcast(server);
     let snap = lastSnap(viewerFc.sent);
-    expect(entRecord(snap, rogue.pid)).not.toBeNull();
+    expect(entRecord(snap, thief.pid)).not.toBeNull();
 
-    server.sim.duelRequest(rogue.pid, viewer.pid);
-    server.sim.duelAccept(rogue.pid);
+    server.sim.duelRequest(thief.pid, viewer.pid);
+    server.sim.duelAccept(thief.pid);
     viewerFc.sent.length = 0;
     step(server);
     snap = lastSnap(viewerFc.sent);
-    expect(entRecord(snap, rogue.pid)).toBeNull();
-    expect(inKeep(snap, rogue.pid)).toBe(false);
+    expect(entRecord(snap, thief.pid)).toBeNull();
+    expect(inKeep(snap, thief.pid)).toBe(false);
   });
 
   it('hides stealthed active duel opponents outside hostile detection range', () => {
     const rogueFc = fakeWs();
-    const rogue = joinServer(server, rogueFc, 3, 'DuelSneak', 'rogue');
+    const thief = joinServer(server, rogueFc, 3, 'DuelSneak', 'thief');
     server.sim.setPlayerLevel(10, viewer.pid);
-    server.sim.setPlayerLevel(10, rogue.pid);
+    server.sim.setPlayerLevel(10, thief.pid);
     const v = server.sim.entities.get(viewer.pid)!;
-    placeAt(server, rogue.pid, v.pos.x + 30, v.pos.z);
-    server.sim.duelRequest(rogue.pid, viewer.pid);
-    server.sim.duelAccept(rogue.pid);
+    placeAt(server, thief.pid, v.pos.x + 30, v.pos.z);
+    server.sim.duelRequest(thief.pid, viewer.pid);
+    server.sim.duelAccept(thief.pid);
     for (let i = 0; i < 20 * 5 && server.sim.duelFor(viewer.pid)?.state !== 'active'; i++)
       server.sim.tick();
-    server.sim.castAbility('stealth', rogue.pid);
+    server.sim.castAbility('stealth', thief.pid);
 
     viewerFc.sent.length = 0;
     step(server);
@@ -405,25 +405,25 @@ describe('crowd interest management', () => {
     expect(
       server.sim.isHostileTo(
         server.sim.entities.get(viewer.pid)!,
-        server.sim.entities.get(rogue.pid)!,
+        server.sim.entities.get(thief.pid)!,
       ),
     ).toBe(true);
-    expect(entRecord(snap, rogue.pid)).toBeNull();
-    expect(inKeep(snap, rogue.pid)).toBe(false);
+    expect(entRecord(snap, thief.pid)).toBeNull();
+    expect(inKeep(snap, thief.pid)).toBe(false);
   });
 
   it('hides stealthed active duel opponents even inside normal detection range', () => {
     const rogueFc = fakeWs();
-    const rogue = joinServer(server, rogueFc, 3, 'CloseSneak', 'rogue');
+    const thief = joinServer(server, rogueFc, 3, 'CloseSneak', 'thief');
     server.sim.setPlayerLevel(10, viewer.pid);
-    server.sim.setPlayerLevel(10, rogue.pid);
+    server.sim.setPlayerLevel(10, thief.pid);
     const v = server.sim.entities.get(viewer.pid)!;
-    placeAt(server, rogue.pid, v.pos.x + 6, v.pos.z);
-    server.sim.duelRequest(rogue.pid, viewer.pid);
-    server.sim.duelAccept(rogue.pid);
+    placeAt(server, thief.pid, v.pos.x + 6, v.pos.z);
+    server.sim.duelRequest(thief.pid, viewer.pid);
+    server.sim.duelAccept(thief.pid);
     for (let i = 0; i < 20 * 5 && server.sim.duelFor(viewer.pid)?.state !== 'active'; i++)
       server.sim.tick();
-    server.sim.castAbility('stealth', rogue.pid);
+    server.sim.castAbility('stealth', thief.pid);
 
     viewerFc.sent.length = 0;
     step(server);
@@ -432,11 +432,11 @@ describe('crowd interest management', () => {
     expect(
       server.sim.isHostileTo(
         server.sim.entities.get(viewer.pid)!,
-        server.sim.entities.get(rogue.pid)!,
+        server.sim.entities.get(thief.pid)!,
       ),
     ).toBe(true);
-    expect(entRecord(snap, rogue.pid)).toBeNull();
-    expect(inKeep(snap, rogue.pid)).toBe(false);
+    expect(entRecord(snap, thief.pid)).toBeNull();
+    expect(inKeep(snap, thief.pid)).toBe(false);
   });
 
   it('keeps stationary npcs visible out to the legacy 120yd radius', () => {
@@ -522,27 +522,27 @@ describe('client crowd protocol', () => {
 
   it('prunes a previously visible duel opponent when they enter stealth', () => {
     const rogueFc = fakeWs();
-    const rogue = joinServer(server, rogueFc, 3, 'ClientSneak', 'rogue');
+    const thief = joinServer(server, rogueFc, 3, 'ClientSneak', 'thief');
     server.sim.setPlayerLevel(10, viewer.pid);
-    server.sim.setPlayerLevel(10, rogue.pid);
+    server.sim.setPlayerLevel(10, thief.pid);
     const v = server.sim.entities.get(viewer.pid)!;
-    placeAt(server, rogue.pid, v.pos.x + 6, v.pos.z);
+    placeAt(server, thief.pid, v.pos.x + 6, v.pos.z);
 
     broadcast(server);
     apply();
-    expect(client.entities.has(rogue.pid)).toBe(true);
+    expect(client.entities.has(thief.pid)).toBe(true);
 
-    server.sim.duelRequest(rogue.pid, viewer.pid);
-    server.sim.duelAccept(rogue.pid);
+    server.sim.duelRequest(thief.pid, viewer.pid);
+    server.sim.duelAccept(thief.pid);
     for (let i = 0; i < 20 * 5 && server.sim.duelFor(viewer.pid)?.state !== 'active'; i++)
       server.sim.tick();
-    server.sim.castAbility('stealth', rogue.pid);
+    server.sim.castAbility('stealth', thief.pid);
 
     viewerFc.sent.length = 0;
     step(server);
     apply();
 
-    expect(client.entities.has(rogue.pid)).toBe(false);
+    expect(client.entities.has(thief.pid)).toBe(false);
   });
 
   it('merges lite records preserving identity fields', () => {

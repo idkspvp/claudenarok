@@ -180,22 +180,22 @@ describe('held weapon models', () => {
   });
 
   // Every player class swaps its held mainhand to the equipped weapon, EXCEPT the
-  // hunter, which keeps its crossbow regardless of the melee weapon equipped. The
+  // archer, which keeps its crossbow regardless of the melee weapon equipped. The
   // cosmetic Combat Mech (player_mech) is class-agnostic but is included: it still
   // shows the wearer's equipped mainhand, like every other body.
-  it('all player classes swap the mainhand except the hunter', () => {
+  it('all player classes swap the mainhand except the archer', () => {
     const players = Object.keys(VISUALS).filter((k) => k.startsWith('player_'));
     expect(players).toContain('player_hunter');
     expect(players).toContain('player_mech');
     for (const key of players) {
       const def = VISUALS[key];
       if (key === 'player_hunter') {
-        expect(def.weaponSlots, 'hunter must keep its crossbow').toBeUndefined();
+        expect(def.weaponSlots, 'archer must keep its crossbow').toBeUndefined();
       } else {
         expect(def.weaponSlots?.includes(0), `${key} should swap its mainhand`).toBe(true);
       }
     }
-    // The rogue dual-wields through independent mainhand and offhand slots.
+    // The thief dual-wields through independent mainhand and offhand slots.
     expect(VISUALS.player_rogue.weaponSlots).toEqual([0]);
     expect(VISUALS.player_rogue.offhandSlot).toBe(1);
   });
@@ -232,20 +232,20 @@ describe('held weapon models', () => {
   // The class-agnostic Combat Mech adopts the wearer's real offhand layout, so
   // rogues keep their second weapon and shield classes keep their shield.
   it('the Combat Mech mirrors every class with an independent offhand', () => {
-    const rogue = mechHeldWeaponOverride('rogue');
-    expect(rogue?.weaponSlots).toEqual([0]);
-    expect(rogue?.offhandSlot).toBe(1);
-    expect(rogue?.attach?.length).toBe(2);
-    expect(mechHeldWeaponOverride('paladin')?.offhandSlot).toBe(1);
-    expect(mechHeldWeaponOverride('shaman')?.offhandSlot).toBe(1);
-    for (const cls of ['hunter', 'priest', 'mage', 'warlock', 'druid'] as const) {
+    const thief = mechHeldWeaponOverride('thief');
+    expect(thief?.weaponSlots).toEqual([0]);
+    expect(thief?.offhandSlot).toBe(1);
+    expect(thief?.attach?.length).toBe(2);
+    expect(mechHeldWeaponOverride('swordman')?.offhandSlot).toBe(1);
+    expect(mechHeldWeaponOverride('acolyte')?.offhandSlot).toBe(1);
+    for (const cls of ['archer', 'acolyte', 'mage', 'mage', 'acolyte'] as const) {
       expect(mechHeldWeaponOverride(cls), `${cls} should keep the mech default`).toBeNull();
     }
 
-    const warrior = mechHeldWeaponOverride('warrior');
-    expect(warrior?.weaponSlots).toEqual([0]);
-    expect(warrior?.offhandSlot).toBe(1);
-    expect(warrior?.attach?.[1]).toEqual({
+    const swordman = mechHeldWeaponOverride('swordman');
+    expect(swordman?.weaponSlots).toEqual([0]);
+    expect(swordman?.offhandSlot).toBe(1);
+    expect(swordman?.attach?.[1]).toEqual({
       url: 'models/weapons/shield_round.glb',
       bone: 'handslot.l',
     });

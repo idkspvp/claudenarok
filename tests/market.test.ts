@@ -5,7 +5,7 @@ import type { Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // A full browse query with sensible defaults; tests vary only what they care about.
@@ -74,7 +74,7 @@ describe('the World Market — the Merchant', () => {
 
   it('browse filter narrows listings by item name and reports the full match count', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.addItem('bone_fragments', 1, seller);
@@ -106,7 +106,7 @@ describe('the World Market — the Merchant', () => {
 
   it('applies armor class and dominant primary stat to the authoritative browse result', () => {
     const sim = makeWorld();
-    const viewer = sim.addPlayer('warrior', 'Viewer');
+    const viewer = sim.addPlayer('swordman', 'Viewer');
     standAtMerchant(sim, viewer);
     const book = sim.market.marketListings;
     book.length = 0;
@@ -145,7 +145,7 @@ describe('the World Market — the Merchant', () => {
 
   it('paginates other sellers server-side, keeping the viewer own listings on every page', () => {
     const sim = makeWorld();
-    const viewer = sim.addPlayer('warrior', 'Viewer');
+    const viewer = sim.addPlayer('swordman', 'Viewer');
     standAtMerchant(sim, viewer);
     const book = sim.market.marketListings;
     book.length = 0; // drop the seeded house stock so the page math is exact
@@ -200,7 +200,7 @@ describe('the World Market — the Merchant', () => {
 
   it("lists a stack from a seller's bags into escrow", () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 3, seller);
     sim.events.length = 0;
@@ -217,7 +217,7 @@ describe('the World Market — the Merchant', () => {
 
   it('completes a sale: coin and goods move, seller keeps proceeds less the cut', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -240,7 +240,7 @@ describe('the World Market — the Merchant', () => {
 
   it("collecting moves waiting gold into the seller's purse", () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -261,7 +261,7 @@ describe('the World Market — the Merchant', () => {
 
   it('forbids buying your own listing, but lets you reclaim it', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.players.get(seller)!.copper = 10000;
@@ -280,7 +280,7 @@ describe('the World Market — the Merchant', () => {
 
   it('keeps listings owned by the same character after a rename', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.players.get(seller)!.copper = 10000;
@@ -304,7 +304,7 @@ describe('the World Market — the Merchant', () => {
 
   it('keeps sale proceeds collectible by the same character after a rename', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -325,7 +325,7 @@ describe('the World Market — the Merchant', () => {
 
   it('rekeys legacy name-bound market state during a forced rename', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller', { characterId: 77 });
+    const seller = sim.addPlayer('swordman', 'Seller', { characterId: 77 });
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.marketList('wolf_fang', 1, 200, seller);
@@ -347,7 +347,7 @@ describe('the World Market — the Merchant', () => {
 
   it('rejects a purchase the buyer cannot afford', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -378,7 +378,7 @@ describe('the World Market — the Merchant', () => {
 
   it("returns expired listings to the seller's collection", () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.marketList('wolf_fang', 1, 100, seller);
@@ -393,7 +393,7 @@ describe('the World Market — the Merchant', () => {
 
   it('refuses to deal with anyone who is not standing at the Merchant', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     teleport(sim, seller, 200, 200);
     sim.addItem('wolf_fang', 1, seller);
     sim.events.length = 0;
@@ -408,7 +408,7 @@ describe('the World Market — the Merchant', () => {
   it('rejects a non-finite count without escrowing goods or listing them', () => {
     for (const badCount of [NaN, Infinity, -Infinity]) {
       const sim = makeWorld();
-      const seller = sim.addPlayer('warrior', 'Seller');
+      const seller = sim.addPlayer('swordman', 'Seller');
       standAtMerchant(sim, seller);
       sim.addItem('wolf_fang', 3, seller);
       sim.events.length = 0;
@@ -424,7 +424,7 @@ describe('the World Market — the Merchant', () => {
 
   it('will not broker quest items', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('boar_hide', 1, seller); // a quest item
     sim.events.length = 0;
@@ -435,7 +435,7 @@ describe('the World Market — the Merchant', () => {
 
   it('will not broker items flagged as unsafe for the market', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('alien_armor_plate', 1, seller);
     sim.events.length = 0;
@@ -449,7 +449,7 @@ describe('the World Market — the Merchant', () => {
 
   it('caps how many listings one seller may keep', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 20, seller);
     for (let i = 0; i < 12; i++) sim.marketList('wolf_fang', 1, 10, seller);
@@ -464,7 +464,7 @@ describe('the World Market — the Merchant', () => {
 
   it('survives a save/load round-trip (persistence)', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -502,7 +502,7 @@ describe('the World Market — the Merchant', () => {
     ).marketCollections.get(marketSellerKey(seller));
     expect(col?.copper).toBe(285); // 300 - 5%
     // new listings keep climbing past the loaded ids
-    const seller2 = sim2.addPlayer('warrior', 'Seller');
+    const seller2 = sim2.addPlayer('swordman', 'Seller');
     standAtMerchant(sim2, seller2);
     sim2.addItem('bone_fragments', 1, seller2);
     sim2.marketList('bone_fragments', 1, 50, seller2);
@@ -563,7 +563,7 @@ describe('the World Market — the Merchant', () => {
 
   it('always wires a seller their own listings even when the market overflows the wire cap', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
 
     // The seller fills all 12 of their slots. Their item name ('wolf_fang')
@@ -655,7 +655,7 @@ describe('World Market: a now-soulbound listing is returned to the seller', () =
 describe('marketCollectPendingFor - the collect-indicator bit', () => {
   it('flips true when a sale credits the collection and false after collecting', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -683,7 +683,7 @@ describe('marketCollectPendingFor - the collect-indicator bit', () => {
 
   it('an item-only collection (expired listing returned) also reads pending', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('wolf_fang', 1, seller);
     sim.marketList('wolf_fang', 1, 100, seller);
@@ -697,7 +697,7 @@ describe('marketCollectPendingFor - the collect-indicator bit', () => {
   });
 
   it('the marketCollectPending getter mirrors the primary player', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman' });
     expect(sim.marketCollectPending).toBe(false);
     const internals = sim.market as unknown as {
       marketCollections: Map<

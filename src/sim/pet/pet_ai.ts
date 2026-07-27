@@ -1,6 +1,6 @@
 // Pet AI tick (P1a), extracted from the Sim monolith.
 //
-// This module owns the per-tick brain for hunter/warlock pets: the updatePet
+// This module owns the per-tick brain for archer/warlock pets: the updatePet
 // dispatcher (owner-resolve + despawn guard, stun guard, aspect sync, taunt timer +
 // out-of-combat regen, target acquisition incl. leash drop, then the combat arm
 // (ranged-DPS bolt dispatch, close/reach, auto/manual taunt, melee-vs-ranged swing)
@@ -214,7 +214,7 @@ function pullNearbyMobs(ctx: SimContext, pet: Entity): void {
 
 // Heel locomotion: route the pet to its owner AROUND obstacles instead of
 // letting greedy slide-steering wedge on a wall and then snapping the pet to
-// the owner. Mirrors the warrior-charge path cache (`petPath`): A* is recomputed
+// the owner. Mirrors the swordman-charge path cache (`petPath`): A* is recomputed
 // at most every PET_PATH_RECALC and otherwise the cached waypoints are followed.
 // The teleport is kept as a recovery path when no route exists or the pet-owner
 // separation is implausibly large (for example, after an instance transition).
@@ -386,7 +386,7 @@ export function petPickTarget(ctx: SimContext, pet: Entity, owner: Entity): Enti
   if (pet.petMode === 'passive') return null;
   // Anti-AFK: an aggressive pet only proactively pulls fresh targets while its
   // owner is actually playing. An idle owner's pet still defends (engagingUs /
-  // ownerOffense below) but cannot farm the area alone (hunter/warlock).
+  // ownerOffense below) but cannot farm the area alone (archer/warlock).
   const ownerMeta = ctx.players.get(owner.id);
   const ownerIdle = !ownerMeta || ctx.tickCount - ownerMeta.lastActiveTick > PET_OWNER_IDLE_TICKS;
   let best: Entity | null = null;

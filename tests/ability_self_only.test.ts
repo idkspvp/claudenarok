@@ -49,7 +49,7 @@ describe('isSelfOnlyAbility', () => {
     // must NOT read as self-only. This is the regression the fix pins.
     ['conjure_water', false],
     ['conjure_food', false],
-    // Patch Up acts on the hunter's companion, not the hunter.
+    // Patch Up acts on the archer's companion, not the archer.
     ['revive_pet', false], // hot
     // Hostile self-centered AoEs: `requiresTarget` false but not caster-only.
     ['frost_nova', false], // aoeRoot

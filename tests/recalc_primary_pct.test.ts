@@ -63,8 +63,8 @@ function derive(cls: PlayerClass, level: number, mut?: (m: PlayerModifiers) => v
 
 describe('recalcPlayerStats primary-attribute multipliers', () => {
   it('agiPct scales Agility and everything derived from it', () => {
-    const base = derive('hunter', 40);
-    const buffed = derive('hunter', 40, (m) => {
+    const base = derive('archer', 40);
+    const buffed = derive('archer', 40, (m) => {
       m.stats.agiPct = 0.1;
     });
     expect(buffed.agi).toBe(Math.round(base.agi * 1.1));
@@ -83,8 +83,8 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
   });
 
   it('dexPct scales Dexterity, the ranged attack power AND the accuracy it feeds', () => {
-    const base = derive('hunter', 40);
-    const buffed = derive('hunter', 40, (m) => {
+    const base = derive('archer', 40);
+    const buffed = derive('archer', 40, (m) => {
       m.stats.dexPct = 0.1;
     });
     expect(buffed.dex).toBe(Math.round(base.dex * 1.1));
@@ -96,8 +96,8 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
   });
 
   it('lukPct scales Luck and the critical rate it feeds', () => {
-    const base = derive('rogue', 40);
-    const buffed = derive('rogue', 40, (m) => {
+    const base = derive('thief', 40);
+    const buffed = derive('thief', 40, (m) => {
       m.stats.lukPct = 0.15;
     });
     expect(buffed.luk).toBe(Math.round(base.luk * 1.15));
@@ -115,8 +115,8 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
   });
 
   it('strPct scales Strength and melee attack power', () => {
-    const base = derive('warrior', 40);
-    const buffed = derive('warrior', 40, (m) => {
+    const base = derive('swordman', 40);
+    const buffed = derive('swordman', 40, (m) => {
       m.stats.strPct = 0.2;
     });
     expect(buffed.str).toBe(Math.round(base.str * 1.2));
@@ -124,8 +124,8 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
   });
 
   it('vitPct scales Vitality and the health pool it feeds', () => {
-    const base = derive('priest', 40);
-    const buffed = derive('priest', 40, (m) => {
+    const base = derive('acolyte', 40);
+    const buffed = derive('acolyte', 40, (m) => {
       m.stats.vitPct = 0.15;
     });
     expect(buffed.vit).toBe(Math.round(base.vit * 1.15));

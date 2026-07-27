@@ -163,7 +163,7 @@ describe('Clearcasting procs from real casts', () => {
   });
 
   it('procs from a friendly-target spell (a heal)', () => {
-    const { sim, p, meta } = makeCastingSim('priest', 23);
+    const { sim, p, meta } = makeCastingSim('acolyte', 23);
     p.hp = 1; // keep the self-heal meaningful so the cast never no-ops
     for (let i = 0; i < 300 && !hasClearcasting(p); i++) {
       p.hp = 1;
@@ -172,11 +172,11 @@ describe('Clearcasting procs from real casts', () => {
     expect(hasClearcasting(p)).toBe(true);
   });
 
-  it('never procs from physical-school casts or toggle-offs (druid form flips)', () => {
-    // Mournweave is cloth, so a druid can wear the full set; a form toggle is a
+  it('never procs from physical-school casts or toggle-offs (acolyte form flips)', () => {
+    // Mournweave is cloth, so a acolyte can wear the full set; a form toggle is a
     // physical-school ability and its off-flip is a toggle-off: neither is a
     // spell, so 300 alternating flips (which would proc ~30 times ungated) stay dry.
-    const { sim, p, meta } = makeCastingSim('druid', 24);
+    const { sim, p, meta } = makeCastingSim('acolyte', 24);
     for (let i = 0; i < 300 && !hasClearcasting(p); i++) castOnce(sim, p, meta, 'bear_form');
     expect(hasClearcasting(p)).toBe(false);
   });

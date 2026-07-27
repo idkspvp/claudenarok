@@ -25,14 +25,14 @@ import type { PlayerClass } from '../src/sim/types';
 
 describe('inspect: sim mirrors the worn set onto the entity', () => {
   it('copies PlayerMeta.equipment onto entity.equippedItems on creation', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     // autoEquip dresses the starter, so the mirror is non-empty and matches.
     expect(Object.keys(sim.equipment).length).toBeGreaterThan(0);
     expect(sim.player.equippedItems).toEqual(sim.equipment);
   });
 
   it('mirrors a distinct copy, not an alias of the meta map', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     // A copy, so a later mutation of one never silently changes the other.
     expect(sim.player.equippedItems).not.toBe(sim.equipment);
   });
@@ -44,7 +44,7 @@ describe('inspect: sim mirrors the worn set onto the entity', () => {
   });
 
   it('leaves equippedItems empty for a non-player entity', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const mob = [...sim.entities.values()].find((e) => e.kind === 'mob');
     // Mobs never run recalcPlayerStats, so the mirror stays at its empty default.
     if (mob) expect(mob.equippedItems).toEqual({});
@@ -73,7 +73,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -88,7 +88,7 @@ function broadcast(server: GameServer): void {
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.missingSince = new Map();
   c.playerId = pid;

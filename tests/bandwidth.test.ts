@@ -170,7 +170,7 @@ function joinAt(server: GameServer, characterId: number, name: string, x: number
       if (snap.t === 'snap') member.lastFrame = payload;
     },
   };
-  const session = server.join(ws as any, characterId, characterId, name, 'warrior', null);
+  const session = server.join(ws as any, characterId, characterId, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   member.pid = session.pid;
   member.session = session;
@@ -227,7 +227,7 @@ describe('crowd bandwidth', () => {
             JSON.stringify(snap.ents).length + (snap.keep ? JSON.stringify(snap.keep).length : 0);
         },
       };
-      const session = server.join(ws as any, i + 1, i + 1, `Walker${i}`, 'warrior', null);
+      const session = server.join(ws as any, i + 1, i + 1, `Walker${i}`, 'swordman', null);
       if ('error' in session) throw new Error(session.error);
       holder.pid = session.pid;
       sessions.push(holder);

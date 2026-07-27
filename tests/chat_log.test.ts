@@ -21,31 +21,31 @@ function row(message: string, channel = 'say'): ChatLogRow {
 
 describe('sent chat normalization', () => {
   function makeWorld() {
-    return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+    return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
   }
 
   it('captures plain text and /say as say', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     expect(sim.chat('hello world', a)).toEqual({ channel: 'say', message: 'hello world' });
     expect(sim.chat('/say hello again', a)).toEqual({ channel: 'say', message: 'hello again' });
   });
 
   it('captures /yell as yell', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     expect(sim.chat('/y Over here!', a)).toEqual({ channel: 'yell', message: 'Over here!' });
   });
 
   it('captures /general as general', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     expect(sim.chat('/general LFG crypt', a)).toEqual({ channel: 'general', message: 'LFG crypt' });
   });
 
   it('captures /whisper as whisper only when the target is valid', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.addPlayer('mage', 'Bet');
     expect(sim.chat('/w bet psst', a)).toEqual({
       channel: 'whisper',
@@ -57,7 +57,7 @@ describe('sent chat normalization', () => {
 
   it('captures /party only for party members', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     expect(sim.chat('/p before party', a)).toBeNull();
     sim.partyInvite(b, a);
@@ -70,7 +70,7 @@ describe('sent chat normalization', () => {
 
   it('does not capture discarded, unknown, or throttled messages', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     expect(sim.chat('', a)).toBeNull();
     expect(sim.chat('   ', a)).toBeNull();
     expect(sim.chat('/dance', a)).toBeNull();
@@ -86,7 +86,7 @@ describe('sent chat normalization', () => {
 
   it('caps captured messages at MAX_CHAT_MESSAGE_LEN characters like Sim.chat', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const sent = sim.chat('x'.repeat(500), a);
     expect(sent?.message.length).toBe(MAX_CHAT_MESSAGE_LEN);
   });
@@ -111,7 +111,7 @@ describe('GameServer chat logging', () => {
     const server = new GameServer();
     const aWs = fakeWs();
     const bWs = fakeWs();
-    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'warrior', null);
+    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'swordman', null);
     const b = server.join(bWs.ws, 22, 202, 'Bet', 'mage', null);
     if ('error' in a || 'error' in b) throw new Error('join failed');
 
@@ -146,7 +146,7 @@ describe('GameServer chat logging', () => {
   it('routes /g through guild chat and remembers guild for plain follow-up messages', async () => {
     const server = new GameServer();
     const aWs = fakeWs();
-    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'warrior', null);
+    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'swordman', null);
     if ('error' in a) throw new Error('join failed');
 
     const guildSpy = vi.spyOn(server.social, 'guildChat').mockResolvedValue(true);
@@ -169,7 +169,7 @@ describe('GameServer chat logging', () => {
     const server = new GameServer();
     const aWs = fakeWs();
     const bWs = fakeWs();
-    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'warrior', null);
+    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'swordman', null);
     const b = server.join(bWs.ws, 22, 202, 'Bet', 'mage', null);
     if ('error' in a || 'error' in b) throw new Error('join failed');
 
@@ -189,7 +189,7 @@ describe('GameServer chat logging', () => {
   it('blocks chat from muted accounts and shows the mute warning', () => {
     const server = new GameServer();
     const aWs = fakeWs();
-    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'warrior', null, false, {
+    const a = server.join(aWs.ws, 11, 101, 'Aleph', 'swordman', null, false, {
       mutedUntil: new Date(Date.now() + 3600_000).toISOString(),
       reason: 'keep chat civil',
     } as any);

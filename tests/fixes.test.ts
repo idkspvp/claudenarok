@@ -38,7 +38,7 @@ import {
 
 const SEED = 20061;
 
-function makeSim(cls: 'warrior' | 'mage' | 'hunter' = 'warrior') {
+function makeSim(cls: 'swordman' | 'mage' | 'archer' = 'swordman') {
   return new Sim({ seed: SEED, playerClass: cls });
 }
 
@@ -64,7 +64,7 @@ function faceTarget(actor: Entity, target: Entity) {
 
 function formRaid(sim: Sim) {
   while ((sim.partyOf(sim.playerId)?.members.length ?? 1) < 5) {
-    const pid = sim.addPlayer('priest', `RaidFill${sim.players.size}`);
+    const pid = sim.addPlayer('acolyte', `RaidFill${sim.players.size}`);
     sim.partyInvite(pid);
     sim.partyAccept(pid);
   }
@@ -504,7 +504,7 @@ describe('rare spawn rules', () => {
   });
 
   it('rare respawn timers use their configured multiplier', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', respawnSeconds: 2 });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', respawnSeconds: 2 });
     const rare = createMob(990003, MOBS.mirejaw_the_ravenous, 10, { x: 0, y: 0, z: 0 });
     (sim as any).handleDeath(rare, null);
     expect(rare.respawnTimer).toBe(1296);
@@ -513,7 +513,7 @@ describe('rare spawn rules', () => {
   it('quest-related named rares respawn after 3 minutes', () => {
     const ids = ['old_cragmaw'] as const;
     for (const id of ids) {
-      const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+      const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
       const mob = createMob(990004, MOBS[id], MOBS[id].maxLevel, { x: 0, y: 0, z: 0 });
       (sim as any).handleDeath(mob, null);
       expect(mob.respawnTimer, id).toBe(180);
@@ -521,7 +521,7 @@ describe('rare spawn rules', () => {
   });
 
   it('Mogger respawns on a quest-boss timer instead of a long rare-spawn timer', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', respawnSeconds: 2 });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', respawnSeconds: 2 });
     const mogger = [...sim.entities.values()].find(
       (e) => e.kind === 'mob' && e.templateId === 'mogger',
     )!;
@@ -578,8 +578,8 @@ describe('the Hollow Crypt doors', () => {
   });
 
   it('party members who walk in share one instance', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Anna');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Anna');
     const b = sim.addPlayer('mage', 'Bert');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
@@ -605,8 +605,8 @@ describe('the Hollow Crypt doors', () => {
   });
 
   it('solo players from different groups get different instances', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Anna');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Anna');
     const b = sim.addPlayer('mage', 'Bert');
     teleportTo(sim, CRYPT_DOOR_POS.x, CRYPT_DOOR_POS.z - 1, a);
     sim.tick();
@@ -714,8 +714,8 @@ describe('boss loot and encounter resets', () => {
     const sim = makeSim();
     const a = sim.playerId;
     const b = sim.addPlayer('mage', 'Bert');
-    const c = sim.addPlayer('rogue', 'Cyra');
-    const d = sim.addPlayer('priest', 'Dara');
+    const c = sim.addPlayer('thief', 'Cyra');
+    const d = sim.addPlayer('acolyte', 'Dara');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     sim.partyInvite(c, a);
@@ -965,7 +965,7 @@ describe('boss loot and encounter resets', () => {
     const sim = makeSim();
     const a = sim.playerId;
     const b = sim.addPlayer('mage', 'Bert');
-    const c = sim.addPlayer('rogue', 'Cyra');
+    const c = sim.addPlayer('thief', 'Cyra');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     teleportTo(sim, 20, 20, a);
@@ -1176,7 +1176,7 @@ describe('quest npc roles', () => {
   });
 });
 
-describe('warrior charge', () => {
+describe('swordman charge', () => {
   function chargeSetup() {
     const sim = makeSim();
     (sim as any).grantXp(99999); // learn charge (level 4)
@@ -1184,7 +1184,7 @@ describe('warrior charge', () => {
     const wolf = [...sim.entities.values()].find(
       (e) => e.kind === 'mob' && e.templateId === 'forest_wolf' && !e.dead,
     )!;
-    // A level-20 warrior one-shots a ~28hp wolf, and the swing that lands the
+    // A level-20 swordman one-shots a ~28hp wolf, and the swing that lands the
     // instant the charge arrives would clear autoAttack (target died). Whether
     // that kill connects rides the shared RNG stream — which shifts as world
     // content grows — so beef the wolf up to survive the engaging swing and
@@ -1498,22 +1498,22 @@ describe('ranged auto-attack crit suppression', () => {
   }
 
   function setup(level: number, targetLevel: number) {
-    const sim = new Sim({ seed: SEED, playerClass: 'hunter' });
-    const hunter = sim.player;
+    const sim = new Sim({ seed: SEED, playerClass: 'archer' });
+    const archer = sim.player;
     if (level > 1) sim.setPlayerLevel(level);
-    hunter.critChance = 0.5;
+    archer.critChance = 0.5;
     const wolf = [...sim.entities.values()].find((e) => e.kind === 'mob')!;
     wolf.level = targetLevel;
-    const ranged = CLASSES.hunter.ranged!;
-    return { sim, hunter, wolf, ranged };
+    const ranged = CLASSES.archer.ranged!;
+    return { sim, archer, wolf, ranged };
   }
 
   it('suppresses crit against a higher-level target, matching melee', () => {
-    const { sim, hunter, wolf, ranged } = setup(10, 13); // +3 levels
+    const { sim, archer, wolf, ranged } = setup(10, 13); // +3 levels
     const rolled = critChanceRolled(
       sim,
-      () => (sim as any).rangedSwing(hunter, wolf, ranged),
-      hunter,
+      () => (sim as any).rangedSwing(archer, wolf, ranged),
+      archer,
       wolf,
     );
     // 0.5 base - 3 * 0.002 suppression = 0.494 (was a flat 0.5 before the fix)
@@ -1521,11 +1521,11 @@ describe('ranged auto-attack crit suppression', () => {
   });
 
   it('does not suppress crit against an equal-or-lower-level target', () => {
-    const { sim, hunter, wolf, ranged } = setup(10, 8); // lower level
+    const { sim, archer, wolf, ranged } = setup(10, 8); // lower level
     const rolled = critChanceRolled(
       sim,
-      () => (sim as any).rangedSwing(hunter, wolf, ranged),
-      hunter,
+      () => (sim as any).rangedSwing(archer, wolf, ranged),
+      archer,
       wolf,
     );
     expect(rolled).toBeCloseTo(0.5, 5);
@@ -1641,7 +1641,7 @@ describe('spell visuals', () => {
   });
 
   it('ranged auto shot does not fire through dungeon walls', () => {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     const origin = instanceOrigin(2, 0);
     const p = sim.player;
     const mob = createMob(990202, MOBS.sanctum_boneguard, 19, {
@@ -1737,10 +1737,10 @@ describe('mob auto attacks against moving targets', () => {
 
 describe('trade and duel invites validate availability at accept time', () => {
   it('a second invitee cannot hijack the inviter who is already trading', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Anna');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Anna');
     const b = sim.addPlayer('mage', 'Bert');
-    const c = sim.addPlayer('warrior', 'Cara');
+    const c = sim.addPlayer('swordman', 'Cara');
 
     // Anna fires off trade requests to both Bert and Cara while still free.
     sim.tradeRequest(b, a);
@@ -1764,10 +1764,10 @@ describe('trade and duel invites validate availability at accept time', () => {
   });
 
   it('a second challenger acceptance cannot hijack a duelist mid-duel', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const a = sim.addPlayer('warrior', 'Anna');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const a = sim.addPlayer('swordman', 'Anna');
     const b = sim.addPlayer('mage', 'Bert');
-    const c = sim.addPlayer('warrior', 'Cara');
+    const c = sim.addPlayer('swordman', 'Cara');
 
     sim.duelRequest(b, a);
     sim.duelRequest(c, a);

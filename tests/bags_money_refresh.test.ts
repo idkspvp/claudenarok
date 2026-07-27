@@ -83,7 +83,7 @@ function joinServer(
   characterId: number,
   name = 'Fernando',
 ): ClientSession {
-  const session = server.join(fc.ws, characterId, characterId, name, 'warrior', null, false, {});
+  const session = server.join(fc.ws, characterId, characterId, name, 'swordman', null, false, {});
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -91,7 +91,7 @@ function joinServer(
 
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly
 // (the tests/snapshots.test.ts idiom, copied per the repo's house pattern).
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();

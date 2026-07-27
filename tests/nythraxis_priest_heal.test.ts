@@ -6,8 +6,8 @@ import type { Aura, Entity } from '../src/sim/types';
 
 const SEED = 51234;
 
-// Malric, the Deathless Hierophant: the heroic Nythraxis priest add. He is
-// CC-able (unlike the boss and warrior add) and channels an ESCALATING heal on
+// Malric, the Deathless Hierophant: the heroic Nythraxis acolyte add. He is
+// CC-able (unlike the boss and swordman add) and channels an ESCALATING heal on
 // the boss that a stun/silence must break, or it ramps every tick.
 const inner = (sim: Sim) =>
   sim as unknown as {
@@ -47,7 +47,7 @@ function tickOneChannel(sim: Sim, malric: Entity, boss: Entity, maxTicks = 90): 
   return boss.hp - before;
 }
 
-describe('heroic Nythraxis priest: escalating channeled heal', () => {
+describe('heroic Nythraxis acolyte: escalating channeled heal', () => {
   it('is authored CC-able with a channelHeal and no ward', () => {
     const t = MOBS.nythraxis_heroic_priest_add;
     expect(t.ccImmune).toBe(false);
@@ -64,7 +64,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('heals the boss for more each uninterrupted tick (the ramp)', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const boss = spawn(sim, 8001, 'nythraxis_scourge_of_thornpeak', 1000); // wounded, huge pool
     const malric = spawn(sim, 8002, 'nythraxis_heroic_priest_add');
     boss.pos = { x: 4, y: 0, z: 0 };
@@ -82,7 +82,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('a stun breaks the channel and resets the ramp to base', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const boss = spawn(sim, 8011, 'nythraxis_scourge_of_thornpeak', 1000);
     const malric = spawn(sim, 8012, 'nythraxis_heroic_priest_add');
     boss.pos = { x: 4, y: 0, z: 0 };
@@ -103,8 +103,8 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
     expect(afterStun).toBe(320);
   });
 
-  it('the priest (and stalker) accept player CC; the warrior add does not', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+  it('the acolyte (and stalker) accept player CC; the swordman add does not', () => {
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const malric = spawn(sim, 8021, 'nythraxis_heroic_priest_add');
     const voss = spawn(sim, 8022, 'nythraxis_heroic_rogue_add');
     const aldren = spawn(sim, 8023, 'nythraxis_heroic_warrior_add');
@@ -120,7 +120,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('holds a standoff near its protectee and channels, instead of chasing the player', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(20);
     const pid = sim.playerId;
     // Player in aggro range to one side; Malric keeps him as a target but must NOT
@@ -148,7 +148,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('a shadow-school lockout breaks the channel and resets the ramp', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const boss = spawn(sim, 8401, 'nythraxis_scourge_of_thornpeak', 1000);
     const malric = spawn(sim, 8402, 'nythraxis_heroic_priest_add');
     boss.pos = { x: 4, y: 0, z: 0 };
@@ -172,7 +172,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('a silence breaks the channel and resets the ramp', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const boss = spawn(sim, 8401, 'nythraxis_scourge_of_thornpeak', 1000);
     const malric = spawn(sim, 8402, 'nythraxis_heroic_priest_add');
     boss.pos = { x: 4, y: 0, z: 0 };
@@ -193,7 +193,7 @@ describe('heroic Nythraxis priest: escalating channeled heal', () => {
   });
 
   it('the ramp caps at maxHeal and the heroic heal multiplier applies', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     const boss = spawn(sim, 8501, 'nythraxis_scourge_of_thornpeak', 1); // huge pool, deeply wounded
     boss.maxHp = 1_000_000;
     const malric = spawn(sim, 8502, 'nythraxis_heroic_priest_add');

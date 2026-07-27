@@ -33,7 +33,7 @@ function castTemporalBarrier(
   sim.setPlayerLevel(level);
   sim.player.resource = sim.player.maxResource;
   const manaBefore = sim.player.resource;
-  const allyId = sim.addPlayer('warrior', 'Barrier Target');
+  const allyId = sim.addPlayer('swordman', 'Barrier Target');
   const ally = sim.entities.get(allyId);
   if (!ally) throw new Error('missing barrier target');
   sim.targetEntity(allyId);

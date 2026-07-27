@@ -242,7 +242,7 @@ export function attackReadout(ctx: SimContext, p: Entity, meta: PlayerMeta): str
   if (!p.autoAttack) return 'Auto-attack is off.';
   const t = p.targetId !== null ? ctx.entities.get(p.targetId) : null;
   if (!t || t.dead) return 'Auto-attack is on, but you have no valid target.';
-  // ranged classes (hunter auto shot, caster wands) swing at their ranged
+  // ranged classes (archer auto shot, caster wands) swing at their ranged
   // speed; everyone else, including a druid shifted into a wandless form,
   // uses the form-aware melee cadence (bear: weapon, cat: claw baseline)
   const base = rangedAutoProfile(p, meta.cls)?.speed ?? baseSwingSpeed(p);
@@ -250,11 +250,11 @@ export function attackReadout(ctx: SimContext, p: Entity, meta: PlayerMeta): str
   const next = p.swingTimer <= 0 ? 'now' : `in ${p.swingTimer.toFixed(1)}s`;
   return `Auto-attack is on against ${t.name} — next swing ${next} (${interval.toFixed(1)}s swing).`;
 }
-// Overpower is a warrior reactive: an enemy dodging the player's attack opens
+// Overpower is a swordman reactive: an enemy dodging the player's attack opens
 // a 5s window (overpowerUntil = time + 5) in which the ability becomes usable.
 // It is neither an aura nor a normal cooldown, so no other readout exposes it.
 export function overpowerReadout(ctx: SimContext, e: Entity, meta: PlayerMeta): string {
-  if (meta.cls !== 'warrior') return 'Overpower is a warrior ability; your class cannot use it.';
+  if (meta.cls !== 'swordman') return 'Overpower is a swordman ability; your class cannot use it.';
   const remaining = Math.ceil(e.overpowerUntil - ctx.time);
   if (remaining > 0) {
     return `Overpower is ready — strike within ${remaining}s (an enemy dodged your attack).`;

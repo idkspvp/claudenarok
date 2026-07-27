@@ -21,9 +21,9 @@ async function bootOffline(page, name) {
   await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
   // Skip the first-spawn intro cinematic (it inline-hides #ui while it runs).
   await page.evaluate((n) => {
-    localStorage.setItem(`woc_spawn_intro_seen:offline:warrior:${n}`, '1');
+    localStorage.setItem(`woc_spawn_intro_seen:offline:swordman:${n}`, '1');
   }, name);
-  await enterOfflineGame(page, { charClass: 'warrior', charName: name, settleMs: 1500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: name, settleMs: 1500 });
   await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 40000 });
   // Dismiss the new-adventurer tutorial overlay (it intercepts input).
   await page.evaluate(() => {
@@ -44,10 +44,10 @@ async function seedFinderState(page) {
     sim.setPlayerLevel(8);
     sim.dungeonFinderSetRoles(['tank']);
     const bots = [
-      ['Lumen', 'priest', ['healer']],
+      ['Lumen', 'acolyte', ['healer']],
       ['Wick', 'mage', ['dps']],
-      ['Fletch', 'hunter', ['dps']],
-      ['Shade', 'rogue', ['dps']],
+      ['Fletch', 'archer', ['dps']],
+      ['Shade', 'thief', ['dps']],
     ].map(([name, cls, roles]) => {
       const pid = sim.addPlayer(cls, name);
       // Dev bots auto-accept finder proposals (the /dev lfg behavior), so the
@@ -97,12 +97,12 @@ await seedFinderState(page);
 // --- Premade board: my listing + an applicant + another open listing ---
 await page.evaluate(() => {
   const sim = window.__game.sim;
-  const [healer, , , rogue] = window.__dfBots;
+  const [healer, , , thief] = window.__dfBots;
   sim.dungeonFinderListingCreate('hollow_crypt_normal', ['first_run', 'learning']);
   sim.dungeonFinderListingCreate('hollow_crypt_normal', ['fast_run'], healer);
   for (let i = 0; i < 3; i++) sim.tick();
   const mine = sim.dungeonFinderInfoFor(sim.playerId).myListing;
-  sim.dungeonFinderApply(mine.id, rogue);
+  sim.dungeonFinderApply(mine.id, thief);
   for (let i = 0; i < 3; i++) sim.tick();
   window.__game.hud.toggleDungeonFinder();
 });

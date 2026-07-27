@@ -334,14 +334,14 @@ describe('item level: purity and determinism', () => {
 describe('heroic set: class coverage', () => {
   it('every class can use a broad slot spread of heroic epics', () => {
     const ALL_CLASSES = [
-      'warrior',
+      'swordman',
       'paladin',
       'shaman',
-      'rogue',
-      'hunter',
+      'thief',
+      'archer',
       'druid',
       'mage',
-      'priest',
+      'acolyte',
       'warlock',
     ] as const;
     const ids = Object.values(HEROIC_BOSS_LOOT)

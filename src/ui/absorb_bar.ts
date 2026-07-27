@@ -1,6 +1,6 @@
 // Pure derivation of the absorb-shield overlay for unit-frame health bars.
 //
-// Classic-era clients render active damage-absorb shields — priest wards,
+// Classic-era clients render active damage-absorb shields — acolyte wards,
 // Ice Barrier, the paladin holy shield, etc. — as a lighter segment laid over
 // the health bar that extends past current health toward the bar's right edge.
 // The sim already models these as `kind: 'absorb'` auras whose `value` is the

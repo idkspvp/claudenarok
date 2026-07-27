@@ -64,7 +64,7 @@ const NODE = GATHER_NODES[0]; // ore_eastbrook_1, tier 1
 const NODE_MATERIAL = nodeMaterialFor(NODE.type, NODE.zoneId);
 
 function makeSim(seed = 4242): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 function teleportTo(sim: Sim, x: number, z: number): void {
@@ -310,7 +310,7 @@ describe('hidden-state wire invariant', () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
     const join = (fc: FakeClient, id: number, name: string): ClientSession => {
-      const session = server.join(fc.ws, id, id, name, 'warrior', null);
+      const session = server.join(fc.ws, id, id, name, 'swordman', null);
       if ('error' in session) throw new Error(session.error);
       session.blockListLoaded = true;
       return session;
@@ -393,8 +393,8 @@ describe('gather cast duration', () => {
   });
 
   it('a started gather cast pins castTotal to the formula output (live)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Timed');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Timed');
     teleportOntoNode(sim, pid, 'ore_mirefen_t2'); // tier-2 vein
     sim.addItem('mithril_mining_pick', 1, pid); // mining tier 3
     mustMeta(sim, pid).gatheringProficiency.mining = 150; // band 1
@@ -416,8 +416,8 @@ describe('gather cast duration', () => {
 
 describe('gather completion re-validation', () => {
   function simMidCast() {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Revalidated');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Revalidated');
     sim.addItem('copper_mining_pick', 1, pid); // #2343: tier-1 tool keeps castTotal at base
     teleportOntoNode(sim, pid, NODE.id);
     expect(sim.harvestNode(NODE.id, pid)).toBe(true);
@@ -477,8 +477,8 @@ describe('node-tier-relative proficiency gain through the live cast loop', () =>
   // two gain tiers above it (green, 0.25) and mining 75 grays it out
   // entirely (queueGatheringGrant drops the 0: nothing is queued).
   function harvestAt(proficiency: number): { queued: number[]; settled: number } {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Curved');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Curved');
     const meta = mustMeta(sim, pid);
     meta.gatheringProficiency.mining = proficiency;
     sim.addItem('copper_mining_pick', 1, pid); // #2343: node harvest needs the tool
@@ -636,8 +636,8 @@ describe('silence and lockout exemptions (with the demon-heal fold, byte-identic
 
 describe('interrupt immunity and damage-cancels-not-pushback', () => {
   it('an interrupt effect stops a mob spell cast but never a fishing or gather cast', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const kicker = sim.addPlayer('warrior', 'Kicker');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const kicker = sim.addPlayer('swordman', 'Kicker');
     const caster = sim.entities.get(kicker);
     const casterMeta = mustMeta(sim, kicker);
     if (!caster) throw new Error('missing caster');
@@ -656,7 +656,7 @@ describe('interrupt immunity and damage-cancels-not-pushback', () => {
     expect(mob.castingAbility).toBe(null);
     // Immunity arms: the non-spell sentinels survive the identical effect.
     for (const castId of [FISHING_CAST_ID, GATHER_CAST_ID]) {
-      const victimPid = sim.addPlayer('warrior', `Victim${castId}`);
+      const victimPid = sim.addPlayer('swordman', `Victim${castId}`);
       const victim = sim.entities.get(victimPid);
       if (!victim) throw new Error('missing victim');
       victim.castingAbility = castId;
@@ -668,8 +668,8 @@ describe('interrupt immunity and damage-cancels-not-pushback', () => {
   });
 
   it('damage CANCELS a gather cast outright rather than pushing it back', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Struck');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Struck');
     sim.addItem('copper_mining_pick', 1, pid); // #2343: node harvest needs the tool
     teleportOntoNode(sim, pid, NODE.id);
     expect(sim.harvestNode(NODE.id, pid)).toBe(true);
@@ -747,8 +747,8 @@ describe('every gather start-deny arm leaves no cast and draws nothing', () => {
   }
 
   it('dead, unknown node, too far, respawn-not-ready, toolless, bags-full: no cast, zero draws', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Denied');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Denied');
     const p = sim.entities.get(pid);
     const meta = mustMeta(sim, pid);
     if (!p) throw new Error('missing entity');
@@ -795,8 +795,8 @@ describe('every gather start-deny arm leaves no cast and draws nothing', () => {
   });
 
   it('busy: a mid-cast re-press denies without touching the running cast', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Busy');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Busy');
     const p = sim.entities.get(pid);
     if (!p) throw new Error('missing entity');
     sim.addItem('copper_mining_pick', 1, pid); // #2343: node harvest needs the tool
@@ -845,8 +845,8 @@ describe('death clears the hidden cast state (review fix)', () => {
   });
 
   it('a sourceless lethal blow mid-gather-cast leaves every hidden field inert', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Slain');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Slain');
     const p = sim.entities.get(pid);
     if (!p) throw new Error('missing entity');
     sim.addItem('copper_mining_pick', 1, pid); // #2343: node harvest needs the tool
@@ -970,8 +970,8 @@ describe('every other cast-end path returns the hidden fields to inert (QA pins)
 
 describe('the widened useItem busy guard covers the gather cast (QA pin)', () => {
   it('a potion press mid-gather-cast denies busy and leaves the cast untouched', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Sipper');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Sipper');
     const p = sim.entities.get(pid);
     if (!p) throw new Error('missing entity');
     sim.addItem('minor_mana_potion', 1, pid);

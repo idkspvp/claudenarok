@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorTexts(events: SimEvent[], pid: number): string[] {
@@ -15,9 +15,9 @@ function errorTexts(events: SimEvent[], pid: number): string[] {
 // /overpower reads only Entity.overpowerUntil + sim.time + the player's class,
 // replies on the self-only error channel, and is never logged to chat.
 describe('/overpower command', () => {
-  it('reports the open reactive window with seconds remaining for a warrior', () => {
+  it('reports the open reactive window with seconds remaining for a swordman', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(pid)!;
     e.overpowerUntil = sim.time + 4; // an enemy just dodged the player's attack
@@ -30,7 +30,7 @@ describe('/overpower command', () => {
 
   it('reports the window closed once it has lapsed', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(pid)!;
     e.overpowerUntil = -1; // default / consumed: no proc active
@@ -50,13 +50,13 @@ describe('/overpower command', () => {
 
     sim.chat('/overpowered', pid);
     expect(errorTexts(sim.tick(), pid)).toContain(
-      'Overpower is a warrior ability; your class cannot use it.',
+      'Overpower is a swordman ability; your class cannot use it.',
     );
   });
 
   it('never emits a chat event (self-only, unlogged)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     expect(sim.chat('/overpower', pid)).toBeNull();

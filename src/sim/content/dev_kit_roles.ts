@@ -45,7 +45,7 @@ const CASTER = { int: 1, luk: 0.35, vit: 0.4 } as const;
 const HEALER = { int: 1, luk: 0.7, vit: 0.4 } as const;
 
 export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>> = Object.freeze({
-  warrior: [
+  swordman: [
     { spec: 'arms', weights: PHYS_STR, melee: true },
     // Fury dual-wields (and with Titan's Grip can hold two two-handers), so the
     // picker must fill BOTH hands rather than leaving an empty offhand.
@@ -57,17 +57,17 @@ export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>>
     { spec: 'protection', weights: TANK_STR, melee: true, tank: true, hands: 'shield' },
     { spec: 'retribution', weights: PHYS_STR, melee: true },
   ],
-  hunter: [
+  archer: [
     { spec: 'beast_mastery', weights: PHYS_AGI, melee: false },
     { spec: 'marksmanship', weights: PHYS_AGI, melee: false },
     { spec: 'survival', weights: PHYS_AGI, melee: false },
   ],
-  rogue: [
+  thief: [
     { spec: 'assassination', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
     { spec: 'combat', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
     { spec: 'subtlety', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
   ],
-  priest: [
+  acolyte: [
     { spec: 'discipline', weights: HEALER, melee: false },
     { spec: 'holy', weights: HEALER, melee: false },
     { spec: 'shadow', weights: CASTER, melee: false },

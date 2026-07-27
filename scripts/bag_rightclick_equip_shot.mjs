@@ -33,7 +33,7 @@ await page.evaluate(() => {
     el.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 for (let i = 0; i < 60; i++) {
   const ready = await page.evaluate(() => !!window.__game?.sim);

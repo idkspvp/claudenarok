@@ -58,7 +58,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -69,11 +69,11 @@ function joinServer(
 describe('unequip an offhand item over the wire', () => {
   it('unequip_item{slot:offhand} moves the offhand weapon into the bags', () => {
     const server = new GameServer();
-    const session = joinServer(server, fakeWs(), 1, 'Duelist', 'rogue');
+    const session = joinServer(server, fakeWs(), 1, 'Duelist', 'thief');
     const sim = server.sim;
     const meta = sim.meta(session.pid)!;
 
-    // Use a rogue: with the specializations retired (Phase D0) it is the one
+    // Use a thief: with the specializations retired (Phase D0) it is the one
     // class that can hold a dual-wield offhand weapon.
     sim.setPlayerLevel(40, session.pid);
 
@@ -100,7 +100,7 @@ describe('unequip an offhand item over the wire', () => {
 describe('equip an aimed offhand weapon over the wire', () => {
   it('honors slot:offhand instead of falling back to the mainhand resolver', () => {
     const server = new GameServer();
-    const session = joinServer(server, fakeWs(), 2, 'DuelistAim', 'rogue');
+    const session = joinServer(server, fakeWs(), 2, 'DuelistAim', 'thief');
     const sim = server.sim;
     const meta = sim.meta(session.pid)!;
 

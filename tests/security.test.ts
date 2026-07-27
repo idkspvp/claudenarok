@@ -551,13 +551,13 @@ describe('gm privilege boundaries', () => {
   });
 
   it('does not restore gm privilege from client-controlled saved character state', () => {
-    const source = new Sim({ seed: 42, playerClass: 'warrior' });
+    const source = new Sim({ seed: 42, playerClass: 'swordman' });
     const state = source.serializeCharacter(source.playerId) as any;
     state.gm = true;
     state.is_gm = true;
 
-    const target = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = target.addPlayer('warrior', 'Tester', { state });
+    const target = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = target.addPlayer('swordman', 'Tester', { state });
 
     expect(target.entities.get(pid)?.gm).not.toBe(true);
   });

@@ -41,7 +41,7 @@ function equipmentOf(items: ItemDef[]): PlayerEquipment {
 }
 
 function player(cls: PlayerClass, level = 20): { sim: AnySim; p: AnyEntity; pid: number } {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true }) as AnySim;
   const pid = sim.addPlayer(cls, 'Tester');
   sim.setPlayerLevel(level, pid);
   sim.tick();
@@ -127,10 +127,10 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
   });
 
   it('the tier-2 Nighttalon 3-piece adds haste on top of its agi/crit bonus', () => {
-    const { p } = player('rogue');
+    const { p } = player('thief');
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(setMembers(SET_NIGHTTALON).slice(0, 3)),
       undefined,
       {},
@@ -143,10 +143,10 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
   });
 
   it('the tier-1 Deathlord 3-piece grants no haste', () => {
-    const { p } = player('warrior');
+    const { p } = player('swordman');
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       equipmentOf(setMembers(SET_DEATHLORD).slice(0, 3)),
       undefined,
       {},
@@ -204,7 +204,7 @@ describe('spell haste shortens casts and channels', () => {
 
 describe('melee / ranged haste shorten the swing interval', () => {
   it('melee haste shortens the next melee swing timer', () => {
-    const { sim, p } = player('warrior');
+    const { sim, p } = player('swordman');
     const meta = sim.players.get(p.id)!;
     spawnDummy(sim, p);
     p.autoAttack = true;
@@ -219,8 +219,8 @@ describe('melee / ranged haste shorten the swing interval', () => {
     expect(p.swingTimer).toBeCloseTo(p.weapon.speed * sim.swingIntervalMult(p), 6);
   });
 
-  it('ranged haste shortens the next auto-shot timer (hunter)', () => {
-    const { sim, p } = player('hunter');
+  it('ranged haste shortens the next auto-shot timer (archer)', () => {
+    const { sim, p } = player('archer');
     const meta = sim.players.get(p.id)!;
     spawnDummy(sim, p, 12); // inside ranged max, outside the dead zone
     p.autoAttack = true;

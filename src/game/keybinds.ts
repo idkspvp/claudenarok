@@ -281,7 +281,7 @@ export const BIND_ACTIONS: BindAction[] = [
     kind: 'edge',
     defaults: ['KeyZ'],
   },
-  // Pet bar (hunter/warlock pet commands). Bound to Ctrl + 1..5 by default, so the
+  // Pet bar (archer/warlock pet commands). Bound to Ctrl + 1..5 by default, so the
   // action-bar 1..5 stay free; every one is rebindable like any other action. The
   // handlers live in main.ts (onPet -> the IWorld pet commands).
   {

@@ -11,7 +11,7 @@ function char(over: Partial<CharacterSummary> & { id: number }): CharacterSummar
   return {
     id: over.id,
     name: over.name ?? `Char${over.id}`,
-    class: over.class ?? 'warrior',
+    class: over.class ?? 'swordman',
     level: over.level ?? 1,
     skin: over.skin ?? 0,
     online: over.online ?? false,

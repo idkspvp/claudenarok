@@ -56,10 +56,10 @@ type SimInternals = {
 };
 
 function setup(seed = 11) {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
-  const a = sim.addPlayer('warrior', 'Alpha');
-  const b = sim.addPlayer('warrior', 'Bravo');
+  const a = sim.addPlayer('swordman', 'Alpha');
+  const b = sim.addPlayer('swordman', 'Bravo');
   sim.tick();
 
   for (const pid of [a, b]) {
@@ -700,9 +700,9 @@ describe('corpse premium-arm tool gating (Professions 2.0)', () => {
   // seeds below were hunted against exactly this construction order, and the
   // second addPlayer would shift the world's draw positions.
   function soloRig(seed: number, templateId = 'forest_wolf') {
-    const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
     const internals = sim as unknown as SimInternals;
-    const a = sim.addPlayer('warrior', 'Alpha');
+    const a = sim.addPlayer('swordman', 'Alpha');
     sim.tick();
     const e = internals.entities.get(a)!;
     e.pos = { x: 0, y: 0, z: 0 };
@@ -910,11 +910,11 @@ describe('corpse premium-arm tool gating (Professions 2.0)', () => {
 // and tests/CLAUDE.md).
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.sportRole = null;
@@ -1014,7 +1014,7 @@ function lastSnap(sent: any[]): any {
 }
 
 function joinServer(server: GameServer, fc: FakeClient, id: number, name: string): ClientSession {
-  const session = server.join(fc.ws, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;

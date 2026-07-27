@@ -27,8 +27,8 @@ function equipmentOf(sim: AnySim, pid: number): Record<string, string | undefine
 }
 
 function makeSim(): { sim: AnySim; pid: number } {
-  const sim = new Sim({ seed: 11, playerClass: 'warrior', noPlayer: true }) as AnySim;
-  const pid = sim.addPlayer('warrior', 'Aimer');
+  const sim = new Sim({ seed: 11, playerClass: 'swordman', noPlayer: true }) as AnySim;
+  const pid = sim.addPlayer('swordman', 'Aimer');
   sim.setPlayerLevel(20, pid);
   return { sim, pid };
 }
@@ -107,8 +107,8 @@ describe('Sim.equipItemToSlot', () => {
   });
 
   it('still enforces the level gate on an aimed slot', () => {
-    const sim = new Sim({ seed: 3, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid = sim.addPlayer('warrior', 'Twink');
+    const sim = new Sim({ seed: 3, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid = sim.addPlayer('swordman', 'Twink');
     sim.setPlayerLevel(1, pid);
     // A rare ring gates on its source level; a level-1 character cannot wear it.
     sim.addItem(RING_A, 1, pid);

@@ -4,7 +4,7 @@ import type { IWorld } from '../src/world_api';
 
 function world(overrides: Record<string, unknown> = {}): IWorld {
   return {
-    cfg: { playerClass: 'warrior' },
+    cfg: { playerClass: 'swordman' },
     player: {
       name: 'Ari Stone',
       color: 0x123456,

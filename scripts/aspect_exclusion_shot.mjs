@@ -1,5 +1,5 @@
-// Screenshot the hunter aspect mutual-exclusion fix in the offline client.
-// Boots a hunter, levels to 14 so Hawk/Monkey/Cheetah are all trained, then casts
+// Screenshot the archer aspect mutual-exclusion fix in the offline client.
+// Boots a archer, levels to 14 so Hawk/Monkey/Cheetah are all trained, then casts
 // each aspect in turn (clearing the GCD between casts). Before the fix all three
 // stacked (+AP, +dodge, +speed at once); now only the most recent aspect is up.
 // Captures the buff bar holding a single aspect icon and logs the stat proof.
@@ -26,7 +26,7 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 400));
 await page.type('#char-name', 'Brannok');
 await page.evaluate(() => {
-  const chip = document.querySelector('#offline-select .mini-class[data-class="hunter"]');
+  const chip = document.querySelector('#offline-select .mini-class[data-class="archer"]');
   if (chip) chip.click();
 });
 await page.click('#btn-start-offline');

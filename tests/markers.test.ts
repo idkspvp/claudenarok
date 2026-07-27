@@ -23,7 +23,7 @@ const STAR = 0;
 const SKULL = 7;
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // Wild, live, hostile mobs are spawned from CAMPS in the Sim constructor.
@@ -46,9 +46,9 @@ function makeParty(sim: Sim, ...pids: number[]): void {
 describe('target markers — sim layer', () => {
   it('a marker set by one party member is visible to the whole party, not outsiders', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel'); // outsider
+    const c = sim.addPlayer('thief', 'Gimel'); // outsider
     makeParty(sim, a, b);
     const [mob] = liveMobs(sim, 1);
 
@@ -61,10 +61,10 @@ describe('target markers — sim layer', () => {
 
   it('two separate parties can mark the same mob independently', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
-    const d = sim.addPlayer('priest', 'Dalet');
+    const c = sim.addPlayer('thief', 'Gimel');
+    const d = sim.addPlayer('acolyte', 'Dalet');
     makeParty(sim, a, b);
     makeParty(sim, c, d);
     const [mob] = liveMobs(sim, 1);
@@ -78,7 +78,7 @@ describe('target markers — sim layer', () => {
 
   it('a symbol is unique within a party — re-assigning it moves it off the old mob', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     makeParty(sim, a, b);
     const [mob1, mob2] = liveMobs(sim, 2);
@@ -91,7 +91,7 @@ describe('target markers — sim layer', () => {
 
   it('re-applying the same symbol to the same mob toggles it off', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     makeParty(sim, a, b);
     const [mob] = liveMobs(sim, 1);
@@ -104,7 +104,7 @@ describe('target markers — sim layer', () => {
 
   it('clearMarker removes a mark for the party', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     makeParty(sim, a, b);
     const [mob] = liveMobs(sim, 1);
@@ -119,7 +119,7 @@ describe('target markers — sim layer', () => {
   describe('validation', () => {
     it('does nothing when the actor has no party', () => {
       const sim = makeWorld();
-      const lone = sim.addPlayer('warrior', 'Aleph');
+      const lone = sim.addPlayer('swordman', 'Aleph');
       const [mob] = liveMobs(sim, 1);
 
       sim.setMarker(mob.id, SKULL, lone);
@@ -129,7 +129,7 @@ describe('target markers — sim layer', () => {
 
     it('rejects out-of-range and non-integer marker ids', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -143,7 +143,7 @@ describe('target markers — sim layer', () => {
 
     it('refuses to mark a non-mob (e.g. a player)', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
 
@@ -154,7 +154,7 @@ describe('target markers — sim layer', () => {
 
     it('refuses to mark a dead mob', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -167,7 +167,7 @@ describe('target markers — sim layer', () => {
 
     it('refuses to mark an owned pet/summon (ownerId set)', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -182,7 +182,7 @@ describe('target markers — sim layer', () => {
   describe('lifecycle cleanup', () => {
     it('clears a mark when the marked mob dies (so it cannot reappear on respawn)', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -199,7 +199,7 @@ describe('target markers — sim layer', () => {
 
     it('clears a mark when the marked entity despawns', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -212,9 +212,9 @@ describe('target markers — sim layer', () => {
 
     it('clears a mark when the marked mob is tamed into a pet', () => {
       const sim = makeWorld();
-      const hunter = sim.addPlayer('hunter', 'Aleph');
+      const archer = sim.addPlayer('archer', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
-      makeParty(sim, hunter, b);
+      makeParty(sim, archer, b);
       const wolf = [...sim.entities.values()].find(
         (e) =>
           e.kind === 'mob' &&
@@ -224,31 +224,31 @@ describe('target markers — sim layer', () => {
           e.templateId === 'forest_wolf',
       );
       if (!wolf) throw new Error('expected a tameable forest_wolf in the overworld');
-      const hunterE = sim.entities.get(hunter)!;
+      const hunterE = sim.entities.get(archer)!;
       hunterE.level = 20; // out-level the wolf so taming is permitted
 
-      sim.setMarker(wolf.id, SKULL, hunter);
-      expect(sim.markersFor(hunter)).toEqual({ [wolf.id]: SKULL });
+      sim.setMarker(wolf.id, SKULL, archer);
+      expect(sim.markersFor(archer)).toEqual({ [wolf.id]: SKULL });
 
       (sim as unknown as { completeTame(p: Entity, target: Entity): void }).completeTame(
         hunterE,
         wolf,
       );
 
-      const pet = sim.petOf(hunter);
-      expect(pet?.ownerId).toBe(hunter); // it created an owned pet copy
+      const pet = sim.petOf(archer);
+      expect(pet?.ownerId).toBe(archer); // it created an owned pet copy
       expect(pet?.id).not.toBe(wolf.id);
       expect(sim.entities.has(wolf.id)).toBe(false);
-      expect(sim.markersFor(hunter)).toEqual({}); // and the stale mark is gone
+      expect(sim.markersFor(archer)).toEqual({}); // and the stale mark is gone
     });
   });
 
   describe('party lifecycle', () => {
     it('marks survive a non-fatal member departure', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
-      const c = sim.addPlayer('rogue', 'Gimel');
+      const c = sim.addPlayer('thief', 'Gimel');
       makeParty(sim, a, b, c);
       const [mob] = liveMobs(sim, 1);
 
@@ -260,7 +260,7 @@ describe('target markers — sim layer', () => {
 
     it('clears all marks when the party disbands', () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Aleph');
+      const a = sim.addPlayer('swordman', 'Aleph');
       const b = sim.addPlayer('mage', 'Bet');
       makeParty(sim, a, b);
       const [mob] = liveMobs(sim, 1);
@@ -290,7 +290,7 @@ describe('target markers — server self-wire', () => {
     return mob;
   }
   function join(server: GameServer, fc: { ws: any }, id: number, name: string) {
-    const s = server.join(fc.ws, id, id, name, 'warrior', null);
+    const s = server.join(fc.ws, id, id, name, 'swordman', null);
     if ('error' in s) throw new Error(s.error);
     return s;
   }

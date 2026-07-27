@@ -8,7 +8,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
-function makeSim(playerClass: 'warrior' | 'mage' = 'warrior') {
+function makeSim(playerClass: 'swordman' | 'mage' = 'swordman') {
   return new Sim({ seed: 11, playerClass, autoEquip: true });
 }
 
@@ -56,7 +56,7 @@ describe('mob disarm ("Disarming Smash")', () => {
   });
 
   it('suppresses auto-attack while disarmed, then resumes once it falls off', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const p = sim.player;
     const meta = (sim as any).players.get(p.id);
     // A defenseless dummy directly in front of the player, inside melee range.

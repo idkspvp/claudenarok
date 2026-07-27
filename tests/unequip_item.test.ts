@@ -10,11 +10,11 @@ function logText(events: SimEvent[]): string | undefined {
 
 describe('Sim.unequipItem', () => {
   it('moves an equipped piece back to bags, empties the slot, and recalcs stats', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(pid)!;
     sim.tick();
-    // give + equip a helmet (a slot a fresh warrior leaves empty)
+    // give + equip a helmet (a slot a fresh swordman leaves empty)
     sim.addItem('cryptbone_helm', 1, pid);
     sim.equipItem('cryptbone_helm', pid);
     sim.tick();
@@ -33,8 +33,8 @@ describe('Sim.unequipItem', () => {
   });
 
   it('is a no-op for an empty slot', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Aleph');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(sim.unequipItem('legs', pid)).toBe(false);
   });

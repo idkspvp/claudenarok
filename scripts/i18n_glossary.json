@@ -10,11 +10,11 @@
     "classNames": {
       "note": "The 9 canonical class names. Use the established localized form already in the resolved table; never re-coin. Many locales keep the cognate (e.g. Paladin, Druid).",
       "keyPatterns": [
-        "classes.warrior",
+        "classes.swordman",
         "classes.paladin",
-        "classes.hunter",
-        "classes.rogue",
-        "classes.priest",
+        "classes.archer",
+        "classes.thief",
+        "classes.acolyte",
         "classes.shaman",
         "classes.mage",
         "classes.warlock",

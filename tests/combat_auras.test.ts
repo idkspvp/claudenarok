@@ -21,7 +21,7 @@ import type { Aura, Entity } from '../src/sim/types';
 import { DT } from '../src/sim/types';
 
 function makeSim(seed = 7373): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 function aura(kind: Aura['kind'], value: number, extra: Partial<Aura> = {}): Aura {

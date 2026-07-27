@@ -1,8 +1,10 @@
 // Screenshots of the social systems + the Hollow Crypt through real clients.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 const uniq = Date.now().toString(36).slice(-5);
@@ -22,24 +24,42 @@ async function login(page, charName, cls, fresh) {
   page.on('pageerror', (e) => errors.push(`[${charName}] ` + e.message));
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   await sleep(700);
-  await page.evaluate((u, p, fresh) => {
-    document.querySelector('#btn-online').click();
-    document.querySelector('#login-user').value = u;
-    document.querySelector('#login-pass').value = p;
-    document.querySelector(fresh ? '#btn-register' : '#btn-login').click();
-  }, `socv_${uniq}`, 'hunter22', fresh);
-  await page.waitForFunction(() => document.querySelector('#charselect-panel')?.style.display === 'block', { timeout: 8000, polling: 200 });
-  await page.evaluate((name, cls) => {
-    document.querySelector('#new-char-name').value = name;
-    document.querySelector(`#charselect-panel .mini-class[data-class="${cls}"]`).click();
-    document.querySelector('#btn-create-char').click();
-  }, charName, cls);
+  await page.evaluate(
+    (u, p, fresh) => {
+      document.querySelector('#btn-online').click();
+      document.querySelector('#login-user').value = u;
+      document.querySelector('#login-pass').value = p;
+      document.querySelector(fresh ? '#btn-register' : '#btn-login').click();
+    },
+    `socv_${uniq}`,
+    'hunter22',
+    fresh,
+  );
+  await page.waitForFunction(
+    () => document.querySelector('#charselect-panel')?.style.display === 'block',
+    { timeout: 8000, polling: 200 },
+  );
+  await page.evaluate(
+    (name, cls) => {
+      document.querySelector('#new-char-name').value = name;
+      document.querySelector(`#charselect-panel .mini-class[data-class="${cls}"]`).click();
+      document.querySelector('#btn-create-char').click();
+    },
+    charName,
+    cls,
+  );
   await sleep(700);
   await page.evaluate((name) => {
     const rows = [...document.querySelectorAll('.char-row')];
-    rows.find((r) => r.querySelector('.char-name')?.textContent === name)?.querySelector('.enter-world-btn')?.click();
+    rows
+      .find((r) => r.querySelector('.char-name')?.textContent === name)
+      ?.querySelector('.enter-world-btn')
+      ?.click();
   }, charName);
-  await page.waitForFunction(() => window.__game?.world?.entities?.size > 5, { timeout: 20000, polling: 500 });
+  await page.waitForFunction(() => window.__game?.world?.entities?.size > 5, {
+    timeout: 20000,
+    polling: 500,
+  });
 }
 
 const pageA = await browser.newPage();
@@ -56,7 +76,7 @@ await sleep(300);
 await pageC.screenshot({ path: 'tmp/s0_classes.png' });
 await pageC.close();
 
-await login(pageB, `Pri${alpha}`, 'priest', false);
+await login(pageB, `Pri${alpha}`, 'acolyte', false);
 console.log('both in world');
 
 // party up via console commands (UI context menu verified separately)
@@ -83,7 +103,9 @@ await sleep(800);
 await pageA.screenshot({ path: 'tmp/s1_trade_party.png' });
 const partyVisible = await pageA.evaluate(() => document.querySelectorAll('.party-frame').length);
 console.log('party frames rendered:', partyVisible >= 1 ? 'OK' : 'FAIL');
-const tradeVisible = await pageA.evaluate(() => document.querySelector('#trade-window')?.style.display === 'block');
+const tradeVisible = await pageA.evaluate(
+  () => document.querySelector('#trade-window')?.style.display === 'block',
+);
 console.log('trade window rendered:', tradeVisible ? 'OK' : 'FAIL');
 await pageA.evaluate(() => window.__game.world.tradeCancel());
 

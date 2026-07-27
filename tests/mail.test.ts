@@ -16,7 +16,7 @@ import {
 import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
-const makeWorld = () => new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+const makeWorld = () => new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 
 function moveToMailbox(sim: Sim, pid: number): void {
   const box = sim.entities.get(sim.postOffice.mailboxIds[0]);
@@ -56,7 +56,7 @@ describe('mailboxes in the world', () => {
 
   it('keyboard interact at a mailbox emits the open-mailbox cue', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Postie');
+    const pid = sim.addPlayer('swordman', 'Postie');
     moveToMailbox(sim, pid);
     sim.interact(pid);
     const events = sim.drainEvents();
@@ -67,7 +67,7 @@ describe('mailboxes in the world', () => {
 describe('the welcome letter', () => {
   it('greets a new character exactly once, with the enclosed coin', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Newbie');
+    const pid = sim.addPlayer('swordman', 'Newbie');
     expect(sim.mailUnreadFor(pid)).toBe(1);
     moveToMailbox(sim, pid);
     const info = sim.mailInfoFor(pid);
@@ -79,11 +79,11 @@ describe('the welcome letter', () => {
 
   it('is not re-sent to a character whose save says it was already welcomed', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Veteran');
+    const pid = sim.addPlayer('swordman', 'Veteran');
     const state = sim.serializeCharacter(pid);
     expect(state?.mailWelcomed).toBe(true);
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Veteran', { state: state ?? undefined });
+    const pid2 = sim2.addPlayer('swordman', 'Veteran', { state: state ?? undefined });
     expect(sim2.mailUnreadFor(pid2)).toBe(0);
   });
 });
@@ -91,7 +91,7 @@ describe('the welcome letter', () => {
 describe('sending a letter', () => {
   it('escrows coin, parcels and postage, then delivers after the flight', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const bob = sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
@@ -126,7 +126,7 @@ describe('sending a letter', () => {
 
   it('refuses what the post refuses', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
     aliceMeta.copper = 5;
@@ -169,7 +169,7 @@ describe('sending a letter', () => {
 
   it('lets the recipient take the attachments, then discard the letter', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const bob = sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     const bobMeta = sim.meta(bob);
@@ -206,7 +206,7 @@ describe('sending a letter', () => {
 describe('instanced attachments (finding 1)', () => {
   it('escrows only the fungible copy, never an instanced slot of the same item', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
@@ -232,7 +232,7 @@ describe('instanced attachments (finding 1)', () => {
 
   it('refuses to mail when the only copies are instanced', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
@@ -262,7 +262,7 @@ describe('taking attachments against bag capacity (finding 2)', () => {
 
   it('collects coin, leaves unfitting stacks attached, delivers them after space is freed', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const bob = sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     const bobMeta = sim.meta(bob);
@@ -306,7 +306,7 @@ describe('taking attachments against bag capacity (finding 2)', () => {
 
   it('does not start the emptied clock while a partially-taken letter still holds parcels', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const bob = sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     const bobMeta = sim.meta(bob);
@@ -345,7 +345,7 @@ describe('unread index equivalence (finding 4)', () => {
     'matches the linear scan across sends, deliveries, reads, takes, deletes, renames and expiries',
     () => {
       const sim = makeWorld();
-      const alice = sim.addPlayer('warrior', 'Alice');
+      const alice = sim.addPlayer('swordman', 'Alice');
       const bob = sim.addPlayer('mage', 'Bob');
       const aliceMeta = sim.meta(alice);
       const bobMeta = sim.meta(bob);
@@ -431,7 +431,7 @@ describe('unread index equivalence (finding 4)', () => {
 
   it('rebuilds a byte-identical index after a serialize/load round-trip', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
@@ -478,7 +478,7 @@ describe('unread index equivalence (finding 4)', () => {
 describe('the Heroic Marks reward letter (mailHeroicMarks)', () => {
   it('books a system letter carrying the exact mark count as its attachment', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Backline');
+    const pid = sim.addPlayer('swordman', 'Backline');
     sim.postOffice.mailHeroicMarks(pid, HEROIC_MARK_ITEM_ID, 3);
     tickFor(sim, 1);
     moveToMailbox(sim, pid);
@@ -491,7 +491,7 @@ describe('the Heroic Marks reward letter (mailHeroicMarks)', () => {
 
   it('refuses an unknown recipient and a non-positive count', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Backline');
+    const pid = sim.addPlayer('swordman', 'Backline');
     const before = (sim.postOffice as any).mail.length;
     sim.postOffice.mailHeroicMarks(999999, HEROIC_MARK_ITEM_ID, 3); // no such player
     sim.postOffice.mailHeroicMarks(pid, HEROIC_MARK_ITEM_ID, 0);
@@ -503,7 +503,7 @@ describe('the Heroic Marks reward letter (mailHeroicMarks)', () => {
 describe('persistence and rename', () => {
   it('round-trips the book through serializeMail/loadMail without re-announcing', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const bob = sim.addPlayer('mage', 'Bob');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
@@ -525,7 +525,7 @@ describe('persistence and rename', () => {
 
   it('rekeys name-keyed letters onto the stable character id on rename', () => {
     const sim = makeWorld();
-    const alice = sim.addPlayer('warrior', 'Alice');
+    const alice = sim.addPlayer('swordman', 'Alice');
     const aliceMeta = sim.meta(alice);
     if (!aliceMeta) throw new Error('no meta');
     aliceMeta.copper = 10_000;

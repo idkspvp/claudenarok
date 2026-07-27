@@ -13,7 +13,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity, Vec3 } from '../src/sim/types';
 
 function makeSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function spawnMob(sim: Sim, templateId: string, pos: Vec3, level = 10): Entity {

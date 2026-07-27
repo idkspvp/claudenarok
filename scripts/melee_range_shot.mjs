@@ -6,12 +6,14 @@
 // so it struck the passerby; after the fix a stationary mob only reaches its true
 // 5 yd, so the player at 6.5 yd takes no damage. Writes PNGs to tmp/. Needs
 // `npm run dev` (:5173). Override URL with GAME_URL=.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = (process.env.GAME_URL ?? 'http://localhost:5173') + '/?gfx=ultra';
-const W = 1600, H = 900;
+const W = 1600,
+  H = 900;
 fs.mkdirSync('tmp', { recursive: true });
 
 const browser = await puppeteer.launch({
@@ -23,7 +25,9 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (msg) => { if (msg.type() === 'error') errors.push('CONSOLE: ' + msg.text()); });
+page.on('console', (msg) => {
+  if (msg.type() === 'error') errors.push('CONSOLE: ' + msg.text());
+});
 
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 45000 });
@@ -35,10 +39,12 @@ await page.waitForSelector('#char-name', { timeout: 20000 });
 await new Promise((r) => setTimeout(r, 300));
 await page.focus('#char-name');
 await page.type('#char-name', 'Strider');
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await new Promise((r) => setTimeout(r, 200));
 await tap('#btn-start-offline');
-await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player, { timeout: 40000 });
+await page.waitForFunction(() => window.__game && window.__game.sim && window.__game.sim.player, {
+  timeout: 40000,
+});
 await new Promise((r) => setTimeout(r, 3000)); // settle the ultra pipeline
 await tap('.tut-skip');
 await new Promise((r) => setTimeout(r, 300));
@@ -64,8 +70,11 @@ const staged = await page.evaluate(() => {
   // the nearest-approach distance stays 6.5 yd: beyond the true 5 yd reach, but inside
   // the old inflated 8 yd reach. Mobs are stationary (moveSpeed 0) so they cannot chase.
   for (const e of mobs) {
-    e.pos.x = p.pos.x + 9000; e.pos.z = p.pos.z + 9000; e.prevPos = { ...e.pos };
-    e.aggroTargetId = null; e.aiState = 'idle';
+    e.pos.x = p.pos.x + 9000;
+    e.pos.z = p.pos.z + 9000;
+    e.prevPos = { ...e.pos };
+    e.aggroTargetId = null;
+    e.aiState = 'idle';
     sim.rebucket(e);
   }
   const anchors = [];
@@ -76,7 +85,8 @@ const staged = await page.evaluate(() => {
     e.pos.z = p.pos.z + dz;
     e.pos.y = p.pos.y;
     e.prevPos = { ...e.pos };
-    e.dead = false; e.hp = e.maxHp;
+    e.dead = false;
+    e.hp = e.maxHp;
     e.hostile = true;
     sim.rebucket(e);
     anchors.push({ id: e.id, x: e.pos.x, y: e.pos.y, z: e.pos.z });
@@ -94,7 +104,11 @@ const staged = await page.evaluate(() => {
   return { ok: true, nearDist: 6.5, hpBefore: p.hp };
 });
 console.log('staged:', JSON.stringify(staged));
-if (!staged.ok) { console.error('not enough mobs', staged); await browser.close(); process.exit(1); }
+if (!staged.ok) {
+  console.error('not enough mobs', staged);
+  await browser.close();
+  process.exit(1);
+}
 await new Promise((r) => setTimeout(r, 1200));
 await page.screenshot({ path: 'tmp/melee_range_walk_past_camp.png' });
 
@@ -103,8 +117,10 @@ await page.screenshot({ path: 'tmp/melee_range_walk_past_camp.png' });
 // spawners); here we only confirm the framing: the player passes the packed camp at
 // 6.5 yd, outside a stationary scale-1 mob's true 5 yd reach but inside the old
 // inflated 8 yd reach (true 5 yd + the removed flat 3 yd moving-target grace).
-console.log('staged packed camp at 6.5 yd from the player:',
-  'true reach (fixed) = 5 yd -> safe; old reach = 8 yd -> would have hit.');
+console.log(
+  'staged packed camp at 6.5 yd from the player:',
+  'true reach (fixed) = 5 yd -> safe; old reach = 8 yd -> would have hit.',
+);
 
 if (errors.length) console.log('page errors:\n' + errors.join('\n'));
 await browser.close();

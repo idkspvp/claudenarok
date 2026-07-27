@@ -31,10 +31,10 @@ no procedural-rig path here anymore. Reads the world; never mutates the sim.
   per-frame render paths; `createCharacterVisual` returns null on such a
   failure so callers skip the view for the frame instead of stalling the
   renderer (`tests/character_visual_fail_soft.test.ts`).
-- `halo.ts`: the class halo (the priest's Light): `buildHalo(color, upOffset,
+- `halo.ts`: the class halo (the acolyte's Light): `buildHalo(color, upOffset,
   radius)`, driven by `VisualDef.halo` plus the optional
   `haloUpOffset`/`haloRadius` placement overrides (defaults live here; the
-  priest overrides only the lift, for hat clearance). Texture, per-color
+  acolyte overrides only the lift, for hat clearance). Texture, per-color
   materials, and
   per-radius geometries are shared never-disposed caches; radii must come from
   static `VisualDef` values so the cache keys stay bounded. `visual.ts` parents
@@ -57,7 +57,7 @@ no procedural-rig path here anymore. Reads the world; never mutates the sim.
 - `weapon_skin_materials.ts`: tracks and disposes the materials a displayed
   weapon skin owns (`tests/weapon_skin_materials.test.ts`).
 - `skin_attack.ts`: skin-driven attack-clip substitution (a bow skin swaps
-  the hunter's crossbow shot); pure over the skin catalog
+  the archer's crossbow shot); pure over the skin catalog
   (`tests/weapon_skins.test.ts`).
 - `back_grips.ts`: back-carry transforms for sheathed weapons on the chest
   bone; pure data + math (`tests/back_grips.test.ts`).

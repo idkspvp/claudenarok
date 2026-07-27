@@ -30,7 +30,7 @@ function tierSkill(tier: number): number {
 }
 
 function makeSim(seed = 5150): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 /** Attune the local player to the Smith pair directly (bypassing the quest), so
@@ -255,7 +255,7 @@ describe('tier-crossing master mail (Professions 2.0)', () => {
     expect(saved?.tierMailSent).toMatchObject({ [PRIMARY]: 3, [SECONDARY]: 2 });
 
     const reloaded = makeSim(5151);
-    const pid = reloaded.addPlayer('warrior', 'Reloaded', { state: saved ?? undefined });
+    const pid = reloaded.addPlayer('swordman', 'Reloaded', { state: saved ?? undefined });
     const reloadedMeta = reloaded.players.get(pid)!;
     expect(reloadedMeta.tierMailSent.get(PRIMARY)).toBe(3);
     // The persisted acknowledgement means the same tier never re-mails on load.
@@ -306,7 +306,7 @@ describe('tier-crossing master mail (Professions 2.0)', () => {
     expect(saved?.tierMailSent).toEqual({ [PRIMARY]: 2, [SECONDARY]: 1, goldsmithing: 2 });
 
     const reloaded = makeSim(5152);
-    const pid = reloaded.addPlayer('warrior', 'Reloaded', { state: saved ?? undefined });
+    const pid = reloaded.addPlayer('swordman', 'Reloaded', { state: saved ?? undefined });
     const reloadedMeta = reloaded.players.get(pid)!;
     expect(reloadedMeta.tierMailSent.has('goldsmithing')).toBe(false); // self-healed
     expect([...reloadedMeta.tierMailSent.entries()]).toEqual([

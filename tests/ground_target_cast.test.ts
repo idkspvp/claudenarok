@@ -122,10 +122,10 @@ describe('ground-targeted casting (Flamestrike)', () => {
   });
 });
 
-// The thematic per-class ground-targeted spells. Rain of Fire (warlock), Volley
-// (hunter) and Hurricane (druid) are CHANNELED: casting begins a channel aimed at
+// The thematic per-class ground-targeted spells. Rain of Fire (mage), Volley
+// (archer) and Hurricane (acolyte) are CHANNELED: casting begins a channel aimed at
 // the (clamped) point, and each tick pulses an AoE there via the channel-tick path.
-// Earthquake (shaman) is an instant lingering ground zone (groundAoE).
+// Earthquake (acolyte) is an instant lingering ground zone (groundAoE).
 describe('ground-targeted casting (thematic per-class spells)', () => {
   function castGroundSpell(cls: PlayerClass, spell: string, aim: { x: number; z: number }): Sim {
     const sim = new Sim({ seed: 7, playerClass: cls, noPlayer: true });
@@ -140,9 +140,9 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
   }
 
   const channeled = [
-    { cls: 'warlock', spell: 'rain_of_fire' },
-    { cls: 'hunter', spell: 'volley' },
-    { cls: 'druid', spell: 'hurricane' },
+    { cls: 'mage', spell: 'rain_of_fire' },
+    { cls: 'archer', spell: 'volley' },
+    { cls: 'acolyte', spell: 'hurricane' },
   ] as const;
 
   for (const c of channeled) {
@@ -178,11 +178,11 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
   it('a channeled ground spell damages enemies in the aimed area over its ticks', () => {
     // Flat dungeon-floor band (x > 600) for deterministic clear line-of-sight.
     const FLAT_X = 700;
-    const sim = new Sim({ seed: 7, playerClass: 'warlock', noPlayer: true });
-    const pid = sim.addPlayer('warlock', 'Lock');
+    const sim = new Sim({ seed: 7, playerClass: 'mage', noPlayer: true });
+    const pid = sim.addPlayer('mage', 'Lock');
     sim.setPlayerLevel(20, pid);
     const me = sim.entities.get(pid);
-    if (!me) throw new Error('no warlock');
+    if (!me) throw new Error('no mage');
     me.resource = 9999;
     place(sim, pid, FLAT_X, 0);
     const mob = createMob(9100, MOBS.forest_wolf, 20, sim.groundPos(FLAT_X + 6, 0));
@@ -198,7 +198,7 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
   });
 
   it('a completed ground-targeted channel clears castAim (always cleared on resolve)', () => {
-    const sim = castGroundSpell('warlock', 'rain_of_fire', { x: 16, z: 0 });
+    const sim = castGroundSpell('mage', 'rain_of_fire', { x: 16, z: 0 });
     const me = sim.entities.get(sim.playerId);
     expect(me?.channeling).toBe(true);
     expect(me?.castAim).not.toBeNull();
@@ -207,8 +207,8 @@ describe('ground-targeted casting (thematic per-class spells)', () => {
     expect(me?.castAim).toBeNull();
   });
 
-  it('earthquake (shaman) drops a lingering nature zone at the aimed point', () => {
-    const sim = castGroundSpell('shaman', 'earthquake', { x: 16, z: 0 });
+  it('earthquake (acolyte) drops a lingering nature zone at the aimed point', () => {
+    const sim = castGroundSpell('acolyte', 'earthquake', { x: 16, z: 0 });
     const fx = aimedFx(sim);
     expect(fx?.radius).toBe(8);
     const zone = (sim as unknown as { groundAoEs: GroundAoE[] }).groundAoEs.find(

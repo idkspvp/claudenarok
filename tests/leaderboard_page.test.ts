@@ -12,7 +12,7 @@ function makeEntries(n: number): LeaderboardEntry[] {
   return Array.from({ length: n }, (_, i) => ({
     rank: i + 1,
     name: `Player${i + 1}`,
-    cls: 'warrior',
+    cls: 'swordman',
     level: 20,
     virtualLevel: 20,
     lifetimeXp: (n - i) * 1000,

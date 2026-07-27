@@ -44,12 +44,12 @@ import { applyResurrectionSickness } from '../src/sim/spirit';
 import type { DungeonDifficulty, Entity, Vec3 } from '../src/sim/types';
 
 function makeSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 // Add a fresh player and return its persisted meta.
 function addMeta(sim: Sim, name: string): PlayerMeta {
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   return sim.players.get(pid)!;
 }
 
@@ -574,9 +574,9 @@ describe('encounter mechanical arms (onMobKillCreditForDeeds)', () => {
     const sim = makeSim();
     const boss = spawnMob(sim, 'thunzharr_waking_peak', { x: 5, y: 0, z: -5 }, 30);
     const diverChar = 8801;
-    const diverPid = sim.addPlayer('warrior', 'Diver', { characterId: diverChar });
+    const diverPid = sim.addPlayer('swordman', 'Diver', { characterId: diverChar });
     const diver = sim.players.get(diverPid)!;
-    const survivor = sim.players.get(sim.addPlayer('warrior', 'Survivor', { characterId: 8802 }))!;
+    const survivor = sim.players.get(sim.addPlayer('swordman', 'Survivor', { characterId: 8802 }))!;
     boss.bossDamagers.add(diver.entityId);
     boss.bossDamagers.add(survivor.entityId);
     // The diver falls mid-fight while on the boss's damager roster.
@@ -584,7 +584,7 @@ describe('encounter mechanical arms (onMobKillCreditForDeeds)', () => {
     // Relog: the old entity leaves the world, the same character rejoins with a
     // fresh pid and re-hits the boss (rejoining the damager roster).
     sim.removePlayer(diverPid);
-    const diver2 = sim.players.get(sim.addPlayer('warrior', 'Diver', { characterId: diverChar }))!;
+    const diver2 = sim.players.get(sim.addPlayer('swordman', 'Diver', { characterId: diverChar }))!;
     boss.bossDamagers.add(diver2.entityId);
     onWorldBossKilledForDeeds(sim.ctx, boss, [diver2, survivor]);
     expect(diver2.deedsEarned.has('cmb_thunzharr')).toBe(true);
@@ -603,8 +603,8 @@ describe('encounter mechanical arms (onMobKillCreditForDeeds)', () => {
     const boss = spawnMob(sim, 'thunzharr_waking_peak', { x: 5, y: 0, z: -5 }, 30);
     boss.hostile = true;
     boss.inCombat = true;
-    const healer = sim.players.get(sim.addPlayer('warrior', 'Healer', { characterId: 9001 }))!;
-    const damager = sim.players.get(sim.addPlayer('warrior', 'Damager', { characterId: 9002 }))!;
+    const healer = sim.players.get(sim.addPlayer('swordman', 'Healer', { characterId: 9001 }))!;
+    const damager = sim.players.get(sim.addPlayer('swordman', 'Damager', { characterId: 9002 }))!;
     // Heal-only: threat but never a damage hit. The damager is on the roster.
     boss.threat.set(healer.entityId, 30);
     boss.bossDamagers.add(damager.entityId);
@@ -629,7 +629,7 @@ describe('encounter mechanical arms (onMobKillCreditForDeeds)', () => {
     const boss = spawnMob(sim, 'thunzharr_waking_peak', { x: 5, y: 0, z: -5 }, 30);
     boss.hostile = true;
     boss.inCombat = true;
-    const healer = sim.players.get(sim.addPlayer('warrior', 'Healer', { characterId: 9101 }))!;
+    const healer = sim.players.get(sim.addPlayer('swordman', 'Healer', { characterId: 9101 }))!;
     boss.threat.set(healer.entityId, 30); // heal-only when they die
     handleDeath(sim.ctx, entityOf(sim, healer), boss);
     entityOf(sim, healer).dead = false;
@@ -646,7 +646,7 @@ describe('encounter mechanical arms (onMobKillCreditForDeeds)', () => {
     const boss = spawnMob(sim, 'thunzharr_waking_peak', { x: 5, y: 0, z: -5 }, 30);
     boss.hostile = true;
     boss.inCombat = true;
-    const diver = sim.players.get(sim.addPlayer('warrior', 'Diver', { characterId: 9201 }))!;
+    const diver = sim.players.get(sim.addPlayer('swordman', 'Diver', { characterId: 9201 }))!;
     boss.bossDamagers.add(diver.entityId);
     boss.threat.set(diver.entityId, 40);
     handleDeath(sim.ctx, entityOf(sim, diver), boss);

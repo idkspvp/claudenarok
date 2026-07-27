@@ -23,7 +23,7 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Ranker', settleMs: 2800 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Ranker', settleMs: 2800 });
 await sleep(400);
 await page.evaluate(() => {
   document.querySelector('.tut-skip')?.click();

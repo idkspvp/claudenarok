@@ -18,7 +18,7 @@
 // script that calls enterOfflineGame gets this for free.
 //
 // opts:
-//   charClass  data-class of the class card to pick (default 'warrior')
+//   charClass  data-class of the class card to pick (default 'swordman')
 //   charName   name typed into #char-name when that field is present (default 'Adventurer')
 //   settleMs   pause after Enter World for the world to load (default 2500; 0 to skip)
 //   dismissMobilePreflight  wait for and dismiss the touch-only gate (default true)
@@ -27,7 +27,7 @@
 // Returns true when the world boot hook appeared before gameBootTimeoutMs, otherwise false.
 export async function enterOfflineGame(page, opts = {}) {
   const {
-    charClass = 'warrior',
+    charClass = 'swordman',
     charName = 'Adventurer',
     settleMs = 2500,
     dismissMobilePreflight = true,

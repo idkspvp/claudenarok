@@ -98,7 +98,7 @@ const OUT_DIR = path.resolve(
 );
 const MEASURE_PERF = captureConfig.measurePerf;
 const EXPECTED_SEED = EASTBROOK_ARMOURY_CAPTURE_SEED;
-const CHARACTER_CLASS = 'warrior';
+const CHARACTER_CLASS = 'swordman';
 const CHARACTER_NAME = 'Armourist';
 const PLAYER_STATE = EASTBROOK_ARMOURY_PLAYER_STATE;
 const PERF_WARMUP_MS = EASTBROOK_TOWN_CAPTURE_TIMING.perfWarmupMs;

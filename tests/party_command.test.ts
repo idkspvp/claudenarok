@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -24,9 +24,9 @@ function formParty(sim: Sim, leader: number, members: number[]) {
 describe('/party readout command', () => {
   it('lists party members with level, class, and HP%, tagging the leader', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.tick();
     formParty(sim, a, [b, c]);
 
@@ -52,7 +52,7 @@ describe('/party readout command', () => {
 
   it('reports when you are not in a party', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Solo');
+    const a = sim.addPlayer('swordman', 'Solo');
     sim.tick();
     sim.chat('/party', a);
     expect(errorText(sim.tick(), a)).toBe('You are not in a party.');
@@ -60,8 +60,8 @@ describe('/party readout command', () => {
 
   it('shows dead members as (dead)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
     sim.tick();
     formParty(sim, a, [b]);
     sim.entities.get(b)!.hp = 0;

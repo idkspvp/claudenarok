@@ -77,7 +77,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
   meta: Parameters<GameServer['join']>[7] = {},
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null, false, meta);
@@ -98,7 +98,7 @@ function broadcast(server: GameServer): void {
 }
 
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly.
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();
@@ -189,7 +189,7 @@ describe('self stat wire round-trip', () => {
       self: {
         id: 1,
         k: 'player',
-        tid: 'warrior',
+        tid: 'swordman',
         nm: 'Veteran',
         lv: 20,
         x: 0,
@@ -225,7 +225,7 @@ describe('spectate client POV', () => {
       self: {
         id: 1,
         k: 'player',
-        tid: 'warrior',
+        tid: 'swordman',
         nm: 'Moderator',
         lv: 10,
         x: 0,
@@ -248,7 +248,7 @@ describe('spectate client POV', () => {
       self: {
         id: 2,
         k: 'player',
-        tid: 'rogue',
+        tid: 'thief',
         nm: 'Suspect',
         lv: 10,
         x: 5,
@@ -267,7 +267,7 @@ describe('spectate client POV', () => {
     internals.applySnapshot(snapshot(1.25, false));
     expect(client.playerId).toBe(2);
     expect(client.player.name).toBe('Suspect');
-    expect(client.cfg.playerClass).toBe('rogue');
+    expect(client.cfg.playerClass).toBe('thief');
     expect(client.consumeSpectateFacing()).toBe(1.25);
     expect(client.consumeSpectateFacing()).toBeNull();
 
@@ -281,7 +281,7 @@ describe('spectate client POV', () => {
     expect(client.spectating).toBeNull();
     expect(client.playerId).toBe(1);
     expect(client.player.name).toBe('Moderator');
-    expect(client.cfg.playerClass).toBe('warrior');
+    expect(client.cfg.playerClass).toBe('swordman');
     expect(client.consumeSpectateFacing()).toBeNull();
   });
 });
@@ -363,7 +363,7 @@ describe('raid lockouts over the wire', () => {
 // emit into the real client mirror and checks the visual layer's inputs.
 describe('Combat Mech held weapon over the wire', () => {
   it('mirrors a Rogue mech with independent mainhand and offhand weapons', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'rogue', autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'thief', autoEquip: true });
     const pid = sim.playerId;
     sim.setPlayerLevel(20, pid);
     sim.setPlayerSkin(pid, 0, 'mech');
@@ -375,16 +375,16 @@ describe('Combat Mech held weapon over the wire', () => {
 
     // server emit
     const w = wireEntity(e);
-    expect(w.tid).toBe('rogue'); // class drives visualKeyFor and the hand-layout override
+    expect(w.tid).toBe('thief'); // class drives visualKeyFor and the hand-layout override
     expect(w.cat).toBe('mech'); // cosmetic body
     expect(w.mh).toBe('rusty_dagger');
     expect(w.oh).toBe('keen_dirk');
 
-    // client mirror: a DIFFERENT local player seeing this rogue-mech in the world
+    // client mirror: a DIFFERENT local player seeing this thief-mech in the world
     const client = bareClient(pid + 1000);
     (client as any).applySnapshot({ t: 'snap', ents: [w] });
     const mirrored = client.entities.get(e.id)!;
-    expect(mirrored.templateId).toBe('rogue');
+    expect(mirrored.templateId).toBe('thief');
     expect(mirrored.skinCatalog).toBe('mech');
     expect(mirrored.mainhandItemId).toBe('rusty_dagger');
     expect(mirrored.offhandItemId).toBe('keen_dirk');
@@ -397,7 +397,7 @@ describe('Combat Mech held weapon over the wire', () => {
   });
 
   it('mirrors a winning Warrior mech with its real shield offhand', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true });
     const pid = sim.playerId;
     sim.setPlayerSkin(pid, 0, 'mech');
     sim.addItem('worn_sword', 1, pid);
@@ -427,7 +427,7 @@ describe('account flair over the wire', () => {
   const LINKS = { twitch: 'https://twitch.tv/someone', youtube: 'https://youtu.be/abc' };
 
   it('mirrors the AI mark and the streamer links onto another player client', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     const e = sim.player;
     // What the server stamps on the entity once an operator sets the flair
     // (GameServer.applyAccountFlairLive; the wireStreamerLinks gate runs there).
@@ -447,7 +447,7 @@ describe('account flair over the wire', () => {
   });
 
   it('leaves an ordinary player unmarked, with neither key on the wire', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     const e = sim.player;
 
     const wire = wireEntity(e);
@@ -464,7 +464,7 @@ describe('account flair over the wire', () => {
   });
 
   it('drops a hostile link at the client boundary even if one reached the wire', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     const e = sim.player;
     // The server gates this twice (admin write + wireStreamerLinks), so this record
     // cannot occur in production. The point is that the CLIENT re-sanitizes anyway:
@@ -598,8 +598,8 @@ describe('loot FFA lapse over the wire', () => {
 });
 
 describe('combat ratings over the wire', () => {
-  it('mirrors Ranged Attack Power so online hunter attack-spell tooltips can scale', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'hunter', autoEquip: true });
+  it('mirrors Ranged Attack Power so online archer attack-spell tooltips can scale', () => {
+    const sim = new Sim({ seed: 7, playerClass: 'archer', autoEquip: true });
     sim.setPlayerLevel(20);
     sim.tick();
     const e = sim.player;
@@ -645,7 +645,7 @@ describe('delta snapshots', () => {
   it('mirrors account-wide cosmetic unlocks from self snapshots', () => {
     const server = new GameServer();
     const fc = fakeWs();
-    const joined = server.join(fc.ws, 1, 1, 'Cosmetic', 'warrior', null, false, {
+    const joined = server.join(fc.ws, 1, 1, 'Cosmetic', 'swordman', null, false, {
       accountCosmetics: {
         completedQuestIds: ['q_aldrics_fallen_star'],
         mechChromaIds: ['amber_crimson'],
@@ -678,7 +678,7 @@ describe('delta snapshots', () => {
   it('mirrors live cosmetic appearance catalog through snapshots', () => {
     const server = new GameServer();
     const fc = fakeWs();
-    const joined = server.join(fc.ws, 1, 1, 'Mechlive', 'shaman', null);
+    const joined = server.join(fc.ws, 1, 1, 'Mechlive', 'acolyte', null);
     if ('error' in joined) throw new Error(joined.error);
     const session = joined;
     session.blockListLoaded = true;
@@ -748,12 +748,12 @@ describe('delta snapshots', () => {
   it('includes live aura and movement diagnostics in admin online rows', () => {
     const druidServer = new GameServer();
     const fc = fakeWs();
-    const druid = joinServer(druidServer, fc, 10, 'Newkali', 'druid');
-    const player = druidServer.sim.entities.get(druid.pid)!;
-    druidServer.sim.setPlayerLevel(20, druid.pid);
+    const acolyte = joinServer(druidServer, fc, 10, 'Newkali', 'acolyte');
+    const player = druidServer.sim.entities.get(acolyte.pid)!;
+    druidServer.sim.setPlayerLevel(20, acolyte.pid);
     player.resource = player.maxResource;
 
-    druidServer.sim.castAbility('travel_form', druid.pid);
+    druidServer.sim.castAbility('travel_form', acolyte.pid);
     druidServer.sim.tick();
 
     const row = druidServer.liveSessions().find((p) => p.characterId === 10)!;
@@ -904,7 +904,7 @@ describe('delta snapshots', () => {
   // retired with the talent trees (Phase D0).
 
   it('resends equip + inv on the next snapshot after an online unequip', () => {
-    // A fresh warrior starts with worn_sword equipped in mainhand (its class
+    // A fresh swordman starts with worn_sword equipped in mainhand (its class
     // startWeapon). unequipItem returns the piece to bags via the sim's
     // addItemSilent, which (unlike the addItem/removeItem hub) does NOT bump
     // PlayerMeta.wireRev and emits only a log event, so the gated equip/inv block
@@ -1565,7 +1565,7 @@ describe('/who command', () => {
   it('lists online players with class, level, realm, and zone metadata', () => {
     const server = new GameServer();
     const fc = fakeWs();
-    const self = joinServer(server, fc, 1, 'Aleph', 'warrior');
+    const self = joinServer(server, fc, 1, 'Aleph', 'swordman');
     const fc2 = fakeWs();
     const other = joinServer(server, fc2, 2, 'Bet', 'mage');
     server.sim.setPlayerLevel(7, other.pid);
@@ -1575,7 +1575,7 @@ describe('/who command', () => {
 
     const text = eventTexts(fc.sent).join('\n');
     expect(text).toContain('Who: 2 players online on Claudemoon.');
-    expect(text).toContain('Aleph - level 1 warrior - Eastbrook Vale');
+    expect(text).toContain('Aleph - level 1 swordman - Eastbrook Vale');
     expect(text).toContain('Bet - level 7 mage - Eastbrook Vale');
   });
 
@@ -1595,7 +1595,7 @@ describe('/who command', () => {
 
     const text = eventTexts(fc.sent).join('\n');
     expect(text).toContain('Who: 1 player online on Claudemoon.');
-    expect(text).toContain('Aleph - level 1 warrior - Eastbrook Vale');
+    expect(text).toContain('Aleph - level 1 swordman - Eastbrook Vale');
     expect(text).not.toContain('Bet');
     expect(text).not.toContain('Gimel');
   });
@@ -1627,7 +1627,7 @@ describe('/who command', () => {
 
     const text = eventTexts(fc.sent).join('\n');
     expect(text).toContain('Who: 1 player online on Claudemoon.');
-    expect(text).toContain('Aleph - level 1 warrior - Eastbrook Vale');
+    expect(text).toContain('Aleph - level 1 swordman - Eastbrook Vale');
     expect(text).not.toContain('Bet');
   });
 });
@@ -1747,7 +1747,7 @@ describe('client-side delta merge', () => {
     // would silently decode every online aura to sourceId 0, degrading the
     // target strip's ownFirst dot/hot prominence online while offline keeps it
     // (the stacks/charges sibling pins above follow the same pattern).
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true });
     const e = sim.entities.get(sim.playerId)!;
     e.auras.push(
       {
@@ -1792,7 +1792,7 @@ describe('client-side delta merge', () => {
   });
 
   it('round-trips next-cast empowerment scope for online action-bar glows', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'priest', autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'acolyte', autoEquip: true });
     const e = sim.entities.get(sim.playerId)!;
     e.auras.push({
       id: 'pri_searing_light',
@@ -1860,7 +1860,7 @@ describe('despawn grace (anti-flicker)', () => {
     return {
       id,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: `E${id}`,
       lv: 1,
       x,
@@ -1984,8 +1984,8 @@ describe('despawn grace (anti-flicker)', () => {
 // offline/headless never call it, so the field stays ''.
 describe('guild nameplate wire', () => {
   it('carries the guild name through wireEntity only when set', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Thaldrin');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Thaldrin');
 
     expect(wireEntity(sim.entities.get(pid)!).gd).toBeUndefined();
 
@@ -2002,7 +2002,7 @@ describe('guild nameplate wire', () => {
     const base = {
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Brae',
       lv: 5,
       x: 0,
@@ -2028,8 +2028,8 @@ describe('guild nameplate wire', () => {
 // sim validator (src/sim/deeds.ts setActiveTitle) is the only writer.
 describe('active title wire (Book of Deeds)', () => {
   it('carries the title deed id through wireEntity only when set', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Thaldrin');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Thaldrin');
     const e = sim.entities.get(pid)!;
     const meta = sim.players.get(pid)!;
     expect(wireEntity(e).title).toBeUndefined();
@@ -2049,7 +2049,7 @@ describe('active title wire (Book of Deeds)', () => {
     const base = {
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Brae',
       lv: 5,
       x: 0,
@@ -2247,10 +2247,10 @@ describe('active title wire (Book of Deeds)', () => {
 // recalcPlayerStats; the renderer maps them to GLBs (ITEM_WEAPON_VARIANTS).
 describe('held weapon wire (mainhandItemId/offhandItemId)', () => {
   it('carries both equipped hand item ids through wireEntity', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Thaldrin');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Thaldrin');
     const e = sim.entities.get(pid)!;
-    // a fresh warrior starts holding its class startWeapon
+    // a fresh swordman starts holding its class startWeapon
     expect(e.mainhandItemId).toBe('worn_sword');
     e.offhandItemId = 'eastbrook_buckler';
     expect(wireEntity(e).mh).toBe('worn_sword');
@@ -2262,7 +2262,7 @@ describe('held weapon wire (mainhandItemId/offhandItemId)', () => {
     const base = {
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Brae',
       lv: 5,
       x: 0,
@@ -2308,7 +2308,7 @@ describe('weapon skin wire (weaponSkinId)', () => {
       self: {
         id: 99,
         k: 'player',
-        tid: 'hunter',
+        tid: 'archer',
         nm: 'Ranger',
         lv: 5,
         x: 0,
@@ -2337,12 +2337,12 @@ describe('weapon skin wire (weaponSkinId)', () => {
   });
 
   it('carries the active skin through wireEntity only while one is applied', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Thaldrin');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Thaldrin');
     const e = sim.entities.get(pid)!;
     expect(wireEntity(e).wsk).toBeUndefined();
 
-    // a fresh warrior holds worn_sword (a sword), so the sword skin attaches
+    // a fresh swordman holds worn_sword (a sword), so the sword skin attaches
     expect(sim.setWeaponSkin(pid, 'ice_fang_sword')).toBe(true);
     expect(wireEntity(e).wsk).toBe('ice_fang_sword');
 
@@ -2356,7 +2356,7 @@ describe('weapon skin wire (weaponSkinId)', () => {
     const base = {
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Brae',
       lv: 5,
       x: 0,
@@ -2385,7 +2385,7 @@ describe('weapon skin wire (weaponSkinId)', () => {
   it('broadcasts wsk to nearby sessions as a full record on apply and drops it on detach', () => {
     const server = new GameServer();
     const fcA = fakeWs();
-    const joined = server.join(fcA.ws, 1, 1, 'Skinner', 'warrior', null, false, {
+    const joined = server.join(fcA.ws, 1, 1, 'Skinner', 'swordman', null, false, {
       accountCosmetics: {
         completedQuestIds: [],
         mechChromaIds: [],
@@ -2449,8 +2449,8 @@ describe('equipped instance wire (eqi)', () => {
   const inst = { rolled: { masterwork: true, stats: { int: 3, luk: 1 } }, signer: 'Aldric' };
 
   it('carries eqi through wireEntity only while an instanced piece is worn', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Thaldrin');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Thaldrin');
     const e = sim.entities.get(pid)!;
     // The fresh auto-equipped worn set is all plain pieces: eq rides, eqi
     // stays off the wire entirely.
@@ -2468,8 +2468,8 @@ describe('equipped instance wire (eqi)', () => {
   });
 
   it('strips non-cosmetic instance fields from the wire payload (data minimization)', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Yrsa');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Yrsa');
     const e = sim.entities.get(pid)!;
     sim.addItemInstance(
       'eastbrook_ritual_vestments',
@@ -2500,7 +2500,7 @@ describe('equipped instance wire (eqi)', () => {
     const base = {
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Brae',
       lv: 5,
       x: 0,
@@ -3513,8 +3513,8 @@ describe('dfb realm-readout memo (shared board bytes, per-session cadence)', () 
 // (ClientWorld.applySnapshot).
 describe('aura magnitude over the wire (buff/debuff tooltip parity)', () => {
   function roundTrip(aura: Aura): { wire: Record<string, unknown>; mirror: Aura } {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Sapped');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Sapped');
     const e = sim.entities.get(pid)!;
     e.auras.push(aura);
     const wire = wireEntity(e);
@@ -3732,8 +3732,8 @@ describe('aura decode reuses records across snapshots (allocation fast path)', (
   }
 
   function makeMobWithAura(): { sim: Sim; mobId: number } {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Poker');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Poker');
     const mob = [...sim.entities.values()].find((e) => e.kind === 'mob')!;
     void pid;
     mob.auras.push({
@@ -3812,8 +3812,8 @@ describe('aura decode fast-path guards (composition edge cases)', () => {
   }
 
   function makeMobWithTwoAuras(): { sim: Sim; mobId: number } {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    sim.addPlayer('warrior', 'Poker');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    sim.addPlayer('swordman', 'Poker');
     const mob = [...sim.entities.values()].find((e) => e.kind === 'mob')!;
     mob.auras.push(
       {
@@ -4411,7 +4411,7 @@ describe('negotiated stable timer wire v2', () => {
     const stableWs = fakeWs();
     const legacyWs = fakeWs();
     const subjectWs = fakeWs();
-    const stable = joinServer(server, stableWs, 1, 'StableViewer', 'warrior', timerV2);
+    const stable = joinServer(server, stableWs, 1, 'StableViewer', 'swordman', timerV2);
     joinServer(server, legacyWs, 2, 'LegacyViewer');
     const subject = joinServer(server, subjectWs, 3, 'Subject', 'mage');
     const subjectEntity = server.sim.entities.get(subject.pid)!;
@@ -4501,7 +4501,7 @@ describe('negotiated stable timer wire v2', () => {
       1,
       1,
       'ResumeWire',
-      'warrior',
+      'swordman',
       null,
       false,
       timerV2,
@@ -4516,7 +4516,7 @@ describe('negotiated stable timer wire v2', () => {
     stableWs.ws.readyState = 3;
     expect(server.socketClosed(stableResult, stableWs.ws)).toBe(true);
     const fallbackWs = fakeWs();
-    const fallback = server.join(fallbackWs.ws, 1, 1, 'ResumeWire', 'warrior', null);
+    const fallback = server.join(fallbackWs.ws, 1, 1, 'ResumeWire', 'swordman', null);
     if ('error' in fallback) throw new Error(fallback.error);
     expect(fallback).toBe(original);
     expect((fallback as any).timerWireVersion).toBe(1);

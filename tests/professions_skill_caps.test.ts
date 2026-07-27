@@ -119,7 +119,7 @@ describe('arm 4: normalizeGatheringProficiency clamps an over-cap save DOWN to t
   });
 
   it('a sim-level load from a legacy professions-key-only CharacterState clamps the same way', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const state = (sim as any).serializeCharacter(sim.playerId);
     // A pre-rename save carries only the legacy `professions` key; the sim.ts
     // call site feeds it through the same normalize (gatheringProficiency ??
@@ -127,8 +127,8 @@ describe('arm 4: normalizeGatheringProficiency clamps an over-cap save DOWN to t
     delete state.gatheringProficiency;
     state.professions = { mining: 300, logging: 0, herbalism: 0, fishing: 300 };
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'LegacyOvercap', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'LegacyOvercap', { state });
     expect(mustMeta(sim2, pid).gatheringProficiency).toEqual({
       mining: 100,
       logging: 0,
@@ -143,7 +143,7 @@ describe('at cap, actions still work: only skill gain stops', () => {
     // The professions_masterwork.test.ts fixture recipe: skillReq 0, uncommon
     // def with a stats profile, bump tier 2 inside the pre-attunement rare
     // ceiling, so the proc effect gate stays open on a fresh character.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     const meta = mustMeta(sim, pid);
     meta.craftSkills.tailoring = 125;
@@ -171,8 +171,8 @@ describe('at cap, actions still work: only skill gain stops', () => {
   });
 
   it('a harvest at mining 100 still yields the node material; proficiency stays at cap', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Capped');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Capped');
     // #2343: every node harvest needs the matching-profession tool in bags.
     sim.addItem('copper_mining_pick', 1, pid);
     const meta = mustMeta(sim, pid);
@@ -195,7 +195,7 @@ describe('at cap, actions still work: only skill gain stops', () => {
   });
 
   it('a landed catch at fishing 200 still grants the item; proficiency stays at cap', () => {
-    const sim = new Sim({ seed: 4242, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 4242, playerClass: 'swordman', autoEquip: true });
     const meta = mustMeta(sim, sim.playerId);
     meta.gatheringProficiency.fishing = 200;
     // South shore of the vale lake, facing the water (the fishing-suite idiom).

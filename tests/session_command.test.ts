@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorEvents(events: SimEvent[]): Extract<SimEvent, { type: 'error' }>[] {
@@ -22,16 +22,16 @@ function sessionLine(sim: Sim, pid: number): string {
 describe('/session command', () => {
   it('reports a fresh session as all zeros', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(sessionLine(sim, a)).toBe(
       'Session: 0 kills, 0 deaths. Damage dealt 0, taken 0. XP gained 0.',
     );
   });
 
-  it('reflects this session\'s counters with singular/plural and thousands separators', () => {
+  it("reflects this session's counters with singular/plural and thousands separators", () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const c = sim.players.get(a)!.counters;
     c.kills = 14;
@@ -46,7 +46,7 @@ describe('/session command', () => {
 
   it('is self-only and never reaches the chat log', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     sim.chat('/session', a);
@@ -59,7 +59,7 @@ describe('/session command', () => {
 
   it('accepts the /sess and /sessionstats aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     for (const alias of ['/sess', '/sessionstats']) {
       sim.chat(alias, a);

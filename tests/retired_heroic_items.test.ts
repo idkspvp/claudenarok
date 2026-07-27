@@ -14,6 +14,7 @@ import { HEROIC_BOSS_LOOT, RETIRED_HEROIC_ITEMS } from '../src/sim/content/heroi
 import { HEROIC_VENDOR_STOCK } from '../src/sim/content/heroic_vendor';
 import { FURY_STOCK } from '../src/sim/content/pvp_honor';
 import { CLASSES, ITEMS, MOBS, NPCS } from '../src/sim/data';
+import { baseHpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { MAIL_ATTACHMENT_EXPIRY_SECONDS, type MailSave } from '../src/sim/mail/post_office';
 import type { MarketSave } from '../src/sim/market';
 import { type CharacterState, Sim } from '../src/sim/sim';
@@ -40,7 +41,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 315, str: 11, vit: 9 },
     sellValue: 13_000,
-    requiredClass: ['warrior', 'paladin', 'shaman'],
+    requiredClass: ['swordman', 'swordman', 'acolyte'],
   },
   scourgehide_carapace: {
     id: 'scourgehide_carapace',
@@ -52,7 +53,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 172, agi: 12, vit: 10 },
     sellValue: 14_000,
-    requiredClass: ['rogue', 'hunter', 'druid'],
+    requiredClass: ['thief', 'archer', 'acolyte'],
   },
   soulforged_warplate: {
     id: 'soulforged_warplate',
@@ -64,7 +65,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 335, int: 12, luk: 10 },
     sellValue: 14_000,
-    requiredClass: ['paladin', 'shaman'],
+    requiredClass: ['swordman', 'acolyte'],
   },
   soulrend_diadem: {
     id: 'soulrend_diadem',
@@ -76,7 +77,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     requiredLevel: 20,
     stats: { armor: 76, int: 10, luk: 8 },
     sellValue: 12_000,
-    requiredClass: ['mage', 'priest', 'warlock', 'druid'],
+    requiredClass: ['mage', 'acolyte', 'mage', 'acolyte'],
   },
 };
 
@@ -112,8 +113,8 @@ function legacyRogueState(equipment: CharacterState['equipment']): CharacterStat
 }
 
 function loadLegacyRogue(equipment: CharacterState['equipment']) {
-  const sim = new Sim({ seed: 42, playerClass: 'rogue', noPlayer: true });
-  const pid = sim.addPlayer('rogue', 'Legacy', { state: legacyRogueState(equipment) });
+  const sim = new Sim({ seed: 42, playerClass: 'thief', noPlayer: true });
+  const pid = sim.addPlayer('thief', 'Legacy', { state: legacyRogueState(equipment) });
   const entity = sim.entities.get(pid);
   if (!entity) throw new Error('legacy player entity was not created');
   return { sim, pid, entity };
@@ -166,8 +167,7 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     // The 10 Vitality is worth 10% of the pool rather than a flat 100 HP. Read the
     // unmultiplied pool off the class def: maxHp is already rounded, and rounding
     // it twice lands a point off.
-    const def = CLASSES.rogue;
-    const pool = def.baseHp + def.hpPerLevel * (unequipped.entity.level - 1);
+    const pool = baseHpAt(JOB_VITALS.thief, unequipped.entity.level);
     expect(Math.round(pool * (1 + unequipped.entity.stats.vit / 100))).toBe(
       unequipped.entity.maxHp,
     );
@@ -224,7 +224,7 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
       ],
       nextMailId: 10,
     };
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 
     sim.loadMarket(marketSave);
     sim.loadMail(mailSave);

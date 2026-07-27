@@ -41,7 +41,7 @@ try {
   // schedule, advance as the probe moves, and swallow whatever touches land on
   // them, which made runs nondeterministic (src/ui/tutorial.ts STORAGE_KEY).
   await page.evaluate(() => localStorage.setItem('woc.tutorial.v1', 'done'));
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'DriftProbe', settleMs: 2500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'DriftProbe', settleMs: 2500 });
 
   const cdp = await page.createCDPSession();
   const touch = {

@@ -7,7 +7,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function nearestMob(sim: Sim): Entity {
@@ -25,7 +25,7 @@ function lastError(sim: Sim, pid: number): string | undefined {
 describe('/threat command', () => {
   it('lists the target threat table highest-first as percentages of the leader', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     const mob = nearestMob(sim);
     mob.threat.clear();
@@ -40,7 +40,7 @@ describe('/threat command', () => {
 
   it('reports no target when nothing is targeted', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.entities.get(a)!.targetId = null;
 
     sim.chat('/aggro', a);
@@ -49,7 +49,7 @@ describe('/threat command', () => {
 
   it('reports an empty table when the target has no threat on it', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const mob = nearestMob(sim);
     mob.threat.clear();
     sim.entities.get(a)!.targetId = mob.id;
@@ -60,7 +60,7 @@ describe('/threat command', () => {
 
   it('refuses to read threat off a non-enemy target', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.entities.get(a)!.targetId = b;
 

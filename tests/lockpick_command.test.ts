@@ -8,7 +8,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 
 function enterFinale(sim: Sim) {
   sim.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);

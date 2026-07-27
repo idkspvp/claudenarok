@@ -36,13 +36,13 @@ describe('itemArmorTypeLabelKey', () => {
         slot: 'mainhand',
         weapon: { min: 1, max: 2, speed: 2 },
         sellValue: 1,
-        requiredClass: ['warrior'],
+        requiredClass: ['swordman'],
       }),
     ).toBeNull();
   });
 
   it('is deterministic for a given item', () => {
-    const item = armor({ requiredClass: ['shaman'] });
+    const item = armor({ requiredClass: ['acolyte'] });
     expect(itemArmorTypeLabelKey(item)).toBe(itemArmorTypeLabelKey(item));
   });
 });

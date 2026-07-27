@@ -3,10 +3,12 @@
 // independent and persist per character. Max graphics preset so the world
 // behind the Key Bindings panel renders at full quality. Needs `npm run dev`.
 // Writes PNGs + a localStorage dump to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -20,16 +22,25 @@ await page.setViewport({ width: 1280, height: 900 });
 
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (m) => { if (m.type() === 'error') errors.push('CONSOLE: ' + m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') errors.push('CONSOLE: ' + m.text());
+});
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 
 // Seed max-graphics settings so every shot renders the world at full quality.
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await page.evaluate(() => localStorage.setItem('woc_settings', JSON.stringify({
-  graphicsPreset: 5, effectsQuality: 1, shadowQuality: 1,
-})));
+await page.evaluate(() =>
+  localStorage.setItem(
+    'woc_settings',
+    JSON.stringify({
+      graphicsPreset: 5,
+      effectsQuality: 1,
+      shadowQuality: 1,
+    }),
+  ),
+);
 
 async function bootOffline(name, cls) {
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
@@ -38,7 +49,10 @@ async function bootOffline(name, cls) {
   await wait(200);
   await page.evaluate((n) => {
     const el = document.querySelector('#char-name');
-    if (el) { el.value = n; el.dispatchEvent(new Event('input', { bubbles: true })); }
+    if (el) {
+      el.value = n;
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   }, name);
   await tap(`#offline-select .mini-class[data-class="${cls}"]`);
   await tap('#btn-start-offline');
@@ -46,26 +60,36 @@ async function bootOffline(name, cls) {
   await wait(1500); // let the first frames + assets settle for the shot
 }
 
-const openKeybinds = () => page.evaluate(() => {
-  const hud = window.__game.hud;
-  hud.toggleOptionsMenu();
-  hud.optionsView = 'keybinds';
-  hud.renderOptions();
-});
+const openKeybinds = () =>
+  page.evaluate(() => {
+    const hud = window.__game.hud;
+    hud.toggleOptionsMenu();
+    hud.optionsView = 'keybinds';
+    hud.renderOptions();
+  });
 // Rebind through the live Keybinds instance the HUD owns, then re-render so the
 // keycap updates exactly as a manual rebind would.
-const rebind = (action, code) => page.evaluate((a, c) => {
-  window.__game.hud.keybinds.bind(a, 0, c);
-  window.__game.hud.renderOptions();
-}, action, code);
+const rebind = (action, code) =>
+  page.evaluate(
+    (a, c) => {
+      window.__game.hud.keybinds.bind(a, 0, c);
+      window.__game.hud.renderOptions();
+    },
+    action,
+    code,
+  );
 const jumpCap = () => page.evaluate(() => window.__game.hud.keybinds.labelAt('jump', 0));
-const dumpKeys = () => page.evaluate(() => Object.fromEntries(
-  Object.keys(localStorage)
-    .filter((k) => k.startsWith('woc_keybinds'))
-    .map((k) => [k, JSON.parse(localStorage.getItem(k)).jump])));
+const dumpKeys = () =>
+  page.evaluate(() =>
+    Object.fromEntries(
+      Object.keys(localStorage)
+        .filter((k) => k.startsWith('woc_keybinds'))
+        .map((k) => [k, JSON.parse(localStorage.getItem(k)).jump]),
+    ),
+  );
 
-// --- Character A: Aldric the warrior rebinds Jump to Z ---
-await bootOffline('Aldric', 'warrior');
+// --- Character A: Aldric the swordman rebinds Jump to Z ---
+await bootOffline('Aldric', 'swordman');
 await openKeybinds();
 await wait(400);
 console.log('Aldric jump before:', await jumpCap());
@@ -84,7 +108,7 @@ await wait(300);
 await page.screenshot({ path: 'tmp/keybinds_char_brenna.png' });
 
 // --- Back to Aldric: his custom Z must have persisted ---
-await bootOffline('Aldric', 'warrior');
+await bootOffline('Aldric', 'swordman');
 await openKeybinds();
 await wait(400);
 console.log('Aldric jump (persisted):', await jumpCap());
@@ -95,5 +119,7 @@ fs.writeFileSync('tmp/keybinds_localstorage.json', JSON.stringify(keys, null, 2)
 console.log('per-character localStorage keys (jump binding):', JSON.stringify(keys, null, 2));
 
 if (errors.length) console.log('PAGE ERRORS:\n' + errors.join('\n'));
-console.log('wrote tmp/keybinds_char_aldric.png, tmp/keybinds_char_brenna.png, tmp/keybinds_char_aldric_reload.png');
+console.log(
+  'wrote tmp/keybinds_char_aldric.png, tmp/keybinds_char_brenna.png, tmp/keybinds_char_aldric_reload.png',
+);
 await browser.close();

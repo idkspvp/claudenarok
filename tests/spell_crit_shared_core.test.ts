@@ -156,16 +156,16 @@ describe.skip('spell crit shared core', () => {
   });
 
   it('the set 3-piece crit rating bonus reaches spell crit through the shared core', () => {
-    // Arrange: a rogue with 2 then 3 Nighttalon pieces (the 3pc grants
+    // Arrange: a thief with 2 then 3 Nighttalon pieces (the 3pc grants
     // SET_CRIT_3PC_RATING crit rating; the pieces themselves carry no ratings).
-    const sim = new Sim({ seed: 11, playerClass: 'rogue' });
+    const sim = new Sim({ seed: 11, playerClass: 'thief' });
     sim.setPlayerLevel(20);
     const p = sim.player;
     const pieces = setMembers(SET_NIGHTTALON);
 
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(pieces.slice(0, 2)),
       undefined,
       {},
@@ -177,7 +177,7 @@ describe.skip('spell crit shared core', () => {
     // Act
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(pieces.slice(0, 3)),
       undefined,
       {},
@@ -229,7 +229,7 @@ describe.skip('spell crit shared core', () => {
 
   it('berserker stance crit stays melee-only', () => {
     // Arrange
-    const sim = new Sim({ seed: 11, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 11, playerClass: 'swordman' });
     const p = sim.player;
     const spell0 = sim.ctx.spellCrit(p);
 

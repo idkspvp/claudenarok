@@ -7,13 +7,13 @@
 //
 // Three benches:
 //   A) intake: per-hit damage distribution and DTPS on each committed tank
-//      (prot warrior, protection paladin, feral druid) from every Sanctum
+//      (prot swordman, protection paladin, feral druid) from every Sanctum
 //      encounter shape, both sides pinned to full HP so the distribution is
 //      not censored by death, enrage, or summon thresholds
 //   B) survival: fresh tank + fresh healer + a modeled fresh-DPS drain runs
 //      the real fight (enrage fires, Velkhar's add waves spawn tuned at his
 //      66%/33% thresholds): cleared-vs-tank-death outcomes
-//   C) solo ceiling (economy guard): DTPS on a best-in-slot max-EHP warrior,
+//   C) solo ceiling (economy guard): DTPS on a best-in-slot max-EHP swordman,
 //      compared against the ~140 hps self-heal ceiling of the strongest solo
 //      archetype, so the retune provably keeps solo boss-farming dead
 //
@@ -87,7 +87,7 @@ const SOLO_SELF_HEAL_CEILING = 140;
 const TANK_SPECS: Spec[] = [
   {
     key: 'prot_warrior',
-    cls: 'warrior',
+    cls: 'swordman',
     kind: 'tank',
     talents: {
       spec: 'prot',
@@ -167,7 +167,7 @@ function statScore(item: ItemDef, spec: Spec): number {
       weapon + (s.int ?? 0) * 5.4 + (s.luk ?? 0) * 4.4 + (s.vit ?? 0) * 0.8 + (s.armor ?? 0) * 0.004
     );
   // Tank: max-EHP pick (stamina first, armor as tiebreak), the same weighting
-  // that reproduces the floors-test reference warrior at the 'bis' tier.
+  // that reproduces the floors-test reference swordman at the 'bis' tier.
   return (s.vit ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
 }
 
@@ -384,7 +384,7 @@ type IntakeRun = {
 };
 
 function runIntake(spec: Spec, encounter: Encounter, seed: number, tier: KitTier): IntakeRun {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const { pid, tank } = setupTank(sim, spec, tier, tier === 'bis');
   const mobs = spawnEncounter(sim, encounter, tank);
   const keep = new Set(mobs.map((m) => m.id));
@@ -453,7 +453,7 @@ function runSurvival(
   seed: number,
   groupDps: number = GROUP_DPS,
 ): SurvivalRun {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const { pid: tankPid, tank } = setupTank(sim, spec, 'fresh', false);
   const healerPid = addTierPlayer(sim, FRESH_HEALER, 'Healer', 'fresh');
   teleport(sim, healerPid, ARENA.x + 20, ARENA.z + 20);
@@ -573,7 +573,7 @@ function main() {
   const profiles: Record<string, Record<string, unknown>> = {};
   for (const spec of TANK_SPECS) {
     for (const tier of ['fresh', 'bis'] as KitTier[]) {
-      const sim = new Sim({ seed: BASE_SEED, playerClass: 'warrior', noPlayer: true });
+      const sim = new Sim({ seed: BASE_SEED, playerClass: 'swordman', noPlayer: true });
       const { tank } = setupTank(sim, spec, tier, false);
       profiles[`${spec.key}__${tier}`] = {
         maxHp: tank.maxHp,
@@ -683,7 +683,7 @@ function main() {
     }
   }
 
-  // Bench C: solo ceiling on the best-in-slot warrior (economy guard).
+  // Bench C: solo ceiling on the best-in-slot swordman (economy guard).
   const solo: Record<string, Record<string, unknown>> = {};
   const soloEncounters = ENCOUNTERS.filter((e) =>
     ['trash_2boneguard_1drakonid', 'midboss_korgath', 'midboss_velkhar', 'boss_korzul'].includes(
@@ -704,7 +704,7 @@ function main() {
       soloDies: dtps.p10 > SOLO_SELF_HEAL_CEILING,
     };
     console.log(
-      `C ${encounter.key.padEnd(28)} bis-warrior dtps p50 ${dtps.p50.toFixed(0).padStart(4)} ` +
+      `C ${encounter.key.padEnd(28)} bis-swordman dtps p50 ${dtps.p50.toFixed(0).padStart(4)} ` +
         `(p10 ${dtps.p10.toFixed(0)}) vs solo self-heal ${SOLO_SELF_HEAL_CEILING} hps -> ` +
         `${dtps.p10 > SOLO_SELF_HEAL_CEILING ? 'solo still dies' : 'SOLOABLE'}`,
     );

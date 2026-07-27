@@ -139,9 +139,9 @@ describe('Guide routes', () => {
   });
 
   it('claims deeper segments as params (class/creature detail pages)', () => {
-    const m = matchRoute('/wiki/classes/warrior');
+    const m = matchRoute('/wiki/classes/swordman');
     expect(m?.route.id).toBe('classes');
-    expect(m?.params).toEqual(['warrior']);
+    expect(m?.params).toEqual(['swordman']);
   });
 
   it('returns null for unknown paths so the app can render notFound', () => {
@@ -152,7 +152,7 @@ describe('Guide routes', () => {
     // Regression: the skip link href="#guide-main" must not route to notFound.
     expect(matchRoute('/wiki#guide-main')?.route.id).toBe('home');
     expect(matchRoute('/wiki/reference/controls#movement')?.route.id).toBe('controls');
-    expect(matchRoute('/wiki/classes/warrior?from=home')?.params).toEqual(['warrior']);
+    expect(matchRoute('/wiki/classes/swordman?from=home')?.params).toEqual(['swordman']);
     expect(toSub('/wiki/classes#kit')).toBe('classes');
   });
 

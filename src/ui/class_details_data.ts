@@ -21,58 +21,34 @@ export interface ClassDetails {
 }
 
 export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
-  warrior: {
-    roleKey: 'classDetails.roles.warrior',
+  swordman: {
+    roleKey: 'classDetails.roles.swordman',
     roleType: 'hybrid',
     armorKey: 'classDetails.armor.chainLeatherCloth',
     weaponsKey: 'classDetails.weapons.swordsMacesAxes',
   },
-  paladin: {
-    roleKey: 'classDetails.roles.paladin',
-    roleType: 'hybrid',
-    armorKey: 'classDetails.armor.chainLeatherCloth',
-    weaponsKey: 'classDetails.weapons.swordsMaces',
-  },
-  hunter: {
-    roleKey: 'classDetails.roles.hunter',
+  archer: {
+    roleKey: 'classDetails.roles.archer',
     roleType: 'ranged',
     armorKey: 'classDetails.armor.leatherCloth',
     weaponsKey: 'classDetails.weapons.axesSwords',
   },
-  rogue: {
-    roleKey: 'classDetails.roles.rogue',
+  thief: {
+    roleKey: 'classDetails.roles.thief',
     roleType: 'dps',
     armorKey: 'classDetails.armor.leatherCloth',
     weaponsKey: 'classDetails.weapons.daggersSwords',
   },
-  priest: {
-    roleKey: 'classDetails.roles.priest',
+  acolyte: {
+    roleKey: 'classDetails.roles.acolyte',
     roleType: 'healer',
     armorKey: 'classDetails.armor.cloth',
     weaponsKey: 'classDetails.weapons.staves',
-  },
-  shaman: {
-    roleKey: 'classDetails.roles.shaman',
-    roleType: 'hybrid',
-    armorKey: 'classDetails.armor.chainLeatherCloth',
-    weaponsKey: 'classDetails.weapons.macesAxes',
   },
   mage: {
     roleKey: 'classDetails.roles.mage',
     roleType: 'ranged',
     armorKey: 'classDetails.armor.cloth',
-    weaponsKey: 'classDetails.weapons.staves',
-  },
-  warlock: {
-    roleKey: 'classDetails.roles.warlock',
-    roleType: 'ranged',
-    armorKey: 'classDetails.armor.cloth',
-    weaponsKey: 'classDetails.weapons.staves',
-  },
-  druid: {
-    roleKey: 'classDetails.roles.druid',
-    roleType: 'hybrid',
-    armorKey: 'classDetails.armor.leatherCloth',
     weaponsKey: 'classDetails.weapons.staves',
   },
 };
@@ -81,13 +57,9 @@ export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
 // Each entry MUST be a real ability that the class can learn, enforced by
 // tests/charselect_class_details.test.ts so this never drifts from the sim.
 export const SIGNATURE_ABILITIES: Record<PlayerClass, string[]> = {
-  warrior: ['charge', 'heroic_strike', 'execute'],
-  paladin: ['holy_light', 'judgement', 'seal_of_righteousness'],
-  hunter: ['serpent_sting', 'aimed_shot', 'arcane_shot'],
-  rogue: ['sinister_strike', 'eviscerate', 'evasion'],
-  priest: ['smite', 'power_word_shield', 'shadow_word_pain'],
-  shaman: ['lightning_bolt', 'rockbiter_weapon', 'ghost_wolf'],
+  swordman: ['charge', 'heroic_strike', 'execute'],
+  archer: ['serpent_sting', 'aimed_shot', 'arcane_shot'],
+  thief: ['sinister_strike', 'eviscerate', 'evasion'],
+  acolyte: ['smite', 'power_word_shield', 'shadow_word_pain'],
   mage: ['fireball', 'frostbolt', 'polymorph'],
-  warlock: ['shadow_bolt', 'corruption', 'life_tap'],
-  druid: ['wrath', 'bear_form', 'rejuvenation'],
 };

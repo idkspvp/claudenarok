@@ -19,7 +19,7 @@ export interface RangedProfile {
 }
 
 // Resolve the min/max/speed an auto-shot / wand bolt fires with. Wands keep the
-// class ranged profile; every other ranged attacker (i.e. the hunter) uses the
+// class ranged profile; every other ranged attacker (i.e. the archer) uses the
 // carried weapon. School/dead-zone/range still come from the class `ranged` def.
 export function rangedShotProfile(
   ranged: { min: number; max: number; speed: number; wand?: boolean },

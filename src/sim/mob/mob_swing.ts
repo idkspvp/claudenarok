@@ -988,7 +988,7 @@ function applyStackPoison(
 }
 
 // Apply (or refresh + stack) a corrosive armor-shred debuff on the victim.
-// Mirrors the warrior Sunder Armor stacking: one shared `sunder` slot found by
+// Mirrors the swordman Sunder Armor stacking: one shared `sunder` slot found by
 // kind, bumped up to `maxStacks`, with its timer fully refreshed each application.
 // effectiveArmor() already subtracts value*stacks, so the victim takes more
 // physical damage from every attacker until it expires.
@@ -999,7 +999,7 @@ function applyCorrosion(
   corrode: NonNullable<MobTemplate['corrode']>,
 ): void {
   // Mob corrosion is a FLAT, stacking armor shred on its own `corrode` kind, kept
-  // separate from the warrior/rogue percent `sunder` so effectiveArmor subtracts it
+  // separate from the swordman/thief percent `sunder` so effectiveArmor subtracts it
   // flat (before the percent debuffs) and the two mechanics never collide.
   const existing = target.auras.find((a) => a.kind === 'corrode');
   if (existing) {

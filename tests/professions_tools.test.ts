@@ -195,8 +195,8 @@ describe('sim-level node access gating (Professions 2.0)', () => {
   const T2_WOOD = 'wood_thornpeak_t2';
 
   function simAtNode(nodeId: string, seed = 42) {
-    const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Prospector');
     const node = GATHER_NODES.find((n) => n.id === nodeId);
     if (!node) throw new Error(`missing node ${nodeId}`);
     const p = sim.entities.get(pid);

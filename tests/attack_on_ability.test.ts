@@ -126,7 +126,7 @@ describe('deferAutoAttackUntilCastEnd (the aggro-before-damage bug)', () => {
     // any positive cast time waits for the successful castStop
     expect(deferAutoAttackUntilCastEnd(2.5)).toBe(true);
     expect(deferAutoAttackUntilCastEnd(0.1)).toBe(true);
-    // a real timed spell from content: the priest's smite carries a cast time
+    // a real timed spell from content: the acolyte's smite carries a cast time
     const smite = ABILITIES.smite;
     if (smite) expect(deferAutoAttackUntilCastEnd(smite.castTime)).toBe(true);
   });

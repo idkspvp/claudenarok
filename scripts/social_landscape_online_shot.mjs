@@ -96,11 +96,11 @@ class AltBot {
 }
 
 const ALT_SPECS = [
-  ['Brannor', 'warrior'],
+  ['Brannor', 'swordman'],
   ['Cindrel', 'mage'],
-  ['Doriath', 'priest'],
-  ['Elowen', 'rogue'],
-  ['Fenwick', 'hunter'],
+  ['Doriath', 'acolyte'],
+  ['Elowen', 'thief'],
+  ['Fenwick', 'archer'],
   ['Galandra', 'paladin'],
 ];
 const alts = ALT_SPECS.map(([n, c], i) => new AltBot(`${n}${alpha}`, c, i));

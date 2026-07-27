@@ -53,7 +53,7 @@ describe('nuke damage is proportional to cast time (the balance framework rule)'
   });
 
   it('Starfire (3s) at least matches Wrath (shorter cast) per second', () => {
-    const ratio = nukeBaseDps('druid', 'starfire') / nukeBaseDps('druid', 'wrath');
+    const ratio = nukeBaseDps('acolyte', 'starfire') / nukeBaseDps('acolyte', 'wrath');
     expect(ratio).toBeGreaterThan(0.9);
     expect(ratio).toBeLessThan(1.3);
   });
@@ -72,12 +72,12 @@ describe('nuke damage is proportional to cast time (the balance framework rule)'
 
 describe('healer primary mana efficiency', () => {
   const level20PeerHeals = [
-    ['priest', 'lesser_heal'],
-    ['priest', 'heal'],
-    ['priest', 'flash_heal'],
-    ['shaman', 'healing_wave'],
-    ['druid', 'healing_touch'],
-    ['druid', 'regrowth'],
+    ['acolyte', 'lesser_heal'],
+    ['acolyte', 'heal'],
+    ['acolyte', 'flash_heal'],
+    ['acolyte', 'healing_wave'],
+    ['acolyte', 'healing_touch'],
+    ['acolyte', 'regrowth'],
   ] as const satisfies readonly (readonly [PlayerClass, string])[];
 
   it('pins the tuned Mending Light rank costs', () => {
@@ -90,8 +90,8 @@ describe('healer primary mana efficiency', () => {
   it('keeps level 20 Mending Light within the peer healer efficiency band', () => {
     const peerRatios = level20PeerHeals.map(([cls, id]) => manaPerAverageHeal(cls, id));
     const peerMedian = median(peerRatios);
-    const paladinRatio = manaPerAverageHeal('paladin', 'holy_light');
-    const priestHealRatio = manaPerAverageHeal('priest', 'heal');
+    const paladinRatio = manaPerAverageHeal('swordman', 'holy_light');
+    const priestHealRatio = manaPerAverageHeal('acolyte', 'heal');
 
     expect(paladinRatio).toBeGreaterThanOrEqual(peerMedian * 0.9);
     expect(paladinRatio).toBeLessThanOrEqual(peerMedian * 1.1);

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function lastError(events: SimEvent[]): string | undefined {
@@ -17,7 +17,7 @@ function lastError(events: SimEvent[]): string | undefined {
 // Sets up two players, targets `target` from `self`, and forces both levels.
 function setup(selfLevel: number, targetLevel: number) {
   const sim = makeWorld();
-  const self = sim.addPlayer('warrior', 'Aleph');
+  const self = sim.addPlayer('swordman', 'Aleph');
   const target = sim.addPlayer('mage', 'Bet');
   sim.tick();
   sim.entities.get(self)!.level = selfLevel;
@@ -34,7 +34,7 @@ function verdict(sim: Sim, self: number): string | undefined {
 describe('/consider command', () => {
   it('reports no target when nothing is selected', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/consider', a);
     expect(lastError(sim.tick())).toBe('You have no target to consider.');

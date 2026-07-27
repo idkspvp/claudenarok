@@ -99,7 +99,7 @@ interface Profile {
 const PROFILES: readonly Profile[] = [
   {
     name: 'Strength mail',
-    classes: ['warrior', 'paladin', 'shaman'],
+    classes: ['swordman', 'swordman', 'acolyte'],
     armor: FURYFORGED,
     neck: 'final_oath_medallion',
     rings: ['iron_vow_band', 'unbroken_circle'],
@@ -107,7 +107,7 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'Agility leather',
-    classes: ['rogue', 'hunter', 'druid'],
+    classes: ['thief', 'archer', 'acolyte'],
     armor: ASHSTALKER,
     neck: 'razorwind_torque',
     rings: ['fleetblood_band', 'last_step_signet'],
@@ -115,7 +115,7 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'caster mail',
-    classes: ['paladin', 'shaman'],
+    classes: ['swordman', 'acolyte'],
     armor: STORMBOUND,
     neck: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],
@@ -123,7 +123,7 @@ const PROFILES: readonly Profile[] = [
   },
   {
     name: 'caster cloth',
-    classes: ['mage', 'priest', 'warlock', 'druid'],
+    classes: ['mage', 'acolyte', 'mage', 'acolyte'],
     armor: CINDERWEAVE,
     neck: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],

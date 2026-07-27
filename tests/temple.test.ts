@@ -10,7 +10,7 @@ import { dist2d } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -50,7 +50,7 @@ describe('The Drowned Temple', () => {
 
   it('is enterable through the moongate with its full spawn set, and exits home', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const door = DUNGEONS.drowned_temple.doorPos;
     teleport(sim, a, door.x, door.z);
     sim.enterDungeon('drowned_temple', a);
@@ -71,7 +71,7 @@ describe('The Drowned Temple', () => {
 
   it('Ysolei summons Moonspawn at hp thresholds and enrages below 30%', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const door = DUNGEONS.drowned_temple.doorPos;
     teleport(sim, a, door.x, door.z);
     sim.enterDungeon('drowned_temple', a);

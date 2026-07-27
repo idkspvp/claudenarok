@@ -26,7 +26,7 @@ type AnySim = Sim & Record<string, any>;
 const DEAD_ERROR = "You can't do that while dead.";
 
 const makeSim = (seed = 42): AnySim =>
-  new Sim({ seed, playerClass: 'warrior', autoEquip: true }) as AnySim;
+  new Sim({ seed, playerClass: 'swordman', autoEquip: true }) as AnySim;
 
 function deadErrors(events: SimEvent[]): number {
   return events.filter((ev) => ev.type === 'error' && ev.text === DEAD_ERROR).length;
@@ -153,7 +153,7 @@ for (const mode of ['unreleased', 'ghost'] as const) {
       teleport(sim, p, vendor.pos.x + 1, vendor.pos.z);
       makeDead(sim, mode);
       sim.drainEvents();
-      // Starting bags may already hold the vendor's item (a warrior spawns with
+      // Starting bags may already hold the vendor's item (a swordman spawns with
       // starter rations, and the first vendor found sells that same food), so
       // pin the refused buy as "count unchanged", not "count zero".
       const before = sim.countItem(itemId);
@@ -284,8 +284,8 @@ describe('auto-release-on-logout: save/load of a dead-unreleased character', () 
     sim.releaseSpirit();
     const releasedPos = { x: p.pos.x, z: p.pos.z };
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Reloger', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Reloger', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     expect(e2.dead).toBe(true);
     expect(e2.ghost).toBe(true);
@@ -316,8 +316,8 @@ describe('auto-release-on-logout: save/load of a dead-unreleased character', () 
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.dead).toBe(true);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Reloger', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Reloger', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     expect(e2.dead).toBe(true);
     expect(e2.ghost).toBe(true);
@@ -337,8 +337,8 @@ describe('auto-release-on-logout: save/load of a dead-unreleased character', () 
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.dead).toBe(false);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Reloger', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Reloger', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     expect(e2.dead).toBe(false);
     expect(e2.ghost).toBe(false);
@@ -358,8 +358,8 @@ describe('auto-release-on-logout: save/load of a dead-unreleased character', () 
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.ghost).toBe(true);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Reloger', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Reloger', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     expect(e2.dead).toBe(true);
     expect(e2.ghost).toBe(true);
@@ -378,8 +378,8 @@ describe('auto-release-on-logout: save/load of a dead-unreleased character', () 
     const state = sim.serializeCharacter(sim.playerId)! as any;
     delete state.dead; // simulate a pre-fix save
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-    const pid2 = sim2.addPlayer('warrior', 'Reloger', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+    const pid2 = sim2.addPlayer('swordman', 'Reloger', { state });
     const e2 = sim2.entities.get(pid2) as AnyEntity;
     expect(e2.dead).toBe(false);
     expect(e2.ghost).toBe(false);

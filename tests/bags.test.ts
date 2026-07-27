@@ -20,7 +20,7 @@ import { isEnchantedInstance } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
 import type { InvSlot } from '../src/sim/types';
 
-const makeSim = (cls = 'warrior', seed = 42) =>
+const makeSim = (cls = 'swordman', seed = 42) =>
   new Sim({ seed, playerClass: cls as never, autoEquip: false });
 
 const meta = (sim: Sim) =>
@@ -330,8 +330,8 @@ describe('persistence and back-compat', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.bags).toEqual([null, null, 'linen_pouch', null]);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Restored', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Restored', { state });
     expect(sim2.bags).toEqual([null, null, 'linen_pouch', null]);
     expect(sim2.bagCapacity).toBe(BACKPACK_SLOTS + 6);
     expect(pid).toBeGreaterThan(0);
@@ -341,8 +341,8 @@ describe('persistence and back-compat', () => {
     const sim = makeSim();
     const state = sim.serializeCharacter(sim.playerId)!;
     delete (state as { bags?: unknown }).bags;
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    sim2.addPlayer('warrior', 'Legacy', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    sim2.addPlayer('swordman', 'Legacy', { state });
     expect(sim2.bags).toEqual([null, null, null, null]);
     expect(sim2.bagCapacity).toBe(BACKPACK_SLOTS);
   });
@@ -351,8 +351,8 @@ describe('persistence and back-compat', () => {
     const sim = makeSim();
     const state = sim.serializeCharacter(sim.playerId)!;
     state.bags = ['worn_sword', 'not_an_item', 'linen_pouch', null];
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    sim2.addPlayer('warrior', 'Tampered', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    sim2.addPlayer('swordman', 'Tampered', { state });
     expect(sim2.bags).toEqual([null, null, 'linen_pouch', null]);
   });
 
@@ -361,8 +361,8 @@ describe('persistence and back-compat', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     state.bags = [null, null, null, null];
     state.inventory = Array.from({ length: 20 }, () => ({ itemId: 'worn_sword', count: 1 }));
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Hoarder', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Hoarder', { state });
     const m2 = (sim2 as never as { players: Map<number, { inventory: InvSlot[] }> }).players.get(
       pid,
     )!;
@@ -427,8 +427,8 @@ describe('pre-bag save migration (equivalent bags for earned space)', () => {
       itemId: i % 2 ? 'worn_sword' : 'rusty_dagger',
       count: 1,
     }));
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Veteran', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Veteran', { state });
     const m2 = (sim2 as never as { players: Map<number, { bags: (string | null)[] }> }).players.get(
       pid,
     )!;
@@ -450,13 +450,13 @@ describe('pre-bag save migration (equivalent bags for earned space)', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     delete (state as { bags?: unknown }).bags;
     state.inventory = Array.from({ length: 20 }, () => ({ itemId: 'worn_sword', count: 1 }));
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Veteran', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Veteran', { state });
     const migrated = sim2.serializeCharacter(pid)!;
     expect(migrated.bags).toEqual(['linen_pouch', null, null, null]);
     // discard down to an empty backpack-sized load, then unequip the granted bag
-    const sim3 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid3 = sim3.addPlayer('warrior', 'Veteran', { state: migrated });
+    const sim3 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid3 = sim3.addPlayer('swordman', 'Veteran', { state: migrated });
     const m3 = (sim3 as never as { players: Map<number, { bags: (string | null)[] }> }).players.get(
       pid3,
     )!;
@@ -470,8 +470,8 @@ describe('pre-bag save migration (equivalent bags for earned space)', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     state.bags = [null, null, null, null];
     state.inventory = Array.from({ length: 30 }, () => ({ itemId: 'worn_sword', count: 1 }));
-    const sim2 = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Tamper', { state });
+    const sim2 = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Tamper', { state });
     const m2 = (sim2 as never as { players: Map<number, { bags: (string | null)[] }> }).players.get(
       pid,
     )!;

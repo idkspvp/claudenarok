@@ -16,9 +16,9 @@ import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
 
 function makeParty(delveId: 'collapsed_reliquary' | 'drowned_litany', tier: 'normal' = 'normal') {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true, noPlayer: true });
-  const a = sim.addPlayer('warrior', 'DoorA');
-  const b = sim.addPlayer('warrior', 'DoorB');
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true, noPlayer: true });
+  const a = sim.addPlayer('swordman', 'DoorA');
+  const b = sim.addPlayer('swordman', 'DoorB');
   sim.partyInvite(b, a);
   sim.partyAccept(b);
   const def = DELVES[delveId];

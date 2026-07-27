@@ -25,7 +25,7 @@ import { groundHeight } from '../src/sim/world';
 import type { PartyMemberInfo } from '../src/world_api';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function mustEntity(sim: Sim, pid: number): Entity {
@@ -63,7 +63,7 @@ function face(sim: Sim, pid: number, targetId: number) {
 function fillPartyToFive(sim: Sim, leader: number): number[] {
   const added: number[] = [];
   while ((sim.partyOf(leader)?.members.length ?? 1) < 5) {
-    const pid = sim.addPlayer('priest', `RaidFill${added.length}`);
+    const pid = sim.addPlayer('acolyte', `RaidFill${added.length}`);
     sim.partyInvite(pid, leader);
     sim.partyAccept(pid);
     added.push(pid);
@@ -112,14 +112,14 @@ describe('nine classes', () => {
       // every class's core kit keeps scaling: something reaches rank 3+ by 20
       expect(kit.some((k) => k.rank >= 3)).toBe(true);
       // resource type sane
-      if (cls === 'warrior') expect(p.resourceType).toBe('rage');
-      else if (cls === 'rogue') expect(p.resourceType).toBe('energy');
+      if (cls === 'swordman') expect(p.resourceType).toBe('rage');
+      else if (cls === 'thief') expect(p.resourceType).toBe('energy');
       else expect(p.resourceType).toBe('mana');
     }
   });
 
-  it('priest heals and shields', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'priest' });
+  it('acolyte heals and shields', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     const p = sim.player;
     sim.setPlayerLevel(6);
     p.hp = 30;
@@ -137,13 +137,13 @@ describe('nine classes', () => {
 
   it('friendly target spells can affect selected players', () => {
     const sim = makeWorld();
-    const priestId = sim.addPlayer('priest', 'Healer');
-    const priest = mustEntity(sim, priestId);
-    const allyId = sim.addPlayer('warrior', 'Ally');
+    const priestId = sim.addPlayer('acolyte', 'Healer');
+    const acolyte = mustEntity(sim, priestId);
+    const allyId = sim.addPlayer('swordman', 'Ally');
     const ally = mustEntity(sim, allyId);
     teleport(sim, priestId, ally.pos.x + 5, ally.pos.z);
     sim.setPlayerLevel(6, priestId);
-    priest.resource = priest.maxResource;
+    acolyte.resource = acolyte.maxResource;
     ally.hp = 20;
 
     sim.targetEntity(ally.id, priestId);
@@ -158,7 +158,7 @@ describe('nine classes', () => {
   });
 
   it('renew ticks healing over time', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'priest' });
+    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     sim.setPlayerLevel(8);
     const p = sim.player;
     p.hp = 20;
@@ -167,8 +167,8 @@ describe('nine classes', () => {
     expect(p.hp).toBeGreaterThan(30);
   });
 
-  it('paladin seal empowers swings and judgement consumes it', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'paladin' });
+  it('swordman seal empowers swings and judgement consumes it', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'swordman' });
     sim.setPlayerLevel(4);
     const p = sim.player;
     sim.castAbility('seal_of_righteousness');
@@ -204,8 +204,8 @@ describe('nine classes', () => {
     expect(p.auras.some((a) => a.kind === 'imbue')).toBe(false); // consumed
   });
 
-  it('warlock life taps and drains life', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warlock' });
+  it('mage life taps and drains life', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'mage' });
     sim.setPlayerLevel(10);
     const p = sim.player;
     p.resource = 10;
@@ -228,8 +228,8 @@ describe('nine classes', () => {
     expect(p.hp).toBeGreaterThan(30);
   });
 
-  it('hunter kills with ranged auto shot from distance', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'hunter' });
+  it('archer kills with ranged auto shot from distance', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'archer' });
     const p = sim.player;
     const wolf = nearestMob(sim, 'forest_wolf');
     p.maxHp = 500;
@@ -254,7 +254,7 @@ describe('nine classes', () => {
   });
 
   it('lightning shield zaps attackers (thorns)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'shaman' });
+    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     sim.setPlayerLevel(8);
     const p = sim.player;
     sim.castAbility('lightning_shield');
@@ -275,7 +275,7 @@ describe('nine classes', () => {
 
   it('lightning shield reflects at most 3 charges, gated by a 5s internal cooldown', () => {
     const runReflects = () => {
-      const sim = new Sim({ seed: 7, playerClass: 'shaman' });
+      const sim = new Sim({ seed: 7, playerClass: 'acolyte' });
       sim.setPlayerLevel(12);
       const p = sim.player;
       sim.castAbility('lightning_shield');
@@ -284,7 +284,7 @@ describe('nine classes', () => {
       expect(aura?.charges).toBe(3);
       const wolf = nearestMob(sim, 'forest_wolf');
       // A fast, low-damage, beefy attacker: lands many swings without killing the
-      // shaman or dying to the reflects, so we measure the cap, not the fight.
+      // acolyte or dying to the reflects, so we measure the cap, not the fight.
       wolf.level = p.level;
       wolf.weapon = { min: 1, max: 1, speed: 1 };
       wolf.hp = wolf.maxHp = 100000;
@@ -323,8 +323,8 @@ describe('nine classes', () => {
     expect(runReflects()).toEqual(r);
   }, 15_000);
 
-  it('druid bear form toggles and raises armor', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'druid' });
+  it('acolyte bear form toggles and raises armor', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     sim.setPlayerLevel(10);
     const p = sim.player;
     const armorBefore = p.stats.armor;
@@ -343,7 +343,7 @@ describe('nine classes', () => {
 describe('elite mobs', () => {
   it('elites scale like vanilla elites (~2.3x hp, 1.5x damage, 2x xp)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Tank');
+    const pid = sim.addPlayer('swordman', 'Tank');
     sim.enterCrypt(pid);
     const origin = instanceOrigin(0, 0);
     const shambler = nearestMob(sim, 'crypt_shambler', origin);
@@ -359,8 +359,8 @@ describe('elite mobs', () => {
 describe('parties', () => {
   function makeDuo(): { sim: Sim; a: number; b: number } {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     return { sim, a, b };
@@ -397,9 +397,9 @@ describe('parties', () => {
 
   it('does not replace a pending party invite', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.partyInvite(b, a);
     sim.partyInvite(b, c);
     sim.partyAccept(b);
@@ -409,9 +409,9 @@ describe('parties', () => {
 
   it('allows a new party invite after decline or expiry', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.partyInvite(b, a);
     sim.partyDecline(b);
     sim.partyInvite(b, c);
@@ -420,7 +420,7 @@ describe('parties', () => {
     expect(sim.partyOf(a)).toBe(null);
 
     const d = sim.addPlayer('mage', 'Dalet');
-    const e = sim.addPlayer('warrior', 'Heh');
+    const e = sim.addPlayer('swordman', 'Heh');
     sim.partyInvite(d, a);
     for (let i = 0; i < 20 * 31; i++) sim.tick();
     sim.partyInvite(d, e);
@@ -435,8 +435,8 @@ describe('parties', () => {
     // never consumes the inviter's own pending invite. Accepting that stale
     // invite must NOT leave the player a member of two parties at once.
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const c = sim.addPlayer('thief', 'Gimel');
     const d = sim.addPlayer('mage', 'Dalet');
     // C invites A while A is solo (stored, unaccepted).
     sim.partyInvite(a, c);
@@ -521,8 +521,8 @@ describe('parties', () => {
 
   it('converts a party to a two-group raid with a ten player cap', () => {
     const sim = makeWorld();
-    const leader = sim.addPlayer('warrior', 'Leader');
-    const pids = Array.from({ length: 10 }, (_, i) => sim.addPlayer('priest', `Raid${i}`));
+    const leader = sim.addPlayer('swordman', 'Leader');
+    const pids = Array.from({ length: 10 }, (_, i) => sim.addPlayer('acolyte', `Raid${i}`));
     for (const pid of pids.slice(0, 3)) {
       sim.partyInvite(pid, leader);
       sim.partyAccept(pid);
@@ -586,8 +586,8 @@ describe('parties', () => {
 
   it('refuses to demote a raid larger than one party (> 5 members)', () => {
     const sim = makeWorld();
-    const leader = sim.addPlayer('warrior', 'BigLeader');
-    const pids = Array.from({ length: 9 }, (_, i) => sim.addPlayer('priest', `Big${i}`));
+    const leader = sim.addPlayer('swordman', 'BigLeader');
+    const pids = Array.from({ length: 9 }, (_, i) => sim.addPlayer('acolyte', `Big${i}`));
     fillPartyToFive(sim, leader);
     sim.convertPartyToRaid(leader);
     for (const pid of pids.slice(0, 5)) {
@@ -602,7 +602,7 @@ describe('parties', () => {
 
   it('blocks raid groups from standard dungeons while requiring raid groups for Nythraxis entry', () => {
     const sim = makeWorld();
-    const leader = sim.addPlayer('warrior', 'Leader');
+    const leader = sim.addPlayer('swordman', 'Leader');
     sim.enterDungeon('nythraxis_boss_arena', leader);
     expect(sim.entities.get(leader)?.pos.x).toBeLessThan(DUNGEON_X_THRESHOLD);
 
@@ -640,8 +640,8 @@ describe('parties', () => {
 
   it('non-party members cannot loot tapped kills', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const c = sim.addPlayer('thief', 'Gimel');
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.hp = 1;
     teleport(sim, a, wolf.pos.x + 2, wolf.pos.z);
@@ -765,7 +765,7 @@ describe('parties', () => {
 
     it("a stranger's corpse yields no loot and the silent pass emits no error event", () => {
       const { sim, a, b } = makeDuo();
-      const stranger = sim.addPlayer('rogue', 'Gimel');
+      const stranger = sim.addPlayer('thief', 'Gimel');
       teleport(sim, a, 0, 1);
       teleport(sim, stranger, 0, 1);
       const mob = deadCorpse(sim, a, [a, b], {
@@ -828,7 +828,7 @@ describe('parties', () => {
 
     it("does not auto-loot a stranger's corpse after it goes FFA, though a deliberate manual loot still can", () => {
       const { sim, a } = makeDuo();
-      const stranger = sim.addPlayer('rogue', 'Gimel');
+      const stranger = sim.addPlayer('thief', 'Gimel');
       teleport(sim, a, 0, 1);
       // A stranger (not in a's party) tapped this corpse, and its owner-lock has lapsed to FFA.
       const mob = deadCorpse(sim, stranger, [stranger], {
@@ -856,7 +856,7 @@ describe('parties', () => {
 describe('duels', () => {
   it('full duel flow: challenge, countdown, fight to 1hp, winner declared', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -895,9 +895,9 @@ describe('duels', () => {
 
   it('does not replace a pending duel challenge', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
     teleport(sim, c, 6, -40);
@@ -911,9 +911,9 @@ describe('duels', () => {
 
   it('blocks other social invites until a pending duel is answered or expires', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
     teleport(sim, c, 6, -40);
@@ -925,7 +925,7 @@ describe('duels', () => {
     expect(sim.partyOf(c)?.members).toEqual([c, b]);
     expect(sim.duelFor(a)).toBe(null);
 
-    const d = sim.addPlayer('priest', 'Dalet');
+    const d = sim.addPlayer('acolyte', 'Dalet');
     teleport(sim, d, 9, -40);
     sim.duelRequest(d, a);
     for (let i = 0; i < 20 * 31; i++) sim.tick();
@@ -938,7 +938,7 @@ describe('duels', () => {
 describe('trading', () => {
   it('atomic trade of items and copper', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -973,7 +973,7 @@ describe('trading', () => {
     // both directions, BOTH sides offering the same payload in one confirm
     // (merge-on-receive on both ends), and per-payload unit conservation.
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1010,9 +1010,9 @@ describe('trading', () => {
 
   it('does not replace a pending trade request', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
     teleport(sim, c, 6, -40);
@@ -1025,7 +1025,7 @@ describe('trading', () => {
 
   it('trade cancels when players walk apart', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1039,7 +1039,7 @@ describe('trading', () => {
 
   it('duplicate offer slots cannot duplicate items', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1065,7 +1065,7 @@ describe('trading', () => {
 
   it('malformed offer slots are rejected, not crashed or duplicated', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1094,7 +1094,7 @@ describe('trading', () => {
 
   it('duplicate slots within the bags merge and trade normally', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1120,7 +1120,7 @@ describe('trading', () => {
 
   it('quest items cannot be traded', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1133,7 +1133,7 @@ describe('trading', () => {
 
   it('mech chroma plates can be traded directly', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 3, -40);
@@ -1154,9 +1154,9 @@ describe('trading', () => {
 describe('the Hollow Crypt', () => {
   it('party members enter the same instance; strangers get their own', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     for (const pid of [a, b, c]) teleport(sim, pid, 80, 88);
@@ -1182,7 +1182,7 @@ describe('the Hollow Crypt', () => {
 
   it('crypt has the full spawn set and Morthen pulses in combat', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 80, 88);
     sim.enterCrypt(a);
     const slot = sim.instanceSlotAt(mustEntity(sim, a).pos) ?? 0;
@@ -1220,7 +1220,7 @@ describe('the Hollow Crypt', () => {
 describe('the new dungeons', () => {
   it('the Sunken Bastion and Gravewyrm Sanctum are enterable with full spawn sets', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 45, 511);
     sim.enterDungeon('sunken_bastion', a);
     const ea = sim.entities.get(a)!;
@@ -1246,7 +1246,7 @@ describe('the new dungeons', () => {
 
   it('Velkhar summons add waves at hp thresholds and Korgath enrages below 30%', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     teleport(sim, a, 0, 876);
     sim.enterDungeon('gravewyrm_sanctum', a);
     const ea = sim.entities.get(a)!;
@@ -1286,7 +1286,7 @@ describe('the new dungeons', () => {
 describe('dungeon difficulty slash command', () => {
   it('routes /dungeon reset to the owned-instance reset', () => {
     const sim = makeWorld();
-    const p = sim.addPlayer('warrior', 'Solo');
+    const p = sim.addPlayer('swordman', 'Solo');
     sim.enterDungeon('hollow_crypt', p);
     sim.leaveDungeon(p);
     sim.setDungeonDifficulty('heroic', p);
@@ -1306,7 +1306,7 @@ describe('dungeon difficulty slash command', () => {
 
   it('routes the /dungeons and /instances reset aliases', () => {
     const sim = makeWorld();
-    const p = sim.addPlayer('warrior', 'Aliases');
+    const p = sim.addPlayer('swordman', 'Aliases');
     for (const cmd of ['/dungeons reset', '/instances reset']) {
       sim.drainEvents();
       sim.chat(cmd, p);
@@ -1323,7 +1323,7 @@ describe('dungeon difficulty slash command', () => {
 
   it('lets a leader switch normal and heroic without using dev commands', () => {
     const sim = makeWorld();
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Mage');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1352,7 +1352,7 @@ describe('dungeon difficulty slash command', () => {
 
   it('routes the /instances and /dungeons aliases, case-insensitively', () => {
     const sim = makeWorld();
-    const p = sim.addPlayer('warrior', 'Solo');
+    const p = sim.addPlayer('swordman', 'Solo');
 
     sim.chat('/instances heroic', p);
     expect(sim.dungeonDifficulty(p)).toBe('heroic');
@@ -1364,7 +1364,7 @@ describe('dungeon difficulty slash command', () => {
 
   it('the /dungeon readout reports the current selection and how to change it', () => {
     const sim = makeWorld();
-    const p = sim.addPlayer('warrior', 'Solo');
+    const p = sim.addPlayer('swordman', 'Solo');
 
     sim.drainEvents();
     sim.chat('/dungeon', p);

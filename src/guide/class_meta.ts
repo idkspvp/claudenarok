@@ -21,11 +21,11 @@ export interface ClassMeta {
 }
 
 export const CLASS_META: Record<string, ClassMeta> = {
-  warrior: { style: 'melee', play: 'flexible', complexity: 'med', goodFirst: true },
+  swordman: { style: 'melee', play: 'flexible', complexity: 'med', goodFirst: true },
   paladin: { style: 'melee', play: 'flexible', complexity: 'low', goodFirst: true },
-  hunter: { style: 'ranged', play: 'solo', complexity: 'low', goodFirst: true },
-  rogue: { style: 'melee', play: 'solo', complexity: 'high', goodFirst: false },
-  priest: { style: 'ranged', play: 'group', complexity: 'med', goodFirst: false },
+  archer: { style: 'ranged', play: 'solo', complexity: 'low', goodFirst: true },
+  thief: { style: 'melee', play: 'solo', complexity: 'high', goodFirst: false },
+  acolyte: { style: 'ranged', play: 'group', complexity: 'med', goodFirst: false },
   shaman: { style: 'both', play: 'flexible', complexity: 'med', goodFirst: false },
   mage: { style: 'ranged', play: 'solo', complexity: 'med', goodFirst: false },
   warlock: { style: 'ranged', play: 'solo', complexity: 'high', goodFirst: false },

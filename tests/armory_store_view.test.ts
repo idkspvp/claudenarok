@@ -11,7 +11,7 @@ describe('buildArmorySections', () => {
   it('always lists all 29 skins in 4 sections, highest rarity first', () => {
     const sections = buildArmorySections(0, [], {
       cosmetics: noCosmetics,
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'worn_sword',
     });
     expect(sections.map((s) => s.rarity)).toEqual(['legendary', 'epic', 'rare', 'uncommon']);
@@ -34,7 +34,7 @@ describe('buildArmorySections', () => {
   it('takes the live service price and purchasability when the SKU exists', () => {
     const sections = buildArmorySections(5000, [serviceRow('ice_fang_sword', 2400)], {
       cosmetics: noCosmetics,
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'worn_sword',
     });
     const ice = sections.flatMap((s) => s.rows).find((r) => r.skin.id === 'ice_fang_sword');
@@ -47,7 +47,7 @@ describe('buildArmorySections', () => {
   it('computes shortfall against the balance', () => {
     const sections = buildArmorySections(1000, [serviceRow('solheim_sword', 5000)], {
       cosmetics: noCosmetics,
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'worn_sword',
     });
     const solheim = sections.flatMap((s) => s.rows).find((r) => r.skin.id === 'solheim_sword');
@@ -61,7 +61,7 @@ describe('buildArmorySections', () => {
         weaponSkinIds: ['cinderbrand_sword'],
         weaponSkinLoadout: { sword: 'cinderbrand_sword' },
       },
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'worn_sword',
     });
     const rows = sections.flatMap((s) => s.rows);
@@ -76,21 +76,21 @@ describe('buildArmorySections', () => {
     expect(star?.owned).toBe(false);
   });
 
-  it('gates canApplyNow on the equipped weapon type (hunter ranged rule included)', () => {
+  it('gates canApplyNow on the equipped weapon type (archer ranged rule included)', () => {
     const owned = {
       weaponSkinIds: ['glaciersplit_axe', 'winterbite'],
       weaponSkinLoadout: {},
     };
     const asWarrior = buildArmorySections(0, [], {
       cosmetics: owned,
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'rusty_hatchet',
     }).flatMap((s) => s.rows);
     expect(asWarrior.find((r) => r.skin.id === 'glaciersplit_axe')?.canApplyNow).toBe(true);
     expect(asWarrior.find((r) => r.skin.id === 'winterbite')?.canApplyNow).toBe(false);
     const asHunter = buildArmorySections(0, [], {
       cosmetics: owned,
-      cls: 'hunter',
+      cls: 'archer',
       mainhandItemId: 'rusty_hatchet',
     }).flatMap((s) => s.rows);
     expect(asHunter.find((r) => r.skin.id === 'glaciersplit_axe')?.canApplyNow).toBe(false);
@@ -100,14 +100,14 @@ describe('buildArmorySections', () => {
   it('threads the eligible-class chips onto every row', () => {
     const rows = buildArmorySections(0, [], {
       cosmetics: noCosmetics,
-      cls: 'warrior',
+      cls: 'swordman',
       mainhandItemId: 'worn_sword',
     }).flatMap((s) => s.rows);
     expect(rows.every((r) => r.eligibleClasses.length > 0)).toBe(true);
     const bow = rows.find((r) => r.skin.weaponType === 'bow');
-    expect(bow?.eligibleClasses).toEqual(['hunter']);
+    expect(bow?.eligibleClasses).toEqual(['archer']);
     const sword = rows.find((r) => r.skin.weaponType === 'sword');
-    expect(sword?.eligibleClasses).toContain('warrior');
-    expect(sword?.eligibleClasses).not.toContain('hunter');
+    expect(sword?.eligibleClasses).toContain('swordman');
+    expect(sword?.eligibleClasses).not.toContain('archer');
   });
 });

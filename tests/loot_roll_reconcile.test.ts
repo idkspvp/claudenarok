@@ -13,7 +13,7 @@ import { LOOT_ROLL_REGRACE_MS, reconcileLootRolls } from '../src/ui/hud/loot/loo
 // online client mirrors them, so the HUD can re-show a missed prompt.
 
 const makeSim = (seed = 42) =>
-  new Sim({ seed, playerClass: 'warrior', autoEquip: true, noPlayer: true });
+  new Sim({ seed, playerClass: 'swordman', autoEquip: true, noPlayer: true });
 
 function teleportTo(sim: Sim, pid: number, x: number, z: number) {
   const e = sim.entities.get(pid)!;
@@ -25,7 +25,7 @@ function teleportTo(sim: Sim, pid: number, x: number, z: number) {
 
 function partyWithSharedRoll(seed = 42) {
   const sim = makeSim(seed);
-  const a = sim.addPlayer('warrior', 'Aaa');
+  const a = sim.addPlayer('swordman', 'Aaa');
   const b = sim.addPlayer('mage', 'Bbb');
   sim.partyInvite(b, a);
   sim.partyAccept(b);
@@ -72,7 +72,7 @@ describe('Sim.activeLootRolls', () => {
 
   it('reports nothing to a non-candidate', () => {
     const { sim } = partyWithSharedRoll();
-    const outsider = (sim as any).addPlayer('hunter', 'Ccc');
+    const outsider = (sim as any).addPlayer('archer', 'Ccc');
     expect(sim.activeLootRolls(outsider)).toHaveLength(0);
   });
 

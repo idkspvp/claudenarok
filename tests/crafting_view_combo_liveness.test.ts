@@ -122,7 +122,7 @@ function lastSnap(sent: any[]): any {
 }
 
 function joinServer(server: GameServer, fc: FakeClient, id: number, name: string): ClientSession {
-  const session = server.join(fc.ws, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -139,11 +139,11 @@ function broadcast(server: GameServer): void {
 // freshly constructed online client holds before its first cprof arrives.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.sportRole = null;
@@ -199,7 +199,7 @@ function bareClient(pid: number): ClientWorld {
 
 describe('crafting view combo gate liveness across both IWorld arms', () => {
   it('offline Sim arm: the live IWorld reads carry the arranged values and open the gate', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const meta = sim.meta(sim.player.id)!;
     meta.craftSkills.armorcrafting = 25;
     meta.craftSkills.weaponcrafting = 25;
@@ -219,7 +219,7 @@ describe('crafting view combo gate liveness across both IWorld arms', () => {
 
   it('online arm mirrors equal values through a real cprof snapshot and yields the identical view', () => {
     // Offline arm.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const offMeta = sim.meta(sim.player.id)!;
     offMeta.craftSkills.armorcrafting = 25;
     offMeta.craftSkills.weaponcrafting = 25;
@@ -310,7 +310,7 @@ describe('crafting view combo gate liveness across both IWorld arms', () => {
       self: {
         id: 1,
         k: 'player',
-        tid: 'warrior',
+        tid: 'swordman',
         nm: 'Sync',
         lv: 15,
         x: 0,

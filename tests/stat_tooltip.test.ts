@@ -4,6 +4,7 @@ import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
 import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
+import { baseHpAt, baseSpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { Sim } from '../src/sim/sim';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
@@ -44,7 +45,7 @@ function inputFor(cls: PlayerClass, p: ReturnType<typeof freshPlayer>): StatTool
     critRating: p.critRating,
     hasteRating: p.hasteRating,
     hitRating: p.hitRating,
-    parryChance: cls === 'warrior' ? warriorParryChance(p.stats.str) : 0,
+    parryChance: cls === 'swordman' ? warriorParryChance(p.stats.str) : 0,
     dps: 0,
   };
 }
@@ -95,24 +96,20 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
         const sim = new Sim({ seed: 1, playerClass: cls });
         sim.setPlayerLevel(level);
         const p = sim.player;
-        const def = CLASSES[cls];
-        // Players keep their class starting chest even with autoEquip off, so total
-        // armor = the class's own armor + that gear's armor + vitality*2. Isolate
-        // the attribute part. Agility contributes nothing: it buys evasion.
+        // Hard DEF is EQUIPMENT only now: the class contributes none, the level
+        // contributes none, and Vitality contributes none (it buys soft DEF in
+        // combat/defence.ts instead). Agility never contributed: it buys evasion.
         let gearArmor = 0;
         for (const id of Object.values(sim.equipment))
           gearArmor += (id && ITEMS[id]?.stats?.armor) || 0;
-        const classArmor = def.baseArmor + def.armorPerLevel * (level - 1);
-        const vitArmor = statEffectVal(cls, p, 'vit', 'armor') ?? 0;
-        expect(vitArmor).toBe(p.stats.armor - classArmor - gearArmor);
-        expect(vitArmor).toBe(p.stats.vit * 2); // proves the tooltip matches
+        expect(p.stats.armor).toBe(gearArmor);
+        expect(statEffectVal(cls, p, 'vit', 'armor')).toBeUndefined();
         expect(statEffectVal(cls, p, 'agi', 'armor')).toBeUndefined();
       });
 
       it(`${cls} L${level}: stamina max-health contribution matches entity.maxHp`, () => {
         const p = freshPlayer(cls, level);
-        const def = CLASSES[cls];
-        const base = def.baseHp + def.hpPerLevel * (level - 1);
+        const base = baseHpAt(JOB_VITALS[cls], level);
         // VIT scales the pool now rather than adding to it, so the tooltip line
         // is a percentage and the check is the multiplier, not a difference.
         const pct = statEffectVal(cls, p, 'vit', 'maxHealthPct') ?? 0;
@@ -132,8 +129,7 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
     for (const cls of ALL_CLASSES) {
       if (!isManaClass(cls)) continue;
       const p = freshPlayer(cls, 20);
-      const def = CLASSES[cls];
-      const base = def.baseMana + def.manaPerLevel * (20 - 1);
+      const base = baseSpAt(JOB_VITALS[cls], 20);
       const pct = statEffectVal(cls, p, 'int', 'maxManaPct') ?? 0;
       expect(pct).toBeCloseTo((manaMultiplierFromInt(p.stats.int) - 1) * 100, 6);
       expect(p.maxResource).toBe(Math.round(base * manaMultiplierFromInt(p.stats.int)));
@@ -142,29 +138,27 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
 });
 
 describe('class-aware effect selection', () => {
-  it('Strength grants 2 AP/point for warrior/paladin/shaman/druid, else 1', () => {
-    expect(strApPerPoint('warrior')).toBe(2);
-    expect(strApPerPoint('paladin')).toBe(2);
-    expect(strApPerPoint('shaman')).toBe(2);
-    expect(strApPerPoint('druid')).toBe(2);
-    expect(strApPerPoint('rogue')).toBe(1);
-    expect(strApPerPoint('hunter')).toBe(1);
+  it('Strength grants 2 AP/point for the swordman, 1 for every other job', () => {
+    expect(strApPerPoint('swordman')).toBe(2);
+    expect(strApPerPoint('acolyte')).toBe(1);
+    expect(strApPerPoint('thief')).toBe(1);
+    expect(strApPerPoint('archer')).toBe(1);
     expect(strApPerPoint('mage')).toBe(1);
-    expect(strApPerPoint('priest')).toBe(1);
-    expect(strApPerPoint('warlock')).toBe(1);
+    expect(strApPerPoint('acolyte')).toBe(1);
+    expect(strApPerPoint('mage')).toBe(1);
   });
 
-  it('Agility melee AP applies only to rogue and hunter', () => {
-    expect(agiMeleeApPerPoint('rogue')).toBe(1);
-    expect(agiMeleeApPerPoint('hunter')).toBe(1);
+  it('Agility melee AP applies only to thief and archer', () => {
+    expect(agiMeleeApPerPoint('thief')).toBe(1);
+    expect(agiMeleeApPerPoint('archer')).toBe(1);
     for (const cls of [
-      'warrior',
-      'paladin',
-      'shaman',
-      'druid',
+      'swordman',
+      'swordman',
+      'acolyte',
+      'acolyte',
       'mage',
-      'priest',
-      'warlock',
+      'acolyte',
+      'mage',
     ] as PlayerClass[]) {
       expect(agiMeleeApPerPoint(cls)).toBe(0);
     }
@@ -172,28 +166,28 @@ describe('class-aware effect selection', () => {
 
   it('only hunters get a ranged attack power line, and it hangs off Dexterity', () => {
     // Bows read DEX where a melee weapon reads STR, so the ranged line belongs on
-    // the DEX cell. AGI carries none of it any more, for a hunter or anyone else.
-    const hunter = freshPlayer('hunter', 20);
-    const st = hunter.stats;
+    // the DEX cell. AGI carries none of it any more, for a archer or anyone else.
+    const archer = freshPlayer('archer', 20);
+    const st = archer.stats;
     const ranged = effect(
-      buildStatTooltip('dex', inputFor('hunter', hunter)).effects,
+      buildStatTooltip('dex', inputFor('archer', archer)).effects,
       'rangedAttackPower',
     );
     expect(ranged?.value).toBe(statusRangedAttackPower(st.str, st.dex, st.luk));
     expect(
-      effect(buildStatTooltip('agi', inputFor('hunter', hunter)).effects, 'rangedAttackPower'),
+      effect(buildStatTooltip('agi', inputFor('archer', archer)).effects, 'rangedAttackPower'),
     ).toBeUndefined();
-    const warrior = freshPlayer('warrior', 20);
+    const swordman = freshPlayer('swordman', 20);
     expect(
-      effect(buildStatTooltip('dex', inputFor('warrior', warrior)).effects, 'rangedAttackPower'),
+      effect(buildStatTooltip('dex', inputFor('swordman', swordman)).effects, 'rangedAttackPower'),
     ).toBeUndefined();
   });
 
   it('only Intellect shows the minor-benefit note, and only for non-mana classes', () => {
-    const rogue = freshPlayer('rogue', 20); // energy
-    const warrior = freshPlayer('warrior', 20); // rage
-    for (const cls of [rogue, warrior]) {
-      const c = cls === rogue ? 'rogue' : 'warrior';
+    const thief = freshPlayer('thief', 20); // energy
+    const swordman = freshPlayer('swordman', 20); // rage
+    for (const cls of [thief, swordman]) {
+      const c = cls === thief ? 'thief' : 'swordman';
       const intM = buildStatTooltip('int', inputFor(c, cls));
       expect(intM.minorForClass).toBe(true);
       expect(intM.effects).toHaveLength(0);
@@ -213,35 +207,35 @@ describe('class-aware effect selection', () => {
     expect(buildStatTooltip('luk', inputFor('mage', mage)).minorForClass).toBe(false);
   });
 
-  it('treats a druid as a mana class in every form, so Int keeps its mana lines', () => {
-    // A druid is fundamentally a mana class whose Int governs the caster-form mana
+  it('treats a acolyte as a mana class in every form, so Int keeps its mana lines', () => {
+    // A acolyte is fundamentally a mana class whose Int governs the caster-form mana
     // pool, so its breakdown must NOT collapse to "of little benefit" the way a
     // true rage/energy class does, even while shapeshifted. isManaClass keys off the
     // base class (not the transient form resource) on purpose; lock that here.
-    expect(isManaClass('druid')).toBe(true);
-    const druid = freshPlayer('druid', 20);
-    const intDruid = buildStatTooltip('int', inputFor('druid', druid));
+    expect(isManaClass('acolyte')).toBe(true);
+    const acolyte = freshPlayer('acolyte', 20);
+    const intDruid = buildStatTooltip('int', inputFor('acolyte', acolyte));
     expect(intDruid.minorForClass).toBe(false);
     expect(effect(intDruid.effects, 'maxManaPct')).toBeDefined();
     expect(effect(intDruid.effects, 'spellCritPct')).toBeDefined();
     expect(effect(intDruid.effects, 'manaRegen')).toBeDefined();
-    const lukDruid = buildStatTooltip('luk', inputFor('druid', druid));
+    const lukDruid = buildStatTooltip('luk', inputFor('acolyte', acolyte));
     expect(lukDruid.minorForClass).toBe(false);
   });
 
   it('derived cells carry their notes and no header', () => {
-    const p = freshPlayer('warrior', 10);
-    const crit = buildStatTooltip('critChance', inputFor('warrior', p));
-    const dodge = buildStatTooltip('dodge', inputFor('warrior', p));
-    const dps = buildStatTooltip('dps', { ...inputFor('warrior', p), dps: 12.3 });
+    const p = freshPlayer('swordman', 10);
+    const crit = buildStatTooltip('critChance', inputFor('swordman', p));
+    const dodge = buildStatTooltip('dodge', inputFor('swordman', p));
+    const dps = buildStatTooltip('dps', { ...inputFor('swordman', p), dps: 12.3 });
     expect(crit.isPrimary).toBe(false);
     expect(crit.baseChanceNote).toBe(true);
     expect(dodge.baseChanceNote).toBe(true);
     expect(dps.dpsApproxNote).toBe(true);
     expect(dps.statValue).toBe(12.3);
     // primary stats are the left column only
-    expect(buildStatTooltip('str', inputFor('warrior', p)).isPrimary).toBe(true);
-    expect(buildStatTooltip('agi', inputFor('warrior', p)).isPrimary).toBe(true);
+    expect(buildStatTooltip('str', inputFor('swordman', p)).isPrimary).toBe(true);
+    expect(buildStatTooltip('agi', inputFor('swordman', p)).isPrimary).toBe(true);
   });
 });
 
@@ -290,13 +284,13 @@ describe('effect wiring reconciles each effect kind with its source', () => {
   ) => statEffectVal(cls, p, stat, kind);
 
   it('attackPower cell emits dpsFromAp = attackPower / 14', () => {
-    const p = freshPlayer('warrior', 20);
-    expect(effVal('warrior', p, 'attackPower', 'dpsFromAp')).toBeCloseTo(p.attackPower / 14, 6);
+    const p = freshPlayer('swordman', 20);
+    expect(effVal('swordman', p, 'attackPower', 'dpsFromAp')).toBeCloseTo(p.attackPower / 14, 6);
   });
 
   it('stamina cell wires healthRegen = restingHealthPer5s(sta)', () => {
-    const p = freshPlayer('warrior', 20);
-    expect(effVal('warrior', p, 'vit', 'healthRegen')).toBe(restingHealthPer5s(p.stats.vit));
+    const p = freshPlayer('swordman', 20);
+    expect(effVal('swordman', p, 'vit', 'healthRegen')).toBe(restingHealthPer5s(p.stats.vit));
   });
 
   it('mana classes wire intellect to BOTH manaRegen and spellCritPct', () => {
@@ -337,7 +331,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
       critRating: p.critRating,
       hasteRating: p.hasteRating,
       hitRating: p.hitRating,
-      parryChance: cls === 'warrior' ? warriorParryChance(p.stats.str) : 0,
+      parryChance: cls === 'swordman' ? warriorParryChance(p.stats.str) : 0,
       dps: 0,
       gear,
       buffs,
@@ -376,7 +370,7 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
   }
 
   it('itemizes a flat buff by name and folds talents into the remainder', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman' });
     sim.setPlayerLevel(20);
     const p = sim.player;
     // A flat +20 Stamina buff (e.g. Power Word: Fortitude) must appear as its own
@@ -391,8 +385,8 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
       sourceId: p.id,
       school: 'holy',
     });
-    recalcPlayerStats(p, 'warrior', sim.equipment, undefined, {}, spreadAllocation(p.level));
-    const input = inputWithGear(sim, 'warrior');
+    recalcPlayerStats(p, 'swordman', sim.equipment, undefined, {}, spreadAllocation(p.level));
+    const input = inputWithGear(sim, 'swordman');
     const sta = buildStatTooltip('vit', input);
     const buffLine = sta.sources.find((s) => s.kind === 'buff');
     expect(buffLine?.name).toBe('Power Word: Fortitude');
@@ -412,35 +406,25 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
     const sum = model.sources.reduce((acc, s) => acc + s.value, 0);
     expect(sum).toBe(p.spellPower);
     // non-casters get the minor-benefit note on the spell power cell
-    const warriorSim = new Sim({ seed: 1, playerClass: 'warrior' });
+    const warriorSim = new Sim({ seed: 1, playerClass: 'swordman' });
     warriorSim.setPlayerLevel(20);
-    expect(buildStatTooltip('spellPower', inputWithGear(warriorSim, 'warrior')).minorForClass).toBe(
-      true,
-    );
+    expect(
+      buildStatTooltip('spellPower', inputWithGear(warriorSim, 'swordman')).minorForClass,
+    ).toBe(true);
   });
 
-  it('cat-form druid keeps its armor on Vitality, which the form does not touch', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'druid' });
+  it('shows no attribute line at all in the armor breakdown', () => {
+    const sim = new Sim({ seed: 1, playerClass: 'acolyte' });
     sim.setPlayerLevel(20);
     const p = sim.player;
-    p.auras.push({
-      id: 'cat_form',
-      name: 'Cat Form',
-      kind: 'form_cat',
-      remaining: 3600,
-      duration: 3600,
-      value: 1,
-      sourceId: p.id,
-      school: 'physical',
-    });
-    recalcPlayerStats(p, 'druid', sim.equipment, undefined, {}, spreadAllocation(p.level));
-    const armor = buildStatTooltip('armor', inputWithGear(sim, 'druid'));
-    // Cat Form raises Agility, and Agility no longer feeds armor, so the form's
-    // bonus cannot reach the armor breakdown at all. The attribute line is
-    // Vitality's, untouched by the shift, and the lines still reconcile.
-    const fromVit = armor.sources.find((s) => s.kind === 'attributes');
-    expect(fromVit?.fromStat).toBe('vit');
-    expect(fromVit?.value).toBe(p.stats.vit * 2);
+    recalcPlayerStats(p, 'acolyte', sim.equipment, undefined, {}, spreadAllocation(p.level));
+    expect(p.stats.vit).toBeGreaterThan(1); // the allocation really did buy Vitality
+    const armor = buildStatTooltip('armor', inputWithGear(sim, 'acolyte'));
+    // Hard DEF is equipment only. Agility buys evasion and Vitality buys SOFT DEF
+    // (the flat subtraction in combat/defence.ts), so neither reaches this cell,
+    // and the base line is 0 rather than a class/level term.
+    expect(armor.sources.some((s) => s.kind === 'attributes')).toBe(false);
+    expect(armor.sources.find((s) => s.kind === 'base')?.value).toBe(0);
     expect(armor.sources.reduce((acc, s) => acc + s.value, 0)).toBe(armor.statValue);
   });
 });
@@ -461,8 +445,8 @@ describe('rating stat cells', () => {
   });
 
   it('summarizes both capped PvP effects in one Warfare stat', () => {
-    const p = freshPlayer('warrior', 20);
-    const input = inputFor('warrior', p);
+    const p = freshPlayer('swordman', 20);
+    const input = inputFor('swordman', p);
     input.stats = {
       ...input.stats,
       pvpOffense: 0.2,

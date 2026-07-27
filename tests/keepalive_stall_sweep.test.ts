@@ -47,7 +47,7 @@ describe('keepalive sweep under an event-loop stall', () => {
   it('re-arms instead of terminating when the sweep itself fired late, then terminates on the next on-time sweep', () => {
     const server = new GameServer();
     const ws = fakeWs();
-    const session = expectJoined(server.join(ws, 11, 101, 'Stalled', 'warrior', null));
+    const session = expectJoined(server.join(ws, 11, 101, 'Stalled', 'swordman', null));
 
     // First on-time sweep: a ping goes out and a pong is now outstanding.
     server.pingLiveSessions();

@@ -13,8 +13,8 @@ const HELM = 'knight_commanders_greaves';
 const REQUIRED_LEVEL = 12;
 
 function freshWarrior(level: number) {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true, autoEquip: false });
-  const pid = sim.addPlayer('warrior', 'Tester');
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true, autoEquip: false });
+  const pid = sim.addPlayer('swordman', 'Tester');
   sim.setPlayerLevel(level, pid);
   sim.addItem(HELM, 1, pid);
   sim.drainEvents(); // clear setup events so a later drain only sees the equip attempt
@@ -60,8 +60,8 @@ describe('equip level requirement', () => {
 
   it('leaves an uncommon leveling green equippable at level 1', () => {
     // cryptbone_helm is uncommon: a leveling green, deliberately ungated.
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true, autoEquip: false });
-    const pid = sim.addPlayer('warrior', 'Tester');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true, autoEquip: false });
+    const pid = sim.addPlayer('swordman', 'Tester');
     sim.addItem('cryptbone_helm', 1, pid);
     sim.equipItem('cryptbone_helm', pid);
     expect(sim.meta(pid)!.equipment.helmet).toBe('cryptbone_helm');
@@ -77,8 +77,8 @@ describe('equip level requirement', () => {
   });
 
   it('auto-equip skips gear above the level silently (no equip, no error toast)', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Tester', { autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Tester', { autoEquip: true });
     sim.setPlayerLevel(REQUIRED_LEVEL - 1, pid); // below the piece's required level
     sim.drainEvents();
     sim.addItem(HELM, 1, pid); // would trigger maybeAutoEquip

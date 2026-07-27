@@ -299,7 +299,7 @@ async function seed(client: PoolClient): Promise<void> {
   }
   for (const c of CHARS) {
     await client.query(
-      `INSERT INTO characters (id, account_id, name, class, level) VALUES ($1, $2, $3, 'warrior', 10)`,
+      `INSERT INTO characters (id, account_id, name, class, level) VALUES ($1, $2, $3, 'swordman', 10)`,
       [c.id, c.accountId, c.name],
     );
   }

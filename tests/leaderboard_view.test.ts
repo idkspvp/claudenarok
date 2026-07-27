@@ -29,7 +29,7 @@ function entry(over: Partial<LeaderboardEntry> = {}): LeaderboardEntry {
   return {
     rank: 1,
     name: 'Me',
-    cls: 'warrior',
+    cls: 'swordman',
     level: 60,
     virtualLevel: 12,
     lifetimeXp: 5_000_000,
@@ -93,7 +93,7 @@ describe('buildLeaderboardView: row derivation', () => {
       buildLeaderboardView({
         kind: 'page',
         page: page('sim', [
-          entry({ rank: 1, name: 'Me', cls: 'warrior' }),
+          entry({ rank: 1, name: 'Me', cls: 'swordman' }),
           entry({ rank: 2, name: 'Rival', cls: 'mage' }),
         ]),
         viewer: VIEWER,
@@ -263,7 +263,7 @@ describe('buildLeaderboardView: pager state + server clamp', () => {
 
 describe('buildLeaderboardView: ClientWorld-vs-Sim parity', () => {
   const leaders = [
-    entry({ rank: 1, name: 'Me', cls: 'warrior' }),
+    entry({ rank: 1, name: 'Me', cls: 'swordman' }),
     entry({ rank: 2, name: 'Rival', cls: 'mage', prestigeRank: 1 }),
   ];
   const cases: { label: string; input: (shape: 'sim' | 'client') => LeaderboardInput }[] = [
@@ -281,7 +281,7 @@ describe('buildLeaderboardView: ClientWorld-vs-Sim parity', () => {
       label: 'ranked (viewer off page, paged)',
       input: (shape) => ({
         kind: 'page',
-        page: page(shape, [entry({ name: 'Other', cls: 'rogue' })], { page: 1, pageCount: 4 }),
+        page: page(shape, [entry({ name: 'Other', cls: 'thief' })], { page: 1, pageCount: 4 }),
         viewer: VIEWER,
       }),
     },

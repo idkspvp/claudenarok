@@ -16,7 +16,7 @@ describe('stun DR categories (#1004)', () => {
   });
 
   it('keeps opener and controlled stuns in independent buckets', () => {
-    // The whole point of the split: a rogue opener must not share a bucket with a
+    // The whole point of the split: a thief opener must not share a bucket with a
     // controlled stun, so Cheap Shot cannot diminish the following Kidney Shot.
     expect(stunDrCategory('cheap_shot')).not.toBe(stunDrCategory('kidney_shot'));
   });

@@ -1,14 +1,14 @@
 // Heroic retune (economy pass, 2026-07): every heroic mob's health DOUBLES
 // versus the previous heroic calibration, and the minimum non-crit swing of
 // every SPAWN-LIST mob lands at least 500 post-mitigation on the
-// maximum-mitigation reference warrior (see below); boss-summoned adds floor
+// maximum-mitigation reference swordman (see below); boss-summoned adds floor
 // at 150 since the v0.30 40% add nerf. The Nythraxis raid rides the model on
 // its own numbers: heroic boss floor 1000 (2026-07-24 nerf), encounter-script
 // add waves at the raid 250 line, and NORMAL Nythraxis gets the
 // normal-Gravewyrm treatment (2x health, boss >= 600, adds >= 300).
 //
-// Reference warrior (the "fully geared" mitigation ceiling, same as
-// tests/gravewyrm_normal_tuning.test.ts): level-20 prot warrior in the
+// Reference swordman (the "fully geared" mitigation ceiling, same as
+// tests/gravewyrm_normal_tuning.test.ts): level-20 prot swordman in the
 // max-armor kit (full heroic plate + shield, prot mastery), 2861 armor, in
 // Defensive Stance (takes 10% less). Heroic mobs attack at the level-22 pin,
 // so the armor step passes ~44.2% and the stance cut leaves ~39.8%.
@@ -58,7 +58,7 @@ const RAID_HEROIC_ADDS = [
   'nythraxis_heroic_rogue_add',
 ];
 
-// The minimum non-avoided, non-crit hit on the reference warrior, replicating
+// The minimum non-avoided, non-crit hit on the reference swordman, replicating
 // the sim's rounding chain (mobSwing rounds after armor, dealDamage after the
 // stance cut). Heroic spawns land at the transformed template's pinned level.
 function minSwing(
@@ -94,7 +94,7 @@ function spawnListMobIds(dungeonId: string): Set<string> {
 }
 
 describe('heroic five-man floors', () => {
-  it('every spawn-list mob swings for at least 500 on the reference warrior', () => {
+  it('every spawn-list mob swings for at least 500 on the reference swordman', () => {
     for (const dungeonId of FIVE_MANS) {
       for (const mobId of spawnListMobIds(dungeonId)) {
         expect(
@@ -105,7 +105,7 @@ describe('heroic five-man floors', () => {
     }
   });
 
-  it('every boss-summoned add swings for at least the 150 add floor on the reference warrior', () => {
+  it('every boss-summoned add swings for at least the 150 add floor on the reference swordman', () => {
     for (const dungeonId of FIVE_MANS) {
       for (const mobId of spawnListMobIds(dungeonId)) {
         const summoned = MOBS[mobId]?.summonAdds?.mobId;

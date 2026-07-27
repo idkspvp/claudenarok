@@ -39,8 +39,8 @@ const SCENARIO = {
   ],
   // 1 alive + 1 dead party member, plus the local player (must be dropped).
   party: [
-    { pid: 1, cls: 'warrior', dead: 0, localX: 0, localZ: 20 },
-    { pid: 6, cls: 'warrior', dead: 0, localX: 4, localZ: 24 },
+    { pid: 1, cls: 'swordman', dead: 0, localX: 0, localZ: 20 },
+    { pid: 6, cls: 'swordman', dead: 0, localX: 4, localZ: 24 },
     { pid: 7, cls: 'mage', dead: 1, localX: -4, localZ: 16 },
   ],
 };
@@ -103,10 +103,10 @@ describe('delveDrawModel (pure draw model)', () => {
     // mob 4 is dead, mob 5 is an NPC, the player is excluded -> only mobs 2 + 3.
     expect(model.mobs).toHaveLength(2);
     expect(model.mobs.map((m) => m.aggro)).toEqual([true, false]);
-    // party self (pid 1) excluded -> the warrior (alive) + the mage (dead).
+    // party self (pid 1) excluded -> the swordman (alive) + the mage (dead).
     expect(model.party).toHaveLength(2);
     expect(model.party.map((m) => m.dead)).toEqual([0, 1]);
-    expect(model.party.map((m) => m.cls)).toEqual(['warrior', 'mage']);
+    expect(model.party.map((m) => m.cls)).toEqual(['swordman', 'mage']);
     expect(model.player.kind).toBe('arrow');
   });
 

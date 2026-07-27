@@ -17,7 +17,7 @@ const page = await browser.newPage();
 page.on('console', (m) => console.log('CONSOLE:', m.type(), m.text()));
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'VerifyFive', settleMs: 4000 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'VerifyFive', settleMs: 4000 });
 await page.evaluate(() => document.body.classList.add('mobile-touch'));
 await new Promise((r) => setTimeout(r, 600));
 

@@ -84,7 +84,7 @@ function landProjectiles(
 
 describe('auto_attack meleeSwing: the white-hit table', () => {
   it('a swing that passes the table connects and deals physical damage', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     const mob = spawnDummy(sim, p, 1); // far below level -> floor miss chance
     const events = capture(sim);
     const hp0 = mob.hp;
@@ -100,7 +100,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
   });
 
   it('critChance 1 forces a crit (double damage) on a connected swing', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     p.critChance = 1; // every hit crits (rng.chance(1) still draws, returns true)
     const mob = spawnDummy(sim, p, 1);
     const events = capture(sim);
@@ -113,7 +113,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
 
   it('slow one-hand auto attacks hit harder per swing than fast one-hand attacks at the same weapon damage budget', () => {
     const hitWithSpeed = (speed: number): number => {
-      const { sim, p } = makeSim('warrior', 12);
+      const { sim, p } = makeSim('swordman', 12);
       const mob = spawnDummy(sim, p, 1);
       p.attackPower = 0;
       p.critChance = 0;
@@ -148,7 +148,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
 
   it('a comparable two-hand auto attack hits harder per swing than a one-hand auto attack', () => {
     const hitWithHand = (autoAttackHand: 'onehand' | 'twohand'): number => {
-      const { sim, p } = makeSim('warrior', 12);
+      const { sim, p } = makeSim('swordman', 12);
       const mob = spawnDummy(sim, p, 1);
       p.attackPower = 0;
       p.critChance = 0;
@@ -182,7 +182,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
   });
 
   it('a 100% blind forces a miss: returns false, emits a miss, deals no damage', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     const mob = spawnDummy(sim, p, 1);
     p.auras.push({
       id: 'blind_x',
@@ -205,8 +205,8 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
   });
 
   it('a guaranteed dodge returns false, emits a dodge, and opens the Overpower window', () => {
-    const { sim, p } = makeSim('warrior', 30); // high level -> floor miss chance (0.005)
-    const targetPid = sim.addPlayer('rogue', 'Dodgy') as number;
+    const { sim, p } = makeSim('swordman', 30); // high level -> floor miss chance (0.005)
+    const targetPid = sim.addPlayer('thief', 'Dodgy') as number;
     sim.setPlayerLevel(1, targetPid);
     const target = sim.entities.get(targetPid);
     if (!target) throw new Error('test target missing');
@@ -228,7 +228,7 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
 
 describe('auto_attack rangedSwing: Auto Shot vs Wand', () => {
   it('Auto Shot is a physical projectile (armor-mitigated)', () => {
-    const { sim, p } = makeSim('hunter', 12);
+    const { sim, p } = makeSim('archer', 12);
     const mob = spawnDummy(sim, p, 8, 20);
     const events = capture(sim);
     rangedSwing(sim.ctx, p, mob, { min: 5, max: 9, speed: 2.3 });
@@ -248,7 +248,7 @@ describe('auto_attack rangedSwing: Auto Shot vs Wand', () => {
   });
 
   it('Auto Shot launches on the swing tick without adding a universal draw delay', () => {
-    const { sim, p } = makeSim('hunter', 12);
+    const { sim, p } = makeSim('archer', 12);
     const mob = spawnDummy(sim, p, 8, 20);
     const events = capture(sim);
     rangedSwing(sim.ctx, p, mob, { min: 5, max: 9, speed: 2.3 });
@@ -288,8 +288,8 @@ describe('auto_attack rangedSwing: Auto Shot vs Wand', () => {
 });
 
 describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
-  it('a hunter at range takes the ranged branch (Auto Shot), arming ranged-speed cadence', () => {
-    const { sim, p, meta } = makeSim('hunter', 12);
+  it('a archer at range takes the ranged branch (Auto Shot), arming ranged-speed cadence', () => {
+    const { sim, p, meta } = makeSim('archer', 12);
     spawnDummy(sim, p, 8, 20); // beyond the 8yd dead zone, within 35
     p.autoAttack = true;
     p.swingTimer = 0;
@@ -300,8 +300,8 @@ describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
     expect(events.some((e) => e.type === 'damage' && e.ability === 'Auto Shot')).toBe(true);
   });
 
-  it('a warrior in melee takes the melee branch, arming weapon-speed cadence', () => {
-    const { sim, p, meta } = makeSim('warrior', 12);
+  it('a swordman in melee takes the melee branch, arming weapon-speed cadence', () => {
+    const { sim, p, meta } = makeSim('swordman', 12);
     spawnDummy(sim, p, 5, 2); // within MELEE_RANGE
     p.autoAttack = true;
     p.swingTimer = 0;
@@ -318,7 +318,7 @@ describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
     // guard sits AFTER the ranged branch, so a ranged attacker needs its own
     // swing-timer gate before it or it re-enters and fires on all 20 ticks per
     // second.
-    const { sim, p, meta } = makeSim('hunter', 12);
+    const { sim, p, meta } = makeSim('archer', 12);
     spawnDummy(sim, p, 8, 20);
     p.autoAttack = true;
     p.swingTimer = 0;
@@ -336,7 +336,7 @@ describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
   });
 
   it('the swing timer decrements every tick even while not auto-attacking', () => {
-    const { sim, p, meta } = makeSim('warrior', 12);
+    const { sim, p, meta } = makeSim('swordman', 12);
     p.autoAttack = false;
     p.swingTimer = 1;
     updatePlayerAutoAttack(sim.ctx, p, meta);
@@ -345,12 +345,12 @@ describe('auto_attack updatePlayerAutoAttack: ranged-vs-melee dispatch', () => {
 });
 
 describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', () => {
-  // A hunter has no separate ranged slot, so Auto Shot fires with the equipped
+  // A archer has no separate ranged slot, so Auto Shot fires with the equipped
   // weapon: its cadence follows the weapon's speed (not the class ranged speed),
   // and its damage follows the weapon's damage range (its DPS), on top of the
   // agility-driven ranged attack power.
   it('arms the cadence from the equipped weapon speed, not the class ranged speed', () => {
-    const { sim, p, meta } = makeSim('hunter', 20);
+    const { sim, p, meta } = makeSim('archer', 20);
     spawnDummy(sim, p, 20, 20); // beyond the 8yd dead zone, within 35
     // A deliberately slow bow, distinct from the class ranged speed (2.3).
     p.weapon = { min: 40, max: 60, speed: 4 };
@@ -365,7 +365,7 @@ describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', ()
 
   it('a heavier-hitting weapon yields a bigger Auto Shot than a weak one', () => {
     const shoot = (weaponMin: number, weaponMax: number): number => {
-      const { sim, p, meta } = makeSim('hunter', 20, 3);
+      const { sim, p, meta } = makeSim('archer', 20, 3);
       const mob = spawnDummy(sim, p, 1, 20); // far below level -> floored miss chance
       mob.stats = { ...mob.stats, armor: 0, vit: 0 }; // isolate the weapon-damage signal from armor mitigation
       p.critChance = 0; // no crit variance
@@ -398,7 +398,7 @@ describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', ()
 
 describe('auto_attack start/stopAutoAttack', () => {
   it('startAutoAttack rejects an invalid target and sets the flag for a valid one', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     p.targetId = null;
     const events = capture(sim);
     startAutoAttack(sim.ctx, p.id);
@@ -412,7 +412,7 @@ describe('auto_attack start/stopAutoAttack', () => {
   });
 
   it('silently no-ops on a target that just died (no spurious "Invalid attack target." toast)', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     const mob = spawnDummy(sim, p, 5, 2);
     mob.dead = true; // the engaging spell landed the killing blow this same tick
     p.targetId = mob.id;
@@ -423,7 +423,7 @@ describe('auto_attack start/stopAutoAttack', () => {
   });
 
   it('stopAutoAttack clears the flag', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     p.autoAttack = true;
     stopAutoAttack(sim.ctx, p.id);
     expect(p.autoAttack).toBe(false);
@@ -446,7 +446,7 @@ describe('auto_attack startAutoAttack: ranged engage must not pre-aggro (issue #
   });
 
   it('melee engage still seeds aggro immediately (unchanged behavior)', () => {
-    const { sim, p } = makeSim('warrior', 12);
+    const { sim, p } = makeSim('swordman', 12);
     const mob = spawnDummy(sim, p, 12, 2); // 2yd: melee range, a swing lands at once
     startAutoAttack(sim.ctx, p.id);
     expect(p.autoAttack).toBe(true);
@@ -467,7 +467,7 @@ describe('auto_attack startAutoAttack: ranged engage must not pre-aggro (issue #
 describe('auto_attack determinism', () => {
   it('identical seeds produce an identical swing-damage sequence (seeded replay)', () => {
     const run = (): number[] => {
-      const { sim, p, meta } = makeSim('warrior', 15, 4242);
+      const { sim, p, meta } = makeSim('swordman', 15, 4242);
       const mob = spawnDummy(sim, p, 10, 2);
       p.autoAttack = true;
       const dmg: number[] = [];
@@ -492,7 +492,7 @@ describe('auto_attack determinism', () => {
 
 describe('startAutoAttack while casting (the aggro-before-damage bug)', () => {
   it('a mid-cast Attack press queues the swing but does NOT aggro the untouched target', () => {
-    const { sim, p } = makeSim('priest', 10);
+    const { sim, p } = makeSim('acolyte', 10);
     const mob = spawnDummy(sim, p, 5, 2);
     sim.castAbility('smite', p.id); // timed cast in progress
     expect(p.castingAbility).toBe('smite');
@@ -505,7 +505,7 @@ describe('startAutoAttack while casting (the aggro-before-damage bug)', () => {
   });
 
   it('outside a cast the toggle still pulls the idle target at once (unchanged)', () => {
-    const { sim, p } = makeSim('warrior', 10);
+    const { sim, p } = makeSim('swordman', 10);
     const mob = spawnDummy(sim, p, 5, 2);
     startAutoAttack(sim.ctx, p.id);
     expect(mob.aiState).not.toBe('idle');
@@ -518,8 +518,8 @@ describe('startAutoAttack while casting (the aggro-before-damage bug)', () => {
 // hit exact, so dropping the coefficient, or applying it to wands, changes the
 // number and fails here. Misses (amount 0) and crits (x2) are asserted around it.
 describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () => {
-  it('a hunter shot lands at 0.6 x weapon roll + the AP term', () => {
-    const { sim, p } = makeSim('hunter', 20);
+  it('a archer shot lands at 0.6 x weapon roll + the AP term', () => {
+    const { sim, p } = makeSim('archer', 20);
     const mob = spawnDummy(sim, p, 5, 8);
     // Vitality is zeroed alongside armour: a monster carries a level-scaled
     // Vitality now, and soft DEF is a FLAT subtraction that zero armour does not
@@ -573,19 +573,19 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
   });
 });
 
-// A hunter's Auto Shot strikes with the equipped mainhand, so an on-hit weapon proc
+// A archer's Auto Shot strikes with the equipped mainhand, so an on-hit weapon proc
 // (Thronebane's Chain Arc, trigger 'weaponHit') must fire from a ranged shot too, not
 // just a melee swing. A caster's wand bolt does NOT swing the mainhand, so it never
 // rolls the mainhand's proc.
-describe('rangedSwing fires weaponHit procs (Thronebane on a hunter Auto Shot)', () => {
+describe('rangedSwing fires weaponHit procs (Thronebane on a archer Auto Shot)', () => {
   const chainArcs = (events: SimEvent[]): DamageEvent[] =>
     events.filter(
       (e): e is DamageEvent =>
         isDamageEvent(e) && e.ability === 'Chain Arc' && e.school === 'nature',
     );
 
-  it('a hunter wielding Thronebane procs Chain Arc off Auto Shot', () => {
-    const { sim, p } = makeSim('hunter', 20);
+  it('a archer wielding Thronebane procs Chain Arc off Auto Shot', () => {
+    const { sim, p } = makeSim('archer', 20);
     const mob = spawnDummy(sim, p, 1, 20); // far below level -> floored miss chance
     mob.stats = { ...mob.stats, armor: 0, vit: 0 };
     p.mainhandItemId = 'kingsbane_last_oath'; // Thronebane: 10% weaponHit Chain Arc

@@ -27,8 +27,8 @@ function free(p: Entity): boolean {
 describe('Cascada real threat: a tank lead holds through the Chronomancer heals', () => {
   it('the mob stays on the tank; healing only accrues minor threat on the healer', () => {
     const { sim, p } = chronoMage();
-    const tankId = sim.addPlayer('warrior', 'Tank');
-    const allyId = sim.addPlayer('warrior', 'Ally');
+    const tankId = sim.addPlayer('swordman', 'Tank');
+    const allyId = sim.addPlayer('swordman', 'Ally');
     const tank = sim.entities.get(tankId)!;
     const ally = sim.entities.get(allyId)!;
     tank.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };

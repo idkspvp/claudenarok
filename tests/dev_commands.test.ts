@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import { MAX_LEVEL } from '../src/sim/types';
 
 function devSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true, devCommands: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true, devCommands: true });
 }
 
 function devSpawns(sim: Sim, ownerId = sim.playerId) {
@@ -46,8 +46,8 @@ describe('dev commands', () => {
   });
 
   it('despawns only mobs created by the requesting developer', () => {
-    const sim = new Sim({ seed: 9, playerClass: 'warrior', noPlayer: true, devCommands: true });
-    const alpha = sim.addPlayer('warrior', 'Alpha');
+    const sim = new Sim({ seed: 9, playerClass: 'swordman', noPlayer: true, devCommands: true });
+    const alpha = sim.addPlayer('swordman', 'Alpha');
     const beta = sim.addPlayer('mage', 'Beta');
     sim.chat('/dev spawn forest_wolf 2', alpha);
     sim.chat('/dev spawn wild_boar 1', beta);
@@ -67,8 +67,8 @@ describe('dev commands', () => {
   });
 
   it('clears every player target and owned spawn when its developer leaves', () => {
-    const sim = new Sim({ seed: 15, playerClass: 'warrior', noPlayer: true, devCommands: true });
-    const alpha = sim.addPlayer('warrior', 'Alpha');
+    const sim = new Sim({ seed: 15, playerClass: 'swordman', noPlayer: true, devCommands: true });
+    const alpha = sim.addPlayer('swordman', 'Alpha');
     const beta = sim.addPlayer('mage', 'Beta');
     sim.chat('/dev spawn forest_wolf 2', alpha);
     const [first, second] = devSpawns(sim, alpha);
@@ -155,7 +155,7 @@ describe('dev commands', () => {
   });
 
   it('is inert when dev commands are disabled', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', devCommands: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', devCommands: false });
     const beforeIds = [...sim.entities.keys()];
 
     sim.chat('/dev spawn forest_wolf 4');

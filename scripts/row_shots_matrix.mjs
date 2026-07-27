@@ -12,7 +12,7 @@
 // window-open / level / row-pick / cast gotchas live there). Run with `npm run dev` up.
 //
 // Usage: node scripts/row_shots_matrix.mjs [class1 class2 ...]
-//   With no args it shoots all nine. Pass a subset to shoot a wave (e.g. warrior priest).
+//   With no args it shoots all nine. Pass a subset to shoot a wave (e.g. swordman acolyte).
 import { mkdirSync } from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH } from './browser_path.mjs';
@@ -32,7 +32,7 @@ mkdirSync(BROWSER_PROFILE_DIR, { recursive: true });
 // a mob target and cast at it. `momentFallbacks` are alternate abilities to try if the
 // primary is not on the action bar (kept minimal, row-granted where possible).
 const CLASS_PLAN = {
-  warrior: {
+  swordman: {
     spec: 'arms',
     name: 'Rowwar',
     rows: {
@@ -47,7 +47,7 @@ const CLASS_PLAN = {
     momentIsSelfBuff: true,
     momentFallbacks: ['berserker_rage', 'shield_wall'],
   },
-  priest: {
+  acolyte: {
     spec: 'discipline',
     name: 'Rowpriest',
     rows: {
@@ -107,7 +107,7 @@ const CLASS_PLAN = {
     momentIsSelfBuff: true,
     momentFallbacks: ['ice_block', 'icy_veins', 'arcane_power'],
   },
-  rogue: {
+  thief: {
     spec: 'combat',
     name: 'Rowrog',
     rows: {
@@ -122,7 +122,7 @@ const CLASS_PLAN = {
     momentIsSelfBuff: true,
     momentFallbacks: ['adrenaline_rush', 'evasion', 'sprint'],
   },
-  hunter: {
+  archer: {
     spec: 'marksmanship',
     name: 'Rowhunt',
     rows: {

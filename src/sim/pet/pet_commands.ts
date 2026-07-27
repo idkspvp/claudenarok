@@ -1,6 +1,6 @@
 // Pet commands & lifecycle (P1b), extracted from the Sim monolith.
 //
-// This module owns the player-driven hunter/warlock pet command surface (abandon/
+// This module owns the player-driven archer/warlock pet command surface (abandon/
 // rename/revive/attack/taunt/feed/heal/setPetMode/setPetAutoTaunt) plus the
 // create/destroy/persist plumbing those commands and other systems call: the live
 // pet lookup (petOf), persistence (serializePet/restorePet, including the mid-delve
@@ -457,7 +457,7 @@ export function despawnPet(ctx: SimContext, pet: Entity): void {
 export function abandonPet(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
-  if (r.meta.cls !== 'hunter') {
+  if (r.meta.cls !== 'archer') {
     ctx.error(r.e.id, 'Only hunters can abandon pets.');
     return;
   }
@@ -621,7 +621,7 @@ export function petWaterJet(ctx: SimContext, pid?: number): void {
 export function feedPet(ctx: SimContext, itemId: string, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
-  if (r.meta.cls !== 'hunter') {
+  if (r.meta.cls !== 'archer') {
     ctx.error(r.e.id, 'Only hunters can feed pets.');
     return;
   }
@@ -664,10 +664,6 @@ export function feedPet(ctx: SimContext, itemId: string, pid?: number): void {
 export function healPet(ctx: SimContext, pid?: number): void {
   const r = ctx.resolve(pid);
   if (!r) return;
-  if (r.meta.cls !== 'warlock') {
-    ctx.error(r.e.id, 'Only warlocks can channel demon healing.');
-    return;
-  }
   if (petCommandBlockedByControl(ctx, r.e)) return;
   if (r.e.dead) {
     ctx.error(r.e.id, 'You are dead.');
@@ -682,7 +678,11 @@ export function healPet(ctx: SimContext, pid?: number): void {
     return;
   }
   const pet = petOf(ctx, r.e.id);
-  if (!pet) {
+  // Demon Heal belongs to whoever commands a demon, never to a class id. The
+  // Warlock that used to own it is cut (D1, first jobs), so the gate reads the
+  // pet's own family and the channel simply has no caller until a demon-summoning
+  // job returns.
+  if (!pet || MOBS[pet.templateId]?.family !== 'demon') {
     ctx.error(r.e.id, noPetError(r.e, 'You have no living demon.'));
     return;
   }

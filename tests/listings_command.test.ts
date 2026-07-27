@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function lastError(events: SimEvent[]): string | undefined {
@@ -21,7 +21,7 @@ function metaOf(sim: Sim, pid: number) {
 describe('/listings command', () => {
   it('reports an empty market presence when you have no listings', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/listings', a);
     expect(lastError(sim.tick())).toBe('You have no goods on the World Market.');
@@ -29,7 +29,7 @@ describe('/listings command', () => {
 
   it('lists only your own active listings with price and time left', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const _b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     const aName = metaOf(sim, a).name;
@@ -86,7 +86,7 @@ describe('/listings command', () => {
 
   it('is self-only and never logged or spoken, via the /auctions alias', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const result = sim.chat('/auctions', a);
     expect(result).toBeNull();

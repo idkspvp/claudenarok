@@ -87,10 +87,10 @@ function idleWolfAt(sim: Sim, id: number, dx: number, dz: number): void {
   (sim as unknown as { addEntity: (e: Entity) => void }).addEntity(mob);
 }
 
-// Add a warrior, teleport it onto the given ring, and raise it above the wolves so
+// Add a swordman, teleport it onto the given ring, and raise it above the wolves so
 // isTrivialTo skips it: never detected however far a wolf wanders toward it. Returns pid.
 function addTrivialPlayerAt(sim: Sim, name: string, dx: number, dz: number): number {
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   const e = entityOf(sim, pid);
   e.pos.x = FAR.x + dx;
   e.pos.z = FAR.z + dz;
@@ -153,7 +153,7 @@ interface RunResult {
 // the same rng in both runs, so the observed stream differs only if the annulus band
 // perturbs the mobs, which it must not.
 function runScenario(annulusRadius: number): RunResult {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
 
   const wolfIds: number[] = [];
   for (let i = 0; i < WOLVES; i++) {
@@ -207,7 +207,7 @@ describe('mob idle scan determinism: the FAR camp is clear of world spawns at th
     // The crowd-cost suite guards this precondition at seed 42; this suite pins exact
     // visit literals (15, and the wolf evolution) at its own seed, so it carries its
     // own clearance guard rather than borrowing one proven for a different world.
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     let near = 0;
     for (const e of (sim as unknown as { entities: Map<number, Entity> }).entities.values()) {
       const dx = e.pos.x - FAR.x;

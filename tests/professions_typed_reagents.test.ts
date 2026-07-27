@@ -27,7 +27,7 @@ const TYPED_MATERIALS = [
 ] as const;
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 // Run `fn` with a draw-counting observer installed on the shared rng, returning
@@ -281,9 +281,9 @@ describe('disenchant yield model (professions/enchanting.ts)', () => {
 // inventory hub (unbound counting, the removal skip, and the grantOffer stamp),
 // which a flat-count fake cannot model.
 function makeTradeSim(seed = 42) {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: false, noPlayer: true });
-  const a = sim.addPlayer('warrior', 'Ayla');
-  const b = sim.addPlayer('warrior', 'Borin');
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: false, noPlayer: true });
+  const a = sim.addPlayer('swordman', 'Ayla');
+  const b = sim.addPlayer('swordman', 'Borin');
   const ea = sim.ctx.entities.get(a)!;
   const eb = sim.ctx.entities.get(b)!;
   eb.pos.x = ea.pos.x + 2;

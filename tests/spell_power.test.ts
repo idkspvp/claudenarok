@@ -14,7 +14,7 @@ import { MAX_LEVEL } from '../src/sim/types';
 import { levelWithStats } from './helpers/alloc';
 
 function leveled(cls: PlayerClass, level = MAX_LEVEL) {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
   const pid = sim.addPlayer(cls, 'Tester');
   levelWithStats(sim, level, pid);
   sim.tick();
@@ -56,8 +56,8 @@ describe('Spell Power derivation', () => {
     expect(hi).toBeGreaterThan(lo);
   });
 
-  it('a pure-melee class (rogue) has far less spell power than a caster', () => {
-    expect(leveled('rogue').p.spellPower).toBeLessThan(leveled('mage').p.spellPower / 3);
+  it('a pure-melee class (thief) has far less spell power than a caster', () => {
+    expect(leveled('thief').p.spellPower).toBeLessThan(leveled('mage').p.spellPower / 3);
   });
 });
 
@@ -85,8 +85,8 @@ describe('Spell Power balance band (content cap)', () => {
   });
 
   it('a DoT (Shadow Word: Pain) scales per tick within the band', () => {
-    const { p } = leveled('priest', CONTENT_CAP);
-    const swp = abilitiesKnownAt('priest', CONTENT_CAP).find(
+    const { p } = leveled('acolyte', CONTENT_CAP);
+    const swp = abilitiesKnownAt('acolyte', CONTENT_CAP).find(
       (k) => k.def.id === 'shadow_word_pain',
     )!;
     const dot = swp.effects.find((e) => e.type === 'dot') as {
@@ -101,11 +101,11 @@ describe('Spell Power balance band (content cap)', () => {
     expect(share).toBeLessThan(0.55);
   });
 
-  it('hunter Arcane Shot scales off Ranged AP (not Spell Power) within the band', () => {
-    const { p } = leveled('hunter');
-    const as = abilitiesKnownAt('hunter', MAX_LEVEL).find((k) => k.def.id === 'arcane_shot')!;
+  it('archer Arcane Shot scales off Ranged AP (not Spell Power) within the band', () => {
+    const { p } = leveled('archer');
+    const as = abilitiesKnownAt('archer', MAX_LEVEL).find((k) => k.def.id === 'arcane_shot')!;
     expect(as.def.scalesWith).toBe('ranged');
-    // scaling power is ranged AP, and it dwarfs the hunter's tiny spell power
+    // scaling power is ranged AP, and it dwarfs the archer's tiny spell power
     expect(abilityScalingPower(p, as.def)).toBe(p.rangedPower);
     expect(p.rangedPower).toBeGreaterThan(p.spellPower);
     const dd = as.effects.find((e) => e.type === 'directDamage') as { min: number; max: number };
@@ -116,12 +116,12 @@ describe('Spell Power balance band (content cap)', () => {
     expect(share).toBeLessThan(0.45);
   });
 
-  it('warrior Execute scales off melee Attack Power (not Spell Power) within the band', () => {
-    const { p } = leveled('warrior');
-    const ex = abilitiesKnownAt('warrior', MAX_LEVEL).find((k) => k.def.id === 'execute')!;
+  it('swordman Execute scales off melee Attack Power (not Spell Power) within the band', () => {
+    const { p } = leveled('swordman');
+    const ex = abilitiesKnownAt('swordman', MAX_LEVEL).find((k) => k.def.id === 'execute')!;
     expect(ex.def.school).toBe('physical');
     expect(ex.def.scalesWith).toBeUndefined();
-    // A physical special routes to melee Attack Power, which dwarfs a warrior's SP.
+    // A physical special routes to melee Attack Power, which dwarfs a swordman's SP.
     expect(abilityScalingPower(p, ex.def)).toBe(p.attackPower);
     expect(p.attackPower).toBeGreaterThan(p.spellPower);
     const dd = ex.effects.find((e) => e.type === 'directDamage') as { min: number; max: number };
@@ -134,11 +134,11 @@ describe('Spell Power balance band (content cap)', () => {
   });
 
   it('Maiming Strike folds melee Attack Power into each Gaping Wounds tick', () => {
-    const { sim, pid, p } = leveled('warrior');
+    const { sim, pid, p } = leveled('swordman');
     const dummy = spawnDummy(sim, p);
     p.targetId = dummy.id;
     p.resource = 100;
-    const mortalStrike = abilitiesKnownAt('warrior', MAX_LEVEL, sim.meta(pid)!.mods).find(
+    const mortalStrike = abilitiesKnownAt('swordman', MAX_LEVEL, sim.meta(pid)!.mods).find(
       (k) => k.def.id === 'mortal_strike',
     )!;
     const dot = mortalStrike.effects.find((e) => e.type === 'dot') as {
@@ -160,10 +160,12 @@ describe('Spell Power balance band (content cap)', () => {
 // End-to-end: the snapshotted DoT tick value on the target reflects Spell Power.
 describe('Spell Power end-to-end through the sim', () => {
   it('Shadow Word: Pain applies a per-tick value of base + Spell Power bonus', () => {
-    const { sim, p } = leveled('priest');
+    const { sim, p } = leveled('acolyte');
     const dummy = spawnDummy(sim, p);
     p.targetId = dummy.id;
-    const swp = abilitiesKnownAt('priest', MAX_LEVEL).find((k) => k.def.id === 'shadow_word_pain')!;
+    const swp = abilitiesKnownAt('acolyte', MAX_LEVEL).find(
+      (k) => k.def.id === 'shadow_word_pain',
+    )!;
     const dot = swp.effects.find((e) => e.type === 'dot') as {
       total: number;
       duration: number;

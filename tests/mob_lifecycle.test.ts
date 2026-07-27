@@ -23,7 +23,7 @@ import type { PlayerClass } from '../src/sim/types';
 
 const SEED = 88;
 
-const makeSim = (cls: PlayerClass = 'warrior') => {
+const makeSim = (cls: PlayerClass = 'swordman') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
   sim.setPlayerLevel(12);
   return sim;

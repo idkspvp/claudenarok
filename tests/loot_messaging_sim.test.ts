@@ -8,7 +8,7 @@ const SEED = 20061;
 const PREMIUM = 'greyjaw_hide_boots'; // uncommon: opens a need/greed roll by default
 
 function makeSim() {
-  return new Sim({ seed: SEED, playerClass: 'warrior' });
+  return new Sim({ seed: SEED, playerClass: 'swordman' });
 }
 function teleportTo(sim: Sim, x: number, z: number, pid: number) {
   const p = sim.entities.get(pid)!;
@@ -23,7 +23,7 @@ function teleportTo(sim: Sim, x: number, z: number, pid: number) {
 function partyOfThree(sim: Sim, itemId: string, mobId = 990501) {
   const a = sim.playerId;
   const b = sim.addPlayer('mage', 'Bert');
-  const c = sim.addPlayer('priest', 'Cora');
+  const c = sim.addPlayer('acolyte', 'Cora');
   for (const p of [b, c]) {
     sim.partyInvite(p, a);
     sim.partyAccept(p);
@@ -84,7 +84,7 @@ describe('loot lifecycle broadcasts', () => {
       ).pendingLootRolls.values(),
     ][0];
     // The first candidate leaves and joins a DIFFERENT party while the roll is open.
-    const d = sim.addPlayer('rogue', 'Dane');
+    const d = sim.addPlayer('thief', 'Dane');
     sim.partyLeave(a);
     sim.partyInvite(a, d);
     sim.partyAccept(a);
@@ -121,7 +121,7 @@ describe('loot settings announcements', () => {
     const a = sim.playerId;
     // setPartyLootMaster is a leader-only party op; form a party of two first
     // (a solo player has no party, so the call would otherwise no-op).
-    const c = sim.addPlayer('priest', 'Cora');
+    const c = sim.addPlayer('acolyte', 'Cora');
     sim.partyInvite(c, a);
     sim.partyAccept(c);
     sim.setPartyLootMaster(true, 0, 'rare', a);

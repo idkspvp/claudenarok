@@ -27,7 +27,7 @@ const STANDINGS = {
 
 const LADDERS = {
   '1v1': [
-    { pid: 1, name: 'Me', cls: 'warrior', rating: 1500, wins: 10, losses: 5 },
+    { pid: 1, name: 'Me', cls: 'swordman', rating: 1500, wins: 10, losses: 5 },
     { pid: 2, name: 'Rival', cls: 'mage', rating: 1400, wins: 8, losses: 7 },
   ],
   '2v2': [],
@@ -78,7 +78,7 @@ const party = (members: { pid: number; level?: number; cls?: string }[], leader 
     members: members.map((m) => ({
       pid: m.pid,
       name: `P${m.pid}`,
-      cls: m.cls ?? 'warrior',
+      cls: m.cls ?? 'swordman',
       level: m.level ?? 60,
     })),
   }) as unknown as PartyInfo;
@@ -195,8 +195,8 @@ describe('buildArenaView: ladder + all-time rows', () => {
   it('derives all-time rows from the painter-owned cache, me-flagged by name', () => {
     const allTime: Partial<Record<ArenaFormat, ArenaAllTimeEntry[]>> = {
       '1v1': [
-        { name: 'Me', class: 'warrior', level: 60, rating: 1600, wins: 20, losses: 4 },
-        { name: 'Legend', class: 'rogue', level: 60, rating: 1700, wins: 30, losses: 2 },
+        { name: 'Me', class: 'swordman', level: 60, rating: 1600, wins: 20, losses: 4 },
+        { name: 'Legend', class: 'thief', level: 60, rating: 1700, wins: 30, losses: 2 },
       ],
     };
     const v = live(buildArenaView(input({ allTime })));

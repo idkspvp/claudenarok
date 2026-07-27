@@ -81,7 +81,7 @@ function mailSend(server: AnyServer, session: ClientSession, to: string): void {
 describe('mail_send block enforcement (finding 3)', () => {
   it('refuses to mail an online recipient who has blocked the sender, taking nothing', () => {
     const server = new GameServer();
-    const alice = join(server, 1, 'Alice', 'warrior');
+    const alice = join(server, 1, 'Alice', 'swordman');
     const bob = join(server, 2, 'Bob', 'mage');
     // Bob has ignored Alice (block == ignore); character ids are the join ids.
     bob.session.blockedIds = new Set([1]);
@@ -110,7 +110,7 @@ describe('mail_send block enforcement (finding 3)', () => {
 
   it('refuses to mail an offline recipient who has blocked the sender, taking nothing', async () => {
     const server: AnyServer = new GameServer();
-    const alice = join(server, 1, 'Alice', 'warrior');
+    const alice = join(server, 1, 'Alice', 'swordman');
 
     const sim = server.sim as Sim;
     const aliceMeta = sim.meta(alice.session.pid);

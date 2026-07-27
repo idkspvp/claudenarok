@@ -1,9 +1,11 @@
 // Visual check for the subzone banner: enter offline, walk into two named
 // landmarks and screenshot the banner each time.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -20,7 +22,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.click('#btn-offline');
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Wanderer');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 1500));
 
@@ -29,7 +31,8 @@ async function shot(name, poi) {
   await page.evaluate(({ x, z }) => {
     const g = window.__game;
     const p = g.sim.player;
-    p.pos.x = x; p.pos.z = z;
+    p.pos.x = x;
+    p.pos.z = z;
   }, poi);
   await new Promise((r) => setTimeout(r, 300));
   const txt = await page.evaluate(() => document.querySelector('#subzone-banner').textContent);

@@ -62,7 +62,7 @@ function resolve(sim: TestSim, abilityId: string, pid: number): ResolvedAbility 
 
 describe('effect_dispatch: a single cast fans into every listed effect', () => {
   it('moonfire applies BOTH a direct hit and a dot aura in one runEffects call', () => {
-    const { sim, p, meta } = makeSim('druid', 20);
+    const { sim, p, meta } = makeSim('acolyte', 20);
     const mob = spawnTarget(sim, p);
     const hp0 = mob.hp;
     const res = resolve(sim, 'moonfire', p.id);
@@ -71,12 +71,12 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
 
     // directDamage effect: the mob took a hit.
     expect(mob.hp).toBeLessThan(hp0);
-    // dot effect (same cast): a damage-over-time aura sourced by the druid landed.
+    // dot effect (same cast): a damage-over-time aura sourced by the acolyte landed.
     expect(mob.auras.some((a: Aura) => a.kind === 'dot' && a.sourceId === p.id)).toBe(true);
   });
 
-  it('rogue eviscerate: finisherDamage lands AND the combo-spend reset fires after the loop', () => {
-    const { sim, p, meta } = makeSim('rogue', 20);
+  it('thief eviscerate: finisherDamage lands AND the combo-spend reset fires after the loop', () => {
+    const { sim, p, meta } = makeSim('thief', 20);
     const mob = spawnTarget(sim, p);
     p.comboPoints = 5; // character-bound: no target anchor needed
     const hp0 = mob.hp;
@@ -88,8 +88,8 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     expect(p.comboPoints).toBe(0); // spendsCombo reset, AFTER the effect loop
   });
 
-  it('paladin consecration: the groundAoE case pushes a ground effect and fires the on-cast pulse', () => {
-    const { sim, p, meta } = makeSim('paladin', 20);
+  it('swordman consecration: the groundAoE case pushes a ground effect and fires the on-cast pulse', () => {
+    const { sim, p, meta } = makeSim('swordman', 20);
     const mob = spawnTarget(sim, p, 8, 2); // within the 8yd consecration radius
     const before = sim.ctx.groundAoEs.length;
     mob.aiState = 'chase';
@@ -120,7 +120,7 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
 describe('effect_dispatch: determinism / replay', () => {
   it('same seed + same multi-effect cast => byte-identical outcome and draw count', () => {
     const run = (): { hp: number; auras: number; draws: number } => {
-      const { sim, p, meta } = makeSim('druid', 20);
+      const { sim, p, meta } = makeSim('acolyte', 20);
       const mob = spawnTarget(sim, p);
       const res = resolve(sim, 'moonfire', p.id);
       let draws = 0;

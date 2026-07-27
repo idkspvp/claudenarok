@@ -42,7 +42,7 @@ async function waitState(sel, want, ms = 25000) {
 }
 
 // 1) Class page: the hero portrait autoplays (loads + spins) without a click.
-await page.goto(`${BASE}/wiki/classes/warrior`, { waitUntil: 'networkidle0' });
+await page.goto(`${BASE}/wiki/classes/swordman`, { waitUntil: 'networkidle0' });
 const classReady = await waitState('.guide-class-portrait .guide-viewer', 'ready');
 check('class hero viewer autoplays to ready', classReady);
 check(
@@ -81,7 +81,7 @@ check(
 // 4) Reduced motion: the hero must NOT autoplay; the still poster + "View in 3D" button stay.
 const rmPage = await browser.newPage();
 await rmPage.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
-await rmPage.goto(`${BASE}/wiki/classes/warrior`, { waitUntil: 'networkidle0' });
+await rmPage.goto(`${BASE}/wiki/classes/swordman`, { waitUntil: 'networkidle0' });
 await new Promise((r) => setTimeout(r, 2500)); // give autoplay a chance to (wrongly) fire
 const rm = await rmPage.evaluate(() => {
   const fig = document.querySelector('.guide-class-portrait .guide-viewer');

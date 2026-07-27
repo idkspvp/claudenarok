@@ -18,7 +18,7 @@
  *  larger or smaller than its clamped size). Keyed by weapon model basename (the
  *  `<key>.glb` file, the same key as KAYKIT_WEAPON_ACCESSORY in assets.ts).
  *  Overrides are authored (and inspector-previewed) against the RIGHT hand; on an
- *  off-hand attachment (rogue dual-wield) `rot` composes against the mirrored
+ *  off-hand attachment (thief dual-wield) `rot` composes against the mirrored
  *  (identity) base, so keep offhand-visible rotations small or expect a mirror. */
 export interface WeaponGripOverride {
   scale?: number;
@@ -98,7 +98,7 @@ export const WEAPON_GRIP_OVERRIDES: Record<string, WeaponGripOverride> = {
   },
   // The encore star-cannon reads correctly at the family default grip (muzzle
   // forward off the right hand); the scale-up is the point, a legendary gun
-  // longer than the hunter is tall.
+  // longer than the archer is tall.
   encore_the_second_falling_star: {
     pos: [-0.0268, 0.0704, -0.0141],
     rot: [-140.4492, 5.0614, 104.6019],

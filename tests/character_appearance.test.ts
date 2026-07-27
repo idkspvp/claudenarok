@@ -1,11 +1,14 @@
 import { describe, expect, it } from 'vitest';
-import { ALL_CLASSES } from '../src/sim/types';
 import { SKIN_COUNTS } from '../src/sim/content/skins';
-import { activeCharacterAppearancePreview, characterAppearanceOptions } from '../src/ui/character_appearance';
+import { ALL_CLASSES } from '../src/sim/types';
+import {
+  activeCharacterAppearancePreview,
+  characterAppearanceOptions,
+} from '../src/ui/character_appearance';
 
 describe('character appearance picker', () => {
   it('numbers unlocked mech cosmetics after the class appearances', () => {
-    const options = characterAppearanceOptions('shaman', ['amber_crimson']);
+    const options = characterAppearanceOptions('acolyte', ['amber_crimson']);
 
     expect(options.map((option) => ({ kind: option.kind, label: option.label }))).toEqual([
       { kind: 'class', label: 1 },
@@ -36,11 +39,11 @@ describe('character appearance picker', () => {
   });
 
   it('reopens the character preview on the active cosmetic body catalog', () => {
-    expect(activeCharacterAppearancePreview('shaman', 0, 'mech')).toEqual({
+    expect(activeCharacterAppearancePreview('acolyte', 0, 'mech')).toEqual({
       skin: 0,
       visualKey: 'player_mech',
     });
-    expect(activeCharacterAppearancePreview('paladin', 1, 'class')).toEqual({
+    expect(activeCharacterAppearancePreview('swordman', 1, 'class')).toEqual({
       skin: 1,
       visualKey: 'player_paladin',
     });

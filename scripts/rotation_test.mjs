@@ -27,7 +27,7 @@ function makeBot(
     ents,
     self: {
       id: 1,
-      res: cls === 'warrior' ? 80 : Math.round(mres * manaFrac),
+      res: cls === 'swordman' ? 80 : Math.round(mres * manaFrac),
       mres,
       lv,
       hp: hp * 100,
@@ -61,7 +61,7 @@ function castSeq(cls, lv, manaFrac, ticks, opts = {}) {
   return casts.length ? casts.join(' → ') : '(auto-attack only)';
 }
 
-const DPS = ['warrior', 'hunter', 'mage', 'warlock', 'shaman'];
+const DPS = ['swordman', 'archer', 'mage', 'warlock', 'shaman'];
 console.log('\n=== DPS rotation - top ability cast, FULL mana, by level ===');
 console.log('class'.padEnd(9), ['L4', 'L8', 'L10', 'L14', 'L16'].map((s) => s.padEnd(16)).join(''));
 for (const cls of DPS) {
@@ -70,7 +70,7 @@ for (const cls of DPS) {
 }
 
 console.log('\n=== mana management - same classes at LOW mana (10%) vs full ===');
-for (const cls of ['mage', 'warlock', 'shaman', 'hunter']) {
+for (const cls of ['mage', 'warlock', 'shaman', 'archer']) {
   console.log(
     cls.padEnd(9),
     'full →',

@@ -248,11 +248,11 @@ describe('tick perf capture lifecycle', () => {
     const emitted = new Set<string>();
     const sim = new Sim({
       seed: 42,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       perfLap: (phase) => emitted.add(phase),
     });
-    sim.addPlayer('warrior', 'PerfProbe'); // exercise the per-player lap phases too
+    sim.addPlayer('swordman', 'PerfProbe'); // exercise the per-player lap phases too
     for (let i = 0; i < 5; i++) sim.tick();
 
     expect(emitted.size).toBeGreaterThan(0);
@@ -454,7 +454,7 @@ describe('tick perf capture lifecycle', () => {
     // check) but can never be aggroed, so every committed tick adds exactly one
     // aggro visit while the threat accumulators stay at zero; a swapped fold
     // argument order would move the count across and redden both halves.
-    const pid = sim.addPlayer('warrior', 'LoopScanTarget');
+    const pid = sim.addPlayer('swordman', 'LoopScanTarget');
     const player = (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid)!;
     player.pos.x = 510;
     player.pos.z = 500;

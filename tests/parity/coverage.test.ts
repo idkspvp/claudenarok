@@ -173,7 +173,7 @@ describe('coverage: each scenario fires its subsystem', () => {
     // (re-summoning while the current demon is alive dismisses it and summons anew, it
     // never toggles off into no pet).
     expect(logs.filter((t) => t.includes('answers your summons')).length).toBeGreaterThanOrEqual(4);
-    // despawnPet scrubbed the hunter's targetId (set to the demon, nulled on its hard despawn).
+    // despawnPet scrubbed the archer's targetId (set to the demon, nulled on its hard despawn).
     expect((rec.sim as any).player.targetId).toBeNull();
     // abandon's despawnPersistentPet scrub pulled the biter off the (now-gone) pet.
     const petId = rec.notes.petId as number;
@@ -556,12 +556,12 @@ describe('coverage: each scenario fires its subsystem', () => {
   it('c4a_casting_lifecycle: casts start, a timed cast completes, and interrupts cancel', () => {
     const rec = run('c4a_casting_lifecycle');
     const ev = rec.allEvents as Ev[];
-    // castAbility started the timed casts + the channel (mage fireball, priest heal,
+    // castAbility started the timed casts + the channel (mage fireball, acolyte heal,
     // warlock drain_life).
     expect(ev.some((e) => e.type === 'castStart')).toBe(true);
     // a timed cast ran to completion (the mage fireball -> updateCasting finish branch).
     expect(ev.some((e) => e.type === 'castStop' && e.success === true)).toBe(true);
-    // an interrupt cancelled a cast (priest silence + warlock fishing -> cancelCast).
+    // an interrupt cancelled a cast (acolyte silence + warlock fishing -> cancelCast).
     expect(ev.some((e) => e.type === 'castStop' && e.success === false)).toBe(true);
     // the warlock drain channel ticked and dealt shadow damage (applyChannelTick).
     const wl = rec.notes.warlockId as number;
@@ -633,7 +633,7 @@ describe('coverage: each scenario fires its subsystem', () => {
     const rec = run('c4b_effect_dispatch');
     const ev = rec.allEvents as Ev[];
     const ents = entities(rec);
-    // warrior sunder_armor: the sunder aura landed (or a miss event fired) on its mob.
+    // swordman sunder_armor: the sunder aura landed (or a miss event fired) on its mob.
     const warriorMob = ents.find(
       (e) => e.templateId === 'forest_wolf' && e.auras?.some((a: Ev) => a.kind === 'sunder'),
     );
@@ -655,12 +655,12 @@ describe('coverage: each scenario fires its subsystem', () => {
         .map((e) => e.targetId),
     );
     expect(arcaneTargets.size).toBe(2);
-    // rogue eviscerate: finisher dealt physical damage AND the combo-spend reset fired.
-    const rogue = rec.notes.rogueId as number;
+    // thief eviscerate: finisher dealt physical damage AND the combo-spend reset fired.
+    const thief = rec.notes.rogueId as number;
     expect(
-      ev.some((e) => e.type === 'damage' && e.sourceId === rogue && e.school === 'physical'),
+      ev.some((e) => e.type === 'damage' && e.sourceId === thief && e.school === 'physical'),
     ).toBe(true);
-    expect(ev.some((e) => e.type === 'comboPoint' && e.pid === rogue && e.points === 0)).toBe(true);
+    expect(ev.some((e) => e.type === 'comboPoint' && e.pid === thief && e.points === 0)).toBe(true);
     // paladin judgement: a holy damage from the paladin (the Seal unleashed).
     const paladin = rec.notes.paladinId as number;
     expect(
@@ -703,7 +703,7 @@ describe('coverage: each scenario fires its subsystem', () => {
     const rec = run('c5_auto_attack');
     const ev = rec.allEvents as Ev[];
     // ranged white swings carry their hardcoded labels in the damage-event ability field.
-    expect(ev.some((e) => e.type === 'damage' && e.ability === 'Auto Shot')).toBe(true); // hunter ranged path
+    expect(ev.some((e) => e.type === 'damage' && e.ability === 'Auto Shot')).toBe(true); // archer ranged path
     expect(ev.some((e) => e.type === 'damage' && e.ability === 'Wand')).toBe(true); // mage wand path (no dead zone)
     // melee auto-attack produced physical white-hit outcomes (the single-roll table).
     expect(

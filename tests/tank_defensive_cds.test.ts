@@ -1,7 +1,7 @@
 // Tank defensive cooldowns, one distinct mechanic per class:
 //   - Paladin Sacred Bulwark: a cheat-death that denies a lethal blow and restores 35%.
 //   - Druid Primal Reflexes: a dodge cooldown (buff_dodge), usable while shapeshifted.
-// Also covers the druid parity buff (Dire Bruin now +20% threat / +15% armor).
+// Also covers the acolyte parity buff (Dire Bruin now +20% threat / +15% armor).
 import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
@@ -61,13 +61,13 @@ function advanceArena(sim: Sim, pid: number): ArenaMatch {
 }
 
 function startArenaMode(format: '1v1' | 'fiesta' | 'yumi3') {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
   const classes: PlayerClass[] =
     format === '1v1'
-      ? ['paladin', 'warrior']
+      ? ['swordman', 'swordman']
       : format === 'fiesta'
-        ? ['paladin', 'mage', 'rogue', 'priest']
-        : ['paladin', 'mage', 'rogue', 'priest', 'hunter', 'druid'];
+        ? ['swordman', 'mage', 'thief', 'acolyte']
+        : ['swordman', 'mage', 'thief', 'acolyte', 'archer', 'acolyte'];
   const pids = classes.map((cls, i) => sim.addPlayer(cls, `P${i}`));
   for (const pid of pids) sim.arenaQueueJoin(pid, format);
   sim.tick();
@@ -79,10 +79,10 @@ function startArenaMode(format: '1v1' | 'fiesta' | 'yumi3') {
 }
 
 describe('Tank defensive cooldowns: known by their class at 20', () => {
-  it('paladin knows Sacred Bulwark, druid Primal Reflexes', () => {
+  it('swordman knows Sacred Bulwark, acolyte Primal Reflexes', () => {
     const CD: Record<string, string> = {
-      paladin: 'sacred_bulwark',
-      druid: 'primal_reflexes',
+      swordman: 'sacred_bulwark',
+      acolyte: 'primal_reflexes',
     };
     for (const [cls, id] of Object.entries(CD)) {
       const { sim } = make(cls);
@@ -93,7 +93,7 @@ describe('Tank defensive cooldowns: known by their class at 20', () => {
   it('pins costs, cooldowns, durations, values and off-GCD tuning', () => {
     const expected = [
       {
-        cls: 'paladin',
+        cls: 'swordman',
         id: 'sacred_bulwark',
         cost: 15,
         cooldown: 180,
@@ -101,7 +101,7 @@ describe('Tank defensive cooldowns: known by their class at 20', () => {
         value: 0.35,
       },
       {
-        cls: 'druid',
+        cls: 'acolyte',
         id: 'primal_reflexes',
         cost: 0,
         cooldown: 60,
@@ -127,7 +127,7 @@ describe('Tank defensive cooldowns: known by their class at 20', () => {
 
 describe('Generic shield-wall ward infrastructure', () => {
   it('reduces all-school damage without depending on a specific ability id', () => {
-    const { sim, p } = make('warrior');
+    const { sim, p } = make('swordman');
     p.maxHp = p.hp = 1_000_000;
     p.auras.push({
       id: 'test_generic_wall',
@@ -148,9 +148,9 @@ describe('Generic shield-wall ward infrastructure', () => {
   });
 });
 
-describe('Sacred Bulwark (paladin): divine cheat-death', () => {
+describe('Sacred Bulwark (swordman): divine cheat-death', () => {
   it('denies a lethal blow and restores 35% health, consuming the ward', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     cast(sim, 'sacred_bulwark', pid);
     expect(p.auras.some((a) => a.kind === 'guardian_ward')).toBe(true);
     const mob = spawnMob(sim, p, 3);
@@ -165,7 +165,7 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it('a non-lethal blow leaves the ward intact', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     cast(sim, 'sacred_bulwark', pid);
     const mob = spawnMob(sim, p, 3);
     p.hp = p.maxHp;
@@ -174,7 +174,7 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it('does not trigger on sourceless environmental damage', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     cast(sim, 'sacred_bulwark', pid);
     p.hp = 100;
     (sim as any).dealDamage(null, p, 150, false, 'physical', 'Falling', 'hit');
@@ -183,9 +183,9 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it('does not trigger on friendly sourced damage', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     cast(sim, 'sacred_bulwark', pid);
-    const allyPid = sim.addPlayer('priest', 'Ally');
+    const allyPid = sim.addPlayer('acolyte', 'Ally');
     const ally = sim.entities.get(allyPid)!;
     p.hp = 100;
 
@@ -196,7 +196,7 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it('reads the restore percentage from the ward aura value', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     const mob = spawnMob(sim, p, 3);
     p.auras.push({ ...guardianWard(pid), value: 0.42 });
     p.hp = p.maxHp;
@@ -208,9 +208,9 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it('clamps overkill and still runs normal damage bookkeeping and interruptions', () => {
-    const { sim, p, pid } = make('paladin');
+    const { sim, p, pid } = make('swordman');
     cast(sim, 'sacred_bulwark', pid);
-    const sourcePid = sim.addPlayer('warrior', 'Attacker');
+    const sourcePid = sim.addPlayer('swordman', 'Attacker');
     const source = sim.entities.get(sourcePid)!;
     const sourceMeta = sim.players.get(sourcePid)!;
     const targetMeta = sim.players.get(pid)!;
@@ -302,16 +302,16 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   });
 
   it.each(['duel', '1v1', 'fiesta', 'yumi3'] as const)(
-    'saves the paladin from an enemy lethal hit in %s',
+    'saves the swordman from an enemy lethal hit in %s',
     (mode) => {
       let sim: Sim;
       let victimPid: number;
       let sourcePid: number;
       let match: ArenaMatch | null = null;
       if (mode === 'duel') {
-        sim = new Sim({ seed: 9, playerClass: 'warrior', noPlayer: true });
-        victimPid = sim.addPlayer('paladin', 'Paladin');
-        sourcePid = sim.addPlayer('warrior', 'Warrior');
+        sim = new Sim({ seed: 9, playerClass: 'swordman', noPlayer: true });
+        victimPid = sim.addPlayer('swordman', 'Paladin');
+        sourcePid = sim.addPlayer('swordman', 'Warrior');
         const duel = { a: victimPid, b: sourcePid, state: 'active' as const, timer: 0 };
         sim.ctx.duels.set(victimPid, duel);
         sim.ctx.duels.set(sourcePid, duel);
@@ -338,16 +338,16 @@ describe('Sacred Bulwark (paladin): divine cheat-death', () => {
   );
 });
 
-describe('Primal Reflexes (druid): dodge cooldown', () => {
+describe('Primal Reflexes (acolyte): dodge cooldown', () => {
   it('raises dodge chance and works while shapeshifted', () => {
-    const { sim, p, pid } = make('druid');
+    const { sim, p, pid } = make('acolyte');
     const baseDodge = p.dodgeChance;
     cast(sim, 'primal_reflexes', pid);
     expect(p.auras.some((a) => a.kind === 'buff_dodge')).toBe(true);
     expect(p.dodgeChance).toBeCloseTo(baseDodge + 0.5, 10);
 
     // usable in bear form: shift, then pop it
-    const { sim: sim2, p: p2, pid: pid2 } = make('druid');
+    const { sim: sim2, p: p2, pid: pid2 } = make('acolyte');
     cast(sim2, 'bear_form', pid2);
     expect(p2.auras.some((a) => a.kind === 'form_bear')).toBe(true);
     const bearDodge = p2.dodgeChance;
@@ -357,19 +357,19 @@ describe('Primal Reflexes (druid): dodge cooldown', () => {
   });
 });
 
-describe('Oakhide (druid): armor cooldown usable while shapeshifted', () => {
+describe('Oakhide (acolyte): armor cooldown usable while shapeshifted', () => {
   it('applies its armor buff in Bruin Form and Wolf Form, not just caster form', () => {
-    const { sim, p, pid } = make('druid');
+    const { sim, p, pid } = make('acolyte');
     cast(sim, 'barkskin', pid);
     expect(p.auras.some((a) => a.kind === 'buff_armor' && a.value === 150)).toBe(true);
 
-    const { sim: sim2, p: p2, pid: pid2 } = make('druid');
+    const { sim: sim2, p: p2, pid: pid2 } = make('acolyte');
     cast(sim2, 'bear_form', pid2);
     expect(p2.auras.some((a) => a.kind === 'form_bear')).toBe(true);
     cast(sim2, 'barkskin', pid2);
     expect(p2.auras.some((a) => a.kind === 'buff_armor' && a.value === 150)).toBe(true);
 
-    const { sim: sim3, p: p3, pid: pid3 } = make('druid');
+    const { sim: sim3, p: p3, pid: pid3 } = make('acolyte');
     cast(sim3, 'cat_form', pid3);
     expect(p3.auras.some((a) => a.kind === 'form_cat')).toBe(true);
     cast(sim3, 'barkskin', pid3);

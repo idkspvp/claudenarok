@@ -19,7 +19,7 @@ import type { Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function merchant(sim: Sim): Entity {
@@ -51,7 +51,7 @@ function marketSellerKey(pid: number): string {
 describe('World Market integration: profession items (#1146)', () => {
   it('lists a gathered material fully and sells it: no dupe, no loss', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Gatherer');
+    const seller = sim.addPlayer('swordman', 'Gatherer');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -84,8 +84,8 @@ describe('World Market integration: profession items (#1146)', () => {
 
   it('lists a crafted/vendor gathering tool and buys it: no dupe, no loss', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Toolsmith');
-    const buyer = sim.addPlayer('rogue', 'Buyer');
+    const seller = sim.addPlayer('swordman', 'Toolsmith');
+    const buyer = sim.addPlayer('thief', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
     sim.addItem('copper_mining_pick', 1, seller);
@@ -112,7 +112,7 @@ describe('World Market integration: profession items (#1146)', () => {
 
   it('lists a crafted weapon from the recipe path and reclaims it (escrow round trip)', () => {
     const sim = makeWorld();
-    const crafter = sim.addPlayer('warrior', 'Crafter');
+    const crafter = sim.addPlayer('swordman', 'Crafter');
     standAtMerchant(sim, crafter);
     sim.addItem('eastbrook_arming_sword', 1, crafter);
     sim.events.length = 0;
@@ -133,7 +133,7 @@ describe('World Market integration: profession items (#1146)', () => {
   it('survives a save/load round-trip with a mix of gathered, crafted, and tool items', () => {
     // Profession-item variant of the existing market.test.ts persistence test.
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     const buyer = sim.addPlayer('mage', 'Buyer');
     standAtMerchant(sim, seller);
     standAtMerchant(sim, buyer);
@@ -213,7 +213,7 @@ describe('save-on-leave atomicity for a profession-item listing (#1146)', () => 
       dbMock.connect.mockResolvedValueOnce(client as any);
 
       const sim = makeWorld();
-      const seller = sim.addPlayer('warrior', 'Gatherer');
+      const seller = sim.addPlayer('swordman', 'Gatherer');
       standAtMerchant(sim, seller);
       sim.addItem('bone_fragments', 3, seller);
       sim.marketList('bone_fragments', 3, 150, seller); // escrows the whole stack right before "disconnect"

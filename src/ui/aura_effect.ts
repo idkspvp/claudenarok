@@ -301,7 +301,7 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
         },
       };
     case 'battle_trance':
-      // The warrior free-strike proc: the summary is the covered abilities,
+      // The swordman free-strike proc: the summary is the covered abilities,
       // not a number (their names are baked per locale in the catalog value).
       return { key: `${KEY}.battleTrance` };
     case 'revenge_free':

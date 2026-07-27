@@ -206,7 +206,7 @@ describe('Temporal Reversal: combat resurrection', () => {
 
   it('rewinds a dead party ally back to life; refuses on a living or non-party target', () => {
     const { sim, p } = chronoMage();
-    const allyId = sim.addPlayer('warrior', 'Fallen');
+    const allyId = sim.addPlayer('swordman', 'Fallen');
     const ally = sim.entities.get(allyId)!;
     ally.pos = { x: p.pos.x + 3, y: p.pos.y, z: p.pos.z };
     sim.partyInvite(allyId, p.id);
@@ -246,7 +246,7 @@ describe('Temporal Reversal: combat resurrection', () => {
   it('keeps a declined or expired combat resurrection dead', () => {
     const castOffer = () => {
       const { sim, p } = chronoMage();
-      const allyId = sim.addPlayer('warrior', 'Fallen');
+      const allyId = sim.addPlayer('swordman', 'Fallen');
       const ally = sim.entities.get(allyId)!;
       ally.pos = { x: p.pos.x + 3, y: p.pos.y, z: p.pos.z };
       sim.partyInvite(allyId, p.id);
@@ -272,7 +272,7 @@ describe('Temporal Reversal: combat resurrection', () => {
 
   it('measures a released spirit from its nearby corpse, not the distant graveyard', () => {
     const { sim, p } = chronoMage();
-    const allyId = sim.addPlayer('warrior', 'Released');
+    const allyId = sim.addPlayer('swordman', 'Released');
     const ally = sim.entities.get(allyId)!;
     sim.partyInvite(allyId, p.id);
     sim.partyAccept(allyId);

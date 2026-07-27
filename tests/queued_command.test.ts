@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorEvents(events: SimEvent[]): Extract<SimEvent, { type: 'error' }>[] {
@@ -19,16 +19,16 @@ function queuedReply(sim: Sim, pid: number): string {
 }
 
 describe('/queued command', () => {
-  it('reports nothing queued for a fresh warrior', () => {
+  it('reports nothing queued for a fresh swordman', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(queuedReply(sim, a)).toBe('You have no ability queued for your next swing.');
   });
 
   it('reports the queued ability with its cost and current resource', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.queuedOnSwing = 'heroic_strike';
@@ -42,7 +42,7 @@ describe('/queued command', () => {
 
   it('warns that an unaffordable queued ability will fizzle', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.queuedOnSwing = 'heroic_strike';
@@ -54,7 +54,7 @@ describe('/queued command', () => {
 
   it('is reachable through every alias', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     for (const cmd of ['/queued', '/onswing', '/swingqueue']) {
       sim.chat(cmd, a);

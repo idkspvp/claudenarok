@@ -8,7 +8,7 @@ Build the server bundle once:   npm run build:env
 Then:
 
     from wow_env import WoWClassicEnv
-    env = WoWClassicEnv(player_class="warrior")
+    env = WoWClassicEnv(player_class="swordman")
     obs, info = env.reset(seed=42)
     obs, reward, terminated, truncated, info = env.step(env.action_space.sample())
 
@@ -49,7 +49,7 @@ class WoWClassicEnv(gym.Env):
 
     def __init__(
         self,
-        player_class: str = "warrior",
+        player_class: str = "swordman",
         frame_skip: int = 5,
         max_steps: int = 3000,
         respawn_seconds: float = 15,

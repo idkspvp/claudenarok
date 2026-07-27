@@ -33,7 +33,7 @@ const browser = await puppeteer.launch({
 const stageBout = (nextId) => `(() => {
   const w = window.__game.world;
   w.ctx.nextArenaMatchId = ${nextId};
-  const botPid = w.addPlayer('warrior', 'Sparring Bot');
+  const botPid = w.addPlayer('swordman', 'Sparring Bot');
   w.arenaQueueJoin();
   w.arenaQueueJoin(botPid);
   window.__botPid = botPid;
@@ -116,7 +116,7 @@ await page.setViewport({ width: 1600, height: 900 });
 await suppressGpuNotice(page);
 await forceMaxGfx(page);
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
-if (!(await enterOfflineGame(page, { charClass: 'warrior', charName: 'Gladiator' })))
+if (!(await enterOfflineGame(page, { charClass: 'swordman', charName: 'Gladiator' })))
   throw new Error('offline world did not boot');
 await stageArena(page, 1);
 await page.evaluate(CENTER_CAM);
@@ -137,7 +137,7 @@ await page2.setViewport({ width: 1600, height: 900 });
 await suppressGpuNotice(page2);
 await forceMaxGfx(page2);
 await page2.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
-if (!(await enterOfflineGame(page2, { charClass: 'warrior', charName: 'Gladiator' })))
+if (!(await enterOfflineGame(page2, { charClass: 'swordman', charName: 'Gladiator' })))
   throw new Error('offline world did not boot');
 await stageArena(page2, 2);
 await page2.evaluate(CENTER_CAM);
@@ -157,7 +157,7 @@ try {
   });
   await mobile.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
   await mobile.evaluate(() => document.body.classList.add('mobile-touch'));
-  await enterOfflineGame(mobile, { charClass: 'warrior', charName: 'Gladiator' });
+  await enterOfflineGame(mobile, { charClass: 'swordman', charName: 'Gladiator' });
   await stageArena(mobile, 1);
   await mobile.evaluate(CENTER_CAM);
   await shoot(mobile, 'drowned-overview-mobile');

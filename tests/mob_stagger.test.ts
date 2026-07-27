@@ -18,8 +18,8 @@ describe('mob stagger-on-hit', () => {
   });
 
   it('a landed swing cuts the victim Flee via a negative buff_flee aura', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Staggered');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Staggered');
     sim.setPlayerLevel(15);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };
@@ -28,7 +28,7 @@ describe('mob stagger-on-hit', () => {
     victim.gm = true; // invulnerable for the test; applyAura still fires
 
     const baseFlee = victim.flee;
-    // A same-level rogue's evasion, which the -1.8% shave has to stay under.
+    // A same-level thief's evasion, which the -1.8% shave has to stay under.
     expect(baseFlee).toBeGreaterThan(0.018);
 
     const kobold = createMob((sim as any).nextId++, MOBS.deeprock_kobold, 15, { x: 0, y: 0, z: 0 });
@@ -52,8 +52,8 @@ describe('mob stagger-on-hit', () => {
   });
 
   it('re-applies (refreshes) rather than stacking on repeated hits', () => {
-    const sim = new Sim({ seed: 11, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Hounded');
+    const sim = new Sim({ seed: 11, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Hounded');
     sim.setPlayerLevel(15);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };
@@ -76,8 +76,8 @@ describe('mob stagger-on-hit', () => {
   });
 
   it('the flee floor keeps Flee from going negative', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Floored');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Floored');
     sim.setPlayerLevel(15);
     const victim = sim.entities.get(pid)!;
 
@@ -98,8 +98,8 @@ describe('mob stagger-on-hit', () => {
   });
 
   it('an ordinary mob with no staggerHit field never applies the debuff', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Safe');
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Safe');
     sim.setPlayerLevel(15);
     const victim = sim.entities.get(pid)!;
     victim.pos = { x: 1, y: 0, z: 0 };

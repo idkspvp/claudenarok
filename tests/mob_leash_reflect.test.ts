@@ -15,7 +15,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity, Vec3 } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = () => new Sim({ seed: 42, playerClass: 'shaman', autoEquip: true });
+const makeSim = () => new Sim({ seed: 42, playerClass: 'acolyte', autoEquip: true });
 
 type SimHarness = Sim & {
   cfg: { seed: number };

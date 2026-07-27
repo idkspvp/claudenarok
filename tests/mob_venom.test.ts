@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 const SEED = 31337;
-const makeSim = (cls: 'warrior' | 'mage' = 'warrior') => new Sim({ seed: SEED, playerClass: cls });
+const makeSim = (cls: 'swordman' | 'mage' = 'swordman') =>
+  new Sim({ seed: SEED, playerClass: cls });
 
 // Spawn a venomous spider adjacent to the player and hand it back.
 function spawnSpider(sim: Sim, id = 970001, level = 4) {
@@ -80,7 +81,11 @@ describe('mob venom (on-hit poison DoT)', () => {
     const player = sim.entities.get(sim.playerId)!;
     player.maxHp = 5000;
     player.hp = 5000;
-    const wolf = createMob(970050, MOBS.forest_wolf, 4, { x: player.pos.x, y: player.pos.y, z: player.pos.z });
+    const wolf = createMob(970050, MOBS.forest_wolf, 4, {
+      x: player.pos.x,
+      y: player.pos.y,
+      z: player.pos.z,
+    });
     sim.entities.set(wolf.id, wolf);
     for (let i = 0; i < 40; i++) (sim as any).mobSwing(wolf, player);
     expect(player.auras.some((a) => a.kind === 'dot')).toBe(false);

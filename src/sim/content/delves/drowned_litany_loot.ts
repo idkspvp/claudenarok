@@ -7,15 +7,11 @@ import type { Rng } from '../../rng';
 import type { PlayerClass } from '../../types';
 
 const LOOT_ARCHETYPE: Record<PlayerClass, 'WAR' | 'ROG' | 'MAG'> = {
-  warrior: 'WAR',
-  paladin: 'WAR',
-  shaman: 'WAR',
-  rogue: 'ROG',
-  hunter: 'ROG',
+  swordman: 'WAR',
+  thief: 'ROG',
+  archer: 'ROG',
   mage: 'MAG',
-  priest: 'MAG',
-  warlock: 'MAG',
-  druid: 'MAG',
+  acolyte: 'MAG',
 };
 
 // Per-archetype item pools. Indexed so draws are arch-stable (same draw count

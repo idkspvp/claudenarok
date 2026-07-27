@@ -70,7 +70,7 @@ function drainCast(sim: AnySim, p: AnyEntity, meta: any): number {
 
 describe('casting_lifecycle: timed cast start -> progress -> finish', () => {
   it('starts a timed cast (gcd armed, state set) and resolves the ability on completion', () => {
-    const { sim, p, meta } = makeSim('priest', 12);
+    const { sim, p, meta } = makeSim('acolyte', 12);
     p.hp = Math.max(1, p.maxHp - 500);
     const hp0 = p.hp;
     // Whispered Prayer (friendly, never misses) so finish -> applyAbility -> runEffects is observable.
@@ -108,9 +108,9 @@ describe('casting_lifecycle: timed cast start -> progress -> finish', () => {
   });
 
   it('resolves a completed friendly heal against the target locked at cast start', () => {
-    const { sim, p, meta } = makeSim('priest', 12);
-    const ally = sim.entities.get(sim.addPlayer('warrior', 'Ally')) as AnyEntity;
-    const bystander = sim.entities.get(sim.addPlayer('rogue', 'Bystander')) as AnyEntity;
+    const { sim, p, meta } = makeSim('acolyte', 12);
+    const ally = sim.entities.get(sim.addPlayer('swordman', 'Ally')) as AnyEntity;
+    const bystander = sim.entities.get(sim.addPlayer('thief', 'Bystander')) as AnyEntity;
     placePlayerInOpenField(sim, ally.id, { x: 2 });
     placePlayerInOpenField(sim, bystander.id, { x: 4 });
     ally.hp = Math.max(1, ally.maxHp - 500);
@@ -136,7 +136,7 @@ describe('casting_lifecycle: timed cast start -> progress -> finish', () => {
 
 describe('casting_lifecycle: channel start -> tick -> finish', () => {
   it('starts a channel (channeling, resource spent at START), ticks drain, then finishes', () => {
-    const { sim, p, meta } = makeSim('warlock', 12);
+    const { sim, p, meta } = makeSim('mage', 12);
     const mob = spawnTarget(sim, p);
     p.hp = Math.max(1, p.maxHp - 300);
     const res0 = p.resource;
@@ -155,7 +155,7 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('keeps channel ticks on the target locked at channel start after retargeting', () => {
-    const { sim, p, meta } = makeSim('warlock', 12);
+    const { sim, p, meta } = makeSim('mage', 12);
     const first = spawnTarget(sim, p, 12, 6);
     const firstHp0 = first.hp;
     sim.drainEvents();
@@ -179,7 +179,7 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('keeps a channel ticking when the current target is cleared mid-channel', () => {
-    const { sim, p, meta } = makeSim('warlock', 12);
+    const { sim, p, meta } = makeSim('mage', 12);
     const mob = spawnTarget(sim, p, 12, 6);
     const mobHp0 = mob.hp;
     sim.drainEvents();
@@ -205,7 +205,7 @@ describe('casting_lifecycle: channel start -> tick -> finish', () => {
   });
 
   it('cancels the channel when the locked target dies mid-channel', () => {
-    const { sim, p, meta } = makeSim('warlock', 12);
+    const { sim, p, meta } = makeSim('mage', 12);
     const mob = spawnTarget(sim, p, 12, 6);
     sim.drainEvents();
     castAbility(sim.ctx, 'drain_life', p.id);
@@ -270,7 +270,7 @@ describe('casting_lifecycle: pushbackCast', () => {
   });
 
   it('shaves a channel by CHANNEL_PUSHBACK_FRACTION of its total', () => {
-    const { sim, p } = makeSim('warlock', 12);
+    const { sim, p } = makeSim('mage', 12);
     spawnTarget(sim, p);
     castAbility(sim.ctx, 'drain_life', p.id);
     const rem0 = p.castRemaining;
@@ -318,7 +318,7 @@ describe('casting_lifecycle: spell queue (#1360)', () => {
   });
 
   it('keeps only a single queued slot: a later press overwrites the earlier one', () => {
-    const { sim, p } = makeSim('priest', 12);
+    const { sim, p } = makeSim('acolyte', 12);
     spawnTarget(sim, p); // smite (the second queued press) requires a hostile target
     p.hp = Math.max(1, p.maxHp - 500);
     castAbility(sim.ctx, 'lesser_heal', p.id);
@@ -386,7 +386,7 @@ describe('casting_lifecycle: spell queue (#1360)', () => {
   });
 
   it('holds a queued cast that would complete before the arming GCD clears, and fires it once the GCD does', () => {
-    const { sim, p } = makeSim('priest', 40);
+    const { sim, p } = makeSim('acolyte', 40);
     spawnTarget(sim, p);
     // Owner 2026-07-13: haste now shortens the GCD too (floored at MIN_GCD). At +300%
     // spell haste the cast shrinks to base/4 while the GCD floors at 0.75, so the cast
@@ -508,7 +508,7 @@ describe('casting_lifecycle: force-stop clears drop the queued slot', () => {
 describe('casting_lifecycle: determinism', () => {
   it('same seed + same module-driven sequence -> identical end state', () => {
     const run = () => {
-      const { sim, p, meta } = makeSim('warlock', 12);
+      const { sim, p, meta } = makeSim('mage', 12);
       const mob = spawnTarget(sim, p);
       p.hp = Math.max(1, p.maxHp - 300);
       castAbility(sim.ctx, 'drain_life', p.id);
@@ -523,7 +523,7 @@ describe('casting_lifecycle: determinism', () => {
 
 describe('casting_lifecycle: physical ranged shots resolve on projectile impact (Long Draw)', () => {
   it('deals no damage at cast completion; damage lands when the arrow arrives', () => {
-    const { sim, p, meta } = makeSim('hunter', 20);
+    const { sim, p, meta } = makeSim('archer', 20);
     p.resource = p.maxResource = 500;
     const mob = spawnTarget(sim, p, 20, 20); // 20yd: within 35yd range, beyond the 8yd deadzone
     const events: Array<Record<string, any>> = [];

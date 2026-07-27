@@ -62,7 +62,7 @@ function charRow(overrides: Partial<CharacterRow> = {}): CharacterRow {
     id: 1,
     account_id: 7,
     name: 'Hero',
-    class: 'warrior',
+    class: 'swordman',
     level: 1,
     state: null,
     is_gm: false,
@@ -322,7 +322,7 @@ describe('character list handlers', () => {
     const rowA = charRow({
       id: 1,
       name: 'Aaa',
-      class: 'warrior',
+      class: 'swordman',
       level: 10,
       state: st({
         skin: 3,
@@ -345,7 +345,7 @@ describe('character list handlers', () => {
     });
     setCharactersDbForTests({
       listCharacters: async () => [rowA, rowB],
-      // A sword skin in the account loadout: resolves onto the warrior's held
+      // A sword skin in the account loadout: resolves onto the swordman's held
       // worn_sword and NOT onto the stateless mage (no mainhand, null skin).
       loadAccountCosmetics: async () => ({
         completedQuestIds: [],
@@ -363,7 +363,7 @@ describe('character list handlers', () => {
         {
           id: 1,
           name: 'Aaa',
-          class: 'warrior',
+          class: 'swordman',
           level: 10,
           skin: 3,
           online: true,
@@ -443,7 +443,7 @@ describe('owner sheet handler', () => {
     const row = charRow({
       id: 3,
       name: 'Sheety',
-      class: 'warrior',
+      class: 'swordman',
       level: 20,
       state: st({ skin: 1 }),
     });
@@ -498,7 +498,7 @@ describe('create handler', () => {
     const created = charRow({
       id: 10,
       name: 'Valid',
-      class: 'warrior',
+      class: 'swordman',
       level: 1,
       state: st({ skin: 2 }),
       force_rename: false,
@@ -506,13 +506,13 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped: async () => created });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior', skin: 2 },
+      body: { name: 'Valid', class: 'swordman', skin: 2 },
     });
     expect(res.status).toBe(200);
     expect(res.body).toEqual({
       id: 10,
       name: 'Valid',
-      class: 'warrior',
+      class: 'swordman',
       level: 1,
       skin: 2,
       forceRename: false,
@@ -531,7 +531,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped: async () => charRow({ id: 11 }) });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(200);
     expect(created).toBe(1);
@@ -548,7 +548,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped: async () => null });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(400);
     expect(created).toBe(0);
@@ -559,7 +559,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'A', class: 'warrior' }, // one letter fails the 2-16 shape
+      body: { name: 'A', class: 'swordman' }, // one letter fails the 2-16 shape
     });
     expect(res.status).toBe(400);
     expect(res.body).toEqual({
@@ -574,7 +574,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Hitler', class: 'warrior' }, // in the built-in banlist
+      body: { name: 'Hitler', class: 'swordman' }, // in the built-in banlist
     });
     expect(res.status).toBe(400);
     expect(res.body).toEqual({
@@ -598,7 +598,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped: async () => null });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(400);
     expect(res.body).toEqual({ error: 'character limit reached', code: 'character.limit_reached' });
@@ -613,7 +613,7 @@ describe('create handler', () => {
     });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(409);
     expect(res.body).toEqual({ error: 'that name is taken', code: 'character.name_taken' });
@@ -623,7 +623,7 @@ describe('create handler', () => {
     const created = charRow({
       id: 11,
       name: 'Valid',
-      class: 'warrior',
+      class: 'swordman',
       level: 1,
       state: st({ skin: 0 }),
     });
@@ -635,7 +635,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped, reclaimDeactivatedName });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(200);
     expect(res.body).toMatchObject({ id: 11, name: 'Valid', forceRename: false });
@@ -651,7 +651,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped, reclaimDeactivatedName: async () => true });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(409);
     expect(res.body).toEqual({ error: 'that name is taken', code: 'character.name_taken' });
@@ -666,7 +666,7 @@ describe('create handler', () => {
       },
     });
     const r = await runRoute('POST', '/api/characters', {
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(r.status).toBe(500);
     expect(bodyRecord(r.body).code).toBe('internal.error');
@@ -682,7 +682,7 @@ describe('create handler', () => {
     setCharactersDbForTests({ createCharacterCapped, reclaimDeactivatedName: async () => true });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(res.status).toBe(400);
     expect(res.body).toEqual({ error: 'character limit reached', code: 'character.limit_reached' });
@@ -699,7 +699,7 @@ describe('create handler', () => {
       .mockRejectedValueOnce(new Error('db exploded on retry'));
     authedDb({ createCharacterCapped, reclaimDeactivatedName: async () => true });
     const r = await runRoute('POST', '/api/characters', {
-      body: { name: 'Valid', class: 'warrior' },
+      body: { name: 'Valid', class: 'swordman' },
     });
     expect(r.status).toBe(500);
     expect(bodyRecord(r.body).code).toBe('internal.error');
@@ -720,11 +720,11 @@ describe('create handler', () => {
     });
     const res = await callHandler('POST', '/api/characters', {
       account: { accountId: 7, scope: 'full' },
-      body: { name: 'Clamped', class: 'warrior', skin: input },
+      body: { name: 'Clamped', class: 'swordman', skin: input },
     });
     expect(res.status).toBe(200);
     expect(bodyRecord(res.body).skin).toBe(expected);
-    expect(initialCharacterState).toHaveBeenCalledWith('warrior', 'Clamped', expected);
+    expect(initialCharacterState).toHaveBeenCalledWith('swordman', 'Clamped', expected);
   });
 });
 
@@ -737,7 +737,7 @@ describe('rename handler', () => {
     const renamed = charRow({
       id: 5,
       name: 'Newname',
-      class: 'rogue',
+      class: 'thief',
       level: 8,
       force_rename: false,
     });
@@ -749,7 +749,7 @@ describe('rename handler', () => {
     const character = charRow({
       id: 5,
       name: 'Oldname',
-      class: 'rogue',
+      class: 'thief',
       level: 8,
       force_rename: true,
     });
@@ -762,7 +762,7 @@ describe('rename handler', () => {
     expect(res.body).toEqual({
       id: 5,
       name: 'Newname',
-      class: 'rogue',
+      class: 'thief',
       level: 8,
       forceRename: false,
     });
@@ -776,7 +776,7 @@ describe('rename handler', () => {
     const renamed = charRow({
       id: 5,
       name: 'Newname',
-      class: 'rogue',
+      class: 'thief',
       level: 8,
       force_rename: false,
     });
@@ -788,7 +788,7 @@ describe('rename handler', () => {
     const character = charRow({
       id: 5,
       name: 'Oldname',
-      class: 'rogue',
+      class: 'thief',
       level: 8,
       force_rename: true,
     });
@@ -1234,7 +1234,7 @@ describe('character-mutation limiters (newLimiterCharacterMutations 429)', () =>
     authedDb({
       createCharacterCapped: async () => charRow({ id: 10, name: 'Valid', state: st({ skin: 0 }) }),
     });
-    const opts = { body: { name: 'Valid', class: 'warrior' } };
+    const opts = { body: { name: 'Valid', class: 'swordman' } };
     await drainToLimit('POST', '/api/characters', opts);
     expectLimited(await runRoute('POST', '/api/characters', opts));
   });
@@ -1242,9 +1242,9 @@ describe('character-mutation limiters (newLimiterCharacterMutations 429)', () =>
   it('POST /api/characters/:id/rename limits the 21st attempt', async () => {
     authedDb({
       getCharacter: async () =>
-        charRow({ id: 1, name: 'Oldname', class: 'rogue', level: 8, force_rename: true }),
+        charRow({ id: 1, name: 'Oldname', class: 'thief', level: 8, force_rename: true }),
       renameCharacter: async () =>
-        charRow({ id: 1, name: 'Newname', class: 'rogue', level: 8, force_rename: false }),
+        charRow({ id: 1, name: 'Newname', class: 'thief', level: 8, force_rename: false }),
     });
     installRuntime({ isCharacterOnline: () => false, rekeyMarketSeller: () => false });
     const opts = { params: { id: '1' }, body: { name: 'Newname' } };
@@ -1281,7 +1281,7 @@ describe('character-mutation limiters (newLimiterCharacterMutations 429)', () =>
       deleteCharacter: async () => true,
     });
     installRuntime({ isCharacterOnline: () => false });
-    const createOpts = { body: { name: 'Valid', class: 'warrior' } };
+    const createOpts = { body: { name: 'Valid', class: 'swordman' } };
     await drainToLimit('POST', '/api/characters', createOpts);
     expectLimited(await runRoute('POST', '/api/characters', createOpts));
     // create is fully throttled; delete has an independent bucket, so it still 200s.

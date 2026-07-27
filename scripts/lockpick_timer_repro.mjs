@@ -40,7 +40,7 @@ await sleep(1200);
 const step2 = await page.evaluate(() => {
   const name = document.querySelector('#char-name');
   if (name) name.value = 'Picker';
-  const cls = document.querySelector('#offline-select .mini-class[data-class="warrior"]');
+  const cls = document.querySelector('#offline-select .mini-class[data-class="swordman"]');
   cls?.click();
   const start = document.querySelector('#btn-start-offline');
   start?.click();

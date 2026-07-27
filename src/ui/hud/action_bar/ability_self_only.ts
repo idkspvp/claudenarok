@@ -1,7 +1,7 @@
 // Pure, host-agnostic classifier for whether an ability can ONLY ever be cast on
 // the caster, so the spellbook/action-bar tooltip can show a "Self only" line for
 // beneficial self-centered abilities (Frost Armor, Ice Barrier, Evasion, the
-// warrior stances) that carry no other targeting hint. hud.ts is the thin
+// swordman stances) that carry no other targeting hint. hud.ts is the thin
 // consumer (abilityRequirementLines); this lives on its own so a Vitest can import
 // and pin the truth table directly without pulling in the DOM/Three HUD module.
 //

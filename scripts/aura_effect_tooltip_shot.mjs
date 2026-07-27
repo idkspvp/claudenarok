@@ -33,7 +33,7 @@ await jsClick('#btn-offline');
 await sleep(400);
 await page.waitForSelector('#char-name', { timeout: 30000 });
 await page.type('#char-name', 'Warlord');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await sleep(300);
 await jsClick('#btn-start-offline');
 await page.bringToFront();

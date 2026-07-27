@@ -22,7 +22,7 @@ const browser = await puppeteer.launch({
 const jsClick = (page, sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 
 const SPEC_SIGS = {
-  warrior: [
+  swordman: [
     ['arms', 'mortal_strike'],
     ['fury', 'bloodthirst'],
     ['prot', 'shield_slam'],
@@ -32,7 +32,7 @@ const SPEC_SIGS = {
     ['protection', 'holy_shield'],
     ['retribution', 'crusader_strike'],
   ],
-  hunter: [
+  archer: [
     ['beast_mastery', 'bestial_wrath'],
     ['marksmanship', 'trueshot_aura'],
     ['survival', 'wyvern_sting'],
@@ -42,12 +42,12 @@ const SPEC_SIGS = {
     ['fire', 'combustion'],
     ['frost', 'icy_veins'],
   ],
-  rogue: [
+  thief: [
     ['assassination', 'cold_blood'],
     ['combat', 'blade_flurry'],
     ['subtlety', 'hemorrhage'],
   ],
-  priest: [
+  acolyte: [
     ['discipline', 'power_infusion'],
     ['holy', 'holy_nova'],
     ['shadow', 'shadowform'],
@@ -70,12 +70,12 @@ const SPEC_SIGS = {
 };
 
 const CLASSES = [
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
+  'archer',
   'mage',
-  'rogue',
-  'priest',
+  'thief',
+  'acolyte',
   'shaman',
   'warlock',
   'druid',

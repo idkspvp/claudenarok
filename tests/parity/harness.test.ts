@@ -62,7 +62,7 @@ describe('canonical', () => {
 
 describe('samplePlayerMeta', () => {
   function freshMeta() {
-    const sim = new Sim({ seed: 5, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 5, playerClass: 'swordman', autoEquip: true });
     return sim.players.get(sim.playerId)!;
   }
 
@@ -187,7 +187,7 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
   });
 
   it('every always-present excluded name is a real field (catches silent renames)', () => {
-    const sim = new Sim({ seed: 9, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 9, playerClass: 'swordman', autoEquip: true });
     const entity = sim.player as unknown as Record<string, unknown>;
     const meta = sim.players.get(sim.playerId)! as unknown as Record<string, unknown>;
     // Optional fields that are legitimately absent on a fresh entity/meta.
@@ -250,8 +250,8 @@ describe('draw-order digest in the trace', () => {
   });
 
   it('differs across scenarios with different draw sequences', () => {
-    const warrior = recordTrace(SCENARIOS.find((s) => s.name === 'solo_warrior')!);
+    const swordman = recordTrace(SCENARIOS.find((s) => s.name === 'solo_warrior')!);
     const mage = recordTrace(SCENARIOS.find((s) => s.name === 'solo_mage')!);
-    expect(warrior.drawDigest).not.toBe(mage.drawDigest);
+    expect(swordman.drawDigest).not.toBe(mage.drawDigest);
   });
 });

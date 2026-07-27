@@ -4,7 +4,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 
 const SEED = 42;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
 
 // Spawn Warlord Drogmar next to a beefy player so the fury can ramp over many
 // landed swings without the target ever dropping.

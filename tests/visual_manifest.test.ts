@@ -51,7 +51,7 @@ async function glbAnimationNames(path: string): Promise<Set<string>> {
 describe('character visual manifest', () => {
   it('keeps Bursar Fernando in his likeness atlas (the Eastbrook banker easter egg)', () => {
     // The maintainer-approved easter egg: black shoulder-length hair and light
-    // brown skin ride a repainted rogue palette resolved at skin index 0 (NPCs
+    // brown skin ride a repainted thief palette resolved at skin index 0 (NPCs
     // always resolve skin 0; the mech precedent for a real index-0 texture).
     // The def must stay TINT-FREE: an entity tint would wash the repaint back
     // toward the gold villager look. Do not "clean up" any of the three.
@@ -59,7 +59,7 @@ describe('character visual manifest', () => {
     expect(key).toBe('npc_fernando');
     expect(VISUALS.npc_fernando.tint).toBeUndefined();
     const atlas = SKINS.npc_fernando?.[0];
-    expect(atlas).toBe('textures/skins/rogue/fernando.png');
+    expect(atlas).toBe('textures/skins/thief/fernando.png');
     expect(existsSync(fileURLToPath(new URL(`../public/${atlas}`, import.meta.url)))).toBe(true);
   });
 

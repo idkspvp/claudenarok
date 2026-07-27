@@ -157,7 +157,7 @@ describe('tier capability mapping and progress curve (#1128)', () => {
 });
 
 describe('Sim integration: craftSkills read surface + persistence', () => {
-  const makeSim = () => new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
+  const makeSim = () => new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true });
 
   it('a fresh character has all ten crafts at 0', () => {
     const sim = makeSim();
@@ -192,8 +192,8 @@ describe('Sim integration: craftSkills read surface + persistence', () => {
     const state = sim.serializeCharacter(sim.primaryId);
     if (state === null) throw new Error('expected a serialized character state');
 
-    const reloaded = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-    const pid = reloaded.addPlayer('warrior', 'Reloaded', { state });
+    const reloaded = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+    const pid = reloaded.addPlayer('swordman', 'Reloaded', { state });
     const skills = reloaded.craftSkillsFor(pid);
     expect(skills.enchanting).toBe(25);
     expect(skills.cooking).toBe(4);

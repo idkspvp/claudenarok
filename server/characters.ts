@@ -127,11 +127,11 @@ const CHARACTER_RESOURCE = 'character';
 const CHARACTER_LIMIT = 10;
 /** The nine playable classes accepted by create (mirrors the legacy inline list). */
 const VALID_CLASSES: readonly string[] = [
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'shaman',
   'mage',
   'warlock',

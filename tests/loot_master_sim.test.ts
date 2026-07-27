@@ -9,7 +9,7 @@ const PREMIUM = 'greyjaw_hide_boots'; // uncommon: opens a roll under default st
 const COMMON = 'worn_sword'; // common: never master-looted under a rare threshold
 
 function makeSim() {
-  return new Sim({ seed: SEED, playerClass: 'warrior' });
+  return new Sim({ seed: SEED, playerClass: 'swordman' });
 }
 function teleportTo(sim: Sim, x: number, z: number, pid?: number) {
   const p = sim.entities.get(pid ?? sim.playerId)!;
@@ -95,7 +95,7 @@ describe('master loot', () => {
   it('falls back to need/greed for remaining candidates when the master looter logs out', () => {
     const sim = makeSim();
     const { a, b, mob } = partyOnCorpse(sim, PREMIUM);
-    const c = sim.addPlayer('rogue', 'Cara');
+    const c = sim.addPlayer('thief', 'Cara');
     sim.partyInvite(c, a);
     sim.partyAccept(c);
     teleportTo(sim, 21, 21, c);
@@ -170,7 +170,7 @@ describe('master loot', () => {
   it('rolls only among the checked subset, excluding unchecked candidates', () => {
     const sim = makeSim();
     const { a, b, mob } = partyOnCorpse(sim, PREMIUM);
-    const c = sim.addPlayer('rogue', 'Cara');
+    const c = sim.addPlayer('thief', 'Cara');
     sim.partyInvite(c, a);
     sim.partyAccept(c);
     teleportTo(sim, 21, 21, c); // within loot range of the corpse

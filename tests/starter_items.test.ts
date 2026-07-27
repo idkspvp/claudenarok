@@ -25,19 +25,19 @@ describe('starter rations', () => {
 
   it('rage and energy classes are exactly the waterless ones', () => {
     const waterless = ALL_CLASSES.filter((c) => CLASSES[c].resourceType !== 'mana').sort();
-    expect(waterless).toEqual(['rogue', 'warrior']);
+    expect(waterless).toEqual(['thief', 'swordman']);
   });
 
   it('a saved character keeps its bags as-is (no re-grant on load)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'priest' });
+    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
     // The player ate two loaves and drank all the water before saving.
     sim.removeItem('baked_bread', 2);
     sim.removeItem('spring_water', 5);
     const state = sim.serializeCharacter(sim.primaryId);
     expect(state).not.toBeNull();
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'priest', noPlayer: true });
-    const pid = sim2.addPlayer('priest', 'Reloaded', { state: state! });
+    const sim2 = new Sim({ seed: 42, playerClass: 'acolyte', noPlayer: true });
+    const pid = sim2.addPlayer('acolyte', 'Reloaded', { state: state! });
     const meta = sim2.players.get(pid)!;
     const loaded = (id: string) =>
       meta.inventory.filter((s) => s.itemId === id).reduce((t, s) => t + s.count, 0);

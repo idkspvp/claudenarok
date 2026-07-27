@@ -30,7 +30,7 @@ describe('steadyAngleTo', () => {
 
 describe('mob facing vs a target standing on top of it', () => {
   it('does not strobe when the target dithers millimetrically on the mob', () => {
-    const sim = new Sim({ seed: 999, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 999, playerClass: 'swordman' });
     const p = sim.player;
     let mob: ReturnType<typeof sim.entities.get> | undefined;
     for (const e of sim.entities.values()) {

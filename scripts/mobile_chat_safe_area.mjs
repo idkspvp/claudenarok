@@ -36,7 +36,7 @@ async function enterGame(page) {
       }
       return false;
     }, sel);
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Tester', settleMs: 2000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Tester', settleMs: 2000 });
   await clickIf('#mobile-preflight-continue');
   await sleep(1000);
   // Force the touch UI + open the chat overlay (headless can't report coarse pointer).

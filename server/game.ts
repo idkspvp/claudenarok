@@ -1436,7 +1436,7 @@ export class GameServer {
   constructor() {
     this.sim = new Sim({
       seed: WORLD_SEED,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       devCommands: process.env.ALLOW_DEV_COMMANDS === '1',
       // Thunzharr is up as soon as the realm boots; subsequent rises keep the
@@ -4483,7 +4483,7 @@ export class GameServer {
       case 'clearMarker':
         if (typeof msg.id === 'number') sim.clearMarker(msg.id, pid);
         break;
-      // hunter pets
+      // archer pets
       case 'pet_abandon':
         sim.abandonPet(pid);
         break;

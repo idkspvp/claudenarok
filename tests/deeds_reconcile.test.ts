@@ -167,7 +167,7 @@ describe('reconcile through GameServer.join', () => {
       deeds: { prog_veteran: '2026-01-01', prog_first_steps: '2026-01-02' },
     };
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'warrior', state as never);
+    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'swordman', state as never);
     if ('error' in session) throw new Error(session.error);
     await settle();
 
@@ -214,7 +214,7 @@ describe('reconcile through GameServer.join', () => {
       masteryResetApplied: true,
     };
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Crafter', 'warrior', state as never);
+    const session = server.join(fc.ws as never, 7, 42, 'Crafter', 'swordman', state as never);
     if ('error' in session) throw new Error(session.error);
     await settle();
 
@@ -253,7 +253,7 @@ describe('reconcile through GameServer.join', () => {
     });
     const setPlayerGuild = vi.spyOn(server.sim, 'setPlayerGuild');
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Guilded', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Guilded', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     await vi.waitFor(() => expect(setPlayerGuild).toHaveBeenCalled());
     expect(setPlayerGuild).toHaveBeenCalledWith(session.pid, 'The Vanguard', { retroDeeds: true });
@@ -262,7 +262,7 @@ describe('reconcile through GameServer.join', () => {
     setPlayerGuild.mockClear();
     session.linkdead = true;
     const fc2 = fakeWs();
-    const resumed = server.join(fc2.ws as never, 7, 42, 'Guilded', 'warrior', null);
+    const resumed = server.join(fc2.ws as never, 7, 42, 'Guilded', 'swordman', null);
     if ('error' in resumed) throw new Error(resumed.error);
     expect(resumed).toBe(session); // planJoin resumed the held session
     await vi.waitFor(() => expect(setPlayerGuild).toHaveBeenCalled());
@@ -274,7 +274,7 @@ describe('reconcile through GameServer.join', () => {
 
   it('a fresh character with no earned deeds issues no reconcile batch', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     await settle();
     expect(insertDeedsMock).not.toHaveBeenCalled();
@@ -312,7 +312,7 @@ describe('reconcile through GameServer.join', () => {
       deeds: { prog_veteran: '2026-01-01' },
     };
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'warrior', state as never);
+    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'swordman', state as never);
     if ('error' in session) throw new Error(session.error);
     // The batch insert is held: Steam must wait behind it on the FIFO tail.
     await new Promise((resolve) => setImmediate(resolve));

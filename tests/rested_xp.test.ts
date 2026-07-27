@@ -18,7 +18,7 @@ import { xpBarView } from '../src/ui/xp_bar';
 const TEST_LEVEL = 30;
 
 function makeSim(): Sim {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
   sim.setPlayerLevel(TEST_LEVEL);
   return sim;
 }
@@ -165,8 +165,8 @@ describe('rested XP, persistence', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.restedXp).toBe(4242);
 
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior' });
-    const pid = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman' });
+    const pid = sim2.addPlayer('swordman', 'Reloaded', { state });
     expect(sim2.meta(pid)!.restedXp).toBe(4242);
   });
 });

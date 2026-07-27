@@ -81,7 +81,7 @@ function join(
   accountId: number,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws as never, accountId, characterId, name, cls, null);
   if ('error' in session) throw new Error(`join failed: ${session.error}`);

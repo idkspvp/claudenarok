@@ -29,7 +29,7 @@ await page.waitForSelector('#btn-offline', { timeout: 30000 });
 await jsClick('#btn-offline');
 await sleep(400);
 await page.type('#char-name', 'Mixer');
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await jsClick('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 40000 });
 await sleep(1500);

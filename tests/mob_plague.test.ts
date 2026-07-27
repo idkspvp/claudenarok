@@ -8,7 +8,7 @@ const SEED = 5150;
 // A drain affix needs attributes to drain. A fresh character carries 1 in
 // each of the six with every point unspent, so the suite spends them itself.
 const makeSim = () => {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
   levelWithStats(sim, 20);
   return sim;
 };

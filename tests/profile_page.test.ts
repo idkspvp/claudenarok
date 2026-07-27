@@ -25,7 +25,7 @@ function charRow(state: Record<string, unknown>) {
     id: 42,
     account_id: 7,
     name: 'Hilda',
-    class: 'warrior',
+    class: 'swordman',
     level: 12,
     realm: 'Claudemoon',
     state,

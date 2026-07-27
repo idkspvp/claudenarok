@@ -145,7 +145,7 @@ describe('Aether Surge feeds Temporal Echo (no hidden heal bonus)', () => {
   it('the marked ally is healed for the Echo fraction of the Aether Surge damage', () => {
     const { sim, p } = chronoMage();
     const mob = addHostile(sim);
-    const allyId = sim.addPlayer('warrior', 'Marcado');
+    const allyId = sim.addPlayer('swordman', 'Marcado');
     const ally = sim.entities.get(allyId)!;
     ally.pos.x = p.pos.x + 4;
     ally.pos.z = p.pos.z;
@@ -273,7 +273,7 @@ describe('Aether Surge free-cast proc', () => {
 
   it('the free proc only covers Aether Surge, not other casts', () => {
     const { sim, p } = chronoMage();
-    const allyId = sim.addPlayer('warrior', 'Aliado');
+    const allyId = sim.addPlayer('swordman', 'Aliado');
     const ally = sim.entities.get(allyId)!;
     ally.pos.x = p.pos.x + 4;
     ally.pos.z = p.pos.z;

@@ -1,6 +1,6 @@
 // Tiny history-based router for the Guide SPA. No dependencies: intercepts in-app
 // link clicks, drives history.pushState, and notifies on every navigation (click,
-// back/forward, initial load). Clean URLs (/guide/classes/warrior) work because both
+// back/forward, initial load). Clean URLs (/guide/classes/swordman) work because both
 // vite.config.ts and server/main.ts fall back to guide.html for /guide* paths.
 
 import { GUIDE_BASE } from './routes';

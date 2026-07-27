@@ -43,7 +43,7 @@ export function quatFromEulerXYZ(
 // Long hafts (staves, polearms, 2H) ride the diagonal across the back; short
 // blades tuck vertically behind the shoulder. The rig's chest +Z faces forward,
 // +Y runs up the spine, so "on the back" is negative Z. Mainhand (right) props
-// lean one way; a left-hand prop (rogue offhand dagger, the warlock spellbook)
+// lean one way; a left-hand prop (thief offhand dagger, the warlock spellbook)
 // mirrors across X so dual-wield reads as crossed blades.
 const DEFAULT_BACK: BackGripSpec = {
   position: [0.16, 0.14, -0.27],

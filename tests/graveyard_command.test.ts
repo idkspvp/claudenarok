@@ -1,16 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
 import { zoneAt } from '../src/sim/data';
+import { Sim } from '../src/sim/sim';
+import type { SimEvent } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
   const e = sim.entities.get(pid)!;
-  e.pos.x = x; e.pos.z = z;
+  e.pos.x = x;
+  e.pos.z = z;
   e.pos.y = groundHeight(x, z, sim.cfg.seed);
   e.prevPos = { ...e.pos };
 }
@@ -26,7 +27,7 @@ function lastError(events: SimEvent[]): string | undefined {
 describe('/graveyard command', () => {
   it('names the current zone graveyard your spirit returns to', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     teleport(sim, a, 0, 0); // overworld, first zone
     const zone = zoneAt(0);
@@ -39,7 +40,7 @@ describe('/graveyard command', () => {
 
   it('tracks the zone you stand in', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     teleport(sim, a, 0, 600); // deeper zone (Thornpeak range, zMin 540)
     const zone = zoneAt(600);
@@ -52,7 +53,7 @@ describe('/graveyard command', () => {
 
   it('is self-only and never logged or spoken', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const result = sim.chat('/spirithealer', a);
     expect(result).toBeNull();

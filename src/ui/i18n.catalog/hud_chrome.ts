@@ -611,7 +611,7 @@ export const hudChromeStrings = {
       'Rows appear automatically once your party deals damage or healing, and this segment closes a few seconds after combat ends.',
   },
   // Pet action bar disabled-state tooltips: the feed/heal-pet button stays
-  // visible (never hidden) while it cannot currently be used, so a hunter
+  // visible (never hidden) while it cannot currently be used, so a archer
   // sees WHY instead of a button that looks broken.
   petFeed: {
     disabledFullHp: 'Pet is at full health',

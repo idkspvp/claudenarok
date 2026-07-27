@@ -145,11 +145,11 @@ class Bot {
 
 async function main() {
   const bots = [
-    new Bot('Tankrik', 'warrior'),
+    new Bot('Tankrik', 'swordman'),
     new Bot('Lumen', 'paladin'),
-    new Bot('Vessa', 'priest'),
+    new Bot('Vessa', 'acolyte'),
     new Bot('Pyrra', 'mage'),
-    new Bot('Fletch', 'hunter'),
+    new Bot('Fletch', 'archer'),
   ];
   console.log('joining 5 bots...');
   for (const b of bots) await b.join();
@@ -159,7 +159,7 @@ async function main() {
   );
 
   // party up: tank invites everyone
-  const [tank, pala, priest, mage, hunter] = bots;
+  const [tank, pala, acolyte, mage, archer] = bots;
   for (const b of bots.slice(1)) {
     tank.cmd({ cmd: 'pinvite', id: b.pid });
     await sleep(250);
@@ -205,9 +205,9 @@ async function main() {
 
   // buff up + stock water for the casters
   pala.cmd({ cmd: 'cast', ability: 'seal_of_righteousness' });
-  priest.cmd({ cmd: 'cast', ability: 'power_word_fortitude' });
-  hunter.cmd({ cmd: 'cast', ability: 'aspect_of_the_hawk' });
-  for (const b of [pala, priest, mage, hunter])
+  acolyte.cmd({ cmd: 'cast', ability: 'power_word_fortitude' });
+  archer.cmd({ cmd: 'cast', ability: 'aspect_of_the_hawk' });
+  for (const b of [pala, acolyte, mage, archer])
     b.cmd({ cmd: 'dev_give', item: 'spring_water', count: 20 });
   await sleep(400);
 
@@ -219,7 +219,7 @@ async function main() {
   let wipes = 0;
   let lastTelemetry = 0;
 
-  const healers = new Set([priest.pid, pala.pid]);
+  const healers = new Set([acolyte.pid, pala.pid]);
 
   while (Date.now() - start < 480_000 && !bossDead) {
     // telemetry every 20s
@@ -272,12 +272,12 @@ async function main() {
           .sort((x, y) => x.hp / x.mhp - y.hp / y.mhp)[0];
         if (hurt && (b.self.gcd ?? 0) <= 0 && !b.self.cast) {
           b.cmd({ cmd: 'target', id: hurt.pid });
-          b.cmd({ cmd: 'cast', ability: b.cls === 'priest' ? 'lesser_heal' : 'holy_light' });
+          b.cmd({ cmd: 'cast', ability: b.cls === 'acolyte' ? 'lesser_heal' : 'holy_light' });
           continue;
         }
-        // priest shields the tank between heals
+        // acolyte shields the tank between heals
         if (
-          b.cls === 'priest' &&
+          b.cls === 'acolyte' &&
           (b.self.gcd ?? 0) <= 0 &&
           !b.self.cast &&
           tank.self &&
@@ -308,7 +308,7 @@ async function main() {
         if (MOBS_ELITE.has(target.tid)) sawElite = true;
         const d = b.dist(target);
         const facing = b.faceTo(target);
-        const meleeRange = b.cls === 'warrior' || b.cls === 'paladin' ? 4 : 26;
+        const meleeRange = b.cls === 'swordman' || b.cls === 'paladin' ? 4 : 26;
         if (d > meleeRange) {
           b.input({ f: 1 }, facing);
         } else {
@@ -316,13 +316,13 @@ async function main() {
           if (b.self.target !== target.id) b.cmd({ cmd: 'target', id: target.id });
           b.cmd({ cmd: 'attack' });
           if ((b.self.gcd ?? 0) <= 0 && !b.self.cast) {
-            if (b.cls === 'warrior' && (b.self.res ?? 0) >= 15)
+            if (b.cls === 'swordman' && (b.self.res ?? 0) >= 15)
               b.cmd({ cmd: 'cast', ability: 'heroic_strike' });
             if (b.cls === 'paladin' && (b.self.res ?? 0) >= 30)
               b.cmd({ cmd: 'cast', ability: 'judgement' });
             if (b.cls === 'mage' && (b.self.res ?? 0) >= 30)
               b.cmd({ cmd: 'cast', ability: 'fireball' });
-            if (b.cls === 'hunter' && (b.self.res ?? 0) >= 25)
+            if (b.cls === 'archer' && (b.self.res ?? 0) >= 25)
               b.cmd({ cmd: 'cast', ability: 'arcane_shot' });
           }
         }

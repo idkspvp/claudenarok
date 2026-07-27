@@ -68,9 +68,9 @@ for (const profile of PROFILES) {
   await page.goto(BASE, { waitUntil: 'networkidle0', timeout: 60000 });
   // Skip the first-spawn intro cinematic (it inline-hides #ui while it runs).
   await page.evaluate((name) => {
-    localStorage.setItem(`woc_spawn_intro_seen:offline:warrior:${name}`, '1');
+    localStorage.setItem(`woc_spawn_intro_seen:offline:swordman:${name}`, '1');
   }, CHAR_NAME);
-  await enterOfflineGame(page, { charClass: 'warrior', charName: CHAR_NAME, settleMs: 3000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: CHAR_NAME, settleMs: 3000 });
 
   // Arrange: god-mode, depositable material stacks, coin for the buy row, then
   // teleport to Bursar Fernando (zone1 {x:13, z:8}).

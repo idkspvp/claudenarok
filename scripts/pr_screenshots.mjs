@@ -167,7 +167,7 @@ async function shootSpecific(targets) {
           await suppressGpuNotice(page);
           await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
           await enterOfflineGame(page, {
-            charClass: 'warrior',
+            charClass: 'swordman',
             charName: 'Thorgar',
             settleMs: 3000,
           });
@@ -198,7 +198,7 @@ async function shootGenericHud(frames) {
     watch(page, 'desktop');
     await suppressGpuNotice(page);
     await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
-    await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar', settleMs: 3000 });
+    await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar', settleMs: 3000 });
     await shoot(page, `${next()}-hud-desktop`);
     await page.close();
   }

@@ -12,7 +12,7 @@ const OUT = 'docs/screenshots/signatures';
 fs.mkdirSync(OUT, { recursive: true });
 
 const SPECS = {
-  warrior: [
+  swordman: [
     ['arms', 'mortal_strike'],
     ['fury', 'bloodthirst'],
     ['prot', 'shield_slam'],
@@ -22,17 +22,17 @@ const SPECS = {
     ['protection', 'holy_shield'],
     ['retribution', 'crusader_strike'],
   ],
-  hunter: [
+  archer: [
     ['beast_mastery', 'bestial_wrath'],
     ['marksmanship', 'trueshot_aura'],
     ['survival', 'wyvern_sting'],
   ],
-  rogue: [
+  thief: [
     ['assassination', 'cold_blood'],
     ['combat', 'blade_flurry'],
     ['subtlety', 'hemorrhage'],
   ],
-  priest: [
+  acolyte: [
     ['discipline', 'power_infusion'],
     ['holy', 'holy_nova'],
     ['shadow', 'shadowform'],

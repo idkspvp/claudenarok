@@ -96,7 +96,7 @@ class Bot {
 }
 
 async function main() {
-  const a = new Bot('Trader', 'warrior');
+  const a = new Bot('Trader', 'swordman');
   const b = new Bot('Buyer', 'mage');
   await a.join();
   await b.join();

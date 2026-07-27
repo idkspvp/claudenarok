@@ -222,7 +222,7 @@ function openDrownedReliquary(
   const members = run.partyKey ? ctx.partyMembersForKey(run.partyKey) : [openerId];
   const partyLoot: Record<number, { itemId: string; count: number }[]> = {};
   for (const pid of members) {
-    const cls = ctx.players.get(pid)?.cls ?? 'warrior';
+    const cls = ctx.players.get(pid)?.cls ?? 'swordman';
     partyLoot[pid] = drownedLitanyChestItemsForTier(tier, cls, ctx.rng, isCoffer);
   }
   if (state) {

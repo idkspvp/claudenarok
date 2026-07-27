@@ -149,7 +149,7 @@ const results = [];
 
 // Scene 5: Shadowform visual (Vesper Form: gloom tint + shadow wisp aura).
 {
-  const page = await enterGame('priest', 'Gloamys');
+  const page = await enterGame('acolyte', 'Gloamys');
   const cast = await page.evaluate(() => {
     const sim = window.__game.sim;
     sim.setSpec('shadow');

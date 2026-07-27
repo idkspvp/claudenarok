@@ -206,9 +206,9 @@ describe('interest_candidates', () => {
     // Freshness guarantee via the REAL sim: an entity knocked across a cell
     // boundary is re-bucketed by sim.grid.refresh (end of tick), so the shared
     // query run from the anchor's cell center at broadcast time still covers it.
-    const sim = new Sim({ seed: 5150, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 5150, playerClass: 'swordman' });
     const displaced = sim.entities.get(sim.playerId)!; // the entity that moves
-    displaced.gm = true; // an L1 warrior would otherwise be irrelevant; keeps it alive
+    displaced.gm = true; // an L1 swordman would otherwise be irrelevant; keeps it alive
     // Flat Eastbrook ground near origin, right beside the x=0 cell boundary.
     displaced.pos.x = 0.5;
     displaced.pos.y = 0;

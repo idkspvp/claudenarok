@@ -347,7 +347,7 @@ function lockpickSucceed(ctx: SimContext, run: DelveRun, session: LockSession): 
   session.state = 'SUCCESS';
   const state = run.objectState[session.chestId];
   const obj = ctx.entities.get(session.chestId);
-  const ownerCls = ctx.players.get(session.ownerId)?.cls ?? 'warrior';
+  const ownerCls = ctx.players.get(session.ownerId)?.cls ?? 'swordman';
   // A solved Bountiful Coffer guarantees the signature rare (see §7.6).
   const isCoffer = run.bountiful && session.chestId === run.rewardChestId;
   const items = delveChestItemsForTier(session.lootTier, ownerCls, ctx.rng, isCoffer);

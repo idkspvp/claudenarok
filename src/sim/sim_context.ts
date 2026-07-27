@@ -698,7 +698,7 @@ export interface SimContextCallbacks {
   // physical-swing entry (also a C4a weaponStrike path); `effectiveAttackPower` is the
   // attack-power stat read the damage formulas use (`effectiveArmor` is the M3 decl
   // above, shared, not re-declared here); `hasLineOfSight` gates the AoE cases;
-  // `findChargePath` builds the warrior/druid charge route.
+  // `findChargePath` builds the swordman/druid charge route.
   // `runEffects` itself is the C4b boundary: it flips points-at to effect_dispatch
   // (the moved switch), reached only via the cast lifecycle's applyAbility/applyChannelTick.
   awardCombo(p: Entity, target: Entity, points: number): void;

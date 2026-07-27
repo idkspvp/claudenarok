@@ -108,7 +108,7 @@ function mapWorld(): IWorld {
     },
     entities: new Map(),
     socialInfo: null,
-    cfg: { seed: 42, playerClass: 'warrior' },
+    cfg: { seed: 42, playerClass: 'swordman' },
     questState: () => 'unavailable',
     questLog: new Map(),
   } as unknown as IWorld;

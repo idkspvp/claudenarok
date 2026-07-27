@@ -89,8 +89,8 @@ describe('mob enfeebling curse (Maddening Whisper)', () => {
     expect(player.auras.filter((a) => a.kind === 'buff_int' && a.value < 0).length).toBe(1);
   });
 
-  it('never curses a non-mana victim (warrior uses rage)', () => {
-    const sim = makeSim('warrior');
+  it('never curses a non-mana victim (swordman uses rage)', () => {
+    const sim = makeSim('swordman');
     const player = sim.player;
     expect(player.resourceType).not.toBe('mana');
     const mob = spawnZealot(sim);

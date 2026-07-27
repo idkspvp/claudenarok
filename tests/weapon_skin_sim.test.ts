@@ -4,9 +4,9 @@ import { Sim } from '../src/sim/sim';
 // Season 1 Armory weapon-skin behavior inside the deterministic sim: the same
 // code resolves the active skin on every host, so these cover the offline path
 // and the exact rules the server relies on (type match, loadout dormancy on a
-// weapon-type swap, hunter's fixed ranged visual, and loadout seeding).
+// weapon-type swap, archer's fixed ranged visual, and loadout seeding).
 
-function newSim(cls: 'warrior' | 'hunter' | 'rogue') {
+function newSim(cls: 'swordman' | 'archer' | 'thief') {
   const sim = new Sim({ seed: 5, playerClass: cls, playerName: 'Armory' });
   const pid = sim.primaryId;
   const e = sim.entities.get(pid);
@@ -16,7 +16,7 @@ function newSim(cls: 'warrior' | 'hunter' | 'rogue') {
 
 describe('weapon skin sim behavior', () => {
   it('applies a matching-type skin to the equipped weapon and mirrors it on the entity', () => {
-    const { sim, pid, e } = newSim('warrior');
+    const { sim, pid, e } = newSim('swordman');
     expect(e.mainhandItemId).toBe('worn_sword');
     expect(sim.setWeaponSkin(pid, 'ice_fang_sword')).toBe(true);
     expect(e.weaponSkinId).toBe('ice_fang_sword');
@@ -24,14 +24,14 @@ describe('weapon skin sim behavior', () => {
   });
 
   it('rejects a skin whose type does not match the equipped weapon', () => {
-    const { sim, pid, e } = newSim('warrior');
+    const { sim, pid, e } = newSim('swordman');
     expect(sim.setWeaponSkin(pid, 'glaciersplit_axe')).toBe(false);
     expect(e.weaponSkinId).toBeNull();
     expect(sim.setWeaponSkin(pid, 'not_a_real_skin')).toBe(false);
   });
 
   it('parks the skin when a different weapon type is equipped and restores it on re-equip', () => {
-    const { sim, pid, e } = newSim('warrior');
+    const { sim, pid, e } = newSim('swordman');
     sim.setWeaponSkin(pid, 'cinderbrand_sword');
     expect(e.weaponSkinId).toBe('cinderbrand_sword');
     sim.addItem('training_mace', 1, pid);
@@ -44,7 +44,7 @@ describe('weapon skin sim behavior', () => {
   });
 
   it('supports one applied skin per weapon type at once', () => {
-    const { sim, pid, e } = newSim('warrior');
+    const { sim, pid, e } = newSim('swordman');
     sim.setWeaponSkin(pid, 'cinderbrand_sword');
     sim.addItem('training_mace', 1, pid);
     sim.equipItem('training_mace', pid);
@@ -56,7 +56,7 @@ describe('weapon skin sim behavior', () => {
   });
 
   it('detaches by weapon type and re-resolves', () => {
-    const { sim, pid, e } = newSim('warrior');
+    const { sim, pid, e } = newSim('swordman');
     sim.setWeaponSkin(pid, 'solheim_sword');
     expect(e.weaponSkinId).toBe('solheim_sword');
     expect(sim.setWeaponSkin(pid, null, 'sword')).toBe(true);
@@ -66,10 +66,10 @@ describe('weapon skin sim behavior', () => {
     expect(sim.setWeaponSkin(pid, null, 'sword')).toBe(false);
   });
 
-  it('lets a hunter apply bow and crossbow skins, with the latest family displacing the other', () => {
-    const { sim, pid, e } = newSim('hunter');
+  it('lets a archer apply bow and crossbow skins, with the latest family displacing the other', () => {
+    const { sim, pid, e } = newSim('archer');
     expect(e.mainhandItemId).toBe('rusty_hatchet');
-    // an axe skin does NOT apply: the hunter never displays the axe
+    // an axe skin does NOT apply: the archer never displays the axe
     expect(sim.setWeaponSkin(pid, 'glaciersplit_axe')).toBe(false);
     expect(sim.setWeaponSkin(pid, 'winterbite')).toBe(true); // bow
     expect(e.weaponSkinId).toBe('winterbite');
@@ -82,7 +82,7 @@ describe('weapon skin sim behavior', () => {
   });
 
   it('seeds a whole loadout (server join path) and drops mismatched entries', () => {
-    const { sim, pid, e } = newSim('rogue');
+    const { sim, pid, e } = newSim('thief');
     expect(e.mainhandItemId).toBe('rusty_dagger');
     sim.setWeaponSkinLoadout(pid, {
       dagger: 'astravyr_dagger',

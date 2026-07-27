@@ -46,7 +46,7 @@ function fakeWs(): FakeClient {
 }
 
 function joinServer(server: GameServer, fc: FakeClient, id: number, name: string): ClientSession {
-  const session = server.join(fc.ws, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;

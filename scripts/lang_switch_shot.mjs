@@ -28,7 +28,7 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Thorgar');
 await page.evaluate(() =>
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click(),
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click(),
 );
 await sleep(200);
 await page.evaluate(() => document.querySelector('#btn-start-offline').click());

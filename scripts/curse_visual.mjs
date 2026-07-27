@@ -2,10 +2,12 @@
 // A landed hit curses the victim so they take more damage from every source, shown
 // as a red debuff on the buff bar. Runs the offline flow (no server). Needs
 // `npm run dev`. Writes PNGs to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -19,7 +21,9 @@ await page.setViewport({ width: 1280, height: 720 });
 
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (m) => { if (m.type() === 'error') errors.push('CONSOLE: ' + m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') errors.push('CONSOLE: ' + m.text());
+});
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
@@ -27,9 +31,14 @@ await page.evaluate(() => document.querySelector('#btn-offline')?.click());
 await wait(200);
 await page.evaluate(() => {
   const n = document.querySelector('#char-name');
-  if (n) { n.value = 'Garrosh'; n.dispatchEvent(new Event('input', { bubbles: true })); }
+  if (n) {
+    n.value = 'Garrosh';
+    n.dispatchEvent(new Event('input', { bubbles: true }));
+  }
 });
-await page.evaluate(() => document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click());
+await page.evaluate(() =>
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click(),
+);
 await page.evaluate(() => document.querySelector('#btn-start-offline')?.click());
 await wait(3000);
 
@@ -47,19 +56,26 @@ await wait(400);
 const result = await page.evaluate(async () => {
   const sim = window.__game.sim;
   const p = sim.player;
-  let mob = null, best = 1e9;
+  let mob = null,
+    best = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind !== 'mob' || e.dead) continue;
-    const dx = e.pos.x - p.pos.x, dz = e.pos.z - p.pos.z;
+    const dx = e.pos.x - p.pos.x,
+      dz = e.pos.z - p.pos.z;
     const d = dx * dx + dz * dz;
-    if (d < best) { best = d; mob = e; }
+    if (d < best) {
+      best = d;
+      mob = e;
+    }
   }
   if (!mob) return { ok: false, why: 'no mob nearby' };
   mob.templateId = 'gravecaller_cultist';
   mob.name = 'Gravecaller Cultist';
   mob.hostile = true;
   mob.level = p.level + 3;
-  mob.pos.x = p.pos.x + 3; mob.pos.z = p.pos.z; mob.pos.y = p.pos.y;
+  mob.pos.x = p.pos.x + 3;
+  mob.pos.z = p.pos.z;
+  mob.pos.y = p.pos.y;
 
   p.maxHp = 100000;
   let cursed = false;
@@ -75,7 +91,8 @@ const result = await page.evaluate(async () => {
 // Teleport the player away so combat ends and the 10s curse rides along, then
 // screenshot quickly before it expires.
 await page.evaluate(() => {
-  const sim = window.__game.sim, p = sim.player;
+  const sim = window.__game.sim,
+    p = sim.player;
   p.pos.x -= 80;
   p.prevPos = { ...p.pos };
 });
@@ -88,15 +105,23 @@ try {
     const el = document.querySelector('#buff-bar');
     if (!el) return null;
     const r = el.getBoundingClientRect();
-    return { x: Math.max(0, r.x - 12), y: Math.max(0, r.y - 8), width: Math.min(360, r.width + 24), height: Math.min(120, r.height + 50) };
+    return {
+      x: Math.max(0, r.x - 12),
+      y: Math.max(0, r.y - 8),
+      width: Math.min(360, r.width + 24),
+      height: Math.min(120, r.height + 50),
+    };
   });
   if (clip && clip.width > 4) await page.screenshot({ path: 'tmp/curse-buffbar.png', clip });
-} catch (e) { errors.push('buffbar crop: ' + e.message); }
+} catch (e) {
+  errors.push('buffbar crop: ' + e.message);
+}
 
 // Hover the debuff icon to surface its tooltip, then crop the top-right region.
 try {
   await page.evaluate(() => {
-    const icon = document.querySelector('#buff-bar .buff.debuff') || document.querySelector('#buff-bar .buff');
+    const icon =
+      document.querySelector('#buff-bar .buff.debuff') || document.querySelector('#buff-bar .buff');
     if (!icon) return;
     const r = icon.getBoundingClientRect();
     const opts = { bubbles: false, clientX: r.x + r.width / 2, clientY: r.y + r.height / 2 };
@@ -104,8 +129,13 @@ try {
     icon.dispatchEvent(new MouseEvent('mousemove', { ...opts, bubbles: true }));
   });
   await wait(250);
-  await page.screenshot({ path: 'tmp/curse-tooltip.png', clip: { x: 900, y: 0, width: 380, height: 230 } });
-} catch (e) { errors.push('tooltip: ' + e.message); }
+  await page.screenshot({
+    path: 'tmp/curse-tooltip.png',
+    clip: { x: 900, y: 0, width: 380, height: 230 },
+  });
+} catch (e) {
+  errors.push('tooltip: ' + e.message);
+}
 
 console.log('RESULT', JSON.stringify(result));
 console.log(errors.length ? 'ERRORS:\n' + errors.join('\n') : 'OK: no page errors');

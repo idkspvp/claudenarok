@@ -142,7 +142,7 @@ describe('GameServer sessions', () => {
   it('equips a live mech appearance only when the account owns the chroma', () => {
     const server = new GameServer();
     const allowed = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Mechwearer', 'shaman', null, false, {
+      server.join(fakeWs(), 11, 101, 'Mechwearer', 'acolyte', null, false, {
         accountCosmetics: {
           completedQuestIds: [],
           mechChromaIds: ['amber_crimson'],
@@ -151,7 +151,7 @@ describe('GameServer sessions', () => {
         },
       }),
     );
-    const blocked = expectJoined(server.join(fakeWs(), 12, 102, 'Blockedmech', 'shaman', null));
+    const blocked = expectJoined(server.join(fakeWs(), 12, 102, 'Blockedmech', 'acolyte', null));
 
     server.handleMessage(
       allowed,
@@ -176,7 +176,7 @@ describe('GameServer sessions', () => {
       weaponSkinLoadout: {},
     };
     const first = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Mechone', 'shaman', null, false, {
+      server.join(fakeWs(), 11, 101, 'Mechone', 'acolyte', null, false, {
         accountCosmetics: cosmetics,
       }),
     );
@@ -213,12 +213,12 @@ describe('GameServer sessions', () => {
 
   it('keeps the character-id session index coherent across join, duplicate join, leave, and rejoin', async () => {
     const server = new GameServer();
-    const first = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'warrior', null));
-    const second = expectJoined(server.join(fakeWs(), 12, 102, 'Indexb', 'warrior', null));
+    const first = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'swordman', null));
+    const second = expectJoined(server.join(fakeWs(), 12, 102, 'Indexb', 'swordman', null));
 
     expect((server as any).sessionByCharacterId(101)).toBe(first);
     expect((server as any).sessionByCharacterId(102)).toBe(second);
-    expect(server.join(fakeWs(), 13, 101, 'Indexa', 'warrior', null)).toEqual({
+    expect(server.join(fakeWs(), 13, 101, 'Indexa', 'swordman', null)).toEqual({
       error: 'character already in world',
     });
 
@@ -227,13 +227,13 @@ describe('GameServer sessions', () => {
     expect((server as any).sessionByCharacterId(101)).toBeNull();
     expect((server as any).sessionByCharacterId(102)).toBe(second);
 
-    const rejoined = expectJoined(server.join(fakeWs(), 13, 101, 'Indexa', 'warrior', null));
+    const rejoined = expectJoined(server.join(fakeWs(), 13, 101, 'Indexa', 'swordman', null));
     expect((server as any).sessionByCharacterId(101)).toBe(rejoined);
   });
 
   it('blocks a fast relog until the disconnect save releases the character id', async () => {
     const server = new GameServer();
-    const first = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'warrior', null));
+    const first = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'swordman', null));
 
     let resolveSave!: () => void;
     const slowSave = new Promise<void>((resolve) => {
@@ -247,7 +247,7 @@ describe('GameServer sessions', () => {
     });
 
     expect((server as any).sessionByCharacterId(101)).toBe(first);
-    expect(server.join(fakeWs(), 13, 101, 'Indexa', 'warrior', null)).toEqual({
+    expect(server.join(fakeWs(), 13, 101, 'Indexa', 'swordman', null)).toEqual({
       error: 'character already in world',
     });
 
@@ -255,13 +255,13 @@ describe('GameServer sessions', () => {
     await leaving;
 
     expect((server as any).sessionByCharacterId(101)).toBeNull();
-    const rejoined = expectJoined(server.join(fakeWs(), 13, 101, 'Indexa', 'warrior', null));
+    const rejoined = expectJoined(server.join(fakeWs(), 13, 101, 'Indexa', 'swordman', null));
     expect((server as any).sessionByCharacterId(101)).toBe(rejoined);
   });
 
   it('cancels an active trade before the disconnect snapshot can yield', async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
     server.sim.addItem('wolf_fang', 1, leaver.pid);
     server.sim.tradeRequest(stayer.pid, leaver.pid);
@@ -298,7 +298,7 @@ describe('GameServer sessions', () => {
 
   it('ignores commands from a session after its disconnect teardown starts', async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
 
     let resolveSave!: () => void;
@@ -325,9 +325,9 @@ describe('GameServer sessions', () => {
 
   it('forfeits pending loot rolls before the disconnect save can yield', async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
-    const third = expectJoined(server.join(fakeWs(), 13, 103, 'Third', 'rogue', null));
+    const third = expectJoined(server.join(fakeWs(), 13, 103, 'Third', 'thief', null));
     server.sim.partyInvite(stayer.pid, leaver.pid);
     server.sim.partyAccept(stayer.pid);
     server.sim.partyInvite(third.pid, leaver.pid);
@@ -400,9 +400,9 @@ describe('GameServer sessions', () => {
 
   it('preserves corpse loot rights and strategy after the original tapper leaves', async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
-    const third = expectJoined(server.join(fakeWs(), 13, 103, 'Third', 'rogue', null));
+    const third = expectJoined(server.join(fakeWs(), 13, 103, 'Third', 'thief', null));
     server.sim.partyInvite(stayer.pid, leaver.pid);
     server.sim.partyAccept(stayer.pid);
     server.sim.partyInvite(third.pid, leaver.pid);
@@ -429,7 +429,7 @@ describe('GameServer sessions', () => {
 
   it('excludes a departing player from heroic rewards after the leave snapshot', async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
     server.sim.partyInvite(stayer.pid, leaver.pid);
     server.sim.partyAccept(stayer.pid);
@@ -502,7 +502,7 @@ describe('GameServer sessions', () => {
 
   it("delegates a departing killer's fatal queued hit to the remaining heroic party", async () => {
     const server = new GameServer();
-    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'warrior', null));
+    const leaver = expectJoined(server.join(fakeWs(), 11, 101, 'Leaver', 'swordman', null));
     const stayer = expectJoined(server.join(fakeWs(), 12, 102, 'Stayer', 'mage', null));
     server.sim.partyInvite(stayer.pid, leaver.pid);
     server.sim.partyAccept(stayer.pid);
@@ -581,13 +581,13 @@ describe('GameServer sessions', () => {
 
     try {
       const server = new GameServer();
-      const session = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'warrior', null));
+      const session = expectJoined(server.join(fakeWs(), 11, 101, 'Indexa', 'swordman', null));
       const leaving = server.leave(session, 'test');
 
       await vi.waitFor(() => {
         expect(saveCharacterAndMarketState).toHaveBeenCalledTimes(1);
       });
-      expect(server.join(fakeWs(), 12, 101, 'Indexa', 'warrior', null)).toEqual({
+      expect(server.join(fakeWs(), 12, 101, 'Indexa', 'swordman', null)).toEqual({
         error: 'character already in world',
       });
 
@@ -611,7 +611,7 @@ describe('GameServer sessions', () => {
     vi.mocked(saveCharacterState).mockResolvedValue(true);
 
     const server = new GameServer();
-    const session = expectJoined(server.join(fakeWs(), 11, 101, 'Saverace', 'warrior', null));
+    const session = expectJoined(server.join(fakeWs(), 11, 101, 'Saverace', 'swordman', null));
 
     let resolveFirstSave!: () => void;
     const firstSave = new Promise<void>((resolve) => {
@@ -650,7 +650,7 @@ describe('GameServer sessions', () => {
     );
 
     const server = new GameServer();
-    const session = expectJoined(server.join(fakeWs(), 21, 201, 'Racer', 'warrior', null));
+    const session = expectJoined(server.join(fakeWs(), 21, 201, 'Racer', 'swordman', null));
     expect(session.dbSessionId).toBeNull();
 
     // Player disconnects before the insert resolves: leave() sees a null id.
@@ -670,7 +670,7 @@ describe('GameServer sessions', () => {
     closePlaySession.mockReset();
     closePlaySession.mockResolvedValue(undefined);
     const server = new GameServer();
-    const session = expectJoined(server.join(fakeWs(), 22, 202, 'Levelmetric', 'warrior', null));
+    const session = expectJoined(server.join(fakeWs(), 22, 202, 'Levelmetric', 'swordman', null));
     await vi.waitFor(() => expect(session.dbSessionId).toBe(77));
 
     (server as any).detectActivity([{ type: 'levelup', level: 5, pid: session.pid }]);
@@ -683,13 +683,13 @@ describe('GameServer sessions', () => {
     openPlaySession.mockReset();
     openPlaySession.mockResolvedValue(78);
     const server = new GameServer();
-    const seedPid = server.sim.addPlayer('warrior', 'Metricseed');
+    const seedPid = server.sim.addPlayer('swordman', 'Metricseed');
     const saved = server.sim.serializeCharacter(seedPid);
     server.sim.removePlayer(seedPid);
     if (!saved) throw new Error('seed character state missing');
 
     const session = expectJoined(
-      server.join(fakeWs(), 23, 203, 'Veteranmetric', 'warrior', { ...saved, level: 12 }),
+      server.join(fakeWs(), 23, 203, 'Veteranmetric', 'swordman', { ...saved, level: 12 }),
     );
 
     await vi.waitFor(() => expect(openPlaySession).toHaveBeenCalledOnce());
@@ -714,7 +714,7 @@ describe('GameServer sessions', () => {
 
   it('allows one ONLINE character per account, and lets the account back in once it leaves', async () => {
     const server = new GameServer();
-    const a = expectJoined(server.join(fakeWs(), 20, 201, 'Aone', 'warrior', null));
+    const a = expectJoined(server.join(fakeWs(), 20, 201, 'Aone', 'swordman', null));
 
     expect((server as any).sessionByCharacterId(201)).toBe(a);
 
@@ -725,7 +725,7 @@ describe('GameServer sessions', () => {
     });
 
     // a different account is unaffected
-    const b = expectJoined(server.join(fakeWs(), 21, 203, 'Bone', 'priest', null));
+    const b = expectJoined(server.join(fakeWs(), 21, 203, 'Bone', 'acolyte', null));
     expect((server as any).sessionByCharacterId(203)).toBe(b);
 
     // once the account's online character leaves, another of its characters may join
@@ -736,12 +736,12 @@ describe('GameServer sessions', () => {
 
   it('exempts GM characters from the per-account session cap (for supervision)', () => {
     const server = new GameServer();
-    expectJoined(server.join(fakeWs(), 30, 301, 'Gmaa', 'warrior', null));
+    expectJoined(server.join(fakeWs(), 30, 301, 'Gmaa', 'swordman', null));
     // a second character on the same account joins because it is flagged GM
-    expectJoined(server.join(fakeWs(), 30, 303, 'Gmcc', 'warrior', null, true));
+    expectJoined(server.join(fakeWs(), 30, 303, 'Gmcc', 'swordman', null, true));
     expect((server as any).sessionByCharacterId(303)).not.toBeNull();
     // and the cap still applies to a non-GM sibling
-    expect(server.join(fakeWs(), 30, 302, 'Gmbb', 'warrior', null)).toEqual({
+    expect(server.join(fakeWs(), 30, 302, 'Gmbb', 'swordman', null)).toEqual({
       error: 'too many characters on this account are already in the world',
     });
   });
@@ -754,7 +754,9 @@ describe('GameServer sessions', () => {
     const ip = '203.0.113.7';
     expect(server.countIpSessions(ip)).toBe(0);
 
-    const a = expectJoined(server.join(fakeWs(), 41, 401, 'Ipone', 'warrior', null, false, { ip }));
+    const a = expectJoined(
+      server.join(fakeWs(), 41, 401, 'Ipone', 'swordman', null, false, { ip }),
+    );
     expect(server.countIpSessions(ip)).toBe(1);
     const b = expectJoined(server.join(fakeWs(), 42, 402, 'Iptwo', 'mage', null, false, { ip }));
     expect(server.countIpSessions(ip)).toBe(2);
@@ -777,9 +779,9 @@ describe('GameServer sessions', () => {
     const server = new GameServer();
     const ip = '203.0.113.8';
     const a = expectJoined(
-      server.join(fakeWs(), 43, 403, 'Ipsolo', 'warrior', null, false, { ip }),
+      server.join(fakeWs(), 43, 403, 'Ipsolo', 'swordman', null, false, { ip }),
     );
-    const b = expectJoined(server.join(fakeWs(), 44, 404, 'Ipkick', 'rogue', null, false, { ip }));
+    const b = expectJoined(server.join(fakeWs(), 44, 404, 'Ipkick', 'thief', null, false, { ip }));
     expect(server.countIpSessions(ip)).toBe(2);
 
     await server.leave(b, 'kick');
@@ -796,7 +798,7 @@ describe('GameServer sessions', () => {
     const ip1 = '198.51.100.1';
     const ip2 = '198.51.100.2';
     const a = expectJoined(
-      server.join(fakeWs(), 45, 405, 'Neta', 'warrior', null, false, { ip: ip1 }),
+      server.join(fakeWs(), 45, 405, 'Neta', 'swordman', null, false, { ip: ip1 }),
     );
     expectJoined(server.join(fakeWs(), 46, 406, 'Netb', 'mage', null, false, { ip: ip2 }));
     expect(server.countIpSessions(ip1)).toBe(1);
@@ -811,9 +813,9 @@ describe('GameServer sessions', () => {
     vi.mocked(saveCharacterState).mockResolvedValue(true);
     const server = new GameServer();
     const ws = fakeWs();
-    expectJoined(server.join(ws, 70, 700, 'Takeoverme', 'warrior', null));
+    expectJoined(server.join(ws, 70, 700, 'Takeoverme', 'swordman', null));
     // A second join for the same character is rejected while it is online.
-    expect(server.join(fakeWs(), 70, 700, 'Takeoverme', 'warrior', null)).toEqual({
+    expect(server.join(fakeWs(), 70, 700, 'Takeoverme', 'swordman', null)).toEqual({
       error: 'character already in world',
     });
 
@@ -821,7 +823,7 @@ describe('GameServer sessions', () => {
     expect(result).toBe('taken-over');
     expect(ws.close).toHaveBeenCalled();
     // Slot is freed: the character can now enter the world again.
-    expectJoined(server.join(fakeWs(), 70, 700, 'Takeoverme', 'warrior', null));
+    expectJoined(server.join(fakeWs(), 70, 700, 'Takeoverme', 'swordman', null));
   });
 
   it('takeOverCharacter is a no-op when the character is offline', async () => {
@@ -848,7 +850,7 @@ describe('GameServer sessions', () => {
     vi.mocked(saveCharacterState).mockResolvedValue(true);
     const server = new GameServer();
     const ws = fakeWs();
-    expectJoined(server.join(ws, 90, 900, 'Imdutha', 'warrior', null));
+    expectJoined(server.join(ws, 90, 900, 'Imdutha', 'swordman', null));
 
     // Force the bot detector to kick on the next anti-bot tick.
     (server as any).botDetector = {
@@ -870,7 +872,7 @@ describe('GameServer sessions', () => {
     expect(ws.close).toHaveBeenCalled();
 
     // The character slot is freed: the same character can enter the world again.
-    expectJoined(server.join(fakeWs(), 90, 900, 'Imdutha', 'warrior', null));
+    expectJoined(server.join(fakeWs(), 90, 900, 'Imdutha', 'swordman', null));
   });
 
   it('a flood kick sends the dedicated message rate exceeded frame at the limiter site', () => {
@@ -886,7 +888,7 @@ describe('GameServer sessions', () => {
       vi.setSystemTime(T0);
       const server = new GameServer();
       const ws = fakeWs();
-      const session = expectJoined(server.join(ws, 91, 901, 'Roburr', 'warrior', null));
+      const session = expectJoined(server.join(ws, 91, 901, 'Roburr', 'swordman', null));
 
       // Five abusive receive-time seconds of pure gate drops: drain the frame
       // burst, then each second refills the rate allowance and thirty more
@@ -943,7 +945,7 @@ describe('GameServer weapon skin commands', () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Skinner', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Skinner', 'swordman', null, false, {
         ...ownedSkins(['ice_fang_sword']),
       }),
     );
@@ -961,11 +963,11 @@ describe('GameServer weapon skin commands', () => {
     });
   });
 
-  it('keeps hunter bow and crossbow selections mutually exclusive on the server', async () => {
+  it('keeps archer bow and crossbow selections mutually exclusive on the server', async () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Ranger', 'hunter', null, false, {
+      server.join(fakeWs(), 11, 101, 'Ranger', 'archer', null, false, {
         ...ownedSkins(['winterbite', 'meteorlatch_crossbow']),
       }),
     );
@@ -996,7 +998,7 @@ describe('GameServer weapon skin commands', () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Forger', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Forger', 'swordman', null, false, {
         ...ownedSkins([]),
       }),
     );
@@ -1011,10 +1013,10 @@ describe('GameServer weapon skin commands', () => {
   it('rejects an owned skin whose type does not match the equipped weapon', () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
-    // Owns the axe skin, but the warrior is holding worn_sword (a sword), so
+    // Owns the axe skin, but the swordman is holding worn_sword (a sword), so
     // the Sim's equipped-type gate must refuse the apply.
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Mismatch', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Mismatch', 'swordman', null, false, {
         ...ownedSkins(['glaciersplit_axe']),
       }),
     );
@@ -1030,7 +1032,7 @@ describe('GameServer weapon skin commands', () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Detacher', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Detacher', 'swordman', null, false, {
         ...ownedSkins(['ice_fang_sword'], { sword: 'ice_fang_sword' }),
       }),
     );
@@ -1051,7 +1053,7 @@ describe('GameServer weapon skin commands', () => {
     setAccountWeaponSkinLoadout.mockClear();
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Junkproof', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Junkproof', 'swordman', null, false, {
         ...ownedSkins(['ice_fang_sword'], { sword: 'ice_fang_sword' }),
       }),
     );
@@ -1076,7 +1078,7 @@ describe('GameServer weapon skin commands', () => {
       weaponSkinLoadout: {},
     };
     const first = expectJoined(
-      server.join(fakeWs(), 11, 101, 'Skinone', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'Skinone', 'swordman', null, false, {
         accountCosmetics: cosmetics,
       }),
     );
@@ -1084,7 +1086,7 @@ describe('GameServer weapon skin commands', () => {
     // session cap (same trick as the mech-chroma sweep test); both are
     // warriors, so both hold worn_sword and the sword skin applies to each.
     const second = expectJoined(
-      server.join(fakeWs(), 11, 102, 'Skintwo', 'warrior', null, true, {
+      server.join(fakeWs(), 11, 102, 'Skintwo', 'swordman', null, true, {
         accountCosmetics: cosmetics,
       }),
     );
@@ -1119,7 +1121,7 @@ describe('GameServer weapon skin commands', () => {
     );
     const server = new GameServer();
     const session = expectJoined(
-      server.join(fakeWs(), 11, 101, 'RapidSkinner', 'warrior', null, false, {
+      server.join(fakeWs(), 11, 101, 'RapidSkinner', 'swordman', null, false, {
         ...ownedSkins(['ice_fang_sword']),
       }),
     );

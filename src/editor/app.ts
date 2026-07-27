@@ -1940,7 +1940,7 @@ export class EditorApp {
     this.toasts.info(t('editor.status.playtestLaunch'));
     const ok = launchPlaytest(world, {
       seed: this.map.meta.seed,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       playerName: t('editor.playtestPlayerName'),
     });
     if (!ok) this.toasts.error(t('editor.status.playtestFailed'));

@@ -9,7 +9,7 @@ describe('rangedShotProfile', () => {
   const wandRanged = { min: 3, max: 6, speed: 1.8, wand: true as const };
   const bigBow = { min: 46, max: 74, speed: 2.8 };
 
-  it('a hunter (non-wand) shoots with the equipped weapon, not the class ranged def', () => {
+  it('a archer (non-wand) shoots with the equipped weapon, not the class ranged def', () => {
     expect(rangedShotProfile(hunterRanged, bigBow)).toEqual(bigBow);
   });
 
@@ -17,7 +17,7 @@ describe('rangedShotProfile', () => {
     expect(rangedShotProfile(wandRanged, bigBow)).toEqual({ min: 3, max: 6, speed: 1.8 });
   });
 
-  it('a missing wand flag is treated as a hunter-style weapon shot', () => {
+  it('a missing wand flag is treated as a archer-style weapon shot', () => {
     const noFlag = { min: 5, max: 9, speed: 2.3 };
     expect(rangedShotProfile(noFlag, bigBow)).toEqual(bigBow);
   });

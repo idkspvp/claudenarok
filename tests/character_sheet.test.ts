@@ -44,7 +44,7 @@ function makeRow(cls: PlayerClass, level: number, state: CharacterState): Charac
 
 function input(over: Partial<CharacterSheetInput> = {}): CharacterSheetInput {
   return {
-    row: makeRow('shaman', 20, makeState()),
+    row: makeRow('acolyte', 20, makeState()),
     visibility: 'owner',
     realm: 'Claudemoon',
     origin: 'https://worldofclaudecraft.com',
@@ -68,7 +68,7 @@ describe('characterSheet: shared fields', () => {
     const sheet = characterSheet(input());
     expect(sheet.name).toBe('Thrallish');
     expect(sheet.realm).toBe('Claudemoon');
-    expect(sheet.class).toBe('shaman');
+    expect(sheet.class).toBe('acolyte');
     expect(sheet.classLabel).toBe('Shaman');
     expect(sheet.level).toBe(20);
     expect(sheet.virtualLevel).toBe(virtualLevel(50_000));
@@ -76,7 +76,7 @@ describe('characterSheet: shared fields', () => {
     expect(sheet.zone).toBe(zoneAt(0).name);
     expect(sheet.guild).toBe('Echoes of Claude');
     expect(sheet.rank).toEqual({ scope: 'realm', rank: 27, total: 4012 });
-    expect(sheet.avatarUrl).toBe('https://worldofclaudecraft.com/avatar/shaman/0.png');
+    expect(sheet.avatarUrl).toBe('https://worldofclaudecraft.com/avatar/acolyte/0.png');
     expect(sheet.profileUrl).toBe('https://worldofclaudecraft.com/c/Thrallish');
     expect(sheet.arena['1v1']).toEqual({ rating: 1600, wins: 10, losses: 4 });
   });
@@ -101,7 +101,7 @@ describe('characterSheet: owner variant', () => {
   });
 
   it('stats equal recalcPlayerStats output for the same class/level/gear', () => {
-    const cls: PlayerClass = 'warrior';
+    const cls: PlayerClass = 'swordman';
     const level = 18;
     const sheet = characterSheet(
       input({ row: makeRow(cls, level, makeState({ level, equipment: {} })) }),
@@ -139,15 +139,15 @@ describe('characterSheet: public variant leaks nothing sensitive', () => {
 
   it('property check: no owner-only key survives across many class/level combos', () => {
     const classes: PlayerClass[] = [
-      'warrior',
-      'paladin',
-      'hunter',
-      'rogue',
-      'priest',
-      'shaman',
+      'swordman',
+      'swordman',
+      'archer',
+      'thief',
+      'acolyte',
+      'acolyte',
       'mage',
-      'warlock',
-      'druid',
+      'mage',
+      'acolyte',
     ];
     for (const cls of classes) {
       for (const level of [1, 10, 20]) {

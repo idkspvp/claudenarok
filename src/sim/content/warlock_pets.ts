@@ -1,7 +1,7 @@
 import type { MobTemplate } from '../types';
 
 // Warlock demon pets. Summoned (never tamed) demons owned by a warlock; they
-// follow/assist exactly like hunter pets (see Sim.updatePet) but never go feral
+// follow/assist exactly like archer pets (see Sim.updatePet) but never go feral
 // — a slain or dismissed demon unravels. The Emberkin is a ranged Firebolt
 // damage pet; the Gloomshade is a sturdy melee tank that taunts to hold threat.
 // Created at the owner's level (createMob reads the passed level, not

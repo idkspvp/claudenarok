@@ -2,6 +2,7 @@
 import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
@@ -15,14 +16,15 @@ await page.goto('http://localhost:5173', { waitUntil: 'networkidle0' });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Adventurer');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 1500));
 
 // move somewhere flat & quiet
 await page.evaluate(() => {
   const g = window.__game;
-  g.sim.player.pos.x = 0; g.sim.player.pos.z = -40;
+  g.sim.player.pos.x = 0;
+  g.sim.player.pos.z = -40;
   g.sim.player.facing = 0;
   g.input.camYaw = 0;
 });
@@ -35,7 +37,11 @@ const camRight = async () =>
   });
 
 const playerPos = async () =>
-  page.evaluate(() => ({ x: window.__game.sim.player.pos.x, z: window.__game.sim.player.pos.z, f: window.__game.sim.player.facing }));
+  page.evaluate(() => ({
+    x: window.__game.sim.player.pos.x,
+    z: window.__game.sim.player.pos.z,
+    f: window.__game.sim.player.facing,
+  }));
 
 // --- strafe right (E): movement should project positively onto screen-right
 let right = await camRight();
@@ -45,7 +51,10 @@ await new Promise((r) => setTimeout(r, 700));
 await page.keyboard.up('e');
 let p1 = await playerPos();
 let dot = (p1.x - p0.x) * right.x + (p1.z - p0.z) * right.z;
-console.log('E (strafe right) moves screen-right:', dot > 0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`);
+console.log(
+  'E (strafe right) moves screen-right:',
+  dot > 0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`,
+);
 
 // --- strafe left (Q)
 right = await camRight();
@@ -55,10 +64,16 @@ await new Promise((r) => setTimeout(r, 700));
 await page.keyboard.up('q');
 p1 = await playerPos();
 dot = (p1.x - p0.x) * right.x + (p1.z - p0.z) * right.z;
-console.log('Q (strafe left) moves screen-left:', dot < -0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`);
+console.log(
+  'Q (strafe left) moves screen-left:',
+  dot < -0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`,
+);
 
 // --- turn right (D): after turning, forward movement should drift toward old screen-right
-await page.evaluate(() => { window.__game.sim.player.facing = 0; window.__game.input.camYaw = 0; });
+await page.evaluate(() => {
+  window.__game.sim.player.facing = 0;
+  window.__game.input.camYaw = 0;
+});
 await new Promise((r) => setTimeout(r, 300));
 right = await camRight();
 p0 = await playerPos();
@@ -71,10 +86,17 @@ await page.keyboard.up('w');
 p1 = await playerPos();
 dot = (p1.x - p0.x) * right.x + (p1.z - p0.z) * right.z;
 const f1 = await playerPos();
-console.log('D (turn right) then W veers screen-right:', dot > 0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`, `(facing ${f1.f.toFixed(2)})`);
+console.log(
+  'D (turn right) then W veers screen-right:',
+  dot > 0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`,
+  `(facing ${f1.f.toFixed(2)})`,
+);
 
 // --- turn left (A)
-await page.evaluate(() => { window.__game.sim.player.facing = 0; window.__game.input.camYaw = 0; });
+await page.evaluate(() => {
+  window.__game.sim.player.facing = 0;
+  window.__game.input.camYaw = 0;
+});
 await new Promise((r) => setTimeout(r, 300));
 right = await camRight();
 p0 = await playerPos();
@@ -86,7 +108,10 @@ await new Promise((r) => setTimeout(r, 700));
 await page.keyboard.up('w');
 p1 = await playerPos();
 dot = (p1.x - p0.x) * right.x + (p1.z - p0.z) * right.z;
-console.log('A (turn left) then W veers screen-left:', dot < -0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`);
+console.log(
+  'A (turn left) then W veers screen-left:',
+  dot < -0.1 ? 'OK' : `FAIL (dot=${dot.toFixed(2)})`,
+);
 
 console.log(errors.length ? 'ERRORS: ' + errors.join('; ') : 'no page errors');
 await browser.close();

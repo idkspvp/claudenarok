@@ -530,7 +530,7 @@ export const en: EnTranslations = {
         "cinderlatch_crossbow": {
           "name": "Cinderlatch",
           "look": "Blackened-steel crossbow, ember-orange glow seeping from cracks in the prod, a smouldering coal in the tiller.",
-          "lore": "The strangest of the ember-forged: the mountain's fire poured into a machine. Orange seeps from cracks in the prod, and a smouldering coal in the tiller keeps the string from ever stiffening in Thornpeak's cold or Mirefen's damp. Its bolts leave the groove already warm and land warmer. A hunter's answer to a wall where the enemy does not feel the cold either."
+          "lore": "The strangest of the ember-forged: the mountain's fire poured into a machine. Orange seeps from cracks in the prod, and a smouldering coal in the tiller keeps the string from ever stiffening in Thornpeak's cold or Mirefen's damp. Its bolts leave the groove already warm and land warmer. A archer's answer to a wall where the enemy does not feel the cold either."
         },
         "ice_fang_sword": {
           "name": "Ice Fang",
@@ -3028,7 +3028,7 @@ export const en: EnTranslations = {
       "runForward": "Run forward",
       "arrowKeys": "Arrow Keys",
       "groupPet": "Pet commands",
-      "petBar": "Pet bar: Attack, Stop, Taunt, Defensive, Aggressive (with a hunter or warlock pet out)",
+      "petBar": "Pet bar: Attack, Stop, Taunt, Defensive, Aggressive (with a archer or warlock pet out)",
       "attackMoveNote": "One more, off by default: enable Attack Move in the options to reserve a key (A, while the option is on) that walks you toward your cursor and opens up on the enemy under it, or the first one met along the way.",
       "mobileHeading": "On mobile",
       "mobileBody": "Touch controls appear automatically on phones and tablets: a movement stick on the left, drag anywhere else to look, pinch with two fingers to zoom the camera, and on-screen buttons for your abilities and menus. A small arrow in the top left corner shows or hides the menu buttons, and the More button there holds the rest of your windows.",
@@ -3173,7 +3173,7 @@ export const en: EnTranslations = {
       "restedTerm": "Rested",
       "restedDef": "Bonus experience your character banks while resting at an inn, out of combat. Your next kills earn extra experience until the pool runs dry.",
       "petBarTerm": "Pet bar",
-      "petBarDef": "The command row a hunter or warlock pet adds: Attack, Stop, Taunt, Defensive, and Aggressive, bound to Ctrl plus 1 through 5 by default.",
+      "petBarDef": "The command row a archer or warlock pet adds: Attack, Stop, Taunt, Defensive, and Aggressive, bound to Ctrl plus 1 through 5 by default.",
       "metersTerm": "Damage meters",
       "metersDef": "The party scoreboard window for the current fight: damage dealt, healing done, and who holds the most threat, kept per encounter. Open it with its keybind (Shift+H by default).",
       "targetMarkerTerm": "Target marker",
@@ -3242,11 +3242,11 @@ export const en: EnTranslations = {
       "petsNote": "Warlocks summon demons to fight beside them, each suited to a different job."
     },
     "classHook": {
-      "warrior": "A relentless front-line fighter who turns every blow taken into fuel for the next.",
-      "paladin": "A holy warrior who can shield allies, mend their wounds, or bring the hammer down.",
-      "hunter": "A ranged marksman with a loyal beast at their side and a trick for every foe.",
-      "rogue": "A master of stealth and poisons who strikes from the shadows and never fights fair.",
-      "priest": "A devoted healer whose light keeps the party standing, or whose shadow unmakes the enemy.",
+      "swordman": "A relentless front-line fighter who turns every blow taken into fuel for the next.",
+      "paladin": "A holy swordman who can shield allies, mend their wounds, or bring the hammer down.",
+      "archer": "A ranged marksman with a loyal beast at their side and a trick for every foe.",
+      "thief": "A master of stealth and poisons who strikes from the shadows and never fights fair.",
+      "acolyte": "A devoted healer whose light keeps the party standing, or whose shadow unmakes the enemy.",
       "shaman": "A spirit-caller who bends storm, fire, and water, and mends allies between the lightning.",
       "mage": "A spellweaver of fire, frost, and arcane who controls the battlefield from afar.",
       "warlock": "A dark conjurer who commands demons and curses, trading life for devastating power.",
@@ -3441,7 +3441,7 @@ export const en: EnTranslations = {
       "figuresTitle": "Faces you will come to know",
       "figuresBody": "A handful of people walk the whole road with you. Watch for these names from the valley to the peaks.",
       "aldricRole": "Priest of the Vale",
-      "aldricBody": "A humble village priest who first names the cult over a defiled grave in Eastbrook, then follows its trail in person through the marsh and up to the wall at Highwatch. He is the steady heart of the whole campaign.",
+      "aldricBody": "A humble village acolyte who first names the cult over a defiled grave in Eastbrook, then follows its trail in person through the marsh and up to the wall at Highwatch. He is the steady heart of the whole campaign.",
       "marenRole": "The Marshal's Scout",
       "marenBody": "A low-talking tracker you meet in the reeds of Mirefen, all quiet feet and a short blade. She follows the trail north too, and it is her ear that catches the words that send you to the peaks."
     },
@@ -3839,7 +3839,7 @@ export const en: EnTranslations = {
           "identityHeading": "Bottles that win fights",
           "identityBody": "The craft is worked at the apothecary in Highwatch, home of Alchemist Verane, Master of the Apothecary, who teaches the recipe ladder, sells Glass Vials at 12 copper, and pays coin for herbs through her work order.\n\nOn the craft ring, Alchemy sits with the trial-and-error trades, next to Engineering on one side and Cooking on the other. That gives it two pair identities: the Bombardier (Engineering and Alchemy, taken up before Tinker Gizzel in Eastbrook) and the Apothecary (Alchemy and Cooking, sworn before Cook Marlow). Attune to either pair to make Alchemy a major and open the skill all the way to its cap; until then it works to the rare tier like any undeclared craft.",
           "materialsHeading": "Herbs, glands, and glass",
-          "materialsBody": "Every draught wants a Glass Vial plus herbs matched to its rung: sheenleaf grows in Eastbrook Vale, goldleaf in Mirefen Marsh, and sunpetal in Thornpeak Heights, one herb per zone, so your bottles climb the world alongside you. Herbalism is the natural partner skill, though buying from gatherers or the market works just as well; deeper zones hold higher-tier patches that ask for a better sickle, so keep your tool current if you pick your own.\n\nThe elixir line adds a hunter's ingredient: Venom Glands harvested from venomous corpses, and the top elixir asks for a Pristine Venom Gland, the signed rare specimen a lucky corpse harvest turns up. If you do not harvest yourself, those are exactly the goods worth asking a hunter friend to bring back.",
+          "materialsBody": "Every draught wants a Glass Vial plus herbs matched to its rung: sheenleaf grows in Eastbrook Vale, goldleaf in Mirefen Marsh, and sunpetal in Thornpeak Heights, one herb per zone, so your bottles climb the world alongside you. Herbalism is the natural partner skill, though buying from gatherers or the market works just as well; deeper zones hold higher-tier patches that ask for a better sickle, so keep your tool current if you pick your own.\n\nThe elixir line adds a archer's ingredient: Venom Glands harvested from venomous corpses, and the top elixir asks for a Pristine Venom Gland, the signed rare specimen a lucky corpse harvest turns up. If you do not harvest yourself, those are exactly the goods worth asking a archer friend to bring back.",
           "ladderHeading": "The recipe ladder",
           "ladderBody": "Everyone knows the Minor Healing Potion from the start and can mix it anywhere, no station needed. The real ladder is nine recipes taught by Verane at the apothecary, three at each rung: the skill 0 recipes are free, the skill 25 rung costs 25 silver per recipe, and the skill 50 rung costs 1 gold per recipe. Each rung is a healing draught, a mana draught, and a stamina elixir, stepping from common sheenleaf bottles (120 health, 160 mana) through uncommon goldleaf (200 health, 260 mana) to rare sunpetal (280 health, 360 mana).\n\nThe elixirs climb the same way: the Elixir of the Boar grants 6 Stamina for 10 minutes, the Vipersear Elixir 9 for 15 minutes, and the Elixir of the Serpent 12 for 15 minutes, brewing two bottles per craft. One more recipe sits off to the side: the Elixir of the Bear, a combination brew Verane teaches for 25 silver once your Alchemy reaches 25, mixable anywhere, but only by an attuned Bombardier with both Alchemy and Engineering at 25.",
           "routeHeading": "A brewer's route to 125",
@@ -4102,7 +4102,7 @@ export const en: EnTranslations = {
       "strTitle": "Strength",
       "strBody": "Strength raises your melee attack power, so your weapon swings hit harder. It does the most for the heavy melee classes that fight up close.",
       "agiTitle": "Agility",
-      "agiBody": "Agility sharpens you in several ways: it raises your chance to land a critical hit and your chance to dodge, and it adds a little armor. For rogues and hunters it also feeds attack power, and it drives a hunter's ranged shots.",
+      "agiBody": "Agility sharpens you in several ways: it raises your chance to land a critical hit and your chance to dodge, and it adds a little armor. For rogues and hunters it also feeds attack power, and it drives a archer's ranged shots.",
       "staTitle": "Stamina",
       "staBody": "Stamina is your staying power. More Stamina means a larger health pool, and it speeds the health you recover while resting out of combat. Every class wants some.",
       "intTitle": "Intellect",
@@ -4948,24 +4948,16 @@ export const en: EnTranslations = {
     "statusShareUnsupported": "Sharing is not supported on this device."
   },
   "classes": {
-    "warrior": "Warrior",
-    "paladin": "Paladin",
-    "hunter": "Hunter",
-    "rogue": "Rogue",
-    "priest": "Priest",
-    "shaman": "Shaman",
+    "swordman": "Swordman",
     "mage": "Mage",
-    "warlock": "Warlock",
-    "druid": "Druid",
-    "warriorAria": "Warrior class",
-    "paladinAria": "Paladin class",
-    "hunterAria": "Hunter class",
-    "rogueAria": "Rogue class",
-    "priestAria": "Priest class",
-    "shamanAria": "Shaman class",
+    "archer": "Archer",
+    "acolyte": "Acolyte",
+    "thief": "Thief",
+    "swordmanAria": "Swordman class",
     "mageAria": "Mage class",
-    "warlockAria": "Warlock class",
-    "druidAria": "Druid class"
+    "archerAria": "Archer class",
+    "acolyteAria": "Acolyte class",
+    "thiefAria": "Thief class"
   },
   "controls": {
     "title": "Controls Guide",
@@ -5773,15 +5765,11 @@ export const en: EnTranslations = {
       "rage": "Rage"
     },
     "roles": {
-      "warrior": "Tank / Melee DPS",
-      "paladin": "Healer / Tank / Melee DPS",
-      "hunter": "Ranged DPS",
-      "rogue": "Melee DPS",
-      "priest": "Healer / Ranged DPS",
-      "shaman": "Healer / Melee or Ranged DPS",
-      "mage": "Ranged DPS",
-      "warlock": "Ranged DPS",
-      "druid": "Tank / Healer / Melee or Ranged DPS"
+      "swordman": "Tank / Melee DPS",
+      "archer": "Ranged DPS",
+      "thief": "Melee DPS",
+      "acolyte": "Healer / Ranged DPS",
+      "mage": "Ranged DPS"
     },
     "armor": {
       "chainLeatherCloth": "Chainmail, Leather, Cloth",
@@ -5797,15 +5785,11 @@ export const en: EnTranslations = {
       "macesAxes": "Maces, Axes"
     },
     "lore": {
-      "warrior": "Warriors are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.",
-      "paladin": "Paladins are holy crusaders who support allies with blessings, heal wounds with Mending Light, and protect the weak in heavy armor.",
-      "hunter": "Hunters are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.",
-      "rogue": "Rogues are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.",
-      "priest": "Priests call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.",
-      "shaman": "Shaman command the elements, imbuing weapons with power, shocking enemies with lightning, and restoring allies.",
-      "mage": "Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.",
-      "warlock": "Warlocks summon demons, apply curses and damage-over-time magic, and leech life from enemies to endure.",
-      "druid": "Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defense or damage."
+      "swordman": "Swordmen are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.",
+      "archer": "Archers are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.",
+      "thief": "Thieves are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.",
+      "acolyte": "Acolytes call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.",
+      "mage": "Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place."
     },
     "aria": "Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.",
     "statBarAria": "{stat}: {value} out of 25"
@@ -7631,7 +7615,7 @@ export const en: EnTranslations = {
       },
       "berserker_stance": {
         "name": "Reckless Stance",
-        "description": "A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury warrior always fights in this stance."
+        "description": "A reckless combat stance: your critical strikes land 3% more often and hit for 3% more. The Fury swordman always fights in this stance."
       },
       "sweeping_strikes": {
         "name": "Widening Arc",

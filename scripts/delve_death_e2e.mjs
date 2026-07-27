@@ -78,7 +78,7 @@ await sleep(1200);
 await page.evaluate(() => {
   const name = document.querySelector('#char-name');
   if (name) name.value = 'Deathcheck';
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click();
   document.querySelector('#btn-start-offline')?.click();
 });
 await page.waitForFunction(() => window.__game?.sim?.player?.pos, { timeout: 30000, polling: 200 });

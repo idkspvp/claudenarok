@@ -4590,7 +4590,7 @@ export class Hud {
       const effect = line.effects.map((e) => this.procEffectText(e)).join(' ');
       const triggerKey =
         // onMeleeHit is the legacy key id; its English reads the generic "Chance on
-        // hit", correct for a weaponHit proc that fires on melee AND hunter ranged.
+        // hit", correct for a weaponHit proc that fires on melee AND archer ranged.
         line.trigger === 'weaponHit'
           ? 'hudChrome.itemProc.onMeleeHit'
           : line.trigger === 'spellDamage'
@@ -4740,7 +4740,7 @@ export class Hud {
       critRating: p.critRating,
       hasteRating: p.hasteRating,
       hitRating: p.hitRating,
-      parryChance: sim.cfg.playerClass === 'warrior' ? warriorParryChance(p.stats.str) : 0,
+      parryChance: sim.cfg.playerClass === 'swordman' ? warriorParryChance(p.stats.str) : 0,
       dps: weaponDps(wpn?.weapon, p.attackPower),
       gear,
       buffs,
@@ -6315,14 +6315,14 @@ export class Hud {
     return null;
   }
 
-  // The warrior stance bar: a small row of stance toggles stacked above the
+  // The swordman stance bar: a small row of stance toggles stacked above the
   // action bars, shown only for warriors and only for the stances valid for the
   // current spec (Battle + Guarded for Arms/Prot, Berserker for Fury, Battle only
   // for no spec). Rebuilds only when the known-stance set or the active stance
   // changes (sig elision, like the pet bar).
   private renderStanceBar(): void {
     const bar = $('#stancebar') as HTMLElement;
-    const isWarrior = this.sim.cfg.playerClass === 'warrior';
+    const isWarrior = this.sim.cfg.playerClass === 'swordman';
     const knownStances = isWarrior
       ? this.sim.known.filter((k) => k.def.exclusiveGroup === WARRIOR_STANCE_GROUP)
       : [];
@@ -6402,6 +6402,9 @@ export class Hud {
     const autoWaterJet = pet.petAutoWaterJet === true;
     const canTaunt = MOBS[pet.templateId]?.petCanTaunt !== false;
     const ownerClass = this.sim.cfg.playerClass;
+    // Demon Heal replaces the feed button for a demon pet. It used to key off the
+    // owner being a Warlock; that class is cut (D1), so it reads the pet instead.
+    const isDemonPet = MOBS[pet.templateId]?.family === 'demon';
     const actionCooldownSig =
       pet.templateId === 'water_elemental'
         ? `water-jet:${cd}:${autoWaterJet ? 'auto' : 'manual'}`
@@ -6410,10 +6413,9 @@ export class Hud {
           : 'no-taunt';
     // Feed-button reason (full HP / no food) folds in so the pet bar redraws
     // when either flips, even while the pet stays otherwise unchanged.
-    const feedSig =
-      ownerClass === 'warlock'
-        ? ''
-        : (petFeedButtonState(pet.hp, pet.maxHp, this.hasPetFood()).reasonKey ?? 'ok');
+    const feedSig = isDemonPet
+      ? ''
+      : (petFeedButtonState(pet.hp, pet.maxHp, this.hasPetFood()).reasonKey ?? 'ok');
     const sig = `${pet.id}:${ownerClass}:${mode}:${actionCooldownSig}:${this.pendingPetFeed ? 'feed' : ''}:${this.petModeMenuOpen ? 'modes' : ''}:${feedSig}`;
     bar.style.display = 'flex';
     if (sig === this.lastPetBarSig) return;
@@ -6627,7 +6629,7 @@ export class Hud {
         },
       );
     }
-    if (ownerClass === 'warlock') {
+    if (isDemonPet) {
       addButton(
         commands,
         PET_ACTION_ICONS.healDemon,
@@ -7142,7 +7144,7 @@ export class Hud {
     // timer, not per-frame work; the painter's two classes never conflict).
     // The login preview only makes sense where the bird is otherwise RARE, which
     // is the mage's Hot Streak. It is gated to the mage so it never flashes on a
-    // warrior or other class.
+    // swordman or other class.
     if (!this.procOverlayPreviewed && this.sim.cfg.playerClass === 'mage') {
       this.procOverlayPreviewed = true;
       this.procOverlayEl.classList.add('preview');
@@ -13044,14 +13046,18 @@ export class Hud {
     });
   }
 
-  openPetMenu(_entityId: number, name: string, dead: boolean, x: number, y: number): void {
+  openPetMenu(entityId: number, name: string, dead: boolean, x: number, y: number): void {
     const el = $('#ctx-menu');
     el.classList.remove(CTX_MENU_PICKER_CLASS);
-    const isWarlock = this.sim.cfg.playerClass === 'warlock';
+    // A summoned demon is re-summoned rather than abandoned, so it hides Abandon.
+    // The gate used to be "owner is a Warlock"; that class is cut (D1), so it now
+    // reads the pet's own family.
+    const templateId = this.sim.entities.get(entityId)?.templateId ?? '';
+    const isDemonPet = MOBS[templateId]?.family === 'demon';
     let html = `<div class="ctx-title">${esc(name)}</div>`;
     html += `<div class="ctx-item" data-act="rename">${esc(t('hud.pet.rename'))}</div>`;
     if (dead) html += `<div class="ctx-item" data-act="revive">${esc(t('hud.pet.revive'))}</div>`;
-    if (!isWarlock)
+    if (!isDemonPet)
       html += `<div class="ctx-item" data-act="abandon">${esc(t('hud.pet.abandon'))}</div>`;
     html += `<div class="ctx-item" data-act="close">${esc(t('hud.pet.cancel'))}</div>`;
     el.innerHTML = html;

@@ -674,7 +674,7 @@ export interface EntityView {
   castFill: HTMLDivElement;
   castLabel: HTMLDivElement;
   raidMarkEl: HTMLDivElement; // party raid/target marker, above the name
-  comboRow: HTMLDivElement; // rogue/druid combo-point pips, above the name
+  comboRow: HTMLDivElement; // thief/druid combo-point pips, above the name
   comboPips: HTMLDivElement[]; // the COMBO_PIP_MAX pip cells, lit left-to-right
   nameplateDisplay: string;
   nameplateTransform: string;
@@ -4346,7 +4346,7 @@ export class Renderer {
     const raidMark = document.createElement('div');
     raidMark.className = 'np-raidmark';
     raidMark.style.display = 'none';
-    // combo-point pips (rogue/druid): hidden until the local player builds
+    // combo-point pips (thief/druid): hidden until the local player builds
     // points on this entity; lit left-to-right as they accumulate
     const comboRow = document.createElement('div');
     comboRow.className = 'np-combo';
@@ -5508,7 +5508,7 @@ export class Renderer {
       }
 
       // live held-weapon swap — equipped mainhand changed (self equip or a peer's
-      // gear update); setWeapon no-ops on classes with a fixed weapon (hunter)
+      // gear update); setWeapon no-ops on classes with a fixed weapon (archer)
       if (e.mainhandItemId !== v.mainhandItemId) {
         v.mainhandItemId = e.mainhandItemId;
         v.visual.setWeapon(e.mainhandItemId);
@@ -5596,7 +5596,7 @@ export class Renderer {
         e.templateId === 'spirit_healer'; // the graveyard angel is an ethereal figure
       active.setGhost(ghost);
       active.setSoulRend(characterSoulRendActive(e));
-      // Shadowform tints the base priest rig shadow-purple (no rig swap). Moonkin Form and
+      // Shadowform tints the base acolyte rig shadow-purple (no rig swap). Moonkin Form and
       // Metamorphosis reuse the same tint treatment (a bright violet, and a dark fel demon);
       // Metamorphosis also grows the body via Entity.scale in the sim.
       active.setShadowform(hasShadowform);
