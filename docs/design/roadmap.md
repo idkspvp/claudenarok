@@ -20,6 +20,11 @@ things can be written rather than built.
 | Attribute derivations | ATK with its squared term, MATK, MaxHP/MaxSP as multipliers, crit from LUK, defence from VIT |
 | The allocation UI | place points, reset, the sheet shows all six |
 | Element, race, size + the chart | the foundation the rest sits on |
+| **C1 HIT against FLEE** | `level + DEX + LUK/3` vs `level + AGI + LUK/5`, `80 + HIT - FLEE`, perfect dodge separate |
+| **C3 Hard DEF and soft DEF** | capped percentage from equipment, then the flat Vitality subtraction, in that order, floored at 1 |
+| **C2 The real damage formula** | weapon roll with its Dexterity floor plus status ATK, size on the weapon share only, `STATUS_AP_PER_DPS` retired |
+| **The critical strike, whole** | no multiplier, cannot miss, ignores defence, denied by the target's Luck, magic and heals cannot crit at all |
+| **A1 The job tree** | Novice, six first jobs, twelve second jobs, read off `e_mapid`; Super Novice cut by decision |
 | Weapon class + the size table | why a player carries more than one weapon |
 | Refine ladder | value per weapon level, safe limit, over-refine bonus |
 | Quest system removed | and the public wiki stopped advertising it |
@@ -28,12 +33,18 @@ things can be written rather than built.
 
 ## The blocker in front of everything
 
-**Phase A: naming.** Almost nothing below can start without it, and it is not
+**A1 is done**, which clears the item that used to block the most. What now
+blocks the most is not naming at all: it is the **talent and spec system**. All
+nine classes carry three specs, twenty-seven in total, plus masteries and
+`spec_baselines`, and Ragnarok has no equivalent concept. Every class-shaped
+step below has to route around it until it is gone, so it goes first.
+
+**Phase A: naming.** The rest of it still gates Phase B, and it is not
 engineering work.
 
 | # | Step | Size | Blocks |
 |---|---|---|---|
-| A1 | 18 job names (Novice, 6 first, 12 second) | S | the job tree, every ability re-home |
+| A1 | ~~18 job names~~ **DONE** (`src/sim/content/jobs.ts`) | S | - |
 | A2 | Monster names | M | monster records, cards, drop tables |
 | A3 | Weapon and armour names | M | weapon records, the gear rebalance |
 | A4 | Card names and effects | M | the whole card system |
@@ -43,8 +54,9 @@ Every name goes through `tests/ip_scrub.test.ts` and is recorded in
 `ip-refactor/NAME-MAP.md`. The scanner has already rejected one proposed name as
 verbatim WoW, so this is a real gate and not a formality.
 
-**This is the critical path.** Naming is the only thing on it that cannot be
-parallelised or automated, and four of the five phases below wait on it.
+**Naming is still the critical path for CONTENT** (Phases B and E), and it is
+the only thing on it that cannot be parallelised or automated. It is no longer
+the critical path for the CLASS work, which is now the talent teardown above.
 
 ---
 
@@ -65,11 +77,14 @@ constant to tune, it is the ladder to retire.
 
 | # | Step | Size | Needs |
 |---|---|---|---|
-| C1 | HIT against FLEE, replacing the flat dodge fraction | M | - |
-| C2 | The real damage formula: weapon ATK + status ATK against DEF, retiring `STATUS_AP_PER_DPS` | L | C1 |
-| C3 | Hard DEF (percentage, from equipment) and soft DEF (flat, from VIT) as separate terms | M | C2 |
+| C1 | ~~HIT against FLEE~~ **DONE** | M | - |
+| C2 | ~~The real damage formula~~ **DONE** | L | C1 |
+| C3 | ~~Hard DEF and soft DEF as separate terms~~ **DONE** | M | C2 |
 | C4 | ASPD from weapon class + AGI + DEX, replacing the authored per-weapon speed | M | B2 |
-| C5 | Magic: pre-renewal magic cannot crit, and MATK works differently from ATK | M | C2 |
+| C5a | ~~Magic cannot crit~~ **DONE** (heals too) | M | C2 |
+| C5b | MATK against MDEF, which works differently from ATK against DEF | M | C2 |
+| C6 | Retire `MOB_AP_PER_DPS`, the last calibration constant, when monster records carry an authored ATK pair | S | B1 |
+| C7 | Restore the three heroic difficulty floors, which fell about 1.3% short when armour stopped losing value against a higher-level attacker | S | B1 |
 
 C1 and C2 are the two that most change how the game feels, and neither needs a
 single name. **They are the best thing to work on while naming is in flight.**
@@ -78,10 +93,14 @@ single name. **They are the best thing to work on while naming is in flight.**
 
 | # | Step | Size | Needs |
 |---|---|---|---|
-| D1 | The job tree: Novice, 6 first jobs, 12 second jobs, with the JL gates | L | A1 |
-| D2 | Re-home 317 abilities onto that tree | XL | D1 |
-| D3 | Job EXP as a second pool, and job levels | M | D1 |
-| D4 | Skill points separate from status points | M | D3 |
+| D0 | **Retire the talent and spec system**: 27 specs, masteries, `spec_baselines`. Ragnarok has no equivalent, and every step below routes around it until it is gone | L | - |
+| D1 | Collapse the nine classes onto the **six first jobs**. `PlayerClass` is referenced in 93 files with 169 hardcoded class literals, so this is the wide one | L | D0 |
+| D2 | Character creation picks a first job. Novice is CUT as a playable state; the picker and both server validation lists derive from `JOBS` instead of the three hardcoded HTML copies | M | D1 |
+| D3 | Job advancement as a FIELD, not a new class: a first job plus an optional 2-1/2-2 that unlocks skills. Keeps every `Record<PlayerClass, X>` table at six entries | M | D1 |
+| D4 | Re-home the 279 abilities onto the job tree | XL | D1 |
+| D5 | Job EXP as a second pool, and job levels | M | D3 |
+| D6 | Skill points separate from status points | M | D5 |
+| D7 | Warlock, Druid, and Shaman as a seventh first job with two branches. Deliberately AFTER the eighteen, because nothing depends on it | L | D4 |
 
 ## Phase E: the world
 
@@ -119,4 +138,5 @@ largest piece in the whole conversion**: three zones, six dungeons, and 119
 monsters were all built for a cap of 20. Everything else makes the existing
 content Ragnarok-shaped; only E6 makes there be more of it.
 
-**Start now, without waiting for a single name:** C1, C2, E1, E2, F2.
+**Start now, without waiting for a single name:** D0 (the talent teardown),
+then D1 to D3. E1, E2, and F2 are still unblocked and can run beside them.
