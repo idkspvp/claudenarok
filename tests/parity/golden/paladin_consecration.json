@@ -148,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "716b45f9",
+      "state": "426816ac",
       "events": "2d6f8587",
       "rng": {
         "draws": 4,
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "1ca7203e",
+      "state": "c651701f",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -170,7 +170,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "8b207f2f",
+      "state": "9bf5a6b8",
       "events": "c1306d25",
       "rng": {
         "draws": 80,
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "ca3ba27a",
+      "state": "59b52e01",
       "events": "741638a5",
       "rng": {
         "draws": 170,
@@ -192,7 +192,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "9d0d79e1",
+      "state": "e1ab1292",
       "events": "eab31871",
       "rng": {
         "draws": 270,
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "dd059f2d",
+      "state": "59302d12",
       "events": "741638a5",
       "rng": {
         "draws": 384,
@@ -214,7 +214,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 417,
-      "state": "997226d4",
+      "state": "33b14ec9",
       "events": "e030896d",
       "rng": {
         "draws": 503,
@@ -225,7 +225,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 417,
-      "state": "43da18e7",
+      "state": "5b5860da",
       "events": "741638a5",
       "rng": {
         "draws": 629,
@@ -236,7 +236,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 417,
-      "state": "8a6a1634",
+      "state": "87beb01d",
       "events": "0ed31d57",
       "rng": {
         "draws": 764,
@@ -247,7 +247,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 417,
-      "state": "a7d928f8",
+      "state": "d0781ffd",
       "events": "741638a5",
       "rng": {
         "draws": 919,
@@ -258,7 +258,7 @@
       "tick": 201,
       "time": 10.05,
       "nextId": 417,
-      "state": "9d686092",
+      "state": "60ad083f",
       "events": "741638a5",
       "rng": {
         "draws": 923,
@@ -377,7 +377,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 10,
           "flee": 25,
-          "hit": 29,
+          "hit": 28,
           "hp": 49998,
           "id": 415,
           "inCombat": true,

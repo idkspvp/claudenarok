@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "7eea521b",
+      "state": "be14caee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -94,7 +94,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 415,
           "kind": "player",
@@ -152,19 +152,19 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "80d0181e",
-      "events": "dbd02e6d",
+      "state": "c85ad60a",
+      "events": "c9827cda",
       "rng": {
-        "draws": 16,
-        "digest": "ac87be47"
+        "draws": 14,
+        "digest": "4b746836"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "75cfd491",
-      "events": "13b9166b",
+      "state": "75d3f418",
+      "events": "99746bae",
       "rng": {
         "draws": 24,
         "digest": "672bbd02"
@@ -174,8 +174,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "eba111ac",
-      "events": "7d3bba45",
+      "state": "027898fd",
+      "events": "2bd61946",
       "rng": {
         "draws": 103,
         "digest": "4bf8fdbd"
@@ -185,7 +185,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "9a8a1d20",
+      "state": "c9258865",
       "events": "741638a5",
       "rng": {
         "draws": 159,
@@ -208,14 +208,14 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 93,
-            "damageTaken": 11
+            "damageDealt": 99,
+            "damageTaken": 9
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 93
+              "damageDealt": 99
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -279,7 +279,7 @@
           "attackPower": 14,
           "autoAttack": true,
           "combatTimer": 1.2,
-          "comboPoints": 2,
+          "comboPoints": 3,
           "comboUntil": 32.4,
           "critChance": 0.026667,
           "detonateTimer": "Infinity",
@@ -290,9 +290,9 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "flee": 24,
-          "hit": 19,
-          "hp": 49989,
+          "flee": 23,
+          "hit": 18,
+          "hp": 49991,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -310,7 +310,7 @@
             "speed": 1.8
           },
           "onGround": true,
-          "overpowerUntil": -1,
+          "overpowerUntil": 5.05,
           "petMode": "defensive",
           "pos": {
             "x": 2.5,
@@ -361,7 +361,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8907,
+          "hp": 8901,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -402,7 +402,7 @@
           "threat": [
             [
               415,
-              94
+              100
             ]
           ],
           "weapon": {

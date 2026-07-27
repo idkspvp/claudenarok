@@ -159,7 +159,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "25a73c54",
+      "state": "5b0bb0d9",
       "events": "bcc7df8e",
       "rng": {
         "draws": 9,
@@ -170,7 +170,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "5af48fec",
+      "state": "f4cd2a19",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -181,7 +181,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "68da9abe",
+      "state": "9cc3674d",
       "events": "5bfdbaa4",
       "rng": {
         "draws": 105,
@@ -192,7 +192,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "01caf08c",
+      "state": "1aac06a3",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -310,7 +310,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
           "flee": 16,
-          "hit": 19,
+          "hit": 18,
           "hp": 49998,
           "id": 415,
           "inCombat": true,
@@ -431,7 +431,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "4baf2b5d",
+      "state": "405d6a74",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -554,7 +554,7 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 102.8,
           "flee": 16,
-          "hit": 19,
+          "hit": 18,
           "hp": 49998,
           "id": 415,
           "inCombat": true,
