@@ -85,9 +85,36 @@ Applying the deletion, repointing every import at `player_modifiers`, unwiring
 Plus roughly 200 errors across about 40 test files, most of which are talent
 suites that get deleted outright.
 
-`abilitiesKnownAt` loses its third parameter, so every call site drops an
-argument. Watch the replacement: a naive regex over
-`abilitiesKnownAt(a, b, c)` left an unbalanced paren in `fiesta.ts`.
+`abilitiesKnownAt` loses its third parameter, so all eight call sites drop an
+argument. Watch the replacement: a regex over `abilitiesKnownAt(a, b, c)` whose
+third group is `[^)]+` stops at the first inner `)` and leaves an unbalanced
+paren on `fiesta.ts` line 246, which passes `ctx.playerMods(meta)`. That has now
+bitten twice. Match the argument as a balanced expression, or fix that one line
+by hand.
+
+## The PlayerMeta surgery (step 2, the part that has to be planned)
+
+`PlayerMeta` (`src/sim/sim.ts`, around line 1096) carries the talent state, and
+every field has to be resolved before the tree compiles again. Counts are across
+`src/`, `server/`, and `headless/`:
+
+| Field | Sites | Resolution |
+|---|---|---|
+| `talents: TalentAllocation` | 18 | delete |
+| `talentMods: PlayerModifiers` | 22 | RENAME to `mods`, value is always `emptyModifiers()`; Fiesta augments still merge on top |
+| `loadouts: SavedLoadout[]` | 3 | delete |
+| `activeLoadout: number` | 14 | delete |
+| `fiestaRestore` | 19 | keep, but drop its `talents` member |
+
+`fiestaStandardize` / `fiestaRestoreChar` (`social/fiesta.ts`) snapshot and
+restore the allocation as well as level and xp. They keep the level and xp
+snapshot and lose the allocation. `mergeAugmentMods(base, augIds)` keeps working
+unchanged: its `base` simply becomes the empty modifier value.
+
+**Old saves need no migration path.** `CharacterState.talents`, `.loadouts`, and
+`.activeLoadout` are already OPTIONAL (they were added after the format shipped),
+and the column is JSONB, so removing the type members and the reads leaves the
+stored fields simply unread. That is D0-6, and it is free.
 
 ## Order
 
