@@ -8,8 +8,8 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 157,
-  "drawDigest": "0b000750",
+  "draws": 153,
+  "drawDigest": "ded1cbc7",
   "frames": [
     {
       "tick": 0,
@@ -156,8 +156,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "3d4ea7d4",
-      "events": "baf1c877",
+      "state": "e6bea6f9",
+      "events": "6a83cf70",
       "rng": {
         "draws": 13,
         "digest": "3fc203d8"
@@ -167,8 +167,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "462bb85a",
-      "events": "599e7f83",
+      "state": "6ce577c5",
+      "events": "32d624ec",
       "rng": {
         "draws": 22,
         "digest": "e093578a"
@@ -178,22 +178,22 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "f89f019d",
-      "events": "fa429453",
+      "state": "15ad3265",
+      "events": "3f82c231",
       "rng": {
-        "draws": 101,
-        "digest": "417a5ce3"
+        "draws": 100,
+        "digest": "86e1474f"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "7a871913",
+      "state": "cc66676b",
       "events": "741638a5",
       "rng": {
-        "draws": 157,
-        "digest": "0b000750"
+        "draws": 153,
+        "digest": "ded1cbc7"
       },
       "label": "final",
       "players": [
@@ -213,14 +213,14 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 71,
-            "damageTaken": 9
+            "damageDealt": 104,
+            "damageTaken": 18
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 71
+              "damageDealt": 104
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -300,7 +300,7 @@
           "fiveSecondRule": 102.6,
           "flee": 24,
           "hit": 19,
-          "hp": 49991,
+          "hp": 49982,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -369,7 +369,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8929,
+          "hp": 8896,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -406,7 +406,7 @@
           "threat": [
             [
               415,
-              72
+              105
             ]
           ],
           "weapon": {

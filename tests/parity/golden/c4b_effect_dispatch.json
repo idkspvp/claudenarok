@@ -4600,8 +4600,8 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 427,
-      "state": "f9bb39c2",
-      "events": "bdfbdef3",
+      "state": "ed0e3726",
+      "events": "5d8e4b27",
       "rng": {
         "draws": 455,
         "digest": "fac237a0"
@@ -4810,13 +4810,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 107
+            "damageDealt": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 107
+              "damageDealt": 116
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -5822,7 +5822,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499893,
+          "hp": 499884,
           "id": 426,
           "inCombat": true,
           "kind": "mob",
@@ -5857,7 +5857,7 @@
           "threat": [
             [
               417,
-              108
+              117
             ]
           ],
           "weapon": {
@@ -5872,7 +5872,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 428,
-      "state": "51de9e31",
+      "state": "16e97b6d",
       "events": "62ad0077",
       "rng": {
         "draws": 456,
@@ -6082,13 +6082,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 107
+            "damageDealt": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 107
+              "damageDealt": 116
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -7123,7 +7123,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499893,
+          "hp": 499884,
           "id": 426,
           "inCombat": true,
           "kind": "mob",
@@ -7158,7 +7158,7 @@
           "threat": [
             [
               417,
-              108
+              117
             ]
           ],
           "weapon": {
@@ -7226,7 +7226,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "ceb85b52",
+      "state": "1532e60a",
       "events": "a867c74e",
       "rng": {
         "draws": 456,
@@ -7436,13 +7436,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 107
+            "damageDealt": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 107
+              "damageDealt": 116
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -8490,7 +8490,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499893,
+          "hp": 499884,
           "id": 426,
           "inCombat": true,
           "kind": "mob",
@@ -8525,7 +8525,7 @@
           "threat": [
             [
               417,
-              108
+              117
             ]
           ],
           "weapon": {
@@ -8636,7 +8636,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "ceb85b52",
+      "state": "1532e60a",
       "events": "741638a5",
       "rng": {
         "draws": 456,
@@ -8846,13 +8846,13 @@
           "cls": "rogue",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 107
+            "damageDealt": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 107
+              "damageDealt": 116
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -9900,7 +9900,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499893,
+          "hp": 499884,
           "id": 426,
           "inCombat": true,
           "kind": "mob",
@@ -9935,7 +9935,7 @@
           "threat": [
             [
               417,
-              108
+              117
             ]
           ],
           "weapon": {

@@ -207,8 +207,8 @@
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "90b02941",
-      "events": "242548ef",
+      "state": "8964923f",
+      "events": "fd868e55",
       "rng": {
         "draws": 368,
         "digest": "0fdc705d"
@@ -218,7 +218,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 418,
-      "state": "9cbae3e2",
+      "state": "30f9056c",
       "events": "897a0d20",
       "rng": {
         "draws": 499,
@@ -229,8 +229,8 @@
       "tick": 160,
       "time": 8,
       "nextId": 418,
-      "state": "01ce6bed",
-      "events": "a77bb74f",
+      "state": "b1ee158f",
+      "events": "5267448f",
       "rng": {
         "draws": 639,
         "digest": "263c03a3"
@@ -240,8 +240,8 @@
       "tick": 180,
       "time": 9,
       "nextId": 418,
-      "state": "48024ce1",
-      "events": "6307a2b1",
+      "state": "186c6a6d",
+      "events": "9202c8d2",
       "rng": {
         "draws": 777,
         "digest": "ccaf2ef3"
@@ -251,8 +251,8 @@
       "tick": 200,
       "time": 10,
       "nextId": 418,
-      "state": "6783d1e0",
-      "events": "367cefec",
+      "state": "895ae92d",
+      "events": "0924e999",
       "rng": {
         "draws": 942,
         "digest": "5772aa74"
@@ -262,8 +262,8 @@
       "tick": 220,
       "time": 11,
       "nextId": 418,
-      "state": "16463533",
-      "events": "6307a2b1",
+      "state": "830e8704",
+      "events": "8a055c03",
       "rng": {
         "draws": 1014,
         "digest": "2cdc8d2a"
@@ -273,7 +273,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 418,
-      "state": "795481e1",
+      "state": "d11fbd58",
       "events": "741638a5",
       "rng": {
         "draws": 1014,
@@ -297,13 +297,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 18
+            "damageDealt": 16
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 18
+              "damageDealt": 16
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -443,7 +443,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 333,
+          "hp": 341,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -494,7 +494,7 @@
           "forcedTargetTimer": 3,
           "hit": 10,
           "hostile": true,
-          "hp": 49942,
+          "hp": 49962,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -531,11 +531,11 @@
           "threat": [
             [
               415,
-              19
+              17
             ],
             [
               416,
-              42
+              24
             ]
           ],
           "weapon": {
@@ -550,8 +550,8 @@
       "tick": 224,
       "time": 11.2,
       "nextId": 418,
-      "state": "38d7aef9",
-      "events": "01d3c56c",
+      "state": "688ab551",
+      "events": "acc73fde",
       "rng": {
         "draws": 1046,
         "digest": "b4433506"
@@ -574,13 +574,13 @@
           "cls": "warlock",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 18
+            "damageDealt": 16
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 18
+              "damageDealt": 16
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -721,7 +721,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 319,
+          "hp": 327,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -773,7 +773,7 @@
           "forcedTargetTimer": 2.8,
           "hit": 10,
           "hostile": true,
-          "hp": 49929,
+          "hp": 49951,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -810,11 +810,11 @@
           "threat": [
             [
               415,
-              19
+              17
             ],
             [
               416,
-              55
+              35
             ]
           ],
           "weapon": {

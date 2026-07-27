@@ -163,8 +163,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "3a311236",
-      "events": "a6e6597e",
+      "state": "4cfcf7bc",
+      "events": "bcc7df8e",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -174,7 +174,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "221c64ee",
+      "state": "087e009c",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -185,8 +185,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "9f168098",
-      "events": "2b2ff28b",
+      "state": "fdd86d6c",
+      "events": "5bfdbaa4",
       "rng": {
         "draws": 105,
         "digest": "3e0eb09d"
@@ -196,7 +196,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "76a56878",
+      "state": "04079774",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -220,7 +220,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7073,
+            "damageDealt": 7084,
             "damageTaken": 2,
             "kills": 1
           },
@@ -228,7 +228,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7073,
+              "damageDealt": 7084,
               "kills": 1
             },
             "dungeonClears": {},
@@ -439,7 +439,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "83ba7593",
+      "state": "e43c8ba7",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -463,7 +463,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7073,
+            "damageDealt": 7084,
             "damageTaken": 2,
             "kills": 1
           },
@@ -471,7 +471,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7073,
+              "damageDealt": 7084,
               "kills": 1
             },
             "dungeonClears": {},

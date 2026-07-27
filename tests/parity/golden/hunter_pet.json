@@ -153,8 +153,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "1d68250e",
-      "events": "4e3e2964",
+      "state": "6fc54259",
+      "events": "b44d9f99",
       "rng": {
         "draws": 11,
         "digest": "c55d1f86"
@@ -164,7 +164,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "3044b51b",
+      "state": "e5e1c9e8",
       "events": "741638a5",
       "rng": {
         "draws": 11,
@@ -175,8 +175,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "cb43b14c",
-      "events": "f4928e1a",
+      "state": "99f8332c",
+      "events": "651c35f7",
       "rng": {
         "draws": 102,
         "digest": "b5b7b15d"
@@ -186,7 +186,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "a60d14d3",
+      "state": "1704658b",
       "events": "741638a5",
       "rng": {
         "draws": 201,
@@ -197,8 +197,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "03ca453f",
-      "events": "efdad201",
+      "state": "82cfff03",
+      "events": "e58df22d",
       "rng": {
         "draws": 306,
         "digest": "1f424e90"
@@ -208,7 +208,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "1e5aa558",
+      "state": "e117e7c0",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -219,7 +219,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "1e5aa558",
+      "state": "e117e7c0",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -243,14 +243,14 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 33,
+            "damageDealt": 45,
             "damageTaken": 15
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 33
+              "damageDealt": 45
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -440,7 +440,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 49918,
+          "hp": 49906,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -477,7 +477,7 @@
           "threat": [
             [
               415,
-              33
+              45
             ],
             [
               416,

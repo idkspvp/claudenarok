@@ -162,8 +162,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "01a888e6",
-      "events": "05321230",
+      "state": "d96b0b1f",
+      "events": "7a8dbe7e",
       "rng": {
         "draws": 17,
         "digest": "0d655f92"
@@ -173,8 +173,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "ce8edc73",
-      "events": "d170f275",
+      "state": "b4e7df42",
+      "events": "84d62024",
       "rng": {
         "draws": 34,
         "digest": "14849c77"
@@ -184,8 +184,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "50216089",
-      "events": "5b039776",
+      "state": "ec038fdb",
+      "events": "eba06792",
       "rng": {
         "draws": 64,
         "digest": "4e1f7fc1"
@@ -209,7 +209,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 132
+            "damageTaken": 146
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -322,7 +322,7 @@
           "fiveSecondRule": 101.5,
           "flee": 20,
           "hit": 23,
-          "hp": 434,
+          "hp": 422,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -342,7 +342,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 11.740385,
+          "resource": 12.734615,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -496,7 +496,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "6d01b6f0",
+      "state": "d303c712",
       "events": "741638a5",
       "rng": {
         "draws": 78,
@@ -521,7 +521,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 132
+            "damageTaken": 146
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -635,7 +635,7 @@
           "fiveSecondRule": 101.7,
           "flee": 20,
           "hit": 23,
-          "hp": 434,
+          "hp": 422,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -655,7 +655,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 11.740385,
+          "resource": 12.734615,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {

@@ -1954,8 +1954,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "0385cd2c",
-      "events": "ba35b95d",
+      "state": "488f6ae2",
+      "events": "a730ec0a",
       "rng": {
         "draws": 16,
         "digest": "50064c0d"
@@ -1965,7 +1965,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "dc26dbde",
+      "state": "62077870",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1976,7 +1976,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "dc26dbde",
+      "state": "62077870",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2000,7 +2000,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 120,
-            "damageTaken": 9
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2205,7 +2205,7 @@
           "fiveSecondRule": 99.5,
           "flee": 5,
           "hit": 7,
-          "hp": 49991,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",

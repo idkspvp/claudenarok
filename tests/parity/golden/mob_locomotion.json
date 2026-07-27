@@ -227,8 +227,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "1e9ad475",
-      "events": "46a9042e",
+      "state": "c294713b",
+      "events": "b0b73d86",
       "rng": {
         "draws": 7,
         "digest": "2e56e253"
@@ -250,7 +250,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 133
+            "damageTaken": 142
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -333,7 +333,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 7,
-          "hp": 999884,
+          "hp": 999875,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -353,7 +353,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 9.496667,
+          "resource": 9.991667,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -477,8 +477,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "4d2ed857",
-      "events": "2219c2eb",
+      "state": "d6845586",
+      "events": "744064c7",
       "rng": {
         "draws": 13,
         "digest": "06ceb9a6"
@@ -500,7 +500,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -594,7 +594,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 7,
-          "hp": 999883,
+          "hp": 999887,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -614,7 +614,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -785,7 +785,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "f3cae82f",
+      "state": "cac4b95e",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -808,7 +808,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -902,7 +902,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 7,
-          "hp": 999883,
+          "hp": 999887,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -922,7 +922,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1143,7 +1143,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "5d08ca1c",
+      "state": "e82d384d",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1166,7 +1166,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1260,7 +1260,7 @@
           "fiveSecondRule": 99,
           "flee": 5,
           "hit": 7,
-          "hp": 999883,
+          "hp": 999887,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -1280,7 +1280,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1545,7 +1545,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "ff788b56",
+      "state": "30f5c487",
       "events": "38fff8ae",
       "rng": {
         "draws": 16,
@@ -1568,7 +1568,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1682,7 +1682,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1994,7 +1994,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "25757881",
+      "state": "e509f858",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2017,7 +2017,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2131,7 +2131,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2444,7 +2444,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "25757881",
+      "state": "e509f858",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2467,7 +2467,7 @@
           "cls": "warrior",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 250
+            "damageTaken": 255
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2581,7 +2581,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 20.221667,
+          "resource": 20.35,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {

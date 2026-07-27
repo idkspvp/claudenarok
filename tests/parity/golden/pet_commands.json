@@ -2384,8 +2384,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "9cfbd148",
-      "events": "283c9aa5",
+      "state": "b9bbaa3e",
+      "events": "1d912460",
       "rng": {
         "draws": 84,
         "digest": "dae9f299"
@@ -2395,7 +2395,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "db3c9374",
+      "state": "ee1f27a4",
       "events": "4a119102",
       "rng": {
         "draws": 160,
@@ -2406,7 +2406,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "db3c9374",
+      "state": "ee1f27a4",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -2430,7 +2430,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 8
+            "damageTaken": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2593,7 +2593,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49992,
+          "hp": 49988,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -2654,7 +2654,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49976,
+          "hp": 49978,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -2695,7 +2695,7 @@
             ],
             [
               421,
-              24
+              22
             ]
           ],
           "weapon": {
@@ -2816,7 +2816,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "89e617e6",
+      "state": "549f4fe4",
       "events": "3c0a5f6e",
       "rng": {
         "draws": 160,
@@ -2840,7 +2840,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 8
+            "damageTaken": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3003,7 +3003,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49992,
+          "hp": 49988,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3064,7 +3064,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49976,
+          "hp": 49978,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3105,7 +3105,7 @@
             ],
             [
               421,
-              24
+              22
             ]
           ],
           "weapon": {
@@ -3226,7 +3226,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "ed73e7cb",
+      "state": "998ddb8f",
       "events": "0fcaa395",
       "rng": {
         "draws": 160,
@@ -3250,7 +3250,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 8
+            "damageTaken": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3413,7 +3413,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49992,
+          "hp": 49988,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3474,7 +3474,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49976,
+          "hp": 49978,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3515,7 +3515,7 @@
             ],
             [
               421,
-              24
+              22
             ]
           ],
           "weapon": {
@@ -3645,7 +3645,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "ed73e7cb",
+      "state": "998ddb8f",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -3669,7 +3669,7 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 8
+            "damageTaken": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -3832,7 +3832,7 @@
           "fiveSecondRule": 103,
           "flee": 25,
           "hit": 28,
-          "hp": 49992,
+          "hp": 49988,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3893,7 +3893,7 @@
           "forcedTargetTimer": 1,
           "hit": 10,
           "hostile": true,
-          "hp": 49976,
+          "hp": 49978,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -3934,7 +3934,7 @@
             ],
             [
               421,
-              24
+              22
             ]
           ],
           "weapon": {

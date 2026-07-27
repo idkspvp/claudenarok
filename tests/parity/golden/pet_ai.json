@@ -10,8 +10,8 @@
     "updatePet melee arm: close + auto-taunt + mobSwing (PET_COMBAT_LINGER owner inCombat)",
     "petFollow heel transition (pets return to a moved owner)"
   ],
-  "draws": 785,
-  "drawDigest": "c1c2ac62",
+  "draws": 792,
+  "drawDigest": "7424fa2b",
   "frames": [
     {
       "tick": 0,
@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "090f46ca",
-      "events": "e5848a97",
+      "state": "64a81ac7",
+      "events": "b56f1c79",
       "rng": {
         "draws": 17,
         "digest": "250a33eb"
@@ -166,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "16ba7174",
+      "state": "d1a9abb9",
       "events": "741638a5",
       "rng": {
         "draws": 17,
@@ -177,8 +177,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "3b9e96ef",
-      "events": "2d234fd8",
+      "state": "2195eefe",
+      "events": "80144eaf",
       "rng": {
         "draws": 112,
         "digest": "b6fc5cb4"
@@ -188,7 +188,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "0c18818a",
+      "state": "eb4d74af",
       "events": "741638a5",
       "rng": {
         "draws": 196,
@@ -199,18 +199,18 @@
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "9c9d1631",
-      "events": "e106852a",
+      "state": "ecb81b50",
+      "events": "73e51b3f",
       "rng": {
-        "draws": 311,
-        "digest": "6aa1bbaf"
+        "draws": 310,
+        "digest": "6ec485e8"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "16caf9ca",
+      "state": "4fdc66f3",
       "events": "741638a5",
       "rng": {
         "draws": 433,
@@ -221,7 +221,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "5e50f32c",
+      "state": "59ebb2f7",
       "events": "741638a5",
       "rng": {
         "draws": 433,
@@ -245,13 +245,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 15
+            "damageDealt": 20
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 15
+              "damageDealt": 20
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -388,7 +388,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 139,
+          "hp": 128,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -499,7 +499,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 351,
+          "hp": 354,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -587,7 +587,7 @@
           "threat": [
             [
               415,
-              15
+              20
             ],
             [
               418,
@@ -606,44 +606,44 @@
       "tick": 140,
       "time": 7,
       "nextId": 420,
-      "state": "6e2690ee",
+      "state": "d728a5a3",
       "events": "741638a5",
       "rng": {
-        "draws": 535,
-        "digest": "0e4dc6da"
+        "draws": 528,
+        "digest": "06c750ce"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 420,
-      "state": "ed721fe3",
+      "state": "0602473b",
       "events": "741638a5",
       "rng": {
-        "draws": 657,
-        "digest": "c486bb87"
+        "draws": 644,
+        "digest": "3a92ac50"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "a962fabe",
+      "state": "5a945d36",
       "events": "741638a5",
       "rng": {
-        "draws": 785,
-        "digest": "c1c2ac62"
+        "draws": 792,
+        "digest": "7424fa2b"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "a962fabe",
+      "state": "5a945d36",
       "events": "741638a5",
       "rng": {
-        "draws": 785,
-        "digest": "c1c2ac62"
+        "draws": 792,
+        "digest": "7424fa2b"
       },
       "label": "final",
       "players": [
@@ -663,13 +663,13 @@
           "cls": "hunter",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 15
+            "damageDealt": 20
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 15
+              "damageDealt": 20
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -805,7 +805,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 142,
+          "hp": 131,
           "id": 416,
           "kind": "mob",
           "level": 12,
@@ -902,7 +902,7 @@
           "fiveSecondRule": 99,
           "flee": 16,
           "hit": 16,
-          "hp": 359,
+          "hp": 362,
           "id": 418,
           "kind": "mob",
           "level": 12,
