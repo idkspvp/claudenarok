@@ -1,13 +1,16 @@
 // The shared crit core (Entity.sharedCritBonus): crit rating, talent crit, set
-// crit, and flat crit auras now feed BOTH hit tables. Community-found gap: the
-// spell path (Sim.spellCrit) used to read only Intellect, so crit from gear
-// ratings, talents, and set bonuses silently did nothing for casters. These
-// tests pin the shared core through the real seam every damage/heal crit roll
-// consumes (sim.ctx.spellCrit) and pin the channels that must NOT be shared:
-// Agility and Berserker Stance stay melee-only, Intellect and buff_spellcrit
-// stay spell-only. The concrete melee values are already pinned elsewhere
-// (combat_rating, haste_set_bonus, warrior_stances, spec_masteries), so the
-// melee side here asserts composition, not new numbers.
+// crit, and flat crit auras feed the MELEE hit table.
+//
+// This file used to pin that they also reached the SPELL table, closing a gap
+// where casters got nothing from crit gear. Pre-renewal Ragnarok removes the
+// question: magic cannot critically strike at all, so there is no spell table
+// for them to reach. The spell-side cases are skipped rather than deleted, so
+// they come back as the guard if magic crit is ever reintroduced; what remains
+// live is the melee composition and the assertion that the spell rate is zero.
+//
+// The concrete melee values are pinned elsewhere (combat_rating, haste_set_bonus,
+// warrior_stances, spec_masteries), so the melee side here asserts composition,
+// not new numbers.
 
 import { describe, expect, it } from 'vitest';
 import { critRateFrom } from '../src/sim/combat/crit';
@@ -45,7 +48,20 @@ function equipmentOf(items: ItemDef[]): PlayerEquipment {
   return Object.fromEntries(items.map((i) => [i.slot, i.id])) as PlayerEquipment;
 }
 
-describe('spell crit shared core', () => {
+describe('magic cannot critically strike', () => {
+  it('reports a zero spell-crit rate however much Intellect or crit gear is worn', () => {
+    // The guard the skipped suite below becomes when magic crit is gone: no
+    // amount of Intellect, crit rating, talent crit, or a flat crit aura moves
+    // the spell rate off zero, because there is no spell critical to buy.
+    const sim = new Sim({ seed: 1, playerClass: 'mage', autoEquip: true });
+    const p = sim.player;
+    p.stats.int = 9999;
+    p.sharedCritBonus = 5;
+    expect((sim.ctx as unknown as { spellCrit(e: typeof p): number }).spellCrit(p)).toBe(0);
+  });
+});
+
+describe.skip('spell crit shared core', () => {
   it('gear crit rating raises spell crit by exactly rating/2000', () => {
     // Arrange: a mage wearing a chest with 20 crit rating (20/2000 = 1%).
     const itemId = '__test_spell_crit_chest';

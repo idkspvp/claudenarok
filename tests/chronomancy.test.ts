@@ -162,7 +162,7 @@ describe('Temporal Mend', () => {
     expect(p.hp).toBe(p.maxHp);
   });
 
-  it('heals a wounded ally, crits through the normal roll, and draws healing threat', () => {
+  it('heals a wounded ally and draws healing threat', () => {
     const { sim, p } = chronoMage();
     const ally = sim.addPlayer('warrior', 'Tanque');
     const allyEnt = sim.entities.get(ally);
@@ -186,7 +186,9 @@ describe('Temporal Mend', () => {
       }
     ).dealDamage(allyEnt, mob, 1, false, 'physical', null, 'hit');
     allyEnt.hp = Math.max(1, Math.floor(allyEnt.maxHp * 0.4));
-    p.stats.int = 2000; // spellCrit = 0.05 + int * 0.0008: forces the heal crit roll
+    // Intellect no longer buys a heal crit: pre-renewal magic has no critical at
+    // all, so the roll is still drawn and always fails.
+    p.stats.int = 2000;
     sim.targetEntity(ally);
     sim.castAbility('temporal_mend');
     const events = collect(sim, 2.5);
@@ -195,7 +197,7 @@ describe('Temporal Mend', () => {
         e.type === 'heal2' && e.sourceId === p.id && e.targetId === ally,
     );
     expect(heal).toBeDefined();
-    expect(heal?.crit).toBe(true); // the normal heal-crit roll, forced by stat
+    expect(heal?.crit).toBe(false);
     // Threat: the healer entered the mob's table via the effective healing.
     const threat = (mob as unknown as { threat?: Map<number, number> }).threat;
     expect(threat?.has(p.id)).toBe(true);

@@ -5280,21 +5280,23 @@ export class Sim {
     spendResourceImpl(p, cost);
   }
 
-  private spellCrit(p: Entity): number {
-    // Magic CANNOT crit in pre-renewal Ragnarok: `battle_calc_magic_attack` never
+  private spellCrit(_p: Entity): number {
+    // Magic CANNOT critically strike in pre-renewal Ragnarok. This is an ABSENCE
+    // in the source rather than a statement: `battle_calc_magic_attack` never
     // calls `is_attack_critical`, and all seven of its call sites are on the
-    // weapon path (`MAGIC_CAN_CRIT` in combat/crit.ts records the finding).
+    // weapon path. `MAGIC_CAN_CRIT` in combat/crit.ts names the finding.
     //
-    // This still returns a rate, on purpose and temporarily. Spell crit is what
-    // most of the mage and priest talent trees are BUILT ON (Hot Streak,
-    // Combustion, Shatter, Ignite, the chronomancy row, the spec masteries) plus
-    // every healing critical, and Ragnarok has none of those talents either.
-    // Zeroing the rate ahead of the skills that replace them kills the trees
-    // without replacing them. It goes with the skill rebuild, in one piece.
+    // Zero rather than a deleted method, on purpose: every caller still ROLLS,
+    // so the shared rng stream keeps its shape and the talents that read the
+    // outcome for their own effects still resolve. The roll simply never comes
+    // up. The Intellect-scaled rate this used to return was invented, and it
+    // disagreed with the 1% physical base besides.
     //
-    // Base + Intellect + the shared crit core (crit rating, talent/set crit,
-    // flat crit auras; recalcPlayerStats) + spell-crit-specific auras.
-    return 0.05 + p.stats.int * 0.0008 + (p.sharedCritBonus ?? 0) + spellCritBonusFromAuras(p);
+    // This kills the mage and priest talents built on spell crit (Hot Streak,
+    // Combustion, Shatter, Ignite, the chronomancy row, the spec masteries) and
+    // every healing critical. Ragnarok has none of those either; they go with
+    // the skill rebuild rather than being preserved against it.
+    return 0;
   }
 
   // Heal core, heal multipliers, heal-absorb soak, crit-vuln bonus, and the

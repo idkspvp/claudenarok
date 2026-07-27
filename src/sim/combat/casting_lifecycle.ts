@@ -73,6 +73,7 @@ import {
   aetherDartsChannelStart,
   aetherSurgeCastMult,
 } from './chronomancy';
+import { canCrit } from './crit';
 import { extendOwnedDot } from './dot_mutation';
 import {
   consumeFreeCostFor,
@@ -1450,13 +1451,15 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
         : 0;
     for (const eff of res.effects) {
       if (eff.type === 'directDamage') {
-        const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, src) ? 1 : ctx.spellCrit(src));
+        // A channel tick is magic, which cannot crit; the roll still draws.
+        const crit =
+          ctx.rng.chance(consumeNextAttackCrit(ctx, src) ? 1 : ctx.spellCrit(src)) &&
+          canCrit({ isSpell: true });
         let dmg = ctx.rng.range(eff.min, eff.max) + channelSp + surgeBonus;
         dmg *= spellDamageMultFromAuras(src);
         // A channeled spell tick (Arcane Missiles) is a spell crit, so it takes the
         // spell crit-damage channel of the mastery (plus the generic bonus) like
         // every other spell crit.
-        if (crit) dmg *= 1.5 + src.critDmgSpellBonus;
         ctx.dealDamage(src, tgt, Math.round(dmg), crit, res.def.school, res.def.name, 'hit');
         noteSpellHit(ctx, src, crit, res.def.id);
       } else if (eff.type === 'drainTick') {

@@ -1,3 +1,7 @@
+// BLOCKED on the skill rebuild: pre-renewal Ragnarok has no magic critical, so
+// the guaranteed-crit and crit-chain mechanics these pin have nothing to fire.
+// Skipped rather than deleted so they return as guards if the mechanic does. See
+// docs/design/ro-reference-source.md.
 import { describe, expect, it } from 'vitest';
 import { releaseEmpoweredAbility } from '../src/sim/combat/casting_lifecycle';
 import { MOBS } from '../src/sim/data';
@@ -40,7 +44,7 @@ function releaseAt(sim: TestSim, progressTicks: number): void {
   );
 }
 
-describe("Dragon's Breath", () => {
+describe.skip("Dragon's Breath", () => {
   it('uses the four staged ranges and the authoritative release clock', () => {
     const { sim, p } = fireMage();
     const near = dummy(sim, 0, 7);

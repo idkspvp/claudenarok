@@ -203,19 +203,22 @@ describe('heal: applyHeal', () => {
     expect(draws).toBe(1);
   });
 
-  it('forced crit applies the *1.5 multiplier', () => {
+  it('never crits, however much Intellect the healer carries', () => {
     const sim = makeSim();
     const src = sim.player as AnyEntity;
     const tgt = sim.player as AnyEntity;
     tgt.maxHp = 100000;
     tgt.hp = 1000;
-    src.stats.int = 5000; // spellCrit = 0.05 + 5000*0.0008 = 4.05 -> chance always passes
+    // Intellect used to buy spell crit and with it healing crit. Pre-renewal
+    // Ragnarok has neither: nothing on the magic path calls is_attack_critical,
+    // so the rate is zero and no amount of Intellect moves it.
+    src.stats.int = 5000;
     sim.drainEvents();
     applyHeal(sim.ctx, src, tgt, 1000, 'Heal');
-    expect(tgt.hp).toBe(1000 + 1500); // round(1000 * 1.5)
+    expect(tgt.hp).toBe(1000 + 1000);
     const ev = sim.drainEvents().find((e) => e.type === 'heal2') as any;
-    expect(ev.crit).toBe(true);
-    expect(ev.amount).toBe(1500);
+    expect(ev.crit).toBe(false);
+    expect(ev.amount).toBe(1000);
     expect(ev.ability).toBe('Heal');
   });
 
@@ -244,19 +247,19 @@ describe('heal: applyHeal', () => {
     expect(ev.amount).toBe(100); // only the effective (non-overheal) portion
   });
 
-  it('chains crit * hex(source) * mortalWound(target) before the absorb soak', () => {
+  it('chains hex(source) * mortalWound(target) before the absorb soak', () => {
     const sim = makeSim();
     const src = sim.player as AnyEntity;
     const tgt = sim.player as AnyEntity;
     tgt.maxHp = 100000;
     tgt.hp = 1000;
-    src.stats.int = 5000; // forced crit
+    src.stats.int = 5000; // no longer buys a crit; the multipliers below are the subject
     src.auras.push(aura('hex', 0.5)); // outgoing *0.5
     tgt.auras.push(aura('mortal_wound', 0.5)); // incoming *0.5
     tgt.auras.push(aura('heal_absorb', 100)); // soak 100 after the mults
     applyHeal(sim.ctx, src, tgt, 1000, 'Heal');
-    // round(1000 * 1.5 * 0.5 * 0.5) = 375, minus 100 absorb = 275 lands.
-    expect(tgt.hp).toBe(1000 + 275);
+    // round(1000 * 0.5 * 0.5) = 250, minus 100 absorb = 150 lands.
+    expect(tgt.hp).toBe(1000 + 150);
     expect(tgt.auras.some((a: Aura) => a.kind === 'heal_absorb')).toBe(false); // 100 shield depleted
   });
 });

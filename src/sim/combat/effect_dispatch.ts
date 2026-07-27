@@ -69,6 +69,7 @@ import {
   placeTemporalEcho,
   selectCascadeTargets,
 } from './chronomancy';
+import { canCrit } from './crit';
 import { extendOwnedDot } from './dot_mutation';
 import { consumeAuraKind, consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
@@ -392,17 +393,20 @@ export function runEffects(
         ) {
           dmg *= 1 + vsDotted;
         }
+        // The gate is applied LAST on purpose: the roll draws from the shared
+        // stream and consumeNextAttackCrit has a side effect, so short-circuiting
+        // ahead of them would change the stream and swallow an aura.
         const crit =
-          ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : critChance) ||
-          sureCrit ||
-          // Fire spec (combat/fire_mage.ts): Combustion / Fire Blast / Scorch
-          // execute override the OUTCOME; the roll above is still drawn.
-          fireGuaranteedCrit(ctx, p, ability.id, ability.school, target);
+          (ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : critChance) ||
+            sureCrit ||
+            // Fire spec (combat/fire_mage.ts): Combustion / Fire Blast / Scorch
+            // execute override the OUTCOME; the roll above is still drawn.
+            fireGuaranteedCrit(ctx, p, ability.id, ability.school, target)) &&
+          canCrit({ isSpell });
         if (sureCrit) sureCritRolled = true;
         // A PHYSICAL critical does not multiply: it is worth the defence it skips
         // (combat/crit.ts). The spell arm keeps its multiplier until magic crit
         // goes with the skill rebuild that removes the talents built on it.
-        if (crit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
         if (isSpell) dmg *= spellDamageMultFromAuras(p);
         if (!isSpell) dmg = ctx.applyDefence(dmg, target, crit);
         // Aether Surge (Chronomancy Phase 3): each held Arcane Charge scales the
@@ -498,9 +502,10 @@ export function runEffects(
           ctx.rng.range(0, eff.variance) +
           ctx.effectiveAttackPower(p) / 14;
         const crit =
-          ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : p.critChance) ||
-          sureCrit ||
-          fireGuaranteedCrit(ctx, p, ability.id, ability.school, target ?? null);
+          (ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : p.critChance) ||
+            sureCrit ||
+            fireGuaranteedCrit(ctx, p, ability.id, ability.school, target ?? null)) &&
+          canCrit({ isSpell });
         if (sureCrit) sureCritRolled = true;
         // No multiplier; a critical's worth is that it skips defence entirely.
         dmg = ctx.applyDefence(dmg, target, crit);
@@ -837,14 +842,14 @@ export function runEffects(
         ctx.emit({ type: 'aura', targetId: p.id, name: seal.name, gained: false });
         // Judgement is an instant holy nuke; scale it with Spell Power too.
         const baseDmg = ctx.rng.range(seal.value2 ?? 10, seal.value3 ?? 15);
-        let dmg =
+        const dmg =
           baseDmg * (eff.dmgMult ?? 1) +
           (eff.flat ?? 0) +
           directHitBonus(p.spellPower, ability, res.castTime);
         const crit =
-          ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : ctx.spellCrit(p)) || sureCrit;
+          (ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : ctx.spellCrit(p)) || sureCrit) &&
+          canCrit({ isSpell });
         if (sureCrit) sureCritRolled = true;
-        if (crit) dmg *= 1.5 + p.critDmgSpellBonus;
         ctx.dealDamage(
           p,
           target,
@@ -1366,6 +1371,7 @@ export function runEffects(
         const aoeCrit =
           (eff.canCrit ?? false) &&
           aoeTargets.length > 0 &&
+          canCrit({ isSpell, abilityCanCrit: eff.canCrit }) &&
           (ctx.rng.chance(ctx.spellCrit(p)) ||
             fireGuaranteedCrit(ctx, p, ability.id, ability.school, null));
         for (const m of aoeTargets) {
@@ -1374,7 +1380,6 @@ export function runEffects(
           // A physical critical does not multiply; it skips defence instead. The
           // spell arm keeps its multiplier for now, and defence never applied to
           // spell-school AoE (Arcane Explosion, Consecration) anyway.
-          if (aoeCrit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
           if (!isSpell) dmg = ctx.applyDefence(dmg, m, aoeCrit);
           // Soft-cap scale (Revenge above 5 targets): applied after the roll and
           // armor so the total, not any single hit, is what the cap bounds.
@@ -1733,12 +1738,12 @@ export function runEffects(
           if (!glacialFrontContains(p.pos, p.facing, m.pos, stage.range, angle)) continue;
           const critRoll = ctx.rng.chance(ctx.spellCrit(p));
           const crit =
-            critRoll ||
-            fireGuaranteedCrit(ctx, p, ability.id, ability.school, m) ||
-            (eff.guaranteedCritLevel !== undefined && level === eff.guaranteedCritLevel);
+            (critRoll ||
+              fireGuaranteedCrit(ctx, p, ability.id, ability.school, m) ||
+              (eff.guaranteedCritLevel !== undefined && level === eff.guaranteedCritLevel)) &&
+            canCrit({ isSpell });
           let damage = ctx.rng.range(stage.min, stage.max) + spellPower;
           damage *= spellDamageMultFromAuras(p);
-          if (crit) damage *= 1.5 + p.critDmgSpellBonus;
           ctx.dealDamage(p, m, Math.round(damage), crit, ability.school, ability.name, 'hit');
           if (eff.hotStreakOnce) {
             hotStreakHit = true;
@@ -2125,10 +2130,10 @@ export function runEffects(
             directHitBonus(abilityScalingPower(p, ability), ability, res.castTime);
           if (isSpell) dmg *= spellDamageMultFromAuras(p);
           const crit =
-            ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : ctx.spellCrit(p)) || sureCrit;
+            (ctx.rng.chance(consumeNextAttackCrit(ctx, p) ? 1 : ctx.spellCrit(p)) || sureCrit) &&
+            canCrit({ isSpell });
           if (sureCrit) sureCritRolled = true;
           // A physical critical does not multiply; it skips defence instead.
-          if (crit && isSpell) dmg *= 1.5 + p.critDmgSpellBonus;
           if (!isSpell) dmg = ctx.applyDefence(dmg, target, crit);
           if (isSpell) noteSpellHit(ctx, p, crit, ability.id);
           ctx.dealDamage(

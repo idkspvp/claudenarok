@@ -187,7 +187,10 @@ describe('Gloamveil Form amplifies Shadow damage by 15%', () => {
   });
 });
 
-describe('channeled spell crits take the spell crit-damage mastery', () => {
+// BLOCKED on the skill rebuild: pre-renewal Ragnarok has no magic critical, so
+// a spell crit-damage mastery has nothing to multiply. Skipped rather than
+// deleted so it returns as the guard if the mechanic ever does.
+describe.skip('channeled spell crits take the spell crit-damage mastery', () => {
   it('a spell crit-damage mastery makes the Aether Darts channel crit harder (same rolls)', () => {
     // Drive the channeled directDamage tick path (casting_lifecycle) with a guaranteed
     // crit. The mage rework gated Aether Darts to Chronomancy and swapped the fire

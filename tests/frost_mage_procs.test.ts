@@ -350,7 +350,7 @@ describe('Ice Lance frozen resolution', () => {
     expect(p.auras.some((a) => a.kind === 'fingers_of_frost')).toBe(false);
   });
 
-  it('Shatter adds crit chance without adding another crit-damage multiplier', () => {
+  it('Shatter adds crit chance, which pre-renewal magic can never cash in', () => {
     expect(SHATTER_CRIT_BONUS).toBe(0.5);
     const forcedCrit = (rooted: boolean): number => {
       const { sim, p } = makeSim({ seed: 1337 });
@@ -365,7 +365,10 @@ describe('Ice Lance frozen resolution', () => {
       sim.drainEvents();
       const hits = damageEvents(castAndResolve(sim, p, 'frostbolt', 'Rimelance'), 'Rimelance');
       expect(hits).toHaveLength(1);
-      expect(hits[0].crit).toBe(true);
+      // Magic cannot crit at all now, so even a forced spell-crit buff does not
+      // land one. The pin that mattered here was that Shatter adds no SECOND
+      // damage multiplier, and it still holds: the two runs agree exactly.
+      expect(hits[0].crit).toBe(false);
       return hits[0].amount;
     };
 
