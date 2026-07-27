@@ -29,11 +29,18 @@ import type { StatAllocation } from '../src/sim/types';
 import { emptyStatAllocation } from '../src/sim/types';
 
 describe('the two ratings', () => {
-  it('gives the attacker the higher baseline, so a fight lands its blows', () => {
-    // Equal level, no attributes: the attacker is ahead by design. If this ever
-    // inverts, two naked level-1 characters flail at each other forever.
-    expect(hitRating(1, 0, 0)).toBeGreaterThan(fleeRating(1, 0, 0));
-    expect(hitChance(hitRating(1, 0, 0), fleeRating(1, 0, 0))).toBe(MAX_HIT_CHANCE);
+  it('carries NO baseline, so an even fight meets at the base percentage', () => {
+    // The correction that mattered: an earlier pass gave HIT a +175 term and
+    // FLEE a +100 one, which handed every attacker a permanent 75-point lead and
+    // made two identical characters connect every single time. They are level
+    // plus the attribute and nothing else, so an even fight trades at 80% and
+    // one swing in five misses.
+    expect(hitRating(1, 0, 0)).toBe(fleeRating(1, 0, 0));
+    expect(hitChance(hitRating(20, 10, 0), fleeRating(20, 10, 0))).toBeCloseTo(
+      BASE_HIT_PERCENT / 100,
+      10,
+    );
+    expect(hitChance(hitRating(20, 10, 0), fleeRating(20, 10, 0))).toBeLessThan(MAX_HIT_CHANCE);
   });
 
   it('pays DEX into accuracy and AGI into evasion, point for point', () => {
@@ -48,10 +55,9 @@ describe('the two ratings', () => {
   it('scales both with level, so a level gap still matters on its own', () => {
     expect(hitRating(50, 0, 0)).toBeGreaterThan(hitRating(1, 0, 0));
     expect(fleeRating(50, 0, 0)).toBeGreaterThan(fleeRating(1, 0, 0));
-    // Equal-level parity is preserved at every level: the gap between the two
-    // baselines is a constant, not something that drifts as characters grow.
-    const gapAt = (lv: number) => hitRating(lv, 0, 0) - fleeRating(lv, 0, 0);
-    expect(gapAt(99)).toBe(gapAt(1));
+    // And they stay level with each other: an unbuilt character of any level
+    // meets another of the same level at parity, never ahead.
+    for (const lv of [1, 20, 50, 99]) expect(hitRating(lv, 0, 0)).toBe(fleeRating(lv, 0, 0));
   });
 
   it('floors a drained attribute instead of inverting the rating', () => {
@@ -101,8 +107,7 @@ describe('perfect dodge', () => {
     // The contest and this roll are separate on purpose. If perfect dodge were
     // folded into FLEE, a high-HIT attacker would eventually never miss at all,
     // and Luck would stop being a defensive attribute.
-    const drowning = hitChance(100000, fleeRating(1, 0, 99));
-    expect(drowning).toBe(MAX_HIT_CHANCE);
+    expect(hitChance(100000, fleeRating(1, 0, 99))).toBe(MAX_HIT_CHANCE);
     expect(perfectDodgeChance(99)).toBeGreaterThan(0);
   });
 });
@@ -147,8 +152,10 @@ describe('the contest reaches a real swing', () => {
     return landed / swings;
   }
 
-  it('lands nearly every swing on an unevasive target', () => {
-    expect(landRate({})).toBeGreaterThan(0.9);
+  it('lands most swings on an unevasive target, but not all of them', () => {
+    const rate = landRate({});
+    expect(rate).toBeGreaterThan(0.6);
+    expect(rate).toBeLessThan(1);
   });
 
   it('makes a high-Agility target genuinely hard to hit', () => {
@@ -163,9 +170,13 @@ describe('the contest reaches a real swing', () => {
   it('lets Dexterity buy its way back through that evasion', () => {
     // The other half, and the reason DEX is a real build choice now: accuracy
     // answers evasion. With no DEX this attacker is losing the contest badly.
-    const noDex = landRate({ targetAgi: 200 });
-    const withDex = landRate({ targetAgi: 200, attackerDex: 150 });
-    expect(withDex).toBeGreaterThan(noDex + 0.2);
+    // Against evasion this deep the attacker is pinned at the 5% floor with no
+    // Dexterity at all, so the target's Agility comes down to somewhere the
+    // contest can actually move.
+    const noDex = landRate({ targetAgi: 80 });
+    const withDex = landRate({ targetAgi: 80, attackerDex: 150 });
+    expect(noDex).toBeLessThan(0.5);
+    expect(withDex).toBeGreaterThan(noDex + 0.3);
   });
 
   it('gives a player real hit and flee ratings off their own attributes', () => {

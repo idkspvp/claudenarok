@@ -18,29 +18,27 @@
 // SOURCING: a reimplementation of a published mechanic, authored from the
 // documented relationships. Nothing copied from a GPL server's db/.
 //
-// CONFIDENCE, stated plainly so a reviewer knows where to spend their checking:
-//   HIGH   that perfect dodge exists at all, comes from LUK alone, and ignores
-//          the attacker's accuracy. It is the number Ragnarok shows in
-//          parentheses beside FLEE in the status window.
-//   HIGH   the two rating formulas below.
-//   MEDIUM the perfect dodge coefficient.
-//   LOWEST BASE_HIT_PERCENT. Both 80 and 100 appear in circulation for it, and
-//          this file has not resolved which is right.
-// Every one of those is a NAMED CONSTANT here rather than a number inlined at a
-// call site, and the tests pin RELATIONSHIPS rather than values, so correcting
-// any of them against a reference is a one-line change that breaks nothing.
+// VERIFIED against published references (iRO Wiki and the pre-renewal accuracy
+// documentation) rather than reconstructed from memory. The first pass of this
+// file carried a +175 baseline on HIT and +100 on FLEE, which handed every
+// attacker a permanent 75-point advantage and made two equally built characters
+// of the same level connect every single time. There are no baselines: the
+// ratings are level plus the attribute, and the 80% base is what an even fight
+// trades at. Checking was worth it, and the named constants below are what made
+// the correction a three-line change.
 
-/** Attacker accuracy. The 175 is the baseline every combatant carries, which is
- *  what makes a same-level fight land most of its blows rather than whiff. */
+/** Attacker accuracy: level, Dexterity, and a third of Luck. No baseline term:
+ *  the 80% floor in the contest below is what carries an even fight, and adding
+ *  one here would hand the attacker a permanent free advantage. */
 export function hitRating(level: number, dex: number, luk: number): number {
-  return 175 + Math.max(1, Math.floor(level)) + Math.max(0, dex) + Math.floor(Math.max(0, luk) / 3);
+  return Math.max(1, Math.floor(level)) + Math.max(0, dex) + Math.floor(Math.max(0, luk) / 3);
 }
 
-/** Defender evasion. Its baseline is 75 below the attacker's on purpose: at equal
- *  level and equal attributes the attacker is ahead, and FLEE has to be BOUGHT
- *  with Agility before it starts refusing hits. */
+/** Defender evasion: level, Agility, and a fifth of Luck. Symmetric with HIT, so
+ *  two equally built characters of the same level meet at the 80% base rather
+ *  than one of them starting ahead. */
 export function fleeRating(level: number, agi: number, luk: number): number {
-  return 100 + Math.max(1, Math.floor(level)) + Math.max(0, agi) + Math.floor(Math.max(0, luk) / 5);
+  return Math.max(1, Math.floor(level)) + Math.max(0, agi) + Math.floor(Math.max(0, luk) / 5);
 }
 
 /** The floor and ceiling on the contest. Nothing is ever unhittable and nothing
@@ -49,9 +47,10 @@ export function fleeRating(level: number, agi: number, luk: number): number {
 export const MIN_HIT_CHANCE = 0.05;
 export const MAX_HIT_CHANCE = 1;
 
-/** Where the contest sits when HIT and FLEE are equal. With the 175/100 split
- *  above, equal attributes at equal level put the attacker 75 ahead, so this
- *  matters only once a defender has actually invested in Agility. */
+/** Where the contest sits when HIT and FLEE are equal, and the number that does
+ *  all the work: two equally built characters of the same level trade at 80%, so
+ *  one swing in five misses no matter how the fight is going. Every point of
+ *  advantage moves it one point. */
 export const BASE_HIT_PERCENT = 80;
 
 /** Chance this attack gets past FLEE, as a fraction. */

@@ -848,15 +848,14 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   // any attacker's accuracy, and a level-12 character lands every swing on a
   // level-60 elite. Agility is what makes a monster hard to hit in Ragnarok, and
   // an unauthored one needs enough of it for the level gap to mean something.
-  // Agility tracks level; Dexterity does NOT, and the asymmetry is the point.
-  // Agility is what makes a monster hard to hit, so a zero-Agility one lets a
-  // level-12 character land every swing on a level-60 elite. Dexterity is what
-  // makes a monster hard to DODGE, and giving it the same level scaling puts an
-  // unauthored monster's accuracy permanently ahead of any player's evasion:
-  // a 99-Agility character would never dodge anything, which deletes a whole
-  // build from the game. Both become authored numbers when the records land.
-  e.hit = hitRating(level, 0, 0);
-  e.flee = fleeRating(level, level, 0);
+  // A third of level for both, which is what Ragnarok's monsters actually carry:
+  // modest attributes, not a level's worth. Zero would let a level-12 character
+  // land every swing on a level-60 elite; a full level's worth swings it the
+  // other way and leaves a capped Agility build unable to dodge and a capped
+  // Dexterity build unable to hit, deleting both archetypes at once. Authored
+  // numbers replace this when the monster records land.
+  e.hit = hitRating(level, Math.floor(level / 3), 0);
+  e.flee = fleeRating(level, Math.floor(level / 3), 0);
   e.dodgeChance = perfectDodgeChance(0);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
   e.stats.armor = Math.round(template.armorPerLevel * (level - 1));
