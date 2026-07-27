@@ -812,8 +812,8 @@ export const en: EnTranslations = {
     },
     "nativeUpdate": {
       "title": "Update Available",
-      "body": "A new version of World of ClaudeCraft is available. Update now for the latest fixes and improvements.",
-      "bodyWithVersion": "Version {version} of World of ClaudeCraft is available. Update now for the latest fixes and improvements.",
+      "body": "A new version of Claudenarok Online is available. Update now for the latest fixes and improvements.",
+      "bodyWithVersion": "Version {version} of Claudenarok Online is available. Update now for the latest fixes and improvements.",
       "notNow": "Not now",
       "update": "Update"
     },
@@ -1806,7 +1806,7 @@ export const en: EnTranslations = {
     },
     "discord": {
       "title": "Discord",
-      "panelTitle": "World of ClaudeCraft",
+      "panelTitle": "Claudenarok Online",
       "open": "Discord",
       "close": "Close",
       "keybind": "Discord Panel",
@@ -2823,8 +2823,8 @@ export const en: EnTranslations = {
     }
   },
   "guide": {
-    "brand": "World of ClaudeCraft",
-    "brandShort": "ClaudeCraft",
+    "brand": "Claudenarok Online",
+    "brandShort": "Claudenarok",
     "tagline": "A classic-style MMO you play free in your browser.",
     "skipToContent": "Skip to main content",
     "loading": "Loading...",
@@ -2888,7 +2888,7 @@ export const en: EnTranslations = {
       "github": "Source on GitHub",
       "discord": "Join the Discord",
       "communityWiki": "Community Wiki",
-      "rights": "World of ClaudeCraft",
+      "rights": "Claudenarok Online",
       "linksLabel": "Play and community links"
     },
     "language": {
@@ -2911,7 +2911,7 @@ export const en: EnTranslations = {
     },
     "home": {
       "eyebrow": "Classic-style browser MMO",
-      "title": "World of ClaudeCraft",
+      "title": "Claudenarok Online",
       "subtitle": "Hunt, group up, and explore a hand-built world, free in your browser.",
       "ctaPlay": "Play Now",
       "ctaLearn": "How to Play",
@@ -3412,7 +3412,7 @@ export const en: EnTranslations = {
     },
     "worldPage": {
       "heading": "The world",
-      "intro": "World of ClaudeCraft is one continuous land you cross on foot, three zones laid south to north. There is no fast travel, so the journey is part of the adventure.",
+      "intro": "Claudenarok Online is one continuous land you cross on foot, three zones laid south to north. There is no fast travel, so the journey is part of the adventure.",
       "hub": "Home base",
       "mapHeading": "The road north",
       "mapSub": "Three zones, south to north, each a step higher in level. Follow the road north and the land carries you from the valley to the peaks.",
@@ -4152,7 +4152,7 @@ export const en: EnTranslations = {
   },
   "editor": {
     "appTitle": "Map Editor",
-    "docTitle": "Map Editor - World of ClaudeCraft",
+    "docTitle": "Map Editor - Claudenarok Online",
     "untitledMap": "Untitled Map",
     "playtestPlayerName": "Mapmaker",
     "topbar": {
@@ -4628,8 +4628,8 @@ export const en: EnTranslations = {
     "realmName": "World Name"
   },
   "footer": {
-    "copyright": "2026 World of ClaudeCraft",
-    "githubLink": "https://github.com/levy-street/world-of-claudecraft",
+    "copyright": "2026 Claudenarok Online",
+    "githubLink": "https://github.com/idkspvp/claudenarok",
     "githubLabel": "Open Source Project",
     "whitepaper": "Whitepaper",
     "terms": "Terms of Service",
@@ -4686,7 +4686,7 @@ export const en: EnTranslations = {
     "serverOnline": "Online",
     "serverOffline": "Offline",
     "play": "Play",
-    "playAria": "Play World of ClaudeCraft",
+    "playAria": "Play Claudenarok Online",
     "serverLabel": "Choose your world",
     "serverAria": "Select world: Online or Offline",
     "serverOfflineSub": "Instant local world",
@@ -4797,12 +4797,12 @@ export const en: EnTranslations = {
     "helpLinkedDisconnectedWithBalance": "Holder perks are active. Connect the app when you need to sign or spend.",
     "extensionHelp": "Choose an installed browser wallet, or open Reown AppKit for Phantom, Solflare, Backpack, and more.",
     "mobileAppHelp": "Choose Phantom or Solflare. Your wallet app will ask for approval. Keep this game open and return to it when finished.",
-    "standaloneAppHelp": "Wallet connections are not available in the Home Screen app yet. Open World of ClaudeCraft in Safari or Chrome to use Phantom or Solflare.",
+    "standaloneAppHelp": "Wallet connections are not available in the Home Screen app yet. Open Claudenarok Online in Safari or Chrome to use Phantom or Solflare.",
     "openAppTitle": "Continue in {wallet}",
     "openAppHelp": "Open {wallet} to review this request. Keep this game tab open while the wallet app is active.",
     "openAppButton": "Open {wallet}",
     "manualReturnBrowserHelp": "After approval, return to this game tab. If iOS opens another browser, close it and return to the original browser manually.",
-    "manualReturnStandaloneHelp": "After approval, return to World of ClaudeCraft from your Home Screen. If iOS opens a browser, close it and reopen the Home Screen app manually.",
+    "manualReturnStandaloneHelp": "After approval, return to Claudenarok Online from your Home Screen. If iOS opens a browser, close it and reopen the Home Screen app manually.",
     "preparingAppButton": "Preparing {wallet}...",
     "walletAppUnavailable": "{wallet} could not be prepared. Close this window and try again.",
     "flowConnect": "Choose a wallet. Verification continues automatically.",
@@ -4817,12 +4817,12 @@ export const en: EnTranslations = {
       "linkBody": "Choose a wallet extension in this browser. You will sign a verification message, then return to the desktop app.",
       "paymentBody": "Choose the wallet linked to your account and approve the transaction in this browser.",
       "extensionHelp": "No compatible wallet extension was found. Install or unlock Phantom, Solflare, or another Solana browser wallet, then retry.",
-      "safety": "World of ClaudeCraft never asks for your recovery phrase or private key.",
+      "safety": "Claudenarok Online never asks for your recovery phrase or private key.",
       "continueWith": "Continue with {wallet}",
       "reviewTitle": "Review in your wallet",
       "reviewBody": "Follow the prompt from {wallet}. Keep this browser page open.",
       "completeTitle": "Wallet authorization complete",
-      "completeBody": "You can return to the World of ClaudeCraft desktop app.",
+      "completeBody": "You can return to the Claudenarok Online desktop app.",
       "returnButton": "Return to desktop app",
       "failed": "Wallet authorization failed or expired. Return to the desktop app and try again.",
       "retry": "Retry"
@@ -4920,7 +4920,7 @@ export const en: EnTranslations = {
     "levelClass": "Level {level} - {className}",
     "topPercent": "TOP {percent}%",
     "realmSubtitle": "{realm} World",
-    "defaultRealm": "World of ClaudeCraft",
+    "defaultRealm": "Claudenarok Online",
     "brandWordmark": "WORLD OF CLAUDECRAFT",
     "recruited": "{count} recruited",
     "footerHandle": "@{handle}",
@@ -4928,8 +4928,8 @@ export const en: EnTranslations = {
     "footerCta": "Forge your legend: {siteUrl}",
     "arenaStat": "Arena",
     "shareTierBit": ", {tier}-rank $WOC holder",
-    "shareText": "I'm forging my legend in World of ClaudeCraft: Level {level} {className}{tierBit}. Join my world:",
-    "nativeShareTitle": "World of ClaudeCraft",
+    "shareText": "I'm forging my legend in Claudenarok Online: Level {level} {className}{tierBit}. Join my world:",
+    "nativeShareTitle": "Claudenarok Online",
     "fileNameFallback": "player",
     "actionShareX": "Share to X",
     "actionCopyReferral": "Copy Referral Link",
@@ -5577,13 +5577,13 @@ export const en: EnTranslations = {
     }
   },
   "seo": {
-    "title": "World of ClaudeCraft: Classic-Style Web MMO",
-    "description": "Embark on an epic adventure in World of ClaudeCraft, a classic-style micro-MMO playable directly in your browser. Join a persistent shared world, level up classes, and defeat enemies!",
+    "title": "Claudenarok Online: Classic-Style Web MMO",
+    "description": "Embark on an epic adventure in Claudenarok Online, a classic-style micro-MMO playable directly in your browser. Join a persistent shared world, level up classes, and defeat enemies!",
     "genre": "MMORPG",
     "playMode": "Multiplayer",
     "applicationCategory": "Game",
     "operatingSystem": "Web browser",
-    "officialLabel": "Official World of ClaudeCraft website",
+    "officialLabel": "Official Claudenarok Online website",
     "officialBody": "worldofclaudecraft.com is the official free browser MMO for the Claudemoon world. Play online with a persistent character, explore solo offline, read the wiki, and follow verified community links from this site."
   },
   "a11y": {
@@ -5592,9 +5592,9 @@ export const en: EnTranslations = {
     "mainNavigation": "Main navigation",
     "languageSelection": "Language selection",
     "characterActions": "Character actions",
-    "githubProject": "Open the World of ClaudeCraft GitHub project",
-    "discordCommunity": "Join the World of ClaudeCraft Discord community",
-    "donateProject": "Donate to support World of ClaudeCraft"
+    "githubProject": "Open the Claudenarok Online GitHub project",
+    "discordCommunity": "Join the Claudenarok Online Discord community",
+    "donateProject": "Donate to support Claudenarok Online"
   },
   "entryGuard": {
     "title": "Graphics lowered",
@@ -5675,11 +5675,11 @@ export const en: EnTranslations = {
       "later": "Later"
     },
     "crash": {
-      "title": "World of ClaudeCraft",
+      "title": "Claudenarok Online",
       "body": "The game view stopped working. Reload it?",
       "reload": "Reload",
       "quit": "Quit",
-      "fatalBody": "World of ClaudeCraft hit an unexpected error and needs to close."
+      "fatalBody": "Claudenarok Online hit an unexpected error and needs to close."
     }
   },
   "gpuNotice": {
@@ -5818,17 +5818,17 @@ export const en: EnTranslations = {
     "iosStandaloneDetail": "You are in home-screen fullscreen mode. Keep the device in landscape.",
     "iosInstallDetail": "For true fullscreen on iPhone or iPad, install this page to your Home Screen first.",
     "iosShareStep": "In Safari, tap Share, then Add to Home Screen.",
-    "iosOpenStep": "Open World of ClaudeCraft from the new Home Screen icon.",
+    "iosOpenStep": "Open Claudenarok Online from the new Home Screen icon.",
     "androidStandaloneDetail": "You are in fullscreen app mode. Keep the device in landscape.",
     "androidInstallDetail": "For fullscreen on Android, install this page or add it to your Home screen first.",
     "androidInstallStep": "In Chrome, tap the menu, then Install app or Add to Home screen.",
-    "androidOpenStep": "Open World of ClaudeCraft from the new icon.",
+    "androidOpenStep": "Open Claudenarok Online from the new icon.",
     "otherStandaloneDetail": "Keep your device in landscape fullscreen.",
     "otherInstallDetail": "Install or add this page to your Home screen for the best fullscreen mobile experience."
   },
   "serverUnavailable": {
-    "title": "World of ClaudeCraft - World Unavailable",
-    "logoAlt": "World of ClaudeCraft",
+    "title": "Claudenarok Online - World Unavailable",
+    "logoAlt": "Claudenarok Online",
     "eyebrow": "World maintenance",
     "heading": "The world is temporarily unavailable.",
     "body": "We are restarting the game service and expect Claudemoon to return shortly. This page will keep checking automatically.",

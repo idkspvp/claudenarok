@@ -3,7 +3,7 @@
 **Status:** planning. Nothing below has landed yet.
 **Decided:** 2026-07-26. Target is Ragnarok Online *pre-renewal* ("classic"), not Renewal.
 
-This is the plan for turning SpiritVale's progression from the WoW-shaped one it
+This is the plan for turning Claudenarok Online's progression from the WoW-shaped one it
 inherited into a classic-Ragnarok one. It records the reference numbers, what the
 codebase looks like today, and the order the work has to happen in — that order is
 not free, and getting it wrong means tuning the same content twice.
@@ -11,7 +11,7 @@ not free, and getting it wrong means tuning the same content twice.
 ## Sourcing rule (this project is commercial)
 
 The open-source Ragnarok emulators (rAthena, Hercules) are **GPL-3.0, repository
-wide, `db/` included**. SpiritVale is MIT and intended to be commercial, so:
+wide, `db/` included**. Claudenarok Online is MIT and intended to be commercial, so:
 
 - **Formulas and numbers are facts** and carry no copyright. Take them from the
   documentation — [iRO Wiki](https://irowiki.org/wiki/Stats),

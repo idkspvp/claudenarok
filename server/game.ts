@@ -70,11 +70,11 @@ import {
   emptyMoveInput,
   isDungeonDifficulty,
   MAX_LEVEL,
-  STATUS_STATS,
   type MobFamily,
   RUN_SPEED,
   type SimEvent,
   type SportRole,
+  STATUS_STATS,
   type VcBracket,
   type VcNationId,
 } from '../src/sim/types';
@@ -2859,7 +2859,7 @@ export class GameServer {
     // broadcast it to everyone (and likewise don't broadcast departures below).
     this.send(session, {
       t: 'events',
-      list: [{ type: 'log', text: `${name} has entered World of ClaudeCraft.`, color: '#ffd100' }],
+      list: [{ type: 'log', text: `${name} has entered Claudenarok Online.`, color: '#ffd100' }],
     });
     // firstJoin: the fresh-join path (a resume takes resumeSession, which stamps
     // the guild with firstJoin false since the entity already carries it), so

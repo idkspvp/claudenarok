@@ -18,8 +18,8 @@ const ROOT = path.resolve(__dirname, '..');
 
 // Brand / acronym / pure-template tokens that legitimately stay identical across locales.
 const BRAND = [
-  'World of ClaudeCraft',
-  'ClaudeCraft',
+  'Claudenarok Online',
+  'Claudenarok',
   'GitHub',
   'Fiesta',
   'MMORPG',

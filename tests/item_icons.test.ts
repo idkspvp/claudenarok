@@ -290,7 +290,7 @@ describe('item webp icons', () => {
     for (const id of [...BAG_IDS, 'backpack']) {
       const entry = m.entries.find((e) => e.itemId === id);
       expect(entry?.license, `${id} must carry its own license override`).toContain(
-        'World of ClaudeCraft original art',
+        'Claudenarok Online original art',
       );
     }
   });
@@ -346,7 +346,7 @@ describe('item webp icons', () => {
         `${declared?.batch}/masters/${id}.png (accepted ${declared?.acceptedVersion})`,
       );
       expect(entry?.license, `${id} must override the mapping's CraftPix default`).toContain(
-        'World of ClaudeCraft original art',
+        'Claudenarok Online original art',
       );
     }
   });

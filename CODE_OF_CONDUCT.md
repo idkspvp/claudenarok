@@ -3,7 +3,7 @@
 ## Our pledge
 
 We as members, contributors, and maintainers pledge to make participation in the
-World of ClaudeCraft community a welcoming and harassment-free experience for
+Claudenarok Online community a welcoming and harassment-free experience for
 everyone, regardless of age, body size, visible or invisible disability,
 ethnicity, gender identity and expression, level of experience, education,
 socioeconomic status, nationality, personal appearance, race, religion, or sexual

@@ -1,6 +1,6 @@
 # Desktop release runbook (Electron: website download + Steam)
 
-How to build, sign, publish, and verify the World of ClaudeCraft desktop app.
+How to build, sign, publish, and verify the Claudenarok Online desktop app.
 The longer companion explainer (what shipped, per-platform update/signing
 mechanics, step-by-step release walkthroughs) is `docs/desktop-ship-notes.md`.
 One codebase produces two distribution channels:
@@ -137,7 +137,7 @@ the nested Electron frameworks).
 - HARD DEPENDENCY: macOS auto-update does not apply unless the app is signed with a
   real Developer ID AND notarized. The updater consumes the ZIP target (which is why
   zip stays in the mac target list). Ship no public mac build without both.
-- Verify after a signed build: `codesign --verify --deep --strict "release/mac-universal/World of ClaudeCraft.app"`
+- Verify after a signed build: `codesign --verify --deep --strict "release/mac-universal/Claudenarok Online.app"`
   and `spctl -a -t exec -vv <app>` says "accepted, source=Notarized Developer ID".
 
 ## Windows: Azure signing (two routes)
@@ -310,7 +310,7 @@ SHA256SUMS-mac --ignore-missing` on macOS) from their download directory.
    is stamped and the acceptance window can later be tightened to stamped-only.
 3. Upload from `release/` to the update host directory (keep filenames exactly):
    - macOS: handled by CI; the manual list, should CI ever be bypassed:
-     `world-of-claudecraft-<v>-mac-universal.dmg` (download page),
+     `claudenarok-<v>-mac-universal.dmg` (download page),
      `...-mac-universal.zip` + `.zip.blockmap` (updater), `latest-mac.yml`.
    - Windows: handled by CI (which takes the artifact list from `latest.yml`,
      see "Publishing from CI"). For a manual upload, should CI ever be
@@ -357,7 +357,7 @@ would init Steam with the Spacewar fallback id (480) and link tickets would veri
 against the wrong app. Output layouts
 in `release-steam/`:
 
-- `mac-universal/World of ClaudeCraft.app` (one universal .app)
+- `mac-universal/Claudenarok Online.app` (one universal .app)
 - `win-unpacked/` (x64; Windows-on-ARM runs it via emulation)
 - `linux-unpacked/` (x64)
 
@@ -366,12 +366,12 @@ Depot layout (one app, three depots, one package):
 | Depot | Content root | OS filter |
 |---|---|---|
 | `<appid>1` | `win-unpacked/*` | Windows, 64-bit |
-| `<appid>2` | `World of ClaudeCraft.app` (the loose bundle) | macOS |
+| `<appid>2` | `Claudenarok Online.app` (the loose bundle) | macOS |
 | `<appid>3` | `linux-unpacked/*` | Linux, 64-bit |
 
-Launch options (one per OS): Windows `World of ClaudeCraft.exe`; macOS
-`World of ClaudeCraft.app` (app-bundle launch picks the best arch on Apple Silicon);
-Linux `world-of-claudecraft` (the executable inside linux-unpacked).
+Launch options (one per OS): Windows `Claudenarok Online.exe`; macOS
+`Claudenarok Online.app` (app-bundle launch picks the best arch on Apple Silicon);
+Linux `claudenarok` (the executable inside linux-unpacked).
 
 Rules that keep this working:
 - Upload the mac depot from a macOS or Linux machine (a Windows upload destroys the
@@ -398,9 +398,9 @@ Rules that keep this working:
 
 - Shell log file (rotating, 5 MB + one archive; paths follow the package NAME,
   verified on a packaged build): macOS
-  `~/Library/Logs/world-of-claudecraft/main.log`; Windows
-  `%USERPROFILE%\AppData\Roaming\world-of-claudecraft\logs\main.log`; Linux
-  `~/.config/world-of-claudecraft/logs/main.log`. Contains the startup banner
+  `~/Library/Logs/claudenarok/main.log`; Windows
+  `%USERPROFILE%\AppData\Roaming\claudenarok\logs\main.log`; Linux
+  `~/.config/claudenarok/logs/main.log`. Contains the startup banner
   (version/channel/updater state), GPU status (including a warning if WebGL fell
   back to software), updater activity, renderer console warnings/errors, uncaught
   renderer errors (clamped + secret-redacted, capped per session), and crash/
@@ -491,7 +491,7 @@ Rules that keep this working:
    restore the flag. The dev loop (`npm run electron:dev`) pre-applies the same
    configuration to the electron it spawns, so no relaunch happens there and the
    Vite teardown-on-exit logic keeps working.
-   Verify with `ps -o pid,ppid,cmd -C world-of-claudecraft` (or the AppImage/binary
+   Verify with `ps -o pid,ppid,cmd -C claudenarok` (or the AppImage/binary
    name) showing the relaunched PID's parent already exited, and `[gpu] running as
    PRIME-relaunched child` in `main.log` (the child writes it; the parent exits
    before file logging exists).

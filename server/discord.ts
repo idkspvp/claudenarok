@@ -1078,7 +1078,7 @@ function bouncePage(
     .replace(/>/g, '\\u003e')
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
-  const html = `<!doctype html><html><head><meta charset="utf-8"><title>World of ClaudeCraft</title>
+  const html = `<!doctype html><html><head><meta charset="utf-8"><title>Claudenarok Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>body{background:#14100a;color:#fff6df;font-family:system-ui,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}main{text-align:center;padding:24px}</style>
 </head><body><main><p id="m">Connecting Discord...</p></main><script>

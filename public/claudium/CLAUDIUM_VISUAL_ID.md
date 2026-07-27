@@ -2,7 +2,7 @@
 
 Claudium is the in-game SOFT currency (1 Claudium = 0.01 USD, one-way, cosmetics only).
 It must read as premium + trustworthy (real money buys it) AND belong to the World of
-ClaudeCraft fantasy world. It is DISTINCT from $WOC (the tradable gold token): Claudium
+Claudenarok fantasy world. It is DISTINCT from $WOC (the tradable gold token): Claudium
 is platinum/arcane, not gold.
 
 ## The mark

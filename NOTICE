@@ -1,7 +1,7 @@
-SpiritVale
-==========
+Claudenarok Online
+==================
 
-SpiritVale is a commercial game built on World of ClaudeCraft, an open-source
+Claudenarok Online is a commercial game built on World of ClaudeCraft, an open-source
 project by Levy Street released under the MIT License.
 
     https://github.com/levy-street/world-of-claudecraft
@@ -14,7 +14,7 @@ that file carries the upstream copyright line alongside ours. Do not remove it.
 What this project is
 --------------------
 
-World of ClaudeCraft is the starting point, not the destination. SpiritVale is a
+World of ClaudeCraft is the starting point, not the destination. Claudenarok Online is a
 long-running conversion of it into a game modelled on classic (pre-renewal)
 Ragnarok Online: six status attributes the player places by hand, a level cap of
 99, the element / race / size damage triangle, weapon classes and refining, and
@@ -23,7 +23,7 @@ its own world, monsters, and items. Changes are not contributed back upstream.
 Where the two differ
 --------------------
 
-Anything under this repository that is not marked otherwise is SpiritVale's own
+Anything under this repository that is not marked otherwise is Claudenarok Online's own
 work and is not covered by the upstream project's terms beyond what the MIT
 License already grants. Where upstream code survives, it survives under the MIT
 License above.

@@ -117,10 +117,10 @@ const desktopLoginOrigin = desktopConfig.loginOrigin.replace(/\/+$/, '');
 // build time, https-only) they upload compressed and rate-limited. No extra
 // user data rides along: the report carries only process/version metadata.
 crashReporter.start({
-  productName: 'World of ClaudeCraft',
+  productName: 'Claudenarok Online',
   // companyName is deprecated in Electron 43; the metadata field survives as
   // the _companyName global extra.
-  globalExtra: { _companyName: 'World of ClaudeCraft' },
+  globalExtra: { _companyName: 'Claudenarok Online' },
   submitURL: desktopConfig.crashSubmitUrl || undefined,
   uploadToServer: desktopConfig.crashSubmitUrl !== '',
   compress: true,
@@ -237,7 +237,7 @@ function createMainWindow() {
     height: 900,
     minWidth: 1024,
     minHeight: 720,
-    title: 'World of ClaudeCraft',
+    title: 'Claudenarok Online',
     backgroundColor: '#05070a',
     icon: path.join(__dirname, '..', 'build', 'icon.png'),
     webPreferences: {

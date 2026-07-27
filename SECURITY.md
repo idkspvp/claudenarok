@@ -1,6 +1,6 @@
 # Security Policy
 
-We take the security of World of ClaudeCraft seriously, and we appreciate the work
+We take the security of Claudenarok Online seriously, and we appreciate the work
 of everyone who helps keep players and self-hosters safe.
 
 ## Reporting a vulnerability
@@ -48,7 +48,7 @@ without permission.
 
 ## Supported versions
 
-World of ClaudeCraft is under active development and is currently pre-1.0. Fixes
+Claudenarok Online is under active development and is currently pre-1.0. Fixes
 land on the active `release/vX.Y.Z` branch, which merges into `main` when that
 version ships, so the supported targets are the most recent release and the
 current release branch. Older releases do not receive backports. If you run a

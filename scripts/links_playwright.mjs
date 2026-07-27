@@ -36,12 +36,12 @@ const server = http.createServer((req, res) => {
 
 const EXPECTED_LINKS = [
   'https://worldofclaudecraft.com/',
-  'https://x.com/WoClaudecraft',
+  'https://x.com/Claudenarok',
   'https://www.instagram.com/worldofclaudecraft/',
   'https://www.tiktok.com/@worldofclaudecraft',
-  'https://www.youtube.com/@WoClaudeCraft',
-  'https://www.reddit.com/r/WorldofClaudecraft/',
-  'https://github.com/levy-street/world-of-claudecraft',
+  'https://www.youtube.com/@Claudenarok',
+  'https://www.reddit.com/r/ClaudenarokOnline/',
+  'https://github.com/idkspvp/claudenarok',
 ];
 
 const problems = [];
@@ -77,7 +77,7 @@ async function main() {
     ok(errs.length === 0, `[${t.name}] no console/page errors`);
 
     // Core structural assertions (run on every device).
-    ok((await page.title()) === 'World of ClaudeCraft - Official Links', `[${t.name}] localized title`);
+    ok((await page.title()) === 'Claudenarok Online - Official Links', `[${t.name}] localized title`);
     ok((await page.locator('h1').count()) === 1, `[${t.name}] exactly one h1`);
     ok((await page.locator('h2').count()) === 1, `[${t.name}] exactly one h2`);
     ok((await page.locator('a.btn').count()) === 7, `[${t.name}] 7 link buttons`);

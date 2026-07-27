@@ -200,7 +200,7 @@ node_modules in the asar, all seven fuses set.
 2. On each OS runner, with that platform's signing env set:
    `npm run electron:build`. Outputs land in `release/`.
 3. Upload to the update host directory (keep exact filenames):
-   - mac: `world-of-claudecraft-<v>-mac-universal.dmg` (download page),
+   - mac: `claudenarok-<v>-mac-universal.dmg` (download page),
      `...-mac-universal.zip` + `.zip.blockmap` + `latest-mac.yml` (updater).
    - win: the combined NSIS installer electron-builder emits by default for
      x64+arm64 (see `docs/desktop-release.md` for the buildUniversalInstaller
@@ -244,9 +244,9 @@ bump the version, rebuild, upload, and watch the toast + install cycle.
 ## Details worth knowing (grab bag)
 
 - **Log files** (paths follow the package NAME): mac
-  `~/Library/Logs/world-of-claudecraft/main.log`, win
-  `%APPDATA%\world-of-claudecraft\logs\main.log`, linux
-  `~/.config/world-of-claudecraft/logs/main.log`. 5 MB rotation, one `.old`.
+  `~/Library/Logs/claudenarok/main.log`, win
+  `%APPDATA%\claudenarok\logs\main.log`, linux
+  `~/.config/claudenarok/logs/main.log`. 5 MB rotation, one `.old`.
   The startup banner logs version, channel, updater state, crash-dump dir, and
   the log path itself. Ask players to attach it to bug reports.
 - **Crash minidumps** accumulate under the Crashpad dir printed in the banner

@@ -24,7 +24,7 @@ repository or redistribute a build of it:
 | `Yes` | Public domain or MIT-equivalent. Redistribute freely, commercially or not. |
 | `Yes, attribution required` | Redistribute freely, but you must keep the credit and the licence notice. |
 | `Yes, under SIL OFL 1.1` | Redistribute under the Open Font License. You may not sell the fonts on their own. |
-| `With the project only` | Project-owned art you may keep and ship **as part of World of ClaudeCraft or a fork of it**, so your fork works out of the box. You may not extract these assets and redistribute, sell, or publish them on their own or as part of an asset pack. |
+| `With the project only` | Project-owned art you may keep and ship **as part of Claudenarok Online or a fork of it**, so your fork works out of the box. You may not extract these assets and redistribute, sell, or publish them on their own or as part of an asset pack. |
 | `Non-commercial only, with attribution` | CC BY-NC 4.0. Share and adapt non-commercially with credit. **Commercial use requires the author's permission.** |
 | **`No, permission required`** | **Do not redistribute.** Rights reserved, or licensed to Levy Street only. See below. |
 
@@ -52,14 +52,14 @@ get written permission.
 - **Artwork and recordings used with permission.** The Collective Reversal and
   Hourglass of Suspension mage icons, the `fireball_form` and `counterspell`
   mage artwork, and the `temporal_clock` sound effect. These are used in World
-  of ClaudeCraft under a permission granted to Levy Street, which does not
+  of Claudenarok under a permission granted to Levy Street, which does not
   extend to third parties. **Redistribution requires permission, and must be
   arranged through Levy Street** (tony@levystreet.com).
 
 The **@jamiecypher** sound effects are a separate case: they are CC BY-NC 4.0,
 so you *may* redistribute them non-commercially with attribution, but you may
 **not** use them commercially. The perpetual commercial grant covering them runs
-to World of ClaudeCraft (Levy Street) only and does not transfer to forks. See
+to Claudenarok Online (Levy Street) only and does not transfer to forks. See
 the Audio section.
 
 The **brand marks** (Twitch, X, Kick, YouTube, Discord, Solana, USDC) are
@@ -113,27 +113,27 @@ than free, so ask before you rely on it.
 | HDRI environment maps (kloofendal_48d_partly_cloudy_puresky, belfast_open_field, kiara_1_dawn, dikhololo_night) | Poly Haven | https://polyhaven.com | CC0 1.0 | Yes |
 | Vale Cup practice-pitch skybox (env/space_galaxy.jpg, the 360 degree Milky Way panorama) | ESO / S. Brunier | https://www.eso.org/public/images/eso0932a/ | CC BY 4.0 | Yes, attribution required |
 | Water normal maps (waternormals.jpg, Water_1/2_M_Normal.jpg) | three.js authors | https://github.com/mrdoob/three.js (r165, examples/textures) | MIT | Yes, attribution required |
-| Biome backdrop panoramas (vale_backdrop.webp, marsh_backdrop.webp, peaks_backdrop.webp and 4K variants) | World of ClaudeCraft | Project-generated procedural painterly sky panorama art | Project asset | With the project only |
-| Elite dragon rank emblem (`public/ui/ranks/elite-dragon-frame.webp`) | World of ClaudeCraft | Project-generated with OpenAI image generation and optimized locally | Project asset, rights reserved | **No, permission required** |
-| Eastbrook Vale rebuild master concept, nine turnaround sheets, full-color surface-atlas source, and comparison evidence (`docs/screenshots/eastbrook-vale-rebuild/concepts/`, `turnarounds/`, and `materials/`) | World of ClaudeCraft | Original project art generated with OpenAI image generation using only World of ClaudeCraft captures and project-generated style/scale anchors; the full-color atlas source and any comparison containing it are provenance evidence, not the redistributable shipping texture; prompts and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset, rights reserved | **No, permission required** |
-| Eastbrook finishing-pass master concept and Ravenpost mailbox / noticeboard turnaround sheets (`docs/screenshots/eastbrook-vale-rebuild/polish/concepts/` and `polish/turnarounds/`) | World of ClaudeCraft | Original project art generated with OpenAI image generation using only accepted World of ClaudeCraft concepts, turnarounds, and in-game captures; no proprietary-game screenshots or third-party art entered the lineage; exact prompts, hashes, and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset, rights reserved | **No, permission required** |
-| Eastbrook shared surface atlas (`public/textures/eastbrook_surface_atlas.webp`; accepted source and comparison under `docs/screenshots/eastbrook-vale-rebuild/materials/`) | World of ClaudeCraft | Original project art generated with OpenAI image generation from first-party World of ClaudeCraft references, then deterministically converted to a high-key grayscale detail multiplier via `scripts/assets/eastbrook_town`; exact prompt and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset | With the project only |
-| Meshy creature models (tolling_bell, spider_egg_sac from the Drowned Litany, yumi_cat from Protect Yumi, in `public/models/creatures/`) | World of ClaudeCraft | Project-generated via Meshy AI (text-to-3D; the humanoids and yumi_cat rigged and animated), owned under the Meshy paid-plan license | Project asset | With the project only |
-| Legacy Claudium prototype weapon models and source images (emberfang, Red Skull, and Purple sets, in `public/models/weapons/` and `public/ui/weapons/`) | World of ClaudeCraft | Project-generated and normalized through the PR 1405 asset pipeline | Project asset, rights reserved | **No, permission required** |
-| Bag icons (`public/ui/items/{backpack,linen_pouch,travelers_knapsack,wolfhide_satchel,gravewoven_bag,mistcallers_duffel}.webp`, encoded to 128px WebP via `scripts/convert_item_icons_webp.mjs`) | World of ClaudeCraft | Project art created for this game; provenance per icon in `public/ui/items/mapping.json` | Project asset | With the project only |
-| Professions 2.0 art set (`public/ui/professions/*.webp`, the `woc_professions_art` material icons recorded in `public/ui/items/mapping.json`, and the inline maker's-mark glyph in `src/ui/ui_icons.ts`) | World of ClaudeCraft | Maintainer-commissioned original art created for this game and normalized through the profession/item pipelines; provenance per raster in the corresponding mapping file | Project asset, rights reserved | **No, permission required** |
-| Generated item icon rebrand (`public/ui/items/*.webp`, exact IDs under `generatedBatches` in `public/ui/items/mapping.json`) | World of ClaudeCraft | Project-generated with OpenAI image generation, reviewed and optimized locally | Project asset, rights reserved | **No, permission required** |
+| Biome backdrop panoramas (vale_backdrop.webp, marsh_backdrop.webp, peaks_backdrop.webp and 4K variants) | Claudenarok Online | Project-generated procedural painterly sky panorama art | Project asset | With the project only |
+| Elite dragon rank emblem (`public/ui/ranks/elite-dragon-frame.webp`) | Claudenarok Online | Project-generated with OpenAI image generation and optimized locally | Project asset, rights reserved | **No, permission required** |
+| Eastbrook Vale rebuild master concept, nine turnaround sheets, full-color surface-atlas source, and comparison evidence (`docs/screenshots/eastbrook-vale-rebuild/concepts/`, `turnarounds/`, and `materials/`) | Claudenarok Online | Original project art generated with OpenAI image generation using only Claudenarok Online captures and project-generated style/scale anchors; the full-color atlas source and any comparison containing it are provenance evidence, not the redistributable shipping texture; prompts and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset, rights reserved | **No, permission required** |
+| Eastbrook finishing-pass master concept and Ravenpost mailbox / noticeboard turnaround sheets (`docs/screenshots/eastbrook-vale-rebuild/polish/concepts/` and `polish/turnarounds/`) | Claudenarok Online | Original project art generated with OpenAI image generation using only accepted Claudenarok Online concepts, turnarounds, and in-game captures; no proprietary-game screenshots or third-party art entered the lineage; exact prompts, hashes, and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset, rights reserved | **No, permission required** |
+| Eastbrook shared surface atlas (`public/textures/eastbrook_surface_atlas.webp`; accepted source and comparison under `docs/screenshots/eastbrook-vale-rebuild/materials/`) | Claudenarok Online | Original project art generated with OpenAI image generation from first-party Claudenarok Online references, then deterministically converted to a high-key grayscale detail multiplier via `scripts/assets/eastbrook_town`; exact prompt and provenance are committed under `docs/design/eastbrook-vale-rebuild/` | Project asset | With the project only |
+| Meshy creature models (tolling_bell, spider_egg_sac from the Drowned Litany, yumi_cat from Protect Yumi, in `public/models/creatures/`) | Claudenarok Online | Project-generated via Meshy AI (text-to-3D; the humanoids and yumi_cat rigged and animated), owned under the Meshy paid-plan license | Project asset | With the project only |
+| Legacy Claudium prototype weapon models and source images (emberfang, Red Skull, and Purple sets, in `public/models/weapons/` and `public/ui/weapons/`) | Claudenarok Online | Project-generated and normalized through the PR 1405 asset pipeline | Project asset, rights reserved | **No, permission required** |
+| Bag icons (`public/ui/items/{backpack,linen_pouch,travelers_knapsack,wolfhide_satchel,gravewoven_bag,mistcallers_duffel}.webp`, encoded to 128px WebP via `scripts/convert_item_icons_webp.mjs`) | Claudenarok Online | Project art created for this game; provenance per icon in `public/ui/items/mapping.json` | Project asset | With the project only |
+| Professions 2.0 art set (`public/ui/professions/*.webp`, the `woc_professions_art` material icons recorded in `public/ui/items/mapping.json`, and the inline maker's-mark glyph in `src/ui/ui_icons.ts`) | Claudenarok Online | Maintainer-commissioned original art created for this game and normalized through the profession/item pipelines; provenance per raster in the corresponding mapping file | Project asset, rights reserved | **No, permission required** |
+| Generated item icon rebrand (`public/ui/items/*.webp`, exact IDs under `generatedBatches` in `public/ui/items/mapping.json`) | Claudenarok Online | Project-generated with OpenAI image generation, reviewed and optimized locally | Project asset, rights reserved | **No, permission required** |
 | Class ability icons (`public/ui/skills/<class>/*.webp`, re-encoded from the source-pack PNGs to WebP via `scripts/convert_skill_icons_webp.mjs`; all 9 classes: paladin, hunter, priest, warlock, rogue, warrior, mage, druid, shaman; source packs paladin/archer/priest/warlock/thief/warrior/berserker/demon/druid/pyromancer/cryomancer/aeromancer/lightning-mage/earth-magician/100-rpg-skill-icons/100-skill-icons-pack-for-rpg + per-ability fill sets) | CraftPix | https://craftpix.net | CraftPix premium (royalty-free commercial), purchased by Levy Street account (callum@levystreet.com) | **No, permission required** |
-| Collective Reversal and Hourglass of Suspension ability icons (`public/ui/skills/mage/collective_reversal.webp`, `public/ui/skills/mage/temporal_hourglass.webp`) | World of ClaudeCraft project owner | Owner-provided original artwork | Used with permission (Levy Street) | **No, permission required** |
-| Season 1 Armory weapon models, source images, generated store thumbnails, and promotional card (Guildmark, Emberwrought, Hoarfrost, and Fallen Star collections, in `public/models/weapons/`, `public/ui/weapons/`, and `public/ui/store/`) | World of ClaudeCraft | Project-generated via `scripts/asset_pipeline` (Tripo AI 3D); storefront renders composited locally, with the text-free promo background derived through OpenAI image editing | Project asset, rights reserved | **No, permission required** |
-| Claudium visual asset set (`public/claudium/`: coin, UI icons, and denomination stacks; excludes the two payment-rail brand icons noted under Brand marks) | World of ClaudeCraft | Project-generated via the Higgsfield MCP connector (Recraft V4.1 stills), composited and web-optimized locally; owned under the Higgsfield paid-plan license | Project asset, rights reserved | **No, permission required** |
-| Sampled interface and event sound effects (`public/audio/sfx/ui_*.mp3`, except `ui_level_up.mp3` and `ui_achievement.mp3`, credited under Audio below) | World of ClaudeCraft | Project-generated deterministic FFmpeg synthesis via `scripts/gen_ui_sfx.mjs` | Project asset | With the project only |
-| Book of Deeds achievement icons (`public/ui/deeds/*.webp`, one per earnable deed, downscaled from the maintainer's 512px source set to 128px WebP via `scripts/convert_deed_icons_webp.mjs`) | World of ClaudeCraft | Maintainer-commissioned bespoke art, owned by the project | Project asset, rights reserved | **No, permission required** |
-| HUD chrome launcher icons (`public/ui/chrome/*.webp`, one per primary destination in the side rail and mobile bar, keyed to alpha and normalized to 128px WebP via `scripts/convert_chrome_icons_webp.mjs`) | World of ClaudeCraft | Project-generated with Google Gemini image generation to one authored art direction, keyed and optimized locally; provenance per icon in `public/ui/chrome/mapping.json` | Project asset, rights reserved | **No, permission required** |
+| Collective Reversal and Hourglass of Suspension ability icons (`public/ui/skills/mage/collective_reversal.webp`, `public/ui/skills/mage/temporal_hourglass.webp`) | Claudenarok Online project owner | Owner-provided original artwork | Used with permission (Levy Street) | **No, permission required** |
+| Season 1 Armory weapon models, source images, generated store thumbnails, and promotional card (Guildmark, Emberwrought, Hoarfrost, and Fallen Star collections, in `public/models/weapons/`, `public/ui/weapons/`, and `public/ui/store/`) | Claudenarok Online | Project-generated via `scripts/asset_pipeline` (Tripo AI 3D); storefront renders composited locally, with the text-free promo background derived through OpenAI image editing | Project asset, rights reserved | **No, permission required** |
+| Claudium visual asset set (`public/claudium/`: coin, UI icons, and denomination stacks; excludes the two payment-rail brand icons noted under Brand marks) | Claudenarok Online | Project-generated via the Higgsfield MCP connector (Recraft V4.1 stills), composited and web-optimized locally; owned under the Higgsfield paid-plan license | Project asset, rights reserved | **No, permission required** |
+| Sampled interface and event sound effects (`public/audio/sfx/ui_*.mp3`, except `ui_level_up.mp3` and `ui_achievement.mp3`, credited under Audio below) | Claudenarok Online | Project-generated deterministic FFmpeg synthesis via `scripts/gen_ui_sfx.mjs` | Project asset | With the project only |
+| Book of Deeds achievement icons (`public/ui/deeds/*.webp`, one per earnable deed, downscaled from the maintainer's 512px source set to 128px WebP via `scripts/convert_deed_icons_webp.mjs`) | Claudenarok Online | Maintainer-commissioned bespoke art, owned by the project | Project asset, rights reserved | **No, permission required** |
+| HUD chrome launcher icons (`public/ui/chrome/*.webp`, one per primary destination in the side rail and mobile bar, keyed to alpha and normalized to 128px WebP via `scripts/convert_chrome_icons_webp.mjs`) | Claudenarok Online | Project-generated with Google Gemini image generation to one authored art direction, keyed and optimized locally; provenance per icon in `public/ui/chrome/mapping.json` | Project asset, rights reserved | **No, permission required** |
 | Guide webfonts (`public/fonts/*.woff2`: Cinzel by Natanael Gama; Alegreya and Alegreya Sans by Juan Pablo del Peral, Huerta Tipografica; woff2 subsets latin/latin-ext/cyrillic/vietnamese as served by Google Fonts, self-hosted for the /wiki guide) | Natanael Gama; Huerta Tipografica | https://fonts.google.com/specimen/Cinzel , https://fonts.google.com/specimen/Alegreya , https://fonts.google.com/specimen/Alegreya+Sans | SIL OFL 1.1 | Yes, under SIL OFL 1.1 |
 | Owner-provided Mage artwork (`fireball_form.webp`, `counterspell.webp`) | Levy Street account | Owner-provided artwork | Used with permission (Levy Street) | **No, permission required** |
-| Temporal clock sound effect (`public/audio/sfx/temporal_clock.mp3`) | World of ClaudeCraft | User-provided source recording | Used with permission (Levy Street) | **No, permission required** |
-| Remastered streamed soundtrack (`public/audio/music/*.mp3`: town, overworld, dungeon, and battle themes) | World of ClaudeCraft | Rendered from the project's own procedural themes (`scripts/render_music.mjs`), then remixed and remastered; provided by the project owner | Project asset | With the project only |
+| Temporal clock sound effect (`public/audio/sfx/temporal_clock.mp3`) | Claudenarok Online | User-provided source recording | Used with permission (Levy Street) | **No, permission required** |
+| Remastered streamed soundtrack (`public/audio/music/*.mp3`: town, overworld, dungeon, and battle themes) | Claudenarok Online | Rendered from the project's own procedural themes (`scripts/render_music.mjs`), then remixed and remastered; provided by the project owner | Project asset | With the project only |
 
 ## Brand marks
 
@@ -152,7 +152,7 @@ project assets, and no endorsement or affiliation is implied.
 
 None of these marks are licensed to you by this file or by the project's MIT
 license. Trademark law, not copyright licensing, governs their use. The same
-applies to the "World of ClaudeCraft" and "Levy Street" names, logos, and
+applies to the "Claudenarok Online" and "Levy Street" names, logos, and
 branding.
 
 ## Audio
@@ -163,7 +163,7 @@ licensed source material from EastWest Composer Cloud, Epic Stock Media, and
 Freesound.org (CC0). @jamiecypher retains copyright and publishes this work
 under CC BY-NC 4.0 (Creative Commons Attribution-NonCommercial 4.0
 International): free to use and share non-commercially with attribution.
-@jamiecypher separately grants World of ClaudeCraft (Levy Street) a
+@jamiecypher separately grants Claudenarok Online (Levy Street) a
 perpetual, royalty-free license to use these assets commercially, including
 in official releases and the Claudium store.
 
@@ -173,54 +173,54 @@ non-commercial. For commercial use, arrange your own licence with the author.
 
 | Assets | Author | Source | License | Redistribution |
 |---|---|---|---|---|
-| Quest event sounds (`quest_accept`, `quest_ready`, `quest_complete`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Lockpick minigame sounds (`lockpick_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Wand auto-attack sounds (`wand_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Level-up and Book of Deeds achievement chimes (`ui_level_up`, `ui_achievement`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Magic-school impact and casting-support one-shots (`impact_*`, `heal_impact`, `buff_apply`, `debuff_apply`, `spell_nova`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Magic-school projectile launches (`proj_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Melee, footstep, movement, combat-reaction, and player-state sounds (`melee_*`, `foot_*`, `move_*`, `combat_*`, `player_death*`, `player_hurt*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
-| Creature vocalizations, every mob family (`mob_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to World of ClaudeCraft) | Non-commercial only, with attribution |
+| Quest event sounds (`quest_accept`, `quest_ready`, `quest_complete`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Lockpick minigame sounds (`lockpick_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Wand auto-attack sounds (`wand_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Level-up and Book of Deeds achievement chimes (`ui_level_up`, `ui_achievement`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Magic-school impact and casting-support one-shots (`impact_*`, `heal_impact`, `buff_apply`, `debuff_apply`, `spell_nova`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Magic-school projectile launches (`proj_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Melee, footstep, movement, combat-reaction, and player-state sounds (`melee_*`, `foot_*`, `move_*`, `combat_*`, `player_death*`, `player_hurt*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
+| Creature vocalizations, every mob family (`mob_*`) | @jamiecypher | Original work | CC BY-NC 4.0 (+ perpetual commercial grant to Claudenarok Online) | Non-commercial only, with attribution |
 
 ## Generated prop and creature models
 
 | Assets | Author | Source | License | Redistribution |
 |---|---|---|---|---|
-| Generated prop model (marsh_plank_bridge) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_shrine_fragment) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_corpse_candle) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_bell_gallows) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_sluice_post) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_dead_tree) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_reed_cluster) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (yumi_brazier_stand) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (yumi_torch_handle) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (dungeon_door_arch) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (crypt_ritual_circle) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_module_exit) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_surface_exit) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_rite_shrine_bell) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_rite_shrine_candle) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_rite_shrine_reed) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_rite_shrine_skull) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (delve_pressure_plate) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (marsh_root_wall) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated creature model + animations (training_dummy) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D, auto-rig + preset retargets) | Project asset | With the project only |
-| Generated prop model (engineering_workbench) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (alchemy_cauldron) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (cooking_spit) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (leatherworking_rack) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (tailoring_loom) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (inscription_lectern) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (enchanting_altar) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (jewelcrafting_bench) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (mining_ore_cart) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (herbalism_drying_rack) | World of ClaudeCraft | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
-| Generated prop model (banker_chest) | World of ClaudeCraft | Project-generated via the img2threejs workflow and `scripts/assets/banker_chest` from a user-provided concept reference; reference not redistributed | Project asset | With the project only |
-| Generated landmark model (eastbrook_grand_armoury) | World of ClaudeCraft | Original procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_grand_armoury`, inspired by a user-provided scene reference; reference not redistributed | Project asset | With the project only |
-| Generated Eastbrook town kit (`eastbrook_bank`, `eastbrook_smithy`, `eastbrook_inn`, `eastbrook_chapel`, `eastbrook_weaving_workshop`, `eastbrook_toolworks`, `eastbrook_civic_well_beacon`, `eastbrook_market_stall`, `eastbrook_wall_wing`) | World of ClaudeCraft | Original deterministic procedural Three.js models produced via the img2threejs workflow and `scripts/assets/eastbrook_town` from the project-generated Eastbrook turnaround sheets | Project asset | With the project only |
-| Generated Eastbrook Ravenpost mailbox (`mailbox_pillar`) | World of ClaudeCraft | Original deterministic procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_mailbox` from the project-generated finishing-pass turnaround; replaces the historical Tripo mailbox while preserving its stable runtime path and gameplay contract | Project asset | With the project only |
-| Generated Eastbrook public noticeboard (`eastbrook_noticeboard`) | World of ClaudeCraft | Original deterministic procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_noticeboard` from the project-generated finishing-pass turnaround; blank notice shapes contain no readable or proprietary text | Project asset | With the project only |
+| Generated prop model (marsh_plank_bridge) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_shrine_fragment) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_corpse_candle) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_bell_gallows) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_sluice_post) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_dead_tree) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_reed_cluster) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (yumi_brazier_stand) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (yumi_torch_handle) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (dungeon_door_arch) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (crypt_ritual_circle) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_module_exit) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_surface_exit) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_rite_shrine_bell) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_rite_shrine_candle) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_rite_shrine_reed) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_rite_shrine_skull) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (delve_pressure_plate) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (marsh_root_wall) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated creature model + animations (training_dummy) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D, auto-rig + preset retargets) | Project asset | With the project only |
+| Generated prop model (engineering_workbench) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (alchemy_cauldron) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (cooking_spit) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (leatherworking_rack) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (tailoring_loom) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (inscription_lectern) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (enchanting_altar) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (jewelcrafting_bench) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (mining_ore_cart) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (herbalism_drying_rack) | Claudenarok Online | Project-generated via scripts/asset_pipeline (Tripo AI 3D) | Project asset | With the project only |
+| Generated prop model (banker_chest) | Claudenarok Online | Project-generated via the img2threejs workflow and `scripts/assets/banker_chest` from a user-provided concept reference; reference not redistributed | Project asset | With the project only |
+| Generated landmark model (eastbrook_grand_armoury) | Claudenarok Online | Original procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_grand_armoury`, inspired by a user-provided scene reference; reference not redistributed | Project asset | With the project only |
+| Generated Eastbrook town kit (`eastbrook_bank`, `eastbrook_smithy`, `eastbrook_inn`, `eastbrook_chapel`, `eastbrook_weaving_workshop`, `eastbrook_toolworks`, `eastbrook_civic_well_beacon`, `eastbrook_market_stall`, `eastbrook_wall_wing`) | Claudenarok Online | Original deterministic procedural Three.js models produced via the img2threejs workflow and `scripts/assets/eastbrook_town` from the project-generated Eastbrook turnaround sheets | Project asset | With the project only |
+| Generated Eastbrook Ravenpost mailbox (`mailbox_pillar`) | Claudenarok Online | Original deterministic procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_mailbox` from the project-generated finishing-pass turnaround; replaces the historical Tripo mailbox while preserving its stable runtime path and gameplay contract | Project asset | With the project only |
+| Generated Eastbrook public noticeboard (`eastbrook_noticeboard`) | Claudenarok Online | Original deterministic procedural Three.js model produced via the img2threejs workflow and `scripts/assets/eastbrook_noticeboard` from the project-generated finishing-pass turnaround; blank notice shapes contain no readable or proprietary text | Project asset | With the project only |
 
 Assets were optimized for shipping (animation clip pruning, meshopt compression,
 texture resizing) via `scripts/assets/build_assets.mjs`; raw packs are not

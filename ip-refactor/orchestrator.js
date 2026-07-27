@@ -15,11 +15,11 @@ export const meta = {
 //   must be committed on feature/ip-pivot BEFORE this orchestrator runs. Tracks apply the LOCKED
 //   NAME-MAP; if it is not LOCKED, every slice STOPS.
 
-const BASE = '/Users/reubenhorne/Documents/code/world-of-claudecraft/world-of-claudecraft' // feature/ip-pivot (integration target)
-const VOCAB_WT = '/Users/reubenhorne/Documents/code/world-of-claudecraft/wt-ip-vocab'       // track/ip-vocab
-const CREAT_WT = '/Users/reubenhorne/Documents/code/world-of-claudecraft/wt-ip-creatures'   // track/ip-creatures
-const WORLD_WT = '/Users/reubenhorne/Documents/code/world-of-claudecraft/wt-ip-world'       // track/ip-world
-const TEXT_WT  = '/Users/reubenhorne/Documents/code/world-of-claudecraft/wt-ip-text'        // track/ip-text
+const BASE = '/Users/reubenhorne/Documents/code/claudenarok/claudenarok' // feature/ip-pivot (integration target)
+const VOCAB_WT = '/Users/reubenhorne/Documents/code/claudenarok/wt-ip-vocab'       // track/ip-vocab
+const CREAT_WT = '/Users/reubenhorne/Documents/code/claudenarok/wt-ip-creatures'   // track/ip-creatures
+const WORLD_WT = '/Users/reubenhorne/Documents/code/claudenarok/wt-ip-world'       // track/ip-world
+const TEXT_WT  = '/Users/reubenhorne/Documents/code/claudenarok/wt-ip-text'        // track/ip-text
 const PKT = '/Users/reubenhorne/Documents/code/woc-refactor/ip-refactor'
 const WM = `${PKT}/02-WORKING-MEMORY.md`
 
@@ -56,7 +56,7 @@ const SLICES = {
         gate: `npx vitest run tests/parity tests/localization_fixes.test.ts tests/i18n_resolved_equivalence.test.ts tests/guide.test.ts && npx tsc --noEmit`, note: RENAME_NOTE + ' S3: the mob mechanic name has NO id; it keys off the English STRING, so edit the inline name AND its src/ui/sim_i18n.ts AURA_NAME_KEY entry in the SAME commit, then run tests/localization_fixes.test.ts.',
         allowed: ['src/sim/content/dungeons.ts', 'src/sim/content/zone2.ts', 'src/sim/content/zone3.ts', 'src/ui/sim_i18n.ts', 'src/ui/i18n.resolved.generated/', 'src/ui/i18n.resolved.sha256', 'src/guide/content.generated.ts'] },
   T1: { repo: TEXT_WT, branch: 'track/ip-text', track: 'Text', brief: `${PKT}/T1-debrand-text.md`, mode: 'plain',
-        gate: `npx tsc --noEmit && npx vitest run tests/i18n_resolved_equivalence.test.ts tests/guide.test.ts`, note: 'De-brand text (comments/docs/README) + optional realm copy. NO ids, NO mechanics. Only regen if you change a player-visible t() string (realm copy); comment/doc edits need no regen. Do not touch the brand name "World of ClaudeCraft" (deferred).',
+        gate: `npx tsc --noEmit && npx vitest run tests/i18n_resolved_equivalence.test.ts tests/guide.test.ts`, note: 'De-brand text (comments/docs/README) + optional realm copy. NO ids, NO mechanics. Only regen if you change a player-visible t() string (realm copy); comment/doc edits need no regen. Do not touch the brand name "Claudenarok Online" (deferred).',
         allowed: ['README.md', 'server/realm.ts', 'src/main.ts', 'src/ui/i18n.catalog/', 'src/ui/hud.ts', 'src/ui/i18n.resolved.generated/', 'src/ui/i18n.resolved.sha256', 'src/guide/content.generated.ts'] },
 }
 

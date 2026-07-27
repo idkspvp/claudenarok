@@ -1,4 +1,4 @@
-# Deploying World of ClaudeCraft on AWS
+# Deploying Claudenarok Online on AWS
 
 > **Levy Street production** is deployed via Ansible, not this document:
 > the `eastbrook_game` role in the internal `ansible-scripts` repo runs
@@ -14,7 +14,7 @@ One EC2 instance runs everything: the game server, Postgres, MediaWiki, and Cadd
 ## 1. Confirm the repo is public
 
 The standalone first-boot script clones
-`https://github.com/levy-street/world-of-claudecraft.git` anonymously. If you
+`https://github.com/idkspvp/claudenarok.git` anonymously. If you
 are deploying a private fork instead, use a deploy key or another secret
 manager-specific flow; do not paste long-lived personal access tokens into EC2
 user data.
@@ -190,7 +190,7 @@ console transport: emails are logged, never sent. To deliver for real via SES:
 ```bash
 EMAIL_PROVIDER=ses
 EMAIL_SES_REGION=us-east-1
-EMAIL_FROM="World of ClaudeCraft <noreply@worldofclaudecraft.com>"
+EMAIL_FROM="Claudenarok Online <noreply@worldofclaudecraft.com>"
 EMAIL_BASE_URL=https://worldofclaudecraft.com
 ```
 
@@ -532,7 +532,7 @@ representative direct invocation from that host is:
 ```bash
 npm run ops:cpu-monitor -- \
   --direct \
-  --host world-of-claudecraft-prod \
+  --host claudenarok-prod \
   --container eastbrook-game \
   --out-dir /var/lib/woc-prod-cpu-monitor
 ```
@@ -583,7 +583,7 @@ Docker commands and run one controlled check:
 
 ```bash
 npm run ops:cpu-monitor -- --once --dry-run --direct \
-  --host world-of-claudecraft-prod \
+  --host claudenarok-prod \
   --container eastbrook-game \
   --out-dir /var/lib/woc-prod-cpu-monitor
 ```

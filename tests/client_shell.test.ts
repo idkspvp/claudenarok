@@ -71,10 +71,7 @@ const supportHtml = readFileSync(
   new URL('../public/support.html', import.meta.url),
   'utf8',
 ).replace(/\r\n/g, '\n');
-const whitepaperUrl = new URL(
-  '../public/World-of-ClaudeCraft-Whitepaper-v1.0.pdf',
-  import.meta.url,
-);
+const whitepaperUrl = new URL('../public/Claudenarok-Online-Whitepaper-v1.0.pdf', import.meta.url);
 const viteConfig = readFileSync(new URL('../vite.config.ts', import.meta.url), 'utf8').replace(
   /\r\n/g,
   '\n',
@@ -739,15 +736,15 @@ describe('client HTML shell', () => {
       '<meta name="robots" content="index, follow, max-image-preview:large" />',
     );
     expect(html).toContain('<link rel="canonical" href="https://worldofclaudecraft.com/" />');
-    expect(html).toContain('<meta property="og:site_name" content="World of ClaudeCraft" />');
-    expect(html).toContain('"alternateName": "World of Claudecraft"');
-    expect(html).toContain('"https://github.com/levy-street/world-of-claudecraft"');
-    expect(mainTs).toContain("alternateName: 'World of Claudecraft'");
+    expect(html).toContain('<meta property="og:site_name" content="Claudenarok Online" />');
+    expect(html).toContain('"alternateName": "Claudenarok Online"');
+    expect(html).toContain('"https://github.com/idkspvp/claudenarok"');
+    expect(mainTs).toContain("alternateName: 'Claudenarok Online'");
     // The social profiles moved into src/brand.ts, which is the point of that
     // file: the identity lives in one place instead of at eighty-five call
     // sites. Scan it there rather than re-inlining the list to keep a source
     // assertion passing.
-    expect(brandTs).toContain("'https://github.com/levy-street/world-of-claudecraft'");
+    expect(brandTs).toContain("'https://github.com/idkspvp/claudenarok'");
     expect(robotsTxt.trim()).toBe(
       'User-agent: *\nAllow: /\n\nSitemap: https://worldofclaudecraft.com/sitemap.xml\nSitemap: https://worldofclaudecraft.com/sitemap-characters.xml',
     );
@@ -796,7 +793,7 @@ describe('client HTML shell', () => {
     expect(supportHtml).toContain('href="/data-deletion">Data Deletion page</a>');
     expect(supportHtml).toContain('"@type": "ContactPage"');
     expect(html).toContain(
-      'href="/World-of-ClaudeCraft-Whitepaper-v1.0.pdf" class="footer-link" data-i18n="footer.whitepaper"',
+      'href="/Claudenarok-Online-Whitepaper-v1.0.pdf" class="footer-link" data-i18n="footer.whitepaper"',
     );
     expect(html.indexOf('data-i18n="footer.whitepaper"')).toBeLessThan(
       html.indexOf('data-i18n="footer.terms"'),

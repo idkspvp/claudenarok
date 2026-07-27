@@ -4,8 +4,8 @@ contact_links:
     url: https://discord.com/invite/worldofclaudecraft
     about: Questions, help, ideas, and general chat. The fastest way to reach the community.
   - name: Contributing guide
-    url: https://github.com/levy-street/world-of-claudecraft/blob/main/CONTRIBUTING.md
+    url: https://github.com/idkspvp/claudenarok/blob/main/CONTRIBUTING.md
     about: How to set up the project, make a change, translate the game, and open a pull request (available in many languages).
   - name: Report a security vulnerability
-    url: https://github.com/levy-street/world-of-claudecraft/security/policy
+    url: https://github.com/idkspvp/claudenarok/security/policy
     about: Please report security issues privately. Do not open a public issue.

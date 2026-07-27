@@ -137,7 +137,7 @@ function fakeRuntime(overrides: Partial<LeaderboardRuntime> = {}): LeaderboardRu
     getAccountsCreatedCount: async () => 0,
     getCharactersCreatedCount: async () => 0,
     getReleases: async () => [],
-    githubRepo: 'levy-street/world-of-claudecraft',
+    githubRepo: 'idkspvp/claudenarok',
     releasesMaxLimit: 20,
     publicOrigin: () => 'https://worldofclaudecraft.com',
     toSheetRank: (rank) => (rank ? { scope: 'realm', rank: rank.rank, total: rank.total } : null),

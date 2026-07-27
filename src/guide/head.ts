@@ -28,7 +28,7 @@ import { type GuideRoute, hrefFor } from './routes';
 // The site origin. Matches index.html's canonical/og:url host exactly.
 const ORIGIN = SITE_ORIGIN;
 const LOGO = `${ORIGIN}/woc_logo_square.webp`;
-const GITHUB_URL = 'https://github.com/levy-street/world-of-claudecraft';
+const GITHUB_URL = 'https://github.com/idkspvp/claudenarok';
 const DISCORD_URL = DISCORD_INVITE;
 
 // The newcomer FAQ on /guide/faq, kept in lockstep with pages/faq.ts so the FAQPage
@@ -248,7 +248,7 @@ function videoGameNode(description: string, inLanguage: string): Record<string, 
   return {
     '@type': 'VideoGame',
     name: t('guide.brand'),
-    alternateName: 'World of Claudecraft',
+    alternateName: 'Claudenarok Online',
     genre: t('seo.genre'),
     playMode: t('seo.playMode'),
     applicationCategory: t('seo.applicationCategory'),

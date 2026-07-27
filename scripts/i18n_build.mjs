@@ -65,7 +65,7 @@ const KEYS_PATH = process.env.I18N_OUT_DIR
 // and never imports src/ui/i18n.ts, so it never depends on the file it generates
 // (no circular import at build time).
 //
-// SpiritVale ships English only. The upstream project carried 21 further
+// Claudenarok Online ships English only. The upstream project carried 21 further
 // locales; they were removed rather than left to rot because the Ragnarok
 // conversion rewrites the job tree and every piece of content, which would have
 // meant re-translating thousands of keys into 21 languages and then deleting

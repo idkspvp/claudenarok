@@ -94,7 +94,7 @@ describe('production CPU monitor configuration', () => {
   it('defaults to a low-noise production trigger with sub-minute detection', () => {
     const options = parseMonitorOptions([], {});
     expect(options).toMatchObject({
-      targetHost: 'world-of-claudecraft-prod',
+      targetHost: 'claudenarok-prod',
       jumpHost: 'minivac',
       container: 'eastbrook-game',
       threshold: 90,
@@ -179,7 +179,7 @@ describe('production CPU monitor configuration', () => {
       'ServerAliveCountMax=2',
       '-J',
       'minivac',
-      'world-of-claudecraft-prod',
+      'claudenarok-prod',
       'true',
     ]);
   });
@@ -197,7 +197,7 @@ describe('production CPU monitor configuration', () => {
       'ServerAliveInterval=15',
       '-o',
       'ServerAliveCountMax=2',
-      'world-of-claudecraft-prod',
+      'claudenarok-prod',
       'true',
     ]);
   });

@@ -1,5 +1,5 @@
 {
-  "name": "world-of-claudecraft",
+  "name": "claudenarok",
   "version": "0.30.0",
   "private": true,
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "type": "module",
   "main": "electron/main.cjs",
-  "description": "World of Claudecraft: a classic-style micro-MMO + headless RL training environment",
+  "description": "Claudenarok Online: a classic-style micro-MMO + headless RL training environment",
   "scripts": {
     "dev": "vite",
     "release:check": "node scripts/release_version.mjs check",
@@ -150,7 +150,7 @@
   },
   "build": {
     "appId": "com.worldofclaudecraft.desktop",
-    "productName": "World of ClaudeCraft",
+    "productName": "Claudenarok Online",
     "icon": "build/icon.png",
     "files": [
       "dist/**",
@@ -176,7 +176,7 @@
     },
     "protocols": [
       {
-        "name": "World of ClaudeCraft Login",
+        "name": "Claudenarok Online Login",
         "schemes": [
           "worldofclaudecraft"
         ]

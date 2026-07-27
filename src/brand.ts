@@ -16,10 +16,10 @@
 // browser client.
 
 /** Display name, as a player sees it. */
-export const BRAND_NAME = 'SpiritVale';
+export const BRAND_NAME = 'Claudenarok Online';
 
 /** Package / repository / slug form. */
-export const BRAND_SLUG = 'spiritvale';
+export const BRAND_SLUG = 'claudenarok';
 
 /** The public site's host. STILL THE UPSTREAM DOMAIN: see the header. Changing
  *  this one line moves the sitemap, every canonical URL, and the SEO graph. */
@@ -44,11 +44,11 @@ export const DISCORD_INVITE = 'https://discord.com/invite/worldofclaudecraft';
  *  browser hands the login code to a scheme nothing answers. */
 export const DESKTOP_URL_SCHEME = 'worldofclaudecraft';
 
-/** Social profiles, for the site's SEO graph. ALL still upstream's, like the
- *  Discord invite: they point at someone else's accounts and should be emptied
- *  or replaced rather than quietly inherited. */
+/** Social profiles, for the site's SEO graph. The repository is ours; the rest
+ *  are still upstream's, like the Discord invite: they point at someone else's
+ *  accounts and should be emptied or replaced rather than quietly inherited. */
 export const SOCIAL_LINKS: readonly string[] = [
-  'https://github.com/levy-street/world-of-claudecraft',
+  'https://github.com/idkspvp/claudenarok',
   DISCORD_INVITE,
   'https://www.youtube.com/@WoClaudeCraft',
   'https://x.com/WoClaudecraft',

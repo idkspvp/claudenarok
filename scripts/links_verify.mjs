@@ -39,12 +39,12 @@ const server = http.createServer((req, res) => {
 const PORT = 8799;
 const EXPECTED_LINKS = [
   'https://worldofclaudecraft.com/',
-  'https://x.com/WoClaudecraft',
+  'https://x.com/Claudenarok',
   'https://www.instagram.com/worldofclaudecraft/',
   'https://www.tiktok.com/@worldofclaudecraft',
-  'https://www.youtube.com/@WoClaudeCraft',
-  'https://www.reddit.com/r/WorldofClaudecraft/',
-  'https://github.com/levy-street/world-of-claudecraft',
+  'https://www.youtube.com/@Claudenarok',
+  'https://www.reddit.com/r/ClaudenarokOnline/',
+  'https://github.com/idkspvp/claudenarok',
 ];
 
 const problems = [];
@@ -74,7 +74,7 @@ async function main() {
     ok(errors.length === 0, `no page/console errors (got: ${JSON.stringify(errors)})`);
 
     const title = await page.title();
-    ok(title === 'World of ClaudeCraft - Official Links', `document.title is localized ("${title}")`);
+    ok(title === 'Claudenarok Online - Official Links', `document.title is localized ("${title}")`);
 
     const htmlLang = await page.evaluate(() => document.documentElement.lang);
     ok(htmlLang === 'en', `html lang = en (got "${htmlLang}")`);

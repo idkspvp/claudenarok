@@ -17,12 +17,12 @@
 const { flattenControlChars } = require('./diagnostics.cjs');
 
 const DEFAULT_SHELL_STRINGS = {
-  crashTitle: 'World of ClaudeCraft',
+  crashTitle: 'Claudenarok Online',
   crashBody: 'The game view stopped working. Reload it?',
   crashReload: 'Reload',
   crashQuit: 'Quit',
-  fatalTitle: 'World of ClaudeCraft',
-  fatalBody: 'World of ClaudeCraft hit an unexpected error and needs to close.',
+  fatalTitle: 'Claudenarok Online',
+  fatalBody: 'Claudenarok Online hit an unexpected error and needs to close.',
 };
 
 const MAX_SHELL_STRING_LENGTH = 300;

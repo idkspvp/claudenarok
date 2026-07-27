@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# World of ClaudeCraft: game container watchdog.
+# Claudenarok Online: game container watchdog.
 #
 # WHY THIS EXISTS
 # Docker's `restart: unless-stopped` policy only fires when the container process

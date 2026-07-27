@@ -514,9 +514,9 @@ export const hudChromeStrings = {
   },
   nativeUpdate: {
     title: 'Update Available',
-    body: 'A new version of World of ClaudeCraft is available. Update now for the latest fixes and improvements.',
+    body: 'A new version of Claudenarok Online is available. Update now for the latest fixes and improvements.',
     bodyWithVersion:
-      'Version {version} of World of ClaudeCraft is available. Update now for the latest fixes and improvements.',
+      'Version {version} of Claudenarok Online is available. Update now for the latest fixes and improvements.',
     notNow: 'Not now',
     update: 'Update',
   },
@@ -1913,7 +1913,7 @@ export const hudChromeStrings = {
   },
   discord: {
     title: 'Discord',
-    panelTitle: 'World of ClaudeCraft',
+    panelTitle: 'Claudenarok Online',
     open: 'Discord',
     close: 'Close',
     keybind: 'Discord Panel',

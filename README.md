@@ -1,12 +1,12 @@
 <div align="center">
 
-# World of ClaudeCraft
+# Claudenarok Online
 
 **Quest, group up, and raid a hand-built world, free in your browser. Open source, web3, and online right now.**
 
 **Official website: https://worldofclaudecraft.com/**
 
-[![CI](https://github.com/levy-street/world-of-claudecraft/actions/workflows/ci.yml/badge.svg)](https://github.com/levy-street/world-of-claudecraft/actions/workflows/ci.yml)
+[![CI](https://github.com/idkspvp/claudenarok/actions/workflows/ci.yml/badge.svg)](https://github.com/idkspvp/claudenarok/actions/workflows/ci.yml)
 [![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-r165-000000?logo=threedotjs&logoColor=white)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
@@ -21,13 +21,13 @@
 
 [Play now](https://worldofclaudecraft.com/) · [Host your own world](#host-your-own-world-one-command) · [Train an agent](#train-an-agent-headless-rl) · [Web3](#web3) · [Contributing](CONTRIBUTING.md) · [Discord](https://discord.com/invite/worldofclaudecraft)
 
-![World of ClaudeCraft title screen](docs/screenshots/title-screen.jpg)
+![Claudenarok Online title screen](docs/screenshots/title-screen.jpg)
 
 </div>
 
 ## What this is
 
-World of ClaudeCraft is a complete classic-era MMO you can play right now in your browser, host yourself with one command, and even train AI agents to play. It is free, open source, and live at [worldofclaudecraft.com](https://worldofclaudecraft.com/).
+Claudenarok Online is a complete classic-era MMO you can play right now in your browser, host yourself with one command, and even train AI agents to play. It is free, open source, and live at [worldofclaudecraft.com](https://worldofclaudecraft.com/).
 
 One shared world runs in three places, all from the same game core:
 
@@ -95,9 +95,9 @@ Name your character, pick any of the nine classes, and you start in **Eastbrook 
 
 ### Desktop apps for Windows, Linux, and macOS
 
-World of ClaudeCraft ships as full desktop apps for all three major desktop platforms: signed Windows installers, Linux AppImage and deb packages, and signed and notarized universal macOS builds. They use the same game client and online world as the browser, with native packaging and automatic updates.
+Claudenarok Online ships as full desktop apps for all three major desktop platforms: signed Windows installers, Linux AppImage and deb packages, and signed and notarized universal macOS builds. They use the same game client and online world as the browser, with native packaging and automatic updates.
 
-Online sign-in is Discord and email only, exactly the web flow: email/password logs in inside the app, and "Continue with Discord" opens your default browser on the `/desktop-login` page, which hands a one-time code back to the app over a `worldofclaudecraft://` deep link that the app exchanges for a normal World of ClaudeCraft session token.
+Online sign-in is Discord and email only, exactly the web flow: email/password logs in inside the app, and "Continue with Discord" opens your default browser on the `/desktop-login` page, which hands a one-time code back to the app over a `worldofclaudecraft://` deep link that the app exchanges for a normal Claudenarok Online session token.
 
 ```bash
 npm run electron:dev          # Vite + Electron dev shell
@@ -175,7 +175,7 @@ The protocol and bindings are documented in `headless/CLAUDE.md` and `python/CLA
 
 ## Web3
 
-World of ClaudeCraft is web3-native around **$WOC**, our community token on Solana. Connect a Solana wallet, link it to your account with one signature (non-custodial, no transaction to approve), and your read-only $WOC balance shows up in the HUD alongside a cosmetic holder-tier badge.
+Claudenarok Online is web3-native around **$WOC**, our community token on Solana. Connect a Solana wallet, link it to your account with one signature (non-custodial, no transaction to approve), and your read-only $WOC balance shows up in the HUD alongside a cosmetic holder-tier badge.
 
 $WOC also has optional utility in the live game:
 
@@ -377,11 +377,11 @@ artifact export, [DEPLOY.md](DEPLOY.md) for production, and
 
 ## Localization
 
-Every player-visible string resolves through `t()`, and the game ships in **English**. The sim and server stay language-agnostic: they emit stable keys or English that the client re-localizes at the boundary, which keeps determinism intact. The upstream project carried 21 further locales; SpiritVale removed them while the Ragnarok conversion rewrites the job tree and every piece of content, and will add Thai in one pass once that content has settled. The lazy per-locale loading machinery is intact and empty, so adding a locale is a data change. The workflow is documented in `docs/i18n-scaling/translation-workflow.md`.
+Every player-visible string resolves through `t()`, and the game ships in **English**. The sim and server stay language-agnostic: they emit stable keys or English that the client re-localizes at the boundary, which keeps determinism intact. The upstream project carried 21 further locales; Claudenarok Online removed them while the Ragnarok conversion rewrites the job tree and every piece of content, and will add Thai in one pass once that content has settled. The lazy per-locale loading machinery is intact and empty, so adding a locale is a data change. The workflow is documented in `docs/i18n-scaling/translation-workflow.md`.
 
 ## Contributing
 
-Contributions of every kind are welcome: code, translations, bug reports, and documentation. Start with [CONTRIBUTING.md](CONTRIBUTING.md) for setup, read the [Code of Conduct](CODE_OF_CONDUCT.md), and check [SECURITY.md](SECURITY.md) before reporting a vulnerability. New here? Look for issues labeled [`good first issue`](https://github.com/levy-street/world-of-claudecraft/labels/good%20first%20issue), open an [issue](https://github.com/levy-street/world-of-claudecraft/issues/new/choose), or say hello on [Discord](https://discord.com/invite/worldofclaudecraft).
+Contributions of every kind are welcome: code, translations, bug reports, and documentation. Start with [CONTRIBUTING.md](CONTRIBUTING.md) for setup, read the [Code of Conduct](CODE_OF_CONDUCT.md), and check [SECURITY.md](SECURITY.md) before reporting a vulnerability. New here? Look for issues labeled [`good first issue`](https://github.com/idkspvp/claudenarok/labels/good%20first%20issue), open an [issue](https://github.com/idkspvp/claudenarok/issues/new/choose), or say hello on [Discord](https://discord.com/invite/worldofclaudecraft).
 
 Active development runs on the newest `release/vX.Y.Z` branch. Look it up rather than assuming, then branch from it and target it with your pull request. Never branch from or target `main`, which only receives a release branch once that version ships. [CONTRIBUTING.md](CONTRIBUTING.md) has the one-line command that finds the current one.
 
@@ -395,7 +395,7 @@ Three things are licensed separately, so it is worth thirty seconds to know whic
 |---|---|---|
 | **Source code**, meaning all of it except the media assets carved out below | [MIT](LICENSE) | Yes. Commercially too. |
 | **Media assets**: models, textures, HDRIs, icons, sounds, fonts (mostly under `public/`) | Per asset, recorded in [CREDITS.md](CREDITS.md) | Mostly yes (most are CC0). Some are not, see below. |
-| **Name and branding**: "World of ClaudeCraft", "Levy Street", the logos | Not licensed | No. |
+| **Name and branding**: "Claudenarok Online", "Levy Street", the logos | Not licensed | No. |
 
 **Fork it and host your own world. That works, and the assets are not in your way.** Most of what you see is CC0 public domain (KayKit, Quaternius, Kenney, ambientCG, Poly Haven), and our own generated props, creatures, backdrops and interface sounds ship with the project so a fork runs out of the box. You just can't lift those out and sell them as standalone art.
 

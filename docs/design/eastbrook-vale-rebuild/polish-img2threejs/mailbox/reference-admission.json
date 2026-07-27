@@ -117,6 +117,6 @@
     "Reject a future replacement with a changed SHA unless it is re-admitted and visually inspected.",
     "Reject cropped views that omit the base, roof, mail slot, or complete side depth.",
     "Reject duplicate angles that do not add independent depth evidence.",
-    "Reject readable text, watermarks, or non-World-of-ClaudeCraft symbols."
+    "Reject readable text, watermarks, or non-Claudenarok-Online symbols."
   ]
 }

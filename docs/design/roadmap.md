@@ -1,4 +1,4 @@
-# SpiritVale: the road from here to a Ragnarok-shaped game
+# Claudenarok Online: the road from here to a Ragnarok-shaped game
 
 Where the conversion stands, what is left, and in what order. Companion to
 `ro-classic-conversion.md` (stats and progression) and

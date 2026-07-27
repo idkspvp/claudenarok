@@ -20,9 +20,9 @@ const DESKTOP_HOST = DESKTOP_UPDATE_HOST;
 // electron-builder's arch token for AppImage, not "x64"). Windows ships one
 // combined NSIS installer that selects its x64 or arm64 payload at install time.
 const ARTIFACT: Partial<Record<DesktopPlatform, string>> = {
-  mac: `world-of-claudecraft-${DESKTOP_VERSION}-mac-universal.dmg`,
-  win: `world-of-claudecraft-${DESKTOP_VERSION}-win.exe`,
-  linux: `world-of-claudecraft-${DESKTOP_VERSION}-linux-x86_64.AppImage`,
+  mac: `claudenarok-${DESKTOP_VERSION}-mac-universal.dmg`,
+  win: `claudenarok-${DESKTOP_VERSION}-win.exe`,
+  linux: `claudenarok-${DESKTOP_VERSION}-linux-x86_64.AppImage`,
 };
 
 // Full download URL for a platform, or null when no artifact is published for it.

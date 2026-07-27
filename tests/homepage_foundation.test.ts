@@ -21,7 +21,7 @@ describe('i18n Translation Foundation', () => {
     expect(getLanguage()).toBe('en');
     expect(t('nav.home')).toBe('Home');
     expect(t('stats.playersOnline')).toBe('Players Online');
-    expect(t('footer.copyright')).toBe('2026 World of ClaudeCraft');
+    expect(t('footer.copyright')).toBe('2026 Claudenarok Online');
     expect(t('footer.githubLabel')).toBe('Open Source Project');
     expect(t('nav.highscores')).toBe('High Scores');
     expect(t('nav.wiki')).toBe('Wiki');
@@ -38,7 +38,6 @@ describe('i18n Translation Foundation', () => {
 
   // A Spanish-value test stood here, and beside it a sweep asserting nav.play
   // renders each locale’s own word. Both needed the locales the cut removed.
-
 
   it('persists language selection in localStorage when available', () => {
     const mockStorage: Record<string, string> = {};

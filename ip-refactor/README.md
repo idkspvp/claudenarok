@@ -4,7 +4,7 @@ Goal: strip every player-visible Blizzard / World of Warcraft IP name out of the
 (spell/ability names, talent + spec names, Blizzard-original creatures, a few item and
 mob-mechanic names) and replace it with original vocabulary, **without changing any game
 mechanic, save format, wire protocol, or RL action space.** This is a rename job, driven
-by a legal IP-risk plan (Levy Street Group, `~/Downloads/World_of_ClaudeCraft_IP_Pivot_Plan.pdf`).
+by a legal IP-risk plan (Levy Street Group, `~/Downloads/World_of_Claudenarok_IP_Pivot_Plan.pdf`).
 It follows the exact playbook of the completed sim (`refactor/sim`) and world-api
 (`refactor/world-api`) refactors: one self-contained slice per session, a gate that pins the
 contract before any work, green-only commits, parallel tracks merged by a single integrator.
@@ -100,7 +100,7 @@ Explore agent per slice** to fetch the exact current lines / ids / call sites fo
   nine-class set as a residual "copied compilation" argument; the operator accepts that residual
   risk for now. Class DISPLAY names are OUT of scope this pass. Do not touch class ids or class
   `.name`.
-- **The product name "World of ClaudeCraft" stays.** The brand rename (the lawyer's P0) is a
+- **The product name "Claudenarok Online" stays.** The brand rename (the lawyer's P0) is a
   separate business track, deferred by operator + counsel decision (easy to pivot later, and
   cleared with the lawyer). It is NOT in this refactor.
 - **Ids frozen EXCEPT the coined-id sweep** (murloc/kobold `MobFamily` + warlock demon-pet ids;
