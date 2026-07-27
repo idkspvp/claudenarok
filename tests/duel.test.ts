@@ -148,38 +148,41 @@ describe('duel: PvP combat affordances', () => {
   });
 
   it('lets mage self and hostile spells work against active duel opponents', () => {
+    // Life Tap, Curse of Agony, and Drain Life were the Warlock's and went with it
+    // in D1. The claim is that a duel opponent is a legal target for a self cast, a
+    // hostile projectile, and a channel, so the live Mage kit stands in for all
+    // three: Frost Armor on self, Polymorph as the projectile, Arcane Missiles as
+    // the channel.
     const { sim, a, b } = startedDuel('mage', 'swordman');
     const mage = sim.entities.get(a)!;
     const swordman = sim.entities.get(b)!;
     sim.setPlayerLevel(20, a);
     sim.setPlayerLevel(20, b);
-    mage.resource = Math.floor(mage.maxResource / 2);
-    mage.hp = mage.maxHp - 50;
+    raisePool(mage);
     mage.targetId = b;
     mage.facing = Math.atan2(swordman.pos.x - mage.pos.x, swordman.pos.z - mage.pos.z);
 
-    const hpBeforeTap = mage.hp;
-    const manaBeforeTap = mage.resource;
-    sim.castAbility('life_tap', a);
-    expect(mage.hp).toBeLessThan(hpBeforeTap);
-    expect(mage.resource).toBeGreaterThan(manaBeforeTap);
+    sim.castAbility('frost_armor', a);
+    expect(mage.auras.some((aura) => aura.id === 'frost_armor')).toBe(true);
 
     mage.gcdRemaining = 0;
     raisePool(mage);
-    sim.castAbility('curse_of_agony', a);
-    // The curse is a projectile now: it applies when the bolt reaches the swordman
+    swordman.hp = Math.max(1, swordman.maxHp - 200);
+    sim.castAbility('polymorph', a);
+    // Polymorph is a projectile: it applies when the bolt reaches the swordman
     // (projectile_travel), a few ticks after the cast, so let it land.
-    for (let i = 0; i < 20 && (sim as any).pendingProjectiles.length > 0; i++) sim.tick();
-    expect(swordman.auras.some((aura) => aura.id === 'curse_of_agony')).toBe(true);
+    for (let i = 0; i < 60 && !swordman.auras.some((au) => au.kind === 'polymorph'); i++) {
+      sim.tick();
+    }
+    expect(swordman.auras.some((aura) => aura.kind === 'polymorph')).toBe(true);
 
     mage.gcdRemaining = 0;
     raisePool(mage);
-    const warriorHpBeforeDrain = swordman.hp;
-    const warlockHpBeforeDrain = mage.hp;
-    sim.castAbility('drain_life', a);
-    for (let i = 0; i < 20 * 2; i++) sim.tick();
+    swordman.auras = swordman.auras.filter((aura) => aura.kind !== 'polymorph');
+    const warriorHpBeforeChannel = swordman.hp;
+    sim.castAbility('arcane_missiles', a);
+    for (let i = 0; i < 20 * 4; i++) sim.tick();
 
-    expect(swordman.hp).toBeLessThan(warriorHpBeforeDrain);
-    expect(mage.hp).toBeGreaterThan(warlockHpBeforeDrain);
+    expect(swordman.hp).toBeLessThan(warriorHpBeforeChannel);
   });
 });
