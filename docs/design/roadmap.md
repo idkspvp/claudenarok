@@ -63,6 +63,13 @@ the critical path for the CLASS work, which is now the talent teardown above.
 
 ## Phase B: content on the new foundation
 
+**How much content, and in what shape: `world-shape.md`.** It sizes B1 and E3/E4
+against a measurement of Ragnarok, of SpiritVale (a shipped MMO on this lineage,
+whose attribute set turns out to be Ragnarok's ten exactly), and of this project
+today. The short version: about 32 to 35 areas and about 220 monsters covering 1
+to 99, each area spanning roughly 13 levels and OVERLAPPING its neighbours, with
+Ragnarok's fixed stat blocks rather than per-level scaling.
+
 | # | Step | Size | Needs |
 |---|---|---|---|
 | B1 | Monster records: fixed stat blocks, race, element+level, size | XL | A2 |
