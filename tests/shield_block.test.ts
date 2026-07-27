@@ -88,6 +88,9 @@ describe('shield block', () => {
     attacker.weapon = { min: 20, max: 20, speed: 2 };
     attacker.attackPower = 0;
     attacker.critChance = 0;
+    // Dexterity is the damage floor now, so pin it above the weapon's attack
+    // power to collapse the roll and leave only the block under test.
+    attacker.stats.dex = 100;
     defender.stats.armor = 0;
     // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
     // alone no longer isolates the mechanic under test.

@@ -95,6 +95,10 @@ describe('offhand combat rules', () => {
     p.weapon = { min: 20, max: 20, speed: 2 };
     p.attackPower = 0;
     p.critChance = 0;
+    // Dexterity is a player's damage FLOOR now, so pin it above the weapon's
+    // attack power to collapse the roll and leave only the offhand share under
+    // test. A fixed min and max no longer fixes a player's damage by itself.
+    p.stats.dex = 100;
     target.stats.armor = 0;
     // Vitality is a FLAT subtraction now (Ragnarok soft DEF), so zeroing armour
     // alone no longer isolates the mechanic under test.

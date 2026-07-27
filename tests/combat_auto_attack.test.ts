@@ -18,13 +18,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { advancePendingProjectiles } from '../src/sim/projectile_travel';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
-import {
-  type Aura,
-  type Entity,
-  type PlayerClass,
-  type SimEvent,
-  STATUS_AP_PER_DPS,
-} from '../src/sim/types';
+import type { Aura, Entity, PlayerClass, SimEvent } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
 
 type DamageEvent = Extract<SimEvent, { type: 'damage' }>;
@@ -124,6 +118,11 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
       p.attackPower = 0;
       p.critChance = 0;
       mob.stats = { ...mob.stats, armor: 0 };
+      // Dexterity sets a player's damage FLOOR now, so a low-Dexterity
+      // character rolls a band under a fixed-damage weapon. Pinning it above
+      // the weapon's attack power collapses the roll and isolates the
+      // mechanic under test, which is what a fixed min and max used to do.
+      p.stats.dex = 100;
       sim.rng.next = () => 0.9; // clears miss/dodge/parry/block and crit; fixed weapon roll
       const events = capture(sim);
 
@@ -154,6 +153,11 @@ describe('auto_attack meleeSwing: the white-hit table', () => {
       p.attackPower = 0;
       p.critChance = 0;
       mob.stats = { ...mob.stats, armor: 0 };
+      // Dexterity sets a player's damage FLOOR now, so a low-Dexterity
+      // character rolls a band under a fixed-damage weapon. Pinning it above
+      // the weapon's attack power collapses the roll and isolates the
+      // mechanic under test, which is what a fixed min and max used to do.
+      p.stats.dex = 100;
       sim.rng.next = () => 0.9; // clears miss/dodge/parry/block and crit; fixed weapon roll
       const events = capture(sim);
 
@@ -669,14 +673,12 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     const { sim, p } = makeSim('hunter', 20);
     const mob = spawnDummy(sim, p, 5, 8);
     mob.stats = { ...mob.stats, armor: 0 }; // no armor mitigation: keeps the hit exact
-    // AP term: (140 / STATUS_AP_PER_DPS) x speed 2. A player's attack power is on
-    // the Ragnarok status scale now, which is a much smaller number, so the swing
-    // formula divides it by less: 140 here stands in for a far higher old-scale
-    // attack power than it used to.
-    // 141, not 140: divisible by STATUS_AP_PER_DPS, so the AP term is a whole
-    // number and the expected damage below needs no rounding fudge.
     p.rangedPower = 141;
-    const apTerm = (141 / STATUS_AP_PER_DPS) * 2;
+    p.stats.dex = 100;
+    // Status ATK adds RAW now. It was divided down while a player's attack power
+    // still had to be calibrated onto the old per-swing model; Ragnarok has no
+    // such divisor, and the status formula is already on its scale.
+    const apTerm = 141;
     const events = capture(sim);
     for (let i = 0; i < 60; i++) rangedSwing(sim.ctx, p, mob, { min: 100, max: 100, speed: 2 });
     for (let i = 0; i < 400 && sim.ctx.pendingProjectiles.length > 0; i++)
@@ -688,7 +690,10 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     expect(hits.some((h) => !h.crit)).toBe(true);
     // 0.6 x 100 + the AP term (would be the FULL 100 with the coefficient dropped)
     const shot = 0.6 * 100 + apTerm;
-    for (const h of hits) expect(h.amount).toBe(h.crit ? shot * 2 : shot);
+    // The SAME number whether or not it crit. A pre-renewal critical takes the
+    // top of the range and skips the roll, which is worth nothing when Dexterity
+    // has already pinned the roll to the top; there is no damage multiplier.
+    for (const h of hits) expect(h.amount).toBe(shot);
     expect(shot).toBeLessThan(100 + apTerm); // the coefficient really is applied
   });
 
@@ -696,7 +701,8 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     const { sim, p } = makeSim('mage', 20);
     const mob = spawnDummy(sim, p, 5, 8);
     p.rangedPower = 141; // same AP term as above, isolating the coefficient arm
-    const apTerm = (141 / STATUS_AP_PER_DPS) * 2;
+    p.stats.dex = 100;
+    const apTerm = 141;
     const events = capture(sim);
     for (let i = 0; i < 60; i++)
       rangedSwing(sim.ctx, p, mob, { min: 100, max: 100, speed: 2, wand: true, school: 'arcane' });
@@ -709,7 +715,7 @@ describe('rangedSwing damage: the 0.6 weapon coefficient is Auto Shot only', () 
     expect(hits.some((h) => !h.crit)).toBe(true);
     // the FULL roll plus the AP term (would carry the 0.6 if it leaked onto wands)
     const bolt = 100 + apTerm;
-    for (const h of hits) expect(h.amount).toBe(h.crit ? bolt * 2 : bolt);
+    for (const h of hits) expect(h.amount).toBe(bolt);
     expect(bolt).toBeGreaterThan(0.6 * 100 + apTerm);
   });
 });

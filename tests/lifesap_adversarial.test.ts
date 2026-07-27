@@ -179,7 +179,8 @@ describe('Lifesap adversarial balance checks', () => {
     // 3.08 once defence became Ragnarok's two layers: Vitality is a FLAT
     // subtraction off every hit now, so five wolf swings on a level-20 warrior
     // land for well under half what they used to and mint proportionally less
-    // rage. That is a mitigation change, not a rage-model change; all three
+    // rage, then 3.41 once a monster critical started ignoring defence outright.
+    // Both are mitigation changes, not rage-model changes; all four
     // numbers here are MEASUREMENTS, and the claim the case actually makes is the
     // multiple below.
     const warrior = new Sim({ seed: 11, playerClass: 'warrior', autoEquip: true });
@@ -191,7 +192,7 @@ describe('Lifesap adversarial balance checks', () => {
     wolf.facing = Math.atan2(p.pos.x - wolf.pos.x, p.pos.z - wolf.pos.z);
     for (let i = 0; i < 5; i++) (warrior as unknown as SimInternals).mobSwing(wolf, p);
 
-    expect(p.resource).toBeCloseTo(3.08);
+    expect(p.resource).toBeCloseTo(3.41);
     expect(measureLifesapPotential('bear_form')).toBeGreaterThanOrEqual(p.resource * 11);
   });
 

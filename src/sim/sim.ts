@@ -87,6 +87,7 @@ import { isSpellResisted } from './combat/spell_resist';
 import { isCritImmuneTank } from './combat/tank_crit_immunity';
 import { warriorMeleeDefense } from './combat/warrior_hit_table';
 import { ensureWarriorStance } from './combat/warrior_stances';
+import { weaponSwingDamage } from './combat/weapon_damage';
 // A3: the augment/power-up content helpers used by the Fiesta match logic
 // (AUGMENTS_BY_ID/AugmentDef/eligibleAugments/POWERUPS/PowerupDef/tierForWave)
 // moved to social/fiesta.ts with that logic; sim.ts keeps only the type used by
@@ -6130,19 +6131,31 @@ export class Sim {
       this.tryRevengeFree(target);
       return;
     }
-    let dmg =
-      this.rng.range(mob.weapon.min, mob.weapon.max) +
-      (this.effectiveAttackPower(mob) / MOB_AP_PER_DPS) * mob.weapon.speed;
     // Tank crit immunity: the 5% roll is still DRAWN (stream position), a
-    // committed tank just never suffers it (combat/tank_crit_immunity.ts).
+    // committed tank just never suffers it (combat/tank_crit_immunity.ts). The
+    // roll moved ABOVE the damage because a Ragnarok critical decides the RANGE
+    // rather than scaling the result: it takes the top of the monster's authored
+    // pair and skips the roll, and it ignores the target's defence entirely.
     const critRoll = this.rng.chance(0.05);
     const crit = critRoll && !isCritImmuneTank(target, this.players.get(target.id));
-    if (crit) dmg *= 2;
+    let dmg =
+      weaponSwingDamage(
+        {
+          atkMax: mob.weapon.max,
+          monsterAtkMin: mob.weapon.min,
+          isMonster: true,
+          crit,
+        },
+        this.rng.next(),
+      ) +
+      // Monsters keep the pre-conversion attack-power scale and its divisor
+      // until their records carry a real ATK pair; see combat/auto_attack.ts.
+      (this.effectiveAttackPower(mob) / MOB_AP_PER_DPS) * mob.weapon.speed;
     const enrage = MOBS[mob.templateId]?.enrage;
     if (mob.enraged && enrage) dmg *= enrage.dmgMult;
     dmg *= this.petDamageMult(mob);
-    const rawDmg = dmg; // pre-armor, post-crit/enrage — basis for cleave splash
-    dmg = this.applyDefence(dmg, target);
+    const rawDmg = dmg; // pre-defence, post-crit/enrage: basis for cleave splash
+    if (!crit) dmg = this.applyDefence(dmg, target);
     if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
       dmg = Math.max(1, dmg - target.blockValue);
     }

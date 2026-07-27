@@ -22,8 +22,17 @@ export const ROGUE_BASE_SWING_SPEED: number = ITEMS[CLASSES.rogue.startWeapon].w
 // (`swingIntervalMult`). Wolf Form ignores the equipped weapon and matches the
 // rogue baseline; every other entity swings at its own weapon speed.
 export function baseSwingSpeed(e: Entity): number {
+  return formSwingSpeed(e) ?? e.weapon.speed;
+}
+
+/** The fixed cadence a shapeshift imposes, or null when the entity swings at its
+ *  own weapon's speed. Separate from `baseSwingSpeed` because a damage site may
+ *  be resolving a weapon OTHER than the equipped one (a strike ability passes
+ *  its own): it needs to know whether a form is overriding the cadence without
+ *  being handed the equipped weapon's speed as the answer. */
+export function formSwingSpeed(e: Entity): number | null {
   for (const a of e.auras) if (a.kind === 'form_cat') return ROGUE_BASE_SWING_SPEED;
-  return e.weapon.speed;
+  return null;
 }
 
 // The druid shapeshifts that fight with claws (or hooves): while one is active

@@ -3,7 +3,7 @@ import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { baseSwingSpeed, ROGUE_BASE_SWING_SPEED } from '../src/sim/combat/form_swing';
 import { CLASSES, ITEMS } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
-import { type AuraKind, STATUS_AP_PER_DPS } from '../src/sim/types';
+import type { AuraKind } from '../src/sim/types';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
@@ -63,13 +63,20 @@ describe('Wolf Form swing speed', () => {
 
   // Land the first white-hit auto-attack a druid scores on an immortal,
   // unarmored dummy, returning the dealt amount plus the runtime attack power and
-  // armor reduction in effect, so the test can predict the amount exactly even as
-  // recalcPlayerStats refreshes AP every tick. Weapon base damage and crit are
-  // zeroed so the hit reduces to round(ap/14 * <normalization speed> * (1 - dr)).
+  // hard-DEF reduction in effect, so the test can predict the amount exactly even
+  // as recalcPlayerStats refreshes attack power every tick.
+  //
+  // The weapon carries a real attack power now, where it used to be zeroed: the
+  // cadence normalization this case is about moved onto the WEAPON roll, because
+  // Ragnarok's status ATK has no per-second divisor to normalize. Zeroing the
+  // weapon would leave nothing cadence-dependent to measure at all. Dexterity is
+  // pinned above the weapon so the roll collapses to a single value.
+  const DUMMY_WEAPON_ATK = 40;
   function firstWhiteHit(sim: Sim, pid: number): { amount: number; ap: number; dr: number } {
     const p = sim.entities.get(pid)!;
     p.critChance = 0;
-    p.weapon = { ...p.weapon, min: 0, max: 0 };
+    p.weapon = { ...p.weapon, min: DUMMY_WEAPON_ATK, max: DUMMY_WEAPON_ATK };
+    p.stats.dex = 200;
     const dummy = [...sim.entities.values()].find((e) => e.kind === 'mob' && !e.dead)!;
     dummy.level = 1;
     dummy.stats.armor = 0;
@@ -101,10 +108,14 @@ describe('Wolf Form swing speed', () => {
   }
 
   it('Wolf Form normalizes swing DAMAGE to the rogue cadence (no AP double-dip)', () => {
-    // The player scale, not the mob one: a druid's attack power is the Ragnarok
-    // status number, so its swing contribution divides by STATUS_AP_PER_DPS.
+    // Status ATK adds RAW and carries no speed factor: Ragnarok has no
+    // attack-power-per-second divisor at all. The cadence guard now lives
+    // entirely on the WEAPON roll, which is normalized by the speed the swing
+    // actually fires at, so a fast shapeshift cannot also collect the per-swing
+    // damage of the slow staff it is holding. `dr` is the equipment percentage
+    // only; the flat Vitality layer is zero against a dummy with no Vitality.
     const expectAt = (ap: number, speed: number, dr: number) =>
-      Math.max(1, Math.round((ap / STATUS_AP_PER_DPS) * speed * (1 - dr)));
+      Math.max(1, Math.round((DUMMY_WEAPON_ATK * (speed / 2) + ap) * (1 - dr)));
 
     const sim = makeWorld();
     const a = sim.addPlayer('druid', 'Feral');
@@ -126,7 +137,7 @@ describe('Wolf Form swing speed', () => {
     giveForm(sim2, b, 'form_bear', 'Bear Form');
     const staff = firstWhiteHit(sim2, b);
 
-    // Wolf Form's per-swing AP uses the rogue speed (1.8); the bear druid's the staff.
+    // Wolf Form's per-swing weapon share uses the rogue speed (1.8); the bear druid's the staff.
     expect(wolf.amount).toBe(expectAt(wolf.ap, ROGUE_BASE_SWING_SPEED, wolf.dr));
     expect(staff.amount).toBe(expectAt(staff.ap, staffSpeed, staff.dr));
     // The bug would have been Wolf Form normalizing by the slow staff instead: prove

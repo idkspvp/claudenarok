@@ -45,24 +45,25 @@ import {
   MOB_AP_PER_DPS,
   normAngle,
   STANCE_MASTERY_BERSERKER_HASTE,
-  STATUS_AP_PER_DPS,
   swingMissChance,
   type WeaponHand,
   type WeaponInfo,
 } from '../types';
 import { drawWeapon } from '../weapon_stow';
-import { attributeDamageMultiplier } from './attribute_damage';
+import { attributeMultipliers } from './attribute_damage';
+
 import { applyRageSpendCooldownRefund, spendResource } from './casting_lifecycle';
 import { blindMissBonus, isDisarmed, isInStasis, isStunned } from './cc';
 import { consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
-import { baseSwingSpeed, rangedAutoProfile } from './form_swing';
+import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing';
 import { isTravelFormAuraKind } from './forms';
 import { missChanceFromContest } from './hit_flee';
 import { rangedShotProfile } from './ranged_shot';
 import { onCastCompleted, onMeleeSwing } from './talent_procs';
 import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
+import { weaponSwingDamage } from './weapon_damage';
 
 // Fraction of the mainhand weapon's damage a hunter's Auto Shot deals. There is no
 // dedicated ranged-weapon slot, so the mainhand doubles as the "bow"; a full melee
@@ -92,12 +93,54 @@ function mainhandAutoAttackHand(attacker: Entity): AutoAttackHand {
   return weaponHand(item) === 'twohand' ? 'twohand' : 'onehand';
 }
 
-// Which attack-power scale is this attacker on? A player (and anything deriving
-// its stats from recalcPlayerStats, which is the pet and the delve companion)
-// carries the Ragnarok status number; a mob carries its template's pre-conversion
-// one. Getting this backwards is a 4-to-5x damage error in either direction.
-function apDivisorFor(attacker: Entity): number {
-  return attacker.kind === 'mob' ? MOB_AP_PER_DPS : STATUS_AP_PER_DPS;
+// Is this attacker on the monster damage model? A monster rolls an authored min
+// and max pair and has no Dexterity term; a player derives their damage floor
+// from Dexterity and the weapon's level. A pet and a delve companion take their
+// stats from recalcPlayerStats, so they are on the player model despite being
+// entities of kind 'mob'.
+function usesMonsterDamageModel(attacker: Entity): boolean {
+  return attacker.kind === 'mob' && attacker.ownerId === null;
+}
+
+/** The weapon range this swing rolls in. Bridges this game's `{min, max}` weapon
+ *  record onto Ragnarok's shape: a monster's pair maps across directly, while a
+ *  player keeps only the max as their weapon attack power and takes their floor
+ *  from Dexterity instead. */
+function weaponRangeFor(attacker: Entity, weapon: WeaponInfo, crit: boolean) {
+  return {
+    atkMax: weapon.max,
+    monsterAtkMin: weapon.min,
+    dex: attacker.stats.dex,
+    weaponType: weapon.weaponType,
+    weaponLevel: weapon.weaponLevel,
+    isMonster: usesMonsterDamageModel(attacker),
+    crit,
+  };
+}
+
+// Status ATK, the flat amount an attacker's attributes add on top of the weapon
+// roll. Ragnarok adds it RAW and after the size modifier, which is what a player
+// now gets: `statusAttackPower` is already on Ragnarok's scale, so dividing it
+// down was a calibration for a model this no longer is.
+//
+// Monsters are the exception, and deliberately so. Their templates still carry
+// attack power on the pre-conversion scale, where a level-20 attacker had a few
+// hundred, so adding theirs raw would multiply monster damage by more than ten.
+// They keep their divisor and their damage until the monster records are
+// authored with a real ATK1/ATK2 pair, at which point the pair IS their damage
+// and both this and the constant go away.
+function statusAttackContribution(ctx: SimContext, attacker: Entity, apSwingSpeed: number): number {
+  const ap = ctx.effectiveAttackPower(attacker);
+  if (!usesMonsterDamageModel(attacker)) return ap;
+  return (ap / MOB_AP_PER_DPS) * apSwingSpeed;
+}
+
+/** The ranged equivalent. `rangedPower` is the same status formula with STR and
+ *  DEX swapped, so it is already on Ragnarok's scale and adds raw; only a
+ *  monster's pre-conversion number needs the divisor. */
+function rangedStatusAttack(attacker: Entity): number {
+  if (!usesMonsterDamageModel(attacker)) return attacker.rangedPower;
+  return attacker.rangedPower / MOB_AP_PER_DPS;
 }
 
 export function startAutoAttack(ctx: SimContext, pid?: number): void {
@@ -364,16 +407,27 @@ export function rangedSwing(
     // Only part of a melee weapon's roll carries to a hunter's Auto Shot (see
     // RANGED_WEAPON_COEFF); a wand deals its full fixed damage. The ranged AP term
     // (agility) is unaffected either way.
-    const weaponRoll = ctx.rng.range(ranged.min, ranged.max);
-    let dmg =
-      (ranged.wand ? weaponRoll : weaponRoll * RANGED_WEAPON_COEFF) +
-      (atk.rangedPower / apDivisorFor(atk)) * ranged.speed;
     // ranged white hits suffer the same higher-level crit suppression as melee
     const critChance = Math.max(0.005, atk.critChance - Math.max(0, tgt.level - atk.level) * 0.002);
+    // Decided before the roll: a critical picks the top of the range rather than
+    // scaling the result, and on a BOW it still runs the Dexterity floor branch,
+    // which can push that top above the weapon's own attack power.
     const crit = ctx.rng.chance(consumeNextAttackCrit(ctx, atk) ? 1 : critChance);
-    if (crit) dmg *= 2 + atk.critDmgPhysBonus;
-    // wand bolts are magic — armor doesn't apply; physical auto shot is mitigated
-    if (!ranged.wand) dmg = ctx.applyDefence(dmg, tgt);
+    const weaponRoll = weaponSwingDamage(
+      {
+        ...weaponRangeFor(atk, ranged, crit),
+        // A wand is the caster sidearm with fixed class damage, not a Ragnarok
+        // weapon: it keeps its authored pair and takes no Dexterity floor.
+        ...(ranged.wand ? { isMonster: true } : {}),
+      },
+      ctx.rng.next(),
+    );
+    let dmg =
+      (ranged.wand ? weaponRoll : weaponRoll * RANGED_WEAPON_COEFF) + rangedStatusAttack(atk);
+    // Wand bolts are magic, so defence does not apply; a physical auto shot is
+    // mitigated unless it CRIT, since a pre-renewal critical ignores defence
+    // outright (see the melee path).
+    if (!ranged.wand && !crit) dmg = ctx.applyDefence(dmg, tgt);
     ctx.dealDamage(
       atk,
       tgt,
@@ -483,33 +537,23 @@ export function meleeSwing(
   const weapon = opts.weapon ?? attacker.weapon;
   const autoAttackHand =
     opts.autoAttackHand === 'mainhand' ? mainhandAutoAttackHand(attacker) : opts.autoAttackHand;
+  // The cadence this swing ACTUALLY fires at: a shapeshift's fixed one when a
+  // form is overriding it, otherwise THIS swing's weapon speed, which may be an
+  // ability's own weapon rather than the equipped one. Normalizing the weapon
+  // roll by it is what stops a druid in Wolf Form collecting the per-swing damage
+  // of the slow staff it is holding while swinging at the rogue cadence. The
+  // status ATK term carries no speed factor at all now (Ragnarok has none), so
+  // this is the only place that guard still lives.
+  const apSwingSpeed = opts.apSwingSpeed ?? formSwingSpeed(attacker) ?? weapon.speed;
   const weaponRollMult =
-    autoAttackHand === undefined ? 1 : autoAttackWeaponDamageMult(autoAttackHand, weapon.speed);
-  const apSwingSpeed = opts.apSwingSpeed ?? baseSwingSpeed(attacker);
+    autoAttackHand === undefined ? 1 : autoAttackWeaponDamageMult(autoAttackHand, apSwingSpeed);
   // weapon imbues (seals, rockbiter) add flat damage to every swing
   let imbueBonus = 0;
   for (const a of attacker.auras) if (a.kind === 'imbue') imbueBonus += a.value;
-  let dmg =
-    (ctx.rng.range(weapon.min, weapon.max) * weaponRollMult +
-      // Normalize the attack-power contribution to the SAME cadence the swing
-      // fires at: Wolf Form swings at the rogue speed (baseSwingSpeed), so its
-      // AP-per-swing must use that speed too, not the slow staff's, or feral
-      // would double-dip (fast swings AND heavy slow-weapon AP weighting).
-      (ctx.effectiveAttackPower(attacker) / apDivisorFor(attacker)) * apSwingSpeed) *
-      mult +
-    bonus +
-    imbueBonus;
-  // The Ragnarok classifications: the weapon's class against the target's size,
-  // and the swing's attribute against what the target is made of. Both default
-  // to the even trade, so a target whose template has not been authored yet
-  // takes exactly what it took before the chart existed.
-  dmg *= attributeDamageMultiplier({
-    attackElement: weapon.element,
-    weaponType: weapon.weaponType,
-    defenderElement: target.element,
-    defenderElementLevel: target.elementLevel,
-    defenderSize: target.size,
-  });
+  // The critical is decided BEFORE the weapon roll, because in Ragnarok it
+  // changes the RANGE rather than scaling the result: a critical takes the top
+  // of the range and skips the roll, and that is its entire bonus. There is no
+  // multiplier (see combat/weapon_damage.ts).
   const critChance = Math.max(
     0.005,
     attacker.critChance +
@@ -519,8 +563,33 @@ export function meleeSwing(
   const crit =
     ctx.rng.chance(consumeNextAttackCrit(ctx, attacker) ? 1 : critChance) ||
     opts.forceCrit === true;
-  if (crit) dmg *= 2 + attacker.critDmgPhysBonus;
-  dmg = ctx.applyDefence(dmg, target);
+  // The Ragnarok classifications: the weapon's class against the target's size,
+  // and the swing's attribute against what the target is made of. Both default
+  // to the even trade, so a target whose template has not been authored yet
+  // takes exactly what it took before the chart existed. They apply at DIFFERENT
+  // points: size scales the weapon's contribution only, element scales the whole
+  // hit after status ATK has joined it.
+  const attribute = attributeMultipliers({
+    attackElement: weapon.element,
+    weaponType: weapon.weaponType,
+    defenderElement: target.element,
+    defenderElementLevel: target.elementLevel,
+    defenderSize: target.size,
+  });
+  const weaponPart =
+    weaponSwingDamage(weaponRangeFor(attacker, weapon, crit), ctx.rng.next()) *
+    weaponRollMult *
+    attribute.size;
+  let dmg = (weaponPart + statusAttackContribution(ctx, attacker, apSwingSpeed)) * mult;
+  dmg += bonus + imbueBonus;
+  dmg *= attribute.element;
+  // A pre-renewal critical ignores the target's defence OUTRIGHT, both layers
+  // (`attack_ignores_def` returns true for any critical under `#ifndef
+  // RENEWAL`). Together with taking the top of the range, that is the whole
+  // critical: no multiplier, but armour stops mattering. It is why a critical
+  // build is the answer to a heavily armoured target specifically, and why
+  // removing the old x2 is not the flat nerf it looks like.
+  if (!crit) dmg = ctx.applyDefence(dmg, target);
   if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
     dmg = Math.max(1, dmg - target.blockValue);
   }
