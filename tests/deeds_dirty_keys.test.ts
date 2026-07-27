@@ -9,7 +9,6 @@
 
 import { describe, expect, it } from 'vitest';
 import { DEED_ORDER, DEEDS } from '../src/sim/content/deeds';
-import { emptyAllocation } from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import {
   bumpDeedStat,
@@ -103,7 +102,6 @@ describe('bucket completeness (the contract narrow marks rely on)', () => {
       });
       const meta = {
         prestigeRank: 0,
-        talents: emptyAllocation(),
         arenaWins: 0,
         arenaLosses: 0,
         arena2v2Wins: 0,

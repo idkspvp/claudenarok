@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  emptyModifiers,
-  type TalentModifiers,
-} from '../src/sim/content/talents';
+import type { PlayerModifiers } from '../src/sim/player_modifiers';
 import {
   abilityScalingPower,
   absorbBonus,
@@ -23,7 +18,7 @@ import {
   abilityTemporalHourglassValues,
 } from '../src/ui/ability_damage';
 
-function known(cls: Parameters<typeof abilitiesKnownAt>[0], id: string, mods?: TalentModifiers) {
+function known(cls: Parameters<typeof abilitiesKnownAt>[0], id: string, mods?: PlayerModifiers) {
   const ability = abilitiesKnownAt(cls, MAX_LEVEL, mods).find((k) => k.def.id === id);
   if (!ability) throw new Error(`missing ability ${id}`);
   return ability;
@@ -35,24 +30,14 @@ function required<T>(value: T | undefined): T {
 }
 
 const SC: AbilityScaling = { spellPower: 80, rangedPower: 200, attackPower: 140 };
-const ARCANE_MODS = { ...emptyModifiers(), spec: 'arcane' as const };
-const FROST_MODS = { ...emptyModifiers(), spec: 'frost' as const };
-const PROT_MODS = computeTalentModifiers('warrior', {
-  ...emptyAllocation(),
-  spec: 'prot',
-} as never);
 
 describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   it('renders Direhowl from its percentage damage reduction, not the retired AP amount', () => {
-    expect(abilityBuffValue(known('warrior', 'demoralizing_shout', PROT_MODS))).toBe(20);
+    expect(abilityBuffValue(known('warrior', 'demoralizing_shout'))).toBe(20);
   });
 
   it('reads Hourglass healing and cooldown percentages from the resolved effect', () => {
-    const mods = computeTalentModifiers('mage', {
-      ...emptyAllocation(),
-      spec: 'arcane',
-    } as never);
-    const hourglass = abilitiesKnownAt('mage', MAX_LEVEL, mods).find(
+    const hourglass = abilitiesKnownAt('mage', MAX_LEVEL).find(
       (ability) => ability.def.id === 'temporal_hourglass',
     );
     expect(hourglass).toBeDefined();
@@ -77,7 +62,7 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   });
 
   it('an AoE nuke takes the AoE-penalised coefficient', () => {
-    const ae = known('mage', 'arcane_explosion', ARCANE_MODS);
+    const ae = known('mage', 'arcane_explosion');
     const eff = required(ae.effects.find((e) => e.type === 'aoeDamage'));
     expect(abilityDamageBonus(ae, eff, SC)).toBe(
       directHitBonus(SC.spellPower, ae.def, ae.castTime, true),
@@ -104,7 +89,7 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   });
 
   it('a channelled directDamage (Arcane Missiles) uses the per-tick CHANNEL coefficient', () => {
-    const am = known('mage', 'arcane_missiles', ARCANE_MODS);
+    const am = known('mage', 'arcane_missiles');
     const eff = required(am.effects.find((e) => e.type === 'directDamage'));
     // It is a per-missile channel tick, so it must use the channel coefficient, not
     // the single-cast direct coefficient.
@@ -139,7 +124,7 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   });
 
   it('a personal mage barrier shows the same Spell Power bonus combat applies', () => {
-    const barrier = known('mage', 'ice_barrier', FROST_MODS);
+    const barrier = known('mage', 'ice_barrier');
     const eff = required(barrier.effects.find((e) => e.type === 'absorb'));
     if (eff.type !== 'absorb') throw new Error('expected absorb');
     expect(abilityDamageBonus(barrier, eff, SC)).toBe(absorbBonus(SC.spellPower, 0.5));

@@ -4,7 +4,7 @@
 // Layer-agnostic: type-only sim imports, no t(), no DOM (guarded by
 // tests/architecture.test.ts).
 import type { FinderListingTag } from '../sim/content/dungeon_finder';
-import type { Role } from '../sim/content/talents';
+import type { Role } from '../sim/player_modifiers';
 import type { PlayerClass } from '../sim/types';
 
 // My automatic-queue state. `waited` is whole seconds since the original join

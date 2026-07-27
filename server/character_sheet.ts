@@ -11,16 +11,9 @@
 //
 // Derived numbers reuse the engine, never re-derive: stats/vitals via
 // recalcPlayerStats (through characterDerivedStats), zone via zoneAt, spec via
-// the talents specLabel, virtualLevel via the types helper.
+// virtualLevel via the types helper.
 
 import { DEED_ORDER, DEEDS } from '../src/sim/content/deeds';
-import {
-  computeTalentModifiers,
-  repairAllocation,
-  specLabel,
-  type TalentAllocation,
-  type TalentModifiers,
-} from '../src/sim/content/talents';
 import { zoneAt } from '../src/sim/data';
 import { completionCounts } from '../src/sim/deeds_completion';
 import { characterDerivedStats } from '../src/sim/entity';
@@ -126,7 +119,6 @@ export interface CharacterSheet {
   realm: string;
   class: PlayerClass;
   classLabel: string;
-  spec: string | null;
   level: number;
   virtualLevel: number;
   prestigeRank: number;
@@ -162,28 +154,6 @@ const CLASS_LABELS: Record<PlayerClass, string> = {
 export function splitCopper(copper: number): MoneySplit {
   const c = Math.max(0, Math.floor(copper));
   return { gold: Math.floor(c / 10000), silver: Math.floor(c / 100) % 100, copper: c % 100 };
-}
-
-function normalizeAllocation(
-  cls: PlayerClass,
-  state: CharacterState,
-  level: number,
-): TalentAllocation {
-  return repairAllocation(cls, state.talents, level);
-}
-
-function talentMods(
-  cls: PlayerClass,
-  state: CharacterState,
-  level: number,
-): TalentModifiers | undefined {
-  try {
-    // Pass the character's level so mastery level-scaling matches the live sim
-    // (a sub-20 character's sheet must not report full-strength mastery stats).
-    return computeTalentModifiers(cls, normalizeAllocation(cls, state, level), level);
-  } catch {
-    return undefined; // never let a malformed allocation break a public read
-  }
 }
 
 function arenaBrackets(state: CharacterState): Record<string, SheetArenaBracket> {
@@ -228,7 +198,6 @@ export function characterSheet(input: CharacterSheetInput): CharacterSheet {
     realm,
     class: cls,
     classLabel: CLASS_LABELS[cls] ?? cls,
-    spec: specLabel(cls, normalizeAllocation(cls, state, level)),
     level,
     virtualLevel: virtualLevel(lifetimeXp),
     prestigeRank: state.prestigeRank ?? 0,
@@ -282,7 +251,7 @@ export function characterSheet(input: CharacterSheetInput): CharacterSheet {
       cls,
       level,
       state.equipment ?? {},
-      talentMods(cls, state, level),
+      undefined,
       state.equipmentInstance ?? {},
       // The saved allocation IS the character's attributes now. Without it the
       // sheet would report 1 in all six for every character it renders. A save

@@ -1,6 +1,6 @@
 import { isPartyFrameRelevantAura } from './aura_classify';
 import { echoVisibleTo, partyAuraPriority } from './combat/chronomancy';
-import type { Role } from './content/talents';
+import type { Role } from './player_modifiers';
 import type { AbilityEffect, Aura, Entity } from './types';
 import { PARTY_MEMBER_AURA_CAP } from './types';
 

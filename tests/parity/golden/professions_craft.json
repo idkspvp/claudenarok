@@ -19,7 +19,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "bc2ea292",
+      "state": "0ebe8d2a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -28,7 +28,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -80,9 +79,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -164,7 +160,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "4a7cbe07",
+      "state": "c2375f1b",
       "events": "7021a161",
       "rng": {
         "draws": 0,
@@ -173,7 +169,6 @@
       "label": "craft-denied",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -230,9 +225,6 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -313,7 +305,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "8adf3326",
+      "state": "cbc4e5ba",
       "events": "2f11cd21",
       "rng": {
         "draws": 1,
@@ -322,7 +314,6 @@
       "label": "craft-plain",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -399,9 +390,6 @@
             "luk": 1,
             "str": 9,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 14
@@ -484,7 +472,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "19acf0cd",
+      "state": "e156e98d",
       "events": "84a3ac24",
       "rng": {
         "draws": 2,
@@ -493,7 +481,6 @@
       "label": "craft-masterwork",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {
             "activeArchetype": "tailoring",
             "attunedPairs": [
@@ -612,9 +599,6 @@
             "str": 9,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {},
           "xp": 14
         }
@@ -696,7 +680,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c8af56a2",
+      "state": "47fa0e2e",
       "events": "3ea8d374",
       "rng": {
         "draws": 3,
@@ -705,7 +689,6 @@
       "label": "craft-plain-2",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {
             "activeArchetype": "tailoring",
             "attunedPairs": [
@@ -821,9 +804,6 @@
             "luk": 1,
             "str": 10,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 18
@@ -906,7 +886,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c8af56a2",
+      "state": "47fa0e2e",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -915,7 +895,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {
             "activeArchetype": "tailoring",
             "attunedPairs": [
@@ -1031,9 +1010,6 @@
             "luk": 1,
             "str": 10,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 18

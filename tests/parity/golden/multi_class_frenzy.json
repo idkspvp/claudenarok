@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "5e295ed4",
+      "state": "5f7c133b",
       "events": "5cf7b5a4",
       "rng": {
         "draws": 3,
@@ -39,7 +39,6 @@
       "label": "frenzy-round-0",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -96,13 +95,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -162,13 +157,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -223,9 +214,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -371,7 +359,7 @@
           "fallStartY": 2.299474,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 50000,
           "id": 417,
           "inCombat": true,
@@ -515,7 +503,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e671cffe",
+      "state": "946ff345",
       "events": "8ee351ae",
       "rng": {
         "draws": 6,
@@ -524,7 +512,6 @@
       "label": "frenzy-round-1",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -581,13 +568,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -647,13 +630,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -708,9 +687,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -856,7 +832,7 @@
           "fallStartY": 2.299474,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 50000,
           "id": 417,
           "inCombat": true,
@@ -1000,7 +976,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e7cbe27e",
+      "state": "545ce5dd",
       "events": "8ee351ae",
       "rng": {
         "draws": 9,
@@ -1009,7 +985,6 @@
       "label": "frenzy-round-2",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1066,13 +1041,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1132,13 +1103,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1193,9 +1160,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1341,7 +1305,7 @@
           "fallStartY": 2.299474,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 50000,
           "id": 417,
           "inCombat": true,
@@ -1485,7 +1449,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "41304c08",
+      "state": "a95ce5f1",
       "events": "8ee351ae",
       "rng": {
         "draws": 12,
@@ -1494,7 +1458,6 @@
       "label": "frenzy-round-3",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1551,13 +1514,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1617,13 +1576,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1678,9 +1633,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1826,7 +1778,7 @@
           "fallStartY": 2.299474,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 50000,
           "id": 417,
           "inCombat": true,
@@ -1970,7 +1922,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "92b9cd63",
+      "state": "a767f17e",
       "events": "a730ec0a",
       "rng": {
         "draws": 16,
@@ -1981,7 +1933,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "ecca237d",
+      "state": "4d89c108",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1992,7 +1944,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "ecca237d",
+      "state": "4d89c108",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2001,7 +1953,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2059,13 +2010,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2125,13 +2072,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2186,9 +2129,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -2337,7 +2277,7 @@
           "fallStartY": 2.299474,
           "fiveSecondRule": 99.5,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 50000,
           "id": 417,
           "inCombat": true,

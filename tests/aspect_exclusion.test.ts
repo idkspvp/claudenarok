@@ -104,7 +104,6 @@ describe('class self-buff mutual exclusion groups', () => {
   it('keeps only one self-applied warrior stance active', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(14);
-    expect(sim.setSpec('arms')).toBe(true);
 
     castSelfBuff(sim, 'battle_stance');
     expect(sim.player.auras.filter((a) => a.id.endsWith('_stance')).map((a) => a.id)).toEqual([

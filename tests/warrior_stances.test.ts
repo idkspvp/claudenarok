@@ -37,54 +37,34 @@ describe('warrior stance pure core', () => {
     expect(isWarriorStanceKind('stealth')).toBe(false);
   });
 
-  it('maps each spec to its available stances and default', () => {
-    expect(availableWarriorStanceKinds('fury')).toEqual(['berserker_stance']);
-    expect(availableWarriorStanceKinds('arms')).toEqual(['battle_stance', 'defensive_stance']);
-    expect(availableWarriorStanceKinds('prot')).toEqual(['battle_stance', 'defensive_stance']);
-    expect(availableWarriorStanceKinds(null)).toEqual(['battle_stance']);
-    expect(defaultWarriorStanceId('fury')).toBe(BERSERKER_STANCE);
-    expect(defaultWarriorStanceId('arms')).toBe(BATTLE_STANCE);
-    expect(defaultWarriorStanceId(null)).toBe(BATTLE_STANCE);
+  // Specs are retired (Phase D0): every warrior may wear any of the three
+  // stances, and Battle is the spawn default for everyone.
+  it('makes all three stances available and Battle the default', () => {
+    expect(availableWarriorStanceKinds()).toEqual([
+      'battle_stance',
+      'defensive_stance',
+      'berserker_stance',
+    ]);
+    expect(defaultWarriorStanceId()).toBe(BATTLE_STANCE);
   });
 
   it('reconciles: keep a valid stance, else drop invalid and apply the default', () => {
-    // Fresh (no stance) -> gain the spec default, nothing to remove.
-    expect(warriorStanceReconcile(null, [])).toEqual({ removeKinds: [], applyId: BATTLE_STANCE });
-    expect(warriorStanceReconcile('fury', [])).toEqual({
-      removeKinds: [],
-      applyId: BERSERKER_STANCE,
-    });
-    // Already in a valid stance -> no change.
-    expect(warriorStanceReconcile(null, ['battle_stance'])).toEqual({
-      removeKinds: [],
-      applyId: null,
-    });
-    expect(warriorStanceReconcile('arms', ['defensive_stance'])).toEqual({
-      removeKinds: [],
-      applyId: null,
-    });
-    expect(warriorStanceReconcile('fury', ['berserker_stance'])).toEqual({
-      removeKinds: [],
-      applyId: null,
-    });
-    // Worn stance invalid for the new spec -> strip it, apply the default.
-    expect(warriorStanceReconcile('fury', ['battle_stance'])).toEqual({
-      removeKinds: ['battle_stance'],
-      applyId: BERSERKER_STANCE,
-    });
-    expect(warriorStanceReconcile('arms', ['berserker_stance'])).toEqual({
-      removeKinds: ['berserker_stance'],
+    // Fresh (no stance) -> gain the default, nothing to remove.
+    expect(warriorStanceReconcile([])).toEqual({ removeKinds: [], applyId: BATTLE_STANCE });
+    // Already in a valid stance -> no change, whichever of the three it is.
+    for (const kind of ['battle_stance', 'defensive_stance', 'berserker_stance'] as const) {
+      expect(warriorStanceReconcile([kind]), kind).toEqual({ removeKinds: [], applyId: null });
+    }
+    // A non-stance kind is not a stance -> strip it and apply the default.
+    expect(warriorStanceReconcile(['stealth'])).toEqual({
+      removeKinds: ['stealth'],
       applyId: BATTLE_STANCE,
     });
   });
 });
 
 describe('stance ability defs match the pure gating', () => {
-  it('gates Battle (exclude Fury), Berserker (Fury), Guarded (Arms/Prot); one group', () => {
-    expect(ABILITIES.battle_stance?.excludeSpecs).toEqual(['fury']);
-    expect(ABILITIES.battle_stance?.specs).toBeUndefined();
-    expect(ABILITIES.berserker_stance?.specs).toEqual(['fury']);
-    expect(ABILITIES.defensive_stance?.specs).toEqual(['arms', 'prot']);
+  it('keeps all three ungated and in one exclusive group', () => {
     for (const id of WARRIOR_STANCE_IDS) {
       expect(ABILITIES[id]?.exclusiveGroup, id).toBe('warrior_stance');
       const eff = ABILITIES[id]?.effects.find((e) => e.type === 'selfBuff');
@@ -106,15 +86,16 @@ describe('warrior stances in the live sim', () => {
     expect(berserkerCritDamage(sim.player)).toBe(0);
   });
 
-  it('Fury lives in Berserker Stance (crit damage on, no Battle rage bonus)', () => {
+  it('a cast Berserker Stance sticks (crit damage on, no Battle rage bonus)', () => {
     const sim = makeSim();
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('fury')).toBe(true);
+    sim.tick();
+    sim.castAbility('berserker_stance');
     sim.tick();
     const worn = stanceAuras(sim);
     expect(worn.length).toBe(1);
     expect(worn[0].kind).toBe('berserker_stance');
-    // Berserker's crit-damage half is live; Fury does NOT get Battle's rage bonus.
+    // Berserker's crit-damage half is live; it does NOT carry Battle's rage bonus.
     expect(berserkerCritDamage(sim.player)).toBeCloseTo(0.03, 5);
     expect(rageGenAuraMult(sim.player)).toBeCloseTo(1, 5);
   });
@@ -139,11 +120,10 @@ describe('warrior stances in the live sim', () => {
     expect(sim.player.critChance).toBeCloseTo(crit0 + 0.03, 5);
   });
 
-  it('Arms swaps Battle <-> Guarded via the exclusive group', () => {
+  it('swaps Battle <-> Guarded via the exclusive group', () => {
     const sim = makeSim();
     sim.tick();
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('arms')).toBe(true);
     sim.tick();
     expect(stanceAuras(sim).map((a) => a.kind)).toEqual(['battle_stance']);
     // Cast Guarded: it cancels Battle (never both), staying exactly one stance.
@@ -156,15 +136,5 @@ describe('warrior stances in the live sim', () => {
     expect(stanceAuras(sim).map((a) => a.kind)).toEqual(['battle_stance']);
   });
 
-  it('reconciles the worn stance when the spec changes (Fury -> Arms)', () => {
-    const sim = makeSim();
-    sim.setPlayerLevel(20);
-    expect(sim.setSpec('fury')).toBe(true);
-    sim.tick();
-    expect(stanceAuras(sim).map((a) => a.kind)).toEqual(['berserker_stance']);
-    // Respec to Arms: Berserker is now invalid, reconciled to Battle next tick.
-    expect(sim.setSpec('arms')).toBe(true);
-    sim.tick();
-    expect(stanceAuras(sim).map((a) => a.kind)).toEqual(['battle_stance']);
-  });
+  // The spec-change reconcile test that stood here went with the specs (Phase D0).
 });

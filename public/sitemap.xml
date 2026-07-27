@@ -251,11 +251,6 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://worldofclaudecraft.com/wiki/reference/talents</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://worldofclaudecraft.com/wiki/reference/glossary</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

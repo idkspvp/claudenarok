@@ -186,7 +186,6 @@ export class SpellbookWindow {
       hasFreeSlot: this.deps.hasFreeSlot(),
       attackOnBar: this.deps.attackOnBar(),
       hasFormBars: this.deps.hasFormBars(),
-      spec: world.talentSpec,
       level: world.player.level,
     });
     const className = classDisplayName(view.classId);

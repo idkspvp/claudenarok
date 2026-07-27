@@ -91,8 +91,13 @@ export function brainFreezeBypassesCooldown(p: Entity, abilityId: string): boole
   return abilityId === 'flurry' && p.auras.some((a) => a.kind === 'brain_freeze');
 }
 
-function isCommittedFrost(ctx: SimContext, meta: PlayerMeta): boolean {
-  return meta.cls === 'mage' && ctx.playerMods(meta).spec === 'frost';
+// The frost proc machinery used to gate on the committed Frost specialization.
+// Specs are retired (Phase D0) and the mage learns the whole frost kit, so the
+// gate is the KNOWN passive that documents the procs: the same idiom the
+// warrior's Sudden Death proc uses (combat/auto_attack.ts).
+function knowsFrostProcs(meta: PlayerMeta): boolean {
+  if (meta.cls !== 'mage') return false;
+  return meta.known.some((known) => known.def.id === 'fingers_of_frost' && known.def.passive);
 }
 
 function emitFade(ctx: SimContext, e: Entity, aura: Aura): void {
@@ -171,10 +176,10 @@ export function gainIcicle(ctx: SimContext, p: Entity): void {
 
 /** Roll the two frostbolt-impact procs. Exactly two draws, Fingers first then
  *  Brain Freeze, both ALWAYS drawn (a capped/active proc discards its result)
- *  so the stream position never depends on proc state; only a committed-frost
- *  player reaches the rng at all, so every existing golden stays byte-stable. */
+ *  so the stream position never depends on proc state; only a mage who knows the
+ *  proc passives reaches the rng at all. */
 export function rollFrostboltProcs(ctx: SimContext, p: Entity, meta: PlayerMeta): void {
-  if (!isCommittedFrost(ctx, meta)) return;
+  if (!knowsFrostProcs(meta)) return;
   const fingers = ctx.rng.chance(FINGERS_OF_FROST_CHANCE);
   const brain = ctx.rng.chance(BRAIN_FREEZE_CHANCE);
   if (fingers) gainFingersOfFrost(ctx, p);
@@ -259,7 +264,7 @@ export function resolveFrozenCast(
   target: Entity | null,
 ): FrozenCastState {
   if (!target || ability.school === 'physical') return INERT_FROZEN;
-  if (!isCommittedFrost(ctx, meta)) return INERT_FROZEN;
+  if (!knowsFrostProcs(meta)) return INERT_FROZEN;
   const lanceMult = ability.id === 'ice_lance' ? ICE_LANCE_FROZEN_MULT : 1;
   if (isRooted(target)) return { treatAsFrozen: true, damageMult: lanceMult };
   if (ability.id === 'ice_lance' && consumeFingersCharge(ctx, p)) {
@@ -273,7 +278,7 @@ export function resolveFrozenCast(
 
 /** Post-impact rider, called once at the end of runEffects: frostbolt rolls
  *  its two procs; Flurry plants Winter's Chill on its (surviving) target.
- *  Inert for anything that is not a committed-frost mage cast. */
+ *  Inert for anything that is not a frost-proc mage cast. */
 export function frostMageAfterCast(
   ctx: SimContext,
   p: Entity,
@@ -285,8 +290,8 @@ export function frostMageAfterCast(
   if (ability.id === 'frostbolt') {
     rollFrostboltProcs(ctx, p, meta);
     // Each Rimelance impact also banks an Icicle toward Glacial Spike.
-    if (isCommittedFrost(ctx, meta)) gainIcicle(ctx, p);
-  } else if (ability.id === 'flurry' && isCommittedFrost(ctx, meta)) {
+    if (knowsFrostProcs(meta)) gainIcicle(ctx, p);
+  } else if (ability.id === 'flurry' && knowsFrostProcs(meta)) {
     if (target && !target.dead) applyWintersChill(ctx, p, target);
   }
 }

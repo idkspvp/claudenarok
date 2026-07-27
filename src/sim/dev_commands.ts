@@ -200,7 +200,7 @@ export function handleDevChat(
   if (kitMatch) {
     const meta = ctx.players.get(pid);
     if (!meta) return null;
-    const spec = kitMatch[1] ?? meta.talents.spec;
+    const spec = kitMatch[1] ?? meta.mods.spec;
     if (!spec) {
       ctx.error(pid, '[dev] No spec chosen; pass one, e.g. /dev kit fury.');
       return null;

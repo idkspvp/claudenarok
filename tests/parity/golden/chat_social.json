@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "c35651f3",
       "rng": {
         "draws": 0,
@@ -39,7 +39,6 @@
       "label": "chat-setup",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -94,13 +93,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -158,13 +153,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -215,9 +206,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -363,7 +351,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",
@@ -421,7 +409,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "deb46c6d",
       "rng": {
         "draws": 0,
@@ -430,7 +418,6 @@
       "label": "a-chats",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -485,13 +472,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -549,13 +532,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -606,9 +585,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -754,7 +730,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",
@@ -812,7 +788,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "6ba2842e",
       "rng": {
         "draws": 0,
@@ -821,7 +797,6 @@
       "label": "b-chats",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -876,13 +851,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -940,13 +911,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -997,9 +964,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1145,7 +1109,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",
@@ -1203,7 +1167,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "28093250",
       "rng": {
         "draws": 0,
@@ -1212,7 +1176,6 @@
       "label": "readout-emote",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1267,13 +1230,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1331,13 +1290,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1388,9 +1343,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1536,7 +1488,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",
@@ -1594,7 +1546,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "e3ee7b19",
       "rng": {
         "draws": 0,
@@ -1603,7 +1555,6 @@
       "label": "throttled",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1658,13 +1609,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1722,13 +1669,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1779,9 +1722,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1927,7 +1867,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",
@@ -1985,7 +1925,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "25f72544",
+      "state": "32575e77",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1994,7 +1934,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2049,13 +1988,9 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2113,13 +2048,9 @@
             "luk": 1,
             "vit": 4
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2170,9 +2101,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -2318,7 +2246,7 @@
           "fallStartY": 3.363615,
           "fiveSecondRule": 99,
           "flee": 10,
-          "hit": 7,
+          "hit": 6,
           "hp": 62,
           "id": 417,
           "kind": "player",

@@ -162,7 +162,6 @@ try {
 
   // New pages render (not the placeholder).
   for (const [path, sel] of [
-    ['reference/talents', '.guide-talents'],
     ['arena', '.guide-arena'],
     ['wish-i-knew', '.guide-wish'],
   ]) {

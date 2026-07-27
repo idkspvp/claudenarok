@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { emptyModifiers, type TalentModifiers } from '../src/sim/content/talents';
 import { createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
+import { emptyModifiers, type PlayerModifiers } from '../src/sim/player_modifiers';
 import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { PlayerClass } from '../src/sim/types';
 
 // recalcPlayerStats is the ONE place derived stats are computed (src/sim/CLAUDE.md). These
-// lock the primary-attribute multipliers (strPct/agiPct/intPct/lukPct) that back talents
-// like Lightning Reflexes (+10% Agility) and Arcane Mind (+8% Intellect): the multiplier
+// lock the primary-attribute multipliers (strPct/agiPct/intPct/lukPct) in the shared
+// modifier vocabulary (src/sim/player_modifiers.ts): the multiplier
 // must reach the fully-summed attribute AND flow into everything derived from it
 // (agiPct -> armor/dodge, intPct -> Spell Power, strPct -> attack power, dexPct ->
 // ranged AP, lukPct -> crit).
@@ -33,10 +33,10 @@ interface Derived {
   hit: number;
 }
 
-function derive(cls: PlayerClass, level: number, mut?: (m: TalentModifiers) => void): Derived {
+function derive(cls: PlayerClass, level: number, mut?: (m: PlayerModifiers) => void): Derived {
   const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, 'Test');
   e.level = level;
-  let mods: TalentModifiers | undefined;
+  let mods: PlayerModifiers | undefined;
   if (mut) {
     mods = emptyModifiers();
     mut(mods);

@@ -41,7 +41,6 @@ function drain(sim: Sim): SimEvent[] {
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -85,14 +84,8 @@ function echoMark(ally: Entity, mageId: number) {
 }
 
 describe('Temporal Echo: the mark', () => {
-  it('is granted only to Chronomancy and appears on the healer book', () => {
-    const { sim } = chronoMage();
-    expect(sim.resolvedAbility('temporal_echo')).not.toBeNull();
-    expect(sim.setSpec('fire')).toBe(true);
-    expect(sim.resolvedAbility('temporal_echo')).toBeNull();
-    expect(sim.setSpec('frost')).toBe(true);
-    expect(sim.resolvedAbility('temporal_echo')).toBeNull();
-  });
+  // The Chronomancy-exclusivity arm that stood here has no subject left: specs
+  // are retired (Phase D0) and every mage learns the kit.
 
   it('applies a small initial heal and a per-caster mark, instant on the GCD', () => {
     const { sim, p } = chronoMage();
@@ -291,7 +284,6 @@ describe('Temporal Echo: multiple chronomancers stay independent', () => {
     const { sim, p } = chronoMage();
     const mage2Pid = sim.addPlayer('mage', 'Cronomante2');
     sim.setPlayerLevel(20, mage2Pid);
-    expect(sim.setSpec('arcane', mage2Pid)).toBe(true);
     const mage2 = sim.entities.get(mage2Pid);
     if (!mage2) throw new Error('mage2 missing');
     mage2.pos.x = p.pos.x + 2;
@@ -318,14 +310,8 @@ describe('Temporal Echo: multiple chronomancers stay independent', () => {
 });
 
 describe('Temporal Echo: cleanup', () => {
-  it('leaving Chronomancy clears the marks this mage placed', () => {
-    const { sim, p } = chronoMage();
-    const ally = addAlly(sim, 'Limpieza');
-    markEcho(sim, ally);
-    expect(echoMark(ally, p.id)).toBeDefined();
-    expect(sim.setSpec('fire')).toBe(true);
-    expect(echoMark(ally, p.id)).toBeUndefined(); // stripped on spec loss
-  });
+  // The Chronomancy-exclusivity arm that stood here has no subject left: specs
+  // are retired (Phase D0) and every mage learns the kit.
 
   it('the ally dying sheds the mark through the normal death path', () => {
     const { sim } = chronoMage();

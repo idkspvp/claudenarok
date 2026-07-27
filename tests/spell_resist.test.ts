@@ -96,7 +96,6 @@ describe('spell_resist: cast outcome labeling', () => {
 
   it('a physical ability (Shieldcrack) still emits kind:"miss" when avoided', () => {
     const { sim, p, meta } = makeSim('warrior', 12);
-    expect(sim.setSpec('prot', p.id)).toBe(true);
     const mob = spawnTarget(sim, p, 60, 2);
     // meleeSwing draws avoidance from ONE rng.next() roll against stacked bands
     // (miss first). A CRITICAL is now resolved above that table and bypasses it

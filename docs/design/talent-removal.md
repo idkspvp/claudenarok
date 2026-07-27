@@ -1,8 +1,51 @@
 # Removing the talent and spec system (D0)
 
-The recipe, the decisions already made, and the exact remaining work. Written
-after running the removal twice and restoring both times, so none of it has to be
-re-derived. Roadmap context: `roadmap.md`, Phase D.
+**DONE.** This is now the record of how it was done, not a plan. Read it when
+something looks odd in a class kit, a spec-shaped mechanic, or an old save.
+Roadmap context: `roadmap.md`, Phase D.
+
+## What the removal actually decided
+
+Everything in the plan below happened, plus five calls the plan did not make.
+Each came from the same rule: a class now gets its WHOLE ability list, so an
+ability that is learnable must also work.
+
+- **`abilitiesKnownAt` KEPT its third parameter.** The plan said to drop it. It
+  stays, typed `PlayerModifiers`, because the Fiesta augments feed their grants
+  and per-ability mods through exactly that argument; dropping it would have
+  taken augment grants off the known list with the talents.
+- **Warrior stances were ungated.** `availableWarriorStanceKinds` mirrored the
+  `specs`/`excludeSpecs` gate on the stance defs and answered "Battle only" for
+  a spec-less warrior, so a cast Guarded or Berserker was stripped on the next
+  tick. All three are wearable now and the functions lost their `spec` argument.
+- **The frost procs and the fire mechanics were re-keyed off the KNOWN passive**
+  (`fingers_of_frost`, `ignition`), the idiom the warrior's Sudden Death proc
+  already used. Both kits are learnable, so gating them on a committed spec left
+  a book full of passives that did nothing. Ignition's burn fraction was the
+  fire mastery's scalable axis and is now the constant `IGNITION_BURN_FRAC` in
+  `combat/fire_mage.ts`, at the value its own description promises.
+- **`onCastCompleted` survived as `combat/cast_hooks.ts`.** It was the proc
+  engine's, but two riders only lived there because it is the one funnel every
+  completed cast passes: Elemental Convergence's memory and Phoenix Trance's
+  Cinderfall restoke. The proc counters/icds it also held are the leaf
+  `combat/proc_state.ts`.
+- **Every OTHER `mods.spec` read was left alone.** They all had a correct,
+  shipped null branch (the pre-spec player), so they resolve to it with no
+  behavior churn and no rng-draw-order change. That is a deliberate deferral:
+  the tank crit immunity, the Fury dual wield, Protection's threat, and the
+  per-spec `execute` are all things D1 to D3 re-home onto the job tree, and
+  their suites were retired rather than rewritten against a spec that is gone.
+
+**Left standing on purpose:** 23 ability defs in `classes.ts` that were reachable
+only through a talent-row grant (Avatar, Bladestorm, Victory Rush, Recklessness,
+Cone of Cold, Evocation, Mass Barrier, Rune of Power and the rest). They are
+inert content records now, unreachable and harmless, and D4 (re-home the 279
+abilities onto the job tree) is the step that decides their fate. Deleting them
+here would have thrown away authored content on the way past.
+
+---
+
+# The original recipe
 
 Ragnarok has no specialization concept and its skills are a point-buy tree, so
 the 27 specs, their masteries, and `spec_baselines` all go. Everything class

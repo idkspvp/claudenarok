@@ -57,7 +57,7 @@ function desiredEquipSlot(meta: PlayerMeta, itemId: string): EquipSlot | null {
   if (!def?.slot) return null;
   if (def.kind !== 'weapon') return resolveEquipSlot(def, meta.equipment);
 
-  const spec = meta.talents.spec;
+  const spec = meta.mods.spec;
   const hand = weaponHand(def);
   if (hand === 'mainhand') return 'mainhand';
   if (hand === 'twohand') {
@@ -209,7 +209,7 @@ export function equipItem(
   // Warrior weapons additionally route between hands from the committed v0.26
   // specialization (desiredEquipSlot), and the chosen slot, aimed or resolved,
   // is re-validated against the spec-aware rules.
-  const spec = meta.talents.spec;
+  const spec = meta.mods.spec;
   const slot = targetSlot ?? desiredEquipSlot(meta, itemId);
   if (!slot) return;
   if (!canEquipItemInSlot(meta.cls, def, slot, spec)) {
@@ -300,7 +300,7 @@ export function revalidateOffhandForSpec(ctx: SimContext, pid?: number): void {
   if (!offhandId) return;
   const def = ITEMS[offhandId];
   if (!def) return;
-  if (canEquipItemInSlot(meta.cls, def, 'offhand', meta.talents.spec)) return;
+  if (canEquipItemInSlot(meta.cls, def, 'offhand', meta.mods.spec)) return;
 
   const instance = meta.equipmentInstance?.offhand;
   delete meta.equipment.offhand;

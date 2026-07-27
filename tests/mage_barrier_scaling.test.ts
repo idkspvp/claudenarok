@@ -9,7 +9,6 @@ function castBarrier(
 ): { absorb: number; cost: number; maxHp: number; spellPower: number } {
   const sim = new Sim({ seed: 707, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec(spec)).toBe(true);
   if (spellPower !== undefined) sim.player.spellPower = spellPower;
   sim.player.resource = sim.player.maxResource;
   const manaBefore = sim.player.resource;
@@ -32,7 +31,6 @@ function castTemporalBarrier(
 ): { absorb: number; cost: number; spellPower: number } {
   const sim = new Sim({ seed: 708, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.player.resource = sim.player.maxResource;
   const manaBefore = sim.player.resource;
   const allyId = sim.addPlayer('warrior', 'Barrier Target');

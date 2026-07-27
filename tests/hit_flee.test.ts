@@ -35,35 +35,39 @@ describe('the two ratings', () => {
     // made two identical characters connect every single time. They are level
     // plus the attribute and nothing else, so an even fight trades at 80% and
     // one swing in five misses.
-    expect(hitRating(1, 0, 0)).toBe(fleeRating(1, 0, 0));
-    expect(hitChance(hitRating(20, 10, 0), fleeRating(20, 10, 0))).toBeCloseTo(
+    expect(hitRating(1, 0)).toBe(fleeRating(1, 0));
+    expect(hitChance(hitRating(20, 10), fleeRating(20, 10))).toBeCloseTo(
       BASE_HIT_PERCENT / 100,
       10,
     );
-    expect(hitChance(hitRating(20, 10, 0), fleeRating(20, 10, 0))).toBeLessThan(MAX_HIT_CHANCE);
+    expect(hitChance(hitRating(20, 10), fleeRating(20, 10))).toBeLessThan(MAX_HIT_CHANCE);
   });
 
   it('pays DEX into accuracy and AGI into evasion, point for point', () => {
-    expect(hitRating(1, 10, 0) - hitRating(1, 0, 0)).toBe(10);
-    expect(fleeRating(1, 10, 0) - fleeRating(1, 0, 0)).toBe(10);
+    expect(hitRating(1, 10) - hitRating(1, 0)).toBe(10);
+    expect(fleeRating(1, 10) - fleeRating(1, 0)).toBe(10);
     // And crucially NOT the other way round: DEX must not buy evasion.
-    expect(fleeRating(1, 0, 0)).toBe(fleeRating(1, 0, 0));
-    expect(hitRating(1, 0, 50) - hitRating(1, 0, 0)).toBe(16); // LUK/3
-    expect(fleeRating(1, 0, 50) - fleeRating(1, 0, 0)).toBe(10); // LUK/5
+    expect(fleeRating(1, 0)).toBe(fleeRating(1, 0));
+    // Luck does NOTHING to either rating in pre-renewal. The luk/3 and luk/5
+    // terms this used to pin are Renewal's, from the same lines as the +175 and
+    // +100 baselines already removed. Pinned as an ABSENCE so the terms cannot
+    // come back a third time.
+    expect(hitRating(1, 0)).toBe(hitRating(1, 0));
+    expect(fleeRating(1, 0)).toBe(fleeRating(1, 0));
   });
 
   it('scales both with level, so a level gap still matters on its own', () => {
-    expect(hitRating(50, 0, 0)).toBeGreaterThan(hitRating(1, 0, 0));
-    expect(fleeRating(50, 0, 0)).toBeGreaterThan(fleeRating(1, 0, 0));
+    expect(hitRating(50, 0)).toBeGreaterThan(hitRating(1, 0));
+    expect(fleeRating(50, 0)).toBeGreaterThan(fleeRating(1, 0));
     // And they stay level with each other: an unbuilt character of any level
     // meets another of the same level at parity, never ahead.
-    for (const lv of [1, 20, 50, 99]) expect(hitRating(lv, 0, 0)).toBe(fleeRating(lv, 0, 0));
+    for (const lv of [1, 20, 50, 99]) expect(hitRating(lv, 0)).toBe(fleeRating(lv, 0));
   });
 
   it('floors a drained attribute instead of inverting the rating', () => {
-    expect(hitRating(1, -50, -50)).toBe(hitRating(1, 0, 0));
-    expect(fleeRating(1, -50, -50)).toBe(fleeRating(1, 0, 0));
-    expect(hitRating(0, 0, 0)).toBe(hitRating(1, 0, 0));
+    expect(hitRating(1, -50)).toBe(hitRating(1, 0));
+    expect(fleeRating(1, -50)).toBe(fleeRating(1, 0));
+    expect(hitRating(0, 0)).toBe(hitRating(1, 0));
   });
 });
 
@@ -107,7 +111,7 @@ describe('perfect dodge', () => {
     // The contest and this roll are separate on purpose. If perfect dodge were
     // folded into FLEE, a high-HIT attacker would eventually never miss at all,
     // and Luck would stop being a defensive attribute.
-    expect(hitChance(100000, fleeRating(1, 0, 99))).toBe(MAX_HIT_CHANCE);
+    expect(hitChance(100000, fleeRating(1, 0))).toBe(MAX_HIT_CHANCE);
     expect(perfectDodgeChance(99)).toBeGreaterThan(0);
   });
 });
@@ -122,14 +126,7 @@ describe('the contest reaches a real swing', () => {
       if (!meta) throw new Error('missing meta');
       const alloc: StatAllocation = { ...emptyStatAllocation(), dex: opts.attackerDex };
       meta.statAllocation = alloc;
-      recalcPlayerStats(
-        p,
-        meta.cls,
-        meta.equipment,
-        meta.talentMods,
-        meta.equipmentInstance,
-        alloc,
-      );
+      recalcPlayerStats(p, meta.cls, meta.equipment, meta.mods, meta.equipmentInstance, alloc);
     }
     const target = createMob((sim as never as { nextId: number }).nextId++, MOBS.forest_wolf, 5, {
       ...p.pos,
@@ -138,7 +135,7 @@ describe('the contest reaches a real swing', () => {
     target.stats = { ...target.stats, armor: 0 };
     if (opts.targetAgi !== undefined) {
       target.stats = { ...target.stats, agi: opts.targetAgi };
-      target.flee = fleeRating(target.level, opts.targetAgi, 0);
+      target.flee = fleeRating(target.level, opts.targetAgi);
     }
     (sim as never as { addEntity(e: unknown): void }).addEntity(target);
     const swings = opts.swings ?? 400;
@@ -183,8 +180,8 @@ describe('the contest reaches a real swing', () => {
     const sim = new Sim({ seed: 3, playerClass: 'hunter' });
     sim.setPlayerLevel(40);
     const p = sim.player;
-    expect(p.hit).toBe(hitRating(40, p.stats.dex, p.stats.luk) + Math.round(p.hitBonus * 100));
-    expect(p.flee).toBe(fleeRating(40, p.stats.agi, p.stats.luk));
+    expect(p.hit).toBe(hitRating(40, p.stats.dex) + Math.round(p.hitBonus * 100));
+    expect(p.flee).toBe(fleeRating(40, p.stats.agi));
     // A hunter's suggested spread leads on Dexterity, so their accuracy should
     // outrun their evasion; if those ever swap, the preset has drifted.
     const bare = defaultAllocationFor('hunter', 40);

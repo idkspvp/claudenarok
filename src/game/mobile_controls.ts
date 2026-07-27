@@ -138,7 +138,6 @@ export interface MobileControlCallbacks {
   /** Open the Crafting window, folded into the More tray on mobile. */
   onCrafting(): void;
   onSpellbook(): void;
-  onTalents(): void;
   onMap(): void;
   onLeaderboard(): void;
   /** Open the Daily Rewards chest, folded into the More tray on mobile. */
@@ -499,7 +498,6 @@ export class MobileControls {
     this.bindButton('mobile-bags', () => this.callbacks.onBags());
     this.bindButton('mobile-crafting', () => this.callbacks.onCrafting());
     this.bindButton('mobile-spellbook', () => this.callbacks.onSpellbook());
-    this.bindButton('mobile-talents', () => this.callbacks.onTalents());
     this.bindButton('mobile-map', () => this.callbacks.onMap());
     this.bindButton('mobile-leaderboard', () => this.callbacks.onLeaderboard());
     this.bindButton('mobile-daily-rewards', () => this.callbacks.onDailyRewards());

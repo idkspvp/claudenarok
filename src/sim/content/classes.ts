@@ -1,3 +1,4 @@
+import type { PlayerModifiers } from '../player_modifiers';
 import {
   type AbilityDef,
   type AbilityEffect,
@@ -15,8 +16,6 @@ import {
   TEMPORAL_HOURGLASS_SELF_RADIUS,
   type WeaponInfo,
 } from '../types';
-import { TALENT_ABILITIES_V2 } from './talent_abilities_v2';
-import type { TalentModifiers } from './talents';
 import { SPORT_ABILITIES } from './vale_cup';
 
 // ---------------------------------------------------------------------------
@@ -565,7 +564,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // replaces it with Revenge, Arms (owner restructure 2026-07-08) leans on
     // Maiming Strike + Brute Swing, and Fury (owner 2026-07-08) dropped it too
     // in favour of Bloodletting / Twinstrike. All three committed specs exclude it.
-    excludeSpecs: ['prot', 'arms', 'fury'],
     threat: { flat: 20 }, // classic per-rank values: 20/39/59/78
     effects: [{ type: 'weaponDamage', bonus: 11 }],
     ranks: [
@@ -617,7 +615,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Direhowl',
     class: 'warrior',
     learnLevel: 12,
-    specs: ['prot'],
     cost: 10,
     castTime: 0,
     // Owner rework: a real defensive cooldown instead of a spammable flat AP
@@ -654,7 +651,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     learnLevel: 5,
     // Protection-only now (owner restructure 2026-07-08): the seismic AoE belongs
     // to the tank; Arms dropped it to declutter its bar.
-    specs: ['prot'],
     cost: 20,
     castTime: 0,
     cooldown: 4,
@@ -721,7 +717,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Blood Toll',
     class: 'warrior',
     learnLevel: 6,
-    specs: ['arms', 'prot'],
     cost: 0,
     castTime: 0,
     cooldown: 60,
@@ -761,8 +756,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // rider feeds the Arms-granted Maiming Strike, a dead rider beside
     // Shieldcrack/Revenge, review round 2 item on Prot coherence). Arms keeps
     // it: the Maiming Strike empower is its whole point.
-    excludeSpecs: ['fury', 'prot'],
-    excludeSpecsAtLevel: 10,
     effects: [
       { type: 'weaponStrike', bonus: 5, cannotBeDodged: true },
       // Empowers the next Maiming Strike (+20% per stack, up to 2), consumed in
@@ -794,7 +787,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Twinstrike',
     class: 'warrior',
     learnLevel: 7,
-    specs: ['fury'],
     cost: 0,
     castTime: 0,
     cooldown: 8,
@@ -838,7 +830,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     learnLevel: 5,
     // Arms-only (owner 2026-07-08): Protection dropped Brute Swing since Revenge
     // is already its filler; a generic mandoble adds nothing for a tank.
-    specs: ['arms'],
     // Redesigned 2026-07-10 (owner): from a 15-rage spender into the Arms rage
     // BUILDER (free, generates 8 rage, 4s cooldown, stays on the GCD). Dropped
     // from Battle Trance's free-cost scope in the same change: a 0-cost ability
@@ -866,7 +857,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Red Harvest',
     class: 'warrior',
     learnLevel: 10,
-    specs: ['fury'],
     cost: 80,
     castTime: 0,
     cooldown: 0,
@@ -893,7 +883,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Mayhem',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['fury'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -916,7 +905,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Furious Mending',
     class: 'warrior',
     learnLevel: 10,
-    specs: ['fury'],
     cost: 0,
     castTime: 0,
     cooldown: 120,
@@ -946,7 +934,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Emboldening Roar',
     class: 'warrior',
     learnLevel: 16,
-    specs: ['fury'],
     cost: 0,
     castTime: 0,
     cooldown: 180,
@@ -967,7 +954,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Raised Guard',
     class: 'warrior',
     learnLevel: 8,
-    specs: ['prot'],
     requiresShield: true,
     cost: 15,
     castTime: 0,
@@ -1000,7 +986,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Iron Resolve',
     class: 'warrior',
     learnLevel: 14,
-    specs: ['prot'],
     cost: 20,
     spendsAllResource: true,
     spendResourceCap: 40,
@@ -1021,7 +1006,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Faultline',
     class: 'warrior',
     learnLevel: 14,
-    specs: ['prot'],
     cost: 15,
     castTime: 0,
     cooldown: 30,
@@ -1041,7 +1025,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Defiant Bellow',
     class: 'warrior',
     learnLevel: 12,
-    specs: ['prot'],
     cost: 0,
     castTime: 0,
     cooldown: 60,
@@ -1062,7 +1045,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Breachmaker',
     class: 'warrior',
     learnLevel: 12,
-    specs: ['arms'],
     cost: 10,
     castTime: 0,
     cooldown: 45,
@@ -1092,7 +1074,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Measured Fury',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['arms'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1112,7 +1093,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Seasoned Soldier',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['arms'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1130,7 +1110,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Diabolical Twinstrike',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['fury'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1148,7 +1127,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Cleaving Blows',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['fury'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1168,7 +1146,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Sudden Death',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['arms'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1188,7 +1165,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Widening Arc',
     class: 'warrior',
     learnLevel: 18,
-    specs: ['arms'],
     cost: 0,
     castTime: 0,
     cooldown: 30,
@@ -1205,7 +1181,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Gaping Wounds',
     class: 'warrior',
     learnLevel: 9,
-    specs: ['arms'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1222,7 +1197,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Reaping Arc',
     class: 'warrior',
     learnLevel: 14,
-    specs: ['arms'],
     // Balance pass 2026-07-10 (Arms buff round): 20 rage / 20-26 -> 15 rage /
     // 30-38, soft-capped at 5 targets (the Revenge mechanism: above 5 the
     // total holds at 5x per-target, scaling already-rolled hits, no rng moved).
@@ -1246,7 +1220,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Comeuppance',
     class: 'warrior',
     learnLevel: 7,
-    specs: ['prot'],
     cost: 20,
     castTime: 0,
     cooldown: 0,
@@ -1268,7 +1241,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Warring Stance',
     class: 'warrior',
     learnLevel: 1,
-    excludeSpecs: ['fury'],
     cost: 0,
     castTime: 0,
     cooldown: 1,
@@ -1286,7 +1258,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Reckless Stance',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['fury'],
     cost: 0,
     castTime: 0,
     cooldown: 1,
@@ -1304,7 +1275,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Guarded Stance',
     class: 'warrior',
     learnLevel: 5,
-    specs: ['arms', 'prot'],
     cost: 0,
     castTime: 0,
     cooldown: 1,
@@ -1324,7 +1294,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     learnLevel: 5,
     // Protection-only now (owner restructure 2026-07-08): Arms dropped armor
     // shred to declutter its bar.
-    specs: ['prot'],
     cost: 15,
     castTime: 0,
     cooldown: 0,
@@ -1437,7 +1406,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // Frost identity (owner 2026-07-14 spec split): committing to Fire or
     // Chronomancy hands the armor off (excludeSpecs, the Reaver Strike idiom),
     // while the level 1-4 pre-spec mage keeps its starter armor.
-    excludeSpecs: ['fire', 'arcane'],
     cost: 20,
     castTime: 0,
     cooldown: 0,
@@ -1533,7 +1501,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Ice Lance',
     class: 'mage',
     learnLevel: 5,
-    specs: ['frost'],
     cost: 10,
     castTime: 0,
     cooldown: 0,
@@ -1567,7 +1534,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Winterlash',
     class: 'mage',
     learnLevel: 8,
-    specs: ['frost'],
     cost: 30,
     castTime: 1.5,
     cooldown: 10,
@@ -1603,7 +1569,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Rimeglobe',
     class: 'mage',
     learnLevel: 15,
-    specs: ['frost'],
     cost: 50,
     castTime: 0,
     cooldown: 45,
@@ -1633,7 +1598,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Glacial Spike',
     class: 'mage',
     learnLevel: 16,
-    specs: ['frost'],
     cost: 50,
     castTime: 2.7,
     cooldown: 0,
@@ -1669,7 +1633,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Blizzard',
     class: 'mage',
     learnLevel: 10,
-    specs: ['frost'],
     cost: 70,
     cooldown: 8,
     range: 30,
@@ -1709,7 +1672,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Glacial Front',
     class: 'mage',
     learnLevel: 17,
-    specs: ['frost'],
     cost: 80,
     castTime: 2.4,
     empowerStages: 4,
@@ -1743,7 +1705,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: "Dragon's Breath",
     class: 'mage',
     learnLevel: 14,
-    specs: ['fire'],
     cost: 90,
     castTime: 2.4,
     empowerStages: 4,
@@ -1778,7 +1739,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Fingers of Frost',
     class: 'mage',
     learnLevel: 5,
-    specs: ['frost'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1795,7 +1755,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Brain Freeze',
     class: 'mage',
     learnLevel: 5,
-    specs: ['frost'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1812,7 +1771,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Brittle Ruin',
     class: 'mage',
     learnLevel: 10,
-    specs: ['frost'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -1870,7 +1828,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     id: 'fire_blast',
     // DPS-spec kit (Chronomancy gating, docs/prd/mage-chronomancy.md Phase 1):
     // both damage specs keep it exactly as before; the healer does not.
-    specs: ['fire'],
     name: 'Cinderfall',
     class: 'mage',
     learnLevel: 5,
@@ -1910,7 +1867,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Aether Darts',
     class: 'mage',
     learnLevel: 5,
-    specs: ['arcane'],
     cost: 50,
     castTime: 0,
     channel: { duration: 3, ticks: 3 },
@@ -1993,7 +1949,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Aetherburst',
     class: 'mage',
     learnLevel: 7,
-    specs: ['arcane'],
     cost: 60,
     castTime: 0,
     cooldown: 0,
@@ -2010,7 +1965,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     id: 'flamestrike',
     // DPS-spec kit (Chronomancy gating, docs/prd/mage-chronomancy.md Phase 1):
     // both damage specs keep it exactly as before; the healer does not.
-    specs: ['fire'],
     name: 'Flamestrike',
     class: 'mage',
     learnLevel: 12,
@@ -2104,7 +2058,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     id: 'scorch',
     // DPS-spec kit (Chronomancy gating, docs/prd/mage-chronomancy.md Phase 1):
     // both damage specs keep it exactly as before; the healer does not.
-    specs: ['fire'],
     name: 'Scald',
     class: 'mage',
     learnLevel: 10,
@@ -2131,7 +2084,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     id: 'pyroblast',
     // DPS-spec kit (Chronomancy gating, docs/prd/mage-chronomancy.md Phase 1):
     // both damage specs keep it exactly as before; the healer does not.
-    specs: ['fire'],
     name: 'Pyrelance',
     class: 'mage',
     learnLevel: 5,
@@ -2156,7 +2108,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Mend',
     class: 'mage',
     learnLevel: 5,
-    specs: ['arcane'],
     cost: 45,
     // The reliable efficient heal (owner spec: ~2s): quicker than the priest
     // and paladin big heals (2.5s), paying for the speed with a slightly
@@ -2180,7 +2131,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Barrier',
     class: 'mage',
     learnLevel: 5,
-    specs: ['arcane'],
     cost: 50,
     castTime: 0,
     // Instant, on the GCD, 12s cooldown (owner spec). Sized against the
@@ -2241,7 +2191,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Echo',
     class: 'mage',
     learnLevel: 8,
-    specs: ['arcane'],
     cost: 40,
     castTime: 0,
     cooldown: 0,
@@ -2291,7 +2240,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Cascade',
     class: 'mage',
     learnLevel: 12,
-    specs: ['arcane'],
     cost: 90,
     castTime: 2,
     cooldown: 17,
@@ -2353,7 +2301,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Reversal',
     class: 'mage',
     learnLevel: 16,
-    specs: ['arcane'],
     cost: 60,
     castTime: 2,
     cooldown: 600,
@@ -2374,7 +2321,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Collective Reversal',
     class: 'mage',
     learnLevel: 8,
-    specs: ['arcane'],
     cost: 250,
     castTime: 7,
     cooldown: 0,
@@ -2399,7 +2345,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Rewind',
     class: 'mage',
     learnLevel: 14,
-    specs: ['arcane'],
     cost: 150,
     castTime: 0,
     cooldown: 120,
@@ -2419,7 +2364,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Hourglass of Suspension',
     class: 'mage',
     learnLevel: 14,
-    specs: ['arcane'],
     cost: 110,
     castTime: 0,
     cooldown: 50,
@@ -2461,7 +2405,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Perfect Moment',
     class: 'mage',
     learnLevel: 10,
-    specs: ['arcane'],
     cost: 0,
     castTime: 0,
     cooldown: 120,
@@ -2478,7 +2421,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Temporal Acceleration',
     class: 'mage',
     learnLevel: 20,
-    specs: ['arcane'],
     cost: 120,
     castTime: 0,
     cooldown: 300,
@@ -2513,7 +2455,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Aether Surge',
     class: 'mage',
     learnLevel: 5,
-    specs: ['arcane'],
     cost: 16,
     castTime: 2,
     cooldown: 0,
@@ -2536,7 +2477,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     id: 'ice_barrier',
     // Frost's personal barrier (owner leveling pass 2026-07-14): Fire gets its
     // own Blazing Barrier at the spec pick, so the shared Frostveil is gone.
-    specs: ['frost'],
     name: 'Frostveil',
     class: 'mage',
     learnLevel: 5,
@@ -5106,7 +5046,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // Fury-only (balance pass 2026-07-10): Fury had no baseline AoE, so it gets
     // Bladed Gyre back as its spec AoE tool. Arms/Prot keep their own AoE
     // (Reaping Arc / Quaking Blow); no-spec never learns it.
-    specs: ['fury'],
     // Bladed Gyre is free but mints nothing (v0.27.1 rage fix): with Twinstrike,
     // Bloodletting, AND the spin all generating, Fury's whole rotation was
     // rage-positive and Red Harvest fired every ~6s. Bloodletting is now the one
@@ -5317,7 +5256,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // Arms base-kit defensive cooldown (owner restructure 2026-07-08): Arms had
     // no defensive of its own. Also still reachable as a choice-row grant. No
     // shield gate: the "sword" IS the defense (Arms wields a two-hander).
-    specs: ['arms'],
     cost: 0,
     castTime: 0,
     cooldown: 120,
@@ -5543,7 +5481,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   combustion: {
     id: 'combustion',
-    specs: ['fire'],
     name: 'Phoenix Trance',
     class: 'mage',
     learnLevel: 12,
@@ -5581,7 +5518,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
   },
   icy_veins: {
     id: 'icy_veins',
-    specs: ['frost'],
     name: 'Icy Veins',
     class: 'mage',
     learnLevel: 12,
@@ -5946,7 +5882,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Emberfall',
     class: 'mage',
     learnLevel: 16,
-    specs: ['fire'],
     cost: 120,
     castTime: 0,
     cooldown: 45,
@@ -6153,7 +6088,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Blazing Barrier',
     class: 'mage',
     learnLevel: 5,
-    specs: ['fire'],
     cost: 45,
     castTime: 0,
     cooldown: 30,
@@ -6205,7 +6139,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Ignition',
     class: 'mage',
     learnLevel: 5,
-    specs: ['fire'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -6222,7 +6155,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Hot Streak',
     class: 'mage',
     learnLevel: 5,
-    specs: ['fire'],
     passive: true,
     cost: 0,
     castTime: 0,
@@ -6239,7 +6171,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
     name: 'Summon Water Elemental',
     class: 'mage',
     learnLevel: 12,
-    specs: ['frost'],
     cost: 150,
     castTime: 2,
     cooldown: 0,
@@ -6480,7 +6411,6 @@ export const ABILITIES: Record<string, AbilityDef> = {
 
   // Canonical Talents V2 active grants. These are absent from baseline class kits
   // and become known only through the selected row's `grant` effect.
-  ...TALENT_ABILITIES_V2,
 
   // The Vale Cup sport kit (class-agnostic; docs/prd/vale-cup.md). Merged here
   // so every ABILITIES consumer (casting, icons, hotbar validation, tooltips)
@@ -6649,7 +6579,7 @@ function scaleEffect(
     // multiplier and rounding corrupts it (1.2 -> 1 = zero haste, 1.4 -> 1 = no speed),
     // and a sub-1 rate (a 0.2 crit fraction) floors to 0 (this silently zeroed Aether
     // Surge's haste for an Arcane mage). Gate on the KIND, never a value heuristic.
-    // Intentional buff scaling still rides the per-ability buffPct in applyTalentMods.
+    // Intentional buff scaling still rides the per-ability buffPct in applyModifiers.
     case 'buffTarget':
     case 'selfBuff':
       return SCALABLE_BUFF_KINDS.has(eff.kind)
@@ -6688,10 +6618,10 @@ function scaleEffect(
   }
 }
 
-// Fold precomputed talent modifiers into one resolved ability (FR-5.3). Global
+// Fold precomputed player modifiers into one resolved ability. Global
 // melee/spell/heal mults apply to every ability of the right school; per-ability
 // mods stack on top and also tune cost / cast time / cooldown.
-function applyTalentMods(entry: KnownAbility, mods: TalentModifiers): void {
+function applyModifiers(entry: KnownAbility, mods: PlayerModifiers): void {
   const am = mods.abilities[entry.def.id];
   const physical = entry.def.school === 'physical';
   const globalDmg = physical ? mods.global.meleeDmgPct : mods.global.spellDmgPct;
@@ -6757,11 +6687,11 @@ function applyTalentMods(entry: KnownAbility, mods: TalentModifiers): void {
 }
 
 // Abilities a class knows at a given level, with rank values resolved and any
-// talent modifiers (granted abilities + per-ability/global tweaks) applied.
+// player modifiers (granted abilities + per-ability/global tweaks) applied.
 export function abilitiesKnownAt(
   cls: PlayerClass,
   level: number,
-  mods?: TalentModifiers,
+  mods?: PlayerModifiers,
 ): KnownAbility[] {
   const out: KnownAbility[] = [];
   const baseIds = CLASSES[cls].abilities;
@@ -6775,25 +6705,6 @@ export function abilitiesKnownAt(
     if (!def) continue;
     const granted = grantIds.has(id) || !baseIds.includes(id);
     if (!granted && def.learnLevel > level) continue; // class kit is level-gated; grants bypass it
-    // Spec-gated kit: a spec-restricted ability is shown ONLY when the player's
-    // committed spec is in its `specs` list. With no spec chosen the shared base
-    // kit stays but every spec-exclusive drops out, so exclusivity is visible
-    // before committing. Grants bypass entirely (already spec-scoped).
-    if (!granted && def.specs && (!mods?.spec || !def.specs.includes(mods.spec))) continue;
-    // Spec EXCLUSION: an otherwise-ungated ability drops out for a committed spec
-    // in its `excludeSpecs` list (Reaver Strike hides for Protection, which uses
-    // Revenge instead). A no-spec player and non-listed specs keep it; grants
-    // bypass entirely (already spec-scoped). With excludeSpecsAtLevel set the
-    // drop waits for that player level (a kit hand-off, e.g. Redhand serves
-    // Fury until Red Harvest arrives at 10).
-    if (
-      !granted &&
-      def.excludeSpecs &&
-      mods?.spec &&
-      def.excludeSpecs.includes(mods.spec) &&
-      level >= (def.excludeSpecsAtLevel ?? 0)
-    )
-      continue;
 
     let rank = 1,
       cost = def.cost,
@@ -6810,21 +6721,7 @@ export function abilitiesKnownAt(
         if (r.threatFlat !== undefined) threatFlat = r.threatFlat;
       }
     }
-    let cooldown = def.cooldown;
-    if (id === 'execute' && mods?.spec === 'arms') {
-      cost = 10;
-    }
-    // Fury's execute is a rage BUILDER, not a spender (owner 2026-07-08):
-    // for a committed Fury warrior it costs nothing and MINTS 20 rage instead of
-    // the shared finisher cost. Arms, Protection and no-spec keep the classic
-    // rage-costing execute. Resolved here (not via a talent mod) so the
-    // cast-time cost gate sees 0 and the appended gainResource flows through the
-    // normal dispatch scaling (abilityRagePct / rage-gen auras).
-    if (id === 'execute' && mods?.spec === 'fury') {
-      cost = 0;
-      effects = [...effects, { type: 'gainResource', amount: 20 }];
-      cooldown = 6;
-    }
+    const cooldown = def.cooldown;
     const entry: KnownAbility = {
       def,
       rank,
@@ -6844,12 +6741,7 @@ export function abilitiesKnownAt(
       entry.charges = def.maxCharges;
       entry.bonusCharges = Math.max(0, def.maxCharges - 1);
     }
-    // Frost mages carry a SECOND Ice Block charge (owner 2026-07-13: "doble cubo"),
-    // on the abilityCharges recharge model. Resolved HERE (the shared known-list
-    // builder) so BOTH worlds see it: the offline Sim's meta.known and the
-    // ClientWorld's locally recomputed list, which is what the action bar badges.
-    if (id === 'ice_block' && mods?.spec === 'frost') entry.bonusCharges = 1;
-    if (mods) applyTalentMods(entry, mods);
+    if (mods) applyModifiers(entry, mods);
     out.push(entry);
   }
   return out;

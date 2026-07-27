@@ -11,17 +11,6 @@ import {
 import { bagCapacity } from '../sim/bags';
 import { signChallenge } from '../sim/client_challenge';
 import { mechChromaItemId, mechChromaSkinIndex } from '../sim/content/skins';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  type Role,
-  repairAllocation,
-  rowsPicked,
-  rowsUnlockedAtLevel,
-  type SavedLoadout,
-  type TalentAllocation,
-  type TalentRowLevel,
-} from '../sim/content/talents';
 import { resolveSportKit } from '../sim/content/vale_cup';
 import { resolveActiveWeaponSkin, withWeaponSkinApplied } from '../sim/content/weapon_skin_rules';
 import { WEAPON_SKINS } from '../sim/content/weapon_skins';
@@ -44,8 +33,6 @@ import type { MaterialRarity } from '../sim/professions/gathering';
 import { emptyCraftSkills } from '../sim/professions/wheel';
 import type { ResolvedAbility } from '../sim/sim';
 import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
-import { parseTalentAllocation } from '../sim/talent_allocation_input';
-import { repairTalentLoadouts } from '../sim/talent_loadouts';
 import {
   type Aura,
   cloneItemInstancePayload,
@@ -1329,13 +1316,6 @@ export class ClientWorld implements IWorld {
   // Rested XP pool, mirrored from snapshot self.
   restedXp = 0;
   unlockedMilestones: string[] = [];
-  // --- IWorldTalents: talents + spec/role + saved loadouts, mirrored from
-  // snapshot self (display + staging). ---
-  talents: TalentAllocation = emptyAllocation();
-  talentSpec: string | null = null;
-  talentRole: Role | null = null;
-  loadouts: SavedLoadout[] = [];
-  activeLoadout = -1;
   // --- IWorldParty: party/raid roster, mirrored from the snapshot self (`party`).
   // The raid-target markers ride the `markers` map below; IWorldPet keeps no mirror
   // field (pet state lives on the owned-mob entity wire). ---
@@ -2887,40 +2867,16 @@ export class ClientWorld implements IWorld {
       }
       if (s.lockouts !== undefined) this.selfLockouts = s.lockouts as Record<string, number>;
       if (s.ddiff === 'normal' || s.ddiff === 'heroic') this.selectedDungeonDifficulty = s.ddiff;
-      // IWorldTalents facet (W7) self-decode: tal is delta-guarded (omitted keeps
-      // the prior mirror); the known rebuild below is display-only (re-renders what
-      // the server already decided), not client authority.
-      // talent state (heavy field, sent on change): mirror it, then resolve known
-      // with the precomputed modifiers so granted abilities + tweaks show locally.
-      if (s.tal !== undefined && s.tal) {
-        const parsed = parseTalentAllocation(s.tal.alloc);
-        if (parsed) {
-          this.talents = repairAllocation(this.cfg.playerClass, parsed, e.level);
-          const repairedLoadouts = repairTalentLoadouts(
-            this.cfg.playerClass,
-            e.level,
-            s.tal.loadouts,
-            s.tal.activeLoadout,
-          );
-          this.loadouts = repairedLoadouts.loadouts;
-          this.activeLoadout = repairedLoadouts.activeLoadout;
-        }
-      }
-      if (!this.talents) this.talents = emptyAllocation();
-      const talents = this.talents;
-      const talentMods = computeTalentModifiers(this.cfg.playerClass, talents, e.level);
-      this.talentSpec = talentMods.spec;
-      this.talentRole = talentMods.role;
       // IWorldValeCup sport-kit swap (the wire trap, docs/prd/vale-cup.md): a
       // server-side meta.known swap is invisible to this derived rebuild, so
       // the server flags the live role via the wireRev-gated heavy `sport`
       // field. While the mirrored role is set, known is the role kit from the
       // shared resolver (identical to the Sim's swap); otherwise the normal
-      // class/level/talent derivation below applies.
+      // class/level derivation below applies.
       if (s.sport !== undefined) this.sportRole = s.sport ? (s.sport.role ?? null) : null;
       this.known = this.sportRole
         ? resolveSportKit(this.sportRole)
-        : abilitiesKnownAt(this.cfg.playerClass, e.level, talentMods);
+        : abilitiesKnownAt(this.cfg.playerClass, e.level);
       // --- IWorldParty: party roster + raid markers, delta-omitted self-decode
       // (keep the prior value when absent; `marks: null` clears on disband). ---
       if (s.party !== undefined) this.partyInfo = s.party;
@@ -3669,7 +3625,7 @@ export class ClientWorld implements IWorld {
   }
   // --- IWorldDungeonFinder: group-finder sends (dungeonFinderInfo and
   // dungeonFinderBoard are snapshot reads, decoded in applySnapshot). ---
-  dungeonFinderSetRoles(roles: import('../sim/content/talents').Role[]): void {
+  dungeonFinderSetRoles(roles: import('../sim/player_modifiers').Role[]): void {
     this.cmd({ cmd: 'df_roles', roles });
   }
   dungeonFinderQueueJoin(activityIds: string[]): void {
@@ -3834,7 +3790,6 @@ export class ClientWorld implements IWorld {
         name: sheet.name,
         cls: sheet.class,
         classLabel: sheet.classLabel ?? sheet.class,
-        spec: sheet.spec ?? '',
         level: sheet.level ?? 1,
         guild: sheet.guild ?? null,
         zone: sheet.zone ?? '',
@@ -4262,8 +4217,6 @@ export class ClientWorld implements IWorld {
   prestige(): void {
     this.cmd({ cmd: 'prestige' });
   }
-  // --- IWorldTalents: talentPoints is a local display compute; every mutation
-  // is sent to the authoritative server and mirrors only from a later snapshot. ---
   // --- IWorldStatusPoints: the six attributes. The mirror is server-written
   // (the `salloc` self field); the two reads below re-derive the pool with the
   // SAME pure functions the server uses, so the number under the spend button
@@ -4288,31 +4241,6 @@ export class ClientWorld implements IWorld {
     this.cmd({ cmd: 'resetStats' });
   }
 
-  talentPoints(): { total: number; spent: number } {
-    const level = this.entities.get(this.playerId)?.level ?? 1;
-    return { total: rowsUnlockedAtLevel(level), spent: rowsPicked(this.talents) };
-  }
-  applyTalents(alloc: TalentAllocation): void {
-    this.cmd({ cmd: 'applyTalents', alloc });
-  }
-  respec(): void {
-    this.cmd({ cmd: 'respec' });
-  }
-  setSpec(specId: string | null): void {
-    this.cmd({ cmd: 'setSpec', spec: specId });
-  }
-  selectTalentRow(level: TalentRowLevel, optionId: string | null): void {
-    this.cmd({ cmd: 'selectTalentRow', level, optionId });
-  }
-  saveLoadout(name: string, bar: (string | null)[], alloc?: TalentAllocation): void {
-    this.cmd({ cmd: 'saveLoadout', name, bar, alloc });
-  }
-  switchLoadout(index: number): void {
-    this.cmd({ cmd: 'switchLoadout', index });
-  }
-  deleteLoadout(index: number): void {
-    this.cmd({ cmd: 'deleteLoadout', index });
-  }
   // legacy aliases kept for older scripts
   enterCrypt(): void {
     this.enterDungeon('hollow_crypt');

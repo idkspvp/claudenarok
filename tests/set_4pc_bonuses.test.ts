@@ -59,7 +59,7 @@ function equipSet(sim: Sim, equipment: Record<string, string>): AnyEntity {
     p,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );
@@ -209,7 +209,7 @@ describe('spellCast set procs (Soulblaze, tier-2 casters)', () => {
       p,
       meta.cls,
       meta.equipment,
-      meta.talentMods,
+      meta.mods,
       meta.equipmentInstance,
       meta.statAllocation,
     );

@@ -292,7 +292,7 @@ export function releaseSpiritInDelve(ctx: SimContext, pid: number): void {
     p,
     r.meta.cls,
     r.meta.equipment,
-    r.meta.talentMods,
+    r.meta.mods,
     r.meta.equipmentInstance,
     r.meta.statAllocation,
   );

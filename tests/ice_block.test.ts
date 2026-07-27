@@ -10,7 +10,6 @@ import type { Aura, Entity } from '../src/sim/types';
 function rigMage(spec: 'frost' | 'fire' | 'arcane' | null = null) {
   const sim = new Sim({ seed: 17, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  if (spec) expect(sim.setSpec(spec)).toBe(true); // Ice Block is base kit, no talent needed
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -223,23 +222,8 @@ describe('Ice Block: immunity + cleanse + control', () => {
     expect(p.auras).not.toContain(ownedAbsorb);
   });
 
-  it('Frost carries two Ice Block charges; other specs carry one', () => {
-    const frost = rigMage('frost');
-    const frostRes = frost.sim.resolvedAbility('ice_block', frost.p.id);
-    expect(frostRes?.bonusCharges ?? 0).toBe(1); // +1 => two total charges
-
-    // The KNOWN entry carries it too (abilitiesKnownAt, the shared builder):
-    // this is what the action bar badges, and what ClientWorld's local
-    // recompute mirrors, so a resolvedAbility-only stamp would regress the "2".
-    const frostKnown = frost.sim.known.find((k) => k.def.id === 'ice_block');
-    expect(frostKnown?.bonusCharges ?? 0).toBe(1);
-
-    const plain = rigMage(null);
-    const plainRes = plain.sim.resolvedAbility('ice_block', plain.p.id);
-    expect(plainRes?.bonusCharges ?? 0).toBe(0); // one charge
-    const plainKnown = plain.sim.known.find((k) => k.def.id === 'ice_block');
-    expect(plainKnown?.bonusCharges ?? 0).toBe(0);
-  });
+  // The Frost second-charge test that stood here was resolved per spec; specs are
+  // retired (Phase D0) and every mage carries the def's single charge.
 
   it('replays deterministically', () => {
     const run = () => {

@@ -60,7 +60,7 @@ type TestFrame = {
     nm: string;
     ack: number;
     party: { members: { pid: number; x: number; z: number }[] };
-    tal?: { alloc: { spec: string | null; rows: Record<number, string> } };
+    deeds?: Record<string, string>;
   };
 };
 
@@ -789,11 +789,11 @@ describe('moderator spectate integration', () => {
   // Regression for the /spectate talent-reset bug: the heavy self block
   // (tal/inv/equip/...) is gated on meta.wireRev vs session.lastWireRev, a
   // comparison keyed to whichever entity's meta is currently being wired.
-  // Neither talent allocation bumps wireRev here (both start at the sim
-  // default, 0), so without forcing selfHeavyDirty on enter/exit, the
-  // moderator's own 'tal' field silently fails to resend after /unspectate
-  // and the client stays mirrored on the spectated target's talents.
-  it('resends the moderator own talents (not the spectated target) after /unspectate', () => {
+  // Neither earned-deed map bumps wireRev here (both start at the sim default,
+  // 0), so without forcing selfHeavyDirty on enter/exit, the moderator's own
+  // 'deeds' field silently fails to resend after /unspectate and the client
+  // stays mirrored on the spectated target's deeds.
+  it('resends the moderator own deeds (not the spectated target) after /unspectate', () => {
     const server = new GameServer();
     const moderatorWs = fakeWs();
     const moderator = joined(
@@ -806,8 +806,8 @@ describe('moderator spectate integration', () => {
     const moderatorMeta = server.sim.meta(moderator.pid);
     const suspectMeta = server.sim.meta(suspect.pid);
     if (!moderatorMeta || !suspectMeta) throw new Error('meta missing');
-    moderatorMeta.talents = { spec: 'arcane', rows: { 5: 'arc_r5_arcane_focus' } };
-    suspectMeta.talents = { spec: 'fire', rows: { 5: 'fir_r5_imp_fireball' } };
+    moderatorMeta.deedsEarned.set('prog_level_5', '20260101');
+    suspectMeta.deedsEarned.set('prog_level_10', '20260202');
 
     // first snapshot as self establishes session.lastWireRev at the
     // moderator's own (unbumped) wireRev.
@@ -817,13 +817,13 @@ describe('moderator spectate integration', () => {
     moderatorWs.send.mockClear();
     internals(server).broadcastSnapshots();
     const spectateSnap = frames(moderatorWs).find((frame) => frame.t === 'snap');
-    expect(spectateSnap?.self?.tal?.alloc).toEqual(suspectMeta.talents);
+    expect(spectateSnap?.self?.deeds).toEqual({ prog_level_10: '20260202' });
 
     command(server, moderator, '/unspectate');
     moderatorWs.send.mockClear();
     internals(server).broadcastSnapshots();
     const restoredSnap = frames(moderatorWs).find((frame) => frame.t === 'snap');
     if (!restoredSnap?.self) throw new Error('restored snapshot missing');
-    expect(restoredSnap.self.tal?.alloc).toEqual(moderatorMeta.talents);
+    expect(restoredSnap.self.deeds).toEqual({ prog_level_5: '20260101' });
   });
 });

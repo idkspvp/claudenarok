@@ -12,7 +12,6 @@
 // by this painter-mount harness; their pixels get no faked per-marker aria.
 
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import type { TalentAllocation } from '../../src/sim/content/talents';
 import { ITEMS } from '../../src/sim/data';
 import { ALL_CLASSES } from '../../src/sim/types';
 import { ArenaWindow } from '../../src/ui/arena_window';
@@ -26,7 +25,6 @@ import { MarketWindow } from '../../src/ui/market_window';
 import { OptionsWindow } from '../../src/ui/options_window';
 import { SocialWindow } from '../../src/ui/social_window';
 import { SpellbookWindow } from '../../src/ui/spellbook_window';
-import { TalentsWindow } from '../../src/ui/talents_window';
 import type {
   LeaderboardEntry,
   LeaderboardPage,
@@ -129,69 +127,8 @@ describe('axe: leaderboard window (Sim + ClientWorld shapes)', () => {
   });
 });
 
-// ---------------------------------------------------------------------------
-// Talents (#talents-window) - dialog role, the close button, the tablist + radiogroup.
-// ---------------------------------------------------------------------------
-
-describe('axe: talents window', () => {
-  it('warrior talent tree is clean (dialog role + close button + tablist)', async () => {
-    const root = host('talents-window');
-    root.style.display = 'none';
-    const allocation: TalentAllocation = { spec: null, rows: {} };
-    const win = new TalentsWindow(
-      stubDeps({
-        root: () => root,
-        playerClass: () => 'warrior',
-        playerLevel: () => 20,
-        currentAllocation: () => allocation,
-        activeLoadout: () => -1,
-        loadouts: () => [],
-        currentBar: () => [],
-        captureFocus: () => null,
-      }),
-    );
-    win.open();
-    expect(root.getAttribute('role')).toBe('dialog');
-    expect(root.querySelector('button[data-close]')).toBeTruthy();
-    await expectClean(root);
-  });
-
-  it('puts every specialization role on its own line instead of joining the spec name', () => {
-    for (const cls of ALL_CLASSES) {
-      const root = host(`talents-window-${cls}`);
-      root.style.display = 'none';
-      const allocation: TalentAllocation = { spec: null, rows: {} };
-      const win = new TalentsWindow(
-        stubDeps({
-          root: () => root,
-          playerClass: () => cls,
-          playerLevel: () => 20,
-          currentAllocation: () => allocation,
-          activeLoadout: () => -1,
-          loadouts: () => [],
-          currentBar: () => [],
-          captureFocus: () => null,
-        }),
-      );
-      win.open();
-
-      const cards = Array.from(root.querySelectorAll<HTMLElement>('.ts-panel'));
-      expect(cards, `${cls} specialization cards`).toHaveLength(3);
-      for (const card of cards) {
-        const name = card.querySelector<HTMLElement>('.ts-name');
-        const role = card.querySelector<HTMLElement>('.ts-role');
-        expect(name, `${cls} spec name`).toBeTruthy();
-        expect(role, `${cls} spec role`).toBeTruthy();
-        expect(getComputedStyle(name!).display, `${cls} spec name display`).toBe('block');
-        expect(getComputedStyle(role!).display, `${cls} spec role display`).toBe('block');
-        expect(role!.getBoundingClientRect().top, `${cls} spec role line`).toBeGreaterThan(
-          name!.getBoundingClientRect().top,
-        );
-      }
-      root.remove();
-    }
-  });
-});
+// The talents-window axe block that stood here went with the window itself
+// (Phase D0).
 
 // ---------------------------------------------------------------------------
 // Arena (#arena-window) - the offline host (dialog role + named title + close).
@@ -580,7 +517,6 @@ describe('axe: character window', () => {
           }) as never,
         statCellHtml: () => '',
         statTooltipHtml: () => '',
-        talentSummaryHtml: () => '',
         progressionHtml: () => '',
         slotName: (s: string) => s,
         // The 3D turntable + skin picker are HUD-owned (rendered by callback). The skin

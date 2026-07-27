@@ -3,8 +3,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { AUGMENTS } from '../src/sim/content/augments';
-import { CHOICE_ROWS } from '../src/sim/content/choice_rows';
-import { ROW_TREES, TALENTS } from '../src/sim/content/talents';
 import { ABILITIES, DUNGEONS, ITEM_SETS, ITEMS, MOBS, NPCS, ZONES } from '../src/sim/data';
 import { en } from '../src/ui/i18n.resolved.generated/en';
 
@@ -337,45 +335,8 @@ function collectViolations(): Violation[] {
     scanNameValue(`abilities.${id}.name`, id, a.name, false, out);
   }
 
-  // Talents: spec names, mastery names, and every canonical row-option name.
-  for (const cls of Object.keys(TALENTS) as (keyof typeof TALENTS)[]) {
-    const ct = TALENTS[cls];
-    for (const spec of ct.specs) {
-      scanNameValue(`talents.${cls}.specs.${spec.id}.name`, spec.id, spec.name, true, out);
-      scanNameValue(
-        `talents.${cls}.specs.${spec.id}.mastery.name`,
-        spec.id,
-        spec.mastery.name,
-        false,
-        out,
-      );
-    }
-    for (const row of ROW_TREES[cls]) {
-      for (const option of row.options) {
-        scanNameValue(
-          `talents.${cls}.rows.${row.level}.options.${option.id}.name`,
-          option.id,
-          option.name,
-          false,
-          out,
-        );
-      }
-    }
-  }
-  // Choice rows replaced the node trees: every row option name is player-visible.
-  for (const [cls, rows] of Object.entries(CHOICE_ROWS)) {
-    for (const row of rows.rows) {
-      for (const option of row.options) {
-        scanNameValue(
-          `choiceRows.${cls}.${row.level}.${option.id}.name`,
-          option.id,
-          option.name,
-          false,
-          out,
-        );
-      }
-    }
-  }
+  // The talent spec/mastery/row-option name sweep that stood here went with
+  // the talent trees (Phase D0).
 
   // Mobs: display name + every inline mechanic/aura display name (any direct
   // sub-object carrying a string `name`, e.g. mortalStrike/stomp/petSpell/
@@ -425,10 +386,8 @@ function collectViolations(): Violation[] {
     scanProseValue(`npcs.${id}.greeting`, id, npc.greeting, out);
   }
 
-  // Amendment #4: ability/talent tooltip DESCRIPTION prose (PROSE_SCAN set).
+  // Amendment #4: ability tooltip DESCRIPTION prose (PROSE_SCAN set).
   scanDescriptions(ABILITIES, 'abilities', out);
-  scanDescriptions(TALENTS, 'talents', out);
-  scanDescriptions(ROW_TREES, 'talentRows', out);
 
   // Amendment #4: scripted encounter/delve DIALOGUE (prose-scan the string
   // literals of the source files, since the lines are inline, not exported).

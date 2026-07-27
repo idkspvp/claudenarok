@@ -15,7 +15,6 @@ const REWIND = 'temporal_rewind';
 function chronoMage(): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -300,7 +299,6 @@ describe('Rewind: rules', () => {
     const { sim, p } = chronoMage();
     const mage2Id = sim.addPlayer('mage', 'Chrono2');
     sim.setPlayerLevel(20, mage2Id);
-    expect(sim.setSpec('arcane', mage2Id)).toBe(true);
     const mage2 = sim.entities.get(mage2Id)!;
     mage2.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };
     mage2.resource = mage2.maxResource;

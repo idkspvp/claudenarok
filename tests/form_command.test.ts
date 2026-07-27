@@ -57,7 +57,6 @@ describe('/form command', () => {
     // Arms may hold Guarded Stance; swap the auto-worn Warring Stance for it so
     // the per-tick stance reconcile leaves the pushed aura in place.
     sim.setPlayerLevel(10, a);
-    expect(sim.setSpec('arms', a)).toBe(true);
     const e = sim.entities.get(a)!;
     e.auras = e.auras.filter((au) => au.kind !== 'battle_stance');
     giveForm(sim, a, 'defensive_stance', 'Defensive Stance');

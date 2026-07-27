@@ -11,11 +11,6 @@ import {
   PERFECT_MOMENT_ID,
 } from '../src/sim/combat/chronomancy';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  type TalentAllocation,
-} from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -24,7 +19,6 @@ import type { Entity, SimEvent } from '../src/sim/types';
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -54,18 +48,13 @@ function dartsHits(events: SimEvent[]): number {
   return events.filter((e) => e.type === 'damage' && e.ability === 'Aether Darts').length;
 }
 
-const alloc = (spec: string | null): TalentAllocation => ({ ...emptyAllocation(), spec });
-const knownIds = (spec: string | null): Set<string> =>
-  new Set(
-    abilitiesKnownAt('mage', 20, computeTalentModifiers('mage', alloc(spec))).map((k) => k.def.id),
-  );
+const knownIds = (): Set<string> => new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('Perfect Moment content def', () => {
   it('pins the Chronomancer-only, level 10, off-GCD 2 min cooldown', () => {
     const def = ABILITIES.perfect_moment;
     expect(def).toBeDefined();
     expect(def.name).toBe('Perfect Moment');
-    expect(def.specs).toEqual(['arcane']);
     expect(def.learnLevel).toBe(10);
     expect(def.cooldown).toBe(120);
     expect(def.castTime).toBe(0);
@@ -73,10 +62,9 @@ describe('Perfect Moment content def', () => {
     expect(def.effects).toEqual([{ type: 'perfectMoment' }]);
   });
 
-  it('is Chronomancer-exclusive', () => {
-    expect(knownIds('arcane').has('perfect_moment')).toBe(true);
-    expect(knownIds('fire').has('perfect_moment')).toBe(false);
-    expect(knownIds('frost').has('perfect_moment')).toBe(false);
+  // Specs are retired (Phase D0): every mage learns it.
+  it('is on the level-20 mage kit', () => {
+    expect(knownIds().has('perfect_moment')).toBe(true);
   });
 });
 

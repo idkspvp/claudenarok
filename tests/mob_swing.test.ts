@@ -125,7 +125,7 @@ describe('mob_swing module: runMobSwingAffixes', () => {
       p,
       meta.cls,
       meta.equipment,
-      meta.talentMods,
+      meta.mods,
       meta.equipmentInstance,
       meta.statAllocation,
     );

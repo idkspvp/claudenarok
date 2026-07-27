@@ -48,7 +48,7 @@ describe('fiesta module: mergeAugmentMods', () => {
     expect(aug).toBeTruthy();
     const sim = makeWorld();
     const pid = sim.addPlayer('warrior', 'A');
-    const base = sim.players.get(pid)!.talentMods;
+    const base = sim.players.get(pid)!.mods;
     const baseCrit = base.stats.crit;
     const merged = fiesta.mergeAugmentMods(base, [aug.id]);
     expect(merged.stats.crit).toBeCloseTo(baseCrit + (aug.effect.stats!.crit ?? 0), 6);

@@ -9,8 +9,8 @@
 //
 // Data-as-code: plain exported records, no engine logic (content CLAUDE.md).
 
+import type { Role } from '../player_modifiers';
 import type { DungeonDifficulty, PlayerClass } from '../types';
-import type { Role } from './talents';
 
 // Structured listing tags: the only "description" a premade listing carries.
 // Free-form listing text is deliberately unsupported (no moderation surface).
@@ -35,11 +35,11 @@ export function isFinderRole(value: unknown): value is Role {
   return (FINDER_ROLE_ORDER as readonly unknown[]).includes(value);
 }
 
-// Below FIRST_TALENT_LEVEL there is no specialization, so finder roles come
-// from this fixed class-capability table. From the spec unlock (FIRST_TALENT_LEVEL) on, the selected role
-// must match the active specialization's role instead (see compatibleFinderRoles
-// in ../social/dungeon_finder.ts).
-export const FINDER_PRE_SPEC_ROLES: Record<Role, readonly PlayerClass[]> = {
+// Finder roles come from this fixed class-capability table, at every level.
+// It used to apply only below the specialization unlock, with the committed
+// spec's role taking over above it; specs are retired (Phase D0), so the table
+// is the whole answer (see compatibleFinderRoles in ../social/dungeon_finder.ts).
+export const FINDER_CLASS_ROLES: Record<Role, readonly PlayerClass[]> = {
   tank: ['warrior', 'paladin', 'druid'],
   healer: ['paladin', 'priest', 'shaman', 'druid'],
   dps: ['warrior', 'paladin', 'hunter', 'rogue', 'priest', 'shaman', 'mage', 'warlock', 'druid'],

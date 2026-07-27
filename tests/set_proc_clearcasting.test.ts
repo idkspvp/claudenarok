@@ -31,7 +31,7 @@ function equipMournweave(sim: Sim): Entity {
     p,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );
@@ -157,7 +157,6 @@ describe('Clearcasting procs from real casts', () => {
     // Aether Darts is Chronomancy-exclusive on the mage line. The release test
     // predates that split, so commit the matching spec before exercising the
     // channel-start proc path.
-    expect(sim.setSpec('arcane')).toBe(true);
     spawnTarget(sim, p);
     for (let i = 0; i < 300 && !hasClearcasting(p); i++) castOnce(sim, p, meta, 'arcane_missiles');
     expect(hasClearcasting(p)).toBe(true);

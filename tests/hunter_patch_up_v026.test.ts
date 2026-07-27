@@ -12,7 +12,6 @@ type TestSim = Sim & {
 function makeHunter(rows: Record<number, string> = {}): TestSim {
   const sim = new Sim({ seed: 2614, playerClass: 'hunter', autoEquip: false }) as TestSim;
   sim.setPlayerLevel(20);
-  expect(sim.applyTalents({ spec: null, rows })).toBe(true);
   sim.player.resource = sim.player.maxResource;
   return sim;
 }
@@ -122,29 +121,8 @@ describe('Hunter Patch Up', () => {
     expect(pet.auras.some((aura) => aura.id === 'revive_pet')).toBe(false);
   });
 
-  it('improves the living-pet heal to exactly 360 without changing its cadence', () => {
-    const sim = makeHunter({ 11: 'hun_r11_mend_pet' });
-    const pet = addPet(sim, sim.playerId);
-
-    expect(sim.resolvedAbility('revive_pet')?.effects).toContainEqual({
-      type: 'hot',
-      total: 360,
-      duration: 12,
-      interval: 3,
-    });
-
-    castPatchUp(sim);
-
-    expect(pet.auras).toContainEqual(
-      expect.objectContaining({
-        id: 'revive_pet',
-        kind: 'hot',
-        value: 90,
-        tickInterval: 3,
-        sourceId: sim.playerId,
-      }),
-    );
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 
   it('keeps Master Tamer independent from Patch Up healing', () => {
     const sim = makeHunter({ 17: 'hun_r17_master_tamer' });

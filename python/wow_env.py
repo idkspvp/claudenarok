@@ -117,8 +117,6 @@ class WoWClassicEnv(gym.Env):
         }
         if options and "player_level" in options:
             request["player_level"] = options["player_level"]
-        if options and "talents" in options:
-            request["talents"] = options["talents"]
         res = self._request(request)
         obs = np.asarray(res["obs"], dtype=np.float32)
         return obs, res.get("info", {})

@@ -42,8 +42,6 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
     meta.skin = 3;
     meta.skinCatalog = 'mech';
     meta.pendingSkinRank = 'rare';
-    meta.loadouts = [{ name: 'PvP', alloc: meta.talents, bar: [] }];
-    meta.activeLoadout = 0;
     meta.delveMarks = 17;
     meta.delveClears = { crypt: 4 };
     meta.companionUpgrades = { tessa: 2 };
@@ -75,7 +73,6 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
     expect(s2.lifetimeHonor).toBe(654);
     expect(s2.honorArenaDaily).toEqual(meta.honorArenaDaily);
     expect(s2.delveMarks).toBe(17);
-    expect(s2.loadouts?.length).toBe(1);
     expect(s2.skinCatalog).toBe('mech');
     expect(s2.bank?.purchasedSlots).toBe(6);
     expect(s2.bank?.bonusSlots).toBe(2);
@@ -137,7 +134,6 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
     expect(m.delveDaily.date).toBe('');
     expect(m.skin).toBe(0);
     expect(m.skinCatalog).toBe('class');
-    expect(m.loadouts).toEqual([]);
     expect(m.prestigeRank).toBe(0);
     expect(m.restedXp).toBe(0);
     expect(m.bank).toEqual({ inventory: [], purchasedSlots: 0, bonusSlots: 0 });
@@ -152,7 +148,7 @@ describe('serializeCharacter <-> addPlayer round-trip (G2 persistence)', () => {
     const pid = sim.addPlayer('warrior', 'Bouter');
     sim.setPlayerLevel(20, pid); // pretend mid-bout standardization to 20
     const meta = sim.meta(pid)!;
-    meta.fiestaRestore = { level: 8, xp: 1234, talents: meta.talents };
+    meta.fiestaRestore = { level: 8, xp: 1234 };
     const s = sim.serializeCharacter(pid)!;
     expect(s.level).toBe(8);
     expect(s.xp).toBe(1234);

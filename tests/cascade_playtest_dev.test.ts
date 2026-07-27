@@ -10,7 +10,6 @@ import { dist2d, type SimEvent } from '../src/sim/types';
 function devMage(devCommands: boolean) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true, devCommands });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;

@@ -197,13 +197,6 @@ export const GUIDE_ROUTES: GuideRoute[] = [
     descKey: 'guide.progression.intro',
   },
   {
-    id: 'talents',
-    sub: 'reference/talents',
-    navKey: 'guide.nav.talents',
-    group: 'reference',
-    descKey: 'guide.talentsPage.intro',
-  },
-  {
     id: 'glossary',
     sub: 'reference/glossary',
     navKey: 'guide.nav.glossary',

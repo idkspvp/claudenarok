@@ -8,7 +8,6 @@ import { terrainHeight } from '../src/sim/world';
 function warrior(spec: 'arms' | 'fury' | 'prot' | null = 'arms'): Sim {
   const sim = new Sim({ seed: 2602, playerClass: 'warrior' });
   sim.setPlayerLevel(MAX_LEVEL);
-  if (spec !== null) expect(sim.setSpec(spec)).toBe(true);
   return sim;
 }
 
@@ -70,12 +69,8 @@ describe('v0.26 Battle Trance', () => {
     expect(auras[0]).toMatchObject({ remaining: 10, duration: 10 });
   });
 
-  it('preserves the Battle Trance RNG draw for Fury but discards its result', () => {
-    const sim = warrior('fury');
-    const chance = swingOnce(sim);
-    expect(chance.mock.calls.filter(([p]: [number]) => p === BATTLE_TRANCE_CHANCE)).toHaveLength(1);
-    expect(hasTrance(sim)).toBe(false);
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 
   it('shares an exact two-ability consumption scope with UI predicates', () => {
     expect([...BATTLE_TRANCE_ABILITIES].sort()).toEqual(['heroic_strike', 'mortal_strike']);

@@ -58,6 +58,7 @@ import {
   normAngle,
 } from '../types';
 import { drawWeapon } from '../weapon_stow';
+import { onCastCompleted } from './cast_hooks';
 import {
   hasUnbreakableMovementLock,
   isInStasis,
@@ -100,7 +101,6 @@ import {
   spellHasteMult,
 } from './spell_combat';
 import { isSpellResisted } from './spell_resist';
-import { onCastCompleted } from './talent_procs';
 
 // Shaman shocks (earth/flame/frost) share one cooldown; lightning_shock joins them
 // for the shared-cooldown predicate. Moved with the casting slice (only callers).

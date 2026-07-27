@@ -287,7 +287,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     }
     case 'agi': {
       statValue = stats.agi;
-      effects.push({ kind: 'flee', value: fleeRating(level, stats.agi, stats.luk) });
+      effects.push({ kind: 'flee', value: fleeRating(level, stats.agi) });
 
       break;
     }
@@ -299,7 +299,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
           statusAttackPower(stats.str, stats.dex, stats.luk) -
           statusAttackPower(stats.str, 0, stats.luk),
       });
-      effects.push({ kind: 'hit', value: hitRating(level, stats.dex, stats.luk) });
+      effects.push({ kind: 'hit', value: hitRating(level, stats.dex) });
       if (cls === 'hunter') {
         effects.push({
           kind: 'rangedAttackPower',

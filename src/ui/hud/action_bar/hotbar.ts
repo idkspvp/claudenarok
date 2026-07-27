@@ -1,5 +1,3 @@
-import { computeTalentModifiers, type TalentAllocation } from '../../../sim/content/talents';
-import { abilitiesKnownAt } from '../../../sim/data';
 import type { AbilityDef, PlayerClass } from '../../../sim/types';
 
 export type HotbarAction = { type: 'ability'; id: string } | { type: 'item'; id: string } | null;
@@ -304,55 +302,6 @@ export function shouldSeedFormBar(
   if (alreadySeeded) return false;
   if (parsedForm.every((action) => action === null)) return true;
   return hotbarActionsEqual(parsedForm, parsedNormal);
-}
-
-// Castable ability ids the loadout's OWN talent allocation actually grants,
-// independent of
-// whichever build happens to be active client-side right now. `applyLoadoutBar`'s
-// `abilityExists` predicate must be built from this, never from "does the id exist
-// anywhere in ABILITIES": two builds on the same class can grant disjoint ability
-// sets (e.g. a shaman's Enhancement loadout grants stormstrike, Restoration grants
-// chain_heal, and both ids exist globally regardless of which spec is active), so
-// a global-existence check lets a stale/foreign-spec id survive the switch and land
-// on the bar. Computed from the loadout's `alloc` directly rather than the live
-// `known` list, since switchTalentLoadout's server round trip has not necessarily
-// resolved yet when the client applies the bar.
-export function loadoutKnownAbilityIds(
-  cls: PlayerClass,
-  alloc: TalentAllocation,
-  level: number,
-): Set<string> {
-  const mods = computeTalentModifiers(cls, alloc, level);
-  return new Set(
-    abilitiesKnownAt(cls, level, mods)
-      .filter((known) => isAbilityActionBarEligible(known.def))
-      .map((known) => known.def.id),
-  );
-}
-
-// Rebuild the bar for a switched talent loadout. A `SavedLoadout.bar` only ever
-// records ability ids (the caller's currentBar mapping strips item shortcuts
-// before saving), so replacing the WHOLE bar from it wipes any potion/food/drink
-// slot the loadout never captured. A loadout slot with a resolvable ability id
-// fully replaces whatever was there; every other slot keeps its existing item
-// shortcut (if any) instead of being cleared.
-export function applyLoadoutBar(
-  current: readonly HotbarAction[],
-  bar: readonly (string | null)[],
-  slots: number,
-  abilityExists: (id: string) => boolean,
-): HotbarAction[] {
-  return Array.from({ length: slots }, (_, i) => {
-    // A pre-third-row loadout contains only 22 entries. Missing tail entries
-    // mean the row did not exist when it was saved, not that the player chose
-    // to clear it, so preserve the current action there. An explicit null
-    // inside the saved span still clears an ability while retaining items.
-    if (i >= bar.length) return current[i] ?? null;
-    const v = bar[i];
-    if (typeof v === 'string' && abilityExists(v)) return { type: 'ability' as const, id: v };
-    const existing = current[i];
-    return existing?.type === 'item' ? existing : null;
-  });
 }
 
 export function syncHotbarActions(

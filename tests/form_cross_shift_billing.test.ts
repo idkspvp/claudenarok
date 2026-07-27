@@ -39,7 +39,7 @@ function shiftToMoonkin(sim: Sim): void {
     p,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );

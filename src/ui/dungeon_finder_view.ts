@@ -21,8 +21,8 @@ import {
   finderActivity,
 } from '../sim/content/dungeon_finder';
 import { HEROIC_BOSS_LOOT } from '../sim/content/heroic_loot';
-import { FIRST_TALENT_LEVEL, type Role } from '../sim/content/talents';
 import { DUNGEONS, ITEMS, MOBS, zoneAt } from '../sim/data';
+import type { Role } from '../sim/player_modifiers';
 import { compatibleFinderRoles } from '../sim/social/dungeon_finder';
 import type { DungeonDifficulty, PlayerClass } from '../sim/types';
 
@@ -45,7 +45,7 @@ export const FINDER_TABS: readonly FinderTab[] = ['catalogue', 'queue', 'board']
 // Directory of the prerendered boss portrait stills (WebP, fixed 128x128).
 export const FINDER_PORTRAIT_DIR = '/ui/dungeons';
 
-export type FinderBlockReason = 'level' | 'spec' | null;
+export type FinderBlockReason = 'level' | null;
 
 export interface FinderActivityRowView {
   id: string;
@@ -142,7 +142,6 @@ export interface FinderProposalPanelView {
 
 export interface FinderQueuePanelView {
   roles: FinderRoleOptionView[];
-  needsSpec: boolean; // at or past the spec unlock with no active spec: the finder is closed
   inParty: boolean;
   isLeader: boolean; // solo counts as leader of self
   queuedActivities: string[]; // live selection while queued ([] otherwise)
@@ -203,7 +202,6 @@ export interface DungeonFinderViewInput {
   playerLevel: number;
   playerClass: PlayerClass;
   playerId: number;
-  specRole: Role | null;
   // Derived from partyInfo by the painter (null = solo).
   party: { leader: number; size: number } | null;
   lockouts: RaidLockout[];
@@ -213,14 +211,8 @@ export interface DungeonFinderViewInput {
   stagedActivityIds: readonly string[]; // pre-join checklist while NOT queued
 }
 
-function blockReasonFor(
-  activity: FinderActivity,
-  level: number,
-  specRole: Role | null,
-): FinderBlockReason {
-  if (level < activity.minLevel || level > activity.maxLevel) return 'level';
-  if (level >= FIRST_TALENT_LEVEL && specRole === null) return 'spec';
-  return null;
+function blockReasonFor(activity: FinderActivity, level: number): FinderBlockReason {
+  return level < activity.minLevel || level > activity.maxLevel ? 'level' : null;
 }
 
 function lockoutMinutesFor(activity: FinderActivity, lockouts: RaidLockout[]): number {
@@ -295,12 +287,11 @@ function buildEncounters(activity: FinderActivity): FinderEncounterViewModel[] {
 function buildDetail(
   activity: FinderActivity,
   level: number,
-  specRole: Role | null,
   lockouts: RaidLockout[],
 ): FinderActivityDetailView {
   const door = DUNGEONS[activity.entranceDungeonId]?.doorPos ?? { x: 0, z: 0 };
   const tuning = HEROIC_DUNGEON_TUNING[activity.dungeonId];
-  const blocked = blockReasonFor(activity, level, specRole);
+  const blocked = blockReasonFor(activity, level);
   return {
     id: activity.id,
     dungeonId: activity.dungeonId,
@@ -327,14 +318,13 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   if (!info) return { kind: 'loading' };
 
   const level = input.playerLevel;
-  const specRole = input.specRole;
   const selectedId =
     input.selectedActivityId && finderActivity(input.selectedActivityId)
       ? input.selectedActivityId
       : FINDER_ACTIVITIES[0].id;
 
   const rows: FinderActivityRowView[] = FINDER_ACTIVITIES.map((a) => {
-    const blocked = blockReasonFor(a, level, specRole);
+    const blocked = blockReasonFor(a, level);
     const finalEnc = a.encounters.find((e) => e.final) ?? a.encounters[a.encounters.length - 1];
     return {
       portraitUrl: `${FINDER_PORTRAIT_DIR}/${finalEnc.mobId}.webp`,
@@ -352,10 +342,10 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
     };
   });
   const selected = finderActivity(selectedId);
-  const detail = selected ? buildDetail(selected, level, specRole, input.lockouts) : null;
+  const detail = selected ? buildDetail(selected, level, input.lockouts) : null;
 
   // --- Quick Match panel ---
-  const eligibleRoles = compatibleFinderRoles(input.playerClass, level, specRole);
+  const eligibleRoles = compatibleFinderRoles(input.playerClass);
   const roleOptions: FinderRoleOptionView[] = (['tank', 'healer', 'dps'] as const).map((role) => ({
     role,
     eligible: eligibleRoles.includes(role),
@@ -365,7 +355,7 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   const isLeader = input.party === null || input.party.leader === input.playerId;
   const onCooldown = info.cooldown > 0;
   const options: FinderQueueOptionView[] = FINDER_ACTIVITIES.filter((a) => a.autoQueue).map((a) => {
-    const blocked = blockReasonFor(a, level, specRole);
+    const blocked = blockReasonFor(a, level);
     return {
       id: a.id,
       dungeonId: a.dungeonId,
@@ -381,7 +371,6 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   const proposalActivity = info.proposal ? finderActivity(info.proposal.activityId) : null;
   const queuePanel: FinderQueuePanelView = {
     roles: roleOptions,
-    needsSpec: level >= FIRST_TALENT_LEVEL && specRole === null,
     inParty: input.party !== null,
     isLeader,
     queuedActivities: info.queue ? [...info.queue.activities] : [],
@@ -414,7 +403,7 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
   for (const listing of board) {
     const activity = finderActivity(listing.activityId);
     if (!activity) continue;
-    const blocked = blockReasonFor(activity, level, specRole);
+    const blocked = blockReasonFor(activity, level);
     const mine = info.myListing?.id === listing.id;
     const roleFit =
       activity.composition === null || info.roles.some((r) => (listing.needed?.[r] ?? 0) > 0);
@@ -442,7 +431,7 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
     canCreate: info.myListing === null && isLeader,
     createGate: info.myListing !== null ? 'exists' : isLeader ? null : 'leader',
     createOptions: FINDER_ACTIVITIES.filter(
-      (a) => blockReasonFor(a, level, specRole) === null && (input.party?.size ?? 1) < a.size,
+      (a) => blockReasonFor(a, level) === null && (input.party?.size ?? 1) < a.size,
     ).map((a) => ({ id: a.id, dungeonId: a.dungeonId, difficulty: a.difficulty })),
     tags: FINDER_LISTING_TAGS,
   };
@@ -464,7 +453,6 @@ export function buildDungeonFinderView(input: DungeonFinderViewInput): DungeonFi
     rows.map((r) => [r.eligible, r.blocked, r.lockedMinutes]),
     info.roles,
     eligibleRoles,
-    queuePanel.needsSpec,
     queuePanel.isLeader,
     queuePanel.queued,
     queuePanel.onCooldown,

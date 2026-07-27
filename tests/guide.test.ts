@@ -252,13 +252,9 @@ describe('Guide generated class content', () => {
       expect(c.color).toMatch(/^#[0-9a-f]{6}$/);
       expect(['rage', 'mana', 'energy']).toContain(c.resource);
       expect(c.roles.length).toBeGreaterThan(0);
-      expect(c.specs.length).toBeGreaterThan(0);
       expect(c.signatureAbilities.length).toBeGreaterThan(0);
       expect(c.abilities.length).toBeGreaterThanOrEqual(c.signatureAbilities.length);
-      for (const s of c.specs) {
-        expect(['tank', 'healer', 'dps']).toContain(s.role);
-        expect(s.signature.length).toBeGreaterThan(0);
-      }
+      for (const r of c.roles) expect(['tank', 'healer', 'dps']).toContain(r);
       // every class nav name resolves
       expect(t(`classes.${c.id}` as never).length).toBeGreaterThan(0);
       // the class page uses the canonical character-creation description, not a guide-only blurb

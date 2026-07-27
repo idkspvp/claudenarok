@@ -361,7 +361,6 @@ describe('casting_lifecycle: spell queue (#1360)', () => {
 
   it('carries the queued aim point through to the fired ground-targeted cast', () => {
     const { sim, p } = makeSim('mage', 20);
-    sim.setSpec('fire'); // Flamestrike is a DPS-spec ability (Chronomancy gating)
     spawnTarget(sim, p);
     castAbility(sim.ctx, 'fireball', p.id);
     while (p.castRemaining > CAST_QUEUE_WINDOW_SEC) sim.tick();

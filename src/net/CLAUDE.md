@@ -7,7 +7,7 @@
 `online.ts` is the core: a REST `Api` (auth, characters, realms, leaderboard, wallet
 linking) and `ClientWorld implements IWorld`, which mirrors authoritative server
 snapshots and sends commands over one WebSocket. **PRESENTATION ONLY**, it never
-computes outcomes (combat, loot, quest credit, talents), only reflects server state.
+computes outcomes (combat, loot, quest credit), only reflects server state.
 The client even runs `abilitiesKnownAt` / `computeQuestState` locally, but purely to
 *display* what the server already decided; the server re-validates everything.
 

@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest';
-import { computeTalentModifiers, TALENTS } from '../src/sim/content/talents';
 import {
   ABILITIES,
   abilitiesKnownAt,
@@ -101,20 +100,10 @@ describe('nine classes', () => {
       // Expanded kits can exceed the 12 action-bar slots; overflow remains
       // available from the spellbook and can be dragged onto the bar.
       expect(CLASSES[cls].abilities.length).toBeGreaterThan(0);
-      // At MAX_LEVEL a no-spec player resolves every ability EXCEPT the ones
-      // reserved for a committed spec (the class redesigns gate spec kits behind
-      // `specs`), so the resolvable no-spec kit is EXACTLY the ungated abilities.
-      // Spec-gated abilities are reachable across the class's three committed
-      // specializations.
+      // Specs are retired (Phase D0): at MAX_LEVEL a class resolves its WHOLE
+      // authored list, with nothing gated away.
       const kit = abilitiesKnownAt(cls, MAX_LEVEL);
-      const ungated = CLASSES[cls].abilities.filter((id) => !ABILITIES[id]?.specs);
-      expect(new Set(kit.map((k) => k.def.id))).toEqual(new Set(ungated));
-      const reachable = new Set(kit.map((known) => known.def.id));
-      for (const spec of TALENTS[cls].specs) {
-        const mods = computeTalentModifiers(cls, { spec: spec.id, rows: {} }, MAX_LEVEL);
-        for (const known of abilitiesKnownAt(cls, MAX_LEVEL, mods)) reachable.add(known.def.id);
-      }
-      expect(CLASSES[cls].abilities.every((abilityId) => reachable.has(abilityId))).toBe(true);
+      expect(new Set(kit.map((k) => k.def.id))).toEqual(new Set(CLASSES[cls].abilities));
       // the 10-20 band still has things to learn. Exception: the mage baseline kit
       // compressed to level 10 when the choice-row unlock guard moved pyroblast/scorch/
       // ice_barrier earlier (rows carry the 11-20 progression); flagged for PTR pacing
@@ -490,7 +479,7 @@ describe('parties', () => {
     const member = mustEntity(sim, b);
     const meta = sim.meta(b);
     if (!meta) throw new Error('missing party member metadata');
-    meta.talentMods.role = 'healer';
+    meta.mods.role = 'healer';
     for (let i = 0; i < 8; i++) {
       member.auras.push({
         id: `maintenance_${i}`,

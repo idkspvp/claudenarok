@@ -23,7 +23,6 @@
 //   cosmetics.ts        IWorldCosmetics      account skins + mech chroma
 //   progression_xp.ts   IWorldProgressionXp  xp/lifetimeXp/prestige/rested/leaderboard
 //   status_points.ts    IWorldStatusPoints   the six status attributes
-//   talents.ts          IWorldTalents        talents, specs, loadouts
 //   pet.ts              IWorldPet            hunter-pet command surface
 //   party.ts            IWorldParty          party/raid + raid-target markers
 //   trade.ts            IWorldTrade          peer-to-peer trade window
@@ -79,7 +78,6 @@ import type { IWorldProfessions } from './world_api/professions';
 import type { IWorldProgressionXp } from './world_api/progression_xp';
 import type { IWorldSocialGraph } from './world_api/social_graph';
 import type { IWorldStatusPoints } from './world_api/status_points';
-import type { IWorldTalents } from './world_api/talents';
 import type { IWorldTargeting } from './world_api/targeting';
 import type { IWorldTelemetry } from './world_api/telemetry';
 import type { IWorldTrade } from './world_api/trade';
@@ -227,7 +225,6 @@ export interface IWorld
     IWorldCosmetics,
     IWorldProgressionXp,
     IWorldStatusPoints,
-    IWorldTalents,
     IWorldPet,
     IWorldParty,
     IWorldTrade,
@@ -358,14 +355,8 @@ export const COMMAND_NAMES = [
   'play_card',
   'card_forfeit',
   'prestige',
-  'applyTalents',
   'raiseStat',
   'resetStats',
-  'respec',
-  'setSpec',
-  'saveLoadout',
-  'switchLoadout',
-  'deleteLoadout',
   'market_search',
   'market_list',
   'market_buy',
@@ -428,8 +419,6 @@ export const COMMAND_NAMES = [
   'ignore_add',
   'ignore_remove',
   'stow_weapon',
-  // Append-only protocol addition for the canonical Talents V2 row mutation.
-  'selectTalentRow',
   'resurrect_respond',
   // Recipe training (Professions 2.0): learn a trainer-taught recipe
   // at its craft's station (Sim.trainRecipe via professions/training.ts).
@@ -501,7 +490,6 @@ export type WorldFacet =
   | 'IWorldCosmetics'
   | 'IWorldProgressionXp'
   | 'IWorldStatusPoints'
-  | 'IWorldTalents'
   | 'IWorldPet'
   | 'IWorldParty'
   | 'IWorldTrade'
@@ -547,15 +535,6 @@ export const COMMAND_FACETS = {
   // IWorldProgressionXp: opt-in cosmetic prestige (leaderboard is a REST GET, no
   // wire command; the XP/milestone reads ride the self-snapshot, not a send).
   prestige: 'IWorldProgressionXp',
-  // IWorldTalents: allocation commits + loadout edits (talentPoints is a local
-  // compute with no send; the server re-validates every allocation).
-  applyTalents: 'IWorldTalents',
-  respec: 'IWorldTalents',
-  setSpec: 'IWorldTalents',
-  selectTalentRow: 'IWorldTalents',
-  saveLoadout: 'IWorldTalents',
-  switchLoadout: 'IWorldTalents',
-  deleteLoadout: 'IWorldTalents',
   // IWorldCosmetics: skin + mech-chroma equips (snake_case wire strings, by design).
   change_skin: 'IWorldCosmetics',
   claim_event_skin: 'IWorldCosmetics',

@@ -14,7 +14,6 @@ type AnySim = Sim & Record<string, any>;
 function warrior(): { sim: AnySim; p: Entity } {
   const sim = new Sim({ seed: 271, playerClass: 'warrior' }) as AnySim;
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('fury')).toBe(true);
   return { sim, p: sim.player };
 }
 

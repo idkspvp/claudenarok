@@ -433,25 +433,8 @@ describe('coverage: each scenario fires its subsystem', () => {
     );
   });
 
-  it('talents_progression: applyTalents/respec/loadout/setSpec fire and bake the flat struct', () => {
-    const rec = run('talents_progression');
-    const pid = (rec.sim as any).playerId;
-    const ev = rec.allEvents as Ev[];
-    // applyTalents (and setSpec -> applyTalents) emitted the confirmation log.
-    expect(ev.some((e) => e.type === 'log' && e.text === 'Talents updated.')).toBe(true);
-    // respec emitted its own log.
-    expect(ev.some((e) => e.type === 'log' && e.text === 'Talents reset.')).toBe(true);
-    // switchLoadout restored a saved build.
-    expect(
-      ev.some(
-        (e) => e.type === 'log' && typeof e.text === 'string' && e.text.startsWith('Loadout '),
-      ),
-    ).toBe(true);
-    // setSpec('fury') applied last: the flat talentMods re-baked from the new tree.
-    const meta = (rec.sim as any).players.get(pid);
-    expect(meta.talents.spec).toBe('fury');
-    expect(meta.talentMods.spec).toBe('fury');
-  });
+  // The talents_progression coverage test that stood here went with the
+  // scenario (Phase D0).
 
   it('multi_class_heal: heals land, absorb is consumed, threat splits across aware mobs, HoT ticks', () => {
     const rec = run('multi_class_heal');
@@ -864,30 +847,8 @@ describe('coverage: each scenario fires its subsystem', () => {
     expect(chats.some((e) => e.text === 'Malric...')).toBe(true);
   });
 
-  it('warrior_row_capstones: double charge, thresholded fear, victory rush heal, bladestorm ticks', () => {
-    const rec = run('warrior_row_capstones');
-    const sim = rec.sim as any;
-    const pid = sim.playerId;
-    const ev = rec.allEvents as Ev[];
-    // Double Charge: BOTH stored uses were spent while one recharge timer ran;
-    // the classic single-cooldown gate would have blocked cast #2.
-    expect(rec.notes.chargeSpent).toBe(2);
-    expect(rec.notes.chargeRecharging).toBe(true);
-    // Intimidating Shout feared a wolf; Lingering Dread armed its threshold.
-    const feared = entities(rec).find((e) =>
-      e.auras?.some((a: any) => a.id === 'fear_incap'),
-    ) as any;
-    expect(feared).toBeTruthy();
-    const fear = feared.auras.find((a: any) => a.id === 'fear_incap');
-    expect(fear.breaksOnDamage).toBe(true);
-    expect(fear.breakThreshold).toBeGreaterThan(0);
-    // Victory Rush: the on-kill strike healed the player.
-    expect(ev.some((e) => (e.type === 'heal' || e.type === 'heal2') && e.targetId === pid)).toBe(
-      true,
-    );
-    // Bladestorm: the self-centered channel pulsed damage.
-    expect(ev.some((e) => e.type === 'damage' && e.ability === 'Rending Cyclone')).toBe(true);
-  });
+  // The warrior_row_capstones coverage test that stood here went with the
+  // scenario (Phase D0).
 
   it('professions_craft: denial draws nothing, each craft draws once, and the vestments proc mints + surfaces a masterwork', () => {
     const { trace, rec } = record(SCENARIOS.find((s) => s.name === 'professions_craft')!);

@@ -9,7 +9,6 @@ import { ensureLocaleLoaded, setLanguage } from '../src/ui/i18n';
 function icebindRig(targetMaxHp: number, level = 7): { sim: Sim; target: Entity } {
   const sim = new Sim({ seed: 811, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('frost')).toBe(true);
   sim.player.resource = sim.player.maxResource;
 
   const target = createMob(98_811, MOBS.forest_wolf, level, {

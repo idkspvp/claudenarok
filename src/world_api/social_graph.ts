@@ -79,7 +79,6 @@ export interface CharacterProfile {
   name: string;
   cls: string;
   classLabel: string;
-  spec: string;
   level: number;
   guild: string | null;
   zone: string;

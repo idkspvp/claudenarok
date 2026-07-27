@@ -26,32 +26,8 @@ function addDummy(sim: Sim, x = sim.player.pos.x, z = sim.player.pos.z + 4): Ent
 }
 
 describe('signature mechanics v2', () => {
-  it('bestial_wrath grants hunter AP percent and doubles pet damage', () => {
-    const sim = new Sim({ seed: 11, playerClass: 'hunter', autoEquip: true });
-    sim.setPlayerLevel(20);
-    expect(sim.setSpec('beast_mastery')).toBe(true);
-    const hunter = sim.player;
-    summonPet(sim.ctx, hunter, 'forest_wolf');
-    const pet = sim.petOf(sim.playerId);
-    if (!pet) throw new Error('expected summoned pet');
-
-    const apBefore = hunter.attackPower;
-    hunter.resource = hunter.maxResource;
-    sim.castAbility('bestial_wrath');
-
-    const apAura = hunter.auras.find((a) => a.kind === 'buff_ap_pct' && a.id === 'bestial_wrath');
-    expect(apAura?.value).toBe(20);
-    expect(hunter.attackPower).toBeGreaterThan(apBefore);
-    expect(hunter.attackPower - apBefore).not.toBe(55);
-
-    const petAura = pet.auras.find(
-      (a) => a.kind === 'pet_damage_pct' && a.id === 'bestial_wrath_pet',
-    );
-    expect(petAura?.value).toBe(100);
-    // 2.0 from the Bestial Wrath pet buff x 1.35 from the Packbond mastery (petDmgPct 0.35
-    // at full level-20 mastery strength); the two stack multiplicatively by design.
-    expect((sim as any).petDamageMult(pet)).toBeCloseTo(2.7, 10);
-  });
+  // The specialization arm that stood here has no source left: the specs and
+  // their masteries went with the talent trees (Phase D0).
 
   it('trueshot_aura gives same-party allies a percent AP buff instead of flat AP', () => {
     const sim = new Sim({ seed: 12, playerClass: 'hunter', autoEquip: true });
@@ -59,7 +35,6 @@ describe('signature mechanics v2', () => {
     const allyPid = sim.addPlayer('warrior', 'Aleph');
     sim.setPlayerLevel(20, hunterPid);
     sim.setPlayerLevel(20, allyPid);
-    expect(sim.setSpec('marksmanship', hunterPid)).toBe(true);
     const hunter = entity(sim, hunterPid);
     const ally = entity(sim, allyPid);
     ally.pos = { ...hunter.pos, x: hunter.pos.x + 3 };
@@ -82,7 +57,6 @@ describe('signature mechanics v2', () => {
   it('hemorrhage applies bleed vulnerability and makes later bleed ticks hit harder', () => {
     const sim = new Sim({ seed: 13, playerClass: 'rogue', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('subtlety')).toBe(true);
     const rogue = sim.player;
     rogue.resource = rogue.maxResource;
     rogue.facing = 0;

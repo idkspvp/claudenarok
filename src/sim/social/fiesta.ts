@@ -30,16 +30,11 @@ import {
   type PowerupDef,
   tierForWave,
 } from '../content/augments';
-import {
-  cloneAllocation,
-  computeTalentModifiers,
-  defaultBuild,
-  type TalentModifiers,
-} from '../content/talents';
 import { abilitiesKnownAt, arenaOrigin } from '../data';
 import * as deedsMod from '../deeds';
 import { arenaMapForSlot } from '../dungeon_layout';
 import { recalcPlayerStats } from '../entity';
+import type { PlayerModifiers } from '../player_modifiers';
 import { awardFiestaKillHonor } from '../pvp';
 import { Rng } from '../rng';
 import type { ArenaMatch, FiestaPowerup, FiestaState, PlayerMeta } from '../sim';
@@ -102,10 +97,10 @@ export function createFiestaState(ctx: SimContext): FiestaState {
   };
 }
 
-// talentMods + the chosen augments' flat effects, deep-cloned so the base
+// mods + the chosen augments' flat effects, deep-cloned so the base
 // talent struct is never mutated.
-export function mergeAugmentMods(base: TalentModifiers, augIds: string[]): TalentModifiers {
-  const m: TalentModifiers = {
+export function mergeAugmentMods(base: PlayerModifiers, augIds: string[]): PlayerModifiers {
+  const m: PlayerModifiers = {
     spec: base.spec,
     role: base.role,
     stats: { ...base.stats },
@@ -185,7 +180,7 @@ export function mergeAugmentMods(base: TalentModifiers, augIds: string[]): Talen
 // augments, then rebuild known abilities and stats (preserving hp fraction so
 // a +maxHp augment grows the bar instead of healing to full).
 export function fiestaApplyAugments(meta: PlayerMeta, e: Entity): void {
-  meta.fiestaMods = mergeAugmentMods(meta.talentMods, meta.fiestaAugments);
+  meta.fiestaMods = mergeAugmentMods(meta.mods, meta.fiestaAugments);
   const sp: AugmentSpecial = {};
   for (const id of meta.fiestaAugments) {
     const s = AUGMENTS_BY_ID[id]?.special;
@@ -208,7 +203,7 @@ export function fiestaApplyAugments(meta: PlayerMeta, e: Entity): void {
   e.hp = e.dead ? 0 : Math.max(1, Math.round(e.maxHp * frac));
 }
 
-// Strip all Fiesta augment state and restore plain talent-only stats/abilities.
+// Strip all Fiesta augment state and restore the plain unaugmented stats/abilities.
 export function clearFiestaAugments(meta: PlayerMeta, e: Entity): void {
   if (
     meta.fiestaAugments.length === 0 &&
@@ -221,30 +216,26 @@ export function clearFiestaAugments(meta: PlayerMeta, e: Entity): void {
   meta.fiestaAugments = [];
   meta.fiestaMods = null;
   meta.fiestaSpecial = {};
-  meta.known = abilitiesKnownAt(meta.cls, e.level, meta.talentMods);
+  meta.known = abilitiesKnownAt(meta.cls, e.level, meta.mods);
   recalcPlayerStats(
     e,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );
 }
 
-// Standardize a fighter to a balanced level-20 build for the bout. The
-// pre-fiesta character is snapshotted in meta.fiestaRestore (which also makes
+// Standardize a fighter to the balanced level-20 bout level. The pre-fiesta
+// level and xp are snapshotted in meta.fiestaRestore (which also makes
 // serializeCharacter persist the real, not the temporary, state).
 export function fiestaStandardize(ctx: SimContext, meta: PlayerMeta, e: Entity): void {
   if (meta.fiestaRestore) return;
-  meta.fiestaRestore = { level: e.level, xp: meta.xp, talents: cloneAllocation(meta.talents) };
+  meta.fiestaRestore = { level: e.level, xp: meta.xp };
   e.level = FIESTA_STANDARD_LEVEL;
-  // A standardized default build (spec + first-option rows) so every fighter
-  // enters equal; the player's real allocation returns with fiestaRestoreChar.
-  meta.talents = defaultBuild(meta.cls, FIESTA_STANDARD_LEVEL);
-  meta.talentMods = computeTalentModifiers(meta.cls, meta.talents, e.level);
   meta.known = abilitiesKnownAt(meta.cls, e.level, ctx.playerMods(meta));
-  meta.wireRev++; // talents/loadouts swapped for the bout, refresh the wire promptly
+  meta.wireRev++; // the bout level swapped in, refresh the wire promptly
   recalcPlayerStats(
     e,
     meta.cls,
@@ -255,22 +246,20 @@ export function fiestaStandardize(ctx: SimContext, meta: PlayerMeta, e: Entity):
   );
 }
 
-// Undo fiestaStandardize: restore the player's real level/xp/talents.
+// Undo fiestaStandardize: restore the player's real level/xp.
 export function fiestaRestoreChar(meta: PlayerMeta, e: Entity): void {
   const snap = meta.fiestaRestore;
   if (!snap) return;
   e.level = snap.level;
   meta.xp = snap.xp;
-  meta.talents = snap.talents;
-  meta.talentMods = computeTalentModifiers(meta.cls, meta.talents, e.level);
   meta.fiestaRestore = null;
-  meta.known = abilitiesKnownAt(meta.cls, e.level, meta.talentMods);
-  meta.wireRev++; // real talents restored, refresh the wire promptly
+  meta.known = abilitiesKnownAt(meta.cls, e.level, meta.mods);
+  meta.wireRev++; // the real level restored, refresh the wire promptly
   recalcPlayerStats(
     e,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );

@@ -16,7 +16,6 @@ import type { Entity } from '../src/sim/types';
 function mage(spec: 'fire' | 'frost'): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   const p = sim.player;
   p.hp = p.maxHp; // full, real level-20 pool (recalc keeps maxHp stable across ticks)
@@ -127,8 +126,15 @@ describe('Cauterize', () => {
     expect(p.auras.some((a) => a.kind === 'cauterize_fatigue')).toBe(true); // re-armed
   });
 
-  it('never triggers for a non-fire mage', () => {
-    const { sim, p } = mage('frost');
+  // Cauterize used to be gated on the committed Fire spec; specs are retired
+  // (Phase D0) and it is gated on the KNOWN Ignition passive instead, so the
+  // non-fire arm that stood here has no subject left. A warrior still never
+  // saves: it is not a mage and never learns Ignition.
+  it('never triggers for a non-mage', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    sim.setPlayerLevel(20);
+    sim.tick();
+    const p = sim.player;
     hit(sim, enemy(sim), p, 999_999);
     expect(p.dead).toBe(true);
     expect(p.auras.some((a) => a.id === 'cauterizing')).toBe(false);

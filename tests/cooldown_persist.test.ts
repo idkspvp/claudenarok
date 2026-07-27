@@ -226,7 +226,6 @@ function emptyWorld(): Sim {
 function makeFuryWarrior(seed: number): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('fury')).toBe(true);
   const host = sim as Sim & { nextId: number; addEntity(entity: Entity): void };
   const p = sim.player;
   const mob = createMob(host.nextId++, MOBS.forest_wolf, 1, {

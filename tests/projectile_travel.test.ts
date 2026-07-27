@@ -205,7 +205,6 @@ describe('deferred projectile damage end-to-end (mage Ice Lance)', () => {
     const sim = new Sim({ seed, playerClass: 'mage', autoEquip: true });
     sim.setPlayerLevel(20);
     // Ice Lance is Frost-spec kit: commit the spec so the ability is known.
-    expect(sim.setSpec('frost')).toBe(true);
     const p = sim.player;
     p.hp = p.maxHp;
     p.resource = p.maxResource;

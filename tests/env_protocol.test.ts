@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   MAX_INPUT_LINE_LENGTH,
-  parseTalentResetRequest,
+  parseResetRequest,
   validateAction,
   validatePlayerClass,
   validatePlayerLevel,
@@ -46,36 +46,26 @@ describe('headless environment protocol validation', () => {
     }
   });
 
-  it('parses one strict canonical talent allocation for a reset', () => {
-    const canonical = {
-      player_level: 20,
-      talents: { spec: 'arms', rows: { 5: 'war_row_double_charge' } },
-    };
-
-    expect(parseTalentResetRequest(canonical)).toEqual({
-      ok: true,
-      playerLevel: 20,
-      talents: canonical.talents,
-    });
-    expect(parseTalentResetRequest({})).toEqual({ ok: true, playerLevel: 1 });
+  // The reset request used to carry a talent allocation; talents are retired
+  // (Phase D0), so player_level is the only optional field left to validate.
+  it('parses a reset request, defaulting the player level to 1', () => {
+    expect(parseResetRequest({ player_level: 20 })).toEqual({ ok: true, playerLevel: 20 });
+    expect(parseResetRequest({})).toEqual({ ok: true, playerLevel: 1 });
   });
 
-  it('rejects malformed levels and every legacy or dual-model talent reset shape', () => {
-    expect(parseTalentResetRequest({ player_level: 1.5 })).toEqual({
+  it('rejects a malformed reset request', () => {
+    expect(parseResetRequest({ player_level: 1.5 })).toEqual({
       ok: false,
       error: 'invalid player_level: expected integer 1-20',
     });
-    for (const talents of [
-      { spec: 'arms', ranks: {}, choices: {} },
-      { spec: 'arms', rows: {}, rowPicks: [] },
-      { spec: 'arms', rows: {}, unknown: true },
-      undefined,
-    ]) {
-      expect(parseTalentResetRequest({ talents })).toEqual({
-        ok: false,
-        error: 'invalid talents: expected canonical spec/rows allocation',
-      });
-    }
+    expect(parseResetRequest({ player_level: 21 })).toEqual({
+      ok: false,
+      error: 'invalid player_level: expected integer 1-20',
+    });
+    expect(parseResetRequest(null)).toEqual({
+      ok: false,
+      error: 'invalid reset request: expected object',
+    });
   });
 
   it('builds an identical-shape, full-size, finite observation for every class', () => {

@@ -69,13 +69,13 @@ function joinServer(
 describe('unequip an offhand item over the wire', () => {
   it('unequip_item{slot:offhand} moves the offhand weapon into the bags', () => {
     const server = new GameServer();
-    const session = joinServer(server, fakeWs(), 1, 'Fury');
+    const session = joinServer(server, fakeWs(), 1, 'Duelist', 'rogue');
     const sim = server.sim;
     const meta = sim.meta(session.pid)!;
 
-    // Use a Fury warrior as a build that can hold a dual-wield offhand weapon.
+    // Use a rogue: with the specializations retired (Phase D0) it is the one
+    // class that can hold a dual-wield offhand weapon.
     sim.setPlayerLevel(40, session.pid);
-    expect(sim.setSpec('fury', session.pid)).toBe(true);
 
     // Put a one-hand weapon in the offhand the way the game does it: the resolver
     // routes a one-hander to the offhand when the mainhand is occupied (a weapon's
@@ -100,12 +100,11 @@ describe('unequip an offhand item over the wire', () => {
 describe('equip an aimed offhand weapon over the wire', () => {
   it('honors slot:offhand instead of falling back to the mainhand resolver', () => {
     const server = new GameServer();
-    const session = joinServer(server, fakeWs(), 2, 'FuryAim');
+    const session = joinServer(server, fakeWs(), 2, 'DuelistAim', 'rogue');
     const sim = server.sim;
     const meta = sim.meta(session.pid)!;
 
     sim.setPlayerLevel(40, session.pid);
-    expect(sim.setSpec('fury', session.pid)).toBe(true);
     expect(sim.unequipItem('mainhand', session.pid)).toBe(true);
     expect(sim.unequipItem('offhand', session.pid)).toBe(true);
     expect(meta.equipment.mainhand).toBeFalsy();

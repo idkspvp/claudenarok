@@ -195,7 +195,6 @@ describe('spell haste shortens casts and channels', () => {
     const { sim, p, pid } = player('mage');
     // Aether Darts moved from the shared mage kit to Chronomancy after this
     // release test was written; select that spec so the channel actually starts.
-    expect(sim.setSpec('arcane', pid)).toBe(true);
     spawnDummy(sim, p);
     p.resource = p.maxResource;
 

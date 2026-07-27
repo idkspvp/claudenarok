@@ -13,12 +13,6 @@
 import { isDebuffAura } from '../aura_classify';
 import { isRooted } from '../combat/cc';
 import { baseSwingSpeed, rangedAutoProfile } from '../combat/form_swing';
-import {
-  FIRST_TALENT_LEVEL,
-  pointsSpent,
-  talentPointsAtLevel,
-  talentsFor,
-} from '../content/talents';
 import { ABILITIES, abilitiesKnownAt, CLASSES, DUNGEON_LIST, ITEMS, ZONES, zoneAt } from '../data';
 import { formatMoney } from '../format_money';
 import { MARKET_MAX_LISTINGS } from '../market';
@@ -579,24 +573,4 @@ export function queuedReadout(ctx: SimContext, e: Entity): string {
     return `${name} is queued for your next melee swing (costs ${queued.cost} ${res}; you have ${have}).`;
   }
   return `${name} is queued for your next melee swing, but you cannot afford it (costs ${queued.cost} ${res}; you have ${have}) — it will fizzle.`;
-}
-
-// Self-only readout for "/talents": the player's specialization and how their
-// talent points are split across the Class tree and the chosen spec tree.
-// Points are derived live from level (talentPointsAtLevel), so the total stays
-// correct after a level-up even if the allocation hasn't been touched since.
-export function talentsReadout(meta: PlayerMeta, e: Entity): string {
-  const ct = talentsFor(meta.cls);
-  if (!ct) return 'Your class has no talent tree yet.';
-  const total = talentPointsAtLevel(e.level);
-  if (total <= 0)
-    return `You have not unlocked talents yet — they begin at level ${FIRST_TALENT_LEVEL}.`;
-  const spent = pointsSpent(meta.talents);
-  const specName = meta.talents.spec
-    ? (ct.specs.find((s) => s.id === meta.talents.spec)?.name ?? meta.talents.spec)
-    : null;
-  const head = specName ?? 'no specialization';
-  const unspent = total - spent;
-  const tail = unspent > 0 ? ` ${unspent} unspent.` : '';
-  return `Talents: ${head} - ${spent}/${total} rows selected.${tail}`;
 }

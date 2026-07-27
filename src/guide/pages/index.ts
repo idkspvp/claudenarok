@@ -24,7 +24,6 @@ import { progression } from './progression';
 import { settings } from './settings';
 import { social } from './social';
 import { stats } from './stats';
-import { talents } from './talents';
 import type { GuidePage, PageContext } from './types';
 import { valeCup } from './vale_cup';
 import { wishIKnew } from './wish_i_knew';
@@ -54,7 +53,6 @@ const PAGES: Record<string, GuidePage> = {
   progression,
   controls,
   settings,
-  talents,
   glossary,
   faq,
 };

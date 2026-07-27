@@ -9,7 +9,6 @@ import {
   aetherSurgeStacks,
 } from '../src/sim/combat/chronomancy';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -18,7 +17,6 @@ import type { Entity, SimEvent } from '../src/sim/types';
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -39,29 +37,9 @@ function addDummy(sim: Sim): Entity {
   return mob;
 }
 
-describe('Chronoweave mastery: healing + mana cushion', () => {
-  it('grants +15% healing, +5% max mana, and +20% mana regen', () => {
-    const mods = computeTalentModifiers('mage', { ...emptyAllocation(), spec: 'arcane' } as never);
-    expect(mods.global.healPct).toBeCloseTo(0.15, 6);
-    expect(mods.global.manaPct).toBeCloseTo(0.05, 6);
-    expect(mods.global.manaRegenPct).toBeCloseTo(0.2, 6);
-  });
-
-  it('the mana cushion actually raises a Chronomancer max mana', () => {
-    const chrono = chronoMage().p.maxResource;
-    const fire = (() => {
-      const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
-      sim.setPlayerLevel(20);
-      sim.setSpec('fire');
-      sim.tick();
-      return sim.player.maxResource;
-    })();
-    // Same base pool, but the mastery gives the Chronomancer ~5% more.
-    expect(chrono).toBeGreaterThan(fire);
-    expect(chrono / fire).toBeCloseTo(1.05, 2);
-  });
-});
-
+// The Chronoweave MASTERY block that used to open this file went with the spec
+// masteries (Phase D0): its +15% healing / +5% max mana / +20% mana regen were
+// spec-granted modifiers with no source left to grant them.
 describe('Cascada echo window', () => {
   it('lasts 10s on a 17s cooldown (a longer window, same ~7s gap)', () => {
     const cascade = ABILITIES.temporal_cascade;

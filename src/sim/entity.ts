@@ -1,11 +1,11 @@
 import { critRateFrom } from './combat/crit';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
-import type { TalentModifiers } from './content/talents';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
+import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
 import { defaultAllocationFor } from './stat_preset';
 import type {
@@ -326,7 +326,7 @@ export function recalcPlayerStats(
   e: Entity,
   cls: PlayerClass,
   equipment: PlayerEquipment,
-  mods: TalentModifiers | undefined,
+  mods: PlayerModifiers | undefined,
   equipmentInstance: Partial<Record<EquipSlot, ItemInstancePayload>>,
   // Required, deliberately not defaulted. Every attribute a character has comes
   // from here now, so a caller that forgets it does not get a small inaccuracy:
@@ -722,8 +722,8 @@ export function recalcPlayerStats(
   // perfect dodge: flat, from Luck, and the one avoidance an attacker's accuracy
   // cannot answer. Aura grants (buff_dodge and the mob stagger debuff) still land
   // here, so their sign and magnitude are unchanged.
-  e.hit = hitRating(lvl, s.dex, s.luk) + Math.round(e.hitBonus * 100);
-  e.flee = Math.max(0, fleeRating(lvl, s.agi, s.luk) + bonusFlee);
+  e.hit = hitRating(lvl, s.dex) + Math.round(e.hitBonus * 100);
+  e.flee = Math.max(0, fleeRating(lvl, s.agi) + bonusFlee);
   e.dodgeChance = Math.max(0, perfectDodgeChance(s.luk) + bonusDodge);
 
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
@@ -788,7 +788,7 @@ export function characterDerivedStats(
   cls: PlayerClass,
   level: number,
   equipment: PlayerEquipment,
-  mods?: TalentModifiers,
+  mods?: PlayerModifiers,
   equipmentInstance?: Partial<Record<EquipSlot, ItemInstancePayload>>,
   // The character's stored allocation. Omitting it does NOT mean "no allocation":
   // it means the sheet would report 1 in every attribute for a character who is
@@ -867,8 +867,8 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   e.stats.dex = monsterAttribute;
   e.stats.vit = monsterAttribute;
   e.stats.luk = monsterAttribute;
-  e.hit = hitRating(level, e.stats.dex, e.stats.luk);
-  e.flee = fleeRating(level, e.stats.agi, e.stats.luk);
+  e.hit = hitRating(level, e.stats.dex);
+  e.flee = fleeRating(level, e.stats.agi);
   e.dodgeChance = perfectDodgeChance(e.stats.luk);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
   e.stats.armor = Math.round(template.armorPerLevel * (level - 1));

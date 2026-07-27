@@ -73,7 +73,7 @@ logic module pairs with a `<domain>_db.ts` that owns its SQL).
 
 ## Invariants, YOU MUST keep these
 - **Trust nothing from the client.** Movement intent + `cmd`s arrive over WS;
-  every combat/loot/quest/economy/talent outcome resolves *inside the `Sim`*.
+  every combat/loot/quest/economy outcome resolves *inside the `Sim`*.
   `dispatchMessage` (game.ts) type-checks each field before calling a `sim.*`
   method, keep that guarding when you add a command.
 - **Wire protocol lockstep with `src/net/online.ts`.** Server sends `hello` /
@@ -93,7 +93,7 @@ logic module pairs with a `<domain>_db.ts` that owns its SQL).
   and the dev-only `GET /api/perf` read (both dispatch arms).
 
 ## Persistence model
-- Character level + full state (gear/bags/bank/quests/position/money/talents/arena/lifetimeXp/
+- Character level + full state (gear/bags/bank/quests/position/money/arena/lifetimeXp/
   deeds/deedStats/activeTitle/renown) stored as **JSONB** in `characters.state`;
   `serializeCharacter` converts to and from the `Sim`.
   Same-blob atomicity is the bank's anti-dupe cornerstone: the personal bank NEVER gets its own

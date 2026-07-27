@@ -5,8 +5,8 @@
 // every fighter is offered THREE class-appropriate augments and keeps the one
 // they pick for the rest of the bout (it survives death/respawn). They are NOT
 // auras — auras get wiped when a fighter is readied — so each pick folds into a
-// flat `TalentEffect` that is accumulated into the player's effective
-// `TalentModifiers` (exactly like a talent), plus an optional `special` bag for
+// flat `ModifierEffect` that is accumulated into the player's effective
+// `PlayerModifiers` (exactly like a talent), plus an optional `special` bag for
 // the handful of effects the modifier pipeline can't express (lifesteal, move
 // speed). See `Sim.fiestaApplyAugments`.
 //
@@ -16,8 +16,8 @@
 // and shared verbatim by the authoritative Sim and the display-only net client.
 // ---------------------------------------------------------------------------
 
+import type { ModifierEffect, Role } from '../player_modifiers';
 import type { AuraKind, PlayerClass } from '../types';
-import type { Role, TalentEffect } from './talents';
 
 export type AugmentTier = 'silver' | 'gold' | 'prismatic';
 
@@ -37,7 +37,7 @@ export interface AugmentDef {
   // When set, offered only to these classes / roles. Undefined = universal.
   classes?: PlayerClass[];
   roles?: Role[];
-  effect: TalentEffect; // folded into the player's effective TalentModifiers
+  effect: ModifierEffect; // folded into the player's effective PlayerModifiers
   special?: AugmentSpecial;
 }
 

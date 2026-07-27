@@ -174,6 +174,7 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'lastActiveTick',
       'lastWhisperFrom',
       'marketQuery',
+      'mods',
       'moveInput',
       'name',
       'pendingSkinCatalog',
@@ -181,7 +182,6 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'pendingSkinRank',
       'skin',
       'skinCatalog',
-      'talentMods',
       'wireRev',
     ]);
   });

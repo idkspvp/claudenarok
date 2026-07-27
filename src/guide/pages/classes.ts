@@ -22,7 +22,6 @@ import {
   className,
   classTags,
   roleBadges,
-  specCardHtml,
 } from '../class_view';
 import { GUIDE_CLASSES, GUIDE_WARLOCK_PETS, type GuideClassInfo } from '../content.generated';
 import { hrefFor } from '../routes';
@@ -251,15 +250,6 @@ function signatureKitHtml(c: GuideClassInfo): string {
     </section>`;
 }
 
-function specsHtml(c: GuideClassInfo): string {
-  const items = c.specs.map((sp) => specCardHtml(c.id, sp)).join('');
-  return `
-    <section class="guide-block">
-      <h2>${esc(t('guide.classPage.specsHeading'))}</h2>
-      <ul class="guide-spec-list">${items}</ul>
-    </section>`;
-}
-
 function fullKitHtml(c: GuideClassInfo): string {
   const items = c.abilities
     .map(
@@ -317,11 +307,9 @@ function detailHtml(id: string): string {
       <p class="guide-lead">${esc(classLore(c.id))}</p>
       ${factsHtml(c)}
       ${signatureKitHtml(c)}
-      ${specsHtml(c)}
       ${c.id === 'warlock' ? warlockPetsHtml() : ''}
       ${fullKitHtml(c)}
       ${related([
-        { href: hrefFor('reference/talents'), key: 'guide.nav.talents' },
         { href: hrefFor('how-to-play'), key: 'guide.nav.howToPlay' },
         { href: hrefFor('reference/combat'), key: 'guide.nav.combat' },
       ])}

@@ -62,19 +62,15 @@ describe('paperdollDropAction', () => {
     expect(paperdollDropAction(HELM, 'ring1', 'mage', 20)).toBe('blockedSlot');
   });
 
-  it('accepts a one-hand weapon on offhand only when the active spec can dual wield', () => {
-    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'warrior', 40, 'fury')).toBe('equip');
+  // Dual wield used to open up for a Fury warrior; specs are retired (Phase D0),
+  // so the rogue is the only class that dual wields and the warrior never does.
+  it('accepts a one-hand weapon on offhand only for a class that dual wields', () => {
     expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'rogue', 40)).toBe('equip');
-    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'warrior', 40, 'arms')).toBe(
-      'blockedClass',
-    );
+    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'warrior', 40)).toBe('blockedClass');
   });
 
-  it('accepts a two-hand weapon on offhand only for Fury Titan Grip', () => {
-    expect(paperdollDropAction(TWO_HAND_WEAPON, 'offhand', 'warrior', 40, 'fury')).toBe('equip');
-    expect(paperdollDropAction(TWO_HAND_WEAPON, 'offhand', 'warrior', 40, 'arms')).toBe(
-      'blockedClass',
-    );
+  it('refuses a two-hand weapon on offhand', () => {
+    expect(paperdollDropAction(TWO_HAND_WEAPON, 'offhand', 'warrior', 40)).toBe('blockedClass');
   });
 });
 
@@ -86,7 +82,6 @@ describe('paperdollDropAction agrees with the sim (the authority)', () => {
     slot: EquipSlot;
     cls: 'warrior' | 'rogue' | 'mage';
     level: number;
-    spec?: string;
   }> = [
     { itemId: 'seal_of_the_nine_oaths', slot: 'ring2', cls: 'warrior', level: 20 },
     { itemId: 'cryptbone_helm', slot: 'helmet', cls: 'warrior', level: 20 },
@@ -94,14 +89,12 @@ describe('paperdollDropAction agrees with the sim (the authority)', () => {
     { itemId: 'cryptbone_helm', slot: 'helmet', cls: 'mage', level: 20 },
     { itemId: 'seal_of_the_nine_oaths', slot: 'ring1', cls: 'warrior', level: 1 },
     { itemId: 'training_mace', slot: 'offhand', cls: 'rogue', level: 20 },
-    { itemId: 'training_mace', slot: 'offhand', cls: 'warrior', level: 40, spec: 'fury' },
-    { itemId: 'training_mace', slot: 'offhand', cls: 'warrior', level: 40, spec: 'arms' },
+    { itemId: 'training_mace', slot: 'offhand', cls: 'warrior', level: 40 },
     {
       itemId: 'eastbrook_greatsword',
       slot: 'offhand',
       cls: 'warrior',
       level: 40,
-      spec: 'fury',
     },
   ];
 
@@ -111,9 +104,8 @@ describe('paperdollDropAction agrees with the sim (the authority)', () => {
         Record<string, any>;
       const pid = sim.addPlayer(c.cls, 'Dropper');
       sim.setPlayerLevel(c.level, pid);
-      if (c.spec) expect(sim.setSpec(c.spec, pid)).toBe(true);
       sim.addItem(c.itemId, 1, pid);
-      const expected = paperdollDropAction(ITEMS[c.itemId], c.slot, c.cls, c.level, c.spec);
+      const expected = paperdollDropAction(ITEMS[c.itemId], c.slot, c.cls, c.level);
       sim.equipItemToSlot(c.itemId, c.slot, pid);
       const worn = equipmentOf(sim, pid)[c.slot];
       expect(worn === c.itemId, `core said ${expected}`).toBe(expected === 'equip');

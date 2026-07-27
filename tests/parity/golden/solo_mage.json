@@ -8,14 +8,14 @@
     "casting lifecycle (C4a)",
     "effect dispatch + spell damage (C4b/C1)"
   ],
-  "draws": 426,
-  "drawDigest": "c0531261",
+  "draws": 430,
+  "drawDigest": "af9692bf",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "af533eec",
+      "state": "ff7c803a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -24,7 +24,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -80,9 +79,6 @@
             "int": 9,
             "luk": 1,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -151,7 +147,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "eb9ebc2e",
+      "state": "f0da84af",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -162,7 +158,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "98b8824d",
+      "state": "666efd26",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -173,7 +169,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "458dfa3d",
+      "state": "ef9c0b6c",
       "events": "f6dafa5e",
       "rng": {
         "draws": 76,
@@ -184,7 +180,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "1cde6118",
+      "state": "43383723",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -195,7 +191,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "7cf301df",
+      "state": "93e19c66",
       "events": "b7594fe1",
       "rng": {
         "draws": 269,
@@ -206,27 +202,26 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "1ca4b559",
-      "events": "cecd4114",
+      "state": "814156b0",
+      "events": "d36287b0",
       "rng": {
-        "draws": 390,
-        "digest": "4fcb9088"
+        "draws": 392,
+        "digest": "8137f094"
       }
     },
     {
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "a792909c",
-      "events": "422fb47c",
+      "state": "2ac43034",
+      "events": "9b949a9d",
       "rng": {
-        "draws": 426,
-        "digest": "c0531261"
+        "draws": 430,
+        "digest": "af9692bf"
       },
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -242,7 +237,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 84,
-            "damageTaken": 3
+            "damageTaken": 6
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -304,9 +299,6 @@
             "luk": 2,
             "vit": 6
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -314,11 +306,23 @@
         {
           "aiState": "idle",
           "attackPower": 3,
-          "castRemaining": 1.2,
+          "auras": [
+            {
+              "duration": 30,
+              "id": "icicles",
+              "kind": "icicles",
+              "name": "Icicles",
+              "remaining": 28.65,
+              "school": "frost",
+              "sourceId": 415,
+              "stacks": 1
+            }
+          ],
+          "castRemaining": 1.7,
           "castTargetId": 416,
-          "castTotal": 2,
+          "castTotal": 2.5,
           "castingAbility": "frostbolt",
-          "combatTimer": 1.35,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.02,
           "detonateTimer": "Infinity",
@@ -330,14 +334,14 @@
           "fiveSecondRule": 1.55,
           "flee": 14,
           "gcdRemaining": 0.7,
-          "hit": 23,
-          "hp": 49997,
+          "hit": 22,
+          "hp": 215,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 10,
           "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
+          "maxHp": 218,
           "maxResource": 775,
           "moveSpeed": 7,
           "onGround": true,
@@ -402,7 +406,7 @@
               "value": 0.6
             }
           ],
-          "combatTimer": 1.35,
+          "combatTimer": 0.05,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",

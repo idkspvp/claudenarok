@@ -62,19 +62,13 @@ describe('command facet tags (W6)', () => {
   });
 });
 
-// W7: append the progression cluster's tags (prestige + talents + cosmetics). The
+// W7: append the progression cluster's tags (prestige + cosmetics; the talents
+// entries went with the facet in Phase D0). The
 // table-consistency invariants in the W6 block above (no orphan tag, no dispatch-only
 // leak) already cover these new entries; this block pins the exact facet per W7
 // command and that the no-wire members stay untagged. Append-only: never edit a tag.
 const W7_TAGS: Readonly<Record<string, string>> = {
   prestige: 'IWorldProgressionXp',
-  applyTalents: 'IWorldTalents',
-  respec: 'IWorldTalents',
-  setSpec: 'IWorldTalents',
-  selectTalentRow: 'IWorldTalents',
-  saveLoadout: 'IWorldTalents',
-  switchLoadout: 'IWorldTalents',
-  deleteLoadout: 'IWorldTalents',
   change_skin: 'IWorldCosmetics',
   claim_event_skin: 'IWorldCosmetics',
   unequip_mech_chroma: 'IWorldCosmetics',
@@ -83,7 +77,7 @@ const W7_TAGS: Readonly<Record<string, string>> = {
 describe('command facet tags (W7)', () => {
   const tags = COMMAND_FACETS as Readonly<Record<string, string>>;
 
-  it('tags every W7 progression/talents/cosmetics command with its facet', () => {
+  it('tags every W7 progression/cosmetics command with its facet', () => {
     for (const [cmd, facet] of Object.entries(W7_TAGS)) {
       expect(tags[cmd], `facet tag for '${cmd}'`).toBe(facet);
     }

@@ -26,7 +26,6 @@ function makeMage(spec: Spec, level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   placePlayerInOpenField(sim);
-  sim.setSpec(spec);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -302,7 +301,6 @@ interface CascadeMeasure {
 function cascadeAoeHeal(enemyCount: number): CascadeMeasure {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  sim.setSpec('arcane');
   sim.tick();
   placePlayerInOpenField(sim);
   const p = sim.player;
