@@ -38,20 +38,20 @@ describe('the tree matches Ragnarok Classic', () => {
     }
   });
 
-  it('carries twenty jobs: Novice, six first, twelve second, and Super Novice', () => {
-    expect(JOBS).toHaveLength(20);
+  it('carries nineteen jobs: the Novice, six first, and twelve second', () => {
+    expect(JOBS).toHaveLength(19);
     const byTier = (tier: JobDef['tier']) => JOBS.filter((j) => j.tier === tier).length;
     expect(byTier('novice')).toBe(1);
     expect(byTier('first')).toBe(6);
-    // Seven 2-1 rather than six: Super Novice is the Novice's, which the source
-    // comments on directly.
-    expect(byTier('second_1')).toBe(7);
+    expect(byTier('second_1')).toBe(6);
     expect(byTier('second_2')).toBe(6);
   });
 
-  it('hangs Super Novice off the Novice, not off a first job', () => {
-    expect(jobById('super_novice')?.from).toBe('novice');
-    expect(advancementsFrom('novice').map((j) => j.id)).toEqual(['super_novice']);
+  it('leaves the Novice with no advancement of its own', () => {
+    // Ragnarok hangs Super Novice here. It is out by product decision, so the
+    // Novice's only route forward is a first job.
+    expect(jobById('super_novice')).toBeUndefined();
+    expect(advancementsFrom('novice')).toEqual([]);
   });
 
   it('excludes every transcendent, third, and expanded class', () => {
@@ -108,7 +108,6 @@ describe('the tree is internally consistent', () => {
     // The Novice descends from nothing, so it has no first job; Super Novice
     // inherits that, which is exactly the oddity the source calls out.
     expect(firstJobOf('novice')).toBeUndefined();
-    expect(firstJobOf('super_novice')).toBeUndefined();
   });
 
   it('has no unknown job id', () => {

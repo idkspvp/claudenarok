@@ -3,7 +3,8 @@
 // Read off `e_mapid` in rAthena's `src/map/map.hpp`, filtered to the pre-renewal
 // Classic era: the six first jobs plus Novice, and each first job's two second
 // jobs. Transcendent, third, and expanded classes are all in that enum and all
-// deliberately excluded here, because Classic does not have them.
+// deliberately excluded here, because Classic does not have them. Super Novice
+// IS Classic and is excluded anyway, by product decision; see JOBS below.
 //
 // This is the AUTHORITY for the conversion, not the game's live class list. The
 // live list is still the nine it inherited (`PlayerClass` in ../types.ts), and
@@ -37,10 +38,12 @@ export interface JobDef {
 }
 
 /** The Novice, the six first jobs, and their twelve second jobs: nineteen
- *  records, in tree order. Super Novice is the odd one out and is included
- *  because Ragnarok includes it: the source comments on it directly, noting that
- *  Super Novices are the 2-1 of the Novice and that Novices count as a first
- *  class too. */
+ *  records, in tree order.
+ *
+ *  Super Novice is deliberately ABSENT. Ragnarok has it, hung off the Novice as
+ *  a 2-1 rather than off any first job, and the source comments on that oddity
+ *  directly. It is out by product decision, not by oversight, so a later reader
+ *  does not go looking for the branch that is missing. */
 export const JOBS: readonly JobDef[] = [
   { id: 'novice', name: 'Novice', tier: 'novice', from: null },
 
@@ -50,8 +53,6 @@ export const JOBS: readonly JobDef[] = [
   { id: 'acolyte', name: 'Acolyte', tier: 'first', from: 'novice' },
   { id: 'merchant', name: 'Merchant', tier: 'first', from: 'novice' },
   { id: 'thief', name: 'Thief', tier: 'first', from: 'novice' },
-
-  { id: 'super_novice', name: 'Super Novice', tier: 'second_1', from: 'novice' },
 
   { id: 'knight', name: 'Knight', tier: 'second_1', from: 'swordman' },
   { id: 'crusader', name: 'Crusader', tier: 'second_2', from: 'swordman' },
@@ -83,8 +84,8 @@ export function firstJobs(): readonly JobDef[] {
   return JOBS.filter((j) => j.tier === 'first');
 }
 
-/** Both advancements a first job offers, 2-1 first. Super Novice is reachable
- *  from the Novice and so appears for it. */
+/** Both advancements a first job offers, 2-1 first. Empty for the Novice, whose
+ *  only route forward is a first job. */
 export function advancementsFrom(jobId: string): readonly JobDef[] {
   return JOBS.filter((j) => j.from === jobId && j.tier !== 'first');
 }
