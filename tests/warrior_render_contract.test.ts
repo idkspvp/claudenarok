@@ -18,11 +18,11 @@ describe('winning Warrior attack animation routing', () => {
   });
 
   it('pins winning Warrior hand and ability clips', () => {
-    expect(VISUALS.player_warrior.clips.attackByHand).toEqual({
+    expect(VISUALS.player_swordman.clips.attackByHand).toEqual({
       twohand: '2H_Melee_Attack_Chop',
       dualwield: 'Dualwield_Melee_Attack_Chop',
     });
-    expect(VISUALS.player_warrior.clips.attackByAbility).toMatchObject({
+    expect(VISUALS.player_swordman.clips.attackByAbility).toMatchObject({
       mortal_strike: '2H_Melee_Attack_Chop',
       execute: '2H_Melee_Attack_Chop',
       slam: '2H_Melee_Attack_Chop',

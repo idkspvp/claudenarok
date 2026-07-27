@@ -88,7 +88,7 @@ const RIGS = [
   'players/mage',
   'players/paladin',
   'players/ranger',
-  'players/thief',
+  'players/rogue',
   'players/rogue_hooded',
   'enemies/necromancer',
   'enemies/skeleton_golem',

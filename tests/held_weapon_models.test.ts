@@ -185,45 +185,39 @@ describe('held weapon models', () => {
   // shows the wearer's equipped mainhand, like every other body.
   it('all player classes swap the mainhand except the archer', () => {
     const players = Object.keys(VISUALS).filter((k) => k.startsWith('player_'));
-    expect(players).toContain('player_hunter');
+    expect(players).toContain('player_archer');
     expect(players).toContain('player_mech');
     for (const key of players) {
       const def = VISUALS[key];
-      if (key === 'player_hunter') {
+      if (key === 'player_archer') {
         expect(def.weaponSlots, 'archer must keep its crossbow').toBeUndefined();
       } else {
         expect(def.weaponSlots?.includes(0), `${key} should swap its mainhand`).toBe(true);
       }
     }
     // The thief dual-wields through independent mainhand and offhand slots.
-    expect(VISUALS.player_rogue.weaponSlots).toEqual([0]);
-    expect(VISUALS.player_rogue.offhandSlot).toBe(1);
+    expect(VISUALS.player_thief.weaponSlots).toEqual([0]);
+    expect(VISUALS.player_thief.offhandSlot).toBe(1);
   });
 
   it('gives winning Warrior one mainhand swap and one independent live offhand', () => {
-    expect(VISUALS.player_warrior.weaponSlots).toEqual([0]);
-    expect(VISUALS.player_warrior.offhandSlot).toBe(1);
-    expect(VISUALS.player_warrior.attach).toEqual([
+    expect(VISUALS.player_swordman.weaponSlots).toEqual([0]);
+    expect(VISUALS.player_swordman.offhandSlot).toBe(1);
+    expect(VISUALS.player_swordman.attach).toEqual([
       { url: 'models/weapons/sword_1handed.glb', bone: 'handslot.r' },
       { url: 'models/weapons/shield_round.glb', bone: 'handslot.l' },
     ]);
   });
 
   it('keeps every real offhand independent from mainhand cosmetics', () => {
-    expect(VISUALS.player_rogue.offhandSlot).toBe(1);
-    expect(VISUALS.player_paladin).toMatchObject({
+    // The Paladin and Shaman arms of this case went with those classes (D1). The
+    // two survivors that carry a real offhand are the Swordman and the Thief.
+    expect(VISUALS.player_thief).toMatchObject({ weaponSlots: [0], offhandSlot: 1 });
+    expect(VISUALS.player_swordman).toMatchObject({
       weaponSlots: [0],
       offhandSlot: 1,
       attach: [
-        { url: 'models/weapons/axe_1handed.glb', bone: 'handslot.r' },
-        { url: 'models/weapons/shield_square.glb', bone: 'handslot.l' },
-      ],
-    });
-    expect(VISUALS.player_shaman).toMatchObject({
-      weaponSlots: [0],
-      offhandSlot: 1,
-      attach: [
-        { url: 'models/weapons/axe_1handed.glb', bone: 'handslot.r' },
+        { url: 'models/weapons/sword_1handed.glb', bone: 'handslot.r' },
         { url: 'models/weapons/shield_round.glb', bone: 'handslot.l' },
       ],
     });
@@ -237,8 +231,7 @@ describe('held weapon models', () => {
     expect(thief?.offhandSlot).toBe(1);
     expect(thief?.attach?.length).toBe(2);
     expect(mechHeldWeaponOverride('swordman')?.offhandSlot).toBe(1);
-    expect(mechHeldWeaponOverride('acolyte')?.offhandSlot).toBe(1);
-    for (const cls of ['archer', 'acolyte', 'mage', 'mage', 'acolyte'] as const) {
+    for (const cls of ['archer', 'acolyte', 'mage'] as const) {
       expect(mechHeldWeaponOverride(cls), `${cls} should keep the mech default`).toBeNull();
     }
 

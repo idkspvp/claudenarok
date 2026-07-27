@@ -45,7 +45,7 @@ describe('character appearance picker', () => {
     });
     expect(activeCharacterAppearancePreview('swordman', 1, 'class')).toEqual({
       skin: 1,
-      visualKey: 'player_paladin',
+      visualKey: 'player_swordman',
     });
   });
 });

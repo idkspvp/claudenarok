@@ -86,7 +86,7 @@ describe('previewAppearanceVisual', () => {
     const v = previewAppearanceVisual(
       appearance({ cls: 'thief', mainhandItemId: 'dagger_x', offhandItemId: 'dagger_y' }),
     );
-    expect(v.visualKey).toBe('player_rogue');
+    expect(v.visualKey).toBe('player_thief');
     expect(v.weaponItemId).toBe('dagger_x');
     expect(v.offhandItemId).toBe('dagger_y');
     expect(v.weaponOverride).toBeNull();
@@ -94,7 +94,7 @@ describe('previewAppearanceVisual', () => {
 
   it('shows no weapon when the character is unarmed', () => {
     const v = previewAppearanceVisual(appearance({ cls: 'acolyte', mainhandItemId: null }));
-    expect(v.visualKey).toBe('player_priest');
+    expect(v.visualKey).toBe('player_acolyte');
     expect(v.weaponItemId).toBeNull();
   });
 
@@ -178,7 +178,7 @@ describe('CharacterPreview.setAppearance', () => {
 
     preview.setAppearance(mech);
     expect(setVisualKey).toHaveBeenCalledOnce();
-    expect(setVisualKey).toHaveBeenLastCalledWith('player_rogue', 'dagger_x', null, 'dagger_y');
+    expect(setVisualKey).toHaveBeenLastCalledWith('player_thief', 'dagger_x', null, 'dagger_y');
 
     await finishMechLoad();
 
@@ -215,7 +215,7 @@ describe('CharacterPreview.setClass', () => {
 
     preview.setClass('swordman');
     expect(setVisualKey).toHaveBeenLastCalledWith(
-      'player_warrior',
+      'player_swordman',
       'worn_sword',
       null,
       'eastbrook_buckler',
@@ -223,7 +223,7 @@ describe('CharacterPreview.setClass', () => {
 
     preview.setClass('thief', 'rusty_dagger', 'keen_dirk');
     expect(setVisualKey).toHaveBeenLastCalledWith(
-      'player_rogue',
+      'player_thief',
       'rusty_dagger',
       null,
       'keen_dirk',
@@ -243,7 +243,7 @@ describe('CharacterPreview visual lifecycle', () => {
     state.currentVisual = { root: {}, dispose };
     state.characterGroup = { remove, add, rotation: { y: 1 } };
 
-    preview.setVisualKey('player_warrior');
+    preview.setVisualKey('player_swordman');
 
     expect(remove).toHaveBeenCalledOnce();
     expect(dispose).toHaveBeenCalledOnce();
@@ -269,7 +269,7 @@ describe('CharacterPreview.setVisualKey: the weapon-skin rebuild contract', () =
 
   it('re-applies the persisted skin to the freshly BUILT visual, and live changes land', () => {
     const preview = rawPreview('frostbite_dagger');
-    preview.setVisualKey('player_rogue', 'rusty_dagger', null, 'rusty_dagger');
+    preview.setVisualKey('player_thief', 'rusty_dagger', null, 'rusty_dagger');
     const built = visualDoubles.built.at(-1) as { setWeaponSkin: ReturnType<typeof vi.fn> };
     expect(built).toBeDefined();
     // the rebuild path itself re-applied the persisted cosmetic
@@ -284,7 +284,7 @@ describe('CharacterPreview.setVisualKey: the weapon-skin rebuild contract', () =
 
   it('leaves the skin path untouched when none is persisted (char-create stays bare)', () => {
     const preview = rawPreview(null);
-    preview.setVisualKey('player_rogue', 'rusty_dagger', null, null);
+    preview.setVisualKey('player_thief', 'rusty_dagger', null, null);
     const built = visualDoubles.built.at(-1) as { setWeaponSkin: ReturnType<typeof vi.fn> };
     expect(built.setWeaponSkin).not.toHaveBeenCalled();
   });

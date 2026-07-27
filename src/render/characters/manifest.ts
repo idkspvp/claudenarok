@@ -417,7 +417,6 @@ export const SKINS: Record<string, (string | null)[]> = {
     `${SKINS_DIR}/knight/alt_b.png`,
     `${SKINS_DIR}/knight/alt_c.png`,
   ],
-  player_paladin: [null, `${SKINS_DIR}/paladin/alt_a.png`],
   player_archer: [
     null,
     `${SKINS_DIR}/ranger/alt_a.png`,
@@ -441,24 +440,6 @@ export const SKINS: Record<string, (string | null)[]> = {
     `${SKINS_DIR}/mage/alt_a.png`,
     `${SKINS_DIR}/mage/alt_b.png`,
     `${SKINS_DIR}/mage/alt_c.png`,
-  ],
-  player_warlock: [
-    null,
-    `${SKINS_DIR}/mage/alt_a.png`,
-    `${SKINS_DIR}/mage/alt_b.png`,
-    `${SKINS_DIR}/mage/alt_c.png`,
-  ],
-  player_shaman: [
-    null,
-    `${SKINS_DIR}/barbarian/alt_a.png`,
-    `${SKINS_DIR}/barbarian/alt_b.png`,
-    `${SKINS_DIR}/barbarian/alt_c.png`,
-  ],
-  player_druid: [
-    null,
-    `${SKINS_DIR}/druid/alt_a.png`,
-    `${SKINS_DIR}/druid/alt_b.png`,
-    `${SKINS_DIR}/druid/alt_c.png`,
   ],
   // Combat Mech chromas — every index is a real full-model texture (no null
   // default; the embedded base texture is not one of the rewards).
@@ -544,23 +525,6 @@ export const VISUALS: Record<string, VisualDef> = {
     weaponSlots: [0],
     offhandSlot: 1,
   },
-  player_paladin: {
-    url: `${PLAYERS}/paladin.glb`,
-    height: HUMANOID_H,
-    clips: {
-      ...kaykit(['1H_Melee_Attack_Chop', '1H_Melee_Attack_Slice_Diagonal']),
-      attackByHand: { twohand: '2H_Melee_Attack_Chop' },
-    },
-    // dedicated paladin model (helmeted variant) — ships its own Cape + Helmet
-    // meshes and texture, so no show-list/tint. Shield + paladin hammer arrive
-    // in the weapons pass; the gripped axe holds the slot until then.
-    attach: [
-      { url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/shield_square.glb`, bone: 'handslot.l' },
-    ],
-    weaponSlots: [0],
-    offhandSlot: 1,
-  },
   player_archer: {
     url: `${PLAYERS}/ranger.glb`,
     height: HUMANOID_H,
@@ -607,23 +571,6 @@ export const VISUALS: Record<string, VisualDef> = {
     tint: 0xf0e9d6,
     tintStrength: 0.5,
   },
-  player_shaman: {
-    url: `${PLAYERS}/barbarian.glb`,
-    height: HUMANOID_H,
-    clips: {
-      ...kaykit(['1H_Melee_Attack_Chop', '1H_Melee_Attack_Slice_Diagonal']),
-      attackByHand: { twohand: '2H_Melee_Attack_Chop' },
-    },
-    show: ['Barbarian_BearHat'], // v2 barbarian renamed Hat→BearHat and dropped the round shield mesh
-    attach: [
-      { url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/shield_round.glb`, bone: 'handslot.l' },
-    ],
-    weaponSlots: [0],
-    offhandSlot: 1,
-    tint: 0x6f8fc9,
-    tintStrength: 0.4,
-  },
   player_mage: {
     url: `${PLAYERS}/mage.glb`,
     height: HUMANOID_H,
@@ -633,27 +580,6 @@ export const VISUALS: Record<string, VisualDef> = {
     // (assets.ts) only hides non-skinned nodes. The hatted silhouette is the
     // sanctioned mage look; listing Mage_Cape is inert but kept as intent.
     show: ['Mage_Cape'],
-    attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
-    weaponSlots: [0],
-  },
-  player_warlock: {
-    url: `${PLAYERS}/mage.glb`,
-    height: HUMANOID_H,
-    clips: kaykit(['Spellcast_Shoot']), // wand zap reads better than a staff bonk
-    show: [],
-    attach: [
-      { url: `${WEAPONS}/wand.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/spellbook_open.glb`, bone: 'handslot.l', gripRef: 'Spellbook_open' },
-    ],
-    weaponSlots: [0], // mainhand (wand) swaps; spellbook offhand stays
-    tint: 0x8d5fd3,
-    tintStrength: 0.45,
-  },
-  player_druid: {
-    url: `${PLAYERS}/druid.glb`,
-    height: HUMANOID_H,
-    clips: kaykit(['2H_Melee_Attack_Chop']),
-    // dedicated druid model (own texture, ships a Backpack mesh)
     attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
     weaponSlots: [0],
   },

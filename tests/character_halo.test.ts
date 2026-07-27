@@ -2,7 +2,7 @@
 // The acolyte's Light halo: per-visual geometry (PR: halo must not clip the
 // canon mage-model hat). Pins the halo.ts cache doctrine (geometry keyed by
 // radius, material keyed by color, both shared and never disposed) and the
-// manifest contract: only player_priest overrides the placement, so every
+// manifest contract: only player_acolyte overrides the placement, so every
 // other current and future halo user gets the default constants unchanged.
 import * as THREE from 'three';
 import { describe, expect, it, vi } from 'vitest';
@@ -70,7 +70,7 @@ describe('class halo geometry', () => {
     const { charactersReady } = await import('../src/render/characters/assets');
     await charactersReady();
     const { CharacterVisual } = await import('../src/render/characters/visual');
-    const visual = new CharacterVisual('player_priest', 0xffffff, 0);
+    const visual = new CharacterVisual('player_acolyte', 0xffffff, 0);
     const halo = visual.root.getObjectByName('class_halo') as THREE.Mesh;
     expect(halo).toBeDefined();
     expect(halo.position.y).toBe(1.45);
@@ -114,7 +114,7 @@ describe('class halo geometry', () => {
   });
 
   it('gives the acolyte hat clearance and leaves every other visual on defaults', () => {
-    const acolyte = VISUALS.player_priest;
+    const acolyte = VISUALS.player_acolyte;
     expect(acolyte.halo).toBe(0xffd766);
     // Screenshot-tuned against the mage.glb hat cone; see the manifest comment.
     // Raise-only: the default-size ring clears the cone at tip height, and
@@ -123,7 +123,7 @@ describe('class halo geometry', () => {
     expect(acolyte.haloUpOffset).toBe(1.45);
     expect(acolyte.haloRadius).toBeUndefined();
     for (const [key, def] of Object.entries(VISUALS)) {
-      if (key === 'player_priest') continue;
+      if (key === 'player_acolyte') continue;
       // placement overrides are meaningless without a halo; a future second
       // haloed visual may legitimately set all three
       if (def.halo === undefined) {

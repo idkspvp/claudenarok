@@ -59,7 +59,7 @@ describe('character visual manifest', () => {
     expect(key).toBe('npc_fernando');
     expect(VISUALS.npc_fernando.tint).toBeUndefined();
     const atlas = SKINS.npc_fernando?.[0];
-    expect(atlas).toBe('textures/skins/thief/fernando.png');
+    expect(atlas).toBe('textures/skins/rogue/fernando.png');
     expect(existsSync(fileURLToPath(new URL(`../public/${atlas}`, import.meta.url)))).toBe(true);
   });
 
@@ -194,10 +194,10 @@ describe('character visual manifest', () => {
     const allWeaponUrls = manifestUrls().filter((url) => url.startsWith('models/weapons/'));
     expect(allWeaponUrls.length).toBeGreaterThan(0);
     expect(manifestUrlsForGraphics(false)).toEqual(expect.arrayContaining(allWeaponUrls));
-    expect(visibleAttachmentsForGraphics(VISUALS.player_warrior).map((a) => a.url)).toContain(
+    expect(visibleAttachmentsForGraphics(VISUALS.player_swordman).map((a) => a.url)).toContain(
       'models/weapons/sword_1handed.glb',
     );
-    expect(visibleAttachmentsForGraphics(VISUALS.player_rogue).map((a) => a.url)).toEqual([
+    expect(visibleAttachmentsForGraphics(VISUALS.player_thief).map((a) => a.url)).toEqual([
       'models/weapons/dagger.glb',
       'models/weapons/dagger.glb',
     ]);

@@ -311,8 +311,8 @@ describe('bow skin attack animation (archer draw instead of crossbow aim)', () =
     // the module-import GLB preloads (assets.ts loading contract).
     const manifestSrc = readFileSync(join(ROOT, 'src/render/characters/manifest.ts'), 'utf8');
     const hunterBlock = manifestSrc.slice(
-      manifestSrc.indexOf('player_hunter: {'),
-      manifestSrc.indexOf('player_rogue: {'),
+      manifestSrc.indexOf('player_archer: {'),
+      manifestSrc.indexOf('player_thief: {'),
     );
     expect(hunterBlock).toContain('bow_anims.glb');
     // Parse the shipped GLB's JSON chunk and assert the clips are inside
@@ -433,7 +433,7 @@ describe('eligible classes per skin type (store card chips)', () => {
     expect(eligibleClassesForWeaponSkinType('dagger')).toContain('thief');
     expect(eligibleClassesForWeaponSkinType('staff')).toContain('mage');
     expect(eligibleClassesForWeaponSkinType('wand')).toContain('mage');
-    expect(eligibleClassesForWeaponSkinType('mace')).toContain('paladin');
+    expect(eligibleClassesForWeaponSkinType('mace')).toContain('acolyte');
   });
 
   it('memoizes per type (static content)', () => {

@@ -3682,19 +3682,6 @@ function weaponIconUrl(id: string): string | null {
 const SKILL_ICON_DIR = '/ui/skills';
 export const ABILITY_IMAGE_IDS = new Set<string>([
   // paladin (CraftPix premium "RPG Paladin skill icons" pack)
-  'seal_of_righteousness',
-  'holy_light',
-  'devotion_aura',
-  'judgement',
-  'blessing_of_might',
-  'divine_protection',
-  'hammer_of_justice',
-  'lay_on_hands',
-  'flash_of_light',
-  'exorcism',
-  'consecration',
-  'righteous_fury',
-  'retribution_aura',
   // archer (CraftPix premium "RPG Archer skill icons" pack). The archer pack is
   // arrows/bows/traps only — the beast/aspect-animal abilities (aspect_of_the_hawk,
   // aspect_of_the_monkey, tame_beast, dismiss_pet, revive_pet) have no fitting art
@@ -3720,23 +3707,6 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'flash_heal',
   // warlock (CraftPix premium "RPG Warlock skill icons" pack + "RPG Demon skill icons"
   // pack for the summons/life_tap/searing_pain that the warlock pack couldn't cover).
-  'shadow_bolt',
-  'demon_skin',
-  'immolate',
-  'corruption',
-  'curse_of_agony',
-  'drain_life',
-  'fear',
-  'shadowburn',
-  'summon_imp',
-  'summon_voidwalker',
-  'summon_succubus',
-  'summon_felhunter',
-  'summon_felguard',
-  'summon_infernal',
-  'summon_doomguard',
-  'life_tap',
-  'searing_pain',
   // thief (CraftPix premium "RPG Thief skill icons" pack). garrote/sap/expose_armor/blind
   // have no fitting art (no garrote-wire, blackjack, armor-shred, or eye-powder) — procedural.
   'sinister_strike',
@@ -3884,44 +3854,8 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'perfect_moment',
   // druid (CraftPix premium "RPG Druid" pack). moonfire (no moon), bear_charge, pounce,
   // demoralizing_roar, hibernate (no sleep), insect_swarm have no fitting art — procedural.
-  'wrath',
-  'healing_touch',
-  'mark_of_the_wild',
-  'rejuvenation',
-  'thorns',
-  'entangling_roots',
-  'bear_form',
-  'maul',
-  'growl',
-  'cat_form',
-  'prowl',
-  'rake',
-  'claw',
-  'regrowth',
-  'ferocious_bite',
-  'barkskin',
-  'swipe',
-  'starfire',
-  'travel_form',
-  'enrage',
-  'bash',
-  'faerie_fire',
-  'dash',
-  'tigers_fury',
-  'rip',
   // shaman (no dedicated pack — matched against the two generic CraftPix "100 RPG/skill
   // icon" packs + earth-magician for the earth abilities; aeromancer went unused). 11/11.
-  'lightning_bolt',
-  'rockbiter_weapon',
-  'healing_wave',
-  'earth_shock',
-  'lightning_shield',
-  'flame_shock',
-  'flametongue_weapon',
-  'frost_shock',
-  'frostbrand_weapon',
-  'ghost_wolf',
-  'stormstrike',
   // cross-class fills from the two generic CraftPix "100 RPG/skill icon" packs — abilities
   // their own class pack couldn't cover but a generic icon fit. (swordman taunt completes swordman.)
   'aspect_of_the_hawk',
@@ -3931,9 +3865,6 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'sap',
   'expose_armor', // thief
   'taunt', // swordman
-  'moonfire',
-  'demoralizing_roar',
-  'insect_swarm', // druid
   // final bespoke fills from per-ability "_Missing_*" packs — completes every class.
   'aspect_of_the_monkey',
   'revive_pet', // archer
@@ -3942,9 +3873,6 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'blind', // thief
   'conjure_food',
   'polymorph', // mage
-  'bear_charge',
-  'hibernate',
-  'pounce', // druid
 ]);
 
 /** Static URL of an ability's image icon, or null if it uses a recipe. */
