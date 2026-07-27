@@ -103,20 +103,34 @@ Medians from the same database, and the ratio is the interesting column:
 | 21-25 | 264 | 160 | 0.61 | 22.4 |
 | 26-30 | 461 | 266 | 0.58 | 20.2 |
 
-**Job experience settles at about 0.62 of base**, drifting down from 0.8 at the
-very bottom. It is a separate authored number rather than a global percentage,
-but that ratio is the sane default to author against.
+Those medians are an ANCHOR and nothing more. The variance around them is the
+actual finding, and it is large enough to rule out deriving either number:
 
-The last column is the one that shapes play: experience per hit point RISES with
-level, roughly tripling from the first band to the sixth. A higher-level monster
-is not merely worth more, it is worth more PER SWING, which is why the correct
-answer in Ragnarok is always to fight the strongest thing you can still kill.
-A flat experience-per-effort curve would remove that decision entirely.
+    Job/Base ratio     p10 0.50 · median 0.63 · p90 0.86 · range 0.20 to 2.00
+
+    Base EXP among monsters of the SAME level
+      level 10   6 monsters    3 to 100     a 33x spread
+      level 15   7 monsters    1 to  84     an 84x spread
+      level 25   9 monsters  233 to 465
+
+**Two monsters of one level can be worth eighty times different experience**,
+because experience is priced against how hard the thing is to KILL, not against
+the number on it. A level-15 creature that dies to one hit and one that takes
+three minutes are not the same reward, and Ragnarok says so directly.
+
+That is fatal to the model in the tree today: `mobXpBase(mobLevel)` divides the
+level's own curve, so every monster of a level is worth exactly the same and
+nothing a designer does can change it. Both numbers have to be authored per
+monster. Use the band medians to start from and expect to land far off them.
+
+The last column of the table shapes play in a different way: experience per hit
+point RISES with level, roughly tripling across these six bands. A higher-level
+monster is worth more PER SWING, not merely more, which is why the right answer
+in Ragnarok is always to fight the strongest thing you can still kill.
 
 **Author `jobExp` in this pass even though nothing reads it yet.** Job levels are
 `D5` and do not exist; the field will sit unused. Authoring it now costs one more
-number per record and saves walking all thirty-one records again later, and the
-0.62 ratio above is not information we will have more of by waiting.
+number per record and saves walking all thirty-one records again later.
 
 ## Assigning the three classifications
 
@@ -168,10 +182,7 @@ already exists as a whole subsystem (`src/sim/professions/crafting.ts` against
 |---|---|---|---|
 | **material** | one or two per AREA, from most things in it | common, above 50% | **this pass** |
 | **rare** | a finished piece, from a specific monster | 0.1% to a few percent | `B5` |
-| **card** | the monster's own card | 0.01% to 0.05% | `B4` |
-
-The three exist to do different jobs and dropping any of them collapses the
-economy into something duller.
+| **card** | the monster's own card | see below | `B4` |
 
 **Materials are the floor.** An area's material is what makes the area worth
 standing in, and taking it to an NPC to craft that area's gear is what turns
@@ -182,14 +193,38 @@ no source in the world at all any more. Scattering 130 items across drop tables
 would turn every table into noise; making them craft OUTPUTS is a list, and each
 one lands somewhere on purpose.
 
-**Rare drops and cards are the ceiling**, and the reason not to stop at the floor.
-A purely deterministic material-to-craft loop has no moment in it. Ragnarok's drop
-rates are deliberately spread across four orders of magnitude: 12% of its drops
-are above 50% and 22% are below 0.1%, which is the same table holding both the
-thing you always get and the thing you tell people about.
+**Rare drops are the ceiling**, and the reason not to stop at the floor. A purely
+deterministic material-to-craft loop has no moment in it. Ragnarok's drop rates
+are deliberately spread across four orders of magnitude: 12% of its drops are
+above 50% and 22% are below 0.1%, which is the same table holding both the thing
+you always get and the thing you tell people about.
 
-**Not every monster gets a card, and the rate is brutal.** Only 52% of
-pre-renewal monsters carry one, at a median rate of 0.01%. That rarity IS the
-system: a roster where all thirty-one drop cards at a comfortable rate is one a
-player completes in a week, after which the cards mean nothing. About half the
-roster, at 0.01% to 0.05%, keeps a card an event.
+### Cards follow SpiritVale, not Ragnarok, and that is a real choice
+
+The two designs are not variations on each other, so this is recorded as a
+decision rather than a number.
+
+| | Ragnarok pre-renewal | SpiritVale, and OURS |
+|---|---|---|
+| card from a normal monster | 0.01% | **1 to 5%** |
+| from an elite | - | 10 to 15% |
+| from a boss | - | **25 to 50%**, never below Uncommon |
+| how you get a better one | you do not, you find it | **combine 5 of a rarity into 1 of the next, always succeeds** |
+| carries a card at all | 52% of monsters | to be decided per monster |
+
+Ragnarok makes a card a lottery ticket: one drop at one in ten thousand, and the
+card you find defines a build. SpiritVale makes it a **currency** you accumulate
+and upgrade through a forge, with rarity tiers doing the work rarity used to.
+
+Taking SpiritVale's numbers means **a card stops being a moment you remember and
+becomes a progression track you advance**. That is a legitimate design and it is
+the one chosen, but it is not the Ragnarok feel and should not be described as
+one later.
+
+Two consequences to carry forward:
+
+- The rarity tiers and the forge are the system. Without them, 1 to 5% drops are
+  simply cards made worthless; the tiers are what absorbs the volume.
+- **SpiritVale unlocks its forge with a level-20 quest, and this project deleted
+  the quest system.** The unlock needs another gate: a plain level requirement,
+  or open from the start. Not yet decided.
