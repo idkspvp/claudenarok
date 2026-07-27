@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { emptyModifiers } from '../src/sim/content/talents';
+import { emptyModifiers } from '../src/sim/player_modifiers';
 import { abilityEffectText } from '../src/ui/hud';
 
 describe('mage personal barrier tooltip', () => {

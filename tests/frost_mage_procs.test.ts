@@ -10,11 +10,6 @@ import {
   WINTERS_CHILL_SPENDERS,
 } from '../src/sim/combat/frost_mage';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  type TalentAllocation,
-} from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
@@ -42,7 +37,6 @@ function makeSim(opts?: { spec?: string | null; seed?: number }): { sim: TestSim
   }) as unknown as TestSim;
   sim.setPlayerLevel(20);
   const spec = opts?.spec === undefined ? 'frost' : opts.spec;
-  if (spec !== null) expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   return { sim, p: sim.player };
 }
@@ -104,11 +98,8 @@ function pushAura(e: Entity, aura: Partial<Aura> & Pick<Aura, 'id' | 'name' | 'k
   } as Aura);
 }
 
-const alloc = (spec: string | null): TalentAllocation => ({ ...emptyAllocation(), spec });
-const knownIds = (spec: string | null): Set<string> =>
-  new Set(
-    abilitiesKnownAt('mage', 20, computeTalentModifiers('mage', alloc(spec))).map((k) => k.def.id),
-  );
+const knownIds = (): Set<string> =>
+  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('frost kit content defs', () => {
   it('pins Ice Lance: instant, cheap, no cooldown, frost-gated', () => {
@@ -117,7 +108,6 @@ describe('frost kit content defs', () => {
     expect(def.name).toBe('Ice Lance');
     expect(def.class).toBe('mage');
     expect(def.learnLevel).toBe(5);
-    expect(def.specs).toEqual(['frost']);
     expect(def.castTime).toBe(0);
     expect(def.cooldown).toBe(0);
     expect(def.school).toBe('frost');
@@ -130,7 +120,6 @@ describe('frost kit content defs', () => {
     expect(def).toBeDefined();
     expect(def.name).toBe('Winterlash');
     expect(def.learnLevel).toBe(8);
-    expect(def.specs).toEqual(['frost']);
     expect(def.castTime).toBe(1.5);
     expect(def.cooldown).toBe(10);
     expect(def.school).toBe('frost');
@@ -149,7 +138,6 @@ describe('frost kit content defs', () => {
       const def = ABILITIES[id];
       expect(def, id).toBeDefined();
       expect(def.passive, id).toBe(true);
-      expect(def.specs, id).toEqual(['frost']);
       expect(def.effects, id).toEqual([]);
       expect(def.learnLevel, id).toBe(lvl);
     }
@@ -173,17 +161,13 @@ describe('frost kit content defs', () => {
   });
 });
 
-describe('spec gating', () => {
-  it('committed frost knows the kit; fire/arcane/no-spec interactions', () => {
-    const frost = knownIds('frost');
+// Specs are retired (Phase D0): the frost kit used to be gated behind the
+// committed spec and is now simply part of the mage's level-20 list.
+describe('kit membership', () => {
+  it('a level-20 mage knows the whole frost kit', () => {
+    const ids = knownIds();
     for (const id of ['ice_lance', 'flurry', 'fingers_of_frost', 'brain_freeze', 'shatter']) {
-      expect(frost.has(id), id).toBe(true);
-    }
-    const fire = knownIds('fire');
-    const arcane = knownIds('arcane');
-    for (const id of ['ice_lance', 'flurry', 'fingers_of_frost', 'brain_freeze', 'shatter']) {
-      expect(fire.has(id), id).toBe(false);
-      expect(arcane.has(id), id).toBe(false);
+      expect(ids.has(id), id).toBe(true);
     }
   });
 });

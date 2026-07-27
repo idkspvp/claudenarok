@@ -35,8 +35,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 422,
-      "state": "0befa239",
-      "events": "9addfc4f",
+      "state": "26608bcb",
+      "events": "3779fbd7",
       "rng": {
         "draws": 2,
         "digest": "68f9f3dd"
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 422,
-      "state": "98665d36",
+      "state": "6e1c389a",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 422,
-      "state": "c46b09dc",
+      "state": "d991d02c",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "f5154b95",
+      "state": "3a17f759",
       "events": "5636db41",
       "rng": {
         "draws": 2,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 422,
-      "state": "36225bc9",
+      "state": "639bdf85",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 422,
-      "state": "37ab6079",
+      "state": "9ce92a3b",
       "events": "b1e513e5",
       "rng": {
         "draws": 2,
@@ -101,7 +101,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 422,
-      "state": "b78221c9",
+      "state": "3b7f5a07",
       "events": "5c5a36ff",
       "rng": {
         "draws": 4,
@@ -110,7 +110,6 @@
       "label": "warlock-fear",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -158,10 +157,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -187,7 +182,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -195,14 +190,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -286,13 +276,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -375,13 +361,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -469,13 +451,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -560,13 +538,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -650,9 +624,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -713,12 +684,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "templateId": "warrior",
           "weapon": {
@@ -1110,7 +1081,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 422,
-      "state": "47ae3fdc",
+      "state": "be5b9d00",
       "events": "22113634",
       "rng": {
         "draws": 4,
@@ -1121,7 +1092,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "afdc4bd3",
+      "state": "1820b86f",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -1132,7 +1103,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 422,
-      "state": "0c9f2270",
+      "state": "54fa08da",
       "events": "741638a5",
       "rng": {
         "draws": 36,
@@ -1143,7 +1114,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 422,
-      "state": "ed2cc44c",
+      "state": "dc100944",
       "events": "741638a5",
       "rng": {
         "draws": 50,
@@ -1154,7 +1125,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 422,
-      "state": "9b89a54a",
+      "state": "dc964728",
       "events": "741638a5",
       "rng": {
         "draws": 66,
@@ -1165,7 +1136,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "d75b4ece",
+      "state": "9d6559a6",
       "events": "741638a5",
       "rng": {
         "draws": 80,
@@ -1176,7 +1147,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 422,
-      "state": "f2f9a996",
+      "state": "96093796",
       "events": "741638a5",
       "rng": {
         "draws": 101,
@@ -1187,7 +1158,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 422,
-      "state": "276dab9c",
+      "state": "418962de",
       "events": "741638a5",
       "rng": {
         "draws": 127,
@@ -1198,7 +1169,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 422,
-      "state": "fa9bc029",
+      "state": "2dd869b9",
       "events": "741638a5",
       "rng": {
         "draws": 152,
@@ -1209,7 +1180,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 422,
-      "state": "2c6a34c9",
+      "state": "c417628d",
       "events": "741638a5",
       "rng": {
         "draws": 174,
@@ -1220,7 +1191,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 422,
-      "state": "d5c1984a",
+      "state": "281b67ae",
       "events": "741638a5",
       "rng": {
         "draws": 203,
@@ -1231,7 +1202,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 422,
-      "state": "b19977b4",
+      "state": "498da492",
       "events": "741638a5",
       "rng": {
         "draws": 230,
@@ -1242,7 +1213,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 422,
-      "state": "d0b9d762",
+      "state": "88735d62",
       "events": "741638a5",
       "rng": {
         "draws": 253,
@@ -1253,7 +1224,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 422,
-      "state": "342e3ad4",
+      "state": "34c48f86",
       "events": "741638a5",
       "rng": {
         "draws": 276,
@@ -1264,7 +1235,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 422,
-      "state": "5f41e2ba",
+      "state": "1f325b7e",
       "events": "741638a5",
       "rng": {
         "draws": 304,
@@ -1275,7 +1246,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 422,
-      "state": "6d26db01",
+      "state": "35cb2a87",
       "events": "741638a5",
       "rng": {
         "draws": 328,
@@ -1286,7 +1257,7 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 422,
-      "state": "17702d36",
+      "state": "1def1630",
       "events": "741638a5",
       "rng": {
         "draws": 360,
@@ -1297,7 +1268,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 422,
-      "state": "10452512",
+      "state": "db319bde",
       "events": "741638a5",
       "rng": {
         "draws": 388,
@@ -1308,7 +1279,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 422,
-      "state": "9641bf7a",
+      "state": "f713d05c",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -1319,7 +1290,7 @@
       "tick": 130,
       "time": 6.5,
       "nextId": 422,
-      "state": "398a5bde",
+      "state": "47ab8e18",
       "events": "741638a5",
       "rng": {
         "draws": 435,
@@ -1330,7 +1301,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 423,
-      "state": "d66ee5a0",
+      "state": "2b3782b0",
       "events": "c09e532d",
       "rng": {
         "draws": 445,
@@ -1339,7 +1310,6 @@
       "label": "warlock-summon",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1387,10 +1357,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -1416,7 +1382,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -1424,14 +1390,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1515,13 +1476,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1604,13 +1561,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1698,13 +1651,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1789,13 +1738,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1879,9 +1824,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -1942,12 +1884,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "templateId": "warrior",
           "weapon": {
@@ -2339,7 +2281,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 424,
-      "state": "5f516e67",
+      "state": "05645eb0",
       "events": "b143e666",
       "rng": {
         "draws": 446,
@@ -2348,7 +2290,6 @@
       "label": "warrior-sunder",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2396,10 +2337,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -2425,7 +2362,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -2433,14 +2370,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2524,13 +2456,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2613,13 +2541,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2707,13 +2631,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2798,13 +2718,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2888,9 +2804,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -2953,12 +2866,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -3408,7 +3321,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {
@@ -3423,8 +3336,8 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 426,
-      "state": "f8270db1",
-      "events": "5fd29751",
+      "state": "8495bc1c",
+      "events": "5a654e22",
       "rng": {
         "draws": 448,
         "digest": "7a0cf6db"
@@ -3432,7 +3345,6 @@
       "label": "mage-arcane-explosion",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3480,10 +3392,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -3509,7 +3417,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -3517,14 +3425,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3612,14 +3515,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {},
-            "spec": "arcane"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3702,13 +3600,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3796,13 +3690,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3887,13 +3777,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -3977,9 +3863,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -4042,12 +3925,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -4070,14 +3953,14 @@
           "flee": 26,
           "gcdRemaining": 1.5,
           "hit": 40,
-          "hp": 411,
+          "hp": 50000,
           "id": 416,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 411,
-          "maxResource": 1586,
+          "maxHp": 50000,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4089,7 +3972,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1526,
+          "resource": 1450,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4497,7 +4380,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {
@@ -4632,7 +4515,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 427,
-      "state": "ebcac242",
+      "state": "c8bde8c7",
       "events": "2a6c3af3",
       "rng": {
         "draws": 455,
@@ -4641,7 +4524,6 @@
       "label": "rogue-combo-finishers",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -4689,10 +4571,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -4718,7 +4596,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -4726,14 +4604,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -4821,14 +4694,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {},
-            "spec": "arcane"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -4915,13 +4783,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -5009,13 +4873,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -5100,13 +4960,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -5190,9 +5046,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -5255,12 +5108,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -5283,14 +5136,14 @@
           "flee": 26,
           "gcdRemaining": 1.5,
           "hit": 40,
-          "hp": 411,
+          "hp": 50000,
           "id": 416,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 411,
-          "maxResource": 1586,
+          "maxHp": 50000,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -5302,7 +5155,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1526,
+          "resource": 1450,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -5718,7 +5571,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {
@@ -5924,7 +5777,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 428,
-      "state": "16b9edb8",
+      "state": "4750987f",
       "events": "62ad0077",
       "rng": {
         "draws": 456,
@@ -5933,7 +5786,6 @@
       "label": "paladin-judge-consecrate",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -5981,10 +5833,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -6010,7 +5858,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -6018,14 +5866,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -6113,14 +5956,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {},
-            "spec": "arcane"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -6207,13 +6045,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -6305,13 +6139,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -6396,13 +6226,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -6486,9 +6312,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -6551,12 +6374,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -6579,14 +6402,14 @@
           "flee": 26,
           "gcdRemaining": 1.5,
           "hit": 40,
-          "hp": 411,
+          "hp": 50000,
           "id": 416,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 411,
-          "maxResource": 1586,
+          "maxHp": 50000,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6598,7 +6421,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1526,
+          "resource": 1450,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -7039,7 +6862,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {
@@ -7302,7 +7125,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "32cf2002",
+      "state": "b43e99a1",
       "events": "a867c74e",
       "rng": {
         "draws": 456,
@@ -7311,7 +7134,6 @@
       "label": "druid-moonfire-forms",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7359,10 +7181,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -7388,7 +7206,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -7396,14 +7214,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7491,14 +7304,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {},
-            "spec": "arcane"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7585,13 +7393,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7683,13 +7487,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7774,13 +7574,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -7864,9 +7660,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -7929,12 +7722,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -7957,14 +7750,14 @@
           "flee": 26,
           "gcdRemaining": 1.5,
           "hit": 40,
-          "hp": 411,
+          "hp": 50000,
           "id": 416,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 411,
-          "maxResource": 1586,
+          "maxHp": 50000,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7976,7 +7769,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1526,
+          "resource": 1450,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -8430,7 +8223,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {
@@ -8740,7 +8533,7 @@
       "tick": 133,
       "time": 6.65,
       "nextId": 429,
-      "state": "32cf2002",
+      "state": "b43e99a1",
       "events": "741638a5",
       "rng": {
         "draws": 456,
@@ -8749,7 +8542,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -8797,10 +8589,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -8826,7 +8614,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 8,
             "dex": 11,
@@ -8834,14 +8622,9 @@
             "str": 20,
             "vit": 15
           },
-          "talents": {
-            "rows": {},
-            "spec": "prot"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -8929,14 +8712,9 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {},
-            "spec": "arcane"
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -9023,13 +8801,9 @@
             "str": 15,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -9121,13 +8895,9 @@
             "str": 19,
             "vit": 18
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -9212,13 +8982,9 @@
             "str": 12,
             "vit": 12
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -9302,9 +9068,6 @@
             "luk": 4,
             "vit": 9
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -9367,12 +9130,12 @@
           "spellPower": 1,
           "stats": {
             "agi": 9,
-            "armor": 435,
+            "armor": 366,
             "dex": 12,
             "int": 1,
             "luk": 4,
             "str": 21,
-            "vit": 24
+            "vit": 17
           },
           "targetId": 423,
           "templateId": "warrior",
@@ -9395,14 +9158,14 @@
           "flee": 26,
           "gcdRemaining": 1.5,
           "hit": 40,
-          "hp": 411,
+          "hp": 50000,
           "id": 416,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 411,
-          "maxResource": 1586,
+          "maxHp": 50000,
+          "maxResource": 1510,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9414,7 +9177,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1526,
+          "resource": 1450,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -9868,7 +9631,7 @@
           "threat": [
             [
               415,
-              170
+              131
             ]
           ],
           "weapon": {

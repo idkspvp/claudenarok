@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { frostIcicleCharges, ICICLE_MAX } from '../src/sim/combat/frost_mage';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  type TalentAllocation,
-} from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
@@ -31,7 +26,6 @@ function makeSim(opts?: { spec?: string | null; seed?: number }): { sim: TestSim
   }) as unknown as TestSim;
   sim.setPlayerLevel(20);
   const spec = opts?.spec === undefined ? 'frost' : opts.spec;
-  if (spec !== null) expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   return { sim, p: sim.player };
 }
@@ -87,18 +81,14 @@ function pushAura(e: Entity, aura: Partial<Aura> & Pick<Aura, 'id' | 'name' | 'k
   } as Aura);
 }
 
-const alloc = (spec: string | null): TalentAllocation => ({ ...emptyAllocation(), spec });
-const knownIds = (spec: string | null): Set<string> =>
-  new Set(
-    abilitiesKnownAt('mage', 20, computeTalentModifiers('mage', alloc(spec))).map((k) => k.def.id),
-  );
+const knownIds = (): Set<string> =>
+  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('Glacial Spike content def', () => {
   it('pins the slow, heavy, icicle-gated spender', () => {
     const def = ABILITIES.glacial_spike;
     expect(def).toBeDefined();
     expect(def.name).toBe('Glacial Spike');
-    expect(def.specs).toEqual(['frost']);
     // Slow and powerful: a long cast, no cooldown (the Icicle gate is the limiter).
     expect(def.castTime).toBeGreaterThanOrEqual(2.5);
     expect(def.cooldown).toBe(0);
@@ -113,10 +103,9 @@ describe('Glacial Spike content def', () => {
     expect(types).toContain('root');
   });
 
-  it('is a frost-only ability', () => {
-    expect(knownIds('frost').has('glacial_spike')).toBe(true);
-    expect(knownIds('fire').has('glacial_spike')).toBe(false);
-    expect(knownIds(null).has('glacial_spike')).toBe(false);
+  // Specs are retired (Phase D0): every mage learns it.
+  it('is on the level-20 mage kit', () => {
+    expect(knownIds().has('glacial_spike')).toBe(true);
   });
 });
 

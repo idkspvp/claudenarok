@@ -1,7 +1,7 @@
 import { critRateFrom } from './combat/crit';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
-import type { TalentModifiers } from './content/talents';
+import type { PlayerModifiers } from './player_modifiers';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
@@ -326,7 +326,7 @@ export function recalcPlayerStats(
   e: Entity,
   cls: PlayerClass,
   equipment: PlayerEquipment,
-  mods: TalentModifiers | undefined,
+  mods: PlayerModifiers | undefined,
   equipmentInstance: Partial<Record<EquipSlot, ItemInstancePayload>>,
   // Required, deliberately not defaulted. Every attribute a character has comes
   // from here now, so a caller that forgets it does not get a small inaccuracy:
@@ -788,7 +788,7 @@ export function characterDerivedStats(
   cls: PlayerClass,
   level: number,
   equipment: PlayerEquipment,
-  mods?: TalentModifiers,
+  mods?: PlayerModifiers,
   equipmentInstance?: Partial<Record<EquipSlot, ItemInstancePayload>>,
   // The character's stored allocation. Omitting it does NOT mean "no allocation":
   // it means the sheet would report 1 in every attribute for a character who is

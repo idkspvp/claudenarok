@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "99369606",
+      "state": "949274be",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -24,7 +24,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -81,9 +80,6 @@
             "luk": 1,
             "str": 3,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -153,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "09c7babb",
+      "state": "4470eecf",
       "events": "53c735d9",
       "rng": {
         "draws": 11,
@@ -164,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "592e48d8",
+      "state": "7a4e9322",
       "events": "741638a5",
       "rng": {
         "draws": 11,
@@ -175,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "be437067",
+      "state": "7af2b18b",
       "events": "0fa4be61",
       "rng": {
         "draws": 102,
@@ -186,7 +182,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "060d7d66",
+      "state": "04208f4c",
       "events": "741638a5",
       "rng": {
         "draws": 201,
@@ -197,7 +193,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "70a8cbe2",
+      "state": "5bbb3850",
       "events": "a5cc10db",
       "rng": {
         "draws": 306,
@@ -208,7 +204,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "7b8c39cb",
+      "state": "ac4d7f7f",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -219,7 +215,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "7b8c39cb",
+      "state": "ac4d7f7f",
       "events": "741638a5",
       "rng": {
         "draws": 408,
@@ -228,7 +224,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -309,9 +304,6 @@
             "luk": 2,
             "str": 6,
             "vit": 5
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }

@@ -20,8 +20,6 @@ describe('Wildfang Rally never stacks with itself', () => {
     const b = sim.addPlayer('hunter', 'HunterB');
     for (const pid of [a, b]) {
       sim.setPlayerLevel(20, pid);
-      expect(sim.setSpec('beast_mastery', pid)).toBe(true);
-      expect(sim.selectTalentRow(20, 'hun_r20_aspect_of_the_wild', pid)).toBe(true);
       const p = sim.entities.get(pid) as Entity;
       p.resource = p.maxResource;
     }

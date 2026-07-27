@@ -16,7 +16,6 @@ import type { Entity } from '../src/sim/types';
 function mage(spec: 'fire' | 'frost'): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   const p = sim.player;
   p.hp = p.maxHp; // full, real level-20 pool (recalc keeps maxHp stable across ticks)

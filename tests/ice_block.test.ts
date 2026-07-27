@@ -10,7 +10,6 @@ import type { Aura, Entity } from '../src/sim/types';
 function rigMage(spec: 'frost' | 'fire' | 'arcane' | null = null) {
   const sim = new Sim({ seed: 17, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  if (spec) expect(sim.setSpec(spec)).toBe(true); // Ice Block is base kit, no talent needed
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;

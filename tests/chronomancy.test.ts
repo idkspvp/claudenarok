@@ -6,7 +6,6 @@
 // fire/frost books.
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation, TALENTS } from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -15,16 +14,14 @@ import type { Entity, SimEvent } from '../src/sim/types';
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
   return { sim, p };
 }
 
-function knownIds(spec: 'arcane' | 'fire' | 'frost' | null, level = 20): string[] {
-  const mods = computeTalentModifiers('mage', { ...emptyAllocation(), spec } as never);
-  return abilitiesKnownAt('mage', level, mods).map((k) => k.def.id);
+function knownIds(level = 20): string[] {
+  return abilitiesKnownAt('mage', level).map((k) => k.def.id);
 }
 
 function collect(sim: Sim, seconds: number): SimEvent[] {
@@ -46,90 +43,24 @@ function addHostile(sim: Sim, dist = 6): Entity {
   return mob;
 }
 
-describe('the spec card', () => {
-  it('Chronomancy is the healer, internal id still arcane', () => {
-    const spec = TALENTS.mage?.specs.find((s) => s.id === 'arcane');
-    expect(spec?.name).toBe('Chronomancy');
-    expect(spec?.role).toBe('healer');
-    expect(spec?.signature).toBe('temporal_mend');
-    expect(spec?.mastery?.name).toBe('Chronoweave');
-  });
-});
-
-describe('gating', () => {
-  it('committing Chronomancy grants the healer kit; fire and frost never see it', () => {
-    const chrono = knownIds('arcane');
-    expect(chrono).toContain('temporal_mend');
-    expect(chrono).toContain('temporal_barrier');
-    for (const spec of ['fire', 'frost'] as const) {
-      const book = knownIds(spec);
-      expect(book, spec).not.toContain('temporal_mend');
-      expect(book, spec).not.toContain('temporal_barrier');
-    }
-  });
-
-  it('the healer keeps its arcane kit + shared utility and loses the DPS nukes', () => {
-    const chrono = knownIds('arcane');
-    for (const kept of [
-      // The arcane school is Chronomancer-exclusive now (owner spec split 2026-07-14).
+// The spec card and the spec-gating block that stood here are retired with the
+// specializations (Phase D0). A mage now learns every mage ability at its learn
+// level, so what remains to pin is membership, not exclusivity.
+describe('kit membership', () => {
+  it('a level-20 mage knows the Chronomancy kit alongside the fire and frost books', () => {
+    const book = knownIds();
+    for (const id of [
+      'temporal_mend',
+      'temporal_barrier',
       'arcane_missiles',
       'arcane_explosion',
-      'arcane_intellect',
-      'polymorph',
-      'blink',
-      'fireball',
-      'frostbolt',
-      'frost_nova',
-      'conjure_food',
-      'conjure_water',
-    ]) {
-      expect(chrono, kept).toContain(kept);
-    }
-    // frost_armor is Frost identity (excludeSpecs hand-off, like Reaver Strike).
-    for (const gone of [
       'fire_blast',
-      'scorch',
       'pyroblast',
-      'flamestrike',
       'ice_barrier',
       'frost_armor',
     ]) {
-      expect(chrono, gone).not.toContain(gone);
+      expect(book, id).toContain(id);
     }
-  });
-
-  it('the owner spec split (2026-07-14): fire keeps the fire book, frost sheds it', () => {
-    const fire = knownIds('fire');
-    for (const kept of ['fire_blast', 'scorch', 'pyroblast', 'flamestrike', 'blazing_barrier']) {
-      expect(fire, `fire:${kept}`).toContain(kept);
-    }
-    // Fire hands off the starter frost armor on commit (excludeSpecs), and its
-    // barrier is Blazing Barrier at the spec pick: no shared Frostveil.
-    expect(fire, 'fire:frost_armor').not.toContain('frost_armor');
-    expect(fire, 'fire:ice_barrier').not.toContain('ice_barrier');
-    const frost = knownIds('frost');
-    // Frost keeps its own barrier + starter armor, but the fire nukes are
-    // fire-only now (Lluvia de Ascuas / Escaldar / Lanza Ignea / Llamarada).
-    expect(frost, 'frost:ice_barrier').toContain('ice_barrier');
-    expect(frost, 'frost:frost_armor').toContain('frost_armor');
-    for (const gone of ['fire_blast', 'scorch', 'pyroblast', 'flamestrike']) {
-      expect(frost, `frost:${gone}`).not.toContain(gone);
-    }
-    // The arcane school stays Chronomancer-exclusive for both DPS specs.
-    for (const spec of ['fire', 'frost'] as const) {
-      for (const gone of ['arcane_missiles', 'arcane_explosion']) {
-        expect(knownIds(spec), `${spec}:${gone}`).not.toContain(gone);
-      }
-    }
-  });
-
-  it('swapping the healer to a DPS spec swaps the exclusive kit both ways', () => {
-    const { sim } = chronoMage();
-    expect(sim.resolvedAbility('temporal_mend')).not.toBeNull();
-    expect(sim.setSpec('fire')).toBe(true);
-    expect(sim.resolvedAbility('temporal_mend')).toBeNull();
-    expect(sim.resolvedAbility('temporal_barrier')).toBeNull();
-    expect(sim.resolvedAbility('fire_blast')).not.toBeNull();
   });
 });
 
@@ -284,29 +215,5 @@ describe('Temporal Barrier', () => {
   });
 });
 
-describe('persistence and loadouts', () => {
-  it('the arcane spec id survives a serialize/addPlayer round-trip', () => {
-    const { sim } = chronoMage();
-    const state = sim.serializeCharacter(sim.playerId);
-    expect(state?.talents?.spec).toBe('arcane');
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
-    const pid = sim2.addPlayer('mage', 'Persistida', { state: state ?? undefined });
-    sim2.tick();
-    const meta = (
-      sim2 as unknown as { players: Map<number, { talents: { spec: string | null } }> }
-    ).players.get(pid);
-    expect(meta?.talents.spec).toBe('arcane');
-    expect(sim2.resolvedAbility('temporal_mend', pid)).not.toBeNull();
-    expect(sim2.resolvedAbility('temporal_barrier', pid)).not.toBeNull();
-  });
-
-  it('a saved loadout restores the healer spec', () => {
-    const { sim } = chronoMage();
-    const idx = sim.saveLoadout('sanadora', []);
-    expect(idx).toBeGreaterThanOrEqual(0);
-    expect(sim.setSpec('fire')).toBe(true);
-    expect(sim.resolvedAbility('temporal_mend')).toBeNull();
-    expect(sim.switchLoadout(idx)).toBe(true);
-    expect(sim.resolvedAbility('temporal_mend')).not.toBeNull();
-  });
-});
+// The persistence block that stood here round-tripped the committed spec id and
+// a saved loadout; both went with the talent system (Phase D0).

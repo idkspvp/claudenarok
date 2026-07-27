@@ -16,7 +16,6 @@ type Ev = { type?: string; ability?: string | null; amount?: number; text?: stri
 function setup(): { sim: Sim; p: Entity; events: Ev[] } {
   const sim = new Sim({ seed: 7, playerClass: 'paladin', autoEquip: true });
   sim.setPlayerLevel(14);
-  expect(sim.applyTalents({ spec: null, rows: { 14: 'pal_r14_swift_verdicts' } })).toBe(true);
   const p = sim.player;
   const mob = createMob(20_000, MOBS.forest_wolf, 5, {
     x: p.pos.x + 3,

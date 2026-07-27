@@ -16,7 +16,6 @@ type TestSim = Sim & { nextId: number; addEntity(entity: Entity): void };
 function makeFuryWarrior(seed = 7): { sim: TestSim; p: Entity; mob: Entity } {
   const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true }) as TestSim;
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('fury')).toBe(true);
   const p = sim.player;
   const mob = createMob(sim.nextId++, MOBS.forest_wolf, 1, {
     x: p.pos.x,

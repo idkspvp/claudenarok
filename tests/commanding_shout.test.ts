@@ -42,7 +42,6 @@ describe('Valor Roar', () => {
     const second = sim.addPlayer('warrior', 'Second');
     for (const pid of [first, second]) {
       sim.setPlayerLevel(20, pid);
-      expect(sim.setSpec('prot', pid)).toBe(true);
     }
     sim.partyInvite(second, first);
     sim.partyAccept(second);

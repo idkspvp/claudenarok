@@ -34,7 +34,7 @@ function shiftToBear(sim: Sim, pid: number): void {
     e,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );

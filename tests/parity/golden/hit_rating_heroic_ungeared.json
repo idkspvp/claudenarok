@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "fce7b0d9",
+      "state": "b59d6b23",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -23,7 +23,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -78,9 +77,6 @@
             "int": 9,
             "luk": 1,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -149,7 +145,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "cf60d0de",
+      "state": "36f2638e",
       "events": "7c87282e",
       "rng": {
         "draws": 4,
@@ -160,7 +156,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "f0bed7fc",
+      "state": "ad3182ee",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -171,7 +167,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "0fbd9057",
+      "state": "3c5fa643",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -182,7 +178,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "a31df666",
+      "state": "42003cd8",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -193,7 +189,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "697d1dcd",
+      "state": "b6dee521",
       "events": "ea586f8d",
       "rng": {
         "draws": 50,
@@ -204,7 +200,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "74a44a81",
+      "state": "dfe759b5",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -215,7 +211,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "1ab9aa28",
+      "state": "c86875d6",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -226,7 +222,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "5cf81cb4",
+      "state": "c177aac2",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -237,7 +233,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "f8b85943",
+      "state": "7ff9147f",
       "events": "2238491a",
       "rng": {
         "draws": 248,
@@ -248,7 +244,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "9c4babbc",
+      "state": "3fd7df82",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -259,7 +255,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "40d4f007",
+      "state": "ee282903",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -270,7 +266,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "d79a8622",
+      "state": "7539c7a0",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -281,7 +277,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "d79a8622",
+      "state": "7539c7a0",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -290,7 +286,6 @@
       "label": "fireball-landed",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -381,9 +376,6 @@
             "int": 21,
             "luk": 4,
             "vit": 9
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -529,7 +521,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "d79a8622",
+      "state": "7539c7a0",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -538,7 +530,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -629,9 +620,6 @@
             "int": 21,
             "luk": 4,
             "vit": 9
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }

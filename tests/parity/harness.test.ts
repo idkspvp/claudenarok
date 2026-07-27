@@ -178,10 +178,10 @@ describe('exclude lists are pinned and real (anti-loosening guard)', () => {
       'name',
       'pendingSkinCatalog',
       'pendingSkinItemId',
+      'mods',
       'pendingSkinRank',
       'skin',
       'skinCatalog',
-      'talentMods',
       'wireRev',
     ]);
   });

@@ -6,7 +6,6 @@ import { Sim } from '../src/sim/sim';
 function makePriest(): { sim: Sim; p: any } {
   const sim = new Sim({ seed: 7, playerClass: 'priest', autoEquip: true });
   sim.setPlayerLevel(20);
-  sim.setSpec('shadow'); // Shadowform is the Shadow spec signature
   const p = sim.entities.get(sim.playerId) as any;
   p.resource = p.maxResource;
   return { sim, p };

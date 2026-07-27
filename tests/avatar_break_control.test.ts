@@ -14,7 +14,6 @@ import type { Aura, Entity } from '../src/sim/types';
 function rigWarrior() {
   const sim = new Sim({ seed: 17, playerClass: 'warrior', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.selectTalentRow(17, 'war_row_avatar')).toBe(true); // Avatar is a tier-5 row grant
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -65,7 +64,6 @@ describe('Avatar breaks enemy control (usableWhileControlled + source-scoped bre
   it('activates at level 17 by immediately clearing fear and preserving the damage buff', () => {
     const sim = new Sim({ seed: 17, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(17);
-    expect(sim.selectTalentRow(17, 'war_row_avatar')).toBe(true);
     sim.tick();
     const p = sim.player;
     const mob = addTrashMob(sim);

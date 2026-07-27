@@ -53,12 +53,6 @@ import {
 import type { PetState, PlayerMeta } from '../src/sim/sim';
 import { MAX_CHAT_MESSAGE_LEN, Sim } from '../src/sim/sim';
 import type { VcMatch } from '../src/sim/social/vale_cup';
-import {
-  parseTalentAllocation,
-  parseTalentLoadoutIndex,
-  parseTalentOptionId,
-  parseTalentRowLevel,
-} from '../src/sim/talent_allocation_input';
 import { stealthDetectionRadius, threatEntries } from '../src/sim/threat';
 import {
   ALL_EQUIP_SLOTS,
@@ -550,13 +544,6 @@ const HEAVY_SELF_CMDS = new Set<string>([
   'harvestCorpse',
   'pickup',
   'interact',
-  'applyTalents',
-  'respec',
-  'setSpec',
-  'selectTalentRow',
-  'saveLoadout',
-  'switchLoadout',
-  'deleteLoadout',
   'change_skin',
   'unequip_mech_chroma',
   'claim_event_skin',
@@ -4816,15 +4803,6 @@ export class GameServer {
         sim.prestige(pid);
         break;
 
-      // Talents & Specializations, every allocation re-validated in the Sim.
-      case 'applyTalents': {
-        const alloc = parseTalentAllocation(msg.alloc);
-        if (alloc) sim.applyTalents(alloc, pid);
-        break;
-      }
-      case 'respec':
-        sim.respec(pid);
-        break;
       // Status points. The client stages nothing: it names an attribute and the
       // Sim re-derives the budget, so a forged spend costs the same as a real one
       // and is refused by the same rule.
@@ -4840,39 +4818,6 @@ export class GameServer {
         sim.resetStats(pid);
         session.selfHeavyDirty = true;
         break;
-      case 'setSpec': {
-        const spec = parseTalentOptionId(msg.spec);
-        if (spec !== undefined) sim.setSpec(spec, pid);
-        break;
-      }
-      case 'selectTalentRow': {
-        const level = parseTalentRowLevel(msg.level);
-        const optionId = parseTalentOptionId(msg.optionId);
-        if (level !== null && optionId !== undefined) sim.selectTalentRow(level, optionId, pid);
-        break;
-      }
-      case 'saveLoadout': {
-        const hasAlloc = Object.hasOwn(msg, 'alloc');
-        if (hasAlloc) {
-          const alloc = parseTalentAllocation(msg.alloc);
-          if (typeof msg.name === 'string' && alloc) {
-            sim.saveLoadout(msg.name, Array.isArray(msg.bar) ? msg.bar : [], pid, alloc);
-          }
-        } else if (typeof msg.name === 'string') {
-          sim.saveLoadout(msg.name, Array.isArray(msg.bar) ? msg.bar : [], pid);
-        }
-        break;
-      }
-      case 'switchLoadout': {
-        const index = parseTalentLoadoutIndex(msg.index);
-        if (index !== null) sim.switchLoadout(index, pid);
-        break;
-      }
-      case 'deleteLoadout': {
-        const index = parseTalentLoadoutIndex(msg.index);
-        if (index !== null) sim.deleteLoadout(index, pid);
-        break;
-      }
       // World Market (the Merchant's auction house)
       case 'market_search':
         sim.marketSearch(
@@ -5923,12 +5868,6 @@ export class GameServer {
         visited: [...meta.deedStats.visited],
         dungeonClears: meta.deedStats.dungeonClears,
       });
-      // talents/spec/loadouts: the client recomputes its known abilities from this.
-      maybe('tal', {
-        alloc: meta.talents,
-        loadouts: meta.loadouts,
-        activeLoadout: meta.activeLoadout,
-      });
       // IWorldActionBar login restore (self-scoped, never a broadcast/entity
       // field): the VIEWER's own stored layout, or an explicit null meaning "the
       // server has no copy, seed from this device". Bound to the frozen join-time
@@ -6001,7 +5940,7 @@ export class GameServer {
             inCombat: e.inCombat ? 1 : 0,
             group: party.raidGroups.get(mPid) ?? 1,
             absorb: partyFrameAbsorb(e.auras),
-            role: partyFrameRole(meta.talentMods.role),
+            role: partyFrameRole(meta.mods.role),
             // Effective health Rewind could currently restore to this member
             // (combat/rewind.ts); 0 for members with no recent recorded loss.
             rewind: rewindHealAmount(damageTakenWithin(e, this.sim.tickCount), e.hp, e.maxHp),

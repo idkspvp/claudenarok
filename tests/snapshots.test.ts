@@ -209,54 +209,8 @@ describe('self stat wire round-trip', () => {
   });
 });
 
-describe('self talent wire decode (IWorldTalents facet)', () => {
-  // Ported coverage from the mage-line branch: the client decodes the heavy `tal`
-  // field, repairs the allocation, and re-derives spec/role/known/talentPoints
-  // locally from the mirrored rows (display-only; the server stays authoritative).
-  it('decodes the talent snapshot field and recomputes known from spec plus rows', () => {
-    const client = bareClient(1);
-    const internals = client as unknown as { applySnapshot(snapshot: unknown): void };
-    const snapshotAlloc = {
-      spec: 'prot',
-      rows: { 8: 'war_row_die_by_the_sword', 17: 'war_row_recklessness' },
-    };
-    internals.applySnapshot({
-      t: 'snap',
-      ents: [],
-      self: {
-        id: 1,
-        k: 'player',
-        tid: 'warrior',
-        nm: 'Tank',
-        lv: 20,
-        x: 0,
-        y: 0,
-        z: 0,
-        f: 0,
-        hp: 100,
-        mhp: 100,
-        res: 0,
-        mres: 100,
-        rtype: 'rage',
-        tal: {
-          alloc: snapshotAlloc,
-          loadouts: [{ name: 'MT', alloc: { spec: null, rows: {} }, bar: [] }],
-          activeLoadout: 0,
-        },
-      },
-    });
-    expect(client.talents).toEqual(snapshotAlloc);
-    expect(client.talentSpec).toBe('prot');
-    expect(client.talentRole).toBe('tank'); // derived from the prot mastery, not the wire
-    expect(client.loadouts.length).toBe(1);
-    expect(client.activeLoadout).toBe(0);
-    // known is re-derived locally: the prot signature plus the two row grants.
-    expect(client.known.some((k) => k.def.id === 'shield_slam')).toBe(true);
-    expect(client.known.some((k) => k.def.id === 'die_by_sword')).toBe(true);
-    expect(client.known.some((k) => k.def.id === 'recklessness')).toBe(true);
-    expect(client.talentPoints()).toEqual({ total: 6, spent: 2 });
-  });
-});
+// The self talent wire decode block that stood here went with the IWorldTalents
+// facet in Phase D0: the heavy `tal` field no longer exists.
 
 describe('spectate client POV', () => {
   it('follows observed self, aligns on entry and respawn, then restores identity', () => {
@@ -946,31 +900,8 @@ describe('delta snapshots', () => {
     expect(snap.self).not.toHaveProperty('stats');
   });
 
-  it('flushes mage row picks in the next heavy self snapshot', () => {
-    const mageServer = new GameServer();
-    const mageFc = fakeWs();
-    const mage = joinServer(mageServer, mageFc, 9, 'Rowwire', 'mage');
-    mageServer.sim.setPlayerLevel(5, mage.pid);
-
-    broadcast(mageServer);
-    const client = bareClient(mage.pid, 'mage');
-    (client as any).applySnapshot(lastSnap(mageFc.sent));
-    mageFc.sent.length = 0;
-    broadcast(mageServer);
-    expect(lastSnap(mageFc.sent).self).not.toHaveProperty('tal');
-
-    mageFc.sent.length = 0;
-    mageServer.handleMessage(
-      mage,
-      JSON.stringify({ t: 'cmd', cmd: 'selectTalentRow', level: 5, optionId: 'mag_r5_ice_floes' }),
-    );
-    broadcast(mageServer);
-
-    const snap = lastSnap(mageFc.sent);
-    expect(snap.self.tal.alloc).toEqual({ spec: null, rows: { 5: 'mag_r5_ice_floes' } });
-    (client as any).applySnapshot(snap);
-    expect(client.talents).toEqual({ spec: null, rows: { 5: 'mag_r5_ice_floes' } });
-  });
+  // The mage row-pick flush test that stood here rode the heavy `tal` field,
+  // retired with the talent trees (Phase D0).
 
   it('resends equip + inv on the next snapshot after an online unequip', () => {
     // A fresh warrior starts with worn_sword equipped in mainhand (its class
@@ -1169,7 +1100,7 @@ describe('raid party wire', () => {
   it('ships tactical frame fields and the authoritative connection state', () => {
     const entity = server.sim.entities.get(member.pid)!;
     const meta = server.sim.meta(member.pid)!;
-    meta.talentMods.role = 'healer';
+    meta.mods.role = 'healer';
     entity.auras.push({
       id: 'power_word_shield',
       name: 'Psalm of Warding',
@@ -3057,7 +2988,6 @@ function dirtyEveryDeltaField(): {
   // seconds and nodeHarvestableByMe reports it not ready.
   meta.nodeHarvestReadyAt[GATHER_NODES[0].id] = sim.time + 30;
   meta.delveDaily = { date: '2099-01-01', firstClearXp: new Set(['x']), markClears: 4 };
-  meta.talents = { spec: 'arms', rows: {} };
   // Book of Deeds: two earned deeds with DISTINCT utcDay stamps (an empty map
   // would be a vacuous pin), a non-zero stat block covering the counter, both
   // sets, and a clear record, a renown total, and an active title
@@ -3072,9 +3002,7 @@ function dirtyEveryDeltaField(): {
   meta.activeTitle = 'prog_veteran';
   // the Vale Cup sport kit swap ('sport' heavy key) and queue readout ('vcup')
   meta.sportRole = 'keeper';
-  meta.talentMods.spec = 'arms';
-  meta.loadouts = [{ name: 'PvP', alloc: { spec: 'arms', rows: {} }, bar: [] }];
-  meta.activeLoadout = 0;
+  meta.mods.spec = 'arms';
 
   // Session-scoped account cosmetics.
   leader.accountCosmetics = {

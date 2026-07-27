@@ -100,7 +100,7 @@ import {
   spellHasteMult,
 } from './spell_combat';
 import { isSpellResisted } from './spell_resist';
-import { onCastCompleted } from './talent_procs';
+import { onCastCompleted } from './cast_hooks';
 
 // Shaman shocks (earth/flame/frost) share one cooldown; lightning_shock joins them
 // for the shared-cooldown predicate. Moved with the casting slice (only callers).

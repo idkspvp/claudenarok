@@ -29,7 +29,6 @@ describe('signature mechanics v2', () => {
   it('bestial_wrath grants hunter AP percent and doubles pet damage', () => {
     const sim = new Sim({ seed: 11, playerClass: 'hunter', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('beast_mastery')).toBe(true);
     const hunter = sim.player;
     summonPet(sim.ctx, hunter, 'forest_wolf');
     const pet = sim.petOf(sim.playerId);
@@ -59,7 +58,6 @@ describe('signature mechanics v2', () => {
     const allyPid = sim.addPlayer('warrior', 'Aleph');
     sim.setPlayerLevel(20, hunterPid);
     sim.setPlayerLevel(20, allyPid);
-    expect(sim.setSpec('marksmanship', hunterPid)).toBe(true);
     const hunter = entity(sim, hunterPid);
     const ally = entity(sim, allyPid);
     ally.pos = { ...hunter.pos, x: hunter.pos.x + 3 };
@@ -82,7 +80,6 @@ describe('signature mechanics v2', () => {
   it('hemorrhage applies bleed vulnerability and makes later bleed ticks hit harder', () => {
     const sim = new Sim({ seed: 13, playerClass: 'rogue', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('subtlety')).toBe(true);
     const rogue = sim.player;
     rogue.resource = rogue.maxResource;
     rogue.facing = 0;

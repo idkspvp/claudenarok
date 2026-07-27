@@ -27,7 +27,6 @@
 
 import { DEED_ORDER, DEEDS, DEEDS_ERA } from './content/deeds';
 import { GATHERING_PROFESSION_IDS } from './content/professions';
-import { pointsSpent } from './content/talents';
 import { ITEMS, MOBS, ZONES, zoneAt } from './data';
 import { RESURRECTION_SICKNESS_ID } from './resurrection';
 import type { ArenaMatch, InstanceSlot, PlayerMeta } from './sim';
@@ -682,7 +681,10 @@ function deedListForKeys(keys: ReadonlySet<string>): readonly string[] {
 
 const METERS: Record<DeedMeterId, (meta: PlayerMeta) => number> = {
   prestigeRank: (m) => m.prestigeRank,
-  talentPoints: (m) => pointsSpent(m.talents),
+  // The talent trees are retired (Phase D0). The meter is KEPT and reads zero
+  // so the four deeds still wired to it simply cannot progress, instead of
+  // failing to resolve a meter that no longer exists.
+  talentPoints: () => 0,
   arenaRankedMatches: (m) => m.arenaWins + m.arenaLosses + m.arena2v2Wins + m.arena2v2Losses,
   arenaRankedWins: (m) => m.arenaWins + m.arena2v2Wins,
   vcupWins: (m) => m.vcupWins,
@@ -714,8 +716,9 @@ const MARK_CIRCUIT_DUNGEONS = [
 ];
 
 const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
-  talentSpecChosen: (m) => m.talents.spec !== null,
-  talentCapstone: (m) => typeof m.talents.rows[20] === 'string',
+  // Retired with the talent trees (see the talentPoints meter above).
+  talentSpecChosen: () => false,
+  talentCapstone: () => false,
   hasRestedXp: (m) => m.restedXp > 0,
   // Guild membership is server-stamped onto the entity; offline it stays ''
   // (never satisfiable there, matching the offline-sandbox model).

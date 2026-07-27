@@ -17,7 +17,6 @@ const ONEHAND = 'gravewyrm_cleaver';
 function furyWarrior(): AnySim {
   const sim = new Sim({ seed: 2711, playerClass: 'warrior' }) as AnySim;
   sim.setPlayerLevel(MAX_LEVEL);
-  expect(sim.setSpec('fury')).toBe(true);
   return sim;
 }
 
@@ -30,7 +29,7 @@ function equipLoadout(sim: AnySim, mainhand?: string, offhand?: string): void {
     sim.player,
     meta.cls,
     meta.equipment,
-    meta.talentMods,
+    meta.mods,
     meta.equipmentInstance,
     meta.statAllocation,
   );

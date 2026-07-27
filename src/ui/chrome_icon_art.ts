@@ -49,7 +49,6 @@ export const CHROME_ART_IDS: ReadonlySet<UiIconName> = new Set<UiIconName>([
   'professions',
   'social',
   'spellbook',
-  'talents',
 ]);
 
 /** True when `name` ships painted launcher art (and so is a primary destination). */

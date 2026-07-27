@@ -12,9 +12,6 @@ import { terrainHeight } from '../src/sim/world';
 function warrior(spec: 'arms' | 'prot' | null): Sim {
   const sim = new Sim({ seed: 2614, playerClass: 'warrior', autoEquip: true });
   sim.setPlayerLevel(MAX_LEVEL);
-  if (spec !== null) expect(sim.setSpec(spec)).toBe(true);
-  expect(sim.selectTalentRow(17, 'war_row_recklessness')).toBe(true);
-  expect(sim.selectTalentRow(20, 'war_row_colossal_might')).toBe(true);
   return sim;
 }
 

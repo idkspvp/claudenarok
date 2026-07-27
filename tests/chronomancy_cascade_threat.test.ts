@@ -13,7 +13,6 @@ import type { Entity } from '../src/sim/types';
 function chronoMage() {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;

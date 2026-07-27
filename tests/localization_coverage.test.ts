@@ -40,12 +40,6 @@ import {
   type TranslationKey,
   t,
 } from '../src/ui/i18n';
-import {
-  hasTalentTitleOverride,
-  renderTalentManifestEntry,
-  type TalentTranslationManifestEntry,
-  talentTranslationManifest,
-} from '../src/ui/talent_i18n';
 
 // The NON-English resolved tables, keyed by code. Empty while English is the only
 // shipped locale: the per-locale parity loops below iterate nothing, while every
@@ -886,31 +880,8 @@ describe('i18n Localization Key Coverage', () => {
     ).not.toThrow();
   });
 
-  it('keeps generated talent effect labels out of English fallback in translated locales', () => {
-    const englishEffectFragments = [
-      'damage-over-time damage',
-      'heal-over-time healing',
-      'melee haste',
-      'pet damage',
-      'damage redirected to pet',
-    ];
-    const descriptions = talentTranslationManifest().filter(
-      (entry) => entry.field === 'description',
-    );
-
-    for (const lang of supportedLanguages) {
-      if (lang === 'en' || lang === 'en_CA') continue;
-      setLanguage(lang);
-      const rendered = descriptions.map(renderTalentManifestEntry).join('\n').toLowerCase();
-      for (const fragment of englishEffectFragments) {
-        expect(rendered, `${lang}: copied English talent effect label ${fragment}`).not.toContain(
-          fragment,
-        );
-      }
-    }
-
-    setLanguage('en');
-  });
+  // The generated-talent-effect-label check that stood here went with the talent
+  // trees (Phase D0).
 
   it('renders the mobile Store label in every locale', () => {
     const expected: Record<SupportedLanguage, string> = {
@@ -923,57 +894,8 @@ describe('i18n Localization Key Coverage', () => {
     setLanguage('en');
   });
 
-  it('should provide talent content translations for every supported locale', () => {
-    const talentEntries = talentTranslationManifest();
-    expect(talentEntries.length).toBeGreaterThan(250);
-    expect(
-      new Set(
-        talentEntries.map(
-          (entry) =>
-            `${entry.kind}:${entry.classId}:${entry.specId ?? 'class'}:${entry.id}:${entry.field}`,
-        ),
-      ).size,
-    ).toBe(talentEntries.length);
-
-    for (const lang of supportedLanguages) {
-      setLanguage(lang);
-      for (const entry of talentEntries) {
-        const rendered = renderTalentManifestEntry(entry);
-        expect(rendered.trim().length, `${lang}.${entry.id}.${entry.field}`).toBeGreaterThan(0);
-        expect(rendered, `${lang}.${entry.id}.${entry.field}`).not.toMatch(placeholderPattern);
-        // RELEASE-TIER ONLY (copied-English talent content): an untranslated talent
-        // renders the English fill on a PR (a `pending` row), blocked at release.
-        if (RELEASE_TIER && lang !== 'en' && lang !== 'en_CA' && entry.field === 'description') {
-          expect(
-            copiedEnglishComparable(rendered),
-            `${lang}.${entry.id}.${entry.field} should not copy canonical English talent prose`,
-          ).not.toBe(copiedEnglishComparable(entry.source));
-        }
-        // Talent NAMES must not leak English either. A name may legitimately equal
-        // English only when it is a deliberate cross-language cognate recorded as an
-        // explicit titleOverride (e.g. French "Comeuppance", Spanish "Vigor"); a name that
-        // matches English WITHOUT such an override is an accidental leak (e.g. a new
-        // talent whose vocabulary the translation tables do not yet cover).
-        if (
-          RELEASE_TIER &&
-          lang !== 'en' &&
-          lang !== 'en_CA' &&
-          entry.field === 'name' &&
-          !hasTalentTitleOverride(lang, entry.source)
-        ) {
-          expect(
-            copiedEnglishComparable(rendered),
-            `${lang}.${entry.id}.name leaks English with no explicit titleOverride`,
-          ).not.toBe(copiedEnglishComparable(entry.source));
-        }
-      }
-    }
-
-    // The release-tier block that stood here spot-checked real translated talent
-    // strings in es / zh_CN / ko_KR. It went with the locale cut; the manifest
-    // completeness loop above is what still runs, in English.
-    setLanguage('en');
-  });
+  // The talent-content translation manifest loop that stood here went with the
+  // talent trees (Phase D0).
 
   // Deed names and reward titles that legitimately equal English in a locale,
   // recorded as deliberate cross-language cognates (Veteran, Champion, Paragon,

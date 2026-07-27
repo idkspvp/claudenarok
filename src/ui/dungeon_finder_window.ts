@@ -19,7 +19,7 @@
 
 import { audio } from '../game/audio';
 import type { FinderListingTag } from '../sim/content/dungeon_finder';
-import type { Role } from '../sim/content/talents';
+import type { Role } from '../sim/player_modifiers';
 import { ITEMS } from '../sim/data';
 import type { DungeonDifficulty } from '../sim/types';
 import type { DungeonFinderApplicantView, IWorld } from '../world_api';
@@ -141,7 +141,6 @@ export class DungeonFinderWindow {
       playerLevel: world.player.level,
       playerClass: world.cfg.playerClass,
       playerId: world.playerId,
-      specRole: world.talentRole,
       party: party ? { leader: party.leader, size: party.members.length } : null,
       lockouts: world.raidLockouts(),
       tab: this.tab,
@@ -562,9 +561,6 @@ export class DungeonFinderWindow {
   }
 
   private queueHtml(q: FinderQueuePanelView): string {
-    if (q.needsSpec) {
-      return `<div class="df-note">${esc(t('hudChrome.finder.needsSpec'))}</div>`;
-    }
     const roles =
       `<div class="df-sub">${esc(t('hudChrome.finder.yourRoles'))}</div><div class="df-roles">` +
       q.roles
@@ -780,9 +776,7 @@ export class DungeonFinderWindow {
   }
 
   private blockedLabel(r: FinderActivityRowView): string {
-    return r.blocked === 'spec'
-      ? t('hudChrome.finder.blockedSpec')
-      : t('hudChrome.finder.blockedLevel', { min: num(r.minLevel), max: num(r.maxLevel) });
+    return t('hudChrome.finder.blockedLevel', { min: num(r.minLevel), max: num(r.maxLevel) });
   }
 }
 

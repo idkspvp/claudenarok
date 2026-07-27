@@ -22,7 +22,6 @@ import type { Aura, Entity, SimEvent } from '../src/sim/types';
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;

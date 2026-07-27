@@ -1,9 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { CLASSES } from '../src/sim/content/classes';
-import { emptyAllocation } from '../src/sim/content/talents';
 import {
   actionForAttackSlot,
-  applyLoadoutBar,
   assignAttackSlotAction,
   attackDragDisposition,
   attackSlotStorageKey,
@@ -17,7 +15,6 @@ import {
   handleMobileAttackTap,
   hotbarActionsEqual,
   loadAttackSlotAction,
-  loadoutKnownAbilityIds,
   parseHotbarActions,
   parseStoredHotbarAction,
   placeAbilityOnSlot,
@@ -523,117 +520,8 @@ describe('hotbar slot sync', () => {
   });
 });
 
-describe('applying a saved talent loadout bar', () => {
-  // A SavedLoadout.bar is ability ids only (saveTalentLoadout's currentBar mapping
-  // in hud.ts drops item shortcuts before persisting), so switching to a saved
-  // loadout must not silently clear a potion/food/drink slot the loadout never
-  // captured in the first place. Regression for #1889.
-  it('keeps an existing item shortcut in a slot the loadout leaves blank', () => {
-    const current = [
-      { type: 'item' as const, id: 'baked_bread' },
-      { type: 'ability' as const, id: 'frost_armor' },
-      { type: 'item' as const, id: 'spring_water' },
-      null,
-    ];
-
-    expect(applyLoadoutBar(current, ['fireball', null, null, null], 4, abilityExists)).toEqual([
-      { type: 'ability', id: 'fireball' },
-      null,
-      { type: 'item', id: 'spring_water' },
-      null,
-    ]);
-  });
-
-  it('lets a loadout ability slot replace whatever was there before', () => {
-    const current = [
-      { type: 'item' as const, id: 'baked_bread' },
-      { type: 'ability' as const, id: 'frost_armor' },
-    ];
-
-    expect(applyLoadoutBar(current, ['polymorph', 'fireball'], 2, abilityExists)).toEqual([
-      { type: 'ability', id: 'polymorph' },
-      { type: 'ability', id: 'fireball' },
-    ]);
-  });
-
-  it('drops an unknown/stale ability id from the loadout without reviving an item there', () => {
-    const current = [{ type: 'ability' as const, id: 'fireball' }];
-
-    expect(applyLoadoutBar(current, ['no_such_ability'], 1, abilityExists)).toEqual([null]);
-  });
-
-  it('restores an ability in the last slot of the third row', () => {
-    const current = Array(33).fill(null);
-    const saved = Array<string | null>(33).fill(null);
-    saved[32] = 'polymorph';
-
-    expect(applyLoadoutBar(current, saved, 33, abilityExists)[32]).toEqual({
-      type: 'ability',
-      id: 'polymorph',
-    });
-  });
-
-  it('preserves third-row actions missing from a legacy two-row loadout', () => {
-    const current = Array<ReturnType<typeof applyLoadoutBar>[number]>(33).fill(null);
-    current[32] = { type: 'ability', id: 'polymorph' };
-    const legacyBar = Array<string | null>(22).fill(null);
-
-    expect(applyLoadoutBar(current, legacyBar, 33, abilityExists)[32]).toEqual({
-      type: 'ability',
-      id: 'polymorph',
-    });
-  });
-});
-
-describe('loadoutKnownAbilityIds', () => {
-  // Regression: switching talent loadouts scrambled the action bar (shaman bug
-  // report). applyLoadoutBar's "does this ability id exist" check must resolve
-  // against what the TARGET build actually grants, not the global ability
-  // table: two shaman specs grant disjoint signature abilities (stormstrike for
-  // Enhancement, chain_heal for Restoration), and stormstrike/chain_heal both
-  // exist in ABILITIES regardless of which spec is active.
-  it('only includes abilities the loadout own allocation actually grants', () => {
-    const enhancement = { ...emptyAllocation(), spec: 'enhancement' };
-    const restoration = { ...emptyAllocation(), spec: 'restoration' };
-
-    const enhancementKnown = loadoutKnownAbilityIds('shaman', enhancement, 20);
-    const restorationKnown = loadoutKnownAbilityIds('shaman', restoration, 20);
-
-    expect(enhancementKnown.has('stormstrike')).toBe(true);
-    expect(enhancementKnown.has('chain_heal')).toBe(false);
-    expect(restorationKnown.has('chain_heal')).toBe(true);
-    expect(restorationKnown.has('stormstrike')).toBe(false);
-  });
-
-  it('still includes base class-kit abilities regardless of spec', () => {
-    const known = loadoutKnownAbilityIds('shaman', { ...emptyAllocation(), spec: 'elemental' }, 20);
-    expect(known.has('lightning_bolt')).toBe(true);
-  });
-
-  it('excludes passive traits from saved loadout action-bar eligibility', () => {
-    const armsKnown = loadoutKnownAbilityIds('warrior', { ...emptyAllocation(), spec: 'arms' }, 20);
-
-    expect(armsKnown.has('measured_fury')).toBe(false);
-    expect(armsKnown.has('seasoned_soldier')).toBe(false);
-    expect(armsKnown.has('sudden_death')).toBe(false);
-    expect(armsKnown.has('deep_wounds')).toBe(false);
-    expect(armsKnown.has('battle_shout')).toBe(true);
-  });
-
-  // Pins the actual applyLoadoutBar call site wiring, not just the predicate in
-  // isolation: reverting the predicate to `(id) => !!ABILITIES[id]` would let
-  // stormstrike survive a switch to a Restoration loadout without failing this.
-  it("rejects a foreign-spec ability when used as applyLoadoutBar's predicate", () => {
-    const restoration = { ...emptyAllocation(), spec: 'restoration' };
-    const restorationKnown = loadoutKnownAbilityIds('shaman', restoration, 20);
-
-    const current = [{ type: 'ability' as const, id: 'stormstrike' }];
-
-    expect(applyLoadoutBar(current, ['stormstrike'], 1, (id) => restorationKnown.has(id))).toEqual([
-      null,
-    ]);
-  });
-});
+// The saved-talent-loadout bar blocks that stood here (applyLoadoutBar and
+// loadoutKnownAbilityIds) went with the talent loadouts in Phase D0.
 
 describe('mobile touch drag drop resolution', () => {
   it('resolves the target slot when it differs from the source', () => {

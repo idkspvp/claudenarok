@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c9dcada9",
+      "state": "13ae7fa5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -30,7 +30,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -83,9 +82,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -167,7 +163,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 416,
-      "state": "86e6ab29",
+      "state": "0312d465",
       "events": "e7b86907",
       "rng": {
         "draws": 2,
@@ -176,7 +172,6 @@
       "label": "harvest-ore-common-and-denial",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -277,9 +272,6 @@
             "str": 9,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {},
           "xp": 11
         }
@@ -362,7 +354,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 416,
-      "state": "6f02f2ce",
+      "state": "eda88808",
       "events": "fbab41e3",
       "rng": {
         "draws": 4,
@@ -371,7 +363,6 @@
       "label": "harvest-wood-max-proficiency",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -492,9 +483,6 @@
             "str": 10,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {},
           "xp": 16
         }
@@ -577,8 +565,8 @@
       "tick": 500,
       "time": 25,
       "nextId": 416,
-      "state": "2ed758a8",
-      "events": "a03fc69b",
+      "state": "2ac37c16",
+      "events": "e02f321c",
       "rng": {
         "draws": 18,
         "digest": "590f883b"
@@ -588,8 +576,8 @@
       "tick": 1000,
       "time": 50,
       "nextId": 416,
-      "state": "ed7a8c4c",
-      "events": "b1ec90c1",
+      "state": "6efc0fda",
+      "events": "d41935fb",
       "rng": {
         "draws": 38,
         "digest": "ad7c0780"
@@ -599,8 +587,8 @@
       "tick": 1500,
       "time": 75,
       "nextId": 416,
-      "state": "8582720b",
-      "events": "2961d098",
+      "state": "fe91f37f",
+      "events": "172dffc0",
       "rng": {
         "draws": 58,
         "digest": "d7942c0d"
@@ -610,7 +598,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 416,
-      "state": "fe6bbd6a",
+      "state": "dd829a08",
       "events": "a3cc9f09",
       "rng": {
         "draws": 78,
@@ -621,7 +609,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 416,
-      "state": "8cc9da12",
+      "state": "a31a6ce4",
       "events": "e559297f",
       "rng": {
         "draws": 96,
@@ -632,8 +620,8 @@
       "tick": 3000,
       "time": 150,
       "nextId": 416,
-      "state": "fdd21036",
-      "events": "ac00e1cf",
+      "state": "75e2e976",
+      "events": "70f24b4b",
       "rng": {
         "draws": 116,
         "digest": "2442686e"
@@ -643,7 +631,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 416,
-      "state": "5603439f",
+      "state": "16395e7f",
       "events": "86d29dfd",
       "rng": {
         "draws": 136,
@@ -654,7 +642,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 416,
-      "state": "364cb5dc",
+      "state": "eeab5f7c",
       "events": "c0982447",
       "rng": {
         "draws": 156,
@@ -665,7 +653,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 416,
-      "state": "366495fc",
+      "state": "ef5d4016",
       "events": "f460621d",
       "rng": {
         "draws": 176,
@@ -676,7 +664,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 416,
-      "state": "4694744d",
+      "state": "2ea1b581",
       "events": "1854a740",
       "rng": {
         "draws": 194,
@@ -687,7 +675,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 416,
-      "state": "06c556a0",
+      "state": "f210928e",
       "events": "4f44fcfa",
       "rng": {
         "draws": 204,
@@ -696,7 +684,6 @@
       "label": "rare-event-window",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -841,9 +828,6 @@
             "luk": 2,
             "str": 12,
             "vit": 10
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 151
@@ -927,7 +911,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 416,
-      "state": "4d347ce1",
+      "state": "337db749",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -936,7 +920,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1081,9 +1064,6 @@
             "luk": 2,
             "str": 12,
             "vit": 10
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 151

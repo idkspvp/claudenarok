@@ -14,7 +14,6 @@ import { terrainHeight } from '../src/sim/world';
 function makeSim(cls: PlayerClass, spec: string | null = null, seed = 7): Sim {
   const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
   sim.setPlayerLevel(20);
-  if (spec) sim.setSpec(spec);
   const p = sim.entities.get(sim.playerId) as Entity;
   p.maxHp = p.hp = 1_000_000;
   p.resource = p.maxResource;

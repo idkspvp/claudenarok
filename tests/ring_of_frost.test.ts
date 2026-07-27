@@ -7,7 +7,6 @@ import type { Entity, SimEvent } from '../src/sim/types';
 function rig(): { sim: Sim; caster: Entity } {
   const sim = new Sim({ seed: 73, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.applyTalents({ spec: 'frost', rows: { 11: 'mag_r11_rings_of_frost' } })).toBe(true);
   const caster = sim.player;
   caster.resource = caster.maxResource;
   return { sim, caster };

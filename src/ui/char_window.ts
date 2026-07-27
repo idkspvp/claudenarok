@@ -127,7 +127,6 @@ export interface CharWindowDeps extends PainterHostPresentation {
   slotName(slot: EquipSlot): string;
   statCellHtml(stat: StatId): string;
   statTooltipHtml(stat: StatId): string;
-  talentSummaryHtml(): string;
   progressionHtml(level: number): string;
   /** Hud.confirmDialog: the single focus-trapped destroy-confirm family. */
   confirmDialog(
@@ -247,7 +246,6 @@ export class CharWindow {
       return `<div class="${cls}">${title}${cells}</div>`;
     }).join('')}</div>`;
     html += this.statusPointsHtml(world);
-    html += this.deps.talentSummaryHtml();
     html += this.deps.progressionHtml(p.level);
     html += this.gatheringHtml(world);
     html += `<div class="pc-share-row"><button type="button" class="btn pc-share-btn" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div>`;
@@ -454,7 +452,7 @@ export class CharWindow {
     if (!item) return;
     const world = this.deps.world();
     switch (
-      paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level, world.talentSpec)
+      paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level)
     ) {
       case 'blockedSlot':
         this.deps.showError(tSim('error.wrongEquipSlot'));
@@ -490,13 +488,7 @@ export class CharWindow {
       const accepts =
         !!item &&
         !!slot &&
-        paperdollDropAction(
-          item,
-          slot,
-          world.cfg.playerClass,
-          world.player.level,
-          world.talentSpec,
-        ) === 'equip';
+        paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level) === 'equip';
       row.classList.toggle('drop-target', accepts);
     }
   }
@@ -512,13 +504,7 @@ export class CharWindow {
       const world = this.deps.world();
       if (
         !item ||
-        paperdollDropAction(
-          item,
-          slot,
-          world.cfg.playerClass,
-          world.player.level,
-          world.talentSpec,
-        ) !== 'equip'
+        paperdollDropAction(item, slot, world.cfg.playerClass, world.player.level) !== 'equip'
       )
         return;
       e.preventDefault();

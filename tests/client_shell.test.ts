@@ -581,7 +581,6 @@ describe('client HTML shell', () => {
     // left on an inline hide that drops focus.
     expect(cmBody).toContain('this.socialWindow.close();');
     expect(cmBody).toContain('this.arenaWindow.close();');
-    expect(cmBody).toContain('this.talentsWindow.close();');
     expect(cmBody).toContain('this.spellbookWindow.close();');
     // Bags is the NON-MODAL companion (no trap), but still returns focus via close().
     expect(cmBody).toContain('this.bagsWindow.close();');
@@ -2387,13 +2386,8 @@ describe('client HTML shell', () => {
     expect(hudMobileCss).toContain('transform: translateX(-50%);');
   });
 
-  it('centers mobile Talents above touch controls', () => {
-    expect(hudMobileCss).toContain('body.mobile-touch.mobile-window-open #ui {\n    z-index: 90;');
-    expect(hudMobileCss).toContain('body.mobile-touch #talents-window {\n    position: fixed;');
-    expect(hudMobileCss).toContain('top: 50%;');
-    expect(hudMobileCss).toContain('transform: translate(-50%, -50%);');
-    expect(hudMobileCss).toContain('z-index: 95 !important;');
-  });
+  // The mobile Talents centering test that stood here went with the talents
+  // window (Phase D0).
   it('keeps desktop rolls above managed windows and the mobile bag sheet above rolls', () => {
     const railZ = Number(componentsCss.match(/#loot-rolls \{[\s\S]*?z-index:\s*(\d+);/)?.[1]);
     const managedFloors = [

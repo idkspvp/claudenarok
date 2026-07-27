@@ -41,7 +41,6 @@ describe('Mage Fireball Form online authority', () => {
     const session = server.join(fakeWs(), 1, 1, 'Ember', 'mage', null);
     if ('error' in session) throw new Error('join failed');
     server.sim.setPlayerLevel(11, session.pid);
-    expect(server.sim.setSpec('arcane', session.pid)).toBe(true);
     server.sim.tick();
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');

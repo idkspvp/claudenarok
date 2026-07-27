@@ -1357,7 +1357,6 @@ describe('aoe damage vs armor', () => {
     (sim as any).grantXp(99999); // level up far past Aetherburst (lvl 7)
     // The mage rework spec-gated Aetherburst (arcane_explosion) to the arcane
     // spec; a no-spec mage drops it from the known list, so commit first.
-    expect(sim.setSpec('arcane')).toBe(true);
     const p = sim.player;
     const wolf = [...sim.entities.values()].find(
       (e) => e.kind === 'mob' && e.templateId === 'forest_wolf' && !e.dead,

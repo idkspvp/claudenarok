@@ -5,7 +5,6 @@
 // against Red Harvest's 80 cost, an 80-rage spender every ~6 seconds. The fix
 // makes Bloodletting the one generating builder and restores the shared scale.
 import { describe, expect, it } from 'vitest';
-import { WARRIOR_ROWS } from '../src/sim/content/warrior_rows';
 import { ABILITIES } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
@@ -16,7 +15,6 @@ type AnySim = Sim & Record<string, any>;
 function furyWarrior(): AnySim {
   const sim = new Sim({ seed: 2712, playerClass: 'warrior' }) as AnySim;
   sim.setPlayerLevel(MAX_LEVEL);
-  expect(sim.setSpec('fury')).toBe(true);
   return sim;
 }
 
@@ -63,11 +61,6 @@ describe('v0.27.1 warrior rage economy', () => {
     expect(whirlwindMints).toBe(false);
   });
 
-  it('Anger Management is trimmed to +10% auto / +5% ability rage', () => {
-    const row = WARRIOR_ROWS.flatMap((tier) => tier.options).find(
-      (option) => option.id === 'war_row_anger_management',
-    );
-    expect(row).toBeDefined();
-    expect(row?.effect).toEqual({ global: { autoRagePct: 0.1, abilityRagePct: 0.05 } });
-  });
+  // The Anger Management row test that stood here read a warrior choice row,
+  // retired with the talent trees (Phase D0).
 });

@@ -2364,22 +2364,6 @@ export interface AbilityDef {
   // wherever the flat known list is read (e.g. the cost choke point in
   // resolvedAbility); castAbility refuses it silently.
   passive?: boolean;
-  // Spec-gated base kit: when set, only players whose CHOSEN spec id is in the
-  // list keep this ability in their known list (abilitiesKnownAt). A player who
-  // has not committed to a spec keeps the full kit, and talent/row GRANTS are
-  // never filtered (the tree they come from is already spec-scoped).
-  specs?: readonly string[];
-  // Spec EXCLUSION (Reaver Strike vs Revenge): when set, a player whose CHOSEN
-  // spec id is in the list DROPS this ability from their known list, even though
-  // it is otherwise ungated. Used to swap one ability for a spec-exclusive
-  // replacement (heroic_strike excludeSpecs ['prot'], since prot uses revenge).
-  // A no-spec player and any non-listed spec keep it. Grants are never filtered.
-  excludeSpecs?: readonly string[];
-  // When set alongside excludeSpecs, the exclusion only kicks in at this player
-  // level: below it the listed specs still know the ability. Models a kit
-  // hand-off (Redhand serves committed Fury as its rage spender until Red
-  // Harvest arrives, then retires). Without it exclusion applies at any level.
-  excludeSpecsAtLevel?: number;
   // friendly = self or allied player; 'any' = either (defaults to enemy)
   // An INSTANT that may be pressed in the middle of another cast without
   // touching it (Fire Blast, Combustion; casting_lifecycle's through-cast

@@ -34,7 +34,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "90e02ee4",
+      "state": "75042c62",
       "events": "c97c850b",
       "rng": {
         "draws": 6,
@@ -43,7 +43,6 @@
       "label": "heals",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -100,13 +99,9 @@
             "str": 2,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -163,13 +158,9 @@
             "str": 8,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -226,13 +217,9 @@
             "str": 5,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -289,13 +276,9 @@
             "str": 6,
             "vit": 6
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -347,9 +330,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -925,7 +905,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "b15008fe",
+      "state": "95bf606c",
       "events": "a18f2672",
       "rng": {
         "draws": 6,
@@ -934,7 +914,6 @@
       "label": "crit-vuln-damage",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -991,13 +970,9 @@
             "str": 2,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1054,13 +1029,9 @@
             "str": 8,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1122,13 +1093,9 @@
             "str": 5,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1185,13 +1152,9 @@
             "str": 6,
             "vit": 6
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1243,9 +1206,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -1839,7 +1799,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 424,
-      "state": "f8f9d973",
+      "state": "fbb8dbe3",
       "events": "c4531615",
       "rng": {
         "draws": 10,
@@ -1850,7 +1810,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 424,
-      "state": "5bdab340",
+      "state": "c3049766",
       "events": "c4531615",
       "rng": {
         "draws": 10,
@@ -1859,7 +1819,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1916,13 +1875,9 @@
             "str": 2,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1979,13 +1934,9 @@
             "str": 8,
             "vit": 8
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2047,13 +1998,9 @@
             "str": 5,
             "vit": 5
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2110,13 +2057,9 @@
             "str": 6,
             "vit": 6
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         },
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -2168,9 +2111,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }

@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a873b20a",
+      "state": "9302859a",
       "events": "2a52b203",
       "rng": {
         "draws": 0,
@@ -40,7 +40,6 @@
       "label": "bank-setup",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -98,9 +97,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -182,7 +178,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "4146e036",
+      "state": "5c92d4ee",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -191,7 +187,6 @@
       "label": "deposited-partial",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -260,9 +255,6 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -343,7 +335,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "ca7ce27a",
+      "state": "ab89fe7a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -352,7 +344,6 @@
       "label": "deposited-whole",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -417,9 +408,6 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -500,7 +488,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "903c852a",
+      "state": "2bbb3fda",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -509,7 +497,6 @@
       "label": "withdrew-partial",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -578,9 +565,6 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -661,7 +645,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "dd20d4e0",
+      "state": "3b979388",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -670,7 +654,6 @@
       "label": "withdrew-whole",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -732,9 +715,6 @@
             "str": 8,
             "vit": 7
           },
-          "talents": {
-            "rows": {}
-          },
           "townFocus": {}
         }
       ],
@@ -815,7 +795,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "7b5015d6",
+      "state": "d095ca46",
       "events": "9b5ca5bc",
       "rng": {
         "draws": 0,
@@ -824,7 +804,6 @@
       "label": "bought-slots",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -887,9 +866,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -971,7 +947,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 416,
-      "state": "e1f23080",
+      "state": "98afce78",
       "events": "c73a5c51",
       "rng": {
         "draws": 0,
@@ -980,7 +956,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -1054,9 +1029,6 @@
             "luk": 1,
             "str": 8,
             "vit": 7
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }

@@ -140,12 +140,12 @@ describe.skip('spell crit shared core', () => {
 
     // Act: inject the talent crit through the mods slot recalcPlayerStats reads
     // (the mastery_mechanism pattern: mutate mods, not the raw entity field).
-    meta.talentMods.stats.crit = 0.05;
+    meta.mods.stats.crit = 0.05;
     recalcPlayerStats(
       p,
       meta.cls,
       meta.equipment,
-      meta.talentMods,
+      meta.mods,
       meta.equipmentInstance,
       meta.statAllocation,
     );

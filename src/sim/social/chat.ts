@@ -176,14 +176,6 @@ export function chat(ctx: SimContext, text: string, pid?: number): SentChat | nu
     return null;
   }
 
-  // "/talents" (aliases "/talent", "/spec"): self-only readout of the
-  // player's specialization and how their talent points are spent. Returns
-  // null (unlogged); no server interceptor, so it works online for free.
-  if (/^\/(?:talents|talent|spec)(?:\s|$)/i.test(raw)) {
-    ctx.error(r.meta.entityId, readouts.talentsReadout(r.meta, r.e));
-    return null;
-  }
-
   // "/help" (or "/?" / "/commands") lists the available chat commands as a
   // system notice to the asker only. Like /who, it produces no chat message,
   // so it works identically offline and online without server wiring.

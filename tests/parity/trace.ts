@@ -197,7 +197,7 @@ export const ENTITY_EXCLUDE: ReadonlySet<string> = new Set([
 ]);
 
 // Session-only / presentation / derived PlayerMeta fields. Derived fields
-// (known, talentMods, fiestaMods, fiestaSpecial) are pure functions of sampled
+// (known, mods, fiestaMods, fiestaSpecial) are pure functions of sampled
 // inputs (talents/equipment/level/augments), so excluding them avoids redundant
 // drift and large nested blobs while their inputs stay pinned.
 export const META_EXCLUDE: ReadonlySet<string> = new Set([
@@ -219,8 +219,8 @@ export const META_EXCLUDE: ReadonlySet<string> = new Set([
   // sampled meta.bank.bonusSlots), so excluding the rows loses no gameplay net.
   'bankBonusSources',
   'known', // derived from class/level/talents
-  'talentMods', // derived from talents (recomputed)
-  'fiestaMods', // derived from talentMods + augments
+  'mods', // derived from talents (recomputed)
+  'fiestaMods', // derived from mods + augments
   'fiestaSpecial', // derived from augments
   'wireRev', // runtime-only wire-dirty counter; never serialized/persisted
 ]);

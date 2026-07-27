@@ -134,11 +134,10 @@ describe('Spell Power balance band (content cap)', () => {
 
   it('Maiming Strike folds melee Attack Power into each Gaping Wounds tick', () => {
     const { sim, pid, p } = leveled('warrior');
-    expect(sim.setSpec('arms', pid)).toBe(true);
     const dummy = spawnDummy(sim, p);
     p.targetId = dummy.id;
     p.resource = 100;
-    const mortalStrike = abilitiesKnownAt('warrior', MAX_LEVEL, sim.meta(pid)!.talentMods).find(
+    const mortalStrike = abilitiesKnownAt('warrior', MAX_LEVEL, sim.meta(pid)!.mods).find(
       (k) => k.def.id === 'mortal_strike',
     )!;
     const dot = mortalStrike.effects.find((e) => e.type === 'dot') as {
@@ -204,10 +203,9 @@ describe('Spell Power end-to-end through the sim', () => {
     const { sim, pid, p } = leveled('mage');
     // The mage rework gated Aether Darts (arcane_missiles) behind the Chronomancy
     // (arcane) spec, so commit the spec before resolving the known ability.
-    expect(sim.setSpec('arcane', pid)).toBe(true);
     const dummy = spawnDummy(sim, p);
     p.targetId = dummy.id;
-    const am = abilitiesKnownAt('mage', MAX_LEVEL, sim.meta(pid)!.talentMods).find(
+    const am = abilitiesKnownAt('mage', MAX_LEVEL, sim.meta(pid)!.mods).find(
       (k) => k.def.id === 'arcane_missiles',
     )!;
     const dd = am.effects.find((e) => e.type === 'directDamage') as { min: number; max: number };

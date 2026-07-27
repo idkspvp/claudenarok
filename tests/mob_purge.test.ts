@@ -63,7 +63,7 @@ describe('mob purge affix (Spellgnaw)', () => {
       player,
       meta.cls,
       meta.equipment,
-      meta.talentMods,
+      meta.mods,
       meta.equipmentInstance,
       meta.statAllocation,
     );

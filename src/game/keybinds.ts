@@ -178,7 +178,6 @@ export const BIND_ACTIONS: BindAction[] = [
     kind: 'edge',
     defaults: ['KeyV'],
   },
-  { id: 'talents', label: 'Talents', category: 'Interface', kind: 'edge', defaults: ['KeyN'] },
   // Every bare letter is claimed by another default (see the KeyZ note on
   // Book of Deeds below), so Damage Meters parks on the shifted layer of its
   // thematically nearest key (H, "hate"/threat), like deeds does on Z.

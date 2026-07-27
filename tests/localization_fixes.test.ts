@@ -18,11 +18,6 @@ import {
 } from '../src/ui/i18n';
 import { localizeServerText, DICT as serverDICT, tServer } from '../src/ui/server_i18n';
 import { localizeSimAuraName, localizeSimText, DICT as simDICT } from '../src/ui/sim_i18n';
-import {
-  hasTalentTitleOverride,
-  renderTalentManifestEntry,
-  talentTranslationManifest,
-} from '../src/ui/talent_i18n';
 
 // Lazy locale flip: the non-en game locales are no longer statically resident. Every
 // describe below setLanguage(non-en)s and reads synchronously through t() / localizeSimText /
@@ -151,26 +146,8 @@ describe('L3/L4: additional server-message coverage', () => {
   // Dropped with the locale cut (needed a non-English locale): localizes the (combat) /who status flag...
 });
 
-// --- H1: talent names never fall to raw word-substitution ---
-describe('H1: every talent name resolves via override or ability name', () => {
-  const abilityNames = new Set(Object.values(ABILITIES).map((a) => a.name));
-  const nameEntries = talentTranslationManifest().filter((e) => e.field === 'name');
-
-  it('each talent name has an explicit override or is an ability name in every translated locale', () => {
-    for (const lang of supportedLanguages) {
-      if (lang === 'en' || lang === 'en_CA') continue;
-      for (const e of nameEntries) {
-        const ok = hasTalentTitleOverride(lang, e.source) || abilityNames.has(e.source);
-        expect(
-          ok,
-          `${lang}: talent name "${e.source}" falls through to broken word-substitution`,
-        ).toBe(true);
-      }
-    }
-  });
-
-  // A CJK leftover-Latin sweep over talent names stood here.
-});
+// H1 (talent names never fall to raw word-substitution) went with the talent
+// trees (Phase D0).
 
 // H2 scanned the game.* subtree of every non-English table for accent-stripped
 // forms (Espanol for Espanol with a tilde, and so on). English has no diacritics
@@ -246,34 +223,8 @@ describe('H3: DICT key parity, non-empty values, placeholder integrity', () => {
   );
 });
 
-// --- H1b: no two talents in the same class tree may render with the same name ---
-describe('H1b: talent names are unique within a class tree', () => {
-  const nameEntries = talentTranslationManifest().filter((e) => e.field === 'name');
-  it('has zero same-tree name collisions in any translated locale', () => {
-    for (const lang of supportedLanguages) {
-      if (lang === 'en' || lang === 'en_CA') continue;
-      setLanguage(lang);
-      const perClass = new Map<string, Map<string, Set<string>>>();
-      for (const e of nameEntries) {
-        const rendered = renderTalentManifestEntry(e);
-        const cls = (e as any).classId as string;
-        if (!perClass.has(cls)) perClass.set(cls, new Map());
-        const m = perClass.get(cls)!;
-        if (!m.has(rendered)) m.set(rendered, new Set());
-        m.get(rendered)?.add(e.source);
-      }
-      for (const [cls, m] of perClass) {
-        for (const [rendered, sources] of m) {
-          expect(
-            sources.size,
-            `${lang} ${cls}: "${rendered}" used by [${[...sources].join(', ')}]`,
-          ).toBe(1);
-        }
-      }
-    }
-    setLanguage('en');
-  });
-});
+// H1b (talent names unique within a class tree) went with the talent trees
+// (Phase D0).
 
 // --- M1b: /who status flags localize at the FRAGMENT level (not just whole-string) ---
 describe('M1b: /who status flags localize within the row', () => {
@@ -343,30 +294,8 @@ describe('M1c: entity strings preserve every placeholder (incl {className})', ()
   });
 });
 
-// --- H4b: every shipped talent name resolves via override or ability, and renders
-// non-empty & (for non-en) differs from English unless a deliberate cognate override. ---
-describe('H4b: talent-name resolution is complete (no silent English fallthrough)', () => {
-  const abilityNames = new Set(Object.values(ABILITIES).map((a) => a.name));
-  const nameEntries = talentTranslationManifest().filter((e) => e.field === 'name');
-  it('renders non-empty for every name in every locale and never word-salads a new name', () => {
-    for (const lang of supportedLanguages) {
-      setLanguage(lang);
-      for (const e of nameEntries) {
-        const rendered = renderTalentManifestEntry(e);
-        expect(rendered.trim().length, `${lang}: "${e.source}" rendered empty`).toBeGreaterThan(0);
-        if (lang !== 'en' && lang !== 'en_CA') {
-          // must resolve via an explicit override or be an ability name (which tEntity localizes)
-          const resolved = hasTalentTitleOverride(lang, e.source) || abilityNames.has(e.source);
-          expect(
-            resolved,
-            `${lang}: "${e.source}" has no override and is not an ability name (would fall through to raw English)`,
-          ).toBe(true);
-        }
-      }
-    }
-    setLanguage('en');
-  });
-});
+// H4b (talent-name resolution completeness) went with the talent trees
+// (Phase D0).
 
 // --- S1: sim-emitted log/error/loot text localizes (HIGH-3). These strings originate
 // in src/sim/sim.ts as SimEvent text and are re-localized client-side by sim_i18n via

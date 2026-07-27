@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { ABILITIES, DUNGEONS, instanceOrigin, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { enterDungeon } from '../src/sim/instances/dungeons';
@@ -16,18 +15,9 @@ function mageWithSpec(spec: 'fire' | 'frost' | 'arcane', devCommands = false): S
   const sim = new Sim({ seed: 73, playerClass: 'mage', autoEquip: true, devCommands });
   sim.setPlayerLevel(11);
   placePlayerInOpenField(sim);
-  expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   sim.player.resource = sim.player.maxResource;
   return sim;
-}
-
-function knownMageAbilities(spec: 'fire' | 'frost' | 'arcane'): string[] {
-  const mods = computeTalentModifiers('mage', {
-    ...emptyAllocation(),
-    spec,
-  } as never);
-  return abilitiesKnownAt('mage', 11, mods).map((known) => known.def.id);
 }
 
 function activate(sim: Sim): void {
@@ -38,17 +28,14 @@ function activate(sim: Sim): void {
 }
 
 describe('Mage Fireball Form', () => {
-  it('is a general Mage ability learned by every specialization at level 11', () => {
+  it('is a general Mage ability learned at level 11', () => {
     expect(abilitiesKnownAt('mage', 10).map((known) => known.def.id)).not.toContain(FORM_ID);
-    for (const spec of ['fire', 'frost', 'arcane'] as const) {
-      expect(knownMageAbilities(spec), spec).toContain(FORM_ID);
-    }
+    expect(abilitiesKnownAt('mage', 11).map((known) => known.def.id)).toContain(FORM_ID);
     expect(ABILITIES[FORM_ID]).toMatchObject({
       class: 'mage',
       learnLevel: 11,
       requiresTarget: false,
     });
-    expect(ABILITIES[FORM_ID].specs).toBeUndefined();
   });
 
   it('requires a real two-second cast before the transformation begins', () => {

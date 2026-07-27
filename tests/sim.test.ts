@@ -673,7 +673,6 @@ describe('spell pushback', () => {
   it('a hit shaves a quarter off a channel instead of cancelling it', () => {
     const { sim, wolf } = castingMage(8);
     // Aether Darts is Chronomancy-gated in the reworked kit; commit the spec first.
-    sim.setSpec('arcane');
     sim.castAbility('arcane_missiles');
     expect(sim.player.channeling).toBe(true);
     const remBefore = sim.player.castRemaining;

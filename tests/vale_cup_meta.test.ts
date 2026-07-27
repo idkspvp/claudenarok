@@ -119,7 +119,6 @@ describe('Vale Cup: kit swap round trip and persistence', () => {
     const knownBefore = JSON.stringify(aMeta.known.map((k) => [k.def.id, k.rank, k.cost]));
     const levelBefore = ae.level;
     const xpBefore = aMeta.xp;
-    const talentsBefore = JSON.stringify(aMeta.talents);
 
     const match = startBout(sim, a, b);
     expect(aMeta.sportRole).toBe('allrounder');
@@ -137,7 +136,6 @@ describe('Vale Cup: kit swap round trip and persistence', () => {
     expect(JSON.stringify(aMeta.known.map((k) => [k.def.id, k.rank, k.cost]))).toBe(knownBefore);
     expect(ae.level).toBe(levelBefore);
     expect(aMeta.xp).toBe(xpBefore);
-    expect(JSON.stringify(aMeta.talents)).toBe(talentsBefore);
     expect(ae.cooldowns.size).toBe(0); // arena-style wipe, sport cds included
     expect(sim.petOf(a)).toBeTruthy(); // restored from the stash
   });

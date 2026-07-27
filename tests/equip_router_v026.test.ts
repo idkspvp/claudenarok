@@ -34,7 +34,6 @@ describe('v0.26 canonical right-click equip routing', () => {
   it('routes a Fury one-hander to the offhand', () => {
     const sim = new Sim({ seed: 2612, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('fury')).toBe(true);
     addWithoutAutoEquip(sim, 'redbrook_blade');
 
     sim.equipItem('redbrook_blade');
@@ -47,7 +46,6 @@ describe('v0.26 canonical right-click equip routing', () => {
   it('uses the natural two-click Titan Grip flow and benches the illegal offhand on switch', () => {
     const sim = new Sim({ seed: 2613, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('fury')).toBe(true);
     addWithoutAutoEquip(sim, 'eastbrook_greatsword', 2);
 
     sim.equipItem('eastbrook_greatsword');
@@ -58,7 +56,6 @@ describe('v0.26 canonical right-click equip routing', () => {
     expect(sim.equipment.offhand).toBe('eastbrook_greatsword');
     expect(sim.player.offhandWeapon).toEqual(ITEMS.eastbrook_greatsword.weapon);
 
-    expect(sim.setSpec('arms')).toBe(true);
     expect(sim.equipment.mainhand).toBe('eastbrook_greatsword');
     expect(sim.equipment.offhand).toBeUndefined();
     expect(sim.countItem('eastbrook_greatsword')).toBe(1);

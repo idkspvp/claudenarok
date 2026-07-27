@@ -5,7 +5,6 @@ import { describe, expect, it } from 'vitest';
 import { bagCapacity } from '../src/sim/bags';
 import { dealDamage } from '../src/sim/combat/damage';
 import { DEED_ORDER, DEEDS } from '../src/sim/content/deeds';
-import { emptyAllocation, type TalentAllocation } from '../src/sim/content/talents';
 import { ITEMS, MOBS, ZONES } from '../src/sim/data';
 import {
   bumpDeedStat,
@@ -362,7 +361,7 @@ describe('Fiesta standardization safety', () => {
     const sim = makeSim();
     const { meta, e } = primary(sim);
     // Seated in a Fiesta bout: the character is standardized to the cap.
-    meta.fiestaRestore = { level: 3, xp: 0, talents: emptyAllocation() };
+    meta.fiestaRestore = { level: 3, xp: 0 };
     e.level = MAX_LEVEL;
     sim.ctx.markDeedsDirty(meta.entityId);
     sim.tick();
@@ -1180,15 +1179,10 @@ describe('flag triggers (one negative and one positive per predicate)', () => {
       sim.tick();
       expect(meta.deedsEarned.has(deedId), label).toBe(expected);
     };
-    // talentSpecChosen
-    check('prog_specialized', false, 'no spec chosen yet');
-    meta.talents.spec = 'arms';
-    check('prog_specialized', true, 'spec chosen');
-    // talentCapstone: a lower row does nothing; selecting the level-20 row grants.
-    meta.talents.rows = { 5: 'war_row_double_charge' };
-    check('prog_deep_roots', false, 'lower-row choice');
-    meta.talents.rows = { 20: 'war_row_colossal_might' };
-    check('prog_deep_roots', true, 'final-row choice');
+    // talentSpecChosen / talentCapstone read FALSE for everyone now that the
+    // talent trees are retired (Phase D0); their deeds cannot progress.
+    check('prog_specialized', false, 'talent flag retired');
+    check('prog_deep_roots', false, 'talent flag retired');
     // guildMember (server-stamped entity field)
     check('soc_guild_joined', false, 'guildless');
     sim.setPlayerGuild(meta.entityId, 'The Levy');
@@ -1613,72 +1607,10 @@ describe('live sites grant in the same run (retro cannot mask a broken site)', (
     expect(meta.deedsEarned.has('cmb_heavy_hitter')).toBe(true);
   });
 
-  // A valid six-row warrior build: a spec and one choice in every canonical row,
-  // including the level-20 capstone, so it satisfies the spec, capstone,
-  // first-choice, and full-build deeds at once.
-  const warriorSpecCapstoneBuild = (): TalentAllocation => ({
-    ...emptyAllocation(),
-    spec: 'arms',
-    rows: {
-      5: 'war_row_double_charge',
-      8: 'war_row_die_by_the_sword',
-      11: 'war_row_storm_bolt',
-      14: 'war_row_blood_offering',
-      17: 'war_row_avatar',
-      20: 'war_row_colossal_might',
-    },
-  });
-
-  it('saveLoadout: applying a staged spec+capstone build makes the talent deeds land in-tick', () => {
-    const sim = makeSim();
-    sim.setPlayerLevel(MAX_LEVEL); // all six rows unlocked
-    const { meta } = primary(sim);
-    // Drain the setPlayerLevel dirty mark on its own tick so the final tick's
-    // only mark can come from saveLoadout itself.
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_talented')).toBe(false);
-    expect(meta.deedsEarned.has('prog_specialized')).toBe(false);
-    expect(meta.deedsEarned.has('prog_deep_roots')).toBe(false);
-    expect(meta.deedsEarned.has('prog_full_build')).toBe(false);
-    // The UI Save flow always passes the staged allocation, so this applies the
-    // build as its only effect.
-    expect(sim.saveLoadout('Build', [], warriorSpecCapstoneBuild())).toBeGreaterThanOrEqual(0);
-    expect(meta.talents.spec).toBe('arms'); // the staged build was applied
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_talented')).toBe(true);
-    expect(meta.deedsEarned.has('prog_specialized')).toBe(true);
-    expect(meta.deedsEarned.has('prog_deep_roots')).toBe(true);
-    expect(meta.deedsEarned.has('prog_full_build')).toBe(true);
-  });
-
-  it('deleteLoadout: auto-applying the next loadout on delete makes its talent deeds land in-tick', () => {
-    const sim = makeSim();
-    sim.setPlayerLevel(MAX_LEVEL);
-    const { meta } = primary(sim);
-    const plainBuild: TalentAllocation = {
-      ...emptyAllocation(),
-      spec: null,
-      rows: { 5: 'war_row_pursuit' },
-    };
-    // Save the spec+capstone build first (slot 0), then a spec-less build (slot
-    // 1) which becomes active and live. No tick runs between the two saves, so
-    // the live state settles on the spec-less build.
-    expect(sim.saveLoadout('Spec', [], warriorSpecCapstoneBuild())).toBe(0);
-    expect(sim.saveLoadout('Plain', [], plainBuild)).toBe(1);
-    // Drain the save marks; the live build is spec-less, so the spec deeds stay
-    // unearned. This isolates the delete auto-apply as the only remaining site.
-    sim.tick();
-    expect(meta.talents.spec).toBeNull();
-    expect(meta.deedsEarned.has('prog_specialized')).toBe(false);
-    expect(meta.deedsEarned.has('prog_deep_roots')).toBe(false);
-    // Deleting the active spec-less loadout auto-applies slot 0 (the
-    // spec+capstone build), which must re-check the talent deeds.
-    expect(sim.deleteLoadout(1)).toBe(true);
-    expect(meta.talents.spec).toBe('arms'); // slot 0 auto-applied
-    sim.tick();
-    expect(meta.deedsEarned.has('prog_specialized')).toBe(true);
-    expect(meta.deedsEarned.has('prog_deep_roots')).toBe(true);
-  });
+  // The two loadout tests that stood here (saveLoadout / deleteLoadout landing
+  // the talent deeds in-tick) went with the talent system in Phase D0; the four
+  // prog_* talent deeds now read false permanently (see the meters/flags block
+  // above and src/sim/deeds.ts).
 
   it('potion drink: a Battlefield Experience trickle crossing 75 skill makes the craft deed land in-tick', () => {
     const sim = makeSim();

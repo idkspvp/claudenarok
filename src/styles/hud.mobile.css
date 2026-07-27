@@ -473,7 +473,6 @@
      body.mobile-touch (hidden below); xpbar/player-frame/petbar keep rendering
      (their own mobile rules are untouched).
 
-
      GEOMETRY: the 5 paged buttons sit on one circular arc centred on the attack
      button's centre, a quarter sweep from due-left (180deg) to due-up (90deg) in
      22.5deg steps, so every adjacent pair has the same centre distance
@@ -3912,87 +3911,6 @@
   body.mobile-touch .perf-footer .btn {
     min-height: 44px;
   }
-  /* Compact centered Talents sheet. The specialization picker is intentionally
-     three-up in every orientation so all specs remain visible and tappable
-     without a horizontal or vertical selection gesture. */
-  body.mobile-touch #talents-window {
-    position: fixed;
-    left: 50%;
-    right: auto;
-    top: 50%;
-    bottom: auto;
-    width: min(620px, calc(var(--app-vw) / var(--window-scale, 1) - 20px));
-    max-width: calc(var(--app-vw) / var(--window-scale, 1) - 20px);
-    max-height: calc(var(--app-vh) / var(--window-scale, 1) - 20px);
-    transform: translate(-50%, -50%);
-    overflow-x: hidden;
-    overflow-y: hidden;
-    z-index: 95 !important;
-  }
-  body.mobile-touch #talents-window #tal-body {
-    width: 100%;
-    min-height: 0;
-    max-height: max(150px, min(360px, calc(var(--app-vh) / var(--window-scale, 1) - 180px)));
-    overflow: auto;
-  }
-  body.mobile-touch #talents-window .panel-title {
-    margin-bottom: 4px;
-    padding-bottom: 4px;
-    font-size: 13px;
-  }
-  body.mobile-touch #talents-window .tal-tabs {
-    margin: 4px 0;
-  }
-  body.mobile-touch #talents-window .tal-tab {
-    min-height: 40px;
-    display: flex;
-    align-items: center;
-    padding: 4px 6px;
-  }
-  body.mobile-touch #talents-window .ts-specs-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    min-height: 0;
-    gap: 6px;
-    margin: 6px 0;
-  }
-  body.mobile-touch #talents-window .ts-panel {
-    padding: 8px 4px;
-    aspect-ratio: auto;
-    min-height: 150px;
-  }
-  body.mobile-touch #talents-window .ts-panel-head {
-    gap: 4px;
-    margin-bottom: 4px;
-  }
-  body.mobile-touch #talents-window .ts-panel .ts-icon {
-    width: 36px;
-    height: 36px;
-  }
-  body.mobile-touch #talents-window .ts-name {
-    font-size: 11px;
-    overflow-wrap: anywhere;
-  }
-  body.mobile-touch #talents-window .ts-role {
-    font-size: 8px;
-  }
-  body.mobile-touch #talents-window .ts-det-desc,
-  body.mobile-touch #talents-window .ts-det-meta,
-  body.mobile-touch #talents-window .ts-det-mastery,
-  body.mobile-touch #talents-window .ts-ex-block {
-    display: none;
-  }
-  body.mobile-touch #talents-window .ts-view-talents {
-    min-height: 40px;
-    margin-top: auto;
-    padding: 4px 3px;
-    font-size: 9px;
-    line-height: 1.15;
-  }
-  body.mobile-touch #talents-window .tal-loadout-btn {
-    min-height: 40px;
-    padding: 5px 9px;
-  }
   body.mobile-touch #spellbook [data-close] {
     min-width: 40px;
     min-height: 40px;
@@ -5006,11 +4924,6 @@
     }
     body.mobile-touch #mobile-preflight-steps {
       font-size: 11px;
-    }
-    /* Keep the footer compact below the full-width, internally scrollable body. */
-    body.mobile-touch #talents-window > .tal-foot {
-      margin-top: 0;
-      padding-top: 4px;
     }
   }
   /* Re-homed from the char-select responsive block in shell.css: narrow-width

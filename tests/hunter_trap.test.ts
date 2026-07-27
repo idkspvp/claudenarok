@@ -16,7 +16,6 @@ type AnySim = Sim & { ctx: { groundAoEs: GroundAoE[] } };
 function setup(): { sim: AnySim; p: Entity } {
   const sim = new Sim({ seed: 7, playerClass: 'hunter', autoEquip: true }) as AnySim;
   sim.setPlayerLevel(10);
-  expect(sim.applyTalents({ spec: null, rows: { 8: 'hun_r8_frost_trap' } })).toBe(true);
   const p = sim.player;
   p.resource = p.maxResource;
   return { sim, p };

@@ -1418,9 +1418,6 @@ async function startGame(
           case 'nameplates':
             renderer.showNameplates = !renderer.showNameplates;
             break;
-          case 'talents':
-            hud.toggleTalents();
-            break;
           case 'meters':
             hud.toggleMeters();
             break;
@@ -1525,7 +1522,6 @@ async function startGame(
     onBags: () => hud.toggleBags(),
     onCrafting: () => hud.toggleCrafting(),
     onSpellbook: () => hud.toggleSpellbook(),
-    onTalents: () => hud.toggleTalents(),
     onMap: () => hud.toggleMap(),
     onLeaderboard: () => hud.toggleLeaderboard(),
     onDailyRewards: () => hud.toggleDailyRewards(),
@@ -1639,9 +1635,6 @@ async function startGame(
         break;
       case 'nameplates':
         renderer.showNameplates = !renderer.showNameplates;
-        break;
-      case 'talents':
-        hud.toggleTalents();
         break;
       case 'meters':
         hud.toggleMeters();

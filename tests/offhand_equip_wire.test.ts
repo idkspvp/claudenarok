@@ -75,7 +75,6 @@ describe('unequip an offhand item over the wire', () => {
 
     // Use a Fury warrior as a build that can hold a dual-wield offhand weapon.
     sim.setPlayerLevel(40, session.pid);
-    expect(sim.setSpec('fury', session.pid)).toBe(true);
 
     // Put a one-hand weapon in the offhand the way the game does it: the resolver
     // routes a one-hander to the offhand when the mainhand is occupied (a weapon's
@@ -105,7 +104,6 @@ describe('equip an aimed offhand weapon over the wire', () => {
     const meta = sim.meta(session.pid)!;
 
     sim.setPlayerLevel(40, session.pid);
-    expect(sim.setSpec('fury', session.pid)).toBe(true);
     expect(sim.unequipItem('mainhand', session.pid)).toBe(true);
     expect(sim.unequipItem('offhand', session.pid)).toBe(true);
     expect(meta.equipment.mainhand).toBeFalsy();

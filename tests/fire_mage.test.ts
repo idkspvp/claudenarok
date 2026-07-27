@@ -10,17 +10,17 @@
 import { describe, expect, it } from 'vitest';
 import { applyIgnite, fireGuaranteedCrit, HOT_STREAK_BUILDERS } from '../src/sim/combat/fire_mage';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { ROW_TREES } from '../src/sim/content/talent_rows';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 
-function mageWithSpec(spec: 'fire' | 'frost') {
+// Specs are retired (Phase D0): a level-20 mage knows every mage ability, so the
+// `spec` argument no longer selects anything. It is kept as a readable label of
+// which kit each test is exercising.
+function mageWithSpec(_spec: 'fire' | 'frost') {
   const sim = new Sim({ seed: 33, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -52,28 +52,8 @@ function gcdReset(p: Entity): void {
   (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
 }
 
-describe.skip('fire spec kit', () => {
-  it('the pick grants Ignition + Hot Streak passives, Blazing Barrier and Meteor', () => {
-    const fireMods = computeTalentModifiers('mage', {
-      ...emptyAllocation(),
-      spec: 'fire',
-    } as never);
-    const fire = abilitiesKnownAt('mage', 20, fireMods).map((k) => k.def.id);
-    for (const id of ['ignition', 'hot_streak', 'blazing_barrier', 'meteor', 'combustion']) {
-      expect(fire, id).toContain(id);
-    }
-    const frostMods = computeTalentModifiers('mage', {
-      ...emptyAllocation(),
-      spec: 'frost',
-    } as never);
-    const frost = abilitiesKnownAt('mage', 20, frostMods).map((k) => k.def.id);
-    for (const id of ['ignition', 'hot_streak', 'blazing_barrier', 'meteor']) {
-      expect(frost, id).not.toContain(id);
-    }
-    expect(frost).toContain('summon_water_elemental');
-    expect(fire).not.toContain('summon_water_elemental');
-  });
-});
+// The already-skipped 'fire spec kit' block that stood here asserted the spec
+// pick's exclusive grants; specs are retired (Phase D0).
 
 describe.skip('guaranteed crits and Ignition', () => {
   it('Cinderfall killing its target makes the follow-up auto-engage a silent no-op', () => {
@@ -450,7 +430,6 @@ describe.skip('playtest round five (owner hotfixes)', () => {
         (e) => e.templateId === 'water_elemental' && (e as { ownerId?: number }).ownerId === p.id,
       );
     expect(pet()).toBeDefined();
-    expect(sim.setSpec('fire')).toBe(true);
     collect(sim, 0.5);
     expect(pet()).toBeUndefined(); // dismissed at the spec boundary
   });
@@ -503,18 +482,9 @@ describe.skip('playtest round five (owner hotfixes)', () => {
     expect(p.castingAbility).toBe('flamestrike');
   });
 
-  it('Rune of Power is a deliberate cast now', () => {
-    const { sim, p } = mageWithSpec('fire');
-    // The rune is a level-20 choice-row grant; pick it like the window would.
-    const row = (ROW_TREES.mage ?? []).find((r) =>
-      r.options.some((o) => o.id === 'mag_r20_rune_of_power'),
-    );
-    expect(row).toBeDefined();
-    expect(sim.selectTalentRow(row!.level, 'mag_r20_rune_of_power')).toBe(true);
-    p.resource = p.maxResource;
-    sim.castAbility('rune_of_power');
-    expect(p.castingAbility).toBe('rune_of_power');
-  });
+  // The Rune of Power test that stood here picked a level-20 choice-row grant;
+  // the rows went with the talent trees (Phase D0) and the ability has no
+  // acquisition path left.
 });
 
 describe.skip('Emberfall', () => {
@@ -544,7 +514,6 @@ describe.skip('the personal-barrier slot', () => {
   it('Warded cuts damage behind Blazing Barrier and heals when it breaks', () => {
     const sim = new Sim({ seed: 33, playerClass: 'mage', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.applyTalents({ spec: 'fire', rows: { 8: 'mag_r8_warded' } } as never)).toBe(true);
     sim.tick();
     const p = sim.player;
     p.resource = p.maxResource;
@@ -577,18 +546,8 @@ describe.skip('the personal-barrier slot', () => {
     expect(p.hp).toBe(hp0 + breakHeal - landingDamage);
   });
 
-  it('Cold Snap finishes the Blazing Barrier cooldown too', () => {
-    const sim = new Sim({ seed: 33, playerClass: 'mage', autoEquip: true });
-    sim.setPlayerLevel(20);
-    expect(sim.applyTalents({ spec: 'fire', rows: { 17: 'mag_r17_cold_snap' } } as never)).toBe(
-      true,
-    );
-    const p = sim.player;
-    p.cooldowns.set('blazing_barrier', 25);
-    p.resource = p.maxResource;
-    sim.castAbility('cold_snap');
-    expect(p.cooldowns.has('blazing_barrier')).toBe(false);
-  });
+  // The Cold Snap test that stood here applied a level-17 choice-row talent; the
+  // rows went with the talent trees (Phase D0).
 });
 
 describe.skip('Water Elemental', () => {

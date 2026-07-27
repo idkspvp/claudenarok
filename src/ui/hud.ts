@@ -34,7 +34,6 @@ import { DEED_ORDER, DEEDS } from '../sim/content/deeds';
 import { HEROIC_MARK_ITEM_ID } from '../sim/content/dungeon_difficulty';
 import { HEROIC_VENDOR_STOCK } from '../sim/content/heroic_vendor';
 import { recipeById } from '../sim/content/recipes';
-import { FIRST_TALENT_LEVEL, type TalentAllocation, talentsFor } from '../sim/content/talents';
 import { resolveActiveWeaponSkin } from '../sim/content/weapon_skin_rules';
 import type { ZoneDef } from '../sim/data';
 import {
@@ -278,7 +277,6 @@ import {
   shouldUseGroundAim,
 } from './hud/action_bar/ground_aim';
 import {
-  applyLoadoutBar as applyLoadoutBarActions,
   assignAttackSlotAction,
   attackDragDisposition,
   clearHotbarSlot,
@@ -286,7 +284,6 @@ import {
   HOTBAR_ACTION_MIME,
   type HotbarAction,
   handleMobileAttackTap,
-  loadoutKnownAbilityIds,
   parseHotbarAction,
   placeAbilityOnSlot,
   placeItemOnSlot,
@@ -447,7 +444,6 @@ import { ProfessionsWindow } from './professions_window';
 import { lockoutParts, lockoutShape } from './raid_lockout';
 import { type RaidLockoutI18n, raidLockoutPanelHtml } from './raid_lockout_view';
 import { restView } from './rest_indicator';
-import { isTalentRowUnlockLevel } from './row_unlock_toast';
 import { localizeServerText } from './server_i18n';
 import { localizeSimAuraName, localizeSimText } from './sim_i18n';
 import { SocialWindow } from './social_window';
@@ -473,8 +469,6 @@ import { StoreWindow } from './store_window';
 import { nearestSubzone } from './subzone';
 import { swingTimerState } from './swing_timer';
 import { SwingTimerPainter } from './swing_timer_painter';
-import { roleLabel, tTalent } from './talent_i18n';
-import { TalentsWindow } from './talents_window';
 import { targetOfTargetId } from './target_of_target';
 import { targetPortraitUrl } from './target_portrait_view';
 import { targetRankView, targetUsesEliteFrame } from './target_rank_view';
@@ -1864,7 +1858,6 @@ export class Hud {
     });
     $('#mm-char').addEventListener('click', () => this.toggleChar());
     $('#mm-spell').addEventListener('click', () => this.toggleSpellbook());
-    $('#mm-talents')?.addEventListener('click', () => this.toggleTalents());
     $('#mm-town-focus')?.addEventListener('click', () => this.toggleTownFocus());
     $('#mm-deeds').addEventListener('click', () => this.toggleDeeds());
     $('#mm-professions').addEventListener('click', () => this.toggleProfessions());
@@ -2640,11 +2633,6 @@ export class Hud {
         // Route through the painter so focus returns to the opener (WCAG 2.4.3),
         // consistent with the toggle / X close path. NON-MODAL: no trap is released.
         else this.bagsWindow.close();
-        break;
-      case 'talents-window':
-        // Route through the painter so the staged buffer is dropped AND focus
-        // returns to the opener (WCAG), consistent with the toggle/X close path.
-        this.talentsWindow.close();
         break;
       case 'spellbook':
         // Route through the painter so focus returns to the opener (WCAG 2.2 AA).
@@ -3460,37 +3448,6 @@ export class Hud {
     itemTooltip: (item, instance?: ItemInstancePayload) => this.itemTooltip(item, true, instance),
     attachTooltip: (el, html) => this.attachTooltip(el, html),
   };
-  // The interactive talents window. All allocation reads and mutations cross the
-  // IWorld seam; the painter owns no optimistic talent state. All closures are
-  // lazy, so this field initializer is safe before the ctor assigns this.sim.
-  private readonly talentsWindow = new TalentsWindow({
-    ...this.presentationBag,
-    root: () => $('#talents-window'),
-    hideTooltip: () => this.hideTooltip(),
-    ...this.windowFocus('#talents-window'),
-    playerClass: () => this.sim.cfg.playerClass,
-    playerLevel: () => this.sim.player.level,
-    currentAllocation: () => this.sim.talents,
-    activeLoadout: () => this.sim.activeLoadout,
-    loadouts: () => this.sim.loadouts,
-    abilityTooltip: (id) => {
-      const res = this.previewResolvedAbility(id);
-      return res ? this.abilityTooltip(res) : null;
-    },
-    commitSpec: (specId) => this.sim.setSpec(specId),
-    selectRow: (level, optionId) => this.sim.selectTalentRow(level, optionId),
-    applyTalents: (allocation) => this.sim.applyTalents(allocation),
-    respec: () => this.sim.respec(),
-    currentBar: () => this.hotbarActions.map((a) => (a && a.type === 'ability' ? a.id : null)),
-    saveLoadout: (name, bar, alloc) => this.sim.saveLoadout(name, bar, alloc),
-    switchLoadout: (i) => this.sim.switchLoadout(i),
-    deleteLoadout: (i) => this.sim.deleteLoadout(i),
-    applyLoadoutBar: (bar, alloc) => this.applyLoadoutBar(bar, alloc),
-    inputDialog: (opts) => this.inputDialog(opts),
-    confirmDialog: (title, body, okText, cancelText, onOk) =>
-      this.confirmDialog(title, body, okText, cancelText, onOk),
-    showError: (text) => this.showError(text),
-  });
   // Social panel painter (social_view.ts core + social_window.ts painter). The
   // window renders no item rows, so it composes no PainterHostPresentation bag; it
   // reads/commands the live world and routes the shared chrome (whisper, confirm
@@ -3818,7 +3775,6 @@ export class Hud {
     slotName: (slot) => itemSlotName(slot),
     statCellHtml: (stat) => statCellHtml(this.statModel(stat), STAT_VIEW_DEPS, { colon: false }),
     statTooltipHtml: (stat) => statTooltipHtml(this.statModel(stat), STAT_VIEW_DEPS),
-    talentSummaryHtml: () => this.talentSummaryHtml(),
     progressionHtml: (level) => this.progressionHtml(level),
     unequip: (slot) => {
       this.sim.unequipItem(slot);
@@ -6323,7 +6279,6 @@ export class Hud {
     const sideButtons: [selector: string, action: string, labelKey: TranslationKey][] = [
       ['#mm-char', 'char', 'hud.keybinds.actions.char'],
       ['#mm-spell', 'spellbook', 'abilityUi.spellbook.title'],
-      ['#mm-talents', 'talents', 'game.talents.title'],
       ['#mm-deeds', 'deeds', 'hudChrome.deeds.title'],
       ['#mm-professions', 'professions', 'hudChrome.professions.title'],
       ['#mm-map', 'map', 'hud.core.mobileMap'],
@@ -6874,12 +6829,6 @@ export class Hud {
     this.syncActiveHotbarForm();
     this.syncSlotMap(); // picks up newly learned abilities mid-session
 
-    // talent buttons glow while the player has unspent points (and a tree exists)
-    const tp = sim.talentPoints();
-    const talGlow = talentsFor(sim.cfg.playerClass) !== null && tp.spent < tp.total;
-    document.getElementById('mm-talents')?.classList.toggle('has-points', talGlow);
-    document.getElementById('mobile-talents')?.classList.toggle('has-points', talGlow);
-
     // Town Focus (#1143): the minimap button (and, if open, the panel's live
     // gate) only ever shows/works while standing in a town hub. Cheap zone
     // check, gated to the slow tier since it changes only on foot travel.
@@ -7191,25 +7140,25 @@ export class Hud {
     // writes nothing). On the FIRST frame in-world, preview the unlit bird for
     // a few seconds so the player can find it and drag it into place (one-shot
     // timer, not per-frame work; the painter's two classes never conflict).
-    // The login preview only makes sense where the bird is otherwise RARE: the
-    // fire mage (Hot Streak procs occasionally). It is gated to fire so it never
-    // flashes on a warrior/other class, and never on a Chronomancer (whose bird
-    // is on screen constantly, one quarter per Aether Surge charge, so a preview
-    // would just be noise). Gated inside the one-shot guard so a mage whose spec
-    // loads a frame late still previews once.
-    if (!this.procOverlayPreviewed && this.sim.talentSpec === 'fire') {
+    // The login preview only makes sense where the bird is otherwise RARE, which
+    // is the mage's Hot Streak. It is gated to the mage so it never flashes on a
+    // warrior or other class.
+    if (!this.procOverlayPreviewed && this.sim.cfg.playerClass === 'mage') {
       this.procOverlayPreviewed = true;
       this.procOverlayEl.classList.add('preview');
       window.setTimeout(() => this.procOverlayEl.classList.remove('preview'), 8000);
     }
-    // Chronomancy (arcane spec) drives the same bird from its Aether Surge
-    // charges (one quarter per charge); every other spec/class keeps the fire
-    // Heating Up / Hot Streak rule. Both routes clear the other's classes, so a
-    // spec swap never strands a half-lit bird.
-    if (this.sim.talentSpec === 'arcane') {
-      this.procOverlayPainter.paintChronoCharges(chronoOverlayCharges(p.auras));
-    } else if (this.sim.talentSpec === 'frost') {
-      this.procOverlayPainter.paintFrostCharges(frostOverlayCharges(p.auras));
+    // Three kits share the bird, and a mage now knows all three, so the live
+    // AURAS pick the route rather than a committed spec: Chronomancy's Aether
+    // Surge charges (one quarter per charge), then Frost's Icicle bank, then the
+    // fire Heating Up / Hot Streak rule. Both charge routes clear the other's
+    // classes, so switching between them never strands a half-lit bird.
+    const chronoCharges = chronoOverlayCharges(p.auras);
+    const icicleCharges = frostOverlayCharges(p.auras);
+    if (chronoCharges > 0) {
+      this.procOverlayPainter.paintChronoCharges(chronoCharges);
+    } else if (icicleCharges > 0) {
+      this.procOverlayPainter.paintFrostCharges(icicleCharges);
     } else {
       this.procOverlayPainter.paint(procOverlayState(p.auras), combustionOverlayActive(p.auras));
     }
@@ -8767,15 +8716,6 @@ export class Hud {
           this.showBanner(t('hud.core.levelBanner', { level: ev.level }));
           this.log(t('hud.core.levelLog', { level: ev.level }), '#ffd100');
           audio.levelUp();
-          if (isTalentRowUnlockLevel(ev.level)) {
-            this.showBanner(t('game.talents.rowUnlockToast'));
-            // No local gain override: the manifest's resolved gain (keyTrimDb)
-            // is the single source of truth, same fix efe124264 already
-            // applied to every other quest_ready call site. This one was
-            // missed; stacking this on top of the corrected catalog gain was
-            // clipping (+3.4dBTP effective).
-            sfx.playUi('quest_ready');
-          }
           if (ev.level === 5) {
             const characterId = (this.sim as unknown as { characterId?: number }).characterId;
             trackMetaPixel(
@@ -8783,11 +8723,6 @@ export class Hud {
               { level: ev.level },
               characterId ? { eventID: `lvl5_${characterId}` } : undefined,
             );
-          }
-          // First talent point (and spec) unlock — nudge the player to the panel.
-          if (ev.level === FIRST_TALENT_LEVEL && talentsFor(this.sim.cfg.playerClass)) {
-            this.showBanner(t('game.talents.unlockBanner'));
-            this.log(t('game.talents.unlockHint'), '#ffd100');
           }
           break;
         }
@@ -12092,24 +12027,6 @@ export class Hud {
     }
   }
 
-  // Character-sheet summary of the current specialization, role, and Mastery
-  // (FR-8.6). Reuses the progression-block styling.
-  private talentSummaryHtml(): string {
-    const ct = talentsFor(this.sim.cfg.playerClass);
-    if (!ct) return '';
-    const sp = ct.specs.find((s) => s.id === this.sim.talentSpec);
-    const specName = sp
-      ? esc(tTalent({ kind: 'talentSpec', spec: sp, field: 'name' }))
-      : t('game.talents.noSpec');
-    let html = `<div class="char-progression"><div class="cp-title">${t('game.talents.specTab')}</div>`;
-    html += `<div class="char-stats cp-stats"><span>${t('game.talents.specTab')}: <b>${specName}</b></span>`;
-    if (sp) html += `<span>${t('game.talents.role')}: <b>${roleLabel(sp.role)}</b></span>`;
-    html += `</div>`;
-    if (sp)
-      html += `<div class="cp-milestones"><span class="cp-ms-label">${t('game.talents.mastery')}:</span> <b style="color:var(--gold)">${esc(tTalent({ kind: 'talentMastery', spec: sp, field: 'name' }))}</b> <span class="cp-none">${esc(tTalent({ kind: 'talentMastery', spec: sp, field: 'description' }))}</span></div>`;
-    return `${html}</div>`;
-  }
-
   // The "Progression" group on the character sheet: total XP, virtual level,
   // prestige rank (when prestiged), unlocked milestone badges, and — at the cap
   // — the opt-in Prestige button.
@@ -12558,52 +12475,6 @@ export class Hud {
   // refreshes the +/- controls from hud.update() while open.
   toggleSpellbook(): void {
     this.spellbookWindow.toggle();
-  }
-
-  // -------------------------------------------------------------------------
-  // Talents & Specializations panel (bound to 'N'). The interactive staged-edit
-  // window (tree, spec tabs, loadout footer) lives in TalentsWindow; Hud stays the
-  // coordinator (closeOtherWindows needs its private window state). The staged build
-  // commits through the server-authoritative IWorld on save / loadout switch /
-  // delete (saveLoadout / switchLoadout / deleteLoadout), never inline.
-  // -------------------------------------------------------------------------
-
-  toggleTalents(): void {
-    const el = $('#talents-window');
-    if (el.style.display === 'block') {
-      this.talentsWindow.close();
-      return;
-    }
-    this.closeOtherWindows('#talents-window');
-    this.talentsWindow.open();
-  }
-
-  // Restore a saved loadout's action bar into the per-class slot map (reuses the
-  // existing hotbar persistence; only places ids the TARGET build's own allocation
-  // actually grants). A SavedLoadout's bar is ability ids only (currentBar strips
-  // item shortcuts before saving, see the talentsWindow deps below), so this must
-  // not replace the WHOLE bar wholesale: that would also silently clear any
-  // potion/food/drink shortcut the player had placed, since the loadout never
-  // recorded it either way (#1889). applyLoadoutBarActions keeps an existing item
-  // slot wherever the loadout leaves that slot blank.
-  //
-  // The ability predicate is resolved from `alloc` (the loadout's own talent
-  // allocation), not `!!ABILITIES[id]`: two builds on one class can grant disjoint
-  // ability sets (e.g. a shaman's Enhancement vs. Restoration loadout), and
-  // checking global existence let a stale/foreign-spec id survive a switch and
-  // scramble the bar. Resolving from `alloc` also sidesteps switchLoadout's server
-  // round trip, which has not necessarily landed in `this.sim.known` yet when this
-  // runs (see the talentsWindow dropdown handler, which calls switchLoadout and
-  // applyLoadoutBar back to back).
-  private applyLoadoutBar(bar: (string | null)[], alloc: TalentAllocation): void {
-    const known = loadoutKnownAbilityIds(this.sim.cfg.playerClass, alloc, this.sim.player.level);
-    this.hotbarActions = applyLoadoutBarActions(
-      this.hotbarActions,
-      bar,
-      Hud.BAR_ABILITY_SLOTS,
-      (id) => known.has(id),
-    );
-    this.saveSlotMap();
   }
 
   // -------------------------------------------------------------------------

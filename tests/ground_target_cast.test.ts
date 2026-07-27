@@ -24,8 +24,6 @@ function makeMage(): { sim: Sim; pid: number } {
   const pid = sim.addPlayer('mage', 'Mag');
   placePlayerInOpenField(sim, pid);
   sim.setPlayerLevel(20, pid); // plenty of level for Flamestrike
-  // The mage unify spec-gated Flamestrike into the fire kit (specs: ['fire']).
-  if (!sim.setSpec('fire', pid)) throw new Error('no fire spec');
   const me = sim.entities.get(pid);
   if (!me) throw new Error('no mage');
   me.resource = 9999; // plenty of mana for the cast

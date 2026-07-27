@@ -94,7 +94,6 @@ describe('Highwatch training dummy', () => {
     const d = dummyOf(sim);
     const pid = meleePlayerAt(sim, d.pos.x + 1, d.pos.z);
     const player = sim.entities.get(pid)!;
-    expect(sim.setSpec('prot', pid)).toBe(true);
 
     sim.castAbility('defiant_bellow', pid);
     expect(d.threat.get(pid)).toBeGreaterThan(0);

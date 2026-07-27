@@ -17,7 +17,6 @@ function tankEhp(cls: PlayerClass, spec: string, form?: string): number {
   const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
   const pid = sim.addPlayer(cls, 'T');
   sim.setPlayerLevel(20, pid);
-  sim.applyTalents({ spec, rows: {} }, pid);
   const p = sim.entities.get(pid)!;
   const score = (i: ItemDef) => (i.stats?.vit ?? 0) * 100 + (i.stats?.armor ?? 0) * 0.1;
   for (const slot of [

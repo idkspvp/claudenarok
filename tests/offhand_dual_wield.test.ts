@@ -77,7 +77,6 @@ describe('starting hands', () => {
   it('a non-dual-wield warrior replaces mainhand instead of filling offhand', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(10);
-    expect(sim.setSpec('prot')).toBe(true);
     requirePlayerMeta(sim, sim.player.id).autoEquip = false;
     sim.addItem('redbrook_blade', 1);
     sim.equipItem('redbrook_blade');
@@ -153,7 +152,6 @@ describe('offhand combat rules', () => {
   it('dual wielding arms both swing timers and emits both hands over auto-attack', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true }) as AnySim;
     sim.setPlayerLevel(10);
-    expect(sim.setSpec('fury')).toBe(true);
     sim.addItem('redbrook_blade', 1);
     sim.equipItem('redbrook_blade');
     const p = sim.player;
@@ -225,7 +223,6 @@ describe("Titan's Grip combat and bench rules", () => {
   function furyWithTwoGreatswords(): Sim {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(10);
-    expect(sim.setSpec('fury')).toBe(true);
     requirePlayerMeta(sim, sim.player.id).autoEquip = false;
     sim.addItem('eastbrook_greatsword', 2);
     sim.equipItem('eastbrook_greatsword');
@@ -267,13 +264,11 @@ describe("Titan's Grip combat and bench rules", () => {
   it('switching Fury (dual one-handers) to Prot benches the offhand weapon', () => {
     const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
     sim.setPlayerLevel(10);
-    expect(sim.setSpec('fury')).toBe(true);
     requirePlayerMeta(sim, sim.player.id).autoEquip = false;
     sim.addItem('redbrook_blade', 2);
     sim.equipItem('redbrook_blade');
     sim.equipItem('redbrook_blade');
     expect(sim.equipment.offhand).toBe('redbrook_blade'); // dual-wielding one-handers
-    expect(sim.setSpec('prot')).toBe(true);
     // Prot cannot dual-wield: the offhand one-hander is benched.
     expect(sim.equipment.offhand).toBeUndefined();
   });

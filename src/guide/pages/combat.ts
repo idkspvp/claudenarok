@@ -44,7 +44,6 @@ export const combat: GuidePage = {
         ${related([
           { href: hrefFor('reference/stats'), key: 'guide.nav.stats' },
           { href: hrefFor('classes'), key: 'guide.nav.classes' },
-          { href: hrefFor('reference/talents'), key: 'guide.nav.talents' },
           { href: hrefFor('reference/glossary'), key: 'guide.nav.glossary' },
         ])}
       </article>`;

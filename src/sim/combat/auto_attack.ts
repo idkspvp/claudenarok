@@ -61,7 +61,7 @@ import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing'
 import { isTravelFormAuraKind } from './forms';
 import { missChanceFromContest } from './hit_flee';
 import { rangedShotProfile } from './ranged_shot';
-import { onCastCompleted, onMeleeSwing } from './talent_procs';
+import { onCastCompleted } from './cast_hooks';
 import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
 import { weaponSwingDamage } from './weapon_damage';
@@ -619,10 +619,6 @@ export function meleeSwing(
   // the weaponStrike ability path, which resolves through this shell). Gated on
   // setProcs inside applySetProcs, so proc-less players draw no rng.
   if (crit && attacker.kind === 'player') ctx.applySetProcs(attacker, target, 'weaponCrit');
-  // Landed-swing talent responses resolve before the target retaliates or the
-  // weapon's on-hit proc fires. This is observable for defensive healing and
-  // preserves the authored Oathwheel, Venom Dividend, and imbue proc cadence.
-  if (attacker.kind === 'player') onMeleeSwing(ctx, attacker);
   // thorns / lightning shield: melee attackers take damage back. Charge-limited
   // thorns (Lightning Shield) consume a charge and gate on an internal cooldown.
   if (!attacker.dead) {

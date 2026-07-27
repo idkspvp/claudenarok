@@ -1,7 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ClientWorld } from '../src/net/online';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { ABILITIES } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
@@ -13,7 +12,6 @@ const ABILITY_ID = 'collective_reversal';
 function chronomancer(): { sim: Sim; mage: Entity } {
   const sim = new Sim({ seed: 73, playerClass: 'mage' });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const mage = sim.player;
   mage.resource = mage.maxResource;
@@ -42,7 +40,6 @@ describe('Collective Reversal content', () => {
     const def = ABILITIES[ABILITY_ID];
     expect(def).toMatchObject({
       class: 'mage',
-      specs: ['arcane'],
       learnLevel: 8,
       castTime: 7,
       requiresTarget: false,
@@ -50,15 +47,9 @@ describe('Collective Reversal content', () => {
     });
     expect(def.effects).toContainEqual({ type: 'massResurrectGroup', hpFrac: 0.3 });
 
-    const known = (spec: 'arcane' | 'fire' | 'frost') =>
-      abilitiesKnownAt(
-        'mage',
-        8,
-        computeTalentModifiers('mage', { ...emptyAllocation(), spec }),
-      ).map((ability) => ability.def.id);
-    expect(known('arcane')).toContain(ABILITY_ID);
-    expect(known('fire')).not.toContain(ABILITY_ID);
-    expect(known('frost')).not.toContain(ABILITY_ID);
+    // Specs are retired (Phase D0): every mage learns it at level 8.
+    const known = abilitiesKnownAt('mage', 8).map((ability) => ability.def.id);
+    expect(known).toContain(ABILITY_ID);
   });
 
   it('ships distinct icon and localized spellbook text', () => {

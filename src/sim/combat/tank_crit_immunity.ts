@@ -22,12 +22,12 @@ const TANK_SPEC_BY_CLASS: Partial<Record<PlayerClass, string>> = {
 
 export interface TankCritImmunityMeta {
   cls: PlayerClass;
-  talentMods?: { spec: string | null } | null;
+  mods?: { spec: string | null } | null;
 }
 
 export function isCritImmuneTank(target: Entity, meta: TankCritImmunityMeta | undefined): boolean {
   if (target.kind !== 'player' || !meta) return false;
-  const spec = meta.talentMods?.spec ?? null;
+  const spec = meta.mods?.spec ?? null;
   if (spec === null) return false;
   if (TANK_SPEC_BY_CLASS[meta.cls] === spec) return true;
   if (meta.cls === 'druid' && spec === 'feral') {

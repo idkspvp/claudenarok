@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "aac40f8f",
+      "state": "7eea521b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -24,7 +24,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -76,9 +75,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -156,7 +152,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 426,
-      "state": "79edc105",
+      "state": "be374891",
       "events": "98e6db53",
       "rng": {
         "draws": 1,
@@ -165,7 +161,6 @@
       "label": "delve-first-release",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -218,9 +213,6 @@
             "luk": 4,
             "str": 8,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -297,7 +289,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 426,
-      "state": "d6ef8c42",
+      "state": "ddb3076c",
       "events": "b6f29a92",
       "rng": {
         "draws": 1,
@@ -306,7 +298,6 @@
       "label": "delve-fail",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -370,9 +361,6 @@
             "luk": 4,
             "str": 8,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -450,7 +438,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 426,
-      "state": "d6ef8c42",
+      "state": "ddb3076c",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -459,7 +447,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -523,9 +510,6 @@
             "luk": 4,
             "str": 8,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }

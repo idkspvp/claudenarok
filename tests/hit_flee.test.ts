@@ -126,7 +126,7 @@ describe('the contest reaches a real swing', () => {
         p,
         meta.cls,
         meta.equipment,
-        meta.talentMods,
+        meta.mods,
         meta.equipmentInstance,
         alloc,
       );

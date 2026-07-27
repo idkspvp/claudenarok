@@ -4,7 +4,7 @@
   "sampleEvery": 20,
   "ticks": 84,
   "coverage": [
-    "class:mage (committed frost)",
+    "class:mage",
     "Frozen Orb pulse damage + Icicle generation",
     "Fingers of Frost proc draw from frostbolt",
     "Brain Freeze proc draw from frostbolt"
@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "af533eec",
+      "state": "ff7c803a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -25,7 +25,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -81,9 +80,6 @@
             "int": 9,
             "luk": 1,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -152,8 +148,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "4653da1d",
-      "events": "dab18aca",
+      "state": "84b915f2",
+      "events": "3ce46143",
       "rng": {
         "draws": 1,
         "digest": "e1d88b80"
@@ -163,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "d2ecf4dd",
+      "state": "50203da2",
       "events": "f7152ad1",
       "rng": {
         "draws": 2,
@@ -174,7 +170,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "759f4066",
+      "state": "144dde7d",
       "events": "40c3c8b1",
       "rng": {
         "draws": 82,
@@ -185,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "1be277ce",
+      "state": "4e5c65ed",
       "events": "7900256a",
       "rng": {
         "draws": 152,
@@ -196,8 +192,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "e3b21294",
-      "events": "974197bc",
+      "state": "e3aa8eb5",
+      "events": "a6bd7bbb",
       "rng": {
         "draws": 180,
         "digest": "1a2d5a02"
@@ -205,7 +201,6 @@
       "label": "frost-procs",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -220,13 +215,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 200
+            "damageDealt": 182
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 200
+              "dummyDamage": 182
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -261,10 +256,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -293,17 +284,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 4,
             "dex": 18,
             "int": 21,
             "luk": 4,
             "vit": 9
-          },
-          "talents": {
-            "rows": {},
-            "spec": "frost"
           },
           "townFocus": {}
         }
@@ -391,7 +378,7 @@
           "spellPower": 36,
           "stats": {
             "agi": 5,
-            "armor": 142,
+            "armor": 129,
             "dex": 19,
             "int": 23,
             "luk": 5,
@@ -440,7 +427,7 @@
           "flee": 27,
           "hit": 28,
           "hostile": true,
-          "hp": 499800,
+          "hp": 499818,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -477,7 +464,7 @@
           "threat": [
             [
               415,
-              200
+              182
             ]
           ],
           "weapon": {
@@ -490,7 +477,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "e3b21294",
+      "state": "e3aa8eb5",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -499,7 +486,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -514,13 +500,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 200
+            "damageDealt": 182
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 200
+              "dummyDamage": 182
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -555,10 +541,6 @@
               ""
             ],
             [
-              "prog_specialized",
-              ""
-            ],
-            [
               "prog_the_long_middle",
               ""
             ]
@@ -587,17 +569,13 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 65,
+          "renown": 55,
           "statAllocation": {
             "agi": 4,
             "dex": 18,
             "int": 21,
             "luk": 4,
             "vit": 9
-          },
-          "talents": {
-            "rows": {},
-            "spec": "frost"
           },
           "townFocus": {}
         }
@@ -685,7 +663,7 @@
           "spellPower": 36,
           "stats": {
             "agi": 5,
-            "armor": 142,
+            "armor": 129,
             "dex": 19,
             "int": 23,
             "luk": 5,
@@ -734,7 +712,7 @@
           "flee": 27,
           "hit": 28,
           "hostile": true,
-          "hp": 499800,
+          "hp": 499818,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -771,7 +749,7 @@
           "threat": [
             [
               415,
-              200
+              182
             ]
           ],
           "weapon": {

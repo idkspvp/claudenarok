@@ -41,7 +41,6 @@ function drain(sim: Sim): SimEvent[] {
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -88,9 +87,7 @@ describe('Temporal Echo: the mark', () => {
   it('is granted only to Chronomancy and appears on the healer book', () => {
     const { sim } = chronoMage();
     expect(sim.resolvedAbility('temporal_echo')).not.toBeNull();
-    expect(sim.setSpec('fire')).toBe(true);
     expect(sim.resolvedAbility('temporal_echo')).toBeNull();
-    expect(sim.setSpec('frost')).toBe(true);
     expect(sim.resolvedAbility('temporal_echo')).toBeNull();
   });
 
@@ -291,7 +288,6 @@ describe('Temporal Echo: multiple chronomancers stay independent', () => {
     const { sim, p } = chronoMage();
     const mage2Pid = sim.addPlayer('mage', 'Cronomante2');
     sim.setPlayerLevel(20, mage2Pid);
-    expect(sim.setSpec('arcane', mage2Pid)).toBe(true);
     const mage2 = sim.entities.get(mage2Pid);
     if (!mage2) throw new Error('mage2 missing');
     mage2.pos.x = p.pos.x + 2;
@@ -323,7 +319,6 @@ describe('Temporal Echo: cleanup', () => {
     const ally = addAlly(sim, 'Limpieza');
     markEcho(sim, ally);
     expect(echoMark(ally, p.id)).toBeDefined();
-    expect(sim.setSpec('fire')).toBe(true);
     expect(echoMark(ally, p.id)).toBeUndefined(); // stripped on spec loss
   });
 

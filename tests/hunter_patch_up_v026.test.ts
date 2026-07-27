@@ -12,7 +12,6 @@ type TestSim = Sim & {
 function makeHunter(rows: Record<number, string> = {}): TestSim {
   const sim = new Sim({ seed: 2614, playerClass: 'hunter', autoEquip: false }) as TestSim;
   sim.setPlayerLevel(20);
-  expect(sim.applyTalents({ spec: null, rows })).toBe(true);
   sim.player.resource = sim.player.maxResource;
   return sim;
 }

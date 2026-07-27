@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
 
@@ -48,23 +47,17 @@ describe('Pyroblast (mage)', () => {
     expect(pyro.effects.some((e: any) => e.type === 'dot')).toBe(true);
   });
 
+  // Pyroblast was the Pyromancy spec signature and reached the book through the
+  // spec pick at level 5; specs are retired (Phase D0) and its learnLevel of 5
+  // is the whole gate now.
   it('is learned only at level 5', () => {
-    // Pyroblast is the Pyromancy SIGNATURE since the owner leveling pass
-    // (talents_classic.ts): the spec pick grants it, and grants bypass the
-    // learnLevel gate, so the level-5 arrival is enforced by the spec unlock
-    // (SPEC_UNLOCK_LEVEL = 5). Resolve the allocation at the player level like
-    // every live caller does; repairAllocation strips the spec below 5.
-    const alloc = { ...emptyAllocation(), spec: 'fire' } as never;
-    const at4 = computeTalentModifiers('mage', alloc, 4);
-    const at5 = computeTalentModifiers('mage', alloc, 5);
-    expect(abilitiesKnownAt('mage', 4, at4).some((k) => k.def.id === 'pyroblast')).toBe(false);
-    expect(abilitiesKnownAt('mage', 5, at5).some((k) => k.def.id === 'pyroblast')).toBe(true);
+    expect(abilitiesKnownAt('mage', 4).some((k) => k.def.id === 'pyroblast')).toBe(false);
+    expect(abilitiesKnownAt('mage', 5).some((k) => k.def.id === 'pyroblast')).toBe(true);
   });
 
   it('casts with its cast time and damages the target over time', () => {
     const sim = makeSim();
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('fire')).toBe(true);
     const wolf = nearestMob(sim);
     teleportTo(sim, wolf.pos.x + 15, wolf.pos.z);
     sim.targetEntity(wolf.id);

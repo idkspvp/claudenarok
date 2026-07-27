@@ -33,7 +33,6 @@ describe('Collective Reversal authoritative online path', () => {
     if ('error' in mageSession || 'error' in allySession) throw new Error('join failed');
 
     server.sim.setPlayerLevel(10, mageSession.pid);
-    expect(server.sim.setSpec('arcane', mageSession.pid)).toBe(true);
     server.sim.tick();
     const mage = server.sim.entities.get(mageSession.pid);
     const ally = server.sim.entities.get(allySession.pid);

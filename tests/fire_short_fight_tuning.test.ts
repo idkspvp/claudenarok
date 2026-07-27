@@ -60,50 +60,19 @@ const BIS_GEAR: PlayerEquipment = {
   ring2: 'zyzzs_deathless_signet',
 };
 
+// Which of the mage's two damage rotations the harness plays. These used to be
+// committed specializations; specs are retired (Phase D0) and a mage now knows
+// both kits, so this is a ROTATION choice, not a build.
 type Spec = 'fire' | 'frost';
-type Rows = Record<number, string>;
-
-// The strongest talent build the 2026-07-24 Monte Carlo sweep found (rows
-// 5/8/11 are throughput-neutral, verified by the sweep): Racing Mind's extra
-// instant Pyrelance, Elemental Convergence fed by a free instant Icebind
-// weave, and Rune of Power under the whole opener. The talented ceiling
-// gate below runs THIS build; a naked-spec pin alone would miss it.
-// (BiS re-sweep 2026-07-25: at heroic gear the top burst builds swap
-// Convergence for a dead r17 within seed noise, ~280 vs ~276 mean, because
-// the Icebind weave's GCD costs more than the surge pays at high spell
-// power. This build stays the gate's pin: representative within 2% of the
-// strongest, and the sanity ceiling holds 35% headroom over either.)
-const TOP_TALENTED_ROWS: Rows = {
-  5: 'mag_r5_ice_floes',
-  8: 'mag_r8_warded',
-  11: 'mag_r11_twin_nova',
-  14: 'mag_r14_presence_of_mind',
-  17: 'mag_r17_convergence',
-  20: 'mag_r20_rune_of_power',
-};
-
-// Frost's best throughput rows from the same sweep (Convergence is a net
-// LOSS for frost, whose weave is a 2.5s Cinderbolt, so it takes the dead
-// r17 instead): the fair talented comparator for the sustained gate.
-const FROST_TOP_ROWS: Rows = {
-  5: 'mag_r5_ice_floes',
-  8: 'mag_r8_warded',
-  11: 'mag_r11_twin_nova',
-  14: 'mag_r14_presence_of_mind',
-  17: 'mag_r17_cold_snap',
-  20: 'mag_r20_rune_of_power',
-};
 
 interface CtxLike {
   players: Map<number, { cls: string; equipment: PlayerEquipment; equipmentInstance?: unknown }>;
   playerMods: (meta: unknown) => unknown;
 }
 
-function gearedMage(spec: Spec, seed = 41, rows?: Rows): { sim: Sim; p: Entity } {
+function gearedMage(seed = 41): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  if (rows) expect(sim.applyTalents({ spec, rows } as never)).toBe(true);
-  else expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   const p = sim.player;
   const ctx = (sim as unknown as { ctx: CtxLike }).ctx;
@@ -160,20 +129,20 @@ interface BurstResult {
   igniteBanked: number; // estimate: 40% of fire crit damage + 40% of non-crit Meteor impacts
 }
 
-// Drive one spec's short-fight loop for `seconds` and sum every point of
+// Drive one rotation's short-fight loop for `seconds` and sum every point of
 // player damage on the dummy (direct hits, DoTs, Ignite and the frost pet all
 // attribute to the mage: pet damage resolves through ownerId). Deterministic:
-// fixed seed, fixed tick script, no rng beyond the sim's own stream. With
-// `rows`, the fire policy also plays the row actives (Rune under the opener,
-// the Icebind weave for Convergence, Racing Mind Pyrelances).
-function runShortFight(spec: Spec, seconds: number, seed = 41, rows?: Rows): BurstResult {
-  const { sim, p } = gearedMage(spec, seed, rows);
+// fixed seed, fixed tick script, no rng beyond the sim's own stream.
+//
+// The row-active arms (Rune of Power, the Convergence weave, Racing Mind) were
+// talent picks and are pinned off: their abilities went with the talent trees.
+function runShortFight(spec: Spec, seconds: number, seed = 41): BurstResult {
+  const { sim, p } = gearedMage(seed);
   const dummy = addBossDummy(sim);
   sim.targetEntity(dummy.id);
-  const has = (id: string) => Object.values(rows ?? {}).includes(id);
-  const hasRune = has('mag_r20_rune_of_power');
-  const hasConv = has('mag_r17_convergence');
-  const hasRacing = has('mag_r14_presence_of_mind');
+  const hasRune = false;
+  const hasConv = false;
+  const hasRacing = false;
   const auraUp = (id: string) => p.auras.some((a) => a.id === id);
   if (spec === 'frost') {
     // A raider walks in with the Water Elemental already up: summon it before
@@ -334,45 +303,6 @@ describe.skip('the tuned knobs (balance 2026-07-25, designer round)', () => {
   });
 });
 
-// The Monte Carlo talent sweep (2026-07-24) showed the naked-spec pin above
-// is not the real ceiling: row 14/17/20 actives (Racing Mind, Convergence,
-// Rune of Power) stack multiplicatively on the trance loop. Designer round
-// (2026-07-25): the burst window IS the fire identity (dump the Cinderfall
-// bank inside Phoenix Trance, chain free Pyrelances), so the burst is not
-// held to the fight-long line; it gets a SANITY ratio ceiling versus the
-// talented frost comparator instead, wide enough for the sanctioned spike
-// (measured ~1.4x) and tight enough to catch a pre-fix-magnitude explosion
-// (3.6x). Fight-long balance lives in the sustained block below.
-describe.skip('talented burst window (Monte Carlo 2026-07-24, designer round 2026-07-25)', () => {
-  const BURST_SANITY_CEILING = 1.8; // x the talented frost 27s comparator
-  const CEILING_SEEDS = [41, 101, 108, 115, 122];
-  const fire = CEILING_SEEDS.map((seed) =>
-    runShortFight('fire', FIGHT_SECONDS, seed, TOP_TALENTED_ROWS),
-  );
-  const frost = CEILING_SEEDS.map((seed) =>
-    runShortFight('frost', FIGHT_SECONDS, seed, FROST_TOP_ROWS),
-  );
-  const mean = fire.reduce((a, r) => a + r.dps, 0) / fire.length;
-  const frostMean = frost.reduce((a, r) => a + r.dps, 0) / frost.length;
-
-  it('reports the talented burst numbers (owner harness)', () => {
-    const per = fire.map((r, k) => `${CEILING_SEEDS[k]}:${r.dps.toFixed(1)}`).join(' ');
-    console.log(
-      `\n[fire talented burst] racing+convergence+rune, mean=${mean.toFixed(1)} frost=${frostMean.toFixed(1)} ratio=${(mean / frostMean).toFixed(2)} [${per}]`,
-    );
-    expect(fire.length).toBe(CEILING_SEEDS.length);
-  });
-
-  it(`the burst window stays a bounded spike (within ${BURST_SANITY_CEILING}x talented frost)`, () => {
-    expect(mean).toBeLessThanOrEqual(frostMean * BURST_SANITY_CEILING);
-  });
-
-  it('the talented build still out-bursts the naked spec (over-nerf guard)', () => {
-    const naked = runShortFight('fire', FIGHT_SECONDS);
-    expect(mean).toBeGreaterThanOrEqual(naked.dps);
-  });
-});
-
 // Entire-fight coverage (owner follow-up 2026-07-24): the bug was never just
 // the opener. On the pre-fix sim the Ignite refresh overpay GREW with fight
 // length (about 47% of all fire damage by 120s) and sustained talented fire
@@ -395,8 +325,8 @@ describe.skip('sustained parity, entire fight (Monte Carlo follow-up 2026-07-24)
   // length. Both are pinned so the bank/recharge shape cannot smear the
   // opener across a whole fight again.
   const measure = (seconds: number) => {
-    const fire = SUSTAINED_SEEDS.map((s) => runShortFight('fire', seconds, s, TOP_TALENTED_ROWS));
-    const frost = SUSTAINED_SEEDS.map((s) => runShortFight('frost', seconds, s, FROST_TOP_ROWS));
+    const fire = SUSTAINED_SEEDS.map((s) => runShortFight('fire', seconds, s));
+    const frost = SUSTAINED_SEEDS.map((s) => runShortFight('frost', seconds, s));
     const fireMean = fire.reduce((a, r) => a + r.dps, 0) / fire.length;
     const frostMean = frost.reduce((a, r) => a + r.dps, 0) / frost.length;
     const igniteShare =

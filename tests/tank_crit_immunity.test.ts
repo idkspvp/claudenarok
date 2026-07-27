@@ -29,7 +29,6 @@ function critsTaken(setup: Setup): { hits: number; crits: number } {
   const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
   const pid = sim.addPlayer(setup.cls, 'Defender');
   sim.setPlayerLevel(20, pid);
-  if (setup.spec) sim.applyTalents({ spec: setup.spec, rows: {} }, pid);
   const p = sim.entities.get(pid)!;
   if (setup.form) {
     sim.castAbility(setup.form, pid);

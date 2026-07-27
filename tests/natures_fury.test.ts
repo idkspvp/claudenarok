@@ -27,7 +27,6 @@ function fury(e: Entity): Aura | undefined {
 function setup(): { sim: Sim; druid: Entity; allyEntity: Entity } {
   const sim = new Sim({ seed: 7, playerClass: 'druid', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.applyTalents({ spec: null, rows: { 20: 'dru_r20_improved_hurricane' } })).toBe(true);
   const druid = sim.player;
   const allyPid = sim.addPlayer('priest', 'FuryAlly');
   sim.partyInvite(allyPid, druid.id);

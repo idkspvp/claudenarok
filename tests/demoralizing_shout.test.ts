@@ -3,7 +3,6 @@
 // flat `debuff_ap` coverage below remains for other retained class content.
 import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt, CLASSES } from '../src/sim/content/classes';
-import { computeTalentModifiers } from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -26,7 +25,6 @@ describe('warrior Direhowl', () => {
     expect(def).toBeTruthy();
     expect(def.class).toBe('warrior');
     expect(def.learnLevel).toBe(12);
-    expect(def.specs).toEqual(['prot']);
     expect(def.requiresTarget).toBe(false);
     expect(def.cooldown).toBe(45);
     expect(def.effects[0]).toMatchObject({
@@ -39,27 +37,25 @@ describe('warrior Direhowl', () => {
     expect(def.ranks).toBeUndefined();
   });
 
-  it('sits in the warrior learn order and gates on level and Protection spec', () => {
+  // The Protection gate went with the specializations (Phase D0); the LEVEL gate
+  // is the whole rule now.
+  it('sits in the warrior learn order and gates on level', () => {
     expect(CLASSES.warrior.abilities).toContain('demoralizing_shout');
-    const prot11 = computeTalentModifiers('warrior', { spec: 'prot', rows: {} }, 11);
-    const prot12 = computeTalentModifiers('warrior', { spec: 'prot', rows: {} }, 12);
-    const arms20 = computeTalentModifiers('warrior', { spec: 'arms', rows: {} }, 20);
     expect(
-      abilitiesKnownAt('warrior', 11, prot11).some((k) => k.def.id === 'demoralizing_shout'),
+      abilitiesKnownAt('warrior', 11).some((k) => k.def.id === 'demoralizing_shout'),
     ).toBe(false);
     expect(
-      abilitiesKnownAt('warrior', 12, prot12).find((k) => k.def.id === 'demoralizing_shout')?.rank,
+      abilitiesKnownAt('warrior', 12).find((k) => k.def.id === 'demoralizing_shout')?.rank,
     ).toBe(1);
     expect(
-      abilitiesKnownAt('warrior', 20, arms20).some((k) => k.def.id === 'demoralizing_shout'),
-    ).toBe(false);
+      abilitiesKnownAt('warrior', 20).some((k) => k.def.id === 'demoralizing_shout'),
+    ).toBe(true);
   });
 
   it('reduces nearby enemies damage dealt by 20% on cast', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
     const p = sim.player;
     sim.setPlayerLevel(12, p.id);
-    expect(sim.setSpec('prot', p.id)).toBe(true);
     p.gm = true;
     p.resource = 100; // rage for the shout
     const mob = spawnDummy(sim, p);
@@ -163,7 +159,6 @@ describe('warrior Direhowl', () => {
     const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
     const p = sim.player;
     sim.setPlayerLevel(12, p.id);
-    expect(sim.setSpec('prot', p.id)).toBe(true);
     p.gm = true;
     p.resource = 100; // rage for the shout
     const far = spawnDummy(sim, p);

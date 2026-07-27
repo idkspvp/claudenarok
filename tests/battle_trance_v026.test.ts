@@ -8,7 +8,6 @@ import { terrainHeight } from '../src/sim/world';
 function warrior(spec: 'arms' | 'fury' | 'prot' | null = 'arms'): Sim {
   const sim = new Sim({ seed: 2602, playerClass: 'warrior' });
   sim.setPlayerLevel(MAX_LEVEL);
-  if (spec !== null) expect(sim.setSpec(spec)).toBe(true);
   return sim;
 }
 

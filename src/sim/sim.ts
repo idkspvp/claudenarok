@@ -106,20 +106,7 @@ import {
   rankAllowsSkin,
   rollSkinRank,
 } from './content/skins';
-import {
-  cloneAllocation,
-  computeTalentModifiers,
-  emptyAllocation,
-  emptyModifiers,
-  FIRST_TALENT_LEVEL,
-  type Role,
-  repairAllocation,
-  type SavedLoadout,
-  TALENTS,
-  type TalentAllocation,
-  type TalentModifiers,
-  type TalentRowLevel,
-} from './content/talents';
+import { emptyModifiers, type PlayerModifiers, type Role } from './player_modifiers';
 import {
   resolveActiveWeaponSkin,
   weaponSkinTypeMatches,
@@ -339,17 +326,6 @@ import {
   gainCraftSkill,
   normalizeCraftSkills,
 } from './professions/wheel';
-import {
-  applyTalentAllocation,
-  deleteTalentLoadout,
-  respecTalents,
-  saveTalentLoadout,
-  selectTalentRow as selectTalentRowImpl,
-  setTalentSpec,
-  spendTalentPoint,
-  switchTalentLoadout,
-  talentPointBudget,
-} from './progression/talents';
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
 import * as honorMod from './pvp';
@@ -368,11 +344,6 @@ import {
   revivePlayerAt,
   spawnOverworldSpiritHealers,
 } from './spirit';
-import { repairTalentLoadouts } from './talent_loadouts';
-import {
-  CURRENT_CHARACTER_CONTENT_REVISION,
-  migrateCharacterTalentsV2,
-} from './talent_save_migration';
 import {
   rollWorldBossLoot as rollWorldBossLootImpl,
   scaleWorldBossHp,
@@ -1095,28 +1066,25 @@ export interface PlayerMeta {
   vcupBetWins: number;
   vcupBetLosses: number;
   vcupBetNet: number;
-  // Talents & Specializations. `talents` is the active allocation; `talentMods`
-  // is its precomputed flat struct — resolved only on allocation/respec/loadout
-  // change (recomputeTalents), never walked on the combat or stat hot path.
-  talents: TalentAllocation;
-  talentMods: TalentModifiers;
+  // The player's precomputed flat modifier struct. The talent trees that used
+  // to fill it are gone, so it is the empty value for every character; Fiesta
+  // augments still fold on top of it into `fiestaMods`.
+  mods: PlayerModifiers;
   // Battle Rhythm's every-third-ability counter. Session-only: a new login
   // starts a fresh rhythm and persistence never needs to migrate it.
   abilityRhythm: number;
   // 2v2 Fiesta (session-only, never persisted). `fiestaAugments` is the ordered
-  // list of augment ids picked this bout; `fiestaMods` is talentMods with those
+  // list of augment ids picked this bout; `fiestaMods` is mods with those
   // augments folded in (the effective modifier the stat/ability hot paths use
   // while in a Fiesta match); `fiestaSpecial` aggregates the non-modifier augment
   // effects (lifesteal, move speed). All cleared when the bout ends.
   fiestaAugments: string[];
-  fiestaMods: TalentModifiers | null;
+  fiestaMods: PlayerModifiers | null;
   fiestaSpecial: AugmentSpecial;
   // Pre-Fiesta character snapshot while standardized to level 20 (see
   // fiestaStandardize); restored on bout exit and used by serializeCharacter so
   // the temporary level-20 build is never persisted.
-  fiestaRestore: { level: number; xp: number; talents: TalentAllocation } | null;
-  loadouts: SavedLoadout[];
-  activeLoadout: number; // index into loadouts, or -1 for none
+  fiestaRestore: { level: number; xp: number } | null;
   // Session-only dungeon preference. Omitted when normal so deterministic
   // parity samples and character persistence do not churn on a default.
   dungeonDifficulty?: DungeonDifficulty;
@@ -1257,9 +1225,6 @@ export interface AwayStatus {
 // are optional so characters saved before the Ashen Coliseum existed load
 // cleanly (addPlayer falls back to the unranked defaults).
 export interface CharacterState {
-  // Production content migration revision. Revision 1 is the v0.26 all-class
-  // Talents V2 migration; absent means a pre-v0.26 character JSONB save.
-  contentRevision?: number;
   level: number;
   xp: number;
   // Points spent per status attribute. Optional: a save written before the RO
@@ -1333,11 +1298,10 @@ export interface CharacterState {
   vcupBetWins?: number;
   vcupBetLosses?: number;
   vcupBetNet?: number;
-  // Talents & Specializations (JSONB). All optional so characters saved before
-  // talents existed load cleanly; contentRevision owns point-tree -> row migration.
-  talents?: TalentAllocation;
-  loadouts?: SavedLoadout[];
-  activeLoadout?: number;
+  // `talents`, `loadouts`, `activeLoadout` and `contentRevision` were written
+  // by the retired talent system. They were always optional, the column is
+  // JSONB, and nothing reads them now, so an old save simply carries them
+  // unread; no migration is needed and none is run.
   raidLockouts?: Record<string, number>;
   // Ability/potion cooldowns as remaining-time deltas (JSONB; optional so pre-fix
   // saves load cleanly with no cooldowns). Persisted so logging out and back in no
@@ -2128,7 +2092,7 @@ export class Sim {
     },
   ): number {
     const savedState = opts?.state
-      ? sanitizeRemovedZone1Content(migrateCharacterTalentsV2(cls, opts.state)).state
+      ? sanitizeRemovedZone1Content(opts.state).state
       : undefined;
     // Characters saved inside a dungeon instance rejoin at its entrance —
     // their old instance is gone (or belongs to someone else) by now.
@@ -2237,15 +2201,12 @@ export class Sim {
       vcupBetWins: savedState?.vcupBetWins ?? 0,
       vcupBetLosses: savedState?.vcupBetLosses ?? 0,
       vcupBetNet: savedState?.vcupBetNet ?? 0,
-      talents: emptyAllocation(),
-      talentMods: emptyModifiers(),
+      mods: emptyModifiers(),
       abilityRhythm: 0,
       fiestaAugments: [],
       fiestaMods: null,
       fiestaSpecial: {},
       fiestaRestore: null,
-      loadouts: [],
-      activeLoadout: -1,
       raidLockouts: new Map(),
       away: null,
       marketFilter: '',
@@ -2371,16 +2332,6 @@ export class Sim {
       // Bank sanitizes on load (never destroys items; a pre-bank save has no `bank`
       // field and sanitizes to an empty bank). See bank.ts sanitizeBankState.
       meta.bank = sanitizeBankState(s.bank);
-      if (s.talents)
-        // Revalidate the persisted build against the current rules + level budget
-        // before it is baked into the flat mods below. A stored allocation replays
-        // verbatim on load, so without this an over-budget, prereq-broken, or gated
-        // build (stale tuning, a level-down, or a tampered save) would still grant
-        // its stats/abilities. An honest in-budget build is returned unchanged.
-        meta.talents = repairAllocation(cls, s.talents, player.level);
-      const repairedLoadouts = repairTalentLoadouts(cls, player.level, s.loadouts, s.activeLoadout);
-      meta.loadouts = repairedLoadouts.loadouts;
-      meta.activeLoadout = repairedLoadouts.activeLoadout;
       if (s.raidLockouts) {
         const now = this.lockoutNowMs();
         for (const [dungeonId, until] of Object.entries(s.raidLockouts)) {
@@ -2487,15 +2438,12 @@ export class Sim {
       meta.bankBonusSources = opts.bankBonus.sources.map((s) => ({ ...s }));
     }
 
-    // Resolve the flat talent struct once, before the stat pass + ability
-    // resolver below consume it (they only ever read these flat numbers).
-    meta.talentMods = computeTalentModifiers(cls, meta.talents, player.level);
     this.refreshKnownAbilities(meta, false);
     recalcPlayerStats(
       player,
       cls,
       meta.equipment,
-      meta.talentMods,
+      meta.mods,
       meta.equipmentInstance,
       meta.statAllocation,
     );
@@ -2975,7 +2923,6 @@ export class Sim {
     // delvePetStash fallback; known/sportRole are session-derived, not saved.
     const cupReturn = valeCupMod.vcupReturnFor(this.ctx, pid);
     const state: CharacterState = {
-      contentRevision: CURRENT_CHARACTER_CONTENT_REVISION,
       level: restore ? restore.level : e.level,
       xp: restore ? restore.xp : meta.xp,
       statAllocation: { ...meta.statAllocation },
@@ -3066,13 +3013,6 @@ export class Sim {
             vcupBetNet: meta.vcupBetNet,
           }
         : {}),
-      talents: cloneAllocation(restore ? restore.talents : meta.talents),
-      loadouts: meta.loadouts.map((l) => ({
-        name: l.name,
-        alloc: cloneAllocation(l.alloc),
-        bar: [...l.bar],
-      })),
-      activeLoadout: meta.activeLoadout,
       raidLockouts: Object.fromEntries(
         [...meta.raidLockouts].filter(([, until]) => until > this.lockoutNowMs()),
       ),
@@ -3523,21 +3463,6 @@ export class Sim {
   }
   get counters(): RewardCounters {
     return this.primary.counters;
-  }
-  get talents(): TalentAllocation {
-    return this.primary.talents;
-  }
-  get talentSpec(): string | null {
-    return this.primary.talentMods.spec;
-  }
-  get talentRole(): Role | null {
-    return this.primary.talentMods.role;
-  }
-  get loadouts(): SavedLoadout[] {
-    return this.primary.loadouts;
-  }
-  get activeLoadout(): number {
-    return this.primary.activeLoadout;
   }
 
   meta(pid: number): PlayerMeta | null {
@@ -4212,7 +4137,7 @@ export class Sim {
     const before = new Map(meta.known.map((k) => [k.def.id, k.rank]));
     // (Frost's second Ice Block charge is resolved inside abilitiesKnownAt, the
     // shared known-list builder, so ClientWorld's recomputed list matches.)
-    meta.known = abilitiesKnownAt(meta.cls, e.level, meta.talentMods);
+    meta.known = abilitiesKnownAt(meta.cls, e.level, meta.mods);
     if (announce) {
       for (const k of meta.known) {
         const prev = before.get(k.def.id);
@@ -4262,12 +4187,6 @@ export class Sim {
     // from a sane baseline (virtualLevel never falls below the real level). Only
     // ever raises it — lifetimeXp is monotonic.
     r.meta.lifetimeXp = Math.max(r.meta.lifetimeXp, xpToReachLevel(r.e.level));
-    // Re-bake the flat talent mods at the new level before the stat + ability pass:
-    // spec mastery magnitudes scale with level (min(1, level/20)), so a dev/GM level
-    // jump must strengthen (or weaken) the mastery, exactly like the live ding path
-    // (combat/damage.ts grantXp). Without this a level-jumped character keeps the
-    // mastery baked at the OLD level.
-    r.meta.talentMods = computeTalentModifiers(r.meta.cls, r.meta.talents, r.e.level);
     // A character still sitting on the untouched suggestion gets the suggestion for
     // the new level. This is the dev/GM and test path: jumping to level 80 and
     // handing back someone with a level-1 spread would leave them unable to fight
@@ -4290,17 +4209,6 @@ export class Sim {
     this.syncPetLevel(r.e);
     deedsMod.markDeedsDirty(this.ctx, r.meta.entityId); // level/lifetimeXp predicates re-check
   }
-
-  // -------------------------------------------------------------------------
-  // Talents & Specializations (server-authoritative). The application layer
-  // (validate -> bake the flat TalentModifiers struct -> manage specs + the named
-  // loadouts) lives in progression/talents.ts (G1a). These stay here as thin wrappers
-  // that delegate into the module via this.ctx, so the IWorld / server-command surface
-  // (sim.applyTalents(...) etc.) is unchanged. recomputeTalents (the SOLE tree walk),
-  // talentLockReason, and sanitizeTalentAllocation are module-internal there. The
-  // talent-facing getters (talents/talentSpec/talentRole/loadouts/activeLoadout) and
-  // playerMods (the Fiesta overlay) stay on Sim.
-  // -------------------------------------------------------------------------
 
   // -------------------------------------------------------------------------
   // Status points (IWorldStatusPoints)
@@ -4355,80 +4263,8 @@ export class Sim {
     meta.wireRev++;
   }
 
-  talentPoints(pid?: number): { total: number; spent: number } {
-    return talentPointBudget(this.ctx, pid);
-  }
-
-  // A successful talent mutation marks the player deed-dirty from these thin
-  // wrappers (the talent predicates read the persisted allocation), keeping
-  // the extracted module untouched.
-  private markTalentDeeds(ok: boolean, pid?: number): boolean {
-    if (ok) {
-      const r = this.resolve(pid);
-      if (r) deedsMod.markDeedsDirty(this.ctx, r.meta.entityId);
-    }
-    return ok;
-  }
-
-  // Commit a whole staged allocation in one shot (the UI's "Apply"). Rejects any
-  // allocation that fails server-side validation with a reason event (FR-4.5).
-  applyTalents(alloc: TalentAllocation, pid?: number): boolean {
-    return this.markTalentDeeds(applyTalentAllocation(this.ctx, alloc, pid), pid);
-  }
-
-  // Spend a single point into a node (incremental API; the UI mostly stages then
-  // applies). Validated identically by building + checking a candidate alloc.
-  spendTalent(nodeId: string, pid?: number): boolean {
-    return this.markTalentDeeds(spendTalentPoint(this.ctx, nodeId, pid), pid);
-  }
-
-  // Choose / change specialization. Switching specs drops the previous spec
-  // tree's points (they belonged to that tree); the class tree is untouched.
-  setSpec(specId: string | null, pid?: number): boolean {
-    return this.markTalentDeeds(setTalentSpec(this.ctx, specId, pid), pid);
-  }
-
-  selectTalentRow(level: TalentRowLevel, optionId: string | null, pid?: number): boolean {
-    return this.markTalentDeeds(selectTalentRowImpl(this.ctx, level, optionId, pid), pid);
-  }
-
-  // Free respec (out of combat): wipe all talent points. Spec is retained.
-  respec(pid?: number): boolean {
-    return this.markTalentDeeds(respecTalents(this.ctx, pid), pid);
-  }
-
-  // Save the current build (talents + spec + the given action-bar slot map) as a
-  // named loadout. A same-named loadout is overwritten; otherwise appended up to
-  // MAX_LOADOUTS. Returns the loadout index (-1 on failure).
-  saveLoadout(
-    name: string,
-    bar: (string | null)[],
-    pidOrAlloc?: number | TalentAllocation,
-    allocMaybe?: TalentAllocation,
-  ): number {
-    const idx = saveTalentLoadout(this.ctx, name, bar, pidOrAlloc, allocMaybe);
-    // A successful save applies the staged allocation (the UI's Save flow always
-    // passes it), so mark the talent deeds like the sibling wrappers; -1 is a
-    // rejected save. saveTalentLoadout derives its pid the same way.
-    const pid = typeof pidOrAlloc === 'number' ? pidOrAlloc : undefined;
-    this.markTalentDeeds(idx >= 0, pid);
-    return idx;
-  }
-
-  // Apply a saved loadout's talents (out of combat). The action bar is restored
-  // client-side from the loadout's stored slot map. Re-validated server-side.
-  switchLoadout(index: number, pid?: number): boolean {
-    return this.markTalentDeeds(switchTalentLoadout(this.ctx, index, pid), pid);
-  }
-
-  deleteLoadout(index: number, pid?: number): boolean {
-    // Deleting the active loadout auto-applies the next one (talents.ts), which
-    // can newly satisfy a talent deed, so mark on success like switchLoadout.
-    return this.markTalentDeeds(deleteTalentLoadout(this.ctx, index, pid), pid);
-  }
-
-  // Threat modifier including the tank-role talent bonus (e.g. Protection's
-  // Vengeance Mastery). Reads the precomputed flat threatPct — no tree walk.
+  // Threat modifier including the flat threat modifier (a tank role bonus, say).
+  // Reads the precomputed flat threatPct — no tree walk.
   private threatMod(source: Entity, school: string): number {
     let m = threatModifier(source, school);
     if (source.kind === 'player') {
@@ -6212,7 +6048,7 @@ export class Sim {
         target,
         meta.cls,
         meta.equipment,
-        meta.talentMods,
+        meta.mods,
         meta.equipmentInstance,
         meta.statAllocation,
       );
@@ -7805,10 +7641,6 @@ export class Sim {
         this.rebucket(e);
       }
       this.setPlayerLevel(level, botPid);
-      if (level >= FIRST_TALENT_LEVEL) {
-        const spec = TALENTS[cls]?.specs.find((s) => s.role === role);
-        if (spec) this.setSpec(spec.id, botPid);
-      }
       this.dungeonFinderSetRoles([role], botPid);
       return botPid;
     };
@@ -8158,8 +7990,8 @@ export class Sim {
   // The effective talent modifiers for a player: their talents with any Fiesta
   // augments folded in. Every stat/ability/threat recompute reads through this,
   // so augments persist through aura procs, gear swaps, and respawns.
-  playerMods(meta: PlayerMeta): TalentModifiers {
-    return meta.fiestaMods ?? meta.talentMods;
+  playerMods(meta: PlayerMeta): PlayerModifiers {
+    return meta.fiestaMods ?? meta.mods;
   }
 
   // -------------------------------------------------------------------------
@@ -8828,7 +8660,7 @@ export class Sim {
                 inCombat: e.inCombat ? 1 : 0,
                 group: party.raidGroups.get(mPid) ?? 1,
                 absorb: partyFrameAbsorb(e.auras),
-                role: partyFrameRole(meta.talentMods.role),
+                role: partyFrameRole(meta.mods.role),
                 // Effective health Rewind could currently restore to this member
                 // (combat/rewind.ts); 0 for members with no recent recorded loss.
                 rewind: rewindHealAmount(damageTakenWithin(e, this.tickCount), e.hp, e.maxHp),

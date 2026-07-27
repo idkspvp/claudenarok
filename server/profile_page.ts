@@ -112,13 +112,11 @@ export async function handleProfilePage(
 }
 
 function profileTitle(sheet: CharacterSheet): string {
-  const spec = sheet.spec ? `${sheet.spec} ` : '';
-  return `${sheet.name} — Lv ${sheet.level} ${spec}${sheet.classLabel}`;
+  return `${sheet.name} — Lv ${sheet.level} ${sheet.classLabel}`;
 }
 
 function profileDescription(sheet: CharacterSheet): string {
   const parts = [`Level ${sheet.level} ${sheet.classLabel}`];
-  if (sheet.spec) parts.push(sheet.spec);
   parts.push(`in the ${sheet.zone} zone on ${sheet.realm}`);
   if (sheet.guild) parts.push(`· <${sheet.guild}>`);
   if (sheet.rank) parts.push(`· realm rank #${sheet.rank.rank} of ${sheet.rank.total}`);
@@ -196,7 +194,7 @@ function profileHtml(sheet: CharacterSheet, origin: string): string {
     <img class="avatar" src="${avatar}" alt="${name} portrait" width="256" height="256">
     <h1>${name}</h1>
     ${deedTitleLine}
-    <p class="sub">Level ${sheet.level} ${escapeHtml(sheet.classLabel)}${sheet.spec ? ` · ${escapeHtml(sheet.spec)}` : ''} · ${escapeHtml(sheet.realm)}</p>
+    <p class="sub">Level ${sheet.level} ${escapeHtml(sheet.classLabel)} · ${escapeHtml(sheet.realm)}</p>
     <ul>
       <li>Zone: <strong>${escapeHtml(sheet.zone)}</strong></li>
       ${guildLine}

@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import { isCancelableAura } from '../src/sim/combat/aura_cancel';
 import { isInStasis, isStunned } from '../src/sim/combat/cc';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { MOBS, NPCS } from '../src/sim/data';
 import { createMob, createNpc } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
@@ -15,15 +14,13 @@ import {
 
 const FLAT_X = 700;
 
-function knownIds(spec: 'arcane' | 'fire' | 'frost'): string[] {
-  const mods = computeTalentModifiers('mage', { ...emptyAllocation(), spec } as never);
-  return abilitiesKnownAt('mage', 14, mods).map((known) => known.def.id);
+function knownIds(): string[] {
+  return abilitiesKnownAt('mage', 14).map((known) => known.def.id);
 }
 
 function makeChronomancer(): { sim: Sim; mage: Entity } {
   const sim = new Sim({ seed: 147, playerClass: 'mage' });
   sim.setPlayerLevel(14);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const mage = sim.player;
   mage.pos = sim.groundPos(FLAT_X, 0);
@@ -73,9 +70,9 @@ function advance(sim: Sim, seconds: number): void {
 
 describe('Hourglass of Suspension content', () => {
   it('belongs only to Chronomancy and uses provisional ground-targeted balance', () => {
-    expect(knownIds('arcane')).toContain('temporal_hourglass');
-    expect(knownIds('fire')).not.toContain('temporal_hourglass');
-    expect(knownIds('frost')).not.toContain('temporal_hourglass');
+    expect(knownIds()).toContain('temporal_hourglass');
+    expect(knownIds()).not.toContain('temporal_hourglass');
+    expect(knownIds()).not.toContain('temporal_hourglass');
 
     const { sim } = makeChronomancer();
     const resolved = sim.resolvedAbility('temporal_hourglass');

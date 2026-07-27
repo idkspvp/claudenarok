@@ -23,7 +23,6 @@
 // `src/sim`-pure: no DOM/Three/render/ui/game/net imports, no Math.random/Date.now
 // (enforced by tests/architecture.test.ts).
 
-import { computeTalentModifiers } from '../content/talents';
 import { ABILITIES, DELVES, GROUP_XP_BONUS, ITEMS, MOBS } from '../data';
 import * as deedsMod from '../deeds';
 import { recalcPlayerStats } from '../entity';
@@ -67,7 +66,7 @@ import {
   igniteOnCrit,
   PERSONAL_BARRIER_IDS,
 } from './fire_mage';
-import { onDamageTaken, onShieldConsumed, onSpellCrit, resetProcState } from './talent_procs';
+import { resetProcState } from './proc_state';
 
 // How long a slain mob's corpse persists (seconds) before it is cleared. Sole user
 // is handleDeath, so the constant lives here with the death-domain code.
@@ -411,11 +410,6 @@ export function dealDamage(
       if (a.value <= 0) {
         target.auras.splice(i, 1);
         ctx.emit({ type: 'aura', targetId: target.id, name: a.name, gained: false });
-        // Talent procs listening for a fully consumed shield (deterministic).
-        const shielder = ctx.entities.get(a.sourceId);
-        if (shielder && !shielder.dead && shielder.kind === 'player') {
-          onShieldConsumed(ctx, shielder, a.id, target);
-        }
       }
     }
   }
@@ -847,10 +841,6 @@ export function dealDamage(
   if (source && source.kind === 'player' && source.id !== target.id) {
     const meta = ctx.players.get(source.id);
     if (meta) meta.counters.damageDealt += amount;
-    // Talent procs listening for spell crits (deterministic, no rng draw).
-    if (crit && school !== 'physical' && ability) {
-      onSpellCrit(ctx, source, abilityId, target);
-    }
     if (source.resourceType === 'rage' && !noRage && school === 'physical' && !ability) {
       const isWarrior = meta?.cls === 'warrior';
       const seasonedCrit =
@@ -875,8 +865,6 @@ export function dealDamage(
   if (target.kind === 'player') {
     const meta = ctx.players.get(target.id);
     if (meta) meta.counters.damageTaken += amount;
-    // Talent procs listening for big single hits (deterministic, ICD-gated).
-    if (amount > 0 && !target.dead) onDamageTaken(ctx, target, amount);
     if (target.resourceType === 'rage' && source && source.id !== target.id) {
       const isWarrior = meta?.cls === 'warrior';
       const baseRage = isWarrior
@@ -1374,10 +1362,6 @@ export function grantXp(
     meta.xp -= xpForLevel(p.level);
     p.level++;
     meta.counters.levelUps++;
-    // Re-bake the flat talent mods at the new level BEFORE the stat pass: spec mastery
-    // magnitudes scale with level (min(1, level/20) in accumulate), so a ding must
-    // strengthen the mastery without waiting for a respec/spec-pick/relog re-bake.
-    meta.talentMods = computeTalentModifiers(meta.cls, meta.talents, p.level);
     // A character still sitting on the untouched suggestion carries it forward to
     // the new level. Once the player has moved a single point the build is theirs
     // and the ding leaves it alone, handing them the new points to place: the same

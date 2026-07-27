@@ -300,7 +300,6 @@ describe('persistence', () => {
     expect(kb.actionForCode('KeyJ')).toBe('jump');
     expect(kb.actionForCode('KeyW')).toBe('forward');
     expect(kb.actionForCode('Tab')).toBe('target');
-    expect(kb.actionForCode('KeyN')).toBe('talents');
     expect(kb.actionForCode('KeyH')).toBe('targetFriendly');
     expect(kb.actionForCode('Enter')).toBe('chat');
     expect(kb.actionForCode('Equal')).toBe('slot11');

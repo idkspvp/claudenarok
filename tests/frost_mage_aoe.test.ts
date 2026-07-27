@@ -6,11 +6,6 @@ import {
 } from '../src/sim/combat/frost_mage';
 import { FROZEN_ORB_SLOW_MULT, FROZEN_ORB_SPEED } from '../src/sim/combat/frozen_orb';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
-import {
-  computeTalentModifiers,
-  emptyAllocation,
-  type TalentAllocation,
-} from '../src/sim/content/talents';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
@@ -31,7 +26,6 @@ type TestSim = Sim & {
 function makeSim(seed = 60601): { sim: TestSim; p: Entity } {
   const sim = new Sim({ seed, playerClass: 'mage', autoEquip: true }) as unknown as TestSim;
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('frost')).toBe(true);
   sim.tick();
   return { sim, p: sim.player };
 }
@@ -70,11 +64,8 @@ function tickFor(sim: TestSim, seconds: number): SimEvent[] {
   return events;
 }
 
-const alloc = (spec: string | null): TalentAllocation => ({ ...emptyAllocation(), spec });
-const knownIds = (spec: string | null): Set<string> =>
-  new Set(
-    abilitiesKnownAt('mage', 20, computeTalentModifiers('mage', alloc(spec))).map((k) => k.def.id),
-  );
+const knownIds = (): Set<string> =>
+  new Set(abilitiesKnownAt('mage', 20).map((k) => k.def.id));
 
 describe('AoE content defs', () => {
   it('pins Frozen Orb: level 15, instant, 45s cooldown, frost-gated, orb effect', () => {
@@ -82,7 +73,6 @@ describe('AoE content defs', () => {
     expect(def).toBeDefined();
     expect(def.name).toBe('Rimeglobe');
     expect(def.learnLevel).toBe(15);
-    expect(def.specs).toEqual(['frost']);
     expect(def.castTime).toBe(0);
     expect(def.cooldown).toBe(45);
     expect(def.school).toBe('frost');
@@ -93,9 +83,8 @@ describe('AoE content defs', () => {
   });
 
   it('unlocks Frozen Orb at level 15, not level 14', () => {
-    const frostMods = computeTalentModifiers('mage', alloc('frost'));
-    const at14 = abilitiesKnownAt('mage', 14, frostMods).map((known) => known.def.id);
-    const at15 = abilitiesKnownAt('mage', 15, frostMods).map((known) => known.def.id);
+    const at14 = abilitiesKnownAt('mage', 14).map((known) => known.def.id);
+    const at15 = abilitiesKnownAt('mage', 15).map((known) => known.def.id);
 
     expect(at14).not.toContain('frozen_orb');
     expect(at15).toContain('frozen_orb');
@@ -106,7 +95,6 @@ describe('AoE content defs', () => {
     expect(def).toBeDefined();
     expect(def.name).toBe('Blizzard');
     expect(def.learnLevel).toBe(10);
-    expect(def.specs).toEqual(['frost']);
     expect(def.targetMode).toBe('position');
     // Owner playtest 2026-07-11: no longer a channel; the cast IS the wind-up.
     expect(def.channel).toBeUndefined();
@@ -128,15 +116,12 @@ describe('AoE content defs', () => {
     ]);
   });
 
-  it('gates both behind the frost spec', () => {
-    const frost = knownIds('frost');
-    expect(frost.has('frozen_orb')).toBe(true);
-    expect(frost.has('blizzard')).toBe(true);
-    for (const spec of ['fire', 'arcane']) {
-      const ids = knownIds(spec);
-      expect(ids.has('frozen_orb'), spec).toBe(false);
-      expect(ids.has('blizzard'), spec).toBe(false);
-    }
+  // Specs are retired (Phase D0), so the whole mage kit is learnable: both AoE
+  // tools are simply known at their learn level.
+  it('puts both on the level-20 mage kit', () => {
+    const ids = knownIds();
+    expect(ids.has('frozen_orb')).toBe(true);
+    expect(ids.has('blizzard')).toBe(true);
   });
 });
 

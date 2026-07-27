@@ -1,16 +1,11 @@
-// Shared class-presentation helpers used by both the Classes pages and the Talents page,
-// so the spec card, role badges, crest, and "feel" tags render identically everywhere.
-// Pure HTML-string builders; all interpolation goes through esc(). Localized spec and
-// mastery prose come from talent_i18n (the same source the in-game talents panel uses).
+// Shared class-presentation helpers used by the Classes pages, so the role badges,
+// crest, and "feel" tags render identically everywhere. Pure HTML-string builders;
+// all interpolation goes through esc().
 
-import { TALENTS } from '../sim/content/talents';
-import type { PlayerClass } from '../sim/types';
-import { esc } from '../ui/esc';
 import { type TranslationKey, t } from '../ui/i18n';
 import { iconDataUrl } from '../ui/icons';
-import { tTalent } from '../ui/talent_i18n';
 import { CLASS_META } from './class_meta';
-import type { GuideClassSpec, GuideRole } from './content.generated';
+import type { GuideRole } from './content.generated';
 import { badge, tag, tagRow } from './pages/ui';
 
 export function roleKey(role: GuideRole): TranslationKey {
@@ -58,25 +53,4 @@ export function classTags(id: string): string {
   ];
   if (m.goodFirst) chips.push(tag(t('guide.tag.goodFirst'), 'guide-tag-first'));
   return tagRow(chips.join(''));
-}
-
-// One specialization card: signature-ability icon, name, role badge, the localized spec
-// one-liner, and the mastery name (never the number-laden mastery effect).
-export function specCardHtml(classId: string, sp: GuideClassSpec): string {
-  const def = TALENTS[classId as PlayerClass]?.specs.find((s) => s.id === sp.id);
-  const name = def ? tTalent({ kind: 'talentSpec', spec: def, field: 'name' }) : sp.name;
-  const desc = def ? tTalent({ kind: 'talentSpec', spec: def, field: 'description' }) : '';
-  const mastery = def ? tTalent({ kind: 'talentMastery', spec: def, field: 'name' }) : '';
-  return `
-    <li class="guide-spec-card">
-      <img class="guide-spec-icon" src="${esc(iconDataUrl('ability', sp.signature, 48))}" alt="" width="40" height="40" loading="lazy" decoding="async" />
-      <div class="guide-spec-body">
-        <div class="guide-spec-head">
-          <span class="guide-spec-name">${esc(name)}</span>
-          ${badge(t(roleKey(sp.role)), `guide-role-${sp.role}`)}
-        </div>
-        ${desc ? `<p class="guide-spec-desc">${esc(desc)}</p>` : ''}
-        ${mastery ? `<p class="guide-spec-mastery"><span>${esc(t('guide.classPage.masteryLabel'))}</span> ${esc(mastery)}</p>` : ''}
-      </div>
-    </li>`;
 }

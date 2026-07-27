@@ -16,7 +16,6 @@ type Ev = { type?: string; text?: string };
 function setup(): { sim: Sim; p: Entity; mob: Entity; events: Ev[] } {
   const sim = new Sim({ seed: 7, playerClass: 'warlock', autoEquip: true });
   sim.setPlayerLevel(10);
-  expect(sim.applyTalents({ spec: null, rows: { 8: 'wlk_r8_voidfeast' } })).toBe(true);
   const p = sim.player;
   const mob = createMob(20_000, MOBS.forest_wolf, 8, {
     x: p.pos.x + 3,
@@ -103,7 +102,6 @@ describe('Voidfeast is only usable with something to devour', () => {
   it('Cleansing Verdict keeps the old behavior on a clean target (no gate)', () => {
     const sim = new Sim({ seed: 7, playerClass: 'paladin', autoEquip: true });
     sim.setPlayerLevel(10);
-    expect(sim.applyTalents({ spec: null, rows: { 8: 'pal_r8_cleansing_verdict' } })).toBe(true);
     const p = sim.player;
     p.resource = p.maxResource;
     sim.targetEntity(p.id);

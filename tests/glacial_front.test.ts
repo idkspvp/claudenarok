@@ -15,7 +15,6 @@ type TestSim = Sim & { nextId: number; addEntity(e: Entity): void; ctx: never };
 function frostMage(): { sim: TestSim; p: Entity } {
   const sim = new Sim({ seed: 87, playerClass: 'mage', autoEquip: true }) as TestSim;
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('frost')).toBe(true);
   sim.tick();
   sim.player.resource = sim.player.maxResource;
   sim.player.facing = 0;

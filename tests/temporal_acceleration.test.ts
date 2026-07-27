@@ -13,7 +13,6 @@ const TA = 'temporal_acceleration';
 function chronoMage(): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec('arcane')).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -45,7 +44,6 @@ describe('Temporal Acceleration: definition', () => {
     expect(def.castTime).toBe(0);
     expect(def.requiresTarget).toBe(false);
     expect(def.cooldown).toBe(300);
-    expect(def.specs).toContain('arcane');
     const eff = def.effects.find((e) => e.type === 'aoeAllyHaste');
     expect(eff && 'mult' in eff ? eff.mult : 0).toBe(1.3);
     expect(eff && 'duration' in eff ? eff.duration : 0).toBe(15);

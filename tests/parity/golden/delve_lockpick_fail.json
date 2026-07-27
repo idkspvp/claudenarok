@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "aac40f8f",
+      "state": "7eea521b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -25,7 +25,6 @@
       "label": "init",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -77,9 +76,6 @@
             "luk": 3,
             "str": 6,
             "vit": 3
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {}
         }
@@ -157,7 +153,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 427,
-      "state": "9647ea64",
+      "state": "e1d40d40",
       "events": "47800102",
       "rng": {
         "draws": 3,
@@ -168,7 +164,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 427,
-      "state": "ae6fb4d4",
+      "state": "4f05fd90",
       "events": "fcb0555f",
       "rng": {
         "draws": 3,
@@ -179,7 +175,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 427,
-      "state": "ee897f3a",
+      "state": "ff462cae",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -190,7 +186,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 427,
-      "state": "92b56880",
+      "state": "6dca5fdc",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -201,7 +197,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 427,
-      "state": "249076f2",
+      "state": "dd4a3046",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -212,7 +208,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 427,
-      "state": "e46257e0",
+      "state": "979dab7c",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -223,7 +219,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 428,
-      "state": "e7522bd2",
+      "state": "d44d30e6",
       "events": "e8a08ba7",
       "rng": {
         "draws": 3,
@@ -232,7 +228,6 @@
       "label": "lockpick-jammed",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -311,9 +306,6 @@
             "luk": 4,
             "str": 8,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 14
@@ -429,7 +421,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 428,
-      "state": "ff3baf8a",
+      "state": "abb910de",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -440,7 +432,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 428,
-      "state": "85aef196",
+      "state": "0790375a",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -449,7 +441,6 @@
       "label": "final",
       "players": [
         {
-          "activeLoadout": -1,
           "archetype": {},
           "arena2v2Rating": 1500,
           "arenaRating": 1500,
@@ -528,9 +519,6 @@
             "luk": 4,
             "str": 8,
             "vit": 4
-          },
-          "talents": {
-            "rows": {}
           },
           "townFocus": {},
           "xp": 14

@@ -29,7 +29,6 @@ export function paperdollDropAction(
   slot: EquipSlot,
   cls: PlayerClass,
   level: number,
-  spec?: string | null,
 ): PaperdollDropAction {
   // Only real gear equips; a consumable or material declares no slot at all, and
   // a bag equips into its own bar socket, never the paperdoll.
@@ -38,7 +37,7 @@ export function paperdollDropAction(
   if (!slotAcceptsItem(item, slot)) return 'blockedSlot';
   if (!canEquipItem(cls, item)) return 'blockedClass';
   if (!meetsLevelRequirement(level, item)) return 'blockedLevel';
-  if (!canEquipItemInSlot(cls, item, slot, spec)) return 'blockedClass';
+  if (!canEquipItemInSlot(cls, item, slot)) return 'blockedClass';
   return 'equip';
 }
 

@@ -12,7 +12,6 @@ import type { Aura, Entity } from '../src/sim/types';
 function mage(spec: 'fire' | 'frost' | 'arcane'): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
-  expect(sim.setSpec(spec)).toBe(true);
   sim.tick();
   const p = sim.player;
   p.resource = p.maxResource;
@@ -97,7 +96,6 @@ describe('Mass Barrier shields only the 5 nearest', () => {
     // Mass Barrier is a choice-row talent, so grant it via the talent rig.
     const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.applyTalents({ spec: 'frost', rows: { 17: 'mag_r17_mass_barrier' } })).toBe(true);
     const p = sim.player;
     // Recipients are group-scoped (party/raid only), so raid all 7 allies with
     // the caster: fill the 5-player party, convert to raid, invite the rest.

@@ -25,14 +25,14 @@ import type {
 } from '../../world_api/dungeon_finder';
 import {
   FINDER_ACTIVITIES,
-  FINDER_PRE_SPEC_ROLES,
+  FINDER_CLASS_ROLES,
   FINDER_ROLE_ORDER,
   type FinderActivity,
   type FinderComposition,
   type FinderListingTag,
   finderActivity,
 } from '../content/dungeon_finder';
-import { FIRST_TALENT_LEVEL, type Role } from '../content/talents';
+import type { Role } from '../player_modifiers';
 import type { SimContext } from '../sim_context';
 import type { PlayerClass } from '../types';
 
@@ -54,16 +54,12 @@ export const FINDER_BOARD_LISTING_CAP = 50;
 // Pure helpers (direct Vitest coverage in tests/dungeon_finder.test.ts).
 // ---------------------------------------------------------------------------
 
-// Roles a character may select: below the first talent level a fixed class
-// capability table applies; from there on, exactly the active spec's role
-// (no active spec = cannot use the finder).
-export function compatibleFinderRoles(
-  cls: PlayerClass,
-  level: number,
-  specRole: Role | null,
-): Role[] {
-  if (level >= FIRST_TALENT_LEVEL) return specRole ? [specRole] : [];
-  return FINDER_ROLE_ORDER.filter((role) => FINDER_PRE_SPEC_ROLES[role].includes(cls));
+// Roles a character may select: the fixed class-capability table, at every
+// level. Specializations used to narrow this to the committed spec's role from
+// the spec unlock on; they are retired (Phase D0), so class capability is the
+// whole rule.
+export function compatibleFinderRoles(cls: PlayerClass): Role[] {
+  return FINDER_ROLE_ORDER.filter((role) => FINDER_CLASS_ROLES[role].includes(cls));
 }
 
 export function finderLevelEligible(activity: FinderActivity, level: number): boolean {
@@ -228,7 +224,7 @@ export class DungeonFinderMachine {
   private allowedRoles(pid: number): Role[] {
     const meta = this.ctx.players.get(pid);
     if (!meta) return [];
-    const eligible = compatibleFinderRoles(meta.cls, this.levelOf(pid), meta.talentMods.role);
+    const eligible = compatibleFinderRoles(meta.cls);
     const selected = this.roleSelections.get(pid) ?? [];
     return FINDER_ROLE_ORDER.filter((r) => selected.includes(r) && eligible.includes(r));
   }
@@ -291,11 +287,7 @@ export class DungeonFinderMachine {
     const r = this.ctx.resolve(pid);
     if (!r) return;
     const id = r.meta.entityId;
-    const eligible = compatibleFinderRoles(r.meta.cls, r.e.level, r.meta.talentMods.role);
-    if (r.e.level >= FIRST_TALENT_LEVEL && eligible.length === 0) {
-      this.ctx.error(id, 'Choose a specialization to use the Dungeon Finder.');
-      return;
-    }
+    const eligible = compatibleFinderRoles(r.meta.cls);
     const cleaned = FINDER_ROLE_ORDER.filter((role) => roles.includes(role));
     const invalid = cleaned.some((role) => !eligible.includes(role));
     if (invalid) {
@@ -391,16 +383,7 @@ export class DungeonFinderMachine {
 
   private memberRolesError(leaderPid: number, memberPid: number): void {
     if (memberPid === leaderPid) {
-      const r = this.ctx.resolve(leaderPid);
-      const eligible = r
-        ? compatibleFinderRoles(r.meta.cls, r.e.level, r.meta.talentMods.role)
-        : [];
-      this.ctx.error(
-        leaderPid,
-        eligible.length === 0
-          ? 'Choose a specialization to use the Dungeon Finder.'
-          : 'Select a Dungeon Finder role first.',
-      );
+      this.ctx.error(leaderPid, 'Select a Dungeon Finder role first.');
       return;
     }
     const name = this.ctx.players.get(memberPid)?.name ?? 'A party member';
@@ -997,7 +980,7 @@ export class DungeonFinderMachine {
   buildInfoFor(pid: number): DungeonFinderInfo {
     const meta = this.ctx.players.get(pid) ?? null;
     const level = this.levelOf(pid);
-    const eligibleRoles = meta ? compatibleFinderRoles(meta.cls, level, meta.talentMods.role) : [];
+    const eligibleRoles = meta ? compatibleFinderRoles(meta.cls) : [];
     const selection = this.roleSelections.get(pid) ?? [];
     const roles = FINDER_ROLE_ORDER.filter(
       (r) => selection.includes(r) && eligibleRoles.includes(r),

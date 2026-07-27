@@ -3,7 +3,6 @@ import { DEV_KIT_ROLE_COUNT, DEV_KIT_ROLES, devKitRole } from '../src/sim/conten
 import { HEROIC_ITEMS, RETIRED_HEROIC_ITEMS } from '../src/sim/content/heroic_loot';
 import { HEROIC_VENDOR_ITEMS } from '../src/sim/content/heroic_vendor';
 import { WARFARE_ITEMS } from '../src/sim/content/pvp_honor';
-import { talentsFor } from '../src/sim/content/talents';
 import { ITEMS } from '../src/sim/data';
 import {
   applyDevKit,
@@ -22,10 +21,12 @@ import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 // out through the database, and so a Gravewyrm Sanctum balance run measures the
 // ENCOUNTER rather than whatever gear happened to be lying around.
 
+// The dev-kit spec labels used to mirror the talent trees; the trees are retired
+// (Phase D0) and DEV_KIT_ROLES is now the standalone source of the 27 pairs.
 function everySpec(): { cls: PlayerClass; spec: string }[] {
   const out: { cls: PlayerClass; spec: string }[] = [];
   for (const cls of ALL_CLASSES) {
-    for (const spec of talentsFor(cls)?.specs ?? []) out.push({ cls, spec: spec.id });
+    for (const role of DEV_KIT_ROLES[cls] ?? []) out.push({ cls, spec: role.spec });
   }
   return out;
 }
@@ -297,7 +298,7 @@ describe('/dev kit against a real Sim', () => {
     const sim = new Sim({ seed: 7, playerClass: cls, devCommands: true });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
     const meta = sim.players.get(sim.playerId);
-    if (meta) meta.talents.spec = spec;
+    if (meta) meta.mods.spec = spec;
     sim.chat(`/dev kit ${spec}`);
     return sim;
   }
@@ -321,10 +322,10 @@ describe('/dev kit against a real Sim', () => {
     const sim = new Sim({ seed: 7, playerClass: 'mage', devCommands: true });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
     const meta = sim.players.get(sim.playerId);
-    if (meta) meta.talents.spec = 'frost';
+    if (meta) meta.mods.spec = 'frost';
     sim.chat('/dev kit fire');
     expect(sim.player.level).toBe(DEV_KIT_LEVEL);
-    expect(sim.players.get(sim.playerId)?.talents.spec).toBe('frost');
+    expect(sim.players.get(sim.playerId)?.mods.spec).toBe('frost');
   });
 
   // A fresh character already wears starter gear (worn_sword, recruit_tunic, ...), so

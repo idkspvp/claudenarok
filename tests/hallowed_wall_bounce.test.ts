@@ -26,7 +26,6 @@ describe('Hallowed Wall bounce', () => {
   it('bounces to enemies around the target, not the caster, capped at 2', () => {
     const sim = new Sim({ seed: 7, playerClass: 'paladin', autoEquip: true });
     sim.setPlayerLevel(20);
-    expect(sim.setSpec('protection')).toBe(true);
     const p = sim.entities.get(sim.playerId) as Entity;
     p.maxHp = p.hp = 1_000_000; // survive incidental mob swings during resolution
     const meta = (sim as unknown as { players: Map<number, unknown> }).players.get(sim.playerId);

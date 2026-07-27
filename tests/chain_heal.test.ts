@@ -48,7 +48,6 @@ function chainSetup() {
   // so heal2 amounts show the raw falloff instead of the missing-hp clamp.
   sim.setPlayerLevel(18, caster);
   // Chain Heal is the Restoration (Spiritmend) signature: granted on spec pick.
-  sim.setSpec('restoration', caster);
   sim.setPlayerLevel(18, near);
   sim.setPlayerLevel(18, mid);
   sim.setPlayerLevel(18, far);
@@ -112,7 +111,6 @@ describe('chain heal', () => {
   it('with no ally in range it heals only the target (a single beam)', () => {
     const sim = new Sim({ seed: 7, playerClass: 'shaman' });
     sim.setPlayerLevel(18);
-    sim.setSpec('restoration');
     teleport(sim, sim.playerId, 0, -40);
     sim.player.hp = Math.round(sim.player.maxHp * 0.4);
     const before = sim.player.hp;

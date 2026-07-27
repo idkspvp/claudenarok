@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import { ClientWorld } from '../src/net/online';
-import { computeTalentModifiers, emptyAllocation } from '../src/sim/content/talents';
 import { SPORT_KITS } from '../src/sim/content/vale_cup';
 import { abilitiesKnownAt } from '../src/sim/data';
 import type { CupInfo } from '../src/world_api';
@@ -224,11 +223,7 @@ describe('vcup self delta guard (absent keeps prior, null clears)', () => {
 });
 
 describe('sport-known rebuild (the wire trap)', () => {
-  const classKnownIds = abilitiesKnownAt(
-    'warrior',
-    10,
-    computeTalentModifiers('warrior', emptyAllocation()),
-  ).map((k) => k.def.id);
+  const classKnownIds = abilitiesKnownAt('warrior', 10).map((k) => k.def.id);
 
   it('resolves the role kit via the shared resolver while s.sport carries a role', () => {
     const { client } = bareClient(1);
