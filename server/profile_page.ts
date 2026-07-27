@@ -112,7 +112,7 @@ export async function handleProfilePage(
 }
 
 function profileTitle(sheet: CharacterSheet): string {
-  return `${sheet.name} — Lv ${sheet.level} ${sheet.classLabel}`;
+  return `${sheet.name}, Lv ${sheet.level} ${sheet.classLabel}`;
 }
 
 function profileDescription(sheet: CharacterSheet): string {
