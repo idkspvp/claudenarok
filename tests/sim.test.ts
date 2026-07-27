@@ -366,6 +366,11 @@ describe('movement directions', () => {
 describe('combat', () => {
   it('player kills a wolf and gains xp + loot', () => {
     const sim = makeSim('warrior');
+    // The subject here is the XP and loot pipeline, not balance. A fresh
+    // character carries every point unspent and cannot reliably finish a wolf,
+    // so spend them; whether an UNSPENT level-1 character should be able to is a
+    // question for the monster records (B1), not for this test.
+    levelWithStats(sim, 1);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
