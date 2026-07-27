@@ -118,3 +118,8 @@ dist-bot/
 /scripts/hunter_agents.sh
 /scripts/gravewyrm_trio.mjs
 /TESTING-TALENTS-2-0.md
+
+# A 1.1 GB download of the upstream project, pulled in for reference. It has no
+# business in the repository and was committed by accident once already.
+world-of-claudecraft-main.zip
+*.zip
