@@ -19,6 +19,14 @@ checkout is for. Two things are not:
   records, their specific numbers), which is why the sparse checkout deliberately
   excludes it. Mechanics are fair to reimplement; datasets are not.
 
+**One recorded exception, taken on the owner's explicit instruction.** The four
+per-job HP and SP coefficients in `src/sim/job_vitals.ts` were read from
+`db/pre-re/job_stats.yml`. The concern was raised, the owner reaffirmed the
+decision, and it is written down here rather than left as an undocumented
+divergence between this rule and the tree. It stays an exception: the rule above
+is unchanged for everything else, and monster records, item records, and card
+effects are still authored from scratch.
+
 Keeping the clone outside the working tree is what stops it becoming part of
 anything this project distributes. Do not move it in, and do not add it as a
 submodule.
@@ -119,6 +127,22 @@ NOVICE. Everything transcendent, third, or expanded in that enum is a later era.
 Transcribed to `src/sim/content/jobs.ts`: names and tree only, no stat blocks or
 skill lists.
 
+**MATK and MDEF** (`status_base_matk_min`/`_max` and the `status->mdef2`
+derivation in `status.cpp`, the magic reduction in `battle_calc_magic_attack`,
+all three under `#ifndef RENEWAL` / `#else`). Status MATK is a RANGE, not a
+number: `INT + (INT/7)^2` to `INT + (INT/5)^2`, rolled half-open exactly as the
+weapon roll is. Reduction has the same two-layer shape as physical, `damage x
+(100 - MDEF) / 100 - MDEF2`, floored at 1.
+
+Two things diverge from the physical side and both are easy to miss because
+everything else lines up. **Soft MDEF carries no random term**: `mdef2` is a
+plain `INT + VIT/2` and is subtracted as-is, where soft DEF rolls a quadratic
+span. So the variance on the magic side lives entirely in the ATTACK and on the
+physical side entirely in the DEFENCE. And **Intelligence pays into soft MDEF one
+for one while Vitality pays half**, which makes a caster the hardest magic target
+in the game and the softest to answer with a weapon. Converted in
+`src/sim/combat/magic_defence.ts`.
+
 ## Open items this reference has surfaced
 
 - **Magic crit is deliberately not converted yet.** Verified that pre-renewal
@@ -128,6 +152,17 @@ skill lists.
   has none of those talents either. Zeroing the rate ahead of the skills that
   replace them kills the trees without replacing them, so it lands with the skill
   rebuild in one piece. The finding is recorded at `Sim.spellCrit`.
+- **Hard MDEF has no source in this engine yet.** `combat/magic_defence.ts` takes
+  it as an argument rather than converting it, because unlike `Entity.armor`
+  there is no magic-armour field on an entity or an `ItemDef` to convert FROM.
+  Picking a divisor against a field that does not exist would be a guess. Every
+  caller passes 0 until the gear records carry a real MDEF value (roadmap B3), so
+  only the flat Intelligence layer bites, which is incomplete rather than wrong.
+- **The magic module is not wired into the cast path.** The formulas are
+  converted and tested; `spellPower` still carries the MIDPOINT of the MATK range
+  as a single number (`statusMagicPower` in `entity.ts`) and no spell subtracts
+  MDEF. Wiring it changes rng draw ORDER on every cast (the range roll is a new
+  draw), so it lands with the parity-golden regeneration and not before.
 - **The live class list is still the inherited nine**, not the Classic tree in
   `content/jobs.ts`. Attack speed is the system blocked on the migration: it is
   per JOB and per weapon class.
