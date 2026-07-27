@@ -10264,7 +10264,7 @@ export const en: EnTranslations = {
       "the_merchant": {
         "name": "The Merchant",
         "title": "Keeper of the World Market",
-        "greeting": "Welcome to the World Market, {className}. Buy from every adventurer in the realm - or set out your own wares and let coin find you."
+        "greeting": "Welcome to the World Market, {className}. Buy from every adventurer in the realm, or set out your own wares and let coin find you."
       },
       "marshal_redbrook": {
         "name": "Marshal Redbrook",
@@ -10294,7 +10294,7 @@ export const en: EnTranslations = {
       "fisherman_brandt": {
         "name": "Fisherman Brandt",
         "title": "Old Salt",
-        "greeting": "Blrb-glub- sorry, been listening to those fish-men too long."
+        "greeting": "Blrb-glub, sorry, been listening to those fish-men too long."
       },
       "foreman_odell": {
         "name": "Foreman Odell",
@@ -10309,12 +10309,12 @@ export const en: EnTranslations = {
       "brother_aldric_fen": {
         "name": "Brother Aldric",
         "title": "Priest of the Vale",
-        "greeting": "The Light keep you above the water, {playerName}. The dead in this fen do not sleep - they wade."
+        "greeting": "The Light keep you above the water, {playerName}. The dead in this fen do not sleep, they wade."
       },
       "provisioner_hale": {
         "name": "Provisioner Hale",
         "title": "Provisioner",
-        "greeting": "Dry boots, dry bread, dry powder - at Fenbridge you get two of the three on a good day."
+        "greeting": "Dry boots, dry bread, dry powder, at Fenbridge you get two of the three on a good day."
       },
       "herbalist_yara": {
         "name": "Herbalist Yara",
@@ -10324,12 +10324,12 @@ export const en: EnTranslations = {
       "scout_maren": {
         "name": "Scout Maren",
         "title": "Marshal's Scout",
-        "greeting": "Quiet feet and a short blade keep you breathing out here. Speak quick - I am due back in the reeds."
+        "greeting": "Quiet feet and a short blade keep you breathing out here. Speak quick, I am due back in the reeds."
       },
       "captain_thessaly": {
         "name": "Captain Thessaly",
         "title": "Highwatch Captain",
-        "greeting": "Two hundred years this wall has held, {className}. It will not break on my watch - but it groans."
+        "greeting": "Two hundred years this wall has held, {className}. It will not break on my watch, but it groans."
       },
       "brother_aldric_highwatch": {
         "name": "Brother Aldric",
@@ -10344,7 +10344,7 @@ export const en: EnTranslations = {
       "quartermaster_bree": {
         "name": "Quartermaster Bree",
         "title": "Highwatch Quartermaster",
-        "greeting": "Wool, hardtack, and steel-shod boots - Highwatch runs on all three, and I am short of everything."
+        "greeting": "Wool, hardtack, and steel-shod boots, Highwatch runs on all three, and I am short of everything."
       },
       "armorer_hode": {
         "name": "Armorer Hode",

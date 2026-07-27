@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "2b0142bb",
+      "state": "e63189dc",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "a0c0b2c6",
+      "state": "f2ea2db7",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "32002492",
+      "state": "f768998f",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "ed5000ff",
+      "state": "15ce0f9c",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "9851df6e",
+      "state": "f2229d13",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "93b54da9",
+      "state": "ae2a9a4a",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "0c3d358b",
+      "state": "217ab4f0",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "4f2becb8",
+      "state": "5a3b4d3d",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "7f4be52b",
+      "state": "4fcc21d0",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -279,8 +279,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.05,
-          "flee": 105,
-          "hit": 182,
+          "flee": 5,
+          "hit": 7,
           "hp": 90,
           "id": 415,
           "kind": "player",
@@ -336,8 +336,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.05,
-          "flee": 104,
-          "hit": 185,
+          "flee": 4,
+          "hit": 10,
           "hp": 54,
           "id": 416,
           "kind": "player",

@@ -9,14 +9,14 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:warrior"
   ],
-  "draws": 77,
-  "drawDigest": "168312fc",
+  "draws": 71,
+  "drawDigest": "60069de6",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f5e76d2d",
+      "state": "b1dceb96",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -111,8 +111,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 105,
-          "hit": 182,
+          "flee": 5,
+          "hit": 7,
           "hp": 90,
           "id": 415,
           "kind": "player",
@@ -162,33 +162,33 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "9de5a58e",
-      "events": "920049cc",
+      "state": "165330f0",
+      "events": "13b25635",
       "rng": {
-        "draws": 17,
-        "digest": "0d655f92"
+        "draws": 14,
+        "digest": "97283cfb"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "c62271a0",
-      "events": "357be310",
+      "state": "30bdc3b9",
+      "events": "fad1a5b5",
       "rng": {
-        "draws": 34,
-        "digest": "14849c77"
+        "draws": 28,
+        "digest": "9c413583"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "c9d21e2d",
-      "events": "eba06792",
+      "state": "0fa2dacc",
+      "events": "918ee910",
       "rng": {
-        "draws": 63,
-        "digest": "72fec67c"
+        "draws": 57,
+        "digest": "390c5ea3"
       },
       "label": "taunt",
       "players": [
@@ -209,7 +209,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 253
+            "damageTaken": 195
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -320,9 +320,9 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.5,
-          "flee": 120,
-          "hit": 198,
-          "hp": 319,
+          "flee": 20,
+          "hit": 23,
+          "hp": 377,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -342,7 +342,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 25.215385,
+          "resource": 20.307692,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -393,10 +393,10 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 108,
+          "flee": 5,
           "forcedTargetId": 415,
           "forcedTargetTimer": 3,
-          "hit": 179,
+          "hit": 5,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -455,8 +455,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 126,
-          "hit": 188,
+          "flee": 17,
+          "hit": 17,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -496,11 +496,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "225eb8d8",
+      "state": "d7c60f75",
       "events": "741638a5",
       "rng": {
-        "draws": 77,
-        "digest": "168312fc"
+        "draws": 71,
+        "digest": "60069de6"
       },
       "label": "final",
       "players": [
@@ -521,7 +521,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 253
+            "damageTaken": 195
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -633,9 +633,9 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.7,
-          "flee": 120,
-          "hit": 198,
-          "hp": 319,
+          "flee": 20,
+          "hit": 23,
+          "hp": 377,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -655,7 +655,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 25.215385,
+          "resource": 20.307692,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -707,10 +707,10 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 108,
+          "flee": 5,
           "forcedTargetId": 415,
           "forcedTargetTimer": 2.8,
-          "hit": 179,
+          "hit": 5,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -769,8 +769,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 126,
-          "hit": 188,
+          "flee": 17,
+          "hit": 17,
           "hostile": true,
           "hp": 60000,
           "id": 417,
