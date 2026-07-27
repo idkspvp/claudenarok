@@ -20,6 +20,7 @@ import { advancePendingProjectiles } from '../src/sim/projectile_travel';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass, SimEvent } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { fundCasts } from './helpers/sp';
 
 type DamageEvent = Extract<SimEvent, { type: 'damage' }>;
 
@@ -38,7 +39,7 @@ function makeSim(
   const p = sim.player;
   const meta = sim.players.get(p.id);
   if (!meta) throw new Error('test player metadata missing');
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 

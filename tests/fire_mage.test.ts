@@ -14,6 +14,7 @@ import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Specs are retired (Phase D0): a level-20 mage knows every mage ability, so the
 // `spec` argument no longer selects anything. It is kept as a readable label of
@@ -23,7 +24,7 @@ function mageWithSpec(_spec: 'fire' | 'frost') {
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -477,7 +478,7 @@ describe.skip('playtest round five (owner hotfixes)', () => {
     expect(p.cooldowns.has('flamestrike')).toBe(false);
 
     gcdReset(p);
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbilityAt('flamestrike', { x: mob.pos.x, z: mob.pos.z });
     expect(p.castingAbility).toBe('flamestrike');
   });
@@ -516,7 +517,7 @@ describe.skip('the personal-barrier slot', () => {
     sim.setPlayerLevel(20);
     sim.tick();
     const p = sim.player;
-    p.resource = p.maxResource;
+    fundCasts(p);
     const mob = addDummy(sim);
     sim.castAbility('blazing_barrier');
     const initialBarrier =

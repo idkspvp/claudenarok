@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Entity, PlayerClass, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Weapon imbues (acolyte rockbiter/flametongue/frostbrand, thief instant/deadly
 // poison, swordman seal) are a single weapon-enchant slot: classic allows exactly
@@ -22,7 +23,7 @@ function makePlayer(cls: PlayerClass, level: number): { sim: Sim; p: Entity } {
 function cast(sim: Sim, p: Entity, ability: string): SimEvent[] {
   p.gcdRemaining = 0;
   p.cooldowns.delete(ability);
-  p.resource = p.maxResource;
+  fundCasts(p);
   sim.castAbility(ability, p.id);
   return sim.tick();
 }

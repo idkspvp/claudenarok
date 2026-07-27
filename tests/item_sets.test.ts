@@ -18,6 +18,7 @@ import type { Entity, PlayerClass } from '../src/sim/types';
 import { CAST_PUSHBACK_SEC, CHANNEL_PUSHBACK_FRACTION } from '../src/sim/types';
 import { itemSetMemberCounts, itemSetTooltipModel } from '../src/ui/item_set_tooltip_view';
 import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -382,7 +383,7 @@ describe('caster 2-piece: damage never delays a cast (end to end)', () => {
     mob.prevPos = { ...mob.pos };
     (sim as any).rebucket(mob);
     sim.targetEntity(mob.id);
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('fireball');
     expect(p.castingAbility).toBe('fireball');
     const rem0 = p.castRemaining;

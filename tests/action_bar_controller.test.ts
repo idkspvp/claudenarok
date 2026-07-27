@@ -79,7 +79,7 @@ describe('ActionBarController form persistence', () => {
       { length: 22 },
       (_, index): HotbarAction => (index === 0 ? { type: 'ability', id: 'sunder_armor' } : null),
     );
-    storage.setItem('woc_hotbar_warrior_ActionbarTester', JSON.stringify(legacy));
+    storage.setItem('woc_hotbar_swordman_ActionbarTester', JSON.stringify(legacy));
     const { controller } = makeHarness('swordman', ['sunder_armor'], bar(), storage);
 
     controller.init();
@@ -89,28 +89,28 @@ describe('ActionBarController form persistence', () => {
     expect(controller.actions.slice(22)).toEqual(Array.from({ length: 11 }, () => null));
   });
 
-  it('persists the last third-row slot independently across Druid forms and reloads', () => {
+  it('persists the last third-row slot independently across form pages and reloads', () => {
     const storage = new MemoryStorage();
-    const first = makeHarness('acolyte', ['wrath', 'bear_form', 'claw'], bar(), storage);
+    const first = makeHarness('acolyte', ['smite', 'renew'], bar(), storage);
     const caster = bar();
-    caster[32] = { type: 'ability', id: 'wrath' };
+    caster[32] = { type: 'ability', id: 'smite' };
     first.controller.replaceActions(caster);
     first.controller.saveActions();
 
     first.state.auras = ['form_bear'];
     first.controller.syncActiveForm();
     const bear = bar();
-    bear[32] = { type: 'ability', id: 'claw' };
+    bear[32] = { type: 'ability', id: 'renew' };
     first.controller.replaceActions(bear);
     first.controller.saveActions();
 
-    const reloaded = makeHarness('acolyte', ['wrath', 'bear_form', 'claw'], bar(), storage);
+    const reloaded = makeHarness('acolyte', ['smite', 'renew'], bar(), storage);
     reloaded.controller.init();
-    expect(reloaded.controller.actions[32]).toEqual({ type: 'ability', id: 'wrath' });
+    expect(reloaded.controller.actions[32]).toEqual({ type: 'ability', id: 'smite' });
 
     reloaded.state.auras = ['form_bear'];
     reloaded.controller.syncActiveForm();
-    expect(reloaded.controller.actions[32]).toEqual({ type: 'ability', id: 'claw' });
+    expect(reloaded.controller.actions[32]).toEqual({ type: 'ability', id: 'renew' });
   });
 
   it('round-trips source slot 20 through the expanded storage model', () => {
@@ -162,7 +162,7 @@ describe('ActionBarController form persistence', () => {
       ['sinister_strike', 'stealth', 'garrote'],
       normal,
     );
-    storage.setItem('woc_hotbar_rogue_ActionbarTester_stealth', JSON.stringify(normal));
+    storage.setItem('woc_hotbar_thief_ActionbarTester_stealth', JSON.stringify(normal));
 
     state.auras = ['stealth'];
     controller.syncActiveForm();
@@ -183,7 +183,7 @@ describe('ActionBarController form persistence', () => {
 
     const custom = makeHarness('thief', ['sinister_strike', 'stealth', 'garrote'], normal);
     custom.storage.setItem(
-      'woc_hotbar_rogue_ActionbarTester_stealth',
+      'woc_hotbar_thief_ActionbarTester_stealth',
       JSON.stringify(customStealth),
     );
     custom.state.auras = ['stealth'];
@@ -192,9 +192,9 @@ describe('ActionBarController form persistence', () => {
 
     const encoded = makeHarness('thief', ['sinister_strike', 'stealth'], normal);
     const legacyEncoded = normal.map((action) => (action?.type === 'ability' ? action.id : action));
-    encoded.storage.setItem('woc_hotbar_rogue_ActionbarTester', JSON.stringify(normal));
+    encoded.storage.setItem('woc_hotbar_thief_ActionbarTester', JSON.stringify(normal));
     encoded.storage.setItem(
-      'woc_hotbar_rogue_ActionbarTester_stealth',
+      'woc_hotbar_thief_ActionbarTester_stealth',
       JSON.stringify(legacyEncoded),
     );
     encoded.state.auras = ['stealth'];
@@ -204,7 +204,7 @@ describe('ActionBarController form persistence', () => {
 
   it('writes the migration marker only after the blank page persists', () => {
     const normal = bar('sinister_strike', 'stealth');
-    const normalKey = 'woc_hotbar_rogue_ActionbarTester';
+    const normalKey = 'woc_hotbar_thief_ActionbarTester';
     const stealthKey = `${normalKey}_stealth`;
     const markerKey = `${stealthKey}_blank_v1`;
     const storage = new MemoryStorage();
@@ -249,15 +249,14 @@ describe('ActionBarController form persistence', () => {
     expect(controller.actions).toEqual(bar());
   });
 
-  it('keeps Druid caster, Wolf, and stealthed Wolf pages independently editable', () => {
-    const caster = bar('wrath', 'moonfire', 'cat_form');
-    const wolf = bar('claw', 'rip', 'prowl', 'cat_form');
-    const stealthedWolf = bar('pounce', 'rake', 'prowl', 'cat_form');
-    const { controller, state } = makeHarness(
-      'acolyte',
-      ['wrath', 'moonfire', 'cat_form', 'claw', 'rip', 'prowl', 'rake', 'pounce'],
-      caster,
-    );
+  it('keeps caster, Wolf, and stealthed Wolf pages independently editable', () => {
+    // The kit these pages used to hold went with the Druid (D1); the case is about
+    // the three pages staying independent, so live ability ids stand in for it.
+    const known = ['smite', 'renew', 'shadow_word_pain', 'mind_blast', 'heal'];
+    const caster = bar('smite', 'renew');
+    const wolf = bar('shadow_word_pain', 'mind_blast');
+    const stealthedWolf = bar('heal', 'smite');
+    const { controller, state } = makeHarness('acolyte', known, caster);
 
     state.auras = ['form_cat'];
     controller.syncActiveForm();
@@ -286,9 +285,9 @@ describe('ActionBarController form persistence', () => {
   it('migrates a legacy Wolf clone to blank', () => {
     const wolf = bar('claw', 'prowl', 'cat_form');
     const harness = makeHarness('acolyte', ['cat_form', 'claw', 'prowl', 'rake'], wolf);
-    harness.storage.setItem('woc_hotbar_druid_ActionbarTester_cat', JSON.stringify(wolf));
-    harness.storage.setItem('woc_hotbar_druid_ActionbarTester_cat_seeded', '1');
-    harness.storage.setItem('woc_hotbar_druid_ActionbarTester_cat_stealth', JSON.stringify(wolf));
+    harness.storage.setItem('woc_hotbar_acolyte_ActionbarTester_cat', JSON.stringify(wolf));
+    harness.storage.setItem('woc_hotbar_acolyte_ActionbarTester_cat_seeded', '1');
+    harness.storage.setItem('woc_hotbar_acolyte_ActionbarTester_cat_stealth', JSON.stringify(wolf));
     harness.state.auras = ['form_cat'];
     harness.controller.syncActiveForm();
     harness.state.auras = ['form_cat', 'stealth'];
@@ -345,7 +344,7 @@ describe('ActionBarController attack slot', () => {
   it('loads, hides, exposes, and removes the persisted freed-slot action', () => {
     const storage = new MemoryStorage();
     storage.setItem(
-      'woc_hotbar_warrior_ActionbarTester:s0',
+      'woc_hotbar_swordman_ActionbarTester:s0',
       JSON.stringify({ type: 'ability', id: 'strike' }),
     );
     const harness = makeHarness('swordman', ['strike'], bar('strike'), storage);
@@ -357,34 +356,34 @@ describe('ActionBarController attack slot', () => {
 
     harness.controller.replaceAttackAction(null);
     harness.controller.saveAttackAction();
-    expect(storage.getItem('woc_hotbar_warrior_ActionbarTester:s0')).toBeNull();
+    expect(storage.getItem('woc_hotbar_swordman_ActionbarTester:s0')).toBeNull();
   });
 
-  it('reloads a acolyte form-scoped attack slot on shapeshift instead of leaking the caster slot', () => {
-    const harness = makeHarness('acolyte', ['bear_form', 'cat_form', 'claw', 'mangle'], bar());
+  it('reloads a form-scoped attack slot on shapeshift instead of leaking the caster slot', () => {
+    const harness = makeHarness('acolyte', ['smite', 'renew'], bar());
     harness.state.showAttackButton = false;
     harness.controller.init();
 
-    harness.controller.replaceAttackAction({ type: 'ability', id: 'mangle' });
+    harness.controller.replaceAttackAction({ type: 'ability', id: 'smite' });
     harness.controller.saveAttackAction();
-    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'mangle' });
+    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'smite' });
 
     harness.state.auras = ['form_bear'];
     harness.controller.syncActiveForm();
     expect(harness.controller.actionForSlot(0)).toBeNull();
 
-    harness.controller.replaceAttackAction({ type: 'ability', id: 'claw' });
+    harness.controller.replaceAttackAction({ type: 'ability', id: 'renew' });
     harness.controller.saveAttackAction();
-    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'claw' });
-    expect(harness.storage.getItem('woc_hotbar_druid_ActionbarTester_bear:s0')).not.toBeNull();
+    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'renew' });
+    expect(harness.storage.getItem('woc_hotbar_acolyte_ActionbarTester_bear:s0')).not.toBeNull();
 
     harness.state.auras = [];
     harness.controller.syncActiveForm();
-    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'mangle' });
+    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'smite' });
 
     harness.state.auras = ['form_bear'];
     harness.controller.syncActiveForm();
-    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'claw' });
+    expect(harness.controller.actionForSlot(0)).toEqual({ type: 'ability', id: 'renew' });
   });
 });
 
@@ -425,7 +424,7 @@ describe('ActionBarController: passives never occupy an action slot', () => {
 
   it('cleans and persists a passive from an old saved normal bar during init', () => {
     const storage = new MemoryStorage();
-    const key = 'woc_hotbar_warrior_ActionbarTester';
+    const key = 'woc_hotbar_swordman_ActionbarTester';
     storage.setItem(key, JSON.stringify(bar('sunder_armor', 'measured_fury')));
     const { controller } = makeHarness(
       'swordman',
@@ -457,7 +456,7 @@ describe('ActionBarController: passives never occupy an action slot', () => {
 
   it('cleans a passive persisted in configurable slot 0 during init', () => {
     const storage = new MemoryStorage();
-    const key = 'woc_hotbar_warrior_ActionbarTester:s0';
+    const key = 'woc_hotbar_swordman_ActionbarTester:s0';
     storage.setItem(key, JSON.stringify({ type: 'ability', id: 'measured_fury' }));
     const { controller } = makeHarness('swordman', ['measured_fury'], bar(), storage);
 
@@ -509,7 +508,7 @@ describe('ActionBarController persistence seam', () => {
     controller.init();
     persisted.length = 0;
     // Simulate a server layout landing in the mirror, then a reload.
-    storage.setItem('woc_hotbar_warrior_ActionbarTester', JSON.stringify(bar('sunder_armor')));
+    storage.setItem('woc_hotbar_swordman_ActionbarTester', JSON.stringify(bar('sunder_armor')));
     controller.reload();
     expect(persisted).toEqual([]);
     expect(controller.actions[0]).toEqual({ type: 'ability', id: 'sunder_armor' });
@@ -530,10 +529,12 @@ describe('ActionBarController persistence seam', () => {
     controller.init();
     controller.replaceActions(bar('heroic_strike'));
     expect(() => controller.saveActions()).not.toThrow();
-    expect(JSON.parse(storage.getItem('woc_hotbar_warrior_ActionbarTester') ?? 'null')[0]).toEqual({
-      type: 'ability',
-      id: 'heroic_strike',
-    });
+    expect(JSON.parse(storage.getItem('woc_hotbar_swordman_ActionbarTester') ?? 'null')[0]).toEqual(
+      {
+        type: 'ability',
+        id: 'heroic_strike',
+      },
+    );
   });
 });
 

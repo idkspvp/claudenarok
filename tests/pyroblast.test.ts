@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { ABILITIES, abilitiesKnownAt } from '../src/sim/content/classes';
 import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
+import { fundCasts } from './helpers/sp';
 
 function makeSim(seed = 42) {
   return new Sim({ seed, playerClass: 'mage', autoEquip: true });
@@ -62,7 +63,7 @@ describe('Pyroblast (mage)', () => {
     teleportTo(sim, wolf.pos.x + 15, wolf.pos.z);
     sim.targetEntity(wolf.id);
     sim.player.facing = Math.atan2(wolf.pos.x - sim.player.pos.x, wolf.pos.z - sim.player.pos.z);
-    sim.player.resource = sim.player.maxResource;
+    fundCasts(sim.player);
     const hpBefore = wolf.hp;
     sim.castAbility('pyroblast');
     expect(sim.player.castingAbility).toBe('pyroblast');

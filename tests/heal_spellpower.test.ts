@@ -3,6 +3,7 @@ import { castAbility, updateCasting } from '../src/sim/combat/casting_lifecycle'
 import { Sim } from '../src/sim/sim';
 import { hotTickBonus } from '../src/sim/spell_scaling';
 import type { Entity, PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Healing scales with Spell Power the same way damage does: a direct heal takes the
 // cast-time coefficient, a HoT takes the DoT (duration/15) coefficient split across
@@ -18,7 +19,7 @@ function makeSim(cls: PlayerClass, level: number, spellPower: number) {
   sim.setPlayerLevel(level);
   const p = sim.player as AnyEntity;
   const meta = sim.players.get(p.id);
-  p.resource = p.maxResource;
+  fundCasts(p);
   // A large HP pool with a deep deficit so nothing overheals and caps the delta.
   p.maxHp = 100000;
   p.hp = 1;

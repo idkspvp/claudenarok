@@ -4,6 +4,7 @@ import { spawnNythraxisAdds } from '../src/sim/encounters/nythraxis';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Boss-summoned adds spawn seeded on the boss's current target (the tank) with
 // a REAL threat lead, not a token one. The old seed was 1 point: the healer's
@@ -101,7 +102,7 @@ describe('summon threat seeding', () => {
         h.targetId = tankPid;
         sim.castAbility('flash_heal', healerPid);
       }
-      h.resource = h.maxResource;
+      fundCasts(h);
       sim.tick();
     }
     for (const add of adds) {
@@ -129,7 +130,7 @@ describe('summon threat seeding', () => {
         m.prevFacing = m.facing;
         sim.castAbility('fireball', magePid);
       }
-      m.resource = m.maxResource;
+      fundCasts(m);
       sim.tick();
     }
     expect(target.aggroTargetId).toBe(magePid);

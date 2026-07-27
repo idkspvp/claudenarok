@@ -3,6 +3,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 const SEED = 42;
 const makeSim = (cls: PlayerClass = 'mage') =>
@@ -41,7 +42,7 @@ describe('mob mana burn (Mana Sear)', () => {
     const { sim, player, mob } = setup('mage');
     expect(player.resourceType).toBe('mana');
     const burn = MOBS.wyrmcult_necromancer.manaBurn!;
-    player.resource = player.maxResource;
+    fundCasts(player);
     const old = burn.chance;
     burn.chance = 1;
     try {
@@ -90,7 +91,7 @@ describe('mob mana burn (Mana Sear)', () => {
   it('a friendly pet never drains its target (hostile guard)', () => {
     const { sim, player, mob } = setup('mage');
     mob.hostile = false; // emulate a tamed pet swinging
-    player.resource = player.maxResource;
+    fundCasts(player);
     const burn = MOBS.wyrmcult_necromancer.manaBurn!;
     const old = burn.chance;
     burn.chance = 1;

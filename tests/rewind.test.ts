@@ -9,6 +9,7 @@ import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 const REWIND = 'temporal_rewind';
 
@@ -17,7 +18,7 @@ function chronoMage(): { sim: Sim; p: Entity } {
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -301,7 +302,7 @@ describe('Rewind: rules', () => {
     sim.setPlayerLevel(20, mage2Id);
     const mage2 = sim.entities.get(mage2Id)!;
     mage2.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };
-    mage2.resource = mage2.maxResource;
+    fundCasts(mage2);
     const ally = addAlly(sim, 'A', 3, 0);
     group(sim, p.id, [mage2.id, ally.id]);
     const lost = hurt(sim, ally, 10_000);

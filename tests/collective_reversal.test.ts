@@ -6,6 +6,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 import { en } from '../src/ui/i18n.resolved.generated';
 import { abilityIconRecipe, hasExplicitAbilityIcon } from '../src/ui/icons';
+import { fundCasts } from './helpers/sp';
 
 const ABILITY_ID = 'collective_reversal';
 
@@ -14,7 +15,7 @@ function chronomancer(): { sim: Sim; mage: Entity } {
   sim.setPlayerLevel(20);
   sim.tick();
   const mage = sim.player;
-  mage.resource = mage.maxResource;
+  fundCasts(mage);
   return { sim, mage };
 }
 

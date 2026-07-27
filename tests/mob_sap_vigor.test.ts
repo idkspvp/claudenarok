@@ -3,6 +3,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 const SEED = 42;
 const makeSim = (cls: PlayerClass) => new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
@@ -40,7 +41,7 @@ describe('mob sap vigor (Sapping Bite)', () => {
     const { sim, player, mob } = setup('thief');
     expect(player.resourceType).toBe('energy');
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
-    player.resource = player.maxResource;
+    fundCasts(player);
     const old = sap.chance;
     sap.chance = 1;
     try {
@@ -72,7 +73,7 @@ describe('mob sap vigor (Sapping Bite)', () => {
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
     const old = sap.chance;
     sap.chance = 1;
-    player.resource = player.maxResource;
+    fundCasts(player);
     try {
       for (let i = 0; i < 50; i++) {
         player.maxHp = KEEP_ALIVE;
@@ -89,7 +90,7 @@ describe('mob sap vigor (Sapping Bite)', () => {
   it('a friendly pet never drains its target (hostile guard)', () => {
     const { sim, player, mob } = setup('thief');
     mob.hostile = false; // emulate a tamed pet swinging
-    player.resource = player.maxResource;
+    fundCasts(player);
     const sap = MOBS.mirejaw_the_ravenous.sapVigor!;
     const old = sap.chance;
     sap.chance = 1;

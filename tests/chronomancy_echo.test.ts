@@ -10,6 +10,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // dealDamage's full signature including the Phase 2 `aoe` flag (last arg). This
 // port's signature carries `abilityId` (the stable content id for talent-proc
@@ -43,7 +44,7 @@ function chronoMage(level = 20) {
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -120,7 +121,7 @@ describe('Temporal Echo: the mark', () => {
     for (let i = 0; i < 100; i++) sim.tick(); // 5s
     const midway = echoMark(ally, p.id)?.remaining ?? 0;
     expect(midway).toBeLessThan(15);
-    p.resource = p.maxResource;
+    fundCasts(p);
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
     markEcho(sim, ally);
     const marks = ally.auras.filter((a) => a.kind === 'temporal_echo' && a.sourceId === p.id);
@@ -134,7 +135,7 @@ describe('Temporal Echo: the mark', () => {
     const allyB = addAlly(sim, 'Segundo', 6);
     markEcho(sim, allyA);
     expect(echoMark(allyA, p.id)).toBeDefined();
-    p.resource = p.maxResource;
+    fundCasts(p);
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
     markEcho(sim, allyB);
     expect(echoMark(allyA, p.id)).toBeUndefined(); // moved off A
@@ -288,7 +289,7 @@ describe('Temporal Echo: multiple chronomancers stay independent', () => {
     if (!mage2) throw new Error('mage2 missing');
     mage2.pos.x = p.pos.x + 2;
     mage2.pos.z = p.pos.z;
-    mage2.resource = mage2.maxResource;
+    fundCasts(mage2);
     sim.tick();
     const ally = addAlly(sim, 'Compartido', 4);
     const mob = addHostile(sim);
@@ -351,7 +352,7 @@ describe('Temporal Echo: determinism and enemy-free healing', () => {
     sim.castAbility('temporal_mend'); // self
     for (let i = 0; i < 50; i++) sim.tick(); // 2.5s cast window
     expect(p.hp).toBeGreaterThan(hp0); // healed with no enemy present
-    p.resource = p.maxResource;
+    fundCasts(p);
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
     sim.castAbility('temporal_barrier'); // self
     sim.tick();

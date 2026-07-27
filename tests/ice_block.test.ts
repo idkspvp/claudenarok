@@ -6,13 +6,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function rigMage(spec: 'frost' | 'fire' | 'arcane' | null = null) {
   const sim = new Sim({ seed: 17, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   p.gcdRemaining = 0;
   return { sim, p };
 }
@@ -77,7 +78,7 @@ describe('Ice Block: immunity + cleanse + control', () => {
 
     // Your own casts/swings are blocked while encased.
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('fireball');
     expect(p.castingAbility).toBe(null);
     sim.startAutoAttack();
@@ -95,7 +96,7 @@ describe('Ice Block: immunity + cleanse + control', () => {
     tickSeconds(sim, 5); // 8s stasis expires
     expect(p.auras.some((a) => a.kind === 'stasis')).toBe(false);
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('fireball');
     expect(p.castingAbility).toBe('fireball'); // action restored
   });
@@ -237,7 +238,7 @@ describe('Ice Block: immunity + cleanse + control', () => {
       p.gcdRemaining = 0;
       sim.castAbility('ice_block');
       p.gcdRemaining = 0;
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('fireball');
       events.push(...tickSeconds(sim, 4));
       return { hp: p.hp, casting: p.castingAbility, mobHp: mob.hp, events };

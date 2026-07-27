@@ -30,6 +30,7 @@ import {
   FISHING_CAST_ID,
 } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { fundCasts } from './helpers/sp';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -40,7 +41,7 @@ function makeSim(cls: PlayerClass, level: number): { sim: AnySim; p: AnyEntity; 
   placePlayerInOpenField(sim);
   const p = sim.player as AnyEntity;
   const meta = sim.players.get(p.id);
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 

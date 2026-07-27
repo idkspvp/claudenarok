@@ -115,6 +115,14 @@ export class ActionBarController {
 
   resolveActiveForm(): HotbarForm {
     if (this.deps.isInSportMatch()) return 'sport';
+    // The shapeshift pages key off the AURA, never off a class id. The Druid that
+    // used to be their only wearer was cut in D1, so no live kit reaches them
+    // today, but a saved layout still round-trips and a future form-owning job
+    // needs no change here.
+    if (this.deps.hasAura('form_bear')) return 'bear';
+    if (this.deps.hasAura('form_cat')) {
+      return this.deps.hasAura('stealth') ? 'cat_stealth' : 'cat';
+    }
     if (this.deps.playerClass === 'thief' && this.deps.hasAura('stealth')) return 'stealth';
     return 'normal';
   }

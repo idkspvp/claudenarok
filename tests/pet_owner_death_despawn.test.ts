@@ -4,6 +4,7 @@ import { createMob } from '../src/sim/entity';
 import { completeTame, petOf } from '../src/sim/pet/pet_commands';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Regression for the "immortal pet" bug: when a Hunter or Warlock OWNER dies, their
 // pet/demon used to keep living forever. handleDeath's player branch tore down the
@@ -64,7 +65,7 @@ describe('a dead owner does not leave an immortal pet', () => {
     const wpid = sim.addPlayer('mage', 'Demonist') as number;
     sim.setPlayerLevel(12, wpid);
     const mage = sim.entities.get(wpid) as AnyEntity;
-    mage.resource = mage.maxResource;
+    fundCasts(mage);
     (sim as any).summonPet(mage, 'emberkin');
     const imp = petOf(sim.ctx, wpid) as AnyEntity;
     expect(imp).toBeTruthy();

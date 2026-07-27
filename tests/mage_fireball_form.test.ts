@@ -8,6 +8,7 @@ import { type Entity, NYTHRAXIS_BOSS_ID } from '../src/sim/types';
 import { abilityBuffValue } from '../src/ui/ability_damage';
 import { hasExplicitAbilityIcon } from '../src/ui/icons';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { fundCasts } from './helpers/sp';
 
 const FORM_ID = 'fireball_form';
 
@@ -16,7 +17,7 @@ function mageWithSpec(spec: 'fire' | 'frost' | 'arcane', devCommands = false): S
   sim.setPlayerLevel(11);
   placePlayerInOpenField(sim);
   sim.tick();
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   return sim;
 }
 

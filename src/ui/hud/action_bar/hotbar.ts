@@ -286,8 +286,12 @@ export function hotbarActionsEqual(
 // Whether a class has per-form action bars at all (today: druid bear/cat). The
 // single source of truth for gating form-bar-only UI (e.g. the spellbook "Reset
 // bar" button) so it never leaks onto single-bar classes.
-export function classHasFormBars(playerClass: string): boolean {
-  return playerClass === 'druid';
+export function classHasFormBars(_playerClass: string): boolean {
+  // No live job owns a shapeshift kit: the Druid was cut in D1. The per-form bar
+  // MACHINERY stays (a saved layout still round-trips through it), but nothing
+  // reaches it, so no class advertises form bars and the form-bar-only "Reset
+  // bar" button never appears. A future form-owning job names itself here.
+  return false;
 }
 
 // Decide whether a druid form bar should be (re)seeded with its form kit. Seeds

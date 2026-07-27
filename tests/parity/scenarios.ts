@@ -42,6 +42,7 @@ import {
 } from '../../src/sim/types';
 import { terrainHeight } from '../../src/sim/world';
 import { OPEN_FIELD } from '../helpers/open_field';
+import { fundCasts } from '../helpers/sp';
 import type { Recorder, Scenario } from './record';
 
 // ----- shared helpers ---------------------------------------------------------
@@ -210,12 +211,12 @@ function frostProcOrb(): Scenario {
       face(p, mob);
       sim.targetEntity(mob.id);
 
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('frozen_orb');
       rec.tick(30);
 
       p.gcdRemaining = 0;
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('frostbolt');
       for (let tick = 0; tick < 100; tick++) {
         const events = rec.tick(1);
@@ -496,7 +497,7 @@ function warlockPet(): Scenario {
       sim.setPlayerLevel(12);
       const p = sim.player as AnyEntity;
       beef(p);
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('summon_voidwalker');
       for (let i = 0; i < 20 * 12 && p.castingAbility; i++) rec.tick(1);
       const pet = sim.petOf(sim.playerId) as AnyEntity | null;
@@ -710,7 +711,7 @@ function petCommands(): Scenario {
       const mage = sim.entities.get(wpid) as AnyEntity;
       teleport(sim, mage, archer.pos.x + 30, archer.pos.z);
       beef(mage);
-      mage.resource = mage.maxResource;
+      fundCasts(mage);
       rec.track(wpid);
 
       (sim as any).summonPet(mage, 'emberkin'); // createDemonPet -> "answers your summons"
@@ -776,7 +777,7 @@ function paladinConsecration(): Scenario {
       rec.track(mob.id);
       teleport(sim, p, mob.pos.x, mob.pos.z - 2); // mob within the 8yd radius
       sim.targetEntity(mob.id);
-      p.resource = p.maxResource;
+      fundCasts(p);
       rec.tick(1);
       p.gcdRemaining = 0;
       sim.castAbility('consecration'); // pushes the ground AoE; immediate pulse fires
@@ -2873,7 +2874,7 @@ function c3AuraRunner(): Scenario {
       }
       rec.track(a1.id, a2.id);
       rec.notes.aoeMobIds = [a1.id, a2.id];
-      p.resource = p.maxResource;
+      fundCasts(p);
       p.gcdRemaining = 0;
       sim.castAbility('consecration'); // immediate on-cast pulse + deferred interval pulses
       rec.tick(20 * 6); // 6s of interval-2 deferred pulses over both mobs
@@ -2945,7 +2946,7 @@ function c4aCastingLifecycle(): Scenario {
       rec.notes.mobId = mob.id;
 
       // --- mage: timed-cast start -> mid-cast pushback -> finish -> applyAbility ---
-      eMage.resource = eMage.maxResource;
+      fundCasts(eMage);
       face(eMage, mob);
       sim.targetEntity(mob.id, mage);
       sim.castAbility('fireball', mage); // timed-cast START (castStart)
@@ -2955,7 +2956,7 @@ function c4aCastingLifecycle(): Scenario {
       rec.tick(120); // let the 2.5s cast (+ pushback) finish -> applyAbility -> runEffects
 
       // --- mage: spell queue (#1360): a press in the cast tail queues, fires on completion ---
-      eMage.resource = eMage.maxResource;
+      fundCasts(eMage);
       face(eMage, mob);
       sim.castAbility('fireball', mage); // second timed-cast START (fresh cast, no pushback)
       // drain to inside the queue window: tick one at a time (cast time varies by rank/level,
@@ -2976,7 +2977,7 @@ function c4aCastingLifecycle(): Scenario {
 
       // --- acolyte: timed self-heal start -> silence lands -> updateCasting cancel ---
       ePriest.hp = Math.max(1, ePriest.maxHp - 1000);
-      ePriest.resource = ePriest.maxResource;
+      fundCasts(ePriest);
       sim.castAbility('lesser_heal', healer); // self (friendly fallback), timed START
       rec.tick(1); // progress one tick (no interrupt yet)
       ePriest.auras.push(
@@ -2994,7 +2995,7 @@ function c4aCastingLifecycle(): Scenario {
 
       // --- acolyte: channel start -> channel tick -> channel-fraction pushback ---
       eChanneler.hp = Math.max(1, eChanneler.maxHp - 500);
-      eChanneler.resource = eChanneler.maxResource;
+      fundCasts(eChanneler);
       face(eChanneler, mob);
       sim.targetEntity(mob.id, channeler);
       sim.castAbility('mind_flay', channeler); // channel START (spend+arm at START)
@@ -3294,7 +3295,7 @@ function c4bEffectDispatch(): Scenario {
       };
       const ready = (e: AnyEntity): void => {
         e.gcdRemaining = 0;
-        e.resource = e.maxResource;
+        fundCasts(e);
       };
 
       // --- mage FIRST (timed casts in a clean environment) ---
@@ -3404,7 +3405,7 @@ function hitRatingHeroic(withHitGear: boolean): Scenario {
       rec.track(mob.id);
       face(p, mob);
       sim.targetEntity(mob.id);
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('fireball');
       rec.tick(120);
       rec.snapshot('fireball-landed');
@@ -3499,8 +3500,8 @@ function c5AutoAttack(): Scenario {
           teleport(sim, m, e.pos.x, e.pos.z + dz);
           face(e, m);
         }
-        eWarrior.resource = eWarrior.maxResource;
-        eHunterM.resource = eHunterM.maxResource;
+        fundCasts(eWarrior);
+        fundCasts(eHunterM);
         // Queue on-next-swing abilities (the guard avoids the cast-toggle that a
         // re-cast while already queued would trigger).
         if (eWarrior.gcdRemaining <= 0 && !eWarrior.castingAbility && !eWarrior.queuedOnSwing) {

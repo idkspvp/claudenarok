@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { fundCasts } from './helpers/sp';
 
 // Mock the db layer so no Postgres is needed; snapshot logic is under test.
 vi.mock('../server/db', () => ({
@@ -751,7 +752,7 @@ describe('delta snapshots', () => {
     const acolyte = joinServer(druidServer, fc, 10, 'Newkali', 'acolyte');
     const player = druidServer.sim.entities.get(acolyte.pid)!;
     druidServer.sim.setPlayerLevel(20, acolyte.pid);
-    player.resource = player.maxResource;
+    fundCasts(player);
 
     druidServer.sim.castAbility('travel_form', acolyte.pid);
     druidServer.sim.tick();

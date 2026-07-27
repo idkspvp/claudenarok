@@ -7,6 +7,7 @@ import type { PlayerMeta, ResolvedAbility } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { AbilityDef, Entity, Vec3 } from '../src/sim/types';
 import { dist2d } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function twoPlayers(clsA = 'mage', clsB = 'swordman') {
   const sim = new Sim({
@@ -33,7 +34,7 @@ function startDuel(clsA = 'mage', clsB = 'swordman', level = 20) {
   const { sim, aPid, bPid, a, b } = setup;
   sim.setPlayerLevel(level, aPid);
   sim.setPlayerLevel(level, bPid);
-  a.resource = a.maxResource;
+  fundCasts(a);
   a.facing = Math.atan2(b.pos.x - a.pos.x, b.pos.z - a.pos.z);
   sim.duelRequest(bPid, aPid);
   sim.duelAccept(bPid);
@@ -194,7 +195,7 @@ describe('PvP control abilities in active duels', () => {
     const npc = [...sim.entities.values()].find((e) => e.kind === 'npc');
     expect(npc).toBeDefined();
     sim.setPlayerLevel(20);
-    sim.player.resource = sim.player.maxResource;
+    fundCasts(sim.player);
     sim.targetEntity(npc!.id);
 
     sim.castAbility('polymorph');
@@ -215,7 +216,7 @@ describe('PvP control abilities in active duels', () => {
         b.auras = b.auras.filter((aura) => aura.kind !== 'polymorph');
         mage.gcdRemaining = 0;
         mage.cooldowns.delete('polymorph');
-        mage.resource = mage.maxResource;
+        fundCasts(mage);
         sim.castAbility('polymorph', aPid);
         finishCast(sim, aPid);
         const applied = b.auras.find((aura) => aura.kind === 'polymorph');
@@ -263,7 +264,7 @@ describe('PvP control abilities in active duels', () => {
         b.auras = b.auras.filter((aura) => aura.id !== 'fear_incap');
         const warlock = sim.entities.get(aPid)!;
         warlock.gcdRemaining = 0;
-        warlock.resource = warlock.maxResource;
+        fundCasts(warlock);
         sim.castAbility('fear', aPid);
         finishCast(sim, aPid);
         dur = b.auras.find((aura) => aura.id === 'fear_incap')?.duration ?? 0;
@@ -294,7 +295,7 @@ describe('PvP control abilities in active duels', () => {
         b.auras = b.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
         const pala = sim.entities.get(aPid)!;
         pala.gcdRemaining = 0;
-        pala.resource = pala.maxResource;
+        fundCasts(pala);
         pala.cooldowns.delete('hammer_of_justice');
         sim.castAbility('hammer_of_justice', aPid);
         finishCast(sim, aPid);
@@ -329,7 +330,7 @@ describe('PvP control abilities in active duels', () => {
         b.auras = b.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
         const pala = sim.entities.get(aPid)!;
         pala.gcdRemaining = 0;
-        pala.resource = pala.maxResource;
+        fundCasts(pala);
         pala.cooldowns.delete('hammer_of_justice');
         sim.castAbility('hammer_of_justice', aPid);
         finishCast(sim, aPid);
@@ -375,13 +376,13 @@ describe('PvP control abilities in active duels', () => {
     const stunMob = () => {
       m.auras = m.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
       p.gcdRemaining = 0;
-      p.resource = p.maxResource;
+      fundCasts(p);
       p.cooldowns.delete('hammer_of_justice');
       let dur = 0;
       for (let attempt = 0; attempt < 50 && dur === 0; attempt++) {
         m.auras = m.auras.filter((aura) => aura.id !== 'hammer_of_justice_stun');
         p.gcdRemaining = 0;
-        p.resource = p.maxResource;
+        fundCasts(p);
         p.cooldowns.delete('hammer_of_justice');
         sim.castAbility('hammer_of_justice', pid);
         finishCast(sim, pid);

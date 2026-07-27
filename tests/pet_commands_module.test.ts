@@ -23,6 +23,7 @@ import {
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 import { localizeSimText } from '../src/ui/sim_i18n';
+import { fundCasts } from './helpers/sp';
 
 // Direct unit tests for the extracted pet command/lifecycle module (P1b). They drive
 // the moved functions through the real Sim.ctx seam (so the still-on-Sim helpers they
@@ -135,7 +136,7 @@ describe('pet_commands module (P1b)', () => {
     summonPet(sim.ctx, owner, 'emberkin');
     const pet = petOf(sim.ctx, pid) as AnyEntity;
     pet.hp = Math.max(1, pet.maxHp - 50);
-    owner.resource = owner.maxResource;
+    fundCasts(owner);
     sim.ctx.applyAura(owner, {
       id: 'scripted_boss_lock',
       name: 'Scripted Boss Lock',
@@ -268,7 +269,7 @@ describe('pet_commands module (P1b)', () => {
     const wpid = sim.addPlayer('mage', 'Demonist') as number;
     sim.setPlayerLevel(12, wpid);
     const mage = sim.entities.get(wpid) as AnyEntity;
-    mage.resource = mage.maxResource;
+    fundCasts(mage);
 
     // Summon an imp.
     summonPet(sim.ctx, mage, 'emberkin');

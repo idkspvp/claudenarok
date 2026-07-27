@@ -4,6 +4,7 @@ import { createMob } from '../src/sim/entity';
 import { summonPet } from '../src/sim/pet/pet_commands';
 import { Sim } from '../src/sim/sim';
 import { DT, type Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function entity(sim: Sim, pid: number): Entity {
   const e = sim.entities.get(pid);
@@ -44,7 +45,7 @@ describe('signature mechanics v2', () => {
     sim.partyAccept(allyPid);
 
     const allyApBefore = ally.attackPower;
-    archer.resource = archer.maxResource;
+    fundCasts(archer);
     sim.castAbility('trueshot_aura', hunterPid);
 
     const aura = ally.auras.find((a) => a.kind === 'buff_ap_pct' && a.id === 'trueshot_aura_ap');
@@ -58,7 +59,7 @@ describe('signature mechanics v2', () => {
     const sim = new Sim({ seed: 13, playerClass: 'thief', autoEquip: true });
     sim.setPlayerLevel(20);
     const thief = sim.player;
-    thief.resource = thief.maxResource;
+    fundCasts(thief);
     thief.facing = 0;
     const target = addDummy(sim, thief.pos.x, thief.pos.z + 4);
     sim.targetEntity(target.id);

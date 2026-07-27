@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { fundCasts } from './helpers/sp';
 
 vi.mock('../server/db', () => ({
   pool: { query: vi.fn(async () => ({ rows: [] })) },
@@ -44,7 +45,7 @@ describe('Mage Fireball Form online authority', () => {
     server.sim.tick();
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');
-    mage.resource = mage.maxResource;
+    fundCasts(mage);
     mage.gcdRemaining = 0;
     expect(server.sim.resolvedAbility('fireball_form', session.pid)).not.toBeNull();
     expect(mage.auras.some((aura) => aura.id === 'fireball_form')).toBe(false);
@@ -79,7 +80,7 @@ describe('Mage Fireball Form online authority', () => {
     server.sim.tick();
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');
-    mage.resource = mage.maxResource;
+    fundCasts(mage);
     mage.gcdRemaining = 0;
     server.handleMessage(
       session,
@@ -107,7 +108,7 @@ describe('Mage Fireball Form online authority', () => {
     server.sim.tick();
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');
-    mage.resource = mage.maxResource;
+    fundCasts(mage);
     mage.gcdRemaining = 0;
     const target = createMob(94002, MOBS.training_dummy, 11, {
       x: mage.pos.x,

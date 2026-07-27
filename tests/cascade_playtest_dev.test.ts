@@ -6,13 +6,14 @@ import { describe, expect, it } from 'vitest';
 import { CASCADE_SCENARIO } from '../src/sim/dev/cascade_playtest';
 import { Sim } from '../src/sim/sim';
 import { dist2d, type SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function devMage(devCommands: boolean) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true, devCommands });
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 

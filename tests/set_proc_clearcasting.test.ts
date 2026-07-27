@@ -4,6 +4,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob, recalcPlayerStats } from '../src/sim/entity';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import type { Entity, PlayerClass, SetProc } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type ProcInternals = {
   players: Map<number, PlayerMeta>;
@@ -45,7 +46,7 @@ function makeCastingSim(cls: PlayerClass, seed: number): { sim: AnySim; p: AnyEn
   sim.setPlayerLevel(20); // the real level-up path, so higher-learnLevel spells are known
   const p = equipMournweave(sim) as AnyEntity;
   const meta = sim.players.get(p.id);
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 
@@ -70,7 +71,7 @@ const hasClearcasting = (p: Entity) => p.auras.some((a) => a.kind === 'next_cast
 // One full cast: reset the per-cast throttles, start, then drain the cast to
 // completion (applyAbility runs inside updateCasting when the timer clears).
 function castOnce(sim: AnySim, p: AnyEntity, meta: any, abilityId: string): void {
-  p.resource = p.maxResource;
+  fundCasts(p);
   p.gcdRemaining = 0;
   p.castingAbility = null;
   p.channeling = false;

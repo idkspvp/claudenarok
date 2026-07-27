@@ -10,13 +10,14 @@ import { Sim } from '../src/sim/sim';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 function makeSim(cls: PlayerClass, spec: string | null = null, seed = 7): Sim {
   const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
   sim.setPlayerLevel(20);
   const p = sim.entities.get(sim.playerId) as Entity;
   p.maxHp = p.hp = 1_000_000;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return sim;
 }
 

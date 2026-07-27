@@ -3,6 +3,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type TestSim = Sim & {
   addEntity(entity: Entity): void;
@@ -12,7 +13,7 @@ type TestSim = Sim & {
 function makeHunter(rows: Record<number, string> = {}): TestSim {
   const sim = new Sim({ seed: 2614, playerClass: 'archer', autoEquip: false }) as TestSim;
   sim.setPlayerLevel(20);
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   return sim;
 }
 
@@ -39,7 +40,7 @@ function advance(sim: Sim, ticks: number): SimEvent[] {
 }
 
 function castPatchUp(sim: TestSim): SimEvent[] {
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   sim.player.gcdRemaining = 0;
   sim.castAbility('revive_pet');
   return advance(sim, 61);

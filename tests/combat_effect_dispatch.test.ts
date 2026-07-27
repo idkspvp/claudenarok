@@ -14,6 +14,7 @@ import { createMob } from '../src/sim/entity';
 import type { PlayerMeta, ResolvedAbility } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type TestSim = Sim & {
   nextId: number;
@@ -31,7 +32,7 @@ function makeSim(cls: PlayerClass, level: number): { sim: TestSim; p: Entity; me
   const p = sim.player;
   const meta = sim.players.get(p.id);
   if (!meta) throw new Error(`missing player meta for ${p.id}`);
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 

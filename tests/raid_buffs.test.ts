@@ -10,6 +10,7 @@ import {
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import { levelWithStats } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 // Standardized percent raid buffs (resurrecting PR #1038 on release/v0.21.0): the six
 // iconic buffs are percent, integer-point auras that land on the caster and every
@@ -37,7 +38,7 @@ function formParty(sim: Sim, leader: number, members: number[]) {
 
 const ready = (sim: Sim, pid: number) => {
   const e = sim.entities.get(pid)!;
-  e.resource = e.maxResource;
+  fundCasts(e);
 };
 
 const blessingAura = (sourceId: number, value: number, remaining = 1800): Aura => ({

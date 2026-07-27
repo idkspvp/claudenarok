@@ -21,6 +21,7 @@ import { createMob, type PlayerEquipment, recalcPlayerStats } from '../src/sim/e
 import { Sim } from '../src/sim/sim';
 import type { Entity, ItemDef, PlayerClass } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -161,7 +162,7 @@ describe('spell haste shortens casts and channels', () => {
   it('a timed cast is (1 + spellHaste) times shorter', () => {
     const { sim, p, pid } = player('mage');
     spawnDummy(sim, p);
-    p.resource = p.maxResource;
+    fundCasts(p);
 
     p.spellHaste = 0;
     sim.castAbility('frostbolt', pid);
@@ -171,7 +172,7 @@ describe('spell haste shortens casts and channels', () => {
     p.castingAbility = null;
     p.castRemaining = 0;
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     p.spellHaste = SET_HASTE_3PC;
     sim.castAbility('frostbolt', pid);
     expect(p.castTotal).toBeCloseTo(base / (1 + SET_HASTE_3PC), 6);
@@ -182,7 +183,7 @@ describe('spell haste shortens casts and channels', () => {
     // Aether Darts moved from the shared mage kit to Chronomancy after this
     // release test was written; select that spec so the channel actually starts.
     spawnDummy(sim, p);
-    p.resource = p.maxResource;
+    fundCasts(p);
 
     p.spellHaste = 0;
     sim.castAbility('arcane_missiles', pid);
@@ -194,7 +195,7 @@ describe('spell haste shortens casts and channels', () => {
     p.channeling = false;
     p.castRemaining = 0;
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     p.spellHaste = SET_HASTE_3PC;
     sim.castAbility('arcane_missiles', pid);
     expect(p.castTotal).toBeCloseTo(baseTotal / (1 + SET_HASTE_3PC), 6);

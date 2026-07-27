@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
+import { fundCasts } from './helpers/sp';
 
 function castBarrier(
   level: number,
@@ -10,7 +11,7 @@ function castBarrier(
   const sim = new Sim({ seed: 707, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   if (spellPower !== undefined) sim.player.spellPower = spellPower;
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   const manaBefore = sim.player.resource;
 
   sim.castAbility(abilityId);
@@ -31,7 +32,7 @@ function castTemporalBarrier(
 ): { absorb: number; cost: number; spellPower: number } {
   const sim = new Sim({ seed: 708, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   const manaBefore = sim.player.resource;
   const allyId = sim.addPlayer('swordman', 'Barrier Target');
   const ally = sim.entities.get(allyId);

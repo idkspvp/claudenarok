@@ -25,6 +25,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import type { Aura, Entity } from '../src/sim/types';
 import { type AuraInput, type AurasDeps, createAurasView } from '../src/ui/auras_view';
+import { fundCasts } from './helpers/sp';
 
 function ctxOf(sim: Sim): SimContext {
   return (sim as unknown as { ctx: SimContext }).ctx;
@@ -35,7 +36,7 @@ function chronoMage(level = 20) {
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 

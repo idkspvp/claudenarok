@@ -21,6 +21,7 @@ import { PLAYER_BODY_RADIUS } from '../src/sim/pathfind';
 import { eloDelta, Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
+import { fundCasts } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
@@ -677,7 +678,7 @@ describe('arena: crowd control diminishing returns', () => {
     face(sim, a, b);
 
     const castRoot = () => {
-      acolyte.resource = acolyte.maxResource;
+      fundCasts(acolyte);
       acolyte.gcdRemaining = 0;
       sim.castAbility('entangling_roots', a);
       finishCast(sim, a);
@@ -758,7 +759,7 @@ describe('arena: class ability target filters', () => {
         const acolyte = sim.entities.get(pid)!;
         sim.castAbility('bear_form', pid);
         acolyte.gcdRemaining = 0;
-        acolyte.resource = acolyte.maxResource;
+        fundCasts(acolyte);
       },
     },
   ];
@@ -774,7 +775,7 @@ describe('arena: class ability target filters', () => {
       setup?.(sim, a);
       startBout(sim);
       teleport(sim, b, caster.pos.x, caster.pos.z + 3);
-      caster.resource = caster.maxResource;
+      fundCasts(caster);
       caster.gcdRemaining = 0;
 
       const startHp = target.hp;

@@ -19,6 +19,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { fundCasts } from './helpers/sp';
 
 type Spec = 'arcane' | 'fire' | 'frost';
 
@@ -28,7 +29,7 @@ function makeMage(spec: Spec, level = 20) {
   placePlayerInOpenField(sim);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -304,7 +305,7 @@ function cascadeAoeHeal(enemyCount: number): CascadeMeasure {
   sim.tick();
   placePlayerInOpenField(sim);
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   const allyIds: number[] = [];
   for (let i = 0; i < 5; i++) {
     const id = sim.addPlayer('swordman', `Ally${i}`);

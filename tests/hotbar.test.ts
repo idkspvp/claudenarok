@@ -407,28 +407,16 @@ describe('hotbar actions equality', () => {
 });
 
 describe('classes with per-form action bars', () => {
-  it('only the druid has form bars — every other class is single-bar', () => {
+  it('gives no job form bars now that the Druid is cut', () => {
     const classIds = Object.keys(CLASSES);
-    // sanity: the full roster is present so this stays exhaustive as classes are added
-    expect(classIds.length).toBeGreaterThanOrEqual(9);
-    expect(classIds).toContain('druid');
+    // sanity: the whole roster is present so this stays exhaustive as jobs are added
+    expect(classIds.length).toBeGreaterThanOrEqual(5);
+    expect(classIds).not.toContain('druid');
 
-    expect(classHasFormBars('druid')).toBe(true);
-    for (const id of classIds) {
-      expect(classHasFormBars(id)).toBe(id === 'druid');
-    }
-    // the form-bar-only "Reset bar" button must never leak onto these
-    for (const id of [
-      'swordman',
-      'mage',
-      'thief',
-      'acolyte',
-      'archer',
-      'paladin',
-      'shaman',
-      'warlock',
-    ]) {
-      expect(classHasFormBars(id)).toBe(false);
+    // The form-bar-only "Reset bar" button must not leak onto any of them, and an
+    // id that is no longer a class must not resurrect the bars either.
+    for (const id of [...classIds, 'druid', 'paladin', 'shaman', 'warlock']) {
+      expect(classHasFormBars(id), id).toBe(false);
     }
   });
 });
@@ -550,8 +538,8 @@ describe('desktop attack slot behavior', () => {
 
   it('uses a separate, stable storage key and round-trips valid actions', () => {
     const store = storage();
-    const key = attackSlotStorageKey('woc_hotbar_warrior_Thorgar');
-    expect(key).toBe('woc_hotbar_warrior_Thorgar:s0');
+    const key = attackSlotStorageKey('woc_hotbar_swordman_Thorgar');
+    expect(key).toBe('woc_hotbar_swordman_Thorgar:s0');
 
     saveAttackSlotAction(store, key, { type: 'ability', id: 'fireball' });
     expect(loadAttackSlotAction(store, key, abilityExists, itemExists)).toEqual({

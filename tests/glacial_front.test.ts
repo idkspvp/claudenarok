@@ -9,6 +9,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type TestSim = Sim & { nextId: number; addEntity(e: Entity): void; ctx: never };
 
@@ -16,7 +17,7 @@ function frostMage(): { sim: TestSim; p: Entity } {
   const sim = new Sim({ seed: 87, playerClass: 'mage', autoEquip: true }) as TestSim;
   sim.setPlayerLevel(20);
   sim.tick();
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   sim.player.facing = 0;
   return { sim, p: sim.player };
 }

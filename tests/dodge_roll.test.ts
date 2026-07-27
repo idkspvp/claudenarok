@@ -12,6 +12,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 const ROLLS: Record<PlayerClass, string> = {
   swordman: 'bracing_roll',
@@ -29,7 +30,7 @@ function rig(cls: PlayerClass) {
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   p.gcdRemaining = 0;
   return { sim, p };
 }

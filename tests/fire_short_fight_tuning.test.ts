@@ -35,6 +35,7 @@ import { createMob, type PlayerEquipment, recalcPlayerStats } from '../src/sim/e
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 const FIGHT_SECONDS = 27; // the reported Nythraxis kill length
 const SHORT_FIGHT_DPS_CEILING = 1.6; // x the sustained comparator, 27s window
@@ -87,7 +88,7 @@ function gearedMage(seed = 41): { sim: Sim; p: Entity } {
     meta.equipmentInstance as never,
     spreadAllocation(p.level),
   );
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -149,7 +150,7 @@ function runShortFight(spec: Spec, seconds: number, seed = 41): BurstResult {
     // the pull so the 27s window measures the fight, not the setup cast.
     sim.castAbility('summon_water_elemental');
     for (let i = 0; i < 60; i++) sim.tick(); // 3s: cast lands, pet settles
-    p.resource = p.maxResource;
+    fundCasts(p);
   }
   const mine = (sourceId: number): boolean => {
     if (sourceId === p.id) return true;

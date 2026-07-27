@@ -23,6 +23,7 @@ import {
 } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import type { PartyMemberInfo } from '../src/world_api';
+import { fundCasts } from './helpers/sp';
 
 function makeWorld() {
   return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
@@ -90,7 +91,7 @@ function nearestMob(
   return best;
 }
 
-describe('nine classes', () => {
+describe('the five first jobs', () => {
   it('every class spawns with a working kit and stats', () => {
     for (const cls of ALL_CLASSES) {
       const sim = new Sim({ seed: 42, playerClass: cls });
@@ -143,7 +144,7 @@ describe('nine classes', () => {
     const ally = mustEntity(sim, allyId);
     teleport(sim, priestId, ally.pos.x + 5, ally.pos.z);
     sim.setPlayerLevel(6, priestId);
-    acolyte.resource = acolyte.maxResource;
+    fundCasts(acolyte);
     ally.hp = 20;
 
     sim.targetEntity(ally.id, priestId);
@@ -164,67 +165,6 @@ describe('nine classes', () => {
     p.hp = 20;
     sim.castAbility('renew');
     for (let i = 0; i < 20 * 7; i++) sim.tick();
-    expect(p.hp).toBeGreaterThan(30);
-  });
-
-  it('swordman seal empowers swings and judgement consumes it', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'swordman' });
-    sim.setPlayerLevel(4);
-    const p = sim.player;
-    sim.castAbility('seal_of_righteousness');
-    sim.tick();
-    expect(p.auras.some((a) => a.kind === 'imbue')).toBe(true);
-    const wolf = nearestMob(sim, 'forest_wolf');
-    teleport(sim, p.id, wolf.pos.x + 3, wolf.pos.z);
-    sim.targetEntity(wolf.id);
-    face(sim, p.id, wolf.id);
-    p.resource = p.maxResource;
-    // wait out gcd then judge
-    for (let i = 0; i < 35; i++) sim.tick();
-    // Judgement's spell hit is an RNG roll (capped at 99%), so a single cast can
-    // miss on some world seeds and deal no damage. Re-seal and retry until it
-    // lands, so this checks the mechanic (judgement hits and consumes the seal)
-    // rather than a lucky roll — robust to RNG-stream shifts from new content.
-    let landed = false;
-    for (let attempt = 0; attempt < 25 && !landed; attempt++) {
-      if (!p.auras.some((a) => a.kind === 'imbue')) {
-        sim.castAbility('seal_of_righteousness');
-        sim.tick();
-      }
-      p.gcdRemaining = 0;
-      p.cooldowns.delete('judgement');
-      p.resource = p.maxResource;
-      face(sim, p.id, wolf.id);
-      const dealtBefore = sim.counters.damageDealt;
-      sim.castAbility('judgement');
-      sim.tick();
-      landed = sim.counters.damageDealt > dealtBefore;
-    }
-    expect(landed).toBe(true); // judgement connected and dealt damage
-    expect(p.auras.some((a) => a.kind === 'imbue')).toBe(false); // consumed
-  });
-
-  it('mage life taps and drains life', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'mage' });
-    sim.setPlayerLevel(10);
-    const p = sim.player;
-    p.resource = 10;
-    const hpBefore = p.hp;
-    sim.castAbility('life_tap');
-    sim.tick();
-    expect(p.hp).toBe(hpBefore - 30);
-    expect(p.resource).toBe(40);
-    // drain life channel heals
-    const wolf = nearestMob(sim, 'forest_wolf');
-    teleport(sim, p.id, wolf.pos.x + 10, wolf.pos.z);
-    sim.targetEntity(wolf.id);
-    face(sim, p.id, wolf.id);
-    p.hp = 30;
-    p.resource = p.maxResource;
-    for (let i = 0; i < 35; i++) sim.tick();
-    face(sim, p.id, wolf.id);
-    sim.castAbility('drain_life');
-    for (let i = 0; i < 20 * 6 && p.castingAbility; i++) sim.tick();
     expect(p.hp).toBeGreaterThan(30);
   });
 
@@ -251,92 +191,6 @@ describe('nine classes', () => {
     }
     expect(killed).toBe(true);
     expect(autoShots).toBeGreaterThan(0); // ranged shots landed before melee
-  });
-
-  it('lightning shield zaps attackers (thorns)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
-    sim.setPlayerLevel(8);
-    const p = sim.player;
-    sim.castAbility('lightning_shield');
-    sim.tick();
-    const wolf = nearestMob(sim, 'forest_wolf');
-    // The level-based miss curve means a L1-2 wolf almost never lands a hit on an L8
-    // player, so match its level to the player to actually exercise the reflect.
-    wolf.level = p.level;
-    teleport(sim, p.id, wolf.pos.x + 2, wolf.pos.z);
-    const wolfHpBefore = wolf.hp;
-    let zapped = false;
-    for (let i = 0; i < 20 * 15 && !zapped; i++) {
-      sim.tick();
-      if (wolf.hp < wolfHpBefore) zapped = true;
-    }
-    expect(zapped).toBe(true);
-  });
-
-  it('lightning shield reflects at most 3 charges, gated by a 5s internal cooldown', () => {
-    const runReflects = () => {
-      const sim = new Sim({ seed: 7, playerClass: 'acolyte' });
-      sim.setPlayerLevel(12);
-      const p = sim.player;
-      sim.castAbility('lightning_shield');
-      sim.tick();
-      const aura = p.auras.find((a) => a.id === 'lightning_shield');
-      expect(aura?.charges).toBe(3);
-      const wolf = nearestMob(sim, 'forest_wolf');
-      // A fast, low-damage, beefy attacker: lands many swings without killing the
-      // acolyte or dying to the reflects, so we measure the cap, not the fight.
-      wolf.level = p.level;
-      wolf.weapon = { min: 1, max: 1, speed: 1 };
-      wolf.hp = wolf.maxHp = 100000;
-      p.hp = p.maxHp = 100000;
-      teleport(sim, p.id, wolf.pos.x + 2, wolf.pos.z);
-      let reflects = 0;
-      const reflectTicks: number[] = [];
-      for (let i = 0; i < 20 * 40; i++) {
-        const evs = sim.tick();
-        for (const e of evs) {
-          // The 3-charge cap and 5s internal cooldown are shield-wide, not per-attacker
-          // (a wandering low-level mob can also land a hit now that it connects >= 80%),
-          // so count every Thunder Ward reflect regardless of which attacker it hits.
-          if (e.type === 'damage' && e.ability === 'Thunder Ward') {
-            reflects++;
-            reflectTicks.push(i);
-          }
-        }
-      }
-      return {
-        reflects,
-        reflectTicks,
-        auraGone: !p.auras.some((a) => a.id === 'lightning_shield'),
-      };
-    };
-
-    const r = runReflects();
-    // exactly the 3 charges fire, then the aura is spent and removed
-    expect(r.reflects).toBe(3);
-    expect(r.auraGone).toBe(true);
-    // consecutive reflects are at least the 5s internal cooldown apart (>= 100 ticks)
-    for (let i = 1; i < r.reflectTicks.length; i++) {
-      expect(r.reflectTicks[i] - r.reflectTicks[i - 1]).toBeGreaterThanOrEqual(20 * 5);
-    }
-    // deterministic
-    expect(runReflects()).toEqual(r);
-  }, 15_000);
-
-  it('acolyte bear form toggles and raises armor', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'acolyte' });
-    sim.setPlayerLevel(10);
-    const p = sim.player;
-    const armorBefore = p.stats.armor;
-    sim.castAbility('bear_form');
-    sim.tick();
-    expect(p.auras.some((a) => a.kind === 'form_bear')).toBe(true);
-    expect(p.stats.armor).toBeGreaterThan(armorBefore * 1.4);
-    for (let i = 0; i < 35; i++) sim.tick();
-    sim.castAbility('bear_form');
-    sim.tick();
-    expect(p.auras.some((a) => a.kind === 'form_bear')).toBe(false);
-    expect(p.stats.armor).toBe(armorBefore);
   });
 });
 
