@@ -113,7 +113,19 @@ function parseNeighbourhoods(byName) {
   return maps;
 }
 
-const isReal = (r) => r.baseExp > 0 && r.hp > 30 && r.def < 90 && r.mdef < 90 && r.atk2 > 0;
+// A real, ordinary monster. Beyond the event and quest dummies, this rules out
+// the special high-health spawns the reference scatters through otherwise normal
+// regions: a level-5 Condor with eight thousand health and 200 to 400 attack is
+// a scripted encounter wearing an ordinary monster's name, and pairing one of
+// our starter mobs with it would be a disaster nobody would spot until they
+// played it.
+const isReal = (r) =>
+  r.baseExp > 0 &&
+  r.hp > 30 &&
+  r.def < 90 &&
+  r.mdef < 90 &&
+  r.atk2 > 0 &&
+  r.hp < 80 * (r.level + 4) ** 1.35;
 const mid = (m) => Math.round((m.minLevel + m.maxLevel) / 2);
 
 /** Our places: each zone's field, and each dungeon. */
@@ -140,7 +152,11 @@ function ourPlaces() {
   }
   const rest = Object.keys(MOBS).filter((id) => !claimed.has(id));
   if (rest.length) places.push({ name: 'unplaced', kind: 'field', ids: rest });
-  return places;
+  // Lowest band first, so the starter field gets first pick of the starter
+  // region. Processing dungeons first let a level-8 crypt take Prontera's
+  // fields and pushed the level-1 zone onto a region that starts at 14.
+  const band = (p) => Math.min(...p.ids.map((id) => mid(MOBS[id])));
+  return places.sort((a, b) => band(a) - band(b));
 }
 
 export function matchMonsters() {
@@ -170,15 +186,29 @@ export function matchMonsters() {
       // forty monsters against a region's twenty; repeating a resident is
       // already the cheap, intended outcome.
       if (pool.length < 3) continue;
-      const rl = pool.map((r) => r.level);
-      const rLo = Math.min(...rl);
-      const rHi = Math.max(...rl);
-      // Both the CENTRE and the SPREAD have to line up. Scoring on the centre
-      // alone picked maps that happen to average right while running from level
-      // 1 to level 25, which then handed our level-7 monster a level-25 wolf.
-      const centre = Math.abs((rLo + rHi) / 2 - (lo + hi) / 2);
-      const spread = Math.abs(rHi - rLo - (hi - lo));
-      let score = centre * 2 + spread + Math.abs(pool.length - normals.length) * 0.25;
+      // Score by FIT: for each of our monsters, how far is the nearest resident
+      // of this region? Summed, so a region is good when it actually has
+      // monsters at the levels ours are at.
+      //
+      // This replaced a centre-and-spread score measured over the region's
+      // minimum and maximum level, which a single outlier destroyed: Prontera's
+      // fields are the reference's true starter ladder (Poring 1, Fabre 2, Pupa
+      // 2, Picky 4, Condor 5, Hornet 8, Rocker 9) but carry one level-62 spawn,
+      // so their "spread" read 1 to 62 and lost to Payon, whose roster jumps
+      // straight from level 4 to level 14 with nothing in between.
+      const rl = pool.map((r) => r.level).sort((a, b) => a - b);
+      let fit = 0;
+      for (const level of levels) {
+        let nearest = Number.POSITIVE_INFINITY;
+        for (const r of rl) nearest = Math.min(nearest, Math.abs(r - level));
+        fit += nearest;
+      }
+      let score = fit / levels.length;
+      // A region with far fewer residents than we have monsters makes everyone
+      // share, so prefer one that can carry the roster, gently.
+      if (pool.length < normals.length) score += (normals.length - pool.length) * 0.1;
+      // One region per place: a world where three of our zones all borrow from
+      // Prontera field is not a world with three zones in it.
       if (usedMaps.has(name)) score += 25;
       if (score < bestScore) {
         bestScore = score;
