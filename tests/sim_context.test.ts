@@ -438,6 +438,7 @@ function makeFakeHost() {
     onBossDeath: vi.fn(),
     effectiveArmor: vi.fn(() => 0),
     applyDefence: vi.fn((damage: number) => damage),
+    applyMagicDefence: (d: number) => d,
     recalcPlayer: vi.fn(),
     // I2a delve run lifecycle stubs. grantXp/despawnPet/delveRunForMob/onDelveBossDefeated/
     // delveDetectMult stubbed above (C1/M2/C3) - deduped here.

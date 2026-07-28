@@ -27,16 +27,14 @@
 // the four non-Swordman jobs it is the FASTEST option they have. A level-1
 // character with no weapon is not helpless in Ragnarok, they are just weak.
 
-import type { WeaponType } from './types';
+import type { PlayerClass, WeaponType } from './types';
 
-/** The five startable jobs, as their own union rather than an import.
- *
- *  `PlayerClass` is still the inherited nine while the collapse onto the first
- *  jobs is in flight, and `content/jobs.ts` still lists all eighteen including
- *  the Novice and Merchant branches that were cut by decision. Neither is a
- *  stable key today. When `PlayerClass` becomes these five, this should become an
- *  alias of it and a test should pin the two as identical. */
-export type AspdJob = 'swordman' | 'mage' | 'archer' | 'acolyte' | 'thief';
+/** The five startable jobs. An ALIAS of `PlayerClass` now that the class
+ *  collapse has landed: this was briefly its own union because `PlayerClass` was
+ *  still the inherited nine when the table was written, and a duplicate that can
+ *  drift is worse than a dependency. `tests/job_aspd.test.ts` pins the two as
+ *  identical, so a sixth job cannot be added to one without the other. */
+export type AspdJob = PlayerClass;
 
 export const ASPD_JOBS: readonly AspdJob[] = ['swordman', 'mage', 'archer', 'acolyte', 'thief'];
 

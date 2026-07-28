@@ -623,6 +623,12 @@ export interface SimContextCallbacks {
   // rather than multiplying by an armour fraction itself, which is what keeps the
   // flat Vitality layer from being silently skipped somewhere.
   applyDefence(damage: number, target: Entity, ignore?: boolean): number;
+  // The magic mirror of the above, and the shape is the same two layers: a capped
+  // percentage from equipment, then a flat subtraction, floored at 1. The one real
+  // difference is that it DRAWS NO RNG: pre-renewal soft MDEF is a plain
+  // `INT + VIT/2` with no random term (see combat/magic_defence.ts), where soft DEF
+  // rolls. That is why adding this to the magic damage sites changed no draw order.
+  applyMagicDefence(damage: number, target: Entity): number;
   // I2a delve run lifecycle (delves/runs.ts). The reach-in callbacks delveRunForMob/
   // onDelveBossDefeated/delveDetectMult are declared above (C1/M2 stubs; I2a flips
   // points-at to delves/runs via the Sim delegate); startDelveRaiseDeadChannel is the
@@ -1209,6 +1215,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     effectiveArmor: host.effectiveArmor,
     recalcPlayer: host.recalcPlayer,
     applyDefence: host.applyDefence,
+    applyMagicDefence: host.applyMagicDefence,
     // I2a delve run lifecycle bindings. grantXp/despawnPet/delveRunForMob/
     // onDelveBossDefeated/delveDetectMult are bound above (C1/M2/C3); deduped here.
     partyMembersForKey: host.partyMembersForKey,

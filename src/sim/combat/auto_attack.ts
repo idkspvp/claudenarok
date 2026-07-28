@@ -433,7 +433,8 @@ export function rangedSwing(
     // Wand bolts are magic, so defence does not apply; a physical auto shot is
     // mitigated unless it CRIT, since a pre-renewal critical ignores defence
     // outright (see the melee path).
-    if (!ranged.wand) dmg = ctx.applyDefence(dmg, tgt, crit);
+    if (ranged.wand) dmg = ctx.applyMagicDefence(dmg, tgt);
+    else dmg = ctx.applyDefence(dmg, tgt, crit);
     ctx.dealDamage(
       atk,
       tgt,

@@ -16,7 +16,7 @@ import {
   JOB_BASE_AMOTION,
   UNARMED_BASE_AMOTION,
 } from '../src/sim/job_aspd';
-import type { WeaponType } from '../src/sim/types';
+import type { PlayerClass, WeaponType } from '../src/sim/types';
 
 describe('the shape of the table', () => {
   it('covers all five startable jobs, unarmed and armed', () => {
@@ -135,5 +135,24 @@ describe('the cadences this produces', () => {
     expect(interval('mage', 'twohand_axe', 0, 0)).toBeCloseTo(4, 5);
     expect(interval('mage', 'rod', 0, 0)).toBeCloseTo(1.4, 5);
     expect(interval('mage', 'twohand_axe', 99, 99)).toBeGreaterThan(interval('mage', 'rod', 0, 0));
+  });
+});
+
+describe('the job key', () => {
+  it('IS PlayerClass, so a new job cannot reach one table and miss the other', () => {
+    // AspdJob was briefly its own union, written while PlayerClass was still the
+    // inherited nine. It is an alias now, and this pins the pair: adding a sixth
+    // job to PlayerClass without an ASPD row is a compile error rather than a
+    // monster-slow character nobody notices until they play it.
+    const fromUnion: Record<AspdJob, true> = {
+      swordman: true,
+      mage: true,
+      archer: true,
+      acolyte: true,
+      thief: true,
+    };
+    const fromClasses: Record<PlayerClass, true> = fromUnion;
+    expect(Object.keys(fromClasses).sort()).toEqual([...ASPD_JOBS].sort());
+    for (const job of ASPD_JOBS) expect(JOB_BASE_AMOTION[job]).toBeDefined();
   });
 });

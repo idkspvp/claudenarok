@@ -65,6 +65,7 @@ import {
 } from './combat/damage';
 import { damageTakenWithin } from './combat/damage_history';
 import { applyDefence } from './combat/defence';
+import { applyMagicDefence } from './combat/magic_defence';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
 import { applyIgnite } from './combat/fire_mage';
 import { frostMageChannelPulse } from './combat/frost_mage';
@@ -3965,6 +3966,7 @@ export class Sim {
       recalcPlayer: sim.recalcPlayer.bind(sim),
       // C3: the shared two-layer defence entry point (see the SimContext decl).
       applyDefence: sim.applyDefence.bind(sim),
+      applyMagicDefence: sim.applyMagicDefence.bind(sim),
       // I2a delve run lifecycle now lives in src/sim/delves/runs.ts; the moved module
       // reaches the still-on-Sim helpers / gate predicates / pet seam / I2b lockpick /
       // I2c companion through these delegates. The five reach-in callbacks resolve back
@@ -4647,6 +4649,20 @@ export class Sim {
       vit: target.stats.vit,
       isMonster: target.kind !== 'player',
       roll,
+    });
+  }
+
+  // Ragnarok's magic reduction, the mirror of applyDefence above. Hard MDEF is
+  // passed as 0 because this game has no magic-armour field to derive it from:
+  // `Entity.armor` is a single physical value and no ItemDef carries a magic
+  // counterpart, so only the flat Intelligence layer bites until the gear records
+  // carry one (roadmap B3). Draws NO rng, which is what let this land without
+  // shifting the global draw order on any cast.
+  private applyMagicDefence(damage: number, target: Entity): number {
+    return applyMagicDefence(damage, {
+      mdef: 0,
+      int: target.stats.int,
+      vit: target.stats.vit,
     });
   }
 
