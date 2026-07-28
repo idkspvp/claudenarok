@@ -29,7 +29,27 @@ Written by the run as it goes. Anything the plan did not anticipate goes here,
 not in the commit message alone, so the next phase inherits it.
 
 ### Phase 0
-(nothing yet)
+Job 1 of 3 landed: the card duel is gone (cc3fd43, goldens 393cbf3).
+
+Two findings the plan did not anticipate, both corrected in the plan itself:
+
+- The plan claimed twenty dead modules in src/sim/combat/. There are NONE. The
+  original scan matched the `.../combat/<name>` import form and missed
+  same-directory relative imports. A real import-graph walk from all 125 entry
+  points finds one unreachable module, weapon_class_atk, and that one is a live
+  content guard for three item-balance tests. It moves to phase 6, where the
+  item model changes and it genuinely becomes wrong.
+- The card-duel removal shifts the world-init entity sequence by one (the Card
+  Master NPC), so all 50 parity goldens moved. The diff is 4,415 lines in and
+  4,415 out, a pure one-for-one rewrite: an id shift, not a behavior change.
+
+Jobs 2 (finish the talent removal: D0-2, D0-4 through D0-7) and 3 (M1c simple
+aggro) are NOT started.
+
+Baseline note for whoever picks this up: the suite carries 38 to 39 pre-existing
+failing files unrelated to any of this, several flaky under parallel load and
+one (server/static_sfx_serving) an EPERM on Windows. Always diff the failing SET
+against a baseline worktree rather than reading the count.
 
 ### Phase 1
 (nothing yet)
