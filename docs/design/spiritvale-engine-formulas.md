@@ -435,16 +435,67 @@ Deliberately NOT recommended:
 - **Base level 150.** Would require rebuilding the experience curve and moving
   every content level gate.
 
+## The job experience table: unpublished, but the shape is constrained
+
+No job curve appears in any of the site's 28 data files, its page source, its
+changelog, or the two other community wikis. What follows is a working
+hypothesis with its evidence and its remaining gap stated, NOT a transcription.
+Do not implement it as if it were read from the binary.
+
+**Hypothesis: job level reuses the base curve, and one kill feeds both pools.**
+
+Four independent things point that way:
+
+1. **A monster publishes exactly one `exp` field.** Ragnarok publishes two
+   (`BaseExp` and `JobExp`, separately tuned per mob). Whatever job experience
+   is in SpiritVale, it is derived from that single number rather than authored
+   alongside it.
+2. **The published curve is one table, not two concatenated.** All 161 entries
+   are strictly increasing with no discontinuity anywhere, so there is no second
+   curve hiding in its tail. The 11 entries past the level-150 cap are padding.
+3. **The array is named `ExpRequirement`, singular,** and the extraction that
+   pulled it out of `GameServerConfig.asset` found no sibling.
+4. **The resulting shape is coherent.** Under the hypothesis job 50 lands at
+   exactly base 50, the advanced track restarts at job 1 and reaches job 70 at
+   base 73, and base level then runs another 77 levels with no further skill
+   points. Job capping early while base keeps going is an ordinary design, and
+   the numbers land in a sensible place rather than an absurd one.
+
+**The gap.** "Same curve" and "job exp equals base exp per kill" are two claims,
+and only the first is supported. If job experience were a fraction `f` of the
+same number on the same curve, job 50 would land at a different base level:
+
+| Job 50 lands at base | implies `f` |
+|---|---|
+| 40 | 2.63x |
+| 45 | 1.59x |
+| 48 | 1.20x |
+| **50** | **1.00x** |
+| 55 | 0.66x |
+| 60 | 0.44x |
+
+Community guides report hitting job 50 "around base level 45 to 50", which puts
+`f` between roughly 1.0 and 1.6 and makes `f = 1.0` the low edge of the reported
+window. Those guides read as machine-generated SEO pages, so weight that as a
+hint, not a measurement. One player's screenshot of a job-50 character's base
+level would settle it.
+
+For contrast, the reference goes the other way. Reading
+`db/pre-re/mob_db.yml` directly, across the 595 mobs carrying both fields the
+`JobExp / BaseExp` ratio has a **median of 0.62** (p10 0.36, p90 1.00), so job
+level LAGS base level in Ragnarok by design. If SpiritVale really runs `f = 1.0`
+the two levels move in lockstep, which is a different feel and matches the rest
+of its "fewer things to fall behind on" design.
+
+**If we adopt it:** implement job experience as its own curve constant seeded
+from the base curve, not as a call into the base curve. They are the same
+numbers today by hypothesis, not by definition, and a shared reference would
+make a future correction touch both.
+
 ## What is still missing
 
-One thing, and it looks genuinely unpublished:
-
-- **The job experience table.** Base level's curve is published (161 entries,
-  read from `GameServerConfig.asset::ExpRequirement`); no job curve appears in
-  any of the site's 28 data files, in its page source, in its changelog, or on
-  the two other community wikis. The extraction that found the base array found
-  no second one. That is suggestive, not conclusive, and it is not enough to
-  claim job level reuses the base curve. Leave it open.
+Only the item above. Everything else the database raised has been resolved and
+recorded, in this file or in `spiritvale-data-schema.md`.
 
 Resolved since the first pass, and recorded where they belong:
 
