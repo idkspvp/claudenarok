@@ -37,7 +37,6 @@ export const CHROME_ART_IDS: ReadonlySet<UiIconName> = new Set<UiIconName>([
   'bags',
   'ball',
   'book',
-  'cards',
   'character',
   'chest',
   'crafting',

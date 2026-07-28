@@ -1172,7 +1172,6 @@ export const en_XA: EnTranslations = {
       "market": "[Óþéñ ţĥé ɱáŕķéţ]",
       "bank": "[Óþéñ ýóúŕ šţŕóñĝƀóẋ]",
       "heroicVendor": "[Šþéñð ĥéŕóíç ɱáŕķš]",
-      "cardDuel": "[Þļáý á çáŕð ðúéļ]",
       "train": "[Ļéáŕñ á ŕéçíþé]",
       "unbind": "[Úñƀíñð á ɱáķéŕ'š ɱáŕķ]"
     },
@@ -4947,24 +4946,6 @@ export const en_XA: EnTranslations = {
     "buyConfirmBody": "[Ɓúý {item} ƒóŕ {marks} Ĥéŕóíç Ɱáŕķš? Ɱáŕķš þúŕçĥášéš çáññóţ ƀé ŕéƒúñðéð.]",
     "buyConfirmAccept": "[Ɓúý]",
     "buyConfirmCancel": "[Çáñçéļ]"
-  },
-  "cardDuel": {
-    "title": "[Çáŕð Ðúéļ]",
-    "close": "[Çļóšé]",
-    "join": "[Ĵóíñ Ɋúéúé]",
-    "joinAria": "[Ĵóíñ ţĥé Çáŕð Ðúéļ ɋúéúé]",
-    "leave": "[Ļéáʋé Ɋúéúé]",
-    "leaveAria": "[Ļéáʋé ţĥé Çáŕð Ðúéļ ɋúéúé]",
-    "forfeit": "[Ƒóŕƒéíţ]",
-    "forfeitAria": "[Ƒóŕƒéíţ ţĥé Çáŕð Ðúéļ]",
-    "queued": "[Ŵáíţíñĝ ƒóŕ áñ óþþóñéñţ...]",
-    "unavailable": "[Çáŕð Ðúéļ ŕéɋúíŕéš áñóţĥéŕ þļáýéŕ óñļíñé.]",
-    "vsOpponent": "[ʋš {name}]",
-    "round": "[Ŕóúñð šçóŕé: {mine} - {theirs}]",
-    "counts": "[Ðéçķ: {deck} · Ðíšçáŕð: {discard}]",
-    "playCardAria": "[Þļáý ţĥé {value} çáŕð]",
-    "waitingOnOpponent": "[Ŵáíţíñĝ óñ ýóúŕ óþþóñéñţ'š çáŕð...]",
-    "yourTurn": "[Þļáý á çáŕð]"
   },
   "delveUi": {
     "board": {
@@ -10254,11 +10235,6 @@ export const en_XA: EnTranslations = {
         "name": "[Ɓúŕšáŕ Ƒéŕñáñðó]",
         "title": "[Ţĥé Ĝíļðéð Šţŕóñĝƀóẋ]",
         "greeting": "[Ŵéļçóɱé ţó ţĥé Ĝíļðéð Šţŕóñĝƀóẋ. Ýóúŕ ĝóóðš ŕéšţ šáƒé ƀéĥíñð óúŕ ļóçķš.]"
-      },
-      "card_master": {
-        "name": "[Çáŕð Ɱášţéŕ]",
-        "title": "[Ðéáļéŕ óƒ Çĥáñçé]",
-        "greeting": "[Çáŕé ƒóŕ á Çáŕð Ðúéļ? Ɓéšţ óƒ ţĥŕéé, ŵíññéŕ ţáķéš ţĥé ƀŕáĝĝíñĝ ŕíĝĥţš.]"
       },
       "bursar_petra_vell": {
         "name": "[Ɓúŕšáŕ Þéţŕá Ʋéļļ]",

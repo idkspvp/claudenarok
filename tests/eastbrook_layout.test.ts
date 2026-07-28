@@ -286,12 +286,6 @@ describe('removed Eastbrook placement inventory', () => {
         position: { x: 13, z: 8 },
         facing: -Math.PI / 2,
       },
-      {
-        id: 'card_master',
-        disposition: 'relocated',
-        position: { x: 13, z: 2 },
-        facing: -Math.PI / 2,
-      },
       { id: 'chronicler_saul', disposition: 'relocated', position: { x: 15, z: -16 }, facing: 2.4 },
       {
         id: 'fury',
@@ -1062,7 +1056,6 @@ describe('layout clearance and service anchors', () => {
         -2.0119758072098772,
         'eastbrook_bank',
       ],
-      ['card_master', 10.5, 1, -1.4758446204521403, 'eastbrook_grand_armoury'],
       ['chronicler_saul', 0, -14.5, -0.3006056700423954, 'mailbox_eastbrook'],
       [
         'forgemistress_darva',

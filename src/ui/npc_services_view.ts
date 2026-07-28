@@ -24,7 +24,6 @@ export type NpcServiceId =
   | 'market'
   | 'bank'
   | 'heroicVendor'
-  | 'cardDuel'
   | 'train'
   | 'unbind';
 
@@ -50,7 +49,6 @@ export function npcServicesFor(
   else if (npc.heroicVendor) out.push('heroicVendor');
   else if (npc.devVendor || (npc.vendorItems?.length ?? 0) > 0) out.push('vendor');
   if (npc.banker) out.push('bank');
-  if (npc.cardMaster) out.push('cardDuel');
   if (deps.stationMasterIds.has(npc.id)) {
     out.push('train');
     if (deps.hasBoundItems) out.push('unbind');

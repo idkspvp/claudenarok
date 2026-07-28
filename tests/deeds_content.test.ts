@@ -45,12 +45,12 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 214 deeds worth 2635 total Renown', () => {
+  it('ships exactly 213 deeds worth 2630 total Renown', () => {
     // Down from 219 / 2,710: five quest-triggered deeds went with the quest system
     // (dgn_nythraxis_crypt, prog_callused_hands, prog_mere_at_rest, prog_crown_below,
     // hid_codfather).
-    expect(DEED_ORDER.length).toBe(214);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2635);
+    expect(DEED_ORDER.length).toBe(213);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2630);
   });
 
   it('ships the audited per-category counts', () => {
@@ -63,7 +63,7 @@ describe('audited launch totals (literals: update deliberately with the catalog)
       delve: 13,
       chronicle: 24,
       collection: 28,
-      pvp: 28,
+      pvp: 27,
       social: 18,
       exploration: 9,
       feat: 3,
@@ -81,7 +81,6 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     expect(DEED_ORDER.slice(185)).toEqual([
       'prog_tools_of_the_trade',
       'chr_marsh_first_cast',
-      'pvp_card_duel_first_win',
       // Professions 2.0 tail (order-pinned like the block above).
       'prog_guildsworn',
       'prog_masterwright',
@@ -112,12 +111,6 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     ]);
     expect(DEEDS.prog_tools_of_the_trade.renown).toBe(10);
     expect(DEEDS.chr_marsh_first_cast.renown).toBe(5);
-    expect(DEEDS.pvp_card_duel_first_win.renown).toBe(5);
-    expect(DEEDS.pvp_card_duel_first_win.trigger).toEqual({
-      kind: 'stat',
-      stat: 'cardDuelsWon',
-      count: 1,
-    });
     // Full trigger literals: the evaluator's .every() is proven elsewhere, but
     // only a literal pin catches a quest id quietly dropped from a chain list.
     expect(DEEDS.prog_tools_of_the_trade.trigger).toEqual({
@@ -273,8 +266,6 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // v0.26 replaces the point tree before release, so prog_full_build's unreachable
   // eleven-point threshold is deliberately migrated once to the canonical six rows.
   // This new digest freezes that release contract; it is not permission for later edits.
-  // Re-baselined once more at the release/v0.27.0 base merge: the catalog now also
-  // carries the appended pvp_card_duel_first_win deed (Card Duel).
   // Re-baselined for Professions 2.0: 26 appended professions deeds
   // (Craftsworn, Masterwright, the fishing pair, the per-craft 50/125
   // milestones, the rare-find quartet, and the salvage pair). No shipped
@@ -283,7 +274,10 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // Re-baselined for the quest removal: five quest-triggered deeds were deleted
   // (the `quest`/`quests` trigger kinds no longer exist) and eleven meta deeds
   // dropped their optional questIds arm. No surviving trigger was retro-edited.
-  const FROZEN_CATALOG_SHA256 = 'cc3914d64a8779d768d0449988a5aafcb4aa750a8f8de125f8771a01b2c5f148';
+  // Re-baselined for the card-duel removal: pvp_card_duel_first_win went with
+  // the minigame it triggered on, and its cardDuelsWon stat key with it. No
+  // surviving deed changed.
+  const FROZEN_CATALOG_SHA256 = '7d030a02065d786f19f1c9eba91f9f01d97fb3916555bc4de0bb5b74ade2041e';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(

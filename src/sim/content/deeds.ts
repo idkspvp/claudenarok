@@ -1848,14 +1848,6 @@ export const DEEDS: Record<string, DeedDef> = {
     renown: 5,
     trigger: { kind: 'visit', markId: 'fish:mirefen_marsh' },
   },
-  pvp_card_duel_first_win: {
-    id: 'pvp_card_duel_first_win',
-    name: 'House Rules',
-    desc: 'Win a Card Duel at the Card Master.',
-    category: 'pvp',
-    renown: 5,
-    trigger: { kind: 'stat', stat: 'cardDuelsWon', count: 1 },
-  },
 
   // Professions 2.0 additions (append-only tail, grouped by category
   // within this block only). Craft-skill thresholds reference ONLY resolved

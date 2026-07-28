@@ -22,7 +22,6 @@ describe('the services an NPC fronts', () => {
     expect(npcServicesFor(npc({ market: true }), deps())).toEqual(['market']);
     expect(npcServicesFor(npc({ banker: true }), deps())).toEqual(['bank']);
     expect(npcServicesFor(npc({ heroicVendor: true }), deps())).toEqual(['heroicVendor']);
-    expect(npcServicesFor(npc({ cardMaster: true }), deps())).toEqual(['cardDuel']);
     expect(npcServicesFor(npc({ devVendor: true }), deps())).toEqual(['vendor']);
   });
 
@@ -54,7 +53,7 @@ describe('the services an NPC fronts', () => {
     const withService = Object.values(NPCS).filter(
       (def) => npcServicesFor(def, deps(true)).length > 0,
     );
-    expect(withService.length).toBeGreaterThanOrEqual(20);
+    expect(withService.length).toBeGreaterThanOrEqual(19);
     const kinds = new Set(withService.flatMap((def) => npcServicesFor(def, deps(true))));
     for (const kind of ['vendor', 'market', 'bank', 'train', 'unbind'])
       expect(kinds, `no NPC in the world offers ${kind}`).toContain(kind);

@@ -40,6 +40,12 @@ import { isResting } from '../src/sim/progression/xp';
 import type { BuildingDef, Entity } from '../src/sim/types';
 import { groundHeight, terrainHeight, waterLevelAt } from '../src/sim/world';
 
+// The old Card Master stood at (10.5, 1), on the walking route between the Grand
+// Armoury approach and the town square. The NPC went with the card-duel removal;
+// the POINT is still the thing these tests care about, so it stays as a literal
+// route anchor rather than being dropped along with the NPC that used to mark it.
+const ARMOURY_ROUTE_ANCHOR = { x: 10.5, z: 1 };
+
 const SEED = 20061;
 const ALTERNATE_SEED = 4717;
 
@@ -301,8 +307,8 @@ describe('Eastbrook Grand Armoury gameplay preservation', () => {
     expect(isResting(player)).toBe(false);
 
     player.inCombat = false;
-    player.pos.x = NPCS.card_master.pos.x;
-    player.pos.z = NPCS.card_master.pos.z;
+    player.pos.x = ARMOURY_ROUTE_ANCHOR.x;
+    player.pos.z = ARMOURY_ROUTE_ANCHOR.z;
     expect(buildingRestPadding(building)).toBe(0.9);
     expect(isResting(player)).toBe(false);
   });
@@ -356,7 +362,6 @@ describe('Eastbrook Grand Armoury gameplay preservation', () => {
 
   it('keeps nearby NPC bodies, the banker, and the banker chest approach outside collision', () => {
     const ids = [
-      'card_master',
       'tinker_gizzel',
       'chronicler_saul',
       'apothecary_lin',
@@ -374,7 +379,7 @@ describe('Eastbrook Grand Armoury gameplay preservation', () => {
     );
   });
 
-  it('keeps the square, card table, toolworks, and armoury approach mutually reachable', () => {
+  it('keeps the square, route anchor, toolworks, and armoury approach mutually reachable', () => {
     const approach = EASTBROOK_GRAND_ARMOURY.frontApproachWorld;
     const square = { x: 4, z: -2 };
     const toolworksStation = STATIONS.find(
@@ -382,7 +387,7 @@ describe('Eastbrook Grand Armoury gameplay preservation', () => {
     );
     if (!toolworksStation) throw new Error('Eastbrook toolworks station is missing');
     const toolworks = toolworksStation.pos;
-    for (const destination of [square, NPCS.card_master.pos, toolworks]) {
+    for (const destination of [square, ARMOURY_ROUTE_ANCHOR, toolworks]) {
       expectWalkableRoute(approach, destination);
       expectWalkableRoute(destination, approach);
     }
@@ -422,8 +427,8 @@ describe('Eastbrook Grand Armoury gameplay preservation', () => {
     }
   });
 
-  it('keeps the approach and Card Master route anchors on dry, walkable terrain', () => {
-    const points = [EASTBROOK_GRAND_ARMOURY.frontApproachWorld, NPCS.card_master.pos];
+  it('keeps the approach and route anchors on dry, walkable terrain', () => {
+    const points = [EASTBROOK_GRAND_ARMOURY.frontApproachWorld, ARMOURY_ROUTE_ANCHOR];
     for (const point of points) {
       expect(terrainHeight(point.x, point.z, SEED)).toBeGreaterThan(
         waterLevelAt(point.x, point.z) - 0.8,

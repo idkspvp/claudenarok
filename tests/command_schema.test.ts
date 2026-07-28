@@ -34,8 +34,8 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // Plus the two status-point commands the Ragnarok conversion added, raise_stat
 // and reset_stats: a character's attributes are the player's to spend now, so
 // both spend verbs cross the wire and the server owns the budget check.
-const EXPECTED_SEND_COUNT = 155;
-const EXPECTED_DISPATCH_COUNT = 162;
+const EXPECTED_SEND_COUNT = 151;
+const EXPECTED_DISPATCH_COUNT = 158;
 const EXPECTED_DISPATCH_ONLY_COUNT = 7;
 
 // The chat sub-channel routing switch (server/game.ts `switch

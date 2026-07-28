@@ -69,7 +69,6 @@ export type UiIconName =
   | 'mail'
   | 'ball'
   | 'book'
-  | 'cards'
   | 'trash'
   | 'crafting'
   | 'professions'
@@ -185,7 +184,6 @@ const ICONS: Record<UiIconName, string> = {
   // hand-authored playing card (the Card Duel minigame): a solid card body
   // with a hollowed diamond pip so the glyph reads as "a card" at
   // micro-button size (evenodd punches the pip through the body)
-  cards: '<path fill-rule="evenodd" d="M176 72h160v336H176zM256 110l40 40-40 40-40-40z"/>',
   // hand-authored anvil (the Crafting window): a horned top slab over a waisted
   // body and flared base, one solid silhouette so it reads at micro-button size
   crafting: '<path d="M60 102l90-11h300v85h-100l-30 92v97h68v54H124v-54h68v-97l-30-92h-12z"/>',

@@ -468,12 +468,6 @@ export const REMOVED_EASTBROOK_PLACEMENTS = deepFreeze({
       position: { x: 13, z: 8 },
       facing: -Math.PI / 2,
     },
-    {
-      id: 'card_master',
-      disposition: 'relocated',
-      position: { x: 13, z: 2 },
-      facing: -Math.PI / 2,
-    },
     { id: 'chronicler_saul', disposition: 'relocated', position: { x: 15, z: -16 }, facing: 2.4 },
     {
       id: 'fury',
@@ -1012,12 +1006,6 @@ const NPCS = [
   ),
   makeNpc('foreman_odell', { x: -8, z: -9.5 }, 0.607802, 'eastbrook_gate_southwest'),
   makeNpc('bursar_fernando', BANK.frontStandingPoint, BANK.rotation, BANK.id),
-  makeNpc(
-    'card_master',
-    { x: 10.5, z: 1 },
-    facingToward({ x: 10.5, z: 1 }, CIVIC_CENTER),
-    PRESERVED_ARMOURY.id,
-  ),
   makeNpc('chronicler_saul', SAUL_POSITION, TOOLWORKS.rotation, 'mailbox_eastbrook'),
   makeNpc('forgemistress_darva', DARVA_POSITION, SMITHY.rotation, FORGE_STATION.id),
   makeNpc('cook_marlow', COOK_POSITION, INN.rotation, KITCHENS_STATION.id),

@@ -154,17 +154,6 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     banker: true,
     greeting: 'Welcome to the Gilded Strongbox. Your goods rest safe behind our locks.',
   },
-  card_master: {
-    id: 'card_master',
-    name: 'Card Master',
-    title: 'Dealer of Chance',
-    pos: { ...EASTBROOK_NPC_PLACEMENTS_BY_ID.card_master.position },
-    facing: EASTBROOK_NPC_PLACEMENTS_BY_ID.card_master.facing,
-    color: 0x7a2f8f,
-    questIds: [],
-    cardMaster: true,
-    greeting: 'Care for a Card Duel? Best of three, winner takes the bragging rights.',
-  },
   groundskeeper_bram: {
     id: 'groundskeeper_bram',
     name: 'Groundskeeper Bram',

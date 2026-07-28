@@ -2530,9 +2530,6 @@ export interface NpcDef {
   // The Heroic Quartermaster: talking to this NPC opens the Heroic Marks
   // shop (src/sim/content/heroic_vendor.ts) instead of a copper vendor stock.
   heroicVendor?: boolean;
-  // The Card Master: talking to this NPC joins/leaves the Card Duel minigame
-  // queue (src/sim/social/card_duel.ts) instead of any vendor/bank flow.
-  cardMaster?: boolean;
   greeting: string;
   // Registered but not surface-placed at world init. The owning system spawns
   // the entity on demand (e.g. the Nythraxis encounter walks Brother Aldric in
@@ -3780,22 +3777,6 @@ export type SimEvent = { pid?: number } & (
     }
   // personal outcome line for each fighter (rides beside the anchored vcupEnd)
   | { type: 'vcupResult'; won: boolean; draw: boolean }
-  // Card Duel minigame (src/sim/social/card_duel.ts). Personal (pid), text-free
-  // on purpose (the client picks its own audio/copy off the structured
-  // fields, same as gatherResult/craftResult above).
-  | { type: 'cardDuelMatchStart'; pid?: number }
-  | { type: 'cardPlayed'; pid?: number }
-  | {
-      type: 'cardRoundResolved';
-      mine: number;
-      theirs: number;
-      outcome: 'win' | 'lose' | 'push';
-      // True when this side's post-round draw emptied the deck and had to
-      // reshuffle the discard pile back in (see card_hand.ts drawOne).
-      reshuffled: boolean;
-      pid?: number;
-    }
-  | { type: 'cardDuelMatchEnd'; won: boolean; pid?: number }
   | {
       type: 'heal2';
       sourceId: number;
@@ -4805,7 +4786,6 @@ export type DeedStatKey =
   | 'lootCopper'
   | 'duelsWon'
   | 'duelsLost'
-  | 'cardDuelsWon'
   | 'tradesCompleted'
   | 'mailAttachmentsSent'
   | 'craftsPerformed'
@@ -4833,7 +4813,6 @@ export const DEED_STAT_KEYS: readonly DeedStatKey[] = [
   'lootCopper',
   'duelsWon',
   'duelsLost',
-  'cardDuelsWon',
   'tradesCompleted',
   'mailAttachmentsSent',
   'craftsPerformed',

@@ -1033,7 +1033,6 @@ export const hudChromeStrings = {
     market: 'Open the market',
     bank: 'Open your strongbox',
     heroicVendor: 'Spend heroic marks',
-    cardDuel: 'Play a card duel',
     train: 'Learn a recipe',
     unbind: "Unbind a maker's mark",
   },

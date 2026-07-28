@@ -311,7 +311,7 @@ describe('Eastbrook authored gameplay data integration', () => {
     ]);
   });
 
-  it('moves only the 15 town NPC placement fields and preserves key order and all other payload', () => {
+  it('moves only the 14 town NPC placement fields and preserves key order and all other payload', () => {
     expect(Object.keys(ZONE1_NPCS)).toEqual([
       'the_merchant',
       'marshal_redbrook',
@@ -322,7 +322,6 @@ describe('Eastbrook authored gameplay data integration', () => {
       'fisherman_brandt',
       'foreman_odell',
       'bursar_fernando',
-      'card_master',
       'groundskeeper_bram',
       'chronicler_saul',
       'forgemistress_darva',
@@ -331,9 +330,9 @@ describe('Eastbrook authored gameplay data integration', () => {
       'tinker_gizzel',
     ]);
     expect(createHash('sha256').update(JSON.stringify(stableTownNpcPayload())).digest('hex')).toBe(
-      '92c37779f6a29982ec3541169d995fc4365c9696a9b7a0e2fd32713094073db1',
+      '613b7217a8e3f165ce0712f15467def1093af7c88cb22e23f8315b58290a7412',
     );
-    expect(ZONE1_TOWN_NPC_IDS).toHaveLength(15);
+    expect(ZONE1_TOWN_NPC_IDS).toHaveLength(14);
     for (const id of ZONE1_TOWN_NPC_IDS) {
       const placement = EASTBROOK_NPC_PLACEMENTS_BY_ID[id];
       expect(ZONE1_NPCS[id].pos).toEqual(placement.position);
@@ -617,7 +616,7 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
         (building) => ({ id: `${building.id}:entrance`, point: building.frontStandingPoint }),
       ),
     ];
-    expect(destinations).toHaveLength(36);
+    expect(destinations).toHaveLength(35);
     const moverProfiles = [
       { id: 'player', bodyRadius: PLAYER_BODY_RADIUS },
       // Pet locomotion deliberately shares PLAYER_BODY_RADIUS; keep this

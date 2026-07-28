@@ -40,7 +40,6 @@ import { OVERHEAD_EMOTE_IDS, type PlayerClass } from '../src/sim/types';
 // type-only to pin each facet's runtime member array to its interface key-set below.
 import type { IWorldActionBar } from '../src/world_api/action_bar';
 import type { IWorldBank } from '../src/world_api/bank';
-import type { IWorldCardMinigame } from '../src/world_api/card_minigame';
 import type { IWorldChat } from '../src/world_api/chat';
 // The overhead-emote runtime surface the chat facet derives locally (see the
 // exhaustiveness guard at the bottom of this file): the seam imports sim/ for TYPES
@@ -172,11 +171,6 @@ export const IWORLD_MEMBERS = [
   { name: 'arenaInfo', kind: 'data' },
   { name: 'honor', kind: 'data' },
   { name: 'lifetimeHonor', kind: 'data' },
-  { name: 'cardMinigameInfo', kind: 'data' },
-  { name: 'joinCardDuelQueue', kind: 'method' },
-  { name: 'leaveCardDuelQueue', kind: 'method' },
-  { name: 'playCardInDuel', kind: 'method' },
-  { name: 'forfeitCardDuel', kind: 'method' },
   { name: 'cupInfo', kind: 'data' },
   { name: 'marketInfo', kind: 'data' },
   { name: 'marketCollectPending', kind: 'data' },
@@ -445,9 +439,11 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // members and eight methods) went with the talent system (Phase D0). Then up
     // two for IWorldJobLevel (jobProgress + jobXpToNext), the read side of the
     // second progression track.
-    expect(IWORLD_MEMBERS.length).toBe(234);
-    expect(DATA_MEMBERS.length).toBe(62);
-    expect(METHOD_MEMBERS.length).toBe(172);
+    // Down five more (one data + four methods) with the card-duel removal:
+    // the whole IWorldCardMinigame facet went with the minigame.
+    expect(IWORLD_MEMBERS.length).toBe(229);
+    expect(DATA_MEMBERS.length).toBe(61);
+    expect(METHOD_MEMBERS.length).toBe(168);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -486,7 +482,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'buyHeroicVendorItem',
       'buyItem',
       'cancelAura',
-      'cardMinigameInfo',
       'castAbility',
       'castAbilityAt',
       'castAbilityBySlot',
@@ -547,7 +542,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'equipItemToSlot',
       'equipment',
       'feedPet',
-      'forfeitCardDuel',
       'friendAdd',
       'friendRemove',
       'friendlyTabTarget',
@@ -577,7 +571,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'inventory',
       'jobProgress',
       'jobXpToNext',
-      'joinCardDuelQueue',
       'known',
       'lastCraftResult',
       'lastDisenchantResult',
@@ -585,7 +578,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'lastMasterwork',
       'lastSalvageResult',
       'leaderboard',
-      'leaveCardDuelQueue',
       'leaveDelve',
       'leaveDungeon',
       'lifetimeHonor',
@@ -626,7 +618,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'petWaterJet',
       'pickUpObject',
       'placeMobileStation',
-      'playCardInDuel',
       'playEmote',
       'player',
       'playerId',
@@ -707,7 +698,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'bagCapacity',
       'bags',
       'bankInfo',
-      'cardMinigameInfo',
       'cfg',
       'companionState',
       'companionUpgrades',
@@ -825,7 +815,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'equipItem',
       'equipItemToSlot',
       'feedPet',
-      'forfeitCardDuel',
       'friendAdd',
       'friendRemove',
       'friendlyTabTarget',
@@ -851,9 +840,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'interact',
       'jobProgress',
       'jobXpToNext',
-      'joinCardDuelQueue',
       'leaderboard',
-      'leaveCardDuelQueue',
       'leaveDelve',
       'leaveDungeon',
       'lockpickAbort',
@@ -885,7 +872,6 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'petWaterJet',
       'pickUpObject',
       'placeMobileStation',
-      'playCardInDuel',
       'playEmote',
       'prestige',
       'raidLockouts',
@@ -1172,17 +1158,6 @@ type _ExhaustDuelArena = AssertNever<
   Exclude<keyof IWorldDuelArena, (typeof FACET_DUEL_ARENA)[number]>
 >;
 
-const FACET_CARD_MINIGAME = [
-  'cardMinigameInfo',
-  'joinCardDuelQueue',
-  'leaveCardDuelQueue',
-  'playCardInDuel',
-  'forfeitCardDuel',
-] as const satisfies readonly (keyof IWorldCardMinigame)[];
-type _ExhaustCardMinigame = AssertNever<
-  Exclude<keyof IWorldCardMinigame, (typeof FACET_CARD_MINIGAME)[number]>
->;
-
 const FACET_SOCIAL_GRAPH = [
   'socialInfo',
   'friendAdd',
@@ -1371,7 +1346,6 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   trade: FACET_TRADE,
   chat: FACET_CHAT,
   duelArena: FACET_DUEL_ARENA,
-  cardMinigame: FACET_CARD_MINIGAME,
   socialGraph: FACET_SOCIAL_GRAPH,
   market: FACET_MARKET,
   mail: FACET_MAIL,
@@ -1390,7 +1364,7 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
 describe('W1: aggregate IWorld member set equals the disjoint union of the 27 facets', () => {
   it('pins the facet count at 27', () => {
     // 28 before the quest facet went.
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(27);
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(26);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -1418,8 +1392,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 27 fa
 
   it('the union of the facets equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(234);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(234);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(229);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(229);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

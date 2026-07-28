@@ -341,7 +341,6 @@ export const SIM_LAP_PHASES = [
   'ent.misc',
   'engaged',
   'duels',
-  'cardDuel',
   'arena',
   'trades',
   'lootRolls',
@@ -526,7 +525,6 @@ const JAILED_BLOCKED_COMMANDS = new Set<string>([
   'enter_delve',
   'duel_req',
   'duel_accept',
-  'card_queue_join',
 ]);
 const HEAVY_SELF_CMDS = new Set<string>([
   'equip',
@@ -1661,7 +1659,6 @@ export class GameServer {
     this.sim.arenaQueueLeave(target.pid);
     this.sim.vcupQueueLeave(target.pid);
     this.sim.vcupResolveDesertion(target.pid);
-    this.sim.leaveCardMinigameEntirely(target.pid);
     this.teleportJailedSession(target);
     // System notice (chat log), not the fading error toast: the prisoner must be
     // able to read the sentence after alt-tabbing back, like other moderation
@@ -3045,9 +3042,6 @@ export class GameServer {
     // remaining player's win/honor durable if both combatants disconnect close
     // together; removePlayer repeats the idempotent cleanup after the save.
     this.sim.arenaResolveDesertion(session.pid);
-    // Card Duel: drop the queue slot and forfeit any live match on disconnect,
-    // same idempotent-before-persistence shape as the two lines above.
-    this.sim.leaveCardMinigameEntirely(session.pid);
     // Freeze reward eligibility and reconcile pending loot before the leave
     // snapshot. saveCharacterOnLeave awaits the database; without this
     // synchronous prefix, a roll or boss death can mutate the character after
@@ -4692,21 +4686,6 @@ export class GameServer {
         break;
       }
 
-      // Card Duel minigame (the Card Master NPC, docs: src/sim/social/card_duel.ts).
-      case 'card_queue_join':
-        sim.joinCardDuelQueue(pid);
-        break;
-      case 'card_queue_leave':
-        sim.leaveCardDuelQueue(pid);
-        break;
-      case 'play_card':
-        if (typeof msg.value === 'number' && Number.isInteger(msg.value))
-          sim.playCardInDuel(msg.value, pid);
-        break;
-      case 'card_forfeit':
-        sim.forfeitCardDuel(pid);
-        break;
-
       // The Vale Cup (boarball queue at the Sowfield, docs/prd/vale-cup.md).
       // Deliberately NOT in HEAVY_SELF_CMDS: queueing mutates no heavy self
       // field (queue state rides the throttled 'vcup' delta key + the pid-
@@ -5688,7 +5667,6 @@ export class GameServer {
     maybe('marks', this.markersWire(anchorSession.pid));
     maybe('trade', this.tradeWire(anchorSession.pid));
     maybe('duel', this.duelWire(anchorSession.pid));
-    maybe('cardDuel', this.sim.cardMinigameInfoFor(anchorSession.pid));
     // Small PvP-ledger scalars. Delta-guarded like delve marks: a fresh
     // session receives both, then they ride only on earn/spend changes.
     maybe('honor', meta.honor);

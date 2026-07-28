@@ -58,7 +58,6 @@
 
 import type { IWorldActionBar } from './world_api/action_bar';
 import type { IWorldBank } from './world_api/bank';
-import type { IWorldCardMinigame } from './world_api/card_minigame';
 import type { IWorldChat } from './world_api/chat';
 import type { IWorldCombat } from './world_api/combat';
 import type { IWorldCosmetics } from './world_api/cosmetics';
@@ -137,7 +136,6 @@ export type {
   ActionBarSlotAction,
 } from './world_api/action_bar';
 export type { BankBonusSource, BankInfo } from './world_api/bank';
-export type { CardMinigameInfo } from './world_api/card_minigame';
 export { isOverheadEmoteId, OVERHEAD_EMOTES } from './world_api/chat';
 export type { ActiveFrostRing, ActiveTemporalHourglass } from './world_api/combat';
 export type { AccountCosmetics } from './world_api/cosmetics';
@@ -233,7 +231,6 @@ export interface IWorld
     IWorldTrade,
     IWorldChat,
     IWorldDuelArena,
-    IWorldCardMinigame,
     IWorldSocialGraph,
     IWorldMarket,
     IWorldMail,
@@ -353,10 +350,6 @@ export const COMMAND_NAMES = [
   'arena_queue',
   'arena_leave',
   'arena_augment',
-  'card_queue_join',
-  'card_queue_leave',
-  'play_card',
-  'card_forfeit',
   'prestige',
   'raiseStat',
   'resetStats',
@@ -498,7 +491,6 @@ export type WorldFacet =
   | 'IWorldTrade'
   | 'IWorldChat'
   | 'IWorldDuelArena'
-  | 'IWorldCardMinigame'
   | 'IWorldSocialGraph'
   | 'IWorldMarket'
   | 'IWorldMail'
@@ -591,12 +583,6 @@ export const COMMAND_FACETS = {
   arena_queue: 'IWorldDuelArena',
   arena_leave: 'IWorldDuelArena',
   arena_augment: 'IWorldDuelArena',
-  // IWorldCardMinigame: the Card Duel minigame queue + in-match card plays.
-  // cardMinigameInfo is a snapshot read (no send).
-  card_queue_join: 'IWorldCardMinigame',
-  card_queue_leave: 'IWorldCardMinigame',
-  play_card: 'IWorldCardMinigame',
-  card_forfeit: 'IWorldCardMinigame',
   // IWorldSocialGraph: friends/blocks/guild commands (online only; resolved
   // server-side by character name, handled by the #4 SocialService). socialInfo
   // arrives via the social/socialpos frames (no command); searchCharacters is a REST
