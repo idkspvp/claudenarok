@@ -2,7 +2,7 @@
 // Where ratelimit_clock.test focuses on the allowed flip across a window
 // boundary, this file pins the injected clock and asserts the exact { allowed,
 // remaining, resetSeconds } numbers: the record-then-judge counters (rateLimited),
-// the fused IP-AND-account merge (walletLinkRateLimited), and the read-only
+// the fused IP-AND-account merge (steamLinkRateLimited), and the read-only
 // per-account failed-login throttle (authThrottled). Every case pins the clock
 // with setRateLimitClock and restores it (plus the shared maps) in afterEach, so
 // the suite is deterministic and leaves global state clean.
@@ -21,11 +21,11 @@ import {
   resetClaudiumMutationRateLimits,
   resetRateLimitClock,
   resetRateLimits,
-  resetWalletLinkRateLimits,
+  resetSteamLinkRateLimits,
+  STEAM_LINK_MAX_PER_MINUTE,
   setRateLimitClock,
-  WALLET_LINK_MAX_PER_MINUTE,
+  steamLinkRateLimited,
   WINDOW_MS,
-  walletLinkRateLimited,
 } from '../../server/ratelimit';
 
 // Mirror the un-exported per-account failed-login constants in server/ratelimit.
@@ -47,7 +47,7 @@ function pinClock(start: number) {
 function resetAll() {
   resetRateLimits();
   resetClaudiumMutationRateLimits();
-  resetWalletLinkRateLimits();
+  resetSteamLinkRateLimits();
   resetAuthFailures();
   resetRateLimitClock();
 }
@@ -103,18 +103,18 @@ describe('rateLimited: RateLimitOutcome accuracy', () => {
   });
 });
 
-describe('walletLinkRateLimited: fused IP-AND-account merge', () => {
+describe('steamLinkRateLimited: fused IP-AND-account merge', () => {
   it('keeps the IP and account buckets independent', () => {
     const T = 4_000_000;
     pinClock(T);
     // Drain the account bucket for account 1 across DISTINCT IPs. Each call records a
     // fresh IP bucket (always allowed) but shares account 1, so account 1 is what caps.
-    for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(walletLinkRateLimited(reqFrom(`10.2.0.${i + 1}`), 1).allowed).toBe(true);
+    for (let i = 0; i < STEAM_LINK_MAX_PER_MINUTE; i++) {
+      expect(steamLinkRateLimited(reqFrom(`10.2.0.${i + 1}`), 1).allowed).toBe(true);
     }
     // The (cap + 1)th call from a brand-new IP is still limited: the account bucket
     // disallows, and the fused outcome is allowed only when BOTH buckets allow.
-    expect(walletLinkRateLimited(reqFrom('10.2.0.250'), 1)).toEqual({
+    expect(steamLinkRateLimited(reqFrom('10.2.0.250'), 1)).toEqual({
       allowed: false,
       remaining: 0,
       resetSeconds: 60,
@@ -122,20 +122,19 @@ describe('walletLinkRateLimited: fused IP-AND-account merge', () => {
 
     // The mirror: drain ONE IP across distinct accounts. Now the IP bucket caps even
     // though each account bucket is fresh.
-    resetWalletLinkRateLimits();
-    for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(walletLinkRateLimited(reqFrom('10.2.9.9'), 1000 + i).allowed).toBe(true);
+    for (let i = 0; i < STEAM_LINK_MAX_PER_MINUTE; i++) {
+      expect(steamLinkRateLimited(reqFrom('10.2.9.9'), 1000 + i).allowed).toBe(true);
     }
-    expect(walletLinkRateLimited(reqFrom('10.2.9.9'), 9999).allowed).toBe(false);
+    expect(steamLinkRateLimited(reqFrom('10.2.9.9'), 9999).allowed).toBe(false);
   });
 
   it('merges remaining (min) and resetSeconds (max) from the two buckets independently', () => {
     const T = 5_000_000;
     pinClock(T);
     // Seed account X (and a throwaway IP) at T so account X's oldest entry is T.
-    expect(walletLinkRateLimited(reqFrom('10.3.0.1'), 42)).toEqual({
+    expect(steamLinkRateLimited(reqFrom('10.3.0.1'), 42)).toEqual({
       allowed: true,
-      remaining: WALLET_LINK_MAX_PER_MINUTE - 1,
+      remaining: STEAM_LINK_MAX_PER_MINUTE - 1,
       resetSeconds: 60,
     });
 
@@ -145,9 +144,9 @@ describe('walletLinkRateLimited: fused IP-AND-account merge', () => {
     // tighter remaining (8, account) and the longer reset (60, IP), from DIFFERENT
     // buckets, proving min/max are applied independently.
     fakeTime = T + 20_000;
-    expect(walletLinkRateLimited(reqFrom('10.3.0.2'), 42)).toEqual({
+    expect(steamLinkRateLimited(reqFrom('10.3.0.2'), 42)).toEqual({
       allowed: true,
-      remaining: WALLET_LINK_MAX_PER_MINUTE - 2,
+      remaining: STEAM_LINK_MAX_PER_MINUTE - 2,
       resetSeconds: 60,
     });
   });

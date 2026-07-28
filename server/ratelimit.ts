@@ -283,12 +283,9 @@ export function resetRateLimits(): void {
 }
 
 export const CARD_UPLOAD_MAX_PER_MINUTE = 10;
-export const WALLET_LINK_MAX_PER_MINUTE = 10;
 
 const cardUploadIpAttempts = new Map<string, number[]>();
 const cardUploadAccountAttempts = new Map<number, number[]>();
-const walletLinkIpAttempts = new Map<string, number[]>();
-const walletLinkAccountAttempts = new Map<number, number[]>();
 
 function recordSlidingWindowAttempt<K>(
   attemptsByKey: Map<K, number[]>,
@@ -444,29 +441,6 @@ export function resetSteamLinkRateLimits(): void {
   steamLinkAccountAttempts.clear();
 }
 
-export function walletLinkRateLimited(
-  req: http.IncomingMessage,
-  accountId: number,
-): RateLimitOutcome {
-  const ip = recordSlidingWindowAttempt(
-    walletLinkIpAttempts,
-    requestIp(req),
-    WALLET_LINK_MAX_PER_MINUTE,
-  );
-  const account = recordSlidingWindowAttempt(
-    walletLinkAccountAttempts,
-    accountId,
-    WALLET_LINK_MAX_PER_MINUTE,
-  );
-  return mergeFusedOutcomes(ip, account);
-}
-
-/** Reset wallet-link verification throttles. Test-only: keeps scoped buckets isolated. */
-export function resetWalletLinkRateLimits(): void {
-  walletLinkIpAttempts.clear();
-  walletLinkAccountAttempts.clear();
-}
-
 // Discord link/status/reward endpoints share one dedicated bucket (per IP AND
 // per account), separate from login/register so an OAuth-link or reward-claim
 // flood can't lock a user out of logging in. accountId 0 keys the unauthenticated
@@ -518,29 +492,6 @@ export function githubRateLimited(req: http.IncomingMessage, accountId: number):
 export function resetGithubRateLimits(): void {
   githubIpAttempts.clear();
   githubAccountAttempts.clear();
-}
-
-export const WOC_BALANCE_MAX_PER_MINUTE = 20;
-const wocBalanceIpAttempts = new Map<string, number[]>();
-
-/**
- * Throttle the public /api/woc/balance proxy per IP on its OWN bucket. The proxy
- * is unauthenticated (on-chain balances are public), so it keys on IP only, but
- * NOT the shared register/login `attempts` map, so a player opening their card/bag
- * (each a fresh RPC read) can't burn their login budget, and a balance flood can't
- * lock them out of logging in (or vice-versa).
- */
-export function wocBalanceRateLimited(req: http.IncomingMessage): RateLimitOutcome {
-  return recordSlidingWindowAttempt(
-    wocBalanceIpAttempts,
-    requestIp(req),
-    WOC_BALANCE_MAX_PER_MINUTE,
-  );
-}
-
-/** Reset the balance-proxy throttle. Test-only: keeps scoped buckets isolated. */
-export function resetWocBalanceRateLimits(): void {
-  wocBalanceIpAttempts.clear();
 }
 
 // Public, unauthenticated read endpoints (the public character sheet, the /c/

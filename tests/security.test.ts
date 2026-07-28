@@ -28,19 +28,16 @@ import {
   CARD_UPLOAD_MAX_PER_MINUTE,
   cardUploadRateLimited,
   clearAuthFailures,
+  PUBLIC_READ_MAX_PER_MINUTE,
+  publicReadRateLimited,
   rateLimited,
   recordAuthFailure,
   requestIp,
   resetAuthFailures,
   resetCardUploadRateLimits,
+  resetPublicReadRateLimits,
   resetRateLimits,
-  resetWalletLinkRateLimits,
-  resetWocBalanceRateLimits,
   trackedIpCount,
-  WALLET_LINK_MAX_PER_MINUTE,
-  WOC_BALANCE_MAX_PER_MINUTE,
-  walletLinkRateLimited,
-  wocBalanceRateLimited,
 } from '../server/ratelimit';
 import { passesTurnstile } from '../server/turnstile';
 import { isWebClientRequest } from '../server/web_login_guard';
@@ -148,8 +145,7 @@ describe('rate-limit client IP selection', () => {
   beforeEach(() => {
     resetRateLimits();
     resetCardUploadRateLimits();
-    resetWalletLinkRateLimits();
-    resetWocBalanceRateLimits();
+    resetPublicReadRateLimits();
   });
 
   it('ignores spoofed x-forwarded-for from untrusted direct clients', () => {
@@ -246,56 +242,26 @@ describe('rate-limit client IP selection', () => {
     ).toBe(false);
   });
 
-  it('rate-limits wallet link/challenge attempts by account across client IPs', () => {
-    const accountId = 77;
-    for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(
-        walletLinkRateLimited(
-          fakeReq({ 'x-forwarded-for': `203.0.114.${i + 1}` }, '172.18.0.1'),
-          accountId,
-        ).allowed,
-      ).toBe(true);
-    }
-    expect(
-      walletLinkRateLimited(
-        fakeReq({ 'x-forwarded-for': '203.0.114.250' }, '172.18.0.1'),
-        accountId,
-      ).allowed,
-    ).toBe(false);
-  });
-
-  it('rate-limits wallet link/challenge attempts by client IP across accounts', () => {
-    const ip = '203.0.114.220';
-    for (let i = 0; i < WALLET_LINK_MAX_PER_MINUTE; i++) {
-      expect(
-        walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 1000 + i).allowed,
-      ).toBe(true);
-    }
-    expect(
-      walletLinkRateLimited(fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1'), 2000).allowed,
-    ).toBe(false);
-  });
-
-  it('rate-limits the $WOC balance proxy per IP on its OWN bucket (decoupled from login/register)', () => {
+  it('rate-limits a public read per IP on its OWN bucket (decoupled from login/register)', () => {
     const ip = '203.0.115.10';
     const req = () => fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1');
-    for (let i = 0; i < WOC_BALANCE_MAX_PER_MINUTE; i++) {
-      expect(wocBalanceRateLimited(req()).allowed).toBe(true);
+    for (let i = 0; i < PUBLIC_READ_MAX_PER_MINUTE; i++) {
+      expect(publicReadRateLimited(req()).allowed).toBe(true);
     }
-    // 21st balance read from this IP is limited
-    expect(wocBalanceRateLimited(req()).allowed).toBe(false);
-    // Crucially, exhausting the balance bucket must NOT spill into the shared
+    // one past the cap from this IP is limited
+    expect(publicReadRateLimited(req()).allowed).toBe(false);
+    // Crucially, exhausting that bucket must NOT spill into the shared
     // register/login limiter, the player can still log in from the same IP.
     expect(rateLimited(req()).allowed).toBe(true);
   });
 
-  it('keeps the balance proxy unaffected by an exhausted login/register budget', () => {
+  it('keeps public reads unaffected by an exhausted login/register budget', () => {
     const ip = '203.0.115.20';
     const req = () => fakeReq({ 'x-forwarded-for': ip }, '172.18.0.1');
     for (let i = 0; i < 21; i++) rateLimited(req()); // burn the shared login/register bucket
     expect(rateLimited(req()).allowed).toBe(false);
-    // The balance proxy has its own bucket, so a card/bag open still succeeds.
-    expect(wocBalanceRateLimited(req()).allowed).toBe(true);
+    // A public read has its own bucket, so it still succeeds.
+    expect(publicReadRateLimited(req()).allowed).toBe(true);
   });
 
   it('keeps limiting a persistent attacker after the memory backstop evicts', () => {
