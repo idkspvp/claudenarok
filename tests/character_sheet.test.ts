@@ -69,7 +69,7 @@ describe('characterSheet: shared fields', () => {
     expect(sheet.name).toBe('Thrallish');
     expect(sheet.realm).toBe('Claudemoon');
     expect(sheet.class).toBe('acolyte');
-    expect(sheet.classLabel).toBe('Shaman');
+    expect(sheet.classLabel).toBe('Acolyte');
     expect(sheet.level).toBe(20);
     expect(sheet.virtualLevel).toBe(virtualLevel(50_000));
     expect(sheet.prestigeRank).toBe(1);
@@ -103,13 +103,20 @@ describe('characterSheet: owner variant', () => {
   it('stats equal recalcPlayerStats output for the same class/level/gear', () => {
     const cls: PlayerClass = 'swordman';
     const level = 18;
+    // BOTH sides get the same allocation. The sheet reads state.statAllocation,
+    // and a character now starts with every point UNSPENT, so leaving it off the
+    // state compared a 1-in-everything sheet against a spent reference and the
+    // case said nothing about whether the two derivations agree.
+    const allocation = spreadAllocation(level);
     const sheet = characterSheet(
-      input({ row: makeRow(cls, level, makeState({ level, equipment: {} })) }),
+      input({
+        row: makeRow(cls, level, makeState({ level, equipment: {}, statAllocation: allocation })),
+      }),
     );
     // Independently derive via the engine's one true function.
     const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
     e.level = level;
-    recalcPlayerStats(e, cls, {}, undefined, {}, spreadAllocation(e.level));
+    recalcPlayerStats(e, cls, {}, undefined, {}, allocation);
     expect(sheet.stats).toEqual({ ...e.stats });
     expect(sheet.vitals!.maxHp).toBe(e.maxHp);
     expect(sheet.vitals!.resource.max).toBe(e.maxResource);

@@ -3,14 +3,17 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
-import { levelWithStats } from './helpers/alloc';
+import { levelWithClassStats } from './helpers/alloc';
 
 const SEED = 42;
 // Level the victim to 20 so a L18 Boneclad Revenant's swing never one-shots it
-// (death would clear the aura before we can read it).
+// (death would clear the aura before we can read it), and spend its points the way
+// its job would. An even spread leaves a level-20 character on 13 Vitality, which is
+// LESS than the 14 this drain removes, so the stat floored at 0 and the case measured
+// the clamp instead of the drain. A Swordman built as one has the Vitality to lose.
 const makeSim = (cls: PlayerClass = 'swordman') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
-  levelWithStats(sim, 20);
+  levelWithClassStats(sim, cls, 20);
   return sim;
 };
 

@@ -1,7 +1,12 @@
-// Hallowed Wall (Protection swordman signature): a direct hit on the target that then
-// bounces to up to 2 nearby enemies AROUND THE TARGET (not the caster). Regression for
-// the old caster-centered, uncapped aoeDamage that hit enemies next to the caster and
-// re-hit the primary. The bounce is a deterministic chainDamage (nearest, then lowest id).
+// chainDamage: a direct hit on the target that then bounces to up to 2 nearby enemies
+// AROUND THE TARGET (not the caster). Regression for the old caster-centered, uncapped
+// aoeDamage that hit enemies next to the caster and re-hit the primary. The bounce is
+// deterministic (nearest squared distance, then lowest id) and draws no extra rng.
+//
+// The effect list is SYNTHETIC. This used to drive a paladin signature, and the class
+// collapse cut both the ability and every other authored chain, so no content reaches
+// this dispatch arm today. The arm is live code that the ability re-home will want, so
+// the coverage is kept and fed directly rather than deleted along with the ability.
 import { describe, expect, it } from 'vitest';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
@@ -42,12 +47,24 @@ describe('Hallowed Wall bounce', () => {
     // Two enemies next to the CASTER, > 10 yd from the target: must never be bounced to.
     const nearCaster = [hostileAt(sim, p.pos.x + 3, p.pos.z), hostileAt(sim, p.pos.x, p.pos.z + 3)];
 
-    // Resolve holy_shield's effects directly against the primary target. This drives the
+    // Run the effects directly against the primary target: that drives the
     // directDamage + chainDamage dispatch deterministically, without the cast pipeline's
     // seed-dependent caster-to-target terrain LoS getting in the way of the bounce logic.
-    const res = (
-      sim as unknown as { resolvedAbility(id: string, pid: number): unknown }
-    ).resolvedAbility('holy_shield', sim.playerId);
+    // A real known ability supplies the surrounding shape (school, cast time, scaling);
+    // only the effect list is replaced.
+    const known = (
+      sim as unknown as { players: Map<number, { known: { def: { id: string } }[] }> }
+    ).players.get(sim.playerId)?.known?.[0];
+    const base = (
+      sim as unknown as { resolvedAbility(id: string, pid: number): Record<string, unknown> }
+    ).resolvedAbility(known?.def.id ?? '', sim.playerId);
+    const res = {
+      ...base,
+      effects: [
+        { type: 'directDamage', min: 40, max: 40 },
+        { type: 'chainDamage', min: 20, max: 20, jumps: 2, falloff: 1, radius: 10 },
+      ],
+    };
     (
       sim as unknown as {
         ctx: { runEffects(p: Entity, meta: unknown, target: Entity, res: unknown): void };

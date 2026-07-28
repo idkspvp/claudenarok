@@ -11,12 +11,12 @@ import {
 } from '../src/sim/spell_scaling';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { MAX_LEVEL } from '../src/sim/types';
-import { levelWithStats } from './helpers/alloc';
+import { levelWithClassStats } from './helpers/alloc';
 
 function leveled(cls: PlayerClass, level = MAX_LEVEL) {
   const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
   const pid = sim.addPlayer(cls, 'Tester');
-  levelWithStats(sim, level, pid);
+  levelWithClassStats(sim, cls, level, pid);
   sim.tick();
   return { sim, pid, p: sim.entities.get(pid)! };
 }
@@ -56,7 +56,10 @@ describe('Spell Power derivation', () => {
     expect(hi).toBeGreaterThan(lo);
   });
 
-  it('a pure-melee class (thief) has far less spell power than a caster', () => {
+  it('a thief BUILT as a thief has far less spell power than a mage built as a mage', () => {
+    // Class no longer decides attributes; the player's spending does. So this is a
+    // statement about two BUILDS, not two classes, and it only holds because each
+    // side put its points where its job wants them.
     expect(leveled('thief').p.spellPower).toBeLessThan(leveled('mage').p.spellPower / 3);
   });
 });

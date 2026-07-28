@@ -10,11 +10,13 @@
 // build anyone would choose and is not meant to be. Tests that care about a
 // SPECIFIC attribute should pass their own allocation instead.
 
+import type { PlayerClass } from '../../src/sim/types';
 import {
   BASE_STAT,
   MAX_STAT,
   STATUS_STATS,
   type StatAllocation,
+  type StatusStat,
   statRaiseCost,
   totalStatusPointsAt,
 } from '../../src/sim/types';
@@ -57,5 +59,63 @@ export function levelWithStats(
   const meta = sim.players.get(id);
   if (!meta) throw new Error(`no player meta for ${id}`);
   meta.statAllocation = spreadAllocation(level);
+  sim.recalcPlayer(sim.entities.get(id));
+}
+
+/** The attributes each first job's own players actually buy.
+ *
+ *  `spreadAllocation` gives every stat the same value, which makes a Mage and a
+ *  Thief identical bodies. That is fine for a suite measuring one formula and
+ *  useless for one asking whether a caster out-casts a rogue: with an even
+ *  spread the answer is no, because nothing about the CLASS decides attributes
+ *  any more. The player's spending does, and a suite that wants a class-shaped
+ *  character has to spend like one.
+ *
+ *  Test-only, like everything else here. Deliberately NOT a revived
+ *  `stat_preset`: the game must never spend a player's points for them, and this
+ *  exists so tests can say what kind of build they mean, not so the game can. */
+const CLASS_PRIORITY: Readonly<Record<PlayerClass, readonly StatusStat[]>> = {
+  swordman: ['str', 'vit'],
+  thief: ['agi', 'str'],
+  archer: ['dex', 'agi'],
+  acolyte: ['int', 'vit'],
+  mage: ['int', 'dex'],
+};
+
+/** Spend the level's whole budget into the job's primary attributes, in order,
+ *  so a Mage reads as a caster and a Thief does not. */
+export function classAllocation(cls: PlayerClass, level: number): StatAllocation {
+  const alloc: StatAllocation = { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
+  const priority = CLASS_PRIORITY[cls];
+  let budget = totalStatusPointsAt(level);
+  let progress = true;
+  while (budget > 0 && progress) {
+    progress = false;
+    for (const stat of priority) {
+      const current = BASE_STAT + alloc[stat];
+      if (current >= MAX_STAT) continue;
+      const cost = statRaiseCost(current);
+      if (cost > budget) continue;
+      alloc[stat]++;
+      budget -= cost;
+      progress = true;
+    }
+  }
+  return alloc;
+}
+
+/** `levelWithStats`, but spending like the job would. */
+export function levelWithClassStats(
+  // biome-ignore lint/suspicious/noExplicitAny: reaches sim internals, as sim suites do
+  sim: any,
+  cls: PlayerClass,
+  level: number,
+  pid?: number,
+): void {
+  sim.setPlayerLevel(level, pid);
+  const id = pid ?? sim.player.id;
+  const meta = sim.players.get(id);
+  if (!meta) throw new Error(`no player meta for ${id}`);
+  meta.statAllocation = classAllocation(cls, level);
   sim.recalcPlayer(sim.entities.get(id));
 }
