@@ -12,6 +12,7 @@
 // game/net/DOM/Three, no `Math.random`/`Date.now`), so it runs unchanged in Node,
 // the browser, and the headless RL env (enforced by tests/architecture.test.ts).
 
+import type { Element } from './combat/elements';
 import type { FrozenOrbState } from './combat/frozen_orb';
 import type { LetterDef } from './content/letters';
 import type { DeedRuntime } from './deeds';
@@ -622,7 +623,16 @@ export interface SimContextCallbacks {
   // single slice can own it. Every physical damage site routes through this
   // rather than multiplying by an armour fraction itself, which is what keeps the
   // flat Vitality layer from being silently skipped somewhere.
-  applyDefence(damage: number, target: Entity, ignore?: boolean): number;
+  // The whole tail of a physical hit in the reference's order: defence, refine,
+  // the floor, the attribute chart, cards. Every physical channel resolves
+  // through this. May return a NEGATIVE
+  // number when the defender absorbs the attribute (sim.ts resolvePhysical).
+  resolvePhysical(
+    damage: number,
+    attacker: Entity | null,
+    target: Entity,
+    opts?: { ignoreDefence?: boolean; attackElement?: Element },
+  ): number;
   // The magic mirror of the above, and the shape is the same two layers: a capped
   // percentage from equipment, then a flat subtraction, floored at 1. The one real
   // difference is that it DRAWS NO RNG: pre-renewal soft MDEF is a plain
@@ -1214,7 +1224,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     // M3 mob-swing affix cascade seam.
     effectiveArmor: host.effectiveArmor,
     recalcPlayer: host.recalcPlayer,
-    applyDefence: host.applyDefence,
+    resolvePhysical: host.resolvePhysical,
     applyMagicDefence: host.applyMagicDefence,
     // I2a delve run lifecycle bindings. grantXp/despawnPet/delveRunForMob/
     // onDelveBossDefeated/delveDetectMult are bound above (C1/M2/C3); deduped here.

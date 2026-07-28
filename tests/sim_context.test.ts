@@ -150,7 +150,7 @@ const CALLBACK_KEYS = [
   'awardHeroicMarks',
   // M3 mob-swing affix cascade surface.
   'effectiveArmor',
-  'applyDefence',
+  'resolvePhysical',
   'recalcPlayer',
   // I2a delve run lifecycle consume surface (helpers / gates / pet seam / I2b / I2c
   // + the reach-in callbacks). grantXp/despawnPet/delveRunForMob/onDelveBossDefeated/
@@ -437,7 +437,7 @@ function makeFakeHost() {
     resetEvadingMob: vi.fn(),
     onBossDeath: vi.fn(),
     effectiveArmor: vi.fn(() => 0),
-    applyDefence: vi.fn((damage: number) => damage),
+    resolvePhysical: vi.fn((damage: number) => damage),
     applyMagicDefence: (d: number) => d,
     recalcPlayer: vi.fn(),
     // I2a delve run lifecycle stubs. grantXp/despawnPet/delveRunForMob/onDelveBossDefeated/

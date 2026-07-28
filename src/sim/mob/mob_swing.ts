@@ -110,7 +110,9 @@ export function runMobSwingAffixes(
       if (!pe || pe.dead || pe.id === target.id) continue;
       if (dist2d(pe.pos, target.pos) > cleave.radius) continue;
       let sd = rawDmg * cleave.mult;
-      sd = ctx.applyDefence(sd, pe);
+      // Cleave splash resolves the same tail a direct swing does, so a monster's
+      // own attribute reaches the players it splashes onto too.
+      sd = ctx.resolvePhysical(sd, mob, pe);
       ctx.dealDamage(
         mob,
         pe,

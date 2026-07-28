@@ -23,6 +23,7 @@ import {
 } from './bags';
 import * as bankMod from './bank';
 import { type BankState, clampBonusSlots, sanitizeBankState } from './bank';
+import { cardAttackMultiplier } from './cards';
 import { lineOfSightClear, resolveMovement, resolvePosition } from './colliders';
 import { auraAffectsStats, removeCancelableAura } from './combat/aura_cancel';
 import { auraReplacementConflicts } from './combat/aura_stacking';
@@ -64,8 +65,10 @@ import {
   handleDeath as handleDeathImpl,
 } from './combat/damage';
 import { damageTakenWithin } from './combat/damage_history';
-import { applyDefence } from './combat/defence';
+import { resolvePhysicalTail } from './combat/damage_pipeline';
+import { hardDefMultiplier, monsterSoftDef, playerSoftDef } from './combat/defence';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
+import { type Element, elementMultiplier } from './combat/elements';
 import { applyIgnite } from './combat/fire_mage';
 import { frostMageChannelPulse } from './combat/frost_mage';
 import { type FrozenOrbState, tickFrozenOrbs } from './combat/frozen_orb';
@@ -80,6 +83,7 @@ import {
 import { advanceHeroicLeap } from './combat/heroic_leap';
 import { applyMagicDefence } from './combat/magic_defence';
 import { tickNaturesFury } from './combat/natures_fury';
+import { refineFlatAtk } from './combat/refine';
 import * as resurrectionOfferMod from './combat/resurrection_offer';
 import { rewindHealAmount } from './combat/rewind';
 import { applySetProcs as applySetProcsImpl } from './combat/set_procs';
@@ -3965,7 +3969,7 @@ export class Sim {
       effectiveArmor: sim.effectiveArmor.bind(sim),
       recalcPlayer: sim.recalcPlayer.bind(sim),
       // C3: the shared two-layer defence entry point (see the SimContext decl).
-      applyDefence: sim.applyDefence.bind(sim),
+      resolvePhysical: sim.resolvePhysical.bind(sim),
       applyMagicDefence: sim.applyMagicDefence.bind(sim),
       // I2a delve run lifecycle now lives in src/sim/delves/runs.ts; the moved module
       // reaches the still-on-Sim helpers / gate predicates / pet seam / I2b lockpick /
@@ -4641,18 +4645,78 @@ export class Sim {
   // key the stream to a stat, and a gear change would silently fork the world),
   // and , since a critical bypasses defence entirely and would otherwise
   // draw one fewer value than an ordinary hit.
-  private applyDefence(damage: number, target: Entity, ignore = false): number {
+  // The whole tail of a physical hit, in the reference's order: defence, then
+  // the weapon's refine against a possibly negative value, then the floor of 1,
+  // then the attribute chart, then cards (combat/damage_pipeline.ts carries the
+  // citations). Every physical channel resolves through here, which is what
+  // stopped the attribute chart from reaching only the melee swing.
+  //
+  // The defence roll is drawn FIRST and unconditionally, exactly where
+  // the removed applyDefence drew it, so converting a call site did not move
+  // draw order. The over-refine draw happens only for a weapon that actually
+  // carries an over-refine, the same discipline the gear procs use.
+  //
+  // May return a NEGATIVE number when the defender absorbs the attribute: the
+  // caller decides whether that heals or is discarded, rather than having it
+  // clamped away here.
+  private resolvePhysical(
+    damage: number,
+    attacker: Entity | null,
+    target: Entity,
+    opts: { ignoreDefence?: boolean; attackElement?: Element } = {},
+  ): number {
     const roll = this.rng.next();
-    if (ignore) return damage;
-    return applyDefence(damage, {
-      armor: this.effectiveArmor(target),
-      vit: target.stats.vit,
-      isMonster: target.kind !== 'player',
-      roll,
+    const vit = target.stats.vit;
+    const isMonster = target.kind !== 'player';
+    const attackElement = opts.attackElement ?? this.attackElementOf(attacker);
+    const cards = attacker?.cardBonuses;
+    return resolvePhysicalTail({
+      damage,
+      hardDefMultiplier: hardDefMultiplier(this.effectiveArmor(target)),
+      softDef: isMonster ? monsterSoftDef(vit, roll) : playerSoftDef(vit, roll),
+      refineFlat: attacker ? this.weaponRefineFlat(attacker) : 0,
+      elementMultiplier: elementMultiplier(
+        attackElement,
+        target.element ?? 'neutral',
+        target.elementLevel,
+      ),
+      cardMultiplier: cards
+        ? cardAttackMultiplier(cards, {
+            race: target.race,
+            element: target.element,
+            size: target.size,
+          })
+        : 1,
+      ignoreDefence: opts.ignoreDefence,
     });
   }
 
-  // Ragnarok's magic reduction, the mirror of applyDefence above. Hard MDEF is
+  // What attribute a swing carries. A player's comes from the weapon, or from a
+  // card that endows it (which is what makes an attribute card the top of the
+  // ladder). A monster attacks with whatever it is made of, which is how the
+  // reference does it too: a fire monster hits with fire.
+  private attackElementOf(attacker: Entity | null): Element {
+    if (!attacker) return 'neutral';
+    if (attacker.kind !== 'player') return attacker.element ?? 'neutral';
+    const endowed = attacker.cardBonuses?.weaponElement;
+    if (endowed) return endowed;
+    const item = ITEMS[attacker.mainhandItemId ?? ''];
+    return (item?.kind === 'weapon' ? item.weapon?.element : undefined) ?? 'neutral';
+  }
+
+  // The flat half of the wielder's refine, which is the half that lands after
+  // defence. Zero for anything unrefined, which is everything until a copy
+  // actually carries a refine level.
+  private weaponRefineFlat(attacker: Entity): number {
+    if (attacker.kind !== 'player') return 0;
+    const meta = this.players.get(attacker.id);
+    const refine = meta?.equipmentInstance?.mainhand?.refine ?? 0;
+    if (refine <= 0) return 0;
+    const item = ITEMS[attacker.mainhandItemId ?? ''];
+    return refineFlatAtk(item?.kind === 'weapon' ? item.weapon?.weaponLevel : undefined, refine);
+  }
+
+  // Ragnarok's magic reduction, the mirror of resolvePhysical above. Hard MDEF is
   // passed as 0 because this game has no magic-armour field to derive it from:
   // `Entity.armor` is a single physical value and no ItemDef carries a magic
   // counterpart, so only the flat Intelligence layer bites until the gear records
@@ -6014,7 +6078,10 @@ export class Sim {
     if (mob.enraged && enrage) dmg *= enrage.dmgMult;
     dmg *= this.petDamageMult(mob);
     const rawDmg = dmg; // pre-defence, post-crit/enrage: basis for cleave splash
-    dmg = this.applyDefence(dmg, target, crit);
+    // The same tail a player's swing resolves through: a monster attacks with
+    // whatever it is made of, so a fire monster's swing finally meets the
+    // attribute chart instead of landing for full on everything.
+    dmg = this.resolvePhysical(dmg, mob, target, { ignoreDefence: crit });
     if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
       dmg = Math.max(1, dmg - target.blockValue);
     }

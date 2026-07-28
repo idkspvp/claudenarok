@@ -1055,6 +1055,10 @@ export type ItemDef =
 export interface ItemInstancePayload {
   /** Player name that signed/crafted this specific copy, if any. */
   signer?: string;
+  /** The refine level of THIS copy, 0 to MAX_REFINE. A property of the copy and
+   *  not the definition: two of the same sword refined differently are different
+   *  items to their owners. See src/sim/combat/refine.ts. */
+  refine?: number;
   /** Card ids socketed into THIS copy, in socket order. Per-copy rather than
    *  per-item because that is the whole point: two of the same sword differ by
    *  what is in them. Never longer than the item's `cardSlots`. */

@@ -431,11 +431,19 @@ export function rangedSwing(
     );
     let dmg =
       (ranged.wand ? weaponRoll : weaponRoll * RANGED_WEAPON_COEFF) + rangedStatusAttack(atk);
-    // Wand bolts are magic, so defence does not apply; a physical auto shot is
-    // mitigated unless it CRIT, since a pre-renewal critical ignores defence
-    // outright (see the melee path).
+    // Wand bolts are magic, so physical defence does not apply; a physical auto
+    // shot resolves the same tail the melee swing does, which is what finally
+    // put the attribute chart on the ranged channel: it reached only the melee
+    // swing before, so a fire arrow against a water monster hit for full.
     if (ranged.wand) dmg = ctx.applyMagicDefence(dmg, tgt);
-    else dmg = ctx.applyDefence(dmg, tgt, crit);
+    else {
+      dmg = ctx.resolvePhysical(dmg, atk, tgt, {
+        ignoreDefence: crit,
+        // The ranged descriptor carries no attribute of its own, so the shot
+        // takes the wielder's: an endowing card first, then the equipped bow.
+        attackElement: atk.cardBonuses?.weaponElement,
+      });
+    }
     ctx.dealDamage(
       atk,
       tgt,
@@ -605,24 +613,21 @@ export function meleeSwing(
     attribute.size;
   let dmg = (weaponPart + statusAttackContribution(ctx, attacker, apSwingSpeed)) * mult;
   dmg += bonus + imbueBonus;
-  dmg *= attribute.element;
-  // Cards that hunt a race, an attribute or a size. Multiplicative WITH the
-  // chart rather than folded into it, so a card that adds a fifth against the
-  // undead adds a fifth of whatever the chart already decided.
-  if (cards) {
-    dmg *= cardAttackMultiplier(cards, {
-      race: target.race,
-      element: target.element,
-      size: target.size,
-    });
-  }
+  // Everything after the attack power is assembled, in the reference's order:
+  // defence, refine, the floor, the attribute chart, then cards. The chart and
+  // the cards used to run HERE, before defence, which is not where the reference
+  // puts either (combat/damage_pipeline.ts carries the citations).
+  //
   // A pre-renewal critical ignores the target's defence OUTRIGHT, both layers
   // (`attack_ignores_def` returns true for any critical under `#ifndef
   // RENEWAL`). Together with taking the top of the range, that is the whole
   // critical: no multiplier, but armour stops mattering. It is why a critical
   // build is the answer to a heavily armoured target specifically, and why
   // removing the old x2 is not the flat nerf it looks like.
-  dmg = ctx.applyDefence(dmg, target, crit);
+  dmg = ctx.resolvePhysical(dmg, attacker, target, {
+    ignoreDefence: crit,
+    attackElement: cards?.weaponElement ?? weapon.element,
+  });
   if (blockChance > 0 && roll < missChance + dodgeChance + parryChance + blockChance) {
     dmg = Math.max(1, dmg - target.blockValue);
   }

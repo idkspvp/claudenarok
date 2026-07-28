@@ -1285,7 +1285,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
         // physical channels (Volley) are mitigated by armor; spell-school rain is not,
         // mirroring the instant aoeDamage path in effect_dispatch.
         if (isSpell) dmg = ctx.applyMagicDefence(dmg, m);
-        else dmg = ctx.applyDefence(dmg, m);
+        else dmg = ctx.resolvePhysical(dmg, p, m);
         ctx.dealDamage(p, m, Math.round(dmg), false, res.def.school, res.def.name, 'hit');
         struck++;
       }
@@ -1336,7 +1336,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
         if (!ctx.hasLineOfSight(p, m)) continue;
         let dmg = ctx.rng.range(eff.min, eff.max) + channelSp;
         if (isSpell) dmg = ctx.applyMagicDefence(dmg, m);
-        else dmg = ctx.applyDefence(dmg, m);
+        else dmg = ctx.resolvePhysical(dmg, p, m);
         ctx.dealDamage(p, m, Math.round(dmg), false, res.def.school, res.def.name, 'hit');
       }
     }

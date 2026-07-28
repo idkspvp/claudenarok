@@ -47,12 +47,21 @@ describe('the element ring', () => {
     expect(pct('water', 'wind')).toBeLessThan(100);
   });
 
-  it('makes every element resist itself, except the one that does not', () => {
+  it('makes an element resist itself, with three named exceptions', () => {
+    // Neutral is the plain trade and resists nothing. Earth is an even trade
+    // against itself at level 1 and only starts resisting from level 2. Ghost
+    // is the one element that takes MORE from its own kind, pinned below.
+    const evenAtLevelOne: readonly Element[] = ['neutral', 'earth', 'ghost'];
     for (const e of ELEMENTS) {
-      if (e === 'neutral') continue; // neutral is the plain trade, it resists nothing
-      if (e === 'ghost') continue; // the deliberate exception, pinned below
+      if (evenAtLevelOne.includes(e)) continue;
       expect(pct(e, e), `${e} vs ${e}`).toBeLessThan(100);
     }
+    expect(pct('neutral', 'neutral')).toBe(100);
+    // Earth is the slow one: even at level 1, then down through immunity into
+    // absorption. Missing this is what an invented per-level rule gets wrong.
+    expect([1, 2, 3, 4].map((l) => pct('earth', 'earth', l as ElementLevel))).toEqual([
+      100, 50, 0, -25,
+    ]);
   });
 
   it('makes ghost the answer to ghost: the chart has one self-weakness', () => {
@@ -73,15 +82,22 @@ describe('the answers outside the ring', () => {
     expect(pct('shadow', 'holy')).toBeGreaterThan(100);
   });
 
-  it('makes holy and fire the answer to the undead, and shadow no answer at all', () => {
+  it('makes holy and fire the answer to the undead, and shadow the opposite', () => {
     expect(pct('holy', 'undead')).toBeGreaterThan(100);
     expect(pct('fire', 'undead')).toBeGreaterThan(100);
-    expect(pct('shadow', 'undead')).toBe(0);
+    // Shadow does not merely fail against the undead: they FEED on it. This is
+    // the single most build-relevant cell in the chart and the easiest to get
+    // backwards, so it is pinned to its literal values at every level.
+    expect([1, 2, 3, 4].map((l) => pct('shadow', 'undead', l as ElementLevel))).toEqual([
+      -25, -50, -75, -100,
+    ]);
   });
 
-  it('leaves poison useless against poison and weak against the undead', () => {
+  it('leaves poison useless against poison and healing to the undead', () => {
     expect(pct('poison', 'poison')).toBe(0);
-    expect(pct('poison', 'undead')).toBeLessThan(100);
+    expect([1, 2, 3, 4].map((l) => pct('poison', 'undead', l as ElementLevel))).toEqual([
+      -25, -50, -75, -100,
+    ]);
   });
 
   it('makes ghost the answer to neutral, and neutral almost no answer to ghost', () => {
@@ -113,21 +129,67 @@ describe('the defender attribute level', () => {
     expect(pct('fire', 'earth', 4)).toBeGreaterThan(pct('fire', 'earth', 1));
   });
 
-  it('deepens a resistance, all the way to absorbing the hit', () => {
+  it('deepens a resistance as the level rises', () => {
     let prev = pct('fire', 'water', 1);
     for (const level of [2, 3, 4] as ElementLevel[]) {
       const now = pct('fire', 'water', level);
       expect(now, `fire vs water L${level}`).toBeLessThanOrEqual(prev);
       prev = now;
     }
-    // Deep enough and the hit heals. A caller clamping damage at zero would erase
-    // this, so it gets its own predicate rather than living as a sign check.
-    expect(elementAbsorbs('fire', 'water', 4)).toBe(true);
-    expect(elementMultiplier('fire', 'water', 4)).toBeLessThan(0);
+    // Fire bottoms out at immunity against water, not absorption: a resistance
+    // deepening does NOT automatically become a heal.
+    expect(pct('fire', 'water', 4)).toBe(0);
+    expect(elementAbsorbs('fire', 'water', 4)).toBe(false);
   });
 
-  it('leaves an even trade even at every level', () => {
+  it('turns the three deep resistances into an outright heal', () => {
+    // A caller clamping damage at zero erases this entirely, so it gets its own
+    // predicate rather than living as a sign check somewhere.
+    expect(elementAbsorbs('shadow', 'undead', 1)).toBe(true);
+    expect(elementAbsorbs('poison', 'undead', 1)).toBe(true);
+    expect(elementAbsorbs('earth', 'earth', 4)).toBe(true);
+    expect(elementMultiplier('shadow', 'undead', 4)).toBe(-1);
+    // The complete set, pinned as a literal. Every element that resists itself
+    // hard enough ends up absorbing itself at level 4; on top of that the
+    // poison/shadow/undead cluster feeds on each other from level 1. Any edit to
+    // the table that adds or removes an absorbing pair has to come here first.
+    const absorbing = new Set<string>();
+    for (const a of ELEMENTS)
+      for (const d of ELEMENTS)
+        for (const level of ELEMENT_LEVELS)
+          if (elementAbsorbs(a, d, level)) absorbing.add(`${a}->${d}`);
+    expect([...absorbing].sort()).toEqual([
+      'earth->earth',
+      'fire->fire',
+      'holy->holy',
+      'poison->shadow',
+      'poison->undead',
+      'shadow->poison',
+      'shadow->shadow',
+      'shadow->undead',
+      'undead->poison',
+      'water->water',
+      'wind->wind',
+    ]);
+    // Neutral never absorbs anything, at any level: it is the plain trade.
+    for (const d of ELEMENTS)
+      for (const level of ELEMENT_LEVELS)
+        expect(elementAbsorbs('neutral', d, level), `neutral vs ${d} L${level}`).toBe(false);
+  });
+
+  it('leaves the plain neutral trade even at every level', () => {
     for (const level of ELEMENT_LEVELS) expect(pct('neutral', 'fire', level)).toBe(100);
+  });
+
+  it('does NOT freeze every cell that sits at 100 at level 1', () => {
+    // The trap an invented per-level rule falls into: "a cell at 100 is a
+    // neutral trade and never moves" is false. Around twenty of them move.
+    expect([1, 2, 3, 4].map((l) => pct('holy', 'water', l as ElementLevel))).toEqual([
+      100, 100, 100, 75,
+    ]);
+    expect([1, 2, 3, 4].map((l) => pct('water', 'undead', l as ElementLevel))).toEqual([
+      100, 100, 125, 150,
+    ]);
   });
 
   it('never runs past the ends of the chart', () => {
@@ -136,7 +198,7 @@ describe('the defender attribute level', () => {
         for (const level of ELEMENT_LEVELS) {
           const v = pct(a, d, level);
           expect(v, `${a} vs ${d} L${level}`).toBeLessThanOrEqual(200);
-          expect(v, `${a} vs ${d} L${level}`).toBeGreaterThanOrEqual(-25);
+          expect(v, `${a} vs ${d} L${level}`).toBeGreaterThanOrEqual(-100);
         }
   });
 

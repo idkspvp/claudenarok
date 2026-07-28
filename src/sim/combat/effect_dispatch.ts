@@ -409,7 +409,7 @@ export function runEffects(
         // goes with the skill rebuild that removes the talents built on it.
         if (isSpell) dmg *= spellDamageMultFromAuras(p);
         if (isSpell) dmg = ctx.applyMagicDefence(dmg, target);
-        else dmg = ctx.applyDefence(dmg, target, crit);
+        else dmg = ctx.resolvePhysical(dmg, p, target, { ignoreDefence: crit });
         // Aether Surge (Chronomancy Phase 3): each held Arcane Charge scales the
         // FULL post-spell-power, post-crit damage. The extra damage is what feeds
         // more Temporal Echo healing (no hidden heal bonus). Deterministic; reads
@@ -510,7 +510,7 @@ export function runEffects(
         if (sureCrit) sureCritRolled = true;
         // No multiplier; a critical's worth is that it skips defence entirely.
         if (isSpell) dmg = ctx.applyMagicDefence(dmg, target);
-        else dmg = ctx.applyDefence(dmg, target, crit);
+        else dmg = ctx.resolvePhysical(dmg, p, target, { ignoreDefence: crit });
         ctx.dealDamage(
           p,
           target,
@@ -1383,7 +1383,7 @@ export function runEffects(
           // spell arm keeps its multiplier for now, and defence never applied to
           // spell-school AoE (Arcane Explosion, Consecration) anyway.
           if (isSpell) dmg = ctx.applyMagicDefence(dmg, m);
-          else dmg = ctx.applyDefence(dmg, m, aoeCrit);
+          else dmg = ctx.resolvePhysical(dmg, p, m, { ignoreDefence: aoeCrit });
           // Soft-cap scale (Revenge above 5 targets): applied after the roll and
           // armor so the total, not any single hit, is what the cap bounds.
           dmg *= capScale;
@@ -1494,7 +1494,7 @@ export function runEffects(
           });
           let dmg = baseAmount * eff.falloff ** i;
           if (isSpell) dmg = ctx.applyMagicDefence(dmg * spellDamageMultFromAuras(p), m);
-          else dmg = ctx.applyDefence(dmg, m);
+          else dmg = ctx.resolvePhysical(dmg, p, m);
           ctx.dealDamage(
             p,
             m,
@@ -2138,7 +2138,7 @@ export function runEffects(
           if (sureCrit) sureCritRolled = true;
           // A physical critical does not multiply; it skips defence instead.
           if (isSpell) dmg = ctx.applyMagicDefence(dmg, target);
-          else dmg = ctx.applyDefence(dmg, target, crit);
+          else dmg = ctx.resolvePhysical(dmg, p, target, { ignoreDefence: crit });
           if (isSpell) noteSpellHit(ctx, p, crit, ability.id);
           ctx.dealDamage(
             p,

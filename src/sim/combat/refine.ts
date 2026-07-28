@@ -17,8 +17,18 @@
 // not own the attempt: whether a refine succeeds is an rng draw, and that
 // belongs to a system module with a SimContext, never to a leaf.
 //
-// SOURCING: a reimplementation of a published mechanic, authored from the
-// documented relationships. Nothing copied from a GPL server's db/.
+// The two halves land in DIFFERENT places in the damage line, which is the part
+// that matters and the part a single combined number gets wrong:
+//
+//   the flat rate    goes into the weapon's second attack accumulator and is
+//                    added AFTER defence (`status.cpp:3957` fills it,
+//                    `battle.cpp:4906` adds it), where it can dig the hit out of
+//                    a negative before the floor.
+//   the over-refine  is a RANDOM 1 to N added to base attack power BEFORE
+//                    defence (`battle.cpp:2419`; the source comment says the
+//                    over-refine bonus is part of base attack).
+//
+// So this module exposes them separately and never as one total.
 
 import type { WeaponLevel } from '../types';
 
@@ -35,7 +45,7 @@ const SAFE_LIMIT: Readonly<Record<WeaponLevel, number>> = { 1: 7, 2: 6, 3: 5, 4:
 
 /** Extra attack power per refine BEYOND the safe limit, by weapon level: the
  *  reward for taking the risk, on top of the flat rate. */
-const OVER_REFINE_BONUS: Readonly<Record<WeaponLevel, number>> = { 1: 3, 2: 5, 3: 8, 4: 14 };
+const OVER_REFINE_BONUS: Readonly<Record<WeaponLevel, number>> = { 1: 3, 2: 5, 3: 8, 4: 13 };
 
 const clampRefine = (refine: number): number =>
   Math.max(0, Math.min(MAX_REFINE, Math.floor(refine)));
@@ -54,17 +64,44 @@ export function refineIsRisky(weaponLevel: WeaponLevel | undefined, refine: numb
   return at >= safeRefineLimit(weaponLevel) && at < MAX_REFINE;
 }
 
-/** Total attack power this refine level is worth on a weapon of this class.
+/** The flat attack power this refine level is worth, added AFTER defence.
  *
- *  Flat rate for every step, plus the over-refine bonus for each step past the
- *  safe limit. Monotonic in refine and in weapon level, so a higher-class weapon
- *  at the same refine is never worth less. */
-export function refineAttackBonus(weaponLevel: WeaponLevel | undefined, refine: number): number {
+ *  Monotonic in refine and in weapon level, so a higher-class weapon at the same
+ *  refine is never worth less. */
+export function refineFlatAtk(weaponLevel: WeaponLevel | undefined, refine: number): number {
+  return clampRefine(refine) * ATK_PER_REFINE[level(weaponLevel)];
+}
+
+/** The TOP of the over-refine range for this refine level: the reward for going
+ *  past the safe limit. Zero at or below it.
+ *
+ *  The actual bonus is a random 1 to this, drawn by the caller and added to base
+ *  attack power BEFORE defence. Returning the ceiling rather than a rolled value
+ *  is what keeps this a leaf: every draw in the sim goes through its Rng. */
+export function overRefineMax(weaponLevel: WeaponLevel | undefined, refine: number): number {
   const lv = level(weaponLevel);
-  const at = clampRefine(refine);
-  const safe = SAFE_LIMIT[lv];
-  const overSteps = Math.max(0, at - safe);
-  return at * ATK_PER_REFINE[lv] + overSteps * OVER_REFINE_BONUS[lv];
+  const overSteps = Math.max(0, clampRefine(refine) - SAFE_LIMIT[lv]);
+  return overSteps * OVER_REFINE_BONUS[lv];
+}
+
+/** The rolled over-refine bonus: 1 to `overRefineMax`, or zero when there is no
+ *  over-refine. `roll` is a 0..1 draw from the caller's Rng. */
+export function overRefineBonus(
+  weaponLevel: WeaponLevel | undefined,
+  refine: number,
+  roll: number,
+): number {
+  const max = overRefineMax(weaponLevel, refine);
+  if (max <= 0) return 0;
+  return Math.floor(Math.max(0, Math.min(0.999999, roll)) * max) + 1;
+}
+
+/** Both halves at their expected value, for a tooltip that has to show the
+ *  weapon's power as one number. NEVER the damage line: the two halves land on
+ *  opposite sides of defence. */
+export function refineAttackBonus(weaponLevel: WeaponLevel | undefined, refine: number): number {
+  const max = overRefineMax(weaponLevel, refine);
+  return refineFlatAtk(weaponLevel, refine) + (max > 0 ? (max + 1) / 2 : 0);
 }
 
 /** What the NEXT refine would add, for the upgrade window's preview line. Zero

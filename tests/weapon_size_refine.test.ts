@@ -12,7 +12,10 @@ import { SIZES } from '../src/sim/combat/elements';
 import {
   MAX_REFINE,
   nextRefineGain,
+  overRefineBonus,
+  overRefineMax,
   refineAttackBonus,
+  refineFlatAtk,
   refineIsRisky,
   safeRefineLimit,
 } from '../src/sim/combat/refine';
@@ -143,5 +146,57 @@ describe('the refine ladder', () => {
     expect(refineAttackBonus(4, 999)).toBe(refineAttackBonus(4, MAX_REFINE));
     // An unmarked weapon level falls back to the gentlest ladder rather than throwing.
     expect(refineAttackBonus(undefined, 5)).toBe(refineAttackBonus(1, 5));
+  });
+});
+
+describe('the two halves of a refine, which land on opposite sides of defence', () => {
+  it('pays the flat rate the reference pays, per weapon level', () => {
+    // db/pre-re/refine.yml, the Weapon group: Bonus is 200/300/500/700 per 100
+    // at every step, so a +10 is ten of them.
+    expect([1, 2, 3, 4].map((lv) => refineFlatAtk(lv as 1 | 2 | 3 | 4, 10))).toEqual([
+      20, 30, 50, 70,
+    ]);
+    expect(refineFlatAtk(1, 0)).toBe(0);
+  });
+
+  it('opens the over-refine range only past the safe limit', () => {
+    // Safe limits 7/6/5/4. At the limit there is no range at all; one step past
+    // it opens the first band.
+    expect(overRefineMax(1, 7)).toBe(0);
+    expect(overRefineMax(1, 8)).toBe(3);
+    expect(overRefineMax(2, 6)).toBe(0);
+    expect(overRefineMax(2, 7)).toBe(5);
+    expect(overRefineMax(3, 5)).toBe(0);
+    expect(overRefineMax(3, 6)).toBe(8);
+    expect(overRefineMax(4, 4)).toBe(0);
+    expect(overRefineMax(4, 5)).toBe(13);
+  });
+
+  it('reaches the reference top-of-ladder values exactly', () => {
+    // The RandomBonus column at +10: 900/2000/4000/7800 per 100. The level-4
+    // figure is the one that was wrong (14 per step gives 84, not 78).
+    expect([1, 2, 3, 4].map((lv) => overRefineMax(lv as 1 | 2 | 3 | 4, 10))).toEqual([
+      9, 20, 40, 78,
+    ]);
+  });
+
+  it('rolls the over-refine as 1 to the maximum, never zero and never over', () => {
+    // The reference adds `rnd() % max + 1`, so the floor is 1, not 0: an
+    // over-refined weapon always gets something.
+    expect(overRefineBonus(4, 10, 0)).toBe(1);
+    expect(overRefineBonus(4, 10, 0.999999)).toBe(78);
+    for (const roll of [0, 0.25, 0.5, 0.75, 0.999999]) {
+      const v = overRefineBonus(3, 10, roll);
+      expect(v).toBeGreaterThanOrEqual(1);
+      expect(v).toBeLessThanOrEqual(40);
+    }
+    // No over-refine means no bonus at all, not a guaranteed 1.
+    expect(overRefineBonus(1, 7, 0.999999)).toBe(0);
+  });
+
+  it('keeps the combined figure an average, for a tooltip and nothing else', () => {
+    // Flat 70 plus the midpoint of a 1-to-78 range.
+    expect(refineAttackBonus(4, 10)).toBeCloseTo(70 + 39.5, 10);
+    expect(refineAttackBonus(1, 7)).toBe(refineFlatAtk(1, 7));
   });
 });
