@@ -55,6 +55,12 @@ export const VALE_CUP_BALL_MOB: MobTemplate = {
   minLevel: 1,
   maxLevel: 1,
   family: 'beast',
+  // Not a creature: the ball is an object the match pushes around, so it takes
+  // the formless, neutral classification the training dummy takes.
+  race: 'formless',
+  element: 'neutral',
+  elementLevel: 1,
+  size: 'small',
   hpBase: 1,
   hpPerLevel: 0,
   dmgBase: 0,

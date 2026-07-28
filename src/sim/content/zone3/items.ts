@@ -372,7 +372,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 85, max: 113, speed: 2.5, weaponType: 'sword', weaponLevel: 2 },
+    weapon: { min: 85, max: 113, speed: 2.5, weaponType: 'sword', weaponLevel: 2, element: 'fire' },
     stats: { str: 8, vit: 3 },
     sellValue: 2400,
     requiredClass: ['swordman', 'thief', 'archer'],
@@ -695,7 +695,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'epic',
-    weapon: { min: 52, max: 69, speed: 3.0, weaponType: 'rod', weaponLevel: 3 },
+    weapon: { min: 52, max: 69, speed: 3.0, weaponType: 'rod', weaponLevel: 3, element: 'shadow' },
     stats: { int: 12, luk: 6 },
     sellValue: 8000,
     requiredClass: ['mage', 'acolyte'],
@@ -849,7 +849,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'legendary',
-    weapon: { min: 63, max: 84, speed: 3.2, weaponType: 'rod', weaponLevel: 4 },
+    weapon: { min: 63, max: 84, speed: 3.2, weaponType: 'rod', weaponLevel: 4, element: 'shadow' },
     // A druid caster/healer staff by deliberate choice: its 17 points sit in
     // spirit (druid mana/healing) rather than agility, accepting that feral
     // wearers lose real value from the swap (bear-form AP scales on agility).
@@ -892,7 +892,14 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'legendary',
-    weapon: { min: 126, max: 168, speed: 2.8, weaponType: 'sword', weaponLevel: 4 },
+    weapon: {
+      min: 126,
+      max: 168,
+      speed: 2.8,
+      weaponType: 'sword',
+      weaponLevel: 4,
+      element: 'holy',
+    },
     // Rebalanced into a str/agi/sta hybrid within the fixed 44-pt legendary
     // mainhand budget: 15 agi makes it a viable archer ranged weapon (ranged AP +
     // crit) while it stays usable by its swordman/paladin owners.
@@ -1519,7 +1526,14 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // stat budget round(primaryStatBudget(26, epic, mainhand) = 18 x
     // TWOHAND_STAT_MULT) = 23 (the wyrmfang_greatblade total), dps on the
     // weaponDpsBudget(26) x TWOHAND_DPS_MULT curve (~16.68 at speed 3.6).
-    weapon: { min: 126, max: 168, speed: 3.6, weaponType: 'twohand_rod', weaponLevel: 4 },
+    weapon: {
+      min: 126,
+      max: 168,
+      speed: 3.6,
+      weaponType: 'twohand_rod',
+      weaponLevel: 4,
+      element: 'shadow',
+    },
     stats: { str: 9, agi: 7, vit: 7 },
     sellValue: 9000,
     requiredClass: FERAL,

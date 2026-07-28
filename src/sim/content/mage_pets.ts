@@ -13,6 +13,10 @@ export const MAGE_PET_MOBS: Record<string, MobTemplate> = {
     minLevel: 1,
     maxLevel: 60,
     family: 'elemental',
+    race: 'formless',
+    element: 'water',
+    elementLevel: 1,
+    size: 'medium',
     // ranged caster: modest health, steady Waterbolt damage from range
     hpBase: 40,
     hpPerLevel: 14,

@@ -15,6 +15,10 @@ export const YUMI_MOBS: Record<string, MobTemplate> = {
     minLevel: 1,
     maxLevel: 60,
     family: 'beast',
+    race: 'brute',
+    element: 'neutral',
+    elementLevel: 1,
+    size: 'small',
     hpPerLevel: 0, // 5000 flat regardless of level or format
     hpBase: 5000,
     dmgBase: 0,
