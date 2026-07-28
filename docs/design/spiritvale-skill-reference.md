@@ -256,6 +256,13 @@ Rune · Jewel · Scroll · Relic
 
 The ten match this game's ten exactly. The four sockets have no counterpart here.
 
+## Superseded in part
+
+The "SpiritVale gives shape but not maths" reading below was written before the
+community's engine-formula page was found. See
+`spiritvale-engine-formulas.md`: the combat math IS published, read out of the
+client, and the gap is now per-skill effect detail rather than the engine.
+
 ## What could not be confirmed
 
 - Whether the base tree is 50 points (planner) or 70 (a fan wiki). Recorded as
