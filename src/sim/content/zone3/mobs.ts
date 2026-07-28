@@ -75,6 +75,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
       school: 'physical',
     },
     loot: [
+      { itemId: 'card_ridge_stalker', chance: 0.03 },
       { copper: 60, chance: 1 },
       { itemId: 'ridge_stalker_pelt', chance: 0.6, questId: 'q_stalker_pelts' },
       { itemId: 'ridge_stalker_pelt', chance: 0.6, questId: 'q_stalker_cloaks' },
@@ -144,6 +145,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 10,
     loot: [
+      { itemId: 'card_deeprock_kobold', chance: 0.03 },
       { copper: 65, chance: 1 },
       { itemId: 'glowing_wax', chance: 0.5, questId: 'q_glowing_wax' },
       { itemId: 'tallow_candle', chance: 0.4 },
@@ -257,6 +259,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     aggroRadius: 11,
     concuss: { chance: 0.2, duration: 2, name: 'Concussive Blow' },
     loot: [
+      { itemId: 'card_thornpeak_ogre', chance: 0.03 },
       { copper: 75, chance: 1 },
       { itemId: 'ogre_toe_ring', chance: 0.35 },
       { itemId: 'cragprowl_belt', chance: 0.1 },
@@ -288,6 +291,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     // a tank holding the pack. The inverse of the Summoner's Silencing Shriek.
     disarm: { chance: 0.25, duration: 6, name: 'Disarming Smash', school: 'physical' },
     loot: [
+      { itemId: 'card_ogre_crusher', chance: 0.12 },
       { copper: 200, chance: 1 },
       { itemId: 'ogre_toe_ring', chance: 0.5 },
       { itemId: 'revenantstep_treads', chance: 0.06 },
@@ -538,6 +542,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     aggroRadius: 11,
     enervate: { chance: 0.3, vit: 14, duration: 12, name: 'Soul Siphon', school: 'shadow' },
     loot: [
+      { itemId: 'card_boneclad_revenant', chance: 0.03 },
       { copper: 100, chance: 1 },
       { itemId: 'bone_fragments', chance: 0.6 },
       { itemId: 'runed_bone_shard', chance: 0.7, questId: 'q_nythraxis_restless_dead' },
@@ -808,6 +813,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     knockback: { chance: 0.25, distance: 6, name: 'Crushing Sweep' },
     stoneskin: { amount: 260, every: 14, duration: 8, name: 'Bone Carapace', school: 'shadow' },
     loot: [
+      { itemId: 'card_marrowlord_varkas', chance: 0.12 },
       { copper: 650, chance: 1 },
       { itemId: 'bone_fragments', chance: 1 },
       { itemId: 'marrowlord_boneboots', chance: 0.3 },
@@ -886,6 +892,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     },
     enrage: { belowHpPct: 0.3, dmgMult: 1.5, hasteMult: 1.3 },
     loot: [
+      { itemId: 'card_voskar_emberwing', chance: 0.12 },
       { copper: 700, chance: 1 },
       { itemId: 'emberwing_cinderscale', chance: 1 },
       { itemId: 'emberwing_legguards', chance: 0.25, rollGroup: 'voskar_emberwing_chase' },
@@ -1027,6 +1034,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     // rate is ~22% (0.68 x 0.32) and a single kill never hands out both a glove and a belt.
     // Keep the glove entries first if this ordering skew is ever retuned.
     loot: [
+      { itemId: 'card_thunzharr_waking_peak', chance: 0.3 },
       { itemId: 'inert_storm_shard', chance: 1 },
       { itemId: 'crownforged_gauntlets', chance: 0.08, rollGroup: 'thunzharr_t2' },
       { itemId: 'nighttalon_grips', chance: 0.08, rollGroup: 'thunzharr_t2' },

@@ -37,6 +37,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 8.5,
     aggroRadius: 11,
     loot: [
+      { itemId: 'card_mire_prowler', chance: 0.03 },
       { copper: 30, chance: 1 },
       { itemId: 'mire_prowler_pelt', chance: 0.6, questId: 'q_prowler_pelts' },
       { itemId: 'soggy_moccasin', chance: 0.3 },
@@ -215,6 +216,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     // against the victim bite 50% deeper for a few seconds.
     critVuln: { chance: 0.3, critDamage: 0.5, duration: 8, name: 'Exposed Wound' },
     loot: [
+      { itemId: 'card_mire_widow', chance: 0.03 },
       { copper: 38, chance: 1 },
       { itemId: 'widow_venom_sac', chance: 0.65, questId: 'q_widows' },
       { itemId: 'spider_leg', chance: 0.4 },
@@ -285,6 +287,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
     // their constitution (Stamina) and shrinking their health pool.
     plague: { chance: 0.3, vit: 3, duration: 12, name: 'Bog Rot' },
     loot: [
+      { itemId: 'card_drowned_dead', chance: 0.03 },
       { copper: 42, chance: 1 },
       { itemId: 'bone_fragments', chance: 0.5 },
       { itemId: 'cracked_fetish', chance: 0.3 },
@@ -381,6 +384,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
       school: 'shadow',
     },
     loot: [
+      { itemId: 'card_gravecaller_cultist', chance: 0.03 },
       { copper: 55, chance: 1 },
       { itemId: 'linen_scrap', chance: 0.3 },
       { itemId: 'tallow_candle', chance: 0.3 },
@@ -597,6 +601,7 @@ export const ZONE2_MOBS: Record<string, MobTemplate> = {
       school: 'nature',
     },
     loot: [
+      { itemId: 'card_bog_bloat', chance: 0.03 },
       { copper: 40, chance: 1 },
       { itemId: 'tangled_weed', chance: 0.5 },
     ],

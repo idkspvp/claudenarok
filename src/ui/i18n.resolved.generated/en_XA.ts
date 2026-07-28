@@ -6361,6 +6361,7 @@ export const en_XA: EnTranslations = {
       "junk": "[Ĵúñķ]",
       "food": "[Ƒóóð]",
       "drink": "[Ðŕíñķ]",
+      "card": "[Çáŕð]",
       "tool": "[Ţóóļ]",
       "potion": "[Þóţíóñ]",
       "elixir": "[Éļíẋíŕ]",
@@ -8940,6 +8941,93 @@ export const en_XA: EnTranslations = {
       },
       "resonant_timber": {
         "name": "[Ŕéšóñáñţ Ţíɱƀéŕ]"
+      },
+      "card_forest_wolf": {
+        "name": "[Ƒóŕéšţ Ŵóļƒ Çáŕð]"
+      },
+      "card_wild_boar": {
+        "name": "[Ŵíļð Ɓóáŕ Çáŕð]"
+      },
+      "card_mogger": {
+        "name": "[Ɱóĝĝéŕ Çáŕð]"
+      },
+      "card_tunnel_rat": {
+        "name": "[Ðééþŕóçķ Ðíĝĝéŕ Çáŕð]"
+      },
+      "card_vale_bandit": {
+        "name": "[Ʋáļé Ɓáñðíţ Çáŕð]"
+      },
+      "card_gravecaller_cultist": {
+        "name": "[Ĝŕáʋéçáļļéŕ Çúļţíšţ Çáŕð]"
+      },
+      "card_restless_bones": {
+        "name": "[Ŕéšţļéšš Ɓóñéš Çáŕð]"
+      },
+      "card_webwood_spider": {
+        "name": "[Šáƀļéŵéƀ Ļúŕķéŕ Çáŕð]"
+      },
+      "card_thornpeak_ogre": {
+        "name": "[Ţĥóŕñþéáķ Óĝŕé Çáŕð]"
+      },
+      "card_deeprock_kobold": {
+        "name": "[Ðééþŕóçķ Ţúññéļéŕ Çáŕð]"
+      },
+      "card_raised_bonewalker": {
+        "name": "[Ŕáíšéð Ɓóñéŵáļķéŕ Çáŕð]"
+      },
+      "card_mire_prowler": {
+        "name": "[Ɱíŕé Þŕóŵļéŕ Çáŕð]"
+      },
+      "card_drowned_dead": {
+        "name": "[Ðŕóŵñéð Ðéáð Çáŕð]"
+      },
+      "card_emberkin": {
+        "name": "[Éɱƀéŕķíñ Çáŕð]"
+      },
+      "card_gloomshade": {
+        "name": "[Ĝļóóɱšĥáðé Çáŕð]"
+      },
+      "card_bog_bloat": {
+        "name": "[Ɓóĝ Ɓļóáţ Çáŕð]"
+      },
+      "card_ridge_stalker": {
+        "name": "[Ŕíðĝé Šţáļķéŕ Çáŕð]"
+      },
+      "card_mudfin_murloc": {
+        "name": "[Ɱúðƒíñ Šķúļķéŕ Çáŕð]"
+      },
+      "card_boneclad_revenant": {
+        "name": "[Ɓóñéçļáð Ŕéʋéñáñţ Çáŕð]"
+      },
+      "card_warlock_imp": {
+        "name": "[Ƒíŕé Ðéɱóñ Çáŕð]"
+      },
+      "card_mire_widow": {
+        "name": "[Ɱíŕéƒéñ Ŵíðóŵ Çáŕð]"
+      },
+      "card_ogre_crusher": {
+        "name": "[Ţĥóŕñþéáķ Çŕúšĥéŕ Çáŕð]"
+      },
+      "card_moonspawn": {
+        "name": "[Ɱóóñšþáŵñ Çáŕð]"
+      },
+      "card_korzul_the_gravewyrm": {
+        "name": "[Ķóŕžúļ Çáŕð]"
+      },
+      "card_voskar_emberwing": {
+        "name": "[Ʋóšķáŕ Çáŕð]"
+      },
+      "card_ysolei": {
+        "name": "[Ýšóļéí Çáŕð]"
+      },
+      "card_marrowlord_varkas": {
+        "name": "[Ɱáŕŕóŵļóŕð Ʋáŕķáš Çáŕð]"
+      },
+      "card_thunzharr_waking_peak": {
+        "name": "[Ţĥúñžĥáŕŕ Çáŕð]"
+      },
+      "card_nythraxis": {
+        "name": "[Ñýţĥŕáẋíš Çáŕð]"
       },
       "conjured_water4": {
         "name": "[Çóñĵúŕéð Šþŕíñĝŵáţéŕ]"

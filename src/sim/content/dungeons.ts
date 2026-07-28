@@ -444,7 +444,7 @@ export const DUNGEON_MOBS: Record<string, MobTemplate> = {
       name: 'Onrush',
       school: 'physical',
     },
-    loot: [], // summoned add — nothing to loot
+    loot: [{ itemId: 'card_raised_bonewalker', chance: 0.03 }], // summoned add — nothing to loot
     scale: 1.0,
     color: 0xc8cfc8,
   },
@@ -576,6 +576,7 @@ export const DUNGEON_MOBS: Record<string, MobTemplate> = {
     },
     enrage: { belowHpPct: 0.3, dmgMult: 1.5, hasteMult: 1.3 },
     loot: [
+      { itemId: 'card_korzul_the_gravewyrm', chance: 0.3 },
       { copper: 50000, chance: 1 },
       { itemId: 'boneplate_vest', chance: 0.34, rollGroup: 'korzul_guaranteed_uncommon' },
       { itemId: 'revenant_silk_robe', chance: 0.33, rollGroup: 'korzul_guaranteed_uncommon' },
@@ -760,6 +761,7 @@ export const DUNGEON_MOBS: Record<string, MobTemplate> = {
     // group) and sums to exactly 1.00. The offhand/two-hander epics ride the
     // existing four groups, one per group, with the set-piece chances rebalanced.
     loot: [
+      { itemId: 'card_nythraxis', chance: 0.3 },
       { copper: 150000, chance: 1 },
       { itemId: 'deathless_heartwood', chance: 0.03, rollGroup: 'nythraxis_drop_1' },
       { itemId: 'bonewrought_greatsword', chance: 0.13, rollGroup: 'nythraxis_drop_1' },

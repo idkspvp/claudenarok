@@ -1,6 +1,8 @@
+import { aggregateCards, type CardDef } from './cards';
 import { critRateFrom } from './combat/crit';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
+import { CARDS } from './content/cards';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
@@ -357,6 +359,7 @@ export function recalcPlayerStats(
   let bonusHitRating = 0;
   let bonusPvpOffenseRating = 0;
   let bonusPvpDefenseRating = 0;
+  const wornCards: CardDef[] = [];
   for (const slot of ALL_EQUIP_SLOTS) {
     const itemId = equipment[slot];
     if (!itemId) continue;
@@ -399,7 +402,27 @@ export function recalcPlayerStats(
       s.luk += enchantStats.luk ?? 0;
       s.armor += enchantStats.armor ?? 0;
     }
+    // Cards socketed into THIS copy. Same shape as the enchant fold above, and
+    // deliberately after it, so a card stacks on top of an enchant rather than
+    // competing with it. Duplicates stack, which is why a player hunts four of
+    // the same card (src/sim/cards.ts).
+    for (const cardId of equipmentInstance?.[slot]?.cards ?? []) {
+      const card = CARDS[cardId];
+      if (!card) continue;
+      wornCards.push(card);
+      if (!card.effect.stats) continue;
+      s.str += card.effect.stats.str ?? 0;
+      s.agi += card.effect.stats.agi ?? 0;
+      s.vit += card.effect.stats.vit ?? 0;
+      s.int += card.effect.stats.int ?? 0;
+      s.dex += card.effect.stats.dex ?? 0;
+      s.luk += card.effect.stats.luk ?? 0;
+      s.armor += card.effect.stats.armor ?? 0;
+    }
   }
+  // One aggregate for the whole worn set, computed here so the damage path never
+  // walks the equipment: the same rule every other player modifier follows.
+  e.cardBonuses = wornCards.length ? aggregateCards(wornCards) : undefined;
   // Item-set bonuses from equipped pieces. Flat primary stats join the gear
   // totals so they feed every derivation below; AP/crit/pushback fold in at
   // their own steps (bonusAp, critChance, castPushbackReduction, knockbackResistance).

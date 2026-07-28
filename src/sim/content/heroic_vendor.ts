@@ -36,6 +36,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
+    cardSlots: 3,
     requiredLevel: 20,
     stats: { str: 3, vit: 1 },
     hitRating: JEWELRY_RATING, // plate melee: Hit answers the Heroic +3 miss
@@ -58,6 +59,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
+    cardSlots: 2,
     requiredLevel: 20,
     stats: { agi: 3, vit: 1 },
     critRating: JEWELRY_RATING, // agi dps: crit throughput
@@ -69,6 +71,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
+    cardSlots: 1,
     requiredLevel: 20,
     stats: { vit: 2, str: 2 },
     hitRating: JEWELRY_RATING, // tank/melee: Hit
@@ -80,6 +83,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
+    cardSlots: 3,
     requiredLevel: 20,
     stats: { luk: 2, int: 2 },
     hasteRating: JEWELRY_RATING, // healer-leaning: haste
@@ -91,6 +95,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'epic',
+    cardSlots: 2,
     requiredLevel: 20,
     stats: { int: 2, luk: 2 },
     hasteRating: JEWELRY_RATING, // caster/healer: uptime
@@ -102,6 +107,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'face',
     quality: 'epic',
+    cardSlots: 1,
     requiredLevel: 20,
     stats: { agi: 2, vit: 2 },
     hasteRating: JEWELRY_RATING, // agi dps: uptime
@@ -135,6 +141,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'face',
     quality: 'epic',
+    cardSlots: 1,
     requiredLevel: 20,
     stats: { str: 2, vit: 2 },
     critRating: JEWELRY_RATING, // melee throughput

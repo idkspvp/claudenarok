@@ -1,6 +1,7 @@
 // Core shared types for the simulation. The sim layer has zero DOM/rendering deps.
 
 import type { ChatSenderFlair, StreamerLinks } from './account_flair';
+import type { AggregatedCards } from './cards';
 import type { Element, ElementLevel, Race, Size } from './combat/elements';
 import type { GatheringProfessionId } from './content/professions';
 import type { LockSession, LootTier, PickAction, StepResult, VisibleCell } from './lockpick';
@@ -787,13 +788,21 @@ type ItemKind =
   | 'tool'
   | 'potion'
   | 'elixir'
-  | 'bag';
+  | 'bag'
+  // A card: an item whose whole purpose is to go INTO another item
+  // (src/sim/cards.ts). Its own kind so the inventory, the market and the
+  // socketing path can all tell one at a glance.
+  | 'card';
 
 interface BaseItemDef {
   id: string;
   name: string;
   slot?: ItemSlot;
   weapon?: WeaponInfo;
+  /** How many card sockets this piece carries, 0 to MAX_CARD_SLOTS. About a
+   *  third of the reference game's equipment has at least one, and what goes in
+   *  them is its endgame (src/sim/cards.ts). */
+  cardSlots?: number;
   stats?: Partial<CoreStats>;
   // Spell Power affix (caster gear): flat Spell Power, summed in recalcPlayerStats.
   // Kept off `Stats` because Spell Power is a derived combat rating (like attackPower),
@@ -1033,6 +1042,10 @@ export type ItemDef =
 export interface ItemInstancePayload {
   /** Player name that signed/crafted this specific copy, if any. */
   signer?: string;
+  /** Card ids socketed into THIS copy, in socket order. Per-copy rather than
+   *  per-item because that is the whole point: two of the same sword differ by
+   *  what is in them. Never longer than the item's `cardSlots`. */
+  cards?: string[];
   /** Remaining charges for a per-effect-limited item, keyed by effect id. */
   charges?: Record<string, number>;
   /** Quality/stat values baked into this specific copy at creation time.
@@ -1082,6 +1095,9 @@ export interface InvSlot {
 export function cloneItemInstancePayload(src: ItemInstancePayload): ItemInstancePayload {
   const instance: ItemInstancePayload = { ...src };
   if (src.charges) instance.charges = { ...src.charges };
+  // The socketed set is per-copy, so a shared array would let socketing one
+  // sword fill every other copy of it.
+  if (src.cards) instance.cards = [...src.cards];
   if (src.rolled)
     instance.rolled = {
       ...src.rolled,
@@ -2910,6 +2926,10 @@ export interface Entity {
   // work server-side and leave the client unable to show why a hit landed for
   // what it did. Defaults are the even trade (neutral / medium), so an entity
   // whose template has not been authored yet fights exactly as it does today.
+  /** Everything socketed across the worn set, aggregated ONCE in
+   *  recalcPlayerStats. The damage path reads this rather than walking the
+   *  equipment, which is the same rule every other player modifier follows. */
+  cardBonuses?: AggregatedCards;
   race?: Race;
   element?: Element;
   elementLevel?: ElementLevel;

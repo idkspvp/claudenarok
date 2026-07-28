@@ -300,7 +300,7 @@ export const TEMPLE_DUNGEON_MOBS: Record<string, MobTemplate> = {
     armorPerLevel: 10,
     moveSpeed: 8,
     aggroRadius: 12,
-    loot: [], // summoned by Ysolei — nothing to loot
+    loot: [{ itemId: 'card_moonspawn', chance: 0.03 }], // summoned by Ysolei — nothing to loot
     scale: 0.9,
     color: 0xcfe0ff,
   },
@@ -332,6 +332,7 @@ export const TEMPLE_DUNGEON_MOBS: Record<string, MobTemplate> = {
     summonAdds: { mobId: 'moonspawn', count: 2, atHpPct: [0.6, 0.3] },
     enrage: { belowHpPct: 0.3, dmgMult: 1.4, hasteMult: 1.3 },
     loot: [
+      { itemId: 'card_ysolei', chance: 0.3 },
       { copper: 6000, chance: 1 },
       { itemId: 'ysols_pearl_greaves', chance: 0.5 },
       // exclusive "one of three" blue chests (weights sum to 1.0)
@@ -511,6 +512,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'rare',
+    cardSlots: 1,
     stats: { armor: 2 },
     sellValue: 1400,
     requiredClass: MAG,
@@ -532,6 +534,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
+    cardSlots: 1,
     weapon: { min: 94, max: 125, speed: 2.6, weaponType: 'mace', weaponLevel: 3 },
     stats: { str: 8, vit: 4 },
     sellValue: 2200,
@@ -577,6 +580,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'rare',
+    cardSlots: 1,
     stats: { armor: 4 },
     sellValue: 2400,
     requiredClass: MAG,
@@ -599,6 +603,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'rare',
+    cardSlots: 1,
     stats: { armor: 3 },
     sellValue: 2000,
   },
@@ -620,6 +625,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'uncommon',
+    cardSlots: 1,
     // Drowned Votaries (level 16) -> item level 17, feet budget 4.
     stats: { armor: 1 },
     sellValue: 430,
@@ -632,6 +638,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     slot: 'offhand',
     shield: true,
     quality: 'rare',
+    cardSlots: 1,
     // Sethrael Palecoil (level 16 rare) -> item level 19, offhand budget 8.
     // Shield armor is ~2x a same-tier mail chest (the buckler/wallshield rule,
     // see bonewrought_bulwark); blockValue 12 sits between the wallshield (14)

@@ -27,6 +27,7 @@
 // `src/sim`-pure: no DOM/Three, no Math.random/Date.now; all randomness is the shared
 // `ctx.rng` stream, drawn in the exact pre-move positions.
 
+import { cardAttackMultiplier } from '../cards';
 import { ITEMS, isArenaPos, MOBS } from '../data';
 import { weaponHand } from '../equipment_rules';
 import { TWOHAND_DPS_MULT } from '../item_budget';
@@ -584,8 +585,11 @@ export function meleeSwing(
   // takes exactly what it took before the chart existed. They apply at DIFFERENT
   // points: size scales the weapon's contribution only, element scales the whole
   // hit after status ATK has joined it.
+  // A card that endows the weapon overrides what the weapon itself is made of,
+  // which is exactly what makes an attribute card the top of the ladder.
+  const cards = attacker.cardBonuses;
   const attribute = attributeMultipliers({
-    attackElement: weapon.element,
+    attackElement: cards?.weaponElement ?? weapon.element,
     weaponType: weapon.weaponType,
     defenderElement: target.element,
     defenderElementLevel: target.elementLevel,
@@ -598,6 +602,16 @@ export function meleeSwing(
   let dmg = (weaponPart + statusAttackContribution(ctx, attacker, apSwingSpeed)) * mult;
   dmg += bonus + imbueBonus;
   dmg *= attribute.element;
+  // Cards that hunt a race, an attribute or a size. Multiplicative WITH the
+  // chart rather than folded into it, so a card that adds a fifth against the
+  // undead adds a fifth of whatever the chart already decided.
+  if (cards) {
+    dmg *= cardAttackMultiplier(cards, {
+      race: target.race,
+      element: target.element,
+      size: target.size,
+    });
+  }
   // A pre-renewal critical ignores the target's defence OUTRIGHT, both layers
   // (`attack_ignores_def` returns true for any critical under `#ifndef
   // RENEWAL`). Together with taking the top of the range, that is the whole

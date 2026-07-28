@@ -227,6 +227,209 @@
       "confidence": "high"
     },
     {
+      "itemId": "card_bog_bloat",
+      "name": "Bog Bloat Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_boneclad_revenant",
+      "name": "Boneclad Revenant Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_deeprock_kobold",
+      "name": "Deeprock Tunneler Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_drowned_dead",
+      "name": "Drowned Dead Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_emberkin",
+      "name": "Emberkin Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_forest_wolf",
+      "name": "Forest Wolf Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_gloomshade",
+      "name": "Gloomshade Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_gravecaller_cultist",
+      "name": "Gravecaller Cultist Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_korzul_the_gravewyrm",
+      "name": "Korzul Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_marrowlord_varkas",
+      "name": "Marrowlord Varkas Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_mire_prowler",
+      "name": "Mire Prowler Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_mire_widow",
+      "name": "Mirefen Widow Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_mogger",
+      "name": "Mogger Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_moonspawn",
+      "name": "Moonspawn Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_mudfin_murloc",
+      "name": "Mudfin Skulker Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_nythraxis",
+      "name": "Nythraxis Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_ogre_crusher",
+      "name": "Thornpeak Crusher Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_raised_bonewalker",
+      "name": "Raised Bonewalker Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_restless_bones",
+      "name": "Restless Bones Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_ridge_stalker",
+      "name": "Ridge Stalker Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_thornpeak_ogre",
+      "name": "Thornpeak Ogre Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_thunzharr_waking_peak",
+      "name": "Thunzharr Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_tunnel_rat",
+      "name": "Deeprock Digger Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_vale_bandit",
+      "name": "Vale Bandit Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_voskar_emberwing",
+      "name": "Voskar Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_warlock_imp",
+      "name": "Fire Demon Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_webwood_spider",
+      "name": "Sableweb Lurker Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_wild_boar",
+      "name": "Wild Boar Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_ysolei",
+      "name": "Ysolei Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
       "itemId": "chipped_tusk",
       "name": "Chipped Tusk",
       "sourcePack": "hunting",
@@ -369,20 +572,6 @@
       "confidence": "high"
     },
     {
-      "itemId": "crypt_keystone",
-      "name": "Crypt Keystone",
-      "sourcePack": "generic100b",
-      "sourceFile": "47.png",
-      "confidence": "medium"
-    },
-    {
-      "itemId": "crypt_ritual_circle",
-      "name": "Ritual Circle",
-      "sourcePack": "generic100a",
-      "sourceFile": "skill 41.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "cryptbone_greaves",
       "name": "Cryptbone Greaves",
       "sourcePack": "greaves",
@@ -395,6 +584,20 @@
       "sourcePack": "helmets",
       "sourceFile": "32.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "crypt_keystone",
+      "name": "Crypt Keystone",
+      "sourcePack": "generic100b",
+      "sourceFile": "47.png",
+      "confidence": "medium"
+    },
+    {
+      "itemId": "crypt_ritual_circle",
+      "name": "Ritual Circle",
+      "sourcePack": "generic100a",
+      "sourceFile": "skill 41.png",
+      "confidence": "high"
     },
     {
       "itemId": "cryptstalker_jerkin",
@@ -439,17 +642,17 @@
       "confidence": "high"
     },
     {
-      "itemId": "deathlord_warplate",
-      "name": "Barrowlord Warplate",
-      "sourcePack": "armor",
-      "sourceFile": "33.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "deathlords_dread_visage",
       "name": "Barrowlord's Dread Visage",
       "sourcePack": "helmets",
       "sourceFile": "24.png",
+      "confidence": "high"
+    },
+    {
+      "itemId": "deathlord_warplate",
+      "name": "Barrowlord Warplate",
+      "sourcePack": "armor",
+      "sourceFile": "33.png",
       "confidence": "high"
     },
     {
@@ -464,6 +667,13 @@
       "name": "Drogmar's Warboots",
       "sourcePack": "boots",
       "sourceFile": "15.png",
+      "confidence": "medium"
+    },
+    {
+      "itemId": "drownedguard_breastplate",
+      "name": "Drownedguard Breastplate",
+      "sourcePack": "equipment",
+      "sourceFile": "32.png",
       "confidence": "medium"
     },
     {
@@ -485,13 +695,6 @@
       "name": "Drowned Prayer Sandals",
       "sourcePack": "boots",
       "sourceFile": "13.png",
-      "confidence": "medium"
-    },
-    {
-      "itemId": "drownedguard_breastplate",
-      "name": "Drownedguard Breastplate",
-      "sourcePack": "equipment",
-      "sourceFile": "32.png",
       "confidence": "medium"
     },
     {
@@ -587,13 +790,6 @@
       "confidence": "high"
     },
     {
-      "itemId": "fen_muster_order",
-      "name": "Fenbridge Muster Order",
-      "sourcePack": "generic100b",
-      "sourceFile": "30.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "fenbridge_rye",
       "name": "Fenbridge Rye Loaf",
       "sourcePack": "cooking",
@@ -606,6 +802,13 @@
       "sourcePack": "armor",
       "sourceFile": "45.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "fen_muster_order",
+      "name": "Fenbridge Muster Order",
+      "sourcePack": "generic100b",
+      "sourceFile": "30.png",
+      "confidence": "high"
     },
     {
       "itemId": "fenwalker_boots",
@@ -695,6 +898,13 @@
       "license": "Claudenarok Online original art (project-owned, created for this game)"
     },
     {
+      "itemId": "gravecaller_sigil",
+      "name": "Gravecaller's Sigil",
+      "sourcePack": "generic100c",
+      "sourceFile": "skill 81.png",
+      "confidence": "high"
+    },
+    {
       "itemId": "grave_captain_voss",
       "name": "Grave of Royal Assassin Voss",
       "sourcePack": "generic100c",
@@ -709,24 +919,17 @@
       "confidence": "medium"
     },
     {
-      "itemId": "grave_sir_aldren",
-      "name": "Grave of Captain Aldren",
-      "sourcePack": "generic100c",
-      "sourceFile": "skill 78.png",
-      "confidence": "medium"
-    },
-    {
-      "itemId": "gravecaller_sigil",
-      "name": "Gravecaller's Sigil",
-      "sourcePack": "generic100c",
-      "sourceFile": "skill 81.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "gravepath_treads",
       "name": "Gravepath Treads",
       "sourcePack": "boots",
       "sourceFile": "37.png",
+      "confidence": "medium"
+    },
+    {
+      "itemId": "grave_sir_aldren",
+      "name": "Grave of Captain Aldren",
+      "sourcePack": "generic100c",
+      "sourceFile": "skill 78.png",
       "confidence": "medium"
     },
     {
@@ -893,21 +1096,6 @@
       "confidence": "medium"
     },
     {
-      "itemId": "iron_mining_pick",
-      "name": "Iron Mining Pick",
-      "sourcePack": "farming",
-      "sourceFile": "8.png",
-      "confidence": "high"
-    },
-    {
-      "itemId": "iron_ore",
-      "name": "Iron Ore",
-      "sourcePack": "woc_professions_art",
-      "sourceFile": "batch-6/masters/iron_ore.png (accepted v1)",
-      "confidence": "high",
-      "license": "Claudenarok Online original art (project-owned, created for this game)"
-    },
-    {
       "itemId": "ironbark_axe",
       "name": "Ironbark Axe",
       "sourcePack": "farming",
@@ -919,6 +1107,21 @@
       "name": "Ironbark Log",
       "sourcePack": "woc_professions_art",
       "sourceFile": "batch-7/masters/ironbark_log.png (accepted v1)",
+      "confidence": "high",
+      "license": "Claudenarok Online original art (project-owned, created for this game)"
+    },
+    {
+      "itemId": "iron_mining_pick",
+      "name": "Iron Mining Pick",
+      "sourcePack": "farming",
+      "sourceFile": "8.png",
+      "confidence": "high"
+    },
+    {
+      "itemId": "iron_ore",
+      "name": "Iron Ore",
+      "sourcePack": "woc_professions_art",
+      "sourceFile": "batch-6/masters/iron_ore.png (accepted v1)",
       "confidence": "high",
       "license": "Claudenarok Online original art (project-owned, created for this game)"
     },
@@ -980,14 +1183,6 @@
       "license": "Claudenarok Online original art (project-owned, created for this game)"
     },
     {
-      "itemId": "silkspun_satchel",
-      "name": "Silkspun Satchel",
-      "sourcePack": "woc_bags",
-      "sourceFile": "WoC_Bag_03.png (hue-shifted silk recolor of the linen_pouch conversion; dedicated art welcome)",
-      "confidence": "high",
-      "license": "Claudenarok Online original art (project-owned, created for this game)"
-    },
-    {
       "itemId": "linen_scrap",
       "name": "Linen Scrap",
       "sourcePack": "generic100b",
@@ -1030,18 +1225,18 @@
       "confidence": "high"
     },
     {
-      "itemId": "marsh_mint_tea",
-      "name": "Marsh Mint Tea",
-      "sourcePack": "generic100b",
-      "sourceFile": "82.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "marshcloth_robe",
       "name": "Marshcloth Robe",
       "sourcePack": "armor",
       "sourceFile": "8.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "marsh_mint_tea",
+      "name": "Marsh Mint Tea",
+      "sourcePack": "generic100b",
+      "sourceFile": "82.png",
+      "confidence": "high"
     },
     {
       "itemId": "marshstrider_boots",
@@ -1072,18 +1267,18 @@
       "confidence": "high"
     },
     {
-      "itemId": "mire_prowler_pelt",
-      "name": "Mire Prowler Pelt",
-      "sourcePack": "hunting",
-      "sourceFile": "36.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "mirejaw_scale_vest",
       "name": "Mirejaw Scale Vest",
       "sourcePack": "armor",
       "sourceFile": "10.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "mire_prowler_pelt",
+      "name": "Mire Prowler Pelt",
+      "sourcePack": "hunting",
+      "sourceFile": "36.png",
+      "confidence": "high"
     },
     {
       "itemId": "mistcallers_duffel",
@@ -1290,18 +1485,18 @@
       "confidence": "high"
     },
     {
-      "itemId": "pale_pearl",
-      "name": "Pale Pearl",
-      "sourcePack": "gems",
-      "sourceFile": "30.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "palecoil_heartscale",
       "name": "Sethrael's Heartscale",
       "sourcePack": "gems",
       "sourceFile": "86.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "pale_pearl",
+      "name": "Pale Pearl",
+      "sourcePack": "gems",
+      "sourceFile": "30.png",
+      "confidence": "high"
     },
     {
       "itemId": "peakwool_robe",
@@ -1544,17 +1739,17 @@
       "confidence": "high"
     },
     {
-      "itemId": "roast_mountain_goat",
-      "name": "Roast Mountain Goat",
-      "sourcePack": "hunting",
-      "sourceFile": "16.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "roasted_boar",
       "name": "Roasted Boar Meat",
       "sourcePack": "cooking",
       "sourceFile": "30.png",
+      "confidence": "high"
+    },
+    {
+      "itemId": "roast_mountain_goat",
+      "name": "Roast Mountain Goat",
+      "sourcePack": "hunting",
+      "sourceFile": "16.png",
       "confidence": "high"
     },
     {
@@ -1634,6 +1829,14 @@
       "sourcePack": "belts",
       "sourceFile": "46.png",
       "confidence": "medium"
+    },
+    {
+      "itemId": "silkspun_satchel",
+      "name": "Silkspun Satchel",
+      "sourcePack": "woc_bags",
+      "sourceFile": "WoC_Bag_03.png (hue-shifted silk recolor of the linen_pouch conversion; dedicated art welcome)",
+      "confidence": "high",
+      "license": "Claudenarok Online original art (project-owned, created for this game)"
     },
     {
       "itemId": "silverleaf_herb",
@@ -1774,13 +1977,6 @@
       "confidence": "high"
     },
     {
-      "itemId": "storm_core",
-      "name": "Storm Core",
-      "sourcePack": "gems",
-      "sourceFile": "92.png",
-      "confidence": "high"
-    },
-    {
       "itemId": "stormcallers_crown",
       "name": "Galecall Crown",
       "sourcePack": "helmets",
@@ -1799,6 +1995,13 @@
       "name": "Stormcaller's Waistguard",
       "sourcePack": "belts",
       "sourceFile": "27.png",
+      "confidence": "high"
+    },
+    {
+      "itemId": "storm_core",
+      "name": "Storm Core",
+      "sourcePack": "gems",
+      "sourceFile": "92.png",
       "confidence": "high"
     },
     {

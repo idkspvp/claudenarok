@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MOBS } from '../src/sim/data';
+import { ITEMS, MOBS } from '../src/sim/data';
 import { EASTBROOK_BUILDINGS_BY_ID, localToWorld } from '../src/sim/eastbrook_layout';
 import { respawnMob } from '../src/sim/mob/lifecycle';
 import { resetEvadingMob } from '../src/sim/mob/locomotion';
@@ -383,10 +383,14 @@ describe('world boss personal loot', () => {
       killWith(sim, boss, pids);
       const items = boss.loot?.items ?? [];
       for (const pid of pids) {
-        // The guaranteed Inert Storm Shard is a trophy, not a gear drop; every other
-        // personal slot is a Tier-2 set piece from a roll group.
+        // The guaranteed Inert Storm Shard is a trophy, not a gear drop, and a
+        // card is a card: it goes INTO gear rather than being a piece of it, so
+        // it is outside the one-set-piece cap for the same reason the trophy is.
         const gear = items.filter(
-          (s) => (s.personalFor ?? []).includes(pid) && s.itemId !== 'inert_storm_shard',
+          (s) =>
+            (s.personalFor ?? []).includes(pid) &&
+            s.itemId !== 'inert_storm_shard' &&
+            ITEMS[s.itemId]?.kind !== 'card',
         );
         expect(gear.length).toBeLessThanOrEqual(1);
         if (gear.length === 1) anyGearDropped = true;

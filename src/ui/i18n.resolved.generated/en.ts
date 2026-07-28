@@ -6361,6 +6361,7 @@ export const en: EnTranslations = {
       "junk": "Junk",
       "food": "Food",
       "drink": "Drink",
+      "card": "Card",
       "tool": "Tool",
       "potion": "Potion",
       "elixir": "Elixir",
@@ -8940,6 +8941,93 @@ export const en: EnTranslations = {
       },
       "resonant_timber": {
         "name": "Resonant Timber"
+      },
+      "card_forest_wolf": {
+        "name": "Forest Wolf Card"
+      },
+      "card_wild_boar": {
+        "name": "Wild Boar Card"
+      },
+      "card_mogger": {
+        "name": "Mogger Card"
+      },
+      "card_tunnel_rat": {
+        "name": "Deeprock Digger Card"
+      },
+      "card_vale_bandit": {
+        "name": "Vale Bandit Card"
+      },
+      "card_gravecaller_cultist": {
+        "name": "Gravecaller Cultist Card"
+      },
+      "card_restless_bones": {
+        "name": "Restless Bones Card"
+      },
+      "card_webwood_spider": {
+        "name": "Sableweb Lurker Card"
+      },
+      "card_thornpeak_ogre": {
+        "name": "Thornpeak Ogre Card"
+      },
+      "card_deeprock_kobold": {
+        "name": "Deeprock Tunneler Card"
+      },
+      "card_raised_bonewalker": {
+        "name": "Raised Bonewalker Card"
+      },
+      "card_mire_prowler": {
+        "name": "Mire Prowler Card"
+      },
+      "card_drowned_dead": {
+        "name": "Drowned Dead Card"
+      },
+      "card_emberkin": {
+        "name": "Emberkin Card"
+      },
+      "card_gloomshade": {
+        "name": "Gloomshade Card"
+      },
+      "card_bog_bloat": {
+        "name": "Bog Bloat Card"
+      },
+      "card_ridge_stalker": {
+        "name": "Ridge Stalker Card"
+      },
+      "card_mudfin_murloc": {
+        "name": "Mudfin Skulker Card"
+      },
+      "card_boneclad_revenant": {
+        "name": "Boneclad Revenant Card"
+      },
+      "card_warlock_imp": {
+        "name": "Fire Demon Card"
+      },
+      "card_mire_widow": {
+        "name": "Mirefen Widow Card"
+      },
+      "card_ogre_crusher": {
+        "name": "Thornpeak Crusher Card"
+      },
+      "card_moonspawn": {
+        "name": "Moonspawn Card"
+      },
+      "card_korzul_the_gravewyrm": {
+        "name": "Korzul Card"
+      },
+      "card_voskar_emberwing": {
+        "name": "Voskar Card"
+      },
+      "card_ysolei": {
+        "name": "Ysolei Card"
+      },
+      "card_marrowlord_varkas": {
+        "name": "Marrowlord Varkas Card"
+      },
+      "card_thunzharr_waking_peak": {
+        "name": "Thunzharr Card"
+      },
+      "card_nythraxis": {
+        "name": "Nythraxis Card"
       },
       "conjured_water4": {
         "name": "Conjured Springwater"

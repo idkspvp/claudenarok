@@ -266,6 +266,10 @@ describe('item level: heroic boss drops are budget-exact (five-mans 31, raid 33/
     let epics = 0;
     let legendaries = 0;
     for (const base of raidBases) {
+      // A card is not gear: it goes INTO gear, so there is no heroic copy of
+      // one. Cards reach boss loot tables like anything else, which is why this
+      // skip is explicit (heroic_variants.ts makes the same one).
+      if (ITEMS[base]?.kind === 'card') continue;
       const variant = ITEMS[`heroic_${base}`];
       expect(variant, `heroic_${base} exists`).toBeTruthy();
       expect(itemSourceLevel(variant.id), `${variant.id} source`).toBe(27);
@@ -279,7 +283,9 @@ describe('item level: heroic boss drops are budget-exact (five-mans 31, raid 33/
       }
       expectAttributesLegal(variant, variant.id);
     }
-    expect(epics + legendaries).toBe(raidBases.length);
+    expect(epics + legendaries).toBe(
+      raidBases.filter((b: string) => ITEMS[b]?.kind !== 'card').length,
+    );
     expect(legendaries).toBe(2); // Deathless Heartwood + Kingsbane, Last Oath
   });
 });

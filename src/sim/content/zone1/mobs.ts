@@ -34,7 +34,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     armorPerLevel: 5,
     moveSpeed: 8,
     aggroRadius: 0,
-    loot: [],
+    loot: [{ itemId: 'card_warlock_imp', chance: 0.03 }],
     scale: 0.65,
     color: 0xff5a2e,
     petRole: 'ranged_dps',
@@ -82,6 +82,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 8,
     aggroRadius: 10,
     loot: [
+      { itemId: 'card_forest_wolf', chance: 0.03 },
       { copper: 8, chance: 1 },
       { itemId: 'wolf_fang', chance: 0.45 },
       { itemId: 'milepost_boots', chance: 0.1 },
@@ -146,6 +147,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     // Stiff bristles prick anyone who melees the boar.
     thorns: { value: 2, name: 'Bristled Hide' },
     loot: [
+      { itemId: 'card_wild_boar', chance: 0.03 },
       { copper: 12, chance: 1 },
       { itemId: 'boar_hide', chance: 0.6, questId: 'q_boars' },
       { itemId: 'tough_jerky', chance: 0.3 },
@@ -183,6 +185,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     },
     ensnare: { chance: 0.25, duration: 3, name: 'Sticky Web', school: 'nature' },
     loot: [
+      { itemId: 'card_webwood_spider', chance: 0.03 },
       { copper: 14, chance: 1 },
       { itemId: 'webwood_silk', chance: 0.55, questId: 'q_spiders' },
       { itemId: 'spider_leg', chance: 0.4 },
@@ -227,6 +230,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       school: 'physical',
     },
     loot: [
+      { itemId: 'card_mogger', chance: 0.12 },
       { copper: 180, chance: 1 },
       { itemId: 'linen_scrap', chance: 1 },
       { itemId: 'moggers_stomper_boots', chance: 0.3 },
@@ -279,6 +283,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 8,
     aggroRadius: 13, // murlocs aggro from far and bring friends
     loot: [
+      { itemId: 'card_mudfin_murloc', chance: 0.03 },
       { copper: 18, chance: 1 },
       { itemId: 'mudfin_scale', chance: 0.5 },
       { itemId: 'linen_scrap', chance: 0.2 },
@@ -311,6 +316,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 10,
     loot: [
+      { itemId: 'card_tunnel_rat', chance: 0.03 },
       { copper: 22, chance: 1 },
       { itemId: 'tallow_candle', chance: 0.6 },
       { itemId: 'blessed_wax', chance: 0.45, questId: 'q_rite' },
@@ -379,6 +385,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 11,
     loot: [
+      { itemId: 'card_vale_bandit', chance: 0.03 },
       { copper: 25, chance: 1 },
       { itemId: 'bandit_bandana', chance: 0.5 },
       { itemId: 'linen_scrap', chance: 0.3 },
@@ -408,6 +415,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 6.5,
     aggroRadius: 11,
     loot: [
+      { itemId: 'card_restless_bones', chance: 0.03 },
       { copper: 30, chance: 1 },
       { itemId: 'bone_fragments', chance: 0.6 },
       { itemId: 'ghostly_essence', chance: 0.55, questId: 'q_rite' },

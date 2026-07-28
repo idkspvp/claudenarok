@@ -116,6 +116,7 @@ export {
   resolveDelveShopOffers,
 } from './content/delves';
 
+import { buildCardItems } from './content/cards';
 import { DELVE_ITEMS } from './content/delves/items';
 import { HEROIC_ITEMS, RETIRED_HEROIC_ITEMS } from './content/heroic_loot';
 import { buildHeroicVariants } from './content/heroic_variants';
@@ -193,6 +194,10 @@ export const MOBS: Record<string, MobTemplate> = {
 // merged into ITEMS in place, so a "Heroic X" copy is a first-class item everywhere.
 // Must run after both ITEMS and MOBS are assembled (it reads their loot tables).
 Object.assign(ITEMS, buildHeroicVariants(ITEMS, MOBS));
+
+// Cards are items too: a card has to be lootable, carried, traded and socketed,
+// so its ITEM record is generated from the catalogue rather than authored twice.
+Object.assign(ITEMS, buildCardItems());
 
 export const NPCS: Record<string, NpcDef> = {
   ...ZONE1_NPCS,

@@ -815,6 +815,7 @@ const ITEM_KIND_LABEL_KEYS: Record<ItemDef['kind'], TranslationKey> = {
   held_offhand: 'itemUi.kind.armor',
   quest: 'itemUi.kind.quest',
   junk: 'itemUi.kind.junk',
+  card: 'itemUi.kind.card',
   food: 'itemUi.kind.food',
   drink: 'itemUi.kind.drink',
   tool: 'itemUi.kind.tool',

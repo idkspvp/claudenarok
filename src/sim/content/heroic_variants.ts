@@ -174,6 +174,10 @@ export function buildHeroicVariants(
       if (!id) continue;
       const def = items[id];
       if (!def || def.heroicOf) continue; // skip missing ids and already-variants
+      // A card is not gear: it goes INTO gear, so there is no such thing as a
+      // heroic copy of one. Cards reach boss loot tables like anything else, so
+      // this has to be an explicit skip rather than an accident of quality.
+      if (def.kind === 'card') continue;
       if (def.quality !== 'epic' && def.quality !== 'rare' && def.quality !== 'legendary') continue;
       // Equippable combat gear only: armor (incl. shields), weapons, and held
       // offhands, so every raid-boss normal drop has a heroic-claim upgrade.

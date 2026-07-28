@@ -23,6 +23,7 @@
 // `src/sim`-pure: no DOM/Three/render/ui/game/net imports, no Math.random/Date.now
 // (enforced by tests/architecture.test.ts).
 
+import { cardDefenceMultiplier } from '../cards';
 import { ABILITIES, DELVES, GROUP_XP_BONUS, ITEMS, MOBS } from '../data';
 import * as deedsMod from '../deeds';
 import { recalcPlayerStats } from '../entity';
@@ -217,6 +218,17 @@ export function dealDamage(
       if (a.kind === 'spellvuln') amp += a.value;
     }
     if (amp > 0) amount = Math.round(amount * (1 + amp));
+  }
+
+  // Cards that resist what is attacking. The defensive mirror of the hunter
+  // cards on the swing side: a shield socketed against the undead cuts a tenth
+  // off everything undead throws, whatever it throws it with. Never below zero,
+  // so a stack may reach immunity but can never turn a hit into a heal.
+  if (source && amount > 0 && target.cardBonuses) {
+    amount = Math.round(
+      amount *
+        cardDefenceMultiplier(target.cardBonuses, { race: source.race, element: source.element }),
+    );
   }
 
   // Curse of frailty: a cursed victim takes more damage from every source. The

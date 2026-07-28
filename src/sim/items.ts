@@ -17,6 +17,8 @@
 // (enforced by tests/architecture.test.ts). This region draws NO rng.
 
 import { addStacked, bagCapacity, bagsFullError, equipBag as equipBagCmd } from './bags';
+import { canSocket } from './cards';
+import { CARDS } from './content/cards';
 import { ITEMS } from './data';
 import { recalcPlayerStats } from './entity';
 import {
@@ -809,4 +811,68 @@ export function buyBackItem(ctx: SimContext, itemId: string, pid?: number): void
 
 function addItemSilent(itemId: string, count: number, meta: PlayerMeta): void {
   addStacked(meta.inventory, itemId, count);
+}
+
+/** Socket a card into a worn piece.
+ *
+ *  Permanent, the way it is in the reference game: the card goes in and the
+ *  socket is spent. That is what makes the decision a decision, and it is why
+ *  this refuses rather than swaps when the sockets are full.
+ *
+ *  The card must FIT the slot (a weapon card does nothing in a helmet) and
+ *  there has to be a socket free. Both are the pure leaf's rules
+ *  (src/sim/cards.ts); this is the command around them. */
+export function socketCard(
+  ctx: SimContext,
+  slot: EquipSlot,
+  cardId: string,
+  pid?: number,
+): boolean {
+  const r = ctx.resolve(pid);
+  if (!r) return false;
+  const { meta, e: p } = r;
+  const itemId = meta.equipment[slot];
+  if (!itemId) {
+    ctx.error(meta.entityId, 'Nothing is equipped in that slot.');
+    return false;
+  }
+  const card = CARDS[cardId];
+  if (!card) {
+    ctx.error(meta.entityId, 'That is not a card.');
+    return false;
+  }
+  if (ctx.countItem(cardId, meta.entityId) < 1) {
+    ctx.error(meta.entityId, 'You do not have that card.');
+    return false;
+  }
+  const item = ITEMS[itemId];
+  meta.equipmentInstance ??= {};
+  const instance = (meta.equipmentInstance[slot] ??= {});
+  const socketed = instance.cards ?? [];
+  if (!canSocket(card, item, socketed)) {
+    const slots = item?.cardSlots ?? 0;
+    if (slots <= 0) ctx.error(meta.entityId, `${item?.name ?? itemId} has no card sockets.`);
+    else if (socketed.length >= slots) {
+      ctx.error(meta.entityId, `${item?.name ?? itemId} has no free card socket.`);
+    } else ctx.error(meta.entityId, `${card.name} does not fit ${item?.name ?? itemId}.`);
+    return false;
+  }
+  ctx.removeItem(cardId, 1, meta.entityId);
+  instance.cards = [...socketed, cardId];
+  ctx.markDeedsDirty(meta.entityId);
+  recalcPlayerStats(
+    p,
+    meta.cls,
+    meta.equipment,
+    ctx.playerMods(meta),
+    meta.equipmentInstance,
+    meta.statAllocation,
+  );
+  ctx.emit({
+    type: 'log',
+    text: `Socketed ${card.name} into ${item?.name ?? itemId}.`,
+    color: '#8f8',
+    pid: meta.entityId,
+  });
+  return true;
 }
