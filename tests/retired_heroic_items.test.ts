@@ -164,7 +164,7 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     // Off the record: the piece's attributes moved with the equipment rule, and
     // what this case proves is that a retired id REHYDRATES with whatever it
     // carries, not what those numbers happen to be.
-    const carapace = ITEMS.scourgehide_carapace.stats!;
+    const carapace = ITEMS.scourgehide_carapace.stats ?? {};
     expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + (carapace.agi ?? 0));
     expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + (carapace.vit ?? 0));
     expect(carapace.agi ?? 0).toBeGreaterThan(0);

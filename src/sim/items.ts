@@ -847,7 +847,8 @@ export function socketCard(
   }
   const item = ITEMS[itemId];
   meta.equipmentInstance ??= {};
-  const instance = (meta.equipmentInstance[slot] ??= {});
+  meta.equipmentInstance[slot] ??= {};
+  const instance = meta.equipmentInstance[slot];
   const socketed = instance.cards ?? [];
   if (!canSocket(card, item, socketed)) {
     const slots = item?.cardSlots ?? 0;
