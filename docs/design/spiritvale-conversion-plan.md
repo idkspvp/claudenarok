@@ -265,8 +265,15 @@ The grimoire loop is the single highest-value import in the dataset: it gives
 ordinary monsters an endgame reason to exist and it puts a passive layer outside
 the skill-point budget. It needs phase 5 (passives) and nothing else.
 
+Weapon attack starts coming from the item's own stat lines here, so
+`src/sim/combat/weapon_class_atk.ts` becomes wrong in this phase and is deleted
+IN it. Its three item-balance guards (`heroic_loot_flair`, `pvp_honor_gear`,
+`twohand_rebudget`) must be replaced with the equivalent assertion against the
+new model in the same change, never just dropped.
+
 **Accept:** a drop-rate test that every category only ever emits a value from
-its published ladder; a test that no kill is empty.
+its published ladder; a test that no kill is empty; the three weapon-band guards
+replaced, not deleted.
 
 ### Phase 7. World shape
 
