@@ -32,9 +32,29 @@ Two things survive the change and should be said so nobody re-does them: the
 **six attributes** are the same six, and the **job-level track granting one
 skill point per level** is the same idea. Those two were the expensive parts.
 
-## Decisions required before phase 1
+## Decisions: made
 
-Each of these changes what later phases are, so they cannot be deferred.
+Answered 2026-07-29. Recorded here so no phase re-opens them.
+
+| # | Decision | Chosen |
+|---|---|---|
+| D1 | Level cap | **150.** Take SpiritVale's scale wholesale. |
+| D2 | Element chart | **Take SpiritVale's three-value table.** Overrides the recommendation below; "100%" was meant literally. |
+| D3 | Class set | **All 15, in two waves.** 7 base in phase 4, 8 advanced in phase 8. |
+| D4 | Item economy | Artifact-to-grimoire loop and the drop ladder in phase 6; the rest of our economy left alone until phase 9. |
+| -- | Starting point | **Phase 0.** |
+
+D2 is the one that went against the recommendation. That is the user's call and
+it is the consistent reading of the rule change: a "100% SpiritVale" game does
+not keep Ragnarok's element chart. The 400-cell table stays in git history
+(`02cfb38`) if it is ever wanted back.
+
+The reasoning behind each option is kept below, unedited, because a later phase
+may need to know why a road was not taken.
+
+## The decisions, as they were framed
+
+Each of these changes what later phases are, so they could not be deferred.
 
 ### D1. Level cap: keep 99, or go to 150?
 
