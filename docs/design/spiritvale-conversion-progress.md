@@ -11,7 +11,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 | Phase | What | Status | Landed at |
 |---|---|---|---|
 | 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
-| 1 | The stat core: six pure modules, no call sites | NOT STARTED | |
+| 1 | The stat core: six pure modules, no call sites | IN PROGRESS | |
 | 2 | Wire the stat core, retire the Ragnarok one | NOT STARTED | |
 | 3 | Progression: cap 150, attribute ladder, job pools, refund | NOT STARTED | |
 | 4 | The seven base classes and the skill-tree window | NOT STARTED | |
