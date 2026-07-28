@@ -11,7 +11,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 | Phase | What | Status | Landed at |
 |---|---|---|---|
 | 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
-| 1 | The stat core: six pure modules, no call sites | IN PROGRESS | |
+| 1 | The stat core: six pure modules, no call sites | DONE | 6214a89..daa4ebd |
 | 2 | Wire the stat core, retire the Ragnarok one | NOT STARTED | |
 | 3 | Progression: cap 150, attribute ladder, job pools, refund | NOT STARTED | |
 | 4 | The seven base classes and the skill-tree window | NOT STARTED | |
@@ -65,7 +65,31 @@ one (server/static_sfx_serving) an EPERM on Windows. Always diff the failing SET
 against a baseline worktree rather than reading the count.
 
 ### Phase 1
-(nothing yet)
+Six pure leaves under `src/sim/stats/`, 83 assertions, nothing wired. Phase 2
+wires them one formula at a time.
+
+  attack.ts         ATK melee + ranged, MATK, the DoT coefficient
+  defence_curve.ts  100/(DEF+100)
+  accuracy.ts       Hit, Flee, crit rate/damage/defence, perfect dodge
+  attack_speed.ts   the 23-row weapon table, ASPD, cast speed, both caps
+  resources.ts      Max HP, Max MP, both regen curves
+  sustain.ts        healing, siphon, leech, reflect, status resist
+
+Notes phase 2 needs:
+
+- `defence_curve` is the bug fix, not a number change. Wire it FIRST, before
+  attack: it removes the immunity cliff that the Fiesta augments fell off, and
+  it makes every later damage comparison meaningful.
+- Max HP clamps its quadratic term at level 130 under a cap of 150. That is in
+  the source. Anyone retuning health at the cap will read it as a bug.
+- The regen percentage stats enter halved on both sides, and apply a SECOND
+  time in full on the mana side only. Both are pinned.
+- Leech is a reserve, not a steal: a fifth of face value banked per hit, paid
+  out at no more than a fifth of max health per second. Wiring it as
+  instant lifesteal would be several times too strong.
+- `accuracy` deliberately has no roll: it says how likely a hit is, and the
+  caller draws the rng. Keep it that way so the parity draw order stays the
+  caller's business.
 
 ## Decisions taken mid-run
 
