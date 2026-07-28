@@ -2138,7 +2138,7 @@ export function runEffects(
           if (sureCrit) sureCritRolled = true;
           // A physical critical does not multiply; it skips defence instead.
           if (isSpell) dmg = ctx.applyMagicDefence(dmg, target);
-        else dmg = ctx.applyDefence(dmg, target, crit);
+          else dmg = ctx.applyDefence(dmg, target, crit);
           if (isSpell) noteSpellHit(ctx, p, crit, ability.id);
           ctx.dealDamage(
             p,

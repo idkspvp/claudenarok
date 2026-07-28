@@ -199,18 +199,21 @@ amotion makes every character attack twice as fast as Ragnarok does. Converted i
 - **The live class list is still the inherited nine**, not the Classic tree in
   `content/jobs.ts`. Attack speed is the system blocked on the migration: it is
   per JOB and per weapon class.
-- **The ASPD table is authored but not wired.** `src/sim/job_aspd.ts` carries it
-  (see the exception table above); `combat/aspd.ts` still takes the base as an
-  argument, and nothing calls either yet. Two things block the wiring, and both
-  are real: the table is keyed by the five first jobs, which are not `PlayerClass`
-  members until D1 lands, and wiring it RETIRES `WeaponInfo.speed`, because a
-  per-weapon speed cannot express a per-job one. That last part changes the
-  cadence of every weapon in the game at once, so it wants its own change and its
-  own parity regeneration.
-- **`AspdJob` duplicates the five first-job ids** rather than importing them,
-  because neither `PlayerClass` (still the inherited nine) nor `content/jobs.ts`
-  (still all eighteen on `main`) is a stable key today. When D1 lands, make it an
-  alias of `PlayerClass` and pin the two as identical.
+- **The ASPD table is authored but NOT wired, and the blocker moved.** The job
+  half is solved: `AspdJob` is an alias of `PlayerClass` now that the collapse has
+  landed, pinned by `tests/job_aspd.test.ts`. What blocks it now is the weapon
+  half. The table is indexed by job AND weapon class, and **not one of the weapon
+  records carries a `weaponType`**: the field is optional, every authored weapon
+  omits it, and the only `weaponType` values in `content/` belong to
+  `weapon_skins.ts`, which is a cosmetic skin type and a different union.
+
+  Wiring it against that would give every job ONE cadence regardless of what it
+  holds, which is strictly worse than the per-weapon `speed` already shipped: it
+  would delete the distinction between a dagger and a two-handed sword to gain a
+  distinction between a Swordman and a Mage. So attack speed waits on `B2`, the
+  weapon records, and the same is true of the size table in `combat/weapon_size.ts`
+  for the same reason (an unmarked weapon is treated as a sword, so the whole
+  size chart is inert too). One authoring pass unblocks both.
 - **`MOB_AP_PER_DPS` is the last calibration constant left.** Monster attack power
   is still on the pre-conversion scale, so it is divided down where a player's
   adds raw. It goes away when the monster records carry an authored ATK pair.

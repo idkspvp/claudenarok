@@ -65,7 +65,6 @@ import {
 } from './combat/damage';
 import { damageTakenWithin } from './combat/damage_history';
 import { applyDefence } from './combat/defence';
-import { applyMagicDefence } from './combat/magic_defence';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
 import { applyIgnite } from './combat/fire_mage';
 import { frostMageChannelPulse } from './combat/frost_mage';
@@ -79,6 +78,7 @@ import {
   hexOutputMult as hexOutputMultImpl,
 } from './combat/heal';
 import { advanceHeroicLeap } from './combat/heroic_leap';
+import { applyMagicDefence } from './combat/magic_defence';
 import { tickNaturesFury } from './combat/natures_fury';
 import * as resurrectionOfferMod from './combat/resurrection_offer';
 import { rewindHealAmount } from './combat/rewind';
