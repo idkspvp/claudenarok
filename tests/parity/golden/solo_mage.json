@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0dcb2528",
+      "state": "305a89a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -70,6 +70,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -153,7 +154,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "a2519322",
+      "state": "9540615e",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -164,7 +165,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "059801a2",
+      "state": "7ba5fcde",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -175,7 +176,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "3da8b49a",
+      "state": "7f9f4da6",
       "events": "09fee253",
       "rng": {
         "draws": 76,
@@ -186,7 +187,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "48e9bd01",
+      "state": "020c5c1f",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -197,7 +198,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "015ac691",
+      "state": "07cd5caf",
       "events": "1beed8d7",
       "rng": {
         "draws": 269,
@@ -208,7 +209,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "4cc89ddb",
+      "state": "75578821",
       "events": "30166966",
       "rng": {
         "draws": 392,
@@ -219,7 +220,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "960317e6",
+      "state": "66832c82",
       "events": "e9e2cddb",
       "rng": {
         "draws": 430,
@@ -293,6 +294,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

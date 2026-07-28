@@ -29,7 +29,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "296f9a36",
+      "state": "54927858",
       "events": "4edd2d7a",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "a07e33d3",
+      "state": "cf2ede21",
       "events": "f1f789bc",
       "rng": {
         "draws": 34,
@@ -51,7 +51,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 417,
-      "state": "beb03849",
+      "state": "74cefe17",
       "events": "0e9797f8",
       "rng": {
         "draws": 134,
@@ -62,7 +62,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "8b838964",
+      "state": "c22317a6",
       "events": "3abd1ad8",
       "rng": {
         "draws": 254,
@@ -73,7 +73,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 417,
-      "state": "5a73cf5b",
+      "state": "59c6f9fb",
       "events": "ac6fb178",
       "rng": {
         "draws": 384,
@@ -84,7 +84,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 417,
-      "state": "3d16ad5e",
+      "state": "baf3ff6a",
       "events": "741638a5",
       "rng": {
         "draws": 483,
@@ -156,6 +156,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeHonor": 25,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -225,6 +226,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

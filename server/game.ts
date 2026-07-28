@@ -5851,6 +5851,10 @@ export class GameServer {
       maybe('equip', meta.equipment);
       maybe('cosmetics', anchorSession.accountCosmetics);
       maybe('salloc', { ...meta.statAllocation });
+      // The job track. One packed triple rather than three fields: the three
+      // always move together, and `maybe` only re-sends a self field that
+      // actually changed.
+      maybe('job', [meta.jobLevel, meta.jobXp, meta.skillPoints]);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so

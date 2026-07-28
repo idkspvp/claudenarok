@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "b2bcd059",
+      "state": "f2cb47a7",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "cb1a3ad4",
+      "state": "6fc84356",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "6fafffbc",
+      "state": "8e680bbe",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "73230d11",
+      "state": "4d25d8c9",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "c79603c4",
+      "state": "42cc7374",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "cb20dfcf",
+      "state": "538a93d7",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "56d81ac1",
+      "state": "915cc1b9",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "45228b12",
+      "state": "d776b9f2",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "8b52ae11",
+      "state": "1bbd41c9",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -171,6 +171,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -226,6 +227,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

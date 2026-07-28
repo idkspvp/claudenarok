@@ -23,6 +23,7 @@
 //   cosmetics.ts        IWorldCosmetics      account skins + mech chroma
 //   progression_xp.ts   IWorldProgressionXp  xp/lifetimeXp/prestige/rested/leaderboard
 //   status_points.ts    IWorldStatusPoints   the six status attributes
+//   job_level.ts        IWorldJobLevel       the job track and its skill points
 //   pet.ts              IWorldPet            archer-pet command surface
 //   party.ts            IWorldParty          party/raid + raid-target markers
 //   trade.ts            IWorldTrade          peer-to-peer trade window
@@ -69,6 +70,7 @@ import type { IWorldDungeons } from './world_api/dungeons';
 import type { IWorldEntityRoster } from './world_api/entity_roster';
 import type { IWorldInteraction } from './world_api/interaction';
 import type { IWorldInventory } from './world_api/inventory';
+import type { IWorldJobLevel } from './world_api/job_level';
 import type { IWorldLoot } from './world_api/loot';
 import type { IWorldMail } from './world_api/mail';
 import type { IWorldMarket } from './world_api/market';
@@ -224,6 +226,7 @@ export interface IWorld
     IWorldInventory,
     IWorldCosmetics,
     IWorldProgressionXp,
+    IWorldJobLevel,
     IWorldStatusPoints,
     IWorldPet,
     IWorldParty,

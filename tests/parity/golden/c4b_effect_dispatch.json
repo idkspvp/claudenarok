@@ -35,7 +35,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 420,
-      "state": "803251fd",
+      "state": "9a3aecc7",
       "events": "53da3c1a",
       "rng": {
         "draws": 2,
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 420,
-      "state": "83a8dba8",
+      "state": "f39244e2",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 420,
-      "state": "b9624572",
+      "state": "3f7ff2dc",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "c99c3afb",
+      "state": "37062595",
       "events": "f603937d",
       "rng": {
         "draws": 2,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 420,
-      "state": "19bea385",
+      "state": "8cd924a7",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 420,
-      "state": "e82d1468",
+      "state": "9499e4aa",
       "events": "29be4bca",
       "rng": {
         "draws": 2,
@@ -101,7 +101,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 420,
-      "state": "10efb2a5",
+      "state": "5896f047",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -178,6 +178,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -258,6 +259,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -337,6 +339,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -417,6 +420,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -773,7 +777,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 420,
-      "state": "2c6fc0a7",
+      "state": "090aae41",
       "events": "2132125a",
       "rng": {
         "draws": 2,
@@ -784,7 +788,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "7ed29105",
+      "state": "0b7b8a27",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -795,7 +799,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 420,
-      "state": "db85de7b",
+      "state": "fb982115",
       "events": "741638a5",
       "rng": {
         "draws": 34,
@@ -806,7 +810,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 420,
-      "state": "fd332238",
+      "state": "144c097a",
       "events": "419d9db5",
       "rng": {
         "draws": 49,
@@ -817,7 +821,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 420,
-      "state": "175b9e1d",
+      "state": "498ef47f",
       "events": "741638a5",
       "rng": {
         "draws": 65,
@@ -828,7 +832,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "d98d650b",
+      "state": "c545a825",
       "events": "741638a5",
       "rng": {
         "draws": 79,
@@ -839,7 +843,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 420,
-      "state": "fb820814",
+      "state": "c5274d66",
       "events": "741638a5",
       "rng": {
         "draws": 102,
@@ -850,7 +854,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 420,
-      "state": "1575e92a",
+      "state": "b9e26e54",
       "events": "741638a5",
       "rng": {
         "draws": 125,
@@ -861,7 +865,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 420,
-      "state": "66cad2ca",
+      "state": "1767bf74",
       "events": "88e0a9f2",
       "rng": {
         "draws": 150,
@@ -872,7 +876,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 420,
-      "state": "6158207e",
+      "state": "203e9508",
       "events": "741638a5",
       "rng": {
         "draws": 156,
@@ -949,6 +953,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1029,6 +1034,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1108,6 +1114,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1188,6 +1195,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1578,7 +1586,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 421,
-      "state": "c76c2098",
+      "state": "7ab0a35a",
       "events": "7b38e34b",
       "rng": {
         "draws": 157,
@@ -1655,6 +1663,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1735,6 +1744,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1814,6 +1824,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1894,6 +1905,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2364,7 +2376,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 423,
-      "state": "97e20283",
+      "state": "ec4815d5",
       "events": "74f5ed1e",
       "rng": {
         "draws": 159,
@@ -2441,6 +2453,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2525,6 +2538,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2604,6 +2618,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2684,6 +2699,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -3283,7 +3299,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 424,
-      "state": "c40c5c5a",
+      "state": "c282440c",
       "events": "8edf3c23",
       "rng": {
         "draws": 164,
@@ -3360,6 +3376,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -3444,6 +3461,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -3527,6 +3545,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -3607,6 +3626,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -4290,7 +4310,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 424,
-      "state": "6106c11e",
+      "state": "13bf2790",
       "events": "f8b1c6df",
       "rng": {
         "draws": 164,
@@ -4367,6 +4387,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -4451,6 +4472,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -4534,6 +4556,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -4614,6 +4637,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -5309,7 +5333,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 425,
-      "state": "891627c9",
+      "state": "6024dac5",
       "events": "6bacb10f",
       "rng": {
         "draws": 202,
@@ -5320,7 +5344,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 425,
-      "state": "c8b06b37",
+      "state": "610b4c13",
       "events": "741638a5",
       "rng": {
         "draws": 231,
@@ -5331,7 +5355,7 @@
       "tick": 89,
       "time": 4.45,
       "nextId": 425,
-      "state": "22e8e8cd",
+      "state": "75d4ba59",
       "events": "cf047694",
       "rng": {
         "draws": 253,
@@ -5410,6 +5434,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -5495,6 +5520,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -5578,6 +5604,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -5658,6 +5685,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -6470,7 +6498,7 @@
       "tick": 89,
       "time": 4.45,
       "nextId": 425,
-      "state": "22e8e8cd",
+      "state": "75d4ba59",
       "events": "741638a5",
       "rng": {
         "draws": 253,
@@ -6549,6 +6577,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -6634,6 +6663,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -6717,6 +6747,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -6797,6 +6828,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

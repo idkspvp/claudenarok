@@ -3494,6 +3494,9 @@ export type SimEvent = { pid?: number } & (
   | { type: 'xp'; amount: number; rested?: number }
   | { type: 'honor'; amount: number; reason: HonorReason }
   | { type: 'levelup'; level: number }
+  // The job track's own level-up. Personal (carries pid): it grants a skill
+  // point, which is the only thing job level buys.
+  | { type: 'jobLevelUp'; jobLevel: number }
   // opt-in post-cap rank reset (always personal: emitted with pid), fired by
   // prestige() in src/sim/progression/xp.ts alongside the 'log' chat line. The
   // rank itself rides every self snapshot, so this exists to tell an open

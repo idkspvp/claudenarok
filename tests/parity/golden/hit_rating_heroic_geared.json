@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "a1a46d43",
+      "state": "ba8de60f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -68,6 +68,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -151,7 +152,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "5db87582",
+      "state": "bb1de5d6",
       "events": "22c55820",
       "rng": {
         "draws": 4,
@@ -162,7 +163,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "b73d7cce",
+      "state": "0d9277d2",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -173,7 +174,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "1c20f36d",
+      "state": "234ea95b",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -184,7 +185,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "678abd86",
+      "state": "8379713a",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -195,7 +196,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "fdbcfbc9",
+      "state": "9aff7367",
       "events": "bfdb5897",
       "rng": {
         "draws": 50,
@@ -206,7 +207,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "04b05dff",
+      "state": "c1f9544d",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -217,7 +218,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "2672e3a8",
+      "state": "47d7f204",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -228,7 +229,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "07e1de95",
+      "state": "4a90aab3",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -239,7 +240,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "be5697a2",
+      "state": "6d0049b6",
       "events": "fdce1759",
       "rng": {
         "draws": 248,
@@ -250,7 +251,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "d0d511a5",
+      "state": "d92752c3",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -261,7 +262,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "37a359c8",
+      "state": "a59685e4",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -272,7 +273,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "f0af9009",
+      "state": "6a358a27",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -283,7 +284,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "f0af9009",
+      "state": "6a358a27",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -387,6 +388,7 @@
               "itemId": "gnarled_staff"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -551,7 +553,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "f0af9009",
+      "state": "6a358a27",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -655,6 +657,7 @@
               "itemId": "gnarled_staff"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

@@ -2794,6 +2794,7 @@ const ALL_DELTA_KEYS = [
   'hbl',
   'honor',
   'inv',
+  'job',
   'lhonor',
   'lockouts',
   'lroll',
@@ -2809,8 +2810,6 @@ const ALL_DELTA_KEYS = [
   'party',
   'prof',
   'renown',
-  // The status-point allocation the Ragnarok conversion added: a character's six
-  // attributes are the player's own spend now, so the wire has to carry it.
   'salloc',
   'salv',
   'sport',
@@ -3284,9 +3283,9 @@ describe('gather node cooldown wire round trip (ncd)', () => {
 });
 
 describe('delta-key contract pins (anti-drift)', () => {
-  it('ALL_DELTA_KEYS contains exactly 54 unique keys in sorted order', () => {
-    expect(ALL_DELTA_KEYS).toHaveLength(54);
-    expect(new Set(ALL_DELTA_KEYS).size).toBe(54);
+  it('ALL_DELTA_KEYS contains exactly 55 unique keys in sorted order', () => {
+    expect(ALL_DELTA_KEYS).toHaveLength(55);
+    expect(new Set(ALL_DELTA_KEYS).size).toBe(55);
     expect([...ALL_DELTA_KEYS]).toEqual([...ALL_DELTA_KEYS].sort());
   });
 
@@ -3305,7 +3304,7 @@ describe('delta-key contract pins (anti-drift)', () => {
     expect(scraped.has('lockouts')).toBe(true); // the multi-line call IS captured
     expect(scraped.has('vcupb')).toBe(true); // the maybeRaw calls ARE captured by the widened regex
     expect(scraped.has('dfb')).toBe(true); // incl. the multi-line maybeRaw('dfb', ...) form
-    expect(scraped.size).toBe(54);
+    expect(scraped.size).toBe(55);
     expect([...scraped].sort()).toEqual([...ALL_DELTA_KEYS].sort());
   });
 

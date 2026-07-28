@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "31070be5",
+      "state": "27b6ab9b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -82,6 +82,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -130,6 +131,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -182,6 +184,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -468,7 +471,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "f0acdda0",
+      "state": "8484e154",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -519,6 +522,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -567,6 +571,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -619,6 +624,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -905,7 +911,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "cd7194ea",
+      "state": "6beb0b46",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -956,6 +962,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1004,6 +1011,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1056,6 +1064,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1342,7 +1351,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "f916a4d9",
+      "state": "5d81f40f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1393,6 +1402,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1441,6 +1451,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1493,6 +1504,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1779,7 +1791,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "0d501b77",
+      "state": "e70abe2d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1830,6 +1842,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1878,6 +1891,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -1930,6 +1944,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2218,7 +2233,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "f2d5a783",
+      "state": "ee551199",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2269,6 +2284,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2317,6 +2333,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2369,6 +2386,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2657,7 +2675,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "01b47262",
+      "state": "e721aa6e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2708,6 +2726,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2756,6 +2775,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -2808,6 +2828,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3095,7 +3116,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "a8f4d944",
+      "state": "5b27e468",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3146,6 +3167,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3194,6 +3216,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3246,6 +3269,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3533,7 +3557,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "6da921f5",
+      "state": "0e4a7d6b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3584,6 +3608,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3632,6 +3657,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3684,6 +3710,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -3956,7 +3983,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "6da921f5",
+      "state": "0e4a7d6b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4007,6 +4034,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -4055,6 +4083,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -4107,6 +4136,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

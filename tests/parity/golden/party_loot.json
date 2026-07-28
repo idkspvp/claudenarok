@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 418,
-      "state": "67bdc653",
+      "state": "a8c29533",
       "events": "10c8d55b",
       "rng": {
         "draws": 2,
@@ -92,6 +92,7 @@
               "itemId": "greyjaw_hide_boots"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -153,6 +154,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,

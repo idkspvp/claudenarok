@@ -30,6 +30,7 @@ import { recalcPlayerStats } from '../entity';
 import { DAMAGE_IDLE_DESPAWN_MOB_IDS, DAMAGE_IDLE_DESPAWN_SECONDS } from '../entity_roster';
 import { weaponHand } from '../equipment_rules';
 import { lockNormalDungeonResetOnBossKill } from '../instances/dungeons';
+import { applyJobXp } from '../progression/job_level';
 import { pvpDamageMultiplier } from '../pvp';
 import { aurasSurvivingDeath } from '../resurrection';
 import type { PlayerMeta } from '../sim';
@@ -1298,6 +1299,12 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
             eligible.length,
         );
         if (xpGain > 0) grantXp(ctx, xpGain, member, { fromKill: true });
+        // The job track, from the monster's OWN job-experience figure rather
+        // than a fraction of the base award: the reference pays the two bars
+        // separately, and a monster worth little base experience can be worth a
+        // lot of job experience. Split across the party the same way.
+        const jobGain = Math.round(((template?.jobExp ?? 0) * bonus) / eligible.length);
+        if (jobGain > 0) grantJobXp(ctx, jobGain, member);
       }
       // World bosses use PERSONAL loot for every contributor (rolled below from the
       // hate-table snapshot), not the tapper/party shared-corpse roll. Rares pass
@@ -1325,6 +1332,25 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
       // World-boss deeds ride the same never-pruned contributor roster.
       deedsMod.onWorldBossKilledForDeeds(ctx, e, worldBossContribs);
     }
+  }
+}
+
+// Bank job experience on one character, taking every job level and skill point
+// it pays for. Separate from grantXp because the two bars are separate: rested
+// experience, the level-difference scaling and the post-cap overflow all belong
+// to the BASE track and none of them applies here.
+export function grantJobXp(ctx: SimContext, amount: number, meta: PlayerMeta): void {
+  if (amount <= 0) return;
+  const before = meta.jobLevel;
+  const after = applyJobXp(
+    { jobLevel: meta.jobLevel, jobXp: meta.jobXp, skillPoints: meta.skillPoints },
+    amount,
+  );
+  meta.jobLevel = after.jobLevel;
+  meta.jobXp = after.jobXp;
+  meta.skillPoints = after.skillPoints;
+  if (after.jobLevel > before) {
+    ctx.emit({ type: 'jobLevelUp', pid: meta.entityId, jobLevel: after.jobLevel });
   }
 }
 

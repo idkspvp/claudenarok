@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b4e4fd6c",
+      "state": "a0793d4a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -68,6 +68,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -154,7 +155,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 418,
-      "state": "32166488",
+      "state": "37524bcc",
       "events": "c11309ec",
       "rng": {
         "draws": 4,
@@ -165,7 +166,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 418,
-      "state": "eab879a3",
+      "state": "20fff279",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -176,7 +177,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "15e9fa37",
+      "state": "f1dba71d",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -242,6 +243,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -330,7 +332,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "04c3ecb6",
+      "state": "8b099152",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -396,6 +398,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -480,7 +483,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 418,
-      "state": "83aa1ea2",
+      "state": "17e8f3de",
       "events": "1372ec7a",
       "rng": {
         "draws": 4,
@@ -546,6 +549,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -628,7 +632,7 @@
       "tick": 6,
       "time": 0.3,
       "nextId": 418,
-      "state": "7828432f",
+      "state": "b03579a5",
       "events": "5123ef0d",
       "rng": {
         "draws": 4,
@@ -639,7 +643,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 418,
-      "state": "254a3ac2",
+      "state": "d25144be",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -705,6 +709,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 670,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

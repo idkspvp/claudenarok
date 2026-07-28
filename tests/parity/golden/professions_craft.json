@@ -19,7 +19,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c769ea1f",
+      "state": "19f4220b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -70,6 +70,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -156,7 +157,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "fd4772d6",
+      "state": "8b69abd2",
       "events": "7021a161",
       "rng": {
         "draws": 0,
@@ -207,6 +208,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lastCraftResult": {
             "reason": "insufficient_materials",
             "recipeId": "recipe_minor_healing_potion"
@@ -297,7 +299,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "ea94906f",
+      "state": "71c1ba75",
       "events": "2f11cd21",
       "rng": {
         "draws": 1,
@@ -365,6 +367,7 @@
               "itemId": "minor_healing_potion"
             }
           ],
+          "jobLevel": 1,
           "lastCraftResult": {
             "count": 1,
             "itemId": "minor_healing_potion",
@@ -460,7 +463,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "8f1fc873",
+      "state": "7d3f21e5",
       "events": "84a3ac24",
       "rng": {
         "draws": 2,
@@ -561,6 +564,7 @@
               "itemId": "eastbrook_ritual_vestments"
             }
           ],
+          "jobLevel": 1,
           "lastCraftResult": {
             "count": 1,
             "itemId": "eastbrook_ritual_vestments",
@@ -663,7 +667,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "3e5b2807",
+      "state": "2dfb3c33",
       "events": "3ea8d374",
       "rng": {
         "draws": 3,
@@ -764,6 +768,7 @@
               "itemId": "eastbrook_ritual_vestments"
             }
           ],
+          "jobLevel": 1,
           "lastCraftResult": {
             "count": 1,
             "itemId": "minor_healing_potion",
@@ -864,7 +869,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "3e5b2807",
+      "state": "2dfb3c33",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -965,6 +970,7 @@
               "itemId": "eastbrook_ritual_vestments"
             }
           ],
+          "jobLevel": 1,
           "lastCraftResult": {
             "count": 1,
             "itemId": "minor_healing_potion",

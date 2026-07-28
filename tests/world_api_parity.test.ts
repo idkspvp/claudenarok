@@ -96,6 +96,9 @@ export const IWORLD_MEMBERS = [
   { name: 'copper', kind: 'data' },
   { name: 'xp', kind: 'data' },
   { name: 'lifetimeXp', kind: 'data' },
+  // The job track: read-only from the client, so both are methods.
+  { name: 'jobProgress', kind: 'method' },
+  { name: 'jobXpToNext', kind: 'method' },
   { name: 'prestigeRank', kind: 'data' },
   { name: 'unlockedMilestones', kind: 'data' },
   { name: 'restedXp', kind: 'data' },
@@ -439,10 +442,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // surface, the mobile-station pair (placeMobileStation +
     // activeMobileStationCraft), and the commissions unbindItem command.
     // Down another 13 from 245/67/178: the whole IWorldTalents facet (five data
-    // members and eight methods) went with the talent system (Phase D0).
-    expect(IWORLD_MEMBERS.length).toBe(232);
+    // members and eight methods) went with the talent system (Phase D0). Then up
+    // two for IWorldJobLevel (jobProgress + jobXpToNext), the read side of the
+    // second progression track.
+    expect(IWORLD_MEMBERS.length).toBe(234);
     expect(DATA_MEMBERS.length).toBe(62);
-    expect(METHOD_MEMBERS.length).toBe(170);
+    expect(METHOD_MEMBERS.length).toBe(172);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -570,6 +575,8 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'ignoreRemove',
       'interact',
       'inventory',
+      'jobProgress',
+      'jobXpToNext',
       'joinCardDuelQueue',
       'known',
       'lastCraftResult',
@@ -842,6 +849,8 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'ignoreAdd',
       'ignoreRemove',
       'interact',
+      'jobProgress',
+      'jobXpToNext',
       'joinCardDuelQueue',
       'leaderboard',
       'leaveCardDuelQueue',
@@ -1343,6 +1352,11 @@ type _ExhaustActionBar = AssertNever<
 >;
 
 // The facet partition, keyed by facet for legible failure messages.
+// The job track's read side. Note the neighbouring IWorldStatusPoints facet is
+// NOT pinned here: it landed after this list froze, and back-filling it is a
+// separate reviewed edit rather than a side effect of this one.
+const FACET_JOB_LEVEL = ['jobProgress', 'jobXpToNext'];
+
 const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   entityRoster: FACET_ENTITY_ROSTER,
   combat: FACET_COMBAT,
@@ -1370,12 +1384,13 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   dungeonFinder: FACET_DUNGEON_FINDER,
   deeds: FACET_DEEDS,
   actionBar: FACET_ACTION_BAR,
+  jobLevel: FACET_JOB_LEVEL,
 };
 
-describe('W1: aggregate IWorld member set equals the disjoint union of the 26 facets', () => {
-  it('pins the facet count at 26', () => {
+describe('W1: aggregate IWorld member set equals the disjoint union of the 27 facets', () => {
+  it('pins the facet count at 27', () => {
     // 28 before the quest facet went.
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(26);
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(27);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -1403,8 +1418,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 26 fa
 
   it('the union of the facets equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(232);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(232);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(234);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(234);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

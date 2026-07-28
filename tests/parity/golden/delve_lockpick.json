@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "dffd73e5",
+      "state": "993a16e9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -67,6 +67,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -151,7 +152,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 429,
-      "state": "0c328c7d",
+      "state": "7c496c31",
       "events": "688169c8",
       "rng": {
         "draws": 9,
@@ -162,7 +163,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 429,
-      "state": "95185845",
+      "state": "0e56f709",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -173,7 +174,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 429,
-      "state": "14f850a1",
+      "state": "c9a286b5",
       "events": "abfe8876",
       "rng": {
         "draws": 13,
@@ -184,8 +185,8 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 431,
-      "state": "a2c030f9",
-      "events": "aca407c6",
+      "state": "05083c1d",
+      "events": "7bfc5c98",
       "rng": {
         "draws": 16,
         "digest": "88fdc798"
@@ -285,11 +286,14 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 2,
+          "jobXp": 29,
           "lifetimeXp": 2021,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "skillPoints": 1,
           "statAllocation": {},
           "townFocus": {},
           "xp": 377
@@ -527,7 +531,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "31b4b199",
+      "state": "27849efd",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -538,7 +542,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "31b4b199",
+      "state": "27849efd",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -639,11 +643,14 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 2,
+          "jobXp": 29,
           "lifetimeXp": 2021,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
+          "skillPoints": 1,
           "statAllocation": {},
           "townFocus": {},
           "xp": 377

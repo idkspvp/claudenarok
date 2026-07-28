@@ -31,6 +31,7 @@ import { normalizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import { getArchetypeTitle, getHobbyCraft } from '../sim/professions/archetype';
 import type { MaterialRarity } from '../sim/professions/gathering';
 import { emptyCraftSkills } from '../sim/professions/wheel';
+import { type JobProgress, jobXpToNext as jobXpToNextImpl } from '../sim/progression/job_level';
 import type { ResolvedAbility } from '../sim/sim';
 import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
 import {
@@ -2807,6 +2808,12 @@ export class ClientWorld implements IWorld {
       // Sanitized on the way in exactly as it is on the way out of the database:
       // the client mirror is display state, and a malformed field must degrade to
       // an unspent character rather than render nonsense next to a spend button.
+      if (Array.isArray(s.job)) {
+        const [lvl, xp, pts] = s.job as unknown[];
+        this.jobLevelMirror = Math.max(1, Math.floor(Number(lvl) || 1));
+        this.jobXpMirror = Math.max(0, Math.floor(Number(xp) || 0));
+        this.skillPointsMirror = Math.max(0, Math.floor(Number(pts) || 0));
+      }
       if (s.salloc !== undefined)
         this.statAllocation = sanitizeStatAllocation(
           s.salloc as Record<string, unknown>,
@@ -4202,6 +4209,24 @@ export class ClientWorld implements IWorld {
   // SAME pure functions the server uses, so the number under the spend button
   // matches what the server will charge. ---
   statAllocation: StatAllocation = emptyStatAllocation();
+
+  // --- IWorldJobLevel: mirrored from the server's self fields, and the
+  // to-next cost re-derived with the SAME table the server banks against. ---
+  jobLevelMirror = 1;
+  jobXpMirror = 0;
+  skillPointsMirror = 0;
+
+  jobProgress(): JobProgress {
+    return {
+      jobLevel: this.jobLevelMirror,
+      jobXp: this.jobXpMirror,
+      skillPoints: this.skillPointsMirror,
+    };
+  }
+
+  jobXpToNext(): number | null {
+    return jobXpToNextImpl(this.jobLevelMirror);
+  }
 
   statusPoints(): number {
     const level = this.entities.get(this.playerId)?.level ?? 1;

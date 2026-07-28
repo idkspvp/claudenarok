@@ -35,7 +35,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "a92263a3",
+      "state": "e4bde023",
       "events": "c528b6cf",
       "rng": {
         "draws": 33,
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "32c0d1a8",
+      "state": "3506d42e",
       "events": "741638a5",
       "rng": {
         "draws": 33,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "5525d911",
+      "state": "db48ebb1",
       "events": "1f05a0e8",
       "rng": {
         "draws": 36,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "f339cd39",
+      "state": "597b5911",
       "events": "fe6870bd",
       "rng": {
         "draws": 40,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "bba5578b",
+      "state": "4fc7463b",
       "events": "1f0ac6d3",
       "rng": {
         "draws": 45,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "f608b329",
+      "state": "d55ce631",
       "events": "f9852bc5",
       "rng": {
         "draws": 55,
@@ -101,7 +101,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "5fea20f9",
+      "state": "2cc32f01",
       "events": "126597fc",
       "rng": {
         "draws": 55,
@@ -112,7 +112,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "bf4f6a89",
+      "state": "7f9d2691",
       "events": "dddada6b",
       "rng": {
         "draws": 58,
@@ -123,7 +123,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "62bea572",
+      "state": "54d32208",
       "events": "785526cd",
       "rng": {
         "draws": 101,
@@ -134,7 +134,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "3835f5f7",
+      "state": "0ba631ef",
       "events": "741638a5",
       "rng": {
         "draws": 123,
@@ -145,7 +145,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 425,
-      "state": "e0526aaf",
+      "state": "4c832537",
       "events": "126597fc",
       "rng": {
         "draws": 135,
@@ -156,7 +156,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 425,
-      "state": "8a9eccc0",
+      "state": "c633cee6",
       "events": "1a345902",
       "rng": {
         "draws": 165,
@@ -167,7 +167,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 425,
-      "state": "751a738a",
+      "state": "126bdf70",
       "events": "126597fc",
       "rng": {
         "draws": 185,
@@ -178,7 +178,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 425,
-      "state": "fab55555",
+      "state": "5afb656d",
       "events": "e617caf5",
       "rng": {
         "draws": 218,
@@ -189,7 +189,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 425,
-      "state": "f8201571",
+      "state": "8025d509",
       "events": "24ffbeaf",
       "rng": {
         "draws": 239,
@@ -200,7 +200,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 425,
-      "state": "57f9fb4d",
+      "state": "81756215",
       "events": "741638a5",
       "rng": {
         "draws": 262,
@@ -211,7 +211,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 425,
-      "state": "f85ad717",
+      "state": "d9b76dd7",
       "events": "cd8d6100",
       "rng": {
         "draws": 311,
@@ -222,7 +222,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 425,
-      "state": "56230418",
+      "state": "c7223fee",
       "events": "73a4dd7a",
       "rng": {
         "draws": 339,
@@ -233,7 +233,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 425,
-      "state": "ce24fcc7",
+      "state": "12ab9b87",
       "events": "126597fc",
       "rng": {
         "draws": 364,
@@ -244,7 +244,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 425,
-      "state": "d52455fa",
+      "state": "f4d889e0",
       "events": "de2143a4",
       "rng": {
         "draws": 393,
@@ -255,7 +255,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 425,
-      "state": "bfa5a9f1",
+      "state": "95e6db79",
       "events": "126597fc",
       "rng": {
         "draws": 424,
@@ -266,7 +266,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 425,
-      "state": "90228a10",
+      "state": "eba62046",
       "events": "741638a5",
       "rng": {
         "draws": 449,
@@ -277,7 +277,7 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 425,
-      "state": "7479f7a0",
+      "state": "dc075016",
       "events": "5f17e1cb",
       "rng": {
         "draws": 494,
@@ -288,7 +288,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 425,
-      "state": "bb6cc4d2",
+      "state": "8467e2d8",
       "events": "741638a5",
       "rng": {
         "draws": 542,
@@ -299,7 +299,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 425,
-      "state": "bb6cc4d2",
+      "state": "8467e2d8",
       "events": "741638a5",
       "rng": {
         "draws": 542,
@@ -373,6 +373,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -446,6 +447,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -526,6 +528,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -602,6 +605,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -678,6 +682,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1406,7 +1411,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 425,
-      "state": "39c783f7",
+      "state": "ec5379b5",
       "events": "cad1eda1",
       "rng": {
         "draws": 590,
@@ -1417,7 +1422,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 425,
-      "state": "02b4b3d8",
+      "state": "cc034f68",
       "events": "741638a5",
       "rng": {
         "draws": 598,
@@ -1491,6 +1496,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1564,6 +1570,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1644,6 +1651,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1720,6 +1728,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -1796,6 +1805,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2517,7 +2527,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 425,
-      "state": "02b4b3d8",
+      "state": "cc034f68",
       "events": "741638a5",
       "rng": {
         "draws": 598,
@@ -2591,6 +2601,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2664,6 +2675,7 @@
               "itemId": "baked_bread"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2744,6 +2756,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2820,6 +2833,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -2896,6 +2910,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 2666,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

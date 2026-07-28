@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "0dcb2528",
+      "state": "305a89a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -71,6 +71,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
@@ -154,7 +155,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "08bf9038",
+      "state": "d4c5afd4",
       "events": "af1ed4a2",
       "rng": {
         "draws": 1,
@@ -165,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "456f633e",
+      "state": "c3f7c182",
       "events": "b999fb56",
       "rng": {
         "draws": 2,
@@ -176,7 +177,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "a4620c73",
+      "state": "37760171",
       "events": "122b90b6",
       "rng": {
         "draws": 82,
@@ -187,7 +188,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "ab7ab807",
+      "state": "349ffa85",
       "events": "9d3bce8d",
       "rng": {
         "draws": 152,
@@ -198,7 +199,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "8773b84f",
+      "state": "6f76b25d",
       "events": "059d9c8b",
       "rng": {
         "draws": 180,
@@ -286,6 +287,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
@@ -493,7 +495,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "8773b84f",
+      "state": "6f76b25d",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -581,6 +583,7 @@
               "itemId": "spring_water"
             }
           ],
+          "jobLevel": 1,
           "lifetimeXp": 7677,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},

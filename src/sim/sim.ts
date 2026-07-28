@@ -330,6 +330,11 @@ import {
   gainCraftSkill,
   normalizeCraftSkills,
 } from './professions/wheel';
+import {
+  type JobProgress,
+  jobXpToNext as jobXpToNextImpl,
+  MAX_JOB_LEVEL,
+} from './progression/job_level';
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
 import * as honorMod from './pvp';
@@ -971,6 +976,13 @@ export interface PlayerMeta {
   // the leaderboard sort key + virtual-level source. `prestigeRank` and
   // `unlockedMilestones` are cosmetic-only. All persisted in CharacterState.
   lifetimeXp: number;
+  // The SECOND progression track. Base level buys status points and the pools;
+  // job level buys skill points, one each, and nothing else. A character who
+  // farms a low map carries a high job level on a modest base level, which is a
+  // real build decision (src/sim/progression/job_level.ts).
+  jobLevel: number;
+  jobXp: number;
+  skillPoints: number;
   // Soulbound PvP currency. honor is spendable; lifetimeHonor is monotonic.
   honor: number;
   lifetimeHonor: number;
@@ -1237,6 +1249,11 @@ export interface CharacterState {
   // Post-cap progression. All optional so characters saved before the Max-Level
   // XP Overflow system load cleanly (addPlayer backfills lifetimeXp from level).
   lifetimeXp?: number;
+  // The job track. All three optional: a save written before it existed loads
+  // as a fresh job level 1 with nothing spent, which is exactly right.
+  jobLevel?: number;
+  jobXp?: number;
+  skillPoints?: number;
   // Soulbound PvP progression. Optional so pre-honor saves load at zero.
   honor?: number;
   lifetimeHonor?: number;
@@ -2161,6 +2178,9 @@ export class Sim {
       equipmentInstance: {},
       xp: 0,
       lifetimeXp: 0,
+      jobLevel: 1,
+      jobXp: 0,
+      skillPoints: 0,
       honor: 0,
       lifetimeHonor: 0,
       prestigeRank: 0,
@@ -2279,6 +2299,9 @@ export class Sim {
       // plus their current bar progress, so the leaderboard is meaningful for
       // existing characters from day one.
       meta.lifetimeXp = s.lifetimeXp ?? xpToReachLevel(player.level) + Math.max(0, s.xp);
+      meta.jobLevel = Math.max(1, Math.min(MAX_JOB_LEVEL, Math.floor(s.jobLevel ?? 1)));
+      meta.jobXp = Math.max(0, Math.floor(s.jobXp ?? 0));
+      meta.skillPoints = Math.max(0, Math.floor(s.skillPoints ?? 0));
       meta.honor = honorMod.normalizeHonorCounter(s.honor);
       meta.lifetimeHonor = Math.max(
         meta.honor,
@@ -2919,6 +2942,11 @@ export class Sim {
       xp: restore ? restore.xp : meta.xp,
       statAllocation: { ...meta.statAllocation },
       lifetimeXp: meta.lifetimeXp,
+      // Only written once the character has actually advanced, so a save made
+      // before the job track existed stays byte-equal.
+      ...(meta.jobLevel > 1 || meta.jobXp > 0 || meta.skillPoints > 0
+        ? { jobLevel: meta.jobLevel, jobXp: meta.jobXp, skillPoints: meta.skillPoints }
+        : {}),
       ...(meta.honor || meta.lifetimeHonor
         ? { honor: meta.honor, lifetimeHonor: meta.lifetimeHonor }
         : {}),
@@ -4211,6 +4239,18 @@ export class Sim {
 
   get statAllocation(): StatAllocation {
     return this.primary.statAllocation;
+  }
+
+  // --- IWorldJobLevel: the job track. Read-only; the points are spent through
+  // a separate command once the skill tree lands. ---
+  jobProgress(pid?: number): JobProgress {
+    const r = this.resolve(pid);
+    if (!r) return { jobLevel: 1, jobXp: 0, skillPoints: 0 };
+    return { jobLevel: r.meta.jobLevel, jobXp: r.meta.jobXp, skillPoints: r.meta.skillPoints };
+  }
+
+  jobXpToNext(pid?: number): number | null {
+    return jobXpToNextImpl(this.jobProgress(pid).jobLevel);
   }
 
   statusPoints(pid?: number): number {
