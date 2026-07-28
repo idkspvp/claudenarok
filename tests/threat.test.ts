@@ -4,7 +4,6 @@ import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/data';
 import { Sim } from '../src/sim/sim';
 import {
-  BEAR_FORM_THREAT_MULT,
   DEFENSIVE_STANCE_THREAT_MULT,
   dropThreat,
   RIGHTEOUS_FURY_THREAT_MULT,

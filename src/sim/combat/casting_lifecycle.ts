@@ -702,16 +702,11 @@ export function castAbility(
     ctx.error(p.id, 'That ability requires combo points.');
     return;
   }
-  // Action-locking forms gate their kit both ways: Druid form abilities need
-  // their form, while travel forms lock the normal kit until toggled off.
+  // A travel form locks the normal kit until it is toggled off. The other half
+  // of this gate (an ability that REQUIRED a form) went with the druid melee
+  // forms, which no content ever granted.
   const form = p.auras.find((a) => isActionLockingFormAuraKind(a.kind));
-  if (ability.requiresForm) {
-    const need = ability.requiresForm === 'bear' ? 'form_bear' : 'form_cat';
-    if (!form || form.kind !== need) {
-      ctx.error(p.id, `You must be in ${ability.requiresForm === 'bear' ? 'Bruin' : 'Wolf'} Form.`);
-      return;
-    }
-  } else if (form && !isFormToggle(ability) && !ability.usableInForm) {
+  if (form && !isFormToggle(ability) && !ability.usableInForm) {
     ctx.error(p.id, "You can't do that while shapeshifted.");
     return;
   }

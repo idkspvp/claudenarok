@@ -22,8 +22,6 @@ export const SUMMONED_ADD_THREAT_SEED = 750;
 export const RANGED_SWITCH_MULT = 1.3;
 export const HEAL_THREAT_FACTOR = 0.5;
 export const DEFENSIVE_STANCE_THREAT_MULT = 1.3;
-export const BEAR_FORM_THREAT_MULT = 1.3;
-export const CAT_FORM_THREAT_MULT = 0.71;
 export const RIGHTEOUS_FURY_THREAT_MULT = 1.6; // holy school only
 export const TAUNT_FORCE_SECONDS = 3;
 // Stealth shrinks detection at equal level; higher-level observers pierce it
@@ -40,8 +38,6 @@ export function threatModifier(source: Entity, school: string): number {
   let mod = 1;
   for (const a of source.auras) {
     if (a.kind === 'defensive_stance') mod *= DEFENSIVE_STANCE_THREAT_MULT;
-    else if (a.kind === 'form_bear') mod *= BEAR_FORM_THREAT_MULT;
-    else if (a.kind === 'form_cat') mod *= CAT_FORM_THREAT_MULT;
     else if (a.kind === 'righteous_fury' && school === 'holy') mod *= RIGHTEOUS_FURY_THREAT_MULT;
   }
   return mod;

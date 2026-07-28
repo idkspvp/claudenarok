@@ -752,25 +752,6 @@ export function runEffects(
         }
         break;
       }
-      case 'feralCharge': {
-        // Druid Feral signature (Feral Instinct): a form-gated resource burst. Cat Form
-        // (Energy) gains a regeneration buff; Bear Form (Rage) gets an instant Rage jolt.
-        if (p.auras.some((a) => a.kind === 'form_cat')) {
-          ctx.applyAura(p, {
-            id: 'feral_instinct_energy',
-            name: ability.name,
-            kind: 'buff_energyregen',
-            remaining: 10,
-            duration: 10,
-            value: 1,
-            sourceId: p.id,
-            school: ability.school,
-          });
-        } else if (p.auras.some((a) => a.kind === 'form_bear') && p.resourceType === 'rage') {
-          p.resource = Math.min(p.maxResource, p.resource + 50);
-        }
-        break;
-      }
       case 'hot': {
         const hotTarget = target ?? p;
         // A HoT that RIDES a direct heal (Regrowth-style) does NOT also scale here:
