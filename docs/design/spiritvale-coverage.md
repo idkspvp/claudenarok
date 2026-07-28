@@ -63,7 +63,7 @@ hold.
 | Equipment | 518, 513 carrying stat lines | total |
 | Cards / gems / artifacts / sets | 269 / 129 / 34 / 24 | total |
 | Substat pools | 9 pools plus the essence economy | total |
-| Monsters | 319: element, race, level, exp, size, boss, skills, drops | **records total, stats NOT computable, see below** |
+| Monsters | 319 records, plus computed health, attributes, defence, hit and flee for every one | total except attack power |
 | Drops | 966-item reverse index, 316 of 319 monsters carry a table | total |
 | Crafting | 474 recipes by result, 31 by material, 39 class crafts | total |
 | Maps | 46 with level band, density, spawn pool, bosses | total as metadata, no geometry |
@@ -73,37 +73,46 @@ hold.
 | Experience | base curve, 161 entries to a cap of 150 | base only |
 | Progression | attribute points and their cost curve, skill points per job level | total, from a second wiki |
 
+## Correction: monster stats are NOT missing
+
+The first version of this audit called unpublished monster archetype definitions
+the biggest gap in the dataset, on the reasoning that a monster's attributes are
+multipliers on an archetype and none of the twelve archetypes is defined
+anywhere.
+
+**That was wrong.** The archetype name is a display label. The multipliers apply
+straight to level, so there is no base table to be missing. The wiki's own page
+source computes and shows every monster's health, defence, accuracy and evasion
+from a `monStats()` function, and prints a prose tooltip beside the numbers that
+states the same rule independently.
+
+Every monster's combat values are therefore derivable, and
+`data/spiritvale-monster-stats.tsv` now holds all 319 of them (health, six
+attributes, soft and flat defence and magic defence, hit, flee, plus experience
+and coin including the 50x boss payout). The derivation is in
+`spiritvale-engine-formulas.md`.
+
+What this cost: two claims in the previous commit, both retracted. Monster
+combat coverage went from "zero" to "complete except attack power".
+
 ## What is absent, ranked by how much it blocks
 
-**1. Monster archetype definitions. This is the one that blocks work.**
+**1. Monster ATK.** The one real hole left in the monster picture. The site's
+own tooltip says attack scales with weapon and rank, and the site displays no
+attack value, so it did not work that part out either. Everything else about a
+monster computes.
 
-A monster's attributes are published as MULTIPLIERS on an archetype:
-`{arch: "Defender", str: 1.5, vit: 1.75, agi: 0.25, def: 5, mdef: 1, ms: 1, as: 2}`.
-Twelve archetypes are referenced across the 319 monsters:
+**2. `AttackSpeedRanks`.** The ASPD formula divides the weapon delay by
+`AttackSpeedRanks[SpeedRank]`, notes the player-effective value is 1.0, and says
+monsters ride their archetype rank instead. The table's values are not
+published, so a monster's `ms` and `as` stay ranks out of 5 with no seconds
+attached. Same root cause as (1).
 
-```
-Archer  Brute  Caster  Critter  Defender  Egg
-Flyer   Hybrid  Plant   Ravager  Runner    Undead
-```
-
-**None of the twelve is defined anywhere.** The `archetypes` table in
-`mechanics.json` holds 31 entries and every one is a player class. Without the
-base values a multiplier multiplies, not a single monster's actual Strength,
-defence or attack speed can be computed. We have the shape of all 319 monsters
-and the magnitude of none.
-
-**2. The monster health rule.** The Max HP formula's own note says a monster
-that is not a summon is handed to a different rule entirely, and that rule is
-not published. Combined with (1), monster durability is fully unknown.
-
-**3. `AttackSpeedRanks`.** The ASPD formula divides the weapon delay by
-`AttackSpeedRanks[SpeedRank]`, notes that the player-effective value is 1.0, and
-says monsters ride their archetype rank instead. The table's values are not
-published. `ms` and `as` on a monster are ranks 0 to 5 with no meanings.
-
-**4. The job experience curve.** Covered in
+**3. The job experience curve.** Covered in
 `spiritvale-engine-formulas.md`: unpublished, with a hypothesis and the evidence
 for it recorded separately from any claim of fact.
+
+**4. `SetAtkSpd`.** One stat the engine has and the published catalog does not.
 
 ## Unlabelled integers, the smaller gap
 
@@ -151,15 +160,21 @@ Split it, because one number would mislead:
 - **Content records: complete in count, complete in shape.** Every monster,
   item, card, gem, artifact, set, skill, status, passive, summon, map, recipe
   and drop table the wiki publishes, with no dangling reference between them.
-- **Monster combat values: zero.** Not partial. The multipliers are useless
-  without the twelve archetype base blocks, and those are not published
-  anywhere.
+- **Monster combat values: complete except attack power.** Health, the six
+  attributes, soft and flat defence and magic defence, hit and flee for all 319,
+  computed from a rule the wiki publishes twice (as code and as prose).
 - **World content (geometry, dialogue, quests, art): near zero,** and mostly by
   design rather than by omission.
 
-For designing this game's systems that is enough and then some. For copying
-SpiritVale's monster balance directly it is not, and no amount of re-fetching
-this site will fix it: the archetype table would have to come from the client.
+That is enough to design this game's systems on, and enough to copy SpiritVale's
+monster balance if we want it. The one thing that would still have to come from
+the client is monster attack power, and its companion the `AttackSpeedRanks`
+table.
+
+Two cautions on using the monster numbers. They are the community's
+reverse-engineering, not a decompile we ran, so they inherit whatever that got
+wrong. And `roundSig2` means every published health value is rounded to two
+significant figures: 15,000 is a display value, not necessarily the engine's.
 
 ## Re-verifying this
 

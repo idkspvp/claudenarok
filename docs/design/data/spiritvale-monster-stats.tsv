@@ -1,0 +1,348 @@
+# SpiritVale monster combat values, all 319, computed July 2026.
+#
+# NOT transcribed: derived by running the community wiki's own monStats() over
+# its published monsters.json. That function is its reverse-engineering of the
+# game's Formula.* system, corroborated by the prose tooltip it renders beside
+# the numbers. Nothing here is verified against a decompile by us.
+#
+# The rules, verbatim from the code:
+#   slv      = boss ? level*2 : level
+#   attr     = max(0, round(combat.<attr> * slv))          six attributes
+#   dmf      = boss ? 3 : 1                                 Def/MdefMult boss block
+#   def      = round(round(combat.def /10 * level) * dmf)
+#   mdef     = round(round(combat.mdef/10 * level) * dmf)
+#   defFlat  = round((floor(level/2) + floor(vit/5)) * dmf)
+#   mdefFlat = round((floor(level/4) + floor(vit/10) + floor(int/5)) * dmf)
+#   hp       = roundSig2( (100 + 10*level + 10*Tri(level)) * (1 + vit/100)
+#                         * (boss ? 101 : 1) * (1 + 0.25*clamp01((level-1)/149)) )
+#   hit      = floor(level + dex/2)
+#   flee     = floor(level + agi/2)
+#   exp/coin = boss kills pay 50x; coin = level * 3
+#
+# The archetype column is a LABEL ONLY. The wiki renders it as a tag and never
+# reads it numerically; the multipliers apply straight to level.
+#
+# NOT derivable, still open: monster ATK (the tooltip says it scales with weapon
+# and rank, and no ATK is shown), and the AttackSpeedRanks values behind the
+# moveRank / aspdRank columns, which are ranks out of 5.
+#
+id	name	level	boss	element	race	size	arch	exp	coin	hp	str	vit	agi	dex	int	luk	def	defFlat	mdef	mdefFlat	hit	flee	moveRank	aspdRank	ranged
+Devil Bat	Fire Bat	0	0	Fire	Demon	1	Flyer	0	3	120	1	1	2	1	0	1	0	0	0	0	1	2	3	4	0
+Devil Hell	Hell Bat	0	0	Fire	Demon	2	Flyer	0	3	120	1	1	2	1	0	1	0	0	0	0	1	2	3	4	0
+Devil Hades	Inferno Bat	0	0	Fire	Demon	3	Flyer	0	3	120	1	1	2	1	0	1	0	0	0	0	1	2	3	4	0
+Pollen	Pollen	1	0	Neutral	Plant	1	Flyer	27	3	120	1	1	2	1	0	1	0	0	0	0	1	2	3	4	0
+Chick	Chick	2	0	Neutral	Beast	1	Critter	58	6	150	2	2	2	2	2	2	0	1	0	0	3	3	2	2	0
+Egg	Egg	4	0	Neutral	Formless	1	Egg	132	12	260	2	6	4	4	4	4	0	3	0	1	6	6	0	0	0
+Seed	Seedling	5	0	Earth	Plant	2	Plant	175	15	310	5	4	1	8	8	5	1	2	2	2	9	5	0	5	0
+Bee	Bee	6	0	Wind	Insect	1	Flyer	222	18	380	5	3	11	5	2	3	1	3	1	1	8	11	3	4	0
+Bumble	Bumblebee	7	0	Wind	Insect	2	Flyer	273	21	470	5	4	12	5	2	4	1	3	1	1	9	13	3	4	0
+Fledgling	Fledgling	8	0	Neutral	Beast	2	Critter	328	24	580	6	6	6	6	6	6	1	5	0	3	11	11	2	2	0
+Sprout	Sprout	9	0	Earth	Plant	2	Brute	387	27	740	16	14	7	9	2	7	3	6	1	3	13	12	3	3	0
+Bird	Rooster	10	0	Neutral	Beast	3	Critter	450	30	820	8	8	8	8	8	8	1	6	0	3	14	14	2	2	0
+Wisp Blue	Frost Wisp	11	0	Water	Formless	1	Caster	517	33	940	6	6	6	19	19	11	0	6	4	5	20	14	3	2	0
+Wisp Purple	Lightning Wisp	12	0	Wind	Formless	1	Caster	588	36	1100	6	6	6	21	21	12	0	7	5	7	22	15	3	2	0
+Wisp Red	Fire Wisp	14	0	Fire	Formless	1	Caster	742	42	1400	7	7	7	25	25	14	0	8	6	8	26	17	3	2	0
+Wisp Yellow	Earth Wisp	15	0	Earth	Formless	1	Caster	825	45	1600	8	8	8	26	26	15	0	8	6	8	28	19	3	2	0
+Sting	Vespa	15	1	Wind	Insect	3	Flyer	41250	2250	170000	23	15	53	23	8	15	6	30	6	15	26	41	3	4	0
+Treant Minion Autumn	Maple Sapling	16	0	Fire	Plant	1	Hybrid	912	48	1900	20	16	12	20	20	8	3	11	3	9	26	22	4	3	0
+Rat Dark	Sewer Rat	16	0	Shadow	Beast	1	Critter	912	48	1900	12	12	12	12	12	12	2	10	0	7	22	22	2	2	0
+Cat Meow	Sparkit	16	0	Wind	Beast	1	Hybrid	912	48	1900	20	16	12	20	20	8	3	11	3	9	26	22	4	3	0
+Burrow	Digger	17	0	Earth	Beast	1	Brute	1003	51	2300	30	26	13	17	4	13	5	13	2	6	25	23	3	3	0
+Treant Tree Autumn	Maple Treant	17	0	Fire	Plant	2	Brute	1003	51	2300	30	26	13	17	4	13	5	13	2	6	25	23	3	3	0
+Treant Minion Evergreen	Pine Sapling	17	0	Earth	Plant	1	Hybrid	1003	51	2200	21	17	13	21	21	9	3	11	3	9	27	23	4	3	0
+Treant Tree Evergreen	Pine Treant	18	0	Earth	Plant	2	Brute	1098	54	2600	32	27	14	18	5	14	5	14	2	7	27	25	3	3	0
+Rat Grey	Plague Rat	18	0	Poison	Beast	1	Critter	1098	54	2300	14	14	14	14	14	14	2	11	0	7	25	25	2	2	0
+Treant Forest Autumn	Maple Ancient	19	0	Fire	Plant	3	Hybrid	1197	57	2700	24	19	14	24	24	10	4	12	4	9	31	26	4	3	0
+Treant Forest Evergreen	Pine Ancient	19	0	Earth	Plant	3	Hybrid	1197	57	2700	24	19	14	24	24	10	4	12	4	9	31	26	4	3	0
+Dog Pup	Pup	19	0	Fire	Beast	1	Brute	1197	57	2900	33	29	14	19	5	14	6	14	2	7	28	26	3	3	0
+Rat White	Albino Rat	20	0	Neutral	Beast	1	Critter	1300	60	2800	15	15	15	15	15	15	2	13	0	9	27	27	2	2	0
+Dog Bark	Hound	20	0	Fire	Beast	2	Brute	1300	60	3200	35	30	15	20	5	15	6	16	2	9	30	27	3	3	0
+Flower Pot Monster	Mandrake	20	0	Earth	Plant	3	Brute	1300	60	3200	35	30	15	20	5	15	6	16	2	9	30	27	3	3	0
+Eyeball Bat Blue	Azure Gazer	21	0	Undead	Demon	1	Flyer	1407	63	3000	16	11	37	16	5	11	2	12	2	7	29	39	3	4	0
+Bunny	Bunny	21	0	Neutral	Beast	1	Critter	1407	63	3100	16	16	16	16	16	16	2	13	0	9	29	29	2	2	0
+Eyeball Bat Green	Jade Gazer	22	0	Undead	Demon	1	Flyer	1518	66	3300	17	11	39	17	6	11	2	13	2	7	30	41	3	4	0
+Egglet	Egglet	23	0	Neutral	Formless	2	Runner	1633	69	3700	29	17	35	23	6	29	5	14	2	7	34	40	5	4	0
+Eyeball Bat Red	Ruby Gazer	24	0	Undead	Demon	1	Flyer	1752	72	3900	18	12	42	18	6	12	2	14	2	8	33	45	3	4	0
+Rabbit	Rabbit	25	0	Neutral	Beast	2	Critter	1875	75	4500	19	19	19	19	19	19	3	15	0	10	34	34	2	2	0
+Skeleton	Skeleton	25	0	Undead	Demon	1	Ravager	1875	75	4700	38	25	25	25	13	25	5	17	3	10	37	37	4	4	0
+Whirlwind	Breeze	26	0	Wind	Demon	1	Caster	2002	78	4600	13	13	13	46	46	26	0	15	10	16	49	32	3	2	0
+Mushroom	Shroom	26	0	Water	Plant	1	Brute	2002	78	5600	46	39	20	26	7	20	8	20	3	10	39	36	3	3	0
+Wolf Pup	Wolf Cub	26	0	Shadow	Beast	1	Ravager	2002	78	5100	39	26	26	26	13	26	5	18	3	10	39	39	4	4	0
+Glow Wisp Purple	Lightning Glimmer	27	0	Wind	Formless	2	Caster	2133	81	4900	14	14	14	47	47	27	0	15	11	16	50	34	3	2	0
+Fungi	Fungi	28	0	Water	Plant	2	Brute	2268	84	6600	49	42	21	28	7	21	8	22	3	12	42	38	3	3	0
+Wind	Gale	28	0	Wind	Demon	2	Caster	2268	84	5300	14	14	14	49	49	28	0	16	11	17	52	35	3	2	0
+Cat Lightning	Voltpaw	29	0	Wind	Beast	2	Hybrid	2407	87	6400	36	29	22	36	36	15	6	19	6	16	47	40	4	3	0
+Toadstool	Toadstool	30	0	Water	Plant	3	Brute	2550	90	7700	53	45	23	30	8	23	9	24	3	12	45	41	3	3	0
+Hare	Vorpal Hare	30	1	Neutral	Beast	3	Runner	127500	4500	780000	75	45	90	60	15	75	18	72	9	42	60	75	5	4	0
+Wind Mage	Wind Mage	30	0	Wind	Demon	3	Caster	2550	90	6100	15	15	15	53	53	30	0	18	12	18	56	37	3	2	0
+Wolf	Wolf	30	0	Shadow	Beast	2	Ravager	2550	90	6900	45	30	30	30	15	30	6	21	3	13	45	45	4	4	0
+Cacti	Cacti	31	0	Earth	Plant	1	Plant	2697	93	6900	31	23	8	47	47	31	3	19	9	18	54	35	0	5	0
+Scorpling	Scorpling	31	0	Fire	Insect	1	Critter	2697	93	6900	23	23	23	23	23	23	3	19	0	13	42	42	2	2	0
+Posy	Sea Blossom	31	0	Water	Fish	1	Critter	2697	93	6900	23	23	23	23	23	23	3	19	0	13	42	42	2	2	0
+Butterfly Hue	Sprite	31	0	Holy	Insect	1	Flyer	2697	93	6500	23	16	54	23	8	16	3	18	3	9	42	58	3	4	0
+Glow Wisp Blue	Frost Glimmer	32	0	Water	Formless	2	Caster	2848	96	7000	16	16	16	56	56	32	0	19	13	20	60	40	3	2	0
+Moth Luna	Luna Moth	32	0	Ghost	Insect	1	Flyer	2848	96	7000	24	16	56	24	8	16	3	19	3	10	44	60	3	4	0
+Mole Rat	Mole	32	0	Earth	Beast	2	Brute	2848	96	8900	56	48	24	32	8	24	10	25	3	13	48	44	3	3	0
+Sun Blossom	Nymph	32	0	Holy	Plant	1	Caster	2848	96	7000	16	16	16	56	56	32	0	19	13	20	60	40	3	2	0
+Spore	Spore	32	0	Neutral	Plant	2	Plant	2848	96	7400	32	24	8	48	48	32	3	20	10	19	56	36	0	5	0
+Cactus	Cactus	33	0	Earth	Plant	2	Brute	3003	99	9500	58	50	25	33	8	25	10	26	3	14	49	45	3	3	0
+Butterfly Fairy	Fairy	33	0	Holy	Insect	2	Caster	3003	99	7400	17	17	17	58	58	33	0	19	13	20	62	41	3	2	0
+Glow Wisp Yellow	Fire Glimmer	33	0	Fire	Formless	2	Caster	3003	99	7400	17	17	17	58	58	33	0	19	13	20	62	41	3	2	0
+Scorpion	Scorpion	33	0	Fire	Insect	2	Brute	3003	99	9500	58	50	25	33	8	25	10	26	3	14	49	45	3	3	0
+Flora	Flora	34	0	Water	Fish	2	Critter	3162	102	8500	26	26	26	26	26	26	3	22	0	15	47	47	2	2	0
+Dog Bowwow	Hellhound	34	0	Fire	Beast	3	Hybrid	3162	102	9000	43	34	26	43	43	17	7	23	7	19	55	47	4	3	0
+Plant Chewer	Man-Eater	34	0	Neutral	Plant	3	Plant	3162	102	8500	34	26	9	51	51	34	3	22	10	20	59	38	0	5	0
+Moth Moon	Moon Moth	34	0	Ghost	Insect	2	Caster	3162	102	7900	17	17	17	60	60	34	0	20	14	21	64	42	3	2	0
+Sunflower Fairy	Sylvie	34	0	Holy	Plant	2	Caster	3162	102	7900	17	17	17	60	60	34	0	20	14	21	64	42	3	2	0
+Moth Celestial	Celestial Moth	35	0	Ghost	Insect	3	Caster	3325	105	8400	18	18	18	61	61	35	0	20	14	21	65	44	3	2	0
+Mole Rat King	Dire Mole	35	0	Earth	Beast	3	Brute	3325	105	11000	61	53	26	35	9	26	11	27	4	14	52	48	3	3	0
+Werewolf	Lycanthrope	35	1	Shadow	Beast	3	Ravager	166250	5250	1200000	105	70	70	70	35	70	21	93	12	66	70	70	4	4	0
+Petal	Nautilus	35	0	Water	Fish	3	Critter	3325	105	9000	26	26	26	26	26	26	4	22	0	15	48	48	2	2	0
+Butterfly Pixie	Pixie	35	0	Holy	Insect	3	Caster	3325	105	8400	18	18	18	61	61	35	0	20	14	21	65	44	3	2	0
+Cat Bolt	Raiju	35	1	Wind	Beast	3	Hybrid	166250	5250	1200000	88	70	53	88	88	35	21	93	21	96	79	61	4	3	0
+Golem Earth	Stone Golem	35	0	Earth	Formless	3	Defender	3325	105	11000	53	61	9	35	18	35	18	29	4	17	52	39	1	2	0
+Shell	Conch	36	0	Water	Fish	1	Critter	3492	108	9600	27	27	27	27	27	27	4	23	0	16	49	49	2	2	0
+Dragonfly Arrow	Darter	36	0	Wind	Insect	1	Flyer	3492	108	8900	27	18	63	27	9	18	4	21	4	11	49	67	3	4	0
+Housefly Icky	Gadfly	37	0	Poison	Insect	1	Flyer	3663	111	9500	28	19	65	28	9	19	4	21	4	11	51	69	3	4	0
+Mosquito Bug	Gnat	37	0	Wind	Insect	1	Flyer	3663	111	9500	28	19	65	28	9	19	4	21	4	11	51	69	3	4	0
+Slime	Slime	38	0	Poison	Formless	1	Critter	3838	114	11000	29	29	29	29	29	29	4	24	0	16	52	52	2	2	0
+Plant Shooter	Spitter	38	0	Poison	Plant	1	Plant	3838	114	11000	38	29	10	57	57	38	4	24	11	22	66	43	0	5	0
+Housefly Nom	Blowfly	39	0	Poison	Insect	2	Flyer	4017	117	11000	29	20	68	29	10	20	4	23	4	13	53	73	3	4	0
+Dragonfly Darner	Skimmer	39	0	Wind	Insect	2	Flyer	4017	117	11000	29	20	68	29	10	20	4	23	4	13	53	73	3	4	0
+Cactus Boss	Cactus King	40	1	Earth	Plant	3	Defender	210000	6000	2200000	120	140	20	80	40	80	60	144	12	96	80	50	1	2	0
+Spike	Hermit	40	0	Water	Fish	2	Critter	4200	120	12000	30	30	30	30	30	30	4	26	0	19	55	55	2	2	0
+Sunflora Pixie	Lady Fey	40	1	Holy	Plant	3	Caster	210000	6000	1300000	40	40	40	140	140	80	0	84	48	126	110	60	3	2	0
+Mosquito Pester	Mosquito	40	0	Wind	Insect	2	Flyer	4200	120	11000	30	20	70	30	10	20	4	24	4	14	55	75	3	4	0
+Scorpion King	Scorpion King	40	1	Fire	Insect	3	Ravager	210000	6000	1700000	120	80	80	80	40	80	24	108	12	78	80	80	4	4	0
+Bat	Bat	41	0	Poison	Beast	1	Flyer	4387	123	12000	31	21	72	31	10	21	4	24	4	14	56	77	3	4	0
+Goblin Minion	Goblin	41	0	Earth	Beast	1	Critter	4387	123	13000	31	31	31	31	31	31	4	26	0	19	56	56	2	2	0
+Goblin Trooper Mage	Goblin Mage	42	0	Earth	Beast	2	Caster	4578	126	12000	21	21	21	74	74	42	0	25	17	26	79	52	3	2	0
+Spider	Spider	42	0	Poison	Insect	1	Runner	4578	126	13000	53	32	63	42	11	53	8	27	4	15	63	73	5	4	0
+Snakelet	Adder	43	0	Poison	Beast	1	Ravager	4773	129	15000	65	43	43	43	22	43	9	29	4	18	64	64	4	4	0
+Goblin Trooper Assassin	Goblin Assassin	43	0	Earth	Beast	2	Runner	4773	129	14000	54	32	65	43	11	54	9	27	4	15	64	75	5	4	0
+Lurker	Lurker	43	0	Shadow	Demon	1	Ravager	4773	129	15000	65	43	43	43	22	43	9	29	4	18	64	64	4	4	0
+Goblin Trooper	Goblin Grunt	44	0	Earth	Beast	2	Brute	4972	132	19000	77	66	33	44	11	33	13	35	4	19	66	60	3	3	0
+Spider Toxin	Widow	44	0	Poison	Insect	2	Runner	4972	132	15000	55	33	66	44	11	55	9	28	4	16	66	77	5	4	0
+Creeper	Crawler	45	0	Shadow	Demon	2	Ravager	5175	135	17000	68	45	45	45	23	45	9	31	5	19	67	67	4	4	0
+Goblin Trooper Soldier	Goblin Soldier	45	0	Earth	Beast	2	Brute	5175	135	20000	79	68	34	45	11	34	14	35	5	19	67	62	3	3	0
+Hermit King	Hermit King	45	1	Water	Fish	3	Defender	258750	6750	3100000	135	158	23	90	45	90	69	159	15	105	90	56	1	2	0
+Vampire Bat	Nosferatu	46	0	Poison	Beast	2	Flyer	5382	138	15000	35	23	81	35	12	23	5	27	5	15	63	86	3	4	0
+Goblin Giant Mage	Orc Mage	46	0	Earth	Beast	3	Caster	5382	138	15000	23	23	23	81	81	46	0	27	18	29	86	57	3	2	0
+Snake	Viper	47	0	Poison	Beast	2	Ravager	5593	141	19000	71	47	47	47	24	47	9	32	5	19	70	70	4	4	0
+Goblin Giant	Orc	48	0	Earth	Beast	3	Brute	5808	144	23000	84	72	36	48	12	36	14	38	5	21	72	66	3	3	0
+Spider King	Arachne	49	0	Poison	Insect	3	Runner	6027	147	19000	61	37	74	49	12	61	10	31	5	17	73	86	5	4	0
+Horror	Horror	50	0	Shadow	Demon	3	Ravager	6250	150	22000	75	50	50	50	25	50	10	35	5	22	75	75	4	4	0
+Snake Naga	Naga	50	1	Poison	Beast	3	Ravager	312500	7500	2900000	150	100	100	100	50	100	30	135	15	96	100	100	4	4	0
+Goblin Giant Devil	Orc Soldier	50	0	Earth	Beast	3	Brute	6250	150	25000	88	75	38	50	13	38	15	40	5	21	75	69	3	3	0
+Monster Bat	Nightwing	51	0	Undead	Beast	1	Flyer	6477	153	19000	38	26	89	38	13	26	5	30	5	16	70	95	3	4	0
+Zombie Goblin Minion	Zombie Goblin	53	0	Undead	Beast	1	Undead	6943	159	29000	106	80	13	53	53	13	21	42	0	31	79	59	2	1	0
+Bat Lord	Night Baron	55	1	Poison	Beast	3	Flyer	371250	8250	2700000	83	55	193	83	28	55	18	114	18	69	96	151	3	4	0
+Goblin Giant Gold	Orc King	55	1	Earth	Beast	3	Brute	371250	8250	4700000	193	165	83	110	28	83	51	180	18	102	110	96	3	3	0
+Zombie Goblin Soldier	Zombie Grunt	55	0	Undead	Beast	2	Undead	7425	165	32000	110	83	14	55	55	14	22	43	0	32	82	62	2	1	0
+Monster Bat King	Nightlord	56	0	Undead	Beast	3	Flyer	7672	168	23000	42	28	98	42	14	28	6	33	6	18	77	105	3	4	0
+Zombie Goblin Giant	Zombie Orc	58	0	Undead	Beast	3	Undead	8178	174	36000	116	87	15	58	58	15	23	46	0	33	87	65	2	1	0
+Abomination	Abomination	60	0	Undead	Undead	3	Defender	8700	180	43000	90	105	15	60	30	60	30	51	6	31	90	67	1	2	0
+Turtle	Turtle Baby	61	0	Water	Beast	1	Critter	8967	183	32000	46	46	46	46	46	46	6	39	0	28	84	84	2	2	0
+Shark Baby	Sharkling	62	0	Water	Fish	1	Ravager	9238	186	36000	93	62	62	62	31	62	12	43	6	27	93	93	4	4	0
+Turtle Monster Blue	Azure Terrapin	63	0	Water	Beast	2	Critter	9513	189	34000	47	47	47	47	47	47	6	40	0	28	86	86	2	2	0
+Turtle Monster Green	Verdant Terrapin	63	0	Water	Beast	2	Critter	9513	189	34000	47	47	47	47	47	47	6	40	0	28	86	86	2	2	0
+Turtle Monster Red	Crimson Terrapin	64	0	Water	Beast	2	Critter	9792	192	35000	48	48	48	48	48	48	6	41	0	29	88	88	2	2	0
+Shark Humanoid	Shark Buccaneer	65	0	Water	Humanoid	3	Ravager	10075	195	41000	98	65	65	65	33	65	13	45	7	28	97	97	4	4	0
+Zombie Goblin King	Zombie Orc Lord	65	1	Undead	Beast	3	Undead	503750	9750	7300000	260	195	33	130	130	33	78	213	0	183	130	81	2	1	0
+Earthworm	Grave Worm	66	0	Undead	Insect	1	Undead	10362	198	50000	132	99	17	66	66	17	26	52	0	38	99	74	2	1	0
+Slime Jelly	Jellooze	67	0	Poison	Formless	2	Runner	10653	201	39000	84	50	101	67	17	84	13	43	7	24	100	117	5	4	0
+Plant Monster	Snapvine	67	0	Poison	Plant	2	Plant	10653	201	39000	67	50	17	101	101	67	7	43	20	41	117	75	0	5	0
+Dragonfly Swift	Hawker	68	0	Wind	Insect	3	Flyer	10948	204	36000	51	34	119	51	17	34	7	40	7	23	93	127	3	4	0
+Worm	Worm	68	0	Undead	Insect	2	Undead	10948	204	54000	136	102	17	68	68	17	27	54	0	40	102	76	2	1	0
+Mosquito Stinger	Bloodsucker	69	0	Wind	Insect	3	Flyer	11247	207	38000	52	35	121	52	17	35	7	41	7	23	95	129	3	4	0
+Housefly Junk	Bluebottle	69	0	Poison	Insect	3	Flyer	11247	207	38000	52	35	121	52	17	35	7	41	7	23	95	129	3	4	0
+Slime Monster	Oozelord	70	0	Poison	Formless	3	Ravager	11550	210	49000	105	70	70	70	35	70	14	49	7	31	105	105	4	4	0
+Plant Worm	Vinecrawler	70	0	Poison	Plant	3	Ravager	11550	210	49000	105	70	70	70	35	70	14	49	7	31	105	105	4	4	0
+Ice	Ice	71	0	Water	Formless	1	Caster	11857	213	40000	36	36	36	124	124	71	0	42	28	44	133	89	3	2	0
+Snow Bomb	Snowball	71	0	Water	Formless	1	Runner	11857	213	45000	89	53	107	71	18	89	14	45	7	25	106	124	5	4	0
+Dragon Water	Aqua Drake	72	0	Water	Dragon	1	Hybrid	12168	216	52000	90	72	54	90	90	36	14	50	14	43	117	99	4	3	0
+Cyclops Minion	Cyclopling	72	0	Neutral	Beast	1	Brute	12168	216	63000	126	108	54	72	18	54	22	57	7	31	108	99	3	3	0
+Cyclops	Cyclops	73	0	Neutral	Beast	2	Brute	12483	219	66000	128	110	55	73	18	55	22	58	7	32	109	100	3	3	0
+Icicle	Icicle	73	0	Water	Formless	2	Caster	12483	219	43000	37	37	37	128	128	73	0	43	29	46	137	91	3	2	0
+Dragon Ice	Rime Drake	73	0	Water	Dragon	2	Hybrid	12483	219	54000	91	73	55	91	91	37	15	50	15	43	118	100	4	3	0
+Elder Wisp Blue	Elder Frost	74	0	Water	Formless	3	Caster	12802	222	44000	37	37	37	130	130	74	0	44	30	47	139	92	3	2	0
+Dragon Blizzard	Frost Wyvern	74	0	Water	Dragon	3	Hybrid	12802	222	56000	93	74	56	93	93	37	15	51	15	43	120	102	4	3	0
+Queen Worm	Broodmother	75	1	Undead	Insect	3	Undead	656250	11250	11000000	300	225	38	150	150	38	90	246	0	210	150	94	2	1	0
+Cyclops Giant	Cyclops Titan	75	0	Neutral	Beast	3	Brute	13125	225	70000	131	113	56	75	19	56	23	59	8	32	112	103	3	3	0
+Golem Ice	Rime Golem	75	0	Water	Formless	3	Defender	13125	225	76000	113	131	19	75	38	75	38	63	8	38	112	84	1	2	0
+Angel	Angel	76	0	Holy	Angel	1	Caster	13452	228	47000	38	38	38	133	133	76	0	45	30	48	142	95	3	2	0
+Dragon Dusk	Dusk Drake	77	0	Shadow	Dragon	1	Hybrid	13783	231	62000	96	77	58	96	96	39	15	53	15	45	125	106	4	3	0
+Ghost	Ghost	77	0	Ghost	Demon	1	Flyer	13783	231	48000	58	39	135	58	19	39	8	45	8	25	106	144	3	4	0
+Soul	Soul	78	0	Ghost	Demon	1	Hybrid	14118	234	64000	98	78	59	98	98	39	16	54	16	45	127	107	4	3	0
+Archangel	Archangel	79	0	Holy	Angel	2	Caster	14457	237	51000	40	40	40	138	138	79	0	47	32	50	148	99	3	2	0
+Dragon Nightfall	Night Drake	79	0	Shadow	Dragon	2	Hybrid	14457	237	66000	99	79	59	99	99	40	16	54	16	45	128	108	4	3	0
+Haunt	Banshee	80	0	Ghost	Demon	2	Hybrid	14800	240	68000	100	80	60	100	100	40	16	56	16	48	130	110	4	3	0
+Ice Mage	Ice Mage	80	1	Water	Demon	3	Caster	740000	12000	6900000	80	80	80	280	280	160	0	168	96	252	220	120	3	2	0
+Bomb	Bomb	81	0	Fire	Formless	1	Runner	15147	243	62000	101	61	122	81	20	101	16	52	8	30	121	142	5	4	0
+Spook	Spook	82	0	Ghost	Demon	2	Flyer	15498	246	56000	62	41	144	62	21	41	8	49	8	28	113	154	3	4	0
+Phantom	Phantom	83	0	Ghost	Demon	3	Flyer	15853	249	58000	62	42	145	62	21	42	8	49	8	28	114	155	3	4	0
+Dragon Darkness	Shadow Wyvern	84	0	Shadow	Dragon	3	Hybrid	16212	252	77000	105	84	63	105	105	42	17	58	17	50	136	115	4	3	0
+Soul Mage	Soul Mage	85	0	Ghost	Demon	3	Hybrid	16575	255	79000	106	85	64	106	106	43	17	59	17	50	138	117	4	3	0
+Bud	Venom Bud	86	0	Poison	Plant	1	Flyer	16942	258	63000	65	43	151	65	22	43	9	51	9	29	118	161	3	4	0
+Worm Stink	Grub	87	0	Poison	Insect	1	Ravager	17313	261	84000	131	87	87	87	44	87	17	60	9	37	130	130	4	4	0
+Poison Bomb	Miasma	87	0	Poison	Formless	1	Runner	17313	261	74000	109	65	131	87	22	109	17	56	9	31	130	152	5	4	0
+Worm Rot	Maggot	88	0	Poison	Insect	2	Ravager	17688	264	86000	132	88	88	88	44	88	18	61	9	38	132	132	4	4	0
+Elder Wisp Purple	Elder Lightning	89	0	Wind	Formless	3	Caster	18067	267	68000	45	45	45	156	156	89	0	53	36	57	167	111	3	2	0
+Bloom	Nightbloom	89	0	Poison	Plant	2	Undead	18067	267	110000	178	134	22	89	89	22	36	70	0	52	133	100	2	1	0
+Blossom	Deathblossom	90	0	Poison	Plant	3	Undead	18450	270	110000	180	135	23	90	90	23	36	72	0	53	135	101	2	1	0
+Angel Mage	Seraphim Arbiter	90	1	Holy	Angel	3	Caster	922500	13500	9300000	90	90	90	315	315	180	0	189	108	282	247	135	3	2	0
+Jellyfish Robot	Stormjelly	91	0	Wind	Formless	1	Caster	18837	273	72000	46	46	46	159	159	91	0	54	36	57	170	114	3	2	0
+Alien Sporella	Chompcap	92	0	Poison	Plant	1	Plant	19228	276	85000	92	69	23	138	138	92	9	59	28	56	161	103	0	5	0
+Alien Spike	Cinderspike	92	0	Fire	Formless	1	Runner	19228	276	85000	115	69	138	92	23	115	18	59	9	33	138	161	5	4	0
+Alien Cyclops	Voidspawn	93	0	Holy	Formless	1	Hybrid	19623	279	100000	116	93	70	116	116	47	19	64	19	55	151	128	4	3	0
+Alien Biteroot	Chomproot	94	0	Poison	Plant	2	Plant	20022	282	90000	94	71	24	141	141	94	9	61	28	58	164	106	0	5	0
+Stinger Robot	Stormstinger	94	0	Wind	Formless	2	Caster	20022	282	78000	47	47	47	165	165	94	0	56	38	60	176	117	3	2	0
+Alien Wheel	Cinderwheel	95	0	Fire	Formless	2	Runner	20425	285	92000	119	71	143	95	24	119	19	61	10	34	142	166	5	4	0
+Worm Creep	Devourer	95	1	Poison	Insect	3	Ravager	1021250	14250	16000000	285	190	190	190	95	190	57	255	30	183	190	190	4	4	0
+Fire	Ember	96	0	Fire	Demon	1	Caster	20832	288	82000	48	48	48	168	168	96	0	57	38	61	180	120	3	2	0
+Imp Mischief	Gremlin	96	0	Fire	Demon	1	Runner	20832	288	95000	120	72	144	96	24	120	19	62	10	35	144	168	5	4	0
+Flame	Blaze	97	0	Fire	Demon	2	Caster	21243	291	84000	49	49	49	170	170	97	0	57	39	62	182	121	3	2	0
+Imp Demon	Imp	97	0	Fire	Demon	2	Runner	21243	291	98000	121	73	146	97	24	121	19	62	10	35	145	170	5	4	0
+Dragon Spark	Spark Drake	97	0	Fire	Dragon	1	Hybrid	21243	291	110000	121	97	73	121	121	49	19	67	19	57	157	133	4	3	0
+Dragon Fire	Flame Drake	98	0	Fire	Dragon	2	Hybrid	21658	294	110000	123	98	74	123	123	49	20	68	20	57	159	135	4	3	0
+Shade	Shade	98	0	Shadow	Demon	2	Brute	21658	294	140000	172	147	74	98	25	74	29	78	10	43	147	135	3	3	0
+Elder Wisp Yellow	Elder Fire	99	0	Fire	Formless	3	Caster	22077	297	88000	50	50	50	173	173	99	0	59	40	63	185	124	3	2	0
+Fire Mage	Fire Mage	99	0	Fire	Demon	3	Caster	22077	297	88000	50	50	50	173	173	99	0	59	40	63	185	124	3	2	0
+Dragon Inferno	Inferno Wyvern	99	0	Fire	Dragon	3	Hybrid	22077	297	120000	124	99	74	124	124	50	20	68	20	57	161	136	4	3	0
+Golem Fire	Magma Golem	100	0	Fire	Formless	3	Defender	22500	300	170000	150	175	25	100	50	100	50	85	10	52	150	112	1	2	0
+Shadow	Nightfiend	100	0	Shadow	Demon	3	Brute	22500	300	150000	175	150	75	100	25	75	30	80	10	45	150	137	3	3	0
+FIsh Blue	Bluefin	101	0	Water	Fish	1	Critter	22927	303	110000	76	76	76	76	76	76	10	65	0	47	139	139	2	2	0
+Fish Pink	Rosetail	101	0	Fire	Fish	1	Critter	22927	303	110000	76	76	76	76	76	76	10	65	0	47	139	139	2	2	0
+Octopus Baby Orange	Amber Squid	102	0	Water	Fish	1	Hybrid	23358	306	130000	128	102	77	128	128	51	20	71	20	60	166	140	4	3	0
+Octopus Baby Blue	Azure Squid	102	0	Water	Fish	1	Hybrid	23358	306	130000	128	102	77	128	128	51	20	71	20	60	166	140	4	3	0
+Fish Yellow	Goldtail	102	0	Wind	Fish	1	Critter	23358	306	110000	77	77	77	77	77	77	10	66	0	47	140	140	2	2	0
+Squid Baby	Squidling	102	0	Water	Fish	1	Critter	23358	306	110000	77	77	77	77	77	77	10	66	0	47	140	140	2	2	0
+Fish Man Blue	Aqua Merling	103	0	Water	Fish	2	Runner	23793	309	110000	129	77	155	103	26	129	21	66	10	37	154	180	5	4	0
+Fish Man Yellow	Canary Merling	103	0	Wind	Fish	2	Runner	23793	309	110000	129	77	155	103	26	129	21	66	10	37	154	180	5	4	0
+Octopus Baby Purple	Plum Squid	103	0	Water	Fish	1	Hybrid	23793	309	130000	129	103	77	129	129	52	21	71	21	60	167	141	4	3	0
+Fish Man Pink	Roseate Merling	103	0	Fire	Fish	2	Runner	23793	309	110000	129	77	155	103	26	129	21	66	10	37	154	180	5	4	0
+Octopus Orange	Amber Cuttlefish	104	0	Water	Fish	2	Hybrid	24232	312	130000	130	104	78	130	130	52	21	72	21	62	169	143	4	3	0
+Shark	Bull Shark	104	0	Water	Fish	2	Ravager	24232	312	130000	156	104	104	104	52	104	21	72	10	46	156	156	4	4	0
+Octopus White	Pearl Cuttlefish	104	0	Water	Fish	2	Hybrid	24232	312	130000	130	104	78	130	130	52	21	72	21	62	169	143	4	3	0
+Octopus Purple	Violet Cuttlefish	104	0	Water	Fish	2	Hybrid	24232	312	130000	130	104	78	130	130	52	21	72	21	62	169	143	4	3	0
+Fish Merman Pink	Coral Merman	105	0	Fire	Humanoid	3	Ravager	24675	315	140000	158	105	105	105	53	105	21	73	11	46	157	157	4	4	0
+Imp Devil	Demon Lord	105	1	Fire	Demon	3	Hybrid	1233750	15750	21000000	263	210	158	263	263	105	63	282	63	297	236	184	4	3	0
+Fish Merman Blue	Sapphire Merman	105	0	Water	Humanoid	3	Ravager	24675	315	140000	158	105	105	105	53	105	21	73	11	46	157	157	4	4	0
+Fish Merman Yellow	Topaz Merman	105	0	Wind	Humanoid	3	Ravager	24675	315	140000	158	105	105	105	53	105	21	73	11	46	157	157	4	4	0
+Mimic Living Trap	Trap Mimic	106	0	Ghost	Formless	1	Runner	25122	318	120000	133	80	159	106	27	133	21	69	11	39	159	185	5	4	0
+Mimic Barrel	Barrel Mimic	107	0	Ghost	Formless	2	Runner	25573	321	120000	134	80	161	107	27	134	21	69	11	39	160	187	5	4	0
+Mimic Candle	Candle Mimic	109	0	Ghost	Formless	2	Runner	26487	327	130000	136	82	164	109	27	136	22	70	11	40	163	191	5	4	0
+Mimic Treasure Chest	Chest Mimic	110	0	Ghost	Formless	3	Runner	26950	330	130000	138	83	165	110	28	138	22	71	11	40	165	192	5	4	0
+Eyeball Monster	Kraken	110	1	Water	Fish	3	Hybrid	1347500	16500	24000000	275	220	165	275	275	110	66	297	66	312	247	192	4	3	0
+Cyclops Bat	Eyeclops Bat	111	0	Undead	Beast	1	Flyer	27417	333	120000	83	56	194	83	28	56	11	66	11	37	152	208	3	4	0
+Death	Wight	112	0	Ghost	Demon	1	Caster	27888	336	120000	56	56	56	196	196	112	0	67	45	72	210	140	3	2	0
+Cyclops Bat Wizard	Eyeclops Arcanist	113	0	Undead	Beast	2	Caster	28363	339	120000	57	57	57	198	198	113	0	67	45	72	212	141	3	2	0
+Skeleton Mage	Skeleton Mage	113	0	Undead	Demon	2	Caster	28363	339	120000	57	57	57	198	198	113	0	67	45	72	212	141	3	2	0
+Mimic Sword	Sword Mimic	114	0	Ghost	Formless	3	Runner	28842	342	150000	143	86	171	114	29	143	23	74	11	41	171	199	5	4	0
+Skeleton Giant	Skeleton Giant	115	0	Undead	Demon	3	Defender	29325	345	240000	173	201	29	115	58	115	58	97	12	59	172	129	1	2	0
+Gloom	Spectre	116	0	Undead	Demon	1	Hybrid	29812	348	180000	145	116	87	145	145	58	23	81	23	69	188	159	4	3	0
+Eyeball Creep Blue	Azure Eyestalk	117	0	Undead	Demon	2	Hybrid	30303	351	180000	146	117	88	146	146	59	23	81	23	69	190	161	4	3	0
+Eyeball Creep Green	Jade Eyestalk	118	0	Undead	Demon	2	Hybrid	30798	354	190000	148	118	89	148	148	59	24	82	24	69	192	162	4	3	0
+Eyeball Creep Red	Ruby Eyestalk	118	0	Undead	Demon	2	Hybrid	30798	354	190000	148	118	89	148	148	59	24	82	24	69	192	162	4	3	0
+Grim Reaper	Reaper	119	0	Undead	Demon	2	Hybrid	31297	357	190000	149	119	89	149	149	60	24	82	24	69	193	163	4	3	0
+Direwolf	Direwolf	120	0	Undead	Beast	3	Ravager	31800	360	200000	180	120	120	120	60	120	24	84	12	54	180	180	4	4	0
+Mimic Book	Book Mimic	121	0	Ghost	Formless	1	Runner	32307	363	170000	151	91	182	121	30	151	24	78	12	45	181	212	5	4	0
+Goblin Warlock	Orc Warlock	121	0	Shadow	Beast	3	Caster	32307	363	150000	61	61	61	212	212	121	0	72	48	78	227	151	3	2	0
+Nightmare	Apparition	122	0	Ghost	Demon	2	Caster	32818	366	150000	61	61	61	214	214	122	0	73	49	78	229	152	3	2	0
+Eyeball Mage Blue	Azure Beholder	123	0	Undead	Demon	3	Caster	33333	369	150000	62	62	62	215	215	123	0	73	49	79	230	154	3	2	0
+Cyclops Bat Mage	Eyeclops Mage	123	0	Undead	Beast	3	Caster	33333	369	150000	62	62	62	215	215	123	0	73	49	79	230	154	3	2	0
+Goblin Warblade	Orc Reaver	123	0	Fire	Beast	3	Ravager	33333	369	210000	185	123	123	123	62	123	25	85	12	54	184	184	4	4	0
+Eyeball Mage Green	Jade Beholder	124	0	Undead	Demon	3	Caster	33852	372	150000	62	62	62	217	217	124	0	74	50	80	232	155	3	2	0
+Goblin Warcrusher	Orc Crusher	125	0	Earth	Beast	3	Brute	34375	375	280000	219	188	94	125	31	94	38	99	13	55	187	172	3	3	0
+Eyeball Mage Red	Ruby Beholder	125	0	Undead	Demon	3	Caster	34375	375	160000	63	63	63	219	219	125	0	74	50	80	234	156	3	2	0
+Wraith	Wraith King	125	1	Undead	Demon	3	Hybrid	1718750	18750	34000000	313	250	188	313	313	125	75	336	75	354	281	219	4	3	0
+Razor Robot	Razor Robot	126	0	Fire	Formless	1	Runner	34902	378	190000	158	95	189	126	32	158	25	82	13	46	189	220	5	4	0
+Shell Robot	Shell Robot	126	0	Fire	Formless	1	Runner	34902	378	190000	158	95	189	126	32	158	25	82	13	46	189	220	5	4	0
+Alien One Eye	Voidgazer	126	0	Holy	Formless	2	Hybrid	34902	378	220000	158	126	95	158	158	63	25	88	25	74	205	173	4	3	0
+Nozzle Robot	Nozzle Robot	127	0	Neutral	Formless	1	Hybrid	35433	381	230000	159	127	95	159	159	64	25	88	25	74	206	174	4	3	0
+Spike Robot	Spike Robot	127	0	Fire	Formless	1	Runner	35433	381	200000	159	95	191	127	32	159	25	82	13	46	190	222	5	4	0
+Tentacles Robot	Stormcoil	127	0	Wind	Formless	3	Caster	35433	381	160000	64	64	64	222	222	127	0	75	51	81	238	159	3	2	0
+Nose Robot	Nose Robot	128	0	Neutral	Formless	2	Hybrid	35968	384	230000	160	128	96	160	160	64	26	89	26	76	208	176	4	3	0
+Spiderling Robot	Spiderling Robot	128	0	Shadow	Formless	1	Ravager	35968	384	230000	192	128	128	128	64	128	26	89	13	56	192	192	4	4	0
+Spider Robot	Spider Robot	128	0	Shadow	Formless	2	Ravager	35968	384	230000	192	128	128	128	64	128	26	89	13	56	192	192	4	4	0
+Alien Plant	Chompbloom	129	0	Poison	Plant	3	Plant	36507	387	200000	129	97	32	194	194	129	13	83	39	79	226	145	0	5	0
+Delivery Robot	Delivery Robot	129	0	Neutral	Formless	2	Brute	36507	387	300000	226	194	97	129	32	97	39	102	13	57	193	177	3	3	0
+Snout Robot	Snout Robot	129	0	Neutral	Formless	3	Hybrid	36507	387	240000	161	129	97	161	161	65	26	89	26	76	209	177	4	3	0
+Death Mage	Abyss Archon	130	1	Ghost	Demon	3	Caster	1852500	19500	24000000	130	130	130	455	455	260	0	273	156	408	357	195	3	2	0
+Boxy Robot	Boxy Robot	130	0	Neutral	Formless	3	Brute	37050	390	310000	228	195	98	130	33	98	39	104	13	57	195	179	3	3	0
+Alien Wreck	Cindermaw	130	0	Fire	Formless	3	Runner	37050	390	210000	163	98	195	130	33	163	26	84	13	47	195	227	5	4	0
+Gripper Robot	Gripper Robot	130	0	Neutral	Formless	3	Brute	37050	390	310000	228	195	98	130	33	98	39	104	13	57	195	179	3	3	0
+Goblin Warchief	Orc Warchief	130	1	Wind	Beast	3	Hybrid	1852500	19500	38000000	325	260	195	325	325	130	78	351	78	369	292	227	4	3	0
+Alien Star	Little Star	131	0	Holy	Formless	1	Flyer	37597	393	180000	98	66	229	98	33	66	13	78	13	44	180	245	3	4	0
+Titan Turtle Sci Green	Solar Turtle	131	0	Fire	Humanoid	3	Caster	37597	393	180000	66	66	66	229	229	131	0	78	52	83	245	164	3	2	0
+Octopus King Blue	Azure Octopus	132	0	Water	Fish	3	Archer	38148	396	220000	99	99	165	231	33	165	13	85	26	48	247	214	2	1	0
+Mini Ice Bear B	Festive Baby	132	0	Holy	Beast	1	Runner	38148	396	220000	165	99	198	132	33	165	26	85	13	48	198	231	5	4	0
+Mini Ice Bear A	Ice Baby	132	0	Water	Beast	1	Runner	38148	396	220000	165	99	198	132	33	165	26	85	13	48	198	231	5	4	0
+Octopus King Orange	Amber Octopus	133	0	Water	Fish	3	Archer	38703	399	220000	100	100	166	233	33	166	13	86	27	49	249	216	2	1	0
+Ice Starflake A	Starflake	133	0	Holy	Formless	2	Flyer	38703	399	180000	100	67	233	100	33	67	13	79	13	45	183	249	3	4	0
+Ice Starflake B	Vanilla Ice	133	0	Water	Formless	2	Flyer	38703	399	180000	100	67	233	100	33	67	13	79	13	45	183	249	3	4	0
+Octopus King Purple	Violet Octopus	133	0	Water	Fish	3	Archer	38703	399	220000	100	100	166	233	33	166	13	86	27	49	249	216	2	1	0
+Titan Turtle Sci Blue	Hydro Turtle	134	0	Water	Humanoid	3	Ravager	39262	402	260000	201	134	134	134	67	134	27	93	13	59	201	201	4	4	0
+Ice Bear A	Ice Bear	134	0	Water	Beast	2	Brute	39262	402	340000	235	201	101	134	34	101	40	107	13	59	201	184	3	3	0
+Ice Starflake C	Shadow Ice	134	0	Shadow	Formless	2	Flyer	39262	402	190000	101	67	235	101	34	67	13	80	13	45	184	251	3	4	0
+Alien Big Blink	Cosmic Entity	135	1	Holy	Formless	3	Hybrid	1991250	20250	43000000	338	270	203	338	338	135	81	363	81	381	304	236	4	3	0
+Ice Bear B	Festive Bear	135	0	Holy	Beast	2	Brute	39825	405	350000	236	203	101	135	34	101	41	107	14	59	202	185	3	3	0
+Titan Turtle Sci Pink	Storm Turtle	135	0	Wind	Humanoid	3	Brute	39825	405	350000	236	203	101	135	34	101	41	107	14	59	202	185	3	3	0
+Spider Queen Robot	Suphara	135	1	Shadow	Formless	3	Ravager	1991250	20250	43000000	405	270	270	270	135	270	81	363	42	261	270	270	4	4	0
+Alien Twinkle	Twinkle	135	0	Holy	Formless	3	Flyer	39825	405	190000	101	68	236	101	34	68	14	80	14	45	185	253	3	4	0
+Crystal Guardian Amethyst	Amethyst Guardian	136	0	Shadow	Formless	0	Hybrid	40392	408	270000	170	136	102	170	170	68	27	95	27	81	221	187	4	3	0
+Love Heart	Cupid	136	0	Holy	Angel	1	Flyer	40392	408	190000	102	68	238	102	34	68	14	81	14	46	187	255	3	4	0
+Crystal Guardian Emerald	Emerald Guardian	136	0	Earth	Formless	0	Hybrid	40392	408	270000	170	136	102	170	170	68	27	95	27	81	221	187	4	3	0
+NightmareAcolyte	Umbral Acolyte	136	0	Holy	Humanoid	2	Caster	40392	408	190000	68	68	68	238	238	136	0	81	54	87	255	170	3	2	0
+Mini Ice Cube A	Ice Cube	137	0	Water	Formless	1	Critter	40963	411	240000	103	103	103	103	103	103	14	88	0	64	188	188	2	2	0
+Dark Wizard Black	Onyx Warlock	137	0	Ghost	Demon	2	Caster	40963	411	200000	69	69	69	240	240	137	0	81	55	88	257	171	3	2	0
+Mini Ice Cube B	Shadow Cube	137	0	Shadow	Formless	1	Critter	40963	411	240000	103	103	103	103	103	103	14	88	0	64	188	188	2	2	0
+Alien Starry	Starry	137	0	Holy	Formless	2	Flyer	40963	411	200000	103	69	240	103	34	69	14	81	14	46	188	257	3	4	0
+NightmareMage	Umbral Mage	137	0	Ghost	Humanoid	2	Caster	40963	411	200000	69	69	69	240	240	137	0	81	55	88	257	171	3	2	0
+NightmareRogue	Umbral Rogue	137	0	Poison	Humanoid	2	Runner	40963	411	240000	171	103	206	137	34	171	27	88	14	50	205	240	5	4	0
+Eyeball Mage	Beholder	138	0	Shadow	Demon	2	Caster	41538	414	200000	69	69	69	242	242	138	0	82	55	88	259	172	3	2	0
+Ice Cube A	Ice Golem	138	0	Water	Formless	2	Critter	41538	414	240000	104	104	104	104	104	104	14	89	0	64	190	190	2	2	0
+Dark Wizard Red	Scarlet Warlock	138	0	Ghost	Demon	2	Caster	41538	414	200000	69	69	69	242	242	138	0	82	55	88	259	172	3	2	0
+Ice Cube B	Shadow Golem	138	0	Shadow	Formless	2	Critter	41538	414	240000	104	104	104	104	104	104	14	89	0	64	190	190	2	2	0
+NightmareScout	Umbral Scout	138	0	Wind	Humanoid	2	Archer	41538	414	240000	104	104	173	242	35	173	14	89	28	51	259	224	2	1	0
+Dark Wizard Purple	Violet Warlock	138	0	Ghost	Demon	2	Caster	41538	414	200000	69	69	69	242	242	138	0	82	55	88	259	172	3	2	0
+Dragon King Orange	Earth Wyrm	139	0	Earth	Dragon	2	Brute	42117	417	380000	243	209	104	139	35	104	42	110	14	61	208	191	3	3	0
+Dragon King Green	Fire Wyrm	139	0	Fire	Dragon	2	Brute	42117	417	380000	243	209	104	139	35	104	42	110	14	61	208	191	3	3	0
+Dragon King Blue	Frost Wyrm	139	0	Water	Dragon	2	Brute	42117	417	380000	243	209	104	139	35	104	42	110	14	61	208	191	3	3	0
+Dragon King Purple	Lightning Wyrm	139	0	Wind	Dragon	2	Brute	42117	417	380000	243	209	104	139	35	104	42	110	14	61	208	191	3	3	0
+NightmareSummoner	Umbral Summoner	139	0	Undead	Humanoid	2	Hybrid	42117	417	290000	174	139	104	174	174	70	28	96	28	81	226	191	4	3	0
+NightmareWarrior	Umbral Warrior	139	0	Fire	Humanoid	2	Ravager	42117	417	290000	209	139	139	139	70	139	28	96	14	61	208	208	4	4	0
+Crystal Guardian Aqua	Aquamarine Guardian	140	0	Water	Formless	3	Hybrid	42700	420	300000	175	140	105	175	175	70	28	98	28	84	227	192	4	3	0
+Cobra Venom	Cobra	140	0	Poison	Beast	3	Hybrid	42700	420	300000	175	140	105	175	175	70	28	98	28	84	227	192	4	3	0
+Mega Ice Golem	Ice Titan	140	1	Water	Formless	3	Defender	2135000	21000	74000000	420	490	70	280	140	280	210	504	42	336	280	175	1	2	0
+Blind	Nightshade	140	0	Poison	Plant	3	Caster	42700	420	210000	70	70	70	245	245	140	0	84	56	91	262	175	3	2	0
+Turtle King	Turtle Champion	140	1	Earth	Humanoid	3	Ravager	2135000	21000	47000000	420	280	280	280	140	280	84	378	42	273	280	280	4	4	0
+NightmareKnight	Umbral Knight	140	0	Water	Humanoid	2	Defender	42700	420	430000	210	245	35	140	70	140	70	119	14	73	210	157	1	2	0
+Bot Robot	Repair Robot	141	0	Neutral	Formless	1	Runner	43287	423	260000	176	106	212	141	35	176	28	91	14	52	211	247	5	4	0
+Ball Robot Red	Strike Robot	141	0	Neutral	Formless	1	Runner	43287	423	260000	176	106	212	141	35	176	28	91	14	52	211	247	5	4	0
+Ball Robot Blue	Ward Robot	141	0	Neutral	Formless	1	Runner	43287	423	260000	176	106	212	141	35	176	28	91	14	52	211	247	5	4	0
+Dragon Bot	Dragon Bot	142	0	Neutral	Formless	1	Hybrid	43878	426	310000	178	142	107	178	178	71	28	99	28	84	231	195	4	3	0
+Alien Pew Pew	Galaxian Blaster	142	0	Neutral	Formless	1	Hybrid	43878	426	310000	178	142	107	178	178	71	28	99	28	84	231	195	4	3	0
+Nexus Robot	Nexus Robot	142	0	Neutral	Formless	1	Critter	43878	426	260000	107	107	107	107	107	107	14	92	0	66	195	195	2	2	0
+Hermit Robot Blue	Scout Robot	142	0	Neutral	Formless	1	Critter	43878	426	260000	107	107	107	107	107	107	14	92	0	66	195	195	2	2	0
+Hermit Robot Red	Sentry Robot	142	0	Neutral	Formless	1	Critter	43878	426	260000	107	107	107	107	107	107	14	92	0	66	195	195	2	2	0
+Blast Robot Red	Blast Robot	143	0	Neutral	Formless	2	Archer	44473	429	270000	107	107	179	250	36	179	14	92	29	52	268	232	2	1	0
+Grid Robot	Grid Robot	143	0	Neutral	Formless	1	Brute	44473	429	410000	250	215	107	143	36	107	43	114	14	63	214	196	3	3	0
+Blast Robot Blue	Guard Robot	143	0	Neutral	Formless	2	Archer	44473	429	270000	107	107	179	250	36	179	14	92	29	52	268	232	2	1	0
+Tech Robot	Tech Robot	143	0	Neutral	Formless	1	Brute	44473	429	410000	250	215	107	143	36	107	43	114	14	63	214	196	3	3	0
+Dragon Robot	Dragon Robot	144	0	Neutral	Formless	2	Hybrid	45072	432	320000	180	144	108	180	180	72	29	100	29	86	234	198	4	3	0
+Alien Galaxia	Galaxian Brute	144	0	Neutral	Formless	3	Critter	45072	432	270000	108	108	108	108	108	108	14	93	0	67	198	198	2	2	0
+Alien Skye	Galaxian Skimmer	144	0	Neutral	Formless	2	Hybrid	45072	432	320000	180	144	108	180	180	72	29	100	29	86	234	198	4	3	0
+Galaxy Robot	Galaxy Robot	144	0	Neutral	Formless	3	Hybrid	45072	432	320000	180	144	108	180	180	72	29	100	29	86	234	198	4	3	0
+Metal Robot	Metal Robot	144	0	Neutral	Formless	3	Brute	45072	432	420000	252	216	108	144	36	108	43	115	14	64	216	198	3	3	0
+Soldier Robot	Soldier Robot	145	0	Neutral	Formless	3	Brute	45675	435	420000	254	218	109	145	36	109	44	115	15	64	217	199	3	3	0
+Tanker Robot	Tanker Robot	145	0	Neutral	Formless	3	Defender	45675	435	470000	218	254	36	145	73	145	73	122	15	75	217	163	1	2	0
+Trooper Robot	Trooper Robot	145	0	Neutral	Formless	3	Brute	45675	435	420000	254	218	109	145	36	109	44	115	15	64	217	199	3	3	0
+Dragon Predator Robot	Robot Dragon	150	1	Neutral	Formless	3	Hybrid	2437500	22500	58000000	375	300	225	375	375	150	90	405	90	426	337	262	4	3	0
+NightmareBerserkerBoss	Echo Berserker	155	1	Fire	Humanoid	2	Ravager	2596250	23250	63000000	465	310	310	310	155	310	93	417	48	300	310	310	4	4	0
+NightmareGunslingerBoss	Echo Gunslinger	155	1	Wind	Humanoid	2	Archer	2596250	23250	52000000	233	233	388	543	78	388	48	369	93	228	426	349	2	1	0
+NightmareNecromancerBoss	Echo Necromancer	155	1	Undead	Humanoid	2	Undead	2596250	23250	87000000	620	465	78	310	310	78	186	510	0	438	310	194	2	1	0
+NightmarePaladinBoss	Echo Paladin	155	1	Water	Humanoid	2	Defender	2596250	23250	99000000	465	543	78	310	155	310	234	555	48	369	310	194	1	2	0
+NightmarePriestBoss	Echo Priest	155	1	Holy	Humanoid	2	Caster	2596250	23250	39000000	155	155	155	543	543	310	0	324	186	483	426	232	3	2	0
+NightmareShinobiBoss	Echo Shinobi	155	1	Poison	Humanoid	2	Hybrid	2596250	23250	63000000	388	310	233	388	388	155	93	417	93	438	349	271	4	3	0
+NightmareWizardBoss	Echo Wizard	155	1	Ghost	Humanoid	2	Caster	2596250	23250	39000000	155	155	155	543	543	310	0	324	186	483	426	232	3	2	0

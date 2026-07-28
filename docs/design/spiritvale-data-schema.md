@@ -258,14 +258,24 @@ combat    { arch, str, vit, agi, dex, int, luk, def, mdef, ms, as, ranged }
 drops     { equip[], material[], consumable[], gem[], card[], artifact[] }
 ```
 
-The attribute fields in `combat` are **multipliers on the archetype**, not
-absolute values: `{arch: "Defender", str: 1.5, vit: 1.75, agi: 0.25}`. Level and
-archetype supply the magnitude and the multipliers supply the character. Adding
-a monster means picking an archetype and six numbers near 1.0, which is a far
-cheaper authoring step than filling a stat block.
+The attribute fields in `combat` are **growth rates multiplied by level**, not
+absolute values: `{arch: "Defender", str: 1.5, vit: 1.75, agi: 0.25}` on a
+level-60 monster means Strength 90, Vitality 105, Agility 15. Adding a monster
+is picking six numbers near 1.0, which is a far cheaper authoring step than
+filling a stat block.
 
-`ms` and `as` are movement and attack speed ranks. `essence` is the drop chance
-for the substat re-roll currency.
+`arch` is a **label only**. It groups monsters for display and supplies no
+numbers; the multipliers apply straight to level. (An earlier draft in this
+directory treated the twelve archetypes as an unpublished stat table and called
+it the biggest gap in the dataset. That was wrong, and the correction is
+recorded in `spiritvale-coverage.md`.)
+
+`ms` and `as` are movement and attack speed ranks out of 5, and the table they
+index is not published. `essence` is the drop chance for the substat re-roll
+currency.
+
+The full derivation, and the computed values for all 319 monsters, are in
+`spiritvale-engine-formulas.md` and `data/spiritvale-monster-stats.tsv`.
 
 Races are the reference's ten unchanged: Angel, Beast, Demon, Dragon, Fish,
 Formless, Humanoid, Insect, Plant, Undead. Sizes are 0 to 3.
