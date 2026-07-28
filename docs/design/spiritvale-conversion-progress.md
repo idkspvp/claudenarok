@@ -10,7 +10,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 
 | Phase | What | Status | Landed at |
 |---|---|---|---|
-| 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | IN PROGRESS | |
+| 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
 | 1 | The stat core: six pure modules, no call sites | NOT STARTED | |
 | 2 | Wire the stat core, retire the Ragnarok one | NOT STARTED | |
 | 3 | Progression: cap 150, attribute ladder, job pools, refund | NOT STARTED | |
@@ -43,8 +43,21 @@ Two findings the plan did not anticipate, both corrected in the plan itself:
   Master NPC), so all 50 parity goldens moved. The diff is 4,415 lines in and
   4,415 out, a pure one-for-one rewrite: an id shift, not a behavior change.
 
-Jobs 2 (finish the talent removal: D0-2, D0-4 through D0-7) and 3 (M1c simple
-aggro) are NOT started.
+Job 2 landed (70e236c, 0d691d0, 34da7ce). D0-2 and D0-4 turned out to be already
+done: no ability carries spec gating and no TalentModifiers type survives. What
+was actually left was four DEEDS still wired to the retired trees through a
+meter stubbed to zero and two flags stubbed false, so they were permanently
+unearnable rather than retired; they are gone, with their crest art and their
+two Steam achievements. Also stripped 81 stale "(Mage talent)" parentheticals
+from ability descriptions and twenty comments citing modules deleted in D0.
+D0-6 is closed by tests/legacy_talent_save.test.ts: the tolerance already held
+by construction, but nothing proved it, so a save carrying the exact key set the
+trees persisted is now pinned to load identical to a clean one.
+
+Job 3 (M1c) is CANCELLED, not skipped. See the plan for the evidence: SpiritVale
+keeps accumulated threat, so replacing the table with simple aggro would move
+AWAY from the conversion target. The threat table stays; its modifiers get
+retuned in phase 4 with the skills that carry ThreatMult and SkillThreat.
 
 Baseline note for whoever picks this up: the suite carries 38 to 39 pre-existing
 failing files unrelated to any of this, several flaky under parallel load and
@@ -60,7 +73,17 @@ When the run hits a genuine ambiguity, it picks the behavior-preserving reading
 and records the assumption here with the phase it was made in. A later phase
 that contradicts one of these must say so.
 
-(nothing yet)
+**Phase 0.** Deleted content rather than leaving it inert, in three places: the
+card-duel deed, the four talent deeds, and their Steam achievements and crest
+art. The alternative was to leave them wired to stubs returning zero and false,
+which is what Phase D0 had already tried and is why they were still there. An
+achievement a player can see and can never earn is worse than one that is gone.
+
+**Phase 0.** Stripped the "(Mage talent)" parentheticals from the non-English
+catalog rows too, even though the repo reserves locale fills for the maintainer.
+Removing a phrase that describes a deleted system is a deletion, not a
+translation, and leaving it would have shipped a Spanish description of a system
+no Spanish-speaking player can reach.
 
 ## Blocked on
 
