@@ -117,7 +117,7 @@ Each phase is independently shippable, ends green, and states its own acceptance
 check. Nothing here is a rewrite: every step lands as a module behind an
 existing seam, per the repo's module-first rule.
 
-### Phase 0. Clear the dead weight (prerequisite, no design content)
+### Phase 0. Finish what is half-done (prerequisite, no design content)
 
 **Corrected.** An earlier draft of this plan claimed twenty of the 58 modules in
 `src/sim/combat/` had no importer, and built Phase 0 around clearing them. That
@@ -136,11 +136,17 @@ whole repo       1,223 files, 27 unreachable, and 26 of those are benign
                  middleware registered through the route registry)
 ```
 
-So there is no dead-weight problem. `weapon_class_atk` goes because SpiritVale
-derives weapon attack from the item's own stat lines rather than from a
-per-class band, which makes it wrong under the new model as well as unused.
+And `weapon_class_atk` is not dead either. It has no PRODUCTION importer, but
+three item-balance tests (`heroic_loot_flair`, `pvp_honor_gear`,
+`twohand_rebudget`) import it to assert that every weapon in the content tables
+sits inside its class's attack band. That is a live content guard, and a
+test-only consumer is a legitimate consumer. It becomes wrong at **phase 6**,
+when weapon attack starts coming from the item's own stat lines instead of a
+per-class band, and it should be deleted there, with its three guards replaced,
+not now.
 
-Phase 0 is therefore the pending work already open, plus one removal the user
+**So the dead-weight problem does not exist at all.** The directory is clean.
+Phase 0 is purely the pending work already open, plus one removal the user
 ordered:
 
 - **Cut the card duel minigame.** SpiritVale's "cards" are gear affixes dropped
@@ -150,7 +156,6 @@ ordered:
   instance, NPCs, i18n and six test files.
 - **Finish the talent removal** (`D0-2`, `D0-4` through `D0-7`).
 - **Replace the threat table with simple aggro** (`M1c`).
-- Delete `weapon_class_atk.ts`.
 
 **Accept:** `npm run gate` green; `tests/world_api_parity.test.ts`,
 `tests/architecture.test.ts`, `tests/deeds_content.test.ts` and
