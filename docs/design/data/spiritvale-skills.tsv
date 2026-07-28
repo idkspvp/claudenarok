@@ -1,0 +1,248 @@
+# SpiritVale skill database, 226 rows, read from the community client datamine
+# at spiritvalers.com (#/skills) in July 2026. Tab-separated.
+#
+# Columns:
+#   id        the engine's own skill id
+#   name      display name
+#   element   one of the ten, blank on a passive
+#   type      Magic | Melee | Ranged | passive
+#   target    Enemy | Ally | Self | Any
+#   place     Target | Ground | Toggle | (blank = area around the caster)
+#   maxLv     1, 2, 3, 5 or 10
+#   classes   slash-separated; a skill can belong to several
+#   power     a PERCENTAGE of a derived stat: "+100%/lv ATK", "100% +60%/lv ATK",
+#             "+300%/lv MATK", "+66.6%/lv ATK+MATK", "100% max HP", "... reflect"
+#   hits      packets per cast; may scale ("0 +1/lv", "1 -> 6 (Lv 1-10)")
+#   cast      seconds, may scale ("0 +0.8/lv s")
+#   cd        seconds, usually FALLS with level ("7 -1/lv s")
+#   sp        "base +X/lv SP"
+#   applies   statuses and passive bonuses, semicolon-separated
+#
+# A blank cell means the field is absent, which for a passive is most of them.
+id	name	element	type	target	place	maxLv	classes	power	hits	cast	cd	sp	applies
+ShadowRelease	Black Blade	Neutral	Ranged	Enemy	Target	10		+100%/lv ATK+MATK		0.5 s	1 s	10 +5/lv SP	
+free-cast	Free Cast		passive			5	Mage						+15% +10%/lv Free-cast while moving ; +50% +10%/lv Free-cast while attacking
+VolatileBolt	Volatile Bolt	Neutral	Ranged	Enemy	Target	10	Scout	+75%/lv ATK			4 s	10 +5/lv SP	Volatile 5s x5
+VenomStrike	Venom Strike	Neutral	Melee	Enemy	Target	5	Rogue/Weaver	100% +20%/lv ATK	2			3 +1/lv SP	Poison 5s 0.5+0.1/lv%
+Damnation	Damnation	Holy	Magic	Enemy	Target	5	Priest	+100%/lv ATK+MATK			3 s	20 +10/lv SP	Vulnerability 5s x2/lv ; Magic Exposure 5s x2/lv
+NPC_Poison	Gunk Shot	Poison	Ranged	Enemy	Target	5		+100%/lv ATK				7 +3/lv SP	Poison 5s
+FieldCurse	Banishment Field	Ghost	Magic	Enemy	Target	5		+100%/lv ATK+MATK	3	0.5 s	2 s	10 +5/lv SP	Curse 10s 0.5+0.1/lv%
+Endure	Endure	Neutral	Melee	Self		5	Knight/Weaver					10 SP	Endure 60s/lv
+Berserk	Berserk	Neutral	Melee	Self	Toggle	5	Berserker					20 SP	Berserk 1s
+SoulStrike	Soul Strike	Ghost	Magic	Enemy	Target	5	Summoner/Weaver	+60%/lv ATK+MATK	0 +1/lv	0.5 s		10 +5/lv SP	
+Haste	Haste	Neutral	Melee	Ally	Target	5	Acolyte/Rogue/Weaver					20 SP	Haste 60s/lv ; Slow Immunity 2s/lv
+ShadowStrike	Shadow Strike	Shadow	Magic	Enemy	Target	5		+100%/lv MATK	3	1 s		10 +5/lv SP	
+GrandCross	Grand Cross	Holy	Magic	Enemy		10	Paladin	+100%/lv ATK+MATK	3	1 s	3 s	10 +5/lv SP	
+NPC_WideCurse	Wide Curse	Shadow	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Curse 10s
+ChainLightning	Chain Lightning	Wind	Magic	Enemy	Target	5	Wizard	+300%/lv MATK	0 +1/lv	0 +0.8/lv s	1 s	20 +10/lv SP	Water Exposure 10s
+HolyLight	Holy Light	Holy	Magic	Enemy	Target	5	Acolyte/Weaver	+100%/lv MATK	3	1 s		10 +5/lv SP	
+IceShard	Ice Shard	Water	Magic	Enemy	Target	5	Mage/Weaver	+100%/lv MATK		0.75 s	1 s	15 +7/lv SP	Frozen 10s 0.5+0.1/lv% ; Wind Exposure 10s
+ShadowStep	Shadow Step	Neutral	Melee	Enemy	Target	5	Rogue/Weaver	+100%/lv ATK	2		7 -1/lv s	5 +2/lv SP	
+Barrier	Sacred Aegis	Neutral	Melee	Ally	Target	5			1 s	3 s	20 +10/lv SP	Sacred Aegis 60s/lv
+Smite	Smite	Holy	Magic	Enemy	Target	10	Priest	+60%/lv ATK+MATK			3 s	10 +5/lv SP	Stun 1.5s 0.03%/lv
+FieldDamage	Dissonance Well	Ghost	Magic	Enemy	Ground	5		+75%/lv ATK+MATK	2	0.5 s	5 s	15 +7/lv SP	Slow 1s
+Cyclone	Cyclone	Neutral	Melee	Enemy		10	Berserker	+125%/lv ATK	3		6 s	15 +7/lv SP	Bleeding 5s
+LifeDrain	Life Drain	Undead	Magic	Any	Target	5	Necromancer	+300%/lv MATK		0.5 s	3 s	20 +10/lv SP	
+DeathCoil	Death Coil	Undead	Magic	Any	Target	5	Necromancer	+300%/lv MATK	3	0.5 s	3 s	20 +10/lv SP	Decay 5s
+Stomp	Stomp	Neutral	Melee	Enemy	Ground	5	Warrior/Weaver	+100%/lv ATK			4 s	10 +5/lv SP	Stun 3s 0.15%/lv
+VenomCoating	Venom Coating	Neutral	Melee	Self		5	Rogue/Weaver					20 SP	Venom Coating 60s/lv
+Earthquake	Earthquake	Earth	Magic	Enemy	Ground	10	Wizard	+50%/lv MATK	1->6 (Lv1-10)	0 +0.8/lv s	5 s	40 +20/lv SP	Stun 3s 0.05%/lv ; Fire Exposure 10s
+DarkExorcism	Dark Exorcism	Shadow	Magic	Enemy	Ground	10		+77%/lv MATK	3	0 +0.5/lv s	5 s	40 +20/lv SP	
+Meteor	Meteor	Fire	Magic	Enemy	Ground	10	Wizard	+400%/lv MATK	0 +1/lv	0 +0.8/lv s	5 s	40 +20/lv SP	Stun 3s 0.1%/lv ; Burning 10s ; Earth Exposure 10s
+FieldSilence	Suppression Field	Ghost	Magic	Enemy	Target	5		+100%/lv ATK+MATK	3	0.5 s	2 s	10 +5/lv SP	Silence 5s 0.5+0.1/lv%
+ShieldBash	Shield Bash	Neutral	Melee	Enemy	Ground	5	Paladin	100% +60%/lv reflect			3 s	7 +3/lv SP	Stagger 5s ; Vulnerability 5s x5
+EnergyShield	Energy Shield	Neutral	Melee	Self		5	Mage					20 SP	Energy Shield 60s/lv
+Thunderbolt	Thunderbolt	Wind	Magic	Enemy	Target	5	Mage/Weaver	+200%/lv MATK	0 +2/lv	0 +0.8/lv s	1 s	10 +5/lv SP	
+Heal	Heal	Holy	Magic	Ally	Target	5	Acolyte/Weaver				1 s	10 +5/lv SP	Healing: 25% +25%/lv
+DivinePunishment	Divine Punishment	Holy	Magic	Enemy	Ground	10	Paladin	+50%/lv ATK+MATK	4	0 +0.3/lv s	5 s	20 +10/lv SP	Blind 5s
+Tempest	Tempest	Wind	Magic	Enemy	Ground	10	Wizard	+100%/lv MATK	0 +1/lv	0 +0.6/lv s	5 s	40 +20/lv SP	Blind 5s 0.05%/lv ; Water Exposure 10s
+Execute	Execute	Neutral	Melee	Enemy	Target	10	Berserker	+175%/lv ATK			4 s	15 +7/lv SP	Bleeding 5s
+FirePillar	Fire Pillar	Fire	Magic	Enemy	Ground	5	Wizard	+120%/lv MATK	2	0.25 s	3 s	20 +10/lv SP	Burning 1s ; Earth Exposure 10s
+ThunderStorm	Thunder Storm	Wind	Magic	Enemy	Ground	5	Mage/Weaver	+250%/lv MATK	0 +1/lv	0 +1/lv s	1 s	30 +15/lv SP	Water Exposure 10s
+HydroVortex	Hydro Vortex	Water	Magic	Enemy	Ground	5	Wizard	+100%/lv MATK	1	0 +1/lv s	5 s	30 +15/lv SP	Wind Exposure 10s
+SummonAngel	Summon Angel	Neutral	Melee	Self		3	Summoner			2 s	30 s	30 SP	
+IceRelease	Ice Release	Water	Magic	Enemy	Ground	5	Shinobi	+100%/lv MATK	2	1 s	1 s	15 +7/lv SP	Slow 1s
+Whirlwind	Whirlwind	Neutral	Melee	Enemy		10	Warrior/Weaver	+75%/lv ATK	2		6 s	10 +5/lv SP	
+Conviction	Conviction Aura	Neutral	Melee	Ally	Toggle	5						20 SP	Might 1s/lv
+StrafingVolley	Strafing Volley	Neutral	Ranged	Enemy	Target	5	Scout/Weaver	100% +50%/lv ATK	2			3 +1/lv SP	
+NPC_WidePoison	Wide Poison	Poison	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Poison 10s
+TetraVortexFire	Overload Fire	Fire	Magic	Enemy	Ground	5		+1000%/lv MATK	0 +4/lv	0 +2/lv s	10 s		Burning 10s
+Exorcism	Exorcism	Holy	Magic	Enemy	Ground	10	Priest	+77%/lv MATK	3	0 +0.5/lv s	5 s	40 +20/lv SP	
+BloodFrenzy	Blood Frenzy	Neutral	Melee	Self	Toggle	5	Berserker					20 SP	Blood Frenzy 1s ; Frenzy 1s
+FreezingField	Blizzard	Water	Magic	Enemy	Ground	10		+100%/lv MATK	3	0 +0.8/lv s	5 s	40 +20/lv SP	Frozen 10s 0.05%/lv ; Wind Exposure 10s
+Consecration	Consecration	Holy	Magic	Ally		10	Paladin				5 s	10 +5/lv SP	Healing: +10%/lv
+ShoutMight	Mighty Roar	Neutral	Melee	Ally	Toggle	5	Berserker					20 SP	Might 1s/lv
+AxeThrow	Axe Throw	Neutral	Melee	Enemy	Target	5	Berserker	100% +20%/lv ATK	2			5 +2/lv SP	Slow 5s 0.15%/lv
+Bash	Bash	Neutral	Melee	Enemy	Target	5	Warrior/Weaver	100% +60%/lv ATK				3 +1/lv SP	Stun 3s 0.05%/lv
+ShieldThrow	Shield Throw	Neutral	Ranged	Enemy	Target	10	Paladin	100% +10%/lv reflect				5 +2/lv SP	
+Firebolt	Firebolt	Fire	Magic	Enemy	Target	5	Mage/Weaver	+200%/lv MATK	0 +2/lv	0 +0.8/lv s	1 s	10 +5/lv SP	
+TurnUndead	Turn Undead	Holy	Magic	Enemy	Target	5	Priest	+100%/lv MATK		1 s	2 s	40 +20/lv SP	
+FireRelease	Fire Release	Fire	Magic	Enemy	Ground	5	Shinobi	+200%/lv MATK	0 +1/lv	1 s	1 s	15 +7/lv SP	
+PoisonGrenade	Poison Grenade	Poison	Ranged	Enemy	Ground	5	Gunslinger	+150%/lv ATK	0 +1/lv		6 s	10 +5/lv SP	Poison 5s
+weaver-mastery	Weaver Mastery		passive			10	Weaver						+3/lv ATK ; +3/lv MATK ; +1/lv All Stats ; +3 Skill Splash
+JudgementBlade	Judgement Blade	Holy	Magic	Enemy	Target	10	Paladin	+77%/lv ATK+MATK	3		1 s	7 +3/lv SP	Slow 5s
+Sanctuary	Sanctuary	Holy	Magic	Ally	Ground	10	Priest			0 +0.5/lv s	5 s	40 +20/lv SP	Healing: +15%/lv ; Sanctuary 1s ; Regeneration 5s
+Harvest	Harvest	Neutral	Melee	Enemy	Ground	5	Necromancer	+100%/lv ATK			3 s	10 +5/lv SP	Stagger 5s ; Vulnerability 5s x5
+DeathSpiral	Death Spiral	Neutral	Melee	Enemy		10	Necromancer	+100%/lv ATK	2		6 s	20 +10/lv SP	Decay 5s
+FieldHealing	Resonance Well	Holy	Magic	Ally	Ground	5			0.5 s	5 s	15 +7/lv SP	Healing: +15%/lv
+SmokeScreen	Smoke Screen	Neutral	Melee	Enemy	Ground	5	Rogue				10 -1/lv s	20 SP	Blind 1s
+ExplosiveGrenade	Explosive Grenade	Fire	Ranged	Enemy	Ground	10	Gunslinger	+150%/lv ATK	0 +1/lv		6 s	10 +5/lv SP	Burning 5s
+Cloaking	Cloaking	Neutral	Melee	Self		5	Rogue/Weaver				8 -1/lv s	20 SP	Cloaking 6s/lv
+Sacrifice	Sacrifice	Holy	Magic	Enemy	Target	5	Paladin					10 +5/lv SP	
+Vitality	Vitality Aura	Neutral	Melee	Ally	Toggle	5	Paladin					20 SP	Vitality 1s
+SummonWolf	Summon Wolf	Neutral	Melee	Self		3	Summoner			2 s	30 s	30 SP	
+NPC_WideSilence	Wide Silence	Neutral	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Silence 5s
+Reap	Reap	Neutral	Melee	Enemy		5	Necromancer	+200%/lv ATK	2		3 s	20 +10/lv SP	
+Fireball	Fireball	Fire	Magic	Enemy	Target	5	Mage/Weaver	+100%/lv MATK		0.75 s	1 s	30 +15/lv SP	Burning 10s ; Earth Exposure 10s
+DeathNova	Death Nova	Undead	Magic	Enemy		10	Necromancer	+250%/lv MATK	0 +1/lv	2 s	5 s	30 +15/lv SP	Decay 10s ; Desecrated 10s
+NPC_ManaLeech	Mana Drain	Neutral	Ranged	Enemy	Target	5		+100%/lv ATK			10 s	7 +3/lv SP	
+SacredGround	Sacred Ground	Holy	Magic	Ally	Ground	5	Priest			0 +1/lv s	5 s	40 +20/lv SP	Sacred Ground 1s
+NPC_WideStun	Wide Stun	Neutral	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Stun 3s
+VenomBloom	Venom Bloom	Neutral	Melee	Enemy	Target	5		100% ATK				3 +1/lv SP	Poison 5s x3
+dual-wield-mastery	Dual Wield Mastery		passive			5	Rogue/Warrior/Weaver						+50% +10%/lv Off-hand Damage
+SpellShield	Arcanum Ward	Neutral	Melee	Ally	Target	5	Acolyte				15 -1/lv s	20 +10/lv SP	Arcanum Ward 1s/lv
+LightningRelease	Lightning Release	Wind	Magic	Enemy	Ground	5	Shinobi	+200%/lv MATK	0 +1/lv	1 s	1 s	15 +7/lv SP	
+ShoutStun	Fearsome Cry	Neutral	Melee	Enemy		5		+100%/lv ATK			11 -1/lv s	20 SP	Stagger 5s ; Stun 3s
+SummonWraith	Summon Wraith	Neutral	Melee	Self		3	Necromancer			2 s	30 s	30 SP	
+Fanaticism	Fanaticism	Neutral	Melee	Ally	Toggle	5	Priest					20 SP	Frenzy 1s
+TrueSight	True Sight	Holy	Magic	Enemy		5	Acolyte/Mage/Summoner				10 s	20 SP	Revealed 1s/lv
+NPC_WideFreeze	Wide Freeze	Water	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Frozen 10s
+Icebolt	Icebolt	Water	Magic	Enemy	Target	5	Mage/Weaver	+200%/lv MATK	0 +2/lv	0 +0.8/lv s	1 s	10 +5/lv SP	
+BoneSpikes	Bone Spikes	Undead	Magic	Enemy	Ground	10	Necromancer	+66.6%/lv ATK+MATK	3	0.5 s	3 s	20 +10/lv SP	Slow 1s ; Desecrated 10s
+SummonCat	Summon Cat	Neutral	Melee	Self		3	Summoner			2 s	30 s	30 SP	
+BladeDance	Blade Dance	Neutral	Melee	Enemy		10	Rogue/Weaver	+75%/lv ATK	3		3 s	10 +5/lv SP	
+SpearStab	Impale	Neutral	Melee	Enemy	Target	5		100% +40%/lv ATK	2		3 s	7 +3/lv SP	Vulnerability 5s
+ShoutBlood	Blood Howl	Neutral	Melee	Ally	Toggle	5	Berserker					20 SP	Blood Lust 1s
+TetraVortex	Elemental Overload	Neutral	Magic	Enemy	Ground	5	Wizard	+1000%/lv MATK	0 +4/lv	0 +2/lv s	10 s	0 +100/lv SP	Magic Exposure 5s x4/lv
+FuryBond	Fury Bond	Neutral	Melee		Target	5	Summoner			1 s	1 s	20 SP	Ally Not Self ; Fury Bond 60s/lv ; Fury 60s/lv ; Might 60s/lv x1/lv
+WildCharge	Wild Charge	Neutral	Melee	Enemy	Ground	5	Berserker	+150%/lv ATK			4 s	10 +5/lv SP	Stun 3s 0.15%/lv
+BloodCrash	Blood Crash	Neutral	Melee	Self		5	Berserker				15 -1/lv s	20 SP	Healing: +5%/lv max HP
+brutality	Brutality		passive			3	Berserker						+25/lv Max Rage Stacks
+SummonAbomination	Summon Abomination	Neutral	Melee	Self		1	Necromancer			0.5 s	10 s	30 SP	
+Grace	Divine Grace	Neutral	Melee	Ally		5	Acolyte/Weaver			1 s		30 +15/lv SP	Divine Grace 60s/lv
+Cure	Cure	Neutral	Melee	Ally	Target	5	Acolyte/Rogue/Weaver				5 -1/lv s	10 SP	Poison Immunity 2s/lv ; Blind Immunity 2s/lv ; Silence Immunity 2s/lv
+SoulDrain	Soul Drain	Neutral	Melee		Toggle	5	Necromancer					20 SP	Summon ; Soul Drain 1s
+NPC_Stun	Stun Attack	Neutral	Melee	Enemy	Target	5		+100%/lv ATK				7 +3/lv SP	Stun 2s
+Earthbolt	Earthbolt	Earth	Magic	Enemy	Target	5	Mage/Weaver	+200%/lv MATK	0 +2/lv	0 +0.8/lv s	1 s	10 +5/lv SP	
+JumpShot	Jump Shot	Neutral	Ranged	Enemy	Ground	5	Gunslinger	+200%/lv ATK			11 -1/lv s	10 +5/lv SP	Vulnerability 5s x5 ; Silence 1s 0.2%/lv
+HolyWrath	Holy Wrath	Holy	Magic	Enemy	Target	5	Priest	+200%/lv MATK		1 s	5 s	60 +30/lv SP	Silence 5s
+EarthSpikes	Earth Spikes	Earth	Magic	Enemy	Ground	5	Mage/Weaver	+80%/lv MATK	2	0.75 s	1 s	20 +10/lv SP	Slow 5s 0.5+0.1/lv% ; Fire Exposure 10s
+FreezeGrenade	Freeze Grenade	Water	Ranged	Enemy	Ground	5	Gunslinger	+150%/lv ATK			6 s	10 +5/lv SP	Frozen 10s 0.5+0.1/lv% ; Vulnerability 5s x10
+SummonCactus	Summon Cactus	Neutral	Melee	Self		3	Summoner			2 s	30 s	30 SP	
+Combustion	Combustion	Fire	Magic	Enemy	Target	5		50% MATK				15 +7/lv SP	Burning 5s
+Counter	Counter Stance	Neutral	Melee	Self		5				3 s	10 SP	Counter 2s
+SummonSkeleton	Summon Skeleton	Neutral	Melee	Self		3	Necromancer			0.25 s	10 s	30 SP	
+Taunt	Taunt	Neutral	Melee	Enemy		5	Knight				6 -1/lv s	10 SP	Aggressive 5+2/lv s
+multistrike	Multistrike		passive			5	Rogue						+10%/lv Multistrike
+NPC_WideBlind	Wide Blind	Neutral	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Blind 10s
+PanicBurst	Panic Burst	Neutral	Ranged	Enemy		10	Gunslinger	+100%/lv ATK	5		6 s	7 +3/lv SP	
+PointBlankShot	Point Blank	Neutral	Ranged	Enemy	Target	10		+200%/lv ATK			6 s	10 +5/lv SP	Blind 5s
+StatusRecovery	Status Recovery	Neutral	Melee	Ally	Target	5	Priest				5 -1/lv s	10 +5/lv SP	Stun Immunity 2s/lv ; Frozen Immunity 2s/lv ; Burning Immunity 2s/lv ; Decay Immunity 2s/lv
+SpearThrust	Piercing Flurry	Neutral	Melee	Enemy	Target	5		100% +40%/lv ATK	3		3 s	7 +3/lv SP	Vulnerability 5s
+faith	Faith		passive			5	Acolyte/Paladin						+5%/lv Damage to Undead/Shadow ; +5%/lv Damage from Undead/Shadow
+DarkClaw	Dark Claw	Neutral	Melee	Enemy	Target	5	Berserker	100% +60%/lv ATK	3			5 +2/lv SP	Bleeding 5s
+reflect-shield	Reflect Shield		passive			5	Knight						+10%/lv Reflect Damage
+Frostglass	Frostglass	Water	Magic	Enemy	Target	5		250% MATK				15 +7/lv SP	Slow 5s
+AxeVortex	Vortex Slash	Neutral	Melee	Enemy		5		+120%/lv ATK			4 s	10 +5/lv SP	
+FlowState	Flow State	Neutral	Melee	Self	Toggle	5	Shinobi					20 SP	Flow State 1s
+MimicSeal	Mimic Seal	Neutral	Melee	Any	Target	5	Shinobi					20 SP	
+natural-resistance	Natural Resistance		passive			5	Warrior/Weaver						+3%/lv All Element Resist
+steady-hands	Steady Hands		passive			10	Scout/Weaver						+3/lv Bow Weapon ATK ; +1/lv DEX
+ShadowSeal	Shadow Seal	Neutral	Melee	Self		3	Shinobi				15 -1/lv s	20 +10/lv SP	
+increased-regeneration	Increased Regeneration		passive			5	Berserker/Knight						+5/lv HP Regen ; +0.2/lv Max HP Regen
+HolyShield	Holy Shield	Neutral	Melee	Self		5	Paladin					20 SP	Holy Shield 60s/lv
+EnchantPoison	Enchant Poison	Neutral	Melee	Self		5	Rogue					20 SP	Enchant Poison 60s/lv
+SpearSlice	Air Cutter	Neutral	Melee	Enemy		5		100% +40%/lv ATK	2		3 s	7 +3/lv SP	Stagger 5s ; Vulnerability 5s
+HighHeal	High Heal	Holy	Magic	Ally	Target	10	Priest			2 s	5 s	60 +30/lv SP	Healing: 100% +50%/lv + +2%/lv max HP
+LightningStrike	Flash Step	Neutral	Melee	Enemy	Ground	10		+150%/lv ATK			3 s	10 +5/lv SP
+SuppressiveShot	Suppressive Shot	Neutral	Ranged	Enemy	Target	5	Gunslinger	+100%/lv ATK			6 s	5 +2/lv SP	Weaken 5s ; Marked 10+4/lv s
+CorpseExplosion	Corpse Explosion	Neutral	Magic		Target	10	Necromancer	100% max HP		0.5 s	1 s	20 +10/lv SP	Summon Not Self
+ForceShot	Force Shot	Neutral	Ranged	Enemy	Target	5	Scout	+100%/lv ATK		0.5 s	1 s	5 +2/lv SP
+HighGuard	High Guard	Neutral	Melee	Ally	Toggle	5	Paladin					20 SP	Protection 1s ; Stability 1s
+GuardianBond	Guardian Bond	Neutral	Melee		Target	5	Summoner			1 s	1 s	20 SP	Ally Not Self ; Guardian Bond 60s/lv ; Vitality 60s/lv ; Regeneration 60s/lv x1/lv
+NPC_WideBleed	Wide Bleed	Neutral	Magic	Enemy		5		+100%/lv MATK		2 s		15 +7/lv SP	Bleeding 10s
+FanFire	Fan Fire	Neutral	Ranged	Enemy	Target	5	Gunslinger	+80%/lv ATK	3			3 +1/lv SP
+FlameOrb	Flame Orb	Neutral	Magic	Enemy	Ground	10	Shinobi	+80%/lv MATK	2	2 s	3 s	20 +10/lv SP	Burning 1s
+LightningReflexes	Lightning Reflexes	Neutral	Melee	Self		5	Rogue/Weaver					20 SP	Lightning Reflexes 60s/lv
+TriggerHappy	Trigger Happy	Neutral	Melee	Self	Toggle	5	Gunslinger					20 SP	Trigger Happy 1s
+SilentEdge	Silent Edge	Neutral	Melee	Self	Toggle	5	Shinobi					20 SP	Silent Edge 1s
+SummonSkeletonMage	Summon Skeleton Mage	Neutral	Melee	Self		2	Necromancer			0.25 s	10 s	30 SP
+Blessing	Benediction	Neutral	Melee	Ally		5				1 s		20 +10/lv SP	Benediction 60s/lv ; Curse Immunity 10s
+TwistOfFate	Twist Of Fate	Neutral	Melee	Enemy		5	Shinobi	+150%/lv ATK	0 +1/lv		11 -1/lv s	10 +5/lv SP	Stun 3s
+fortify	Fortify		passive			5	Knight/Weaver						+4%/lv Max HP ; +4%/lv Healing Received ; +2/lv VIT
+Revive	Resurrection	Neutral	Melee	Ally	Target	5	Acolyte		2.5 -0.5/lv s	10 -1/lv s	60 +30/lv SP
+SummonReanimation	Summon Reanimation	Neutral	Melee	Self		1	Necromancer			2 s	30 s	30 SP
+Sacrament	Sacrament	Neutral	Melee	Ally	Toggle	5	Priest					20 SP	Focus 1s/lv
+SniperShot	Sniper Shot	Neutral	Ranged	Enemy	Target	10	Gunslinger	+150%/lv ATK		0.5 s	6 s	10 +5/lv SP
+BoneSpear	Bone Spear	Undead	Magic	Enemy	Target	5	Necromancer	+66.6%/lv ATK+MATK	0 +1/lv	0.5 s		10 +5/lv SP	Decay 5s
+EnchantArmorHoly	Sanctify	Neutral	Melee	Self		5	Paladin					40 +20/lv SP	Sanctify 60s/lv
+WeaponThrow	Weapon Throw	Neutral	Ranged	Enemy	Target	5	Knight	100% +30%/lv ATK			3 s	7 +3/lv SP	Slow 5s ; Vulnerability 5s
+Defiance	Defiance Aura	Neutral	Melee	Ally	Toggle	5	Paladin					20 SP	Defiance 1s
+Divinity	Divinity	Neutral	Melee	Ally	Toggle	5	Priest					20 SP	Vitality 1s
+Reanimation	Reanimation	Neutral	Melee		Target	1	Necromancer			2 s	1 s	30 SP	Grave
+Unyielding	Unyielding	Neutral	Melee	Self		2	Berserker				30 -5/lv s	20 SP
+ninjutsu-mastery	Ninjutsu Mastery		passive			5	Shinobi						+1/lv Attack Range ; +2%/lv MATK ; +3%/lv MP Regen ; +4%/lv Max MP
+ShurikenFan	Shuriken Fan	Neutral	Ranged	Enemy	Ground	5	Shinobi	+50%/lv ATK	3		3 s	7 +3/lv SP
+ShoutFury	Furious Shout	Neutral	Melee	Ally	Toggle	5						20 SP	Fury 1s
+LifeBond	Life Bond	Neutral	Melee		Target	5	Paladin			1 s	10 s	20 SP	Ally Not Self ; Life Bond 60s/lv
+twohand-parry	Twohand Parry		passive			5	Knight/Necromancer						+6%/lv Block
+ArrowShower	Arrow Shower	Neutral	Ranged	Enemy	Ground	10	Scout/Weaver	+30%/lv ATK	2		4 s	7 +3/lv SP
+AxeArc	Twin Cleave	Neutral	Melee	Enemy		10		+50%/lv ATK	2		4 s	5 +2/lv SP
+CorpseBarrier	Corpse Barrier	Neutral	Melee		Target	5	Necromancer	50% max HP		1 s	3 s	20 +10/lv SP	Summon Not Self
+EndowHoly	Endow Holy	Neutral	Melee	Ally	Target	5	Priest					20 SP	Enchant Holy 60s/lv
+FireBarrier	Avatar of Fire	Neutral	Melee	Self	Toggle	5	Wizard					20 SP	Fire Barrier 1s ; Fire Attunement 1s
+ShrapnelShot	Shrapnel	Neutral	Ranged	Enemy	Target	5	Gunslinger	+200%/lv ATK	0 +1/lv		5 s	5 +2/lv SP	Slow 5s ; Bleeding 5s
+MountMastery	Gryphon Riding	Neutral	Melee	Self		5	Paladin					20 SP
+gun-mastery	Gun Mastery		passive			10	Gunslinger						+3/lv Pistol/Rifle/Shotgun Weapon ATK ; +5/lv GatlingGun/Launcher Weapon ATK ; +1%/lv Atk Speed
+GuardianSpirit	Guardian Spirit	Holy	Magic	Ally	Target	5	Priest				15 -1/lv s	30 +15/lv SP	Guardian Spirit 1s/lv
+summon-mastery	Summon Mastery		passive			10	Summoner						+10%/lv Summon Stat Share
+TwohandQuicken	Axe Quicken	Neutral	Melee	Self		5						20 SP	Axe Quicken 60s/lv
+FrostBlade	Binding Spiral	Neutral	Ranged	Enemy	Ground	10		+30%/lv ATK+MATK	3	1 s	3 s	15 +7/lv SP
+shadow-mastery	Shadow Mastery		passive			5	Shinobi						+2%/lv Perfect Dodge ; +4%/lv Move Speed ; +6%/lv Spell Dodge
+GroundSlam	Earth Splitter	Neutral	Melee	Enemy	Ground	5		+150%/lv ATK			4 s	10 +5/lv SP	Stagger 5s ; Slow 5s
+mace-mastery	Mace Mastery		passive			10	Priest						+3/lv Mace/Book/Wand Weapon ATK ; +1%/lv Atk Speed
+Zeal	Zeal	Neutral	Melee	Ally	Target	5	Priest					60 +30/lv SP	Zeal 60s/lv
+DeathBond	Death Bond	Neutral	Melee		Target	5	Necromancer			1 s	1 s	20 SP	Ally Not Self ; Death Bond 60s/lv
+axe-mastery	Axe Mastery		passive			10	Warrior						+3/lv Axe/Sword/Scythe Weapon ATK ; +1%/lv Crit Rate
+ShadowTrail	Shadow Trail	Neutral	Melee	Enemy		5		250% ATK				5 +2/lv SP	Slow 5s
+SummonMount	Summon Mount	Neutral	Melee	Self		5	Summoner				3 s	20 SP
+Aegis	Aegis of Light	Neutral	Melee	Ally		5					80 -10/lv s	20 +10/lv SP	Aegis 3s
+GraveChill	Grave Chill	Neutral	Melee		Toggle	5	Necromancer					20 SP	Summon ; Grave Chill 1s
+Lockdown	Lockdown	Neutral	Melee	Self		10	Gunslinger				20 -1/lv s	20 SP
+WaterBarrier	Avatar of Frost	Neutral	Melee	Self	Toggle	5	Wizard					20 SP	Water Barrier 1s ; Water Attunement 1s
+Conjurer	Conjurer	Neutral	Melee	Self	Toggle	5	Summoner					20 SP	Conjurer 1s
+Invoker	Invoker	Neutral	Melee	Self	Toggle	5	Summoner					20 SP	Invoker 1s
+spear-mastery	Spear Mastery		passive			10	Knight						+3/lv Spear/Sword/Mace Weapon ATK ; +35/lv Max HP
+Dispell	Absolution	Holy	Magic	Any	Target	5				2 s	10 -1/lv s	30 +15/lv SP
+FanOfKnives	Fan Of Knives	Neutral	Ranged	Enemy	Ground	5	Shinobi	+100%/lv ATK	0 +1/lv		3 s	7 +3/lv SP
+scythe-mastery	Scythe Mastery		passive			10	Necromancer						+3/lv Scythe/Axe/Sword Weapon ATK ; +1/lv HP Siphon
+WindBarrier	Avatar of Storm	Neutral	Melee	Self	Toggle	5	Wizard					20 SP	Wind Barrier 1s ; Wind Attunement 1s
+PiercingShot	Piercing Shot	Neutral	Ranged	Enemy	Target	5	Gunslinger	+150%/lv ATK		0.5 s	1 s	5 +2/lv SP	Vulnerability 5s x5
+ArcaneSigil	Arcane Sigil	Neutral	Melee	Self		5	Wizard					20 +10/lv SP	Arcane Sigil 60s/lv
+blade-mastery	Blade Mastery		passive			10	Rogue						+3/lv Dagger/Sword/Twinblade/Katar Weapon ATK ; +1%/lv Atk Speed
+DeathBramble	Necrotic Presence	Neutral	Melee		Toggle	5	Necromancer					20 SP	Summon ; Necrotic Presence 1s
+skeleton-mastery	Skeleton Mastery		passive			10	Necromancer						+1%/lv Summon ATK ; +1%/lv Summon MATK ; +1/lv Summon Resist
+NPC_BleedAttack	Bleed Attack	Neutral	Melee	Enemy	Target	5		+100%/lv ATK					Bleeding 5s
+EarthBarrier	Avatar of Stone	Neutral	Melee	Self	Toggle	5	Wizard					20 SP	Earth Barrier 1s ; Earth Attunement 1s
+ReviveAll	Salvation	Neutral	Melee	Ally		5	Priest			5 s	210 -30/lv s	400 SP
+AerialShot	Aerial Shot	Neutral	Ranged	Enemy	Ground	5	Gunslinger	+100%/lv ATK	0 +1/lv		11 -1/lv s	7 +3/lv SP
+SniperNest	Snipers Nest	Neutral	Ranged	Self	Toggle	5	Scout					20 SP	Sniper Nest 1s
+codex-mastery	Codex Mastery		passive			10	Acolyte						+3/lv Book/Wand/Mace Weapon MATK ; +1%/lv Healing
+increased-recovery	Increased Recovery		passive			5	Acolyte/Mage						+2/lv MP Regen ; +0.2/lv Max MP Regen
+SpearQuicken	Spear Quicken	Neutral	Melee	Self		5	Knight					20 SP	Spear Quicken 60s/lv
+SlowTrap	Slow Trap	Neutral	Ranged	Enemy	Ground	5	Scout				4 s	10 SP	Slow 1s/lv ; Vulnerability 1s/lv
+honed-blade	Honed Blade		passive			5	Warrior						+3%/lv Crit Damage
+precise-aim	Precise Aim		passive			5	Scout						+1/lv Attack Range ; +2/lv Hit
+EarthWall	Earth Wall	Earth	Magic	Enemy	Ground	5	Wizard					15 +7/lv SP	Fire Exposure 10s
+FlashBang	Flash Bang	Neutral	Ranged	Self		3	Gunslinger				9 -1/lv s	5 +2/lv SP
+shield-mastery	Shield Mastery		passive			5	Knight						+1%/lv Shield Block ; +1%/lv DEF ; +1%/lv MDEF
+Blink	Blink	Neutral	Melee	Any	Ground	5	Mage				10 -1/lv s	20 SP
+Agility	Inner Focus	Neutral	Melee	Self		5						20 SP	Inner Focus 60s/lv
+ShadowFeint	Elusive Feint	Neutral	Melee	Self		5					11 -1/lv s	7 +3/lv SP	Elusive 1s ; Cloaking 10+4/lv s
+Firewall	Firewall	Fire	Magic	Enemy	Ground	5		+50%/lv MATK
+SummonSwap	Summon Swap	Neutral	Melee	Self		5	Summoner				3 s	20 SP
+wand-mastery	Wand Mastery		passive			10	Mage						+3/lv Wand/Book/Sword Weapon MATK ; +1%/lv Cast Speed
+NPC_Pull	Pull	Neutral	Ranged	Enemy	Target	5		+100%/lv ATK			5 s	7 +3/lv SP	Stun 1s
+SummonRecall	Summon Recall	Neutral	Melee	Self		5	Summoner				3 s	20 SP
+Marked	Mark Target	Neutral	Ranged	Enemy	Target	5						10 SP	Marked 10+4/lv s
+NPC_Blind	Blind	Neutral	Magic	Enemy	Target	5		+100%/lv MATK			5 s	7 +3/lv SP	Blind 10s
