@@ -20,7 +20,7 @@ const SCHOOL_CUES = {
 
 // Wand auto-attack cues: distinct from a real spell cast's SCHOOL_CUES
 // projectile so a passive auto-attack doesn't sound identical to an actual
-// cast. Only the three wand-equipped classes (mage/arcane, priest/holy,
+// cast. Only the three wand-equipped classes (mage/arcane, acolyte/holy,
 // warlock/shadow, see classes.ts ranged.wand) have a dedicated cue; any other
 // school reaching here (should not happen) falls back to the real spell cue.
 const WAND_CUES: Partial<Record<MagicSchool, SfxId>> = {
@@ -155,7 +155,7 @@ export function castCueForAbility(ability: string): SfxId | null {
 
 export function materialImpactCue(target: Entity): SfxId {
   if (target.kind === 'player') {
-    return target.templateId === 'warrior' || target.templateId === 'paladin'
+    return target.templateId === 'swordman' || target.templateId === 'paladin'
       ? 'impact_metal'
       : 'impact_leather';
   }
@@ -213,14 +213,14 @@ export function weaponSwingCue(entity: Entity): SfxId {
     return 'melee_unarmed';
   }
   switch (entity.templateId) {
-    case 'rogue':
+    case 'thief':
     case 'warlock':
       return 'melee_swing_light';
-    case 'hunter':
+    case 'archer':
       return 'melee_bow';
     case 'paladin':
     case 'mage':
-    case 'priest':
+    case 'acolyte':
     case 'druid':
       return 'melee_swing_heavy';
     default:

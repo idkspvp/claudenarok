@@ -54,7 +54,7 @@ const jsClick = (sel) =>
 
 await new Promise((r) => setTimeout(r, 400));
 await jsClick('#btn-offline');
-await page.waitForSelector('#offline-select .mini-class[data-class="warrior"]', {
+await page.waitForSelector('#offline-select .mini-class[data-class="swordman"]', {
   visible: true,
   timeout: 15000,
 });
@@ -65,7 +65,7 @@ await page.evaluate(() => {
     n.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
-await jsClick('#offline-select .mini-class[data-class="warrior"]');
+await jsClick('#offline-select .mini-class[data-class="swordman"]');
 await jsClick('#btn-start-offline');
 await page
   .waitForSelector('#mobile-preflight-continue', { visible: true, timeout: 5000 })

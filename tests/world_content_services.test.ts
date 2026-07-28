@@ -63,11 +63,11 @@ describe('WorldContent static gameplay services', () => {
   it('rejects a custom noticeboard id before the next player spawn can overwrite it', () => {
     const empty = worldWithoutServices();
     setActiveWorldContent(empty);
-    const probe = new Sim({ seed: 71, playerClass: 'warrior', noPlayer: true, world: empty });
+    const probe = new Sim({ seed: 71, playerClass: 'swordman', noPlayer: true, world: empty });
     const collidingEntityId = probe.nextId;
     expect(collidingEntityId).toBeLessThan(STATIC_WORLD_SERVICE_ENTITY_ID_MIN);
     expect(probe.entities.has(collidingEntityId)).toBe(false);
-    const playerProbe = new Sim({ seed: 71, playerClass: 'warrior', world: empty });
+    const playerProbe = new Sim({ seed: 71, playerClass: 'swordman', world: empty });
     expect(playerProbe.playerId).toBe(collidingEntityId);
 
     const world: WorldContent = {
@@ -84,7 +84,7 @@ describe('WorldContent static gameplay services', () => {
     };
     setActiveWorldContent(world);
 
-    expect(() => new Sim({ seed: 71, playerClass: 'warrior', world })).toThrow(
+    expect(() => new Sim({ seed: 71, playerClass: 'swordman', world })).toThrow(
       'Invalid canonical Eastbrook noticeboard entityId',
     );
   });
@@ -93,7 +93,7 @@ describe('WorldContent static gameplay services', () => {
     const world = worldWithoutServices();
     expect(getActiveWorldContent()).toBe(BUILTIN_WORLD);
 
-    const sim = new Sim({ seed: 71, playerClass: 'warrior', world });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman', world });
 
     expect(getActiveWorldContent()).toBe(BUILTIN_WORLD);
     expect(sim.stationPlacements).toEqual([]);
@@ -118,7 +118,7 @@ describe('WorldContent static gameplay services', () => {
     const graveyard = { id: 'custom_rest', name: 'Custom Rest', x: 115, z: 45 };
     world.services = { graveyards: [graveyard] };
 
-    const sim = new Sim({ seed: 71, playerClass: 'warrior', world });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman', world });
     const healer = entitiesWithTemplate(sim, 'spirit_healer');
 
     expect(getActiveWorldContent()).toBe(BUILTIN_WORLD);
@@ -140,7 +140,7 @@ describe('WorldContent static gameplay services', () => {
 
   it('does not inherit built-in station gates when cfg.world omits services', () => {
     const world = worldWithoutServices();
-    const sim = new Sim({ seed: 71, playerClass: 'warrior', world });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman', world });
 
     expect(getActiveWorldContent()).toBe(BUILTIN_WORLD);
     expect(sim.stationPlacements).toEqual([]);
@@ -192,7 +192,7 @@ describe('WorldContent static gameplay services', () => {
       ],
     };
 
-    const sim = new Sim({ seed: 71, playerClass: 'warrior', world });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman', world });
     expect(getActiveWorldContent()).toBe(BUILTIN_WORLD);
     expect(isAtStation(sim.stationPlacements, world.playerStart, toolworks.type)).toBe(true);
 
@@ -226,7 +226,7 @@ describe('WorldContent static gameplay services', () => {
       },
     };
 
-    const sim = new Sim({ seed: 71, playerClass: 'warrior', world });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman', world });
     const bram = sim.entities.get(VALE_CUP_BRAM_ID);
 
     expect(bram).toMatchObject({
@@ -240,7 +240,7 @@ describe('WorldContent static gameplay services', () => {
   it('keeps built-in services unchanged after restoring the default world', () => {
     setActiveWorldContent(worldWithoutServices());
     setActiveWorldContent(null);
-    const sim = new Sim({ seed: 71, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 71, playerClass: 'swordman' });
 
     expect(sim.stationPlacements).toBe(STATIONS);
     expect(entitiesWithTemplate(sim, 'mailbox')).toHaveLength(
@@ -258,7 +258,7 @@ describe('WorldContent static gameplay services', () => {
     setActiveWorldContent(null);
     const builtin = new Sim({
       seed: 71,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
     });
 
@@ -282,7 +282,7 @@ describe('WorldContent static gameplay services', () => {
     };
     const explicit = new Sim({
       seed: 71,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       world: custom,
     });
@@ -291,7 +291,7 @@ describe('WorldContent static gameplay services', () => {
     // authorization, later joins, or release destinations in an existing Sim.
     setActiveWorldContent(custom);
     expect(builtin.stationPlacements).toBe(STATIONS);
-    const builtinPid = builtin.addPlayer('warrior', 'Builtin');
+    const builtinPid = builtin.addPlayer('swordman', 'Builtin');
     const builtinPlayer = builtin.entities.get(builtinPid);
     expect(builtinPlayer && { x: builtinPlayer.pos.x, z: builtinPlayer.pos.z }).toEqual(
       BUILTIN_WORLD.playerStart,
@@ -305,7 +305,7 @@ describe('WorldContent static gameplay services', () => {
 
     setActiveWorldContent(null);
     expect(explicit.stationPlacements).toEqual([customStation]);
-    const customPid = explicit.addPlayer('warrior', 'Custom');
+    const customPid = explicit.addPlayer('swordman', 'Custom');
     const customPlayer = explicit.entities.get(customPid);
     expect(customPlayer && { x: customPlayer.pos.x, z: customPlayer.pos.z }).toEqual(
       custom.playerStart,

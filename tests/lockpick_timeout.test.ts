@@ -21,7 +21,7 @@ import { Sim } from '../src/sim/sim';
 import { DT } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 
 /** Boot a Collapsed Reliquary finale, kill the boss, stand the player on the
  * reward chest. */

@@ -148,7 +148,7 @@ export function isFreshTwentyItem(cls: PlayerClass, item: ItemDef): boolean {
   // Level inference is not sound for this: the heroic-mark vendor registers its stock
   // at source level 20 (HEROIC_VENDOR_SOURCE_LEVEL), so a `source > 20` test lets
   // badge gear straight through, and some heroic pieces have NO derivable source at
-  // all, so no level test can reach them. Both leaked into the first shipped priest
+  // all, so no level test can reach them. Both leaked into the first shipped acolyte
   // kit, the second case handing out a RETIRED id that is save-compat only and not
   // obtainable in game. Table membership is exactly the question being asked, so it
   // is what gets asked.
@@ -171,7 +171,7 @@ export function isFreshTwentyItem(cls: PlayerClass, item: ItemDef): boolean {
   if (!canEquipItem(cls, item)) return false;
   // canEquipItem returns on the armor-rank check for anything with an armorType, so
   // a class-locked plate piece never reaches its own requiredClass test. Re-check it
-  // here or a mail class ends up wearing warrior-only tier pieces.
+  // here or a mail class ends up wearing swordman-only tier pieces.
   if (item.requiredClass && !item.requiredClass.includes(cls)) return false;
   return meetsLevelRequirement(DEV_KIT_LEVEL, item);
 }

@@ -10,7 +10,7 @@ import { BROWSER_PATH } from './browser_path.mjs';
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const USER = process.env.WOC_USER ?? 'Aelwyn';
 const PASS = process.env.WOC_PASS ?? 'correct-horse';
-const CLASSES = (process.env.WOC_CLASSES ?? 'warrior,mage,hunter').split(',');
+const CLASSES = (process.env.WOC_CLASSES ?? 'swordman,mage,archer').split(',');
 const VIEWPORTS = [
   { width: 1920, height: 1080 },
   { width: 1440, height: 900 },

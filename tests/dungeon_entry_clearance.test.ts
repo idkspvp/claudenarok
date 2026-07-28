@@ -59,7 +59,7 @@ describe('dungeon door clearance: no camp mob spawns on an overworld door', () =
   // door). Loop several seeds and assert exact clearance (no tolerance slack).
   for (const seed of [7, 99, 2024, 20061, 31337]) {
     it(`seed ${seed}: no camp mob spawns within the clear radius of any dungeon door`, () => {
-      const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+      const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: true });
       const mobs = [...(sim as any).entities.values()].filter((e: Entity) => e.kind === 'mob');
       expect(mobs.length).toBeGreaterThan(0);
       for (const mob of mobs) {

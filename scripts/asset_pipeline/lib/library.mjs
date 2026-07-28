@@ -27,13 +27,13 @@ const THUMBS_DIR = join(LIBRARY_DIR, 'thumbs');
 const CACHE_FILE = join(LIBRARY_DIR, 'cache.json');
 
 // Class -> body model, mirroring the CLASS_MODELS map in pipeline.mjs cmdSkin
-// and the VISUALS urls (mage.glb serves priest/mage/warlock).
+// and the VISUALS urls (mage.glb serves acolyte/mage/warlock).
 const SKIN_MODEL_CLASSES = {
-  knight: ['warrior'],
+  knight: ['swordman'],
   paladin: ['paladin'],
-  ranger: ['hunter'],
-  rogue: ['rogue'],
-  mage: ['priest', 'mage', 'warlock'],
+  ranger: ['archer'],
+  thief: ['thief'],
+  mage: ['acolyte', 'mage', 'warlock'],
   barbarian: ['shaman'],
   druid: ['druid'],
 };

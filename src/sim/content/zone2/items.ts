@@ -17,19 +17,12 @@ import type {
 } from '../../types';
 import { FERAL } from '../items';
 
-// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands warrior
+// Archetype groups for class-locked rewards (REWARD_ARCHETYPE hands swordman
 // rewards to paladins/shamans etc., so the lock must admit the whole group).
-const WAR: PlayerClass[] = ['warrior', 'paladin', 'shaman'];
-const MAG: PlayerClass[] = ['mage', 'priest', 'warlock', 'druid'];
-const ROG: PlayerClass[] = ['rogue', 'hunter'];
-const CASTER_WEAPON_CLASSES: PlayerClass[] = [
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-];
+const WAR: PlayerClass[] = ['swordman'];
+const MAG: PlayerClass[] = ['mage', 'acolyte'];
+const ROG: PlayerClass[] = ['thief', 'archer'];
+const CASTER_WEAPON_CLASSES: PlayerClass[] = ['mage', 'acolyte'];
 
 export const ZONE2_ITEMS: Record<string, ItemDef> = {
   // --- quest items ---

@@ -48,7 +48,7 @@ function joinServer(server: GameServer, fc: FakeClient, id: number, name: string
     id,
     id,
     name,
-    'warrior',
+    'swordman',
     null,
   );
   if ('error' in session) throw new Error(session.error);

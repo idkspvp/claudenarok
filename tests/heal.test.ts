@@ -24,7 +24,7 @@ import type { Aura, Entity } from '../src/sim/types';
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 5252): Sim {
-  return new Sim({ seed, playerClass: 'priest', autoEquip: true });
+  return new Sim({ seed, playerClass: 'acolyte', autoEquip: true });
 }
 
 // Construct an aura with only the fields the heal helpers read.
@@ -44,7 +44,7 @@ function aura(kind: Aura['kind'], value: number, extra: Partial<Aura> = {}): Aur
 
 // A distinct healer player (source) so it never aliases the healed target.
 function addHealer(sim: Sim): AnyEntity {
-  const pid = (sim as any).addPlayer('priest', 'Healer') as number;
+  const pid = (sim as any).addPlayer('acolyte', 'Healer') as number;
   return (sim as any).entities.get(pid) as AnyEntity;
 }
 

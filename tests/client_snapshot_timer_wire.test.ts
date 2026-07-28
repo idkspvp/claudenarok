@@ -7,7 +7,7 @@ import {
 } from '../src/net/snapshot_timer_wire';
 import type { PlayerClass } from '../src/sim/types';
 
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const client: any = Object.create(ClientWorld.prototype);
   client.cfg = { seed: 20061, playerClass };
   client.entities = new Map();
@@ -58,7 +58,7 @@ function playerWire(id: number, extra: Record<string, unknown> = {}): Record<str
   return {
     id,
     k: 'player',
-    tid: 'warrior',
+    tid: 'swordman',
     nm: `Player${id}`,
     lv: 20,
     x: 0,

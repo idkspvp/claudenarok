@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -16,7 +16,7 @@ function errorText(events: SimEvent[], pid: number): string | undefined {
 describe('/arena command', () => {
   it('reports rating with a win/loss record and win rate', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.arenaRating = 1530;
     meta.arenaWins = 12;
@@ -31,16 +31,18 @@ describe('/arena command', () => {
 
   it('reports an unranked character with no matches played', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph'); // defaults: 1500 / 0 / 0
+    const a = sim.addPlayer('swordman', 'Aleph'); // defaults: 1500 / 0 / 0
     sim.tick();
 
     sim.chat('/arena', a);
-    expect(errorText(sim.tick(), a)).toBe('Arena: 1v1 Rating 1500 - no matches played yet. 2v2 Rating 1500 - no matches played yet.');
+    expect(errorText(sim.tick(), a)).toBe(
+      'Arena: 1v1 Rating 1500 - no matches played yet. 2v2 Rating 1500 - no matches played yet.',
+    );
   });
 
   it('does not divide by zero when all games were draws (no wins or losses)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.arenaRating = 1490;
     meta.arenaWins = 0;
@@ -48,12 +50,14 @@ describe('/arena command', () => {
     sim.tick();
 
     sim.chat('/arena', a);
-    expect(errorText(sim.tick(), a)).toBe('Arena: 1v1 Rating 1490 - no matches played yet. 2v2 Rating 1500 - no matches played yet.');
+    expect(errorText(sim.tick(), a)).toBe(
+      'Arena: 1v1 Rating 1490 - no matches played yet. 2v2 Rating 1500 - no matches played yet.',
+    );
   });
 
   it('rounds the win rate and works through the /pvp and /rating aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.arenaRating = 1602;
     meta.arenaWins = 1;
@@ -73,7 +77,7 @@ describe('/arena command', () => {
 
   it('does not emit a chat event (self-only, unlogged)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     const result = sim.chat('/arena', a);

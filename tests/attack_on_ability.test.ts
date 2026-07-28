@@ -26,13 +26,12 @@ describe('abilityStartsAutoAttack', () => {
 
   it('does not engage on heals or self/ally buffs', () => {
     expect(abilityStartsAutoAttack(effectsOf('battle_shout'))).toBe(false); // selfBuff
-    expect(abilityStartsAutoAttack(effectsOf('mark_of_the_wild'))).toBe(false); // buffTarget (friendly)
+    expect(abilityStartsAutoAttack(effectsOf('power_word_fortitude'))).toBe(false); // buffTarget (friendly)
   });
 
   it('does not engage on pure crowd control', () => {
     expect(abilityStartsAutoAttack(effectsOf('polymorph'))).toBe(false); // polymorph only
     expect(abilityStartsAutoAttack(effectsOf('sap'))).toBe(false); // incapacitate only
-    expect(abilityStartsAutoAttack(effectsOf('hammer_of_justice'))).toBe(false); // stun, no damage
   });
 
   it('never engages on damage-breakable CC even when the ability also deals damage', () => {
@@ -90,7 +89,7 @@ describe('abilityStartsAutoAttack', () => {
     // startAutoAttack here pops a spurious "Invalid attack target." toast (#1063).
     expect(abilityStartsAutoAttack(effectsOf('arcane_explosion'))).toBe(true);
     expect(abilityStartsAutoAttack(effectsOf('thunder_clap'))).toBe(true);
-    expect(abilityStartsAutoAttack(effectsOf('consecration'))).toBe(true);
+    expect(abilityStartsAutoAttack(effectsOf('blizzard'))).toBe(true);
     expect(abilityStartsAutoAttack(effectsOf('cleave'))).toBe(true);
     expect(abilityStartsAutoAttack(effectsOf('heroic_leap'))).toBe(true);
   });
@@ -126,7 +125,7 @@ describe('deferAutoAttackUntilCastEnd (the aggro-before-damage bug)', () => {
     // any positive cast time waits for the successful castStop
     expect(deferAutoAttackUntilCastEnd(2.5)).toBe(true);
     expect(deferAutoAttackUntilCastEnd(0.1)).toBe(true);
-    // a real timed spell from content: the priest's smite carries a cast time
+    // a real timed spell from content: the acolyte's smite carries a cast time
     const smite = ABILITIES.smite;
     if (smite) expect(deferAutoAttackUntilCastEnd(smite.castTime)).toBe(true);
   });

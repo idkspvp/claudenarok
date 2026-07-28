@@ -49,8 +49,8 @@ const SCENARIO = {
     { id: 5, kind: 'npc', dead: false, localX: -2, localZ: 18, aggro: false },
   ],
   party: [
-    { pid: 1, cls: 'warrior', dead: 0, localX: 0, localZ: 20 },
-    { pid: 6, cls: 'warrior', dead: 0, localX: 4, localZ: 24 },
+    { pid: 1, cls: 'swordman', dead: 0, localX: 0, localZ: 20 },
+    { pid: 6, cls: 'swordman', dead: 0, localX: 4, localZ: 24 },
     { pid: 7, cls: 'mage', dead: 1, localX: -4, localZ: 16 },
   ],
 };

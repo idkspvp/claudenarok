@@ -65,12 +65,12 @@ const built = await page.evaluate(() => {
   const roster = [
     ['Brightoak', 'druid', 1],
     ['Stormcaller', 'shaman', 1],
-    ['Nightblade', 'rogue', 1],
+    ['Nightblade', 'thief', 1],
     ['Emberlyn', 'mage', 1],
-    ['Holyverse', 'priest', 2],
-    ['Ironhowl', 'warrior', 2],
+    ['Holyverse', 'acolyte', 2],
+    ['Ironhowl', 'swordman', 2],
     ['Grimfang', 'warlock', 2],
-    ['Swiftarrow', 'hunter', 2],
+    ['Swiftarrow', 'archer', 2],
   ];
   // Spawn bots in a cluster near the leader so the in-world frames have live units.
   const pids = roster.map(([name, cls], i) => {

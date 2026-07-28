@@ -93,7 +93,7 @@ describe('the one-time mastery reset through GameServer.join', () => {
       7,
       42,
       'Online',
-      'warrior',
+      'swordman',
       preCurveState() as never,
     );
     if ('error' in session) throw new Error(session.error);
@@ -134,7 +134,7 @@ describe('the one-time mastery reset through GameServer.join', () => {
       7,
       42,
       'Online',
-      'warrior',
+      'swordman',
       preCurveState() as never,
     );
     if ('error' in session) throw new Error(session.error);
@@ -145,7 +145,7 @@ describe('the one-time mastery reset through GameServer.join', () => {
     blob.craftSkills = { ...blob.craftSkills, armorcrafting: 40 };
     const server2 = new GameServer();
     const fc2 = fakeWs();
-    const session2 = server2.join(fc2.ws as never, 7, 42, 'Online', 'warrior', blob as never);
+    const session2 = server2.join(fc2.ws as never, 7, 42, 'Online', 'swordman', blob as never);
     if ('error' in session2) throw new Error(session2.error);
     const meta2 = server2.sim.meta(session2.pid);
     if (!meta2) throw new Error('missing meta');

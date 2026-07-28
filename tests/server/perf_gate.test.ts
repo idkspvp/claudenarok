@@ -432,7 +432,7 @@ wallDescribe('perf_gate ARM C: wall-clock added-p99 and tick p95 (PERF_GATE_WALL
     // server uses. See the header: this is tick self-cost + between-tick servicing,
     // not production gap jitter (the soak owns that).
     const { Sim } = await import('../../src/sim/sim');
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     const onion = createApiDispatcher({
       registry: createApiRegistry([probeRoute(PROBE_STATIC)]),
       delegate: () => {},

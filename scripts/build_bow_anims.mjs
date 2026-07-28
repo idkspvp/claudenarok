@@ -1,4 +1,4 @@
-// Build the hunter's bow-shot animation clip GLB.
+// Build the archer's bow-shot animation clip GLB.
 //
 // The KayKit ranged clips have no bow shot: 2H_Ranged_Shoot is the crossbow
 // shoulder-aim, Aiming/Shooting are near-static drawn holds, and Reload is a

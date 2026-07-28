@@ -1,4 +1,4 @@
-// Heroic anti-kite charge (MobTemplate.charge): the warrior/guard melee mobs of
+// Heroic anti-kite charge (MobTemplate.charge): the swordman/guard melee mobs of
 // the four heroic five-mans open with an Onrush-style gap closer so a ranged
 // kiter cannot hold them at range forever. The template field is inert until
 // applyDungeonMobTuning stamps Entity.chargeEnabled on a HEROIC spawn, so a

@@ -28,7 +28,7 @@ import { Sim } from '../src/sim/sim';
 import type { DeedMeterId } from '../src/sim/types';
 
 function makeSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function primary(sim: Sim) {
@@ -222,7 +222,7 @@ describe('the scheduler-resolved witness sweep', () => {
   it('a scheduled world boss rise feeds the witness mark within 100 yd', () => {
     const sim = new Sim({
       seed: 7,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       autoEquip: false,
       worldBossAtBoot: true,
     });

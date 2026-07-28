@@ -3,6 +3,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type TestSim = Sim & {
   addEntity(entity: Entity): void;
@@ -10,9 +11,9 @@ type TestSim = Sim & {
 };
 
 function makeHunter(rows: Record<number, string> = {}): TestSim {
-  const sim = new Sim({ seed: 2614, playerClass: 'hunter', autoEquip: false }) as TestSim;
+  const sim = new Sim({ seed: 2614, playerClass: 'archer', autoEquip: false }) as TestSim;
   sim.setPlayerLevel(20);
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   return sim;
 }
 
@@ -39,7 +40,7 @@ function advance(sim: Sim, ticks: number): SimEvent[] {
 }
 
 function castPatchUp(sim: TestSim): SimEvent[] {
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
   sim.player.gcdRemaining = 0;
   sim.castAbility('revive_pet');
   return advance(sim, 61);
@@ -49,7 +50,7 @@ describe('Hunter Patch Up', () => {
   it('heals only the living owned pet for exactly 240 over 12 sec', () => {
     const sim = makeHunter();
     const ownPet = addPet(sim, sim.playerId);
-    const otherPid = sim.addPlayer('hunter', 'Other Hunter');
+    const otherPid = sim.addPlayer('archer', 'Other Hunter');
     const foreignPet = addPet(sim, otherPid);
     sim.player.targetId = foreignPet.id;
 
@@ -91,9 +92,9 @@ describe('Hunter Patch Up', () => {
     ).toBe(false);
   });
 
-  it('does not heal or revive another hunter pet when the caster owns none', () => {
+  it('does not heal or revive another archer pet when the caster owns none', () => {
     const sim = makeHunter();
-    const otherPid = sim.addPlayer('hunter', 'Other Hunter');
+    const otherPid = sim.addPlayer('archer', 'Other Hunter');
     const foreignPet = addPet(sim, otherPid, 0);
     foreignPet.dead = true;
     sim.player.targetId = foreignPet.id;

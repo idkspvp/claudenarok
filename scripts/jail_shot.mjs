@@ -28,7 +28,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(200);
 await page.type('#char-name', 'Warden');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction('window.__game && window.__game.sim && window.__game.sim.player', {
   timeout: 90000,

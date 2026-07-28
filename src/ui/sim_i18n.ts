@@ -232,7 +232,7 @@ const baseEnTable = {
   // Cauterize's 5 min lockout debuff (combat/fire_mage.ts); survives death.
   'aura.cauterizeFatigue': 'Cauterize Fatigue',
   'mechanic.warStomp': 'Shuddering Stomp',
-  // Heroic warrior-mob anti-kite charge (MobTemplate.charge, src/sim/mob/charge.ts):
+  // Heroic swordman-mob anti-kite charge (MobTemplate.charge, src/sim/mob/charge.ts):
   // the stun debuff on the player and the {mechanic} in the "unleashes" line.
   'mechanic.charge': 'Onrush',
   'mechanic.boneCarapace': 'Bone Carapace',

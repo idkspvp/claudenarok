@@ -29,7 +29,7 @@ class FakeDb implements SocialDb {
   private members = new Map<number, { guildId: number; rank: GuildRank }>();
   private nextGuildId = 1;
 
-  addChar(id: number, name: string, cls = 'warrior', level = 10, realm = 'Claudemoon'): void {
+  addChar(id: number, name: string, cls = 'swordman', level = 10, realm = 'Claudemoon'): void {
     this.chars.set(id, { id, name, cls, level, realm, activeTitle: null });
   }
 
@@ -303,7 +303,7 @@ function setup() {
     tx.charCache.set(id, {
       id,
       name,
-      cls: opts.cls ?? 'warrior',
+      cls: opts.cls ?? 'swordman',
       level: opts.level ?? 10,
       realm: 'Claudemoon',
     });
@@ -844,11 +844,11 @@ describe('guilds', () => {
     await h.svc.guildInvite(h.actor(1), 'Bet');
     await h.svc.guildAccept(h.actor(2));
     h.tx.clear();
-    const withClass = { ...h.actor(1), cls: 'warrior' as const };
+    const withClass = { ...h.actor(1), cls: 'swordman' as const };
     expect(await h.svc.guildChat(withClass, 'hail')).toBe(true);
     for (const id of [1, 2]) {
       const line = h.tx.eventsFor(id).find((e) => e.type === 'chat')!;
-      expect(line.type === 'chat' && line.classId).toBe('warrior');
+      expect(line.type === 'chat' && line.classId).toBe('swordman');
     }
     h.tx.clear();
     expect(await h.svc.guildChat(h.actor(1), 'no live meta')).toBe(true);
@@ -858,7 +858,7 @@ describe('guilds', () => {
     h.tx.clear();
     expect(await h.svc.officerChat(withClass, 'ranks')).toBe(true);
     const officer = h.tx.eventsFor(2).find((e) => e.type === 'chat')!;
-    expect(officer.type === 'chat' && officer.classId).toBe('warrior');
+    expect(officer.type === 'chat' && officer.classId).toBe('swordman');
   });
 
   it('suppresses guild chat from a player the recipient ignores', async () => {

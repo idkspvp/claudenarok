@@ -16,7 +16,12 @@ mkdirSync(OUT, { recursive: true });
 const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
-  args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  args: [
+    '--no-sandbox',
+    '--use-gl=angle',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
 });
 
 try {
@@ -24,7 +29,7 @@ try {
   await page.setViewport({ width: 1280, height: 800 });
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
-  // Offline flow: Play Offline → name → Start (warrior auto-selected).
+  // Offline flow: Play Offline → name → Start (swordman auto-selected).
   await page.waitForSelector('#btn-offline', { timeout: 15000 });
   await page.evaluate(() => document.querySelector('#btn-offline').click());
   await page.waitForSelector('#char-name', { visible: true });
@@ -78,7 +83,10 @@ try {
     // Declutter: banish every other mob far away so only the crew is in frame.
     const crew = new Set([mogger.id, ...window.__lackeys]);
     for (const e of sim.entities.values()) {
-      if (e.kind === 'mob' && !crew.has(e.id)) { e.pos.x += 100000; e.prevPos = { ...e.pos }; }
+      if (e.kind === 'mob' && !crew.has(e.id)) {
+        e.pos.x += 100000;
+        e.prevPos = { ...e.pos };
+      }
     }
     // Target Mogger so the target frame names the warding boss.
     p.targetId = mogger.id;
@@ -105,11 +113,17 @@ try {
   console.log('saved ward_scene.png (full scene)');
 
   // Cropped close-up on Mogger + lackeys (the shielded crew).
-  await page.screenshot({ path: `${OUT}/ward_actors.png`, clip: { x: 420, y: 110, width: 480, height: 360 } });
+  await page.screenshot({
+    path: `${OUT}/ward_actors.png`,
+    clip: { x: 420, y: 110, width: 480, height: 360 },
+  });
   console.log('saved ward_actors.png (close-up)');
 
   // Cropped on the combat log showing the Bracing Order ward lines.
-  await page.screenshot({ path: `${OUT}/ward_log.png`, clip: { x: 8, y: 470, width: 580, height: 250 } });
+  await page.screenshot({
+    path: `${OUT}/ward_log.png`,
+    clip: { x: 8, y: 470, width: 580, height: 250 },
+  });
   console.log('saved ward_log.png (combat log)');
 } finally {
   await browser.close();

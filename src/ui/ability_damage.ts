@@ -46,7 +46,7 @@ export function abilityDamageBonus(
   // A weaponStrike / weaponDamage listed number is its flat bonus; Attack Power
   // rides the weapon swing (shown on the character sheet), so it falls through to
   // the switch default (0) here. Every other rider scales: Spell Power for spells,
-  // Ranged AP for hunter shots, melee Attack Power for physical specials.
+  // Ranged AP for archer shots, melee Attack Power for physical specials.
   const power = abilityScalingPower(scaling, def);
   switch (eff.type) {
     case 'directDamage':

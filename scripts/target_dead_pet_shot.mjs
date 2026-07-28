@@ -1,5 +1,5 @@
 // Visual proof for "target your own dead pet" (fix/target-own-dead-pet).
-// Boots offline as a hunter, turns a nearby mob into the player's OWN pet and kills
+// Boots offline as a archer, turns a nearby mob into the player's OWN pet and kills
 // it (dead = true, lootable = false) exactly as a wipe would leave it, then drives
 // the real target path (world.targetEntity) and opens the pet context menu from the
 // target portrait. Before the fix, targetEntity rejected the dead, unlootable pet so
@@ -29,7 +29,7 @@ await page.bringToFront(); // headless throttles rAF while backgrounded; __game 
 await click('#btn-offline');
 await new Promise((r) => setTimeout(r, 300));
 await page.type('#char-name', 'Houndmaster');
-await click('#offline-select .mini-class[data-class="hunter"]');
+await click('#offline-select .mini-class[data-class="archer"]');
 await new Promise((r) => setTimeout(r, 150));
 await click('#btn-start-offline');
 await page

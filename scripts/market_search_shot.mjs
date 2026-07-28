@@ -37,14 +37,14 @@ page.on('console', (m) => {
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
-await page.waitForSelector('#offline-select .mini-class[data-class="warrior"]', {
+await page.waitForSelector('#offline-select .mini-class[data-class="swordman"]', {
   visible: true,
   timeout: 20000,
 });
 await sleep(200);
 await page.evaluate(() => {
   document.querySelector('#char-name').value = 'Hero';
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-start-offline').click();
 });
 await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, {
@@ -87,7 +87,7 @@ const scene = await page.evaluate(() => {
   let listed = 0;
   for (let i = 0; i < 14; i++) {
     const pid = sim.addPlayer(
-      ['mage', 'rogue', 'priest', 'hunter'][i % 4],
+      ['mage', 'thief', 'acolyte', 'archer'][i % 4],
       'Seller' + 'ABCDEFGHIJKLMN'[i],
     );
     const e = sim.entities.get(pid);

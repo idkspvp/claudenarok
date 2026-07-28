@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 const SEED = 31337;
-const makeSim = (cls: 'warrior' | 'mage' = 'warrior') => new Sim({ seed: SEED, playerClass: cls });
+const makeSim = (cls: 'swordman' | 'mage' = 'swordman') =>
+  new Sim({ seed: SEED, playerClass: cls });
 
 // Spawn Deacon Voss adjacent to the player and hand it back.
 function spawnDeacon(sim: Sim, id = 980001, level = 12) {
@@ -18,6 +19,10 @@ function spawnDeacon(sim: Sim, id = 980001, level = 12) {
 // loop until the target carries the arcane-rot aura (the chance is 1 in tests).
 function swingUntilRot(sim: Sim, mob: any, target: any, tries = 60): boolean {
   for (let i = 0; i < tries; i++) {
+    // D1 took class and level armour away, so an ungeared target now eats the full
+    // swing and can die inside the loop, which clears the very aura under test.
+    // Keep it topped up: the case is about the DoT refreshing, not about survival.
+    target.hp = target.maxHp;
     (sim as any).mobSwing(mob, target);
     if (target.auras.some((a: any) => a.id === 'arcaneRot_deacon_voss')) return true;
   }
@@ -81,7 +86,11 @@ describe('mob arcane rot (on-hit arcane DoT)', () => {
     const player = sim.entities.get(sim.playerId)!;
     player.maxHp = 5000;
     player.hp = 5000;
-    const wolf = createMob(980050, MOBS.forest_wolf, 4, { x: player.pos.x, y: player.pos.y, z: player.pos.z });
+    const wolf = createMob(980050, MOBS.forest_wolf, 4, {
+      x: player.pos.x,
+      y: player.pos.y,
+      z: player.pos.z,
+    });
     sim.entities.set(wolf.id, wolf);
     for (let i = 0; i < 40; i++) (sim as any).mobSwing(wolf, player);
     expect(player.auras.some((a) => a.kind === 'dot')).toBe(false);

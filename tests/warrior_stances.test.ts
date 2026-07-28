@@ -16,17 +16,17 @@ import { ABILITIES } from '../src/sim/content/classes';
 import { Sim } from '../src/sim/sim';
 import { berserkerCritDamage, rageGenAuraMult } from '../src/sim/types';
 
-// Warrior combat stances (owner design 2026-07-08): a warrior always lives in
+// Warrior combat stances (owner design 2026-07-08): a swordman always lives in
 // exactly one stance valid for their spec. Battle = Arms/Prot/no-spec offensive
 // default (+10% rage); Guarded = Arms/Prot defensive; Berserker = Fury-only
 // offensive default (+3% crit chance, +3% crit damage, no downside). Stances are
 // mutually exclusive (exclusiveGroup 'warrior_stance') and auto-applied and
 // reconciled each player-tick.
 
-const makeSim = (seed = 42): Sim => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42): Sim => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 const stanceAuras = (sim: Sim) => sim.player.auras.filter((a) => isWarriorStanceKind(a.kind));
 
-describe('warrior stance pure core', () => {
+describe('swordman stance pure core', () => {
   it('exposes exactly the three stance ids/kinds', () => {
     expect([...WARRIOR_STANCE_IDS].sort()).toEqual(
       [BATTLE_STANCE, BERSERKER_STANCE, DEFENSIVE_STANCE].sort(),
@@ -37,7 +37,7 @@ describe('warrior stance pure core', () => {
     expect(isWarriorStanceKind('stealth')).toBe(false);
   });
 
-  // Specs are retired (Phase D0): every warrior may wear any of the three
+  // Specs are retired (Phase D0): every swordman may wear any of the three
   // stances, and Battle is the spawn default for everyone.
   it('makes all three stances available and Battle the default', () => {
     expect(availableWarriorStanceKinds()).toEqual([
@@ -74,8 +74,8 @@ describe('stance ability defs match the pure gating', () => {
   });
 });
 
-describe('warrior stances in the live sim', () => {
-  it('auto-applies Battle Stance to a fresh (no-spec) warrior, exactly one stance', () => {
+describe('swordman stances in the live sim', () => {
+  it('auto-applies Battle Stance to a fresh (no-spec) swordman, exactly one stance', () => {
     const sim = makeSim();
     sim.tick();
     const worn = stanceAuras(sim);
@@ -101,7 +101,7 @@ describe('warrior stances in the live sim', () => {
   });
 
   it('Berserker Stance folds +3% crit chance in recalcPlayerStats', () => {
-    // Isolated from Fury spec bonuses: apply the aura to a no-spec warrior and
+    // Isolated from Fury spec bonuses: apply the aura to a no-spec swordman and
     // let applyAura re-run recalc, so the delta is purely the stance fold.
     const sim = makeSim();
     sim.setPlayerLevel(20);

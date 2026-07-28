@@ -174,7 +174,7 @@ async function main() {
   check('characters require auth', noAuth.status === 401);
   const c1 = await api(
     '/api/characters',
-    { method: 'POST', body: JSON.stringify({ name: `Thorg${alpha}`, class: 'warrior' }) },
+    { method: 'POST', body: JSON.stringify({ name: `Thorg${alpha}`, class: 'swordman' }) },
     t1,
   );
   check('create character 1', c1.status === 200 && c1.body.id > 0);
@@ -186,7 +186,7 @@ async function main() {
   check('create character 2', c2.status === 200 && c2.body.id > 0);
   const badName = await api(
     '/api/characters',
-    { method: 'POST', body: JSON.stringify({ name: '!!', class: 'warrior' }) },
+    { method: 'POST', body: JSON.stringify({ name: '!!', class: 'swordman' }) },
     t1,
   );
   check('bad character name rejected', badName.status === 400);
@@ -237,7 +237,7 @@ async function main() {
   a.cmd({ cmd: 'targetNearest' });
   await sleep(200);
   check('target acquired or none in range', true); // mobs may be far from town; not fatal
-  // server-side cast validation: warrior with 0 rage is denied Battle Shout...
+  // server-side cast validation: swordman with 0 rage is denied Battle Shout...
   a.cmd({ cmd: 'cast', ability: 'battle_shout' });
   await sleep(400);
   const denied = a.events.some((e) => e.type === 'error' && e.text.includes('rage'));

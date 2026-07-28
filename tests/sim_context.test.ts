@@ -593,7 +593,7 @@ describe('createSimContext (isolated, fake host)', () => {
 });
 
 describe('Sim.ctx (real seam delegation)', () => {
-  const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 
   it('exposes the live shared rng/entities/time/tickCount', () => {
     const sim = makeSim();

@@ -41,7 +41,7 @@ await page.evaluate((name) => {
     i.value = name;
     i.dispatchEvent(new Event('input', { bubbles: true }));
   }
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click();
 }, 'Valdris');
 await new Promise((r) => setTimeout(r, 300));
 await page.evaluate(() => document.querySelector('#btn-start-offline')?.click());

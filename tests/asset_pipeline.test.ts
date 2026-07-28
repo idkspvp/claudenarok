@@ -136,7 +136,7 @@ describe('anchored registry edits', () => {
   it('supports array anchors, inserting before the closing bracket', () => {
     const ARR = [
       'export const SKINS = {',
-      '  player_warrior: [',
+      '  player_swordman: [',
       "    'skins/a.png',",
       '  ],',
       '  player_mage: [',
@@ -146,7 +146,7 @@ describe('anchored registry edits', () => {
       '',
     ].join('\n');
     const inserted = "    'skins/c.png',\n";
-    const out = integrate.insertIntoBlock(ARR, 'player_warrior: [', inserted);
+    const out = integrate.insertIntoBlock(ARR, 'player_swordman: [', inserted);
     const at = out.indexOf(inserted);
     expect(at).toBeGreaterThan(out.indexOf("'skins/a.png'"));
     expect(out.slice(at + inserted.length).startsWith('  ],\n  player_mage:')).toBe(true);
@@ -784,12 +784,12 @@ describe('asset library registry parsers', () => {
     const library = await libraryImport;
     const src = readFileSync(join(ROOT, 'src/render/characters/manifest.ts'), 'utf8');
     const map = library.parseVisualUrls(src);
-    expect(map.get('models/chars/players/knight.glb')).toContain('player_warrior');
+    expect(map.get('models/chars/players/knight.glb')).toContain('player_swordman');
     expect(map.get('models/creatures/wolf_basic.glb')).toEqual(
       expect.arrayContaining(['form_cat', 'mob_wolf']),
     );
     // Attach urls are attributed too (the knight's default sword).
-    expect(map.get('models/weapons/sword_1handed.glb')).toContain('player_warrior');
+    expect(map.get('models/weapons/sword_1handed.glb')).toContain('player_swordman');
   });
 
   it('parses SKINS into atlasPath -> [{key, index}] with correct indexes', async () => {
@@ -797,12 +797,12 @@ describe('asset library registry parsers', () => {
     const src = readFileSync(join(ROOT, 'src/render/characters/manifest.ts'), 'utf8');
     const map = library.parseSkinsMap(src);
     const knightA = map.get('textures/skins/knight/alt_a.png') ?? [];
-    expect(knightA).toEqual(expect.arrayContaining([{ key: 'player_warrior', index: 1 }]));
-    // mage.glb atlases serve priest, mage, and warlock.
+    expect(knightA).toEqual(expect.arrayContaining([{ key: 'player_swordman', index: 1 }]));
+    // mage.glb atlases serve acolyte, mage, and warlock.
     const mageA = map.get('textures/skins/mage/alt_a.png') ?? [];
     expect(mageA.map((s: { key: string }) => s.key).sort()).toEqual([
       'player_mage',
-      'player_priest',
+      'player_acolyte',
       'player_warlock',
     ]);
   });
@@ -830,7 +830,7 @@ describe('asset library registry parsers', () => {
     const knight = assets.find(
       (a: { path: string }) => a.path === 'models/chars/players/knight.glb',
     );
-    expect(knight.registration.visualKeys).toContain('player_warrior');
+    expect(knight.registration.visualKeys).toContain('player_swordman');
     expect(knight.registration.referenced).toBe(true);
   });
 });

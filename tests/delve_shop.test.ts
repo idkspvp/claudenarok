@@ -7,7 +7,7 @@ import type { PlayerClass } from '../src/sim/types';
 
 // autoEquip:false so a bought wearable stays in the bags where we can count it
 // (mirrors the chest-loot test in delves.test.ts).
-const makeSim = (cls: PlayerClass = 'warrior', seed = 7) =>
+const makeSim = (cls: PlayerClass = 'swordman', seed = 7) =>
   new Sim({ seed, playerClass: cls, autoEquip: false });
 const metaOf = (sim: Sim) => (sim as any).players.get(sim.playerId);
 const countOf = (sim: Sim, id: string) =>

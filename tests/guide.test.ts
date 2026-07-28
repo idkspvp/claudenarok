@@ -46,6 +46,7 @@ import { DEEDS } from '../src/sim/content/deeds';
 import { ENCHANTS } from '../src/sim/content/enchants';
 import { GATHER_NODES } from '../src/sim/content/gather_nodes';
 import { FISHING_TABLES_BY_BAND } from '../src/sim/content/items';
+import { startableJobs } from '../src/sim/content/jobs';
 import {
   CRAFT_GOLD_SINK_COPPER_PER_BUDGET,
   CRAFT_RING,
@@ -139,9 +140,9 @@ describe('Guide routes', () => {
   });
 
   it('claims deeper segments as params (class/creature detail pages)', () => {
-    const m = matchRoute('/wiki/classes/warrior');
+    const m = matchRoute('/wiki/classes/swordman');
     expect(m?.route.id).toBe('classes');
-    expect(m?.params).toEqual(['warrior']);
+    expect(m?.params).toEqual(['swordman']);
   });
 
   it('returns null for unknown paths so the app can render notFound', () => {
@@ -152,7 +153,7 @@ describe('Guide routes', () => {
     // Regression: the skip link href="#guide-main" must not route to notFound.
     expect(matchRoute('/wiki#guide-main')?.route.id).toBe('home');
     expect(matchRoute('/wiki/reference/controls#movement')?.route.id).toBe('controls');
-    expect(matchRoute('/wiki/classes/warrior?from=home')?.params).toEqual(['warrior']);
+    expect(matchRoute('/wiki/classes/swordman?from=home')?.params).toEqual(['swordman']);
     expect(toSub('/wiki/classes#kit')).toBe('classes');
   });
 
@@ -246,8 +247,8 @@ describe('guide.html shell', () => {
 });
 
 describe('Guide generated class content', () => {
-  it('covers all nine classes with grounded data', () => {
-    expect(GUIDE_CLASSES).toHaveLength(9);
+  it('covers all five first jobs with grounded data', () => {
+    expect(GUIDE_CLASSES.map((c) => c.id)).toEqual(startableJobs().map((j) => j.id));
     for (const c of GUIDE_CLASSES) {
       expect(c.color).toMatch(/^#[0-9a-f]{6}$/);
       expect(['rage', 'mana', 'energy']).toContain(c.resource);

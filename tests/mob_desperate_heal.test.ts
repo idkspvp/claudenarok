@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 const SEED = 20061;
 
@@ -23,7 +23,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('heals once when hp first drops below the threshold', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const mob = makeAcolyte(sim, 0.25);
     const before = mob.hp;
     fire(sim, mob);
@@ -32,7 +32,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('does not heal again on subsequent ticks in the same pull', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const mob = makeAcolyte(sim, 0.25);
     fire(sim, mob);
     const afterFirst = mob.hp;
@@ -43,7 +43,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('does not heal while above the threshold', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const mob = makeAcolyte(sim, 0.5);
     const before = mob.hp;
     fire(sim, mob);
@@ -52,7 +52,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('never overheals past max hp', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const mob = makeAcolyte(sim, 0.29);
     mob.hp = mob.maxHp - 1; // technically below frac but nearly full
     // force the threshold by lowering hp under 30%
@@ -62,7 +62,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('re-arms after the mob evades and resets', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const mob = makeAcolyte(sim, 0.25);
     fire(sim, mob);
     expect(mob.healedThisPull).toBe(true);
@@ -75,7 +75,7 @@ describe('mob desperation self-heal', () => {
   });
 
   it('leaves mobs without the mechanic untouched', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior' });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman' });
     const wolf = createMob(990102, MOBS.forest_wolf, 5, { x: 0, y: 0, z: 0 });
     wolf.hp = Math.round(wolf.maxHp * 0.1);
     wolf.inCombat = true;

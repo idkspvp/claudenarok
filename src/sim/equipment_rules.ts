@@ -8,26 +8,13 @@ import {
   type WeaponItemDef,
 } from './types';
 
-type WeaponArchetype = 'warrior' | 'caster' | 'rogue';
+type WeaponArchetype = 'swordman' | 'caster' | 'thief';
 
-const MAIL_CLASSES = new Set<PlayerClass>(['warrior', 'paladin', 'shaman']);
-const LEATHER_CLASSES = new Set<PlayerClass>(['druid', 'rogue', 'hunter']);
-const WARRIOR_WEAPON_CLASSES = new Set<PlayerClass>([
-  'warrior',
-  'rogue',
-  'hunter',
-  'shaman',
-  'paladin',
-]);
-const CASTER_WEAPON_CLASSES = new Set<PlayerClass>([
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-]);
-const ROGUE_WEAPON_CLASSES = new Set<PlayerClass>(['rogue', 'hunter']);
+const MAIL_CLASSES = new Set<PlayerClass>(['swordman']);
+const LEATHER_CLASSES = new Set<PlayerClass>(['thief', 'archer']);
+const WARRIOR_WEAPON_CLASSES = new Set<PlayerClass>(['swordman', 'thief', 'archer']);
+const CASTER_WEAPON_CLASSES = new Set<PlayerClass>(['mage', 'acolyte']);
+const ROGUE_WEAPON_CLASSES = new Set<PlayerClass>(['thief', 'archer']);
 
 const ARMOR_RANK: Record<ArmorType, number> = {
   cloth: 0,
@@ -93,16 +80,16 @@ export function maxArmorTypeForClass(cls: PlayerClass): ArmorType {
 // class line on the tooltip.
 export function weaponArchetypeForItem(item: ItemDef): WeaponArchetype | null {
   if (item.kind !== 'weapon' || !item.requiredClass) return null;
-  if (sameClassSet(item.requiredClass, WARRIOR_WEAPON_CLASSES)) return 'warrior';
+  if (sameClassSet(item.requiredClass, WARRIOR_WEAPON_CLASSES)) return 'swordman';
   if (sameClassSet(item.requiredClass, CASTER_WEAPON_CLASSES)) return 'caster';
-  if (sameClassSet(item.requiredClass, ROGUE_WEAPON_CLASSES)) return 'rogue';
+  if (sameClassSet(item.requiredClass, ROGUE_WEAPON_CLASSES)) return 'thief';
   return null;
 }
 
 // The full set of classes `canEquipItem` actually admits for a given armor weight,
 // i.e. every class whose max armor rank is at least `armorType`'s rank. Used to tell
 // a genuinely enforced armor class list (one that names exactly this set, e.g. mail
-// naming only warrior/paladin/shaman) apart from `requiredClass` values that are
+// naming only swordman/paladin/shaman) apart from `requiredClass` values that are
 // narrower loot-targeting metadata `canEquipItem` never reads (armor short-circuits
 // on weight before it would reach `requiredClass`).
 export function classesThatCanEquipArmorType(armorType: ArmorType): PlayerClass[] {
@@ -111,11 +98,11 @@ export function classesThatCanEquipArmorType(armorType: ArmorType): PlayerClass[
 }
 
 export function canDualWield(cls: PlayerClass, spec?: string | null): boolean {
-  return cls === 'rogue' || (cls === 'warrior' && spec === 'fury');
+  return cls === 'thief' || (cls === 'swordman' && spec === 'fury');
 }
 
 export function canDualWieldTwoHand(cls: PlayerClass, spec?: string | null): boolean {
-  return cls === 'warrior' && spec === 'fury';
+  return cls === 'swordman' && spec === 'fury';
 }
 
 export function weaponHand(item: WeaponItemDef): WeaponItemDef['hand'] {
@@ -136,13 +123,13 @@ export function canEquipItem(cls: PlayerClass, item: ItemDef): boolean {
   // Rogues may dual wield one-handed weapons, but can never equip a two-hander.
   // Keep this at the equipment boundary so future items cannot bypass it through
   // a missing or overly broad requiredClass list.
-  if (cls === 'rogue' && item.kind === 'weapon' && weaponHand(item) === 'twohand') {
+  if (cls === 'thief' && item.kind === 'weapon' && weaponHand(item) === 'twohand') {
     return false;
   }
   const weaponArchetype = weaponArchetypeForItem(item);
-  if (weaponArchetype === 'warrior') return WARRIOR_WEAPON_CLASSES.has(cls);
+  if (weaponArchetype === 'swordman') return WARRIOR_WEAPON_CLASSES.has(cls);
   if (weaponArchetype === 'caster') return CASTER_WEAPON_CLASSES.has(cls);
-  if (weaponArchetype === 'rogue') return ROGUE_WEAPON_CLASSES.has(cls);
+  if (weaponArchetype === 'thief') return ROGUE_WEAPON_CLASSES.has(cls);
   if (item.requiredClass) return item.requiredClass.includes(cls);
   return true;
 }

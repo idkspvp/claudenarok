@@ -4,12 +4,12 @@ import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function playerWorld() {
   const sim = makeWorld();
-  const pid = sim.addPlayer('warrior', 'Aleph');
+  const pid = sim.addPlayer('swordman', 'Aleph');
   sim.tick();
   const p = sim.entities.get(pid)! as Entity;
   return { sim, pid, p };

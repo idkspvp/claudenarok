@@ -41,7 +41,7 @@ import {
 import { terrainHeight } from '../src/sim/world';
 import { formatXp, xpBarView } from '../src/ui/xp_bar';
 
-function makeSim(cls: 'warrior' | 'mage' | 'rogue' = 'warrior', seed = 42): Sim {
+function makeSim(cls: 'swordman' | 'mage' | 'thief' = 'swordman', seed = 42): Sim {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
 }
 
@@ -126,7 +126,7 @@ describe('virtual-level curve', () => {
 
 describe('solo grantXp at the cap', () => {
   it('accrues lifetimeXp at the cap instead of discarding it', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     expect(sim.player.level).toBe(MAX_LEVEL);
     const before = sim.lifetimeXp;
@@ -138,7 +138,7 @@ describe('solo grantXp at the cap', () => {
   });
 
   it('keeps accruing across many post-cap awards (overflow never resets)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     let expected = sim.lifetimeXp;
     // Sized from the curve, not a literal: one post-cap virtual level split into
@@ -154,7 +154,7 @@ describe('solo grantXp at the cap', () => {
   });
 
   it('a level-up into the cap keeps the overflow remainder in lifetimeXp', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL - 1); // level 19
     const lifeBefore = sim.lifetimeXp;
     const need = xpForLevel(MAX_LEVEL - 1); // 19 → 20
@@ -165,7 +165,7 @@ describe('solo grantXp at the cap', () => {
   });
 
   it('emits a virtual-level-up event when crossing a virtual level past cap', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.events.length = 0;
     // Two full virtual levels past the cap, measured off the curve.
@@ -182,14 +182,14 @@ describe('solo grantXp at the cap', () => {
 
 describe('pre-cap leveling regression', () => {
   it('carries overflow XP between levels', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.grantXp(xpForLevel(1) + xpForLevel(2) + 10);
     expect(sim.player.level).toBe(3);
     expect(sim.xp).toBe(10); // carry preserved
   });
 
   it('lifetimeXp tracks the running total and matches virtual level pre-cap', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.grantXp(xpForLevel(1) + xpForLevel(2) + 10);
     // total earned = sum of crossed levels + carry = xpToReachLevel(3) + 10
     expect(sim.lifetimeXp).toBe(xpToReachLevel(3) + 10);
@@ -203,9 +203,9 @@ describe('pre-cap leveling regression', () => {
 
 describe('party grantXp at the cap', () => {
   it('a capped party member accrues lifetimeXp from a shared kill', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const p1 = sim.playerId;
-    const p2 = sim.addPlayer('warrior', 'Bjorn');
+    const p2 = sim.addPlayer('swordman', 'Bjorn');
     sim.partyInvite(p2, p1);
     sim.partyAccept(p2);
     sim.setPlayerLevel(MAX_LEVEL, p1);
@@ -243,7 +243,7 @@ describe('anti-farm level-diff scaling', () => {
   });
 
   it('a zero award is a no-op on lifetimeXp', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     const before = sim.lifetimeXp;
     sim.grantXp(0);
@@ -262,7 +262,7 @@ describe('cosmetic milestones', () => {
   // dual-writes the legacy unlockedMilestones set. deedUnlocked is the single
   // grant event; the legacy milestoneUnlocked emit is gone.
   it('unlocks at the tick tail, emits deedUnlocked, and dual-writes the legacy set', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     const first = MILESTONES[0];
     sim.grantXp(first.lifetimeXp + 1);
@@ -275,7 +275,7 @@ describe('cosmetic milestones', () => {
   });
 
   it('does not re-unlock a milestone already earned', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.grantXp(MILESTONES[0].lifetimeXp + 1);
     sim.tick();
@@ -297,7 +297,7 @@ describe('cosmetic milestones', () => {
 
 describe('prestige', () => {
   it('resets the level bar and bumps rank but never lifetimeXp', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.grantXp(PRESTIGE_XP_PER_RANK); // exactly one rank's worth of post-cap XP
     const m = sim.meta(sim.playerId)!;
@@ -312,7 +312,7 @@ describe('prestige', () => {
   });
 
   it('is refused below the cap', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(10);
     expect(sim.prestige()).toBe(false);
     expect(sim.prestigeRank).toBe(0);
@@ -326,7 +326,7 @@ describe('prestige', () => {
   // precedent), so a successful prestige must emit exactly one carrying the new
   // rank, and a refused one must emit none.
   it('emits a personal prestige event carrying the new rank (issue #2137)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.grantXp(PRESTIGE_XP_PER_RANK);
     sim.drainEvents();
@@ -338,7 +338,7 @@ describe('prestige', () => {
   });
 
   it('emits no prestige event when the gate refuses', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(10);
     sim.drainEvents();
 
@@ -349,7 +349,7 @@ describe('prestige', () => {
 
 describe('prestige anti-abuse gate (server-locked rank)', () => {
   it('refuses prestige at the cap with no post-cap XP earned', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL); // lifetimeXp == cap threshold, nothing earned past it
     expect(maxPrestigeRank(sim.lifetimeXp)).toBe(0);
     expect(sim.prestige()).toBe(false);
@@ -357,7 +357,7 @@ describe('prestige anti-abuse gate (server-locked rank)', () => {
   });
 
   it('caps rank at earned post-cap XP — spamming the command cannot inflate it', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     // earn exactly 3 prestige bars of post-cap XP
     sim.grantXp(PRESTIGE_XP_PER_RANK * 3);
@@ -372,7 +372,7 @@ describe('prestige anti-abuse gate (server-locked rank)', () => {
   });
 
   it('unlocks the next rank only after earning another full bar', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.grantXp(PRESTIGE_XP_PER_RANK); // exactly one bar
     expect(sim.prestige()).toBe(true); // rank 1
@@ -396,7 +396,7 @@ describe('prestige anti-abuse gate (server-locked rank)', () => {
 
 describe('persistence', () => {
   it('round-trips lifetimeXp, prestigeRank, and milestones', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setPlayerLevel(MAX_LEVEL);
     sim.grantXp(Math.max(MILESTONES[0].lifetimeXp + 5, PRESTIGE_XP_PER_RANK));
     sim.tick(); // milestone deeds grant (and dual-write the legacy set) at the tick tail
@@ -406,8 +406,8 @@ describe('persistence', () => {
     expect(state.prestigeRank).toBe(1);
     expect(state.unlockedMilestones).toContain(MILESTONES[0].id);
 
-    const sim2 = makeSim('warrior');
-    const pid = sim2.addPlayer('warrior', 'Reload', { state });
+    const sim2 = makeSim('swordman');
+    const pid = sim2.addPlayer('swordman', 'Reload', { state });
     const m = sim2.meta(pid)!;
     expect(m.lifetimeXp).toBe(state.lifetimeXp);
     expect(m.prestigeRank).toBe(1);
@@ -415,13 +415,13 @@ describe('persistence', () => {
   });
 
   it('backfills lifetimeXp for characters saved before the counter existed', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     // a legacy save: level + bar XP, but no lifetimeXp field
     const legacy = sim.serializeCharacter(sim.playerId)!;
     const state: CharacterState = { ...legacy, level: 12, xp: 500 };
     delete (state as any).lifetimeXp;
-    const sim2 = makeSim('warrior');
-    const pid = sim2.addPlayer('warrior', 'Legacy', { state });
+    const sim2 = makeSim('swordman');
+    const pid = sim2.addPlayer('swordman', 'Legacy', { state });
     const m = sim2.meta(pid)!;
     expect(m.lifetimeXp).toBe(xpToReachLevel(12) + 500);
   });
@@ -509,7 +509,7 @@ describe('xp-bar label states', () => {
 
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.missingSince = new Map(); // despawn-grace bookkeeping (set by the real field initializer)
   c.playerId = pid;
@@ -549,7 +549,7 @@ describe('online ClientWorld path', () => {
       sent: [] as any[],
       ws: { readyState: 1, send: (p: string) => fc.sent.push(JSON.parse(p)) },
     };
-    const session = server.join(fc.ws as any, 1, 1, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as any, 1, 1, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
 
     server.sim.setPlayerLevel(MAX_LEVEL, session.pid);

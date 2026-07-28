@@ -769,7 +769,7 @@ describe('i18n Localization Key Coverage', () => {
     // the same picker hud.ts feeds the token. Pinning the literal fails if the datum
     // (or the picker) changes, and rendering with it confirms the EN description
     // interpolates the real number instead of a stale hardcoded one.
-    const battleShout = abilitiesKnownAt('warrior', ABILITIES.battle_shout.learnLevel).find(
+    const battleShout = abilitiesKnownAt('swordman', ABILITIES.battle_shout.learnLevel).find(
       (known) => known.def.id === 'battle_shout' && known.rank === 1,
     );
     if (!battleShout) throw new Error('battle_shout rank 1 did not resolve');

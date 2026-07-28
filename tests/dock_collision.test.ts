@@ -92,7 +92,7 @@ describe('fishing dock deck collision', () => {
     setActiveWorldContent(world({}));
 
     const walk = (startLocalZ: number, facing: number): number => {
-      const sim = new Sim({ seed: PRODUCTION_SEED, playerClass: 'warrior', autoEquip: true });
+      const sim = new Sim({ seed: PRODUCTION_SEED, playerClass: 'swordman', autoEquip: true });
       const p = sim.player;
       p.pos.x = d.x + startLocalZ * Math.sin(d.rot);
       p.pos.z = d.z + startLocalZ * Math.cos(d.rot);

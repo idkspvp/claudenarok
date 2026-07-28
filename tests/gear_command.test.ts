@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[]): string | undefined {
@@ -14,8 +14,8 @@ function errorText(events: SimEvent[]): string | undefined {
 describe('/gear command', () => {
   it('lists equipped slots in a fixed order and marks empty ones', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    // A fresh warrior starts with a main hand, a buckler, and a chest piece.
+    const a = sim.addPlayer('swordman', 'Aleph');
+    // A fresh swordman starts with a main hand, a buckler, and a chest piece.
     sim.tick();
     sim.chat('/gear', a);
     const text = errorText(sim.tick());
@@ -39,7 +39,7 @@ describe('/gear command', () => {
 
   it('reflects newly equipped gear and resolves item names', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.equipment = {
       mainhand: 'worn_sword',
@@ -64,7 +64,7 @@ describe('/gear command', () => {
 
   it('reports nothing equipped when every slot is empty', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const meta = sim.players.get(a)!;
     meta.equipment = {};
     sim.tick();
@@ -74,7 +74,7 @@ describe('/gear command', () => {
 
   it('is reachable via the /equip and /equipment aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     for (const alias of ['/equip', '/equipment']) {
       sim.chat(alias, a);
@@ -84,7 +84,7 @@ describe('/gear command', () => {
 
   it('does not emit a chat event or broadcast to others', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.addPlayer('mage', 'Bet');
     sim.tick();
     const sent = sim.chat('/gear', a);

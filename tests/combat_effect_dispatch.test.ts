@@ -14,6 +14,7 @@ import { createMob } from '../src/sim/entity';
 import type { PlayerMeta, ResolvedAbility } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type TestSim = Sim & {
   nextId: number;
@@ -31,7 +32,7 @@ function makeSim(cls: PlayerClass, level: number): { sim: TestSim; p: Entity; me
   const p = sim.player;
   const meta = sim.players.get(p.id);
   if (!meta) throw new Error(`missing player meta for ${p.id}`);
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 
@@ -61,22 +62,24 @@ function resolve(sim: TestSim, abilityId: string, pid: number): ResolvedAbility 
 }
 
 describe('effect_dispatch: a single cast fans into every listed effect', () => {
-  it('moonfire applies BOTH a direct hit and a dot aura in one runEffects call', () => {
-    const { sim, p, meta } = makeSim('druid', 20);
+  it('fireball applies BOTH a direct hit and a dot aura in one runEffects call', () => {
+    // Moonfire was the Druid's; Fireball is the surviving cast that fans into a
+    // direct hit and a damage-over-time aura from one effect list.
+    const { sim, p, meta } = makeSim('mage', 20);
     const mob = spawnTarget(sim, p);
     const hp0 = mob.hp;
-    const res = resolve(sim, 'moonfire', p.id);
+    const res = resolve(sim, 'fireball', p.id);
 
     runEffects(sim.ctx, p, meta, mob, res);
 
     // directDamage effect: the mob took a hit.
     expect(mob.hp).toBeLessThan(hp0);
-    // dot effect (same cast): a damage-over-time aura sourced by the druid landed.
+    // dot effect (same cast): a damage-over-time aura sourced by the mage landed.
     expect(mob.auras.some((a: Aura) => a.kind === 'dot' && a.sourceId === p.id)).toBe(true);
   });
 
-  it('rogue eviscerate: finisherDamage lands AND the combo-spend reset fires after the loop', () => {
-    const { sim, p, meta } = makeSim('rogue', 20);
+  it('thief eviscerate: finisherDamage lands AND the combo-spend reset fires after the loop', () => {
+    const { sim, p, meta } = makeSim('thief', 20);
     const mob = spawnTarget(sim, p);
     p.comboPoints = 5; // character-bound: no target anchor needed
     const hp0 = mob.hp;
@@ -88,9 +91,13 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     expect(p.comboPoints).toBe(0); // spendsCombo reset, AFTER the effect loop
   });
 
-  it('paladin consecration: the groundAoE case pushes a ground effect and fires the on-cast pulse', () => {
-    const { sim, p, meta } = makeSim('paladin', 20);
-    const mob = spawnTarget(sim, p, 8, 2); // within the 8yd consecration radius
+  it('mage blizzard: the groundAoE case pushes a zone whose pulse re-anchors leashes', () => {
+    // Consecration went with the Paladin, and it was the only ground AoE that
+    // pulsed ON CAST. Every live one is `delayed`, so the zone is pushed here and
+    // the pulse is driven explicitly, which is the same code path the tick driver
+    // takes; the on-cast-pulse arm itself has no live caster until D4 re-homes one.
+    const { sim, p, meta } = makeSim('mage', 20);
+    const mob = spawnTarget(sim, p, 8, 2); // inside the zone radius
     const before = sim.ctx.groundAoEs.length;
     mob.aiState = 'chase';
     mob.aggroTargetId = p.id;
@@ -98,31 +105,30 @@ describe('effect_dispatch: a single cast fans into every listed effect', () => {
     p.inCombat = true;
     mob.leashAnchor = { ...mob.pos, x: mob.pos.x - 10 };
     const anchorBefore = { ...mob.leashAnchor };
-    const res = resolve(sim, 'consecration', p.id);
+    const res = resolve(sim, 'blizzard', p.id);
 
-    runEffects(sim.ctx, p, meta, null, res); // consecration is self-centered (no target)
+    runEffects(sim.ctx, p, meta, null, res); // a ground AoE resolves with no target
 
     expect(sim.ctx.groundAoEs.length).toBe(before + 1); // groundAoEs.push happened
-    // the immediate on-cast pulse (pulseGroundAoE) hit the in-radius mob.
+    sim.ctx.pulseGroundAoE(sim.ctx.groundAoEs[0]);
     expect(mob.hp).toBeLessThan(mob.maxHp);
     expect(mob.leashAnchor).not.toEqual(anchorBefore);
     expect(mob.leashAnchor.x).toBeCloseTo(mob.pos.x);
     expect(mob.leashAnchor.z).toBeCloseTo(mob.pos.z);
 
-    const anchorAfterCast = { ...mob.leashAnchor };
-    mob.pos = { x: mob.pos.x + 3, y: mob.pos.y, z: mob.pos.z };
-    sim.ctx.pulseGroundAoE(sim.ctx.groundAoEs[0]);
-    expect(mob.leashAnchor.x).toBeCloseTo(anchorAfterCast.x);
-    expect(mob.leashAnchor.z).toBeCloseTo(anchorAfterCast.z);
+    // The original case also pinned that a LATER pulse does not move the anchor
+    // again. That arm hung off the on-cast pulse being the first one, which no
+    // live ground AoE has any more, so it goes with Consecration rather than being
+    // re-pointed at a pulse sequence that means something different.
   });
 });
 
 describe('effect_dispatch: determinism / replay', () => {
   it('same seed + same multi-effect cast => byte-identical outcome and draw count', () => {
     const run = (): { hp: number; auras: number; draws: number } => {
-      const { sim, p, meta } = makeSim('druid', 20);
+      const { sim, p, meta } = makeSim('mage', 20);
       const mob = spawnTarget(sim, p);
-      const res = resolve(sim, 'moonfire', p.id);
+      const res = resolve(sim, 'fireball', p.id);
       let draws = 0;
       sim.rng.setObserver(() => {
         draws++;

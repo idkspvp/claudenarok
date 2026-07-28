@@ -56,7 +56,16 @@ function join(
   name: string,
   meta: Parameters<GameServer['join']>[7] = {},
 ): ClientSession {
-  const s = server.join(fc.ws as any, characterId, characterId, name, 'warrior', null, false, meta);
+  const s = server.join(
+    fc.ws as any,
+    characterId,
+    characterId,
+    name,
+    'swordman',
+    null,
+    false,
+    meta,
+  );
   if ('error' in s) throw new Error(s.error);
   s.blockListLoaded = true;
   return s;

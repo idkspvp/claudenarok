@@ -4,7 +4,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorAfter(sim: Sim, text: string, pid: number): string | undefined {
@@ -18,13 +18,13 @@ function errorAfter(sim: Sim, text: string, pid: number): string | undefined {
 describe('/abilities command', () => {
   it('lists every known ability with its rank, self-only and unsaid', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const text = errorAfter(sim, '/abilities', a)!;
 
-    const known = abilitiesKnownAt('warrior', sim.entities.get(a)!.level);
+    const known = abilitiesKnownAt('swordman', sim.entities.get(a)!.level);
     expect(text).toContain(`Spellbook (${known.length}):`);
-    // a level-1 warrior knows Reaver Strike but not yet Charge (learnLevel 4)
+    // a level-1 swordman knows Reaver Strike but not yet Charge (learnLevel 4)
     expect(text).toContain('Reaver Strike (Rank 1)');
     expect(text).not.toContain('Onrush');
     expect(text.endsWith('.')).toBe(true);
@@ -32,13 +32,13 @@ describe('/abilities command', () => {
 
   it('reflects newly learned abilities and higher ranks at a higher level', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const e = sim.entities.get(a)!;
     e.level = 20;
     sim.tick();
     const text = errorAfter(sim, '/abilities', a)!;
 
-    const known = abilitiesKnownAt('warrior', 20);
+    const known = abilitiesKnownAt('swordman', 20);
     expect(text).toContain(`Spellbook (${known.length}):`);
     // Reaver Strike reaches Rank 4 at level 20; Charge is now learned
     expect(text).toContain('Reaver Strike (Rank 4)');

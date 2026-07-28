@@ -1,8 +1,9 @@
 // Captures the player unit-frame "resting" zZz indicator in the offline client.
 // Run the dev client first (npm run dev), then:
 //   GAME_URL=http://localhost:5173 node scripts/resting_indicator_shot.mjs
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as CHROME } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -14,7 +15,13 @@ const browser = await puppeteer.launch({
   executablePath: CHROME,
   headless: 'new',
   protocolTimeout: 60000,
-  args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1280,760', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--window-size=1280,760',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
   defaultViewport: { width: 1280, height: 760 },
 });
 
@@ -27,17 +34,25 @@ await sleep(800);
 await page.evaluate(() => {
   document.querySelector('#btn-offline').click();
   document.querySelector('#char-name').value = 'Resty';
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-start-offline').click();
 });
-await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, { timeout: 20000, polling: 300 });
+await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, {
+  timeout: 20000,
+  polling: 300,
+});
 await sleep(800);
 
 async function clipPlayerFrame(name) {
   await sleep(700); // let the per-frame HUD pick up the state + a pulse beat
   const box = await page.evaluate(() => {
     const r = document.querySelector('#player-frame').getBoundingClientRect();
-    return { x: Math.max(0, r.x - 10), y: Math.max(0, r.y - 12), width: r.width + 20, height: r.height + 22 };
+    return {
+      x: Math.max(0, r.x - 10),
+      y: Math.max(0, r.y - 12),
+      width: r.width + 20,
+      height: r.height + 22,
+    };
   });
   await page.screenshot({ path: `${OUT}/${name}.png`, clip: box });
   console.log('shot:', name);
@@ -47,7 +62,9 @@ async function clipPlayerFrame(name) {
 await clipPlayerFrame('standing');
 
 // 2) Resting (bare sit).
-await page.evaluate(() => { window.__game.sim.player.sitting = true; });
+await page.evaluate(() => {
+  window.__game.sim.player.sitting = true;
+});
 await clipPlayerFrame('resting');
 
 // 3) Eating + drinking (recovering).
@@ -60,7 +77,10 @@ await page.evaluate(() => {
 await clipPlayerFrame('recovering');
 
 // 4) Full HUD context shot while resting.
-await page.evaluate(() => { window.__game.sim.player.eating = null; window.__game.sim.player.drinking = null; });
+await page.evaluate(() => {
+  window.__game.sim.player.eating = null;
+  window.__game.sim.player.drinking = null;
+});
 await sleep(500);
 await page.screenshot({ path: `${OUT}/full-hud.png` });
 console.log('shot: full-hud');

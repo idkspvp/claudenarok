@@ -14,10 +14,11 @@ import {
 import { ITEMS, MOBS } from '../src/sim/data';
 import { createMob, createPlayer, recalcPlayerStats, statusAttackPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { CAST_PUSHBACK_SEC, CHANNEL_PUSHBACK_FRACTION } from '../src/sim/types';
 import { itemSetMemberCounts, itemSetTooltipModel } from '../src/ui/item_set_tooltip_view';
+import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -26,7 +27,7 @@ function statsFor(cls: PlayerClass, level: number, equipment: Record<string, str
   e.level = level;
   // With the class's suggested spread, not bare 1s: a set bonus of +15 Strength
   // read against a base of 1 tells you nothing about whether it landed correctly.
-  recalcPlayerStats(e, cls, equipment as any, undefined, {}, defaultAllocationFor(cls, level));
+  recalcPlayerStats(e, cls, equipment as any, undefined, {}, spreadAllocation(level));
   return e;
 }
 
@@ -204,17 +205,17 @@ describe('item set tooltip model', () => {
 
 describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear)', () => {
   it('Deathlord (t1 strength): flat AP at 2pc, str/sta added at 3pc', () => {
-    const base = statsFor('warrior', 20, {});
+    const base = statsFor('swordman', 20, {});
     // 2 pieces: +40 AP, no set str yet. Melee ATK is the status formula plus the
     // flat set bonus, not a per-point rate: STR carries a squared term now.
-    const two = statsFor('warrior', 20, {
+    const two = statsFor('swordman', 20, {
       chest: 'deathlord_warplate',
       legs: 'deathlord_legguards',
     });
     const ap = (e: Entity) => statusAttackPower(e.stats.str, e.stats.dex, e.stats.luk);
     expect(two.attackPower).toBe(ap(two) + 40);
     // 3 pieces: set adds +15 str / +15 sta on top of the item stats.
-    const three = statsFor('warrior', 20, {
+    const three = statsFor('swordman', 20, {
       chest: 'deathlord_warplate',
       legs: 'deathlord_legguards',
       feet: 'deathlord_sabatons',
@@ -225,7 +226,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
   });
 
   it('Wyrmshadow (t1 agility): crit gains 1% at 3pc on top of agi-derived crit', () => {
-    const three = statsFor('rogue', 20, {
+    const three = statsFor('thief', 20, {
       chest: 'wyrmshadow_harness',
       feet: 'wyrmshadow_treads',
       legs: 'wyrmshadow_legguards',
@@ -238,7 +239,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     // End-to-end (not just the pure set-bonus resolver): the +60 four-set Hit rides
     // through recalcPlayerStats onto e.hitRating, on top of the 20 + 20 the helm and
     // shoulder carry. Drop the `+ setEff.hitRating` term and this reds.
-    const four = statsFor('warrior', 20, {
+    const four = statsFor('swordman', 20, {
       helmet: 'crownforged_dreadhelm',
       shoulder: 'crownforged_warspaulders',
       gloves: 'crownforged_gauntlets',
@@ -248,8 +249,8 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
   });
 
   it('Nighttalon (t2 agility, 2 pieces): reaches the 2-piece +40 AP bonus', () => {
-    const base = statsFor('rogue', 20, {});
-    const two = statsFor('rogue', 20, {
+    const base = statsFor('thief', 20, {});
+    const two = statsFor('thief', 20, {
       helmet: 'nighttalon_crown',
       shoulder: 'nighttalon_shoulderguards',
     });
@@ -317,8 +318,8 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     expect(soulflame.stats.int).toBe(mageBase.stats.int + 11 + 9 + 8 + 15);
     expect(soulflame.stats.luk).toBe(mageBase.stats.luk + 15);
 
-    const shamanBase = statsFor('shaman', 20, {});
-    const stormcallers = statsFor('shaman', 20, {
+    const shamanBase = statsFor('acolyte', 20, {});
+    const stormcallers = statsFor('acolyte', 20, {
       helmet: 'stormcallers_crown',
       shoulder: 'stormcallers_spaulders',
       gloves: 'stormcallers_handguards',
@@ -382,7 +383,7 @@ describe('caster 2-piece: damage never delays a cast (end to end)', () => {
     mob.prevPos = { ...mob.pos };
     (sim as any).rebucket(mob);
     sim.targetEntity(mob.id);
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('fireball');
     expect(p.castingAbility).toBe('fireball');
     const rem0 = p.castRemaining;

@@ -1,9 +1,11 @@
 // Visual proof of the innate mob Thorns ("Bristled Hide") mechanic: melee a
 // bristleback boar and capture the reflect damage ticking back onto the player.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -21,7 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Bristler');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 1500));
 
@@ -32,18 +34,25 @@ await page.evaluate(() => {
   const p = sim.player;
   const tpl = sim.constructor; // unused; reach MOBS via module is not exposed
   // Find a wild boar if the world already has one; else convert the nearest mob.
-  let boar = null, d = 1e9;
+  let boar = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind !== 'mob' || e.dead || e.ownerId !== null) continue;
     const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-    if (dd < d) { d = dd; boar = e; }
+    if (dd < d) {
+      d = dd;
+      boar = e;
+    }
   }
   // Force the engaged mob to be a thorns boar template so the reflect fires.
   boar.templateId = 'wild_boar';
   boar.name = 'Wild Boar';
-  boar.maxHp = 4000; boar.hp = 4000; // survive long enough to bank reflect ticks
-  boar.pos.x = p.pos.x + 2.0; boar.pos.z = p.pos.z;
-  p.maxHp = 4000; p.hp = 4000;
+  boar.maxHp = 4000;
+  boar.hp = 4000; // survive long enough to bank reflect ticks
+  boar.pos.x = p.pos.x + 2.0;
+  boar.pos.z = p.pos.z;
+  p.maxHp = 4000;
+  p.hp = 4000;
   sim.targetEntity(boar.id);
   p.facing = Math.atan2(boar.pos.x - p.pos.x, boar.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
@@ -74,7 +83,10 @@ const reflected = await page.evaluate(() => window.__startHp - window.__game.sim
 // Pull any combat-log / floating text mentioning the reflect, as textual proof.
 const proof = await page.evaluate(() => {
   const txt = document.body.innerText || '';
-  return txt.split('\n').filter((l) => /bristled hide/i.test(l)).slice(0, 4);
+  return txt
+    .split('\n')
+    .filter((l) => /bristled hide/i.test(l))
+    .slice(0, 4);
 });
 
 await new Promise((r) => setTimeout(r, 120));
@@ -84,4 +96,7 @@ console.log('reflect damage taken by player:', reflected);
 console.log('combat-log proof:', JSON.stringify(proof));
 console.log('page errors:', errors);
 await browser.close();
-if (reflected <= 0) { console.error('NO REFLECT DAMAGE OBSERVED'); process.exit(1); }
+if (reflected <= 0) {
+  console.error('NO REFLECT DAMAGE OBSERVED');
+  process.exit(1);
+}

@@ -1,8 +1,9 @@
 // New-Adventurer tutorial screenshots: the five guided steps a fresh character
 // is walked through (move → seek → talk → slay → return) plus the closing card.
 // Offline flow (no server). Needs `npm run dev`. Writes PNGs to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -17,7 +18,9 @@ const page = await browser.newPage();
 await page.setViewport({ width: 1600, height: 960 });
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (m) => { if (m.type() === 'error') errors.push('CONSOLE: ' + m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') errors.push('CONSOLE: ' + m.text());
+});
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
 
@@ -26,9 +29,12 @@ await tap('#btn-offline');
 await wait(200);
 await page.evaluate(() => {
   const n = document.querySelector('#char-name');
-  if (n) { n.value = 'Rook'; n.dispatchEvent(new Event('input', { bubbles: true })); }
+  if (n) {
+    n.value = 'Rook';
+    n.dispatchEvent(new Event('input', { bubbles: true }));
+  }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 await wait(14000);
 
@@ -41,7 +47,8 @@ const shot = async (name) => {
 // Step 1 — move: fresh spawn, player still at the start point.
 await page.evaluate(() => {
   const { sim } = window.__game;
-  sim.player.pos.x = 2; sim.player.pos.z = -2;
+  sim.player.pos.x = 2;
+  sim.player.pos.z = -2;
 });
 await shot('1_move');
 
@@ -57,14 +64,16 @@ const giverPos = await page.evaluate(() => {
 // Step 2 — seek: walk a few yards from spawn (still far from the marshal).
 await page.evaluate(() => {
   const { sim } = window.__game;
-  sim.player.pos.x = 16; sim.player.pos.z = -12;
+  sim.player.pos.x = 16;
+  sim.player.pos.z = -12;
 });
 await shot('2_seek');
 
 // Step 3 — talk: stand right next to Marshal Redbrook.
 await page.evaluate((g) => {
   const { sim } = window.__game;
-  sim.player.pos.x = g.x + 2; sim.player.pos.z = g.z + 1;
+  sim.player.pos.x = g.x + 2;
+  sim.player.pos.z = g.z + 1;
 }, giverPos);
 await shot('3_talk');
 
@@ -74,7 +83,8 @@ await page.evaluate(() => {
   sim.acceptQuest('q_wolves');
   const qp = sim.questLog.get('q_wolves');
   if (qp) qp.counts[0] = 3;
-  sim.player.pos.x = 20; sim.player.pos.z = -60;
+  sim.player.pos.x = 20;
+  sim.player.pos.z = -60;
 });
 await shot('4_slay');
 
@@ -82,8 +92,12 @@ await shot('4_slay');
 await page.evaluate((g) => {
   const { sim } = window.__game;
   const qp = sim.questLog.get('q_wolves');
-  if (qp) { qp.counts[0] = 8; qp.state = 'ready'; }
-  sim.player.pos.x = g.x + 2; sim.player.pos.z = g.z + 1;
+  if (qp) {
+    qp.counts[0] = 8;
+    qp.state = 'ready';
+  }
+  sim.player.pos.x = g.x + 2;
+  sim.player.pos.z = g.z + 1;
 }, giverPos);
 await shot('5_return');
 

@@ -210,6 +210,7 @@ import { deleteCharButtonHtml } from './ui/char_delete_button';
 import { loadCharselectNews } from './ui/charselect_news';
 import { ChatCommandMenu } from './ui/chat_command_menu';
 import { CLASS_DETAILS, SIGNATURE_ABILITIES } from './ui/class_details_data';
+import { renderClassPickers } from './ui/class_picker';
 import { ensureDeedLocalesLoaded } from './ui/deed_i18n';
 import { isDevGuiCommand } from './ui/dev_command_view';
 import { devTierByIndex, devTierDisplayName } from './ui/dev_tier';
@@ -3718,7 +3719,7 @@ function updatePreviewContainer(panelId: string): void {
       characterPreview.setAppearance(charselectAppearance(charselectSelected));
     } else {
       const row = document.querySelector('#char-list .char-row.sel') as HTMLElement | null;
-      const cls = (row?.dataset.class as PlayerClass) ?? 'warrior';
+      const cls = (row?.dataset.class as PlayerClass) ?? 'swordman';
       characterPreview.setClass(cls);
       characterPreview.setSkin(Number(row?.dataset.skin ?? 0) || 0);
     }
@@ -4864,7 +4865,7 @@ async function refreshCharacters(): Promise<void> {
     if (firstRow) {
       firstRow.click();
     } else {
-      characterPreview?.setClass('warrior');
+      characterPreview?.setClass('swordman');
     }
   } catch (err) {
     // A failed roster load must also drop any boot resume intent: leaving it
@@ -6453,6 +6454,10 @@ function applyLandingBackdrop(highContrast: boolean): void {
 }
 
 function wireStartScreens(): void {
+  // Build the class pickers from the job table BEFORE the first translation pass
+  // and before the chip click handlers below query them, so a chip exists to be
+  // localized, decorated with its portrait, and wired exactly once.
+  renderClassPickers();
   // Initial page translation and stats load. Lazy locale flip: a stored non-en locale is now
   // a real chunk fetch, and the homepage IS the first paint (there is no loading screen to sit
   // behind), so we localize-then-reveal to prevent an English flash + text swap. The start
@@ -6585,9 +6590,9 @@ function wireStartScreens(): void {
     if (!offlineAvailable) return;
     show('#offline-select');
 
-    // Select warrior by default and render details
+    // Select swordman by default and render details
     const warriorCard = document.querySelector(
-      '#offline-select .mini-class[data-class="warrior"]',
+      '#offline-select .mini-class[data-class="swordman"]',
     ) as HTMLElement | null;
     if (warriorCard) {
       document.querySelectorAll('#offline-select .mini-class').forEach((c) => {
@@ -6596,9 +6601,9 @@ function wireStartScreens(): void {
       });
       warriorCard.classList.add('sel');
       warriorCard.setAttribute('aria-pressed', 'true');
-      renderClassDetails('offline-class-details', 'warrior');
+      renderClassDetails('offline-class-details', 'swordman');
       btnStartOffline.removeAttribute('disabled');
-      refreshOfflineSkins('warrior');
+      refreshOfflineSkins('swordman');
     }
   };
 
@@ -7336,15 +7341,15 @@ function wireStartScreens(): void {
     });
   });
 
-  // Default select warrior in online character creator
+  // Default select swordman in online character creator
   const defaultOnlineClass = document.querySelector(
-    '#charcreate-panel .mini-class[data-class="warrior"]',
+    '#charcreate-panel .mini-class[data-class="swordman"]',
   ) as HTMLElement | null;
   if (defaultOnlineClass) {
     defaultOnlineClass.classList.add('sel');
     defaultOnlineClass.setAttribute('aria-pressed', 'true');
-    renderClassDetails('charcreate-class-details', 'warrior');
-    refreshOnlineSkins('warrior');
+    renderClassDetails('charcreate-class-details', 'swordman');
+    refreshOnlineSkins('swordman');
   }
   const newCharNameInput = $('#new-char-name') as HTMLInputElement;
   const charselectError = $('#charselect-error');
@@ -8175,7 +8180,7 @@ function wireStartScreens(): void {
               ? '#offline-select .mini-class.sel'
               : '#charcreate-panel .mini-class.sel';
           const selEl = document.querySelector(selSelector) as HTMLElement | null;
-          const cls = selEl ? (selEl.dataset.class as PlayerClass) : 'warrior';
+          const cls = selEl ? (selEl.dataset.class as PlayerClass) : 'swordman';
           characterPreview.setClass(cls);
         }
       }

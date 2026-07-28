@@ -12,7 +12,7 @@ import { solveLockActions } from '../src/sim/lockpick';
 import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 
 /** Boot the Collapsed Reliquary finale, kill the boss, stand the player on the
  * reward chest. Returns the run + chestId. Pins bountiful=false unless asked. */

@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -25,7 +25,7 @@ function placeFarApart(sim: Sim, a: number, b: number) {
 describe('/invite: global party invite by name', () => {
   it('invites a player across the whole world (no proximity required)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     placeFarApart(sim, a, b);
@@ -47,7 +47,7 @@ describe('/invite: global party invite by name', () => {
 
   it('resolves the name case-insensitively when unambiguous', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     sim.chat('/invite bet', a); // lowercase
@@ -56,7 +56,7 @@ describe('/invite: global party invite by name', () => {
 
   it('keeps /inv as the inventory readout, never an invite alias', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     sim.chat('/inv Bet', a);
@@ -65,7 +65,7 @@ describe('/invite: global party invite by name', () => {
 
   it('errors on an unknown name (recognized "no player named" toast)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/invite Nobody', a);
     expect(errorText(sim.tick(), a)).toBe("There is no player named 'Nobody' online.");
@@ -73,7 +73,7 @@ describe('/invite: global party invite by name', () => {
 
   it('errors with a usage hint when no name is given', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/invite', a);
     expect(errorText(sim.tick(), a)).toBe('Invite whom? Usage: /invite <name>.');
@@ -81,9 +81,9 @@ describe('/invite: global party invite by name', () => {
 
   it('delegates party validation: cannot invite someone already in a party', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.tick();
     // b joins c's party first.
     sim.partyInvite(b, c);

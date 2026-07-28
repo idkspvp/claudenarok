@@ -5,7 +5,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman' });
 
 describe('Ensnare web-root affix', () => {
   it('a landed webwood_spider swing can root the player in place', () => {

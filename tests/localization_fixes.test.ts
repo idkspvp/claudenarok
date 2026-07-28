@@ -115,7 +115,7 @@ describe('B1: server log-type messages localize through the log path', () => {
       'Bob has left the world. (disconnected)',
       'Who: 3 players online on Stormforge.',
       'Who: 1 player online on Stormforge.',
-      'Carl - level 12 warrior - Eastbrook Vale',
+      'Carl - level 12 swordman - Eastbrook Vale',
     ];
     for (const lang of supportedLanguages) {
       setLanguage(lang);
@@ -238,7 +238,7 @@ describe('M1b: /who status flags localize within the row', () => {
     for (const lang of supportedLanguages) {
       setLanguage(lang);
       for (const [flag, key] of statuses) {
-        const out = localizeServerText(`Carl - level 12 warrior - Eastbrook Vale (${flag})`);
+        const out = localizeServerText(`Carl - level 12 swordman - Eastbrook Vale (${flag})`);
         expect(out, `${lang}: "(${flag})" row not recognized`).not.toBeNull();
         const localized = tServer(key);
         expect(
@@ -565,11 +565,11 @@ describe("R3: the flood-kick reason maps to the client matcher's exact bytes", (
 // --- A1: admin class column is localized (MED-5) ---
 describe('A1: admin classLabel localizes the raw class id', () => {
   const classIds = [
-    'warrior',
+    'swordman',
     'paladin',
-    'hunter',
-    'rogue',
-    'priest',
+    'archer',
+    'thief',
+    'acolyte',
     'shaman',
     'mage',
     'warlock',

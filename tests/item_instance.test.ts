@@ -16,7 +16,7 @@ import { groundHeight } from '../src/sim/world';
 import { buildBagGrid } from '../src/ui/bags_view';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function standAtMerchant(sim: Sim, pid: number) {
@@ -37,7 +37,7 @@ function standAtMerchant(sim: Sim, pid: number) {
 
 describe('item-instance payload (#1165)', () => {
   it('an instanced item survives a save/load round-trip', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
       {
@@ -58,8 +58,8 @@ describe('item-instance payload (#1165)', () => {
       boundTo: sim.playerId,
     });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff');
     expect(loaded?.count).toBe(1);
     expect(loaded?.instance).toEqual({
@@ -71,7 +71,7 @@ describe('item-instance payload (#1165)', () => {
   });
 
   it('mutating a serialized snapshot does not alias the live instance payload (charges/rolled.stats)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
       { signer: 'Aldric', charges: { fireball: 3 }, rolled: { stats: { spellPower: 5 } } },
@@ -88,8 +88,8 @@ describe('item-instance payload (#1165)', () => {
     expect(live?.instance?.charges?.fireball).toBe(3);
     expect(live?.instance?.rolled?.stats?.spellPower).toBe(5);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     // mutating the loaded copy must not reach back into the (already-mutated) saved state
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff');
     loaded!.instance!.charges!.fireball = 1;
@@ -97,7 +97,7 @@ describe('item-instance payload (#1165)', () => {
   });
 
   it('an ordinary fungible stack round-trips unaffected (no instance field)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItem('wolf_fang', 3, sim.playerId);
 
     const state = sim.serializeCharacter(sim.playerId)!;
@@ -107,7 +107,7 @@ describe('item-instance payload (#1165)', () => {
   });
 
   it('addItem never merges a plain grant into an existing instanced slot', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance('apprentice_staff', { signer: 'Aldric' }, sim.playerId);
     sim.addItem('apprentice_staff', 1, sim.playerId);
 
@@ -118,7 +118,7 @@ describe('item-instance payload (#1165)', () => {
   });
 
   it('a batched multi-unit grant emits one xN loot line and lands units as usual', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.drainEvents();
     sim.addItemInstance('wolf_fang', { signer: 'Aldric' }, sim.playerId, 3);
 
@@ -134,7 +134,7 @@ describe('item-instance payload (#1165)', () => {
   });
 
   it('a zero-count grant is a full no-op: no slot, no loot line', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.drainEvents();
     sim.addItemInstance('wolf_fang', { signer: 'Aldric' }, sim.playerId, 0);
 
@@ -146,7 +146,7 @@ describe('item-instance payload (#1165)', () => {
     // charges payloads are one-per-slot by the merge carve-out, so a count-2
     // grant must mint two slots holding DISTINCT payload objects: charges
     // mutate in place, and a shared reference would drain both copies.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
       { signer: 'Aldric', charges: { zap: 2 } },
@@ -177,7 +177,7 @@ describe('item-instance payload (#1165)', () => {
 
   it('an instanced item is inert on the World Market: listing it is rejected', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItemInstance('apprentice_staff', { signer: 'Aldric' }, seller);
 
@@ -194,7 +194,7 @@ describe('item-instance payload (#1165)', () => {
 
   it('a fungible stack still lists normally alongside an unrelated instanced copy', () => {
     const sim = makeWorld();
-    const seller = sim.addPlayer('warrior', 'Seller');
+    const seller = sim.addPlayer('swordman', 'Seller');
     standAtMerchant(sim, seller);
     sim.addItem('apprentice_staff', 1, seller);
     sim.addItemInstance('apprentice_staff', { signer: 'Aldric' }, seller);
@@ -211,7 +211,7 @@ describe('item-instance payload (#1165)', () => {
 
 describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)', () => {
   it('a legacy rolled.quality payload still loads, clones without aliasing, and equips unchanged', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     // The current model retired NEW rolled.quality writes; a persisted legacy
     // payload (a legacy signed craft) must keep loading exactly as saved.
     sim.addItemInstance('cryptbone_greaves', { rolled: { quality: 'rare' } }, sim.playerId);
@@ -220,8 +220,8 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     const saved = state.inventory.find((s) => s.itemId === 'cryptbone_greaves')!;
     expect(saved.instance).toEqual({ rolled: { quality: 'rare' } });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'cryptbone_greaves');
     expect(loaded?.instance).toEqual({ rolled: { quality: 'rare' } });
 
@@ -243,11 +243,12 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     expect(meta.equipment.legs).toBe('cryptbone_greaves');
     expect(meta.equipmentInstance?.legs).toEqual({ rolled: { quality: 'rare' } });
     const after = sim.entities.get(sim.playerId)!.stats;
-    // 48 from the piece, plus 2 armor for each of the 2 Vitality it rolled.
-    expect(after.armor - before.armor).toBe(48 + 4);
+    // 48 from the piece and nothing else: D1 took the Vitality-to-armour term out,
+    // so hard DEF is the equipment value alone.
+    expect(after.armor - before.armor).toBe(48);
     expect(after.vit - before.vit).toBe(2);
 
-    const plain = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const plain = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     plain.addItem('cryptbone_greaves', 1, plain.playerId);
     plain.equipItem('cryptbone_greaves', plain.playerId);
     expect(sim.entities.get(sim.playerId)!.stats).toEqual(
@@ -256,7 +257,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
   });
 
   it('a masterwork payload round-trips save/load with non-aliasing', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
       { signer: 'Aldric', rolled: { masterwork: true, stats: { int: 2, luk: 1 } } },
@@ -270,8 +271,8 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
       rolled: { masterwork: true, stats: { int: 2, luk: 1 } },
     });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff');
     expect(loaded?.instance).toEqual({
       signer: 'Aldric',
@@ -305,7 +306,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
   });
 
   it('a combined legacy quality + stats + masterwork payload survives save/load intact', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     sim.addItemInstance(
       'apprentice_staff',
       {
@@ -324,8 +325,8 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
       boundTo: sim.playerId,
     });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     expect(
       sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff')?.instance,
     ).toEqual({
@@ -336,7 +337,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
   });
 
   it('the top-level enchant marker survives save/load intact and keeps the copy enchant-guarded', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     // The exact current shape of an enchanted masterwork copy: signer plus
     // rolled.masterwork plus baked stats plus the authoritative top-level
     // enchant id (types.ts ItemInstancePayload.enchant). If persistence dropped
@@ -356,8 +357,8 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     const saved = state.inventory.find((s) => s.itemId === 'apprentice_staff')!;
     expect(saved.instance?.enchant).toBe('enchant_weapon_might');
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const loaded = sim2.meta(pid2)?.inventory.find((s) => s.itemId === 'apprentice_staff');
     expect(loaded?.instance).toEqual({
       signer: 'Aldric',
@@ -374,7 +375,7 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
 });
 
 describe('identical-payload stacking (Professions 2.0)', () => {
-  const makeSim = () => new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+  const makeSim = () => new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
 
   it('two same-signer grants merge into ONE slot at count 2; a third keeps merging', () => {
     const sim = makeSim();
@@ -499,8 +500,8 @@ describe('identical-payload stacking (Professions 2.0)', () => {
     expect(saved).toHaveLength(1);
     expect(saved[0]).toEqual({ itemId: 'wolf_fang', count: 3, instance: { signer: 'Ana' } });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const loaded = sim2.meta(pid2)!.inventory.filter((s) => s.itemId === 'wolf_fang');
     expect(loaded).toHaveLength(1);
     expect(loaded[0].count).toBe(3);
@@ -526,8 +527,8 @@ describe('identical-payload stacking (Professions 2.0)', () => {
       instance: { signer: 'Old' },
     });
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Tampered', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Tampered', { state });
     const inv = sim2.meta(pid2)!.inventory;
     const counts = (pred: (s: (typeof inv)[number]) => boolean) =>
       inv.filter(pred).map((s) => s.count);

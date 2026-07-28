@@ -19,7 +19,7 @@ function gridInRadius(grid: SpatialGrid, x: number, z: number, radius: number): 
 
 describe('spatial grid', () => {
   it('radius queries match a brute-force scan across the whole world', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman' });
     // let mobs wander off their spawn points and the grid re-bucket them
     for (let i = 0; i < 200; i++) sim.tick();
 
@@ -34,7 +34,7 @@ describe('spatial grid', () => {
   });
 
   it('keeps the roster exact on spawn and despawn without a tick', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman', noPlayer: true });
     const pid = sim.addPlayer('mage', 'Gridtest');
     const p = sim.entities.get(pid)!;
     expect(gridInRadius(sim.grid, p.pos.x, p.pos.z, 5).has(pid)).toBe(true);
@@ -74,7 +74,7 @@ describe('spatial grid', () => {
   });
 
   it('player combat flag matches per-player scan semantics', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman' });
     const p = sim.entities.get(sim.primaryId)!;
     // walk the player into a camp until something aggroes
     let aggroed = false;

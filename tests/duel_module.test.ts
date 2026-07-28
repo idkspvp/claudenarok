@@ -11,7 +11,7 @@ import { groundHeight } from '../src/sim/world';
 type AnySim = Sim & Record<string, any>;
 
 function makeWorld(): AnySim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, pid: number, x: number, z: number): void {
@@ -25,7 +25,7 @@ function teleport(sim: AnySim, pid: number, x: number, z: number): void {
 
 function seatedDuel(): { sim: AnySim; a: number; b: number; d: any } {
   const sim = makeWorld();
-  const a = sim.addPlayer('warrior', 'Aleph');
+  const a = sim.addPlayer('swordman', 'Aleph');
   const b = sim.addPlayer('mage', 'Bet');
   teleport(sim, a, 0, -40);
   teleport(sim, b, 4, -40);
@@ -48,7 +48,7 @@ describe('duel module: request/accept formation', () => {
 
   it('rejects a self-challenge and a far-away target', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 400, -40); // well past the 30yd request range

@@ -140,18 +140,18 @@ describe('cooldown_persist leaf', () => {
 });
 
 describe('Sim cooldown persistence round-trip (anti-relog-reset)', () => {
-  const makeWorld = () => new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  const makeWorld = () => new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
 
   it('an ability cooldown survives serializeCharacter -> addPlayer (no relog reset)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Sprinter');
+    const pid = sim.addPlayer('swordman', 'Sprinter');
     const e = sim.entities.get(pid)!;
     e.cooldowns.set('sprint', 25);
     e.potionCooldownUntil = sim.time + 30;
 
     const state = sim.serializeCharacter(pid)!;
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Sprinter', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Sprinter', { state });
     const e2 = sim2.entities.get(pid2)!;
     expect(e2.cooldowns.get('sprint')).toBe(25);
     expect(e2.potionCooldownUntil).toBe(sim2.time + 30);
@@ -159,12 +159,12 @@ describe('Sim cooldown persistence round-trip (anti-relog-reset)', () => {
 
   it('a removed Ironhold cooldown is scrubbed from a legacy character on load', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Legacy Tank');
+    const pid = sim.addPlayer('swordman', 'Legacy Tank');
     const state = sim.serializeCharacter(pid)!;
     state.cooldowns = { abilities: { sprint: 25, ironhold: 180 } };
 
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Legacy Tank', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Legacy Tank', { state });
     expect([...sim2.entities.get(pid2)!.cooldowns]).toEqual([['sprint', 25]]);
     expect(sim2.serializeCharacter(pid2)?.cooldowns).toEqual({ abilities: { sprint: 25 } });
   });
@@ -175,14 +175,14 @@ describe('Sim cooldown persistence round-trip (anti-relog-reset)', () => {
     // action bar painted the potion READY (no swipe) while the sim gate still rejected
     // the quaff. The display copy must be re-derived from the restored authority.
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Quaffer');
+    const pid = sim.addPlayer('swordman', 'Quaffer');
     const e = sim.entities.get(pid)!;
     e.potionCooldownUntil = sim.time + 40; // 40s left on the shared potion cooldown
     e.potionCdRemaining = 40; // as a quaff materializes it
 
     const state = sim.serializeCharacter(pid)!;
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Quaffer', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Quaffer', { state });
     const e2 = sim2.entities.get(pid2)!;
     // Authority restored, so the use-gate still blocks...
     expect(e2.potionCooldownUntil).toBe(sim2.time + 40);
@@ -192,7 +192,7 @@ describe('Sim cooldown persistence round-trip (anti-relog-reset)', () => {
 
   it('a populated character round-trips deep-equal through serialize -> load -> serialize', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Onco');
+    const pid = sim.addPlayer('swordman', 'Onco');
     const e = sim.entities.get(pid)!;
     e.cooldowns.set('sprint', 25);
     e.cooldowns.set('battle_shout', 180);
@@ -201,30 +201,30 @@ describe('Sim cooldown persistence round-trip (anti-relog-reset)', () => {
     const s1 = sim.serializeCharacter(pid)!;
     expect(s1.cooldowns).toEqual({ abilities: { sprint: 25, battle_shout: 180 }, potion: 30 });
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Onco', { state: s1 });
+    const pid2 = sim2.addPlayer('swordman', 'Onco', { state: s1 });
     expect(sim2.serializeCharacter(pid2)).toEqual(s1);
   });
 
   it('a character with no cooldowns still round-trips deep-equal', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Idle');
+    const pid = sim.addPlayer('swordman', 'Idle');
     const s1 = sim.serializeCharacter(pid)!;
     expect(s1.cooldowns).toBeUndefined();
     const sim2 = makeWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Idle', { state: s1 });
+    const pid2 = sim2.addPlayer('swordman', 'Idle', { state: s1 });
     expect(sim2.serializeCharacter(pid2)).toEqual(s1);
   });
 });
 
 // An empty world to relog into (mirrors the makeWorld helper scoped above).
 function emptyWorld(): Sim {
-  return new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
 }
 
-// A live Fury warrior at cap with a melee target, for driving REAL charge spends
+// A live Fury swordman at cap with a melee target, for driving REAL charge spends
 // (raging_gale is fury-gated, learnLevel 7; def maxCharges 2, cooldown 8).
 function makeFuryWarrior(seed: number): { sim: Sim; p: Entity } {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: true });
   sim.setPlayerLevel(20);
   const host = sim as Sim & { nextId: number; addEntity(entity: Entity): void };
   const p = sim.player;
@@ -261,7 +261,7 @@ describe('Sim charge-pool persistence round-trip (anti-relog-refill)', () => {
     });
 
     const sim2 = emptyWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Twin', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Twin', { state });
     const e2 = sim2.entities.get(pid2)!;
     // The relog neither refills the spent use (still 1, not 2) nor loses the
     // banked one; the recharge resumes where it left off.
@@ -286,7 +286,7 @@ describe('Sim charge-pool persistence round-trip (anti-relog-refill)', () => {
 
     const state = sim.serializeCharacter(p.id)!;
     const sim2 = emptyWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Drained', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Drained', { state });
     const e2 = sim2.entities.get(pid2)!;
     expect(e2.abilityCharges?.raging_gale?.charges).toBe(0);
     expect(e2.cooldowns.get('raging_gale')).toBe(8); // still blocked: no relog reset
@@ -311,7 +311,7 @@ describe('Sim charge-pool persistence round-trip (anti-relog-refill)', () => {
       },
     };
     const sim2 = emptyWorld();
-    const pid2 = sim2.addPlayer('warrior', 'Legacy', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Legacy', { state });
     const e2 = sim2.entities.get(pid2)!;
     expect(e2.abilityCharges?.raging_gale).toEqual({
       charges: 1,

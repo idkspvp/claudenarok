@@ -51,7 +51,7 @@ const NYTHRAXIS_DROP_IDS = new Set(
 const specs = {
   protectionWarrior: {
     key: 'protection_warrior',
-    cls: 'warrior',
+    cls: 'swordman',
     role: 'bossTank',
     kind: 'tank',
     melee: true,
@@ -121,7 +121,7 @@ const specs = {
   },
   holyPriest: {
     key: 'holy_priest',
-    cls: 'priest',
+    cls: 'acolyte',
     role: 'healer',
     kind: 'healer',
     melee: false,
@@ -141,7 +141,7 @@ const specs = {
   },
   disciplinePriest: {
     key: 'discipline_priest',
-    cls: 'priest',
+    cls: 'acolyte',
     role: 'healer',
     kind: 'healer',
     melee: false,
@@ -221,7 +221,7 @@ const specs = {
   },
   combatRogue: {
     key: 'combat_rogue',
-    cls: 'rogue',
+    cls: 'thief',
     role: 'dps',
     kind: 'physical',
     melee: true,
@@ -240,7 +240,7 @@ const specs = {
   },
   assassinationRogue: {
     key: 'assassination_rogue',
-    cls: 'rogue',
+    cls: 'thief',
     role: 'dps',
     kind: 'physical',
     melee: true,
@@ -259,7 +259,7 @@ const specs = {
   },
   subtletyRogue: {
     key: 'subtlety_rogue',
-    cls: 'rogue',
+    cls: 'thief',
     role: 'dps',
     kind: 'physical',
     melee: true,
@@ -278,7 +278,7 @@ const specs = {
   },
   armsWarrior: {
     key: 'arms_warrior',
-    cls: 'warrior',
+    cls: 'swordman',
     role: 'dps',
     kind: 'physical',
     melee: true,
@@ -304,7 +304,7 @@ const specs = {
   },
   furyWarrior: {
     key: 'fury_warrior',
-    cls: 'warrior',
+    cls: 'swordman',
     role: 'dps',
     kind: 'physical',
     melee: true,
@@ -445,7 +445,7 @@ const specs = {
   },
   marksmanshipHunter: {
     key: 'marksmanship_hunter',
-    cls: 'hunter',
+    cls: 'archer',
     role: 'dps',
     kind: 'physical',
     melee: false,
@@ -464,7 +464,7 @@ const specs = {
   },
   beastMasteryHunter: {
     key: 'beast_mastery_hunter',
-    cls: 'hunter',
+    cls: 'archer',
     role: 'dps',
     kind: 'physical',
     melee: false,
@@ -483,7 +483,7 @@ const specs = {
   },
   survivalHunter: {
     key: 'survival_hunter',
-    cls: 'hunter',
+    cls: 'archer',
     role: 'dps',
     kind: 'physical',
     melee: false,
@@ -605,7 +605,7 @@ const specs = {
   },
   shadowPriest: {
     key: 'shadow_priest',
-    cls: 'priest',
+    cls: 'acolyte',
     role: 'dps',
     kind: 'caster',
     melee: false,
@@ -753,7 +753,7 @@ function positionFor(spec: Spec, boss: Entity, i: number) {
   if (spec.key === 'feral_druid_tank') return { x: boss.pos.x + 12, z: boss.pos.z };
   const range = spec.melee
     ? MELEE_RANGE - 1.2
-    : spec.cls === 'hunter'
+    : spec.cls === 'archer'
       ? 13
       : spec.cls === 'warlock' ||
           spec.key === 'shadow_priest' ||
@@ -839,20 +839,20 @@ function plannedAbilityReady(sim: Sim, caster: Entity, target: Entity, spec: Spe
 function shouldRangedAutoFallback(sim: Sim, caster: Entity, target: Entity, spec: Spec): boolean {
   return (
     !spec.melee &&
-    (spec.cls === 'mage' || spec.cls === 'priest' || spec.cls === 'warlock') &&
+    (spec.cls === 'mage' || spec.cls === 'acolyte' || spec.cls === 'warlock') &&
     !plannedAbilityReady(sim, caster, target, spec)
   );
 }
 
 function setupHunterPet(sim: Sim, pid: number) {
-  const hunter = sim.entities.get(pid)!;
+  const archer = sim.entities.get(pid)!;
   const beast = [...sim.entities.values()].find(
     (e) => e.kind === 'mob' && e.templateId === 'forest_wolf' && e.ownerId === null && !e.dead,
   );
   if (!beast) return;
   teleport(sim, pid, beast.pos.x + 5, beast.pos.z);
   sim.targetEntity(beast.id, pid);
-  face(hunter, beast);
+  face(archer, beast);
   sim.castAbility('tame_beast', pid);
   for (let i = 0; i < 20 * 7; i++) sim.tick();
 }
@@ -998,7 +998,7 @@ function secureAddThreat(add: Entity, tankPid: number, lead: number): void {
 }
 
 function runGroup(groupSpecs: Spec[], key: string): Result {
-  const sim = new Sim({ seed: 42, noPlayer: true, playerClass: 'warrior' });
+  const sim = new Sim({ seed: 42, noPlayer: true, playerClass: 'swordman' });
   const pids = groupSpecs.map((spec, i) => sim.addPlayer(spec.cls, `${spec.key}_${i}`));
   for (let i = 0; i < pids.length; i++) {
     sim.players.get(pids[i])?.questsDone.add('q_nythraxis_bound_guardian');
@@ -1007,7 +1007,7 @@ function runGroup(groupSpecs: Spec[], key: string): Result {
     equipBest(sim, pids[i], groupSpecs[i]);
   }
   for (let i = 0; i < pids.length; i++) {
-    if (groupSpecs[i].cls === 'hunter') setupHunterPet(sim, pids[i]);
+    if (groupSpecs[i].cls === 'archer') setupHunterPet(sim, pids[i]);
     if (groupSpecs[i].cls === 'warlock') setupWarlockImp(sim, pids[i]);
   }
   for (const pid of pids.slice(1)) {

@@ -53,7 +53,7 @@ function joinServer(
   id: number,
   name: string,
 ): ClientSession {
-  const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -100,7 +100,7 @@ function serverInv(server: GameServer, pid: number): InvSlot[] {
   return meta.inventory;
 }
 
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();
@@ -155,7 +155,7 @@ function applySnap(client: ClientWorld, snap: unknown): void {
 
 describe('offline Sim end-to-end (IWorld surface)', () => {
   it('disenchants a rare (typed secondary), applies a Runed enchant, salvages, with lastX mirrors', () => {
-    const sim = new Sim({ seed: 20260721, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 20260721, playerClass: 'swordman', autoEquip: false });
     const inv = () => sim.ctx.resolve()?.meta.inventory ?? [];
 
     // 1. Rare disenchant: fixed 1 essence + exactly 1 armed resonant_steel.

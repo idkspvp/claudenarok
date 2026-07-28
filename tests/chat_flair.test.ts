@@ -39,7 +39,7 @@ function joinServer(
   fc: FakeClient,
   id: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, id, id, name, cls, null);
   if ('error' in session) throw new Error(session.error);

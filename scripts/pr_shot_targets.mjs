@@ -1050,7 +1050,7 @@ export const TARGETS = [
               m({
                 id: 2,
                 name: 'Seraphine',
-                cls: 'priest',
+                cls: 'acolyte',
                 level: 58,
                 online: true,
                 status: 'dungeon',
@@ -1060,7 +1060,7 @@ export const TARGETS = [
               m({
                 id: 3,
                 name: 'Gorehowl',
-                cls: 'warrior',
+                cls: 'swordman',
                 level: 55,
                 online: true,
                 status: 'combat',
@@ -1079,7 +1079,7 @@ export const TARGETS = [
               m({
                 id: 5,
                 name: 'Thornbeard',
-                cls: 'hunter',
+                cls: 'archer',
                 level: 39,
                 online: false,
                 rank: 'member',
@@ -1271,7 +1271,7 @@ export const TARGETS = [
     when: ['ui/hud/chat/chat_line'],
     // Mage: a bright, unmistakably-not-default-white class color, so the
     // before/after class-color diff is obvious at a glance (the default
-    // 'warrior' tan reads close to the plain sender-name white already).
+    // 'swordman' tan reads close to the plain sender-name white already).
     variants: [
       { key: 'desktop', charClass: 'mage', charName: 'Lyravel' },
       { key: 'mobile', charClass: 'mage', charName: 'Lyravel', mobile: true },
@@ -1333,23 +1333,23 @@ export const TARGETS = [
     // The palette is one shared value (CLASSES[cls].color), so a refresh must be
     // eyeballed on every surface that reads it: the chat sender names (all nine
     // classes across channels), the party-frame class accents plus the minimap
-    // party dots, and the 3D model tint (priest moved the furthest, off pure white).
+    // party dots, and the 3D model tint (acolyte moved the furthest, off pure white).
     variants: [
-      { key: 'chat', charClass: 'warrior', charName: 'Thorgar' },
+      { key: 'chat', charClass: 'swordman', charName: 'Thorgar' },
       // The class names paint on whatever panel the active UI theme sets
       // (src/ui/theme.ts presets), so legibility must be checked per theme,
       // not only on the shipped classic dark panel.
-      { key: 'chat-midnight', charClass: 'warrior', charName: 'Thorgar', theme: 'midnight' },
-      { key: 'chat-parchment', charClass: 'warrior', charName: 'Thorgar', theme: 'parchment' },
+      { key: 'chat-midnight', charClass: 'swordman', charName: 'Thorgar', theme: 'midnight' },
+      { key: 'chat-parchment', charClass: 'swordman', charName: 'Thorgar', theme: 'parchment' },
       {
         key: 'chat-highcontrast',
-        charClass: 'warrior',
+        charClass: 'swordman',
         charName: 'Thorgar',
         theme: 'highContrast',
       },
-      { key: 'party', charClass: 'priest', charName: 'Lumina' },
-      { key: 'raid', charClass: 'warrior', charName: 'Thorgar' },
-      { key: 'model', charClass: 'priest', charName: 'Lumina' },
+      { key: 'party', charClass: 'acolyte', charName: 'Lumina' },
+      { key: 'raid', charClass: 'swordman', charName: 'Thorgar' },
+      { key: 'model', charClass: 'acolyte', charName: 'Lumina' },
     ],
     async capture(page, variant) {
       // Headless-swiftshader GPU notice is a capture-environment artifact; the
@@ -1378,15 +1378,15 @@ export const TARGETS = [
           const hud = window.__game?.hud;
           if (!hud) return;
           const lines = [
-            ['warrior', 'Thorgar', 'yell', 'Form up at the gate, pulling in ten.'],
+            ['swordman', 'Thorgar', 'yell', 'Form up at the gate, pulling in ten.'],
             ['mage', 'Emberlyn', 'party', 'Sheep is on the moon marker, do not break it.'],
             ['druid', 'Brightoak', 'party', 'Innervate is ready when you need it.'],
             ['shaman', 'Stormcaller', 'general', 'Dropping totems at the bridge camp.'],
             ['warlock', 'Morgatha', 'general', 'Summons up at the stone in two minutes.'],
-            ['priest', 'Selene', 'guild', 'Renew rolling on the tank, save your potions.'],
-            ['rogue', 'Nightblade', 'whisper', 'Meet me behind the mill after this pull.'],
+            ['acolyte', 'Selene', 'guild', 'Renew rolling on the tank, save your potions.'],
+            ['thief', 'Nightblade', 'whisper', 'Meet me behind the mill after this pull.'],
             ['paladin', 'Aurelius', 'world', 'Selling arcane dust stacks, whisper me.'],
-            ['hunter', 'Fletcher', 'lfg', 'LF healer for the delve, last spot.'],
+            ['archer', 'Fletcher', 'lfg', 'LF healer for the delve, last spot.'],
           ];
           hud.handleEvents(
             lines.map(([classId, from, channel, text], i) => ({
@@ -1418,7 +1418,7 @@ export const TARGETS = [
           const p = sim.player;
           const pm = sim.party;
           const roster = [
-            ['Thorgar', 'warrior'],
+            ['Thorgar', 'swordman'],
             ['Stormcaller', 'shaman'],
             ['Emberlyn', 'mage'],
             ['Brightoak', 'druid'],
@@ -1452,7 +1452,7 @@ export const TARGETS = [
         return {};
       }
       if (variant.key === 'raid') {
-        // Two-group raid covering all nine classes (me = warrior makes ten), so
+        // Two-group raid covering all nine classes (me = swordman makes ten), so
         // the raid-style frames show every class accent at once; same
         // PartyMachine struct as the party variant with raid: true and each
         // member placed into a raid group.
@@ -1463,14 +1463,14 @@ export const TARGETS = [
           const pm = sim.party;
           const roster = [
             ['Aurelius', 'paladin'],
-            ['Fletcher', 'hunter'],
-            ['Nightblade', 'rogue'],
-            ['Selene', 'priest'],
+            ['Fletcher', 'archer'],
+            ['Nightblade', 'thief'],
+            ['Selene', 'acolyte'],
             ['Stormcaller', 'shaman'],
             ['Emberlyn', 'mage'],
             ['Morgatha', 'warlock'],
             ['Brightoak', 'druid'],
-            ['Ironhide', 'warrior'],
+            ['Ironhide', 'swordman'],
           ];
           const pids = roster.map(([name, cls], i) => {
             const pid = sim.addPlayer(cls, name);
@@ -1503,7 +1503,7 @@ export const TARGETS = [
         return {};
       }
       // model: the character sheet's 3D stage, tinted via the shared class color
-      // (partial lerp, so the shift is subtle; priest moved the furthest).
+      // (partial lerp, so the shift is subtle; acolyte moved the furthest).
       await page.evaluate(() => window.__game.hud.toggleChar());
       await pollForSize(page, '#char-window');
       await wait(600);
@@ -1677,8 +1677,8 @@ export const TARGETS = [
       'server/deeds_board.ts',
     ],
     variants: [
-      { key: 'desktop', charClass: 'warrior', charName: 'Chronicler' },
-      { key: 'mobile', charClass: 'warrior', charName: 'Chronicler', mobile: true },
+      { key: 'desktop', charClass: 'swordman', charName: 'Chronicler' },
+      { key: 'mobile', charClass: 'swordman', charName: 'Chronicler', mobile: true },
     ],
     // The offline Sim resolves an EMPTY Renown board (a sandbox has no account
     // population), so stub the IWorld read with a representative ranked page
@@ -1704,7 +1704,7 @@ export const TARGETS = [
               rank: 1,
               name: 'Aldwin',
               realm: 'Claudemoon',
-              cls: 'warrior',
+              cls: 'swordman',
               level: 20,
               renown: 1620,
               title: 'prog_veteran',
@@ -1722,7 +1722,7 @@ export const TARGETS = [
               rank: 3,
               name: 'Cifern',
               realm: 'Claudemoon',
-              cls: 'priest',
+              cls: 'acolyte',
               level: 19,
               renown: 1390,
               title: null,
@@ -1731,7 +1731,7 @@ export const TARGETS = [
               rank: 4,
               name: 'Doran',
               realm: 'Claudemoon',
-              cls: 'rogue',
+              cls: 'thief',
               level: 20,
               renown: 1350,
               title: 'prog_veteran',
@@ -1775,14 +1775,14 @@ export const TARGETS = [
     label: 'Professions wheel window',
     when: ['src/ui/professions_view.ts', 'src/ui/professions_window.ts'],
     variants: [
-      { key: 'desktop-full', charClass: 'warrior', charName: 'Forgeheart' },
+      { key: 'desktop-full', charClass: 'swordman', charName: 'Forgeheart' },
       { key: 'desktop-simplified', charClass: 'mage', charName: 'Newhand', simplified: true },
-      { key: 'mobile', charClass: 'warrior', charName: 'Anvilmar', mobile: true },
+      { key: 'mobile', charClass: 'swordman', charName: 'Anvilmar', mobile: true },
       // The gathering section sits below the craft-skill fold; a fourth
       // framing scrolls it into view.
       {
         key: 'desktop-gathering',
-        charClass: 'warrior',
+        charClass: 'swordman',
         charName: 'Forgeheart',
         scrollSel: '.prof-gathering',
       },
@@ -1887,8 +1887,8 @@ export const TARGETS = [
     // Desktop and mobile: the three-state teaching ladder is actionable info (a
     // player decides what to train), so it must read on both form factors.
     variants: [
-      { key: 'desktop', charClass: 'warrior', charName: 'Forgeheart' },
-      { key: 'mobile', charClass: 'warrior', charName: 'Anvilmar', mobile: true },
+      { key: 'desktop', charClass: 'swordman', charName: 'Forgeheart' },
+      { key: 'mobile', charClass: 'swordman', charName: 'Anvilmar', mobile: true },
     ],
     // Show all three row states in one frame at Forgemistress Darva's forge. Set
     // the viewer's craft skills so the forge ladder renders every state at once:
@@ -1985,8 +1985,8 @@ export const TARGETS = [
     // button reads a disabled Learning state until the trainResult lands), so
     // it must read on both form factors.
     variants: [
-      { key: 'desktop', charClass: 'warrior', charName: 'Pendaline' },
-      { key: 'mobile', charClass: 'warrior', charName: 'Pendamora', mobile: true },
+      { key: 'desktop', charClass: 'swordman', charName: 'Pendaline' },
+      { key: 'mobile', charClass: 'swordman', charName: 'Pendamora', mobile: true },
     ],
     // The forge staging of train-window above (weaponcrafting 30 makes
     // recipe_forgeguard_bulwark_gauntlets the TEACHABLE row), then stage the
@@ -2155,7 +2155,7 @@ export const TARGETS = [
     key: 'station-props',
     label: 'Crafting-station scenery (Eastbrook forge)',
     when: ['render/stations', 'src/sim/content/professions'],
-    variants: [{ key: 'desktop', charClass: 'warrior', charName: 'Forgeheart' }],
+    variants: [{ key: 'desktop', charClass: 'swordman', charName: 'Forgeheart' }],
     // A world-scene shot of the Eastbrook forge station props (anvil + reused
     // crate/barrel clutter) beside Forgemistress Darva, framed the way a player
     // walks up to it. The station sits at STATIONS station_eastbrook_forge
@@ -2209,7 +2209,7 @@ export const TARGETS = [
         const roster = [
           ['Brightoak', 'druid'],
           ['Stormcaller', 'shaman'],
-          ['Nightblade', 'rogue'],
+          ['Nightblade', 'thief'],
           ['Emberlyn', 'mage'],
         ];
         const pids = roster.map(([name, cls], i) => {
@@ -2287,19 +2287,19 @@ export const TARGETS = [
     label: 'Target-of-target mini-frame beside the target frame, clear of the aura strip',
     when: ['totarget', 'ui/target_of_target'],
     variants: [
-      { key: 'desktop', charClass: 'warrior', charName: 'Marksman' },
+      { key: 'desktop', charClass: 'swordman', charName: 'Marksman' },
       // Slider maximum: the mini zoom compounds --target-frame-scale, so the
       // 18px gap and the top-aligned anchor must hold at the largest frame.
-      { key: 'desktop-scale-max', charClass: 'warrior', charName: 'Marksman', frameScale: 1.15 },
+      { key: 'desktop-scale-max', charClass: 'swordman', charName: 'Marksman', frameScale: 1.15 },
       // Move mode: the unlocked frame grows a dashed outline and the corner
       // button lights gold; the mini must stay clear of both.
-      { key: 'desktop-unlocked', charClass: 'warrior', charName: 'Marksman', unlockFrame: true },
+      { key: 'desktop-unlocked', charClass: 'swordman', charName: 'Marksman', unlockFrame: true },
       // Party pushed below the target: the painter measures frame + strip only,
       // so the beside-the-frame mini must no longer interact with the pushed rows.
       { key: 'desktop-party', charClass: 'paladin', charName: 'Marksman', party: true },
       // Boss rank: the move button moves to right: -30px and the dragon emblem
       // overhangs the portrait side, so the mini takes the widened boss gap.
-      { key: 'desktop-boss', charClass: 'warrior', charName: 'Marksman', boss: true },
+      { key: 'desktop-boss', charClass: 'swordman', charName: 'Marksman', boss: true },
       { key: 'mobile', charClass: 'mage', charName: 'Marksman', mobile: true },
     ],
     async capture(page, variant) {
@@ -2316,7 +2316,7 @@ export const TARGETS = [
             const roster = [
               ['Brightoak', 'druid'],
               ['Stormcaller', 'shaman'],
-              ['Nightblade', 'rogue'],
+              ['Nightblade', 'thief'],
               ['Emberlyn', 'mage'],
             ];
             const pids = roster.map(([name, cls], i) => {
@@ -2500,7 +2500,7 @@ export const TARGETS = [
     variants: [
       {
         key: 'cleaver-mainhand',
-        charClass: 'warrior',
+        charClass: 'swordman',
         charName: 'Cleaverjaw',
         items: ['gravewyrm_cleaver'],
         // Mirrored three-quarter: the mainhand (the subject) is the RIGHT hand.
@@ -2508,7 +2508,7 @@ export const TARGETS = [
       },
       {
         key: 'dual-fang',
-        charClass: 'rogue',
+        charClass: 'thief',
         charName: 'Twinfang',
         items: ['mirejaw_fang_knife', 'mirejaw_fang_knife'],
       },
@@ -2759,16 +2759,16 @@ export const TARGETS = [
         const HOLDER = [
           { holderTier: 1, name: 'Emberlyn', cls: 'mage', bal: 1 },
           { holderTier: 5, name: 'Goldwyn', cls: 'paladin', bal: 10000 },
-          { holderTier: 7, name: 'Whalimir', cls: 'warrior', bal: 1000000 },
+          { holderTier: 7, name: 'Whalimir', cls: 'swordman', bal: 1000000 },
           { holderTier: 12, name: 'Titanys', cls: 'druid', bal: 50000000 },
-          { holderTier: 16, name: 'Forgemara', cls: 'priest', bal: 90000000 },
-          { holderTier: 17, name: 'Worlding', cls: 'hunter', bal: 100000000 },
-          { holderTier: 18, name: 'Sovryn', cls: 'rogue', bal: 1000000000 },
+          { holderTier: 16, name: 'Forgemara', cls: 'acolyte', bal: 90000000 },
+          { holderTier: 17, name: 'Worlding', cls: 'archer', bal: 100000000 },
+          { holderTier: 18, name: 'Sovryn', cls: 'thief', bal: 1000000000 },
         ];
         // The contributor ladder: five merged-PR rungs (Tinkerer to Worldwright).
         const DEV = [
           { devTier: 1, name: 'Tinkwyn', cls: 'mage', prs: 1 },
-          { devTier: 2, name: 'Artifica', cls: 'rogue', prs: 5 },
+          { devTier: 2, name: 'Artifica', cls: 'thief', prs: 5 },
           { devTier: 3, name: 'Runael', cls: 'warlock', prs: 15 },
           { devTier: 4, name: 'Archibald', cls: 'paladin', prs: 30 },
           { devTier: 5, name: 'Wrightlynn', cls: 'druid', prs: 70 },
@@ -2883,12 +2883,12 @@ export const TARGETS = [
       { key: 'picker-mobile', picker: true, mobile: true },
       // The TARGET step (step two of the picker): worn gear is enchanted in
       // place, so an equipped copy lists there beside the bagged ones, tagged
-      // with its equipment slot. The dual-wield variant is a rogue with the SAME
+      // with its equipment slot. The dual-wield variant is a thief with the SAME
       // sword in both hands, the case the slot discriminator exists for: two
       // identical item ids, two separate rows.
       { key: 'targets', targets: true },
       { key: 'targets-mobile', targets: true, mobile: true },
-      { key: 'targets-dualwield', targets: true, dualWield: true, charClass: 'rogue' },
+      { key: 'targets-dualwield', targets: true, dualWield: true, charClass: 'thief' },
       // The #2415 replace flow: already-enchanted copies list as FLAGGED
       // replace rows (worn and bagged families both, the meta naming the
       // enchant a confirm would destroy, the same-enchant row disabled), and

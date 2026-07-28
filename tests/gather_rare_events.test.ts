@@ -249,8 +249,8 @@ describe('announceGatherRareEvent: soft zone fanout + dormant deed mark', () => 
 // hit: both events, the x5 signed yield, and the deed mark.
 describe('rare events through Sim.harvestNode (all three flavors)', () => {
   function huntHit(nodeId: string) {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Finder');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Finder');
     const node = mustNode(nodeId);
     const p = sim.entities.get(pid);
     if (!p) throw new Error('missing player entity');
@@ -363,8 +363,8 @@ describe('rare events through Sim.harvestNode (all three flavors)', () => {
 // count, while uncommon stays a plain fungible stack.
 describe('rarity-floor signing through Sim.harvestNode', () => {
   function huntRarity(want: (rarity: string, rareEvent: unknown) => boolean) {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Prospector');
     const nodeId = 'ore_eastbrook_1';
     const node = mustNode(nodeId);
     const p = sim.entities.get(pid);
@@ -434,8 +434,8 @@ describe('isSignableMaterialRarity threshold', () => {
 // gatherResult.qty must report the GRANTED count, not the resolved one.
 describe('grant truncation at the command boundary (full bags)', () => {
   function simAtOreNode() {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Packrat');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Packrat');
     const nodeId = 'ore_eastbrook_1';
     const node = mustNode(nodeId);
     const p = sim.entities.get(pid);

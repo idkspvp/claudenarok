@@ -26,13 +26,13 @@ import type { Entity, LootEntry, LootSlot, SimEvent } from '../src/sim/types';
 // pin drop-rate + need-greed resolution + fair-split determinism, the everyone-passes
 // return-to-corpse branch, and the visibility/prune helpers.
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 
 function partyOfThree(seed = 42) {
   const sim = makeSim(seed);
-  const a = sim.addPlayer('warrior', 'Aaa');
+  const a = sim.addPlayer('swordman', 'Aaa');
   const b = sim.addPlayer('mage', 'Bbb');
-  const c = sim.addPlayer('rogue', 'Ccc');
+  const c = sim.addPlayer('thief', 'Ccc');
   sim.partyInvite(b, a);
   sim.partyAccept(b);
   sim.partyInvite(c, a);
@@ -75,7 +75,7 @@ function deadCorpse(
 describe('loot_roll: rollLoot producer (drop-rate determinism)', () => {
   function dropRate(seed: number, mobId: string, itemId: string, n: number): number {
     const sim = makeSim(seed);
-    const pid = sim.addPlayer('warrior', 'Looter');
+    const pid = sim.addPlayer('swordman', 'Looter');
     const meta = playerMeta(sim, pid);
     const template = MOBS[mobId];
     let hits = 0;
@@ -113,7 +113,7 @@ describe('loot_roll: rollLoot producer (drop-rate determinism)', () => {
     // per-kill duplicate rate the unfixed table produced.
     const template = MOBS.nythraxis_scourge_of_thornpeak;
     const sim = makeSim(0);
-    const pid = sim.addPlayer('warrior', 'Looter');
+    const pid = sim.addPlayer('swordman', 'Looter');
     const meta = playerMeta(sim, pid);
     for (let seed = 0; seed < 60; seed++) {
       sim.rng = new Rng(seed);
@@ -515,7 +515,7 @@ describe('loot_roll: fair-split copper (module entry)', () => {
 
   it('falls back to looter-takes-all when there is no party split', () => {
     const sim = makeSim(7);
-    const a = sim.addPlayer('warrior', 'Solo');
+    const a = sim.addPlayer('swordman', 'Solo');
     const mob = deadCorpse(sim, a, [a], { copper: 50, items: [] });
     const meta = playerMeta(sim, a);
     const before = meta.copper;
@@ -655,7 +655,7 @@ describe('loot_roll: heroic-append cross-group dedup arm', () => {
     ];
     try {
       const sim = makeSim(0);
-      const pid = sim.addPlayer('warrior', 'Looter');
+      const pid = sim.addPlayer('swordman', 'Looter');
       const meta = playerMeta(sim, pid);
       const mob = createMob(-1, template, template.minLevel, { x: 0, y: 0, z: 0 });
       sim.ctx.instances.push({

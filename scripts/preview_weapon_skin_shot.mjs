@@ -1,5 +1,5 @@
 // Captures the character-sheet and inspect 3D previews with an Armory weapon
-// skin active, offline: a rogue holding the starter dagger applies the
+// skin active, offline: a thief holding the starter dagger applies the
 // Frostbite skin through the real changeWeaponSkin path, then (a) opens the
 // character sheet and (b) inspects a staged dev bot wearing the same skin.
 // Run with MODE=base on the base branch for the before set (base dagger model).
@@ -35,7 +35,7 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERR', e.message));
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-const booted = await enterOfflineGame(page, { charClass: 'rogue', charName: 'Sable' });
+const booted = await enterOfflineGame(page, { charClass: 'thief', charName: 'Sable' });
 console.log('offline boot:', booted);
 await page.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
 await sleep(800);

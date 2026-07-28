@@ -9,7 +9,7 @@ import { groundHeight } from '../src/sim/world';
 // at the exact moments hud.ts's audio wiring depends on.
 
 function makeWorld(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleportToCardMaster(sim: Sim, pid: number) {
@@ -24,7 +24,7 @@ function teleportToCardMaster(sim: Sim, pid: number) {
 }
 
 function queueDuo(sim: Sim, aName = 'Aleph', bName = 'Bet') {
-  const a = sim.addPlayer('warrior', aName);
+  const a = sim.addPlayer('swordman', aName);
   const b = sim.addPlayer('mage', bName);
   teleportToCardMaster(sim, a);
   teleportToCardMaster(sim, b);

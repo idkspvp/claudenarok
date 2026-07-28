@@ -53,9 +53,9 @@ export function startFiestaPractice(sim: Sim): boolean {
 
   sim.fiestaBotPids = [];
   const kit: { cls: PlayerClass; name: string }[] = [
-    { cls: 'paladin', name: 'Sir Botsworth' },
+    { cls: 'swordman', name: 'Sir Botsworth' },
     { cls: 'mage', name: 'Botzo the Arcane' },
-    { cls: 'rogue', name: 'Sneakbot' },
+    { cls: 'thief', name: 'Sneakbot' },
   ];
   for (let i = 0; i < kit.length; i++) {
     const pid = sim.addPlayer(kit[i].cls, kit[i].name);

@@ -6,6 +6,7 @@ import * as http from 'node:http';
 import * as path from 'node:path';
 import { WebSocketServer } from 'ws';
 import { DEEDS } from '../src/sim/content/deeds';
+import { isStartableJob } from '../src/sim/content/jobs';
 import {
   LEADERBOARD_MAX,
   LEADERBOARD_PAGE_SIZE,
@@ -1463,18 +1464,9 @@ async function handleApi(req: http.IncomingMessage, res: http.ServerResponse): P
             error: 'character name is not allowed',
             code: 'character.name_not_allowed',
           });
-        const validClasses = [
-          'warrior',
-          'paladin',
-          'hunter',
-          'rogue',
-          'priest',
-          'shaman',
-          'mage',
-          'warlock',
-          'druid',
-        ];
-        if (!validClasses.includes(body.class))
+        // Same source as the pipeline handler (server/characters.ts) and the
+        // character-creation picker: the startable rows of the job table.
+        if (!isStartableJob(body.class))
           return json(res, 400, { error: 'invalid class', code: 'character.invalid_class' });
         const skin = Math.max(
           0,

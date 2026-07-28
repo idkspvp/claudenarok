@@ -53,7 +53,7 @@ async function shoot(label, viewport) {
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
   // The shared entry flow: it fires the hidden #btn-offline hook, fills name/class, and
   // dismisses the mobile "tap to continue" preflight that otherwise gates the touch boot.
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Baggins', settleMs: 3000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Baggins', settleMs: 3000 });
   await page.waitForFunction(() => window.__game?.hud, { timeout: 60000 });
 
   await page.evaluate((bags) => {

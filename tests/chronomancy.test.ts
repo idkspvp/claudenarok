@@ -10,13 +10,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  raisePool(p);
   return { sim, p };
 }
 
@@ -95,7 +96,7 @@ describe('Temporal Mend', () => {
 
   it('heals a wounded ally and draws healing threat', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Tanque');
+    const ally = sim.addPlayer('swordman', 'Tanque');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 5;
@@ -136,7 +137,7 @@ describe('Temporal Mend', () => {
 
   it('respects range like every other heal', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Lejano');
+    const ally = sim.addPlayer('swordman', 'Lejano');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 50; // beyond the 30yd heal range
@@ -186,7 +187,7 @@ describe('Temporal Barrier', () => {
     // A same-caster recast REPLACES to full (the documented absorb rule).
     p.cooldowns.delete('temporal_barrier');
     (p as unknown as { gcdRemaining: number }).gcdRemaining = 0;
-    p.resource = p.maxResource;
+    raisePool(p);
     sim.castAbility('temporal_barrier');
     sim.tick();
     const shields = p.auras.filter((a) => a.id === 'temporal_barrier');
@@ -199,7 +200,7 @@ describe('Temporal Barrier', () => {
 
   it('lands on an ally and is instant on the GCD', () => {
     const { sim, p } = chronoMage();
-    const ally = sim.addPlayer('warrior', 'Escudado');
+    const ally = sim.addPlayer('swordman', 'Escudado');
     const allyEnt = sim.entities.get(ally);
     if (!allyEnt) throw new Error('ally missing');
     allyEnt.pos.x = p.pos.x + 5;

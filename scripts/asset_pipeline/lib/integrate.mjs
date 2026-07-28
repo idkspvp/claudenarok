@@ -356,7 +356,7 @@ export function registerClassSkin({ cls, model, texturePath, suffix }) {
   let manifest = read(FILES.manifest);
   const anchor = `player_${cls}: [`;
   // Idempotence must be scoped to THIS CLASS's SKINS array, not the whole file:
-  // classes sharing a model (priest/mage/warlock all use the mage atlas) each
+  // classes sharing a model (acolyte/mage/warlock all use the mage atlas) each
   // need their own SKINS entry pointing at the same shared atlas path.
   const anchorAt = manifest.indexOf(anchor);
   if (anchorAt === -1) {

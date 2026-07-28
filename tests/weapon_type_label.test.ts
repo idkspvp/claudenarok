@@ -28,7 +28,7 @@ describe('weaponTypeLabelKey', () => {
   });
 
   it('classifies each weapon item id that exists to its own type label', () => {
-    // bow/crossbow are hunter-only cosmetic skin types with no weapon ITEM, so
+    // bow/crossbow are archer-only cosmetic skin types with no weapon ITEM, so
     // only the seven item-backed types appear in the map; drive the accessor with
     // a real item for each, exercising id -> type -> label-key end to end.
     const itemTypes = new Set(Object.values(WEAPON_TYPE_BY_ITEM));
@@ -44,7 +44,7 @@ describe('weaponTypeLabelKey', () => {
   });
 
   it('resolves known example weapons to their type label', () => {
-    // Fang of Korzul is the canonical rogue dagger; a staff and a polearm cover
+    // Fang of Korzul is the canonical thief dagger; a staff and a polearm cover
     // the added-label case.
     expect(weaponTypeLabelKey('fang_of_korzul')).toBe('hudChrome.wocStore.wtype.dagger');
     expect(weaponTypeLabelKey('gnarled_staff')).toBe('hudChrome.wocStore.wtype.staff');

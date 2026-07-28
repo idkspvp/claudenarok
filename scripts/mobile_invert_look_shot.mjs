@@ -59,7 +59,7 @@ try {
   await sleep(1200);
 
   // Offline entry: Play Offline -> type a name -> pick a class -> Enter World.
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Aethel', settleMs: 2500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Aethel', settleMs: 2500 });
   await page.evaluate(() => document.getElementById('mobile-preflight-continue')?.click());
   await sleep(1500);
 

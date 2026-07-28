@@ -3,13 +3,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 const SEED = 42;
 // A mage so the victim is a mana user; level it up so Sister Nhalia's L12 elite
 // swing never one-shots it (death would clear the aura before we can read it).
 const makeSim = (cls: PlayerClass = 'mage') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
-  sim.setPlayerLevel(20);
+  levelWithStats(sim, 20);
   return sim;
 };
 
@@ -116,8 +117,8 @@ describe('mob Spirit Siphon (Sister Nhalia)', () => {
     expect(player.auras.filter((a) => a.kind === 'buff_int' && a.value < 0).length).toBe(1);
   });
 
-  it('never siphons a non-mana victim (warrior uses rage)', () => {
-    const sim = makeSim('warrior');
+  it('never siphons a non-mana victim (swordman uses rage)', () => {
+    const sim = makeSim('swordman');
     const player = sim.player;
     expect(player.resourceType).not.toBe('mana');
     const mob = spawnNhalia(sim);

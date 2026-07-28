@@ -421,25 +421,25 @@ describe('per-character scope', () => {
 
   it('namespaces the offline scope (offline:<class>:<name>) per character', () => {
     // Offline scope is `offline:${playerClass}:${name}` (the only stable handle).
-    const aldric = new Keybinds('offline:warrior:Aldric');
+    const aldric = new Keybinds('offline:swordman:Aldric');
     aldric.bind('jump', 0, 'KeyZ');
-    expect(localStorage.getItem('woc_keybinds:offline:warrior:Aldric')).not.toBeNull();
+    expect(localStorage.getItem('woc_keybinds:offline:swordman:Aldric')).not.toBeNull();
     expect(localStorage.getItem('woc_keybinds')).toBeNull();
     // A different offline character starts from defaults, not Aldric's binding
     // (KeyZ is sheathe's default, so Brenna resolves it to sheathe, not jump).
     expect(new Keybinds('offline:mage:Brenna').actionForCode('KeyZ')).toBe('sheathe');
     expect(new Keybinds('offline:mage:Brenna').codeAt('jump', 0)).toBe('Space');
     // The same scope reads back its own profile.
-    expect(new Keybinds('offline:warrior:Aldric').actionForCode('KeyZ')).toBe('jump');
+    expect(new Keybinds('offline:swordman:Aldric').actionForCode('KeyZ')).toBe('jump');
   });
 
   it('shares one store across same-class same-name offline characters', () => {
     // Offline characters are not persisted, so class+name is the only handle:
     // two offline sessions with the same class and name intentionally share one
     // profile. A different name does not.
-    new Keybinds('offline:warrior:Aldric').bind('jump', 0, 'KeyZ');
-    expect(new Keybinds('offline:warrior:Aldric').actionForCode('KeyZ')).toBe('jump');
-    expect(new Keybinds('offline:warrior:Borin').actionForCode('KeyZ')).toBe('sheathe');
+    new Keybinds('offline:swordman:Aldric').bind('jump', 0, 'KeyZ');
+    expect(new Keybinds('offline:swordman:Aldric').actionForCode('KeyZ')).toBe('jump');
+    expect(new Keybinds('offline:swordman:Borin').actionForCode('KeyZ')).toBe('sheathe');
   });
 
   it('seeds from the legacy blob when the scoped value is corrupt JSON', () => {

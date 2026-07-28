@@ -3,6 +3,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 const SEED = 42;
 // A mage victim at the troll's own level: low melee avoidance and no level gap, so
@@ -10,7 +11,7 @@ const SEED = 42;
 // on-hit roll would rarely fire). We top hp up each swing so a hit never kills.
 const makeSim = (cls: PlayerClass = 'mage') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
-  sim.setPlayerLevel(12);
+  levelWithStats(sim, 12);
   return sim;
 };
 
@@ -57,9 +58,9 @@ describe('mob withering curse (Withering Rot)', () => {
   });
 
   it('the curse lowers the victim Agility and thins their evasion', () => {
-    // A rogue has ample base Agility, so the drain lands without flooring at 0.
+    // A thief has ample base Agility, so the drain lands without flooring at 0.
     // Apply the aura through the normal path (recalcPlayerStats runs on apply).
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     const player = sim.player;
     const mob = spawnTroll(sim);
     const agiBefore = player.stats.agi;

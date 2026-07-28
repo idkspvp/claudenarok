@@ -24,7 +24,7 @@ const scenes = [
   {
     spell: 'volley',
     label: 'Volley',
-    cls: 'hunter',
+    cls: 'archer',
     name: 'Arrow',
     shot: 'tmp/pr2_ground_volley.png',
     waitMs: 700,

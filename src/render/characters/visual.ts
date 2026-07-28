@@ -75,7 +75,7 @@ const BOW_AIM_QUAT = new THREE.Quaternion().setFromEuler(
 );
 // Root-relative carry for a bow-slot gun outside the shot: muzzle (authored
 // along +Y) pitched forward to the horizon, then rolled a quarter turn about
-// the barrel so the handle lies parallel to the hunter's body instead of
+// the barrel so the handle lies parallel to the archer's body instead of
 // jutting out sideways. The shot itself keeps the hand-tuned grip.
 const GUN_CARRY_QUAT = new THREE.Quaternion()
   .setFromEuler(new THREE.Euler(Math.PI / 2, 0, 0, 'XYZ'))
@@ -270,7 +270,7 @@ export class CharacterVisual {
       skinTexture(key, skinIndex),
       skinEmissiveTexture(key, skinIndex),
     );
-    // Class halo (the priest's Light): a glowing ring behind the head bone.
+    // Class halo (the acolyte's Light): a glowing ring behind the head bone.
     // Added AFTER applyMaterials (its additive material must not be re-mapped)
     // and BEFORE the originalMaterials snapshot, so ghost/stealth material
     // swaps restore it like any other mesh.
@@ -704,7 +704,7 @@ export class CharacterVisual {
   }
 
   /** Swap the held mainhand weapon model at runtime (gear equip/unequip); no-op if
-   *  unchanged or if this class keeps a fixed weapon (hunter crossbow, mobs/NPCs —
+   *  unchanged or if this class keeps a fixed weapon (archer crossbow, mobs/NPCs —
    *  no VisualDef.weaponSlot). Mirrors setSkin: re-attach the prop, re-run the
    *  shared material pass, re-snapshot the original-material map, then re-apply any
    *  active ghost/soul-rend overlay. Cheap (one prop clone) and keeps the mixer/
@@ -757,7 +757,7 @@ export class CharacterVisual {
   }
 
   /** Apply or clear a Season 1 Armory weapon-skin cosmetic: the skin's model
-   *  replaces the held weapon (all swap slots, or the hunter's fixed ranged
+   *  replaces the held weapon (all swap slots, or the archer's fixed ranged
    *  attach) and its rarity VFX ride the new payloads. Null restores the
    *  equipped item's own model. */
   setWeaponSkin(weaponSkinId: string | null): void {
@@ -827,7 +827,7 @@ export class CharacterVisual {
     // A VFX-tier skin's emissive derive mutates its payload materials in place,
     // so give each payload exclusive clones BEFORE the caster snapshot: the
     // shared tinted-material cache must never carry derived state (two players
-    // with one skin, or a rogue's two hands, would corrupt each other), and the
+    // with one skin, or a thief's two hands, would corrupt each other), and the
     // ghost/stealth snapshot below must target the clones the rig restores.
     if (this.weaponSkinVfxSpec()) {
       for (const payload of payloads) {

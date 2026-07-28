@@ -3467,7 +3467,7 @@ export class ClientWorld implements IWorld {
     }
     this.cmd({ cmd: 'emote', emote: emoteId });
   }
-  // --- IWorldPet: hunter-pet commands (snake_case wire; pet state mirrors on the
+  // --- IWorldPet: archer-pet commands (snake_case wire; pet state mirrors on the
   // owned-mob entity wire, not the self frame). setPetAutoTaunt nudges the owned mob
   // locally before the send (sanctioned trivial-UI optimism), re-confirmed next frame. ---
   abandonPet(): void {

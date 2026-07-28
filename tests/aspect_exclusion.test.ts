@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { ABILITIES } from '../src/sim/content/classes';
 import { Sim } from '../src/sim/sim';
+import { raisePool } from './helpers/sp';
 
-// The three hunter aspects are mutually exclusive: only one may be active at a
+// The three archer aspects are mutually exclusive: only one may be active at a
 // time. They are marked with the shared `exclusiveGroup: 'aspect'` and enforced
 // at the self-buff apply site (effect_dispatch).
 const makeHunter = (seed = 42) => {
-  const sim = new Sim({ seed, playerClass: 'hunter', autoEquip: true });
+  const sim = new Sim({ seed, playerClass: 'archer', autoEquip: true });
   sim.setPlayerLevel(14); // hawk(4) + monkey(10) + cheetah(14) all known
   return sim;
 };
@@ -17,16 +18,18 @@ const aspectAuras = (sim: Sim) =>
 // Aspects trigger the global cooldown, so a cast must clear the GCD (1.5s = 30
 // ticks at 20 Hz) before the next one will land. Cast, then settle past the GCD.
 const castAspect = (sim: Sim, id: string) => {
+  raisePool(sim.player); // the D1 SP pool no longer covers three aspects in a row
   sim.castAbility(id);
   for (let i = 0; i < 32; i++) sim.tick();
 };
 
 const castSelfBuff = (sim: Sim, id: string) => {
+  raisePool(sim.player);
   sim.castAbility(id);
   for (let i = 0; i < 32; i++) sim.tick();
 };
 
-describe('hunter aspect mutual exclusion', () => {
+describe('archer aspect mutual exclusion', () => {
   it('marks all three aspects with the shared exclusive group', () => {
     expect(ABILITIES.aspect_of_the_hawk.exclusiveGroup).toBe('aspect');
     expect(ABILITIES.aspect_of_the_monkey.exclusiveGroup).toBe('aspect');
@@ -78,31 +81,8 @@ describe('hunter aspect mutual exclusion', () => {
 });
 
 describe('class self-buff mutual exclusion groups', () => {
-  it('marks paladin auras and warrior stances with their own exclusive groups', () => {
-    expect(ABILITIES.devotion_aura.exclusiveGroup).toBe('paladin_aura');
-    expect(ABILITIES.retribution_aura.exclusiveGroup).toBe('paladin_aura');
-    expect(ABILITIES.battle_stance.exclusiveGroup).toBe('warrior_stance');
-    expect(ABILITIES.defensive_stance.exclusiveGroup).toBe('warrior_stance');
-    expect(ABILITIES.berserker_stance.exclusiveGroup).toBe('warrior_stance');
-  });
-
-  it('keeps only one paladin aura active', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'paladin', autoEquip: true });
-    sim.setPlayerLevel(16); // devotion(1) + retribution(16) known
-
-    castSelfBuff(sim, 'devotion_aura');
-    expect(sim.player.auras.filter((a) => a.id.endsWith('_aura')).map((a) => a.id)).toEqual([
-      'devotion_aura',
-    ]);
-
-    castSelfBuff(sim, 'retribution_aura');
-    expect(sim.player.auras.filter((a) => a.id.endsWith('_aura')).map((a) => a.id)).toEqual([
-      'retribution_aura',
-    ]);
-  });
-
-  it('keeps only one self-applied warrior stance active', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  it('keeps only one self-applied swordman stance active', () => {
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(14);
 
     castSelfBuff(sim, 'battle_stance');

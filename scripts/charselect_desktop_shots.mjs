@@ -15,7 +15,7 @@ const uniq = Date.now().toString(36).slice(-6);
 const alpha = uniq.replace(/[0-9]/g, (d) => 'abcdefghij'[Number(d)]);
 const USER = `uishot_${uniq}`;
 const CHARS = [
-  { name: `Ashot${alpha}`, cls: 'warrior' },
+  { name: `Ashot${alpha}`, cls: 'swordman' },
   { name: `Bshot${alpha}`, cls: 'mage' },
   { name: `Cshot${alpha}`, cls: 'druid' },
 ];

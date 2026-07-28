@@ -16,8 +16,7 @@
 import type { Entity, PlayerClass } from '../types';
 
 const TANK_SPEC_BY_CLASS: Partial<Record<PlayerClass, string>> = {
-  warrior: 'prot',
-  paladin: 'protection',
+  swordman: 'prot',
 };
 
 export interface TankCritImmunityMeta {
@@ -29,9 +28,5 @@ export function isCritImmuneTank(target: Entity, meta: TankCritImmunityMeta | un
   if (target.kind !== 'player' || !meta) return false;
   const spec = meta.mods?.spec ?? null;
   if (spec === null) return false;
-  if (TANK_SPEC_BY_CLASS[meta.cls] === spec) return true;
-  if (meta.cls === 'druid' && spec === 'feral') {
-    return target.auras.some((a) => a.kind === 'form_bear');
-  }
-  return false;
+  return TANK_SPEC_BY_CLASS[meta.cls] === spec;
 }

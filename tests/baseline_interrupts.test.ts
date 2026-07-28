@@ -8,14 +8,13 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
+// The Paladin, Druid, and Warlock interrupts went with those classes in D1. The
+// Acolyte deliberately has no row: it never carried one.
 const INTERRUPTS: Record<string, string> = {
-  warrior: 'pummel',
-  rogue: 'kick',
+  swordman: 'pummel',
+  thief: 'kick',
   mage: 'counterspell',
-  hunter: 'counter_shot',
-  paladin: 'rebuke',
-  druid: 'skull_bash',
-  warlock: 'spell_lock',
+  archer: 'counter_shot',
 };
 
 describe('baseline class interrupts', () => {
@@ -30,7 +29,7 @@ describe('baseline class interrupts', () => {
   });
 
   it('an interrupt cancels a hostile cast and locks that spell school', () => {
-    const sim = new Sim({ seed: 4, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 4, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(20);
     const p = sim.entities.get(sim.playerId) as Entity;
     // A hostile mob mid-cast of a non-physical (interruptible) spell.

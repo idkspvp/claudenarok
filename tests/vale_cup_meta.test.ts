@@ -35,13 +35,13 @@ describe('Vale Cup: parimutuel betting', () => {
   // Stage a bot showcase in the briefing window, then seat two spectators at the
   // Sowfield with copper to wager.
   function stageBettableMatch() {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', playerName: 'Host' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', playerName: 'Host' });
     (sim as unknown as { cfg: { valeCupShowcase: boolean } }).cfg.valeCupShowcase = true;
     for (let i = 0; i < 20 * 60 + 2 && !sim.vcup.match; i++) sim.tick();
     const match = sim.vcup.match!;
     expect(match.phase).toBe('briefing');
-    const s1 = addAt(sim, 'warrior', 'Bettor1', PITCH_CENTER.x, PITCH_CENTER.z - 22);
-    const s2 = addAt(sim, 'warrior', 'Bettor2', PITCH_CENTER.x + 3, PITCH_CENTER.z - 22);
+    const s1 = addAt(sim, 'swordman', 'Bettor1', PITCH_CENTER.x, PITCH_CENTER.z - 22);
+    const s2 = addAt(sim, 'swordman', 'Bettor2', PITCH_CENTER.x + 3, PITCH_CENTER.z - 22);
     sim.players.get(s1)!.copper = 1000;
     sim.players.get(s2)!.copper = 1000;
     return { sim, match, s1, s2 };
@@ -110,7 +110,7 @@ describe('Vale Cup: parimutuel betting', () => {
 describe('Vale Cup: kit swap round trip and persistence', () => {
   it('restores the exact class kit, pets, cooldowns, and leaves level/xp/talents untouched', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warlock', 'Aleph');
+    const a = addAt(sim, 'mage', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const ae = sim.entities.get(a)!;
     (sim as any).summonPet(ae, 'emberkin');
@@ -142,7 +142,7 @@ describe('Vale Cup: kit swap round trip and persistence', () => {
 
   it('persists the RETURN position while mid-match, and standings round-trip via CharacterState', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     // Before any result: the standing keys stay absent (back-compat shape).
     const clean = sim.serializeCharacter(a)!;
@@ -161,7 +161,7 @@ describe('Vale Cup: kit swap round trip and persistence', () => {
     expect(won.vcupLosses).toBe(0);
 
     const sim2 = makeWorld();
-    const a2 = sim2.addPlayer('warrior', 'Aleph', { state: won });
+    const a2 = sim2.addPlayer('swordman', 'Aleph', { state: won });
     const meta2 = sim2.players.get(a2)!;
     expect(meta2.vcupWins).toBe(1);
     expect(meta2.vcupLosses).toBe(0);
@@ -181,7 +181,7 @@ describe('Vale Cup: determinism', () => {
 
   it('the same seed and script replays an identical match (run-twice trace)', () => {
     const run = () => {
-      const sim = new Sim({ seed: 5, playerClass: 'warrior', playerName: 'Solo' });
+      const sim = new Sim({ seed: 5, playerClass: 'swordman', playerName: 'Solo' });
       sim.vcupPracticeStart(2);
       const trace: unknown[] = [];
       for (let i = 0; i < 20 * 45; i++) {
@@ -204,8 +204,8 @@ describe('Vale Cup: determinism', () => {
 
   it('draws ZERO shared rng anywhere on the queue + match path (draw-value accounting)', () => {
     const script = (withCup: boolean): number[] => {
-      const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-      const a = addAt(sim, 'warrior', 'Aleph');
+      const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+      const a = addAt(sim, 'swordman', 'Aleph');
       const b = addAt(sim, 'mage', 'Bet', 6, -40);
       const values: number[] = [];
       sim.rng.setObserver((v) => values.push(v));
@@ -230,7 +230,7 @@ describe('Vale Cup: determinism', () => {
 
   it('the BOT path (practice: spawn, chase, kicks, shoulders, dives) also draws zero shared rng', () => {
     const script = (withCup: boolean): number[] => {
-      const sim = new Sim({ seed: 11, playerClass: 'warrior', playerName: 'Solo' });
+      const sim = new Sim({ seed: 11, playerClass: 'swordman', playerName: 'Solo' });
       const values: number[] = [];
       sim.rng.setObserver((v) => values.push(v));
       if (withCup) sim.vcupPracticeStart(3);
@@ -245,7 +245,7 @@ describe('Vale Cup: determinism', () => {
 describe('Vale Cup: parallel private practice', () => {
   it('runs many practice matches at once, each on its own isolated pitch', () => {
     const sim = makeWorld();
-    const pids = Array.from({ length: 3 }, (_, i) => addAt(sim, 'warrior', `P${i}`, i * 3, -40));
+    const pids = Array.from({ length: 3 }, (_, i) => addAt(sim, 'swordman', `P${i}`, i * 3, -40));
     for (const pid of pids) sim.vcupPracticeStart(1, pid);
     expect(sim.vcup.practices.length).toBe(3);
     expect(sim.vcup.match).toBe(null); // the physical slot is untouched
@@ -270,10 +270,10 @@ describe('Vale Cup: parallel private practice', () => {
 
   it('practice runs alongside the one real Sowfield match without contention', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'RealA', 0, -40);
+    const a = addAt(sim, 'swordman', 'RealA', 0, -40);
     const b = addAt(sim, 'mage', 'RealB', 4, -40);
     startBout(sim, a, b); // occupies vc.match
-    const solo = addAt(sim, 'rogue', 'Practicer', 8, -40);
+    const solo = addAt(sim, 'thief', 'Practicer', 8, -40);
     sim.vcupPracticeStart(2, solo);
     // Both coexist: the real match on the pitch, the practice in its instance.
     expect(sim.vcup.match).toBeTruthy();
@@ -282,7 +282,7 @@ describe('Vale Cup: parallel private practice', () => {
   });
 
   it('a practice bout plays a real match of football (kickoff, ball moves)', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', playerName: 'Solo' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', playerName: 'Solo' });
     sim.vcupPracticeStart(3, sim.primaryId);
     const match = sim.vcup.practices[0];
     tickUntil(sim, () => match.phase === 'active', 20 * 40);
@@ -301,7 +301,7 @@ describe('Vale Cup: parallel private practice', () => {
   it('a human Shoot fires toward the practice goal, not back toward the Sowfield', () => {
     // Regression: sport landmarks are Sowfield-frame; on an offset practice pitch
     // the shot aim must add match.origin or it fires the wrong way (toward x=0).
-    const sim = new Sim({ seed: 3, playerClass: 'warrior', playerName: 'Solo' });
+    const sim = new Sim({ seed: 3, playerClass: 'swordman', playerName: 'Solo' });
     sim.vcupPracticeStart(1, sim.primaryId);
     const match = sim.vcup.practices[0];
     readyAll(sim);
@@ -316,7 +316,7 @@ describe('Vale Cup: parallel private practice', () => {
   });
 
   it('refuses to double-seat a player already practicing', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', playerName: 'Solo' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', playerName: 'Solo' });
     sim.vcupPracticeStart(1, sim.primaryId);
     expect(sim.vcup.practices.length).toBe(1);
     sim.vcupPracticeStart(2, sim.primaryId);
@@ -338,7 +338,7 @@ describe('Vale Cup: guild banners and the guild leaderboard', () => {
 
   it('credits the guild W/L of banner entrants and builds the guild board', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Ada', 0, -40);
+    const a = addAt(sim, 'swordman', 'Ada', 0, -40);
     const b = addAt(sim, 'mage', 'Bo', 4, -40);
     sim.setPlayerGuild(a, 'Wheat Kings');
     sim.setPlayerGuild(b, 'Mire Herons');
@@ -375,7 +375,7 @@ describe('Vale Cup: guild banners and the guild leaderboard', () => {
 
   it('does not credit a guild when the player entered privately (banner off)', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Ada', 0, -40);
+    const a = addAt(sim, 'swordman', 'Ada', 0, -40);
     const b = addAt(sim, 'mage', 'Bo', 4, -40);
     sim.setPlayerGuild(a, 'Wheat Kings');
     sim.setPlayerGuild(b, 'Mire Herons');
@@ -391,7 +391,7 @@ describe('Vale Cup: guild banners and the guild leaderboard', () => {
 
   it('forfeits guild credit if you leave the guild before the result', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Ada', 0, -40);
+    const a = addAt(sim, 'swordman', 'Ada', 0, -40);
     const b = addAt(sim, 'mage', 'Bo', 4, -40);
     sim.setPlayerGuild(a, 'Wheat Kings');
     sim.setPlayerGuild(b, 'Mire Herons');
@@ -406,7 +406,7 @@ describe('Vale Cup: guild banners and the guild leaderboard', () => {
 
   it('deserting under a banner costs the guild a loss', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Ada', 0, -40);
+    const a = addAt(sim, 'swordman', 'Ada', 0, -40);
     const b = addAt(sim, 'mage', 'Bo', 4, -40);
     sim.setPlayerGuild(a, 'Wheat Kings');
     sim.vcupQueueJoin(1, 'vale', 'allrounder', true, a);

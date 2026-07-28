@@ -8,7 +8,7 @@ describe('Valor Roar', () => {
     expect(def).toBeTruthy();
     expect(def.id).toBe('rallying_cry');
     expect(def.name).toBe('Valor Roar');
-    expect(def.class).toBe('warrior');
+    expect(def.class).toBe('swordman');
     expect(def.learnLevel).toBe(18);
     expect(def.school).toBe('physical');
     expect(def.requiresTarget).toBe(false);
@@ -16,15 +16,15 @@ describe('Valor Roar', () => {
     expect(def.effects).toEqual([{ type: 'aoeAllyMaxHp', pct: 0.2, duration: 10, radius: 40 }]);
   });
 
-  it('is unknown at level 17 and known from level 18 in the warrior kit', () => {
-    const before = abilitiesKnownAt('warrior', 17).map((k) => k.def.id);
-    const after = abilitiesKnownAt('warrior', 18).map((k) => k.def.id);
+  it('is unknown at level 17 and known from level 18 in the swordman kit', () => {
+    const before = abilitiesKnownAt('swordman', 17).map((k) => k.def.id);
+    const after = abilitiesKnownAt('swordman', 18).map((k) => k.def.id);
     expect(before).not.toContain('rallying_cry');
     expect(after).toContain('rallying_cry');
   });
 
   it('raises maximum health by 20% for 10 seconds when cast', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(18);
     const p = sim.player;
     const maxHpBefore = p.maxHp;

@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[]): string | undefined {
@@ -13,7 +13,7 @@ function errorText(events: SimEvent[]): string | undefined {
 describe('/potion command', () => {
   it('reports the combat potion as ready when off cooldown', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.potionCooldownUntil = -1;
@@ -24,7 +24,7 @@ describe('/potion command', () => {
 
   it('reports remaining cooldown, ceiled, when on cooldown', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     // potionCooldownUntil is an absolute sim-time deadline measured against sim.time.
@@ -36,7 +36,7 @@ describe('/potion command', () => {
 
   it('responds to the /potioncd alias', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.entities.get(a)!.potionCooldownUntil = -1;
 

@@ -16,7 +16,12 @@ mkdirSync(OUT, { recursive: true });
 const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
-  args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  args: [
+    '--no-sandbox',
+    '--use-gl=angle',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
 });
 
 try {
@@ -24,7 +29,7 @@ try {
   await page.setViewport({ width: 1280, height: 800 });
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
-  // Offline flow: Play Offline (auto-selects warrior) → name → Start.
+  // Offline flow: Play Offline (auto-selects swordman) → name → Start.
   await page.waitForSelector('#btn-offline', { timeout: 15000 });
   await page.evaluate(() => document.querySelector('#btn-offline').click());
   await page.waitForSelector('#char-name', { visible: true });
@@ -48,7 +53,11 @@ try {
     const fx = p.pos.x + Math.sin(p.facing) * 7;
     const fz = p.pos.z + Math.cos(p.facing) * 7;
     const ground = (x, z) => sim.groundPos(x, z);
-    const offsets = [[-2.5, 0], [2.5, 0.5], [0, 2.5]];
+    const offsets = [
+      [-2.5, 0],
+      [2.5, 0.5],
+      [0, 2.5],
+    ];
     window.__school = [];
     for (let i = 0; i < 3 && i < mobs.length; i++) {
       const m = mobs[i];
@@ -88,7 +97,11 @@ try {
     return window.__school.map((id) => {
       const m = sim.entities.get(id);
       const a = m?.auras.find((x) => x.id === 'warcry_deepfen_murloc');
-      return { name: m?.name, haste: a ? a.value : null, remaining: a ? Math.round(a.remaining * 10) / 10 : null };
+      return {
+        name: m?.name,
+        haste: a ? a.value : null,
+        remaining: a ? Math.round(a.remaining * 10) / 10 : null,
+      };
     });
   });
   console.log('Tide Cadence auras:', JSON.stringify(proof));
@@ -97,15 +110,24 @@ try {
   await page.screenshot({ path: `${OUT}/warcry-scene.png` });
   console.log('saved warcry-scene.png (full scene — the buffed murloc school)');
 
-  await page.screenshot({ path: `${OUT}/warcry-actors.png`, clip: { x: 420, y: 90, width: 470, height: 360 } });
+  await page.screenshot({
+    path: `${OUT}/warcry-actors.png`,
+    clip: { x: 420, y: 90, width: 470, height: 360 },
+  });
   console.log('saved warcry-actors.png (close-up on the school)');
 
   // Combat log showing the repeated "channels Tide Cadence" lines.
-  await page.screenshot({ path: `${OUT}/warcry-log.png`, clip: { x: 8, y: 470, width: 560, height: 250 } });
+  await page.screenshot({
+    path: `${OUT}/warcry-log.png`,
+    clip: { x: 8, y: 470, width: 560, height: 250 },
+  });
   console.log('saved warcry-log.png (combat log)');
 
   // Target frame of the lead snapper (top-left), which carries the haste buff.
-  await page.screenshot({ path: `${OUT}/warcry-targetframe.png`, clip: { x: 0, y: 0, width: 420, height: 150 } });
+  await page.screenshot({
+    path: `${OUT}/warcry-targetframe.png`,
+    clip: { x: 0, y: 0, width: 420, height: 150 },
+  });
   console.log('saved warcry-targetframe.png (target frame)');
 } finally {
   await browser.close();

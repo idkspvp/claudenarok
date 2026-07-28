@@ -4,10 +4,12 @@
 // "flies into a frenzy" combat-log line + the nova VFX on the wolf. The buff is
 // a self-haste on the mob (not a player debuff), so there is no debuff icon to
 // grab — the combat log is the reliable visual, as for other reactive traits.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -24,13 +26,15 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Brannok');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
 // Switch the chat panel to the combat-log tab up front.
 await page.evaluate(() => {
-  const tab = [...document.querySelectorAll('.chat-tab')].find((t) => t.dataset.logTab === 'combat');
+  const tab = [...document.querySelectorAll('.chat-tab')].find(
+    (t) => t.dataset.logTab === 'combat',
+  );
   if (tab) tab.click();
 });
 
@@ -41,11 +45,15 @@ const result = await page.evaluate(() => {
   const p = sim.player;
   p.gm = true; // invulnerable so the live 20Hz tick can't kill us mid-capture
 
-  let mob = null, d = 1e9;
+  let mob = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind === 'mob' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; mob = e; }
+      if (dd < d) {
+        d = dd;
+        mob = e;
+      }
     }
   }
   // Reskin it as the rare wolf, stand it ~6yd out front, and keep it alive.
@@ -53,8 +61,10 @@ const result = await page.evaluate(() => {
   mob.name = 'Old Greyjaw';
   mob.level = 4;
   mob.hostile = true;
-  mob.maxHp = 100000; mob.hp = 100000;
-  mob.pos.x = p.pos.x + 4; mob.pos.z = p.pos.z;
+  mob.maxHp = 100000;
+  mob.hp = 100000;
+  mob.pos.x = p.pos.x + 4;
+  mob.pos.z = p.pos.z;
   sim.targetEntity(mob.id);
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
@@ -67,8 +77,12 @@ const result = await page.evaluate(() => {
   const after = sim.swingIntervalMult(mob);
   const aura = mob.auras.find((a) => a.id === 'blood_frenzy');
   return {
-    hasFrenzy: !!aura, name: aura?.name, value: aura?.value, remaining: aura?.remaining,
-    swingBefore: before, swingAfter: after,
+    hasFrenzy: !!aura,
+    name: aura?.name,
+    value: aura?.value,
+    remaining: aura?.remaining,
+    swingBefore: before,
+    swingAfter: after,
   };
 });
 console.log('frenzy result:', JSON.stringify(result));

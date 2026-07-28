@@ -66,9 +66,9 @@ async function masteryPanelShot(cls, charName, spec, outName) {
 
 const results = [];
 results.push(
-  await masteryPanelShot('priest', 'Wardkeeper', 'discipline', 'spec-mastery-discipline.png'),
+  await masteryPanelShot('acolyte', 'Wardkeeper', 'discipline', 'spec-mastery-discipline.png'),
 );
-results.push(await masteryPanelShot('rogue', 'Scrapfighter', 'combat', 'spec-mastery-combat.png'));
+results.push(await masteryPanelShot('thief', 'Scrapfighter', 'combat', 'spec-mastery-combat.png'));
 results.push(
   await masteryPanelShot('warlock', 'Rotweaver', 'affliction', 'spec-mastery-affliction.png'),
 );

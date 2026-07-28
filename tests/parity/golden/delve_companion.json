@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "13ae7fa5",
+      "state": "c7f6f287",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -36,7 +36,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -71,20 +71,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -100,21 +94,21 @@
           "blockValue": 6,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -137,15 +131,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -158,7 +152,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "97a8fc4a",
+      "state": "c11cde54",
       "events": "76b7d315",
       "rng": {
         "draws": 9,
@@ -169,7 +163,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "3c81b914",
+      "state": "8b563226",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -180,7 +174,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "74eeb6ce",
+      "state": "f8c5581c",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -191,7 +185,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "2ab92b21",
+      "state": "bfb68a2f",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -202,7 +196,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "e7b9c361",
+      "state": "7251d547",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -213,7 +207,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "64a3dd09",
+      "state": "abd880d9",
       "events": "ecdb7dd8",
       "rng": {
         "draws": 13,
@@ -224,7 +218,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "ad1e0517",
+      "state": "ca74d843",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -235,7 +229,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "f027b889",
+      "state": "4938a2a1",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -246,7 +240,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "f027b889",
+      "state": "4938a2a1",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -266,7 +260,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {
             "companion_tessa": 2
           },
@@ -315,20 +309,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "luk": 2,
-            "str": 11,
-            "vit": 9
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -344,14 +332,14 @@
           "blockValue": 6,
           "combatTimer": 101,
           "comboUntil": -1,
-          "critChance": 0.02,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101,
-          "flee": 12,
-          "hit": 15,
+          "flee": 8,
+          "hit": 8,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
@@ -380,16 +368,16 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 198,
-            "dex": 8,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 3,
-            "str": 12,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
           "targetId": 421,
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -510,7 +498,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 425,
-      "state": "61666aac",
+      "state": "fd6ce8d6",
       "events": "77392800",
       "rng": {
         "draws": 15,
@@ -530,7 +518,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {
             "companion_tessa": 2
           },
@@ -579,20 +567,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "luk": 2,
-            "str": 11,
-            "vit": 9
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -608,15 +590,15 @@
           "blockValue": 6,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.02,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 55.720563,
           "fiveSecondRule": 101.05,
-          "flee": 12,
-          "hit": 15,
+          "flee": 8,
+          "hit": 8,
           "hp": 29000,
           "id": 415,
           "inCombat": true,
@@ -645,16 +627,16 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 198,
-            "dex": 8,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 3,
-            "str": 12,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
           "targetId": 421,
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -775,7 +757,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "d2d3d972",
+      "state": "3fe78e7a",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -786,7 +768,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 425,
-      "state": "d1da8ecb",
+      "state": "13eff831",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -806,7 +788,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {
             "companion_tessa": 2
           },
@@ -855,20 +837,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "luk": 2,
-            "str": 11,
-            "vit": 9
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -884,15 +860,15 @@
           "blockValue": 6,
           "combatTimer": 101.45,
           "comboUntil": -1,
-          "critChance": 0.02,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 55.2043,
           "fiveSecondRule": 101.45,
-          "flee": 12,
-          "hit": 15,
+          "flee": 8,
+          "hit": 8,
           "hp": 29000,
           "id": 415,
           "kind": "player",
@@ -920,15 +896,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 198,
-            "dex": 8,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 3,
-            "str": 12,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -988,7 +964,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "2ed439cd",
+      "state": "30db9cad",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -999,7 +975,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "e84a6b2c",
+      "state": "d8b15538",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1019,7 +995,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {
             "companion_tessa": 2
           },
@@ -1068,20 +1044,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "luk": 2,
-            "str": 11,
-            "vit": 9
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1097,15 +1067,15 @@
           "blockValue": 6,
           "combatTimer": 101.55,
           "comboUntil": -1,
-          "critChance": 0.02,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
-          "flee": 12,
-          "hit": 15,
+          "flee": 8,
+          "hit": 8,
           "hp": 29000,
           "id": 415,
           "kind": "player",
@@ -1133,15 +1103,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 198,
-            "dex": 8,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 3,
-            "str": 12,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1202,7 +1172,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "e84a6b2c",
+      "state": "d8b15538",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1222,7 +1192,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {
             "companion_tessa": 2
           },
@@ -1271,20 +1241,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 4,
-            "dex": 7,
-            "luk": 2,
-            "str": 11,
-            "vit": 9
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1300,15 +1264,15 @@
           "blockValue": 6,
           "combatTimer": 101.55,
           "comboUntil": -1,
-          "critChance": 0.02,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
-          "flee": 12,
-          "hit": 15,
+          "flee": 8,
+          "hit": 8,
           "hp": 29000,
           "id": 415,
           "kind": "player",
@@ -1336,15 +1300,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 5,
-            "armor": 198,
-            "dex": 8,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 3,
-            "str": 12,
-            "vit": 11
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,

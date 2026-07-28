@@ -43,7 +43,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws as any, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -90,7 +90,7 @@ describe('arena: online integration (GameServer)', () => {
 
   it('routes arena_queue format=2v2 and seats four solos with wire-safe arena snapshots', () => {
     const names = ['Aleph', 'Bet', 'Gimel', 'Dalet'];
-    const classes: PlayerClass[] = ['warrior', 'mage', 'rogue', 'priest'];
+    const classes: PlayerClass[] = ['swordman', 'mage', 'thief', 'acolyte'];
     const clients: FakeClient[] = [];
     const sessions: ClientSession[] = [];
 
@@ -145,8 +145,8 @@ describe('arena: online integration (GameServer)', () => {
   it('premade party leader queues via arena_queue and both members receive arenaQueued', () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
-    const sa = joinServer(server, fcA, 10, 'Leader', 'warrior');
-    const sb = joinServer(server, fcB, 11, 'Member', 'priest');
+    const sa = joinServer(server, fcA, 10, 'Leader', 'swordman');
+    const sb = joinServer(server, fcB, 11, 'Member', 'acolyte');
     teleport(server.sim, sa.pid, 0, -40);
     teleport(server.sim, sb.pid, 3, -40);
 
@@ -165,7 +165,7 @@ describe('arena: online integration (GameServer)', () => {
   it('1v1 arena_queue still works through the server command path', () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
-    const sa = joinServer(server, fcA, 20, 'One', 'warrior');
+    const sa = joinServer(server, fcA, 20, 'One', 'swordman');
     const sb = joinServer(server, fcB, 21, 'Two', 'mage');
     teleport(server.sim, sa.pid, 0, -40);
     teleport(server.sim, sb.pid, 4, -40);
@@ -184,7 +184,7 @@ describe('arena: online integration (GameServer)', () => {
   it('resolves a disconnect win before leave saves so a near-simultaneous winner leave persists honor', async () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
-    const sa = joinServer(server, fcA, 30, 'Deserter', 'warrior');
+    const sa = joinServer(server, fcA, 30, 'Deserter', 'swordman');
     const sb = joinServer(server, fcB, 31, 'Victor', 'mage');
     server.sim.utcDay = '2026-07-11';
     teleport(server.sim, sa.pid, 0, -40);
@@ -218,7 +218,7 @@ describe('arena: online integration (GameServer)', () => {
 
   it('refreshes the arena self key on the very next tick after arena_queue/arena_leave, not after the 10s throttle', () => {
     const fc = fakeWs();
-    const session = joinServer(server, fc, 40, 'Quick', 'warrior');
+    const session = joinServer(server, fc, 40, 'Quick', 'swordman');
     teleport(server.sim, session.pid, 0, -40);
 
     // A fresh join always ships arena on its first snapshot (lastArenaWireTick
@@ -246,7 +246,7 @@ describe('arena: online integration (GameServer)', () => {
   it('refreshes the arena self key on the very next tick after a match concludes (arenaEnd), not after the 10s throttle', async () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
-    const sa = joinServer(server, fcA, 41, 'Loser', 'warrior');
+    const sa = joinServer(server, fcA, 41, 'Loser', 'swordman');
     const sb = joinServer(server, fcB, 42, 'Winner', 'mage');
     teleport(server.sim, sa.pid, 0, -40);
     teleport(server.sim, sb.pid, 4, -40);

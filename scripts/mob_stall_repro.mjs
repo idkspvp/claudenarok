@@ -213,11 +213,11 @@ const TAP_DWELL_MS = 2_200;
 const READY_TIMEOUT_MS = 180_000; // the child re-bundles before it listens, so be patient
 
 const CLASSES = [
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'shaman',
   'mage',
   'warlock',

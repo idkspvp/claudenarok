@@ -45,41 +45,27 @@ const CASTER = { int: 1, luk: 0.35, vit: 0.4 } as const;
 const HEALER = { int: 1, luk: 0.7, vit: 0.4 } as const;
 
 export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>> = Object.freeze({
-  warrior: [
+  swordman: [
     { spec: 'arms', weights: PHYS_STR, melee: true },
     // Fury dual-wields (and with Titan's Grip can hold two two-handers), so the
     // picker must fill BOTH hands rather than leaving an empty offhand.
     { spec: 'fury', weights: PHYS_STR, melee: true, hands: 'dualWield' },
     { spec: 'prot', weights: TANK_STR, melee: true, tank: true, hands: 'shield' },
   ],
-  paladin: [
-    { spec: 'holy', weights: HEALER, melee: false, hands: 'shield' },
-    { spec: 'protection', weights: TANK_STR, melee: true, tank: true, hands: 'shield' },
-    { spec: 'retribution', weights: PHYS_STR, melee: true },
-  ],
-  hunter: [
+  archer: [
     { spec: 'beast_mastery', weights: PHYS_AGI, melee: false },
     { spec: 'marksmanship', weights: PHYS_AGI, melee: false },
     { spec: 'survival', weights: PHYS_AGI, melee: false },
   ],
-  rogue: [
+  thief: [
     { spec: 'assassination', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
     { spec: 'combat', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
     { spec: 'subtlety', weights: PHYS_AGI, melee: true, hands: 'dualWield' },
   ],
-  priest: [
+  acolyte: [
     { spec: 'discipline', weights: HEALER, melee: false },
     { spec: 'holy', weights: HEALER, melee: false },
     { spec: 'shadow', weights: CASTER, melee: false },
-  ],
-  shaman: [
-    { spec: 'elemental', weights: CASTER, melee: false },
-    // Enhancement is the melee shaman, agility-led unlike its two caster siblings.
-    // NOT dual-wield: canDualWield (equipment_rules.ts) grants that to rogues and
-    // fury warriors ONLY, so claiming it here would ask for an offhand weapon the
-    // equip rules refuse and leave the slot empty instead of taking a held offhand.
-    { spec: 'enhancement', weights: PHYS_AGI, melee: true },
-    { spec: 'restoration', weights: HEALER, melee: false, hands: 'shield' },
   ],
   mage: [
     // Declared HEALER in talents.ts (this game's arcane mage heals), so it is
@@ -88,22 +74,11 @@ export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>>
     { spec: 'fire', weights: CASTER, melee: false },
     { spec: 'frost', weights: CASTER, melee: false },
   ],
-  warlock: [
-    { spec: 'affliction', weights: CASTER, melee: false },
-    { spec: 'demonology', weights: CASTER, melee: false },
-    { spec: 'destruction', weights: CASTER, melee: false },
-  ],
-  druid: [
-    { spec: 'balance', weights: CASTER, melee: false },
-    // Declared TANK in talents.ts. Agility-led rather than strength-led, and no
-    // shield: druids cannot hold one.
-    { spec: 'feral', weights: TANK_AGI, melee: true, tank: true },
-    { spec: 'restoration', weights: HEALER, melee: false },
-  ],
 });
 
-// Every class-and-spec pair, flattened. 27 entries: 9 classes times 3 specs.
-export const DEV_KIT_ROLE_COUNT = 27;
+// Every class-and-spec pair, flattened. 15 entries: the five first jobs times
+// three specs each (D1 cut the other four classes and their twelve pairs).
+export const DEV_KIT_ROLE_COUNT = 15;
 
 export function devKitRole(cls: PlayerClass, spec: string): DevKitRole | null {
   return DEV_KIT_ROLES[cls]?.find((role) => role.spec === spec) ?? null;

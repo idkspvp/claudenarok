@@ -224,8 +224,8 @@ describe('determinism with the six masters spawned', () => {
   }
 
   it('two same-seed worlds tick to identical states, master NPCs included', () => {
-    const a = new Sim({ seed: 20061, playerClass: 'warrior', autoEquip: false });
-    const b = new Sim({ seed: 20061, playerClass: 'warrior', autoEquip: false });
+    const a = new Sim({ seed: 20061, playerClass: 'swordman', autoEquip: false });
+    const b = new Sim({ seed: 20061, playerClass: 'swordman', autoEquip: false });
     for (let i = 0; i < 100; i++) {
       a.tick();
       b.tick();

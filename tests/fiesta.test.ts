@@ -11,7 +11,7 @@ import type { PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -25,7 +25,7 @@ function teleport(sim: Sim, pid: number, x: number, z: number) {
 
 // Seat a 2v2 Fiesta with four solo-queued players and run the countdown out so
 // the bout is live. Returns the match plus the four pids.
-function startFiesta(classes: PlayerClass[] = ['warrior', 'mage', 'rogue', 'priest']) {
+function startFiesta(classes: PlayerClass[] = ['swordman', 'mage', 'thief', 'acolyte']) {
   const sim = makeWorld();
   const pids = classes.map((c, i) => sim.addPlayer(c, `P${i}`));
   pids.forEach((p, i) => {
@@ -58,7 +58,7 @@ describe('fiesta: matchmaking & format', () => {
 
   it('keeps fiesta on its own queue, separate from ranked 2v2', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'A');
+    const a = sim.addPlayer('swordman', 'A');
     sim.arenaQueueJoin(a, 'fiesta');
     expect(sim.arenaQueueFiesta.length).toBe(1);
     expect(sim.arenaQueue2v2.length).toBe(0);
@@ -92,7 +92,7 @@ describe('fiesta: scoring & respawn', () => {
 
   it('keeps a cross-team target selected during the countdown when the fiesta goes live', () => {
     const sim = makeWorld();
-    const classes: PlayerClass[] = ['warrior', 'mage', 'rogue', 'priest'];
+    const classes: PlayerClass[] = ['swordman', 'mage', 'thief', 'acolyte'];
     const pids = classes.map((c, i) => sim.addPlayer(c, `P${i}`));
     pids.forEach((p, i) => {
       teleport(sim, p, i * 4, -40);
@@ -223,8 +223,8 @@ describe('fiesta: augments', () => {
   });
 
   it('standardizes every fighter to level 20 with a balanced build, restoring after', () => {
-    const sim = new Sim({ seed: 5, playerClass: 'warrior', noPlayer: true });
-    const pids = (['warrior', 'mage', 'rogue', 'priest'] as const).map((c, i) =>
+    const sim = new Sim({ seed: 5, playerClass: 'swordman', noPlayer: true });
+    const pids = (['swordman', 'mage', 'thief', 'acolyte'] as const).map((c, i) =>
       sim.addPlayer(c, `P${i}`),
     );
     // Pretend everyone walked in at level 8.
@@ -290,7 +290,7 @@ describe('fiesta: determinism', () => {
 
 describe('fiesta: offline practice vs bots', () => {
   it('spawns three bots, seats a 2v2 bout, and the bots fight (score climbs)', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     expect(sim.startFiestaPractice()).toBe(true);
     expect((sim as any).fiestaBotPids.length).toBe(3);
     let match: any = null;
@@ -305,7 +305,7 @@ describe('fiesta: offline practice vs bots', () => {
   });
 
   it('toggling practice off tears down the bots and dequeues them', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     sim.startFiestaPractice();
     const botPids = [...(sim as any).fiestaBotPids];
     expect(botPids.length).toBe(3);
@@ -340,15 +340,15 @@ describe('fiesta: augment catalog integrity', () => {
 
   it('every class can be offered three augments at every tier', () => {
     const classes: PlayerClass[] = [
-      'warrior',
-      'paladin',
-      'hunter',
-      'rogue',
-      'priest',
-      'shaman',
+      'swordman',
+      'swordman',
+      'archer',
+      'thief',
+      'acolyte',
+      'acolyte',
       'mage',
-      'warlock',
-      'druid',
+      'mage',
+      'acolyte',
     ];
     for (const cls of classes) {
       for (const tier of ['silver', 'gold', 'prismatic'] as const) {

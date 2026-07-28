@@ -15,7 +15,7 @@ const snapshot: SessionRuntimeSnapshot = {
   instanceSlot: null,
   instanceDungeonId: null,
   level: 1,
-  classId: 'warrior',
+  classId: 'swordman',
   hp: 100,
   maxHp: 100,
   resource: 0,

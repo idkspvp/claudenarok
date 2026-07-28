@@ -19,7 +19,7 @@ import type { ProfessionRecipeRecord } from '../src/sim/professions/types';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 
 function makeSim(seed = 7): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function metaOf(sim: Sim): PlayerMeta {

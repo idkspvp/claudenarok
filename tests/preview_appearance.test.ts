@@ -46,7 +46,7 @@ vi.mock('../src/render/characters/visual', () => ({
 }));
 
 const appearance = (over: Partial<PreviewAppearance>): PreviewAppearance => ({
-  cls: 'warrior',
+  cls: 'swordman',
   skin: 0,
   skinCatalog: 'class',
   mainhandItemId: null,
@@ -84,52 +84,52 @@ beforeEach(() => {
 describe('previewAppearanceVisual', () => {
   it('uses the class rig for a class-catalog character and holds its mainhand', () => {
     const v = previewAppearanceVisual(
-      appearance({ cls: 'rogue', mainhandItemId: 'dagger_x', offhandItemId: 'dagger_y' }),
+      appearance({ cls: 'thief', mainhandItemId: 'dagger_x', offhandItemId: 'dagger_y' }),
     );
-    expect(v.visualKey).toBe('player_rogue');
+    expect(v.visualKey).toBe('player_thief');
     expect(v.weaponItemId).toBe('dagger_x');
     expect(v.offhandItemId).toBe('dagger_y');
     expect(v.weaponOverride).toBeNull();
   });
 
   it('shows no weapon when the character is unarmed', () => {
-    const v = previewAppearanceVisual(appearance({ cls: 'priest', mainhandItemId: null }));
-    expect(v.visualKey).toBe('player_priest');
+    const v = previewAppearanceVisual(appearance({ cls: 'acolyte', mainhandItemId: null }));
+    expect(v.visualKey).toBe('player_acolyte');
     expect(v.weaponItemId).toBeNull();
   });
 
   it('uses the Combat Mech body for an event skin (skinCatalog mech)', () => {
-    const v = previewAppearanceVisual(appearance({ cls: 'warrior', skinCatalog: 'mech' }));
+    const v = previewAppearanceVisual(appearance({ cls: 'swordman', skinCatalog: 'mech' }));
     expect(v.visualKey).toBe('player_mech');
   });
 
   it('mirrors the wearer class hand layout and actual offhand on the mech', () => {
-    const rogue = previewAppearanceVisual(
+    const thief = previewAppearanceVisual(
       appearance({
-        cls: 'rogue',
+        cls: 'thief',
         skinCatalog: 'mech',
         mainhandItemId: 'dagger_x',
         offhandItemId: 'dagger_y',
       }),
     );
-    expect(rogue.visualKey).toBe('player_mech');
-    expect(rogue.weaponItemId).toBe('dagger_x');
-    expect(rogue.offhandItemId).toBe('dagger_y');
+    expect(thief.visualKey).toBe('player_mech');
+    expect(thief.weaponItemId).toBe('dagger_x');
+    expect(thief.offhandItemId).toBe('dagger_y');
     // Same override the in-world mech render applies for the dual-wield class.
-    expect(rogue.weaponOverride).toEqual(mechHeldWeaponOverride('rogue'));
-    expect(rogue.weaponOverride).not.toBeNull();
+    expect(thief.weaponOverride).toEqual(mechHeldWeaponOverride('thief'));
+    expect(thief.weaponOverride).not.toBeNull();
 
     // Winning Warrior also needs its independent shield / Fury offhand layout.
-    const warrior = previewAppearanceVisual(appearance({ cls: 'warrior', skinCatalog: 'mech' }));
-    expect(warrior.weaponOverride).toEqual(mechHeldWeaponOverride('warrior'));
+    const swordman = previewAppearanceVisual(appearance({ cls: 'swordman', skinCatalog: 'mech' }));
+    expect(swordman.weaponOverride).toEqual(mechHeldWeaponOverride('swordman'));
   });
 });
 
 describe('appearanceSignature', () => {
   it('changes when any appearance field changes', () => {
-    const base = appearance({ cls: 'rogue', skin: 2, mainhandItemId: 'a' });
+    const base = appearance({ cls: 'thief', skin: 2, mainhandItemId: 'a' });
     const sig = appearanceSignature(base);
-    expect(appearanceSignature(appearance({ cls: 'rogue', skin: 2, mainhandItemId: 'a' }))).toBe(
+    expect(appearanceSignature(appearance({ cls: 'thief', skin: 2, mainhandItemId: 'a' }))).toBe(
       sig,
     );
     expect(appearanceSignature({ ...base, skin: 3 })).not.toBe(sig);
@@ -141,7 +141,7 @@ describe('appearanceSignature', () => {
   it('changes when the Armory weapon skin changes (apply, swap, and remove)', () => {
     // Without this, applying or removing a purchased skin while a preview is
     // mounted elides as "same appearance" and the stale weapon model survives.
-    const base = appearance({ cls: 'rogue', skin: 2, mainhandItemId: 'a' });
+    const base = appearance({ cls: 'thief', skin: 2, mainhandItemId: 'a' });
     const sig = appearanceSignature(base);
     const skinned = appearanceSignature({ ...base, weaponSkinId: 'frostbite_dagger' });
     expect(skinned).not.toBe(sig);
@@ -156,20 +156,20 @@ describe('CharacterPreview.setAppearance', () => {
     const { preview } = barePreview();
     const state = preview as unknown as Record<string, unknown>;
     preview.setAppearance(
-      appearance({ cls: 'rogue', mainhandItemId: 'a', weaponSkinId: 'frostbite_dagger' }),
+      appearance({ cls: 'thief', mainhandItemId: 'a', weaponSkinId: 'frostbite_dagger' }),
     );
     // setVisualKey rebuilds the CharacterVisual and re-applies this field; the
     // stub harness cannot build a real visual, so pin the persisted state that
     // drives the re-apply.
     expect(state.currentWeaponSkinId).toBe('frostbite_dagger');
-    preview.setAppearance(appearance({ cls: 'rogue', mainhandItemId: 'a' }));
+    preview.setAppearance(appearance({ cls: 'thief', mainhandItemId: 'a' }));
     expect(state.currentWeaponSkinId).toBeNull();
   });
 
   it('re-applies the current mech appearance once its lazy assets are ready', async () => {
     const { preview, setVisualKey } = barePreview();
     const mech = appearance({
-      cls: 'rogue',
+      cls: 'thief',
       skin: 2,
       skinCatalog: 'mech',
       mainhandItemId: 'dagger_x',
@@ -178,7 +178,7 @@ describe('CharacterPreview.setAppearance', () => {
 
     preview.setAppearance(mech);
     expect(setVisualKey).toHaveBeenCalledOnce();
-    expect(setVisualKey).toHaveBeenLastCalledWith('player_rogue', 'dagger_x', null, 'dagger_y');
+    expect(setVisualKey).toHaveBeenLastCalledWith('player_thief', 'dagger_x', null, 'dagger_y');
 
     await finishMechLoad();
 
@@ -187,14 +187,14 @@ describe('CharacterPreview.setAppearance', () => {
     expect(setVisualKey).toHaveBeenLastCalledWith(
       'player_mech',
       'dagger_x',
-      mechHeldWeaponOverride('rogue'),
+      mechHeldWeaponOverride('thief'),
       'dagger_y',
     );
   });
 
   it('does not let a stale mech re-apply overwrite a newer selection', async () => {
     const { preview, setVisualKey } = barePreview();
-    preview.setAppearance(appearance({ cls: 'rogue', skinCatalog: 'mech' }));
+    preview.setAppearance(appearance({ cls: 'thief', skinCatalog: 'mech' }));
     preview.setAppearance(
       appearance({ cls: 'mage', skin: 1, skinCatalog: 'class', mainhandItemId: 'staff_x' }),
     );
@@ -213,17 +213,17 @@ describe('CharacterPreview.setClass', () => {
   it('shows starter offhands and accepts the live equipped hands from callers', () => {
     const { preview, setVisualKey } = barePreview();
 
-    preview.setClass('warrior');
+    preview.setClass('swordman');
     expect(setVisualKey).toHaveBeenLastCalledWith(
-      'player_warrior',
+      'player_swordman',
       'worn_sword',
       null,
       'eastbrook_buckler',
     );
 
-    preview.setClass('rogue', 'rusty_dagger', 'keen_dirk');
+    preview.setClass('thief', 'rusty_dagger', 'keen_dirk');
     expect(setVisualKey).toHaveBeenLastCalledWith(
-      'player_rogue',
+      'player_thief',
       'rusty_dagger',
       null,
       'keen_dirk',
@@ -243,7 +243,7 @@ describe('CharacterPreview visual lifecycle', () => {
     state.currentVisual = { root: {}, dispose };
     state.characterGroup = { remove, add, rotation: { y: 1 } };
 
-    preview.setVisualKey('player_warrior');
+    preview.setVisualKey('player_swordman');
 
     expect(remove).toHaveBeenCalledOnce();
     expect(dispose).toHaveBeenCalledOnce();
@@ -269,7 +269,7 @@ describe('CharacterPreview.setVisualKey: the weapon-skin rebuild contract', () =
 
   it('re-applies the persisted skin to the freshly BUILT visual, and live changes land', () => {
     const preview = rawPreview('frostbite_dagger');
-    preview.setVisualKey('player_rogue', 'rusty_dagger', null, 'rusty_dagger');
+    preview.setVisualKey('player_thief', 'rusty_dagger', null, 'rusty_dagger');
     const built = visualDoubles.built.at(-1) as { setWeaponSkin: ReturnType<typeof vi.fn> };
     expect(built).toBeDefined();
     // the rebuild path itself re-applied the persisted cosmetic
@@ -284,7 +284,7 @@ describe('CharacterPreview.setVisualKey: the weapon-skin rebuild contract', () =
 
   it('leaves the skin path untouched when none is persisted (char-create stays bare)', () => {
     const preview = rawPreview(null);
-    preview.setVisualKey('player_rogue', 'rusty_dagger', null, null);
+    preview.setVisualKey('player_thief', 'rusty_dagger', null, null);
     const built = visualDoubles.built.at(-1) as { setWeaponSkin: ReturnType<typeof vi.fn> };
     expect(built.setWeaponSkin).not.toHaveBeenCalled();
   });

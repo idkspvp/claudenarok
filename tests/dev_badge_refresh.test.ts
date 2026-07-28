@@ -88,7 +88,7 @@ describe('GameServer.refreshDevBadge (real DB + contributor-cache resolution)', 
     mockMergedPrsFetch('FernandoX7', 70);
     const server = new GameServer();
     const fc = fakeWs();
-    const session = server.join(fc.ws, 1, 1, 'Devvy', 'warrior', null);
+    const session = server.join(fc.ws, 1, 1, 'Devvy', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
 
@@ -105,7 +105,7 @@ describe('GameServer.refreshDevBadge (real DB + contributor-cache resolution)', 
     mockMergedPrsFetch('someoneelse', 5); // 'newdev' is not in the merged-PR list
     const server = new GameServer();
     const fc = fakeWs();
-    const session = server.join(fc.ws, 1, 1, 'Devvy', 'warrior', null);
+    const session = server.join(fc.ws, 1, 1, 'Devvy', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
 
@@ -122,7 +122,7 @@ describe('GameServer.refreshDevBadge (real DB + contributor-cache resolution)', 
     const fetchSpy = mockMergedPrsFetch('irrelevant', 999);
     const server = new GameServer();
     const fc = fakeWs();
-    const session = server.join(fc.ws, 1, 1, 'Devvy', 'warrior', null);
+    const session = server.join(fc.ws, 1, 1, 'Devvy', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
 
@@ -141,7 +141,7 @@ describe('GameServer.refreshDevBadge (real DB + contributor-cache resolution)', 
     mockMergedPrsFetch('jgyy', 15); // 15 merged PRs -> Runesmith (rung 3)
     const server = new GameServer();
     const fc = fakeWs();
-    const session = server.join(fc.ws, 1, 1, 'Devvy', 'warrior', null);
+    const session = server.join(fc.ws, 1, 1, 'Devvy', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
 

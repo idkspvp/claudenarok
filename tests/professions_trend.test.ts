@@ -142,7 +142,7 @@ describe('classifyCraftTrend: the pure leading-pair classifier', () => {
 
 // --- Guild-letter delivery through the real Sim ---
 
-const makeWorld = () => new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+const makeWorld = () => new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 
 function tickFor(sim: Sim, seconds: number): SimEvent[] {
   const out: SimEvent[] = [];
@@ -171,7 +171,7 @@ describe('the Guild letter through the real Sim', () => {
     'a fresh character crossing the threshold gets exactly one pair-correct letter',
     () => {
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Tinker');
+      const pid = sim.addPlayer('swordman', 'Tinker');
       sim.gainCraftSkill(pid, 'engineering', 15);
       sim.gainCraftSkill(pid, 'alchemy', 15);
       const events = tickFor(sim, letterDelay('engineering+alchemy') + 5);
@@ -186,7 +186,7 @@ describe('the Guild letter through the real Sim', () => {
     'continued gains and long additional ticking never produce a second Guild letter',
     () => {
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Tinker');
+      const pid = sim.addPlayer('swordman', 'Tinker');
       sim.gainCraftSkill(pid, 'engineering', 15);
       sim.gainCraftSkill(pid, 'alchemy', 15);
       const all: SimEvent[] = [];
@@ -205,7 +205,7 @@ describe('the Guild letter through the real Sim', () => {
     'an attuned character crossing the threshold gets no Guild letter',
     () => {
       const seedWorld = makeWorld();
-      const seedPid = seedWorld.addPlayer('warrior', 'Seed');
+      const seedPid = seedWorld.addPlayer('swordman', 'Seed');
       const state = seedWorld.serializeCharacter(seedPid);
       if (!state) throw new Error('expected a serialized character state');
       state.archetype = {
@@ -216,7 +216,7 @@ describe('the Guild letter through the real Sim', () => {
       state.craftSkills = { ...state.craftSkills, engineering: 40, alchemy: 40 };
 
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Attuned', { state });
+      const pid = sim.addPlayer('swordman', 'Attuned', { state });
       const meta = sim.meta(pid);
       if (!meta) throw new Error('no meta');
       expect(meta.archetype.activeArchetype).toBe('engineering');
@@ -231,13 +231,13 @@ describe('the Guild letter through the real Sim', () => {
     'an amends character (no active pair, non-empty history) gets no Guild letter',
     () => {
       const seedWorld = makeWorld();
-      const seedPid = seedWorld.addPlayer('warrior', 'Seed');
+      const seedPid = seedWorld.addPlayer('swordman', 'Seed');
       const state = seedWorld.serializeCharacter(seedPid);
       if (!state) throw new Error('expected a serialized character state');
       state.archetype = { activeArchetype: null, attunedPairs: ['engineering+alchemy'] };
 
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Amends', { state });
+      const pid = sim.addPlayer('swordman', 'Amends', { state });
       const meta = sim.meta(pid);
       if (!meta) throw new Error('no meta');
       // normalizeArchetypeState drops pair history when activeArchetype is
@@ -261,7 +261,7 @@ describe('the Guild letter through the real Sim', () => {
     'a legacy save with high skills and no flag gets the letter once, then never again',
     () => {
       const seedWorld = makeWorld();
-      const seedPid = seedWorld.addPlayer('warrior', 'Seed');
+      const seedPid = seedWorld.addPlayer('swordman', 'Seed');
       const state = seedWorld.serializeCharacter(seedPid);
       if (!state) throw new Error('expected a serialized character state');
       // A save predating the guild letter carries no guildLetterSent field at all.
@@ -269,7 +269,7 @@ describe('the Guild letter through the real Sim', () => {
       state.craftSkills = { ...state.craftSkills, engineering: 30, alchemy: 10 };
 
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Legacy', { state });
+      const pid = sim.addPlayer('swordman', 'Legacy', { state });
       const events = tickFor(sim, letterDelay('engineering+alchemy') + 10);
       const letters = guildLetters(events, pid);
       expect(letters).toHaveLength(1);
@@ -279,7 +279,7 @@ describe('the Guild letter through the real Sim', () => {
       if (!saved) throw new Error('expected a serialized character state');
       expect(saved.guildLetterSent).toBe(true);
       const sim2 = makeWorld();
-      const pid2 = sim2.addPlayer('warrior', 'Legacy', { state: saved });
+      const pid2 = sim2.addPlayer('swordman', 'Legacy', { state: saved });
       const again = tickFor(sim2, letterDelay('engineering+alchemy') + 30);
       expect(guildLetters(again, pid2)).toHaveLength(0);
     },
@@ -293,7 +293,7 @@ describe('the Guild letter through the real Sim', () => {
       // serialized as soon as the letter is booked, not when it lands, so a
       // save taken mid-flight never re-triggers the letter in a fresh world.
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Hasty');
+      const pid = sim.addPlayer('swordman', 'Hasty');
       sim.gainCraftSkill(pid, 'engineering', 15);
       sim.gainCraftSkill(pid, 'alchemy', 15);
       // Two seconds: enough for the send evaluation, well short of the NPC
@@ -303,7 +303,7 @@ describe('the Guild letter through the real Sim', () => {
       if (!state) throw new Error('expected a serialized character state');
       expect(state.guildLetterSent).toBe(true);
       const sim2 = makeWorld();
-      const pid2 = sim2.addPlayer('warrior', 'Hasty', { state });
+      const pid2 = sim2.addPlayer('swordman', 'Hasty', { state });
       const events = tickFor(sim2, letterDelay('engineering+alchemy') + 30);
       expect(guildLetters(events, pid2)).toHaveLength(0);
     },
@@ -398,7 +398,7 @@ describe('the Guild letter delivery contract', () => {
     'the booked mail is the system kind from The Crafting Guild on the mailbox surface',
     () => {
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Tinker');
+      const pid = sim.addPlayer('swordman', 'Tinker');
       sim.gainCraftSkill(pid, 'engineering', 15);
       sim.gainCraftSkill(pid, 'alchemy', 15);
       tickFor(sim, letterDelay('engineering+alchemy') + 5);
@@ -427,7 +427,7 @@ describe('the Guild letter delivery contract', () => {
     'two players crossing in the same sweep each get exactly their own pair letter',
     () => {
       const sim = makeWorld();
-      const a = sim.addPlayer('warrior', 'Anvil');
+      const a = sim.addPlayer('swordman', 'Anvil');
       const b = sim.addPlayer('mage', 'Loom');
       sim.gainCraftSkill(a, 'weaponcrafting', 15);
       sim.gainCraftSkill(a, 'armorcrafting', 15);
@@ -449,7 +449,7 @@ describe('the Guild letter delivery contract', () => {
     () => {
       const run = () => {
         const sim = makeWorld();
-        const pid = sim.addPlayer('warrior', 'Tinker');
+        const pid = sim.addPlayer('swordman', 'Tinker');
         sim.gainCraftSkill(pid, 'engineering', 15);
         sim.gainCraftSkill(pid, 'alchemy', 15);
         const arrivals: { tick: number; ev: SimEvent }[] = [];

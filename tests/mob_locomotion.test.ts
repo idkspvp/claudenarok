@@ -20,7 +20,7 @@ import { terrainHeight } from '../src/sim/world';
 type AnyEntity = ReturnType<typeof createMob> & Record<string, any>;
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 const ctxOf = (sim: Sim): SimContext => (sim as unknown as { ctx: SimContext }).ctx;
 

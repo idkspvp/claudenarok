@@ -68,7 +68,7 @@ export function critFractionFromRating(rating: number): number {
 }
 // Hit rating converts to a hit fraction that reduces both physical miss and spell
 // resist by the same amount (both share the above-level penalty table). One unified
-// stat: a warrior and a mage both want hit. Applied in recalcPlayerStats.
+// stat: a swordman and a mage both want hit. Applied in recalcPlayerStats.
 export function hitFractionFromRating(rating: number): number {
   return rating / (HIT_RATING_PER_PCT * 100);
 }
@@ -137,32 +137,20 @@ export const DELVE_COMPANION_HEAL_INTERVAL = 3;
 // PET_TELEPORT_DISTANCE (the pet/companion last-resort heel warp) was relocated to this
 // module by P1a (above); the I2c companion AI shares that same const, not re-declared here.
 
-export type PlayerClass =
-  | 'warrior'
-  | 'paladin'
-  | 'hunter'
-  | 'rogue'
-  | 'priest'
-  | 'shaman'
-  | 'mage'
-  | 'warlock'
-  | 'druid';
+// The five Ragnarok FIRST jobs, and only those. Second jobs are an advancement
+// recorded in content/jobs.ts, never a member here, which is what keeps every
+// Record<PlayerClass, X> table five entries wide instead of fifteen.
+export type PlayerClass = 'swordman' | 'mage' | 'archer' | 'acolyte' | 'thief';
 
 // Sanguine Aura's class-level melee recipient filter. It excludes the pure
-// casters and Hunter, whose primary attack loop is ranged.
-export const MELEE_CLASSES: ReadonlySet<PlayerClass> = new Set([
-  'warrior',
-  'paladin',
-  'rogue',
-  'shaman',
-  'druid',
-]);
+// casters and the Archer, whose primary attack loop is ranged.
+export const MELEE_CLASSES: ReadonlySet<PlayerClass> = new Set(['swordman', 'thief']);
 
-// Classes that command a persistent pet (hunter beast, warlock demon, the
-// frost mage's Water Elemental). Pure predicate, here so the pet-command slice
-// imports it without a sim.ts cycle.
+// Classes that command a persistent pet (the archer's beast, the frost mage's
+// Water Elemental). Pure predicate, here so the pet-command slice imports it
+// without a sim.ts cycle.
 export function isPetClass(cls: PlayerClass): boolean {
-  return cls === 'hunter' || cls === 'warlock' || cls === 'mage';
+  return cls === 'archer' || cls === 'mage';
 }
 // '1v1'/'2v2' are the ranked Ashen Coliseum ladders; 'fiesta' is the
 // dopamine-maxxed 2v2 party mode (score-based, respawns, augments, a shrinking
@@ -202,17 +190,7 @@ export interface ArenaCombatant {
   cls: PlayerClass;
   level: number;
 }
-export const ALL_CLASSES: PlayerClass[] = [
-  'warrior',
-  'paladin',
-  'hunter',
-  'rogue',
-  'priest',
-  'shaman',
-  'mage',
-  'warlock',
-  'druid',
-];
+export const ALL_CLASSES: PlayerClass[] = ['swordman', 'mage', 'archer', 'acolyte', 'thief'];
 export type ResourceType = 'rage' | 'mana' | 'energy';
 export const OVERHEAD_EMOTE_IDS = [
   'wave',
@@ -343,7 +321,7 @@ export type AuraKind =
   // Darts does not consume the caster's Arcane Charges.
   | 'perfect_moment'
   | 'righteous_fury'
-  // Warrior/rogue armor debuff. Now a PERCENTAGE reduction (2% per stack via
+  // Warrior/thief armor debuff. Now a PERCENTAGE reduction (2% per stack via
   // effectiveArmor), not a flat armor subtraction. Does not stack with faerie_fire
   // (effectiveArmor max-combines the two percents).
   | 'sunder'
@@ -586,23 +564,35 @@ export function statusPointsForLevel(level: number): number {
   return Math.floor(level / 5) + 3;
 }
 
-/** What raising an attribute from `current` by one costs. 2 through the single
- *  digits, 3 through the teens, 4 through the twenties, and so on: the cost step
- *  is what makes a 99 in anything a commitment rather than a cap you drift into.
+/** What raising an attribute from `current` by one costs. 2 to take it anywhere
+ *  through 10, 3 through 20, 4 through 30, and so on: the cost step is what makes
+ *  a 99 in anything a commitment rather than a cap you drift into.
  *
- *  The band boundary sits ON the round number (10 already costs 3, not 2), which
- *  is where a `(current - 1)` version of this quietly went wrong. */
+ *  The band boundary sits ABOVE the round number: raising FROM 10 still costs 2,
+ *  and 3 does not start until 11. Ragnarok writes this as
+ *  `1 + (current + 9) / 10` in integer arithmetic (`PC_STATUS_POINT_COST`,
+ *  `pc.cpp`); the form below is the same function.
+ *
+ *  This shipped wrong, one point too expensive at every multiple of ten, and the
+ *  comment that used to sit here asserted the error as the fix. The consequence
+ *  was not cosmetic: it put two capped attributes at 1,274 points against the
+ *  1,273 a character is ever granted, one short, and a whole paragraph of design
+ *  reasoning was built on that near-miss. The real numbers are 1,256 against
+ *  1,273, so Ragnarok leaves 17 points spare and the near-miss never existed. */
 export function statRaiseCost(current: number): number {
-  return Math.floor(current / 10) + 2;
+  return 2 + Math.floor((Math.max(1, current) - 1) / 10);
 }
 
 /** Total points a character has ever been granted at `level`, creation included.
  *
  *  At base level 99 this is 1,273: Ragnarok's 1,225 earned plus the 48 handed out
- *  at creation. That figure is worth keeping honest, because raising two separate
- *  attributes to 99 costs 1,274, one point more than the game ever gives you.
- *  Being one short is the whole reason job bonuses matter there, and a rounding
- *  error here would quietly erase that. */
+ *  at creation, all 48 of which arrive at level 1 rather than trickling in.
+ *
+ *  Two capped attributes cost 1,256, so a level-99 character can buy both and
+ *  keep 17 points over. An earlier version of `statRaiseCost` overcharged by a
+ *  point at every multiple of ten and made that 1,274, one MORE than a character
+ *  is ever granted; the design note that used to sit here treated the near-miss
+ *  as intentional. It was arithmetic. */
 export function totalStatusPointsAt(level: number): number {
   let total = CREATION_STATUS_POINTS;
   for (let l = 1; l < level; l++) total += statusPointsForLevel(l);
@@ -951,7 +941,7 @@ export interface WeaponItemDef extends BaseItemDef {
 // carrying a proc weapon, so ordinary gear draws no extra rng and the deterministic
 // draw order (and every parity golden that equips no legendary) is unchanged.
 // `weaponHit` covers ANY weapon strike with the equipped mainhand: a melee swing OR a
-// hunter's Auto Shot (which fires with that same weapon). Caster wand bolts, which do
+// archer's Auto Shot (which fires with that same weapon). Caster wand bolts, which do
 // not swing the mainhand, never roll it.
 export type WeaponProcTrigger = 'weaponHit' | 'spellDamage' | 'heal';
 
@@ -2287,14 +2277,14 @@ export type AbilityEffect =
   | { type: 'feralCharge' }
   // Sunder Armor: stacking PERCENT armor debuff (2% per stack via effectiveArmor) +
   // flat threat. `full` lands all `maxStacks` at once (Expose Armor, a finisher that
-  // applies the cap in one cast) instead of building one stack per hit (warrior Sunder).
+  // applies the cap in one cast) instead of building one stack per hit (swordman Sunder).
   // `armor` is retained for the threat value; the reduction percent is a fixed constant.
   | { type: 'sunder'; armor: number; maxStacks: number; full?: boolean }
   | { type: 'faerieFire'; duration: number } // fixed-percent armor reduction (AuraKind 'faerie_fire')
   | { type: 'absorbSpentResource'; mult: number; duration: number }
   | { type: 'aoeTaunt'; radius: number }
   | { type: 'taunt' } // taunt/growl: match top threat and force-attack the caster
-  | { type: 'tamePet' } // hunter tame beast: the targeted mob becomes the caster's pet
+  | { type: 'tamePet' } // archer tame beast: the targeted mob becomes the caster's pet
   | { type: 'dismissPet' } // release the caster's pet back to the wild
   | { type: 'summonPet'; templateId: string } // warlock demon summon: creates/replaces a controlled pet
   | { type: 'summonDemon'; mobId: string }; // warlock: summon a demon pet (emberkin/gloomshade)
@@ -2334,10 +2324,10 @@ export interface AbilityDef {
   // The attack travels to its target as a projectile, so its damage and effects
   // resolve when the bolt LANDS (projectile_travel), not at cast completion. Every
   // non-physical spell is a projectile by convention (keyed off school in
-  // casting_lifecycle); a PHYSICAL ranged shot (hunter Aimed / Concussive Shot) must
+  // casting_lifecycle); a PHYSICAL ranged shot (archer Aimed / Concussive Shot) must
   // set this explicitly, or it would deal its damage instantly while the arrow is
   // still visibly in flight. Melee physical attacks leave it unset.
-  // Projectile opt-IN for physical ranged shots (hunter Aimed/Concussive), and
+  // Projectile opt-IN for physical ranged shots (archer Aimed/Concussive), and
   // opt-OUT for spells: `projectile: false` on a non-physical spell resolves its
   // damage instantly at cast completion instead of on bolt arrival (Fire Blast).
   projectile?: boolean;
@@ -2347,7 +2337,7 @@ export interface AbilityDef {
   projectileFx?: 'lightning' | 'heavyBolt';
   // Instant-cast VISUAL cue (renderer-only; the sim just emits a spellfx with it):
   // 'shout' plays the caster's roar one-shot + an expanding ground shockwave ring
-  // (the warrior shouts); 'flourish' plays the ability-mapped one-shot clip
+  // (the swordman shouts); 'flourish' plays the ability-mapped one-shot clip
   // (manifest attackByAbility) with no particles: a pure cast gesture. Emitted on
   // the successful instant resolution.
   castFx?: 'shout' | 'weaponAura' | 'flourish';
@@ -2355,7 +2345,7 @@ export interface AbilityDef {
   // Damage scaling source for the flat directDamage / DoT / AoE riders. Default:
   // non-physical damage scales with Spell Power; physical damage scales with melee
   // Attack Power (on top of the weapon/finisher paths, which already carry AP).
-  // 'ranged' marks a hunter "attack spell" that scales off Ranged Attack Power
+  // 'ranged' marks a archer "attack spell" that scales off Ranged Attack Power
   // instead (Arcane Shot, Serpent Sting, Aimed Shot), regardless of school.
   scalesWith?: 'ranged';
   requiresTarget: boolean;
@@ -2392,8 +2382,8 @@ export interface AbilityDef {
   selfCentered?: boolean;
   onNextSwing?: boolean; // heroic strike style: no GCD, queues on swing
   offGcd?: boolean;
-  awardsCombo?: number; // rogue builders
-  spendsCombo?: boolean; // rogue finishers
+  awardsCombo?: number; // thief builders
+  spendsCombo?: boolean; // thief finishers
   fearDr?: boolean; // incapacitate effects that use fear diminishing returns
   requiresDodgeProc?: boolean; // overpower
   requiresTargetHpBelow?: number; // execute-style (fraction)
@@ -2406,7 +2396,7 @@ export interface AbilityDef {
   // both Cat and Bear Form). Exempts the ability from the "can't act while shapeshifted" lock.
   usableInForm?: boolean;
   // Mutually exclusive self-buff group: casting one ability in the group cancels
-  // any active buff from a sibling in the same group (e.g. hunter aspects, where
+  // any active buff from a sibling in the same group (e.g. archer aspects, where
   // only one aspect may be active at a time). Distinct from form toggles, which
   // are excluded by aura kind, not by group.
   exclusiveGroup?: string;
@@ -3052,7 +3042,7 @@ export interface Entity {
   // gcdRemaining) so the action bar can paint a cooldown swipe without a client
   // clock. Derived from potionCooldownUntil; excluded from the parity trace.
   potionCdRemaining: number;
-  // warrior charge: forced run toward the target along a pathfound route
+  // swordman charge: forced run toward the target along a pathfound route
   chargeTargetId: number | null;
   chargeTimeLeft: number; // seconds; failsafe so a blocked charge can't run forever
   chargePath: Vec3[]; // waypoints consumed front-to-back; last leg homes on the live target
@@ -3091,7 +3081,7 @@ export interface Entity {
   forcedTargetTimer: number; // seconds left on the forced-attack window
   shuffleTargetTimer?: number; // seconds until a special AI may reroll its preferred target
   ownerId: number | null; // controlled pets: owning player's entity id (null = wild)
-  petMode: PetMode; // hunter pet behavior stance
+  petMode: PetMode; // archer pet behavior stance
   petTauntTimer: number; // controlled pet Growl cooldown
   petAutoTaunt?: boolean; // right-click autocast toggle for controlled pet Growl
   petAutoWaterJet?: boolean; // right-click autocast toggle for the Water Elemental's Water Jet
@@ -3139,7 +3129,7 @@ export interface Entity {
   // applyDungeonMobTuning on heroic spawns of charge-bearing templates only;
   // normal spawns of the same template never charge. The cooldown deliberately
   // starts absent/0 (ready), unlike the telegraphed pulse timers: a heroic
-  // warrior mob opens the pull with its charge, that is the anti-kite design.
+  // swordman mob opens the pull with its charge, that is the anti-kite design.
   chargeEnabled?: boolean;
   mobChargeCooldown?: number; // seconds until the next charge may fire (undefined = ready)
   mobChargeTimeLeft?: number; // seconds left in the in-flight dash (undefined/0 = not dashing)
@@ -5104,7 +5094,7 @@ export const SPELL_AOE_COEFF_MULT = 0.333;
 // cast/duration shape, scaled down by this factor (RAP is far larger than SP).
 // Tuned so Arcane Shot / Aimed Shot / Serpent Sting gain a ~20-30% lift at cap.
 export const RANGED_SPELL_AP_SCALE = 0.15;
-// Melee physical "attack spells" (warrior Rend/Execute/Cleave, rogue Rupture/
+// Melee physical "attack spells" (swordman Rend/Execute/Cleave, thief Rupture/
 // Garrote bleeds, druid feral bleeds, etc.) take the flat-damage portion of a
 // special and scale it off melee Attack Power with the same shape. Melee AP is
 // the same magnitude as Ranged AP, so it reuses the same scale-down factor. The

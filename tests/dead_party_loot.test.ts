@@ -38,10 +38,10 @@ function mustNumber(value: number | undefined, label: string): number {
 }
 
 function setup() {
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
   // Survivor lands the killing blow; Faller dies during the fight.
-  const survivor = sim.addPlayer('warrior', 'Survivor');
+  const survivor = sim.addPlayer('swordman', 'Survivor');
   const faller = sim.addPlayer('mage', 'Faller');
   sim.tick();
   sim.partyInvite(faller, survivor);

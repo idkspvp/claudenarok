@@ -2,10 +2,12 @@
 // Boots the game, repurposes a nearby mob into Sloomtooth, targets it to raise
 // the golden rare-elite nameplate, fires its Tidal Sweep cleave + Drowning
 // Resurgence, and captures the scene + target frame + a drop tooltip.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -22,7 +24,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.click('#btn-offline');
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Tidewarden');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -30,24 +32,33 @@ const result = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  p.maxHp = 100000; p.hp = 100000;
+  p.maxHp = 100000;
+  p.hp = 100000;
 
-  let mob = null, d = 1e9;
+  let mob = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind === 'mob' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; mob = e; }
+      if (dd < d) {
+        d = dd;
+        mob = e;
+      }
     }
   }
   // Reskin the nearest mob as Sloomtooth and stand it right in front of us.
   const tpl = sim.constructor.MOBS?.sloomtooth_the_drowned;
   mob.templateId = 'sloomtooth_the_drowned';
   mob.name = 'Sloomtooth the Drowned';
-  mob.rare = true; mob.elite = true; mob.level = 11;
+  mob.rare = true;
+  mob.elite = true;
+  mob.level = 11;
   mob.hostile = true;
-  mob.maxHp = 1200; mob.hp = mob.maxHp;
+  mob.maxHp = 1200;
+  mob.hp = mob.maxHp;
   mob.scale = 1.1;
-  mob.pos.x = p.pos.x + 3; mob.pos.z = p.pos.z + 1;
+  mob.pos.x = p.pos.x + 3;
+  mob.pos.z = p.pos.z + 1;
   sim.targetEntity(mob.id);
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
@@ -79,8 +90,10 @@ if (tf && tf.w > 0) {
   await page.screenshot({
     path: 'tmp/sloomtooth_target.png',
     clip: {
-      x: Math.max(0, tf.x - pad), y: Math.max(0, tf.y - pad),
-      width: tf.w + pad * 2, height: tf.h + pad * 2,
+      x: Math.max(0, tf.x - pad),
+      y: Math.max(0, tf.y - pad),
+      width: tf.w + pad * 2,
+      height: tf.h + pad * 2,
     },
   });
 }

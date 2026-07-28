@@ -77,7 +77,7 @@ export const armorySkinStrings = {
   cinderlatch_crossbow: {
     name: 'Cinderlatch',
     look: 'Blackened-steel crossbow, ember-orange glow seeping from cracks in the prod, a smouldering coal in the tiller.',
-    lore: "The strangest of the ember-forged: the mountain's fire poured into a machine. Orange seeps from cracks in the prod, and a smouldering coal in the tiller keeps the string from ever stiffening in Thornpeak's cold or Mirefen's damp. Its bolts leave the groove already warm and land warmer. A hunter's answer to a wall where the enemy does not feel the cold either.",
+    lore: "The strangest of the ember-forged: the mountain's fire poured into a machine. Orange seeps from cracks in the prod, and a smouldering coal in the tiller keeps the string from ever stiffening in Thornpeak's cold or Mirefen's damp. Its bolts leave the groove already warm and land warmer. A archer's answer to a wall where the enemy does not feel the cold either.",
   },
   ice_fang_sword: {
     name: 'Ice Fang',

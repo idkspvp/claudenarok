@@ -1,15 +1,15 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 // Drives the authoritative loot roller (Sim.rollLoot) directly against the
 // dungeon mob templates, the same way combat death does, to verify the
 // Inventory 2.0 drops fire at roughly their configured rates — and do so
 // deterministically (same seed ⇒ identical empirical rate).
 function dropRate(mobId: string, itemId: string, seed = 1234, n = 20000): number {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
-  const pid = sim.addPlayer('warrior', 'Looter');
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
+  const pid = sim.addPlayer('swordman', 'Looter');
   const meta = (sim as unknown as { players: Map<number, unknown> }).players.get(pid);
   const template = MOBS[mobId];
   let hits = 0;
@@ -49,8 +49,9 @@ describe('Inventory 2.0 dungeon drops', () => {
   }
 
   it('is deterministic — identical seed reproduces the exact empirical rate', () => {
-    expect(dropRate('bastion_revenant', 'mistveil_cord', 7, 5000))
-      .toBe(dropRate('bastion_revenant', 'mistveil_cord', 7, 5000));
+    expect(dropRate('bastion_revenant', 'mistveil_cord', 7, 5000)).toBe(
+      dropRate('bastion_revenant', 'mistveil_cord', 7, 5000),
+    );
   });
 
   it('does not leak items across dungeons (mistveil is drowned-only)', () => {

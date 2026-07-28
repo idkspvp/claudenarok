@@ -1016,7 +1016,7 @@ export class DungeonFinderMachine {
                 return {
                   pid: a.pid,
                   name: applicant?.name ?? '',
-                  cls: applicant?.cls ?? 'warrior',
+                  cls: applicant?.cls ?? 'swordman',
                   level: this.levelOf(a.pid),
                   roles: [...a.roles],
                 };
@@ -1102,7 +1102,7 @@ export class DungeonFinderMachine {
       members: members.map((pid) => {
         const meta = this.ctx.players.get(pid);
         return {
-          cls: meta?.cls ?? 'warrior',
+          cls: meta?.cls ?? 'swordman',
           level: this.levelOf(pid),
           role: assigned.get(pid) ?? null,
         };

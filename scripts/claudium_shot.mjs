@@ -8,7 +8,7 @@
 //      balance + skus + a couple store items, re-open, and shoot the funded state.
 //
 // Modeled on scripts/clock_shot.mjs (offline boot: #btn-offline, #char-name, the
-// warrior mini-class, #btn-start-offline; wait for the sim player + a visible UI).
+// swordman mini-class, #btn-start-offline; wait for the sim player + a visible UI).
 import fs from 'node:fs';
 import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
@@ -35,13 +35,13 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 // opens the offline character panel (show('#offline-select')). It has no
 // clickable point, so trigger it via a DOM .click() rather than page.click().
 await page.evaluate(() => document.querySelector('#btn-offline').click());
-await page.waitForSelector('#offline-select .mini-class[data-class="warrior"]', {
+await page.waitForSelector('#offline-select .mini-class[data-class="swordman"]', {
   visible: true,
   timeout: 30000,
 });
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Thorgar');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 
 // The game must boot with NO economy service: wait for the sim player and a

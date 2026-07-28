@@ -47,7 +47,7 @@ listening on http://localhost:5173 and a Chromium-family browser resolved by
 `scripts/browser_path.mjs`, launched headless with
 `--use-angle=swiftshader --enable-unsafe-swiftshader`. No server or Postgres is required:
 perf_tour boots the offline `Sim` directly (clicks `#btn-offline`, names a character, picks
-warrior, clicks `#btn-start-offline`).
+swordman, clicks `#btn-start-offline`).
 
 ```sh
 # desktop profile (1600x900, deviceScaleFactor 1, non-touch):

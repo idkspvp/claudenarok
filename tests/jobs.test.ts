@@ -13,13 +13,12 @@ import {
 } from '../src/sim/content/jobs';
 
 describe('the tree matches Ragnarok Classic', () => {
-  it('has the six first jobs and no more', () => {
+  it('has the five first jobs and no more', () => {
     expect(firstJobs().map((j) => j.id)).toEqual([
       'swordman',
       'mage',
       'archer',
       'acolyte',
-      'merchant',
       'thief',
     ]);
   });
@@ -38,20 +37,22 @@ describe('the tree matches Ragnarok Classic', () => {
     }
   });
 
-  it('carries nineteen jobs: the Novice, six first, and twelve second', () => {
-    expect(JOBS).toHaveLength(19);
+  it('carries fifteen jobs: five first and ten second', () => {
+    expect(JOBS).toHaveLength(15);
     const byTier = (tier: JobDef['tier']) => JOBS.filter((j) => j.tier === tier).length;
-    expect(byTier('novice')).toBe(1);
-    expect(byTier('first')).toBe(6);
-    expect(byTier('second_1')).toBe(6);
-    expect(byTier('second_2')).toBe(6);
+    expect(byTier('first')).toBe(5);
+    expect(byTier('second_1')).toBe(5);
+    expect(byTier('second_2')).toBe(5);
   });
 
-  it('leaves the Novice with no advancement of its own', () => {
-    // Ragnarok hangs Super Novice here. It is out by product decision, so the
-    // Novice's only route forward is a first job.
-    expect(jobById('super_novice')).toBeUndefined();
-    expect(advancementsFrom('novice')).toEqual([]);
+  it('has no Novice, no Super Novice, and no Merchant branch', () => {
+    // All three are Classic and all three are out by product decision. A first
+    // job is a ROOT here: a character picks one at creation, so nothing precedes
+    // it, and every first job carries .
+    for (const absent of ['novice', 'super_novice', 'merchant', 'blacksmith', 'alchemist']) {
+      expect(jobById(absent), absent).toBeUndefined();
+    }
+    for (const first of firstJobs()) expect(first.from, first.id).toBeNull();
   });
 
   it('excludes every transcendent, third, and expanded class', () => {
@@ -89,7 +90,7 @@ describe('the tree is internally consistent', () => {
     expect(ids.size).toBe(JOBS.length);
     for (const job of JOBS) {
       if (job.from === null) {
-        expect(job.tier, job.id).toBe('novice');
+        expect(job.tier, job.id).toBe('first');
         continue;
       }
       expect(jobById(job.from), `${job.id} parent ${job.from}`).toBeDefined();
@@ -99,15 +100,12 @@ describe('the tree is internally consistent', () => {
   it('walks every second job back to its first job', () => {
     expect(firstJobOf('knight')?.id).toBe('swordman');
     expect(firstJobOf('rogue')?.id).toBe('thief');
-    expect(firstJobOf('alchemist')?.id).toBe('merchant');
     expect(firstJobOf('bard')?.id).toBe('archer');
   });
 
-  it('returns a first job unchanged and refuses the Novice', () => {
+  it('returns a first job unchanged', () => {
     expect(firstJobOf('thief')?.id).toBe('thief');
-    // The Novice descends from nothing, so it has no first job; Super Novice
-    // inherits that, which is exactly the oddity the source calls out.
-    expect(firstJobOf('novice')).toBeUndefined();
+    expect(firstJobOf('swordman')?.id).toBe('swordman');
   });
 
   it('has no unknown job id', () => {

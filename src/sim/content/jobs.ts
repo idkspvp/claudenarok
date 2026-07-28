@@ -1,10 +1,12 @@
 // The Ragnarok Classic job tree: the shape every class-facing system converts to.
 //
 // Read off `e_mapid` in rAthena's `src/map/map.hpp`, filtered to the pre-renewal
-// Classic era: the six first jobs plus Novice, and each first job's two second
-// jobs. Transcendent, third, and expanded classes are all in that enum and all
-// deliberately excluded here, because Classic does not have them. Super Novice
-// IS Classic and is excluded anyway, by product decision; see JOBS below.
+// Classic era, minus what this game deliberately does not take: five first jobs
+// and each one's two second jobs. Transcendent, third, and expanded classes are
+// all in that enum and all excluded because Classic does not have them. Three
+// more are Classic and excluded anyway, by product decision: Super Novice, the
+// NOVICE state itself (characters pick a first job at creation), and MERCHANT
+// with its Blacksmith and Alchemist branch.
 //
 // This is the AUTHORITY for the conversion, not the game's live class list. The
 // live list is still the nine it inherited (`PlayerClass` in ../types.ts), and
@@ -25,7 +27,7 @@
  *  for the pair is 2-1 and 2-2; the split is not a quality tier, it is a
  *  direction (2-1 leans to the profession's obvious strength, 2-2 to its
  *  unobvious one). */
-export type JobTier = 'novice' | 'first' | 'second_1' | 'second_2';
+export type JobTier = 'first' | 'second_1' | 'second_2';
 
 export interface JobDef {
   /** Stable id. Lower snake case, never displayed. */
@@ -33,26 +35,31 @@ export interface JobDef {
   /** The English name. Localized at the client like every other entity name. */
   name: string;
   tier: JobTier;
-  /** The job this one advances from, or null for the Novice. */
+  /** The job this one advances from, or null for a first job, which is a root:
+   *  characters pick one at creation and there is no Novice state before it. */
   from: string | null;
+  /** Offered on the character-creation screen. Deliberately its own flag rather
+   *  than `tier === 'first'`: the two say different things (what a job IS versus
+   *  whether a new character may pick it), and keeping them apart is what lets a
+   *  first job ship unstartable while its kit is authored. The picker and both
+   *  server validation lists read THIS, so adding a startable job is one row. */
+  startable?: boolean;
 }
 
-/** The Novice, the six first jobs, and their twelve second jobs: nineteen
- *  records, in tree order.
+/** The five first jobs and their ten second jobs, in tree order.
  *
- *  Super Novice is deliberately ABSENT. Ragnarok has it, hung off the Novice as
- *  a 2-1 rather than off any first job, and the source comments on that oddity
- *  directly. It is out by product decision, not by oversight, so a later reader
- *  does not go looking for the branch that is missing. */
+ *  Three Classic jobs are deliberately ABSENT, all by product decision rather
+ *  than oversight, so a later reader does not go looking for what is missing:
+ *  the NOVICE (a character picks a first job at creation, so there is no state
+ *  before it and first jobs are roots), SUPER NOVICE (which Ragnarok hangs off
+ *  the Novice as a 2-1), and MERCHANT with both of its branches, Blacksmith and
+ *  Alchemist. */
 export const JOBS: readonly JobDef[] = [
-  { id: 'novice', name: 'Novice', tier: 'novice', from: null },
-
-  { id: 'swordman', name: 'Swordman', tier: 'first', from: 'novice' },
-  { id: 'mage', name: 'Mage', tier: 'first', from: 'novice' },
-  { id: 'archer', name: 'Archer', tier: 'first', from: 'novice' },
-  { id: 'acolyte', name: 'Acolyte', tier: 'first', from: 'novice' },
-  { id: 'merchant', name: 'Merchant', tier: 'first', from: 'novice' },
-  { id: 'thief', name: 'Thief', tier: 'first', from: 'novice' },
+  { id: 'swordman', name: 'Swordman', tier: 'first', from: null, startable: true },
+  { id: 'mage', name: 'Mage', tier: 'first', from: null, startable: true },
+  { id: 'archer', name: 'Archer', tier: 'first', from: null, startable: true },
+  { id: 'acolyte', name: 'Acolyte', tier: 'first', from: null, startable: true },
+  { id: 'thief', name: 'Thief', tier: 'first', from: null, startable: true },
 
   { id: 'knight', name: 'Knight', tier: 'second_1', from: 'swordman' },
   { id: 'crusader', name: 'Crusader', tier: 'second_2', from: 'swordman' },
@@ -66,9 +73,6 @@ export const JOBS: readonly JobDef[] = [
   { id: 'priest', name: 'Priest', tier: 'second_1', from: 'acolyte' },
   { id: 'monk', name: 'Monk', tier: 'second_2', from: 'acolyte' },
 
-  { id: 'blacksmith', name: 'Blacksmith', tier: 'second_1', from: 'merchant' },
-  { id: 'alchemist', name: 'Alchemist', tier: 'second_2', from: 'merchant' },
-
   { id: 'assassin', name: 'Assassin', tier: 'second_1', from: 'thief' },
   { id: 'rogue', name: 'Rogue', tier: 'second_2', from: 'thief' },
 ];
@@ -79,19 +83,29 @@ export function jobById(id: string): JobDef | undefined {
   return BY_ID.get(id);
 }
 
-/** The six starting professions, in the source's own order. */
+/** The five starting professions, in the source's own order. */
 export function firstJobs(): readonly JobDef[] {
   return JOBS.filter((j) => j.tier === 'first');
 }
 
-/** Both advancements a first job offers, 2-1 first. Empty for the Novice, whose
- *  only route forward is a first job. */
+/** The jobs a new character may actually pick, in tree order. The ONE source the
+ *  character-creation picker and both server validation lists derive from. */
+export function startableJobs(): readonly JobDef[] {
+  return JOBS.filter((j) => j.startable === true);
+}
+
+/** Whether `id` names a job a new character may be created as. */
+export function isStartableJob(id: string): boolean {
+  return BY_ID.get(id)?.startable === true;
+}
+
+/** Both advancements a first job offers, 2-1 first. */
 export function advancementsFrom(jobId: string): readonly JobDef[] {
   return JOBS.filter((j) => j.from === jobId && j.tier !== 'first');
 }
 
 /** Walk back to the first job this one descends from, or the job itself when it
- *  already is one. Returns null for the Novice, which descends from nothing. */
+ *  already is one. */
 export function firstJobOf(jobId: string): JobDef | undefined {
   let cur = BY_ID.get(jobId);
   while (cur && cur.tier !== 'first') {

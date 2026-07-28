@@ -5,11 +5,12 @@ import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
 import { tEntity } from '../src/ui/entity_i18n';
 import { ensureLocaleLoaded, setLanguage } from '../src/ui/i18n';
+import { fundCasts } from './helpers/sp';
 
 function icebindRig(targetMaxHp: number, level = 7): { sim: Sim; target: Entity } {
   const sim = new Sim({ seed: 811, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
-  sim.player.resource = sim.player.maxResource;
+  fundCasts(sim.player);
 
   const target = createMob(98_811, MOBS.forest_wolf, level, {
     x: sim.player.pos.x + 3,

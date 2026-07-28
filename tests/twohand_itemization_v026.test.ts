@@ -36,11 +36,11 @@ describe('v0.26 two-handed greatblade itemization', () => {
       shield: true,
       blockValue: 14,
       stats: { armor: 112, vit: 2 },
-      requiredClass: ['warrior', 'paladin', 'shaman'],
+      requiredClass: ['swordman'],
     });
-    expect(canEquipItem('warrior', wallshield)).toBe(true);
-    expect(canEquipItem('paladin', wallshield)).toBe(true);
-    expect(canEquipItem('shaman', wallshield)).toBe(true);
+    // The Paladin and the Shaman shared this shield and were cut in D1.
+    expect(canEquipItem('swordman', wallshield)).toBe(true);
+    expect(canEquipItem('acolyte', wallshield)).toBe(false);
     expect(canEquipItem('mage', wallshield)).toBe(false);
     expect(NPCS.armorer_hode.vendorItems).toEqual(
       expect.arrayContaining(['highwatch_greatsword', 'highwatch_wallshield']),
@@ -98,9 +98,9 @@ describe('v0.26 two-handed Rogue proficiency', () => {
     );
     expect(twoHanders.length).toBeGreaterThanOrEqual(3);
     for (const item of twoHanders) {
-      expect(canEquipItem('rogue', item), item.id).toBe(false);
-      expect(canEquipItemInSlot('rogue', item, 'mainhand', null), item.id).toBe(false);
-      expect(item.requiredClass ?? [], item.id).not.toContain('rogue');
+      expect(canEquipItem('thief', item), item.id).toBe(false);
+      expect(canEquipItemInSlot('thief', item, 'mainhand', null), item.id).toBe(false);
+      expect(item.requiredClass ?? [], item.id).not.toContain('thief');
     }
 
     const futureTwoHander: ItemDef = {
@@ -112,15 +112,15 @@ describe('v0.26 two-handed Rogue proficiency', () => {
       weapon: { min: 1, max: 2, speed: 3 },
       sellValue: 0,
     };
-    expect(canEquipItem('rogue', futureTwoHander)).toBe(false);
+    expect(canEquipItem('thief', futureTwoHander)).toBe(false);
   });
 
   it('keeps Rogue one-handed weapons legal', () => {
     const kingsbane = weapon('kingsbane_last_oath');
     expect(weaponHand(kingsbane)).toBe('onehand');
-    expect(canEquipItem('rogue', kingsbane)).toBe(true);
+    expect(canEquipItem('thief', kingsbane)).toBe(true);
     const fang = weapon('fang_of_korzul');
     expect(weaponHand(fang)).toBe('onehand');
-    expect(canEquipItem('rogue', fang)).toBe(true);
+    expect(canEquipItem('thief', fang)).toBe(true);
   });
 });

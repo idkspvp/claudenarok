@@ -35,7 +35,7 @@ page.on('console', (msg) => {
 });
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Adventurer', settleMs: 2500 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Adventurer', settleMs: 2500 });
 
 // Reveal the touch overlay (headless Chromium reports pointer: fine).
 await page.evaluate(() => document.body.classList.add('mobile-touch'));

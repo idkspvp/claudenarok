@@ -233,7 +233,7 @@ export class NameplatePainter {
         v.raidMarkEl.style.display = 'none';
       }
 
-      // combo points the local player has built on this entity (rogue/druid)
+      // combo points the local player has built on this entity (thief/druid)
       this.setNameplateCombo(v, plan.comboPips);
 
       if (plateKind === 'object') {

@@ -97,7 +97,7 @@ similar mobs) and the tint.
 
 ### 4. skin (real AI-generated texture-swap skins)
 ```
-node scripts/asset_pipeline/pipeline.mjs skin --class warrior --suffix lava \
+node scripts/asset_pipeline/pipeline.mjs skin --class swordman --suffix lava \
   --tripo --prompt "molten obsidian armor, glowing orange lava cracks" [--apply]
 ```
 Three modes, in order of quality:
@@ -130,7 +130,7 @@ a procedural GRADIENT MAP (`lib/skinsuit.mjs`): the base atlas luminance is rema
 per-model themed color ramp, which discards the original hues and imposes one glossy uniform
 material (latex/chrome/bio), the most radical change possible within the swap-atlas system
 (UV-safe by construction). Each model is rendered on its class model for review. `--apply`
-registers the set across all 9 classes (the caster trio priest/mage/warlock share the mage
+registers the set across all 9 classes (the caster trio acolyte/mage/warlock share the mage
 atlas) with the `SKINS`/`SKIN_COUNTS` lockstep, and appends one CREDITS row. Shipped sets:
 `prismatic` (Prismatic Vanguard, bold saturated) and `chrome` (Liquid Chrome, metallic with
 class-tinted rims). Add a set by extending `SUIT_SETS` in `lib/skinsuit.mjs`. Note the
@@ -140,12 +140,12 @@ it the gradient-map suits are the procedural path.
 
 ### 6. skinmodel (League-style character skins from the base model)
 ```
-node scripts/asset_pipeline/pipeline.mjs skinmodel --class hunter \
+node scripts/asset_pipeline/pipeline.mjs skinmodel --class archer \
   --theme "pool party, swim trunks, floatie ring" --name pool_party_hunter \
   [--face-limit 8000] [--grip-rot deg] [--apply] [--job id]
 ```
 A BRAND-NEW character body derived from the base class model, the way League of
-Legends does themed skins ("pool party hunter"). Requires `OPENAI_API_KEY`. The
+Legends does themed skins ("pool party archer"). Requires `OPENAI_API_KEY`. The
 chain: (1) render the REAL base model from three angles; (2) gpt-image-2
 redesigns that exact character around the theme (same identity, same chibi
 proportions, same flat-shaded style) as a T-pose sheet; (3) Tripo builds it with

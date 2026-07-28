@@ -22,7 +22,7 @@ const SEED = 42;
 const CLIMB_LIMIT = 1.5;
 
 function makeSim(): Sim {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
   sim.setPlayerLevel(60); // rim mobs must not decide these tests
   return sim;
 }

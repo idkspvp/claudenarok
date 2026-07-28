@@ -12,7 +12,7 @@ import { type Entity, type ItemDef, POTION_COOLDOWN, type SimEvent } from '../sr
 // Sim delegates forward through), exercising the moved bodies, not just "it runs".
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 // The live SimContext the Sim assembled in its ctor (private field; reached here so the
@@ -21,9 +21,9 @@ function ctxOf(sim: Sim): SimContext {
   return (sim as unknown as { ctx: SimContext }).ctx;
 }
 
-// Add a warrior and stand them at Trader Wilkes so the buy / vendorInRange gates pass.
+// Add a swordman and stand them at Trader Wilkes so the buy / vendorInRange gates pass.
 function vendorPlayer(sim: Sim, name = 'Aleph') {
-  const pid = sim.addPlayer('warrior', name);
+  const pid = sim.addPlayer('swordman', name);
   const anySim = sim as unknown as {
     entities: Map<number, Entity>;
     players: Map<
@@ -298,7 +298,7 @@ describe('items vendor: buy / sell / sellAllJunk / buyBack', () => {
 
   it('buys FURY gear with honor without changing lifetime honor', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Veteran');
+    const pid = sim.addPlayer('swordman', 'Veteran');
     const meta = sim.meta(pid)!;
     const fury = [...sim.entities.values()].find((entity) => entity.templateId === 'fury')!;
     const player = sim.entities.get(pid)!;
@@ -318,7 +318,7 @@ describe('items vendor: buy / sell / sellAllJunk / buyBack', () => {
 
   it('can destroy duplicate soulbound FURY purchases without making them transferable', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Collector');
+    const pid = sim.addPlayer('swordman', 'Collector');
     const meta = sim.meta(pid)!;
     const fury = [...sim.entities.values()].find((entity) => entity.templateId === 'fury')!;
     const player = sim.entities.get(pid)!;
@@ -338,7 +338,7 @@ describe('items vendor: buy / sell / sellAllJunk / buyBack', () => {
 
   it('checks dual copper/honor prices and bag space before either debit', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'DualBuyer');
+    const pid = sim.addPlayer('swordman', 'DualBuyer');
     const meta = sim.meta(pid)!;
     const fury = [...sim.entities.values()].find((entity) => entity.templateId === 'fury')!;
     const player = sim.entities.get(pid)!;

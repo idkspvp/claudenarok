@@ -10,7 +10,7 @@ import { groundHeight } from '../src/sim/world';
 // that is exactly the property the whole design depends on.
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleportToCardMaster(sim: Sim, pid: number) {
@@ -25,7 +25,7 @@ function teleportToCardMaster(sim: Sim, pid: number) {
 }
 
 function queueDuo(sim: Sim, aName = 'Aleph', bName = 'Bet') {
-  const a = sim.addPlayer('warrior', aName);
+  const a = sim.addPlayer('swordman', aName);
   const b = sim.addPlayer('mage', bName);
   teleportToCardMaster(sim, a);
   teleportToCardMaster(sim, b);
@@ -46,7 +46,7 @@ describe('Sim.cardMinigameInfoFor', () => {
 
   it('reports available:true and queued once a second player joins the queue', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleportToCardMaster(sim, a);
     teleportToCardMaster(sim, b);
@@ -142,7 +142,7 @@ describe('Sim.removePlayer tears down Card Duel state', () => {
 
   it('drops a queued (not yet matched) departed player from the queue', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const bystander = sim.addPlayer('mage', 'Bystander');
     teleportToCardMaster(sim, a);
     sim.joinCardDuelQueue(a);

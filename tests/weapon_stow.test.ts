@@ -3,6 +3,7 @@
 // persistence back-compat, and the entity-wire `ws` bit end to end
 // (server encode -> ClientWorld decode).
 import { describe, expect, it, vi } from 'vitest';
+import { raisePool } from './helpers/sp';
 
 // Mock the db layer so no Postgres is needed; wire/dispatch logic is under test.
 vi.mock('../server/db', () => ({
@@ -36,8 +37,10 @@ import { dist2d, type PlayerClass } from '../src/sim/types';
 import { drawWeapon, toggleWeaponStow } from '../src/sim/weapon_stow';
 import { terrainHeight } from '../src/sim/world';
 
-function makeSim(cls: 'warrior' | 'mage' = 'warrior', seed = 42) {
-  return new Sim({ seed, playerClass: cls, autoEquip: true });
+function makeSim(cls: 'swordman' | 'mage' = 'swordman', seed = 42) {
+  const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
+  raisePool(sim.player); // a level-1 pool no longer funds a single spell
+  return sim;
 }
 
 function nearestMob(sim: Sim, templateId?: string) {
@@ -105,7 +108,7 @@ describe('IWorld toggle + combat auto-unsheathe', () => {
   });
 
   it('engaging auto-attack draws the weapon', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -139,8 +142,8 @@ describe('persistence (JSONB back-compat)', () => {
     const stowed = sim.serializeCharacter(sim.playerId);
     expect(stowed?.weaponStowed).toBe(true);
 
-    const resume = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = resume.addPlayer('warrior', 'Resumer', { state: stowed ?? undefined });
+    const resume = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = resume.addPlayer('swordman', 'Resumer', { state: stowed ?? undefined });
     expect(resume.entities.get(pid)?.weaponStowed).toBe(true);
   });
 
@@ -149,8 +152,8 @@ describe('persistence (JSONB back-compat)', () => {
     const state = sim.serializeCharacter(sim.playerId);
     if (!state) throw new Error('no state');
     expect('weaponStowed' in state).toBe(false); // the legacy-save shape
-    const resume = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = resume.addPlayer('warrior', 'Legacy', { state });
+    const resume = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = resume.addPlayer('swordman', 'Legacy', { state });
     expect(resume.entities.get(pid)?.weaponStowed).toBe(false);
   });
 });
@@ -179,7 +182,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -190,11 +193,11 @@ function joinServer(
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.sportRole = null;
@@ -242,7 +245,7 @@ describe('ClientWorld optimistic nudge', () => {
     const self = (extra: Record<string, unknown>) => ({
       id: 7,
       k: 'player',
-      tid: 'warrior',
+      tid: 'swordman',
       nm: 'Nudge',
       lv: 1,
       x: 0,

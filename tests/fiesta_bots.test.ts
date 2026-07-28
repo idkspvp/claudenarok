@@ -141,7 +141,7 @@ describe('fiesta bots: advanceBotSteer', () => {
 // centre-diamond pillar (numerically in melee reach, no line of sight) must
 // round the pillar and land hits, and the whole run must replay identically.
 function runWedgedBot(): { trace: string[]; hpDropTick: number } {
-  const sim = new Sim({ seed: 11, playerClass: 'warrior' });
+  const sim = new Sim({ seed: 11, playerClass: 'swordman' });
   expect(sim.startFiestaPractice()).toBe(true);
   let match: ReturnType<typeof sim.arenaMatchFor> = null;
   for (let i = 0; i < 20 * 30 && match?.state !== 'active'; i++) {

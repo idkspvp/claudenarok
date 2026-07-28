@@ -4,6 +4,7 @@ import { MOBS } from '../src/sim/data';
 import { createMob, recalcPlayerStats } from '../src/sim/entity';
 import { type PlayerMeta, Sim } from '../src/sim/sim';
 import type { Entity, PlayerClass, SetProc } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type ProcInternals = {
   players: Map<number, PlayerMeta>;
@@ -45,7 +46,7 @@ function makeCastingSim(cls: PlayerClass, seed: number): { sim: AnySim; p: AnyEn
   sim.setPlayerLevel(20); // the real level-up path, so higher-learnLevel spells are known
   const p = equipMournweave(sim) as AnyEntity;
   const meta = sim.players.get(p.id);
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta };
 }
 
@@ -70,7 +71,7 @@ const hasClearcasting = (p: Entity) => p.auras.some((a) => a.kind === 'next_cast
 // One full cast: reset the per-cast throttles, start, then drain the cast to
 // completion (applyAbility runs inside updateCasting when the timer clears).
 function castOnce(sim: AnySim, p: AnyEntity, meta: any, abilityId: string): void {
-  p.resource = p.maxResource;
+  fundCasts(p);
   p.gcdRemaining = 0;
   p.castingAbility = null;
   p.channeling = false;
@@ -163,7 +164,7 @@ describe('Clearcasting procs from real casts', () => {
   });
 
   it('procs from a friendly-target spell (a heal)', () => {
-    const { sim, p, meta } = makeCastingSim('priest', 23);
+    const { sim, p, meta } = makeCastingSim('acolyte', 23);
     p.hp = 1; // keep the self-heal meaningful so the cast never no-ops
     for (let i = 0; i < 300 && !hasClearcasting(p); i++) {
       p.hp = 1;
@@ -172,11 +173,11 @@ describe('Clearcasting procs from real casts', () => {
     expect(hasClearcasting(p)).toBe(true);
   });
 
-  it('never procs from physical-school casts or toggle-offs (druid form flips)', () => {
-    // Mournweave is cloth, so a druid can wear the full set; a form toggle is a
+  it('never procs from physical-school casts or toggle-offs (acolyte form flips)', () => {
+    // Mournweave is cloth, so a acolyte can wear the full set; a form toggle is a
     // physical-school ability and its off-flip is a toggle-off: neither is a
     // spell, so 300 alternating flips (which would proc ~30 times ungated) stay dry.
-    const { sim, p, meta } = makeCastingSim('druid', 24);
+    const { sim, p, meta } = makeCastingSim('acolyte', 24);
     for (let i = 0; i < 300 && !hasClearcasting(p); i++) castOnce(sim, p, meta, 'bear_form');
     expect(hasClearcasting(p)).toBe(false);
   });

@@ -33,8 +33,8 @@ function clone<T>(v: T): T {
 
 // Load a blob into a fresh deterministic world and serialize it straight back
 // (no ticks, so nothing but the load path itself can move a field).
-function roundTrip(state: CharacterState, seed: number, playerClass = 'warrior'): Blob {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+function roundTrip(state: CharacterState, seed: number, playerClass = 'swordman'): Blob {
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   // biome-ignore lint/suspicious/noExplicitAny: rehearsal rows may carry any class
   const pid = sim.addPlayer(playerClass as any, 'Rehearsal', { state: clone(state) });
   const blob = sim.serializeCharacter(pid);
@@ -117,7 +117,7 @@ interface RehearsalResult {
 // The sweep core: classify every input-vs-output delta against the
 // documented allowlist. `seed` must stay fixed per row so the baseline and
 // actual arms share one world construction.
-function rehearse(state: CharacterState, seed: number, playerClass = 'warrior'): RehearsalResult {
+function rehearse(state: CharacterState, seed: number, playerClass = 'swordman'): RehearsalResult {
   const input = clone(state) as unknown as Blob;
   const wasApplied = input.masteryResetApplied === true;
   const baseline = roundTrip({ ...clone(state), masteryResetApplied: true }, seed, playerClass);
@@ -180,6 +180,18 @@ function rehearse(state: CharacterState, seed: number, playerClass = 'warrior'):
     ) {
       continue; // a default fill any curve-era load produces, reset or not
     }
+    if (
+      row.path === 'hp' &&
+      typeof row.before === 'number' &&
+      typeof row.after === 'number' &&
+      row.after < row.before
+    ) {
+      // The load-time pool clamp. D1 put max HP on Ragnarok's curve, which is far
+      // below the scale these pre-D1 rows were written at, so a stored hp above the
+      // new maximum is clamped down on load. The corpus is deliberately NOT edited
+      // to hide it: a real saved character takes exactly this clamp.
+      continue;
+    }
     violations.push(
       `undocumented delta: ${row.path}: ${JSON.stringify(row.before)} -> ${JSON.stringify(row.after)}`,
     );
@@ -227,8 +239,8 @@ function rehearse(state: CharacterState, seed: number, playerClass = 'warrior'):
 // five documented variants.
 
 function buildModernBlob(): CharacterState {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
-  const pid = sim.addPlayer('warrior', 'Corpus');
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
+  const pid = sim.addPlayer('swordman', 'Corpus');
   // biome-ignore lint/suspicious/noExplicitAny: corpus construction reaches meta
   const meta = (sim as any).players.get(pid);
   meta.copper = 4321;
@@ -372,7 +384,7 @@ describe.runIf(!!rehearsalInput)('mastery reset rehearsal (RESET_REHEARSAL_INPUT
     let alreadyApplied = 0;
     const failures: string[] = [];
     rows.forEach((row, i) => {
-      const result = rehearse(row.state, 1000 + i, row.playerClass ?? 'warrior');
+      const result = rehearse(row.state, 1000 + i, row.playerClass ?? 'swordman');
       if (result.applied) applied++;
       else alreadyApplied++;
       for (const v of result.violations) failures.push(`${row.id}: ${v}`);

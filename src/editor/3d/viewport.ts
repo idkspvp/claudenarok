@@ -175,7 +175,7 @@ export class Editor3DViewport {
     // world or the Renderer ctor would build a second, frozen copy.
     this.sim = new Sim({
       seed: this.seed,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       world: { ...world, placements: undefined },
     });
     this.renderer = new Renderer(this.sim, this.canvas, this.nameplates);

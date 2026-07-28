@@ -16,7 +16,12 @@ mkdirSync(OUT, { recursive: true });
 const browser = await puppeteer.launch({
   executablePath: BROWSER_PATH,
   headless: 'new',
-  args: ['--no-sandbox', '--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  args: [
+    '--no-sandbox',
+    '--use-gl=angle',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
 });
 
 try {
@@ -32,7 +37,7 @@ try {
     const n = document.querySelector('#char-name');
     n.value = 'Mendwatch';
     n.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('.mini-class[data-class="priest"]')?.click();
+    document.querySelector('.mini-class[data-class="acolyte"]')?.click();
   });
   await page.evaluate(() => document.querySelector('#btn-start-offline').click());
   await new Promise((r) => setTimeout(r, 3000));
@@ -87,10 +92,17 @@ try {
     const sim = window.__game.sim;
     const mender = sim.entities.get(window.__mender);
     const ally = sim.entities.get(window.__ally);
-    if (mender && ally) { ally.hp = Math.round(ally.maxHp * 0.4); mender.inCombat = true; mender.mendTimer = 0; }
+    if (mender && ally) {
+      ally.hp = Math.round(ally.maxHp * 0.4);
+      mender.inCombat = true;
+      mender.mendTimer = 0;
+    }
   });
   await new Promise((r) => setTimeout(r, 110));
-  await page.screenshot({ path: `${OUT}/mender-heal-fct.png`, clip: { x: 430, y: 90, width: 470, height: 360 } });
+  await page.screenshot({
+    path: `${OUT}/mender-heal-fct.png`,
+    clip: { x: 430, y: 90, width: 470, height: 360 },
+  });
   console.log('saved mender-heal-fct.png (heal numbers)');
 
   await new Promise((r) => setTimeout(r, 80));
@@ -98,11 +110,17 @@ try {
   console.log('saved mender-heal.png (full scene)');
 
   // Cropped close-up on the two actors + the rising green heal numbers.
-  await page.screenshot({ path: `${OUT}/mender-heal-actors.png`, clip: { x: 430, y: 90, width: 470, height: 360 } });
+  await page.screenshot({
+    path: `${OUT}/mender-heal-actors.png`,
+    clip: { x: 430, y: 90, width: 470, height: 360 },
+  });
   console.log('saved mender-heal-actors.png (close-up)');
 
   // Cropped on the combat log showing the repeated Grave Mending cast lines.
-  await page.screenshot({ path: `${OUT}/mender-heal-log.png`, clip: { x: 8, y: 470, width: 560, height: 250 } });
+  await page.screenshot({
+    path: `${OUT}/mender-heal-log.png`,
+    clip: { x: 8, y: 470, width: 560, height: 250 },
+  });
   console.log('saved mender-heal-log.png (combat log)');
 } finally {
   await browser.close();

@@ -80,7 +80,7 @@ async function run(viewport) {
     const charName = `LogoFade${viewport.name}`;
     // Deliberately do NOT set woc_spawn_intro_seen: a fresh character must
     // play the intro cinematic (and its logo fade) on first entry.
-    await enterOfflineGame(page, { charClass: 'warrior', charName, settleMs: 0 });
+    await enterOfflineGame(page, { charClass: 'swordman', charName, settleMs: 0 });
 
     await page.waitForFunction(() => Boolean(window.__game), { timeout: 15000 });
 

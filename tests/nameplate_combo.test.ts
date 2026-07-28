@@ -3,9 +3,9 @@ import { COMBO_PIP_MAX, comboPipsFor } from '../src/render/nameplate_combo';
 import { Sim } from '../src/sim/sim';
 
 function makeWorld() {
-  const sim = new Sim({ seed: 42, playerClass: 'rogue', noPlayer: true });
-  const pid = sim.addPlayer('rogue', 'Aleph');
-  const foe = sim.addPlayer('warrior', 'Bet');
+  const sim = new Sim({ seed: 42, playerClass: 'thief', noPlayer: true });
+  const pid = sim.addPlayer('thief', 'Aleph');
+  const foe = sim.addPlayer('swordman', 'Bet');
   sim.tick();
   return { player: sim.entities.get(pid)!, foe: sim.entities.get(foe)! };
 }

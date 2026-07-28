@@ -44,7 +44,7 @@ function harness(reduceMotion = false) {
     document,
     window,
     world: () =>
-      ({ cfg: { playerClass: 'warrior' }, claimEventSkin }) as unknown as Pick<
+      ({ cfg: { playerClass: 'swordman' }, claimEventSkin }) as unknown as Pick<
         IWorld,
         'cfg' | 'claimEventSkin'
       >,

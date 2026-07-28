@@ -55,7 +55,7 @@ function entry(over: Partial<LeaderboardEntry> = {}): LeaderboardEntry {
   return {
     rank: 1,
     name: 'Aurelia',
-    cls: 'warrior',
+    cls: 'swordman',
     level: 60,
     virtualLevel: 12,
     lifetimeXp: 5_000_000,
@@ -106,7 +106,7 @@ describe('axe: leaderboard window (Sim + ClientWorld shapes)', () => {
     it(`ranked page is clean under the ${shape} shape`, async () => {
       const leaders = [
         entry({ rank: 1, name: 'Aurelia', me: true } as Partial<LeaderboardEntry>),
-        entry({ rank: 2, name: 'Bramblefoot', cls: 'druid', prestigeRank: 2 }),
+        entry({ rank: 2, name: 'Bramblefoot', cls: 'acolyte', prestigeRank: 2 }),
         entry({ rank: 3, name: 'Cinderhowl', cls: 'mage' }),
       ];
       const { root, win } = leaderboardWindow(async () => page(shape, leaders));
@@ -176,7 +176,7 @@ describe('axe: spellbook window', () => {
         // The render reads world.player.level for the spec/level learn gate
         // (IWorld always carries a player); level 1 keeps every row locked.
         world: () =>
-          ({ cfg: { playerClass: 'warrior' }, known: [], player: { level: 1 } }) as never,
+          ({ cfg: { playerClass: 'swordman' }, known: [], player: { level: 1 } }) as never,
         barAbilityIds: () => [],
         hasFreeSlot: () => true,
         hasFormBars: () => false,
@@ -392,9 +392,9 @@ describe('axe: social window', () => {
             player: { name: 'Aurelia' },
             // 3 same-realm matches, none the local player (so none is filtered out).
             searchCharacters: async () => [
-              { name: 'Borin', cls: 'warrior', level: 42 },
+              { name: 'Borin', cls: 'swordman', level: 42 },
               { name: 'Celes', cls: 'mage', level: 37 },
-              { name: 'Dorn', cls: 'priest', level: 28 },
+              { name: 'Dorn', cls: 'acolyte', level: 28 },
             ],
           }) as never,
         captureFocus: () => null,
@@ -510,7 +510,7 @@ describe('axe: character window', () => {
         root: () => root,
         world: () =>
           ({
-            cfg: { playerClass: 'warrior' },
+            cfg: { playerClass: 'swordman' },
             player: { name: 'Aurelia', level: 60, skin: 0 },
             equipment: {},
             professionsState: { skills: [] },

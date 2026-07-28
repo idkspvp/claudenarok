@@ -54,12 +54,12 @@ const MIN_FPS = parseCeilingEnv('CROWD_MIN_FPS', process.env.CROWD_MIN_FPS);
 const JSON_OUT = process.env.CROWD_JSON_OUT ?? 'tmp/crowd-fps-latest.json';
 
 const CLASSES = [
-  'warrior',
+  'swordman',
   'paladin',
-  'priest',
+  'acolyte',
   'mage',
-  'hunter',
-  'rogue',
+  'archer',
+  'thief',
   'warlock',
   'druid',
   'shaman',
@@ -233,7 +233,7 @@ async function enterWorld(page) {
     const name = document.querySelector('#new-char-name');
     name.value = nm;
     name.dispatchEvent(new Event('input', { bubbles: true }));
-    document.querySelector('#charcreate-panel .mini-class[data-class="warrior"]').click();
+    document.querySelector('#charcreate-panel .mini-class[data-class="swordman"]').click();
     document.querySelector('#btn-create-char').click();
   }, camName);
   await page.waitForFunction(

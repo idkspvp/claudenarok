@@ -13,13 +13,14 @@ import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  raisePool(p);
   return { sim, p };
 }
 
@@ -61,6 +62,7 @@ describe('Aether Darts full-charge barrage', () => {
     const dummy = addDummy(sim);
     for (let i = 0; i < 4 && aetherSurgeStacks(mage) < 4; i++) {
       sim.targetEntity(dummy.id);
+      raisePool(mage); // the pool no longer covers four casts in a row
       sim.castAbility('arcane_surge');
       for (let t = 0; t < 60 && !free(mage); t++) sim.tick();
     }
@@ -89,6 +91,7 @@ describe('Aether Darts full-charge barrage', () => {
     const dummy = addDummy(sim);
     for (let i = 0; i < 4 && aetherSurgeStacks(p) < 4; i++) {
       sim.targetEntity(dummy.id);
+      raisePool(p); // the pool no longer covers four casts in a row
       sim.castAbility('arcane_surge');
       for (let t = 0; t < 60 && !free(p); t++) sim.tick();
     }
@@ -112,6 +115,7 @@ describe('Aether Darts full-charge barrage', () => {
     const dummy = addDummy(sim);
     for (let i = 0; i < 4 && aetherSurgeStacks(p) < 4; i++) {
       sim.targetEntity(dummy.id);
+      raisePool(p); // the pool no longer covers four casts in a row
       sim.castAbility('arcane_surge');
       for (let t = 0; t < 60 && !free(p); t++) sim.tick();
     }
@@ -206,7 +210,7 @@ describe('Temporal Reversal: combat resurrection', () => {
 
   it('rewinds a dead party ally back to life; refuses on a living or non-party target', () => {
     const { sim, p } = chronoMage();
-    const allyId = sim.addPlayer('warrior', 'Fallen');
+    const allyId = sim.addPlayer('swordman', 'Fallen');
     const ally = sim.entities.get(allyId)!;
     ally.pos = { x: p.pos.x + 3, y: p.pos.y, z: p.pos.z };
     sim.partyInvite(allyId, p.id);
@@ -246,7 +250,7 @@ describe('Temporal Reversal: combat resurrection', () => {
   it('keeps a declined or expired combat resurrection dead', () => {
     const castOffer = () => {
       const { sim, p } = chronoMage();
-      const allyId = sim.addPlayer('warrior', 'Fallen');
+      const allyId = sim.addPlayer('swordman', 'Fallen');
       const ally = sim.entities.get(allyId)!;
       ally.pos = { x: p.pos.x + 3, y: p.pos.y, z: p.pos.z };
       sim.partyInvite(allyId, p.id);
@@ -272,7 +276,7 @@ describe('Temporal Reversal: combat resurrection', () => {
 
   it('measures a released spirit from its nearby corpse, not the distant graveyard', () => {
     const { sim, p } = chronoMage();
-    const allyId = sim.addPlayer('warrior', 'Released');
+    const allyId = sim.addPlayer('swordman', 'Released');
     const ally = sim.entities.get(allyId)!;
     sim.partyInvite(allyId, p.id);
     sim.partyAccept(allyId);

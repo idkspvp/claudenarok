@@ -22,7 +22,7 @@ import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 // ENCOUNTER rather than whatever gear happened to be lying around.
 
 // The dev-kit spec labels used to mirror the talent trees; the trees are retired
-// (Phase D0) and DEV_KIT_ROLES is now the standalone source of the 27 pairs.
+// (Phase D0) and DEV_KIT_ROLES is now the standalone source of the 15 pairs.
 function everySpec(): { cls: PlayerClass; spec: string }[] {
   const out: { cls: PlayerClass; spec: string }[] = [];
   for (const cls of ALL_CLASSES) {
@@ -32,7 +32,7 @@ function everySpec(): { cls: PlayerClass; spec: string }[] {
 }
 
 describe('dev kit role table', () => {
-  it('covers all 27 class-and-spec pairs', () => {
+  it('covers all 15 class-and-spec pairs', () => {
     expect(everySpec()).toHaveLength(DEV_KIT_ROLE_COUNT);
     const missing = everySpec().filter(({ cls, spec }) => devKitRole(cls, spec) === null);
     expect(missing).toEqual([]);
@@ -80,7 +80,7 @@ describe('fresh-20 item pool', () => {
   it('excludes heroic variants, raid loot and PvP gear', () => {
     for (const item of Object.values(ITEMS)) {
       if (item.heroicOf !== undefined || item.priceHonor !== undefined) {
-        expect(isFreshTwentyItem('warrior', item)).toBe(false);
+        expect(isFreshTwentyItem('swordman', item)).toBe(false);
       }
     }
   });
@@ -88,7 +88,7 @@ describe('fresh-20 item pool', () => {
   // REGRESSION. The first cut of this filter excluded by inferred source level
   // (`> 20`), which was unsound twice over: the Heroic Marks vendor registers its
   // stock at EXACTLY 20, and some heroic pieces (soulrend_diadem) have no derivable
-  // source at all. Three badge items and a heroic helm shipped in the priest kit as a
+  // source at all. Three badge items and a heroic helm shipped in the acolyte kit as a
   // result. The exclusions are now table identity, and this walks every finished kit.
   it('no kit contains a single item from any excluded source', () => {
     const banned: [string, ReadonlySet<string>][] = [
@@ -151,7 +151,7 @@ describe('fresh-20 item pool', () => {
   it('honours requiredClass even for armor, which canEquipItem alone does not', () => {
     // canEquipItem returns on the armor-rank check for anything with an armorType, so
     // a class-locked plate piece never reaches its own requiredClass test. Without the
-    // explicit re-check a mail class ends up wearing warrior-only tier pieces.
+    // explicit re-check a mail class ends up wearing swordman-only tier pieces.
     const locked = Object.values(ITEMS).filter(
       (item) => item.requiredClass && item.requiredClass.length > 0 && item.stats,
     );
@@ -221,7 +221,7 @@ describe('kit construction', () => {
   });
 
   it('gives a shield spec a one-hander so the shield actually fits', () => {
-    const kit = buildDevKit('warrior', 'prot');
+    const kit = buildDevKit('swordman', 'prot');
     const main = ITEMS[kit?.equip.mainhand ?? ''];
     expect(main).toBeTruthy();
     expect(main?.kind === 'weapon' && main.hand === 'twohand').toBe(false);
@@ -230,7 +230,7 @@ describe('kit construction', () => {
 
   it('never hands a caster a strength piece over an intellect one', () => {
     // The dead-stat armor discount exists precisely to stop "heaviest armor wins".
-    const kit = buildDevKit('priest', 'holy');
+    const kit = buildDevKit('acolyte', 'holy');
     for (const id of Object.values(kit?.equip ?? {})) {
       const stats = ITEMS[id]?.stats;
       if (!stats) continue;
@@ -254,7 +254,7 @@ describe('kit application order', () => {
         return true;
       },
     };
-    const applied = applyDevKit(ctx, 'warrior', 'prot');
+    const applied = applyDevKit(ctx, 'swordman', 'prot');
     expect(applied?.bagsEquipped).toBe(4);
 
     const lastBag = calls.map((c) => c.startsWith('bag:')).lastIndexOf(true);
@@ -274,7 +274,7 @@ describe('kit application order', () => {
         return true;
       },
     };
-    applyDevKit(ctx, 'warrior', 'prot');
+    applyDevKit(ctx, 'swordman', 'prot');
     expect(calls).toContain('unequip:mainhand');
     expect(calls).toContain('unequip:offhand');
     expect(calls.indexOf('unequip:offhand')).toBeLessThan(
@@ -289,7 +289,7 @@ describe('kit application order', () => {
       equipItem: () => {},
       unequipItem: () => true,
     };
-    expect(applyDevKit(ctx, 'warrior', 'restoration')).toBeNull();
+    expect(applyDevKit(ctx, 'swordman', 'restoration')).toBeNull();
   });
 });
 
@@ -304,7 +304,7 @@ describe('/dev kit against a real Sim', () => {
   }
 
   it('dresses the character and fills all four bag sockets', () => {
-    const sim = kitted('warrior', 'prot');
+    const sim = kitted('swordman', 'prot');
     const meta = sim.players.get(sim.playerId);
     expect(meta?.bags.filter(Boolean)).toHaveLength(4);
     // 8 armor/weapon slots minimum. Not 11: neck and both rings stay empty because no
@@ -335,7 +335,7 @@ describe('/dev kit against a real Sim', () => {
   }
 
   it('refuses a spec that belongs to another class', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', devCommands: true });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', devCommands: true });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
     const before = equipmentSnapshot(sim);
     sim.chat('/dev kit restoration');
@@ -345,7 +345,7 @@ describe('/dev kit against a real Sim', () => {
   it('is inert when dev commands are off', () => {
     // The whole surface is env-gated server-side; a preset must not be the one cheat
     // that leaks past it.
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', devCommands: false });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', devCommands: false });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
     const before = equipmentSnapshot(sim);
     const bagsBefore = sim.players.get(sim.playerId)?.bags.filter(Boolean).length ?? 0;

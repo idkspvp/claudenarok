@@ -347,7 +347,7 @@ async function warriorFlow() {
   const page = await browser.newPage();
   await startOffline(
     page,
-    'warrior',
+    'swordman',
     `War${Date.now().toString(36).replace(/\d/g, 'a').slice(-7)}`,
   );
   await level(page, 10);
@@ -357,7 +357,7 @@ async function warriorFlow() {
   await hoverTalentCard(page, snap.specs[0]?.name ?? 'Arms');
   const specSnap = await uiSnapshot(page);
   await chooseTab(page, 'choices');
-  await shot(page, 1, 'warrior-level10-talents');
+  await shot(page, 1, 'swordman-level10-talents');
   const rowsOk =
     snap.talentsActiveTab?.includes('Choices') &&
     snap.rows.length === 6 &&
@@ -390,7 +390,7 @@ async function warriorFlow() {
   const pickedSpec = await chooseSpec(page, 'Arms');
   await openSpellbookKey(page);
   snap = await uiSnapshot(page);
-  await shot(page, 2, 'warrior-spec-click-spellbook');
+  await shot(page, 2, 'swordman-spec-click-spellbook');
   const hasMortalStrike = snap.spellRows.some((row) => /Mortal Strike/i.test(row.name));
   const mortalOnBar = snap.actionLabels.some((label) => /Mortal Strike/i.test(label));
   verdict(
@@ -410,12 +410,12 @@ async function warriorFlow() {
   await pickOption(page, 'Warleap');
   await pickOption(page, 'Jawcrack');
   const save3 = await saveCurrent(page, 'Warrior Playtest');
-  await shot(page, 3, 'warrior-saved-rows');
+  await shot(page, 3, 'swordman-saved-rows');
   await closeWindow(page, '#talents-window');
   await openTalentsKey(page);
   snap = await uiSnapshot(page);
   const cast3 = await castAtTarget(page, 'Warleap');
-  await shot(page, 3, 'warrior-warleap-cast');
+  await shot(page, 3, 'swordman-warleap-cast');
   const picksPersist =
     snap.rows.find((row) => row.level === '5')?.picked === 'Warleap' &&
     snap.rows.find((row) => row.level === '8')?.picked === 'Jawcrack';
@@ -442,7 +442,7 @@ async function warriorFlow() {
   await pickOption(page, 'Bladed Gyre');
   const save4 = await saveCurrent(page, 'Warrior Playtest');
   const cast4 = await castAtTarget(page, 'Bladed Gyre');
-  await shot(page, 4, 'warrior-level20-bladed-gyre');
+  await shot(page, 4, 'swordman-level20-bladed-gyre');
   const unlockedOk = unlockedAt20.join(',') === '5,8,11,14,17,20';
   const cast4Ok =
     save4.ok &&
@@ -484,7 +484,7 @@ async function warriorFlow() {
       return { reachable: true, threw: String(err?.message ?? err), before };
     }
   });
-  await shot(page, 5, 'warrior-legacy-apply');
+  await shot(page, 5, 'swordman-legacy-apply');
   const migrationOk =
     migration.reachable &&
     !migration.threw &&
@@ -518,7 +518,7 @@ async function warriorFlow() {
   const save6 = await saveCurrent(page, 'Warrior Playtest');
   await openSpellbookKey(page);
   snap = await uiSnapshot(page);
-  await shot(page, 6, 'warrior-clear-respec');
+  await shot(page, 6, 'swordman-clear-respec');
   const rowsEmpty = snap.rows.every((row) => !row.picked);
   const warleapGone = !snap.spellRows.some((row) => /Warleap/i.test(row.name));
   verdict(

@@ -12,7 +12,7 @@ import type { PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function addFighter(sim: Sim, cls: PlayerClass, name: string): number {
@@ -27,7 +27,7 @@ function addFighter(sim: Sim, cls: PlayerClass, name: string): number {
 }
 
 function queue1v1Pair(sim: Sim): { a: number; b: number } {
-  const a = addFighter(sim, 'warrior', `W${sim.ctx.nextArenaMatchId}a`);
+  const a = addFighter(sim, 'swordman', `W${sim.ctx.nextArenaMatchId}a`);
   const b = addFighter(sim, 'mage', `M${sim.ctx.nextArenaMatchId}b`);
   sim.arenaQueueJoin(a);
   sim.arenaQueueJoin(b);
@@ -82,10 +82,10 @@ describe('arena rotation: ranked matchId-parity preference', () => {
 describe('arena rotation: fiesta is pinned to even (Coliseum) slots', () => {
   function queueFiestaFour(sim: Sim): number[] {
     const pids = [
-      addFighter(sim, 'warrior', 'Fa'),
+      addFighter(sim, 'swordman', 'Fa'),
       addFighter(sim, 'mage', 'Fb'),
-      addFighter(sim, 'rogue', 'Fc'),
-      addFighter(sim, 'paladin', 'Fd'),
+      addFighter(sim, 'thief', 'Fc'),
+      addFighter(sim, 'swordman', 'Fd'),
     ];
     for (const pid of pids) sim.arenaQueueJoin(pid, 'fiesta');
     sim.tick();
@@ -137,7 +137,7 @@ describe('arena rotation: yumi isolation', () => {
     const sim = makeWorld();
     sim.ctx.yumiBusySlots.add(0); // force the bout onto maze slot 1
     const pids: number[] = [];
-    for (let i = 0; i < 6; i++) pids.push(addFighter(sim, i % 2 ? 'mage' : 'warrior', `Y${i}`));
+    for (let i = 0; i < 6; i++) pids.push(addFighter(sim, i % 2 ? 'mage' : 'swordman', `Y${i}`));
     for (const pid of pids) sim.arenaQueueJoin(pid, 'yumi3');
     sim.tick();
     const m = sim.arenaMatchFor(pids[0])!;

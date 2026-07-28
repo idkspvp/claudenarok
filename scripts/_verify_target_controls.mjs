@@ -25,7 +25,7 @@ try {
   page.on('pageerror', (err) => check('no pageerror', false, String(err).slice(0, 160)));
   await page.setViewport({ width: 1280, height: 900 });
   await page.goto(URL, { waitUntil: 'networkidle2' });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Adventurer', settleMs: 1500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Adventurer', settleMs: 1500 });
 
   const media = await page.createCDPSession();
   await media.send('Emulation.setEmulatedMedia', {

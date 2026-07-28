@@ -7,7 +7,7 @@ import type { Aura, PlayerClass } from '../src/sim/types';
 
 const SEED = 42;
 
-const makeSim = (cls: PlayerClass = 'warrior') => {
+const makeSim = (cls: PlayerClass = 'swordman') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
   sim.setPlayerLevel(20);
   return sim;

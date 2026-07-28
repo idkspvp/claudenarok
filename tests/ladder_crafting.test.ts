@@ -17,7 +17,7 @@ import { Sim } from '../src/sim/sim';
 const SPECIMEN_IDS = new Set(Object.values(HARVEST_COMPONENT_SPECIMENS));
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 function metaOf(sim: Sim, pid: number) {
   return (sim as any).players.get(pid);

@@ -40,26 +40,25 @@ describe('isSelfOnlyAbility', () => {
     ['evasion', true], // selfBuff
     ['ice_barrier', true], // absorb
     ['instant_poison', true], // imbue
-    ['life_tap', true], // lifeTap
     ['adrenaline_rush', true], // gainResource
     ['bloodrage', true], // selfDamagePctMax + gainResource
-    ['summon_imp', true], // summonDemon
     ['dismiss_pet', true], // dismissPet
     // Empty-effects bag abilities are special-cased elsewhere, so `[].every(...)`
     // must NOT read as self-only. This is the regression the fix pins.
     ['conjure_water', false],
     ['conjure_food', false],
-    // Patch Up acts on the hunter's companion, not the hunter.
+    // Patch Up acts on the archer's companion, not the archer.
     ['revive_pet', false], // hot
     // Hostile self-centered AoEs: `requiresTarget` false but not caster-only.
     ['frost_nova', false], // aoeRoot
     ['arcane_explosion', false], // aoeDamage
     ['thunder_clap', false], // aoeDamage + aoeAttackSpeed
-    // Ground-targeted cast: aimed at a world point, never self-only.
-    ['rain_of_fire', false], // targetMode: 'position'
-    // Friendly-target buffs: land on the friendly branch, not self-only.
-    ['mark_of_the_wild', false], // requiresTarget + targetType friendly
-    ['blessing_of_might', false], // requiresTarget + targetType friendly
+    // Ground-targeted cast: aimed at a world point, never self-only. Rain of Fire
+    // went with the Warlock in D1; Blizzard is the surviving position-targeted cast.
+    ['blizzard', false], // targetMode: 'position'
+    // Friendly-target buffs: land on the friendly branch, not self-only. Mark of
+    // the Wild and Blessing of Might went with the Druid and the Paladin.
+    ['power_word_fortitude', false], // requiresTarget + targetType friendly
     ['arcane_intellect', false], // buffTarget, not in the allowlist
   ];
 

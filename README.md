@@ -161,7 +161,7 @@ python python/example_random_agent.py
 ```python
 from wow_env import WoWClassicEnv
 
-env = WoWClassicEnv(player_class="warrior")   # any of the nine classes
+env = WoWClassicEnv(player_class="swordman")   # any of the nine classes
 obs, info = env.reset(seed=42)
 obs, reward, terminated, truncated, info = env.step(env.action_space.sample())
 env.close()
@@ -221,7 +221,7 @@ The Gravecaller storyline runs through three five-player elite instances, a four
 - **The Drowned Temple** (5 players) through the Glimmermere moongate: a pale, moon-violet instance leading to Choirmother Selthe and then Ysolei, Avatar of the Drowned Moon, whose lunar tides and summoned Moonspawn punish a stationary group.
 - **The Abandoned Crypt** (solo) in Thornpeak: a quiet keystone-and-diary dive for one whose trail unseals the royal door to **Nythraxis, Scourge of Thornpeak**, a ten-player raid finale fought across three soul wardstones.
 
-Every instance also runs on **Heroic**: higher-level enemies, sharper mechanics, and its own loot and vendor currency. The lead-up quest chains are soloable, so the story is never gated behind finding a group. Our automated five-bot raid (warrior, paladin, priest, mage, hunter with focus-fire and healer AI) clears the Hollow Crypt in about five minutes (`node scripts/crypt_raid.mjs`, needs `ALLOW_DEV_COMMANDS=1`).
+Every instance also runs on **Heroic**: higher-level enemies, sharper mechanics, and its own loot and vendor currency. The lead-up quest chains are soloable, so the story is never gated behind finding a group. Our automated five-bot raid (swordman, paladin, acolyte, mage, archer with focus-fire and healer AI) clears the Hollow Crypt in about five minutes (`node scripts/crypt_raid.mjs`, needs `ALLOW_DEV_COMMANDS=1`).
 
 ### Delves
 
@@ -353,7 +353,7 @@ npm test                        # vitest: formulas, combat, AI, quests, all 9 cl
 npm run gate                    # complete CI-equivalent contribution gate
 npm run build                   # production web build
 npm run sfx:studio              # local SFX authoring, runtime mix, and production export
-node scripts/smoke_browser.mjs  # warrior end-to-end (needs npm run dev)
+node scripts/smoke_browser.mjs  # swordman end-to-end (needs npm run dev)
 node scripts/smoke_mage.mjs     # mage: casting, polymorph, conjure and drink, death and release
 node scripts/visual_tour.mjs    # screenshot tour of the zone and UI into tmp/
 node scripts/tour_temple.mjs    # screenshot tour of the Glimmermere and Drowned Temple into tmp/

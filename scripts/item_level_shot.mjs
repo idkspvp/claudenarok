@@ -1,4 +1,4 @@
-// Item-level feature proof. Boots offline as a warrior, turns on the
+// Item-level feature proof. Boots offline as a swordman, turns on the
 // "Show Item Level" interface toggle, and captures: (1) the Interface options
 // panel with the toggle, (2) item tooltips for a spread of level-20 gear across
 // tiers (raid / dungeon / legendary / rare) showing the "Item Level N" + power-
@@ -62,7 +62,7 @@ await page.evaluate(() => {
     el.dispatchEvent(new Event('input', { bubbles: true }));
   }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 180000 });
 await wait(1500);

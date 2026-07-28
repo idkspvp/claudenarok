@@ -115,14 +115,15 @@ export class ActionBarController {
 
   resolveActiveForm(): HotbarForm {
     if (this.deps.isInSportMatch()) return 'sport';
-    if (this.deps.playerClass === 'druid') {
-      if (this.deps.hasAura('form_bear')) return 'bear';
-      if (this.deps.hasAura('form_cat')) {
-        if (this.deps.hasAura('stealth')) return 'cat_stealth';
-        return 'cat';
-      }
+    // The shapeshift pages key off the AURA, never off a class id. The Druid that
+    // used to be their only wearer was cut in D1, so no live kit reaches them
+    // today, but a saved layout still round-trips and a future form-owning job
+    // needs no change here.
+    if (this.deps.hasAura('form_bear')) return 'bear';
+    if (this.deps.hasAura('form_cat')) {
+      return this.deps.hasAura('stealth') ? 'cat_stealth' : 'cat';
     }
-    if (this.deps.playerClass === 'rogue' && this.deps.hasAura('stealth')) return 'stealth';
+    if (this.deps.playerClass === 'thief' && this.deps.hasAura('stealth')) return 'stealth';
     return 'normal';
   }
 
@@ -288,7 +289,9 @@ export class ActionBarController {
   }
 
   private isFormKitBar(form: HotbarForm = this.activeFormState): boolean {
-    return this.deps.playerClass === 'druid' && (form === 'bear' || form === 'cat');
+    // The Druid that owned the shapeshift bars is cut (D1), so no live class has
+    // a form kit. The bar pages stay so a saved layout still round-trips.
+    return form === 'bear' || form === 'cat';
   }
 
   private isStealthForm(form: HotbarForm = this.activeFormState): boolean {

@@ -10,11 +10,11 @@
 //   never reads `requiredClass` at all. On armor, `requiredClass` is loot-targeting
 //   metadata unless it happens to name EXACTLY the classes that weight already
 //   admits (see equipment_rules.ts classesThatCanEquipArmorType), e.g. a mail chest
-//   naming only warrior/paladin/shaman. A narrower list (e.g. a leather item naming
-//   only rogue/hunter, when every mail class can also wear leather) is not enforced,
+//   naming only swordman/paladin/shaman. A narrower list (e.g. a leather item naming
+//   only thief/archer, when every mail class can also wear leather) is not enforced,
 //   and showing it would claim a restriction that does not exist.
 //
-// Bug #1893: a rogue/hunter-only dagger (Fang of Korzul) or a warrior/paladin/shaman
+// Bug #1893: a thief/archer-only dagger (Fang of Korzul) or a swordman/paladin/shaman
 // mail chest (Deathlord Warplate) resolves to a known archetype/armor-weight group
 // whose enforced set matches `requiredClass` exactly, and a prior version of the
 // tooltip hid the class list whenever that happened, leaving a blocked player with

@@ -2,8 +2,9 @@
 // full-HUD shot, driving the real offline client via window.__game. Screenshots
 // land in tmp/. Run the dev client first (npm run dev), then:
 //   GAME_URL=http://localhost:5173 node scripts/minimap_zoom_visual.mjs
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -15,7 +16,13 @@ const browser = await puppeteer.launch({
   executablePath: EDGE,
   headless: 'new',
   protocolTimeout: 60000,
-  args: ['--no-sandbox', '--disable-setuid-sandbox', '--window-size=1280,800', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
+  args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--window-size=1280,800',
+    '--use-angle=swiftshader',
+    '--enable-unsafe-swiftshader',
+  ],
   defaultViewport: { width: 1280, height: 800 },
 });
 
@@ -29,10 +36,13 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(400);
 await page.evaluate(() => {
   document.querySelector('#char-name').value = 'Scout';
-  document.querySelector('#offline-select .mini-class[data-class="hunter"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="archer"]').click();
   document.querySelector('#btn-start-offline').click();
 });
-await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, { timeout: 20000, polling: 400 });
+await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, {
+  timeout: 20000,
+  polling: 400,
+});
 await sleep(500);
 // dismiss the mobile preflight if it appears
 await page.evaluate(() => document.querySelector('#mobile-preflight-continue')?.click());
@@ -48,8 +58,15 @@ async function clipMinimap(name) {
 }
 
 // reset to a known state, then step the control like a player would
-await page.evaluate(() => { localStorage.removeItem('minimapZoom'); });
-for (const [z, file] of [[1, 'mmzoom-1x'], [1.5, 'mmzoom-1_5x'], [2, 'mmzoom-2x'], [3, 'mmzoom-3x']]) {
+await page.evaluate(() => {
+  localStorage.removeItem('minimapZoom');
+});
+for (const [z, file] of [
+  [1, 'mmzoom-1x'],
+  [1.5, 'mmzoom-1_5x'],
+  [2, 'mmzoom-2x'],
+  [3, 'mmzoom-3x'],
+]) {
   await page.evaluate((target) => {
     // drive through the public buttons so the readout + disabled states update
     document.querySelector('#minimap-zoom-out').click(); // floor to 1x
@@ -59,7 +76,9 @@ for (const [z, file] of [[1, 'mmzoom-1x'], [1.5, 'mmzoom-1_5x'], [2, 'mmzoom-2x'
   }, z);
   await sleep(500);
   await clipMinimap(file);
-  const shown = await page.evaluate(() => document.querySelector('#minimap-zoom-label').textContent);
+  const shown = await page.evaluate(
+    () => document.querySelector('#minimap-zoom-label').textContent,
+  );
   console.log(`zoom ${z}x -> label "${shown}"`);
 }
 

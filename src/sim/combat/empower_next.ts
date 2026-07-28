@@ -8,7 +8,7 @@ function matches(aura: Aura, abilityId?: string): boolean {
 
 // The aura kinds whose consumption marks the cast as empowered for the castNth
 // guard in talent_procs.ts (Entity.castConsumedEmpower). Deliberately excludes
-// the warrior bespoke kinds (battle_trance, sudden_death, revenge_free) and
+// the swordman bespoke kinds (battle_trance, sudden_death, revenge_free) and
 // next_attack_crit: those bill on swings, not casts.
 const EMPOWER_CAST_KINDS: ReadonlySet<string> = new Set([
   'next_cast_free',

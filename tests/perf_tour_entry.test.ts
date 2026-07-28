@@ -15,7 +15,7 @@ function entryDom(): void {
   document.body.innerHTML = `
     <button id="btn-offline"></button>
     <div id="offline-select">
-      <button class="mini-class" data-class="warrior"></button>
+      <button class="mini-class" data-class="swordman"></button>
     </div>
     <input id="char-name">
     <button id="btn-start-offline"></button>
@@ -62,7 +62,7 @@ function fakePage(bootSucceeds = true): { page: object; state: FakePageState } {
 describe('performance tour entry options', () => {
   it('uses a long mobile gate wait and the configured boot timeout only on mobile', () => {
     expect(perfTourEntryOptions({ label: 'mobile', isMobile: true }, 120_000)).toEqual({
-      charClass: 'warrior',
+      charClass: 'swordman',
       charName: 'MobilePerf',
       settleMs: 0,
       dismissMobilePreflight: true,
@@ -70,7 +70,7 @@ describe('performance tour entry options', () => {
       gameBootTimeoutMs: 120_000,
     });
     expect(perfTourEntryOptions({ label: 'desktop', isMobile: false }, 90_000)).toEqual({
-      charClass: 'warrior',
+      charClass: 'swordman',
       charName: 'DesktopPerf',
       settleMs: 0,
       dismissMobilePreflight: false,

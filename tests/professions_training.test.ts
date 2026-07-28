@@ -32,7 +32,7 @@ const ALCH_COMBO_ID = 'recipe_volatile_flux_elixir';
 const FIELD_POS = { x: 0, z: 150 };
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function metaOf(sim: Sim, pid: number) {

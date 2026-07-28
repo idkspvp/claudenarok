@@ -23,7 +23,7 @@ type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 99): AnySim {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, e: AnyEntity, x: number, z: number): void {
@@ -70,7 +70,7 @@ function fireFirstWave(sim: AnySim, boss: AnyEntity, pid: number): AnyEntity[] {
 describe('boss adds anchor where they erupt', () => {
   it('adds hatched from a KITED boss engage instead of leashing home instantly', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Kiter');
+    const pid = sim.addPlayer('swordman', 'Kiter');
     enterDungeon(sim.ctx, 'gravewyrm_sanctum', pid);
     const inst = claimedSanctum(sim, 'normal');
     const boss = velkharIn(sim, inst);
@@ -99,7 +99,7 @@ describe('boss adds anchor where they erupt', () => {
 
   it('adds hatched at the boss home behave as before: engaged on the victim', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Tank');
+    const pid = sim.addPlayer('swordman', 'Tank');
     enterDungeon(sim.ctx, 'gravewyrm_sanctum', pid);
     const boss = velkharIn(sim, claimedSanctum(sim, 'normal'));
     const adds = fireFirstWave(sim, boss, pid);
@@ -115,7 +115,7 @@ describe('boss adds anchor where they erupt', () => {
 describe('heroic boss adds swing at addDamageMultiplier', () => {
   it("Velkhar's heroic bonewalkers use the softer add multiplier, the boss the full one", () => {
     const sim = makeSim(123);
-    const pid = sim.addPlayer('warrior', 'Hero');
+    const pid = sim.addPlayer('swordman', 'Hero');
     sim.setDungeonDifficulty('heroic', pid);
     enterDungeon(sim.ctx, 'gravewyrm_sanctum', pid);
     const boss = velkharIn(sim, claimedSanctum(sim, 'heroic'));
@@ -148,7 +148,7 @@ describe('heroic boss adds swing at addDamageMultiplier', () => {
 
   it('normal-difficulty adds use the normal per-mob retune, not the heroic add multiplier', () => {
     const sim = makeSim(321);
-    const pid = sim.addPlayer('warrior', 'Normie');
+    const pid = sim.addPlayer('swordman', 'Normie');
     enterDungeon(sim.ctx, 'gravewyrm_sanctum', pid);
     const boss = velkharIn(sim, claimedSanctum(sim, 'normal'));
     const adds = fireFirstWave(sim, boss, pid);

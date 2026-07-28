@@ -15,13 +15,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function chronoMage(level = 20) {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -87,14 +88,14 @@ describe('Perfect Moment window', () => {
     sim.tick();
     // First barrage: five missiles, and the stack survives the dump.
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('arcane_missiles');
     const first = collect(sim, 4);
     expect(dartsHits(first)).toBe(AETHER_DARTS_FULL_CHARGE_MISSILES);
     expect(aetherSurgeStacks(p)).toBe(AETHER_SURGE_MAX_CHARGES);
     // Second barrage inside the same window: five more.
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('arcane_missiles');
     const second = collect(sim, 4);
     expect(dartsHits(second)).toBe(AETHER_DARTS_FULL_CHARGE_MISSILES);
@@ -112,12 +113,12 @@ describe('Perfect Moment window', () => {
     expect(aetherSurgeStacks(p)).toBe(0);
     // Rebuild one real charge, then dump: back to the normal consume rule.
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('arcane_surge');
     collect(sim, 3);
     expect(aetherSurgeStacks(p)).toBe(1);
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('arcane_missiles');
     collect(sim, 4);
     expect(aetherSurgeStacks(p)).toBe(0);

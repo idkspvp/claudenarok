@@ -50,13 +50,13 @@ page.on('console', (m) => {
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
 await sleep(800);
 
-// Offline quick-start as warrior.
+// Offline quick-start as swordman.
 await page.evaluate(() => {
   document.querySelector('#btn-offline')?.click();
 });
 await sleep(400);
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click();
   const name = document.querySelector('#char-name');
   if (name) name.value = 'Wallcheck';
   document.querySelector('#btn-start-offline')?.click();

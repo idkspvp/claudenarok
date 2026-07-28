@@ -2,9 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
+import { raisePool } from './helpers/sp';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -19,8 +20,8 @@ function teleport(sim: Sim, pid: number, x: number, z: number) {
 // Start an accepted duel between two adjacent players and run the countdown
 // out so the bout is live.
 function startedDuel(
-  aClass: 'warrior' | 'mage' | 'hunter' | 'warlock' = 'warrior',
-  bClass: 'warrior' | 'mage' | 'hunter' | 'warlock' = 'mage',
+  aClass: 'swordman' | 'mage' | 'archer' | 'mage' = 'swordman',
+  bClass: 'swordman' | 'mage' | 'archer' | 'mage' = 'mage',
 ): { sim: Sim; a: number; b: number } {
   const sim = makeWorld();
   const a = sim.addPlayer(aClass, 'Aleph', { autoEquip: true });
@@ -112,7 +113,7 @@ describe('duel: non-lethal cleanup', () => {
 
 describe('duel: PvP combat affordances', () => {
   it('lets a commanded pet attack an active duel opponent', () => {
-    const { sim, a, b } = startedDuel('hunter', 'mage');
+    const { sim, a, b } = startedDuel('archer', 'mage');
     const pet = givePet(sim, a);
     const eb = sim.entities.get(b)!;
     const startHp = eb.hp;
@@ -126,7 +127,7 @@ describe('duel: PvP combat affordances', () => {
   });
 
   it('does not make a dueling pet hostile to its owner', () => {
-    const { sim, a } = startedDuel('hunter', 'mage');
+    const { sim, a } = startedDuel('archer', 'mage');
     const pet = givePet(sim, a);
     const owner = sim.entities.get(a)!;
 
@@ -135,7 +136,7 @@ describe('duel: PvP combat affordances', () => {
   });
 
   it('treats pet damage as owner PvP damage for non-lethal duel endings', () => {
-    const { sim, a, b } = startedDuel('hunter', 'mage');
+    const { sim, a, b } = startedDuel('archer', 'mage');
     const pet = givePet(sim, a);
     const eb = sim.entities.get(b)!;
 
@@ -146,39 +147,42 @@ describe('duel: PvP combat affordances', () => {
     expect(eb.hp).toBe(1);
   });
 
-  it('lets warlock self and hostile spells work against active duel opponents', () => {
-    const { sim, a, b } = startedDuel('warlock', 'warrior');
-    const warlock = sim.entities.get(a)!;
-    const warrior = sim.entities.get(b)!;
+  it('lets mage self and hostile spells work against active duel opponents', () => {
+    // Life Tap, Curse of Agony, and Drain Life were the Warlock's and went with it
+    // in D1. The claim is that a duel opponent is a legal target for a self cast, a
+    // hostile projectile, and a channel, so the live Mage kit stands in for all
+    // three: Frost Armor on self, Polymorph as the projectile, Arcane Missiles as
+    // the channel.
+    const { sim, a, b } = startedDuel('mage', 'swordman');
+    const mage = sim.entities.get(a)!;
+    const swordman = sim.entities.get(b)!;
     sim.setPlayerLevel(20, a);
     sim.setPlayerLevel(20, b);
-    warlock.resource = Math.floor(warlock.maxResource / 2);
-    warlock.hp = warlock.maxHp - 50;
-    warlock.targetId = b;
-    warlock.facing = Math.atan2(warrior.pos.x - warlock.pos.x, warrior.pos.z - warlock.pos.z);
+    raisePool(mage);
+    mage.targetId = b;
+    mage.facing = Math.atan2(swordman.pos.x - mage.pos.x, swordman.pos.z - mage.pos.z);
 
-    const hpBeforeTap = warlock.hp;
-    const manaBeforeTap = warlock.resource;
-    sim.castAbility('life_tap', a);
-    expect(warlock.hp).toBeLessThan(hpBeforeTap);
-    expect(warlock.resource).toBeGreaterThan(manaBeforeTap);
+    sim.castAbility('frost_armor', a);
+    expect(mage.auras.some((aura) => aura.id === 'frost_armor')).toBe(true);
 
-    warlock.gcdRemaining = 0;
-    warlock.resource = warlock.maxResource;
-    sim.castAbility('curse_of_agony', a);
-    // The curse is a projectile now: it applies when the bolt reaches the warrior
+    mage.gcdRemaining = 0;
+    raisePool(mage);
+    swordman.hp = Math.max(1, swordman.maxHp - 200);
+    sim.castAbility('polymorph', a);
+    // Polymorph is a projectile: it applies when the bolt reaches the swordman
     // (projectile_travel), a few ticks after the cast, so let it land.
-    for (let i = 0; i < 20 && (sim as any).pendingProjectiles.length > 0; i++) sim.tick();
-    expect(warrior.auras.some((aura) => aura.id === 'curse_of_agony')).toBe(true);
+    for (let i = 0; i < 60 && !swordman.auras.some((au) => au.kind === 'polymorph'); i++) {
+      sim.tick();
+    }
+    expect(swordman.auras.some((aura) => aura.kind === 'polymorph')).toBe(true);
 
-    warlock.gcdRemaining = 0;
-    warlock.resource = warlock.maxResource;
-    const warriorHpBeforeDrain = warrior.hp;
-    const warlockHpBeforeDrain = warlock.hp;
-    sim.castAbility('drain_life', a);
-    for (let i = 0; i < 20 * 2; i++) sim.tick();
+    mage.gcdRemaining = 0;
+    raisePool(mage);
+    swordman.auras = swordman.auras.filter((aura) => aura.kind !== 'polymorph');
+    const warriorHpBeforeChannel = swordman.hp;
+    sim.castAbility('arcane_missiles', a);
+    for (let i = 0; i < 20 * 4; i++) sim.tick();
 
-    expect(warrior.hp).toBeLessThan(warriorHpBeforeDrain);
-    expect(warlock.hp).toBeGreaterThan(warlockHpBeforeDrain);
+    expect(swordman.hp).toBeLessThan(warriorHpBeforeChannel);
   });
 });

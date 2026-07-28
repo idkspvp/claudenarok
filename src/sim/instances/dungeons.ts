@@ -871,7 +871,7 @@ export function instanceInfoAt(
 
 // Authoritative: is `pos` physically inside one of the two Nythraxis raid
 // instances (the crypt approach or the boss arena), regardless of raid-GROUP
-// membership. Used to silently gate walk-by autoloot (interaction.ts): a rogue
+// membership. Used to silently gate walk-by autoloot (interaction.ts): a thief
 // looter leaving the raid, or a raid party staging pre-pull in the open world,
 // must not trigger it.
 export function isInRaidInstance(ctx: SimContext, pos: Vec3): boolean {

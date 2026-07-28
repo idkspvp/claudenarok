@@ -29,7 +29,7 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle2' });
 
   // Enter the offline world: open the panel, pick a class, start.
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Adventurer', settleMs: 2500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Adventurer', settleMs: 2500 });
   // Dismiss the mobile preflight gate if present.
   await page.evaluate(() => document.querySelector('#mobile-preflight-continue')?.click());
   await sleep(600);

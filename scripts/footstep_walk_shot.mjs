@@ -1,7 +1,8 @@
 // Visual context for the footstep-audio PR: spawn offline, walk, and screenshot
 // the character mid-stride. (The fix itself is audible; see the spectrograms.)
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -19,7 +20,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Strider');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 

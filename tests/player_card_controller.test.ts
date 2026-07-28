@@ -38,7 +38,7 @@ vi.mock('../src/ui/wallet_balance', () => ({
 
 function world(): IWorld {
   return {
-    cfg: { playerClass: 'warrior' },
+    cfg: { playerClass: 'swordman' },
     player: {
       name: 'Card Tester',
       color: 0x123456,

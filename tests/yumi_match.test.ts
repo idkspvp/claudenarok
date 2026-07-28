@@ -21,7 +21,7 @@ import { groundHeight } from '../src/sim/world';
 import { teleportPoints, YUMI_TELEPORT_MIN_SEP, yumiMazeLayout } from '../src/sim/yumi_maze_layout';
 
 function makeWorld(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -36,7 +36,7 @@ function teleport(sim: Sim, pid: number, x: number, z: number) {
 // Queue six solos for yumi3 and run the countdown out so the bout is live.
 function startYumi3(seed = 42) {
   const sim = makeWorld(seed);
-  const classes = ['warrior', 'mage', 'rogue', 'priest', 'hunter', 'druid'] as const;
+  const classes = ['swordman', 'mage', 'thief', 'acolyte', 'archer', 'acolyte'] as const;
   const pids = classes.map((c, i) => sim.addPlayer(c, `P${i}`));
   pids.forEach((p, i) => {
     teleport(sim, p, i * 4, -40);
@@ -86,7 +86,7 @@ describe('yumi: queue and matchmaking', () => {
   it('seats ten players into a 5v5 and keeps the two yumi queues separate', () => {
     const sim = makeWorld();
     const pids = Array.from({ length: 10 }, (_, i) =>
-      sim.addPlayer(i % 2 === 0 ? 'warrior' : 'priest', `Q${i}`),
+      sim.addPlayer(i % 2 === 0 ? 'swordman' : 'acolyte', `Q${i}`),
     );
     pids.forEach((p, i) => {
       teleport(sim, p, i * 4, -40);
@@ -105,9 +105,9 @@ describe('yumi: queue and matchmaking', () => {
 
   it('queues a premade party as one unit via the leader only', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'A');
+    const a = sim.addPlayer('swordman', 'A');
     const b = sim.addPlayer('mage', 'B');
-    const c = sim.addPlayer('rogue', 'C');
+    const c = sim.addPlayer('thief', 'C');
     [a, b, c].forEach((p, i) => {
       teleport(sim, p, i * 4, -40);
     });
@@ -135,7 +135,7 @@ describe('yumi: queue and matchmaking', () => {
 
   it('rejects a party larger than the team size', () => {
     const sim = makeWorld();
-    const pids = ['warrior', 'mage', 'rogue', 'priest'].map((c, i) =>
+    const pids = ['swordman', 'mage', 'thief', 'acolyte'].map((c, i) =>
       sim.addPlayer(c as any, `B${i}`),
     );
     pids.forEach((p, i) => {
@@ -195,7 +195,7 @@ describe('yumi: hostility matrix', () => {
     expect(friendly(b0, catB)).toBe(true);
     expect(friendly(b0, catA)).toBe(false);
     // an outsider (7th player, not in the match) gets nothing
-    const out = sim.addPlayer('paladin', 'Out');
+    const out = sim.addPlayer('swordman', 'Out');
     teleport(sim, out, 40, -40);
     const outE = sim.entities.get(out)!;
     expect(hostile(outE, catA)).toBe(false);
@@ -209,7 +209,7 @@ describe('yumi: hostility matrix', () => {
     // countdown: the enemy cat is not strikeable yet, but pre-shielding your
     // own already is (the documented asymmetry of the two arms)
     const sim = makeWorld();
-    const classes = ['warrior', 'mage', 'rogue', 'priest', 'hunter', 'druid'] as const;
+    const classes = ['swordman', 'mage', 'thief', 'acolyte', 'archer', 'acolyte'] as const;
     const pids = classes.map((c, i) => sim.addPlayer(c, `G${i}`));
     pids.forEach((p, i) => {
       teleport(sim, p, i * 4, -40);
@@ -481,7 +481,7 @@ describe('yumi: sudden death', () => {
 describe('yumi: win and cleanup', () => {
   it('restores the exact HP, resource, cooldown, and CC DR pools carried into the match', () => {
     const sim = makeWorld();
-    const classes = ['warrior', 'mage', 'rogue', 'priest', 'hunter', 'druid'] as const;
+    const classes = ['swordman', 'mage', 'thief', 'acolyte', 'archer', 'acolyte'] as const;
     const pids = classes.map((cls, i) => sim.addPlayer(cls, `Restore${i}`));
     pids.forEach((pid, i) => {
       teleport(sim, pid, i * 4, -40);

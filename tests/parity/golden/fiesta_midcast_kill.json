@@ -31,8 +31,8 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "2f606dca",
-      "events": "98fec4b7",
+      "state": "52529843",
+      "events": "944df307",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -42,7 +42,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "f19ae1d9",
+      "state": "72989870",
       "events": "2624f545",
       "rng": {
         "draws": 28,
@@ -53,7 +53,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "0b5ccc75",
+      "state": "78797b5a",
       "events": "92dd922d",
       "rng": {
         "draws": 138,
@@ -64,7 +64,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "1a1f3f22",
+      "state": "f5fa0747",
       "events": "547fbe65",
       "rng": {
         "draws": 294,
@@ -75,7 +75,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "43768196",
+      "state": "00891381",
       "events": "b1fb8310",
       "rng": {
         "draws": 300,
@@ -94,7 +94,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 50
@@ -136,13 +136,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -197,13 +191,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 2,
-            "dex": 8,
-            "int": 9,
-            "luk": 1,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -217,7 +205,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageTaken": 50
@@ -256,13 +244,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -276,7 +258,7 @@
             null
           ],
           "bank": {},
-          "cls": "hunter",
+          "cls": "archer",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -317,21 +299,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 7,
-            "dex": 9,
-            "int": 1,
-            "luk": 1,
-            "str": 3,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -346,21 +321,21 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 24,
-          "hit": 26,
-          "hp": 753,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 753,
+          "maxHp": 288,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -383,15 +358,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 350,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -400,24 +375,24 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 23,
-          "hit": 29,
-          "hp": 393,
+          "flee": 21,
+          "hit": 21,
+          "hp": 201,
           "id": 416,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 393,
-          "maxResource": 1363,
+          "maxHp": 201,
+          "maxResource": 133,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -428,7 +403,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1363,
+          "resource": 133,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -436,15 +411,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 14,
+          "spellPower": 2,
           "stats": {
-            "agi": 3,
-            "armor": 119,
-            "dex": 9,
-            "int": 11,
-            "luk": 2,
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
             "str": 1,
-            "vit": 5
+            "vit": 1
           },
           "templateId": "mage",
           "weapon": {
@@ -455,21 +430,21 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "castRemaining": 2.5,
           "castTotal": 2.5,
           "castingAbility": "fireball",
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 29,
-          "hit": 25,
+          "flee": 21,
+          "hit": 21,
           "hp": 4950,
           "id": 417,
           "inCombat": true,
@@ -505,15 +480,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 214,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -523,25 +498,25 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 28,
-          "hit": 30,
-          "hp": 701,
+          "flee": 21,
+          "hit": 21,
+          "hp": 246,
           "id": 418,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 701,
-          "maxResource": 597,
+          "maxHp": 246,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -552,8 +527,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 11,
-          "resource": 597,
+          "rangedPower": 1,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -561,17 +536,17 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 1,
           "stats": {
-            "agi": 8,
-            "armor": 219,
-            "dex": 10,
-            "int": 2,
-            "luk": 2,
-            "str": 4,
-            "vit": 4
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "hunter",
+          "templateId": "archer",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -584,7 +559,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "e333c8f1",
+      "state": "1064037a",
       "events": "ffc08c87",
       "rng": {
         "draws": 300,
@@ -603,7 +578,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 100
@@ -645,13 +620,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -706,13 +675,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 2,
-            "dex": 8,
-            "int": 9,
-            "luk": 1,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -726,7 +689,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageTaken": 100
@@ -765,13 +728,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -785,7 +742,7 @@
             null
           ],
           "bank": {},
-          "cls": "hunter",
+          "cls": "archer",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -826,21 +783,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 7,
-            "dex": 9,
-            "int": 1,
-            "luk": 1,
-            "str": 3,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -855,21 +805,21 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 24,
-          "hit": 26,
-          "hp": 753,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 753,
+          "maxHp": 288,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -892,15 +842,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 350,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -909,24 +859,24 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 23,
-          "hit": 29,
-          "hp": 393,
+          "flee": 21,
+          "hit": 21,
+          "hp": 201,
           "id": 416,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 393,
-          "maxResource": 1363,
+          "maxHp": 201,
+          "maxResource": 133,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -937,7 +887,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1363,
+          "resource": 133,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -945,15 +895,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 14,
+          "spellPower": 2,
           "stats": {
-            "agi": 3,
-            "armor": 119,
-            "dex": 9,
-            "int": 11,
-            "luk": 2,
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
             "str": 1,
-            "vit": 5
+            "vit": 1
           },
           "templateId": "mage",
           "weapon": {
@@ -964,19 +914,19 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "castTotal": 2.5,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 29,
-          "hit": 25,
+          "flee": 21,
+          "hit": 21,
           "hp": 4900,
           "id": 417,
           "inCombat": true,
@@ -1012,15 +962,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 214,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -1030,25 +980,25 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 28,
-          "hit": 30,
-          "hp": 701,
+          "flee": 21,
+          "hit": 21,
+          "hp": 246,
           "id": 418,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 701,
-          "maxResource": 597,
+          "maxHp": 246,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1059,8 +1009,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 11,
-          "resource": 597,
+          "rangedPower": 1,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1068,17 +1018,17 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 1,
           "stats": {
-            "agi": 8,
-            "armor": 219,
-            "dex": 10,
-            "int": 2,
-            "luk": 2,
-            "str": 4,
-            "vit": 4
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "hunter",
+          "templateId": "archer",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1091,7 +1041,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "4b55d3b0",
+      "state": "b59d8e2f",
       "events": "f677c602",
       "rng": {
         "draws": 300,
@@ -1110,7 +1060,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 100,
@@ -1155,13 +1105,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1216,13 +1160,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 2,
-            "dex": 8,
-            "int": 9,
-            "luk": 1,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1236,7 +1174,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageTaken": 100,
@@ -1276,13 +1214,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1296,7 +1228,7 @@
             null
           ],
           "bank": {},
-          "cls": "hunter",
+          "cls": "archer",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -1337,21 +1269,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 7,
-            "dex": 9,
-            "int": 1,
-            "luk": 1,
-            "str": 3,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1366,21 +1291,21 @@
           "blockChance": 0.05,
           "blockValue": 6,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 24,
-          "hit": 26,
-          "hp": 753,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 753,
+          "maxHp": 288,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1403,15 +1328,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 350,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1420,24 +1345,24 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 23,
-          "hit": 29,
-          "hp": 393,
+          "flee": 21,
+          "hit": 21,
+          "hp": 201,
           "id": 416,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 393,
-          "maxResource": 1363,
+          "maxHp": 201,
+          "maxResource": 133,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1448,7 +1373,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1363,
+          "resource": 133,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1456,15 +1381,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 14,
+          "spellPower": 2,
           "stats": {
-            "agi": 3,
-            "armor": 119,
-            "dex": 9,
-            "int": 11,
-            "luk": 2,
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
             "str": 1,
-            "vit": 5
+            "vit": 1
           },
           "templateId": "mage",
           "weapon": {
@@ -1475,20 +1400,20 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "castTotal": 2,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 29,
-          "hit": 25,
+          "flee": 21,
+          "hit": 21,
           "id": 417,
           "inCombat": true,
           "kind": "player",
@@ -1523,15 +1448,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 214,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -1541,25 +1466,25 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 28,
-          "hit": 30,
-          "hp": 701,
+          "flee": 21,
+          "hit": 21,
+          "hp": 246,
           "id": 418,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 701,
-          "maxResource": 597,
+          "maxHp": 246,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1570,8 +1495,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 11,
-          "resource": 597,
+          "rangedPower": 1,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1579,17 +1504,17 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 1,
           "stats": {
-            "agi": 8,
-            "armor": 219,
-            "dex": 10,
-            "int": 2,
-            "luk": 2,
-            "str": 4,
-            "vit": 4
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "hunter",
+          "templateId": "archer",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1602,7 +1527,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "f1f68d22",
+      "state": "ddc5abef",
       "events": "741638a5",
       "rng": {
         "draws": 429,
@@ -1613,7 +1538,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 419,
-      "state": "31945653",
+      "state": "76996966",
       "events": "741638a5",
       "rng": {
         "draws": 524,
@@ -1632,7 +1557,7 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 100,
@@ -1677,13 +1602,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1738,13 +1657,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 2,
-            "dex": 8,
-            "int": 9,
-            "luk": 1,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1758,7 +1671,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
             "damageTaken": 100,
@@ -1798,13 +1711,7 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -1818,7 +1725,7 @@
             null
           ],
           "bank": {},
-          "cls": "hunter",
+          "cls": "archer",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -1859,21 +1766,14 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 7,
-            "dex": 9,
-            "int": 1,
-            "luk": 1,
-            "str": 3,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -1889,21 +1789,21 @@
           "blockValue": 6,
           "combatTimer": 2.05,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 106.1,
-          "flee": 24,
-          "hit": 26,
-          "hp": 753,
+          "flee": 21,
+          "hit": 21,
+          "hp": 288,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 753,
+          "maxHp": 288,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1926,15 +1826,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 350,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -1943,24 +1843,24 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 1,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 106.1,
-          "flee": 23,
-          "hit": 29,
-          "hp": 393,
+          "flee": 21,
+          "hit": 21,
+          "hp": 201,
           "id": 416,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 393,
-          "maxResource": 1363,
+          "maxHp": 201,
+          "maxResource": 133,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1971,7 +1871,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 1363,
+          "resource": 133,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1979,15 +1879,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 14,
+          "spellPower": 2,
           "stats": {
-            "agi": 3,
-            "armor": 119,
-            "dex": 9,
-            "int": 11,
-            "luk": 2,
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
             "str": 1,
-            "vit": 5
+            "vit": 1
           },
           "templateId": "mage",
           "weapon": {
@@ -1998,21 +1898,21 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "castTotal": 2,
           "combatTimer": 2.05,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 106.1,
-          "flee": 29,
-          "hit": 25,
+          "flee": 21,
+          "hit": 21,
           "id": 417,
           "inCombat": true,
           "kind": "player",
@@ -2047,15 +1947,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 214,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -2065,25 +1965,25 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 1,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 106.1,
-          "flee": 28,
-          "hit": 30,
-          "hp": 701,
+          "flee": 21,
+          "hit": 21,
+          "hp": 246,
           "id": 418,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
-          "maxHp": 701,
-          "maxResource": 597,
+          "maxHp": 246,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2094,8 +1994,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 11,
-          "resource": 597,
+          "rangedPower": 1,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2103,17 +2003,17 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 1,
           "stats": {
-            "agi": 8,
-            "armor": 219,
-            "dex": 10,
-            "int": 2,
-            "luk": 2,
-            "str": 4,
-            "vit": 4
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "hunter",
+          "templateId": "archer",
           "weapon": {
             "max": 5,
             "min": 2,

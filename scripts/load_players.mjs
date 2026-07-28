@@ -49,11 +49,11 @@ const RUN_ID =
 const CLEANUP = process.env.CLEANUP === '1';
 
 const CLASSES = [
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'shaman',
   'mage',
   'warlock',
@@ -191,7 +191,7 @@ function isAliveMob(entity) {
 }
 
 function classRange(cls) {
-  return cls === 'warrior' || cls === 'paladin' || cls === 'rogue' ? 4 : 26;
+  return cls === 'swordman' || cls === 'paladin' || cls === 'thief' ? 4 : 26;
 }
 
 function shouldCast(bot, ability, cost, cooldownMs) {
@@ -206,17 +206,17 @@ function shouldCast(bot, ability, cost, cooldownMs) {
 
 function castForClass(bot) {
   switch (bot.cls) {
-    case 'warrior':
+    case 'swordman':
       return shouldCast(bot, 'heroic_strike', 15, 1_000);
     case 'paladin':
       if (!(bot.self?.auras ?? []).some((a) => a.kind === 'imbue'))
         return shouldCast(bot, 'seal_of_righteousness', 0, 2_000);
       return shouldCast(bot, 'judgement', 30, 1_000);
-    case 'hunter':
+    case 'archer':
       return shouldCast(bot, 'arcane_shot', 25, 1_200);
-    case 'rogue':
+    case 'thief':
       return shouldCast(bot, 'sinister_strike', 45, 1_000);
-    case 'priest':
+    case 'acolyte':
       return shouldCast(bot, 'smite', 30, 1_500);
     case 'shaman':
       return shouldCast(bot, 'lightning_bolt', 30, 1_500);

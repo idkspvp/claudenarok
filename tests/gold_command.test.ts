@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { Sim, formatMoney } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import { formatMoney, Sim } from '../src/sim/sim';
+import type { SimEvent } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorTextFor(events: SimEvent[], pid: number): string | undefined {
@@ -16,7 +16,7 @@ function errorTextFor(events: SimEvent[], pid: number): string | undefined {
 describe('/gold command', () => {
   it('reports your purse with gold/silver/copper formatting', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(a)!.copper = 123405; // 12g 34s 5c
     sim.tick();
 
@@ -26,7 +26,7 @@ describe('/gold command', () => {
 
   it('shows flavor text for an empty purse instead of "0c"', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(a)!.copper = 0;
     sim.tick();
 
@@ -36,7 +36,7 @@ describe('/gold command', () => {
 
   it('accepts the /money and /coins aliases', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(a)!.copper = 250;
     sim.tick();
 
@@ -48,7 +48,7 @@ describe('/gold command', () => {
 
   it('is a self-only reply that does not emit a chat event', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.players.get(a)!.copper = 99;
     sim.tick();
 

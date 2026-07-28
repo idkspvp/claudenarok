@@ -50,7 +50,7 @@ await page.waitForSelector('#btn-offline', { timeout: 15000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 250));
 await page.type('#char-name', 'Adventurer');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(
   () => window.__game && window.__game.hud && window.__game.hud.optionsHooks,

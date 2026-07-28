@@ -10,7 +10,7 @@ function entity(sim: Sim, id: number) {
 }
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -36,7 +36,7 @@ function errors(events: SimEvent[]): string[] {
 describe('/follow', () => {
   it('walks the follower toward the leader and stops at the trail distance', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -1000);
     teleport(sim, b, 20, -1000);
@@ -55,7 +55,7 @@ describe('/follow', () => {
 
   it('keeps trailing when the leader moves away', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -1000);
     teleport(sim, b, 6, -1000);
@@ -71,7 +71,7 @@ describe('/follow', () => {
 
   it('breaks follow when the follower issues manual movement', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 10, -40);
@@ -90,7 +90,7 @@ describe('/follow', () => {
 
   it('ends follow when the leader goes out of range', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 5, -40);
@@ -106,7 +106,7 @@ describe('/follow', () => {
 
   it('rejects following yourself and unknown players', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/follow Aleph', a);
     expect(errors(sim.tick()).some((t) => /follow yourself/i.test(t))).toBe(true);

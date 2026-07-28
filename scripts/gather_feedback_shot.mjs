@@ -24,10 +24,10 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Gatherer', settleMs: 3000 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Gatherer', settleMs: 3000 });
 await page.evaluate(() => document.querySelector('#gpu-notice')?.remove());
 
-// The ore node sits in a Deeprock Digger camp that shreds a level 1 warrior
+// The ore node sits in a Deeprock Digger camp that shreds a level 1 swordman
 // before the screenshot lands; a few levels keep the shot corpse-free.
 await page.evaluate(() => {
   window.__game.sim.chat('/dev level 12');

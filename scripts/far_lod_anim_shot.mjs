@@ -218,7 +218,7 @@ async function shoot(page, name, clip) {
 
 async function run(page, name, width, height, opts = {}) {
   await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Ranger', settleMs: 3500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Ranger', settleMs: 3500 });
   await page.evaluate(
     `window.__lodKeepHud = ${!!opts.keepHud}; window.__lodNoTelephoto = ${!!opts.noTelephoto};`,
   );

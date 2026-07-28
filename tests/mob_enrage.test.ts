@@ -12,7 +12,7 @@ type TestSim = Sim & {
 };
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 function anyMob(sim: Sim): Entity {

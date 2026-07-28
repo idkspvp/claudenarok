@@ -8,7 +8,7 @@ import { Sim } from '../src/sim/sim';
 import { dist2d, type SimEvent } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-const makeSim = () => new Sim({ seed: 42, playerClass: 'rogue', autoEquip: true });
+const makeSim = () => new Sim({ seed: 42, playerClass: 'thief', autoEquip: true });
 
 function nearestMobs(sim: Sim, templateId: string, count: number) {
   const p = sim.player;

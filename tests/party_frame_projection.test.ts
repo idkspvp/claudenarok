@@ -142,7 +142,7 @@ describe('PartyFrameProjectionCache', () => {
         member: {
           pid,
           name: `Player ${pid}`,
-          cls: 'warrior' as const,
+          cls: 'swordman' as const,
           level: 60,
           hp: 1_000,
           mhp: 1_000,

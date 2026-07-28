@@ -77,7 +77,7 @@ class Lab {
     readonly frameMs = FRAME_MS,
     opts: { start?: { x: number; z: number }; facing?: number } = {},
   ) {
-    this.srv = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+    this.srv = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
     this.srv.setPlayerLevel(60);
     const start = opts.start ?? { x: 0, z: -80 };
     teleport(this.srv, start.x, start.z);

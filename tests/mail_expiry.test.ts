@@ -12,7 +12,7 @@ import { MAIL_ATTACHMENT_EXPIRY_SECONDS, MAIL_DELIVERY_SECONDS } from '../src/si
 import { Sim } from '../src/sim/sim';
 import { DT, type SimEvent } from '../src/sim/types';
 
-const makeWorld = () => new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+const makeWorld = () => new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 
 function moveToMailbox(sim: Sim, pid: number): void {
   const box = sim.entities.get(sim.postOffice.mailboxIds[0]);
@@ -36,7 +36,7 @@ const bookOf = (sim: Sim): any[] => (sim.postOffice as any).mail;
 // raw letter so tests can force its clock without ticking 30 sim-days.
 function setupParcel(copper = 500) {
   const sim = makeWorld();
-  const alice = sim.addPlayer('warrior', 'Alice');
+  const alice = sim.addPlayer('swordman', 'Alice');
   const bob = sim.addPlayer('mage', 'Bob');
   const aliceMeta = sim.meta(alice);
   if (!aliceMeta) throw new Error('no meta');
@@ -180,7 +180,7 @@ describe('the return flight', () => {
 describe('the system and npc exemption', () => {
   it('gives authored parcels no clock at all through the real send paths', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Keeper');
+    const pid = sim.addPlayer('swordman', 'Keeper');
     const welcome = bookOf(sim).find((m) => m.letterId === WELCOME_LETTER.letterId);
     expect(welcome.kind).toBe('system');
     expect(welcome.copper).toBeGreaterThan(0);
@@ -203,7 +203,7 @@ describe('the system and npc exemption', () => {
 
   it('the sweep kind filter leaves a non-player parcel alone even past a forced expiry', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Keeper');
+    const pid = sim.addPlayer('swordman', 'Keeper');
     sim.postOffice.mailHeroicMarks(pid, HEROIC_MARK_ITEM_ID, 3);
     tickFor(sim, 1);
     const marks = bookOf(sim).find((m) => m.letterId === HEROIC_MARK_LETTER.letterId);

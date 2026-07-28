@@ -14,7 +14,7 @@ import { BROWSER_PATH } from './browser_path.mjs';
 
 const BASE_URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const GFX = process.env.PERF_GFX ?? 'ultra';
-const KLASS = process.env.PERF_CLASS ?? 'warrior';
+const KLASS = process.env.PERF_CLASS ?? 'swordman';
 const WALK_MS = Number(process.env.WALK_MS ?? 14000);
 const HEADLESS = process.env.HEADED === '1' ? false : 'new';
 const OUT =

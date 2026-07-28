@@ -12,15 +12,11 @@ import { CLASSES } from '../src/sim/content/classes';
 import type { PlayerClass } from '../src/sim/types';
 
 export const PLAYER_CLASSES: readonly PlayerClass[] = [
-  'warrior',
-  'paladin',
-  'hunter',
-  'rogue',
-  'priest',
-  'shaman',
+  'swordman',
+  'archer',
+  'thief',
+  'acolyte',
   'mage',
-  'warlock',
-  'druid',
 ];
 
 export const MAX_SKIN = 7;

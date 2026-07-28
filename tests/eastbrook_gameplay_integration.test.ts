@@ -368,12 +368,12 @@ describe('Eastbrook authored gameplay data integration', () => {
     setActiveWorldContent(worldWithoutFury);
     const withoutFury = new Sim({
       seed: SEED,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       world: worldWithoutFury,
     });
     setActiveWorldContent(BUILTIN_WORLD);
-    const withFury = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const withFury = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
 
     expect(withoutFury.entities.has(FURY_ENTITY_ID)).toBe(false);
     const fury = withFury.entities.get(FURY_ENTITY_ID);
@@ -461,7 +461,7 @@ describe('Eastbrook authored gameplay data integration', () => {
 
 describe('Eastbrook runtime collision, spawn, and services', () => {
   it('spawns every moved NPC exactly at its authored point and facing without safe-position drift', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
     for (const placement of EASTBROOK_LAYOUT.services.npcs) {
       const entity = npcEntity(sim, placement.id);
       expect({ x: entity.pos.x, z: entity.pos.z }, placement.id).toEqual(placement.position);
@@ -643,8 +643,8 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
   });
 
   it('summons a passive pet and follows its owner through every gate in both directions', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warlock', noPlayer: true });
-    const pid = sim.addPlayer('warlock', 'Gatekeeper');
+    const sim = new Sim({ seed: SEED, playerClass: 'mage', noPlayer: true });
+    const pid = sim.addPlayer('mage', 'Gatekeeper');
     const owner = sim.entities.get(pid);
     if (!owner) throw new Error('missing pet owner');
     summonPet(sim.ctx, owner, 'gloomshade');
@@ -703,8 +703,8 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
   });
 
   it('keeps targetless Saul interaction outside mailbox reach at his measured face point', () => {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Chronicler Visitor');
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Chronicler Visitor');
     const saul = npcEntity(sim, 'chronicler_saul');
     const mailbox = sim.entities.get(sim.postOffice.mailboxIds[0]);
     if (!mailbox) throw new Error('missing Eastbrook mailbox');
@@ -740,12 +740,12 @@ describe('Eastbrook runtime collision, spawn, and services', () => {
     setActiveWorldContent(legacyWorld);
     const legacy = new Sim({
       seed: stabilitySeed,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       world: legacyWorld,
     });
     setActiveWorldContent(BUILTIN_WORLD);
-    const rebuilt = new Sim({ seed: stabilitySeed, playerClass: 'warrior', noPlayer: true });
+    const rebuilt = new Sim({ seed: stabilitySeed, playerClass: 'swordman', noPlayer: true });
 
     const stableProjection = (sim: Sim) =>
       [...sim.entities.values()]

@@ -71,7 +71,7 @@ function moveFarFromBankers(sim: Sim, pid = sim.playerId): void {
 // The command-suite assertions never read position, so the move is invisible to them; the
 // far-refusal cases below move away explicitly.
 const makeSim = (seed = 42) => {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: false });
   moveToBanker(sim);
   return sim;
 };
@@ -79,7 +79,7 @@ const meta = (sim: Sim, pid = sim.playerId) => sim.meta(pid)!;
 
 // A multiplayer world (no default player) for the banker interaction
 // tests, mirroring the tests/mail.test.ts makeWorld idiom.
-const makeBankWorld = (seed = 42) => new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+const makeBankWorld = (seed = 42) => new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 
 // Distinct gear ids (stackSize 1) for filling containers with non-mergeable entries.
 const GEAR_IDS = Object.values(ITEMS)
@@ -675,7 +675,7 @@ describe('conservation seed sweeps', () => {
 describe('determinism', () => {
   it('the same fixed bank-op script over 300 ticks yields identical state + events', () => {
     function run() {
-      const sim = new Sim({ seed: 123, playerClass: 'warrior', autoEquip: false });
+      const sim = new Sim({ seed: 123, playerClass: 'swordman', autoEquip: false });
       moveToBanker(sim); // proximity gate: the scripted bank ops need a banker in reach
       const m = sim.meta(sim.playerId)!;
       m.copper = LADDER_TOTAL;
@@ -724,8 +724,8 @@ describe('persistence and back-compat', () => {
     m.copper = 4242;
 
     const s1 = sim.serializeCharacter(sim.playerId)!;
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Saver', { state: s1 });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid2 = sim2.addPlayer('swordman', 'Saver', { state: s1 });
     const s2 = sim2.serializeCharacter(pid2)!;
     // The Book of Deeds legitimately enriches a save across a load: joining
     // seeds the discovery ledger from held items (the hand-stuffed bank rows
@@ -749,8 +749,8 @@ describe('persistence and back-compat', () => {
       { itemId: 'worn_sword', count: 1, instance: { signer: 'Cyd', charges: { z: 2 } } },
     ];
     const s1 = sim.serializeCharacter(sim.playerId)!;
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Saver', { state: s1 });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid2 = sim2.addPlayer('swordman', 'Saver', { state: s1 });
     const m2 = meta(sim2, pid2);
     // Mutate the SOURCE sim's banked payload; the loaded copy must be untouched.
     m.bank.inventory[0].instance!.charges!.z = 999;
@@ -800,10 +800,10 @@ describe('persistence and back-compat', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     const legacy = JSON.parse(JSON.stringify(state)) as Record<string, unknown>;
     delete legacy.bank;
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
     let pid = -1;
     expect(() => {
-      pid = sim2.addPlayer('warrior', 'Legacy', { state: legacy as never });
+      pid = sim2.addPlayer('swordman', 'Legacy', { state: legacy as never });
     }).not.toThrow();
     const m2 = meta(sim2, pid);
     expect(m2.bank).toEqual({ inventory: [], purchasedSlots: 0, bonusSlots: 0 });
@@ -819,8 +819,8 @@ describe('persistence and back-compat', () => {
     const sim = makeSim();
     const state = sim.serializeCharacter(sim.playerId)! as { bank?: unknown };
     state.bank = { inventory: gearSlots(30), purchasedSlots: 0, bonusSlots: 0 };
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Hoarder', { state: state as never });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Hoarder', { state: state as never });
     const m2 = meta(sim2, pid);
     moveToBanker(sim2, pid); // proximity gate: the deposit/withdraw below need a banker in reach
     expect(m2.bank.inventory).toHaveLength(30); // nothing dropped
@@ -860,8 +860,8 @@ describe('persistence and back-compat', () => {
       purchasedSlots: 7, // floored to the 6-grid
       bonusSlots: -2, // clamped to 0
     };
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid = sim2.addPlayer('warrior', 'Tampered', { state: state as never });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid = sim2.addPlayer('swordman', 'Tampered', { state: state as never });
     expect(meta(sim2, pid).bank).toEqual({
       inventory: [
         { itemId: 'worn_sword', count: 1, instance: { signer: 'Ana' } },
@@ -1002,7 +1002,7 @@ describe('interacting with a banker opens the bank', () => {
   for (const templateId of BANKERS) {
     it(`a targeted interact at ${templateId} emits exactly one bank event for the caller`, () => {
       const sim = makeBankWorld();
-      const pid = sim.addPlayer('warrior', 'Vaulter');
+      const pid = sim.addPlayer('swordman', 'Vaulter');
       const banker = moveToBanker(sim, pid, templateId);
       const p = sim.entities.get(pid)!;
       p.targetId = banker.id;
@@ -1015,7 +1015,7 @@ describe('interacting with a banker opens the bank', () => {
 
     it(`an untargeted proximity interact at ${templateId} emits exactly one bank event`, () => {
       const sim = makeBankWorld();
-      const pid = sim.addPlayer('warrior', 'Vaulter');
+      const pid = sim.addPlayer('swordman', 'Vaulter');
       moveToBanker(sim, pid, templateId);
       const p = sim.entities.get(pid)!;
       p.targetId = null; // force the proximity-scan arm, not the targeted arm
@@ -1029,8 +1029,8 @@ describe('interacting with a banker opens the bank', () => {
 
   it('carries the interacting player, not a bystander standing at the same banker', () => {
     const sim = makeBankWorld();
-    const first = sim.addPlayer('warrior', 'First');
-    const second = sim.addPlayer('warrior', 'Second');
+    const first = sim.addPlayer('swordman', 'First');
+    const second = sim.addPlayer('swordman', 'Second');
     const banker = moveToBanker(sim, second, 'bursar_fernando');
     moveToBanker(sim, first, 'bursar_fernando'); // the bystander also stands at the banker
     const p = sim.entities.get(second)!;
@@ -1044,7 +1044,7 @@ describe('interacting with a banker opens the bank', () => {
 
   it('interacting away from every banker emits no bank event', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Wanderer');
+    const pid = sim.addPlayer('swordman', 'Wanderer');
     moveFarFromBankers(sim, pid);
     const p = sim.entities.get(pid)!;
     p.targetId = null;
@@ -1055,7 +1055,7 @@ describe('interacting with a banker opens the bank', () => {
 
   it('a targeted interact at a banker from out of range emits no bank event', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Wanderer');
+    const pid = sim.addPlayer('swordman', 'Wanderer');
     const banker = bankerEntity(sim);
     moveFarFromBankers(sim, pid);
     const p = sim.entities.get(pid)!;
@@ -1071,7 +1071,7 @@ describe('interacting with a banker opens the bank', () => {
   // proves the intercept returned before the quest-talk dispatch.
   it('a banker interact never falls through to quest talk (either arm)', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Vaulter');
+    const pid = sim.addPlayer('swordman', 'Vaulter');
     const banker = moveToBanker(sim, pid, 'bursar_fernando');
     let talked = 0;
     (sim as unknown as { talkToNpc: () => void }).talkToNpc = () => {
@@ -1096,7 +1096,7 @@ describe('bank commands require a nearby banker', () => {
 
   it('deposit is refused far from a banker (moves/charges nothing), then succeeds in reach', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Depositor');
+    const pid = sim.addPlayer('swordman', 'Depositor');
     const m = sim.meta(pid)!;
     sim.addItem('wolf_fang', 5, pid);
     const idx = () => m.inventory.findIndex((s) => s.itemId === 'wolf_fang');
@@ -1120,7 +1120,7 @@ describe('bank commands require a nearby banker', () => {
 
   it('withdraw is refused far from a banker (moves/charges nothing), then succeeds in reach', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Withdrawer');
+    const pid = sim.addPlayer('swordman', 'Withdrawer');
     const m = sim.meta(pid)!;
     m.bank.inventory = [{ itemId: 'wolf_fang', count: 7 }];
 
@@ -1143,7 +1143,7 @@ describe('bank commands require a nearby banker', () => {
 
   it('buying slots is refused far from a banker (charges nothing), then succeeds in reach', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Buyer');
+    const pid = sim.addPlayer('swordman', 'Buyer');
     const m = sim.meta(pid)!;
     m.copper = 500; // exactly the first tier price
 
@@ -1166,7 +1166,7 @@ describe('bank commands require a nearby banker', () => {
   for (const templateId of BANKERS) {
     it(`deposit is gated by proximity at ${templateId}`, () => {
       const sim = makeBankWorld();
-      const pid = sim.addPlayer('warrior', 'Traveler');
+      const pid = sim.addPlayer('swordman', 'Traveler');
       const m = sim.meta(pid)!;
       sim.addItem('wolf_fang', 3, pid);
       const idx = () => m.inventory.findIndex((s) => s.itemId === 'wolf_fang');
@@ -1191,7 +1191,7 @@ describe('bank commands require a nearby banker', () => {
   // reach inclusive, just past it is refused.
   it('the reach boundary is 7 yards inclusive: 7.0 succeeds, 7.05 is refused', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Surveyor');
+    const pid = sim.addPlayer('swordman', 'Surveyor');
     const m = sim.meta(pid)!;
     sim.addItem('wolf_fang', 2, pid);
     const idx = () => m.inventory.findIndex((s) => s.itemId === 'wolf_fang');
@@ -1302,7 +1302,7 @@ describe('server-stamped bank bonus', () => {
 
   it('stamps a brand-new (stateless) character: first-ever join already gets its bonus', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Fresh', {
+    const pid = sim.addPlayer('swordman', 'Fresh', {
       bankBonus: { bonusSlots: 10, sources: SOURCES },
     });
     const m = meta(sim, pid);
@@ -1319,15 +1319,15 @@ describe('server-stamped bank bonus', () => {
     meta(sim).bank.bonusSlots = 6;
     const saved = sim.serializeCharacter(sim.playerId)!;
 
-    const up = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const upPid = up.addPlayer('warrior', 'Linked', {
+    const up = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const upPid = up.addPlayer('swordman', 'Linked', {
       state: saved,
       bankBonus: { bonusSlots: 14, sources: SOURCES },
     });
     expect(meta(up, upPid).bank.bonusSlots).toBe(14);
 
-    const down = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const downPid = down.addPlayer('warrior', 'Unlinked', {
+    const down = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const downPid = down.addPlayer('swordman', 'Unlinked', {
       state: saved,
       bankBonus: { bonusSlots: 2, sources: [] },
     });
@@ -1336,7 +1336,7 @@ describe('server-stamped bank bonus', () => {
 
   it('the stamp itself is clamped to the registry ceiling', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Greedy', {
+    const pid = sim.addPlayer('swordman', 'Greedy', {
       bankBonus: { bonusSlots: 40, sources: [] },
     });
     expect(meta(sim, pid).bank.bonusSlots).toBe(BANK_MAX_BONUS_SLOTS);
@@ -1346,8 +1346,8 @@ describe('server-stamped bank bonus', () => {
     const sim = makeSim();
     meta(sim).bank.bonusSlots = 5;
     const saved = sim.serializeCharacter(sim.playerId)!;
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Offline', { state: saved });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid2 = sim2.addPlayer('swordman', 'Offline', { state: saved });
     expect(meta(sim2, pid2).bank.bonusSlots).toBe(5);
     expect(meta(sim2, pid2).bankBonusSources).toEqual([]);
   });
@@ -1356,8 +1356,8 @@ describe('server-stamped bank bonus', () => {
     const sim = makeSim();
     const saved = sim.serializeCharacter(sim.playerId)!;
     delete (saved as { bank?: unknown }).bank; // a save from before the bank existed
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Ancient', {
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid2 = sim2.addPlayer('swordman', 'Ancient', {
       state: saved,
       bankBonus: { bonusSlots: 4, sources: SOURCES.slice(0, 2) },
     });
@@ -1376,8 +1376,8 @@ describe('server-stamped bank bonus', () => {
 
     // Rejoin after every account fact was unlinked: the stamp drops to 0, so the
     // 30 banked stacks now sit over the 24-slot capacity. Tolerated, never trimmed.
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const pid2 = sim2.addPlayer('warrior', 'Shrunk', {
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const pid2 = sim2.addPlayer('swordman', 'Shrunk', {
       state: saved,
       bankBonus: { bonusSlots: 0, sources: [] },
     });
@@ -1401,7 +1401,7 @@ describe('server-stamped bank bonus', () => {
 
   it('bankInfoFor serves the stamped breakdown as boundary clones', () => {
     const sim = makeBankWorld();
-    const pid = sim.addPlayer('warrior', 'Reader', {
+    const pid = sim.addPlayer('swordman', 'Reader', {
       bankBonus: { bonusSlots: 10, sources: SOURCES },
     });
     moveToBanker(sim, pid);

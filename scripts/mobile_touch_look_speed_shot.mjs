@@ -38,7 +38,7 @@ page.on('console', (m) => {
 
 await page.goto(URL, { waitUntil: 'networkidle2', timeout: 30000 });
 await sleep(500);
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thumbwar', settleMs: 6000 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thumbwar', settleMs: 6000 });
 
 // Open the Esc options menu and jump straight to the Graphics view.
 await page.evaluate(() => {

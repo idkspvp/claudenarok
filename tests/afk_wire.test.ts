@@ -32,7 +32,7 @@ function joinAt(server: any, id: number, name: string, x: number, z: number) {
       if (m.t === 'snap') frames.push(m);
     },
   };
-  const session = server.join(ws, id, id, name, 'warrior', null);
+  const session = server.join(ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   const e = server.sim.entities.get(session.pid);

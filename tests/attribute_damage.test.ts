@@ -73,7 +73,7 @@ describe('the chart reaches a real swing', () => {
     size?: Entity['size'];
     weapon?: { weaponType?: 'dagger' | 'spear'; element?: 'fire' | 'water' };
   }): number {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' });
     const p = sim.player;
     p.hp = p.maxHp = 100000;
     const target = createMob((sim as any).nextId++, MOBS.forest_wolf, 5, { ...p.pos });
@@ -113,7 +113,7 @@ describe('the chart reaches a real swing', () => {
   });
 
   it('gives a player the demi-human, neutral, medium classification', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'rogue' });
+    const sim = new Sim({ seed: 1, playerClass: 'thief' });
     expect(sim.player.race).toBe('demihuman');
     expect(sim.player.element).toBe('neutral');
     expect(sim.player.size).toBe('medium');

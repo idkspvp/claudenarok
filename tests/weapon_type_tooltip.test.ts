@@ -17,7 +17,7 @@ interface TooltipHarness {
   itemTooltip(item: ItemDef, compare?: boolean): string;
 }
 
-function harness(playerClass = 'rogue'): TooltipHarness {
+function harness(playerClass = 'thief'): TooltipHarness {
   const hud = Object.create(Hud.prototype) as unknown as TooltipHarness;
   hud.sim = { player: { level: 80 }, cfg: { playerClass }, equipment: {} };
   return hud;

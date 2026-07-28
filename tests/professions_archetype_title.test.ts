@@ -15,7 +15,7 @@ import {
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 describe('getArchetypeTitle (#1130, pair-named)', () => {

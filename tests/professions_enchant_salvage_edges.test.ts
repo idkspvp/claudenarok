@@ -34,7 +34,7 @@ afterAll(() => {
 });
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function countDraws<T>(sim: Sim, fn: () => T): { result: T; draws: number } {
@@ -54,9 +54,9 @@ function slotFor(sim: Sim, pid: number, itemId: string) {
 }
 
 function makeTradeSim(seed = 42) {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: false, noPlayer: true });
-  const a = sim.addPlayer('warrior', 'Ayla');
-  const b = sim.addPlayer('warrior', 'Borin');
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: false, noPlayer: true });
+  const a = sim.addPlayer('swordman', 'Ayla');
+  const b = sim.addPlayer('swordman', 'Borin');
   const ea = sim.ctx.entities.get(a)!;
   const eb = sim.ctx.entities.get(b)!;
   eb.pos.x = ea.pos.x + 2;

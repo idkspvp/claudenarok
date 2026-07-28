@@ -25,6 +25,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import type { Aura, Entity } from '../src/sim/types';
 import { type AuraInput, type AurasDeps, createAurasView } from '../src/ui/auras_view';
+import { raisePool } from './helpers/sp';
 
 function ctxOf(sim: Sim): SimContext {
   return (sim as unknown as { ctx: SimContext }).ctx;
@@ -35,7 +36,7 @@ function chronoMage(level = 20) {
   sim.setPlayerLevel(level);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  raisePool(p);
   return { sim, p };
 }
 
@@ -56,7 +57,7 @@ function makeRaid(sim: Sim, leader: number, members: number[]): void {
 // Add a player ally at a fixed spot with a huge health pool (so conversion heals
 // never clamp) and, by default, a big chunk of missing health to receive them.
 function addAlly(sim: Sim, x: number, z: number, name: string): Entity {
-  const id = sim.addPlayer('warrior', name);
+  const id = sim.addPlayer('swordman', name);
   const e = sim.entities.get(id)!;
   e.pos.x = x;
   e.pos.z = z;
@@ -255,12 +256,16 @@ describe('two chronomancers keep independent marks by sourceId', () => {
     expect(marked(ally, p.id)).toBe(true);
     expect(marked(ally, mage2.id)).toBe(true);
 
+    // Keep a real deficit open: the D1 HP curve made the pools small enough that a
+    // full-health ally overheals and the assertion would read the clamp.
+    ally.hp = Math.max(1, ally.maxHp - 200);
     // Mage1's arcane damage heals via the 13% group mark only.
     let h = ally.hp;
     chronomancyConvertArcaneDamage(ctxOf(sim), p, 100, 'arcane', false);
     expect(ally.hp - h).toBe(Math.round(100 * ECHO_GROUP_CONVERT_SINGLE));
 
     // Mage2's arcane damage heals via its own 35% mark, independently.
+    ally.hp = Math.max(1, ally.maxHp - 200);
     h = ally.hp;
     chronomancyConvertArcaneDamage(ctxOf(sim), mage2, 100, 'arcane', false);
     expect(ally.hp - h).toBe(Math.round(100 * ECHO_CONVERT_SINGLE));

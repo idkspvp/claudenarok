@@ -38,11 +38,11 @@ try {
 
   await page.goto(URL, { waitUntil: 'networkidle2' });
   await page.evaluate((name) => {
-    localStorage.setItem(`woc_spawn_intro_seen:offline:warrior:${name}`, '1');
+    localStorage.setItem(`woc_spawn_intro_seen:offline:swordman:${name}`, '1');
   }, CHAR_NAME);
 
   // Offline flow: Play Offline -> name -> pick class -> Start.
-  await enterOfflineGame(page, { charClass: 'warrior', charName: CHAR_NAME, settleMs: 2500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: CHAR_NAME, settleMs: 2500 });
   await page.waitForSelector('#mobile-controls', { timeout: 15000 });
   await page.waitForFunction(() => Number.isFinite(window.__game?.input?.camDist), {
     timeout: 15000,

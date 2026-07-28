@@ -36,7 +36,7 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Chaser');
 await page.evaluate(() => {
-  document.querySelector('.mini-class[data-class="warrior"]').click();
+  document.querySelector('.mini-class[data-class="swordman"]').click();
   document.querySelector('#btn-start-offline').click();
 });
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 90000, polling: 250 });

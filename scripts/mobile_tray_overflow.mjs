@@ -29,7 +29,7 @@ await page.emulate({
     'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148',
 });
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Mobile', settleMs: 2500 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Mobile', settleMs: 2500 });
 await page.click('#mobile-more');
 await sleep(400);
 

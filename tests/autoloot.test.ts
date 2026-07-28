@@ -26,7 +26,7 @@ function member(pid: number, partial: Partial<PartyMemberInfo> = {}): PartyMembe
   return {
     pid,
     name: 'Ally',
-    cls: 'warrior',
+    cls: 'swordman',
     level: 1,
     hp: 1,
     mhp: 1,

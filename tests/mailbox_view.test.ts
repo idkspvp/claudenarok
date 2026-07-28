@@ -172,10 +172,10 @@ describe('mailIndicatorView', () => {
 
 describe('recipientSuggestions', () => {
   const results = [
-    { name: 'Player', cls: 'warrior', level: 20 },
+    { name: 'Player', cls: 'swordman', level: 20 },
     { name: 'Alice', cls: 'mage', level: 18 },
-    { name: 'Bob', cls: 'priest', level: 12 },
-    { name: 'Cara', cls: 'rogue', level: 16 },
+    { name: 'Bob', cls: 'acolyte', level: 12 },
+    { name: 'Cara', cls: 'thief', level: 16 },
   ];
 
   it('excludes the current player name and caps results', () => {

@@ -13,17 +13,13 @@ export interface ClassChip {
   color: string;
 }
 
-// Order groups the three pure archetypes first, then the hybrids, for a calm grid.
+// The five first jobs, in the job tree's own order (src/sim/content/jobs.ts).
 export const CLASS_CHIPS: ClassChip[] = [
-  { id: 'warrior', nameKey: 'classes.warrior', color: '#d67a54' },
-  { id: 'paladin', nameKey: 'classes.paladin', color: '#f58ca0' },
-  { id: 'hunter', nameKey: 'classes.hunter', color: '#a6d84f' },
-  { id: 'rogue', nameKey: 'classes.rogue', color: '#fcee58' },
-  { id: 'priest', nameKey: 'classes.priest', color: '#c6d4f0' },
-  { id: 'shaman', nameKey: 'classes.shaman', color: '#4e8aea' },
+  { id: 'swordman', nameKey: 'classes.swordman', color: '#d67a54' },
   { id: 'mage', nameKey: 'classes.mage', color: '#33c1f1' },
-  { id: 'warlock', nameKey: 'classes.warlock', color: '#a785e6' },
-  { id: 'druid', nameKey: 'classes.druid', color: '#ff8c1a' },
+  { id: 'archer', nameKey: 'classes.archer', color: '#a6d84f' },
+  { id: 'acolyte', nameKey: 'classes.acolyte', color: '#c6d4f0' },
+  { id: 'thief', nameKey: 'classes.thief', color: '#fcee58' },
 ];
 
 export interface ZoneTeaser {

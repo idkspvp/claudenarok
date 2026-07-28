@@ -13,7 +13,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ClientWorld } from '../src/net/online';
 import type { PlayerClass } from '../src/sim/types';
 
-const PROBE_CLASS: PlayerClass = 'warrior';
+const PROBE_CLASS: PlayerClass = 'swordman';
 
 class StubWebSocket {
   static readonly CONNECTING = 0;

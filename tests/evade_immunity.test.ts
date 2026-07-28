@@ -8,7 +8,7 @@ import type { Entity } from '../src/sim/types';
 import { dist2d } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 
 function nearestMob(sim: Sim): Entity {
@@ -73,9 +73,9 @@ describe('evading mobs are immune while resetting', () => {
   });
 
   it('does not make an owned pet immune if stale evade state leaks onto it', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true, autoEquip: true });
-    const attackerId = sim.addPlayer('warrior', 'Attacker');
-    const ownerId = sim.addPlayer('hunter', 'Owner');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true, autoEquip: true });
+    const attackerId = sim.addPlayer('swordman', 'Attacker');
+    const ownerId = sim.addPlayer('archer', 'Owner');
     const attacker = sim.entities.get(attackerId);
     if (!attacker) throw new Error('missing attacker');
     const pet = nearestMob(sim);
@@ -112,7 +112,7 @@ describe('an evading mob that cannot path home recovers instead of getting stuck
   }
 
   it('frees a tent-pinned Gravecaller Summoner and makes it killable again', () => {
-    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'swordman', autoEquip: true });
     const mob = tentSummoner(sim);
     expect(mob).toBeTruthy();
     sim.player.pos = { x: 9999, z: 9999, y: 0 }; // out of aggro range
@@ -157,7 +157,7 @@ describe('an evading mob that cannot path home recovers instead of getting stuck
   });
 
   it('phases through the tent only — leaves it clear of the prop, not teleported home', () => {
-    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'swordman', autoEquip: true });
     const mob = tentSummoner(sim);
     sim.player.pos = { x: 9999, z: 9999, y: 0 };
 
@@ -189,7 +189,7 @@ describe('an evading mob that cannot path home recovers instead of getting stuck
   });
 
   it('does not disturb a normal short evade across open ground', () => {
-    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: WORLD_SEED, playerClass: 'swordman', autoEquip: true });
     const mob = tentSummoner(sim);
     sim.player.pos = { x: 9999, z: 9999, y: 0 };
 

@@ -8,13 +8,14 @@ import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function mage(spec: 'fire' | 'frost' | 'arcane'): { sim: Sim; p: Entity } {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 

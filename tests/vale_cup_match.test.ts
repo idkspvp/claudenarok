@@ -64,7 +64,7 @@ describe('Vale Cup: possession gate (must be on the ball to play it)', () => {
 
   it('rejects a shot from off the ball (the reported anywhere-on-the-map bug)', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 2, -40);
     const { ball } = stageRestingBall(sim, a, b);
     // Stand ~24yd off the ball: inside the old sport_shoot.range (34) that let a
@@ -77,7 +77,7 @@ describe('Vale Cup: possession gate (must be on the ball to play it)', () => {
 
   it('rejects a kick and a pass from off the ball', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 2, -40);
     const { ball } = stageRestingBall(sim, a, b);
     teleport(sim, a, ball.x - 16, ball.z); // inside sport_kick(18)/sport_pass(42) range
@@ -90,7 +90,7 @@ describe('Vale Cup: possession gate (must be on the ball to play it)', () => {
 
   it('lets you strike the ball once it is at your feet', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 2, -40);
     const { ball } = stageRestingBall(sim, a, b);
     teleport(sim, a, ball.x - 2, ball.z); // on the ball (within VC_POSSESSION_RADIUS)
@@ -103,7 +103,7 @@ describe('Vale Cup: possession gate (must be on the ball to play it)', () => {
 describe('Vale Cup: queue guards', () => {
   it('rejects a dead, instanced, dueling-free litany with the arena literals', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const e = sim.entities.get(a)!;
     e.dead = true;
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
@@ -116,14 +116,14 @@ describe('Vale Cup: queue guards', () => {
 
   it('rejects a missing banner nation', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     sim.vcupQueueJoin(2, 'atlantis' as never, 'allrounder', false, a);
     expect(errorsOf(sim.drainEvents())).toContain('Pick a banner nation first.');
   });
 
   it('rejects dueling and mid-trade queuers with the arena literals', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     (sim as any).duels.set(a, { a, b: -1, state: 'active' });
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     expect(errorsOf(sim.drainEvents())).toContain('You cannot queue while dueling.');
@@ -135,9 +135,9 @@ describe('Vale Cup: queue guards', () => {
 
   it('rejects a party larger than the bracket', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 2, -40);
-    const c = addAt(sim, 'rogue', 'Gimel', 4, -40);
+    const c = addAt(sim, 'thief', 'Gimel', 4, -40);
     sim.partyInvite(b, a);
     sim.partyAccept(b);
     sim.partyInvite(c, a);
@@ -149,7 +149,7 @@ describe('Vale Cup: queue guards', () => {
 
   it('only the party leader may queue the team', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 2, -40);
     sim.partyInvite(b, a);
     sim.partyAccept(b);
@@ -162,7 +162,7 @@ describe('Vale Cup: queue guards', () => {
 
   it('the Groundskeeper remembers deserters', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     sim.vcup.deserters.set('aleph', sim.time + 120);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     expect(errorsOf(sim.drainEvents())).toContain('The Groundskeeper remembers. Come back later.');
@@ -171,7 +171,7 @@ describe('Vale Cup: queue guards', () => {
 
   it('re-queueing the same bracket re-emits the position; another bracket errors', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     sim.vcupQueueJoin(3, 'vale', 'striker', false, a);
     sim.drainEvents();
     sim.vcupQueueJoin(3, 'vale', 'striker', false, a);
@@ -184,7 +184,7 @@ describe('Vale Cup: queue guards', () => {
 
   it('vcupSetRole updates a queued role; 1v1 and 2v2 force the all-rounder kit', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     sim.vcupQueueJoin(3, 'vale', 'striker', false, a);
     expect(sim.cupInfoFor(a)!.role).toBe('striker');
     sim.vcupSetRole('keeper', a);
@@ -198,7 +198,7 @@ describe('Vale Cup: queue guards', () => {
 describe('Vale Cup: matchmaking and packing', () => {
   it('a lone queuer waits; a second fills the 1v1 and the one slot busies', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     sim.tick();
     expect(sim.vcup.match).toBe(null);
@@ -216,10 +216,10 @@ describe('Vale Cup: matchmaking and packing', () => {
 
   it('packs a premade against solos in a 2v2 (first-fit, queue order)', () => {
     const sim = makeWorld();
-    const a1 = addAt(sim, 'warrior', 'AlephOne');
+    const a1 = addAt(sim, 'swordman', 'AlephOne');
     const a2 = addAt(sim, 'mage', 'AlephTwo', 2, -40);
-    const s1 = addAt(sim, 'rogue', 'SoloOne', 4, -40);
-    const s2 = addAt(sim, 'priest', 'SoloTwo', 6, -40);
+    const s1 = addAt(sim, 'thief', 'SoloOne', 4, -40);
+    const s2 = addAt(sim, 'acolyte', 'SoloTwo', 6, -40);
     sim.partyInvite(a2, a1);
     sim.partyAccept(a2);
     sim.drainEvents();
@@ -261,18 +261,18 @@ describe('Vale Cup: matchmaking and packing', () => {
   it('gives a freed pitch to the oldest-waiting bracket (FIFO), not the smallest', () => {
     const sim = makeWorld();
     // Occupy the pitch with a 1v1 rated bout.
-    const a = addAt(sim, 'warrior', 'Occ1', 0, -40);
+    const a = addAt(sim, 'swordman', 'Occ1', 0, -40);
     const b = addAt(sim, 'mage', 'Occ2', 4, -40);
     const bout = startBout(sim, a, b);
     // While it runs, a 3v3 group queues FIRST...
     const trio = Array.from({ length: 6 }, (_, i) =>
-      addAt(sim, 'warrior', `Trio${i}`, 10 + i, -40),
+      addAt(sim, 'swordman', `Trio${i}`, 10 + i, -40),
     );
     for (const pid of trio) sim.vcupQueueJoin(3, 'vale', 'striker', false, pid);
     for (let i = 0; i < 40; i++) sim.tick(); // 2s later...
     // ...then a fresh 1v1 pair queues (smaller bracket, but younger).
-    const c = addAt(sim, 'rogue', 'Late1', 20, -40);
-    const d = addAt(sim, 'priest', 'Late2', 24, -40);
+    const c = addAt(sim, 'thief', 'Late1', 20, -40);
+    const d = addAt(sim, 'acolyte', 'Late2', 24, -40);
     sim.vcupQueueJoin(1, 'ogre', 'allrounder', false, c);
     sim.vcupQueueJoin(1, 'thornpeak', 'allrounder', false, d);
     // Free the pitch and let matchmaking choose.
@@ -289,7 +289,7 @@ describe('Vale Cup: matchmaking and packing', () => {
 
   it('the away side plays the inverted palette when both pick the same banner', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, b);
@@ -301,7 +301,7 @@ describe('Vale Cup: matchmaking and packing', () => {
     const sim = makeWorld();
     // Six solo queuers, all outfield (striker), pack into two full teams of 3.
     const pids = Array.from({ length: 6 }, (_, i) =>
-      addAt(sim, 'warrior', `Field${i}`, i * 2, -40),
+      addAt(sim, 'swordman', `Field${i}`, i * 2, -40),
     );
     for (const pid of pids) sim.vcupQueueJoin(3, 'vale', 'striker', false, pid);
     sim.tick();
@@ -317,7 +317,7 @@ describe('Vale Cup: matchmaking and packing', () => {
 
   it('does not add a second keeper when a human already picked keeper', () => {
     const sim = makeWorld();
-    const pids = Array.from({ length: 6 }, (_, i) => addAt(sim, 'warrior', `K${i}`, i * 2, -40));
+    const pids = Array.from({ length: 6 }, (_, i) => addAt(sim, 'swordman', `K${i}`, i * 2, -40));
     // First queuer on each packed side picks keeper (queue order: A=0,1,2 B=3,4,5).
     sim.vcupQueueJoin(3, 'vale', 'keeper', false, pids[0]);
     sim.vcupQueueJoin(3, 'vale', 'striker', false, pids[1]);
@@ -334,7 +334,7 @@ describe('Vale Cup: matchmaking and packing', () => {
 
   it('never autofills a keeper in 1v1 or 2v2 (all-rounder brackets)', () => {
     const sim = makeWorld();
-    const pids = Array.from({ length: 4 }, (_, i) => addAt(sim, 'warrior', `R${i}`, i * 2, -40));
+    const pids = Array.from({ length: 4 }, (_, i) => addAt(sim, 'swordman', `R${i}`, i * 2, -40));
     for (const pid of pids) sim.vcupQueueJoin(2, 'vale', 'allrounder', false, pid);
     sim.tick();
     const match = sim.vcup.match!;
@@ -347,7 +347,7 @@ describe('Vale Cup: matchmaking and packing', () => {
 describe('Vale Cup: match lifecycle', () => {
   it('runs whistle -> kickoff -> dribble -> kick -> goal -> reset, and first-to-5 ends early', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     sim.vcupQueueJoin(1, 'mirefen', 'allrounder', false, b);
@@ -429,7 +429,7 @@ describe('Vale Cup: match lifecycle', () => {
 
   it('credits no scorer on an own goal the other side never touched in', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     // Team A puts the ball into its OWN (west) goal: park both fighters clear of
@@ -456,7 +456,7 @@ describe('Vale Cup: match lifecycle', () => {
 
   it('full-time draw goes to golden goal; the golden cap ends in a draw', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     (match as any).clock = VC_MATCH_DURATION - 0.05;
@@ -474,7 +474,7 @@ describe('Vale Cup: match lifecycle', () => {
 
   it('a golden goal wins immediately after the celebrate', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     (match as any).clock = VC_MATCH_DURATION - 0.05;
@@ -500,7 +500,7 @@ describe('Vale Cup: sport moves', () => {
   // distance) and report whether it scored. No keeper, no other fighters.
   function shootFromRange(charge: number, outYd: number): { scored: boolean; maxY: number } {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Striker');
+    const a = addAt(sim, 'swordman', 'Striker');
     const b = addAt(sim, 'mage', 'Keep', 4, -40);
     const match = startBout(sim, a, b);
     teleport(sim, b, PITCH.xMin + 1, PITCH.zMin + 1); // opponent far away
@@ -543,7 +543,7 @@ describe('Vale Cup: sport moves', () => {
 
   it('the harvest truce floors damage between fighters to 0', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     startBout(sim, a, b);
     const ae = sim.entities.get(a)!;
@@ -559,10 +559,10 @@ describe('Vale Cup: sport moves', () => {
   // A 2v2 with a1+a2 premade on team A (against two parked human solos), run to
   // active. Returns the match plus every pid so a pass test can stage positions.
   function start2v2(sim: Sim) {
-    const a1 = addAt(sim, 'warrior', 'Passer');
-    const a2 = addAt(sim, 'warrior', 'Mate', 2, -40);
-    const s1 = addAt(sim, 'warrior', 'OppOne', 4, -40);
-    const s2 = addAt(sim, 'warrior', 'OppTwo', 6, -40);
+    const a1 = addAt(sim, 'swordman', 'Passer');
+    const a2 = addAt(sim, 'swordman', 'Mate', 2, -40);
+    const s1 = addAt(sim, 'swordman', 'OppOne', 4, -40);
+    const s2 = addAt(sim, 'swordman', 'OppTwo', 6, -40);
     sim.partyInvite(a2, a1);
     sim.partyAccept(a2);
     sim.drainEvents();
@@ -628,7 +628,7 @@ describe('Vale Cup: sport moves', () => {
   it('keeper role: grip catches a shot in the box (a save), holds, expires, and punts from the hold', () => {
     const sim = makeWorld();
     const pids: number[] = [];
-    const classes = ['warrior', 'mage', 'rogue', 'priest', 'paladin', 'shaman'] as const;
+    const classes = ['swordman', 'mage', 'thief', 'acolyte', 'swordman', 'acolyte'] as const;
     for (let i = 0; i < 6; i++) pids.push(addAt(sim, classes[i], `Fighter${i}`, i * 2, -40));
     // Six solos, bracket 3: first three seat team A, next three team B. The
     // fourth queuer (team B seat 0) keeps goal for the EAST side.
@@ -691,7 +691,7 @@ describe('Vale Cup: sport moves', () => {
     // Live-balance pin: keepers line up ON their goal line at every kickoff and
     // the whistle grace clamps a charged shot to the short-touch profile, so an
     // instant unchallenged shot from the center spot is savable, not a goal.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', playerName: 'Solo' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', playerName: 'Solo' });
     sim.vcupPracticeStart(3); // the bot side's seat 0 keeps goal
     const match = sim.vcup.practices[0];
     readyAll(sim);
@@ -715,7 +715,7 @@ describe('Vale Cup: sport moves', () => {
 
   it('opens on a briefing: bots pre-ready, humans ready up or auto-ready at the timer', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     sim.vcupQueueJoin(1, 'mirefen', 'allrounder', false, b);
@@ -739,7 +739,7 @@ describe('Vale Cup: sport moves', () => {
 
   it('auto-readies at the briefing timer when a fighter never readies', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     sim.vcupQueueJoin(1, 'vale', 'allrounder', false, a);
     sim.vcupQueueJoin(1, 'mirefen', 'allrounder', false, b);
@@ -752,7 +752,7 @@ describe('Vale Cup: sport moves', () => {
 
   it('kick power scales with aim distance: a short pass is softer than a long shot', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     const ae = sim.entities.get(a)!;
@@ -787,7 +787,7 @@ describe('Vale Cup: sport moves', () => {
 
   it('fighters cannot walk through each other on the pitch (soft separation)', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     const ae = sim.entities.get(a)!;
@@ -810,7 +810,7 @@ describe('Vale Cup: sport moves', () => {
     // the human idle, the all-bot attack must not run away. Shot range gate +
     // deterministic aim error + a slower decision cadence keep the scoreline
     // human-playable. Deterministic (zero rng), so these are hard bounds.
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', playerName: 'Idle' });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', playerName: 'Idle' });
     sim.vcupPracticeStart(3);
     const match = sim.vcup.practices[0];
     readyAll(sim);
@@ -833,7 +833,7 @@ describe('Vale Cup: sport moves', () => {
 describe('Vale Cup: desertion', () => {
   it('a deserter takes the loss and the lockout; the team plays short and forfeits when empty', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     const match = startBout(sim, a, b);
     const bMeta = sim.players.get(b)!;
@@ -856,7 +856,7 @@ describe('Vale Cup: desertion', () => {
 
   it('vcupResolveDesertion is idempotent (the server calls it before the leave save)', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Aleph');
+    const a = addAt(sim, 'swordman', 'Aleph');
     const b = addAt(sim, 'mage', 'Bet', 4, -40);
     startBout(sim, a, b);
     const bMeta = sim.players.get(b)!;
@@ -870,9 +870,9 @@ describe('Vale Cup: desertion', () => {
 describe('Vale Cup: the pitch is closed during a match', () => {
   it('lets a walk-up stand on the pitch when idle, but ejects them once a match is on', () => {
     const sim = makeWorld();
-    const a = addAt(sim, 'warrior', 'Kick', 0, -40);
+    const a = addAt(sim, 'swordman', 'Kick', 0, -40);
     const b = addAt(sim, 'mage', 'Boot', 4, -40);
-    const spec = addAt(sim, 'rogue', 'Nosey', 8, -40);
+    const spec = addAt(sim, 'thief', 'Nosey', 8, -40);
     // Idle pitch: a walk-up can stand right on the center spot.
     teleport(sim, spec, PITCH_CENTER.x, PITCH_CENTER.z);
     sim.tick();

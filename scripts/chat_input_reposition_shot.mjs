@@ -4,8 +4,9 @@
 //   01-empty   : freshly opened, single line, sitting ABOVE the tab strip
 //   02-long    : a long message wrapped onto several lines, grown upward
 // Saves to docs/pr-assets/chat-input-reposition/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
@@ -31,7 +32,7 @@ await page.evaluate(() => document.getElementById('btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Scribe');
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]').click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]').click();
   document.getElementById('btn-start-offline').click();
 });
 await page.waitForFunction(() => window.__game && window.__game.hud, { timeout: 30000 });
@@ -69,7 +70,8 @@ await page.screenshot({ path: `${OUT}/01-empty-${LABEL}.png`, clip: CLIP });
 // Type a long message to exercise the upward autosize growth.
 await page.evaluate(() => {
   const el = document.getElementById('chat-input');
-  el.value = 'Looking for a healer and a tank for Shadowfen Hollow, we have three DPS ready and saved to the heroic lockout, ping me here or whisper.';
+  el.value =
+    'Looking for a healer and a tank for Shadowfen Hollow, we have three DPS ready and saved to the heroic lockout, ping me here or whisper.';
   el.dispatchEvent(new Event('input'));
 });
 await sleep(250);
@@ -80,12 +82,16 @@ const geom = await page.evaluate(() => {
   const input = document.getElementById('chat-input').getBoundingClientRect();
   const wrap = document.getElementById('chatlog-wrap').getBoundingClientRect();
   return {
-    inputBottom: Math.round(input.bottom), inputTop: Math.round(input.top),
-    inputHeight: Math.round(input.height), boxTop: Math.round(wrap.top),
+    inputBottom: Math.round(input.bottom),
+    inputTop: Math.round(input.top),
+    inputHeight: Math.round(input.height),
+    boxTop: Math.round(wrap.top),
     overlap: Math.round(input.bottom - wrap.top),
   };
 });
 console.log(`[${LABEL}] geometry:`, JSON.stringify(geom));
-console.log(`[${LABEL}] input.bottom=${geom.inputBottom} box.top=${geom.boxTop} -> overlap=${geom.overlap}px (<=0 means clear)`);
+console.log(
+  `[${LABEL}] input.bottom=${geom.inputBottom} box.top=${geom.boxTop} -> overlap=${geom.overlap}px (<=0 means clear)`,
+);
 console.log('screenshots written to', OUT);
 await browser.close();

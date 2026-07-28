@@ -15,7 +15,7 @@ const TICKS = FIGHT_SECONDS * 20;
 
 type AnySim = Sim & Record<string, any>;
 
-const sim = new Sim({ seed: 4242, playerClass: 'warrior', autoEquip: true }) as AnySim;
+const sim = new Sim({ seed: 4242, playerClass: 'swordman', autoEquip: true }) as AnySim;
 sim.setPlayerLevel(20);
 if (!sim.setSpec('fury')) throw new Error('setSpec fury failed');
 sim.tick(); // stance reconcile: Battle -> Berserker (the fury default)

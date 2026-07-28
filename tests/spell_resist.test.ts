@@ -12,6 +12,7 @@ import { createMob } from '../src/sim/entity';
 import { advancePendingProjectiles } from '../src/sim/projectile_travel';
 import { Sim } from '../src/sim/sim';
 import { type Entity, type PlayerClass, spellHitChance } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -46,7 +47,7 @@ function makeSim(cls: PlayerClass, level: number): { sim: AnySim; p: AnyEntity; 
   const sim = new Sim({ seed: 99, playerClass: cls, autoEquip: true }) as AnySim;
   sim.setPlayerLevel(level);
   const p = sim.player as AnyEntity;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p, meta: sim.players.get(p.id) };
 }
 
@@ -95,7 +96,7 @@ describe('spell_resist: cast outcome labeling', () => {
   });
 
   it('a physical ability (Shieldcrack) still emits kind:"miss" when avoided', () => {
-    const { sim, p, meta } = makeSim('warrior', 12);
+    const { sim, p, meta } = makeSim('swordman', 12);
     const mob = spawnTarget(sim, p, 60, 2);
     // meleeSwing draws avoidance from ONE rng.next() roll against stacked bands
     // (miss first). A CRITICAL is now resolved above that table and bypasses it

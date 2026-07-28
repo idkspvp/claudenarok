@@ -1,7 +1,7 @@
 import { isBlocked, pathCrossesFence, resolvePosition } from './colliders';
 import { groundHeight, waterLevelAt } from './world';
 
-// Local A* over a 1-yard grid, used for short forced moves (warrior Charge).
+// Local A* over a 1-yard grid, used for short forced moves (swordman Charge).
 // The search window is the start/goal bounding box plus a margin, so cost
 // stays tiny (Charge range is ~25yd). Cells are blocked by static colliders,
 // deep water, and uphill steps too steep to climb; the caller supplies those

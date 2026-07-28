@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Aura } from '../src/sim/types';
 
-const makeSim = (cls: 'warrior' | 'mage' = 'warrior', seed = 42) =>
+const makeSim = (cls: 'swordman' | 'mage' = 'swordman', seed = 42) =>
   new Sim({ seed, playerClass: cls, autoEquip: true });
 
 function buff(over: Partial<Aura> = {}): Aura {

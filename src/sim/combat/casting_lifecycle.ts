@@ -1316,7 +1316,7 @@ function applyChannelTick(ctx: SimContext, p: Entity, res: ResolvedAbility): voi
   // Self-centered AoE channel (Steel Cyclone / bladestorm): a targetless channel
   // whose storm follows the CASTER, pulsing its aoeDamage on every hostile in
   // radius around the caster each tick (center is live p.pos, so it moves with
-  // the warrior). Distinct from the position channel above (which clamps a
+  // the swordman). Distinct from the position channel above (which clamps a
   // ground point) and from the single-target channel below.
   if (!res.def.requiresTarget && res.effects.some((eff) => eff.type === 'aoeDamage')) {
     const isSpell = res.def.school !== 'physical';
@@ -1678,7 +1678,7 @@ function applyAbility(
 
   // A ranged attack travels as a projectile, so its damage/effects resolve when the
   // bolt LANDS, not at cast completion. Every non-physical spell is a bolt by
-  // convention (school proxy); a physical ranged shot (hunter Aimed / Concussive Shot)
+  // convention (school proxy); a physical ranged shot (archer Aimed / Concussive Shot)
   // opts in with projectile:true. Without this a physical shot deals its damage
   // instantly while the arrow is still visibly in flight (health drops, or the mob
   // dies, before it arrives).
@@ -1728,7 +1728,7 @@ function applyAbility(
     // 'spellCast' set procs (Clearcasting) roll at CAST COMPLETION, matching the
     // trigger name: the cast is done even though the bolt is still in flight (a
     // resisted or fizzled bolt was still a cast). Physical projectile shots
-    // (hunter Aimed / Concussive) are not spells and never roll.
+    // (archer Aimed / Concussive) are not spells and never roll.
     if (p.kind === 'player' && isSpell) ctx.applySetProcs(p, target, 'spellCast');
     if (p.kind === 'player') onCastCompleted(ctx, p, ability.id, target);
     return;

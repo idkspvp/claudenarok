@@ -70,7 +70,7 @@ describe('ClientWorld.deedsLeaderboard', () => {
           rank: 1,
           name: 'Aldwin',
           realm: 'Claudemoon',
-          cls: 'warrior',
+          cls: 'swordman',
           level: 20,
           renown: 50,
           title: 'prog_veteran',

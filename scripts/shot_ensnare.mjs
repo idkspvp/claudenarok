@@ -2,10 +2,12 @@
 // Runs the offline client (no server/Postgres), forces the on-hit web proc, and
 // captures the red root debuff on the player frame + the "rooted" movement block.
 // Needs `npm run dev` running. Writes PNGs to tmp/.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -19,7 +21,9 @@ await page.setViewport({ width: 1280, height: 800 });
 
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (m) => { if (m.type() === 'error') errors.push('CONSOLE: ' + m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') errors.push('CONSOLE: ' + m.text());
+});
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
@@ -29,9 +33,12 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await wait(200);
 await page.evaluate(() => {
   const n = document.querySelector('#char-name');
-  if (n) { n.value = 'Webbed'; n.dispatchEvent(new Event('input', { bubbles: true })); }
+  if (n) {
+    n.value = 'Webbed';
+    n.dispatchEvent(new Event('input', { bubbles: true }));
+  }
 });
-await tap('#offline-select .mini-class[data-class="warrior"]');
+await tap('#offline-select .mini-class[data-class="swordman"]');
 await tap('#btn-start-offline');
 await wait(3000);
 
@@ -40,14 +47,20 @@ const info = await page.evaluate(() => {
   const game = window.__game;
   const sim = game.sim;
   const p = sim.player;
-  p.maxHp = 99999; p.hp = 99999;
+  p.maxHp = 99999;
+  p.hp = 99999;
   // Repurpose the nearest living mob as a Webwood Lurker carrying the affix.
-  let best = null, bestD = Infinity;
+  let best = null,
+    bestD = Infinity;
   for (const e of sim.entities.values()) {
     if (e.kind !== 'mob' || e.dead || e.id === p.id) continue;
-    const dx = e.pos.x - p.pos.x, dz = e.pos.z - p.pos.z;
+    const dx = e.pos.x - p.pos.x,
+      dz = e.pos.z - p.pos.z;
     const d = dx * dx + dz * dz;
-    if (d < bestD) { bestD = d; best = e; }
+    if (d < bestD) {
+      bestD = d;
+      best = e;
+    }
   }
   if (!best) return { ok: false, reason: 'no mob nearby' };
   best.templateId = 'webwood_spider';
@@ -73,7 +86,12 @@ const frame = await page.evaluate(() => {
   const el = document.querySelector('#buff-bar') || document.querySelector('#player-frame');
   if (!el) return null;
   const r = el.getBoundingClientRect();
-  return { x: Math.max(0, r.x - 8), y: Math.max(0, r.y - 8), width: r.width + 16, height: r.height + 16 };
+  return {
+    x: Math.max(0, r.x - 8),
+    y: Math.max(0, r.y - 8),
+    width: r.width + 16,
+    height: r.height + 16,
+  };
 });
 if (frame && frame.width > 4 && frame.height > 4) {
   await page.screenshot({ path: 'tmp/ensnare_debuff_crop.png', clip: frame });

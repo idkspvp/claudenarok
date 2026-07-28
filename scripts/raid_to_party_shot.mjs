@@ -61,7 +61,7 @@ const built = await page.evaluate(() => {
   const roster = [
     ['Brightoak', 'druid', 1],
     ['Stormcaller', 'shaman', 1],
-    ['Nightblade', 'rogue', 1],
+    ['Nightblade', 'thief', 1],
     ['Emberlyn', 'mage', 1],
   ];
   const pids = roster.map(([name, cls], i) => {

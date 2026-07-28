@@ -1,4 +1,4 @@
-// Captures the action-bar charge UI states offline on a Fury warrior's
+// Captures the action-bar charge UI states offline on a Fury swordman's
 // Twinstrike (ability id raging_gale, an authored 2-charge pool): full pool
 // (badge "2"), one spent (badge "1" + the thin recharge strip, button still
 // usable), and empty (full cooldown sweep + strip). Run with MODE=base on the
@@ -37,7 +37,7 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERR', e.message));
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-const booted = await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar' });
+const booted = await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar' });
 console.log('offline boot:', booted);
 await page.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
 await sleep(600);
@@ -154,7 +154,7 @@ await mob.emulate({
     'Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Mobile/15E148 Safari/604.1',
 });
 await mob.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-const mobBoot = await enterOfflineGame(mob, { charClass: 'warrior', charName: 'Thorgar' });
+const mobBoot = await enterOfflineGame(mob, { charClass: 'swordman', charName: 'Thorgar' });
 console.log('mobile boot:', mobBoot);
 await mob.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
 await sleep(600);

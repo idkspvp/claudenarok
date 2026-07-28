@@ -17,7 +17,7 @@ import { type CharacterState, Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeSim(seed = 42): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function deedEvents(evs: SimEvent[]): Extract<SimEvent, { type: 'deedUnlocked' }>[] {
@@ -116,7 +116,7 @@ describe('healDisplayRoundedProficiency', () => {
 describe('the one-time heal on load', () => {
   it('heals a pre-fix save and grants the stranded deeds on the same join', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Stranded', { state: strandedState() });
+    const pid = sim.addPlayer('swordman', 'Stranded', { state: strandedState() });
     const meta = sim.players.get(pid)!;
     expect(meta.gatheringProficiency.fishing).toBe(100);
     expect(meta.gatheringProficiency.mining).toBe(100);
@@ -138,7 +138,7 @@ describe('the one-time heal on load', () => {
 
   it('serializes the heal flag as literal true with the healed values', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Stranded', { state: strandedState() });
+    const pid = sim.addPlayer('swordman', 'Stranded', { state: strandedState() });
     const saved = sim.serializeCharacter(pid);
     expect(saved?.proficiencyDisplayHealApplied).toBe(true);
     expect(saved?.gatheringProficiency?.fishing).toBe(100);
@@ -147,7 +147,7 @@ describe('the one-time heal on load', () => {
 
   it('never re-heals a post-fix save: 99.5 under the floored display stays 99.5', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Honest', {
+    const pid = sim.addPlayer('swordman', 'Honest', {
       state: { ...strandedState(), proficiencyDisplayHealApplied: true },
     });
     const meta = sim.players.get(pid)!;
@@ -162,7 +162,7 @@ describe('the one-time heal on load', () => {
     // pass compares the raw value with >=, so a genuine 100+ earns Old Salt
     // at the next login regardless of the heal branch.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Veteran', {
+    const pid = sim.addPlayer('swordman', 'Veteran', {
       state: {
         ...strandedState(),
         gatheringProficiency: { fishing: 123.4 },
@@ -176,7 +176,7 @@ describe('the one-time heal on load', () => {
 
   it('heals the 200 band edge to the cap and grants both fishing deeds', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Angler', {
+    const pid = sim.addPlayer('swordman', 'Angler', {
       state: { ...strandedState(), gatheringProficiency: { fishing: 199.5 } },
     });
     const meta = sim.players.get(pid)!;
@@ -191,7 +191,7 @@ describe('the one-time heal on load', () => {
     const state = strandedState();
     delete state.masteryResetApplied;
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'PreCurve', { state });
+    const pid = sim.addPlayer('swordman', 'PreCurve', { state });
     const meta = sim.players.get(pid)!;
     expect(meta.gatheringProficiency.fishing).toBe(0);
     expect(meta.gatheringProficiency.mining).toBe(0);
@@ -206,7 +206,7 @@ describe('the one-time heal on load', () => {
     delete state.gatheringProficiency;
     state.professions = { fishing: 99.5 };
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Legacy', { state });
+    const pid = sim.addPlayer('swordman', 'Legacy', { state });
     const meta = sim.players.get(pid)!;
     expect(meta.gatheringProficiency.fishing).toBe(100);
     expect(meta.deedsEarned.has('prog_fishing_100')).toBe(true);

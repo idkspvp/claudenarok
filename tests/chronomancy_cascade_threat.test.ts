@@ -9,13 +9,14 @@ import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function chronoMage() {
   const sim = new Sim({ seed: 41, playerClass: 'mage', autoEquip: true });
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -27,8 +28,8 @@ function free(p: Entity): boolean {
 describe('Cascada real threat: a tank lead holds through the Chronomancer heals', () => {
   it('the mob stays on the tank; healing only accrues minor threat on the healer', () => {
     const { sim, p } = chronoMage();
-    const tankId = sim.addPlayer('warrior', 'Tank');
-    const allyId = sim.addPlayer('warrior', 'Ally');
+    const tankId = sim.addPlayer('swordman', 'Tank');
+    const allyId = sim.addPlayer('swordman', 'Ally');
     const tank = sim.entities.get(tankId)!;
     const ally = sim.entities.get(allyId)!;
     tank.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };

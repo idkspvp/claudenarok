@@ -1,10 +1,10 @@
 // Skin-driven attack-clip substitution: the clip set and time scale a
 // DISPLAYED weapon skin swaps in for a visual's authored attack.
 //
-// The hunter's authored attack is 2H_Ranged_Shoot, a crossbow shoulder-aim
+// The archer's authored attack is 2H_Ranged_Shoot, a crossbow shoulder-aim
 // (the class ranged visual is a crossbow). With a BOW skin displayed the shot
 // plays the purpose-built Bow_Draw_Shot clip instead. The clip is assembled
-// from KayKit donor poses and shipped to the hunter via the bow_anims.glb
+// from KayKit donor poses and shipped to the archer via the bow_anims.glb
 // animUrls entry (scripts/build_bow_anims.mjs). Crossbow skins keep the
 // authored shoulder-aim.
 //
@@ -43,7 +43,7 @@ const BOW_ATTACK: SkinAttackClips = {
 // Every clip a displayed weapon skin can substitute for the authored attack.
 // CharacterVisual binds these alongside the def's own clip names; a rig that
 // does not ship them (no animUrls entry) simply skips the absent names, so
-// only the hunter pays the extra action.
+// only the archer pays the extra action.
 export const SKIN_ATTACK_CLIP_NAMES: readonly string[] = ['Bow_Draw_Shot'];
 
 /** How a ranged skin is held and fired: its weapon type, unless the def

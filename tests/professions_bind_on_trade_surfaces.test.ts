@@ -25,7 +25,7 @@ const REAGENTS = [
 ] as const;
 const R = 'resonant_steel';
 
-const makeWorld = () => new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+const makeWorld = () => new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 
 function standAt(sim: Sim, pid: number, target: Entity): void {
   const p = sim.entities.get(pid);
@@ -128,7 +128,7 @@ describe('content: the five typed reagents are not purchasable anywhere', () => 
 
   it('buyItem with a reagent id at a live vendor is refused and grants nothing', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Buyer');
+    const pid = sim.addPlayer('swordman', 'Buyer');
     const vendor = vendorEntity(sim);
     standAt(sim, pid, vendor);
     setCopper(sim, pid, 100000);
@@ -144,7 +144,7 @@ describe('content: the five typed reagents are not purchasable anywhere', () => 
 describe('mail: armed and stamped copies can never ride a raven', () => {
   function mailSetup() {
     const sim = makeWorld();
-    const sender = sim.addPlayer('warrior', 'Sender');
+    const sender = sim.addPlayer('swordman', 'Sender');
     const recipient = sim.addPlayer('mage', 'Rex');
     standAt(sim, sender, mailboxEntity(sim));
     setCopper(sim, sender, 10000);
@@ -213,7 +213,7 @@ describe('mail: armed and stamped copies can never ride a raven', () => {
 describe('World Market: armed and stamped copies can never be listed', () => {
   function marketSetup() {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Lister');
+    const pid = sim.addPlayer('swordman', 'Lister');
     standAt(sim, pid, merchantEntity(sim));
     sim.drainEvents();
     return { sim, pid };
@@ -262,7 +262,7 @@ describe('World Market: armed and stamped copies can never be listed', () => {
 describe('vendor: plain and armed copies sell, stamped copies are refused (wash closed)', () => {
   function vendorSetup() {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Seller');
+    const pid = sim.addPlayer('swordman', 'Seller');
     standAt(sim, pid, vendorEntity(sim));
     sim.drainEvents();
     return { sim, pid };
@@ -387,7 +387,7 @@ describe('vendor: plain and armed copies sell, stamped copies are refused (wash 
 describe('bank: a stamped copy round-trips payload-intact (self-storage, no transfer)', () => {
   it('deposit then withdraw preserves bindOnTrade AND boundTo byte-for-byte', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Hoarder');
+    const pid = sim.addPlayer('swordman', 'Hoarder');
     standAt(sim, pid, bankerEntity(sim));
     sim.addItemInstance(R, { ...STAMPED }, pid);
     sim.drainEvents();

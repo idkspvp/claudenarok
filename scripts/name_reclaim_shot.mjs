@@ -93,7 +93,7 @@ try {
   const aCreate = await api('/api/characters', {
     method: 'POST',
     token: tokenA,
-    body: { name: NAME, class: 'warrior', skin: 0 },
+    body: { name: NAME, class: 'swordman', skin: 0 },
   });
   if (aCreate.status !== 200) throw new Error('A create failed: ' + JSON.stringify(aCreate));
   log(`A created "${NAME}" (id ${aCreate.data.id})`);

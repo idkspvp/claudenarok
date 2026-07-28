@@ -420,7 +420,6 @@ import * as valeCupMod from './social/vale_cup';
 import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
-import { defaultAllocationFor, isSuggestedSpread } from './stat_preset';
 import {
   raiseCost,
   raiseStat,
@@ -667,7 +666,7 @@ const SWIM_DEPTH = PLAYER_SWIM_DEPTH; // ground this far under the water line = 
 // NYTHRAXIS_PARTY_INTERACT_RANGE / NYTHRAXIS_VISION_LINE_DELAY moved to
 // encounters/nythraxis.ts (N1) with the crypt-quest helpers that read them.
 const BODY_RADIUS = PLAYER_BODY_RADIUS;
-const CHARGE_SPEED_MULT = 3; // warrior charge runs at 3x normal speed
+const CHARGE_SPEED_MULT = 3; // swordman charge runs at 3x normal speed
 const CHARGE_ARRIVE_RANGE = MELEE_RANGE - 1; // stop inside melee range
 const FOLLOW_STOP_DIST = 3; // /follow trails this close behind the leader (yards)
 const FOLLOW_MAX_RANGE = 60; // give up follow once the leader is this far away
@@ -2178,7 +2177,7 @@ export class Sim {
       // simply unable to fight, and the points are the FIRST thing a new player
       // would have to understand. The spread is a starting build, not a lock: every
       // point of it is refunded by Reset and re-spendable however they like.
-      statAllocation: defaultAllocationFor(cls, 1),
+      statAllocation: emptyStatAllocation(),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2267,7 +2266,7 @@ export class Sim {
       // would be a silent, unexplained gutting of a character someone played.
       meta.statAllocation = s.statAllocation
         ? sanitizeStatAllocation(s.statAllocation, player.level)
-        : defaultAllocationFor(meta.cls, player.level);
+        : emptyStatAllocation();
       player.facing = s.facing;
       player.prevFacing = s.facing;
       meta.xp = s.xp;
@@ -2712,17 +2711,7 @@ export class Sim {
     // A mixed party rather than all-mages (owner 2026-07-13): a rotating spread of
     // classes so the practice allies read like a real group (tank/healer/melee/etc.),
     // each with its own class HP pool and armor.
-    const sandboxClasses: PlayerClass[] = [
-      'warrior',
-      'priest',
-      'rogue',
-      'hunter',
-      'shaman',
-      'warlock',
-      'druid',
-      'paladin',
-      'mage',
-    ];
+    const sandboxClasses: PlayerClass[] = ['swordman', 'acolyte', 'thief', 'archer', 'mage'];
     const botIds: number[] = [];
     for (let i = 0; i < cfg.bots; i++) {
       const cls = sandboxClasses[i % sandboxClasses.length];
@@ -2801,7 +2790,7 @@ export class Sim {
     this.party.partyInvites.delete(pid);
     this.tradeInvites.delete(pid);
     this.duelInvites.delete(pid);
-    // mobs forget the leaving player; persistent hunter pets are serialized
+    // mobs forget the leaving player; persistent archer pets are serialized
     // with the character and removed from the live world instead of released
     const pet = this.petOf(pid, true);
     if (pet) this.despawnPersistentPet(pet);
@@ -3476,7 +3465,7 @@ export class Sim {
   }
 
   playerGcdFor(cls: PlayerClass): number {
-    return cls === 'rogue' ? 1.0 : GCD; // rogue GCD is 1.0 sec
+    return cls === 'thief' ? 1.0 : GCD; // thief GCD is 1.0 sec
   }
   get playerGcd(): number {
     return this.playerGcdFor(this.primary.cls);
@@ -4191,8 +4180,6 @@ export class Sim {
     // anything, and the new points would sit unspent with no player around to place
     // them. A character who has moved even one point keeps their build exactly:
     // it is theirs, and so are the fresh points.
-    if (isSuggestedSpread(r.meta.statAllocation, r.meta.cls, prevLevel))
-      r.meta.statAllocation = defaultAllocationFor(r.meta.cls, r.e.level);
     recalcPlayerStats(
       r.e,
       r.meta.cls,
@@ -4420,7 +4407,7 @@ export class Sim {
       if (e.kind !== 'mob' || e.dead) continue;
       // a wild mob actively engaged keeps its target in combat — and if that
       // target is someone's pet, the pet's owner stays in combat too, so a
-      // hunter/warlock can't regen, eat/drink, or use out-of-combat abilities
+      // archer/warlock can't regen, eat/drink, or use out-of-combat abilities
       // while their pet tanks
       if (
         e.ownerId === null &&
@@ -4614,7 +4601,7 @@ export class Sim {
   // Sunder Armor stacks shave flat armor off the defender for physical hits.
   private effectiveArmor(e: Entity): number {
     let armor = e.stats.armor;
-    // Player/rogue armor debuffs are PERCENTAGES that do NOT stack with each other:
+    // Player/thief armor debuffs are PERCENTAGES that do NOT stack with each other:
     // Sunder Armor (2% per stack, up to 10% at 5 stacks) and Faerie Fire (a flat 10%)
     // max-combine, so a fully-stacked Sunder and a Faerie Fire are redundant rather
     // than additive. Mob corrosion (kind 'corrode') is a separate FLAT shred that
@@ -4728,7 +4715,7 @@ export class Sim {
   // swing interval multiplier: >1 = slower (thunder clap), haste divides.
   // v0.27.1: ALL haste folds into ONE additive bucket applied once, mirroring
   // spellHasteMult (always additive). Before this, each buff_haste aura divided
-  // the interval independently and the meleeHaste stat (item sets + the warrior
+  // the interval independently and the meleeHaste stat (item sets + the swordman
   // Enrage) divided again in auto_attack, so stacked raid buffs COMPOUNDED:
   // Bloodlust 1.3 x Wildfang Rally 1.05 x Enrage 1.25 = 1.71x attack speed
   // instead of the additive 1.6x. Single-source cases are unchanged
@@ -5126,7 +5113,7 @@ export class Sim {
     // up. The Intellect-scaled rate this used to return was invented, and it
     // disagreed with the 1% physical base besides.
     //
-    // This kills the mage and priest talents built on spell crit (Hot Streak,
+    // This kills the mage and acolyte talents built on spell crit (Hot Streak,
     // Combustion, Shatter, Ignite, the chronomancy row, the spec masteries) and
     // every healing critical. Ragnarok has none of those either; they go with
     // the skill rebuild rather than being preserved against it.
@@ -5201,7 +5188,7 @@ export class Sim {
       return;
     if (
       this.isNythraxisRaidEnemy(target) &&
-      !nythraxis.isNythraxisControllableAdd(target) && // priest + stalker are meant to be CC'd
+      !nythraxis.isNythraxisControllableAdd(target) && // acolyte + stalker are meant to be CC'd
       this.isNythraxisControlAura(aura.kind) &&
       aura.sourceId !== target.id &&
       !isUnbreakableControlAura(aura)
@@ -5309,7 +5296,7 @@ export class Sim {
 
   // On-hit knockback: hurl `target` up to `distance` yards straight away from
   // `source`. Instantaneous displacement (no aura) walked in small steps so it can
-  // be terrain-clamped exactly like a warrior charge — the shove stops at the last
+  // be terrain-clamped exactly like a swordman charge — the shove stops at the last
   // safe footing before deep water or a cliff rather than stranding the victim off
   // the world. Each step is also collider-swept (resolveMove, the same walker uses)
   // so a wall (an arena side wall in particular) stops the shove instead of letting
@@ -5852,7 +5839,7 @@ export class Sim {
       if (run) this.maybeCompanionBark(run, target.id, 'boss_pull');
     }
     // Boss engage bark: once per pull, on the first player-driven aggro. A
-    // player-owned pet pull counts (a hunter opening with the pet still wakes
+    // player-owned pet pull counts (a archer opening with the pet still wakes
     // the boss); yelledEngage resets with the other per-pull state on
     // evade/respawn.
     const engageYell = MOBS[mob.templateId]?.yells?.engage;
@@ -7645,8 +7632,8 @@ export class Sim {
     const inBand = (a: (typeof FINDER_ACTIVITIES)[number]) =>
       level >= a.minLevel && level <= a.maxLevel;
     const BOT_KITS: Record<Role, { cls: PlayerClass; name: string }> = {
-      tank: { cls: 'warrior', name: 'Tankbot' },
-      healer: { cls: 'priest', name: 'Healbot' },
+      tank: { cls: 'swordman', name: 'Tankbot' },
+      healer: { cls: 'acolyte', name: 'Healbot' },
       dps: { cls: 'mage', name: 'Dpsbot' },
     };
 
@@ -7654,10 +7641,10 @@ export class Sim {
       const listable = FINDER_ACTIVITIES.filter(inBand);
       if (listable.length === 0) return { spawned: 0, note: 'noneEligible' };
       let spawned = 0;
-      const lister1 = spawnBot('paladin', 'tank', 'Listerbot');
+      const lister1 = spawnBot('swordman', 'tank', 'Listerbot');
       spawned++;
       this.dungeonFinderListingCreate(listable[0].id, ['learning'], lister1);
-      const lister2 = spawnBot('shaman', 'healer', 'Callerbot');
+      const lister2 = spawnBot('acolyte', 'healer', 'Callerbot');
       spawned++;
       this.dungeonFinderListingCreate(
         (listable[1] ?? listable[0]).id,
@@ -7666,7 +7653,7 @@ export class Sim {
       );
       const mine = this.dungeonFinderInfoFor(id)?.myListing;
       if (mine) {
-        const applicant = spawnBot('rogue', 'dps', 'Seekerbot');
+        const applicant = spawnBot('thief', 'dps', 'Seekerbot');
         spawned++;
         this.dungeonFinderApply(mine.id, applicant);
       }
@@ -8164,7 +8151,7 @@ export class Sim {
         return {
           pid: p,
           name: m?.name ?? '?',
-          cls: m?.cls ?? 'warrior',
+          cls: m?.cls ?? 'swordman',
           kills: f.kills.get(p) ?? 0,
           down: f.respawn.has(p),
           me: p === pid,

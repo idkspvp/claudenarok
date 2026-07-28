@@ -4,7 +4,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorTexts(events: SimEvent[]): string[] {
@@ -14,7 +14,7 @@ function errorTexts(events: SimEvent[]): string[] {
 describe('/dungeons command', () => {
   it('lists every dungeon with its door zone and suggested party size', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     const parts = DUNGEON_LIST.map(
@@ -37,7 +37,7 @@ describe('/dungeons command', () => {
 
   it('responds to the /dungeon and /instances aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/dungeon', a);
@@ -51,7 +51,7 @@ describe('/dungeons command', () => {
 
   it('is self-only and never logged or spoken', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const result = sim.chat('/dungeons', a);
     expect(result).toBeNull();

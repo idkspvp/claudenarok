@@ -148,7 +148,7 @@ export const CLASS_MODEL_PATHS = [
   'knight',
   'paladin',
   'ranger',
-  'rogue',
+  'thief',
   'mage',
   'barbarian',
   'druid',
@@ -156,7 +156,7 @@ export const CLASS_MODEL_PATHS = [
 
 /** Render the weapon attached to a character rig exactly as the game grips
  *  variant weapons (handslot.r + lift + right-hand flip + maxHeight clamp).
- *  Default character: the knight (player_warrior). opts.attack adds a mid-swing
+ *  Default character: the knight (player_swordman). opts.attack adds a mid-swing
  *  frame; opts.prefix renames outputs held_<prefix>_*. */
 export async function renderHeldPreviews(
   weaponGlbPath,

@@ -23,7 +23,7 @@ const characterAssetsSource = readFileSync(
 
 describe('appearance skin selection', () => {
   it('updates offline player skin through the world contract', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'druid', playerName: 'Skintest' });
+    const sim = new Sim({ seed: 1, playerClass: 'acolyte', playerName: 'Skintest' });
     const world: IWorld = sim;
 
     world.changeSkin(3);

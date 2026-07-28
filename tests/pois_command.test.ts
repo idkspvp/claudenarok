@@ -1,16 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
-import { SimEvent, dist2d } from '../src/sim/types';
 import { zoneAt } from '../src/sim/data';
+import { Sim } from '../src/sim/sim';
+import { dist2d, type SimEvent } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
   const e = sim.entities.get(pid)!;
-  e.pos.x = x; e.pos.z = z;
+  e.pos.x = x;
+  e.pos.z = z;
   e.pos.y = groundHeight(x, z, sim.cfg.seed);
   e.prevPos = { ...e.pos };
 }
@@ -36,7 +37,7 @@ function expected(sim: Sim, pid: number): string {
 describe('/pois command', () => {
   it('lists the current zone landmarks nearest first', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     teleport(sim, a, 0, 0); // first zone
     const want = expected(sim, a);
@@ -49,7 +50,7 @@ describe('/pois command', () => {
 
   it('tracks the zone you stand in, via the /landmarks alias', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     teleport(sim, a, 0, 600); // deeper zone
     const want = expected(sim, a);
@@ -60,7 +61,7 @@ describe('/pois command', () => {
 
   it('is self-only and never logged or spoken', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const result = sim.chat('/poi', a);
     expect(result).toBeNull();

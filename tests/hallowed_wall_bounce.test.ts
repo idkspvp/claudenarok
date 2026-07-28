@@ -1,4 +1,4 @@
-// Hallowed Wall (Protection paladin signature): a direct hit on the target that then
+// Hallowed Wall (Protection swordman signature): a direct hit on the target that then
 // bounces to up to 2 nearby enemies AROUND THE TARGET (not the caster). Regression for
 // the old caster-centered, uncapped aoeDamage that hit enemies next to the caster and
 // re-hit the primary. The bounce is a deterministic chainDamage (nearest, then lowest id).
@@ -24,7 +24,7 @@ const tookDamage = (m: Entity) => m.maxHp - m.hp > 0;
 
 describe('Hallowed Wall bounce', () => {
   it('bounces to enemies around the target, not the caster, capped at 2', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'paladin', autoEquip: true });
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true });
     sim.setPlayerLevel(20);
     const p = sim.entities.get(sim.playerId) as Entity;
     p.maxHp = p.hp = 1_000_000; // survive incidental mob swings during resolution

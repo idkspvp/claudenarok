@@ -60,7 +60,7 @@ const DUST = 'arcane_dust';
 // enchanted and sitting in the bags.
 const WORN_WEAPON = 'bronzework_mace';
 
-const makeSim = (seed = 7): Sim => new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+const makeSim = (seed = 7): Sim => new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 
 function eventsOfType(events: SimEvent[], type: SimEvent['type']): SimEvent[] {
   return events.filter((ev) => ev.type === type);
@@ -297,7 +297,7 @@ function joinServer(
   id: number,
   name: string,
 ): ClientSession {
-  const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -339,7 +339,7 @@ function eventsFor(sent: { t: string; list?: SimEvent[] }[], type: SimEvent['typ
 
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly
 // (the tests/snapshots.test.ts bareClient shape).
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();

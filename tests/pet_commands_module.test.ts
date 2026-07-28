@@ -23,6 +23,7 @@ import {
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 import { localizeSimText } from '../src/ui/sim_i18n';
+import { fundCasts } from './helpers/sp';
 
 // Direct unit tests for the extracted pet command/lifecycle module (P1b). They drive
 // the moved functions through the real Sim.ctx seam (so the still-on-Sim helpers they
@@ -32,12 +33,12 @@ import { localizeSimText } from '../src/ui/sim_i18n';
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
-function hunterWorld(seed = 11): { sim: AnySim; hid: number; hunter: AnyEntity } {
-  const sim = new Sim({ seed, playerClass: 'hunter', noPlayer: true }) as AnySim;
-  const hid = sim.addPlayer('hunter', 'Owner') as number;
+function hunterWorld(seed = 11): { sim: AnySim; hid: number; archer: AnyEntity } {
+  const sim = new Sim({ seed, playerClass: 'archer', noPlayer: true }) as AnySim;
+  const hid = sim.addPlayer('archer', 'Owner') as number;
   sim.setPlayerLevel(12, hid);
-  const hunter = sim.entities.get(hid) as AnyEntity;
-  return { sim, hid, hunter };
+  const archer = sim.entities.get(hid) as AnyEntity;
+  return { sim, hid, archer };
 }
 
 // Spawn a tameable wild beast next to `near` (forest_wolf: family beast, low level,
@@ -55,13 +56,13 @@ function spawnWolf(sim: AnySim, near: AnyEntity, level = 2): AnyEntity {
 
 describe('pet_commands module (P1b)', () => {
   it('an unbreakable owner movement lock blocks every user-issued pet command', () => {
-    const { sim, hid, hunter } = hunterWorld();
-    const tame = spawnWolf(sim, hunter);
-    completeTame(sim.ctx, hunter, tame);
+    const { sim, hid, archer } = hunterWorld();
+    const tame = spawnWolf(sim, archer);
+    completeTame(sim.ctx, archer, tame);
     const pet = petOf(sim.ctx, hid) as AnyEntity;
-    const target = spawnWolf(sim, hunter);
-    hunter.targetId = target.id;
-    sim.ctx.applyAura(hunter, {
+    const target = spawnWolf(sim, archer);
+    archer.targetId = target.id;
+    sim.ctx.applyAura(archer, {
       id: 'scripted_boss_lock',
       name: 'Scripted Boss Lock',
       kind: 'root',
@@ -129,13 +130,13 @@ describe('pet_commands module (P1b)', () => {
   });
 
   it('an unbreakable owner movement lock cannot spend mana or arm Demon Heal', () => {
-    const sim = new Sim({ seed: 12, playerClass: 'warlock', noPlayer: true }) as AnySim;
-    const pid = sim.addPlayer('warlock', 'Demonist') as number;
+    const sim = new Sim({ seed: 12, playerClass: 'mage', noPlayer: true }) as AnySim;
+    const pid = sim.addPlayer('mage', 'Demonist') as number;
     const owner = sim.entities.get(pid) as AnyEntity;
     summonPet(sim.ctx, owner, 'emberkin');
     const pet = petOf(sim.ctx, pid) as AnyEntity;
     pet.hp = Math.max(1, pet.maxHp - 50);
-    owner.resource = owner.maxResource;
+    fundCasts(owner);
     sim.ctx.applyAura(owner, {
       id: 'scripted_boss_lock',
       name: 'Scripted Boss Lock',
@@ -158,16 +159,16 @@ describe('pet_commands module (P1b)', () => {
     expect(owner.channeling).toBe(false);
   });
 
-  it('hunter lifecycle: tame -> setMode -> feed -> revive -> abandon', () => {
-    const { sim, hid, hunter } = hunterWorld();
-    const wolf = spawnWolf(sim, hunter);
+  it('archer lifecycle: tame -> setMode -> feed -> revive -> abandon', () => {
+    const { sim, hid, archer } = hunterWorld();
+    const wolf = spawnWolf(sim, archer);
 
     // Tame: completeTame builds the owned pet and scales it to the owner's level.
-    completeTame(sim.ctx, hunter, wolf);
+    completeTame(sim.ctx, archer, wolf);
     const pet = petOf(sim.ctx, hid) as AnyEntity;
     expect(pet).toBeTruthy();
     expect(pet.ownerId).toBe(hid);
-    expect(pet.level).toBe(hunter.level); // syncPetLevel scaled it up from level 2
+    expect(pet.level).toBe(archer.level); // syncPetLevel scaled it up from level 2
     expect(pet.petMode).toBe('defensive');
 
     // setMode cycles.
@@ -195,18 +196,18 @@ describe('pet_commands module (P1b)', () => {
   });
 
   it('restorePet notifies the owner when the stored template no longer exists', () => {
-    const { sim, hid, hunter } = hunterWorld();
+    const { sim, hid, archer } = hunterWorld();
     // Stale save: the pet's templateId was removed/renamed by a content update.
     const stale = {
       templateId: 'forest_wolf_REMOVED',
       name: 'Rex',
-      level: hunter.level,
+      level: archer.level,
       hp: 50,
       dead: false,
       mode: 'defensive' as const,
       autoTaunt: false,
     };
-    restorePet(sim.ctx, hunter, stale);
+    restorePet(sim.ctx, archer, stale);
 
     // No pet is created from an unknown template (we cannot rebuild it)...
     expect(petOf(sim.ctx, hid, true)).toBeNull();
@@ -220,7 +221,7 @@ describe('pet_commands module (P1b)', () => {
   });
 
   it('restorePet emits the name-free notice when the saved name is unclean', () => {
-    const { sim, hid, hunter } = hunterWorld();
+    const { sim, hid, archer } = hunterWorld();
     // Stale template AND an unclean saved name (cleanPetName rejects it), so there
     // is no localizable proper noun to splice. The emit must be the generic,
     // name-free sentence, not one that embeds an English "Your pet" the client
@@ -228,13 +229,13 @@ describe('pet_commands module (P1b)', () => {
     const stale = {
       templateId: 'forest_wolf_REMOVED',
       name: '???',
-      level: hunter.level,
+      level: archer.level,
       hp: 50,
       dead: false,
       mode: 'defensive' as const,
       autoTaunt: false,
     };
-    restorePet(sim.ctx, hunter, stale);
+    restorePet(sim.ctx, archer, stale);
     expect(petOf(sim.ctx, hid, true)).toBeNull();
     const ev = sim.drainEvents();
     const notice = ev.find(
@@ -247,9 +248,9 @@ describe('pet_commands module (P1b)', () => {
   });
 
   it("setPetMode('passive') clears aggroTargetId/inCombat/autoAttack", () => {
-    const { sim, hid, hunter } = hunterWorld(12);
-    const wolf = spawnWolf(sim, hunter);
-    completeTame(sim.ctx, hunter, wolf);
+    const { sim, hid, archer } = hunterWorld(12);
+    const wolf = spawnWolf(sim, archer);
+    completeTame(sim.ctx, archer, wolf);
     const pet = petOf(sim.ctx, hid) as AnyEntity;
     pet.aggroTargetId = 999;
     pet.inCombat = true;
@@ -263,15 +264,15 @@ describe('pet_commands module (P1b)', () => {
     expect(pet.autoAttack).toBe(false);
   });
 
-  it('warlock demon swap: fresh demon answers on swap + resummon + Demon Heal tick', () => {
-    const sim = new Sim({ seed: 13, playerClass: 'warlock', noPlayer: true }) as AnySim;
-    const wpid = sim.addPlayer('warlock', 'Demonist') as number;
+  it('mage demon swap: fresh demon answers on swap + resummon + Demon Heal tick', () => {
+    const sim = new Sim({ seed: 13, playerClass: 'mage', noPlayer: true }) as AnySim;
+    const wpid = sim.addPlayer('mage', 'Demonist') as number;
     sim.setPlayerLevel(12, wpid);
-    const warlock = sim.entities.get(wpid) as AnyEntity;
-    warlock.resource = warlock.maxResource;
+    const mage = sim.entities.get(wpid) as AnyEntity;
+    fundCasts(mage);
 
     // Summon an imp.
-    summonPet(sim.ctx, warlock, 'emberkin');
+    summonPet(sim.ctx, mage, 'emberkin');
     const imp = petOf(sim.ctx, wpid) as AnyEntity;
     expect(imp).toBeTruthy();
     expect(imp.templateId).toBe('emberkin');
@@ -279,13 +280,13 @@ describe('pet_commands module (P1b)', () => {
     // Demon Heal channel tick heals the wounded demon (the channel driver feeds it).
     imp.hp = Math.floor(imp.maxHp * 0.4);
     healPet(sim.ctx, wpid);
-    expect(warlock.castingAbility).toBe('demon_heal');
+    expect(mage.castingAbility).toBe('demon_heal');
     const before = imp.hp;
-    applyDemonHealTick(sim.ctx, warlock);
+    applyDemonHealTick(sim.ctx, mage);
     expect(imp.hp).toBeGreaterThan(before);
 
     // Swap to a DIFFERENT demon: the imp is despawned, a voidwalker answers.
-    summonPet(sim.ctx, warlock, 'gloomshade');
+    summonPet(sim.ctx, mage, 'gloomshade');
     const vw = petOf(sim.ctx, wpid) as AnyEntity;
     expect(vw.templateId).toBe('gloomshade');
     expect(vw.id).not.toBe(imp.id);
@@ -295,7 +296,7 @@ describe('pet_commands module (P1b)', () => {
     // full-health one answers in its place (not a toggle-off into no pet).
     const woundedId = vw.id;
     vw.hp = Math.floor(vw.maxHp * 0.4);
-    summonPet(sim.ctx, warlock, 'gloomshade');
+    summonPet(sim.ctx, mage, 'gloomshade');
     const freshVw = petOf(sim.ctx, wpid) as AnyEntity;
     expect(freshVw).toBeTruthy();
     expect(freshVw.templateId).toBe('gloomshade');
@@ -306,9 +307,9 @@ describe('pet_commands module (P1b)', () => {
 
   it('is deterministic on seeded replay (same seed + same drive => identical state)', () => {
     const drive = (seed: number): string => {
-      const { sim, hid, hunter } = hunterWorld(seed);
-      const wolf = spawnWolf(sim, hunter);
-      completeTame(sim.ctx, hunter, wolf);
+      const { sim, hid, archer } = hunterWorld(seed);
+      const wolf = spawnWolf(sim, archer);
+      completeTame(sim.ctx, archer, wolf);
       setPetMode(sim.ctx, 'aggressive', hid);
       const pet = petOf(sim.ctx, hid) as AnyEntity;
       pet.hp = Math.floor(pet.maxHp * 0.5);

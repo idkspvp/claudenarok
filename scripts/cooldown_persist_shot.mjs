@@ -1,6 +1,6 @@
 // Visual proof for the cooldown-persistence fix: spell/potion cooldowns used to
 // reset on logout, letting players bypass them by relogging. Boots the offline
-// game, puts the warrior on real ability + combat-potion cooldowns, shows the
+// game, puts the swordman on real ability + combat-potion cooldowns, shows the
 // /cooldowns readout, then drives the REAL save/load path (sim.serializeCharacter
 // -> sim.addPlayer({state})) to relog the character and shows the cooldowns
 // survive. The "old behaviour" panel is the same character loaded with the
@@ -40,8 +40,8 @@ await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.evaluate(() => {
   const card =
-    document.querySelector('#offline-select .mini-class[data-class="warrior"]') ||
-    document.querySelector('.class-card[data-class="warrior"]');
+    document.querySelector('#offline-select .mini-class[data-class="swordman"]') ||
+    document.querySelector('.class-card[data-class="swordman"]');
   card?.click();
 });
 await sleep(150);
@@ -58,7 +58,7 @@ await sleep(2500);
 await page.evaluate(() => document.querySelector('.tut-skip')?.click());
 await sleep(300);
 
-// --- stage real cooldowns on the controlled warrior and show the readout.
+// --- stage real cooldowns on the controlled swordman and show the readout.
 const before = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
@@ -84,12 +84,12 @@ const relog = await page.evaluate(() => {
   // REAL serialize: with the fix this now carries a `cooldowns` snapshot.
   const state = sim.serializeCharacter(pid);
   // Fixed load: addPlayer restores the cooldown deltas, re-anchored to the clock.
-  const fixedPid = sim.addPlayer('warrior', 'Relogged', { state });
+  const fixedPid = sim.addPlayer('swordman', 'Relogged', { state });
   const fixed = sim.entities.get(fixedPid);
   // Pre-fix load: a save with no `cooldowns` field (exactly the old behaviour).
   const legacy = { ...state };
   delete legacy.cooldowns;
-  const oldPid = sim.addPlayer('warrior', 'OldRelog', { state: legacy });
+  const oldPid = sim.addPlayer('swordman', 'OldRelog', { state: legacy });
   const old = sim.entities.get(oldPid);
   const fmt = (e) => ({
     abilities: [...e.cooldowns.entries()].map(([id, r]) => `${id} (${Math.ceil(r)}s)`),

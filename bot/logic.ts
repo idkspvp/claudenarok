@@ -327,11 +327,11 @@ export async function clearDepartedFlair(
 // A class "icon" + the in-game level attached to the member's Discord name, so a
 // linked player's level shows next to their name in the server (e.g. "Aldric ⚔20").
 const CLASS_EMOJI: Record<string, string> = {
-  warrior: '⚔',
+  swordman: '⚔',
   paladin: '🛡',
-  hunter: '🏹',
-  rogue: '🗡',
-  priest: '✨',
+  archer: '🏹',
+  thief: '🗡',
+  acolyte: '✨',
   mage: '🔮',
   warlock: '😈',
   shaman: '⚡',

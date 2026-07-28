@@ -55,7 +55,7 @@ async function capture(key, mobile) {
   }
   await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
   if (mobile) await page.evaluate(() => document.body.classList.add('mobile-touch'));
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Iconproof', settleMs: 3000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Iconproof', settleMs: 3000 });
   const inventory = await page.evaluate((ids) => {
     const game = window.__game;
     const pid = game?.sim?.player?.id;

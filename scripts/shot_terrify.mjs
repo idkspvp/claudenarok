@@ -2,10 +2,12 @@
 // Boots the game, repurposes a nearby mob as Sister Nhalia, fires her timed
 // AoE-fear pulse onto the player, and captures the resulting fear debuff on
 // the player unit frame.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -22,7 +24,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Brannok');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -31,13 +33,18 @@ const result = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  p.maxHp = 100000; p.hp = 100000;
+  p.maxHp = 100000;
+  p.hp = 100000;
 
-  let mob = null, d = 1e9;
+  let mob = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind === 'mob' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; mob = e; }
+      if (dd < d) {
+        d = dd;
+        mob = e;
+      }
     }
   }
   // Reskin it as the wailing banshee, stand it next to us, lock it in combat.
@@ -45,7 +52,8 @@ const result = await page.evaluate(() => {
   mob.name = 'Sister Nhalia';
   mob.hostile = true;
   mob.hp = mob.maxHp;
-  mob.pos.x = p.pos.x + 3; mob.pos.z = p.pos.z;
+  mob.pos.x = p.pos.x + 3;
+  mob.pos.z = p.pos.z;
   mob.aiState = 'attack';
   mob.aggroTargetId = p.id;
   mob.inCombat = true;
@@ -58,7 +66,12 @@ const result = await page.evaluate(() => {
   sim.updateMob(mob);
 
   const wail = p.auras.find((a) => a.name === "Banshee's Wail");
-  return { hasWail: !!wail, kind: wail?.kind, remaining: wail?.remaining, breaksOnDamage: wail?.breaksOnDamage };
+  return {
+    hasWail: !!wail,
+    kind: wail?.kind,
+    remaining: wail?.remaining,
+    breaksOnDamage: wail?.breaksOnDamage,
+  };
 });
 console.log('terrify result:', JSON.stringify(result));
 
@@ -77,8 +90,10 @@ if (box) {
   await page.screenshot({
     path: 'tmp/terrify_frame.png',
     clip: {
-      x: Math.max(0, box.x - pad), y: Math.max(0, box.y - pad),
-      width: box.w + pad * 2, height: box.h + pad * 2,
+      x: Math.max(0, box.x - pad),
+      y: Math.max(0, box.y - pad),
+      width: box.w + pad * 2,
+      height: box.h + pad * 2,
     },
   });
   // Hover the debuff icon to surface its tooltip.
@@ -87,8 +102,10 @@ if (box) {
   await page.screenshot({
     path: 'tmp/terrify_tooltip_crop.png',
     clip: {
-      x: Math.max(0, box.x - 300), y: Math.max(0, box.y - 10),
-      width: 300 + box.w + 20, height: 140,
+      x: Math.max(0, box.x - 300),
+      y: Math.max(0, box.y - 10),
+      width: 300 + box.w + 20,
+      height: 140,
     },
   });
 }

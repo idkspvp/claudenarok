@@ -10,7 +10,7 @@ const SMITH_MASTER = 'forgemistress_darva';
 const WEAPON_ARMOR = 'weaponcrafting+armorcrafting';
 
 function makeSim(seed = 6161): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 /** A minimal ctx exposing only what announceAttunement + emitToZonePlayers read:

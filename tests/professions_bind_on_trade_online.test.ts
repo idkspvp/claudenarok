@@ -98,7 +98,7 @@ function joinServer(
   id: number,
   name: string,
 ): ClientSession {
-  const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -154,7 +154,7 @@ function tradeSessionFor(
 
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly
 // (the tests/snapshots.test.ts bareClient shape).
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();
@@ -306,13 +306,13 @@ describe('online bind-on-trade arc (two sessions, live GameServer)', () => {
 // Arm 2: bindOnTrade JSONB persistence round-trip + the shared load clamp.
 // ---------------------------------------------------------------------------
 function freshSim(seed = 5): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false, noPlayer: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false, noPlayer: true });
 }
 
 describe('bindOnTrade persistence round-trip (serialize -> JSONB -> load)', () => {
   it('an armed-unstamped and a stamped payload both survive a serialize/load round-trip byte-identically', () => {
     const src = freshSim();
-    const pid = src.addPlayer('warrior', 'Src');
+    const pid = src.addPlayer('swordman', 'Src');
     // Two distinct payloads => two distinct slots (boundTo differs, so they never
     // merge). 777 is an arbitrary persisted owner id; the load only preserves it.
     src.ctx.addItemInstance(SECONDARY, { bindOnTrade: true }, pid);
@@ -324,7 +324,7 @@ describe('bindOnTrade persistence round-trip (serialize -> JSONB -> load)', () =
     const wire = JSON.parse(JSON.stringify(state));
 
     const dst = freshSim(9);
-    const loadedPid = dst.addPlayer('warrior', 'Dst', { state: wire });
+    const loadedPid = dst.addPlayer('swordman', 'Dst', { state: wire });
     const inv = dst.ctx.resolve(loadedPid)?.meta.inventory ?? [];
     const armed = inv.find((s) => s.itemId === SECONDARY && s.instance?.boundTo === undefined);
     const stamped = inv.find((s) => s.itemId === SECONDARY && s.instance?.boundTo === 777);
@@ -336,7 +336,7 @@ describe('bindOnTrade persistence round-trip (serialize -> JSONB -> load)', () =
 
   it('an absurd persisted count on an armed instanced stack load-clamps through the SHARED instancedCountCap', () => {
     const src = freshSim();
-    const pid = src.addPlayer('warrior', 'Src');
+    const pid = src.addPlayer('swordman', 'Src');
     src.ctx.addItemInstance(SECONDARY, { bindOnTrade: true }, pid);
 
     const state = src.serializeCharacter(pid);
@@ -349,7 +349,7 @@ describe('bindOnTrade persistence round-trip (serialize -> JSONB -> load)', () =
     tampered.count = 9999;
 
     const dst = freshSim(9);
-    const loadedPid = dst.addPlayer('warrior', 'Dst', { state: wire });
+    const loadedPid = dst.addPlayer('swordman', 'Dst', { state: wire });
     const loaded = (dst.ctx.resolve(loadedPid)?.meta.inventory ?? []).find(
       (s) => s.itemId === SECONDARY,
     );

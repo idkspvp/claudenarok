@@ -35,7 +35,7 @@ type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 99): AnySim {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, e: AnyEntity, x: number, z: number): void {
@@ -110,7 +110,7 @@ function expectedHeroicStats(template: MobTemplate, dungeonId: string) {
 describe('dungeons: door-trigger entry/exit', () => {
   it('reports whether direct dungeon entry and exit changed the world', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
 
     expect(enterDungeon(sim.ctx, 'missing_dungeon', pid)).toBe(false);
     expect(enterDungeon(sim.ctx, 'hollow_crypt', pid)).toBe(true);
@@ -120,7 +120,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 
   it('walking onto a dungeon door teleports the player into a freshly claimed instance', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     const p = sim.entities.get(pid) as AnyEntity;
     const door = hollowDoor(sim);
     teleport(sim, p, door.pos.x, door.pos.z);
@@ -138,7 +138,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 
   it('a party of two walking the same door shares ONE instance (instanceKeyFor)', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aaa');
+    const a = sim.addPlayer('swordman', 'Aaa');
     const b = sim.addPlayer('mage', 'Bbb');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
@@ -161,7 +161,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 
   it('walking the exit portal climbs the player back out (no DUNGEON_LIST[0] fallback)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     const p = sim.entities.get(pid) as AnyEntity;
     const door = hollowDoor(sim);
     teleport(sim, p, door.pos.x, door.pos.z);
@@ -177,7 +177,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 
   it('leaving the dungeon scrubs the leaver from every inside hate table (no exit dancing)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Dancer');
+    const pid = sim.addPlayer('swordman', 'Dancer');
     const p = sim.entities.get(pid) as AnyEntity;
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedHollow(sim);
@@ -202,7 +202,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 
   it('the mob re-targets a remaining party member instead of chasing the leaver', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Leaver');
+    const a = sim.addPlayer('swordman', 'Leaver');
     const b = sim.addPlayer('mage', 'Stayer');
     sim.partyInvite(b, a);
     sim.partyAccept(b);
@@ -235,7 +235,7 @@ describe('dungeons: door-trigger entry/exit', () => {
 describe('dungeons: heroic difficulty', () => {
   it('resets a cleared durable solo claim before starting the selected heroic difficulty', () => {
     const sim = makeSim(456);
-    const firstPid = sim.addPlayer('warrior', 'Switcher', { characterId: 77 });
+    const firstPid = sim.addPlayer('swordman', 'Switcher', { characterId: 77 });
 
     enterDungeon(sim.ctx, 'hollow_crypt', firstPid);
     const normalInst = claimedDungeon(sim, 'hollow_crypt', 'normal');
@@ -247,7 +247,7 @@ describe('dungeons: heroic difficulty', () => {
 
     // A relog keeps the anti-exploit durable claim and its defeated boss.
     sim.removePlayer(firstPid);
-    const secondPid = sim.addPlayer('warrior', 'Switcher', { characterId: 77 });
+    const secondPid = sim.addPlayer('swordman', 'Switcher', { characterId: 77 });
     enterDungeon(sim.ctx, 'hollow_crypt', secondPid);
     expect(mobInInstance(sim, normalInst, 'morthen').dead).toBe(true);
 
@@ -272,7 +272,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('tells a player entering a claim at the other difficulty how to transition', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Confused', { characterId: 78 });
+    const pid = sim.addPlayer('swordman', 'Confused', { characterId: 78 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -308,7 +308,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('refuses a same-difficulty reset so normal bosses cannot be farmed with zero downtime', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Farmer', { characterId: 89 });
+    const pid = sim.addPlayer('swordman', 'Farmer', { characterId: 89 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -330,7 +330,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('binds a reset to the selected difficulty so toggle-reset-toggle cannot respawn Normal', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'ToggleFarmer', { characterId: 92 });
+    const pid = sim.addPlayer('swordman', 'ToggleFarmer', { characterId: 92 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const normalInst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -361,7 +361,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('allows the reverse transition when the five-minute cooldown expires', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Patient', { characterId: 202 });
+    const pid = sim.addPlayer('swordman', 'Patient', { characterId: 202 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -379,8 +379,8 @@ describe('dungeons: heroic difficulty', () => {
 
   it('keeps the cooldown when the owners reform under a new party id', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'Reformer', { characterId: 93 });
-    const member = sim.addPlayer('warrior', 'Rejoiner', { characterId: 94 });
+    const leader = sim.addPlayer('swordman', 'Reformer', { characterId: 93 });
+    const member = sim.addPlayer('swordman', 'Rejoiner', { characterId: 94 });
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
     enterDungeon(sim.ctx, 'hollow_crypt', leader);
@@ -415,12 +415,12 @@ describe('dungeons: heroic difficulty', () => {
 
   it('keeps the cooldown on the claim when every original owner leaves the party', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'OriginalLeader', { characterId: 193 });
-    const original = sim.addPlayer('warrior', 'OriginalMember', { characterId: 194 });
-    const replacementLeader = sim.addPlayer('warrior', 'ReplacementLeader', {
+    const leader = sim.addPlayer('swordman', 'OriginalLeader', { characterId: 193 });
+    const original = sim.addPlayer('swordman', 'OriginalMember', { characterId: 194 });
+    const replacementLeader = sim.addPlayer('swordman', 'ReplacementLeader', {
       characterId: 195,
     });
-    const replacementMember = sim.addPlayer('warrior', 'ReplacementMember', {
+    const replacementMember = sim.addPlayer('swordman', 'ReplacementMember', {
       characterId: 196,
     });
     sim.partyInvite(original, leader);
@@ -480,7 +480,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it("keeps a reset owner out of another party's pre-created claim during cooldown", () => {
     const sim = makeSim();
-    const owner = sim.addPlayer('warrior', 'ResetOwner', { characterId: 95 });
+    const owner = sim.addPlayer('swordman', 'ResetOwner', { characterId: 95 });
     enterDungeon(sim.ctx, 'hollow_crypt', owner);
     const resetClaim = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, owner);
@@ -488,8 +488,8 @@ describe('dungeons: heroic difficulty', () => {
     sim.resetDungeonInstances(owner);
     expect(resetClaim.difficulty).toBe('heroic');
 
-    const friend = sim.addPlayer('warrior', 'Friend', { characterId: 96 });
-    const helper = sim.addPlayer('warrior', 'Helper', { characterId: 97 });
+    const friend = sim.addPlayer('swordman', 'Friend', { characterId: 96 });
+    const helper = sim.addPlayer('swordman', 'Helper', { characterId: 97 });
     sim.partyInvite(helper, friend);
     sim.partyAccept(helper);
     enterDungeon(sim.ctx, 'hollow_crypt', friend);
@@ -517,8 +517,8 @@ describe('dungeons: heroic difficulty', () => {
 
   it('inherits the cooldown from the party claim itself when no member holds a lock', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'ClaimHolder', { characterId: 210 });
-    const member = sim.addPlayer('warrior', 'Second', { characterId: 211 });
+    const leader = sim.addPlayer('swordman', 'ClaimHolder', { characterId: 210 });
+    const member = sim.addPlayer('swordman', 'Second', { characterId: 211 });
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
     enterDungeon(sim.ctx, 'hollow_crypt', leader);
@@ -532,7 +532,7 @@ describe('dungeons: heroic difficulty', () => {
     // that forgets them): the claim's own resetAvailableAt must still poison
     // joiners, or roster churn could rotate the cooldown away.
     sim.dungeonResetLocks.clear();
-    const joiner = sim.addPlayer('warrior', 'Freshest', { characterId: 212 });
+    const joiner = sim.addPlayer('swordman', 'Freshest', { characterId: 212 });
     sim.partyInvite(joiner, leader);
     sim.partyAccept(joiner);
     sim.partyLeave(joiner);
@@ -554,7 +554,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('never shortens an existing reset lock when joining a party', () => {
     const sim = makeSim();
-    const mule = sim.addPlayer('warrior', 'OldLock', { characterId: 231 });
+    const mule = sim.addPlayer('swordman', 'OldLock', { characterId: 231 });
     enterDungeon(sim.ctx, 'hollow_crypt', mule);
     leaveDungeon(sim.ctx, mule);
     sim.setDungeonDifficulty('heroic', mule);
@@ -563,7 +563,7 @@ describe('dungeons: heroic difficulty', () => {
     // Much later (the mule's lock is nearly expired) the farmer resets too,
     // then briefly joins the mule's party hoping to inherit the shorter lock.
     sim.time += INSTANCE_EMPTY_TIMEOUT - 5;
-    const farmer = sim.addPlayer('warrior', 'Launderer', { characterId: 230 });
+    const farmer = sim.addPlayer('swordman', 'Launderer', { characterId: 230 });
     enterDungeon(sim.ctx, 'hollow_crypt', farmer);
     const farmerClaim = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, farmer);
@@ -579,7 +579,7 @@ describe('dungeons: heroic difficulty', () => {
     // cannot mint a fresh run (the laundering exploit's actual payoff).
     sim.time += 10;
     sim.setDungeonDifficulty('normal', farmer);
-    const helper = sim.addPlayer('warrior', 'CleanHelper', { characterId: 232 });
+    const helper = sim.addPlayer('swordman', 'CleanHelper', { characterId: 232 });
     sim.partyInvite(helper, farmer);
     sim.partyAccept(helper);
     sim.drainEvents();
@@ -601,9 +601,9 @@ describe('dungeons: heroic difficulty', () => {
 
   it('lets a ghost corpse-run back into the party claim past a partymate reset lock', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'RunLeader', { characterId: 220 });
-    const runner = sim.addPlayer('warrior', 'CorpseGhost', { characterId: 221 });
-    const locked = sim.addPlayer('warrior', 'RecentReset', { characterId: 222 });
+    const leader = sim.addPlayer('swordman', 'RunLeader', { characterId: 220 });
+    const runner = sim.addPlayer('swordman', 'CorpseGhost', { characterId: 221 });
+    const locked = sim.addPlayer('swordman', 'RecentReset', { characterId: 222 });
     // The future recruit earns a reset lock on their own solo claim first.
     enterDungeon(sim.ctx, 'hollow_crypt', locked);
     leaveDungeon(sim.ctx, locked);
@@ -635,7 +635,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('preserves an empty claim while unlooted boss loot remains inside', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Looter', { characterId: 90 });
+    const pid = sim.addPlayer('swordman', 'Looter', { characterId: 90 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     const boss = mobInInstance(sim, inst, 'morthen');
@@ -663,7 +663,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('preserves a heroic daily lockout after resetting a cleared normal claim', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Locked', { characterId: 91 });
+    const pid = sim.addPlayer('swordman', 'Locked', { characterId: 91 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const normalInst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -687,7 +687,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('refuses to reset an owned instance while a player is still inside', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Inside', { characterId: 88 });
+    const pid = sim.addPlayer('swordman', 'Inside', { characterId: 88 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     sim.setDungeonDifficulty('heroic', pid);
@@ -708,7 +708,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('allows only the party leader to reset the party claim', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'Leader', { characterId: 197 });
+    const leader = sim.addPlayer('swordman', 'Leader', { characterId: 197 });
     const member = sim.addPlayer('mage', 'Member', { characterId: 198 });
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -735,7 +735,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('preserves every claim when one resettable dungeon still contains loot', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Atomic', { characterId: 199 });
+    const pid = sim.addPlayer('swordman', 'Atomic', { characterId: 199 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const hollow = claimedDungeon(sim, 'hollow_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -759,7 +759,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('refuses a reset while a released corpse run remains bound to the claim', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'CorpseRunner', { characterId: 200 });
+    const pid = sim.addPlayer('swordman', 'CorpseRunner', { characterId: 200 });
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
     const boss = mobInInstance(sim, inst, 'morthen');
@@ -791,7 +791,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('does not include raid claims in Reset All Instances', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Raider', { characterId: 201 });
+    const pid = sim.addPlayer('swordman', 'Raider', { characterId: 201 });
     enterDungeon(sim.ctx, 'nythraxis_crypt', pid);
     const raidClaim = claimedDungeon(sim, 'nythraxis_crypt', 'normal');
     leaveDungeon(sim.ctx, pid);
@@ -807,7 +807,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('claims heroic Hollow Crypt as a fixed heroic instance with level-22 transformed mobs', () => {
     const heroic = makeSim(123);
-    const heroicPid = heroic.addPlayer('warrior', 'Hero');
+    const heroicPid = heroic.addPlayer('swordman', 'Hero');
     heroic.setDungeonDifficulty('heroic', heroicPid);
 
     enterDungeon(heroic.ctx, 'hollow_crypt', heroicPid);
@@ -865,7 +865,7 @@ describe('dungeons: heroic difficulty', () => {
     expect(heroicMorthen.auras.some((a: any) => a.id === 'test_slow')).toBe(false);
 
     const normal = makeSim(123);
-    const normalPid = normal.addPlayer('warrior', 'Normal');
+    const normalPid = normal.addPlayer('swordman', 'Normal');
     enterDungeon(normal.ctx, 'hollow_crypt', normalPid);
     const normalInst = claimedDungeon(normal, 'hollow_crypt', 'normal');
     const normalMorthen = mobInInstance(normal, normalInst, 'morthen');
@@ -896,7 +896,7 @@ describe('dungeons: heroic difficulty', () => {
 
     for (const [dungeonId, bossId] of finalBosses) {
       const sim = makeSim(321);
-      const pid = sim.addPlayer('warrior', `Hero-${dungeonId}`);
+      const pid = sim.addPlayer('swordman', `Hero-${dungeonId}`);
       sim.setDungeonDifficulty('heroic', pid);
 
       enterDungeon(sim.ctx, dungeonId, pid);
@@ -909,7 +909,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('never applies heroic selection to the Nythraxis attunement dungeon', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Attuned');
+    const pid = sim.addPlayer('swordman', 'Attuned');
     sim.setDungeonDifficulty('heroic', pid);
 
     enterDungeon(sim.ctx, 'nythraxis_crypt', pid);
@@ -920,7 +920,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('a live claim wins over a flipped selection; the new difficulty applies after the reset', () => {
     const sim = makeSim(456);
-    const pid = sim.addPlayer('warrior', 'Switcher');
+    const pid = sim.addPlayer('swordman', 'Switcher');
 
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const normalInst = claimedDungeon(sim, 'hollow_crypt', 'normal');
@@ -958,7 +958,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('a party formed after the leader chose heroic inherits the selection', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Late');
     sim.setDungeonDifficulty('heroic', leader);
 
@@ -971,7 +971,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it("a member's stale personal heroic preference never overrides an unset party", () => {
     const sim = makeSim();
-    const member = sim.addPlayer('warrior', 'Stale');
+    const member = sim.addPlayer('swordman', 'Stale');
     const leader = sim.addPlayer('mage', 'Fresh');
     sim.setDungeonDifficulty('heroic', member); // stamped while solo
     expect(sim.dungeonDifficulty(member)).toBe('heroic');
@@ -993,7 +993,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('boss adds summoned in a heroic instance spawn as level-22 transforms', () => {
     const sim = makeSim(31);
-    const pid = sim.addPlayer('warrior', 'Adds');
+    const pid = sim.addPlayer('swordman', 'Adds');
     sim.setDungeonDifficulty('heroic', pid);
     enterDungeon(sim.ctx, 'sunken_bastion', pid);
     const inst = claimedDungeon(sim, 'sunken_bastion', 'heroic');
@@ -1026,7 +1026,7 @@ describe('dungeons: heroic difficulty', () => {
     // the fire-site multiply that heroic spawns rely on.
     const run = (mult?: number): number => {
       const sim = makeSim(444);
-      const pid = sim.addPlayer('warrior', 'Pulse');
+      const pid = sim.addPlayer('swordman', 'Pulse');
       enterDungeon(sim.ctx, 'hollow_crypt', pid);
       const inst = claimedDungeon(sim, 'hollow_crypt', 'normal');
       const morthen = mobInInstance(sim, inst, 'morthen');
@@ -1055,7 +1055,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('allows only the party leader to change the party dungeon difficulty', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'Leader');
+    const leader = sim.addPlayer('swordman', 'Leader');
     const member = sim.addPlayer('mage', 'Member');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1079,7 +1079,7 @@ describe('dungeons: heroic difficulty', () => {
 
   it('a leader-set party difficulty never stamps other members personally', () => {
     const sim = makeSim();
-    const leader = sim.addPlayer('warrior', 'Boss');
+    const leader = sim.addPlayer('swordman', 'Boss');
     const member = sim.addPlayer('mage', 'Along');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1091,7 +1091,7 @@ describe('dungeons: heroic difficulty', () => {
     // party they later lead does not inherit the old group's setting.
     sim.partyLeave(member);
     expect(sim.dungeonDifficulty(member)).toBe('normal');
-    const third = sim.addPlayer('rogue', 'Newmate');
+    const third = sim.addPlayer('thief', 'Newmate');
     sim.partyInvite(third, member);
     sim.partyAccept(third);
     expect(sim.dungeonDifficulty(third)).toBe('normal');
@@ -1114,7 +1114,7 @@ describe('dungeons: heroic marks', () => {
 
   it('grants Heroic Marks directly at kill time without requiring a corpse loot action', () => {
     const sim = makeSim(9);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Mate');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1153,7 +1153,7 @@ describe('dungeons: heroic marks', () => {
 
   it('drops no marks from a normal final boss or heroic trash', () => {
     const normal = makeSim(10);
-    const nPid = normal.addPlayer('warrior', 'Norm');
+    const nPid = normal.addPlayer('swordman', 'Norm');
     enterDungeon(normal.ctx, 'hollow_crypt', nPid);
     const nInst = claimedDungeon(normal, 'hollow_crypt', 'normal');
     const nMorthen = mobInInstance(normal, nInst, 'morthen');
@@ -1174,7 +1174,7 @@ describe('dungeons: heroic marks', () => {
     expect(normal.players.get(nPid)!.raidLockouts.size).toBe(0);
 
     const heroic = makeSim(11);
-    const hPid = heroic.addPlayer('warrior', 'Hero');
+    const hPid = heroic.addPlayer('swordman', 'Hero');
     heroic.setDungeonDifficulty('heroic', hPid);
     enterDungeon(heroic.ctx, 'hollow_crypt', hPid);
     const hInst = claimedDungeon(heroic, 'hollow_crypt', 'heroic');
@@ -1204,7 +1204,7 @@ describe('dungeons: heroic marks', () => {
 
 describe('dungeons: heroic boss drops', () => {
   function killFinalBoss(sim: AnySim, dungeonId: string, bossId: string): AnyEntity {
-    const pid = sim.addPlayer('warrior', 'Slayer');
+    const pid = sim.addPlayer('swordman', 'Slayer');
     sim.setDungeonDifficulty('heroic', pid);
     enterDungeon(sim.ctx, dungeonId, pid);
     const inst = claimedDungeon(sim, dungeonId, 'heroic');
@@ -1253,7 +1253,7 @@ describe('dungeons: heroic boss drops', () => {
 
   it('normal final bosses and heroic trash never drop the heroic epics', () => {
     const normal = makeSim(3);
-    const nPid = normal.addPlayer('warrior', 'Norm');
+    const nPid = normal.addPlayer('swordman', 'Norm');
     enterDungeon(normal.ctx, 'hollow_crypt', nPid);
     const nBoss = mobInInstance(
       normal,
@@ -1295,7 +1295,7 @@ describe('dungeons: heroic boss drops', () => {
     const droppedVariants = new Set<string>();
     for (let seed = 1; seed <= 8; seed++) {
       const sim = makeSim(seed);
-      const tank = sim.addPlayer('warrior', 'Tank');
+      const tank = sim.addPlayer('swordman', 'Tank');
       for (let i = 0; i < 4; i++) {
         const p = sim.addPlayer('mage', `D${i}`);
         sim.partyInvite(p, tank);
@@ -1355,7 +1355,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('a heroic clear locks the heroic claim for the day but not the normal run', () => {
     const sim = makeSim(5);
-    const pid = sim.addPlayer('warrior', 'Raider');
+    const pid = sim.addPlayer('swordman', 'Raider');
     heroicClear(sim, pid, 'hollow_crypt', 'morthen');
 
     // Heroic re-entry is refused with the heroic-locked message.
@@ -1379,13 +1379,13 @@ describe('dungeons: heroic daily lockouts', () => {
     let now = 1_000_000;
     const sim = new Sim({
       seed: 5,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       noPlayer: true,
       lockoutNowMs: () => now,
       raidResetMs: () => now + 24 * 3600 * 1000,
     }) as AnySim;
     sim.utcDay = '2026-07-12';
-    const pid = sim.addPlayer('warrior', 'Raider');
+    const pid = sim.addPlayer('swordman', 'Raider');
     heroicClear(sim, pid, 'hollow_crypt', 'morthen');
 
     const meta = sim.players.get(pid)!;
@@ -1403,7 +1403,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('the kill locks EVERY current party member, wherever they stand', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const camper = sim.addPlayer('mage', 'Camper');
     sim.partyInvite(camper, leader);
     sim.partyAccept(camper);
@@ -1443,8 +1443,8 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('mails a healer waiting back at camp who entered this run, and never twice', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
-    const healer = sim.addPlayer('priest', 'Heals');
+    const leader = sim.addPlayer('swordman', 'Lead');
+    const healer = sim.addPlayer('acolyte', 'Heals');
     sim.partyInvite(healer, leader);
     sim.partyAccept(healer);
     sim.setDungeonDifficulty('heroic', leader);
@@ -1477,7 +1477,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it("uses a released participant's corpse position for loot and Heroic Mark eligibility", () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Fallen');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1506,8 +1506,8 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('a member who left the party mid-run but stayed inside is still locked by the kill', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
-    const buddy = sim.addPlayer('priest', 'Buddy');
+    const leader = sim.addPlayer('swordman', 'Lead');
+    const buddy = sim.addPlayer('acolyte', 'Buddy');
     const quitter = sim.addPlayer('mage', 'Quit');
     sim.partyInvite(buddy, leader);
     sim.partyAccept(buddy);
@@ -1544,8 +1544,8 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it("locks a released member who leaves the party using their corpse's instance position", () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
-    const buddy = sim.addPlayer('priest', 'Buddy');
+    const leader = sim.addPlayer('swordman', 'Lead');
+    const buddy = sim.addPlayer('acolyte', 'Buddy');
     const quitter = sim.addPlayer('mage', 'Quit');
     sim.partyInvite(buddy, leader);
     sim.partyAccept(buddy);
@@ -1595,8 +1595,8 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('ignores a released corpse bound to an older instance claim', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
-    const buddy = sim.addPlayer('priest', 'Buddy');
+    const leader = sim.addPlayer('swordman', 'Lead');
+    const buddy = sim.addPlayer('acolyte', 'Buddy');
     const stale = sim.addPlayer('mage', 'Stale');
     sim.partyInvite(buddy, leader);
     sim.partyAccept(buddy);
@@ -1632,7 +1632,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('an uncredited final-boss death still locks the owning party (no marks, no credit)', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Mate');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1664,7 +1664,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('a locked party cannot ride an unlocked recruit into a fresh heroic claim', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const member = sim.addPlayer('mage', 'Mate');
     sim.partyInvite(member, leader);
     sim.partyAccept(member);
@@ -1690,7 +1690,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
     // A fresh recruit (never locked) joins the party and claims a NEW heroic
     // instance with a living boss.
-    const recruit = sim.addPlayer('priest', 'Fresh');
+    const recruit = sim.addPlayer('acolyte', 'Fresh');
     sim.partyInvite(recruit, leader);
     sim.partyAccept(recruit);
     enterDungeon(sim.ctx, 'hollow_crypt', recruit);
@@ -1712,9 +1712,9 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('a tap-runner who left the party and the instance is still locked by the kill', () => {
     const sim = makeSim(5);
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     const runner = sim.addPlayer('mage', 'Runner');
-    const buddy = sim.addPlayer('priest', 'Buddy');
+    const buddy = sim.addPlayer('acolyte', 'Buddy');
     sim.partyInvite(runner, leader);
     sim.partyAccept(runner);
     sim.partyInvite(buddy, leader);
@@ -1761,7 +1761,7 @@ describe('dungeons: heroic daily lockouts', () => {
   it('a locked player cannot enter a clear they took no part in, even after its boss dies', () => {
     const sim = makeSim(5);
     // A clears heroic solo and is locked; the claim frees.
-    const a = sim.addPlayer('warrior', 'LockedA');
+    const a = sim.addPlayer('swordman', 'LockedA');
     sim.setDungeonDifficulty('heroic', a);
     enterDungeon(sim.ctx, 'hollow_crypt', a);
     const first = claimedDungeon(sim, 'hollow_crypt', 'heroic');
@@ -1777,7 +1777,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
     // An unlocked recruit parties up with A, claims a fresh heroic, and kills
     // its boss alone while A waits outside.
-    const c = sim.addPlayer('priest', 'Fresh');
+    const c = sim.addPlayer('acolyte', 'Fresh');
     sim.partyInvite(a, c);
     sim.partyAccept(a);
     sim.setDungeonDifficulty('heroic', c);
@@ -1808,7 +1808,7 @@ describe('dungeons: heroic daily lockouts', () => {
 
   it('a locked player still walks back into the cleared live claim (corpse-run / loot)', () => {
     const sim = makeSim(5);
-    const pid = sim.addPlayer('warrior', 'Raider');
+    const pid = sim.addPlayer('swordman', 'Raider');
     sim.setDungeonDifficulty('heroic', pid);
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedDungeon(sim, 'hollow_crypt', 'heroic');
@@ -1835,7 +1835,7 @@ describe('dungeons: heroic Nythraxis raid arena', () => {
   // per-run entry record is what the heroic mail arm pays against).
   function raidSetup(difficulty: 'normal' | 'heroic') {
     const sim = makeSim(77);
-    const tank = sim.addPlayer('warrior', 'Tank');
+    const tank = sim.addPlayer('swordman', 'Tank');
     const raiders: number[] = [tank];
     for (let i = 0; i < 4; i++) {
       const pid = sim.addPlayer('mage', `Dps${i}`);
@@ -2287,7 +2287,7 @@ describe('dungeons: heroic Nythraxis raid arena', () => {
 describe('dungeons: ghost corpse-run re-entry', () => {
   it('the tick loop pulls a ghost through the door and resurrects it at the entry', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     const p = sim.entities.get(pid) as AnyEntity;
     // enter, die inside, release the spirit to the outdoor graveyard
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
@@ -2316,7 +2316,7 @@ describe('dungeons: ghost corpse-run re-entry', () => {
     // that prop's rock-mound collider used to bleed forward far enough to swallow
     // the door tile itself, stranding every ghost outside the 2.0yd trigger.
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'CryptRunner');
+    const pid = sim.addPlayer('swordman', 'CryptRunner');
     const p = sim.entities.get(pid) as AnyEntity;
     enterDungeon(sim.ctx, 'nythraxis_crypt', pid);
     expect(sim.instanceSlotAt(p.pos)).not.toBeNull();
@@ -2345,7 +2345,7 @@ describe('dungeons: ghost corpse-run re-entry', () => {
 describe('dungeons: empty-instance reset', () => {
   it('updateInstances frees an empty claimed instance past the timeout', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     const p = sim.entities.get(pid) as AnyEntity;
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedHollow(sim);
@@ -2372,7 +2372,7 @@ describe('dungeons: empty-instance reset', () => {
 
   it('an occupied instance never resets (emptyFor stays 0)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedHollow(sim);
     inst.emptyFor = 100000; // even pre-loaded, an occupied check resets it
@@ -2387,7 +2387,7 @@ describe('dungeons: concurrent-instance capacity', () => {
     const sim = makeSim();
     const PARTIES = 8; // was capped at 6 concurrent instances before the bump
     for (let i = 0; i < PARTIES; i++) {
-      const pid = sim.addPlayer('warrior', `Solo${i}`);
+      const pid = sim.addPlayer('swordman', `Solo${i}`);
       sim.drainEvents();
       enterDungeon(sim.ctx, 'hollow_crypt', pid);
       const events = sim.drainEvents() as any[];
@@ -2406,9 +2406,9 @@ describe('dungeons: concurrent-instance capacity', () => {
 
 describe('dungeons: raid lockout gate', () => {
   function attunedRaid(sim: AnySim): number {
-    const leader = sim.addPlayer('warrior', 'Lead');
+    const leader = sim.addPlayer('swordman', 'Lead');
     while ((sim.partyOf(leader)?.members.length ?? 1) < 5) {
-      const pid = sim.addPlayer('priest', `Fill${sim.players.size}`);
+      const pid = sim.addPlayer('acolyte', `Fill${sim.players.size}`);
       sim.partyInvite(pid, leader);
       sim.partyAccept(pid);
     }
@@ -2468,7 +2468,7 @@ describe('dungeons: raid lockout gate', () => {
 
   it('a non-raid party cannot enter the raid-required arena', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     sim.drainEvents();
     enterDungeon(sim.ctx, 'nythraxis_boss_arena', pid);
     const events = sim.drainEvents() as any[];
@@ -2484,7 +2484,7 @@ describe('dungeons: raid lockout gate', () => {
 describe('dungeons: pure helpers', () => {
   it('instanceKeyFor keys solo vs party players', () => {
     const sim = makeSim();
-    const a = sim.addPlayer('warrior', 'Aaa');
+    const a = sim.addPlayer('swordman', 'Aaa');
     expect(instanceKeyFor(sim.ctx, a)).toBe(`solo:${a}`);
     const b = sim.addPlayer('mage', 'Bbb');
     sim.partyInvite(b, a);
@@ -2496,7 +2496,7 @@ describe('dungeons: pure helpers', () => {
 
   it('instanceOriginOf matches the data instanceOrigin for the slot', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     enterDungeon(sim.ctx, 'hollow_crypt', pid);
     const inst = claimedHollow(sim);
     expect(instanceOriginOf(inst)).toEqual(instanceOrigin(DUNGEONS.hollow_crypt.index, inst.slot));
@@ -2506,7 +2506,7 @@ describe('dungeons: pure helpers', () => {
 describe('dungeons: leaveDungeon guard', () => {
   it('leaveDungeon from the overworld is a no-op (no fallback teleport)', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Solo');
+    const pid = sim.addPlayer('swordman', 'Solo');
     const p = sim.entities.get(pid) as AnyEntity;
     teleport(sim, p, 0, 0);
     const before = { ...p.pos };

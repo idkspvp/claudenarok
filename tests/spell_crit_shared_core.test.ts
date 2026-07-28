@@ -18,9 +18,9 @@ import { SET_CRIT_3PC_RATING, SET_NIGHTTALON } from '../src/sim/content/item_set
 import { ITEMS } from '../src/sim/data';
 import { type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Aura, ItemDef } from '../src/sim/types';
 import { critFractionFromRating } from '../src/sim/types';
+import { spreadAllocation } from './helpers/alloc';
 
 function aura(kind: string, value: number, sourceId: number): Aura {
   return {
@@ -156,20 +156,20 @@ describe.skip('spell crit shared core', () => {
   });
 
   it('the set 3-piece crit rating bonus reaches spell crit through the shared core', () => {
-    // Arrange: a rogue with 2 then 3 Nighttalon pieces (the 3pc grants
+    // Arrange: a thief with 2 then 3 Nighttalon pieces (the 3pc grants
     // SET_CRIT_3PC_RATING crit rating; the pieces themselves carry no ratings).
-    const sim = new Sim({ seed: 11, playerClass: 'rogue' });
+    const sim = new Sim({ seed: 11, playerClass: 'thief' });
     sim.setPlayerLevel(20);
     const p = sim.player;
     const pieces = setMembers(SET_NIGHTTALON);
 
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(pieces.slice(0, 2)),
       undefined,
       {},
-      defaultAllocationFor('rogue', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.sharedCritBonus).toBe(0);
     const twoPiece = sim.ctx.spellCrit(p);
@@ -177,11 +177,11 @@ describe.skip('spell crit shared core', () => {
     // Act
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(pieces.slice(0, 3)),
       undefined,
       {},
-      defaultAllocationFor('rogue', p.level),
+      spreadAllocation(p.level),
     );
 
     // Assert: the set rating is the whole core (no mods, no auras), and spell
@@ -229,7 +229,7 @@ describe.skip('spell crit shared core', () => {
 
   it('berserker stance crit stays melee-only', () => {
     // Arrange
-    const sim = new Sim({ seed: 11, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 11, playerClass: 'swordman' });
     const p = sim.player;
     const spell0 = sim.ctx.spellCrit(p);
 

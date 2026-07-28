@@ -29,7 +29,7 @@
 // (#tab-near-cluster). An enemy actively engaged in melee with the player also
 // joins the cluster, even outside the facing cone, so an immediate attacker
 // cannot lose target priority to a distant idle mob. Keeping the wider off-screen
-// engaged band out of the cluster still means a warrior fleeing a fight can turn
+// engaged band out of the cluster still means a swordman fleeing a fight can turn
 // toward a fresh mob, Tab it, and Charge away, rather than Tab snapping back to
 // the enemy chasing from behind. The fallback band is reached only when the
 // cluster is empty (e.g. the player has turned away from every enemy), so Tab

@@ -1,11 +1,11 @@
-// Before/after proof for the Druid "Wolf Form swings as fast as a rogue" fix.
+// Before/after proof for the Druid "Wolf Form swings as fast as a thief" fix.
 // Drives the REAL offline Sim in-page: a level-20 druid auto-attacks a god-mode
 // dummy for 20s under three conditions and we chart cumulative auto-attacks:
-//   - Wolf Form AFTER fix   (form_cat -> fixed rogue cadence, 1.8s)
+//   - Wolf Form AFTER fix   (form_cat -> fixed thief cadence, 1.8s)
 //   - Wolf Form BEFORE fix  (no form -> the slow caster staff leaked in)
 //   - Rogue (reference)     (1.8s dagger, no form) -> overlaps the AFTER line
-// The bug is visible as the "before" line falling well behind the rogue line;
-// the fix makes "after" land exactly on the rogue reference.
+// The bug is visible as the "before" line falling well behind the thief line;
+// the fix makes "after" land exactly on the thief reference.
 // Needs `npm run dev` (override with GAME_URL). Writes tmp/wolf-form-swing-chart.png.
 
 import fs from 'node:fs';
@@ -104,7 +104,7 @@ const out = await page.evaluate(() => {
     staffSpeed,
     after: run({ form: true, weaponSpeed: staffSpeed }),
     before: run({ form: false, weaponSpeed: staffSpeed }),
-    rogue: run({ form: false, weaponSpeed: 1.8 }),
+    thief: run({ form: false, weaponSpeed: 1.8 }),
   };
 });
 
@@ -131,7 +131,7 @@ await page.evaluate((s) => {
   ctx.fillStyle = '#11151c';
   ctx.fillRect(0, 0, W, H);
 
-  const all = [...s.after, ...s.before, ...s.rogue];
+  const all = [...s.after, ...s.before, ...s.thief];
   const maxN = Math.max(...all) * 1.05;
   const x = (t) => PAD + (t / (TICKS - 1)) * (W - PAD * 1.3);
   const y = (n) => H - PAD - (n / maxN) * (H - PAD * 2);
@@ -168,7 +168,7 @@ await page.evaluate((s) => {
     ctx.setLineDash([]);
   };
   // Rogue reference thick underneath; AFTER dashed on top to show the overlap.
-  line(s.rogue, '#4ad07a', [], 6);
+  line(s.thief, '#4ad07a', [], 6);
   line(s.after, '#e8edf4', [10, 8], 3);
   line(s.before, '#e8623a');
 
@@ -177,7 +177,7 @@ await page.evaluate((s) => {
   ctx.fillText('Druid Wolf Form: auto-attacks landed over 20s (vs a dummy)', PAD, 38);
   const legend = [
     ['#4ad07a', 'Rogue reference (1.8s dagger)'],
-    ['#e8edf4', 'Wolf Form AFTER fix  -> matches rogue cadence (overlaps green)'],
+    ['#e8edf4', 'Wolf Form AFTER fix  -> matches thief cadence (overlaps green)'],
     ['#e8623a', `Wolf Form BEFORE fix -> slow ${s.staffSpeed.toFixed(1)}s staff leaked in`],
   ];
   ctx.font = '16px system-ui, sans-serif';
@@ -193,7 +193,7 @@ await page.evaluate((s) => {
   ctx.fillStyle = '#8b95a6';
   ctx.font = '15px system-ui, sans-serif';
   ctx.fillText(
-    `final swings: after ${fn(s.after)} · rogue ${fn(s.rogue)} · before ${fn(s.before)}`,
+    `final swings: after ${fn(s.after)} · thief ${fn(s.thief)} · before ${fn(s.before)}`,
     PAD,
     H - 18,
   );
@@ -225,8 +225,8 @@ console.log(
   out.staffSpeed,
   '| final swings  after:',
   out.after.at(-1),
-  'rogue:',
-  out.rogue.at(-1),
+  'thief:',
+  out.thief.at(-1),
   'before:',
   out.before.at(-1),
 );

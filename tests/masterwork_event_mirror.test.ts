@@ -9,7 +9,7 @@ import { ClientWorld } from '../src/net/online';
 import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
-// Hunted proc seed, pinned: with a fresh warrior (tailoring 0, no archetype,
+// Hunted proc seed, pinned: with a fresh swordman (tailoring 0, no archetype,
 // no self-signed reagent, not specialized) the first craft of
 // recipe_eastbrook_ritual_vestments draws under the 3 percent base masterwork
 // chance at this seed. Pre-verified against this exact grant order (3x
@@ -22,7 +22,7 @@ const ITEM_ID = 'eastbrook_ritual_vestments';
 // One craft at the pinned seed: returns the sim, its player id, and every
 // masterwork event that craft emitted.
 function craftMasterwork() {
-  const sim = new Sim({ seed: PROC_SEED, playerClass: 'warrior', autoEquip: false });
+  const sim = new Sim({ seed: PROC_SEED, playerClass: 'swordman', autoEquip: false });
   const pid = sim.playerId;
   for (let i = 0; i < 3; i++) sim.addItem('linen_scrap', 1, pid);
   sim.addItem('spider_leg', 1, pid);

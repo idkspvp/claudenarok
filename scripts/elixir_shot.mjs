@@ -8,7 +8,7 @@ import puppeteer from 'puppeteer-core';
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
 
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
-const CLASS = process.env.GAME_CLASS ?? 'warrior';
+const CLASS = process.env.GAME_CLASS ?? 'swordman';
 fs.mkdirSync('tmp', { recursive: true });
 
 const browser = await puppeteer.launch({

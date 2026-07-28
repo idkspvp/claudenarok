@@ -87,7 +87,7 @@ describe('mob combat profiles', () => {
   });
 
   it('exposes default-profile reach through the mob combat module', () => {
-    const sim = new Sim({ seed: 7788, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 7788, playerClass: 'swordman' });
     const player = sim.entities.get(sim.playerId);
     if (!player) throw new Error('expected default player');
     player.pos = { x: 0, y: 0, z: 0 };

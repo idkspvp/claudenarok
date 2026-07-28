@@ -21,7 +21,7 @@ import type { ProfessionRecipeRecord } from '../src/sim/professions/types';
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function grantItem(sim: Sim, itemId: string, count: number, pid: number) {
@@ -113,7 +113,7 @@ describe('#1299 recipe acquisition', () => {
     // Persistence round-trip: serialize then reload into a fresh Sim.
     const saved = sim.serializeCharacter(pid);
     const sim2 = makeSim();
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state: saved ?? undefined });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state: saved ?? undefined });
     const meta2 = (sim2 as any).players.get(pid2);
     expect(meta2?.knownRecipes.has(GATED_RECIPE.id)).toBe(true);
   });
@@ -124,7 +124,7 @@ describe('#1299 recipe acquisition', () => {
     const saved = sim.serializeCharacter(pid);
     (saved as { knownRecipes?: string[] }).knownRecipes = undefined;
     const sim2 = makeSim();
-    const pid2 = sim2.addPlayer('warrior', 'Legacy', { state: saved ?? undefined });
+    const pid2 = sim2.addPlayer('swordman', 'Legacy', { state: saved ?? undefined });
     expect((sim2 as any).players.get(pid2)?.knownRecipes.size).toBe(0);
   });
 });

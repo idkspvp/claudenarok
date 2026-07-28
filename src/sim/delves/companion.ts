@@ -2,7 +2,7 @@
 // Sim.updateDelveCompanion behind the SimContext seam (move + import, not a rewrite).
 //
 // She runs INSIDE the shared updateMob mob-AI pass, in entity-iteration order,
-// dispatched BEFORE the hunter/warlock pet branch (the mob-AI coordinator calls
+// dispatched BEFORE the archer/warlock pet branch (the mob-AI coordinator calls
 // `ctx.updateDelveCompanion(mob)` for an owned, non-stunned companion mob). Her
 // rng-drawing callees (mobSwing -> dealDamage crit/hit rolls) therefore fire at the
 // global stream position set by where she sits in `entities.values()` order, so the

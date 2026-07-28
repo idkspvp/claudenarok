@@ -118,7 +118,7 @@ async function main() {
     password: 'hunter22',
     email: `vcup_${uniq}_b@example.com`,
   });
-  const c1 = await api('/api/characters', { name: `Kicka${alpha}`, class: 'warrior' }, r1.token);
+  const c1 = await api('/api/characters', { name: `Kicka${alpha}`, class: 'swordman' }, r1.token);
   const c2 = await api('/api/characters', { name: `Wallb${alpha}`, class: 'mage' }, r2.token);
   const a = new Client('A');
   const b = new Client('B');

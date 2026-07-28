@@ -47,7 +47,7 @@ function makeWindow(state: WorldState): { w: DeedsWindow; el: HTMLElement } {
         setActiveTitle: (id: string | null) => {
           state.activeTitle = id;
         },
-        cfg: { playerClass: 'warrior' },
+        cfg: { playerClass: 'swordman' },
         player: { name: 'Hero' },
       }) as never,
     closeOthers: () => {},

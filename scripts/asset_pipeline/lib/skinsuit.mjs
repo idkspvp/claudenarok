@@ -84,7 +84,7 @@ export const SUIT_PROMPTS = {
       'molten obsidian plate armor with glowing orange lava cracks and ember glow, dark fantasy',
     paladin: 'radiant golden holy plate armor, gleaming polished gold, warm white light, ornate',
     ranger: 'venomous dark green leather armor, toxic acid-green glow, hooded forest scout',
-    rogue: 'glossy void-purple leather armor, violet and magenta sheen, shadowy assassin',
+    thief: 'glossy void-purple leather armor, violet and magenta sheen, shadowy assassin',
     mage: 'arcane frost robes, deep blue crystalline fabric, glowing cyan magical runes',
     barbarian: 'storm cobalt fur and hide armor, crackling electric blue lightning, tribal',
     druid: 'verdant emerald bark armor, living wood and leaves, glowing amber nature magic',
@@ -93,7 +93,7 @@ export const SUIT_PROMPTS = {
     knight: 'liquid chrome steel plate armor, polished mirror metal, faint red rim light',
     paladin: 'black chrome armor with gold trim, glossy dark metal, gold highlights',
     ranger: 'brushed steel armor, cool metallic surfaces, faint green rim glow',
-    rogue: 'dark liquid chrome leather armor, violet metallic sheen, sleek',
+    thief: 'dark liquid chrome leather armor, violet metallic sheen, sleek',
     mage: 'silver chrome robes, icy blue metallic highlights, reflective',
     barbarian: 'gunmetal chrome hide armor, electric blue metal rim, rugged',
     druid: 'chromed bark armor, metallic green rim light, silvered antlers',
@@ -103,11 +103,11 @@ export const SUIT_PROMPTS = {
 // Class MODELS (7) and the class visual keys that share each (9 classes). The
 // three caster classes share the mage model+atlas, so they share its suit.
 export const MODEL_CLASSES = {
-  knight: ['warrior'],
+  knight: ['swordman'],
   paladin: ['paladin'],
-  ranger: ['hunter'],
-  rogue: ['rogue'],
-  mage: ['priest', 'mage', 'warlock'],
+  ranger: ['archer'],
+  thief: ['thief'],
+  mage: ['acolyte', 'mage', 'warlock'],
   barbarian: ['shaman'],
   druid: ['druid'],
 };
@@ -120,7 +120,7 @@ export const SUIT_SETS = {
     label: 'Prismatic Vanguard',
     suffix: 'suit_prismatic',
     themes: {
-      // warrior: molten obsidian (black -> crimson -> ember gold)
+      // swordman: molten obsidian (black -> crimson -> ember gold)
       knight: {
         gamma: 0.9,
         sheen: 0.7,
@@ -142,7 +142,7 @@ export const SUIT_SETS = {
           { t: 1.0, c: [255, 240, 200] },
         ],
       },
-      // hunter: venom (black -> deep green -> acid)
+      // archer: venom (black -> deep green -> acid)
       ranger: {
         gamma: 0.95,
         sheen: 0.6,
@@ -153,8 +153,8 @@ export const SUIT_SETS = {
           { t: 1.0, c: [200, 255, 150] },
         ],
       },
-      // rogue: void latex (black -> violet -> magenta, high gloss)
-      rogue: {
+      // thief: void latex (black -> violet -> magenta, high gloss)
+      thief: {
         gamma: 1.0,
         sheen: 0.9,
         ramp: [
@@ -213,7 +213,7 @@ export const SUIT_SETS = {
     knight: [255, 120, 90],
     paladin: [255, 220, 140],
     ranger: [140, 255, 160],
-    rogue: [220, 130, 255],
+    thief: [220, 130, 255],
     mage: [140, 210, 255],
     barbarian: [130, 170, 255],
     druid: [180, 255, 150],

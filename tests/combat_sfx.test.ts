@@ -136,7 +136,7 @@ describe('combat SFX policy', () => {
   it('suppresses the crit ding for a boss but not the Training Dummy', () => {
     expect(shouldPlayCritSfxForTarget(target('mob', 'nythraxis_scourge_of_thornpeak'))).toBe(false);
     expect(shouldPlayCritSfxForTarget(target('mob', 'nythraxis_skeleton_warrior'))).toBe(true);
-    expect(shouldPlayCritSfxForTarget(target('player', 'warrior'))).toBe(true);
+    expect(shouldPlayCritSfxForTarget(target('player', 'swordman'))).toBe(true);
     // 2026-07-19 follow-up to #2116: the dummy still gets the plain crit
     // ding (only the hurt-bark vocalization is suppressed for it, see
     // mobVoiceActionForDamage below).
@@ -146,7 +146,7 @@ describe('combat SFX policy', () => {
   it('suppresses Nythraxis add voice barks without muting ordinary undead', () => {
     expect(shouldPlayMobVoiceSfxForEntity(target('mob', 'nythraxis_skeleton_warrior'))).toBe(false);
     expect(shouldPlayMobVoiceSfxForEntity(target('mob', 'crypt_shambler'))).toBe(true);
-    expect(shouldPlayMobVoiceSfxForEntity(target('player', 'warrior'))).toBe(false);
+    expect(shouldPlayMobVoiceSfxForEntity(target('player', 'swordman'))).toBe(false);
   });
 
   it('mutes all non-dialogue Nythraxis boss combat sounds', () => {
@@ -157,7 +157,7 @@ describe('combat SFX policy', () => {
       false,
     );
     expect(shouldPlayCombatImpactForTarget(target('mob', 'crypt_shambler'))).toBe(true);
-    expect(shouldPlayCombatImpactForTarget(target('player', 'warrior'))).toBe(true);
+    expect(shouldPlayCombatImpactForTarget(target('player', 'swordman'))).toBe(true);
   });
 
   it('maps physical and six magic projectile cues without synthesizing unknown keys', () => {
@@ -355,7 +355,7 @@ describe('combat SFX policy', () => {
     const mob = target('mob', 'crypt_shambler');
     const boss = target('mob', 'nythraxis_scourge_of_thornpeak');
     const dummy = target('mob', 'training_dummy');
-    const player = target('player', 'warrior');
+    const player = target('player', 'swordman');
     expect(mobVoiceActionForDamage(damage({ crit: true }), mob)).toBe('hurt');
     expect(mobVoiceActionForDamage(damage({ crit: false }), mob)).toBeNull();
     expect(mobVoiceActionForDamage(damage({ crit: true }), boss)).toBeNull();
@@ -398,11 +398,11 @@ describe('combat SFX policy', () => {
   });
 
   it('plays attempted physical swings for avoidance but not magic or Auto Shot impact', () => {
-    const warrior = target('player', 'warrior');
-    expect(playerSwingCueForDamage(damage({ kind: 'miss' }), warrior)).toBe('melee_swing_blade');
-    expect(playerSwingCueForDamage(damage({ kind: 'dodge' }), warrior)).toBe('melee_swing_blade');
-    expect(playerSwingCueForDamage(damage({ school: 'fire' }), warrior)).toBeNull();
-    expect(playerSwingCueForDamage(damage({ ability: 'Auto Shot' }), warrior)).toBeNull();
+    const swordman = target('player', 'swordman');
+    expect(playerSwingCueForDamage(damage({ kind: 'miss' }), swordman)).toBe('melee_swing_blade');
+    expect(playerSwingCueForDamage(damage({ kind: 'dodge' }), swordman)).toBe('melee_swing_blade');
+    expect(playerSwingCueForDamage(damage({ school: 'fire' }), swordman)).toBeNull();
+    expect(playerSwingCueForDamage(damage({ ability: 'Auto Shot' }), swordman)).toBeNull();
   });
 
   it('a potion always plays its cue, a mana-only quaff included (amount 0)', () => {

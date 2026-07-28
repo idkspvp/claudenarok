@@ -4,6 +4,7 @@ import { createMob } from '../src/sim/entity';
 import { summonPet } from '../src/sim/pet/pet_commands';
 import { Sim } from '../src/sim/sim';
 import { DT, type Entity } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 function entity(sim: Sim, pid: number): Entity {
   const e = sim.entities.get(pid);
@@ -30,21 +31,21 @@ describe('signature mechanics v2', () => {
   // their masteries went with the talent trees (Phase D0).
 
   it('trueshot_aura gives same-party allies a percent AP buff instead of flat AP', () => {
-    const sim = new Sim({ seed: 12, playerClass: 'hunter', autoEquip: true });
+    const sim = new Sim({ seed: 12, playerClass: 'archer', autoEquip: true });
     const hunterPid = sim.playerId;
-    const allyPid = sim.addPlayer('warrior', 'Aleph');
+    const allyPid = sim.addPlayer('swordman', 'Aleph');
     sim.setPlayerLevel(20, hunterPid);
     sim.setPlayerLevel(20, allyPid);
-    const hunter = entity(sim, hunterPid);
+    const archer = entity(sim, hunterPid);
     const ally = entity(sim, allyPid);
-    ally.pos = { ...hunter.pos, x: hunter.pos.x + 3 };
+    ally.pos = { ...archer.pos, x: archer.pos.x + 3 };
     ally.prevPos = { ...ally.pos };
     (sim as any).rebucket(ally);
     sim.partyInvite(allyPid, hunterPid);
     sim.partyAccept(allyPid);
 
     const allyApBefore = ally.attackPower;
-    hunter.resource = hunter.maxResource;
+    fundCasts(archer);
     sim.castAbility('trueshot_aura', hunterPid);
 
     const aura = ally.auras.find((a) => a.kind === 'buff_ap_pct' && a.id === 'trueshot_aura_ap');
@@ -55,12 +56,12 @@ describe('signature mechanics v2', () => {
   });
 
   it('hemorrhage applies bleed vulnerability and makes later bleed ticks hit harder', () => {
-    const sim = new Sim({ seed: 13, playerClass: 'rogue', autoEquip: true });
+    const sim = new Sim({ seed: 13, playerClass: 'thief', autoEquip: true });
     sim.setPlayerLevel(20);
-    const rogue = sim.player;
-    rogue.resource = rogue.maxResource;
-    rogue.facing = 0;
-    const target = addDummy(sim, rogue.pos.x, rogue.pos.z + 4);
+    const thief = sim.player;
+    fundCasts(thief);
+    thief.facing = 0;
+    const target = addDummy(sim, thief.pos.x, thief.pos.z + 4);
     sim.targetEntity(target.id);
 
     sim.castAbility('hemorrhage');
@@ -81,14 +82,14 @@ describe('signature mechanics v2', () => {
       value: 10,
       tickInterval: DT,
       tickTimer: DT,
-      sourceId: rogue.id,
+      sourceId: thief.id,
       school: 'physical',
     });
     const events = sim.tick();
     const tick = events.find(
       (e) =>
         e.type === 'damage' &&
-        e.sourceId === rogue.id &&
+        e.sourceId === thief.id &&
         e.targetId === target.id &&
         e.ability === 'Test Bleed',
     );

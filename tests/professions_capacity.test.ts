@@ -107,7 +107,7 @@ const qaMwRecipe: ProfessionRecipeRecord = {
 } as ProfessionRecipeRecord;
 
 function makeSim(seed = 11) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function metaOf(sim: Sim, pid: number) {

@@ -56,7 +56,7 @@ import {
 import { terrainHeight } from '../src/sim/world';
 
 function makeSim(seed = 4242): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 function teleportTo(sim: Sim, x: number, z: number): void {
@@ -1134,7 +1134,7 @@ function fakeWs(): FakeClient {
 }
 
 function joinServer(server: GameServer, fc: FakeClient, id: number, name: string): ClientSession {
-  const session = server.join(fc.ws, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -1153,7 +1153,7 @@ function lastSnap(sent: any[]): any {
 
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot
 // directly (the bareClient idiom from tests/snapshots.test.ts).
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();

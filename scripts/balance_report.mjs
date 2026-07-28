@@ -21,7 +21,7 @@ const SPELL_CRIT_MULT = 1.5; // sim: spell crit deals 1.5x
 const THRESH = 0.25; // flag spells > 25% off the class median spamDPS
 
 function refChar(cls) {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
   const pid = sim.addPlayer(cls, 'Ref');
   sim.setPlayerLevel(MAX_LEVEL, pid);
   sim.tick();
@@ -88,7 +88,7 @@ function analyze(p, k) {
   return { spamDPS, dpsPerMana, effCast, cost: def.cost };
 }
 
-const CASTERS = ['mage', 'warlock', 'priest', 'shaman', 'druid', 'paladin'];
+const CASTERS = ['mage', 'warlock', 'acolyte', 'shaman', 'druid', 'paladin'];
 const DMG = new Set(['directDamage', 'aoeDamage', 'aoeRoot', 'dot', 'drainTick']);
 
 for (const cls of CASTERS) {

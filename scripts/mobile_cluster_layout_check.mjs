@@ -188,7 +188,7 @@ try {
   // on asset init, see ios_hud_scroll_check.mjs), then flip per profile.
   await page.setViewport({ width: 1280, height: 900 });
   await page.goto(URL, { waitUntil: 'networkidle2' });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Adventurer', settleMs: 1500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Adventurer', settleMs: 1500 });
 
   // Headless Chromium is a fine-pointer device; emulate a coarse no-hover one so
   // PHONE_TOUCH_QUERY matches and the runtime itself activates the touch UI and

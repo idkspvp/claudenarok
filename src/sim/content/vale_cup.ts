@@ -6,7 +6,7 @@
 //
 // AbilityDef.class has no runtime consumer (casting gates purely on membership
 // in meta.known), so sport abilities are class-agnostic by construction; the
-// 'warrior' tag below is a type requirement only. All sport moves are school
+// 'swordman' tag below is a type requirement only. All sport moves are school
 // 'physical' so they resolve on the cast tick (no projectile landing delay)
 // and skip spell-resist rolls, and they cost 0 so every class can use them.
 import type { AbilityDef, MobTemplate, SportRole, VcNationId } from '../types';
@@ -81,7 +81,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_kick: {
     id: 'sport_kick',
     name: 'Kick',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -97,7 +97,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_boot: {
     id: 'sport_boot',
     name: 'Big Boot',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -113,7 +113,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_hoof: {
     id: 'sport_hoof',
     name: 'Hoof It',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -129,7 +129,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_punt: {
     id: 'sport_punt',
     name: 'Long Punt',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -145,7 +145,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_shoot: {
     id: 'sport_shoot',
     name: 'Shoot',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -165,7 +165,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_pass: {
     id: 'sport_pass',
     name: 'Pass',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -183,7 +183,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_feint: {
     id: 'sport_feint',
     name: 'Feint',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -199,7 +199,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_dive: {
     id: 'sport_dive',
     name: 'Dive',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -215,7 +215,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
   sport_shoulder: {
     id: 'sport_shoulder',
     name: 'Shoulder',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,
@@ -236,7 +236,7 @@ export const SPORT_ABILITIES: Record<string, AbilityDef> = {
     // verbatim-WoW denylist (tests/ip_scrub.test.ts). The id predates the
     // rename and is not player-visible.
     name: 'Fresh Legs',
-    class: 'warrior',
+    class: 'swordman',
     learnLevel: 1,
     cost: 0,
     castTime: 0,

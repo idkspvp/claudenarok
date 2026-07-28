@@ -15,7 +15,7 @@
 //   - primaryStatBudget(...): the total primary-stat points an item of that tier
 //     SHOULD grant. normalizePrimaryStats() distributes that budget back across an
 //     item's existing stats so two drops from the same place carry the same total
-//     power while keeping their own stat identity (a warrior plate piece stays
+//     power while keeping their own stat identity (a swordman plate piece stays
 //     str/sta, a mage cloth piece stays int/spi). itemScore() is the realized
 //     power (stats + armor + weapon dps) for at-a-glance comparison.
 

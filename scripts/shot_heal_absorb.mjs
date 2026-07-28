@@ -3,10 +3,12 @@
 // its on-hit blight onto the player, and captures the resulting heal-absorb
 // debuff on the player buff bar — plus a console proof that a follow-up heal
 // is devoured by the shield.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -23,7 +25,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Brannok');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -34,13 +36,18 @@ const result = await page.evaluate(() => {
   // gm keeps the player alive through the live 20Hz loop without maxHp being
   // wiped by recalcPlayerStats; applyAura/applyHeal still resolve normally.
   p.gm = true;
-  p.maxHp = 100000; p.hp = 60000;
+  p.maxHp = 100000;
+  p.hp = 60000;
 
-  let mob = null, d = 1e9;
+  let mob = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.kind === 'mob' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; mob = e; }
+      if (dd < d) {
+        d = dd;
+        mob = e;
+      }
     }
   }
   // Reskin it as the Gravecaller Summoner and stand it next to us.
@@ -49,7 +56,8 @@ const result = await page.evaluate(() => {
   mob.level = 12;
   mob.hostile = true;
   mob.hp = mob.maxHp;
-  mob.pos.x = p.pos.x + 2; mob.pos.z = p.pos.z;
+  mob.pos.x = p.pos.x + 2;
+  mob.pos.z = p.pos.z;
   sim.targetEntity(mob.id);
   p.facing = Math.atan2(mob.pos.x - p.pos.x, mob.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
@@ -65,8 +73,12 @@ const result = await page.evaluate(() => {
   const after = (p.auras.find((a) => a.kind === 'heal_absorb') || {}).value;
   const hpAfter = p.hp;
   return {
-    hasBlight: !!blight, name: blight?.name, shieldBefore: before, shieldAfter: after,
-    healedHp: hpAfter - hpBefore, remaining: blight?.remaining,
+    hasBlight: !!blight,
+    name: blight?.name,
+    shieldBefore: before,
+    shieldAfter: after,
+    healedHp: hpAfter - hpBefore,
+    remaining: blight?.remaining,
   };
 });
 console.log('heal_absorb result:', JSON.stringify(result));
@@ -86,8 +98,10 @@ if (box) {
   await page.screenshot({
     path: 'tmp/heal_absorb_debuff.png',
     clip: {
-      x: Math.max(0, box.x - pad), y: Math.max(0, box.y - pad),
-      width: box.w + pad * 2, height: box.h + pad * 2,
+      x: Math.max(0, box.x - pad),
+      y: Math.max(0, box.y - pad),
+      width: box.w + pad * 2,
+      height: box.h + pad * 2,
     },
   });
 }

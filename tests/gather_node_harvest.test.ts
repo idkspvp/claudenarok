@@ -44,7 +44,7 @@ function mustMeta(sim: Sim, pid: number) {
 }
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function mustEntity(sim: Sim, pid: number): Entity {
@@ -118,7 +118,7 @@ const NODE_MATERIAL = nodeMaterialFor(GATHER_NODES[0].type, GATHER_NODES[0].zone
 describe('gather node harvest (#1121)', () => {
   it('a player near a node receives the material item on harvest', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Miner');
+    const pid = sim.addPlayer('swordman', 'Miner');
     sim.addItem('copper_mining_pick', 1, pid); // tier-1 pick: bare hands never harvest (#2343)
     teleportOntoNode(sim, pid, NODE_ID);
 
@@ -132,7 +132,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('denies harvest when the player is too far from the node', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'FarAway');
+    const pid = sim.addPlayer('swordman', 'FarAway');
     // Tool in bags (#2343) so the too-far arm is decisively the denier.
     sim.addItem('copper_mining_pick', 1, pid);
     const p = mustEntity(sim, pid);
@@ -151,8 +151,8 @@ describe('gather node harvest (#1121)', () => {
 
   it("two players harvesting the same node each get their own respawn timer: A's harvest never blocks B", () => {
     const sim = makeWorld();
-    const pidA = sim.addPlayer('warrior', 'PlayerA');
-    const pidB = sim.addPlayer('warrior', 'PlayerB');
+    const pidA = sim.addPlayer('swordman', 'PlayerA');
+    const pidB = sim.addPlayer('swordman', 'PlayerB');
     // Each carries their own tier-1 pick: bare hands never harvest (#2343).
     sim.addItem('copper_mining_pick', 1, pidA);
     sim.addItem('copper_mining_pick', 1, pidB);
@@ -181,7 +181,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('denies a second harvest by the SAME player before their own timer elapses, allows it after', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Repeat');
+    const pid = sim.addPlayer('swordman', 'Repeat');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     const node = mustNode(NODE_ID);
@@ -215,7 +215,7 @@ describe('gather node harvest (#1121)', () => {
     // regression that shifts either the timer or the grant amount is caught.
     const run = () => {
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Det');
+      const pid = sim.addPlayer('swordman', 'Det');
       sim.addItem('copper_mining_pick', 1, pid);
       teleportOntoNode(sim, pid, NODE_ID);
       castAndComplete(sim, NODE_ID, pid);
@@ -244,7 +244,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('an unknown node id is denied without throwing', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Unknown');
+    const pid = sim.addPlayer('swordman', 'Unknown');
     expect(sim.harvestNode('not_a_real_node', pid)).toBe(false);
     sim.tick();
     expect(sim.nodeHarvestableByMeFor('not_a_real_node', pid)).toBe(false);
@@ -252,7 +252,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('a harvest grants the matching gathering profession one point of skill', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Skiller');
+    const pid = sim.addPlayer('swordman', 'Skiller');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     const node = mustNode(NODE_ID);
@@ -273,7 +273,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('a harvest grants character XP scaled to the node level (profession XP)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'XpMiner');
+    const pid = sim.addPlayer('swordman', 'XpMiner');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     const meta = mustMeta(sim, pid);
@@ -286,7 +286,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('a harvest of a node far below a high-level player grants zero XP (gray band)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'MaxLevelMiner');
+    const pid = sim.addPlayer('swordman', 'MaxLevelMiner');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     sim.setPlayerLevel(20);
@@ -300,7 +300,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('denies harvest for a dead player without granting the item or the timer', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Ghost');
+    const pid = sim.addPlayer('swordman', 'Ghost');
     // Tool in bags (#2343) so the dead gate, not the tool gate, is the denier.
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
@@ -318,7 +318,7 @@ describe('gather node harvest (#1121)', () => {
 
   it('denies harvest when the bag is full, without consuming the respawn timer', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'FullBags');
+    const pid = sim.addPlayer('swordman', 'FullBags');
     teleportOntoNode(sim, pid, NODE_ID);
     const node = mustNode(NODE_ID);
     const entry = NODE_HARVEST_TABLE[node.type];
@@ -348,8 +348,8 @@ describe('gather node harvest (#1121)', () => {
 
   it('spends exactly two rng draws on a granted harvest and none on any denial path', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'DrawCount');
-    const fullBagsPid = sim.addPlayer('warrior', 'DrawCountFull');
+    const pid = sim.addPlayer('swordman', 'DrawCount');
+    const fullBagsPid = sim.addPlayer('swordman', 'DrawCountFull');
     // The tier-1 pick (#2343): the granted path needs it, and the bags-full
     // arm must reach PAST the tool gate to stay a bags-full denial.
     sim.addItem('copper_mining_pick', 1, pid);
@@ -413,7 +413,7 @@ describe('gather node harvest (#1121)', () => {
 describe('gather-completion event for audio (#1729)', () => {
   it('a granted harvest emits a personal gatherResult carrying node/profession/item/rarity', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Harvester');
+    const pid = sim.addPlayer('swordman', 'Harvester');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     const node = mustNode(NODE_ID);
@@ -442,7 +442,7 @@ describe('gather-completion event for audio (#1729)', () => {
 
   it('the emitted rarity reflects the actual roll: a max-proficiency harvest never reports common', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Proficient');
+    const pid = sim.addPlayer('swordman', 'Proficient');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     const node = mustNode(NODE_ID);
@@ -464,7 +464,7 @@ describe('gather-completion event for audio (#1729)', () => {
 
   it('no gatherResult is emitted on any denial path (too far, dead, unknown node)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Denied');
+    const pid = sim.addPlayer('swordman', 'Denied');
     // Tool in bags (#2343): each arm's own gate, not the tool gate, denies.
     sim.addItem('copper_mining_pick', 1, pid);
     const p = mustEntity(sim, pid);
@@ -494,7 +494,7 @@ describe('gather-completion event for audio (#1729)', () => {
   it('the gatherResult event is deterministic across runs (same seed, same harvest)', () => {
     const run = () => {
       const sim = makeWorld();
-      const pid = sim.addPlayer('warrior', 'Det');
+      const pid = sim.addPlayer('swordman', 'Det');
       sim.addItem('copper_mining_pick', 1, pid);
       teleportOntoNode(sim, pid, NODE_ID);
       sim.drainEvents();
@@ -560,7 +560,7 @@ describe('the RuneScape rule (#2343): pre-phase nodes deny bare hands and need o
   it('all 24 pre-phase defs carry tier 1: bare hands deny with requiredTier 1 and zero draws, the matching tier-1 tool grants', () => {
     expect(PRE_PHASE_NODE_IDS).toHaveLength(24);
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'BareHands');
+    const pid = sim.addPlayer('swordman', 'BareHands');
     const meta = mustMeta(sim, pid);
     // Genuinely bare-handed: the starting kit carries no gathering tool.
     expect(meta.inventory.some((s) => ITEMS[s.itemId]?.use?.type === 'gatherTool')).toBe(false);
@@ -634,7 +634,7 @@ describe('node tool gate ordering', () => {
 
   it('the respawn deny fires before the tool gate: a cooling node never emits gatherDenied', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'OrderA');
+    const pid = sim.addPlayer('swordman', 'OrderA');
     teleportOntoNode(sim, pid, T2);
     sim.addItem('iron_mining_pick', 1, pid);
     expect(sim.harvestNode(T2, pid)).toBe(true);
@@ -657,7 +657,7 @@ describe('node tool gate ordering', () => {
 
   it('the tool gate fires before the bags-full deny', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'OrderB');
+    const pid = sim.addPlayer('swordman', 'OrderB');
     teleportOntoNode(sim, pid, T2);
     const meta = mustMeta(sim, pid);
     meta.inventory.length = 0;
@@ -674,7 +674,7 @@ describe('node tool gate ordering', () => {
 
   it('a tier-1 node with a tier-1 tool takes the untouched hot path: no gatherDenied, exactly the two pinned draws', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'HotPath');
+    const pid = sim.addPlayer('swordman', 'HotPath');
     sim.addItem('copper_mining_pick', 1, pid);
     teleportOntoNode(sim, pid, NODE_ID);
     sim.drainEvents();
@@ -700,8 +700,8 @@ describe('node tool gate ordering', () => {
 describe('gated-path determinism (same seed, same drive)', () => {
   it('two Sims produce identical event streams and post-state through the gated paths', () => {
     const run = () => {
-      const sim = new Sim({ seed: 4242, playerClass: 'warrior', noPlayer: true });
-      const pid = sim.addPlayer('warrior', 'Det');
+      const sim = new Sim({ seed: 4242, playerClass: 'swordman', noPlayer: true });
+      const pid = sim.addPlayer('swordman', 'Det');
       sim.tick();
       const meta = mustMeta(sim, pid);
       const events: unknown[] = [];
@@ -772,7 +772,7 @@ function fakeWs(): FakeClient {
 }
 
 function joinServer(server: GameServer, fc: FakeClient, id: number, name: string): ClientSession {
-  const session = server.join(fc.ws, id, id, name, 'warrior', null);
+  const session = server.join(fc.ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;
@@ -793,11 +793,11 @@ function lastSnap(sent: any[]): any {
 // directly (the bareClient idiom from tests/snapshots.test.ts).
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.sportRole = null;

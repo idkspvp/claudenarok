@@ -97,8 +97,8 @@ function fillBags(sim: AnySim, pid: number): void {
 }
 
 function twoPlayers(): { sim: AnySim; a: number; b: number } {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true }) as AnySim;
-  const a = sim.addPlayer('warrior', 'Aaa');
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true }) as AnySim;
+  const a = sim.addPlayer('swordman', 'Aaa');
   const b = sim.addPlayer('mage', 'Bbb');
   freezeWorld(sim);
   place(sim, sim.entities.get(a) as AnyEntity, 20, 20);

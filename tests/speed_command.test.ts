@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { Aura, SimEvent } from '../src/sim/types';
+import type { Aura, SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function aura(kind: Aura['kind'], value: number): Aura {
@@ -29,14 +29,14 @@ function speedText(sim: Sim, pid: number): string | undefined {
 describe('/speed command', () => {
   it('reports 100% of normal when unaffected', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(speedText(sim, a)).toBe('Movement speed: 100% of normal.');
   });
 
   it('reports a slowed percent under a slow aura', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.entities.get(a)!.auras.push(aura('slow', 0.6));
     expect(speedText(sim, a)).toBe('Movement speed: 60% of normal (slowed).');
@@ -44,7 +44,7 @@ describe('/speed command', () => {
 
   it('reports a hastened percent under a speed buff', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.entities.get(a)!.auras.push(aura('buff_speed', 1.4));
     expect(speedText(sim, a)).toBe('Movement speed: 140% of normal (hastened).');
@@ -52,7 +52,7 @@ describe('/speed command', () => {
 
   it('reports rooted state regardless of speed modifiers', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.auras.push(aura('buff_speed', 1.4));
@@ -62,12 +62,16 @@ describe('/speed command', () => {
 
   it('aliases /movespeed and /ms behave the same', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(speedText(sim, a)).toBe('Movement speed: 100% of normal.');
     sim.chat('/movespeed', a);
-    expect(sim.tick().some((e) => e.type === 'error' && e.text === 'Movement speed: 100% of normal.')).toBe(true);
+    expect(
+      sim.tick().some((e) => e.type === 'error' && e.text === 'Movement speed: 100% of normal.'),
+    ).toBe(true);
     sim.chat('/ms', a);
-    expect(sim.tick().some((e) => e.type === 'error' && e.text === 'Movement speed: 100% of normal.')).toBe(true);
+    expect(
+      sim.tick().some((e) => e.type === 'error' && e.text === 'Movement speed: 100% of normal.'),
+    ).toBe(true);
   });
 });

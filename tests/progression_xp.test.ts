@@ -15,7 +15,7 @@ import { terrainHeight } from '../src/sim/world';
 type AnySim = Sim & Record<string, any>;
 
 function makeSim(): AnySim {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true }) as AnySim;
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, e: any, x: number, z: number): void {

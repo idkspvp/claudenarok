@@ -710,7 +710,7 @@ export function valeCupStandardize(
   role: SportRole,
 ): void {
   if (meta.sportRole) return;
-  // Pets are stowed for the match (the delve pet-park round-trip); a hunter's
+  // Pets are stowed for the match (the delve pet-park round-trip); a archer's
   // wolf must not chase the ball.
   stowPetForDelve(ctx, meta.entityId);
   meta.sportRole = role;

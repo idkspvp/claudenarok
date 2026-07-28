@@ -268,23 +268,6 @@ function fullKitHtml(c: GuideClassInfo): string {
     </section>`;
 }
 
-function warlockPetsHtml(): string {
-  const items = GUIDE_WARLOCK_PETS.map(
-    (pet) => `
-      <li class="guide-pet">
-        ${modelViewerEmbed({ modelKey: pet.model, tint: pet.tint, name: pet.name, still: pet.still })}
-        <span class="guide-pet-name">${esc(pet.name)}</span>
-        <span class="guide-pet-line">${esc(t(`guide.petHook.${pet.id}` as TranslationKey))}</span>
-      </li>`,
-  ).join('');
-  return `
-    <section class="guide-block">
-      <h2>${esc(t('guide.classPage.petsHeading'))}</h2>
-      <p>${esc(t('guide.classPage.petsNote'))}</p>
-      <ul class="guide-pet-list">${items}</ul>
-    </section>`;
-}
-
 function detailHtml(id: string): string {
   const c = GUIDE_CLASSES.find((x) => x.id === id);
   if (!c) return notFoundInline();
@@ -307,7 +290,6 @@ function detailHtml(id: string): string {
       <p class="guide-lead">${esc(classLore(c.id))}</p>
       ${factsHtml(c)}
       ${signatureKitHtml(c)}
-      ${c.id === 'warlock' ? warlockPetsHtml() : ''}
       ${fullKitHtml(c)}
       ${related([
         { href: hrefFor('how-to-play'), key: 'guide.nav.howToPlay' },

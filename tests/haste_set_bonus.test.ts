@@ -19,8 +19,9 @@ import {
 import { ITEMS, MOBS } from '../src/sim/data';
 import { createMob, type PlayerEquipment, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, ItemDef, PlayerClass } from '../src/sim/types';
+import { spreadAllocation } from './helpers/alloc';
+import { fundCasts } from './helpers/sp';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -41,7 +42,7 @@ function equipmentOf(items: ItemDef[]): PlayerEquipment {
 }
 
 function player(cls: PlayerClass, level = 20): { sim: AnySim; p: AnyEntity; pid: number } {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true }) as AnySim;
   const pid = sim.addPlayer(cls, 'Tester');
   sim.setPlayerLevel(level, pid);
   sim.tick();
@@ -117,38 +118,24 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
   it('3 caster kit pieces set all three haste channels from the one stat', () => {
     const { p } = player('mage');
     const [a, b, c] = setMembers(SET_VALE_ARCANIST);
-    recalcPlayerStats(
-      p,
-      'mage',
-      equipmentOf([a, b]),
-      undefined,
-      {},
-      defaultAllocationFor('mage', p.level),
-    );
+    recalcPlayerStats(p, 'mage', equipmentOf([a, b]), undefined, {}, spreadAllocation(p.level));
     expect(p.spellHaste).toBe(0);
     expect(p.meleeHaste).toBe(0);
-    recalcPlayerStats(
-      p,
-      'mage',
-      equipmentOf([a, b, c]),
-      undefined,
-      {},
-      defaultAllocationFor('mage', p.level),
-    );
+    recalcPlayerStats(p, 'mage', equipmentOf([a, b, c]), undefined, {}, spreadAllocation(p.level));
     expect(p.spellHaste).toBe(SET_HASTE_3PC);
     expect(p.meleeHaste).toBe(SET_HASTE_3PC);
     expect(p.rangedHaste).toBe(SET_HASTE_3PC);
   });
 
   it('the tier-2 Nighttalon 3-piece adds haste on top of its agi/crit bonus', () => {
-    const { p } = player('rogue');
+    const { p } = player('thief');
     recalcPlayerStats(
       p,
-      'rogue',
+      'thief',
       equipmentOf(setMembers(SET_NIGHTTALON).slice(0, 3)),
       undefined,
       {},
-      defaultAllocationFor('rogue', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.meleeHaste).toBe(SET_HASTE_3PC);
     expect(p.spellHaste).toBe(SET_HASTE_3PC);
@@ -157,14 +144,14 @@ describe('set-bonus haste derivation (recalcPlayerStats)', () => {
   });
 
   it('the tier-1 Deathlord 3-piece grants no haste', () => {
-    const { p } = player('warrior');
+    const { p } = player('swordman');
     recalcPlayerStats(
       p,
-      'warrior',
+      'swordman',
       equipmentOf(setMembers(SET_DEATHLORD).slice(0, 3)),
       undefined,
       {},
-      defaultAllocationFor('warrior', p.level),
+      spreadAllocation(p.level),
     );
     expect(p.meleeHaste).toBe(0);
     expect(p.spellHaste).toBe(0);
@@ -175,7 +162,7 @@ describe('spell haste shortens casts and channels', () => {
   it('a timed cast is (1 + spellHaste) times shorter', () => {
     const { sim, p, pid } = player('mage');
     spawnDummy(sim, p);
-    p.resource = p.maxResource;
+    fundCasts(p);
 
     p.spellHaste = 0;
     sim.castAbility('frostbolt', pid);
@@ -185,7 +172,7 @@ describe('spell haste shortens casts and channels', () => {
     p.castingAbility = null;
     p.castRemaining = 0;
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     p.spellHaste = SET_HASTE_3PC;
     sim.castAbility('frostbolt', pid);
     expect(p.castTotal).toBeCloseTo(base / (1 + SET_HASTE_3PC), 6);
@@ -196,7 +183,7 @@ describe('spell haste shortens casts and channels', () => {
     // Aether Darts moved from the shared mage kit to Chronomancy after this
     // release test was written; select that spec so the channel actually starts.
     spawnDummy(sim, p);
-    p.resource = p.maxResource;
+    fundCasts(p);
 
     p.spellHaste = 0;
     sim.castAbility('arcane_missiles', pid);
@@ -208,7 +195,7 @@ describe('spell haste shortens casts and channels', () => {
     p.channeling = false;
     p.castRemaining = 0;
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     p.spellHaste = SET_HASTE_3PC;
     sim.castAbility('arcane_missiles', pid);
     expect(p.castTotal).toBeCloseTo(baseTotal / (1 + SET_HASTE_3PC), 6);
@@ -218,7 +205,7 @@ describe('spell haste shortens casts and channels', () => {
 
 describe('melee / ranged haste shorten the swing interval', () => {
   it('melee haste shortens the next melee swing timer', () => {
-    const { sim, p } = player('warrior');
+    const { sim, p } = player('swordman');
     const meta = sim.players.get(p.id)!;
     spawnDummy(sim, p);
     p.autoAttack = true;
@@ -233,8 +220,8 @@ describe('melee / ranged haste shorten the swing interval', () => {
     expect(p.swingTimer).toBeCloseTo(p.weapon.speed * sim.swingIntervalMult(p), 6);
   });
 
-  it('ranged haste shortens the next auto-shot timer (hunter)', () => {
-    const { sim, p } = player('hunter');
+  it('ranged haste shortens the next auto-shot timer (archer)', () => {
+    const { sim, p } = player('archer');
     const meta = sim.players.get(p.id)!;
     spawnDummy(sim, p, 12); // inside ranged max, outside the dead zone
     p.autoAttack = true;

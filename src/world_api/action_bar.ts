@@ -12,7 +12,7 @@
 // action_bar_layout_sync.ts` (browser-only), which imports the type from here.
 
 // The six action-bar "forms" a character can arrange independently: the base
-// bar, the druid Bear/Cat/Cat-stealth kits, the rogue Stealth bar, and the Vale
+// bar, the druid Bear/Cat/Cat-stealth kits, the thief Stealth bar, and the Vale
 // Cup sport bar. This is the full sibling set the localStorage keys cover.
 export const ACTION_BAR_LAYOUT_FORMS = [
   'normal',

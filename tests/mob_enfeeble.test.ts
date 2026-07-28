@@ -1,15 +1,16 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
+import { levelWithStats } from './helpers/alloc';
 
 const SEED = 42;
 // A mage so the victim is a mana user; level it up so a L17 Zealot's swing
 // never one-shots it (death would clear the aura before we can read it).
 const makeSim = (cls: PlayerClass = 'mage') => {
   const sim = new Sim({ seed: SEED, playerClass: cls, autoEquip: true });
-  sim.setPlayerLevel(20);
+  levelWithStats(sim, 20);
   return sim;
 };
 
@@ -88,8 +89,8 @@ describe('mob enfeebling curse (Maddening Whisper)', () => {
     expect(player.auras.filter((a) => a.kind === 'buff_int' && a.value < 0).length).toBe(1);
   });
 
-  it('never curses a non-mana victim (warrior uses rage)', () => {
-    const sim = makeSim('warrior');
+  it('never curses a non-mana victim (swordman uses rage)', () => {
+    const sim = makeSim('swordman');
     const player = sim.player;
     expect(player.resourceType).not.toBe('mana');
     const mob = spawnZealot(sim);
@@ -97,7 +98,10 @@ describe('mob enfeebling curse (Maddening Whisper)', () => {
     const old = enfeeble.chance;
     enfeeble.chance = 1;
     try {
-      for (let i = 0; i < 80; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 80; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       enfeeble.chance = old;
     }
@@ -113,7 +117,10 @@ describe('mob enfeebling curse (Maddening Whisper)', () => {
     const old = enfeeble.chance;
     enfeeble.chance = 1;
     try {
-      for (let i = 0; i < 80; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 80; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       enfeeble.chance = old;
     }

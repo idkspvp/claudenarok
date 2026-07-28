@@ -33,7 +33,7 @@ const SC: AbilityScaling = { spellPower: 80, rangedPower: 200, attackPower: 140 
 
 describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   it('renders Direhowl from its percentage damage reduction, not the retired AP amount', () => {
-    expect(abilityBuffValue(known('warrior', 'demoralizing_shout'))).toBe(20);
+    expect(abilityBuffValue(known('swordman', 'demoralizing_shout'))).toBe(20);
   });
 
   it('reads Hourglass healing and cooldown percentages from the resolved effect', () => {
@@ -70,7 +70,7 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   });
 
   it('a pure DoT folds Spell Power across all its ticks (the total)', () => {
-    const swp = known('priest', 'shadow_word_pain');
+    const swp = known('acolyte', 'shadow_word_pain');
     const eff = required(swp.effects.find((e) => e.type === 'dot'));
     if (eff.type !== 'dot') throw new Error('expected dot');
     const ticks = eff.duration / eff.interval;
@@ -79,8 +79,8 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
     );
   });
 
-  it('a hunter attack-spell scales off Ranged Attack Power, not Spell Power', () => {
-    const as = known('hunter', 'arcane_shot');
+  it('a archer attack-spell scales off Ranged Attack Power, not Spell Power', () => {
+    const as = known('archer', 'arcane_shot');
     const eff = required(as.effects.find((e) => e.type === 'directDamage'));
     expect(abilityScalingPower(SC, as.def)).toBe(SC.rangedPower);
     expect(abilityDamageBonus(as, eff, SC)).toBe(
@@ -97,25 +97,25 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
   });
 
   it('a drain channel (Mind Flay) folds the per-tick channel coefficient', () => {
-    const mf = known('priest', 'mind_flay');
+    const mf = known('acolyte', 'mind_flay');
     const eff = required(mf.effects.find((e) => e.type === 'drainTick'));
     expect(abilityDamageBonus(mf, eff, SC)).toBe(channelTickBonus(SC.spellPower, mf.def));
   });
 
   it('a melee weaponStrike adds nothing here (Attack Power rides the swing)', () => {
-    const ss = known('rogue', 'sinister_strike');
+    const ss = known('thief', 'sinister_strike');
     const eff = required(ss.effects.find((e) => e.type === 'weaponStrike'));
     expect(abilityDamageBonus(ss, eff, SC)).toBe(0);
   });
 
-  it('a rogue finisher folds Attack Power / 14 into its base', () => {
-    const ev = known('rogue', 'eviscerate');
+  it('a thief finisher folds Attack Power / 14 into its base', () => {
+    const ev = known('thief', 'eviscerate');
     const eff = required(ev.effects.find((e) => e.type === 'finisherDamage'));
     expect(abilityDamageBonus(ev, eff, SC)).toBe(Math.round(SC.attackPower / 14));
   });
 
   it('a direct heal folds Spell Power at the cast-time coefficient (combat directHealBonus)', () => {
-    const heal = abilitiesKnownAt('priest', MAX_LEVEL).find((k) =>
+    const heal = abilitiesKnownAt('acolyte', MAX_LEVEL).find((k) =>
       k.effects.some((e) => e.type === 'heal'),
     )!;
     const eff = required(heal.effects.find((e) => e.type === 'heal'));
@@ -130,32 +130,32 @@ describe('abilityDamageBonus (tooltip scaling mirrors combat)', () => {
     expect(abilityDamageBonus(barrier, eff, SC)).toBe(absorbBonus(SC.spellPower, 0.5));
   });
 
-  it('a pure HoT folds Spell Power across all its ticks; a hybrid HoT rider does not', () => {
-    const rejuv = known('druid', 'rejuvenation');
-    const hot = required(rejuv.effects.find((e) => e.type === 'hot'));
+  it('a pure HoT folds Spell Power across all its ticks', () => {
+    // Rejuvenation and Regrowth went with the Druid in D1; Renew is the surviving
+    // pure HoT. No live kit pairs a HoT rider with a direct heal any more, so the
+    // rider-suppression arm has no ability to exercise it until D4 re-homes one.
+    const renew = known('acolyte', 'renew');
+    const hot = required(renew.effects.find((e) => e.type === 'hot'));
     if (hot.type !== 'hot') throw new Error('expected hot');
     const ticks = hot.duration / hot.interval;
-    expect(abilityDamageBonus(rejuv, hot, SC)).toBe(
+    expect(abilityDamageBonus(renew, hot, SC)).toBe(
       hotTickBonus(SC.spellPower, hot.duration, hot.interval) * ticks,
     );
-    // Regrowth's HoT rides a direct heal: combat suppresses the rider (the
-    // direct part already took the coefficient), so the tooltip must too.
-    const regrowth = known('druid', 'regrowth');
-    const rider = required(regrowth.effects.find((e) => e.type === 'hot'));
-    expect(abilityDamageBonus(regrowth, rider, SC)).toBe(0);
   });
 
   it('a ground AoE pulse folds the AoE-penalised direct coefficient (combat spBonus)', () => {
-    const cons = known('paladin', 'consecration');
-    const eff = required(cons.effects.find((e) => e.type === 'groundAoE'));
-    expect(abilityDamageBonus(cons, eff, SC)).toBe(
-      directHitBonus(SC.spellPower, cons.def, cons.castTime, true),
+    // Consecration went with the Paladin; Blizzard is the surviving ground AoE.
+    const bliz = known('mage', 'blizzard');
+    const eff = required(bliz.effects.find((e) => e.type === 'groundAoE'));
+    expect(abilityDamageBonus(bliz, eff, SC)).toBe(
+      directHitBonus(SC.spellPower, bliz.def, bliz.castTime, true),
     );
   });
 
-  it('a channelled AoE (Rain of Fire) uses the per-tick CHANNEL coefficient, not the cast one', () => {
-    const rof = known('warlock', 'rain_of_fire');
-    const eff = required(rof.effects.find((e) => e.type === 'aoeDamage'));
-    expect(abilityDamageBonus(rof, eff, SC)).toBe(channelTickBonus(SC.spellPower, rof.def));
-  });
+  // The channelled-AoE case is GONE, not fixed. Rain of Fire was the only spell
+  // that folded Spell Power per channel tick, and it went with the Warlock in D1.
+  // The two channels left are physical (Volley scales off Ranged AP, Rending
+  // Cyclone off melee), so neither reaches channelTickBonus, and substituting one
+  // would pin a different coefficient under the old name. Restore this when D4
+  // re-homes a magic channel.
 });

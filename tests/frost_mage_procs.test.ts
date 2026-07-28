@@ -16,6 +16,7 @@ import type { PlayerMeta } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { SimContext } from '../src/sim/sim_context';
 import type { Aura, Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Frost mage proc engine (owner design 2026-07-11, combat/frost_mage.ts):
 // Rimelance (frostbolt) impacts roll Fingers of Frost (15%, 2 stacks) and
@@ -77,7 +78,7 @@ function castAndResolve(
   maxTicks = 140,
 ): SimEvent[] {
   p.gcdRemaining = 0;
-  p.resource = p.maxResource;
+  fundCasts(p);
   sim.castAbility(abilityId);
   const events: SimEvent[] = [...sim.drainEvents()];
   for (let i = 0; i < maxTicks; i++) {
@@ -374,7 +375,7 @@ describe("Flurry and Winter's Chill", () => {
     pushAura(p, { id: 'brain_freeze', name: 'Brain Freeze', kind: 'brain_freeze' });
     sim.drainEvents();
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('flurry');
     // Instant: no cast bar armed, the proc is gone, no cooldown armed.
     expect(p.castingAbility).toBeNull();
@@ -413,7 +414,7 @@ describe("Flurry and Winter's Chill", () => {
     // Without the proc, a running cooldown refuses the cast.
     p.cooldowns.set('flurry', 10);
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('flurry');
     expect(
       sim

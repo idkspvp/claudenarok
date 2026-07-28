@@ -592,7 +592,7 @@ describe('createCharacterCapped', () => {
       .mockResolvedValueOnce({ rows: [{ n: 10 }], rowCount: 1 } as any)
       .mockResolvedValueOnce({ rows: [], rowCount: 0 } as any); // ROLLBACK
 
-    await expect(createCharacterCapped(7, 'Overflow', 'warrior', 10)).resolves.toBeNull();
+    await expect(createCharacterCapped(7, 'Overflow', 'swordman', 10)).resolves.toBeNull();
 
     expect(client.query.mock.calls.map((c) => c[0])).toEqual([
       'BEGIN',
@@ -613,7 +613,7 @@ describe('createCharacterCapped', () => {
       .mockRejectedValueOnce(new Error('duplicate name'))
       .mockResolvedValueOnce({ rows: [], rowCount: 0 } as any); // ROLLBACK
 
-    await expect(createCharacterCapped(7, 'Taken', 'rogue', 10)).rejects.toThrow(/duplicate name/);
+    await expect(createCharacterCapped(7, 'Taken', 'thief', 10)).rejects.toThrow(/duplicate name/);
 
     expect(client.query.mock.calls.map((c) => c[0])).toContain('ROLLBACK');
     expect(client.query.mock.calls.map((c) => c[0])).not.toContain('COMMIT');

@@ -146,7 +146,7 @@ describe('player pathfinding', () => {
   });
 
   it('blocks normal player movement through fences', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman' });
     const p = sim.player;
     const fence = TEST_FENCE;
     const mx = (fence.x1 + fence.x2) / 2;
@@ -171,7 +171,7 @@ describe('player pathfinding', () => {
   });
 
   it('lets a jumping player clear a fence', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman' });
     const p = sim.player;
     const fence = TEST_FENCE;
     const mx = (fence.x1 + fence.x2) / 2;

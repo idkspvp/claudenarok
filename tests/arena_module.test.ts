@@ -14,7 +14,7 @@ import { groundHeight } from '../src/sim/world';
 type AnySim = Sim & Record<string, any>;
 
 function makeWorld(): AnySim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 function teleport(sim: AnySim, pid: number, x: number, z: number): void {
@@ -91,7 +91,7 @@ describe('arena module: rating accounting (floor 100, base 1500)', () => {
 describe('arena module: ranked match resolution', () => {
   function liveBout(): { sim: AnySim; a: number; b: number; match: any } {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     teleport(sim, a, 0, -40);
     teleport(sim, b, 6, -40);

@@ -46,7 +46,7 @@ function lastSnap(sent: any[]): any {
 // applySnapshot's delta-guarded decode. That is exactly what the omission test needs.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.moveInput = {};
@@ -72,7 +72,7 @@ function bareClient(pid: number): ClientWorld {
 }
 
 function joinAt(server: GameServer, fw: ReturnType<typeof fakeWs>, acct: number, name: string) {
-  const s = server.join(fw.ws as any, acct, acct, name, 'warrior', null) as any;
+  const s = server.join(fw.ws as any, acct, acct, name, 'swordman', null) as any;
   if ('error' in s) throw new Error(s.error);
   s.blockListLoaded = true;
   return s;
@@ -303,7 +303,7 @@ describe('bank wire round-trip', () => {
     // The shared script: stock 5 wolf_fang + 1000 copper, deposit 2 then the rest,
     // withdraw 1, buy the first expansion. End state: 4 in the bank, 6 purchased
     // slots, 500 copper.
-    const offline = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true }) as any;
+    const offline = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true }) as any;
     const offPid = offline.playerId;
     bringBankerToPlayer(offline, offPid);
     offline.addItem('wolf_fang', 5, offPid);
@@ -352,7 +352,7 @@ describe('bank wire round-trip', () => {
         { id: 'referral', slots: 4, maxSlots: 10, count: 2, cap: 5 },
       ],
     };
-    const s = server.join(fw.ws as any, 1, 1, 'Vaultg', 'warrior', null, false, {
+    const s = server.join(fw.ws as any, 1, 1, 'Vaultg', 'swordman', null, false, {
       bankBonus,
     }) as any;
     if ('error' in s) throw new Error(s.error);

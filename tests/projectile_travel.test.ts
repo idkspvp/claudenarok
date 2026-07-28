@@ -14,6 +14,7 @@ import {
 import { Sim } from '../src/sim/sim';
 import { DT } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
+import { fundCasts } from './helpers/sp';
 
 const STEP = PROJECTILE_SPEED * DT; // yards a bolt covers per 20 Hz tick
 
@@ -207,7 +208,7 @@ describe('deferred projectile damage end-to-end (mage Ice Lance)', () => {
     // Ice Lance is Frost-spec kit: commit the spec so the ability is known.
     const p = sim.player;
     p.hp = p.maxHp;
-    p.resource = p.maxResource;
+    fundCasts(p);
     let target: any = null;
     for (const e of (sim as any).entities.values()) {
       if (e.kind === 'mob' && !e.dead) {

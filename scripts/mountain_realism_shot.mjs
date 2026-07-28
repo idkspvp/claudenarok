@@ -1,5 +1,5 @@
 // Screenshot harness for the mountain-realism / draw-distance-haze pass.
-// Boots an offline warrior, god-mode teleports to each zone hub (~"zone
+// Boots an offline swordman, god-mode teleports to each zone hub (~"zone
 // centre") plus a couple of up-close mountain vantage points, hides the HUD,
 // and captures a frame at each. Needs `npm run dev` on :5173 (override with
 // GAME_URL). Writes to tmp/, filenames prefixed by the LABEL env var (default
@@ -42,7 +42,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(200);
 await page.type('#char-name', 'Aldwyn');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => Boolean(window.__game?.sim), { timeout: 40000 });
 

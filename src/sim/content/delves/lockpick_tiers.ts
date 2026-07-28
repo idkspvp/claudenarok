@@ -58,15 +58,11 @@ export const LOCKPICK_TIER_REWARD: Record<LootTier, { bonusMarks: number; copper
 // Archetype groups mirror REWARD_ARCHETYPE in data.ts (inlined to avoid the
 // data.ts -> content/delves import cycle): WAR plate, ROG leather/mail, MAG cloth.
 const LOOT_ARCHETYPE: Record<PlayerClass, 'WAR' | 'ROG' | 'MAG'> = {
-  warrior: 'WAR',
-  paladin: 'WAR',
-  shaman: 'WAR',
-  rogue: 'ROG',
-  hunter: 'ROG',
+  swordman: 'WAR',
+  thief: 'ROG',
+  archer: 'ROG',
   mage: 'MAG',
-  priest: 'MAG',
-  warlock: 'MAG',
-  druid: 'MAG',
+  acolyte: 'MAG',
 };
 
 /**
@@ -77,7 +73,7 @@ const LOOT_ARCHETYPE: Record<PlayerClass, 'WAR' | 'ROG' | 'MAG'> = {
  *
  * `bountiful` (§7.6): a solved Bountiful Coffer GUARANTEES the signature rare plus a
  * premium green, strictly better than the 50% rare chance of a normal premium chest.
- * (Rogue/hunter has no signature rare in this tier yet, so they get the two best
+ * (Rogue/archer has no signature rare in this tier yet, so they get the two best
  * greens, a known content gap to fill when a ROG rare ships.)
  */
 export function delveChestItemsForTier(

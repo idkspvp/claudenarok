@@ -23,10 +23,10 @@ type SimInternals = {
 };
 
 function setup(seed = 11) {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
-  const a = sim.addPlayer('warrior', 'Alpha');
-  const b = sim.addPlayer('warrior', 'Bravo');
+  const a = sim.addPlayer('swordman', 'Alpha');
+  const b = sim.addPlayer('swordman', 'Bravo');
   sim.tick();
   for (const pid of [a, b]) {
     const e = internals.entities.get(pid)!;

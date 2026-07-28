@@ -34,7 +34,6 @@ import { aurasSurvivingDeath } from '../resurrection';
 import type { PlayerMeta } from '../sim';
 import type { SimContext } from '../sim_context';
 import { vcupBothSeated } from '../social/vale_cup';
-import { defaultAllocationFor, isSuggestedSpread } from '../stat_preset';
 import { addThreat, canDetectStealthedTarget, clearThreat } from '../threat';
 import type { Entity } from '../types';
 import {
@@ -161,7 +160,7 @@ export function dealDamage(
     amount = Math.round(amount * 100);
 
   // Master Armorer is a live equipment condition, not a stat baked at talent
-  // recompute time. It applies to every school while the Arms warrior's current
+  // recompute time. It applies to every school while the Arms swordman's current
   // mainhand is two-handed. Redirected already-final damage skips source output
   // modifiers so the same original hit cannot receive the mastery twice.
   if (!alreadyFinal && source?.kind === 'player' && source.id !== target.id && amount > 0) {
@@ -842,7 +841,7 @@ export function dealDamage(
     const meta = ctx.players.get(source.id);
     if (meta) meta.counters.damageDealt += amount;
     if (source.resourceType === 'rage' && !noRage && school === 'physical' && !ability) {
-      const isWarrior = meta?.cls === 'warrior';
+      const isWarrior = meta?.cls === 'swordman';
       const seasonedCrit =
         isWarrior &&
         crit &&
@@ -851,7 +850,7 @@ export function dealDamage(
           ? 1.1
           : 1;
       // v0.27.1 rage fix: warriors are back on the shared classic 7.5x outgoing
-      // scale (rageFromDealing). The talents-v2 era ran a warrior-only 9x mint
+      // scale (rageFromDealing). The talents-v2 era ran a swordman-only 9x mint
       // here, a hidden ~20% income buff that co-fed the fury overpower incident.
       const baseRage = rageFromDealing(amount, source.level);
       const talentMult = isWarrior ? 1 + ctx.playerMods(meta).global.autoRagePct : 1;
@@ -866,7 +865,7 @@ export function dealDamage(
     const meta = ctx.players.get(target.id);
     if (meta) meta.counters.damageTaken += amount;
     if (target.resourceType === 'rage' && source && source.id !== target.id) {
-      const isWarrior = meta?.cls === 'warrior';
+      const isWarrior = meta?.cls === 'swordman';
       const baseRage = isWarrior
         ? amount / Math.max(1, source.level)
         : rageFromTaking(amount, source.level);
@@ -1084,7 +1083,7 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
     // (still owned, owner present-but-dead) so updatePet's despawn guard never
     // fired and petPickTarget's `!owner.dead` gate left it idle and unkillable.
     // Route it through handleDeath so the owned-mob branch below applies: warlock
-    // demons unravel, a hunter's beast leaves a revivable corpse (Revive Pet).
+    // demons unravel, a archer's beast leaves a revivable corpse (Revive Pet).
     const pet = ctx.petOf(e.id);
     if (pet) handleDeath(ctx, pet, killer);
     return;
@@ -1268,7 +1267,7 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
         }
       }
       if (
-        meta.cls === 'warrior' &&
+        meta.cls === 'swordman' &&
         ctx.playerMods(meta).grants.some((grant) => grant.ability === 'victory_rush')
       ) {
         ctx.applyAura(creditEntity, {
@@ -1362,13 +1361,8 @@ export function grantXp(
     meta.xp -= xpForLevel(p.level);
     p.level++;
     meta.counters.levelUps++;
-    // A character still sitting on the untouched suggestion carries it forward to
-    // the new level. Once the player has moved a single point the build is theirs
-    // and the ding leaves it alone, handing them the new points to place: the same
-    // rule setPlayerLevel uses, so a character leveled by playing and one leveled
-    // by a GM end up in the same place.
-    if (isSuggestedSpread(meta.statAllocation, meta.cls, p.level - 1))
-      meta.statAllocation = defaultAllocationFor(meta.cls, p.level);
+    // The allocation is untouched by the level-up on purpose: the new points
+    // land unspent and the player places them.
     recalcPlayerStats(
       p,
       meta.cls,

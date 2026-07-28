@@ -8,7 +8,7 @@ import { FLEE_HELP_RADIUS, rallyFleeingAllies } from '../src/sim/mob/social_aggr
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
-const makeSim = () => new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+const makeSim = () => new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 
 function wildMobs(sim: Sim): Entity[] {
   return [...sim.entities.values()].filter(

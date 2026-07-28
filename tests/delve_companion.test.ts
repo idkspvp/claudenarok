@@ -4,7 +4,7 @@ import { updateDelveCompanion } from '../src/sim/delves/companion';
 import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
 
-function makeSim(cls: 'hunter' | 'warrior' = 'warrior', seed = 42) {
+function makeSim(cls: 'archer' | 'swordman' = 'swordman', seed = 42) {
   return new Sim({ seed, playerClass: cls, autoEquip: true });
 }
 
@@ -73,8 +73,8 @@ describe('delve companions', () => {
     expect(clear.x).toBeCloseTo(grave.pos.x + 20);
   });
 
-  it('stows hunter pet on enter and restores on leave', () => {
-    const sim = makeSim('hunter');
+  it('stows archer pet on enter and restores on leave', () => {
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const boar = [...sim.entities.values()].find(
       (e) => e.templateId === 'wild_boar' && e.ownerId === null,
@@ -89,7 +89,7 @@ describe('delve companions', () => {
   });
 
   it('serializes the stowed pet while in a delve (no pet loss on mid-delve disconnect/save)', () => {
-    const sim = makeSim('hunter');
+    const sim = makeSim('archer');
     sim.setPlayerLevel(10);
     const boar = [...sim.entities.values()].find(
       (e) => e.templateId === 'wild_boar' && e.ownerId === null,

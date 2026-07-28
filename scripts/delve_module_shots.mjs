@@ -30,7 +30,7 @@ await sleep(800);
 await page.evaluate(() => document.querySelector('#btn-offline')?.click());
 await sleep(400);
 await page.evaluate(() => {
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click();
   const n = document.querySelector('#char-name');
   if (n) n.value = 'Artcheck';
   document.querySelector('#btn-start-offline')?.click();

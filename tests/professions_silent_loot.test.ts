@@ -40,7 +40,7 @@ function despawnMobs(sim: Sim): void {
 }
 
 function makeWorld(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleportOntoNode(sim: Sim, pid: number, nodeId: string) {
@@ -63,7 +63,7 @@ function lootEvents(events: SimEvent[]): Array<Extract<SimEvent, { type: 'loot' 
 describe('professions grants suppress the generic loot audio cue, not the text', () => {
   it('a gather harvest emits a silent loot event (text still prints)', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Miner');
+    const pid = sim.addPlayer('swordman', 'Miner');
     // Bare-handed harvesting is denied even on a tier-1 node (the starting
     // kit carries no gathering tool); grant the matching tier-1 tool
     // (ore_eastbrook_1 is 'ore', see tests/gather_node_harvest.test.ts's
@@ -91,7 +91,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
 
   it('a plain addItem grant (every non-professions path) stays loud by default', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Vendee');
+    const pid = sim.addPlayer('swordman', 'Vendee');
     sim.addItem(NODE_MATERIAL.itemId, 1, pid);
     const events = lootEvents(sim.tick());
     expect(events.length).toBe(1);
@@ -100,7 +100,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
 
   it('a plain addItemInstance grant stays loud by default too', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Enchanter');
+    const pid = sim.addPlayer('swordman', 'Enchanter');
     sim.addItemInstance(NODE_MATERIAL.itemId, { signer: 'Test' }, pid);
     const events = lootEvents(sim.tick());
     expect(events.length).toBe(1);
@@ -108,7 +108,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   });
 
   it('a successful craft emits (only) silent loot events', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('spider_leg', 1, pid); // the reagent grant itself stays loud
     sim.craftItem('recipe_tough_jerky', false, pid);
@@ -122,7 +122,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   });
 
   it('a disenchant emits a silent loot event for the reclaimed material', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('eastbrook_arming_sword', 1, pid);
     sim.tick(); // drain the (loud) sword grant before isolating the disenchant
@@ -134,7 +134,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   });
 
   it('an apply-enchant emits a silent loot event for the enchanted copy', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('eastbrook_arming_sword', 1, pid);
     sim.addItem('arcane_dust', 5, pid);
@@ -152,7 +152,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   // whole file exists to pin. The plain-apply case above cannot see it (a
   // different arm, a different mint), which is why this case is separate.
   it('a confirmed enchant REPLACE emits a silent loot event for the replaced copy', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('eastbrook_arming_sword', 1, pid);
     sim.addItem('arcane_dust', 20, pid);
@@ -172,7 +172,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   // enchantResult one. Pinned so a future refactor that routes the worn arm
   // through a mint cannot quietly reintroduce the stacked ding.
   it('a confirmed WORN enchant replace emits no loot event at all', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('eastbrook_arming_sword', 1, pid);
     sim.addItem('arcane_dust', 20, pid);
@@ -188,7 +188,7 @@ describe('professions grants suppress the generic loot audio cue, not the text',
   });
 
   it('a salvage emits a silent loot event for the reclaimed material', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.addItem('eastbrook_arming_sword', 1, pid);
     sim.tick(); // drain the (loud) sword grant before isolating the salvage

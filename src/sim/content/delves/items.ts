@@ -1,10 +1,10 @@
 import type { ItemDef, PlayerClass } from '../../types';
 
 // Archetype groups, mirrors the pattern in content/items.ts so class-locked
-// delve rewards admit the whole archetype (warrior/paladin/shaman etc.).
-const WAR: PlayerClass[] = ['warrior', 'paladin', 'shaman'];
-const MAG: PlayerClass[] = ['mage', 'priest', 'warlock', 'druid'];
-const ROG: PlayerClass[] = ['rogue', 'hunter'];
+// delve rewards admit the whole archetype (swordman/paladin/shaman etc.).
+const WAR: PlayerClass[] = ['swordman'];
+const MAG: PlayerClass[] = ['mage', 'acolyte'];
+const ROG: PlayerClass[] = ['thief', 'archer'];
 
 // ---------------------------------------------------------------------------
 // Delve items, Collapsed Reliquary loot & Marks vendor stock

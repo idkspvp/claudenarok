@@ -13,7 +13,7 @@ import { Sim } from '../src/sim/sim';
 import { terrainHeight } from '../src/sim/world';
 import type { LockpickView } from '../src/world_api';
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 
 function enterBountifulFinale(sim: Sim) {
   sim.setPlayerLevel(DELVES.collapsed_reliquary.minLevel);

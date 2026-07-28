@@ -1,10 +1,12 @@
 // Visual tour: screenshots of the overhauled game for inspection.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
-const CLASS = process.env.GAME_CLASS ?? 'warrior';
+const CLASS = process.env.GAME_CLASS ?? 'swordman';
 fs.mkdirSync('tmp', { recursive: true });
 
 const browser = await puppeteer.launch({
@@ -16,7 +18,9 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 const errors = [];
 page.on('pageerror', (e) => errors.push('PAGEERROR: ' + e.message));
-page.on('console', (m) => { if (m.type() === 'error') errors.push('CONSOLE: ' + m.text()); });
+page.on('console', (m) => {
+  if (m.type() === 'error') errors.push('CONSOLE: ' + m.text());
+});
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
@@ -31,19 +35,27 @@ await page.screenshot({ path: 'tmp/t01_town.png' });
 // tour god mode so the camp mobs don't murder the photographer
 await page.evaluate(() => {
   const p = window.__game.sim.player;
-  p.maxHp = 99999; p.hp = 99999;
+  p.maxHp = 99999;
+  p.hp = 99999;
 });
 
 const tp = async (x, z, yaw = 0) => {
-  await page.evaluate((x, z, yaw) => {
-    const g = window.__game;
-    const p = g.sim.player;
-    if (p.dead) g.sim.releaseSpirit();
-    p.maxHp = 99999; p.hp = 99999;
-    p.pos.x = x; p.pos.z = z;
-    p.facing = yaw;
-    g.input.camYaw = yaw;
-  }, x, z, yaw);
+  await page.evaluate(
+    (x, z, yaw) => {
+      const g = window.__game;
+      const p = g.sim.player;
+      if (p.dead) g.sim.releaseSpirit();
+      p.maxHp = 99999;
+      p.hp = 99999;
+      p.pos.x = x;
+      p.pos.z = z;
+      p.facing = yaw;
+      g.input.camYaw = yaw;
+    },
+    x,
+    z,
+    yaw,
+  );
   await new Promise((r) => setTimeout(r, 700));
 };
 
@@ -76,14 +88,19 @@ await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  let wolf = null, d = 1e9;
+  let wolf = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.templateId === 'forest_wolf' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; wolf = e; }
+      if (dd < d) {
+        d = dd;
+        wolf = e;
+      }
     }
   }
-  p.pos.x = wolf.pos.x + 3; p.pos.z = wolf.pos.z;
+  p.pos.x = wolf.pos.x + 3;
+  p.pos.z = wolf.pos.z;
   p.facing = Math.atan2(wolf.pos.x - p.pos.x, wolf.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
   sim.targetEntity(wolf.id);
@@ -105,7 +122,8 @@ await page.keyboard.press('p');
 // accept a quest then quest log
 await page.evaluate(() => {
   const g = window.__game;
-  g.sim.player.pos.x = 4; g.sim.player.pos.z = 3;
+  g.sim.player.pos.x = 4;
+  g.sim.player.pos.z = 3;
 });
 await new Promise((r) => setTimeout(r, 200));
 await page.keyboard.press('f');
@@ -132,7 +150,8 @@ await page.keyboard.press('l');
 await page.evaluate(() => {
   const g = window.__game;
   const wilkes = [...g.sim.entities.values()].find((e) => e.templateId === 'trader_wilkes');
-  g.sim.player.pos.x = wilkes.pos.x + 2; g.sim.player.pos.z = wilkes.pos.z;
+  g.sim.player.pos.x = wilkes.pos.x + 2;
+  g.sim.player.pos.z = wilkes.pos.z;
   g.sim.copper = 500;
   g.hud.openVendor(wilkes.id);
 });

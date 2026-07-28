@@ -141,11 +141,11 @@ describe('net pipeline stats module', () => {
 // holder in online.ts must survive.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.cupInfo = null;
   c.lastVcupRemainder = null;
@@ -192,7 +192,7 @@ function wirePlayer(id: number, name: string) {
   return {
     id,
     k: 'player',
-    tid: 'warrior',
+    tid: 'swordman',
     nm: name,
     lv: 10,
     x: 1,

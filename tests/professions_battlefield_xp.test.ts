@@ -8,7 +8,7 @@ import { emptyCraftSkills } from '../src/sim/professions/wheel';
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 // #1149 Battlefield Experience: self-observation (the wielder is also the

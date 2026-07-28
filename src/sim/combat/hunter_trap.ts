@@ -1,7 +1,7 @@
 // Hunter trap (G6, fix/talents2-balance-pass): Rime Snare is a real trap, not
-// an aimed nova. Placed at the hunter's feet, it arms after a short delay and
+// an aimed nova. Placed at the archer's feet, it arms after a short delay and
 // freezes the FIRST enemy whose movement touches it, then is consumed. One
-// trap per hunter at a time (the classic rule). The state rides the existing
+// trap per archer at a time (the classic rule). The state rides the existing
 // groundAoEs collection as a hunterTrap rider (the Ring of Frost pattern);
 // this module owns the spawn and contact rules. Draws no rng.
 

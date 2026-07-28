@@ -8,15 +8,15 @@ import { aggregateSetBonuses, SET_NECROMANCERS } from '../src/sim/content/item_s
 import { MOBS } from '../src/sim/data';
 import { createMob, createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
-import { defaultAllocationFor } from '../src/sim/stat_preset';
 import type { Entity, PlayerClass } from '../src/sim/types';
+import { spreadAllocation } from './helpers/alloc';
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
 function statsFor(cls: PlayerClass, level: number, equipment: Record<string, string>): Entity {
   const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
   e.level = level;
-  recalcPlayerStats(e, cls, equipment as any, undefined, {}, defaultAllocationFor(cls, e.level));
+  recalcPlayerStats(e, cls, equipment as any, undefined, {}, spreadAllocation(e.level));
   return e;
 }
 

@@ -78,7 +78,7 @@ describe('heroic tuning data contract', () => {
   it('pins the floor-calibrated heroic multipliers per dungeon', () => {
     // Economy retune: the damageMultiplier per dungeon is set so the MINIMUM
     // non-crit swing of the dungeon's weakest spawn-list mob lands at least
-    // 500 post-mitigation on the maximum-mitigation reference warrior at the
+    // 500 post-mitigation on the maximum-mitigation reference swordman at the
     // level-22 pin, and health is DOUBLED versus the previous calibration
     // (1.9/2.0/2.6/2.0/1.6 became 3.8/4.0/5.2/4.0/3.2). The ladder still
     // inverts because harder dungeons carry bigger base weapon damage.

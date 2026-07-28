@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { Entity, SimEvent } from '../src/sim/types';
+import type { Entity, SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function liveMob(sim: Sim): Entity {
@@ -15,13 +15,15 @@ function liveMob(sim: Sim): Entity {
 }
 
 function errors(events: SimEvent[]): string[] {
-  return events.filter((e): e is Extract<SimEvent, { type: 'error' }> => e.type === 'error').map((e) => e.text);
+  return events
+    .filter((e): e is Extract<SimEvent, { type: 'error' }> => e.type === 'error')
+    .map((e) => e.text);
 }
 
 describe('/target readout command', () => {
   it('reports no target when nothing is targeted', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.chat('/target', a);
     const errs = errors(sim.tick());
     expect(errs.some((t) => /no target/i.test(t))).toBe(true);
@@ -29,7 +31,7 @@ describe('/target readout command', () => {
 
   it('reports a targeted mob with name, level, kind and HP percent', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const mob = liveMob(sim);
     sim.targetEntity(mob.id, a);
     sim.chat('/tar', a); // alias
@@ -42,7 +44,7 @@ describe('/target readout command', () => {
 
   it('reports another player target as a player and never reaches other clients', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.targetEntity(b, a);
     sim.chat('/target', a);

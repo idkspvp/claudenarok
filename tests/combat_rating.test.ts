@@ -56,7 +56,7 @@ describe('combat ratings', () => {
     };
     ITEMS[itemId] = item;
     try {
-      const sim = new Sim({ seed: 11, playerClass: 'rogue' });
+      const sim = new Sim({ seed: 11, playerClass: 'thief' });
       const p = sim.player;
       sim.addItem(itemId, 1);
       sim.equipItem(itemId);

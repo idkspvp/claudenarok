@@ -153,7 +153,7 @@ describe('meetsComboRequirement composes the archetype ceiling (#1132 combo gate
     for (const comboRecipe of COMBO_RECIPES) {
       const combo = comboRecipe.comboRequirement!;
       for (const attuned of [combo.craftA, combo.craftB]) {
-        const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+        const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
         sim.acceptArchetypeQuest(attuned);
         const meta = (
           sim as unknown as {
@@ -180,7 +180,7 @@ describe('meetsComboRequirement composes the archetype ceiling (#1132 combo gate
 
 describe('resolveCraftForRecipe reads the archetype-gated ceiling for skill-gain scaling', () => {
   function makeSim(seed = 42) {
-    return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+    return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
   }
 
   function metaOf(sim: Sim, pid: number) {
@@ -451,7 +451,7 @@ describe('archetype ceilings gate the masterwork effect (ceilings bind craft out
   const PROC_SEED = 18;
 
   function makeSim() {
-    return new Sim({ seed: PROC_SEED, playerClass: 'warrior', autoEquip: false });
+    return new Sim({ seed: PROC_SEED, playerClass: 'swordman', autoEquip: false });
   }
 
   interface CraftMeta {

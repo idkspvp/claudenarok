@@ -26,7 +26,7 @@ const FULL_SET = {
 
 async function boot(page) {
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Looker', settleMs: 2600 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Looker', settleMs: 2600 });
   await page.evaluate(() => document.querySelector('#mobile-preflight-continue')?.click());
   await sleep(400);
   await page.evaluate(() => {

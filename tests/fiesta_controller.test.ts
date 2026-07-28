@@ -20,7 +20,7 @@ function match(overrides: Partial<FiestaMatchInfo> = {}): FiestaMatchInfo {
     augments: [],
     offer: null,
     augmentPending: 0,
-    teamA: [{ pid: 1, name: 'Aki', cls: 'warrior', kills: 0, down: false, me: true }],
+    teamA: [{ pid: 1, name: 'Aki', cls: 'swordman', kills: 0, down: false, me: true }],
     teamB: [{ pid: 2, name: 'Bex', cls: 'mage', kills: 0, down: false, me: false }],
     powerups: [],
     ...overrides,

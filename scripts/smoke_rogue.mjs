@@ -1,8 +1,10 @@
 // Rogue E2E: energy, builders/finishers, combo pips in the UI, vendor buy/sell.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -20,7 +22,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Sneaks');
-await page.click('#offline-select .mini-class[data-class="rogue"]');
+await page.click('#offline-select .mini-class[data-class="thief"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 1500));
 
@@ -29,16 +31,22 @@ await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  let wolf = null, d = 1e9;
+  let wolf = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.templateId === 'forest_wolf' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; wolf = e; }
+      if (dd < d) {
+        d = dd;
+        wolf = e;
+      }
     }
   }
-  p.pos.x = wolf.pos.x + 2.5; p.pos.z = wolf.pos.z;
+  p.pos.x = wolf.pos.x + 2.5;
+  p.pos.z = wolf.pos.z;
   // beef the wolf up so we can bank 3 combo points before it dies
-  wolf.maxHp = 120; wolf.hp = 120;
+  wolf.maxHp = 120;
+  wolf.hp = 120;
   sim.targetEntity(wolf.id);
   p.facing = Math.atan2(wolf.pos.x - p.pos.x, wolf.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
@@ -66,7 +74,13 @@ for (let i = 0; i < 60; i++) {
       }
     }
     const pips = [...document.querySelectorAll('.combo-pip.on')].length;
-    return { combo: p.comboPoints, pips, energy: Math.round(p.resource), dead: w.dead, evis: !!window.__evis };
+    return {
+      combo: p.comboPoints,
+      pips,
+      energy: Math.round(p.resource),
+      dead: w.dead,
+      evis: !!window.__evis,
+    };
   });
   maxCombo = Math.max(maxCombo, s.combo);
   if (s.combo >= 2 && !evisFired) {
@@ -81,11 +95,23 @@ for (let i = 0; i < 60; i++) {
       });
     }
     await page.screenshot({ path: 'tmp/r1_combo.png' });
-    console.log('combo state:', JSON.stringify(s), '| UI pips match:', pips.ui === pips.combo ? 'OK' : `FAIL (ui ${pips.ui} vs ${pips.combo})`);
+    console.log(
+      'combo state:',
+      JSON.stringify(s),
+      '| UI pips match:',
+      pips.ui === pips.combo ? 'OK' : `FAIL (ui ${pips.ui} vs ${pips.combo})`,
+    );
     evisFired = true;
   }
   if (s.dead) {
-    console.log('rogue killed wolf:', 'OK', '| eviscerate used:', s.evis ? 'OK' : 'FAIL', '| max combo:', maxCombo);
+    console.log(
+      'thief killed wolf:',
+      'OK',
+      '| eviscerate used:',
+      s.evis ? 'OK' : 'FAIL',
+      '| max combo:',
+      maxCombo,
+    );
     break;
   }
   await new Promise((r) => setTimeout(r, 400));
@@ -96,21 +122,28 @@ await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const w = sim.entities.get(window.__wolfId);
-  sim.player.pos.x = w.pos.x + 1; sim.player.pos.z = w.pos.z;
+  sim.player.pos.x = w.pos.x + 1;
+  sim.player.pos.z = w.pos.z;
   sim.lootCorpse(w.id);
 });
 const vendor = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes');
-  sim.player.pos.x = wilkes.pos.x + 2; sim.player.pos.z = wilkes.pos.z;
+  sim.player.pos.x = wilkes.pos.x + 2;
+  sim.player.pos.z = wilkes.pos.z;
   sim.copper = 100;
   sim.buyItem(wilkes.id, 'baked_bread');
   const fangs = sim.countItem('wolf_fang');
   if (fangs > 0) sim.sellItem('wolf_fang');
   return { bread: sim.countItem('baked_bread'), copper: sim.copper, hadFang: fangs > 0 };
 });
-console.log('vendor buy bread:', vendor.bread === 1 ? 'OK' : 'FAIL', '| copper after:', vendor.copper);
+console.log(
+  'vendor buy bread:',
+  vendor.bread === 1 ? 'OK' : 'FAIL',
+  '| copper after:',
+  vendor.copper,
+);
 
 // eat the bread
 const eat = await page.evaluate(() => {
@@ -124,7 +157,10 @@ const eat = await page.evaluate(() => {
 });
 await new Promise((r) => setTimeout(r, 4500));
 const eat2 = await page.evaluate(() => window.__game.sim.player.hp);
-console.log('eating heals while sitting:', eat.sitting && eat2 > eat.hp ? `OK (${eat.hp} -> ${eat2})` : 'FAIL');
+console.log(
+  'eating heals while sitting:',
+  eat.sitting && eat2 > eat.hp ? `OK (${eat.hp} -> ${eat2})` : 'FAIL',
+);
 await page.screenshot({ path: 'tmp/r2_eating.png' });
 
 console.log(errors.length ? 'ERRORS:\n' + errors.slice(0, 10).join('\n') : 'no page errors');

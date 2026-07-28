@@ -1,4 +1,4 @@
-// Screenshot harness for item set bonuses. Boots the offline world as a warrior,
+// Screenshot harness for item set bonuses. Boots the offline world as a swordman,
 // equips two Deathlord (tier-1 Strength set) pieces, opens the bags, and hovers a
 // third Deathlord piece so its tooltip shows the set block: "Deathlord Battlegear
 // (2/3)" with the 2-piece bonus lit and the 3-piece bonus still dim. Then equips
@@ -30,7 +30,7 @@ await page.waitForSelector('#btn-offline', { timeout: 60000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.type('#char-name', 'Setlord');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.hud, { timeout: 60000 });
 await sleep(1500);

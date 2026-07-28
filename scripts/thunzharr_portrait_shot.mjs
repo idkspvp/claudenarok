@@ -38,14 +38,14 @@ page.on('console', (m) => {
   if (m.type() === 'error') console.log('CONSOLE-ERR:', m.text());
 });
 
-// Boot the offline client as a warrior (class does not matter for a portrait)
+// Boot the offline client as a swordman (class does not matter for a portrait)
 await page.goto(BASE_URL, { waitUntil: 'networkidle0', timeout: 90000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(300);
 await page.evaluate(() => {
   const card =
-    document.querySelector('#offline-select .mini-class[data-class="warrior"]') ||
-    document.querySelector('.class-card[data-class="warrior"]');
+    document.querySelector('#offline-select .mini-class[data-class="swordman"]') ||
+    document.querySelector('.class-card[data-class="swordman"]');
   card?.click();
 });
 await sleep(150);

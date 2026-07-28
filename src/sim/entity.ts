@@ -5,9 +5,9 @@ import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
+import { baseHpAt, baseSpAt, JOB_VITALS } from './job_vitals';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
-import { defaultAllocationFor } from './stat_preset';
 import type {
   Entity,
   EquipSlot,
@@ -234,7 +234,7 @@ export function createPlayer(id: number, cls: PlayerClass, pos: Vec3, name: stri
   e.color = def.color;
   // Warriors begin in the spec-agnostic default. The tick reconciliation moves
   // Fury to Berserker Stance after a spec is committed.
-  if (cls === 'warrior') {
+  if (cls === 'swordman') {
     const stance = buildStanceAura(BATTLE_STANCE, id);
     if (stance) e.auras.push(stance);
   }
@@ -488,7 +488,7 @@ export function recalcPlayerStats(
     // Moonkin Form carries its Spell Power bonus in the form aura's value, so it lives and
     // dies with the one toggle (a Balance druid's whole kit is arcane/nature, so a generic
     // Spell Power bonus is correct). Gloamveil Form (form_shadow) is NOT a Spell Power
-    // buff: it amplifies the priest's Shadow-school DAMAGE by a percent, applied in
+    // buff: it amplifies the acolyte's Shadow-school DAMAGE by a percent, applied in
     // combat/damage.ts, so it contributes nothing to the stat pass here.
     else if (a.kind === 'form_moonkin') {
       bonusSp += a.value;
@@ -542,10 +542,12 @@ export function recalcPlayerStats(
   // because the pre-conversion Agility was also the generic "light armor" stat.
   // Vitality is the attribute that makes a character hard to kill, so it is the
   // one that reduces damage as well as raising the pool.
-  s.armor += def.baseArmor + def.armorPerLevel * (lvl - 1) + s.vit * 2;
+  // No class or level term, and no Vitality term. Ragnarok's hard DEF comes off
+  // EQUIPMENT and nothing else; Vitality already buys soft DEF, the flat
+  // subtraction in combat/defence.ts, so adding it here counted it twice.
   if (bearForm) {
     // 2.3x (2026-07 tank parity, was 1.9x): leather peaks ~1700-2100 armor
-    // vs the warrior's 2861, so the form multiplier fakes the missing plate
+    // vs the swordman's 2861, so the form multiplier fakes the missing plate
     // tier, the Dire Bear logic.
     s.armor = Math.round(s.armor * 2.3);
     bonusAp += 15 + Math.round(s.agi * 1.5);
@@ -590,7 +592,7 @@ export function recalcPlayerStats(
   e.offhandWeapon = offhandWeapon;
   e.dualWielding = offhandWeapon !== null;
   // Titan's Grip state: dual-wielding with a two-hander in either hand (only a
-  // Fury warrior can reach this via equipment_rules.canDualWieldTwoHand). Pays the
+  // Fury swordman can reach this via equipment_rules.canDualWieldTwoHand). Pays the
   // flat physical-damage penalty in combat/damage.ts (TITANS_GRIP_DMG_PENALTY):
   // the throughput side of the tradeoff whose stat side is item_budget.ts's
   // TWOHAND_STAT_MULT. The offhand arm needs no level re-check: a non-null
@@ -602,7 +604,7 @@ export function recalcPlayerStats(
       meetsLevelRequirement(lvl, mainhand)) ||
       (offhand?.kind === 'weapon' && offhand.hand === 'twohand'));
   const activeShield =
-    cls === 'warrior' && isShieldItem(offhand) && meetsLevelRequirement(lvl, offhand);
+    cls === 'swordman' && isShieldItem(offhand) && meetsLevelRequirement(lvl, offhand);
   e.blockChance = activeShield ? SHIELD_BLOCK_BASE : 0;
   e.blockValue = activeShield ? (offhand.blockValue ?? 0) : 0;
   // The equipped mainhand item id: drives the held weapon model on the client
@@ -657,7 +659,7 @@ export function recalcPlayerStats(
   // Ranged attack keys off DEX rather than AGI, which is Ragnarok's split: AGI
   // buys attack SPEED and evasion, DEX buys accuracy and bow damage.
   e.rangedPower =
-    cls === 'hunter'
+    cls === 'archer'
       ? Math.max(
           0,
           Math.round(
@@ -731,7 +733,7 @@ export function recalcPlayerStats(
   // grant. At VIT 99 a character carries just under double the pool a VIT 1
   // character does. That is decisive without ever dwarfing the class and level
   // base, the way a flat +10/point did once the scale ran to 99.
-  e.maxHp = Math.round((def.baseHp + def.hpPerLevel * (lvl - 1)) * vitHealthMultiplier(s.vit));
+  e.maxHp = Math.round(baseHpAt(JOB_VITALS[def.id], lvl) * vitHealthMultiplier(s.vit));
   if (bearForm) e.maxHp = Math.round(e.maxHp * 1.15);
   if (mods?.stats.maxHpPct) e.maxHp = Math.round(e.maxHp * (1 + mods.stats.maxHpPct));
   if (maxHpPctAura !== 0) e.maxHp = Math.max(1, Math.round(e.maxHp * (1 + maxHpPctAura)));
@@ -756,7 +758,7 @@ export function recalcPlayerStats(
     const manaFrac = e.maxResource > 0 ? e.resource / e.maxResource : 1;
     e.resourceType = 'mana';
     e.maxResource = Math.round(
-      (def.baseMana + def.manaPerLevel * (lvl - 1)) *
+      baseSpAt(JOB_VITALS[def.id], lvl) *
         intManaMultiplier(s.int) *
         (1 + (mods?.global.manaPct ?? 0)),
     );
@@ -803,7 +805,7 @@ export function characterDerivedStats(
     equipment,
     mods,
     equipmentInstance ?? {},
-    alloc ?? defaultAllocationFor(cls, e.level),
+    alloc ?? emptyStatAllocation(),
   );
   return {
     stats: e.stats,

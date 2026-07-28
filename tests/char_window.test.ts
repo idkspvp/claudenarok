@@ -94,7 +94,7 @@ describe('char_window: profession art placements', () => {
     );
     const root = document.createElement('div');
     let world = {
-      cfg: { playerClass: 'warrior' },
+      cfg: { playerClass: 'swordman' },
       player: { name: 'Aurelia', level: 60, skin: 0 },
       equipment: {},
       honor: 0,
@@ -199,7 +199,7 @@ describe('char_window: profession art placements', () => {
     );
     const root = document.createElement('div');
     const world = {
-      cfg: { playerClass: 'warrior' },
+      cfg: { playerClass: 'swordman' },
       player: { name: 'Aurelia', level: 60, skin: 0 },
       equipment: {},
       honor: 0,

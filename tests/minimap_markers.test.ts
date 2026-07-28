@@ -69,9 +69,9 @@ function makeWorld(shape: 'sim' | 'client'): IWorld {
     leader: 1,
     raid: false,
     members: [
-      { pid: 1, cls: 'warrior', dead: 0, x: 0, z: PZ }, // self, skipped
+      { pid: 1, cls: 'swordman', dead: 0, x: 0, z: PZ }, // self, skipped
       { pid: 5, cls: 'mage', dead: 0, x: 7, z: PZ }, // on-map disc, alive (pip)
-      { pid: 16, cls: 'priest', dead: 1, x: 0, z: PZ + 80 }, // off-map arrow, dead
+      { pid: 16, cls: 'acolyte', dead: 1, x: 0, z: PZ + 80 }, // off-map arrow, dead
     ],
   };
   const socialInfo = {
@@ -88,7 +88,7 @@ function makeWorld(shape: 'sim' | 'client'): IWorld {
     partyInfo,
     socialInfo,
     delveRun: null,
-    cfg: { seed: 42, playerClass: 'warrior' },
+    cfg: { seed: 42, playerClass: 'swordman' },
     playerId: 1,
     stationPlacements: STATIONS,
   } as unknown as IWorld;
@@ -169,7 +169,7 @@ describe('createMinimapMarkers: the discriminated union per draw kind', () => {
     expect(disc.dead).toBe(false);
     expect(disc.pip).toBe(true);
     expect(disc.radius).toBeGreaterThan(0);
-    expect(arrow.cls).toBe('priest');
+    expect(arrow.cls).toBe('acolyte');
     expect(arrow.dead).toBe(true);
     expect(Number.isFinite(arrow.angle)).toBe(true);
   });
@@ -245,7 +245,7 @@ describe('station markers (Professions 2.0)', () => {
       partyInfo: null,
       socialInfo: { friends: [], blocks: [], guild: null },
       delveRun: null,
-      cfg: { seed: 42, playerClass: 'warrior' },
+      cfg: { seed: 42, playerClass: 'swordman' },
       playerId: 1,
       stationPlacements: STATIONS,
       nodeHarvestableByMe: () => true,
@@ -380,7 +380,7 @@ describe('gather-node markers: the locked dimension', () => {
       partyInfo: null,
       socialInfo: null,
       delveRun: null,
-      cfg: { seed: 42, playerClass: 'warrior' },
+      cfg: { seed: 42, playerClass: 'swordman' },
       playerId: 1,
       stationPlacements: STATIONS,
       inventory: opts.inventory ?? [],

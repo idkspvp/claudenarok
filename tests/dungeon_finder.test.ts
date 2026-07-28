@@ -20,11 +20,12 @@ import {
   normalizeFinderSelection,
 } from '../src/sim/social/dungeon_finder';
 import type { PlayerClass, SimEvent } from '../src/sim/types';
+import { ALL_CLASSES } from '../src/sim/types';
 
 const FIVE = { tank: 1, healer: 1, dps: 3 };
 const TEN = { tank: 2, healer: 2, dps: 6 };
 
-const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+const makeSim = (seed = 42) => new Sim({ seed, playerClass: 'swordman', noPlayer: true });
 
 interface Joined {
   sim: Sim;
@@ -59,11 +60,11 @@ const errorsFor = (events: SimEvent[], pid: number) =>
 // A standard eligible five for the Hollow Crypt (levels 7-10, spec roles).
 function queueFive(sim: Sim): Joined {
   const pids = addPlayers(sim, [
-    { cls: 'warrior', roles: ['tank'], level: 8 },
-    { cls: 'priest', roles: ['healer'], level: 8 },
+    { cls: 'swordman', roles: ['tank'], level: 8 },
+    { cls: 'acolyte', roles: ['healer'], level: 8 },
     { cls: 'mage', roles: ['dps'], level: 8 },
-    { cls: 'rogue', roles: ['dps'], level: 8 },
-    { cls: 'hunter', roles: ['dps'], level: 8 },
+    { cls: 'thief', roles: ['dps'], level: 8 },
+    { cls: 'archer', roles: ['dps'], level: 8 },
   ]);
   for (const pid of pids) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
   const events = tickAll(sim, 1);
@@ -170,19 +171,17 @@ describe('finder catalogue metadata', () => {
 // every level.
 describe('compatibleFinderRoles', () => {
   it('applies the fixed class table', () => {
-    expect(compatibleFinderRoles('warrior')).toEqual(['tank', 'dps']);
-    expect(compatibleFinderRoles('paladin')).toEqual(['tank', 'healer', 'dps']);
-    expect(compatibleFinderRoles('druid')).toEqual(['tank', 'healer', 'dps']);
-    expect(compatibleFinderRoles('priest')).toEqual(['healer', 'dps']);
-    expect(compatibleFinderRoles('shaman')).toEqual(['healer', 'dps']);
+    // One tank and one healer survive the D1 collapse: the Swordman holds the
+    // shield and the Acolyte owns every heal.
+    expect(compatibleFinderRoles('swordman')).toEqual(['tank', 'dps']);
+    expect(compatibleFinderRoles('acolyte')).toEqual(['healer', 'dps']);
     expect(compatibleFinderRoles('mage')).toEqual(['dps']);
-    expect(compatibleFinderRoles('rogue')).toEqual(['dps']);
-    expect(compatibleFinderRoles('hunter')).toEqual(['dps']);
-    expect(compatibleFinderRoles('warlock')).toEqual(['dps']);
+    expect(compatibleFinderRoles('thief')).toEqual(['dps']);
+    expect(compatibleFinderRoles('archer')).toEqual(['dps']);
   });
 
   it('every class can dps (table completeness)', () => {
-    expect(FINDER_CLASS_ROLES.dps).toHaveLength(9);
+    expect([...FINDER_CLASS_ROLES.dps].sort()).toEqual([...ALL_CLASSES].sort());
   });
 });
 
@@ -311,7 +310,7 @@ describe('automatic queue', () => {
   it('level range is strict at both ends', () => {
     const sim = makeSim();
     const [low, high] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 6 },
+      { cls: 'swordman', roles: ['tank'], level: 6 },
       { cls: 'mage', roles: ['dps'], level: 11 },
     ]);
     sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], low);
@@ -344,25 +343,25 @@ describe('automatic queue', () => {
 
   it('assigns exactly one role to a multi-role selection (the active spec narrows it)', () => {
     const sim = makeSim();
-    // A druid picks both tank and healer below the spec unlock; the sticky
-    // selection survives leveling up, but from level 5 the active spec is the
-    // whole capability set, so it collapses to one role at match time.
-    const druid = sim.addPlayer('druid', 'P0');
-    sim.setPlayerLevel(4, druid);
-    sim.dungeonFinderSetRoles(['tank', 'healer'], druid);
-    sim.setPlayerLevel(8, druid);
+    // The Swordman is the one multi-role job left after D1 (tank and dps), so it
+    // is what exercises the narrowing: it picks both, and the composition decides
+    // which single role the proposal assigns.
+    const swordman = sim.addPlayer('swordman', 'P0');
+    sim.setPlayerLevel(8, swordman);
+    sim.dungeonFinderSetRoles(['tank', 'dps'], swordman);
     const rest = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
       { cls: 'mage', roles: ['dps'], level: 8 },
-      { cls: 'rogue', roles: ['dps'], level: 8 },
-      { cls: 'hunter', roles: ['dps'], level: 8 },
+      { cls: 'thief', roles: ['dps'], level: 8 },
+      { cls: 'archer', roles: ['dps'], level: 8 },
     ]);
-    const pids = [druid, ...rest];
+    const pids = [swordman, ...rest];
     for (const pid of pids) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
     tickAll(sim, 1);
-    // The restoration spec restricts the tank+healer selection to healing.
-    expect(sim.dungeonFinderInfoFor(pids[0])?.proposal?.role).toBe('healer');
-    expect(sim.dungeonFinderInfoFor(pids[1])?.proposal?.role).toBe('tank');
+    // Three dps are already queued, so the group needs the tank, and exactly one
+    // role comes back rather than the pair that was selected.
+    expect(sim.dungeonFinderInfoFor(pids[0])?.proposal?.role).toBe('tank');
+    expect(sim.dungeonFinderInfoFor(pids[1])?.proposal?.role).toBe('healer');
   });
 
   it('a decline returns accepted units to the queue with their original wait and locks out the decliner', () => {
@@ -413,11 +412,11 @@ describe('automatic queue', () => {
   it("requires intersecting activity selections and picks the oldest unit's first activity", () => {
     const sim = makeSim();
     const pids = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 19 },
-      { cls: 'priest', roles: ['healer'], level: 19 },
+      { cls: 'swordman', roles: ['tank'], level: 19 },
+      { cls: 'acolyte', roles: ['healer'], level: 19 },
       { cls: 'mage', roles: ['dps'], level: 19 },
-      { cls: 'rogue', roles: ['dps'], level: 19 },
-      { cls: 'hunter', roles: ['dps'], level: 19 },
+      { cls: 'thief', roles: ['dps'], level: 19 },
+      { cls: 'archer', roles: ['dps'], level: 19 },
     ]);
     // Oldest unit wants only the Sanctum; the rest select both remaining
     // eligible activities. (Level 19 is only eligible for gravewyrm_sanctum_normal,
@@ -430,11 +429,11 @@ describe('automatic queue', () => {
 
     const sim2 = makeSim(7);
     const pids2 = addPlayers(sim2, [
-      { cls: 'warrior', roles: ['tank'], level: 20 },
-      { cls: 'priest', roles: ['healer'], level: 20 },
+      { cls: 'swordman', roles: ['tank'], level: 20 },
+      { cls: 'acolyte', roles: ['healer'], level: 20 },
       { cls: 'mage', roles: ['dps'], level: 20 },
-      { cls: 'rogue', roles: ['dps'], level: 20 },
-      { cls: 'hunter', roles: ['dps'], level: 20 },
+      { cls: 'thief', roles: ['dps'], level: 20 },
+      { cls: 'archer', roles: ['dps'], level: 20 },
     ]);
     // Tank only wants the Sanctum; everyone else only heroic Hollow Crypt:
     // no intersection, no proposal.
@@ -466,8 +465,8 @@ describe('automatic queue', () => {
       tickAll(sim, 1); // strictly increasing join times
     }
     const [tank, healer] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8 },
-      { cls: 'priest', roles: ['healer'], level: 8 },
+      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
     ]);
     sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], tank);
     sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], healer);
@@ -483,11 +482,11 @@ describe('automatic queue', () => {
   it('keeps premade parties indivisible and preserves their leader', () => {
     const sim = makeSim();
     const pids = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8, name: 'Lead' },
-      { cls: 'priest', roles: ['healer'], level: 8, name: 'Mate' },
+      { cls: 'swordman', roles: ['tank'], level: 8, name: 'Lead' },
+      { cls: 'acolyte', roles: ['healer'], level: 8, name: 'Mate' },
       { cls: 'mage', roles: ['dps'], level: 8 },
-      { cls: 'rogue', roles: ['dps'], level: 8 },
-      { cls: 'hunter', roles: ['dps'], level: 8 },
+      { cls: 'thief', roles: ['dps'], level: 8 },
+      { cls: 'archer', roles: ['dps'], level: 8 },
     ]);
     // Solos queue FIRST, so the premade is the newest unit; its leader must
     // still lead the formed party.
@@ -510,8 +509,8 @@ describe('automatic queue', () => {
   it('only the premade leader may queue or dequeue the unit', () => {
     const sim = makeSim();
     const [lead, mate] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8 },
-      { cls: 'priest', roles: ['healer'], level: 8 },
+      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
     ]);
     sim.partyInvite(mate, lead);
     sim.partyAccept(mate);
@@ -530,8 +529,8 @@ describe('automatic queue', () => {
   it('every premade member must satisfy the level band (anti-boost)', () => {
     const sim = makeSim();
     const [lead, low] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8 },
-      { cls: 'priest', roles: ['healer'], level: 5, name: 'Lowbie' },
+      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 5, name: 'Lowbie' },
     ]);
     sim.partyInvite(low, lead);
     sim.partyAccept(low);
@@ -548,7 +547,7 @@ describe('automatic queue', () => {
     const pids = addPlayers(
       sim,
       Array.from({ length: 5 }, (_, i) => ({
-        cls: 'druid' as PlayerClass,
+        cls: 'acolyte' as PlayerClass,
         roles: ['tank', 'healer', 'dps'] as Role[],
         level: 8,
         name: `F${i}`,
@@ -566,8 +565,8 @@ describe('automatic queue', () => {
   it('drops a queued unit when its party roster changes (sweep)', () => {
     const sim = makeSim();
     const [lead, mate, third] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8 },
-      { cls: 'priest', roles: ['healer'], level: 8 },
+      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
       { cls: 'mage', roles: ['dps'], level: 8 },
     ]);
     sim.partyInvite(mate, lead);
@@ -585,10 +584,10 @@ describe('automatic queue', () => {
   it('forms a 10-player raid (2/2/6) and converts the group to a raid with both subgroups capped', () => {
     const sim = makeSim();
     const defs: { cls: PlayerClass; roles: Role[]; level: number; name?: string }[] = [
-      { cls: 'warrior', roles: ['tank'], level: 20, name: 'T1' },
-      { cls: 'paladin', roles: ['tank'], level: 20, name: 'T2' },
-      { cls: 'priest', roles: ['healer'], level: 20, name: 'H1' },
-      { cls: 'shaman', roles: ['healer'], level: 20, name: 'H2' },
+      { cls: 'swordman', roles: ['tank'], level: 20, name: 'T1' },
+      { cls: 'swordman', roles: ['tank'], level: 20, name: 'T2' },
+      { cls: 'acolyte', roles: ['healer'], level: 20, name: 'H1' },
+      { cls: 'acolyte', roles: ['healer'], level: 20, name: 'H2' },
       ...Array.from({ length: 6 }, (_, i) => ({
         cls: 'mage' as PlayerClass,
         roles: ['dps'] as Role[],
@@ -657,8 +656,8 @@ describe('automatic queue', () => {
 describe('premade board', () => {
   function listedPair(sim: Sim): { leader: number; applicant: number } {
     const [leader, applicant] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8, name: 'Lead' },
-      { cls: 'priest', roles: ['healer'], level: 8, name: 'App' },
+      { cls: 'swordman', roles: ['tank'], level: 8, name: 'Lead' },
+      { cls: 'acolyte', roles: ['healer'], level: 8, name: 'App' },
     ]);
     sim.dungeonFinderListingCreate('hollow_crypt_normal', ['first_run'], leader);
     tickAll(sim, 1);
@@ -721,8 +720,8 @@ describe('premade board', () => {
     const listingId = sim.dungeonFinderBoardView()[0].id;
     const [low, tank2, other] = addPlayers(sim, [
       { cls: 'mage', roles: ['dps'], level: 5 },
-      { cls: 'paladin', roles: ['tank'], level: 8 },
-      { cls: 'rogue', roles: ['dps'], level: 8 },
+      { cls: 'swordman', roles: ['tank'], level: 8 },
+      { cls: 'thief', roles: ['dps'], level: 8 },
     ]);
     let events: SimEvent[];
     sim.dungeonFinderApply(listingId, low);
@@ -752,12 +751,12 @@ describe('premade board', () => {
   it('closes the listing when it fills and notifies remaining applicants when it closes', () => {
     const sim = makeSim();
     const [leader, h, d1, d2, d3, extra] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8, name: 'Lead' },
-      { cls: 'priest', roles: ['healer'], level: 8 },
+      { cls: 'swordman', roles: ['tank'], level: 8, name: 'Lead' },
+      { cls: 'acolyte', roles: ['healer'], level: 8 },
       { cls: 'mage', roles: ['dps'], level: 8 },
-      { cls: 'rogue', roles: ['dps'], level: 8 },
-      { cls: 'hunter', roles: ['dps'], level: 8 },
-      { cls: 'warlock', roles: ['dps'], level: 8 },
+      { cls: 'thief', roles: ['dps'], level: 8 },
+      { cls: 'archer', roles: ['dps'], level: 8 },
+      { cls: 'mage', roles: ['dps'], level: 8 },
     ]);
     sim.dungeonFinderListingCreate('hollow_crypt_normal', [], leader);
     tickAll(sim, 1);
@@ -786,7 +785,7 @@ describe('premade board', () => {
   it('supports the solo crypt as a listing-only activity (no roles, level 20, never auto-queued)', () => {
     const sim = makeSim();
     const [leader, buddy] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 20, name: 'Lead' },
+      { cls: 'swordman', roles: ['tank'], level: 20, name: 'Lead' },
       { cls: 'mage', roles: ['dps'], level: 20 },
     ]);
     // The crypt cannot be auto-queued.
@@ -808,8 +807,8 @@ describe('premade board', () => {
   it('a raid listing converts the party to a raid on the first acceptance', () => {
     const sim = makeSim();
     const [leader, buddy] = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 20, name: 'Lead' },
-      { cls: 'priest', roles: ['healer'], level: 20 },
+      { cls: 'swordman', roles: ['tank'], level: 20, name: 'Lead' },
+      { cls: 'acolyte', roles: ['healer'], level: 20 },
     ]);
     sim.dungeonFinderListingCreate('nythraxis_boss_arena_normal', [], leader);
     tickAll(sim, 1);
@@ -842,7 +841,7 @@ describe('premade board', () => {
 // ---------------------------------------------------------------------------
 
 describe('/dev lfg seeding', () => {
-  const makeDevSim = () => new Sim({ seed: 42, playerClass: 'warrior', devCommands: true });
+  const makeDevSim = () => new Sim({ seed: 42, playerClass: 'swordman', devCommands: true });
 
   it('queue mode spawns the complementary bots so my join pops a proposal', () => {
     const sim = makeDevSim();
@@ -895,7 +894,7 @@ describe('/dev lfg seeding', () => {
     sim.chat('/dev lfg');
     tickAll(sim, 1);
     expect([...sim.players.values()].filter((m) => m.isDevBot)).toHaveLength(0);
-    const prod = new Sim({ seed: 42, playerClass: 'warrior' });
+    const prod = new Sim({ seed: 42, playerClass: 'swordman' });
     prod.setPlayerLevel(8);
     prod.dungeonFinderSetRoles(['tank']);
     prod.chat('/dev lfg');
@@ -925,11 +924,11 @@ describe('parity with the invite path (party-side rules)', () => {
   it('clears a premade ready check when the finder dissolves its source party', () => {
     const sim = makeSim();
     const pids = addPlayers(sim, [
-      { cls: 'warrior', roles: ['tank'], level: 8, name: 'Lead' },
-      { cls: 'priest', roles: ['healer'], level: 8, name: 'Mate' },
+      { cls: 'swordman', roles: ['tank'], level: 8, name: 'Lead' },
+      { cls: 'acolyte', roles: ['healer'], level: 8, name: 'Mate' },
       { cls: 'mage', roles: ['dps'], level: 8 },
-      { cls: 'rogue', roles: ['dps'], level: 8 },
-      { cls: 'hunter', roles: ['dps'], level: 8 },
+      { cls: 'thief', roles: ['dps'], level: 8 },
+      { cls: 'archer', roles: ['dps'], level: 8 },
     ]);
     for (const pid of pids.slice(2)) sim.dungeonFinderQueueJoin(['hollow_crypt_normal'], pid);
     tickAll(sim, 1);

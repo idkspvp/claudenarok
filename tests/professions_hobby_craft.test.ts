@@ -10,7 +10,7 @@ import { getHobbyCraft } from '../src/sim/professions/archetype';
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 11) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 const CRAFT_A = CRAFT_RING[0].id;

@@ -24,7 +24,7 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', e.message));
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 60000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Blinky' });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Blinky' });
 
 // One steady long buff, one expiring buff on the player, one expiring DoT on a
 // targeted mob, applied directly so the shot is deterministic.

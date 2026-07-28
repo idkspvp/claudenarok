@@ -2674,19 +2674,19 @@
     padding: 0;
     margin-left: 0;
   }
-  .mini-class[data-class="warrior"] {
+  .mini-class[data-class="swordman"] {
     --class-color: #d67a54;
   }
   .mini-class[data-class="paladin"] {
     --class-color: #f58ca0;
   }
-  .mini-class[data-class="hunter"] {
+  .mini-class[data-class="archer"] {
     --class-color: #a6d84f;
   }
-  .mini-class[data-class="rogue"] {
+  .mini-class[data-class="thief"] {
     --class-color: #fcee58;
   }
-  .mini-class[data-class="priest"] {
+  .mini-class[data-class="acolyte"] {
     --class-color: #c6d4f0;
   }
   .mini-class[data-class="shaman"] {
@@ -5743,19 +5743,19 @@
   }
 
   /* Class color tokens, any element with data-class exposes --class-color */
-  [data-class="warrior"] {
+  [data-class="swordman"] {
     --class-color: #d67a54;
   }
   [data-class="paladin"] {
     --class-color: #f58ca0;
   }
-  [data-class="hunter"] {
+  [data-class="archer"] {
     --class-color: #a6d84f;
   }
-  [data-class="rogue"] {
+  [data-class="thief"] {
     --class-color: #fcee58;
   }
-  [data-class="priest"] {
+  [data-class="acolyte"] {
     --class-color: #c6d4f0;
   }
   [data-class="shaman"] {

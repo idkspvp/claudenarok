@@ -49,9 +49,9 @@ describe('Sloomtooth the Drowned (rare elite)', () => {
       expect(d.weapon).toBeDefined();
       expect(d.requiredClass).toBeDefined();
     }
-    // warrior / rogue / mage archetypes are mutually exclusive
-    expect(drops[0].requiredClass).toContain('warrior');
-    expect(drops[1].requiredClass).toContain('rogue');
+    // swordman / thief / mage archetypes are mutually exclusive
+    expect(drops[0].requiredClass).toContain('swordman');
+    expect(drops[1].requiredClass).toContain('thief');
     expect(drops[2].requiredClass).toContain('mage');
   });
 
@@ -64,7 +64,7 @@ describe('Sloomtooth the Drowned (rare elite)', () => {
   });
 
   it('actually surges back to life the first time it is brought low', () => {
-    const sim = new Sim({ seed: 20061, playerClass: 'warrior' });
+    const sim = new Sim({ seed: 20061, playerClass: 'swordman' });
     const mob = createMob(990201, MOBS.sloomtooth_the_drowned, 11, { x: 0, y: 0, z: 0 });
     mob.hp = Math.round(mob.maxHp * 0.25);
     mob.inCombat = true;

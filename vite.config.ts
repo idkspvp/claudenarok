@@ -106,7 +106,7 @@ const STATIC_PAGE_ALIASES = new Map([
   ['/editor/', '/editor.html'],
 ]);
 // The Guide is the site wiki: a client-routed SPA at /wiki. Deep paths like
-// /wiki/classes/warrior have no static file, so any extensionless /wiki* request falls
+// /wiki/classes/swordman have no static file, so any extensionless /wiki* request falls
 // back to guide.html (mirrored in server/main.ts serveStatic). Asset requests under
 // /wiki keep their extension and are left alone so they 404 rather than serving HTML.
 function isGuideSpaPath(pathOnly: string): boolean {

@@ -117,7 +117,7 @@ function fakeWs() {
 // Distinct accountId (7) and characterId (42) so a swapped-field bug in the row
 // mapping is caught (equal ids would hide it).
 function joinLedger(server: GameServer, fw: ReturnType<typeof fakeWs>, name: string) {
-  const s = server.join(fw.ws as any, 7, 42, name, 'warrior', null) as any;
+  const s = server.join(fw.ws as any, 7, 42, name, 'swordman', null) as any;
   if ('error' in s) throw new Error(s.error);
   s.blockListLoaded = true;
   return s;

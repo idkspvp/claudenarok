@@ -340,7 +340,7 @@ const METHOD_MEMBERS = IWORLD_MEMBERS.filter((m) => m.kind === 'method');
 // --- the two worlds under test: real prototypes + constructed instances ---
 
 const SIM_SEED = 1;
-const PROBE_CLASS: PlayerClass = 'warrior';
+const PROBE_CLASS: PlayerClass = 'swordman';
 
 // A DOM-less, network-free WebSocket stand-in for the ClientWorld ctor
 // (online.ts:800-823 opens a real `new WebSocket(...)`). No-op send/close; settable

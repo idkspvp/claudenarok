@@ -22,7 +22,7 @@ const players: LivePlayer[] = [
     accountId: 77,
     characterId: 42,
     name: 'Aragorn',
-    class: 'warrior',
+    class: 'swordman',
     level: 60,
     hp: 90,
     maxHp: 100,

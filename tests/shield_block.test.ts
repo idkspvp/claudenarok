@@ -38,8 +38,8 @@ function spawnMobInFront(sim: AnySim, player: Entity): Entity {
 
 describe('shield block', () => {
   it('the starting shield equips block stats', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true });
-    // A fresh warrior now spawns with the buckler already in the offhand.
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true });
+    // A fresh swordman now spawns with the buckler already in the offhand.
     expect(sim.player.offhandItemId).toBe('eastbrook_buckler');
     expect(sim.player.blockChance).toBe(SHIELD_BLOCK_BASE);
     expect(sim.player.blockChance).toBeGreaterThan(0);
@@ -47,7 +47,7 @@ describe('shield block', () => {
   });
 
   it('mob melee from the front is reduced by blockValue; from behind it is not', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true }) as AnySim;
     const player = sim.player;
     const mob = spawnMobInFront(sim, player);
     player.dodgeChance = 0;
@@ -59,7 +59,7 @@ describe('shield block', () => {
     player.stats.vit = 0;
     mob.weapon = { min: 20, max: 20, speed: 2 };
     mob.attackPower = 0;
-    // One-roll table: 0.9 clears miss (~5%) and the warrior parry band (~5.5%),
+    // One-roll table: 0.9 clears miss (~5%) and the swordman parry band (~5.5%),
     // and with blockChance 1 always lands inside the block window. The same
     // stubbed draw keeps the damage roll (min = max) and crit (0.9 >= 0.05)
     // deterministic.
@@ -80,9 +80,9 @@ describe('shield block', () => {
   });
 
   it('player melee into a shielded target is reduced only from the front', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true }) as AnySim;
     const attacker = sim.player;
-    const defenderId = sim.addPlayer('warrior', 'Shielded');
+    const defenderId = sim.addPlayer('swordman', 'Shielded');
     const defender = sim.entities.get(defenderId);
     if (!defender || defender.kind !== 'player') throw new Error('missing defender');
     attacker.weapon = { min: 20, max: 20, speed: 2 };

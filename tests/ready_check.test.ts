@@ -7,8 +7,8 @@ import { READY_CHECK_SECONDS } from '../src/sim/social/ready_check';
 import type { SimEvent } from '../src/sim/types';
 
 function makeParty() {
-  const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-  const lead = sim.addPlayer('warrior', 'Lead');
+  const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+  const lead = sim.addPlayer('swordman', 'Lead');
   const mate = sim.addPlayer('mage', 'Mate');
   sim.partyInvite(mate, lead);
   sim.partyAccept(mate);
@@ -17,11 +17,11 @@ function makeParty() {
 
 // Leader plus three members, so a single finalize can produce every tally bucket.
 function makeParty4() {
-  const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-  const lead = sim.addPlayer('warrior', 'Lead');
+  const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+  const lead = sim.addPlayer('swordman', 'Lead');
   const a = sim.addPlayer('mage', 'Aay');
-  const b = sim.addPlayer('priest', 'Bee');
-  const c = sim.addPlayer('rogue', 'Cee');
+  const b = sim.addPlayer('acolyte', 'Bee');
+  const c = sim.addPlayer('thief', 'Cee');
   for (const m of [a, b, c]) {
     sim.partyInvite(m, lead);
     sim.partyAccept(m);
@@ -58,8 +58,8 @@ describe('ready check', () => {
     const { sim, mate } = makeParty();
     sim.chat('/ready', mate); // member, not leader
     expect((sim as any).readyChecks.size).toBe(0);
-    const solo = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const alone = solo.addPlayer('warrior', 'Solo');
+    const solo = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const alone = solo.addPlayer('swordman', 'Solo');
     solo.chat('/ready', alone);
     expect((solo as any).readyChecks.size).toBe(0);
   });

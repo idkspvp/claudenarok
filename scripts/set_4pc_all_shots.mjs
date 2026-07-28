@@ -5,8 +5,8 @@
 //   node scripts/set_4pc_all_shots.mjs   (needs `npm run dev`; GAME_URL overrides)
 //
 // Shots:
-//   set-4pc-barrowlord-ingame.png   warrior, 4 Barrowlord pieces -> Gravemight (4) line
-//   set-4pc-direfang-ingame.png     hunter, 4 Direfang pieces -> Ragged Gash (4) line
+//   set-4pc-barrowlord-ingame.png   swordman, 4 Barrowlord pieces -> Gravemight (4) line
+//   set-4pc-direfang-ingame.png     archer, 4 Direfang pieces -> Ragged Gash (4) line
 //   own-aura-target-strip.png       the target strip leading with the player's own
 //                                   (enlarged, gold-glowed) bleed among the mob's auras
 import fs from 'node:fs';
@@ -206,7 +206,7 @@ async function shotSlotTooltip(page, slot, file) {
 
 // ---- Shot 1: Barrowlord (plate) 4-piece tooltip with the Gravemight proc ----
 {
-  const page = await boot('warrior', 'Barrowzug');
+  const page = await boot('swordman', 'Barrowzug');
   const r = await equip(page, [
     'deathlord_warplate',
     'deathlord_legguards',
@@ -223,7 +223,7 @@ async function shotSlotTooltip(page, slot, file) {
 
 // ---- Shot 2: Direfang (leather) 4-piece tooltip with the Bared Fangs proc ----
 {
-  const page = await boot('hunter', 'Fangora');
+  const page = await boot('archer', 'Fangora');
   const r = await equip(page, [
     'nighttalon_grips',
     'nighttalon_waistband',
@@ -240,7 +240,7 @@ async function shotSlotTooltip(page, slot, file) {
 
 // ---- Shot 3: the target strip with the player's own bleed enlarged + first ----
 {
-  const page = await boot('warrior', 'Critgar');
+  const page = await boot('swordman', 'Critgar');
   await equip(page, [
     'crownforged_gauntlets',
     'crownforged_girdle',

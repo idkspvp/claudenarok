@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { Aura, SimEvent } from '../src/sim/types';
+import type { Aura, SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[]): string | undefined {
@@ -28,7 +28,7 @@ function aura(partial: Partial<Aura> & Pick<Aura, 'name' | 'kind'>): Aura {
 describe('/targetbuffs command', () => {
   it('reports no target when nothing is targeted', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/targetbuffs', a);
     expect(errorText(sim.tick())).toBe('You have no target.');
@@ -36,7 +36,7 @@ describe('/targetbuffs command', () => {
 
   it('reports an empty effect list for a clean target', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     sim.targetEntity(b, a);
@@ -46,7 +46,7 @@ describe('/targetbuffs command', () => {
 
   it('tags each aura on the target as a buff or debuff with stacks and remaining time', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     const target = sim.entities.get(b)!;
@@ -66,7 +66,7 @@ describe('/targetbuffs command', () => {
     // Regression: these kinds were previously absent from the sim-local harmful set
     // and so mis-tagged as [buff]. Unifying onto isDebuffAura fixes the drift.
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
     sim.tick();
     const target = sim.entities.get(b)!;
@@ -84,7 +84,7 @@ describe('/targetbuffs command', () => {
 
   it('responds to the /debuffs and /tb aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.chat('/debuffs', a);
     expect(errorText(sim.tick())).toBe('You have no target.');

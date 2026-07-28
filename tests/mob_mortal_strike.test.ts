@@ -6,7 +6,7 @@ import { Sim } from '../src/sim/sim';
 import { type Aura, Entity } from '../src/sim/types';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman' });
 
 function woundAura(value: number, remaining = 6): Aura {
   return {

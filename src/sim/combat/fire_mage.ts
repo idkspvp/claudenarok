@@ -97,7 +97,7 @@ export function personalBarrierIdForSpec(spec: string | null): string | null {
 // The fire kit used to gate on the committed Fire specialization. Specs are
 // retired (Phase D0) and the mage learns the whole fire book, so the gate is the
 // KNOWN Ignition passive that documents these mechanics: the same idiom the
-// frost procs and the warrior's Sudden Death proc use.
+// frost procs and the swordman's Sudden Death proc use.
 function knowsFireMastery(ctx: SimContext, p: Entity): boolean {
   if (p.kind !== 'player') return false;
   const meta = ctx.players.get(p.id);

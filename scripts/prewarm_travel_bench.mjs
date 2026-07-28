@@ -25,7 +25,7 @@ import { BROWSER_PATH } from './browser_path.mjs';
 
 const BASE_URL = process.env.GAME_URL ?? 'http://localhost:5173';
 const GFX = process.env.PERF_GFX ?? 'ultra';
-const KLASS = process.env.PERF_CLASS ?? 'warrior';
+const KLASS = process.env.PERF_CLASS ?? 'swordman';
 const SETTLE_MS = Number(process.env.PERF_SETTLE_MS ?? 2200);
 const BOOT_TIMEOUT_MS = Number(process.env.PERF_BOOT_TIMEOUT_MS ?? 120000);
 const NAV_TIMEOUT_MS = Number(process.env.PERF_NAV_TIMEOUT_MS ?? 30000);

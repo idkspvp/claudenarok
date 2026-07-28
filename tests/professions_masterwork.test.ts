@@ -401,7 +401,7 @@ describe('draw-order determinism over a real Sim', () => {
   const SEED = 20;
 
   function run() {
-    const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     sim.acceptArchetypeQuest('tailoring');
     const meta = (sim as any).players.get(pid);
@@ -498,7 +498,7 @@ describe('draw-order determinism over a real Sim', () => {
 describe('proc-chance wiring over a real Sim (hunted boundary-window seeds)', () => {
   // Both cases craft recipe_eastbrook_ritual_vestments (skillReq 0, uncommon
   // def, bump tier 2: inside the pre-attunement rare ceiling) on a fresh
-  // warrior, so the only chance inputs in play are the ones each case flips.
+  // swordman, so the only chance inputs in play are the ones each case flips.
   // Granting materials and setting craftSkills directly never draws rng, so
   // paired same-seed runs share the identical single proc draw; each seed was
   // hunted (bounded scan from seed 1, draw value verified via the rng
@@ -506,7 +506,7 @@ describe('proc-chance wiring over a real Sim (hunted boundary-window seeds)', ()
   // flipped input alone decides the proc.
 
   function craftVestments(seed: number, setup: (sim: Sim, pid: number) => void) {
-    const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: false });
     const pid = sim.playerId;
     setup(sim, pid);
     sim.craftItem('recipe_eastbrook_ritual_vestments', false, pid);
@@ -716,7 +716,7 @@ describe('material-tier masterwork feed (material_tier.ts)', () => {
   it('the crafting call site passes the consumed materials tier into the proc (hunted seed-69 window)', () => {
     // Same hunted seed-69 window as the signed-reagent cases above: the
     // single proc draw lands in [0.03, 0.05). A synthetic skillReq-0 recipe
-    // (resolveCraftForRecipe's exported-for-tests seam) on a fresh warrior
+    // (resolveCraftForRecipe's exported-for-tests seam) on a fresh swordman
     // has no other bonus in play, so the ONLY chance input separating the
     // two arms is the reagent's material tier: the tier-2 arm rolls at
     // 0.03 + 0.02 = 0.05 and procs, the tier-0 arm rolls at the bare 0.03
@@ -725,7 +725,7 @@ describe('material-tier masterwork feed (material_tier.ts)', () => {
     // is pure and cannot move the procRoll draw.
     const SEED = 69;
     const craftSynthetic = (reagentItemId: string) => {
-      const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: false });
+      const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: false });
       const pid = sim.playerId;
       sim.addItem(reagentItemId, 1, pid);
       const recipe: ProfessionRecipeRecord = {

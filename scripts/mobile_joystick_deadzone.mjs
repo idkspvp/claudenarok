@@ -58,7 +58,7 @@ page.on('console', (msg) => {
 });
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Tapper', settleMs: 2500 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Tapper', settleMs: 2500 });
 
 // Headless Chromium reports pointer:fine, so force the touch layout the same
 // way the other mobile harnesses do, and make isPhoneTouchDevice() return true

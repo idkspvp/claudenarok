@@ -31,8 +31,8 @@ function teleport(sim: AnySim, e: AnyEntity, x: number, z: number, y?: number): 
 // are opt-in so the default keeps every pre-heroic assertion byte-identical.
 function setup(opts: { difficulty?: 'normal' | 'heroic'; dpsCount?: number } = {}) {
   const { difficulty = 'normal', dpsCount = 4 } = opts;
-  const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
-  const tankPid = sim.addPlayer('warrior', 'Tank') as number;
+  const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
+  const tankPid = sim.addPlayer('swordman', 'Tank') as number;
   const dpsPids: number[] = [];
   for (let i = 0; i < dpsCount; i++) {
     const pid = sim.addPlayer('mage', `Dps${i}`) as number;

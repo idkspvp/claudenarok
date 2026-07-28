@@ -169,7 +169,7 @@ describe('unitFrameView: TWO-DESCRIPTOR contract (the FULL field set)', () => {
       resText: '',
       levelText: null, // a party member may hide the level
       name: 'Goradil',
-      portraitKey: 'player:warrior:2',
+      portraitKey: 'player:swordman:2',
       absorb: null,
       dead: false,
       outOfRange: true,

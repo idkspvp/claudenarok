@@ -27,7 +27,7 @@ class MemoryStorage {
   }
 }
 
-const CLS = 'warrior';
+const CLS = 'swordman';
 const NAME = 'LayoutTester';
 
 describe('sanitizeActionBarLayout (untrusted payload bounds)', () => {

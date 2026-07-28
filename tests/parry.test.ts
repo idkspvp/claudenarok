@@ -3,7 +3,7 @@
 // warriorParryChance in src/sim/combat/warrior_hit_table.ts), Strength-scaled,
 // front-arc gated, and folded into the existing one-roll hit tables. There is
 // no entity.parryChance field anymore; the payload's every-weapon-class parry
-// expectation is intentionally superseded by the warrior-only redesign.
+// expectation is intentionally superseded by the swordman-only redesign.
 import { describe, expect, it } from 'vitest';
 import { missChanceFromContest } from '../src/sim/combat/hit_flee';
 import { warriorMeleeDefense, warriorParryChance } from '../src/sim/combat/warrior_hit_table';
@@ -43,19 +43,19 @@ function damageKinds(events: SimEvent[]): string[] {
     .map((e) => e.kind);
 }
 
-describe('parry: who gets a parry chance (warrior-only redesign)', () => {
-  it('scales from Strength for a warrior; every other class and mobs get zero', () => {
+describe('parry: who gets a parry chance (swordman-only redesign)', () => {
+  it('scales from Strength for a swordman; every other class and mobs get zero', () => {
     expect(warriorParryChance(0)).toBeCloseTo(0.05, 8);
     expect(warriorParryChance(20)).toBeCloseTo(0.05 + 20 * 0.0005, 8);
 
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const mob = spawnMobInFront(sim);
     sim.player.facing = 0; // facing +z, toward the mob
     const forWarrior = warriorMeleeDefense(sim.player, mob);
     expect(forWarrior.parryChance).toBeCloseTo(warriorParryChance(sim.player.stats.str), 8);
     expect(forWarrior.parryChance).toBeGreaterThan(0);
 
-    for (const cls of ['paladin', 'rogue', 'mage', 'priest'] as PlayerClass[]) {
+    for (const cls of ['thief', 'archer', 'mage', 'acolyte'] as PlayerClass[]) {
       const other = makeSim(cls);
       const otherMob = spawnMobInFront(other);
       other.player.facing = 0;
@@ -66,7 +66,7 @@ describe('parry: who gets a parry chance (warrior-only redesign)', () => {
   });
 
   it('is front-arc only in the pure helper', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const mob = spawnMobInFront(sim);
     const p = sim.player;
     p.facing = 0; // toward the mob: in the front arc
@@ -90,8 +90,8 @@ describe('parry: the one-roll mob-swing hit table', () => {
     return missChance + warriorParryChance(sim.player.stats.str) / 2;
   }
 
-  it('a warrior facing the attacker parries; from behind the same roll hits', () => {
-    const sim = makeSim('warrior');
+  it('a swordman facing the attacker parries; from behind the same roll hits', () => {
+    const sim = makeSim('swordman');
     const mob = spawnMobInFront(sim);
     const p = sim.player;
     p.dodgeChance = 0; // dodge shares the roll band; remove it so parry is isolated
@@ -109,12 +109,12 @@ describe('parry: the one-roll mob-swing hit table', () => {
     expect(damageKinds(sim.drainEvents())).toEqual(['hit']);
   });
 
-  it('a non-warrior facing the attacker never parries on the same roll', () => {
-    const sim = makeSim('paladin');
+  it('a non-swordman facing the attacker never parries on the same roll', () => {
+    const sim = makeSim('thief');
     const mob = spawnMobInFront(sim);
     const p = sim.player;
     p.dodgeChance = 0;
-    // The roll a warrior of this Strength WOULD parry: for a paladin it connects.
+    // The roll a swordman of this Strength WOULD parry: for a swordman it connects.
     const roll =
       Math.min(MOB_VS_PLAYER_MAX_MISS, missChanceFromContest(mob.hit, p.flee)) +
       warriorParryChance(p.stats.str) / 2;
@@ -126,7 +126,7 @@ describe('parry: the one-roll mob-swing hit table', () => {
   });
 
   it('a parried swing consumes exactly ONE rng draw (rng order is unchanged)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const mob = spawnMobInFront(sim);
     const p = sim.player;
     p.dodgeChance = 0;

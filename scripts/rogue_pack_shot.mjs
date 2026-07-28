@@ -1,4 +1,4 @@
-// Screenshots for the rogue ability pack: the spellbook showing the 10 new
+// Screenshots for the thief ability pack: the spellbook showing the 10 new
 // abilities, a tooltip on Rupture, and an in-world capture of Crippling
 // Poison's slow + Rupture's bleed on a target dummy.
 
@@ -23,7 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Shivspeak');
-await page.click('#offline-select .mini-class[data-class="rogue"]');
+await page.click('#offline-select .mini-class[data-class="thief"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -96,7 +96,7 @@ const result = await page.evaluate(() => {
 
   return { auras: mob.auras.map((a) => ({ name: a.name, kind: a.kind })) };
 });
-console.log('rogue in-world auras:', JSON.stringify(result));
+console.log('thief in-world auras:', JSON.stringify(result));
 await new Promise((r) => setTimeout(r, 600));
 await page.screenshot({ path: 'shots/target-debuff.png' });
 await page.screenshot({ path: 'shots/scene.png' });

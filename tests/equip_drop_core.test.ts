@@ -33,44 +33,44 @@ const TWO_HAND_WEAPON = ITEMS.eastbrook_greatsword;
 
 describe('paperdollDropAction', () => {
   it('equips a ring dropped on EITHER finger', () => {
-    expect(paperdollDropAction(RING, 'ring1', 'warrior', 20)).toBe('equip');
-    expect(paperdollDropAction(RING, 'ring2', 'warrior', 20)).toBe('equip');
+    expect(paperdollDropAction(RING, 'ring1', 'swordman', 20)).toBe('equip');
+    expect(paperdollDropAction(RING, 'ring2', 'swordman', 20)).toBe('equip');
   });
 
   it('refuses a piece dropped on a socket it does not fit', () => {
-    expect(paperdollDropAction(HELM, 'ring1', 'warrior', 20)).toBe('blockedSlot');
-    expect(paperdollDropAction(RING, 'helmet', 'warrior', 20)).toBe('blockedSlot');
+    expect(paperdollDropAction(HELM, 'ring1', 'swordman', 20)).toBe('blockedSlot');
+    expect(paperdollDropAction(RING, 'helmet', 'swordman', 20)).toBe('blockedSlot');
   });
 
   it('refuses a non-gear item outright (a potion is never worn)', () => {
-    expect(paperdollDropAction(POTION, 'chest', 'warrior', 20)).toBe('blockedSlot');
+    expect(paperdollDropAction(POTION, 'chest', 'swordman', 20)).toBe('blockedSlot');
   });
 
   it('refuses armor the class cannot wear, naming the CLASS reason', () => {
     expect(paperdollDropAction(HELM, 'helmet', 'mage', 20)).toBe('blockedClass');
-    expect(paperdollDropAction(HELM, 'helmet', 'warrior', 20)).toBe('equip');
+    expect(paperdollDropAction(HELM, 'helmet', 'swordman', 20)).toBe('equip');
   });
 
   it('refuses gear above the level gate, naming the LEVEL reason', () => {
     const gate = dropRequiredLevel(RING);
     expect(gate).toBeGreaterThan(1);
-    expect(paperdollDropAction(RING, 'ring1', 'warrior', gate - 1)).toBe('blockedLevel');
-    expect(paperdollDropAction(RING, 'ring1', 'warrior', gate)).toBe('equip');
+    expect(paperdollDropAction(RING, 'ring1', 'swordman', gate - 1)).toBe('blockedLevel');
+    expect(paperdollDropAction(RING, 'ring1', 'swordman', gate)).toBe('equip');
   });
 
   it('checks the socket BEFORE the class, so a mage aiming a mail helm at a ring reads blockedSlot', () => {
     expect(paperdollDropAction(HELM, 'ring1', 'mage', 20)).toBe('blockedSlot');
   });
 
-  // Dual wield used to open up for a Fury warrior; specs are retired (Phase D0),
-  // so the rogue is the only class that dual wields and the warrior never does.
+  // Dual wield used to open up for a Fury swordman; specs are retired (Phase D0),
+  // so the thief is the only class that dual wields and the swordman never does.
   it('accepts a one-hand weapon on offhand only for a class that dual wields', () => {
-    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'rogue', 40)).toBe('equip');
-    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'warrior', 40)).toBe('blockedClass');
+    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'thief', 40)).toBe('equip');
+    expect(paperdollDropAction(ONE_HAND_WEAPON, 'offhand', 'swordman', 40)).toBe('blockedClass');
   });
 
   it('refuses a two-hand weapon on offhand', () => {
-    expect(paperdollDropAction(TWO_HAND_WEAPON, 'offhand', 'warrior', 40)).toBe('blockedClass');
+    expect(paperdollDropAction(TWO_HAND_WEAPON, 'offhand', 'swordman', 40)).toBe('blockedClass');
   });
 });
 
@@ -80,20 +80,20 @@ describe('paperdollDropAction agrees with the sim (the authority)', () => {
   const cases: Array<{
     itemId: string;
     slot: EquipSlot;
-    cls: 'warrior' | 'rogue' | 'mage';
+    cls: 'swordman' | 'thief' | 'mage';
     level: number;
   }> = [
-    { itemId: 'seal_of_the_nine_oaths', slot: 'ring2', cls: 'warrior', level: 20 },
-    { itemId: 'cryptbone_helm', slot: 'helmet', cls: 'warrior', level: 20 },
-    { itemId: 'cryptbone_helm', slot: 'ring1', cls: 'warrior', level: 20 },
+    { itemId: 'seal_of_the_nine_oaths', slot: 'ring2', cls: 'swordman', level: 20 },
+    { itemId: 'cryptbone_helm', slot: 'helmet', cls: 'swordman', level: 20 },
+    { itemId: 'cryptbone_helm', slot: 'ring1', cls: 'swordman', level: 20 },
     { itemId: 'cryptbone_helm', slot: 'helmet', cls: 'mage', level: 20 },
-    { itemId: 'seal_of_the_nine_oaths', slot: 'ring1', cls: 'warrior', level: 1 },
-    { itemId: 'training_mace', slot: 'offhand', cls: 'rogue', level: 20 },
-    { itemId: 'training_mace', slot: 'offhand', cls: 'warrior', level: 40 },
+    { itemId: 'seal_of_the_nine_oaths', slot: 'ring1', cls: 'swordman', level: 1 },
+    { itemId: 'training_mace', slot: 'offhand', cls: 'thief', level: 20 },
+    { itemId: 'training_mace', slot: 'offhand', cls: 'swordman', level: 40 },
     {
       itemId: 'eastbrook_greatsword',
       slot: 'offhand',
-      cls: 'warrior',
+      cls: 'swordman',
       level: 40,
     },
   ];

@@ -4,7 +4,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity, Vec3 } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
-// Pets heel by pathfinding around obstacles (like a warrior charge route) rather
+// Pets heel by pathfinding around obstacles (like a swordman charge route) rather
 // than greedily wedging on a wall and then snapping to the owner. These tests pin
 // that behavior: routing around a static collider, determinism, no mid-play
 // teleport, and the last-resort warp only when the owner is truly unreachable.
@@ -20,8 +20,8 @@ function place(e: Entity, x: number, z: number): void {
 // and its owner explicitly. Passive mode guarantees the pet never picks a combat
 // target, so it stays in the heel branch under test.
 function setup(petAt: Vec3, ownerAt: Vec3): { sim: Sim; pet: Entity; owner: Entity } {
-  const sim = new Sim({ seed: SEED, playerClass: 'hunter', noPlayer: true });
-  const pid = sim.addPlayer('hunter', 'Aleph');
+  const sim = new Sim({ seed: SEED, playerClass: 'archer', noPlayer: true });
+  const pid = sim.addPlayer('archer', 'Aleph');
   const owner = sim.entities.get(pid)!;
   let pet: Entity | null = null;
   for (const e of sim.entities.values()) {

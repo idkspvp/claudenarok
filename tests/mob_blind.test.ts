@@ -10,7 +10,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
-function makeSim(playerClass: 'warrior' | 'mage' = 'warrior') {
+function makeSim(playerClass: 'swordman' | 'mage' = 'swordman') {
   return new Sim({ seed: 7, playerClass, autoEquip: true });
 }
 
@@ -77,7 +77,7 @@ describe('mob blind ("Blinding Powder")', () => {
   });
 
   it("makes the blinded victim's own swings whiff", () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const p = sim.player;
     const dummy = spawnBandit(sim, p);
     dummy.maxHp = 100000;
@@ -105,7 +105,7 @@ describe('mob blind ("Blinding Powder")', () => {
   });
 
   it('adds no miss chance when the victim is not blinded', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const p = sim.player;
     // No blind aura → the swing math sees zero added miss chance.
     expect(blindMissBonus(p)).toBe(0);
@@ -146,7 +146,7 @@ describe('mob blind ("Blinding Powder")', () => {
   });
 
   it('a friendly pet swing never blinds its target', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const p = sim.player;
     p.maxHp = 100000;
     p.hp = 100000;

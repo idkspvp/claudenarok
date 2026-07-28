@@ -89,18 +89,10 @@ function nextBotName(sim: Sim): string {
 
 // Cosmetic class variety for bots (sport abilities are class-agnostic: the kit
 // swap overrides meta.known and the no-damage truce floors class stats, so class
-// is purely visual here). The two pet classes are excluded so a hunter beast or
+// is purely visual here). The two pet classes are excluded so a archer beast or
 // warlock demon never wanders onto the pitch. Picked by deterministic spawn
 // order (botPids length), so a run-twice replay and the online server agree.
-const VC_BOT_CLASSES = [
-  'warrior',
-  'rogue',
-  'mage',
-  'priest',
-  'paladin',
-  'shaman',
-  'druid',
-] as const;
+const VC_BOT_CLASSES = ['swordman', 'thief', 'mage', 'acolyte'] as const;
 
 function spawnCupBot(sim: Sim, role: SportRole): { pid: number; role: SportRole } {
   const cls = VC_BOT_CLASSES[sim.vcup.botPids.length % VC_BOT_CLASSES.length];

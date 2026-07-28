@@ -39,7 +39,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -54,7 +54,7 @@ function broadcast(server: GameServer): void {
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot directly.
 function bareClient(pid: number): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.missingSince = new Map();
   c.playerId = pid;

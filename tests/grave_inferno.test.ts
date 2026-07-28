@@ -19,8 +19,8 @@ const SEED = 24601;
 type TickEvent = ReturnType<Sim['tick']>[number];
 
 function setup(mult: number) {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
-  const tankPid = sim.addPlayer('warrior', 'Tank');
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
+  const tankPid = sim.addPlayer('swordman', 'Tank');
   sim.setPlayerLevel(20, tankPid);
   const tank = sim.entities.get(tankPid)!;
   tank.maxHp = 1e7;
@@ -129,14 +129,14 @@ describe('Grave Inferno (Korzul channel)', () => {
 
   it('the 14yd boundary is exact: 13.5yd eats every pulse, 14.5yd none; damage ignores armor', () => {
     const { sim, boss, tank } = setup(19);
-    const farPid = sim.addPlayer('warrior', 'Far');
+    const farPid = sim.addPlayer('swordman', 'Far');
     sim.setPlayerLevel(20, farPid);
     const far = sim.entities.get(farPid)!;
     far.maxHp = 1e7;
     far.hp = 1e7;
     far.pos = { x: boss.pos.x + 14.5, y: boss.pos.y, z: boss.pos.z };
     far.prevPos = { ...far.pos };
-    const nakedPid = sim.addPlayer('priest', 'Naked');
+    const nakedPid = sim.addPlayer('acolyte', 'Naked');
     sim.setPlayerLevel(20, nakedPid);
     const naked = sim.entities.get(nakedPid)!;
     naked.maxHp = 1e7;
@@ -152,7 +152,7 @@ describe('Grave Inferno (Korzul channel)', () => {
     expect(farHits).toHaveLength(0);
     expect(nakedHits.length).toBeGreaterThan(0);
     expect(tankHits.length).toBe(nakedHits.length);
-    // Unmitigated: the armored tank and the cloth priest take the SAME pulse.
+    // Unmitigated: the armored tank and the cloth acolyte take the SAME pulse.
     for (let i = 0; i < tankHits.length; i++) {
       expect(tankHits[i].event.amount).toBe(nakedHits[i].event.amount);
     }

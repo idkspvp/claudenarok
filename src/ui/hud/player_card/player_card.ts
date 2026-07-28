@@ -93,7 +93,7 @@ export interface CardPose {
 }
 
 export const CARD_POSES: readonly CardPose[] = [
-  // Heroic raised weapon: epic across warrior/mage/hunter/etc. The default.
+  // Heroic raised weapon: epic across swordman/mage/archer/etc. The default.
   {
     id: 'hero',
     labelKey: 'playerCard.poseHero',

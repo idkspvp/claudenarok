@@ -74,7 +74,7 @@ export function modelPrompt({ kind, description, family }) {
 
 /** League-of-Legends-style SKIN MODEL concept: the attached views show the base
  *  class character; gpt-image-2 redesigns that exact character around a theme
- *  (like "pool party hunter") while keeping the game's chibi KayKit style and
+ *  (like "pool party archer") while keeping the game's chibi KayKit style and
  *  the character's silhouette, output as a T-pose sheet ready for Tripo. */
 export function skinModelPrompt({ theme, className }) {
   return (

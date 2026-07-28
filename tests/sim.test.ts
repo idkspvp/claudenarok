@@ -27,10 +27,18 @@ import {
   xpToReachLevel,
 } from '../src/sim/types';
 import { terrainHeight, WATER_LEVEL } from '../src/sim/world';
+import { levelWithStats } from './helpers/alloc';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { raisePool } from './helpers/sp';
 
-function makeSim(cls: 'warrior' | 'mage' | 'rogue' = 'warrior', seed = 42) {
-  return new Sim({ seed, playerClass: cls, autoEquip: true });
+function makeSim(cls: 'swordman' | 'mage' | 'thief' = 'swordman', seed = 42) {
+  const sim = new Sim({ seed, playerClass: cls, autoEquip: true });
+  // D1 put the SP pool on Ragnarok's curve, an order of magnitude below the scale
+  // the ability costs and the potion values are still authored against (re-costing
+  // the kit is D4). None of the cases in this file are about the pool, so give it
+  // headroom rather than letting a dry bar decide whether a spell went off.
+  raisePool(sim.player);
+  return sim;
 }
 
 function nearestMob(sim: Sim, templateId?: string) {
@@ -190,13 +198,13 @@ describe('classic formulas', () => {
     expect(meleeMissChance(3, 5)).toBeCloseTo(0.19); // +2 (L3 vs L5) -> ~19%
     expect(meleeMissChance(3, 7)).toBeCloseTo(0.26); // +4 -> capped ~26%
     expect(meleeMissChance(3, 9)).toBeCloseTo(0.26); // +6 -> still capped ~26%
-    // hunter Auto Shot + wands resolve through meleeMissChance too, so this covers them
+    // archer Auto Shot + wands resolve through meleeMissChance too, so this covers them
   });
 
   it('abilities unlock at the right levels with ranks', () => {
-    const w1 = abilitiesKnownAt('warrior', 1).map((k) => k.def.id);
+    const w1 = abilitiesKnownAt('swordman', 1).map((k) => k.def.id);
     expect(w1).toEqual(['heroic_strike', 'battle_shout', 'battle_stance']);
-    const w10 = abilitiesKnownAt('warrior', 10);
+    const w10 = abilitiesKnownAt('swordman', 10);
     expect(w10.map((k) => k.def.id)).toContain('overpower');
     const hs10 = w10.find((k) => k.def.id === 'heroic_strike')!;
     expect(hs10.rank).toBe(2);
@@ -207,36 +215,37 @@ describe('classic formulas', () => {
   });
 
   it('ranks and new abilities carry the kit through the 10-20 band', () => {
-    // warrior: Heroic Strike reaches rank 4 at 20; Early Grave unlocks at 12
-    expect(abilitiesKnownAt('warrior', 11).map((k) => k.def.id)).not.toContain('execute');
-    expect(abilitiesKnownAt('warrior', 12).map((k) => k.def.id)).toContain('execute');
-    const w20 = abilitiesKnownAt('warrior', 20);
+    // swordman: Heroic Strike reaches rank 4 at 20; Early Grave unlocks at 12
+    expect(abilitiesKnownAt('swordman', 11).map((k) => k.def.id)).not.toContain('execute');
+    expect(abilitiesKnownAt('swordman', 12).map((k) => k.def.id)).toContain('execute');
+    const w20 = abilitiesKnownAt('swordman', 20);
     expect(w20.map((k) => k.def.id)).toContain('execute');
     const hs20 = w20.find((k) => k.def.id === 'heroic_strike')!;
     expect(hs20.rank).toBe(4);
     expect(hs20.effects).toEqual([{ type: 'weaponDamage', bonus: 44 }]);
-    // shaman: lightning bolt keeps pace — rank 2 at 10, rank 3 at 14, rank 4 at 20
-    const lbAt = (lvl: number) =>
-      abilitiesKnownAt('shaman', lvl).find((k) => k.def.id === 'lightning_bolt')!;
-    expect(lbAt(10).rank).toBe(2);
-    const lb14 = lbAt(14);
-    expect(lb14.rank).toBe(3);
-    expect(lb14.cost).toBe(40);
-    expect(lb14.castTime).toBe(2.5);
-    const lb20 = lbAt(20);
-    expect(lb20.rank).toBe(4);
-    expect(lb20.cost).toBe(60);
-    expect(lb20.effects).toEqual([{ type: 'directDamage', min: 75, max: 85 }]);
-    // rogue: kidney shot is the finisherStun new ability
-    const ks = abilitiesKnownAt('rogue', 14).find((k) => k.def.id === 'kidney_shot')!;
+    // acolyte: Smite keeps pace, rank 2 at 8, rank 3 at 14, rank 4 at 20. It stands
+    // in for Lightning Bolt, which went with the Shaman in D1.
+    const smiteAt = (lvl: number) =>
+      abilitiesKnownAt('acolyte', lvl).find((k) => k.def.id === 'smite')!;
+    expect(smiteAt(8).rank).toBe(2);
+    const smite14 = smiteAt(14);
+    expect(smite14.rank).toBe(3);
+    expect(smite14.cost).toBe(48);
+    expect(smite14.castTime).toBe(2.5);
+    const smite20 = smiteAt(20);
+    expect(smite20.rank).toBe(4);
+    expect(smite20.cost).toBe(70);
+    expect(smite20.effects).toEqual([{ type: 'directDamage', min: 64, max: 78 }]);
+    // thief: kidney shot is the finisherStun new ability
+    const ks = abilitiesKnownAt('thief', 14).find((k) => k.def.id === 'kidney_shot')!;
     expect(ks.effects).toEqual([{ type: 'finisherStun', base: 1, perCombo: 1 }]);
   });
 });
 
 describe('world generation', () => {
   it('spawns player, npcs, mobs and objects deterministically', () => {
-    const a = makeSim('warrior', 7);
-    const b = makeSim('warrior', 7);
+    const a = makeSim('swordman', 7);
+    const b = makeSim('swordman', 7);
     expect(a.entities.size).toBe(b.entities.size);
     expect(a.entities.size).toBeGreaterThan(60);
     const mobsA = [...a.entities.values()].filter((e) => e.kind === 'mob');
@@ -260,7 +269,7 @@ describe('movement directions', () => {
   // Camera sits behind the player looking along the facing direction
   // (sin f, cos f); screen-right is therefore world (-cos f, sin f).
   it('turn right decreases facing, turn left increases it', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.player.facing = 0;
     sim.moveInput.turnRight = true;
     for (let i = 0; i < 10; i++) sim.tick();
@@ -273,7 +282,7 @@ describe('movement directions', () => {
   });
 
   it('strafing moves along the screen-right vector', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     teleportTo(sim, 0, -40);
     sim.player.facing = 0; // facing +Z; screen-right is -X
     const x0 = sim.player.pos.x;
@@ -288,7 +297,7 @@ describe('movement directions', () => {
   });
 
   it('ground movement changes direction immediately', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     teleportTo(sim, 0, -40);
     sim.player.facing = 0;
     sim.moveInput.forward = true;
@@ -303,7 +312,7 @@ describe('movement directions', () => {
   });
 
   it('preserves launch momentum while airborne', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     teleportTo(sim, 0, -40);
     sim.player.facing = 0;
     sim.moveInput.forward = true;
@@ -344,7 +353,7 @@ describe('movement directions', () => {
       }
     }
     if (!found) throw new Error('Expected to find a walkable downhill step');
-    const sim = makeSim('warrior', seed);
+    const sim = makeSim('swordman', seed);
     teleportTo(sim, found.x, found.z);
     sim.player.facing = found.facing;
     const y0 = sim.player.pos.y;
@@ -364,7 +373,12 @@ describe('movement directions', () => {
 
 describe('combat', () => {
   it('player kills a wolf and gains xp + loot', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
+    // The subject here is the XP and loot pipeline, not balance. A fresh
+    // character carries every point unspent and cannot reliably finish a wolf,
+    // so spend them; whether an UNSPENT level-1 character should be able to is a
+    // question for the monster records (B1), not for this test.
+    levelWithStats(sim, 1);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -383,8 +397,8 @@ describe('combat', () => {
     expect(sim.copper).toBeGreaterThan(0);
   });
 
-  it('warrior generates rage from combat (vanilla formula scale)', () => {
-    const sim = makeSim('warrior');
+  it('swordman generates rage from combat (vanilla formula scale)', () => {
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -397,8 +411,8 @@ describe('combat', () => {
     expect(sim.player.resource).toBeGreaterThan(0);
   });
 
-  it('warrior generates rage when taking damage from enemy level', () => {
-    const sim = makeSim('warrior');
+  it('swordman generates rage when taking damage from enemy level', () => {
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 20;
     sim.player.resource = 0;
@@ -431,7 +445,7 @@ describe('combat', () => {
   });
 
   it('mobs leash, evade, and reset to full health', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -457,7 +471,7 @@ describe('combat', () => {
   });
 
   it('hostile actions refresh the mob leash anchor for kiting', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.maxHp = 5000;
     wolf.hp = 5000;
@@ -479,7 +493,7 @@ describe('combat', () => {
     // Gravecaller Summoners pinned on their own camp tent while chasing: moveToward
     // pushed straight into the collider with no way around it, so the mob froze a few
     // yards short of the player. collide-and-slide must let it round the prop.
-    const sim = makeSim('warrior', 20061);
+    const sim = makeSim('swordman', 20061);
     const tent = { x: -3, z: 505, y: 0 }; // tent collider radius ~1.95
     const mob = [...sim.entities.values()]
       .filter((e: any) => e.kind === 'mob' && e.templateId === 'gravecaller_summoner')
@@ -511,7 +525,7 @@ describe('combat', () => {
   });
 
   it('social pulls only very close same-template mobs', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wolf = nearestMob(sim, 'forest_wolf');
     const otherWolf = [...sim.entities.values()].find(
       (e: any) => e.kind === 'mob' && e.id !== wolf.id && e.templateId === 'forest_wolf',
@@ -546,7 +560,7 @@ describe('combat', () => {
   });
 
   it('dead mobs respawn', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', respawnSeconds: 2 });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', respawnSeconds: 2 });
     const wolf = nearestMob(sim, 'forest_wolf');
     const spawn = { ...wolf.spawnPos };
     wolf.hp = 1;
@@ -608,7 +622,7 @@ describe('combat', () => {
 
   it('polymorph sheeps a beast and breaks on damage', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(8);
+    levelWithStats(sim, 8);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 10, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -622,8 +636,8 @@ describe('combat', () => {
   });
 
   it('Redhand is usable without a dodge proc', () => {
-    const sim = makeSim('warrior');
-    sim.setPlayerLevel(10);
+    const sim = makeSim('swordman');
+    levelWithStats(sim, 10);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -638,7 +652,7 @@ describe('combat', () => {
 describe('spell pushback', () => {
   function castingMage(level = 1) {
     const sim = makeSim('mage');
-    if (level > 1) sim.setPlayerLevel(level);
+    if (level > 1) levelWithStats(sim, level);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, wolf.pos.x + 15, wolf.pos.z);
     sim.targetEntity(wolf.id);
@@ -692,16 +706,16 @@ describe('spell pushback', () => {
   });
 });
 
-describe('rogue', () => {
+describe('thief', () => {
   it('regenerates energy on the 2-second tick', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     sim.player.resource = 0;
     for (let i = 0; i < 41; i++) sim.tick();
     expect(sim.player.resource).toBe(20);
   });
 
   it('builds combo points with sinister strike and spends them with eviscerate', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 1;
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
@@ -728,7 +742,7 @@ describe('rogue', () => {
   });
 
   it('toggling stealth off does not re-arm its cooldown', () => {
-    const sim = makeSim('rogue');
+    const sim = makeSim('thief');
     (sim as any).grantXp(xpForLevel(1) + xpForLevel(2) + 10); // reach level 3, learns stealth (lvl 2)
     expect(sim.known.map((k) => k.def.id)).toContain('stealth');
     // Stealth on: arms the 10s re-entry cooldown.
@@ -742,13 +756,13 @@ describe('rogue', () => {
     sim.castAbility('stealth');
     expect(sim.player.auras.some((a) => a.kind === 'stealth')).toBe(false);
     expect(sim.player.cooldowns.has('stealth')).toBe(false);
-    // Therefore the rogue can immediately re-stealth.
+    // Therefore the thief can immediately re-stealth.
     sim.castAbility('stealth');
     expect(sim.player.auras.some((a) => a.kind === 'stealth')).toBe(true);
   });
 
-  it('rogue Stealth moves at 50% speed', () => {
-    const sim = makeSim('rogue');
+  it('thief Stealth moves at 50% speed', () => {
+    const sim = makeSim('thief');
     (sim as any).grantXp(xpForLevel(1) + xpForLevel(2) + 10); // reach level 3, learns stealth (lvl 2)
     expect((sim as any).moveSpeedMult(sim.player)).toBe(1);
     sim.castAbility('stealth');
@@ -756,12 +770,12 @@ describe('rogue', () => {
     expect((sim as any).moveSpeedMult(sim.player)).toBeCloseTo(0.5, 5);
   });
 
-  it('rogue Stealth actually covers half normal ground', () => {
-    const normal = makeSim('rogue');
+  it('thief Stealth actually covers half normal ground', () => {
+    const normal = makeSim('thief');
     despawnMobs(normal);
     (normal as any).grantXp(xpForLevel(1) + xpForLevel(2) + 10);
 
-    const stealthed = makeSim('rogue');
+    const stealthed = makeSim('thief');
     despawnMobs(stealthed);
     (stealthed as any).grantXp(xpForLevel(1) + xpForLevel(2) + 10);
     stealthed.castAbility('stealth');
@@ -773,22 +787,22 @@ describe('rogue', () => {
     expect(stealth / base).toBeCloseTo(0.5, 1);
   });
 
-  it('rogue Vanish moves at 50% speed', () => {
-    const sim = makeSim('rogue');
-    sim.setPlayerLevel(20); // Vanish learns at level 18
+  it('thief Vanish moves at 50% speed', () => {
+    const sim = makeSim('thief');
+    levelWithStats(sim, 20); // Vanish learns at level 18
     sim.castAbility('vanish');
     expect(sim.player.auras.some((a) => a.kind === 'stealth')).toBe(true);
     expect((sim as any).moveSpeedMult(sim.player)).toBeCloseTo(0.5, 5);
   });
 
-  it('rogue Vanish actually covers half normal ground', () => {
-    const normal = makeSim('rogue');
+  it('thief Vanish actually covers half normal ground', () => {
+    const normal = makeSim('thief');
     despawnMobs(normal);
-    normal.setPlayerLevel(20);
+    levelWithStats(normal, 20);
 
-    const vanished = makeSim('rogue');
+    const vanished = makeSim('thief');
     despawnMobs(vanished);
-    vanished.setPlayerLevel(20);
+    levelWithStats(vanished, 20);
     vanished.castAbility('vanish');
     expect(vanished.player.auras.some((a) => a.kind === 'stealth')).toBe(true);
 
@@ -799,8 +813,8 @@ describe('rogue', () => {
   });
 
   it('Sap does not break the caster stealth (issue #1890)', () => {
-    const sim = makeSim('rogue');
-    sim.setPlayerLevel(10); // Sap learns at level 10
+    const sim = makeSim('thief');
+    levelWithStats(sim, 10); // Sap learns at level 10
     const mob = nearestMob(sim, 'forest_wolf');
     mob.level = 1;
     mob.inCombat = false;
@@ -818,8 +832,8 @@ describe('rogue', () => {
   });
 
   it('Low Blow (kidney_shot) works while invisible from Vanish (issue #1890)', () => {
-    const sim = makeSim('rogue');
-    sim.setPlayerLevel(20); // Vanish (18) and Low Blow (14) both known
+    const sim = makeSim('thief');
+    levelWithStats(sim, 20); // Vanish (18) and Low Blow (14) both known
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 1;
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
@@ -850,16 +864,16 @@ describe('rogue', () => {
     expect(wolf.auras.some((a: any) => a.kind === 'stun')).toBe(true);
   });
 
-  it('rogue GCD is 1.0s', () => {
-    const sim = makeSim('rogue');
+  it('thief GCD is 1.0s', () => {
+    const sim = makeSim('thief');
     expect(sim.playerGcd).toBe(1.0);
-    expect(makeSim('warrior').playerGcd).toBe(1.5);
+    expect(makeSim('swordman').playerGcd).toBe(1.5);
   });
 });
 
 describe('food, drink, vendor', () => {
   it('eating restores health over time while sitting and stands on move', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.addItem('baked_bread', 1);
     sim.player.hp = 20;
     sim.player.combatTimer = 99;
@@ -940,7 +954,7 @@ describe('food, drink, vendor', () => {
 
   it('out-of-combat mana regen is brisk and scales past the old spi/4+2 rate (#103)', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(10);
+    levelWithStats(sim, 10);
     sim.player.resource = 0;
     sim.player.inCombat = false;
     sim.player.combatTimer = 0;
@@ -953,7 +967,8 @@ describe('food, drink, vendor', () => {
 
   it('mage conjures water and drinking restores mana', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(4);
+    levelWithStats(sim, 4);
+    raisePool(sim.player); // the level-up recalculated the bar back down
     sim.castAbility('conjure_water');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_water')).toBe(2);
@@ -969,7 +984,7 @@ describe('food, drink, vendor', () => {
 
   it('mage conjures food and eating restores health', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(6);
+    levelWithStats(sim, 6);
     sim.castAbility('conjure_food');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_bread')).toBe(2);
@@ -985,14 +1000,14 @@ describe('food, drink, vendor', () => {
 
   it('higher conjure food rank yields the heartier tier', () => {
     const sim = makeSim('mage');
-    sim.setPlayerLevel(18);
+    levelWithStats(sim, 18);
     sim.castAbility('conjure_food');
     for (let i = 0; i < 20 * 4; i++) sim.tick();
     expect(sim.countItem('conjured_bread3')).toBe(2);
   });
 
   it('vendor buys and sells', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.copper = 200;
@@ -1007,7 +1022,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor buyback restores recently sold gear for the sale price', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.addItem('apprentice_staff', 1);
@@ -1026,7 +1041,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor buyback round-trips through saved character state', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.addItem('apprentice_staff', 1);
@@ -1035,8 +1050,8 @@ describe('food, drink, vendor', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.vendorBuyback).toEqual([{ itemId: 'apprentice_staff', count: 1 }]);
 
-    const sim2 = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
-    const pid2 = sim2.addPlayer('warrior', 'Saved', { state });
+    const sim2 = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
+    const pid2 = sim2.addPlayer('swordman', 'Saved', { state });
     const wilkes2 = [...sim2.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim2, wilkes2.pos.x + 2, wilkes2.pos.z);
 
@@ -1047,7 +1062,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor buyback requires money and keeps only recent sold item groups', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', autoEquip: false });
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.addItem('wolf_fang', 2);
@@ -1092,7 +1107,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('Sell Junk bulk-sells only gray items, sparing quest items and better gear', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.copper = 0;
@@ -1126,7 +1141,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('Sell Junk needs a vendor in range and no-ops cleanly with nothing to sell', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
 
     // far from any merchant: refuses, sells nothing
@@ -1152,7 +1167,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('Fisherman Brandt sells a simple fishing pole', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const brandt = [...sim.entities.values()].find((e) => e.templateId === 'fisherman_brandt')!;
     teleportTo(sim, brandt.pos.x + 2, brandt.pos.z);
     sim.copper = 100;
@@ -1169,7 +1184,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('rejects fishing away from fishable water', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.addItem('simple_fishing_pole', 1);
     sim.events = [];
     sim.useItem('simple_fishing_pole');
@@ -1184,7 +1199,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('starts the capped fishing session near and facing Mirror Lake with the one bite-delay draw', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     teleportTo(sim, spot.x, spot.z);
     sim.player.facing = spot.facing;
@@ -1217,7 +1232,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('rolls the fishing catch table only at a reel press inside the bite window', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     despawnMobs(sim);
     teleportTo(sim, spot.x, spot.z);
@@ -1256,7 +1271,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('does not catch The Codfather without the active quest or outside Deepfen Shallows', () => {
-    const deepfenSim = makeSim('warrior');
+    const deepfenSim = makeSim('swordman');
     const deepfenSpot = deepfenFishingSpot(deepfenSim.cfg.seed);
     despawnMobs(deepfenSim);
     teleportTo(deepfenSim, deepfenSpot.x, deepfenSpot.z);
@@ -1272,7 +1287,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('movement cancels fishing before any catch is granted', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     teleportTo(sim, spot.x, spot.z);
     sim.player.facing = spot.facing;
@@ -1292,7 +1307,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('does not consume items while fishing is casting', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     teleportTo(sim, spot.x, spot.z);
     sim.player.facing = spot.facing;
@@ -1315,7 +1330,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('rejects fishing while in combat', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     teleportTo(sim, spot.x, spot.z);
     sim.player.facing = spot.facing;
@@ -1333,7 +1348,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('rejects fishing while swimming', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     teleportTo(sim, LAKE.x, LAKE.z);
     sim.player.facing = 0;
     sim.addItem('simple_fishing_pole', 1);
@@ -1349,7 +1364,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('damage cancels fishing instead of applying spell pushback', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const spot = mirrorLakeFishingSpot(sim.cfg.seed);
     const wolf = nearestMob(sim, 'forest_wolf');
     teleportTo(sim, spot.x, spot.z);
@@ -1364,7 +1379,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('fishing draws only from the zone the angler is standing in', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const meta = sim.meta(sim.player.id)!;
     // Eastbrook Vale water: every catch must come from the Vale table, never a
     // marsh/heights fish, and never an item outside the catch list.
@@ -1385,7 +1400,7 @@ describe('food, drink, vendor', () => {
 
   it('fishing catches are replay-deterministic for a fixed seed', () => {
     const reel = () => {
-      const sim = makeSim('warrior', 1234);
+      const sim = makeSim('swordman', 1234);
       const meta = sim.meta(sim.player.id)!;
       const caught: string[] = [];
       for (let i = 0; i < 30; i++) {
@@ -1400,7 +1415,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('a rare catch announces itself in the combat log', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const meta = sim.meta(sim.player.id)!;
     let sawRare = false;
     for (let i = 0; i < 400 && !sawRare; i++) {
@@ -1415,7 +1430,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor buy rejects stale or invalid merchants with feedback', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 40, wilkes.pos.z);
     sim.copper = 100;
@@ -1429,7 +1444,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor sells stack quantities without exceeding what the player has', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.addItem('wolf_fang', 5);
@@ -1446,7 +1461,7 @@ describe('food, drink, vendor', () => {
   });
 
   it('vendor ignores invalid sell quantities', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const wilkes = [...sim.entities.values()].find((e) => e.templateId === 'trader_wilkes')!;
     teleportTo(sim, wilkes.pos.x + 2, wilkes.pos.z);
     sim.addItem('wolf_fang', 2);
@@ -1461,7 +1476,7 @@ describe('food, drink, vendor', () => {
 
 describe('leveling', () => {
   it('levels up, heals to full, and learns new abilities', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     expect(sim.known.map((k) => k.def.id)).toEqual([
       'heroic_strike',
       'battle_shout',
@@ -1476,7 +1491,7 @@ describe('leveling', () => {
   });
 
   it('caps at max level', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     // Enough to overshoot the whole curve however long it is. A literal sized for
     // the old 20-cap stopped reaching the ceiling the moment it moved to 99.
     (sim as any).grantXp(xpToReachLevel(MAX_LEVEL) * 2);
@@ -1499,7 +1514,7 @@ describe('quests', () => {
 
 describe('RL interface', () => {
   it('observation has documented size and stays in sane bounds', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const obs = encodeObs(sim);
     expect(obs.length).toBe(obsSize());
     for (const v of obs) {
@@ -1509,7 +1524,7 @@ describe('RL interface', () => {
   });
 
   it('actions execute without error and sim stays finite', () => {
-    const sim = makeSim('rogue', 123);
+    const sim = makeSim('thief', 123);
     for (let step = 0; step < 600; step++) {
       applyAction(sim, step % ACTIONS.length);
       for (let t = 0; t < 4; t++) sim.tick();
@@ -1520,7 +1535,7 @@ describe('RL interface', () => {
 
   it('same seed + same actions => identical trajectories', () => {
     const run = () => {
-      const sim = makeSim('warrior', 999);
+      const sim = makeSim('swordman', 999);
       const trace: number[] = [];
       for (let step = 0; step < 300; step++) {
         applyAction(sim, (step * 7) % ACTIONS.length);
@@ -1536,7 +1551,7 @@ describe('RL interface', () => {
 
 describe('gm characters', () => {
   it('gm flag makes a player invulnerable through every damage path', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.setGm();
     const before = sim.player.hp;
     (sim as any).dealDamage(null, sim.player, 9999, false, 'physical', 'Test', 'hit', true);
@@ -1545,7 +1560,7 @@ describe('gm characters', () => {
   });
 
   it('non-gm players still take damage (control)', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const before = sim.player.hp;
     (sim as any).dealDamage(null, sim.player, 5, false, 'physical', 'Test', 'hit', true);
     expect(sim.player.hp).toBe(before - 5);
@@ -1556,7 +1571,7 @@ describe('friendly targeting (#133)', () => {
   // Drop an ally `dx` yards east of the caster and return its entity.
   function addAllyAt(sim: Sim, name: string, dx: number) {
     const p = sim.player;
-    const pid = sim.addPlayer('priest', name);
+    const pid = sim.addPlayer('acolyte', name);
     const e = sim.entities.get(pid)!;
     e.pos.x = p.pos.x + dx;
     e.pos.z = p.pos.z;
@@ -1566,7 +1581,7 @@ describe('friendly targeting (#133)', () => {
   }
 
   it('targetNearestFriendly picks the closest ally and never auto-attacks', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const far = addAllyAt(sim, 'Far', 12);
     const near = addAllyAt(sim, 'Near', 5);
     sim.tick(); // rebucket the spatial grid
@@ -1577,14 +1592,14 @@ describe('friendly targeting (#133)', () => {
   });
 
   it('targetNearestFriendly never targets yourself', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.tick();
     sim.targetNearestFriendly();
     expect(sim.player.targetId).toBeNull();
   });
 
   it('ignores allies beyond 40 yards and keeps the current target', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     addAllyAt(sim, 'WayOut', 60);
     sim.tick();
     sim.player.targetId = 1234;
@@ -1593,7 +1608,7 @@ describe('friendly targeting (#133)', () => {
   });
 
   it('skips dead allies', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const ally = addAllyAt(sim, 'Downed', 5);
     ally.dead = true;
     ally.hp = 0;
@@ -1603,7 +1618,7 @@ describe('friendly targeting (#133)', () => {
   });
 
   it('friendlyTabTarget cycles allies by distance and wraps', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     const a = addAllyAt(sim, 'A', 5);
     const b = addAllyAt(sim, 'B', 10);
     const c = addAllyAt(sim, 'C', 15);
@@ -1619,7 +1634,7 @@ describe('friendly targeting (#133)', () => {
   });
 
   it('friendlyTabTarget is a no-op when no ally is nearby', () => {
-    const sim = makeSim('warrior');
+    const sim = makeSim('swordman');
     sim.player.targetId = 77;
     sim.tick();
     sim.friendlyTabTarget();

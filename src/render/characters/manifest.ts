@@ -73,7 +73,7 @@ export interface VisualDef {
   attach?: AttachDef[];
   /** Indices into `attach` whose model is replaced by the entity's equipped mainhand
    *  weapon (mapped via ITEM_WEAPON_VARIANTS). undefined/empty = the held weapon never
-   *  changes with gear (hunter keeps its crossbow; mobs/NPCs are fixed). A fixed
+   *  changes with gear (archer keeps its crossbow; mobs/NPCs are fixed). A fixed
    *  offhand left off this list stays authored (the warlock spellbook); a live
    *  equipped offhand uses `offhandSlot` below. */
   weaponSlots?: number[];
@@ -99,7 +99,7 @@ export interface VisualDef {
    *  flip the standalone weapon files carry). Node name as authored in the GLB;
    *  applied as a local-space rotation (radians) after the bind transform. */
   weaponFix?: { node: string; rotX?: number; rotY?: number; rotZ?: number }[];
-  /** Glowing ring parented behind the head bone (the priest's Light halo).
+  /** Glowing ring parented behind the head bone (the acolyte's Light halo).
    *  Value is the glow color; geometry/placement live in halo.ts. */
   halo?: number;
   /** Halo placement overrides, head-bone space (defaults in halo.ts): lift
@@ -338,7 +338,7 @@ export function itemOffhandModelUrl(itemId: string | null | undefined): string |
 }
 
 /** GLB url the offhand slot should render: the active weapon skin's model when it
- *  mirrors onto a matching-type offhand weapon (a rogue's second dagger
+ *  mirrors onto a matching-type offhand weapon (a thief's second dagger
  *  under a dagger skin), otherwise the equipped offhand item's own model. A shield,
  *  held offhand (orb/tome), or different-type offhand weapon never mirrors, so it
  *  keeps its item model; null when the offhand has no mapped model. The mirror
@@ -411,26 +411,25 @@ function mechEmissiveUrl(c: MechChroma): string | null {
 // to the body material's .map (same UVs). Classes sharing a model share its skin
 // set. Players only — mobs/npcs keep their default look. See public/textures/skins/.
 export const SKINS: Record<string, (string | null)[]> = {
-  player_warrior: [
+  player_swordman: [
     null,
     `${SKINS_DIR}/knight/alt_a.png`,
     `${SKINS_DIR}/knight/alt_b.png`,
     `${SKINS_DIR}/knight/alt_c.png`,
   ],
-  player_paladin: [null, `${SKINS_DIR}/paladin/alt_a.png`],
-  player_hunter: [
+  player_archer: [
     null,
     `${SKINS_DIR}/ranger/alt_a.png`,
     `${SKINS_DIR}/ranger/alt_b.png`,
     `${SKINS_DIR}/ranger/alt_c.png`,
   ],
-  player_rogue: [
+  player_thief: [
     null,
     `${SKINS_DIR}/rogue/alt_a.png`,
     `${SKINS_DIR}/rogue/alt_b.png`,
     `${SKINS_DIR}/rogue/alt_c.png`,
   ],
-  player_priest: [
+  player_acolyte: [
     null,
     `${SKINS_DIR}/mage/alt_a.png`,
     `${SKINS_DIR}/mage/alt_b.png`,
@@ -442,28 +441,10 @@ export const SKINS: Record<string, (string | null)[]> = {
     `${SKINS_DIR}/mage/alt_b.png`,
     `${SKINS_DIR}/mage/alt_c.png`,
   ],
-  player_warlock: [
-    null,
-    `${SKINS_DIR}/mage/alt_a.png`,
-    `${SKINS_DIR}/mage/alt_b.png`,
-    `${SKINS_DIR}/mage/alt_c.png`,
-  ],
-  player_shaman: [
-    null,
-    `${SKINS_DIR}/barbarian/alt_a.png`,
-    `${SKINS_DIR}/barbarian/alt_b.png`,
-    `${SKINS_DIR}/barbarian/alt_c.png`,
-  ],
-  player_druid: [
-    null,
-    `${SKINS_DIR}/druid/alt_a.png`,
-    `${SKINS_DIR}/druid/alt_b.png`,
-    `${SKINS_DIR}/druid/alt_c.png`,
-  ],
   // Combat Mech chromas — every index is a real full-model texture (no null
   // default; the embedded base texture is not one of the rewards).
   player_mech: MECH_CHROMAS.map(mechChromaUrl),
-  // Bursar Fernando (the Eastbrook banker easter egg): the rogue palette with
+  // Bursar Fernando (the Eastbrook banker easter egg): the thief palette with
   // the skin swatch repainted light brown and the hair/brow swatch black, in
   // the real Fernando's likeness. Index 0 is the real texture (mech precedent):
   // NPCs always resolve skin 0, so the embedded default is deliberately unused.
@@ -507,7 +488,7 @@ const VELOCIRAPTOR: ClipMap = {
 
 export const VISUALS: Record<string, VisualDef> = {
   // -- player classes ------------------------------------------------------
-  player_warrior: {
+  player_swordman: {
     url: `${PLAYERS}/knight.glb`,
     height: HUMANOID_H,
     clips: {
@@ -544,24 +525,7 @@ export const VISUALS: Record<string, VisualDef> = {
     weaponSlots: [0],
     offhandSlot: 1,
   },
-  player_paladin: {
-    url: `${PLAYERS}/paladin.glb`,
-    height: HUMANOID_H,
-    clips: {
-      ...kaykit(['1H_Melee_Attack_Chop', '1H_Melee_Attack_Slice_Diagonal']),
-      attackByHand: { twohand: '2H_Melee_Attack_Chop' },
-    },
-    // dedicated paladin model (helmeted variant) — ships its own Cape + Helmet
-    // meshes and texture, so no show-list/tint. Shield + paladin hammer arrive
-    // in the weapons pass; the gripped axe holds the slot until then.
-    attach: [
-      { url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/shield_square.glb`, bone: 'handslot.l' },
-    ],
-    weaponSlots: [0],
-    offhandSlot: 1,
-  },
-  player_hunter: {
+  player_archer: {
     url: `${PLAYERS}/ranger.glb`,
     height: HUMANOID_H,
     clips: kaykit(['2H_Ranged_Shoot']),
@@ -573,7 +537,7 @@ export const VISUALS: Record<string, VisualDef> = {
     // a separate chest attachment
     attach: [{ url: `${WEAPONS}/crossbow_1handed.glb`, bone: 'handslot.r' }],
   },
-  player_rogue: {
+  player_thief: {
     url: `${PLAYERS}/rogue.glb`,
     height: HUMANOID_H,
     clips: kaykit(['Dualwield_Melee_Attack_Chop']),
@@ -585,11 +549,11 @@ export const VISUALS: Record<string, VisualDef> = {
     weaponSlots: [0],
     offhandSlot: 1,
   },
-  player_priest: {
+  player_acolyte: {
     url: `${PLAYERS}/mage.glb`,
     height: HUMANOID_H,
     clips: kaykit(['2H_Melee_Attack_Chop']),
-    // The priest's Light: a warm golden halo ring above the crown. The mage
+    // The acolyte's Light: a warm golden halo ring above the crown. The mage
     // model's pointed hat is canon here, and at the default lift the ring
     // plane crosses the hat cone where it is wide, clipping through it; +0.15
     // raises the plane to the cone tip, where the default-size ring clears it
@@ -607,23 +571,6 @@ export const VISUALS: Record<string, VisualDef> = {
     tint: 0xf0e9d6,
     tintStrength: 0.5,
   },
-  player_shaman: {
-    url: `${PLAYERS}/barbarian.glb`,
-    height: HUMANOID_H,
-    clips: {
-      ...kaykit(['1H_Melee_Attack_Chop', '1H_Melee_Attack_Slice_Diagonal']),
-      attackByHand: { twohand: '2H_Melee_Attack_Chop' },
-    },
-    show: ['Barbarian_BearHat'], // v2 barbarian renamed Hat→BearHat and dropped the round shield mesh
-    attach: [
-      { url: `${WEAPONS}/axe_1handed.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/shield_round.glb`, bone: 'handslot.l' },
-    ],
-    weaponSlots: [0],
-    offhandSlot: 1,
-    tint: 0x6f8fc9,
-    tintStrength: 0.4,
-  },
   player_mage: {
     url: `${PLAYERS}/mage.glb`,
     height: HUMANOID_H,
@@ -633,27 +580,6 @@ export const VISUALS: Record<string, VisualDef> = {
     // (assets.ts) only hides non-skinned nodes. The hatted silhouette is the
     // sanctioned mage look; listing Mage_Cape is inert but kept as intent.
     show: ['Mage_Cape'],
-    attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
-    weaponSlots: [0],
-  },
-  player_warlock: {
-    url: `${PLAYERS}/mage.glb`,
-    height: HUMANOID_H,
-    clips: kaykit(['Spellcast_Shoot']), // wand zap reads better than a staff bonk
-    show: [],
-    attach: [
-      { url: `${WEAPONS}/wand.glb`, bone: 'handslot.r' },
-      { url: `${WEAPONS}/spellbook_open.glb`, bone: 'handslot.l', gripRef: 'Spellbook_open' },
-    ],
-    weaponSlots: [0], // mainhand (wand) swaps; spellbook offhand stays
-    tint: 0x8d5fd3,
-    tintStrength: 0.45,
-  },
-  player_druid: {
-    url: `${PLAYERS}/druid.glb`,
-    height: HUMANOID_H,
-    clips: kaykit(['2H_Melee_Attack_Chop']),
-    // dedicated druid model (own texture, ships a Backpack mesh)
     attach: [{ url: `${WEAPONS}/staff.glb`, bone: 'handslot.r' }],
     weaponSlots: [0],
   },
@@ -943,7 +869,7 @@ export const VISUALS: Record<string, VisualDef> = {
     tintStrength: 0.55,
   },
   delve_skel_ringer: {
-    // Funeral Ringer: skeleton rogue rig, cloth-brown tint at mid strength
+    // Funeral Ringer: skeleton thief rig, cloth-brown tint at mid strength
     url: `${ENEMIES}/skeleton_rogue.glb`,
     height: 2.5,
     clips: skeletonClips(['1H_Melee_Attack_Chop', '1H_Melee_Attack_Slice_Diagonal']),
@@ -1144,7 +1070,7 @@ export const VISUALS: Record<string, VisualDef> = {
   // Brother Halven, the Reliquary Keeper: a devout male guardian tending the crypt
   // door. Uses the KayKit paladin, one of the newer full-pack adventurer models
   // (unused elsewhere), for a sturdier, holier silhouette than the old hooded
-  // rogue. Ships its accessories (helm/cape/shield) by default (no show filter).
+  // thief. Ships its accessories (helm/cape/shield) by default (no show filter).
   npc_reliquary_keeper: {
     url: `${PLAYERS}/paladin.glb`,
     height: HUMANOID_H,
@@ -1291,9 +1217,9 @@ const MOB_KEYS: Record<string, string> = {
   // the "Spirit of X" adds reuse each character's crypt visual above. Without these
   // the ids fall through to FAMILY_KEYS.undead (skel_minion) and the whole court
   // renders as identical generic skeletons. See spawnNythraxisHeroicAdds.
-  vision_aldren_warrior: 'player_warrior',
+  vision_aldren_warrior: 'player_swordman',
   vision_malric_mage: 'player_mage',
-  vision_deathstalker_voss: 'player_rogue',
+  vision_deathstalker_voss: 'player_thief',
 };
 
 const FAMILY_KEYS: Record<string, string> = {
@@ -1357,7 +1283,7 @@ const NPC_KEYS: Record<string, string> = {
 export function visualKeyFor(e: Entity): string {
   if (e.kind === 'player') {
     if (e.skinCatalog === 'mech') return 'player_mech';
-    return VISUALS[`player_${e.templateId}`] ? `player_${e.templateId}` : 'player_warrior';
+    return VISUALS[`player_${e.templateId}`] ? `player_${e.templateId}` : 'player_swordman';
   }
   if (e.kind === 'mob') {
     const override = MOB_KEYS[e.templateId];
@@ -1372,7 +1298,7 @@ export function visualKeyFor(e: Entity): string {
 
 /** Held-weapon layout override for the class-agnostic Combat Mech body. The mech
  *  keeps its own model and clips but adopts the WEARER class's hand layout, so a
- *  dual-wield class (the rogue) shows the equipped weapon in BOTH hands on the mech
+ *  dual-wield class (the thief) shows the equipped weapon in BOTH hands on the mech
  *  (it shares the KayKit handslot.r/.l bones). Non-dual classes return null and keep
  *  the mech's own single-mainhand default. Host-agnostic: the wearer's class arrives
  *  as a player entity's templateId, so this applies the same offline and online. */
@@ -1426,7 +1352,7 @@ export function manifestUrlsForGraphics(standardMaterials: boolean): string[] {
  * preloaded" synchronously when the resolved URL was never loaded. The live tier is
  * set by initGfxTier() inside the Renderer constructor, AFTER assets.ts froze its
  * import-time GFX best-guess. On low gfx, LOW_URL_ALIAS swaps one body GLB
- * (rogue_hooded.glb -> rogue.glb), so manifestUrlsForGraphics(false) is a STRICT
+ * (rogue_hooded.glb -> thief.glb), so manifestUrlsForGraphics(false) is a STRICT
  * subset of manifestUrlsForGraphics(true). If the import-time guess is low but the
  * renderer resolves medium+, the very common mob_bandit body (rogue_hooded.glb, the
  * humanoid-family default AND the global mob fallback) is placed yet was never

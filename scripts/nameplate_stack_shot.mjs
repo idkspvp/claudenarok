@@ -51,7 +51,7 @@ async function shoot(label, viewport, emulateTouch) {
   }
   await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
   // shared entry flow: it also dismisses the intro, tutorial and camera prompt
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar', settleMs: 3000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar', settleMs: 3000 });
   await page.waitForFunction(() => window.__game?.sim?.entities?.size > 3, {
     timeout: 30000,
     polling: 300,

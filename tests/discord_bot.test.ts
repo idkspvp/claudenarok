@@ -356,9 +356,9 @@ describe('slash commands + messages', () => {
 
 describe('level-on-name nickname', () => {
   it('appends a class icon + level to the base name', () => {
-    expect(buildLevelNick('Aldric', 20, 'warrior')).toBe('Aldric ⚔20');
+    expect(buildLevelNick('Aldric', 20, 'swordman')).toBe('Aldric ⚔20');
     expect(buildLevelNick('Mira', 7, 'mage')).toBe('Mira 🔮7');
-    expect(levelNickSuffix(12, 'hunter')).toBe(' 🏹12');
+    expect(levelNickSuffix(12, 'archer')).toBe(' 🏹12');
   });
 
   it('handles an unknown class with no emoji', () => {
@@ -366,21 +366,21 @@ describe('level-on-name nickname', () => {
   });
 
   it('caps at the Discord 32-char nickname limit without splitting an emoji', () => {
-    const nick = buildLevelNick('A'.repeat(40), 20, 'warrior');
+    const nick = buildLevelNick('A'.repeat(40), 20, 'swordman');
     expect([...nick].length).toBeLessThanOrEqual(NICK_MAX);
     expect(nick.endsWith('⚔20')).toBe(true);
   });
 
   it('is idempotent when built from the same stable base', () => {
-    expect(buildLevelNick('Aldric', 20, 'warrior')).toBe(buildLevelNick('Aldric', 20, 'warrior'));
+    expect(buildLevelNick('Aldric', 20, 'swordman')).toBe(buildLevelNick('Aldric', 20, 'swordman'));
   });
 
   it('replaces an existing suffix instead of compounding it', () => {
     // Simulates a re-sync fed the CURRENT (already-suffixed) nick as its base,
     // e.g. because the fallback chain reused the live Discord nick.
-    const first = buildLevelNick('Aldric', 20, 'warrior');
-    const second = buildLevelNick(first, 21, 'warrior');
-    expect(second).toBe(`Aldric${levelNickSuffix(21, 'warrior')}`);
+    const first = buildLevelNick('Aldric', 20, 'swordman');
+    const second = buildLevelNick(first, 21, 'swordman');
+    expect(second).toBe(`Aldric${levelNickSuffix(21, 'swordman')}`);
   });
 
   it('collapses several stacked suffixes from a prior compounding bug down to one', () => {
@@ -388,17 +388,17 @@ describe('level-on-name nickname', () => {
     // (possibly from different classes/levels) stacked back to back.
     const stacked =
       'Enrik' +
-      levelNickSuffix(20, 'warrior').repeat(5) +
-      levelNickSuffix(2, 'warrior') +
-      levelNickSuffix(20, 'warrior');
-    expect(buildLevelNick(stacked, 20, 'warrior')).toBe(`Enrik${levelNickSuffix(20, 'warrior')}`);
+      levelNickSuffix(20, 'swordman').repeat(5) +
+      levelNickSuffix(2, 'swordman') +
+      levelNickSuffix(20, 'swordman');
+    expect(buildLevelNick(stacked, 20, 'swordman')).toBe(`Enrik${levelNickSuffix(20, 'swordman')}`);
 
     const stackedMixed =
       'jgyy' +
-      levelNickSuffix(1, 'rogue').repeat(3) +
-      levelNickSuffix(1, 'priest') +
-      levelNickSuffix(1, 'rogue').repeat(3) +
-      levelNickSuffix(1, 'priest').repeat(2);
+      levelNickSuffix(1, 'thief').repeat(3) +
+      levelNickSuffix(1, 'acolyte') +
+      levelNickSuffix(1, 'thief').repeat(3) +
+      levelNickSuffix(1, 'acolyte').repeat(2);
     expect(stripLevelSuffix(stackedMixed)).toBe('jgyy');
   });
 

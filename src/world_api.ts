@@ -23,7 +23,7 @@
 //   cosmetics.ts        IWorldCosmetics      account skins + mech chroma
 //   progression_xp.ts   IWorldProgressionXp  xp/lifetimeXp/prestige/rested/leaderboard
 //   status_points.ts    IWorldStatusPoints   the six status attributes
-//   pet.ts              IWorldPet            hunter-pet command surface
+//   pet.ts              IWorldPet            archer-pet command surface
 //   party.ts            IWorldParty          party/raid + raid-target markers
 //   trade.ts            IWorldTrade          peer-to-peer trade window
 //   chat.ts             IWorldChat           chat router + emotes
@@ -541,7 +541,7 @@ export const COMMAND_FACETS = {
   unequip_mech_chroma: 'IWorldCosmetics',
   change_weapon_skin: 'IWorldCosmetics',
   stow_weapon: 'IWorldCosmetics',
-  // IWorldPet: hunter-pet commands (snake_case wire strings, by design; pet state
+  // IWorldPet: archer-pet commands (snake_case wire strings, by design; pet state
   // mirrors on the owned-mob entity wire, not a self-snapshot field).
   pet_abandon: 'IWorldPet',
   pet_rename: 'IWorldPet',

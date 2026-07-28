@@ -31,7 +31,7 @@ import type {
 function friend(over: Partial<FriendInfo> & { name: string }): FriendInfo {
   return {
     id: 1,
-    cls: 'warrior',
+    cls: 'swordman',
     level: 10,
     realm: 'Test',
     online: true,
@@ -49,7 +49,7 @@ function partyMember(
 ): PartyMemberInfo {
   return {
     name: `p${over.pid}`,
-    cls: 'warrior' as PlayerClass,
+    cls: 'swordman' as PlayerClass,
     level: 10,
     hp: 100,
     mhp: 100,

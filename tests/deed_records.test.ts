@@ -449,7 +449,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('founding a guild grants soc_guild_founded live: the transport observer feeds the sim stat', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     vi.spyOn(server.social, 'broadcastDeedUnlock').mockResolvedValue(undefined);
     tickAndDetect(); // settle the fresh join
@@ -479,7 +479,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('a multi-deed live tick batches every earned id with the session ids; a marquee unlock broadcasts', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -516,7 +516,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('the account opt-out suppresses the broadcast but never the record', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -554,7 +554,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
       inventory: [],
     };
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'warrior', state as never);
+    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'swordman', state as never);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -583,7 +583,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // tick-tail sweep grants prog_guildsworn (marquee: renown 25 plus a
     // title), and the observer fans exactly that id out.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -635,7 +635,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
       masteryResetApplied: true,
     };
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'warrior', state as never);
+    const session = server.join(fc.ws as never, 7, 42, 'Returning', 'swordman', state as never);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -658,7 +658,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('a drifted deed id (content removed) still records but never reaches the broadcast gate', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -682,7 +682,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('a hidden deed never broadcasts, even when a reward makes it marquee', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -713,7 +713,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // crash would leave the public record ahead of the Book, the one drift
     // direction the join reconcile cannot heal.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     tickAndDetect();
     await settle();
@@ -752,7 +752,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // it on the in-flight save's success would put the index ahead of
     // durable state for the crash window until the queued save lands.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     tickAndDetect();
     await settle();
@@ -795,7 +795,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // unlocks in one tick; one blob write must cover them all, and the drain
     // mirrors the whole slice in ONE multi-row batch rather than N singles.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     tickAndDetect();
     await settle();
@@ -833,7 +833,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // have). The ids stay pending on the session and the next successful
     // save (the 30s autosave stands in here) publishes them in event order.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     tickAndDetect();
     await settle();
@@ -884,7 +884,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
     // not inherit the save's latency, or a slow autosave queue would delay
     // every congratulation by seconds.
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')
@@ -913,7 +913,7 @@ describe('deedUnlocked through GameServer.detectActivity', () => {
 
   it('a non-marquee live unlock records without ever reading the opt-out flag', async () => {
     const fc = fakeWs();
-    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'warrior', null);
+    const session = server.join(fc.ws as never, 7, 42, 'Hilda', 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     const broadcastSpy = vi
       .spyOn(server.social, 'broadcastDeedUnlock')

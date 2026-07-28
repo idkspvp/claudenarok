@@ -23,7 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.click('#btn-offline');
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Angler');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await page.waitForFunction(() => window.__game?.sim?.player, { timeout: 60000 });
 await new Promise((r) => setTimeout(r, 1500));

@@ -1113,7 +1113,7 @@ async function runSocialAndTradeSurfaces(page, locale, viewport) {
         {
           id: 801,
           name: 'Boro',
-          cls: 'warrior',
+          cls: 'swordman',
           level: 12,
           realm: 'Eastbrook',
           online: true,
@@ -1141,7 +1141,7 @@ async function runSocialAndTradeSurfaces(page, locale, viewport) {
           {
             id: 803,
             name: 'Ilyra',
-            cls: 'priest',
+            cls: 'acolyte',
             level: 14,
             realm: 'Eastbrook',
             online: true,

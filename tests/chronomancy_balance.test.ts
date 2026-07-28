@@ -19,6 +19,7 @@ import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
 import { placePlayerInOpenField } from './helpers/open_field';
+import { fundCasts } from './helpers/sp';
 
 type Spec = 'arcane' | 'fire' | 'frost';
 
@@ -28,7 +29,7 @@ function makeMage(spec: Spec, level = 20) {
   placePlayerInOpenField(sim);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   return { sim, p };
 }
 
@@ -47,7 +48,7 @@ function addDummy(sim: Sim, dist = 6): Entity {
 
 function addAlly(sim: Sim): Entity {
   const p = sim.player;
-  const id = sim.addPlayer('warrior', 'Tanque');
+  const id = sim.addPlayer('swordman', 'Tanque');
   const ally = sim.entities.get(id)!;
   ally.pos.x = p.pos.x + 4;
   ally.pos.z = p.pos.z;
@@ -304,10 +305,10 @@ function cascadeAoeHeal(enemyCount: number): CascadeMeasure {
   sim.tick();
   placePlayerInOpenField(sim);
   const p = sim.player;
-  p.resource = p.maxResource;
+  fundCasts(p);
   const allyIds: number[] = [];
   for (let i = 0; i < 5; i++) {
-    const id = sim.addPlayer('warrior', `Ally${i}`);
+    const id = sim.addPlayer('swordman', `Ally${i}`);
     const a = sim.entities.get(id)!;
     a.pos.x = p.pos.x + 1 + i * 0.4; // tight cluster (party invites need proximity)
     a.pos.z = p.pos.z;

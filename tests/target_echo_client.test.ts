@@ -57,7 +57,7 @@ interface ClientInternals {
 
 function makeWorld(): { world: ClientWorld; wire: ClientInternals } {
   const world = withDomStubs(() => {
-    const w = new ClientWorld('target-echo-token', 1, 'warrior', 'http://localhost');
+    const w = new ClientWorld('target-echo-token', 1, 'swordman', 'http://localhost');
     w.close();
     return w;
   });

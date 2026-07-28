@@ -19,7 +19,7 @@ const SECONDS = 300;
 const TICKS = Math.round(SECONDS / DT);
 
 function setup(cls) {
-  const sim = new Sim({ seed: 12345, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: 12345, playerClass: 'swordman', noPlayer: true });
   const pid = sim.addPlayer(cls, 'Ref');
   sim.setPlayerLevel(MAX_LEVEL, pid);
   sim.tick();
@@ -110,7 +110,7 @@ const ROTATIONS = {
     dots: ['corruption', 'curse_of_agony', 'immolate'],
     nukes: ['shadow_bolt', 'searing_pain'],
   },
-  priest: { dots: ['shadow_word_pain'], nukes: ['mind_blast', 'mind_flay', 'smite'] },
+  acolyte: { dots: ['shadow_word_pain'], nukes: ['mind_blast', 'mind_flay', 'smite'] },
   shaman: { dots: ['flame_shock'], nukes: ['lightning_bolt', 'earth_shock'] },
   druid: { dots: ['moonfire', 'insect_swarm'], nukes: ['starfire', 'wrath'] },
 };

@@ -34,7 +34,7 @@ const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERR', e.message));
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-const booted = await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thorgar' });
+const booted = await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thorgar' });
 console.log('offline boot:', booted);
 await page.evaluate(() => document.querySelector('.gpu-notice-dismiss')?.click());
 await sleep(600);

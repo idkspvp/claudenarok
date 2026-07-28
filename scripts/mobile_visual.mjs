@@ -40,7 +40,7 @@ page.on('console', (msg) => {
 });
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Touchscreen', settleMs: 2800 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Touchscreen', settleMs: 2800 });
 
 // Dismiss the landscape/fullscreen preflight if it's up.
 await page.evaluate(() => {

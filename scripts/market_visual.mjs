@@ -38,7 +38,7 @@ page.on('console', (m) => {
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(200);
-await page.click('.class-card[data-class="warrior"]');
+await page.click('.class-card[data-class="swordman"]');
 await page.waitForFunction(() => window.__game?.sim?.entities?.size > 5, {
   timeout: 20000,
   polling: 200,
@@ -70,8 +70,8 @@ const scene = await page.evaluate(() => {
   // other adventurers consign goods to the market
   const others = [
     ['Brena', 'mage'],
-    ['Tovrin', 'rogue'],
-    ['Sella', 'priest'],
+    ['Tovrin', 'thief'],
+    ['Sella', 'acolyte'],
   ];
   const ids = {};
   for (const [name, cls] of others) {

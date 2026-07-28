@@ -95,7 +95,7 @@ async function main() {
   });
   check('registered accounts', r1.status === 200 && r2.status === 200);
 
-  const c1 = await api('/api/characters', { name: nameA, class: 'warrior' }, r1.body.token);
+  const c1 = await api('/api/characters', { name: nameA, class: 'swordman' }, r1.body.token);
   const c2 = await api('/api/characters', { name: nameB, class: 'mage' }, r2.body.token);
   check('created characters', c1.status === 200 && c2.status === 200);
 

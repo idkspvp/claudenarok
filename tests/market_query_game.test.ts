@@ -34,7 +34,7 @@ describe('GameServer market query wire', () => {
       readyState: 1,
       send: () => undefined,
     } as unknown as WebSocket;
-    const joined = server.join(ws, 1, 1, 'Buyer', 'warrior', null);
+    const joined = server.join(ws, 1, 1, 'Buyer', 'swordman', null);
     if ('error' in joined) throw new Error(joined.error);
     joined.blockListLoaded = true;
 

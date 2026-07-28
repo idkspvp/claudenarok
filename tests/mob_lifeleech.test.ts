@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { Sim } from '../src/sim/sim';
 import { MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
+import { Sim } from '../src/sim/sim';
 
 const SEED = 42;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
 
 // Spawn a Drowned Dead next to the player, sitting at a fixed missing-health
 // deficit so any leech proc has room to heal.
@@ -56,7 +56,10 @@ describe('mob lifesteal (Drowning Grasp)', () => {
     const old = leech.chance;
     leech.chance = 1;
     try {
-      for (let i = 0; i < 50; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 50; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       leech.chance = old;
     }
@@ -70,7 +73,10 @@ describe('mob lifesteal (Drowning Grasp)', () => {
     const old = leech.chance;
     leech.chance = 1;
     try {
-      for (let i = 0; i < 50; i++) { player.hp = player.maxHp; (sim as any).mobSwing(mob, player); }
+      for (let i = 0; i < 50; i++) {
+        player.hp = player.maxHp;
+        (sim as any).mobSwing(mob, player);
+      }
     } finally {
       leech.chance = old;
     }
@@ -88,7 +94,9 @@ describe('mob lifesteal (Drowning Grasp)', () => {
         player.hp = player.maxHp;
         (sim as any).events.length = 0;
         (sim as any).mobSwing(mob, player);
-        healEvent = (sim as any).events.some((ev: any) => ev.type === 'heal' && ev.targetId === mob.id);
+        healEvent = (sim as any).events.some(
+          (ev: any) => ev.type === 'heal' && ev.targetId === mob.id,
+        );
       }
     } finally {
       leech.chance = old;

@@ -31,8 +31,8 @@ function spawnMob(
 
 describe('rare mob tap and personal-drop credit', () => {
   it('a pet acting alone still taps a rare mob (classic pet-tap rule, unchanged)', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warlock', noPlayer: true });
-    const pid = sim.addPlayer('warlock', 'Ashwyn');
+    const sim = new Sim({ seed: 42, playerClass: 'mage', noPlayer: true });
+    const pid = sim.addPlayer('mage', 'Ashwyn');
     const greyjaw = spawnMob(sim, 90001, 'old_greyjaw', 4, 10, 10);
     const pet = spawnMob(sim, 90002, 'emberkin', 10, 10, 10);
     pet.ownerId = pid;
@@ -43,8 +43,8 @@ describe('rare mob tap and personal-drop credit', () => {
   });
 
   it('a pet acting alone still taps an ordinary (non-rare) mob', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warlock', noPlayer: true });
-    const pid = sim.addPlayer('warlock', 'Ashwyn');
+    const sim = new Sim({ seed: 42, playerClass: 'mage', noPlayer: true });
+    const pid = sim.addPlayer('mage', 'Ashwyn');
     const boar = spawnMob(sim, 90004, 'wild_boar', 3, 10, 10);
     const pet = spawnMob(sim, 90005, 'emberkin', 10, 10, 10);
     pet.ownerId = pid;

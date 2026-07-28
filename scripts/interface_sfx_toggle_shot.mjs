@@ -25,7 +25,7 @@ await page.waitForSelector('#btn-offline', { timeout: 60000 });
 // Suppress the one-shot first-run camera prompt so it does not overlay the menu.
 await page.evaluate(() => localStorage.setItem('woc.cameraModePrompt.shown', '1'));
 const tap = (sel) => page.evaluate((s) => document.querySelector(s)?.click(), sel);
-await tap('#btn-offline'); // reveals #offline-select and auto-selects the warrior card
+await tap('#btn-offline'); // reveals #offline-select and auto-selects the swordman card
 await wait(600);
 await page.evaluate(() => {
   document.querySelector('#char-name').value = 'Strider';

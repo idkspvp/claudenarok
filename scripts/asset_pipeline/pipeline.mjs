@@ -15,11 +15,11 @@
 //     [--prompt "..."] [--image ...] [--rotate-y 90] [--apply] [--job id]
 //   node scripts/asset_pipeline/pipeline.mjs creature --name bog_lurker \
 //     [--prompt "..."] [--image ...] [--rig-type biped] [--height 2.0] [--job id]
-//   node scripts/asset_pipeline/pipeline.mjs skin --class warrior --suffix lava \
+//   node scripts/asset_pipeline/pipeline.mjs skin --class swordman --suffix lava \
 //     --tripo --prompt "molten obsidian armor, glowing lava cracks" [--apply]  (real gen)
 //     (or --recolor hue=..[,sat=..][,light=..] fallback, or --prompt with OPENAI_API_KEY)
 //   node scripts/asset_pipeline/pipeline.mjs skinset --set prismatic|chrome [--tripo] [--apply]
-//   node scripts/asset_pipeline/pipeline.mjs skinmodel --class hunter --theme "pool party" \
+//   node scripts/asset_pipeline/pipeline.mjs skinmodel --class archer --theme "pool party" \
 //     --name pool_party_hunter [--face-limit 8000] [--grip-rot deg] [--apply]  (League-style skin)
 //   node scripts/asset_pipeline/pipeline.mjs rig-manual --raw <raw.glb> --name <key>  (free local rig,
 //     KayKit skeleton + all 22 native clips; see CLAUDE.md)
@@ -760,11 +760,11 @@ async function cmdCreature() {
 // Player class -> the body model GLB that class wears (mage.glb serves the
 // caster trio). Shared by the skin, skinset, and skinmodel lanes.
 const CLASS_MODELS = {
-  warrior: 'knight',
+  swordman: 'knight',
   paladin: 'paladin',
-  hunter: 'ranger',
-  rogue: 'rogue',
-  priest: 'mage',
+  archer: 'ranger',
+  thief: 'thief',
+  acolyte: 'mage',
   mage: 'mage',
   warlock: 'mage',
   shaman: 'barbarian',

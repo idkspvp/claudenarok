@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import { MAX_LEVEL, type SimEvent, xpForLevel } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function chatEvents(events: SimEvent[]): Extract<SimEvent, { type: 'chat' }>[] {
@@ -20,7 +20,7 @@ function errorFor(events: SimEvent[], pid: number): string | undefined {
 describe('/xp command', () => {
   it('reports level, progress, percent, and remaining XP to the sender only', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const bystander = sim.addPlayer('mage', 'Bet');
     const meta = sim.players.get(a)!;
     sim.entities.get(a)!.level = 40;
@@ -49,7 +49,7 @@ describe('/xp command', () => {
 
   it('aliases /exp and /experience behave the same', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.entities.get(a)!.level = 3;
     sim.players.get(a)!.xp = 0;
     sim.tick();
@@ -63,7 +63,7 @@ describe('/xp command', () => {
 
   it('announces the cap at max level instead of dividing by zero', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.entities.get(a)!.level = MAX_LEVEL;
     sim.players.get(a)!.xp = 0;
     sim.tick();

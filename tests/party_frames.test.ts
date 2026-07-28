@@ -12,7 +12,7 @@ import type { PartyInfo, PartyMemberInfo } from '../src/world_api';
 const member = (pid: number, group: 1 | 2, x = 0, z = 0): PartyMemberInfo => ({
   pid,
   name: `Raid${pid}`,
-  cls: 'priest',
+  cls: 'acolyte',
   level: 20,
   hp: 100,
   mhp: 100,

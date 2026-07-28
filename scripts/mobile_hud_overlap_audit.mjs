@@ -283,7 +283,7 @@ async function buildParty(page) {
     const roster = [
       ['Brightoak', 'druid'],
       ['Stormcaller', 'shaman'],
-      ['Nightblade', 'rogue'],
+      ['Nightblade', 'thief'],
       ['Emberlyn', 'mage'],
     ];
     const pids = roster.map(([name, cls], i) => {
@@ -624,7 +624,7 @@ try {
   await page.goto(URL, { waitUntil: 'networkidle2' });
   // Suppress the tutorial before entry so its cards do not overlay the chrome.
   await page.evaluate(() => localStorage.setItem('woc.tutorial.v1', 'done')).catch(() => {});
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'Auditor', settleMs: 1500 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'Auditor', settleMs: 1500 });
 
   const media = await page.createCDPSession();
   await media.send('Emulation.setEmulatedMedia', {

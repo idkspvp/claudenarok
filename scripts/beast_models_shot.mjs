@@ -44,7 +44,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.evaluate(() => document.querySelector('#btn-offline').click());
 await sleep(200);
 await page.type('#char-name', 'Beastward');
-await page.click('#offline-select .mini-class[data-class="hunter"]');
+await page.click('#offline-select .mini-class[data-class="archer"]');
 await page.click('#btn-start-offline');
 await sleep(3000);
 

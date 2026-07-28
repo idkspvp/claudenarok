@@ -40,9 +40,9 @@ export function isFinderRole(value: unknown): value is Role {
 // spec's role taking over above it; specs are retired (Phase D0), so the table
 // is the whole answer (see compatibleFinderRoles in ../social/dungeon_finder.ts).
 export const FINDER_CLASS_ROLES: Record<Role, readonly PlayerClass[]> = {
-  tank: ['warrior', 'paladin', 'druid'],
-  healer: ['paladin', 'priest', 'shaman', 'druid'],
-  dps: ['warrior', 'paladin', 'hunter', 'rogue', 'priest', 'shaman', 'mage', 'warlock', 'druid'],
+  tank: ['swordman'],
+  healer: ['acolyte'],
+  dps: ['swordman', 'archer', 'thief', 'acolyte', 'mage'],
 };
 
 export type FinderActivityKind = 'dungeon' | 'raid' | 'solo';

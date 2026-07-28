@@ -22,9 +22,9 @@ type SimInternals = {
 };
 
 function setup(seed = 11) {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const internals = sim as unknown as SimInternals;
-  const pid = sim.addPlayer('warrior', 'Alpha');
+  const pid = sim.addPlayer('swordman', 'Alpha');
   sim.tick();
   const e = internals.entities.get(pid)!;
   e.pos = { x: 0, y: 0, z: 0 };

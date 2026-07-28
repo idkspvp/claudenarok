@@ -28,7 +28,7 @@ try {
     hasTouch: true,
   });
   await page.goto(URL, { waitUntil: 'networkidle2' });
-  await enterOfflineGame(page, { charClass: 'warrior', charName: 'LayoutVerify', settleMs: 2000 });
+  await enterOfflineGame(page, { charClass: 'swordman', charName: 'LayoutVerify', settleMs: 2000 });
   await page.keyboard.press('Space');
   await page.waitForFunction(
     () => {

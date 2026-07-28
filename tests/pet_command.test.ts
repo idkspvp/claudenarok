@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'hunter', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'archer', noPlayer: true });
 }
 
 function makeClassWorld(cls: Parameters<Sim['addPlayer']>[0]) {
@@ -31,8 +32,8 @@ function givePet(sim: Sim, ownerPid: number): Entity {
 
 describe('/pet command', () => {
   it('does not spawn new warlocks with a demon by default', () => {
-    const sim = makeClassWorld('warlock');
-    const pid = sim.addPlayer('warlock', 'Wick');
+    const sim = makeClassWorld('mage');
+    const pid = sim.addPlayer('mage', 'Wick');
 
     expect(sim.petOf(pid)).toBeNull();
   });
@@ -41,37 +42,19 @@ describe('/pet command', () => {
   // their demon (paying the cost + 180s cooldown) on login instead of getting it
   // back for free, which would let a relog launder the summon cooldown. The demon
   // snapshot is dropped to null at the serializeCharacter boundary, so a reload
-  // spawns no demon and forces a fresh summon.
-  it('does not persist a summoned warlock demon across a save/reload', () => {
-    const first = makeClassWorld('warlock');
-    const pid = first.addPlayer('warlock', 'Wick');
-    first.setPlayerLevel(20, pid);
-    first.castAbility('summon_voidwalker', pid);
-    for (let i = 0; i < 20 * 6; i++) first.tick();
-    expect(first.petOf(pid)?.templateId).toBe('gloomshade');
-    const saved = first.serializeCharacter(pid)!;
-    expect(saved.pet).toBeNull();
-
-    const restored = makeClassWorld('warlock');
-    const restoredPid = restored.addPlayer('warlock', 'Wick', { state: saved });
-    const pets = [...restored.entities.values()].filter(
-      (e) => e.kind === 'mob' && e.ownerId === restoredPid,
-    );
-
-    expect(pets).toHaveLength(0);
-    expect(restored.petOf(restoredPid)).toBeNull();
-  });
-
-  it('still persists a non-demon (hunter beast) pet across a save/reload', () => {
+  // spawns no demon and forces a fresh summon. That save-drop rule is demon-only,
+  // and the Warlock that owned every demon was cut in D1, so the round trip has no
+  // live summon to exercise it: the Water Elemental persists like a tamed pet.
+  it('still persists a non-demon (archer beast) pet across a save/reload', () => {
     const first = makeWorld();
-    const pid = first.addPlayer('hunter', 'Tamer');
+    const pid = first.addPlayer('archer', 'Tamer');
     const pet = givePet(first, pid);
     const templateId = pet.templateId;
     const saved = first.serializeCharacter(pid)!;
     expect(saved.pet?.templateId).toBe(templateId);
 
-    const restored = new Sim({ seed: 42, playerClass: 'hunter', noPlayer: true });
-    const restoredPid = restored.addPlayer('hunter', 'Tamer', { state: saved });
+    const restored = new Sim({ seed: 42, playerClass: 'archer', noPlayer: true });
+    const restoredPid = restored.addPlayer('archer', 'Tamer', { state: saved });
     expect(restored.petOf(restoredPid)?.templateId).toBe(templateId);
   });
 
@@ -84,7 +67,7 @@ describe('/pet command', () => {
 
   it('reports name, level, family, and health for an active pet', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     const pet = givePet(sim, a);
     // The pet is adopted straight out of a spawn camp; move owner + pet onto empty
     // ground so its former campmates do not proximity-aggro and chip its HP before the
@@ -112,7 +95,7 @@ describe('/pet command', () => {
 
   it('rounds the health percentage from live pet HP', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     const pet = givePet(sim, a);
     pet.hp = Math.round(pet.maxHp * 0.5);
     sim.tick();
@@ -124,7 +107,7 @@ describe('/pet command', () => {
 
   it('tells players without a pet that they have none', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     sim.tick();
 
     sim.chat('/pet', a);
@@ -135,7 +118,7 @@ describe('/pet command', () => {
 
   it('supports the /companion and /pets aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('hunter', 'Aleph');
+    const a = sim.addPlayer('archer', 'Aleph');
     const pet = givePet(sim, a);
     sim.tick();
 

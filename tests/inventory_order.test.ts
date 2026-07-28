@@ -122,9 +122,9 @@ describe('moveStackToCell', () => {
 
 describe('Sim.moveInventoryItem', () => {
   const makeSim = (): { sim: Sim & Record<string, any>; pid: number } => {
-    const sim = new Sim({ seed: 9, playerClass: 'warrior', noPlayer: true }) as Sim &
+    const sim = new Sim({ seed: 9, playerClass: 'swordman', noPlayer: true }) as Sim &
       Record<string, any>;
-    const pid = sim.addPlayer('warrior', 'Sorter');
+    const pid = sim.addPlayer('swordman', 'Sorter');
     return { sim, pid };
   };
   const invOf = (sim: Sim & Record<string, any>, pid: number): InvSlot[] => {

@@ -19,7 +19,7 @@ describe('avatar validation', () => {
 
 describe('avatarPng', () => {
   it('emits a valid PNG with the right signature and IEND', () => {
-    const png = avatarPng('shaman', 3);
+    const png = avatarPng('acolyte', 3);
     expect(png.subarray(0, 8).equals(PNG_SIGNATURE)).toBe(true);
     // IHDR chunk type follows the 8-byte sig + 4-byte length.
     expect(png.subarray(12, 16).toString('ascii')).toBe('IHDR');
@@ -32,12 +32,12 @@ describe('avatarPng', () => {
   });
 
   it('differs across class and across skin', () => {
-    expect(avatarPng('mage', 2).equals(avatarPng('warlock', 2))).toBe(false);
+    expect(avatarPng('mage', 2).equals(avatarPng('acolyte', 2))).toBe(false);
     expect(avatarPng('mage', 2).equals(avatarPng('mage', 5))).toBe(false);
   });
 
   it('throws on invalid inputs', () => {
-    expect(() => avatarPng('paladin', 9)).toThrow();
+    expect(() => avatarPng('swordman', 9)).toThrow();
     expect(() => avatarPng('nope' as any, 0)).toThrow();
   });
 });

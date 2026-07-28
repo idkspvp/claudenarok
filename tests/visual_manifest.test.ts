@@ -51,7 +51,7 @@ async function glbAnimationNames(path: string): Promise<Set<string>> {
 describe('character visual manifest', () => {
   it('keeps Bursar Fernando in his likeness atlas (the Eastbrook banker easter egg)', () => {
     // The maintainer-approved easter egg: black shoulder-length hair and light
-    // brown skin ride a repainted rogue palette resolved at skin index 0 (NPCs
+    // brown skin ride a repainted thief palette resolved at skin index 0 (NPCs
     // always resolve skin 0; the mech precedent for a real index-0 texture).
     // The def must stay TINT-FREE: an entity tint would wash the repaint back
     // toward the gold villager look. Do not "clean up" any of the three.
@@ -194,10 +194,10 @@ describe('character visual manifest', () => {
     const allWeaponUrls = manifestUrls().filter((url) => url.startsWith('models/weapons/'));
     expect(allWeaponUrls.length).toBeGreaterThan(0);
     expect(manifestUrlsForGraphics(false)).toEqual(expect.arrayContaining(allWeaponUrls));
-    expect(visibleAttachmentsForGraphics(VISUALS.player_warrior).map((a) => a.url)).toContain(
+    expect(visibleAttachmentsForGraphics(VISUALS.player_swordman).map((a) => a.url)).toContain(
       'models/weapons/sword_1handed.glb',
     );
-    expect(visibleAttachmentsForGraphics(VISUALS.player_rogue).map((a) => a.url)).toEqual([
+    expect(visibleAttachmentsForGraphics(VISUALS.player_thief).map((a) => a.url)).toEqual([
       'models/weapons/dagger.glb',
       'models/weapons/dagger.glb',
     ]);

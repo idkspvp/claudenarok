@@ -1,13 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
-  const e = events.find((ev): ev is Extract<SimEvent, { type: 'error' }> => ev.type === 'error' && ev.pid === pid);
+  const e = events.find(
+    (ev): ev is Extract<SimEvent, { type: 'error' }> => ev.type === 'error' && ev.pid === pid,
+  );
   return e?.text;
 }
 
@@ -22,15 +24,18 @@ function formParty(sim: Sim, leader: number, members: number[]) {
 describe('/party readout command', () => {
   it('lists party members with level, class, and HP%, tagging the leader', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     const b = sim.addPlayer('mage', 'Bet');
-    const c = sim.addPlayer('rogue', 'Gimel');
+    const c = sim.addPlayer('thief', 'Gimel');
     sim.tick();
     formParty(sim, a, [b, c]);
 
     // Wound Gimel to a known HP% so the readout is deterministic.
     const ce = sim.entities.get(c)!;
-    ce.hp = Math.round(ce.maxHp * 0.4);
+    // A round pool so the percentage is exact: the subject is the readout
+    // format, not how big a level-1 pool happens to be.
+    ce.maxHp = 100;
+    ce.hp = 40;
 
     const sent = sim.chat('/party', a);
     expect(sent).toBeNull(); // self-only readout is never broadcast
@@ -47,7 +52,7 @@ describe('/party readout command', () => {
 
   it('reports when you are not in a party', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Solo');
+    const a = sim.addPlayer('swordman', 'Solo');
     sim.tick();
     sim.chat('/party', a);
     expect(errorText(sim.tick(), a)).toBe('You are not in a party.');
@@ -55,8 +60,8 @@ describe('/party readout command', () => {
 
   it('shows dead members as (dead)', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
-    const b = sim.addPlayer('priest', 'Bet');
+    const a = sim.addPlayer('swordman', 'Aleph');
+    const b = sim.addPlayer('acolyte', 'Bet');
     sim.tick();
     formParty(sim, a, [b]);
     sim.entities.get(b)!.hp = 0;

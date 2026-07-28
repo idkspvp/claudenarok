@@ -273,7 +273,7 @@ describe('public card origin config', () => {
 
 describe('POST /api/card', () => {
   it('stores the PNG and returns the name slug + url', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = []; // slug free
     const { status, data } = await callUpload('/api/card?character=5', validCardPng);
     expect(status).toBe(200);
@@ -286,13 +286,20 @@ describe('POST /api/card', () => {
     const storedPng = insert?.[1][3];
     expect(Buffer.isBuffer(storedPng)).toBe(true); // png bytes
     expect(Buffer.isBuffer(storedPng) && storedPng.equals(validCardPng)).toBe(true);
-    expect(insert?.[1][4]).toBe('Sir Test - Level 12 Paladin'); // title
+    expect(insert?.[1][4]).toBe('Sir Test - Level 12 Swordman'); // title
     expect(insert?.[1][6]).toBe('en'); // locale
   });
 
   it('ignores client-reported levels and uses server-side character state for metadata', async () => {
     characterRows = [
-      { id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12, state: { level: 12 } },
+      {
+        id: 5,
+        account_id: 1,
+        name: 'Sir Test',
+        class: 'swordman',
+        level: 12,
+        state: { level: 12 },
+      },
     ];
     slugRows = [];
     const { status } = await callUpload('/api/card?character=5&level=16', validCardPng);
@@ -300,11 +307,11 @@ describe('POST /api/card', () => {
     const insert = dbMock.query.mock.calls.find((c) =>
       String(c[0]).includes('INSERT INTO player_cards'),
     );
-    expect(insert?.[1][4]).toBe('Sir Test - Level 12 Paladin');
+    expect(insert?.[1][4]).toBe('Sir Test - Level 12 Swordman');
   });
 
   it('uses the saved level when level query params are absent or forged', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     for (const url of [
       '/api/card?character=5',
       '/api/card?character=5&level=0',
@@ -320,7 +327,7 @@ describe('POST /api/card', () => {
       const insert = dbMock.query.mock.calls.find((c) =>
         String(c[0]).includes('INSERT INTO player_cards'),
       );
-      expect(insert?.[1][4]).toBe('Sir Test - Level 12 Paladin');
+      expect(insert?.[1][4]).toBe('Sir Test - Level 12 Swordman');
     }
   });
 
@@ -328,7 +335,14 @@ describe('POST /api/card', () => {
     // The column can lag state by an autosave window; state.level is the fresher
     // server-side value, so it wins over the column when the client sends nothing.
     characterRows = [
-      { id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12, state: { level: 14 } },
+      {
+        id: 5,
+        account_id: 1,
+        name: 'Sir Test',
+        class: 'swordman',
+        level: 12,
+        state: { level: 14 },
+      },
     ];
     slugRows = [];
     const { status } = await callUpload('/api/card?character=5', validCardPng);
@@ -336,12 +350,19 @@ describe('POST /api/card', () => {
     const insert = dbMock.query.mock.calls.find((c) =>
       String(c[0]).includes('INSERT INTO player_cards'),
     );
-    expect(insert?.[1][4]).toBe('Sir Test - Level 14 Paladin');
+    expect(insert?.[1][4]).toBe('Sir Test - Level 14 Swordman');
   });
 
   it('prefers the live in-session level over persisted state', async () => {
     characterRows = [
-      { id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12, state: { level: 14 } },
+      {
+        id: 5,
+        account_id: 1,
+        name: 'Sir Test',
+        class: 'swordman',
+        level: 12,
+        state: { level: 14 },
+      },
     ];
     slugRows = [];
     const { status } = await callUpload('/api/card?character=5', validCardPng, 1, (id) =>
@@ -351,12 +372,19 @@ describe('POST /api/card', () => {
     const insert = dbMock.query.mock.calls.find((c) =>
       String(c[0]).includes('INSERT INTO player_cards'),
     );
-    expect(insert?.[1][4]).toBe('Sir Test - Level 15 Paladin');
+    expect(insert?.[1][4]).toBe('Sir Test - Level 15 Swordman');
   });
 
   it('falls back to persisted state when the character is not online', async () => {
     characterRows = [
-      { id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12, state: { level: 14 } },
+      {
+        id: 5,
+        account_id: 1,
+        name: 'Sir Test',
+        class: 'swordman',
+        level: 12,
+        state: { level: 14 },
+      },
     ];
     slugRows = [];
     const { status } = await callUpload('/api/card?character=5', validCardPng, 1, () => null);
@@ -364,11 +392,11 @@ describe('POST /api/card', () => {
     const insert = dbMock.query.mock.calls.find((c) =>
       String(c[0]).includes('INSERT INTO player_cards'),
     );
-    expect(insert?.[1][4]).toBe('Sir Test - Level 14 Paladin');
+    expect(insert?.[1][4]).toBe('Sir Test - Level 14 Swordman');
   });
 
   it('does not allow bounded-looking level query params to change metadata', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = [];
     const atBound = await callUpload('/api/card?character=5&level=1000', validCardPng);
     expect(atBound.status).toBe(200);
@@ -376,7 +404,7 @@ describe('POST /api/card', () => {
       dbMock.query.mock.calls.find((c) =>
         String(c[0]).includes('INSERT INTO player_cards'),
       )?.[1][4],
-    ).toBe('Sir Test - Level 12 Paladin');
+    ).toBe('Sir Test - Level 12 Swordman');
 
     dbMock.query.mockClear();
     slugRows = [];
@@ -386,24 +414,24 @@ describe('POST /api/card', () => {
       dbMock.query.mock.calls.find((c) =>
         String(c[0]).includes('INSERT INTO player_cards'),
       )?.[1][4],
-    ).toBe('Sir Test - Level 12 Paladin');
+    ).toBe('Sir Test - Level 12 Swordman');
   });
 
   it('stores localized public-page metadata using the upload locale', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = [];
     const { status } = await callUpload('/api/card?character=5&lang=es-ES', validCardPng);
     expect(status).toBe(200);
     const insert = dbMock.query.mock.calls.find((c) =>
       String(c[0]).includes('INSERT INTO player_cards'),
     );
-    expect(insert?.[1][4]).toBe('Sir Test - Nivel 12 Paladín');
+    expect(insert?.[1][4]).toBe('Sir Test - Nivel 12 Guerrero');
     expect(insert?.[1][5]).toContain('Sir Test está forjando una leyenda');
     expect(insert?.[1][6]).toBe('es_ES');
   });
 
   it('falls back to a character-id-suffixed slug when the name slug is taken', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = (slug) => (slug === 'sir-test' ? [{ character_id: 999 }] : []);
     const { status, data } = await callUpload('/api/card?character=5', validCardPng);
     expect(status).toBe(200);
@@ -411,7 +439,7 @@ describe('POST /api/card', () => {
   });
 
   it('falls back past a colliding character-id-suffixed slug', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = (slug) => {
       if (slug === 'sir-test') return [{ character_id: 999 }];
       if (slug === 'sir-test-5') return [{ character_id: 1000 }];
@@ -427,7 +455,7 @@ describe('POST /api/card', () => {
   });
 
   it('retries with a suffixed slug on a unique violation', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = []; // appears free, but the insert races a 23505
     let first = true;
     dbMock.query.mockImplementation((sql: string) => {
@@ -451,7 +479,7 @@ describe('POST /api/card', () => {
   });
 
   it('keeps retrying deterministic suffixes after repeated unique violations', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     slugRows = []; // every candidate appears free, but the first two inserts race 23505
     let failuresLeft = 2;
     dbMock.query.mockImplementation((sql: string) => {
@@ -497,7 +525,7 @@ describe('POST /api/card', () => {
   });
 
   it('rejects a non-PNG body with 400', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     const { status } = await callUpload('/api/card?character=5', Buffer.from('not a png'));
     expect(status).toBe(400);
     expect(
@@ -506,7 +534,7 @@ describe('POST /api/card', () => {
   });
 
   it('rejects a fake magic-header PNG with 400', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     const { status, data } = await callUpload('/api/card?character=5', fakeMagicHeaderPng);
     expect(status).toBe(400);
     expect(data.error).toBe('expected a PNG image');
@@ -516,7 +544,7 @@ describe('POST /api/card', () => {
   });
 
   it('rejects a structurally valid PNG with unexpected dimensions', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     const { status } = await callUpload('/api/card?character=5', makePng(32, 32));
     expect(status).toBe(400);
     expect(
@@ -525,7 +553,7 @@ describe('POST /api/card', () => {
   });
 
   it('rejects an oversized body with 413 and stores nothing', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     const huge = Buffer.concat([PNG_MAGIC, Buffer.alloc(4 * 1024 * 1024 + 1)]); // > MAX_CARD_BYTES (4 MB)
     const { status } = await callUpload('/api/card?character=5', huge);
     expect(status).toBe(413);
@@ -546,7 +574,7 @@ describe('POST /api/card', () => {
   });
 
   it('returns 400 when the body read fails with a non-size error', async () => {
-    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'paladin', level: 12 }];
+    characterRows = [{ id: 5, account_id: 1, name: 'Sir Test', class: 'swordman', level: 12 }];
     const res = makeRes();
     await handleCardUpload(makeErrorBinaryReq('/api/card?character=5'), res, 1);
     expect(res.statusCode).toBe(400);

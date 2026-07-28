@@ -77,13 +77,13 @@ function grantReagents(sim: Sim, recipeId: string, pid: number, crafts = 1): voi
 }
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function makeTradeSim(seed = 42) {
-  const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: false, noPlayer: true });
-  const a = sim.addPlayer('warrior', 'Ayla');
-  const b = sim.addPlayer('warrior', 'Borin');
+  const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: false, noPlayer: true });
+  const a = sim.addPlayer('swordman', 'Ayla');
+  const b = sim.addPlayer('swordman', 'Borin');
   const ea = sim.ctx.entities.get(a)!;
   const eb = sim.ctx.entities.get(b)!;
   eb.pos.x = ea.pos.x + 2;
@@ -684,7 +684,7 @@ describe('persistence: commission payloads survive save/load', () => {
     sim.ctx.addItemInstance(VESTMENTS, { bindOnTrade: true }, pid);
     const state = sim.serializeCharacter(pid)!;
     const sim2 = makeSim();
-    const pid2 = sim2.addPlayer('warrior', 'Reloaded', { state });
+    const pid2 = sim2.addPlayer('swordman', 'Reloaded', { state });
     const sword = sim2.meta(pid2)!.inventory.find((s) => s.itemId === SWORD);
     expect(sword?.instance).toEqual({ bindOnTrade: true, boundTo: pid, signer: 'Aldric' });
     const vest = sim2.meta(pid2)!.inventory.find((s) => s.itemId === VESTMENTS);
@@ -697,8 +697,8 @@ describe('persistence: commission payloads survive save/load', () => {
 // ---------------------------------------------------------------------------
 describe('mail/market: a commissioned equipment instance never mails or lists', () => {
   it('mailSend refuses armed AND bound sword copies (fungible-only escrow), payload intact', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const sender = sim.addPlayer('warrior', 'Sender');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const sender = sim.addPlayer('swordman', 'Sender');
     sim.addPlayer('mage', 'Rex');
     const box = sim.entities.get(sim.postOffice.mailboxIds[0])!;
     const se = sim.ctx.entities.get(sender)!;
@@ -721,8 +721,8 @@ describe('mail/market: a commissioned equipment instance never mails or lists', 
   });
 
   it('marketList refuses armed AND bound copies with no escrow', () => {
-    const sim = new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
-    const pid = sim.addPlayer('warrior', 'Lister');
+    const sim = new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
+    const pid = sim.addPlayer('swordman', 'Lister');
     let merchant: { pos: { x: number; z: number } } | null = null;
     for (const e of sim.entities.values()) {
       if (e.templateId === 'the_merchant') merchant = e;
@@ -823,7 +823,7 @@ describe('live GameServer: commission craft, bound trade refusal, unbind over th
     id: number,
     name: string,
   ): ClientSession {
-    const session = server.join(fc.ws as never, id, id, name, 'warrior', null);
+    const session = server.join(fc.ws as never, id, id, name, 'swordman', null);
     if ('error' in session) throw new Error(session.error);
     session.blockListLoaded = true;
     return session;

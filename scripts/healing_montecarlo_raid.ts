@@ -3,7 +3,7 @@
 // claim, enterDungeon), normal AND heroic, across seeds, sweeping healer
 // count. Mechanics are PLAYED, not ignored (ported from nythraxis_matrix.ts):
 // Soul Rend marks stack, Deathless Rage ward stones get channeled, the
-// off-tank secures add waves, DPS focus the CC-able priest add first.
+// off-tank secures add waves, DPS focus the CC-able acolyte add first.
 //
 // Run: npx tsx scripts/healing_montecarlo_raid.ts [--runs N] [--quick]
 // Writes tmp/healing_mc/raid_report.json and prints the digest.
@@ -135,7 +135,7 @@ function livingAdds(sim: Sim): Entity[] {
 }
 
 function runRaid(difficulty: 'normal' | 'heroic', healerSpecs: Spec[], seed: number): RaidRun {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const specs: Spec[] = [
     TANK_SPEC,
     OFFTANK_SPEC,
@@ -227,7 +227,7 @@ function runRaid(difficulty: 'normal' | 'heroic', healerSpecs: Spec[], seed: num
     const tank = must(sim.entities.get(activeTankPid), `active tank ${activeTankPid}`);
     tankAliveSeconds += 1 / 20;
 
-    // Off-tank secures add waves; DPS focus the priest add (Malric) first so
+    // Off-tank secures add waves; DPS focus the acolyte add (Malric) first so
     // his escalating boss heal is answered the way a real raid answers it.
     const adds = livingAdds(sim);
     const otAlive = otPid !== activeTankPid && !sim.entities.get(otPid)?.dead;
@@ -319,7 +319,7 @@ function runRaid(difficulty: 'normal' | 'heroic', healerSpecs: Spec[], seed: num
         let priority = spec.healPriority ?? [];
         // Multi-target casts when the raid is broadly wounded.
         if (spec.cls === 'shaman' && wounded.length >= 2) priority = ['chain_heal', ...priority];
-        if (spec.cls === 'priest' && wounded.length >= 3)
+        if (spec.cls === 'acolyte' && wounded.length >= 3)
           priority = ['prayer_of_healing', ...priority];
         healTick(sim, hpid, target, spec, priority);
       }
@@ -400,7 +400,7 @@ function runRaid(difficulty: 'normal' | 'heroic', healerSpecs: Spec[], seed: num
 
 function main() {
   const startedAt = Date.now();
-  const twoHealers = [HEALER_SPECS[0], HEALER_SPECS[3]]; // holy priest + resto shaman
+  const twoHealers = [HEALER_SPECS[0], HEALER_SPECS[3]]; // holy acolyte + resto shaman
   const threeHealers = [HEALER_SPECS[0], HEALER_SPECS[3], HEALER_SPECS[2]]; // + resto druid
   const fourHealers = [...threeHealers, HEALER_SPECS[4]]; // + holy paladin
   const cells: { key: string; difficulty: 'normal' | 'heroic'; healers: Spec[] }[] = [

@@ -122,14 +122,14 @@ async function main() {
   });
   const page = await browser.newPage();
 
-  // ---- priest: procSurge (Searing Light), wardBloom (Inner Fire), echoBurst
-  await boot(page, 'priest', 'Fxpriest');
+  // ---- acolyte: procSurge (Searing Light), wardBloom (Inner Fire), echoBurst
+  await boot(page, 'acolyte', 'Fxpriest');
   await prep(page, {
     5: 'pri_r5_searing_light',
     14: 'pri_r14_greater_heal',
     17: 'pri_r17_inner_fire',
   });
-  if (!(await target(page))) throw new Error('no mob near priest spawn');
+  if (!(await target(page))) throw new Error('no mob near acolyte spawn');
   await zoomIn(page);
 
   // procSurge: three completed Smites, shoot the instant the charge aura lands.

@@ -11,6 +11,7 @@ import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Frost mage AoE half (owner design 2026-07-11): Frozen Orb, the drifting
 // Icicle generator (combat/frozen_orb.ts), and Blizzard, the ground channel
@@ -130,7 +131,7 @@ describe('Frozen Orb in combat', () => {
     const near = spawnDummy(sim, p, 4);
     face(p, near);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     const events = tickFor(sim, 0.2);
     const orb = events.filter(
@@ -155,7 +156,7 @@ describe('Frozen Orb in combat', () => {
     const prey = spawnDummy(sim, p, 10);
     face(p, prey);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     const orbState = () => (sim as any).ctx.frozenOrbs[0];
     // Reach the pulse radius: (10 - 6) / speed seconds of travel, plus slack.
@@ -190,7 +191,7 @@ describe('Frozen Orb in combat', () => {
     const prey = spawnDummy(sim, p, 3); // inside contact reach almost at once
     face(p, prey);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     tickFor(sim, 9); // past the 8s life while latched the whole way
     expect((sim as any).ctx.frozenOrbs).toHaveLength(0);
@@ -201,7 +202,7 @@ describe('Frozen Orb in combat', () => {
     const near = spawnDummy(sim, p, 4);
     face(p, near);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     const events = tickFor(sim, 1.5); // first pulse fires at ~1s
     const hits = damageEvents(events, 'Rimeglobe');
@@ -220,7 +221,7 @@ describe('Frozen Orb in combat', () => {
     const far = spawnDummy(sim, p, 14);
     face(p, far);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     // Orb starts at the caster (radius 6): 14yd away needs ~(14-6)/speed
     // seconds of travel before the pulse can touch the dummy.
@@ -236,7 +237,7 @@ describe('Frozen Orb in combat', () => {
     const near = spawnDummy(sim, p, 3);
     face(p, near);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('frozen_orb');
     let total = 0;
     for (let i = 0; i < 20 * 9; i++) {
@@ -258,7 +259,7 @@ describe('Frozen Orb in combat', () => {
       const near = spawnDummy(sim, p, 4);
       face(p, near);
       sim.drainEvents();
-      p.resource = p.maxResource;
+      fundCasts(p);
       sim.castAbility('frozen_orb');
       return damageEvents(tickFor(sim, 9), 'Rimeglobe').map((e) => e.amount);
     };
@@ -274,7 +275,7 @@ describe('Blizzard in combat', () => {
     const pack = [spawnDummy(sim, p, 10), spawnDummy(sim, p, 12), spawnDummy(sim, p, 11)];
     face(p, pack[0]);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('blizzard', undefined, { x: p.pos.x, z: p.pos.z + 11 });
     const events = tickFor(sim, 2 + 6.6); // the 2s cast, then the storm's life
     const hits = damageEvents(events, 'Blizzard');
@@ -293,7 +294,7 @@ describe('Blizzard in combat', () => {
     const pack = [spawnDummy(sim, p, 10), spawnDummy(sim, p, 12), spawnDummy(sim, p, 11)];
     face(p, pack[0]);
     sim.drainEvents();
-    p.resource = p.maxResource;
+    fundCasts(p);
     const orbCooldown = ABILITIES.frozen_orb.cooldown;
     p.cooldowns.set('frozen_orb', orbCooldown);
     sim.castAbility('blizzard', undefined, { x: p.pos.x, z: p.pos.z + 11 });
@@ -306,7 +307,7 @@ describe('Blizzard in combat', () => {
     // A second cast gets a FRESH budget (the per-cast reset).
     tickFor(sim, 2); // let Blizzard's own 8s cooldown clear
     p.cooldowns.set('frozen_orb', 20);
-    p.resource = p.maxResource;
+    fundCasts(p);
     p.gcdRemaining = 0;
     sim.castAbility('blizzard', undefined, { x: p.pos.x, z: p.pos.z + 11 });
     tickFor(sim, seconds);
@@ -319,7 +320,7 @@ describe('Blizzard in combat', () => {
       const { sim, p } = makeSim(2718);
       for (let i = 0; i < packSize; i++) spawnDummy(sim, p, 10 + i);
       sim.drainEvents();
-      p.resource = p.maxResource;
+      fundCasts(p);
       p.cooldowns.set('frozen_orb', ABILITIES.frozen_orb.cooldown);
       sim.castAbility('blizzard', undefined, { x: p.pos.x, z: p.pos.z + 11 });
       tickFor(sim, midChannel);

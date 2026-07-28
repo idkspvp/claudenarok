@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorText(events: SimEvent[], pid: number): string | undefined {
@@ -16,7 +16,7 @@ function errorText(events: SimEvent[], pid: number): string | undefined {
 describe('/stats command', () => {
   it('reports a self-only character sheet with the rage resource clause', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     const sent = sim.chat('/stats', a);
@@ -24,19 +24,21 @@ describe('/stats command', () => {
 
     const events = sim.tick();
     const text = errorText(events, a)!;
-    expect(text).toMatch(/^Level \d+ Warrior — HP \d+\/\d+, Rage \d+\/\d+\. AP \d+, Crit \d+\.\d%, Armor \d+\.$/);
+    expect(text).toMatch(
+      /^Level \d+ Swordman — HP \d+\/\d+, Rage \d+\/\d+\. AP \d+, Crit \d+\.\d%, Armor \d+\.$/,
+    );
     // self-only: no other player receives the readout
     expect(events.some((e) => e.type === 'error' && e.pid !== a)).toBe(false);
   });
 
-  it('uses the Energy clause for a rogue', () => {
+  it('uses the Energy clause for a thief', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('thief', 'Gimel');
     sim.tick();
 
     sim.chat('/stats', a);
     const text = errorText(sim.tick(), a)!;
-    expect(text).toContain('Rogue');
+    expect(text).toContain('Thief');
     expect(text).toMatch(/Energy \d+\/\d+/);
   });
 

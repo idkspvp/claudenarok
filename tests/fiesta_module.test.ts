@@ -17,7 +17,7 @@ import * as fiestaBots from '../src/sim/social/fiesta_bots';
 type AnySim = Sim & Record<string, any>;
 
 function makeWorld(): AnySim {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
 describe('fiesta module: respawn-time growth', () => {
@@ -47,7 +47,7 @@ describe('fiesta module: mergeAugmentMods', () => {
     const aug = AUGMENTS.find((a) => (a.effect.stats?.crit ?? 0) > 0)!;
     expect(aug).toBeTruthy();
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'A');
+    const pid = sim.addPlayer('swordman', 'A');
     const base = sim.players.get(pid)!.mods;
     const baseCrit = base.stats.crit;
     const merged = fiesta.mergeAugmentMods(base, [aug.id]);
@@ -77,7 +77,7 @@ describe('fiesta module: augment application preserves hp fraction', () => {
     const hpAug = AUGMENTS.find((a) => (a.effect.stats?.maxHpPct ?? 0) > 0)!;
     expect(hpAug).toBeTruthy();
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'A');
+    const pid = sim.addPlayer('swordman', 'A');
     const meta = sim.players.get(pid)!;
     const e = sim.entities.get(pid)!;
     e.hp = Math.round(e.maxHp * 0.5);
@@ -114,7 +114,7 @@ describe('fiesta module: standardize / restore round-trip', () => {
 
 describe('fiesta_bots module: offline harness entry', () => {
   it('spawns three bots through the module entry and tears them down', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior' }) as AnySim;
+    const sim = new Sim({ seed: 7, playerClass: 'swordman' }) as AnySim;
     expect(fiestaBots.startFiestaPractice(sim)).toBe(true);
     expect(sim.fiestaBotPids.length).toBe(3);
     expect(fiestaBots.fiestaPracticeActive(sim)).toBe(true);

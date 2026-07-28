@@ -13,7 +13,7 @@ import { Sim } from '../src/sim/sim';
 // such an old row, and prove the reload does not throw and the defaults apply.
 
 function makeSim(): Sim {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 
 describe('character state JSONB back-compat', () => {
@@ -53,10 +53,10 @@ describe('character state JSONB back-compat', () => {
     delete stripped.bank;
 
     // Loading the stripped row must not throw, and the `??` defaults apply.
-    const sim2 = new Sim({ seed: 1, playerClass: 'warrior' });
+    const sim2 = new Sim({ seed: 1, playerClass: 'swordman' });
     let reloadedPid = -1;
     expect(() => {
-      reloadedPid = sim2.addPlayer('warrior', 'Reloaded', {
+      reloadedPid = sim2.addPlayer('swordman', 'Reloaded', {
         state: stripped as unknown as CharacterState,
       });
     }).not.toThrow();

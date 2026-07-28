@@ -225,11 +225,11 @@ export function localizeAdminError(message: string): string {
 // raw PlayerClass enum value (e.g. "mage"); render the localized name to match the
 // game client. Unknown ids fall back to the raw id.
 const CLASS_LABEL_IDS = new Set([
-  'warrior',
+  'swordman',
   'paladin',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'shaman',
   'mage',
   'warlock',

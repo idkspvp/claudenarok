@@ -3,7 +3,7 @@
 //
 //   -> {"cmd":"info"}
 //   <- {"obs_size":...,"num_actions":...,"actions":[...]}  (sizes are content-dependent; query, don't hardcode)
-//   -> {"cmd":"reset","seed":123,"player_class":"warrior","player_level":20,"config":{...}}
+//   -> {"cmd":"reset","seed":123,"player_class":"swordman","player_level":20,"config":{...}}
 //   <- {"obs":[...],"info":{...}}
 //   -> {"cmd":"step","action":4}
 //   <- {"obs":[...],"reward":0.01,"terminated":false,"truncated":false,"info":{...}}
@@ -70,7 +70,7 @@ const DEFAULT_CONFIG: EnvConfig = {
 class Env {
   sim: Sim | null = null;
   config: EnvConfig = DEFAULT_CONFIG;
-  playerClass: PlayerClass = 'warrior';
+  playerClass: PlayerClass = 'swordman';
   stepCount = 0;
   prev: RewardCounters | null = null;
 
@@ -150,7 +150,7 @@ class Env {
 
 function bench(): void {
   const env = new Env();
-  env.reset(1, 'warrior', {});
+  env.reset(1, 'swordman', {});
   const targetSeconds = 20;
   let steps = 0;
   // exercise a realistic action mix
@@ -160,7 +160,7 @@ function bench(): void {
     const a = steps % 11 === 0 ? 8 : steps % 7 === 0 ? 9 : steps % 5 === 0 ? 10 : 1;
     const res = env.step(a);
     steps++;
-    if (res.terminated || res.truncated) env.reset(steps, 'warrior', {});
+    if (res.terminated || res.truncated) env.reset(steps, 'swordman', {});
     if (steps % 100 === 0) elapsed = Number(process.hrtime.bigint() - start) / 1e9;
   }
   elapsed = Number(process.hrtime.bigint() - start) / 1e9;
@@ -201,7 +201,7 @@ function serve(): void {
           break;
         case 'reset':
           {
-            const playerClass = validatePlayerClass(msg.player_class ?? 'warrior');
+            const playerClass = validatePlayerClass(msg.player_class ?? 'swordman');
             if (playerClass === null) {
               send({ error: `invalid player_class: expected one of ${ALL_CLASSES.join(', ')}` });
               break;

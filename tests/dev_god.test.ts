@@ -5,7 +5,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
 function godSim(devCommands = true): { sim: Sim; pid: number } {
-  const sim = new Sim({ seed: 3, playerClass: 'warrior', autoEquip: true, devCommands });
+  const sim = new Sim({ seed: 3, playerClass: 'swordman', autoEquip: true, devCommands });
   sim.setPlayerLevel(20);
   return { sim, pid: sim.playerId };
 }

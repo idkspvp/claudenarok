@@ -27,7 +27,7 @@ function fakeMeta() {
 }
 
 function makeSim(seed = 7) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true, noPlayer: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true, noPlayer: true });
 }
 
 function findBoss(sim: Sim): Entity | undefined {
@@ -92,7 +92,7 @@ describe('world boss scheduler', () => {
     // The live server opts in: Thunzharr is up as soon as the realm boots.
     const atBoot = new Sim({
       seed: 7,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       autoEquip: true,
       noPlayer: true,
       worldBossAtBoot: true,
@@ -161,7 +161,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('barks the engage yell exactly once per pull, to nearby players only', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ada');
+    const pid = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     engageBoss(sim, pid, boss);
     let yells = chatYells(sim.tick()).filter((e) => /You wake the mountain/.test((e as any).text));
@@ -176,7 +176,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('a player-owned pet pull triggers the engage yell too', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('hunter', 'Ada');
+    const pid = sim.addPlayer('archer', 'Ada');
     const { boss } = spawnBossNow(sim);
     const p = (sim as any).entities.get(pid) as Entity;
     p.pos = { ...boss.pos };
@@ -200,7 +200,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('hardcasts Stormcall on a visible cast bar, then novas players in range', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ada');
+    const pid = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     engageBoss(sim, pid, boss);
     const p = (sim as any).entities.get(pid) as Entity;
@@ -242,7 +242,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('barks the enrage yell when the last-fifth enrage turns on', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ada');
+    const pid = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     engageBoss(sim, pid, boss);
     sim.tick();
@@ -255,7 +255,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('barks the summon yell as each stormling wave rises', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ada');
+    const pid = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     engageBoss(sim, pid, boss);
     sim.tick();
@@ -268,7 +268,7 @@ describe('world boss raid-tier combat (melee, Stormcall hardcast, yells)', () =>
 
   it('collapses the summoned stormlings the moment the boss dies', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Ada');
+    const pid = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     const p = engageBoss(sim, pid, boss);
     sim.tick();
@@ -302,7 +302,7 @@ describe('world boss personal loot', () => {
   it('drops an independent personal slot for every contributor', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const p2 = sim.addPlayer('mage', 'Bru');
     const { boss } = spawnBossNow(sim);
     killWith(sim, boss, [p1, p2]);
@@ -335,7 +335,7 @@ describe('world boss personal loot', () => {
   it('gives a contributor who LOOTED a boss no loot from a second boss the same day', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const first = spawnBossNow(sim);
     killWith(sim, first.boss, [p1]);
     expect((first.boss.loot?.items ?? []).length).toBeGreaterThan(0);
@@ -354,7 +354,7 @@ describe('world boss personal loot', () => {
   it('keeps the daily for a contributor who never looted the corpse', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const first = spawnBossNow(sim);
     killWith(sim, first.boss, [p1]);
     expect((first.boss.loot?.items ?? []).length).toBeGreaterThan(0);
@@ -375,9 +375,9 @@ describe('world boss personal loot', () => {
       const sim = makeSim(seed);
       sim.utcDay = DAY;
       const pids = [
-        sim.addPlayer('warrior', 'Ada'),
+        sim.addPlayer('swordman', 'Ada'),
         sim.addPlayer('mage', 'Bru'),
-        sim.addPlayer('rogue', 'Cyd'),
+        sim.addPlayer('thief', 'Cyd'),
       ];
       const { boss } = spawnBossNow(sim);
       killWith(sim, boss, pids);
@@ -400,13 +400,13 @@ describe('world boss personal loot', () => {
     const RESET = 9_999_999_999;
     const sim = new Sim({
       seed: 7,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       autoEquip: true,
       noPlayer: true,
       lockoutNowMs: () => 1_000,
       raidResetMs: () => RESET,
     } as any);
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     killWith(sim, boss, [p1]);
     const meta = (sim as any).players.get(p1);
@@ -426,8 +426,8 @@ describe('world boss personal loot', () => {
     const run = () => {
       const sim = makeSim(99);
       sim.utcDay = DAY;
-      const p1 = sim.addPlayer('warrior', 'Ada');
-      const p2 = sim.addPlayer('rogue', 'Bru');
+      const p1 = sim.addPlayer('swordman', 'Ada');
+      const p2 = sim.addPlayer('thief', 'Bru');
       const { boss } = spawnBossNow(sim);
       killWith(sim, boss, [p1, p2]);
       return JSON.stringify(boss.loot?.items ?? []);
@@ -440,7 +440,7 @@ describe('world boss loot roster survives contributor death and grouping', () =>
   it('keeps a contributor who DIED to the boss on the loot roster (not just the hate table)', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const p2 = sim.addPlayer('mage', 'Bru');
     const { boss } = spawnBossNow(sim);
     const e1 = (sim as any).entities.get(p1) as Entity;
@@ -471,7 +471,7 @@ describe('world boss loot roster survives contributor death and grouping', () =>
   it('clears the damager roster on a full evade-home reset: a wiped pull ends loot rights', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'WipedRaiderA');
+    const p1 = sim.addPlayer('swordman', 'WipedRaiderA');
     const p2 = sim.addPlayer('mage', 'FreshRaiderB');
     const { boss } = spawnBossNow(sim);
     const e1 = (sim as any).entities.get(p1) as Entity;
@@ -498,7 +498,7 @@ describe('world boss loot roster survives contributor death and grouping', () =>
   it('clears the damager roster on respawn: loot rights never carry across lives', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     const e1 = (sim as any).entities.get(p1) as Entity;
     (sim as any).dealDamage(e1, boss, 999_999, false, 'physical', 'Finisher', 'hit', true);
@@ -514,7 +514,7 @@ describe('world boss loot roster survives contributor death and grouping', () =>
 
   it('lets a slain world boss corpse linger far longer than a normal corpse', () => {
     const sim = makeSim();
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const { boss } = spawnBossNow(sim);
     const e1 = (sim as any).entities.get(p1) as Entity;
     (sim as any).dealDamage(e1, boss, 999_999, false, 'physical', 'Finisher', 'hit', true);
@@ -527,7 +527,7 @@ describe('world boss loot roster survives contributor death and grouping', () =>
   it('never routes a world-boss epic through a party need/greed roll (personal loot only)', () => {
     const sim = makeSim();
     sim.utcDay = DAY;
-    const p1 = sim.addPlayer('warrior', 'Ada');
+    const p1 = sim.addPlayer('swordman', 'Ada');
     const p2 = sim.addPlayer('mage', 'Bru');
     // Party them up: the default party loot strategy rolls premium (epic) items as
     // need/greed. If a boss epic ever reached the shared path, this is where it would.
@@ -581,7 +581,7 @@ describe('world boss anti-kite snare (Howling Gale)', () => {
 
   it('outruns a player on foot: boss move speed exceeds base run speed', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('hunter', 'Runner');
+    const pid = sim.addPlayer('archer', 'Runner');
     const { boss } = spawnBossNow(sim);
     const p = (sim as any).entities.get(pid) as Entity;
     expect(boss.moveSpeed).toBeGreaterThan(p.moveSpeed);
@@ -589,7 +589,7 @@ describe('world boss anti-kite snare (Howling Gale)', () => {
 
   it('snares a ranged kiter it is chasing, cutting move speed to 70% (not kiteable)', () => {
     const sim = makeSim();
-    const kiter = sim.addPlayer('hunter', 'Kiter');
+    const kiter = sim.addPlayer('archer', 'Kiter');
     const { boss } = spawnBossNow(sim);
     // 22yd: beyond the boss's ~17yd melee reach (so it is in the CHASE state, the kite
     // case none of the other pulses fire in), inside the 40yd snare radius.
@@ -606,8 +606,8 @@ describe('world boss anti-kite snare (Howling Gale)', () => {
 
   it('also fires from the attack state and only snares players inside the radius', () => {
     const sim = makeSim();
-    const near = sim.addPlayer('hunter', 'Near');
-    const far = sim.addPlayer('hunter', 'Runner');
+    const near = sim.addPlayer('archer', 'Near');
+    const far = sim.addPlayer('archer', 'Runner');
     const { boss } = spawnBossNow(sim);
     const pNear = place(sim, boss, near, 22); // inside the 40yd snare
     const pFar = place(sim, boss, far, 200); // well beyond the 40yd radius
@@ -620,7 +620,7 @@ describe('world boss anti-kite snare (Howling Gale)', () => {
 
   it('does not re-apply the snare on the next engaged tick (once-per-cadence guard)', () => {
     const sim = makeSim();
-    const kiter = sim.addPlayer('hunter', 'Kiter');
+    const kiter = sim.addPlayer('archer', 'Kiter');
     const { boss } = spawnBossNow(sim);
     const p = place(sim, boss, kiter, 22);
     // First pulse fires now; the cadence timer resets to `every` (5s), far past a tick.
@@ -696,13 +696,13 @@ describe('world boss participant HP scaling', () => {
     expect(boss.hp).toBe(40_000);
 
     // Five participants: 40k + 5k * (5 - 1) = 60k.
-    for (let i = 0; i < 5; i++) engage(sim, boss, sim.addPlayer('warrior', `P${i}`));
+    for (let i = 0; i < 5; i++) engage(sim, boss, sim.addPlayer('swordman', `P${i}`));
     sim.tick();
     expect(boss.maxHp).toBe(60_000);
 
     // A very large raid still tops out at the 1M cap (40k + 5k * (n - 1) hits 1M at
     // n = 193 participants) so it cannot grow without bound.
-    for (let i = 5; i < 220; i++) engage(sim, boss, sim.addPlayer('warrior', `Q${i}`));
+    for (let i = 5; i < 220; i++) engage(sim, boss, sim.addPlayer('swordman', `Q${i}`));
     sim.tick();
     expect(boss.maxHp).toBe(1_000_000);
   });
@@ -710,7 +710,7 @@ describe('world boss participant HP scaling', () => {
   it('never shrinks the grown pool when participants leave', () => {
     const sim = makeSim();
     const { boss } = spawnBossNow(sim);
-    for (let i = 0; i < 5; i++) engage(sim, boss, sim.addPlayer('warrior', `P${i}`));
+    for (let i = 0; i < 5; i++) engage(sim, boss, sim.addPlayer('swordman', `P${i}`));
     sim.tick();
     expect(boss.maxHp).toBe(60_000);
     // The whole raid drops off the hate table: the boss keeps its enlarged pool.
@@ -736,8 +736,8 @@ describe('world boss is imposing and loud', () => {
 
   it('bellows its engage yell far past the default yell range', () => {
     const sim = makeSim();
-    const near = sim.addPlayer('warrior', 'Tank');
-    const far = sim.addPlayer('warrior', 'Watcher');
+    const near = sim.addPlayer('swordman', 'Tank');
+    const far = sim.addPlayer('swordman', 'Watcher');
     const { boss } = spawnBossNow(sim);
     const pn = (sim as any).entities.get(near) as Entity;
     pn.maxHp = pn.hp = 1_000_000;
@@ -756,9 +756,9 @@ describe('world boss is imposing and loud', () => {
 
   it('bellows periodic battle cries across the zone, but not past the loud range', () => {
     const sim = makeSim();
-    const tank = sim.addPlayer('warrior', 'Tank');
-    const far = sim.addPlayer('warrior', 'Watcher');
-    const tooFar = sim.addPlayer('warrior', 'TooFar');
+    const tank = sim.addPlayer('swordman', 'Tank');
+    const far = sim.addPlayer('swordman', 'Watcher');
+    const tooFar = sim.addPlayer('swordman', 'TooFar');
     const { boss } = spawnBossNow(sim);
     const pt = (sim as any).entities.get(tank) as Entity;
     pt.maxHp = pt.hp = 1_000_000;
@@ -793,7 +793,7 @@ describe('world boss keeps a quiet combat log (quietMechanics)', () => {
 
   it('fires its mechanics without ever barking "unleashes X" or "becomes enraged" to the log', () => {
     const sim = makeSim();
-    const tank = sim.addPlayer('warrior', 'Tank');
+    const tank = sim.addPlayer('swordman', 'Tank');
     const { boss } = spawnBossNow(sim);
     const p = (sim as any).entities.get(tank) as Entity;
     p.gm = true; // survive the raid-tier melee so the pull runs for real seconds
@@ -877,7 +877,7 @@ describe('world boss pathing (phases through obstacles)', () => {
 describe('world boss summons erupt centered on him and engage immediately', () => {
   it('spawns adds on the boss, aggroed on his target, anchored where they erupted', () => {
     const sim = makeSim();
-    const tank = sim.addPlayer('warrior', 'Tank');
+    const tank = sim.addPlayer('swordman', 'Tank');
     const { boss } = spawnBossNow(sim);
     const pt = (sim as any).entities.get(tank) as Entity;
     pt.maxHp = pt.hp = 1_000_000;
@@ -907,7 +907,7 @@ describe('world boss summons erupt centered on him and engage immediately', () =
 
   it('adds hatched from a KITED boss engage instead of leashing home instantly', () => {
     const sim = makeSim();
-    const tank = sim.addPlayer('warrior', 'Tank');
+    const tank = sim.addPlayer('swordman', 'Tank');
     const { boss } = spawnBossNow(sim);
     const pt = (sim as any).entities.get(tank) as Entity;
     pt.maxHp = pt.hp = 1_000_000;

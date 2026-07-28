@@ -11,6 +11,7 @@ import {
   TEMPORAL_HOURGLASS_DURATION,
   TEMPORAL_HOURGLASS_HEAL_FRACTION,
 } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 const FLAT_X = 700;
 
@@ -25,7 +26,7 @@ function makeChronomancer(): { sim: Sim; mage: Entity } {
   const mage = sim.player;
   mage.pos = sim.groundPos(FLAT_X, 0);
   mage.prevPos = { ...mage.pos };
-  mage.resource = mage.maxResource;
+  raisePool(mage);
   (sim as unknown as { rebucket(e: Entity): void }).rebucket(mage);
   return { sim, mage };
 }
@@ -40,7 +41,7 @@ function addHostile(sim: Sim, x: number, z = 0, template = MOBS.forest_wolf): En
 }
 
 function addAlly(sim: Sim, mage: Entity, x: number, grouped = true): Entity {
-  const allyId = sim.addPlayer('warrior', `Ally-${x}`);
+  const allyId = sim.addPlayer('swordman', `Ally-${x}`);
   const ally = sim.entities.get(allyId);
   if (!ally) throw new Error('ally missing');
   ally.pos = sim.groundPos(x, 0);
@@ -55,7 +56,7 @@ function addAlly(sim: Sim, mage: Entity, x: number, grouped = true): Entity {
 
 function castAt(sim: Sim, mage: Entity, x: number, z = 0): void {
   mage.gcdRemaining = 0;
-  mage.resource = mage.maxResource;
+  raisePool(mage);
   mage.cooldowns.delete('temporal_hourglass');
   sim.castAbility('temporal_hourglass', mage.id, { x, z });
 }

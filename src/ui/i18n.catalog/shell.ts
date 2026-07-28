@@ -241,15 +241,11 @@ export const shellStrings = {
         rage: 'Rage',
       },
       roles: {
-        warrior: 'Tank / Melee DPS',
-        paladin: 'Healer / Tank / Melee DPS',
-        hunter: 'Ranged DPS',
-        rogue: 'Melee DPS',
-        priest: 'Healer / Ranged DPS',
-        shaman: 'Healer / Melee or Ranged DPS',
+        swordman: 'Tank / Melee DPS',
+        archer: 'Ranged DPS',
+        thief: 'Melee DPS',
+        acolyte: 'Healer / Ranged DPS',
         mage: 'Ranged DPS',
-        warlock: 'Ranged DPS',
-        druid: 'Tank / Healer / Melee or Ranged DPS',
       },
       armor: {
         chainLeatherCloth: 'Chainmail, Leather, Cloth',
@@ -265,23 +261,15 @@ export const shellStrings = {
         macesAxes: 'Maces, Axes',
       },
       lore: {
-        warrior:
-          'Warriors are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.',
-        paladin:
-          'Paladins are holy crusaders who support allies with blessings, heal wounds with Mending Light, and protect the weak in heavy armor.',
-        hunter:
-          'Hunters are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.',
-        rogue:
-          'Rogues are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.',
-        priest:
-          'Priests call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
-        shaman:
-          'Shaman command the elements, imbuing weapons with power, shocking enemies with lightning, and restoring allies.',
+        swordman:
+          'Swordmen are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.',
+        archer:
+          'Archers are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.',
+        thief:
+          'Thieves are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.',
+        acolyte:
+          'Acolytes call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
         mage: 'Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.',
-        warlock:
-          'Warlocks summon demons, apply curses and damage-over-time magic, and leech life from enemies to endure.',
-        druid:
-          'Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defense or damage.',
       },
       aria: 'Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.',
       statBarAria: '{stat}: {value} out of 25',
@@ -441,15 +429,11 @@ export const shellStrings = {
         rage: 'Ira',
       },
       roles: {
-        warrior: 'Tanque / DPS cuerpo a cuerpo',
-        paladin: 'Sanador / Tanque / DPS cuerpo a cuerpo',
-        hunter: 'DPS a distancia',
-        rogue: 'DPS cuerpo a cuerpo',
-        priest: 'Sanador / DPS a distancia',
-        shaman: 'Sanador / DPS cuerpo a cuerpo o a distancia',
+        swordman: 'Tanque / DPS cuerpo a cuerpo',
+        archer: 'DPS a distancia',
+        thief: 'DPS cuerpo a cuerpo',
+        acolyte: 'Sanador / DPS a distancia',
         mage: 'DPS a distancia',
-        warlock: 'DPS a distancia',
-        druid: 'Tanque / Sanador / DPS cuerpo a cuerpo o a distancia',
       },
       armor: {
         chainLeatherCloth: 'Malla, cuero, tela',
@@ -465,23 +449,15 @@ export const shellStrings = {
         macesAxes: 'Mazas, hachas',
       },
       lore: {
-        warrior:
+        swordman:
           'Los guerreros son combatientes curtidos que generan ira al infligir o recibir daño. Absorben golpes duros o aplastan enemigos con armas pesadas.',
-        paladin:
-          'Los paladines son cruzados sagrados que apoyan con bendiciones, curan con Luz Sagrada y protegen a los débiles con armadura pesada.',
-        hunter:
+        archer:
           'Los cazadores dominan la naturaleza, rastrean enemigos desde lejos con arcos o armas de fuego y controlan el campo con trampas.',
-        rogue:
+        thief:
           'Los pícaros son asesinos sigilosos que gastan energía y puntos de combo en puñaladas y remates desde las sombras.',
-        priest:
+        acolyte:
           'Los sacerdotes invocan la Luz Sagrada para sanar y proteger aliados, mientras la magia de las Sombras drena la vida enemiga.',
-        shaman:
-          'Los chamanes ordenan los elementos, imbuyen sus armas, golpean con relámpagos y restauran a sus aliados.',
         mage: 'Los magos moldean Fuego, Escarcha y magia Arcana para destruir enemigos, conjurar agua y congelar amenazas.',
-        warlock:
-          'Los brujos invocan demonios, lanzan maldiciones y daño prolongado, y drenan vida para resistir.',
-        druid:
-          'Los druidas canalizan la naturaleza, curan heridas, enredan enemigos y cambian de forma animal para defender o atacar.',
       },
       aria: 'Detalles de clase para {className}: rol {role}. Atributos iniciales: Fuerza {str}, Agilidad {agi}, Aguante {sta}, Intelecto {int}, Espíritu {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -644,15 +620,11 @@ export const shellStrings = {
         rage: 'Ira',
       },
       roles: {
-        warrior: 'Tanque / DPS cuerpo a cuerpo',
-        paladin: 'Sanador / Tanque / DPS cuerpo a cuerpo',
-        hunter: 'DPS a distancia',
-        rogue: 'DPS cuerpo a cuerpo',
-        priest: 'Sanador / DPS a distancia',
-        shaman: 'Sanador / DPS cuerpo a cuerpo o a distancia',
+        swordman: 'Tanque / DPS cuerpo a cuerpo',
+        archer: 'DPS a distancia',
+        thief: 'DPS cuerpo a cuerpo',
+        acolyte: 'Sanador / DPS a distancia',
         mage: 'DPS a distancia',
-        warlock: 'DPS a distancia',
-        druid: 'Tanque / Sanador / DPS cuerpo a cuerpo o a distancia',
       },
       armor: {
         chainLeatherCloth: 'Malla, cuero, tela',
@@ -668,23 +640,15 @@ export const shellStrings = {
         macesAxes: 'Mazas, hachas',
       },
       lore: {
-        warrior:
+        swordman:
           'Los guerreros son combatientes curtidos que generan ira al infligir o recibir daño. Absorben grandes golpes o aplastan enemigos con armas pesadas.',
-        paladin:
-          'Los paladines son cruzados sagrados que apoyan con bendiciones, curan con Luz Sagrada y protegen a los débiles con armadura pesada.',
-        hunter:
+        archer:
           'Los cazadores dominan lo salvaje, rastrean enemigos desde lejos con arcos o armas de fuego y controlan el campo con trampas.',
-        rogue:
+        thief:
           'Los pícaros son asesinos sigilosos que gastan energía y puntos de combo en puñaladas y golpes finales desde las sombras.',
-        priest:
+        acolyte:
           'Los sacerdotes invocan la Luz Sagrada para sanar y proteger aliados, mientras la magia de las Sombras drena la vida enemiga.',
-        shaman:
-          'Los chamanes dominan los elementos, imbuyen armas con poder, golpean con relámpagos y restauran a sus aliados.',
         mage: 'Los magos moldean Fuego, Escarcha y magia Arcana para destruir enemigos, conjurar agua y congelar amenazas.',
-        warlock:
-          'Los brujos invocan demonios, lanzan maldiciones y daño en el tiempo, y drenan vida para resistir.',
-        druid:
-          'Los druidas canalizan la naturaleza, curan heridas, enredan enemigos y cambian a formas animales para defender o dañar.',
       },
       aria: 'Detalles de clase para {className}: rol {role}. Atributos iniciales: Fuerza {str}, Agilidad {agi}, Aguante {sta}, Intelecto {int}, Espíritu {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -848,15 +812,11 @@ export const shellStrings = {
         rage: 'Rage',
       },
       roles: {
-        warrior: 'Tank / DPS mêlée',
-        paladin: 'Soigneur / Tank / DPS mêlée',
-        hunter: 'DPS à distance',
-        rogue: 'DPS mêlée',
-        priest: 'Soigneur / DPS à distance',
-        shaman: 'Soigneur / DPS mêlée ou distance',
+        swordman: 'Tank / DPS mêlée',
+        archer: 'DPS à distance',
+        thief: 'DPS mêlée',
+        acolyte: 'Soigneur / DPS à distance',
         mage: 'DPS à distance',
-        warlock: 'DPS à distance',
-        druid: 'Tank / Soigneur / DPS mêlée ou distance',
       },
       armor: {
         chainLeatherCloth: 'Mailles, cuir, tissu',
@@ -872,23 +832,15 @@ export const shellStrings = {
         macesAxes: 'Masses, haches',
       },
       lore: {
-        warrior:
+        swordman:
           'Les guerriers sont des combattants aguerris qui gagnent de la rage en infligeant ou subissant des dégâts. Ils encaissent les coups ou écrasent leurs ennemis.',
-        paladin:
-          'Les paladins sont des croisés sacrés qui soutiennent par des bénédictions, soignent avec la Lumière sacrée et protègent les faibles.',
-        hunter:
+        archer:
           'Les chasseurs maîtrisent les terres sauvages, traquent à distance avec arcs ou armes à feu et contrôlent le terrain avec des pièges.',
-        rogue:
+        thief:
           'Les voleurs sont des assassins furtifs qui dépensent énergie et points de combo pour frapper depuis les ombres.',
-        priest:
+        acolyte:
           "Les prêtres invoquent la Lumière sacrée pour soigner et protéger, tandis que l'Ombre draine la vie ennemie.",
-        shaman:
-          'Les chamans commandent les éléments, imprègnent leurs armes, foudroient leurs ennemis et restaurent leurs alliés.',
         mage: "Les mages plient le Feu, le Givre et l'Arcane pour détruire, conjurer de l'eau et figer les menaces.",
-        warlock:
-          'Les démonistes invoquent des démons, lancent malédictions et dégâts sur la durée, puis drainent la vie pour tenir.',
-        druid:
-          'Les druides canalisent la nature, soignent, entravent les ennemis et prennent des formes animales pour défendre ou attaquer.',
       },
       aria: 'Détails de classe pour {className}: rôle {role}. Caractéristiques initiales: Force {str}, Agilité {agi}, Endurance {sta}, Intelligence {int}, Esprit {spi}.',
       statBarAria: '{stat}: {value} sur 25',
@@ -1052,15 +1004,11 @@ export const shellStrings = {
         rage: 'Rage',
       },
       roles: {
-        warrior: 'Tank / DPS mêlée',
-        paladin: 'Soigneur / Tank / DPS mêlée',
-        hunter: 'DPS à distance',
-        rogue: 'DPS mêlée',
-        priest: 'Soigneur / DPS à distance',
-        shaman: 'Soigneur / DPS mêlée ou distance',
+        swordman: 'Tank / DPS mêlée',
+        archer: 'DPS à distance',
+        thief: 'DPS mêlée',
+        acolyte: 'Soigneur / DPS à distance',
         mage: 'DPS à distance',
-        warlock: 'DPS à distance',
-        druid: 'Tank / Soigneur / DPS mêlée ou distance',
       },
       armor: {
         chainLeatherCloth: 'Mailles, cuir, tissu',
@@ -1076,23 +1024,15 @@ export const shellStrings = {
         macesAxes: 'Masses, haches',
       },
       lore: {
-        warrior:
+        swordman:
           'Les guerriers sont des combattants endurcis qui gagnent de la rage en infligeant ou subissant des dégâts. Ils encaissent ou écrasent leurs ennemis.',
-        paladin:
-          'Les paladins sont des croisés sacrés qui aident par des bénédictions, soignent avec la Lumière sacrée et protègent les plus faibles.',
-        hunter:
+        archer:
           'Les chasseurs maîtrisent la nature sauvage, traquent de loin avec arcs ou armes à feu et contrôlent le terrain avec des pièges.',
-        rogue:
+        thief:
           'Les voleurs sont des assassins furtifs qui dépensent énergie et points de combo pour frapper depuis les ombres.',
-        priest:
+        acolyte:
           "Les prêtres invoquent la Lumière sacrée pour soigner et protéger, tandis que l'Ombre draine la vie ennemie.",
-        shaman:
-          'Les chamans commandent les éléments, imprègnent leurs armes, frappent avec la foudre et restaurent leurs alliés.',
         mage: "Les mages manipulent Feu, Givre et Arcane pour détruire, conjurer de l'eau et figer les menaces.",
-        warlock:
-          'Les démonistes invoquent des démons, posent malédictions et dégâts prolongés, puis drainent la vie pour survivre.',
-        druid:
-          'Les druides canalisent la nature, guérissent, entravent les ennemis et prennent des formes animales pour défendre ou attaquer.',
       },
       aria: 'Détails de classe pour {className}: rôle {role}. Caractéristiques de départ: Force {str}, Agilité {agi}, Endurance {sta}, Intelligence {int}, Esprit {spi}.',
       statBarAria: '{stat}: {value} sur 25',
@@ -1268,15 +1208,11 @@ export const shellStrings = {
         rage: 'Rage',
       },
       roles: {
-        warrior: 'Tank / Melee DPS',
-        paladin: 'Healer / Tank / Melee DPS',
-        hunter: 'Ranged DPS',
-        rogue: 'Melee DPS',
-        priest: 'Healer / Ranged DPS',
-        shaman: 'Healer / Melee or Ranged DPS',
+        swordman: 'Tank / Melee DPS',
+        archer: 'Ranged DPS',
+        thief: 'Melee DPS',
+        acolyte: 'Healer / Ranged DPS',
         mage: 'Ranged DPS',
-        warlock: 'Ranged DPS',
-        druid: 'Tank / Healer / Melee or Ranged DPS',
       },
       armor: {
         chainLeatherCloth: 'Chainmail, Leather, Cloth',
@@ -1292,23 +1228,15 @@ export const shellStrings = {
         macesAxes: 'Maces, Axes',
       },
       lore: {
-        warrior:
+        swordman:
           'Warriors are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.',
-        paladin:
-          'Paladins are holy crusaders who support allies with blessings, heal wounds with Holy Light, and protect the weak in heavy armour.',
-        hunter:
+        archer:
           'Hunters are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.',
-        rogue:
+        thief:
           'Rogues are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.',
-        priest:
+        acolyte:
           'Priests call on Holy Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
-        shaman:
-          'Shaman command the elements, imbuing weapons with power, shocking enemies with lightning, and restoring allies.',
         mage: 'Mages bend Fire, Frost, and Arcane power to destroy enemies, conjure water, and freeze threats in place.',
-        warlock:
-          'Warlocks summon demons, apply curses and damage-over-time magic, and drain life from enemies to endure.',
-        druid:
-          'Druids channel nature, healing wounds, entangling foes, and shifting into animal forms for defence or damage.',
       },
       aria: 'Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.',
       statBarAria: '{stat}: {value} out of 25',
@@ -1470,15 +1398,11 @@ export const shellStrings = {
         rage: 'Rabbia',
       },
       roles: {
-        warrior: 'Tank / DPS da mischia',
-        paladin: 'Guaritore / Tank / DPS da mischia',
-        hunter: 'DPS a distanza',
-        rogue: 'DPS da mischia',
-        priest: 'Guaritore / DPS a distanza',
-        shaman: 'Guaritore / DPS da mischia o a distanza',
+        swordman: 'Tank / DPS da mischia',
+        archer: 'DPS a distanza',
+        thief: 'DPS da mischia',
+        acolyte: 'Guaritore / DPS a distanza',
         mage: 'DPS a distanza',
-        warlock: 'DPS a distanza',
-        druid: 'Tank / Guaritore / DPS da mischia o a distanza',
       },
       armor: {
         chainLeatherCloth: 'Maglia, cuoio, stoffa',
@@ -1494,23 +1418,15 @@ export const shellStrings = {
         macesAxes: 'Mazze, asce',
       },
       lore: {
-        warrior:
+        swordman:
           'I guerrieri sono combattenti temprati che accumulano rabbia infliggendo o subendo danni. Incassano colpi pesanti o schiacciano i nemici.',
-        paladin:
-          'I paladini sono crociati sacri che aiutano con benedizioni, curano con Luce Sacra e proteggono i deboli con armature robuste.',
-        hunter:
+        archer:
           'I cacciatori dominano le terre selvagge, seguono i nemici da lontano con archi o armi da fuoco e controllano il campo con trappole.',
-        rogue:
+        thief:
           'I ladri sono assassini furtivi che spendono energia e punti combo per colpire dalle ombre.',
-        priest:
+        acolyte:
           "I sacerdoti invocano la Luce Sacra per curare e proteggere, mentre la magia d'Ombra prosciuga la vita nemica.",
-        shaman:
-          'Gli sciamani comandano gli elementi, infondono potere nelle armi, colpiscono con fulmini e curano gli alleati.',
         mage: 'I maghi manipolano Fuoco, Gelo e Arcano per distruggere, evocare acqua e congelare le minacce.',
-        warlock:
-          'Gli stregoni evocano demoni, applicano maledizioni e danni nel tempo, poi drenano vita per resistere.',
-        druid:
-          'I druidi canalizzano la natura, curano ferite, intralciano nemici e assumono forme animali per difendere o attaccare.',
       },
       aria: 'Dettagli classe per {className}: ruolo {role}. Statistiche iniziali: Forza {str}, Agilità {agi}, Tempra {sta}, Intelletto {int}, Spirito {spi}.',
       statBarAria: '{stat}: {value} su 25',
@@ -1674,15 +1590,11 @@ export const shellStrings = {
         rage: 'Wut',
       },
       roles: {
-        warrior: 'Tank / Nahkampf-DPS',
-        paladin: 'Heiler / Tank / Nahkampf-DPS',
-        hunter: 'Fernkampf-DPS',
-        rogue: 'Nahkampf-DPS',
-        priest: 'Heiler / Fernkampf-DPS',
-        shaman: 'Heiler / Nahkampf- oder Fernkampf-DPS',
+        swordman: 'Tank / Nahkampf-DPS',
+        archer: 'Fernkampf-DPS',
+        thief: 'Nahkampf-DPS',
+        acolyte: 'Heiler / Fernkampf-DPS',
         mage: 'Fernkampf-DPS',
-        warlock: 'Fernkampf-DPS',
-        druid: 'Tank / Heiler / Nahkampf- oder Fernkampf-DPS',
       },
       armor: {
         chainLeatherCloth: 'Kette, Leder, Stoff',
@@ -1698,23 +1610,15 @@ export const shellStrings = {
         macesAxes: 'Streitkolben, Äxte',
       },
       lore: {
-        warrior:
+        swordman:
           'Krieger sind kampferprobte Nahkämpfer, die Wut aufbauen, wenn sie Schaden verursachen oder erleiden. Sie halten schwere Treffer aus oder zerschmettern Gegner.',
-        paladin:
-          'Paladine sind heilige Kreuzritter, die mit Segen unterstützen, mit Heiligem Licht heilen und Schwache in schwerer Rüstung schützen.',
-        hunter:
+        archer:
           'Jäger beherrschen die Wildnis, verfolgen Gegner aus der Ferne mit Bögen oder Schusswaffen und kontrollieren das Feld mit Fallen.',
-        rogue:
+        thief:
           'Schurken sind verstohlene Assassinen, die Energie und Kombopunkte für Angriffe aus den Schatten ausgeben.',
-        priest:
+        acolyte:
           'Priester rufen das Heilige Licht, um Verbündete zu heilen und zu schützen, während Schattenmagie Gegnern Leben entzieht.',
-        shaman:
-          'Schamanen gebieten über die Elemente, erfüllen Waffen mit Macht, treffen Gegner mit Blitzen und stellen Verbündete wieder her.',
         mage: 'Magier formen Feuer, Frost und Arkane Macht, um Gegner zu vernichten, Wasser zu beschwören und Bedrohungen einzufrieren.',
-        warlock:
-          'Hexenmeister beschwören Dämonen, wirken Flüche und Schaden über Zeit und entziehen Leben, um durchzuhalten.',
-        druid:
-          'Druiden kanalisieren die Natur, heilen Wunden, fesseln Gegner und wechseln in Tierformen für Verteidigung oder Schaden.',
       },
       aria: 'Klassendetails für {className}: Rolle {role}. Startwerte: Stärke {str}, Beweglichkeit {agi}, Ausdauer {sta}, Intelligenz {int}, Willenskraft {spi}.',
       statBarAria: '{stat}: {value} von 25',
@@ -1875,15 +1779,11 @@ export const shellStrings = {
         rage: '怒气',
       },
       roles: {
-        warrior: '坦克 / 近战 DPS',
-        paladin: '治疗 / 坦克 / 近战 DPS',
-        hunter: '远程 DPS',
-        rogue: '近战 DPS',
-        priest: '治疗 / 远程 DPS',
-        shaman: '治疗 / 近战或远程 DPS',
+        swordman: '坦克 / 近战 DPS',
+        archer: '远程 DPS',
+        thief: '近战 DPS',
+        acolyte: '治疗 / 远程 DPS',
         mage: '远程 DPS',
-        warlock: '远程 DPS',
-        druid: '坦克 / 治疗 / 近战或远程 DPS',
       },
       armor: {
         chainLeatherCloth: '锁甲、皮甲、布甲',
@@ -1899,16 +1799,12 @@ export const shellStrings = {
         macesAxes: '锤、斧',
       },
       lore: {
-        warrior:
+        swordman:
           '战士是久经沙场的近战斗士，会在造成或承受伤害时积累怒气。他们能承受重击，也能用强力武器碾碎敌人。',
-        paladin: '圣骑士是神圣的十字军，以祝福支援盟友，用圣光治疗伤口，并身披重甲保护弱者。',
-        hunter: '猎人精通荒野，使用弓或火器从远处追踪敌人，并用陷阱控制战场。',
-        rogue: '潜行者是隐秘刺客，消耗能量和连击点，从阴影中发动背刺与终结技。',
-        priest: '牧师召唤圣光治疗并保护盟友，也能用暗影魔法汲取敌人的生命。',
-        shaman: '萨满掌控元素，强化武器，以闪电震击敌人，并恢复盟友。',
+        archer: '猎人精通荒野，使用弓或火器从远处追踪敌人，并用陷阱控制战场。',
+        thief: '潜行者是隐秘刺客，消耗能量和连击点，从阴影中发动背刺与终结技。',
+        acolyte: '牧师召唤圣光治疗并保护盟友，也能用暗影魔法汲取敌人的生命。',
         mage: '法师操纵火焰、冰霜与奥术来毁灭敌人，召唤清水，并冻结威胁。',
-        warlock: '术士召唤恶魔，施放诅咒和持续伤害魔法，并吸取生命来维持自身。',
-        druid: '德鲁伊引导自然之力，治疗伤口，缠绕敌人，并变形成动物来防御或输出。',
       },
       aria: '{className} 职业详情：职责 {role}。初始属性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。',
       statBarAria: '{stat}：{value}/25',
@@ -2063,15 +1959,11 @@ export const shellStrings = {
         rage: '怒氣',
       },
       roles: {
-        warrior: '坦克 / 近戰 DPS',
-        paladin: '治療 / 坦克 / 近戰 DPS',
-        hunter: '遠程 DPS',
-        rogue: '近戰 DPS',
-        priest: '治療 / 遠程 DPS',
-        shaman: '治療 / 近戰或遠程 DPS',
+        swordman: '坦克 / 近戰 DPS',
+        archer: '遠程 DPS',
+        thief: '近戰 DPS',
+        acolyte: '治療 / 遠程 DPS',
         mage: '遠程 DPS',
-        warlock: '遠程 DPS',
-        druid: '坦克 / 治療 / 近戰或遠程 DPS',
       },
       armor: {
         chainLeatherCloth: '鎖甲、皮甲、布甲',
@@ -2087,16 +1979,12 @@ export const shellStrings = {
         macesAxes: '錘、斧',
       },
       lore: {
-        warrior:
+        swordman:
           '戰士是久經戰場的近戰鬥士，會在造成或承受傷害時累積怒氣。他們能承受重擊，也能用強力武器粉碎敵人。',
-        paladin: '聖騎士是神聖的十字軍，以祝福支援盟友，用聖光治療傷口，並身披重甲保護弱者。',
-        hunter: '獵人精通荒野，使用弓或火器從遠處追蹤敵人，並用陷阱控制戰場。',
-        rogue: '盜賊是隱密刺客，消耗能量與連擊點，從陰影中施展背刺與終結技。',
-        priest: '牧師召喚聖光治療並保護盟友，也能以暗影魔法汲取敵人的生命。',
-        shaman: '薩滿掌控元素，強化武器，以閃電震擊敵人並恢復盟友。',
+        archer: '獵人精通荒野，使用弓或火器從遠處追蹤敵人，並用陷阱控制戰場。',
+        thief: '盜賊是隱密刺客，消耗能量與連擊點，從陰影中施展背刺與終結技。',
+        acolyte: '牧師召喚聖光治療並保護盟友，也能以暗影魔法汲取敵人的生命。',
         mage: '法師操縱火焰、冰霜與祕法來毀滅敵人，召喚清水並凍結威脅。',
-        warlock: '術士召喚惡魔，施放詛咒與持續傷害魔法，並吸取生命來支撐自己。',
-        druid: '德魯伊引導自然之力，治療傷口、纏繞敵人，並變形成動物來防禦或輸出。',
       },
       aria: '{className} 職業詳情：職責 {role}。初始屬性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。',
       statBarAria: '{stat}：{value}/25',
@@ -2252,15 +2140,11 @@ export const shellStrings = {
         rage: '분노',
       },
       roles: {
-        warrior: '탱커 / 근접 DPS',
-        paladin: '치유 / 탱커 / 근접 DPS',
-        hunter: '원거리 DPS',
-        rogue: '근접 DPS',
-        priest: '치유 / 원거리 DPS',
-        shaman: '치유 / 근접 또는 원거리 DPS',
+        swordman: '탱커 / 근접 DPS',
+        archer: '원거리 DPS',
+        thief: '근접 DPS',
+        acolyte: '치유 / 원거리 DPS',
         mage: '원거리 DPS',
-        warlock: '원거리 DPS',
-        druid: '탱커 / 치유 / 근접 또는 원거리 DPS',
       },
       armor: {
         chainLeatherCloth: '사슬, 가죽, 천',
@@ -2276,23 +2160,15 @@ export const shellStrings = {
         macesAxes: '둔기, 도끼',
       },
       lore: {
-        warrior:
+        swordman:
           '전사는 피해를 주거나 받을 때 분노를 쌓는 단련된 근접 전투원입니다. 강한 공격을 버티거나 강력한 무기로 적을 압도합니다.',
-        paladin:
-          '성기사는 축복으로 아군을 돕고 성스러운 빛으로 상처를 치유하며 중갑으로 약자를 보호하는 성전사입니다.',
-        hunter:
+        archer:
           '사냥꾼은 야생을 다루며 활이나 총으로 멀리서 적을 추적하고 덫으로 전장을 통제합니다.',
-        rogue:
+        thief:
           '도적은 기력과 연계 점수를 사용해 그림자 속에서 기습과 마무리 일격을 가하는 암살자입니다.',
-        priest:
+        acolyte:
           '사제는 성스러운 빛으로 아군을 치유하고 보호하며, 암흑 마법으로 적의 생명력을 흡수합니다.',
-        shaman:
-          '주술사는 정령을 다루고 무기에 힘을 불어넣으며 번개로 적을 충격시키고 아군을 회복시킵니다.',
         mage: '마법사는 화염, 냉기, 비전의 힘으로 적을 파괴하고 물을 만들어내며 위협을 얼립니다.',
-        warlock:
-          '흑마법사는 악마를 소환하고 저주와 지속 피해 마법을 걸며 생명력을 흡수해 버팁니다.',
-        druid:
-          '드루이드는 자연의 힘으로 치유하고 적을 묶으며 동물 형태로 변신해 방어하거나 피해를 줍니다.',
       },
       aria: '{className} 직업 세부 정보: 역할 {role}. 시작 능력치: 힘 {str}, 민첩 {agi}, 체력 {sta}, 지능 {int}, 정신력 {spi}.',
       statBarAria: '{stat}: {value}/25',
@@ -2452,15 +2328,11 @@ export const shellStrings = {
         rage: '怒り',
       },
       roles: {
-        warrior: 'タンク / 近接DPS',
-        paladin: 'ヒーラー / タンク / 近接DPS',
-        hunter: '遠隔DPS',
-        rogue: '近接DPS',
-        priest: 'ヒーラー / 遠隔DPS',
-        shaman: 'ヒーラー / 近接または遠隔DPS',
+        swordman: 'タンク / 近接DPS',
+        archer: '遠隔DPS',
+        thief: '近接DPS',
+        acolyte: 'ヒーラー / 遠隔DPS',
         mage: '遠隔DPS',
-        warlock: '遠隔DPS',
-        druid: 'タンク / ヒーラー / 近接または遠隔DPS',
       },
       armor: {
         chainLeatherCloth: '鎖、革、布',
@@ -2476,20 +2348,13 @@ export const shellStrings = {
         macesAxes: 'メイス、斧',
       },
       lore: {
-        warrior:
+        swordman:
           'ウォリアーは戦いで鍛えられた近接戦士で、ダメージを与えたり受けたりして怒りを蓄えます。重い一撃を耐え、強力な武器で敵を砕きます。',
-        paladin:
-          'パラディンは祝福で味方を支え、聖なる光で傷を癒やし、重装備で弱き者を守る聖騎士です。',
-        hunter: 'ハンターは荒野を熟知し、弓や銃で遠距離から敵を追い、罠で戦場を支配します。',
-        rogue:
+        archer: 'ハンターは荒野を熟知し、弓や銃で遠距離から敵を追い、罠で戦場を支配します。',
+        thief:
           'ローグはエネルギーとコンボポイントを使い、影から奇襲と決め技を放つ隠密の暗殺者です。',
-        priest: 'プリーストは聖なる光で味方を癒やして守り、影の魔法で敵の生命力を吸い取ります。',
-        shaman: 'シャーマンは元素を操り、武器に力を宿し、稲妻で敵を打ち、味方を回復します。',
+        acolyte: 'プリーストは聖なる光で味方を癒やして守り、影の魔法で敵の生命力を吸い取ります。',
         mage: 'メイジは火炎、氷霜、秘術の力で敵を破壊し、水を作り出し、脅威を凍らせます。',
-        warlock:
-          'ウォーロックは悪魔を召喚し、呪いと継続ダメージ魔法をかけ、生命力を吸収して耐えます。',
-        druid:
-          'ドルイドは自然の力を導き、傷を癒やし、敵を絡め取り、動物形態に変身して守りまたは攻めます。',
       },
       aria: '{className}のクラス詳細: 役割 {role}。開始ステータス: 筋力 {str}、敏捷性 {agi}、耐久力 {sta}、知力 {int}、精神力 {spi}。',
       statBarAria: '{stat}: {value}/25',
@@ -2650,15 +2515,11 @@ export const shellStrings = {
         rage: 'Raiva',
       },
       roles: {
-        warrior: 'Tanque / DPS corpo a corpo',
-        paladin: 'Curador / Tanque / DPS corpo a corpo',
-        hunter: 'DPS à distância',
-        rogue: 'DPS corpo a corpo',
-        priest: 'Curador / DPS à distância',
-        shaman: 'Curador / DPS corpo a corpo ou à distância',
+        swordman: 'Tanque / DPS corpo a corpo',
+        archer: 'DPS à distância',
+        thief: 'DPS corpo a corpo',
+        acolyte: 'Curador / DPS à distância',
         mage: 'DPS à distância',
-        warlock: 'DPS à distância',
-        druid: 'Tanque / Curador / DPS corpo a corpo ou à distância',
       },
       armor: {
         chainLeatherCloth: 'Malha, couro, tecido',
@@ -2674,23 +2535,15 @@ export const shellStrings = {
         macesAxes: 'Maças, machados',
       },
       lore: {
-        warrior:
+        swordman:
           'Guerreiros são combatentes de linha de frente que acumulam raiva ao causar ou receber dano. Eles absorvem golpes pesados ou esmagam inimigos.',
-        paladin:
-          'Paladinos são cruzados sagrados que apoiam com bênçãos, curam com Luz Sagrada e protegem os fracos com armaduras robustas.',
-        hunter:
+        archer:
           'Caçadores dominam a natureza, rastreiam inimigos de longe com arcos ou armas de fogo e controlam o campo com armadilhas.',
-        rogue:
+        thief:
           'Ladinos são assassinos furtivos que gastam energia e pontos de combo para atacar das sombras.',
-        priest:
+        acolyte:
           'Sacerdotes invocam a Luz Sagrada para curar e proteger aliados, enquanto a magia Sombria drena a vida dos inimigos.',
-        shaman:
-          'Xamãs comandam os elementos, imbuem armas com poder, chocam inimigos com relâmpagos e restauram aliados.',
         mage: 'Magos manipulam Fogo, Gelo e Arcano para destruir inimigos, conjurar água e congelar ameaças.',
-        warlock:
-          'Bruxos invocam demônios, aplicam maldições e dano contínuo, e drenam vida para resistir.',
-        druid:
-          'Druidas canalizam a natureza, curam feridas, enredam inimigos e assumem formas animais para defender ou causar dano.',
       },
       aria: 'Detalhes de classe para {className}: função {role}. Atributos iniciais: Força {str}, Agilidade {agi}, Vigor {sta}, Intelecto {int}, Espírito {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -2853,15 +2706,11 @@ export const shellStrings = {
         rage: 'Ярость',
       },
       roles: {
-        warrior: 'Танк / ближний DPS',
-        paladin: 'Лекарь / танк / ближний DPS',
-        hunter: 'Дальний DPS',
-        rogue: 'Ближний DPS',
-        priest: 'Лекарь / дальний DPS',
-        shaman: 'Лекарь / ближний или дальний DPS',
+        swordman: 'Танк / ближний DPS',
+        archer: 'Дальний DPS',
+        thief: 'Ближний DPS',
+        acolyte: 'Лекарь / дальний DPS',
         mage: 'Дальний DPS',
-        warlock: 'Дальний DPS',
-        druid: 'Танк / лекарь / ближний или дальний DPS',
       },
       armor: {
         chainLeatherCloth: 'Кольчуга, кожа, ткань',
@@ -2877,22 +2726,14 @@ export const shellStrings = {
         macesAxes: 'Дробящее, топоры',
       },
       lore: {
-        warrior:
+        swordman:
           'Воины - закаленные бойцы ближнего боя, накапливающие ярость от нанесенного и полученного урона. Они держат удар или сокрушают врагов.',
-        paladin:
-          'Паладины - священные крестоносцы, поддерживающие благословениями, исцеляющие Светом и защищающие слабых тяжелой броней.',
-        hunter:
+        archer:
           'Охотники знают дикую природу, выслеживают врагов издалека луками или огнестрелом и контролируют поле боя ловушками.',
-        rogue: 'Разбойники - скрытные убийцы, расходующие энергию и очки серии на удары из тени.',
-        priest:
+        thief: 'Разбойники - скрытные убийцы, расходующие энергию и очки серии на удары из тени.',
+        acolyte:
           'Жрецы призывают Святой Свет для исцеления и защиты союзников, а магия Тьмы вытягивает жизнь врагов.',
-        shaman:
-          'Шаманы повелевают стихиями, усиливают оружие, поражают врагов молниями и восстанавливают союзников.',
         mage: 'Маги управляют огнем, льдом и тайной магией, уничтожают врагов, создают воду и замораживают угрозы.',
-        warlock:
-          'Чернокнижники призывают демонов, накладывают проклятия и длительный урон, затем вытягивают жизнь, чтобы выжить.',
-        druid:
-          'Друиды направляют силу природы, лечат раны, оплетают врагов и принимают звериные формы для защиты или урона.',
       },
       aria: 'Описание класса {className}: роль {role}. Начальные характеристики: Сила {str}, Ловкость {agi}, Выносливость {sta}, Интеллект {int}, Дух {spi}.',
       statBarAria: '{stat}: {value} из 25',

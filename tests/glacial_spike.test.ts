@@ -6,6 +6,7 @@ import { createMob } from '../src/sim/entity';
 import type { PlayerMeta } from '../src/sim/sim';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, SimEvent } from '../src/sim/types';
+import { fundCasts } from './helpers/sp';
 
 // Glacial Spike (owner design 2026-07-14, combat/frost_mage.ts + content): the
 // frost spender. Rimelance impacts and Frozen Orb pulses bank Icicles (up to 5);
@@ -61,7 +62,7 @@ function castAndResolve(
   maxTicks = 160,
 ): SimEvent[] {
   p.gcdRemaining = 0;
-  p.resource = p.maxResource;
+  fundCasts(p);
   sim.castAbility(abilityId);
   const events: SimEvent[] = [...sim.drainEvents()];
   for (let i = 0; i < maxTicks; i++) {
@@ -126,7 +127,7 @@ describe('Glacial Spike gating + payoff', () => {
     const target = spawnTarget(sim, p);
     pushAura(p, { id: 'icicles', name: 'Icicles', kind: 'icicles', stacks: ICICLE_MAX - 1 });
     p.gcdRemaining = 0;
-    p.resource = p.maxResource;
+    fundCasts(p);
     sim.castAbility('glacial_spike');
     const events: SimEvent[] = [...sim.drainEvents()];
     for (let i = 0; i < 160; i++) events.push(...sim.tick());

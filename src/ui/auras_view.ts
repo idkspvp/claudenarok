@@ -57,7 +57,7 @@ const TOGGLE_KINDS: ReadonlySet<AuraKind> = new Set([
 // Sprint also uses, 15s and very much worth a countdown), so it hides by id.
 const TOGGLE_IDS: ReadonlySet<string> = new Set(['ghost_wolf']);
 // The inverse override: an aura that rides a TOGGLE_KIND but is a genuine timed
-// buff worth a countdown. Greater Invisibility reuses the rogue-stealth machinery
+// buff worth a countdown. Greater Invisibility reuses the thief-stealth machinery
 // for its vanish (kind 'stealth' with full move speed), but it is a fixed 20s
 // buff, not a toggle, so it must show its remaining time like any other buff.
 const TIMED_IDS: ReadonlySet<string> = new Set(['greater_invisibility']);

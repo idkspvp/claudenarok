@@ -178,7 +178,7 @@ async function enter(page, user, charName, cls) {
 }
 
 const pageA = await browser.newPage();
-await enter(pageA, `arm_${UNIQ}`, `Solbearer${UNIQ}`, 'warrior');
+await enter(pageA, `arm_${UNIQ}`, `Solbearer${UNIQ}`, 'swordman');
 
 // Credit Claudium straight into the dev ledger (no free-grant API by design).
 const db = new pg.Client({ connectionString: process.env.DATABASE_URL });

@@ -18,8 +18,8 @@ type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
 function world(): { sim: AnySim; pid: number; owner: AnyEntity } {
-  const sim = new Sim({ seed: 7, playerClass: 'hunter', noPlayer: true }) as AnySim;
-  const pid = sim.addPlayer('hunter', 'Owner');
+  const sim = new Sim({ seed: 7, playerClass: 'archer', noPlayer: true }) as AnySim;
+  const pid = sim.addPlayer('archer', 'Owner');
   const owner = sim.entities.get(pid) as AnyEntity;
   return { sim, pid, owner };
 }
@@ -76,13 +76,13 @@ function wildHostile2(sim: AnySim, exclude: number[]): [AnyEntity, AnyEntity] {
   return [first, second];
 }
 
-// Start an active hunter-vs-mage duel (mirrors tests/duel.test.ts) so the hunter's pet
+// Start an active archer-vs-mage duel (mirrors tests/duel.test.ts) so the archer's pet
 // inherits its owner's PvP hostility toward the opponent player. Used to prove a hostile
 // PLAYER is a valid petPickTarget candidate (the grid holds every kind, and the admit
 // predicates carry no kind === 'mob' restriction on ownerOffense).
 function startedDuelHunter(): { sim: AnySim; a: number; b: number } {
-  const sim = new Sim({ seed: 7, playerClass: 'warrior', noPlayer: true }) as AnySim;
-  const a = sim.addPlayer('hunter', 'Aleph', { autoEquip: true });
+  const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true }) as AnySim;
+  const a = sim.addPlayer('archer', 'Aleph', { autoEquip: true });
   const b = sim.addPlayer('mage', 'Bet', { autoEquip: true });
   const move = (pid: number, x: number, z: number): void => {
     const e = sim.entities.get(pid) as AnyEntity;
@@ -392,7 +392,7 @@ describe('petPickTarget: grid scan preserves the selection contract', () => {
     expect(sim.duels.get(a)?.state).toBe('active');
     const owner = sim.entities.get(a) as AnyEntity;
     const enemy = sim.entities.get(b) as AnyEntity;
-    const pet = adopt(sim, a); // the hunter's pet
+    const pet = adopt(sim, a); // the archer's pet
     pet.petMode = 'defensive';
     expect(sim.isHostileTo(pet, enemy)).toBe(true); // pet inherits owner PvP hostility
     isolate(sim, [a, b, pet.id]);

@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { AuraKind, SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errorTexts(events: SimEvent[]): string[] {
@@ -36,23 +36,24 @@ function lastReply(sim: Sim, cmd: string, pid: number): string {
 
 describe('/form command', () => {
   it('reports no form or stance by default', () => {
-    // Warriors now auto-wear a stance, so the no-form default uses a paladin.
+    // The Swordman auto-wears a stance, so the no-form default needs a job that
+    // does not: any of the other four will do.
     const sim = makeWorld();
-    const a = sim.addPlayer('paladin', 'Aleph');
+    const a = sim.addPlayer('mage', 'Aleph');
     sim.tick();
     expect(lastReply(sim, '/form', a)).toBe('You are not in any form or stance.');
   });
 
-  it('reports the battle stance a fresh warrior auto-wears', () => {
+  it('reports the battle stance a fresh swordman auto-wears', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     expect(lastReply(sim, '/form', a)).toBe('You are in Warring Stance.');
   });
 
-  it('names a warrior defensive stance', () => {
+  it('names a swordman defensive stance', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     // Arms may hold Guarded Stance; swap the auto-worn Warring Stance for it so
     // the per-tick stance reconcile leaves the pushed aura in place.
@@ -63,17 +64,17 @@ describe('/form command', () => {
     expect(lastReply(sim, '/form', a)).toBe('You are in Defensive Stance.');
   });
 
-  it('names a druid shapeshift form', () => {
+  it('names a acolyte shapeshift form', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('druid', 'Bet');
+    const a = sim.addPlayer('acolyte', 'Bet');
     sim.tick();
     giveForm(sim, a, 'form_bear', 'Bear Form');
     expect(lastReply(sim, '/form', a)).toBe('You are in Bear Form.');
   });
 
-  it('uses dedicated phrasing for rogue stealth', () => {
+  it('uses dedicated phrasing for thief stealth', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('rogue', 'Gimel');
+    const a = sim.addPlayer('thief', 'Gimel');
     sim.tick();
     giveForm(sim, a, 'stealth', 'Stealth');
     expect(lastReply(sim, '/form', a)).toBe('You are stealthed.');
@@ -81,7 +82,7 @@ describe('/form command', () => {
 
   it('answers to the /stance and /shapeshift aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('druid', 'Dalet');
+    const a = sim.addPlayer('acolyte', 'Dalet');
     sim.tick();
     giveForm(sim, a, 'form_cat', 'Wolf Form');
     expect(lastReply(sim, '/stance', a)).toBe('You are in Wolf Form.');
@@ -90,7 +91,7 @@ describe('/form command', () => {
 
   it('is self-only and never emits a chat event', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const sent = sim.chat('/form', a);
     expect(sent).toBeNull();

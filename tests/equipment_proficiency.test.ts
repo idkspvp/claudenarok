@@ -6,14 +6,8 @@ import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 
 const ALL_CLASSES = Object.keys(CLASSES) as PlayerClass[];
-const CASTER_WEAPON_CLASSES: PlayerClass[] = [
-  'mage',
-  'priest',
-  'warlock',
-  'shaman',
-  'paladin',
-  'druid',
-];
+// The two jobs that carry caster weapon proficiency after the D1 collapse.
+const CASTER_WEAPON_CLASSES: PlayerClass[] = ['mage', 'acolyte'];
 
 function equip(cls: Parameters<Sim['addPlayer']>[0], itemId: string) {
   const sim = new Sim({ seed: 42, playerClass: cls, noPlayer: true, autoEquip: false });
@@ -27,66 +21,68 @@ function equip(cls: Parameters<Sim['addPlayer']>[0], itemId: string) {
 }
 
 describe('armor proficiencies', () => {
-  it('allows mail classes to equip mail, leather, and cloth armor', () => {
-    expect(equip('shaman', 'stormcallers_crown').equipment.helmet).toBe('stormcallers_crown');
-    expect(equip('shaman', 'nighttalon_crown').equipment.helmet).toBe('nighttalon_crown');
-    expect(equip('shaman', 'soulflame_cowl').equipment.helmet).toBe('soulflame_cowl');
+  // Armor weight after D1: the Swordman is the only mail wearer, the Thief and the
+  // Archer are leather, and the Mage and the Acolyte are cloth. Each rank admits
+  // everything lighter than itself.
+  it('lets the mail class equip mail, leather, and cloth armor', () => {
+    expect(equip('swordman', 'crownforged_dreadhelm').equipment.helmet).toBe(
+      'crownforged_dreadhelm',
+    );
+    expect(equip('swordman', 'nighttalon_crown').equipment.helmet).toBe('nighttalon_crown');
+    expect(equip('swordman', 'soulflame_cowl').equipment.helmet).toBe('soulflame_cowl');
   });
 
-  it('allows leather classes to equip leather and cloth armor but not mail armor', () => {
-    expect(equip('druid', 'nighttalon_crown').equipment.helmet).toBe('nighttalon_crown');
-    expect(equip('druid', 'soulflame_cowl').equipment.helmet).toBe('soulflame_cowl');
-    expect(equip('druid', 'crownforged_dreadhelm').equipment.helmet).toBeUndefined();
+  it('lets the leather classes equip leather and cloth armor but not mail armor', () => {
+    for (const cls of ['thief', 'archer'] as const) {
+      expect(equip(cls, 'nighttalon_crown').equipment.helmet, cls).toBe('nighttalon_crown');
+      expect(equip(cls, 'soulflame_cowl').equipment.helmet, cls).toBe('soulflame_cowl');
+      expect(equip(cls, 'crownforged_dreadhelm').equipment.helmet, cls).toBeUndefined();
+    }
   });
 
-  it('keeps cloth classes restricted to cloth armor', () => {
-    expect(equip('priest', 'soulflame_cowl').equipment.helmet).toBe('soulflame_cowl');
-    expect(equip('priest', 'nighttalon_crown').equipment.helmet).toBeUndefined();
-    expect(equip('priest', 'crownforged_dreadhelm').equipment.helmet).toBeUndefined();
+  it('keeps the cloth classes restricted to cloth armor', () => {
+    for (const cls of ['mage', 'acolyte'] as const) {
+      expect(equip(cls, 'soulflame_cowl').equipment.helmet, cls).toBe('soulflame_cowl');
+      expect(equip(cls, 'nighttalon_crown').equipment.helmet, cls).toBeUndefined();
+      expect(equip(cls, 'crownforged_dreadhelm').equipment.helmet, cls).toBeUndefined();
+    }
   });
 
-  it('allows warrior-style weapons for warriors, rogues, hunters, shamans, and paladins', () => {
-    expect(equip('warrior', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
-    const rogue = equip('rogue', 'kingsbane_last_oath').equipment;
-    expect(rogue.mainhand).toBe('rusty_dagger');
-    expect(rogue.offhand).toBe('kingsbane_last_oath');
-    expect(equip('hunter', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
-    expect(equip('shaman', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
-    expect(equip('paladin', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
+  it('allows swordman-style weapons for the swordman, thief, and archer', () => {
+    expect(equip('swordman', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
+    // A thief may hold one but never in the mainhand over its starting dagger:
+    // the dual-wield path parks it in the offhand.
+    const thief = equip('thief', 'kingsbane_last_oath').equipment;
+    expect(thief.mainhand).toBe('rusty_dagger');
+    expect(thief.offhand).toBe('kingsbane_last_oath');
+    expect(equip('archer', 'kingsbane_last_oath').equipment.mainhand).toBe('kingsbane_last_oath');
+    // The two casters cannot.
     expect(equip('mage', 'kingsbane_last_oath').equipment.mainhand).not.toBe('kingsbane_last_oath');
-  });
-
-  it('allows caster weapons for caster and hybrid classes', () => {
-    expect(equip('mage', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('priest', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('warlock', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('shaman', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('paladin', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('druid', 'staff_of_the_gravewyrm').equipment.mainhand).toBe(
-      'staff_of_the_gravewyrm',
-    );
-    expect(equip('warrior', 'staff_of_the_gravewyrm').equipment.mainhand).not.toBe(
-      'staff_of_the_gravewyrm',
+    expect(equip('acolyte', 'kingsbane_last_oath').equipment.mainhand).not.toBe(
+      'kingsbane_last_oath',
     );
   });
 
-  it('lets a shaman equip Lunar Tide Greatstaff through the live equip path', () => {
-    expect(equip('shaman', 'lunar_tide_greatstaff').equipment.mainhand).toBe(
+  it('allows caster weapons for the caster classes only', () => {
+    for (const cls of CASTER_WEAPON_CLASSES) {
+      expect(equip(cls, 'staff_of_the_gravewyrm').equipment.mainhand, cls).toBe(
+        'staff_of_the_gravewyrm',
+      );
+    }
+    for (const cls of ['swordman', 'thief', 'archer'] as const) {
+      expect(equip(cls, 'staff_of_the_gravewyrm').equipment.mainhand, cls).not.toBe(
+        'staff_of_the_gravewyrm',
+      );
+    }
+  });
+
+  it('lets an acolyte equip Lunar Tide Greatstaff through the live equip path', () => {
+    expect(equip('acolyte', 'lunar_tide_greatstaff').equipment.mainhand).toBe(
       'lunar_tide_greatstaff',
     );
   });
 
-  it('allows every caster and hybrid caster to equip every staff', () => {
+  it('allows every caster to equip every staff', () => {
     const staffIds = Object.entries(WEAPON_TYPE_BY_ITEM)
       .filter(([, type]) => type === 'staff')
       .map(([id]) => id);
@@ -95,7 +91,10 @@ describe('armor proficiencies', () => {
     for (const itemId of staffIds) {
       const item = ITEMS[itemId];
       expect(item, `${itemId}: staff definition`).toBeDefined();
-      if (item.requiredClass?.length === 1 && item.requiredClass[0] === 'druid') continue;
+      // A staff locked to a single job is that job's, not the caster group's; the
+      // feral line is locked to nobody at all (its owner was cut) and is skipped
+      // here for the same reason.
+      if (item.requiredClass && item.requiredClass.length <= 1) continue;
       for (const cls of CASTER_WEAPON_CLASSES) {
         expect(canEquipItem(cls, item), `${itemId}: ${cls} staff proficiency`).toBe(true);
       }
@@ -107,7 +106,7 @@ describe('weapon requiredClass is representative of who can equip', () => {
   // The whole point of the field: a weapon's requiredClass must list exactly the
   // classes that can actually equip it, not an archetype-signature subset. Guards
   // every weapon at once, so a future archetype weapon authored with the short
-  // form (e.g. ['warrior','paladin']) fails here until it lists the full group.
+  // form (e.g. ['swordman','swordman']) fails here until it lists the full group.
   it('lists exactly the classes canEquipItem allows, for every weapon with a class list', () => {
     for (const item of Object.values(ITEMS)) {
       if (item.kind !== 'weapon' || !item.requiredClass) continue;

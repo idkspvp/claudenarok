@@ -11,7 +11,7 @@ import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 
 function makeSim() {
-  return new Sim({ seed: 42, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', autoEquip: true });
 }
 
 // Spawn a wailing elite locked in melee on the player and return it.

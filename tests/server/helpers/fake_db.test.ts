@@ -17,7 +17,7 @@ function charRow(over: Partial<CharacterRow> = {}): CharacterRow {
     id: 1,
     account_id: 1,
     name: 'Aldric',
-    class: 'warrior',
+    class: 'swordman',
     level: 1,
     state: null,
     is_gm: false,
@@ -29,7 +29,7 @@ function charRow(over: Partial<CharacterRow> = {}): CharacterRow {
 function xpRow(name: string, lifetimeXp: number): LifetimeXpLeaderRow {
   return {
     name,
-    class: 'warrior',
+    class: 'swordman',
     level: 60,
     realm: 'test-realm',
     lifetimeXp,
@@ -56,9 +56,9 @@ describe('FakeCharactersDb', () => {
 
   it('createCharacterCapped respects the cap and hands out distinct ids', async () => {
     const db = new FakeCharactersDb();
-    const a = await db.createCharacterCapped(1, 'One', 'warrior', 2);
+    const a = await db.createCharacterCapped(1, 'One', 'swordman', 2);
     const b = await db.createCharacterCapped(1, 'Two', 'mage', 2);
-    const c = await db.createCharacterCapped(1, 'Three', 'rogue', 2);
+    const c = await db.createCharacterCapped(1, 'Three', 'thief', 2);
 
     expect(a).not.toBeNull();
     expect(b).not.toBeNull();
@@ -67,7 +67,7 @@ describe('FakeCharactersDb', () => {
     expect((await db.listCharacters(1)).length).toBe(2);
 
     // The cap is per account, so a different account can still create.
-    expect(await db.createCharacterCapped(2, 'Other', 'priest', 2)).not.toBeNull();
+    expect(await db.createCharacterCapped(2, 'Other', 'acolyte', 2)).not.toBeNull();
   });
 
   it('deleteCharacter returns the right boolean', async () => {
@@ -118,7 +118,7 @@ describe('FakeLeaderboardDb', () => {
   it('returns seeded arena and guild rows', async () => {
     const db = new FakeLeaderboardDb();
     const arena: ArenaLeaderRow[] = [
-      { name: 'Gladiator', class: 'warrior', level: 60, rating: 2400, wins: 50, losses: 5 },
+      { name: 'Gladiator', class: 'swordman', level: 60, rating: 2400, wins: 50, losses: 5 },
     ];
     const guilds: GuildLeaderRow[] = [
       {

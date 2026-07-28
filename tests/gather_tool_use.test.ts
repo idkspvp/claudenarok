@@ -16,7 +16,7 @@ import { GATHER_CAST_ID } from '../src/sim/types';
 import { terrainHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function mustEntity(sim: Sim, pid: number) {
@@ -66,7 +66,7 @@ function completeCastNow(sim: Sim, pid: number) {
 describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
   it('using a pick beside a ready vein starts the standard gather cast, draw-free', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     teleportOntoNode(sim, pid, 'ore_eastbrook_1');
     sim.addItem('copper_mining_pick', 1, pid);
     despawnMobs(sim);
@@ -90,7 +90,7 @@ describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
     // (inclusive). Harvest node 1, then click the pick again from the same
     // spot: the respawning node 1 is nearer, the ready node 2 must win.
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     teleportOntoNode(sim, pid, 'ore_eastbrook_1');
     sim.addItem('copper_mining_pick', 1, pid);
     despawnMobs(sim);
@@ -105,7 +105,7 @@ describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
 
   it('no matching node in reach: one text-free gatherToolNoNode, no cast, zero draws, item kept', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     sim.addItem('copper_mining_pick', 1, pid);
     sim.drainEvents();
     let draws = 0;
@@ -124,7 +124,7 @@ describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
 
   it('a wrong-profession tool beside a vein reports no timber in reach, never a harvest', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     teleportOntoNode(sim, pid, 'ore_eastbrook_1');
     sim.addItem('handaxe', 1, pid);
     despawnMobs(sim);
@@ -137,7 +137,7 @@ describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
 
   it('a dead player gets the harvest gate answer, not a scan result', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     teleportOntoNode(sim, pid, 'ore_eastbrook_1');
     sim.addItem('copper_mining_pick', 1, pid);
     despawnMobs(sim);
@@ -153,7 +153,7 @@ describe('useGatherToolItem via Sim.useItem (the sim command body)', () => {
 
   it('re-clicking the pick mid-cast answers busy and keeps the running cast', () => {
     const sim = makeWorld();
-    const pid = sim.addPlayer('warrior', 'Prospector');
+    const pid = sim.addPlayer('swordman', 'Prospector');
     teleportOntoNode(sim, pid, 'ore_eastbrook_1');
     sim.addItem('copper_mining_pick', 1, pid);
     despawnMobs(sim);

@@ -15,10 +15,10 @@ const PLAYERS = 100;
 // a dense pack of mobs each carrying a deep hate table (the big-pull case where every
 // mob's per-tick target scan walks a ~100-entry threat map).
 function buildPileup(): { sim: Sim; players: number[]; entities: number } {
-  const sim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed: WORLD_SEED, playerClass: 'swordman', noPlayer: true });
   const players: number[] = [];
   for (let i = 0; i < PLAYERS; i++) {
-    const pid = sim.addPlayer('warrior', `Zerg${i}`);
+    const pid = sim.addPlayer('swordman', `Zerg${i}`);
     const e = sim.entities.get(pid);
     if (!e) continue;
     e.pos.x = CLUSTER.x + ((i % 10) - 5) * 0.6;
@@ -59,10 +59,10 @@ describe('mob.update high-load regression budget', () => {
   it('lets the headless host skip distant idle wilderness mobs without changing defaults', () => {
     const throttled = new Sim({
       seed: WORLD_SEED,
-      playerClass: 'warrior',
+      playerClass: 'swordman',
       idleMobTickRadius: 25,
     });
-    const defaultSim = new Sim({ seed: WORLD_SEED, playerClass: 'warrior' });
+    const defaultSim = new Sim({ seed: WORLD_SEED, playerClass: 'swordman' });
 
     const distant = [...throttled.entities.values()].find(
       (e) =>

@@ -1,10 +1,12 @@
 // Visual check for the melee swing-timer bar (#swingbar).
 // Boots the offline game, engages auto-attack on a wolf, and captures the
 // swing bar at a few fill levels. Saves screenshots to tmp/ for the PR.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -21,7 +23,7 @@ await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
 await page.click('#btn-offline');
 await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Swingblade');
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 
@@ -30,20 +32,27 @@ const fight = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  let wolf = null, d = 1e9;
+  let wolf = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.templateId === 'forest_wolf' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; wolf = e; }
+      if (dd < d) {
+        d = dd;
+        wolf = e;
+      }
     }
   }
-  p.pos.x = wolf.pos.x + 2; p.pos.z = wolf.pos.z;
+  p.pos.x = wolf.pos.x + 2;
+  p.pos.z = wolf.pos.z;
   p.facing = Math.atan2(wolf.pos.x - p.pos.x, wolf.pos.z - p.pos.z);
   g.input.camYaw = p.facing;
   sim.targetEntity(wolf.id);
   sim.startAutoAttack();
   // keep the wolf alive so the bar keeps cycling for the screenshots
-  wolf.maxHp = 100000; wolf.hp = 100000; wolf.hostile = false;
+  wolf.maxHp = 100000;
+  wolf.hp = 100000;
+  wolf.hostile = false;
   return { wolfId: wolf.id };
 });
 console.log('fight setup:', JSON.stringify(fight));

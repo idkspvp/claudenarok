@@ -2455,7 +2455,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   pet_passive: r('nature', 'earthBrown', ['paw']),
   pet_defensive: r('leather', 'earthBrown', ['shield']),
   pet_aggressive: r('fury', 'blood', ['claw_slash'], ['glow']),
-  // warrior
+  // swordman
   heroic_strike: r('fury', 'steel', ['sword'], ['glow']),
   battle_shout: r('fury', 'gold', ['fist'], ['arcs']),
   demoralizing_shout: r('shadow', 'steel', ['fist'], ['arcs']),
@@ -2557,7 +2557,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   fingers_of_frost: r('frost', 'ice', ['claw_slash', { p: 'snowflake', ...BR }], ['glow']),
   brain_freeze: r('frost', 'ice', ['eye', { p: 'snowflake', ...BR }], ['sparkle']),
   shatter: r('frost', 'ice', ['snowflake', { p: 'claw_slash', ...BIG }], ['arcs']),
-  // rogue
+  // thief
   sinister_strike: r('steel', 'steel', ['dagger'], ['glow']),
   eviscerate: r('blood', 'blood', ['dagger'], ['drips']),
   backstab: r('shadow', 'steel', [{ p: 'dagger', rot: Math.PI * 0.85 }], ['motion']),
@@ -2594,7 +2594,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   hammer_of_justice: r('holy', 'gold', ['mace'], ['arcs']),
   lay_on_hands: r('holy', 'holyGold', [{ p: 'sunburst', ...BIG }, 'hand'], ['sparkle', 'glow']),
   holy_taunt: r('holy', 'holyGold', ['roar'], ['arcs']),
-  // hunter
+  // archer
   raptor_strike: r('earth', 'blood', ['claw_slash']),
   aspect_of_the_hawk: r('storm', 'sky', ['wing'], ['glow']),
   aspect_of_the_monkey: r('nature', 'leafGreen', ['paw'], ['motion']),
@@ -2614,7 +2614,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   sport_dive: r('earth', 'leather', ['gauntlet', { p: 'coin', ...TR }], ['motion']),
   sport_shoulder: r('fury', 'steel', ['pauldron', { p: 'claw_slash', ...BR }]),
   sport_second_wind: r('nature', 'leafGreen', ['boot', { p: 'leaf', ...TR }], ['glow']),
-  // priest
+  // acolyte
   smite: r('holy', 'holyGold', ['bolt', { p: 'sunburst', ...TL }], ['glow']),
   lesser_heal: r('holy', 'silverWhite', ['cross'], ['glow']),
   power_word_fortitude: r('holy', 'gold', ['shield', { p: 'cross', ...TL }]),
@@ -2663,7 +2663,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   tigers_fury: r('fire', 'ember', ['fang'], ['glow']),
   rip: r('blood', 'blood', ['claw_slash'], ['drips']),
   // --- formerly procedural-fallback abilities: unique hand-authored icons ---
-  // warrior
+  // swordman
   execute: r('blood', 'blood', ['axe'], ['glow']),
   slam: r('fury', 'steel', ['mace'], ['motion']),
   cleave: r('fury', 'steel', ['axe'], ['arcs']),
@@ -2675,7 +2675,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   shield_slam: r('steel', 'steel', ['shield', { p: 'mace', ...BR }]),
   whirlwind: r('fury', 'steel', ['sword'], ['arcs']),
   berserker_rage: r('fury', 'blood', ['fist'], ['glow']),
-  // warrior (Talents 2.0 rows): each hints the mechanic with an existing primitive combo
+  // swordman (Talents 2.0 rows): each hints the mechanic with an existing primitive combo
   pummel: r('steel', 'steel', ['fist', { p: 'bolt', ...BR }], ['arcs']), // fist smashing a cast
   // Bladestorm: a whole STORM of blades, so a storm-blue background sets it apart
   // from raging_gale's fury-red crossed swords on the action bar.
@@ -2748,7 +2748,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
     ['glow'],
   ),
   crusader_strike: r('holy', 'gold', ['sword', { p: 'cross', ...BR }], ['glow']),
-  // rogue
+  // thief
   kidney_shot: r('shadow', 'steel', ['dagger', { p: 'boot', ...BR }]),
   ambush: r('shadow', 'steel', ['dagger'], ['motion']),
   stealth: r('shadow', 'steel', ['eye'], ['glow']),
@@ -2759,14 +2759,14 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   consecration: r('holy', 'holyGold', ['sigil_rune'], ['glow']),
   righteous_fury: r('holy', 'gold', ['shield'], ['glow']),
   retribution_aura: r('holy', 'gold', ['sunburst'], ['arcs']),
-  // hunter
+  // archer
   tame_beast: r('nature', 'gold', ['paw'], ['sparkle']),
   dismiss_pet: r('shadow', 'steel', ['paw'], ['arcs']),
   revive_pet: r('nature', 'leafGreen', ['heart', { p: 'paw', ...BR }], ['sparkle', 'glow']),
   aspect_of_the_cheetah: r('nature', 'leafGreen', ['boot', { p: 'paw', ...BR }], ['motion']),
   aimed_shot: r('steel', 'steel', ['crosshair', { p: 'arrow', ...BR }]),
   rapid_fire: r('fury', 'steel', ['arrow'], ['motion']),
-  // priest
+  // acolyte
   heal: r('holy', 'holyGold', ['cross'], ['sparkle']),
   flash_heal: r('holy', 'holyGold', ['cross'], ['motion']),
   mind_flay: r('shadow', 'shadowPurple', ['eye'], ['motion']),
@@ -2833,7 +2833,7 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   // Talents V2 and the winning Warrior overlay. These explicit recipes remain
   // the deterministic fallback contract even when authored painted art wins at
   // render time, and every recipe is deliberately distinct.
-  // warrior
+  // swordman
   battle_stance: r('fury', 'gold', ['sword'], ['arcs']),
   berserker_stance: r('blood', 'blood', ['skull'], ['glow']),
   enrage_passive: r('fury', 'blood', ['flame', { p: 'fist', ...BIG }], ['glow', 'motion']),
@@ -2877,19 +2877,19 @@ const ABILITY_RECIPES: Record<string, IconRecipe> = {
   avenging_wrath: r('holy', 'gold', ['wing', { p: 'sunburst', ...BR }], ['glow']),
   hammer_of_wrath: r('holy', 'holyGold', ['mace', { p: 'lightning', ...BR }], ['glow']),
   aura_surge: r('holy', 'holyGold', ['shield', { p: 'sunburst', ...BR }], ['motion', 'glow']),
-  // hunter
+  // archer
   startle_shot: r('nature', 'venom', ['sunburst'], ['glow']),
   frost_trap: r('frost', 'ice', ['snowflake', { p: 'tendrils', ...BR }], ['glow']),
   multi_shot: r('steel', 'gold', ['bow', { p: 'arrow', ...BR }], ['motion']),
   deterrence: r('steel', 'leafGreen', ['shield', { p: 'paw', ...BR }], ['arcs']),
   aspect_of_the_wild: r('nature', 'leafGreen', ['paw', { p: 'sunburst', ...BR }], ['glow']),
-  // rogue
+  // thief
   smoke_screen: r('shadow', 'steel', ['fist'], ['glow']),
   preparation: r('shadow', 'steel', ['scroll', { p: 'dagger', ...BR }], ['sparkle']),
   ghostly_strike: r('shadow', 'silverWhite', ['dagger', { p: 'eye', ...TR }], ['glow']),
   cloak_of_shadows: r('shadow', 'shadowPurple', ['shield', { p: 'eye', ...BR }], ['glow']),
   shadowstep: r('shadow', 'shadowPurple', ['boot', { p: 'dagger', ...BR }], ['motion']),
-  // priest
+  // acolyte
   silence: r('shadow', 'shadowPurple', ['sigil_rune', { p: 'eye', ...BR }], ['arcs']),
   psychic_scream: r('shadow', 'shadowPurple', ['roar', { p: 'eye', ...BR }], ['glow']),
   inner_focus: r('holy', 'arcanePink', ['eye', { p: 'cross', ...BR }], ['sparkle']),
@@ -3682,20 +3682,7 @@ function weaponIconUrl(id: string): string | null {
 const SKILL_ICON_DIR = '/ui/skills';
 export const ABILITY_IMAGE_IDS = new Set<string>([
   // paladin (CraftPix premium "RPG Paladin skill icons" pack)
-  'seal_of_righteousness',
-  'holy_light',
-  'devotion_aura',
-  'judgement',
-  'blessing_of_might',
-  'divine_protection',
-  'hammer_of_justice',
-  'lay_on_hands',
-  'flash_of_light',
-  'exorcism',
-  'consecration',
-  'righteous_fury',
-  'retribution_aura',
-  // hunter (CraftPix premium "RPG Archer skill icons" pack). The archer pack is
+  // archer (CraftPix premium "RPG Archer skill icons" pack). The archer pack is
   // arrows/bows/traps only — the beast/aspect-animal abilities (aspect_of_the_hawk,
   // aspect_of_the_monkey, tame_beast, dismiss_pet, revive_pet) have no fitting art
   // here and intentionally stay on their procedural recipes until a beast pack lands.
@@ -3708,7 +3695,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'rapid_fire',
   'wing_clip',
   'aspect_of_the_cheetah',
-  // priest (CraftPix premium "RPG Priest skill icons" pack). The pack is all-holy —
+  // acolyte (CraftPix premium "RPG Priest skill icons" pack). The pack is all-holy —
   // the shadow spells (shadow_word_pain, mind_flay) have no dark art and stay procedural.
   'smite',
   'lesser_heal',
@@ -3720,24 +3707,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'flash_heal',
   // warlock (CraftPix premium "RPG Warlock skill icons" pack + "RPG Demon skill icons"
   // pack for the summons/life_tap/searing_pain that the warlock pack couldn't cover).
-  'shadow_bolt',
-  'demon_skin',
-  'immolate',
-  'corruption',
-  'curse_of_agony',
-  'drain_life',
-  'fear',
-  'shadowburn',
-  'summon_imp',
-  'summon_voidwalker',
-  'summon_succubus',
-  'summon_felhunter',
-  'summon_felguard',
-  'summon_infernal',
-  'summon_doomguard',
-  'life_tap',
-  'searing_pain',
-  // rogue (CraftPix premium "RPG Thief skill icons" pack). garrote/sap/expose_armor/blind
+  // thief (CraftPix premium "RPG Thief skill icons" pack). garrote/sap/expose_armor/blind
   // have no fitting art (no garrote-wire, blackjack, armor-shred, or eye-powder) — procedural.
   'sinister_strike',
   'eviscerate',
@@ -3756,7 +3726,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'adrenaline_rush',
   'deadly_poison',
   'stealth',
-  // warrior (CraftPix premium "RPG Warrior" + "RPG Berserker" packs; rage/fury abilities
+  // swordman (CraftPix premium "RPG Warrior" + "RPG Berserker" packs; rage/fury abilities
   // drew from berserker). taunt has no provoke art and stays procedural.
   'heroic_strike',
   'battle_shout',
@@ -3884,67 +3854,25 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'perfect_moment',
   // druid (CraftPix premium "RPG Druid" pack). moonfire (no moon), bear_charge, pounce,
   // demoralizing_roar, hibernate (no sleep), insect_swarm have no fitting art — procedural.
-  'wrath',
-  'healing_touch',
-  'mark_of_the_wild',
-  'rejuvenation',
-  'thorns',
-  'entangling_roots',
-  'bear_form',
-  'maul',
-  'growl',
-  'cat_form',
-  'prowl',
-  'rake',
-  'claw',
-  'regrowth',
-  'ferocious_bite',
-  'barkskin',
-  'swipe',
-  'starfire',
-  'travel_form',
-  'enrage',
-  'bash',
-  'faerie_fire',
-  'dash',
-  'tigers_fury',
-  'rip',
   // shaman (no dedicated pack — matched against the two generic CraftPix "100 RPG/skill
   // icon" packs + earth-magician for the earth abilities; aeromancer went unused). 11/11.
-  'lightning_bolt',
-  'rockbiter_weapon',
-  'healing_wave',
-  'earth_shock',
-  'lightning_shield',
-  'flame_shock',
-  'flametongue_weapon',
-  'frost_shock',
-  'frostbrand_weapon',
-  'ghost_wolf',
-  'stormstrike',
   // cross-class fills from the two generic CraftPix "100 RPG/skill icon" packs — abilities
-  // their own class pack couldn't cover but a generic icon fit. (warrior taunt completes warrior.)
+  // their own class pack couldn't cover but a generic icon fit. (swordman taunt completes swordman.)
   'aspect_of_the_hawk',
   'tame_beast',
-  'dismiss_pet', // hunter
-  'shadow_word_pain', // priest
+  'dismiss_pet', // archer
+  'shadow_word_pain', // acolyte
   'sap',
-  'expose_armor', // rogue
-  'taunt', // warrior
-  'moonfire',
-  'demoralizing_roar',
-  'insect_swarm', // druid
+  'expose_armor', // thief
+  'taunt', // swordman
   // final bespoke fills from per-ability "_Missing_*" packs — completes every class.
   'aspect_of_the_monkey',
-  'revive_pet', // hunter
-  'mind_flay', // priest
+  'revive_pet', // archer
+  'mind_flay', // acolyte
   'garrote',
-  'blind', // rogue
+  'blind', // thief
   'conjure_food',
   'polymorph', // mage
-  'bear_charge',
-  'hibernate',
-  'pounce', // druid
 ]);
 
 /** Static URL of an ability's image icon, or null if it uses a recipe. */
@@ -3963,7 +3891,7 @@ export function abilityImageUrl(id: string): string | null {
     id === 'double_charge' ||
     id === 'crushing_charge' ||
     id === 'combat_mastery'
-      ? 'warrior'
+      ? 'swordman'
       : id === 'double_blink' ||
           id === 'blink_while_casting' ||
           id === 'warded' ||

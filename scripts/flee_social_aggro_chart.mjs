@@ -28,7 +28,7 @@ function wildMobs(sim) {
 // Stage the scene: a low-HP fleer 3yd from the player and a row of idle same-family
 // allies down the lane it will flee along (+x, directly away from the player).
 function stage() {
-  const sim = new Sim({ seed: SEED, playerClass: 'warrior', autoEquip: true });
+  const sim = new Sim({ seed: SEED, playerClass: 'swordman', autoEquip: true });
   const mobs = wildMobs(sim);
   const fleer = mobs[0];
   fleer.templateId = FAMILY_TEMPLATE;

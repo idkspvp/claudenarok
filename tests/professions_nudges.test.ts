@@ -9,7 +9,7 @@ import type { SimEvent } from '../src/sim/types';
 const TREND_PAIR = 'weaponcrafting+armorcrafting';
 
 function makeSim(seed = 3120): Sim {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: true });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: true });
 }
 
 /** A mock ctx exposing only what the nudge helpers read: a mutable tickCount and
@@ -138,7 +138,7 @@ describe('first-tier tutorial one-shot (Professions 2.0)', () => {
     expect(saved?.profTierTutorialSent).toBe(true);
 
     const reloaded = makeSim(3121);
-    const pid = reloaded.addPlayer('warrior', 'Reloaded', { state: saved ?? undefined });
+    const pid = reloaded.addPlayer('swordman', 'Reloaded', { state: saved ?? undefined });
     const reloadedMeta = reloaded.players.get(pid)!;
     expect(reloadedMeta.profTierTutorialSent).toBe(true);
     const afterLoad = nudgeCtx();

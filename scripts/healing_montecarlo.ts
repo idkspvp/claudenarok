@@ -1,7 +1,7 @@
 // Monte Carlo healing-vs-heroic analysis harness (the healing companion to
 // scripts/nythraxis_matrix.ts and the closed PR #1040 DPS simulator). Drives
 // the REAL Sim: level-20 best-in-slot healers and a best-in-slot protection
-// warrior against heroic-transformed dungeon mobs, one fresh seeded Sim per
+// swordman against heroic-transformed dungeon mobs, one fresh seeded Sim per
 // run, so variance comes from real crit/miss/dodge/parry rolls.
 //
 // Three benches:
@@ -88,7 +88,7 @@ export type Spec = {
 export const HEALER_SPECS: Spec[] = [
   {
     key: 'holy_priest',
-    cls: 'priest',
+    cls: 'acolyte',
     kind: 'healer',
     talents: {
       spec: 'holy',
@@ -105,7 +105,7 @@ export const HEALER_SPECS: Spec[] = [
   },
   {
     key: 'discipline_priest',
-    cls: 'priest',
+    cls: 'acolyte',
     kind: 'healer',
     talents: {
       spec: 'discipline',
@@ -177,7 +177,7 @@ export const HEALER_SPECS: Spec[] = [
 
 export const TANK_SPEC: Spec = {
   key: 'protection_warrior',
-  cls: 'warrior',
+  cls: 'swordman',
   kind: 'tank',
   talents: {
     spec: 'prot',
@@ -220,7 +220,7 @@ function statScore(item: ItemDef, spec: Spec): number {
       (s.armor ?? 0) * 0.003
     );
   // Tank: max-EHP pick (stamina first, armor as tiebreak). Reproduces the
-  // floors-test reference warrior kit (2861 armor / 2762 hp base); the old
+  // floors-test reference swordman kit (2861 armor / 2762 hp base); the old
   // armor-heavy weights traded 310 hp away for armor the fights never repaid.
   return (s.vit ?? 0) * 100 + (s.armor ?? 0) * 0.1 + weapon * 0.01;
 }
@@ -459,9 +459,9 @@ function runHealerBench(spec: Spec, seed: number): { run: HealerBenchRun; profil
   let profile: HealerProfile | null = null;
 
   for (const mode of modes) {
-    const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+    const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
     const healerPid = addSpecPlayer(sim, spec, 'Healer');
-    const patientPid = sim.addPlayer('warrior', 'Patient');
+    const patientPid = sim.addPlayer('swordman', 'Patient');
     sim.setPlayerLevel(MAX_LEVEL, patientPid);
     teleport(sim, healerPid, ARENA.x, ARENA.z);
     teleport(sim, patientPid, ARENA.x, ARENA.z + 5);
@@ -571,7 +571,7 @@ type IntakeRun = {
 };
 
 // The buff layers a real group runs on its tank: Litany of Resolve (+5% sta,
-// priest party buff) and Elixir of the Bear (+12 sta). Probe: 2762 base kit
+// acolyte party buff) and Elixir of the Bear (+12 sta). Probe: 2762 base kit
 // to 3072 buffed; enchant/masterwork rolled stats (unmodeled) add more.
 export function applyTankRaidBuffs(sim: Sim, pid: number) {
   const tank = must(sim.entities.get(pid), `tank entity ${pid}`);
@@ -634,7 +634,7 @@ function spawnEncounter(sim: Sim, encounter: Encounter, tank: Entity): Entity[] 
 }
 
 function runIntakeBench(encounter: Encounter, seed: number): IntakeRun {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const { pid, tank } = setupTank(sim);
   const mobs = spawnEncounter(sim, encounter, tank);
   const keep = new Set(mobs.map((m) => m.id));
@@ -682,7 +682,7 @@ type SurvivalRun = {
 };
 
 function runSurvival(encounter: Encounter, healerSpecs: Spec[], seed: number): SurvivalRun {
-  const sim = new Sim({ seed, playerClass: 'warrior', noPlayer: true });
+  const sim = new Sim({ seed, playerClass: 'swordman', noPlayer: true });
   const { pid: tankPid, tank } = setupTank(sim);
   const healerPids = healerSpecs.map((spec, i) => {
     const pid = addSpecPlayer(sim, spec, `Healer${i}`);
@@ -842,7 +842,7 @@ function main() {
       ENCOUNTERS.find((e) => e.key === encounterKey),
       `encounter ${encounterKey}`,
     );
-    const duo = [HEALER_SPECS[0], HEALER_SPECS[3]]; // holy priest + resto shaman
+    const duo = [HEALER_SPECS[0], HEALER_SPECS[3]]; // holy acolyte + resto shaman
     const runs: SurvivalRun[] = [];
     for (let r = 0; r < RUNS; r++) runs.push(runSurvival(encounter, duo, BASE_SEED + r * 32452843));
     survivalCells.push({

@@ -3,7 +3,7 @@
 // This module owns the Nythraxis multi-phase raid script: the per-tick encounter
 // driver, the dialogue/yell scheduler, the Gravebreaker / Raise Fallen / Soul Rend
 // / Deathless Rage mechanics, the Aldric transition + wardstone channels, the
-// skeleton-warrior add AI, the CC-immunity predicates, the raid lockout grant, and
+// skeleton-swordman add AI, the CC-immunity predicates, the raid lockout grant, and
 // the crypt relic / grave-vision quest chain. It is the LAST slice: every AI /
 // damage / aura / threat / locomotion callback it leans on already exists on
 // SimContext, so it consumes a fully-grown seam.
@@ -172,9 +172,9 @@ export function isNythraxisRaidEnemy(target: Entity): boolean {
 }
 
 // The two Nythraxis adds the raid is MEANT to control (their templates carry
-// ccImmune: false): Malric the priest (stun/silence to break his heal channel)
+// ccImmune: false): Malric the acolyte (stun/silence to break his heal channel)
 // and Voss the stalker (untauntable, so root/stun him off the healers). The
-// scripted control-immunity gate exempts both; the warrior add stays CC-immune.
+// scripted control-immunity gate exempts both; the swordman add stays CC-immune.
 export function isNythraxisControllableAdd(target: Entity): boolean {
   return (
     target.kind === 'mob' &&
@@ -183,7 +183,7 @@ export function isNythraxisControllableAdd(target: Entity): boolean {
   );
 }
 
-// ----- skeleton-warrior add AI (consumed by mob retarget on Sim) ------------------
+// ----- skeleton-swordman add AI (consumed by mob retarget on Sim) ------------------
 
 export function findNythraxisBossForAdd(ctx: SimContext, add: Entity): Entity | null {
   if (add.kind !== 'mob' || !isNythraxisRaidAddTemplate(add.templateId)) return null;
@@ -880,7 +880,7 @@ export function startNythraxisTransition(
   boss.castTotal = 0;
   boss.castTargetId = null;
   const transitionLines = [
-    { speaker: 'nythraxis' as const, text: 'Another priest...', delay: 0 },
+    { speaker: 'nythraxis' as const, text: 'Another acolyte...', delay: 0 },
     { speaker: 'aldric' as const, text: 'Your kingdom is gone, Nythraxis', delay: 3.0 },
     { speaker: 'aldric' as const, text: 'Yet you still cling to it', delay: 5.7 },
     { speaker: 'aldric' as const, text: 'Champions, listen carefully!', delay: 8.4 },

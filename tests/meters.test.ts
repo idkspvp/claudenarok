@@ -6,8 +6,8 @@ import type { IWorld } from '../src/world_api';
 // minimal IWorld stand-in: entity map + player + party
 function fakeWorld(): IWorld {
   const entities = new Map<number, any>();
-  entities.set(1, { id: 1, kind: 'player', name: 'Hero', templateId: 'warrior' });
-  entities.set(2, { id: 2, kind: 'player', name: 'Pal', templateId: 'priest' });
+  entities.set(1, { id: 1, kind: 'player', name: 'Hero', templateId: 'swordman' });
+  entities.set(2, { id: 2, kind: 'player', name: 'Pal', templateId: 'acolyte' });
   entities.set(50, { id: 50, kind: 'mob', name: 'Wolf', maxHp: 60, dead: false, aggroTargetId: 1 });
   entities.set(51, {
     id: 51,
@@ -23,7 +23,7 @@ function fakeWorld(): IWorld {
     partyInfo: {
       leader: 1,
       raid: false,
-      members: [{ pid: 2, name: 'Pal', cls: 'priest', group: 1 }],
+      members: [{ pid: 2, name: 'Pal', cls: 'acolyte', group: 1 }],
     },
   } as unknown as IWorld;
 }
@@ -187,9 +187,9 @@ describe('combat meters', () => {
       id: 3,
       kind: 'player',
       name: 'Pal',
-      templateId: 'priest',
+      templateId: 'acolyte',
     });
-    (w.partyInfo as any).members = [{ pid: 3, name: 'Pal', cls: 'priest', group: 1 }];
+    (w.partyInfo as any).members = [{ pid: 3, name: 'Pal', cls: 'acolyte', group: 1 }];
     const party2 = new Set([1, 3]);
     m.onEvent(dmg(3, 50, 30), w, party2, 2000);
     expect(m.current!.tallies.size).toBe(1); // one merged "Pal" row, not two

@@ -6,7 +6,7 @@
   "coverage": [
     "arena 1v1 match + Elo result",
     "multi-player PlayerMeta sampling",
-    "classes:warrior,mage"
+    "classes:swordman,mage"
   ],
   "draws": 483,
   "drawDigest": "ae452b6c",
@@ -29,8 +29,8 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "8eb21e11",
-      "events": "e6f4f578",
+      "state": "757c442c",
+      "events": "4edd2d7a",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -40,7 +40,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "b7be2c36",
+      "state": "6fe13855",
       "events": "f1f789bc",
       "rng": {
         "draws": 34,
@@ -51,7 +51,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 417,
-      "state": "b62ceac8",
+      "state": "3e76be53",
       "events": "0e9797f8",
       "rng": {
         "draws": 134,
@@ -62,7 +62,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "5917326f",
+      "state": "b0118586",
       "events": "3abd1ad8",
       "rng": {
         "draws": 254,
@@ -73,8 +73,8 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 417,
-      "state": "1c6e2262",
-      "events": "3ff70258",
+      "state": "832bf071",
+      "events": "ac6fb178",
       "rng": {
         "draws": 384,
         "digest": "9a9a7293"
@@ -84,7 +84,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 417,
-      "state": "4dc50c81",
+      "state": "9992f184",
       "events": "741638a5",
       "rng": {
         "draws": 483,
@@ -104,14 +104,14 @@
             null
           ],
           "bank": {},
-          "cls": "warrior",
+          "cls": "swordman",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 54
+              "damageDealt": 40
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -161,13 +161,7 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 15,
-          "statAllocation": {
-            "agi": 3,
-            "dex": 5,
-            "luk": 1,
-            "str": 8,
-            "vit": 7
-          },
+          "statAllocation": {},
           "townFocus": {}
         },
         {
@@ -235,20 +229,14 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 10,
-          "statAllocation": {
-            "agi": 2,
-            "dex": 8,
-            "int": 9,
-            "luk": 1,
-            "vit": 4
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 10,
+          "attackPower": 1,
           "auras": [
             {
               "duration": 3600,
@@ -264,20 +252,20 @@
           "blockValue": 6,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 106.1,
-          "flee": 5,
-          "hit": 7,
-          "hp": 90,
+          "flee": 2,
+          "hit": 2,
+          "hp": 41,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 90,
+          "maxHp": 41,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -299,15 +287,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 4,
-            "armor": 122,
-            "dex": 6,
+            "agi": 1,
+            "armor": 54,
+            "dex": 1,
             "int": 1,
-            "luk": 2,
-            "str": 9,
-            "vit": 9
+            "luk": 1,
+            "str": 1,
+            "vit": 2
           },
-          "templateId": "warrior",
+          "templateId": "swordman",
           "weapon": {
             "max": 5,
             "min": 2,
@@ -316,25 +304,25 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 1,
           "combatTimer": 101.05,
           "comboUntil": -1,
-          "critChance": 0.016667,
+          "critChance": 0.013333,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.011,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 106.1,
-          "flee": 4,
-          "hit": 10,
+          "flee": 2,
+          "hit": 2,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 54,
-          "maxResource": 182,
+          "maxHp": 40,
+          "maxResource": 16,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -345,7 +333,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 182,
+          "resource": 16,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -353,15 +341,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 14,
+          "spellPower": 2,
           "stats": {
-            "agi": 3,
-            "armor": 43,
-            "dex": 9,
-            "int": 11,
-            "luk": 2,
+            "agi": 1,
+            "armor": 8,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
             "str": 1,
-            "vit": 5
+            "vit": 1
           },
           "templateId": "mage",
           "weapon": {

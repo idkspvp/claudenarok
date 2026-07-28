@@ -24,7 +24,7 @@ describe('ptr dev vendor', () => {
   });
 
   it('/dev vendor spawns a free vendor and buying an epic costs nothing (dev realm)', () => {
-    const sim = new Sim({ seed: 5, playerClass: 'warrior', autoEquip: false, devCommands: true });
+    const sim = new Sim({ seed: 5, playerClass: 'swordman', autoEquip: false, devCommands: true });
     sim.setPlayerLevel(20);
     const p = sim.player;
     const copperBefore = (sim as unknown as { meta(pid?: number): { copper: number } }).meta?.(
@@ -54,7 +54,7 @@ describe('ptr dev vendor', () => {
   });
 
   it('is inert on a production realm: /dev vendor does nothing without devCommands', () => {
-    const sim = new Sim({ seed: 5, playerClass: 'warrior', autoEquip: true, devCommands: false });
+    const sim = new Sim({ seed: 5, playerClass: 'swordman', autoEquip: true, devCommands: false });
     sim.setPlayerLevel(20);
     sim.chat('/dev vendor');
     sim.tick();

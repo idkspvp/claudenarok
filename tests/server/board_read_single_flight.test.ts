@@ -110,7 +110,7 @@ function xpRows(tag: string): LifetimeXpLeaderRow[] {
   return [
     {
       name: `${tag}-hero`,
-      class: 'warrior',
+      class: 'swordman',
       level: 60,
       realm: 'test-realm',
       lifetimeXp: 1_000,
@@ -166,7 +166,7 @@ function deedsCharacter(id: number): DeedsBoardCharacterRow {
   return {
     id,
     name: id === 1 ? 'preban-deedster' : 'postban-deedster',
-    class: 'warrior',
+    class: 'swordman',
     level: 60,
     realm: 'test-realm',
     activeTitle: null,

@@ -4,7 +4,7 @@
   "sampleEvery": 20,
   "ticks": 72,
   "coverage": [
-    "class:rogue",
+    "class:thief",
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "be14caee",
+      "state": "521a399d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -35,7 +35,7 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {},
           "craftSkills": {},
@@ -69,38 +69,32 @@
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {
-            "agi": 8,
-            "dex": 4,
-            "luk": 3,
-            "str": 6,
-            "vit": 3
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 8,
+          "attackPower": 1,
           "combatTimer": 99,
           "comboUntil": -1,
-          "critChance": 0.023333,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 6,
-          "hp": 62,
+          "flee": 2,
+          "hit": 2,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 62,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -130,15 +124,15 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 9,
-            "armor": 62,
-            "dex": 5,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 4,
-            "str": 7,
-            "vit": 4
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -152,8 +146,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "c85ad60a",
-      "events": "c9827cda",
+      "state": "9eb924ff",
+      "events": "c1109bb8",
       "rng": {
         "draws": 14,
         "digest": "4b746836"
@@ -163,8 +157,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "75d3f418",
-      "events": "99746bae",
+      "state": "37cb6ed5",
+      "events": "63e2247f",
       "rng": {
         "draws": 24,
         "digest": "672bbd02"
@@ -174,8 +168,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "027898fd",
-      "events": "2bd61946",
+      "state": "8d22f57c",
+      "events": "9a4fbffe",
       "rng": {
         "draws": 103,
         "digest": "4bf8fdbd"
@@ -185,7 +179,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "c9258865",
+      "state": "9ab28990",
       "events": "741638a5",
       "rng": {
         "draws": 159,
@@ -205,17 +199,17 @@
             null
           ],
           "bank": {},
-          "cls": "rogue",
+          "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 99,
-            "damageTaken": 9
+            "damageDealt": 23,
+            "damageTaken": 17
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 99
+              "damageDealt": 23
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -263,36 +257,30 @@
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
-          "statAllocation": {
-            "agi": 12,
-            "dex": 7,
-            "luk": 4,
-            "str": 10,
-            "vit": 5
-          },
+          "statAllocation": {},
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 14,
+          "attackPower": 1,
           "autoAttack": true,
           "combatTimer": 1.2,
           "comboPoints": 3,
           "comboUntil": 32.4,
-          "critChance": 0.026667,
+          "critChance": 0.013333,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.015,
+          "dodgeChance": 0.011,
           "dualWielding": true,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "flee": 23,
-          "hit": 18,
-          "hp": 49991,
+          "flee": 11,
+          "hit": 11,
+          "hp": 49983,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -310,7 +298,7 @@
             "speed": 1.8
           },
           "onGround": true,
-          "overpowerUntil": 5.05,
+          "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
             "x": 2.5,
@@ -329,17 +317,17 @@
           },
           "spellPower": 1,
           "stats": {
-            "agi": 13,
-            "armor": 138,
-            "dex": 8,
+            "agi": 1,
+            "armor": 14,
+            "dex": 1,
             "int": 1,
-            "luk": 5,
-            "str": 11,
-            "vit": 6
+            "luk": 1,
+            "str": 1,
+            "vit": 1
           },
           "swingTimer": 0.05,
           "targetId": 416,
-          "templateId": "rogue",
+          "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 4,
@@ -361,7 +349,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8901,
+          "hp": 8977,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -402,7 +390,7 @@
           "threat": [
             [
               415,
-              100
+              24
             ]
           ],
           "weapon": {

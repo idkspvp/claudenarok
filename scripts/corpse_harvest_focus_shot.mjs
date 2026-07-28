@@ -28,7 +28,7 @@ await page.evaluate(() => {
   const cn = document.querySelector('#char-name');
   cn.value = 'Harvestwyn';
   cn.dispatchEvent(new Event('input', { bubbles: true }));
-  document.querySelector('#offline-select .mini-class[data-class="hunter"]')?.click();
+  document.querySelector('#offline-select .mini-class[data-class="archer"]')?.click();
 });
 await sleep(200);
 await page.evaluate(() => document.querySelector('#btn-start-offline').click());

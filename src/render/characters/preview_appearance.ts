@@ -27,7 +27,7 @@ export interface PreviewVisual {
 
 /** Resolve an appearance to its concrete visual, mirroring createCharacterVisual
  *  (index.ts): the Mech is a separate body (`player_mech`) that adopts the wearer
- *  class's hand layout (a rogue mech dual-wields), while the class rig uses
+ *  class's hand layout (a thief mech dual-wields), while the class rig uses
  *  `player_<class>` with no override. Kept DOM/Three-free so it is unit-tested. */
 export function previewAppearanceVisual(a: PreviewAppearance): PreviewVisual {
   const mech = a.skinCatalog === 'mech';

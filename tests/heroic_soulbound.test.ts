@@ -17,7 +17,7 @@ describe('soulbound: heroic_mark is bound', () => {
   });
 
   it('cannot be destroyed via right-click discard, but ordinary items can', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', autoEquip: true });
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', autoEquip: true });
     const pid = sim.player.id;
     sim.addItem('heroic_mark', 3, pid);
     sim.addItem('minor_healing_potion', 3, pid);
@@ -71,8 +71,8 @@ describe('soulbound: heroic_mark is bound', () => {
   });
 
   it('reports a soulbound refusal without calling the mark a quest item', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const sender = sim.addPlayer('warrior', 'Alice');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const sender = sim.addPlayer('swordman', 'Alice');
     const recipient = sim.addPlayer('mage', 'Bob');
     const senderMeta = sim.meta(sender);
     const recipientMeta = sim.meta(recipient);
@@ -105,8 +105,8 @@ describe('soulbound: heroic_mark is bound', () => {
   });
 
   it('returns a persisted pre-soulbound Heroic Mark parcel to its sender on load', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'warrior', noPlayer: true });
-    const sender = sim.addPlayer('warrior', 'Alice');
+    const sim = new Sim({ seed: 1, playerClass: 'swordman', noPlayer: true });
+    const sender = sim.addPlayer('swordman', 'Alice');
     const recipient = sim.addPlayer('mage', 'Bob');
     const legacySave: MailSave = {
       mail: [

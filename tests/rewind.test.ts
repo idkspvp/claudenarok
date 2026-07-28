@@ -9,6 +9,7 @@ import { ABILITIES, MOBS } from '../src/sim/data';
 import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import type { Entity, SimEvent } from '../src/sim/types';
+import { raisePool } from './helpers/sp';
 
 const REWIND = 'temporal_rewind';
 
@@ -17,7 +18,7 @@ function chronoMage(): { sim: Sim; p: Entity } {
   sim.setPlayerLevel(20);
   sim.tick();
   const p = sim.player;
-  p.resource = p.maxResource;
+  raisePool(p);
   return { sim, p };
 }
 
@@ -25,7 +26,7 @@ function chronoMage(): { sim: Sim; p: Entity } {
 // are easy to reason about. Returns the entity.
 function addAlly(sim: Sim, name: string, dx: number, dz: number, maxHp = 100_000): Entity {
   const p = sim.player;
-  const id = sim.addPlayer('warrior', name);
+  const id = sim.addPlayer('swordman', name);
   const e = sim.entities.get(id)!;
   e.pos = { x: p.pos.x + dx, y: p.pos.y, z: p.pos.z + dz };
   e.prevPos = { ...e.pos };
@@ -187,7 +188,7 @@ describe('Rewind: targeting', () => {
     const dead = addAlly(sim, 'Dead', 4, 0);
     group(sim, p.id, [near.id, far.id, dead.id]);
     // A non-group player standing in range.
-    const outsiderId = sim.addPlayer('warrior', 'Outsider');
+    const outsiderId = sim.addPlayer('swordman', 'Outsider');
     const outsider = sim.entities.get(outsiderId)!;
     outsider.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };
     outsider.maxHp = 100_000;
@@ -301,7 +302,7 @@ describe('Rewind: rules', () => {
     sim.setPlayerLevel(20, mage2Id);
     const mage2 = sim.entities.get(mage2Id)!;
     mage2.pos = { x: p.pos.x + 2, y: p.pos.y, z: p.pos.z };
-    mage2.resource = mage2.maxResource;
+    raisePool(mage2);
     const ally = addAlly(sim, 'A', 3, 0);
     group(sim, p.id, [mage2.id, ally.id]);
     const lost = hurt(sim, ally, 10_000);

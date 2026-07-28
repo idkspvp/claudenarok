@@ -77,7 +77,7 @@ function makeOverworldWorld(
     entities,
     socialInfo,
     delveRun: null,
-    cfg: { seed: 42, playerClass: 'warrior' },
+    cfg: { seed: 42, playerClass: 'swordman' },
     playerId: 1,
   } as unknown as IWorld;
 }
@@ -89,7 +89,7 @@ function makeDelveWorld(shape: 'sim' | 'client'): IWorld {
     entities: new Map(),
     socialInfo: null,
     delveRun: { delveId: 'd', modules: ['m'], moduleIndex: 0, origin: { x: 5000, z: 0 } },
-    cfg: { seed: 42, playerClass: 'warrior' },
+    cfg: { seed: 42, playerClass: 'swordman' },
     playerId: 1,
     questLog: new Map(),
   } as unknown as IWorld;

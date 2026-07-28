@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
+import { raisePool } from './helpers/sp';
 
 vi.mock('../server/db', () => ({
   pool: { query: vi.fn(async () => ({ rows: [] })) },
@@ -40,7 +41,7 @@ describe('Hourglass allied cancellation online', () => {
     const mage = server.sim.entities.get(session.pid);
     if (!mage) throw new Error('mage missing');
     place(server, mage, 700);
-    mage.resource = mage.maxResource;
+    raisePool(mage);
 
     server.handleMessage(
       session,
@@ -55,7 +56,7 @@ describe('Hourglass allied cancellation online', () => {
   it('routes cancel_aura to the authoritative simulation and stops every benefit', () => {
     const server = new GameServer();
     const mageSession = server.join(fakeWs(), 1, 1, 'Chrona', 'mage', null);
-    const allySession = server.join(fakeWs(), 2, 2, 'Guard', 'warrior', null);
+    const allySession = server.join(fakeWs(), 2, 2, 'Guard', 'swordman', null);
     if ('error' in mageSession || 'error' in allySession) throw new Error('join failed');
 
     server.sim.setPlayerLevel(14, mageSession.pid);
@@ -65,7 +66,7 @@ describe('Hourglass allied cancellation online', () => {
     if (!mage || !ally) throw new Error('players missing');
     place(server, mage, 700);
     place(server, ally, 708);
-    mage.resource = mage.maxResource;
+    raisePool(mage);
     server.sim.partyInvite(ally.id, mage.id);
     server.sim.partyAccept(ally.id);
     ally.hp = Math.floor(ally.maxHp * 0.4);

@@ -39,7 +39,7 @@ page.on('console', (msg) => {
 });
 
 await page.goto(URL, { waitUntil: 'networkidle0', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Thumbster', settleMs: 2500 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Thumbster', settleMs: 2500 });
 
 // Force the touch layer on. Headless Chromium doesn't always report
 // (pointer: coarse), so we apply the same body class MobileControls would.

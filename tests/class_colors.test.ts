@@ -11,7 +11,7 @@ import type { PlayerClass } from '../src/sim/types';
 // shell.css (char-select chips, class detail panels, skin swatches), the guide's
 // CLASS_CHIPS, and the server avatar emblem tint (public profile pages and
 // og:image unfurls). The CSS and guide copies are MANUAL parallels that do not
-// read CLASSES, and copies have drifted before (priest was #ffffff in CSS vs
+// read CLASSES, and copies have drifted before (acolyte was #ffffff in CSS vs
 // #fffff0 in the sim, and the avatar table shipped a whole palette generation
 // behind), so this suite pins the shared palette to literals and guards every
 // site against it.
@@ -19,15 +19,11 @@ import type { PlayerClass } from '../src/sim/types';
 // The approved palette, pinned as literals so a silent revert of any single
 // color fails loudly. Do not derive these from CLASSES: the pin IS the spec.
 const PALETTE: Record<PlayerClass, number> = {
-  warrior: 0xd67a54,
+  swordman: 0xd67a54,
   mage: 0x33c1f1,
-  rogue: 0xfcee58,
-  paladin: 0xf58ca0,
-  hunter: 0xa6d84f,
-  priest: 0xc6d4f0,
-  shaman: 0x4e8aea,
-  warlock: 0xa785e6,
-  druid: 0xff8c1a,
+  archer: 0xa6d84f,
+  acolyte: 0xc6d4f0,
+  thief: 0xfcee58,
 };
 const CLASS_IDS = Object.keys(PALETTE) as PlayerClass[];
 
@@ -86,17 +82,17 @@ describe('class color palette', () => {
   it('the char-select badge literals track their 1:1 class colors', () => {
     // The energy and rage resource badges and the ranged role label render on
     // the SAME class-details card as the class-colored name, and each is 1:1
-    // with a single class (rogue, warrior, hunter), so they must track the
+    // with a single class (thief, swordman, archer), so they must track the
     // palette exactly or the card shows two near-miss shades of one identity.
     // Mana is shared by five classes and deliberately NOT class-pinned.
     expect(shellCss).toContain(
-      `.badge-resource.resource-energy { background: rgba(252, 238, 88, 0.12); border-color: rgba(252, 238, 88, 0.4); color: ${toCssHex(PALETTE.rogue)}; }`,
+      `.badge-resource.resource-energy { background: rgba(252, 238, 88, 0.12); border-color: rgba(252, 238, 88, 0.4); color: ${toCssHex(PALETTE.thief)}; }`,
     );
     expect(shellCss).toContain(
-      `.badge-resource.resource-rage { background: rgba(214, 122, 84, 0.15); border-color: rgba(214, 122, 84, 0.4); color: ${toCssHex(PALETTE.warrior)}; }`,
+      `.badge-resource.resource-rage { background: rgba(214, 122, 84, 0.15); border-color: rgba(214, 122, 84, 0.4); color: ${toCssHex(PALETTE.swordman)}; }`,
     );
     expect(shellCss).toContain(
-      `.class-details-role.role-ranged { color: ${toCssHex(PALETTE.hunter)}; }`,
+      `.class-details-role.role-ranged { color: ${toCssHex(PALETTE.archer)}; }`,
     );
   });
 });

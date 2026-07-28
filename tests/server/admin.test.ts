@@ -928,7 +928,7 @@ describe('migrated read handlers (QA gate parity coverage)', () => {
     authedAdminDb({
       registrationsByDay,
       sessionsByDay,
-      classDistribution: async () => [{ class: 'warrior', count: 3 }],
+      classDistribution: async () => [{ class: 'swordman', count: 3 }],
       levelDistribution: async () => [{ level: 1, count: 4 }],
     });
     installAdminRuntime();
@@ -941,7 +941,7 @@ describe('migrated read handlers (QA gate parity coverage)', () => {
         days: 30,
         registrations: [{ day: 'd', count: 1 }],
         sessions: [{ day: 'd', count: 2 }],
-        classes: [{ class: 'warrior', count: 3 }],
+        classes: [{ class: 'swordman', count: 3 }],
         levels: [{ level: 1, count: 4 }],
       },
       error: null,

@@ -12,7 +12,7 @@ import { Sim } from '../src/sim/sim';
 import type { PlayerClass } from '../src/sim/types';
 
 const SIM_SEED = 1;
-const PROBE_CLASS: PlayerClass = 'warrior';
+const PROBE_CLASS: PlayerClass = 'swordman';
 
 // A DOM-less, network-free WebSocket stand-in for the ClientWorld ctor (see
 // tests/world_api_parity.test.ts for the full-featured version this mirrors).

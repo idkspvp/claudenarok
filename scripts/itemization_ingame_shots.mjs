@@ -6,8 +6,8 @@
 //   node scripts/itemization_ingame_shots.mjs   (needs `npm run dev` on :5173)
 //
 // Shots:
-//   rating-stats-ingame.png       hunter with 3 Direfang pieces -> Crit + Haste Rating cells
-//   set-4pc-ingame.png            priest with 4 Mournweave pieces -> item-set tooltip incl the 4-set
+//   rating-stats-ingame.png       archer with 3 Direfang pieces -> Crit + Haste Rating cells
+//   set-4pc-ingame.png            acolyte with 4 Mournweave pieces -> item-set tooltip incl the 4-set
 //   legendary-thronebane-ingame.png   Thronebane legendary sword tooltip (Chain Arc proc)
 //   legendary-heartwood-ingame.png    Heartwood legendary staff tooltip (Deathbloom / Lifebloom)
 //   epic-set-names-ingame.png     paperdoll of the equipped Mournweave set (names match the set)
@@ -206,9 +206,9 @@ async function shotSlotTooltip(page, slot, file) {
   return false;
 }
 
-// ---- Shot 1: rating stats (hunter, 3 Direfang / nighttalon leather pieces) ----
+// ---- Shot 1: rating stats (archer, 3 Direfang / nighttalon leather pieces) ----
 {
-  const page = await boot('hunter', 'Ranger');
+  const page = await boot('archer', 'Ranger');
   const r = await equip(page, ['nighttalon_grips', 'nighttalon_waistband', 'nighttalon_crown']);
   console.log('rating equip ->', JSON.stringify(r));
   await wait(600); // let level-up/equip events settle
@@ -217,15 +217,15 @@ async function shotSlotTooltip(page, slot, file) {
   await page.close();
 }
 
-// ---- Shots 2 + 4: caster (priest) with 4 Mournweave + the Heartwood staff ----
+// ---- Shots 2 + 4: caster (acolyte) with 4 Mournweave + the Heartwood staff ----
 {
-  const page = await boot('priest', 'Cleric');
+  const page = await boot('acolyte', 'Cleric');
   const r = await equip(page, [
     'necromancers_starshroud',
     'necromancers_soulspire_mantle',
     'necromancers_legwraps',
     'necromancers_soulsteps',
-    'deathless_heartwood', // legendary staff (mainhand) - priest can wield it
+    'deathless_heartwood', // legendary staff (mainhand) - acolyte can wield it
   ]);
   console.log('mournweave equip ->', JSON.stringify(r.equipment));
   await wait(600);
@@ -239,9 +239,9 @@ async function shotSlotTooltip(page, slot, file) {
   await page.close();
 }
 
-// ---- Shot 3: warrior with the Thronebane legendary sword equipped ----
+// ---- Shot 3: swordman with the Thronebane legendary sword equipped ----
 {
-  const page = await boot('warrior', 'Warblade');
+  const page = await boot('swordman', 'Warblade');
   const r = await equip(page, ['kingsbane_last_oath']); // legendary sword (mainhand)
   console.log('thronebane equip ->', JSON.stringify(r.equipment));
   await wait(600);

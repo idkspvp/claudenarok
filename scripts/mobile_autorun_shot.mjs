@@ -28,7 +28,7 @@ await page.goto(URL, { waitUntil: 'networkidle2' });
 await sleep(800);
 
 // Offline flow: #btn-offline -> pick a class -> name -> start
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Trailblazer', settleMs: 3500 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Trailblazer', settleMs: 3500 });
 
 async function shot(name) {
   await page.screenshot({ path: `${OUT}-${name}.png` });

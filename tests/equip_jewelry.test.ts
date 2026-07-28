@@ -14,10 +14,10 @@ type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
 
 function makeSim(seed = 7): AnySim {
-  return new Sim({ seed, playerClass: 'warrior', noPlayer: true }) as AnySim;
+  return new Sim({ seed, playerClass: 'swordman', noPlayer: true }) as AnySim;
 }
 
-function addCapped(sim: AnySim, cls: 'warrior' | 'mage', name: string): number {
+function addCapped(sim: AnySim, cls: 'swordman' | 'mage', name: string): number {
   const pid = sim.addPlayer(cls, name);
   sim.setPlayerLevel(20, pid);
   return pid;
@@ -47,7 +47,7 @@ describe('resolveEquipSlot (pure)', () => {
 describe('jewelry equip flow', () => {
   it('equips two rings into ring1 then ring2, and a third swaps ring1 back to bags', () => {
     const sim = makeSim();
-    const pid = addCapped(sim, 'warrior', 'Ringo');
+    const pid = addCapped(sim, 'swordman', 'Ringo');
     const meta = sim.players.get(pid) as any;
     sim.addItem('seal_of_the_nine_oaths', 1, pid);
     sim.addItem('nielas_coldlight_band', 1, pid);
@@ -69,7 +69,7 @@ describe('jewelry equip flow', () => {
 
   it('equips and unequips a neckpiece through the neck slot', () => {
     const sim = makeSim();
-    const pid = addCapped(sim, 'warrior', 'Necko');
+    const pid = addCapped(sim, 'swordman', 'Necko');
     const meta = sim.players.get(pid) as any;
     sim.addItem('yumis_keepsake_locket', 1, pid);
 
@@ -84,7 +84,7 @@ describe('jewelry equip flow', () => {
 
   it('folds jewelry stats through recalcPlayerStats', () => {
     const sim = makeSim();
-    const pid = addCapped(sim, 'warrior', 'Statty');
+    const pid = addCapped(sim, 'swordman', 'Statty');
     const p = sim.entities.get(pid) as AnyEntity;
     const before = { str: p.stats.str, vit: p.stats.vit };
     sim.addItem('seal_of_the_nine_oaths', 1, pid);
@@ -104,7 +104,7 @@ describe('jewelry equip flow', () => {
 
   it('refuses jewelry below the level requirement', () => {
     const sim = makeSim();
-    const pid = sim.addPlayer('warrior', 'Lowbie'); // level 1
+    const pid = sim.addPlayer('swordman', 'Lowbie'); // level 1
     const meta = sim.players.get(pid) as any;
     sim.addItem('seal_of_the_nine_oaths', 1, pid);
     sim.drainEvents();

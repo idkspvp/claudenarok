@@ -5,7 +5,7 @@
 import type { TranslationKey } from '../../ui/i18n';
 
 export interface PageContext {
-  /** Path segments after the matched route, e.g. ['warrior'] for classes/warrior. */
+  /** Path segments after the matched route, e.g. ['swordman'] for classes/swordman. */
   params: string[];
   /** The matched route's sub-path. */
   sub: string;

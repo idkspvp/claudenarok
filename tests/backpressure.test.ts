@@ -38,7 +38,7 @@ function fakeWs(bufferedAmount: number) {
 }
 
 function join(server: GameServer, ws: any, id: number, name: string) {
-  const session = server.join(ws, id, id, name, 'warrior', null);
+  const session = server.join(ws, id, id, name, 'swordman', null);
   if ('error' in session) throw new Error(session.error);
   session.blockListLoaded = true;
   return session;

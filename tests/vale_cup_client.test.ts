@@ -17,11 +17,11 @@ import type { CupInfo } from '../src/world_api';
 // cmd() send path directly (mirrors tests/snapshots.test.ts `bareClient`).
 function bareClient(pid: number): { client: ClientWorld; sent: any[] } {
   const c: any = Object.create(ClientWorld.prototype);
-  c.cfg = { seed: 20061, playerClass: 'warrior' };
+  c.cfg = { seed: 20061, playerClass: 'swordman' };
   c.entities = new Map();
   c.playerId = pid;
   c.ownPlayerId = pid;
-  c.ownPlayerClass = 'warrior';
+  c.ownPlayerClass = 'swordman';
   c.spectating = null;
   c.moveInput = {};
   c.inventory = [];
@@ -69,7 +69,7 @@ function selfRecord(pid: number, extra: Record<string, unknown> = {}): Record<st
   return {
     id: pid,
     k: 'player',
-    tid: 'warrior',
+    tid: 'swordman',
     nm: 'Booter',
     lv: 10,
     x: 0,
@@ -223,7 +223,7 @@ describe('vcup self delta guard (absent keeps prior, null clears)', () => {
 });
 
 describe('sport-known rebuild (the wire trap)', () => {
-  const classKnownIds = abilitiesKnownAt('warrior', 10).map((k) => k.def.id);
+  const classKnownIds = abilitiesKnownAt('swordman', 10).map((k) => k.def.id);
 
   it('resolves the role kit via the shared resolver while s.sport carries a role', () => {
     const { client } = bareClient(1);

@@ -39,9 +39,9 @@ describe('worklist classification (blocked-by-default; the stopping rule)', () =
     'entities.npcs.brother_aldric.name',
     'entities.zones.eastbrook_vale.name',
     'entities.dungeons.hollow_crypt.name',
-    'classes.warrior',
+    'classes.swordman',
     'classes.mageAria',
-    'classDetails.lore.warrior',
+    'classDetails.lore.swordman',
     'seo.title',
     'seo.description',
   ];
@@ -65,7 +65,7 @@ describe('worklist classification (blocked-by-default; the stopping rule)', () =
       'errors.noEnemyNearby',
       'nav.home',
       'a11y.characterActions',
-      'classDetails.roles.warrior', // chrome, even though classDetails.lore.* is prose
+      'classDetails.roles.swordman', // chrome, even though classDetails.lore.* is prose
       'realmTypes.pvp',
     ];
     for (const key of CHROME_MAIN) {
@@ -113,7 +113,7 @@ describe('glossary pattern expansion (single-segment, deterministic)', () => {
 
   it('expands patterns against the en key set, sorted and de-duplicated', () => {
     const enKeys = [
-      'classes.warrior',
+      'classes.swordman',
       'classes.mage',
       'entities.abilities.fireball.name',
       'entities.abilities.fireball.description',
@@ -124,7 +124,7 @@ describe('glossary pattern expansion (single-segment, deterministic)', () => {
     ].sort();
     const glossary = {
       categories: {
-        classNames: { keyPatterns: ['classes.warrior', 'classes.mage'] },
+        classNames: { keyPatterns: ['classes.swordman', 'classes.mage'] },
         abilityNames: { keyPatterns: ['entities.abilities.*.name'] },
         zoneNames: { keyPatterns: ['entities.zones.*.name'] },
       },
@@ -132,7 +132,7 @@ describe('glossary pattern expansion (single-segment, deterministic)', () => {
     const terms: GlossaryTerm[] = expandGlossaryTerms(glossary, enKeys);
     expect(terms).toEqual([
       { category: 'classNames', key: 'classes.mage' },
-      { category: 'classNames', key: 'classes.warrior' },
+      { category: 'classNames', key: 'classes.swordman' },
       { category: 'abilityNames', key: 'entities.abilities.fireball.name' },
       { category: 'abilityNames', key: 'entities.abilities.frostbolt.name' },
       { category: 'zoneNames', key: 'entities.zones.eastbrook_vale.name' },
@@ -196,7 +196,7 @@ describe('worklist assembly (deterministic + blocked-prose segregation, end to e
     'loading.worldProgress': 'Loading world... {done}/{total}',
     'loading.enteringWorld': 'Entering world...',
     'classes.mage': 'Mage',
-    'classes.warrior': 'Warrior',
+    'classes.swordman': 'Warrior',
     'entities.quests.q_wolves.title': 'Wolves at the Door',
     'nav.home': 'Home',
   };
@@ -205,14 +205,14 @@ describe('worklist assembly (deterministic + blocked-prose segregation, end to e
     server: { 'who.online': 'Online' },
     admin: { 'app.title': 'Admin' },
   };
-  // de_DE has translated the glossary term classes.warrior (own overlay) but not mage.
+  // de_DE has translated the glossary term classes.swordman (own overlay) but not mage.
   const overlays: Record<string, Record<string, string>> = {
-    de_DE: { 'classes.warrior': 'Krieger' },
+    de_DE: { 'classes.swordman': 'Krieger' },
     es: {},
   };
   const glossarySrc = {
     verbatim: [{ term: 'Claudenarok Online', note: 'brand' }],
-    categories: { classNames: { keyPatterns: ['classes.mage', 'classes.warrior'] } },
+    categories: { classNames: { keyPatterns: ['classes.mage', 'classes.swordman'] } },
   };
   const P = { state: 'pending' };
   const T = { state: 'translated' };
@@ -230,7 +230,7 @@ describe('worklist assembly (deterministic + blocked-prose segregation, end to e
         'main:loading.worldProgress': row('main', P), // chrome -> autoFillable
         'main:loading.enteringWorld': row('main', T),
         'main:classes.mage': row('main', P), // prose -> humanRequired
-        'main:classes.warrior': row('main', T),
+        'main:classes.swordman': row('main', T),
         'main:entities.quests.q_wolves.title': row('main', P), // prose -> humanRequired
         'main:nav.home': row('main', T),
       },
@@ -297,8 +297,8 @@ describe('worklist assembly (deterministic + blocked-prose segregation, end to e
     const de = batchObjs.get('de_DE');
     expect(de.glossary.verbatim.map((v: any) => v.term)).toContain('Claudenarok Online');
     expect(de.glossary.terms.length).toBeGreaterThan(0);
-    // classes.warrior is translated in the de_DE overlay -> established localized form
-    expect(de.glossary.terms.find((t: any) => t.key === 'classes.warrior').localized).toBe(
+    // classes.swordman is translated in the de_DE overlay -> established localized form
+    expect(de.glossary.terms.find((t: any) => t.key === 'classes.swordman').localized).toBe(
       'Krieger',
     );
     // classes.mage has no de_DE overlay value -> falls through to English (not invented)

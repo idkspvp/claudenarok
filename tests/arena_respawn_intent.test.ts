@@ -11,7 +11,7 @@ import type { PlayerClass } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function teleport(sim: Sim, pid: number, x: number, z: number) {
@@ -26,7 +26,7 @@ function teleport(sim: Sim, pid: number, x: number, z: number) {
 // Seat a 2v2 Fiesta with four solo-queued players and run the countdown out so
 // the bout is live. Fiesta respawns route through readyArenaFighter, so it is
 // the clean vehicle for exercising the arena revive path.
-function startFiesta(classes: PlayerClass[] = ['warrior', 'mage', 'rogue', 'priest']) {
+function startFiesta(classes: PlayerClass[] = ['swordman', 'mage', 'thief', 'acolyte']) {
   const sim = makeWorld();
   const pids = classes.map((c, i) => sim.addPlayer(c, `P${i}`));
   pids.forEach((p, i) => {

@@ -56,7 +56,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -75,7 +75,7 @@ function cmd(server: GameServer, session: ClientSession, msg: Record<string, unk
 // A ClientWorld without the WebSocket plumbing, to drive applySnapshot with the
 // REAL captured server snap (the tests/snapshots.test.ts bareClient idiom,
 // trimmed to the fields the ents decode path touches).
-function bareClient(pid: number, playerClass: PlayerClass = 'warrior'): ClientWorld {
+function bareClient(pid: number, playerClass: PlayerClass = 'swordman'): ClientWorld {
   const c: any = Object.create(ClientWorld.prototype);
   c.cfg = { seed: 20061, playerClass };
   c.entities = new Map();

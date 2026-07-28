@@ -3,7 +3,7 @@ import { Sim } from '../src/sim/sim';
 import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function errors(events: SimEvent[]): Extract<SimEvent, { type: 'error' }>[] {
@@ -13,7 +13,7 @@ function errors(events: SimEvent[]): Extract<SimEvent, { type: 'error' }>[] {
 describe('/cooldowns command', () => {
   it('reports nothing on cooldown when the map is empty', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     sim.chat('/cooldowns', a);
@@ -25,7 +25,7 @@ describe('/cooldowns command', () => {
 
   it('lists active cooldowns soonest-ready first with ceil-rounded seconds', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     // insert out of order to prove the readout sorts ascending by remaining
@@ -41,7 +41,7 @@ describe('/cooldowns command', () => {
 
   it('accepts the /cd and /cds aliases', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     for (const cmd of ['/cd', '/cds']) {
@@ -54,7 +54,7 @@ describe('/cooldowns command', () => {
 
   it('is self-only: produces no chat event and is not logged', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
 
     const result = sim.chat('/cooldowns', a);

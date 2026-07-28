@@ -36,12 +36,12 @@ await page.evaluate(() => {
   }
 });
 await page.evaluate(() =>
-  document.querySelector('#offline-select .mini-class[data-class="warrior"]')?.click(),
+  document.querySelector('#offline-select .mini-class[data-class="swordman"]')?.click(),
 );
 await page.evaluate(() => document.querySelector('#btn-start-offline')?.click());
 await wait(3000);
 
-// Level the warrior to 20 so a L18 Revenant's swing never one-shots it.
+// Level the swordman to 20 so a L18 Revenant's swing never one-shots it.
 await page.evaluate(() => {
   const sim = window.__game.sim;
   sim.setPlayerLevel(20);

@@ -119,7 +119,7 @@ for (const profile of profiles) {
 
     await page.evaluateOnNewDocument((settings) => {
       localStorage.setItem('woc_settings', JSON.stringify(settings));
-      localStorage.setItem('woc_spawn_intro_seen:offline:warrior:Vaultseer', '1');
+      localStorage.setItem('woc_spawn_intro_seen:offline:swordman:Vaultseer', '1');
     }, profile.settings);
     await suppressGpuNotice(page);
 
@@ -131,7 +131,7 @@ for (const profile of profiles) {
       await page.evaluate(() => document.body.classList.add('mobile-touch'));
     }
     const booted = await enterOfflineGame(page, {
-      charClass: 'warrior',
+      charClass: 'swordman',
       charName: 'Vaultseer',
       settleMs: 2000,
     });

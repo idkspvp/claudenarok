@@ -149,7 +149,7 @@ const party = (pids: number[], leader: number): PartyInfo =>
   ({
     leader,
     raid: false,
-    members: pids.map((pid) => ({ pid, name: `P${pid}`, cls: 'warrior', level: 10 })),
+    members: pids.map((pid) => ({ pid, name: `P${pid}`, cls: 'swordman', level: 10 })),
   }) as unknown as PartyInfo;
 
 describe('vale_cup_window_view: offline vs live', () => {

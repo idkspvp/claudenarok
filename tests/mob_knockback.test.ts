@@ -6,7 +6,7 @@ import { PLAYER_BODY_RADIUS } from '../src/sim/pathfind';
 import { Sim } from '../src/sim/sim';
 
 const SEED = 5150;
-const makeSim = () => new Sim({ seed: SEED, playerClass: 'warrior' });
+const makeSim = () => new Sim({ seed: SEED, playerClass: 'swordman' });
 const dist2d = (a: { x: number; z: number }, b: { x: number; z: number }) =>
   Math.hypot(a.x - b.x, a.z - b.z);
 
@@ -14,7 +14,7 @@ describe('Knockback on-hit affix (Crushing Sweep)', () => {
   it('a landed marrowlord_varkas swing hurls the player straight away from the mob', () => {
     const sim = makeSim();
     const p = sim.entities.get(sim.playerId)!;
-    p.gm = true; // an L19 elite would otherwise grind the warrior down mid-loop
+    p.gm = true; // an L19 elite would otherwise grind the swordman down mid-loop
     // flat starting ground (Eastbrook town) so the shove isn't terrain-clamped
     p.pos.x = 2;
     p.pos.z = 0;

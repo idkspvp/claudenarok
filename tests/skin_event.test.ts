@@ -117,7 +117,7 @@ describe('cosmetic skin-select event', () => {
   });
 
   it('unequips a mech cosmetic account-wide and returns the specific item', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'shaman', playerName: 'Mechwearer' });
+    const sim = new Sim({ seed: 1, playerClass: 'acolyte', playerName: 'Mechwearer' });
     sim.addItem('amber_crimson_armor_plate', 1);
     sim.useItem('amber_crimson_armor_plate');
 
@@ -137,7 +137,7 @@ describe('cosmetic skin-select event', () => {
   });
 
   it('returns a non-vendorable, non-discardable, non-marketable mech cosmetic item when unequipped', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'shaman', playerName: 'Seller' });
+    const sim = new Sim({ seed: 1, playerClass: 'acolyte', playerName: 'Seller' });
     const merchant = [...sim.entities.values()].find(
       (e) => e.kind === 'npc' && e.templateId === 'the_merchant',
     );
@@ -167,7 +167,7 @@ describe('cosmetic skin-select event', () => {
       const itemId = mechChromaItemId(chroma.id);
       expect(itemId, chroma.id).toBeTruthy();
 
-      const sim = new Sim({ seed: 1, playerClass: 'shaman', playerName: `Mech-${chroma.id}` });
+      const sim = new Sim({ seed: 1, playerClass: 'acolyte', playerName: `Mech-${chroma.id}` });
       sim.accountCosmetics = {
         completedQuestIds: [],
         mechChromaIds: [chroma.id],
@@ -186,7 +186,7 @@ describe('cosmetic skin-select event', () => {
   });
 
   it('can equip a mech cosmetic as the active live appearance catalog', () => {
-    const sim = new Sim({ seed: 1, playerClass: 'shaman', playerName: 'Mechwearer' });
+    const sim = new Sim({ seed: 1, playerClass: 'acolyte', playerName: 'Mechwearer' });
 
     expect(sim.setPlayerSkin(sim.playerId, 0, 'mech')).toBe(true);
 
@@ -219,19 +219,23 @@ describe('cosmetic skin-select event', () => {
     expect(sim.player.skin).toBe(0);
   });
 
-  it('rejects a skin that does not exist for the class, even if the rank allows it', () => {
-    // Paladin only has skins 0 and 1; the epic tier maps to skin 3, which it lacks.
+  it('rejects a skin that does not exist for the class', () => {
+    // The Paladin used to be the short-skin-set class this case leaned on (two
+    // skins against an epic tier that maps to three); it was cut in D1 and all
+    // five survivors carry four, so the case now reaches past the top of the set
+    // directly. That means the rank gate is no longer the thing being outrun:
+    // every authored tier is a skin every class HAS, which is itself the claim
+    // the lockstep case below pins.
     let sim: Sim | null = null;
     for (let seed = 1; seed < 500 && sim === null; seed++) {
-      const r = rollRank(seed, 'paladin');
+      const r = rollRank(seed, 'swordman');
       if (r.rank === 'epic') sim = r.sim;
     }
     expect(sim).not.toBeNull();
-    const epicSkin = EVENT_SKIN_TIERS.find((tier) => tier.rank === 'epic')!.skin;
-    expect(rankAllowsSkin('epic', epicSkin)).toBe(true); // rank gate alone would allow it
-    expect(epicSkin).toBeGreaterThanOrEqual(SKIN_COUNTS.paladin); // but it doesn't exist
+    const missingSkin = SKIN_COUNTS.swordman; // one past the last real index
+    for (const tier of EVENT_SKIN_TIERS) expect(tier.skin).toBeLessThan(missingSkin);
 
-    sim!.claimEventSkin(epicSkin);
+    sim!.claimEventSkin(missingSkin);
 
     expect(sim!.player.skin).toBe(0); // not applied
     expect(sim!.inventory.find((s) => s.itemId === EVENT_SKIN_TOKEN_ID)?.count).toBe(1); // token kept
@@ -248,7 +252,7 @@ describe('cosmetic skin-select event', () => {
     const state = sim.serializeCharacter(sim.playerId)!;
     expect(state.pendingSkinRank).toBe(rank);
 
-    const sim2 = new Sim({ seed: 99, playerClass: 'warrior', playerName: 'Other' });
+    const sim2 = new Sim({ seed: 99, playerClass: 'swordman', playerName: 'Other' });
     const pid = sim2.addPlayer('mage', 'Saver', { state });
     expect(sim2.serializeCharacter(pid)?.pendingSkinRank).toBe(rank);
   });

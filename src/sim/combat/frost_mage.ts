@@ -94,7 +94,7 @@ export function brainFreezeBypassesCooldown(p: Entity, abilityId: string): boole
 // The frost proc machinery used to gate on the committed Frost specialization.
 // Specs are retired (Phase D0) and the mage learns the whole frost kit, so the
 // gate is the KNOWN passive that documents the procs: the same idiom the
-// warrior's Sudden Death proc uses (combat/auto_attack.ts).
+// swordman's Sudden Death proc uses (combat/auto_attack.ts).
 function knowsFrostProcs(meta: PlayerMeta): boolean {
   if (meta.cls !== 'mage') return false;
   return meta.known.some((known) => known.def.id === 'fingers_of_frost' && known.def.passive);

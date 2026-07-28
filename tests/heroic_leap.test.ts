@@ -22,7 +22,7 @@ type AnySim = Sim & {
 
 describe('Heroic Leap: arcs over time, slams on landing', () => {
   it('arms a flight, rises mid-air, then lands near the aim and blasts on touchdown', () => {
-    const sim = new Sim({ seed: 7, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const sim = new Sim({ seed: 7, playerClass: 'swordman', autoEquip: true }) as AnySim;
     sim.setPlayerLevel(MAX_LEVEL);
     const p: Entity = sim.player;
     const from = { ...p.pos };
@@ -60,7 +60,7 @@ describe('Heroic Leap: arcs over time, slams on landing', () => {
   });
 
   it('does not teleport: it is NOT at the destination on the first tick', () => {
-    const sim = new Sim({ seed: 3, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const sim = new Sim({ seed: 3, playerClass: 'swordman', autoEquip: true }) as AnySim;
     sim.setPlayerLevel(MAX_LEVEL);
     const p: Entity = sim.player;
     const aim = { x: p.pos.x + 12, z: p.pos.z };
@@ -73,7 +73,7 @@ describe('Heroic Leap: arcs over time, slams on landing', () => {
   });
 
   it('cannot arm or continue through unbreakable encounter control', () => {
-    const rooted = new Sim({ seed: 31, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const rooted = new Sim({ seed: 31, playerClass: 'swordman', autoEquip: true }) as AnySim;
     rooted.setPlayerLevel(MAX_LEVEL);
     const rootedPlayer = rooted.player;
     const rootedStart = { ...rootedPlayer.pos };
@@ -98,7 +98,7 @@ describe('Heroic Leap: arcs over time, slams on landing', () => {
     expect(rootedPlayer.resource).toBe(rootedResource);
     expect(rootedPlayer.cooldowns.has('heroic_leap')).toBe(false);
 
-    const stunned = new Sim({ seed: 32, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const stunned = new Sim({ seed: 32, playerClass: 'swordman', autoEquip: true }) as AnySim;
     stunned.setPlayerLevel(MAX_LEVEL);
     const stunnedPlayer = stunned.player;
     stunned.castAbility('heroic_leap', stunnedPlayer.id, {
@@ -131,7 +131,7 @@ describe('Heroic Leap: arcs over time, slams on landing', () => {
 // point (skipping the corpse run, or undoing an arena/fiesta placement).
 describe('Heroic Leap: lifecycle resets', () => {
   function armLeap(seed: number): { sim: AnySim; p: Entity; landing: { x: number; z: number } } {
-    const sim = new Sim({ seed, playerClass: 'warrior', autoEquip: true }) as AnySim;
+    const sim = new Sim({ seed, playerClass: 'swordman', autoEquip: true }) as AnySim;
     sim.setPlayerLevel(MAX_LEVEL);
     const p: Entity = sim.player;
     p.gcdRemaining = 0;

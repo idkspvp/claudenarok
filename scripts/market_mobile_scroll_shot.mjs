@@ -46,7 +46,7 @@ await page.emulate({
 });
 
 await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-await enterOfflineGame(page, { charClass: 'warrior', charName: 'Touch', settleMs: 2800 });
+await enterOfflineGame(page, { charClass: 'swordman', charName: 'Touch', settleMs: 2800 });
 await page.evaluate(() => document.getElementById('mobile-preflight-continue')?.click());
 await sleep(600);
 // Clear the new-adventurer tutorial overlay and any auto-opened window so the
@@ -86,7 +86,7 @@ const scene = await page.evaluate(() => {
   ];
   for (let i = 0; i < 14; i++) {
     const pid = sim.addPlayer(
-      ['mage', 'rogue', 'priest', 'hunter'][i % 4],
+      ['mage', 'thief', 'acolyte', 'archer'][i % 4],
       'Seller' + 'ABCDEFGHIJKLMN'[i],
     );
     const e = sim.entities.get(pid);

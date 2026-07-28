@@ -181,7 +181,7 @@ function friendliesInRadius(ctx: SimContext, source: Entity, radius: number): En
 }
 
 function warriorAbilityRageMult(ctx: SimContext, player: Entity, meta: PlayerMeta): number {
-  if (meta.cls !== 'warrior' || player.resourceType !== 'rage') return 1;
+  if (meta.cls !== 'swordman' || player.resourceType !== 'rage') return 1;
   return (1 + ctx.playerMods(meta).global.abilityRagePct) * rageGenAuraMult(player);
 }
 
@@ -215,7 +215,7 @@ export function runEffects(
   // acting breaks stealth (the opener itself still lands first inside the swing).
   // Stealth toggles and Rogue Sprint are allowed while remaining hidden.
   if (!preservesStealth(ability)) ctx.breakStealth(p);
-  // Casting a healing spell drops a Shadow priest out of Shadowform: the form
+  // Casting a healing spell drops a Shadow acolyte out of Shadowform: the form
   // amplifies Shadow damage but forbids healing (classic Shadowform rule).
   if (res.effects.some((e) => e.type === 'heal' || e.type === 'hot' || e.type === 'aoeHeal')) {
     const sf = p.auras.findIndex((a) => a.kind === 'form_shadow');
@@ -372,7 +372,7 @@ export function runEffects(
           (isSpell && frozen.treatAsFrozen ? SHATTER_CRIT_BONUS : 0);
         let dmg = ctx.rng.range(eff.min, eff.max);
         // The flat rider scales with the school's rating: Spell Power for spells,
-        // Ranged AP for hunter shots, melee Attack Power for physical specials.
+        // Ranged AP for archer shots, melee Attack Power for physical specials.
         // abilityScalingPower picks the rating; powerScale (inside directHitBonus)
         // applies the AP scale-down. A non-scaling effect just contributes 0.
         dmg += directHitBonus(abilityScalingPower(p, ability), ability, res.castTime);
@@ -896,7 +896,7 @@ export function runEffects(
         const school = interruptedDef?.school ?? scriptedChannel!.school;
         const remaining = ctx.diminishedCrowdControlDuration(p, target, 'lockout', eff.lockout);
         ctx.cancelCast(target);
-        if (eff.rageOnInterrupt && meta.cls === 'warrior' && p.resourceType === 'rage') {
+        if (eff.rageOnInterrupt && meta.cls === 'swordman' && p.resourceType === 'rage') {
           p.resource = Math.min(
             p.maxResource,
             p.resource + eff.rageOnInterrupt * warriorAbilityRageMult(ctx, p, meta),
@@ -1426,7 +1426,7 @@ export function runEffects(
             }
           }
         }
-        if (eff.rageOnHit && meta.cls === 'warrior' && p.resourceType === 'rage') {
+        if (eff.rageOnHit && meta.cls === 'swordman' && p.resourceType === 'rage') {
           const hitCount = Math.min(aoeTargets.length, eff.rageOnHit.capTargets);
           const amount =
             (eff.rageOnHit.base + eff.rageOnHit.perTarget * hitCount) *
@@ -1934,7 +1934,7 @@ export function runEffects(
           ctx.emit({ type: 'aura', targetId: p.id, name: gone.name, gained: false });
         }
         // The stealth kind doubles as a MOVEMENT factor in moveSpeedMult
-        // (rogue stealth walks slower); an invisible mage keeps full speed,
+        // (thief stealth walks slower); an invisible mage keeps full speed,
         // so the aura value must be 1, never 0 (0 pins the caster in place).
         ctx.applyAura(p, {
           id: ability.id,
@@ -2265,7 +2265,7 @@ export function runEffects(
             }
           }
         }
-        // Mutually exclusive self-buff group (hunter aspects): casting one cancels
+        // Mutually exclusive self-buff group (archer aspects): casting one cancels
         // any active sibling so only one in the group is ever up at a time.
         for (const i of exclusiveAuraConflicts(
           ability.exclusiveGroup,
@@ -2357,7 +2357,7 @@ export function runEffects(
       }
       case 'gainResource': {
         const amount =
-          meta.cls === 'warrior' && p.resourceType === 'rage'
+          meta.cls === 'swordman' && p.resourceType === 'rage'
             ? eff.amount * warriorAbilityRageMult(ctx, p, meta)
             : eff.amount;
         p.resource = Math.min(p.maxResource, p.resource + amount);
@@ -2480,7 +2480,7 @@ export function runEffects(
         p.chargeTimeLeft = CHARGE_MAX_DURATION;
         p.chargePath = ctx.findChargePath(p, target);
         if (p.resourceType === 'rage') {
-          const amount = meta.cls === 'warrior' ? 9 * warriorAbilityRageMult(ctx, p, meta) : 9;
+          const amount = meta.cls === 'swordman' ? 9 * warriorAbilityRageMult(ctx, p, meta) : 9;
           p.resource = Math.min(p.maxResource, p.resource + amount);
         }
         ctx.enterCombat(p, target);
@@ -2528,7 +2528,7 @@ export function runEffects(
           ctx.enterCombat(p, target);
           break;
         }
-        // Expose Armor (`full`) lands all stacks at once; warrior Sunder adds one.
+        // Expose Armor (`full`) lands all stacks at once; swordman Sunder adds one.
         const existing = target.auras.find((a) => a.kind === 'sunder');
         if (existing) {
           existing.stacks = eff.full

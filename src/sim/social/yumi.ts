@@ -585,7 +585,7 @@ export function yumiMatchInfo(ctx: SimContext, match: ArenaMatch, pid: number, m
       return {
         pid: mPid,
         name: meta?.name ?? '?',
-        cls: meta?.cls ?? ('warrior' as const),
+        cls: meta?.cls ?? ('swordman' as const),
         kills: y.kills.get(mPid) ?? 0,
         deaths: y.deaths.get(mPid) ?? 0,
         down: y.respawn.has(mPid),

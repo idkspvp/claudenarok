@@ -49,7 +49,7 @@ describe('topLifetimeXp reads and normalizes the selected title (both arms)', ()
   function xpRow(over: Record<string, unknown>): Record<string, unknown> {
     return {
       name: 'Hilda',
-      class: 'warrior',
+      class: 'swordman',
       level: 20,
       realm: 'Claudemoon',
       lifetime_xp: '1000',

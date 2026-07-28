@@ -35,7 +35,7 @@ import { isAtStation, stationsOfType, stationTypeForCraft } from '../src/sim/pro
 import { Sim } from '../src/sim/sim';
 
 function makeSim(seed = 42) {
-  return new Sim({ seed, playerClass: 'warrior', autoEquip: false });
+  return new Sim({ seed, playerClass: 'swordman', autoEquip: false });
 }
 
 function grantItem(sim: Sim, itemId: string, count: number, pid: number) {
@@ -317,7 +317,7 @@ describe('resolveCraft station gate (position-only, per type)', () => {
     expect(JSON.stringify(state)).not.toContain('mobileStation');
 
     const reloaded = makeSim(7);
-    const reloadedPid = reloaded.addPlayer('warrior', 'Reloaded', { state: state ?? undefined });
+    const reloadedPid = reloaded.addPlayer('swordman', 'Reloaded', { state: state ?? undefined });
     expect((reloaded as any).players.get(reloadedPid).mobileStation).toBeNull();
   });
 

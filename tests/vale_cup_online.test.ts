@@ -60,7 +60,7 @@ function joinServer(
   fc: FakeClient,
   characterId: number,
   name: string,
-  cls: PlayerClass = 'warrior',
+  cls: PlayerClass = 'swordman',
 ): ClientSession {
   const session = server.join(fc.ws as any, characterId, characterId, name, cls, null);
   if ('error' in session) throw new Error(session.error);
@@ -425,9 +425,9 @@ describe('vale cup: online integration (GameServer)', () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
     const fcC = fakeWs();
-    const sa = joinServer(server, fcA, 60, 'Kicker', 'warrior');
+    const sa = joinServer(server, fcA, 60, 'Kicker', 'swordman');
     const sb = joinServer(server, fcB, 61, 'Keeper', 'mage');
-    const sc = joinServer(server, fcC, 62, 'FarIdler', 'priest');
+    const sc = joinServer(server, fcC, 62, 'FarIdler', 'acolyte');
     teleport(server.sim, sa.pid, 0, -40);
     teleport(server.sim, sb.pid, 4, -40);
     teleport(server.sim, sc.pid, 0, -300); // far from the pitch: spectate stays null
@@ -463,9 +463,9 @@ describe('vale cup: online integration (GameServer)', () => {
     const fcA = fakeWs();
     const fcB = fakeWs();
     const fcW = fakeWs();
-    const sa = joinServer(server, fcA, 10, 'Deserter', 'warrior');
+    const sa = joinServer(server, fcA, 10, 'Deserter', 'swordman');
     const sb = joinServer(server, fcB, 11, 'Champion', 'mage');
-    const sw = joinServer(server, fcW, 12, 'Watcher', 'priest');
+    const sw = joinServer(server, fcW, 12, 'Watcher', 'acolyte');
     teleport(server.sim, sa.pid, 0, -40);
     teleport(server.sim, sb.pid, 4, -40);
     // The watcher sits 85yd north of the pitch center: outside both the 55yd

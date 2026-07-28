@@ -65,11 +65,11 @@ const lettersOf = (n) =>
 // a distinct public-looking IP per client → distinct rate-limit + WS-cap bucket
 const ipFor = (n) => `9.${(n >> 8) & 255}.${n & 255}.7`;
 const CLASSES = [
-  'warrior',
+  'swordman',
   'mage',
-  'hunter',
-  'rogue',
-  'priest',
+  'archer',
+  'thief',
+  'acolyte',
   'paladin',
   'warlock',
   'druid',
@@ -280,11 +280,11 @@ async function main() {
 
   // ---- run: every bot circles, jumps, and fights whatever's near ----
   const ATTACK_ABILITY = {
-    warrior: 'heroic_strike',
+    swordman: 'heroic_strike',
     mage: 'fireball',
-    hunter: 'arcane_shot',
-    rogue: 'sinister_strike',
-    priest: 'smite',
+    archer: 'arcane_shot',
+    thief: 'sinister_strike',
+    acolyte: 'smite',
     paladin: 'judgement',
     warlock: 'shadow_bolt',
     druid: 'wrath',

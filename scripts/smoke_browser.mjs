@@ -1,9 +1,11 @@
 // Browser smoke test: boots the game in headless Edge, plays a little,
 // and saves screenshots to tmp/ for visual inspection.
-import puppeteer from 'puppeteer-core';
+
 import fs from 'node:fs';
+import puppeteer from 'puppeteer-core';
 
 import { BROWSER_PATH as EDGE } from './browser_path.mjs';
+
 const URL = process.env.GAME_URL ?? 'http://localhost:5173';
 fs.mkdirSync('tmp', { recursive: true });
 
@@ -26,8 +28,8 @@ await new Promise((r) => setTimeout(r, 200));
 await page.type('#char-name', 'Adventurer');
 await page.screenshot({ path: 'tmp/01_start.png' });
 
-// pick warrior
-await page.click('#offline-select .mini-class[data-class="warrior"]');
+// pick swordman
+await page.click('#offline-select .mini-class[data-class="swordman"]');
 await page.click('#btn-start-offline');
 await new Promise((r) => setTimeout(r, 2500));
 await page.screenshot({ path: 'tmp/02_spawn.png' });
@@ -35,7 +37,14 @@ await page.screenshot({ path: 'tmp/02_spawn.png' });
 const state0 = await page.evaluate(() => {
   const g = window.__game;
   const p = g.sim.player;
-  return { x: p.pos.x, z: p.pos.z, hp: p.hp, maxHp: p.maxHp, level: p.level, entities: g.sim.entities.size };
+  return {
+    x: p.pos.x,
+    z: p.pos.z,
+    hp: p.hp,
+    maxHp: p.maxHp,
+    level: p.level,
+    entities: g.sim.entities.size,
+  };
 });
 console.log('spawn state:', JSON.stringify(state0));
 
@@ -65,14 +74,19 @@ const fight = await page.evaluate(() => {
   const g = window.__game;
   const sim = g.sim;
   const p = sim.player;
-  let wolf = null, d = 1e9;
+  let wolf = null,
+    d = 1e9;
   for (const e of sim.entities.values()) {
     if (e.templateId === 'forest_wolf' && !e.dead) {
       const dd = Math.hypot(e.pos.x - p.pos.x, e.pos.z - p.pos.z);
-      if (dd < d) { d = dd; wolf = e; }
+      if (dd < d) {
+        d = dd;
+        wolf = e;
+      }
     }
   }
-  p.pos.x = wolf.pos.x + 3; p.pos.z = wolf.pos.z;
+  p.pos.x = wolf.pos.x + 3;
+  p.pos.z = wolf.pos.z;
   sim.targetEntity(wolf.id);
   return { wolfId: wolf.id, wolfHp: wolf.hp, wolfLevel: wolf.level };
 });
@@ -107,10 +121,20 @@ for (let i = 0; i < 30; i++) {
       if (!p.autoAttack) g.sim.startAutoAttack();
       if (p.resource >= 15 && !p.queuedOnSwing) g.sim.castAbility('heroic_strike');
     }
-    return { wolfDead: w.dead, wolfHp: w.hp, playerHp: p.hp, rage: p.resource, xp: g.sim.xp, auto: p.autoAttack };
+    return {
+      wolfDead: w.dead,
+      wolfHp: w.hp,
+      playerHp: p.hp,
+      rage: p.resource,
+      xp: g.sim.xp,
+      auto: p.autoAttack,
+    };
   }, fight.wolfId);
   if (i % 5 === 0) console.log('combat:', JSON.stringify(s));
-  if (s.wolfDead) { killed = true; break; }
+  if (s.wolfDead) {
+    killed = true;
+    break;
+  }
 }
 console.log('wolf killed:', killed ? 'OK' : 'FAIL');
 await page.screenshot({ path: 'tmp/06_killed.png' });
@@ -120,9 +144,15 @@ const loot = await page.evaluate((id) => {
   const g = window.__game;
   const w = g.sim.entities.get(id);
   const p = g.sim.player;
-  p.pos.x = w.pos.x + 1; p.pos.z = w.pos.z;
+  p.pos.x = w.pos.x + 1;
+  p.pos.z = w.pos.z;
   g.sim.lootCorpse(id);
-  return { copper: g.sim.copper, inv: g.sim.inventory.map((s) => s.itemId), xp: g.sim.xp, level: p.level };
+  return {
+    copper: g.sim.copper,
+    inv: g.sim.inventory.map((s) => s.itemId),
+    xp: g.sim.xp,
+    level: p.level,
+  };
 }, fight.wolfId);
 console.log('loot:', JSON.stringify(loot));
 await new Promise((r) => setTimeout(r, 500));
@@ -131,7 +161,8 @@ await page.screenshot({ path: 'tmp/07_looted.png' });
 // quest npc dialog: teleport to marshal and press F
 await page.evaluate(() => {
   const g = window.__game;
-  g.sim.player.pos.x = 4; g.sim.player.pos.z = 3;
+  g.sim.player.pos.x = 4;
+  g.sim.player.pos.z = 3;
 });
 await new Promise((r) => setTimeout(r, 200));
 await page.keyboard.press('f');
@@ -145,7 +176,10 @@ const accepted = await page.evaluate(async () => {
   await new Promise((r) => setTimeout(r, 150));
   const btns = [...document.querySelectorAll('#quest-dialog .btn')];
   const accept = btns.find((b) => b.textContent === 'Accept');
-  if (accept) { accept.click(); return true; }
+  if (accept) {
+    accept.click();
+    return true;
+  }
   return false;
 });
 console.log('quest accepted:', accepted ? 'OK' : 'FAIL');

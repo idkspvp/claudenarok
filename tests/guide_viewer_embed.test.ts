@@ -40,11 +40,11 @@ describe('modelViewerEmbed', () => {
   });
 
   it('marks an autoplay hero and leaves other embeds without the flag', () => {
-    const hero = modelViewerEmbed({ modelKey: 'warrior', name: 'Warrior', autoplay: true });
+    const hero = modelViewerEmbed({ modelKey: 'swordman', name: 'Warrior', autoplay: true });
     expect(hero).toContain('data-autoplay="true"');
-    const plain = modelViewerEmbed({ modelKey: 'warrior', name: 'Warrior' });
+    const plain = modelViewerEmbed({ modelKey: 'swordman', name: 'Warrior' });
     expect(plain).not.toContain('data-autoplay');
-    const off = modelViewerEmbed({ modelKey: 'warrior', name: 'Warrior', autoplay: false });
+    const off = modelViewerEmbed({ modelKey: 'swordman', name: 'Warrior', autoplay: false });
     expect(off).not.toContain('data-autoplay');
   });
 

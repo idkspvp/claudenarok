@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { Sim } from '../src/sim/sim';
-import { SimEvent } from '../src/sim/types';
+import type { SimEvent } from '../src/sim/types';
 
 function makeWorld() {
-  return new Sim({ seed: 42, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: 42, playerClass: 'swordman', noPlayer: true });
 }
 
 function lastError(events: SimEvent[]): string | undefined {
@@ -17,7 +17,7 @@ function lastError(events: SimEvent[]): string | undefined {
 describe('/combat command', () => {
   it('reports when you are not in combat', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     sim.entities.get(a)!.inCombat = false;
 
@@ -27,7 +27,7 @@ describe('/combat command', () => {
 
   it('reports the linger countdown while only the combat timer keeps you engaged', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.inCombat = true;
@@ -39,7 +39,7 @@ describe('/combat command', () => {
 
   it('reports active engagement when in combat past the linger window', () => {
     const sim = makeWorld();
-    const a = sim.addPlayer('warrior', 'Aleph');
+    const a = sim.addPlayer('swordman', 'Aleph');
     sim.tick();
     const e = sim.entities.get(a)!;
     e.inCombat = true;

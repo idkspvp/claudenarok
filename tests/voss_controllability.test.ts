@@ -5,7 +5,7 @@ import { HEROIC_MIN_MOVE_SPEED } from '../src/sim/instances/difficulty';
 import { Sim } from '../src/sim/sim';
 import type { Aura, Entity } from '../src/sim/types';
 
-// Voss (the heroic Nythraxis rogue add) is the raid's CONTROL assignment: he
+// Voss (the heroic Nythraxis thief add) is the raid's CONTROL assignment: he
 // ignores taunt by design, so player crowd control and slows are his entire
 // counterplay budget. This contract pins all three legs so no future
 // cc-immunity sweep (the Sanctum bosses got one) silently deletes his
@@ -17,7 +17,7 @@ const SEED = 777;
 const VOSS = 'nythraxis_heroic_rogue_add';
 
 function makeSim(): Sim {
-  return new Sim({ seed: SEED, playerClass: 'warrior', noPlayer: true });
+  return new Sim({ seed: SEED, playerClass: 'swordman', noPlayer: true });
 }
 
 function spawnVoss(sim: Sim): Entity {
