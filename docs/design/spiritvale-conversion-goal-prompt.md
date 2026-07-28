@@ -1,114 +1,165 @@
 # The `/goal` prompt for the SpiritVale conversion
 
-Copy the block below into `/goal`. It is written to be self-contained: a fresh
-session with no memory of this conversation can run it end to end.
+Two prompts. Use the **master** one if you want to hand the whole conversion
+over and check back later. Use the **single-phase** one if you want to watch a
+specific phase closely.
 
-Run it one phase at a time. Do NOT paste the whole thing and expect ten phases in
-one sitting; the prompt tells the agent to stop at a phase boundary, and that is
-deliberate, because each phase changes what the next one should look like.
+Both are self-contained: a fresh session with no memory of the planning
+conversation can run them.
+
+## Why there is no honest "one run, everything done"
+
+The conversion is ten phases: a 46-file removal, moving the level cap, 258
+skills across seven trees, 185 statuses, 111 passives, 34 artifacts, 29 summons,
+and a skill-tree window that does not exist yet. One unattended pass through all
+of it would exhaust its context somewhere in the middle and leave the tree half
+converted, which is the worst possible state.
+
+The master prompt gets as close as is actually achievable: it is driven by a
+**progress file** (`spiritvale-conversion-progress.md`), so it always knows what
+is done, always finishes a phase before stopping, and always leaves the tree
+green. Re-run the same prompt and it picks up where it left off. Run it three or
+four times and the conversion is done.
+
+That is the difference between "one command" and "one sitting". You get the
+first.
 
 ---
 
-## The prompt
+## The master prompt
 
 ```
-Read docs/design/spiritvale-conversion-plan.md and
-docs/design/spiritvale-systems-and-ui.md first. They are the spec. The four
-design decisions in the plan are settled; do not re-open them.
+You are running a long, multi-session conversion. Read these three files first,
+in this order:
 
-GOAL: execute Phase 0 of the SpiritVale conversion, completely, and leave the
-tree green and pushed.
+  docs/design/spiritvale-conversion-progress.md   <- state: what is done
+  docs/design/spiritvale-conversion-plan.md        <- the spec, ten phases
+  docs/design/spiritvale-systems-and-ui.md         <- what survives, what goes
 
-Phase 0 is three jobs. Do them in this order, each as its own commit:
+The four design decisions in the plan are settled. Do not re-open them.
 
-1. Cut the card duel minigame entirely. It spans about 46 files. Follow the
-   removal all the way through: src/sim/social/card_duel.ts and
-   card_duel_queue.ts, src/sim/minigames/card_hand.ts,
-   src/sim/instances/card_master.ts, src/sim/content/card_master.ts, the
-   SimContext members, the IWorld facet src/world_api/card_minigame.ts, the
-   server WS commands in server/game.ts, the ClientWorld mirror in
-   src/net/online.ts, the UI (src/ui/card_duel_window.ts, card_duel_view.ts,
-   its hud.ts wiring, npc_services_view.ts), the NPC in
-   src/sim/content/zone1/npcs.ts and its placement in eastbrook_layout.ts, the
-   deeds in src/sim/content/deeds.ts, the i18n keys, and the six card_duel test
-   files. Keep the shipped item ids: never delete or rename one.
+HOW TO WORK
 
-2. Finish the talent removal. The open pieces are D0-2 (drop spec gating on
-   abilities), D0-4 (remove the TalentModifiers plumbing), D0-5 (remove the
-   IWorld facet, commands and UI), D0-6 (tolerate talent data on old saves), and
-   D0-7 (tests, guide regen, parity, gate).
+1. Read the progress file. Find the first phase whose status is not DONE.
+2. Set it to IN PROGRESS, commit that, and start it.
+3. Execute that phase COMPLETELY, per its section in the plan. Each logical
+   piece is its own commit with a real body.
+4. Run the phase's own "Accept:" check from the plan, then the full verify
+   block below.
+5. Update the progress file: status DONE, the commit range, and any note the
+   next phase needs. Commit that.
+6. Go back to step 1 and start the next phase.
+7. Stop when either every phase is DONE, or you judge your remaining context
+   will not fit another whole phase. NEVER stop in the middle of a phase. If
+   you cannot finish one, revert to the last green commit and say so.
 
-3. Replace the threat table with simple aggro (task M1c). Simple means: a mob
-   attacks whoever most recently damaged it, with a stickiness window, and no
-   accumulated threat number. Extract it as its own module behind the
-   SimContext seam with its own Vitest; do not grow sim.ts.
+The single most important rule: the tree is green and pushed every time you
+stop. A half-converted tree is worse than an unstarted one.
 
-RULES YOU MUST FOLLOW (from CLAUDE.md, non-negotiable):
+RULES YOU MUST FOLLOW (from CLAUDE.md, non-negotiable)
+
 - src/sim/ stays DOM-free, Three-free, and imports nothing from
   render/ui/game/net. All randomness goes through Rng: never Math.random,
   Date.now or performance.now in sim logic.
-- IWorld is the only seam. Removing a member means removing it from the facet
-  file under src/world_api/, from BOTH Sim and ClientWorld, and updating the
+- IWorld is the only seam. Adding or removing a member means doing it in the
+  facet file under src/world_api/, in BOTH Sim and ClientWorld, and updating the
   pinned member list in tests/world_api_parity.test.ts in the SAME change.
-- Removing a SimContext member means removing every consumer. A member with
-  zero consumers is dead scaffolding.
-- Update the pins that guard what you touched: tests/world_api_parity.test.ts,
-  tests/architecture.test.ts, tests/deeds_content.test.ts (the deed catalogue),
+- Module-first. New logic is its own small module behind an existing seam with
+  its own Vitest. Never grow src/sim/sim.ts, src/ui/hud.ts, src/main.ts or
+  src/render/renderer.ts; they are extraction targets, not homes.
+- New sim SYSTEM behavior goes behind the SimContext seam. A SimContext member
+  with zero consumers is dead scaffolding: remove it.
+- New HUD component = a DOM-free pure core (registered in UI_PURE_CORES in
+  tests/architecture.test.ts) plus a thin painter on the PainterHost seam.
+- New game content is a declarative record in src/sim/content/, never a table
+  inline in sim.ts.
+- Update every pin that guards what you touched: tests/world_api_parity.test.ts,
+  tests/architecture.test.ts, tests/deeds_content.test.ts,
   tests/snapshots.test.ts (ALL_DELTA_KEYS, sorted and count-pinned), and
   tests/parity/scenarios.ts.
 - Parity goldens: regenerate ONLY with UPDATE_PARITY=1 npx vitest run
-  tests/parity, in their own reviewed commit, and make it the LAST commit on
-  the branch.
-- Every player-visible string is a t() key. Removing a surface removes its keys
-  from the matching src/ui/i18n.catalog/ module. Never edit
-  src/ui/i18n.locales/ overlays, and never hand-edit a *.generated.ts.
-- Run npm run wiki:content if player-facing content changed (guide freshness is
-  gated by tests/guide.test.ts).
-- No em dashes, no en dashes, no emojis anywhere: code, comments, docs, or
-  commit text.
-- Conventional Commits with a scope, and EVERY commit carries a body of 1 to 4
+  tests/parity, in their own reviewed commit, LAST in that phase.
+- Every player-visible string is a t() key, English only, in the matching
+  src/ui/i18n.catalog/ module. Never edit src/ui/i18n.locales/ overlays. Never
+  hand-edit a *.generated.ts; regenerate through its build step.
+- Run npm run wiki:content when player-facing content changes.
+- Never delete or rename a SHIPPED item id.
+- No em dashes, no en dashes, no emojis anywhere: code, comments, docs, commits.
+- Conventional Commits with a scope. EVERY commit carries a body of 1 to 4
   plain sentences saying what changed and why, wrapped near 72 columns.
 - Never run bare npm install (use npm ci). Never git push --no-verify.
 
-VERIFY BEFORE YOU CALL IT DONE:
+SOURCE OF TRUTH FOR EVERY NUMBER
+
+docs/design/spiritvale-engine-formulas.md    the 37 formulas
+docs/design/spiritvale-data-schema.md        every record shape
+docs/design/spiritvale-world-and-economy.md  maps, spawns, drops, items
+docs/design/data/spiritvale-raw/             the 27 raw JSON files
+docs/design/data/spiritvale-monster-stats.tsv  all 319 monsters, computed
+
+NEVER invent a formula or a balance number. If a value is not in those files,
+it is listed as unknown in spiritvale-coverage.md; use the stand-in that file
+names and record the assumption in the progress file.
+
+VERIFY BEFORE MARKING A PHASE DONE
+
 - npx tsc --noEmit
-- npm test  (do not pipe it through tail, that masks the exit code)
+- npm test            (do not pipe through tail; it masks the exit code)
 - npm run gate
-- Invoke the qa-checklist agent over the finished diff.
+- The phase's own "Accept:" line from the plan
+- Invoke the qa-checklist agent over the phase's diff
 
-Work autonomously and do not stop to ask permission between the three jobs. If
-something is genuinely ambiguous, pick the reading that preserves existing
-behavior, write down the assumption in the commit body, and keep going.
+WHEN YOU ARE GENUINELY STUCK
 
-Report at the end: what landed, what the gate said, and anything you found that
-the plan did not anticipate.
+Pick the reading that preserves existing behavior, record the assumption in the
+progress file under "Decisions taken mid-run", and keep going. Only write to
+"Blocked on" and stop if proceeding either way would be unsafe or would make the
+work useless if wrong.
 
-STOP when Phase 0 is green and pushed. Do not start Phase 1.
+REPORT WHEN YOU STOP
+
+Which phases went DONE, the commit range for each, what the gate said, anything
+the plan did not anticipate, and which phase is next.
 ```
 
 ---
 
-## For the phases after this one
+## The single-phase prompt
 
-Same prompt, three substitutions:
+Same thing, scoped. Use it when you want to watch a phase closely, or for
+Phase 4 and Phase 6, which are the two worth supervising.
 
-1. Change `Phase 0` to the phase number in both the GOAL line and the STOP line.
-2. Replace the numbered job list with that phase's section from
-   `spiritvale-conversion-plan.md`.
-3. Keep the RULES and VERIFY blocks byte for byte. They are what stops a long
-   autonomous run from quietly breaking an invariant.
+Take the master prompt above and change the HOW TO WORK block to:
 
-Phase 1 is the easiest to hand off and the best one to test this workflow on:
-six new pure modules with no call sites, each with its own Vitest, nothing
-wired. It cannot break anything, and if the agent gets it right the same prompt
-shape will carry the rest.
+```
+HOW TO WORK
 
-Phase 4 (the seven base classes and the skill-tree window) and Phase 6 (the
-artifact and grimoire loop) are the two that deserve a checkpoint partway
-through rather than a single unattended run.
+Execute Phase <N> of the plan, completely. Its section in
+docs/design/spiritvale-conversion-plan.md is the spec. Each logical piece is its
+own commit with a real body. Work autonomously; do not stop to ask permission
+between pieces.
 
-## One thing to add by hand each time
+Update docs/design/spiritvale-conversion-progress.md when you finish.
 
-The plan says every phase ends green and states its own acceptance check. Paste
-that phase's **Accept:** line into the prompt verbatim, under VERIFY. It is the
-difference between "the tests pass" and "the thing I asked for actually works".
+STOP when Phase <N> is green and pushed. Do not start Phase <N+1>.
+```
+
+Everything else stays byte for byte. The RULES and VERIFY blocks are what stop
+a long autonomous run from quietly breaking an invariant; do not trim them.
+
+---
+
+## Practical notes
+
+**Expect three or four invocations.** Phases 0 through 3 are mechanical and may
+well go in one run. Phase 4 is the biggest single job in the conversion (seven
+skill trees plus a window that does not exist). Phase 6 is the highest value
+(the artifact and grimoire loop). Phases 8 and 9 can wait indefinitely.
+
+**Phase 1 is the one to test the workflow on** if you want to check the prompt
+before trusting it: six pure modules with no call sites, nothing wired, cannot
+break anything.
+
+**Read the progress file between runs.** Its "Decisions taken mid-run" section
+is where an autonomous run tells you what it had to guess. That is the part
+worth your attention, more than the diffs.
