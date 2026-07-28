@@ -21,7 +21,13 @@ const LEGS_REQ = 12;
 // moggers_shiv: rare dagger, weapon { min: 6, max: 11, speed: 1.7, dagger: true }, req level 6.
 const DAGGER = 'moggers_shiv';
 const DAGGER_REQ = 6;
-const UNARMED = { min: 1, max: 2, speed: 2 };
+// The unarmed damage pair. The SPEED is deliberately not pinned here: a swing
+// interval is no longer a property of the weapon at all, it is derived from the
+// job's base attack motion cut by Agility and Dexterity (combat/aspd.ts), so an
+// unarmed hand is a different cadence for every character. What this file is
+// about is that an over-level weapon grants no damage and no weapon flags.
+const UNARMED_DAMAGE = { min: 1, max: 2 };
+const unarmedDamage = (w: { min: number; max: number }) => ({ min: w.min, max: w.max });
 
 function swordman(level: number, equipment: Record<string, string>) {
   const e = createPlayer(0, 'swordman', { x: 0, y: 0, z: 0 }, 'Tester');
@@ -61,7 +67,7 @@ describe('over-level gear is inert', () => {
 
   it('an over-level weapon deals unarmed damage (no weapon stats, no dagger flag)', () => {
     const e = swordman(DAGGER_REQ - 1, { mainhand: DAGGER });
-    expect(e.weapon).toEqual(UNARMED);
+    expect(unarmedDamage(e.weapon)).toEqual(UNARMED_DAMAGE);
     expect(e.weapon.dagger).toBeUndefined();
   });
 
@@ -75,7 +81,7 @@ describe('over-level gear is inert', () => {
     expect(e.weapon.max).toBe(authored.max);
     expect(e.weapon.dagger).toBe(true);
     // ...and it really opened, rather than both sides reading the same default.
-    expect(e.weapon.max).toBeGreaterThan(UNARMED.max);
+    expect(e.weapon.max).toBeGreaterThan(UNARMED_DAMAGE.max);
   });
 
   it('over-level gear stays worn (still mirrored for render) while inert', () => {
@@ -85,7 +91,7 @@ describe('over-level gear is inert', () => {
     expect(e.equippedItems.legs).toBe(LEGS);
     expect(e.mainhandItemId).toBe(DAGGER);
     // ...but none of it applies.
-    expect(e.weapon).toEqual(UNARMED);
+    expect(unarmedDamage(e.weapon)).toEqual(UNARMED_DAMAGE);
   });
 
   it('set bonuses do not count over-level pieces', () => {

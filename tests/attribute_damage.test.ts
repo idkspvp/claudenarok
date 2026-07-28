@@ -43,13 +43,25 @@ describe('the combined multiplier', () => {
   });
 
   it('reports an absorbing hit rather than hiding it in a negative total', () => {
+    // Shadow against the undead, which is the reference's own absorption case:
+    // they feed on it from level 1 and are healed for the full hit at level 4.
+    // Fire against water is NOT one, and used to be asserted here: a deep
+    // resistance bottoms out at immunity, it does not keep going negative.
     const m = attributeMultipliers({
-      attackElement: 'fire',
-      defenderElement: 'water',
+      attackElement: 'shadow',
+      defenderElement: 'undead',
       defenderElementLevel: 4,
     });
     expect(m.absorbs).toBe(true);
     expect(m.total).toBeLessThan(0);
+
+    const resisted = attributeMultipliers({
+      attackElement: 'fire',
+      defenderElement: 'water',
+      defenderElementLevel: 4,
+    });
+    expect(resisted.absorbs).toBe(false);
+    expect(resisted.total).toBe(0);
   });
 
   it('is symmetric in neither direction: the chart is not a wash', () => {

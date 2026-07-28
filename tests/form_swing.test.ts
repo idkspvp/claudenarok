@@ -61,7 +61,12 @@ describe('Wolf Form swing speed', () => {
     sim.tick();
     const thief = sim.entities.get(a)!;
     expect(baseSwingSpeed(thief)).toBe(thief.weapon.speed);
-    expect(thief.weapon.speed).toBe(ROGUE_BASE_SWING_SPEED);
+    // The thief's cadence used to be pinned to ROGUE_BASE_SWING_SPEED here,
+    // because the starting dagger's authored speed happened to equal the form's
+    // fixed one. A swing interval is derived from the job's base attack motion
+    // and the wielder's Agility now (combat/aspd.ts), so that coincidence is
+    // gone and pinning it would be pinning the wrong thing.
+    expect(thief.weapon.speed).toBeGreaterThan(0);
   });
 
   // Land the first white-hit auto-attack a acolyte scores on an immortal,
@@ -83,6 +88,11 @@ describe('Wolf Form swing speed', () => {
     const dummy = [...sim.entities.values()].find((e) => e.kind === 'mob' && !e.dead)!;
     dummy.level = 1;
     dummy.stats.armor = 0;
+    // The expectation below models the equipment percentage only, so the flat
+    // Vitality layer has to actually be zero. Monsters carry an authored
+    // Vitality since the statline pass, and three points of it is three damage
+    // this model does not account for.
+    dummy.stats.vit = 0;
     dummy.hostile = true;
     p.pos.x = dummy.pos.x + 1;
     p.pos.z = dummy.pos.z;
@@ -125,12 +135,13 @@ describe('Wolf Form swing speed', () => {
     const a = sim.addPlayer('acolyte', 'Feral');
     sim.setPlayerLevel(20, a);
     sim.tick();
-    // Slowed deliberately: the starting staff now swings exactly as fast as a
-    // dagger, and the whole contrast this case draws needs a weapon SLOWER than
-    // the form cadence.
-    const SLOW_STAFF = 3.2;
-    sim.entities.get(a)!.weapon = { ...sim.entities.get(a)!.weapon, speed: SLOW_STAFF };
-    const staffSpeed = SLOW_STAFF;
+    // The weapon speed used to be overridden here to force a staff SLOWER than
+    // the form cadence. That no longer survives: recalcPlayerStats derives the
+    // cadence from the job and the wielder's Agility on every tick, so an
+    // assignment from outside is wiped by the next one. The contrast is drawn
+    // against the character's REAL cadence instead, whichever side of the form's
+    // fixed one it falls on.
+    const staffSpeed = sim.entities.get(a)!.weapon.speed;
     giveForm(sim, a, 'form_cat', 'Wolf Form');
     const wolf = firstWhiteHit(sim, a);
 
@@ -143,16 +154,18 @@ describe('Wolf Form swing speed', () => {
     const b = sim2.addPlayer('acolyte', 'Bruin');
     sim2.setPlayerLevel(20, b);
     sim2.tick();
-    sim2.entities.get(b)!.weapon = { ...sim2.entities.get(b)!.weapon, speed: SLOW_STAFF };
     giveForm(sim2, b, 'form_bear', 'Bear Form');
     const staff = firstWhiteHit(sim2, b);
 
-    // Wolf Form's per-swing weapon share uses the thief speed (1.8); the bear acolyte's the staff.
+    // The load-bearing pair: Wolf Form's per-swing weapon share is normalized by
+    // the FORM's fixed cadence, and the bear's by the wielder's own. The bug
+    // this guards against is Wolf Form collecting the per-swing damage of the
+    // weapon it is holding while swinging at the form's faster rate.
     expect(wolf.amount).toBe(expectAt(wolf.ap, ROGUE_BASE_SWING_SPEED, wolf.dr));
     expect(staff.amount).toBe(expectAt(staff.ap, staffSpeed, staff.dr));
-    // The bug would have been Wolf Form normalizing by the slow staff instead: prove
-    // the fixed cadence value is genuinely smaller, so a faster swing hits softer.
-    expect(staffSpeed).toBeGreaterThan(ROGUE_BASE_SWING_SPEED);
-    expect(wolf.amount).toBeLessThan(expectAt(wolf.ap, staffSpeed, wolf.dr));
+    // And the two cadences really are different, so the assertions above are
+    // not the same statement written twice.
+    expect(staffSpeed).not.toBe(ROGUE_BASE_SWING_SPEED);
+    expect(wolf.amount).not.toBe(expectAt(wolf.ap, staffSpeed, wolf.dr));
   });
 });

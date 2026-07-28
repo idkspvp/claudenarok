@@ -82,7 +82,11 @@ describe('enchant table magnitude invariants', () => {
     // below the band by construction; accepted and recorded rather than
     // padded with new enchants.
     expect(bestPerSlotTotal('luk')).toBe(12); // 13 percent of the 93 spi budget
-    expect(bestPerSlotTotal('armor')).toBe(35); // helmet 15 plus chest 20, the halved reinforcement pair
+    // Helmet 2 plus chest 3, the reinforcement pair on Ragnarok's defence
+    // scale. These were 15 and 20 while armour was an unbounded pool; on a
+    // scale whose cap is 100 and whose best-in-slot total is 74, a single
+    // enchant worth 20 was a fifth of every physical hit.
+    expect(bestPerSlotTotal('armor')).toBe(5);
   });
 
   it('every Greater enchant beats the best base option on its slot and axis by at least 3', () => {
@@ -225,13 +229,13 @@ describe('frozen enchant magnitudes (the #2415 replace-exactness premise)', () =
       enchant_ring_spirit: { luk: 2 },
       enchant_weapon_agility: { agi: 2 },
       enchant_helmet_intellect: { int: 4 },
-      enchant_helmet_armor: { armor: 15 },
+      enchant_helmet_armor: { armor: 2 },
       enchant_neck_intellect: { int: 2 },
       enchant_neck_agility: { agi: 2 },
       enchant_shoulder_strength: { str: 2 },
       enchant_shoulder_intellect: { int: 2 },
       enchant_chest_spirit: { luk: 4 },
-      enchant_chest_armor: { armor: 20 },
+      enchant_chest_armor: { armor: 3 },
       enchant_waist_strength: { str: 3 },
       enchant_waist_agility: { agi: 3 },
       enchant_legs_intellect: { int: 4 },

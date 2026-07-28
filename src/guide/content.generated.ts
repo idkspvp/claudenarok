@@ -7422,7 +7422,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
       "bonus": [
         {
           "stat": "armor",
-          "value": 15
+          "value": 2
         }
       ]
     },
@@ -7538,7 +7538,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
       "bonus": [
         {
           "stat": "armor",
-          "value": 20
+          "value": 3
         }
       ]
     },
