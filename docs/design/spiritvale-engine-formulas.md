@@ -1,17 +1,23 @@
 # SpiritVale's combat math, from its own client
 
-A community fan site publishes SpiritVale's formulas read out of the game
-client itself, naming engine symbols as it goes (`Formula.GetDamage`,
-`Formula.StatusResist`, `CombatComponent.ApplyHit`, `Formula.AttackOffhand`,
-`StatusComponent.Level`). Last updated 2026-07-26. Transcribed here in July 2026.
+A community fan site publishes SpiritVale's formulas read out of the game client
+itself. The published database (`data/spiritvale-raw/mechanics.json`) names the
+engine method behind every rule and lists the numeric constants found in it, and
+its header records exactly which build it was read from:
 
-This supersedes the assessment in `spiritvale-skill-reference.md` that the
-SpiritVale data was structure-only and about 40% as complete as the reference's.
-With this page it is close to comparable: what is missing now is per-skill
-effect detail, not the engine.
+```
+game    SpiritVale, appid 3767850, build 24274182, label "0.30.0 Early Access"
+data    build 24221798, "artifacts.json (DLL outside steamapps)"
+source  node dev/build-mechanics.mjs, generated 2026-07-26
+```
+
+Thirty-seven formulas, sixty-five engine methods. Transcribed here in July 2026
+from the JSON, not from the rendered page, so the numbers below are the numbers
+in the file.
 
 Treat it as a careful community reading rather than as source: the site says so
-itself. Nothing here is verified against a decompile by us.
+itself, and nothing here is verified against a decompile by us. Early Access
+means it moves; re-fetch rather than trusting a stale copy.
 
 ## The one finding that explains why it feels easier
 
@@ -35,31 +41,50 @@ below is a variation on it.
 
 ```
 ATK (melee)   ( Lv/4 + STR*1.5 + DEX/5 + LUK/5 + ATKflat*(1 + DEX/200) )
-              * (1 + FLOOR(STR/10)/100) * (1 + ATK%)
+              * (1 + FLOOR(STR/10)/100) * (1 + ATK%)              Formula$$GetAttack
 
 ATK (ranged)  ( Lv/4 + DEX + STR/5 + LUK/5 + ATKflat*(1 + DEX/200) )
-              * (1 + FLOOR(DEX/10)/100) * (1 + ATK%)
+              * (1 + FLOOR(DEX/10)/100) * (1 + ATK%)              Formula$$GetAttack
 
 MATK          ( Lv/4 + INT*1.5 + DEX/5 + LUK/5 + MatkPerStr*STR
                 + MATKflat*(1 + INT/200) )
-              * (1 + FLOOR(INT/10)/100) * (1 + MATK%)
+              * (1 + FLOOR(INT/10)/100) * (1 + MATK%)             Formula$$MagicAttack
+
+Status DoT    (Lv + STR + AGI + INT) / 10  [ * stacks ]           Formula$$GetStatusDamage
 ```
 
 - **Character level is a term in all three** (`Lv/4`). The reference's status
   attack has no level term at all, which is why a high-level character there
   with poor Strength hits like a beginner.
-- A two-handed weapon with an empty off-hand multiplies by **1.25**.
-- Dual wield runs the whole formula twice, once per weapon, and lands two
-  packets per swing.
-- Ranged swaps which attribute leads and which drives the breakpoint. Same shape.
-- Damage over time is one flat expression: `(Lv + STR + AGI + INT) / 10`.
+- `ATKflat` is weapon attack plus mastery plus flat gear attack, and Dexterity
+  amplifies it by `1 + DEX/200`. Dexterity therefore pays twice.
+- The ranged branch fires for Bow, Pistol, Rifle, Shotgun, Gatling and Launcher:
+  Dexterity leads and drives the breakpoint. Same shape otherwise.
+- A two-handed weapon with an empty off-hand multiplies by the
+  `TwohandedStanceBonus`, **1.25**.
+- Dual wield runs the whole formula again with the off-hand's own weapon state
+  (`Formula.AttackOffhand`), so each swing lands two packets and the character
+  sheet only shows the mainhand number.
+- Every mace grants `MatkPerStr` 1, which is how a Strength build gets magic.
+
+Three auto-attack multipliers sit on top:
+
+| Rule | Effect | Engine |
+|---|---|---|
+| Multistrike | each packet `* (1 + DoubleAttack/100)`, a flat multiplier, NOT a proc | `Formula$$DoubleAttack` |
+| Chain | arcs to `Chain` extra enemies within 8 m, each a fresh independent roll | `Formula$$AttackChain` |
+| Splash | reuses the already-rolled damage against everything within `Splash` m | `Formula$$AttackSplash` |
+
+Chain re-rolls, splash does not. Both ride the weapon state, so a dual-wield
+off-hand chains and multistrikes on its own values.
 
 ## Defence, and the cliff this game just fell off
 
 ```
-DEF           gearDEF  * (1 + DEF%)          (no Vitality term at all)
-MDEF          gearMDEF * (1 + MDEF%)         (no Vitality term at all)
-damageTaken   100 / (DEF + 100)
+DEF           gearDEF  * (1 + DEF%)          Formula$$Def    (no Vitality term at all)
+MDEF          gearMDEF * (1 + MDEF%)         Formula$$MDef   (no Vitality term at all)
+damageTaken   100 / (DEF + 100)              Formula$$DamageReduction
+Block         NoBlock -> 0; Block >= 100 -> 100; else min(75, Block + shieldBlock)
 ```
 
 A hyperbola. 100 defence halves damage, 300 quarters it, and **no amount ever
@@ -73,16 +98,20 @@ an augmented player physically immune (fixed in `f134970`).
 
 SpiritVale's curve makes that bug structurally impossible.
 
+Block is the one place SpiritVale keeps a cliff of its own, and it is
+deliberate: the chance caps at 75%, except that a base Block stat of exactly 100
+snaps to a guaranteed 100%. Nothing lands in between.
+
 ## Accuracy, evasion, criticals
 
 ```
-Hit            round( (Lv + 2*DEX + LUK/5 + flatHit + 25) * (1 + Hit%) )
-Flee           ( Lv + FLOOR(AGI/2) + flatFlee ) * (1 + Flee%)
-               -10% per attacker beyond the FOURTH
+Hit            round( (Lv + 2*DEX + LUK/5 + flatHit + 25) * (1 + Hit%) )   Formula$$Hit
+Flee           ( Lv + FLOOR(AGI/2) + flatFlee ) * (1 + Flee%)              Formula$$Flee
+               -10% per attacker beyond the FOURTH   (GetFleePenaltyCount)
 Perfect dodge  clamp(0, 100, PerfectDodge)      a plain stat, not derived
-Crit rate      ( FLOOR(LUK/3) + FLOOR(LUK/10) + flatCrit ) * (1 + Crit%)
+Crit rate      ( FLOOR(LUK/3) + FLOOR(LUK/10) + flatCrit ) * (1 + Crit%)   uncapped
 Crit damage    120 + FLOOR(LUK/5) + CritDamage%
-Crit defence   FLOOR(LUK/5) + CritDef
+Crit defence   FLOOR(LUK/5) + CritDef          subtracted from the attacker's crit rate
 ```
 
 Against the reference (`hit = level + DEX`, `flee = level + AGI`, perfect dodge
@@ -95,15 +124,23 @@ Against the reference (`hit = level + DEX`, `flee = level + AGI`, perfect dodge
   critical does not multiply at all; it takes the top of the weapon range and
   ignores defence. Two completely different designs.
 - Perfect dodge is a plain stat here, not a Luck derivation.
+- Crit rate is uncapped, but the defender's crit defence subtracts from it, so
+  the arms race resolves between two characters rather than against a ceiling.
 
-## Attack speed
+## Attack and cast speed
 
 ```
 ASPD          round( 200 - 50*BAD*(1 - (AGI + FLOOR(DEX/4))/250)/(1 + ASPD%)
-                     + 0.5*FLOOR(AGI/10) + AtkSpdFlat )
-ASPD cap      min( 193, 185 + FLOOR(AGI/30) + AtkSpdLimit )
-Attack delay  (200 - ASPD) / 50   seconds
+                     + 0.5*FLOOR(AGI/10) + AtkSpdFlat )            Formula$$AttackSpeed
+ASPD cap      min( 193, 185 + FLOOR(AGI/30) + AtkSpdLimit )        Formula$$AttackSpeedLimit
+Attack delay  (200 - ASPD) / 50   seconds                          Formula$$AttackDelay
 Dual wield    BAD = (BAD1 + BAD2) * 0.8
+
+Cast speed    200 - 50*(1 - (DEX + INT/2)/400)/(1 + CastSpd%)
+              + 0.5*(FLOOR(DEX/10) + CastTimeReduction)            Formula$$CastSpeed
+CTR           round( (1 - (200 - CastSpeed)/50) * 100 )
+CTR cap       min( 90% + CastTimeReductionLimit, CTR )             Formula$$MaxCastTimeReduction
+Cast mult     (100 - CTR) / 100
 ```
 
 Same 200-point scale as the reference, and the same "delay converts to a rate"
@@ -112,29 +149,49 @@ reference cuts a per-job base motion by `(4*AGI + DEX)/1000`; SpiritVale scales 
 per-WEAPON base delay by `(AGI + DEX/4)/250` and adds a small Agility bonus on
 top. The reference's ceiling is 190, SpiritVale's is 193.
 
-Base attack delay by weapon (lower is faster):
+Cast speed reuses the identical shape one scale down, with Dexterity and half of
+Intelligence over 400 rather than 250. One idea, two applications.
+
+Base attack delay by weapon (lower is faster), all 23 rows:
 
 | BAD | Weapons |
 |---|---|
 | 0.90 | Unarmed |
 | 1.00 | Dagger, Katar |
-| 1.10 | Book, Sword, Sword2H |
-| 1.15 | Instrument, Mace, Mace2H |
-| 1.20 | Pistol, Scythe, Spear, Spear2H, Twinblade, Wand, Wand2H |
+| 1.10 | Sword, Sword2H, Book |
+| 1.15 | Mace, Mace2H, Instrument |
+| 1.20 | Spear, Spear2H, Wand, Wand2H, Scythe, Pistol, Twinblade |
 | 1.30 | Axe, Axe2H |
 | 1.40 | Bow, GatlingGun |
 | 1.50 | Rifle |
-| 2.00 | Launcher, Shotgun |
+| 2.00 | Shotgun, Launcher |
 
 Note it is per WEAPON, not per job-and-weapon. The reference's table is
 two-dimensional; this one is a single column.
 
-## Resources
+Which weapons can dual wield: Sword, Dagger, Axe, Pistol, Twinblade, Katar.
+Which are inherently two-handed: Bow, Scythe, Instrument, Rifle, Shotgun,
+Launcher, GatlingGun. Which count as ranged: Pistol, Bow, Rifle, Shotgun,
+Launcher, GatlingGun.
+
+## Resources and sustain
 
 ```
 Max HP   max(1, round( ((Tri(L)*Arch% + 10*Lv + 200) * (1 + VIT/100) + flatHP) * (1 + HP%) ))
-         Tri(n) = n*(n+1)/2, L = clamp(Lv, 1, 130)
-Max MP   [ (45 + 5*Lv) * (1 + INT/100) + flatMP ] * (1 + MP%)
+         Tri(n) = n*(n+1)/2, L = clamp(Lv, 1, 130)              Formula$$MaxHealth
+Max MP   [ (45 + 5*Lv) * (1 + INT/100) + flatMP ] * (1 + MP%)   Formula$$MaxMana
+
+HP regen round( (MaxHP/200 + VIT/5 + flatRegen) * (1 + VIT/200 + HpRegen%/2)
+                + MaxHP * MaxHpRegen% )                          Formula$$HealthRegen
+MP regen round( ( (MaxMP/100 + INT/5 + flatRegen) * (1 + INT/200 + MpRegen%/2)
+                  + MaxMP * MaxMpRegen% ) * (1 + MpRegen%) )     Formula$$ManaRegen
+
+Healing  (Lv + INT + VIT) * 2.5 * Healing%                       Formula$$GetHealing
+Siphon   HP: Siphon * (Lv + VIT) / 50   ·   MP: Siphon * (Lv + INT) / 50
+Leech    HP/hit = round( dmg * Leech/100 * 0.2 * (1 + HealingReceived/100) )
+         MP/hit = round( dmg * ManaLeech/100 * 0.02 )      CombatComponent$$ApplyLeech
+Reflect  (Lv + DEF/2 + flatDEF/2 + ATK/2) * 4 * Reflect%         Formula$$GetReflectDamage
+Resist   attribute * 0.66% per point, cutting both chance and duration
 ```
 
 Health is quadratic in level through the triangular number, scaled by a
@@ -142,9 +199,27 @@ per-class multiplier. Spell points are linear. Vitality and Intelligence are
 plain percentage multipliers on their own pool, which is far simpler than the
 reference's per-job table.
 
-Healing is `(Lv + INT + VIT) * 2.5 * Healing%`, so Vitality helps a healer.
+Three details in the sustain block are easy to get wrong and worth pinning:
+
+- The regen multiplier stats enter **halved**, because the engine averages
+  `(1 + VIT/100)` with `(1 + HpRegenMult/100)`. On the mana side the same stat
+  then applies a SECOND time in full on the finished total, so mana regeneration
+  percentage is worth appreciably more than its health twin. The health side
+  divides max health by 200, the mana side by 100.
+- Leech converts a **fifth** of its face value (the 0.2), banks into a reserve
+  rather than healing instantly, and that reserve pays out at most 20% of max
+  health per second. Past a certain attack speed the per-second ceiling is the
+  real cap, not the per-hit amount. Only Melee, Magic and Ranged hits that
+  connect steal; Status and True damage never do, a miss banks nothing, a
+  blocked hit still banks, and at most 3 targets per attack contribute.
+- Status resistance maps one attribute per status pair: Strength resists
+  bleed and stagger, Agility slow and freeze, Vitality stun and decay,
+  Intelligence silence and burn, Dexterity poison and blind, Luck curse and
+  weaken.
 
 ## Archetypes: the class table
+
+The seven base classes, complete:
 
 | Class | HP mult | STR | VIT | AGI | DEX | INT | LUK | Max job |
 |---|---|---|---|---|---|---|---|---|
@@ -157,9 +232,20 @@ Healing is `(Lv + INT + VIT) * 2.5 * Healing%`, so Vitality helps a healer.
 | Mage | 50% | 1 | 1 | 9 | 9 | 12 | 1 | 50 |
 
 Every base class starts with **12 in its lead attribute, 9 in two supports, 1 in
-the rest**, and the health multiplier spreads 50% to 130%. An advanced class
-inherits its parent's health multiplier but **resets every attribute to 1** and
-runs job level 1 to 70.
+the rest**, and nobody starts with Luck. The health multiplier spreads 50% to
+130%, which is the entire durability difference between a Warrior and a Mage.
+
+The archetype table holds 31 entries. The other 24 are advanced classes and
+crafting professions: all run job level 1 to **70**, all carry a health
+multiplier of 1.0 except Weaver at 0.5, and all publish their starting
+attributes as zero, which reads as "not authored in this table" rather than as a
+real reset. An advanced class does NOT inherit its parent's health multiplier
+(Berserker is 1.0 where its parent Warrior is 1.3).
+
+Of the 31, fifteen have real skill trees in the export (see
+`spiritvale-data-schema.md`): the seven base classes minus Warrior's and
+Summoner's overlap, plus Berserker, Gunslinger, Necromancer, Paladin, Priest,
+Shinobi, Weaver and Wizard. The rest are announced but not yet in the files.
 
 The reference starts every job at 1 across the board and separates jobs by their
 health and spell-point tables instead.
@@ -190,25 +276,44 @@ invented chart with that real one (`02cfb38`), all 400 cells.
 SpiritVale flattened the same ten-by-ten relationship into a single table with
 three multipliers. It is the element triangle without the homework.
 
+Monster races are the reference's ten, unchanged: Angel, Beast, Demon, Dragon,
+Fish, Formless, Humanoid, Insect, Plant, Undead. Sizes run 0 to 3.
+
 ## Ceilings
 
-| Cap | Value |
-|---|---|
-| Elemental resistance | 75% |
-| Status resistance | 100% (bosses sit at a flat 100%, immune) |
-| ASPD | 193 |
-| Cast-time reduction | 90% |
-| Block | 75%, or a hard snap to 100% at exactly 100 Block |
-| Perfect dodge / perfect hit | 100% |
-| Defence pierce | 100% |
-| Leech payout | 20% of max health per second |
+| Cap | Value | Engine |
+|---|---|---|
+| ASPD | 193 hard, `185 + FLOOR(AGI/30)` soft | `AttackSpeedLimit` |
+| Cast-time reduction | 90% + `CastTimeReductionLimit` | `MaxCastTimeReduction` |
+| Block | 75%, or a hard snap to 100% at exactly 100 Block | `BlockRate` |
+| Perfect dodge / perfect hit | 100% | `PerfectDodge` |
+| Elemental resistance | 75% | authored, not read from the engine |
+| Status resistance | 100% (bosses sit at a flat 100%, immune) | authored |
+| Defence pierce | 100% | authored, community-sourced |
+| Leech payout | 20% of max health per second | `ApplyLeech` |
 
-Status resistance builds from a `StatusResist` stat plus about two thirds of one
-attribute, which attribute depending on the status.
+The last three rows are marked `authored` in the source file rather than
+`engine`, meaning the site could not read them out of a method and recorded them
+from play. Weight them accordingly.
+
+## Party, and the level-gap brake
+
+```
+expMult       1 + ScalingBonus * (N - 1) * 0.20
+coinMult      1 + ScalingBonus * (N - 1) * 0.10
+ScalingBonus  clamp(0, 1, 1 - 0.05 * clamp(0, 100, LevelGap - 30))
+```
+
+A tight party of 2, 3 or 4 earns +20%, +40%, +60% experience and half that in
+coin. The pool then splits either evenly or by damage contribution, the player's
+choice. The brake is the level gap: full value up to a 30-level spread, then 5%
+lost per extra level, zero at 50. That is a real answer to power-levelling that
+this game currently has nothing equivalent to.
 
 ## Experience
 
-Base level runs to 150. The first twenty steps:
+Base level runs to **150**; the published curve carries 161 entries, so it is
+padded past the cap. The first twenty steps:
 
 | Level | To next | Cumulative |
 |---|---|---|
@@ -217,6 +322,32 @@ Base level runs to 150. The first twenty steps:
 | 10 | 7,981 | 20,343 |
 | 15 | 24,193 | 86,092 |
 | 20 | 61,439 | 271,558 |
+
+Full table: `data/spiritvale-base-exp.tsv`. The last two entries approach the
+signed 32-bit ceiling, which suggests the curve was fitted rather than authored.
+
+## Item economy
+
+```
+Card removal   (cardsOnItem + 4) * 5000    coins, strips EVERY card at once
+Gem removal    (gemsOnArtifact + 4) * 5000 coins, same shape
+```
+
+Essence, the substat re-roll system, is fully published: five types with a coin
+cost, a potential range and a drop weight each.
+
+| Essence | Coin | Potential | Weight | What it does |
+|---|---|---|---|---|
+| Flow | 25,000 | 2 to 3 | 20 | re-rolls the VALUE of one chosen substat |
+| Growth | 35,000 | 3 to 4 | 30 | ADDS a new random substat line |
+| Destruction | 45,000 | 4 to 5 | 25 | REPLACES one chosen substat |
+| Rebirth | 55,000 | 5 to 6 | 15 | wipes and re-rolls EVERY substat |
+| Chaos | 100,000 | n/a | 10 | the wildcard slot |
+
+Every roll has a floor of two thirds of the range, so a re-roll can disappoint
+but never bricks the line. Substat caps: 5 plus one Chaos on weapons, 4 plus one
+Chaos on other gear, 4 and no Chaos slot on artifacts. Potential is the currency
+the roll spends; 10,000 coins buys a point of it.
 
 ## What to take, and what not to
 
@@ -229,6 +360,8 @@ Recommended for this game, in order of how much they buy:
 3. **Per-class starting attributes** (12 / 9 / 9 / 1 / 1 / 1). A new character is
    playable immediately instead of being a blank slate.
 4. **Health as `Tri(level) * classMultiplier`** rather than a per-job table.
+5. **The party level-gap brake.** Fourteen characters of arithmetic that solves
+   power-levelling without a rule anyone has to read.
 
 Deliberately NOT recommended:
 
@@ -247,9 +380,14 @@ Deliberately NOT recommended:
 
 ## What is still missing
 
-- Per-skill effect detail: what `Firebolt 0 (+2/Lv)` multiplies is still
-  unstated, though the ATK/MATK formulas above make "a multiplier on MATK" the
-  obvious reading.
-- The status-point cost curve and points-per-level.
-- The job experience table (only base level is published).
-- What the Grimoire layer does.
+The gaps left after reading the full database, which is a much shorter list than
+it was before:
+
+- The **status-point cost curve** and points-per-level. Job points are 1 per job
+  level (as here), but nothing states what a stat point costs.
+- The **job experience table**. Only base level is published.
+- What the **Grimoire** layer does. It appears as an equipment slot and as the
+  source of the `CastReady` buff, and nothing else describes it.
+- The **enum meanings** behind `targetType` 0 to 7, `castType` 0 to 3 and
+  `exclusiveType` 0 to 5 on a skill record. The values are published; their
+  labels are not. Do not guess them.

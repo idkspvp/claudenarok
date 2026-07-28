@@ -21,9 +21,9 @@ SpiritVale" and the play half had no data behind it until now.
 | `artifact-configs.json` | list[34] | artifacts: full-set, per-piece and per-refine bonuses |
 | `set-configs.json` | list[24] | equipment sets and their full-set bonuses |
 | `substat-pools.json` | dict[9] | which substats each slot may roll |
-| `skills-combat.json` | dict[9] | the big one: skills, statuses, passives and summons with their combat data |
+| `skills-combat.json` | dict[9] | the big one, four databases in a wrapper: 279 `skills` (52 fields each), 185 `statuses`, 111 `passives`, 29 `summons` |
 | `skills.json` | dict[279] | skill index |
-| `spiritvale-all-classes.json` | dict[5] | all 15 classes with their trees |
+| `spiritvale-all-classes.json` | dict[5] | 15 classes with their full skill trees, grid layouts and prerequisites (258 skills) |
 | `maps.json` | list[46] | maps: biome, type, level band, density |
 | `spawns.json` | dict[295] | what spawns where |
 | `spawn-meta.json` | dict[3] | global, per-map and tower spawn rules |
@@ -35,7 +35,7 @@ SpiritVale" and the play half had no data behind it until now.
 | `map-pins.json` | dict[44] | points of interest per map |
 | `worldmap.json` | dict[6] | world grid and tiles |
 | `dungeons.json` | dict[1] | dungeon definitions |
-| `mechanics.json` | dict[15] | the engine formulas, in structured form |
+| `mechanics.json` | dict[15] | the authoritative one: 37 formulas with the engine method and constants behind each, 65 engine method names, the 10x10 element matrix, 31 archetypes, the weapon delay table, the caps, the 161-entry exp curve, the 220-key stat catalog, and the essence economy |
 | `class-roadmap.json` | dict[9] | the developers' announced class plans |
 
 ## The record shapes worth knowing before you read
@@ -75,17 +75,30 @@ re-roll draws from.
 ## What is deliberately NOT here
 
 The game's art. Sprites are referenced by name (`"sprite": "HairAcc_2"`) and the
-files themselves are the SpiritVale developers' copyrighted assets, not
-published data. Models, icons and textures for this game are authored here (see
-the `image-to-glb` skill and `docs/image-to-glb-asset-workflow.md`).
+image files are the SpiritVale developers' copyrighted assets, not published
+data. Models, icons and textures for this game are authored here (see the
+`image-to-glb` skill and `docs/image-to-glb-asset-workflow.md`).
 
-## The transcribed subsets
+One file arrived carrying art anyway: `gem-configs.json` shipped a base64 WebP
+icon inline on all 129 gems, about 310 KB of the file. Those `icon` fields were
+stripped on the way in, which is why the file here is 30 KB and why a re-fetch
+will not match byte for byte. Nothing else in the set embeds an image.
+
+## Reading it
+
+- `../../spiritvale-data-schema.md` explains every record shape and which fields
+  carry design weight. Read it before the numbers.
+- `../../spiritvale-engine-formulas.md` transcribes all 37 formulas from
+  `mechanics.json` with the engine method behind each, and compares them to the
+  reference implementation.
 
 The human-readable extracts alongside this directory came from the same source
-and are easier to read while designing:
+and are quicker to scan while designing:
 
 - `../spiritvale-skills.tsv` (226 skills, one row each)
 - `../spiritvale-stat-catalog.tsv` (219 stats)
 - `../spiritvale-status-effects.tsv` (156 statuses)
 - `../spiritvale-base-exp.tsv` (150 levels)
-- `../../spiritvale-engine-formulas.md` (the formulas in prose)
+
+Where an extract and a raw file disagree, the raw file wins: the extracts were
+transcribed from the rendered site, the JSON is what the site loads.

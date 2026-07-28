@@ -9,6 +9,13 @@ This corrects the note in `spiritvale-skill-reference.md` that per-skill effects
 were unpublished. They are. The earlier reading came from a different fan wiki
 that only carried the shape.
 
+**Superseded on the schema.** The site's JSON was fetched afterwards: 279 skills
+with 52 fields each, plus 185 statuses, 111 passives and 29 summons. The record
+sketch at the bottom of this file guessed roughly a third of the real field set.
+Read `spiritvale-data-schema.md` for the actual shape. What still stands here is
+the reading of the power values and the observation about how low the control
+chances are.
+
 ## The record format
 
 Every skill states the same fields. Here are four real rows:

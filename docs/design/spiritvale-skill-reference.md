@@ -5,6 +5,13 @@ planner, in July 2026. Every number here is transcribed, not estimated. Where a
 source disagreed with another, the planner's live UI wins, and the disagreement
 is recorded.
 
+**Partly superseded.** The site's underlying JSON was fetched afterwards and
+holds 279 skills, not 219, with 52 fields each. For a record's SHAPE and for any
+individual number, read `spiritvale-data-schema.md` and the files under
+`data/spiritvale-raw/`. What still stands here is the survey: the level-cap
+distribution, the element and class spread, and the comparison against the
+reference's first-job trees.
+
 This exists because the project rule is "numbers from Ragnarok, play from
 SpiritVale", and until now we had SpiritVale decisions recorded for equipment
 slots, maps, materials, card rates, refining and sets, but nothing at all for
