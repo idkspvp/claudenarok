@@ -1002,7 +1002,7 @@ export const en = {
       aug_toughness: { name: 'Toughness', desc: 'Gain 12% maximum health.' },
       aug_keen_eye: { name: 'Keen Eye', desc: 'Gain 8% critical strike chance.' },
       aug_fleetfoot: { name: 'Fleetfoot', desc: 'Move 15% faster. Run them down — or run away.' },
-      aug_ironhide: { name: 'Ironhide', desc: 'Gain 250 armor and 5% dodge.' },
+      aug_ironhide: { name: 'Ironhide', desc: 'Gain 6 armor and 5% dodge.' },
       aug_mending: { name: 'Mending', desc: 'Your healing is 20% more potent.' },
       aug_warlords_might: {
         name: "Warlord's Might",
@@ -1018,7 +1018,7 @@ export const en = {
       },
       aug_juggernaut: {
         name: 'Juggernaut',
-        desc: '+20% maximum health and +400 armor. Immovable.',
+        desc: '+20% maximum health and +10 armor. Immovable.',
       },
       aug_bloodhunter: {
         name: 'Bloodhunter',
@@ -1042,7 +1042,7 @@ export const en = {
       },
       aug_unkillable: {
         name: 'Unkillable',
-        desc: '+40% maximum health, +600 armor, heal for 10% of damage dealt.',
+        desc: '+40% maximum health, +16 armor, heal for 10% of damage dealt.',
       },
       aug_overdrive: {
         name: 'Overdrive',
@@ -1050,7 +1050,7 @@ export const en = {
       },
       aug_avatar: {
         name: 'Avatar of War',
-        desc: '+25% all damage, +25% maximum health, +300 armor. Walk it down.',
+        desc: '+25% all damage, +25% maximum health, +8 armor. Walk it down.',
       },
       aug_ascendant: {
         name: 'Ascendant',

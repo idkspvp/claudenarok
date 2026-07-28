@@ -5285,7 +5285,7 @@ export const en: EnTranslations = {
       },
       "aug_ironhide": {
         "name": "Ironhide",
-        "desc": "Gain 250 armor and 5% dodge."
+        "desc": "Gain 6 armor and 5% dodge."
       },
       "aug_mending": {
         "name": "Mending",
@@ -5305,7 +5305,7 @@ export const en: EnTranslations = {
       },
       "aug_juggernaut": {
         "name": "Juggernaut",
-        "desc": "+20% maximum health and +400 armor. Immovable."
+        "desc": "+20% maximum health and +10 armor. Immovable."
       },
       "aug_bloodhunter": {
         "name": "Bloodhunter",
@@ -5329,7 +5329,7 @@ export const en: EnTranslations = {
       },
       "aug_unkillable": {
         "name": "Unkillable",
-        "desc": "+40% maximum health, +600 armor, heal for 10% of damage dealt."
+        "desc": "+40% maximum health, +16 armor, heal for 10% of damage dealt."
       },
       "aug_overdrive": {
         "name": "Overdrive",
@@ -5337,7 +5337,7 @@ export const en: EnTranslations = {
       },
       "aug_avatar": {
         "name": "Avatar of War",
-        "desc": "+25% all damage, +25% maximum health, +300 armor. Walk it down."
+        "desc": "+25% all damage, +25% maximum health, +8 armor. Walk it down."
       },
       "aug_ascendant": {
         "name": "Ascendant",

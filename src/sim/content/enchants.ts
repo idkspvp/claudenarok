@@ -183,7 +183,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_dust', count: 3 },
       { itemId: 'arcane_essence', count: 1 },
     ],
-    statBonus: { armor: 15 },
+    statBonus: { armor: 2 },
   },
   // Necklace: caster (int) and physical (agi) options beside Spirit.
   enchant_neck_intellect: {
@@ -234,7 +234,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
       { itemId: 'arcane_dust', count: 3 },
       { itemId: 'arcane_essence', count: 2 },
     ],
-    statBonus: { armor: 20 },
+    statBonus: { armor: 3 },
   },
   // Belt: melee (str) and physical (agi) options beside Stamina.
   enchant_waist_strength: {

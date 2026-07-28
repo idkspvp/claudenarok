@@ -96,8 +96,8 @@ export const AUGMENTS: AugmentDef[] = [
     id: 'aug_ironhide',
     name: 'Ironhide',
     tier: 'silver',
-    description: 'Gain 250 armor and 5% dodge.',
-    effect: { stats: { armor: 250, dodge: 0.05 } },
+    description: 'Gain 6 armor and 5% dodge.',
+    effect: { stats: { armor: 6, dodge: 0.05 } },
   },
   {
     id: 'aug_mending',
@@ -137,8 +137,8 @@ export const AUGMENTS: AugmentDef[] = [
     id: 'aug_juggernaut',
     name: 'Juggernaut',
     tier: 'gold',
-    description: '+20% maximum health and +400 armor. Immovable.',
-    effect: { stats: { maxHpPct: 0.2, armor: 400 } },
+    description: '+20% maximum health and +10 armor. Immovable.',
+    effect: { stats: { maxHpPct: 0.2, armor: 10 } },
   },
   {
     id: 'aug_bloodhunter',
@@ -187,8 +187,8 @@ export const AUGMENTS: AugmentDef[] = [
     id: 'aug_unkillable',
     name: 'Unkillable',
     tier: 'prismatic',
-    description: '+40% maximum health, +600 armor, heal for 10% of damage dealt.',
-    effect: { stats: { maxHpPct: 0.4, armor: 600 } },
+    description: '+40% maximum health, +16 armor, heal for 10% of damage dealt.',
+    effect: { stats: { maxHpPct: 0.4, armor: 16 } },
     special: { lifestealPct: 0.1 },
   },
   {
@@ -204,8 +204,8 @@ export const AUGMENTS: AugmentDef[] = [
     name: 'Avatar of War',
     tier: 'prismatic',
     classes: PHYSICAL,
-    description: '+25% all damage, +25% maximum health, +300 armor. Walk it down.',
-    effect: { global: { meleeDmgPct: 0.25 }, stats: { maxHpPct: 0.25, armor: 300 } },
+    description: '+25% all damage, +25% maximum health, +8 armor. Walk it down.',
+    effect: { global: { meleeDmgPct: 0.25 }, stats: { maxHpPct: 0.25, armor: 8 } },
   },
   {
     id: 'aug_ascendant',
