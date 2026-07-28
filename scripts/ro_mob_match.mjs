@@ -119,6 +119,10 @@ function parseNeighbourhoods(byName) {
 // a scripted encounter wearing an ordinary monster's name, and pairing one of
 // our starter mobs with it would be a disaster nobody would spot until they
 // played it.
+// Our attribute names against the reference's.
+const ELEMENT_ALIAS = { shadow: 'dark' };
+const alias = (e) => ELEMENT_ALIAS[e] ?? e;
+
 const isReal = (r) =>
   r.baseExp > 0 &&
   r.hp > 30 &&
@@ -252,7 +256,37 @@ export function matchMonsters() {
   return out;
 }
 
-const pairs = matchMonsters();
+// Nearest level, with race, attribute and size as tie-breaks. Simpler than the
+// neighbourhood pass above and better for actually playing the game: a monster
+// keeps roughly the level it already had, so the zone layout does not move, and
+// it still takes real values from a reference monster of the same level.
+export function matchByLevel() {
+  const byName = parseReference();
+  const pool = [...byName.values()].filter(isReal);
+  const normals = pool.filter((r) => !r.boss && !r.mvp);
+  const bosses = pool.filter((r) => r.boss || r.mvp);
+  const out = [];
+  for (const mob of Object.values(MOBS)) {
+    const level = mid(mob);
+    const list = mob.boss || mob.worldBoss ? bosses : normals;
+    let best = null;
+    let bestScore = Number.POSITIVE_INFINITY;
+    for (const r of list) {
+      let score = Math.abs(r.level - level) * 3;
+      if (r.race !== mob.race) score += 4;
+      if (r.element !== alias(mob.element)) score += 3;
+      if (r.size !== mob.size) score += 2;
+      if (score < bestScore) {
+        bestScore = score;
+        best = r;
+      }
+    }
+    if (best) out.push({ mob, ref: best, place: 'by-level', map: 'by-level' });
+  }
+  return out;
+}
+
+const pairs = process.argv.includes('--neighbourhood') ? matchMonsters() : matchByLevel();
 
 if (process.argv.includes('--json')) {
   console.log(
