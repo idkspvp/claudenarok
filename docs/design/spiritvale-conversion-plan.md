@@ -119,26 +119,43 @@ existing seam, per the repo's module-first rule.
 
 ### Phase 0. Clear the dead weight (prerequisite, no design content)
 
-Twenty of the 57 modules in `src/sim/combat/` have no importer:
+**Corrected.** An earlier draft of this plan claimed twenty of the 58 modules in
+`src/sim/combat/` had no importer, and built Phase 0 around clearing them. That
+was a measurement error: the scan matched `from '.../combat/<name>'` and missed
+same-directory relative imports (`from './gear_proc'`), which is how most of
+that directory imports its neighbours.
+
+A real reachability walk (import graph from all 125 entry points: `main.ts`,
+`sim.ts`, the server, the headless env, `online.ts`, the renderer, the HUD, and
+the editor / admin / guide roots) gives the true answer:
 
 ```
-area_echo  armor_slot_def  attribute_damage  auto_cast_ability  cast_hooks
-convergence  dot_mutation  empower_next  equip_procs  exclusive_aura  forms
-gear_proc  glacial_front  group_targeting  haste_burst  mass_resurrection
-proc_state  sure_crit  weapon_class_atk  weapon_size
+src/sim/combat/   58 modules,  1 unreachable:  weapon_class_atk.ts  (69 lines)
+whole repo       1,223 files, 27 unreachable, and 26 of those are benign
+                 (generated bundles, barrels reached another way, server
+                 middleware registered through the route registry)
 ```
 
-Some are correct code that was never wired (`gear_proc`, `auto_cast_ability`,
-`weapon_size` are all from this year's work); some are WoC leftovers. Every one
-is either wired in the phase that needs it or deleted now. Carrying twenty dead
-modules through a conversion this size is how a conversion stalls.
+So there is no dead-weight problem. `weapon_class_atk` goes because SpiritVale
+derives weapon attack from the item's own stat lines rather than from a
+per-class band, which makes it wrong under the new model as well as unused.
 
-Also finish the pending task list already open: the talent removal (`D0-2`,
-`D0-4` through `D0-7`) and the aggro replacement (`M1c`). Those are half-done and
-will conflict with everything below.
+Phase 0 is therefore the pending work already open, plus one removal the user
+ordered:
 
-**Accept:** `npx vitest run tests/architecture.test.ts` green, no module in
-`src/sim/combat/` without an importer, `npm run gate` green.
+- **Cut the card duel minigame.** SpiritVale's "cards" are gear affixes dropped
+  at 0.5%, which is what a Ragnarok player expects a card to be. Two systems
+  called cards will confuse, and the minigame is ours to lose. It spans 46 files
+  including an `IWorld` facet, a `SimContext` member, wire protocol, deeds, an
+  instance, NPCs, i18n and six test files.
+- **Finish the talent removal** (`D0-2`, `D0-4` through `D0-7`).
+- **Replace the threat table with simple aggro** (`M1c`).
+- Delete `weapon_class_atk.ts`.
+
+**Accept:** `npm run gate` green; `tests/world_api_parity.test.ts`,
+`tests/architecture.test.ts`, `tests/deeds_content.test.ts` and
+`tests/snapshots.test.ts` pins all updated in the same change; parity goldens
+regenerated LAST, in their own reviewed commit.
 
 ### Phase 1. The stat core
 
