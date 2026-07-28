@@ -15,7 +15,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 415,
+      "nextId": 414,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -29,8 +29,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "6a37b9be",
+      "nextId": 420,
+      "state": "1c4021b2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -66,7 +66,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -116,7 +116,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -169,7 +169,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -207,7 +207,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -224,7 +224,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -257,7 +257,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 418,
+          "targetId": 417,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -287,7 +287,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -355,7 +355,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -404,7 +404,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -418,7 +418,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -446,7 +446,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -468,7 +468,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -517,7 +517,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -555,8 +555,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "31370879",
+      "nextId": 420,
+      "state": "59461a0b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -592,7 +592,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -642,7 +642,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -695,7 +695,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -733,7 +733,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -750,7 +750,533 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
+          "id": 414,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 100,
+          "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resourceType": "rage",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 1,
+          "stats": {
+            "agi": 1,
+            "armor": 2,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "targetId": 418,
+          "templateId": "swordman",
+          "weapon": {
+            "max": 54,
+            "min": 41,
+            "speed": 1.096,
+            "weaponLevel": 1,
+            "weaponType": "sword"
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
+          "hit": 2,
+          "hp": 40,
           "id": 415,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 15,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 2,
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 15,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 1,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "templateId": "acolyte",
+          "weapon": {
+            "max": 27,
+            "min": 20,
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.194,
+            "weaponLevel": 1,
+            "weaponType": "rod"
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
+          "hit": 2,
+          "hp": 40,
+          "id": 416,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 16,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": -2,
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 16,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 1,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "templateId": "mage",
+          "weapon": {
+            "max": 27,
+            "min": 20,
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.394,
+            "weaponLevel": 1,
+            "weaponType": "rod"
+          }
+        },
+        {
+          "aggroTargetId": 414,
+          "aiState": "attack",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 50000,
+          "id": 417,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 4,
+            "z": 4
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "x": 4,
+            "z": 4
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "targetId": 414,
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 60,
+          "id": 418,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 60,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": -3,
+            "z": 6
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "x": -3,
+            "z": 6
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 50000,
+          "id": 419,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "z": 10
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "z": 10
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        }
+      ]
+    },
+    {
+      "tick": 0,
+      "time": 0,
+      "nextId": 420,
+      "state": "f4a286b8",
+      "events": "741638a5",
+      "rng": {
+        "draws": 0,
+        "digest": "811c9dc5"
+      },
+      "label": "tab-3",
+      "players": [
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "swordman",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "eastbrook_buckler",
+              "recruit_tunic",
+              "worn_sword"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 414,
+          "equipment": {
+            "chest": "recruit_tunic",
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        },
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "acolyte",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 415,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        },
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "mage",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {},
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 416,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        }
+      ],
+      "entities": [
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3600,
+              "school": "physical",
+              "sourceId": 414
+            }
+          ],
+          "blockChance": 0.05,
+          "blockValue": 6,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "hit": 2,
+          "hp": 40,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -813,537 +1339,11 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 2,
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resource": 15,
-          "resourceType": "mana",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 2,
-          "stats": {
-            "agi": 1,
-            "armor": 1,
-            "dex": 1,
-            "int": 2,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "templateId": "acolyte",
-          "weapon": {
-            "max": 27,
-            "min": 20,
-            "ranged": {
-              "maxRange": 30,
-              "school": "arcane",
-              "wand": true
-            },
-            "speed": 1.194,
-            "weaponLevel": 1,
-            "weaponType": "rod"
-          }
-        },
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "gearEffects": {
-            "resist": {
-              "blind": 0.05
-            }
-          },
-          "hit": 2,
-          "hp": 40,
-          "id": 417,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": -2,
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resource": 16,
-          "resourceType": "mana",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 2,
-          "stats": {
-            "agi": 1,
-            "armor": 1,
-            "dex": 1,
-            "int": 2,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "templateId": "mage",
-          "weapon": {
-            "max": 27,
-            "min": 20,
-            "ranged": {
-              "maxRange": 30,
-              "school": "arcane",
-              "wand": true
-            },
-            "speed": 1.394,
-            "weaponLevel": 1,
-            "weaponType": "rod"
-          }
-        },
-        {
-          "aggroTargetId": 415,
-          "aiState": "attack",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 50000,
-          "id": 418,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 4,
-            "z": 4
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "x": 4,
-            "z": 4
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "targetId": 415,
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        },
-        {
-          "aiState": "idle",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 60,
-          "id": 419,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 60,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": -3,
-            "z": 6
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "x": -3,
-            "z": 6
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        },
-        {
-          "aiState": "idle",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 50000,
-          "id": 420,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "z": 10
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "z": 10
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        }
-      ]
-    },
-    {
-      "tick": 0,
-      "time": 0,
-      "nextId": 421,
-      "state": "32018029",
-      "events": "741638a5",
-      "rng": {
-        "draws": 0,
-        "digest": "811c9dc5"
-      },
-      "label": "tab-3",
-      "players": [
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "swordman",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {},
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "eastbrook_buckler",
-              "recruit_tunic",
-              "worn_sword"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 415,
-          "equipment": {
-            "chest": "recruit_tunic",
-            "mainhand": "worn_sword",
-            "offhand": "eastbrook_buckler"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
-        },
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "acolyte",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {},
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "apprentice_robe",
-              "baked_bread",
-              "gnarled_staff",
-              "spring_water"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 416,
-          "equipment": {
-            "chest": "apprentice_robe",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
-        },
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "mage",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {},
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "apprentice_robe",
-              "baked_bread",
-              "gnarled_staff",
-              "spring_water"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 417,
-          "equipment": {
-            "chest": "apprentice_robe",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
-        }
-      ],
-      "entities": [
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "auras": [
-            {
-              "duration": 3600,
-              "id": "battle_stance",
-              "kind": "battle_stance",
-              "name": "Warring Stance",
-              "remaining": 3600,
-              "school": "physical",
-              "sourceId": 415
-            }
-          ],
-          "blockChance": 0.05,
-          "blockValue": 6,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 40,
-          "maxResource": 100,
-          "moveSpeed": 7,
-          "offhandItemId": "eastbrook_buckler",
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resourceType": "rage",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 1,
-          "stats": {
-            "agi": 1,
-            "armor": 2,
-            "dex": 1,
-            "int": 1,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "targetId": 420,
-          "templateId": "swordman",
-          "weapon": {
-            "max": 54,
-            "min": 41,
-            "speed": 1.096,
-            "weaponLevel": 1,
-            "weaponType": "sword"
-          }
-        },
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "gearEffects": {
-            "resist": {
-              "blind": 0.05
-            }
-          },
-          "hit": 2,
-          "hp": 40,
-          "id": 416,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
           "maxResource": 15,
           "moveSpeed": 7,
           "onGround": true,
@@ -1407,7 +1407,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -1456,7 +1456,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -1470,7 +1470,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -1498,7 +1498,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -1520,7 +1520,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -1569,7 +1569,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -1607,8 +1607,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "6a37b9be",
+      "nextId": 420,
+      "state": "1c4021b2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1644,7 +1644,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -1694,7 +1694,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -1747,483 +1747,6 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
-          "equipment": {
-            "chest": "apprentice_robe",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
-        }
-      ],
-      "entities": [
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "auras": [
-            {
-              "duration": 3600,
-              "id": "battle_stance",
-              "kind": "battle_stance",
-              "name": "Warring Stance",
-              "remaining": 3600,
-              "school": "physical",
-              "sourceId": 415
-            }
-          ],
-          "blockChance": 0.05,
-          "blockValue": 6,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
-          "id": 415,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 100,
-          "moveSpeed": 7,
-          "offhandItemId": "eastbrook_buckler",
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resourceType": "rage",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 1,
-          "stats": {
-            "agi": 1,
-            "armor": 2,
-            "dex": 1,
-            "int": 1,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "targetId": 418,
-          "templateId": "swordman",
-          "weapon": {
-            "max": 54,
-            "min": 41,
-            "speed": 1.096,
-            "weaponLevel": 1,
-            "weaponType": "sword"
-          }
-        },
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "gearEffects": {
-            "resist": {
-              "blind": 0.05
-            }
-          },
-          "hit": 2,
-          "hp": 40,
-          "id": 416,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 2,
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resource": 15,
-          "resourceType": "mana",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 2,
-          "stats": {
-            "agi": 1,
-            "armor": 1,
-            "dex": 1,
-            "int": 2,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "templateId": "acolyte",
-          "weapon": {
-            "max": 27,
-            "min": 20,
-            "ranged": {
-              "maxRange": 30,
-              "school": "arcane",
-              "wand": true
-            },
-            "speed": 1.194,
-            "weaponLevel": 1,
-            "weaponType": "rod"
-          }
-        },
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 2,
-          "gearEffects": {
-            "resist": {
-              "blind": 0.05
-            }
-          },
-          "hit": 2,
-          "hp": 40,
-          "id": 417,
-          "kind": "player",
-          "level": 1,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": -2,
-            "y": 1.5
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resource": 16,
-          "resourceType": "mana",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 2,
-          "stats": {
-            "agi": 1,
-            "armor": 1,
-            "dex": 1,
-            "int": 2,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "templateId": "mage",
-          "weapon": {
-            "max": 27,
-            "min": 20,
-            "ranged": {
-              "maxRange": 30,
-              "school": "arcane",
-              "wand": true
-            },
-            "speed": 1.394,
-            "weaponLevel": 1,
-            "weaponType": "rod"
-          }
-        },
-        {
-          "aggroTargetId": 415,
-          "aiState": "attack",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 50000,
-          "id": 418,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 4,
-            "z": 4
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "x": 4,
-            "z": 4
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "targetId": 415,
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        },
-        {
-          "aiState": "idle",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 60,
-          "id": 419,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 60,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": -3,
-            "z": 6
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "x": -3,
-            "z": 6
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        },
-        {
-          "aiState": "idle",
-          "combatTimer": 99,
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 11,
-          "hostile": true,
-          "hp": 50000,
-          "id": 420,
-          "kind": "mob",
-          "level": 3,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "z": 10
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "z": 10
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "templateId": "forest_wolf",
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        }
-      ]
-    },
-    {
-      "tick": 0,
-      "time": 0,
-      "nextId": 421,
-      "state": "a19985b3",
-      "events": "2557807b",
-      "rng": {
-        "draws": 0,
-        "digest": "811c9dc5"
-      },
-      "label": "nearest-friendly",
-      "players": [
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "swordman",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {
-              "partiesJoined": 1
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "baked_bread",
-              "eastbrook_buckler",
-              "recruit_tunic",
-              "worn_sword"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 415,
-          "equipment": {
-            "chest": "recruit_tunic",
-            "mainhand": "worn_sword",
-            "offhand": "eastbrook_buckler"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
-        },
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "acolyte",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {
-              "partiesJoined": 1
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "apprentice_robe",
-              "baked_bread",
-              "gnarled_staff",
-              "spring_water"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
           "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
@@ -2248,61 +1771,6 @@
           "recipesGrandfathered": true,
           "statAllocation": {},
           "townFocus": {}
-        },
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "mage",
-          "companionUpgrades": {},
-          "counters": {},
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {
-              "partiesJoined": 1
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "apprentice_robe",
-              "baked_bread",
-              "gnarled_staff",
-              "spring_water"
-            ]
-          },
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 417,
-          "equipment": {
-            "chest": "apprentice_robe",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "jobLevel": 1,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "statAllocation": {},
-          "townFocus": {}
         }
       ],
       "entities": [
@@ -2317,7 +1785,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -2334,7 +1802,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2397,7 +1865,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2465,7 +1933,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2514,7 +1982,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -2528,7 +1996,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -2556,7 +2024,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -2578,7 +2046,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -2627,7 +2095,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -2665,14 +2133,14 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "47d9952a",
-      "events": "741638a5",
+      "nextId": 420,
+      "state": "77f055f9",
+      "events": "d60c0b62",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
       },
-      "label": "friendly-tab-1",
+      "label": "nearest-friendly",
       "players": [
         {
           "archetype": {},
@@ -2704,7 +2172,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -2756,7 +2224,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -2811,7 +2279,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -2849,7 +2317,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -2866,7 +2334,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2929,7 +2397,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -2997,7 +2465,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3046,7 +2514,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -3060,7 +2528,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3088,7 +2556,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -3110,7 +2578,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3159,7 +2627,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3197,8 +2665,540 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "a19985b3",
+      "nextId": 420,
+      "state": "16d617be",
+      "events": "741638a5",
+      "rng": {
+        "draws": 0,
+        "digest": "811c9dc5"
+      },
+      "label": "friendly-tab-1",
+      "players": [
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "swordman",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {
+              "partiesJoined": 1
+            },
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "baked_bread",
+              "eastbrook_buckler",
+              "recruit_tunic",
+              "worn_sword"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 414,
+          "equipment": {
+            "chest": "recruit_tunic",
+            "mainhand": "worn_sword",
+            "offhand": "eastbrook_buckler"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        },
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "acolyte",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {
+              "partiesJoined": 1
+            },
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 415,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        },
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "mage",
+          "companionUpgrades": {},
+          "counters": {},
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {
+              "partiesJoined": 1
+            },
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ]
+          },
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 416,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "jobLevel": 1,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "statAllocation": {},
+          "townFocus": {}
+        }
+      ],
+      "entities": [
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "auras": [
+            {
+              "duration": 3600,
+              "id": "battle_stance",
+              "kind": "battle_stance",
+              "name": "Warring Stance",
+              "remaining": 3600,
+              "school": "physical",
+              "sourceId": 414
+            }
+          ],
+          "blockChance": 0.05,
+          "blockValue": 6,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "hit": 2,
+          "hp": 40,
+          "id": 414,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 100,
+          "moveSpeed": 7,
+          "offhandItemId": "eastbrook_buckler",
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resourceType": "rage",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 1,
+          "stats": {
+            "agi": 1,
+            "armor": 2,
+            "dex": 1,
+            "int": 1,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "targetId": 415,
+          "templateId": "swordman",
+          "weapon": {
+            "max": 54,
+            "min": 41,
+            "speed": 1.096,
+            "weaponLevel": 1,
+            "weaponType": "sword"
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
+          "hit": 2,
+          "hp": 40,
+          "id": 415,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 15,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 2,
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 15,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 1,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "templateId": "acolyte",
+          "weapon": {
+            "max": 27,
+            "min": 20,
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.194,
+            "weaponLevel": 1,
+            "weaponType": "rod"
+          }
+        },
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
+          "hit": 2,
+          "hp": 40,
+          "id": 416,
+          "kind": "player",
+          "level": 1,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 40,
+          "maxResource": 16,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": -2,
+            "y": 1.5
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 16,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 1,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "templateId": "mage",
+          "weapon": {
+            "max": 27,
+            "min": 20,
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.394,
+            "weaponLevel": 1,
+            "weaponType": "rod"
+          }
+        },
+        {
+          "aggroTargetId": 414,
+          "aiState": "attack",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 50000,
+          "id": 417,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 4,
+            "z": 4
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "x": 4,
+            "z": 4
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "targetId": 414,
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 60,
+          "id": 418,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 60,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": -3,
+            "z": 6
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "x": -3,
+            "z": 6
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        },
+        {
+          "aiState": "idle",
+          "combatTimer": 99,
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fiveSecondRule": 99,
+          "flee": 6,
+          "hit": 11,
+          "hostile": true,
+          "hp": 50000,
+          "id": 419,
+          "kind": "mob",
+          "level": 3,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "z": 10
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "z": 10
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "templateId": "forest_wolf",
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        }
+      ]
+    },
+    {
+      "tick": 0,
+      "time": 0,
+      "nextId": 420,
+      "state": "77f055f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3236,7 +3236,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -3288,7 +3288,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -3343,7 +3343,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -3381,7 +3381,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -3398,7 +3398,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3431,7 +3431,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -3461,7 +3461,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3529,7 +3529,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3578,7 +3578,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -3592,7 +3592,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3620,7 +3620,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -3642,7 +3642,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3691,7 +3691,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -3729,8 +3729,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "a19985b3",
+      "nextId": 420,
+      "state": "77f055f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3768,7 +3768,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -3820,7 +3820,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -3875,7 +3875,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -3913,7 +3913,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -3930,7 +3930,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -3963,7 +3963,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -3993,7 +3993,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -4061,7 +4061,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -4110,7 +4110,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -4124,7 +4124,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4152,7 +4152,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -4174,7 +4174,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4223,7 +4223,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4261,8 +4261,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "a19985b3",
+      "nextId": 420,
+      "state": "77f055f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4300,7 +4300,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -4352,7 +4352,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -4407,7 +4407,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -4445,7 +4445,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -4462,7 +4462,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -4495,7 +4495,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -4525,7 +4525,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -4593,7 +4593,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -4642,7 +4642,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -4656,7 +4656,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4684,7 +4684,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -4706,7 +4706,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4755,7 +4755,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -4793,8 +4793,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "a19985b3",
+      "nextId": 420,
+      "state": "77f055f9",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4832,7 +4832,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -4884,7 +4884,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -4939,7 +4939,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -4977,7 +4977,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -4994,7 +4994,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -5027,7 +5027,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -5057,7 +5057,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -5125,7 +5125,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -5174,7 +5174,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 99,
           "comboUntil": -1,
@@ -5188,7 +5188,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -5216,7 +5216,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -5238,7 +5238,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 60,
-          "id": 419,
+          "id": 418,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -5287,7 +5287,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -5325,9 +5325,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "08569e73",
-      "events": "970aa971",
+      "nextId": 420,
+      "state": "b1f96f78",
+      "events": "06091376",
       "rng": {
         "draws": 6,
         "digest": "f63a1117"
@@ -5370,7 +5370,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -5427,7 +5427,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -5487,7 +5487,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -5528,7 +5528,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -5544,7 +5544,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
@@ -5578,7 +5578,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -5608,7 +5608,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -5676,7 +5676,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -5725,7 +5725,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "auras": [
             {
@@ -5735,7 +5735,7 @@
               "name": "Pack Frenzy",
               "remaining": 8,
               "school": "physical",
-              "sourceId": 418,
+              "sourceId": 417,
               "value": 1.3
             }
           ],
@@ -5751,7 +5751,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -5779,7 +5779,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -5801,7 +5801,7 @@
           "flee": 6,
           "hit": 11,
           "hostile": true,
-          "id": 419,
+          "id": 418,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
@@ -5820,9 +5820,9 @@
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
+            414,
             415,
-            416,
-            417
+            416
           ],
           "lootable": true,
           "maxHp": 60,
@@ -5850,7 +5850,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "tappedById": 415,
+          "tappedById": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -5868,7 +5868,7 @@
               "name": "Pack Frenzy",
               "remaining": 8,
               "school": "physical",
-              "sourceId": 420,
+              "sourceId": 419,
               "value": 1.3
             }
           ],
@@ -5884,7 +5884,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -5922,8 +5922,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 421,
-      "state": "08569e73",
+      "nextId": 420,
+      "state": "b1f96f78",
       "events": "741638a5",
       "rng": {
         "draws": 6,
@@ -5967,7 +5967,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -6024,7 +6024,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -6084,7 +6084,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 417,
+          "entityId": 416,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -6125,7 +6125,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -6141,7 +6141,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
@@ -6175,7 +6175,7 @@
             "str": 1,
             "vit": 1
           },
-          "targetId": 417,
+          "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
@@ -6205,7 +6205,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -6273,7 +6273,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 417,
+          "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -6322,7 +6322,7 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "auras": [
             {
@@ -6332,7 +6332,7 @@
               "name": "Pack Frenzy",
               "remaining": 8,
               "school": "physical",
-              "sourceId": 418,
+              "sourceId": 417,
               "value": 1.3
             }
           ],
@@ -6348,7 +6348,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 418,
+          "id": 417,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -6376,7 +6376,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "targetId": 415,
+          "targetId": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -6398,7 +6398,7 @@
           "flee": 6,
           "hit": 11,
           "hostile": true,
-          "id": 419,
+          "id": 418,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
@@ -6417,9 +6417,9 @@
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
+            414,
             415,
-            416,
-            417
+            416
           ],
           "lootable": true,
           "maxHp": 60,
@@ -6447,7 +6447,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "tappedById": 415,
+          "tappedById": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -6465,7 +6465,7 @@
               "name": "Pack Frenzy",
               "remaining": 8,
               "school": "physical",
-              "sourceId": 420,
+              "sourceId": 419,
               "value": 1.3
             }
           ],
@@ -6481,7 +6481,7 @@
           "hit": 11,
           "hostile": true,
           "hp": 50000,
-          "id": 420,
+          "id": 419,
           "kind": "mob",
           "level": 3,
           "lootFfaTimer": "Infinity",

@@ -13,7 +13,7 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 415,
+      "nextId": 414,
       "state": "5bc471b0",
       "events": "741638a5",
       "rng": {
@@ -27,9 +27,9 @@
     {
       "tick": 3,
       "time": 0.15,
-      "nextId": 418,
-      "state": "a8c29533",
-      "events": "10c8d55b",
+      "nextId": 417,
+      "state": "1e4fbbc0",
+      "events": "e65c5c68",
       "rng": {
         "draws": 2,
         "digest": "c05535b8"
@@ -73,7 +73,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -136,7 +136,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 416,
+          "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
             "mainhand": "gnarled_staff"
@@ -175,7 +175,7 @@
               "name": "Warring Stance",
               "remaining": 3599.85,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -192,7 +192,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -256,7 +256,7 @@
           },
           "hit": 2,
           "hp": 40,
-          "id": 416,
+          "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -322,7 +322,7 @@
           "hit": 10,
           "hostile": true,
           "hp": 60,
-          "id": 417,
+          "id": 416,
           "kind": "mob",
           "level": 2,
           "lootFfaTimer": "Infinity",
@@ -354,7 +354,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "tappedById": 415,
+          "tappedById": 414,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,

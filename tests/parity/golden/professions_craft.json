@@ -18,8 +18,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "19f4220b",
+      "nextId": 415,
+      "state": "2600d708",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -55,7 +55,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -90,7 +90,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -107,7 +107,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -156,9 +156,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "8b69abd2",
-      "events": "7021a161",
+      "nextId": 415,
+      "state": "a960f1a7",
+      "events": "56809ce4",
       "rng": {
         "draws": 0,
         "digest": "811c9dc5"
@@ -193,7 +193,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -232,7 +232,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -249,7 +249,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -298,9 +298,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "71c1ba75",
-      "events": "2f11cd21",
+      "nextId": 415,
+      "state": "9d4d4efa",
+      "events": "d63172f2",
       "rng": {
         "draws": 1,
         "digest": "fff65987"
@@ -348,7 +348,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -396,7 +396,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -413,7 +413,7 @@
           "flee": 3,
           "hit": 3,
           "hp": 46,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 2,
           "lootFfaTimer": "Infinity",
@@ -462,9 +462,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "7d3f21e5",
-      "events": "84a3ac24",
+      "nextId": 415,
+      "state": "1706bfbb",
+      "events": "65f87bbc",
       "rng": {
         "draws": 2,
         "digest": "d6442b50"
@@ -524,7 +524,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -575,7 +575,7 @@
             "selfSignedBonusApplied": true
           },
           "lastMasterwork": {
-            "crafter": 415,
+            "crafter": 414,
             "itemId": "eastbrook_ritual_vestments",
             "recipeId": "recipe_eastbrook_ritual_vestments"
           },
@@ -600,7 +600,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -617,7 +617,7 @@
           "flee": 3,
           "hit": 3,
           "hp": 46,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 2,
           "lootFfaTimer": "Infinity",
@@ -666,9 +666,9 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "2dfb3c33",
-      "events": "3ea8d374",
+      "nextId": 415,
+      "state": "1c674869",
+      "events": "807bb0e3",
       "rng": {
         "draws": 3,
         "digest": "07bdddf8"
@@ -728,7 +728,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -777,7 +777,7 @@
             "recipeId": "recipe_minor_healing_potion"
           },
           "lastMasterwork": {
-            "crafter": 415,
+            "crafter": 414,
             "itemId": "eastbrook_ritual_vestments",
             "recipeId": "recipe_eastbrook_ritual_vestments"
           },
@@ -802,7 +802,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -819,7 +819,7 @@
           "flee": 4,
           "hit": 4,
           "hp": 54,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 3,
           "lootFfaTimer": "Infinity",
@@ -868,8 +868,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "2dfb3c33",
+      "nextId": 415,
+      "state": "1c674869",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -930,7 +930,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -979,7 +979,7 @@
             "recipeId": "recipe_minor_healing_potion"
           },
           "lastMasterwork": {
-            "crafter": 415,
+            "crafter": 414,
             "itemId": "eastbrook_ritual_vestments",
             "recipeId": "recipe_eastbrook_ritual_vestments"
           },
@@ -1004,7 +1004,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -1021,7 +1021,7 @@
           "flee": 4,
           "hit": 4,
           "hp": 54,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 3,
           "lootFfaTimer": "Infinity",

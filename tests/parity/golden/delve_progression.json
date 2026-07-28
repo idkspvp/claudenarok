@@ -15,8 +15,8 @@
     {
       "tick": 0,
       "time": 0,
-      "nextId": 416,
-      "state": "a0793d4a",
+      "nextId": 415,
+      "state": "22cd1b7d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -53,7 +53,7 @@
           },
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -88,7 +88,7 @@
               "name": "Warring Stance",
               "remaining": 3600,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -105,7 +105,7 @@
           "flee": 2,
           "hit": 2,
           "hp": 40,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
@@ -154,9 +154,9 @@
     {
       "tick": 5,
       "time": 0.25,
-      "nextId": 437,
-      "state": "c4f0f437",
-      "events": "008c5659",
+      "nextId": 436,
+      "state": "a8e74ef2",
+      "events": "a3bdfc39",
       "rng": {
         "draws": 1,
         "digest": "5eb1ea5d"
@@ -165,8 +165,8 @@
     {
       "tick": 7,
       "time": 0.35,
-      "nextId": 437,
-      "state": "7b2d0088",
+      "nextId": 436,
+      "state": "9aaa6f69",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -213,7 +213,7 @@
           ],
           "delveClears": {},
           "delveDaily": {},
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "mainhand": "worn_sword",
@@ -250,7 +250,7 @@
               "name": "Warring Stance",
               "remaining": 3599.65,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -266,7 +266,7 @@
           "flee": 8,
           "hit": 8,
           "hp": 50000,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 7,
           "lootFfaTimer": "Infinity",
@@ -314,9 +314,9 @@
     {
       "tick": 7,
       "time": 0.35,
-      "nextId": 437,
-      "state": "2e1547b5",
-      "events": "8f1a3fff",
+      "nextId": 436,
+      "state": "a2998282",
+      "events": "1a556e49",
       "rng": {
         "draws": 3,
         "digest": "e3485a8b"
@@ -369,7 +369,7 @@
             "date": "2099-06-25"
           },
           "delveMarks": 89,
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "legs": "reliquary_legs",
@@ -407,7 +407,7 @@
               "name": "Warring Stance",
               "remaining": 3599.65,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -423,7 +423,7 @@
           "flee": 8,
           "hit": 8,
           "hp": 90,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 7,
           "lootFfaTimer": "Infinity",
@@ -471,8 +471,8 @@
     {
       "tick": 9,
       "time": 0.45,
-      "nextId": 437,
-      "state": "2a3ffb26",
+      "nextId": 436,
+      "state": "fc2ddc01",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -526,7 +526,7 @@
             "date": "2099-06-25"
           },
           "delveMarks": 89,
-          "entityId": 415,
+          "entityId": 414,
           "equipment": {
             "chest": "recruit_tunic",
             "legs": "reliquary_legs",
@@ -564,7 +564,7 @@
               "name": "Warring Stance",
               "remaining": 3599.55,
               "school": "physical",
-              "sourceId": 415
+              "sourceId": 414
             }
           ],
           "blockChance": 0.05,
@@ -580,7 +580,7 @@
           "flee": 8,
           "hit": 8,
           "hp": 90,
-          "id": 415,
+          "id": 414,
           "kind": "player",
           "level": 7,
           "lootFfaTimer": "Infinity",
