@@ -123,3 +123,4 @@ dist-bot/
 # business in the repository and was committed by accident once already.
 claudenarok-main.zip
 *.zip
+.cache/
