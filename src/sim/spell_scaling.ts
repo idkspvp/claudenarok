@@ -3,8 +3,13 @@
 // the flat amount added to a spell hit, heal, absorb, channel tick, DoT tick,
 // or AoE hit.
 //
-// Classic-era model:
-//   - direct nuke: coeff = clamp(castTime, 1.5, 7) / 3.5 (instants use the 1.5 floor)
+// A true spell takes its magic attack whole (see directHitBonus): Ragnarok has
+// no cast-time term in damage. The coefficients below apply to the ATTACK-POWER
+// arms, and to channels and damage-over-time, which still carry the inherited
+// shape.
+//
+// Inherited model:
+//   - direct nuke: coeff = clamp(castTime, 1.5, 7) / 3.5 (attack-power arms only)
 //   - channel:     coeff = clamp(channelDuration, 1.5, 7) / 3.5, split across ticks
 //   - DoT:         coeff = duration / 15 (total), split across ticks
 //   - AoE:         the direct coeff times an AoE penalty (0.333)
@@ -68,18 +73,35 @@ function powerScale(def: AbilityDef): number {
   return 1;
 }
 
-// Flat bonus added to ONE direct (or AoE) spell hit. `castTimeSec` is the
-// rank-resolved cast time (res.castTime), NOT the rank-1 base def.castTime, so
-// higher ranks (and talent-hastened casts) scale correctly. `aoe` applies the
-// AoE penalty.
+// Flat bonus added to ONE direct (or AoE) hit.
+//
+// A TRUE SPELL takes its magic attack whole: Ragnarok has no cast-time term in
+// damage at all. A skill there is `MATK x its own ratio`, and how long it took
+// to cast is not part of the calculation. Scaling a nuke by its cast time is a
+// classic-WoW convention that was carried over with the rest of the engine, and
+// it made an instant spell scale at 1.5/3.5 of its caster's Intelligence for no
+// reason this game can defend. Spells now use the whole thing.
+//
+// The ATTACK-POWER arms keep the coefficient. Those are physical specials and
+// archer shots resolved through the spell machinery, not spells, and they have
+// no Ragnarok counterpart to be measured against.
+//
+// The AoE penalty stays on both arms. In the reference an area skill is weaker
+// per target because its own ratio says so; this game has no per-skill ratio
+// yet, so the flat penalty stands in for one. Replacing it means giving every
+// ability a ratio, which is a content migration and not a wiring change.
+//
+// `castTimeSec` is the rank-resolved cast time (res.castTime), NOT the rank-1
+// base def.castTime, so higher ranks scale correctly on the arms that use it.
 export function directHitBonus(
   power: number,
   def: AbilityDef,
   castTimeSec: number,
   aoe = false,
 ): number {
-  const coeff = directSpellCoeff(castTimeSec) * (aoe ? SPELL_AOE_COEFF_MULT : 1);
-  return Math.round(power * coeff * powerScale(def));
+  const scale = powerScale(def);
+  const base = scale === 1 ? 1 : directSpellCoeff(castTimeSec);
+  return Math.round(power * base * (aoe ? SPELL_AOE_COEFF_MULT : 1) * scale);
 }
 
 // Healing scales off DOUBLE Spell Power: with SPELL_POWER_PER_INT at 0.5 this

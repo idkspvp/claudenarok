@@ -67,28 +67,39 @@ describe('spell coefficient functions (vanilla cast-time / DoT-duration model)',
 });
 
 describe('directHitBonus', () => {
-  it('a 1.5s spell adds round(SP * 1.5/3.5)', () => {
+  it('gives a true spell its whole magic attack, whatever the cast time', () => {
+    // Ragnarok has no cast-time term in damage: a skill is its magic attack
+    // times its own ratio, and how long it took to cast is not part of it. The
+    // same spell instant and at three seconds adds the same amount.
     const sp = 200;
-    expect(directHitBonus(sp, def({}), 1.5)).toBe(Math.round(sp * (1.5 / 3.5)));
+    expect(directHitBonus(sp, def({}), 1.5)).toBe(sp);
+    expect(directHitBonus(sp, def({}), 3.0)).toBe(sp);
+    expect(directHitBonus(sp, def({}), 0)).toBe(sp);
   });
 
-  it('uses the passed (rank-resolved) cast time, not def.castTime', () => {
+  it('no longer reads the cast time at all on the spell arm', () => {
+    // The cast time used to be the coefficient, so this pair used to differ by
+    // a factor of two.
     const sp = 200;
-    // def.castTime is irrelevant; the explicit cast time drives the coefficient.
-    expect(directHitBonus(sp, def({ castTime: 1.5 }), 3.0)).toBe(Math.round(sp * (3.0 / 3.5)));
-  });
-
-  it('applies the AoE penalty when aoe=true', () => {
-    const sp = 300;
-    expect(directHitBonus(sp, def({}), 0, true)).toBe(
-      Math.round(sp * (SPELL_COEFF_MIN_CAST / 3.5) * SPELL_AOE_COEFF_MULT),
+    expect(directHitBonus(sp, def({ castTime: 1.5 }), 3.0)).toBe(
+      directHitBonus(sp, def({ castTime: 3.0 }), 1.5),
     );
   });
 
-  it('ranged attack-spells scale down by RANGED_SPELL_AP_SCALE', () => {
+  it('still applies the AoE penalty, which stands in for a per-skill ratio', () => {
+    const sp = 300;
+    expect(directHitBonus(sp, def({}), 0, true)).toBe(Math.round(sp * SPELL_AOE_COEFF_MULT));
+  });
+
+  it('keeps the coefficient on the attack-power arms, which are not spells', () => {
+    // An archer shot and a physical special resolve through the spell machinery
+    // but are not spells, and have no reference counterpart to measure against.
     const rap = 400;
     const d = def({ school: 'physical', scalesWith: 'ranged' });
     expect(directHitBonus(rap, d, 3.0)).toBe(Math.round(rap * (3.0 / 3.5) * RANGED_SPELL_AP_SCALE));
+    // And the cast time still moves them, which is what tells the two arms apart.
+    expect(directHitBonus(rap, d, 1.5)).not.toBe(directHitBonus(rap, d, 3.0));
+    expect(SPELL_COEFF_MIN_CAST).toBeGreaterThan(0);
   });
 });
 
