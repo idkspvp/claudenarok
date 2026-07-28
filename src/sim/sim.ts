@@ -5312,7 +5312,7 @@ export class Sim {
 
   // On-hit knockback: hurl `target` up to `distance` yards straight away from
   // `source`. Instantaneous displacement (no aura) walked in small steps so it can
-  // be terrain-clamped exactly like a swordman charge — the shove stops at the last
+  // be terrain-clamped exactly like a swordman charge: the shove stops at the last
   // safe footing before deep water or a cliff rather than stranding the victim off
   // the world. Each step is also collider-swept (resolveMove, the same walker uses)
   // so a wall (an arena side wall in particular) stops the shove instead of letting

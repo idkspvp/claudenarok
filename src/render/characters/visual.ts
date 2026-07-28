@@ -704,7 +704,7 @@ export class CharacterVisual {
   }
 
   /** Swap the held mainhand weapon model at runtime (gear equip/unequip); no-op if
-   *  unchanged or if this class keeps a fixed weapon (archer crossbow, mobs/NPCs —
+   *  unchanged or if this class keeps a fixed weapon (archer crossbow, mobs/NPCs,
    *  no VisualDef.weaponSlot). Mirrors setSkin: re-attach the prop, re-run the
    *  shared material pass, re-snapshot the original-material map, then re-apply any
    *  active ghost/soul-rend overlay. Cheap (one prop clone) and keeps the mixer/

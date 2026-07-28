@@ -81,7 +81,7 @@ await pageB.evaluate(() => {
 });
 
 // A: teleport-ish — walk is slow; use the wolf nearest spawn. Find wolf, walk to it via sim facing + forward input is complex online.
-// Instead: target nearest wolf and use Charge (swordman, learnLevel 4 — not known at 1).
+// Instead: target nearest wolf and use Charge (swordman, learnLevel 4, not known at 1).
 // Plan B: spawn-adjacent wolves are ~50yd north. Just walk A forward toward a wolf for a few seconds.
 const apid = await pageA.evaluate(() => window.__game.online.playerId);
 await pageA.bringToFront();

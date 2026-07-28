@@ -30,7 +30,7 @@ describe('/manaregen command', () => {
     e.fiveSecondRule = 2.4; // 5 - 2.4 = 2.6 -> ceil 3
     sim.chat('/5sr', a);
     expect(errorText(sim.tick())).toBe(
-      'Mana regen is paused — resumes in 3s (you spent mana recently).',
+      'Mana regen is paused, resumes in 3s (you spent mana recently).',
     );
   });
 

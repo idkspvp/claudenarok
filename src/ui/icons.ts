@@ -3695,7 +3695,7 @@ export const ABILITY_IMAGE_IDS = new Set<string>([
   'rapid_fire',
   'wing_clip',
   'aspect_of_the_cheetah',
-  // acolyte (CraftPix premium "RPG Priest skill icons" pack). The pack is all-holy —
+  // acolyte (CraftPix premium "RPG Priest skill icons" pack). The pack is all-holy:
   // the shadow spells (shadow_word_pain, mind_flay) have no dark art and stay procedural.
   'smite',
   'lesser_heal',

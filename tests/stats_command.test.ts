@@ -25,7 +25,7 @@ describe('/stats command', () => {
     const events = sim.tick();
     const text = errorText(events, a)!;
     expect(text).toMatch(
-      /^Level \d+ Swordman — HP \d+\/\d+, Rage \d+\/\d+\. AP \d+, Crit \d+\.\d%, Armor \d+\.$/,
+      /^Level \d+ Swordman, HP \d+\/\d+, Rage \d+\/\d+\. AP \d+, Crit \d+\.\d%, Armor \d+\.$/,
     );
     // self-only: no other player receives the readout
     expect(events.some((e) => e.type === 'error' && e.pid !== a)).toBe(false);
