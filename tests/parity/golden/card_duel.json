@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "0457644d",
+      "state": "4c5bfc93",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "b423079a",
+      "state": "d6431de2",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "44f18992",
+      "state": "173b12ca",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "4fc74955",
+      "state": "d7bb82ab",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "546b6e22",
+      "state": "48b11062",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "2adc6303",
+      "state": "f3f62c51",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "85b45d35",
+      "state": "83d91277",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "ed9ff5b0",
+      "state": "3e2511a0",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "65f87555",
+      "state": "396cacf3",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -290,7 +290,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -349,7 +349,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,

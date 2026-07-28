@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f138de3e",
+      "state": "80da6581",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -133,7 +133,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 422,
-      "state": "759860c8",
-      "events": "433a0f95",
+      "state": "866c7148",
+      "events": "2b652c31",
       "rng": {
         "draws": 72,
         "digest": "3a0168ee"
@@ -166,8 +166,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "5988f70a",
-      "events": "7f6ac682",
+      "state": "f3317eef",
+      "events": "5d4293ec",
       "rng": {
         "draws": 128,
         "digest": "f58195cc"
@@ -177,8 +177,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "408b7304",
-      "events": "48b152e5",
+      "state": "a9979a7a",
+      "events": "db205ad8",
       "rng": {
         "draws": 272,
         "digest": "fd62b7bf"
@@ -188,7 +188,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 422,
-      "state": "7c710909",
+      "state": "8b48d868",
       "events": "741638a5",
       "rng": {
         "draws": 272,
@@ -211,7 +211,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1740
+            "damageTaken": 1715
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -380,7 +380,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -410,7 +410,7 @@
           "flee": 24,
           "hit": 24,
           "hostile": true,
-          "hp": 199973,
+          "hp": 199981,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -451,7 +451,7 @@
           "threat": [
             [
               420,
-              27
+              19
             ]
           ],
           "weapon": {
@@ -641,7 +641,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 81,
+          "hp": 123,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -693,7 +693,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 199941,
+          "hp": 199989,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -733,7 +733,7 @@
           "threat": [
             [
               420,
-              60
+              12
             ]
           ],
           "weapon": {
@@ -748,7 +748,7 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 422,
-      "state": "5d26e174",
+      "state": "092735fb",
       "events": "741638a5",
       "rng": {
         "draws": 293,
@@ -771,7 +771,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1740
+            "damageTaken": 1715
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -940,7 +940,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -970,7 +970,7 @@
           "flee": 24,
           "hit": 24,
           "hostile": true,
-          "hp": 199973,
+          "hp": 199981,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -1011,7 +1011,7 @@
           "threat": [
             [
               420,
-              27
+              19
             ]
           ],
           "weapon": {
@@ -1201,7 +1201,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 81,
+          "hp": 123,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -1253,7 +1253,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 199941,
+          "hp": 199989,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -1293,7 +1293,7 @@
           "threat": [
             [
               420,
-              60
+              12
             ]
           ],
           "weapon": {

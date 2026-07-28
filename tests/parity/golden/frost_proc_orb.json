@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "d2b1774a",
+      "state": "bba4dfc1",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -122,7 +122,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -149,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "881b1064",
+      "state": "590fd6c3",
       "events": "7f8f70c7",
       "rng": {
         "draws": 1,
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "c6dc926a",
+      "state": "300fb4ad",
       "events": "5380a5ed",
       "rng": {
         "draws": 2,
@@ -171,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "34de581f",
+      "state": "f61df7d8",
       "events": "a661284d",
       "rng": {
         "draws": 82,
@@ -182,7 +182,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "d69edffb",
+      "state": "a0bc2944",
       "events": "3ec33430",
       "rng": {
         "draws": 152,
@@ -193,7 +193,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "800630d1",
+      "state": "bb98d6de",
       "events": "fd3b2da4",
       "rng": {
         "draws": 180,
@@ -373,7 +373,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -479,7 +479,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "800630d1",
+      "state": "bb98d6de",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -659,7 +659,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,

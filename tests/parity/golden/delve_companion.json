@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f138de3e",
+      "state": "80da6581",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -132,7 +132,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -154,8 +154,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "f43df3a3",
-      "events": "76b7d315",
+      "state": "a606dc33",
+      "events": "1db97f90",
       "rng": {
         "draws": 9,
         "digest": "9aada9c8"
@@ -165,7 +165,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "65e0a6c5",
+      "state": "1715183d",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -176,7 +176,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "e2de56d1",
+      "state": "fb997367",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -187,7 +187,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "91d8abf6",
+      "state": "d69f1e24",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -198,7 +198,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "489b5e96",
+      "state": "c4481264",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -209,8 +209,8 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "b4a9bd56",
-      "events": "ecdb7dd8",
+      "state": "0d7597f5",
+      "events": "df5edf37",
       "rng": {
         "draws": 13,
         "digest": "ff1d6f7e"
@@ -220,7 +220,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "260ca67a",
+      "state": "5e1f145b",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -231,7 +231,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "5aeedac4",
+      "state": "3a0837b9",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -242,7 +242,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "5aeedac4",
+      "state": "3a0837b9",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -371,7 +371,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -399,7 +399,7 @@
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
-          "hp": 81,
+          "hp": 93,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -449,7 +449,7 @@
           "flee": 12,
           "hit": 12,
           "hostile": true,
-          "hp": 39991,
+          "hp": 39998,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -487,7 +487,7 @@
           "threat": [
             [
               420,
-              10
+              3
             ]
           ],
           "weapon": {
@@ -502,7 +502,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 425,
-      "state": "6a81b1e7",
+      "state": "6e09f852",
       "events": "77392800",
       "rng": {
         "draws": 15,
@@ -632,7 +632,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -660,7 +660,7 @@
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
-          "hp": 81,
+          "hp": 93,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -710,7 +710,7 @@
           "flee": 12,
           "hit": 12,
           "hostile": true,
-          "hp": 39991,
+          "hp": 39998,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -748,7 +748,7 @@
           "threat": [
             [
               420,
-              10
+              3
             ]
           ],
           "weapon": {
@@ -763,7 +763,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "62bda20b",
+      "state": "53cd685d",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -774,7 +774,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 425,
-      "state": "8ed93a5a",
+      "state": "8d31b6b2",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -903,7 +903,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -930,7 +930,7 @@
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
-          "hp": 81,
+          "hp": 93,
           "id": 420,
           "kind": "mob",
           "level": 5,
@@ -972,7 +972,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "c81ce63e",
+      "state": "cd690bdc",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -983,7 +983,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "4f59e5cb",
+      "state": "7ffc42e7",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1112,7 +1112,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1139,7 +1139,7 @@
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
-          "hp": 81,
+          "hp": 93,
           "id": 420,
           "kind": "mob",
           "level": 5,
@@ -1182,7 +1182,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "4f59e5cb",
+      "state": "7ffc42e7",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1311,7 +1311,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1338,7 +1338,7 @@
           "fiveSecondRule": 99,
           "flee": 6,
           "hit": 6,
-          "hp": 81,
+          "hp": 93,
           "id": 420,
           "kind": "mob",
           "level": 5,

@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "97c4dc15",
+      "state": "9754b605",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -127,7 +127,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -150,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "c898d106",
-      "events": "48b1b78b",
+      "state": "dd9c158f",
+      "events": "03216cdd",
       "rng": {
         "draws": 14,
         "digest": "4b746836"
@@ -161,8 +161,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "02dcb531",
-      "events": "0df4ba32",
+      "state": "54f1e717",
+      "events": "fa67bd17",
       "rng": {
         "draws": 24,
         "digest": "672bbd02"
@@ -172,8 +172,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "6f792c7c",
-      "events": "2cb7cc89",
+      "state": "3201edea",
+      "events": "6404f95d",
       "rng": {
         "draws": 103,
         "digest": "4bf8fdbd"
@@ -183,7 +183,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "0b3b71c8",
+      "state": "59cd4256",
       "events": "741638a5",
       "rng": {
         "draws": 159,
@@ -206,14 +206,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 46,
+            "damageDealt": 25,
             "damageTaken": 17
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 46
+              "damageDealt": 25
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -324,7 +324,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -357,7 +357,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8954,
+          "hp": 8975,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -398,7 +398,7 @@
           "threat": [
             [
               415,
-              47
+              26
             ]
           ],
           "weapon": {

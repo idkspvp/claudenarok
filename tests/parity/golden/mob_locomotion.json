@@ -32,7 +32,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "7a197ecd",
+      "state": "299353c8",
       "events": "d290e272",
       "rng": {
         "draws": 2,
@@ -150,7 +150,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -223,8 +223,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "15bf386b",
-      "events": "838c3f1e",
+      "state": "69a3124b",
+      "events": "85525ecd",
       "rng": {
         "draws": 7,
         "digest": "2e56e253"
@@ -245,7 +245,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 148
+            "damageTaken": 147
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -319,7 +319,7 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999869,
+          "hp": 999870,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -339,7 +339,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 10.321667,
+          "resource": 10.266667,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -350,7 +350,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -473,8 +473,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "ddc39a90",
-      "events": "1b0d44af",
+      "state": "35a688ff",
+      "events": "54088c28",
       "rng": {
         "draws": 13,
         "digest": "06ceb9a6"
@@ -495,7 +495,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -580,7 +580,7 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999881,
+          "hp": 999882,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -600,7 +600,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -611,7 +611,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -785,7 +785,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "6f578c5a",
+      "state": "32b8b11d",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -807,7 +807,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -892,7 +892,7 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999881,
+          "hp": 999882,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -912,7 +912,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -923,7 +923,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1151,7 +1151,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "150a25d7",
+      "state": "5bf9312e",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1173,7 +1173,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1258,7 +1258,7 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999881,
+          "hp": 999882,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -1278,7 +1278,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1289,7 +1289,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1565,7 +1565,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "2f1a4fae",
+      "state": "567ffcd4",
       "events": "38fff8ae",
       "rng": {
         "draws": 16,
@@ -1587,7 +1587,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1692,7 +1692,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1703,7 +1703,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2030,7 +2030,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "f4f3725b",
+      "state": "fefac00d",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2052,7 +2052,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2157,7 +2157,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2168,7 +2168,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2496,7 +2496,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "f4f3725b",
+      "state": "fefac00d",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2518,7 +2518,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 267
+            "damageTaken": 265
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2623,7 +2623,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.23,
+          "resource": 21.083333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2634,7 +2634,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,

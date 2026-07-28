@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "cf36b42d",
+      "state": "136d1a8f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -122,7 +122,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -148,8 +148,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "f4eb80f5",
-      "events": "5dadceb3",
+      "state": "59fca8fc",
+      "events": "af212b3a",
       "rng": {
         "draws": 9,
         "digest": "381f4473"
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "7e7c6512",
+      "state": "f923c4cf",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -170,8 +170,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "0d8772e4",
-      "events": "ea35548d",
+      "state": "b010f391",
+      "events": "b1824987",
       "rng": {
         "draws": 102,
         "digest": "b5b7b15d"
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "e41f1b57",
+      "state": "4ae330bc",
       "events": "741638a5",
       "rng": {
         "draws": 198,
@@ -192,8 +192,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "ac9a3854",
-      "events": "7a98bfbc",
+      "state": "ff9e780a",
+      "events": "bb8db23e",
       "rng": {
         "draws": 312,
         "digest": "2ffd1eb8"
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "f9eb73ad",
+      "state": "af3bedfb",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -214,7 +214,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "f9eb73ad",
+      "state": "af3bedfb",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -237,14 +237,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 48,
+            "damageDealt": 12,
             "damageTaken": 35
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 48
+              "damageDealt": 12
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -347,7 +347,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -382,7 +382,7 @@
           "fiveSecondRule": 99,
           "flee": 10,
           "hit": 10,
-          "hp": 75,
+          "hp": 86,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -434,7 +434,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 49903,
+          "hp": 49939,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -475,7 +475,7 @@
           "threat": [
             [
               415,
-              48
+              12
             ],
             [
               416,

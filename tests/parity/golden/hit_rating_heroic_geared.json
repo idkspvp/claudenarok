@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "4392473d",
+      "state": "21cd87c0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -119,7 +119,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -146,7 +146,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "1b313260",
+      "state": "b2b9e0f8",
       "events": "d9107c5d",
       "rng": {
         "draws": 4,
@@ -157,7 +157,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "d2acbd4a",
+      "state": "ba7ebe64",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -168,7 +168,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "e42cac89",
+      "state": "c5cf7955",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -179,7 +179,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "8880d818",
+      "state": "61408396",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -190,8 +190,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "9ab28a11",
-      "events": "de22e519",
+      "state": "9d3a16b3",
+      "events": "1843e97a",
       "rng": {
         "draws": 50,
         "digest": "33227c83"
@@ -201,7 +201,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "66d5a861",
+      "state": "ed698fd3",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -212,7 +212,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "206ccb54",
+      "state": "97cf0a54",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -223,7 +223,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "a1e72215",
+      "state": "90b84e20",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -234,8 +234,8 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "8bf1b694",
-      "events": "a9b9b3d6",
+      "state": "2077a6a4",
+      "events": "966fefaf",
       "rng": {
         "draws": 248,
         "digest": "d356c112"
@@ -245,7 +245,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "023d2357",
+      "state": "88f61ffd",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -256,7 +256,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "7175f308",
+      "state": "4a514cf8",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -267,7 +267,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "89e49fb1",
+      "state": "b2b5deff",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -278,7 +278,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "89e49fb1",
+      "state": "b2b5deff",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -300,14 +300,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 148,
-            "damageTaken": 106
+            "damageDealt": 140,
+            "damageTaken": 104
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 148
+              "damageDealt": 140
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -360,10 +360,10 @@
           "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
-            "gloves": "shadowpulse_handwraps",
             "legs": "lunar_choir_leggings",
             "mainhand": "lunar_tide_greatstaff",
-            "waist": "sash_of_the_sunken_court"
+            "ring1": "shadowpulse_handwraps",
+            "ring2": "sash_of_the_sunken_court"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -409,14 +409,14 @@
           "hit": 38,
           "hitBonus": 0.17,
           "hitRating": 170,
-          "hp": 49894,
+          "hp": 49896,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 187,
+          "maxResource": 182,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -428,7 +428,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 92,
+          "resource": 87,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -436,12 +436,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 94,
+          "spellPower": 85,
           "stats": {
             "agi": 1,
-            "armor": 180,
+            "armor": 4,
             "dex": 1,
-            "int": 44,
+            "int": 40,
             "luk": 24,
             "str": 1,
             "vit": 7
@@ -484,7 +484,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49852,
+          "hp": 49860,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -521,7 +521,7 @@
           "threat": [
             [
               415,
-              149
+              141
             ]
           ],
           "weapon": {
@@ -536,7 +536,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "89e49fb1",
+      "state": "b2b5deff",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -558,14 +558,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 148,
-            "damageTaken": 106
+            "damageDealt": 140,
+            "damageTaken": 104
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 148
+              "damageDealt": 140
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -618,10 +618,10 @@
           "entityId": 415,
           "equipment": {
             "chest": "apprentice_robe",
-            "gloves": "shadowpulse_handwraps",
             "legs": "lunar_choir_leggings",
             "mainhand": "lunar_tide_greatstaff",
-            "waist": "sash_of_the_sunken_court"
+            "ring1": "shadowpulse_handwraps",
+            "ring2": "sash_of_the_sunken_court"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -667,14 +667,14 @@
           "hit": 38,
           "hitBonus": 0.17,
           "hitRating": 170,
-          "hp": 49894,
+          "hp": 49896,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 187,
+          "maxResource": 182,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -686,7 +686,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 92,
+          "resource": 87,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -694,12 +694,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 94,
+          "spellPower": 85,
           "stats": {
             "agi": 1,
-            "armor": 180,
+            "armor": 4,
             "dex": 1,
-            "int": 44,
+            "int": 40,
             "luk": 24,
             "str": 1,
             "vit": 7
@@ -742,7 +742,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49852,
+          "hp": 49860,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -779,7 +779,7 @@
           "threat": [
             [
               415,
-              149
+              141
             ]
           ],
           "weapon": {

@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f138de3e",
+      "state": "80da6581",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -133,7 +133,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "db59a562",
-      "events": "720cfa6b",
+      "state": "88960601",
+      "events": "15790eb2",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -166,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "53d9de7c",
+      "state": "e3674a91",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -177,8 +177,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "47b37193",
-      "events": "00b5114c",
+      "state": "1796db73",
+      "events": "1f33a8d3",
       "rng": {
         "draws": 105,
         "digest": "3e0eb09d"
@@ -188,7 +188,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "ac50ab05",
+      "state": "235876c6",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -211,7 +211,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7128,
+            "damageDealt": 7115,
             "damageTaken": 5,
             "kills": 1
           },
@@ -219,7 +219,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7128,
+              "damageDealt": 7115,
               "kills": 1
             },
             "dungeonClears": {},
@@ -332,7 +332,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -423,7 +423,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "3a553ae8",
+      "state": "cd26356f",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -446,7 +446,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7128,
+            "damageDealt": 7115,
             "damageTaken": 5,
             "kills": 1
           },
@@ -454,7 +454,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7128,
+              "damageDealt": 7115,
               "kills": 1
             },
             "dungeonClears": {},
@@ -572,7 +572,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,

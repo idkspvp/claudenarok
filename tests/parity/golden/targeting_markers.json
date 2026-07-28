@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "754bbe34",
+      "state": "bf08edf5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -247,7 +247,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -306,7 +306,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -369,7 +369,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -528,7 +528,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "f5a86b95",
+      "state": "388a27a8",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -745,7 +745,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -804,7 +804,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -867,7 +867,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -1026,7 +1026,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "2903b555",
+      "state": "bd2b27a4",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1243,7 +1243,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1302,7 +1302,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -1365,7 +1365,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -1524,7 +1524,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "754bbe34",
+      "state": "bf08edf5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1741,7 +1741,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1800,7 +1800,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -1863,7 +1863,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -2022,7 +2022,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "821bb343",
+      "state": "6479a648",
       "events": "2557807b",
       "rng": {
         "draws": 0,
@@ -2245,7 +2245,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2304,7 +2304,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -2367,7 +2367,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -2526,7 +2526,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "33c1ff80",
+      "state": "cf56b18f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2749,7 +2749,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2808,7 +2808,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -2871,7 +2871,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -3030,7 +3030,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "821bb343",
+      "state": "6479a648",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3253,7 +3253,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -3312,7 +3312,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -3375,7 +3375,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -3534,7 +3534,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "821bb343",
+      "state": "6479a648",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3757,7 +3757,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -3816,7 +3816,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -3879,7 +3879,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -4038,7 +4038,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "821bb343",
+      "state": "6479a648",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4261,7 +4261,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -4320,7 +4320,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -4383,7 +4383,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -4542,7 +4542,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "821bb343",
+      "state": "6479a648",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4765,7 +4765,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -4824,7 +4824,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -4887,7 +4887,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -5046,7 +5046,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "9797ea41",
+      "state": "b418de1c",
       "events": "262d9c40",
       "rng": {
         "draws": 5,
@@ -5274,7 +5274,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -5333,7 +5333,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -5396,7 +5396,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -5595,7 +5595,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "9797ea41",
+      "state": "b418de1c",
       "events": "741638a5",
       "rng": {
         "draws": 5,
@@ -5823,7 +5823,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -5882,7 +5882,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -5945,7 +5945,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,

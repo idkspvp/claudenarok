@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 418,
-      "state": "f6a35a99",
+      "state": "f0a86ebb",
       "events": "10c8d55b",
       "rng": {
         "draws": 2,
@@ -218,7 +218,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -277,7 +277,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,

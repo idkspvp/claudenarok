@@ -35,8 +35,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "dd8c1e50",
-      "events": "e67b5155",
+      "state": "2c72fa9b",
+      "events": "a1a78412",
       "rng": {
         "draws": 33,
         "digest": "6ae23ad3"
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "b48daf8c",
+      "state": "d087454f",
       "events": "741638a5",
       "rng": {
         "draws": 33,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "9a492f00",
+      "state": "a240f3e1",
       "events": "dbe9474c",
       "rng": {
         "draws": 36,
@@ -68,8 +68,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "f747c2bb",
-      "events": "fe6870bd",
+      "state": "6edc109e",
+      "events": "b9eb0518",
       "rng": {
         "draws": 40,
         "digest": "7c2f1afa"
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "4628ca70",
+      "state": "6bbc6c4d",
       "events": "126597fc",
       "rng": {
         "draws": 40,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "78f6024a",
+      "state": "ecfc3f37",
       "events": "741638a5",
       "rng": {
         "draws": 40,
@@ -101,7 +101,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "41443b39",
+      "state": "0cf50326",
       "events": "126597fc",
       "rng": {
         "draws": 40,
@@ -112,8 +112,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "d607e31e",
-      "events": "7447aa1e",
+      "state": "bab2fc45",
+      "events": "c17ef2cd",
       "rng": {
         "draws": 48,
         "digest": "2c38714d"
@@ -123,8 +123,8 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "4ebb92b0",
-      "events": "1d737564",
+      "state": "343d53ed",
+      "events": "c2810523",
       "rng": {
         "draws": 93,
         "digest": "e53395e6"
@@ -134,8 +134,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "a6778c63",
-      "events": "1740f2b2",
+      "state": "210516ec",
+      "events": "a559e133",
       "rng": {
         "draws": 122,
         "digest": "5fa72172"
@@ -145,7 +145,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 425,
-      "state": "4f954d9a",
+      "state": "a11b140b",
       "events": "126597fc",
       "rng": {
         "draws": 134,
@@ -156,8 +156,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 425,
-      "state": "11e8ff22",
-      "events": "5b2b11ba",
+      "state": "574879b3",
+      "events": "19497fcd",
       "rng": {
         "draws": 158,
         "digest": "a3ca8b3e"
@@ -167,7 +167,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 425,
-      "state": "404800d8",
+      "state": "2c262e03",
       "events": "126597fc",
       "rng": {
         "draws": 178,
@@ -178,7 +178,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 425,
-      "state": "35e39f22",
+      "state": "8d05e6bd",
       "events": "741638a5",
       "rng": {
         "draws": 201,
@@ -189,8 +189,8 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 425,
-      "state": "9470b975",
-      "events": "37ce2e7d",
+      "state": "e19b822d",
+      "events": "f6463792",
       "rng": {
         "draws": 233,
         "digest": "2c0f2386"
@@ -200,7 +200,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 425,
-      "state": "77900e2d",
+      "state": "48b53bdb",
       "events": "741638a5",
       "rng": {
         "draws": 249,
@@ -211,8 +211,8 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 425,
-      "state": "5c9d903c",
-      "events": "e0d2c6ee",
+      "state": "cfbf7ecd",
+      "events": "be59c120",
       "rng": {
         "draws": 295,
         "digest": "87d599a0"
@@ -222,7 +222,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 425,
-      "state": "174c185c",
+      "state": "b752c159",
       "events": "0d134bdb",
       "rng": {
         "draws": 323,
@@ -233,7 +233,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 425,
-      "state": "e6152763",
+      "state": "8ed76f02",
       "events": "019ab02e",
       "rng": {
         "draws": 352,
@@ -244,7 +244,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 425,
-      "state": "718c057b",
+      "state": "f0b0ef2a",
       "events": "741638a5",
       "rng": {
         "draws": 381,
@@ -255,7 +255,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 425,
-      "state": "9cf4c741",
+      "state": "c8f7ac42",
       "events": "126597fc",
       "rng": {
         "draws": 414,
@@ -266,8 +266,8 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 425,
-      "state": "8257d556",
-      "events": "19643edb",
+      "state": "9822de8e",
+      "events": "fbb57182",
       "rng": {
         "draws": 443,
         "digest": "005095de"
@@ -277,7 +277,7 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 425,
-      "state": "2685fc0a",
+      "state": "0a346002",
       "events": "126597fc",
       "rng": {
         "draws": 470,
@@ -288,7 +288,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 425,
-      "state": "1e0227df",
+      "state": "d88878cd",
       "events": "5933091f",
       "rng": {
         "draws": 521,
@@ -299,7 +299,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 425,
-      "state": "1e0227df",
+      "state": "d88878cd",
       "events": "741638a5",
       "rng": {
         "draws": 521,
@@ -321,14 +321,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 167,
+            "damageDealt": 119,
             "damageTaken": 21
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 167
+              "damageDealt": 119
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -395,14 +395,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 45,
+            "damageDealt": 19,
             "damageTaken": 34
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 45
+              "damageDealt": 19
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -468,14 +468,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 96,
+            "damageDealt": 47,
             "damageTaken": 37
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 96
+              "damageDealt": 47
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -548,13 +548,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 51
+            "damageDealt": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 51
+              "damageDealt": 12
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -748,7 +748,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -822,7 +822,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -892,7 +892,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -960,7 +960,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1027,7 +1027,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -1064,7 +1064,7 @@
           "flee": 4,
           "hit": 4,
           "hostile": true,
-          "hp": 499833,
+          "hp": 499881,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -1104,7 +1104,7 @@
           "threat": [
             [
               415,
-              346
+              298
             ]
           ],
           "weapon": {
@@ -1127,7 +1127,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499955,
+          "hp": 499981,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -1167,7 +1167,7 @@
           "threat": [
             [
               416,
-              47
+              21
             ]
           ],
           "weapon": {
@@ -1190,7 +1190,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499904,
+          "hp": 499953,
           "id": 422,
           "inCombat": true,
           "kind": "mob",
@@ -1227,7 +1227,7 @@
           "threat": [
             [
               417,
-              98
+              49
             ]
           ],
           "weapon": {
@@ -1250,7 +1250,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499949,
+          "hp": 499988,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -1289,7 +1289,7 @@
           "threat": [
             [
               418,
-              52
+              13
             ]
           ],
           "wanderTarget": {
@@ -1378,8 +1378,8 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 425,
-      "state": "33bcba66",
-      "events": "cc524c9a",
+      "state": "6d1e1d03",
+      "events": "8699f733",
       "rng": {
         "draws": 567,
         "digest": "3086ce43"
@@ -1389,7 +1389,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 425,
-      "state": "196ab605",
+      "state": "46dc7de4",
       "events": "741638a5",
       "rng": {
         "draws": 574,
@@ -1411,14 +1411,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 218,
+            "damageDealt": 155,
             "damageTaken": 23
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 218
+              "damageDealt": 155
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1485,14 +1485,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 45,
+            "damageDealt": 19,
             "damageTaken": 46
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 45
+              "damageDealt": 19
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1558,14 +1558,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 96,
+            "damageDealt": 47,
             "damageTaken": 47
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 96
+              "damageDealt": 47
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1638,13 +1638,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 51
+            "damageDealt": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 51
+              "damageDealt": 12
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1846,7 +1846,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1919,7 +1919,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -1983,7 +1983,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2051,7 +2051,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2118,7 +2118,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -2155,7 +2155,7 @@
           "flee": 4,
           "hit": 4,
           "hostile": true,
-          "hp": 499782,
+          "hp": 499845,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -2195,7 +2195,7 @@
           "threat": [
             [
               415,
-              456
+              393
             ]
           ],
           "weapon": {
@@ -2218,7 +2218,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499955,
+          "hp": 499981,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -2258,7 +2258,7 @@
           "threat": [
             [
               416,
-              47
+              21
             ]
           ],
           "weapon": {
@@ -2281,7 +2281,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499904,
+          "hp": 499953,
           "id": 422,
           "inCombat": true,
           "kind": "mob",
@@ -2318,7 +2318,7 @@
           "threat": [
             [
               417,
-              98
+              49
             ]
           ],
           "weapon": {
@@ -2341,7 +2341,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499949,
+          "hp": 499988,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -2380,7 +2380,7 @@
           "threat": [
             [
               418,
-              52
+              13
             ]
           ],
           "wanderTarget": {
@@ -2469,7 +2469,7 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 425,
-      "state": "196ab605",
+      "state": "46dc7de4",
       "events": "741638a5",
       "rng": {
         "draws": 574,
@@ -2491,14 +2491,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 218,
+            "damageDealt": 155,
             "damageTaken": 23
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 218
+              "damageDealt": 155
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2565,14 +2565,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 45,
+            "damageDealt": 19,
             "damageTaken": 46
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 45
+              "damageDealt": 19
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2638,14 +2638,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 96,
+            "damageDealt": 47,
             "damageTaken": 47
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 96
+              "damageDealt": 47
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2718,13 +2718,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 51
+            "damageDealt": 12
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 51
+              "damageDealt": 12
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2926,7 +2926,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 54,
+            "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -2999,7 +2999,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -3063,7 +3063,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -3131,7 +3131,7 @@
           "spellPower": 1,
           "stats": {
             "agi": 1,
-            "armor": 14,
+            "armor": 1,
             "dex": 1,
             "int": 1,
             "luk": 1,
@@ -3198,7 +3198,7 @@
           "spellPower": 2,
           "stats": {
             "agi": 1,
-            "armor": 8,
+            "armor": 1,
             "dex": 1,
             "int": 2,
             "luk": 1,
@@ -3235,7 +3235,7 @@
           "flee": 4,
           "hit": 4,
           "hostile": true,
-          "hp": 499782,
+          "hp": 499845,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -3275,7 +3275,7 @@
           "threat": [
             [
               415,
-              456
+              393
             ]
           ],
           "weapon": {
@@ -3298,7 +3298,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499955,
+          "hp": 499981,
           "id": 421,
           "inCombat": true,
           "kind": "mob",
@@ -3338,7 +3338,7 @@
           "threat": [
             [
               416,
-              47
+              21
             ]
           ],
           "weapon": {
@@ -3361,7 +3361,7 @@
           "flee": 8,
           "hit": 8,
           "hostile": true,
-          "hp": 499904,
+          "hp": 499953,
           "id": 422,
           "inCombat": true,
           "kind": "mob",
@@ -3398,7 +3398,7 @@
           "threat": [
             [
               417,
-              98
+              49
             ]
           ],
           "weapon": {
@@ -3421,7 +3421,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499949,
+          "hp": 499988,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -3460,7 +3460,7 @@
           "threat": [
             [
               418,
-              52
+              13
             ]
           ],
           "wanderTarget": {
