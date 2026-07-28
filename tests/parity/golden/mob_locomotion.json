@@ -32,7 +32,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "299353c8",
+      "state": "0cba00ec",
       "events": "d290e272",
       "rng": {
         "draws": 2,
@@ -125,7 +125,7 @@
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -155,7 +155,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -223,8 +223,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "69a3124b",
-      "events": "85525ecd",
+      "state": "b7b8583c",
+      "events": "838c3f1e",
       "rng": {
         "draws": 7,
         "digest": "2e56e253"
@@ -245,7 +245,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 147
+            "damageTaken": 148
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -319,13 +319,13 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999870,
+          "hp": 999869,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -339,7 +339,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 10.266667,
+          "resource": 10.321667,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -355,7 +355,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -473,8 +473,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "35a688ff",
-      "events": "54088c28",
+      "state": "9f6bd3ed",
+      "events": "1b0d44af",
       "rng": {
         "draws": 13,
         "digest": "06ceb9a6"
@@ -495,7 +495,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -580,13 +580,13 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999882,
+          "hp": 999881,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -600,7 +600,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -616,7 +616,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -785,7 +785,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "32b8b11d",
+      "state": "bea0e25f",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -807,7 +807,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -892,13 +892,13 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999882,
+          "hp": 999881,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -912,7 +912,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -928,7 +928,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1151,7 +1151,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "5bf9312e",
+      "state": "0afe6298",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1173,7 +1173,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1258,13 +1258,13 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 999882,
+          "hp": 999881,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1278,7 +1278,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1294,7 +1294,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1565,7 +1565,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "567ffcd4",
+      "state": "2dd4d0ad",
       "events": "38fff8ae",
       "rng": {
         "draws": 16,
@@ -1587,7 +1587,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1678,7 +1678,7 @@
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1692,7 +1692,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1708,7 +1708,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2030,7 +2030,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "fefac00d",
+      "state": "8086e898",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2052,7 +2052,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2143,7 +2143,7 @@
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2157,7 +2157,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2173,7 +2173,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2496,7 +2496,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "fefac00d",
+      "state": "8086e898",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2518,7 +2518,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 265
+            "damageTaken": 267
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2609,7 +2609,7 @@
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2623,7 +2623,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 21.083333,
+          "resource": 21.23,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2639,7 +2639,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

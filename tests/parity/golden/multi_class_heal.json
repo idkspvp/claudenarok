@@ -34,8 +34,8 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "a9c471a5",
-      "events": "62cf7826",
+      "state": "6b359501",
+      "events": "abf38ee6",
       "rng": {
         "draws": 6,
         "digest": "e9e34462"
@@ -388,12 +388,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -422,7 +422,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -644,7 +644,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -747,7 +747,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -813,7 +813,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -879,7 +879,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -906,7 +906,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "ca6542d1",
+      "state": "219d199b",
       "events": "a18f2672",
       "rng": {
         "draws": 6,
@@ -1265,12 +1265,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1299,7 +1299,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1521,7 +1521,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1642,7 +1642,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -1708,7 +1708,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -1774,7 +1774,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -1801,7 +1801,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 424,
-      "state": "8c074c17",
+      "state": "dcd8d5e3",
       "events": "c4531615",
       "rng": {
         "draws": 10,
@@ -1812,7 +1812,7 @@
       "tick": 8,
       "time": 0.4,
       "nextId": 424,
-      "state": "5c2eccce",
+      "state": "a002659a",
       "events": "c4531615",
       "rng": {
         "draws": 10,
@@ -2171,12 +2171,12 @@
           "fiveSecondRule": 99.4,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2205,7 +2205,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2440,7 +2440,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2564,7 +2564,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -2631,7 +2631,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,
@@ -2704,7 +2704,7 @@
           "threat": [
             [
               415,
-              106.666667
+              106.5
             ],
             [
               416,

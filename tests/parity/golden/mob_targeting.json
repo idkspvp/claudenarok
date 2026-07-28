@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e74eda79",
+      "state": "26b549c0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -250,7 +250,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -458,7 +458,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "80503c3c",
+      "state": "b3fcde13",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -677,7 +677,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -885,7 +885,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "6dc850dc",
+      "state": "adb5a36b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1104,7 +1104,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1312,7 +1312,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "7c1a690f",
+      "state": "6be563f0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1531,7 +1531,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1739,7 +1739,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "fcae0d15",
+      "state": "641aa786",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1958,7 +1958,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2168,7 +2168,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "5cfa551d",
+      "state": "5654de1a",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2387,7 +2387,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2597,7 +2597,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "6105a474",
+      "state": "f576fe91",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2816,7 +2816,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -3025,7 +3025,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "e90e184e",
+      "state": "707d7e21",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3244,7 +3244,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -3453,7 +3453,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "8387d109",
+      "state": "2bf5e512",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3672,7 +3672,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -3866,7 +3866,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "8387d109",
+      "state": "2bf5e512",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4085,7 +4085,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

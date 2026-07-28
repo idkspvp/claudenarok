@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "3833c241",
+      "state": "d4d0ce88",
       "events": "5cf7b5a4",
       "rng": {
         "draws": 3,
@@ -262,7 +262,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -498,7 +498,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "c3938237",
+      "state": "c77c4752",
       "events": "8ee351ae",
       "rng": {
         "draws": 6,
@@ -730,7 +730,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -966,7 +966,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "922963f3",
+      "state": "c3f3a8de",
       "events": "8ee351ae",
       "rng": {
         "draws": 9,
@@ -1198,7 +1198,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1434,7 +1434,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "816e54c9",
+      "state": "b859bb9a",
       "events": "8ee351ae",
       "rng": {
         "draws": 12,
@@ -1666,7 +1666,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1902,8 +1902,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "e0a3f4b4",
-      "events": "ec5634b4",
+      "state": "76a8abf5",
+      "events": "71f143d5",
       "rng": {
         "draws": 16,
         "digest": "50064c0d"
@@ -1913,7 +1913,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "ac5a4172",
+      "state": "1a7c95eb",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1924,7 +1924,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "ac5a4172",
+      "state": "1a7c95eb",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1947,7 +1947,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 120,
-            "damageTaken": 13
+            "damageTaken": 14
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2123,7 +2123,7 @@
           "fiveSecondRule": 99.5,
           "flee": 2,
           "hit": 2,
-          "hp": 49987,
+          "hp": 49986,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -2158,7 +2158,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

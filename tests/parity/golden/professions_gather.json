@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "80da6581",
+      "state": "87cb2eb0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -108,12 +108,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -142,7 +142,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -159,7 +159,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 416,
-      "state": "da36a5a1",
+      "state": "22f8e878",
       "events": "e7b86907",
       "rng": {
         "draws": 2,
@@ -295,12 +295,12 @@
           "fiveSecondRule": 101.55,
           "flee": 3,
           "hit": 3,
-          "hp": 47,
+          "hp": 46,
           "id": 415,
           "kind": "player",
           "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 47,
+          "maxHp": 46,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -329,7 +329,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -346,7 +346,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 416,
-      "state": "7f95a0dd",
+      "state": "90eb478c",
       "events": "fbab41e3",
       "rng": {
         "draws": 4,
@@ -536,7 +536,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -553,7 +553,7 @@
       "tick": 500,
       "time": 25,
       "nextId": 416,
-      "state": "67b992e5",
+      "state": "59bce98c",
       "events": "e02f321c",
       "rng": {
         "draws": 18,
@@ -564,7 +564,7 @@
       "tick": 1000,
       "time": 50,
       "nextId": 416,
-      "state": "d25391ff",
+      "state": "92632df6",
       "events": "d41935fb",
       "rng": {
         "draws": 38,
@@ -575,7 +575,7 @@
       "tick": 1500,
       "time": 75,
       "nextId": 416,
-      "state": "fa84e5a6",
+      "state": "ad684409",
       "events": "172dffc0",
       "rng": {
         "draws": 58,
@@ -586,7 +586,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 416,
-      "state": "699a4b57",
+      "state": "96ba13b8",
       "events": "a3cc9f09",
       "rng": {
         "draws": 78,
@@ -597,7 +597,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 416,
-      "state": "b59d327b",
+      "state": "93f77a16",
       "events": "e559297f",
       "rng": {
         "draws": 96,
@@ -608,7 +608,7 @@
       "tick": 3000,
       "time": 150,
       "nextId": 416,
-      "state": "be485a88",
+      "state": "8efdb487",
       "events": "70f24b4b",
       "rng": {
         "draws": 116,
@@ -619,7 +619,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 416,
-      "state": "b9e99521",
+      "state": "aea2f8c4",
       "events": "86d29dfd",
       "rng": {
         "draws": 136,
@@ -630,7 +630,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 416,
-      "state": "7f45e34a",
+      "state": "001358eb",
       "events": "c0982447",
       "rng": {
         "draws": 156,
@@ -641,7 +641,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 416,
-      "state": "59896ad2",
+      "state": "ce056e61",
       "events": "f460621d",
       "rng": {
         "draws": 176,
@@ -652,7 +652,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 416,
-      "state": "5bf50fcb",
+      "state": "3e7b86d8",
       "events": "1854a740",
       "rng": {
         "draws": 194,
@@ -663,7 +663,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 416,
-      "state": "c5d0c166",
+      "state": "edad639b",
       "events": "4f44fcfa",
       "rng": {
         "draws": 204,
@@ -844,12 +844,12 @@
           "fiveSecondRule": 359.3,
           "flee": 10,
           "hit": 10,
-          "hp": 113,
+          "hp": 112,
           "id": 415,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 113,
+          "maxHp": 112,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -878,7 +878,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -895,7 +895,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 416,
-      "state": "2da319e9",
+      "state": "29bee0ec",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -1076,12 +1076,12 @@
           "fiveSecondRule": 359.4,
           "flee": 10,
           "hit": 10,
-          "hp": 113,
+          "hp": 112,
           "id": 415,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 113,
+          "maxHp": 112,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1110,7 +1110,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

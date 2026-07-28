@@ -146,8 +146,8 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "b2b9e0f8",
-      "events": "d9107c5d",
+      "state": "704deee2",
+      "events": "be746c92",
       "rng": {
         "draws": 4,
         "digest": "270cc372"
@@ -157,7 +157,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "ba7ebe64",
+      "state": "42670f0a",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -168,7 +168,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "c5cf7955",
+      "state": "03023d1b",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -179,7 +179,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "61408396",
+      "state": "dde08674",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -190,8 +190,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "9d3a16b3",
-      "events": "1843e97a",
+      "state": "163ae5c1",
+      "events": "78db4c76",
       "rng": {
         "draws": 50,
         "digest": "33227c83"
@@ -201,7 +201,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "ed698fd3",
+      "state": "90453a91",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -212,7 +212,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "97cf0a54",
+      "state": "6cfad28a",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -223,7 +223,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "90b84e20",
+      "state": "76df2bfd",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -234,8 +234,8 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "2077a6a4",
-      "events": "966fefaf",
+      "state": "b5c2ef94",
+      "events": "b13d1822",
       "rng": {
         "draws": 248,
         "digest": "d356c112"
@@ -245,7 +245,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "88f61ffd",
+      "state": "4969fce3",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -256,7 +256,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "4a514cf8",
+      "state": "098692e4",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -267,7 +267,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "b2b5deff",
+      "state": "fadcc8d9",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -278,7 +278,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "b2b5deff",
+      "state": "fadcc8d9",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -300,14 +300,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 140,
-            "damageTaken": 104
+            "damageDealt": 96,
+            "damageTaken": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 140
+              "damageDealt": 96
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -394,13 +394,13 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 5,
+          "attackPower": 3,
           "castTotal": 4,
           "combatTimer": 1.9,
           "comboUntil": -1,
-          "critChance": 0.09,
+          "critChance": 0.056667,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.034,
+          "dodgeChance": 0.024,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
@@ -409,14 +409,14 @@
           "hit": 38,
           "hitBonus": 0.17,
           "hitRating": 170,
-          "hp": 49896,
+          "hp": 49884,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 182,
+          "maxResource": 157,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -428,7 +428,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 87,
+          "resource": 62,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -436,15 +436,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 85,
+          "spellPower": 34,
           "stats": {
             "agi": 1,
             "armor": 4,
             "dex": 1,
-            "int": 40,
-            "luk": 24,
+            "int": 21,
+            "luk": 14,
             "str": 1,
-            "vit": 7
+            "vit": 3
           },
           "targetId": 416,
           "templateId": "mage",
@@ -484,7 +484,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49860,
+          "hp": 49904,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -521,7 +521,7 @@
           "threat": [
             [
               415,
-              141
+              97
             ]
           ],
           "weapon": {
@@ -536,7 +536,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "b2b5deff",
+      "state": "fadcc8d9",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -558,14 +558,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 140,
-            "damageTaken": 104
+            "damageDealt": 96,
+            "damageTaken": 116
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 140
+              "damageDealt": 96
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -652,13 +652,13 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 5,
+          "attackPower": 3,
           "castTotal": 4,
           "combatTimer": 1.9,
           "comboUntil": -1,
-          "critChance": 0.09,
+          "critChance": 0.056667,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.034,
+          "dodgeChance": 0.024,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
@@ -667,14 +667,14 @@
           "hit": 38,
           "hitBonus": 0.17,
           "hitRating": 170,
-          "hp": 49896,
+          "hp": 49884,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 20,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 182,
+          "maxResource": 157,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -686,7 +686,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 87,
+          "resource": 62,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -694,15 +694,15 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 85,
+          "spellPower": 34,
           "stats": {
             "agi": 1,
             "armor": 4,
             "dex": 1,
-            "int": 40,
-            "luk": 24,
+            "int": 21,
+            "luk": 14,
             "str": 1,
-            "vit": 7
+            "vit": 3
           },
           "targetId": 416,
           "templateId": "mage",
@@ -742,7 +742,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49860,
+          "hp": 49904,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -779,7 +779,7 @@
           "threat": [
             [
               415,
-              141
+              97
             ]
           ],
           "weapon": {

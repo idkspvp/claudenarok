@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "80da6581",
+      "state": "87cb2eb0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -103,12 +103,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -137,7 +137,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -154,7 +154,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 425,
-      "state": "a606dc33",
+      "state": "12d0a1ec",
       "events": "1db97f90",
       "rng": {
         "draws": 9,
@@ -165,7 +165,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 425,
-      "state": "1715183d",
+      "state": "0e0d5ed8",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -176,7 +176,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 425,
-      "state": "fb997367",
+      "state": "1fbb9a1c",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -187,7 +187,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 425,
-      "state": "d69f1e24",
+      "state": "604ad745",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -198,7 +198,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 425,
-      "state": "c4481264",
+      "state": "f20500c3",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -209,7 +209,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 425,
-      "state": "0d7597f5",
+      "state": "90f560cc",
       "events": "df5edf37",
       "rng": {
         "draws": 13,
@@ -220,7 +220,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 425,
-      "state": "5e1f145b",
+      "state": "d91d1c90",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -231,7 +231,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "3a0837b9",
+      "state": "3eaa6b68",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -242,7 +242,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 425,
-      "state": "3a0837b9",
+      "state": "3eaa6b68",
       "events": "741638a5",
       "rng": {
         "draws": 13,
@@ -376,7 +376,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "targetId": 421,
           "templateId": "swordman",
@@ -502,7 +502,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 425,
-      "state": "6e09f852",
+      "state": "d9d81d6b",
       "events": "77392800",
       "rng": {
         "draws": 15,
@@ -637,7 +637,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "targetId": 421,
           "templateId": "swordman",
@@ -763,7 +763,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 425,
-      "state": "53cd685d",
+      "state": "31185a18",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -774,7 +774,7 @@
       "tick": 49,
       "time": 2.45,
       "nextId": 425,
-      "state": "8d31b6b2",
+      "state": "90d5873f",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -908,7 +908,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -972,7 +972,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 425,
-      "state": "cd690bdc",
+      "state": "c5e9b929",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -983,7 +983,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "7ffc42e7",
+      "state": "fc00835a",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1117,7 +1117,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1182,7 +1182,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 425,
-      "state": "7ffc42e7",
+      "state": "fc00835a",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -1316,7 +1316,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

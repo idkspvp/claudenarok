@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "80da6581",
+      "state": "87cb2eb0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -104,12 +104,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -138,7 +138,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "88960601",
-      "events": "15790eb2",
+      "state": "4b45b9ce",
+      "events": "84c16dfb",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -166,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "e3674a91",
+      "state": "1366d47e",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -177,7 +177,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "1796db73",
+      "state": "257f8092",
       "events": "1f33a8d3",
       "rng": {
         "draws": 105,
@@ -188,7 +188,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "235876c6",
+      "state": "4483b5c5",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -212,7 +212,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 7115,
-            "damageTaken": 5,
+            "damageTaken": 6,
             "kills": 1
           },
           "craftSkills": {},
@@ -301,7 +301,7 @@
           "fiveSecondRule": 102.6,
           "flee": 11,
           "hit": 11,
-          "hp": 49995,
+          "hp": 49994,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -337,7 +337,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "swingTimer": 0.45,
           "targetId": 416,
@@ -423,7 +423,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "cd26356f",
+      "state": "b53adf3a",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -447,7 +447,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 7115,
-            "damageTaken": 5,
+            "damageTaken": 6,
             "kills": 1
           },
           "craftSkills": {},
@@ -541,7 +541,7 @@
           "fiveSecondRule": 102.8,
           "flee": 11,
           "hit": 11,
-          "hp": 49995,
+          "hp": 49994,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -577,7 +577,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "swingTimer": 0.25,
           "targetId": 416,

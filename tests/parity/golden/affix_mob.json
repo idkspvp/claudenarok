@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "80da6581",
+      "state": "87cb2eb0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -103,12 +103,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -137,7 +137,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -154,8 +154,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "60704c97",
-      "events": "93440da1",
+      "state": "fed9a88f",
+      "events": "814e5271",
       "rng": {
         "draws": 21,
         "digest": "b3b13ee2"
@@ -165,8 +165,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "24203f26",
-      "events": "bdfa0532",
+      "state": "61e21fc5",
+      "events": "8d66e66a",
       "rng": {
         "draws": 34,
         "digest": "14849c77"
@@ -176,8 +176,8 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "6fd53787",
-      "events": "a7c52d46",
+      "state": "54365706",
+      "events": "0ea61fbb",
       "rng": {
         "draws": 64,
         "digest": "4e1f7fc1"
@@ -200,7 +200,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 225
+            "damageTaken": 232
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -304,13 +304,13 @@
           "fiveSecondRule": 101.5,
           "flee": 14,
           "hit": 14,
-          "hp": 125,
+          "hp": 123,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 166,
+          "maxHp": 165,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -324,7 +324,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 23.226923,
+          "resource": 24.2,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -340,7 +340,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "targetId": 416,
           "templateId": "swordman",
@@ -488,7 +488,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "ee7547d4",
+      "state": "a7ec7833",
       "events": "741638a5",
       "rng": {
         "draws": 78,
@@ -512,7 +512,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 225
+            "damageTaken": 232
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -617,13 +617,13 @@
           "fiveSecondRule": 101.7,
           "flee": 14,
           "hit": 14,
-          "hp": 125,
+          "hp": 123,
           "id": 415,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 166,
+          "maxHp": 165,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -637,7 +637,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 23.226923,
+          "resource": 24.2,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -653,7 +653,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "targetId": 416,
           "templateId": "swordman",

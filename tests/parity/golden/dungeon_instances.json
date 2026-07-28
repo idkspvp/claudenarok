@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 431,
-      "state": "a4589f2f",
+      "state": "680f13d8",
       "events": "9bb7b95a",
       "rng": {
         "draws": 39,
@@ -219,7 +219,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -986,7 +986,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 431,
-      "state": "3c1db20f",
+      "state": "5964a1e2",
       "events": "426319d0",
       "rng": {
         "draws": 47,
@@ -1177,7 +1177,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -1944,7 +1944,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 431,
-      "state": "706c3920",
+      "state": "97e075e9",
       "events": "43cbd350",
       "rng": {
         "draws": 47,
@@ -1955,7 +1955,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 431,
-      "state": "06986136",
+      "state": "d00166c7",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1966,7 +1966,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 431,
-      "state": "8bcceb20",
+      "state": "54b53849",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1977,7 +1977,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 431,
-      "state": "9d25215d",
+      "state": "cf266c1a",
       "events": "18091e3e",
       "rng": {
         "draws": 47,
@@ -1988,7 +1988,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "8ec19e75",
+      "state": "1171e2f2",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2191,7 +2191,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -2272,7 +2272,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "8ec19e75",
+      "state": "1171e2f2",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2475,7 +2475,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {

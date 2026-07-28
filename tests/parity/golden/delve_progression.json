@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "80da6581",
+      "state": "87cb2eb0",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -103,12 +103,12 @@
           "fiveSecondRule": 99,
           "flee": 2,
           "hit": 2,
-          "hp": 41,
+          "hp": 40,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 41,
+          "maxHp": 40,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -137,7 +137,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -154,7 +154,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 437,
-      "state": "ebdbc590",
+      "state": "fc99961f",
       "events": "008c5659",
       "rng": {
         "draws": 1,
@@ -165,7 +165,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 437,
-      "state": "c88b35a1",
+      "state": "b710d68e",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -296,7 +296,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 2
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -313,7 +313,7 @@
       "tick": 7,
       "time": 0.35,
       "nextId": 437,
-      "state": "3396318e",
+      "state": "d766cbcd",
       "events": "8f1a3fff",
       "rng": {
         "draws": 3,
@@ -419,12 +419,12 @@
           "fiveSecondRule": 99.35,
           "flee": 8,
           "hit": 8,
-          "hp": 93,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 93,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -452,7 +452,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 4
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
@@ -469,7 +469,7 @@
       "tick": 9,
       "time": 0.45,
       "nextId": 437,
-      "state": "e8517f2f",
+      "state": "cb821f90",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -575,12 +575,12 @@
           "fiveSecondRule": 99.45,
           "flee": 8,
           "hit": 8,
-          "hp": 93,
+          "hp": 90,
           "id": 415,
           "kind": "player",
           "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 93,
+          "maxHp": 90,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -608,7 +608,7 @@
             "int": 1,
             "luk": 1,
             "str": 1,
-            "vit": 4
+            "vit": 1
           },
           "templateId": "swordman",
           "weapon": {
