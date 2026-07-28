@@ -30,7 +30,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "52529843",
+      "state": "118629dc",
       "events": "ae090ee7",
       "rng": {
         "draws": 0,
@@ -41,7 +41,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "72989870",
+      "state": "1bf85313",
       "events": "2624f545",
       "rng": {
         "draws": 36,
@@ -52,7 +52,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "78797b5a",
+      "state": "cfee5609",
       "events": "92dd922d",
       "rng": {
         "draws": 120,
@@ -63,7 +63,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "f5fa0747",
+      "state": "07e21eb8",
       "events": "547fbe65",
       "rng": {
         "draws": 231,
@@ -74,7 +74,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "75ca1cca",
+      "state": "e95dc005",
       "events": "0cce46bd",
       "rng": {
         "draws": 385,
@@ -85,7 +85,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 419,
-      "state": "7e9275eb",
+      "state": "99e6e924",
       "events": "741638a5",
       "rng": {
         "draws": 537,
@@ -96,7 +96,7 @@
       "tick": 163,
       "time": 8.15,
       "nextId": 419,
-      "state": "74ebd69a",
+      "state": "b9db3e81",
       "events": "ec02393c",
       "rng": {
         "draws": 606,
@@ -295,8 +295,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -304,7 +304,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "fiestaRestore": {
@@ -450,7 +450,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -570,9 +575,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         }
       ]

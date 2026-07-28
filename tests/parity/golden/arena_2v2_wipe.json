@@ -29,7 +29,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "372ec3cc",
+      "state": "8188f796",
       "events": "6a27ad52",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "edade535",
+      "state": "b6ccce27",
       "events": "2624f545",
       "rng": {
         "draws": 54,
@@ -51,7 +51,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "aec325d3",
+      "state": "8b73d0a9",
       "events": "92dd922d",
       "rng": {
         "draws": 152,
@@ -62,7 +62,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "b1dd0880",
+      "state": "afe8fd9a",
       "events": "547fbe65",
       "rng": {
         "draws": 276,
@@ -73,7 +73,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "c4506c73",
+      "state": "aa843f35",
       "events": "273db0f5",
       "rng": {
         "draws": 280,
@@ -404,7 +404,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -525,7 +530,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]
@@ -534,7 +544,7 @@
       "tick": 102,
       "time": 5.1,
       "nextId": 419,
-      "state": "9479657a",
+      "state": "cc1e0870",
       "events": "4dbbda95",
       "rng": {
         "draws": 281,
@@ -878,7 +888,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -999,7 +1014,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]
@@ -1008,7 +1028,7 @@
       "tick": 103,
       "time": 5.15,
       "nextId": 419,
-      "state": "fc7ce47e",
+      "state": "288fa4f0",
       "events": "230ffc1e",
       "rng": {
         "draws": 284,
@@ -1415,7 +1435,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -1536,7 +1561,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]
@@ -1545,7 +1575,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "b66cc2c2",
+      "state": "6f7e0dd8",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -1556,7 +1586,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 419,
-      "state": "f23a9736",
+      "state": "cd3032d4",
       "events": "741638a5",
       "rng": {
         "draws": 548,
@@ -1567,7 +1597,7 @@
       "tick": 175,
       "time": 8.75,
       "nextId": 419,
-      "state": "a42f792b",
+      "state": "c36e85ed",
       "events": "741638a5",
       "rng": {
         "draws": 704,
@@ -1578,7 +1608,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 419,
-      "state": "d5b116ad",
+      "state": "934e52df",
       "events": "741638a5",
       "rng": {
         "draws": 898,
@@ -1589,7 +1619,7 @@
       "tick": 225,
       "time": 11.25,
       "nextId": 419,
-      "state": "d3123692",
+      "state": "1a1954e2",
       "events": "65f67b7d",
       "rng": {
         "draws": 1011,
@@ -1600,7 +1630,7 @@
       "tick": 243,
       "time": 12.15,
       "nextId": 419,
-      "state": "5fcb317f",
+      "state": "b15c5ec7",
       "events": "741638a5",
       "rng": {
         "draws": 1087,
@@ -2022,7 +2052,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2145,7 +2180,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]
@@ -2154,7 +2194,7 @@
       "tick": 243,
       "time": 12.15,
       "nextId": 419,
-      "state": "5fcb317f",
+      "state": "b15c5ec7",
       "events": "741638a5",
       "rng": {
         "draws": 1087,
@@ -2576,7 +2616,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2699,7 +2744,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]

@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "44cbebba",
+      "state": "a1b64667",
       "events": "0efe4389",
       "rng": {
         "draws": 1,
@@ -335,7 +335,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -473,7 +478,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "4f43bbde",
+      "state": "83c5bc95",
       "events": "be00f09c",
       "rng": {
         "draws": 3,
@@ -804,7 +809,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -948,7 +958,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "f1eee92e",
+      "state": "43225f2d",
       "events": "880460b2",
       "rng": {
         "draws": 3,
@@ -1288,7 +1298,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -1416,7 +1431,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 419,
-      "state": "5c550fd3",
+      "state": "790d1d8a",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -1756,7 +1771,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {

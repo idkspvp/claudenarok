@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "d608f546",
+      "state": "c3d9d174",
       "events": "24043dbb",
       "rng": {
         "draws": 0,
@@ -217,8 +217,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -226,7 +226,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -525,7 +525,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -647,9 +652,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -706,7 +717,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -855,7 +871,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "d608f546",
+      "state": "c3d9d174",
       "events": "837ef659",
       "rng": {
         "draws": 0,
@@ -1042,8 +1058,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -1051,7 +1067,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1350,7 +1366,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -1472,9 +1493,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1531,7 +1558,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -1680,7 +1712,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "41f609e8",
+      "state": "edabc1ce",
       "events": "21752ac2",
       "rng": {
         "draws": 0,
@@ -1867,8 +1899,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -1876,7 +1908,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -2179,7 +2211,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2301,9 +2338,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -2360,7 +2403,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2509,7 +2557,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "41f609e8",
+      "state": "edabc1ce",
       "events": "77a7946b",
       "rng": {
         "draws": 0,
@@ -2696,8 +2744,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -2705,7 +2753,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -3008,7 +3056,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -3130,9 +3183,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -3189,7 +3248,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -3338,7 +3402,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "41f609e8",
+      "state": "edabc1ce",
       "events": "d43134f1",
       "rng": {
         "draws": 0,
@@ -3525,8 +3589,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -3534,7 +3598,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -3837,7 +3901,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -3959,9 +4028,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -4018,7 +4093,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -4167,7 +4247,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "41f609e8",
+      "state": "edabc1ce",
       "events": "d08918c5",
       "rng": {
         "draws": 0,
@@ -4354,8 +4434,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -4363,7 +4443,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -4666,7 +4746,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -4788,9 +4873,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -4847,7 +4938,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -4996,7 +5092,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "41f609e8",
+      "state": "edabc1ce",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -5183,8 +5279,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -5192,7 +5288,7 @@
           "entityId": 418,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -5495,7 +5591,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -5617,9 +5718,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -5676,7 +5783,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {

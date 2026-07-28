@@ -23,7 +23,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "5851dc5a",
+      "state": "52f68b74",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -54,8 +54,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -63,7 +63,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -139,9 +139,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         }
       ]
@@ -150,7 +156,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "0699dbc2",
+      "state": "1d92ad5c",
       "events": "dc0dea30",
       "rng": {
         "draws": 0,
@@ -181,8 +187,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -190,7 +196,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -267,9 +273,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -321,7 +333,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "2fc9fbea",
+      "state": "384ee2d4",
       "events": "f8ec86ea",
       "rng": {
         "draws": 0,
@@ -352,8 +364,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -361,7 +373,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -438,9 +450,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -506,7 +524,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "c9a7a44b",
+      "state": "ac8fc565",
       "events": "48f168e3",
       "rng": {
         "draws": 0,
@@ -517,7 +535,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "67c07d81",
+      "state": "e136346b",
       "events": "8caaa753",
       "rng": {
         "draws": 0,
@@ -528,7 +546,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "5718d395",
+      "state": "ccd547a7",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -559,8 +577,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -585,7 +603,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -663,9 +681,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -799,7 +823,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "3dc21689",
+      "state": "ee96512b",
       "events": "0f25af7e",
       "rng": {
         "draws": 0,
@@ -830,8 +854,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -856,7 +880,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -934,9 +958,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1007,7 +1037,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "b32a3d36",
+      "state": "b02acd34",
       "events": "252febab",
       "rng": {
         "draws": 0,
@@ -1038,8 +1068,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1064,7 +1094,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1142,9 +1172,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1258,7 +1294,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "a081209e",
+      "state": "035ee054",
       "events": "61f1164e",
       "rng": {
         "draws": 0,
@@ -1289,8 +1325,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1315,7 +1351,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1393,9 +1429,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1509,7 +1551,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "3dc21689",
+      "state": "ee96512b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1540,8 +1582,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1566,7 +1608,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1644,9 +1686,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1717,7 +1765,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "3dc21689",
+      "state": "ee96512b",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1748,8 +1796,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1774,7 +1822,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -1852,9 +1900,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -1925,7 +1979,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "f78d0670",
+      "state": "270981dd",
       "events": "7c671d97",
       "rng": {
         "draws": 0,
@@ -1956,8 +2010,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -1982,7 +2036,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -2113,9 +2167,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -2240,7 +2300,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2296,7 +2361,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "4eab2163",
+      "state": "27ca880c",
       "events": "660fbcc3",
       "rng": {
         "draws": 84,
@@ -2307,7 +2372,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "af180c1f",
+      "state": "a357ec3a",
       "events": "4a119102",
       "rng": {
         "draws": 160,
@@ -2318,7 +2383,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "af180c1f",
+      "state": "a357ec3a",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -2351,8 +2416,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -2377,7 +2442,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -2524,9 +2589,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -2659,7 +2730,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -2715,7 +2791,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "8dc3d6cb",
+      "state": "2523a4a4",
       "events": "3c0a5f6e",
       "rng": {
         "draws": 160,
@@ -2748,8 +2824,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -2774,7 +2850,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -2921,9 +2997,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -3056,7 +3138,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -3112,7 +3199,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "4f354a7a",
+      "state": "2cca107d",
       "events": "0fcaa395",
       "rng": {
         "draws": 160,
@@ -3145,8 +3232,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -3171,7 +3258,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -3318,9 +3405,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -3453,7 +3546,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -3518,7 +3616,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "4f354a7a",
+      "state": "2cca107d",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -3551,8 +3649,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -3577,7 +3675,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -3724,9 +3822,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -3859,7 +3963,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {

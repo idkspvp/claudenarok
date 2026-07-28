@@ -8,14 +8,14 @@
     "updateRangedPetAttack friendly pet arm (~8093/8217)",
     "updateRangedPetAttack hostile-mob arm (~6776)"
   ],
-  "draws": 409,
-  "drawDigest": "3af911a8",
+  "draws": 411,
+  "drawDigest": "7951e481",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "5851dc5a",
+      "state": "52f68b74",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -46,8 +46,8 @@
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ]
           },
           "delveClears": {},
@@ -55,7 +55,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -131,9 +131,15 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         }
       ]
@@ -142,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "9b0a1a65",
+      "state": "a3091802",
       "events": "5dadceb3",
       "rng": {
         "draws": 9,
@@ -153,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "822777f8",
+      "state": "5ee8e221",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -164,7 +170,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "e8d732ad",
+      "state": "3f945613",
       "events": "e50ef01c",
       "rng": {
         "draws": 102,
@@ -175,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "2c2268e6",
+      "state": "27049172",
       "events": "741638a5",
       "rng": {
         "draws": 198,
@@ -186,8 +192,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "9468ed3f",
-      "events": "2a7fb7e9",
+      "state": "3b3184db",
+      "events": "c9f4edf0",
       "rng": {
         "draws": 312,
         "digest": "2ffd1eb8"
@@ -197,22 +203,22 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "42f8e0b4",
+      "state": "2f8c26d4",
       "events": "741638a5",
       "rng": {
-        "draws": 409,
-        "digest": "3af911a8"
+        "draws": 411,
+        "digest": "7951e481"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "42f8e0b4",
+      "state": "2f8c26d4",
       "events": "741638a5",
       "rng": {
-        "draws": 409,
-        "digest": "3af911a8"
+        "draws": 411,
+        "digest": "7951e481"
       },
       "label": "final",
       "players": [
@@ -231,21 +237,21 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 4,
+            "damageDealt": 5,
             "damageTaken": 35
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 4
+              "damageDealt": 5
             },
             "dungeonClears": {},
             "itemsDiscovered": [
               "baked_bread",
               "footpad_jerkin",
-              "rusty_hatchet",
-              "spring_water"
+              "spring_water",
+              "worn_shortbow"
             ],
             "visited": [
               "poi:eastbrook_vale:eastbrook"
@@ -270,7 +276,7 @@
           "entityId": 415,
           "equipment": {
             "chest": "footpad_jerkin",
-            "mainhand": "rusty_hatchet"
+            "mainhand": "worn_shortbow"
           },
           "equipmentInstance": {},
           "gatheringProficiency": {},
@@ -299,7 +305,7 @@
           "aiState": "idle",
           "attackPower": 1,
           "autoAttack": true,
-          "combatTimer": 1.35,
+          "combatTimer": 1.15,
           "comboUntil": -1,
           "critChance": 0.013333,
           "detonateTimer": "Infinity",
@@ -348,13 +354,19 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.9,
+          "swingTimer": 1.2,
           "targetId": 417,
           "templateId": "archer",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2.2
+            "max": 9,
+            "min": 5,
+            "ranged": {
+              "maxRange": 35,
+              "minRange": 8
+            },
+            "speed": 2.3,
+            "weaponLevel": 1,
+            "weaponType": "bow"
           }
         },
         {
@@ -411,7 +423,7 @@
         {
           "aggroTargetId": 416,
           "aiState": "attack",
-          "combatTimer": 1.35,
+          "combatTimer": 1.15,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -422,7 +434,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 49947,
+          "hp": 49946,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -463,7 +475,7 @@
           "threat": [
             [
               415,
-              4
+              5
             ],
             [
               416,

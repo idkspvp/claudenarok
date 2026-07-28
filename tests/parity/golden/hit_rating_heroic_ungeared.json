@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "ec4da942",
+      "state": "16695a67",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -130,7 +130,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         }
       ]
@@ -139,7 +144,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "aacb3941",
+      "state": "ecd19fee",
       "events": "eeb13566",
       "rng": {
         "draws": 4,
@@ -150,7 +155,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "c2ea07c5",
+      "state": "9fd14d1a",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -161,7 +166,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "a2d4bcb0",
+      "state": "ecff8321",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -172,7 +177,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "3f67dbbd",
+      "state": "63de2e06",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -183,7 +188,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "140e09f9",
+      "state": "797503be",
       "events": "292e4e1b",
       "rng": {
         "draws": 50,
@@ -194,7 +199,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "7986df61",
+      "state": "8abb3b66",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -205,7 +210,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "6eb920f4",
+      "state": "ff7732d5",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -216,7 +221,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "d9b20dde",
+      "state": "959a489b",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -227,7 +232,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "20f3965b",
+      "state": "ce46a878",
       "events": "550eac3f",
       "rng": {
         "draws": 248,
@@ -238,7 +243,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "a194052e",
+      "state": "b0e78ff7",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -249,7 +254,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "53f3bed7",
+      "state": "b46b5194",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -260,7 +265,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "238cabec",
+      "state": "34d0d335",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -271,7 +276,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "238cabec",
+      "state": "34d0d335",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -426,7 +431,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
@@ -509,7 +519,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "238cabec",
+      "state": "34d0d335",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -664,7 +674,12 @@
           "weapon": {
             "max": 6,
             "min": 3,
-            "speed": 2.9
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.8
           }
         },
         {
