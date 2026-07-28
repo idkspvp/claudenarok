@@ -1,0 +1,463 @@
+{
+ "source": "SpiritVale Discord — \"Advanced Classes\" (dev roadmap post)",
+ "sourceUrl": "https://discord.com/channels/1257586742865956875/1415295402491772938/1417394343857225768",
+ "asOf": "2026-10",
+ "voteUrl": "https://discord.com/channels/1257586742865956875/1375358868745355304/1426266297506992303",
+ "disclaimer": "Rough plan for upcoming advanced classes. There will probably be changes along the way though!",
+ "generatedAt": "2026-07-28",
+ "classCount": 14,
+ "inGameFiles": 9,
+ "classes": {
+  "Alchemist": {
+   "gameId": "Alchemist",
+   "slug": "alchemist",
+   "displayName": "Alchemist",
+   "parent": "Summoner",
+   "status": "announced",
+   "inGameFiles": false,
+   "description": "",
+   "maxJobLevel": 0,
+   "master": null,
+   "card": {
+    "dmg": "Magic/Hybrid",
+    "attrs": [
+     "INT",
+     "VIT",
+     "DEX"
+    ],
+    "weapons": [
+     "Staff",
+     "Book?",
+     "Axe?"
+    ],
+    "themes": [
+     "Homunculus: One strong summon with skill tree and controllable skills",
+     "Potions and Bombs?"
+    ],
+    "notes": [
+     "Not sure if it’ll step on Nightshade and Gunslinger"
+    ],
+    "revised": true
+   }
+  },
+  "Assassin": {
+   "gameId": "Assassin",
+   "slug": "assassin",
+   "displayName": "Assassin",
+   "parent": "Rogue",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A relentless dual wielder who uses speed and poisons to take down enemies.",
+   "maxJobLevel": 70,
+   "master": {
+    "zone": "Swamp Wilderness",
+    "slug": "swamp-wilderness"
+   },
+   "card": {
+    "dmg": "Melee",
+    "attrs": [
+     "AGI",
+     "LUK",
+     "STR"
+    ],
+    "weapons": [
+     "Twinblade",
+     "Dagger",
+     "Dual Wield"
+    ],
+    "themes": [
+     "Crit",
+     "Auto attacks/Skill Spam"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "BladeMaster": {
+   "gameId": "BladeMaster",
+   "slug": "blade-master",
+   "displayName": "Blade Master",
+   "parent": "Warrior",
+   "status": "announced",
+   "inGameFiles": false,
+   "description": "",
+   "maxJobLevel": 0,
+   "master": null,
+   "card": {
+    "dmg": "Melee",
+    "attrs": [
+     "STR",
+     "LUK",
+     "AGI"
+    ],
+    "weapons": [
+     "Sword",
+     "Twohanded"
+    ],
+    "themes": [
+     "Crits",
+     "Samurai style"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Chronomancer": {
+   "gameId": "Chronomancer",
+   "slug": "chronomancer",
+   "displayName": "Chronomancer",
+   "parent": "Mage",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A peerless mage who manipulates the fabric of time, providing allies with precise utility and control.",
+   "maxJobLevel": 70,
+   "master": null,
+   "card": {
+    "dmg": "Magic",
+    "attrs": [
+     "INT",
+     "AGI",
+     "DEX"
+    ],
+    "weapons": [
+     "Staff"
+    ],
+    "themes": [
+     "Cooldown reduction",
+     "Cast speed",
+     "Move speed",
+     "Time freeze",
+     "Teleport",
+     "Warp"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "DragonKnight": {
+   "gameId": "DragonKnight",
+   "slug": "dragon-knight",
+   "displayName": "Dragon Knight",
+   "parent": "Knight",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A draconic bruiser who channels the power of a dragon, focusing that energy through spears to fell foes with fire.",
+   "maxJobLevel": 70,
+   "master": {
+    "zone": "Crystal Cave",
+    "slug": "crystal-cave"
+   },
+   "card": {
+    "dmg": "Melee",
+    "attrs": [
+     "STR",
+     "VIT",
+     "AGI",
+     "DEX"
+    ],
+    "weapons": [
+     "1H/2H Spear"
+    ],
+    "themes": [
+     "Dragon Transformations",
+     "Fire/Water/Wind",
+     "Dragoon style"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Druid": {
+   "gameId": "Druid",
+   "slug": "druid",
+   "displayName": "Druid",
+   "parent": "Summoner",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A peaceful naturalist who provides healing succor for allies while repelling foes with earth magic.",
+   "maxJobLevel": 70,
+   "master": {
+    "zone": "Fairy Glen",
+    "slug": "fairy-glen"
+   },
+   "card": {
+    "dmg": "Magic",
+    "attrs": [
+     "INT",
+     "VIT",
+     "DEX"
+    ],
+    "weapons": [
+     "Staff"
+    ],
+    "themes": [
+     "Mana Support",
+     "Dual Bonds",
+     "Buff Totems",
+     "Fairy and Tree summons",
+     "Wind/Earth/Fire"
+    ],
+    "notes": [
+     "Shaman merged to this"
+    ],
+    "revised": true
+   }
+  },
+  "Jester": {
+   "gameId": "Jester",
+   "slug": "jester",
+   "displayName": "Jester",
+   "parent": "Scout",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A whimsical performer who empowers allies with lively songs while confounding enemies with music and card tricks.",
+   "maxJobLevel": 70,
+   "master": null,
+   "card": {
+    "dmg": "Ranged",
+    "attrs": [
+     "DEX",
+     "INT",
+     "VIT"
+    ],
+    "weapons": [
+     "Instrument",
+     "Bow"
+    ],
+    "themes": [
+     "Buffs",
+     "Control",
+     "Card tricks"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Mechanist": {
+   "gameId": "Mechanist",
+   "slug": "mechanist",
+   "displayName": "Mechanist",
+   "parent": "Warrior",
+   "status": "announced",
+   "inGameFiles": false,
+   "description": "",
+   "maxJobLevel": 0,
+   "master": null,
+   "card": {
+    "dmg": "Melee",
+    "attrs": [
+     "STR",
+     "VIT",
+     "AGI"
+    ],
+    "weapons": [
+     "Axe",
+     "Mace"
+    ],
+    "themes": [
+     "Mechs",
+     "Turrets",
+     "AA mode",
+     "Blacksmith style"
+    ],
+    "notes": [],
+    "revised": true
+   }
+  },
+  "Monk": {
+   "gameId": "Monk",
+   "slug": "monk",
+   "displayName": "Monk",
+   "parent": "Acolyte",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A spiritual striker who assails enemies with physical combos while healing allies.",
+   "maxJobLevel": 70,
+   "master": null,
+   "card": {
+    "dmg": "Hybrid",
+    "attrs": [
+     "STR",
+     "INT",
+     "DEX",
+     "AGI"
+    ],
+    "weapons": [
+     "Unarmed/Fist",
+     "Staff"
+    ],
+    "themes": [
+     "Magic punches",
+     "Energy blast",
+     "Out of body",
+     "Teleport"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Nightshade": {
+   "gameId": "Nightshade",
+   "slug": "nightshade",
+   "displayName": "Nightshade",
+   "parent": "Rogue",
+   "status": "announced",
+   "inGameFiles": false,
+   "description": "",
+   "maxJobLevel": 0,
+   "master": null,
+   "card": {
+    "dmg": "Melee",
+    "attrs": [
+     "AGI",
+     "STR",
+     "VIT"
+    ],
+    "weapons": [
+     "Dagger"
+    ],
+    "themes": [
+     "Damage over time",
+     "Debuffs",
+     "Poison scaling",
+     "AA"
+    ],
+    "notes": [],
+    "revised": true
+   }
+  },
+  "Ranger": {
+   "gameId": "Ranger",
+   "slug": "ranger",
+   "displayName": "Ranger",
+   "parent": "Scout",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A master tracker who picks off enemies with critical shots while commanding traps and beast companions in battle.",
+   "maxJobLevel": 70,
+   "master": null,
+   "card": {
+    "dmg": "Ranged",
+    "attrs": [
+     "DEX",
+     "AGI",
+     "LUK"
+    ],
+    "weapons": [
+     "Bow"
+    ],
+    "themes": [
+     "Crits",
+     "Traps/Control",
+     "Falcon/Bear summon"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Revenant": {
+   "gameId": "Revenant",
+   "slug": "revenant",
+   "displayName": "Revenant",
+   "parent": "Knight",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A bloodthirsty warrior who sacrifices their own life for power while delivering dark, high-risk attacks.",
+   "maxJobLevel": 70,
+   "master": {
+    "zone": "Forgotten Depths 2",
+    "slug": "forgotten-depths-2"
+   },
+   "card": {
+    "dmg": "Hybrid",
+    "attrs": [
+     "STR",
+     "VIT",
+     "INT"
+    ],
+    "weapons": [
+     "2H Sword",
+     "Scythe"
+    ],
+    "themes": [
+     "Leech",
+     "Cold/Shadow Damage",
+     "Uses life as mana",
+     "Drain tank",
+     "Dark Knight style"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Spellblade": {
+   "gameId": "Spellblade",
+   "slug": "spellblade",
+   "displayName": "Spellblade",
+   "parent": "Mage",
+   "status": "announced",
+   "inGameFiles": false,
+   "description": "",
+   "maxJobLevel": 0,
+   "master": null,
+   "card": {
+    "dmg": "Hybrid",
+    "attrs": [
+     "INT",
+     "LUK",
+     "AGI"
+    ],
+    "weapons": [
+     "Sword",
+     "Dagger"
+    ],
+    "themes": [
+     "Crits",
+     "Spell crit",
+     "Hybrid scaling melee attacks",
+     "Endows"
+    ],
+    "notes": [],
+    "revised": false
+   }
+  },
+  "Warlock": {
+   "gameId": "Warlock",
+   "slug": "warlock",
+   "displayName": "Warlock",
+   "parent": "Acolyte",
+   "status": "announced",
+   "inGameFiles": true,
+   "description": "A cursed spellcaster who afflicts enemies with hexes and drains their life.",
+   "maxJobLevel": 70,
+   "master": {
+    "zone": "Demon's Maw",
+    "slug": "demon-s-maw"
+   },
+   "card": {
+    "dmg": "Hybrid",
+    "attrs": [
+     "INT",
+     "VIT",
+     "STR"
+    ],
+    "weapons": [
+     "Staff",
+     "Scythe"
+    ],
+    "themes": [
+     "Spell Leech",
+     "Shadow Damage",
+     "Scythe Mode",
+     "Curses",
+     "Immolation",
+     "Demonic Summon",
+     "Linker",
+     "Shadow priest style"
+    ],
+    "notes": [],
+    "revised": true
+   }
+  }
+ }
+}

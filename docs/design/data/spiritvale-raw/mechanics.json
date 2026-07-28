@@ -1,0 +1,2177 @@
+{
+ "_generated": "node dev/build-mechanics.mjs (spiritvale-build); DO NOT hand-edit",
+ "generatedAt": "2026-07-26",
+ "source": {
+  "formulas": "GameAssembly.dll method bodies via dev/il2cpp/extract_formulas.py",
+  "archetypes": "ArchetypeConfig export via dev/extract_archetypes.py",
+  "elementMatrix": "AUTHORED (retail Formula$$GetElementalMultiplier is a thunk — unscannable); demo-era chart + 0.30.0 Ghost",
+  "statTypes": "StatType enum from Assembly-CSharp (dev/il2cpp-enums.json)",
+  "statuses": "game skill/status configs via dev/extract_skills.mjs (wiki-data/skills-combat.json)",
+  "expCurve": "GameServerConfig.asset::ExpRequirement (engine, int32 LE); committed home simulator.html EXP_REQ",
+  "levelCap": "GameConstants.MaxBaseLevel (dump.cs)",
+  "essence": "EssenceType + PlayerSave.UseEssence / Formula.*PotentialCost (GameAssembly.dll) via dev/il2cpp/disasm_method.py"
+ },
+ "game": {
+  "name": "SpiritVale",
+  "appid": "3767850",
+  "build": "24274182",
+  "label": "0.30.0 Early Access",
+  "dataBuild": "24221798",
+  "source": "artifacts.json (DLL outside steamapps)"
+ },
+ "engineMethods": 65,
+ "formulas": [
+  {
+   "group": "Resources",
+   "label": "Max HP",
+   "expr": "max( 1, round( ((Tri(L)*Arch% + 10*Lv + 200) * (1 + VIT/100) + flatHP) * (1 + HP%) ) )",
+   "note": "L = clamp(Lv, 1, 130); Tri(n) = n*(n+1)/2. Arch% is the class HealthMult (see Archetypes). Engine base is 200 + 10*Lv. This is the single entry point for every entity: a monster that is not a summon is handed straight to the monster HP rule instead, so none of the above applies to it. One state flag rewrites the input — while it is set, the level used here is forced to 100 regardless of your real level (and the same flag quarters HP regen), which is how a level-normalised mode is implemented.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$MaxHealth",
+    "constants": [
+     200,
+     1,
+     0.01,
+     100
+    ],
+    "ints": [
+     130
+    ],
+    "statReads": [
+     "Hp",
+     "HpMult"
+    ],
+    "calls": [
+     "Get",
+     "IsMonsterNotSummon",
+     "SumOfNumbers",
+     "get_BaseArchetype",
+     "GetArchetype",
+     "Get",
+     "Get",
+     "Round",
+     "MonsterMaxHealth"
+    ],
+    "fingerprint": "3242aa0afd334fe4"
+   }
+  },
+  {
+   "group": "Resources",
+   "label": "Max MP",
+   "expr": "[ (45 + 5*Lv) * (1 + INT/100) + flatMP ] * (1 + MP%)",
+   "note": "",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$MaxMana",
+    "constants": [
+     0.01,
+     1,
+     45,
+     100,
+     1
+    ],
+    "ints": [],
+    "statReads": [
+     "Int",
+     "Mp",
+     "MpMult"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get",
+     "Round"
+    ],
+    "fingerprint": "305f507576a0a69c"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "ATK (melee)",
+   "expr": "( Lv/4 + STR*1.5 + DEX/5 + LUK/5 + ATKflat*(1 + DEX/200) ) * (1 + FLOOR(STR/10)/100) * (1 + ATK%)",
+   "note": "ATKflat = weapon ATK + mastery + flat gear ATK. AtkPerStr gear adds AtkPerStr*STR into the attribute term. A two-handed weapon with no off-hand multiplies by the TwohandedStanceBonus (x1.25). Dual wield: EVERY hit computes this formula with its OWN weapon’s ATK (Formula.AttackOffhand runs GetAttack with the offhand WeaponState) — the sheet shows the mainhand value; each swing lands two packets.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetAttack",
+    "constants": [
+     100,
+     1,
+     1.25,
+     200,
+     0.25,
+     1,
+     200,
+     0.25,
+     15,
+     1.5
+    ],
+    "ints": [
+     3,
+     4
+    ],
+    "statReads": [
+     "TwohandedStanceBonus",
+     "FreeCastAtk",
+     "Atk",
+     "AtkMult",
+     "TotalAtk"
+    ],
+    "calls": [
+     "IsMonsterNotSummon",
+     "IsRangedWeapon",
+     "GetAttackScaling",
+     "ToString",
+     "GetModifier",
+     "get_Data",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "GetAttackScaling",
+     "SumOfNumbers",
+     "Get",
+     "Round"
+    ],
+    "fingerprint": "a09d4a94c9daec57"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "ATK (ranged)",
+   "expr": "( Lv/4 + DEX + STR/5 + LUK/5 + ATKflat*(1 + DEX/200) ) * (1 + FLOOR(DEX/10)/100) * (1 + ATK%)",
+   "note": "Selected when IsRangedWeapon (Bow, Pistol, Rifle, Shotgun, Gatling, Launcher): DEX drives it and the breakpoint keys off DEX.",
+   "unit": "",
+   "variant": "ranged",
+   "engine": {
+    "method": "Formula$$GetAttack",
+    "constants": [
+     100,
+     1,
+     1.25,
+     200,
+     0.25,
+     1,
+     200,
+     0.25,
+     15,
+     1.5
+    ],
+    "ints": [
+     3,
+     4
+    ],
+    "statReads": [
+     "TwohandedStanceBonus",
+     "FreeCastAtk",
+     "Atk",
+     "AtkMult",
+     "TotalAtk"
+    ],
+    "calls": [
+     "IsMonsterNotSummon",
+     "IsRangedWeapon",
+     "GetAttackScaling",
+     "ToString",
+     "GetModifier",
+     "get_Data",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "GetAttackScaling",
+     "SumOfNumbers",
+     "Get",
+     "Round"
+    ],
+    "fingerprint": "a09d4a94c9daec57"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "MATK",
+   "expr": "( Lv/4 + INT*1.5 + DEX/5 + LUK/5 + MatkPerStr*STR + MATKflat*(1 + INT/200) ) * (1 + FLOOR(INT/10)/100) * (1 + MATK%)",
+   "note": "Same shape as ATK: the attribute term also carries LUK/5 and MatkPerStr*STR (every mace grants MatkPerStr 1), and the breakpoint mult keys off INT/10 (GetMagicAttackScaling disasm — issue #84 fixed the earlier FLOOR(INT/1000) transcription). Stance multiplies like ATK.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$MagicAttack",
+    "constants": [
+     100,
+     1,
+     1.25,
+     200,
+     0.25,
+     1,
+     200,
+     0.25,
+     15,
+     0.75
+    ],
+    "ints": [
+     3,
+     4
+    ],
+    "statReads": [
+     "TwohandedStanceBonus",
+     "FreeCastAtk",
+     "Matk",
+     "MatkMult",
+     "TotalMatk"
+    ],
+    "calls": [
+     "IsMonsterNotSummon",
+     "GetMagicAttackScaling",
+     "ToString",
+     "GetModifier",
+     "get_Data",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "GetMagicAttackScaling",
+     "SumOfNumbers",
+     "Get",
+     "Round",
+     "Get"
+    ],
+    "fingerprint": "801d5cd854737715"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "Status damage (per tick)",
+   "expr": "(Lv + STR + AGI + INT) / 10  [ * stacks ]",
+   "note": "Element-typed damage-over-time coefficient.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetStatusDamage",
+    "constants": [
+     10
+    ],
+    "ints": [],
+    "statReads": [
+     "Agi",
+     "Int"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "2af656fac23c4f77"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "Multistrike",
+   "expr": "each auto-attack packet * (1 + Multistrike / 100)",
+   "note": "Multistrike is the DoubleAttack stat. On every auto-attack, CombatComponent.ApplyHit scales the outgoing packet by (1 + DoubleAttack/100) — at 100% each swing lands double. It is a flat multiplier here, not a random proc. Weapon-borne DoubleAttack rides the WeaponState, so a dual-wield off-hand multistrikes on its own value.",
+   "unit": "%",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$DoubleAttack",
+    "constants": [],
+    "ints": [],
+    "statReads": [
+     "DoubleAttack"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "65fbe684e746a0b8"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "Auto-attack chain",
+   "expr": "arcs to +Chain nearby enemies (each a full fresh hit, within 8m)",
+   "note": "Chain = the number of EXTRA targets an auto-attack jumps to. Each jump re-runs the whole hit pipeline against the next enemy in range (AttackChainRange = 8m), so every chained target takes its own independent roll (own crit/hit). Weapon-borne Chain rides the WeaponState.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$AttackChain",
+    "constants": [],
+    "ints": [],
+    "statReads": [
+     "Chain"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "9a88675fb229dd69"
+   }
+  },
+  {
+   "group": "Offense",
+   "label": "Auto-attack splash",
+   "expr": "same packet dealt to every other enemy within Splash metres",
+   "note": "Splash is a radius. When > 0, each auto-attack reuses its already-rolled Damage against every other enemy inside Splash metres (no re-roll) — distinct from Chain, which rolls a fresh hit per jump.",
+   "unit": "m",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$AttackSplash",
+    "constants": [],
+    "ints": [],
+    "statReads": [
+     "Splash"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "65fbe684e746a0b8"
+   }
+  },
+  {
+   "group": "Attack & cast speed",
+   "label": "ASPD",
+   "expr": "round( 200 - 50*BAD*(1 - (AGI + FLOOR(DEX/4))/250)/(1 + ASPD%) + 0.5*FLOOR(AGI/10) + AtkSpdFlat )",
+   "note": "BAD = weapon base attack delay (config-driven); dual wield uses (BAD1 + BAD2)*0.8. The engine also divides BAD by Formula.AttackSpeedRanks[SpeedRank], but the player-effective factor is 1.0 (validated vs a live sheet ASPD 173 + a 59s swing-timer parse) — monsters ride their archetype rank. SetAtkSpd (Launcher Boost) replaces the whole computed value. Capped at the ASPD cap.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$AttackSpeed",
+    "constants": [
+     1,
+     100,
+     10,
+     0.5,
+     250,
+     50,
+     200,
+     0.8
+    ],
+    "ints": [
+     4
+    ],
+    "statReads": [
+     "AtkSpd",
+     "Agi",
+     "Dex",
+     "AtkSpdLimit",
+     219,
+     "AtkSpdFlat"
+    ],
+    "calls": [
+     "ElementAtOrDefault<float>",
+     "IsMonsterNotSummon",
+     "get_Data",
+     "get_Data",
+     "get_Data",
+     "Get",
+     "IsMonsterNotSummon",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Round"
+    ],
+    "fingerprint": "97d5df57b5d0d156"
+   }
+  },
+  {
+   "group": "Attack & cast speed",
+   "label": "ASPD cap",
+   "expr": "min( 193, 185 + FLOOR(AGI/30) + AtkSpdLimit )",
+   "note": "",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$AttackSpeedLimit",
+    "constants": [],
+    "ints": [],
+    "statReads": [
+     "Agi",
+     "AtkSpdLimit"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "58e10ff5f81899c1"
+   }
+  },
+  {
+   "group": "Attack & cast speed",
+   "label": "Attack delay",
+   "expr": "(200 - ASPD) / 50",
+   "note": "Seconds between auto-attacks.",
+   "unit": "s",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$AttackDelay",
+    "constants": [
+     200,
+     50
+    ],
+    "ints": [],
+    "statReads": [],
+    "calls": [
+     "AttackSpeed"
+    ],
+    "fingerprint": "edb5bcbb226434d3"
+   }
+  },
+  {
+   "group": "Attack & cast speed",
+   "label": "Cast speed",
+   "expr": "200 - 50*(1 - (DEX + INT/2)/400)/(1 + CastSpd%) + 0.5*(FLOOR(DEX/10) + CastTimeReduction)",
+   "note": "CastTimeReduction is a flat-point stat (1 point = 1% cast-time reduction); its only current source is the CastReady buff (90, from the Spellshot grimoire).",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$CastSpeed",
+    "constants": [
+     10,
+     0.5,
+     0.5,
+     1,
+     100,
+     200,
+     100,
+     0.9,
+     50,
+     400,
+     50
+    ],
+    "ints": [],
+    "statReads": [
+     "Dex",
+     "Int",
+     "CastTimeReduction",
+     "CastSpd",
+     "CastTimeReductionLimit"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "6ce75b7efc478998"
+   }
+  },
+  {
+   "group": "Attack & cast speed",
+   "label": "Cast-time reduction cap",
+   "expr": "min( 90% + CastTimeReductionLimit, CTR )",
+   "note": "CTR = round((1 - (200 - CastSpeed)/50) * 100). Cast-time multiplier = (100 - CTR)/100.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$MaxCastTimeReduction",
+    "constants": [
+     100,
+     0.9
+    ],
+    "ints": [],
+    "statReads": [
+     "CastTimeReductionLimit"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "ce88c6478f47d78b"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Crit rate",
+   "expr": "( FLOOR(LUK/3) + FLOOR(LUK/10) + flatCrit ) * (1 + Crit%)",
+   "note": "Uncapped; effective crit vs a target is reduced by its Crit Defence.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$CriticalChance",
+    "constants": [
+     3,
+     10,
+     100,
+     1
+    ],
+    "ints": [],
+    "statReads": [
+     "Luk",
+     "CritMult",
+     "Crit"
+    ],
+    "calls": [
+     "IsMonsterNotSummon",
+     "Get",
+     "Get",
+     "Get",
+     "Round",
+     "Get"
+    ],
+    "fingerprint": "fa3525da6eae36c4"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Crit damage",
+   "expr": "120 + FLOOR(LUK/5) + CritDamage%",
+   "note": "",
+   "unit": "%",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$CriticalDamage",
+    "constants": [
+     5
+    ],
+    "ints": [],
+    "statReads": [
+     "Luk",
+     "CritDamage"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "82cfe7cd96681df9"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Crit defence",
+   "expr": "FLOOR(LUK/5) + CritDef",
+   "note": "",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$CriticalDefence",
+    "constants": [],
+    "ints": [],
+    "statReads": [
+     "Luk",
+     "CritDef"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "e59d44948ab83def"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Hit",
+   "expr": "round( (Lv + 2*DEX + LUK/5 + flatHit + 25) * (1 + Hit%) )",
+   "note": "DEX is worth 2 Hit per point — by far the strongest accuracy stat — and LUK adds 1 per 5 points (integer division, so 4 LUK adds nothing). Everyone starts from a flat +25. While the level-normalising state is active the level term is forced to 100 regardless of your real level, the same way it rewrites Max HP.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$Hit",
+    "constants": [
+     100,
+     1,
+     100,
+     1
+    ],
+    "ints": [],
+    "statReads": [
+     "Dex",
+     "Hit",
+     "HitMult",
+     "Luk"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "b73a54c31d753e5a"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Flee",
+   "expr": "( Lv + FLOOR(AGI/2) + flatFlee ) * (1 + Flee%)",
+   "note": "Flee penalty: -10% per attacker beyond the 4th (GetFleePenaltyCount).",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$Flee",
+    "constants": [
+     100,
+     1,
+     10,
+     1,
+     0.1,
+     100
+    ],
+    "ints": [],
+    "statReads": [
+     "NoFlee",
+     "Agi",
+     "Flee",
+     "FleeMult",
+     "Luk"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Round",
+     "Get",
+     "Get",
+     "Get",
+     "GetFleePenaltyCount",
+     "Get"
+    ],
+    "fingerprint": "e299384f9e071faa"
+   }
+  },
+  {
+   "group": "Crit & accuracy",
+   "label": "Perfect dodge",
+   "expr": "clamp( 0, 100, PerfectDodge )",
+   "note": "Engine reads only the PerfectDodge stat, clamped 0-100.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$PerfectDodge",
+    "constants": [
+     10
+    ],
+    "ints": [
+     100
+    ],
+    "statReads": [
+     "PerfectDodge",
+     "Luk"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "555fe70083129230"
+   }
+  },
+  {
+   "group": "Defense",
+   "label": "DEF",
+   "expr": "gearDEF * (1 + DEF%)",
+   "note": "Engine has no VIT term in DEF.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$Def",
+    "constants": [
+     100,
+     1
+    ],
+    "ints": [],
+    "statReads": [
+     "Def",
+     "DefMult"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "b680c55e6b68ec9d"
+   }
+  },
+  {
+   "group": "Defense",
+   "label": "MDEF",
+   "expr": "gearMDEF * (1 + MDEF%)",
+   "note": "Engine has no VIT term in MDEF.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$MDef",
+    "constants": [
+     100,
+     1
+    ],
+    "ints": [],
+    "statReads": [
+     "Mdef",
+     "MdefMult"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "b680c55e6b68ec9d"
+   }
+  },
+  {
+   "group": "Defense",
+   "label": "Damage taken vs DEF",
+   "expr": "damageTaken = 100 / (DEF + 100)   (mitigation = DEF / (DEF + 100))",
+   "note": "Engine constant: 100.",
+   "unit": "x",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$DamageReduction",
+    "constants": [
+     100
+    ],
+    "ints": [],
+    "statReads": [],
+    "calls": [],
+    "fingerprint": "cf1bda85c5259952"
+   }
+  },
+  {
+   "group": "Defense",
+   "label": "Block",
+   "expr": "if NoBlock: 0   ·   else if Block >= 100: 100   ·   else: min(75, Block + shield Block)",
+   "note": "Block chance is capped at 75%. The one exception is a hard threshold: the moment your base Block stat reaches 100 it snaps to a guaranteed 100% — nothing lands between 75% and 100%. A shield’s block adds into the 75% pool but can’t push past it unless that 100 threshold is met. A NoBlock effect forces 0%.",
+   "unit": "%",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$BlockRate",
+    "constants": [],
+    "ints": [
+     17,
+     75,
+     100
+    ],
+    "statReads": [
+     "NoBlock",
+     "Block",
+     "BlockShield"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "4f52a6c7d6c35e41"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "HP regen",
+   "expr": "round( (MaxHP/200 + VIT/5 + flatRegen) * (1 + VIT/200 + HpRegen%/2) + MaxHP * MaxHpRegen% )",
+   "note": "Regen is quartered (×0.25) while the level-normalising state is active; otherwise the expression above is the whole story. HpRegen% here is the HpRegenMult stat, and it enters HALVED because the engine averages (1 + VIT/100) with (1 + HpRegenMult/100). Monsters use a different rule: round(MaxHP * MaxHpRegen/1000).",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$HealthRegen",
+    "constants": [
+     100,
+     1,
+     200,
+     5,
+     0.01,
+     0.5,
+     0.25,
+     1000
+    ],
+    "ints": [],
+    "statReads": [
+     "NoRegenHp",
+     "Vit",
+     "HpRegen",
+     "HpRegenMax",
+     "HpRegenMult"
+    ],
+    "calls": [
+     "IsMonsterNotSummon",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "MaxHealth",
+     "Round",
+     "Get",
+     "MaxHealth",
+     "Round"
+    ],
+    "fingerprint": "9dd7db268252a489"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "MP regen",
+   "expr": "round( ( (MaxMP/100 + INT/5 + flatRegen) * (1 + INT/200 + MpRegen%/2) + MaxMP * MaxMpRegen% ) * (1 + MpRegen%) )",
+   "note": "MpRegen% here is the MpRegenMult stat, and it applies TWICE: halved inside the averaged factor, then again in full on the finished total — so it is worth appreciably more than the HP-side equivalent. Note the MaxMP term is /100 where the HP side is /200.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$ManaRegen",
+    "constants": [
+     100,
+     100,
+     1,
+     100,
+     0.01,
+     5,
+     1,
+     0.5
+    ],
+    "ints": [],
+    "statReads": [
+     "NoRegenMp",
+     "Int",
+     "MpRegen",
+     "MpRegenMax",
+     "MpRegenMult"
+    ],
+    "calls": [
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "Get",
+     "MaxMana",
+     "Round"
+    ],
+    "fingerprint": "1b0b1a7e94292d40"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Healing",
+   "expr": "(Lv + INT + VIT) * 2.5 * Healing%",
+   "note": "",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetHealing",
+    "constants": [
+     2.5
+    ],
+    "ints": [],
+    "statReads": [
+     "Int",
+     "Vit"
+    ],
+    "calls": [
+     "Get",
+     "Get"
+    ],
+    "fingerprint": "24e8de0edf52e109"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Siphon (HP)",
+   "expr": "Siphon HP × (Lv + VIT) / 50",
+   "note": "MP siphon uses INT in place of VIT (SiphonMpMult). Retail (build 24221798) rebalanced this vs the demo form (was (Lv+STR)/25): Formula$$SiphonMult reads VIT (HP) / INT (MP) via StatusComponent.Get and divides by 50. Lv is the character level (StatusComponent.Level); in PvP (CombatComponent.Pvp) it is pinned to a flat 100 so siphon is level-normalized.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$SiphonMult",
+    "constants": [
+     50
+    ],
+    "ints": [],
+    "statReads": [
+     "Vit"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "0074177a0e717e3f"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Siphon (MP)",
+   "expr": "Siphon MP × (Lv + INT) / 50",
+   "note": "The MP twin of HP siphon: each landed attack restores MP Siphon × (Lv + INT) / 50 MP (INT in place of VIT). Same PvP level-pin (Lv forced to 100). Formula$$SiphonMpMult mirrors SiphonMult — identical code shape, so the two share a disasm fingerprint.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$SiphonMpMult",
+    "constants": [
+     50
+    ],
+    "ints": [],
+    "statReads": [
+     "Int"
+    ],
+    "calls": [
+     "Get"
+    ],
+    "fingerprint": "0074177a0e717e3f"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Leech (life / mana steal)",
+   "expr": "HP banked/hit = round( damage × HP Leech/100 × 0.2 × (1 + Healing Received/100) )   ·   MP/hit = round( damage × Mana Leech/100 × 0.02 )",
+   "note": "Each landing hit banks HP/MP into a reserve that heals you over time — but the reserve pays out at MOST ~20% of your Max HP per second (and the MP equivalent), so once you are attacking fast enough that per-second ceiling, NOT the per-hit amount, is your real cap. The 0.2 factor means the Leech stat converts a FIFTH of its face value: 20 Leech on a 10,000 hit banks 10000×0.20×0.2 = 400 HP (× your Healing Received), and you would need ~5 such hits/sec to saturate the 20%-Max-HP ceiling. Only Melee/Magic/Ranged hits that connect steal — Status and True damage never do, and a Miss or Dodge banks nothing (a Blocked hit still does). At most 3 targets per attack contribute.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "CombatComponent$$ApplyLeech",
+    "constants": [
+     100,
+     0.2,
+     100,
+     0.02
+    ],
+    "ints": [
+     2,
+     3,
+     4
+    ],
+    "statReads": [
+     "Leech",
+     "LeechMp",
+     "SiphonHp",
+     "SiphonMp"
+    ],
+    "calls": [
+     "Contains",
+     "Add",
+     "Get",
+     "HealingReceived",
+     "Add",
+     "Get",
+     "Add",
+     "Get",
+     "SiphonMult",
+     "Add",
+     "Get",
+     "SiphonMpMult",
+     "Add"
+    ],
+    "fingerprint": "a3d60652400d8c4e"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Reflect damage",
+   "expr": "(Lv + DEF/2 + flatDEF/2 + ATK/2) * 4 * Reflect%",
+   "note": "Engine constants: 100, 0.5, 4.",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetReflectDamage",
+    "constants": [
+     100,
+     0.5,
+     4
+    ],
+    "ints": [],
+    "statReads": [
+     "ReflectDamage"
+    ],
+    "calls": [
+     "Get",
+     "Def",
+     "DefFlat",
+     "GetAttack",
+     "Round"
+    ],
+    "fingerprint": "d287de361b4b5db2"
+   }
+  },
+  {
+   "group": "Sustain",
+   "label": "Status resist",
+   "expr": "attribute * 0.66% per point (reduces both chance and duration)",
+   "note": "Per-status attribute mapping (STR: bleed/stagger, AGI: slow/freeze, VIT: stun/decay, INT: silence/burn, DEX: poison/blind, LUK: curse/weaken).",
+   "unit": "",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$StatusResist",
+    "constants": [
+     3,
+     100
+    ],
+    "ints": [
+     11,
+     100
+    ],
+    "statReads": [
+     "Luk"
+    ],
+    "calls": [
+     "get_Summoner",
+     "op_Inequality",
+     "IsMonsterNotSummon",
+     "Get",
+     "ToString",
+     "GetModifier",
+     "Round",
+     "ToString",
+     "GetModifier",
+     "get_Summoner",
+     "StatusResist"
+    ],
+    "fingerprint": "752aff5858e5bcc7"
+   }
+  },
+  {
+   "group": "Party & sharing",
+   "label": "Party EXP bonus",
+   "expr": "expMult = 1 + ScalingBonus * (N - 1) * 0.20",
+   "note": "N = valid party members credited with the kill; solo (N<=1) gets x1. PartyExpBonus=20% per extra member (Formula const), applied to the kill's EXP pool in MonsterController.OnDeath_S. Tight party: +20% / +40% / +60% for 2 / 3 / 4 members. The pool is then split: EvenShare = pool/N each; EachTake = by damage contribution.",
+   "unit": "x",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetPartyBonusScaling",
+    "constants": [
+     1,
+     0.05
+    ],
+    "ints": [
+     100
+    ],
+    "statReads": [],
+    "calls": [
+     ".ctor",
+     "Select<BulkMixedWriteOperation.BatchHelper.WriteRequestWithIndex, object>",
+     "Max",
+     "Min",
+     ".ctor",
+     ".ctor"
+    ],
+    "fingerprint": "95aaca30aa6348fb"
+   }
+  },
+  {
+   "group": "Party & sharing",
+   "label": "Party drop (coin) bonus",
+   "expr": "coinMult = 1 + ScalingBonus * (N - 1) * 0.10",
+   "note": "PartyDropBonus=10% per extra member (Formula const), applied to the coin pool in MonsterController.OnDeath_S. Same shape as the EXP bonus, half the rate.",
+   "unit": "x",
+   "variant": "drops",
+   "engine": {
+    "method": "Formula$$GetPartyBonusScaling",
+    "constants": [
+     1,
+     0.05
+    ],
+    "ints": [
+     100
+    ],
+    "statReads": [],
+    "calls": [
+     ".ctor",
+     "Select<BulkMixedWriteOperation.BatchHelper.WriteRequestWithIndex, object>",
+     "Max",
+     "Min",
+     ".ctor",
+     ".ctor"
+    ],
+    "fingerprint": "95aaca30aa6348fb"
+   }
+  },
+  {
+   "group": "Party & sharing",
+   "label": "Party level-gap scaling",
+   "expr": "ScalingBonus = clamp( 0, 1, 1 - 0.05 * clamp(0, 100, LevelGap - 30) )",
+   "note": "LevelGap = maxMemberLevel - minMemberLevel. The party bonus is full (x1) up to a 30-level spread, then loses 5% per extra level, reaching zero at a 50-level spread. Computed in Party.Calibrate; stored on Party.ScalingBonus.",
+   "unit": "",
+   "variant": "scaling",
+   "engine": {
+    "method": "Formula$$GetPartyBonusScaling",
+    "constants": [
+     1,
+     0.05
+    ],
+    "ints": [
+     100
+    ],
+    "statReads": [],
+    "calls": [
+     ".ctor",
+     "Select<BulkMixedWriteOperation.BatchHelper.WriteRequestWithIndex, object>",
+     "Max",
+     "Min",
+     ".ctor",
+     ".ctor"
+    ],
+    "fingerprint": "95aaca30aa6348fb"
+   }
+  },
+  {
+   "group": "Vendors",
+   "label": "Card removal cost",
+   "expr": "(cardsOnItem + 4) * 5000",
+   "note": "Coins the Cardweaver charges to strip EVERY card from one equip at once (you cannot remove just one). cardsOnItem = cards currently socketed. So 1 / 2 / 3 / 4 cards = 25,000 / 30,000 / 35,000 / 40,000 coins.",
+   "unit": "coins",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetRemoveCardCost",
+    "constants": [],
+    "ints": [
+     5000
+    ],
+    "statReads": [],
+    "calls": [],
+    "fingerprint": "f694289a50434421"
+   }
+  },
+  {
+   "group": "Vendors",
+   "label": "Gem removal cost",
+   "expr": "(gemsOnArtifact + 4) * 5000",
+   "note": "Coins charged to pull EVERY gem from one artifact at once; same shape as card removal. gemsOnArtifact = gems currently socketed.",
+   "unit": "coins",
+   "variant": "",
+   "engine": {
+    "method": "Formula$$GetRemoveGemCost",
+    "constants": [],
+    "ints": [
+     5000
+    ],
+    "statReads": [],
+    "calls": [],
+    "fingerprint": "f694289a50434421"
+   }
+  }
+ ],
+ "elementMatrix": {
+  "Neutral": {
+   "Poison": 0.75,
+   "Shadow": 0.75,
+   "Ghost": 0.75
+  },
+  "Poison": {
+   "Neutral": 1.25,
+   "Poison": 0.5,
+   "Undead": 0.75,
+   "Ghost": 0.75
+  },
+  "Shadow": {
+   "Neutral": 1.25,
+   "Shadow": 0.5,
+   "Holy": 1.25,
+   "Ghost": 1.25
+  },
+  "Holy": {
+   "Shadow": 1.25,
+   "Holy": 0.5,
+   "Undead": 1.25,
+   "Ghost": 0.75
+  },
+  "Fire": {
+   "Fire": 0.5,
+   "Water": 0.75,
+   "Earth": 1.25
+  },
+  "Water": {
+   "Fire": 1.25,
+   "Water": 0.5,
+   "Wind": 0.75
+  },
+  "Wind": {
+   "Water": 1.25,
+   "Wind": 0.5,
+   "Earth": 0.75
+  },
+  "Earth": {
+   "Fire": 0.75,
+   "Wind": 1.25,
+   "Earth": 0.5
+  },
+  "Undead": {
+   "Poison": 1.25,
+   "Holy": 0.75,
+   "Undead": 0.5,
+   "Ghost": 1.25
+  },
+  "Ghost": {
+   "Neutral": 1.25,
+   "Undead": 1.25,
+   "Ghost": 0.75,
+   "Shadow": 0.75
+  }
+ },
+ "elementNames": [
+  "Neutral",
+  "Poison",
+  "Shadow",
+  "Holy",
+  "Fire",
+  "Water",
+  "Wind",
+  "Earth",
+  "Undead",
+  "Ghost"
+ ],
+ "weapons": {
+  "dualWield": [
+   "Sword",
+   "Dagger",
+   "Axe",
+   "Pistol",
+   "Twinblade",
+   "Katar"
+  ],
+  "twoHand": [
+   "Bow",
+   "Scythe",
+   "Instrument",
+   "Rifle",
+   "Shotgun",
+   "Launcher",
+   "GatlingGun"
+  ],
+  "ranged": [
+   "Pistol",
+   "Bow",
+   "Rifle",
+   "Shotgun",
+   "Launcher",
+   "GatlingGun"
+  ],
+  "dualWieldMult": 0.8,
+  "bad": {
+   "Unarmed": 0.9,
+   "Dagger": 1,
+   "Twinblade": 1.2,
+   "Katar": 1,
+   "Sword": 1.1,
+   "Book": 1.1,
+   "Mace": 1.15,
+   "Instrument": 1.15,
+   "Spear": 1.2,
+   "Wand": 1.2,
+   "Scythe": 1.2,
+   "Pistol": 1.2,
+   "Axe": 1.3,
+   "Bow": 1.4,
+   "GatlingGun": 1.4,
+   "Rifle": 1.5,
+   "Shotgun": 2,
+   "Launcher": 2,
+   "Sword2H": 1.1,
+   "Mace2H": 1.15,
+   "Spear2H": 1.2,
+   "Wand2H": 1.2,
+   "Axe2H": 1.3
+  }
+ },
+ "archetypes": {
+  "Acolyte": {
+   "healthMult": 0.75,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 1,
+    "VIT": 9,
+    "AGI": 1,
+    "DEX": 9,
+    "INT": 12,
+    "LUK": 1
+   }
+  },
+  "Artificer": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Assassin": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Berserker": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Blacksmith": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Cardweaver": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Chronomancer": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Craftsman": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "DragonKnight": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Druid": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Gemsmith": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Gunslinger": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Jester": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Knight": {
+   "healthMult": 1,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 9,
+    "VIT": 12,
+    "AGI": 1,
+    "DEX": 9,
+    "INT": 1,
+    "LUK": 1
+   }
+  },
+  "Mage": {
+   "healthMult": 0.5,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 1,
+    "VIT": 1,
+    "AGI": 9,
+    "DEX": 9,
+    "INT": 12,
+    "LUK": 1
+   }
+  },
+  "Merchant": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Monk": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Necromancer": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Paladin": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Priest": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Ranger": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Revenant": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Rogue": {
+   "healthMult": 0.85,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 9,
+    "VIT": 1,
+    "AGI": 12,
+    "DEX": 9,
+    "INT": 1,
+    "LUK": 1
+   }
+  },
+  "Scout": {
+   "healthMult": 0.7,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 1,
+    "VIT": 1,
+    "AGI": 9,
+    "DEX": 12,
+    "INT": 9,
+    "LUK": 1
+   }
+  },
+  "Shinobi": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Stylist": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Summoner": {
+   "healthMult": 0.7,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 9,
+    "VIT": 9,
+    "AGI": 1,
+    "DEX": 1,
+    "INT": 12,
+    "LUK": 1
+   }
+  },
+  "Warlock": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Warrior": {
+   "healthMult": 1.3,
+   "maxJobLevel": 50,
+   "attributes": {
+    "STR": 12,
+    "VIT": 9,
+    "AGI": 9,
+    "DEX": 1,
+    "INT": 1,
+    "LUK": 1
+   }
+  },
+  "Weaver": {
+   "healthMult": 0.5,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  },
+  "Wizard": {
+   "healthMult": 1,
+   "maxJobLevel": 70,
+   "attributes": {
+    "STR": 0,
+    "VIT": 0,
+    "AGI": 0,
+    "DEX": 0,
+    "INT": 0,
+    "LUK": 0
+   }
+  }
+ },
+ "caps": [
+  [
+   "ASPD hard cap",
+   "193",
+   "Formula$$AttackSpeedLimit clamps to 193.",
+   "engine"
+  ],
+  [
+   "ASPD base",
+   "185 + FLOOR(AGI/30)",
+   "Soft cap before AtkSpdLimit bonuses (AttackSpeedLimit).",
+   "engine"
+  ],
+  [
+   "Cast-time reduction",
+   "90% (+ CastTimeReductionLimit)",
+   "Formula$$MaxCastTimeReduction.",
+   "engine"
+  ],
+  [
+   "Block",
+   "75% — or a flat 100%",
+   "Capped at 75%; a base Block stat of 100 is a hard threshold that snaps to a guaranteed 100% (no value lands in between). NoBlock forces 0%.",
+   "engine"
+  ],
+  [
+   "Perfect Dodge / Perfect Hit",
+   "100%",
+   "Formula$$PerfectDodge clamps to 100.",
+   "engine"
+  ],
+  [
+   "DEF / MDEF pierce",
+   "100%",
+   "Max armor penetration (community-sourced).",
+   "authored"
+  ],
+  [
+   "HP/MP Leech recovery",
+   "20% of Max HP / sec",
+   "The leech/siphon reserve (CombatComponent.ApplyLeech + LeechSystem) pays out at most ~20% of Max HP per second (and the MP equivalent) — an HP-based ceiling, not a share of damage. In-game tooltip corroborates (1961/s = 0.2 × 9805 Max HP). See the Leech formula for the per-hit banking rate.",
+   "engine"
+  ]
+ ],
+ "levelCap": 150,
+ "expCurve": [
+  40,
+  196,
+  500,
+  970,
+  1620,
+  2464,
+  3513,
+  4777,
+  6263,
+  7981,
+  10007,
+  12534,
+  15683,
+  19544,
+  24193,
+  29698,
+  36120,
+  43516,
+  51939,
+  61439,
+  72062,
+  83854,
+  96858,
+  111114,
+  126662,
+  143541,
+  161788,
+  181439,
+  202528,
+  225090,
+  249218,
+  275153,
+  303103,
+  333247,
+  365747,
+  400756,
+  438418,
+  478873,
+  522253,
+  568688,
+  618302,
+  671218,
+  727553,
+  787424,
+  850945,
+  918226,
+  989378,
+  1064507,
+  1143718,
+  1227117,
+  1314864,
+  1407330,
+  1504900,
+  1607946,
+  1716827,
+  1831894,
+  1953495,
+  2081968,
+  2217650,
+  2360872,
+  2511963,
+  2671247,
+  2839047,
+  3015681,
+  3201466,
+  3396716,
+  3601743,
+  3816857,
+  4042364,
+  4278572,
+  4525844,
+  4784816,
+  5056234,
+  5340867,
+  5639499,
+  5952924,
+  6281947,
+  6627379,
+  6990037,
+  7370743,
+  7770326,
+  8189616,
+  8629450,
+  9090666,
+  9574106,
+  10080615,
+  10611042,
+  11166236,
+  11747051,
+  12354341,
+  12989023,
+  13652368,
+  14345896,
+  15071245,
+  15830142,
+  16624379,
+  17455812,
+  18326346,
+  19237936,
+  20192578,
+  21192310,
+  22239204,
+  23335366,
+  24482938,
+  25684090,
+  26941022,
+  28255960,
+  29631160,
+  31068902,
+  32571490,
+  34141312,
+  35781216,
+  37494524,
+  39284872,
+  41156140,
+  43112432,
+  45158048,
+  47297468,
+  49535336,
+  51876460,
+  54325792,
+  56888432,
+  59569604,
+  62374676,
+  65309128,
+  68378576,
+  71588736,
+  74945448,
+  78454672,
+  82122456,
+  85955016,
+  89960368,
+  94153872,
+  98565376,
+  103246448,
+  108277536,
+  113775176,
+  119899208,
+  126859944,
+  134925408,
+  144428464,
+  155774096,
+  169446576,
+  186016640,
+  206148704,
+  230608064,
+  260268096,
+  296117472,
+  339267296,
+  390958368,
+  452568384,
+  525619104,
+  611783488,
+  712893184,
+  830945152,
+  968109568,
+  1126736512,
+  1309363200,
+  1518721664,
+  1757745408,
+  2029576832
+ ],
+ "statTypes": {
+  "None": -1,
+  "Str": 0,
+  "Vit": 1,
+  "Agi": 2,
+  "Dex": 3,
+  "Int": 4,
+  "Luk": 5,
+  "AllStats": 6,
+  "Hp": 7,
+  "Mp": 8,
+  "Atk": 9,
+  "Matk": 10,
+  "Def": 11,
+  "Mdef": 12,
+  "Hit": 13,
+  "Flee": 14,
+  "Crit": 15,
+  "DefFlat": 16,
+  "MdefFlat": 17,
+  "ElementWeapon": 18,
+  "ElementArmor": 19,
+  "HealthOnHit": 20,
+  "ManaOnHit": 21,
+  "LeechKill": 22,
+  "LeechKillMp": 23,
+  "Splash": 24,
+  "Range": 25,
+  "StatusImmune": 26,
+  "ReverseHealing": 27,
+  "NoAction": 28,
+  "NoMove": 29,
+  "NoAttack": 30,
+  "NoCast": 31,
+  "NoKnockback": 32,
+  "NoFlee": 33,
+  "NoCastCancel": 34,
+  "NoFlinch": 35,
+  "NoReflect": 36,
+  "NoRegenHp": 37,
+  "NoRegenMp": 38,
+  "AutocastHit": 39,
+  "AutocastAttack": 40,
+  "AutocastChance": 41,
+  "GrantSkill": 42,
+  "SkillLevel": 43,
+  "DamageToElement": 44,
+  "DamageToBoss": 45,
+  "DamageElement": 46,
+  "DamageMelee": 47,
+  "DamageMagic": 48,
+  "SkillDamage": 49,
+  "CostSkill": 50,
+  "CooldownSkill": 51,
+  "CritDamage": 52,
+  "ElementResist": 53,
+  "AtkWeapon": 54,
+  "MatkWeapon": 55,
+  "DamageFromElement": 56,
+  "DamageFromMagic": 57,
+  "DamageFromMelee": 58,
+  "HpRegen": 59,
+  "HpRegenMax": 60,
+  "MpRegen": 61,
+  "MpRegenMax": 62,
+  "AtkSpd": 63,
+  "CastSpd": 64,
+  "MoveSpd": 65,
+  "AfterCastDelay": 66,
+  "Healing": 67,
+  "HealingReceived": 68,
+  "AtkMult": 69,
+  "MatkMult": 70,
+  "HpMult": 71,
+  "MpMult": 72,
+  "DefMult": 73,
+  "MdefMult": 74,
+  "HpRegenMult": 75,
+  "MpRegenMult": 76,
+  "FleeMult": 77,
+  "HitMult": 78,
+  "CritMult": 79,
+  "DoubleAttack": 80,
+  "EnergyShield": 81,
+  "FreeCastMove": 82,
+  "FreeCastAtk": 83,
+  "SpellEcho": 84,
+  "Block": 85,
+  "ReflectDamage": 86,
+  "DualWield": 87,
+  "ExpRate": 88,
+  "DropRate": 89,
+  "MpCost": 90,
+  "LifeBond": 91,
+  "SummonStatShare": 92,
+  "SummonDamageShare": 93,
+  "ReflectSpell": 94,
+  "BlockShield": 95,
+  "RangeWand": 96,
+  "LeechChance": 97,
+  "Leech": 98,
+  "LeechMpChance": 99,
+  "LeechMp": 100,
+  "WeightLimit": 101,
+  "DamageRanged": 102,
+  "DamageFromRanged": 103,
+  "SkillCooldown": 104,
+  "SkillDuration": 105,
+  "SkillArea": 106,
+  "SkillHits": 107,
+  "SkillCost": 108,
+  "SkillRemoveKnockback": 109,
+  "SkillRemoveStatus": 110,
+  "Invisible": 111,
+  "Detector": 112,
+  "HpRegenRate": 113,
+  "MpRegenRate": 114,
+  "SummonHealingReceived": 115,
+  "SummonReflectDamage": 116,
+  "SummonHealthRegen": 117,
+  "HealthBarrier": 118,
+  "BuffDuration": 119,
+  "CritDef": 120,
+  "PerfectDodge": 121,
+  "PerfectCloak": 122,
+  "SkillPiercing": 123,
+  "SkillChains": 124,
+  "NoBlock": 125,
+  "SpellAuto": 126,
+  "SpellDodge": 127,
+  "TotalAtk": 128,
+  "TotalMatk": 129,
+  "Chain": 130,
+  "SummonAtkSpd": 131,
+  "SummonAtkMult": 132,
+  "SummonMatkMult": 133,
+  "SummonHpMult": 134,
+  "SummonAllStats": 135,
+  "SummonHealing": 136,
+  "SummonCrit": 137,
+  "FinalDamage": 138,
+  "FinalDamageReduction": 139,
+  "FinalDamageTaken": 140,
+  "AllResist": 141,
+  "DamageStatus": 142,
+  "DamageFromGround": 143,
+  "DamageFromStatus": 144,
+  "SkillCastTime": 145,
+  "AutoattackDamage": 146,
+  "NoStatusApply": 147,
+  "SkillSplash": 148,
+  "Sacrifice": 149,
+  "SacrificeDamage": 150,
+  "MatkPerStr": 151,
+  "AtkPerStr": 152,
+  "StrMult": 153,
+  "VitMult": 154,
+  "AgiMult": 155,
+  "DexMult": 156,
+  "IntMult": 157,
+  "LukMult": 158,
+  "AtkSpdMult": 159,
+  "CastSpdMult": 160,
+  "MoveSpdMult": 161,
+  "SkillCharges": 162,
+  "AutoFire": 163,
+  "DamageCloseRange": 164,
+  "DamageFarRange": 165,
+  "DamageToSummons": 166,
+  "DamageFromSummons": 167,
+  "SummonSpellEcho": 168,
+  "SummonDamage": 169,
+  "SummonDamageReduction": 170,
+  "SummonLeech": 171,
+  "SummonCostShare": 172,
+  "SummonHit": 173,
+  "SummonAutoattackDamage": 174,
+  "SummonResist": 175,
+  "SiphonHp": 176,
+  "SiphonMp": 177,
+  "HealShare": 178,
+  "DeathShare": 179,
+  "AutocastDeath": 180,
+  "AutocastKill": 181,
+  "CooldownRecovery": 182,
+  "StatusMaxStacks": 183,
+  "TwohandedStanceBonus": 184,
+  "AtkSpdLimit": 185,
+  "AutoattackMatk": 186,
+  "CastTimeReduction": 187,
+  "CastTimeReductionLimit": 188,
+  "CastRange": 189,
+  "DodgeRecovery": 190,
+  "AtkSpdFlat": 191,
+  "ThreatMult": 192,
+  "DefPierce": 193,
+  "MdefPierce": 194,
+  "PerfectHit": 195,
+  "HealingToBarrier": 196,
+  "SkillPull": 197,
+  "SkillDamageLowHp": 198,
+  "SkillRange": 199,
+  "SkillInstances": 200,
+  "SkillCrit": 201,
+  "SkillLeap": 202,
+  "SkillThreat": 203,
+  "SkillCastTimeMult": 204,
+  "SkillHitsMult": 205,
+  "SkillDurationMult": 206,
+  "SkillDamageReceived": 207,
+  "SkillDamageVsStatus": 208,
+  "SkillReplace": 209,
+  "StatusReplace": 210,
+  "StatusDuration": 211,
+  "SkillMaxInstances": 212,
+  "SkillAutocast": 213,
+  "SkillApplyStatus": 214,
+  "SkillConsumeStatus": 215,
+  "SkillRecoverHp": 216,
+  "SkillRecoverMp": 217,
+  "DamageVsStatus": 218
+ },
+ "essence": {
+  "coinCostPerPotential": 10000,
+  "chaosCoinCost": 100000,
+  "rollFloor": 0.6666666666666666,
+  "substatCaps": [
+   [
+    "Weapons",
+    "5 + 1 Chaos"
+   ],
+   [
+    "Other gear",
+    "4 + 1 Chaos"
+   ],
+   [
+    "Artifacts",
+    "4 (no Chaos slot)"
+   ]
+  ],
+  "dropWeights": [
+   [
+    "Growth",
+    30
+   ],
+   [
+    "Destruction",
+    25
+   ],
+   [
+    "Flow",
+    20
+   ],
+   [
+    "Rebirth",
+    15
+   ],
+   [
+    "Chaos",
+    10
+   ]
+  ],
+  "types": [
+   {
+    "id": "Flow",
+    "target": true,
+    "potentialMin": 2,
+    "potentialMax": 3,
+    "coinCost": 25000,
+    "effect": "Re-rolls the VALUE of one chosen substat, chasing a higher roll (toward 100% of the stat’s range). Keeps the stat, changes only its strength."
+   },
+   {
+    "id": "Growth",
+    "target": false,
+    "potentialMin": 3,
+    "potentialMax": 4,
+    "coinCost": 35000,
+    "effect": "ADDS a new random substat line — a stat the item does not already have, up to its substat cap. Fails if the item’s pool is exhausted."
+   },
+   {
+    "id": "Destruction",
+    "target": true,
+    "potentialMin": 4,
+    "potentialMax": 5,
+    "coinCost": 45000,
+    "effect": "REPLACES one chosen substat with a different random stat from the item’s pool (the guaranteed attribute in slot 0 is protected)."
+   },
+   {
+    "id": "Rebirth",
+    "target": true,
+    "potentialMin": 5,
+    "potentialMax": 6,
+    "coinCost": 55000,
+    "effect": "WIPES and re-rolls EVERY substat on the item at once — a full fresh roll of the whole block."
+   },
+   {
+    "id": "Chaos",
+    "target": false,
+    "potentialMin": null,
+    "potentialMax": null,
+    "coinCost": 100000,
+    "chaos": true,
+    "effect": "A one-shot GAMBLE: consumes ALL of the item’s remaining Potential for one of four equally-likely outcomes (see the Chaos outcomes below). High risk — it can improve, weaken, or completely re-roll the item."
+   }
+  ],
+  "chaosOutcomes": [
+   [
+    "0–24",
+    "Nothing happens — the Potential is spent for no effect."
+   ],
+   [
+    "25–49",
+    "Adds a random substat at its MINIMUM value (≈⅔ of full)."
+   ],
+   [
+    "50–74",
+    "Multiplies EVERY substat’s value by a random 0.7–1.3× (each rolled independently)."
+   ],
+   [
+    "75–99",
+    "Re-rolls the ENTIRE substat list from scratch — like Rebirth (recycle-all / can ruin the item)."
+   ]
+  ],
+  "engine": {
+   "methods": [
+    "PlayerSave$$RpcLogic___UseEssence_S",
+    "Formula$$GetRandomPotentialCost",
+    "Formula$$GetEssenceCoinCost",
+    "Formula$$GetRandomEssence",
+    "Formula$$GetSubstatScaledValue",
+    "Formula$$GetMaxSubstats",
+    "EquipData$$get_Potential"
+   ]
+  }
+ }
+}

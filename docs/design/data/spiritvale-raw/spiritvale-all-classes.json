@@ -1,0 +1,7399 @@
+{
+ "source": "game export (GameServerConfig.SkillTrees + SkillConfig/SkillPassiveConfig + ArchetypeConfig)",
+ "generatedAt": "2026-07-28",
+ "classCount": 15,
+ "totalSkills": 258,
+ "classes": {
+  "Acolyte": {
+   "slug": "acolyte",
+   "gameId": "Acolyte",
+   "displayName": "Acolyte",
+   "description": "A faithful practitioner of the holy arts who channels their light to protect allies and banish the undead.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Priest"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "Heal",
+     "",
+     "CodexMastery",
+     "",
+     "IncreasedManaRegen",
+     ""
+    ],
+    "1": [
+     "",
+     "Haste",
+     "Blessing",
+     "HolyLight",
+     "Grace",
+     "Barrier",
+     ""
+    ],
+    "2": [
+     "",
+     "Cure",
+     "",
+     "TrueSight",
+     "",
+     "SpellShield",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "",
+     "Faith",
+     "",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "",
+     "Revive",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "heal",
+     "name": "Heal",
+     "description": "Channel holy energy into an ally, restoring HP and leaving gentle Regeneration behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": -25,
+       "level": -25,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "codex-mastery",
+     "name": "Codex Mastery",
+     "description": "Increases Magic Attack with books, staffs, and maces, while improving Healing.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "increased-recovery",
+     "name": "Increased Recovery",
+     "description": "Increases passive MP recovery.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "haste",
+     "name": "Haste",
+     "description": "Bless an ally with swiftness, clearing Slow and increasing Move Speed and Attack Speed.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "benediction",
+     "name": "Benediction",
+     "description": "Bless nearby allies with divine protection, raising all attributes for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "holy-light",
+     "name": "Holy Light",
+     "description": "Release focused divine light at a single enemy, striking them with Holy force.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "divine-grace",
+     "name": "Divine Grace",
+     "description": "Bless nearby allies with divine grace, greatly improving natural HP and MP recovery.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "sacred-aegis",
+     "name": "Sacred Aegis",
+     "description": "Wrap an ally in divine protection, forming a barrier based on their maximum health.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "divine-grace",
+       "name": "Divine Grace",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "cure",
+     "name": "Cure",
+     "description": "Purify an ally with holy clarity, protecting them from Poison, Blind, and Silence.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 5,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "true-sight",
+     "name": "True Sight",
+     "description": "Reveal hidden enemies with holy sight, exposing them for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "arcanum-ward",
+     "name": "Arcanum Ward",
+     "description": "Wrap an ally in a sacred ward that reflects Magic damage before hostile spells can reach them.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sacred-aegis",
+       "name": "Sacred Aegis",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 15,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "faith",
+     "name": "Faith",
+     "description": "Increases damage against Undead and Shadow enemies, while reducing damage taken from them.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "resurrection",
+     "name": "Resurrection",
+     "description": "Return a fallen ally to life, restoring a portion of their HP and spirit.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": -1
+      },
+      "cost": {
+       "base": 60,
+       "level": 30
+      }
+     }
+    }
+   ]
+  },
+  "Berserker": {
+   "slug": "berserker",
+   "gameId": "Berserker",
+   "displayName": "Berserker",
+   "description": "A raging juggernaut who cleaves through enemies using heavy weaponry and thrives in no-holds-barred combat.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "ShoutMight",
+     "GroundSlam",
+     "DarkClaw",
+     "WildCharge",
+     "ShoutBlood",
+     ""
+    ],
+    "1": [
+     "",
+     "ShoutFury",
+     "Execute",
+     "RageMastery",
+     "Cyclone",
+     "ShoutStun",
+     ""
+    ],
+    "2": [
+     "",
+     "Berserk",
+     "",
+     "AxeThrow",
+     "",
+     "BloodFrenzy",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "",
+     "IncreasedHealthRegen",
+     "",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "",
+     "BloodCrash",
+     "",
+     "",
+     ""
+    ],
+    "5": [
+     "",
+     "",
+     "",
+     "Unyielding",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "mighty-roar",
+     "name": "Mighty Roar",
+     "description": "Let out a mighty roar, empowering nearby allies with increased strength.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "earth-splitter",
+     "name": "Earth Splitter",
+     "description": "Slam the ground with heavy force, staggering enemies and setting them up for your next combo.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "dark-claw",
+       "name": "Dark Claw",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "dark-claw",
+     "name": "Dark Claw",
+     "description": "Rip into the target with savage slashes, causing Bleeding while fueling your Rage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 60,
+       "scaling": []
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "wild-charge",
+     "name": "Wild Charge",
+     "description": "Leap forward with ferocious momentum, crushing enemies and fueling your Rage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "dark-claw",
+       "name": "Dark Claw",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "blood-howl",
+     "name": "Blood Howl",
+     "description": "Unleash a savage howl that fills nearby allies with bloodlust and battle hunger.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "furious-shout",
+     "name": "Furious Shout",
+     "description": "Let out a furious battle cry, granting nearby allies Fury and sharpening their critical strikes.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "execute",
+     "name": "Execute",
+     "description": "Deliver a brutal finishing blow, dealing heavy damage and feeding your Rage.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "earth-splitter",
+       "name": "Earth Splitter",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 175,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "brutality",
+     "name": "Brutality",
+     "description": "Increases the maximum number of Rage stacks you can build.",
+     "maxLevel": 3,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "cyclone",
+     "name": "Cyclone",
+     "description": "Spin forward in a violent cyclone, pulling enemies inward and shredding them with repeated strikes.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "wild-charge",
+       "name": "Wild Charge",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 125,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "fearsome-cry",
+     "name": "Fearsome Cry",
+     "description": "Terrify nearby enemies with a savage cry, stunning them while fueling your Rage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 11,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "berserk",
+     "name": "Berserk",
+     "description": "Enter a reckless battle state, greatly increasing combat power while abandoning restraint.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "axe-throw",
+     "name": "Axe Throw",
+     "description": "Hurl your axe in a brutal arc, striking the target before it snaps back into your grasp.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 20,
+       "scaling": []
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "blood-frenzy",
+     "name": "Blood Frenzy",
+     "description": "Give in to relentless violence, trading control for speed, pressure, and sustain.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "increased-regeneration",
+     "name": "Increased Regeneration",
+     "description": "Increases passive HP recovery.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "blood-crash",
+     "name": "Blood Crash",
+     "description": "Spend stored Rage to recover health instantly and keep regenerating for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 15,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 4
+     },
+     "id": "unyielding",
+     "name": "Unyielding",
+     "description": "Consume Rage to steel your body, reducing incoming damage through sheer will.",
+     "maxLevel": 2,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "blood-crash",
+       "name": "Blood Crash",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": -5
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Gunslinger": {
+   "slug": "gunslinger",
+   "gameId": "Gunslinger",
+   "displayName": "Gunslinger",
+   "description": "A ranged specialist who uses a variety of firearms and their mobility to destroy foes both near and far.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "SuppressiveShot",
+     "PiercingShot",
+     "FanFire",
+     "",
+     "ShrapnelShot",
+     "ExplosiveGrenade",
+     "PoisonGrenade"
+    ],
+    "1": [
+     "",
+     "SniperShot",
+     "PanicBurst",
+     "GunMastery",
+     "PointBlankShot",
+     "FreezeGrenade",
+     ""
+    ],
+    "2": [
+     "",
+     "",
+     "AerialShot",
+     "FlashBang",
+     "JumpShot",
+     "",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "TriggerHappy",
+     "",
+     "Lockdown",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "WeaponSwap",
+     "",
+     "HeavySwap",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 1
+     },
+     "id": "suppressive-shot",
+     "name": "Suppressive Shot",
+     "description": "Fire suppressive shots that weaken and mark enemies, setting them up for follow-up attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "piercing-shot",
+     "name": "Piercing Shot",
+     "description": "Fire a piercing rifle round that punches through enemies, staggering and knocking them back.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "fan-fire",
+     "name": "Fan Fire",
+     "description": "Rapidly unload a burst of shots into one target, building momentum for follow-up fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 80,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "shrapnel",
+     "name": "Shrapnel",
+     "description": "Blast enemies with close-range shrapnel, slowing and bleeding those caught in the burst.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "explosive-grenade",
+     "name": "Explosive Grenade",
+     "description": "Hurl an explosive charge that detonates in flames, knocking back and burning enemies.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 7
+     },
+     "id": "poison-grenade",
+     "name": "Poison Grenade",
+     "description": "Hurl a toxic grenade that bursts into Poison, leaving deadly ground behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "sniper-shot",
+     "name": "Sniper Shot",
+     "description": "Line up a devastating rifle shot, striking with heavy precision damage.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "piercing-shot",
+       "name": "Piercing Shot",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "panic-burst",
+     "name": "Panic Burst",
+     "description": "Unleash a sudden burst of pistol fire, damaging nearby enemies and finishing prepared combos.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "fan-fire",
+       "name": "Fan Fire",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "gun-mastery",
+     "name": "Gun Mastery",
+     "description": "Increases attack with firearms, improves Attack Speed, and allows dual wielding pistols.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "point-blank",
+     "name": "Point Blank",
+     "description": "Fire a brutal close-range shotgun blast, blinding enemies and finishing shotgun combos.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shrapnel",
+       "name": "Shrapnel",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "freeze-grenade",
+     "name": "Freeze Grenade",
+     "description": "Throw a freezing charge that bursts in an area, immobilizing enemies caught inside.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "aerial-shot",
+     "name": "Aerial Shot",
+     "description": "Leap through the air and fire downward, striking enemies below before landing with evasive grace.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 11,
+       "level": -1
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "flash-bang",
+     "name": "Flash Bang",
+     "description": "Backslide out of danger and prepare a flash grenade for your next move.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 9,
+       "level": -1
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "jump-shot",
+     "name": "Jump Shot",
+     "description": "Leap into battle and fire mid-air, staggering enemies and opening them to a follow-up shot.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 11,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "trigger-happy",
+     "name": "Trigger Happy",
+     "description": "Enter a wild firing state, automatically shooting nearby enemies while moving.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "lockdown",
+     "name": "Lockdown",
+     "description": "Lock your heavy weapon in place, unleashing sustained fire while holding your ground.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "gun-mastery",
+       "name": "Gun Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 20,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 3
+     },
+     "id": "dual-loadout",
+     "name": "Dual Loadout",
+     "description": "Swap between equipped loadouts, adapting your combat style in the middle of battle.",
+     "maxLevel": 1,
+     "isPassive": false,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 5
+     },
+     "id": "heavy-loadout",
+     "name": "Heavy Loadout",
+     "description": "Ready a dedicated heavy weapon and swap to it mid-battle to unleash overwhelming firepower. Unlocks Gatling Guns and Launchers",
+     "maxLevel": 1,
+     "isPassive": false,
+     "requirements": [],
+     "values": []
+    }
+   ]
+  },
+  "Knight": {
+   "slug": "knight",
+   "gameId": "Knight",
+   "displayName": "Knight",
+   "description": "A balanced melee fighter who uses spear and shield to protect allies while felling foes.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Paladin"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "Taunt",
+     "",
+     "SpearMastery",
+     "",
+     "ShieldMastery",
+     ""
+    ],
+    "1": [
+     "",
+     "Endure",
+     "",
+     "SpearThrust",
+     "",
+     "Fortify",
+     ""
+    ],
+    "2": [
+     "",
+     "TwohandParry",
+     "",
+     "SpearStab",
+     "",
+     "ReflectShield",
+     ""
+    ],
+    "3": [
+     "",
+     "IncreasedHealthRegen",
+     "SpearSlice",
+     "SpearQuicken",
+     "WeaponThrow",
+     "Counter",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "taunt",
+     "name": "Taunt",
+     "description": "Compels inflicted targets to focus their attention on you. Increases Threat generation.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 6,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "spear-mastery",
+     "name": "Spear Mastery",
+     "description": "Increases attack with spears, swords, and maces, while raising maximum HP.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "shield-mastery",
+     "name": "Shield Mastery",
+     "description": "Improves Block Chance and defenses while using a shield.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "endure",
+     "name": "Endure",
+     "description": "Steel yourself against incoming hits, increasing defenses and preventing flinching.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "taunt",
+       "name": "Taunt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "piercing-flurry",
+     "name": "Piercing Flurry",
+     "description": "Open with rapid piercing strikes, cutting through enemies and preparing your next combo.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "fortify",
+     "name": "Fortify",
+     "description": "Increases maximum HP, Vitality, and Healing Received.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [
+      {
+       "id": "shield-mastery",
+       "name": "Shield Mastery",
+       "level": 1
+      }
+     ],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "twohand-parry",
+     "name": "Twohand Parry",
+     "description": "Improves your ability to block while using two-handed weapons.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "impale",
+     "name": "Impale",
+     "description": "Finish them with a strong piercing attack. Increased damage when used as part of a combo.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "piercing-flurry",
+       "name": "Piercing Flurry",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "reflect-shield",
+     "name": "Reflect Shield",
+     "description": "Reflects a portion of incoming damage back to attackers.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [
+      {
+       "id": "fortify",
+       "name": "Fortify",
+       "level": 1
+      }
+     ],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 2
+     },
+     "id": "increased-regeneration",
+     "name": "Increased Regeneration",
+     "description": "Increases passive HP recovery.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "air-cutter",
+     "name": "Air Cutter",
+     "description": "A wide sweeping attack, staggering enemies and making them more susceptible to attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "impale",
+       "name": "Impale",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "spear-quicken",
+     "name": "Spear Quicken",
+     "description": "Through disciplined weapon training, the Knight strikes faster and cleaner. Fear the one who has practiced the same technique a thousand times.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "impale",
+       "name": "Impale",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "weapon-throw",
+     "name": "Weapon Throw",
+     "description": "Hurl your weapon with precision, slowing your target while you attack from afar.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "impale",
+       "name": "Impale",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 30,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 6
+     },
+     "id": "counter-stance",
+     "name": "Counter Stance",
+     "description": "Raise your guard and counter. Blocks attacks and hits back with a stunning blow!",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "reflect-shield",
+       "name": "Reflect Shield",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Mage": {
+   "slug": "mage",
+   "gameId": "Mage",
+   "displayName": "Mage",
+   "description": "A student of elemental magic who is capable of casting destructive spells from a distance.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Wizard"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "",
+     "",
+     "WandMastery",
+     "",
+     "",
+     ""
+    ],
+    "1": [
+     "",
+     "Earthbolt",
+     "Firebolt",
+     "IncreasedManaRegen",
+     "Thunderbolt",
+     "Icebolt",
+     ""
+    ],
+    "2": [
+     "",
+     "EarthSpikes",
+     "Fireball",
+     "TrueSight",
+     "ThunderStorm",
+     "IceShard",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "EnergyShield",
+     "FreeCast",
+     "Blink",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "wand-mastery",
+     "name": "Wand Mastery",
+     "description": "Increases Magic Attack with staffs, books, and swords, while improving Cast Speed.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "earthbolt",
+     "name": "Earthbolt",
+     "description": "Strike a single foe with crushing Earth magic and attune yourself to Earth.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "firebolt",
+     "name": "Firebolt",
+     "description": "Launch a concentrated bolt of Fire at one enemy and attune yourself to Fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "increased-recovery",
+     "name": "Increased Recovery",
+     "description": "Increases passive MP recovery.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "thunderbolt",
+     "name": "Thunderbolt",
+     "description": "Call down a focused bolt of lightning on one enemy and attune yourself to Wind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "icebolt",
+     "name": "Icebolt",
+     "description": "Ice to meet you! As you hurl a Water shard at your foes.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "earth-spikes",
+     "name": "Earth Spikes",
+     "description": "Rupture the ground with jagged stone, striking enemies and leaving them exposed to Fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "earthbolt",
+       "name": "Earthbolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 80,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "fireball",
+     "name": "Fireball",
+     "description": "Launch a fiery orb that explodes on impact, burning enemies and leaving a Firewall behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "firebolt",
+       "name": "Firebolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "true-sight",
+     "name": "True Sight",
+     "description": "Reveal hidden enemies with holy sight, exposing them for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "thunder-storm",
+     "name": "Thunder Storm",
+     "description": "Call down a storm of lightning over an area, striking enemies and exposing them to Water damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "thunderbolt",
+       "name": "Thunderbolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 250,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "ice-shard",
+     "name": "Ice Shard",
+     "description": "This spell is a great ice breaker as you send an ice spike that shatters and freezes your foes.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "icebolt",
+       "name": "Icebolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "energy-shield",
+     "name": "Energy Shield",
+     "description": "Wrap yourself in arcane protection, redirecting part of incoming damage to MP.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "wand-mastery",
+       "name": "Wand Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "free-cast",
+     "name": "Free Cast",
+     "description": "Allows movement and attacks while casting, with reduced Move Speed and Attack Speed.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "blink",
+     "name": "Blink",
+     "description": "Teleport to a target location, slipping out of danger and repositioning with precision.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "energy-shield",
+       "name": "Energy Shield",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Necromancer": {
+   "slug": "necromancer",
+   "gameId": "Necromancer",
+   "displayName": "Necromancer",
+   "description": "A dark spellcaster who commands masses of the dead while twisting the life force of living beings.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "SummonAbomination",
+     "SummonSkeleton",
+     "SkeletonMastery",
+     "SummonSkeletonMage",
+     "SummonWraith",
+     ""
+    ],
+    "1": [
+     "",
+     "BoneSpear",
+     "",
+     "CorpseBarrier",
+     "",
+     "ScytheMastery",
+     ""
+    ],
+    "2": [
+     "",
+     "BoneSpikes",
+     "DeathCoil",
+     "CorpseExplosion",
+     "Harvest",
+     "TwohandParry",
+     ""
+    ],
+    "3": [
+     "",
+     "Reanimation",
+     "LifeDrain",
+     "DeathBond",
+     "Reap",
+     "SummonReanimation",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "DeathNova",
+     "",
+     "DeathSpiral",
+     "",
+     ""
+    ],
+    "5": [
+     "",
+     "",
+     "DeathBramble",
+     "GraveChill",
+     "SoulDrain",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "summon-abomination",
+     "name": "Summon Abomination",
+     "description": "Summon a stitched mass of decaying flesh, built to control space through brute force.",
+     "maxLevel": 1,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "skeleton-mastery",
+       "name": "Skeleton Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "summon-skeleton",
+     "name": "Summon Skeleton",
+     "description": "Raise a Bonekin to fight beside you as the backbone of your undead army.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "skeleton-mastery",
+       "name": "Skeleton Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "skeleton-mastery",
+     "name": "Skeleton Mastery",
+     "description": "Strengthens summons by increasing their Attack, Magic Attack, and resistance.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "summon-skeleton-mage",
+     "name": "Summon Skeleton Mage",
+     "description": "Raise a Bonecaster that attacks from range with unstable necromantic magic.",
+     "maxLevel": 2,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "skeleton-mastery",
+       "name": "Skeleton Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "summon-wraith",
+     "name": "Summon Wraith",
+     "description": "Summon a ghostly undead caster that harasses enemies with dark magic.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "skeleton-mastery",
+       "name": "Skeleton Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "bone-spear",
+     "name": "Bone Spear",
+     "description": "Hurl a sharpened lance of bone that pierces through flesh and spirit alike.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 66.6,
+       "scaling": []
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "corpse-barrier",
+     "name": "Corpse Barrier",
+     "description": "Bind stolen bone and life into a grim barrier, shielding yourself through your summon.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "skeleton-mastery",
+       "name": "Skeleton Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "scythe-mastery",
+     "name": "Scythe Mastery",
+     "description": "Increases attack with scythes, axes, and swords, while adding HP siphon.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "bone-spikes",
+     "name": "Bone Spikes",
+     "description": "Rupture the ground with jagged bone spikes, impaling enemies caught above them.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "bone-spear",
+       "name": "Bone Spear",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 66.6,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "death-coil",
+     "name": "Death Coil",
+     "description": "Unleash a coil of undead energy, harming enemies while restoring summoned allies.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "corpse-explosion",
+     "name": "Corpse Explosion",
+     "description": "Detonate a Bonekin summon in a burst of necrotic force, causing nearby enemies and summons to explode on death.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "corpse-barrier",
+       "name": "Corpse Barrier",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "harvest",
+     "name": "Harvest",
+     "description": "Leap forward with a wide scythe swing, staggering enemies and opening them to a finishing strike.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "scythe-mastery",
+       "name": "Scythe Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "twohand-parry",
+     "name": "Twohand Parry",
+     "description": "Improves your ability to block while using two-handed weapons.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 2
+     },
+     "id": "reanimation",
+     "name": "Reanimation",
+     "description": "Bind the lingering spirit of a fallen boss, claiming it as an undead champion.",
+     "maxLevel": 1,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "death-bond",
+       "name": "Death Bond",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "life-drain",
+     "name": "Life Drain",
+     "description": "Siphon vitality from enemies, or empower a summon with a dangerous undead surge.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "death-coil",
+       "name": "Death Coil",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "death-bond",
+     "name": "Death Bond",
+     "description": "Bind yourself to an ally, sharing healing and HP siphon between both bonded souls.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "corpse-explosion",
+       "name": "Corpse Explosion",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "reap",
+     "name": "Reap",
+     "description": "Carve through nearby enemies with a merciless scythe strike, pulling them in and siphoning HP.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "harvest",
+       "name": "Harvest",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 6
+     },
+     "id": "summon-reanimation",
+     "name": "Summon Reanimation",
+     "description": "Call forth a claimed undead champion, returning it to the battlefield.",
+     "maxLevel": 1,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "death-bond",
+       "name": "Death Bond",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 3
+     },
+     "id": "death-nova",
+     "name": "Death Nova",
+     "description": "Release a burst of necrotic force, rotting nearby enemies and leaving a decaying field behind.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "life-drain",
+       "name": "Life Drain",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 250,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 5
+     },
+     "id": "death-spiral",
+     "name": "Death Spiral",
+     "description": "Spin into a scythe assault, carving nearby enemies while spreading Decay through each strike.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "reap",
+       "name": "Reap",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 3
+     },
+     "id": "necrotic-presence",
+     "name": "Necrotic Presence",
+     "description": "The summon radiates necrotic power, empowering nearby allies' Undead damage while weakening enemies.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 4
+     },
+     "id": "grave-chill",
+     "name": "Grave Chill",
+     "description": "The summon radiates graveborn cold, hastening nearby allies while chilling nearby enemies.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 5
+     },
+     "id": "soul-drain",
+     "name": "Soul Drain",
+     "description": "The summon radiates a draining aura, helping nearby allies siphon HP and MP from battle.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Paladin": {
+   "slug": "paladin",
+   "gameId": "Paladin",
+   "displayName": "Paladin",
+   "description": "A stalwart holy protector who brandishes holy power to both smite foes and protect allies.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "HighGuard",
+     "HolyShield",
+     "Faith",
+     "Sacrifice",
+     "Consecration",
+     ""
+    ],
+    "1": [
+     "",
+     "Aegis",
+     "ShieldBash",
+     "EnchantArmorHoly",
+     "JudgementBlade",
+     "DivinePunishment",
+     ""
+    ],
+    "2": [
+     "",
+     "",
+     "ShieldThrow",
+     "LifeBond",
+     "GrandCross",
+     "",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "Defiance",
+     "Vitality",
+     "Conviction",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "",
+     "MountMastery",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "high-guard",
+     "name": "High Guard",
+     "description": "Become an impenetrable fortress, increasing Block while becoming difficult to move.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "holy-shield",
+       "name": "Holy Shield",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "holy-shield",
+     "name": "Holy Shield",
+     "description": "May the light bless your shield, increasing Block and All Resistance against all your foes!",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "faith",
+     "name": "Faith",
+     "description": "Increases damage against Undead and Shadow enemies, while reducing damage taken from them.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "sacrifice",
+     "name": "Sacrifice",
+     "description": "Offer your own HP to the divine, adding Holy damage to each of your blows.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "consecration",
+     "name": "Consecration",
+     "description": "Drop a pillar of light that purifies the surrounding area, burning the unworthy and healing the righteous.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sacrifice",
+       "name": "Sacrifice",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": -10,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "aegis-of-light",
+     "name": "Aegis of Light",
+     "description": "Briefly protect yourself and allies by invoking your faith. Praise the light!",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "holy-shield",
+       "name": "Holy Shield",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 80,
+       "level": -10
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "shield-bash",
+     "name": "Shield Bash",
+     "description": "Charge! Brace that shield and lunge forth. Crumbling enemy defenses and opening them for further attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "holy-shield",
+       "name": "Holy Shield",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "sanctify",
+     "name": "Sanctify",
+     "description": "Bless an ally's armor with holy light, changing their armor element to Holy.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "judgement-blade",
+     "name": "Judgement Blade",
+     "description": "This giant Holy sword cleaves through the unworthy, slowing them for further attacks.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sacrifice",
+       "name": "Sacrifice",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 77,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "divine-punishment",
+     "name": "Divine Punishment",
+     "description": "Channel your divine might and rain down radiant swords on your unworthy foes!",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "consecration",
+       "name": "Consecration",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 50,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "shield-throw",
+     "name": "Shield Throw",
+     "description": "Let the light guide your shield as you hurl it between many foes.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shield-bash",
+       "name": "Shield Bash",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "life-bond",
+     "name": "Life Bond",
+     "description": "Link your life to an ally, taking their wounds upon yourself through a sacred bond.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sanctify",
+       "name": "Sanctify",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "grand-cross",
+     "name": "Grand Cross",
+     "description": "Burst forth a radiant cross along the ground, purging a wide area of the unworthy with your holy righteousness!",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "judgement-blade",
+       "name": "Judgement Blade",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "defiance-aura",
+     "name": "Defiance Aura",
+     "description": "Radiate unyielding faith, reducing incoming damage for nearby allies.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "vitality-aura",
+     "name": "Vitality Aura",
+     "description": "Emit a gentle divine aura, increasing Vitality and HP recovery for nearby allies.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "conviction-aura",
+     "name": "Conviction Aura",
+     "description": "Radiate unwavering resolve, increasing nearby allies' Melee, Ranged, and Magic damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "faith",
+       "name": "Faith",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "gryphon-riding",
+     "name": "Gryphon Riding",
+     "description": "Call upon your holy gryphon, taking to the battlefield as both rider and radiant blade.",
+     "maxLevel": 0,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Priest": {
+   "slug": "priest",
+   "gameId": "Priest",
+   "displayName": "Priest",
+   "description": "A devoted saint who brings protection and healing to allies and punishes dark creatures with sacred power.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "HighHeal",
+     "",
+     "ReviveAll",
+     "",
+     "MaceMastery",
+     ""
+    ],
+    "1": [
+     "",
+     "Sanctuary",
+     "StatusRecovery",
+     "TurnUndead",
+     "Zeal",
+     "Damnation",
+     ""
+    ],
+    "2": [
+     "",
+     "SacredGround",
+     "GuardianSpirit",
+     "Exorcism",
+     "EndowHoly",
+     "Smite",
+     ""
+    ],
+    "3": [
+     "",
+     "Divinity",
+     "",
+     "Sacrament",
+     "",
+     "Fanaticism",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "",
+     "HolyWrath",
+     "",
+     "",
+     ""
+    ],
+    "5": [
+     "",
+     "",
+     "",
+     "Dispell",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "high-heal",
+     "name": "High Heal",
+     "description": "Pour intense holy power into an ally, restoring a massive amount of HP.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": -100,
+       "level": -50,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 60,
+       "level": 30
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "salvation",
+     "name": "Salvation",
+     "description": "Call down celestial light, returning all fallen allies to life with renewed strength.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 210,
+       "level": -30
+      },
+      "cost": {
+       "base": 400,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "mace-mastery",
+     "name": "Mace Mastery",
+     "description": "Increases attack with maces, books, and staffs, while improving Attack Speed.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "sanctuary",
+     "name": "Sanctuary",
+     "description": "Raise a sacred tree that heals allies and repels undead with holy radiance.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "high-heal",
+       "name": "High Heal",
+       "level": 1
+      },
+      {
+       "id": "status-recovery",
+       "name": "Status Recovery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": -15,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "status-recovery",
+     "name": "Status Recovery",
+     "description": "Clear Stun, Frozen, Burning, and Decay from an ally, granting brief immunity to each.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 5,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "turn-undead",
+     "name": "Turn Undead",
+     "description": "Attempt to purge Undead and Shadow enemies with divine judgment, dealing massive damage on success.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "salvation",
+       "name": "Salvation",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 2,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "zeal",
+     "name": "Zeal",
+     "description": "Inspire an ally with fervent conviction, greatly increasing their damage for a time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 60,
+       "level": 30
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "damnation",
+     "name": "Damnation",
+     "description": "Call down holy judgment, damaging enemies and leaving them exposed to both physical and Magic punishment.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "mace-mastery",
+       "name": "Mace Mastery",
+       "level": 1
+      },
+      {
+       "id": "zeal",
+       "name": "Zeal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "sacred-ground",
+     "name": "Sacred Ground",
+     "description": "Hallow the ground beneath your allies, reducing damage taken from Ground Effects.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sanctuary",
+       "name": "Sanctuary",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "guardian-spirit",
+     "name": "Guardian Spirit",
+     "description": "Conjure a guardian spirit around an ally, shielding them from ranged attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "status-recovery",
+       "name": "Status Recovery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 15,
+       "level": -1
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "exorcism",
+     "name": "Exorcism",
+     "description": "Call down sacred radiance over an area, pulling enemies inward before blasting them with holy power.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "turn-undead",
+       "name": "Turn Undead",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 77,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "endow-holy",
+     "name": "Endow Holy",
+     "description": "Bless an ally's weapon with holy light, converting them to the Holy element.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "zeal",
+       "name": "Zeal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "smite",
+     "name": "Smite",
+     "description": "Strike the target with holy force, dealing blessed damage with a chance to stun.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "damnation",
+       "name": "Damnation",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 60,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 2
+     },
+     "id": "divinity",
+     "name": "Divinity",
+     "description": "Radiate divine power, strengthening nearby allies while empowering your own healing and holy protection.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sacred-ground",
+       "name": "Sacred Ground",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "sacrament",
+     "name": "Sacrament",
+     "description": "Focus holy will into clarity, empowering Holy magic while improving Cast Speed and Status Duration.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "exorcism",
+       "name": "Exorcism",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 6
+     },
+     "id": "fanaticism",
+     "name": "Fanaticism",
+     "description": "Radiate holy zeal, quickening nearby allies while making your own strikes more relentless.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "smite",
+       "name": "Smite",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "holy-wrath",
+     "name": "Holy Wrath",
+     "description": "Smite an area with concentrated holy power, silencing enemies and leaving wrathful light behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "sacrament",
+       "name": "Sacrament",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 60,
+       "level": 30
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 4
+     },
+     "id": "absolution",
+     "name": "Absolution",
+     "description": "Strip the target clean of buffs and harmful statuses, returning them to a neutral state.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": -1
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    }
+   ]
+  },
+  "Rogue": {
+   "slug": "rogue",
+   "gameId": "Rogue",
+   "displayName": "Rogue",
+   "description": "A nimble fighter who strikes from the shadows with poison and blade.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Shinobi"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "",
+     "",
+     "BladeMastery",
+     "",
+     "",
+     ""
+    ],
+    "1": [
+     "",
+     "",
+     "ShadowStep",
+     "Multistrike",
+     "VenomStrike",
+     "",
+     ""
+    ],
+    "2": [
+     "",
+     "",
+     "Cloaking",
+     "LightningReflexes",
+     "VenomCoating",
+     "",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "BladeDance",
+     "DualWieldMastery",
+     "EnchantPoison",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "",
+     "SmokeScreen",
+     "Haste",
+     "Cure",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "blade-mastery",
+     "name": "Blade Mastery",
+     "description": "Increases attack with daggers, swords, twinblades, and katars, while improving Attack Speed.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "shadow-step",
+     "name": "Shadow Step",
+     "description": "Step through shadow to appear behind the target and strike.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 7,
+       "level": -1
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "multistrike",
+     "name": "Multistrike",
+     "description": "Gives auto attacks a chance to strike additional times.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "venom-strike",
+     "name": "Venom Strike",
+     "description": "Strike twice with venomous force, with a chance to apply Poison.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 20,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "cloaking",
+     "name": "Cloaking",
+     "description": "Blend into shifting shadows, hiding from sight until you attack, cast, or take a hit.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-step",
+       "name": "Shadow Step",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 8,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "lightning-reflexes",
+     "name": "Lightning Reflexes",
+     "description": "Move like living lightning, increasing speed and evasive combat instincts.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "smoke-screen",
+       "name": "Smoke Screen",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "venom-coating",
+     "name": "Venom Coating",
+     "description": "Coat your attacks in venom, giving each strike a chance to apply Poison.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "venom-strike",
+       "name": "Venom Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "blade-dance",
+     "name": "Blade Dance",
+     "description": "Unleash a flurry of strikes around you, cutting down nearby enemies in rapid motion.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "cloaking",
+       "name": "Cloaking",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "dual-wield-mastery",
+     "name": "Dual Wield Mastery",
+     "description": "Allows you to wield a weapon in each hand.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "enchant-poison",
+     "name": "Enchant Poison",
+     "description": "Imbue your attacks with the Poison element.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "venom-coating",
+       "name": "Venom Coating",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 3
+     },
+     "id": "smoke-screen",
+     "name": "Smoke Screen",
+     "description": "Create a blinding smoke screen, blinding enemies while cloaking yourself.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "haste",
+     "name": "Haste",
+     "description": "Bless an ally with swiftness, clearing Slow and increasing Move Speed and Attack Speed.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 5
+     },
+     "id": "cure",
+     "name": "Cure",
+     "description": "Purify an ally with holy clarity, protecting them from Poison, Blind, and Silence.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 5,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Scout": {
+   "slug": "scout",
+   "gameId": "Scout",
+   "displayName": "Scout",
+   "description": "A swift marksman who excels at striking enemies from afar with archery.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Gunslinger"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "",
+     "",
+     "SteadyHands",
+     "",
+     "",
+     ""
+    ],
+    "1": [
+     "",
+     "",
+     "StrafingVolley",
+     "PreciseAim",
+     "ArrowShower",
+     "",
+     ""
+    ],
+    "2": [
+     "",
+     "ForceShot",
+     "Marked",
+     "Agility",
+     "SlowTrap",
+     "VolatileBolt",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "",
+     "SniperNest",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "steady-hands",
+     "name": "Steady Hands",
+     "description": "Increases bow attack and DEX.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "strafing-volley",
+     "name": "Strafing Volley",
+     "description": "Fire a rapid volley of arrows into a single target.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "steady-hands",
+       "name": "Steady Hands",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 50,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "precise-aim",
+     "name": "Precise Aim",
+     "description": "Increases attack range and Hit Rate.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [
+      {
+       "id": "steady-hands",
+       "name": "Steady Hands",
+       "level": 1
+      }
+     ],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "arrow-shower",
+     "name": "Arrow Shower",
+     "description": "Rain arrows over a wide area, striking enemies repeatedly and forcing them to scatter.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "steady-hands",
+       "name": "Steady Hands",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 30,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "force-shot",
+     "name": "Force Shot",
+     "description": "Fire a powerful shot that knocks enemies back and sets up a combo finisher.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "strafing-volley",
+       "name": "Strafing Volley",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "mark-target",
+     "name": "Mark Target",
+     "description": "Mark a target's weak points, reducing their Flee and Critical Defense.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "strafing-volley",
+       "name": "Strafing Volley",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "inner-focus",
+     "name": "Inner Focus",
+     "description": "Sharpen your focus and reflexes, increasing AGI and DEX for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "precise-aim",
+       "name": "Precise Aim",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "slow-trap",
+     "name": "Slow Trap",
+     "description": "Spread a shadowy trap across the ground, slowing enemies and leaving them vulnerable.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "arrow-shower",
+       "name": "Arrow Shower",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "volatile-bolt",
+     "name": "Volatile Bolt",
+     "description": "Fire a volatile shot that explodes on impact, damaging enemies around the target.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "arrow-shower",
+       "name": "Arrow Shower",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "sniper-s-nest",
+     "name": "Sniper's Nest",
+     "description": "Take a steady sniper stance, increasing Ranged damage and Critical Damage while greatly reducing movement.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "inner-focus",
+       "name": "Inner Focus",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Shinobi": {
+   "slug": "shinobi",
+   "gameId": "Shinobi",
+   "displayName": "Shinobi",
+   "description": "An elusive trickster who uses clones and elemental arts to misdirect and overwhelm enemies.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "FlameOrb",
+     "",
+     "FrostBlade",
+     "",
+     "LightningStrike",
+     ""
+    ],
+    "1": [
+     "",
+     "",
+     "FireRelease",
+     "IceRelease",
+     "LightningRelease",
+     "",
+     ""
+    ],
+    "2": [
+     "",
+     "FlowState",
+     "NinjutsuMastery",
+     "ShadowSeal",
+     "ShadowMastery",
+     "SilentEdge",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "FanOfKnives",
+     "ShadowFeint",
+     "TwistOfFate",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "ShurikenFan",
+     "",
+     "MimicSeal",
+     "",
+     "ShadowRelease",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "flame-orb",
+     "name": "Flame Orb",
+     "description": "Send out a slow orb of unstable flame that erupts into a wide explosion on impact.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "fire-release",
+       "name": "Fire Release",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 80,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "binding-spiral",
+     "name": "Binding Spiral",
+     "description": "Spin with collapsing force, dragging enemies inward before freezing those caught at the center.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "ice-release",
+       "name": "Ice Release",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 30,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "flash-step",
+     "name": "Flash Step",
+     "description": "Cross the battlefield in an instant, striking the target area with sudden force.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "lightning-release",
+       "name": "Lightning Release",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "fire-release",
+     "name": "Fire Release",
+     "description": "Call forth a blazing spirit that crashes down in flames and leaves your attacks wreathed in Fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "ice-release",
+     "name": "Ice Release",
+     "description": "Call forth a spectral pufferfish that fires icy shards, slowing foes and readying your next spell.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "lightning-release",
+     "name": "Lightning Release",
+     "description": "Unleash a phoenix of lightning that streaks forward, piercing enemies in its path.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "flow-state",
+     "name": "Flow State",
+     "description": "Enter a focused combat rhythm, turning auto attacks into Magic pressure and improving autocast flow.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "ninjutsu-mastery",
+       "name": "Ninjutsu Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "ninjutsu-mastery",
+     "name": "Ninjutsu Mastery",
+     "description": "Increases cast range, Magic Attack, maximum MP, and MP recovery.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "shadow-seal",
+     "name": "Shadow Seal",
+     "description": "Split your presence through shadow, creating clones to fight alongside you.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 15,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "shadow-mastery",
+     "name": "Shadow Mastery",
+     "description": "Increases Move Speed, Perfect Dodge, and Spell Dodge.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "silent-edge",
+     "name": "Silent Edge",
+     "description": "Enter a precise killing stance, increasing critical chance and Critical Damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-mastery",
+       "name": "Shadow Mastery",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "fan-of-knives",
+     "name": "Fan Of Knives",
+     "description": "Scatter a fan of spectral blades, leaping through danger while setting up your next technique.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "elusive-feint",
+     "name": "Elusive Feint",
+     "description": "Slip backward in a shadowy feint, briefly evading all attacks and leaving a clone behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 11,
+       "level": -1
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "twist-of-fate",
+     "name": "Twist Of Fate",
+     "description": "Strike with overwhelming force, stunning and scattering enemies before slipping back into shadows.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 150,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 11,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 2
+     },
+     "id": "shuriken-fan",
+     "name": "Shuriken Fan",
+     "description": "Hurl a spinning shuriken that lingers in place, slicing nearby enemies again and again.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "fan-of-knives",
+       "name": "Fan Of Knives",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 50,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "mimic-seal",
+     "name": "Mimic Seal",
+     "description": "Seal a target's magic and copy its essence, allowing you to cast the spell as your own.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-seal",
+       "name": "Shadow Seal",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 6
+     },
+     "id": "black-blade",
+     "name": "Black Blade",
+     "description": "Launch a whirling crescent of darkness that carves through the target with shadow force.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "twist-of-fate",
+       "name": "Twist Of Fate",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    }
+   ]
+  },
+  "Summoner": {
+   "slug": "summoner",
+   "gameId": "Summoner",
+   "displayName": "Summoner",
+   "description": "A mystical conjurer who fights alongside summoned companions, adapting to fit every scenario.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Necromancer"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "SummonAngel",
+     "SummonCactus",
+     "SummonMastery",
+     "SummonCat",
+     "SummonWolf",
+     ""
+    ],
+    "1": [
+     "",
+     "FieldHealing",
+     "FieldSilence",
+     "SoulStrike",
+     "FieldCurse",
+     "FieldDamage",
+     ""
+    ],
+    "2": [
+     "",
+     "Conjurer",
+     "GuardianBond",
+     "TrueSight",
+     "FuryBond",
+     "Invoker",
+     ""
+    ],
+    "3": [
+     "",
+     "SummonAttack",
+     "SummonRecall",
+     "",
+     "SummonSwap",
+     "SummonMount",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "summon-angel",
+     "name": "Summon Angel",
+     "description": "Summon a radiant healer who restores allies and strikes enemies with holy light.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "summon-cactus",
+     "name": "Summon Cactus",
+     "description": "Summon a spiny sentinel that absorbs punishment and strikes back without flinching.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "summon-mastery",
+     "name": "Summon Mastery",
+     "description": "Allows summoned allies to inherit more of your attributes.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "summon-cat",
+     "name": "Summon Cat",
+     "description": "Summon a nimble caster that darts through battle and blasts enemies with lightning.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "summon-wolf",
+     "name": "Summon Wolf",
+     "description": "Summon a fast, feral brawler that tears into enemies with raw strength and speed.",
+     "maxLevel": 3,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 30,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "resonance-well",
+     "name": "Resonance Well",
+     "description": "Create a soothing well of resonance, healing allies who remain within its gentle hum.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "suppression-field",
+       "name": "Suppression Field",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": -15,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "suppression-field",
+     "name": "Suppression Field",
+     "description": "Create a silent field that pulls enemies inward and may seal their ability to cast.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "soul-strike",
+       "name": "Soul Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 2,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "soul-strike",
+     "name": "Soul Strike",
+     "description": "Launch a focused burst of Soul magic at a single enemy.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 60,
+       "scaling": []
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "banishment-field",
+     "name": "Banishment Field",
+     "description": "Call down a cursed field that twists healing against enemies and leaves them exposed to Magic damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "soul-strike",
+       "name": "Soul Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 2,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "dissonance-well",
+     "name": "Dissonance Well",
+     "description": "Create a dissonant field that damages enemies and slows their movement, attacks, and casting.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "banishment-field",
+       "name": "Banishment Field",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "conjurer",
+     "name": "Conjurer",
+     "description": "Deepen your bond with summoned allies, improving summon damage and healing power.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "guardian-bond",
+     "name": "Guardian Bond",
+     "description": "Bind an ally with guardian magic, granting Vitality and Regeneration through a shared bond.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "true-sight",
+     "name": "True Sight",
+     "description": "Reveal hidden enemies with holy sight, exposing them for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "fury-bond",
+     "name": "Fury Bond",
+     "description": "Bind an ally with volatile force, granting Fury and Might through a shared battle surge.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "invoker",
+     "name": "Invoker",
+     "description": "Enter an invoker state, empowering your summons to echo Soul Strike with their own Magic.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 2
+     },
+     "id": "summon-command",
+     "name": "Summon Command",
+     "description": "Command your active summons to converge on the chosen target and attack.",
+     "maxLevel": 0,
+     "isPassive": false,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "summon-recall",
+     "name": "Summon Recall",
+     "description": "Recall your active summons, cancelling their actions and bringing them back to your side.",
+     "maxLevel": 0,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "summon-swap",
+     "name": "Summon Swap",
+     "description": "Swap your active summon setup, adapting quickly to the fight.",
+     "maxLevel": 0,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 6
+     },
+     "id": "summon-mount",
+     "name": "Summon Mount",
+     "description": "Mount your active summon, taking direct control from a stronger battlefield position.",
+     "maxLevel": 0,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    }
+   ]
+  },
+  "Warrior": {
+   "slug": "warrior",
+   "gameId": "Warrior",
+   "displayName": "Warrior",
+   "description": "A powerful combatant who wields heavy axes to deal high damage against multiple foes.",
+   "type": "base",
+   "maxJobLevel": 50,
+   "advancedClasses": [
+    "Berserker"
+   ],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "",
+     "",
+     "AxeMastery",
+     "",
+     "",
+     ""
+    ],
+    "1": [
+     "",
+     "",
+     "",
+     "Bash",
+     "",
+     "",
+     ""
+    ],
+    "2": [
+     "",
+     "TwohandQuicken",
+     "Stomp",
+     "AxeArc",
+     "AxeVortex",
+     "Whirlwind",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "CritMastery",
+     "DualWieldMastery",
+     "ResistanceMastery",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "axe-mastery",
+     "name": "Axe Mastery",
+     "description": "Increases attack with axes, swords, and scythes, and raises critical chance.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "bash",
+     "name": "Bash",
+     "description": "Smash the target with a crushing blow, with a chance to stun them.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 60,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "axe-quicken",
+     "name": "Axe Quicken",
+     "description": "Sharpen your battle rhythm, increasing Attack Speed and critical chance for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "stomp",
+       "name": "Stomp",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "stomp",
+     "name": "Stomp",
+     "description": "Slam the ground with heavy force, stunning enemies caught in the impact.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "twin-cleave",
+       "name": "Twin Cleave",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "twin-cleave",
+     "name": "Twin Cleave",
+     "description": "Swing twice in wide arcs, cutting through enemies in front of you.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "bash",
+       "name": "Bash",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 50,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "vortex-slash",
+     "name": "Vortex Slash",
+     "description": "Unleash a spinning slash that damages nearby enemies and pulls them toward you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "twin-cleave",
+       "name": "Twin Cleave",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 120,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "whirlwind",
+     "name": "Whirlwind",
+     "description": "Spin in place with relentless force, striking all nearby enemies over time.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "vortex-slash",
+       "name": "Vortex Slash",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "honed-blade",
+     "name": "Honed Blade",
+     "description": "Increases the damage dealt by critical hits.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "dual-wield-mastery",
+     "name": "Dual Wield Mastery",
+     "description": "Allows you to wield a weapon in each hand.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "natural-resistance",
+     "name": "Natural Resistance",
+     "description": "Reduces damage taken from all elements.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    }
+   ]
+  },
+  "Weaver": {
+   "slug": "weaver",
+   "gameId": "Weaver",
+   "displayName": "Weaver",
+   "description": "A scholar of forgotten techniques who stitches together magic from many paths.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "Heal",
+     "Icebolt",
+     "Firebolt",
+     "WeaverMastery",
+     "SpearThrust",
+     "StrafingVolley",
+     "VenomStrike"
+    ],
+    "1": [
+     "Haste",
+     "IceShard",
+     "Fireball",
+     "Bash",
+     "SpearStab",
+     "ArrowShower",
+     "VenomCoating"
+    ],
+    "2": [
+     "Cure",
+     "Earthbolt",
+     "Thunderbolt",
+     "Endure",
+     "SpearSlice",
+     "BladeDance",
+     "ShadowStep"
+    ],
+    "3": [
+     "HolyLight",
+     "EarthSpikes",
+     "ThunderStorm",
+     "Fortify",
+     "Stomp",
+     "Marked",
+     "Cloaking"
+    ],
+    "4": [
+     "SoulStrike",
+     "FieldSilence",
+     "FieldCurse",
+     "ResistanceMastery",
+     "AxeVortex",
+     "SteadyHands",
+     "LightningReflexes"
+    ],
+    "5": [
+     "Blessing",
+     "FieldHealing",
+     "FieldDamage",
+     "Grace",
+     "Whirlwind",
+     "Agility",
+     "DualWieldMastery"
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 1
+     },
+     "id": "heal",
+     "name": "Heal",
+     "description": "Channel holy energy into an ally, restoring HP and leaving gentle Regeneration behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": -25,
+       "level": -25,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "icebolt",
+     "name": "Icebolt",
+     "description": "Ice to meet you! As you hurl a Water shard at your foes.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 3
+     },
+     "id": "firebolt",
+     "name": "Firebolt",
+     "description": "Launch a concentrated bolt of Fire at one enemy and attune yourself to Fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "weaver-mastery",
+     "name": "Weaver Mastery",
+     "description": "Increases Attack, Magic Attack, all attributes, and lets skills splash nearby enemies.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 5
+     },
+     "id": "piercing-flurry",
+     "name": "Piercing Flurry",
+     "description": "Open with rapid piercing strikes, cutting through enemies and preparing your next combo.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "strafing-volley",
+     "name": "Strafing Volley",
+     "description": "Fire a rapid volley of arrows into a single target.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "steady-hands",
+       "name": "Steady Hands",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 50,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 7
+     },
+     "id": "venom-strike",
+     "name": "Venom Strike",
+     "description": "Strike twice with venomous force, with a chance to apply Poison.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 20,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 1
+     },
+     "id": "haste",
+     "name": "Haste",
+     "description": "Bless an ally with swiftness, clearing Slow and increasing Move Speed and Attack Speed.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 2
+     },
+     "id": "ice-shard",
+     "name": "Ice Shard",
+     "description": "This spell is a great ice breaker as you send an ice spike that shatters and freezes your foes.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "icebolt",
+       "name": "Icebolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "fireball",
+     "name": "Fireball",
+     "description": "Launch a fiery orb that explodes on impact, burning enemies and leaving a Firewall behind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "firebolt",
+       "name": "Firebolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 4
+     },
+     "id": "bash",
+     "name": "Bash",
+     "description": "Smash the target with a crushing blow, with a chance to stun them.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 60,
+       "scaling": []
+      },
+      "cost": {
+       "base": 3,
+       "level": 1
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "impale",
+     "name": "Impale",
+     "description": "Finish them with a strong piercing attack. Increased damage when used as part of a combo.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "piercing-flurry",
+       "name": "Piercing Flurry",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 6
+     },
+     "id": "arrow-shower",
+     "name": "Arrow Shower",
+     "description": "Rain arrows over a wide area, striking enemies repeatedly and forcing them to scatter.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "steady-hands",
+       "name": "Steady Hands",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 30,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 7
+     },
+     "id": "venom-coating",
+     "name": "Venom Coating",
+     "description": "Coat your attacks in venom, giving each strike a chance to apply Poison.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "venom-strike",
+       "name": "Venom Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 1
+     },
+     "id": "cure",
+     "name": "Cure",
+     "description": "Purify an ally with holy clarity, protecting them from Poison, Blind, and Silence.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cooldown": {
+       "base": 5,
+       "level": -1
+      },
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "earthbolt",
+     "name": "Earthbolt",
+     "description": "Strike a single foe with crushing Earth magic and attune yourself to Earth.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 3
+     },
+     "id": "thunderbolt",
+     "name": "Thunderbolt",
+     "description": "Call down a focused bolt of lightning on one enemy and attune yourself to Wind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 200,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "endure",
+     "name": "Endure",
+     "description": "Steel yourself against incoming hits, increasing defenses and preventing flinching.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "taunt",
+       "name": "Taunt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 5
+     },
+     "id": "air-cutter",
+     "name": "Air Cutter",
+     "description": "A wide sweeping attack, staggering enemies and making them more susceptible to attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "impale",
+       "name": "Impale",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 100,
+       "level": 40,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 7,
+       "level": 3
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "blade-dance",
+     "name": "Blade Dance",
+     "description": "Unleash a flurry of strikes around you, cutting down nearby enemies in rapid motion.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "cloaking",
+       "name": "Cloaking",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 7
+     },
+     "id": "shadow-step",
+     "name": "Shadow Step",
+     "description": "Step through shadow to appear behind the target and strike.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 7,
+       "level": -1
+      },
+      "cost": {
+       "base": 5,
+       "level": 2
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 1
+     },
+     "id": "holy-light",
+     "name": "Holy Light",
+     "description": "Release focused divine light at a single enemy, striking them with Holy force.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 2
+     },
+     "id": "earth-spikes",
+     "name": "Earth Spikes",
+     "description": "Rupture the ground with jagged stone, striking enemies and leaving them exposed to Fire.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "earthbolt",
+       "name": "Earthbolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 80,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "thunder-storm",
+     "name": "Thunder Storm",
+     "description": "Call down a storm of lightning over an area, striking enemies and exposing them to Water damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "thunderbolt",
+       "name": "Thunderbolt",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 250,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 4
+     },
+     "id": "fortify",
+     "name": "Fortify",
+     "description": "Increases maximum HP, Vitality, and Healing Received.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [
+      {
+       "id": "shield-mastery",
+       "name": "Shield Mastery",
+       "level": 1
+      }
+     ],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "stomp",
+     "name": "Stomp",
+     "description": "Slam the ground with heavy force, stunning enemies caught in the impact.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "twin-cleave",
+       "name": "Twin Cleave",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 6
+     },
+     "id": "mark-target",
+     "name": "Mark Target",
+     "description": "Mark a target's weak points, reducing their Flee and Critical Defense.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "strafing-volley",
+       "name": "Strafing Volley",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 10,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 7
+     },
+     "id": "cloaking",
+     "name": "Cloaking",
+     "description": "Blend into shifting shadows, hiding from sight until you attack, cast, or take a hit.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "shadow-step",
+       "name": "Shadow Step",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 8,
+       "level": -1
+      },
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 1
+     },
+     "id": "soul-strike",
+     "name": "Soul Strike",
+     "description": "Launch a focused burst of Soul magic at a single enemy.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 60,
+       "scaling": []
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 2
+     },
+     "id": "suppression-field",
+     "name": "Suppression Field",
+     "description": "Create a silent field that pulls enemies inward and may seal their ability to cast.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "soul-strike",
+       "name": "Soul Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 2,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 3
+     },
+     "id": "banishment-field",
+     "name": "Banishment Field",
+     "description": "Call down a cursed field that twists healing against enemies and leaves them exposed to Magic damage.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "soul-strike",
+       "name": "Soul Strike",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 2,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "natural-resistance",
+     "name": "Natural Resistance",
+     "description": "Reduces damage taken from all elements.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 5
+     },
+     "id": "vortex-slash",
+     "name": "Vortex Slash",
+     "description": "Unleash a spinning slash that damages nearby enemies and pulls them toward you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "twin-cleave",
+       "name": "Twin Cleave",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 120,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 4,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 6
+     },
+     "id": "steady-hands",
+     "name": "Steady Hands",
+     "description": "Increases bow attack and DEX.",
+     "maxLevel": 10,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 7
+     },
+     "id": "lightning-reflexes",
+     "name": "Lightning Reflexes",
+     "description": "Move like living lightning, increasing speed and evasive combat instincts.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "smoke-screen",
+       "name": "Smoke Screen",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 1
+     },
+     "id": "benediction",
+     "name": "Benediction",
+     "description": "Bless nearby allies with divine protection, raising all attributes for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 2
+     },
+     "id": "resonance-well",
+     "name": "Resonance Well",
+     "description": "Create a soothing well of resonance, healing allies who remain within its gentle hum.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "suppression-field",
+       "name": "Suppression Field",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": -15,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 3
+     },
+     "id": "dissonance-well",
+     "name": "Dissonance Well",
+     "description": "Create a dissonant field that damages enemies and slows their movement, attacks, and casting.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "banishment-field",
+       "name": "Banishment Field",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 4
+     },
+     "id": "divine-grace",
+     "name": "Divine Grace",
+     "description": "Bless nearby allies with divine grace, greatly improving natural HP and MP recovery.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 5
+     },
+     "id": "whirlwind",
+     "name": "Whirlwind",
+     "description": "Spin in place with relentless force, striking all nearby enemies over time.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "vortex-slash",
+       "name": "Vortex Slash",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 75,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 6,
+       "level": 0
+      },
+      "cost": {
+       "base": 10,
+       "level": 5
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 6
+     },
+     "id": "inner-focus",
+     "name": "Inner Focus",
+     "description": "Sharpen your focus and reflexes, increasing AGI and DEX for a short time.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "precise-aim",
+       "name": "Precise Aim",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 7
+     },
+     "id": "dual-wield-mastery",
+     "name": "Dual Wield Mastery",
+     "description": "Allows you to wield a weapon in each hand.",
+     "maxLevel": 5,
+     "isPassive": true,
+     "requirements": [],
+     "values": []
+    }
+   ]
+  },
+  "Wizard": {
+   "slug": "wizard",
+   "gameId": "Wizard",
+   "displayName": "Wizard",
+   "description": "An arcane master who channels fire, ice, lightning, and earth into devastating spells.",
+   "type": "advanced",
+   "maxJobLevel": 70,
+   "advancedClasses": [],
+   "icon": null,
+   "gridLayout": {
+    "0": [
+     "",
+     "FirePillar",
+     "",
+     "FireBarrier",
+     "",
+     "ChainLightning",
+     ""
+    ],
+    "1": [
+     "",
+     "",
+     "Meteor",
+     "",
+     "Tempest",
+     "",
+     ""
+    ],
+    "2": [
+     "",
+     "EarthBarrier",
+     "",
+     "TetraVortex",
+     "",
+     "WindBarrier",
+     ""
+    ],
+    "3": [
+     "",
+     "",
+     "Earthquake",
+     "",
+     "FreezingField",
+     "",
+     ""
+    ],
+    "4": [
+     "",
+     "EarthWall",
+     "",
+     "WaterBarrier",
+     "",
+     "HydroVortex",
+     ""
+    ],
+    "5": [
+     "",
+     "",
+     "",
+     "ArcaneSigil",
+     "",
+     "",
+     ""
+    ]
+   },
+   "skills": [
+    {
+     "position": {
+      "row": 1,
+      "col": 2
+     },
+     "id": "fire-pillar",
+     "name": "Fire Pillar",
+     "description": "Summon a pillar of flame from the ground, burning enemies and exposing them to Earth.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 120,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 3,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 4
+     },
+     "id": "avatar-of-fire",
+     "name": "Avatar of Fire",
+     "description": "Mastery over Fire lets you assume this avatar state. Increasing Fire damage, Healing Received, and igniting those that dare attack you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "meteor",
+       "name": "Meteor",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 1,
+      "col": 6
+     },
+     "id": "chain-lightning",
+     "name": "Chain Lightning",
+     "description": "Unleash lightning that jumps between enemies, shocking each target it chains through.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 300,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 1,
+       "level": 0
+      },
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 3
+     },
+     "id": "meteor",
+     "name": "Meteor",
+     "description": "Call down a burning meteor, stunning enemies and leaving them scorched in the blast.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "fire-pillar",
+       "name": "Fire Pillar",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 400,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 2,
+      "col": 5
+     },
+     "id": "tempest",
+     "name": "Tempest",
+     "description": "Summon a furious gale that batters enemies, blinds them, and exposes them to Water damage.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "chain-lightning",
+       "name": "Chain Lightning",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 2
+     },
+     "id": "avatar-of-stone",
+     "name": "Avatar of Stone",
+     "description": "Mastery over earth lets you assume this avatar state. Increasing earth damage, while making you more resistant to attacks.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "earthquake",
+       "name": "Earthquake",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 4
+     },
+     "id": "elemental-overload",
+     "name": "Elemental Overload",
+     "description": "Unleash a massive elemental eruption based on your current attunement, overwhelming enemies in a wide area.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "meteor",
+       "name": "Meteor",
+       "level": 1
+      },
+      {
+       "id": "blizzard",
+       "name": "Blizzard",
+       "level": 1
+      },
+      {
+       "id": "tempest",
+       "name": "Tempest",
+       "level": 1
+      },
+      {
+       "id": "earthquake",
+       "name": "Earthquake",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cooldown": {
+       "base": 10,
+       "level": 0
+      },
+      "cost": {
+       "base": 0,
+       "level": 100
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 3,
+      "col": 6
+     },
+     "id": "avatar-of-storm",
+     "name": "Avatar of Storm",
+     "description": "Mastery over Wind lets you assume this avatar state. Increasing your Move Speed and discharging a blast of lightning at those that dare attack you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "tempest",
+       "name": "Tempest",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 3
+     },
+     "id": "earthquake",
+     "name": "Earthquake",
+     "description": "Shake the battlefield with violent tremors, stunning enemies caught in the upheaval.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "earth-wall",
+       "name": "Earth Wall",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 50,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 4,
+      "col": 5
+     },
+     "id": "blizzard",
+     "name": "Blizzard",
+     "description": "Unleash a barrage of hail, knocking back foes with the might of ice. A slick spell to keep enemies away.",
+     "maxLevel": 10,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "hydro-vortex",
+       "name": "Hydro Vortex",
+       "level": 1
+      }
+     ],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 40,
+       "level": 20
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 2
+     },
+     "id": "earth-wall",
+     "name": "Earth Wall",
+     "description": "Raise a wall of solid stone, blocking space and shaping the battlefield around you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 15,
+       "level": 7
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 4
+     },
+     "id": "avatar-of-frost",
+     "name": "Avatar of Frost",
+     "description": "Mastery over Water lets you assume this avatar state. Increasing Water damage, MP Regen, and freezing those that dare attack you.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [
+      {
+       "id": "blizzard",
+       "name": "Blizzard",
+       "level": 1
+      }
+     ],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 0
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 5,
+      "col": 6
+     },
+     "id": "hydro-vortex",
+     "name": "Hydro Vortex",
+     "description": "Unleash a violent spiral of water, dragging enemies inward and exposing them to Wind.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "damage": {
+       "base": 0,
+       "level": 100,
+       "scaling": []
+      },
+      "cooldown": {
+       "base": 5,
+       "level": 0
+      },
+      "cost": {
+       "base": 30,
+       "level": 15
+      }
+     }
+    },
+    {
+     "position": {
+      "row": 6,
+      "col": 4
+     },
+     "id": "arcane-sigil",
+     "name": "Arcane Sigil",
+     "description": "Push your magic beyond safe limits, increasing Magic Attack and Cast Speed at the cost of higher MP use.",
+     "maxLevel": 5,
+     "isPassive": false,
+     "requirements": [],
+     "values": {
+      "cost": {
+       "base": 20,
+       "level": 10
+      }
+     }
+    }
+   ]
+  }
+ }
+}
