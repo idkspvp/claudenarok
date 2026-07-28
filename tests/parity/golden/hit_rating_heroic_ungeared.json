@@ -227,8 +227,8 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "cc540a4a",
-      "events": "9cd34ad3",
+      "state": "20f3965b",
+      "events": "550eac3f",
       "rng": {
         "draws": 248,
         "digest": "d356c112"
@@ -238,7 +238,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "9aae2e5f",
+      "state": "a194052e",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -249,7 +249,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "a8f40aea",
+      "state": "53f3bed7",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -260,7 +260,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "7c58707d",
+      "state": "238cabec",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -271,7 +271,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "7c58707d",
+      "state": "238cabec",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -293,14 +293,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 72,
+            "damageDealt": 69,
             "damageTaken": 124
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 72
+              "damageDealt": 69
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -457,7 +457,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49928,
+          "hp": 49931,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -494,7 +494,7 @@
           "threat": [
             [
               415,
-              73
+              70
             ]
           ],
           "weapon": {
@@ -509,7 +509,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "7c58707d",
+      "state": "238cabec",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -531,14 +531,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 72,
+            "damageDealt": 69,
             "damageTaken": 124
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 72
+              "damageDealt": 69
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -695,7 +695,7 @@
           "flee": 30,
           "hit": 30,
           "hostile": true,
-          "hp": 49928,
+          "hp": 49931,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -732,7 +732,7 @@
           "threat": [
             [
               415,
-              73
+              70
             ]
           ],
           "weapon": {

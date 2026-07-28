@@ -186,8 +186,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "c292e8cc",
-      "events": "70d14d30",
+      "state": "5a8c7a1a",
+      "events": "fd3b2da4",
       "rng": {
         "draws": 180,
         "digest": "1a2d5a02"
@@ -209,13 +209,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 137
+            "damageDealt": 134
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 137
+              "dummyDamage": 134
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -415,7 +415,7 @@
           "flee": 26,
           "hit": 26,
           "hostile": true,
-          "hp": 499863,
+          "hp": 499866,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -452,7 +452,7 @@
           "threat": [
             [
               415,
-              137
+              134
             ]
           ],
           "weapon": {
@@ -465,7 +465,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "c292e8cc",
+      "state": "5a8c7a1a",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -488,13 +488,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 137
+            "damageDealt": 134
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 137
+              "dummyDamage": 134
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -694,7 +694,7 @@
           "flee": 26,
           "hit": 26,
           "hostile": true,
-          "hp": 499863,
+          "hp": 499866,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -731,7 +731,7 @@
           "threat": [
             [
               415,
-              137
+              134
             ]
           ],
           "weapon": {
