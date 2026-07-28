@@ -18,11 +18,20 @@ function spawnDeacon(sim: Sim, id = 980001, level = 12) {
 // mobSwing rolls the hit table, so a single swing may miss/dodge. Swing in a
 // loop until the target carries the arcane-rot aura (the chance is 1 in tests).
 function swingUntilRot(sim: Sim, mob: any, target: any, tries = 60): boolean {
+  // Monsters swing for their own reference numbers now, and a swing that
+  // KILLS clears the aura it just applied. Give the target a pool it cannot
+  // lose in one hit rather than topping it up afterwards, which is too late.
+  target.maxHp = 1_000_000;
+  target.hp = target.maxHp;
+  target.dead = false;
   for (let i = 0; i < tries; i++) {
     // D1 took class and level armour away, so an ungeared target now eats the full
     // swing and can die inside the loop, which clears the very aura under test.
     // Keep it topped up: the case is about the DoT refreshing, not about survival.
     target.hp = target.maxHp;
+    // Topping health up is not enough once the swing has already killed: a dead
+    // target stays dead and takes no further swing, so the aura never lands.
+    target.dead = false;
     (sim as any).mobSwing(mob, target);
     if (target.auras.some((a: any) => a.id === 'arcaneRot_deacon_voss')) return true;
   }

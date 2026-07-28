@@ -857,17 +857,38 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   e.element = template.element;
   e.elementLevel = template.elementLevel;
   e.size = template.size;
-  // Elite scaling, classic-style: ~2.3x health, ~1.5x damage.
-  const hpMult = template.elite ? 2.3 : 1;
-  const dmgMult = template.elite ? 1.5 : 1;
-  e.maxHp = Math.round((template.hpBase + template.hpPerLevel * (level - 1)) * hpMult);
+  // Elite scaling, ~2.3x health and ~1.5x damage, is inherited: the reference
+  // game has no elite tier multiplying a monster's numbers, a monster simply IS
+  // its record. So it applies only to monsters still on the level-scaled model.
+  // Applying it on top of a reference statline double-counted, which is how an
+  // elite ended up with almost seven thousand health at level eighteen.
+  const authored = template.hp !== undefined || template.atk !== undefined;
+  const hpMult = template.elite && !authored ? 2.3 : 1;
+  const dmgMult = template.elite && !authored ? 1.5 : 1;
+  // The authored numbers win where a monster has them. A monster in the
+  // reference game is its record, not a curve evaluated at its level, and the
+  // level-scaled arms below are what the pre-conversion tables used before the
+  // records landed.
+  e.maxHp = Math.round(
+    (template.hp ?? template.hpBase + template.hpPerLevel * (level - 1)) * hpMult,
+  );
   e.hp = e.maxHp;
-  const dmg = (template.dmgBase + template.dmgPerLevel * (level - 1)) * dmgMult;
-  e.weapon = {
-    min: Math.round(dmg * 0.8),
-    max: Math.round(dmg * 1.25),
-    speed: template.attackSpeed,
-  };
+  if (template.atk !== undefined && template.atk2 !== undefined) {
+    // The pair IS the swing. No divisor, no attack-speed term: that was the
+    // inherited model, and it is the last of it (MOB_AP_PER_DPS in types.ts).
+    e.weapon = {
+      min: Math.round(template.atk * dmgMult),
+      max: Math.round(template.atk2 * dmgMult),
+      speed: template.attackSpeed,
+    };
+  } else {
+    const dmg = (template.dmgBase + template.dmgPerLevel * (level - 1)) * dmgMult;
+    e.weapon = {
+      min: Math.round(dmg * 0.8),
+      max: Math.round(dmg * 1.25),
+      speed: template.attackSpeed,
+    };
+  }
   // Armor scales from level 1 like hp/dmg above: a template has no armorBase,
   // A monster's accuracy and evasion, from its LEVEL alone until its record
   // carries real attributes (authoring those is its own pass, and it needs the
@@ -893,15 +914,18 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   // the monster records land, and every number here gets better rather than
   // different when they do.
   const monsterAttribute = Math.floor(level / 3);
-  e.stats.agi = monsterAttribute;
-  e.stats.dex = monsterAttribute;
-  e.stats.vit = monsterAttribute;
-  e.stats.luk = monsterAttribute;
+  e.stats.str = template.str ?? 0;
+  e.stats.agi = template.agi ?? monsterAttribute;
+  e.stats.dex = template.dex ?? monsterAttribute;
+  e.stats.vit = template.vit ?? monsterAttribute;
+  e.stats.int = template.int ?? 0;
+  e.stats.luk = template.luk ?? monsterAttribute;
   e.hit = hitRating(level, e.stats.dex);
   e.flee = fleeRating(level, e.stats.agi);
   e.dodgeChance = perfectDodgeChance(e.stats.luk);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.
-  e.stats.armor = Math.round(template.armorPerLevel * (level - 1));
+  e.stats.armor = template.def ?? Math.round(template.armorPerLevel * (level - 1));
+  e.stats.mdef = template.mdef ?? 0;
   e.moveSpeed = template.moveSpeed;
   e.scale = template.scale;
   e.color = template.color;

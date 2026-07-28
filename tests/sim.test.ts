@@ -733,6 +733,9 @@ describe('thief', () => {
       if (sim.player.resource >= 45 && sim.player.gcdRemaining <= 0)
         sim.castAbility('sinister_strike');
       sim.tick();
+      // The wolf hits back for the reference game's numbers, and a dead thief
+      // loses its combo pool, so the build has to survive the build.
+      sim.player.hp = sim.player.maxHp;
       facePlayerAt(sim, wolf);
     }
     expect(sim.player.comboPoints).toBeGreaterThanOrEqual(2);
@@ -858,6 +861,9 @@ describe('thief', () => {
       if (sim.player.resource >= 45 && sim.player.gcdRemaining <= 0)
         sim.castAbility('sinister_strike');
       sim.tick();
+      // The wolf hits back for the reference game's numbers, and a dead thief
+      // loses its combo pool, so the build has to survive the build.
+      sim.player.hp = sim.player.maxHp;
       facePlayerAt(sim, wolf);
     }
     expect(sim.player.comboPoints).toBeGreaterThanOrEqual(2);

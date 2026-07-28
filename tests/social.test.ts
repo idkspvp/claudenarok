@@ -198,7 +198,11 @@ describe('the five first jobs', () => {
 });
 
 describe('elite mobs', () => {
-  it('elites scale like vanilla elites (~2.3x hp, 1.5x damage, 2x xp)', () => {
+  it('lets an elite with a reference statline BE its statline, with no multiplier', () => {
+    // The inherited model multiplied an elite by 2.3 health and 1.5 damage. The
+    // reference game has no elite tier: a monster simply is its record, and
+    // applying the multiplier on top of an imported statline double-counted it,
+    // which is how a level-18 elite reached almost seven thousand health.
     const sim = makeWorld();
     const pid = sim.addPlayer('swordman', 'Tank');
     sim.enterCrypt(pid);
@@ -206,6 +210,14 @@ describe('elite mobs', () => {
     const shambler = nearestMob(sim, 'crypt_shambler', origin);
     expect(shambler).toBeTruthy();
     const t = MOBS.crypt_shambler;
+    expect(t.elite, 'the shambler must be an elite for this case to mean anything').toBe(true);
+    if (t.hp !== undefined) {
+      expect(shambler.maxHp).toBe(t.hp);
+      if (t.atk2 !== undefined) expect(shambler.weapon.max).toBe(t.atk2);
+      return;
+    }
+    // A monster still on the level-scaled model keeps the old multiplier, so the
+    // two arms cannot silently swap without this failing.
     const normalHp = t.hpBase + t.hpPerLevel * (shambler.level - 1);
     expect(shambler.maxHp).toBe(Math.round(normalHp * 2.3));
     const normalDmg = t.dmgBase + t.dmgPerLevel * (shambler.level - 1);

@@ -38,6 +38,16 @@ function facePlayerAt(sim: Sim, target: { pos: { x: number; z: number } }) {
 // Build combo points on the current target with sinister strike (the natural
 // awardCombo path), so comboUntil is stamped exactly as in live play.
 function buildCombo(sim: Sim, target: any, points: number) {
+  // Two things the reference monster numbers changed here. A starter wolf now
+  // dies in two swings, so the dummy needs a pool it cannot lose; and a monster
+  // carries real Luck, so it has a perfect dodge (1 + Luck/10 percent) that
+  // accuracy cannot answer, which made the build take an unpredictable number of
+  // swings and let the fade window expire mid-build. Both come out: these cases
+  // are about where combo points live and when they fade, not about the dice.
+  target.maxHp = 1_000_000;
+  target.hp = target.maxHp;
+  const realNext = sim.rng.next.bind(sim.rng);
+  sim.rng.next = () => 0.99;
   let guard = 0;
   while (sim.player.comboPoints < points && guard++ < 20 * 120 && !target.dead) {
     sim.player.resource = 100;
@@ -46,6 +56,7 @@ function buildCombo(sim: Sim, target: any, points: number) {
     facePlayerAt(sim, target);
     target.hp = target.maxHp; // the dummy must survive the build
   }
+  sim.rng.next = realNext;
   expect(sim.player.comboPoints).toBeGreaterThanOrEqual(points);
 }
 
@@ -70,11 +81,25 @@ describe('character-bound combo points (retail-style)', () => {
 
     // and the finisher spends them on the new target, no "requires combo points"
     sim.player.resource = 100;
-    for (let i = 0; i < 32; i++) sim.tick(); // clear the GCD
+    // Keep the caster alive across the GCD wait. Monsters hit for the reference
+    // game's numbers now, so the wolves kill a level-1 thief inside these 32
+    // ticks, and death clears the combo pool: the finisher then found nothing to
+    // spend, dispatched no effect, and raised no error, which is exactly the
+    // silence this case was reading as a bug.
+    for (let i = 0; i < 32; i++) {
+      sim.player.hp = sim.player.maxHp;
+      sim.tick(); // clear the GCD
+    }
+    sim.player.hp = sim.player.maxHp;
     facePlayerAt(sim, wolfB);
     const hp0 = wolfB.hp;
+    // Same reason as the builder above: take the perfect-dodge roll out, so the
+    // case reads whether the finisher SPENT on the new target.
+    const finisherNext = sim.rng.next.bind(sim.rng);
+    sim.rng.next = () => 0.99;
     sim.castAbility('eviscerate');
     const ev = sim.tick();
+    sim.rng.next = finisherNext;
     expect(ev.some((e) => e.type === 'error' && /requires combo points/.test(e.text))).toBe(false);
     expect(wolfB.hp).toBeLessThan(hp0);
     expect(sim.player.comboPoints).toBe(0);

@@ -42,8 +42,15 @@ export function mobTemplateForDungeonDifficulty(
     const normal = NORMAL_DUNGEON_TUNING[dungeonId];
     if (!normal) return template;
     const dmgMult = normal.damageMultiplierByMob[template.id] ?? 1;
+    // Scale BOTH shapes: the authored numbers where a monster has them, and the
+    // level-scaled fields where it does not. Scaling only the old fields left a
+    // dungeon's difficulty tuning silently doing nothing to any monster that had
+    // taken its reference statline.
     return {
       ...template,
+      ...(template.hp !== undefined && { hp: Math.round(template.hp * normal.healthMultiplier) }),
+      ...(template.atk !== undefined && { atk: Math.round(template.atk * dmgMult) }),
+      ...(template.atk2 !== undefined && { atk2: Math.round(template.atk2 * dmgMult) }),
       hpBase: template.hpBase * normal.healthMultiplier,
       hpPerLevel: template.hpPerLevel * normal.healthMultiplier,
       dmgBase: template.dmgBase * dmgMult,
@@ -60,6 +67,12 @@ export function mobTemplateForDungeonDifficulty(
     ...template,
     minLevel: tuning.level,
     maxLevel: tuning.level,
+    ...(template.hp !== undefined && { hp: Math.round(template.hp * hpMult) }),
+    ...(template.atk !== undefined && { atk: Math.round(template.atk * dmgMult) }),
+    ...(template.atk2 !== undefined && { atk2: Math.round(template.atk2 * dmgMult) }),
+    ...(template.def !== undefined && {
+      def: Math.round(template.def * tuning.armorMultiplier),
+    }),
     hpBase: template.hpBase * hpMult,
     hpPerLevel: template.hpPerLevel * hpMult,
     dmgBase: template.dmgBase * dmgMult,

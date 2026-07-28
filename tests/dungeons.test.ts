@@ -95,15 +95,31 @@ function expectedHeroicStats(template: MobTemplate, dungeonId: string) {
   const dmgMult = template.elite ? 1.5 : 1;
   const tuningDmg = tuning.damageMultiplierByMob?.[template.id] ?? tuning.damageMultiplier;
   const tuningHp = tuning.healthMultiplierByMob?.[template.id] ?? tuning.healthMultiplier;
-  const dmg =
+  // Mirrors instances/difficulty.ts FIELD BY FIELD, because a monster can carry
+  // its reference attack while keeping its own health: a scripted encounter is
+  // tuned around its health pool, so that one stays authored by us even when the
+  // rest of the statline comes from the reference.
+  const dmgOld =
     (template.dmgBase * tuningDmg + template.dmgPerLevel * tuningDmg * levelUps) * dmgMult;
   return {
-    maxHp: Math.round(
-      (template.hpBase * tuningHp + template.hpPerLevel * tuningHp * levelUps) * hpMult,
-    ),
-    weaponMin: Math.round(dmg * 0.8),
-    weaponMax: Math.round(dmg * 1.25),
-    armor: Math.round(template.armorPerLevel * tuning.armorMultiplier * levelUps),
+    maxHp:
+      template.hp !== undefined
+        ? Math.round(Math.round(template.hp * tuningHp) * hpMult)
+        : Math.round(
+            (template.hpBase * tuningHp + template.hpPerLevel * tuningHp * levelUps) * hpMult,
+          ),
+    weaponMin:
+      template.atk !== undefined
+        ? Math.round(Math.round(template.atk * tuningDmg) * dmgMult)
+        : Math.round(dmgOld * 0.8),
+    weaponMax:
+      template.atk2 !== undefined
+        ? Math.round(Math.round(template.atk2 * tuningDmg) * dmgMult)
+        : Math.round(dmgOld * 1.25),
+    armor:
+      template.def !== undefined
+        ? Math.round(template.def * tuning.armorMultiplier)
+        : Math.round(template.armorPerLevel * tuning.armorMultiplier * levelUps),
   };
 }
 

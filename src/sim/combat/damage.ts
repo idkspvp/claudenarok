@@ -1302,7 +1302,8 @@ export function handleDeath(ctx: SimContext, e: Entity, killer: Entity | null): 
         // routes the award to lifetimeXp even at the cap, so the party gate no
         // longer blocks max-level members — it just forwards every positive award.
         const xpGain = Math.round(
-          (mobXpValue(e.level, mE.level) * eliteMult * bonus) / eligible.length,
+          (mobXpValue(e.level, mE.level, MOBS[e.templateId ?? '']?.baseExp) * eliteMult * bonus) /
+            eligible.length,
         );
         if (xpGain > 0) grantXp(ctx, xpGain, member, { fromKill: true });
       }

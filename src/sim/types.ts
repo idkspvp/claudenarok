@@ -1245,6 +1245,33 @@ export interface MobTemplate {
   element?: Element;
   elementLevel?: ElementLevel;
   size?: Size;
+  // ---- The reference monster's own numbers ----------------------------------
+  // Taken from the pre-renewal monster table for the monster this one was paired
+  // with (scripts/ro_mob_match.mjs). Where these are present they REPLACE the
+  // level-scaled formula below: a monster is its authored numbers, the way it is
+  // in the reference, rather than a curve evaluated at its level.
+  /** Flat health. Replaces hpBase + hpPerLevel * level. */
+  hp?: number;
+  /** The authored attack pair. This IS the swing damage; there is no divisor. */
+  atk?: number;
+  atk2?: number;
+  /** Hard defence and magic defence, both percentages. */
+  def?: number;
+  mdef?: number;
+  /** What killing it is worth. Two monsters of the same level differ here by
+   *  design, which is the whole reason it is per-monster rather than derived. */
+  baseExp?: number;
+  jobExp?: number;
+  /** Its own attributes, which feed hit, flee and its status attack. */
+  str?: number;
+  agi?: number;
+  vit?: number;
+  int?: number;
+  dex?: number;
+  luk?: number;
+  /** Cells of reach. 1 is melee. */
+  attackRange?: number;
+  // ---- The pre-conversion level-scaled model --------------------------------
   hpPerLevel: number;
   hpBase: number;
   dmgBase: number; // min dmg at level 1
@@ -4978,8 +5005,16 @@ export function mobXpBase(mobLevel: number): number {
 }
 
 // Mob XP scaled by level difference (the classic con-colour bands).
-export function mobXpValue(mobLevel: number, playerLevel: number): number {
-  const base = mobXpBase(mobLevel);
+export function mobXpValue(
+  mobLevel: number,
+  playerLevel: number,
+  /** The monster's OWN experience value, where it has one. Two monsters of the
+   *  same level are worth different amounts in the reference game, by design,
+   *  which a level-derived curve cannot express: it is the reason a player hunts
+   *  one particular monster rather than whatever is nearest. */
+  authoredBase?: number,
+): number {
+  const base = authoredBase ?? mobXpBase(mobLevel);
   const diff = mobLevel - playerLevel;
   if (diff >= 0) {
     return Math.round(base * (1 + 0.05 * Math.min(diff, 4)));

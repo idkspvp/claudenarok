@@ -89,8 +89,16 @@ describe('v0.26 Battle Trance', () => {
     armTrance(sim);
     sim.player.resource = 0;
     sim.player.gcdRemaining = 0;
+    // Force the swing to land. Monsters carry the reference game's Luck now, so
+    // a Poring-derived boar has a 4% perfect dodge (1 + LUK/10 percent, its Luck
+    // being 30), and perfect dodge is the one avoidance accuracy cannot answer.
+    // This case is about the ability being free and consuming one aura, so the
+    // dice come out of it, the same way swingOnce above already does it.
+    const realNext = sim.rng.next.bind(sim.rng);
+    sim.rng.next = () => 0.99;
     const hpBefore = mob.hp;
     sim.castAbility('mortal_strike');
+    sim.rng.next = realNext;
     expect(mob.hp).toBeLessThan(hpBefore);
     expect(hasTrance(sim)).toBe(false);
   });

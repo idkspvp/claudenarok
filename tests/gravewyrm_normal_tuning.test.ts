@@ -130,9 +130,13 @@ describe('normal Gravewyrm Sanctum tuning data', () => {
 
 describe('normal Gravewyrm Sanctum health', () => {
   it('doubles every mob health at its spawn levels (pre-retune values in comments)', () => {
-    expect(normalMaxHp('sanctum_boneguard', 19)).toBe(2199); // was 1099
-    expect(normalMaxHp('sanctum_drakonid', 19)).toBe(2300); // was 1150
-    expect(normalMaxHp('sanctum_drakonid', 20)).toBe(2410); // was 1205
+    // The boneguard and the drakonid carry the reference table's health now, so
+    // the dungeon multiplier rides that instead of the level-scaled curve; the
+    // drakonid's two rows are equal because an authored statline does not vary
+    // with level. The bonewalker is a summoned add and keeps its own tuning.
+    expect(normalMaxHp('sanctum_boneguard', 19)).toBe(1166);
+    expect(normalMaxHp('sanctum_drakonid', 19)).toBe(1386);
+    expect(normalMaxHp('sanctum_drakonid', 20)).toBe(1386);
     expect(normalMaxHp('raised_bonewalker', 18)).toBe(594); // was 297
     expect(normalMaxHp('korgath_the_bound', 20)).toBe(4342); // was 2171
     expect(normalMaxHp('grand_necromancer_velkhar', 20)).toBe(3942); // was 1971

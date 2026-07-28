@@ -82,7 +82,13 @@ function recast(sim: TestSim, p: Entity, abilityId: string): SimEvent[] {
   p.cooldowns.delete(abilityId);
   p.resource = 100;
   sim.drainEvents();
+  // Force the swing to land. Monsters carry the reference game's Luck now, so
+  // they have a real perfect dodge (1 + Luck/10 percent) that accuracy cannot
+  // answer, and these cases count ECHO hits rather than testing the dice.
+  const realNext = sim.rng.next.bind(sim.rng);
+  sim.rng.next = () => 0.99;
   sim.castAbility(abilityId);
+  sim.rng.next = realNext;
   return sim.drainEvents();
 }
 

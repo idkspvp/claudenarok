@@ -19,7 +19,18 @@ function spawnSapper(sim: Sim, id = 980001, level = 5) {
 // mobSwing rolls the hit table, so a single swing may miss/dodge. Swing in a
 // loop until the target carries the smolder aura (the chance is forced to 1 here).
 function swingUntilSmolder(sim: Sim, mob: any, target: any, tries = 40): boolean {
+  // Monsters swing for their own reference numbers now, and a swing that
+  // KILLS clears the aura it just applied. Give the target a pool it cannot
+  // lose in one hit rather than topping it up afterwards, which is too late.
+  target.maxHp = 1_000_000;
+  target.hp = target.maxHp;
+  target.dead = false;
   for (let i = 0; i < tries; i++) {
+    // Keep the target up. Monsters swing for their own reference numbers
+    // now, so a level-1 target dies long before a chance-gated on-hit
+    // effect lands, and this case is about the effect, not the fight.
+    target.hp = target.maxHp;
+    target.dead = false;
     (sim as any).mobSwing(mob, target);
     if (target.auras.some((a: any) => a.id === 'smolder_ironvein_sapper')) return true;
   }
