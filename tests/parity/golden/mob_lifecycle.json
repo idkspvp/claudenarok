@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "d88a5b6b",
+      "state": "44b64b0e",
       "events": "ced02719",
       "rng": {
         "draws": 5,
@@ -179,6 +179,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -212,7 +214,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -253,6 +257,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -280,6 +286,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -325,6 +333,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -352,6 +362,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -384,6 +396,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -405,6 +419,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -430,7 +446,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "3eb84584",
+      "state": "fd2e805f",
       "events": "9affbed3",
       "rng": {
         "draws": 8,
@@ -585,6 +601,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -618,7 +636,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -659,6 +679,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -686,6 +708,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -731,6 +755,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -758,6 +784,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -790,6 +818,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -811,6 +841,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -838,6 +870,8 @@
           "dead": true,
           "detonateTimer": 1.5,
           "dodgeChance": 0.013,
+          "element": "poison",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 13,
@@ -869,7 +903,9 @@
             "y": 1.5
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "large",
           "spawnPos": {
             "x": 4,
             "y": 1.5
@@ -895,7 +931,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "01ee5b68",
+      "state": "16008415",
       "events": "8dcbe5d5",
       "rng": {
         "draws": 9,
@@ -1052,6 +1088,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1085,7 +1123,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -1126,6 +1166,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1153,6 +1195,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -1198,6 +1242,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1225,6 +1271,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -1257,6 +1305,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1278,6 +1328,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -1305,6 +1357,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
+          "element": "poison",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 13,
@@ -1336,7 +1390,9 @@
             "y": 1.5
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 23.45,
+          "size": "large",
           "spawnPos": {
             "x": 4,
             "y": 1.5
@@ -1362,7 +1418,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 423,
-      "state": "650eb222",
+      "state": "b748e70e",
       "events": "d0921473",
       "rng": {
         "draws": 15,
@@ -1519,6 +1575,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1552,7 +1610,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -1593,6 +1653,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1620,6 +1682,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -1665,6 +1729,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1692,6 +1758,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -1724,6 +1792,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1745,6 +1815,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -1772,6 +1844,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
+          "element": "poison",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 13,
@@ -1803,7 +1877,9 @@
             "y": 1.5
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 23.45,
+          "size": "large",
           "spawnPos": {
             "x": 4,
             "y": 1.5
@@ -1830,6 +1906,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 54.410541,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1851,7 +1929,9 @@
             "z": 300
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 54.410541,
@@ -1878,7 +1958,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "8fcfc291",
+      "state": "f053b8d0",
       "events": "c107d698",
       "rng": {
         "draws": 20,
@@ -2040,6 +2120,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2073,7 +2155,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -2114,6 +2198,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2141,6 +2227,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -2186,6 +2274,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2213,6 +2303,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -2245,6 +2337,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2266,6 +2360,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -2293,6 +2389,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
+          "element": "poison",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 13,
@@ -2324,7 +2422,9 @@
             "y": 1.5
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 23.45,
+          "size": "large",
           "spawnPos": {
             "x": 4,
             "y": 1.5
@@ -2351,6 +2451,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 54.410541,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2372,7 +2474,9 @@
             "z": 300
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 54.410541,
@@ -2401,6 +2505,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 56.399945,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2439,7 +2545,9 @@
             "z": 300
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 700,
             "y": 56.399945,
@@ -2466,7 +2574,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 424,
-      "state": "8fcfc291",
+      "state": "f053b8d0",
       "events": "741638a5",
       "rng": {
         "draws": 20,
@@ -2628,6 +2736,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2661,7 +2771,9 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 5,
             "y": 1.5,
@@ -2702,6 +2814,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2729,6 +2843,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -2774,6 +2890,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2801,6 +2919,8 @@
             "z": 1
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 9,
             "y": 1.5,
@@ -2833,6 +2953,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "earth",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2854,6 +2976,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 6,
             "y": 1.5,
@@ -2881,6 +3005,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.013,
+          "element": "poison",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 13,
@@ -2912,7 +3038,9 @@
             "y": 1.5
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 23.45,
+          "size": "large",
           "spawnPos": {
             "x": 4,
             "y": 1.5
@@ -2939,6 +3067,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 54.410541,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2960,7 +3090,9 @@
             "z": 300
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 54.410541,
@@ -2989,6 +3121,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 56.399945,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -3027,7 +3161,9 @@
             "z": 300
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 700,
             "y": 56.399945,

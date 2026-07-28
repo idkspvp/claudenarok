@@ -149,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "9d6c1bba",
+      "state": "83e19e9f",
       "events": "7498e17c",
       "rng": {
         "draws": 11,
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "f1ffaf99",
+      "state": "0717ab80",
       "events": "6fcbc66e",
       "rng": {
         "draws": 11,
@@ -171,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 418,
-      "state": "64a5c9cf",
+      "state": "08464558",
       "events": "0b469c9b",
       "rng": {
         "draws": 125,
@@ -182,7 +182,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "808d2bc7",
+      "state": "4f0a9a8a",
       "events": "6d8a568a",
       "rng": {
         "draws": 209,
@@ -193,7 +193,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 418,
-      "state": "9e0a780a",
+      "state": "6bfe4c1f",
       "events": "2d65f891",
       "rng": {
         "draws": 296,
@@ -204,7 +204,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "e36cc5ff",
+      "state": "ea6fe08c",
       "events": "207fa586",
       "rng": {
         "draws": 390,
@@ -215,7 +215,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "0625f31c",
+      "state": "d10ba1d7",
       "events": "741638a5",
       "rng": {
         "draws": 390,
@@ -376,6 +376,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "ghost",
+          "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -401,6 +403,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demon",
+          "size": "medium",
           "spawnPos": {
             "x": 4,
             "y": 1.5,
@@ -428,6 +432,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -458,6 +464,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,
@@ -496,7 +504,7 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 418,
-      "state": "ffc84e34",
+      "state": "4e4cd809",
       "events": "ea6824af",
       "rng": {
         "draws": 418,
@@ -658,6 +666,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "ghost",
+          "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -683,6 +693,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demon",
+          "size": "medium",
           "spawnPos": {
             "x": 4,
             "y": 1.5,
@@ -711,6 +723,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -741,6 +755,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 7,
             "y": 1.5,

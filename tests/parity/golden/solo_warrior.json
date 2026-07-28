@@ -155,7 +155,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "4b45b9ce",
+      "state": "4dfc13f1",
       "events": "84c16dfb",
       "rng": {
         "draws": 9,
@@ -166,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "1366d47e",
+      "state": "391be1d5",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -177,7 +177,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "257f8092",
+      "state": "0f4c99e5",
       "events": "1f33a8d3",
       "rng": {
         "draws": 105,
@@ -188,7 +188,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "4483b5c5",
+      "state": "4602cbae",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -358,6 +358,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -398,7 +400,9 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 25,
+          "size": "medium",
           "spawnPos": {
             "x": 4,
             "y": 1.5,
@@ -423,7 +427,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "b53adf3a",
+      "state": "da5b51cb",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -598,6 +602,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -638,7 +644,9 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": 24.8,
+          "size": "medium",
           "spawnPos": {
             "x": 4,
             "y": 1.5,

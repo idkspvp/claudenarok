@@ -32,7 +32,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "0cba00ec",
+      "state": "e5e5a3ac",
       "events": "d290e272",
       "rng": {
         "draws": 2,
@@ -173,6 +173,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -196,6 +198,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -223,7 +227,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "b7b8583c",
+      "state": "bc0411da",
       "events": "838c3f1e",
       "rng": {
         "draws": 7,
@@ -373,6 +377,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -396,6 +402,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -424,6 +432,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -446,6 +456,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -473,7 +485,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "9f6bd3ed",
+      "state": "fb3fb588",
       "events": "1b0d44af",
       "rng": {
         "draws": 13,
@@ -634,6 +646,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -657,6 +671,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -685,6 +701,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -707,6 +725,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -735,6 +755,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -758,6 +780,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -785,7 +809,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "bea0e25f",
+      "state": "361c3b83",
       "events": "741638a5",
       "rng": {
         "draws": 15,
@@ -946,6 +970,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -969,6 +995,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -997,6 +1025,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -1019,6 +1049,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1047,6 +1079,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -1070,6 +1104,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1098,6 +1134,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
@@ -1120,6 +1158,8 @@
             "z": 300.136437
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 58.188532,
@@ -1151,7 +1191,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "0afe6298",
+      "state": "ae43231b",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1312,6 +1352,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -1335,6 +1377,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1363,6 +1407,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -1385,6 +1431,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1413,6 +1461,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -1436,6 +1486,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1464,6 +1516,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
@@ -1486,6 +1540,8 @@
             "z": 300.136437
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 58.188532,
@@ -1518,6 +1574,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1539,6 +1597,8 @@
             "z": 320
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 320,
             "y": 57.211832,
@@ -1565,7 +1625,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "2dd4d0ad",
+      "state": "d806039f",
       "events": "38fff8ae",
       "rng": {
         "draws": 16,
@@ -1726,6 +1786,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -1749,6 +1811,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1777,6 +1841,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -1799,6 +1865,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1827,6 +1895,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -1850,6 +1920,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -1878,6 +1950,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
@@ -1900,6 +1974,8 @@
             "z": 300.136437
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 58.188532,
@@ -1932,6 +2008,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -1953,6 +2031,8 @@
             "z": 320
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 320,
             "y": 57.211832,
@@ -1981,6 +2061,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -2005,6 +2087,8 @@
             "z": -1
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 3,
             "y": 1.5,
@@ -2030,7 +2114,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "8086e898",
+      "state": "922523cc",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2191,6 +2275,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -2214,6 +2300,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2242,6 +2330,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -2264,6 +2354,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2292,6 +2384,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -2315,6 +2409,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2343,6 +2439,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
@@ -2365,6 +2463,8 @@
             "z": 300.136437
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 58.188532,
@@ -2397,6 +2497,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2418,6 +2520,8 @@
             "z": 320
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 320,
             "y": 57.211832,
@@ -2446,6 +2550,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 0.785398,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -2471,6 +2577,8 @@
             "z": -0.839133
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 3,
             "y": 1.5,
@@ -2496,7 +2604,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 422,
-      "state": "8086e898",
+      "state": "922523cc",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2657,6 +2765,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 8,
@@ -2680,6 +2790,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 10,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2708,6 +2820,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "undead",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -2730,6 +2844,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "large",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2758,6 +2874,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.014,
+          "element": "shadow",
+          "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 16,
@@ -2781,6 +2899,8 @@
           },
           "potionCooldownUntil": -1,
           "pulseTimer": 9,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -2809,6 +2929,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
@@ -2831,6 +2953,8 @@
             "z": 300.136437
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 300,
             "y": 58.188532,
@@ -2863,6 +2987,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
           "flee": 6,
@@ -2884,6 +3010,8 @@
             "z": 320
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 320,
             "y": 57.211832,
@@ -2912,6 +3040,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.012,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 0.785398,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -2937,6 +3067,8 @@
             "z": -0.839133
           },
           "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "size": "medium",
           "spawnPos": {
             "x": 3,
             "y": 1.5,

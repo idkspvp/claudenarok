@@ -148,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "31e0a4af",
+      "state": "b6886fe4",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "5d28a271",
+      "state": "3d674cfa",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -170,7 +170,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "77f22a41",
+      "state": "35549256",
       "events": "28a81aa7",
       "rng": {
         "draws": 76,
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "275d2c04",
+      "state": "326e6a9b",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -192,7 +192,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "d0e2a836",
+      "state": "81a6442f",
       "events": "4c449292",
       "rng": {
         "draws": 269,
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "497178c0",
+      "state": "af5d0c1d",
       "events": "ccd1b4a9",
       "rng": {
         "draws": 392,
@@ -214,7 +214,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "fb63dd09",
+      "state": "bef8045a",
       "events": "9bf5948c",
       "rng": {
         "draws": 430,
@@ -413,6 +413,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": 3.039753,
           "fallStartY": 59.40092,
           "fiveSecondRule": 99,
@@ -441,6 +443,8 @@
             "z": -996.02213
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "y": 59.40092,
             "z": -982

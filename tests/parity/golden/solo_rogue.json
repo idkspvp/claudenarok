@@ -150,7 +150,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "dd9c158f",
+      "state": "b3080f88",
       "events": "03216cdd",
       "rng": {
         "draws": 14,
@@ -161,7 +161,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "54f1e717",
+      "state": "1da8159e",
       "events": "fa67bd17",
       "rng": {
         "draws": 24,
@@ -172,7 +172,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "3201edea",
+      "state": "ebe8f5c9",
       "events": "6404f95d",
       "rng": {
         "draws": 103,
@@ -183,7 +183,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "59cd4256",
+      "state": "53ae4535",
       "events": "741638a5",
       "rng": {
         "draws": 159,
@@ -351,6 +351,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
@@ -379,6 +381,8 @@
             "z": -2
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 4,
             "y": 1.5,

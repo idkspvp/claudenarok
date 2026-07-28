@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "222dbfe5",
+      "state": "c0cc0a46",
       "events": "0efe4389",
       "rng": {
         "draws": 1,
@@ -426,6 +426,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
           "flee": 2,
@@ -464,6 +466,8 @@
             "z": 22
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
           "spawnPos": {
             "x": 20,
             "y": 1.603905,
@@ -486,7 +490,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "223b4433",
+      "state": "fb3bc1ec",
       "events": "be00f09c",
       "rng": {
         "draws": 3,
@@ -908,6 +912,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
           "flee": 2,
@@ -951,7 +957,9 @@
             "z": 22
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 20,
             "y": 1.603905,
@@ -974,7 +982,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "93c4c2cf",
+      "state": "f4ef8fa8",
       "events": "880460b2",
       "rng": {
         "draws": 3,
@@ -1405,6 +1413,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
           "flee": 2,
@@ -1432,7 +1442,9 @@
             "z": 22
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.05,
+          "size": "medium",
           "spawnPos": {
             "x": 20,
             "y": 1.603905,
@@ -1455,7 +1467,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 419,
-      "state": "909beda4",
+      "state": "e84f10e7",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -1886,6 +1898,8 @@
           "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.01,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
           "flee": 2,
@@ -1913,7 +1927,9 @@
             "z": 22
           },
           "potionCooldownUntil": -1,
+          "race": "brute",
           "respawnTimer": -0.15,
+          "size": "medium",
           "spawnPos": {
             "x": 20,
             "y": 1.603905,

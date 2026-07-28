@@ -149,7 +149,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "590fd6c3",
+      "state": "5429f68b",
       "events": "7f8f70c7",
       "rng": {
         "draws": 1,
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "300fb4ad",
+      "state": "8ed96ce9",
       "events": "5380a5ed",
       "rng": {
         "draws": 2,
@@ -171,7 +171,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "f61df7d8",
+      "state": "6934136e",
       "events": "a661284d",
       "rng": {
         "draws": 82,
@@ -182,7 +182,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "a0bc2944",
+      "state": "996b36de",
       "events": "3ec33430",
       "rng": {
         "draws": 152,
@@ -193,7 +193,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "bb98d6de",
+      "state": "cddc31a8",
       "events": "fd3b2da4",
       "rng": {
         "draws": 180,
@@ -424,6 +424,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -450,6 +452,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "formless",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
@@ -479,7 +483,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "bb98d6de",
+      "state": "cddc31a8",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -710,6 +714,8 @@
           "critChance": 0.05,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.016,
+          "element": "neutral",
+          "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 26,
@@ -736,6 +742,8 @@
             "z": 2
           },
           "potionCooldownUntil": -1,
+          "race": "formless",
+          "size": "medium",
           "spawnPos": {
             "x": 2,
             "y": 1.5,
