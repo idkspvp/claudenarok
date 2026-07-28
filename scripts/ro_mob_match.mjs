@@ -11,27 +11,41 @@
 //   node scripts/ro_mob_match.mjs            print the table
 //   node scripts/ro_mob_match.mjs --json     emit the id -> reference-name pairs
 //
-// How the match is scored: level proximity DOMINATES, because a monster twenty
-// levels away is the wrong monster however well its attributes line up. Race,
-// attribute and size are penalties on top of that, and reuse is a penalty too so
-// one reference monster does not end up standing in for a dozen of ours.
+// NEIGHBOURHOODS, which is the load-bearing idea. A monster is balanced against
+// the monsters it shares a map with, so pairing ours one at a time produced a
+// zone whose sources were scattered across the reference world: a field wolf
+// borrowed from one map and the wolf beside it from another twenty levels away.
+// Instead each of OUR places (a zone's field, a dungeon) is matched to ONE
+// reference MAP, and our monsters are then paired inside that map's roster.
+// Whatever the reference balanced together stays together, which is what makes
+// the numbers safe to lay out a map with.
+//
+// Within a neighbourhood the pairing is by RANK: our weakest takes their
+// weakest, our strongest their strongest, spread proportionally when the two
+// rosters are different sizes. Rank order is monotone, so neighbours of ours
+// stay neighbours of theirs, which is the entire point. The neighbourhood
+// itself is chosen by level centre AND spread, not centre alone.
 //
 // Excluded from the pool: event and quest dummies (the reference carries a pile
 // at defence 100, magic defence 99 and zero experience, and they are not
-// monsters), and boss-class monsters are matched only against our bosses. An
-// MVP's health is an order of magnitude above a normal monster of its level, so
-// letting one match an ordinary spawn is how a level-6 wolf ends up with
+// monsters). Boss-class monsters are matched only against our bosses: an MVP's
+// health is an order of magnitude above a normal monster of its level, so
+// letting one match an ordinary spawn is how a first pass gave a level-6 wolf
 // eighteen hundred health.
 import fs from 'node:fs';
 import path from 'node:path';
-import { MOBS } from '../src/sim/data.ts';
+import { DUNGEONS, MOBS, ZONES } from '../src/sim/data.ts';
 
 const REFERENCE = process.env.RO_REFERENCE ?? 'E:/ro-reference/rathena';
-const DB = path.join(REFERENCE, 'db/pre-re/mob_db.yml');
+const MOB_DB = path.join(REFERENCE, 'db/pre-re/mob_db.yml');
+const SPAWN_DIRS = [
+  path.join(REFERENCE, 'npc/pre-re/mobs/fields'),
+  path.join(REFERENCE, 'npc/pre-re/mobs/dungeons'),
+];
 
 function parseReference() {
-  const text = fs.readFileSync(DB, 'utf8');
-  const rows = [];
+  const text = fs.readFileSync(MOB_DB, 'utf8');
+  const byName = new Map();
   for (const chunk of text.split('\n  - Id:').slice(1)) {
     const g = (k) => {
       const m = chunk.match(new RegExp(String.raw`^    ${k}:\s*(\S+)`, 'm'));
@@ -43,7 +57,7 @@ function parseReference() {
     };
     const name = g('Name');
     if (!name) continue;
-    rows.push({
+    byName.set(name.toLowerCase(), {
       aegis: g('AegisName'),
       name,
       level: num('Level') ?? 1,
@@ -71,65 +85,165 @@ function parseReference() {
       mvp: /Mvp: true/.test(chunk),
     });
   }
-  return rows;
+  return byName;
 }
 
-// Our attribute names against the reference's.
-const ELEMENT_ALIAS = { shadow: 'dark' };
-const alias = (e) => ELEMENT_ALIAS[e] ?? e;
-
-const RACE_PENALTY = 8;
-const ELEMENT_PENALTY = 5;
-const SIZE_PENALTY = 3;
-const REUSE_PENALTY = 4;
-
-export function matchMonsters(reference, mobs) {
-  const real = reference.filter(
-    (r) => r.baseExp > 0 && r.hp > 30 && r.def < 90 && r.mdef < 90 && r.atk2 > 0,
-  );
-  const normals = real.filter((r) => !r.boss && !r.mvp);
-  const bosses = real.filter((r) => r.boss || r.mvp);
-  const used = new Map();
-  const out = [];
-  for (const mob of mobs) {
-    const level = Math.round((mob.minLevel + mob.maxLevel) / 2);
-    const pool = mob.boss || mob.worldBoss ? bosses : normals;
-    let bestRow = null;
-    let bestScore = Number.POSITIVE_INFINITY;
-    for (const r of pool) {
-      let score = Math.abs(r.level - level);
-      if (r.race !== mob.race) score += RACE_PENALTY;
-      if (r.element !== alias(mob.element)) score += ELEMENT_PENALTY;
-      if (r.size !== mob.size) score += SIZE_PENALTY;
-      score += (used.get(r.aegis) ?? 0) * REUSE_PENALTY;
-      if (score < bestScore) {
-        bestScore = score;
-        bestRow = r;
+/** map name -> the monsters that spawn there, from the reference spawn scripts. */
+function parseNeighbourhoods(byName) {
+  const maps = new Map();
+  for (const dir of SPAWN_DIRS) {
+    if (!fs.existsSync(dir)) continue;
+    for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.txt'))) {
+      for (const line of fs.readFileSync(path.join(dir, file), 'utf8').split('\n')) {
+        if (line.startsWith('//')) continue;
+        const m = line.match(/^(\w+),[\d,]*\s+monster\s+(.+?)\t+(\d+),(\d+)/);
+        if (!m) continue;
+        const ref = byName.get(m[2].trim().toLowerCase());
+        if (!ref) continue;
+        // The neighbourhood is the REGION, not the single map. One reference map
+        // holds about six monsters and our zones hold forty, so a map cannot
+        // stand in for a zone; a region (every Prontera field, every level of the
+        // Payon dungeon) is the unit that actually corresponds to one of ours.
+        const key = file.replace('.txt', '');
+        if (!maps.has(key)) maps.set(key, new Set());
+        maps.get(key).add(ref);
       }
     }
-    if (!bestRow) continue;
-    used.set(bestRow.aegis, (used.get(bestRow.aegis) ?? 0) + 1);
-    out.push({ mob, ref: bestRow, ourLevel: level });
+  }
+  return maps;
+}
+
+const isReal = (r) => r.baseExp > 0 && r.hp > 30 && r.def < 90 && r.mdef < 90 && r.atk2 > 0;
+const mid = (m) => Math.round((m.minLevel + m.maxLevel) / 2);
+
+/** Our places: each zone's field, and each dungeon. */
+function ourPlaces() {
+  const places = [];
+  const inDungeon = new Set();
+  for (const d of Object.values(DUNGEONS)) {
+    const ids = [...new Set((d.spawns ?? []).map((s) => s.mobId))].filter((id) => MOBS[id]);
+    if (!ids.length) continue;
+    for (const id of ids) inDungeon.add(id);
+    places.push({ name: d.id, kind: 'dungeon', ids });
+  }
+  // Zone level bands overlap, so claim each monster for the FIRST zone that
+  // wants it. Without this a monster in two bands is paired twice and the totals
+  // come out above the roster size.
+  const claimed = new Set(inDungeon);
+  for (const zone of ZONES) {
+    const [lo, hi] = zone.levelRange;
+    const ids = Object.values(MOBS)
+      .filter((m) => !claimed.has(m.id) && mid(m) >= lo && mid(m) <= hi)
+      .map((m) => m.id);
+    for (const id of ids) claimed.add(id);
+    if (ids.length) places.push({ name: zone.id, kind: 'field', ids });
+  }
+  const rest = Object.keys(MOBS).filter((id) => !claimed.has(id));
+  if (rest.length) places.push({ name: 'unplaced', kind: 'field', ids: rest });
+  return places;
+}
+
+export function matchMonsters() {
+  const byName = parseReference();
+  const neighbourhoods = parseNeighbourhoods(byName);
+  const places = ourPlaces();
+  const usedMaps = new Set();
+  const out = [];
+
+  for (const place of places) {
+    const mobs = place.ids.map((id) => MOBS[id]).sort((a, b) => mid(a) - mid(b));
+    const bosses = mobs.filter((m) => m.boss || m.worldBoss);
+    const normals = mobs.filter((m) => !m.boss && !m.worldBoss);
+    const levels = mobs.map(mid);
+    const lo = Math.min(...levels);
+    const hi = Math.max(...levels);
+
+    // Pick the one reference map whose roster covers this place's level band and
+    // has enough ordinary monsters to go round.
+    let bestMap = null;
+    let bestScore = Number.POSITIVE_INFINITY;
+    for (const [name, set] of neighbourhoods) {
+      const roster = [...set].filter(isReal);
+      const pool = roster.filter((r) => !r.boss && !r.mvp);
+      // Three residents is enough to be a neighbourhood. Demanding one per
+      // monster of ours ruled out every region for our two big zones, which hold
+      // forty monsters against a region's twenty; repeating a resident is
+      // already the cheap, intended outcome.
+      if (pool.length < 3) continue;
+      const rl = pool.map((r) => r.level);
+      const rLo = Math.min(...rl);
+      const rHi = Math.max(...rl);
+      // Both the CENTRE and the SPREAD have to line up. Scoring on the centre
+      // alone picked maps that happen to average right while running from level
+      // 1 to level 25, which then handed our level-7 monster a level-25 wolf.
+      const centre = Math.abs((rLo + rHi) / 2 - (lo + hi) / 2);
+      const spread = Math.abs(rHi - rLo - (hi - lo));
+      let score = centre * 2 + spread + Math.abs(pool.length - normals.length) * 0.25;
+      if (usedMaps.has(name)) score += 25;
+      if (score < bestScore) {
+        bestScore = score;
+        bestMap = { name, pool, bosses: roster.filter((r) => r.boss || r.mvp) };
+      }
+    }
+    if (!bestMap) {
+      console.error(
+        `no reference region fits ${place.name} (${normals.length} monsters, lv ${lo}-${hi})`,
+      );
+      continue;
+    }
+    usedMaps.add(bestMap.name);
+
+    // Inside the neighbourhood, by RANK rather than by nearest level: our
+    // weakest takes their weakest and our strongest their strongest, spread
+    // proportionally when the two rosters are different sizes. Nearest-level
+    // matching collapsed a whole zone onto whichever end of the region happened
+    // to be crowded; rank order is monotone, so neighbours of ours stay
+    // neighbours of theirs, which is the entire point of the exercise.
+    const rank = (list, i, n) =>
+      list[Math.min(list.length - 1, Math.floor((i * list.length) / Math.max(1, n)))];
+    const ladder = [...bestMap.pool].sort((a, b) => a.level - b.level);
+    normals.forEach((mob, i) => {
+      out.push({ mob, ref: rank(ladder, i, normals.length), place: place.name, map: bestMap.name });
+    });
+    // Bosses take the neighbourhood's own bosses where it has them, and
+    // otherwise the strongest thing living there.
+    const bossLadder = [...(bestMap.bosses.length ? bestMap.bosses : bestMap.pool)].sort(
+      (a, b) => a.level - b.level,
+    );
+    bosses.forEach((mob, i) => {
+      out.push({
+        mob,
+        ref: rank(bossLadder, i, bosses.length),
+        place: place.name,
+        map: bestMap.name,
+      });
+    });
   }
   return out;
 }
 
-const reference = parseReference();
-const pairs = matchMonsters(reference, Object.values(MOBS));
+const pairs = matchMonsters();
 
 if (process.argv.includes('--json')) {
   console.log(
-    JSON.stringify(Object.fromEntries(pairs.map((p) => [p.mob.id, p.ref.aegis])), null, 2),
+    JSON.stringify(
+      Object.fromEntries(pairs.map((p) => [p.mob.id, { ref: p.ref.aegis, map: p.map }])),
+      null,
+      2,
+    ),
   );
 } else {
-  for (const { mob, ref, ourLevel } of pairs) {
+  let place = null;
+  for (const p of pairs.sort(
+    (a, b) => a.place.localeCompare(b.place) || a.ref.level - b.ref.level,
+  )) {
+    if (p.place !== place) {
+      place = p.place;
+      console.log(`\n${place}  <-  ${p.map}`);
+    }
     console.log(
-      `${mob.id.padEnd(32)} lv${String(ourLevel).padStart(2)} ${String(mob.race).padEnd(10)}${String(mob.element).padEnd(8)}${String(mob.size).padEnd(7)}` +
-        ` -> ${ref.name.padEnd(22)} lv${String(ref.level).padStart(2)} hp${String(ref.hp).padStart(6)} atk${ref.atk}-${ref.atk2} def${ref.def} mdef${ref.mdef} exp${ref.baseExp}/${ref.jobExp}`,
+      `  ${p.mob.id.padEnd(32)} lv${String(mid(p.mob)).padStart(2)} -> ${p.ref.name.padEnd(20)} lv${String(p.ref.level).padStart(2)} hp${String(p.ref.hp).padStart(6)} atk${p.ref.atk}-${p.ref.atk2} def${p.ref.def} exp${p.ref.baseExp}/${p.ref.jobExp}`,
     );
   }
-  const gap = pairs.reduce((sum, p) => sum + Math.abs(p.ref.level - p.ourLevel), 0) / pairs.length;
-  console.error(
-    `\npaired ${pairs.length} of ${Object.keys(MOBS).length}, mean level gap ${gap.toFixed(1)}`,
-  );
+  console.error(`\npaired ${pairs.length} of ${Object.keys(MOBS).length}`);
 }
