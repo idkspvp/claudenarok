@@ -20,7 +20,8 @@
       "!tests/server/fixtures",
       "!**/*.svelte",
       "!**/*.min.js",
-      "!docs/design/professions-system",
+      "!docs/design/data/spiritvale-raw",
+    "!docs/design/professions-system",
       "!docs/design/professions-system.html",
       "!ip-refactor"
     ]
