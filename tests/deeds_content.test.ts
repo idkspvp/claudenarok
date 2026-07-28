@@ -45,19 +45,19 @@ const PREFIX_CATEGORY: Record<string, DeedCategory> = {
 };
 
 describe('audited launch totals (literals: update deliberately with the catalog)', () => {
-  it('ships exactly 213 deeds worth 2630 total Renown', () => {
+  it('ships exactly 209 deeds worth 2580 total Renown', () => {
     // Down from 219 / 2,710: five quest-triggered deeds went with the quest system
     // (dgn_nythraxis_crypt, prog_callused_hands, prog_mere_at_rest, prog_crown_below,
     // hid_codfather).
-    expect(DEED_ORDER.length).toBe(213);
-    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2630);
+    expect(DEED_ORDER.length).toBe(209);
+    expect(ALL.reduce((sum, d) => sum + d.renown, 0)).toBe(2580);
   });
 
   it('ships the audited per-category counts', () => {
     const byCategory: Record<string, number> = {};
     for (const d of ALL) byCategory[d.category] = (byCategory[d.category] ?? 0) + 1;
     expect(byCategory).toEqual({
-      progression: 47,
+      progression: 43,
       combat: 10,
       dungeon: 26,
       delve: 13,
@@ -77,8 +77,8 @@ describe('audited launch totals (literals: update deliberately with the catalog)
     // removal deleted four entries from this stretch (hid_codfather closed the
     // launch block; prog_crown_below, prog_mere_at_rest, prog_callused_hands and
     // dgn_nythraxis_crypt opened the tail), so both indices shift by one.
-    expect(DEED_ORDER[184]).toBe('hid_companion_save');
-    expect(DEED_ORDER.slice(185)).toEqual([
+    expect(DEED_ORDER[180]).toBe('hid_companion_save');
+    expect(DEED_ORDER.slice(181)).toEqual([
       'prog_tools_of_the_trade',
       'chr_marsh_first_cast',
       // Professions 2.0 tail (order-pinned like the block above).
@@ -275,9 +275,13 @@ describe('frozen trigger + renown catalog (design rule 9: never retro-edit a tri
   // (the `quest`/`quests` trigger kinds no longer exist) and eleven meta deeds
   // dropped their optional questIds arm. No surviving trigger was retro-edited.
   // Re-baselined for the card-duel removal: pvp_card_duel_first_win went with
-  // the minigame it triggered on, and its cardDuelsWon stat key with it. No
-  // surviving deed changed.
-  const FROZEN_CATALOG_SHA256 = '7d030a02065d786f19f1c9eba91f9f01d97fb3916555bc4de0bb5b74ade2041e';
+  // the minigame it triggered on, and its cardDuelsWon stat key with it.
+  // Re-baselined again for the talent removal: the four talent deeds
+  // (prog_talented, prog_specialized, prog_deep_roots, prog_full_build) went
+  // with the trees. They had been left wired to a meter stubbed at zero and two
+  // flags stubbed false, so they were unearnable rather than merely retired. No
+  // surviving deed changed in either pass.
+  const FROZEN_CATALOG_SHA256 = '0753b48c6d087b066e57cf003fd6b694476c6bde8661c78487f17ba270b84742';
 
   it('every shipped deed keeps its trigger and renown unchanged', () => {
     const canonical = JSON.stringify(

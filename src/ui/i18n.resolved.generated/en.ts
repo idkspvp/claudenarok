@@ -6694,11 +6694,11 @@ export const en: EnTranslations = {
       },
       "cold_snap": {
         "name": "Winter's Recall",
-        "description": "Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility. (Mage talent)"
+        "description": "Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility."
       },
       "greater_invisibility": {
         "name": "Greater Invisibility",
-        "description": "Vanish for 20 sec: removes 2 damage-over-time effects and you take 90% less damage while invisible and shortly after. (Mage talent)"
+        "description": "Vanish for 20 sec: removes 2 damage-over-time effects and you take 90% less damage while invisible and shortly after."
       },
       "hot_streak": {
         "name": "Hot Streak",
@@ -6706,7 +6706,7 @@ export const en: EnTranslations = {
       },
       "ice_floes": {
         "name": "Ice Floes",
-        "description": "Your next two spells with a cast time can be cast while moving. Lasts 15 sec. (Mage talent)"
+        "description": "Your next two spells with a cast time can be cast while moving. Lasts 15 sec."
       },
       "ignition": {
         "name": "Ignition",
@@ -6714,23 +6714,23 @@ export const en: EnTranslations = {
       },
       "mass_barrier": {
         "name": "Mass Barrier",
-        "description": "Shields you and up to 4 nearby allies within 30 yd, each absorbing 130 damage for 60 sec. (Mage talent)"
+        "description": "Shields you and up to 4 nearby allies within 30 yd, each absorbing 130 damage for 60 sec."
       },
       "overload": {
         "name": "Overload",
-        "description": "Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec. (Mage talent)"
+        "description": "Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec."
       },
       "power_echo": {
         "name": "Power Echo",
-        "description": "Your next direct spell repeats at 50% power on the same target. Lasts 10 sec. (Mage talent)"
+        "description": "Your next direct spell repeats at 50% power on the same target. Lasts 10 sec."
       },
       "rings_of_frost": {
         "name": "Hoarfrost Ring",
-        "description": "Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec. (Mage talent)"
+        "description": "Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec."
       },
       "rune_of_power": {
         "name": "Rune of Power",
-        "description": "Inscribe a rune of power at your feet for 15 sec: allies standing within 8 yd deal 10% more damage. (Mage talent)"
+        "description": "Inscribe a rune of power at your feet for 15 sec: allies standing within 8 yd deal 10% more damage."
       },
       "summon_water_elemental": {
         "name": "Summon Water Elemental",
@@ -7262,15 +7262,15 @@ export const en: EnTranslations = {
       },
       "whirlwind": {
         "name": "Bladed Gyre",
-        "description": "Spin in a deadly arc, striking all nearby enemies for {damage}. (Fury talent)"
+        "description": "Spin in a deadly arc, striking all nearby enemies for {damage}."
       },
       "berserker_rage": {
         "name": "Seething Fury",
-        "description": "Enter a seething fury, generating 20 rage. (Warrior talent)"
+        "description": "Enter a seething fury, generating 20 rage."
       },
       "crusader_strike": {
         "name": "Crusader Strike",
-        "description": "Strikes the target for weapon damage plus {damage} Holy damage. (Paladin talent)"
+        "description": "Strikes the target for weapon damage plus {damage} Holy damage."
       },
       "chain_heal": {
         "name": "Chain Heal",
@@ -7286,7 +7286,7 @@ export const en: EnTranslations = {
       },
       "aura_surge": {
         "name": "Dawnward Ricochet",
-        "description": "Hurl a dawnforged shield for {damage} Holy damage and silence the primary target for 2 sec. It bounces to up to 2 additional enemies within 10 yd for 75% damage per bounce. (Paladin talent)"
+        "description": "Hurl a dawnforged shield for {damage} Holy damage and silence the primary target for 2 sec. It bounces to up to 2 additional enemies within 10 yd for 75% damage per bounce."
       },
       "holy_shield": {
         "name": "Hallowed Wall",
@@ -7510,7 +7510,7 @@ export const en: EnTranslations = {
       },
       "aspect_of_the_wild": {
         "name": "Wildfang Rally",
-        "description": "Inspires allies within 30 yd with wild strength, increasing attack power by 45 and attack speed by 5% for 5 min. (Hunter talent)"
+        "description": "Inspires allies within 30 yd with wild strength, increasing attack power by 45 and attack speed by 5% for 5 min."
       },
       "avatar": {
         "name": "Ironshape",
@@ -7518,11 +7518,11 @@ export const en: EnTranslations = {
       },
       "avenging_wrath": {
         "name": "Wrathwing",
-        "description": "Calls down avenging power, increasing attack power by 60 and spell power by 30 for 20 sec. (Paladin talent)"
+        "description": "Calls down avenging power, increasing attack power by 60 and spell power by 30 for 20 sec."
       },
       "berserk": {
         "name": "Red Haze",
-        "description": "Increases attack power by 70 for 15 sec. (Druid talent)"
+        "description": "Increases attack power by 70 for 15 sec."
       },
       "bladestorm": {
         "name": "Rending Cyclone",
@@ -7530,19 +7530,19 @@ export const en: EnTranslations = {
       },
       "blink": {
         "name": "Flickerstep",
-        "description": "Teleports you 15 yd forward and breaks roots. (Mage talent)"
+        "description": "Teleports you 15 yd forward and breaks roots."
       },
       "bloodlust": {
         "name": "Storm Chorus",
-        "description": "Whips your group or raid into a frenzy, increasing attack, casting, and channeling speed by 30% for 15 sec. Allies recently affected by Storm Chorus or Temporal Acceleration are too exhausted to benefit. (Shaman talent)"
+        "description": "Whips your group or raid into a frenzy, increasing attack, casting, and channeling speed by 30% for 15 sec. Allies recently affected by Storm Chorus or Temporal Acceleration are too exhausted to benefit."
       },
       "chain_lightning": {
         "name": "Skybranch",
-        "description": "Hurls lightning at the target area, damaging nearby enemies for {damage}. (Shaman talent)"
+        "description": "Hurls lightning at the target area, damaging nearby enemies for {damage}."
       },
       "chaos_bolt": {
         "name": "Ruinbolt",
-        "description": "Hurls a bolt of chaotic fire for {damage} Fire damage. (Warlock talent)"
+        "description": "Hurls a bolt of chaotic fire for {damage} Fire damage."
       },
       "cleansing_verdict": {
         "name": "Cleansing Verdict",
@@ -7550,87 +7550,87 @@ export const en: EnTranslations = {
       },
       "cloak_of_shadows": {
         "name": "Shadecloak",
-        "description": "Wraps you in shadows, absorbing 420 damage for 5 sec. (Rogue talent)"
+        "description": "Wraps you in shadows, absorbing 420 damage for 5 sec."
       },
       "cone_of_cold": {
         "name": "Frostsweep",
-        "description": "Blasts nearby enemies with frost for {damage} Frost damage. (Mage talent)"
+        "description": "Blasts nearby enemies with frost for {damage} Frost damage."
       },
       "counterspell": {
         "name": "Spellbreak",
-        "description": "Counters enemy spellcasting, preventing any spell in that school from being cast for 6 sec. (Mage talent)"
+        "description": "Counters enemy spellcasting, preventing any spell in that school from being cast for 6 sec."
       },
       "curse_of_exhaustion": {
         "name": "Leaden Hex",
-        "description": "Curses the target, slowing movement by 30% for 12 sec. (Warlock talent)"
+        "description": "Curses the target, slowing movement by 30% for 12 sec."
       },
       "death_coil": {
         "name": "Morrowlash",
-        "description": "Strikes the enemy for {damage} Shadow damage, then horrifies them for 3 sec. (Warlock talent)"
+        "description": "Strikes the enemy for {damage} Shadow damage, then horrifies them for 3 sec."
       },
       "deep_freeze": {
         "name": "Deadfrost",
-        "description": "Deep freezes the target, dealing {damage} Frost damage and stunning it for 4 sec. (Mage talent)"
+        "description": "Deep freezes the target, dealing {damage} Frost damage and stunning it for 4 sec."
       },
       "desperate_prayer": {
         "name": "Last Prayer",
-        "description": "Instantly heals you for {damage}. (Priest talent)"
+        "description": "Instantly heals you for {damage}."
       },
       "deterrence": {
         "name": "Bristleguard",
-        "description": "Increases your dodge chance by 25 percentage points and reduces all damage taken by 30% for 10 sec. (Hunter talent)"
+        "description": "Increases your dodge chance by 25 percentage points and reduces all damage taken by 30% for 10 sec."
       },
       "divine_shield": {
         "name": "Lightward",
-        "description": "Shields you with holy power, absorbing 900 damage for 8 sec. (Paladin talent)"
+        "description": "Shields you with holy power, absorbing 900 damage for 8 sec."
       },
       "earthbind": {
         "name": "Gripping Earth",
-        "description": "Binds nearby enemies to the earth, rooting them for 2 sec. (Shaman talent)"
+        "description": "Binds nearby enemies to the earth, rooting them for 2 sec."
       },
       "evocation": {
         "name": "Aetherwell",
-        "description": "Channel for 6 sec: each second restores 100 mana and builds 8 spell power, stacking while you channel. (Mage talent)"
+        "description": "Channel for 6 sec: each second restores 100 mana and builds 8 spell power, stacking while you channel."
       },
       "frenzied_regeneration": {
         "name": "Savage Mending",
-        "description": "Restores 180 health over 10 sec. Bruin Form only. (Druid talent)"
+        "description": "Restores 180 health over 10 sec. Bruin Form only."
       },
       "frost_trap": {
         "name": "Rime Snare",
-        "description": "Places a frost trap at your feet that arms after 1.5 sec. The first enemy to touch it is frozen for 3 sec, unable to move or act. One trap at a time. Lasts 60 sec. (Hunter talent)"
+        "description": "Places a frost trap at your feet that arms after 1.5 sec. The first enemy to touch it is frozen for 3 sec, unable to move or act. One trap at a time. Lasts 60 sec."
       },
       "ghostly_strike": {
         "name": "Wraith Strike",
-        "description": "Strikes the enemy for weapon damage plus {damage} and briefly increases dodge. Awards 1 combo point. (Rogue talent)"
+        "description": "Strikes the enemy for weapon damage plus {damage} and briefly increases dodge. Awards 1 combo point."
       },
       "hammer_of_wrath": {
         "name": "Tolling Hammer",
-        "description": "Hurls a holy hammer at a wounded enemy for {damage} Holy damage. Only usable below 20% health. (Paladin talent)"
+        "description": "Hurls a holy hammer at a wounded enemy for {damage} Holy damage. Only usable below 20% health."
       },
       "healing_stream": {
         "name": "Springwell",
-        "description": "Restores 120 health to a friendly target over 12 sec. (Shaman talent)"
+        "description": "Restores 120 health to a friendly target over 12 sec."
       },
       "holy_wrath": {
         "name": "Saint's Ire",
-        "description": "Unleashes holy power, damaging nearby enemies for {damage}. (Paladin talent)"
+        "description": "Unleashes holy power, damaging nearby enemies for {damage}."
       },
       "howl_of_terror": {
         "name": "Dread Chorus",
-        "description": "Frightens nearby enemies for up to 3 sec. Damage may break the effect. (Warlock talent)"
+        "description": "Frightens nearby enemies for up to 3 sec. Damage may break the effect."
       },
       "ice_block": {
         "name": "Cold Coffin",
-        "description": "Encases you in ice, absorbing a massive amount of damage for 8 sec. (Mage talent)"
+        "description": "Encases you in ice, absorbing a massive amount of damage for 8 sec."
       },
       "inner_focus": {
         "name": "Stilled Mind",
-        "description": "Makes your next spell free. Lasts 60 sec. (Priest talent)"
+        "description": "Makes your next spell free. Lasts 60 sec."
       },
       "innervate": {
         "name": "Lifesap",
-        "description": "Living sap wells up in you for 10 sec, restoring 20 of your current resource in waves: mana, Rage, or Energy, and shifting forms does not break it. Sleep, stun, or stasis stills the sap. (Druid talent)"
+        "description": "Living sap wells up in you for 10 sec, restoring 20 of your current resource in waves: mana, Rage, or Energy, and shifting forms does not break it. Sleep, stun, or stasis stills the sap."
       },
       "pummel": {
         "name": "Jawcrack",
@@ -7642,11 +7642,11 @@ export const en: EnTranslations = {
       },
       "mend_pet": {
         "name": "Patch Up",
-        "description": "Heals a friendly target for {damage} over 15 sec. (Hunter talent)"
+        "description": "Heals a friendly target for {damage} over 15 sec."
       },
       "meteor": {
         "name": "Skystone",
-        "description": "Calls down a meteor at the target area, dealing {damage} Fire damage and burning the ground. (Mage talent)"
+        "description": "Calls down a meteor at the target area, dealing {damage} Fire damage and burning the ground."
       },
       "temporal_mend": {
         "name": "Temporal Mend",
@@ -7694,27 +7694,27 @@ export const en: EnTranslations = {
       },
       "mind_sear": {
         "name": "Thoughtburn",
-        "description": "Channels shadow energy at the target area, damaging nearby enemies each second for {damage}. (Priest talent)"
+        "description": "Channels shadow energy at the target area, damaging nearby enemies each second for {damage}."
       },
       "multi_shot": {
         "name": "Splitshot",
-        "description": "Loose a spread at the target area, dealing {damage} Physical damage to enemies within 8 yd. (Hunter talent)"
+        "description": "Loose a spread at the target area, dealing {damage} Physical damage to enemies within 8 yd."
       },
       "prayer_of_healing": {
         "name": "Choirmend",
-        "description": "Heals nearby allies for {damage}. (Priest talent)"
+        "description": "Heals nearby allies for {damage}."
       },
       "preparation": {
         "name": "Contingency",
-        "description": "Finishes the cooldown on Swift Heels, Ghostfoot, and Smokestep. (Rogue talent)"
+        "description": "Finishes the cooldown on Swift Heels, Ghostfoot, and Smokestep."
       },
       "presence_of_mind": {
         "name": "Racing Mind",
-        "description": "Makes your next spell with a cast time instant. Lasts 60 sec. (Mage talent)"
+        "description": "Makes your next spell with a cast time instant. Lasts 60 sec."
       },
       "psychic_scream": {
         "name": "Terror Canticle",
-        "description": "Frightens nearby enemies for up to 4 sec. Damage may break the effect. (Priest talent)"
+        "description": "Frightens nearby enemies for up to 4 sec. Damage may break the effect."
       },
       "counter_shot": {
         "name": "Hushing Shot",
@@ -7726,11 +7726,11 @@ export const en: EnTranslations = {
       },
       "shadowstep": {
         "name": "Shadeslip",
-        "description": "Steps through the shadows toward your target without breaking Duskveil. (Rogue talent)"
+        "description": "Steps through the shadows toward your target without breaking Duskveil."
       },
       "silence": {
         "name": "Hushword",
-        "description": "Silences the target for 4 sec. (Priest talent)"
+        "description": "Silences the target for 4 sec."
       },
       "smoke_screen": {
         "name": "Smoke Screen",
@@ -7754,7 +7754,7 @@ export const en: EnTranslations = {
       },
       "tranquility": {
         "name": "Gladesong",
-        "description": "Channels restorative energy for 4 sec, healing allies within 30 yd for 42 to 52 each second. (Druid talent)"
+        "description": "Channels restorative energy for 4 sec, healing allies within 30 yd for 42 to 52 each second."
       },
       "typhoon": {
         "name": "Typhoon",

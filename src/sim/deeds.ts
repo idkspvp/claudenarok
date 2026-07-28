@@ -578,7 +578,6 @@ const NON_MANUAL_ORDER: readonly string[] = DEED_ORDER.filter(
 // (the deedStats ledgers) without declaring the matching key here.
 export const METER_DIRTY_KEYS: Record<DeedMeterId, readonly string[]> = {
   prestigeRank: [],
-  talentPoints: [],
   arenaRankedMatches: [],
   arenaRankedWins: [],
   vcupWins: [],
@@ -681,10 +680,6 @@ function deedListForKeys(keys: ReadonlySet<string>): readonly string[] {
 
 const METERS: Record<DeedMeterId, (meta: PlayerMeta) => number> = {
   prestigeRank: (m) => m.prestigeRank,
-  // The talent trees are retired (Phase D0). The meter is KEPT and reads zero
-  // so the four deeds still wired to it simply cannot progress, instead of
-  // failing to resolve a meter that no longer exists.
-  talentPoints: () => 0,
   arenaRankedMatches: (m) => m.arenaWins + m.arenaLosses + m.arena2v2Wins + m.arena2v2Losses,
   arenaRankedWins: (m) => m.arenaWins + m.arena2v2Wins,
   vcupWins: (m) => m.vcupWins,
@@ -716,9 +711,6 @@ const MARK_CIRCUIT_DUNGEONS = [
 ];
 
 const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
-  // Retired with the talent trees (see the talentPoints meter above).
-  talentSpecChosen: () => false,
-  talentCapstone: () => false,
   hasRestedXp: (m) => m.restedXp > 0,
   // Guild membership is server-stamped onto the entity; offline it stays ''
   // (never satisfiable there, matching the offline-sandbox model).

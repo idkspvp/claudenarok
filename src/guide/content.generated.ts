@@ -1729,38 +1729,6 @@ export const GUIDE_DEEDS: GuideDeed[] = [
     "crest": "/ui/deeds/prog_well_rested.webp"
   },
   {
-    "id": "prog_talented",
-    "name": "A Point Well Spent",
-    "category": "progression",
-    "renown": 5,
-    "feat": false,
-    "crest": "/ui/deeds/prog_talented.webp"
-  },
-  {
-    "id": "prog_specialized",
-    "name": "Declaration of Intent",
-    "category": "progression",
-    "renown": 10,
-    "feat": false,
-    "crest": "/ui/deeds/prog_specialized.webp"
-  },
-  {
-    "id": "prog_deep_roots",
-    "name": "Deep Roots",
-    "category": "progression",
-    "renown": 10,
-    "feat": false,
-    "crest": "/ui/deeds/prog_deep_roots.webp"
-  },
-  {
-    "id": "prog_full_build",
-    "name": "The Full Six",
-    "category": "progression",
-    "renown": 25,
-    "feat": false,
-    "crest": "/ui/deeds/prog_full_build.webp"
-  },
-  {
     "id": "prog_veteran",
     "name": "Veteran",
     "category": "progression",

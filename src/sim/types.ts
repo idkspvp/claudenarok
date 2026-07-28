@@ -4835,7 +4835,6 @@ export const DEED_STAT_KEYS: readonly DeedStatKey[] = [
 // 'meter' grants at reading >= amount and therefore retro-grants on load.
 export type DeedMeterId =
   | 'prestigeRank'
-  | 'talentPoints'
   | 'arenaRankedMatches'
   | 'arenaRankedWins'
   | 'vcupWins'
@@ -4850,8 +4849,6 @@ export type DeedMeterId =
 // Boolean predicates over already-persisted state (see the flag table in
 // deeds.ts). Like meters, they retro-grant on load.
 export type DeedFlagId =
-  | 'talentSpecChosen'
-  | 'talentCapstone'
   | 'hasRestedXp'
   | 'guildMember'
   | 'allEquipSlotsFilled'

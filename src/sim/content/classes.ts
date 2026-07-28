@@ -3253,7 +3253,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Spin in a deadly arc, striking all nearby enemies for $d at no rage cost. Your next 2 single-target abilities also strike enemies near their target. (Fury talent)',
+      'Spin in a deadly arc, striking all nearby enemies for $d at no rage cost. Your next 2 single-target abilities also strike enemies near their target.',
   },
   berserker_rage: {
     id: 'berserker_rage',
@@ -3268,7 +3268,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     offGcd: true,
     effects: [{ type: 'gainResource', amount: 20 }],
-    description: 'Enter a berserker rage, generating 20 rage. (Warrior talent)',
+    description: 'Enter a berserker rage, generating 20 rage.',
   },
   // ------ Base-kit rescues from PR #1348 (owner ruling: these three are BASE
   // swordman abilities, not talents) ------
@@ -3771,7 +3771,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     school: 'arcane',
     requiresTarget: false,
     effects: [{ type: 'blinkForward', distance: 15, breakRoots: true }],
-    description: 'Teleports you 15 yd forward and breaks roots. (Mage talent)',
+    description: 'Teleports you 15 yd forward and breaks roots.',
   },
   counter_shot: {
     id: 'counter_shot',
@@ -3788,7 +3788,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: true,
     effects: [{ type: 'interrupt', lockout: 4 }],
     description:
-      'Interrupts spellcasting and prevents any spell in that school from being cast for 4 sec. (Hunter talent)',
+      'Interrupts spellcasting and prevents any spell in that school from being cast for 4 sec.',
   },
   counterspell: {
     id: 'counterspell',
@@ -3803,7 +3803,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: true,
     effects: [{ type: 'interrupt', lockout: 6 }],
     description:
-      'Counters enemy spellcasting, preventing any spell in that school from being cast for 6 sec. (Mage talent)',
+      'Counters enemy spellcasting, preventing any spell in that school from being cast for 6 sec.',
   },
   deep_freeze: {
     id: 'deep_freeze',
@@ -3821,7 +3821,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'stun', duration: 4 },
     ],
     description:
-      'Deep freezes the target, dealing $d Frost damage and stunning it for 4 sec. (Mage talent)',
+      'Deep freezes the target, dealing $d Frost damage and stunning it for 4 sec.',
   },
   evocation: {
     id: 'evocation',
@@ -3843,7 +3843,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'buff_spellpower', value: 8, duration: 15 },
     ],
     description:
-      'Channel for 6 sec: each second restores 100 mana and builds 8 spell power, stacking while you channel and lasting 15 sec. (Mage talent)',
+      'Channel for 6 sec: each second restores 100 mana and builds 8 spell power, stacking while you channel and lasting 15 sec.',
   },
   ice_block: {
     id: 'ice_block',
@@ -3877,7 +3877,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: true,
     targetType: 'friendly',
     effects: [{ type: 'hot', total: 135, duration: 15, interval: 3 }],
-    description: 'Heals a friendly target for $d over 15 sec. (Hunter talent)',
+    description: 'Heals a friendly target for $d over 15 sec.',
   },
   meteor: {
     id: 'meteor',
@@ -3922,7 +3922,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     offGcd: true, // owner 2026-07-13: fire it without spending the global cooldown
     effects: [{ type: 'selfBuff', kind: 'next_cast_instant', value: 1, duration: 60 }],
-    description: 'Makes your next spell with a cast time instant. Lasts 60 sec. (Mage talent)',
+    description: 'Makes your next spell with a cast time instant. Lasts 60 sec.',
   },
   // --- Mage choice-row actives (owner tree, Artifact calculator 2026-07-11).
   // WoW development names, renamed with the final localization pass like the
@@ -3943,7 +3943,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // worn and finishing a hard cast decrements it (casting_lifecycle).
     effects: [{ type: 'selfBuff', kind: 'ice_floes', value: 2, duration: 15 }],
     description:
-      'Your next two spells with a cast time can be cast while moving. Lasts 15 sec. (Mage talent)',
+      'Your next two spells with a cast time can be cast while moving. Lasts 15 sec.',
   },
   greater_invisibility: {
     id: 'greater_invisibility',
@@ -3962,7 +3962,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'greaterInvisibility', duration: 20, drValue: 0.9, linger: 3, removeDotCount: 2 },
     ],
     description:
-      'Vanish for 20 sec: removes 2 damage-over-time effects and you take 90% less damage while invisible and shortly after. (Mage talent)',
+      'Vanish for 20 sec: removes 2 damage-over-time effects and you take 90% less damage while invisible and shortly after.',
   },
   rings_of_frost: {
     id: 'rings_of_frost',
@@ -3989,7 +3989,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec. (Mage talent)',
+      'Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec.',
   },
   cold_snap: {
     id: 'cold_snap',
@@ -4016,7 +4016,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       },
     ],
     description:
-      'Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility. (Mage talent)',
+      'Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility.',
   },
   mass_barrier: {
     id: 'mass_barrier',
@@ -4031,7 +4031,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     effects: [{ type: 'aoeAllyAbsorb', amount: 130, duration: 60, radius: 30, maxTargets: 5 }],
     description:
-      'Shields you and up to 4 nearby allies within 30 yd, each absorbing 130 damage for 60 sec. (Mage talent)',
+      'Shields you and up to 4 nearby allies within 30 yd, each absorbing 130 damage for 60 sec.',
   },
   overload: {
     id: 'overload',
@@ -4047,7 +4047,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     offGcd: true,
     effects: [{ type: 'selfBuff', kind: 'overload', value: 0.4, duration: 10 }],
     description:
-      'Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec. (Mage talent)',
+      'Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec.',
   },
   power_echo: {
     id: 'power_echo',
@@ -4063,7 +4063,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     offGcd: true,
     effects: [{ type: 'selfBuff', kind: 'power_echo', value: 0.5, duration: 10 }],
     description:
-      'Your next direct spell repeats at 50% power on the same target. Lasts 10 sec. (Mage talent)',
+      'Your next direct spell repeats at 50% power on the same target. Lasts 10 sec.',
   },
   rune_of_power: {
     id: 'rune_of_power',
@@ -4083,7 +4083,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'groundAoE', min: 0, max: 0, radius: 8, duration: 15, interval: 2, allyBuffPct: 0.1 },
     ],
     description:
-      'Inscribe a rune of power at your feet for 15 sec: allies standing within 8 yd deal 10% more damage. (Mage talent)',
+      'Inscribe a rune of power at your feet for 15 sec: allies standing within 8 yd deal 10% more damage.',
   },
   blazing_barrier: {
     id: 'blazing_barrier',
@@ -4219,7 +4219,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
     description:
-      'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec. (Warrior talent)',
+      'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec.',
   },
   shadowslip: {
     id: 'shadowslip',
@@ -4237,7 +4237,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
     description:
-      'Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec. (Rogue talent)',
+      'Slips 8 yards forward, breaking roots, and slides untouched through all damage for 1 sec.',
   },
   wildstep: {
     id: 'wildstep',
@@ -4255,7 +4255,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
     description:
-      'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec. (Hunter talent)',
+      'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec.',
   },
   phase_tumble: {
     id: 'phase_tumble',
@@ -4273,7 +4273,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
     description:
-      'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec. (Mage talent)',
+      'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec.',
   },
   veilstep: {
     id: 'veilstep',
@@ -4291,7 +4291,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
     description:
-      'Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec. (Priest talent)',
+      'Steps 8 yards forward behind the veil, breaking roots, and takes no damage for 1 sec.',
   },
 
   // Canonical Talents V2 active grants. These are absent from baseline class kits
