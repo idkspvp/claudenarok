@@ -124,3 +124,8 @@ dist-bot/
 claudenarok-main.zip
 *.zip
 .cache/
+
+# Untracked scratch scripts. The leading underscore marks a throwaway probe:
+# they are not part of the build and are often left mid-edit, so the lint gate
+# should not read them.
+scripts/_*.mjs
