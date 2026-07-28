@@ -27,7 +27,6 @@
 // `src/sim`-pure: no DOM/Three, no Math.random/Date.now; all randomness is the shared
 // `ctx.rng` stream, drawn in the exact pre-move positions.
 
-import { cardAttackMultiplier } from '../cards';
 import { ITEMS, isArenaPos, MOBS } from '../data';
 import { weaponHand } from '../equipment_rules';
 import { TWOHAND_DPS_MULT } from '../item_budget';
@@ -613,6 +612,10 @@ export function meleeSwing(
     attribute.size;
   let dmg = (weaponPart + statusAttackContribution(ctx, attacker, apSwingSpeed)) * mult;
   dmg += bonus + imbueBonus;
+  // The over-refine half of a refined weapon: a random 1 to N, part of BASE
+  // attack power and therefore added here, before defence, not with the flat
+  // half that lands after it. Zero and no rng draw for an ordinary weapon.
+  dmg += ctx.overRefineAtk(attacker);
   // Everything after the attack power is assembled, in the reference's order:
   // defence, refine, the floor, the attribute chart, then cards. The chart and
   // the cards used to run HERE, before defence, which is not where the reference

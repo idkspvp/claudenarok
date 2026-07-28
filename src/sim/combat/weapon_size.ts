@@ -31,14 +31,19 @@ const SIZE_TABLE: Readonly<Record<WeaponType, Readonly<Record<Size, number>>>> =
   twohand_axe: { small: 50, medium: 75, large: 100 },
   // Blunt force does not care what shape it hits.
   mace: { small: 75, medium: 100, large: 100 },
-  // A two-handed mace trades the one-hander's small-target penalty for a heavier
-  // swing against everything, which is Ragnarok's own row for it.
-  twohand_mace: { small: 75, medium: 100, large: 100 },
+  // A two-handed mace has NO row of its own in the reference, base or
+  // pre-renewal override, which means an even trade against every size. This
+  // read 75 on small, carried over from the one-hander, until an audit checked
+  // it against the merged table.
+  twohand_mace: { small: 100, medium: 100, large: 100 },
   knuckle: { small: 100, medium: 75, large: 50 },
   // Caster and support arms: they are not what the wielder fights with.
   rod: { small: 100, medium: 100, large: 100 },
   twohand_rod: { small: 100, medium: 100, large: 100 },
-  book: { small: 100, medium: 100, large: 75 },
+  // The pre-renewal override drops a book to HALF against a large target, not
+  // three quarters: db/size_fix.yml gives it Large 50 and omits the other two,
+  // and an omitted cell is 100.
+  book: { small: 100, medium: 100, large: 50 },
   instrument: { small: 75, medium: 100, large: 75 },
   whip: { small: 75, medium: 100, large: 50 },
   // A bow's arrow does the work, so the size penalty is mild and even.

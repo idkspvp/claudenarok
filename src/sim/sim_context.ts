@@ -627,6 +627,10 @@ export interface SimContextCallbacks {
   // the floor, the attribute chart, cards. Every physical channel resolves
   // through this. May return a NEGATIVE
   // number when the defender absorbs the attribute (sim.ts resolvePhysical).
+  // The over-refine half of a weapon's refine: a random 1 to N added to base
+  // attack power BEFORE defence, the opposite side from resolvePhysical's flat
+  // half. Draws no rng for an ordinary weapon.
+  overRefineAtk(attacker: Entity): number;
   resolvePhysical(
     damage: number,
     attacker: Entity | null,
@@ -1224,6 +1228,7 @@ export function createSimContext(host: SimContextHost): SimContext {
     // M3 mob-swing affix cascade seam.
     effectiveArmor: host.effectiveArmor,
     recalcPlayer: host.recalcPlayer,
+    overRefineAtk: host.overRefineAtk,
     resolvePhysical: host.resolvePhysical,
     applyMagicDefence: host.applyMagicDefence,
     // I2a delve run lifecycle bindings. grantXp/despawnPet/delveRunForMob/

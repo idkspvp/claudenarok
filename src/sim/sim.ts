@@ -83,7 +83,7 @@ import {
 import { advanceHeroicLeap } from './combat/heroic_leap';
 import { applyMagicDefence } from './combat/magic_defence';
 import { tickNaturesFury } from './combat/natures_fury';
-import { refineFlatAtk } from './combat/refine';
+import { overRefineBonus, overRefineMax, refineFlatAtk } from './combat/refine';
 import * as resurrectionOfferMod from './combat/resurrection_offer';
 import { rewindHealAmount } from './combat/rewind';
 import { applySetProcs as applySetProcsImpl } from './combat/set_procs';
@@ -349,6 +349,7 @@ import {
   revivePlayerAt,
   spawnOverworldSpiritHealers,
 } from './spirit';
+import type { WeaponLevel } from './types';
 import {
   rollWorldBossLoot as rollWorldBossLootImpl,
   scaleWorldBossHp,
@@ -3969,6 +3970,7 @@ export class Sim {
       effectiveArmor: sim.effectiveArmor.bind(sim),
       recalcPlayer: sim.recalcPlayer.bind(sim),
       // C3: the shared two-layer defence entry point (see the SimContext decl).
+      overRefineAtk: sim.overRefineAtk.bind(sim),
       resolvePhysical: sim.resolvePhysical.bind(sim),
       applyMagicDefence: sim.applyMagicDefence.bind(sim),
       // I2a delve run lifecycle now lives in src/sim/delves/runs.ts; the moved module
@@ -4653,8 +4655,9 @@ export class Sim {
   //
   // The defence roll is drawn FIRST and unconditionally, exactly where
   // the removed applyDefence drew it, so converting a call site did not move
-  // draw order. The over-refine draw happens only for a weapon that actually
-  // carries an over-refine, the same discipline the gear procs use.
+  // the shared draw order. It is the only draw this method makes; the
+  // over-refine roll belongs to the PRE-defence attack assembly and is drawn
+  // there (combat/auto_attack.ts), because that is where the reference adds it.
   //
   // May return a NEGATIVE number when the defender absorbs the attribute: the
   // caller decides whether that heals or is discarded, rather than having it
@@ -4704,24 +4707,44 @@ export class Sim {
     return (item?.kind === 'weapon' ? item.weapon?.element : undefined) ?? 'neutral';
   }
 
-  // The flat half of the wielder's refine, which is the half that lands after
-  // defence. Zero for anything unrefined, which is everything until a copy
-  // actually carries a refine level.
-  private weaponRefineFlat(attacker: Entity): number {
-    if (attacker.kind !== 'player') return 0;
-    const meta = this.players.get(attacker.id);
-    const refine = meta?.equipmentInstance?.mainhand?.refine ?? 0;
-    if (refine <= 0) return 0;
+  // The wielder's mainhand refine level and the weapon class it applies to.
+  // Zero for anything unrefined, which is everything until a copy actually
+  // carries a refine level.
+  private mainhandRefine(attacker: Entity): { refine: number; weaponLevel?: WeaponLevel } {
+    if (attacker.kind !== 'player') return { refine: 0 };
+    const refine = this.players.get(attacker.id)?.equipmentInstance?.mainhand?.refine ?? 0;
+    if (refine <= 0) return { refine: 0 };
     const item = ITEMS[attacker.mainhandItemId ?? ''];
-    return refineFlatAtk(item?.kind === 'weapon' ? item.weapon?.weaponLevel : undefined, refine);
+    return { refine, weaponLevel: item?.kind === 'weapon' ? item.weapon?.weaponLevel : undefined };
   }
 
-  // Ragnarok's magic reduction, the mirror of resolvePhysical above. Hard MDEF is
-  // passed as 0 because this game has no magic-armour field to derive it from:
-  // `Entity.armor` is a single physical value and no ItemDef carries a magic
-  // counterpart, so only the flat Intelligence layer bites until the gear records
-  // carry one (roadmap B3). Draws NO rng, which is what let this land without
-  // shifting the global draw order on any cast.
+  // The flat half of the wielder's refine, which is the half that lands after
+  // defence.
+  private weaponRefineFlat(attacker: Entity): number {
+    const { refine, weaponLevel } = this.mainhandRefine(attacker);
+    return refine <= 0 ? 0 : refineFlatAtk(weaponLevel, refine);
+  }
+
+  // The OTHER half: a random 1 to N added to base attack power BEFORE defence,
+  // which is where the reference adds it (`battle.cpp:2419`, and its own comment
+  // says the over-refine bonus is part of base attack). Draws NO rng unless the
+  // weapon is actually refined past its safe limit, so an ordinary weapon leaves
+  // the shared stream untouched.
+  overRefineAtk(attacker: Entity): number {
+    const { refine, weaponLevel } = this.mainhandRefine(attacker);
+    if (refine <= 0 || overRefineMax(weaponLevel, refine) <= 0) return 0;
+    return overRefineBonus(weaponLevel, refine, this.rng.next());
+  }
+
+  // Ragnarok's magic reduction, the mirror of resolvePhysical above. Hard MDEF
+  // is real now: the gear records carry `mdef` and it is passed below. Draws NO
+  // rng, which is what let this land without shifting the global draw order on
+  // any cast.
+  //
+  // What it is still MISSING, and the largest remaining fidelity gap: the
+  // attribute chart. The reference runs `battle_attr_fix` on magic too, right
+  // after magic defence (`battle.cpp:6238`), and a bolt is where the element
+  // triangle matters most. Closing it needs an attribute on AbilityDef.
   private applyMagicDefence(damage: number, target: Entity): number {
     return applyMagicDefence(damage, {
       // Equipment magic defence. This was 0 while no field existed to feed it:

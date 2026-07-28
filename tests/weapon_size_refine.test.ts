@@ -200,3 +200,38 @@ describe('the two halves of a refine, which land on opposite sides of defence', 
     expect(refineAttackBonus(1, 7)).toBe(refineFlatAtk(1, 7));
   });
 });
+
+describe('the size table, pinned to literals', () => {
+  it('matches the reference row for row', () => {
+    // Every other case in this file is RELATIONAL ("a dagger beats a spear on a
+    // small target"), which is the right shape for a rule but cannot catch a
+    // single wrong cell. Two were wrong and nothing failed: a two-handed mace
+    // carried the one-hander's 75 on small, and a book read 75 on large instead
+    // of 50. The values come from db/size_fix.yml merged with the pre-renewal
+    // override, where an omitted cell means 100.
+    const expected: Record<string, [number, number, number]> = {
+      dagger: [100, 75, 50],
+      sword: [75, 100, 75],
+      twohand_sword: [75, 75, 100],
+      spear: [75, 75, 100],
+      twohand_spear: [75, 75, 100],
+      axe: [50, 75, 100],
+      twohand_axe: [50, 75, 100],
+      mace: [75, 100, 100],
+      twohand_mace: [100, 100, 100],
+      knuckle: [100, 75, 50],
+      rod: [100, 100, 100],
+      twohand_rod: [100, 100, 100],
+      book: [100, 100, 50],
+      instrument: [75, 100, 75],
+      whip: [75, 100, 50],
+      bow: [100, 100, 75],
+    };
+    for (const [type, [small, medium, large]] of Object.entries(expected)) {
+      const t = type as WeaponType;
+      expect(Math.round(weaponSizeMultiplier(t, 'small') * 100), `${type} small`).toBe(small);
+      expect(Math.round(weaponSizeMultiplier(t, 'medium') * 100), `${type} medium`).toBe(medium);
+      expect(Math.round(weaponSizeMultiplier(t, 'large') * 100), `${type} large`).toBe(large);
+    }
+  });
+});

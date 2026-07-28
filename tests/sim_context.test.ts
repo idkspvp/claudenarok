@@ -150,6 +150,7 @@ const CALLBACK_KEYS = [
   'awardHeroicMarks',
   // M3 mob-swing affix cascade surface.
   'effectiveArmor',
+  'overRefineAtk',
   'resolvePhysical',
   'recalcPlayer',
   // I2a delve run lifecycle consume surface (helpers / gates / pet seam / I2b / I2c
@@ -437,6 +438,7 @@ function makeFakeHost() {
     resetEvadingMob: vi.fn(),
     onBossDeath: vi.fn(),
     effectiveArmor: vi.fn(() => 0),
+    overRefineAtk: vi.fn(() => 0),
     resolvePhysical: vi.fn((damage: number) => damage),
     applyMagicDefence: (d: number) => d,
     recalcPlayer: vi.fn(),

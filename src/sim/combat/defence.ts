@@ -101,19 +101,17 @@ export interface DefenceInput {
  *  what the hard-DEF cap already exists to prevent. */
 export const MIN_DAMAGE_AFTER_DEF = 1;
 
-/** Damage after both layers. Percentage first, then the flat subtraction:
- *  reversing them would make soft DEF scale with armour, which is not what
- *  either layer is for.
+/** Damage after both layers, floored. Percentage first, then the flat
+ *  subtraction: reversing them would make soft DEF scale with armour, which is
+ *  not what either layer is for.
  *
- *  The floor is applied HERE, which is a simplification of Ragnarok's real
- *  order. There, post-defence damage is allowed to go NEGATIVE, the weapon's
- *  refine bonus is added against that negative value, and only then is the total
- *  capped to 1 (`battle_calc_attack_post_defense`, whose comment says exactly
- *  that). Being able to dig out of a negative is what makes over-refining a
- *  weapon worth anything against a high-DEF target. Refining is authored
- *  (`combat/refine.ts`) but is not yet a term in the physical damage pipeline, so
- *  there is nothing to apply between the subtraction and the floor; when it is
- *  wired in, the floor moves to the call site and this returns the raw value. */
+ *  NOT the live path. The sim resolves a physical hit through
+ *  `combat/damage_pipeline.ts`, which does the same two layers and then keeps
+ *  going: the refine bonus is added against a possibly NEGATIVE value, the floor
+ *  of 1 comes after it, and only then does the attribute chart run. That order
+ *  is what makes over-refining worth anything against a heavily armoured target.
+ *  This function survives because its layer arithmetic is what the unit tests
+ *  drive directly. */
 export function applyDefence(damage: number, def: DefenceInput): number {
   const afterHard = damage * hardDefMultiplier(def.armor);
   const soft = def.isMonster ? monsterSoftDef(def.vit, def.roll) : playerSoftDef(def.vit, def.roll);

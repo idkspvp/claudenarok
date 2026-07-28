@@ -280,6 +280,7 @@ function makeCtx() {
     resetEvadingMob: vi.fn(),
     onBossDeath: vi.fn(),
     effectiveArmor: vi.fn(() => 0),
+    overRefineAtk: vi.fn(() => 0),
     resolvePhysical: vi.fn((damage: number) => damage),
     applyMagicDefence: (d: number) => d,
     recalcPlayer: vi.fn(),
