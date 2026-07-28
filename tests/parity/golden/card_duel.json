@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "a44810fc",
+      "state": "68343a09",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "3104fced",
+      "state": "acdd6598",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "96fa07a5",
+      "state": "5701b620",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "79b015dc",
+      "state": "d6c08421",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "897ac7c1",
+      "state": "be88057c",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "ef5ef636",
+      "state": "56801c8f",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "9bf7b1fc",
+      "state": "d781e781",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "711672af",
+      "state": "0786238e",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "33079b3c",
+      "state": "37a77cc1",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -319,6 +319,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 101.05,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 40,
           "id": 416,

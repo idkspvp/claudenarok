@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "78a220ad",
+      "state": "653f5bae",
       "events": "5cf7b5a4",
       "rng": {
         "draws": 3,
@@ -285,6 +285,11 @@
           "fallStartY": 2.307095,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 50000,
           "id": 416,
@@ -503,7 +508,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "45d6e1c9",
+      "state": "87b5cbd2",
       "events": "8ee351ae",
       "rng": {
         "draws": 6,
@@ -758,6 +763,11 @@
           "fallStartY": 2.307095,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 50000,
           "id": 416,
@@ -976,7 +986,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "40c28bb3",
+      "state": "ebb6b888",
       "events": "8ee351ae",
       "rng": {
         "draws": 9,
@@ -1231,6 +1241,11 @@
           "fallStartY": 2.307095,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 50000,
           "id": 416,
@@ -1449,7 +1464,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "473b57e3",
+      "state": "fc543212",
       "events": "8ee351ae",
       "rng": {
         "draws": 12,
@@ -1704,6 +1719,11 @@
           "fallStartY": 2.307095,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 50000,
           "id": 416,
@@ -1922,7 +1942,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "07a0ba7e",
+      "state": "40a5ae49",
       "events": "a730ec0a",
       "rng": {
         "draws": 16,
@@ -1933,7 +1953,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "82bd8340",
+      "state": "1043b63f",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1944,7 +1964,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "82bd8340",
+      "state": "1043b63f",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2202,6 +2222,11 @@
           "fallStartY": 2.307095,
           "fiveSecondRule": 99.5,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 50000,
           "id": 416,

@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "bba4dfc1",
+      "state": "c730b85c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -91,6 +91,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 40,
           "id": 415,
@@ -148,7 +153,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "7a56dce1",
+      "state": "0c179bda",
       "events": "9d65e232",
       "rng": {
         "draws": 3,
@@ -159,7 +164,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "4d72f4ed",
+      "state": "bd6e27da",
       "events": "979eb25f",
       "rng": {
         "draws": 3,
@@ -170,7 +175,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "cc96cb97",
+      "state": "9b19e9ee",
       "events": "7994be28",
       "rng": {
         "draws": 76,
@@ -181,7 +186,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "b29ed098",
+      "state": "8de80c81",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -192,7 +197,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "b1083216",
+      "state": "2f0ec639",
       "events": "1beed8d7",
       "rng": {
         "draws": 269,
@@ -203,7 +208,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "1b30911c",
+      "state": "85823e19",
       "events": "30166966",
       "rng": {
         "draws": 392,
@@ -214,7 +219,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 417,
-      "state": "aad3642b",
+      "state": "b0595d2e",
       "events": "e9e2cddb",
       "rng": {
         "draws": 430,
@@ -329,6 +334,11 @@
           "fiveSecondRule": 1.55,
           "flee": 11,
           "gcdRemaining": 0.7,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 11,
           "hp": 94,
           "id": 415,

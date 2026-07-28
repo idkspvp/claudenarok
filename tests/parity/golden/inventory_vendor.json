@@ -476,7 +476,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c73c1b5b",
+      "state": "9af70395",
       "events": "7b632ab5",
       "rng": {
         "draws": 0,
@@ -579,6 +579,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "stun": 0.1
+            }
+          },
           "hit": 2,
           "hp": 40,
           "id": 415,

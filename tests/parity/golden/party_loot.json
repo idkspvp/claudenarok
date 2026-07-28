@@ -28,7 +28,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 418,
-      "state": "dfe96676",
+      "state": "72bcb85f",
       "events": "10c8d55b",
       "rng": {
         "draws": 2,
@@ -247,6 +247,11 @@
           "fallStartY": 0.639595,
           "fiveSecondRule": 99.15,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 40,
           "id": 416,

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "bba4dfc1",
+      "state": "c730b85c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -92,6 +92,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
           "flee": 2,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 2,
           "hp": 40,
           "id": 415,
@@ -149,7 +154,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "5429f68b",
+      "state": "87676dee",
       "events": "7f8f70c7",
       "rng": {
         "draws": 1,
@@ -160,7 +165,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "8ed96ce9",
+      "state": "6d3c53c6",
       "events": "5380a5ed",
       "rng": {
         "draws": 2,
@@ -171,7 +176,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "6934136e",
+      "state": "bb981889",
       "events": "a661284d",
       "rng": {
         "draws": 82,
@@ -182,7 +187,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "996b36de",
+      "state": "47e29433",
       "events": "3ec33430",
       "rng": {
         "draws": 152,
@@ -193,7 +198,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "cddc31a8",
+      "state": "d519bed1",
       "events": "fd3b2da4",
       "rng": {
         "draws": 180,
@@ -342,6 +347,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 0.25,
           "flee": 21,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 21,
           "hp": 201,
           "id": 415,
@@ -483,7 +493,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "cddc31a8",
+      "state": "d519bed1",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -632,6 +642,11 @@
           "fallStartY": 1.5,
           "fiveSecondRule": 0.25,
           "flee": 21,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 21,
           "hp": 201,
           "id": 415,

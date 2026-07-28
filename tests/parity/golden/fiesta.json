@@ -30,7 +30,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "80a541df",
+      "state": "759d5f06",
       "events": "ae090ee7",
       "rng": {
         "draws": 0,
@@ -41,7 +41,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "cc12b210",
+      "state": "118b9851",
       "events": "2624f545",
       "rng": {
         "draws": 36,
@@ -52,7 +52,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "139f6630",
+      "state": "4104d845",
       "events": "92dd922d",
       "rng": {
         "draws": 120,
@@ -63,7 +63,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "9d1234e3",
+      "state": "5d8db426",
       "events": "547fbe65",
       "rng": {
         "draws": 231,
@@ -74,7 +74,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "b52d6968",
+      "state": "12b024b5",
       "events": "0cce46bd",
       "rng": {
         "draws": 385,
@@ -85,7 +85,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 419,
-      "state": "d4dd490d",
+      "state": "50285d94",
       "events": "741638a5",
       "rng": {
         "draws": 537,
@@ -96,7 +96,7 @@
       "tick": 163,
       "time": 8.15,
       "nextId": 419,
-      "state": "a75c3f4a",
+      "state": "6dc1db95",
       "events": "ec02393c",
       "rng": {
         "draws": 606,
@@ -412,6 +412,11 @@
           "elementLevel": 1,
           "fiveSecondRule": 107.15,
           "flee": 21,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
           "hit": 21,
           "hp": 201,
           "id": 416,
