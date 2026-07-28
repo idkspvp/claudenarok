@@ -128,9 +128,9 @@ published, the meanings are not.
 | `status.category` | 0, 1 | open |
 | `monster.size` | 0 to 3 | open (the reference has 3 sizes, this has 4) |
 | `monster.combat.ms` / `.as` | 0 to 5 | open, blocked on `AttackSpeedRanks` |
-| `map.biome` | 0 to 6 | open |
-| `map.type` | 0 to 3 | open |
-| `consumable.type` | 1, 2, 3 | open |
+| `map.biome` | 0 to 6 | six of seven read cleanly from map names, value 1 unresolved (see `spiritvale-world-and-economy.md`) |
+| `map.type` | 0 to 3 | **resolved by content**: 0 field, 1 town, 2 arena, 3 tower |
+| `consumable.type` | 1, 2, 3 | **resolved by content**: 1 boss lure, 2 loot box, 3 mystery egg |
 
 None of these blocks a decision; each costs one lookup when it matters. They are
 listed so nobody fills one in by guessing.
