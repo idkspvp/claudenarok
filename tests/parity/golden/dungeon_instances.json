@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 431,
-      "state": "5f76fe06",
+      "state": "eae17700",
       "events": "9bb7b95a",
       "rng": {
         "draws": 39,
@@ -299,20 +299,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 1.225126,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 417,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -329,11 +329,11 @@
             "z": -1232
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -342,8 +342,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -353,20 +353,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -2.276039,
           "fiveSecondRule": 99,
-          "flee": 9,
-          "hit": 9,
+          "flee": 12,
+          "hit": 19,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 418,
           "kind": "mob",
           "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -383,11 +383,11 @@
             "z": -1231
           },
           "stats": {
-            "agi": 2,
-            "armor": 108,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -396,8 +396,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 38,
-            "min": 24,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -407,20 +407,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 0.176555,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 419,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -437,11 +437,11 @@
             "z": -1212
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -450,8 +450,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -461,20 +461,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -1.865185,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 420,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -491,11 +491,11 @@
             "z": -1211
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -504,8 +504,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -515,20 +515,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -1.654431,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 421,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -545,11 +545,11 @@
             "z": -1196
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -558,8 +558,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -569,20 +569,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 2.35088,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 422,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -599,11 +599,11 @@
             "z": -1195
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -612,8 +612,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -623,20 +623,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.025,
           "element": "water",
           "elementLevel": 2,
           "facing": 2.589984,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 17,
+          "hit": 22,
           "hostile": true,
-          "hp": 416,
+          "hp": 198,
           "id": 423,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 416,
+          "maxHp": 198,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -653,11 +653,13 @@
             "z": -1182
           },
           "stats": {
-            "agi": 2,
-            "armor": 84,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 9,
+            "armor": 5,
+            "dex": 14,
+            "int": 10,
+            "luk": 15,
+            "mdef": 10,
+            "vit": 18
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -666,8 +668,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 47,
-            "min": 30,
+            "max": 29,
+            "min": 24,
             "speed": 1.8
           }
         },
@@ -677,20 +679,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.025,
           "element": "water",
           "elementLevel": 2,
           "facing": 1.240933,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 18,
+          "hit": 23,
           "hostile": true,
-          "hp": 460,
+          "hp": 198,
           "id": 424,
           "kind": "mob",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 460,
+          "maxHp": 198,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -707,11 +709,13 @@
             "z": -1180
           },
           "stats": {
-            "agi": 3,
-            "armor": 96,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 9,
+            "armor": 5,
+            "dex": 14,
+            "int": 10,
+            "luk": 15,
+            "mdef": 10,
+            "vit": 18
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -720,8 +724,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 51,
-            "min": 33,
+            "max": 29,
+            "min": 24,
             "speed": 1.8
           }
         },
@@ -731,20 +735,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -0.676504,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 14,
+          "hit": 21,
           "hostile": true,
-          "hp": 695,
+          "hp": 234,
           "id": 425,
           "kind": "mob",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 695,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -761,11 +765,11 @@
             "z": -1168
           },
           "stats": {
-            "agi": 3,
-            "armor": 176,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "sexton_marrow",
           "wanderTarget": {
@@ -774,8 +778,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 54,
-            "min": 35,
+            "max": 47,
+            "min": 39,
             "speed": 2.2
           }
         },
@@ -785,20 +789,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -2.177504,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 426,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -815,11 +819,11 @@
             "z": -1167
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -828,8 +832,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -839,13 +843,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 3,
           "facing": -2.544657,
           "fiveSecondRule": 99,
-          "flee": 13,
-          "hit": 13,
+          "flee": 110,
+          "hit": 110,
           "hostile": true,
           "hp": 1191,
           "id": 427,
@@ -869,11 +873,9 @@
             "z": -1152
           },
           "stats": {
-            "agi": 3,
-            "armor": 234,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 100,
+            "dex": 100,
+            "mdef": 40
           },
           "templateId": "morthen",
           "wanderTarget": {
@@ -893,20 +895,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 1.897485,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 428,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -923,11 +925,11 @@
             "z": -1154
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -936,8 +938,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -947,20 +949,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 3.090952,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 429,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -977,11 +979,11 @@
             "z": -1154
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -990,8 +992,8 @@
           },
           "wanderTimer": 29.95,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1038,7 +1040,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 431,
-      "state": "e61af90a",
+      "state": "d007bf9a",
       "events": "426319d0",
       "rng": {
         "draws": 47,
@@ -1309,20 +1311,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 1.225126,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 417,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1339,11 +1341,11 @@
             "z": -1232
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1352,8 +1354,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1363,20 +1365,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -2.276039,
           "fiveSecondRule": 99,
-          "flee": 9,
-          "hit": 9,
+          "flee": 12,
+          "hit": 19,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 418,
           "kind": "mob",
           "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1393,11 +1395,11 @@
             "z": -1231
           },
           "stats": {
-            "agi": 2,
-            "armor": 108,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1406,8 +1408,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 38,
-            "min": 24,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1417,20 +1419,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 0.176555,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 419,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1447,11 +1449,11 @@
             "z": -1212
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1460,8 +1462,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1471,20 +1473,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -1.865185,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 420,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1501,11 +1503,11 @@
             "z": -1211
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1514,8 +1516,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -1525,20 +1527,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -1.654431,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 421,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1555,11 +1557,11 @@
             "z": -1196
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1568,8 +1570,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1579,20 +1581,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 2.35088,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 422,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1609,11 +1611,11 @@
             "z": -1195
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1622,8 +1624,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -1633,20 +1635,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.025,
           "element": "water",
           "elementLevel": 2,
           "facing": 2.589984,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 17,
+          "hit": 22,
           "hostile": true,
-          "hp": 416,
+          "hp": 198,
           "id": 423,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 416,
+          "maxHp": 198,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1663,11 +1665,13 @@
             "z": -1182
           },
           "stats": {
-            "agi": 2,
-            "armor": 84,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 9,
+            "armor": 5,
+            "dex": 14,
+            "int": 10,
+            "luk": 15,
+            "mdef": 10,
+            "vit": 18
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -1676,8 +1680,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 47,
-            "min": 30,
+            "max": 29,
+            "min": 24,
             "speed": 1.8
           }
         },
@@ -1687,20 +1691,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.025,
           "element": "water",
           "elementLevel": 2,
           "facing": 1.240933,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 18,
+          "hit": 23,
           "hostile": true,
-          "hp": 460,
+          "hp": 198,
           "id": 424,
           "kind": "mob",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 460,
+          "maxHp": 198,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1717,11 +1721,13 @@
             "z": -1180
           },
           "stats": {
-            "agi": 3,
-            "armor": 96,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 9,
+            "armor": 5,
+            "dex": 14,
+            "int": 10,
+            "luk": 15,
+            "mdef": 10,
+            "vit": 18
           },
           "templateId": "bonechill_widow",
           "wanderTarget": {
@@ -1730,8 +1736,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 51,
-            "min": 33,
+            "max": 29,
+            "min": 24,
             "speed": 1.8
           }
         },
@@ -1741,20 +1747,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -0.676504,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 14,
+          "hit": 21,
           "hostile": true,
-          "hp": 695,
+          "hp": 234,
           "id": 425,
           "kind": "mob",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 695,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1771,11 +1777,11 @@
             "z": -1168
           },
           "stats": {
-            "agi": 3,
-            "armor": 176,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "sexton_marrow",
           "wanderTarget": {
@@ -1784,8 +1790,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 54,
-            "min": 35,
+            "max": 47,
+            "min": 39,
             "speed": 2.2
           }
         },
@@ -1795,20 +1801,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": -2.177504,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 391,
+          "hp": 234,
           "id": 426,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 391,
+          "maxHp": 234,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1825,11 +1831,11 @@
             "z": -1167
           },
           "stats": {
-            "agi": 2,
-            "armor": 98,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "hollow_acolyte",
           "wanderTarget": {
@@ -1838,8 +1844,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 45,
-            "min": 29,
+            "max": 47,
+            "min": 39,
             "speed": 2
           }
         },
@@ -1849,13 +1855,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 3,
           "facing": -2.544657,
           "fiveSecondRule": 99,
-          "flee": 13,
-          "hit": 13,
+          "flee": 110,
+          "hit": 110,
           "hostile": true,
           "hp": 1191,
           "id": 427,
@@ -1879,11 +1885,9 @@
             "z": -1152
           },
           "stats": {
-            "agi": 3,
-            "armor": 234,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 100,
+            "dex": 100,
+            "mdef": 40
           },
           "templateId": "morthen",
           "wanderTarget": {
@@ -1903,20 +1907,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 1.897485,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 428,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1933,11 +1937,11 @@
             "z": -1154
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -1946,8 +1950,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -1957,20 +1961,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 2,
           "facing": 3.090952,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 13,
+          "hit": 20,
           "hostile": true,
-          "hp": 437,
+          "hp": 234,
           "id": 429,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 437,
+          "maxHp": 234,
           "moveSpeed": 6.5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1987,11 +1991,11 @@
             "z": -1154
           },
           "stats": {
-            "agi": 2,
-            "armor": 126,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 5,
+            "armor": 10,
+            "dex": 12,
+            "mdef": 10,
+            "vit": 10
           },
           "templateId": "crypt_shambler",
           "wanderTarget": {
@@ -2000,8 +2004,8 @@
           },
           "wanderTimer": 29.85,
           "weapon": {
-            "max": 42,
-            "min": 27,
+            "max": 47,
+            "min": 39,
             "speed": 2.4
           }
         },
@@ -2048,7 +2052,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 431,
-      "state": "385a8f81",
+      "state": "7356ade1",
       "events": "43cbd350",
       "rng": {
         "draws": 47,
@@ -2059,7 +2063,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 431,
-      "state": "52e66821",
+      "state": "b85ef17d",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2070,7 +2074,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 431,
-      "state": "38b87bc7",
+      "state": "1ab8ab07",
       "events": "741638a5",
       "rng": {
         "draws": 47,

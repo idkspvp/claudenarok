@@ -148,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "5ee02320",
+      "state": "747e9689",
       "events": "89ed03d7",
       "rng": {
         "draws": 2,
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "1d8a79d0",
+      "state": "ac92c61d",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -170,7 +170,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "9709af38",
+      "state": "58c7590f",
       "events": "873fc6a5",
       "rng": {
         "draws": 78,
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "c704d043",
+      "state": "198e7c2c",
       "events": "d8dbf1fc",
       "rng": {
         "draws": 171,
@@ -192,7 +192,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "dd7516ce",
+      "state": "a5d028c7",
       "events": "bc9143d2",
       "rng": {
         "draws": 270,
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "f0d17a2a",
+      "state": "74dbd289",
       "events": "d8dbf1fc",
       "rng": {
         "draws": 387,
@@ -214,7 +214,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 417,
-      "state": "600d5f0f",
+      "state": "611350f6",
       "events": "6f71da55",
       "rng": {
         "draws": 509,
@@ -225,8 +225,8 @@
       "tick": 160,
       "time": 8,
       "nextId": 417,
-      "state": "67775dbc",
-      "events": "51094609",
+      "state": "7419e2c2",
+      "events": "c27d10ea",
       "rng": {
         "draws": 632,
         "digest": "4e512886"
@@ -236,7 +236,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 417,
-      "state": "023b254d",
+      "state": "14f51877",
       "events": "a5e66de8",
       "rng": {
         "draws": 775,
@@ -247,7 +247,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 417,
-      "state": "f696f0a8",
+      "state": "1b536a74",
       "events": "e4053b47",
       "rng": {
         "draws": 914,
@@ -258,7 +258,7 @@
       "tick": 220,
       "time": 11,
       "nextId": 417,
-      "state": "a4c229dc",
+      "state": "832b46c2",
       "events": "741638a5",
       "rng": {
         "draws": 991,
@@ -269,7 +269,7 @@
       "tick": 240,
       "time": 12,
       "nextId": 417,
-      "state": "263effe9",
+      "state": "6027066b",
       "events": "bfdb5897",
       "rng": {
         "draws": 1111,
@@ -280,7 +280,7 @@
       "tick": 241,
       "time": 12.05,
       "nextId": 417,
-      "state": "199be920",
+      "state": "3f896f14",
       "events": "741638a5",
       "rng": {
         "draws": 1115,
@@ -304,7 +304,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 84,
-            "damageTaken": 49
+            "damageTaken": 50
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -395,7 +395,7 @@
           "fiveSecondRule": 10.05,
           "flee": 21,
           "hit": 21,
-          "hp": 49951,
+          "hp": 49950,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -454,14 +454,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.483716,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 6,
-          "hit": 6,
+          "flee": 8,
+          "hit": 13,
           "hostile": true,
           "hp": 39916,
           "id": 416,
@@ -493,11 +493,12 @@
             "z": 1
           },
           "stats": {
-            "agi": 1,
-            "armor": 40,
-            "dex": 1,
-            "luk": 1,
-            "vit": 1
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 1.15,
           "tappedById": 415,
@@ -511,7 +512,7 @@
           "wanderTimer": 9.163287,
           "weapon": {
             "max": 12,
-            "min": 8,
+            "min": 9,
             "speed": 2
           }
         }

@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "c0cc0a46",
+      "state": "5db09a9d",
       "events": "0efe4389",
       "rng": {
         "draws": 1,
@@ -425,15 +425,15 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
-          "hp": 54,
+          "hp": 60,
           "id": 418,
           "kind": "mob",
           "level": 2,
@@ -455,7 +455,7 @@
             417
           ],
           "lootable": true,
-          "maxHp": 54,
+          "maxHp": 60,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -474,13 +474,18 @@
             "z": 22
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -490,7 +495,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "fb3bc1ec",
+      "state": "12d0e577",
       "events": "be00f09c",
       "rng": {
         "draws": 3,
@@ -911,15 +916,15 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
-          "hp": 54,
+          "hp": 60,
           "id": 418,
           "kind": "mob",
           "level": 2,
@@ -946,7 +951,7 @@
             417
           ],
           "lootable": true,
-          "maxHp": 54,
+          "maxHp": 60,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -966,13 +971,18 @@
             "z": 22
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -982,7 +992,7 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 419,
-      "state": "f4ef8fa8",
+      "state": "9ad130d1",
       "events": "880460b2",
       "rng": {
         "draws": 3,
@@ -1412,15 +1422,15 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
-          "hp": 54,
+          "hp": 60,
           "id": 418,
           "kind": "mob",
           "level": 2,
@@ -1431,7 +1441,7 @@
             417
           ],
           "lootable": true,
-          "maxHp": 54,
+          "maxHp": 60,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1451,13 +1461,18 @@
             "z": 22
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -1467,7 +1482,7 @@
       "tick": 3,
       "time": 0.15,
       "nextId": 419,
-      "state": "e84f10e7",
+      "state": "90e6f4ee",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -1897,15 +1912,15 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.603905,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
-          "hp": 54,
+          "hp": 60,
           "id": 418,
           "kind": "mob",
           "level": 2,
@@ -1916,7 +1931,7 @@
             417
           ],
           "lootable": true,
-          "maxHp": 54,
+          "maxHp": 60,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1936,13 +1951,18 @@
             "z": 22
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }

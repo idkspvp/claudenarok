@@ -10,8 +10,8 @@
     "updatePet melee arm: close + auto-taunt + mobSwing (PET_COMBAT_LINGER owner inCombat)",
     "petFollow heel transition (pets return to a moved owner)"
   ],
-  "draws": 785,
-  "drawDigest": "c1c2ac62",
+  "draws": 779,
+  "drawDigest": "a693adf3",
   "frames": [
     {
       "tick": 0,
@@ -150,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "ad5323db",
-      "events": "d68271d7",
+      "state": "e825f358",
+      "events": "1a899e08",
       "rng": {
         "draws": 17,
         "digest": "250a33eb"
@@ -161,7 +161,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "c3ffc313",
+      "state": "0c611036",
       "events": "741638a5",
       "rng": {
         "draws": 17,
@@ -172,8 +172,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "ffd606b5",
-      "events": "9c285998",
+      "state": "84bb5aca",
+      "events": "6572b5fb",
       "rng": {
         "draws": 112,
         "digest": "b6fc5cb4"
@@ -183,44 +183,44 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "3362819a",
+      "state": "e37d029d",
       "events": "741638a5",
       "rng": {
-        "draws": 196,
-        "digest": "8938f0ad"
+        "draws": 197,
+        "digest": "8d68d4e6"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "77db9c0e",
-      "events": "a7b1f4a1",
+      "state": "cf28c11a",
+      "events": "a902f663",
       "rng": {
-        "draws": 311,
-        "digest": "6aa1bbaf"
+        "draws": 308,
+        "digest": "42a6ff31"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "009cd53b",
+      "state": "7dd283ef",
       "events": "741638a5",
       "rng": {
-        "draws": 433,
-        "digest": "3f5c8cd6"
+        "draws": 432,
+        "digest": "731b5cc8"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "3eab1c9b",
+      "state": "e283a731",
       "events": "741638a5",
       "rng": {
-        "draws": 433,
-        "digest": "3f5c8cd6"
+        "draws": 432,
+        "digest": "731b5cc8"
       },
       "label": "heel",
       "players": [
@@ -239,13 +239,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 5
+            "damageDealt": 21
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 5
+              "damageDealt": 21
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -368,25 +368,25 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 1.1,
+          "combatTimer": 1.85,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.03,
           "element": "fire",
           "elementLevel": 1,
           "facing": 1.458652,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 143,
+          "flee": 43,
+          "hit": 100,
+          "hp": 2179,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 162,
+          "maxHp": 2179,
           "moveSpeed": 5.2,
           "onGround": true,
           "overpowerUntil": -1,
@@ -406,37 +406,39 @@
             "z": -1000
           },
           "stats": {
-            "agi": 4,
-            "armor": 88,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 31,
+            "armor": 15,
+            "dex": 88,
+            "int": 20,
+            "luk": 20,
+            "mdef": 10,
+            "vit": 31
           },
           "swingTimer": 0.05,
           "templateId": "emberkin",
           "weapon": {
-            "max": 21,
-            "min": 14,
+            "max": 216,
+            "min": 186,
             "speed": 2
           }
         },
         {
           "aggroTargetId": 416,
           "aiState": "attack",
-          "combatTimer": 1.1,
+          "combatTimer": 1.85,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.68294,
           "fallStartY": 55.166507,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 11,
+          "hit": 16,
           "hostile": true,
-          "hp": 49947,
+          "hp": 49390,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -466,11 +468,12 @@
             "z": -1000
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.9,
           "tappedById": 415,
@@ -478,7 +481,7 @@
           "threat": [
             [
               416,
-              54
+              611
             ]
           ],
           "wanderTarget": {
@@ -488,8 +491,8 @@
           },
           "wanderTimer": 29.65,
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         },
@@ -499,21 +502,21 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "ghost",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 376,
+          "flee": 20,
+          "hit": 102,
+          "hp": 3038,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 378,
+          "maxHp": 3040,
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -535,17 +538,17 @@
             "z": -1000
           },
           "stats": {
-            "agi": 4,
-            "armor": 495,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 8,
+            "dex": 90,
+            "int": 5,
+            "luk": 5,
+            "vit": 14
           },
           "swingTimer": 0.4,
           "templateId": "gloomshade",
           "weapon": {
-            "max": 15,
-            "min": 10,
+            "max": 153,
+            "min": 128,
             "speed": 2
           }
         },
@@ -556,17 +559,17 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 57.351926,
           "fiveSecondRule": 99,
-          "flee": 10,
+          "flee": 11,
           "forcedTargetTimer": -0.05,
-          "hit": 10,
+          "hit": 16,
           "hostile": true,
-          "hp": 49992,
+          "hp": 49573,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -596,11 +599,12 @@
             "z": -1000
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.4,
           "tappedById": 415,
@@ -609,16 +613,16 @@
           "threat": [
             [
               415,
-              5
+              21
             ],
             [
               418,
-              8
+              427
             ]
           ],
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -628,44 +632,44 @@
       "tick": 140,
       "time": 7,
       "nextId": 420,
-      "state": "35061835",
+      "state": "41b7fd3f",
       "events": "741638a5",
       "rng": {
-        "draws": 535,
-        "digest": "0e4dc6da"
+        "draws": 523,
+        "digest": "c77ca90b"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 420,
-      "state": "ad32a0d3",
+      "state": "bab008ef",
       "events": "741638a5",
       "rng": {
-        "draws": 657,
-        "digest": "c486bb87"
+        "draws": 637,
+        "digest": "21e10cd8"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "7f72bedc",
+      "state": "8085967e",
       "events": "741638a5",
       "rng": {
-        "draws": 785,
-        "digest": "c1c2ac62"
+        "draws": 779,
+        "digest": "a693adf3"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "7f72bedc",
+      "state": "8085967e",
       "events": "741638a5",
       "rng": {
-        "draws": 785,
-        "digest": "c1c2ac62"
+        "draws": 779,
+        "digest": "a693adf3"
       },
       "label": "final",
       "players": [
@@ -684,13 +688,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 5
+            "damageDealt": 21
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 5
+              "damageDealt": 21
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -812,24 +816,24 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 4.1,
+          "combatTimer": 4.85,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.03,
           "element": "fire",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 146,
+          "flee": 43,
+          "hit": 100,
+          "hp": 2179,
           "id": 416,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 162,
+          "maxHp": 2179,
           "moveSpeed": 5.2,
           "onGround": true,
           "overpowerUntil": -1,
@@ -849,35 +853,37 @@
             "z": -1000
           },
           "stats": {
-            "agi": 4,
-            "armor": 88,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 31,
+            "armor": 15,
+            "dex": 88,
+            "int": 20,
+            "luk": 20,
+            "mdef": 10,
+            "vit": 31
           },
           "templateId": "emberkin",
           "weapon": {
-            "max": 21,
-            "min": 14,
+            "max": 216,
+            "min": 186,
             "speed": 2
           }
         },
         {
           "aiState": "evade",
-          "combatTimer": 4.1,
+          "combatTimer": 4.85,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 55.166507,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 11,
+          "hit": 16,
           "hostile": true,
-          "hp": 49947,
+          "hp": 49390,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -902,11 +908,12 @@
             "z": -1000
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.9,
           "tappedById": 415,
@@ -918,8 +925,8 @@
           },
           "wanderTimer": 29.65,
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         },
@@ -929,20 +936,20 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "ghost",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 378,
+          "flee": 20,
+          "hit": 102,
+          "hp": 3040,
           "id": 418,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 378,
+          "maxHp": 3040,
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -970,16 +977,16 @@
             "z": -1000
           },
           "stats": {
-            "agi": 4,
-            "armor": 495,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 8,
+            "dex": 90,
+            "int": 5,
+            "luk": 5,
+            "vit": 14
           },
           "templateId": "gloomshade",
           "weapon": {
-            "max": 15,
-            "min": 10,
+            "max": 153,
+            "min": 128,
             "speed": 2
           }
         },
@@ -989,16 +996,16 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.665748,
           "fallStartY": 57.351926,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 11,
+          "hit": 16,
           "hostile": true,
-          "hp": 49992,
+          "hp": 49573,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -1023,19 +1030,20 @@
             "z": -1000
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.4,
           "tappedById": 415,
           "targetId": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }

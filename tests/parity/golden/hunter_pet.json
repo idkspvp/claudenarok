@@ -148,8 +148,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "9ea378f3",
-      "events": "af212b3a",
+      "state": "72513f42",
+      "events": "6690c333",
       "rng": {
         "draws": 9,
         "digest": "381f4473"
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "b226cc10",
+      "state": "3d7174d3",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -170,8 +170,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "776463f8",
-      "events": "b1824987",
+      "state": "54b82037",
+      "events": "41192086",
       "rng": {
         "draws": 102,
         "digest": "b5b7b15d"
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "081aec3d",
+      "state": "0d521d9e",
       "events": "741638a5",
       "rng": {
         "draws": 198,
@@ -192,8 +192,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "15009d6d",
-      "events": "bb8db23e",
+      "state": "63647e15",
+      "events": "d27969d3",
       "rng": {
         "draws": 312,
         "digest": "2ffd1eb8"
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "113bb000",
+      "state": "27c8a3d2",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -214,7 +214,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "113bb000",
+      "state": "27c8a3d2",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -237,14 +237,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 12,
+            "damageDealt": 46,
             "damageTaken": 35
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 12
+              "damageDealt": 46
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -382,15 +382,15 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
-          "hp": 86,
+          "flee": 19,
+          "hit": 24,
+          "hp": 505,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
-          "maxHp": 101,
+          "maxHp": 507,
           "moveSpeed": 8,
           "onGround": true,
           "overpowerUntil": -1,
@@ -410,17 +410,18 @@
             "z": -2
           },
           "stats": {
-            "agi": 2,
-            "armor": 35,
-            "dex": 2,
+            "agi": 11,
+            "armor": 15,
+            "dex": 16,
+            "int": 5,
             "luk": 2,
-            "vit": 2
+            "vit": 11
           },
           "swingTimer": 0.05,
           "templateId": "warlock_imp",
           "weapon": {
-            "max": 9,
-            "min": 6,
+            "max": 37,
+            "min": 28,
             "speed": 2
           }
         },
@@ -431,16 +432,16 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 11,
+          "hit": 16,
           "hostile": true,
-          "hp": 49939,
+          "hp": 49905,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -470,11 +471,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.05,
           "tappedById": 415,
@@ -483,7 +485,7 @@
           "threat": [
             [
               415,
-              12
+              46
             ],
             [
               416,
@@ -491,8 +493,8 @@
             ]
           ],
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         },
@@ -509,8 +511,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
-          "hit": 10,
+          "flee": 19,
+          "hit": 24,
           "hostile": true,
           "hp": 50000,
           "id": 418,
@@ -537,18 +539,19 @@
             "z": -2
           },
           "stats": {
-            "agi": 2,
-            "armor": 35,
-            "dex": 2,
+            "agi": 11,
+            "armor": 15,
+            "dex": 16,
+            "int": 5,
             "luk": 2,
-            "vit": 2
+            "vit": 11
           },
           "swingTimer": 0.05,
           "targetId": 415,
           "templateId": "warlock_imp",
           "weapon": {
-            "max": 9,
-            "min": 6,
+            "max": 37,
+            "min": 28,
             "speed": 2
           }
         }

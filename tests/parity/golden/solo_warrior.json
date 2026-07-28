@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "4dfc13f1",
-      "events": "84c16dfb",
+      "state": "00bed6f4",
+      "events": "1350ff76",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -166,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "391be1d5",
+      "state": "3ea63adc",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -177,8 +177,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "0f4c99e5",
-      "events": "1f33a8d3",
+      "state": "3f88be47",
+      "events": "d54f31f1",
       "rng": {
         "draws": 105,
         "digest": "3e0eb09d"
@@ -188,7 +188,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "ede50090",
+      "state": "94551a73",
       "events": "f740fdd2",
       "rng": {
         "draws": 161,
@@ -211,15 +211,15 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7115,
-            "damageTaken": 6,
+            "damageDealt": 7122,
+            "damageTaken": 15,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7115,
+              "damageDealt": 7122,
               "kills": 1
             },
             "dungeonClears": {},
@@ -301,7 +301,7 @@
           "fiveSecondRule": 102.6,
           "flee": 11,
           "hit": 11,
-          "hp": 49994,
+          "hp": 49985,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -357,14 +357,14 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
           "id": 416,
           "inCombat": true,
@@ -409,15 +409,20 @@
             "z": -2
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.45,
           "tappedById": 415,
           "targetId": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -427,7 +432,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "32347037",
+      "state": "f5ea1f0c",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 179,
@@ -450,15 +455,15 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7115,
-            "damageTaken": 6,
+            "damageDealt": 7122,
+            "damageTaken": 15,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7115,
+              "damageDealt": 7122,
               "kills": 1
             },
             "dungeonClears": {},
@@ -545,7 +550,7 @@
           "fiveSecondRule": 102.8,
           "flee": 11,
           "hit": 11,
-          "hp": 49994,
+          "hp": 49985,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -601,14 +606,14 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.01,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 5,
+          "hit": 10,
           "hostile": true,
           "id": 416,
           "inCombat": true,
@@ -653,15 +658,20 @@
             "z": -2
           },
           "stats": {
-            "armor": 10
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.45,
           "tappedById": 415,
           "targetId": 415,
           "templateId": "forest_wolf",
           "weapon": {
-            "max": 6,
-            "min": 4,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }

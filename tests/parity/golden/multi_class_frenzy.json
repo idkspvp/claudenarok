@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "4ad0d4c5",
+      "state": "78a220ad",
       "events": "5cf7b5a4",
       "rng": {
         "draws": 3,
@@ -430,13 +430,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 2.312838,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 8,
+          "flee": 9,
+          "hit": 17,
           "hostile": true,
           "hp": 199910,
           "id": 418,
@@ -468,11 +468,12 @@
             "z": -28
           },
           "stats": {
-            "agi": 2,
-            "armor": 80,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "old_greyjaw",
@@ -491,8 +492,8 @@
             ]
           ],
           "weapon": {
-            "max": 19,
-            "min": 12,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         }
@@ -502,7 +503,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "ae899573",
+      "state": "45d6e1c9",
       "events": "8ee351ae",
       "rng": {
         "draws": 6,
@@ -902,13 +903,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 2.312838,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 8,
+          "flee": 9,
+          "hit": 17,
           "hostile": true,
           "hp": 199820,
           "id": 418,
@@ -940,11 +941,12 @@
             "z": -28
           },
           "stats": {
-            "agi": 2,
-            "armor": 80,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "old_greyjaw",
@@ -963,8 +965,8 @@
             ]
           ],
           "weapon": {
-            "max": 19,
-            "min": 12,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         }
@@ -974,7 +976,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "cc24524b",
+      "state": "40c28bb3",
       "events": "8ee351ae",
       "rng": {
         "draws": 9,
@@ -1374,13 +1376,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 2.312838,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 8,
+          "flee": 9,
+          "hit": 17,
           "hostile": true,
           "hp": 199730,
           "id": 418,
@@ -1412,11 +1414,12 @@
             "z": -28
           },
           "stats": {
-            "agi": 2,
-            "armor": 80,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "old_greyjaw",
@@ -1435,8 +1438,8 @@
             ]
           ],
           "weapon": {
-            "max": 19,
-            "min": 12,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         }
@@ -1446,7 +1449,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "878cbaf5",
+      "state": "473b57e3",
       "events": "8ee351ae",
       "rng": {
         "draws": 12,
@@ -1846,13 +1849,13 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 2.312838,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 8,
+          "flee": 9,
+          "hit": 17,
           "hostile": true,
           "hp": 199640,
           "id": 418,
@@ -1884,11 +1887,12 @@
             "z": -28
           },
           "stats": {
-            "agi": 2,
-            "armor": 80,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "tappedById": 415,
           "templateId": "old_greyjaw",
@@ -1907,8 +1911,8 @@
             ]
           ],
           "weapon": {
-            "max": 19,
-            "min": 12,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         }
@@ -1918,8 +1922,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "684c7212",
-      "events": "71f143d5",
+      "state": "07a0ba7e",
+      "events": "a730ec0a",
       "rng": {
         "draws": 16,
         "digest": "50064c0d"
@@ -1929,7 +1933,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "a30b1298",
+      "state": "82bd8340",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1940,7 +1944,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "a30b1298",
+      "state": "82bd8340",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1963,7 +1967,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 120,
-            "damageTaken": 14
+            "damageTaken": 8
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2139,7 +2143,7 @@
           "fiveSecondRule": 99.5,
           "flee": 2,
           "hit": 2,
-          "hp": 49986,
+          "hp": 49992,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -2345,14 +2349,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -2.677945,
           "fallStartY": 2.312838,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 8,
+          "flee": 9,
+          "hit": 17,
           "hostile": true,
           "hp": 199640,
           "id": 418,
@@ -2384,11 +2388,12 @@
             "z": -28
           },
           "stats": {
-            "agi": 2,
-            "armor": 80,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "swingTimer": 0.934615,
           "tappedById": 415,
@@ -2408,8 +2413,8 @@
             ]
           ],
           "weapon": {
-            "max": 19,
-            "min": 12,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         }

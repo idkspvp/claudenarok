@@ -9,8 +9,8 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:swordman"
   ],
-  "draws": 78,
-  "drawDigest": "509db055",
+  "draws": 83,
+  "drawDigest": "50681192",
   "frames": [
     {
       "tick": 0,
@@ -154,8 +154,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "9d55930d",
-      "events": "814e5271",
+      "state": "ba376219",
+      "events": "a16d2cc4",
       "rng": {
         "draws": 21,
         "digest": "b3b13ee2"
@@ -165,22 +165,22 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "12cafbb1",
-      "events": "8d66e66a",
+      "state": "5af1dffe",
+      "events": "50a426c4",
       "rng": {
-        "draws": 34,
-        "digest": "14849c77"
+        "draws": 39,
+        "digest": "8a221774"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "290253b6",
-      "events": "0ea61fbb",
+      "state": "69739cae",
+      "events": "c999ae92",
       "rng": {
-        "draws": 64,
-        "digest": "4e1f7fc1"
+        "draws": 69,
+        "digest": "06160935"
       },
       "label": "taunt",
       "players": [
@@ -200,7 +200,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 232
+            "damageTaken": 352
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -304,7 +304,7 @@
           "fiveSecondRule": 101.5,
           "flee": 14,
           "hit": 14,
-          "hp": 123,
+          "hp": 120,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -324,7 +324,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 24.2,
+          "resource": 31.688462,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -373,16 +373,16 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
+          "flee": 7,
           "forcedTargetId": 415,
           "forcedTargetTimer": 3,
-          "hit": 5,
+          "hit": 15,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -414,11 +414,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 1,
-            "armor": 48,
-            "dex": 1,
-            "luk": 1,
-            "vit": 1
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "swingTimer": 0.334615,
           "tappedById": 415,
@@ -431,8 +432,8 @@
             ]
           ],
           "weapon": {
-            "max": 14,
-            "min": 9,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         },
@@ -443,14 +444,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 17,
-          "hit": 17,
+          "flee": 28,
+          "hit": 48,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -475,18 +476,18 @@
             "z": -2
           },
           "stats": {
-            "agi": 4,
-            "armor": 168,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 15,
+            "dex": 35,
+            "int": 10,
+            "luk": 5,
+            "vit": 15
           },
           "swingTimer": 1.35,
           "targetId": 415,
           "templateId": "ridge_stalker",
           "weapon": {
-            "max": 50,
-            "min": 32,
+            "max": 55,
+            "min": 46,
             "speed": 1.9
           }
         }
@@ -496,11 +497,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "96c49d25",
+      "state": "2a4f9a23",
       "events": "741638a5",
       "rng": {
-        "draws": 78,
-        "digest": "509db055"
+        "draws": 83,
+        "digest": "50681192"
       },
       "label": "final",
       "players": [
@@ -520,7 +521,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 232
+            "damageTaken": 352
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -625,7 +626,7 @@
           "fiveSecondRule": 101.7,
           "flee": 14,
           "hit": 14,
-          "hp": 123,
+          "hp": 120,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -645,7 +646,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 24.2,
+          "resource": 31.688462,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -695,16 +696,16 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
+          "dodgeChance": 0.03,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
+          "flee": 7,
           "forcedTargetId": 415,
           "forcedTargetTimer": 2.8,
-          "hit": 5,
+          "hit": 15,
           "hostile": true,
           "hp": 59800,
           "id": 416,
@@ -736,11 +737,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 1,
-            "armor": 48,
-            "dex": 1,
-            "luk": 1,
-            "vit": 1
+            "agi": 3,
+            "armor": 20,
+            "dex": 11,
+            "int": 10,
+            "luk": 20,
+            "vit": 3
           },
           "swingTimer": 0.134615,
           "tappedById": 415,
@@ -753,8 +755,8 @@
             ]
           ],
           "weapon": {
-            "max": 14,
-            "min": 9,
+            "max": 11,
+            "min": 8,
             "speed": 1.8
           }
         },
@@ -765,14 +767,14 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "neutral",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 17,
-          "hit": 17,
+          "flee": 28,
+          "hit": 48,
           "hostile": true,
           "hp": 60000,
           "id": 417,
@@ -797,18 +799,18 @@
             "z": -2
           },
           "stats": {
-            "agi": 4,
-            "armor": 168,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 15,
+            "dex": 35,
+            "int": 10,
+            "luk": 5,
+            "vit": 15
           },
           "swingTimer": 1.15,
           "targetId": 415,
           "templateId": "ridge_stalker",
           "weapon": {
-            "max": 50,
-            "min": 32,
+            "max": 55,
+            "min": 46,
             "speed": 1.9
           }
         }

@@ -9,8 +9,8 @@
     "applyTaunt pet auto-taunt arm (~8110)",
     "applyTaunt pet manual-taunt arm (petTaunt, ~4885)"
   ],
-  "draws": 418,
-  "drawDigest": "d47a2301",
+  "draws": 417,
+  "drawDigest": "2068d7d8",
   "frames": [
     {
       "tick": 0,
@@ -149,8 +149,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "83e19e9f",
-      "events": "7498e17c",
+      "state": "7a369394",
+      "events": "33b92c13",
       "rng": {
         "draws": 11,
         "digest": "4e23297a"
@@ -160,7 +160,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "0717ab80",
+      "state": "a60ee2e5",
       "events": "6fcbc66e",
       "rng": {
         "draws": 11,
@@ -171,8 +171,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 418,
-      "state": "08464558",
-      "events": "0b469c9b",
+      "state": "248c5b8f",
+      "events": "030dcc3a",
       "rng": {
         "draws": 125,
         "digest": "2794013f"
@@ -182,8 +182,8 @@
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "4f0a9a8a",
-      "events": "6d8a568a",
+      "state": "169119d6",
+      "events": "61f2fe51",
       "rng": {
         "draws": 209,
         "digest": "5f757242"
@@ -193,33 +193,33 @@
       "tick": 100,
       "time": 5,
       "nextId": 418,
-      "state": "6bfe4c1f",
-      "events": "2d65f891",
+      "state": "cdafa5de",
+      "events": "41e311cd",
       "rng": {
-        "draws": 296,
-        "digest": "7dbc652a"
+        "draws": 297,
+        "digest": "56348d7f"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "ea6fe08c",
+      "state": "a278dfa8",
       "events": "207fa586",
       "rng": {
-        "draws": 390,
-        "digest": "13ccde04"
+        "draws": 389,
+        "digest": "8c04b65d"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "d10ba1d7",
+      "state": "169c577f",
       "events": "741638a5",
       "rng": {
-        "draws": 390,
-        "digest": "13ccde04"
+        "draws": 389,
+        "digest": "8c04b65d"
       },
       "label": "pet-taunt",
       "players": [
@@ -238,13 +238,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 68
+            "damageDealt": 24
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 68
+              "damageDealt": 24
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -305,7 +305,7 @@
           "aiState": "idle",
           "attackPower": 1,
           "autoAttack": true,
-          "combatTimer": 0.45,
+          "combatTimer": 0.4,
           "comboUntil": -1,
           "critChance": 0.013333,
           "detonateTimer": "Infinity",
@@ -375,21 +375,21 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "ghost",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 376,
+          "flee": 20,
+          "hit": 102,
+          "hp": 3038,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 378,
+          "maxHp": 3040,
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -398,7 +398,7 @@
           "petMode": "aggressive",
           "petTauntTimer": 10,
           "pos": {
-            "x": 4.8,
+            "x": 6,
             "y": 1.5,
             "z": -2
           },
@@ -411,17 +411,17 @@
             "z": -2
           },
           "stats": {
-            "agi": 4,
-            "armor": 495,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 8,
+            "dex": 90,
+            "int": 5,
+            "luk": 5,
+            "vit": 14
           },
           "swingTimer": 0.05,
           "templateId": "gloomshade",
           "weapon": {
-            "max": 15,
-            "min": 10,
+            "max": 153,
+            "min": 128,
             "speed": 2
           }
         },
@@ -431,23 +431,23 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
+          "flee": 11,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 10,
+          "hit": 16,
           "hostile": true,
-          "hp": 49927,
+          "hp": 49565,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
-            "x": 5.8,
+            "x": 7,
             "y": 1.5,
             "z": -2
           },
@@ -459,7 +459,7 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 5.8,
+            "x": 7,
             "y": 1.5,
             "z": -2
           },
@@ -472,11 +472,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 0.05,
           "tappedById": 415,
@@ -485,16 +486,16 @@
           "threat": [
             [
               415,
-              69
+              25
             ],
             [
               416,
-              69
+              413
             ]
           ],
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }
@@ -504,11 +505,11 @@
       "tick": 124,
       "time": 6.2,
       "nextId": 418,
-      "state": "4e4cd809",
-      "events": "ea6824af",
+      "state": "ada277ff",
+      "events": "9901b12f",
       "rng": {
-        "draws": 418,
-        "digest": "d47a2301"
+        "draws": 417,
+        "digest": "2068d7d8"
       },
       "label": "final",
       "players": [
@@ -527,13 +528,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 68
+            "damageDealt": 24
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 68
+              "damageDealt": 24
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -594,7 +595,7 @@
           "aiState": "idle",
           "attackPower": 1,
           "autoAttack": true,
-          "combatTimer": 0.65,
+          "combatTimer": 0.6,
           "comboUntil": -1,
           "critChance": 0.013333,
           "detonateTimer": "Infinity",
@@ -665,21 +666,21 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.014,
+          "dodgeChance": 0.015,
           "element": "ghost",
           "elementLevel": 1,
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 16,
-          "hit": 16,
-          "hp": 376,
+          "flee": 20,
+          "hit": 102,
+          "hp": 3037,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 378,
+          "maxHp": 3040,
           "moveSpeed": 5,
           "onGround": true,
           "overpowerUntil": -1,
@@ -688,7 +689,7 @@
           "petMode": "aggressive",
           "petTauntTimer": 9.8,
           "pos": {
-            "x": 4.8,
+            "x": 6,
             "y": 1.5,
             "z": -2
           },
@@ -701,44 +702,44 @@
             "z": -2
           },
           "stats": {
-            "agi": 4,
-            "armor": 495,
-            "dex": 4,
-            "luk": 4,
-            "vit": 4
+            "agi": 8,
+            "dex": 90,
+            "int": 5,
+            "luk": 5,
+            "vit": 14
           },
           "swingTimer": 1.85,
           "templateId": "gloomshade",
           "weapon": {
-            "max": 15,
-            "min": 10,
+            "max": 153,
+            "min": 128,
             "speed": 2
           }
         },
         {
           "aggroTargetId": 416,
           "aiState": "attack",
-          "combatTimer": 0.2,
+          "combatTimer": 0.15,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.012,
+          "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 10,
+          "flee": 11,
           "forcedTargetId": 416,
           "forcedTargetTimer": 2.8,
-          "hit": 10,
+          "hit": 16,
           "hostile": true,
-          "hp": 49925,
+          "hp": 49565,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
           "leashAnchor": {
-            "x": 5.8,
+            "x": 7,
             "y": 1.5,
             "z": -2
           },
@@ -750,7 +751,7 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 5.8,
+            "x": 7,
             "y": 1.5,
             "z": -2
           },
@@ -763,11 +764,12 @@
             "z": -2
           },
           "stats": {
-            "agi": 2,
-            "armor": 70,
-            "dex": 2,
-            "luk": 2,
-            "vit": 2
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
           },
           "swingTimer": 1.85,
           "tappedById": 415,
@@ -776,16 +778,16 @@
           "threat": [
             [
               415,
-              69
+              25
             ],
             [
               416,
-              71
+              413
             ]
           ],
           "weapon": {
-            "max": 18,
-            "min": 11,
+            "max": 12,
+            "min": 9,
             "speed": 2
           }
         }

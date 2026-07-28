@@ -151,8 +151,8 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 429,
-      "state": "ef059b59",
-      "events": "0ad9cf53",
+      "state": "1e8e98e9",
+      "events": "688169c8",
       "rng": {
         "draws": 9,
         "digest": "1540b9da"
@@ -162,7 +162,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 429,
-      "state": "4bdd0f43",
+      "state": "0c23a891",
       "events": "fcb0555f",
       "rng": {
         "draws": 9,
@@ -173,8 +173,8 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 429,
-      "state": "f9ed60cb",
-      "events": "0335d727",
+      "state": "f620145d",
+      "events": "abfe8876",
       "rng": {
         "draws": 13,
         "digest": "ded57bf5"
@@ -184,8 +184,8 @@
       "tick": 38,
       "time": 1.9,
       "nextId": 431,
-      "state": "e61bcd7d",
-      "events": "c82de275",
+      "state": "a9398405",
+      "events": "aca407c6",
       "rng": {
         "draws": 16,
         "digest": "88fdc798"
@@ -210,8 +210,8 @@
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
-            "levelUps": 3,
-            "xpGained": 714
+            "levelUps": 6,
+            "xpGained": 1826
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -285,14 +285,14 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 909,
+          "lifetimeXp": 2021,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
           "statAllocation": {},
           "townFocus": {},
-          "xp": 239
+          "xp": 377
         }
       ],
       "entities": [
@@ -308,15 +308,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 100.9,
-          "flee": 11,
-          "hit": 11,
-          "hp": 115,
+          "flee": 14,
+          "hit": 14,
+          "hp": 149,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 10,
+          "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 115,
+          "maxHp": 149,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -372,19 +372,19 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
+          "dodgeChance": 0.015,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 5,
-          "hp": 74,
+          "flee": 24,
+          "hit": 21,
+          "hp": 140,
           "id": 424,
           "kind": "mob",
           "level": 4,
           "lootFfaTimer": "Infinity",
-          "maxHp": 103,
+          "maxHp": 169,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -402,18 +402,21 @@
             "z": -1253
           },
           "stats": {
-            "agi": 1,
-            "armor": 24,
-            "dex": 1,
-            "luk": 1,
-            "vit": 1
+            "agi": 20,
+            "armor": 5,
+            "dex": 17,
+            "int": 10,
+            "luk": 5,
+            "mdef": 5,
+            "str": 6,
+            "vit": 8
           },
           "swingTimer": 1.6,
           "templateId": "acolyte_tessa",
           "wanderTimer": 1.1,
           "weapon": {
-            "max": 10,
-            "min": 6,
+            "max": 27,
+            "min": 22,
             "speed": 2.6
           }
         },
@@ -424,13 +427,13 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 109,
+          "hit": 109,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -466,11 +469,9 @@
             "z": -1170
           },
           "stats": {
-            "agi": 3,
-            "armor": 160,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 100,
+            "dex": 100,
+            "mdef": 40
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,
@@ -526,7 +527,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "072b3ddb",
+      "state": "6f1dd06d",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -537,7 +538,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 431,
-      "state": "072b3ddb",
+      "state": "6f1dd06d",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -563,8 +564,8 @@
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
-            "levelUps": 3,
-            "xpGained": 714
+            "levelUps": 6,
+            "xpGained": 1826
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -638,14 +639,14 @@
               "itemId": "baked_bread"
             }
           ],
-          "lifetimeXp": 909,
+          "lifetimeXp": 2021,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 65,
           "statAllocation": {},
           "townFocus": {},
-          "xp": 239
+          "xp": 377
         }
       ],
       "entities": [
@@ -661,15 +662,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101,
-          "flee": 11,
-          "hit": 11,
-          "hp": 115,
+          "flee": 14,
+          "hit": 14,
+          "hp": 149,
           "id": 415,
           "inCombat": true,
           "kind": "player",
-          "level": 10,
+          "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 115,
+          "maxHp": 149,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -725,19 +726,19 @@
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
+          "dodgeChance": 0.015,
           "element": "neutral",
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 5,
-          "hp": 74,
+          "flee": 24,
+          "hit": 21,
+          "hp": 140,
           "id": 424,
           "kind": "mob",
           "level": 4,
           "lootFfaTimer": "Infinity",
-          "maxHp": 103,
+          "maxHp": 169,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -755,18 +756,21 @@
             "z": -1253
           },
           "stats": {
-            "agi": 1,
-            "armor": 24,
-            "dex": 1,
-            "luk": 1,
-            "vit": 1
+            "agi": 20,
+            "armor": 5,
+            "dex": 17,
+            "int": 10,
+            "luk": 5,
+            "mdef": 5,
+            "str": 6,
+            "vit": 8
           },
           "swingTimer": 1.4,
           "templateId": "acolyte_tessa",
           "wanderTimer": 1,
           "weapon": {
-            "max": 10,
-            "min": 6,
+            "max": 27,
+            "min": 22,
             "speed": 2.6
           }
         },
@@ -777,13 +781,13 @@
           "critChance": 0.05,
           "dead": true,
           "detonateTimer": "Infinity",
-          "dodgeChance": 0.013,
+          "dodgeChance": 0.01,
           "element": "undead",
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 12,
+          "flee": 109,
+          "hit": 109,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -819,11 +823,9 @@
             "z": -1170
           },
           "stats": {
-            "agi": 3,
-            "armor": 160,
-            "dex": 3,
-            "luk": 3,
-            "vit": 3
+            "agi": 100,
+            "dex": 100,
+            "mdef": 40
           },
           "stompTimer": 10.5,
           "swingTimer": 0.75,
