@@ -19,13 +19,7 @@ import type { NpcDef } from '../sim/types';
 
 /** Every service an NPC can front. Stable ids: the painter maps them to labels
  *  and the HUD maps them to its open* methods. */
-export type NpcServiceId =
-  | 'vendor'
-  | 'market'
-  | 'bank'
-  | 'heroicVendor'
-  | 'train'
-  | 'unbind';
+export type NpcServiceId = 'vendor' | 'market' | 'bank' | 'heroicVendor' | 'train' | 'unbind';
 
 export interface NpcServicesDeps {
   /** Master npc ids that run a crafting station, from the station placements. */

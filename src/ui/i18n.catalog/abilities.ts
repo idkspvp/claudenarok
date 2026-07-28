@@ -1309,11 +1309,7 @@ const classAbilityNamesEn = {
         'Bladed Gyre',
         'Spin in a deadly arc, striking all nearby enemies for {damage}.',
       ],
-      [
-        'berserker_rage',
-        'Seething Fury',
-        'Enter a seething fury, generating 20 rage.',
-      ],
+      ['berserker_rage', 'Seething Fury', 'Enter a seething fury, generating 20 rage.'],
       [
         'crusader_strike',
         'Crusader Strike',
@@ -1646,26 +1642,14 @@ const classAbilityNamesEn = {
         'Skybranch',
         'Hurls lightning at the target area, damaging nearby enemies for {damage}.',
       ],
-      [
-        'chaos_bolt',
-        'Ruinbolt',
-        'Hurls a bolt of chaotic fire for {damage} Fire damage.',
-      ],
+      ['chaos_bolt', 'Ruinbolt', 'Hurls a bolt of chaotic fire for {damage} Fire damage.'],
       [
         'cleansing_verdict',
         'Cleansing Verdict',
         'Purges a harmful magic effect from a friendly target and heals them for {damage} Holy.',
       ],
-      [
-        'cloak_of_shadows',
-        'Shadecloak',
-        'Wraps you in shadows, absorbing 420 damage for 5 sec.',
-      ],
-      [
-        'cone_of_cold',
-        'Frostsweep',
-        'Blasts nearby enemies with frost for {damage} Frost damage.',
-      ],
+      ['cloak_of_shadows', 'Shadecloak', 'Wraps you in shadows, absorbing 420 damage for 5 sec.'],
+      ['cone_of_cold', 'Frostsweep', 'Blasts nearby enemies with frost for {damage} Frost damage.'],
       [
         'counterspell',
         'Spellbreak',
@@ -1697,11 +1681,7 @@ const classAbilityNamesEn = {
         'Lightward',
         'Shields you with holy power, absorbing 900 damage for 8 sec.',
       ],
-      [
-        'earthbind',
-        'Gripping Earth',
-        'Binds nearby enemies to the earth, rooting them for 2 sec.',
-      ],
+      ['earthbind', 'Gripping Earth', 'Binds nearby enemies to the earth, rooting them for 2 sec.'],
       [
         'evocation',
         'Aetherwell',
@@ -1727,16 +1707,8 @@ const classAbilityNamesEn = {
         'Tolling Hammer',
         'Hurls a holy hammer at a wounded enemy for {damage} Holy damage. Only usable below 20% health.',
       ],
-      [
-        'healing_stream',
-        'Springwell',
-        'Restores 120 health to a friendly target over 12 sec.',
-      ],
-      [
-        'holy_wrath',
-        "Saint's Ire",
-        'Unleashes holy power, damaging nearby enemies for {damage}.',
-      ],
+      ['healing_stream', 'Springwell', 'Restores 120 health to a friendly target over 12 sec.'],
+      ['holy_wrath', "Saint's Ire", 'Unleashes holy power, damaging nearby enemies for {damage}.'],
       [
         'howl_of_terror',
         'Dread Chorus',
@@ -2571,11 +2543,7 @@ export const classAbilityNames = {
           'Torbellino',
           'Giras en un arco letal y golpeas a todos los enemigos cercanos por {damage}.',
         ],
-        [
-          'berserker_rage',
-          'Ira rabiosa',
-          'Entras en una ira rabiosa y generas 20 de ira.',
-        ],
+        ['berserker_rage', 'Ira rabiosa', 'Entras en una ira rabiosa y generas 20 de ira.'],
         [
           'holy_shock',
           'Choque Sagrado',
@@ -3364,11 +3332,7 @@ export const classAbilityNames = {
           'Tourbillon',
           'Tournoie dans un arc mortel et frappe tous les ennemis proches pour {damage}.',
         ],
-        [
-          'berserker_rage',
-          'Rage berserker',
-          'Entre dans une rage berserker et génère 20 rage.',
-        ],
+        ['berserker_rage', 'Rage berserker', 'Entre dans une rage berserker et génère 20 rage.'],
         [
           'holy_shock',
           'Horion sacré',
@@ -7676,11 +7640,7 @@ export const classAbilityNames = {
           'Redemoinho',
           'Gira em um arco mortal, atingindo todos os inimigos próximos por {damage}.',
         ],
-        [
-          'berserker_rage',
-          'Raiva Berserker',
-          'Entra em raiva berserker e gera 20 de raiva.',
-        ],
+        ['berserker_rage', 'Raiva Berserker', 'Entra em raiva berserker e gera 20 de raiva.'],
         [
           'holy_shock',
           'Choque Sagrado',

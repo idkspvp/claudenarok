@@ -3820,8 +3820,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'directDamage', min: 92, max: 116 },
       { type: 'stun', duration: 4 },
     ],
-    description:
-      'Deep freezes the target, dealing $d Frost damage and stunning it for 4 sec.',
+    description: 'Deep freezes the target, dealing $d Frost damage and stunning it for 4 sec.',
   },
   evocation: {
     id: 'evocation',
@@ -3942,8 +3941,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     // value = protected casts left; player_motion skips its cast-cancel while
     // worn and finishing a hard cast decrements it (casting_lifecycle).
     effects: [{ type: 'selfBuff', kind: 'ice_floes', value: 2, duration: 15 }],
-    description:
-      'Your next two spells with a cast time can be cast while moving. Lasts 15 sec.',
+    description: 'Your next two spells with a cast time can be cast while moving. Lasts 15 sec.',
   },
   greater_invisibility: {
     id: 'greater_invisibility',
@@ -3988,8 +3986,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
         ring: { duration: 10, innerRadius: 4.5 },
       },
     ],
-    description:
-      'Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec.',
+    description: 'Summons a ring for 10 sec. Enemies crossing its perimeter are frozen for 4 sec.',
   },
   cold_snap: {
     id: 'cold_snap',
@@ -4015,8 +4012,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
         ],
       },
     ],
-    description:
-      'Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility.',
+    description: 'Finishes the cooldown on Flickerstep, Frostveil, and Greater Invisibility.',
   },
   mass_barrier: {
     id: 'mass_barrier',
@@ -4046,8 +4042,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     offGcd: true,
     effects: [{ type: 'selfBuff', kind: 'overload', value: 0.4, duration: 10 }],
-    description:
-      'Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec.',
+    description: 'Your next spell is amplified by 40% but costs 50% more mana. Lasts 10 sec.',
   },
   power_echo: {
     id: 'power_echo',
@@ -4062,8 +4057,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
     requiresTarget: false,
     offGcd: true,
     effects: [{ type: 'selfBuff', kind: 'power_echo', value: 0.5, duration: 10 }],
-    description:
-      'Your next direct spell repeats at 50% power on the same target. Lasts 10 sec.',
+    description: 'Your next direct spell repeats at 50% power on the same target. Lasts 10 sec.',
   },
   rune_of_power: {
     id: 'rune_of_power',
@@ -4218,8 +4212,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'blinkForward', distance: 8, breakRoots: true },
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
-    description:
-      'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec.',
+    description: 'Rolls 8 yards forward, breaking roots, and shrugs off all damage for 1 sec.',
   },
   shadowslip: {
     id: 'shadowslip',
@@ -4254,8 +4247,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'blinkForward', distance: 8, breakRoots: true },
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
-    description:
-      'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec.',
+    description: 'Bounds 8 yards forward, breaking roots, and takes no damage for 1 sec.',
   },
   phase_tumble: {
     id: 'phase_tumble',
@@ -4272,8 +4264,7 @@ export const ABILITIES: Record<string, AbilityDef> = {
       { type: 'blinkForward', distance: 8, breakRoots: true },
       { type: 'selfBuff', kind: 'invuln', value: 1, duration: 1 },
     ],
-    description:
-      'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec.',
+    description: 'Tumbles 8 yards forward, breaking roots, and phases out of all damage for 1 sec.',
   },
   veilstep: {
     id: 'veilstep',
