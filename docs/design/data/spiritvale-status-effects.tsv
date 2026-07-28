@@ -1,0 +1,175 @@
+# SpiritVale status effects, 156 entries, from the community client datamine at
+# spiritvalers.com (#/effects), July 2026.
+#
+# Columns: id, then a pipe-separated record of
+#   name | element | effect lines... | "Max stacks: N" | the skills that apply it
+#
+# Three shapes worth knowing before reading:
+#   - A damage-over-time states its own per-tick formula, and they nearly all
+#     share one: (Level + STR + AGI + INT) / 10, the engine's status coefficient.
+#     Burning adds 3% of max health on top; Rage is 0.1% of max health per stack.
+#   - A status is expressed as STATS from the StatType catalog, not as bespoke
+#     code: Stun is "Cannot act; Cannot dodge; Cannot block", Blind is
+#     "-25% Hit; -25% Flee; -25% Crit Rate".
+#   - "Exposure" statuses are elemental-resist debuffs (-4%/lv), and a skill of
+#     one element applies the exposure of ANOTHER, which is the party-play hook.
+#
+# A trailing "-" in the applied-by position means no skill applies it: it comes
+# from gear, a grimoire, or a monster.
+id	record
+Volatile	Volatile | Neutral | Max stacks: 5 | Volatile Bolt
+Curse	Curse | Neutral | Healing deals damage; -25% MDEF | Banishment Field | Wide Curse
+VenomCoating	Venom Coating | Neutral | On physical hit: applies Poison (5s +1s/lv) - reduced by target resist | Venom | Venom Coating
+Poison	Poison | Poison | Damage over time | Deals (Level + STR + AGI + INT) / 10 Poison damage per tick; No MP regen | Tick rate: 1 s | Gunk Shot | Wide Poison | Poison Grenade | Venom Bloom | Venom Strike
+Might	Might | Neutral | +1%/stack Damage Melee; +1%/stack Damage Ranged; +1%/stack Damage Magic | Max stacks: 25 | Conviction Aura | Fury Bond | Mighty Roar
+Vulnerability	Vulnerability | Neutral | +1%/stack Damage From Melee; +1%/stack Damage From Ranged | Max stacks: 25 | Damnation | Freeze Grenade | Harvest | Jump Shot | Piercing Shot | Shield Bash | Slow Trap | Air Cutter | Impale | Piercing Flurry | Weapon Throw
+Decay	Decay | Undead | Damage over time | Deals (Level + STR + AGI + INT) / 10 Undead damage per tick; -1% Healing Received | Tick rate: 1 s | Bone Spear | Death Coil | Death Nova | Death Spiral | Decay Aura
+Berserk	Berserk | Neutral | +10/lv Two-hand Stance Bonus; +3 Skill Splash; Immune to knockback; Immune to flinch | Berserk
+Endure	Endure | Neutral | Immune to flinch; +1/lv DEF; +1/lv flat DEF; +1/lv MDEF; +1/lv flat MDEF | Endure
+Stagger	Stagger | Neutral | Cannot block; -25% DEF | Earth Splitter | Harvest | Shield Bash | Fearsome Cry | Air Cutter
+Burning	Burning | Fire | Damage over time | Deals 3% max HP + (Level + STR + AGI + INT) / 10 Fire damage per tick | Tick rate: 1 s | Combustion | Explosive Grenade | Fireball | Fire Pillar | Flame Orb | Meteor | Overload Fire
+Bleeding	Bleeding | Neutral | Damage over time | Deals (Level + STR + AGI + INT) / 10 damage per tick; No HP regen | Tick rate: 1 s | Cyclone | Dark Claw | Execute | Bleed Attack | Wide Bleed | Shrapnel
+Bloodprice	Bloodprice | Neutral | +10 HP Siphon | -
+Stun	Stun | Neutral | Cannot act; Cannot dodge; Cannot block | Bash | Earthquake | Meteor | Pull | Stun Attack | Wide Stun | Fearsome Cry | Smite | Stomp | Twist Of Fate | Wild Charge
+Barrier	Sacred Aegis | Neutral | +10 +4/lv Health Barrier | Sacred Aegis
+Haste	Haste | Neutral | +25% Move Speed; +2/lv AGI | Haste
+Frenzy	Frenzy | Neutral | +5%/lv Atk Speed; +1 Atk Speed Cap | Blood Frenzy | Fanaticism
+IronResponse	Iron Response | Neutral | +20% SpearStab skill damage; +20% SpearSlice skill damage | -
+Radiance	Radiance | Neutral | +20%/stack Autoattack Matk; +5%/stack Cast Speed | Max stacks: 5 | -
+Silence	Silence | Neutral | Cannot cast | Suppression Field | Holy Wrath | Jump Shot | Wide Silence
+Slow	Slow | Neutral | -50% Move Speed; -50% Cast Speed; -50% Atk Speed | Axe Throw | Bone Spikes | Earth Spikes | Dissonance Well | Frostglass | Earth Splitter | Ice Release | Judgement Blade | Shadow Trail | Slow Trap | Weapon Throw | Shrapnel
+Multistrike	Multistrike | Neutral | +100% Multistrike | -
+CastReady	Cast Ready | Neutral | +90 Cast Time Reduction | -
+Focus	Focus | Neutral | +1%/stack Cast Speed | Max stacks: 25 | Sacrament
+GospelOfGrace	Gospel Of Grace | Neutral | +25 HolyLight Skill Recover Mp | -
+Ruthless	Ruthless | Neutral | +1 Chain; +10% Atk Speed | -
+EnergyShield	Energy Shield | Neutral | +10/lv Energy Shield | Energy Shield
+Frozen	Frozen | Neutral | Cannot act; Cannot dodge; Cannot block | Freeze Grenade | Blizzard | Ice Shard | Wide Freeze
+HolyAttunement	Holy Attunement | Neutral | +25% Holy damage | -
+Regeneration	Regeneration | Neutral | Heal over time | Restores (Level + STR + AGI + INT) / 10 HP per tick; +1%/stack Healing Received | Tick rate: 1 s | Max stacks: 25 | Guardian Bond | Sanctuary | Litany of Sanctuary
+WaterExposure	Water Exposure | Neutral | -4%/lv Water Element Resist | Chain Lightning | Tempest | Thunder Storm
+MagicExposure	Magic Exposure | Neutral | +1%/stack Damage From Magic | Max stacks: 25 | Damnation | Elemental Overload
+Vitality	Vitality | Neutral | +4%/lv Max HP; +2/lv VIT | Divinity | Guardian Bond | Vitality Aura
+FireAttunement	Fire Attunement | Neutral | +5%/lv Fire damage | Avatar of Fire
+ElementalAttunement	Elemental Attunement | Neutral | +5%/lv Fire damage; +5%/lv Water damage; +5%/lv Wind damage; +5%/lv Earth damage | -
+RadiantBulwark	Radiant Bulwark | Neutral | +10% All Element Resist; +20 Health Barrier | -
+CurseImmunity	Curse Immunity | Neutral | Immune to Curse | Benediction
+FlowState	Flow State | Neutral | +20%/lv Autoattack Matk | Flow State
+Protection	Protection | Neutral | +25% Block | High Guard
+Fury	Fury | Neutral | +4%/lv Crit Rate | Fury Bond | Furious Shout
+Aggressive	Aggressive | Neutral | - | Taunt
+BloodFrenzy	Blood Frenzy | Neutral | +4%/lv Move Speed; +20%/lv Multistrike; +1 Atk Speed Cap; On physical hit: applies Bleeding (5s) - reduced by target resist | Blood Frenzy
+Flow	Flow | Neutral | +25% Move Speed | -
+WindExposure	Wind Exposure | Neutral | -4%/lv Wind Element Resist | Blizzard | Hydro Vortex | Ice Shard
+SpellShield	Arcanum Ward | Neutral | +100% Reflect Spell | Arcanum Ward
+Mounted	Mounted | Neutral | +40% Move Speed | -
+StunImmunity	Stun Immunity | Neutral | Immune to Stun | Status Recovery
+BoostAxeVortex	Warmaw | Neutral | +20%/stack AxeVortex skill damage; Consumes AxeVortex | Max stacks: 5 | -
+BoostBash	Breakjaw | Neutral | +20% Bash skill damage; +3 Bash Skill Area | -
+Blind	Blind | Neutral | -25% Hit; -25% Flee; -25% Crit Rate | Divine Punishment | Blind | Wide Blind | Point Blank | Smoke Screen | Tempest
+BloodLust	Blood Lust | Neutral | +5/lv HP Siphon | Blood Howl
+EnchantPoison	Enchant Poison | Neutral | Weapon element -> Poison | Enchant Poison
+SilentEdge	Silent Edge | Neutral | +4%/lv Crit Rate; +4%/lv Crit Damage | Silent Edge
+TriggerHappy	Trigger Happy | Neutral | Auto-fire; +4%/lv Move Speed; +6/lv Flee | Trigger Happy
+Counter	Counter | Neutral | +100% Block; +100% Crit Rate; Cannot act; Cannot dodge | Counter Stance
+Grace	Divine Grace | Neutral | +100 HP Regen; +100 MP Regen | Divine Grace
+Cloaking	Cloaking | Neutral | Invisible; -100% +20%/lv Move Speed; +10%/lv Crit Rate; No HP regen; No MP regen | Cloaking | Elusive Feint
+SilenceImmunity	Silence Immunity | Neutral | Immune to Silence | Cure
+Revealed	Revealed | Neutral | Immune to Cloaking | True Sight
+HolyShield	Holy Shield | Neutral | +2%/lv Shield Block; Uninterruptible casting | Holy Shield
+EarthExposure	Earth Exposure | Neutral | -4%/lv Earth Element Resist | Fireball | Fire Pillar | Meteor
+EnchantHoly	Enchant Holy | Neutral | Weapon element -> Holy | Endow Holy
+Sacrifice	Sacrifice | Holy | +9 Sacrifice; +100 +10/lv Sacrifice Damage | -
+NPC_SpellGuard	NPC- Spell Guard | Neutral | +50% Reflect Spell | Spell Shield
+UndeadExposure	Desecrated | Neutral | -4%/lv Undead Element Resist | Bone Spikes | Death Nova
+SacredGround	Sacred Ground | Neutral | -50% Damage From Ground | Sacred Ground
+PoisonImmunity	Poison Immunity | Neutral | Immune to Poison | Cure
+SoulDrain	Soul Drain | Neutral | +5/lv HP Siphon; +1/lv Siphon Mp; +10/lv Leech Kill; +2/lv Leech Kill Mp | Soul Drain
+Alacrity	Alacrity | Neutral | +10%/lv Cooldown Recovery | -
+FireExposure	Fire Exposure | Neutral | -4%/lv Fire Element Resist | Earthquake | Earth Spikes | Earth Wall
+Lockdown	Lockdown | Neutral | +20%/stack Atk Speed; +15%/stack ATK; +30%/stack Multistrike; -100/stack Autocast Chance; +1/stack Atk Speed Cap; On physical hit: applies Bleeding (5s) - reduced by target resist | Max stacks: 10 | Lockdown
+Weaken	Weaken | Neutral | -25% Final Damage | Suppressive Shot
+LightningReflexes	Lightning Reflexes | Neutral | +8%/lv Atk Speed; +8/lv Flee | Lightning Reflexes
+WindAttunement	Wind Attunement | Neutral | +5%/lv Wind damage | Avatar of Storm
+LifeBond	Life Bond | Neutral | +100 Life Bond | Life Bond
+SlowImmunity	Slow Immunity | Neutral | Immune to Slow | Haste
+TwohandQuicken	Axe Quicken | Neutral | +6%/lv Atk Speed; +4%/lv Crit Rate | Axe Quicken
+CombatMounted	Combat Mounted | Neutral | +20% Move Speed | -
+EnchantArmorHoly	Sanctify | Neutral | Armor element -> Holy | Sanctify
+Stability	Stability | Neutral | Immune to flinch; Immune to knockback | High Guard
+Aegis	Aegis | Neutral | +100% Damage Reduction | Aegis of Light
+Rage	Rage | Neutral | Damage over time | Deals 0.1% max HP damage per tick (per stack); +0.5%/stack ATK | Tick rate: 1 s | Max stacks: 25 | -
+Blessing	Benediction | Neutral | +2/lv STR; +2/lv INT; +2/lv DEX; +2/lv LUK; +4/lv Hit | Benediction
+SniperNest	Sniper Nest | Neutral | +4%/lv Damage Ranged; +4%/lv Crit Damage | Snipers Nest
+FrozenImmunity	Frozen Immunity | Neutral | Immune to Frozen | Status Recovery
+DeathBramble	Necrotic Presence | Neutral | Weapon element -> Undead; +2%/lv Undead damage | Necrotic Presence
+UmbralCurse	Umbral Curse | Neutral | - | -
+DeathBond	Death Bond | Neutral | +10/lv HP Siphon; +10/lv Heal Share | Death Bond
+Defiance	Defiance | Neutral | +2%/lv Damage Reduction | Defiance Aura
+Sanctuary	Sanctuary | Neutral | +7 EnchantArmorHoly Skill Area | Sanctuary
+WindBarrier	Wind Barrier | Neutral | Autocast ChainLightning +35%; +4%/lv Move Speed | Avatar of Storm
+DecayImmunity	Decay Immunity | Neutral | Immune to Decay | Status Recovery
+GuardianSpirit	Guardian Spirit | Neutral | -100% Damage From Ranged | Guardian Spirit
+WaterAttunement	Water Attunement | Neutral | +5%/lv Water damage | Avatar of Frost
+Marked	Marked | Neutral | -10 -2/lv Crit Defense; -10% -2%/lv Flee | Mark Target | Suppressive Shot
+FireRelease	Fire Release | Neutral | Autocast Firebolt +2%/lv; Weapon element -> Fire | -
+Zeal	Zeal | Neutral | +3/lv ATK; +3/lv MATK | Zeal
+EarthAttunement	Earth Attunement | Neutral | +5%/lv Earth damage | Avatar of Stone
+FireBarrier	Fire Barrier | Neutral | Autocast NPC_Burn +100%; +4%/lv Healing Received | Avatar of Fire
+FuryBond	Fury Bond | Neutral | - | Fury Bond
+Invoker	Invoker | Neutral | +2%/lv Damage Magic; +2%/lv Cast Speed; +20/lv SoulStrike Summon Spell Echo | Invoker
+Agility	Inner Focus | Neutral | +2%/lv AGI; +2%/lv DEX | Inner Focus
+LauncherBoost	Launcher Boost | Neutral | Autocast ExplosiveGrenade +100%; +175 Set Atk Spd | -
+ArcaneSigil	Arcane Sigil | Neutral | +10%/lv MATK; +5%/lv Cast Speed; +20%/lv Mp Cost | Arcane Sigil
+ComboReady	Combo Ready | Neutral | - | -
+Enrage	Enrage | Neutral | On physical hit: gain Rage (5s) | -
+PoisonExposure	Poison Exposure | Neutral | -4%/lv Poison Element Resist | -
+BloodCrash	Blood Crash | Neutral | Heal over time | Restores 5% max HP per tick | Tick rate: 1 s | -
+PerfectStrike	Perfect Strike | Neutral | +100% Crit Rate | -
+EarthBarrier	Earth Barrier | Neutral | Autocast NPC_Stun +35%; +2%/lv All Element Resist | Avatar of Stone
+GraveChill	Grave Chill | Neutral | +2%/lv Atk Speed; +2%/lv Move Speed | Grave Chill
+Conjurer	Conjurer | Neutral | +2/lv Summon Damage; +2%/lv Healing | Conjurer
+Fanaticism	Fanaticism | Neutral | Autocast Smite +10%/lv | -
+GuardianBond	Guardian Bond | Neutral | - | Guardian Bond
+Elusive	Elusive | Neutral | +100% Perfect Dodge; +100% Spell Dodge | Elusive Feint
+LauncherPoison	Launcher Poison | Neutral | +10%/lv Damage Status; On physical hit: applies Poison (5s) - reduced by target resist | -
+SpearQuicken	Spear Quicken | Neutral | +5%/lv Atk Speed; +8/lv Hit | Spear Quicken
+SummonSpeed	Summon Speed | Neutral | +50%/lv Move Speed | -
+ExorcistBrand	Exorcists Brand | Neutral | +20 Damnation Skill Damage Received; +20 HolyWrath Skill Damage Received | -
+LightningRelease	Lightning Release | Neutral | Autocast Thunderbolt +2%/lv; Weapon element -> Wind | -
+WaterBarrier	Water Barrier | Neutral | Autocast NPC_Freeze +100%; +5%/lv MP Regen | Avatar of Frost
+HolyExposure	Consecrated | Neutral | -4%/lv Holy Element Resist | -
+CorpseBarrier	Corpse Barrier | Neutral | +10 +4/lv Health Barrier; Immune to flinch | -
+IceRelease	Ice Release | Neutral | Autocast Icebolt +2%/lv; Weapon element -> Water | -
+NPC_SpikedShell	NPC- Spiked Shell | Neutral | +20% Reflect Damage | Thorns
+BoostAxeArc	Bloodtrail | Neutral | +20% AxeArc skill damage; Consumes AxeArc | -
+Taunt	Taunt | Neutral | +100%/lv Threat | -
+BurningImmunity	Burning Immunity | Neutral | Immune to Burning | Status Recovery
+Unyielding	Unyielding | Neutral | +90% Damage Reduction | -
+ManaEcho	Mana Echo | Neutral | +25 TetraVortex Skill Recover Mp | -
+VenomStep	Venom Step | Neutral | +1 VenomStrike Skill Chains | -
+ArmorBreak	Armor Break | Neutral | -25% DEF | -
+BlindImmunity	Blind Immunity | Neutral | Immune to Blind | Cure
+MindBreak	Mind Break | Neutral | -25% MDEF | -
+NPC_SteelGuard	NPC- Steel Guard | Neutral | +50% Block | Reinforce
+ShadowMark	Shadow Mark | Neutral | - | -
+Spinning	Spinning | Neutral | Cannot attack; Cannot cast | -
+TempestEngine	Tempest Engine | Neutral | +10%/stack ChainLightning skill damage; +30/stack ChainLightning Skill Cost; +10%/stack Tempest skill damage; +30/stack Tempest Skill Cost | Max stacks: 5 | -
+WaterBarrier2	Arcane Barrier | Neutral | +10% Water damage; +10% Water Element Resist | -
+Divinity	Divinity | Neutral | +5%/lv Healing; +10%/lv Buff Duration; +20%/lv Mp Cost | -
+HighGuard	High Guard | Neutral | -50% Move Speed; -50% +10%/lv Atk Speed | -
+BoostSmite	Martyrs Oath | Neutral | +20% Smite skill damage; Applies Smite; Autocast Smite_HolyLight; Consumes Smite | -
+NPC_Sharpen	NPC- Sharpen | Neutral | +30% Crit Rate | Sharpen
+RifleBoost	Rifle Boost | Neutral | +4%/lv SniperShot skill damage | -
+Sacrament	Sacrament | Neutral | +5%/lv Holy damage; +3 HolyLight Skill Area; +20%/lv Mp Cost | -
+Sanctuary2	Sanctuary Doctrine | Neutral | +10% Healing; +10% Damage Reduction | -
+ShotgunBoost	Shotgun Boost | Neutral | +4%/lv PointBlankShot skill damage | -
+EarthBarrier2	Arcane Barrier | Neutral | +10% Earth damage; +10% Earth Element Resist | -
+FireBarrier2	Arcane Barrier | Neutral | +10% Fire damage; +10% Fire Element Resist | -
+WindBarrier2	Arcane Barrier | Neutral | +10% Wind damage; +10% Wind Element Resist | -
+Sitting	Sitting | Neutral | +200 HP Regen; +200 MP Regen | -
+PistolBoost	Pistol Boost | Neutral | +4%/lv PanicBurst skill damage; +3 PanicBurst Skill Area; +3 FanFire Skill Area | -
+SpiritBond	Spirit Bond | Neutral | +1/lv Max MP Regen; +5%/lv Max MP | -
+Stamina	Stamina | Neutral | +10/lv Dodge Recovery | -
+BoostStomp	Gorepath | Neutral | +20% Stomp skill damage; Applies Stomp; Consumes Stomp | -
+HonedTechnique	Honed Technique | Neutral | +20%/stack ShadowRelease skill damage; +20%/stack LightningStrike skill damage; +20%/stack BladeDance skill damage; Consumes ShadowRelease; Consumes LightningStrike; Consumes BladeDance | Max stacks: 3 | -

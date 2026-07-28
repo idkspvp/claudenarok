@@ -1,0 +1,236 @@
+# SpiritVale's complete StatType catalog, 219 entries, read from the community
+# client datamine at spiritvalers.com/mechanics in July 2026.
+#
+# This is the game's entire stat vocabulary: every value an item, skill, buff or
+# passive is allowed to move. `flat` adds a number, `percent` a multiplier.
+#
+# Worth noticing before reading the rows:
+#   - The first six are the six attributes, ids 0 to 5, then AllStats at 6.
+#   - Ids 92 to 175 are almost entirely SUMMON stats. A summoner class needs a
+#     parallel copy of most of the sheet.
+#   - Ids 197 to 218 are all SKILL-modifier stats (Skill Pull, Skill Instances,
+#     Skill Replace, Skill Apply Status). Gear here can rewrite what a skill
+#     does, not just how hard it hits.
+#   - Ids 28 to 38 are the DENIAL flags (No Action, No Move, Cannot Attack,
+#     No Cast, No Flee, No Regen). Statuses are expressed as stats.
+#
+id	stat	internalKey	type
+0	Str	Str	flat
+1	Vit	Vit	flat
+2	Agi	Agi	flat
+3	Dex	Dex	flat
+4	Int	Int	flat
+5	Luk	Luk	flat
+6	All Stats	AllStats	flat
+7	HP	Hp	flat
+8	MP	Mp	flat
+9	Atk	Atk	flat
+10	Matk	Matk	flat
+11	Def	Def	flat
+12	Mdef	Mdef	flat
+13	Hit	Hit	flat
+14	Flee	Flee	flat
+15	Crit	Crit	flat
+16	Flat DEF	DefFlat	flat
+17	Flat MDEF	MdefFlat	flat
+18	Element Weapon	ElementWeapon	flat
+19	Element Armor	ElementArmor	flat
+20	Health On Hit	HealthOnHit	flat
+21	Mana On Hit	ManaOnHit	flat
+22	Health on Kill	LeechKill	flat
+23	Mana on Kill	LeechKillMp	flat
+24	Auto-Attack Splash	Splash	flat
+25	Range	Range	flat
+26	Status Immune	StatusImmune	flat
+27	Reverse Healing	ReverseHealing	flat
+28	No Action	NoAction	flat
+29	No Move	NoMove	flat
+30	Cannot Attack	NoAttack	flat
+31	No Cast	NoCast	flat
+32	Knockback Immunity	NoKnockback	flat
+33	No Flee	NoFlee	flat
+34	Uninterruptible Cast	NoCastCancel	flat
+35	Flinch Immunity	NoFlinch	flat
+36	Ignores Reflect	NoReflect	flat
+37	No Regen Hp	NoRegenHp	flat
+38	No Regen Mp	NoRegenMp	flat
+39	Autocast Hit	AutocastHit	flat
+40	Autocast Attack	AutocastAttack	flat
+41	Autocast Chance	AutocastChance	flat
+42	Grant Skill	GrantSkill	flat
+43	Skill Level	SkillLevel	flat
+44	Damage To Element	DamageToElement	percent
+45	Damage To Boss	DamageToBoss	percent
+46	Damage Element	DamageElement	percent
+47	Melee Damage	DamageMelee	percent
+48	Magic Damage	DamageMagic	percent
+49	Skill Damage	SkillDamage	percent
+50	Cost Skill	CostSkill	flat
+51	Cooldown Skill	CooldownSkill	flat
+52	CRIT Damage	CritDamage	percent
+53	Element Resist	ElementResist	percent
+54	Atk Weapon	AtkWeapon	flat
+55	Matk Weapon	MatkWeapon	flat
+56	Damage From Element	DamageFromElement	percent
+57	Damage from Magic	DamageFromMagic	percent
+58	Damage from Melee	DamageFromMelee	percent
+59	HP Regen	HpRegen	flat
+60	Max HP Regen	HpRegenMax	flat
+61	MP Regen	MpRegen	flat
+62	Max MP Regen	MpRegenMax	flat
+63	Attack Speed	AtkSpd	percent
+64	Cast Speed	CastSpd	percent
+65	Movement Speed	MoveSpd	percent
+66	After Cast Delay	AfterCastDelay	flat
+67	Healing	Healing	percent
+68	Healing Received	HealingReceived	percent
+69	ATK	AtkMult	percent
+70	MATK	MatkMult	percent
+71	HP	HpMult	percent
+72	MP	MpMult	percent
+73	DEF	DefMult	percent
+74	MDEF	MdefMult	percent
+75	HP Regen	HpRegenMult	percent
+76	MP Regen	MpRegenMult	percent
+77	Total FLEE	FleeMult	percent
+78	Total HIT	HitMult	percent
+79	Total CRIT Rate	CritMult	percent
+80	Multistrike	DoubleAttack	percent
+81	Energy Shield	EnergyShield	flat
+82	Free Cast Move	FreeCastMove	flat
+83	Free Cast Atk	FreeCastAtk	flat
+84	Spell Echo	SpellEcho	flat
+85	Block	Block	flat
+86	Reflect Damage	ReflectDamage	percent
+87	Dual Wield	DualWield	flat
+88	EXP Rate	ExpRate	percent
+89	Drop Rate	DropRate	percent
+90	MP Cost	MpCost	percent
+91	Life Bond	LifeBond	flat
+92	Summon Stat Share	SummonStatShare	flat
+93	Summon Damage Share	SummonDamageShare	flat
+94	Spell Reflect	ReflectSpell	percent
+95	Block Shield	BlockShield	flat
+96	Range Wand	RangeWand	flat
+97	Leech Chance	LeechChance	flat
+98	Health Leech	Leech	percent
+99	Leech Mp Chance	LeechMpChance	flat
+100	Leech Mp	LeechMp	flat
+101	Weight Limit	WeightLimit	flat
+102	Ranged Damage	DamageRanged	percent
+103	Damage from Ranged	DamageFromRanged	percent
+104	Skill Cooldown	SkillCooldown	flat
+105	Skill Duration	SkillDuration	flat
+106	Skill Area	SkillArea	flat
+107	Skill Hits	SkillHits	flat
+108	Skill Cost	SkillCost	flat
+109	Skill Remove Knockback	SkillRemoveKnockback	flat
+110	Skill Remove Status	SkillRemoveStatus	flat
+111	Invisible	Invisible	flat
+112	Detector	Detector	flat
+113	Hp Regen Rate	HpRegenRate	flat
+114	Mp Regen Rate	MpRegenRate	flat
+115	Summon Healing Received	SummonHealingReceived	flat
+116	Summon Reflect Damage	SummonReflectDamage	flat
+117	Summon Health Regen	SummonHealthRegen	flat
+118	Health Barrier	HealthBarrier	flat
+119	Buff Duration	BuffDuration	percent
+120	CRIT DEF	CritDef	flat
+121	Perfect Dodge	PerfectDodge	percent
+122	Perfect Cloak	PerfectCloak	percent
+123	Skill Piercing	SkillPiercing	flat
+124	Skill Chains	SkillChains	flat
+125	No Block	NoBlock	flat
+126	Spell Auto	SpellAuto	flat
+127	Spell Dodge	SpellDodge	flat
+128	Total Atk	TotalAtk	flat
+129	Total Matk	TotalMatk	flat
+130	Auto-Attack Chain	Chain	flat
+131	Summon Attack Speed	SummonAtkSpd	flat
+132	Summon ATK	SummonAtkMult	percent
+133	Summon MATK	SummonMatkMult	percent
+134	Summon HP	SummonHpMult	percent
+135	Summon All Stats	SummonAllStats	flat
+136	Summon Healing	SummonHealing	flat
+137	Summon Crit	SummonCrit	flat
+138	Final Damage	FinalDamage	percent
+139	Final Damage Reduction	FinalDamageReduction	percent
+140	Final Damage Taken	FinalDamageTaken	percent
+141	All Resist (except Neutral)	AllResist	percent
+142	Status Damage	DamageStatus	percent
+143	Damage From Ground	DamageFromGround	percent
+144	Damage From Status	DamageFromStatus	percent
+145	Skill Cast Time	SkillCastTime	flat
+146	Autoattack Damage	AutoattackDamage	flat
+147	No Status Apply	NoStatusApply	flat
+148	Skill Splash	SkillSplash	flat
+149	Sacrifice	Sacrifice	flat
+150	Sacrifice Damage	SacrificeDamage	flat
+151	MATK per STR	MatkPerStr	flat
+152	ATK per STR	AtkPerStr	flat
+153	Str Mult	StrMult	percent
+154	Vit Mult	VitMult	percent
+155	Agi Mult	AgiMult	percent
+156	Dex Mult	DexMult	percent
+157	Int Mult	IntMult	percent
+158	Luk Mult	LukMult	percent
+159	Atk Spd Mult	AtkSpdMult	percent
+160	Cast Spd Mult	CastSpdMult	percent
+161	Move Spd Mult	MoveSpdMult	percent
+162	Skill Charges	SkillCharges	flat
+163	Auto Fire	AutoFire	flat
+164	Close-Range Damage	DamageCloseRange	percent
+165	Far-Range Damage	DamageFarRange	percent
+166	Damage To Summons	DamageToSummons	percent
+167	Damage From Summons	DamageFromSummons	percent
+168	Summon Spell Echo	SummonSpellEcho	flat
+169	Summon Damage	SummonDamage	flat
+170	Summon Damage Reduction	SummonDamageReduction	flat
+171	Summon Leech	SummonLeech	flat
+172	Summon Cost Share	SummonCostShare	flat
+173	Summon Hit	SummonHit	flat
+174	Summon Autoattack Damage	SummonAutoattackDamage	flat
+175	Summon Resist	SummonResist	flat
+176	Siphon HP	SiphonHp	flat
+177	Siphon MP	SiphonMp	flat
+178	Heal Share	HealShare	flat
+179	Death Share	DeathShare	flat
+180	Autocast Death	AutocastDeath	flat
+181	Autocast Kill	AutocastKill	flat
+182	Cooldown Recovery	CooldownRecovery	percent
+183	Max Stacks	StatusMaxStacks	flat
+184	Twohanded Stance Bonus	TwohandedStanceBonus	flat
+185	Attack Speed Limit	AtkSpdLimit	flat
+186	Auto-attack uses Matk	AutoattackMatk	percent
+187	Cast Time Reduction	CastTimeReduction	flat
+188	Cast Time Reduction Limit	CastTimeReductionLimit	flat
+189	Cast Range	CastRange	flat
+190	Dodge Recovery	DodgeRecovery	flat
+191	Atk Spd Flat	AtkSpdFlat	flat
+192	Threat Generation	ThreatMult	percent
+193	DEF Pierce	DefPierce	percent
+194	MDEF Pierce	MdefPierce	percent
+195	Perfect Hit	PerfectHit	percent
+196	Healing to Barrier	HealingToBarrier	percent
+197	Skill Pull	SkillPull	flat
+198	Skill Damage Low Hp	SkillDamageLowHp	flat
+199	Skill Range	SkillRange	flat
+200	Skill Instances	SkillInstances	flat
+201	Skill Crit	SkillCrit	flat
+202	Skill Leap	SkillLeap	flat
+203	Skill Threat	SkillThreat	flat
+204	Skill Cast Time Mult	SkillCastTimeMult	percent
+205	Skill Hits Mult	SkillHitsMult	percent
+206	Skill Duration Mult	SkillDurationMult	percent
+207	Skill Damage Received	SkillDamageReceived	flat
+208	Skill Damage Vs Status	SkillDamageVsStatus	flat
+209	Skill Replace	SkillReplace	flat
+210	Status Replace	StatusReplace	flat
+211	Status Duration	StatusDuration	percent
+212	Skill Max Instances	SkillMaxInstances	flat
+213	Skill Autocast	SkillAutocast	flat
+214	Skill Apply Status	SkillApplyStatus	flat
+215	Skill Consume Status	SkillConsumeStatus	flat
+216	Skill Recover Hp	SkillRecoverHp	flat
+217	Skill Recover Mp	SkillRecoverMp	flat
+218	Damage Vs Status	DamageVsStatus	percent
