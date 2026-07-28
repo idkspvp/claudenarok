@@ -35,7 +35,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 420,
-      "state": "fe3c6aab",
+      "state": "7028506e",
       "events": "53da3c1a",
       "rng": {
         "draws": 2,
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 420,
-      "state": "85ce1cb2",
+      "state": "18350785",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 420,
-      "state": "1e3ffc24",
+      "state": "2b72ef93",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "61bb4475",
+      "state": "d83678f6",
       "events": "f603937d",
       "rng": {
         "draws": 2,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 420,
-      "state": "d15e703d",
+      "state": "9f24a908",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 420,
-      "state": "4843b480",
+      "state": "6782556d",
       "events": "29be4bca",
       "rng": {
         "draws": 2,
@@ -101,7 +101,7 @@
       "tick": 32,
       "time": 1.6,
       "nextId": 420,
-      "state": "cf4125b5",
+      "state": "bb989df2",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -492,9 +492,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -551,14 +553,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -587,9 +591,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -622,9 +628,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -679,14 +687,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -748,7 +758,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 420,
-      "state": "a0426ed1",
+      "state": "4d9efa94",
       "events": "2132125a",
       "rng": {
         "draws": 2,
@@ -759,7 +769,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "83a09d3d",
+      "state": "8ef10c4a",
       "events": "741638a5",
       "rng": {
         "draws": 2,
@@ -770,7 +780,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 420,
-      "state": "b071214d",
+      "state": "753ce314",
       "events": "741638a5",
       "rng": {
         "draws": 34,
@@ -781,7 +791,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 420,
-      "state": "bf388298",
+      "state": "ea4ec093",
       "events": "419d9db5",
       "rng": {
         "draws": 49,
@@ -792,7 +802,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 420,
-      "state": "d0d04dc5",
+      "state": "0821c1ee",
       "events": "741638a5",
       "rng": {
         "draws": 65,
@@ -803,7 +813,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "8acc40cd",
+      "state": "dbdbf0f8",
       "events": "741638a5",
       "rng": {
         "draws": 79,
@@ -814,7 +824,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 420,
-      "state": "b8633e5e",
+      "state": "035b3b75",
       "events": "741638a5",
       "rng": {
         "draws": 102,
@@ -825,7 +835,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 420,
-      "state": "0d2d3580",
+      "state": "61c9ec9b",
       "events": "741638a5",
       "rng": {
         "draws": 125,
@@ -836,7 +846,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 420,
-      "state": "552ad6e6",
+      "state": "8caafd8d",
       "events": "88e0a9f2",
       "rng": {
         "draws": 150,
@@ -847,7 +857,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 420,
-      "state": "fd9f73c6",
+      "state": "8d537863",
       "events": "741638a5",
       "rng": {
         "draws": 156,
@@ -1238,9 +1248,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -1304,14 +1316,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -1340,9 +1354,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -1375,9 +1391,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -1432,14 +1450,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -1528,7 +1548,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 421,
-      "state": "d1bba3f3",
+      "state": "df0fb740",
       "events": "7b38e34b",
       "rng": {
         "draws": 157,
@@ -1922,9 +1942,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -1988,14 +2010,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -2024,9 +2048,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -2059,9 +2085,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -2116,14 +2144,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -2284,7 +2314,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 423,
-      "state": "e4c31728",
+      "state": "25e02137",
       "events": "3acf8bed",
       "rng": {
         "draws": 159,
@@ -2682,9 +2712,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -2747,14 +2779,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -2783,9 +2817,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -2818,9 +2854,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -2875,14 +2913,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -3163,8 +3203,8 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 424,
-      "state": "9f8a4f03",
-      "events": "eb9634e7",
+      "state": "b58affbf",
+      "events": "447033ca",
       "rng": {
         "draws": 166,
         "digest": "ec47690e"
@@ -3346,13 +3386,13 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 88
+            "damageDealt": 90
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 88
+              "damageDealt": 90
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -3565,9 +3605,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -3630,14 +3672,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -3673,9 +3717,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -3709,9 +3755,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -3766,14 +3814,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -4071,7 +4121,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499912,
+          "hp": 499910,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -4110,7 +4160,7 @@
           "threat": [
             [
               417,
-              89
+              91
             ]
           ],
           "weapon": {
@@ -4125,7 +4175,7 @@
       "tick": 77,
       "time": 3.85,
       "nextId": 424,
-      "state": "6055097d",
+      "state": "6e764807",
       "events": "f8b1c6df",
       "rng": {
         "draws": 166,
@@ -4308,13 +4358,13 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 88
+            "damageDealt": 90
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 88
+              "damageDealt": 90
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -4527,9 +4577,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -4592,14 +4644,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -4647,9 +4701,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -4683,9 +4739,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -4740,14 +4798,16 @@
           },
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -5045,7 +5105,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499912,
+          "hp": 499910,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -5084,7 +5144,7 @@
           "threat": [
             [
               417,
-              89
+              91
             ]
           ],
           "weapon": {
@@ -5099,7 +5159,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 425,
-      "state": "0544c6a6",
+      "state": "442de1d8",
       "events": "b5d5757b",
       "rng": {
         "draws": 207,
@@ -5110,7 +5170,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 425,
-      "state": "b7d87d8c",
+      "state": "51127012",
       "events": "741638a5",
       "rng": {
         "draws": 236,
@@ -5121,7 +5181,7 @@
       "tick": 89,
       "time": 4.45,
       "nextId": 425,
-      "state": "ed0bb7e4",
+      "state": "c82834da",
       "events": "cf047694",
       "rng": {
         "draws": 258,
@@ -5307,13 +5367,13 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 88
+            "damageDealt": 90
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 88
+              "damageDealt": 90
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -5529,9 +5589,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -5596,14 +5658,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -5652,9 +5716,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -5688,9 +5754,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -5761,14 +5829,16 @@
           "targetId": 418,
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -6076,7 +6146,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499912,
+          "hp": 499910,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -6115,7 +6185,7 @@
           "threat": [
             [
               417,
-              89
+              91
             ]
           ],
           "weapon": {
@@ -6212,7 +6282,7 @@
       "tick": 89,
       "time": 4.45,
       "nextId": 425,
-      "state": "ed0bb7e4",
+      "state": "c82834da",
       "events": "741638a5",
       "rng": {
         "draws": 258,
@@ -6398,13 +6468,13 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 88
+            "damageDealt": 90
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 88
+              "damageDealt": 90
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -6620,9 +6690,11 @@
           "targetId": 420,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -6687,14 +6759,16 @@
           "targetId": 419,
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -6743,9 +6817,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -6779,9 +6855,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -6852,14 +6930,16 @@
           "targetId": 418,
           "templateId": "acolyte",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -7167,7 +7247,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 499912,
+          "hp": 499910,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -7206,7 +7286,7 @@
           "threat": [
             [
               417,
-              89
+              91
             ]
           ],
           "weapon": {

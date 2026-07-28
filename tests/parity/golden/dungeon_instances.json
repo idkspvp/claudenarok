@@ -31,7 +31,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 431,
-      "state": "35845058",
+      "state": "bfadbd9b",
       "events": "9bb7b95a",
       "rng": {
         "draws": 39,
@@ -223,9 +223,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -279,14 +281,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -982,7 +986,7 @@
       "tick": 4,
       "time": 0.2,
       "nextId": 431,
-      "state": "dde5a70e",
+      "state": "32c4dfb1",
       "events": "426319d0",
       "rng": {
         "draws": 47,
@@ -1177,9 +1181,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -1233,14 +1239,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -1936,7 +1944,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 431,
-      "state": "278d4403",
+      "state": "b305bb70",
       "events": "43cbd350",
       "rng": {
         "draws": 47,
@@ -1947,7 +1955,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 431,
-      "state": "c6e9dc25",
+      "state": "70174d2a",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1958,7 +1966,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 431,
-      "state": "8fa7a583",
+      "state": "09cd40a8",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -1969,7 +1977,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 431,
-      "state": "f4dfd5e8",
+      "state": "60f28cbd",
       "events": "18091e3e",
       "rng": {
         "draws": 47,
@@ -1980,7 +1988,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "93db4e38",
+      "state": "865b1515",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2187,9 +2195,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -2244,14 +2254,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         }
       ]
@@ -2260,7 +2272,7 @@
       "tick": 24,
       "time": 1.2,
       "nextId": 431,
-      "state": "93db4e38",
+      "state": "865b1515",
       "events": "741638a5",
       "rng": {
         "draws": 47,
@@ -2467,9 +2479,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -2524,14 +2538,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         }
       ]

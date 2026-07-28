@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c7f6f287",
+      "state": "f138de3e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -142,9 +142,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -153,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "a802cccc",
-      "events": "91a27c3d",
+      "state": "db59a562",
+      "events": "720cfa6b",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -164,7 +166,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "6ce3873a",
+      "state": "53d9de7c",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -175,8 +177,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "83ffeac6",
-      "events": "6d5e9bdb",
+      "state": "47b37193",
+      "events": "00b5114c",
       "rng": {
         "draws": 105,
         "digest": "3e0eb09d"
@@ -186,7 +188,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "0d4c5dca",
+      "state": "ac50ab05",
       "events": "f740fdd2",
       "rng": {
         "draws": 160,
@@ -209,7 +211,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7051,
+            "damageDealt": 7128,
             "damageTaken": 5,
             "kills": 1
           },
@@ -217,7 +219,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7051,
+              "damageDealt": 7128,
               "kills": 1
             },
             "dungeonClears": {},
@@ -341,9 +343,11 @@
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -419,7 +423,7 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "0e141f73",
+      "state": "3a553ae8",
       "events": "ebcfe9d2",
       "rng": {
         "draws": 178,
@@ -442,7 +446,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7051,
+            "damageDealt": 7128,
             "damageTaken": 5,
             "kills": 1
           },
@@ -450,7 +454,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7051,
+              "damageDealt": 7128,
               "kills": 1
             },
             "dungeonClears": {},
@@ -579,9 +583,11 @@
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {

@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "afe63156",
+      "state": "0457644d",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "b261fab1",
+      "state": "b423079a",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "921a6799",
+      "state": "44f18992",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "e7ef0b0e",
+      "state": "4fc74955",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "334b7b25",
+      "state": "546b6e22",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "0356bbfc",
+      "state": "2adc6303",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "d4583722",
+      "state": "85b45d35",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "cca52a6f",
+      "state": "ed9ff5b0",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "f88cedce",
+      "state": "65f87555",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -299,9 +299,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -356,14 +358,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         }
       ]

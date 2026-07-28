@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "521a399d",
+      "state": "97c4dc15",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -101,9 +101,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -136,9 +138,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         }
       ]
@@ -147,7 +151,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 427,
-      "state": "c3e86ac8",
+      "state": "7f3edf68",
       "events": "47800102",
       "rng": {
         "draws": 3,
@@ -158,7 +162,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 427,
-      "state": "f27e9ff6",
+      "state": "2c4d6f4e",
       "events": "fcb0555f",
       "rng": {
         "draws": 3,
@@ -169,7 +173,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 427,
-      "state": "f5690988",
+      "state": "e0cd9628",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -180,7 +184,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 427,
-      "state": "a2c996a2",
+      "state": "fe7c7dfa",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -191,7 +195,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 427,
-      "state": "b675b150",
+      "state": "b7cb6770",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -202,7 +206,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 427,
-      "state": "c2533fd6",
+      "state": "b3482fae",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -213,7 +217,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 428,
-      "state": "f5ac36e8",
+      "state": "019fb908",
       "events": "e8a08ba7",
       "rng": {
         "draws": 3,
@@ -326,9 +330,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -360,9 +366,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -409,7 +417,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 428,
-      "state": "7935742c",
+      "state": "d161fdcc",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -420,7 +428,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 428,
-      "state": "3f2baf50",
+      "state": "37aae570",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -533,9 +541,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -567,9 +577,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c7f6f287",
+      "state": "f138de3e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -141,9 +141,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -152,7 +154,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "f335fbb9",
+      "state": "a0c13a96",
       "events": "0c3a46ba",
       "rng": {
         "draws": 21,
@@ -163,7 +165,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "0ae9d926",
+      "state": "b6d5afeb",
       "events": "78a012e7",
       "rng": {
         "draws": 34,
@@ -174,7 +176,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "46b1c877",
+      "state": "0f064ff8",
       "events": "0ea61fbb",
       "rng": {
         "draws": 64,
@@ -343,9 +345,11 @@
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -484,7 +488,7 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 418,
-      "state": "81711c60",
+      "state": "67f647b9",
       "events": "741638a5",
       "rng": {
         "draws": 78,
@@ -654,9 +658,11 @@
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {

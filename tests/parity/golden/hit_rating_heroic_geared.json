@@ -14,7 +14,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "16695a67",
+      "state": "4392473d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -128,14 +128,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         }
       ]
@@ -144,7 +146,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "c249751d",
+      "state": "1b313260",
       "events": "d9107c5d",
       "rng": {
         "draws": 4,
@@ -155,7 +157,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "fa17f96f",
+      "state": "d2acbd4a",
       "events": "fcb0555f",
       "rng": {
         "draws": 4,
@@ -166,7 +168,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "1741baa6",
+      "state": "e42cac89",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -177,7 +179,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "7bfc42b1",
+      "state": "8880d818",
       "events": "741638a5",
       "rng": {
         "draws": 4,
@@ -188,7 +190,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "9a07ad6c",
+      "state": "9ab28a11",
       "events": "de22e519",
       "rng": {
         "draws": 50,
@@ -199,7 +201,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "da78f768",
+      "state": "66d5a861",
       "events": "741638a5",
       "rng": {
         "draws": 83,
@@ -210,7 +212,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 417,
-      "state": "ec92bbff",
+      "state": "206ccb54",
       "events": "741638a5",
       "rng": {
         "draws": 131,
@@ -221,7 +223,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "235a2764",
+      "state": "a1e72215",
       "events": "979eb25f",
       "rng": {
         "draws": 183,
@@ -232,7 +234,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 417,
-      "state": "0ab49f23",
+      "state": "8bf1b694",
       "events": "a9b9b3d6",
       "rng": {
         "draws": 248,
@@ -243,7 +245,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "fa12655e",
+      "state": "023d2357",
       "events": "741638a5",
       "rng": {
         "draws": 310,
@@ -254,7 +256,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 417,
-      "state": "48d1ef17",
+      "state": "7175f308",
       "events": "741638a5",
       "rng": {
         "draws": 366,
@@ -265,7 +267,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "c1dfa8ac",
+      "state": "89e49fb1",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -276,7 +278,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "c1dfa8ac",
+      "state": "89e49fb1",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -447,9 +449,11 @@
           "targetId": 416,
           "templateId": "mage",
           "weapon": {
-            "max": 60,
-            "min": 36,
-            "speed": 3
+            "max": 77,
+            "min": 58,
+            "speed": 3,
+            "weaponLevel": 4,
+            "weaponType": "rod"
           }
         },
         {
@@ -532,7 +536,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 417,
-      "state": "c1dfa8ac",
+      "state": "89e49fb1",
       "events": "741638a5",
       "rng": {
         "draws": 417,
@@ -703,9 +707,11 @@
           "targetId": 416,
           "templateId": "mage",
           "weapon": {
-            "max": 60,
-            "min": 36,
-            "speed": 3
+            "max": 77,
+            "min": 58,
+            "speed": 3,
+            "weaponLevel": 4,
+            "weaponType": "rod"
           }
         },
         {

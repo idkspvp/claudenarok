@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "52f68b74",
+      "state": "cf36b42d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -131,8 +131,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -148,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "a3091802",
+      "state": "f4eb80f5",
       "events": "5dadceb3",
       "rng": {
         "draws": 9,
@@ -159,7 +159,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "5ee8e221",
+      "state": "7e7c6512",
       "events": "741638a5",
       "rng": {
         "draws": 9,
@@ -170,8 +170,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "3f945613",
-      "events": "e50ef01c",
+      "state": "0d8772e4",
+      "events": "ea35548d",
       "rng": {
         "draws": 102,
         "digest": "b5b7b15d"
@@ -181,7 +181,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "27049172",
+      "state": "e41f1b57",
       "events": "741638a5",
       "rng": {
         "draws": 198,
@@ -192,8 +192,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "3b3184db",
-      "events": "c9f4edf0",
+      "state": "ac9a3854",
+      "events": "7a98bfbc",
       "rng": {
         "draws": 312,
         "digest": "2ffd1eb8"
@@ -203,7 +203,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "2f8c26d4",
+      "state": "f9eb73ad",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -214,7 +214,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "2f8c26d4",
+      "state": "f9eb73ad",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -237,14 +237,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 5,
+            "damageDealt": 48,
             "damageTaken": 35
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 5
+              "damageDealt": 48
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -358,8 +358,8 @@
           "targetId": 417,
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -434,7 +434,7 @@
           "flee": 10,
           "hit": 10,
           "hostile": true,
-          "hp": 49946,
+          "hp": 49903,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -475,7 +475,7 @@
           "threat": [
             [
               415,
-              5
+              48
             ],
             [
               416,

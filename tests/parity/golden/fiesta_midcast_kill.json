@@ -31,7 +31,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 419,
-      "state": "118629dc",
+      "state": "a4d12a72",
       "events": "944df307",
       "rng": {
         "draws": 0,
@@ -42,7 +42,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 419,
-      "state": "1bf85313",
+      "state": "d7139917",
       "events": "2624f545",
       "rng": {
         "draws": 28,
@@ -53,7 +53,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 419,
-      "state": "cfee5609",
+      "state": "2f564727",
       "events": "92dd922d",
       "rng": {
         "draws": 138,
@@ -64,7 +64,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "07e21eb8",
+      "state": "5a9a514a",
       "events": "547fbe65",
       "rng": {
         "draws": 294,
@@ -75,7 +75,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "28e9e2e2",
+      "state": "b1436636",
       "events": "b1fb8310",
       "rng": {
         "draws": 300,
@@ -368,9 +368,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -423,14 +425,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -462,9 +466,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -496,9 +502,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -553,8 +561,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -570,7 +578,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "bc1b00f5",
+      "state": "f72ef4a9",
       "events": "ffc08c87",
       "rng": {
         "draws": 300,
@@ -863,9 +871,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -918,14 +928,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -955,9 +967,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -989,9 +1003,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -1046,8 +1062,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1063,7 +1079,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 419,
-      "state": "024bfb64",
+      "state": "7ed041b8",
       "events": "f677c602",
       "rng": {
         "draws": 300,
@@ -1360,9 +1376,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -1415,14 +1433,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -1452,9 +1472,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -1486,9 +1508,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -1543,8 +1567,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1560,7 +1584,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 419,
-      "state": "f03b475c",
+      "state": "e1ae87a0",
       "events": "741638a5",
       "rng": {
         "draws": 429,
@@ -1571,7 +1595,7 @@
       "tick": 142,
       "time": 7.1,
       "nextId": 419,
-      "state": "6dad44e9",
+      "state": "60a4748f",
       "events": "741638a5",
       "rng": {
         "draws": 524,
@@ -1869,9 +1893,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         },
         {
@@ -1924,14 +1950,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -1962,9 +1990,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -1996,9 +2026,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -2053,8 +2085,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8

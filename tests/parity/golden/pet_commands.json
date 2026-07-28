@@ -23,7 +23,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "52f68b74",
+      "state": "cf36b42d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -139,8 +139,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -156,7 +156,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "1d92ad5c",
+      "state": "a7de0665",
       "events": "dc0dea30",
       "rng": {
         "draws": 0,
@@ -273,8 +273,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -333,7 +333,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "384ee2d4",
+      "state": "fae90023",
       "events": "f8ec86ea",
       "rng": {
         "draws": 0,
@@ -450,8 +450,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -524,7 +524,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "ac8fc565",
+      "state": "ba9e0d94",
       "events": "48f168e3",
       "rng": {
         "draws": 0,
@@ -535,7 +535,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "e136346b",
+      "state": "0420ec4a",
       "events": "8caaa753",
       "rng": {
         "draws": 0,
@@ -546,7 +546,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "ccd547a7",
+      "state": "44a3b27c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -681,8 +681,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -823,7 +823,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "ee96512b",
+      "state": "d978e0a6",
       "events": "0f25af7e",
       "rng": {
         "draws": 0,
@@ -958,8 +958,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1037,7 +1037,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "b02acd34",
+      "state": "c7220533",
       "events": "252febab",
       "rng": {
         "draws": 0,
@@ -1172,8 +1172,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1294,7 +1294,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "035ee054",
+      "state": "f0040977",
       "events": "61f1164e",
       "rng": {
         "draws": 0,
@@ -1429,8 +1429,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1551,7 +1551,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "ee96512b",
+      "state": "d978e0a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1686,8 +1686,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1765,7 +1765,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "ee96512b",
+      "state": "d978e0a6",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1900,8 +1900,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -1979,7 +1979,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "270981dd",
+      "state": "d8ab3272",
       "events": "7c671d97",
       "rng": {
         "draws": 0,
@@ -2167,8 +2167,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -2298,14 +2298,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -2361,7 +2363,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "27ca880c",
+      "state": "ff159a2f",
       "events": "660fbcc3",
       "rng": {
         "draws": 84,
@@ -2372,7 +2374,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "a357ec3a",
+      "state": "c9a0e061",
       "events": "4a119102",
       "rng": {
         "draws": 160,
@@ -2383,7 +2385,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "a357ec3a",
+      "state": "c9a0e061",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -2589,8 +2591,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -2728,14 +2730,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -2791,7 +2795,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "2523a4a4",
+      "state": "40219d4d",
       "events": "3c0a5f6e",
       "rng": {
         "draws": 160,
@@ -2997,8 +3001,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -3136,14 +3140,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -3199,7 +3205,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "2cca107d",
+      "state": "44e3b170",
       "events": "0fcaa395",
       "rng": {
         "draws": 160,
@@ -3405,8 +3411,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -3544,14 +3550,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {
@@ -3616,7 +3624,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "2cca107d",
+      "state": "44e3b170",
       "events": "741638a5",
       "rng": {
         "draws": 160,
@@ -3822,8 +3830,8 @@
           },
           "templateId": "archer",
           "weapon": {
-            "max": 9,
-            "min": 5,
+            "max": 51,
+            "min": 38,
             "ranged": {
               "maxRange": 35,
               "minRange": 8
@@ -3961,14 +3969,16 @@
           },
           "templateId": "mage",
           "weapon": {
-            "max": 6,
-            "min": 3,
+            "max": 27,
+            "min": 20,
             "ranged": {
               "maxRange": 30,
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "rod"
           }
         },
         {

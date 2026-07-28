@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "521a399d",
+      "state": "97c4dc15",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -100,9 +100,11 @@
           "offhandItemId": "rusty_dagger",
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -135,9 +137,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         }
       ]
@@ -146,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "9eb924ff",
-      "events": "c1109bb8",
+      "state": "c898d106",
+      "events": "48b1b78b",
       "rng": {
         "draws": 14,
         "digest": "4b746836"
@@ -157,8 +161,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "37cb6ed5",
-      "events": "63e2247f",
+      "state": "02dcb531",
+      "events": "0df4ba32",
       "rng": {
         "draws": 24,
         "digest": "672bbd02"
@@ -168,8 +172,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "8d22f57c",
-      "events": "9a4fbffe",
+      "state": "6f792c7c",
+      "events": "2cb7cc89",
       "rng": {
         "draws": 103,
         "digest": "4bf8fdbd"
@@ -179,7 +183,7 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "9ab28990",
+      "state": "0b3b71c8",
       "events": "741638a5",
       "rng": {
         "draws": 159,
@@ -202,14 +206,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 23,
+            "damageDealt": 46,
             "damageTaken": 17
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 23
+              "damageDealt": 46
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -293,9 +297,11 @@
           "offhandSwingTimer": 0.05,
           "offhandWeapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           },
           "onGround": true,
           "overpowerUntil": -1,
@@ -330,9 +336,11 @@
           "templateId": "thief",
           "weapon": {
             "dagger": true,
-            "max": 4,
-            "min": 2,
-            "speed": 1.8
+            "max": 41,
+            "min": 31,
+            "speed": 1.8,
+            "weaponLevel": 1,
+            "weaponType": "dagger"
           }
         },
         {
@@ -349,7 +357,7 @@
           "flee": 6,
           "hit": 6,
           "hostile": true,
-          "hp": 8977,
+          "hp": 8954,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -390,7 +398,7 @@
           "threat": [
             [
               415,
-              24
+              47
             ]
           ],
           "weapon": {

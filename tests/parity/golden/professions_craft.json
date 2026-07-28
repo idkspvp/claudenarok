@@ -19,7 +19,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "584e2226",
+      "state": "3234a431",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -143,9 +143,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -154,7 +156,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "b15deb79",
+      "state": "2227f724",
       "events": "7021a161",
       "rng": {
         "draws": 0,
@@ -282,9 +284,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -293,7 +297,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "f67722c4",
+      "state": "2cf48173",
       "events": "2f11cd21",
       "rng": {
         "draws": 1,
@@ -443,9 +447,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -454,7 +460,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "d7e35951",
+      "state": "42de5b5a",
       "events": "84a3ac24",
       "rng": {
         "draws": 2,
@@ -645,9 +651,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -656,7 +664,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "fc8c4da9",
+      "state": "146fdc8c",
       "events": "3ea8d374",
       "rng": {
         "draws": 3,
@@ -845,9 +853,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
@@ -856,7 +866,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "fc8c4da9",
+      "state": "146fdc8c",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -1045,9 +1055,11 @@
           },
           "templateId": "swordman",
           "weapon": {
-            "max": 5,
-            "min": 2,
-            "speed": 2
+            "max": 54,
+            "min": 41,
+            "speed": 2,
+            "weaponLevel": 1,
+            "weaponType": "sword"
           }
         }
       ]
