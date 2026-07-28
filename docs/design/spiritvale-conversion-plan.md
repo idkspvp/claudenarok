@@ -155,7 +155,21 @@ ordered:
   including an `IWorld` facet, a `SimContext` member, wire protocol, deeds, an
   instance, NPCs, i18n and six test files.
 - **Finish the talent removal** (`D0-2`, `D0-4` through `D0-7`).
-- **Replace the threat table with simple aggro** (`M1c`).
+- **Replace the threat table with simple aggro** (`M1c`). **CANCELLED.**
+
+`M1c` was written under the old rule set, and the conversion invalidates it.
+SpiritVale keeps ACCUMULATED threat, and its own data says so three ways:
+
+- the stat catalog carries `ThreatMult` (Threat Generation, a percent) at id
+  192 and `SkillThreat` (flat) at id 203;
+- every one of the 279 skills carries a `threat: {base, per}` field;
+- Taunt is a skill with a threat value plus a matching status.
+
+A "+10% threat generation" stat means nothing in a system where a mob attacks
+whoever hit it last. The threat table stays. Retuning its MODIFIERS to
+SpiritVale's shape, a percent stat plus per-skill flat threat rather than our
+stance and form multipliers, belongs in phase 4 with the skills that carry
+those values.
 
 **Accept:** `npm run gate` green; `tests/world_api_parity.test.ts`,
 `tests/architecture.test.ts`, `tests/deeds_content.test.ts` and

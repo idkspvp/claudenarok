@@ -9,10 +9,10 @@ import { DEEDS } from '../src/sim/content/deeds';
 const ACH_NAME_RE = /^ACH_[A-Z0-9_]+$/;
 
 describe('Steam achievement map', () => {
-  it('has exactly the 71 registered entries (75 minus the four quest-deed achievements)', () => {
+  it('has exactly the 69 registered entries (75 minus four quest and two talent deeds)', () => {
     // The three Professions 2.0 marquee deeds
     // (prog_guildsworn, prog_masterwright, prog_master_angler) join the map.
-    expect(Object.keys(ACHIEVEMENT_MAP).length).toBe(71);
+    expect(Object.keys(ACHIEVEMENT_MAP).length).toBe(69);
   });
 
   it('stays within the App Admin cap', () => {
@@ -71,8 +71,6 @@ describe('Steam achievement map', () => {
       prog_first_steps: 'ACH_FIRST_STEPS',
       prog_double_digits: 'ACH_DOUBLE_DIGITS',
       prog_level_cap: 'ACH_LEVEL_CAP',
-      prog_talented: 'ACH_TALENTED',
-      prog_full_build: 'ACH_FULL_BUILD',
       prog_veteran: 'ACH_VETERAN',
       prog_eternal: 'ACH_ETERNAL',
       prog_prestige: 'ACH_PRESTIGE',
