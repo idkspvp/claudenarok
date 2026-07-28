@@ -52,6 +52,14 @@ fi
 # The Russian doc mirrors are the one prose exception: Russian typography uses the
 # em dash correctly, so docs/i18n/*.ru_RU.md is excluded the same way the game's
 # locale overlays are. Every other locale mirror stays in scope.
+#
+# bot/ is exempt from the EMOJI half only, and still fails on a dash. The Discord
+# bot puts a per-class glyph in a member's nickname, where the glyph sits BESIDE
+# the level rather than standing in for it, outside the game's i18n entirely. The
+# rule's own caveat is about an emoji replacing a label that needs real t() text,
+# which this is not. Narrow on purpose: the exemption is the emoji class in one
+# directory plus the single test that asserts that directory's output, not a
+# blanket pass for either.
 base=$(git merge-base HEAD '@{upstream}' 2>/dev/null \
   || git merge-base HEAD origin/main 2>/dev/null \
   || git rev-parse HEAD~1 2>/dev/null || true)
@@ -67,8 +75,12 @@ if [ -n "$base" ] && command -v perl >/dev/null 2>&1; then
         if (m{^\+\+\+\s+b/(.+)$}) { our $f = $1; $f =~ s/\s+$//; next; }
         next unless /^\+/ && !/^\+\+\+/;
         my $c = substr($_, 1);
-        if ($c =~ /[\x{2013}\x{2014}\x{2015}\x{1F000}-\x{1FAFF}\x{1F1E6}-\x{1F1FF}\x{2600}-\x{27BF}\x{FE0F}]/) {
-          our $f; my $s = $c; $s =~ s/^\s+//; chomp $s;
+        our $f;
+        my $dash = $c =~ /[\x{2013}\x{2014}\x{2015}]/;
+        my $emoji = $c =~ /[\x{1F000}-\x{1FAFF}\x{1F1E6}-\x{1F1FF}\x{2600}-\x{27BF}\x{FE0F}]/;
+        $emoji = 0 if defined $f && $f =~ m{^(bot/|tests/discord_bot\.test\.ts$)};
+        if ($dash || $emoji) {
+          my $s = $c; $s =~ s/^\s+//; chomp $s;
           print "  $f: $s\n";
         }')
   if [ -n "$copy" ]; then
