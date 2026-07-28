@@ -39,7 +39,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'legs',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 4, str: 11, vit: 9 },
+    stats: { armor: 4, str: 3, vit: 2 },
     sellValue: 13_000,
     requiredClass: ['swordman'],
   },
@@ -51,7 +51,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 5, agi: 12, vit: 10 },
+    stats: { armor: 5, agi: 3, vit: 2 },
     sellValue: 14_000,
     requiredClass: ['thief', 'archer'],
   },
@@ -63,7 +63,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 6, int: 12, luk: 10 },
+    stats: { armor: 6, int: 3, luk: 2 },
     sellValue: 14_000,
     requiredClass: [],
   },
@@ -75,7 +75,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'helmet',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 4, int: 10, luk: 8 },
+    stats: { armor: 4, int: 3, luk: 2 },
     sellValue: 12_000,
     requiredClass: ['mage', 'acolyte'],
   },
@@ -158,8 +158,13 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
       chest: 'scourgehide_carapace',
     });
     expect(equipped.entity.equippedItems).toEqual({ chest: 'scourgehide_carapace' });
-    expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + 12);
-    expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + 10);
+    // Off the record: the piece's attributes moved with the equipment rule, and
+    // what this case proves is that a retired id REHYDRATES with whatever it
+    // carries, not what those numbers happen to be.
+    const carapace = ITEMS.scourgehide_carapace.stats!;
+    expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + (carapace.agi ?? 0));
+    expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + (carapace.vit ?? 0));
+    expect(carapace.agi ?? 0).toBeGreaterThan(0);
     // The piece's own defence and nothing else. Neither attribute it carries adds
     // armour any more: Agility never did (it buys evasion), and D1 took the
     // Vitality term out because Vitality already buys soft DEF. Read off the
@@ -176,7 +181,7 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
       unequipped.entity.maxHp,
     );
     expect(equipped.entity.maxHp).toBe(
-      Math.round(pool * (1 + (unequipped.entity.stats.vit + 10) / 100)),
+      Math.round(pool * (1 + (unequipped.entity.stats.vit + (carapace.vit ?? 0)) / 100)),
     );
     expect(equipped.entity.maxHp).toBeGreaterThan(unequipped.entity.maxHp);
 

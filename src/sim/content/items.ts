@@ -162,7 +162,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 2, vit: 2 },
+    stats: { armor: 2 },
     sellValue: 150,
     requiredClass: WAR,
   },
@@ -174,7 +174,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, int: 3, luk: 2 },
+    stats: { armor: 1 },
     sellValue: 150,
     requiredClass: MAG,
   },
@@ -186,7 +186,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 3 },
+    stats: { armor: 1 },
     sellValue: 150,
     requiredClass: ROG,
   },
@@ -197,7 +197,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 1 },
+    stats: { armor: 1 },
     sellValue: 80,
   },
   quilted_trousers: {
@@ -207,7 +207,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 90,
   },
   greyjaw_pelt_cloak: {
@@ -217,7 +217,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 1, agi: 1 },
+    stats: { armor: 1 },
     sellValue: 110,
   },
   greyjaw_hide_boots: {
@@ -228,7 +228,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 1, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 130,
   },
   bristleback_maul: {
@@ -249,7 +249,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     sellValue: 150,
     requiredClass: MAG,
   },
@@ -282,7 +282,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 2, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 180,
     requiredClass: ROG,
   },
@@ -326,7 +326,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 180,
   },
   // --- Inventory 2.0: helmet/shoulder/waist/gloves. ---
@@ -343,7 +343,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 3 },
+    stats: { armor: 1 },
     sellValue: 185,
   },
   cryptbone_pauldrons: {
@@ -353,7 +353,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 140,
   },
   mistveil_cord: {
@@ -362,7 +362,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { vit: 2, agi: 1 },
+    stats: { vit: 2 },
     sellValue: 150,
   },
   mistveil_grips: {
@@ -371,7 +371,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { agi: 2, vit: 1 },
+    stats: { agi: 2 },
     sellValue: 165,
   },
   boundstone_helm: {
@@ -382,7 +382,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 4, vit: 6, str: 5 },
+    stats: { armor: 4 },
     sellValue: 460,
   },
   boundstone_girdle: {
@@ -392,7 +392,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'rare',
-    stats: { vit: 5, str: 3 },
+    stats: { vit: 2, str: 1 },
     sellValue: 340,
   },
   gravewyrm_mantle: {
@@ -402,7 +402,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'rare',
-    stats: { armor: 3, agi: 7, vit: 3 },
+    stats: { armor: 3 },
     sellValue: 410,
   },
   gravewyrm_gauntlets: {
@@ -412,7 +412,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'rare',
-    stats: { str: 4, vit: 4 },
+    stats: { str: 2, vit: 2 },
     sellValue: 390,
   },
   // --- bags (kind:'bag', equip into one of the 4 bag sockets for +bagSlots
@@ -1065,7 +1065,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     shield: true,
     blockValue: 6,
     quality: 'common',
-    stats: { armor: 1, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 130,
     buyValue: 1300,
     requiredClass: ['swordman'],
@@ -1140,7 +1140,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (85); this also retires the piece as the cheapest
     // disenchant fodder (the evidence review's dust-mill row). Not vendored;
@@ -1156,7 +1156,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (93). Not vendored; buyValue kept, read only by
     // the market suggested ask, which clamps to 10x sellValue.
@@ -1170,7 +1170,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     // Economy invariant: re-priced below the
     // reworked craft input (117). Not vendored; buyValue kept, read only by
     // the market suggested ask, which clamps to 10x sellValue.
@@ -1190,7 +1190,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 3, int: 7, luk: 4 },
+    stats: { armor: 3 },
     sellValue: 440,
   },
   duskhide_wraps: {
@@ -1199,7 +1199,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'rare',
-    stats: { int: 5, luk: 3 },
+    stats: { int: 2, luk: 1 },
     sellValue: 420,
   },
   sootscale_mantle: {
@@ -1209,7 +1209,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'rare',
-    stats: { armor: 3, int: 6, luk: 4 },
+    stats: { armor: 3 },
     // Economy invariant, discount-aware arm: both reagents are vendor-stocked
     // at the forge, and a specialized crafter holding a self-signed ore
     // consumes as little as 4 ore + 3 flux = 300c, so the old 470 vendor-back
@@ -1264,7 +1264,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 2, vit: 2, str: 1 },
+    stats: { armor: 2 },
     sellValue: 500,
     requiredClass: WAR,
   },
@@ -1275,7 +1275,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 2, int: 2, luk: 2 },
+    stats: { armor: 2 },
     sellValue: 500,
     requiredClass: MAG,
   },
@@ -1286,7 +1286,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 2, agi: 3 },
+    stats: { armor: 2 },
     sellValue: 500,
     requiredClass: ROG,
   },
@@ -1297,7 +1297,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 3, str: 3, vit: 3 },
+    stats: { armor: 3 },
     sellValue: 700,
     requiredClass: WAR,
   },
@@ -1308,7 +1308,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 2, int: 3, luk: 3 },
+    stats: { armor: 2 },
     sellValue: 700,
     requiredClass: MAG,
   },
@@ -1319,7 +1319,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 2, agi: 4, vit: 2 },
+    stats: { armor: 2 },
     sellValue: 700,
     requiredClass: ROG,
   },
@@ -1330,7 +1330,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'legs',
     quality: 'rare',
-    stats: { armor: 2, vit: 3 },
+    stats: { armor: 2 },
     sellValue: 600,
   },
   gravepath_treads: {
@@ -1340,7 +1340,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 2, vit: 2 },
+    stats: { armor: 2 },
     sellValue: 600,
   },
   // --- Captain Verlan (ruins rare) drops ---
@@ -1353,7 +1353,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2, str: 1 },
+    stats: { armor: 1 },
     sellValue: 200,
   },
   verlans_oathblade: {
@@ -1413,7 +1413,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'chest',
     quality: 'uncommon',
     // Sableweb Lurkers (level 4) -> item level 5, chest budget 2.
-    stats: { armor: 1, int: 1, luk: 1 },
+    stats: { armor: 1 },
     sellValue: 130,
   },
   thornling_grips: {
@@ -1423,7 +1423,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'ring',
     quality: 'uncommon',
     // Deeprock Diggers (level 6) -> item level 7, gloves budget 2.
-    stats: { int: 1, luk: 1 },
+    stats: { int: 2 },
     sellValue: 140,
   },
   acolyte_chain_grips: {
@@ -1433,7 +1433,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'ring',
     quality: 'uncommon',
     // Old Greyjaw (level 4 rare) -> item level 5, gloves budget 1.
-    stats: { int: 1 },
+    stats: { int: 2 },
     sellValue: 120,
   },
   votive_chain_belt: {
@@ -1443,7 +1443,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     slot: 'ring',
     quality: 'uncommon',
     // Gorrak (level 6 boss) -> item level 7, waist budget 2.
-    stats: { int: 1, luk: 1 },
+    stats: { int: 2 },
     sellValue: 150,
   },
   briarroot_staff: {
@@ -1580,7 +1580,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2, agi: 1 },
+    stats: { armor: 1 },
     sellValue: 120,
   },
   monarch_crown_helm: {
@@ -1590,7 +1590,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 3, vit: 3, agi: 2, str: 1 },
+    stats: { armor: 3 },
     sellValue: 320,
   },
   // --- junk (gray) ---
@@ -1751,7 +1751,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 130,
     requiredClass: WAR,
   },
@@ -1762,7 +1762,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 2 },
+    stats: { armor: 1 },
     sellValue: 120,
     requiredClass: ROG,
   },
@@ -1774,7 +1774,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     sellValue: 120,
     requiredClass: MAG,
   },
@@ -1785,7 +1785,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1, str: 1, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 140,
     requiredClass: WAR,
   },
@@ -1796,7 +1796,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2 },
+    stats: { armor: 1 },
     sellValue: 110,
     requiredClass: MAG,
   },
@@ -1816,7 +1816,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { int: 2, luk: 1 },
+    stats: { int: 2 },
     sellValue: 100,
     requiredClass: MAG,
   },
@@ -1826,7 +1826,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { agi: 1, vit: 1 },
+    stats: { agi: 2 },
     sellValue: 95,
   },
   // looted pieces
@@ -1837,7 +1837,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 150,
     requiredClass: ROG,
   },
@@ -1847,7 +1847,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { agi: 1, int: 2 },
+    stats: { int: 2 },
     sellValue: 150,
   },
   gorraks_cleaver: {
@@ -1867,7 +1867,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'uncommon',
-    stats: { int: 1, luk: 1 },
+    stats: { int: 2 },
     sellValue: 140,
     requiredClass: MAG,
   },
@@ -1926,7 +1926,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 2, str: 1, vit: 2 },
+    stats: { armor: 2 },
     sellValue: 165,
   },
   caravan_quilted_vest: {
@@ -1936,7 +1936,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 130,
   },
   wanderers_chestguard: {
@@ -1946,7 +1946,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 2, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 150,
   },
   outrider_legguards: {
@@ -1956,7 +1956,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 150,
   },
   trail_leggings: {
@@ -1967,7 +1967,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 2 },
+    stats: { armor: 1 },
     sellValue: 120,
   },
   pilgrims_leggings: {
@@ -1977,7 +1977,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, int: 2, luk: 1 },
+    stats: { armor: 1 },
     sellValue: 120,
   },
   outrider_sabatons: {
@@ -1987,7 +1987,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 130,
   },
   milepost_boots: {
@@ -1997,7 +1997,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 1, vit: 1 },
+    stats: { armor: 1 },
     sellValue: 110,
   },
   // The Archer's starting weapon, and the first bow the tree has ever carried.

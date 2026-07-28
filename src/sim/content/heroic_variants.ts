@@ -100,9 +100,18 @@ function makeHeroicVariant(base: ItemDef, sourceLevel = HEROIC_VARIANT_SOURCE_LE
   // normalizePrimaryStats keeps the item's stat identity (its str/agi/int ratio)
   // and passes armor through untouched; only the primary-stat sum grows to the
   // larger of the heroic target budget and the base item's realized budget.
-  const stats = base.stats
-    ? normalizePrimaryStats(base.stats, Math.max(targetBudget, baseBudget))
-    : base.stats;
+  // ARMOUR does not grow its attributes with tier any more. A heroic body piece
+  // is a better body piece because it defends more and because of what a player
+  // sockets and refines into it, not because it hands out a dozen attribute
+  // points: that is the arrangement the equipment pass replaced (see
+  // src/sim/item_stat_policy.ts). Weapons keep the budget, because a weapon's
+  // attributes are part of what makes it that weapon.
+  const stats =
+    base.kind === 'armor'
+      ? base.stats
+      : base.stats
+        ? normalizePrimaryStats(base.stats, Math.max(targetBudget, baseBudget))
+        : base.stats;
   // Weapon damage tracks item level too: scale the base weapon to the heroic-tier
   // dps for this variant's item level (two-handers ride TWOHAND_DPS_MULT above the
   // one-hand line), keeping its swing speed and spread. A base weapon already above

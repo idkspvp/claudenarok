@@ -246,8 +246,13 @@ describe('masterwork and legacy instance payloads (Professions 2.0 back-compat)'
     // The piece's own defence and nothing else: D1 took the Vitality-to-armour
     // term out, so hard DEF is the equipment value alone. One point, because
     // defence is a percentage on Ragnarok's scale rather than a pool.
-    expect(after.armor - before.armor).toBe(1);
-    expect(after.vit - before.vit).toBe(2);
+    // Off the record on both axes: greaves are ordinary armour, so they grant
+    // defence and no attributes at all under the equipment rule. What the case
+    // proves is that a LEGACY instance payload still equips and folds through.
+    const greaves = ITEMS.cryptbone_greaves.stats!;
+    expect(after.armor - before.armor).toBe(greaves.armor ?? 0);
+    expect(after.vit - before.vit).toBe(greaves.vit ?? 0);
+    expect(greaves.armor ?? 0).toBeGreaterThan(0);
 
     const plain = new Sim({ seed: 42, playerClass: 'swordman', autoEquip: false });
     plain.addItem('cryptbone_greaves', 1, plain.playerId);

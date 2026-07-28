@@ -111,7 +111,7 @@ describe('the World Market — the Merchant', () => {
     const book = sim.market.marketListings;
     book.length = 0;
     for (const [id, itemId] of [
-      [1, 'eastbrook_warded_leggings'],
+      [1, 'stormbound_legmail'],
       [2, 'sootscale_mantle'],
       [3, 'drowned_prayer_leggings'],
       [4, 'ironlink_legguards'],
@@ -139,7 +139,7 @@ describe('the World Market — the Merchant', () => {
     );
 
     expect(sim.marketInfoFor(viewer)?.listings.map((listing) => listing.itemId)).toEqual([
-      'eastbrook_warded_leggings',
+      'stormbound_legmail',
     ]);
   });
 

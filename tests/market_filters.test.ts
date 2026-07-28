@@ -193,11 +193,16 @@ describe('World Market filters', () => {
   });
 
   it('combines armor class, slot, and dominant primary stat filters', () => {
+    // Ordinary armour grants no attributes at all now (item_stat_policy.ts), so
+    // the pieces this filter can match are the ones that still carry one: the
+    // epic line and the accessories. Filtering plain mail legs by Intellect
+    // correctly finds nothing, which is the second half of the case.
     const armor = [
-      'eastbrook_warded_leggings',
+      'stormbound_legmail',
       'sootscale_mantle',
       'drowned_prayer_leggings',
       'ironlink_legguards',
+      'eastbrook_warded_leggings',
     ];
     expect(
       filterIds(armor, {
@@ -206,20 +211,29 @@ describe('World Market filters', () => {
         armorClass: 'mail',
         primaryStat: 'int',
       }),
-    ).toEqual(['eastbrook_warded_leggings']);
+    ).toEqual(['stormbound_legmail']);
   });
 
   it('matches only a positive dominant Strength, Agility, or Intellect value', () => {
+    // Epics and accessories, because those are the pieces that still carry a
+    // dominant attribute; recruit_tunic is kept as the negative case, an
+    // ordinary piece that matches nothing.
     const gear = [
-      'boundstone_helm',
-      'shadow_jerkin',
-      'woven_robe',
+      'deathlord_legguards',
+      'wyrmshadow_harness',
+      'stormbound_legmail',
       'recruit_tunic',
       'kingsbane_last_oath',
     ];
-    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'str' })).toEqual(['boundstone_helm']);
-    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'agi' })).toEqual(['shadow_jerkin']);
-    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'int' })).toEqual(['woven_robe']);
+    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'str' })).toEqual([
+      'deathlord_legguards',
+    ]);
+    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'agi' })).toEqual([
+      'wyrmshadow_harness',
+    ]);
+    expect(filterIds(gear, { itemType: 'armor', primaryStat: 'int' })).toEqual([
+      'stormbound_legmail',
+    ]);
     expect(filterIds(gear, { itemType: 'weapon', primaryStat: 'str' })).toEqual([
       'kingsbane_last_oath',
     ]);

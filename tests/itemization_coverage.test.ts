@@ -18,7 +18,10 @@ import {
   primaryStatSum,
   TWOHAND_DPS_MULT,
 } from '../src/sim/item_level';
+import { isLegalStatTotal } from '../src/sim/item_stat_policy';
 import { ALL_CLASSES, type ItemDef, type PlayerClass } from '../src/sim/types';
+
+const PRIMARY_STAT_KEYS = ['str', 'agi', 'vit', 'int', 'dex', 'luk'] as const;
 
 // Every item this change ships, with the item level its acquisition source
 // derives (source level + the quality bump + the raid bonus for Nythraxis).
@@ -118,19 +121,40 @@ describe('itemization coverage: every new item is sourced, leveled, and on budge
     expect(itemLevel(item), `${id} item level`).toBe(pinned);
   });
 
-  it.each(ALL_NEW_IDS)('%s: carries exactly its item-level stat budget', (id) => {
+  it.each(ALL_NEW_IDS)('%s: grants attributes only where the rule allows, and no more', (id) => {
+    // This used to require every piece to carry EXACTLY its item-level stat
+    // budget, which is the inherited arrangement where all gear grants
+    // attributes scaled to its tier. Ragnarok makes ordinary armour defence and
+    // nothing else, so most of these pieces legitimately grant zero now and the
+    // budget is no longer the contract. What replaces it is the grant policy,
+    // which is a real check: it fails an overshoot AND an attribute on a piece
+    // that should have none.
     const item = ITEMS[id];
-    const budget = expectedStatBudget(item);
-    expect(budget, `${id} has a derivable budget`).not.toBeUndefined();
-    expect(primaryStatSum(item), `${id} stat sum == budget`).toBe(budget);
+    if (item.kind !== 'armor') {
+      // A weapon's attributes are part of what makes it a weapon, and they were
+      // not touched by the equipment pass, so they stay on the tier budget.
+      const budget = expectedStatBudget(item);
+      expect(budget, `${id} has a derivable budget`).not.toBeUndefined();
+      expect(primaryStatSum(item), `${id} stat sum == budget`).toBe(budget);
+      return;
+    }
+    const attrs = PRIMARY_STAT_KEYS.filter((k) => (item.stats?.[k] ?? 0) > 0);
+    const total = attrs.reduce((sum, k) => sum + (item.stats?.[k] ?? 0), 0);
+    expect(
+      isLegalStatTotal(item.quality, item.slot, total, attrs.length),
+      `${id} (${item.quality}/${item.slot}) grants ${total} over ${attrs.length}`,
+    ).toBe(true);
   });
 });
 
 describe('itemization coverage: the int/spi shield and the low-level held offhand', () => {
-  it('pearlward_aegis keeps its stats but has no wearer left', () => {
+  it('pearlward_aegis still defends but has no wearer left', () => {
     const shield = ITEMS.pearlward_aegis;
     expect(isShieldItem(shield)).toBe(true);
-    expect((shield.stats?.int ?? 0) > 0 && (shield.stats?.luk ?? 0) > 0).toBe(true);
+    // It carried Intellect and Luck under the inherited arrangement. It is a
+    // rare shield, so the equipment rule gives it defence and nothing else now
+    // (src/sim/item_stat_policy.ts); what the case is really about is below.
+    expect(shield.stats?.armor ?? 0).toBeGreaterThan(0);
     // It was the int/spi shield for the holy Paladin and the restoration Shaman,
     // and both were cut in D1. A shipped item id is never deleted, and a shield
     // equips by its literal requiredClass list, so the row survives with an empty

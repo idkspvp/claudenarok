@@ -267,7 +267,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 2, str: 3, vit: 3 },
+    stats: { armor: 2 },
     sellValue: 80,
   },
   ironlink_legguards: {
@@ -277,7 +277,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 3, vit: 3 },
+    stats: { armor: 1 },
     sellValue: 78,
   },
   ironlink_spaulders: {
@@ -287,7 +287,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 2, str: 3, vit: 2 },
+    stats: { armor: 2 },
     sellValue: 48,
   },
   thoriumscale_greathelm: {
@@ -297,7 +297,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 4, str: 6, vit: 5 },
+    stats: { armor: 4 },
     sellValue: 340,
   },
   thoriumscale_cuirass: {
@@ -307,7 +307,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 5, str: 6, vit: 7 },
+    stats: { armor: 5 },
     sellValue: 420,
   },
   thoriumscale_leggings: {
@@ -317,7 +317,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'rare',
-    stats: { armor: 3, str: 6, vit: 6 },
+    stats: { armor: 3 },
     sellValue: 350,
   },
 
@@ -364,7 +364,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, int: 4, luk: 2 },
+    stats: { armor: 1 },
     sellValue: 140,
   },
   goldweave_leggings: {
@@ -374,7 +374,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'legs',
     quality: 'uncommon',
-    stats: { armor: 1, int: 3, luk: 2 },
+    stats: { armor: 1 },
     sellValue: 125,
   },
   silkspun_satchel: {
@@ -392,7 +392,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 4, int: 8, luk: 5 },
+    stats: { armor: 4 },
     sellValue: 340,
   },
   sunweave_mantle: {
@@ -402,7 +402,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'back',
     quality: 'rare',
-    stats: { armor: 3, int: 6, luk: 4 },
+    stats: { armor: 3 },
     sellValue: 175,
   },
   sunweave_treads: {
@@ -412,7 +412,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 3, int: 5, luk: 3 },
+    stats: { armor: 3 },
     sellValue: 260,
   },
 
@@ -458,7 +458,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 4, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 40,
   },
   marshstalker_hood: {
@@ -468,7 +468,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 3, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 34,
   },
   marshstalker_spaulders: {
@@ -478,7 +478,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1, agi: 3, vit: 2 },
+    stats: { armor: 1 },
     sellValue: 34,
   },
   mirewarden_jerkin: {
@@ -488,7 +488,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 4, agi: 8, vit: 5 },
+    stats: { armor: 4 },
     sellValue: 120,
   },
   mirewarden_leggings: {
@@ -498,7 +498,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'legs',
     quality: 'rare',
-    stats: { armor: 3, agi: 7, vit: 5 },
+    stats: { armor: 3 },
     sellValue: 88,
   },
   mirewarden_treads: {
@@ -508,7 +508,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'feet',
     quality: 'rare',
-    stats: { armor: 3, agi: 5, vit: 3 },
+    stats: { armor: 3 },
     sellValue: 78,
   },
 

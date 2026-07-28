@@ -41,8 +41,13 @@ describe('heroic loot flair: variant generation', () => {
       } else {
         expect(itemLevel(v), v.id).toBe(v.quality === 'epic' ? 28 : 25);
       }
-      // A base item already above the generated budget must retain that extra power.
-      expect(primaryStatSum(v)).toBeGreaterThanOrEqual(expectedStatBudget(v) ?? 0);
+      // Armour keeps its base attributes verbatim through the heroic swap now:
+      // a heroic body piece is better because it defends more and because of
+      // what is socketed into it, not because it hands out more attributes
+      // (src/sim/item_stat_policy.ts). Weapons still ride their tier budget.
+      const base = ITEMS[v.heroicOf ?? ''];
+      if (v.kind === 'armor') expect(primaryStatSum(v), v.id).toBe(primaryStatSum(base));
+      else expect(primaryStatSum(v)).toBeGreaterThanOrEqual(expectedStatBudget(v) ?? 0);
     }
   });
 
@@ -76,13 +81,15 @@ describe('heroic loot flair: variant generation', () => {
     });
   });
 
-  it("preserves Moonwrack Robe's 15 primary-stat points in its Heroic variant", () => {
+  it("carries Moonwrack Robe's attributes through unchanged into its Heroic variant", () => {
+    // It was 15 points on both sides. It is zero on both sides now, because
+    // ordinary armour grants no attributes at all; what the case is really
+    // about, that the swap PRESERVES whatever the base had, is unchanged and is
+    // stated against the record rather than a literal.
     const base = ITEMS.moonshroud_robe;
     const variant = ITEMS[heroicVariantId(base.id)];
-    expect({ base: primaryStatSum(base), heroic: primaryStatSum(variant) }).toEqual({
-      base: 15,
-      heroic: 15,
-    });
+    expect(primaryStatSum(variant)).toBe(primaryStatSum(base));
+    expect(variant.stats?.armor ?? 0).toBeGreaterThan(0);
   });
 
   it('shares the base item name (the heroic distinction is a tooltip tag, not a name prefix)', () => {

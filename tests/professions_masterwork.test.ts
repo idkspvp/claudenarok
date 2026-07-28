@@ -14,8 +14,10 @@ import {
   QUALITY_ILVL_BONUS,
   RAID_ILVL_BONUS,
 } from '../src/sim/item_level';
+import { isAccessorySlot } from '../src/sim/item_stat_policy';
 import { resolveCraftForRecipe } from '../src/sim/professions/crafting';
 import {
+  MASTERWORK_ARMOR_BONUS,
   MASTERWORK_BASE_CHANCE,
   MASTERWORK_CHANCE_CAP,
   MASTERWORK_PER_TIER_ABOVE_CHANCE,
@@ -172,29 +174,41 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
   const vestments = ITEMS.eastbrook_ritual_vestments;
   const vestmentsRecipe = recipeById('recipe_eastbrook_ritual_vestments')!;
 
-  it('bakes the exact uncommon-to-rare budget delta for a real crafted def', () => {
-    expect(vestmentsRecipe.level).toBe(9); // anchors the literal budget pins below
+  it('takes the armour path for a real crafted def, which now carries no attributes', () => {
+    expect(vestmentsRecipe.level).toBe(9);
     const record = masterworkBonusStats({
       level: vestmentsRecipe.level,
       quality: vestments.quality,
       slot: vestments.slot,
       stats: vestments.stats,
     });
+    // Every crafted armour piece in the game is attribute-free under the
+    // equipment rule, so this is the path all of them take: a point of defence.
+    expect(record).toEqual({ armor: MASTERWORK_ARMOR_BONUS });
+  });
+
+  it('bakes the exact uncommon-to-rare budget delta when there IS an identity to scale', () => {
+    // The stat-delta path, exercised on a synthetic caster profile because no
+    // crafted armour carries attributes any more. The path itself is live: it is
+    // what weapons and accessories take.
+    const record = masterworkBonusStats({
+      level: 9,
+      quality: 'uncommon',
+      slot: 'chest',
+      stats: { armor: 3, int: 2, luk: 1 },
+    });
     // Literal pin: the 2-point delta lands one point on each profile stat
-    // (largest-remainder over the def's int 2 / spi 1 identity).
+    // (largest-remainder over the int 2 / luk 1 identity).
     expect(record).toEqual({ int: 1, luk: 1 });
     // The record sums to EXACTLY the budget delta from the shared budget
-    // primitives, with both sides of the delta pinned as literals so a drift
-    // in either the baker or the budget curve trips this test.
+    // primitives, with both sides pinned as literals so a drift in either the
+    // baker or the budget curve trips this test.
     expect(primaryStatBudget(9, 'rare', 'chest')).toBe(5);
     expect(primaryStatBudget(9, 'uncommon', 'chest')).toBe(3);
     expect(statSum(record)).toBe(
       primaryStatBudget(9, 'rare', 'chest') - primaryStatBudget(9, 'uncommon', 'chest'),
     );
-    // Distribution stays on the def's own profile keys, nothing else.
-    for (const key of Object.keys(record!)) {
-      expect((vestments.stats as Record<string, number>)[key]).toBeGreaterThan(0);
-    }
+    expect(record).not.toHaveProperty('armor');
   });
 
   it('filters armor out of the profile so the def armor is never doubled', () => {
@@ -216,10 +230,12 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
     ).toBeNull();
   });
 
-  it('returns null for an empty primary profile (armor alone is not a stat identity)', () => {
-    // The real crafted common chest piece is armor-only: it can never
-    // masterwork, and neither can a def with no stats record at all (the
-    // crafted common weapon).
+  it('gives armour-only gear a point of defence, and nothing at all to a def with no stats', () => {
+    // This case used to assert the opposite: armour alone was not a stat
+    // identity, so an armour-only piece could never masterwork. Under the
+    // equipment rule ordinary armour carries NO attributes at all, which would
+    // have made that true of nearly every crafted piece in the game and killed
+    // the feature. A masterwork piece of plain armour is better armour instead.
     const chainVest = ITEMS.eastbrook_chain_vest;
     expect(chainVest.stats).toEqual({ armor: 1 });
     expect(
@@ -229,7 +245,9 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
         slot: chainVest.slot,
         stats: chainVest.stats,
       }),
-    ).toBeNull();
+    ).toEqual({ armor: MASTERWORK_ARMOR_BONUS });
+    // A def with no stats record at all still gets nothing: there is no
+    // defence to improve either.
     const sword = ITEMS.eastbrook_arming_sword;
     expect(sword.stats).toBeUndefined();
     expect(
@@ -358,36 +376,45 @@ describe('masterwork stays strictly below the raid-loot band (acceptance bound)'
     }
   });
 
-  it('pins the concrete numbers for a hub rare-def recipe and a common-band recipe (drift tripwires)', () => {
-    // Even if no content change ever crosses the bound, these two literal rows
-    // trip on any budget/tuning drift. wardweave_cowl: rare helmet, band 20,
-    // def sum 11 plus the baked epic-minus-rare delta 2 at level 20, against
-    // raid floor primaryStatBudget(20 + 6 + 3, 'epic', 'helmet') = 17
-    // (margin 4). eastbrook_ritual_vestments: uncommon chest, band 9, def sum
-    // 3 plus delta 2, against primaryStatBudget(9 + 3 + 3, 'rare', 'chest')
-    // = 8 (margin 3).
-    const cowl = boundRow(recipeById('recipe_wardweave_cowl')!, 1);
-    expect(cowl.total).toBe(13);
-    expect(cowl.floor).toBe(17);
-    const vestments = boundRow(recipeById('recipe_eastbrook_ritual_vestments')!, 1);
-    expect(vestments.total).toBe(5);
-    expect(vestments.floor).toBe(8);
+  it('leaves no crafted ARMOUR granting an attribute, accessories excepted', () => {
+    // What replaced the raid-floor bound. That bound existed to stop a
+    // masterwork craft from inflating a piece's ATTRIBUTES past a raid item's
+    // budget; crafted armour grants no attributes at all now, so the risk it
+    // guarded is gone and this states the stronger guarantee directly. It is
+    // also the tripwire: the day a crafted piece starts granting attributes
+    // again, this reds and the bound has to come back.
+    for (const recipe of equippable) {
+      const def = ITEMS[recipe.resultItemId];
+      // Accessories are where the rule deliberately keeps small attribute
+      // grants, so a crafted ring or face piece is outside this claim.
+      if (def.kind !== 'armor' || isAccessorySlot(def.slot)) continue;
+      expect(statSum(def.stats), `${recipe.id} def attributes`).toBe(0);
+      const record = masterworkBonusStats({
+        level: recipe.level,
+        quality: def.quality,
+        slot: def.slot,
+        stats: def.stats,
+      });
+      expect(statSum(record), `${recipe.id} masterwork attributes`).toBe(0);
+    }
   });
 
-  it('the bound has teeth: a hypothetical 2-tier bump would break it for current recipes', () => {
-    // If the masterwork model ever drifted to a 2-tier stat delta while the
-    // band (def quality + 1) stayed the documented contract, at least one
-    // shipping recipe would cross its raid floor: the rare-def hub pieces
-    // jump to the steep legendary multiplier. This proves the strict bound
-    // actually binds with less than one extra tier of slack.
-    const violating = equippable
-      .filter((r) => {
-        const row = boundRow(r, 2);
-        return row.total >= row.floor;
-      })
-      .map((r) => r.id);
-    expect(violating.length).toBeGreaterThan(0);
-    expect(violating).toContain('recipe_ironbound_warplate_helm');
+  it('still bakes a real improvement, so the feature is alive rather than inert', () => {
+    // The failure mode the case above cannot see: every crafted piece returning
+    // null would also satisfy it. At least one armour recipe has to masterwork
+    // into something.
+    const improved = equippable.filter((recipe) => {
+      const def = ITEMS[recipe.resultItemId];
+      if (def.kind !== 'armor' || isAccessorySlot(def.slot)) return false;
+      const record = masterworkBonusStats({
+        level: recipe.level,
+        quality: def.quality,
+        slot: def.slot,
+        stats: def.stats,
+      });
+      return (record?.armor ?? 0) > 0;
+    });
+    expect(improved.length).toBeGreaterThan(0);
   });
 });
 
@@ -489,8 +516,8 @@ describe('draw-order determinism over a real Sim', () => {
     expect(a.inventory.vestments).toBe(3);
     expect(a.instances).toEqual([
       null,
-      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, luk: 1 } } },
-      { signer: a.playerName, rolled: { masterwork: true, stats: { int: 1, luk: 1 } } },
+      { signer: a.playerName, rolled: { masterwork: true, stats: { armor: 1 } } },
+      { signer: a.playerName, rolled: { masterwork: true, stats: { armor: 1 } } },
     ]);
   });
 });

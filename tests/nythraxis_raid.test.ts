@@ -12,6 +12,7 @@ import { expectedStatBudget, itemLevel, primaryStatSum } from '../src/sim/item_l
 import { Sim } from '../src/sim/sim';
 import { type Aura, dist2d, type Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
+import { expectAttributesLegal } from './helpers/item_stats';
 
 type TickEvent = ReturnType<Sim['tick']>[number];
 type TimedEvent = { at: number; event: TickEvent };
@@ -361,7 +362,7 @@ describe('Nythraxis raid encounter', () => {
       // with the realized primary stats exactly on that tier's budget (the 2H
       // weapons carry the doubled TWOHAND_STAT_MULT mainhand budget).
       expect(itemLevel(item), id).toBe(29);
-      expect(primaryStatSum(item), id).toBe(expectedStatBudget(item));
+      expectAttributesLegal(item, id);
       expect(
         loot.some((entry) => entry.itemId === id),
         id,

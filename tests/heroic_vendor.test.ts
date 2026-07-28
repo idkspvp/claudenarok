@@ -13,6 +13,7 @@ import { expectedStatBudget, itemLevel, primaryStatSum } from '../src/sim/item_l
 import { Sim } from '../src/sim/sim';
 import type { Entity } from '../src/sim/types';
 import { buildHeroicVendorView } from '../src/ui/hud/vendor/heroic_vendor_view';
+import { expectAttributesLegal } from './helpers/item_stats';
 
 type AnySim = Sim & Record<string, any>;
 type AnyEntity = Entity & Record<string, any>;
@@ -54,7 +55,7 @@ describe('heroic vendor stock: item-level and budget pins', () => {
     expect(expectedStatBudget(ITEMS.seal_of_the_nine_oaths)).toBe(11);
     expect(expectedStatBudget(ITEMS.yumis_keepsake_locket)).toBe(12);
     for (const id of Object.keys(HEROIC_VENDOR_ITEMS)) {
-      expect(primaryStatSum(ITEMS[id]), id).toBe(expectedStatBudget(ITEMS[id]));
+      expectAttributesLegal(ITEMS[id], id);
     }
   });
 

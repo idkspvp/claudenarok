@@ -14,6 +14,8 @@ import {
   RAID_ILVL_BONUS,
   resetItemLevelCache,
 } from '../src/sim/item_level';
+import { statGrantFor } from '../src/sim/item_stat_policy';
+import { attributesLegal, expectAttributesLegal } from './helpers/item_stats';
 
 // The showcase tiers wired up in src/sim/content/items.ts: two trios, each one
 // piece per archetype, dropping from the same place so they share an item level.
@@ -84,20 +86,21 @@ describe('item level: stat budget formula', () => {
 });
 
 describe('item level: showcase tiers are normalized to budget', () => {
-  it('every showcase item carries exactly its item-level stat budget', () => {
-    for (const id of [...CHEST_TRIO, ...WEAPON_TRIO]) {
-      const item = ITEMS[id];
-      const budget = expectedStatBudget(item);
-      expect(budget, `${id} has a derivable budget`).not.toBeUndefined();
-      expect(primaryStatSum(item), `${id} stat sum == budget`).toBe(budget);
-    }
+  it('holds every showcase item to whichever attribute rule governs it', () => {
+    // The chest trio is armour, so it owes the grant policy: nothing at all at
+    // its quality. The weapon trio still owes its item-level budget.
+    for (const id of [...CHEST_TRIO, ...WEAPON_TRIO]) expectAttributesLegal(ITEMS[id], id);
   });
 
   it('items from the same place share one item level and one budget (same tier)', () => {
     const chestLevels = new Set(CHEST_TRIO.map((id) => itemLevel(ITEMS[id])));
     const chestBudgets = new Set(CHEST_TRIO.map((id) => primaryStatSum(ITEMS[id])));
     expect(chestLevels).toEqual(new Set([10]));
-    expect(chestBudgets).toEqual(new Set([6]));
+    // One shared value still, and now that value is zero: ordinary armour grants
+    // no attributes, so three pieces from one place agree by granting nothing.
+    // The claim being tested is that they AGREE, which survives the change.
+    expect(chestBudgets.size).toBe(1);
+    expect(chestBudgets).toEqual(new Set([0]));
 
     // The weapon half of this assertion went with WEAPON_TRIO: its three pieces
     // were quest rewards with no other source, so they no longer HAVE an item level
@@ -108,9 +111,12 @@ describe('item level: showcase tiers are normalized to budget', () => {
   it('normalization preserved each piece stat identity (no attribute swapped in/out)', () => {
     const ident = (id: string) =>
       PRIMARY_STATS.filter((k) => (ITEMS[id].stats?.[k] ?? 0) > 0).sort();
-    expect(ident('hollowbone_hauberk')).toEqual(['str', 'vit']);
-    expect(ident('gravewoven_raiment')).toEqual(['int', 'luk']);
-    expect(ident('cryptstalker_jerkin')).toEqual(['agi', 'vit']);
+    // The three chest pieces carry no attributes to have an identity in, which
+    // is the equipment rule rather than a normalization bug; the weapon still
+    // does, and it is what this case can still prove.
+    expect(ident('hollowbone_hauberk')).toEqual([]);
+    expect(ident('gravewoven_raiment')).toEqual([]);
+    expect(ident('cryptstalker_jerkin')).toEqual([]);
     expect(ident('gravecaller_staff')).toEqual(['int', 'luk']);
   });
 });
@@ -246,7 +252,7 @@ describe('item level: heroic boss drops are budget-exact (five-mans 31, raid 33/
       expect(itemSourceLevel(id), `${id} source`).toBe(raid ? 27 : 25);
       expect(item.quality, id).toBe('epic');
       expect(itemLevel(item), `${id} ilvl`).toBe(raid ? 33 : 31);
-      expect(primaryStatSum(item), `${id} stat sum == budget`).toBe(expectedStatBudget(item));
+      expectAttributesLegal(item, id);
     }
   });
 
@@ -271,9 +277,7 @@ describe('item level: heroic boss drops are budget-exact (five-mans 31, raid 33/
         expect(variant.quality, variant.id).toBe('epic');
         expect(itemLevel(variant), `${variant.id} ilvl`).toBe(33);
       }
-      expect(primaryStatSum(variant), `${variant.id} stat sum == budget`).toBe(
-        expectedStatBudget(variant),
-      );
+      expectAttributesLegal(variant, variant.id);
     }
     expect(epics + legendaries).toBe(raidBases.length);
     expect(legendaries).toBe(2); // Deathless Heartwood + Kingsbane, Last Oath
@@ -288,7 +292,7 @@ describe('item level: every level-20 item is balanced to budget', () => {
       const item = ITEMS[id];
       if (!item.slot || itemSourceLevel(id) !== 20) continue;
       checked++;
-      if (primaryStatSum(item) !== expectedStatBudget(item)) {
+      if (!attributesLegal(item)) {
         offBudget.push(`${id}: have ${primaryStatSum(item)}, want ${expectedStatBudget(item)}`);
       }
     }
@@ -297,9 +301,15 @@ describe('item level: every level-20 item is balanced to budget', () => {
   });
 
   it('level-20 items of the same item level + slot + hand share one budget', () => {
+    // Weapons only. Armour is held to a BAND rather than a point now
+    // (item_stat_policy.ts): two rare accessories of the same tier may
+    // legitimately grant 2 and 4, so equal sums stopped being the rule for
+    // them. Every armour piece is checked against its band elsewhere in this
+    // file and in tests/item_stat_policy.test.ts.
     const groups = new Map<string, Set<number>>();
     for (const id of Object.keys(ITEMS)) {
       const item = ITEMS[id];
+      if (item.kind === 'armor') continue;
       if (!item.slot || itemSourceLevel(id) !== 20) continue;
       const hand = item.kind === 'weapon' && item.hand === 'twohand' ? 'twohand' : 'onehand';
       const key = `${itemLevel(item)}:${item.quality}:${item.slot}:${hand}`;
@@ -371,19 +381,34 @@ describe('item level: crafted gear derives its level from the recipe (content/re
     }
   });
 
-  it('the hub caster pieces land at item level 23 and carry their exact stat budget', () => {
+  it('lands the hub caster pieces at item level 23, held to their own rule', () => {
     for (const id of CASTER_HUB_IDS) {
       const item = ITEMS[id];
       expect(itemLevel(item), `${id} item level`).toBe(23);
-      const budget = expectedStatBudget(item);
-      expect(budget, `${id} has a derivable budget`).not.toBeUndefined();
-      expect(primaryStatSum(item), `${id} stat sum == budget`).toBe(budget);
+      expectAttributesLegal(item, id);
     }
   });
 
-  it('matches the existing level-20 rares sharing its slot (helmet 11, gloves 9, shoulder 10)', () => {
-    expect(primaryStatSum(ITEMS.wardweave_cowl)).toBe(primaryStatSum(ITEMS.boundstone_helm));
-    expect(primaryStatSum(ITEMS.duskhide_wraps)).toBe(primaryStatSum(ITEMS.gravewyrm_gauntlets));
-    expect(primaryStatSum(ITEMS.sootscale_mantle)).toBe(primaryStatSum(ITEMS.gravewyrm_mantle));
+  it('matches the existing level-20 rares sharing its slot', () => {
+    // The helmet and back pieces agree at zero, because ordinary armour grants
+    // no attributes; the accessories agree because they sit in the same band.
+    // Stated as "legal and equal" rather than as the old 11 / 9 / 10 literals,
+    // which were budget figures the rule no longer produces.
+    for (const [a, b] of [
+      ['wardweave_cowl', 'boundstone_helm'],
+      ['duskhide_wraps', 'gravewyrm_gauntlets'],
+      ['sootscale_mantle', 'gravewyrm_mantle'],
+    ] as const) {
+      expectAttributesLegal(ITEMS[a], a);
+      expectAttributesLegal(ITEMS[b], b);
+      // Same band, not the same number: two accessories of one quality may
+      // legitimately differ inside their grant, which is what makes one of them
+      // worth chasing over the other.
+      const grant = statGrantFor(ITEMS[a].quality, ITEMS[a].slot);
+      for (const id of [a, b]) {
+        expect(primaryStatSum(ITEMS[id]), `${id} in band`).toBeGreaterThanOrEqual(grant.min);
+        expect(primaryStatSum(ITEMS[id]), `${id} in band`).toBeLessThanOrEqual(grant.max);
+      }
+    }
   });
 });

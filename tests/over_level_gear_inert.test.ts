@@ -51,8 +51,12 @@ describe('over-level gear is inert', () => {
     // Read off the record rather than transcribed, so a defence rebalance does
     // not red a case about the level gate.
     expect(active.stats.armor).toBe(bare.stats.armor + ITEMS[LEGS].stats!.armor!);
-    expect(active.stats.vit).toBe(bare.stats.vit + 4);
-    expect(active.maxHp).toBeGreaterThan(bare.maxHp);
+    expect(active.stats.vit).toBe(bare.stats.vit + (ITEMS[LEGS].stats?.vit ?? 0));
+    // Not health: the piece grants no Vitality under the equipment rule, so it
+    // cannot move the pool. What reactivating means for ordinary armour is
+    // DEFENCE, which is asserted above and restated here as the difference the
+    // level gate actually opens.
+    expect(active.stats.armor).toBeGreaterThan(bare.stats.armor);
   });
 
   it('an over-level weapon deals unarmed damage (no weapon stats, no dagger flag)', () => {

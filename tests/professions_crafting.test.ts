@@ -922,7 +922,7 @@ describe('masterwork proc (Professions 2.0)', () => {
     expect(instance?.signer).toBe(meta.name);
     expect(instance?.rolled?.masterwork).toBe(true);
     expect(instance?.rolled?.quality).toBeUndefined();
-    expect(instance?.rolled?.stats).toEqual({ int: 1, luk: 1 });
+    expect(instance?.rolled?.stats).toEqual({ armor: 1 });
 
     // The IWorld read surface reflects the proc.
     expect(sim.lastMasterwork).toEqual({

@@ -121,6 +121,11 @@ export interface MasterworkStatsInput {
  * bump at one tier (and never past legendary) also keeps a masterwork below
  * the raid-loot band, whose budgets ride the higher raid item level.
  */
+/** What a masterwork adds to a piece that carries no attributes to scale. One
+ *  point, because defence is a percentage: the strongest body armour in the game
+ *  is fifteen, so a point is worth about a fifteenth of the best chest piece. */
+export const MASTERWORK_ARMOR_BONUS = 1;
+
 export function masterworkBonusStats(input: MasterworkStatsInput): Partial<CoreStats> | null {
   const { level, quality, slot, stats } = input;
   if (!slot || !stats) return null;
@@ -134,7 +139,15 @@ export function masterworkBonusStats(input: MasterworkStatsInput): Partial<CoreS
     const value = stats[stat] ?? 0;
     if (value > 0) primaryProfile[stat] = value;
   }
-  if (Object.keys(primaryProfile).length === 0) return null;
+  if (Object.keys(primaryProfile).length === 0) {
+    // Ordinary armour carries no attributes at all under the equipment rule
+    // (src/sim/item_stat_policy.ts), which used to end masterworking here and
+    // quietly killed the whole feature for every armour recipe. A masterwork
+    // piece of plain armour is better ARMOUR: it gets a point of defence, which
+    // is a real bump on a scale whose best body piece is fifteen.
+    const armor = stats.armor ?? 0;
+    return armor > 0 ? { armor: MASTERWORK_ARMOR_BONUS } : null;
+  }
   const bonusBudget =
     primaryStatBudget(level, bumped.quality, slot) - primaryStatBudget(level, quality, slot);
   if (bonusBudget <= 0) return null;

@@ -81,8 +81,12 @@ describe('items.equipItem / unequipItem', () => {
     // one. Read through Vitality rather than armour: on Ragnarok's percentage
     // defence two low-level helms legitimately share a defence value, so armour
     // stopped being able to tell the two apart.
-    expect(statsOf().vit).not.toBe(vitWithCrypt);
-    expect(statsOf().vit).toBe(vitWithCrypt - 1);
+    // The two helms are ordinary armour, so neither grants attributes and both
+    // sit at the same low defence: nothing about the character's derived block
+    // changes. What still proves the recalc ran is the WORN set, which is what
+    // the swap is for.
+    expect(meta.equipment.helmet).toBe('roadwardens_helm');
+    expect(statsOf().vit).toBe(vitWithCrypt);
   });
 
   it('unequips a piece back to the bags, empties the slot, and is a no-op for an empty slot', () => {

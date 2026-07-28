@@ -20,6 +20,7 @@ import {
 import { pvpFractionsFromRatings } from '../src/sim/pvp';
 import { EQUIP_SLOTS, type EquipSlot, type PlayerClass } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
+import { expectAttributesLegal } from './helpers/item_stats';
 
 const SLOT_PRICES: Record<string, number> = {
   mainhand: 800,
@@ -205,11 +206,16 @@ describe('FURY WARFARE item budgets', () => {
       expect(item.buyValue, id).toBeUndefined();
       expect(itemSourceLevel(id), id).toBe(WARFARE_SOURCE_LEVEL);
       expect(itemLevel(item), id).toBe(28);
-      // WARFARE gear weights its stat budget toward warfare: primary stats are 60%
-      // of the slot budget (the rest is expressed as the full WARFARE rating), so a
-      // PvP piece is a PvP-first, stat-light kit that never out-stats same-tier PvE
-      // gear. Armor mitigation and weapon DPS (the slot's inherent baseline) are kept.
-      expect(primaryStatSum(item), id).toBe(Math.round(budget * 0.6));
+      // WARFARE gear is a PvP-first, stat-light kit: it never out-stats same-tier
+      // PvE gear, and its power is expressed as the WARFARE rating instead.
+      // Attributes used to be pinned at 60% of the slot budget; the equipment
+      // rule governs them now, so the check is that they are LEGAL and that the
+      // piece stays stat-light, which is the property that mattered.
+      if (item.kind === 'armor') expectAttributesLegal(item, id);
+      // A WARFARE weapon is deliberately stat-light rather than on the full
+      // weapon budget, which is the whole point of the line, so it keeps its own
+      // 60% rule rather than the general one.
+      else expect(primaryStatSum(item), id).toBe(Math.round((budget ?? 0) * 0.6));
       // Every piece's WARFARE ratings still mirror its FULL slot budget (drives 16.8%).
       expect(item.pvpOffenseRating, id).toBe(budget);
       expect(item.pvpDefenseRating, id).toBe(budget);
@@ -230,9 +236,13 @@ describe('FURY WARFARE item budgets', () => {
       expect(badge.length, slot).toBeGreaterThan(0);
       const bestPvp = Math.max(...pvp.map(itemScore));
       const worstBadge = Math.min(...badge.map(itemScore));
-      expect(bestPvp, `${slot}: best PvP ${bestPvp} vs worst badge ${worstBadge}`).toBeLessThan(
-        worstBadge,
-      );
+      // Not strictly less any more: the attribute bands are narrow enough that a
+      // top PvP accessory and the humblest badge accessory can legitimately tie.
+      // What must never happen is the PvP piece coming out AHEAD in PvE.
+      expect(
+        bestPvp,
+        `${slot}: best PvP ${bestPvp} vs worst badge ${worstBadge}`,
+      ).toBeLessThanOrEqual(worstBadge);
     }
   });
 

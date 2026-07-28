@@ -220,7 +220,14 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       legs: 'deathlord_legguards',
       feet: 'deathlord_sabatons',
     });
-    const itemStr = 8 + 8 + 7; // warplate + legguards + sabatons
+    // Off the records: ordinary armour grants no attributes under the equipment
+    // rule, so these transcribed per-piece figures went stale. The claim, that
+    // the 3-piece bonus adds 15 Strength ON TOP of whatever the pieces carry, is
+    // what the case is for and it survives.
+    const itemStr = ['deathlord_warplate', 'deathlord_legguards', 'deathlord_sabatons'].reduce(
+      (sum, id) => sum + (ITEMS[id].stats?.str ?? 0),
+      0,
+    );
     expect(three.stats.str).toBe(base.stats.str + itemStr + 15);
     expect(three.attackPower).toBe(ap(three) + 40);
   });
@@ -303,7 +310,12 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     });
     expect(three.castPushbackReduction).toBe(1);
     expect(three.knockbackResistance).toBe(0);
-    expect(three.stats.int).toBe(base.stats.int + 11 + 8 + 13 + 10);
+    const necroInt = [
+      'necromancers_starshroud',
+      'necromancers_soulsteps',
+      'necromancers_legwraps',
+    ].reduce((sum, id) => sum + (ITEMS[id].stats?.int ?? 0), 0);
+    expect(three.stats.int).toBe(base.stats.int + necroInt + 10);
     expect(three.stats.vit).toBe(base.stats.vit + 10);
   });
 
@@ -315,9 +327,13 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       ring1: 'soulflame_gloves',
     });
     expect(soulflame.castPushbackReduction).toBe(1);
-    // The gloves lost two Intellect when they became an accessory and picked up
-    // the smaller accessory budget; the helm and the mantle are unchanged.
-    expect(soulflame.stats.int).toBe(mageBase.stats.int + 11 + 9 + 6 + 15);
+    // Off the records: the pieces' own Intellect moved with the equipment rule,
+    // and what this case is for is that the 3-piece bonus adds 15 on top.
+    const soulflameInt = ['soulflame_cowl', 'soulflame_mantle', 'soulflame_gloves'].reduce(
+      (sum, id) => sum + (ITEMS[id].stats?.int ?? 0),
+      0,
+    );
+    expect(soulflame.stats.int).toBe(mageBase.stats.int + soulflameInt + 15);
     expect(soulflame.stats.luk).toBe(mageBase.stats.luk + 15);
 
     const shamanBase = statsFor('acolyte', 20, {});
@@ -327,7 +343,12 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       ring1: 'stormcallers_handguards',
     });
     expect(stormcallers.castPushbackReduction).toBe(1);
-    expect(stormcallers.stats.int).toBe(shamanBase.stats.int + 10 + 8 + 6 + 15);
+    const stormInt = [
+      'stormcallers_crown',
+      'stormcallers_spaulders',
+      'stormcallers_handguards',
+    ].reduce((sum, id) => sum + (ITEMS[id].stats?.int ?? 0), 0);
+    expect(stormcallers.stats.int).toBe(shamanBase.stats.int + stormInt + 15);
     expect(stormcallers.stats.luk).toBe(shamanBase.stats.luk + 15);
   });
 });

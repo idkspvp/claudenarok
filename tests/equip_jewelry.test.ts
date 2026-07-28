@@ -89,8 +89,12 @@ describe('jewelry equip flow', () => {
     const before = { str: p.stats.str, vit: p.stats.vit };
     sim.addItem('seal_of_the_nine_oaths', 1, pid);
     sim.equipItem('seal_of_the_nine_oaths', pid);
-    expect(p.stats.str).toBe(before.str + 7);
-    expect(p.stats.vit).toBe(before.vit + 4);
+    // Read off the record: an accessory's grant is small and deliberately so
+    // (item_stat_policy.ts), and this case is about the FOLD, not the size.
+    const ring = ITEMS.seal_of_the_nine_oaths.stats!;
+    expect(p.stats.str).toBe(before.str + (ring.str ?? 0));
+    expect(p.stats.vit).toBe(before.vit + (ring.vit ?? 0));
+    expect(ring.str ?? 0).toBeGreaterThan(0);
   });
 
   it('lets any class wear jewelry (no armorType gate)', () => {
