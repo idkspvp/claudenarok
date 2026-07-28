@@ -30,7 +30,7 @@ SpiritVale" and the play half had no data behind it until now.
 | `drops.json` | dict[966] | reverse index: item to the monsters that drop it |
 | `crafting.json` | dict[3] | 474 recipes by result, 31 by material, 39 class crafts |
 | `materials.json` | list[49] | crafting materials with rarity and sell value |
-| `consumables.json` | list[27] | potions and the like |
+| `consumables.json` | list[27] | 24 boss lures, 1 loot box, 2 mystery eggs. No healing items exist in this set |
 | `npcs.json` | dict[43] | NPCs per map |
 | `map-pins.json` | dict[44] | points of interest per map |
 | `worldmap.json` | dict[6] | world grid and tiles |
@@ -39,6 +39,8 @@ SpiritVale" and the play half had no data behind it until now.
 | `class-roadmap.json` | dict[9] | the developers' announced class plans |
 | `cosmetics.json` | list[447] | the premium-currency cosmetic catalogue: 14 slots including Pet, Mount, Emote and Stall, with tier and price |
 | `game-info.json` | dict[2] | which client build the whole set was read from |
+| `wiki-strings-en.json` | dict[1024] | the wiki's own English UI strings. Not decoration: the `mech.*` (73) and `sim.*` (290) keys carry rule statements the JSON does not, including how an advanced class inherits its parent and redistributes attributes, what makes Weaver freeform, and the separate base and advanced skill-point pools |
+| `data-changelog.json` | list[11] | the generator's own diff log between game builds: which records were added, removed or changed, with old and new values. Design history for free |
 
 ## The record shapes worth knowing before you read
 
@@ -54,10 +56,13 @@ A monster:
   "drops": { "equip": [ { "id": "BerserkFeet", "chance": 4 } ] } }
 ```
 
-Two things follow from that shape. A monster's attributes are MULTIPLIERS on an
-archetype (`arch: "Defender"`, `str: 1.5`), not absolute numbers, so the level
-and the archetype do the work. And a monster carries a real skill list with per-
-skill cast chances, which is why the skill database includes NPC-only skills.
+Two things follow from that shape. A monster's attributes are GROWTH RATES
+multiplied by level (`str: 1.5` on a level-60 monster is Strength 90), not
+absolute numbers; `arch` is a display label and carries no numbers. And a
+monster carries a real skill list with per-skill cast chances, which is why the
+skill database includes NPC-only skills. The full derivation and the computed
+values for all 319 are in `../../spiritvale-engine-formulas.md` and
+`../spiritvale-monster-stats.tsv`.
 
 A piece of equipment:
 
@@ -101,6 +106,7 @@ and are quicker to scan while designing:
 - `../spiritvale-stat-catalog.tsv` (219 stats)
 - `../spiritvale-status-effects.tsv` (156 statuses)
 - `../spiritvale-base-exp.tsv` (150 levels)
+- `../spiritvale-monster-stats.tsv` (319 monsters, computed not transcribed)
 
 Where an extract and a raw file disagree, the raw file wins: the extracts were
 transcribed from the rendered site, the JSON is what the site loads.

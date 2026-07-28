@@ -236,11 +236,20 @@ the rest**, and nobody starts with Luck. The health multiplier spreads 50% to
 130%, which is the entire durability difference between a Warrior and a Mage.
 
 The archetype table holds 31 entries. The other 24 are advanced classes and
-crafting professions: all run job level 1 to **70**, all carry a health
-multiplier of 1.0 except Weaver at 0.5, and all publish their starting
-attributes as zero, which reads as "not authored in this table" rather than as a
-real reset. An advanced class does NOT inherit its parent's health multiplier
-(Berserker is 1.0 where its parent Warrior is 1.3).
+crafting professions, all running job level 1 to **70**. Their published health
+multipliers and attributes (1.0 and all zeroes) are placeholders, not values:
+the site's own note states that an advanced class **inherits its base class's
+health multiplier** and starts every attribute at **1**, with the freed points
+returned to redistribute. So a Berserker keeps Warrior's 1.3 and re-spends its
+27 starting points.
+
+(An earlier draft here read the placeholder 1.0 as data and concluded that an
+advanced class does NOT inherit its parent multiplier. That was wrong.)
+
+**Weaver is a different thing entirely.** The simulator labels it a "freeform
+advanced class: one skill tree drawn from all base classes, no prerequisites",
+which is why its tree is 42 skills deep and why its prerequisites resolve into
+Knight, Warrior, Rogue and Scout rather than into itself.
 
 Of the 31, fifteen have real skill trees in the export (see
 `spiritvale-data-schema.md`): the seven base classes minus Warrior's and
@@ -427,10 +436,16 @@ at job level 1.
 
 ```
 base class            job 1 to 50    50 points
-after advancement     job 1 to 70    70 more, spendable on EITHER tree
+after advancement     job 1 to 70    70 more
 career total                        120
-a class with no advanced form       70
 ```
+
+The two pools are **separate**, not one shared budget. The simulator carries
+distinct "No skill points left" and "No advanced skill points left" messages, so
+base points buy base-tree skills and advanced points buy advanced-tree skills.
+(A second community wiki says the advanced points spend freely on either tree.
+The two sources disagree; the simulator is the one built against the data, so it
+is recorded here, and the disagreement is left visible.)
 
 And the part worth noticing: **120 points does not max a career.** Summing every
 skill's max level, a base tree costs 65 to 75 and an advanced tree 85 to 126, so
