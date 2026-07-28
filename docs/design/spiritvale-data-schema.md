@@ -66,15 +66,41 @@ cloneCast  projectileZone
 "true damage" concept, which is finer-grained than this game's `ignoreDefence`
 boolean.
 
-**Enums, published as integers with no labels**
+**Enums**
+
+Two of the three have published labels. They are not in the JSON; they are the
+lookup arrays the wiki's own renderer indexes with them, lifted from its page
+source (`SKILL_TARGET`, `SKILL_CAST`):
 
 ```
-targetType   0 to 7
-castType     0 to 3
-exclusiveType 0 to 5
+targetType   0 Enemy · 1 Ally · 2 AllyNotSelf · 3 Self · 4 Any
+             5 Summon · 6 SummonNotSelf · 7 Grave
+castType     0 None · 1 Target · 2 Ground · 3 Toggle
 ```
 
-The site publishes the values, not their meanings. **Do not guess them.**
+`Grave` is a target type, so a corpse is a first-class target and the necromancy
+kit is built on it. `Summon` and `SummonNotSelf` mirror `Ally` and `AllyNotSelf`
+exactly, which is how a buff can be aimed at your minions rather than your party.
+`castType 0 None` means instant self-cast, and `3 Toggle` is a stance.
+
+`exclusiveType` has no published label anywhere. What IS published is its
+membership, and it partitions the 279 skills cleanly into six named-by-content
+groups, so the field reads as a mutual-exclusion group id (only one member
+active at a time):
+
+| Value | n | Members |
+|---|---|---|
+| 0 | 238 | everything else, so 0 is "no group" |
+| 1 | 8 | `EnchantEarth/Fire/Holy/Poison/Shadow/Undead/Water/Wind` |
+| 2 | 13 | stances: Berserk, BloodFrenzy, Conjurer, Divinity, Fanaticism, FlowState, Invoker, Sacrament, SilentEdge, and the four elemental Barriers |
+| 3 | 9 | shouts and auras: Conviction, DeathBramble, Defiance, GraveChill, ShoutBlood, ShoutFury, ShoutMight, SoulDrain, Vitality |
+| 4 | 8 | summons: Reanimation, SummonAngel/Cactus/Cat/DeathMage/Reanimation/Wolf/Wraith |
+| 5 | 3 | weapon coatings: BleedCoating, FreezingEdge, VenomCoating |
+
+Groups 2 and 3 are entirely `castType 3` (Toggle) and group 4 is where the six
+`summon` references live, which is the corroboration: the partition lines up
+with an independent field in every case. This is a reading, not a published
+label. Treat the grouping as evidence-backed and the NAME as ours.
 
 **References out**
 
@@ -197,10 +223,26 @@ question directly. A Summoner has nearly twice a Warrior's tree because a
 summoner's skills include the summons themselves. Weaver at 42 is an outlier and
 sits outside the seven-parent structure entirely.
 
-Note the arithmetic: a base class caps at job 50, so 49 skill points against a
-10-to-19-skill tree with max levels of 5 or 10. A base class can very nearly max
-its whole tree. The choice lives in the ORDER, not in the final build, which is
-another face of the same "easier" design.
+Note the arithmetic, because it is the opposite of what the tree sizes suggest.
+Summing every skill's `maxLevel` gives the points needed to max a whole tree:
+
+| Base class | To max base | Advanced | To max advanced | Both | Budget 120 |
+|---|---|---|---|---|---|
+| Warrior | 65 | Berserker | 85 | 150 | 30 short |
+| Scout | 65 | Gunslinger | 110 | 175 | 55 short |
+| Acolyte | 70 | Priest | 115 | 185 | 65 short |
+| Summoner | 72 | Necromancer | 126 | 198 | 78 short |
+| Knight | 75 | Paladin | 105 | 180 | 60 short |
+| Mage | 75 | Wizard | 90 | 165 | 45 short |
+| Rogue | 75 | Shinobi | 103 | 178 | 58 short |
+| Weaver | 235 | (none) | | 235 | 165 short |
+
+A base class gets **50** skill points and every tree costs 65 to 75, so you
+cannot max even the base tree before advancing. The full career budget is
+**120** (50 base plus 70 advanced, spendable across both trees), against 150 to
+198 to max both. Every build is 30 to 78 points short. The choice is real and
+permanent, which contradicts the "everything is flatter" reading of the rest of
+the design: SpiritVale flattened its stat math, not its skill budget.
 
 `class-roadmap.json` records 14 announced classes with a parent, an intended
 damage type, the attributes and weapons they will key off, and whether they are
@@ -247,6 +289,34 @@ Scythe, Shotgun, Spear, Sword, Twinblade, Wand).
 
 The weapon type IS the slot. There is no generic "weapon" slot with a subtype
 field, which makes a class restriction on weapons redundant with the slot.
+
+## Grimoire: the slot that equips a passive
+
+Thirty-nine of the 518 equipment records sit in the `Grimoire` slot, and every
+one of them has the same shape:
+
+```json
+{ "id": "Acolyte_1", "name": "Scripture of Mercy", "sprite": "grimoire-base",
+  "slot": "Grimoire", "lvl": 0, "element": "Neutral", "set": "",
+  "cardSlots": 0, "arch": [], "primary": [],
+  "secondary": [ { "stat": "GrantSkill", "base": 0, "per": 0, "q": "Acolyte_1" } ],
+  "substatPool": "" }
+```
+
+No stats, no level requirement, no card slots, no substats. The entire item is
+one `GrantSkill` line whose `q` names a passive, and those ids (`Acolyte_1`,
+`Acolyte_2`, ...) match the passive database exactly.
+
+So a grimoire is **a passive you equip**. The 111 passives split into the ones a
+class tree teaches and the 39 a grimoire grants, and the grimoire ones sit
+outside the skill-point budget entirely: a second, item-based build axis on top
+of the tree. `Scripture of Mercy` autocasts Litany of Sanctuary whenever you
+cast Heal; `Radiant Strikes` stacks Radiance on auto-attack and converts it at
+max stacks. Both are trigger rows, not stat lines.
+
+That also settles the loose end in the cast-speed formula: the `CastReady` buff
+worth 90 flat cast-time reduction is granted by the Spellshot grimoire, which is
+an equippable passive rather than a learnable skill.
 
 ## The rest, briefly
 

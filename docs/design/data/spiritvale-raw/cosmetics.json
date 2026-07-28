@@ -1,0 +1,4108 @@
+{
+ "_source": "Unity export GameServerConfig.asset::Cosmetics + CosmeticConfig assets; price gate verified in GameAssembly.dll PlayerSave$$PurchaseCosmetics_S. Prices are Premium currency (supporter currency; icon cosmetic-icons/premium.webp). Excluded: Hidden entries + Exclusive supporter/founder items (server rejects Price==0 OR Exclusive!=0). Regenerate: spiritvale-build dev/extract_cosmetics.py",
+ "items": [
+  {
+   "id": "Bandit Wrap",
+   "slug": "bandit-wrap",
+   "name": "Bandit Wrap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Leather wrapped tight for dust, trouble, and quick escapes.",
+   "icon": "wiki-data/cosmetic-icons/bandit-wrap.webp"
+  },
+  {
+   "id": "Banner Helm",
+   "slug": "banner-helm",
+   "name": "Banner Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Orange cloth marks the one others follow.",
+   "icon": "content/game/icons/equip-V2_Head_19.webp"
+  },
+  {
+   "id": "Beast Hood",
+   "slug": "beast-hood",
+   "name": "Beast Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Gaping jaws make this hood look hungry.",
+   "icon": "content/game/icons/equip-V3_Head_11.webp"
+  },
+  {
+   "id": "Beast Pelt Hood",
+   "slug": "beast-pelt-hood",
+   "name": "Beast Pelt Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Rugged hide wraps close, wild and untamed.",
+   "icon": "content/game/icons/equip-V3_Head_7.webp"
+  },
+  {
+   "id": "Bishop's Hood",
+   "slug": "bishop-s-hood",
+   "name": "Bishop's Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Blue and gold rise tall for solemn rites.",
+   "icon": "content/game/icons/equip-V3_Head_9.webp"
+  },
+  {
+   "id": "Bronze Visage",
+   "slug": "bronze-visage",
+   "name": "Bronze Visage",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Stoic bronze hides the face and keeps its secrets.",
+   "icon": "content/game/icons/equip-V2_Head_10.webp"
+  },
+  {
+   "id": "Bullcrest Helm",
+   "slug": "bullcrest-helm",
+   "name": "Bullcrest Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Red cloth and proud horn promise strength and protection.",
+   "icon": "content/game/icons/equip-V3_Head_6.webp"
+  },
+  {
+   "id": "Crimson Plume",
+   "slug": "crimson-plume",
+   "name": "Crimson Plume",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Ruby feathers draw every eye before the first weapon moves.",
+   "icon": "wiki-data/cosmetic-icons/crimson-plume.webp"
+  },
+  {
+   "id": "Demon Hood",
+   "slug": "demon-hood",
+   "name": "Demon Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Violet horns whisper dark ambition, then pretend they said nothing.",
+   "icon": "wiki-data/cosmetic-icons/demon-hood.webp"
+  },
+  {
+   "id": "Doom Crown",
+   "slug": "doom-crown",
+   "name": "Doom Crown",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Regret-dark metal and a crimson spike make betrayal feel ceremonial.",
+   "icon": "wiki-data/cosmetic-icons/doom-crown.webp"
+  },
+  {
+   "id": "Dragon Hood",
+   "slug": "dragon-hood",
+   "name": "Dragon Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Scaled plates glare forward, making polite conversations much harder nearby.",
+   "icon": "content/game/icons/equip-V3_Head_10.webp"
+  },
+  {
+   "id": "Dragonspire Helm",
+   "slug": "dragonspire-helm",
+   "name": "Dragonspire Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "This helm suggests dragon-slaying confidence, even when confidence came separately.",
+   "icon": "wiki-data/cosmetic-icons/dragonspire-helm.webp"
+  },
+  {
+   "id": "Emerald Crown",
+   "slug": "emerald-crown",
+   "name": "Emerald Crown",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "One verdant gem softens the gold, regal without losing warmth.",
+   "icon": "wiki-data/cosmetic-icons/emerald-crown.webp"
+  },
+  {
+   "id": "Falcon Hood",
+   "slug": "falcon-hood",
+   "name": "Falcon Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Feathers shape the hood for scouts who enjoy looking judgmental.",
+   "icon": "content/game/icons/equip-V2_Head_16.webp"
+  },
+  {
+   "id": "Feathered Crown",
+   "slug": "feathered-crown",
+   "name": "Feathered Crown",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Jade plumes rise from the crown, bright with old forest ceremony.",
+   "icon": "content/game/icons/equip-V2_Head_4.webp"
+  },
+  {
+   "id": "Festival Cap",
+   "slug": "festival-cap",
+   "name": "Festival Cap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Bright red cloth brings celebration, cheer, and mild hat confidence.",
+   "icon": "content/game/icons/equip-V2_Head_5.webp"
+  },
+  {
+   "id": "Festival Turtle Cap",
+   "slug": "festival-turtle-cap",
+   "name": "Festival Turtle Cap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Turtle charm and tassels promise luck, patience, and a great time.",
+   "icon": "content/game/icons/equip-V3_Head_12.webp"
+  },
+  {
+   "id": "Fur Hood",
+   "slug": "fur-hood",
+   "name": "Fur Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "A thick fur-lined hood. Keeps the wearer warm in the coldest regions.",
+   "icon": "content/game/icons/equip-V2_Head_13.webp"
+  },
+  {
+   "id": "Gentleman's Hat",
+   "slug": "gentleman-s-hat",
+   "name": "Gentleman's Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Sharp blue style says trouble may arrive, but properly dressed.",
+   "icon": "content/game/icons/equip-V2_Head_2.webp"
+  },
+  {
+   "id": "Golden Crest",
+   "slug": "golden-crest",
+   "name": "Golden Crest",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Polished gold announces the champion's presence before the wearer proves anything.",
+   "icon": "wiki-data/cosmetic-icons/golden-crest.webp"
+  },
+  {
+   "id": "Hermit Hood",
+   "slug": "hermit-hood",
+   "name": "Hermit Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Plain brown cloth helps wanderers avoid people, questions, and invitations.",
+   "icon": "content/game/icons/equip-V3_Head_8.webp"
+  },
+  {
+   "id": "Horned Vanguard",
+   "slug": "horned-vanguard",
+   "name": "Horned Vanguard",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Curved horns add authority, intimidation, and several doorway problems.",
+   "icon": "wiki-data/cosmetic-icons/horned-vanguard.webp"
+  },
+  {
+   "id": "Hunter's Hood",
+   "slug": "hunter-s-hood",
+   "name": "Hunter's Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Green cloth blends with brush, helping scouts look responsible.",
+   "icon": "content/game/icons/equip-V2_Head_11.webp"
+  },
+  {
+   "id": "Iron Guard Helm",
+   "slug": "iron-guard-helm",
+   "name": "Iron Guard Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Orange trim adds style to the business of being hit.",
+   "icon": "content/game/icons/equip-V2_Head_12.webp"
+  },
+  {
+   "id": "Jester Hat",
+   "slug": "jester-hat",
+   "name": "Jester Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "That glowing rune at the front suggests the joke may be on someone else.",
+   "icon": "content/game/icons/equip-V3_Head_16.webp"
+  },
+  {
+   "id": "Legionnaire Helm",
+   "slug": "legionnaire-helm",
+   "name": "Legionnaire Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "The red plume says valor; the dents say experience.",
+   "icon": "wiki-data/cosmetic-icons/legionnaire-helm.webp"
+  },
+  {
+   "id": "Mystic Hat",
+   "slug": "mystic-hat",
+   "name": "Mystic Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Classic wizard shape, faint sparks, and absolutely no subtlety whatsoever.",
+   "icon": "content/game/icons/equip-V2_Head_7.webp"
+  },
+  {
+   "id": "Nomad Hood",
+   "slug": "nomad-hood",
+   "name": "Nomad Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Blue tassel and rough leather fight sunburn with desert style.",
+   "icon": "content/game/icons/equip-V3_Head_3.webp"
+  },
+  {
+   "id": "Quillcap",
+   "slug": "quillcap",
+   "name": "Quillcap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "A jaunty feather at the top encourages stylish escapes and questionable confidence.",
+   "icon": "wiki-data/cosmetic-icons/quillcap.webp"
+  },
+  {
+   "id": "Raider Helm",
+   "slug": "raider-helm",
+   "name": "Raider Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Horned metal promises raids, bruises, and very limited apologies.",
+   "icon": "content/game/icons/equip-V3_Head_14.webp"
+  },
+  {
+   "id": "Regal Tricorne",
+   "slug": "regal-tricorne",
+   "name": "Regal Tricorne",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Naval authority sits neatly on your head and expects respect.",
+   "icon": "wiki-data/cosmetic-icons/regal-tricorne.webp"
+  },
+  {
+   "id": "Sailor Cap",
+   "slug": "sailor-cap",
+   "name": "Sailor Cap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Crisp blue cloth suggests nautical competence, even on dry land.",
+   "icon": "content/game/icons/equip-V2_Head_17.webp"
+  },
+  {
+   "id": "Scholar's Cap",
+   "slug": "scholar-s-cap",
+   "name": "Scholar's Cap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Teal cloth and a golden emblem make apprentices look prepared.",
+   "icon": "content/game/icons/equip-V2_Head_1.webp"
+  },
+  {
+   "id": "Seer's Hood",
+   "slug": "seer-s-hood",
+   "name": "Seer's Hood",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "The eye motif promises visions, whether you wanted them or not.",
+   "icon": "content/game/icons/equip-V2_Head_6.webp"
+  },
+  {
+   "id": "Sharpened Visor",
+   "slug": "sharpened-visor",
+   "name": "Sharpened Visor",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Angular plates glare outward, because subtle intimidation was unavailable.",
+   "icon": "wiki-data/cosmetic-icons/sharpened-visor.webp"
+  },
+  {
+   "id": "Sky Raider Hat",
+   "slug": "sky-raider-hat",
+   "name": "Sky Raider Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Tinted goggles promise exploration, speed, and terrible plans.",
+   "icon": "content/game/icons/equip-V2_Head_9.webp"
+  },
+  {
+   "id": "Skywing Mask",
+   "slug": "skywing-mask",
+   "name": "Skywing Mask",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Silver curves hum with wind-blessed grace and divine lift overhead.",
+   "icon": "wiki-data/cosmetic-icons/skywing-mask.webp"
+  },
+  {
+   "id": "Spiked Helm",
+   "slug": "spiked-helm",
+   "name": "Spiked Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Gladiators love helmets that introduce themselves before the wearer does.",
+   "icon": "wiki-data/cosmetic-icons/spiked-helm.webp"
+  },
+  {
+   "id": "Straw Hat",
+   "slug": "straw-hat",
+   "name": "Straw Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Sturdy straw protects farmers, pirates, and anyone avoiding sunburn outside.",
+   "icon": "content/game/icons/equip-V2_Head_8.webp"
+  },
+  {
+   "id": "Sun Emblem Helm",
+   "slug": "sun-emblem-helm",
+   "name": "Sun Emblem Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Twin wings and a dawn crest mark those who shield others.",
+   "icon": "wiki-data/cosmetic-icons/sun-emblem-helm.webp"
+  },
+  {
+   "id": "Tiger Hat",
+   "slug": "tiger-hat",
+   "name": "Tiger Hat",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "A striped helm shaped like a tiger's head. Radiates ferocity and predatory strength.",
+   "icon": "content/game/icons/equip-V3_Head_13.webp"
+  },
+  {
+   "id": "Totem Skull Headdress",
+   "slug": "totem-skull-headdress",
+   "name": "Totem Skull Headdress",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "A spirit skull crowns the headdress, warning allies and enemies alike.",
+   "icon": "content/game/icons/equip-V2_Head_20.webp"
+  },
+  {
+   "id": "Trickster Horns",
+   "slug": "trickster-horns",
+   "name": "Trickster Horns",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Small devil horns announce mischief before the prank even begins.",
+   "icon": "content/game/icons/equip-V2_Head_3.webp"
+  },
+  {
+   "id": "Valor Helm",
+   "slug": "valor-helm",
+   "name": "Valor Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Polished curves speak of earned honor, not empty arrogance alone.",
+   "icon": "wiki-data/cosmetic-icons/valor-helm.webp"
+  },
+  {
+   "id": "Voidspike Helm",
+   "slug": "voidspike-helm",
+   "name": "Voidspike Helm",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Purple spikes handle intimidation better than any glare.",
+   "icon": "content/game/icons/equip-V3_Head_1.webp"
+  },
+  {
+   "id": "Worker's Cap",
+   "slug": "worker-s-cap",
+   "name": "Worker's Cap",
+   "slot": "Head",
+   "tier": 0,
+   "price": 500,
+   "desc": "Plain grey cloth belongs to people who keep the world moving.",
+   "icon": "content/game/icons/equip-V3_Head_4.webp"
+  },
+  {
+   "id": "Casual_Head_8",
+   "slug": "casual-head-8",
+   "name": "Artist Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-8.webp"
+  },
+  {
+   "id": "Casual_Head_23",
+   "slug": "casual-head-23",
+   "name": "Banana Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-23.webp"
+  },
+  {
+   "id": "Casual_Head_1",
+   "slug": "casual-head-1",
+   "name": "Baseball Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-1.webp"
+  },
+  {
+   "id": "Casual_Head_5",
+   "slug": "casual-head-5",
+   "name": "Black Beanie",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-5.webp"
+  },
+  {
+   "id": "Casual_Head_2",
+   "slug": "casual-head-2",
+   "name": "Black Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-2.webp"
+  },
+  {
+   "id": "Casual_Head_42",
+   "slug": "casual-head-42",
+   "name": "Blue Bandit Bandana",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-42.webp"
+  },
+  {
+   "id": "Casual_Head_6",
+   "slug": "casual-head-6",
+   "name": "Blue Beanie",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-6.webp"
+  },
+  {
+   "id": "Casual_Head_10",
+   "slug": "casual-head-10",
+   "name": "Blue Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-10.webp"
+  },
+  {
+   "id": "Head_Xmas_M_Blue",
+   "slug": "head-xmas-m-blue",
+   "name": "Blue Christmas Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300
+  },
+  {
+   "id": "Casual_Head_31",
+   "slug": "casual-head-31",
+   "name": "Business Graduation Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-31.webp"
+  },
+  {
+   "id": "Casual_Head_28",
+   "slug": "casual-head-28",
+   "name": "Captain Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-28.webp"
+  },
+  {
+   "id": "Casual_Head_20",
+   "slug": "casual-head-20",
+   "name": "Chicky Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-20.webp"
+  },
+  {
+   "id": "Casual_Head_14",
+   "slug": "casual-head-14",
+   "name": "Cowboy Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-14.webp"
+  },
+  {
+   "id": "Head_Easter_F",
+   "slug": "head-easter-f",
+   "name": "Easter Female Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-easter-f.webp"
+  },
+  {
+   "id": "Head_Easter_M",
+   "slug": "head-easter-m",
+   "name": "Easter Male Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-easter-m.webp"
+  },
+  {
+   "id": "Head_FeatheredCrown_Brown",
+   "slug": "head-featheredcrown-brown",
+   "name": "Feathered Crown Brown",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-featheredcrown-brown.webp"
+  },
+  {
+   "id": "Head_FeatheredCrown_Rainbow",
+   "slug": "head-featheredcrown-rainbow",
+   "name": "Feathered Crown Rainbow",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-featheredcrown-rainbow.webp"
+  },
+  {
+   "id": "Head_FireFox",
+   "slug": "head-firefox",
+   "name": "Fire Fox Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-firefox.webp"
+  },
+  {
+   "id": "Casual_Head_39",
+   "slug": "casual-head-39",
+   "name": "Fireman Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-39.webp"
+  },
+  {
+   "id": "Head_CupidHalo",
+   "slug": "head-cupidhalo",
+   "name": "Halo",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-cupidhalo.webp"
+  },
+  {
+   "id": "Casual_Head_4",
+   "slug": "casual-head-4",
+   "name": "Hipster Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-4.webp"
+  },
+  {
+   "id": "Head_IceFox",
+   "slug": "head-icefox",
+   "name": "Ice Fox Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-icefox.webp"
+  },
+  {
+   "id": "Casual_Head_41",
+   "slug": "casual-head-41",
+   "name": "Red Bandit Bandana",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-41.webp"
+  },
+  {
+   "id": "Head_Xmas_M_Red",
+   "slug": "head-xmas-m-red",
+   "name": "Red Christmas Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300
+  },
+  {
+   "id": "Casual_Head_17",
+   "slug": "casual-head-17",
+   "name": "Ribbon Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-17.webp"
+  },
+  {
+   "id": "Casual_Head_46",
+   "slug": "casual-head-46",
+   "name": "Royal Crown",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-46.webp"
+  },
+  {
+   "id": "Casual_Head_29",
+   "slug": "casual-head-29",
+   "name": "Sailor Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-29.webp"
+  },
+  {
+   "id": "Casual_Head_30",
+   "slug": "casual-head-30",
+   "name": "Science Graduation Cap",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-30.webp"
+  },
+  {
+   "id": "Casual_Head_21",
+   "slug": "casual-head-21",
+   "name": "Scout Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-21.webp"
+  },
+  {
+   "id": "Casual_Head_7",
+   "slug": "casual-head-7",
+   "name": "Snow Beanie",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-7.webp"
+  },
+  {
+   "id": "Casual_Head_16",
+   "slug": "casual-head-16",
+   "name": "Spring Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-16.webp"
+  },
+  {
+   "id": "Casual_Head_13",
+   "slug": "casual-head-13",
+   "name": "Straw Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-head-13.webp"
+  },
+  {
+   "id": "Head_Sunken",
+   "slug": "head-sunken",
+   "name": "Sunken Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-sunken.webp"
+  },
+  {
+   "id": "Head_Transparent",
+   "slug": "head-transparent",
+   "name": "Transparent Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300
+  },
+  {
+   "id": "Head_Urban",
+   "slug": "head-urban",
+   "name": "Urban Hat",
+   "slot": "Head",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/head-urban.webp"
+  },
+  {
+   "id": "Head_Aviator",
+   "slug": "head-aviator",
+   "name": "Aviator Hat",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-aviator.webp"
+  },
+  {
+   "id": "Head_BunnyEars",
+   "slug": "head-bunnyears",
+   "name": "Bunny Ears",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-bunnyears.webp"
+  },
+  {
+   "id": "Head_CatEars",
+   "slug": "head-catears",
+   "name": "Cat Ears",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-catears.webp"
+  },
+  {
+   "id": "Head_FoxEars",
+   "slug": "head-foxears",
+   "name": "Fox Ears",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-foxears.webp"
+  },
+  {
+   "id": "Head_Froggie",
+   "slug": "head-froggie",
+   "name": "Froggie Headband",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-froggie.webp"
+  },
+  {
+   "id": "Head_MajesticHorn",
+   "slug": "head-majestichorn",
+   "name": "Majestic Horns",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-majestichorn.webp"
+  },
+  {
+   "id": "Head_Priest",
+   "slug": "head-priest",
+   "name": "Priest Hat",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-priest.webp"
+  },
+  {
+   "id": "Head_Ribbon_Red",
+   "slug": "head-ribbon-red",
+   "name": "Red Ribbon",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-ribbon-red.webp"
+  },
+  {
+   "id": "Head_Sakkat",
+   "slug": "head-sakkat",
+   "name": "Sakkat",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-sakkat.webp"
+  },
+  {
+   "id": "Head_AoA",
+   "slug": "head-aoa",
+   "name": "Scout's Apple",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-aoa.webp"
+  },
+  {
+   "id": "Head_Shinobi",
+   "slug": "head-shinobi",
+   "name": "Shinobi Hat",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-shinobi.webp"
+  },
+  {
+   "id": "Head_Sprout",
+   "slug": "head-sprout",
+   "name": "Sprout",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-sprout.webp"
+  },
+  {
+   "id": "Head_Wizard",
+   "slug": "head-wizard",
+   "name": "Wizard Hat",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-wizard.webp"
+  },
+  {
+   "id": "Head_Ribbon_Yellow",
+   "slug": "head-ribbon-yellow",
+   "name": "Yellow Ribbon",
+   "slot": "Head",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/head-ribbon-yellow.webp"
+  },
+  {
+   "id": "3D Glasses",
+   "slug": "3d-glasses",
+   "name": "3DGlasses",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "A set of red and blue glasses that makes your vision blurry. You have no idea what they could be used for.",
+   "icon": "wiki-data/cosmetic-icons/3d-glasses.webp"
+  },
+  {
+   "id": "Cardboard Chick",
+   "slug": "cardboard-chick",
+   "name": "Cardboard Chick",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "Cardboard courage stares forward bravely, despite knowing exactly what it is made of.",
+   "icon": "wiki-data/cosmetic-icons/cardboard-chick.webp"
+  },
+  {
+   "id": "Ceremonial Mask",
+   "slug": "ceremonial-mask",
+   "name": "Ceremonial Mask",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "An ornate mask used in ancient rituals. Rumored to ward off evil spirits.",
+   "icon": "wiki-data/cosmetic-icons/ceremonial-mask.webp"
+  },
+  {
+   "id": "Cotton Mask",
+   "slug": "cotton-mask",
+   "name": "Cotton Mask",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "Dust, sneezes, and awkward alley smells meet their soft cotton rival.",
+   "icon": "wiki-data/cosmetic-icons/cotton-mask.webp"
+  },
+  {
+   "id": "Funny Glasses",
+   "slug": "funny-glasses",
+   "name": "Funny Glasses",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "You feel a bit more private with these on. You now have an impressive mustache.",
+   "icon": "wiki-data/cosmetic-icons/funny-glasses.webp"
+  },
+  {
+   "id": "Heartgaze Shades",
+   "slug": "heartgaze-shades",
+   "name": "Heartgaze Shades",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "Heart lenses deflect rejection, or at least make it easier to endure.",
+   "icon": "wiki-data/cosmetic-icons/heartgaze-shades.webp"
+  },
+  {
+   "id": "Round Glasses",
+   "slug": "round-glasses",
+   "name": "Round Glasses",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "A set of sophisticated glasses that are sure to make you look smart.",
+   "icon": "wiki-data/cosmetic-icons/round-glasses.webp"
+  },
+  {
+   "id": "Starshine Glasses",
+   "slug": "starshine-glasses",
+   "name": "Starshine Glasses",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "Star lenses reflect dreams, light, and probably your poor decisions.",
+   "icon": "wiki-data/cosmetic-icons/starshine-glasses.webp"
+  },
+  {
+   "id": "Stylish Shades",
+   "slug": "stylish-shades",
+   "name": "Stylish Shades",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "These glasses shine with golden frames and make you see red.",
+   "icon": "wiki-data/cosmetic-icons/stylish-shades.webp"
+  },
+  {
+   "id": "Sunglasses",
+   "slug": "sunglasses",
+   "name": "Sunglasses",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "A set of cool shades that will keep the sunlight out of your eyes. Don't wear them indoors.",
+   "icon": "wiki-data/cosmetic-icons/sunglasses.webp"
+  },
+  {
+   "id": "Sunset Shutters",
+   "slug": "sunset-shutters",
+   "name": "Sunset Shutters",
+   "slot": "Eyewear",
+   "tier": 0,
+   "price": 300,
+   "desc": "Slatted lenses block sun, shame, and a surprising amount of doubt.",
+   "icon": "wiki-data/cosmetic-icons/sunset-shutters.webp"
+  },
+  {
+   "id": "Casual_Eyewear_15",
+   "slug": "casual-eyewear-15",
+   "name": "Aviator Goggles",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-15.webp"
+  },
+  {
+   "id": "Casual_Eyewear_10",
+   "slug": "casual-eyewear-10",
+   "name": "Diva Shades",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-10.webp"
+  },
+  {
+   "id": "Casual_Eyewear_14",
+   "slug": "casual-eyewear-14",
+   "name": "Diver Goggles",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-14.webp"
+  },
+  {
+   "id": "Face_Goggles",
+   "slug": "face-goggles",
+   "name": "Goggles",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/face-goggles.webp"
+  },
+  {
+   "id": "Casual_Eyewear_3",
+   "slug": "casual-eyewear-3",
+   "name": "Hipster Specs",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-3.webp"
+  },
+  {
+   "id": "Casual_Eyewear_17",
+   "slug": "casual-eyewear-17",
+   "name": "Red Bandit Mask",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-17.webp"
+  },
+  {
+   "id": "Casual_Eyewear_13",
+   "slug": "casual-eyewear-13",
+   "name": "Snow Goggles",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-13.webp"
+  },
+  {
+   "id": "Casual_Eyewear_8",
+   "slug": "casual-eyewear-8",
+   "name": "Star Glasses",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-8.webp"
+  },
+  {
+   "id": "Casual_Eyewear_4",
+   "slug": "casual-eyewear-4",
+   "name": "Stylish Specs",
+   "slot": "Eyewear",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-eyewear-4.webp"
+  },
+  {
+   "id": "Face_CrystalEars",
+   "slug": "face-crystalears",
+   "name": "Crystal Ears",
+   "slot": "Eyewear",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/face-crystalears.webp"
+  },
+  {
+   "id": "Face_KamenRed",
+   "slug": "face-kamenred",
+   "name": "Kamen Red",
+   "slot": "Eyewear",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/face-kamenred.webp"
+  },
+  {
+   "id": "Face_KitsuneMask",
+   "slug": "face-kitsunemask",
+   "name": "Kitsune Mask",
+   "slot": "Eyewear",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/face-kitsunemask.webp"
+  },
+  {
+   "id": "Face_NecroSkull",
+   "slug": "face-necroskull",
+   "name": "Necro Skull",
+   "slot": "Eyewear",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/face-necroskull.webp"
+  },
+  {
+   "id": "Face_OniMask",
+   "slug": "face-onimask",
+   "name": "Oni Mask",
+   "slot": "Eyewear",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/face-onimask.webp"
+  },
+  {
+   "id": "Chest_AcademyF",
+   "slug": "chest-academyf",
+   "name": "Academy Female Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-academyf.webp"
+  },
+  {
+   "id": "Chest_AcademyM",
+   "slug": "chest-academym",
+   "name": "Academy Male Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-academym.webp"
+  },
+  {
+   "id": "Casual_Chest_53",
+   "slug": "casual-chest-53",
+   "name": "Bandit Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-53.webp"
+  },
+  {
+   "id": "Casual_Chest_59",
+   "slug": "casual-chest-59",
+   "name": "Bear Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-59.webp"
+  },
+  {
+   "id": "Casual_Chest_28",
+   "slug": "casual-chest-28",
+   "name": "Black Bomber Jacket",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-28.webp"
+  },
+  {
+   "id": "Casual_Chest_40",
+   "slug": "casual-chest-40",
+   "name": "Black School Wear",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-40.webp"
+  },
+  {
+   "id": "Casual_Chest_20",
+   "slug": "casual-chest-20",
+   "name": "Black Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-20.webp"
+  },
+  {
+   "id": "Casual_Chest_5",
+   "slug": "casual-chest-5",
+   "name": "Black T",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-5.webp"
+  },
+  {
+   "id": "Casual_Chest_29",
+   "slug": "casual-chest-29",
+   "name": "Blue Bomber Jacket",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-29.webp"
+  },
+  {
+   "id": "Casual_Chest_36",
+   "slug": "casual-chest-36",
+   "name": "Blue Formal Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-36.webp"
+  },
+  {
+   "id": "Casual_Chest_25",
+   "slug": "casual-chest-25",
+   "name": "Blue Hoodie",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-25.webp"
+  },
+  {
+   "id": "Casual_Chest_41",
+   "slug": "casual-chest-41",
+   "name": "Blue School Wear",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-41.webp"
+  },
+  {
+   "id": "Casual_Chest_32",
+   "slug": "casual-chest-32",
+   "name": "Blue Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-32.webp"
+  },
+  {
+   "id": "Casual_Chest_11",
+   "slug": "casual-chest-11",
+   "name": "Blue Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-11.webp"
+  },
+  {
+   "id": "Casual_Chest_7",
+   "slug": "casual-chest-7",
+   "name": "Blue T",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-7.webp"
+  },
+  {
+   "id": "Casual_Chest_31",
+   "slug": "casual-chest-31",
+   "name": "Brown Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-31.webp"
+  },
+  {
+   "id": "Casual_Chest_19",
+   "slug": "casual-chest-19",
+   "name": "Brown Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-19.webp"
+  },
+  {
+   "id": "Casual_Chest_57",
+   "slug": "casual-chest-57",
+   "name": "Bunny Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-57.webp"
+  },
+  {
+   "id": "Casual_Chest_49",
+   "slug": "casual-chest-49",
+   "name": "Business Graduation Gown",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-49.webp"
+  },
+  {
+   "id": "Casual_Chest_42",
+   "slug": "casual-chest-42",
+   "name": "Captain Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-42.webp"
+  },
+  {
+   "id": "Casual_Chest_21",
+   "slug": "casual-chest-21",
+   "name": "Cute Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-21.webp"
+  },
+  {
+   "id": "Casual_Chest_58",
+   "slug": "casual-chest-58",
+   "name": "Dino Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-58.webp"
+  },
+  {
+   "id": "Casual_Chest_1",
+   "slug": "casual-chest-1",
+   "name": "Duck Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-1.webp"
+  },
+  {
+   "id": "Chest_Easter_F",
+   "slug": "chest-easter-f",
+   "name": "Easter Female Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-easter-f.webp"
+  },
+  {
+   "id": "Chest_Easter_M",
+   "slug": "chest-easter-m",
+   "name": "Easter Male Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-easter-m.webp"
+  },
+  {
+   "id": "Casual_Chest_61",
+   "slug": "casual-chest-61",
+   "name": "Festive Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-61.webp"
+  },
+  {
+   "id": "Chest_FireFox",
+   "slug": "chest-firefox",
+   "name": "Fire Fox Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-firefox.webp"
+  },
+  {
+   "id": "Casual_Chest_51",
+   "slug": "casual-chest-51",
+   "name": "Fireman Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-51.webp"
+  },
+  {
+   "id": "Casual_Chest_64",
+   "slug": "casual-chest-64",
+   "name": "Football Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-64.webp"
+  },
+  {
+   "id": "Casual_Chest_35",
+   "slug": "casual-chest-35",
+   "name": "Formal Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-35.webp"
+  },
+  {
+   "id": "Casual_Chest_18",
+   "slug": "casual-chest-18",
+   "name": "Green Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-18.webp"
+  },
+  {
+   "id": "Casual_Chest_16",
+   "slug": "casual-chest-16",
+   "name": "Grey Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-16.webp"
+  },
+  {
+   "id": "Casual_Chest_55",
+   "slug": "casual-chest-55",
+   "name": "Hexweaver Robe",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-55.webp"
+  },
+  {
+   "id": "Chest_IceFox",
+   "slug": "chest-icefox",
+   "name": "Ice Fox Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-icefox.webp"
+  },
+  {
+   "id": "Casual_Chest_17",
+   "slug": "casual-chest-17",
+   "name": "Monster Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-17.webp"
+  },
+  {
+   "id": "Casual_Chest_26",
+   "slug": "casual-chest-26",
+   "name": "Navy Hoodie",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-26.webp"
+  },
+  {
+   "id": "Casual_Chest_60",
+   "slug": "casual-chest-60",
+   "name": "Neko Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-60.webp"
+  },
+  {
+   "id": "Casual_Chest_24",
+   "slug": "casual-chest-24",
+   "name": "Orange Hoodie",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-24.webp"
+  },
+  {
+   "id": "Casual_Chest_39",
+   "slug": "casual-chest-39",
+   "name": "Pink School Wear",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-39.webp"
+  },
+  {
+   "id": "Casual_Chest_15",
+   "slug": "casual-chest-15",
+   "name": "Pink Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-15.webp"
+  },
+  {
+   "id": "Casual_Chest_46",
+   "slug": "casual-chest-46",
+   "name": "Purple Dress Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-46.webp"
+  },
+  {
+   "id": "Casual_Chest_14",
+   "slug": "casual-chest-14",
+   "name": "Purple Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-14.webp"
+  },
+  {
+   "id": "Casual_Chest_22",
+   "slug": "casual-chest-22",
+   "name": "Purple Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-22.webp"
+  },
+  {
+   "id": "Casual_Chest_62",
+   "slug": "casual-chest-62",
+   "name": "Red Boxing Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-62.webp"
+  },
+  {
+   "id": "Casual_Chest_12",
+   "slug": "casual-chest-12",
+   "name": "Red Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-12.webp"
+  },
+  {
+   "id": "Casual_Chest_54",
+   "slug": "casual-chest-54",
+   "name": "Royal Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-54.webp"
+  },
+  {
+   "id": "Casual_Chest_43",
+   "slug": "casual-chest-43",
+   "name": "Sailor Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-43.webp"
+  },
+  {
+   "id": "Casual_Chest_50",
+   "slug": "casual-chest-50",
+   "name": "Science Graduation Gown",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-50.webp"
+  },
+  {
+   "id": "Casual_Chest_63",
+   "slug": "casual-chest-63",
+   "name": "Shark Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-63.webp"
+  },
+  {
+   "id": "Casual_Chest_37",
+   "slug": "casual-chest-37",
+   "name": "Smart Casual Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-37.webp"
+  },
+  {
+   "id": "Casual_Chest_30",
+   "slug": "casual-chest-30",
+   "name": "Stylish Bomber Jacket",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-30.webp"
+  },
+  {
+   "id": "Chest_SukebanF",
+   "slug": "chest-sukebanf",
+   "name": "Sukeban Female Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-sukebanf.webp"
+  },
+  {
+   "id": "Chest_SukebanM",
+   "slug": "chest-sukebanm",
+   "name": "Sukeban Male Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-sukebanm.webp"
+  },
+  {
+   "id": "Chest_Sunken",
+   "slug": "chest-sunken",
+   "name": "Sunken Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-sunken.webp"
+  },
+  {
+   "id": "Chest_Transparent",
+   "slug": "chest-transparent",
+   "name": "Transparent Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300
+  },
+  {
+   "id": "Chest_Urban",
+   "slug": "chest-urban",
+   "name": "Urban Top",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/chest-urban.webp"
+  },
+  {
+   "id": "Casual_Chest_27",
+   "slug": "casual-chest-27",
+   "name": "White Bomber Jacket",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-27.webp"
+  },
+  {
+   "id": "Casual_Chest_44",
+   "slug": "casual-chest-44",
+   "name": "White Dress Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-44.webp"
+  },
+  {
+   "id": "Casual_Chest_33",
+   "slug": "casual-chest-33",
+   "name": "White Jersey",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-33.webp"
+  },
+  {
+   "id": "Casual_Chest_3",
+   "slug": "casual-chest-3",
+   "name": "White T",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-3.webp"
+  },
+  {
+   "id": "Casual_Chest_56",
+   "slug": "casual-chest-56",
+   "name": "Witches Robe",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-56.webp"
+  },
+  {
+   "id": "Casual_Chest_45",
+   "slug": "casual-chest-45",
+   "name": "Yellow Dress Shirt",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-45.webp"
+  },
+  {
+   "id": "Casual_Chest_23",
+   "slug": "casual-chest-23",
+   "name": "Yellow Hoodie",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-23.webp"
+  },
+  {
+   "id": "Casual_Chest_38",
+   "slug": "casual-chest-38",
+   "name": "Yellow School Wear",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-38.webp"
+  },
+  {
+   "id": "Casual_Chest_10",
+   "slug": "casual-chest-10",
+   "name": "Yellow Sweater",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-10.webp"
+  },
+  {
+   "id": "Casual_Chest_6",
+   "slug": "casual-chest-6",
+   "name": "Yellow T",
+   "slot": "Chest",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-6.webp"
+  },
+  {
+   "id": "Chest_GS",
+   "slug": "chest-gs",
+   "name": "Gunslinger Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-gs.webp"
+  },
+  {
+   "id": "Chest_Priest_F",
+   "slug": "chest-priest-f",
+   "name": "Priest Female Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-priest-f.webp"
+  },
+  {
+   "id": "Chest_Priest_M",
+   "slug": "chest-priest-m",
+   "name": "Priest Male Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-priest-m.webp"
+  },
+  {
+   "id": "Chest_Shinobi",
+   "slug": "chest-shinobi",
+   "name": "Shinobi Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-shinobi.webp"
+  },
+  {
+   "id": "Casual_Chest_70",
+   "slug": "casual-chest-70",
+   "name": "Tuxedo Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-chest-70.webp"
+  },
+  {
+   "id": "Chest_Wizard_F",
+   "slug": "chest-wizard-f",
+   "name": "Wizard Female Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-wizard-f.webp"
+  },
+  {
+   "id": "Chest_Wizard_M",
+   "slug": "chest-wizard-m",
+   "name": "Wizard Male Top",
+   "slot": "Chest",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/chest-wizard-m.webp"
+  },
+  {
+   "id": "Chest_WhiteCatHoodie",
+   "slug": "chest-whitecathoodie",
+   "name": "White Cat Hoodie",
+   "slot": "Chest",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/chest-whitecathoodie.webp"
+  },
+  {
+   "id": "Legs_AcademyF",
+   "slug": "legs-academyf",
+   "name": "Academy Female Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-academyf.webp"
+  },
+  {
+   "id": "Legs_AcademyM",
+   "slug": "legs-academym",
+   "name": "Academy Male Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-academym.webp"
+  },
+  {
+   "id": "Casual_Legs_36",
+   "slug": "casual-legs-36",
+   "name": "Bandit Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-36.webp"
+  },
+  {
+   "id": "Casual_Legs_42",
+   "slug": "casual-legs-42",
+   "name": "Bear Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-42.webp"
+  },
+  {
+   "id": "Casual_Legs_2",
+   "slug": "casual-legs-2",
+   "name": "Black Boxers",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-2.webp"
+  },
+  {
+   "id": "Casual_Legs_20",
+   "slug": "casual-legs-20",
+   "name": "Black Cargos",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-20.webp"
+  },
+  {
+   "id": "Casual_Legs_33",
+   "slug": "casual-legs-33",
+   "name": "Black Dress",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-33.webp"
+  },
+  {
+   "id": "Casual_Legs_3",
+   "slug": "casual-legs-3",
+   "name": "Blue Boxers",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-3.webp"
+  },
+  {
+   "id": "Casual_Legs_22",
+   "slug": "casual-legs-22",
+   "name": "Blue Cargos",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-22.webp"
+  },
+  {
+   "id": "Casual_Legs_38",
+   "slug": "casual-legs-38",
+   "name": "Blue Shorts",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-38.webp"
+  },
+  {
+   "id": "Casual_Legs_18",
+   "slug": "casual-legs-18",
+   "name": "Brown Cargos",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-18.webp"
+  },
+  {
+   "id": "Casual_Legs_40",
+   "slug": "casual-legs-40",
+   "name": "Bunny Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-40.webp"
+  },
+  {
+   "id": "Casual_Legs_41",
+   "slug": "casual-legs-41",
+   "name": "Dino Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-41.webp"
+  },
+  {
+   "id": "Casual_Legs_45",
+   "slug": "casual-legs-45",
+   "name": "Diver Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-45.webp"
+  },
+  {
+   "id": "Casual_Legs_1",
+   "slug": "casual-legs-1",
+   "name": "Duck Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-1.webp"
+  },
+  {
+   "id": "Legs_Easter_F",
+   "slug": "legs-easter-f",
+   "name": "Easter Female Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-easter-f.webp"
+  },
+  {
+   "id": "Legs_Easter_M",
+   "slug": "legs-easter-m",
+   "name": "Easter Male Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-easter-m.webp"
+  },
+  {
+   "id": "Casual_Legs_44",
+   "slug": "casual-legs-44",
+   "name": "Festive Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-44.webp"
+  },
+  {
+   "id": "Legs_FireFox",
+   "slug": "legs-firefox",
+   "name": "Fire Fox Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-firefox.webp"
+  },
+  {
+   "id": "Casual_Legs_34",
+   "slug": "casual-legs-34",
+   "name": "Fireman Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-34.webp"
+  },
+  {
+   "id": "Casual_Legs_48",
+   "slug": "casual-legs-48",
+   "name": "Football Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-48.webp"
+  },
+  {
+   "id": "Casual_Legs_21",
+   "slug": "casual-legs-21",
+   "name": "Green Cargos",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-21.webp"
+  },
+  {
+   "id": "Casual_Legs_19",
+   "slug": "casual-legs-19",
+   "name": "Grey Cargos",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-19.webp"
+  },
+  {
+   "id": "Legs_IceFox",
+   "slug": "legs-icefox",
+   "name": "Ice Fox Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-icefox.webp"
+  },
+  {
+   "id": "Casual_Legs_24",
+   "slug": "casual-legs-24",
+   "name": "Light Jeans",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-24.webp"
+  },
+  {
+   "id": "Casual_Legs_10",
+   "slug": "casual-legs-10",
+   "name": "Monster Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-10.webp"
+  },
+  {
+   "id": "Casual_Legs_25",
+   "slug": "casual-legs-25",
+   "name": "Navy Jeans",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-25.webp"
+  },
+  {
+   "id": "Casual_Legs_43",
+   "slug": "casual-legs-43",
+   "name": "Neko Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-43.webp"
+  },
+  {
+   "id": "Casual_Legs_13",
+   "slug": "casual-legs-13",
+   "name": "Orange Shorts",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-13.webp"
+  },
+  {
+   "id": "Legs_Priest_M",
+   "slug": "legs-priest-m",
+   "name": "Priest Male Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-priest-m.webp"
+  },
+  {
+   "id": "Casual_Legs_32",
+   "slug": "casual-legs-32",
+   "name": "Red Dress",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-32.webp"
+  },
+  {
+   "id": "Casual_Legs_54",
+   "slug": "casual-legs-54",
+   "name": "Red Dress",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-54.webp"
+  },
+  {
+   "id": "Casual_Legs_37",
+   "slug": "casual-legs-37",
+   "name": "Royal Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-37.webp"
+  },
+  {
+   "id": "Casual_Legs_47",
+   "slug": "casual-legs-47",
+   "name": "Shark Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-47.webp"
+  },
+  {
+   "id": "Legs_SukebanF",
+   "slug": "legs-sukebanf",
+   "name": "Sukeban Female Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-sukebanf.webp"
+  },
+  {
+   "id": "Legs_SukebanM",
+   "slug": "legs-sukebanm",
+   "name": "Sukeban Male Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-sukebanm.webp"
+  },
+  {
+   "id": "Legs_Sunken",
+   "slug": "legs-sunken",
+   "name": "Sunken Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-sunken.webp"
+  },
+  {
+   "id": "Casual_Legs_15",
+   "slug": "casual-legs-15",
+   "name": "Tuxedo Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-15.webp"
+  },
+  {
+   "id": "Legs_Urban",
+   "slug": "legs-urban",
+   "name": "Urban Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-urban.webp"
+  },
+  {
+   "id": "Casual_Legs_23",
+   "slug": "casual-legs-23",
+   "name": "White Jeans",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-23.webp"
+  },
+  {
+   "id": "Casual_Legs_8",
+   "slug": "casual-legs-8",
+   "name": "White Shorts",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-8.webp"
+  },
+  {
+   "id": "Legs_Wizard_M",
+   "slug": "legs-wizard-m",
+   "name": "Wizard Male Pants",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/legs-wizard-m.webp"
+  },
+  {
+   "id": "Casual_Legs_7",
+   "slug": "casual-legs-7",
+   "name": "Yellow Boxers",
+   "slot": "Legs",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-legs-7.webp"
+  },
+  {
+   "id": "Legs_GS",
+   "slug": "legs-gs",
+   "name": "Gunslinger Pants",
+   "slot": "Legs",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/legs-gs.webp"
+  },
+  {
+   "id": "Legs_Priest_F",
+   "slug": "legs-priest-f",
+   "name": "Priest Female Pants",
+   "slot": "Legs",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/legs-priest-f.webp"
+  },
+  {
+   "id": "Legs_Shinobi",
+   "slug": "legs-shinobi",
+   "name": "Shinobi Pants",
+   "slot": "Legs",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/legs-shinobi.webp"
+  },
+  {
+   "id": "Legs_Wizard_F",
+   "slug": "legs-wizard-f",
+   "name": "Wizard Female Pants",
+   "slot": "Legs",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/legs-wizard-f.webp"
+  },
+  {
+   "id": "Casual_Hands_14",
+   "slug": "casual-hands-14",
+   "name": "Blue Boxing Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-14.webp"
+  },
+  {
+   "id": "Casual_Hands_5",
+   "slug": "casual-hands-5",
+   "name": "Elf Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-5.webp"
+  },
+  {
+   "id": "Casual_Hands_12",
+   "slug": "casual-hands-12",
+   "name": "Festive Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-12.webp"
+  },
+  {
+   "id": "Casual_Hands_15",
+   "slug": "casual-hands-15",
+   "name": "Football Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-15.webp"
+  },
+  {
+   "id": "Casual_Hands_3",
+   "slug": "casual-hands-3",
+   "name": "Hiking Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-3.webp"
+  },
+  {
+   "id": "Casual_Hands_4",
+   "slug": "casual-hands-4",
+   "name": "Leather Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-4.webp"
+  },
+  {
+   "id": "Casual_Hands_13",
+   "slug": "casual-hands-13",
+   "name": "Red Boxing Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-13.webp"
+  },
+  {
+   "id": "Hands_Transparent",
+   "slug": "hands-transparent",
+   "name": "Transparent Gloves",
+   "slot": "Gloves",
+   "tier": 1,
+   "price": 200
+  },
+  {
+   "id": "Casual_Hands_11",
+   "slug": "casual-hands-11",
+   "name": "Bear Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-11.webp"
+  },
+  {
+   "id": "Casual_Hands_8",
+   "slug": "casual-hands-8",
+   "name": "Bunny Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-8.webp"
+  },
+  {
+   "id": "Casual_Hands_9",
+   "slug": "casual-hands-9",
+   "name": "Dino Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-9.webp"
+  },
+  {
+   "id": "Casual_Hands_22",
+   "slug": "casual-hands-22",
+   "name": "Duck Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-22.webp"
+  },
+  {
+   "id": "Casual_Hands_21",
+   "slug": "casual-hands-21",
+   "name": "Monster Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-21.webp"
+  },
+  {
+   "id": "Casual_Hands_10",
+   "slug": "casual-hands-10",
+   "name": "Neko Gloves",
+   "slot": "Gloves",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-hands-10.webp"
+  },
+  {
+   "id": "Feet_Academy",
+   "slug": "feet-academy",
+   "name": "Academy Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-academy.webp"
+  },
+  {
+   "id": "Casual_Feet_27",
+   "slug": "casual-feet-27",
+   "name": "Bandit Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-27.webp"
+  },
+  {
+   "id": "Casual_Feet_18",
+   "slug": "casual-feet-18",
+   "name": "Black Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-18.webp"
+  },
+  {
+   "id": "Casual_Feet_19",
+   "slug": "casual-feet-19",
+   "name": "Black Sneakers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-19.webp"
+  },
+  {
+   "id": "Casual_Feet_1",
+   "slug": "casual-feet-1",
+   "name": "Blue Dress Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-1.webp"
+  },
+  {
+   "id": "Casual_Feet_42",
+   "slug": "casual-feet-42",
+   "name": "Blue Sneakers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-42.webp"
+  },
+  {
+   "id": "Casual_Feet_28",
+   "slug": "casual-feet-28",
+   "name": "Dress Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-28.webp"
+  },
+  {
+   "id": "Casual_Feet_12",
+   "slug": "casual-feet-12",
+   "name": "Dress Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-12.webp"
+  },
+  {
+   "id": "Casual_Feet_13",
+   "slug": "casual-feet-13",
+   "name": "Dress Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-13.webp"
+  },
+  {
+   "id": "Casual_Feet_14",
+   "slug": "casual-feet-14",
+   "name": "Dress Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-14.webp"
+  },
+  {
+   "id": "Casual_Feet_15",
+   "slug": "casual-feet-15",
+   "name": "Dress Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-15.webp"
+  },
+  {
+   "id": "Feet_Easter_F",
+   "slug": "feet-easter-f",
+   "name": "Easter Female Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-easter-f.webp"
+  },
+  {
+   "id": "Feet_Easter_M",
+   "slug": "feet-easter-m",
+   "name": "Easter Male Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-easter-m.webp"
+  },
+  {
+   "id": "Casual_Feet_34",
+   "slug": "casual-feet-34",
+   "name": "Elf Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-34.webp"
+  },
+  {
+   "id": "Casual_Feet_39",
+   "slug": "casual-feet-39",
+   "name": "Festive Slippers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-39.webp"
+  },
+  {
+   "id": "Feet_FireFox",
+   "slug": "feet-firefox",
+   "name": "Fire Fox Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-firefox.webp"
+  },
+  {
+   "id": "Casual_Feet_20",
+   "slug": "casual-feet-20",
+   "name": "Fireman Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-20.webp"
+  },
+  {
+   "id": "Casual_Feet_43",
+   "slug": "casual-feet-43",
+   "name": "Football Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-43.webp"
+  },
+  {
+   "id": "Casual_Feet_23",
+   "slug": "casual-feet-23",
+   "name": "Forest Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-23.webp"
+  },
+  {
+   "id": "Casual_Feet_2",
+   "slug": "casual-feet-2",
+   "name": "Green Sneakers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-2.webp"
+  },
+  {
+   "id": "Casual_Feet_21",
+   "slug": "casual-feet-21",
+   "name": "Grey Hightops",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-21.webp"
+  },
+  {
+   "id": "Feet_GS",
+   "slug": "feet-gs",
+   "name": "Gunslinger Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-gs.webp"
+  },
+  {
+   "id": "Casual_Feet_24",
+   "slug": "casual-feet-24",
+   "name": "Heavy Duty Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-24.webp"
+  },
+  {
+   "id": "Casual_Feet_22",
+   "slug": "casual-feet-22",
+   "name": "Hiking Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-22.webp"
+  },
+  {
+   "id": "Feet_IceFox",
+   "slug": "feet-icefox",
+   "name": "Ice Fox Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-icefox.webp"
+  },
+  {
+   "id": "Casual_Feet_4",
+   "slug": "casual-feet-4",
+   "name": "Orange Sneakers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-4.webp"
+  },
+  {
+   "id": "Casual_Feet_29",
+   "slug": "casual-feet-29",
+   "name": "Pointed Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-29.webp"
+  },
+  {
+   "id": "Casual_Feet_30",
+   "slug": "casual-feet-30",
+   "name": "Pointed Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-30.webp"
+  },
+  {
+   "id": "Feet_Priest_M",
+   "slug": "feet-priest-m",
+   "name": "Priest Male Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-priest-m.webp"
+  },
+  {
+   "id": "Casual_Feet_41",
+   "slug": "casual-feet-41",
+   "name": "Red Runners",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-41.webp"
+  },
+  {
+   "id": "Casual_Feet_25",
+   "slug": "casual-feet-25",
+   "name": "Royal Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-25.webp"
+  },
+  {
+   "id": "Casual_Feet_10",
+   "slug": "casual-feet-10",
+   "name": "School Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-10.webp"
+  },
+  {
+   "id": "Casual_Feet_11",
+   "slug": "casual-feet-11",
+   "name": "School Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-11.webp"
+  },
+  {
+   "id": "Casual_Feet_51",
+   "slug": "casual-feet-51",
+   "name": "Shark Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-51.webp"
+  },
+  {
+   "id": "Feet_Shinobi",
+   "slug": "feet-shinobi",
+   "name": "Shinobi Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-shinobi.webp"
+  },
+  {
+   "id": "Casual_Feet_48",
+   "slug": "casual-feet-48",
+   "name": "Strapped Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-48.webp"
+  },
+  {
+   "id": "Feet_SukebanF",
+   "slug": "feet-sukebanf",
+   "name": "Sukeban Female Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-sukebanf.webp"
+  },
+  {
+   "id": "Feet_SukebanM",
+   "slug": "feet-sukebanm",
+   "name": "Sukeban Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-sukebanm.webp"
+  },
+  {
+   "id": "Feet_Sunken",
+   "slug": "feet-sunken",
+   "name": "Sunken Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-sunken.webp"
+  },
+  {
+   "id": "Feet_Transparent",
+   "slug": "feet-transparent",
+   "name": "Transparent Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300
+  },
+  {
+   "id": "Casual_Feet_16",
+   "slug": "casual-feet-16",
+   "name": "Tuxedo Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-16.webp"
+  },
+  {
+   "id": "Feet_Urban",
+   "slug": "feet-urban",
+   "name": "Urban Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-urban.webp"
+  },
+  {
+   "id": "Casual_Feet_17",
+   "slug": "casual-feet-17",
+   "name": "Violet Boots",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-17.webp"
+  },
+  {
+   "id": "Feet_WhiteCatHoodie",
+   "slug": "feet-whitecathoodie",
+   "name": "White Cat Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-whitecathoodie.webp"
+  },
+  {
+   "id": "Casual_Feet_32",
+   "slug": "casual-feet-32",
+   "name": "Witch Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-32.webp"
+  },
+  {
+   "id": "Casual_Feet_33",
+   "slug": "casual-feet-33",
+   "name": "Witch Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-33.webp"
+  },
+  {
+   "id": "Feet_Wizard_F",
+   "slug": "feet-wizard-f",
+   "name": "Wizard Female Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-wizard-f.webp"
+  },
+  {
+   "id": "Feet_Wizard_M",
+   "slug": "feet-wizard-m",
+   "name": "Wizard Male Shoes",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/feet-wizard-m.webp"
+  },
+  {
+   "id": "Casual_Feet_3",
+   "slug": "casual-feet-3",
+   "name": "Yellow Sneakers",
+   "slot": "Feet",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-3.webp"
+  },
+  {
+   "id": "Casual_Feet_37",
+   "slug": "casual-feet-37",
+   "name": "Bear Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-37.webp"
+  },
+  {
+   "id": "Casual_Feet_7",
+   "slug": "casual-feet-7",
+   "name": "Black Runners",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-7.webp"
+  },
+  {
+   "id": "Casual_Feet_8",
+   "slug": "casual-feet-8",
+   "name": "Blue Runners",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-8.webp"
+  },
+  {
+   "id": "Casual_Feet_35",
+   "slug": "casual-feet-35",
+   "name": "Bunny Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-35.webp"
+  },
+  {
+   "id": "Casual_Feet_36",
+   "slug": "casual-feet-36",
+   "name": "Dino Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-36.webp"
+  },
+  {
+   "id": "Casual_Feet_40",
+   "slug": "casual-feet-40",
+   "name": "Diver Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-40.webp"
+  },
+  {
+   "id": "Casual_Feet_52",
+   "slug": "casual-feet-52",
+   "name": "Duck Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-52.webp"
+  },
+  {
+   "id": "Casual_Feet_9",
+   "slug": "casual-feet-9",
+   "name": "Hipster Hightops",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-9.webp"
+  },
+  {
+   "id": "Casual_Feet_50",
+   "slug": "casual-feet-50",
+   "name": "Monster Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-50.webp"
+  },
+  {
+   "id": "Casual_Feet_38",
+   "slug": "casual-feet-38",
+   "name": "Neko Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-38.webp"
+  },
+  {
+   "id": "Feet_Priest_F",
+   "slug": "feet-priest-f",
+   "name": "Priest Female Shoes",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/feet-priest-f.webp"
+  },
+  {
+   "id": "Casual_Feet_6",
+   "slug": "casual-feet-6",
+   "name": "Red Runners",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-6.webp"
+  },
+  {
+   "id": "Casual_Feet_5",
+   "slug": "casual-feet-5",
+   "name": "White Runners",
+   "slot": "Feet",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/casual-feet-5.webp"
+  },
+  {
+   "id": "Adventurer's Pack",
+   "slug": "adventurer-s-pack",
+   "name": "Adventurer's Pack",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Packed tight with rations, tools, and road-worn supplies.",
+   "icon": "content/game/icons/equip-V2_Back_8.webp"
+  },
+  {
+   "id": "Arcane Sigil",
+   "slug": "arcane-sigil",
+   "name": "Arcane Sigil",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Mystic wards glow beneath a polished jeweled crest.",
+   "icon": "content/game/icons/equip-V2_Back_12.webp"
+  },
+  {
+   "id": "Arrow Quiver",
+   "slug": "arrow-quiver",
+   "name": "Arrow Quiver",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Enough arrows to make confidence feel reasonable.",
+   "icon": "content/game/icons/equip-V3_Back_2.webp"
+  },
+  {
+   "id": "Blood Pendant",
+   "slug": "blood-pendant",
+   "name": "Blood Pendant",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "A spiked heart charm that pulses too warmly.",
+   "icon": "content/game/icons/equip-V2_Back_19.webp"
+  },
+  {
+   "id": "Bomb Bud",
+   "slug": "bomb-bud",
+   "name": "Bomb Bud",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Back-mounted kaboom. Unstable, flashy, probably intentional.",
+   "icon": "wiki-data/cosmetic-icons/bomb-bud.webp"
+  },
+  {
+   "id": "Caged Spirit",
+   "slug": "caged-spirit",
+   "name": "Caged Spirit",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "A spectral essence trapped within a twisted cage. Its glow flickers like a soul yearning for freedom.",
+   "icon": "content/game/icons/equip-V3_Back_17.webp"
+  },
+  {
+   "id": "Chronomancer's Codex",
+   "slug": "chronomancer-s-codex",
+   "name": "Chronomancer's Codex",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "The hourglass keeps terrible time, but the magic insists that is intentional.",
+   "icon": "wiki-data/cosmetic-icons/chronomancer-s-codex.webp"
+  },
+  {
+   "id": "Cursed Grimoire",
+   "slug": "cursed-grimoire",
+   "name": "Cursed Grimoire",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "The lock breathes faintly, which most librarians consider a serious problem.",
+   "icon": "content/game/icons/equip-V2_Back_17.webp"
+  },
+  {
+   "id": "Hunter's Roll",
+   "slug": "hunter-s-roll",
+   "name": "Hunter's Roll",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Rolled bedding says the road was planned even if everything else disagrees.",
+   "icon": "content/game/icons/equip-V3_Back_12.webp"
+  },
+  {
+   "id": "Iron Spire",
+   "slug": "iron-spire",
+   "name": "Iron Spire",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "This chained spire looks like a chapel had armor problems.",
+   "icon": "content/game/icons/equip-V3_Back_13.webp"
+  },
+  {
+   "id": "Molten Core",
+   "slug": "molten-core",
+   "name": "Molten Core",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "The cracked stone glows warmly, like a backpack pretending to be geology.",
+   "icon": "content/game/icons/equip-V2_Back_20.webp"
+  },
+  {
+   "id": "Obsidian Pillar",
+   "slug": "obsidian-pillar",
+   "name": "Obsidian Pillar",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Scrolls and charms weigh down magic that deserved supervision.",
+   "icon": "content/game/icons/equip-V3_Back_7.webp"
+  },
+  {
+   "id": "Ocular Grimoire",
+   "slug": "ocular-grimoire",
+   "name": "Ocular Grimoire",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "The eye watches readers, which makes skimming feel personally judged.",
+   "icon": "content/game/icons/equip-V3_Back_16.webp"
+  },
+  {
+   "id": "Ornamented Staff",
+   "slug": "ornamented-staff",
+   "name": "Ornamented Staff",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Colorful charms clatter proudly, announcing a shamanic entrance.",
+   "icon": "content/game/icons/equip-V3_Back_11.webp"
+  },
+  {
+   "id": "Potion Bowl",
+   "slug": "potion-bowl",
+   "name": "Potion Bowl",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Brew tools wait inside, because battle sometimes needs emergency mana soup.",
+   "icon": "wiki-data/cosmetic-icons/potion-bowl.webp"
+  },
+  {
+   "id": "Potion Gourd",
+   "slug": "potion-gourd",
+   "name": "Potion Gourd",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Glowing brew sloshes quietly, praying that nobody will drink it too fast.",
+   "icon": "content/game/icons/equip-V2_Back_6.webp"
+  },
+  {
+   "id": "Satchel of Embers",
+   "slug": "satchel-of-embers",
+   "name": "Satchel of Embers",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Alchemical firestones warm the pouch, and possibly burn your back.",
+   "icon": "content/game/icons/equip-V2_Back_3.webp"
+  },
+  {
+   "id": "Scroll Case",
+   "slug": "scroll-case",
+   "name": "Scroll Case",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Old scrolls stay sealed, safe, and less likely to complain.",
+   "icon": "content/game/icons/equip-V2_Back_7.webp"
+  },
+  {
+   "id": "Skull Lord Totem",
+   "slug": "skull-lord-totem",
+   "name": "Skull Lord Totem",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Horned skulls radiates dread before courage can gather.",
+   "icon": "content/game/icons/equip-V3_Back_6.webp"
+  },
+  {
+   "id": "Smith's Tools",
+   "slug": "smith-s-tools",
+   "name": "Smith's Tools",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Hammers and tongs wait patiently for metal to misbehave.",
+   "icon": "content/game/icons/equip-V2_Back_9.webp"
+  },
+  {
+   "id": "Spiked Familiar",
+   "slug": "spiked-familiar",
+   "name": "Spiked Familiar",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Jagged limbs orbit nearby, humming like a tiny angry chandelier.",
+   "icon": "content/game/icons/equip-V2_Back_14.webp"
+  },
+  {
+   "id": "Spined Aegis",
+   "slug": "spined-aegis",
+   "name": "Spined Aegis",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Spikes crowd the relic's face, turning protection into warning signs.",
+   "icon": "content/game/icons/equip-V3_Back_19.webp"
+  },
+  {
+   "id": "Sun Disc",
+   "slug": "sun-disc",
+   "name": "Sun Disc",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Wooden sunlight rests warm against the back, gentle but alive.",
+   "icon": "content/game/icons/equip-V3_Back_3.webp"
+  },
+  {
+   "id": "Teapot Spirit",
+   "slug": "teapot-spirit",
+   "name": "Teapot Spirit",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "A kettle-shaped charm that steams faintly. Rumored to house a mischievous spirit.",
+   "icon": "content/game/icons/equip-V3_Back_18.webp"
+  },
+  {
+   "id": "Tinkerer's Tools",
+   "slug": "tinkerer-s-tools",
+   "name": "Tinkerer's Tools",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Fixing, tinkering, and improvising all jingle loudly from this belt.",
+   "icon": "wiki-data/cosmetic-icons/tinkerer-s-tools.webp"
+  },
+  {
+   "id": "Tome of Ages",
+   "slug": "tome-of-ages",
+   "name": "Tome of Ages",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Old straps hold forgotten spells and histories that refuse retirement.",
+   "icon": "content/game/icons/equip-V2_Back_15.webp"
+  },
+  {
+   "id": "Traveler's Trunk",
+   "slug": "traveler-s-trunk",
+   "name": "Traveler's Trunk",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "A heavy wooden chest strapped for travel. Carries extra supplies or trade goods.",
+   "icon": "content/game/icons/equip-V2_Back_2.webp"
+  },
+  {
+   "id": "Treasure Chest",
+   "slug": "treasure-chest",
+   "name": "Treasure Chest",
+   "slot": "Back",
+   "tier": 0,
+   "price": 500,
+   "desc": "Golden storage promises fortune.",
+   "icon": "content/game/icons/equip-V2_Back_13.webp"
+  },
+  {
+   "id": "Back_Academy",
+   "slug": "back-academy",
+   "name": "Academy Backpack",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/back-academy.webp"
+  },
+  {
+   "id": "Casual_Back_6",
+   "slug": "casual-back-6",
+   "name": "Blue Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-6.webp"
+  },
+  {
+   "id": "Casual_Back_1",
+   "slug": "casual-back-1",
+   "name": "Brown Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-1.webp"
+  },
+  {
+   "id": "Casual_Back_4",
+   "slug": "casual-back-4",
+   "name": "Brown Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-4.webp"
+  },
+  {
+   "id": "Back_BucketofShrooms",
+   "slug": "back-bucketofshrooms",
+   "name": "Bucket of Shrooms",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/back-bucketofshrooms.webp"
+  },
+  {
+   "id": "Back_DualAxes",
+   "slug": "back-dualaxes",
+   "name": "Dual Axes",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/back-dualaxes.webp"
+  },
+  {
+   "id": "Back_FlowerPot",
+   "slug": "back-flowerpot",
+   "name": "Flower Pot",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/back-flowerpot.webp"
+  },
+  {
+   "id": "Casual_Back_3",
+   "slug": "casual-back-3",
+   "name": "Hipster Backpack",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-3.webp"
+  },
+  {
+   "id": "Casual_Back_7",
+   "slug": "casual-back-7",
+   "name": "Leather Backpack",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-7.webp"
+  },
+  {
+   "id": "Back_MinersPouch",
+   "slug": "back-minerspouch",
+   "name": "Miners Pouch",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/back-minerspouch.webp"
+  },
+  {
+   "id": "Casual_Back_16",
+   "slug": "casual-back-16",
+   "name": "Red Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-16.webp"
+  },
+  {
+   "id": "Casual_Back_2",
+   "slug": "casual-back-2",
+   "name": "School Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-2.webp"
+  },
+  {
+   "id": "Casual_Back_8",
+   "slug": "casual-back-8",
+   "name": "Stylish Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-8.webp"
+  },
+  {
+   "id": "Casual_Back_10",
+   "slug": "casual-back-10",
+   "name": "Travel Backpack",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-10.webp"
+  },
+  {
+   "id": "Casual_Back_5",
+   "slug": "casual-back-5",
+   "name": "White Bag",
+   "slot": "Back",
+   "tier": 1,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/casual-back-5.webp"
+  },
+  {
+   "id": "Back_BabyChicken",
+   "slug": "back-babychicken",
+   "name": "Baby Chicken",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-babychicken.webp"
+  },
+  {
+   "id": "Back_Balloon",
+   "slug": "back-balloon",
+   "name": "Balloon",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-balloon.webp"
+  },
+  {
+   "id": "Back_CatBoltTail",
+   "slug": "back-catbolttail",
+   "name": "Cat Bolt Tail",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-catbolttail.webp"
+  },
+  {
+   "id": "Back_HolyCape",
+   "slug": "back-holycape",
+   "name": "Holy Cape",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-holycape.webp"
+  },
+  {
+   "id": "Back_RaggedCape",
+   "slug": "back-raggedcape",
+   "name": "Ragged Cape",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-raggedcape.webp"
+  },
+  {
+   "id": "Back_TeddyBear",
+   "slug": "back-teddybear",
+   "name": "Teddy Bear",
+   "slot": "Back",
+   "tier": 2,
+   "price": 500,
+   "icon": "wiki-data/cosmetic-icons/back-teddybear.webp"
+  },
+  {
+   "id": "Back_CrystalWings",
+   "slug": "back-crystalwings",
+   "name": "Crystal Wings",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-crystalwings.webp"
+  },
+  {
+   "id": "Back_DragonWings",
+   "slug": "back-dragonwings",
+   "name": "Dragon Wings",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-dragonwings.webp"
+  },
+  {
+   "id": "Back_FairyWings",
+   "slug": "back-fairywings",
+   "name": "Fairy Wings",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-fairywings.webp"
+  },
+  {
+   "id": "Back_ForgeWings",
+   "slug": "back-forgewings",
+   "name": "Forge Wings",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-forgewings.webp"
+  },
+  {
+   "id": "Back_HourGlass",
+   "slug": "back-hourglass",
+   "name": "Hour Glass",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-hourglass.webp"
+  },
+  {
+   "id": "Back_UmbrasGrace",
+   "slug": "back-umbrasgrace",
+   "name": "Umbra's Grace",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-umbrasgrace.webp"
+  },
+  {
+   "id": "Back_VitaeGift",
+   "slug": "back-vitaegift",
+   "name": "Vitae's Gift",
+   "slot": "Back",
+   "tier": 3,
+   "price": 700,
+   "icon": "wiki-data/cosmetic-icons/back-vitaegift.webp"
+  },
+  {
+   "id": "Violet Heart Charm",
+   "slug": "violet-heart-charm",
+   "name": "Violet Heart Charm",
+   "slot": "Accessory",
+   "tier": 0,
+   "price": 200,
+   "desc": "Purple warmth reassures the wearer, like a tiny magical blanket.",
+   "icon": "wiki-data/cosmetic-icons/violet-heart-charm.webp"
+  },
+  {
+   "id": "Earring_AquaBeads",
+   "slug": "earring-aquabeads",
+   "name": "Aqua Beads",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-aquabeads.webp"
+  },
+  {
+   "id": "Watch_1",
+   "slug": "watch-1",
+   "name": "Digital Watch",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/watch-1.webp"
+  },
+  {
+   "id": "Earring_FeatherBeads",
+   "slug": "earring-featherbeads",
+   "name": "Feather Beads",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-featherbeads.webp"
+  },
+  {
+   "id": "Watch_2",
+   "slug": "watch-2",
+   "name": "Hipster Watch",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/watch-2.webp"
+  },
+  {
+   "id": "Earring_MoonlitCrystal",
+   "slug": "earring-moonlitcrystal",
+   "name": "Moonlit Crystal",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-moonlitcrystal.webp"
+  },
+  {
+   "id": "Earring_ObsidianHeart",
+   "slug": "earring-obsidianheart",
+   "name": "Obsidian Heart",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-obsidianheart.webp"
+  },
+  {
+   "id": "Earring_PearlHeart",
+   "slug": "earring-pearlheart",
+   "name": "Pearl Heart",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-pearlheart.webp"
+  },
+  {
+   "id": "Earring_Puddles",
+   "slug": "earring-puddles",
+   "name": "Puddles",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-puddles.webp"
+  },
+  {
+   "id": "Earring_SeasilkPearl",
+   "slug": "earring-seasilkpearl",
+   "name": "Seasilk Pearl",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-seasilkpearl.webp"
+  },
+  {
+   "id": "Earring_SunSigial",
+   "slug": "earring-sunsigial",
+   "name": "Sun Sigial",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-sunsigial.webp"
+  },
+  {
+   "id": "Earring_SylvanSprout",
+   "slug": "earring-sylvansprout",
+   "name": "Sylvan Sprout",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/earring-sylvansprout.webp"
+  },
+  {
+   "id": "Watch_3",
+   "slug": "watch-3",
+   "name": "Wrist Compass",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/watch-3.webp"
+  },
+  {
+   "id": "Watch_4",
+   "slug": "watch-4",
+   "name": "Wrist Hour Glass",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/watch-4.webp"
+  },
+  {
+   "id": "Watch_5",
+   "slug": "watch-5",
+   "name": "Wrist Receiver",
+   "slot": "Accessory",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/watch-5.webp"
+  },
+  {
+   "id": "Earring_CrystalEarring",
+   "slug": "earring-crystalearring",
+   "name": "Crystal Earrings",
+   "slot": "Accessory",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/earring-crystalearring.webp"
+  },
+  {
+   "id": "Earring_Earbuds",
+   "slug": "earring-earbuds",
+   "name": "Earbuds",
+   "slot": "Accessory",
+   "tier": 2,
+   "price": 300,
+   "icon": "wiki-data/cosmetic-icons/earring-earbuds.webp"
+  },
+  {
+   "id": "GatlingGun_Bonedragon",
+   "slug": "gatlinggun-bonedragon",
+   "name": "Bonedragon GatlingGun",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/gatlinggun-bonedragon.webp"
+  },
+  {
+   "id": "Launcher_Bonedragon",
+   "slug": "launcher-bonedragon",
+   "name": "Bonedragon Launcher",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/launcher-bonedragon.webp"
+  },
+  {
+   "id": "Axe_Umbra",
+   "slug": "axe-umbra",
+   "name": "Umbra Axe",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/axe-umbra.webp"
+  },
+  {
+   "id": "Axe2H_Umbra",
+   "slug": "axe2h-umbra",
+   "name": "Umbra Axe2H",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/axe2h-umbra.webp"
+  },
+  {
+   "id": "Bow_Umbra",
+   "slug": "bow-umbra",
+   "name": "Umbra Bow",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/bow-umbra.webp"
+  },
+  {
+   "id": "Dagger_Umbra",
+   "slug": "dagger-umbra",
+   "name": "Umbra Dagger",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/dagger-umbra.webp"
+  },
+  {
+   "id": "Mace_Umbra",
+   "slug": "mace-umbra",
+   "name": "Umbra Mace",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mace-umbra.webp"
+  },
+  {
+   "id": "Scythe_Umbra",
+   "slug": "scythe-umbra",
+   "name": "Umbra Scythe",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/scythe-umbra.webp"
+  },
+  {
+   "id": "Sword_Umbra",
+   "slug": "sword-umbra",
+   "name": "Umbra Sword",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/sword-umbra.webp"
+  },
+  {
+   "id": "Sword2H_Umbra",
+   "slug": "sword2h-umbra",
+   "name": "Umbra Sword2H",
+   "slot": "Mainhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/sword2h-umbra.webp"
+  },
+  {
+   "id": "Shield_Umbra",
+   "slug": "shield-umbra",
+   "name": "Umbra Shield",
+   "slot": "Offhand",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/shield-umbra.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinBlack",
+   "slug": "pet-babygriffinblack",
+   "name": "Black Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffinblack.webp"
+  },
+  {
+   "id": "Pet_DogLabBlack",
+   "slug": "pet-doglabblack",
+   "name": "Black Labrador Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-doglabblack.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinBlue",
+   "slug": "pet-babygriffinblue",
+   "name": "Blue Jay Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffinblue.webp"
+  },
+  {
+   "id": "Pet_DogBoxer",
+   "slug": "pet-dogboxer",
+   "name": "Boxer Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-dogboxer.webp"
+  },
+  {
+   "id": "Pet_CatWhiteHeart",
+   "slug": "pet-catwhiteheart",
+   "name": "British Shorthair Cat",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-catwhiteheart.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinBrown",
+   "slug": "pet-babygriffinbrown",
+   "name": "Brown Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffinbrown.webp"
+  },
+  {
+   "id": "Pet_DogLabBrown",
+   "slug": "pet-doglabbrown",
+   "name": "Brown Labrador Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-doglabbrown.webp"
+  },
+  {
+   "id": "Pet_DogBullmastif",
+   "slug": "pet-dogbullmastif",
+   "name": "Bullmastif Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-dogbullmastif.webp"
+  },
+  {
+   "id": "Pet_DogCorso",
+   "slug": "pet-dogcorso",
+   "name": "Cane Corso Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-dogcorso.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinEagle",
+   "slug": "pet-babygriffineagle",
+   "name": "Eagle Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffineagle.webp"
+  },
+  {
+   "id": "Pet_EasterBunny",
+   "slug": "pet-easterbunny",
+   "name": "Easter Bunny",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-easterbunny.webp"
+  },
+  {
+   "id": "Pet_CatGinger",
+   "slug": "pet-catginger",
+   "name": "Ginger Cat",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-catginger.webp"
+  },
+  {
+   "id": "Pet_CatGrey",
+   "slug": "pet-catgrey",
+   "name": "Grey Munchkin Cat",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-catgrey.webp"
+  },
+  {
+   "id": "Pet_HybridBunny",
+   "slug": "pet-hybridbunny",
+   "name": "Hybrid Bunny",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-hybridbunny.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinMallard",
+   "slug": "pet-babygriffinmallard",
+   "name": "Mallard Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffinmallard.webp"
+  },
+  {
+   "id": "Pet_CatBlackWhite",
+   "slug": "pet-catblackwhite",
+   "name": "Persian Cat",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-catblackwhite.webp"
+  },
+  {
+   "id": "Pet_CatWhiteGrey",
+   "slug": "pet-catwhitegrey",
+   "name": "Ragdoll Cat",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-catwhitegrey.webp"
+  },
+  {
+   "id": "Pet_DogRottie",
+   "slug": "pet-dogrottie",
+   "name": "Rottweiler Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-dogrottie.webp"
+  },
+  {
+   "id": "Pet_BabyGriffinWhite",
+   "slug": "pet-babygriffinwhite",
+   "name": "White Griffin",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-babygriffinwhite.webp"
+  },
+  {
+   "id": "Pet_DogLabWhite",
+   "slug": "pet-doglabwhite",
+   "name": "White Labrador Dog",
+   "slot": "Pet",
+   "tier": 1,
+   "price": 400,
+   "icon": "wiki-data/cosmetic-icons/pet-doglabwhite.webp"
+  },
+  {
+   "id": "Pet_Water",
+   "slug": "pet-water",
+   "name": "Aqualing",
+   "slot": "Pet",
+   "tier": 2,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/pet-water.webp"
+  },
+  {
+   "id": "Pet_Fire",
+   "slug": "pet-fire",
+   "name": "Dawnling",
+   "slot": "Pet",
+   "tier": 2,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/pet-fire.webp"
+  },
+  {
+   "id": "Pet_Earth",
+   "slug": "pet-earth",
+   "name": "Leafling",
+   "slot": "Pet",
+   "tier": 2,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/pet-earth.webp"
+  },
+  {
+   "id": "Pet_Wind",
+   "slug": "pet-wind",
+   "name": "Wildling",
+   "slot": "Pet",
+   "tier": 2,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/pet-wind.webp"
+  },
+  {
+   "id": "Mount_HorseBlack",
+   "slug": "mount-horseblack",
+   "name": "Black Horse",
+   "slot": "Mount",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mount-horseblack.webp"
+  },
+  {
+   "id": "Mount_HorsePalomino",
+   "slug": "mount-horsepalomino",
+   "name": "Palomino Horse",
+   "slot": "Mount",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mount-horsepalomino.webp"
+  },
+  {
+   "id": "Mount_HorseRoan",
+   "slug": "mount-horseroan",
+   "name": "Roan Horse",
+   "slot": "Mount",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mount-horseroan.webp"
+  },
+  {
+   "id": "Mount_HorseTobiano",
+   "slug": "mount-horsetobiano",
+   "name": "Tobiano Horse",
+   "slot": "Mount",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mount-horsetobiano.webp"
+  },
+  {
+   "id": "Mount_HorseWhite",
+   "slug": "mount-horsewhite",
+   "name": "White Horse",
+   "slot": "Mount",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/mount-horsewhite.webp"
+  },
+  {
+   "id": "Mount_GriffinBlack",
+   "slug": "mount-griffinblack",
+   "name": "Black Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffinblack.webp"
+  },
+  {
+   "id": "Mount_GriffinEmber",
+   "slug": "mount-griffinember",
+   "name": "Ember Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffinember.webp"
+  },
+  {
+   "id": "Mount_GriffinMountain",
+   "slug": "mount-griffinmountain",
+   "name": "Mountain Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffinmountain.webp"
+  },
+  {
+   "id": "Mount_GriffinEagle",
+   "slug": "mount-griffineagle",
+   "name": "Sky Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffineagle.webp"
+  },
+  {
+   "id": "Mount_GriffinSnow",
+   "slug": "mount-griffinsnow",
+   "name": "Snow Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffinsnow.webp"
+  },
+  {
+   "id": "Mount_GriffinBrown",
+   "slug": "mount-griffinbrown",
+   "name": "Wild Griffin",
+   "slot": "Mount",
+   "tier": 2,
+   "price": 800,
+   "icon": "wiki-data/cosmetic-icons/mount-griffinbrown.webp"
+  },
+  {
+   "id": "Mount_BananaDuck",
+   "slug": "mount-bananaduck",
+   "name": "Banana Duck",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/mount-bananaduck.webp"
+  },
+  {
+   "id": "Mount_FloraWhale",
+   "slug": "mount-florawhale",
+   "name": "Flora Whale",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/mount-florawhale.webp"
+  },
+  {
+   "id": "Cloud Mount",
+   "slug": "cloud-mount",
+   "name": "Flying Nimbus",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/cloud-mount.webp"
+  },
+  {
+   "id": "Mount_HorseChineseNewYear",
+   "slug": "mount-horsechinesenewyear",
+   "name": "Lunar Flame Horse",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/mount-horsechinesenewyear.webp"
+  },
+  {
+   "id": "Mount_IceFox",
+   "slug": "mount-icefox",
+   "name": "Polarian",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/mount-icefox.webp"
+  },
+  {
+   "id": "Mount_FireFox",
+   "slug": "mount-firefox",
+   "name": "Pyronyx",
+   "slot": "Mount",
+   "tier": 3,
+   "price": 1000,
+   "icon": "wiki-data/cosmetic-icons/mount-firefox.webp"
+  },
+  {
+   "id": "Emote_Flair",
+   "slug": "emote-flair",
+   "name": "Flair Emote",
+   "slot": "Emote",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/emote-flair.webp"
+  },
+  {
+   "id": "Emote_Salsa",
+   "slug": "emote-salsa",
+   "name": "Salsa Emote",
+   "slot": "Emote",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/emote-salsa.webp"
+  },
+  {
+   "id": "Emote_Samba",
+   "slug": "emote-samba",
+   "name": "Samba Emote",
+   "slot": "Emote",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/emote-samba.webp"
+  },
+  {
+   "id": "Emote_Twerk",
+   "slug": "emote-twerk",
+   "name": "Twerk Emote",
+   "slot": "Emote",
+   "tier": 1,
+   "price": 200,
+   "icon": "wiki-data/cosmetic-icons/emote-twerk.webp"
+  },
+  {
+   "id": "Stall_Oriental",
+   "slug": "stall-oriental",
+   "name": "Oriental Vending Stall",
+   "slot": "Stall",
+   "tier": 1,
+   "price": 600,
+   "icon": "wiki-data/cosmetic-icons/stall-oriental.webp"
+  }
+ ]
+}

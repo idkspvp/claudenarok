@@ -37,6 +37,8 @@ SpiritVale" and the play half had no data behind it until now.
 | `dungeons.json` | dict[1] | dungeon definitions |
 | `mechanics.json` | dict[15] | the authoritative one: 37 formulas with the engine method and constants behind each, 65 engine method names, the 10x10 element matrix, 31 archetypes, the weapon delay table, the caps, the 161-entry exp curve, the 220-key stat catalog, and the essence economy |
 | `class-roadmap.json` | dict[9] | the developers' announced class plans |
+| `cosmetics.json` | list[447] | the premium-currency cosmetic catalogue: 14 slots including Pet, Mount, Emote and Stall, with tier and price |
+| `game-info.json` | dict[2] | which client build the whole set was read from |
 
 ## The record shapes worth knowing before you read
 

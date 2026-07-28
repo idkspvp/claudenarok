@@ -326,6 +326,63 @@ padded past the cap. The first twenty steps:
 Full table: `data/spiritvale-base-exp.tsv`. The last two entries approach the
 signed 32-bit ceiling, which suggests the curve was fitted rather than authored.
 
+## Progression: what a level actually buys
+
+Neither number is in `mechanics.json`; both come from a second community wiki
+(spiritvale.info), which states them as rules rather than deriving them from the
+binary. Weight them one notch below everything above.
+
+**Attribute points, from base level:**
+
+```
+level 1          27 points pre-spent by class, NOT reallocatable
+levels 2 to 100  3 per level    297
+levels 101 to 130  2 per level   60
+levels 131 to 150  1 per level   20
+                                ----
+total earned                     404
+```
+
+The 27 reconciles with the archetype table exactly: every base class sums to 33
+across the six attributes, all six start at 1, and 33 minus 6 is 27. Two
+independent sources agreeing on a number neither derived from the other is the
+strongest confirmation available here.
+
+**The cost curve, which is the answer to the open question:**
+
+```
+value  1 to 50    1 point per step
+value 51 to 98    2 points per step
+value 99          3 points
+maximum allocation 99; anything above 99 must come from gear or artifacts
+```
+
+So raising one attribute from 1 to 99 costs `49 + 96 + 3 = 148`. Two capped
+attributes cost 296, leaving 108 of the 404 for the other four. (The source page
+says 110 rather than 108; its own cost table gives 108. The discrepancy is
+theirs and is left unresolved rather than patched.)
+
+This is Ragnarok's escalating-cost idea with a far gentler slope: the reference
+charges `(value/10) + 2` per point, reaching 11 per point near 99, where
+SpiritVale never charges more than 3. Same mechanic, one third the punishment,
+which is the same flattening as the Strength breakpoint.
+
+**Skill points, from job level:** one per job level, including the point granted
+at job level 1.
+
+```
+base class            job 1 to 50    50 points
+after advancement     job 1 to 70    70 more, spendable on EITHER tree
+career total                        120
+a class with no advanced form       70
+```
+
+And the part worth noticing: **120 points does not max a career.** Summing every
+skill's max level, a base tree costs 65 to 75 and an advanced tree 85 to 126, so
+both together run 150 to 198. Every build ends 30 to 78 points short (the
+per-class table is in `spiritvale-data-schema.md`). SpiritVale flattened its
+stat math; it did not flatten its skill budget.
+
 ## Item economy
 
 ```
@@ -380,14 +437,22 @@ Deliberately NOT recommended:
 
 ## What is still missing
 
-The gaps left after reading the full database, which is a much shorter list than
-it was before:
+One thing, and it looks genuinely unpublished:
 
-- The **status-point cost curve** and points-per-level. Job points are 1 per job
-  level (as here), but nothing states what a stat point costs.
-- The **job experience table**. Only base level is published.
-- What the **Grimoire** layer does. It appears as an equipment slot and as the
-  source of the `CastReady` buff, and nothing else describes it.
-- The **enum meanings** behind `targetType` 0 to 7, `castType` 0 to 3 and
-  `exclusiveType` 0 to 5 on a skill record. The values are published; their
-  labels are not. Do not guess them.
+- **The job experience table.** Base level's curve is published (161 entries,
+  read from `GameServerConfig.asset::ExpRequirement`); no job curve appears in
+  any of the site's 28 data files, in its page source, in its changelog, or on
+  the two other community wikis. The extraction that found the base array found
+  no second one. That is suggestive, not conclusive, and it is not enough to
+  claim job level reuses the base curve. Leave it open.
+
+Resolved since the first pass, and recorded where they belong:
+
+- The **status-point cost curve** and points-per-level: above, under
+  Progression.
+- The **Grimoire slot**: an equippable passive, 39 of them, one `GrantSkill`
+  line each. See `spiritvale-data-schema.md`.
+- **`targetType` and `castType`**: labelled, from the wiki renderer's own lookup
+  arrays. **`exclusiveType`**: still unlabelled, but its membership partitions
+  into six coherent groups and two independent fields corroborate the split.
+  Both in `spiritvale-data-schema.md`.
