@@ -97,8 +97,6 @@ Each module owns the FUNCTIONS for one system; the backing STATE stays on `Sim` 
 | `social/vale_cup.ts` + `social/vale_cup_bots.ts` | Vale Cup boarball: brackets, the one match slot, the `vcup*` seam arms (pure ball math in the `vale_cup_ball.ts`/`vale_cup_layout.ts` leaves); its tick phase draws ZERO shared rng |
 | `social/yumi.ts` | Protect Yumi 3v3/5v5 maze mode (layout leaf `yumi_maze_layout.ts`) |
 | `social/ready_check.ts` | `/ready`: the `readyChecks` primitive + the `updateReadyChecks` phase |
-| `social/card_duel.ts` | the Card Duel minigame (Card Master NPC): queue/match state, the `updateCardDuelQueue` (pairing) and `updateCardDuelDeadlines` (AFK forfeit/void) phases |
-| `instances/card_master.ts` | the Card Master NPC proximity gate (`cardMasterInRange`) `social/card_duel.ts` queues against |
 | `social/trade.ts` + `social/chat.ts` | player trade; the `chat()` router, emotes, whispers, channel membership (readout formatters in `social/chat_readouts.ts`). `Sim` keeps only a thin `chat()` delegate for the `IWorld` facade; new slash commands land in `social/chat.ts`, never on `Sim` |
 | `dev_commands.ts` | the `ctx.devCommands` gated `/dev` cheat surface: `handleDevChat` (re-exported by `social/chat.ts` for the chat router), `spawnMobsForDev`/`despawnMobsForDev` (dev-spawned mobs are torn down in `removePlayer`), `resetCombatForDev`; pinned by `tests/dev_commands.test.ts` |
 | `targeting.ts` | player target selection + raid markers |
@@ -112,6 +110,14 @@ Each module owns the FUNCTIONS for one system; the backing STATE stays on `Sim` 
 
 Enumerate the live set: `grep -rl sim_context src/sim --include='*.ts'`; every hit must be
 a row here or a Key files entry (`sim.ts`, `sim_context.ts`, `entity_roster.ts`).
+
+### `stats/`: the SpiritVale formula core
+
+`stats/` holds the reference's own combat math as pure leaves, one module per
+formula group, transcribed from `docs/design/spiritvale-engine-formulas.md` with
+the engine method named in each header. They take resolved numbers, never an
+`Entity`, and never draw rng. `recalcPlayerStats` is still the ONE place a player
+stat is derived; these are what it reads from.
 
 ### Pure leaves (no `SimContext`; a Vitest imports them directly)
 `threat.ts`/`spatial.ts`/`format_money.ts` above are the pattern; reuse or imitate one of
@@ -177,8 +183,7 @@ regen for live players, the ghost-run arm for released spirits, timers + auras f
 players too, intentionally); the per-entity loop (mob update + auras, friendly-NPC aura
 cleanse, object respawn); the `engagedPids` combat-flag pass (reads pet AND mob state
 after both update: this STAYS in the coordinator, never moves into a slice); the
-end-of-tick system block in fixed order (duels, Card Duel pairing + AFK deadlines,
-arena, trades/ready-checks, ..., through the delayed-event drain, then the
+end-of-tick system block in fixed order (duels, arena, trades/ready-checks, ..., through the delayed-event drain, then the
 deeds evaluator `updateDeeds`: zero rng, after the drain so it sees same-tick results); grid
 re-bucketing LAST, then drain + return the `SimEvent[]`. The authoritative phase list is
 `tick()` itself: most phases carry a self-naming `lap?('...')` marker (a few adjacent
