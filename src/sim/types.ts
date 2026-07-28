@@ -538,6 +538,11 @@ export interface Stats {
   dex: number;
   luk: number;
   armor: number;
+  /** Hard magic defence from equipment, the magic mirror of `armor`. Removes a
+   *  percentage of an incoming spell before soft MDEF subtracts its flat amount
+   *  (src/sim/combat/magic_defence.ts). Small by design: the reference data's
+   *  median magic-defence piece is 3 and its best is 18. */
+  mdef: number;
   // Fractions derived from PvP ratings on equipped gear. They affect hostile
   // player-vs-player damage only; PvE never reads them.
   pvpOffense: number;
@@ -643,7 +648,10 @@ export type WeaponType =
 /** Weapon level 1 to 4: the refine ladder a weapon sits on, not its item level. */
 export type WeaponLevel = 1 | 2 | 3 | 4;
 
-export type CoreStats = Pick<Stats, 'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor'>;
+export type CoreStats = Pick<
+  Stats,
+  'str' | 'agi' | 'vit' | 'int' | 'dex' | 'luk' | 'armor' | 'mdef'
+>;
 
 export interface WeaponInfo {
   min: number;

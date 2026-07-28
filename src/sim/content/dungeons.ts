@@ -59,6 +59,7 @@ export const DUNGEON_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 12,
     loot: [
+      { itemId: 'card_hollow_acolyte', chance: 0.12 },
       { copper: 110, chance: 1 },
       { itemId: 'linen_scrap', chance: 0.6 },
     ],

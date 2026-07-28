@@ -6369,6 +6369,7 @@ export const en_XA: EnTranslations = {
     },
     "stats": {
       "armor": "[Áŕɱóŕ]",
+      "mdef": "[Ɱáĝíç Ðéƒéñšé]",
       "str": "[Šţŕéñĝţĥ]",
       "agi": "[Áĝíļíţý]",
       "vit": "[Šţáɱíñá]",
@@ -9028,6 +9029,12 @@ export const en_XA: EnTranslations = {
       },
       "card_nythraxis": {
         "name": "[Ñýţĥŕáẋíš Çáŕð]"
+      },
+      "card_wyrmcult_necromancer": {
+        "name": "[Ŵýŕɱçúļţ Ñéçŕóɱáñçéŕ Çáŕð]"
+      },
+      "card_hollow_acolyte": {
+        "name": "[Ĥóļļóŵ Áçóļýţé Çáŕð]"
       },
       "conjured_water4": {
         "name": "[Çóñĵúŕéð Šþŕíñĝŵáţéŕ]"

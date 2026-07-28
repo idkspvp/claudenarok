@@ -320,7 +320,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'legs',
     quality: 'rare',
-    stats: { armor: 3 },
+    stats: { mdef: 3, armor: 3 },
     sellValue: 350,
   },
 
@@ -347,7 +347,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
     kind: 'armor',
     slot: 'ring',
     quality: 'common',
-    stats: {},
+    stats: { mdef: 3 },
     sellValue: 20,
   },
   silverthread_slippers: {

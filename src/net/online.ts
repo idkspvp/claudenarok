@@ -1113,6 +1113,7 @@ function blankEntity(id: number): Entity {
       dex: 0,
       luk: 0,
       armor: 0,
+      mdef: 0,
       pvpOffense: 0,
       pvpDefense: 0,
     },

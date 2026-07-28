@@ -4660,7 +4660,9 @@ export class Sim {
   // shifting the global draw order on any cast.
   private applyMagicDefence(damage: number, target: Entity): number {
     return applyMagicDefence(damage, {
-      mdef: 0,
+      // Equipment magic defence. This was 0 while no field existed to feed it:
+      // the formula has been correct and inert since it was written.
+      mdef: target.stats.mdef,
       int: target.stats.int,
       vit: target.stats.vit,
     });

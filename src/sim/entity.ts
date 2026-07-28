@@ -68,6 +68,7 @@ function baseEntity(id: number, pos: Vec3): Entity {
       dex: 0,
       luk: 0,
       armor: 0,
+      mdef: 0,
       pvpOffense: 0,
       pvpDefense: 0,
     },
@@ -349,6 +350,7 @@ export function recalcPlayerStats(
     dex: BASE_STAT + alloc.dex,
     luk: BASE_STAT + alloc.luk,
     armor: 0,
+    mdef: 0,
     pvpOffense: 0,
     pvpDefense: 0,
   };
@@ -385,6 +387,7 @@ export function recalcPlayerStats(
       s.int += item.stats.int ?? 0;
       s.luk += item.stats.luk ?? 0;
       s.armor += item.stats.armor ?? 0;
+      s.mdef += item.stats.mdef ?? 0;
     }
     // Instance stat bonus: additive on top of the item's own base stats, from
     // this specific instance's rolled.stats: an enchant's bonus
@@ -401,6 +404,7 @@ export function recalcPlayerStats(
       s.int += enchantStats.int ?? 0;
       s.luk += enchantStats.luk ?? 0;
       s.armor += enchantStats.armor ?? 0;
+      s.mdef += enchantStats.mdef ?? 0;
     }
     // Cards socketed into THIS copy. Same shape as the enchant fold above, and
     // deliberately after it, so a card stacks on top of an enchant rather than
@@ -418,6 +422,7 @@ export function recalcPlayerStats(
       s.dex += card.effect.stats.dex ?? 0;
       s.luk += card.effect.stats.luk ?? 0;
       s.armor += card.effect.stats.armor ?? 0;
+      s.mdef += card.effect.stats.mdef ?? 0;
     }
   }
   // One aggregate for the whole worn set, computed here so the damage path never

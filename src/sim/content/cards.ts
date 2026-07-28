@@ -137,6 +137,21 @@ export const CARDS: Record<string, CardDef> = {
     effect: { resistElement: { element: 'shadow', fraction: 0.15 } },
   },
 
+  card_wyrmcult_necromancer: {
+    id: 'card_wyrmcult_necromancer',
+    name: 'Wyrmcult Necromancer Card',
+    fits: HEADGEAR,
+    from: 'wyrmcult_necromancer',
+    effect: { stats: { mdef: 2 } },
+  },
+  card_hollow_acolyte: {
+    id: 'card_hollow_acolyte',
+    name: 'Hollow Acolyte Card',
+    fits: ARMOR,
+    from: 'hollow_acolyte',
+    effect: { stats: { mdef: 2, int: 1 } },
+  },
+
   // --- Health and mobility ---
   card_bog_bloat: {
     id: 'card_bog_bloat',

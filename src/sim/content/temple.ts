@@ -569,7 +569,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'chest',
     quality: 'rare',
-    stats: { armor: 5 },
+    stats: { mdef: 2, armor: 5 },
     sellValue: 2400,
     requiredClass: WAR,
   },

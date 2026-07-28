@@ -354,7 +354,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'back',
     quality: 'uncommon',
-    stats: { armor: 1 },
+    stats: { mdef: 2, armor: 1 },
     sellValue: 140,
   },
   mistveil_cord: {
@@ -1196,7 +1196,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 3 },
+    stats: { mdef: 1, armor: 3 },
     sellValue: 440,
   },
   duskhide_wraps: {
@@ -1605,7 +1605,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'rare',
-    stats: { armor: 3 },
+    stats: { mdef: 5, armor: 3 },
     sellValue: 320,
   },
   // --- junk (gray) ---
@@ -1777,7 +1777,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'leather',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1 },
+    stats: { mdef: 2, armor: 1 },
     sellValue: 120,
     requiredClass: ROG,
   },
@@ -1789,7 +1789,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'cloth',
     slot: 'helmet',
     quality: 'uncommon',
-    stats: { armor: 1 },
+    stats: { mdef: 2, armor: 1 },
     sellValue: 120,
     requiredClass: MAG,
   },
@@ -2003,7 +2003,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     armorType: 'mail',
     slot: 'feet',
     quality: 'uncommon',
-    stats: { armor: 1 },
+    stats: { mdef: 2, armor: 1 },
     sellValue: 130,
   },
   milepost_boots: {

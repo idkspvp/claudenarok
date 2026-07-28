@@ -509,6 +509,7 @@ export const ZONE3_MOBS: Record<string, MobTemplate> = {
     moveSpeed: 7,
     aggroRadius: 11,
     loot: [
+      { itemId: 'card_wyrmcult_necromancer', chance: 0.03 },
       { copper: 100, chance: 1 },
       { itemId: 'ritual_phylactery', chance: 0.55, questId: 'q_necromancers' },
       { itemId: 'linen_scrap', chance: 0.3 },

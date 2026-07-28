@@ -283,6 +283,13 @@
       "confidence": "high"
     },
     {
+      "itemId": "card_hollow_acolyte",
+      "name": "Hollow Acolyte Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
       "itemId": "card_korzul_the_gravewyrm",
       "name": "Korzul Card",
       "sourcePack": "claudenarok-card-frames",
@@ -418,6 +425,13 @@
     {
       "itemId": "card_wild_boar",
       "name": "Wild Boar Card",
+      "sourcePack": "claudenarok-card-frames",
+      "license": "CC0-1.0",
+      "confidence": "high"
+    },
+    {
+      "itemId": "card_wyrmcult_necromancer",
+      "name": "Wyrmcult Necromancer Card",
       "sourcePack": "claudenarok-card-frames",
       "license": "CC0-1.0",
       "confidence": "high"

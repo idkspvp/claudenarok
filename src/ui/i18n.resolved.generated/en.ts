@@ -6369,6 +6369,7 @@ export const en: EnTranslations = {
     },
     "stats": {
       "armor": "Armor",
+      "mdef": "Magic Defense",
       "str": "Strength",
       "agi": "Agility",
       "vit": "Stamina",
@@ -9028,6 +9029,12 @@ export const en: EnTranslations = {
       },
       "card_nythraxis": {
         "name": "Nythraxis Card"
+      },
+      "card_wyrmcult_necromancer": {
+        "name": "Wyrmcult Necromancer Card"
+      },
+      "card_hollow_acolyte": {
+        "name": "Hollow Acolyte Card"
       },
       "conjured_water4": {
         "name": "Conjured Springwater"
