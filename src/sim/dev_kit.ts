@@ -41,12 +41,10 @@ export const DEV_KIT_EXCLUDED_DUNGEON = 'gravewyrm_sanctum';
 // two-handers and shields resolve together rather than fighting each other.
 const KIT_SLOTS: readonly EquipSlot[] = [
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
-  'waist',
   'legs',
-  'gloves',
   'feet',
   'ring1',
   'ring2',

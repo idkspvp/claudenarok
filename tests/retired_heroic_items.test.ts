@@ -39,7 +39,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'legs',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 315, str: 11, vit: 9 },
+    stats: { armor: 4, str: 11, vit: 9 },
     sellValue: 13_000,
     requiredClass: ['swordman'],
   },
@@ -51,7 +51,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 172, agi: 12, vit: 10 },
+    stats: { armor: 5, agi: 12, vit: 10 },
     sellValue: 14_000,
     requiredClass: ['thief', 'archer'],
   },
@@ -63,7 +63,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'chest',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 335, int: 12, luk: 10 },
+    stats: { armor: 6, int: 12, luk: 10 },
     sellValue: 14_000,
     requiredClass: [],
   },
@@ -75,7 +75,7 @@ const EXPECTED_RETIRED_ITEMS: Record<RetiredId, ItemDef> = {
     slot: 'helmet',
     quality: 'epic',
     requiredLevel: 20,
-    stats: { armor: 76, int: 10, luk: 8 },
+    stats: { armor: 4, int: 10, luk: 8 },
     sellValue: 12_000,
     requiredClass: ['mage', 'acolyte'],
   },
@@ -160,10 +160,14 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     expect(equipped.entity.equippedItems).toEqual({ chest: 'scourgehide_carapace' });
     expect(equipped.entity.stats.agi).toBe(unequipped.entity.stats.agi + 12);
     expect(equipped.entity.stats.vit).toBe(unequipped.entity.stats.vit + 10);
-    // 172 from the piece itself and nothing else. Neither attribute it carries adds
+    // The piece's own defence and nothing else. Neither attribute it carries adds
     // armour any more: Agility never did (it buys evasion), and D1 took the
-    // Vitality term out because Vitality already buys soft DEF.
-    expect(equipped.entity.stats.armor).toBe(unequipped.entity.stats.armor + 172);
+    // Vitality term out because Vitality already buys soft DEF. Read off the
+    // record, so a defence rebalance cannot red a case about rehydrating a
+    // retired item id.
+    expect(equipped.entity.stats.armor).toBe(
+      unequipped.entity.stats.armor + (ITEMS.scourgehide_carapace.stats?.armor ?? 0),
+    );
     // The 10 Vitality is worth 10% of the pool rather than a flat 100 HP. Read the
     // unmultiplied pool off the class def: maxHp is already rounded, and rounding
     // it twice lands a point off.

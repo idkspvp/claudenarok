@@ -57,7 +57,7 @@ describe('Old Cragmaw - rare elite ridge beast (Thornpeak Heights)', () => {
     expect(ITEMS.ridge_stalker_pelt.kind).toBe('quest');
   });
 
-  it('offers a chance at a waist piece that pairs with the prowlboots', () => {
+  it('offers a chance at an accessory that pairs with the prowlboots', () => {
     const m = MOBS.old_cragmaw;
     const drop = m.loot.find((l) => l.itemId === 'cragmaw_huntcord');
     expect(drop).toBeTruthy();
@@ -65,16 +65,17 @@ describe('Old Cragmaw - rare elite ridge beast (Thornpeak Heights)', () => {
     expect(drop?.chance).toBeLessThan(1); // rarer than the guaranteed trophy
 
     const belt = ITEMS.cragmaw_huntcord;
-    expect(belt).toMatchObject({ kind: 'armor', slot: 'waist', quality: 'rare' });
-    // Agility-leaning leather, like the boots; waist armor sits under the feet slot.
+    expect(belt).toMatchObject({ kind: 'armor', slot: 'ring', quality: 'rare' });
+    // Agility-leaning, like the boots. The belt is an ACCESSORY since the
+    // equipment rework, so it defends nothing at all rather than merely less
+    // than the boots: that is the reference game's rule for the slot, and it is
+    // what makes an accessory a bonus rather than a second piece of armour.
     const beltAgility = belt.stats?.agi;
-    const beltArmor = belt.stats?.armor;
     const bootsArmor = ITEMS.cragmaw_prowlboots.stats?.armor;
     expect(beltAgility).toBeDefined();
-    expect(beltArmor).toBeDefined();
-    expect(bootsArmor).toBeDefined();
     expect(beltAgility ?? 0).toBeGreaterThan(0);
-    expect(beltArmor ?? 0).toBeLessThan(bootsArmor ?? 0);
+    expect(belt.stats?.armor ?? 0).toBe(0);
+    expect(bootsArmor ?? 0).toBeGreaterThan(0);
   });
 
   it('has exactly one lone overworld spawn placed on the Thornpeak ridge', () => {

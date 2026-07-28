@@ -142,8 +142,8 @@ export function enchantTier(enchantId: string): EnchantTier {
 const SLOT_SORT_ORDER: readonly string[] = [
   'mainhand',
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
   'waist',
   'legs',

@@ -35,7 +35,7 @@ describe('v0.26 two-handed greatblade itemization', () => {
       slot: 'offhand',
       shield: true,
       blockValue: 14,
-      stats: { armor: 112, vit: 2 },
+      stats: { armor: 1, vit: 2 },
       requiredClass: ['swordman'],
     });
     // The Paladin and the Shaman shared this shield and were cut in D1.

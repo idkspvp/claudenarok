@@ -78,7 +78,7 @@ describe('rare+ disenchant with NO typed material (jewelry arm, decisive)', () =
       name: 'QA Epic Amulet',
       kind: 'armor',
       quality: 'epic',
-      slot: 'neck',
+      slot: 'face',
       sellValue: 10,
     } as unknown as ItemDef;
     // The mapper's jewelry claim, pinned without depending on the catalog

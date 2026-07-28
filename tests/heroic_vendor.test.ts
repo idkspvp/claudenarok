@@ -44,7 +44,7 @@ describe('heroic vendor stock: item-level and budget pins', () => {
       expect(item, offer.itemId).toBeTruthy();
       expect(item.quality, offer.itemId).toBe('epic');
       expect(item.requiredLevel, offer.itemId).toBe(20);
-      expect(['ring', 'neck']).toContain(item.slot);
+      expect(['ring', 'face']).toContain(item.slot);
       expect(offer.marks).toBeGreaterThan(0);
       expect(itemLevel(item), offer.itemId).toBe(26);
     }

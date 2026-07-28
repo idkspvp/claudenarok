@@ -9,7 +9,7 @@ describe('armor type catalog coverage', () => {
     // equipment_rules falls through the armorType gate).
     const missing = Object.values(ITEMS)
       .filter((item) => item.kind === 'armor')
-      .filter((item) => item.slot !== 'neck' && item.slot !== 'ring')
+      .filter((item) => item.slot !== 'face' && item.slot !== 'ring')
       .filter((item) => !armorTypeForItem(item))
       .map((item) => item.id);
 
@@ -18,7 +18,7 @@ describe('armor type catalog coverage', () => {
 
   it('jewelry carries no armor class', () => {
     const jewelry = Object.values(ITEMS).filter(
-      (item) => item.slot === 'neck' || item.slot === 'ring',
+      (item) => item.slot === 'face' || item.slot === 'ring',
     );
     expect(jewelry.length).toBeGreaterThan(0);
     for (const item of jewelry) expect(armorTypeForItem(item), item.id).toBeNull();

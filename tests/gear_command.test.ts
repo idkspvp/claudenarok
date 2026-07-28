@@ -20,16 +20,17 @@ describe('/gear command', () => {
     sim.chat('/gear', a);
     const text = errorText(sim.tick());
     expect(text).toBeDefined();
-    expect(text).toMatch(/^Equipped \(3\/9\):/);
+    expect(text).toMatch(/^Equipped \(3\/10\):/);
     expect(text).toContain('Main Hand:');
     expect(text).toContain('Off Hand:');
     expect(text).toContain('Chest:');
     expect(text).toContain('Helmet: (empty)');
-    expect(text).toContain('Shoulder: (empty)');
-    expect(text).toContain('Waist: (empty)');
+    expect(text).toContain('Face: (empty)');
+    expect(text).toContain('Back: (empty)');
     expect(text).toContain('Legs: (empty)');
-    expect(text).toContain('Gloves: (empty)');
     expect(text).toContain('Feet: (empty)');
+    expect(text).toContain('Accessory 1: (empty)');
+    expect(text).toContain('Accessory 2: (empty)');
     // fixed slot order: main hand before off hand before chest before legs before feet
     expect(text!.indexOf('Main Hand')).toBeLessThan(text!.indexOf('Off Hand'));
     expect(text!.indexOf('Off Hand')).toBeLessThan(text!.indexOf('Chest'));
@@ -45,17 +46,18 @@ describe('/gear command', () => {
       mainhand: 'worn_sword',
       offhand: 'eastbrook_buckler',
       helmet: 'cryptbone_helm',
-      shoulder: 'cryptbone_pauldrons',
+      back: 'cryptbone_pauldrons',
       chest: 'recruit_tunic',
-      waist: 'mistveil_cord',
       legs: 'quilted_trousers',
-      gloves: 'mistveil_grips',
+      ring1: 'mistveil_cord',
+      ring2: 'mistveil_grips',
       feet: 'oiled_boots',
+      face: 'swiftfang_talisman',
     };
     sim.tick();
     sim.chat('/gear', a);
     const text = errorText(sim.tick());
-    expect(text).toMatch(/^Equipped \(9\/9\):/);
+    expect(text).toMatch(/^Equipped \(10\/10\):/);
     expect(text).toContain('Pitted Shortsword');
     expect(text).toContain('Eastbrook Buckler');
     expect(text).toContain('Quilted Trousers');

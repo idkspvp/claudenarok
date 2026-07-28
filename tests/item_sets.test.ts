@@ -241,9 +241,9 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     // shoulder carry. Drop the `+ setEff.hitRating` term and this reds.
     const four = statsFor('swordman', 20, {
       helmet: 'crownforged_dreadhelm',
-      shoulder: 'crownforged_warspaulders',
-      gloves: 'crownforged_gauntlets',
-      waist: 'crownforged_girdle',
+      back: 'crownforged_warspaulders',
+      ring1: 'crownforged_gauntlets',
+      ring2: 'crownforged_girdle',
     });
     expect(four.hitRating).toBe(20 + 20 + 60);
   });
@@ -252,7 +252,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     const base = statsFor('thief', 20, {});
     const two = statsFor('thief', 20, {
       helmet: 'nighttalon_crown',
-      shoulder: 'nighttalon_shoulderguards',
+      back: 'nighttalon_shoulderguards',
     });
     // The only set bonus at 2pc is +40 AP on top of the status formula. AGI feeds
     // evasion now, not melee ATK, so it is deliberately absent from the subtraction.
@@ -269,9 +269,9 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     // live item defs so the heroic-variant stat rescale stays the source of truth.
     const worn = {
       helmet: 'heroic_soulflame_cowl', // heroic helmet mixed with normal pieces
-      shoulder: 'soulflame_mantle',
-      gloves: 'soulflame_gloves',
-      waist: 'soulflame_cord',
+      back: 'soulflame_mantle',
+      ring1: 'soulflame_gloves',
+      ring2: 'soulflame_cord',
     };
     // Level 30, not 20: the heroic cowl derives a level-27 requirement from its
     // heroic-dungeon source, and below that recalc treats it as inert. That gate
@@ -311,21 +311,23 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
     const mageBase = statsFor('mage', 20, {});
     const soulflame = statsFor('mage', 20, {
       helmet: 'soulflame_cowl',
-      shoulder: 'soulflame_mantle',
-      gloves: 'soulflame_gloves',
+      back: 'soulflame_mantle',
+      ring1: 'soulflame_gloves',
     });
     expect(soulflame.castPushbackReduction).toBe(1);
-    expect(soulflame.stats.int).toBe(mageBase.stats.int + 11 + 9 + 8 + 15);
+    // The gloves lost two Intellect when they became an accessory and picked up
+    // the smaller accessory budget; the helm and the mantle are unchanged.
+    expect(soulflame.stats.int).toBe(mageBase.stats.int + 11 + 9 + 6 + 15);
     expect(soulflame.stats.luk).toBe(mageBase.stats.luk + 15);
 
     const shamanBase = statsFor('acolyte', 20, {});
     const stormcallers = statsFor('acolyte', 20, {
       helmet: 'stormcallers_crown',
-      shoulder: 'stormcallers_spaulders',
-      gloves: 'stormcallers_handguards',
+      back: 'stormcallers_spaulders',
+      ring1: 'stormcallers_handguards',
     });
     expect(stormcallers.castPushbackReduction).toBe(1);
-    expect(stormcallers.stats.int).toBe(shamanBase.stats.int + 10 + 8 + 8 + 15);
+    expect(stormcallers.stats.int).toBe(shamanBase.stats.int + 10 + 8 + 6 + 15);
     expect(stormcallers.stats.luk).toBe(shamanBase.stats.luk + 15);
   });
 });

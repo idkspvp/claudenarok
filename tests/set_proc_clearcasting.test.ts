@@ -18,7 +18,7 @@ const mournweaveEquipment = {
   chest: 'necromancers_starshroud',
   feet: 'necromancers_soulsteps',
   legs: 'necromancers_legwraps',
-  shoulder: 'necromancers_soulspire_mantle',
+  back: 'necromancers_soulspire_mantle',
 };
 
 function equipMournweave(sim: Sim): Entity {

@@ -53,14 +53,12 @@ export const SLOT_STAT_MULT: Record<ItemSlot, number> = {
   chest: 1.0,
   legs: 0.9,
   helmet: 0.85,
-  shoulder: 0.75,
-  waist: 0.7,
-  gloves: 0.7,
+  back: 0.75,
   feet: 0.65,
   // Jewelry: small slots with no armor contribution. Items declare 'ring'
   // (never a concrete ring1/ring2 key); the concrete keys carry the same
   // weight so budget math is stable whichever form a caller passes.
-  neck: 0.65,
+  face: 0.65,
   ring: 0.6,
   ring1: 0.6,
   ring2: 0.6,

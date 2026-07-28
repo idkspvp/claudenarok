@@ -167,16 +167,7 @@ describe('fresh-20 item pool', () => {
 describe('kit construction', () => {
   it('builds a kit for every one of the 27 specs, with no empty armor slot', () => {
     // neck/ring1/ring2 are deliberately NOT required: see the jewelry-gap test below.
-    const required = [
-      'helmet',
-      'shoulder',
-      'chest',
-      'waist',
-      'legs',
-      'gloves',
-      'feet',
-      'mainhand',
-    ] as const;
+    const required = ['helmet', 'back', 'chest', 'legs', 'feet', 'mainhand'] as const;
     for (const { cls, spec } of everySpec()) {
       const kit = buildDevKit(cls, spec);
       expect(kit, `${cls}/${spec}`).not.toBeNull();
@@ -186,20 +177,21 @@ describe('kit construction', () => {
     }
   });
 
-  it('leaves neck and rings empty, because no fresh-20 jewelry exists', () => {
-    // Not a filter bug: every neck/ring in the game is either Heroic-badge-vendor
-    // stock or source level 22+, so a genuinely fresh 20 wears none. Documented as a
-    // test so the day content adds fresh-20 jewelry, this reds and the presets get
-    // revisited rather than silently continuing to ship three empty slots.
+  it('fills the accessory slots, now that fresh-20 accessories exist', () => {
+    // This case used to assert the OPPOSITE, and said so: every neck and ring in
+    // the game was vendor stock or source level 22+, so a genuinely fresh 20 wore
+    // none, and it was written to red the day content added some. The slot rework
+    // added some. Every belt and glove became an accessory, which put a pile of
+    // level-appropriate options in the pool, so the presets wear them now.
     const jewelry = Object.values(ITEMS).filter(
-      (item) => item.slot === 'neck' || item.slot === 'ring',
+      (item) => item.slot === 'face' || item.slot === 'ring',
     );
     expect(jewelry.length).toBeGreaterThan(0);
     for (const cls of ALL_CLASSES) {
       expect(
-        jewelry.filter((item) => isFreshTwentyItem(cls, item)),
-        `${cls} has fresh-20 jewelry now: revisit the kit slots`,
-      ).toEqual([]);
+        jewelry.filter((item) => isFreshTwentyItem(cls, item)).length,
+        `${cls} fresh-20 accessories`,
+      ).toBeGreaterThan(0);
     }
   });
 

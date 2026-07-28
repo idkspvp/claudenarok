@@ -24,12 +24,10 @@ import { spreadAllocation } from './helpers/alloc';
 const SLOT_PRICES: Record<string, number> = {
   mainhand: 800,
   helmet: 500,
-  neck: 225,
-  shoulder: 400,
+  face: 225,
+  back: 400,
   chest: 700,
-  waist: 250,
   legs: 600,
-  gloves: 300,
   feet: 300,
   ring: 150,
 };
@@ -37,12 +35,10 @@ const SLOT_PRICES: Record<string, number> = {
 const SUPPORTED_ITEM_SLOTS = [
   'mainhand',
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
-  'waist',
   'legs',
-  'gloves',
   'feet',
   'ring',
 ] as const;
@@ -91,7 +87,7 @@ interface Profile {
   name: string;
   classes: readonly PlayerClass[];
   armor: readonly string[];
-  neck: string;
+  face: string;
   rings: readonly [string, string];
   weapon: string;
 }
@@ -102,7 +98,7 @@ const PROFILES: readonly Profile[] = [
     // The Paladin and the Shaman shared this line and were cut in D1.
     classes: ['swordman'],
     armor: FURYFORGED,
-    neck: 'final_oath_medallion',
+    face: 'final_oath_medallion',
     rings: ['iron_vow_band', 'unbroken_circle'],
     weapon: 'final_argument_greatblade',
   },
@@ -110,7 +106,7 @@ const PROFILES: readonly Profile[] = [
     name: 'Agility leather',
     classes: ['thief', 'archer'],
     armor: ASHSTALKER,
-    neck: 'razorwind_torque',
+    face: 'razorwind_torque',
     rings: ['fleetblood_band', 'last_step_signet'],
     weapon: 'first_blood_razor',
   },
@@ -120,7 +116,7 @@ const PROFILES: readonly Profile[] = [
     // the line survives as items with no profile class left to check.
     classes: [],
     armor: STORMBOUND,
-    neck: 'cinder_sigil_pendant',
+    face: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],
     weapon: 'emberglass_warstaff',
   },
@@ -128,27 +124,36 @@ const PROFILES: readonly Profile[] = [
     name: 'caster cloth',
     classes: ['mage', 'acolyte'],
     armor: CINDERWEAVE,
-    neck: 'cinder_sigil_pendant',
+    face: 'cinder_sigil_pendant',
     rings: ['ashen_focus_ring', 'spellbreakers_seal'],
     weapon: 'emberglass_warstaff',
   },
 ];
 
+// The belt and the gloves left the paperdoll and became accessories, and a
+// character wears only two of those. The line still SELLS them, as alternative
+// accessories a player may take instead of a ring, but a worn profile is the
+// nine equipment slots: weapon, five armour pieces, a face, and two accessories.
+const WORN_ARMOR_INDEXES = [0, 1, 2, 4, 6] as const;
+
 function profileItemIds(profile: Profile): string[] {
-  return [profile.weapon, ...profile.armor, profile.neck, ...profile.rings];
+  return [
+    profile.weapon,
+    ...WORN_ARMOR_INDEXES.map((i) => profile.armor[i]),
+    profile.face,
+    ...profile.rings,
+  ];
 }
 
 function equipmentForProfile(profile: Profile): Partial<Record<EquipSlot, string>> {
   return {
     mainhand: profile.weapon,
     helmet: profile.armor[0],
-    shoulder: profile.armor[1],
+    back: profile.armor[1],
     chest: profile.armor[2],
-    waist: profile.armor[3],
     legs: profile.armor[4],
-    gloves: profile.armor[5],
     feet: profile.armor[6],
-    neck: profile.neck,
+    face: profile.face,
     ring1: profile.rings[0],
     ring2: profile.rings[1],
   };
@@ -176,9 +181,11 @@ describe('FURY WARFARE stock', () => {
     expect([...slots].sort()).toEqual([...SUPPORTED_ITEM_SLOTS].sort());
 
     const rings = FURY_STOCK.filter((id) => ITEMS[id].slot === 'ring');
-    const necks = FURY_STOCK.filter((id) => ITEMS[id].slot === 'neck');
+    const necks = FURY_STOCK.filter((id) => ITEMS[id].slot === 'face');
     const weapons = FURY_STOCK.filter((id) => ITEMS[id].slot === 'mainhand');
-    expect(rings).toHaveLength(6);
+    // Six rings, plus the three belts and three pairs of gloves the slot rework
+    // turned into accessories: twelve accessory offers for two worn slots.
+    expect(rings).toHaveLength(14);
     expect(necks).toHaveLength(3);
     expect(weapons).toHaveLength(3);
     for (const profile of PROFILES) expect(new Set(profile.rings).size, profile.name).toBe(2);
@@ -216,7 +223,7 @@ describe('FURY WARFARE item budgets', () => {
     // weakest PvE badge piece of the same slot: a PvP jewelry piece is never a PvE
     // upgrade over the badge vendor's gear.
     const { HEROIC_VENDOR_ITEMS } = await import('../src/sim/content/heroic_vendor');
-    for (const slot of ['ring', 'neck'] as const) {
+    for (const slot of ['ring', 'face'] as const) {
       const pvp = FURY_STOCK.map((id) => ITEMS[id]).filter((i) => i.slot === slot);
       const badge = Object.values(HEROIC_VENDOR_ITEMS).filter((i) => i.slot === slot);
       expect(pvp.length, slot).toBeGreaterThan(0);
@@ -248,7 +255,7 @@ describe('FURY WARFARE item budgets', () => {
     }
   });
 
-  it('derives 16.8 percent offense and defense by equipping a complete profile', () => {
+  it('derives its full-set offense and defense by equipping a complete profile', () => {
     for (const profile of PROFILES) {
       // The caster-mail line has no wearer left (its two classes were cut in D1),
       // so there is nobody to equip it on; its budget is still pinned by the
@@ -265,8 +272,12 @@ describe('FURY WARFARE item budgets', () => {
         {},
         spreadAllocation(player.level),
       );
-      expect(player.stats.pvpOffense, `${profile.name} offense`).toBeCloseTo(0.168, 10);
-      expect(player.stats.pvpDefense, `${profile.name} defense`).toBeCloseTo(0.168, 10);
+      // 14%, down from the 16.8% a ten-slot paperdoll produced. Each piece still
+      // carries exactly its slot's full budget as WARFARE rating (pinned per
+      // item above); the total is what that rule yields over the eight slots a
+      // character now wears, so this moves whenever the slot set does.
+      expect(player.stats.pvpOffense, `${profile.name} offense`).toBeCloseTo(0.14, 10);
+      expect(player.stats.pvpDefense, `${profile.name} defense`).toBeCloseTo(0.14, 10);
     }
   });
 

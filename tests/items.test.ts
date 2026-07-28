@@ -69,17 +69,20 @@ describe('items.equipItem / unequipItem', () => {
 
     items.equipItem(ctx, 'cryptbone_helm', pid); // empty slot: no swap
     expect(meta.equipment.helmet).toBe('cryptbone_helm');
-    const armorWithCrypt = (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid)!
-      .stats.armor;
+    const statsOf = () =>
+      (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid)!.stats;
+    const vitWithCrypt = statsOf().vit;
 
     items.equipItem(ctx, 'roadwardens_helm', pid); // same slot: SWAP returns the old helm
     expect(meta.equipment.helmet).toBe('roadwardens_helm');
     expect(sim.countItem('cryptbone_helm', pid)).toBe(1); // returned to bags (silent add)
     expect(sim.countItem('roadwardens_helm', pid)).toBe(0);
-    // recalc ran: armor reflects the new (weaker) helmet, not the old one
-    const armorWithRoad = (sim as unknown as { entities: Map<number, Entity> }).entities.get(pid)!
-      .stats.armor;
-    expect(armorWithRoad).not.toBe(armorWithCrypt);
+    // recalc ran: the derived block reflects the new (weaker) helmet, not the old
+    // one. Read through Vitality rather than armour: on Ragnarok's percentage
+    // defence two low-level helms legitimately share a defence value, so armour
+    // stopped being able to tell the two apart.
+    expect(statsOf().vit).not.toBe(vitWithCrypt);
+    expect(statsOf().vit).toBe(vitWithCrypt - 1);
   });
 
   it('unequips a piece back to the bags, empties the slot, and is a no-op for an empty slot', () => {

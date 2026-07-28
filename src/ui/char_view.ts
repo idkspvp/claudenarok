@@ -36,20 +36,13 @@ export interface PaperdollView {
 // fixed-width model stage; the inspect window inherits it via buildPaperdollView.
 export const PAPERDOLL_LEFT_SLOTS: readonly EquipSlot[] = [
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
   'mainhand',
   'offhand',
 ];
-export const PAPERDOLL_RIGHT_SLOTS: readonly EquipSlot[] = [
-  'gloves',
-  'waist',
-  'legs',
-  'feet',
-  'ring1',
-  'ring2',
-];
+export const PAPERDOLL_RIGHT_SLOTS: readonly EquipSlot[] = ['legs', 'feet', 'ring1', 'ring2'];
 
 /**
  * Build the paperdoll view from the player's equipment and the item table. A

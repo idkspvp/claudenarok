@@ -42,10 +42,10 @@ const barrowlordEquipment = {
   helmet: 'deathlords_dread_visage',
 };
 const direfangEquipment = {
-  gloves: 'nighttalon_grips',
-  waist: 'nighttalon_waistband',
+  ring1: 'nighttalon_grips',
+  ring2: 'nighttalon_waistband',
   helmet: 'nighttalon_crown',
-  shoulder: 'nighttalon_shoulderguards',
+  back: 'nighttalon_shoulderguards',
 };
 
 function equipSet(sim: Sim, equipment: Record<string, string>): AnyEntity {
@@ -152,10 +152,10 @@ describe('weaponCrit set procs from real swings', () => {
   it('the Bonesplinter bleed stacks to its cap, scales, refreshes, and ticks', () => {
     const sim = new Sim({ seed: 35, playerClass: 'swordman', autoEquip: false }) as AnySim;
     const p = equipSet(sim, {
-      gloves: 'crownforged_gauntlets',
-      waist: 'crownforged_girdle',
+      ring1: 'crownforged_gauntlets',
+      ring2: 'crownforged_girdle',
       helmet: 'crownforged_dreadhelm',
-      shoulder: 'crownforged_warspaulders',
+      back: 'crownforged_warspaulders',
     });
     const mob = spawnTarget(sim, p);
     p.gm = true;

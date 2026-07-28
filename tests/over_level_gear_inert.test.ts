@@ -12,7 +12,8 @@ import { spreadAllocation } from './helpers/alloc';
 
 type Equip = Parameters<typeof characterDerivedStats>[2];
 
-// knight_commanders_greaves: rare cloth legs, stats { armor: 95, vit: 4 }. Its
+// knight_commanders_greaves: rare cloth legs, stats { armor: 3, vit: 4 } on the
+// Ragnarok defence scale, where armour is a percentage rather than a pool. Its
 // required level used to derive from a level-13 quest reward; with quests gone it
 // falls back to the `rare` quality band at 12.
 const LEGS = 'knight_commanders_greaves';
@@ -45,9 +46,11 @@ describe('over-level gear is inert', () => {
   it('reactivates once the wearer reaches the required level', () => {
     const active = characterDerivedStats('swordman', LEGS_REQ, { legs: LEGS } as Equip);
     const bare = characterDerivedStats('swordman', LEGS_REQ, {} as Equip);
-    // 95 from the piece and nothing else: D1 took the Vitality-to-armour term out,
-    // so the four Vitality the piece carries no longer add eight armour on top.
-    expect(active.stats.armor).toBe(bare.stats.armor + 95);
+    // The piece's own defence and nothing else: D1 took the Vitality-to-armour
+    // term out, so the four Vitality it carries no longer add armour on top.
+    // Read off the record rather than transcribed, so a defence rebalance does
+    // not red a case about the level gate.
+    expect(active.stats.armor).toBe(bare.stats.armor + ITEMS[LEGS].stats!.armor!);
     expect(active.stats.vit).toBe(bare.stats.vit + 4);
     expect(active.maxHp).toBeGreaterThan(bare.maxHp);
   });

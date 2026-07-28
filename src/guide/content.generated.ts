@@ -7197,7 +7197,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_neck_spirit",
       "name": "Enchant Necklace - Spirit",
-      "slot": "neck",
+      "slot": "face",
       "tier": "base",
       "reagents": [
         {
@@ -7215,7 +7215,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_shoulder_agility",
       "name": "Enchant Shoulders - Agility",
-      "slot": "shoulder",
+      "slot": "back",
       "tier": "base",
       "reagents": [
         {
@@ -7255,7 +7255,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_waist_stamina",
       "name": "Enchant Belt - Stamina",
-      "slot": "waist",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7295,7 +7295,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_gloves_agility",
       "name": "Enchant Gloves - Agility",
-      "slot": "gloves",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7313,7 +7313,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_gloves_intellect",
       "name": "Enchant Gloves - Spellpower",
-      "slot": "gloves",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7429,7 +7429,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_neck_intellect",
       "name": "Enchant Necklace - Intellect",
-      "slot": "neck",
+      "slot": "face",
       "tier": "base",
       "reagents": [
         {
@@ -7447,7 +7447,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_neck_agility",
       "name": "Enchant Necklace - Agility",
-      "slot": "neck",
+      "slot": "face",
       "tier": "base",
       "reagents": [
         {
@@ -7465,7 +7465,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_shoulder_strength",
       "name": "Enchant Shoulders - Strength",
-      "slot": "shoulder",
+      "slot": "back",
       "tier": "base",
       "reagents": [
         {
@@ -7483,7 +7483,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_shoulder_intellect",
       "name": "Enchant Shoulders - Intellect",
-      "slot": "shoulder",
+      "slot": "back",
       "tier": "base",
       "reagents": [
         {
@@ -7545,7 +7545,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_waist_strength",
       "name": "Enchant Belt - Strength",
-      "slot": "waist",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7563,7 +7563,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_waist_agility",
       "name": "Enchant Belt - Agility",
-      "slot": "waist",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7603,7 +7603,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_gloves_strength",
       "name": "Enchant Gloves - Strength",
-      "slot": "gloves",
+      "slot": "ring",
       "tier": "base",
       "reagents": [
         {
@@ -7821,7 +7821,7 @@ export const GUIDE_PROF_ENCHANTING: GuideProfEnchanting = {
     {
       "id": "enchant_gloves_greater_agility",
       "name": "Enchant Gloves - Greater Agility",
-      "slot": "gloves",
+      "slot": "ring",
       "tier": "greater",
       "reagents": [
         {

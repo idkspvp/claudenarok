@@ -25,28 +25,29 @@
 
 /** Hard DEF is capped before it is applied, so no amount of equipment makes a
  *  target immune. The cap is the whole reason Vitality is worth buying. */
+import { reachableDefCeiling } from './armor_slot_def';
+
 export const MAX_HARD_DEF = 100;
 
-/** This game's armour scale is unbounded where Ragnarok's DEF is capped, so the
- *  two have to be divided into each other. Sized from the measured ceiling rather
- *  than picked: the best armour value in every equip slot totals 2,560, and that
- *  is now the WHOLE ceiling. The class term, the level term, and the Vitality
- *  term all went with D1: hard DEF comes off equipment and nothing else, and
- *  Vitality buys soft DEF below instead of being counted twice.
+/** Equipment armour IS hard DEF now, one to one.
  *
- *  The resulting ladder is deliberately back-loaded (0 DEF ungeared at any level,
- *  51 fully geared), which is the shape Ragnarok has: a fresh character has no
- *  DEF at all and high DEF is an endgame reward bought entirely with gear.
+ *  This was 50 while the item records still carried the inherited unbounded
+ *  armour pool and the two scales had to be divided into each other. The records
+ *  are authored on Ragnarok's own scale since the equipment pass, so there is
+ *  nothing left to convert: a chest piece reads 15 and removes fifteen percent.
+ *  The constant survives as a named 1 rather than disappearing, because the
+ *  guard test uses it to prove no future rescale reintroduces a hidden divisor.
  *
- *  A conversion, not a Ragnarok constant. It goes away when the item records are
- *  authored with real DEF values. */
-export const ARMOR_TO_HARD_DEF = 50;
+ *  The ladder stays back-loaded, which is the shape Ragnarok has: a fresh
+ *  character has no DEF at all, and high DEF is bought entirely with gear. The
+ *  class term, the level term and the Vitality term all went with D1: Vitality
+ *  buys soft DEF below instead of being counted twice. */
+export const ARMOR_TO_HARD_DEF = 1;
 
 /** The armour a character can actually reach: best-in-slot equipment, and only
- *  that. Named so the guard test can assert the divisor keeps it below the cap
- *  instead of hardcoding a number that silently stops meaning anything when the
- *  item tables are rebuilt. */
-export const REACHABLE_ARMOR_CEILING = 2_560;
+ *  that. Derived from the per-slot ceilings rather than transcribed, so it
+ *  cannot silently stop meaning anything when the bands move. */
+export const REACHABLE_ARMOR_CEILING = reachableDefCeiling();
 
 /** Equipment armour as a Ragnarok hard DEF value. */
 export function hardDefFrom(armor: number): number {

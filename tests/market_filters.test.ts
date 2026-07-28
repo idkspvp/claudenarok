@@ -57,8 +57,8 @@ describe('World Market filters', () => {
       'all',
       'offhand',
       'helmet',
-      'neck',
-      'shoulder',
+      'face',
+      'back',
       'chest',
       'waist',
       'legs',
@@ -268,13 +268,13 @@ describe('World Market filters', () => {
   });
 
   it('narrows armor filters to the jewelry slots (neck and ring)', () => {
-    // Jewelry is kind 'armor' with slot 'ring'/'neck' (heroic vendor exemplars), so the
+    // Jewelry is kind 'armor' with slot 'ring'/'face' (heroic vendor exemplars), so the
     // shared slot predicate must sub-filter it like any other wearable slot.
     const armor = ['seal_of_the_nine_oaths', 'yumis_keepsake_locket', 'recruit_tunic'];
     expect(filterIds(armor, { itemType: 'armor', subtype: 'ring' })).toEqual([
       'seal_of_the_nine_oaths',
     ]);
-    expect(filterIds(armor, { itemType: 'armor', subtype: 'neck' })).toEqual([
+    expect(filterIds(armor, { itemType: 'armor', subtype: 'face' })).toEqual([
       'yumis_keepsake_locket',
     ]);
   });
@@ -296,7 +296,7 @@ describe('World Market filters', () => {
 
   it('keeps neck and ring subtypes through wire sanitization instead of falling back', () => {
     expect(sanitizeMarketQuery({ itemType: 'armor', subtype: 'ring' }).subtype).toBe('ring');
-    expect(sanitizeMarketQuery({ itemType: 'armor', subtype: 'neck' }).subtype).toBe('neck');
+    expect(sanitizeMarketQuery({ itemType: 'armor', subtype: 'face' }).subtype).toBe('face');
     expect(sanitizeMarketQuery({ itemType: 'armor', subtype: 'bogus' }).subtype).toBe('all');
   });
 

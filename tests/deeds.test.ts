@@ -1191,12 +1191,10 @@ describe('flag triggers (one negative and one positive per predicate)', () => {
     meta.equipment = {
       mainhand: 'worn_sword',
       helmet: 'worn_sword',
-      neck: 'worn_sword',
-      shoulder: 'worn_sword',
+      face: 'worn_sword',
+      back: 'worn_sword',
       chest: 'worn_sword',
-      waist: 'worn_sword',
       legs: 'worn_sword',
-      gloves: 'worn_sword',
       feet: 'worn_sword',
       ring1: 'worn_sword',
     };

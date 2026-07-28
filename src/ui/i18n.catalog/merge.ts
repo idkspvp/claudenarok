@@ -2318,8 +2318,15 @@ export const mergeStrings = {
 // Legacy inline dialect copies — cast so new English keys (e.g. hud.errors
 // cantInForm/travel) don't make these one key short of typeof mergeStringsEn.
 // Real es_ES/fr_CA come from i18n.locales overlays at runtime; see i18n CLAUDE.md.
-mergeStrings.es_ES = mergeStrings.es as typeof mergeStringsEn;
-mergeStrings.fr_CA = mergeStrings.fr_FR as typeof mergeStringsEn;
+//
+// Through `unknown` because the drift is now two-directional: the equipment
+// slot rework RENAMED keys rather than only adding them, so these copies carry
+// keys English no longer has and TypeScript stopped treating the two as
+// comparable at all. Only `mergeStrings.en` is read (index.ts), and the locale
+// overlay directory is empty, so these four are dead weight worth deleting on
+// their own rather than inside a slot change.
+mergeStrings.es_ES = mergeStrings.es as unknown as typeof mergeStringsEn;
+mergeStrings.fr_CA = mergeStrings.fr_FR as unknown as typeof mergeStringsEn;
 
 const mergeEntitiesEn = {
   items: mergeNameTranslations(

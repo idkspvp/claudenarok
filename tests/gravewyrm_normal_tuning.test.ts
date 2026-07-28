@@ -32,9 +32,14 @@ import {
   applyDungeonMobTuning,
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
+import { referenceArmorAt } from './helpers/reference_armor';
 
 const SANCTUM = 'gravewyrm_sanctum';
-const REF_ARMOR = 2861; // max-armor BiS prot swordman, level 20 (see header)
+// Best-in-slot defence for a level-20 character, derived from the live tables
+// rather than transcribed: it was 2861 on the inherited unbounded armour pool,
+// and a stale literal there saturates the hard DEF cap and silently reduces
+// every mob swing in this file to zero.
+const REF_ARMOR = referenceArmorAt(20);
 const DEFENSIVE_STANCE_TAKEN = 0.9; // dealDamage: Defensive Stance takes 10% less
 // v0.30 pressure pass (2026-07-26): normal Sanctum serves freshly-capped
 // groups in quest greens/blues (1371-1752 hp / 1439-2361 armor across the

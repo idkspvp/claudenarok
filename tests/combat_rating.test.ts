@@ -137,7 +137,7 @@ describe('combat ratings', () => {
     // PvE combat rating; hit/crit/haste are deliberately NOT added there to avoid a
     // same-level PvP balance change.
     const honorJewelry = Object.values(ITEMS).filter(
-      (i) => (i.slot === 'ring' || i.slot === 'neck') && (i.pvpOffenseRating ?? 0) > 0,
+      (i) => (i.slot === 'ring' || i.slot === 'face') && (i.pvpOffenseRating ?? 0) > 0,
     );
     expect(honorJewelry.length).toBeGreaterThan(0);
     for (const item of honorJewelry) {

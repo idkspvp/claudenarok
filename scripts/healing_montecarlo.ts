@@ -227,8 +227,8 @@ function statScore(item: ItemDef, spec: Spec): number {
 
 const ARMOR_SLOTS: EquipSlot[] = [
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
   'waist',
   'legs',

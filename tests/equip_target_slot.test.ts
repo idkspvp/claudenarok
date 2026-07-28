@@ -38,7 +38,7 @@ describe('slotAcceptsItem (pure)', () => {
     const ring = ITEMS[RING_A];
     expect(slotAcceptsItem(ring, 'ring1')).toBe(true);
     expect(slotAcceptsItem(ring, 'ring2')).toBe(true);
-    expect(slotAcceptsItem(ring, 'neck')).toBe(false);
+    expect(slotAcceptsItem(ring, 'face')).toBe(false);
     expect(slotAcceptsItem(ring, 'helmet')).toBe(false);
   });
 

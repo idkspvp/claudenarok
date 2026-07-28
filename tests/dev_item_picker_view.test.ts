@@ -14,7 +14,7 @@ import {
 
 const SAMPLE: readonly DevItemCandidate[] = [
   { id: 'ashstalker_cowl', name: 'Ashstalker Cowl', slot: 'helmet', quality: 'rare' },
-  { id: 'ashstalker_grips', name: 'Ashstalker Grips', slot: 'gloves', quality: 'rare' },
+  { id: 'ashstalker_grips', name: 'Ashstalker Grips', slot: 'ring', quality: 'rare' },
   { id: 'boundstone_helm', name: 'Boundstone Helm', slot: 'helmet', quality: 'epic' },
   {
     id: 'heroic_boundstone_helm',

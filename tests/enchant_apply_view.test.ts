@@ -227,8 +227,8 @@ describe('enchant_apply_view: enchantSectionsForReagent', () => {
     const PAPERDOLL: readonly string[] = [
       'mainhand',
       'helmet',
-      'neck',
-      'shoulder',
+      'face',
+      'back',
       'chest',
       'waist',
       'legs',

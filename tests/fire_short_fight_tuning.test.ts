@@ -48,13 +48,11 @@ const SHORT_FIGHT_DPS_FLOOR = 1.0; // the nerf must not gut the burst identity
 // per-slot stat-greedy set in head-to-head sims (set bonuses dominate).
 const BIS_GEAR: PlayerEquipment = {
   helmet: 'heroic_soulflame_cowl',
-  neck: 'zense_meridian',
-  shoulder: 'heroic_soulflame_mantle',
+  face: 'zense_meridian',
+  back: 'heroic_soulflame_mantle',
   chest: 'heroic_necromancers_starshroud',
   mainhand: 'heroic_deathless_heartwood',
   offhand: 'heroic_wraithfire_orb',
-  gloves: 'soulflame_gloves',
-  waist: 'soulflame_cord',
   legs: 'necromancers_legwraps',
   feet: 'heroic_necromancers_soulsteps',
   ring1: 'architects_cornerstone',

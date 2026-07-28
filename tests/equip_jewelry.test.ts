@@ -29,7 +29,7 @@ describe('resolveEquipSlot (pure)', () => {
   const CHEST = ITEMS.recruit_tunic;
 
   it('passes non-ring slots straight through', () => {
-    expect(resolveEquipSlot(NECK, {})).toBe('neck');
+    expect(resolveEquipSlot(NECK, {})).toBe('face');
     expect(resolveEquipSlot(CHEST, {})).toBe(CHEST.slot);
     expect(resolveEquipSlot({ ...RING, slot: undefined } as never, {})).toBeNull();
   });
@@ -74,11 +74,11 @@ describe('jewelry equip flow', () => {
     sim.addItem('yumis_keepsake_locket', 1, pid);
 
     sim.equipItem('yumis_keepsake_locket', pid);
-    expect(meta.equipment.neck).toBe('yumis_keepsake_locket');
+    expect(meta.equipment.face).toBe('yumis_keepsake_locket');
     expect(sim.countItem('yumis_keepsake_locket', pid)).toBe(0);
 
-    expect(sim.unequipItem('neck', pid)).toBe(true);
-    expect(meta.equipment.neck).toBeUndefined();
+    expect(sim.unequipItem('face', pid)).toBe(true);
+    expect(meta.equipment.face).toBeUndefined();
     expect(sim.countItem('yumis_keepsake_locket', pid)).toBe(1);
   });
 

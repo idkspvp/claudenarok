@@ -333,7 +333,7 @@ describe('Nythraxis raid encounter', () => {
     ]) {
       const item = ITEMS[itemId];
       expect(item.quality).toBe('epic');
-      expect(['helmet', 'shoulder']).toContain(item.slot);
+      expect(['helmet', 'back']).toContain(item.slot);
       expect(loot.some((entry) => entry.itemId === itemId)).toBe(true);
     }
 

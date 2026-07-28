@@ -398,12 +398,13 @@ export function gearReadout(meta: PlayerMeta): string {
     ['mainhand', 'Main Hand'],
     ['offhand', 'Off Hand'],
     ['helmet', 'Helmet'],
-    ['shoulder', 'Shoulder'],
+    ['face', 'Face'],
+    ['back', 'Back'],
     ['chest', 'Chest'],
-    ['waist', 'Waist'],
     ['legs', 'Legs'],
-    ['gloves', 'Gloves'],
     ['feet', 'Feet'],
+    ['ring1', 'Accessory 1'],
+    ['ring2', 'Accessory 2'],
   ];
   let worn = 0;
   const parts = slots.map(([slot, label]) => {

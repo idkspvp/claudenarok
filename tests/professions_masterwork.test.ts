@@ -221,7 +221,7 @@ describe('masterworkBonusStats (the baked tier-delta budget)', () => {
     // masterwork, and neither can a def with no stats record at all (the
     // crafted common weapon).
     const chainVest = ITEMS.eastbrook_chain_vest;
-    expect(chainVest.stats).toEqual({ armor: 60 });
+    expect(chainVest.stats).toEqual({ armor: 1 });
     expect(
       masterworkBonusStats({
         level: 10,

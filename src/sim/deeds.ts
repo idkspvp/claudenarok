@@ -727,19 +727,7 @@ const FLAGS: Record<DeedFlagId, (meta: PlayerMeta, e: Entity) => boolean> = {
   // does not grow this deed.
   allEquipSlotsFilled: (m) =>
     (
-      [
-        'mainhand',
-        'helmet',
-        'neck',
-        'shoulder',
-        'chest',
-        'waist',
-        'legs',
-        'gloves',
-        'feet',
-        'ring1',
-        'ring2',
-      ] as const
+      ['mainhand', 'helmet', 'face', 'back', 'chest', 'legs', 'feet', 'ring1', 'ring2'] as const
     ).every((slot) => !!m.equipment[slot]),
   nonDefaultSkin: (m) => m.skinCatalog === 'mech' || m.skin > 0,
   // The marked set resets whenever the authoritative reward window advances,

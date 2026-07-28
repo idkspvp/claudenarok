@@ -66,7 +66,7 @@ describe('disenchantYieldPreview', () => {
     // Jewelry carries no armor class, so typedSecondaryFor returns null and the
     // preview must not promise a secondary. Live jewelry is epic-tier here.
     const def = defFor('epic', (d) => typedSecondaryFor(d) === null);
-    expect(def.slot === 'ring' || def.slot === 'neck').toBe(true);
+    expect(def.slot === 'ring' || def.slot === 'face').toBe(true);
     const preview = disenchantYieldPreview(def);
     expect(preview?.primary).toEqual({ itemId: 'arcane_shard', min: 1, max: 1 });
     expect(preview?.secondary).toBeUndefined();

@@ -23,19 +23,18 @@ const QUALITY_TIERS = [
 ] as const;
 
 // The eleven equip slots, paired with their catalog label key (paperdoll order; the
-// two ring slots share the one Finger label, listed once each).
+// two accessory slots share the one Accessory label, listed once each).
 const SLOTS = [
   'guide.gear.slotMainhand',
+  'guide.gear.slotOffhand',
   'guide.gear.slotHelmet',
-  'guide.gear.slotNeck',
-  'guide.gear.slotShoulder',
+  'guide.gear.slotFace',
+  'guide.gear.slotBack',
   'guide.gear.slotChest',
-  'guide.gear.slotWaist',
   'guide.gear.slotLegs',
-  'guide.gear.slotGloves',
   'guide.gear.slotFeet',
-  'guide.gear.slotFinger',
-  'guide.gear.slotFinger',
+  'guide.gear.slotAccessory',
+  'guide.gear.slotAccessory',
 ] as const;
 
 function qualityList(): string {

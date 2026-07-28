@@ -89,7 +89,7 @@ describe('typed disenchant secondary mapping (disenchant_reagents.ts)', () => {
     // A rare necklace/ring is disenchantable but carries no armor class, so the
     // mapper returns null (the disenchant grants the primary only, no draw).
     const rareJewelry = Object.values(ITEMS).find(
-      (d) => d.kind === 'armor' && (d.slot === 'neck' || d.slot === 'ring') && d.quality === 'rare',
+      (d) => d.kind === 'armor' && (d.slot === 'face' || d.slot === 'ring') && d.quality === 'rare',
     );
     if (rareJewelry) expect(typedSecondaryFor(rareJewelry)).toBeNull();
   });

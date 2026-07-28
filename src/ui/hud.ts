@@ -790,12 +790,10 @@ const ITEM_SLOT_LABEL_KEYS: Record<ItemSlot, TranslationKey> = {
   mainhand: 'itemUi.slots.mainhand',
   offhand: 'itemUi.slots.offhand',
   helmet: 'itemUi.slots.helmet',
-  neck: 'itemUi.slots.neck',
-  shoulder: 'itemUi.slots.shoulder',
+  face: 'itemUi.slots.face',
+  back: 'itemUi.slots.back',
   chest: 'itemUi.slots.chest',
-  waist: 'itemUi.slots.waist',
   legs: 'itemUi.slots.legs',
-  gloves: 'itemUi.slots.gloves',
   feet: 'itemUi.slots.feet',
   // The three ring forms share one player-facing label ("Finger"): items
   // declare 'ring', the paperdoll cells are the concrete ring1/ring2 keys.

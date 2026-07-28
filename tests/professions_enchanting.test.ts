@@ -697,12 +697,10 @@ describe('ENCHANTS table integrity', () => {
   const VALID_ITEM_SLOTS = new Set([
     'mainhand',
     'helmet',
-    'neck',
-    'shoulder',
+    'face',
+    'back',
     'chest',
-    'waist',
     'legs',
-    'gloves',
     'feet',
     'ring',
   ]);

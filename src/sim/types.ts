@@ -685,50 +685,52 @@ export interface RangedWeaponProfile {
 
 export type WeaponHand = 'mainhand' | 'onehand' | 'twohand';
 
+// The ten equipment slots. Ragnarok and the modern classic-likes agree on this
+// layout almost exactly: head, face, body, back, feet, weapon, shield and two
+// accessories are common to both, and the only divergence is the third headgear
+// slot Ragnarok carries against the separate legs slot the reference client
+// gives its wearer. We take the legs slot.
+//
+// Belt and glove are NOT slots here, and that is the Ragnarok reading rather
+// than a simplification: its reference data has no location for either, and
+// every belt and glove in that game is an ACCESSORY. Ours are accessories too.
 export type EquipSlot =
   | 'mainhand'
   | 'offhand'
   | 'helmet'
-  | 'neck'
-  | 'shoulder'
+  | 'face'
+  | 'back'
   | 'chest'
-  | 'waist'
   | 'legs'
-  | 'gloves'
   | 'feet'
   | 'ring1'
   | 'ring2';
 
-// The eleven launch equip slots, frozen for the original full-paperdoll deed and
-// the all-slot PvP sets. Offhand is intentionally not added to this historical
-// list: ALL_EQUIP_SLOTS is the live stat/command surface.
+// The nine slots the full-paperdoll deed and the all-slot PvP sets count.
+// Offhand is intentionally not in this list: ALL_EQUIP_SLOTS is the live
+// stat/command surface, and a shield is not something every class wears.
 export const EQUIP_SLOTS: readonly EquipSlot[] = [
   'mainhand',
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
-  'waist',
   'legs',
-  'gloves',
   'feet',
   'ring1',
   'ring2',
 ];
 
-// Every live equipment key, including the redesigned Warrior's additive
-// offhand. Stat derivation and command validators use this list; launch-era
-// completeness rewards continue to use the frozen EQUIP_SLOTS list above.
+// Every live equipment key, including the offhand. Stat derivation and command
+// validators use this list; completeness rewards use the EQUIP_SLOTS list above.
 export const ALL_EQUIP_SLOTS: readonly EquipSlot[] = [
   'mainhand',
   'offhand',
   'helmet',
-  'neck',
-  'shoulder',
+  'face',
+  'back',
   'chest',
-  'waist',
   'legs',
-  'gloves',
   'feet',
   'ring1',
   'ring2',
@@ -925,7 +927,7 @@ export interface ItemSet {
 
 export interface ArmorItemDef extends BaseItemDef {
   kind: 'armor';
-  slot: Exclude<EquipSlot, 'mainhand' | 'neck' | 'ring1' | 'ring2'>;
+  slot: Exclude<EquipSlot, 'mainhand' | 'face' | 'ring1' | 'ring2'>;
   armorType: ArmorType;
   weapon?: never;
   // A shield stays inside v0.26's established armor item kind, avoiding a new
@@ -941,7 +943,7 @@ export interface ArmorItemDef extends BaseItemDef {
 // when set). Rings declare slot 'ring'; see resolveEquipSlot.
 export interface JewelryItemDef extends BaseItemDef {
   kind: 'armor';
-  slot: 'neck' | 'ring';
+  slot: 'face' | 'ring';
   armorType?: never;
   weapon?: never;
 }

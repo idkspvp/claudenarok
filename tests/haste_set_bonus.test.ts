@@ -29,16 +29,30 @@ type AnyEntity = Entity & Record<string, any>;
 const HASTE_KITS = [SET_VALE_ARCANIST, SET_BOUNDSTONE_VANGUARD, SET_GREYJAW_STALKER];
 
 function setMembers(setId: string): ItemDef[] {
-  // one member per equip slot, so slicing N members yields N equipped pieces
+  // One member per EQUIPMENT slot, so slicing N members yields N equipped
+  // pieces. The accessory slot kind is the exception and has to be counted as
+  // the two concrete slots it fills: a set carrying both a belt and a pair of
+  // gloves really does wear both at once, and collapsing them by item slot made
+  // a four-piece set look like a three-piece one.
   const bySlot = new Map<string, ItemDef>();
+  let accessories = 0;
   for (const i of Object.values(ITEMS)) {
-    if (i.set === setId && i.slot && !bySlot.has(i.slot)) bySlot.set(i.slot, i);
+    if (i.set !== setId || !i.slot) continue;
+    if (i.slot === 'ring') {
+      if (accessories >= 2) continue;
+      bySlot.set(`ring${++accessories}`, i);
+      continue;
+    }
+    if (!bySlot.has(i.slot)) bySlot.set(i.slot, i);
   }
   return [...bySlot.values()];
 }
 
 function equipmentOf(items: ItemDef[]): PlayerEquipment {
-  return Object.fromEntries(items.map((i) => [i.slot, i.id])) as PlayerEquipment;
+  let accessories = 0;
+  return Object.fromEntries(
+    items.map((i) => [i.slot === 'ring' ? `ring${++accessories}` : i.slot, i.id]),
+  ) as PlayerEquipment;
 }
 
 function player(cls: PlayerClass, level = 20): { sim: AnySim; p: AnyEntity; pid: number } {
@@ -77,16 +91,34 @@ describe('haste kit definitions (leveling sets in the ITEM_SETS framework)', () 
     }
   });
 
-  it('kit members share the family armor type (cloth / mail / leather)', () => {
-    const armorOf = (setId: string) => setMembers(setId).map((i) => i.armorType);
-    expect(armorOf(SET_VALE_ARCANIST)).toEqual(['cloth', 'cloth', 'cloth']);
-    expect(armorOf(SET_BOUNDSTONE_VANGUARD)).toEqual(['mail', 'mail', 'mail']);
-    expect(armorOf(SET_GREYJAW_STALKER)).toEqual(['leather', 'leather', 'leather']);
+  it('kit members share the family armor type, where they have one', () => {
+    // Accessories are typeless, so any class may wear one. That is the reference
+    // game's rule and the reason a set can pair a mail helm with a belt: only
+    // the ARMOUR in a kit has to match the family.
+    const armorOf = (setId: string) =>
+      setMembers(setId)
+        .filter((i) => i.armorType)
+        .map((i) => i.armorType);
+    for (const [setId, family] of [
+      [SET_VALE_ARCANIST, 'cloth'],
+      [SET_BOUNDSTONE_VANGUARD, 'mail'],
+      [SET_GREYJAW_STALKER, 'leather'],
+    ] as const) {
+      const types = armorOf(setId);
+      expect(types.length, `${setId} has armour`).toBeGreaterThan(0);
+      expect(new Set(types), setId).toEqual(new Set([family]));
+    }
   });
 
   it('kit members cover 3 distinct equip slots (the set is completable)', () => {
+    // Counted as EQUIPMENT slots, so the two accessory slots count separately:
+    // a kit of a helm, a belt and a pair of gloves is worn in three places even
+    // though two of its members declare the same slot kind.
     for (const setId of HASTE_KITS) {
-      const slots = setMembers(setId).map((i) => i.slot);
+      let accessories = 0;
+      const slots = setMembers(setId).map((i) =>
+        i.slot === 'ring' ? `ring${++accessories}` : i.slot,
+      );
       expect(new Set(slots).size, `${setId} slots ${slots}`).toBe(3);
     }
   });

@@ -35,7 +35,7 @@ type Spec = {
 const SLOTS: EquipSlot[] = [
   'mainhand',
   'helmet',
-  'shoulder',
+  'back',
   'chest',
   'waist',
   'legs',

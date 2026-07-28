@@ -1191,17 +1191,16 @@ export const guideStrings = {
     // The eleven equip slots (the paperdoll).
     slotsTitle: 'What you can equip',
     slotsBody:
-      'You have a weapon slot, seven armor slots, and three jewelry slots: a neck and two fingers. Each class can use only certain weapons and wears armor up to its own weight, cloth, leather, or mail, so the upgrades that fit you are the ones made for your class. Jewelry carries no weight at all: any class wears whatever it earns. Within that, fill every slot with the best piece you find.',
+      'You have a weapon slot, a shield slot, five armor slots, and three accessory slots: a face and two of your own choosing. Each class can use only certain weapons and wears armor up to its own weight, cloth, leather, or mail, so the upgrades that fit you are the ones made for your class. Accessories carry no weight at all: any class wears whatever it earns, and belts and gloves are worn there rather than in slots of their own. Within that, fill every slot with the best piece you find.',
     slotMainhand: 'Weapon',
+    slotOffhand: 'Shield',
     slotHelmet: 'Head',
-    slotNeck: 'Neck',
-    slotShoulder: 'Shoulders',
+    slotFace: 'Face',
+    slotBack: 'Back',
     slotChest: 'Chest',
-    slotWaist: 'Waist',
     slotLegs: 'Legs',
-    slotGloves: 'Hands',
     slotFeet: 'Feet',
-    slotFinger: 'Finger',
+    slotAccessory: 'Accessory',
 
     // Bags and carrying capacity: the four bag sockets in the bags window.
     bagsTitle: 'Bags and carrying room',

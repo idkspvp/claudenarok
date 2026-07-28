@@ -85,14 +85,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_neck_spirit: {
     id: 'enchant_neck_spirit',
     name: 'Enchant Necklace - Spirit',
-    itemSlot: 'neck',
+    itemSlot: 'face',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
     statBonus: { luk: 3 },
   },
   enchant_shoulder_agility: {
     id: 'enchant_shoulder_agility',
     name: 'Enchant Shoulders - Agility',
-    itemSlot: 'shoulder',
+    itemSlot: 'back',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { agi: 2 },
   },
@@ -109,7 +109,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_waist_stamina: {
     id: 'enchant_waist_stamina',
     name: 'Enchant Belt - Stamina',
-    itemSlot: 'waist',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { vit: 3 },
   },
@@ -126,14 +126,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_gloves_agility: {
     id: 'enchant_gloves_agility',
     name: 'Enchant Gloves - Agility',
-    itemSlot: 'gloves',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { agi: 3 },
   },
   enchant_gloves_intellect: {
     id: 'enchant_gloves_intellect',
     name: 'Enchant Gloves - Spellpower',
-    itemSlot: 'gloves',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { int: 3 },
   },
@@ -189,14 +189,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_neck_intellect: {
     id: 'enchant_neck_intellect',
     name: 'Enchant Necklace - Intellect',
-    itemSlot: 'neck',
+    itemSlot: 'face',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
     statBonus: { int: 2 },
   },
   enchant_neck_agility: {
     id: 'enchant_neck_agility',
     name: 'Enchant Necklace - Agility',
-    itemSlot: 'neck',
+    itemSlot: 'face',
     reagents: [{ itemId: 'arcane_dust', count: 3 }],
     statBonus: { agi: 2 },
   },
@@ -204,14 +204,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_shoulder_strength: {
     id: 'enchant_shoulder_strength',
     name: 'Enchant Shoulders - Strength',
-    itemSlot: 'shoulder',
+    itemSlot: 'back',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { str: 2 },
   },
   enchant_shoulder_intellect: {
     id: 'enchant_shoulder_intellect',
     name: 'Enchant Shoulders - Intellect',
-    itemSlot: 'shoulder',
+    itemSlot: 'back',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { int: 2 },
   },
@@ -240,14 +240,14 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_waist_strength: {
     id: 'enchant_waist_strength',
     name: 'Enchant Belt - Strength',
-    itemSlot: 'waist',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { str: 3 },
   },
   enchant_waist_agility: {
     id: 'enchant_waist_agility',
     name: 'Enchant Belt - Agility',
-    itemSlot: 'waist',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { agi: 3 },
   },
@@ -266,7 +266,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_gloves_strength: {
     id: 'enchant_gloves_strength',
     name: 'Enchant Gloves - Strength',
-    itemSlot: 'gloves',
+    itemSlot: 'ring',
     reagents: [{ itemId: 'arcane_dust', count: 5 }],
     statBonus: { str: 3 },
   },
@@ -365,7 +365,7 @@ export const ENCHANTS: Record<string, EnchantDef> = {
   enchant_gloves_greater_agility: {
     id: 'enchant_gloves_greater_agility',
     name: 'Enchant Gloves - Greater Agility',
-    itemSlot: 'gloves',
+    itemSlot: 'ring',
     reagents: [
       { itemId: 'arcane_shard', count: 1 },
       { itemId: 'arcane_essence', count: 2 },

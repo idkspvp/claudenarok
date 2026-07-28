@@ -1607,12 +1607,15 @@ const GEAR_SLOT_KEYS: Record<string, TranslationKey> = {
   'Main Hand': 'itemUi.slots.mainhand',
   'Off Hand': 'itemUi.slots.offhand',
   Helmet: 'itemUi.slots.helmet',
-  Shoulder: 'itemUi.slots.shoulder',
+  Face: 'itemUi.slots.face',
+  Back: 'itemUi.slots.back',
   Chest: 'itemUi.slots.chest',
-  Waist: 'itemUi.slots.waist',
   Legs: 'itemUi.slots.legs',
-  Gloves: 'itemUi.slots.gloves',
   Feet: 'itemUi.slots.feet',
+  // Both accessory slots share the one label, the same as the two ring slots
+  // did before the rework named them.
+  'Accessory 1': 'itemUi.slots.ring',
+  'Accessory 2': 'itemUi.slots.ring',
 };
 
 // Rebuild the /gear readout in the active locale: localize each "Slot: value"

@@ -3496,15 +3496,11 @@ function itemFallback(id: string): IconRecipe | null {
           ? 'trousers'
           : it.slot === 'helmet'
             ? 'helm'
-            : it.slot === 'waist'
-              ? 'belt'
-              : it.slot === 'shoulder'
-                ? 'pauldron'
-                : it.slot === 'gloves'
-                  ? 'gauntlet'
-                  : has(name, ['shield', 'bulwark', 'aegis'])
-                    ? 'shield'
-                    : 'chestplate';
+            : it.slot === 'back'
+              ? 'pauldron'
+              : has(name, ['shield', 'bulwark', 'aegis'])
+                ? 'shield'
+                : 'chestplate';
     const pal: PaletteName = isCloth ? 'cloth' : isMetal ? 'steel' : 'leather';
     return r(isCloth ? 'cloth' : isMetal ? 'steel' : 'leather', pal, [{ p: prim, pal }], fx);
   }
