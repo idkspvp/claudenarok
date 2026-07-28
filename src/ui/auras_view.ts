@@ -43,11 +43,8 @@ export { DEBUFF_AURA_KINDS };
 // 5m / 1h / 2d) via compactAuraDuration below.
 const TOGGLE_KINDS: ReadonlySet<AuraKind> = new Set([
   'stealth',
-  'form_bear',
-  'form_cat',
   'form_moonkin',
   'form_shadow',
-  'form_travel',
   'form_fireball',
   'battle_stance',
   'berserker_stance',

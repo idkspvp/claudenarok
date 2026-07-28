@@ -100,9 +100,7 @@ export function updateRegen(ctx: SimContext, p: Entity, meta: PlayerMeta): void 
       p.resource = Math.min(p.maxResource, p.resource + Math.round(regen));
     }
   } else if (p.resourceType === 'energy') {
-    // Feral Instinct (cat form) grants a buff_energyregen aura (value = fraction, 1 = +100%).
-    let regen = 20;
-    for (const a of p.auras) if (a.kind === 'buff_energyregen') regen *= 1 + a.value;
+    const regen = 20;
     p.resource = Math.min(p.maxResource, p.resource + Math.round(regen));
   } else if (p.resourceType === 'rage' && !p.inCombat) {
     p.resource = Math.max(0, p.resource - 2);

@@ -233,12 +233,6 @@ export function auraEffectDescriptor(a: AuraEffectInput): AuraEffectDescriptor |
         : { key: `${KEY}.imbue` };
     case 'stealth':
       return { key: `${KEY}.stealth`, nums: { pct: pctFromMult(a.value) } };
-    case 'form_bear':
-      return { key: `${KEY}.formBear` };
-    case 'form_cat':
-      return { key: `${KEY}.formCat` };
-    case 'form_travel':
-      return { key: `${KEY}.formTravel`, nums: { pct: pctFromMult(a.value) } };
     case 'battle_stance':
       return { key: `${KEY}.battleStance` };
     case 'berserker_stance':

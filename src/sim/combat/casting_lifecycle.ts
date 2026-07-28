@@ -85,7 +85,7 @@ import {
   hasScopedNextCastInstant,
   nextCastCheapMultiplier,
 } from './empower_next';
-import { isActionLockingFormAuraKind, isResourceShiftFormAuraKind } from './forms';
+import { isActionLockingFormAuraKind } from './forms';
 import {
   applyBrainFreezeOverride,
   brainFreezeBypassesCooldown,
@@ -1126,7 +1126,7 @@ function spendAbilityCost(
     // resource bar (bear/cat rage/energy park the mana pool). A caster form
     // (moonkin/shadow) keeps the live mana bar, and recalc would overwrite
     // savedMana on the next resource-shift entry anyway, so bill live mana.
-    const parked = p.auras.some((a) => isResourceShiftFormAuraKind(a.kind));
+    const parked = false;
     if (parked) {
       p.savedMana = Math.max(0, p.savedMana - res.cost);
     } else {

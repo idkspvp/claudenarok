@@ -271,7 +271,7 @@ describe('createAurasView: derivation per mode', () => {
         .durationText,
     ).toBe('');
     expect(
-      v.tick(entity([aura({ id: 'bear_form', kind: 'form_bear', remaining: 3600 })])).slots[0]
+      v.tick(entity([aura({ id: 'bear_form', kind: 'form_shadow', remaining: 3600 })])).slots[0]
         .durationText,
     ).toBe('');
     expect(
@@ -372,7 +372,7 @@ describe('isAuraExpiring + the expiring slot flag (the QoL blink threshold)', ()
         aura({ id: 'rend', kind: 'dot', remaining: 2, duration: 12 }),
         aura({ id: 'might', kind: 'buff_ap', remaining: 300, duration: 600 }),
         // A toggle shows no countdown, so it must never blink even at 1s left.
-        aura({ id: 'bear', kind: 'form_bear', remaining: 1, duration: 3600 }),
+        aura({ id: 'bear', kind: 'form_shadow', remaining: 1, duration: 3600 }),
       ]),
     );
     expect(dying.slots.slice(0, 3).map((s) => [s.key, s.expiring])).toEqual([

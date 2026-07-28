@@ -209,9 +209,6 @@ export function consumeHealCue(event: HealEvent): SfxId | null {
 }
 
 export function weaponSwingCue(entity: Entity): SfxId {
-  if (entity.auras.some((aura) => aura.kind === 'form_bear' || aura.kind === 'form_cat')) {
-    return 'melee_unarmed';
-  }
   switch (entity.templateId) {
     case 'thief':
     case 'warlock':

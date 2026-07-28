@@ -4,14 +4,12 @@ import type { AuraKind } from '../types';
 // includes form_fireball); re-exported here for the combat-side call sites.
 export { isFormAuraKind } from '../types';
 
-export function isResourceShiftFormAuraKind(kind: AuraKind): boolean {
-  return kind === 'form_bear' || kind === 'form_cat' || kind === 'form_travel';
-}
-
+// The druid melee and travel forms are gone (no content ever granted them), so
+// both predicates now describe the one remaining locking form.
 export function isActionLockingFormAuraKind(kind: AuraKind): boolean {
-  return isResourceShiftFormAuraKind(kind) || kind === 'form_fireball';
+  return kind === 'form_fireball';
 }
 
 export function isTravelFormAuraKind(kind: AuraKind): boolean {
-  return kind === 'form_travel' || kind === 'form_fireball';
+  return kind === 'form_fireball';
 }

@@ -288,9 +288,6 @@ export type AuraKind =
   // src/sim/spirit.ts and recalcPlayerStats.
   | 'buff_allstats_pct'
   | 'thorns'
-  | 'form_bear'
-  | 'form_cat'
-  | 'form_travel'
   | 'form_fireball'
   | 'form_moonkin'
   | 'form_shadow'
@@ -298,7 +295,6 @@ export type AuraKind =
   // its damage/haste bonuses ride separate buff auras).
   | 'form_metamorph'
   // Feral (cat form): Energy regeneration multiplier while active (value = fraction, 1 = +100%).
-  | 'buff_energyregen'
   | 'stealth'
   | 'defensive_stance'
   | 'overpower_charge'
@@ -437,9 +433,6 @@ export type AuraKind =
 // and progression/talents.ts all consume isFormAuraKind/FORM_AURA_KINDS from here instead
 // of repeating the five-kind list, so it cannot drift out of sync between call sites.
 export const FORM_AURA_KINDS: ReadonlySet<AuraKind> = new Set<AuraKind>([
-  'form_bear',
-  'form_cat',
-  'form_travel',
   'form_fireball',
   'form_moonkin',
   'form_shadow',
@@ -2475,7 +2468,6 @@ export interface AbilityDef {
   // Classic threat riders: flat bonus threat on a successful use and/or a
   // multiplier on the damage-threat (both scale with stance/form modifiers).
   threat?: { flat?: number; mult?: number };
-  requiresForm?: 'bear' | 'cat'; // druid form kit (maul/growl/swipe/claw/bite)
   // Castable while shapeshifted without requiring a SPECIFIC form (Feral Instinct works in
   // both Cat and Bear Form). Exempts the ability from the "can't act while shapeshifted" lock.
   usableInForm?: boolean;

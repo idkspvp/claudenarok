@@ -5251,10 +5251,10 @@ export class Renderer {
       // One pass over the aura list instead of six .some() scans per entity per
       // frame; the flag combination below preserves the original precedence.
       let hasPoly = false;
-      let hasBear = false;
+      const hasBear = false;
       let hasGhostWolf = false;
-      let hasCatForm = false;
-      let hasTravelForm = false;
+      const hasCatForm = false;
+      const hasTravelForm = false;
       let hasFireballForm = false;
       let hasStealth = false;
       let hasShadowform = false;
@@ -5266,10 +5266,7 @@ export class Renderer {
       let mageBarrierState: MageBarrierState | null = null;
       for (const a of e.auras) {
         if (a.kind === 'polymorph') hasPoly = true;
-        if (a.kind === 'form_bear') hasBear = true;
         if (a.id === 'ghost_wolf') hasGhostWolf = true;
-        if (a.kind === 'form_cat') hasCatForm = true;
-        if (a.kind === 'form_travel') hasTravelForm = true;
         if (a.kind === 'form_fireball') hasFireballForm = true;
         if (a.kind === 'stealth') hasStealth = true;
         if (a.kind === 'form_shadow') hasShadowform = true;
@@ -6341,7 +6338,7 @@ export class Renderer {
     } else {
       this.lastLocalPos = { x: selfPos.x, z: selfPos.z };
     }
-    const inTravelForm = p.auras.some((a) => a.kind === 'form_travel');
+    const inTravelForm = false;
     const target = targetIntensity({
       inTravelForm,
       speed,

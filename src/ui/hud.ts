@@ -771,10 +771,6 @@ const RAID_MARKER_LABEL_KEYS = [
   'hud.markers.names.cross',
   'hud.markers.names.skull',
 ] as const satisfies readonly TranslationKey[];
-const FORM_LABEL_KEYS: Record<'bear' | 'cat', TranslationKey> = {
-  bear: 'abilityUi.forms.bear',
-  cat: 'abilityUi.forms.cat',
-};
 const PET_MODE_LABEL_KEYS: Record<PetMode, TranslationKey> = {
   passive: 'hud.pet.passive',
   defensive: 'hud.pet.defensive',
@@ -13921,8 +13917,6 @@ function abilityCastLine(known: ResolvedAbility, spellHaste = 0): string {
 
 export function abilityRequirementLines(def: AbilityDef): string[] {
   const lines: string[] = [];
-  if (def.requiresForm)
-    lines.push(t('abilityUi.tooltip.requiresForm', { form: t(FORM_LABEL_KEYS[def.requiresForm]) }));
   if (def.requiresStealth) lines.push(t('abilityUi.tooltip.requiresStealth'));
   if (def.spendsCombo) lines.push(t('abilityUi.tooltip.requiresCombo'));
   if (def.requiresDodgeProc) lines.push(t('abilityUi.tooltip.requiresDodge'));

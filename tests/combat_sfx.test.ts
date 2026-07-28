@@ -388,13 +388,14 @@ describe('combat SFX policy', () => {
     expect(auraApplyCue(gained, null)).toBeNull();
   });
 
-  it('uses unarmed swings in both druid combat forms', () => {
-    const druid = target('player', 'druid');
-    expect(weaponSwingCue(druid)).toBe('melee_swing_heavy');
-    druid.auras = [aura('form_bear')];
-    expect(weaponSwingCue(druid)).toBe('melee_unarmed');
-    druid.auras = [aura('form_cat')];
-    expect(weaponSwingCue(druid)).toBe('melee_unarmed');
+  it('keeps the weapon swing cue through a form that does not change the weapon', () => {
+    // The unarmed-swing arm belonged to the two druid melee forms, which no
+    // content ever granted and which are gone; a form that leaves the weapon in
+    // hand must not silently switch the cue.
+    const caster = target('player', 'acolyte');
+    expect(weaponSwingCue(caster)).toBe('melee_swing_heavy');
+    caster.auras = [aura('form_shadow')];
+    expect(weaponSwingCue(caster)).toBe('melee_swing_heavy');
   });
 
   it('plays attempted physical swings for avoidance but not magic or Auto Shot impact', () => {

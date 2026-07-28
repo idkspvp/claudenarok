@@ -34,8 +34,10 @@ export function baseSwingSpeed(e: Entity): number {
  *  be resolving a weapon OTHER than the equipped one (a strike ability passes
  *  its own): it needs to know whether a form is overriding the cadence without
  *  being handed the equipped weapon's speed as the answer. */
-export function formSwingSpeed(e: Entity): number | null {
-  for (const a of e.auras) if (a.kind === 'form_cat') return ROGUE_BASE_SWING_SPEED;
+export function formSwingSpeed(_e: Entity): number | null {
+  // No form overrides the swing cadence any more: Wolf Form was the only one
+  // and no content granted it. Kept as a seam because the damage sites ask the
+  // question, and a future form may answer it again.
   return null;
 }
 

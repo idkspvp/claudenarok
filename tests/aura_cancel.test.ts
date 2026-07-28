@@ -55,8 +55,8 @@ describe('isDebuffAura', () => {
       'absorb',
       'imbue',
       'thorns',
-      'form_bear',
-      'form_cat',
+      'form_shadow',
+      'form_shadow',
       'form_fireball',
       'form_moonkin',
       'form_shadow',
@@ -81,7 +81,7 @@ describe('isDebuffAura', () => {
 describe('auraAffectsStats', () => {
   it('is true for stat buffs and forms, false for hot/absorb/imbue', () => {
     expect(auraAffectsStats(aura('x', 'buff_armor'))).toBe(true);
-    expect(auraAffectsStats(aura('x', 'form_bear'))).toBe(true);
+    expect(auraAffectsStats(aura('x', 'form_shadow'))).toBe(true);
     expect(auraAffectsStats(aura('x', 'hot'))).toBe(false);
     expect(auraAffectsStats(aura('x', 'absorb'))).toBe(false);
     expect(auraAffectsStats(aura('x', 'imbue'))).toBe(false);

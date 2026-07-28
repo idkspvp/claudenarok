@@ -481,8 +481,8 @@ export function recalcPlayerStats(
   let bonusFlee = 0;
   let bonusCrit = 0;
   let bonusHaste = 0;
-  let bearForm = false;
-  let catForm = false;
+  const bearForm = false;
+  const catForm = false;
   let moonkinForm = false;
   let scaleMul = 1; // Fiesta buff_scale: body-size multiplier (>1 also adds hp)
   // Percent raid buffs (Mark of the Wild / Arcane Intellect / Power Word: Fortitude /
@@ -543,8 +543,6 @@ export function recalcPlayerStats(
     // Avatar: the colossus transform grows the body by the fixed scale (its
     // aura value carries the damage amp, consumed in dealDamage).
     else if (a.kind === 'buff_avatar') scaleMul *= AVATAR_SCALE;
-    else if (a.kind === 'form_bear') bearForm = true;
-    else if (a.kind === 'form_cat') catForm = true;
     // Moonkin Form carries its Spell Power bonus in the form aura's value, so it lives and
     // dies with the one toggle (a Balance druid's whole kit is arcane/nature, so a generic
     // Spell Power bonus is correct). Gloamveil Form (form_shadow) is NOT a Spell Power
@@ -823,16 +821,10 @@ export function recalcPlayerStats(
   // Body size: players default to 1; a buff_scale aura grows/shrinks them live.
   if (e.kind === 'player') e.scale = scaleMul;
 
-  // Druid forms swap the resource bar, classic-style: bear runs on rage
-  // (starts empty, fills from combat), cat on energy (starts full, friendlier
-  // than the classic-era 0). Mana is parked in savedMana and restored on shift-out.
-  const formResource: 'rage' | 'energy' | null = bearForm ? 'rage' : catForm ? 'energy' : null;
-  if (formResource) {
-    if (e.resourceType === 'mana') e.savedMana = e.resource;
-    if (e.resourceType !== formResource) e.resource = formResource === 'energy' ? 100 : 0;
-    e.resourceType = formResource;
-    e.maxResource = 100;
-  } else if (def.resourceType === 'mana') {
+  // Nothing swaps the resource bar any more: the druid forms that did were the
+  // only ones, and no content granted them. savedMana and the shift-out restore
+  // below survive because a persisted save may still carry a parked pool.
+  if (def.resourceType === 'mana') {
     const cameFromForm = e.resourceType !== 'mana';
     const manaFrac = e.maxResource > 0 ? e.resource / e.maxResource : 1;
     e.resourceType = 'mana';
