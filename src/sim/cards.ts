@@ -11,6 +11,7 @@
 // Vitest drives it with no world.
 
 import type { Element, Race, Size } from './combat/elements';
+import type { GearEffects } from './combat/gear_effects';
 import type { CoreStats, EquipSlot, ItemSlot } from './types';
 
 /** What a card is allowed to do. Modelled on the effect mix measured over the
@@ -31,6 +32,9 @@ export interface CardEffect {
    *  with. The single most build-defining thing a card does in the reference. */
   armorElement?: Element;
   weaponElement?: Element;
+  /** A card can carry the same beyond-the-numbers effects a piece of gear can,
+   *  and in the reference it is the likeliest place to find them. */
+  gear?: GearEffects;
 }
 
 export interface CardDef {
@@ -78,6 +82,9 @@ export interface AggregatedCards {
    *  attribute cards in one piece. */
   armorElement?: Element;
   weaponElement?: Element;
+  /** A card can carry the same beyond-the-numbers effects a piece of gear can,
+   *  and in the reference it is the likeliest place to find them. */
+  gear?: GearEffects;
 }
 
 export function emptyAggregate(): AggregatedCards {

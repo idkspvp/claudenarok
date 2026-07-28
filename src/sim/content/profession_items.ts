@@ -197,6 +197,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   thorium_warblade: {
     id: 'thorium_warblade',
+    gear: { autoCast: { abilityId: 'fireball', chance: 0.01 } },
     name: 'Osmium Warblade',
     kind: 'weapon',
     slot: 'mainhand',
@@ -219,6 +220,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   elderwood_battle_staff: {
     id: 'elderwood_battle_staff',
+    gear: { attackSpeed: 0.02 },
     name: 'Highpine Battle Staff',
     kind: 'weapon',
     slot: 'mainhand',
@@ -284,6 +286,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   ironlink_spaulders: {
     id: 'ironlink_spaulders',
+    gear: { maxHp: 150 },
     name: 'Ironlink Spaulders',
     kind: 'armor',
     armorType: 'mail',
@@ -304,6 +307,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   thoriumscale_cuirass: {
     id: 'thoriumscale_cuirass',
+    gear: { resistStatus: { status: 'curse', fraction: 0.3 } },
     name: 'Osmiumscale Cuirass',
     kind: 'armor',
     armorType: 'mail',
@@ -410,6 +414,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   sunweave_treads: {
     id: 'sunweave_treads',
+    gear: { maxSp: 100 },
     name: 'Sunweave Treads',
     kind: 'armor',
     armorType: 'cloth',
@@ -456,6 +461,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   marshstalker_jerkin: {
     id: 'marshstalker_jerkin',
+    gear: { maxSp: 50 },
     name: 'Marshstalker Jerkin',
     kind: 'armor',
     armorType: 'leather',
@@ -496,6 +502,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   mirewarden_leggings: {
     id: 'mirewarden_leggings',
+    gear: { maxSp: 80 },
     name: 'Mirewarden Leggings',
     kind: 'armor',
     armorType: 'leather',
@@ -506,6 +513,7 @@ export const PROFESSION_ITEMS: Record<string, ItemDef> = {
   },
   mirewarden_treads: {
     id: 'mirewarden_treads',
+    gear: { attackSpeed: 0.05 },
     name: 'Mirewarden Treads',
     kind: 'armor',
     armorType: 'leather',

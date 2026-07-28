@@ -131,16 +131,50 @@ already takes hard MDEF as an argument, because no equipment field existed to
 feed it. Add the field, author it (12% of reference equipment carries magic
 defence), and stop passing zero.
 
-### Phase 5: the remaining bonus kinds
+### Phase 5: the remaining bonus kinds (done)
 
-Status inflict and resist, auto-cast, max HP and SP, attack speed, flat attack
-and magic attack. Each is small on its own; together they are what makes one
-piece of gear feel different from another once attributes stop doing that job.
+Status inflict and resist, auto-cast, max HP and SP, attack speed. Each is small
+on its own; together they are what makes one piece of gear feel different from
+another once attributes stop doing that job.
 
-Auto-cast in particular is worth building properly: at 7% of equipment and 9% of
-cards it is one of the most common effects in the reference game, and it is the
-main reason a piece of gear changes how a class plays rather than just how hard
-it hits.
+Re-measured against the pre-renewal reference at implementation time, over its
+2017 equipment rows and its 538 cards. The earlier estimate in this document was
+wrong on auto-cast (a case-sensitive search missed `bAutoSpell` entirely and
+reported zero); these are the corrected figures:
+
+| effect | equipment | cards |
+|---|---|---|
+| inflicts a status | 3.2% | 2.6% |
+| resists a status | 2.7% | 4.3% |
+| flat maximum health | 3.5% | 2.6% |
+| flat spell points | 3.5% | 1.7% |
+| attack speed | 3.7% | 0.7% |
+| auto-casts on hit | 4.5% | 4.6% |
+
+Units are confirmed from the reference source, not inferred: an inflict or
+resist rate is a fraction of 10000 (`status.cpp`, `status_change_start`), an
+auto-cast rate a fraction of 1000 (`skill.cpp`, the autospell loop).
+
+Where each of these lands here:
+
+- **The eight statuses** the reference actually inflicts (stun, bleeding, curse,
+  blind, freeze, poison, silence, sleep) map onto auras this game already has
+  rather than a parallel set: curse becomes a slow and freeze a hold, which is
+  what those two do there as well. `src/sim/combat/gear_effects.ts`.
+- **Two stunning items give two rolls**, not one bigger roll; resistance sums and
+  may reach immunity but never turns into a bonus for the attacker.
+- **Auto-cast resolves from the ability table, not the wearer's known list**
+  (`src/sim/combat/auto_cast_ability.ts`). This is the whole point of the effect:
+  a card that casts a bolt has to work on a character who never learns that bolt.
+  It resolves at rank 1, costs nothing, and ignores cooldown; the chance to fire
+  is the only limiter, which is what it is in the reference.
+- **Determinism**: a wearer carrying none of this draws no rng. Every guard
+  short-circuits before the first draw, the same shape the legendary weapon procs
+  already use, so the shared draw order is untouched for ordinary gear.
+
+Flat attack and magic attack are deliberately NOT in this phase: both already
+have a home in the weapon and spell-power fields, and adding a second additive
+source for the same quantity is how a balance pass becomes unreadable.
 
 ## Refining, once weapon level means something
 

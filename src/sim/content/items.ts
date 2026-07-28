@@ -104,6 +104,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   apprentice_robe: {
     id: 'apprentice_robe',
+    gear: { resistStatus: { status: 'blind', fraction: 0.05 } },
     name: 'Threadbare Robe',
     kind: 'armor',
     armorType: 'cloth',
@@ -125,6 +126,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // --- quest reward gear ---
   redbrook_blade: {
     id: 'redbrook_blade',
+    gear: { attackSpeed: 0.02 },
     name: 'Redbrook Militia Blade',
     kind: 'weapon',
     slot: 'mainhand',
@@ -136,6 +138,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   apprentice_staff: {
     id: 'apprentice_staff',
+    gear: { inflictOnHit: { status: 'silence', chance: 0.01 } },
     name: 'Vale Apprentice Staff',
     kind: 'weapon',
     slot: 'mainhand',
@@ -223,6 +226,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   greyjaw_hide_boots: {
     id: 'greyjaw_hide_boots',
+    gear: { autoCast: { abilityId: 'lesser_heal', chance: 0.02 } },
     set: 'greyjaw_stalker',
     name: 'Greyjaw Hide Boots',
     kind: 'armor',
@@ -300,6 +304,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   moggers_shiv: {
     id: 'moggers_shiv',
+    gear: { inflictOnHit: { status: 'poison', chance: 0.03 } },
     name: "Mogger's Shiv",
     kind: 'weapon',
     slot: 'mainhand',
@@ -1010,6 +1015,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // --- Smith Haldren's stock (common/white, levels 3-7) ---
   eastbrook_arming_sword: {
     id: 'eastbrook_arming_sword',
+    gear: { inflictOnHit: { status: 'bleeding', chance: 0.05 } },
     name: 'Eastbrook Arming Sword',
     kind: 'weapon',
     slot: 'mainhand',
@@ -1052,6 +1058,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   hickory_shortstaff: {
     id: 'hickory_shortstaff',
+    gear: { inflictOnHit: { status: 'silence', chance: 0.02 } },
     name: 'Hickory Shortstaff',
     kind: 'weapon',
     slot: 'mainhand',
@@ -1088,6 +1095,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   valespun_robe: {
     id: 'valespun_robe',
+    gear: { maxSp: 30 },
     name: 'Valespun Robe',
     kind: 'armor',
     armorType: 'cloth',
@@ -1125,6 +1133,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   eastbrook_wool_trousers: {
     id: 'eastbrook_wool_trousers',
+    gear: { resistStatus: { status: 'silence', fraction: 0.1 } },
     name: 'Eastbrook Wool Trousers',
     kind: 'armor',
     armorType: 'cloth',
@@ -1140,6 +1149,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // sized via item_budget.ts primaryStatBudget(level, quality, slot).
   eastbrook_ritual_vestments: {
     id: 'eastbrook_ritual_vestments',
+    gear: { maxHp: 100 },
     name: 'Eastbrook Ritual Vestments',
     kind: 'armor',
     armorType: 'cloth',
@@ -1334,6 +1344,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   hollowbound_legguards: {
     id: 'hollowbound_legguards',
+    gear: { maxSp: 20 },
     name: 'Hollowbound Legguards',
     kind: 'armor',
     armorType: 'leather',
@@ -1382,6 +1393,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   hollow_vigil_staff: {
     id: 'hollow_vigil_staff',
+    gear: { autoCast: { abilityId: 'frostbolt', chance: 0.01 } },
     name: 'Staff of the Hollow Vigil',
     kind: 'weapon',
     slot: 'mainhand',
@@ -1761,6 +1773,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // filling the helmet/shoulder/waist/gloves slots the early game leaves thin.
   roadwardens_helm: {
     id: 'roadwardens_helm',
+    gear: { resistStatus: { status: 'stun', fraction: 0.1 } },
     name: "Roadwarden's Helm",
     kind: 'armor',
     armorType: 'mail',
@@ -1847,6 +1860,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // looted pieces
   bristlehide_spaulders: {
     id: 'bristlehide_spaulders',
+    gear: { maxSp: 20, attackSpeed: 0.03 },
     name: 'Bristlehide Spaulders',
     kind: 'armor',
     armorType: 'leather',
@@ -1894,6 +1908,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   // World Market (see seedHouseListings); four more drop around the Vale.
   crossroads_saber: {
     id: 'crossroads_saber',
+    gear: { attackSpeed: 0.02 },
     name: 'Crossroads Saber',
     kind: 'weapon',
     slot: 'mainhand',
@@ -1904,6 +1919,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   tradesman_hatchet: {
     id: 'tradesman_hatchet',
+    gear: { inflictOnHit: { status: 'stun', chance: 0.03 } },
     name: "Tradesman's Hatchet",
     kind: 'weapon',
     slot: 'mainhand',
@@ -1914,6 +1930,10 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   drovers_staff: {
     id: 'drovers_staff',
+    gear: {
+      inflictOnHit: { status: 'silence', chance: 0.01 },
+      autoCast: { abilityId: 'lesser_heal', chance: 0.01 },
+    },
     name: "Drover's Staff",
     kind: 'weapon',
     slot: 'mainhand',
@@ -1977,6 +1997,7 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
   },
   trail_leggings: {
     id: 'trail_leggings',
+    gear: { autoCast: { abilityId: 'frostbolt', chance: 0.02 } },
     set: 'greyjaw_stalker',
     name: 'Trailworn Leggings',
     kind: 'armor',

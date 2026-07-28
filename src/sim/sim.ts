@@ -4753,6 +4753,10 @@ export class Sim {
       const h = MOBS[e.templateId]?.enrage?.hasteMult;
       if (h && h > 0) haste += h - 1;
     }
+    // Attack speed from gear, precomputed once by recalcPlayerStats. Joins the
+    // same additive bucket everything else does, so it never multiplies with a
+    // haste buff into something neither number promised.
+    haste += e.gearEffects?.attackSpeed ?? 0;
     return slow / (1 + Math.max(0, haste));
   }
 

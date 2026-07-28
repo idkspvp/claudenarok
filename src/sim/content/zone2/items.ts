@@ -366,6 +366,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   marshstrider_boots: {
     id: 'marshstrider_boots',
+    gear: { attackSpeed: 0.05 },
     name: 'Marshstrider Boots',
     kind: 'armor',
     armorType: 'cloth',
@@ -376,6 +377,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   broodmother_silk_robe: {
     id: 'broodmother_silk_robe',
+    gear: { maxSp: 30, attackSpeed: 0.03 },
     name: "Broodmother's Silk Robe",
     kind: 'armor',
     armorType: 'cloth',
@@ -387,6 +389,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   voss_sanctified_mace: {
     id: 'voss_sanctified_mace',
+    gear: { inflictOnHit: { status: 'stun', chance: 0.05 } },
     name: "Voss's Sanctified Mace",
     kind: 'weapon',
     slot: 'mainhand',
@@ -465,6 +468,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   nhalias_funeral_wraps: {
     id: 'nhalias_funeral_wraps',
+    gear: { maxSp: 50 },
     name: "Nhalia's Funeral Wraps",
     kind: 'armor',
     armorType: 'cloth',
@@ -476,6 +480,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   fen_reaver_glaive: {
     id: 'fen_reaver_glaive',
+    gear: { attackSpeed: 0.02 },
     name: 'Fen Reaver Glaive',
     kind: 'weapon',
     slot: 'mainhand',
@@ -602,6 +607,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   drowned_prayer_sandals: {
     id: 'drowned_prayer_sandals',
+    gear: { resistStatus: { status: 'poison', fraction: 0.2 } },
     name: 'Drowned Prayer Sandals',
     kind: 'armor',
     armorType: 'cloth',
@@ -706,6 +712,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   bogiron_hauberk: {
     id: 'bogiron_hauberk',
+    gear: { maxHp: 50 },
     name: 'Bogiron Hauberk',
     kind: 'armor',
     armorType: 'mail',
@@ -750,6 +757,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   reedwoven_trousers: {
     id: 'reedwoven_trousers',
+    gear: { maxSp: 20 },
     name: 'Reedwoven Trousers',
     kind: 'armor',
     armorType: 'leather',
@@ -848,6 +856,7 @@ export const ZONE2_ITEMS: Record<string, ItemDef> = {
   },
   duskthorn_mantle: {
     id: 'duskthorn_mantle',
+    gear: { maxHp: 150 },
     name: 'Duskthorn Mantle',
     kind: 'armor',
     armorType: 'leather',

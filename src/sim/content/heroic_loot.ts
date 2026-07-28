@@ -98,6 +98,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
   },
   cryptplate_helm: {
     id: 'cryptplate_helm',
+    gear: { autoCast: { abilityId: 'lesser_heal', chance: 0.05 } },
     name: 'Cryptplate Helm',
     kind: 'armor',
     armorType: 'mail',
@@ -279,6 +280,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
   },
   choir_blessed_spaulders: {
     id: 'choir_blessed_spaulders',
+    gear: { maxSp: 150 },
     name: 'Choir-Blessed Spaulders',
     kind: 'armor',
     armorType: 'mail',

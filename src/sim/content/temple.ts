@@ -731,6 +731,7 @@ export const TEMPLE_ITEMS: Record<string, ItemDef> = {
   },
   moonshroud_tunic: {
     id: 'moonshroud_tunic',
+    gear: { attackSpeed: 0.05, autoCast: { abilityId: 'frostbolt', chance: 0.03 } },
     name: 'Moonwrack Tunic',
     kind: 'armor',
     armorType: 'leather',

@@ -3,6 +3,7 @@
 import type { ChatSenderFlair, StreamerLinks } from './account_flair';
 import type { AggregatedCards } from './cards';
 import type { Element, ElementLevel, Race, Size } from './combat/elements';
+import type { AggregatedGearEffects, GearEffects } from './combat/gear_effects';
 import type { GatheringProfessionId } from './content/professions';
 import type { LockSession, LootTier, PickAction, StepResult, VisibleCell } from './lockpick';
 
@@ -807,6 +808,10 @@ interface BaseItemDef {
   name: string;
   slot?: ItemSlot;
   weapon?: WeaponInfo;
+  /** What this piece does beyond its numbers: a status it inflicts or resists,
+   *  a spell it casts by itself, flat health or spell points, attack speed.
+   *  See src/sim/combat/gear_effects.ts. */
+  gear?: GearEffects;
   /** How many card sockets this piece carries, 0 to MAX_CARD_SLOTS. About a
    *  third of the reference game's equipment has at least one, and what goes in
    *  them is its endgame (src/sim/cards.ts). */
@@ -2965,6 +2970,9 @@ export interface Entity {
    *  recalcPlayerStats. The damage path reads this rather than walking the
    *  equipment, which is the same rule every other player modifier follows. */
   cardBonuses?: AggregatedCards;
+  /** Everything the worn set does beyond its numbers, aggregated ONCE in
+   *  recalcPlayerStats for the same reason the card totals are. */
+  gearEffects?: AggregatedGearEffects;
   race?: Race;
   element?: Element;
   elementLevel?: ElementLevel;

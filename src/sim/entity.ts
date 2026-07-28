@@ -1,5 +1,6 @@
 import { aggregateCards, type CardDef } from './cards';
 import { critRateFrom } from './combat/crit';
+import { aggregateGearEffects, type GearEffects } from './combat/gear_effects';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
 import { CARDS } from './content/cards';
@@ -362,6 +363,7 @@ export function recalcPlayerStats(
   let bonusPvpOffenseRating = 0;
   let bonusPvpDefenseRating = 0;
   const wornCards: CardDef[] = [];
+  const gearSources: (GearEffects | undefined)[] = [];
   for (const slot of ALL_EQUIP_SLOTS) {
     const itemId = equipment[slot];
     if (!itemId) continue;
@@ -374,6 +376,7 @@ export function recalcPlayerStats(
     // the level gate existed; the equip path blocks equipping over-level gear.
     if (!meetsLevelRequirement(lvl, item)) continue;
     if (item.set) setCounts.set(item.set, (setCounts.get(item.set) ?? 0) + 1);
+    if (item.gear) gearSources.push(item.gear);
     bonusSp += item.spellPower ?? 0;
     bonusCritRating += item.critRating ?? 0;
     bonusHasteRating += item.hasteRating ?? 0;
@@ -385,6 +388,7 @@ export function recalcPlayerStats(
       s.agi += item.stats.agi ?? 0;
       s.vit += item.stats.vit ?? 0;
       s.int += item.stats.int ?? 0;
+      s.dex += item.stats.dex ?? 0;
       s.luk += item.stats.luk ?? 0;
       s.armor += item.stats.armor ?? 0;
       s.mdef += item.stats.mdef ?? 0;
@@ -402,6 +406,7 @@ export function recalcPlayerStats(
       s.agi += enchantStats.agi ?? 0;
       s.vit += enchantStats.vit ?? 0;
       s.int += enchantStats.int ?? 0;
+      s.dex += enchantStats.dex ?? 0;
       s.luk += enchantStats.luk ?? 0;
       s.armor += enchantStats.armor ?? 0;
       s.mdef += enchantStats.mdef ?? 0;
@@ -414,6 +419,7 @@ export function recalcPlayerStats(
       const card = CARDS[cardId];
       if (!card) continue;
       wornCards.push(card);
+      if (card.effect.gear) gearSources.push(card.effect.gear);
       if (!card.effect.stats) continue;
       s.str += card.effect.stats.str ?? 0;
       s.agi += card.effect.stats.agi ?? 0;
@@ -428,6 +434,12 @@ export function recalcPlayerStats(
   // One aggregate for the whole worn set, computed here so the damage path never
   // walks the equipment: the same rule every other player modifier follows.
   e.cardBonuses = wornCards.length ? aggregateCards(wornCards) : undefined;
+  // The same one-aggregate rule for everything the worn set does beyond its
+  // numbers, so the swing path never walks the equipment either. Left undefined
+  // when nothing carries one, which is what keeps ordinary gear off the rng
+  // stream in combat/gear_proc.ts.
+  const gearEffects = gearSources.length ? aggregateGearEffects(gearSources) : undefined;
+  e.gearEffects = gearEffects;
   // Item-set bonuses from equipped pieces. Flat primary stats join the gear
   // totals so they feed every derivation below; AP/crit/pushback fold in at
   // their own steps (bonusAp, critChance, castPushbackReduction, knockbackResistance).
@@ -767,6 +779,9 @@ export function recalcPlayerStats(
   if (maxHpPctAura !== 0) e.maxHp = Math.max(1, Math.round(e.maxHp * (1 + maxHpPctAura)));
   // Fiesta "Colossus"-style buffs: growing bigger also makes you tankier.
   if (scaleMul > 1) e.maxHp = Math.round(e.maxHp * scaleMul);
+  // Flat health from gear, added AFTER every multiplier so a fixed number stays
+  // the fixed number the item promises rather than being scaled by a buff.
+  if (gearEffects?.maxHp) e.maxHp = Math.max(1, e.maxHp + gearEffects.maxHp);
   e.hp = Math.max(1, Math.round(e.maxHp * hpFrac));
   if (e.dead) e.hp = 0;
   // Body size: players default to 1; a buff_scale aura grows/shrinks them live.
@@ -788,7 +803,8 @@ export function recalcPlayerStats(
     e.maxResource = Math.round(
       baseSpAt(JOB_VITALS[def.id], lvl) *
         intManaMultiplier(s.int) *
-        (1 + (mods?.global.manaPct ?? 0)),
+        (1 + (mods?.global.manaPct ?? 0)) +
+        (gearEffects?.maxSp ?? 0),
     );
     e.resource = cameFromForm
       ? Math.min(e.savedMana, e.maxResource)

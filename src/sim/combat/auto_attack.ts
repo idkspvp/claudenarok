@@ -60,6 +60,7 @@ import { consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
 import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing';
 import { isTravelFormAuraKind } from './forms';
+import { runGearOnHit } from './gear_proc';
 import { missChanceFromContest } from './hit_flee';
 import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
@@ -456,6 +457,9 @@ export function rangedSwing(
     // swing the mainhand, so casters never roll it. No-op (no rng draw) unless the
     // shooter wields a proc weapon with a weaponHit proc.
     if (!ranged.wand) runWeaponProcs(ctx, atk, tgt, 'weaponHit');
+    // Statuses and auto-casts the wearer's gear carries. No rng unless something
+    // worn actually carries one (src/sim/combat/gear_proc.ts).
+    runGearOnHit(ctx, atk, tgt);
   });
 }
 
@@ -656,5 +660,8 @@ export function meleeSwing(
   // Legendary on-hit weapon procs (e.g. Thronebane's Chain Arc). No-op (no rng
   // draw) unless the attacker wields a proc weapon with a weaponHit proc.
   runWeaponProcs(ctx, attacker, target, 'weaponHit');
+  // Statuses and auto-casts the wearer's gear carries. No rng unless something
+  // worn actually carries one (src/sim/combat/gear_proc.ts).
+  runGearOnHit(ctx, attacker, target);
   return true;
 }

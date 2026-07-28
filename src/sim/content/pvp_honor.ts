@@ -119,6 +119,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   furyforged_sabatons: {
     id: 'furyforged_sabatons',
+    gear: { resistStatus: { status: 'stun', fraction: 0.5 } },
     name: 'Furyforged Sabatons',
     kind: 'armor',
     armorType: 'mail',
@@ -153,6 +154,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   stormbound_spaulders: {
     id: 'stormbound_spaulders',
+    gear: { maxHp: 500 },
     name: 'Stormbound Spaulders',
     kind: 'armor',
     armorType: 'mail',
@@ -228,6 +230,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   stormbound_greaves: {
     id: 'stormbound_greaves',
+    gear: { attackSpeed: 0.1 },
     name: 'Stormbound Greaves',
     kind: 'armor',
     armorType: 'mail',
@@ -307,6 +310,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   ashstalker_legguards: {
     id: 'ashstalker_legguards',
+    gear: { maxHp: 400 },
     name: 'Ashstalker Legguards',
     kind: 'armor',
     armorType: 'leather',
@@ -338,6 +342,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   ashstalker_treads: {
     id: 'ashstalker_treads',
+    gear: { maxSp: 100, autoCast: { abilityId: 'frostbolt', chance: 0.03 } },
     name: 'Ashstalker Treads',
     kind: 'armor',
     armorType: 'leather',
@@ -639,6 +644,7 @@ export const WARFARE_ITEMS: Record<string, ItemDef> = {
   },
   emberglass_warstaff: {
     id: 'emberglass_warstaff',
+    gear: { inflictOnHit: { status: 'silence', chance: 0.3 } },
     name: 'Emberglass Warstaff',
     kind: 'weapon',
     slot: 'mainhand',

@@ -328,6 +328,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   marrowlord_boneboots: {
     id: 'marrowlord_boneboots',
+    gear: { maxHp: 200 },
     name: 'Marrowlord Boneboots',
     kind: 'armor',
     armorType: 'mail',
@@ -340,6 +341,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   // Brutok Skullsmasher (rare ogre), guaranteed trophy + warbelt
   skullsmasher_warbelt: {
     id: 'skullsmasher_warbelt',
+    gear: { resistStatus: { status: 'freeze', fraction: 0.2 } },
     name: "Skullsmasher's Warbelt",
     kind: 'armor',
     armorType: 'mail',
@@ -416,6 +418,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   drogmars_skullcleaver: {
     id: 'drogmars_skullcleaver',
+    gear: { inflictOnHit: { status: 'stun', chance: 0.1 } },
     name: "Drogmar's Skullcleaver",
     kind: 'weapon',
     slot: 'mainhand',
@@ -439,6 +442,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   gutripper_shiv: {
     id: 'gutripper_shiv',
+    gear: { autoCast: { abilityId: 'lesser_heal', chance: 0.01 } },
     name: 'Gutripper Shiv',
     kind: 'weapon',
     slot: 'mainhand',
@@ -537,6 +541,10 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   gravewyrm_stalkers_treads: {
     id: 'gravewyrm_stalkers_treads',
+    gear: {
+      resistStatus: { status: 'blind', fraction: 0.3 },
+      autoCast: { abilityId: 'lesser_heal', chance: 0.03 },
+    },
     name: "Gravewyrm Stalker's Treads",
     kind: 'armor',
     armorType: 'leather',
@@ -717,6 +725,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   fang_of_korzul: {
     id: 'fang_of_korzul',
+    gear: { inflictOnHit: { status: 'poison', chance: 0.1 } },
     name: 'Fang of Korzul',
     kind: 'weapon',
     slot: 'mainhand',
@@ -1051,6 +1060,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   stormcallers_spaulders: {
     id: 'stormcallers_spaulders',
+    gear: { maxHp: 300, autoCast: { abilityId: 'fireball', chance: 0.03 } },
     set: 'stormcallers',
     name: 'Galecall Spaulders',
     kind: 'armor',
@@ -1213,6 +1223,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   highwatch_wallshield: {
     id: 'highwatch_wallshield',
+    gear: { maxHp: 50 },
     name: 'Highwatch Wallshield',
     kind: 'armor',
     armorType: 'mail',
@@ -1362,6 +1373,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   cragward_pauldrons: {
     id: 'cragward_pauldrons',
+    gear: { autoCast: { abilityId: 'fireball', chance: 0.03 } },
     name: 'Cragward Pauldrons',
     kind: 'armor',
     armorType: 'mail',
@@ -1476,6 +1488,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   },
   shardsong_mantle: {
     id: 'shardsong_mantle',
+    gear: { maxSp: 80 },
     name: 'Shardsong Mantle',
     kind: 'armor',
     armorType: 'cloth',
@@ -1612,6 +1625,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
   // armorType already gates equips; no requiredClass is needed.
   wildgrowth_leggings: {
     id: 'wildgrowth_leggings',
+    gear: { attackSpeed: 0.05 },
     name: 'Wildgrowth Leggings',
     kind: 'armor',
     armorType: 'leather',

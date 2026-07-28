@@ -41,7 +41,11 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Wild Boar Card',
     fits: ACCESSORY,
     from: 'wild_boar',
-    effect: { stats: { str: 1 } },
+    effect: {
+      stats: { str: 1 },
+      // Picky Card: 100 maximum health.
+      gear: { maxHp: 100 },
+    },
   },
   card_mogger: {
     id: 'card_mogger',
@@ -83,7 +87,11 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Sableweb Lurker Card',
     fits: HEADGEAR,
     from: 'webwood_spider',
-    effect: { stats: { agi: 1 } },
+    effect: {
+      stats: { agi: 1 },
+      // Fabre Card: 100 maximum health.
+      gear: { maxHp: 100 },
+    },
   },
 
   // --- Defence: flat, and against a race or an attribute ---
@@ -99,7 +107,11 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Deeprock Tunneler Card',
     fits: SHIELD,
     from: 'deeprock_kobold',
-    effect: { resistRace: { race: 'demihuman', fraction: 0.1 } },
+    effect: {
+      resistRace: { race: 'demihuman', fraction: 0.1 },
+      // Zenorc Card: a 4% chance to poison on hit.
+      gear: { inflictOnHit: { status: 'poison', chance: 0.04 } },
+    },
   },
   card_raised_bonewalker: {
     id: 'card_raised_bonewalker',
@@ -113,14 +125,22 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Mire Prowler Card',
     fits: SHIELD,
     from: 'mire_prowler',
-    effect: { resistRace: { race: 'brute', fraction: 0.1 } },
+    effect: {
+      resistRace: { race: 'brute', fraction: 0.1 },
+      // Familiar Card: a 5% chance to blind on hit.
+      gear: { inflictOnHit: { status: 'blind', chance: 0.05 } },
+    },
   },
   card_drowned_dead: {
     id: 'card_drowned_dead',
     name: 'Drowned Dead Card',
     fits: GARMENT,
     from: 'drowned_dead',
-    effect: { resistElement: { element: 'water', fraction: 0.15 } },
+    effect: {
+      resistElement: { element: 'water', fraction: 0.15 },
+      // Skeleton Card: a 2% chance to stun on hit.
+      gear: { inflictOnHit: { status: 'stun', chance: 0.02 } },
+    },
   },
   card_emberkin: {
     id: 'card_emberkin',
@@ -149,7 +169,11 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Hollow Acolyte Card',
     fits: ARMOR,
     from: 'hollow_acolyte',
-    effect: { stats: { mdef: 2, int: 1 } },
+    effect: {
+      stats: { mdef: 2, int: 1 },
+      // Skeleton Card: a 2% chance to stun on hit.
+      gear: { inflictOnHit: { status: 'stun', chance: 0.02 } },
+    },
   },
 
   // --- Health and mobility ---
@@ -165,14 +189,22 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Ridge Stalker Card',
     fits: SHOES,
     from: 'ridge_stalker',
-    effect: { stats: { agi: 1 } },
+    effect: {
+      stats: { agi: 1 },
+      // Snake Card: a 5% chance to poison on hit.
+      gear: { inflictOnHit: { status: 'poison', chance: 0.05 } },
+    },
   },
   card_mudfin_murloc: {
     id: 'card_mudfin_murloc',
     name: 'Mudfin Skulker Card',
     fits: SHOES,
     from: 'mudfin_murloc',
-    effect: { stats: { agi: 1, luk: 1 } },
+    effect: {
+      stats: { agi: 1, luk: 1 },
+      // Roda Frog Card: 400 maximum health and 50 spell points.
+      gear: { maxHp: 400, maxSp: 50 },
+    },
   },
 
   // --- Damage against a race, an attribute, or a size: the hunter cards ---
@@ -218,42 +250,67 @@ export const CARDS: Record<string, CardDef> = {
     name: 'Korzul Card',
     fits: ARMOR,
     from: 'korzul_the_gravewyrm',
-    effect: { armorElement: 'undead' },
+    effect: {
+      armorElement: 'undead',
+      // Orc Hero Card: immunity to stun.
+      gear: { resistStatus: { status: 'stun', fraction: 1 } },
+    },
   },
   card_voskar_emberwing: {
     id: 'card_voskar_emberwing',
     name: 'Voskar Card',
     fits: WEAPON,
     from: 'voskar_emberwing',
-    effect: { weaponElement: 'fire' },
+    effect: {
+      weaponElement: 'fire',
+      // Mutant Dragon Card: a 5% chance to cast a fire nuke on hit.
+      gear: { autoCast: { abilityId: 'fireball', chance: 0.05 } },
+    },
   },
   card_ysolei: {
     id: 'card_ysolei',
     name: 'Ysolei Card',
     fits: WEAPON,
     from: 'ysolei',
-    effect: { weaponElement: 'water' },
+    effect: {
+      weaponElement: 'water',
+      // Nightmare Card: immunity to sleep.
+      gear: { resistStatus: { status: 'sleep', fraction: 1 } },
+    },
   },
   card_marrowlord_varkas: {
     id: 'card_marrowlord_varkas',
     name: 'Marrowlord Varkas Card',
     fits: ARMOR,
     from: 'marrowlord_varkas',
-    effect: { armorElement: 'shadow' },
+    effect: {
+      armorElement: 'shadow',
+      // Lord of Death Card: a 5% chance to stun on hit.
+      gear: { inflictOnHit: { status: 'stun', chance: 0.05 } },
+    },
   },
   card_thunzharr_waking_peak: {
     id: 'card_thunzharr_waking_peak',
     name: 'Thunzharr Card',
     fits: WEAPON,
     from: 'thunzharr_waking_peak',
-    effect: { weaponElement: 'wind' },
+    effect: {
+      weaponElement: 'wind',
+      // Doppelganger Card: 10% attack speed.
+      gear: { attackSpeed: 0.1 },
+    },
   },
   card_nythraxis: {
     id: 'card_nythraxis',
     name: 'Nythraxis Card',
     fits: ARMOR,
     from: 'nythraxis_scourge_of_thornpeak',
-    effect: { stats: { armor: 2, vit: 2 }, resistRace: { race: 'undead', fraction: 0.15 } },
+    effect: {
+      stats: { armor: 2, vit: 2 },
+      resistRace: { race: 'undead', fraction: 0.15 },
+      // Bloody Knight Card: a 2% chance to cast a fire storm on hit.
+      gear: { autoCast: { abilityId: 'flamestrike', chance: 0.02 } },
+    },
   },
 };
 

@@ -77,6 +77,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   reliquary_shoulder: {
     id: 'reliquary_shoulder',
+    gear: { autoCast: { abilityId: 'fireball', chance: 0.02 } },
     name: 'Crumbled Spaulders',
     kind: 'armor',
     armorType: 'mail',
@@ -98,6 +99,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   // --- rare (blue) signature drops, Heroic-gated ---
   deacon_reliquary_helm: {
     id: 'deacon_reliquary_helm',
+    gear: { autoCast: { abilityId: 'frostbolt', chance: 0.02 } },
     name: "Deacon's Reliquary Helm",
     kind: 'armor',
     armorType: 'mail',
@@ -145,6 +147,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   nhalias_bell_maul: {
     id: 'nhalias_bell_maul',
+    gear: { inflictOnHit: { status: 'stun', chance: 0.02 } },
     name: "Nhalia's Bell-Maul",
     kind: 'weapon',
     slot: 'mainhand',
@@ -156,6 +159,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   reedstalker_jerkin: {
     id: 'reedstalker_jerkin',
+    gear: { maxHp: 80 },
     name: 'Reedstalker Jerkin',
     kind: 'armor',
     armorType: 'leather',
@@ -212,6 +216,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   nhalias_litany_rod: {
     id: 'nhalias_litany_rod',
+    gear: { autoCast: { abilityId: 'fireball', chance: 0.01 } },
     name: "Nhalia's Litany Rod",
     kind: 'weapon',
     slot: 'mainhand',
@@ -236,6 +241,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   siltstep_leggings: {
     id: 'siltstep_leggings',
+    gear: { attackSpeed: 0.03 },
     name: 'Siltstep Leggings',
     kind: 'armor',
     armorType: 'leather',
@@ -248,6 +254,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   sunken_reliquary_hood: {
     id: 'sunken_reliquary_hood',
+    gear: { maxHp: 80 },
     name: 'Sunken Reliquary Hood',
     kind: 'armor',
     armorType: 'cloth',
@@ -263,6 +270,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   // 14-20 zone beyond the marsh. Prices live in shop.ts. ---
   litany_legs: {
     id: 'litany_legs',
+    gear: { autoCast: { abilityId: 'lesser_heal', chance: 0.02 } },
     name: 'Silt-Walker Greaves',
     kind: 'armor',
     armorType: 'cloth',
@@ -273,6 +281,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   litany_shoulder: {
     id: 'litany_shoulder',
+    gear: { attackSpeed: 0.03 },
     name: 'Blackwater Drift Mantle',
     kind: 'armor',
     armorType: 'mail',
@@ -315,6 +324,7 @@ export const DELVE_ITEMS: Record<string, ItemDef> = {
   },
   litany_cloth_chest: {
     id: 'litany_cloth_chest',
+    gear: { resistStatus: { status: 'curse', fraction: 0.05 } },
     name: 'Choir-Drowned Raiment',
     kind: 'armor',
     armorType: 'cloth',

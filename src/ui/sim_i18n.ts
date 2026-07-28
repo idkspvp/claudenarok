@@ -377,6 +377,16 @@ const baseEnTable = {
   'aura.wintersChill': "Winter's Chill",
   'aura.icicles': 'Icicles',
   'aura.perfectMoment': 'Perfect Moment',
+  // The eight statuses a piece of equipment or a card can inflict
+  // (src/sim/combat/gear_effects.ts). Shown on the debuff bar and combat log.
+  'aura.gearStunned': 'Stunned',
+  'aura.gearCursed': 'Cursed',
+  'aura.gearBleeding': 'Bleeding',
+  'aura.gearBlinded': 'Blinded',
+  'aura.gearPoisoned': 'Poisoned',
+  'aura.gearFrozen': 'Frozen',
+  'aura.gearSilenced': 'Silenced',
+  'aura.gearAsleep': 'Asleep',
   // Card Duel minigame (Card Master NPC, src/sim/social/card_duel.ts).
   'log.cardDuelQueued': 'You queue for a Card Duel.',
   'log.cardDuelLeftQueue': 'You leave the Card Duel queue.',
@@ -1284,6 +1294,15 @@ const AURA_NAME_KEY: Record<string, SimMessageKey> = {
   // Fury's Enrage buff (the enrageChance case in src/sim/combat/effect_dispatch.ts),
   // procced by Bloodletting and Red Harvest; shown on the buff bar.
   Enraged: 'aura.enraged',
+  // Gear-inflicted statuses (src/sim/combat/gear_proc.ts STATUS_NAME).
+  Stunned: 'aura.gearStunned',
+  Cursed: 'aura.gearCursed',
+  Bleeding: 'aura.gearBleeding',
+  Blinded: 'aura.gearBlinded',
+  Poisoned: 'aura.gearPoisoned',
+  Frozen: 'aura.gearFrozen',
+  Silenced: 'aura.gearSilenced',
+  Asleep: 'aura.gearAsleep',
   Tamed: 'aura.tamed',
   'Temporal Exhaustion': 'aura.temporalExhaustion',
   'Cauterize Fatigue': 'aura.cauterizeFatigue',

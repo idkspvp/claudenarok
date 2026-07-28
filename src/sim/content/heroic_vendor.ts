@@ -137,6 +137,7 @@ export const HEROIC_VENDOR_ITEMS: Record<string, ItemDef> = {
   },
   medallion_of_endless_profit: {
     id: 'medallion_of_endless_profit',
+    gear: { maxHp: 300 },
     name: 'Medallion of Endless Profit',
     kind: 'armor',
     slot: 'face',
