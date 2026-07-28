@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "87cb2eb0",
+      "state": "b4e4fd6c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -148,7 +148,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -159,7 +159,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 416,
-      "state": "22f8e878",
+      "state": "8b05a378",
       "events": "e7b86907",
       "rng": {
         "draws": 2,
@@ -335,7 +335,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -346,7 +346,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 416,
-      "state": "90eb478c",
+      "state": "e814cdd0",
       "events": "fbab41e3",
       "rng": {
         "draws": 4,
@@ -542,7 +542,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -553,7 +553,7 @@
       "tick": 500,
       "time": 25,
       "nextId": 416,
-      "state": "59bce98c",
+      "state": "9cc185e0",
       "events": "e02f321c",
       "rng": {
         "draws": 18,
@@ -564,7 +564,7 @@
       "tick": 1000,
       "time": 50,
       "nextId": 416,
-      "state": "92632df6",
+      "state": "835e5676",
       "events": "d41935fb",
       "rng": {
         "draws": 38,
@@ -575,7 +575,7 @@
       "tick": 1500,
       "time": 75,
       "nextId": 416,
-      "state": "ad684409",
+      "state": "5bd5cb09",
       "events": "172dffc0",
       "rng": {
         "draws": 58,
@@ -586,7 +586,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 416,
-      "state": "96ba13b8",
+      "state": "c1483204",
       "events": "a3cc9f09",
       "rng": {
         "draws": 78,
@@ -597,7 +597,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 416,
-      "state": "93f77a16",
+      "state": "952b055a",
       "events": "e559297f",
       "rng": {
         "draws": 96,
@@ -608,7 +608,7 @@
       "tick": 3000,
       "time": 150,
       "nextId": 416,
-      "state": "8efdb487",
+      "state": "6f43bd33",
       "events": "70f24b4b",
       "rng": {
         "draws": 116,
@@ -619,7 +619,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 416,
-      "state": "aea2f8c4",
+      "state": "4ef5efd4",
       "events": "86d29dfd",
       "rng": {
         "draws": 136,
@@ -630,7 +630,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 416,
-      "state": "001358eb",
+      "state": "4ee7277f",
       "events": "c0982447",
       "rng": {
         "draws": 156,
@@ -641,7 +641,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 416,
-      "state": "ce056e61",
+      "state": "501efe6d",
       "events": "f460621d",
       "rng": {
         "draws": 176,
@@ -652,7 +652,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 416,
-      "state": "3e7b86d8",
+      "state": "6696b288",
       "events": "1854a740",
       "rng": {
         "draws": 194,
@@ -663,7 +663,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 416,
-      "state": "edad639b",
+      "state": "9f36f9bb",
       "events": "4f44fcfa",
       "rng": {
         "draws": 204,
@@ -884,7 +884,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -895,7 +895,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 416,
-      "state": "29bee0ec",
+      "state": "06a32f3c",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -1116,7 +1116,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }

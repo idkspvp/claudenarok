@@ -23,7 +23,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "136d1a8f",
+      "state": "e0b46d83",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -145,7 +145,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -156,7 +156,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "f0031de1",
+      "state": "7c52f5d9",
       "events": "dc0dea30",
       "rng": {
         "draws": 0,
@@ -279,7 +279,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -342,7 +342,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "36c92782",
+      "state": "0d12465a",
       "events": "f8ec86ea",
       "rng": {
         "draws": 0,
@@ -465,7 +465,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -542,7 +542,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "ac284421",
+      "state": "f0a9f3ed",
       "events": "48f168e3",
       "rng": {
         "draws": 0,
@@ -553,7 +553,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "71e24e5e",
+      "state": "31dcfb32",
       "events": "8caaa753",
       "rng": {
         "draws": 0,
@@ -564,7 +564,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "4c0e0403",
+      "state": "feb0814f",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -705,7 +705,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -855,7 +855,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "7051ceb1",
+      "state": "d1ca9e6d",
       "events": "0f25af7e",
       "rng": {
         "draws": 0,
@@ -996,7 +996,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1074,7 +1074,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "b0c6796a",
+      "state": "eb9990b6",
       "events": "252febab",
       "rng": {
         "draws": 0,
@@ -1215,7 +1215,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1345,7 +1345,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "cabd7917",
+      "state": "cba90103",
       "events": "61f1164e",
       "rng": {
         "draws": 0,
@@ -1486,7 +1486,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1616,7 +1616,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "7051ceb1",
+      "state": "d1ca9e6d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1757,7 +1757,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1835,7 +1835,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 422,
-      "state": "7051ceb1",
+      "state": "d1ca9e6d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1976,7 +1976,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2054,7 +2054,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "5b3a030a",
+      "state": "aee38d0e",
       "events": "7c671d97",
       "rng": {
         "draws": 0,
@@ -2248,7 +2248,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2390,7 +2390,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2454,7 +2454,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "bb4cc162",
+      "state": "c57807ea",
       "events": "f892faa9",
       "rng": {
         "draws": 82,
@@ -2465,7 +2465,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "7ab68e2b",
+      "state": "2372ce5f",
       "events": "544e5afd",
       "rng": {
         "draws": 151,
@@ -2476,7 +2476,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "7ab68e2b",
+      "state": "2372ce5f",
       "events": "741638a5",
       "rng": {
         "draws": 151,
@@ -2688,7 +2688,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2833,7 +2833,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2897,7 +2897,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 426,
-      "state": "1dc6e0bf",
+      "state": "e3d01323",
       "events": "3c0a5f6e",
       "rng": {
         "draws": 151,
@@ -3109,7 +3109,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -3254,7 +3254,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3316,7 +3316,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "9a770888",
+      "state": "489d1024",
       "events": "0fcaa395",
       "rng": {
         "draws": 151,
@@ -3528,7 +3528,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -3673,7 +3673,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3745,7 +3745,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 428,
-      "state": "9a770888",
+      "state": "489d1024",
       "events": "741638a5",
       "rng": {
         "draws": 151,
@@ -3957,7 +3957,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -4102,7 +4102,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

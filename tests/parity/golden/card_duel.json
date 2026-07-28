@@ -29,7 +29,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 417,
-      "state": "68343a09",
+      "state": "b2bcd059",
       "events": "5b3a32e3",
       "rng": {
         "draws": 38,
@@ -40,7 +40,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 417,
-      "state": "acdd6598",
+      "state": "cb1a3ad4",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -51,7 +51,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 417,
-      "state": "5701b620",
+      "state": "6fafffbc",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -62,7 +62,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "d6c08421",
+      "state": "73230d11",
       "events": "18091e3e",
       "rng": {
         "draws": 38,
@@ -73,7 +73,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 417,
-      "state": "be88057c",
+      "state": "c79603c4",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -84,7 +84,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 417,
-      "state": "56801c8f",
+      "state": "cb20dfcf",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -95,7 +95,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 417,
-      "state": "d781e781",
+      "state": "56d81ac1",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -106,7 +106,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "0786238e",
+      "state": "45228b12",
       "events": "741638a5",
       "rng": {
         "draws": 38,
@@ -117,7 +117,7 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 417,
-      "state": "37a77cc1",
+      "state": "8b52ae11",
       "events": "741638a5",
       "rng": {
         "draws": 42,
@@ -301,7 +301,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -370,7 +370,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

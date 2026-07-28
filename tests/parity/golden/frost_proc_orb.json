@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c730b85c",
+      "state": "0dcb2528",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -143,7 +143,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -154,8 +154,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "87676dee",
-      "events": "7f8f70c7",
+      "state": "08bf9038",
+      "events": "af1ed4a2",
       "rng": {
         "draws": 1,
         "digest": "e1d88b80"
@@ -165,8 +165,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "6d3c53c6",
-      "events": "5380a5ed",
+      "state": "456f633e",
+      "events": "b999fb56",
       "rng": {
         "draws": 2,
         "digest": "5ab9e87d"
@@ -176,8 +176,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "bb981889",
-      "events": "a661284d",
+      "state": "a4620c73",
+      "events": "122b90b6",
       "rng": {
         "draws": 82,
         "digest": "a2a056cd"
@@ -187,8 +187,8 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "47e29433",
-      "events": "3ec33430",
+      "state": "ab7ab807",
+      "events": "9d3bce8d",
       "rng": {
         "draws": 152,
         "digest": "a592d606"
@@ -198,8 +198,8 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "d519bed1",
-      "events": "fd3b2da4",
+      "state": "8773b84f",
+      "events": "059d9c8b",
       "rng": {
         "draws": 180,
         "digest": "1a2d5a02"
@@ -221,13 +221,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 134
+            "damageDealt": 139
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 134
+              "dummyDamage": 139
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -400,7 +400,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -441,7 +441,7 @@
           "flee": 26,
           "hit": 26,
           "hostile": true,
-          "hp": 499866,
+          "hp": 499861,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -480,7 +480,7 @@
           "threat": [
             [
               415,
-              134
+              139
             ]
           ],
           "weapon": {
@@ -493,7 +493,7 @@
       "tick": 84,
       "time": 4.2,
       "nextId": 417,
-      "state": "d519bed1",
+      "state": "8773b84f",
       "events": "741638a5",
       "rng": {
         "draws": 180,
@@ -516,13 +516,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 134
+            "damageDealt": 139
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "dummyDamage": 134
+              "dummyDamage": 139
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -695,7 +695,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -736,7 +736,7 @@
           "flee": 26,
           "hit": 26,
           "hostile": true,
-          "hp": 499866,
+          "hp": 499861,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -775,7 +775,7 @@
           "threat": [
             [
               415,
-              134
+              139
             ]
           ],
           "weapon": {

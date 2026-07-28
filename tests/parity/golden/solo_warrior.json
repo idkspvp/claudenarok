@@ -10,14 +10,14 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 179,
-  "drawDigest": "c5f4bfe0",
+  "draws": 188,
+  "drawDigest": "21b7e941",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "87cb2eb0",
+      "state": "b4e4fd6c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -144,7 +144,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -155,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "00bed6f4",
-      "events": "1350ff76",
+      "state": "bd1e2a02",
+      "events": "ba3076db",
       "rng": {
         "draws": 9,
         "digest": "c2dae474"
@@ -166,33 +166,33 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "3ea63adc",
-      "events": "741638a5",
+      "state": "bb98c9ab",
+      "events": "147a2cf0",
       "rng": {
-        "draws": 9,
-        "digest": "c2dae474"
+        "draws": 14,
+        "digest": "b57cc633"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "3f88be47",
-      "events": "d54f31f1",
+      "state": "4ca58bc6",
+      "events": "c970ea33",
       "rng": {
-        "draws": 105,
-        "digest": "3e0eb09d"
+        "draws": 112,
+        "digest": "da0142a7"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "94551a73",
-      "events": "f740fdd2",
+      "state": "8e3e3f84",
+      "events": "b9f28e36",
       "rng": {
-        "draws": 161,
-        "digest": "b2ea1088"
+        "draws": 169,
+        "digest": "cd390af7"
       },
       "label": "kill",
       "players": [
@@ -211,7 +211,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7122,
+            "damageDealt": 7098,
             "damageTaken": 15,
             "kills": 1
           },
@@ -219,7 +219,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7122,
+              "damageDealt": 7098,
               "kills": 1
             },
             "dungeonClears": {},
@@ -339,13 +339,13 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.45,
+          "swingTimer": 0.846,
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -376,13 +376,7 @@
           },
           "level": 2,
           "loot": {
-            "copper": 8,
-            "items": [
-              {
-                "count": 1,
-                "itemId": "wolf_fang"
-              }
-            ]
+            "copper": 9
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
@@ -432,11 +426,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "f5ea1f0c",
+      "state": "0f9eabd9",
       "events": "ebcfe9d2",
       "rng": {
-        "draws": 179,
-        "digest": "c5f4bfe0"
+        "draws": 188,
+        "digest": "21b7e941"
       },
       "label": "final",
       "players": [
@@ -455,7 +449,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7122,
+            "damageDealt": 7098,
             "damageTaken": 15,
             "kills": 1
           },
@@ -463,7 +457,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7122,
+              "damageDealt": 7098,
               "kills": 1
             },
             "dungeonClears": {},
@@ -588,13 +582,13 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.25,
+          "swingTimer": 0.646,
           "targetId": 416,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -625,13 +619,7 @@
           },
           "level": 2,
           "loot": {
-            "copper": 8,
-            "items": [
-              {
-                "count": 1,
-                "itemId": "wolf_fang"
-              }
-            ]
+            "copper": 9
           },
           "lootFfaTimer": 59.8,
           "lootRecipientIds": [

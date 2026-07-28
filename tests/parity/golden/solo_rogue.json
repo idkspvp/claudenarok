@@ -8,14 +8,14 @@
     "meleeSwing weaponStrike (sinister_strike via castAbility ~3736)",
     "combo points"
   ],
-  "draws": 159,
-  "drawDigest": "7892bae0",
+  "draws": 166,
+  "drawDigest": "3a191afe",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "9754b605",
+      "state": "dffd73e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -102,7 +102,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -139,7 +139,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -150,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "599bbacb",
-      "events": "359ff2c3",
+      "state": "032076b1",
+      "events": "1cdfd340",
       "rng": {
         "draws": 14,
         "digest": "4b746836"
@@ -161,8 +161,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "ad4c00e6",
-      "events": "e568ac0d",
+      "state": "07b3b931",
+      "events": "7fb3941b",
       "rng": {
         "draws": 24,
         "digest": "672bbd02"
@@ -172,22 +172,22 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "722d9b60",
-      "events": "12e789f2",
+      "state": "e3bc5b92",
+      "events": "feaf4d8e",
       "rng": {
-        "draws": 103,
-        "digest": "4bf8fdbd"
+        "draws": 109,
+        "digest": "68d09295"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "a3413598",
+      "state": "717656d6",
       "events": "741638a5",
       "rng": {
-        "draws": 159,
-        "digest": "7892bae0"
+        "draws": 166,
+        "digest": "3a191afe"
       },
       "label": "final",
       "players": [
@@ -206,14 +206,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 36,
+            "damageDealt": 37,
             "damageTaken": 18
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 36
+              "damageDealt": 37
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -270,7 +270,7 @@
           "aiState": "idle",
           "attackPower": 1,
           "autoAttack": true,
-          "combatTimer": 1.2,
+          "combatTimer": 0.8,
           "comboPoints": 3,
           "comboUntil": 32.4,
           "critChance": 0.013333,
@@ -294,12 +294,12 @@
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
-          "offhandSwingTimer": 0.05,
+          "offhandSwingTimer": 0.644,
           "offhandWeapon": {
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -331,14 +331,14 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.05,
+          "swingTimer": 0.644,
           "targetId": 416,
           "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -346,7 +346,7 @@
         {
           "aggroTargetId": 415,
           "aiState": "attack",
-          "combatTimer": 1.2,
+          "combatTimer": 0.8,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -359,7 +359,7 @@
           "flee": 8,
           "hit": 13,
           "hostile": true,
-          "hp": 8964,
+          "hp": 8963,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -403,7 +403,7 @@
           "threat": [
             [
               415,
-              37
+              38
             ]
           ],
           "weapon": {

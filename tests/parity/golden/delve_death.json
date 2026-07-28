@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "9754b605",
+      "state": "dffd73e5",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -102,7 +102,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -139,7 +139,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -150,7 +150,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 426,
-      "state": "16107116",
+      "state": "ee35bb4e",
       "events": "98e6db53",
       "rng": {
         "draws": 1,
@@ -238,7 +238,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -274,7 +274,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -285,7 +285,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 426,
-      "state": "12b5a332",
+      "state": "f8190a0e",
       "events": "b6f29a92",
       "rng": {
         "draws": 1,
@@ -384,7 +384,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -421,7 +421,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -432,7 +432,7 @@
       "tick": 2,
       "time": 0.1,
       "nextId": 426,
-      "state": "12b5a332",
+      "state": "f8190a0e",
       "events": "741638a5",
       "rng": {
         "draws": 1,
@@ -531,7 +531,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -568,7 +568,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }

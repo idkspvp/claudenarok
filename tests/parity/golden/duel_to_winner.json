@@ -29,7 +29,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "4f414f45",
+      "state": "e1bea211",
       "events": "91b06b2a",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "931b046a",
+      "state": "ef26e4aa",
       "events": "4caca56c",
       "rng": {
         "draws": 0,
@@ -51,7 +51,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 417,
-      "state": "e29f97af",
+      "state": "f1a22c23",
       "events": "c9a7d616",
       "rng": {
         "draws": 71,
@@ -62,7 +62,7 @@
       "tick": 61,
       "time": 3.05,
       "nextId": 417,
-      "state": "6f42f4d6",
+      "state": "d62259ca",
       "events": "3454bb01",
       "rng": {
         "draws": 78,
@@ -247,7 +247,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -316,7 +316,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -327,7 +327,7 @@
       "tick": 61,
       "time": 3.05,
       "nextId": 417,
-      "state": "f336a9a6",
+      "state": "a64fdae6",
       "events": "ac7e0c41",
       "rng": {
         "draws": 78,
@@ -517,7 +517,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -586,7 +586,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -597,7 +597,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 417,
-      "state": "f85d9dcd",
+      "state": "bd724a35",
       "events": "6adf36a9",
       "rng": {
         "draws": 150,
@@ -608,7 +608,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 417,
-      "state": "3a6ad0f6",
+      "state": "6a1f1406",
       "events": "741638a5",
       "rng": {
         "draws": 262,
@@ -619,7 +619,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 417,
-      "state": "48e45685",
+      "state": "7ea45801",
       "events": "741638a5",
       "rng": {
         "draws": 263,
@@ -823,7 +823,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -892,7 +892,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

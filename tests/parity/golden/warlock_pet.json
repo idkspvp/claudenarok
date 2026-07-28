@@ -9,14 +9,14 @@
     "applyTaunt pet auto-taunt arm (~8110)",
     "applyTaunt pet manual-taunt arm (petTaunt, ~4885)"
   ],
-  "draws": 417,
-  "drawDigest": "2068d7d8",
+  "draws": 425,
+  "drawDigest": "c36b64c0",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "c730b85c",
+      "state": "0dcb2528",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -143,7 +143,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -154,8 +154,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "1a13fea3",
-      "events": "33b92c13",
+      "state": "fc3fbe06",
+      "events": "68a3cd63",
       "rng": {
         "draws": 11,
         "digest": "4e23297a"
@@ -165,19 +165,19 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "a760fc36",
-      "events": "6fcbc66e",
+      "state": "cb03af33",
+      "events": "f0a880bf",
       "rng": {
-        "draws": 11,
-        "digest": "4e23297a"
+        "draws": 14,
+        "digest": "dde2d954"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 418,
-      "state": "5167e8f4",
-      "events": "030dcc3a",
+      "state": "0bcc0851",
+      "events": "6ae91023",
       "rng": {
         "draws": 125,
         "digest": "2794013f"
@@ -187,46 +187,341 @@
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "234a32fd",
-      "events": "61f2fe51",
+      "state": "38dadfa5",
+      "events": "d042c0f7",
       "rng": {
-        "draws": 209,
-        "digest": "5f757242"
+        "draws": 206,
+        "digest": "bfc1e949"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 418,
-      "state": "2fa156ad",
-      "events": "41e311cd",
+      "state": "080a0d35",
+      "events": "00da9224",
       "rng": {
-        "draws": 297,
-        "digest": "56348d7f"
+        "draws": 299,
+        "digest": "c4979b40"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "b566eecb",
-      "events": "207fa586",
+      "state": "29417fc5",
+      "events": "61f2fe51",
       "rng": {
-        "draws": 389,
-        "digest": "8c04b65d"
+        "draws": 393,
+        "digest": "02535d85"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "ae860d50",
+      "state": "cd3ee97c",
       "events": "741638a5",
       "rng": {
-        "draws": 389,
-        "digest": "8c04b65d"
+        "draws": 393,
+        "digest": "02535d85"
       },
       "label": "pet-taunt",
+      "players": [
+        {
+          "archetype": {},
+          "arena2v2Rating": 1500,
+          "arenaRating": 1500,
+          "autoEquip": true,
+          "bags": [
+            null,
+            null,
+            null,
+            null
+          ],
+          "bank": {},
+          "cls": "mage",
+          "companionUpgrades": {},
+          "counters": {
+            "damageDealt": 24
+          },
+          "craftSkills": {},
+          "craftThrottle": {},
+          "deedStats": {
+            "counters": {
+              "damageDealt": 24
+            },
+            "dungeonClears": {},
+            "itemsDiscovered": [
+              "apprentice_robe",
+              "baked_bread",
+              "gnarled_staff",
+              "spring_water"
+            ],
+            "visited": [
+              "poi:eastbrook_vale:eastbrook"
+            ]
+          },
+          "deedsEarned": [
+            [
+              "prog_double_digits",
+              ""
+            ],
+            [
+              "prog_finding_your_feet",
+              ""
+            ],
+            [
+              "prog_first_steps",
+              ""
+            ]
+          ],
+          "delveClears": {},
+          "delveDaily": {},
+          "entityId": 415,
+          "equipment": {
+            "chest": "apprentice_robe",
+            "mainhand": "gnarled_staff"
+          },
+          "equipmentInstance": {},
+          "gatheringProficiency": {},
+          "heroicDaily": {},
+          "inventory": [
+            {
+              "count": 5,
+              "itemId": "baked_bread"
+            },
+            {
+              "count": 5,
+              "itemId": "spring_water"
+            }
+          ],
+          "lifetimeXp": 1258,
+          "mailWelcomed": true,
+          "nodeHarvestReadyAt": {},
+          "recipesGrandfathered": true,
+          "renown": 20,
+          "statAllocation": {},
+          "townFocus": {}
+        }
+      ],
+      "entities": [
+        {
+          "aiState": "idle",
+          "attackPower": 1,
+          "autoAttack": true,
+          "combatTimer": 0.2,
+          "comboUntil": -1,
+          "critChance": 0.013333,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.011,
+          "element": "neutral",
+          "elementLevel": 1,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 105,
+          "flee": 13,
+          "gearEffects": {
+            "resist": {
+              "blind": 0.05
+            }
+          },
+          "hit": 13,
+          "hp": 50000,
+          "id": 415,
+          "inCombat": true,
+          "kind": "player",
+          "level": 12,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "maxResource": 84,
+          "moveSpeed": 7,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "potionCooldownUntil": -1,
+          "race": "demihuman",
+          "resource": 84,
+          "resourceType": "mana",
+          "size": "medium",
+          "spawnPos": {
+            "x": 2,
+            "y": 1.5,
+            "z": -2
+          },
+          "spellPower": 2,
+          "stats": {
+            "agi": 1,
+            "armor": 1,
+            "dex": 1,
+            "int": 2,
+            "luk": 1,
+            "str": 1,
+            "vit": 1
+          },
+          "swingTimer": 1.044,
+          "targetId": 417,
+          "templateId": "mage",
+          "weapon": {
+            "max": 27,
+            "min": 20,
+            "ranged": {
+              "maxRange": 30,
+              "school": "arcane",
+              "wand": true
+            },
+            "speed": 1.394,
+            "weaponLevel": 1,
+            "weaponType": "rod"
+          }
+        },
+        {
+          "aggroTargetId": 417,
+          "aiState": "idle",
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.015,
+          "element": "ghost",
+          "elementLevel": 1,
+          "facing": 1.570796,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 20,
+          "hit": 102,
+          "hp": 3037,
+          "id": 416,
+          "inCombat": true,
+          "kind": "mob",
+          "level": 12,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 3040,
+          "moveSpeed": 5,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "ownerId": 415,
+          "petAutoTaunt": true,
+          "petMode": "aggressive",
+          "petTauntTimer": 10,
+          "pos": {
+            "x": 6,
+            "y": 1.5,
+            "z": -2
+          },
+          "potionCooldownUntil": -1,
+          "race": "demon",
+          "size": "medium",
+          "spawnPos": {
+            "x": 4,
+            "y": 1.5,
+            "z": -2
+          },
+          "stats": {
+            "agi": 8,
+            "dex": 90,
+            "int": 5,
+            "luk": 5,
+            "vit": 14
+          },
+          "swingTimer": 0.05,
+          "templateId": "gloomshade",
+          "weapon": {
+            "max": 153,
+            "min": 128,
+            "speed": 2
+          }
+        },
+        {
+          "aggroTargetId": 416,
+          "aiState": "attack",
+          "comboUntil": -1,
+          "critChance": 0.05,
+          "detonateTimer": "Infinity",
+          "dodgeChance": 0.07,
+          "element": "neutral",
+          "elementLevel": 1,
+          "facing": -1.570796,
+          "fallStartY": 1.5,
+          "fiveSecondRule": 99,
+          "flee": 11,
+          "forcedTargetId": 416,
+          "forcedTargetTimer": 3,
+          "hit": 16,
+          "hostile": true,
+          "hp": 49874,
+          "id": 417,
+          "inCombat": true,
+          "kind": "mob",
+          "leashAnchor": {
+            "x": 7,
+            "y": 1.5,
+            "z": -2
+          },
+          "level": 8,
+          "lootFfaTimer": "Infinity",
+          "maxHp": 50000,
+          "moveSpeed": 8,
+          "onGround": true,
+          "overpowerUntil": -1,
+          "petMode": "defensive",
+          "pos": {
+            "x": 7,
+            "y": 1.5,
+            "z": -2
+          },
+          "potionCooldownUntil": -1,
+          "race": "brute",
+          "size": "medium",
+          "spawnPos": {
+            "x": 7,
+            "y": 1.5,
+            "z": -2
+          },
+          "stats": {
+            "agi": 3,
+            "dex": 8,
+            "int": 10,
+            "luk": 60,
+            "mdef": 20,
+            "vit": 3
+          },
+          "swingTimer": 0.05,
+          "tappedById": 415,
+          "targetId": 415,
+          "templateId": "forest_wolf",
+          "threat": [
+            [
+              415,
+              25
+            ],
+            [
+              416,
+              104
+            ]
+          ],
+          "weapon": {
+            "max": 12,
+            "min": 9,
+            "speed": 2
+          }
+        }
+      ]
+    },
+    {
+      "tick": 124,
+      "time": 6.2,
+      "nextId": 418,
+      "state": "a46c569f",
+      "events": "087466d9",
+      "rng": {
+        "draws": 425,
+        "digest": "c36b64c0"
+      },
+      "label": "final",
       "players": [
         {
           "archetype": {},
@@ -318,301 +613,6 @@
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 1.5,
-          "fiveSecondRule": 105,
-          "flee": 13,
-          "gearEffects": {
-            "resist": {
-              "blind": 0.05
-            }
-          },
-          "hit": 13,
-          "hp": 50000,
-          "id": 415,
-          "inCombat": true,
-          "kind": "player",
-          "level": 12,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "maxResource": 84,
-          "moveSpeed": 7,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "potionCooldownUntil": -1,
-          "race": "demihuman",
-          "resource": 84,
-          "resourceType": "mana",
-          "size": "medium",
-          "spawnPos": {
-            "x": 2,
-            "y": 1.5,
-            "z": -2
-          },
-          "spellPower": 2,
-          "stats": {
-            "agi": 1,
-            "armor": 1,
-            "dex": 1,
-            "int": 2,
-            "luk": 1,
-            "str": 1,
-            "vit": 1
-          },
-          "swingTimer": 1.25,
-          "targetId": 417,
-          "templateId": "mage",
-          "weapon": {
-            "max": 27,
-            "min": 20,
-            "ranged": {
-              "maxRange": 30,
-              "school": "arcane",
-              "wand": true
-            },
-            "speed": 1.8,
-            "weaponLevel": 1,
-            "weaponType": "rod"
-          }
-        },
-        {
-          "aggroTargetId": 417,
-          "aiState": "idle",
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.015,
-          "element": "ghost",
-          "elementLevel": 1,
-          "facing": 1.570796,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 102,
-          "hp": 3038,
-          "id": 416,
-          "inCombat": true,
-          "kind": "mob",
-          "level": 12,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 3040,
-          "moveSpeed": 5,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "ownerId": 415,
-          "petAutoTaunt": true,
-          "petMode": "aggressive",
-          "petTauntTimer": 10,
-          "pos": {
-            "x": 6,
-            "y": 1.5,
-            "z": -2
-          },
-          "potionCooldownUntil": -1,
-          "race": "demon",
-          "size": "medium",
-          "spawnPos": {
-            "x": 4,
-            "y": 1.5,
-            "z": -2
-          },
-          "stats": {
-            "agi": 8,
-            "dex": 90,
-            "int": 5,
-            "luk": 5,
-            "vit": 14
-          },
-          "swingTimer": 0.05,
-          "templateId": "gloomshade",
-          "weapon": {
-            "max": 153,
-            "min": 128,
-            "speed": 2
-          }
-        },
-        {
-          "aggroTargetId": 416,
-          "aiState": "attack",
-          "comboUntil": -1,
-          "critChance": 0.05,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.07,
-          "element": "neutral",
-          "elementLevel": 1,
-          "facing": -1.570796,
-          "fallStartY": 1.5,
-          "fiveSecondRule": 99,
-          "flee": 11,
-          "forcedTargetId": 416,
-          "forcedTargetTimer": 3,
-          "hit": 16,
-          "hostile": true,
-          "hp": 49565,
-          "id": 417,
-          "inCombat": true,
-          "kind": "mob",
-          "leashAnchor": {
-            "x": 7,
-            "y": 1.5,
-            "z": -2
-          },
-          "level": 8,
-          "lootFfaTimer": "Infinity",
-          "maxHp": 50000,
-          "moveSpeed": 8,
-          "onGround": true,
-          "overpowerUntil": -1,
-          "petMode": "defensive",
-          "pos": {
-            "x": 7,
-            "y": 1.5,
-            "z": -2
-          },
-          "potionCooldownUntil": -1,
-          "race": "brute",
-          "size": "medium",
-          "spawnPos": {
-            "x": 7,
-            "y": 1.5,
-            "z": -2
-          },
-          "stats": {
-            "agi": 3,
-            "dex": 8,
-            "int": 10,
-            "luk": 60,
-            "mdef": 20,
-            "vit": 3
-          },
-          "swingTimer": 0.05,
-          "tappedById": 415,
-          "targetId": 415,
-          "templateId": "forest_wolf",
-          "threat": [
-            [
-              415,
-              25
-            ],
-            [
-              416,
-              413
-            ]
-          ],
-          "weapon": {
-            "max": 12,
-            "min": 9,
-            "speed": 2
-          }
-        }
-      ]
-    },
-    {
-      "tick": 124,
-      "time": 6.2,
-      "nextId": 418,
-      "state": "5ace4a62",
-      "events": "9901b12f",
-      "rng": {
-        "draws": 417,
-        "digest": "2068d7d8"
-      },
-      "label": "final",
-      "players": [
-        {
-          "archetype": {},
-          "arena2v2Rating": 1500,
-          "arenaRating": 1500,
-          "autoEquip": true,
-          "bags": [
-            null,
-            null,
-            null,
-            null
-          ],
-          "bank": {},
-          "cls": "mage",
-          "companionUpgrades": {},
-          "counters": {
-            "damageDealt": 24
-          },
-          "craftSkills": {},
-          "craftThrottle": {},
-          "deedStats": {
-            "counters": {
-              "damageDealt": 24
-            },
-            "dungeonClears": {},
-            "itemsDiscovered": [
-              "apprentice_robe",
-              "baked_bread",
-              "gnarled_staff",
-              "spring_water"
-            ],
-            "visited": [
-              "poi:eastbrook_vale:eastbrook"
-            ]
-          },
-          "deedsEarned": [
-            [
-              "prog_double_digits",
-              ""
-            ],
-            [
-              "prog_finding_your_feet",
-              ""
-            ],
-            [
-              "prog_first_steps",
-              ""
-            ]
-          ],
-          "delveClears": {},
-          "delveDaily": {},
-          "entityId": 415,
-          "equipment": {
-            "chest": "apprentice_robe",
-            "mainhand": "gnarled_staff"
-          },
-          "equipmentInstance": {},
-          "gatheringProficiency": {},
-          "heroicDaily": {},
-          "inventory": [
-            {
-              "count": 5,
-              "itemId": "baked_bread"
-            },
-            {
-              "count": 5,
-              "itemId": "spring_water"
-            }
-          ],
-          "lifetimeXp": 1258,
-          "mailWelcomed": true,
-          "nodeHarvestReadyAt": {},
-          "recipesGrandfathered": true,
-          "renown": 20,
-          "statAllocation": {},
-          "townFocus": {}
-        }
-      ],
-      "entities": [
-        {
-          "aiState": "idle",
-          "attackPower": 1,
-          "autoAttack": true,
-          "combatTimer": 0.6,
-          "comboUntil": -1,
-          "critChance": 0.013333,
-          "detonateTimer": "Infinity",
-          "dodgeChance": 0.011,
-          "element": "neutral",
-          "elementLevel": 1,
-          "fallStartY": 1.5,
           "fiveSecondRule": 105.2,
           "flee": 13,
           "gearEffects": {
@@ -658,7 +658,7 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 1.05,
+          "swingTimer": 0.844,
           "targetId": 417,
           "templateId": "mage",
           "weapon": {
@@ -669,7 +669,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -689,7 +689,7 @@
           "fiveSecondRule": 99,
           "flee": 20,
           "hit": 102,
-          "hp": 3037,
+          "hp": 3036,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -749,7 +749,7 @@
           "forcedTargetTimer": 2.8,
           "hit": 16,
           "hostile": true,
-          "hp": 49565,
+          "hp": 49840,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -797,7 +797,7 @@
             ],
             [
               416,
-              413
+              138
             ]
           ],
           "weapon": {

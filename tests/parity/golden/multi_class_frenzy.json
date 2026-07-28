@@ -30,7 +30,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "653f5bae",
+      "state": "0ce805e6",
       "events": "5cf7b5a4",
       "rng": {
         "draws": 3,
@@ -268,7 +268,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -337,7 +337,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -370,7 +370,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -407,7 +407,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -508,7 +508,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "87b5cbd2",
+      "state": "8aaf3f22",
       "events": "8ee351ae",
       "rng": {
         "draws": 6,
@@ -746,7 +746,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -815,7 +815,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -848,7 +848,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -885,7 +885,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -986,7 +986,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "ebb6b888",
+      "state": "b05a33a0",
       "events": "8ee351ae",
       "rng": {
         "draws": 9,
@@ -1224,7 +1224,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1293,7 +1293,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1326,7 +1326,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -1363,7 +1363,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -1464,7 +1464,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "fc543212",
+      "state": "c17548d2",
       "events": "8ee351ae",
       "rng": {
         "draws": 12,
@@ -1702,7 +1702,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1771,7 +1771,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1804,7 +1804,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -1841,7 +1841,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -1942,7 +1942,7 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 419,
-      "state": "40a5ae49",
+      "state": "b4ef26d5",
       "events": "a730ec0a",
       "rng": {
         "draws": 16,
@@ -1953,7 +1953,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "1043b63f",
+      "state": "2afb9db3",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -1964,7 +1964,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 419,
-      "state": "1043b63f",
+      "state": "2afb9db3",
       "events": "741638a5",
       "rng": {
         "draws": 16,
@@ -2204,7 +2204,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 2,
+            "speed": 1.096,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -2274,7 +2274,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2308,7 +2308,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2345,7 +2345,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.8,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }

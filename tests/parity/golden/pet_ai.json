@@ -17,7 +17,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "136d1a8f",
+      "state": "e0b46d83",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -139,7 +139,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -150,8 +150,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 420,
-      "state": "e825f358",
-      "events": "1a899e08",
+      "state": "f3cc84e2",
+      "events": "6fe62ad1",
       "rng": {
         "draws": 17,
         "digest": "250a33eb"
@@ -161,7 +161,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "0c611036",
+      "state": "4207e392",
       "events": "741638a5",
       "rng": {
         "draws": 17,
@@ -172,8 +172,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 420,
-      "state": "84bb5aca",
-      "events": "6572b5fb",
+      "state": "60507f84",
+      "events": "fc16d842",
       "rng": {
         "draws": 112,
         "digest": "b6fc5cb4"
@@ -183,7 +183,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 420,
-      "state": "e37d029d",
+      "state": "f27f804d",
       "events": "741638a5",
       "rng": {
         "draws": 197,
@@ -194,8 +194,8 @@
       "tick": 100,
       "time": 5,
       "nextId": 420,
-      "state": "cf28c11a",
-      "events": "a902f663",
+      "state": "a5f4ff74",
+      "events": "6943018f",
       "rng": {
         "draws": 308,
         "digest": "42a6ff31"
@@ -205,7 +205,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "7dd283ef",
+      "state": "77f2fac9",
       "events": "741638a5",
       "rng": {
         "draws": 432,
@@ -216,7 +216,7 @@
       "tick": 120,
       "time": 6,
       "nextId": 420,
-      "state": "e283a731",
+      "state": "c4deff37",
       "events": "741638a5",
       "rng": {
         "draws": 432,
@@ -361,7 +361,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -569,7 +569,7 @@
           "forcedTargetTimer": -0.05,
           "hit": 16,
           "hostile": true,
-          "hp": 49573,
+          "hp": 49878,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -617,7 +617,7 @@
             ],
             [
               418,
-              427
+              122
             ]
           ],
           "weapon": {
@@ -632,7 +632,7 @@
       "tick": 140,
       "time": 7,
       "nextId": 420,
-      "state": "41b7fd3f",
+      "state": "cc16fba1",
       "events": "741638a5",
       "rng": {
         "draws": 523,
@@ -643,7 +643,7 @@
       "tick": 160,
       "time": 8,
       "nextId": 420,
-      "state": "bab008ef",
+      "state": "4806e529",
       "events": "741638a5",
       "rng": {
         "draws": 637,
@@ -654,7 +654,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "8085967e",
+      "state": "20bf9e34",
       "events": "741638a5",
       "rng": {
         "draws": 779,
@@ -665,7 +665,7 @@
       "tick": 180,
       "time": 9,
       "nextId": 420,
-      "state": "8085967e",
+      "state": "20bf9e34",
       "events": "741638a5",
       "rng": {
         "draws": 779,
@@ -809,7 +809,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1005,7 +1005,7 @@
           "flee": 11,
           "hit": 16,
           "hostile": true,
-          "hp": 49573,
+          "hp": 49878,
           "id": 419,
           "inCombat": true,
           "kind": "mob",

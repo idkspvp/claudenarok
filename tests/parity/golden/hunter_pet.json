@@ -8,14 +8,14 @@
     "updateRangedPetAttack friendly pet arm (~8093/8217)",
     "updateRangedPetAttack hostile-mob arm (~6776)"
   ],
-  "draws": 411,
-  "drawDigest": "7951e481",
+  "draws": 410,
+  "drawDigest": "64ad67d4",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "136d1a8f",
+      "state": "e0b46d83",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -137,7 +137,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -148,7 +148,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "72513f42",
+      "state": "6308c30c",
       "events": "6690c333",
       "rng": {
         "draws": 9,
@@ -159,66 +159,66 @@
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "3d7174d3",
-      "events": "741638a5",
+      "state": "691d4567",
+      "events": "794cd547",
       "rng": {
-        "draws": 9,
-        "digest": "381f4473"
+        "draws": 13,
+        "digest": "42dc0e9b"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "54b82037",
-      "events": "41192086",
+      "state": "9fb2d055",
+      "events": "1cd1df81",
       "rng": {
-        "draws": 102,
-        "digest": "b5b7b15d"
+        "draws": 103,
+        "digest": "45584030"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "0d521d9e",
-      "events": "741638a5",
+      "state": "209d3a26",
+      "events": "428a3a25",
       "rng": {
-        "draws": 198,
-        "digest": "4ab939a9"
+        "draws": 200,
+        "digest": "5ea90cb4"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "63647e15",
-      "events": "d27969d3",
+      "state": "f2d6ebd7",
+      "events": "6dfaa50c",
       "rng": {
-        "draws": 312,
-        "digest": "2ffd1eb8"
+        "draws": 306,
+        "digest": "1f424e90"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "27c8a3d2",
-      "events": "741638a5",
+      "state": "da116720",
+      "events": "2a14fcfa",
       "rng": {
-        "draws": 411,
-        "digest": "7951e481"
+        "draws": 410,
+        "digest": "64ad67d4"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "27c8a3d2",
+      "state": "da116720",
       "events": "741638a5",
       "rng": {
-        "draws": 411,
-        "digest": "7951e481"
+        "draws": 410,
+        "digest": "64ad67d4"
       },
       "label": "final",
       "players": [
@@ -237,14 +237,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 46,
-            "damageTaken": 35
+            "damageDealt": 2,
+            "damageTaken": 37
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 46
+              "damageDealt": 2
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -305,7 +305,7 @@
           "aiState": "idle",
           "attackPower": 1,
           "autoAttack": true,
-          "combatTimer": 1.15,
+          "combatTimer": 0.15,
           "comboUntil": -1,
           "critChance": 0.013333,
           "detonateTimer": "Infinity",
@@ -316,7 +316,7 @@
           "fiveSecondRule": 105,
           "flee": 13,
           "hit": 13,
-          "hp": 49965,
+          "hp": 49963,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -326,7 +326,7 @@
           "maxResource": 34,
           "moveSpeed": 7,
           "onGround": true,
-          "overpowerUntil": -1,
+          "overpowerUntil": 10.9,
           "petMode": "defensive",
           "pos": {
             "x": 2,
@@ -354,7 +354,7 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 1.2,
+          "swingTimer": 1.294,
           "targetId": 417,
           "templateId": "archer",
           "weapon": {
@@ -364,7 +364,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 2.3,
+            "speed": 1.394,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -428,7 +428,7 @@
         {
           "aggroTargetId": 416,
           "aiState": "attack",
-          "combatTimer": 1.15,
+          "combatTimer": 0.15,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -441,7 +441,7 @@
           "flee": 11,
           "hit": 16,
           "hostile": true,
-          "hp": 49905,
+          "hp": 49946,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -485,11 +485,11 @@
           "threat": [
             [
               415,
-              46
+              2
             ],
             [
               416,
-              49
+              52
             ]
           ],
           "weapon": {
