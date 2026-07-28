@@ -1,4 +1,5 @@
 import { aggregateCards, type CardDef } from './cards';
+import { attackIntervalSeconds, dualWieldBaseAmotion } from './combat/aspd';
 import { critRateFrom } from './combat/crit';
 import { aggregateGearEffects, type GearEffects } from './combat/gear_effects';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
@@ -8,6 +9,7 @@ import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
+import { baseAmotionFor } from './job_aspd';
 import { baseHpAt, baseSpAt, JOB_VITALS } from './job_vitals';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
@@ -19,6 +21,7 @@ import type {
   PlayerClass,
   Stats,
   Vec3,
+  WeaponInfo,
 } from './types';
 import {
   ALL_EQUIP_SLOTS,
@@ -326,6 +329,23 @@ export function pctValue(value: number): number {
 // Recompute all derived stats for the player from class, level, gear, buffs, and
 // precomputed talent modifiers. `mods` is the flat struct resolved at
 // allocation/respec time (computeTalentModifiers); this never walks the tree.
+// The base attack motion for what this character is actually holding: the job's
+// row for the mainhand class, combined with the offhand's row when dual
+// wielding (seven tenths of the two ADDED, so two one-handers are slower than
+// either alone and faster than the two in sequence).
+//
+// An unarmed hand is a real row rather than a fallback: for four of the five
+// jobs it is the fastest option they have.
+function swingBaseAmotion(
+  cls: PlayerClass,
+  weapon: WeaponInfo,
+  offhandWeapon: WeaponInfo | null,
+): number {
+  const main = baseAmotionFor(cls, weapon.weaponType ?? null);
+  if (!offhandWeapon) return main;
+  return dualWieldBaseAmotion(main, baseAmotionFor(cls, offhandWeapon.weaponType ?? null));
+}
+
 export function recalcPlayerStats(
   e: Entity,
   cls: PlayerClass,
@@ -621,7 +641,6 @@ export function recalcPlayerStats(
     mainhand?.weapon && meetsLevelRequirement(lvl, mainhand)
       ? mainhand.weapon
       : { min: 1, max: 2, speed: 2 };
-  e.weapon = weapon;
   const offhand = equipment.offhand ? ITEMS[equipment.offhand] : undefined;
   const offhandWeapon =
     canDualWield(cls, mods?.spec) &&
@@ -629,7 +648,26 @@ export function recalcPlayerStats(
     meetsLevelRequirement(lvl, offhand)
       ? offhand.weapon
       : null;
-  e.offhandWeapon = offhandWeapon;
+  // Attack speed is a property of WHO IS HOLDING the weapon, not of the weapon.
+  // The reference picks a base attack motion by JOB and weapon class and then
+  // cuts it by (4 x AGI + DEX) / 1000, so an archer and an acolyte holding the
+  // same mace swing at different speeds, and Agility is the attack-speed stat.
+  // An authored per-item `speed` cannot express any of that, so for a player it
+  // is overridden here, once, and every consumer of `e.weapon.speed` reads the
+  // real cadence. Monsters keep their authored speed: they have no job.
+  //
+  // The spread is load-bearing: `weapon` is the ITEM DEFINITION's object, shared
+  // by every copy in the world, and writing a speed into it would hand the whole
+  // server one character's Agility.
+  const swingSpeed = attackIntervalSeconds({
+    baseAmotion: swingBaseAmotion(cls, weapon, offhandWeapon),
+    agi: s.agi,
+    dex: s.dex,
+  });
+  e.weapon = { ...weapon, speed: swingSpeed };
+  // Both hands swing at the one combined cadence, which is already folded into
+  // the base above.
+  e.offhandWeapon = offhandWeapon ? { ...offhandWeapon, speed: swingSpeed } : null;
   e.dualWielding = offhandWeapon !== null;
   // Titan's Grip state: dual-wielding with a two-hander in either hand (only a
   // Fury swordman can reach this via equipment_rules.canDualWieldTwoHand). Pays the
