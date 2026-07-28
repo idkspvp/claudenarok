@@ -39,7 +39,26 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'common',
-    weapon: { min: 3, max: 6, speed: 2.9 },
+    weapon: {
+      min: 3,
+      max: 6,
+      // 1.8, not the 2.9 this staff carried as a melee stick. A staff has ONE
+      // cadence now that the weapon decides, and the number that matters is the
+      // one casters actually use: the class wand fired every 1.8s, and inheriting
+      // the melee figure would have quietly slowed every caster by 61% under
+      // cover of a refactor. Attack speed stops being authored per weapon at all
+      // once `combat/aspd.ts` is wired (job and weapon class decide it), so this
+      // is a preserve-the-behaviour value with a known expiry.
+      speed: 1.8,
+      // weaponType and weaponLevel are deliberately NOT set here. They belong to
+      // the weapon-record pass that unblocks attack speed and the size table, and
+      // setting one opportunistically would change this staff's size modifier as
+      // a side effect of a change about ranged attacks.
+      //
+      // The caster arm: no dead zone, and the bolt carries a school so MDEF
+      // mitigates it rather than DEF.
+      ranged: { maxRange: 30, minRange: 0, wand: true, school: 'arcane' },
+    },
     stats: { int: 1 },
     sellValue: 12,
   },
@@ -1991,6 +2010,30 @@ export const BASE_ITEMS: Record<string, ItemDef> = {
     quality: 'uncommon',
     stats: { armor: 30, agi: 1, vit: 1 },
     sellValue: 110,
+  },
+  // The Archer's starting weapon, and the first bow the tree has ever carried.
+  // Ranged used to be a CLASS trait, so an Archer shot arrows while holding a
+  // hatchet; the profile lives on the weapon now, which means a bow has to exist
+  // for an Archer to be one. minRange 8 is the dead zone that makes an archer
+  // step back rather than stand still.
+  worn_shortbow: {
+    id: 'worn_shortbow',
+    name: 'Worn Shortbow',
+    kind: 'weapon',
+    slot: 'mainhand',
+    quality: 'common',
+    weapon: {
+      min: 5,
+      max: 9,
+      speed: 2.3,
+      // The one weaponType authored ahead of the weapon-record pass, because a
+      // bow that is not typed as a bow is exactly the thing this change exists to
+      // fix: the size table and the ASPD row both key off it.
+      weaponType: 'bow',
+      weaponLevel: 1,
+      ranged: { maxRange: 35, minRange: 8 },
+    },
+    sellValue: 12,
   },
 };
 

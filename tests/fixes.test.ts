@@ -5,6 +5,7 @@ import {
   lineOfSightClear,
   resolvePosition,
 } from '../src/sim/colliders';
+import { rangedAutoProfile } from '../src/sim/combat/form_swing';
 import {
   CLASSES,
   CRYPT_DOOR_POS,
@@ -1504,7 +1505,8 @@ describe('ranged auto-attack crit suppression', () => {
     archer.critChance = 0.5;
     const wolf = [...sim.entities.values()].find((e) => e.kind === 'mob')!;
     wolf.level = targetLevel;
-    const ranged = CLASSES.archer.ranged!;
+    // The profile comes off the equipped weapon now, not the class.
+    const ranged = rangedAutoProfile(archer)!;
     return { sim, archer, wolf, ranged };
   }
 

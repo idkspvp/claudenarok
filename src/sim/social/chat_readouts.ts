@@ -245,7 +245,7 @@ export function attackReadout(ctx: SimContext, p: Entity, meta: PlayerMeta): str
   // ranged classes (archer auto shot, caster wands) swing at their ranged
   // speed; everyone else, including a druid shifted into a wandless form,
   // uses the form-aware melee cadence (bear: weapon, cat: claw baseline)
-  const base = rangedAutoProfile(p, meta.cls)?.speed ?? baseSwingSpeed(p);
+  const base = rangedAutoProfile(p)?.speed ?? baseSwingSpeed(p);
   const interval = base * ctx.swingIntervalMult(p);
   const next = p.swingTimer <= 0 ? 'now' : `in ${p.swingTimer.toFixed(1)}s`;
   return `Auto-attack is on against ${t.name} — next swing ${next} (${interval.toFixed(1)}s swing).`;

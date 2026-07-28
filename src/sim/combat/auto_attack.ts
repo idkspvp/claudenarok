@@ -60,7 +60,6 @@ import { runWeaponProcs } from './equip_procs';
 import { baseSwingSpeed, formSwingSpeed, rangedAutoProfile } from './form_swing';
 import { isTravelFormAuraKind } from './forms';
 import { missChanceFromContest } from './hit_flee';
-import { rangedShotProfile } from './ranged_shot';
 import { applyThornsReaction } from './thorns_charge';
 import { warriorMeleeDefense } from './warrior_hit_table';
 import { weaponSwingDamage } from './weapon_damage';
@@ -222,17 +221,17 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
   // casters (wand-style, no dead zone so they don't run into melee, #94).
   // Form-aware: a druid keeps the class wand only in caster or Moonwing Form;
   // bear/cat/travel resolve to undefined here and fall through to melee.
-  const ranged = rangedAutoProfile(p, meta.cls);
+  const ranged = rangedAutoProfile(p);
   if (ranged && d <= ranged.maxRange && d >= (ranged.wand ? 0 : ranged.minRange)) {
     if (!ctx.hasLineOfSight(p, t)) return;
     ctx.breakGhostWolf(p);
-    // Hunters shoot with their equipped weapon (damage range + speed), casters
-    // with their fixed class wand; the shot then fires at that resolved profile.
-    const shot = rangedShotProfile(ranged, p.weapon);
-    rangedSwing(ctx, p, t, { ...ranged, min: shot.min, max: shot.max, speed: shot.speed });
+    // Damage and cadence come off the weapon, because the profile IS the weapon
+    // now: the wand-versus-bow split that rangedShotProfile used to arbitrate is
+    // gone with the class-owned wand it existed to serve.
+    rangedSwing(ctx, p, t, ranged);
     // The weapon's speed sets the cadence; ranged haste (item-set bonus) then
     // shortens the auto-shot interval.
-    p.swingTimer = (shot.speed * ctx.swingIntervalMult(p)) / (1 + p.rangedHaste);
+    p.swingTimer = (ranged.speed * ctx.swingIntervalMult(p)) / (1 + p.rangedHaste);
     return;
   }
   if (d > MELEE_RANGE) return;

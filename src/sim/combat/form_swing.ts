@@ -11,7 +11,11 @@
 // content tables, so it stays deterministic and host-agnostic.
 
 import { CLASSES, ITEMS } from '../data';
-import type { Entity, PlayerClass } from '../types';
+import type { Entity, RangedWeaponProfile, WeaponInfo } from '../types';
+
+/** A resolved ranged auto-attack: the weapon's own damage and cadence plus its
+ *  range descriptor, so a caller needs nothing else. */
+export type RangedAutoProfile = RangedWeaponProfile & Pick<WeaponInfo, 'min' | 'max' | 'speed'>;
 
 // The thief's baseline weapon speed (its starting dagger). Sourcing it from the
 // content tables keeps Wolf Form genuinely "same as thief" even if the thief's
@@ -47,16 +51,19 @@ export function wandAllowedInForm(e: Entity): boolean {
   return true;
 }
 
-// The class ranged auto profile the player can fire RIGHT NOW: a archer's Auto
-// Shot always, a caster's wand only in a form that can hold it. This is the one
-// resolver every ranged-auto consumer (the swing loop, the /attack readout)
-// goes through, so a shapeshifted druid never wands from bear or cat form.
-export function rangedAutoProfile(
-  e: Entity,
-  cls: PlayerClass,
-): (typeof CLASSES)[PlayerClass]['ranged'] {
-  const ranged = CLASSES[cls].ranged;
+// The ranged auto profile the player can fire RIGHT NOW, read off the EQUIPPED
+// WEAPON rather than the class. A bow shoots because it is a bow; an Archer
+// holding a dagger is a melee character, and a caster that puts its staff down
+// stops firing bolts. A wand still resolves to nothing in a form that cannot
+// hold it, so a shapeshifted druid never wands from bear or cat form.
+//
+// This is the one resolver every ranged-auto consumer (the swing loop, the
+// /attack readout) goes through, so the weapon is the single source of truth for
+// whether an auto-attack is ranged at all.
+export function rangedAutoProfile(e: Entity): RangedAutoProfile | undefined {
+  const w = e.weapon;
+  const ranged = w?.ranged;
   if (!ranged) return undefined;
   if (ranged.wand && !wandAllowedInForm(e)) return undefined;
-  return ranged;
+  return { ...ranged, min: w.min, max: w.max, speed: w.speed };
 }

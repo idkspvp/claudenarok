@@ -659,6 +659,26 @@ export interface WeaponInfo {
   // The attribute the swing carries. Neutral unless the weapon is elemental or
   // has been endowed.
   element?: Element;
+  // Present on a weapon that attacks at RANGE, and absent on one that does not.
+  // This used to live on the CLASS, which said an Archer shoots because it is an
+  // Archer; Ragnarok and SpiritVale both say it shoots because it is holding a
+  // bow. Moving it here is what makes the weapon the thing that decides, so an
+  // Archer with a dagger is a melee character and a Mage that puts its staff down
+  // stops firing bolts.
+  ranged?: RangedWeaponProfile;
+}
+
+/** What a ranged weapon adds on top of the shared `WeaponInfo` fields.
+ *
+ *  `wand` is the caster arm: no dead zone (a wand user never has to close to
+ *  melee to auto-attack) and the shot carries a magic school, so it is mitigated
+ *  by MDEF rather than DEF. A bow leaves it unset and keeps its `minRange` dead
+ *  zone, which is the thing that makes an archer reposition. */
+export interface RangedWeaponProfile {
+  maxRange: number;
+  minRange: number;
+  wand?: boolean;
+  school?: 'physical' | 'fire' | 'frost' | 'arcane' | 'shadow' | 'holy' | 'nature';
 }
 
 export type WeaponHand = 'mainhand' | 'onehand' | 'twohand';

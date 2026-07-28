@@ -258,7 +258,7 @@ function driveFiestaBot(sim: Sim, pid: number): void {
   e.facing = steadyAngleTo(e.pos, target.pos, e.facing);
   // Form-aware (rangedAutoProfile): bots never shapeshift today, but if one
   // ever does, a wandless form correctly collapses its standoff to melee.
-  const engageRange = rangedAutoProfile(e, meta.cls) ? 22 : MELEE_RANGE * 0.9;
+  const engageRange = rangedAutoProfile(e) ? 22 : MELEE_RANGE * 0.9;
   // Close in when out of range, and ALSO when nominally in range but cover
   // blocks the shot: two bots parked on opposite faces of a pillar are within
   // melee reach yet no attack can land, so keep pushing (the detour steering

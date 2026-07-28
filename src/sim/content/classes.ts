@@ -41,14 +41,9 @@ export interface ClassDef {
   // Consumables in a fresh character's bags: every class carries food; the
   // mana classes also carry water. Saved characters load their own bags.
   startItems: { itemId: string; count: number }[];
-  // hunters: auto shot (8yd deadzone). casters: wand (wand:true → no deadzone,
-  // fires a magic-school bolt so they don't run into melee to auto-attack, #94)
-  ranged?: WeaponInfo & {
-    maxRange: number;
-    minRange: number;
-    wand?: boolean;
-    school?: 'physical' | 'fire' | 'frost' | 'arcane' | 'shadow' | 'holy' | 'nature';
-  };
+  // A class no longer decides whether it attacks at range. That descriptor moved
+  // onto WeaponInfo, so a bow shoots because it is a bow and a caster that puts
+  // its staff down stops firing bolts (see combat/form_swing.rangedAutoProfile).
   abilities: string[]; // full kit, in learn order
   color: number;
 }
@@ -128,7 +123,6 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
     startItems: START_RATIONS_MANA,
-    ranged: { min: 3, max: 6, speed: 1.8, maxRange: 30, minRange: 0, wand: true, school: 'arcane' },
     abilities: [
       'fireball',
       'frost_armor',
@@ -254,10 +248,9 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     id: 'archer',
     name: 'Archer',
     resourceType: 'mana',
-    startWeapon: 'rusty_hatchet',
+    startWeapon: 'worn_shortbow',
     startChest: 'footpad_jerkin',
     startItems: START_RATIONS_MANA,
-    ranged: { min: 5, max: 9, speed: 2.3, maxRange: 35, minRange: 8 },
     abilities: [
       'raptor_strike',
       'aspect_of_the_hawk',
@@ -291,7 +284,6 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     startWeapon: 'gnarled_staff',
     startChest: 'apprentice_robe',
     startItems: START_RATIONS_MANA,
-    ranged: { min: 3, max: 6, speed: 1.8, maxRange: 30, minRange: 0, wand: true, school: 'holy' },
     abilities: [
       'smite',
       'lesser_heal',
