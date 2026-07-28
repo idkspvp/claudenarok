@@ -353,8 +353,16 @@ describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', ()
   it('arms the cadence from the equipped weapon speed, not the class ranged speed', () => {
     const { sim, p, meta } = makeSim('archer', 20);
     spawnDummy(sim, p, 20, 20); // beyond the 8yd dead zone, within 35
-    // A deliberately slow bow, distinct from the class ranged speed (2.3).
-    p.weapon = { min: 40, max: 60, speed: 4 };
+    // A deliberately slow bow. The `ranged` block is what makes it a bow at all
+    // now: the profile moved off the class and onto the weapon, so a synthetic
+    // weapon without one is a melee weapon and never fires a shot.
+    p.weapon = {
+      min: 40,
+      max: 60,
+      speed: 4,
+      weaponType: 'bow',
+      ranged: { maxRange: 35, minRange: 8 },
+    };
     p.rangedHaste = 0;
     p.autoAttack = true;
     p.swingTimer = 0;
@@ -370,7 +378,13 @@ describe('auto_attack Auto Shot scales off the equipped weapon (ranged DPS)', ()
       const mob = spawnDummy(sim, p, 1, 20); // far below level -> floored miss chance
       mob.stats = { ...mob.stats, armor: 0, vit: 0 }; // isolate the weapon-damage signal from armor mitigation
       p.critChance = 0; // no crit variance
-      p.weapon = { min: weaponMin, max: weaponMax, speed: 2 };
+      p.weapon = {
+        min: weaponMin,
+        max: weaponMax,
+        speed: 2,
+        weaponType: 'bow',
+        ranged: { maxRange: 35, minRange: 8 },
+      };
       p.autoAttack = true;
       const events = capture(sim);
       let best = 0;

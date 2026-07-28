@@ -116,6 +116,10 @@ export const ITEM_WEAPON_VARIANTS: Record<string, string> = {
 
   // ---- axes (axe_a..d + adv axes) --------------------------------------------
   rusty_hatchet: 'axe_a',
+  // The Archer's starting bow. Ranged became a property of the weapon rather
+  // than the class, so a bow had to exist as a real item, and a real item needs
+  // a model or the hand renders empty (tests/held_weapon_models.test.ts).
+  worn_shortbow: 'simple_farmhand_crossbow',
   copper_bearded_axe: 'axe_a', // crafted (weaponcrafting tier 1)
   drogmars_skullcleaver: 'axe_b',
   deacons_cleaver: 'axe_c',

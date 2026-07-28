@@ -266,7 +266,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'uncommon',
-    weapon: { min: 18, max: 29, speed: 2.3 },
+    weapon: { min: 71, max: 94, speed: 2.3, weaponType: 'sword', weaponLevel: 2 },
     stats: { str: 6, vit: 2 },
     sellValue: 900,
     requiredClass: ['swordman', 'thief', 'archer'],
@@ -277,7 +277,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'uncommon',
-    weapon: { min: 20, max: 33, speed: 3.0 },
+    weapon: { min: 39, max: 52, speed: 3.0, weaponType: 'rod', weaponLevel: 2 },
     stats: { int: 6, luk: 2 },
     sellValue: 900,
     requiredClass: ['mage', 'acolyte'],
@@ -288,7 +288,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'uncommon',
-    weapon: { min: 12, max: 19, speed: 1.7, dagger: true },
+    weapon: { min: 61, max: 81, speed: 1.7, weaponType: 'dagger', weaponLevel: 2, dagger: true },
     stats: { agi: 8 },
     sellValue: 900,
     requiredClass: ['thief', 'archer'],
@@ -310,7 +310,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'uncommon',
-    weapon: { min: 13, max: 21, speed: 1.8, dagger: true },
+    weapon: { min: 65, max: 86, speed: 1.8, weaponType: 'dagger', weaponLevel: 2, dagger: true },
     stats: { agi: 7, vit: 2 },
     sellValue: 950,
     requiredClass: ['thief', 'archer'],
@@ -321,7 +321,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'uncommon',
-    weapon: { min: 19, max: 31, speed: 3.0 },
+    weapon: { min: 38, max: 50, speed: 3.0, weaponType: 'rod', weaponLevel: 2 },
     stats: { int: 7, luk: 3 },
     sellValue: 950,
     requiredClass: ['mage', 'acolyte'],
@@ -373,7 +373,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 26, max: 41, speed: 2.5 },
+    weapon: { min: 85, max: 113, speed: 2.5, weaponType: 'sword', weaponLevel: 2 },
     stats: { str: 8, vit: 3 },
     sellValue: 2400,
     requiredClass: ['swordman', 'thief', 'archer'],
@@ -386,7 +386,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 24, max: 37, speed: 2.7 },
+    weapon: { min: 92, max: 123, speed: 2.7, weaponType: 'mace', weaponLevel: 3 },
     stats: { str: 8, vit: 3 },
     sellValue: 2000,
     requiredClass: ['swordman', 'thief', 'archer'],
@@ -397,7 +397,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 23, max: 36, speed: 3.0 },
+    weapon: { min: 91, max: 121, speed: 3.0, weaponType: 'mace', weaponLevel: 3 },
     stats: { int: 8, luk: 4 },
     sellValue: 2000,
     requiredClass: ['mage', 'acolyte'],
@@ -408,7 +408,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 15, max: 23, speed: 1.7, dagger: true },
+    weapon: { min: 68, max: 91, speed: 1.7, weaponType: 'dagger', weaponLevel: 3, dagger: true },
     stats: { agi: 8, vit: 3 },
     sellValue: 2000,
     requiredClass: ['thief', 'archer'],
@@ -419,7 +419,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 22, max: 35, speed: 2.6 },
+    weapon: { min: 87, max: 116, speed: 2.6, weaponType: 'axe', weaponLevel: 3 },
     stats: { str: 7, vit: 4 },
     sellValue: 2000,
     requiredClass: ['swordman', 'thief', 'archer'],
@@ -430,7 +430,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 24, max: 38, speed: 3.0 },
+    weapon: { min: 42, max: 56, speed: 3.0, weaponType: 'rod', weaponLevel: 2 },
     stats: { int: 9, luk: 4 },
     sellValue: 2000,
     requiredClass: ['mage', 'acolyte'],
@@ -441,7 +441,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 14, max: 22, speed: 1.7, dagger: true },
+    weapon: { min: 67, max: 89, speed: 1.7, weaponType: 'dagger', weaponLevel: 3, dagger: true },
     stats: { agi: 8, vit: 3 },
     sellValue: 2000,
     requiredClass: ['thief', 'archer'],
@@ -483,7 +483,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'rare',
-    weapon: { min: 27, max: 43, speed: 3.0 },
+    weapon: { min: 46, max: 61, speed: 3.0, weaponType: 'rod', weaponLevel: 3 },
     stats: { int: 9, luk: 4 },
     sellValue: 2500,
     requiredClass: ['mage', 'acolyte'],
@@ -683,7 +683,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     // 2H dps premium: weaponDpsBudget(26) = 14.5 x TWOHAND_DPS_MULT -> 16.7 dps
     // (this pre-dated the Eastbrook/Highwatch rule and sat on the flat curve).
-    weapon: { min: 33, max: 53, speed: 2.6 },
+    weapon: { min: 123, max: 164, speed: 2.6, weaponType: 'twohand_sword', weaponLevel: 3 },
     // v0.27.1 re-budget: round(primaryStatBudget(26, epic, mainhand) = 18 x
     // TWOHAND_STAT_MULT) = 23 points; a 2H's compensation lives on the dps side.
     stats: { str: 14, vit: 9 },
@@ -696,7 +696,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'epic',
-    weapon: { min: 32, max: 52, speed: 3.0 },
+    weapon: { min: 52, max: 69, speed: 3.0, weaponType: 'rod', weaponLevel: 3 },
     stats: { int: 12, luk: 6 },
     sellValue: 8000,
     requiredClass: ['mage', 'acolyte'],
@@ -707,7 +707,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'epic',
-    weapon: { min: 19, max: 30, speed: 1.7, dagger: true },
+    weapon: { min: 83, max: 110, speed: 1.7, weaponType: 'dagger', weaponLevel: 3, dagger: true },
     stats: { agi: 12, vit: 6 },
     sellValue: 8000,
     requiredClass: ['thief', 'archer'],
@@ -859,7 +859,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'legendary',
-    weapon: { min: 42, max: 68, speed: 3.2 },
+    weapon: { min: 63, max: 84, speed: 3.2, weaponType: 'rod', weaponLevel: 4 },
     // A druid caster/healer staff by deliberate choice: its 17 points sit in
     // spirit (druid mana/healing) rather than agility, accepting that feral
     // wearers lose real value from the swap (bear-form AP scales on agility).
@@ -902,7 +902,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'legendary',
-    weapon: { min: 46, max: 74, speed: 2.8 },
+    weapon: { min: 126, max: 168, speed: 2.8, weaponType: 'sword', weaponLevel: 4 },
     // Rebalanced into a str/agi/sta hybrid within the fixed 44-pt legendary
     // mainhand budget: 15 agi makes it a viable archer ranged weapon (ranged AP +
     // crit) while it stays usable by its swordman/paladin owners.
@@ -1045,7 +1045,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     // Two-handers trade stats for a slow, heavy swing: weaponDpsBudget(29) = 15.4
     // x TWOHAND_DPS_MULT -> 17.65 dps here.
-    weapon: { min: 45, max: 75, speed: 3.4 },
+    weapon: { min: 163, max: 217, speed: 3.4, weaponType: 'twohand_sword', weaponLevel: 4 },
     // v0.27.1 re-budget: round(primaryStatBudget(29, epic, mainhand) = 20 x
     // TWOHAND_STAT_MULT) = 26 points (a mainhand + offhand pair at this tier
     // carries 35, so any dual-wield or shield setup out-stats this).
@@ -1068,7 +1068,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     quality: 'epic',
     // Same 2H rules as the Bonewrought Greatsword: weaponDpsBudget(29) x
     // TWOHAND_DPS_MULT -> 17.67 dps at a faster 3.0 swing, same 26-point budget.
-    weapon: { min: 40, max: 66, speed: 3.0 },
+    weapon: { min: 146, max: 195, speed: 3.0, weaponType: 'twohand_sword', weaponLevel: 3 },
     stats: { agi: 14, vit: 12 },
     // Physical melee identity: Hit, like the nighttalon pieces.
     hitRating: 20,
@@ -1161,7 +1161,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'common',
-    weapon: { min: 15, max: 24, speed: 2.3 },
+    weapon: { min: 64, max: 85, speed: 2.3, weaponType: 'sword', weaponLevel: 2 },
     sellValue: 600,
     buyValue: 6000,
   },
@@ -1172,7 +1172,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     hand: 'twohand',
     quality: 'common',
-    weapon: { min: 26, max: 40, speed: 3.4 },
+    weapon: { min: 99, max: 132, speed: 3.4, weaponType: 'twohand_sword', weaponLevel: 2 },
     sellValue: 680,
     buyValue: 6800,
   },
@@ -1196,7 +1196,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'common',
-    weapon: { min: 16, max: 27, speed: 3.0 },
+    weapon: { min: 35, max: 46, speed: 3.0, weaponType: 'rod', weaponLevel: 2 },
     stats: { int: 2 },
     sellValue: 600,
     buyValue: 6000,
@@ -1207,7 +1207,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     kind: 'weapon',
     slot: 'mainhand',
     quality: 'common',
-    weapon: { min: 10, max: 16, speed: 1.8, dagger: true },
+    weapon: { min: 55, max: 73, speed: 1.8, weaponType: 'dagger', weaponLevel: 2, dagger: true },
     sellValue: 600,
     buyValue: 6000,
   },
@@ -1344,7 +1344,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // round(primaryStatBudget(17, rare, mainhand) = 10 x TWOHAND_STAT_MULT) =
     // 13, dps on the weaponDpsBudget(17) x TWOHAND_DPS_MULT curve (~13.57 at
     // speed 3.5).
-    weapon: { min: 40, max: 55, speed: 3.5 },
+    weapon: { min: 85, max: 113, speed: 3.5, weaponType: 'twohand_rod', weaponLevel: 2 },
     stats: { str: 5, agi: 4, vit: 4 },
     sellValue: 1400,
     requiredClass: FERAL,
@@ -1505,7 +1505,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // round(primaryStatBudget(23, rare, mainhand) = 13 x TWOHAND_STAT_MULT) =
     // 17, dps on the weaponDpsBudget(23) x TWOHAND_DPS_MULT curve (~15.64 at
     // speed 3.6).
-    weapon: { min: 48, max: 65, speed: 3.6 },
+    weapon: { min: 97, max: 129, speed: 3.6, weaponType: 'twohand_mace', weaponLevel: 3 },
     stats: { str: 7, agi: 5, vit: 5 },
     sellValue: 3200,
     requiredClass: FERAL,
@@ -1534,7 +1534,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // stat budget round(primaryStatBudget(26, epic, mainhand) = 18 x
     // TWOHAND_STAT_MULT) = 23 (the wyrmfang_greatblade total), dps on the
     // weaponDpsBudget(26) x TWOHAND_DPS_MULT curve (~16.68 at speed 3.6).
-    weapon: { min: 51, max: 69, speed: 3.6 },
+    weapon: { min: 126, max: 168, speed: 3.6, weaponType: 'twohand_rod', weaponLevel: 4 },
     stats: { str: 9, agi: 7, vit: 7 },
     sellValue: 9000,
     requiredClass: FERAL,
@@ -1551,7 +1551,7 @@ export const ZONE3_ITEMS: Record<string, ItemDef> = {
     // TWOHAND_STAT_MULT) = 26, dps on the weaponDpsBudget(29) x
     // TWOHAND_DPS_MULT curve (~17.71 at speed 3.7). The top rung of the feral
     // ladder, beside the direfang_greatblade on the same boss.
-    weapon: { min: 56, max: 75, speed: 3.7 },
+    weapon: { min: 128, max: 170, speed: 3.7, weaponType: 'twohand_mace', weaponLevel: 4 },
     stats: { str: 10, agi: 8, vit: 8 },
     // Every item-level-29 raid epic carries exactly one rating at 20 (the tier
     // ladder pin in tests/combat_rating.test.ts); the maul takes Hit like the

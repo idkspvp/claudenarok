@@ -31,9 +31,13 @@ const SIZE_TABLE: Readonly<Record<WeaponType, Readonly<Record<Size, number>>>> =
   twohand_axe: { small: 50, medium: 75, large: 100 },
   // Blunt force does not care what shape it hits.
   mace: { small: 75, medium: 100, large: 100 },
+  // A two-handed mace trades the one-hander's small-target penalty for a heavier
+  // swing against everything, which is Ragnarok's own row for it.
+  twohand_mace: { small: 75, medium: 100, large: 100 },
   knuckle: { small: 100, medium: 75, large: 50 },
   // Caster and support arms: they are not what the wielder fights with.
   rod: { small: 100, medium: 100, large: 100 },
+  twohand_rod: { small: 100, medium: 100, large: 100 },
   book: { small: 100, medium: 100, large: 75 },
   instrument: { small: 75, medium: 100, large: 75 },
   whip: { small: 75, medium: 100, large: 50 },

@@ -60,9 +60,15 @@ describe('over-level gear is inert', () => {
 
   it('the weapon becomes live at the required level', () => {
     const e = swordman(DAGGER_REQ, { mainhand: DAGGER });
-    expect(e.weapon.min).toBe(6);
-    expect(e.weapon.max).toBe(11);
+    // Against the RECORD, not against transcribed numbers: this case is about
+    // the level gate opening, and pinning the dagger's attack here made a
+    // weapon-balance pass fail in a file that has no opinion on balance.
+    const authored = ITEMS[DAGGER].weapon!;
+    expect(e.weapon.min).toBe(authored.min);
+    expect(e.weapon.max).toBe(authored.max);
     expect(e.weapon.dagger).toBe(true);
+    // ...and it really opened, rather than both sides reading the same default.
+    expect(e.weapon.max).toBeGreaterThan(UNARMED.max);
   });
 
   it('over-level gear stays worn (still mirrored for render) while inert', () => {

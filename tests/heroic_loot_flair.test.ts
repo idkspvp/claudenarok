@@ -4,10 +4,10 @@
 // green/uncommon drops and the existing
 // item-level-31 heroic set are untouched.
 import { describe, expect, it } from 'vitest';
+import { weaponAtkBand, weaponLevelFor } from '../src/sim/combat/weapon_class_atk';
 import { heroicVariantId } from '../src/sim/content/heroic_variants';
 import { ITEMS, MOBS } from '../src/sim/data';
 import { enterDungeon } from '../src/sim/instances/dungeons';
-import { TWOHAND_DPS_MULT, weaponDpsBudget } from '../src/sim/item_budget';
 import { expectedStatBudget, itemLevel, primaryStatSum } from '../src/sim/item_level';
 import { Sim } from '../src/sim/sim';
 import type { Entity, ItemDef } from '../src/sim/types';
@@ -108,57 +108,67 @@ describe('heroic loot flair: variant generation', () => {
   });
 });
 
-describe('heroic loot flair: weapon dps tracks item level', () => {
-  const dps = (id: string) => {
-    const w = ITEMS[id].weapon!;
-    return (w.min + w.max) / 2 / w.speed;
-  };
-  const FIVEMAN_SET_WEAPONS = ['gravewyrm_cleaver', 'mistcallers_fang', 'lunar_tide_greatstaff'];
-  // The heroic-only Nythraxis raid weapons are one tier up (item level 33).
-  const RAID_WEAPONS = [
-    'scepter_of_the_deathless_court',
-    'deathless_greatblade',
-    'stormcallers_focus',
-  ];
+// Weapon attack used to be one universal curve read off item level, so a rod and
+// a two-handed sword of the same tier hit for the same amount and the tier was
+// the only thing that mattered. Ragnarok's model replaced it: attack comes from
+// the weapon CLASS, and a caster's rod is deliberately the weakest thing in the
+// game to hold because a caster's damage is MATK. What these cases pin is the
+// class band, which is the contract an authoring mistake actually violates.
+describe('weapon attack sits in its own class band', () => {
+  const authored = () => Object.values(ITEMS).filter((i) => i.weapon && !i.heroicOf);
 
-  it('every five-man heroic (item level 31) set weapon sits on the dps curve', () => {
-    const target = weaponDpsBudget(31);
-    for (const id of FIVEMAN_SET_WEAPONS) {
-      expect(itemLevel(ITEMS[id]), id).toBe(31);
-      expect(Math.abs(dps(id) - target), `${id} dps ${dps(id)}`).toBeLessThan(0.3);
+  it('gives every authored weapon a class and a refine rung', () => {
+    const all = authored();
+    expect(all.length).toBeGreaterThan(100);
+    for (const i of all) {
+      expect(i.weapon?.weaponType, i.id).toBeDefined();
+      expect(i.weapon?.weaponLevel, i.id).toBeGreaterThanOrEqual(1);
+      expect(i.weapon?.weaponLevel, i.id).toBeLessThanOrEqual(4);
     }
   });
 
-  it('every heroic-only raid weapon (item level 33) sits on the dps curve', () => {
-    for (const id of RAID_WEAPONS) {
-      const item = ITEMS[id];
-      expect(itemLevel(item), id).toBe(33);
-      // Two-handers ride the TWOHAND_DPS_MULT premium above the one-hand line
-      // (the v0.27.1 stat-for-dps tradeoff).
-      const isTwoHand = item.kind === 'weapon' && item.hand === 'twohand';
-      const target = weaponDpsBudget(33) * (isTwoHand ? TWOHAND_DPS_MULT : 1);
-      expect(Math.abs(dps(id) - target), `${id} dps ${dps(id)}`).toBeLessThan(0.3);
+  it('keeps every one inside the measured band for its class', () => {
+    for (const i of authored()) {
+      const w = i.weapon!;
+      const band = weaponAtkBand(w.weaponType!);
+      expect(
+        w.max,
+        `${i.id} (${w.weaponType}) atk ${w.max} vs ${band.min}..${band.max}`,
+      ).toBeGreaterThanOrEqual(band.min);
+      expect(
+        w.max,
+        `${i.id} (${w.weaponType}) atk ${w.max} vs ${band.min}..${band.max}`,
+      ).toBeLessThanOrEqual(band.max);
+      // The rung is derived from where in the band the weapon fell, so a record
+      // whose two fields disagree was hand-edited without re-deriving one.
+      expect(w.weaponLevel, `${i.id} rung`).toBe(weaponLevelFor(w.weaponType!, w.max));
     }
   });
 
-  it('keeps the one-hand ladder ordered and the 2H premium inside its own ladder', () => {
-    // Within the one-hand line, higher item level still wins.
-    expect(dps('gravewyrm_cleaver')).toBeGreaterThan(weaponDpsBudget(26));
-    expect(dps('gravewyrm_cleaver')).toBeLessThan(dps('kingsbane_last_oath'));
-    expect(dps('mistcallers_fang')).toBeLessThan(dps('deathless_heartwood'));
-    // The 2H ladder ascends by tier too: the ilvl-26 Wyrmfang stays under the
-    // ilvl-33 Deathless Greatblade.
-    expect(dps('wyrmfang_greatblade')).toBeLessThan(dps('deathless_greatblade'));
+  it('puts the caster band under the melee band and the 2H band over both', () => {
+    // The claim the old item-level curve could not express, stated as whole
+    // classes rather than as a pair of chosen items. Compared best-to-best,
+    // because the bands are meant to OVERLAP at their edges: a top rod really
+    // does out-attack a starter greatsword in Ragnarok, and only the ceilings
+    // are ordered.
+    const best = (t: 'rod' | 'sword' | 'twohand_sword') =>
+      Math.max(
+        ...authored()
+          .filter((i) => i.weapon?.weaponType === t)
+          .map((i) => i.weapon!.max),
+      );
+    expect(best('rod')).toBeLessThan(best('sword'));
+    expect(best('sword')).toBeLessThan(best('twohand_sword'));
+    // And the ceilings are far enough apart to be a real choice, not noise.
+    expect(best('twohand_sword')).toBeGreaterThan(best('rod') * 2);
   });
 
-  it('a Heroic weapon variant scales its damage to its own item level', () => {
-    const v = Object.values(ITEMS).find((i) => i.heroicOf && i.weapon);
-    expect(v).toBeDefined();
-    const w = v!.weapon!;
-    const d = (w.min + w.max) / 2 / w.speed;
-    const isTwoHand = v!.kind === 'weapon' && v!.hand === 'twohand';
-    const target = weaponDpsBudget(itemLevel(v!)!) * (isTwoHand ? TWOHAND_DPS_MULT : 1);
-    expect(Math.abs(d - target)).toBeLessThan(0.6);
+  it('still ranks the tiers inside one class', () => {
+    // Losing the universal curve must not cost the ladder: a heroic set weapon
+    // is still the best of its own class line.
+    const wl = (id: string) => ITEMS[id].weapon!.max;
+    expect(wl('kingsbane_last_oath')).toBeGreaterThan(wl('crossroads_saber'));
+    expect(wl('deathless_greatblade')).toBeGreaterThan(wl('wyrmfang_greatblade'));
   });
 });
 

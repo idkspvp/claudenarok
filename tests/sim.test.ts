@@ -718,6 +718,13 @@ describe('thief', () => {
     const sim = makeSim('thief');
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 1;
+    // A leveled thief on Ragnarok-scale weapon attack one-shots a level-1 wolf,
+    // which ended the build-up loop at a single combo point. The wolf is a
+    // combo-point dispenser in these cases, not a fight, so it is given enough
+    // health to survive one; its LEVEL is left alone because that would move the
+    // hit table this case depends on.
+    wolf.maxHp = 100000;
+    wolf.hp = wolf.maxHp;
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
     facePlayerAt(sim, wolf);
@@ -836,6 +843,13 @@ describe('thief', () => {
     levelWithStats(sim, 20); // Vanish (18) and Low Blow (14) both known
     const wolf = nearestMob(sim, 'forest_wolf');
     wolf.level = 1;
+    // A leveled thief on Ragnarok-scale weapon attack one-shots a level-1 wolf,
+    // which ended the build-up loop at a single combo point. The wolf is a
+    // combo-point dispenser in these cases, not a fight, so it is given enough
+    // health to survive one; its LEVEL is left alone because that would move the
+    // hit table this case depends on.
+    wolf.maxHp = 100000;
+    wolf.hp = wolf.maxHp;
     teleportTo(sim, wolf.pos.x + 2, wolf.pos.z);
     sim.targetEntity(wolf.id);
     facePlayerAt(sim, wolf);

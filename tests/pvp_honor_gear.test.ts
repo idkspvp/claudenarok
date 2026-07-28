@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { weaponAtkBand } from '../src/sim/combat/weapon_class_atk';
 import {
   FURY_ENTITY_ID,
   FURY_NPC,
@@ -9,7 +10,6 @@ import {
 import { ITEMS, NPCS } from '../src/sim/data';
 import { createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import { canEquipItem } from '../src/sim/equipment_rules';
-import { weaponDpsBudget } from '../src/sim/item_budget';
 import {
   expectedStatBudget,
   itemLevel,
@@ -229,14 +229,22 @@ describe('FURY WARFARE item budgets', () => {
     }
   });
 
-  it('puts all three weapons on the item-level-28 DPS curve', () => {
-    const target = weaponDpsBudget(28);
+  it('puts all three weapons at the top of their own class bands', () => {
+    // These were pinned to one item-level-28 dps curve, which asked a greatsword,
+    // a dagger and a warstaff to hit for the same amount. Attack now comes from
+    // the weapon class, so what a top-tier honor reward has to be is the top of
+    // ITS class, and the three are no longer comparable to each other.
     for (const id of ['final_argument_greatblade', 'first_blood_razor', 'emberglass_warstaff']) {
       const weapon = ITEMS[id].weapon;
       expect(weapon, id).toBeDefined();
-      if (!weapon) continue;
-      const dps = (weapon.min + weapon.max) / 2 / weapon.speed;
-      expect(Math.abs(dps - target), `${id}: ${dps}`).toBeLessThan(0.2);
+      if (!weapon?.weaponType) continue;
+      const band = weaponAtkBand(weapon.weaponType);
+      expect(
+        weapon.max,
+        `${id} atk ${weapon.max} vs band ${band.min}..${band.max}`,
+      ).toBeLessThanOrEqual(band.max);
+      // In the top rung of its band: an honor reward is a chase item.
+      expect(weapon.weaponLevel, `${id} rung`).toBeGreaterThanOrEqual(3);
     }
   });
 

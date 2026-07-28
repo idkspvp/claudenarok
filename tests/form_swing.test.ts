@@ -36,8 +36,11 @@ describe('Wolf Form swing speed', () => {
     sim.tick();
     const acolyte = sim.entities.get(a)!;
 
-    // The acolyte's caster weapon is slower than a thief dagger: that slow speed is
-    // exactly what used to leak into Wolf Form's auto-attacks (the bug).
+    // Equip a genuinely slow weapon rather than leaning on the starting staff,
+    // which is exactly as fast as a dagger now that a weapon carries one cadence
+    // instead of a melee speed and a separate class wand speed. The slow speed is
+    // what used to leak into Wolf Form's auto-attacks, and that is the bug.
+    acolyte.weapon = { ...acolyte.weapon, speed: 3.2 };
     expect(acolyte.weapon.speed).toBeGreaterThan(ROGUE_BASE_SWING_SPEED);
 
     giveForm(sim, a, 'form_cat', 'Wolf Form');
@@ -108,6 +111,7 @@ describe('Wolf Form swing speed', () => {
   }
 
   it('Wolf Form normalizes swing DAMAGE to the thief cadence (no AP double-dip)', () => {
+    // Same reason as above: the case needs a weapon slower than the form cadence.
     // Status ATK adds RAW and carries no speed factor: Ragnarok has no
     // attack-power-per-second divisor at all. The cadence guard now lives
     // entirely on the WEAPON roll, which is normalized by the speed the swing
@@ -121,7 +125,12 @@ describe('Wolf Form swing speed', () => {
     const a = sim.addPlayer('acolyte', 'Feral');
     sim.setPlayerLevel(20, a);
     sim.tick();
-    const staffSpeed = sim.entities.get(a)!.weapon.speed;
+    // Slowed deliberately: the starting staff now swings exactly as fast as a
+    // dagger, and the whole contrast this case draws needs a weapon SLOWER than
+    // the form cadence.
+    const SLOW_STAFF = 3.2;
+    sim.entities.get(a)!.weapon = { ...sim.entities.get(a)!.weapon, speed: SLOW_STAFF };
+    const staffSpeed = SLOW_STAFF;
     giveForm(sim, a, 'form_cat', 'Wolf Form');
     const wolf = firstWhiteHit(sim, a);
 
@@ -134,6 +143,7 @@ describe('Wolf Form swing speed', () => {
     const b = sim2.addPlayer('acolyte', 'Bruin');
     sim2.setPlayerLevel(20, b);
     sim2.tick();
+    sim2.entities.get(b)!.weapon = { ...sim2.entities.get(b)!.weapon, speed: SLOW_STAFF };
     giveForm(sim2, b, 'form_bear', 'Bear Form');
     const staff = firstWhiteHit(sim2, b);
 

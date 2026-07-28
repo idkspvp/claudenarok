@@ -58,9 +58,9 @@ export const UNARMED_BASE_AMOTION: Readonly<Record<AspdJob, number>> = {
  *  resolves to `DEFAULT_BASE_AMOTION`, so the table stays a statement about what
  *  a job CAN use rather than a full matrix mostly filled with a penalty.
  *
- *  Ragnarok's two-handed mace and two-handed staff have no counterpart in this
- *  game's `WeaponType`, so their rows are dropped rather than folded into the
- *  one-handed entry. `Staff` maps onto `rod`. */
+ *  `Staff` maps onto `rod` and `2hStaff` onto `twohand_rod`; both two-handed
+ *  classes exist here now, so every row rAthena authors for these five jobs is
+ *  carried rather than dropped. */
 export const JOB_BASE_AMOTION: Readonly<
   Record<AspdJob, Readonly<Partial<Record<WeaponType, number>>>>
 > = {
@@ -76,11 +76,13 @@ export const JOB_BASE_AMOTION: Readonly<
     axe: 700,
     twohand_axe: 750,
     mace: 650,
+    twohand_mace: 700,
   },
   // Three entries. A Mage that picks up anything else is not playing a Mage.
   mage: {
     dagger: 600,
     rod: 700,
+    twohand_rod: 700,
   },
   archer: {
     dagger: 600,
@@ -88,7 +90,9 @@ export const JOB_BASE_AMOTION: Readonly<
   },
   acolyte: {
     mace: 600,
+    twohand_mace: 600,
     rod: 600,
+    twohand_rod: 600,
   },
   // Note the 800s: a Thief CAN hold an axe or a bow, and is punished for it
   // almost as hard as having no row at all. The dagger at 500 is the point.

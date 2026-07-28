@@ -142,7 +142,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'epic',
     requiredLevel: 20,
-    weapon: { min: 22, max: 36, speed: 1.8, dagger: true },
+    weapon: { min: 95, max: 126, speed: 1.8, weaponType: 'dagger', weaponLevel: 4, dagger: true },
     stats: { agi: 13, vit: 9 },
     critRating: FIVE_MAN_WEAPON_RATING,
     sellValue: 15000,
@@ -221,7 +221,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'epic',
     requiredLevel: 20,
-    weapon: { min: 36, max: 60, speed: 3.0 },
+    weapon: { min: 58, max: 77, speed: 3.0, weaponType: 'rod', weaponLevel: 4 },
     stats: { int: 13, luk: 9 },
     hitRating: FIVE_MAN_WEAPON_RATING,
     sellValue: 15000,
@@ -300,7 +300,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'epic',
     requiredLevel: 20,
-    weapon: { min: 31, max: 52, speed: 2.6 },
+    weapon: { min: 116, max: 154, speed: 2.6, weaponType: 'axe', weaponLevel: 4 },
     stats: { str: 13, vit: 9 },
     critRating: FIVE_MAN_WEAPON_RATING,
     sellValue: 15000,
@@ -424,7 +424,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     requiredLevel: 20,
     // Item level 31 heroic-only feral two-hander: 2H dps on the weaponDpsBudget(31)
     // x TWOHAND_DPS_MULT curve (~18.4 at speed 3.6), stat budget 29.
-    weapon: { min: 55, max: 78, speed: 3.6 },
+    weapon: { min: 137, max: 182, speed: 3.6, weaponType: 'twohand_mace', weaponLevel: 4 },
     stats: { str: 13, agi: 9, vit: 7 },
     hitRating: FIVE_MAN_WEAPON_RATING,
     sellValue: 15000,
@@ -438,7 +438,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'epic',
     requiredLevel: 20,
-    weapon: { min: 29, max: 51, speed: 2.4 },
+    weapon: { min: 51, max: 68, speed: 2.4, weaponType: 'rod', weaponLevel: 3 },
     stats: { int: 13, luk: 10 },
     hasteRating: RAID_WEAPON_PRIMARY_RATING,
     critRating: RAID_SECONDARY_RATING,
@@ -455,7 +455,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     requiredLevel: 20,
     // 2H dps premium at the raid tier: weaponDpsBudget(33) = 16.6 x
     // TWOHAND_DPS_MULT -> 19.1 dps.
-    weapon: { min: 52, max: 78, speed: 3.4 },
+    weapon: { min: 168, max: 224, speed: 3.4, weaponType: 'twohand_sword', weaponLevel: 4 },
     // v0.27.1 re-budget: round(primaryStatBudget(33, epic, mainhand) = 23 x
     // TWOHAND_STAT_MULT) = 30 points; the dps premium is the 2H's compensation.
     stats: { str: 18, vit: 12 },
@@ -471,7 +471,7 @@ export const HEROIC_ITEMS: Record<string, ItemDef> = {
     slot: 'mainhand',
     quality: 'epic',
     requiredLevel: 20,
-    weapon: { min: 31, max: 52, speed: 2.5 },
+    weapon: { min: 52, max: 69, speed: 2.5, weaponType: 'rod', weaponLevel: 3 },
     stats: { int: 14, luk: 9 },
     hasteRating: RAID_WEAPON_PRIMARY_RATING,
     critRating: RAID_SECONDARY_RATING,

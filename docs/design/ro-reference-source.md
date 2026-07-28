@@ -19,7 +19,7 @@ checkout is for. Two things are not:
   records, their specific numbers), which is why the sparse checkout deliberately
   excludes it. Mechanics are fair to reimplement; datasets are not.
 
-**Two recorded exceptions, both taken on the owner's explicit instruction.** In
+**Three recorded exceptions, all taken on the owner's explicit instruction.** In
 each case the licensing concern was raised first, the owner reaffirmed, and the
 decision is written down here rather than left as an undocumented divergence
 between this rule and the tree.
@@ -28,6 +28,13 @@ between this rule and the tree.
 |---|---|---|
 | `db/pre-re/job_stats.yml` | `src/sim/job_vitals.ts` | the four per-job HP and SP coefficients |
 | `db/pre-re/job_aspd.yml` | `src/sim/job_aspd.ts` | the per-job, per-weapon base attack motions for the five first jobs |
+| `db/pre-re/item_db_equip.yml` | `src/sim/combat/weapon_class_atk.ts` | AGGREGATE statistics only: the median attack per weapon class, measured over the file's 707 weapons. No individual record, name, or number is carried across |
+
+The third is narrower than the first two and worth stating precisely: what was
+taken is a set of seventeen medians, one per weapon class, computed over the whole
+file. Our own weapons keep their own names and their own relative ordering, and
+are placed inside a band around the median for their class; no authored row was
+copied or transcribed.
 
 `db/pre-re` is added to the reference clone's sparse checkout so these are
 readable; it stays outside the working tree like everything else there.
