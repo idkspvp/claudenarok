@@ -59,6 +59,10 @@ export interface SheetStats {
   int: number;
   luk: number;
   armor: number;
+  /** Hard magic defence from equipment. Reaches the client already, because the
+   *  sheet spreads the whole derived block; declaring it here is what lets a
+   *  typed consumer actually read it. */
+  mdef: number;
   pvpOffense: number;
   pvpDefense: number;
 }
