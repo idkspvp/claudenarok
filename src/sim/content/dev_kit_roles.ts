@@ -9,11 +9,10 @@
 // tester lands in gear that is coherent for their spec, not so the game can claim an
 // optimal set. They deliberately do not encode rotation, set bonuses, or breakpoints.
 //
-// The role for each spec is taken from the declared SpecDef.role in
-// src/sim/content/talents.ts and is pinned by a test, so this table cannot silently
-// drift away from the talent tree. Two of those declared roles are worth noting
-// because they are not the genre default: mage/arcane is a HEALER in this game, and
-// druid/feral is a TANK.
+// The role for each spec was taken from the talent content table, which went with the
+// trees in Phase D0; this table is now the source of truth for it and is pinned by a
+// test. Two of the roles are worth noting because they are not the genre default:
+// mage/arcane is a HEALER in this game, and druid/feral is a TANK.
 
 import type { PlayerClass } from '../types';
 

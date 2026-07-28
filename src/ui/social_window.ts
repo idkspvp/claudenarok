@@ -4,7 +4,7 @@
 // dispatches every friend/guild/raid command through IWorld; the cross-window
 // chrome (whisper, confirm prompts, close-others, focus return) comes through the
 // injected deps. The pure row + signature decisions live in social_view.ts; this
-// is the thin DOM consumer per the unit_portrait / talents_window template.
+// is the thin DOM consumer per the unit_portrait template.
 //
 // Visibility is the '.open' CLASS on #social-window (not style.display), matching
 // the window-manager (closeManagedWindow / topmostOpenWindow read '.open').
@@ -225,7 +225,7 @@ export class SocialWindow {
       `<div class="panel-title"><span>${esc(t('hud.social.title'))}${realmTag}</span><button type="button" class="x-btn" data-close aria-label="${esc(t('hud.options.returnToGame'))}">${svgIcon('close')}</button></div>` +
       // WAI-ARIA tabs: a real role=tablist / role=tab / role=tabpanel with a
       // roving tabindex (0 on the active tab, -1 on the rest) and aria-selected, built
-      // from the shared tab_strip_view core (same markup contract talents_window
+      // from the shared tab_strip_view core (same markup contract the retired talents window
       // follows). Ignore and block are two distinct tiers, so they get a tab each:
       // the Ignored tab lists the chat-only mutes, the Blocked tab the hard blocks.
       // The roving Arrow/Home/End handler is wired in wireChrome via wireTabStrip.

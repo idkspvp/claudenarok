@@ -59,7 +59,7 @@ describe('tabStripHtml', () => {
     );
   });
 
-  it('supports a div tag with a per-tab badge (extraHtml), for a talents_window-style strip', () => {
+  it('supports a div tag with a per-tab badge (extraHtml), for a badge-carrying strip', () => {
     const html = tabStripHtml(
       tabStripModel({
         ariaLabel: 'Talents',

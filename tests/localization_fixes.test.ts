@@ -922,7 +922,7 @@ describe('S3: every sim.ts emit is recognized (drift guard)', () => {
   // exhaustively covered by the B1 and M1b describe blocks above, so skip them here.
   const TMPL_SKIP = [/\$\{verb\}/, /^Who: \$\{/, /^\.\.\.and \$\{.*\} more\.$/];
   // Intentional-English backstops: deterministic-sim talent-build VALIDATION diagnostics
-  // (reasons originate in content/talents.ts and behave like code diagnostics). The
+  // (reasons behaved like code diagnostics). The
   // normal talent-panel flow uses the localized buildInvalid message instead.
   const ALLOW = [/^Loadout invalid:/];
   // v0.7 in-game slash-command + diagnostic status feature (/target, /xp, /auto, /pet,

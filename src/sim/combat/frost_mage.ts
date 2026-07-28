@@ -127,7 +127,7 @@ export function gainFingersOfFrost(ctx: SimContext, p: Entity): void {
       school: 'frost',
     });
   }
-  // The arming moment (talent_procs' procSurge idiom): the player feels it hit.
+  // The arming moment (the procSurge idiom): the player feels it hit.
   ctx.emit({ type: 'spellfx', sourceId: p.id, targetId: p.id, school: 'frost', fx: 'procSurge' });
 }
 

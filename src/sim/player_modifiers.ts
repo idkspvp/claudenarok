@@ -126,7 +126,7 @@ export interface GlobalModEffect {
 }
 
 export type ProcTrigger =
-  // icd: optional internal cooldown in seconds (talent_procs.ts). While it
+  // icd: optional internal cooldown in seconds (combat/proc_state.ts). While it
   // runs, matching casts/crits are ignored entirely: nothing fires and nothing
   // is banked toward n.
   // chance: optional 0-1 fire probability (the item-set Clearcasting shape).

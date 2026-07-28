@@ -1,6 +1,6 @@
 // Pure, DOM-free tab-strip model + markup builder: the WAI-ARIA tabs markup
 // (role=tablist/tab, aria-selected, roving tabindex) that social_window.ts,
-// market_window.ts, talents_window.ts, daily_rewards_window.ts, and
+// market_window.ts, daily_rewards_window.ts, and
 // mailbox_window.ts each hand-rolled independently (market/mailbox use a
 // different toggle-button pattern, not real WAI-ARIA tabs, so they are out of
 // scope for this core). This is the first migration onto a shared building
@@ -10,9 +10,9 @@
 //
 // Kept deliberately generic so every real WAI-ARIA tab strip in the HUD can
 // compose it, not just the social panel's plain-label buttons:
-// - `tag` supports a `<div role="tab">` strip (talents_window's pattern) as
+// - `tag` supports a `<div role="tab">` strip (a plain div strip) as
 //   well as the default `<button>`.
-// - `extraHtml` lets a tab carry more than a label (talents_window appends a
+// - `extraHtml` lets a tab carry more than a label (a strip may append a
 //   spent-points badge after the tab name). It is trusted markup the caller
 //   already escaped/built, exactly like the rest of this HUD's HTML-string
 //   convention: never pass raw player/server text here directly.
@@ -47,7 +47,7 @@ export interface TabStripDescriptor<Id extends string = string> {
   tabClass: string;
   /** Class added to the selected tab on top of tabClass (e.g. 'on'). */
   selectedClass: string;
-  /** Element tag for each tab: 'button' (default) or 'div' (talents_window's pattern). */
+  /** Element tag for each tab: 'button' (default) or 'div' (a plain div strip). */
   tag?: TabStripTag;
   tabs: TabStripTab<Id>[];
   selected: Id;

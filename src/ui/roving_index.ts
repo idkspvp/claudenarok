@@ -1,5 +1,5 @@
 // Pure keyboard-navigation logic for the always-visible roving-tabindex pattern (a
-// tablist, a radiogroup, a menu of sibling options), lifted out of talents_window.ts so
+// tablist, a radiogroup, a menu of sibling options), lifted out of the retired talents window so
 // the three handlers that triplicated it share one tested core. It is the sibling of
 // dropdown_nav.ts: that core models the OPEN/COLLAPSE listbox (a trigger that expands a
 // hidden menu); this one models ALWAYS-VISIBLE roving siblings, where Arrow/Home/End move

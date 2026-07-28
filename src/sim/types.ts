@@ -427,11 +427,12 @@ export type AuraKind =
 
 // The shapeshift/stance aura kinds toggled by casting their granting ability (see the
 // isFormKind toggle in combat/effect_dispatch.ts): mutually exclusive, never expire on
-// their own, and cancel on their own when the granting ability stops being known (see
-// stripOrphanedFormAuras in progression/talents.ts). The single source of truth for this
-// kind set: combat/effect_dispatch.ts, combat/casting_lifecycle.ts, social/chat_readouts.ts,
-// and progression/talents.ts all consume isFormAuraKind/FORM_AURA_KINDS from here instead
-// of repeating the five-kind list, so it cannot drift out of sync between call sites.
+// their own, and cancel on their own when the granting ability stops being known. The
+// single source of truth for this kind set: combat/effect_dispatch.ts,
+// combat/casting_lifecycle.ts and social/chat_readouts.ts all consume
+// isFormAuraKind/FORM_AURA_KINDS from here instead of repeating the list, so it cannot
+// drift out of sync between call sites. (The talent module that used to strip orphaned
+// form auras went with the trees in Phase D0.)
 export const FORM_AURA_KINDS: ReadonlySet<AuraKind> = new Set<AuraKind>([
   'form_fireball',
   'form_moonkin',
@@ -2886,7 +2887,8 @@ export interface DamageTick {
 }
 
 export interface Entity {
-  // Transient talent-proc counters and internal cooldowns (combat/talent_procs.ts).
+  // Transient proc counters and internal cooldowns (combat/proc_state.ts, which is
+  // what survived the talent proc engine).
   // Never serialized; reset on death.
   procState?: { counters: Record<string, number>; icds: Record<string, number> };
   // Set when a cast consumes a next_cast_free / next_execute_free /

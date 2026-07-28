@@ -163,7 +163,7 @@ export class LeaderboardWindow {
     if (focus === 'open') (el.querySelector('[data-close]') as HTMLElement | null)?.focus();
     // A tab switch rebuilt the strip and destroyed the focused button; put the
     // roving focus back on the now-active tab so keyboard focus is never dropped
-    // to <body> (selection-follows-focus, mirroring social_window/talents_window).
+    // to <body> (selection-follows-focus, mirroring social_window).
     if (focus === 'tab') (el.querySelector('.lb-tab-active') as HTMLElement | null)?.focus();
 
     if (this.board === 'guilds') {
@@ -389,7 +389,7 @@ export class LeaderboardWindow {
 
   // The Players / Guilds / Daily tab bar. A WAI-ARIA role=tablist with roving
   // tabindex (0 on the active tab, -1 on the rest) and aria-selected, controlling the
-  // shared #lb-body-panel tabpanel, mirroring social_window/talents_window. The
+  // shared #lb-body-panel tabpanel, mirroring social_window. The
   // roving Arrow/Home/End + Enter/Space handler is wired in wireTabs.
   private tabsHtml(): string {
     const tab = (board: LeaderboardBoard, label: string): string => {

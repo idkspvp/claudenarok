@@ -326,9 +326,10 @@ export function pctValue(value: number): number {
   return value > 1 ? value / 100 : value;
 }
 
-// Recompute all derived stats for the player from class, level, gear, buffs, and
-// precomputed talent modifiers. `mods` is the flat struct resolved at
-// allocation/respec time (computeTalentModifiers); this never walks the tree.
+// Recompute all derived stats for the player from class, level, gear and buffs.
+// `mods` is the flat PlayerModifiers struct (src/sim/player_modifiers.ts); the
+// talent trees that used to populate most of it went in Phase D0, and what
+// remains is fed by augments and set bonuses.
 // The base attack motion for what this character is actually holding: the job's
 // row for the mainhand class, combined with the offhand's row when dual
 // wielding (seven tenths of the two ADDED, so two one-handers are slower than
@@ -533,8 +534,8 @@ export function recalcPlayerStats(
     else if (a.kind === 'buff_scale') scaleMul *= a.value;
     // Metamorphosis: a temporary demon transform that also makes the caster larger.
     else if (a.kind === 'form_metamorph') scaleMul *= 1.35;
-    // Percent raid buffs store integer percent POINTS (5 = +5%) so they survive the
-    // integer-rounding talent value multiplier; converted to a fraction here.
+    // Percent raid buffs store integer percent POINTS (5 = +5%) so they survive an
+    // integer-rounding value multiplier; converted to a fraction here.
     else if (a.kind === 'buff_stats_pct') allStatsPct += a.value / 100;
     else if (a.kind === 'buff_int_pct') intPct += a.value / 100;
     else if (a.kind === 'buff_sta_pct') vitPct += a.value / 100;
@@ -576,7 +577,7 @@ export function recalcPlayerStats(
     if (m.lukPct) s.luk = Math.round(s.luk * (1 + m.lukPct));
   }
   // Percent stat raid buffs, folded multiplicatively on the computed (base + gear +
-  // flat + talent) primary stats so they feed every downstream derivation (melee ATK
+  // flat) primary stats so they feed every downstream derivation (melee ATK
   // from str/dex/luk, ranged ATK from dex, MATK from int, HP from vit, evasion from
   // agi, crit from luk). DEX is listed here explicitly: it was the one attribute an
   // all-stats buff skipped, which quietly made the buff worthless to a bow user.
@@ -764,10 +765,10 @@ export function recalcPlayerStats(
   e.spellHaste = hasteFrac + bonusHaste + (mods?.global.spellHastePct ?? 0);
   e.setProcs = setEff.procs;
   if (e.setProcs.length > 0 && !e.procReadyAt) e.procReadyAt = {};
-  // The class-agnostic crit core (rating + talent/set crit + flat crit auras).
+  // The class-agnostic crit core (rating + modifier/set crit + flat crit auras).
   // Both hit tables read it: melee adds Agility on top, spells add Intellect
-  // (the community-found gap: spell crit read ONLY Intellect, so crit gear and
-  // crit talents were dead weight to casters).
+  // (the community-found gap: spell crit read ONLY Intellect, so crit gear was
+  // dead weight to casters).
   e.sharedCritBonus =
     bonusCrit + (mods?.stats.crit ?? 0) + setEff.crit + critFractionFromRating(e.critRating);
   // Crit is LUK's job, not AGI's: 1% base and a THIRD of a percent a point, so a
@@ -847,7 +848,7 @@ export function recalcPlayerStats(
 // Derived stats + max vitals for an OFFLINE character (a stored CharacterState),
 // computed by reusing recalcPlayerStats on a throwaway entity rather than
 // re-deriving the numbers. With no auras and no active form, recalcPlayerStats
-// yields exactly the class/level/gear/talent stat block, the same numbers a
+// yields exactly the class/level/gear stat block, the same numbers a
 // live player shows, so the character sheet stays in lockstep with the engine.
 // Resource max is the full pool for the class (mana from intellect, or 100 for
 // rage/energy); the sheet pairs it with the stored current value.

@@ -56,7 +56,7 @@ describe('rovingTarget: equivalence with the three folded talents handlers', () 
   // The exact inline arithmetic each handler computed before they were folded onto the
   // core, reproduced here so the fold is proven byte-faithful across a small index grid.
 
-  // talents_window tablist (horizontal): ArrowRight/ArrowLeft/Home/End only.
+  // a horizontal tablist: ArrowRight/ArrowLeft/Home/End only.
   const oldTablist = (key: string, i: number, n: number): number | null => {
     if (key !== 'ArrowRight' && key !== 'ArrowLeft' && key !== 'Home' && key !== 'End') return null;
     return key === 'Home'
@@ -66,7 +66,7 @@ describe('rovingTarget: equivalence with the three folded talents handlers', () 
         : (i + (key === 'ArrowRight' ? 1 : n - 1)) % n;
   };
 
-  // talents_window spec radiogroup (both): ArrowDown/ArrowRight/ArrowUp/ArrowLeft/Home/End.
+  // a two-axis radiogroup (both): ArrowDown/ArrowRight/ArrowUp/ArrowLeft/Home/End.
   const oldRadiogroup = (key: string, i: number, n: number): number | null => {
     if (
       key !== 'ArrowDown' &&
@@ -86,7 +86,7 @@ describe('rovingTarget: equivalence with the three folded talents handlers', () 
           : (i - 1 + n) % n;
   };
 
-  // talents_window choice flyout (both): focusOpt normalizes ((idx % n) + n) % n for each
+  // a choice flyout (both): focusOpt normalizes ((idx % n) + n) % n for each
   // of i + 1 (Down/Right), i - 1 (Up/Left), 0 (Home), n - 1 (End).
   const oldFlyout = (key: string, i: number, n: number): number | null => {
     const norm = (idx: number) => ((idx % n) + n) % n;

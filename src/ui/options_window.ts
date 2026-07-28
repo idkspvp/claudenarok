@@ -4,7 +4,7 @@
 // sub-panels off the declarative model in options_view.ts and dispatches every
 // control through the injected deps; the pure control descriptors + the per-kind
 // value coercion live in the core. This is the thin DOM consumer per the
-// social_window / talents_window template.
+// social_window template.
 //
 // The window renders NO item rows (it is all sliders/toggles/choices/dropdowns),
 // so it composes no PainterHostPresentation bag (the social

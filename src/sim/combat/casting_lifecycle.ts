@@ -945,7 +945,7 @@ export function castAbility(
     }
     // A queued-on-swing ability bills on the swing, not through this cast's
     // completion, so the empower flag the consumes above set must not leak
-    // onto whatever cast completes next (the castNth guard in talent_procs.ts
+    // onto whatever cast completes next (the castNth guard the talent proc engine used
     // deliberately exempts on-next-swing abilities).
     if (p.castConsumedEmpower !== undefined) p.castConsumedEmpower = undefined;
     if (!p.autoAttack && target) ctx.startAutoAttack(p.id);

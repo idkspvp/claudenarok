@@ -873,12 +873,12 @@ export interface ResolvedAbility {
   rank: number;
   cost: number;
   castTime: number;
-  cooldown: number; // base def.cooldown, after talent cooldown modifiers
+  cooldown: number; // base def.cooldown, after modifier cooldown reductions
   effects: AbilityEffect[];
   threatFlat: number; // classic bonus threat on a successful use
   threatMult: number; // classic multiplier on this ability's damage-threat
-  castWhileMoving?: boolean; // talent-granted mobility (def.castWhileMoving covers baseline)
-  damagePushbackImmune?: boolean; // talent-granted immunity to damage-driven cast pushback
+  castWhileMoving?: boolean; // modifier-granted mobility (def.castWhileMoving covers baseline)
+  damagePushbackImmune?: boolean; // modifier-granted immunity to damage-driven cast pushback
   charges?: number; // authored stored uses; undefined means one use
   bonusCharges?: number; // talent-added uses, kept distinct from native maxCharges
   /** 1-based authoritative charge stage for hold-to-charge spells. */

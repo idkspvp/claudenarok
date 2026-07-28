@@ -523,16 +523,12 @@ export interface SimContextCallbacks {
   grantNythraxisLockout(boss: Entity): void;
   frenzyPackmates(dead: Entity): void;
   armDeathThroes(dead: Entity): void;
-  // C1's grantXp level-up path AND G1a's talent application (progression/talents.ts) both
-  // consume refreshKnownAbilities with announce=true, so a spec pick / talent apply that
-  // grants a new ability (e.g. a spec signature) surfaces it: emits learnAbility (the HUD
-  // places it on the bar + spellbook) and a "You have learned" log. Character LOAD uses its
-  // OWN announce=false call (addPlayer/restore) so it never spams on login; the before/after
+  // C1's grantXp level-up path consumes refreshKnownAbilities with announce=true, so
+  // levelling into a new ability surfaces it: emits learnAbility (the HUD places it on the
+  // bar + spellbook) and a "You have learned" log. Character LOAD uses its OWN
+  // announce=false call (addPlayer/restore) so it never spams on login; the before/after
   // diff in refreshKnownAbilities means only genuinely new abilities are announced.
-  // G1a's talent module also consumes the core `error` sink (declared above). The talent
-  // PUBLIC API (applyTalents/spendTalent/setSpec/respec/saveLoadout/switchLoadout/
-  // deleteLoadout/talentPoints) is NOT on this seam: Sim keeps thin wrapper methods that
-  // delegate into the module (server/HUD/tests call the `Sim` facade directly).
+  // The talent module that was the other caller went with the trees in Phase D0.
   refreshKnownAbilities(meta: PlayerMeta, announce: boolean): void;
   // A committed spec change can invalidate an equipped offhand. The inventory
   // module benches it without destroying its instance payload.
