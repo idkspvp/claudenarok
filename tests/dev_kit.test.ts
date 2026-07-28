@@ -54,9 +54,7 @@ describe('dev kit role table', () => {
     // offhand entirely rather than falling back to a held item.
     const bad = Object.entries(DEV_KIT_ROLES).flatMap(([cls, roles]) =>
       roles
-        .filter(
-          (role) => role.hands === 'dualWield' && !canDualWield(cls as PlayerClass, role.spec),
-        )
+        .filter((role) => role.hands === 'dualWield' && !canDualWield(cls as PlayerClass))
         .map((role) => `${cls}/${role.spec}`),
     );
     expect(bad).toEqual([]);
@@ -213,7 +211,7 @@ describe('kit construction', () => {
   });
 
   it('gives a shield spec a one-hander so the shield actually fits', () => {
-    const kit = buildDevKit('swordman', 'prot');
+    const kit = buildDevKit('swordman', 'swordman');
     const main = ITEMS[kit?.equip.mainhand ?? ''];
     expect(main).toBeTruthy();
     expect(main?.kind === 'weapon' && main.hand === 'twohand').toBe(false);
@@ -222,7 +220,7 @@ describe('kit construction', () => {
 
   it('never hands a caster a strength piece over an intellect one', () => {
     // The dead-stat armor discount exists precisely to stop "heaviest armor wins".
-    const kit = buildDevKit('acolyte', 'holy');
+    const kit = buildDevKit('acolyte', 'acolyte');
     for (const id of Object.values(kit?.equip ?? {})) {
       const stats = ITEMS[id]?.stats;
       if (!stats) continue;
@@ -246,7 +244,7 @@ describe('kit application order', () => {
         return true;
       },
     };
-    const applied = applyDevKit(ctx, 'swordman', 'prot');
+    const applied = applyDevKit(ctx, 'swordman', 'swordman');
     expect(applied?.bagsEquipped).toBe(4);
 
     const lastBag = calls.map((c) => c.startsWith('bag:')).lastIndexOf(true);
@@ -266,7 +264,7 @@ describe('kit application order', () => {
         return true;
       },
     };
-    applyDevKit(ctx, 'swordman', 'prot');
+    applyDevKit(ctx, 'swordman', 'swordman');
     expect(calls).toContain('unequip:mainhand');
     expect(calls).toContain('unequip:offhand');
     expect(calls.indexOf('unequip:offhand')).toBeLessThan(
@@ -290,13 +288,12 @@ describe('/dev kit against a real Sim', () => {
     const sim = new Sim({ seed: 7, playerClass: cls, devCommands: true });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
     const meta = sim.players.get(sim.playerId);
-    if (meta) meta.mods.spec = spec;
     sim.chat(`/dev kit ${spec}`);
     return sim;
   }
 
   it('dresses the character and fills all four bag sockets', () => {
-    const sim = kitted('swordman', 'prot');
+    const sim = kitted('swordman', 'swordman');
     const meta = sim.players.get(sim.playerId);
     expect(meta?.bags.filter(Boolean)).toHaveLength(4);
     // 8 armor/weapon slots minimum. Not 11: neck and both rings stay empty because no
@@ -313,11 +310,9 @@ describe('/dev kit against a real Sim', () => {
     // without the other.
     const sim = new Sim({ seed: 7, playerClass: 'mage', devCommands: true });
     sim.setPlayerLevel(DEV_KIT_LEVEL);
-    const meta = sim.players.get(sim.playerId);
-    if (meta) meta.mods.spec = 'frost';
-    sim.chat('/dev kit fire');
+    sim.chat('/dev kit mage');
+    // The kit is gear only: it never moves the character's level.
     expect(sim.player.level).toBe(DEV_KIT_LEVEL);
-    expect(sim.players.get(sim.playerId)?.mods.spec).toBe('frost');
   });
 
   // A fresh character already wears starter gear (worn_sword, recruit_tunic, ...), so

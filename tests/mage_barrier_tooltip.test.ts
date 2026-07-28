@@ -6,7 +6,6 @@ import { abilityEffectText } from '../src/ui/hud';
 describe('mage personal barrier tooltip', () => {
   it('shows the rank base and the live Spell Power contribution', () => {
     const mods = emptyModifiers();
-    mods.spec = 'frost';
     const barrier = abilitiesKnownAt('mage', 20, mods).find(
       (known) => known.def.id === 'ice_barrier',
     );
@@ -19,7 +18,6 @@ describe('mage personal barrier tooltip', () => {
 
   it('shows Temporal Barrier at its lower ally-shield coefficient', () => {
     const mods = emptyModifiers();
-    mods.spec = 'arcane';
     const barrier = abilitiesKnownAt('mage', 20, mods).find(
       (known) => known.def.id === 'temporal_barrier',
     );

@@ -73,8 +73,6 @@ import { weaponSwingDamage } from './weapon_damage';
 // sidearm, fixed class damage) are exempt.
 const RANGED_WEAPON_COEFF = 0.6;
 export const DUAL_WIELD_WHITE_MISS_PENALTY = 0.1;
-const SUDDEN_DEATH_CHANCE = 0.1;
-const SUDDEN_DEATH_DURATION = 10;
 const ONE_HAND_AUTO_ATTACK_BASE_SPEED = 2;
 const OFFHAND_AUTO_ATTACK_DMG_MULT = 0.5;
 
@@ -289,7 +287,6 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
       });
     }
     maybeProcBattleTrance(ctx, p, meta, connected);
-    maybeProcSuddenDeath(ctx, p, meta, connected);
     // Wolf Form swings at the thief's fixed feral cadence, not the carried weapon's
     // speed (see combat/form_swing.ts); everyone else uses their weapon speed.
     // Melee haste (item sets + Enrage + haste buffs) lives in the ONE additive
@@ -307,7 +304,6 @@ export function updatePlayerAutoAttack(ctx: SimContext, p: Entity, meta: PlayerM
       whiteDualWieldPenalty: true,
     });
     maybeProcBattleTrance(ctx, p, meta, connected);
-    maybeProcSuddenDeath(ctx, p, meta, connected);
     p.offhandSwingTimer =
       (offhand.speed * ctx.swingIntervalMult(p)) / (1 + stanceMasteryAutoHaste(ctx, p, meta));
   }
@@ -327,7 +323,7 @@ function maybeProcBattleTrance(
 ): void {
   if (!connected || meta.cls !== 'swordman') return;
   const proc = ctx.rng.chance(BATTLE_TRANCE_CHANCE);
-  if (!proc || ctx.playerMods(meta).spec === 'fury') return;
+  if (!proc) return;
   ctx.applyAura(player, {
     id: 'battle_trance',
     name: 'Battle Trance',
@@ -336,28 +332,6 @@ function maybeProcBattleTrance(
     duration: BATTLE_TRANCE_DURATION,
     value: 0,
     sourceId: player.id,
-    school: 'physical',
-  });
-}
-
-function maybeProcSuddenDeath(
-  ctx: SimContext,
-  p: Entity,
-  meta: PlayerMeta,
-  connected: boolean,
-): void {
-  if (!connected || meta.cls !== 'swordman') return;
-  if (ctx.playerMods(meta).spec !== 'arms') return;
-  if (!meta.known.some((known) => known.def.id === 'sudden_death' && known.def.passive)) return;
-  if (!ctx.rng.chance(SUDDEN_DEATH_CHANCE)) return;
-  ctx.applyAura(p, {
-    id: 'sudden_death',
-    name: 'Sudden Death',
-    kind: 'sudden_death',
-    remaining: SUDDEN_DEATH_DURATION,
-    duration: SUDDEN_DEATH_DURATION,
-    value: 0,
-    sourceId: p.id,
     school: 'physical',
   });
 }

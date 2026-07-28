@@ -200,9 +200,11 @@ export function handleDevChat(
   if (kitMatch) {
     const meta = ctx.players.get(pid);
     if (!meta) return null;
-    const spec = kitMatch[1] ?? meta.mods.spec;
+    // The kit name is required now: it used to fall back to the character's
+    // committed spec, and specs are gone.
+    const spec = kitMatch[1];
     if (!spec) {
-      ctx.error(pid, '[dev] No spec chosen; pass one, e.g. /dev kit fury.');
+      ctx.error(pid, '[dev] No kit chosen; pass one, e.g. /dev kit fury.');
       return null;
     }
     if (!devKitRole(meta.cls, spec)) {

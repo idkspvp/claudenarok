@@ -854,13 +854,6 @@ export function dealDamage(
     if (meta) meta.counters.damageDealt += amount;
     if (source.resourceType === 'rage' && !noRage && school === 'physical' && !ability) {
       const isWarrior = meta?.cls === 'swordman';
-      const seasonedCrit =
-        isWarrior &&
-        crit &&
-        ctx.playerMods(meta).spec === 'arms' &&
-        meta.known.some((known) => known.def.id === 'seasoned_soldier' && known.def.passive)
-          ? 1.1
-          : 1;
       // v0.27.1 rage fix: warriors are back on the shared classic 7.5x outgoing
       // scale (rageFromDealing). The talents-v2 era ran a swordman-only 9x mint
       // here, a hidden ~20% income buff that co-fed the fury overpower incident.
@@ -868,8 +861,7 @@ export function dealDamage(
       const talentMult = isWarrior ? 1 + ctx.playerMods(meta).global.autoRagePct : 1;
       source.resource = Math.min(
         source.maxResource,
-        source.resource +
-          baseRage * (isWarrior ? talentMult * rageGenAuraMult(source) * seasonedCrit : 1),
+        source.resource + baseRage * (isWarrior ? talentMult * rageGenAuraMult(source) : 1),
       );
     }
   }

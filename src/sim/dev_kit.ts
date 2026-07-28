@@ -249,7 +249,7 @@ export function buildDevKit(cls: PlayerClass, spec: string): DevKit | null {
 
   for (const slot of KIT_SLOTS) {
     const best = bestBy(
-      pool.filter((item) => canEquipItemInSlot(cls, item, slot, spec)),
+      pool.filter((item) => canEquipItemInSlot(cls, item, slot)),
       score,
     );
     if (best) equip[slot] = best.id;
@@ -258,22 +258,20 @@ export function buildDevKit(cls: PlayerClass, spec: string): DevKit | null {
   // the best DIFFERENT one.
   if (equip.ring1) {
     const secondRing = bestBy(
-      pool.filter(
-        (item) => item.id !== equip.ring1 && canEquipItemInSlot(cls, item, 'ring2', spec),
-      ),
+      pool.filter((item) => item.id !== equip.ring1 && canEquipItemInSlot(cls, item, 'ring2')),
       score,
     );
     if (secondRing) equip.ring2 = secondRing.id;
     else delete equip.ring2;
   }
 
-  const weapons = pool.filter((item) => canEquipItemInSlot(cls, item, 'mainhand', spec));
+  const weapons = pool.filter((item) => canEquipItemInSlot(cls, item, 'mainhand'));
   const mainhand = bestBy(weapons, score);
   if (mainhand) equip.mainhand = mainhand.id;
 
   if (role.hands === 'shield') {
     const shields = pool.filter(
-      (item) => isShieldItem(item) && canEquipItemInSlot(cls, item, 'offhand', spec),
+      (item) => isShieldItem(item) && canEquipItemInSlot(cls, item, 'offhand'),
     );
     // A shield spec wants a ONE-hander so the shield fits beside it.
     const oneHand = bestBy(
@@ -286,7 +284,7 @@ export function buildDevKit(cls: PlayerClass, spec: string): DevKit | null {
   } else if (role.hands === 'dualWield') {
     const offhand = bestBy(
       weapons.filter(
-        (item) => item.id !== equip.mainhand && canEquipItemInSlot(cls, item, 'offhand', spec),
+        (item) => item.id !== equip.mainhand && canEquipItemInSlot(cls, item, 'offhand'),
       ),
       score,
     );

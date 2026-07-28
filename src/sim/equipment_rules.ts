@@ -97,12 +97,8 @@ export function classesThatCanEquipArmorType(armorType: ArmorType): PlayerClass[
   return ALL_CLASSES.filter((cls) => ARMOR_RANK[maxArmorTypeForClass(cls)] >= rank);
 }
 
-export function canDualWield(cls: PlayerClass, spec?: string | null): boolean {
-  return cls === 'thief' || (cls === 'swordman' && spec === 'fury');
-}
-
-export function canDualWieldTwoHand(cls: PlayerClass, spec?: string | null): boolean {
-  return cls === 'swordman' && spec === 'fury';
+export function canDualWield(cls: PlayerClass): boolean {
+  return cls === 'thief';
 }
 
 export function weaponHand(item: WeaponItemDef): WeaponItemDef['hand'] {
@@ -134,12 +130,7 @@ export function canEquipItem(cls: PlayerClass, item: ItemDef): boolean {
   return true;
 }
 
-export function canEquipItemInSlot(
-  cls: PlayerClass,
-  item: ItemDef,
-  slot: EquipSlot,
-  spec?: string | null,
-): boolean {
+export function canEquipItemInSlot(cls: PlayerClass, item: ItemDef, slot: EquipSlot): boolean {
   if (!canEquipItem(cls, item)) return false;
   if (item.kind === 'armor') {
     if (item.slot === 'ring') return slot === 'ring1' || slot === 'ring2';
@@ -148,6 +139,7 @@ export function canEquipItemInSlot(
   if (item.kind !== 'weapon') return item.slot === slot;
   const hand = weaponHand(item);
   if (slot === 'mainhand') return true;
-  if (slot !== 'offhand' || !canDualWield(cls, spec)) return false;
-  return hand === 'onehand' || (hand === 'twohand' && canDualWieldTwoHand(cls, spec));
+  if (slot !== 'offhand' || !canDualWield(cls)) return false;
+  // A two-handed weapon never goes in the offhand.
+  return hand === 'onehand';
 }

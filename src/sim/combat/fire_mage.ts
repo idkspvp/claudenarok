@@ -86,14 +86,6 @@ export const PERSONAL_BARRIER_IDS: readonly string[] = [
   'temporal_barrier',
 ];
 
-/** The active mage spec's occupant of the shared personal-barrier slot. */
-export function personalBarrierIdForSpec(spec: string | null): string | null {
-  if (spec === 'arcane') return 'temporal_barrier';
-  if (spec === 'fire') return 'blazing_barrier';
-  if (spec === 'frost') return 'ice_barrier';
-  return null;
-}
-
 // The fire kit used to gate on the committed Fire specialization. Specs are
 // retired (Phase D0) and the mage learns the whole fire book, so the gate is the
 // KNOWN Ignition passive that documents these mechanics: the same idiom the

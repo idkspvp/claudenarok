@@ -101,7 +101,6 @@ export function createFiestaState(ctx: SimContext): FiestaState {
 // talent struct is never mutated.
 export function mergeAugmentMods(base: PlayerModifiers, augIds: string[]): PlayerModifiers {
   const m: PlayerModifiers = {
-    spec: base.spec,
     role: base.role,
     stats: { ...base.stats },
     global: { ...base.global },

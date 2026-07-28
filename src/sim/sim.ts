@@ -89,7 +89,6 @@ import { rewindHealAmount } from './combat/rewind';
 import { applySetProcs as applySetProcsImpl } from './combat/set_procs';
 import { spellCritBonusFromAuras, spellDamageMultFromAuras } from './combat/spell_combat';
 import { isSpellResisted } from './combat/spell_resist';
-import { isCritImmuneTank } from './combat/tank_crit_immunity';
 import { warriorMeleeDefense } from './combat/warrior_hit_table';
 import { ensureWarriorStance } from './combat/warrior_stances';
 import { weaponSwingDamage } from './combat/weapon_damage';
@@ -4278,13 +4277,6 @@ export class Sim {
     // lockstep. Return a shallow copy so the cached known-list entry is never
     // mutated.
     let cost = found.cost;
-    if (
-      cost > 0 &&
-      this.playerMods(r.meta).spec === 'arms' &&
-      r.meta.known.some((known) => known.def.id === 'measured_fury' && known.def.passive)
-    ) {
-      cost = Math.max(0, Math.round(cost * 0.9));
-    }
     const tax = this.costTaxMult(r.e);
     if (tax > 1 && cost > 0) cost = Math.ceil(cost * tax);
     // Aether Surge (Chronomancy Phase 3, combat/chronomancy.ts): each held Arcane
@@ -6083,7 +6075,7 @@ export class Sim {
     // rather than scaling the result: it takes the top of the monster's authored
     // pair and skips the roll, and it ignores the target's defence entirely.
     const critRoll = this.rng.chance(0.05);
-    const crit = critRoll && !isCritImmuneTank(target, this.players.get(target.id));
+    const crit = critRoll;
     let dmg =
       weaponSwingDamage(
         {

@@ -643,9 +643,7 @@ export function recalcPlayerStats(
       : { min: 1, max: 2, speed: 2 };
   const offhand = equipment.offhand ? ITEMS[equipment.offhand] : undefined;
   const offhandWeapon =
-    canDualWield(cls, mods?.spec) &&
-    offhand?.kind === 'weapon' &&
-    meetsLevelRequirement(lvl, offhand)
+    canDualWield(cls) && offhand?.kind === 'weapon' && meetsLevelRequirement(lvl, offhand)
       ? offhand.weapon
       : null;
   // Attack speed is a property of WHO IS HOLDING the weapon, not of the weapon.

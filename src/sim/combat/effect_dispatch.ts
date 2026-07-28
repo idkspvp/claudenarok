@@ -74,7 +74,7 @@ import { extendOwnedDot } from './dot_mutation';
 import { consumeAuraKind, consumeNextAttackCrit } from './empower_next';
 import { runWeaponProcs } from './equip_procs';
 import { exclusiveAuraConflicts } from './exclusive_aura';
-import { fireGuaranteedCrit, personalBarrierIdForSpec } from './fire_mage';
+import { fireGuaranteedCrit } from './fire_mage';
 import { isFormAuraKind, isTravelFormAuraKind } from './forms';
 import {
   frostMageAfterCast,
@@ -1888,26 +1888,7 @@ export function runEffects(
             })
             .slice(0, eff.maxTargets);
         }
-        const resolved = ctx.resolve(p.id);
-        const spec = resolved ? ctx.playerMods(resolved.meta).spec : null;
-        if (ability.id === 'mass_barrier') {
-          const personalBarrierId = personalBarrierIdForSpec(spec);
-          const personalBarrier = personalBarrierId
-            ? ctx.resolvedAbility(personalBarrierId, p.id)
-            : null;
-          if (personalBarrierId && personalBarrier && personalBarrier.cooldown > 0) {
-            p.cooldowns.set(
-              personalBarrierId,
-              Math.max(p.cooldowns.get(personalBarrierId) ?? 0, personalBarrier.cooldown),
-            );
-          }
-        }
-        const barrierSchool =
-          ability.id === 'mass_barrier' && spec === 'arcane'
-            ? 'arcane'
-            : ability.id === 'mass_barrier' && spec === 'fire'
-              ? 'fire'
-              : ability.school;
+        const barrierSchool = ability.school;
         for (const mE of recipients) {
           ctx.applyAura(mE, {
             id: ability.id,
@@ -2370,7 +2351,6 @@ export function runEffects(
       case 'aoeAllyMaxHp': {
         const party = ctx.partyOf(p.id);
         const memberIds = party?.members ?? [p.id];
-        const protection = ctx.playerMods(meta).spec === 'prot';
         for (const memberId of memberIds) {
           const member = ctx.entities.get(memberId);
           if (!member || member.dead) continue;
@@ -2387,18 +2367,6 @@ export function runEffects(
             sourceId: p.id,
             school: ability.school,
           });
-          if (protection) {
-            ctx.applyAura(member, {
-              id: `${ability.id}_dr`,
-              name: ability.name,
-              kind: 'buff_dr',
-              remaining: eff.duration,
-              duration: eff.duration,
-              value: 0.05,
-              sourceId: p.id,
-              school: ability.school,
-            });
-          }
           if (member.kind === 'player') {
             const memberMeta = ctx.players.get(member.id);
             if (memberMeta)

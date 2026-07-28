@@ -3003,7 +3003,6 @@ function dirtyEveryDeltaField(): {
   meta.activeTitle = 'prog_veteran';
   // the Vale Cup sport kit swap ('sport' heavy key) and queue readout ('vcup')
   meta.sportRole = 'keeper';
-  meta.mods.spec = 'arms';
 
   // Session-scoped account cosmetics.
   leader.accountCosmetics = {

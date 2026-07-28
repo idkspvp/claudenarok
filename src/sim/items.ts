@@ -23,7 +23,6 @@ import { ITEMS } from './data';
 import { recalcPlayerStats } from './entity';
 import {
   canDualWield,
-  canDualWieldTwoHand,
   canEquipItem,
   canEquipItemInSlot,
   resolveEquipSlot,
@@ -59,32 +58,17 @@ function desiredEquipSlot(meta: PlayerMeta, itemId: string): EquipSlot | null {
   if (!def?.slot) return null;
   if (def.kind !== 'weapon') return resolveEquipSlot(def, meta.equipment);
 
-  const spec = meta.mods.spec;
   const hand = weaponHand(def);
   if (hand === 'mainhand') return 'mainhand';
-  if (hand === 'twohand') {
-    if (!canDualWieldTwoHand(meta.cls, spec)) return 'mainhand';
-    const mainhand = meta.equipment.mainhand ? ITEMS[meta.equipment.mainhand] : undefined;
-    if (
-      mainhand?.kind === 'weapon' &&
-      weaponHand(mainhand) === 'twohand' &&
-      !meta.equipment.offhand
-    ) {
-      return 'offhand';
-    }
-    return 'mainhand';
-  }
+  // A two-handed weapon always takes the mainhand: nothing may pair with it.
+  if (hand === 'twohand') return 'mainhand';
 
   if (!meta.equipment.mainhand) return 'mainhand';
-  if (!canDualWield(meta.cls, spec)) return 'mainhand';
-  if (!canEquipItemInSlot(meta.cls, def, 'offhand', spec)) return 'mainhand';
+  if (!canDualWield(meta.cls)) return 'mainhand';
+  if (!canEquipItemInSlot(meta.cls, def, 'offhand')) return 'mainhand';
 
   const mainhand = meta.equipment.mainhand ? ITEMS[meta.equipment.mainhand] : undefined;
-  if (
-    !canDualWieldTwoHand(meta.cls, spec) &&
-    mainhand?.kind === 'weapon' &&
-    weaponHand(mainhand) === 'twohand'
-  ) {
+  if (mainhand?.kind === 'weapon' && weaponHand(mainhand) === 'twohand') {
     return 'mainhand';
   }
   return 'offhand';
@@ -211,28 +195,24 @@ export function equipItem(
   // Warrior weapons additionally route between hands from the committed v0.26
   // specialization (desiredEquipSlot), and the chosen slot, aimed or resolved,
   // is re-validated against the spec-aware rules.
-  const spec = meta.mods.spec;
   const slot = targetSlot ?? desiredEquipSlot(meta, itemId);
   if (!slot) return;
-  if (!canEquipItemInSlot(meta.cls, def, slot, spec)) {
+  if (!canEquipItemInSlot(meta.cls, def, slot)) {
     ctx.error(meta.entityId, 'You cannot equip that.');
     return;
   }
   const old = meta.equipment[slot];
   const oldInstance = meta.equipmentInstance?.[slot];
   // A two-hander and a shield cannot coexist. Fury's Titan Grip exemption is
-  // weapon-only: a valid Fury weapon pair may contain one or two two-handers.
   let displacedSlot: EquipSlot | null = null;
   if (slot === 'offhand') {
     const mainhand = meta.equipment.mainhand ? ITEMS[meta.equipment.mainhand] : undefined;
-    const titanPair = def.kind === 'weapon' && canDualWieldTwoHand(meta.cls, spec);
-    if (mainhand?.kind === 'weapon' && weaponHand(mainhand) === 'twohand' && !titanPair) {
+    if (mainhand?.kind === 'weapon' && weaponHand(mainhand) === 'twohand') {
       displacedSlot = 'mainhand';
     }
   } else if (slot === 'mainhand' && def.kind === 'weapon' && weaponHand(def) === 'twohand') {
     const offhand = meta.equipment.offhand ? ITEMS[meta.equipment.offhand] : undefined;
-    const titanPair = offhand?.kind === 'weapon' && canDualWieldTwoHand(meta.cls, spec);
-    if (meta.equipment.offhand && !titanPair) displacedSlot = 'offhand';
+    if (meta.equipment.offhand) displacedSlot = 'offhand';
   }
   const displacedId = displacedSlot ? meta.equipment[displacedSlot] : undefined;
   const displacedInstance = displacedSlot ? meta.equipmentInstance?.[displacedSlot] : undefined;
@@ -302,7 +282,7 @@ export function revalidateOffhandForSpec(ctx: SimContext, pid?: number): void {
   if (!offhandId) return;
   const def = ITEMS[offhandId];
   if (!def) return;
-  if (canEquipItemInSlot(meta.cls, def, 'offhand', meta.mods.spec)) return;
+  if (canEquipItemInSlot(meta.cls, def, 'offhand')) return;
 
   const instance = meta.equipmentInstance?.offhand;
   delete meta.equipment.offhand;

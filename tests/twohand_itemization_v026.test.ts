@@ -99,7 +99,7 @@ describe('v0.26 two-handed Rogue proficiency', () => {
     expect(twoHanders.length).toBeGreaterThanOrEqual(3);
     for (const item of twoHanders) {
       expect(canEquipItem('thief', item), item.id).toBe(false);
-      expect(canEquipItemInSlot('thief', item, 'mainhand', null), item.id).toBe(false);
+      expect(canEquipItemInSlot('thief', item, 'mainhand'), item.id).toBe(false);
       expect(item.requiredClass ?? [], item.id).not.toContain('thief');
     }
 

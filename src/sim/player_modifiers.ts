@@ -221,7 +221,6 @@ export interface ResolvedAbilityMod {
 }
 
 export interface PlayerModifiers {
-  spec: string | null;
   role: Role | null;
   stats: Required<StatModEffect>;
   abilities: Record<string, ResolvedAbilityMod>;
@@ -318,7 +317,6 @@ function zeroAbilityMod(): ResolvedAbilityMod {
 
 export function emptyModifiers(): PlayerModifiers {
   return {
-    spec: null,
     role: null,
     stats: zeroStats(),
     abilities: {},
