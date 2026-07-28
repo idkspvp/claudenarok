@@ -23,6 +23,7 @@ import type { EquipSlot, StatusStat } from '../sim/types';
 import type { IWorld } from '../world_api';
 import { STAT_PANELS } from './char_stats_view';
 import { buildPaperdollView, type PaperdollSlot } from './char_view';
+import { buildDerivedStats, type DerivedStatRow } from './derived_stats_view';
 import { markDialogRoot } from './dialog_root';
 import { classDisplayName, itemDisplayName } from './entity_i18n';
 import { dropRequiredLevel, paperdollDropAction } from './equip_drop_core';
@@ -246,6 +247,7 @@ export class CharWindow {
       return `<div class="${cls}">${title}${cells}</div>`;
     }).join('')}</div>`;
     html += this.statusPointsHtml(world);
+    html += this.derivedStatsHtml(world);
     html += this.deps.progressionHtml(p.level);
     html += this.gatheringHtml(world);
     html += `<div class="pc-share-row"><button type="button" class="btn pc-share-btn" data-act="share-card">${SHARE_GLYPH}<span>${esc(t('playerCard.shareButton'))}</span></button></div>`;
@@ -354,6 +356,29 @@ export class CharWindow {
     return `<div class="stat-points-row"><div class="sp-heading">${esc(
       heading,
     )}</div><div class="sp-buttons">${buttons}${reset}</div></div>`;
+  }
+
+  // The right-hand half of Ragnarok's status window. Cold path: this window
+  // repaints on open and on a stat change, never per frame, so it builds HTML
+  // like the rest of the sheet rather than going through the elided writers.
+  private derivedStatsHtml(world: IWorld): string {
+    const model = buildDerivedStats(world);
+    if (!model) return '';
+    const cell = (row: DerivedStatRow): string => {
+      const name = t(`hudChrome.derivedStats.${row.id}` as TranslationKey);
+      const value =
+        row.second === null
+          ? formatNumber(row.value)
+          : row.pair === 'range'
+            ? `${formatNumber(row.value)} ~ ${formatNumber(row.second)}`
+            : `${formatNumber(row.value)} + ${formatNumber(row.second)}`;
+      return `<div class="ds-row"><span class="ds-name">${esc(name)}</span><span class="ds-value">${esc(
+        value,
+      )}</span></div>`;
+    };
+    return `<div class="derived-stats"><div class="ds-heading">${esc(
+      t('hudChrome.derivedStats.heading'),
+    )}</div>${model.rows.map(cell).join('')}</div>`;
   }
 
   private gatheringHtml(world: IWorld): string {

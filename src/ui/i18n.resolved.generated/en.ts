@@ -1186,6 +1186,17 @@ export const en: EnTranslations = {
       "resetTitle": "Return every placed point",
       "resetConfirm": "Return every point you have placed? Your attributes go back to 1."
     },
+    "derivedStats": {
+      "heading": "Combat",
+      "atk": "Attack",
+      "matk": "Magic Attack",
+      "hit": "Accuracy",
+      "crit": "Critical",
+      "flee": "Evasion",
+      "def": "Defence",
+      "mdef": "Magic Defence",
+      "aspd": "Attack Speed"
+    },
     "statInfo": {
       "fromYour": "From your {value} {stat}:",
       "names": {

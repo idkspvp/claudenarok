@@ -1049,6 +1049,20 @@ export const hudChromeStrings = {
     resetTitle: 'Return every placed point',
     resetConfirm: 'Return every point you have placed? Your attributes go back to 1.',
   },
+  // The right-hand half of the status window: what the six attributes buy.
+  // A pair renders as "a + b" (a defence and its soft half) or "a ~ b" (the
+  // magic attack range); src/ui/derived_stats_view.ts decides which.
+  derivedStats: {
+    heading: 'Combat',
+    atk: 'Attack',
+    matk: 'Magic Attack',
+    hit: 'Accuracy',
+    crit: 'Critical',
+    flee: 'Evasion',
+    def: 'Defence',
+    mdef: 'Magic Defence',
+    aspd: 'Attack Speed',
+  },
   // Character-screen stat tooltips (hover a stat on the C panel). The stat NAMES
   // reuse itemUi.stats.*; only these descriptions / effect lines / notes are new.
   // The breakdown numbers are recomputed live from the player's current stats
