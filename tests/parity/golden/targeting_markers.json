@@ -9,8 +9,8 @@
     "targetNearestFriendly + friendlyTabTarget wrap, autoAttack never armed (~9782/9797)",
     "setMarker set/toggle-off/symbol-uniqueness + clearEntityMarker death-strip (~11956/12002)"
   ],
-  "draws": 5,
-  "drawDigest": "f6cccac2",
+  "draws": 6,
+  "drawDigest": "f63a1117",
   "frames": [
     {
       "tick": 0,
@@ -5166,11 +5166,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "d08d80d2",
+      "state": "ab21ce84",
       "events": "262d9c40",
       "rng": {
-        "draws": 5,
-        "digest": "f6cccac2"
+        "draws": 6,
+        "digest": "f63a1117"
       },
       "label": "m2-dead",
       "players": [
@@ -5622,7 +5622,13 @@
           },
           "level": 3,
           "loot": {
-            "copper": 10
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "wolf_fang"
+              }
+            ]
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
@@ -5727,11 +5733,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "d08d80d2",
+      "state": "ab21ce84",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "f6cccac2"
+        "draws": 6,
+        "digest": "f63a1117"
       },
       "label": "final",
       "players": [
@@ -6183,7 +6189,13 @@
           },
           "level": 3,
           "loot": {
-            "copper": 10
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "wolf_fang"
+              }
+            ]
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [

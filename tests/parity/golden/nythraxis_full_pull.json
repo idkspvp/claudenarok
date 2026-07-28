@@ -13,8 +13,8 @@
     "Final Stand enrage at 5% + grantNythraxisLockout (raidLockouts) + onBossDeath death dialogue",
     "class:swordman"
   ],
-  "draws": 3278,
-  "drawDigest": "86acfab0",
+  "draws": 3270,
+  "drawDigest": "b7c7c5b4",
   "frames": [
     {
       "tick": 0,
@@ -10874,11 +10874,11 @@
       "tick": 628,
       "time": 31.4,
       "nextId": 428,
-      "state": "6b327f7c",
+      "state": "903de366",
       "events": "fff730ea",
       "rng": {
-        "draws": 2960,
-        "digest": "928cfcc3"
+        "draws": 2961,
+        "digest": "7d58625d"
       },
       "label": "death",
       "players": [
@@ -11915,11 +11915,19 @@
           },
           "level": 20,
           "loot": {
-            "copper": 188942,
+            "copper": 106032,
             "items": [
               {
                 "count": 1,
-                "itemId": "bonewrought_greatsword"
+                "itemId": "card_nythraxis"
+              },
+              {
+                "count": 1,
+                "itemId": "stormcallers_crown"
+              },
+              {
+                "count": 1,
+                "itemId": "stormcallers_spaulders"
               },
               {
                 "count": 1,
@@ -11927,11 +11935,7 @@
               },
               {
                 "count": 1,
-                "itemId": "soulflame_mantle"
-              },
-              {
-                "count": 1,
-                "itemId": "crownforged_warspaulders"
+                "itemId": "nighttalon_crown"
               }
             ]
           },
@@ -12339,18 +12343,18 @@
       "tick": 630,
       "time": 31.5,
       "nextId": 428,
-      "state": "d63bbde8",
+      "state": "64e01a52",
       "events": "741638a5",
       "rng": {
-        "draws": 2965,
-        "digest": "a2d42466"
+        "draws": 2966,
+        "digest": "25f19738"
       }
     },
     {
       "tick": 640,
       "time": 32,
       "nextId": 428,
-      "state": "1f2c9d04",
+      "state": "847483be",
       "events": "741638a5",
       "rng": {
         "draws": 3025,
@@ -12361,55 +12365,55 @@
       "tick": 650,
       "time": 32.5,
       "nextId": 428,
-      "state": "637af86a",
+      "state": "d7bffce0",
       "events": "741638a5",
       "rng": {
-        "draws": 3074,
-        "digest": "73e7353e"
+        "draws": 3076,
+        "digest": "60d45ed5"
       }
     },
     {
       "tick": 660,
       "time": 33,
       "nextId": 428,
-      "state": "305a99c6",
+      "state": "097019dc",
       "events": "741638a5",
       "rng": {
-        "draws": 3138,
-        "digest": "2032898e"
+        "draws": 3135,
+        "digest": "c5b817fa"
       }
     },
     {
       "tick": 670,
       "time": 33.5,
       "nextId": 428,
-      "state": "0868a10c",
+      "state": "8e4daeae",
       "events": "741638a5",
       "rng": {
-        "draws": 3183,
-        "digest": "c7a118cd"
+        "draws": 3177,
+        "digest": "3e13c7e1"
       }
     },
     {
       "tick": 680,
       "time": 34,
       "nextId": 428,
-      "state": "a0bcb368",
+      "state": "5c2eede2",
       "events": "741638a5",
       "rng": {
-        "draws": 3234,
-        "digest": "e9d68285"
+        "draws": 3227,
+        "digest": "015dff6c"
       }
     },
     {
       "tick": 688,
       "time": 34.4,
       "nextId": 428,
-      "state": "3742d4f0",
+      "state": "b9cbcb46",
       "events": "e3560676",
       "rng": {
-        "draws": 3278,
-        "digest": "86acfab0"
+        "draws": 3270,
+        "digest": "b7c7c5b4"
       },
       "label": "final",
       "players": [
@@ -13446,11 +13450,19 @@
           },
           "level": 20,
           "loot": {
-            "copper": 188942,
+            "copper": 106032,
             "items": [
               {
                 "count": 1,
-                "itemId": "bonewrought_greatsword"
+                "itemId": "card_nythraxis"
+              },
+              {
+                "count": 1,
+                "itemId": "stormcallers_crown"
+              },
+              {
+                "count": 1,
+                "itemId": "stormcallers_spaulders"
               },
               {
                 "count": 1,
@@ -13458,11 +13470,7 @@
               },
               {
                 "count": 1,
-                "itemId": "soulflame_mantle"
-              },
-              {
-                "count": 1,
-                "itemId": "crownforged_warspaulders"
+                "itemId": "nighttalon_crown"
               }
             ]
           },

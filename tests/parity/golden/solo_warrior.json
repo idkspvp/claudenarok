@@ -10,8 +10,8 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 178,
-  "drawDigest": "26f11c05",
+  "draws": 179,
+  "drawDigest": "c5f4bfe0",
   "frames": [
     {
       "tick": 0,
@@ -188,11 +188,11 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 417,
-      "state": "4602cbae",
+      "state": "ede50090",
       "events": "f740fdd2",
       "rng": {
-        "draws": 160,
-        "digest": "2f7654da"
+        "draws": 161,
+        "digest": "b2ea1088"
       },
       "label": "kill",
       "players": [
@@ -380,7 +380,7 @@
             "items": [
               {
                 "count": 1,
-                "itemId": "milepost_boots"
+                "itemId": "wolf_fang"
               }
             ]
           },
@@ -427,11 +427,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 417,
-      "state": "da5b51cb",
+      "state": "32347037",
       "events": "ebcfe9d2",
       "rng": {
-        "draws": 178,
-        "digest": "26f11c05"
+        "draws": 179,
+        "digest": "c5f4bfe0"
       },
       "label": "final",
       "players": [
@@ -624,7 +624,7 @@
             "items": [
               {
                 "count": 1,
-                "itemId": "milepost_boots"
+                "itemId": "wolf_fang"
               }
             ]
           },
