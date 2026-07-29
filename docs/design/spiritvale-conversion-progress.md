@@ -12,7 +12,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 |---|---|---|---|
 | 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
 | 1 | The stat core: six pure modules, no call sites | DONE | 6214a89..daa4ebd |
-| 2 | Wire the stat core, retire the Ragnarok one | IN PROGRESS | |
+| 2 | Wire the stat core, retire the Ragnarok one | IN PROGRESS | 1 of 5 formulas: 097b2ce |
 | 3 | Progression: cap 150, attribute ladder, job pools, refund | NOT STARTED | |
 | 4 | The seven base classes and the skill-tree window | NOT STARTED | |
 | 5 | Statuses and passives as data | NOT STARTED | |
@@ -90,6 +90,32 @@ Notes phase 2 needs:
 - `accuracy` deliberately has no roll: it says how likely a hit is, and the
   caller draws the rng. Keep it that way so the parity draw order stays the
   caller's business.
+
+### Phase 2
+Formula 1 of 5 landed: DEFENCE (097b2ce). Physical and magic both run
+damageTaken = 100/(DEF + 100); combat/defence.ts and combat/magic_defence.ts are
+deleted; the character sheet's reduction cell reads the curve.
+
+Still to wire, in this order: attack, accuracy, attack speed, resources. Attack
+speed last because it retimes every existing encounter.
+
+What the next step needs to know:
+
+- The soft-defence rng draw is GONE from resolvePhysical. Parity is red and
+  stays red until the phase's final regenerate. Do not regenerate per formula:
+  one reviewed commit at the end, per the plan.
+- Vitality currently buys NOTHING defensively. That is correct for the target
+  but the compensation (the health pool) does not arrive until the resources
+  formula, so the intermediate commits describe a game where Vitality is weak.
+  Finish the phase before judging any balance number.
+- tests/heroic_difficulty_floors.test.ts is red and was red BEFORE this phase
+  started (a swing floor and a health pin both drifted). The curve changed which
+  mob sits lowest, not whether the file passes. Phase 7 owns it, when monster
+  stats are re-derived from the reference. Do not bump its pins to hide it.
+- The probe pattern that worked elsewhere in this repo (a throwaway test that
+  console.logs) produces no visible output under this vitest config. Use a
+  deliberately failing assertion, or read the numbers out of a real failure
+  message, when you need to see an intermediate value.
 
 ## Decisions taken mid-run
 
