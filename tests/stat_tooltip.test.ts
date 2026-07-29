@@ -2,9 +2,10 @@ import { describe, expect, it } from 'vitest';
 import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
-import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
+import { recalcPlayerStats } from '../src/sim/entity';
 import { baseHpAt, baseSpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { Sim } from '../src/sim/sim';
+import { magicAttack, meleeAttack, rangedAttack } from '../src/sim/stats/attack';
 import { damageReductionFraction } from '../src/sim/stats/defence_curve';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
@@ -22,6 +23,17 @@ import {
   weaponDps,
 } from '../src/ui/stat_tooltip';
 import { spreadAllocation } from './helpers/alloc';
+
+const attrsOf = (e: {
+  stats: { str: number; agi: number; vit: number; int: number; dex: number; luk: number };
+}) => ({
+  str: e.stats.str,
+  agi: e.stats.agi,
+  vit: e.stats.vit,
+  int: e.stats.int,
+  dex: e.stats.dex,
+  luk: e.stats.luk,
+});
 
 // A gear-free, buff-free, talent-free player: autoEquip defaults to false, so the
 // derived stats are a clean function of class base + per-level growth. That lets
@@ -64,16 +76,24 @@ const LEVELS = [1, 10, 20];
 describe('stat tooltip math reconciles with recalcPlayerStats', () => {
   for (const cls of ALL_CLASSES) {
     for (const level of LEVELS) {
-      it(`${cls} L${level}: attack power breakdown sums to entity.attackPower`, () => {
+      it(`${cls} L${level}: attack power reconciles with the level term`, () => {
         const p = freshPlayer(cls, level);
-        // Three attributes feed melee ATK now, and each tooltip line states that
-        // attribute's contribution in isolation, so the three still reconcile to
-        // the sheet's number. AGI no longer feeds it at all.
+        // Three attributes feed melee attack, and each tooltip line states that
+        // attribute's contribution in isolation. They no longer sum to the sheet
+        // on their own: the formula carries a LEVEL term (Lv/4) that belongs to
+        // no attribute, so the reconciliation has to include it. Agility feeds
+        // none of it.
         const strAp = statEffectVal(cls, p, 'str', 'attackPower') ?? 0;
         const dexAp = statEffectVal(cls, p, 'dex', 'attackPower') ?? 0;
         const lukAp = statEffectVal(cls, p, 'luk', 'attackPower') ?? 0;
         expect(statEffectVal(cls, p, 'agi', 'attackPower')).toBeUndefined();
-        expect(strAp + dexAp + lukAp).toBe(p.attackPower);
+        const levelTerm = meleeAttack({
+          level,
+          attributes: { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 },
+        });
+        expect(strAp + dexAp + lukAp + levelTerm).toBeCloseTo(p.attackPower, 0);
+        // And the level term is real: it is exactly a quarter of the level.
+        expect(levelTerm).toBeCloseTo(level / 4, 10);
       });
 
       it(`${cls} L${level}: AGI drives Flee, DEX drives Hit, LUK drives crit and dodge`, () => {
@@ -173,7 +193,7 @@ describe('class-aware effect selection', () => {
       buildStatTooltip('dex', inputFor('archer', archer)).effects,
       'rangedAttackPower',
     );
-    expect(ranged?.value).toBe(statusRangedAttackPower(st.str, st.dex, st.luk));
+    expect(ranged?.value).toBe(rangedAttack({ level: archer.level, attributes: attrsOf(archer) }));
     expect(
       effect(buildStatTooltip('agi', inputFor('archer', archer)).effects, 'rangedAttackPower'),
     ).toBeUndefined();
@@ -402,7 +422,9 @@ describe('upstream source breakdown reconciles to the displayed stat', () => {
     const model = buildStatTooltip('spellPower', inputWithGear(sim, 'mage'));
     const fromInt = model.sources.find((s) => s.kind === 'attributes');
     expect(fromInt?.fromStat).toBe('int');
-    expect(fromInt?.value).toBe(Math.round(statusMagicPower(p.stats.int)));
+    expect(fromInt?.value).toBe(
+      Math.round(magicAttack({ level: p.level, attributes: attrsOf(p) })),
+    );
     const sum = model.sources.reduce((acc, s) => acc + s.value, 0);
     expect(sum).toBe(p.spellPower);
     // non-casters get the minor-benefit note on the spell power cell

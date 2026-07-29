@@ -12,13 +12,25 @@ import {
   SET_WYRMSHADOW,
 } from '../src/sim/content/item_sets';
 import { ITEMS, MOBS } from '../src/sim/data';
-import { createMob, createPlayer, recalcPlayerStats, statusAttackPower } from '../src/sim/entity';
+import { createMob, createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { meleeAttack } from '../src/sim/stats/attack';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { CAST_PUSHBACK_SEC, CHANNEL_PUSHBACK_FRACTION } from '../src/sim/types';
 import { itemSetMemberCounts, itemSetTooltipModel } from '../src/ui/item_set_tooltip_view';
 import { spreadAllocation } from './helpers/alloc';
 import { fundCasts } from './helpers/sp';
+
+const attrsOf = (e: {
+  stats: { str: number; agi: number; vit: number; int: number; dex: number; luk: number };
+}) => ({
+  str: e.stats.str,
+  agi: e.stats.agi,
+  vit: e.stats.vit,
+  int: e.stats.int,
+  dex: e.stats.dex,
+  luk: e.stats.luk,
+});
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -206,14 +218,17 @@ describe('item set tooltip model', () => {
 describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear)', () => {
   it('Deathlord (t1 strength): flat AP at 2pc, str/sta added at 3pc', () => {
     const base = statsFor('swordman', 20, {});
-    // 2 pieces: +40 AP, no set str yet. Melee ATK is the status formula plus the
-    // flat set bonus, not a per-point rate: STR carries a squared term now.
+    // 2 pieces: +40 AP, no set str yet. The flat bonus rides the formula's
+    // (1 + DEX/200) amplifier rather than being added outside it, so it is worth
+    // at least its face value and more to a Dexterity build.
     const two = statsFor('swordman', 20, {
       chest: 'deathlord_warplate',
       legs: 'deathlord_legguards',
     });
-    const ap = (e: Entity) => statusAttackPower(e.stats.str, e.stats.dex, e.stats.luk);
-    expect(two.attackPower).toBe(ap(two) + 40);
+    const apWithFlat = (e: Entity, flatAtk: number) =>
+      Math.round(meleeAttack({ level: e.level, attributes: attrsOf(e), flatAtk }));
+    expect(two.attackPower).toBe(apWithFlat(two, 40));
+    expect(two.attackPower).toBeGreaterThanOrEqual(apWithFlat(two, 0) + 40);
     // 3 pieces: set adds +15 str / +15 sta on top of the item stats.
     const three = statsFor('swordman', 20, {
       chest: 'deathlord_warplate',
@@ -229,7 +244,7 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       0,
     );
     expect(three.stats.str).toBe(base.stats.str + itemStr + 15);
-    expect(three.attackPower).toBe(ap(three) + 40);
+    expect(three.attackPower).toBe(apWithFlat(three, 40));
   });
 
   it('Wyrmshadow (t1 agility): crit gains 1% at 3pc on top of agi-derived crit', () => {
@@ -261,11 +276,16 @@ describe('recalcPlayerStats applies equipped set bonuses (real raid/dungeon gear
       helmet: 'nighttalon_crown',
       back: 'nighttalon_shoulderguards',
     });
-    // The only set bonus at 2pc is +40 AP on top of the status formula. AGI feeds
-    // evasion now, not melee ATK, so it is deliberately absent from the subtraction.
-    expect(two.attackPower - statusAttackPower(two.stats.str, two.stats.dex, two.stats.luk)).toBe(
-      40,
+    // The only set bonus at 2pc is +40 flat attack. It enters INSIDE the
+    // formula, amplified by (1 + DEX/200), so the difference it makes is at
+    // least 40 rather than exactly 40. Agility feeds evasion now, not melee
+    // attack, so it is deliberately absent either way.
+    expect(two.attackPower).toBe(
+      Math.round(meleeAttack({ level: two.level, attributes: attrsOf(two), flatAtk: 40 })),
     );
+    expect(
+      two.attackPower - Math.round(meleeAttack({ level: two.level, attributes: attrsOf(two) })),
+    ).toBeGreaterThanOrEqual(40);
     expect(two.attackPower).toBeGreaterThan(base.attackPower);
   });
 

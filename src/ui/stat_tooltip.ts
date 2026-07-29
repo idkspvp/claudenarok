@@ -14,13 +14,8 @@
 import { LUK_CRIT_PERMILLE } from '../sim/combat/crit';
 import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
-import {
-  intManaMultiplier,
-  statusAttackPower,
-  statusMagicPower,
-  statusRangedAttackPower,
-  vitHealthMultiplier,
-} from '../sim/entity';
+import { intManaMultiplier, vitHealthMultiplier } from '../sim/entity';
+import { type AttackAttributes, magicAttack, meleeAttack, rangedAttack } from '../sim/stats/attack';
 import { damageReductionFraction } from '../sim/stats/defence_curve';
 import {
   type AuraKind,
@@ -269,18 +264,30 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
   let warfareDamageIncrease: number | undefined;
   let warfareDamageReduction: number | undefined;
 
+  // The attribute block the attack formulas read, and the two helpers the arms
+  // below use. An attribute's contribution is the formula evaluated with and
+  // without it: the per-ten breakpoint and the flat-gear amplifier mean none of
+  // these is a per-point rate.
+  const attrs: AttackAttributes = {
+    str: stats.str,
+    agi: stats.agi,
+    vit: stats.vit,
+    int: stats.int,
+    dex: stats.dex,
+    luk: stats.luk,
+  };
+  const meleeWithout = (drop: keyof AttackAttributes): number =>
+    meleeAttack({ level, attributes: attrs }) -
+    meleeAttack({ level, attributes: { ...attrs, [drop]: 0 } });
+
   switch (stat) {
     // Each arm below states the attribute's contribution in ISOLATION: what the
-    // sheet loses if this attribute drops to zero, holding the others still. The
-    // squared terms mean these are not per-point rates any more, so each one is
-    // the real derivation evaluated twice rather than a constant times the stat.
+    // sheet loses if this attribute drops to zero, holding the others still.
     case 'str': {
       statValue = stats.str;
       effects.push({
         kind: 'attackPower',
-        value:
-          statusAttackPower(stats.str, stats.dex, stats.luk) -
-          statusAttackPower(0, stats.dex, stats.luk),
+        value: meleeWithout('str'),
       });
       break;
     }
@@ -294,15 +301,13 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.dex;
       effects.push({
         kind: 'attackPower',
-        value:
-          statusAttackPower(stats.str, stats.dex, stats.luk) -
-          statusAttackPower(stats.str, 0, stats.luk),
+        value: meleeWithout('dex'),
       });
       effects.push({ kind: 'hit', value: hitRating(level, stats.dex) });
       if (cls === 'archer') {
         effects.push({
           kind: 'rangedAttackPower',
-          value: statusRangedAttackPower(stats.str, stats.dex, stats.luk),
+          value: rangedAttack({ level, attributes: attrs }),
         });
       }
       break;
@@ -310,9 +315,8 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
     case 'vit': {
       statValue = stats.vit;
       effects.push({ kind: 'maxHealthPct', value: (vitHealthMultiplier(stats.vit) - 1) * 100 });
-      // No armor line: Vitality buys SOFT DEF (the flat subtraction in
-      // combat/defence.ts), never the hard DEF this cell describes. It used to
-      // push both, which counted the attribute twice.
+      // No armour line: Vitality buys no defence at all now. The defence curve
+      // reads gear only, so the health pool is the whole of what Vitality is for.
       effects.push({ kind: 'healthRegen', value: restingHealthPer5s(stats.vit) });
       break;
     }
@@ -332,9 +336,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       effects.push({ kind: 'critPct', value: stats.luk * LUK_CRIT_PER_POINT * 100 });
       effects.push({
         kind: 'attackPower',
-        value:
-          statusAttackPower(stats.str, stats.dex, stats.luk) -
-          statusAttackPower(stats.str, stats.dex, 0),
+        value: meleeWithout('luk'),
       });
       break;
     }
@@ -484,6 +486,16 @@ function buffLines(buffs: BuffStatSource[], kinds: AuraKind[]): StatSource[] {
  *  breakdown always reconciles to the displayed cell value. */
 export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSource[] {
   const { cls, stats, level } = input;
+  // The attribute block the attack formulas read. Declared once here rather than
+  // per case: two arms below need it and it is identical for both.
+  const sourceAttrs: AttackAttributes = {
+    str: stats.str,
+    agi: stats.agi,
+    vit: stats.vit,
+    int: stats.int,
+    dex: stats.dex,
+    luk: stats.luk,
+  };
   const gear = input.gear ?? [];
   const buffs = input.buffs ?? [];
   const sources: StatSource[] = [];
@@ -522,10 +534,9 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
       return finish(stats.armor, 1);
     }
     case 'attackPower': {
-      // Attack power comes from the str/agi conversion (which already folds in
-      // gear / buff stats), the flat attack-power buffs by name, then talents /
-      // forms / the apPct multiplier in the remainder.
-      const meleeAp = stats.str * strApPerPoint(cls) + stats.agi * agiMeleeApPerPoint(cls);
+      // Attack power comes from the attribute formula (stats/attack.ts), the flat
+      // attack-power buffs by name, then the apPct multiplier in the remainder.
+      const meleeAp = Math.round(meleeAttack({ level, attributes: sourceAttrs }));
       sources.push({ kind: 'attributes', value: meleeAp });
       sources.push(...buffLines(buffs, ['buff_ap']));
       for (const b of buffs) {
@@ -536,7 +547,7 @@ export function buildStatSources(stat: StatId, input: StatTooltipInput): StatSou
       return finish(input.attackPower, 1);
     }
     case 'spellPower': {
-      const fromInt = Math.round(statusMagicPower(stats.int));
+      const fromInt = Math.round(magicAttack({ level, attributes: sourceAttrs }));
       sources.push({ kind: 'attributes', value: fromInt, fromStat: 'int' });
       const g = gearTotal(gear, 'spellPower');
       if (g !== 0) sources.push({ kind: 'gear', value: g });

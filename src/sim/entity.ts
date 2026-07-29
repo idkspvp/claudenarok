@@ -13,6 +13,7 @@ import { baseAmotionFor } from './job_aspd';
 import { baseHpAt, baseSpAt, JOB_VITALS } from './job_vitals';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
+import { magicAttack, meleeAttack, rangedAttack } from './stats/attack';
 import type {
   Entity,
   EquipSlot,
@@ -250,62 +251,23 @@ export function createPlayer(id: number, cls: PlayerClass, pos: Vec3, name: stri
 
 export type PlayerEquipment = Partial<Record<EquipSlot, string>>;
 
-// Ragnarok's stat derivations. These replace the old flat-per-point rules, which
-// were tuned against a 10-to-60 stat scale and became nonsense against 1-to-99.
+// Stat derivations. Attack, ranged attack and magic attack now come from
+// src/sim/stats/attack.ts (the reference's Formula$GetAttack and
+// Formula$MagicAttack); what remains here is the pool and defence side, which
+// the resources formula takes over later in this phase.
 //
-// The shapes below are Ragnarok's, taken from the documented pre-renewal status
-// formulas and written here in our own terms:
-//
-//   ATK   = STR + floor(STR/10)^2 + floor(DEX/5) + floor(LUK/5)   (melee)
-//   ATK   = DEX + floor(DEX/10)^2 + floor(STR/5) + floor(LUK/5)   (bows)
-//   MATK  = INT + floor(INT/7)^2 .. INT + floor(INT/5)^2          (a range)
 //   HP    = class pool x (1 + VIT/100)
 //   SP    = class pool x (1 + INT/100)
 //   CRIT  = 1% + LUK x 0.3%
-//   DEF   = floor(VIT/2) soft defence on top of gear armour
 //
-// The squared terms are the point: they are why a build that commits to one
-// attribute beats one that spreads, and why the last ten points of a 99 are
-// worth more than the first ten. A linear rule cannot express that.
+// The three attack formulas used to square their per-ten breakpoint, which is
+// what made committing to one attribute beat spreading and made the last ten
+// points of a 99 worth more than the first ten. The model that replaced them
+// makes the same breakpoint one percent, reaching 1.09x across the whole range,
+// so spreading points is now reasonable. That is a deliberate change in the
+// shape of every build, not a retune.
 //
 // Everything is floored at 0 so a draining debuff can never invert a pool.
-
-/** Status ATK for a melee weapon: STR leads and carries the squared term, with
- *  DEX and LUK contributing a fifth of their value each. */
-export function statusAttackPower(str: number, dex: number, luk: number): number {
-  const s = Math.max(0, str);
-  return (
-    s +
-    Math.floor(s / 10) ** 2 +
-    Math.floor(Math.max(0, dex) / 5) +
-    Math.floor(Math.max(0, luk) / 5)
-  );
-}
-
-/** Status ATK for a bow. The same shape with DEX and STR swapped: DEX leads and
- *  takes the squared term, STR drops to a fifth. Passing DEX in twice, which is
- *  what a careless reuse of the melee helper does, silently pays a bow user for
- *  DEX a second time instead of for their STR. */
-export function statusRangedAttackPower(str: number, dex: number, luk: number): number {
-  const d = Math.max(0, dex);
-  return (
-    d +
-    Math.floor(d / 10) ** 2 +
-    Math.floor(Math.max(0, str) / 5) +
-    Math.floor(Math.max(0, luk) / 5)
-  );
-}
-
-/** Status MATK is a RANGE in Ragnarok, not a number: the two ends use different
- *  divisors, and a cast rolls between them. This engine's spellPower is a single
- *  value, so it carries the MIDPOINT, the average of the two ends, rather than
- *  silently picking the low one and making INT read weaker than it is. */
-export function statusMagicPower(int: number): number {
-  const i = Math.max(0, int);
-  const min = i + Math.floor(i / 7) ** 2;
-  const max = i + Math.floor(i / 5) ** 2;
-  return Math.round((min + max) / 2);
-}
 
 /** The VIT multiplier on the class HP pool (1.0 at VIT 0, 1.99 at VIT 99). */
 export function vitHealthMultiplier(vit: number): number {
@@ -717,35 +679,55 @@ export function recalcPlayerStats(
         ]),
       )
     : {};
-  // Melee AP by class (classic-era-ish): warriors/paladins/shamans/druids 2/str,
-  // rogues str+agi, hunters str+agi, pure casters str.
-  // One formula for every class. The old per-class multipliers (2x STR for the
-  // plate wearers, STR+AGI for the leather ones) existed to make a class feel
-  // different from a stat block it no longer has; the difference now comes from
-  // where the player spends, and from the kit.
-  const apFromStats = statusAttackPower(s.str, s.dex, s.luk);
+  // One formula for every class (stats/attack.ts). The per-class multipliers this
+  // replaced existed to make a class feel different from a stat block it no
+  // longer has; the difference comes from where the player spends and from the
+  // kit.
+  //
+  // Three things changed shape with the formula, and all three are deliberate:
+  // character LEVEL is now a term (Lv/4), so levelling is never inert; the flat
+  // gear term rides an amplifier (1 + DEX/200) INSIDE the formula rather than
+  // being added outside it, so Dexterity pays twice; and the per-ten breakpoint
+  // is one percent instead of a square.
+  const attackAttributes = {
+    str: s.str,
+    agi: s.agi,
+    vit: s.vit,
+    int: s.int,
+    dex: s.dex,
+    luk: s.luk,
+  };
+  const atkPercent = (mods?.stats.apPct ?? 0) + buffApPct;
   // Floor at 0 so a heavy debuff_ap stack can never bake a negative attack power
   // (mirrors effectiveAttackPower's mob floor and the agi/spi floors above).
-  // buffApPct (Battle Shout / Blessing of Might) folds into the same AP multiplier.
   e.attackPower = Math.max(
     0,
-    Math.round((apFromStats + bonusAp) * (1 + (mods?.stats.apPct ?? 0) + buffApPct)),
+    Math.round(
+      meleeAttack({ level: e.level, attributes: attackAttributes, flatAtk: bonusAp, atkPercent }),
+    ),
   );
-  // Ranged attack keys off DEX rather than AGI, which is Ragnarok's split: AGI
-  // buys attack SPEED and evasion, DEX buys accuracy and bow damage.
+  // Ranged swaps which attribute leads and which drives the breakpoint: Dexterity
+  // at full weight, Strength down to a support fifth. Same shape otherwise.
   e.rangedPower =
     cls === 'archer'
       ? Math.max(
           0,
           Math.round(
-            (statusRangedAttackPower(s.str, s.dex, s.luk) + bonusAp) *
-              (1 + (mods?.stats.apPct ?? 0) + buffApPct),
+            rangedAttack({
+              level: e.level,
+              attributes: attackAttributes,
+              flatAtk: bonusAp,
+              atkPercent,
+            }),
           ),
         )
       : 0;
-  // Magic attack from INT with the same squared term the melee side gets, plus
-  // flat Spell Power from gear and buffs.
-  e.spellPower = Math.max(0, Math.round(statusMagicPower(s.int) + bonusSp));
+  // Magic attack: Intelligence leads, drives the breakpoint, AND amplifies the
+  // flat term, so a caster's gear is worth more the more Intelligence it has.
+  e.spellPower = Math.max(
+    0,
+    Math.round(magicAttack({ level: e.level, attributes: attackAttributes, flatMatk: bonusSp })),
+  );
   e.critRating = bonusCritRating + setEff.critRating;
   e.hasteRating = bonusHasteRating + setEff.hasteRating;
   // Hit rating (gear + set bonuses) folds into a hit fraction that combat subtracts

@@ -6,10 +6,22 @@
 import { describe, expect, it } from 'vitest';
 import { aggregateSetBonuses, SET_NECROMANCERS } from '../src/sim/content/item_sets';
 import { MOBS } from '../src/sim/data';
-import { createMob, createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
+import { createMob, createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
+import { magicAttack } from '../src/sim/stats/attack';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
+
+const attrsOf = (e: {
+  stats: { str: number; agi: number; vit: number; int: number; dex: number; luk: number };
+}) => ({
+  str: e.stats.str,
+  agi: e.stats.agi,
+  vit: e.stats.vit,
+  int: e.stats.int,
+  dex: e.stats.dex,
+  luk: e.stats.luk,
+});
 
 const counts = (m: Record<string, number>) => new Map(Object.entries(m));
 
@@ -36,13 +48,24 @@ describe('caster set 2-piece bonus', () => {
     const eq = { chest: 'necromancers_starshroud', feet: 'necromancers_soulsteps' };
     const withSet = statsFor('mage', 20, eq);
     expect(withSet.castPushbackReduction).toBe(1);
-    // Neither piece carries flat spell power, so the wearer's spell power is
-    // exactly the int-derived term plus the 2-piece flat +20 (an integer, so it
-    // commutes with the rounding); a one-piece wearer has no flat term at all.
-    // Together these pin that recalcPlayerStats actually folds the set bonus.
-    expect(withSet.spellPower).toBe(Math.round(statusMagicPower(withSet.stats.int)) + 20);
+    // Neither piece carries flat spell power, so the 2-piece +20 is the whole
+    // flat term. It is NOT simply added on top any more: the formula amplifies a
+    // flat magic-attack term by (1 + INT/200) before the breakpoint, so a caster
+    // with Intelligence gets more than twenty out of a twenty-point bonus. That
+    // is exactly what recalcPlayerStats does, so the expectation says it the
+    // same way rather than as an addition.
+    expect(withSet.spellPower).toBe(
+      Math.round(magicAttack({ level: withSet.level, attributes: attrsOf(withSet), flatMatk: 20 })),
+    );
+    // And the amplifier is real: the bonus is worth strictly more than its face
+    // value to a caster who has spent on Intelligence.
+    expect(withSet.spellPower).toBeGreaterThan(
+      Math.round(magicAttack({ level: withSet.level, attributes: attrsOf(withSet) })) + 20,
+    );
     const onePiece = statsFor('mage', 20, { chest: 'necromancers_starshroud' });
-    expect(onePiece.spellPower).toBe(Math.round(statusMagicPower(onePiece.stats.int)));
+    expect(onePiece.spellPower).toBe(
+      Math.round(magicAttack({ level: onePiece.level, attributes: attrsOf(onePiece) })),
+    );
   });
 });
 

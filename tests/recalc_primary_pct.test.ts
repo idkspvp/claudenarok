@@ -1,8 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { createPlayer, recalcPlayerStats, statusMagicPower } from '../src/sim/entity';
+import { createPlayer, recalcPlayerStats } from '../src/sim/entity';
 import { emptyModifiers, type PlayerModifiers } from '../src/sim/player_modifiers';
+import { magicAttack } from '../src/sim/stats/attack';
 import type { PlayerClass } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
+
+const attrsOf = (e: {
+  stats: { str: number; agi: number; vit: number; int: number; dex: number; luk: number };
+}) => ({
+  str: e.stats.str,
+  agi: e.stats.agi,
+  vit: e.stats.vit,
+  int: e.stats.int,
+  dex: e.stats.dex,
+  luk: e.stats.luk,
+});
 
 // recalcPlayerStats is the ONE place derived stats are computed (src/sim/CLAUDE.md). These
 // lock the primary-attribute multipliers (strPct/agiPct/intPct/lukPct) in the shared
@@ -110,7 +122,22 @@ describe('recalcPlayerStats primary-attribute multipliers', () => {
       m.stats.intPct = 0.08;
     });
     expect(buffed.int).toBe(Math.round(base.int * 1.08));
-    expect(buffed.spellPower).toBe(Math.round(statusMagicPower(buffed.int)));
+    // Derived is a flat readout, so build the attribute block from it directly.
+    expect(buffed.spellPower).toBe(
+      Math.round(
+        magicAttack({
+          level: 40,
+          attributes: {
+            str: buffed.str,
+            agi: buffed.agi,
+            vit: buffed.vit,
+            int: buffed.int,
+            dex: buffed.dex,
+            luk: buffed.luk,
+          },
+        }),
+      ),
+    );
     expect(buffed.spellPower).toBeGreaterThan(base.spellPower);
   });
 

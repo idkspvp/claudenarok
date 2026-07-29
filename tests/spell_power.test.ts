@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { abilitiesKnownAt } from '../src/sim/content/classes';
 import { MOBS } from '../src/sim/data';
-import { createMob, statusMagicPower } from '../src/sim/entity';
+import { createMob } from '../src/sim/entity';
 import { Sim } from '../src/sim/sim';
 import {
   abilityScalingPower,
@@ -9,9 +9,22 @@ import {
   directHitBonus,
   dotTickBonus,
 } from '../src/sim/spell_scaling';
+import { magicAttack } from '../src/sim/stats/attack';
 import type { Entity, PlayerClass } from '../src/sim/types';
 import { MAX_LEVEL } from '../src/sim/types';
 import { levelWithClassStats } from './helpers/alloc';
+
+const attrsOf = (e: {
+  level: number;
+  stats: { str: number; agi: number; vit: number; int: number; dex: number; luk: number };
+}) => ({
+  str: e.stats.str,
+  agi: e.stats.agi,
+  vit: e.stats.vit,
+  int: e.stats.int,
+  dex: e.stats.dex,
+  luk: e.stats.luk,
+});
 
 function leveled(cls: PlayerClass, level = MAX_LEVEL) {
   const sim = new Sim({ seed: 7, playerClass: 'swordman', noPlayer: true });
@@ -35,19 +48,26 @@ function spawnDummy(sim: Sim, target: Entity): Entity {
 }
 
 describe('Spell Power derivation', () => {
-  it('a caster derives spellPower from statusMagicPower(int), not a flat rate', () => {
-    // The flat SPELL_POWER_PER_INT conversion is gone: MATK carries a squared
-    // per-INT term, so the last points of a 99 are worth far more than the first.
+  it('a caster derives spellPower from the magic-attack formula, not a flat rate', () => {
     const { p } = leveled('mage');
     expect(p.stats.int).toBeGreaterThan(0);
-    expect(p.spellPower).toBe(Math.round(statusMagicPower(p.stats.int)));
+    expect(p.spellPower).toBe(Math.round(magicAttack({ level: p.level, attributes: attrsOf(p) })));
     expect(p.spellPower).toBeGreaterThan(0);
-    // Per POINT, not in total: the first fifty points buy more MATK outright
-    // (there are five times as many of them), but each of the last ten is worth
-    // several of them. That is what makes a 99 in INT a commitment.
-    const perPointEarly = (statusMagicPower(50) - statusMagicPower(0)) / 50;
-    const perPointLate = (statusMagicPower(99) - statusMagicPower(89)) / 10;
-    expect(perPointLate).toBeGreaterThan(perPointEarly * 2);
+  });
+
+  it('is very nearly LINEAR in Intelligence, which is the whole change', () => {
+    // This assertion used to run the other way. The model it replaced squared
+    // its per-ten term, so each of the last ten points of a 99 was worth several
+    // of the first fifty and committing everything to one attribute was the only
+    // sensible build. The per-ten breakpoint is one percent now, so the late
+    // points are worth barely more than the early ones and spreading is
+    // reasonable. If a future edit restores the square, this fails.
+    const at = (int: number) =>
+      magicAttack({ level: 1, attributes: { str: 0, agi: 0, vit: 0, int, dex: 0, luk: 0 } });
+    const perPointEarly = (at(50) - at(0)) / 50;
+    const perPointLate = (at(99) - at(89)) / 10;
+    expect(perPointLate).toBeGreaterThan(perPointEarly);
+    expect(perPointLate).toBeLessThan(perPointEarly * 1.2);
   });
 
   it('grows with level (more int -> more spell power)', () => {

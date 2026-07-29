@@ -1,4 +1,12 @@
-// Does what we built actually match Ragnarok?
+// Does what we built actually match its reference?
+//
+// MID-CONVERSION. This file was written when the reference was pre-renewal
+// Ragnarok. The attack derivations below now check SpiritVale instead, and the
+// assertions that used to prove a SQUARED per-ten term deliberately run the
+// other way: proving it is LINEAR is how a future edit back toward the square
+// gets caught. The accuracy section still checks Ragnarok and converts with the
+// accuracy formula (phase 2); the status-point budget section still checks
+// Ragnarok and converts with the attribute ladder (phase 3).
 //
 // The other stat tests check that our code is self-consistent. This one checks it
 // against the GAME, using published pre-renewal figures as literals. It is the
@@ -16,13 +24,13 @@
 
 import { describe, expect, it } from 'vitest';
 import { fleeRating, hitRating, perfectDodgeChance } from '../src/sim/combat/hit_flee';
+import { intManaMultiplier, vitHealthMultiplier } from '../src/sim/entity';
 import {
-  intManaMultiplier,
-  statusAttackPower,
-  statusMagicPower,
-  statusRangedAttackPower,
-  vitHealthMultiplier,
-} from '../src/sim/entity';
+  type AttackAttributes,
+  magicAttack,
+  meleeAttack,
+  rangedAttack,
+} from '../src/sim/stats/attack';
 import {
   BASE_STAT,
   CREATION_STATUS_POINTS,
@@ -79,7 +87,19 @@ describe('the status-point budget matches Ragnarok', () => {
   });
 });
 
-describe('the derivations match Ragnarok', () => {
+const attributes = (over: Partial<AttackAttributes> = {}): AttackAttributes => ({
+  str: 0,
+  agi: 0,
+  vit: 0,
+  int: 0,
+  dex: 0,
+  luk: 0,
+  ...over,
+});
+const melee = (str: number, over: Partial<AttackAttributes> = {}): number =>
+  meleeAttack({ level: 1, attributes: attributes({ str, ...over }) });
+
+describe('the attack derivations follow SpiritVale', () => {
   it('scales HP by 1% a point of VIT and SP by 1% a point of INT', () => {
     expect(vitHealthMultiplier(1)).toBeCloseTo(1.01, 10);
     expect(vitHealthMultiplier(99)).toBeCloseTo(1.99, 10);
@@ -87,52 +107,80 @@ describe('the derivations match Ragnarok', () => {
     expect(intManaMultiplier(99)).toBeCloseTo(1.99, 10);
   });
 
-  it('carries the per-10-STR squared bonus that only pre-renewal has', () => {
-    // STR + floor(STR/10)^2 + floor(DEX/5) + floor(LUK/5).
-    expect(statusAttackPower(1, 0, 0)).toBe(1); // 1 + 0 + 0 + 0
-    expect(statusAttackPower(10, 0, 0)).toBe(11); // 10 + 1
-    expect(statusAttackPower(50, 0, 0)).toBe(75); // 50 + 25
-    expect(statusAttackPower(99, 0, 0)).toBe(180); // 99 + 81
-    // The squared term is what makes the top of the range worth committing to:
-    // the last ten points of a 99 add more ATK than the first fifty do.
-    const firstFifty = statusAttackPower(50, 0, 0) - statusAttackPower(0, 0, 0);
-    const lastTen = statusAttackPower(99, 0, 0) - statusAttackPower(89, 0, 0);
+  it('carries a LINEAR per-ten breakpoint where pre-renewal squared it', () => {
+    // The single most consequential difference between the two models. Ragnarok
+    // adds floor(STR/10)^2, so at 99 the square alone contributes 81 on top of
+    // the 99 and the last ten points beat the first fifty. SpiritVale makes the
+    // same breakpoint one percent, reaching 1.09x across the entire range.
+    const firstFifty = melee(50) - melee(0);
+    const lastTen = melee(99) - melee(89);
     expect(lastTen).toBeGreaterThan(0);
-    expect(firstFifty).toBeGreaterThan(lastTen);
+    // Under the old model this read lastTen > firstFifty. It now reads the other
+    // way round by a wide margin, and that is the point.
+    expect(firstFifty).toBeGreaterThan(lastTen * 4);
   });
 
-  it('pays a fifth of DEX and LUK into melee ATK', () => {
-    expect(statusAttackPower(0, 25, 0)).toBe(5);
-    expect(statusAttackPower(0, 0, 25)).toBe(5);
-    expect(statusAttackPower(99, 50, 50)).toBe(180 + 10 + 10);
+  it('pays a fifth of DEX and LUK into melee attack, and Strength one and a half', () => {
+    // Lv 1: base = 1/4 + STR*1.5 + DEX/5 + LUK/5, then the breakpoint.
+    expect(melee(0, { dex: 25 })).toBeCloseTo(0.25 + 5, 10);
+    expect(melee(0, { luk: 25 })).toBeCloseTo(0.25 + 5, 10);
+    // Strength leads at 1.5, not 1.0 as the model it replaced had it.
+    expect(melee(10) - melee(0)).toBeCloseTo(15 * 1.01 + 0.25 * 0.01, 8);
   });
 
-  it('swaps STR and DEX for bows rather than paying DEX twice', () => {
-    // The bug this pins: reusing the melee helper with DEX in both slots pays a
-    // bow user a second time for DEX and nothing at all for their STR.
-    expect(statusRangedAttackPower(0, 99, 0)).toBe(180); // DEX leads and squares
-    expect(statusRangedAttackPower(50, 0, 0)).toBe(10); // STR drops to a fifth
-    expect(statusRangedAttackPower(50, 99, 0)).toBe(190);
-    expect(statusRangedAttackPower(50, 99, 0)).not.toBe(statusAttackPower(99, 99, 0));
+  it('swaps which attribute LEADS for a ranged weapon rather than paying one twice', () => {
+    // The bug this has always pinned: reusing the melee shape with Dexterity in
+    // both slots pays a bow user a second time for Dexterity and nothing for
+    // their Strength. Ranged puts Dexterity at full weight and Strength at a
+    // support fifth, so the two branches disagree on the same attribute block.
+    const attrs = attributes({ str: 50, dex: 99 });
+    expect(rangedAttack({ level: 1, attributes: attrs })).not.toBeCloseTo(
+      meleeAttack({ level: 1, attributes: attrs }),
+      6,
+    );
+    // Dexterity at weight 1 on the ranged branch, a fifth on the melee one.
+    const dexOnly = attributes({ dex: 50 });
+    expect(rangedAttack({ level: 1, attributes: dexOnly })).toBeGreaterThan(
+      meleeAttack({ level: 1, attributes: dexOnly }),
+    );
   });
 
-  it('places MATK between the /7 and /5 ends of the range', () => {
-    for (const int of [1, 20, 50, 99]) {
-      const min = int + Math.floor(int / 7) ** 2;
-      const max = int + Math.floor(int / 5) ** 2;
-      expect(statusMagicPower(int), `INT ${int}`).toBeGreaterThanOrEqual(min);
-      expect(statusMagicPower(int), `INT ${int}`).toBeLessThanOrEqual(max);
+  it('carries a LEVEL term in every attack formula, which pre-renewal has nowhere', () => {
+    // Ragnarok's status attack has no level term at all, which is why a
+    // high-level character there with poor Strength hits like a beginner. Every
+    // branch here carries Lv/4.
+    const attrs = attributes({ str: 30, int: 30, dex: 30 });
+    for (const [name, fn] of [
+      ['melee', meleeAttack],
+      ['ranged', rangedAttack],
+      ['magic', magicAttack],
+    ] as const) {
+      const low = fn({ level: 1, attributes: attrs });
+      const high = fn({ level: 150, attributes: attrs });
+      expect(high, name).toBeGreaterThan(low);
     }
-    // At 99 the ends are 99+196=295 and 99+361=460, so the midpoint is 378.
-    expect(statusMagicPower(99)).toBe(378);
   });
 
-  it('floors every derivation at zero so a drain cannot invert it', () => {
-    expect(statusAttackPower(-50, -50, -50)).toBe(0);
-    expect(statusRangedAttackPower(-50, -50, -50)).toBe(0);
-    expect(statusMagicPower(-50)).toBe(0);
+  it('gives magic attack the same shape as melee, led by Intelligence', () => {
+    // Not a range any more: Ragnarok rolls MATK between an INT/7 and an INT/5
+    // end, and this model produces one number.
+    const attrs = attributes({ int: 99 });
+    // 1/4 + 99*1.5 = 148.75, breakpoint 1 + floor(99/10)/100 = 1.09
+    expect(magicAttack({ level: 1, attributes: attrs })).toBeCloseTo(148.75 * 1.09, 8);
+  });
+
+  it('floors the pool multipliers at zero so a drain cannot invert them', () => {
     expect(vitHealthMultiplier(-50)).toBe(1);
     expect(intManaMultiplier(-50)).toBe(1);
+    // The attack formulas clamp their BREAKPOINT and AMPLIFIER inputs but not
+    // the attribute terms themselves, so a drained attribute genuinely subtracts
+    // and the raw formula can go negative. That is deliberate: the floor lives in
+    // recalcPlayerStats, which is the one place a derived stat is finalised, and
+    // duplicating it in the leaf would hide a drain from a caller that wants to
+    // see it. Lv 100 gives 25 from the level term; -50 in three attributes takes
+    // 95 off it.
+    const drained = attributes({ str: -50, dex: -50, luk: -50 });
+    expect(meleeAttack({ level: 100, attributes: drained })).toBeCloseTo(-70, 10);
   });
 });
 
