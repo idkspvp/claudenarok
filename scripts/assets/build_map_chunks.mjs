@@ -1,16 +1,28 @@
 // Bake a map layout plus its prop GLBs into merged per-chunk GLBs.
 //
-// WHY OFFLINE. The draw-call problem these maps pose is not repetition, it is
-// VARIETY: the largest town draws 498 distinct meshes, so instancing collapses
-// nothing and spatial chunking alone made it worse (measured: 498 flat, 814
-// chunked at 32m, both against a ~150-call frame baseline). What works is
-// merging every prop in a cell into ONE geometry, which is possible because the
-// source's props share a single atlas material. Within 60 metres that takes the
-// same map from 498 draws to 16.
+// PREFER build_map_instances.mjs. This is kept for the maps where merging wins.
 //
-// Doing that merge in the browser would mean fetching hundreds of GLBs and
-// welding them on the main thread at map entry. Doing it here means the client
-// fetches a handful of already-merged chunks and draws each in one call.
+// Two claims that used to head this file were both wrong, and both were wrong in
+// the same way: measured over a WHOLE MAP rather than over what a frame draws.
+//
+//   "the largest town draws 498 distinct meshes, so instancing collapses
+//    nothing" - a frame only draws what is near the camera. Measured over a 60 m
+//    radius across all 52 maps, instancing costs a p95 of 169 draws at worst
+//    against 113 for merging, and 51 of 52 maps stay under 150.
+//
+//   "the source's props share a single atlas material" - they do not. 353 meshes
+//    take a different atlas depending on which map places them and 149 bind a
+//    different material per submesh, so a cell is 5.9 draws even merged.
+//
+// What merging really trades is GPU MEMORY for draw calls, because it duplicates
+// a mesh's geometry once per placement and every copy stays resident. On Nevaris
+// that is 201.26 MiB against 17.58 MiB instanced, an 11.4x difference on the one
+// budget a phone cannot grow. Merging is still the better choice where a map is
+// varied rather than repetitive, which is why this remains.
+//
+// Doing the merge in the browser instead would mean fetching hundreds of GLBs and
+// welding them on the main thread at map entry; doing it here means the client
+// fetches ready-made chunks.
 //
 // USAGE
 //   node scripts/assets/build_map_chunks.mjs <layoutDir> <propGlbDir> <outDir>
@@ -32,6 +44,13 @@ import { Document, NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dedup, dequantize, meshopt, prune } from '@gltf-transform/functions';
 import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
+import {
+  cellKey,
+  DEFAULT_MAX_SPAN_M,
+  makeAtlasResolver,
+  propFileName,
+  skipPlacement,
+} from './map_placements.mjs';
 import { applyDir, applyMat, matMul, normalMatrix, trs } from './transform_math.mjs';
 
 const argv = process.argv.slice(2);
@@ -60,7 +79,7 @@ if (invokedDirectly) {
     ?.split(',')
     .map((s) => s.trim());
   const limit = Number(flag('--limit', '0'));
-  const maxSpan = Number(flag('--max-span', '1200'));
+  const maxSpan = Number(flag('--max-span', String(DEFAULT_MAX_SPAN_M)));
   /** Placements dropped for being skydome-scale, reported rather than silent. */
   const oversized = [];
 
@@ -94,25 +113,7 @@ if (invokedDirectly) {
   const atlasIndex = atlasDir
     ? JSON.parse(readFileSync(path.join(atlasDir, 'index.json'), 'utf8'))
     : null;
-  const materialAtlas = atlasIndex?.materialAtlas ?? {};
-  const meshAtlas = atlasIndex?.meshAtlas ?? {};
-
-  /** Which atlas a placement's submesh `si` samples.
-   *
-   *  Resolution is per PLACEMENT and per SUBMESH because neither alone is
-   *  enough: the same tree draws from a different atlas in a forest map than in
-   *  a meadow one (353 meshes), and a multi-submesh model binds a different
-   *  material per part (149). Falling back to the mesh-keyed mapping covers the
-   *  246 props that variety reduction swapped to a different model, whose
-   *  recorded material list describes the mesh they USED to be. */
-  const atlasFor = (placement, si) => {
-    const mats = placement.mats;
-    if (mats?.length) {
-      const hit = materialAtlas[mats[si]] ?? materialAtlas[mats[0]];
-      if (hit) return hit;
-    }
-    return meshAtlas[placement.name]?.[0] ?? '';
-  };
+  const atlasFor = makeAtlasResolver(atlasIndex);
 
   async function loadProp(name) {
     if (propCache.has(name)) return propCache.get(name);
@@ -221,20 +222,15 @@ if (invokedDirectly) {
     mkdirSync(mapOut, { recursive: true });
 
     // Group placements into cells.
+    // Which placements to draw and where they belong come from the SHARED rules,
+    // not from a copy here. This baker and the instancing one differ only in how
+    // they emit; if they disagreed about what to draw they would produce
+    // different worlds from the same input and nothing would report it. Over the
+    // real corpus they draw an identical 30,888,832 triangles on all 52 maps.
     const cells = new Map();
     for (const p of layout.props) {
-      if (p.inactive) continue;
-      const g = (p.group ?? '').toLowerCase();
-      const n = p.name.toLowerCase();
-      // Skydome-scale scenery is excluded by NAME as well as by group, because
-      // the group is where the designer filed it and the name is what it is:
-      // BackdropMountains sits under the ordinary "World" group yet spans two
-      // kilometres, so it swallowed a 64m cell whole and stretched the baked map
-      // from 343 metres to 2032. A web renderer draws its own distant horizon.
-      if (g === 'lighting' || g === 'fog' || g === 'backdropmountains') continue;
-      if (/backdrop|skyline|skydome|skybox|colormap|horizon/.test(n) || /backdrop|skyline/.test(g))
-        continue;
-      const key = `${Math.floor(p.pos[0] / chunkSize)}_${Math.floor(p.pos[2] / chunkSize)}`;
+      if (skipPlacement(p)) continue;
+      const key = cellKey(p, chunkSize);
       const list = cells.get(key);
       if (list) list.push(p);
       else cells.set(key, [p]);
@@ -265,7 +261,7 @@ if (invokedDirectly) {
       };
 
       for (const p of placements) {
-        const geo = await loadProp(p.name.replace(/[^A-Za-z0-9_-]/g, '_'));
+        const geo = await loadProp(propFileName(p.name));
         if (!geo) continue;
         // SKYDOME-SCALE SCENERY IS EXCLUDED BY SIZE, not by name.
         //
