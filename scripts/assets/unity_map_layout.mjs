@@ -20,13 +20,36 @@
 //   node scripts/assets/unity_map_layout.mjs <bundlesDir> <outDir> [--limit n]
 //
 // The prefab format is plain YAML documents separated by `--- !u!<class> &<id>`.
-// The three classes that matter:
+// The classes that matter:
 //   1   GameObject  -> m_Name, m_Component list, m_IsActive
 //   4   Transform   -> m_LocalPosition/Rotation/Scale, m_Father, m_GameObject
 //   33  MeshFilter  -> m_Mesh, the AUTHORITATIVE mesh reference
 //   23  MeshRenderer -> marks a node as drawn
+//   205 LODGroup    -> m_LODs, which of a node's renderers are DETAIL LEVELS
 // A Transform points at its GameObject and its parent, so the tree is rebuilt by
 // following m_Father and the group name is the nearest named ancestor.
+//
+// THE EMITTED TRANSFORM IS WORLD, COMPOSED UP THE PARENT CHAIN. Unity stores
+// m_LocalPosition/Rotation/Scale, and emitting those verbatim is wrong for any
+// node that is not a direct child of the root: 39,168 of 46,104 props (85%) sit
+// under a displaced ancestor, with position errors up to 1023 units, and the
+// failure is worst exactly where it is least visible. N children of a repeated
+// parent all carry the SAME local offset, so they collapse onto one point: three
+// minecart wheels belonging to carts 250 units apart emitted at one coordinate,
+// 62 window panes stacked at the origin. `group` is only a name, so nothing
+// downstream can undo it; the composition has to happen here or not at all.
+//
+// TRS SURVIVES THE COMPOSITION, ALMOST ALWAYS. A rotated child under a
+// non-uniformly scaled parent composes to a sheared matrix that no
+// position/rotation/scale triple can hold. Measured over the real corpus that is
+// 6 props of 46,104 (0.01%), so the emitted shape stays TRS and those 6 also
+// carry `mat`, the full column-major world matrix, which a consumer must prefer
+// when it is present.
+//
+// LOD LEVELS ARE NOT SEPARATE PROPS. A LODGroup node parents one child per
+// detail level, and all of them own a MeshRenderer, so a naive walk emits every
+// level as its own always-drawn prop: 4,579 redundant draws, 10.8% of the total
+// and 60% of the worst map. Only the LOD0 renderers survive here.
 //
 // THE MESH IS RESOLVED BY GUID, NEVER BY THE GAMEOBJECT'S NAME. A scene node's
 // name is an arbitrary label a level designer typed; the MeshFilter's guid is
@@ -39,6 +62,7 @@
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { decompose, matMul, trs } from './transform_math.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] : d);
@@ -77,6 +101,23 @@ const ref = (body, key) => body.match(new RegExp(`${key}: \\{fileID: (\\d+)`))?.
 /** Round to 4 decimals so the JSON is stable and small; a map is metres, not microns. */
 const r4 = (a) => a.map((n) => Math.round(n * 1e4) / 1e4);
 
+/** Renderer anchors belonging to a LODGroup's levels BELOW LOD0. Unity's
+ *  m_LODs is an ordered list, most detailed first, so everything after the first
+ *  `- screenRelativeHeight:` entry is a reduced level that must not be drawn on
+ *  top of the real one. */
+function lodFallbackRenderers(body) {
+  const start = body.indexOf('m_LODs:');
+  if (start < 0) return [];
+  const block = body.slice(start);
+  const levels = block.split(/^\s*- screenRelativeHeight:/m).slice(1);
+  const out = [];
+  // Skip levels[0]: that is LOD0, the one that survives.
+  for (const level of levels.slice(1)) {
+    for (const m of level.matchAll(/- renderer: \{fileID: (\d+)\}/g)) out.push(m[1]);
+  }
+  return out;
+}
+
 export function extractMapLayout(text, mapName, guidMap = null) {
   const docs = splitDocuments(text);
 
@@ -85,6 +126,7 @@ export function extractMapLayout(text, mapName, guidMap = null) {
   const geometryOwners = new Set(); // GameObject anchors that own a MeshFilter/Renderer
   const meshGuidOf = new Map(); // GameObject anchor -> the guid its MeshFilter draws
   const componentOwner = new Map(); // component anchor -> GameObject anchor
+  const lodFallbackComponents = new Set(); // renderer anchors for LOD1 and below
 
   for (const d of docs) {
     if (d.classId === 1) {
@@ -115,12 +157,40 @@ export function extractMapLayout(text, mapName, guidMap = null) {
     } else if (d.classId === 23) {
       const owner = ref(d.body, 'm_GameObject');
       if (owner) geometryOwners.add(owner);
+    } else if (d.classId === 205) {
+      for (const r of lodFallbackRenderers(d.body)) lodFallbackComponents.add(r);
     }
+  }
+
+  // A reduced LOD level is identified by its RENDERER component, so resolve each
+  // back to the GameObject that carries it. Those nodes are real geometry with a
+  // real transform; they simply must not be drawn alongside LOD0.
+  const lodCulled = new Set();
+  for (const comp of lodFallbackComponents) {
+    const owner = componentOwner.get(comp);
+    if (owner) lodCulled.add(owner);
   }
 
   // Transform anchor by GameObject, so a parent chain can be walked.
   const transformOfGo = new Map();
   for (const [anchor, t] of transforms) if (t.go) transformOfGo.set(t.go, anchor);
+
+  /** The composed world matrix of a transform, memoized: a deep chain is walked
+   *  once per node, not once per descendant. */
+  const worldCache = new Map();
+  const worldOf = (anchor, guard = 0) => {
+    const hit = worldCache.get(anchor);
+    if (hit) return hit;
+    const t = transforms.get(anchor);
+    if (!t || guard > 64) return null;
+    let m = trs(t.pos ?? [0, 0, 0], t.rot ?? [0, 0, 0, 1], t.scale ?? [1, 1, 1]);
+    if (t.parent && t.parent !== '0') {
+      const parent = worldOf(t.parent, guard + 1);
+      if (parent) m = matMul(parent, m);
+    }
+    worldCache.set(anchor, m);
+    return m;
+  };
 
   /** The nearest NAMED ancestor, which is how the prefab groups its content
    *  ("Tree", "Rocks", "Props"). Used as a coarse category. */
@@ -143,23 +213,42 @@ export function extractMapLayout(text, mapName, guidMap = null) {
   const npcs = [];
   const spawners = [];
 
+  let culledLod = 0;
+  let shearedProps = 0;
+
   for (const [anchor, t] of transforms) {
     if (!t.go || !t.pos) continue;
     const go = gameObjects.get(t.go);
-    if (!go || !go.name) continue;
+    if (!go?.name) continue;
+    if (lodCulled.has(t.go)) {
+      culledLod++;
+      continue;
+    }
     // The mesh a guid resolves to, which is the thing actually drawn. Falls back
     // to the node name only when there is no guid map, so a caller running
     // without one still gets a usable (if approximate) answer.
     const guid = meshGuidOf.get(t.go);
     const resolved = guid && guidMap ? guidMap[guid]?.name : null;
+    // WORLD, not local: see the header. The local triple is only correct for a
+    // direct child of the root, and 85% of these nodes are not one.
+    const world = worldOf(anchor);
+    const d = world
+      ? decompose(world)
+      : { pos: t.pos, rot: t.rot ?? [0, 0, 0, 1], scale: t.scale ?? [1, 1, 1], skew: 0 };
     const entry = {
       name: resolved ?? go.name,
       ...(resolved && resolved !== go.name ? { node: go.name } : {}),
-      pos: r4(t.pos),
-      rot: t.rot ? r4(t.rot) : [0, 0, 0, 1],
-      scale: t.scale ? r4(t.scale) : [1, 1, 1],
+      pos: r4(d.pos),
+      rot: r4(d.rot),
+      scale: r4(d.scale),
       group: groupOf(anchor),
     };
+    // A sheared basis does not fit in a scale triple. Rare enough (6 props in the
+    // whole corpus) to carry the matrix only where it is actually needed.
+    if (d.skew > 0.5 && world) {
+      entry.mat = r4(world);
+      shearedProps++;
+    }
     if (!go.active) entry.inactive = true;
 
     if (/^NPC[_\s]/i.test(go.name)) npcs.push(entry);
@@ -178,6 +267,8 @@ export function extractMapLayout(text, mapName, guidMap = null) {
       spawners: spawners.length,
       distinctProps: byName.size,
       transforms: transforms.size,
+      culledLod: culledLod,
+      sheared: shearedProps,
     },
     props: props.sort((a, b) => a.name.localeCompare(b.name) || a.pos[0] - b.pos[0]),
     npcs: npcs.sort((a, b) => a.name.localeCompare(b.name)),
@@ -248,13 +339,19 @@ if (invokedDirectly) {
       props: acc.props + m.props,
       npcs: acc.npcs + m.npcs,
       spawners: acc.spawners + m.spawners,
+      culledLod: acc.culledLod + (m.culledLod ?? 0),
+      sheared: acc.sheared + (m.sheared ?? 0),
       bytes: acc.bytes + m.bytes,
     }),
-    { props: 0, npcs: 0, spawners: 0, bytes: 0 },
+    { props: 0, npcs: 0, spawners: 0, culledLod: 0, sheared: 0, bytes: 0 },
   );
   console.log(
     `\nunity_map_layout: ${index.length} maps -> ${total.props.toLocaleString('en-US')} props, ` +
       `${total.npcs} npcs, ${total.spawners} spawners, ` +
       `${(total.bytes / 1024 / 1024).toFixed(2)} MiB of JSON`,
+  );
+  console.log(
+    `  ${total.culledLod.toLocaleString('en-US')} reduced LOD levels dropped, ` +
+      `${total.sheared} props needed a full matrix`,
   );
 }
