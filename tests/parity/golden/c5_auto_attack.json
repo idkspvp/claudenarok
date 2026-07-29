@@ -14,8 +14,8 @@
     "rangedSwing Wand (mage, arcane, no armor, no dead zone)",
     "stopAutoAttack public entry"
   ],
-  "draws": 569,
-  "drawDigest": "d6a6c5f8",
+  "draws": 571,
+  "drawDigest": "000373a3",
   "frames": [
     {
       "tick": 0,
@@ -35,8 +35,8 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 424,
-      "state": "44b991c9",
-      "events": "8002b07d",
+      "state": "a07b9303",
+      "events": "1e173bcc",
       "rng": {
         "draws": 25,
         "digest": "34f63655"
@@ -46,7 +46,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 424,
-      "state": "32e09b7f",
+      "state": "e7d12ab7",
       "events": "741638a5",
       "rng": {
         "draws": 25,
@@ -57,7 +57,7 @@
       "tick": 15,
       "time": 0.75,
       "nextId": 424,
-      "state": "4ccfd1d7",
+      "state": "ccd41837",
       "events": "c47b8866",
       "rng": {
         "draws": 28,
@@ -68,7 +68,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 424,
-      "state": "e685c8cf",
+      "state": "8edde469",
       "events": "2d4eb5ba",
       "rng": {
         "draws": 31,
@@ -79,7 +79,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 424,
-      "state": "b36c9c1b",
+      "state": "b5c4dde8",
       "events": "0c13a561",
       "rng": {
         "draws": 35,
@@ -90,7 +90,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 424,
-      "state": "5c98bbb1",
+      "state": "deaa20a2",
       "events": "c684a8c4",
       "rng": {
         "draws": 38,
@@ -101,7 +101,7 @@
       "tick": 35,
       "time": 1.75,
       "nextId": 424,
-      "state": "bc032fa9",
+      "state": "73b6a442",
       "events": "e177571b",
       "rng": {
         "draws": 46,
@@ -112,7 +112,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "95ae4ba7",
+      "state": "82211164",
       "events": "741638a5",
       "rng": {
         "draws": 46,
@@ -123,7 +123,7 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 424,
-      "state": "f08d6f8c",
+      "state": "56bfa6f6",
       "events": "5eb0a4e4",
       "rng": {
         "draws": 90,
@@ -134,7 +134,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 424,
-      "state": "8d6450b3",
+      "state": "0df9af8d",
       "events": "d8c21900",
       "rng": {
         "draws": 112,
@@ -145,7 +145,7 @@
       "tick": 55,
       "time": 2.75,
       "nextId": 424,
-      "state": "f3591ab2",
+      "state": "be6d3b50",
       "events": "f5ceb4a6",
       "rng": {
         "draws": 127,
@@ -156,7 +156,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 424,
-      "state": "41141bdc",
+      "state": "5242ad6a",
       "events": "2e4c148b",
       "rng": {
         "draws": 150,
@@ -167,7 +167,7 @@
       "tick": 65,
       "time": 3.25,
       "nextId": 424,
-      "state": "ff73f669",
+      "state": "654fcddb",
       "events": "798231c2",
       "rng": {
         "draws": 176,
@@ -178,7 +178,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 424,
-      "state": "b8af715c",
+      "state": "255d5712",
       "events": "3bef3aa7",
       "rng": {
         "draws": 207,
@@ -189,7 +189,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 424,
-      "state": "632ff8e7",
+      "state": "656f694d",
       "events": "fbb8bb79",
       "rng": {
         "draws": 230,
@@ -200,7 +200,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 424,
-      "state": "31c815ec",
+      "state": "599b6c1a",
       "events": "3bbd44db",
       "rng": {
         "draws": 253,
@@ -211,7 +211,7 @@
       "tick": 85,
       "time": 4.25,
       "nextId": 424,
-      "state": "3c1d782d",
+      "state": "e25d78db",
       "events": "993c4876",
       "rng": {
         "draws": 293,
@@ -222,7 +222,7 @@
       "tick": 90,
       "time": 4.5,
       "nextId": 424,
-      "state": "d6b5b0fa",
+      "state": "6760c7c1",
       "events": "fd6c9109",
       "rng": {
         "draws": 325,
@@ -233,7 +233,7 @@
       "tick": 95,
       "time": 4.75,
       "nextId": 424,
-      "state": "32ba6202",
+      "state": "e5a12e69",
       "events": "fe5adec3",
       "rng": {
         "draws": 356,
@@ -244,7 +244,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 424,
-      "state": "3d5000e6",
+      "state": "4544746d",
       "events": "5471e5f6",
       "rng": {
         "draws": 382,
@@ -255,7 +255,7 @@
       "tick": 105,
       "time": 5.25,
       "nextId": 424,
-      "state": "44a9ba43",
+      "state": "eee7885c",
       "events": "c47b8866",
       "rng": {
         "draws": 419,
@@ -266,7 +266,7 @@
       "tick": 110,
       "time": 5.5,
       "nextId": 424,
-      "state": "0e7f86fe",
+      "state": "8769a991",
       "events": "6c5ce023",
       "rng": {
         "draws": 448,
@@ -277,33 +277,33 @@
       "tick": 115,
       "time": 5.75,
       "nextId": 424,
-      "state": "6b6ae7d6",
-      "events": "46c6c395",
+      "state": "ed6f162f",
+      "events": "767bb1a5",
       "rng": {
-        "draws": 474,
-        "digest": "fbcc099d"
+        "draws": 476,
+        "digest": "ae5560d8"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 424,
-      "state": "78cdc628",
+      "state": "7999006b",
       "events": "d8c21900",
       "rng": {
-        "draws": 522,
-        "digest": "cafc7754"
+        "draws": 524,
+        "digest": "bb89984b"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 424,
-      "state": "78cdc628",
+      "state": "7999006b",
       "events": "741638a5",
       "rng": {
-        "draws": 522,
-        "digest": "cafc7754"
+        "draws": 524,
+        "digest": "bb89984b"
       },
       "label": "swings",
       "players": [
@@ -321,14 +321,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 370,
-            "damageTaken": 34
+            "damageDealt": 438,
+            "damageTaken": 42
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 370
+              "damageDealt": 438
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -751,7 +751,7 @@
           "fiveSecondRule": 105,
           "flee": 19,
           "hit": 42,
-          "hp": 526,
+          "hp": 524,
           "id": 414,
           "inCombat": true,
           "kind": "player",
@@ -762,7 +762,7 @@
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
           "onGround": true,
-          "overpowerUntil": 10.55,
+          "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
             "x": -60,
@@ -771,7 +771,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 85,
+          "resource": 85.733333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1105,7 +1105,7 @@
           "flee": 4,
           "hit": 54,
           "hostile": true,
-          "hp": 499630,
+          "hp": 499562,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -1147,7 +1147,7 @@
           "threat": [
             [
               414,
-              667
+              794
             ]
           ],
           "weapon": {
@@ -1441,22 +1441,22 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 424,
-      "state": "180db833",
-      "events": "598bc67a",
+      "state": "3cfce36b",
+      "events": "73bfb870",
       "rng": {
-        "draws": 561,
-        "digest": "b8674619"
+        "draws": 563,
+        "digest": "9634364f"
       }
     },
     {
       "tick": 126,
       "time": 6.3,
       "nextId": 424,
-      "state": "f38c8952",
+      "state": "d81d67b6",
       "events": "741638a5",
       "rng": {
-        "draws": 569,
-        "digest": "d6a6c5f8"
+        "draws": 571,
+        "digest": "000373a3"
       },
       "label": "after-stop",
       "players": [
@@ -1474,14 +1474,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 370,
-            "damageTaken": 34
+            "damageDealt": 438,
+            "damageTaken": 42
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 370
+              "damageDealt": 438
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1556,7 +1556,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 140,
-            "damageTaken": 40
+            "damageTaken": 38
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1722,13 +1722,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 181
+            "damageDealt": 173
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 181
+              "damageDealt": 173
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1805,13 +1805,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 118
+            "damageDealt": 121
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 118
+              "damageDealt": 121
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1904,7 +1904,7 @@
           "fiveSecondRule": 105.3,
           "flee": 19,
           "hit": 42,
-          "hp": 526,
+          "hp": 524,
           "id": 414,
           "inCombat": true,
           "kind": "player",
@@ -1915,7 +1915,7 @@
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
           "onGround": true,
-          "overpowerUntil": 10.55,
+          "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
             "x": -60,
@@ -1924,7 +1924,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 85,
+          "resource": 85.733333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1968,7 +1968,7 @@
           "fiveSecondRule": 105.3,
           "flee": 21,
           "hit": 58,
-          "hp": 79960,
+          "hp": 79962,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -2249,7 +2249,7 @@
           "flee": 4,
           "hit": 54,
           "hostile": true,
-          "hp": 499630,
+          "hp": 499562,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -2291,7 +2291,7 @@
           "threat": [
             [
               414,
-              667
+              794
             ]
           ],
           "weapon": {
@@ -2449,7 +2449,7 @@
           "flee": 9,
           "hit": 61,
           "hostile": true,
-          "hp": 499819,
+          "hp": 499827,
           "id": 422,
           "inCombat": true,
           "kind": "mob",
@@ -2491,7 +2491,7 @@
           "threat": [
             [
               417,
-              182
+              174
             ]
           ],
           "wanderTarget": {
@@ -2522,7 +2522,7 @@
           "flee": 9,
           "hit": 61,
           "hostile": true,
-          "hp": 499882,
+          "hp": 499879,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -2564,7 +2564,7 @@
           "threat": [
             [
               418,
-              119
+              122
             ]
           ],
           "wanderTarget": {
@@ -2585,11 +2585,11 @@
       "tick": 126,
       "time": 6.3,
       "nextId": 424,
-      "state": "f38c8952",
+      "state": "d81d67b6",
       "events": "741638a5",
       "rng": {
-        "draws": 569,
-        "digest": "d6a6c5f8"
+        "draws": 571,
+        "digest": "000373a3"
       },
       "label": "final",
       "players": [
@@ -2607,14 +2607,14 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 370,
-            "damageTaken": 34
+            "damageDealt": 438,
+            "damageTaken": 42
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 370
+              "damageDealt": 438
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2689,7 +2689,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 140,
-            "damageTaken": 40
+            "damageTaken": 38
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2855,13 +2855,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 181
+            "damageDealt": 173
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 181
+              "damageDealt": 173
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2938,13 +2938,13 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 118
+            "damageDealt": 121
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 118
+              "damageDealt": 121
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -3037,7 +3037,7 @@
           "fiveSecondRule": 105.3,
           "flee": 19,
           "hit": 42,
-          "hp": 526,
+          "hp": 524,
           "id": 414,
           "inCombat": true,
           "kind": "player",
@@ -3048,7 +3048,7 @@
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
           "onGround": true,
-          "overpowerUntil": 10.55,
+          "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
             "x": -60,
@@ -3057,7 +3057,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 85,
+          "resource": 85.733333,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -3101,7 +3101,7 @@
           "fiveSecondRule": 105.3,
           "flee": 21,
           "hit": 58,
-          "hp": 79960,
+          "hp": 79962,
           "id": 415,
           "inCombat": true,
           "kind": "player",
@@ -3382,7 +3382,7 @@
           "flee": 4,
           "hit": 54,
           "hostile": true,
-          "hp": 499630,
+          "hp": 499562,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -3424,7 +3424,7 @@
           "threat": [
             [
               414,
-              667
+              794
             ]
           ],
           "weapon": {
@@ -3582,7 +3582,7 @@
           "flee": 9,
           "hit": 61,
           "hostile": true,
-          "hp": 499819,
+          "hp": 499827,
           "id": 422,
           "inCombat": true,
           "kind": "mob",
@@ -3624,7 +3624,7 @@
           "threat": [
             [
               417,
-              182
+              174
             ]
           ],
           "wanderTarget": {
@@ -3655,7 +3655,7 @@
           "flee": 9,
           "hit": 61,
           "hostile": true,
-          "hp": 499882,
+          "hp": 499879,
           "id": 423,
           "inCombat": true,
           "kind": "mob",
@@ -3697,7 +3697,7 @@
           "threat": [
             [
               418,
-              119
+              122
             ]
           ],
           "wanderTarget": {

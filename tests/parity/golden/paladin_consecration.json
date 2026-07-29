@@ -8,8 +8,8 @@
     "updateGroundAoEs first-in-tick (~2256)",
     "pulseGroundAoE deferred interval caller (~3052)"
   ],
-  "draws": 1083,
-  "drawDigest": "c2ffdf4d",
+  "draws": 1084,
+  "drawDigest": "ea009d96",
   "frames": [
     {
       "tick": 0,
@@ -237,18 +237,18 @@
       "tick": 160,
       "time": 8,
       "nextId": 416,
-      "state": "942a008f",
-      "events": "c6bf7026",
+      "state": "4f9257fa",
+      "events": "a85f39c5",
       "rng": {
-        "draws": 636,
-        "digest": "70af8fc4"
+        "draws": 638,
+        "digest": "763b5dfc"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 416,
-      "state": "e20e8ba8",
+      "state": "e132181b",
       "events": "dfa9a5eb",
       "rng": {
         "draws": 759,
@@ -259,44 +259,44 @@
       "tick": 200,
       "time": 10,
       "nextId": 416,
-      "state": "63986db6",
-      "events": "8e1733b6",
+      "state": "d11c5630",
+      "events": "d7e11a59",
       "rng": {
-        "draws": 904,
-        "digest": "9899e11d"
+        "draws": 900,
+        "digest": "2c81dfef"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 416,
-      "state": "067967fc",
+      "state": "0adea12e",
       "events": "741638a5",
       "rng": {
-        "draws": 970,
-        "digest": "26793a12"
+        "draws": 973,
+        "digest": "dd4e9a90"
       }
     },
     {
       "tick": 240,
       "time": 12,
       "nextId": 416,
-      "state": "a4f5e37e",
+      "state": "6a7a3f34",
       "events": "8db8dc68",
       "rng": {
-        "draws": 1079,
-        "digest": "29da1892"
+        "draws": 1082,
+        "digest": "323fc8dd"
       }
     },
     {
       "tick": 241,
       "time": 12.05,
       "nextId": 416,
-      "state": "4d0f1777",
+      "state": "869ebf2d",
       "events": "741638a5",
       "rng": {
-        "draws": 1083,
-        "digest": "c2ffdf4d"
+        "draws": 1084,
+        "digest": "ea009d96"
       },
       "label": "final",
       "players": [
@@ -316,7 +316,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 134,
-            "damageTaken": 42
+            "damageTaken": 53
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -426,7 +426,7 @@
             }
           },
           "hit": 63,
-          "hp": 49958,
+          "hp": 49947,
           "id": 414,
           "inCombat": true,
           "kind": "player",

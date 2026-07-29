@@ -10,8 +10,8 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 185,
-  "drawDigest": "65f41cc6",
+  "draws": 180,
+  "drawDigest": "09d3b32d",
   "frames": [
     {
       "tick": 0,
@@ -185,21 +185,21 @@
       "time": 3,
       "nextId": 416,
       "state": "06f58aaa",
-      "events": "8d185f10",
+      "events": "edea2564",
       "rng": {
-        "draws": 102,
-        "digest": "93535ed3"
+        "draws": 106,
+        "digest": "6b6abe3e"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 416,
-      "state": "50d9998f",
-      "events": "6e1b7f05",
+      "state": "fe7db638",
+      "events": "4d842e95",
       "rng": {
-        "draws": 163,
-        "digest": "3a2585bb"
+        "draws": 164,
+        "digest": "2a45d366"
       },
       "label": "kill",
       "players": [
@@ -218,7 +218,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7197,
+            "damageDealt": 7184,
             "damageTaken": 11,
             "kills": 1
           },
@@ -226,7 +226,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7197,
+              "damageDealt": 7184,
               "kills": 1
             },
             "dungeonClears": {},
@@ -391,15 +391,11 @@
           },
           "level": 2,
           "loot": {
-            "copper": 11,
+            "copper": 8,
             "items": [
               {
                 "count": 1,
                 "itemId": "wolf_fang"
-              },
-              {
-                "count": 1,
-                "itemId": "milepost_boots"
               }
             ]
           },
@@ -451,11 +447,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 416,
-      "state": "38aa12a6",
+      "state": "1d5eb3b9",
       "events": "f550d811",
       "rng": {
-        "draws": 185,
-        "digest": "65f41cc6"
+        "draws": 180,
+        "digest": "09d3b32d"
       },
       "label": "final",
       "players": [
@@ -474,7 +470,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7197,
+            "damageDealt": 7184,
             "damageTaken": 11,
             "kills": 1
           },
@@ -482,7 +478,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7197,
+              "damageDealt": 7184,
               "kills": 1
             },
             "dungeonClears": {},
@@ -652,15 +648,11 @@
           },
           "level": 2,
           "loot": {
-            "copper": 11,
+            "copper": 8,
             "items": [
               {
                 "count": 1,
                 "itemId": "wolf_fang"
-              },
-              {
-                "count": 1,
-                "itemId": "milepost_boots"
               }
             ]
           },

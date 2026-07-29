@@ -10,8 +10,8 @@
     "mobSwing affix cascade: rampage stacking buff_ap (warlord_drogmar self-buff)",
     "friendly-pet mobSwing: mob.hostile=false short-circuits every proc (no debuff on its target)"
   ],
-  "draws": 255,
-  "drawDigest": "a0d9f450",
+  "draws": 260,
+  "drawDigest": "c62aea8c",
   "frames": [
     {
       "tick": 0,
@@ -162,44 +162,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 421,
-      "state": "3b240b2c",
-      "events": "29eef79d",
+      "state": "9273e74c",
+      "events": "911cb010",
       "rng": {
-        "draws": 58,
-        "digest": "54c982e9"
+        "draws": 64,
+        "digest": "e3196e8b"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "88984c15",
-      "events": "12235555",
+      "state": "689240b4",
+      "events": "4bd92602",
       "rng": {
-        "draws": 99,
-        "digest": "d7d725bd"
+        "draws": 109,
+        "digest": "bfc0b463"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "6bca1dbe",
-      "events": "5cba9574",
+      "state": "3a24a7c3",
+      "events": "1a410c4c",
       "rng": {
-        "draws": 233,
-        "digest": "c42a30b2"
+        "draws": 238,
+        "digest": "b8f73495"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "be935ffb",
+      "state": "6b8d0185",
       "events": "741638a5",
       "rng": {
-        "draws": 233,
-        "digest": "c42a30b2"
+        "draws": 238,
+        "digest": "b8f73495"
       },
       "label": "affixes",
       "players": [
@@ -218,7 +218,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1357
+            "damageTaken": 1382
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -301,6 +301,16 @@
               "sourceId": 414
             },
             {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 9.05,
+              "school": "shadow",
+              "sourceId": 417,
+              "value": 120
+            },
+            {
               "duration": 1,
               "id": "stun_mogger_lackey",
               "kind": "stun",
@@ -322,6 +332,15 @@
               "value": 2
             },
             {
+              "duration": 3,
+              "id": "ensnare_webwood_spider",
+              "kind": "root",
+              "name": "Sticky Web",
+              "remaining": 2.5,
+              "school": "nature",
+              "sourceId": 416
+            },
+            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -329,16 +348,6 @@
               "remaining": 3.5,
               "school": "shadow",
               "sourceId": 417
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 9.5,
-              "school": "shadow",
-              "sourceId": 417,
-              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -374,7 +383,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 82.927778,
+          "resource": 84.455556,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -461,7 +470,7 @@
               1
             ]
           ],
-          "wanderTimer": 7.387893,
+          "wanderTimer": 3.676551,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -661,6 +670,7 @@
           "flee": 9,
           "hit": 61,
           "id": 419,
+          "inCombat": true,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
@@ -692,7 +702,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 1.8,
+          "swingTimer": 0.05,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -702,7 +712,7 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 0.75,
+          "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -746,9 +756,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 2,
+          "swingTimer": 0.25,
           "templateId": "forest_wolf",
-          "wanderTimer": 7.498628,
+          "wanderTimer": 3.304453,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -761,11 +771,11 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 421,
-      "state": "b4e21570",
+      "state": "ed0db169",
       "events": "741638a5",
       "rng": {
-        "draws": 255,
-        "digest": "a0d9f450"
+        "draws": 260,
+        "digest": "c62aea8c"
       },
       "label": "final",
       "players": [
@@ -784,7 +794,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1357
+            "damageTaken": 1382
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -867,6 +877,16 @@
               "sourceId": 414
             },
             {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 8.85,
+              "school": "shadow",
+              "sourceId": 417,
+              "value": 120
+            },
+            {
               "duration": 1,
               "id": "stun_mogger_lackey",
               "kind": "stun",
@@ -888,6 +908,15 @@
               "value": 2
             },
             {
+              "duration": 3,
+              "id": "ensnare_webwood_spider",
+              "kind": "root",
+              "name": "Sticky Web",
+              "remaining": 2.3,
+              "school": "nature",
+              "sourceId": 416
+            },
+            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -895,16 +924,6 @@
               "remaining": 3.3,
               "school": "shadow",
               "sourceId": 417
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 9.3,
-              "school": "shadow",
-              "sourceId": 417,
-              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -940,7 +959,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 82.927778,
+          "resource": 84.455556,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1027,7 +1046,7 @@
               1
             ]
           ],
-          "wanderTimer": 7.387893,
+          "wanderTimer": 3.676551,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -1227,6 +1246,7 @@
           "flee": 9,
           "hit": 61,
           "id": 419,
+          "inCombat": true,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
@@ -1258,7 +1278,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 1.8,
+          "swingTimer": 0.05,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -1268,7 +1288,7 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 0.95,
+          "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1312,9 +1332,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 2,
+          "swingTimer": 0.25,
           "templateId": "forest_wolf",
-          "wanderTimer": 7.298628,
+          "wanderTimer": 3.104453,
           "weapon": {
             "max": 12,
             "min": 9,
