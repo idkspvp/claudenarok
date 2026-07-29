@@ -280,9 +280,20 @@ if (invokedDirectly) {
     }
 
     const plan = planReduction(usable, keepCount, manifest);
-    const props = layout.props.map((p) =>
-      plan.substitute.has(p.name) ? { ...p, name: plan.substitute.get(p.name), was: p.name } : p,
-    );
+    const props = layout.props.map((p) => {
+      if (!plan.substitute.has(p.name)) return p;
+      // THE MATERIAL LIST DOES NOT SURVIVE A SUBSTITUTION. `mats` holds the guids
+      // the prefab's MeshRenderer bound when drawing the RETIRED mesh, and they
+      // describe that mesh's submeshes, not the replacement's. Carrying them over
+      // textured 78 of the 246 swapped placements with the wrong atlas: a cannon
+      // swapped to a cannon WHEEL kept the cannon's FantasyKingdom sheet while
+      // the wheel's own art is on the GoblinWarCamp one. Dropping the field lets
+      // the resolver fall through to the substitute's own mapping, which is the
+      // only thing that still describes it.
+      const { mats, ...rest } = p;
+      void mats;
+      return { ...rest, name: plan.substitute.get(p.name), was: p.name };
+    });
     const out = {
       ...layout,
       props,

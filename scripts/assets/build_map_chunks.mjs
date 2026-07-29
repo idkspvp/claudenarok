@@ -12,7 +12,8 @@
 //
 //   "the source's props share a single atlas material" - they do not. 353 meshes
 //    take a different atlas depending on which map places them and 149 bind a
-//    different material per submesh, so a cell is 5.9 draws even merged.
+//    different material per submesh, so a cell averages 2.56 draws even merged
+//    and the worst single cell is 30.
 //
 // What merging really trades is GPU MEMORY for draw calls, because it duplicates
 // a mesh's geometry once per placement and every copy stays resident. On Nevaris
@@ -260,7 +261,8 @@ if (invokedDirectly) {
 
       // ONE BUCKET PER ATLAS. Merging is only legal between props that sample the
       // same texture, so the cell is split by atlas first and welded within each.
-      // Measured over the reduced maps that is 5.9 buckets per cell on average,
+      // Counted off the finished bake that is 4,685 parts over 1,830 cells, so
+      // 2.56 buckets per cell on average and 30 at the worst single cell,
       // against 1 if every prop really did share a single atlas the way the
       // original comment here assumed.
       const buckets = new Map();
@@ -300,6 +302,18 @@ if (invokedDirectly) {
           ? [...p.mat.slice(0, 12), p.mat[12] - originX, p.mat[13], p.mat[14] - originZ, p.mat[15]]
           : trs([p.pos[0] - originX, p.pos[1], p.pos[2] - originZ], p.rot, p.scale);
         const nm = normalMatrix(m);
+        // A MIRRORED PLACEMENT NEEDS ITS WINDING REVERSED. 641 of 38,512 drawn
+        // placements (1.66%) carry a negative-determinant scale, which turns the
+        // geometry inside out: the triangle order that was counter-clockwise in
+        // the prop is clockwise once reflected, so back-face culling removes the
+        // faces the player should see and keeps the ones behind them. normalMatrix
+        // already divides by the determinant so the shading stays right, which is
+        // exactly what makes this invisible in a lit render.
+        const det =
+          m[0] * (m[5] * m[10] - m[9] * m[6]) -
+          m[4] * (m[1] * m[10] - m[9] * m[2]) +
+          m[8] * (m[1] * m[6] - m[5] * m[2]);
+        const flipWinding = det < 0;
 
         // Each submesh transforms ITS OWN vertices. They cannot be transformed
         // once up front and shared, because the primitives do not share a vertex
@@ -344,6 +358,17 @@ if (invokedDirectly) {
               b.uv.push(part.uv ? part.uv[src * 2] : 0, part.uv ? part.uv[src * 2 + 1] : 0);
             }
             b.idx.push(dst);
+          }
+          // Reverse each mirrored triangle, in place, now that its three indices
+          // are all appended. Swapping the second and third of every triple is
+          // what puts the winding back the way the culler expects.
+          if (flipWinding) {
+            const start = b.idx.length - part.indices.length;
+            for (let i = start; i + 2 < b.idx.length; i += 3) {
+              const t = b.idx[i + 1];
+              b.idx[i + 1] = b.idx[i + 2];
+              b.idx[i + 2] = t;
+            }
           }
           b.base += seen.size;
           b.tris += part.indices.length / 3;

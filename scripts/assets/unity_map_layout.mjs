@@ -230,6 +230,25 @@ export function extractMapLayout(text, mapName, guidMap = null) {
   const npcs = [];
   const spawners = [];
 
+  /** Is any ancestor of this transform a disabled GameObject? Memoized, since a
+   *  deep tree is otherwise rewalked once per leaf. */
+  const hiddenCache = new Map();
+  const hiddenByAncestor = (transformAnchor, guard = 0) => {
+    const hit = hiddenCache.get(transformAnchor);
+    if (hit !== undefined) return hit;
+    const t = transforms.get(transformAnchor);
+    let hidden = false;
+    if (t?.parent && t.parent !== '0' && guard < 64) {
+      const parentT = transforms.get(t.parent);
+      if (parentT) {
+        const parentGo = gameObjects.get(parentT.go ?? '');
+        hidden = parentGo?.active === false || hiddenByAncestor(t.parent, guard + 1);
+      }
+    }
+    hiddenCache.set(transformAnchor, hidden);
+    return hidden;
+  };
+
   let culledLod = 0;
   let shearedProps = 0;
 
@@ -268,7 +287,10 @@ export function extractMapLayout(text, mapName, guidMap = null) {
       entry.mat = r4(world);
       shearedProps++;
     }
-    if (!go.active) entry.inactive = true;
+    // Hidden if THIS node is disabled or any ANCESTOR is. Unity deactivates a
+    // whole subtree when a parent GameObject is switched off, so reading a node's
+    // own m_IsActive alone shipped 240 props that the source map does not draw.
+    if (!go.active || hiddenByAncestor(anchor)) entry.inactive = true;
 
     if (/^NPC[_\s]/i.test(go.name)) npcs.push(entry);
     else if (/spawner/i.test(go.name)) spawners.push(entry);

@@ -95,6 +95,7 @@ if (invokedDirectly) {
   let uvMissing = 0;
   let degenerateTris = 0;
   let trianglesChecked = 0;
+  let nonFinite = 0;
   const worstCell = [];
   const hugeMaps = [];
   const perMap = [];
@@ -117,7 +118,24 @@ if (invokedDirectly) {
         if (atlasFiles && !atlasFiles.has(c.atlas)) danglingAtlas++;
       }
     }
-    const draws = Math.max(0, ...byCell.values());
+    // A FRAME DRAWS A NEIGHBOURHOOD, NOT ONE CELL. Counting the busiest single
+    // cell made this gate unfailable: the corpus maximum is 30 against a
+    // threshold of 120. At a 64 m grid, a camera anywhere inside a cell sees that
+    // cell and its eight neighbours, so that 3x3 block is what a frame costs.
+    const partsAt = new Map();
+    for (const c of chunks) {
+      const k = `${Math.round(c.origin[0] / 64)},${Math.round(c.origin[2] / 64)}`;
+      partsAt.set(k, (partsAt.get(k) ?? 0) + 1);
+    }
+    let draws = 0;
+    for (const key of partsAt.keys()) {
+      const [cx, cz] = key.split(',').map(Number);
+      let block = 0;
+      for (let dz = -1; dz <= 1; dz++) {
+        for (let dx = -1; dx <= 1; dx++) block += partsAt.get(`${cx + dx},${cz + dz}`) ?? 0;
+      }
+      if (block > draws) draws = block;
+    }
     worstCell.push([map, draws]);
 
     const mn = [1e9, 1e9, 1e9];
@@ -149,6 +167,16 @@ if (invokedDirectly) {
             }
           }
           const pa = pos.getArray();
+          // NaN FAILS EVERY COMPARISON BELOW SILENTLY, so it is caught by name
+          // rather than by a threshold. A NaN position sails through the extent
+          // check (both `<` and `>` are false) and a NaN normal through the unit
+          // check, so a chunk full of them reads as clean.
+          for (let i = 0; i < pa.length; i++) {
+            if (!Number.isFinite(pa[i])) {
+              nonFinite++;
+              break;
+            }
+          }
 
           // DEGENERATE TRIANGLES, which is the check this file was missing when
           // it most mattered. The baker re-indexes densely on the way out, so a
@@ -187,7 +215,8 @@ if (invokedDirectly) {
             for (let i = 0; i + 2 < na.length; i += 3) {
               normalsChecked++;
               const len = Math.hypot(na[i], na[i + 1], na[i + 2]);
-              if (len < 1e-6) degenerateNormals++;
+              if (!Number.isFinite(len)) nonFinite++;
+              else if (len < 1e-6) degenerateNormals++;
               else if (Math.abs(len - 1) > 0.05) nonUnitNormals++;
             }
           }
@@ -209,6 +238,7 @@ if (invokedDirectly) {
     `${danglingAtlas} dangling`,
   );
   report.assert('no empty primitives', emptyPrims === 0, `${emptyPrims} empty`);
+  report.assert('no NaN positions or normals', nonFinite === 0, `${nonFinite} primitives`);
   report.assert(
     'no out-of-range indices',
     outOfRangeIndices === 0,
@@ -238,7 +268,12 @@ if (invokedDirectly) {
   report.assert(
     `no cell exceeds ${maxDraws} draws`,
     (worstCell[0]?.[1] ?? 0) <= maxDraws,
-    `worst is ${worstCell[0]?.[0]} at ${worstCell[0]?.[1]}`,
+    worstCell[0] && worstCell[0][1] > maxDraws
+      ? `${worstCell
+          .filter((w) => w[1] > maxDraws)
+          .map((w) => `${w[0]} ${w[1]}`)
+          .join(', ')} - bake these with build_map_instances instead`
+      : `worst is ${worstCell[0]?.[0]} at ${worstCell[0]?.[1]}`,
   );
   const texturedPct = totalTris ? (texturedTris / totalTris) * 100 : 0;
   report.assert(
@@ -257,7 +292,7 @@ if (invokedDirectly) {
     for (const c of report.checks) {
       console.log(`  ${c.pass ? 'PASS' : 'FAIL'}  ${c.name.padEnd(42)} ${c.detail}`);
     }
-    console.log('\n  busiest cells:');
+    console.log('\n  busiest 3x3 neighbourhoods:');
     for (const [m, d] of worstCell.slice(0, 6)) console.log(`    ${m.padEnd(26)} ${d} draws`);
   }
   process.exit(report.failed.length ? 1 : 0);
