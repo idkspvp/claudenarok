@@ -24,13 +24,13 @@
 
 import { describe, expect, it } from 'vitest';
 import { fleeRating, hitRating, perfectDodgeChance } from '../src/sim/combat/hit_flee';
-import { intManaMultiplier, vitHealthMultiplier } from '../src/sim/entity';
 import {
   type AttackAttributes,
   magicAttack,
   meleeAttack,
   rangedAttack,
 } from '../src/sim/stats/attack';
+import { intManaMultiplier, vitHealthMultiplier } from '../src/sim/stats/resources';
 import {
   BASE_STAT,
   CREATION_STATUS_POINTS,

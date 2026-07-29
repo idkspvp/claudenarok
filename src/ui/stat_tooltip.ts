@@ -14,9 +14,9 @@
 import { LUK_CRIT_PERMILLE } from '../sim/combat/crit';
 import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
-import { intManaMultiplier, vitHealthMultiplier } from '../sim/entity';
 import { type AttackAttributes, magicAttack, meleeAttack, rangedAttack } from '../sim/stats/attack';
 import { damageReductionFraction } from '../sim/stats/defence_curve';
+import { intManaMultiplier, vitHealthMultiplier } from '../sim/stats/resources';
 import {
   type AuraKind,
   BASE_STAT,
@@ -215,12 +215,12 @@ export function agiMeleeApPerPoint(cls: PlayerClass): number {
   return cls === 'thief' || cls === 'archer' ? 1 : 0;
 }
 
-/** The VIT multiplier the HP pool carries (entity.ts vitHealthMultiplier). */
+/** The VIT multiplier the HP pool carries (stats/resources.ts). */
 export function healthMultiplierFromVit(vit: number): number {
   return vitHealthMultiplier(vit);
 }
 
-/** The INT multiplier the SP pool carries (entity.ts intManaMultiplier). */
+/** The INT multiplier the SP pool carries (stats/resources.ts). */
 export function manaMultiplierFromInt(int: number): number {
   return intManaMultiplier(int);
 }

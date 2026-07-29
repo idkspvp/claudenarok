@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
+import { classHealthMultiplier } from '../src/sim/combat/class_health_map';
 import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
 import { recalcPlayerStats } from '../src/sim/entity';
-import { baseHpAt, baseSpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { Sim } from '../src/sim/sim';
 import { magicAttack, meleeAttack, rangedAttack } from '../src/sim/stats/attack';
 import { damageReductionFraction } from '../src/sim/stats/defence_curve';
+import { maxHealth, maxMana } from '../src/sim/stats/resources';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
   agiMeleeApPerPoint,
@@ -129,12 +130,13 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
 
       it(`${cls} L${level}: stamina max-health contribution matches entity.maxHp`, () => {
         const p = freshPlayer(cls, level);
-        const base = baseHpAt(JOB_VITALS[cls], level);
-        // VIT scales the pool now rather than adding to it, so the tooltip line
-        // is a percentage and the check is the multiplier, not a difference.
+        // VIT scales the pool rather than adding to it, so the tooltip line is a
+        // percentage and the check is the multiplier, not a difference.
         const pct = statEffectVal(cls, p, 'vit', 'maxHealthPct') ?? 0;
         expect(pct).toBeCloseTo((healthMultiplierFromVit(p.stats.vit) - 1) * 100, 6);
-        expect(p.maxHp).toBe(Math.round(base * healthMultiplierFromVit(p.stats.vit)));
+        expect(p.maxHp).toBe(
+          maxHealth({ level, vit: p.stats.vit, archetypeMultiplier: classHealthMultiplier(cls) }),
+        );
       });
 
       it(`${cls} L${level}: armor cell damage reduction matches hard DEF`, () => {
@@ -149,10 +151,11 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
     for (const cls of ALL_CLASSES) {
       if (!isManaClass(cls)) continue;
       const p = freshPlayer(cls, 20);
-      const base = baseSpAt(JOB_VITALS[cls], 20);
       const pct = statEffectVal(cls, p, 'int', 'maxManaPct') ?? 0;
       expect(pct).toBeCloseTo((manaMultiplierFromInt(p.stats.int) - 1) * 100, 6);
-      expect(p.maxResource).toBe(Math.round(base * manaMultiplierFromInt(p.stats.int)));
+      // No class term at all in the spell-point pool any more: every caster of
+      // the same level and Intelligence carries the same number.
+      expect(p.maxResource).toBe(Math.round(maxMana({ level: 20, int: p.stats.int })));
     }
   });
 });

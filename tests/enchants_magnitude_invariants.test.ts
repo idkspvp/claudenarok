@@ -7,11 +7,12 @@
 // has to be pinned before players can enchant at all.
 
 import { describe, expect, it } from 'vitest';
+import { classHealthMultiplier } from '../src/sim/combat/class_health_map';
 import { ENCHANTS, type EnchantDef } from '../src/sim/content/enchants';
 import { CLASSES } from '../src/sim/data';
-import { baseHpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { resolveApplyEnchant } from '../src/sim/professions/enchanting';
 import { Sim } from '../src/sim/sim';
+import { maxHealth } from '../src/sim/stats/resources';
 import { xpForLevel } from '../src/sim/types';
 
 type Axis = 'str' | 'agi' | 'vit' | 'int' | 'luk' | 'armor';
@@ -173,12 +174,16 @@ describe('the full stamina path in HP', () => {
     // 240 HP, and its value scales with the class and level wearing it. Derive the
     // expected gain from the pool the character actually has, so the pin survives
     // a pool retune while still catching a change in the enchant magnitudes.
-    // Read the unmultiplied pool off the class def rather than dividing it back
-    // out of hpBefore: that value is already rounded, and rounding it twice lands
-    // a point off.
-    const pool = baseHpAt(JOB_VITALS.swordman, sim.player.level);
-    expect(Math.round(pool * (1 + vitBefore / 100))).toBe(hpBefore);
-    const expectedHp = Math.round(pool * (1 + (vitBefore + 24) / 100));
+    // Run the health formula rather than reading a per-class pool: there is no
+    // per-job table any more, just one quadratic and a class multiplier.
+    const poolAt = (vit: number) =>
+      maxHealth({
+        level: sim.player.level,
+        vit,
+        archetypeMultiplier: classHealthMultiplier('swordman'),
+      });
+    expect(poolAt(vitBefore)).toBe(hpBefore);
+    const expectedHp = poolAt(vitBefore + 24);
 
     sim.addItem('arcane_shard', 3, pid);
     sim.addItem('arcane_essence', 8, pid);

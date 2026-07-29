@@ -78,6 +78,11 @@ describe('mob polymorph hex ("Mudfin Hex")', () => {
     p.gm = true;
     p.maxHp = 200;
     p.hp = 50; // wounded
+    // Compare FRACTIONS, not absolute health. A recalcPlayerStats anywhere in the
+    // swing recomputes maxHp from the health formula and rescales hp by the same
+    // fraction, so the hand-set 200 does not survive and an absolute pin reads a
+    // larger number for an unchanged wound.
+    const woundedFrac = p.hp / p.maxHp;
     const mob = spawnSkulker(sim, p);
     MOBS['mudfin_murloc'].polymorphHex!.chance = 1;
     swing(sim, mob, p);
@@ -85,7 +90,7 @@ describe('mob polymorph hex ("Mudfin Hex")', () => {
     expect(p.auras.some((a) => a.kind === 'polymorph')).toBe(true);
     // The mage's Polymorph sets hp = maxHp; a mob's hex must not. The bite itself
     // deals damage, so a wounded victim only ends up MORE hurt, never topped off.
-    expect(p.hp).toBeLessThanOrEqual(50);
+    expect(p.hp / p.maxHp).toBeLessThanOrEqual(woundedFrac);
     expect(p.hp).toBeLessThan(p.maxHp);
   });
 

@@ -9,15 +9,16 @@ import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
+import { classHealthMultiplier } from '../src/sim/combat/class_health_map';
 import { DELVE_SHOPS } from '../src/sim/content/delves/shop';
 import { HEROIC_BOSS_LOOT, RETIRED_HEROIC_ITEMS } from '../src/sim/content/heroic_loot';
 import { HEROIC_VENDOR_STOCK } from '../src/sim/content/heroic_vendor';
 import { FURY_STOCK } from '../src/sim/content/pvp_honor';
 import { CLASSES, ITEMS, MOBS, NPCS } from '../src/sim/data';
-import { baseHpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { MAIL_ATTACHMENT_EXPIRY_SECONDS, type MailSave } from '../src/sim/mail/post_office';
 import type { MarketSave } from '../src/sim/market';
 import { type CharacterState, Sim } from '../src/sim/sim';
+import { maxHealth } from '../src/sim/stats/resources';
 import type { ItemDef } from '../src/sim/types';
 import { buildPaperdollView } from '../src/ui/char_view';
 
@@ -176,15 +177,22 @@ describe('retired heroic items: the four ids v0.25.0 orphaned resolve again', ()
     expect(equipped.entity.stats.armor).toBe(
       unequipped.entity.stats.armor + (ITEMS.scourgehide_carapace.stats?.armor ?? 0),
     );
-    // The 10 Vitality is worth 10% of the pool rather than a flat 100 HP. Read the
-    // unmultiplied pool off the class def: maxHp is already rounded, and rounding
-    // it twice lands a point off.
-    const pool = baseHpAt(JOB_VITALS.thief, unequipped.entity.level);
-    expect(Math.round(pool * (1 + unequipped.entity.stats.vit / 100))).toBe(
-      unequipped.entity.maxHp,
-    );
+    // The 10 Vitality is worth 10% of the pool rather than a flat 100 HP. Run
+    // the health formula rather than reading a per-class pool: there is no
+    // per-job table any more.
+    expect(
+      maxHealth({
+        level: unequipped.entity.level,
+        vit: unequipped.entity.stats.vit,
+        archetypeMultiplier: classHealthMultiplier('thief'),
+      }),
+    ).toBe(unequipped.entity.maxHp);
     expect(equipped.entity.maxHp).toBe(
-      Math.round(pool * (1 + (unequipped.entity.stats.vit + (carapace.vit ?? 0)) / 100)),
+      maxHealth({
+        level: unequipped.entity.level,
+        vit: unequipped.entity.stats.vit + (carapace.vit ?? 0),
+        archetypeMultiplier: classHealthMultiplier('thief'),
+      }),
     );
     expect(equipped.entity.maxHp).toBeGreaterThan(unequipped.entity.maxHp);
 

@@ -135,3 +135,16 @@ export function manaRegen(input: ManaRegenInput): number {
   const inner = flat * factor + input.maxMp * (input.maxMpRegenPercent ?? 0);
   return Math.round(inner * (1 + pct));
 }
+
+/** The Vitality multiplier the health pool carries: `1 + VIT/100`.
+ *
+ *  Exported separately from `maxHealth` because the character sheet shows it as
+ *  its own line. Same relationship, one definition. */
+export function vitHealthMultiplier(vit: number): number {
+  return 1 + Math.max(0, vit) / 100;
+}
+
+/** The Intelligence twin, on the spell-point pool. */
+export function intManaMultiplier(int: number): number {
+  return 1 + Math.max(0, int) / 100;
+}

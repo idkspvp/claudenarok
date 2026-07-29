@@ -1,4 +1,5 @@
 import { aggregateCards, type CardDef } from './cards';
+import { classHealthMultiplier } from './combat/class_health_map';
 import { critRateFrom } from './combat/crit';
 import { aggregateGearEffects, type GearEffects } from './combat/gear_effects';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
@@ -9,11 +10,11 @@ import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
-import { baseHpAt, baseSpAt, JOB_VITALS } from './job_vitals';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
 import { magicAttack, meleeAttack, rangedAttack } from './stats/attack';
 import { attackDelaySeconds, attackSpeed, DUAL_WIELD_MULTIPLIER } from './stats/attack_speed';
+import { maxHealth, maxMana } from './stats/resources';
 import type {
   Entity,
   EquipSlot,
@@ -268,16 +269,6 @@ export type PlayerEquipment = Partial<Record<EquipSlot, string>>;
 // shape of every build, not a retune.
 //
 // Everything is floored at 0 so a draining debuff can never invert a pool.
-
-/** The VIT multiplier on the class HP pool (1.0 at VIT 0, 1.99 at VIT 99). */
-export function vitHealthMultiplier(vit: number): number {
-  return 1 + Math.max(0, vit) / 100;
-}
-
-/** The INT multiplier on the class SP pool. */
-export function intManaMultiplier(int: number): number {
-  return 1 + Math.max(0, int) / 100;
-}
 
 /** Soft defence from VIT, added to gear armour. */
 export function vitSoftDefence(vit: number): number {
@@ -792,11 +783,21 @@ export function recalcPlayerStats(
   e.dodgeChance = Math.max(0, perfectDodgeChance(s.luk) + bonusDodge);
 
   const hpFrac = e.maxHp > 0 ? e.hp / e.maxHp : 1;
-  // Ragnarok's shape: VIT is a PERCENTAGE on the class pool, not a flat per-point
-  // grant. At VIT 99 a character carries just under double the pool a VIT 1
-  // character does. That is decisive without ever dwarfing the class and level
-  // base, the way a flat +10/point did once the scale ran to 99.
-  e.maxHp = Math.round(baseHpAt(JOB_VITALS[def.id], lvl) * vitHealthMultiplier(s.vit));
+  // The reference's Max HP (stats/resources.ts): quadratic in level through the
+  // triangular number, scaled by ONE per-class multiplier, then Vitality as a
+  // plain percentage. The per-job health TABLE this replaces gave each class its
+  // own curve; here every class runs the same quadratic and differs by a
+  // constant factor.
+  //
+  // This is also where Vitality gets its compensation back. The defence curve
+  // took Vitality out of mitigation entirely (the reference's DEF has no
+  // attribute term), so from here Vitality buys the health pool and nothing
+  // else, which is the whole of its job.
+  e.maxHp = maxHealth({
+    level: lvl,
+    vit: s.vit,
+    archetypeMultiplier: classHealthMultiplier(cls),
+  });
   if (bearForm) e.maxHp = Math.round(e.maxHp * 1.15);
   if (mods?.stats.maxHpPct) e.maxHp = Math.round(e.maxHp * (1 + mods.stats.maxHpPct));
   if (maxHpPctAura !== 0) e.maxHp = Math.max(1, Math.round(e.maxHp * (1 + maxHpPctAura)));
@@ -817,11 +818,16 @@ export function recalcPlayerStats(
     const cameFromForm = e.resourceType !== 'mana';
     const manaFrac = e.maxResource > 0 ? e.resource / e.maxResource : 1;
     e.resourceType = 'mana';
+    // The reference's Max MP (stats/resources.ts): LINEAR in level and with no
+    // class term at all, so every caster of the same level and Intelligence
+    // carries the same pool. The per-job SP table this replaces is gone with it.
     e.maxResource = Math.round(
-      baseSpAt(JOB_VITALS[def.id], lvl) *
-        intManaMultiplier(s.int) *
-        (1 + (mods?.global.manaPct ?? 0)) +
-        (gearEffects?.maxSp ?? 0),
+      maxMana({
+        level: lvl,
+        int: s.int,
+        flatMp: gearEffects?.maxSp ?? 0,
+        mpPercent: mods?.global.manaPct ?? 0,
+      }),
     );
     e.resource = cameFromForm
       ? Math.min(e.savedMana, e.maxResource)
