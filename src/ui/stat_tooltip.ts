@@ -303,7 +303,7 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
         kind: 'attackPower',
         value: meleeWithout('dex'),
       });
-      effects.push({ kind: 'hit', value: hitRating(level, stats.dex) });
+      effects.push({ kind: 'hit', value: hitRating(level, stats.dex, stats.luk) });
       if (cls === 'archer') {
         effects.push({
           kind: 'rangedAttackPower',
@@ -338,6 +338,9 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
         kind: 'attackPower',
         value: meleeWithout('luk'),
       });
+      // Luck feeds accuracy now, a fifth of a point each. It bought none at all
+      // under the model this replaces, where accuracy was Dexterity's alone.
+      effects.push({ kind: 'hit', value: hitRating(level, 0, stats.luk) - hitRating(level, 0, 0) });
       break;
     }
     case 'armor': {

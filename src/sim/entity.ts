@@ -781,7 +781,11 @@ export function recalcPlayerStats(
   // perfect dodge: flat, from Luck, and the one avoidance an attacker's accuracy
   // cannot answer. Aura grants (buff_dodge and the mob stagger debuff) still land
   // here, so their sign and magnitude are unchanged.
-  e.hit = hitRating(lvl, s.dex) + Math.round(e.hitBonus * 100);
+  // Luck feeds accuracy now (a fifth of a point each), which it did not under
+  // the model this replaces. The crowd penalty on flee is NOT applied here: it
+  // depends on how many attackers are currently on the defender, which is a
+  // per-swing fact the combat path knows and a baked stat cannot.
+  e.hit = hitRating(lvl, s.dex, s.luk) + Math.round(e.hitBonus * 100);
   e.flee = Math.max(0, fleeRating(lvl, s.agi) + bonusFlee);
   e.dodgeChance = Math.max(0, perfectDodgeChance(s.luk) + bonusDodge);
 
@@ -947,7 +951,7 @@ export function createMob(id: number, template: MobTemplate, level: number, pos:
   e.stats.vit = template.vit ?? monsterAttribute;
   e.stats.int = template.int ?? 0;
   e.stats.luk = template.luk ?? monsterAttribute;
-  e.hit = hitRating(level, e.stats.dex);
+  e.hit = hitRating(level, e.stats.dex, e.stats.luk);
   e.flee = fleeRating(level, e.stats.agi);
   e.dodgeChance = perfectDodgeChance(e.stats.luk);
   // so a level-1 mob gets 0 and each level adds armorPerLevel.

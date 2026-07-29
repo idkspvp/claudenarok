@@ -114,6 +114,41 @@ for it recorded separately from any claim of fact.
 
 **4. `SetAtkSpd`.** One stat the engine has and the published catalog does not.
 
+**5. The hit-rate CONTEST.** Found while wiring phase 2. The data publishes Hit
+and Flee as RATINGS (`Formula$$Hit`, `Formula$$Flee`) and publishes nothing at
+all about how two ratings resolve into a chance to land a blow. Every other
+combat number has an expression; this one has none, in the formulas, the raw
+JSON, or either community wiki.
+
+**Stand-in in use:** this game's existing contest,
+`clamp(5, 100, BASE + HIT - FLEE)`, kept in `src/sim/combat/hit_flee.ts` and
+labelled there as a stand-in rather than a transcription.
+
+Its BASE had to be recalibrated from 80 to 55, and that is worth reading before
+anyone "restores" it. The old ratings were symmetric, so two unbuilt characters
+of the same level had identical Hit and Flee and the base WAS the even-fight
+chance. SpiritVale's Hit carries a flat +25 that Flee has no answer to, so
+`80 + HIT - FLEE` sends every swing to the 100% ceiling: at level 20 with ten
+Dexterity each it reads 80 + 65 - 25 = 120, and nothing ever misses. 55 restores
+the property the stand-in was chosen for, that an unbuilt pair trades at 80%.
+That is our own calibration constant re-derived to keep its own invariant, not a
+balance number taken from anywhere.
+
+What deliberately does not come back is symmetry once both sides spend:
+Dexterity buys two accuracy and Agility buys half an evasion, so an investing
+attacker out-runs an equally investing defender. That asymmetry is SpiritVale's
+and is meant to show.
+
+**6. Whether `LUK/5` in the Hit formula is integer division.** The published
+expression is `round( (Lv + 2*DEX + LUK/5 + flatHit + 25) * (1 + Hit%) )`, one
+round over the whole sum, which makes 4 Luck contribute 0.8 and round up. The
+prose note beside that same expression says "integer division, so 4 LUK adds
+nothing". They cannot both be true.
+
+**Stand-in in use:** the EXPRESSION, because it is the transcribed formula and
+the note is the site's gloss on it. Pinned with its reasoning in
+`tests/ro_stat_fidelity.test.ts`.
+
 ## Unlabelled integers, the smaller gap
 
 The same pattern as `targetType` before its labels were found: the values are

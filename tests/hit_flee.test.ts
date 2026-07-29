@@ -12,7 +12,9 @@
 import { describe, expect, it } from 'vitest';
 import { meleeSwing } from '../src/sim/combat/auto_attack';
 import {
+  ATTACKER_FLAT_LEAD,
   BASE_HIT_PERCENT,
+  EVEN_FIGHT_PERCENT,
   fleeRating,
   hitChance,
   hitRating,
@@ -29,45 +31,62 @@ import { BASE_STAT, emptyStatAllocation } from '../src/sim/types';
 import { spreadAllocation } from './helpers/alloc';
 
 describe('the two ratings', () => {
-  it('carries NO baseline, so an even fight meets at the base percentage', () => {
-    // The correction that mattered: an earlier pass gave HIT a +175 term and
-    // FLEE a +100 one, which handed every attacker a permanent 75-point lead and
-    // made two identical characters connect every single time. They are level
-    // plus the attribute and nothing else, so an even fight trades at 80% and
-    // one swing in five misses.
-    expect(hitRating(1, 0)).toBe(fleeRating(1, 0));
-    expect(hitChance(hitRating(20, 10), fleeRating(20, 10))).toBeCloseTo(
-      BASE_HIT_PERCENT / 100,
-      10,
-    );
-    expect(hitChance(hitRating(20, 10), fleeRating(20, 10))).toBeLessThan(MAX_HIT_CHANCE);
+  it('carries a flat +25 on HIT, so an even fight favours the ATTACKER', () => {
+    // This assertion used to run the other way, and the change is deliberate.
+    // The model it replaces had no baseline on either side and met at parity, so
+    // two identical characters traded at exactly the base percentage. SpiritVale
+    // hands every attacker a flat 25 that the defender has no answer to, so an
+    // unbuilt attacker is 25 points ahead of an unbuilt defender of the same
+    // level before either has spent anything.
+    expect(hitRating(1, 0, 0) - fleeRating(1, 0)).toBe(ATTACKER_FLAT_LEAD);
+    // The contest's base was recalibrated from 80 to 55 to absorb exactly that
+    // lead, so an UNBUILT pair still trades at 80% and one swing in five misses.
+    for (const lv of [1, 20, 50, 99]) {
+      expect(hitChance(hitRating(lv, 0, 0), fleeRating(lv, 0)), `level ${lv}`).toBeCloseTo(
+        EVEN_FIGHT_PERCENT / 100,
+        10,
+      );
+    }
+    // Once both sides SPEND, the attacker pulls ahead: Dexterity buys two
+    // accuracy where Agility buys half an evasion. That asymmetry is deliberate.
+    const bothSpent = hitChance(hitRating(20, 10, 0), fleeRating(20, 10));
+    expect(bothSpent).toBeGreaterThan(EVEN_FIGHT_PERCENT / 100);
+    expect(bothSpent).toBeLessThanOrEqual(MAX_HIT_CHANCE);
   });
 
-  it('pays DEX into accuracy and AGI into evasion, point for point', () => {
-    expect(hitRating(1, 10) - hitRating(1, 0)).toBe(10);
-    expect(fleeRating(1, 10) - fleeRating(1, 0)).toBe(10);
-    // And crucially NOT the other way round: DEX must not buy evasion.
+  it('pays TWO accuracy per DEX and HALF an evasion per AGI', () => {
+    // Four to one, where the old model paid one to one. Accuracy is now much
+    // the cheaper of the two to stack.
+    expect(hitRating(1, 10, 0) - hitRating(1, 0, 0)).toBe(20);
+    expect(fleeRating(1, 10) - fleeRating(1, 0)).toBe(5);
+    // Dexterity must still buy no evasion at all.
     expect(fleeRating(1, 0)).toBe(fleeRating(1, 0));
-    // Luck does NOTHING to either rating in pre-renewal. The luk/3 and luk/5
-    // terms this used to pin are Renewal's, from the same lines as the +175 and
-    // +100 baselines already removed. Pinned as an ABSENCE so the terms cannot
-    // come back a third time.
-    expect(hitRating(1, 0)).toBe(hitRating(1, 0));
-    expect(fleeRating(1, 0)).toBe(fleeRating(1, 0));
+    // And Luck DOES feed accuracy now, a fifth of a point. It fed neither
+    // rating before; pinned as a presence so a revert is caught.
+    expect(hitRating(1, 0, 50)).toBeGreaterThan(hitRating(1, 0, 0));
   });
 
   it('scales both with level, so a level gap still matters on its own', () => {
-    expect(hitRating(50, 0)).toBeGreaterThan(hitRating(1, 0));
+    expect(hitRating(50, 0, 0)).toBeGreaterThan(hitRating(1, 0, 0));
     expect(fleeRating(50, 0)).toBeGreaterThan(fleeRating(1, 0));
-    // And they stay level with each other: an unbuilt character of any level
-    // meets another of the same level at parity, never ahead.
-    for (const lv of [1, 20, 50, 99]) expect(hitRating(lv, 0)).toBe(fleeRating(lv, 0));
+    // They no longer stay level with each other: the +25 rides along at every
+    // level, so the attacker's lead is constant rather than closing.
+    for (const lv of [1, 20, 50, 99]) {
+      expect(hitRating(lv, 0, 0) - fleeRating(lv, 0), `level ${lv}`).toBe(25);
+    }
+  });
+
+  it('penalises evasion from the FIFTH attacker on the defender', () => {
+    // New mechanic: there was no crowd penalty at all before.
+    const alone = fleeRating(50, 40, 1);
+    expect(fleeRating(50, 40, 4)).toBe(alone);
+    expect(fleeRating(50, 40, 5)).toBeCloseTo(alone * 0.9, 10);
   });
 
   it('floors a drained attribute instead of inverting the rating', () => {
-    expect(hitRating(1, -50)).toBe(hitRating(1, 0));
+    expect(hitRating(1, -50, -50)).toBe(hitRating(1, 0, 0));
     expect(fleeRating(1, -50)).toBe(fleeRating(1, 0));
-    expect(hitRating(0, 0)).toBe(hitRating(1, 0));
+    expect(hitRating(0, 0, 0)).toBe(hitRating(1, 0, 0));
   });
 });
 
@@ -161,7 +180,10 @@ describe('the contest reaches a real swing', () => {
     const plain = landRate({});
     const evasive = landRate({ targetAgi: 200 });
     expect(evasive).toBeLessThan(plain);
-    expect(evasive).toBeLessThan(0.5);
+    // Deeper than it used to need to be: Agility buys half a point now, so 200
+    // Agility is worth what 100 was, and the attacker's flat +25 has to be
+    // out-run before evasion bites at all.
+    expect(evasive).toBeLessThan(0.75);
   });
 
   it('lets Dexterity buy its way back through that evasion', () => {
@@ -170,8 +192,10 @@ describe('the contest reaches a real swing', () => {
     // Against evasion this deep the attacker is pinned at the 5% floor with no
     // Dexterity at all, so the target's Agility comes down to somewhere the
     // contest can actually move.
-    const noDex = landRate({ targetAgi: 80 });
-    const withDex = landRate({ targetAgi: 80, attackerDex: 150 });
+    // Agility is worth half a point now, so the target needs far more of it to
+    // put the attacker under pressure at all.
+    const noDex = landRate({ targetAgi: 300 });
+    const withDex = landRate({ targetAgi: 300, attackerDex: 150 });
     expect(noDex).toBeLessThan(0.5);
     expect(withDex).toBeGreaterThan(noDex + 0.3);
   });

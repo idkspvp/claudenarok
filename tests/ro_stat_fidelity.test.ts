@@ -184,36 +184,69 @@ describe('the attack derivations follow SpiritVale', () => {
   });
 });
 
-describe('the accuracy contest matches Ragnarok', () => {
-  it('reads HIT off level and DEX alone, with no LUK term and no baseline', () => {
-    // BaseLv + DEX, full stop. Read off the pre-renewal arm of rAthena's
-    // status_calc_bl_main; this is the only file that states it as a literal.
-    expect(hitRating(1, 0)).toBe(1);
-    expect(hitRating(50, 30)).toBe(50 + 30);
+describe('the accuracy ratings follow SpiritVale', () => {
+  it('pays TWO Hit per Dexterity, a fifth of Luck, and a flat 25 to everyone', () => {
+    // Every one of those three is new. The model this replaces read level plus
+    // Dexterity, full stop: one per point, no Luck term, no baseline.
+    expect(hitRating(1, 0, 0)).toBe(1 + 25);
+    expect(hitRating(50, 30, 0)).toBe(50 + 60 + 25);
+    expect(hitRating(50, 30, 25)).toBe(50 + 60 + 5 + 25);
+    // Dexterity is worth exactly twice what it was.
+    expect(hitRating(50, 31, 0) - hitRating(50, 30, 0)).toBe(2);
   });
 
-  it('reads FLEE off level and AGI alone, with no LUK term and no baseline', () => {
-    // BaseLv + AGI, full stop.
+  it('pays HALF a Flee per Agility, floored, where it used to pay a full point', () => {
     expect(fleeRating(1, 0)).toBe(1);
-    expect(fleeRating(50, 30)).toBe(50 + 30);
+    expect(fleeRating(50, 30)).toBe(50 + 15);
+    // Floored, so an odd point buys nothing on its own.
+    expect(fleeRating(50, 31)).toBe(fleeRating(50, 30));
   });
 
-  it('gives LUCK no say in accuracy at all', () => {
-    // The luk/3 and luk/5 terms belong to Renewal, on the same lines as the
-    // +175 and +100 baselines. Pinned as an absence: Luck buys criticals,
-    // denies them, and grants perfect dodge, and that is its whole job.
-    expect(hitRating(50, 30)).toBe(50 + 30);
-    expect(fleeRating(50, 30)).toBe(50 + 30);
+  it('makes accuracy four times easier to stack than evasion', () => {
+    // The clearest statement of the change. Ten points into Dexterity buys
+    // twenty Hit; ten into Agility buys five Flee. Under the old model both
+    // bought ten, and the two sides met at parity.
+    expect(hitRating(50, 10, 0) - hitRating(50, 0, 0)).toBe(20);
+    expect(fleeRating(50, 10) - fleeRating(50, 0)).toBe(5);
   });
 
-  it('meets at parity, so an even fight misses one swing in five', () => {
-    // Neither side starts ahead. The 80% base is the whole of it, which is why
-    // Dexterity is something a character has to actually buy.
-    expect(hitRating(20, 0)).toBe(fleeRating(20, 0));
+  it('gives LUCK a say in accuracy, which pre-renewal denies it', () => {
+    // Pinned as a PRESENCE now. It used to be pinned as an absence, on the
+    // grounds that the luk/5 term belonged to Renewal; SpiritVale has it.
+    expect(hitRating(50, 30, 25)).toBeGreaterThan(hitRating(50, 30, 0));
+    // A fifth of a point. The SOURCE DISAGREES WITH ITSELF here and this pin
+    // records which side we took: the published expression is
+    // round( (Lv + 2*DEX + LUK/5 + flatHit + 25) * (1 + Hit%) ), a real division
+    // inside one round over the whole sum, but the prose note beside it says
+    // "integer division, so 4 LUK adds nothing". Those cannot both be true.
+    // We follow the EXPRESSION, because that is the transcribed formula and the
+    // note is the site's gloss on it. Under the expression 4 Luck contributes
+    // 0.8, which the round carries.
+    expect(hitRating(50, 0, 4)).toBe(hitRating(50, 0, 0) + 1);
+    expect(hitRating(50, 0, 5)).toBe(hitRating(50, 0, 0) + 1);
+    // Two Luck contributes 0.4 and rounds away, so it is not simply "any Luck
+    // rounds up" either.
+    expect(hitRating(50, 0, 2)).toBe(hitRating(50, 0, 0));
   });
 
-  it('gives Luck a flat dodge that accuracy cannot answer', () => {
-    // 1 + LUK x 0.1 percent, rolled apart from the contest.
+  it('does NOT meet at parity: the attacker starts ahead by 25 plus the split', () => {
+    // Two equally built characters of the same level no longer trade evenly.
+    // That is deliberate in this model, not an oversight in ours.
+    expect(hitRating(20, 0, 0)).toBeGreaterThan(fleeRating(20, 0));
+    expect(hitRating(20, 0, 0) - fleeRating(20, 0)).toBe(25);
+  });
+
+  it('penalises Flee from the FIFTH attacker, which the old model never did', () => {
+    const alone = fleeRating(50, 40, 1);
+    expect(fleeRating(50, 40, 4)).toBe(alone);
+    expect(fleeRating(50, 40, 5)).toBeCloseTo(alone * 0.9, 10);
+    expect(fleeRating(50, 40, 8)).toBeCloseTo(alone * 0.6, 10);
+  });
+
+  it('keeps the Luck perfect dodge as a STAND-IN, not as a transcription', () => {
+    // SpiritVale reads a plain PerfectDodge gear stat with no attribute term.
+    // No item in this game grants it yet, so switching now would delete the
+    // mechanic outright. The Luck derivation stays until phase 6 can grant it.
     expect(perfectDodgeChance(0)).toBeCloseTo(0.01, 10);
     expect(perfectDodgeChance(50)).toBeCloseTo(0.06, 10);
   });
