@@ -13,7 +13,35 @@ function b64ToAB(b64) {
   return a.buffer;
 }
 
-globalThis.__renderMap = async ({ chunks, terrain, width, height, pitch, yaw, wireframe }) => {
+/** Decode the shared atlas WebPs once, keyed by name. */
+async function loadAtlases(atlases) {
+  const out = new Map();
+  for (const [name, b64] of Object.entries(atlases ?? {})) {
+    const blob = new Blob([b64ToAB(b64)], { type: 'image/webp' });
+    const bitmap = await createImageBitmap(blob);
+    const tex = new THREE.Texture(bitmap);
+    // The source art is a Unity atlas, whose V axis runs the other way, and 543
+    // of these meshes genuinely tile so wrapping must not be clamped.
+    tex.flipY = false;
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.needsUpdate = true;
+    out.set(name, tex);
+  }
+  return out;
+}
+
+globalThis.__renderMap = async ({
+  chunks,
+  atlases,
+  terrain,
+  width,
+  height,
+  pitch,
+  yaw,
+  wireframe,
+}) => {
   const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
   renderer.setSize(width, height, false);
   renderer.setClearColor(0x141920, 1);
@@ -31,22 +59,29 @@ globalThis.__renderMap = async ({ chunks, terrain, width, height, pitch, yaw, wi
   scene.add(root);
   let tris = 0;
   let draws = 0;
+  let missingTexture = 0;
+  const atlasTextures = await loadAtlases(atlases);
 
   for (const c of chunks) {
     const gltf = await loader.parseAsync(b64ToAB(c.glb), '');
     const g = gltf.scene;
     // The baker subtracts the cell origin from its geometry; put it back.
     g.position.set(c.origin[0], c.origin[1], c.origin[2]);
+    const map = atlasTextures.get(c.atlas) ?? null;
+    if (c.atlas && !map) missingTexture++;
     g.traverse((o) => {
       if (!o.isMesh) return;
       draws++;
       const idx = o.geometry.index;
       tris += idx ? idx.count / 3 : o.geometry.attributes.position.count / 3;
       o.material = new THREE.MeshStandardMaterial({
-        color: 0xb9b2a4,
+        // Untextured chunks stay grey, so a missing atlas is visible rather than
+        // quietly tinted like everything else.
+        color: map ? 0xffffff : 0xb9b2a4,
+        map,
         roughness: 0.92,
         metalness: 0,
-        flatShading: true,
+        flatShading: !map,
         wireframe: Boolean(wireframe),
       });
     });
@@ -115,6 +150,8 @@ globalThis.__renderMap = async ({ chunks, terrain, width, height, pitch, yaw, wi
   return {
     png: renderer.domElement.toDataURL('image/png'),
     tris: Math.round(tris),
+    missingTexture,
+    textured: draws - missingTexture,
     draws,
     size: [size.x, size.y, size.z].map((n) => Math.round(n)),
   };

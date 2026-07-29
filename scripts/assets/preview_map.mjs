@@ -18,7 +18,7 @@ import { BROWSER_PATH } from '../browser_path.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] : d);
-const VALUED = new Set(['--pitch', '--yaw', '--size', '--max-chunks', '--terrain']);
+const VALUED = new Set(['--pitch', '--yaw', '--size', '--max-chunks', '--terrain', '--atlas']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 const [chunkDir, mapName, outPath] = positional;
 if (!chunkDir || !mapName || !outPath) {
@@ -40,10 +40,37 @@ if (maxChunks > 0) {
   chunks = [...chunks].sort((a, b) => b.tris - a.tris).slice(0, maxChunks);
 }
 
+// The atlas is NOT embedded in a chunk: one serves many chunks across many maps,
+// so it is fetched once and shared. The preview has to do the same binding the
+// renderer will.
+const atlasDir = flag('--atlas');
+const atlasCache = new Map();
+const atlasData = (name) => {
+  if (!name || !atlasDir) return null;
+  if (atlasCache.has(name)) return atlasCache.get(name);
+  let data = null;
+  try {
+    data = readFileSync(path.join(atlasDir, `${name}.webp`)).toString('base64');
+  } catch {
+    data = null;
+  }
+  atlasCache.set(name, data);
+  return data;
+};
+
 const payload = chunks.map((c) => ({
   origin: c.origin,
+  atlas: c.atlas ?? null,
   glb: readFileSync(path.join(mapDir, `${c.chunk}.glb`)).toString('base64'),
 }));
+const atlases = {};
+for (const c of chunks) {
+  if (!c.atlas || atlases[c.atlas]) continue;
+  const d = atlasData(c.atlas);
+  if (d) atlases[c.atlas] = d;
+}
+const missingAtlas = chunks.filter((c) => c.atlas && !atlases[c.atlas]).length;
+const noAtlas = chunks.filter((c) => !c.atlas).length;
 
 // The ground is baked separately (it is a Unity heightfield, not a mesh), so it
 // has to be composed in here or every prop appears to float.
@@ -72,6 +99,7 @@ await page.waitForFunction('globalThis.__ready === true', { timeout: 60_000 });
 
 const result = await page.evaluate((args) => globalThis.__renderMap(args), {
   chunks: payload,
+  atlases,
   terrain,
   width: w,
   height: h,

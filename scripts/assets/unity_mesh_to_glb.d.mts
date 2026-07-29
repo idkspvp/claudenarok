@@ -31,3 +31,10 @@ export function decodeUnityMesh(text: string): {
   indices: Uint16Array | Uint32Array;
   vertexCount: number;
 };
+
+/** The index ranges belonging to each submesh, in source order. */
+export function parseSubMeshes(
+  text: string,
+  totalIndices: number,
+  indexBytes: number,
+): { first: number; count: number; topology: number; baseVertex: number }[];

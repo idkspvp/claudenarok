@@ -80,12 +80,17 @@ const FORMAT = {
 // Unity VertexAttribute index -> what we call it. Only the ones a web renderer
 // consumes; the rest are decoded and dropped.
 //
-// TANGENT and TEXCOORD_1 are deliberately absent. Tangents exist to orient a
-// NORMAL MAP, and the prop atlases carry none, so they were 18.7% of the vertex
-// payload doing nothing. TEXCOORD_1 is Unity's lightmap channel, which a web
-// renderer that lights in real time never reads. COLOR_0 is KEPT: it was checked
-// and genuinely varies on every mesh that has it (Synty shades with it), so
-// dropping it would flatten the art.
+// TANGENT and TEXCOORD_1 are deliberately absent, and TANGENT is a CHOICE rather
+// than an absence. An earlier note here claimed the prop atlases carry no normal
+// map; they do, 282 of them across the props the maps still place. What is true
+// is that this pipeline does not ship them: the art is flat-shaded low-poly whose
+// form reads from geometry and vertex colour, so tangents were 18.7% of the
+// vertex payload orienting a map nothing binds. If normal maps are ever wanted,
+// this and the atlas exporter have to change together, since a normal map with no
+// tangents does nothing. TEXCOORD_1 is Unity's lightmap channel, which a renderer
+// that lights in real time never reads. COLOR_0 is KEPT: it was checked and
+// genuinely varies on every mesh that has it (Synty shades with it), so dropping
+// it would flatten the art.
 //
 // WEIGHTS_0 and JOINTS_0 are absent for a harder reason: this exporter writes no
 // skins array and no joint nodes at all, so a skinning attribute is payload
@@ -361,7 +366,49 @@ export function decodeUnityMesh(text) {
     indices[i] = wide ? idxBuf.readUInt32LE(i * 4) : idxBuf.readUInt16LE(i * 2);
   }
 
-  return { name, vertexCount, attributes, indices, triangles: indices.length / 3 };
+  return {
+    name,
+    vertexCount,
+    attributes,
+    indices,
+    submeshes: parseSubMeshes(text, indices.length, wide ? 4 : 2),
+    triangles: indices.length / 3,
+  };
+}
+
+/** The index RANGES that belong to each submesh.
+ *
+ *  Unity binds one material per submesh, and this converter used to weld them
+ *  all into a single primitive, so a model built from several materials could
+ *  only ever wear one texture. 195 of the meshes the maps still place have more
+ *  than one submesh, and 149 of those really do resolve to different atlases, so
+ *  merging them puts visibly wrong art on part of the model.
+ *
+ *  `firstByte` is a byte offset into the index buffer, not an index offset, so
+ *  it is divided by the index width. `baseVertex` is added to every index in the
+ *  range; it is 0 throughout this corpus, but honouring it costs nothing and
+ *  silently ignoring it would corrupt any mesh that used it. */
+export function parseSubMeshes(text, totalIndices, indexBytes) {
+  const start = text.indexOf('m_SubMeshes:');
+  const out = [];
+  if (start >= 0) {
+    // Stop at the next top-level key, so a later section cannot leak in.
+    const block = text.slice(start, text.indexOf('\n  m_Shapes:', start) + 1 || undefined);
+    for (const m of block.matchAll(
+      /firstByte: (\d+)\s*\n\s*indexCount: (\d+)\s*\n\s*topology: (\d+)\s*\n\s*baseVertex: (\d+)/g,
+    )) {
+      out.push({
+        first: Number(m[1]) / indexBytes,
+        count: Number(m[2]),
+        topology: Number(m[3]),
+        baseVertex: Number(m[4]),
+      });
+    }
+  }
+  // A mesh with no parsable submesh table is one submesh covering everything,
+  // which is what the single-primitive path always assumed.
+  if (!out.length) return [{ first: 0, count: totalIndices, topology: 0, baseVertex: 0 }];
+  return out;
 }
 
 // ---------------------------------------------------------------------------
@@ -419,20 +466,48 @@ if (invokedDirectly) {
 
     const doc = new Document();
     const buffer = doc.createBuffer();
-    const prim = doc.createPrimitive().setMode(4);
+    // ONE PRIMITIVE PER SUBMESH, in source order, because Unity binds one
+    // material per submesh and the prefab's m_Materials list is indexed the same
+    // way. Welding them into a single primitive, as this did before, left a
+    // model built from several materials able to wear only one texture: 387
+    // meshes here have more than one submesh and 149 of the ones the maps still
+    // place really do resolve to different atlases.
+    //
+    // The attribute accessors are SHARED across the primitives. Only the index
+    // range differs, so the vertex payload is not duplicated and a single-submesh
+    // mesh comes out byte-identical to the old single-primitive form.
+    const shared = {};
     for (const [semantic, { data, dimension }] of Object.entries(mesh.attributes)) {
       const type = ACCESSOR_TYPE[dimension];
       if (!type) continue;
-      prim.setAttribute(
-        semantic,
-        doc.createAccessor(semantic).setType(type).setArray(data).setBuffer(buffer),
-      );
+      shared[semantic] = doc
+        .createAccessor(semantic)
+        .setType(type)
+        .setArray(data)
+        .setBuffer(buffer);
     }
-    prim.setIndices(
-      doc.createAccessor('idx').setType('SCALAR').setArray(mesh.indices).setBuffer(buffer),
-    );
-    prim.setMaterial(doc.createMaterial(mesh.name).setRoughnessFactor(0.85).setMetallicFactor(0));
-    const gltfMesh = doc.createMesh(mesh.name).addPrimitive(prim);
+    const gltfMesh = doc.createMesh(mesh.name);
+    for (const [i, sub] of mesh.submeshes.entries()) {
+      const range = mesh.indices.subarray(sub.first, sub.first + sub.count);
+      const idx = sub.baseVertex ? range.map((v) => v + sub.baseVertex) : range;
+      const prim = doc.createPrimitive().setMode(4);
+      for (const [semantic, accessor] of Object.entries(shared))
+        prim.setAttribute(semantic, accessor);
+      prim.setIndices(
+        doc
+          .createAccessor(`idx_${i}`)
+          .setType('SCALAR')
+          .setArray(Uint32Array.from(idx))
+          .setBuffer(buffer),
+      );
+      prim.setMaterial(
+        doc
+          .createMaterial(mesh.submeshes.length > 1 ? `${mesh.name}_${i}` : mesh.name)
+          .setRoughnessFactor(0.85)
+          .setMetallicFactor(0),
+      );
+      gltfMesh.addPrimitive(prim);
+    }
     doc.createScene().addChild(doc.createNode(mesh.name).setMesh(gltfMesh));
 
     if (compress) {

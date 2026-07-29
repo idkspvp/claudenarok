@@ -264,13 +264,29 @@ if (invokedDirectly) {
     mapping[mesh] = hashes.map((h) => byHash.get(h)).filter(Boolean);
   }
 
+  // MATERIAL guid -> atlas, which is the mapping a baker actually needs. The
+  // mesh-keyed one above cannot answer the two cases that matter: the same mesh
+  // drawn with a different material in a different map (353 meshes), and a
+  // multi-submesh mesh whose materials differ from each other (149). Both are
+  // resolved per placement and per submesh through this.
+  const materialAtlas = {};
+  for (const [g, textures] of matTextures) {
+    const names = [];
+    for (const t of textures) {
+      const atlas = byHash.get(hashOfGuid.get(t));
+      if (atlas && !names.includes(atlas)) names.push(atlas);
+    }
+    if (names.length) materialAtlas[g] = names[0];
+  }
+
   const multi = Object.values(mapping).filter((v) => v.length > 1).length;
   const totalBytes = atlases.reduce((a, x) => a + x.bytes, 0);
   atlases.sort((a, b) => b.bytes - a.bytes);
   writeFileSync(
     path.join(outDir, 'index.json'),
-    `${JSON.stringify({ cap, quality, atlases, meshAtlas: mapping }, null, 2)}\n`,
+    `${JSON.stringify({ cap, quality, atlases, meshAtlas: mapping, materialAtlas }, null, 2)}\n`,
   );
+  console.log(`  ${Object.keys(materialAtlas).length} materials resolve to an atlas`);
 
   console.log(
     `\nunity_atlas_to_webp: ${atlases.length} atlases -> ${(totalBytes / 1048576).toFixed(2)} MiB ` +

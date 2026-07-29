@@ -127,6 +127,7 @@ export function extractMapLayout(text, mapName, guidMap = null) {
   const meshGuidOf = new Map(); // GameObject anchor -> the guid its MeshFilter draws
   const componentOwner = new Map(); // component anchor -> GameObject anchor
   const lodFallbackComponents = new Set(); // renderer anchors for LOD1 and below
+  const materialsOf = new Map(); // GameObject anchor -> material guids, submesh order
 
   for (const d of docs) {
     if (d.classId === 1) {
@@ -157,6 +158,22 @@ export function extractMapLayout(text, mapName, guidMap = null) {
     } else if (d.classId === 23) {
       const owner = ref(d.body, 'm_GameObject');
       if (owner) geometryOwners.add(owner);
+      // The MATERIAL list, in submesh order, is a property of this PLACEMENT and
+      // not of the mesh. The same tree draws with a different atlas in a forest
+      // map than in a meadow one: 353 of the meshes the maps place resolve to
+      // more than one atlas for exactly that reason, so binding a texture per
+      // mesh name would put the wrong art on one of the two.
+      if (owner) {
+        const block = d.body.match(
+          /m_Materials:\s*\n((?:\s*- \{fileID: \d+, guid: [0-9a-f]{32}, type: \d+\}\s*\n)+)/,
+        );
+        if (block) {
+          materialsOf.set(
+            owner,
+            [...block[1].matchAll(/guid: ([0-9a-f]{32})/g)].map((m) => m[1]),
+          );
+        }
+      }
     } else if (d.classId === 205) {
       for (const r of lodFallbackRenderers(d.body)) lodFallbackComponents.add(r);
     }
@@ -243,6 +260,8 @@ export function extractMapLayout(text, mapName, guidMap = null) {
       scale: r4(d.scale),
       group: groupOf(anchor),
     };
+    const mats = materialsOf.get(t.go);
+    if (mats?.length) entry.mats = mats;
     // A sheared basis does not fit in a scale triple. Rare enough (6 props in the
     // whole corpus) to carry the matrix only where it is actually needed.
     if (d.skew > 0.5 && world) {

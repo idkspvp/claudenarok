@@ -18,6 +18,8 @@
 //     [--maps <a,b,c>]       only these maps
 //     [--max-tris <n>]       split a cell that exceeds this, default 120000
 //     [--limit <n>]
+//     [--atlas <dir>]        atlas index from unity_atlas_to_webp, for textures
+//     [--max-span <metres>]  drop a placement bigger than this, default 1200
 //
 // Emits <outDir>/<map>/<cx>_<cz>[_<part>].glb plus <outDir>/<map>/chunks.json
 // carrying each chunk's bounds and triangle count, which is what the renderer
@@ -34,7 +36,7 @@ import { applyDir, applyMat, matMul, normalMatrix, trs } from './transform_math.
 
 const argv = process.argv.slice(2);
 const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] : d);
-const VALUED = new Set(['--chunk', '--maps', '--max-tris', '--limit']);
+const VALUED = new Set(['--chunk', '--maps', '--max-tris', '--limit', '--atlas', '--max-span']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 
 // The 4x4 maths lives in its own tested module: it is shared with the prefab
@@ -58,6 +60,9 @@ if (invokedDirectly) {
     ?.split(',')
     .map((s) => s.trim());
   const limit = Number(flag('--limit', '0'));
+  const maxSpan = Number(flag('--max-span', '1200'));
+  /** Placements dropped for being skydome-scale, reported rather than silent. */
+  const oversized = [];
 
   const io = new NodeIO()
     .registerExtensions(ALL_EXTENSIONS)
@@ -83,6 +88,32 @@ if (invokedDirectly) {
   const propCache = new Map();
   const ELEMENTS = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4 };
 
+  // The atlas index, if one was built. Without it every prop lands in a single
+  // untextured bucket, which is what this produced before textures existed.
+  const atlasDir = flag('--atlas');
+  const atlasIndex = atlasDir
+    ? JSON.parse(readFileSync(path.join(atlasDir, 'index.json'), 'utf8'))
+    : null;
+  const materialAtlas = atlasIndex?.materialAtlas ?? {};
+  const meshAtlas = atlasIndex?.meshAtlas ?? {};
+
+  /** Which atlas a placement's submesh `si` samples.
+   *
+   *  Resolution is per PLACEMENT and per SUBMESH because neither alone is
+   *  enough: the same tree draws from a different atlas in a forest map than in
+   *  a meadow one (353 meshes), and a multi-submesh model binds a different
+   *  material per part (149). Falling back to the mesh-keyed mapping covers the
+   *  246 props that variety reduction swapped to a different model, whose
+   *  recorded material list describes the mesh they USED to be. */
+  const atlasFor = (placement, si) => {
+    const mats = placement.mats;
+    if (mats?.length) {
+      const hit = materialAtlas[mats[si]] ?? materialAtlas[mats[0]];
+      if (hit) return hit;
+    }
+    return meshAtlas[placement.name]?.[0] ?? '';
+  };
+
   async function loadProp(name) {
     if (propCache.has(name)) return propCache.get(name);
     const file = path.join(propDir, `${name}.glb`);
@@ -92,8 +123,8 @@ if (invokedDirectly) {
       await doc.transform(dequantize());
       const root = doc.getRoot();
       const mesh = root.listMeshes()[0];
-      const prim = mesh?.listPrimitives()[0];
-      if (prim) {
+      const prims = mesh?.listPrimitives() ?? [];
+      if (prims.length) {
         // The node carrying the mesh holds the compensating transform. Its own
         // parents count too: a converter that emits a scene graph (the Synty FBX
         // path does) puts part of the scale on a parent node.
@@ -110,11 +141,13 @@ if (invokedDirectly) {
         }
         const nodeNrm = normalMatrix(nodeMat);
 
-        const posAttr = prim.getAttribute('POSITION');
-        const nrmAttr = prim.getAttribute('NORMAL');
-        const uvAttr = prim.getAttribute('TEXCOORD_0');
-        const idx = prim.getIndices()?.getArray();
-        if (posAttr && idx) {
+        // The exporter shares one set of attribute accessors across every
+        // primitive and varies only the indices, so the vertex arrays are decoded
+        // ONCE here and the primitives differ only in which triangles they claim.
+        const posAttr = prims[0].getAttribute('POSITION');
+        const nrmAttr = prims[0].getAttribute('NORMAL');
+        const uvAttr = prims[0].getAttribute('TEXCOORD_0');
+        if (posAttr) {
           const rawPos = posAttr.getArray();
           const ps = ELEMENTS[posAttr.getType()] ?? 3;
           const count = Math.floor(rawPos.length / ps);
@@ -151,7 +184,23 @@ if (invokedDirectly) {
               uv[v * 2 + 1] = rawUv[v * us + 1] ?? 0;
             }
           }
-          geo = { position, normal, uv, indices: idx };
+          // One index range per submesh, in the same order the prefab's
+          // m_Materials list uses, which is what lets each range find its atlas.
+          const parts = prims.map((p) => p.getIndices()?.getArray()).filter(Boolean);
+          // The prop's own longest side, so a placement's world size is this
+          // times its scale. Used to recognise skydome-scale scenery.
+          let span = 0;
+          for (let k = 0; k < 3; k++) {
+            let lo = Number.POSITIVE_INFINITY;
+            let hi = Number.NEGATIVE_INFINITY;
+            for (let v = 0; v < count; v++) {
+              const value = position[v * 3 + k];
+              if (value < lo) lo = value;
+              if (value > hi) hi = value;
+            }
+            if (hi - lo > span) span = hi - lo;
+          }
+          if (parts.length) geo = { position, normal, uv, parts, span };
         }
       }
     } catch {
@@ -200,28 +249,40 @@ if (invokedDirectly) {
       const originX = cx * chunkSize;
       const originZ = cz * chunkSize;
 
-      const parts = [];
-      let pos = [];
-      let nrm = [];
-      let uv = [];
-      let idx = [];
-      let base = 0;
-      let tris = 0;
-
-      const flush = () => {
-        if (!idx.length) return;
-        parts.push({ pos, nrm, uv, idx, tris });
-        pos = [];
-        nrm = [];
-        uv = [];
-        idx = [];
-        base = 0;
-        tris = 0;
+      // ONE BUCKET PER ATLAS. Merging is only legal between props that sample the
+      // same texture, so the cell is split by atlas first and welded within each.
+      // Measured over the reduced maps that is 5.9 buckets per cell on average,
+      // against 1 if every prop really did share a single atlas the way the
+      // original comment here assumed.
+      const buckets = new Map();
+      const bucketOf = (atlas) => {
+        let b = buckets.get(atlas);
+        if (!b) {
+          b = { atlas, pos: [], nrm: [], uv: [], idx: [], base: 0, tris: 0 };
+          buckets.set(atlas, b);
+        }
+        return b;
       };
 
       for (const p of placements) {
         const geo = await loadProp(p.name.replace(/[^A-Za-z0-9_-]/g, '_'));
         if (!geo) continue;
+        // SKYDOME-SCALE SCENERY IS EXCLUDED BY SIZE, not by name.
+        //
+        // The name filter above catches the ones actually called Backdrop or
+        // Skydome, and it cannot catch the rest: a prop named "Plane" at scale
+        // 269.6 spans 11 kilometres and swallowed a whole map's bounding box,
+        // and a name blacklist would also wrongly drop a legitimate prop that
+        // happened to be called Backdrop. Size is the honest discriminator.
+        // Measured over 38,309 placements the median is 10 m, p99 is 164 m and
+        // p99.9 is 893 m; past a kilometre every single one is a skydome, cloud
+        // ring, fog ring, backdrop mountain or water plane, which a web renderer
+        // draws as its own horizon.
+        const worldSpan = geo.span * Math.max(...p.scale.map(Math.abs));
+        if (worldSpan > maxSpan) {
+          oversized.push([p.name, Math.round(worldSpan), layout.map]);
+          continue;
+        }
         // `mat` overrides the TRS triple where the layout carried one: a rotated
         // child under a non-uniformly scaled parent composes to a SHEARED matrix
         // that no position/rotation/scale triple can express. Six props in the
@@ -231,6 +292,11 @@ if (invokedDirectly) {
           : trs([p.pos[0] - originX, p.pos[1], p.pos[2] - originZ], p.rot, p.scale);
         const nm = normalMatrix(m);
         const count = geo.position.length / 3;
+
+        // Transform this placement's vertices once, then hand the SAME block to
+        // whichever buckets its submeshes belong to.
+        const wPos = new Float32Array(count * 3);
+        const wNrm = new Float32Array(count * 3);
         for (let v = 0; v < count; v++) {
           const w = applyMat(
             m,
@@ -238,24 +304,76 @@ if (invokedDirectly) {
             geo.position[v * 3 + 1],
             geo.position[v * 3 + 2],
           );
-          pos.push(w[0], w[1], w[2]);
+          wPos[v * 3] = w[0];
+          wPos[v * 3 + 1] = w[1];
+          wPos[v * 3 + 2] = w[2];
           if (geo.normal) {
             const n = applyDir(nm, geo.normal[v * 3], geo.normal[v * 3 + 1], geo.normal[v * 3 + 2]);
-            nrm.push(n[0], n[1], n[2]);
-          } else nrm.push(0, 1, 0);
-          uv.push(geo.uv ? geo.uv[v * 2] : 0, geo.uv ? geo.uv[v * 2 + 1] : 0);
+            wNrm[v * 3] = n[0];
+            wNrm[v * 3 + 1] = n[1];
+            wNrm[v * 3 + 2] = n[2];
+          } else wNrm[v * 3 + 1] = 1;
         }
-        for (let i = 0; i < geo.indices.length; i++) idx.push(geo.indices[i] + base);
-        base += count;
-        tris += geo.indices.length / 3;
-        // A cell dense enough to blow the frame budget is split rather than
-        // shipped whole: the densest 32m cell in the source holds 1.3M triangles
-        // against a 250k budget, so this is a real case, not a guard rail.
-        if (tris >= maxTris) {
-          flush();
+
+        for (const [si, part] of geo.parts.entries()) {
+          const b = bucketOf(atlasFor(p, si));
+          // Only the vertices this submesh actually references travel into the
+          // bucket. Copying the whole block per submesh would duplicate the
+          // vertex payload once per atlas a prop spans, and leave most of each
+          // copy unreferenced, which nothing downstream removes.
+          const seen = new Map();
+          for (let i = 0; i < part.length; i++) {
+            const src = part[i];
+            let dst = seen.get(src);
+            if (dst === undefined) {
+              dst = b.base + seen.size;
+              seen.set(src, dst);
+              b.pos.push(wPos[src * 3], wPos[src * 3 + 1], wPos[src * 3 + 2]);
+              b.nrm.push(wNrm[src * 3], wNrm[src * 3 + 1], wNrm[src * 3 + 2]);
+              b.uv.push(geo.uv ? geo.uv[src * 2] : 0, geo.uv ? geo.uv[src * 2 + 1] : 0);
+            }
+            b.idx.push(dst);
+          }
+          b.base += seen.size;
+          b.tris += part.length / 3;
         }
       }
-      flush();
+
+      // A cell dense enough to blow the frame budget is split rather than shipped
+      // whole: the densest 32m cell in the source holds 1.3M triangles against a
+      // 250k budget, so this is a real case, not a guard rail. Splitting happens
+      // per bucket, since a bucket is what becomes one draw.
+      const parts = [];
+      for (const b of buckets.values()) {
+        if (!b.idx.length) continue;
+        if (b.tris <= maxTris) {
+          parts.push(b);
+          continue;
+        }
+        const chunksNeeded = Math.ceil(b.tris / maxTris);
+        const perChunk = Math.ceil(b.idx.length / 3 / chunksNeeded) * 3;
+        for (let s = 0; s < b.idx.length; s += perChunk) {
+          const slice = b.idx.slice(s, s + perChunk);
+          // Re-index so each split carries only the vertices it uses.
+          const remap = new Map();
+          const pos = [];
+          const nrm = [];
+          const uv = [];
+          const idx = [];
+          for (const original of slice) {
+            let next = remap.get(original);
+            if (next === undefined) {
+              next = remap.size;
+              remap.set(original, next);
+              pos.push(b.pos[original * 3], b.pos[original * 3 + 1], b.pos[original * 3 + 2]);
+              nrm.push(b.nrm[original * 3], b.nrm[original * 3 + 1], b.nrm[original * 3 + 2]);
+              uv.push(b.uv[original * 2], b.uv[original * 2 + 1]);
+            }
+            idx.push(next);
+          }
+          parts.push({ atlas: b.atlas, pos, nrm, uv, idx, tris: idx.length / 3 });
+        }
+      }
       if (!parts.length) continue;
 
       for (const [i, p] of parts.entries()) {
@@ -279,7 +397,12 @@ if (invokedDirectly) {
           .setIndices(
             doc.createAccessor().setType('SCALAR').setArray(new Uint32Array(p.idx)).setBuffer(buf),
           )
-          .setMaterial(doc.createMaterial('atlas').setRoughnessFactor(0.9).setMetallicFactor(0));
+          .setMaterial(
+            doc
+              .createMaterial(p.atlas || 'atlas')
+              .setRoughnessFactor(0.9)
+              .setMetallicFactor(0),
+          );
         const name = parts.length > 1 ? `${key}_${i}` : key;
         doc
           .createScene()
@@ -294,6 +417,10 @@ if (invokedDirectly) {
         chunkIndex.push({
           chunk: name,
           origin: [originX, 0, originZ],
+          // Which WebP the renderer binds for this chunk. The texture is NOT
+          // embedded: one atlas serves many chunks across many maps, so it is
+          // fetched once and shared rather than duplicated into every GLB.
+          atlas: p.atlas || null,
           tris: Math.round(p.tris),
           bytes: statSync(outFile).size,
         });
@@ -324,4 +451,22 @@ if (invokedDirectly) {
   console.log(
     `\nbuild_map_chunks: ${summary.length} maps, ${total.chunks} chunks, ${(total.bytes / 1048576).toFixed(2)} MiB`,
   );
+  if (oversized.length) {
+    // Never silent: a dropped placement is art that will not appear, so it is
+    // named here rather than left to be noticed as a hole later.
+    const byName = new Map();
+    for (const [name, span, map] of oversized) {
+      const e = byName.get(name) ?? { n: 0, span: 0, maps: new Set() };
+      e.n++;
+      e.span = Math.max(e.span, span);
+      e.maps.add(map);
+      byName.set(name, e);
+    }
+    console.log(`  ${oversized.length} placements dropped as scenery larger than ${maxSpan} m:`);
+    for (const [name, e] of [...byName].sort((a, b) => b[1].span - a[1].span)) {
+      console.log(
+        `    ${name.padEnd(34)} x${String(e.n).padStart(3)}  up to ${String(e.span).padStart(6)} m  in ${[...e.maps].slice(0, 3).join(', ')}`,
+      );
+    }
+  }
 }

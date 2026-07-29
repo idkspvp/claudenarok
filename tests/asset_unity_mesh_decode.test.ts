@@ -13,6 +13,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   conformAttribute,
+  parseSubMeshes,
   snapTexcoordDust,
   UV_DUST_EPSILON,
 } from '../scripts/assets/unity_mesh_to_glb.mjs';
@@ -117,5 +118,72 @@ describe('conformAttribute fails closed', () => {
     expect(() => conformAttribute('TEXCOORD_2', new Float32Array([0, 0, 0, 0]), 4)).toThrow(
       /no glTF shape declared/,
     );
+  });
+});
+
+describe('parseSubMeshes', () => {
+  // A trimmed but structurally real m_SubMeshes block, in the field order Unity
+  // writes. Two submeshes over a 16-bit index buffer, so firstByte 120 is index
+  // 60 and the two ranges must tile the buffer with no gap.
+  const TWO_SUBMESHES = `
+  m_SubMeshes:
+  - serializedVersion: 2
+    firstByte: 0
+    indexCount: 60
+    topology: 0
+    baseVertex: 0
+    firstVertex: 0
+    vertexCount: 32
+  - serializedVersion: 2
+    firstByte: 120
+    indexCount: 36
+    topology: 0
+    baseVertex: 0
+    firstVertex: 32
+    vertexCount: 18
+  m_Shapes:
+    vertices: []
+`;
+
+  it('converts firstByte to an INDEX offset, not a byte offset', () => {
+    // The distinction is the whole bug risk here: read as indices, the second
+    // submesh would start at 120 and run off the end of a 96-index buffer.
+    const subs = parseSubMeshes(TWO_SUBMESHES, 96, 2);
+    expect(subs).toHaveLength(2);
+    expect(subs[0]).toMatchObject({ first: 0, count: 60 });
+    expect(subs[1]).toMatchObject({ first: 60, count: 36 });
+  });
+
+  it('scales the offset by the index width', () => {
+    // The same block over a 32-bit buffer puts the second range at 30.
+    const subs = parseSubMeshes(TWO_SUBMESHES, 96, 4);
+    expect(subs[1].first).toBe(30);
+  });
+
+  it('produces ranges that tile the buffer with no gap or overlap', () => {
+    const subs = parseSubMeshes(TWO_SUBMESHES, 96, 2);
+    const sorted = [...subs].sort((a, b) => a.first - b.first);
+    let cursor = 0;
+    for (const s of sorted) {
+      expect(s.first).toBe(cursor);
+      cursor += s.count;
+    }
+    expect(cursor).toBe(96);
+  });
+
+  it('falls back to one range covering everything when there is no table', () => {
+    // Absence must mean "one submesh", never "no geometry", or a mesh with an
+    // unparsable table would silently vanish.
+    const subs = parseSubMeshes('m_Name: Thing\n', 240, 2);
+    expect(subs).toEqual([{ first: 0, count: 240, topology: 0, baseVertex: 0 }]);
+  });
+
+  it('carries baseVertex through rather than dropping it', () => {
+    const block = TWO_SUBMESHES.replace(
+      'baseVertex: 0\n    firstVertex: 32',
+      'baseVertex: 32\n    firstVertex: 32',
+    );
+    const subs = parseSubMeshes(block, 96, 2);
+    expect(subs[1].baseVertex).toBe(32);
   });
 });
