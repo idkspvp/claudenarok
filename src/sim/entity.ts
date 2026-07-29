@@ -1,19 +1,19 @@
 import { aggregateCards, type CardDef } from './cards';
-import { attackIntervalSeconds, dualWieldBaseAmotion } from './combat/aspd';
 import { critRateFrom } from './combat/crit';
 import { aggregateGearEffects, type GearEffects } from './combat/gear_effects';
 import { fleeRating, hitRating, perfectDodgeChance } from './combat/hit_flee';
 import { BATTLE_STANCE, buildStanceAura } from './combat/warrior_stances';
+import { baseDelayFor } from './combat/weapon_speed_map';
 import { CARDS } from './content/cards';
 import { resolveActiveWeaponSkin } from './content/weapon_skin_rules';
 import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
-import { baseAmotionFor } from './job_aspd';
 import { baseHpAt, baseSpAt, JOB_VITALS } from './job_vitals';
 import type { PlayerModifiers } from './player_modifiers';
 import { pvpFractionsFromRatings } from './pvp';
 import { magicAttack, meleeAttack, rangedAttack } from './stats/attack';
+import { attackDelaySeconds, attackSpeed, DUAL_WIELD_MULTIPLIER } from './stats/attack_speed';
 import type {
   Entity,
   EquipSlot,
@@ -293,20 +293,18 @@ export function pctValue(value: number): number {
 // talent trees that used to populate most of it went in Phase D0, and what
 // remains is fed by augments and set bonuses.
 // The base attack motion for what this character is actually holding: the job's
-// row for the mainhand class, combined with the offhand's row when dual
-// wielding (seven tenths of the two ADDED, so two one-handers are slower than
-// either alone and faster than the two in sequence).
+// The base attack delay one swing uses, from the reference's per-WEAPON table
+// (combat/weapon_speed_map.ts joins our vocabulary to it). Dual wielding sums
+// both rows and takes four fifths, so two one-handers are slower than either
+// alone and faster than the two in sequence.
 //
-// An unarmed hand is a real row rather than a fallback: for four of the five
-// jobs it is the fastest option they have.
-function swingBaseAmotion(
-  cls: PlayerClass,
-  weapon: WeaponInfo,
-  offhandWeapon: WeaponInfo | null,
-): number {
-  const main = baseAmotionFor(cls, weapon.weaponType ?? null);
+// The job no longer enters. The table this replaces was two-dimensional, job by
+// weapon, so the same sword swung at different speeds in different hands; the
+// reference's is a single column and a sword is a sword.
+function swingBaseDelay(weapon: WeaponInfo, offhandWeapon: WeaponInfo | null): number {
+  const main = baseDelayFor(weapon.weaponType);
   if (!offhandWeapon) return main;
-  return dualWieldBaseAmotion(main, baseAmotionFor(cls, offhandWeapon.weaponType ?? null));
+  return (main + baseDelayFor(offhandWeapon.weaponType)) * DUAL_WIELD_MULTIPLIER;
 }
 
 export function recalcPlayerStats(
@@ -618,11 +616,15 @@ export function recalcPlayerStats(
   // The spread is load-bearing: `weapon` is the ITEM DEFINITION's object, shared
   // by every copy in the world, and writing a speed into it would hand the whole
   // server one character's Agility.
-  const swingSpeed = attackIntervalSeconds({
-    baseAmotion: swingBaseAmotion(cls, weapon, offhandWeapon),
-    agi: s.agi,
-    dex: s.dex,
-  });
+  // Attack speed on the reference's 200-point scale, then converted to the
+  // seconds-per-swing this engine's weapon.speed carries.
+  const swingSpeed = attackDelaySeconds(
+    attackSpeed({
+      agi: s.agi,
+      dex: s.dex,
+      bad: swingBaseDelay(weapon, offhandWeapon),
+    }),
+  );
   e.weapon = { ...weapon, speed: swingSpeed };
   // Both hands swing at the one combined cadence, which is already folded into
   // the base above.
