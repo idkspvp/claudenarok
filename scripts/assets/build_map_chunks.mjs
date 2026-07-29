@@ -209,8 +209,32 @@ if (invokedDirectly) {
               uv[v * 2 + 1] = rawUv[v * us + 1] ?? 0;
             }
           }
+
+          // COLOR_0 SURVIVES THE MERGE. The converter keeps it deliberately,
+          // because Synty shades with vertex colour and dropping it flattens the
+          // art, and this baker was then throwing it away again: 4.3% of the
+          // placed props carry it and 0 baked chunks did. Read as unsigned
+          // normalized, whatever width it came in at, and always stored RGBA.
+          const colAttr = prim.getAttribute('COLOR_0');
+          let color = null;
+          if (colAttr) {
+            const rawCol = colAttr.getArray();
+            const cs = ELEMENTS[colAttr.getType()] ?? 4;
+            const denom = colAttr.getNormalized()
+              ? rawCol.BYTES_PER_ELEMENT === 1
+                ? 255
+                : 65535
+              : 1;
+            color = new Float32Array(count * 4);
+            for (let v = 0; v < count; v++) {
+              color[v * 4] = (rawCol[v * cs] ?? denom) / denom;
+              color[v * 4 + 1] = (rawCol[v * cs + 1] ?? denom) / denom;
+              color[v * 4 + 2] = (rawCol[v * cs + 2] ?? denom) / denom;
+              color[v * 4 + 3] = cs > 3 ? (rawCol[v * cs + 3] ?? denom) / denom : 1;
+            }
+          }
           // In prefab m_Materials order, which is what lets each find its atlas.
-          parts.push({ position, normal, uv, indices: idx, count });
+          parts.push({ position, normal, uv, color, indices: idx, count });
         }
         // The prop's own longest side, over EVERY primitive: a bounding box from
         // prims[0] alone understates a multi-part model, and the skydome filter
@@ -269,7 +293,17 @@ if (invokedDirectly) {
       const bucketOf = (atlas) => {
         let b = buckets.get(atlas);
         if (!b) {
-          b = { atlas, pos: [], nrm: [], uv: [], idx: [], base: 0, tris: 0 };
+          b = {
+            atlas,
+            pos: [],
+            nrm: [],
+            uv: [],
+            col: [],
+            hasColor: false,
+            idx: [],
+            base: 0,
+            tris: 0,
+          };
           buckets.set(atlas, b);
         }
         return b;
@@ -356,6 +390,18 @@ if (invokedDirectly) {
                 b.nrm.push(n[0], n[1], n[2]);
               } else b.nrm.push(0, 1, 0);
               b.uv.push(part.uv ? part.uv[src * 2] : 0, part.uv ? part.uv[src * 2 + 1] : 0);
+              // White where a prop has no vertex colour, so a bucket mixing
+              // coloured and plain props stays uniform and the plain ones are
+              // unaffected by the multiply.
+              if (part.color) {
+                b.hasColor = true;
+                b.col.push(
+                  part.color[src * 4],
+                  part.color[src * 4 + 1],
+                  part.color[src * 4 + 2],
+                  part.color[src * 4 + 3],
+                );
+              } else b.col.push(1, 1, 1, 1);
             }
             b.idx.push(dst);
           }
@@ -395,6 +441,7 @@ if (invokedDirectly) {
           const pos = [];
           const nrm = [];
           const uv = [];
+          const col = [];
           const idx = [];
           for (const original of slice) {
             let next = remap.get(original);
@@ -404,10 +451,25 @@ if (invokedDirectly) {
               pos.push(b.pos[original * 3], b.pos[original * 3 + 1], b.pos[original * 3 + 2]);
               nrm.push(b.nrm[original * 3], b.nrm[original * 3 + 1], b.nrm[original * 3 + 2]);
               uv.push(b.uv[original * 2], b.uv[original * 2 + 1]);
+              col.push(
+                b.col[original * 4],
+                b.col[original * 4 + 1],
+                b.col[original * 4 + 2],
+                b.col[original * 4 + 3],
+              );
             }
             idx.push(next);
           }
-          parts.push({ atlas: b.atlas, pos, nrm, uv, idx, tris: idx.length / 3 });
+          parts.push({
+            atlas: b.atlas,
+            pos,
+            nrm,
+            uv,
+            col,
+            hasColor: b.hasColor,
+            idx,
+            tris: idx.length / 3,
+          });
         }
       }
       if (!parts.length) continue;
@@ -439,6 +501,15 @@ if (invokedDirectly) {
               .setRoughnessFactor(0.9)
               .setMetallicFactor(0),
           );
+        // Only where a prop in this bucket actually had vertex colour. Emitting
+        // it unconditionally would add four bytes per vertex across the whole
+        // bake to carry white on the 95.7% of props that have none.
+        if (p.hasColor) {
+          prim.setAttribute(
+            'COLOR_0',
+            doc.createAccessor().setType('VEC4').setArray(new Float32Array(p.col)).setBuffer(buf),
+          );
+        }
         const name = parts.length > 1 ? `${key}_${i}` : key;
         doc
           .createScene()

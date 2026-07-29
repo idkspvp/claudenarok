@@ -40,6 +40,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 import { dedup, meshopt, prune, resample } from '@gltf-transform/functions';
@@ -111,7 +112,11 @@ mkdirSync(outDir, { recursive: true });
 
 // Bundle the browser half exactly the way combine_fbx_to_glb.mjs does.
 const bundle = await esbuild.build({
-  entryPoints: [new URL('synty_props_entry.js', import.meta.url).pathname.replace(/^\//, '')],
+  // fileURLToPath, not `.pathname` with a leading slash stripped: that form is
+  // only correct on Windows, where the path really is /E:/... On macOS and Linux
+  // it turns an absolute /home/... into a relative home/..., and it never
+  // percent-decodes, so any directory with a space breaks it.
+  entryPoints: [fileURLToPath(new URL('synty_props_entry.js', import.meta.url))],
   bundle: true,
   format: 'iife',
   write: false,

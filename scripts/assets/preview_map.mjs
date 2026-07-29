@@ -13,6 +13,7 @@
 
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import * as esbuild from 'esbuild';
 import { BROWSER_PATH } from '../browser_path.mjs';
 
@@ -69,6 +70,9 @@ for (const c of chunks) {
   const d = atlasData(c.atlas);
   if (d) atlases[c.atlas] = d;
 }
+// Counted and REPORTED. These are the two numbers that say how much of the
+// preview is untextured, and computing them without printing them made the
+// render look authoritative while quietly hiding that some of it was not.
 const missingAtlas = chunks.filter((c) => c.atlas && !atlases[c.atlas]).length;
 const noAtlas = chunks.filter((c) => !c.atlas).length;
 
@@ -78,7 +82,11 @@ const terrainFile = flag('--terrain');
 const terrain = terrainFile ? readFileSync(terrainFile).toString('base64') : null;
 
 const bundle = await esbuild.build({
-  entryPoints: [new URL('preview_map_entry.js', import.meta.url).pathname.replace(/^\//, '')],
+  // fileURLToPath, not `.pathname` with a leading slash stripped: that form is
+  // only correct on Windows, where the path really is /E:/... On macOS and Linux
+  // it turns an absolute /home/... into a relative home/..., and it never
+  // percent-decodes, so any directory with a space breaks it.
+  entryPoints: [fileURLToPath(new URL('preview_map_entry.js', import.meta.url))],
   bundle: true,
   format: 'iife',
   write: false,
@@ -117,3 +125,8 @@ console.log(
     `${result.tris.toLocaleString('en-US')} tris, ${result.draws} meshes, ` +
     `${result.size.join(' x ')} m)`,
 );
+if (atlasDir && (missingAtlas || noAtlas)) {
+  console.log(
+    `  untextured: ${noAtlas} chunk(s) reference no atlas, ${missingAtlas} reference one that is missing on disk`,
+  );
+}

@@ -43,6 +43,45 @@ For reference-image reconstruction and procedural GLB authoring, read the living
   manifest, and re-pinning the sha256/fingerprint literals in tests, docs, and capture
   evidence JSONs in the same change.
 
+## The Unity map import (`unity_*`, `build_map_*`, `verify_map_bake`)
+A second, self-contained pipeline that turns SpiritVale's Unity maps into
+drawable world data. It does NOT go through `specs/*.json` or `build_assets.mjs`.
+Run in order; each step reads the previous step's output:
+
+| Step | Script | In / out |
+|---|---|---|
+| 1 | `unity_mesh_to_glb.mjs` | `.asset` mesh YAML -> prop GLBs + `manifest.json` |
+| 2 | `unity_map_layout.mjs` | map prefabs -> one placement JSON per map (`--guid-map`) |
+| 3 | `reduce_map_variety.mjs` | layouts -> layouts with fewer distinct meshes |
+| 4 | `unity_atlas_to_webp.mjs` | prefabs + layouts -> WebP atlases + `index.json` |
+| 5a | `build_map_instances.mjs` | layouts -> per-map instance batches (**prefer this**) |
+| 5b | `build_map_chunks.mjs` | layouts -> merged per-cell chunk GLBs |
+| 6 | `verify_map_bake.mjs` | a chunk dir -> pass/fail, non-zero on failure |
+| - | `unity_terrain_to_glb.mjs` | binary `TerrainData` -> ground meshes (38 of 53 maps) |
+| - | `preview_map.mjs` | a baked map -> a PNG a human can look at |
+
+**5a versus 5b is a real choice, not a preference.** Merging a cell into one
+buffer costs fewer draw calls but duplicates a mesh's geometry per placement, and
+every copy stays resident: Nevaris is 201 MiB of GPU memory merged against 17.58
+instanced. Instancing wins everywhere GPU memory is the binding constraint, which
+includes both Capacitor shells. Both must draw the SAME world, so the rules they
+share (which placements to skip, which atlas a submesh samples, which cell a prop
+is in) live in `map_placements.mjs` and are pinned by
+`tests/asset_map_placements.test.ts`; they currently agree on 30,820,661
+triangles across all 52 maps, and that equality is the check to re-run after
+touching either.
+
+**Every defect this pipeline has produced was SILENT**, and several rendered
+convincingly: local coordinates emitted as world, a stride-3 walk over 4-wide
+normals, a missing dequantize that made a map measure 255 km, a UV clamp
+justified by a measurement taken through the clamp itself. So:
+- Run `verify_map_bake.mjs` after any bake. It checks the properties a
+  plausible-looking wrong answer still fails (degenerate triangles, NaN,
+  out-of-range indices, extents, draw calls over a 3x3 neighbourhood).
+- Measure claims against the WRITTEN FILE, never the in-memory document.
+  `meshopt()` reorders vertices per primitive on write, which is not what the
+  code that produced them looks like.
+
 ## Relationship to the rest
 - **Output to `public/`** (the GLB/texture/HDRI tree the game loads at runtime).
 - **Runtime procedural generation** in `src/render/` is a *separate* path, most
