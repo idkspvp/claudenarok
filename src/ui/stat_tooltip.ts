@@ -12,7 +12,6 @@
 // recalcPlayerStats output so the numbers cannot silently drift.
 
 import { LUK_CRIT_PERMILLE } from '../sim/combat/crit';
-import { hardDefMultiplier } from '../sim/combat/defence';
 import { fleeRating, hitRating } from '../sim/combat/hit_flee';
 import { CLASSES } from '../sim/data';
 import {
@@ -22,6 +21,7 @@ import {
   statusRangedAttackPower,
   vitHealthMultiplier,
 } from '../sim/entity';
+import { damageReductionFraction } from '../sim/stats/defence_curve';
 import {
   type AuraKind,
   BASE_STAT,
@@ -343,10 +343,11 @@ export function buildStatTooltip(stat: StatId, input: StatTooltipInput): StatToo
       statValue = stats.armor;
       effects.push({
         kind: 'damageReduction',
-        // Ragnarok's hard DEF: a flat percentage from equipment that does NOT
-        // depend on who is attacking. The old curve normalized by the ATTACKER's
-        // level, so this line used to name one; there is no such reference now.
-        value: (1 - hardDefMultiplier(stats.armor)) * 100,
+        // The reduction the defence curve gives at this armour value
+        // (stats/defence_curve.ts, 100/(DEF + 100)). It depends on nothing but
+        // the defender: not the attacker's level, and not a cap. It also never
+        // reaches 100, which is the point of the curve.
+        value: damageReductionFraction(stats.armor) * 100,
       });
       break;
     }

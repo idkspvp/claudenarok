@@ -20,7 +20,6 @@
 // mastery (armorPct 0.10, vitPct 0.40, armorFromStrPct 0.70).
 
 import { describe, expect, it } from 'vitest';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import {
   NORMAL_DUNGEON_TUNING,
   type NormalDungeonTuning,
@@ -32,6 +31,7 @@ import {
   applyDungeonMobTuning,
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
+import { damageTakenFraction } from '../src/sim/stats/defence_curve';
 import { referenceArmorAt } from './helpers/reference_armor';
 
 const SANCTUM = 'gravewyrm_sanctum';
@@ -83,7 +83,7 @@ function sanctumTuning(): NormalDungeonTuning {
 function minSwingOnReferenceWarrior(mobId: string, level: number): number {
   const template = mobTemplateForDungeonDifficulty(MOBS[mobId], SANCTUM, 'normal');
   const mob = createMob(1, template, level, { x: 0, y: 0, z: 0 });
-  const afterArmor = Math.round(mob.weapon.min * hardDefMultiplier(REF_ARMOR));
+  const afterArmor = Math.round(mob.weapon.min * damageTakenFraction(REF_ARMOR));
   return Math.round(afterArmor * DEFENSIVE_STANCE_TAKEN);
 }
 

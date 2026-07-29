@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import { warriorParryChance } from '../src/sim/combat/warrior_hit_table';
 import { CLASSES } from '../src/sim/content/classes';
 import { ITEMS } from '../src/sim/data';
 import { recalcPlayerStats, statusMagicPower, statusRangedAttackPower } from '../src/sim/entity';
 import { baseHpAt, baseSpAt, JOB_VITALS } from '../src/sim/job_vitals';
 import { Sim } from '../src/sim/sim';
+import { damageReductionFraction } from '../src/sim/stats/defence_curve';
 import { ALL_CLASSES, type PlayerClass } from '../src/sim/types';
 import {
   agiMeleeApPerPoint,
@@ -120,7 +120,7 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
       it(`${cls} L${level}: armor cell damage reduction matches hard DEF`, () => {
         const p = freshPlayer(cls, level);
         const dr = effect(buildStatTooltip('armor', inputFor(cls, p)).effects, 'damageReduction');
-        expect(dr?.value).toBeCloseTo((1 - hardDefMultiplier(p.stats.armor)) * 100, 6);
+        expect(dr?.value).toBeCloseTo(damageReductionFraction(p.stats.armor) * 100, 6);
       });
     }
   }

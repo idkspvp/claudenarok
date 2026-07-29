@@ -14,7 +14,7 @@ import {
   SLOT_DEF_CEILING,
   slotDefends,
 } from '../src/sim/combat/armor_slot_def';
-import { MAX_HARD_DEF } from '../src/sim/combat/defence';
+import { damageReductionFraction } from '../src/sim/stats/defence_curve';
 
 describe('which slots defend', () => {
   it('gives every armour slot a ceiling and every other slot none', () => {
@@ -60,13 +60,17 @@ describe('legality', () => {
 });
 
 describe('what a character can reach', () => {
-  it('stays under total immunity', () => {
-    // The load-bearing one. Defence is a percentage here, so a best-in-slot
-    // total at or above the cap would mean a fully geared character takes
-    // nothing at all from a physical hit.
+  it('buys a real but partial reduction, nowhere near immunity', () => {
+    // This used to assert the best-in-slot total stayed under a hard cap of
+    // 100, because defence was a capped percentage and reaching the cap meant
+    // taking nothing. The curve has no cap, so the question is no longer "does
+    // it exceed a ceiling" but "is the reachable total in a sane band": enough
+    // to matter, far from the asymptote.
     const reachable = reachableDefCeiling();
     expect(reachable).toBeGreaterThan(0);
-    expect(reachable).toBeLessThan(MAX_HARD_DEF);
+    const reduction = damageReductionFraction(reachable);
+    expect(reduction, 'best-in-slot armour is worth having').toBeGreaterThan(0.1);
+    expect(reduction, 'and is nowhere near immunity').toBeLessThan(0.75);
   });
 
   it('is the sum of the worn slots, so it moves when a band moves', () => {

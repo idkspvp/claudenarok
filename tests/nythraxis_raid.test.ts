@@ -3,13 +3,13 @@ import { nextRaidResetMs } from '../server/raid_reset';
 import { visualKeyFor } from '../src/render/characters/manifest';
 import { dungeonDaisHasRaisedPlatform } from '../src/render/dungeon';
 import { isBlocked } from '../src/sim/colliders';
-import { applyDefence } from '../src/sim/combat/defence';
 import { DUNGEONS, ITEMS, instanceOrigin, MOBS } from '../src/sim/data';
 import { NYTHRAXIS_LAYOUT } from '../src/sim/dungeon_layout';
 import { nythraxisGravebreakerOnMobSwing } from '../src/sim/encounters/nythraxis';
 import { isShieldItem } from '../src/sim/equipment_rules';
 import { expectedStatBudget, itemLevel, primaryStatSum } from '../src/sim/item_level';
 import { Sim } from '../src/sim/sim';
+import { damageTakenFraction } from '../src/sim/stats/defence_curve';
 import { type Aura, dist2d, type Entity } from '../src/sim/types';
 import { groundHeight } from '../src/sim/world';
 import { expectAttributesLegal } from './helpers/item_stats';
@@ -615,13 +615,11 @@ describe('Nythraxis raid encounter', () => {
     const secondaryHit = gravebreakerHits.find((ev) => ev.targetId === secondary.id);
 
     // The swing target takes only the swing itself; the cone bystander takes
-    // 1.5x of the (un-crit) swing roll after their own defence step. The roll
-    // passed here is irrelevant to the answer: the player soft-DEF span is empty
-    // below roughly 60 Vitality, which no raid-test character reaches, so both
-    // ends of the range agree and the expectation stays exact.
-    const defence = { armor: sim.ctx.effectiveArmor(secondary), vit: secondary.stats.vit, roll: 0 };
-    expect(applyDefence(1, { ...defence, roll: 0 })).toBe(applyDefence(1, { ...defence, roll: 1 }));
-    const expected = Math.max(1, Math.round(applyDefence(1000 * 1.5, defence)));
+    // 1.5x of the (un-crit) swing roll after their own defence step. Defence is
+    // deterministic now (one curve, no random span), so the expectation is exact
+    // without needing to prove both ends of a roll agree.
+    const multiplier = damageTakenFraction(sim.ctx.effectiveArmor(secondary));
+    const expected = Math.max(1, Math.round(1000 * 1.5 * multiplier));
     expect(tankHit).toBeUndefined();
     expect(secondaryHit?.amount).toBe(expected);
   });

@@ -4,6 +4,12 @@
 // exists is that this game had them in the wrong sequence, with the attribute
 // chart applied before defence and the floor applied inside it, and no test
 // anywhere said what the sequence was supposed to be.
+//
+// Defence is now ONE multiplier (stats/defence_curve.ts, 100/(DEF + 100)) rather
+// than a capped percentage followed by a flat subtraction. That removes the
+// negative running total the old model produced, so the refine bonus is an
+// ordinary addition instead of a dig out of a hole. The floor, the chart's
+// position after defence, and the card step last are all unchanged.
 
 import { describe, expect, it } from 'vitest';
 import {
@@ -11,63 +17,78 @@ import {
   type PhysicalTail,
   resolvePhysicalTail,
 } from '../src/sim/combat/damage_pipeline';
+import { damageTakenFraction } from '../src/sim/stats/defence_curve';
 
 const base = (over: Partial<PhysicalTail> = {}): PhysicalTail => ({
   damage: 1000,
-  hardDefMultiplier: 1,
-  softDef: 0,
+  defenceMultiplier: 1,
   ...over,
 });
 
-describe('the two defence layers', () => {
-  it('takes the percentage first and the flat amount after', () => {
-    // 1000 -> 500 -> 450. The other order would give (1000-50)*0.5 = 475, which
-    // is soft defence scaling with armour: not what either layer is for.
-    expect(resolvePhysicalTail(base({ hardDefMultiplier: 0.5, softDef: 50 }))).toBe(450);
+describe('defence', () => {
+  it('is a single multiplier on the incoming hit', () => {
+    expect(resolvePhysicalTail(base({ defenceMultiplier: 0.5 }))).toBe(500);
+    expect(resolvePhysicalTail(base({ defenceMultiplier: 0.25 }))).toBe(250);
   });
 
-  it('skips both layers outright on a critical', () => {
-    expect(
-      resolvePhysicalTail(base({ hardDefMultiplier: 0.1, softDef: 900, ignoreDefence: true })),
-    ).toBe(1000);
+  it('is skipped outright when the hit ignores defence', () => {
+    expect(resolvePhysicalTail(base({ defenceMultiplier: 0.1, ignoreDefence: true }))).toBe(1000);
+  });
+
+  it('never eats a hit entirely, at any defence the curve can produce', () => {
+    // The reason the curve replaced the two-layer model. Under the old one, a
+    // flat soft-defence amount larger than the hit drove the running total
+    // negative and only the floor of 1 saved it; a capped percentage could take
+    // 100% outright. Neither can happen now: feed the pipeline a real curve
+    // value from any defence and something always lands.
+    for (const def of [0, 100, 250, 600, 5_000, 1e9]) {
+      const out = resolvePhysicalTail(
+        base({ damage: 10, defenceMultiplier: damageTakenFraction(def) }),
+      );
+      expect(out, `defence ${def}`).toBeGreaterThan(0);
+    }
   });
 });
 
 describe('refine, and the floor that follows it', () => {
-  it('adds against a NEGATIVE post-defence value rather than against the floor', () => {
-    // The load-bearing one. 100 damage into 900 flat defence is -800; a +40
-    // refine leaves it still under water, so the floor gives 1.
-    expect(resolvePhysicalTail(base({ damage: 100, softDef: 900, refineFlat: 40 }))).toBe(1);
-    // But refine that is big enough genuinely digs out, which is the whole
-    // reason over-refining a weapon matters against a heavily armoured target.
-    expect(resolvePhysicalTail(base({ damage: 100, softDef: 150, refineFlat: 90 }))).toBe(40);
-    // Floored BEFORE refine instead, the same hit would read 1 + 90 = 91.
+  it('adds after defence, so it is worth more against a heavily armoured target', () => {
+    // 100 damage through a 0.1 multiplier is 10; a +40 refine makes it 50. The
+    // same refine added BEFORE defence would give (100 + 40) * 0.1 = 14.
+    expect(resolvePhysicalTail(base({ damage: 100, defenceMultiplier: 0.1, refineFlat: 40 }))).toBe(
+      50,
+    );
   });
 
-  it('floors a hit that defence ate completely', () => {
-    expect(resolvePhysicalTail(base({ damage: 10, softDef: 500 }))).toBe(MIN_DAMAGE_AFTER_REFINE);
+  it('floors a hit the curve reduced below one', () => {
+    expect(resolvePhysicalTail(base({ damage: 10, defenceMultiplier: 0.01 }))).toBe(
+      MIN_DAMAGE_AFTER_REFINE,
+    );
   });
 });
 
 describe('the attribute chart', () => {
   it('runs AFTER defence, not before', () => {
-    // Half damage from the chart on a hit that armour already halved: 250, not
-    // "500 element then 500 defence" (which is the same here) but crucially not
-    // the pre-defence order once soft defence is involved, checked below.
-    const afterOrder = resolvePhysicalTail(
-      base({ hardDefMultiplier: 0.5, softDef: 100, elementMultiplier: 0.5 }),
+    // (1000 * 0.5) * 0.5 = 250. Same number either way with a pure multiplier,
+    // so the discriminating case is the one below, where refine sits between.
+    expect(resolvePhysicalTail(base({ defenceMultiplier: 0.5, elementMultiplier: 0.5 }))).toBe(250);
+  });
+
+  it('runs after REFINE too, which is what actually distinguishes the order', () => {
+    // (1000 * 0.5 + 100) * 0.5 = 300.
+    // Chart before refine would give 1000 * 0.5 * 0.5 + 100 = 350.
+    const out = resolvePhysicalTail(
+      base({ defenceMultiplier: 0.5, refineFlat: 100, elementMultiplier: 0.5 }),
     );
-    expect(afterOrder).toBe(200); // (1000*0.5 - 100) * 0.5
-    // Applied before defence the same numbers give (1000*0.5)*0.5 - 100 = 150.
-    expect(afterOrder).not.toBe(150);
+    expect(out).toBe(300);
+    expect(out).not.toBe(350);
   });
 
   it('is not stopped by the floor, so a hit can still turn into a heal', () => {
     // The floor sits between refine and the chart. A defender that absorbs the
-    // attribute gets healed even from a hit that defence had already reduced to
-    // the floor: negative out, and the caller decides what that means.
+    // attribute gets healed even from a hit defence had already reduced to the
+    // floor: negative out, and the caller decides what that means.
     const healed = resolvePhysicalTail(
-      base({ damage: 10, softDef: 500, elementMultiplier: -0.25 }),
+      base({ damage: 10, defenceMultiplier: 0.01, elementMultiplier: -0.25 }),
     );
     expect(healed).toBeLessThan(0);
     expect(healed).toBe(-0.25);
@@ -84,7 +105,7 @@ describe('cards, last', () => {
     // fifth of the raw swing.
     expect(
       resolvePhysicalTail(
-        base({ hardDefMultiplier: 0.5, elementMultiplier: 2, cardMultiplier: 1.2 }),
+        base({ defenceMultiplier: 0.5, elementMultiplier: 2, cardMultiplier: 1.2 }),
       ),
     ).toBe(1200);
   });

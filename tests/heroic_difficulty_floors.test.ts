@@ -14,7 +14,6 @@
 // so the armor step passes ~44.2% and the stance cut leaves ~39.8%.
 
 import { describe, expect, it } from 'vitest';
-import { hardDefMultiplier } from '../src/sim/combat/defence';
 import {
   HEROIC_DUNGEON_TUNING,
   NORMAL_DUNGEON_TUNING,
@@ -25,6 +24,7 @@ import {
   type HeroicSpawnRole,
   mobTemplateForDungeonDifficulty,
 } from '../src/sim/instances/difficulty';
+import { damageTakenFraction } from '../src/sim/stats/defence_curve';
 import type { DungeonDifficulty } from '../src/sim/types';
 import { referenceArmorAt } from './helpers/reference_armor';
 
@@ -76,7 +76,7 @@ function minSwing(
   const template = mobTemplateForDungeonDifficulty(MOBS[mobId], dungeonId, difficulty, role);
   const level = levelOverride ?? template.maxLevel;
   const mob = createMob(1, template, level, { x: 0, y: 0, z: 0 });
-  const afterArmor = Math.round(mob.weapon.min * hardDefMultiplier(REF_ARMOR));
+  const afterArmor = Math.round(mob.weapon.min * damageTakenFraction(REF_ARMOR));
   return Math.round(afterArmor * DEFENSIVE_STANCE_TAKEN);
 }
 

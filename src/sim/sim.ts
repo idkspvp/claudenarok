@@ -66,7 +66,6 @@ import {
 } from './combat/damage';
 import { damageTakenWithin } from './combat/damage_history';
 import { resolvePhysicalTail } from './combat/damage_pipeline';
-import { hardDefMultiplier, monsterSoftDef, playerSoftDef } from './combat/defence';
 import { runEffects as runEffectsImpl } from './combat/effect_dispatch';
 import { type Element, elementMultiplier } from './combat/elements';
 import { applyIgnite } from './combat/fire_mage';
@@ -81,7 +80,6 @@ import {
   hexOutputMult as hexOutputMultImpl,
 } from './combat/heal';
 import { advanceHeroicLeap } from './combat/heroic_leap';
-import { applyMagicDefence } from './combat/magic_defence';
 import { tickNaturesFury } from './combat/natures_fury';
 import { overRefineBonus, overRefineMax, refineFlatAtk } from './combat/refine';
 import * as resurrectionOfferMod from './combat/resurrection_offer';
@@ -353,6 +351,7 @@ import {
   revivePlayerAt,
   spawnOverworldSpiritHealers,
 } from './spirit';
+import { damageTakenFraction } from './stats/defence_curve';
 import type { WeaponLevel } from './types';
 import {
   rollWorldBossLoot as rollWorldBossLootImpl,
@@ -4680,15 +4679,11 @@ export class Sim {
     target: Entity,
     opts: { ignoreDefence?: boolean; attackElement?: Element } = {},
   ): number {
-    const roll = this.rng.next();
-    const vit = target.stats.vit;
-    const isMonster = target.kind !== 'player';
     const attackElement = opts.attackElement ?? this.attackElementOf(attacker);
     const cards = attacker?.cardBonuses;
     return resolvePhysicalTail({
       damage,
-      hardDefMultiplier: hardDefMultiplier(this.effectiveArmor(target)),
-      softDef: isMonster ? monsterSoftDef(vit, roll) : playerSoftDef(vit, roll),
+      defenceMultiplier: damageTakenFraction(this.effectiveArmor(target)),
       refineFlat: attacker ? this.weaponRefineFlat(attacker) : 0,
       elementMultiplier: elementMultiplier(
         attackElement,
@@ -4757,14 +4752,12 @@ export class Sim {
   // attribute chart. The reference runs `battle_attr_fix` on magic too, right
   // after magic defence (`battle.cpp:6238`), and a bolt is where the element
   // triangle matters most. Closing it needs an attribute on AbilityDef.
+  // Magic defence runs the SAME curve as physical, against MDEF instead of DEF
+  // (stats/defence_curve.ts). SpiritVale's MDEF has no Intelligence or Vitality
+  // term, so the flat layer those two used to buy is gone; Vitality's
+  // compensation is the health pool, wired later in this phase.
   private applyMagicDefence(damage: number, target: Entity): number {
-    return applyMagicDefence(damage, {
-      // Equipment magic defence. This was 0 while no field existed to feed it:
-      // the formula has been correct and inert since it was written.
-      mdef: target.stats.mdef,
-      int: target.stats.int,
-      vit: target.stats.vit,
-    });
+    return damage * damageTakenFraction(target.stats.mdef);
   }
 
   private effectiveAttackPower(e: Entity): number {
