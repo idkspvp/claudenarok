@@ -4749,16 +4749,20 @@ export const en: EnTranslations = {
     "statusShareUnsupported": "Sharing is not supported on this device."
   },
   "classes": {
-    "swordman": "Swordman",
-    "mage": "Mage",
-    "archer": "Archer",
+    "swordman": "Warrior",
+    "knight": "Knight",
+    "thief": "Rogue",
     "acolyte": "Acolyte",
-    "thief": "Thief",
-    "swordmanAria": "Swordman class",
-    "mageAria": "Mage class",
-    "archerAria": "Archer class",
+    "archer": "Scout",
+    "summoner": "Summoner",
+    "mage": "Mage",
+    "swordmanAria": "Warrior class",
+    "knightAria": "Knight class",
+    "thiefAria": "Rogue class",
     "acolyteAria": "Acolyte class",
-    "thiefAria": "Thief class"
+    "archerAria": "Scout class",
+    "summonerAria": "Summoner class",
+    "mageAria": "Mage class"
   },
   "controls": {
     "title": "Controls Guide",
@@ -5552,7 +5556,9 @@ export const en: EnTranslations = {
       "archer": "Ranged DPS",
       "thief": "Melee DPS",
       "acolyte": "Healer / Ranged DPS",
-      "mage": "Ranged DPS"
+      "mage": "Ranged DPS",
+      "knight": "Tank",
+      "summoner": "Pet DPS / Support"
     },
     "armor": {
       "chainLeatherCloth": "Chainmail, Leather, Cloth",
@@ -5565,6 +5571,7 @@ export const en: EnTranslations = {
       "axesSwords": "Axes, Swords",
       "daggersSwords": "Daggers, Swords",
       "staves": "Staves",
+      "spearsShields": "Spears, Shields",
       "macesAxes": "Maces, Axes"
     },
     "lore": {
@@ -5572,7 +5579,9 @@ export const en: EnTranslations = {
       "archer": "Archers are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.",
       "thief": "Thieves are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.",
       "acolyte": "Acolytes call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.",
-      "mage": "Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place."
+      "mage": "Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.",
+      "knight": "Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.",
+      "summoner": "Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds."
     },
     "aria": "Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.",
     "statBarAria": "{stat}: {value} out of 25"

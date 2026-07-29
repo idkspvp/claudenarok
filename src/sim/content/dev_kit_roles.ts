@@ -41,7 +41,15 @@ const CASTER = { int: 1, luk: 0.35, vit: 0.4 } as const;
 // Healers: intellect still leads but spirit matters far more than for a nuker.
 const HEALER = { int: 1, luk: 0.7, vit: 0.4 } as const;
 
+// The two conversion classes have no dev kit yet: a kit names a SPEC to gear
+// for, and neither has abilities until the skill trees are what the sim casts
+// from. An empty list is what /dev kit already does with an unknown role, so
+// this says the same thing out loud rather than adding a special case.
+const NO_DEV_KIT: readonly DevKitRole[] = [];
+
 export const DEV_KIT_ROLES: Readonly<Record<PlayerClass, readonly DevKitRole[]>> = Object.freeze({
+  knight: NO_DEV_KIT,
+  summoner: NO_DEV_KIT,
   swordman: [{ spec: 'swordman', weights: PHYS_STR, melee: true, hands: 'shield' }],
   archer: [{ spec: 'archer', weights: PHYS_AGI, melee: false }],
   thief: [{ spec: 'thief', weights: PHYS_AGI, melee: true, hands: 'dualWield' }],

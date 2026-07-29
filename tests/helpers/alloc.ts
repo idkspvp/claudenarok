@@ -85,6 +85,8 @@ export function levelWithStats(
  *  exists so tests can say what kind of build they mean, not so the game can. */
 const CLASS_PRIORITY: Readonly<Record<PlayerClass, readonly StatusStat[]>> = {
   swordman: ['str', 'vit'],
+  knight: ['vit', 'str'],
+  summoner: ['int', 'vit'],
   thief: ['agi', 'str'],
   archer: ['dex', 'agi'],
   acolyte: ['int', 'vit'],

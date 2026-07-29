@@ -119,6 +119,12 @@ export function rankAllowsMechChroma(granted: SkinRank, skin: number): boolean {
 // host-agnostic sim can validate a chosen skin index without importing render/.
 // tests/skin_event.test.ts asserts this stays in lockstep with SKINS.
 export const SKIN_COUNTS: Record<PlayerClass, number> = {
+  // The two conversion classes have no art yet, so they have no alternate skins
+  // either. Zero is not a placeholder: the renderer's SKINS map genuinely has no
+  // entry for them, and tests/skin_event.test.ts holds the two in lockstep, so a
+  // non-zero here would offer a skin that cannot be drawn.
+  knight: 0,
+  summoner: 0,
   swordman: 4,
   mage: 4,
   archer: 4,

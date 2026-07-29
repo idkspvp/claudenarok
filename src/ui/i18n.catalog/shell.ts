@@ -246,6 +246,8 @@ export const shellStrings = {
         thief: 'Melee DPS',
         acolyte: 'Healer / Ranged DPS',
         mage: 'Ranged DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Chainmail, Leather, Cloth',
@@ -258,6 +260,7 @@ export const shellStrings = {
         axesSwords: 'Axes, Swords',
         daggersSwords: 'Daggers, Swords',
         staves: 'Staves',
+        spearsShields: 'Spears, Shields',
         macesAxes: 'Maces, Axes',
       },
       lore: {
@@ -270,6 +273,10 @@ export const shellStrings = {
         acolyte:
           'Acolytes call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
         mage: 'Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.',
       statBarAria: '{stat}: {value} out of 25',
@@ -434,6 +441,8 @@ export const shellStrings = {
         thief: 'DPS cuerpo a cuerpo',
         acolyte: 'Sanador / DPS a distancia',
         mage: 'DPS a distancia',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Malla, cuero, tela',
@@ -446,6 +455,7 @@ export const shellStrings = {
         axesSwords: 'Hachas, espadas',
         daggersSwords: 'Dagas, espadas',
         staves: 'Báculos',
+        spearsShields: 'Báculos',
         macesAxes: 'Mazas, hachas',
       },
       lore: {
@@ -458,6 +468,10 @@ export const shellStrings = {
         acolyte:
           'Los sacerdotes invocan la Luz Sagrada para sanar y proteger aliados, mientras la magia de las Sombras drena la vida enemiga.',
         mage: 'Los magos moldean Fuego, Escarcha y magia Arcana para destruir enemigos, conjurar agua y congelar amenazas.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Detalles de clase para {className}: rol {role}. Atributos iniciales: Fuerza {str}, Agilidad {agi}, Aguante {sta}, Intelecto {int}, Espíritu {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -625,6 +639,8 @@ export const shellStrings = {
         thief: 'DPS cuerpo a cuerpo',
         acolyte: 'Sanador / DPS a distancia',
         mage: 'DPS a distancia',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Malla, cuero, tela',
@@ -637,6 +653,7 @@ export const shellStrings = {
         axesSwords: 'Hachas, espadas',
         daggersSwords: 'Dagas, espadas',
         staves: 'Báculos',
+        spearsShields: 'Báculos',
         macesAxes: 'Mazas, hachas',
       },
       lore: {
@@ -649,6 +666,10 @@ export const shellStrings = {
         acolyte:
           'Los sacerdotes invocan la Luz Sagrada para sanar y proteger aliados, mientras la magia de las Sombras drena la vida enemiga.',
         mage: 'Los magos moldean Fuego, Escarcha y magia Arcana para destruir enemigos, conjurar agua y congelar amenazas.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Detalles de clase para {className}: rol {role}. Atributos iniciales: Fuerza {str}, Agilidad {agi}, Aguante {sta}, Intelecto {int}, Espíritu {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -817,6 +838,8 @@ export const shellStrings = {
         thief: 'DPS mêlée',
         acolyte: 'Soigneur / DPS à distance',
         mage: 'DPS à distance',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Mailles, cuir, tissu',
@@ -829,6 +852,7 @@ export const shellStrings = {
         axesSwords: 'Haches, épées',
         daggersSwords: 'Dagues, épées',
         staves: 'Bâtons',
+        spearsShields: 'Bâtons',
         macesAxes: 'Masses, haches',
       },
       lore: {
@@ -841,6 +865,10 @@ export const shellStrings = {
         acolyte:
           "Les prêtres invoquent la Lumière sacrée pour soigner et protéger, tandis que l'Ombre draine la vie ennemie.",
         mage: "Les mages plient le Feu, le Givre et l'Arcane pour détruire, conjurer de l'eau et figer les menaces.",
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Détails de classe pour {className}: rôle {role}. Caractéristiques initiales: Force {str}, Agilité {agi}, Endurance {sta}, Intelligence {int}, Esprit {spi}.',
       statBarAria: '{stat}: {value} sur 25',
@@ -1009,6 +1037,8 @@ export const shellStrings = {
         thief: 'DPS mêlée',
         acolyte: 'Soigneur / DPS à distance',
         mage: 'DPS à distance',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Mailles, cuir, tissu',
@@ -1021,6 +1051,7 @@ export const shellStrings = {
         axesSwords: 'Haches, épées',
         daggersSwords: 'Dagues, épées',
         staves: 'Bâtons',
+        spearsShields: 'Bâtons',
         macesAxes: 'Masses, haches',
       },
       lore: {
@@ -1033,6 +1064,10 @@ export const shellStrings = {
         acolyte:
           "Les prêtres invoquent la Lumière sacrée pour soigner et protéger, tandis que l'Ombre draine la vie ennemie.",
         mage: "Les mages manipulent Feu, Givre et Arcane pour détruire, conjurer de l'eau et figer les menaces.",
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Détails de classe pour {className}: rôle {role}. Caractéristiques de départ: Force {str}, Agilité {agi}, Endurance {sta}, Intelligence {int}, Esprit {spi}.',
       statBarAria: '{stat}: {value} sur 25',
@@ -1213,6 +1248,8 @@ export const shellStrings = {
         thief: 'Melee DPS',
         acolyte: 'Healer / Ranged DPS',
         mage: 'Ranged DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Chainmail, Leather, Cloth',
@@ -1225,6 +1262,7 @@ export const shellStrings = {
         axesSwords: 'Axes, Swords',
         daggersSwords: 'Daggers, Swords',
         staves: 'Staves',
+        spearsShields: 'Spears, Shields',
         macesAxes: 'Maces, Axes',
       },
       lore: {
@@ -1237,6 +1275,10 @@ export const shellStrings = {
         acolyte:
           'Priests call on Holy Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
         mage: 'Mages bend Fire, Frost, and Arcane power to destroy enemies, conjure water, and freeze threats in place.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Class details for {className}: role {role}. Starting stats: Strength {str}, Agility {agi}, Stamina {sta}, Intellect {int}, Spirit {spi}.',
       statBarAria: '{stat}: {value} out of 25',
@@ -1403,6 +1445,8 @@ export const shellStrings = {
         thief: 'DPS da mischia',
         acolyte: 'Guaritore / DPS a distanza',
         mage: 'DPS a distanza',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Maglia, cuoio, stoffa',
@@ -1415,6 +1459,7 @@ export const shellStrings = {
         axesSwords: 'Asce, spade',
         daggersSwords: 'Pugnali, spade',
         staves: 'Bastoni',
+        spearsShields: 'Bastoni',
         macesAxes: 'Mazze, asce',
       },
       lore: {
@@ -1427,6 +1472,10 @@ export const shellStrings = {
         acolyte:
           "I sacerdoti invocano la Luce Sacra per curare e proteggere, mentre la magia d'Ombra prosciuga la vita nemica.",
         mage: 'I maghi manipolano Fuoco, Gelo e Arcano per distruggere, evocare acqua e congelare le minacce.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Dettagli classe per {className}: ruolo {role}. Statistiche iniziali: Forza {str}, Agilità {agi}, Tempra {sta}, Intelletto {int}, Spirito {spi}.',
       statBarAria: '{stat}: {value} su 25',
@@ -1595,6 +1644,8 @@ export const shellStrings = {
         thief: 'Nahkampf-DPS',
         acolyte: 'Heiler / Fernkampf-DPS',
         mage: 'Fernkampf-DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Kette, Leder, Stoff',
@@ -1607,6 +1658,7 @@ export const shellStrings = {
         axesSwords: 'Äxte, Schwerter',
         daggersSwords: 'Dolche, Schwerter',
         staves: 'Stäbe',
+        spearsShields: 'Stäbe',
         macesAxes: 'Streitkolben, Äxte',
       },
       lore: {
@@ -1619,6 +1671,10 @@ export const shellStrings = {
         acolyte:
           'Priester rufen das Heilige Licht, um Verbündete zu heilen und zu schützen, während Schattenmagie Gegnern Leben entzieht.',
         mage: 'Magier formen Feuer, Frost und Arkane Macht, um Gegner zu vernichten, Wasser zu beschwören und Bedrohungen einzufrieren.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Klassendetails für {className}: Rolle {role}. Startwerte: Stärke {str}, Beweglichkeit {agi}, Ausdauer {sta}, Intelligenz {int}, Willenskraft {spi}.',
       statBarAria: '{stat}: {value} von 25',
@@ -1784,6 +1840,8 @@ export const shellStrings = {
         thief: '近战 DPS',
         acolyte: '治疗 / 远程 DPS',
         mage: '远程 DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: '锁甲、皮甲、布甲',
@@ -1796,6 +1854,7 @@ export const shellStrings = {
         axesSwords: '斧、剑',
         daggersSwords: '匕首、剑',
         staves: '法杖',
+        spearsShields: '法杖',
         macesAxes: '锤、斧',
       },
       lore: {
@@ -1805,6 +1864,10 @@ export const shellStrings = {
         thief: '潜行者是隐秘刺客，消耗能量和连击点，从阴影中发动背刺与终结技。',
         acolyte: '牧师召唤圣光治疗并保护盟友，也能用暗影魔法汲取敌人的生命。',
         mage: '法师操纵火焰、冰霜与奥术来毁灭敌人，召唤清水，并冻结威胁。',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: '{className} 职业详情：职责 {role}。初始属性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。',
       statBarAria: '{stat}：{value}/25',
@@ -1964,6 +2027,8 @@ export const shellStrings = {
         thief: '近戰 DPS',
         acolyte: '治療 / 遠程 DPS',
         mage: '遠程 DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: '鎖甲、皮甲、布甲',
@@ -1976,6 +2041,7 @@ export const shellStrings = {
         axesSwords: '斧、劍',
         daggersSwords: '匕首、劍',
         staves: '法杖',
+        spearsShields: '法杖',
         macesAxes: '錘、斧',
       },
       lore: {
@@ -1985,6 +2051,10 @@ export const shellStrings = {
         thief: '盜賊是隱密刺客，消耗能量與連擊點，從陰影中施展背刺與終結技。',
         acolyte: '牧師召喚聖光治療並保護盟友，也能以暗影魔法汲取敵人的生命。',
         mage: '法師操縱火焰、冰霜與祕法來毀滅敵人，召喚清水並凍結威脅。',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: '{className} 職業詳情：職責 {role}。初始屬性：力量 {str}，敏捷 {agi}，耐力 {sta}，智力 {int}，精神 {spi}。',
       statBarAria: '{stat}：{value}/25',
@@ -2145,6 +2215,8 @@ export const shellStrings = {
         thief: '근접 DPS',
         acolyte: '치유 / 원거리 DPS',
         mage: '원거리 DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: '사슬, 가죽, 천',
@@ -2157,6 +2229,7 @@ export const shellStrings = {
         axesSwords: '도끼, 검',
         daggersSwords: '단검, 검',
         staves: '지팡이',
+        spearsShields: '지팡이',
         macesAxes: '둔기, 도끼',
       },
       lore: {
@@ -2169,6 +2242,10 @@ export const shellStrings = {
         acolyte:
           '사제는 성스러운 빛으로 아군을 치유하고 보호하며, 암흑 마법으로 적의 생명력을 흡수합니다.',
         mage: '마법사는 화염, 냉기, 비전의 힘으로 적을 파괴하고 물을 만들어내며 위협을 얼립니다.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: '{className} 직업 세부 정보: 역할 {role}. 시작 능력치: 힘 {str}, 민첩 {agi}, 체력 {sta}, 지능 {int}, 정신력 {spi}.',
       statBarAria: '{stat}: {value}/25',
@@ -2333,6 +2410,8 @@ export const shellStrings = {
         thief: '近接DPS',
         acolyte: 'ヒーラー / 遠隔DPS',
         mage: '遠隔DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: '鎖、革、布',
@@ -2345,6 +2424,7 @@ export const shellStrings = {
         axesSwords: '斧、剣',
         daggersSwords: '短剣、剣',
         staves: '杖',
+        spearsShields: '杖',
         macesAxes: 'メイス、斧',
       },
       lore: {
@@ -2355,6 +2435,10 @@ export const shellStrings = {
           'ローグはエネルギーとコンボポイントを使い、影から奇襲と決め技を放つ隠密の暗殺者です。',
         acolyte: 'プリーストは聖なる光で味方を癒やして守り、影の魔法で敵の生命力を吸い取ります。',
         mage: 'メイジは火炎、氷霜、秘術の力で敵を破壊し、水を作り出し、脅威を凍らせます。',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: '{className}のクラス詳細: 役割 {role}。開始ステータス: 筋力 {str}、敏捷性 {agi}、耐久力 {sta}、知力 {int}、精神力 {spi}。',
       statBarAria: '{stat}: {value}/25',
@@ -2520,6 +2604,8 @@ export const shellStrings = {
         thief: 'DPS corpo a corpo',
         acolyte: 'Curador / DPS à distância',
         mage: 'DPS à distância',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Malha, couro, tecido',
@@ -2532,6 +2618,7 @@ export const shellStrings = {
         axesSwords: 'Machados, espadas',
         daggersSwords: 'Adagas, espadas',
         staves: 'Cajados',
+        spearsShields: 'Cajados',
         macesAxes: 'Maças, machados',
       },
       lore: {
@@ -2544,6 +2631,10 @@ export const shellStrings = {
         acolyte:
           'Sacerdotes invocam a Luz Sagrada para curar e proteger aliados, enquanto a magia Sombria drena a vida dos inimigos.',
         mage: 'Magos manipulam Fogo, Gelo e Arcano para destruir inimigos, conjurar água e congelar ameaças.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Detalhes de classe para {className}: função {role}. Atributos iniciais: Força {str}, Agilidade {agi}, Vigor {sta}, Intelecto {int}, Espírito {spi}.',
       statBarAria: '{stat}: {value} de 25',
@@ -2711,6 +2802,8 @@ export const shellStrings = {
         thief: 'Ближний DPS',
         acolyte: 'Лекарь / дальний DPS',
         mage: 'Дальний DPS',
+        knight: 'Tank',
+        summoner: 'Pet DPS / Support',
       },
       armor: {
         chainLeatherCloth: 'Кольчуга, кожа, ткань',
@@ -2723,6 +2816,7 @@ export const shellStrings = {
         axesSwords: 'Топоры, мечи',
         daggersSwords: 'Кинжалы, мечи',
         staves: 'Посохи',
+        spearsShields: 'Посохи',
         macesAxes: 'Дробящее, топоры',
       },
       lore: {
@@ -2734,6 +2828,10 @@ export const shellStrings = {
         acolyte:
           'Жрецы призывают Святой Свет для исцеления и защиты союзников, а магия Тьмы вытягивает жизнь врагов.',
         mage: 'Маги управляют огнем, льдом и тайной магией, уничтожают врагов, создают воду и замораживают угрозы.',
+        knight:
+          'Knights hold the line with spear and shield, taunting foes onto themselves and turning damage back on whoever dealt it.',
+        summoner:
+          'Summoners fight through the creatures they call: an angel, a wolf, a cat, a cactus, bound one at a time and empowered by shared bonds.',
       },
       aria: 'Описание класса {className}: роль {role}. Начальные характеристики: Сила {str}, Ловкость {agi}, Выносливость {sta}, Интеллект {int}, Дух {spi}.',
       statBarAria: '{stat}: {value} из 25',

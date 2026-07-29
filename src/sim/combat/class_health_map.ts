@@ -27,6 +27,8 @@ import type { PlayerClass } from '../types';
 /** Reference health multipliers, keyed by this game's classes. */
 export const CLASS_HEALTH_MULTIPLIER: Readonly<Record<PlayerClass, number>> = {
   swordman: 1.3,
+  knight: 1.0,
+  summoner: 0.7,
   thief: 0.85,
   acolyte: 0.75,
   archer: 0.7,

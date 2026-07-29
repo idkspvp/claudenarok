@@ -3,6 +3,7 @@
 // forced grinding. These tests are content-shape tests: they run against
 // whatever the content modules currently export, so they hold as zones grow.
 import { describe, expect, it } from 'vitest';
+import { isStartableJob } from '../src/sim/content/jobs';
 import {
   ABILITIES,
   ALL_RECIPES,
@@ -143,7 +144,11 @@ describe('content referential integrity', () => {
 
   it('class kits fit the 12-slot action bar and ranks are ordered', () => {
     for (const def of Object.values(CLASSES)) {
-      expect(def.abilities.length).toBeGreaterThan(0);
+      // A STARTABLE class must have a kit: a character created with no abilities
+      // cannot play. A class that ships unstartable while its kit is authored
+      // (knight, summoner) legitimately has none yet, and content/jobs.ts is the
+      // one place that says which is which.
+      if (isStartableJob(def.id)) expect(def.abilities.length, def.id).toBeGreaterThan(0);
       for (const id of def.abilities) {
         const ab = ABILITIES[id];
         expect(ab, `ability ${id} of ${def.id}`).toBeTruthy();

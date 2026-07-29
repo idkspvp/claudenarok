@@ -33,6 +33,10 @@ export const CLASS_OPENING_ATTRIBUTES: Readonly<
 > = {
   // Warrior
   swordman: { str: 12, vit: 9, agi: 9, dex: 1, int: 1, luk: 1 },
+  // Knight
+  knight: { vit: 12, str: 9, dex: 9, agi: 1, int: 1, luk: 1 },
+  // Summoner
+  summoner: { int: 12, str: 9, vit: 9, agi: 1, dex: 1, luk: 1 },
   // Rogue
   thief: { agi: 12, str: 9, dex: 9, vit: 1, int: 1, luk: 1 },
   // Acolyte

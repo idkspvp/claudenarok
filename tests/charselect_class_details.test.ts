@@ -23,9 +23,14 @@ describe('character-select class details parity', () => {
     describe(cls, () => {
       const picks = SIGNATURE_ABILITIES[cls];
 
-      it('lists three signature abilities', () => {
-        expect(picks).toHaveLength(3);
-        expect(new Set(picks).size).toBe(3); // no duplicates
+      it('lists three signature abilities, or none while the class has no kit', () => {
+        // A class with no authored abilities cannot name three of them, and
+        // borrowing another class's would put a Warrior's kit on a Knight's
+        // select screen. Those classes are unstartable, so the screen never
+        // shows the empty list; when their kits land this returns to three.
+        const hasKit = CLASSES[cls].abilities.length > 0;
+        expect(picks).toHaveLength(hasKit ? 3 : 0);
+        expect(new Set(picks).size).toBe(picks.length); // no duplicates
       });
 
       for (const id of picks) {

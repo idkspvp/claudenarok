@@ -146,20 +146,34 @@ export const DELVE_COMPANION_HEAL_INTERVAL = 3;
 // PET_TELEPORT_DISTANCE (the pet/companion last-resort heel warp) was relocated to this
 // module by P1a (above); the I2c companion AI shares that same const, not re-declared here.
 
-// The five Ragnarok FIRST jobs, and only those. Second jobs are an advancement
-// recorded in content/jobs.ts, never a member here, which is what keeps every
-// Record<PlayerClass, X> table five entries wide instead of fifteen.
-export type PlayerClass = 'swordman' | 'mage' | 'archer' | 'acolyte' | 'thief';
+// The seven SpiritVale BASE classes, and only those. An advancement is recorded
+// in content/jobs.ts, never a member here, which is what keeps every
+// Record<PlayerClass, X> table seven entries wide instead of fifteen.
+//
+// Three ids predate the conversion and are frozen because saved characters carry
+// them: `swordman` is the Warrior, `thief` the Rogue, `archer` the Scout. The
+// display names live in content/jobs.ts and the skill trees record the same
+// pairing as their `archetype`.
+export type PlayerClass =
+  | 'swordman'
+  | 'knight'
+  | 'thief'
+  | 'acolyte'
+  | 'archer'
+  | 'summoner'
+  | 'mage';
 
 // Sanguine Aura's class-level melee recipient filter. It excludes the pure
-// casters and the Archer, whose primary attack loop is ranged.
-export const MELEE_CLASSES: ReadonlySet<PlayerClass> = new Set(['swordman', 'thief']);
+// casters and the Scout, whose primary attack loop is ranged. The Knight joins
+// the Warrior and the Rogue here: its whole published kit is spear and shield.
+export const MELEE_CLASSES: ReadonlySet<PlayerClass> = new Set(['swordman', 'knight', 'thief']);
 
-// Classes that command a persistent pet (the archer's beast, the frost mage's
-// Water Elemental). Pure predicate, here so the pet-command slice imports it
-// without a sim.ts cycle.
+// Classes that command a persistent pet (the Scout's beast, the frost Mage's
+// Water Elemental, and the Summoner, whose entire identity is its pets: four of
+// its nineteen published skills call one). Pure predicate, here so the
+// pet-command slice imports it without a sim.ts cycle.
 export function isPetClass(cls: PlayerClass): boolean {
-  return cls === 'archer' || cls === 'mage';
+  return cls === 'archer' || cls === 'mage' || cls === 'summoner';
 }
 // '1v1'/'2v2' are the ranked Ashen Coliseum ladders; 'fiesta' is the
 // dopamine-maxxed 2v2 party mode (score-based, respawns, augments, a shrinking
@@ -199,7 +213,17 @@ export interface ArenaCombatant {
   cls: PlayerClass;
   level: number;
 }
-export const ALL_CLASSES: PlayerClass[] = ['swordman', 'mage', 'archer', 'acolyte', 'thief'];
+// In the job tree's own order (content/jobs.ts), which is the order the
+// character-creation picker renders.
+export const ALL_CLASSES: PlayerClass[] = [
+  'swordman',
+  'knight',
+  'thief',
+  'acolyte',
+  'archer',
+  'summoner',
+  'mage',
+];
 export type ResourceType = 'rage' | 'mana' | 'energy';
 export const OVERHEAD_EMOTE_IDS = [
   'wave',

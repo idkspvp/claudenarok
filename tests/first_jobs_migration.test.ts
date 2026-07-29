@@ -26,8 +26,15 @@ describe('the class list the migration targets', () => {
 
   it('covers every pre-D1 class exactly once, so no saved character is missed', () => {
     const handled = [...RENAMED_CLASSES.map(([from]) => from), ...CUT_CLASSES];
-    const untouched = ALL_CLASSES.filter((c) => !RENAMED_CLASSES.some(([, to]) => to === c));
-    // mage is the one id that neither moved nor was cut.
+    // Classes that ARRIVED after D1 are out of the migration's scope by
+    // definition: no saved character can carry an id that did not exist when the
+    // save was written. Excluded by name rather than by a live list so a future
+    // class cannot silently widen what this claims to cover.
+    const POST_D1_CLASSES = ['knight', 'summoner'];
+    const untouched = ALL_CLASSES.filter(
+      (c) => !RENAMED_CLASSES.some(([, to]) => to === c) && !POST_D1_CLASSES.includes(c),
+    );
+    // mage is the one PRE-D1 id that neither moved nor was cut.
     expect(untouched).toEqual(['mage']);
     expect(new Set(handled).size).toBe(handled.length);
     expect([...handled, ...untouched].sort()).toEqual(

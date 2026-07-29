@@ -13,9 +13,11 @@ import type { PlayerClass } from '../src/sim/types';
 
 export const PLAYER_CLASSES: readonly PlayerClass[] = [
   'swordman',
-  'archer',
+  'knight',
   'thief',
   'acolyte',
+  'archer',
+  'summoner',
   'mage',
 ];
 

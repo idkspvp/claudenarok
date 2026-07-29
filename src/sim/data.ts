@@ -287,6 +287,12 @@ function mergeProps(sets: ZonePropsDef[]): ZonePropsDef {
 // Quest reward fallback by archetype: classes without an explicit entry use these.
 export const REWARD_ARCHETYPE: Record<PlayerClass, PlayerClass> = {
   swordman: 'swordman',
+  // The Knight shares the Warrior's reward pool and the Summoner the Mage's, the
+  // same grouping their loot archetype uses. A class of its own here would mean
+  // authoring a third and fourth reward set for two classes that wear the same
+  // armour as an existing one.
+  knight: 'swordman',
+  summoner: 'mage',
   thief: 'thief',
   archer: 'thief',
   mage: 'mage',

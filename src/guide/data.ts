@@ -13,13 +13,15 @@ export interface ClassChip {
   color: string;
 }
 
-// The five first jobs, in the job tree's own order (src/sim/content/jobs.ts).
+// The seven base classes, in the job tree own order (src/sim/content/jobs.ts).
 export const CLASS_CHIPS: ClassChip[] = [
   { id: 'swordman', nameKey: 'classes.swordman', color: '#d67a54' },
-  { id: 'mage', nameKey: 'classes.mage', color: '#33c1f1' },
-  { id: 'archer', nameKey: 'classes.archer', color: '#a6d84f' },
-  { id: 'acolyte', nameKey: 'classes.acolyte', color: '#c6d4f0' },
+  { id: 'knight', nameKey: 'classes.knight', color: '#9fb6d8' },
   { id: 'thief', nameKey: 'classes.thief', color: '#fcee58' },
+  { id: 'acolyte', nameKey: 'classes.acolyte', color: '#c6d4f0' },
+  { id: 'archer', nameKey: 'classes.archer', color: '#a6d84f' },
+  { id: 'summoner', nameKey: 'classes.summoner', color: '#9ad8b0' },
+  { id: 'mage', nameKey: 'classes.mage', color: '#33c1f1' },
 ];
 
 export interface ZoneTeaser {

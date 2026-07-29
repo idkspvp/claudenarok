@@ -20,6 +20,7 @@ const outFile = path.join(root, 'src', 'guide', 'content.generated.ts');
 
 const entrySource = `
   export { CLASSES, ABILITIES } from './src/sim/content/classes.ts';
+  export { isStartableJob } from './src/sim/content/jobs.ts';
   export { FINDER_CLASS_ROLES } from './src/sim/content/dungeon_finder.ts';
   export { ALL_CLASSES, FISHING_SESSION_CAP_SEC } from './src/sim/types.ts';
   export { ZONES, DUNGEONS, MOBS, CAMPS, DELVE_LIST, NPCS, ITEMS } from './src/sim/data.ts';
@@ -91,6 +92,7 @@ const built = await esbuild.build({
 const dataUrl = `data:text/javascript;base64,${Buffer.from(built.outputFiles[0].text).toString('base64')}`;
 const {
   CLASSES,
+  isStartableJob,
   ABILITIES,
   FINDER_CLASS_ROLES,
   ALL_CLASSES,
@@ -223,7 +225,11 @@ const mobVisualKey = (id) => visualKeyFor({ kind: 'mob', templateId: id });
 // (allAbilities) follows so every class icon is showcased.
 const SIGNATURE_COUNT = 6;
 
-const classes = ALL_CLASSES.map((id) => {
+// STARTABLE classes only, not every class in the union. The Guide is
+// player-facing: a page for a class nobody can create would document a kit that
+// does not exist yet. content/jobs.ts is the one place that says which is which,
+// so a class appears here the moment it becomes playable and not before.
+const classes = ALL_CLASSES.filter((id) => isStartableJob(id)).map((id) => {
   const def = CLASSES[id];
   // Roles come from the class-capability table the Dungeon Finder enforces. They
   // used to be derived from the class's specializations, which are retired.

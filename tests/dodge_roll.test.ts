@@ -14,7 +14,9 @@ import { Sim } from '../src/sim/sim';
 import type { Aura, Entity, PlayerClass } from '../src/sim/types';
 import { raisePool } from './helpers/sp';
 
-const ROLLS: Record<PlayerClass, string> = {
+// Partial on purpose: the two conversion classes have no abilities yet, so they
+// have no dodge roll to pin. A full Record would force a fabricated id here.
+const ROLLS: Partial<Record<PlayerClass, string>> = {
   swordman: 'bracing_roll',
   mage: 'phase_tumble',
   archer: 'wildstep',

@@ -119,6 +119,8 @@ export interface EntityTranslationFallback extends EntityTranslationManifestEntr
 }
 
 const CLASS_NAME_KEYS: Record<PlayerClass, string> = {
+  knight: 'classes.knight',
+  summoner: 'classes.summoner',
   swordman: 'classes.swordman',
   archer: 'classes.archer',
   thief: 'classes.thief',
@@ -127,6 +129,8 @@ const CLASS_NAME_KEYS: Record<PlayerClass, string> = {
 };
 
 const CLASS_DESCRIPTION_KEYS: Record<PlayerClass, string> = {
+  knight: 'classDetails.lore.knight',
+  summoner: 'classDetails.lore.summoner',
   swordman: 'classDetails.lore.swordman',
   archer: 'classDetails.lore.archer',
   thief: 'classDetails.lore.thief',

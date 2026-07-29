@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { isStartableJob } from '../src/sim/content/jobs';
 import {
   ABILITIES,
   abilitiesKnownAt,
@@ -91,9 +92,12 @@ function nearestMob(
   return best;
 }
 
-describe('the five first jobs', () => {
-  it('every class spawns with a working kit and stats', () => {
-    for (const cls of ALL_CLASSES) {
+describe('the base classes', () => {
+  it('every STARTABLE class spawns with a working kit and stats', () => {
+    // Only the startable ones. knight and summoner exist in the union and carry
+    // their archetype numbers, but their kit is the SpiritVale skill tree and
+    // the sim does not cast from it yet, so they have no abilities to resolve.
+    for (const cls of ALL_CLASSES.filter((c) => isStartableJob(c))) {
       const sim = new Sim({ seed: 42, playerClass: cls });
       const p = sim.player;
       expect(p.maxHp).toBeGreaterThan(30);

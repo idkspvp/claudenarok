@@ -39,10 +39,16 @@ export function isFinderRole(value: unknown): value is Role {
 // It used to apply only below the specialization unlock, with the committed
 // spec's role taking over above it; specs are retired (Phase D0), so the table
 // is the whole answer (see compatibleFinderRoles in ../social/dungeon_finder.ts).
+// This is a CAPABILITY table, not an availability one: it says what a class
+// could queue as, and whether anyone can BE that class is content/jobs.ts's
+// `startable`. So the two conversion classes are listed at their real roles even
+// while no character can be created as one.
 export const FINDER_CLASS_ROLES: Record<Role, readonly PlayerClass[]> = {
-  tank: ['swordman'],
+  // The Knight is the reference's dedicated tank: its published kit is spear and
+  // shield, with a taunt and a damage reflect.
+  tank: ['swordman', 'knight'],
   healer: ['acolyte'],
-  dps: ['swordman', 'archer', 'thief', 'acolyte', 'mage'],
+  dps: ['swordman', 'knight', 'archer', 'thief', 'acolyte', 'mage', 'summoner'],
 };
 
 export type FinderActivityKind = 'dungeon' | 'raid' | 'solo';

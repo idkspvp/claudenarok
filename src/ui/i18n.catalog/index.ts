@@ -436,16 +436,23 @@ export const en = {
     statusShareUnsupported: 'Sharing is not supported on this device.',
   },
   classes: {
-    swordman: 'Swordman',
-    mage: 'Mage',
-    archer: 'Archer',
+    // The KEY is the class id and is frozen (saved characters carry it); the
+    // VALUE is the display name, which the conversion moved onto the
+    // reference's own naming. content/jobs.ts holds the same pairing.
+    swordman: 'Warrior',
+    knight: 'Knight',
+    thief: 'Rogue',
     acolyte: 'Acolyte',
-    thief: 'Thief',
-    swordmanAria: 'Swordman class',
-    mageAria: 'Mage class',
-    archerAria: 'Archer class',
+    archer: 'Scout',
+    summoner: 'Summoner',
+    mage: 'Mage',
+    swordmanAria: 'Warrior class',
+    knightAria: 'Knight class',
+    thiefAria: 'Rogue class',
     acolyteAria: 'Acolyte class',
-    thiefAria: 'Thief class',
+    archerAria: 'Scout class',
+    summonerAria: 'Summoner class',
+    mageAria: 'Mage class',
   },
   controls: {
     title: 'Controls Guide',

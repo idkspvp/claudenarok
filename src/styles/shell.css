@@ -2677,11 +2677,8 @@
   .mini-class[data-class="swordman"] {
     --class-color: #d67a54;
   }
-  .mini-class[data-class="paladin"] {
-    --class-color: #f58ca0;
-  }
-  .mini-class[data-class="archer"] {
-    --class-color: #a6d84f;
+  .mini-class[data-class="knight"] {
+    --class-color: #9fb6d8;
   }
   .mini-class[data-class="thief"] {
     --class-color: #fcee58;
@@ -2689,17 +2686,14 @@
   .mini-class[data-class="acolyte"] {
     --class-color: #c6d4f0;
   }
-  .mini-class[data-class="shaman"] {
-    --class-color: #4e8aea;
+  .mini-class[data-class="archer"] {
+    --class-color: #a6d84f;
+  }
+  .mini-class[data-class="summoner"] {
+    --class-color: #9ad8b0;
   }
   .mini-class[data-class="mage"] {
     --class-color: #33c1f1;
-  }
-  .mini-class[data-class="warlock"] {
-    --class-color: #a785e6;
-  }
-  .mini-class[data-class="druid"] {
-    --class-color: #ff8c1a;
   }
 
   .mini-class {
@@ -5746,11 +5740,8 @@
   [data-class="swordman"] {
     --class-color: #d67a54;
   }
-  [data-class="paladin"] {
-    --class-color: #f58ca0;
-  }
-  [data-class="archer"] {
-    --class-color: #a6d84f;
+  [data-class="knight"] {
+    --class-color: #9fb6d8;
   }
   [data-class="thief"] {
     --class-color: #fcee58;
@@ -5758,17 +5749,14 @@
   [data-class="acolyte"] {
     --class-color: #c6d4f0;
   }
-  [data-class="shaman"] {
-    --class-color: #4e8aea;
+  [data-class="archer"] {
+    --class-color: #a6d84f;
+  }
+  [data-class="summoner"] {
+    --class-color: #9ad8b0;
   }
   [data-class="mage"] {
     --class-color: #33c1f1;
-  }
-  [data-class="warlock"] {
-    --class-color: #a785e6;
-  }
-  [data-class="druid"] {
-    --class-color: #ff8c1a;
   }
 
   /* Portrait chip, a class-ringed headshot rendered from the 3D model.

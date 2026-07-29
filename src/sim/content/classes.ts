@@ -304,6 +304,37 @@ export const CLASSES: Record<PlayerClass, ClassDef> = {
     ],
     color: 0xc6d4f0,
   },
+
+  // The two classes the conversion adds. Their kit is the SpiritVale skill tree
+  // (src/sim/content/skills/), which is data now but is not yet what the sim
+  // casts from, so `abilities` is EMPTY and both are deliberately not startable
+  // in content/jobs.ts. An empty legacy kit is the honest state: the alternative
+  // is borrowing another class's abilities, which would ship a Knight that plays
+  // as a Warrior and quietly become the thing everyone tunes against.
+  knight: {
+    id: 'knight',
+    name: 'Knight',
+    // The reference gives every class one pool. The remaining rage/energy
+    // classes are the ones that predate the conversion; a class added after it
+    // has no reason to inherit a resource the target game does not have.
+    resourceType: 'mana',
+    startWeapon: 'worn_sword',
+    startOffhand: 'eastbrook_buckler',
+    startChest: 'recruit_tunic',
+    startItems: START_RATIONS_MANA,
+    abilities: [],
+    color: 0x9fb6d8,
+  },
+  summoner: {
+    id: 'summoner',
+    name: 'Summoner',
+    resourceType: 'mana',
+    startWeapon: 'gnarled_staff',
+    startChest: 'apprentice_robe',
+    startItems: START_RATIONS_MANA,
+    abilities: [],
+    color: 0x9ad8b0,
+  },
 };
 
 // ---------------------------------------------------------------------------

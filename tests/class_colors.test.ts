@@ -20,6 +20,8 @@ import type { PlayerClass } from '../src/sim/types';
 // color fails loudly. Do not derive these from CLASSES: the pin IS the spec.
 const PALETTE: Record<PlayerClass, number> = {
   swordman: 0xd67a54,
+  knight: 0x9fb6d8,
+  summoner: 0x9ad8b0,
   mage: 0x33c1f1,
   archer: 0xa6d84f,
   acolyte: 0xc6d4f0,

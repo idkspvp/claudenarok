@@ -143,10 +143,12 @@ export interface CharacterSheet {
 }
 
 const CLASS_LABELS: Record<PlayerClass, string> = {
-  swordman: 'Swordman',
-  archer: 'Archer',
-  thief: 'Thief',
+  swordman: 'Warrior',
+  knight: 'Knight',
+  thief: 'Rogue',
   acolyte: 'Acolyte',
+  archer: 'Scout',
+  summoner: 'Summoner',
   mage: 'Mage',
 };
 

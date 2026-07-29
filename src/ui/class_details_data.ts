@@ -21,6 +21,18 @@ export interface ClassDetails {
 }
 
 export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
+  knight: {
+    roleKey: 'classDetails.roles.knight',
+    roleType: 'hybrid',
+    armorKey: 'classDetails.armor.chainLeatherCloth',
+    weaponsKey: 'classDetails.weapons.spearsShields',
+  },
+  summoner: {
+    roleKey: 'classDetails.roles.summoner',
+    roleType: 'ranged',
+    armorKey: 'classDetails.armor.cloth',
+    weaponsKey: 'classDetails.weapons.staves',
+  },
   swordman: {
     roleKey: 'classDetails.roles.swordman',
     roleType: 'hybrid',
@@ -57,6 +69,13 @@ export const CLASS_DETAILS: Record<PlayerClass, ClassDetails> = {
 // Each entry MUST be a real ability that the class can learn, enforced by
 // tests/charselect_class_details.test.ts so this never drifts from the sim.
 export const SIGNATURE_ABILITIES: Record<PlayerClass, string[]> = {
+  // The two conversion classes have no legacy abilities to name yet, and the
+  // pin in tests/charselect_class_details.test.ts requires every entry to be an
+  // ability the class can actually learn. An empty list is the only honest
+  // answer until their skill trees are what the sim casts from; naming another
+  // class's abilities would put a Warrior's kit on a Knight's select screen.
+  knight: [],
+  summoner: [],
   swordman: ['charge', 'heroic_strike', 'execute'],
   archer: ['serpent_sting', 'aimed_shot', 'arcane_shot'],
   thief: ['sinister_strike', 'eviscerate', 'evasion'],

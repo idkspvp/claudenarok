@@ -243,7 +243,11 @@ describe('cosmetic skin-select event', () => {
 
   it('SKIN_COUNTS stays in lockstep with the renderer SKINS manifest', () => {
     for (const cls of Object.keys(SKIN_COUNTS) as PlayerClass[]) {
-      expect(SKINS[`player_${cls}`]?.length, cls).toBe(SKIN_COUNTS[cls]);
+      // A class with no art has no SKINS entry at all, which reads as undefined
+      // rather than as an empty list. Zero is the count either way, and the
+      // point of the lockstep is that the sim never offers a skin the renderer
+      // cannot draw.
+      expect(SKINS[`player_${cls}`]?.length ?? 0, cls).toBe(SKIN_COUNTS[cls]);
     }
   });
 

@@ -8,6 +8,8 @@ import type { PlayerClass } from '../../types';
 
 const LOOT_ARCHETYPE: Record<PlayerClass, 'WAR' | 'ROG' | 'MAG'> = {
   swordman: 'WAR',
+  knight: 'WAR',
+  summoner: 'MAG',
   thief: 'ROG',
   archer: 'ROG',
   mage: 'MAG',
