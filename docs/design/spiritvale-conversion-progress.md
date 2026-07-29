@@ -13,7 +13,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 | 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
 | 1 | The stat core: six pure modules, no call sites | DONE | 6214a89..daa4ebd |
 | 2 | Wire the stat core, retire the Ragnarok one | DONE | 097b2ce..dfc8c58 |
-| 3 | Progression: cap 150, attribute ladder, job pools, refund | IN PROGRESS | |
+| 3 | Progression: cap 150, attribute ladder, job pools, refund | DONE | b719ec7..1d73e4b |
 | 4 | The seven base classes and the skill-tree window | NOT STARTED | |
 | 5 | Statuses and passives as data | NOT STARTED | |
 | 6 | Drops, artifacts, grimoires, gems, essence | NOT STARTED | |
@@ -131,6 +131,53 @@ perfect dodge (SpiritVale reads a plain gear stat; no item grants it until phase
 6, and switching now would delete the mechanic) and the resource TYPE branch
 (rage and energy still cap at 100; SpiritVale is all spell points, which is
 phase 4's business with the skills).
+
+### Phase 3
+Landed b719ec7..1d73e4b. Four modules under `src/sim/progression/`, each a pure
+leaf with its own test:
+
+  attributes.ts    grant bands and cost ladder
+  xp_curve.ts      the 150 transcribed literals + SPIRITVALE_MAX_LEVEL
+  class_blocks.ts  the per-class opening allocation
+  skill_points.ts  which pool pays for which tree
+
+THE BIGGEST CHANGE IS NOT IN THE PLAN'S WORDING: a character now opens with its
+CLASS BLOCK already spent (12 / 9 / 9 / 1 / 1 / 1, 27 points) and the block is
+not reallocatable. The model this replaces handed a new character a pile of
+unspent points and made the class mean nothing mechanically. Every status-point
+function is class-aware as a result, and the load path repairs a save sitting
+BELOW its class block upward rather than trusting it.
+
+Two stale defaults predating the class blocks were the real cause of most of the
+test churn in this phase, and both are now fixed rather than worked around: a
+new character's allocation in `sim.ts` was `emptyStatAllocation()` under a
+comment that already claimed otherwise, and `characterDerivedStats` fell back to
+the same. The shared test helper `tests/helpers/alloc.ts` takes an optional
+class for the same reason: any suite comparing against a path that runs
+`sanitizeStatAllocation` must seed from the block or the two sides disagree on
+the class's lead attributes and nothing else.
+
+THE JOB EXPERIENCE CURVE IS DELIBERATELY NOT CONVERTED. SpiritVale publishes
+none: no job table appears in any of its 28 data files, its page source, or the
+two community wikis. The formulas doc carries a well-evidenced hypothesis (job
+level reuses the base curve, one kill feeding both bars) and states its own
+unresolved gap, the RATIO between the two awards. The pools, the caps and the
+separation ARE published and are implemented; the curve and the per-kill award
+are left as they were. The advanced segment's twenty levels past the end of the
+table reuse the last published requirement, flat and obviously a stand-in.
+
+Also implemented: the free refund (`lowerStat`/`lowerRefund`), which stops at
+the class block, and the refund is the cost of the step being undone so raising
+and lowering are exactly reversible and no point can be laundered across a band.
+`lowerStat` crosses the wire rather than being a client edit because the SERVER
+holds the class, and the class is what sets the floor.
+
+The `IWorldStatusPoints` facet was back-filled into the parity pin, all seven
+members, which its own note in `tests/world_api_parity.test.ts` had asked a
+future change to do.
+
+Still open from phase 2, unchanged: the hit-contest SHAPE. Nothing in this phase
+touched it.
 
 ## Decisions taken mid-run
 
