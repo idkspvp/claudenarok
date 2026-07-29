@@ -142,13 +142,30 @@ if (invokedDirectly) {
         }
         const nodeNrm = normalMatrix(nodeMat);
 
-        // The exporter shares one set of attribute accessors across every
-        // primitive and varies only the indices, so the vertex arrays are decoded
-        // ONCE here and the primitives differ only in which triangles they claim.
-        const posAttr = prims[0].getAttribute('POSITION');
-        const nrmAttr = prims[0].getAttribute('NORMAL');
-        const uvAttr = prims[0].getAttribute('TEXCOORD_0');
-        if (posAttr) {
+        // EVERY PRIMITIVE IS DECODED FROM ITS OWN ACCESSORS.
+        //
+        // The exporter builds a mesh whose primitives share one set of attribute
+        // accessors and differ only in indices, and an earlier version of this
+        // decoded prims[0] once and applied every primitive's indices to it,
+        // saying so in a comment. That comment described the in-memory document,
+        // not the file: meshopt() reorders vertices PER PRIMITIVE on write, so
+        // the accessors are split by the time anything reads them back. Sampled
+        // over 600 shipped props, 0 of 42 multi-primitive meshes still share.
+        //
+        // Reading prims[0] for all of them was therefore wrong twice over. Where
+        // a later primitive's indices stayed in range, its triangles were welded
+        // from the wrong vertices; where they ran past (Back_16_0 has 237
+        // vertices in prims[0] and uses index 1469) the reads came back undefined
+        // and the triangles collapsed to a point. It cost 442,739 zero-area and
+        // ~219,000 mis-sourced triangles across the bake, concentrated in the
+        // multi-part building pieces, so castle walls lost their back faces.
+        const lo = [Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY, Number.POSITIVE_INFINITY];
+        const hi = [Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY, Number.NEGATIVE_INFINITY];
+        const parts = [];
+        for (const prim of prims) {
+          const posAttr = prim.getAttribute('POSITION');
+          const idx = prim.getIndices()?.getArray();
+          if (!posAttr || !idx) continue;
           const rawPos = posAttr.getArray();
           const ps = ELEMENTS[posAttr.getType()] ?? 3;
           const count = Math.floor(rawPos.length / ps);
@@ -158,8 +175,13 @@ if (invokedDirectly) {
             position[v * 3] = w[0];
             position[v * 3 + 1] = w[1];
             position[v * 3 + 2] = w[2];
+            for (let k = 0; k < 3; k++) {
+              if (w[k] < lo[k]) lo[k] = w[k];
+              if (w[k] > hi[k]) hi[k] = w[k];
+            }
           }
 
+          const nrmAttr = prim.getAttribute('NORMAL');
           let normal = null;
           if (nrmAttr) {
             const rawNrm = nrmAttr.getArray();
@@ -175,6 +197,7 @@ if (invokedDirectly) {
             }
           }
 
+          const uvAttr = prim.getAttribute('TEXCOORD_0');
           let uv = null;
           if (uvAttr) {
             const rawUv = uvAttr.getArray();
@@ -185,24 +208,14 @@ if (invokedDirectly) {
               uv[v * 2 + 1] = rawUv[v * us + 1] ?? 0;
             }
           }
-          // One index range per submesh, in the same order the prefab's
-          // m_Materials list uses, which is what lets each range find its atlas.
-          const parts = prims.map((p) => p.getIndices()?.getArray()).filter(Boolean);
-          // The prop's own longest side, so a placement's world size is this
-          // times its scale. Used to recognise skydome-scale scenery.
-          let span = 0;
-          for (let k = 0; k < 3; k++) {
-            let lo = Number.POSITIVE_INFINITY;
-            let hi = Number.NEGATIVE_INFINITY;
-            for (let v = 0; v < count; v++) {
-              const value = position[v * 3 + k];
-              if (value < lo) lo = value;
-              if (value > hi) hi = value;
-            }
-            if (hi - lo > span) span = hi - lo;
-          }
-          if (parts.length) geo = { position, normal, uv, parts, span };
+          // In prefab m_Materials order, which is what lets each find its atlas.
+          parts.push({ position, normal, uv, indices: idx, count });
         }
+        // The prop's own longest side, over EVERY primitive: a bounding box from
+        // prims[0] alone understates a multi-part model, and the skydome filter
+        // decides on it.
+        const span = Math.max(hi[0] - lo[0], hi[1] - lo[1], hi[2] - lo[2]);
+        if (parts.length) geo = { parts, span: Number.isFinite(span) ? span : 0 };
       }
     } catch {
       geo = null;
@@ -287,51 +300,53 @@ if (invokedDirectly) {
           ? [...p.mat.slice(0, 12), p.mat[12] - originX, p.mat[13], p.mat[14] - originZ, p.mat[15]]
           : trs([p.pos[0] - originX, p.pos[1], p.pos[2] - originZ], p.rot, p.scale);
         const nm = normalMatrix(m);
-        const count = geo.position.length / 3;
 
-        // Transform this placement's vertices once, then hand the SAME block to
-        // whichever buckets its submeshes belong to.
-        const wPos = new Float32Array(count * 3);
-        const wNrm = new Float32Array(count * 3);
-        for (let v = 0; v < count; v++) {
-          const w = applyMat(
-            m,
-            geo.position[v * 3],
-            geo.position[v * 3 + 1],
-            geo.position[v * 3 + 2],
-          );
-          wPos[v * 3] = w[0];
-          wPos[v * 3 + 1] = w[1];
-          wPos[v * 3 + 2] = w[2];
-          if (geo.normal) {
-            const n = applyDir(nm, geo.normal[v * 3], geo.normal[v * 3 + 1], geo.normal[v * 3 + 2]);
-            wNrm[v * 3] = n[0];
-            wNrm[v * 3 + 1] = n[1];
-            wNrm[v * 3 + 2] = n[2];
-          } else wNrm[v * 3 + 1] = 1;
-        }
-
+        // Each submesh transforms ITS OWN vertices. They cannot be transformed
+        // once up front and shared, because the primitives do not share a vertex
+        // array on disk (see loadProp).
         for (const [si, part] of geo.parts.entries()) {
           const b = bucketOf(atlasFor(p, si));
           // Only the vertices this submesh actually references travel into the
-          // bucket. Copying the whole block per submesh would duplicate the
-          // vertex payload once per atlas a prop spans, and leave most of each
-          // copy unreferenced, which nothing downstream removes.
+          // bucket, so a prop spanning two atlases does not copy its whole vertex
+          // block into each.
           const seen = new Map();
-          for (let i = 0; i < part.length; i++) {
-            const src = part[i];
+          for (let i = 0; i < part.indices.length; i++) {
+            const src = part.indices[i];
+            // A source index past this primitive's own vertex count would mean
+            // the file disagrees with itself. Refuse rather than read undefined
+            // and silently emit a collapsed triangle, which is exactly how the
+            // previous version failed.
+            if (src >= part.count) {
+              throw new Error(
+                `${p.name}: submesh ${si} index ${src} exceeds its ${part.count} vertices`,
+              );
+            }
             let dst = seen.get(src);
             if (dst === undefined) {
               dst = b.base + seen.size;
               seen.set(src, dst);
-              b.pos.push(wPos[src * 3], wPos[src * 3 + 1], wPos[src * 3 + 2]);
-              b.nrm.push(wNrm[src * 3], wNrm[src * 3 + 1], wNrm[src * 3 + 2]);
-              b.uv.push(geo.uv ? geo.uv[src * 2] : 0, geo.uv ? geo.uv[src * 2 + 1] : 0);
+              const w = applyMat(
+                m,
+                part.position[src * 3],
+                part.position[src * 3 + 1],
+                part.position[src * 3 + 2],
+              );
+              b.pos.push(w[0], w[1], w[2]);
+              if (part.normal) {
+                const n = applyDir(
+                  nm,
+                  part.normal[src * 3],
+                  part.normal[src * 3 + 1],
+                  part.normal[src * 3 + 2],
+                );
+                b.nrm.push(n[0], n[1], n[2]);
+              } else b.nrm.push(0, 1, 0);
+              b.uv.push(part.uv ? part.uv[src * 2] : 0, part.uv ? part.uv[src * 2 + 1] : 0);
             }
             b.idx.push(dst);
           }
           b.base += seen.size;
-          b.tris += part.length / 3;
+          b.tris += part.indices.length / 3;
         }
       }
 

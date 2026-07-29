@@ -93,6 +93,8 @@ if (invokedDirectly) {
   let emptyPrims = 0;
   let outOfRangeIndices = 0;
   let uvMissing = 0;
+  let degenerateTris = 0;
+  let trianglesChecked = 0;
   const worstCell = [];
   const hugeMaps = [];
   const perMap = [];
@@ -147,6 +149,31 @@ if (invokedDirectly) {
             }
           }
           const pa = pos.getArray();
+
+          // DEGENERATE TRIANGLES, which is the check this file was missing when
+          // it most mattered. The baker re-indexes densely on the way out, so a
+          // triangle welded from the wrong or out-of-range vertices arrives here
+          // with perfectly valid indices pointing at the wrong points. The only
+          // trace left is that it has no area. A bake carrying 442,739 collapsed
+          // triangles passed every other check in this file clean.
+          for (let i = 0; i + 2 < ia.length; i += 3) {
+            // Not named a/b/c: `c` is the chunk in the enclosing scope, and
+            // shadowing it here is a trap for the next reader.
+            const i0 = ia[i] * 3;
+            const i1 = ia[i + 1] * 3;
+            const i2 = ia[i + 2] * 3;
+            const ux = pa[i1] - pa[i0];
+            const uy = pa[i1 + 1] - pa[i0 + 1];
+            const uz = pa[i1 + 2] - pa[i0 + 2];
+            const vx = pa[i2] - pa[i0];
+            const vy = pa[i2 + 1] - pa[i0 + 1];
+            const vz = pa[i2 + 2] - pa[i0 + 2];
+            const cx = uy * vz - uz * vy;
+            const cy = uz * vx - ux * vz;
+            const cz = ux * vy - uy * vx;
+            trianglesChecked++;
+            if (Math.hypot(cx, cy, cz) * 0.5 < 1e-9) degenerateTris++;
+          }
           for (let i = 0; i < pa.length; i += 3) {
             for (let k = 0; k < 3; k++) {
               const v = pa[i + k] * s[k] + t[k] + c.origin[k];
@@ -194,6 +221,14 @@ if (invokedDirectly) {
     `${nonUnitNormals} non-unit, ${degenerateNormals} zero-length of ${normalsChecked.toLocaleString('en-US')}`,
   );
   report.assert('every primitive has texcoords', uvMissing === 0, `${uvMissing} without`);
+  // A handful of collapsed triangles is normal in source art; a percent of them
+  // is a welding defect. The bake this check was written for carried 1.43%.
+  const degeneratePct = trianglesChecked ? (degenerateTris / trianglesChecked) * 100 : 0;
+  report.assert(
+    'under 0.5% of triangles are degenerate',
+    degeneratePct < 0.5,
+    `${degenerateTris.toLocaleString('en-US')} of ${trianglesChecked.toLocaleString('en-US')} (${degeneratePct.toFixed(3)}%)`,
+  );
   report.assert(
     'map extents are plausible',
     hugeMaps.length === 0,
