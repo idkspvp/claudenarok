@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<!-- SpiritVale map walkthrough (dev tool, English-only like the music editor and
+     the perf overlay; never part of a production build, so it is deliberately
+     absent from the vite build inputs).
+
+     Loads a map baked by the offline Unity import pipeline
+     (scripts/assets/build_map_instances.mjs, staged into public/spiritvale by
+     scripts/assets/stage_spiritvale_map.mjs) and lets you walk around it. It
+     exists because no triangle count answers "does this world hold up when you
+     stand in it", which is the only question left once the numbers are green.
+
+     Stage a map first:
+       node scripts/assets/stage_spiritvale_map.mjs Sunny_Meadows_1
+     then open under npm run dev:
+       http://localhost:PORT/spiritvale_walk.html?map=Sunny_Meadows_1 -->
+<head>
+  <meta charset="utf-8" />
+  <title>SpiritVale walkthrough</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body { margin: 0; overflow: hidden; background: #10131a; }
+    canvas { display: block; }
+    #status {
+      position: fixed; left: 0; right: 0; top: 0; z-index: 10;
+      padding: 6px 10px; background: rgba(12, 14, 20, 0.72); color: #d7dae2;
+      font: 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
+      pointer-events: none; white-space: pre;
+    }
+    #help {
+      position: fixed; left: 10px; bottom: 10px; z-index: 10;
+      padding: 8px 10px; background: rgba(12, 14, 20, 0.72); color: #9aa3b2;
+      font: 12px/1.6 ui-monospace, Menlo, Consolas, monospace;
+      border-radius: 4px; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="status">starting...</div>
+  <div id="help">click to look &middot; WASD move &middot; shift run &middot; space jump &middot; F fly</div>
+  <script type="module" src="/src/spiritvale_walk.ts"></script>
+</body>
+</html>
