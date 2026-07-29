@@ -10,14 +10,14 @@
     "mobSwing affix cascade: rampage stacking buff_ap (warlord_drogmar self-buff)",
     "friendly-pet mobSwing: mob.hostile=false short-circuits every proc (no debuff on its target)"
   ],
-  "draws": 260,
-  "drawDigest": "c62aea8c",
+  "draws": 255,
+  "drawDigest": "a0d9f450",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "b4b133fc",
+      "state": "a409c5bc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -70,17 +70,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -103,14 +109,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -133,19 +139,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -156,44 +162,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 421,
-      "state": "b0f3b150",
-      "events": "911cb010",
+      "state": "3b240b2c",
+      "events": "29eef79d",
       "rng": {
-        "draws": 64,
-        "digest": "e3196e8b"
+        "draws": 58,
+        "digest": "54c982e9"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "1885c6ca",
-      "events": "4bd92602",
+      "state": "88984c15",
+      "events": "12235555",
       "rng": {
-        "draws": 109,
-        "digest": "bfc0b463"
+        "draws": 99,
+        "digest": "d7d725bd"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "2f5954dd",
-      "events": "1a410c4c",
+      "state": "6bca1dbe",
+      "events": "5cba9574",
       "rng": {
-        "draws": 238,
-        "digest": "b8f73495"
+        "draws": 233,
+        "digest": "c42a30b2"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "7e519673",
+      "state": "be935ffb",
       "events": "741638a5",
       "rng": {
-        "draws": 238,
-        "digest": "b8f73495"
+        "draws": 233,
+        "digest": "c42a30b2"
       },
       "label": "affixes",
       "players": [
@@ -212,7 +218,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1382
+            "damageTaken": 1357
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -265,19 +271,25 @@
             }
           ],
           "jobLevel": 1,
-          "lifetimeXp": 3337,
+          "jobTrack": "base",
+          "lifetimeXp": 110285,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 30,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 23,
           "auras": [
             {
               "duration": 3600,
@@ -287,16 +299,6 @@
               "remaining": 3597,
               "school": "physical",
               "sourceId": 414
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 9.05,
-              "school": "shadow",
-              "sourceId": 417,
-              "value": 120
             },
             {
               "duration": 1,
@@ -320,15 +322,6 @@
               "value": 2
             },
             {
-              "duration": 3,
-              "id": "ensnare_webwood_spider",
-              "kind": "root",
-              "name": "Sticky Web",
-              "remaining": 2.5,
-              "school": "nature",
-              "sourceId": 416
-            },
-            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -336,6 +329,16 @@
               "remaining": 3.5,
               "school": "shadow",
               "sourceId": 417
+            },
+            {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 9.5,
+              "school": "shadow",
+              "sourceId": 417,
+              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -349,7 +352,7 @@
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102,
-          "flee": 16,
+          "flee": 20,
           "hit": 43,
           "hp": 1000000,
           "id": 414,
@@ -357,7 +360,7 @@
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 542,
+          "maxHp": 585,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -371,7 +374,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 84.455556,
+          "resource": 82.927778,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -381,19 +384,19 @@
           },
           "spellPower": 6,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -458,7 +461,7 @@
               1
             ]
           ],
-          "wanderTimer": 3.676551,
+          "wanderTimer": 7.387893,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -658,7 +661,6 @@
           "flee": 9,
           "hit": 61,
           "id": 419,
-          "inCombat": true,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
@@ -690,7 +692,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 0.05,
+          "swingTimer": 1.8,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -700,7 +702,7 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 0.5,
+          "combatTimer": 0.75,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -744,9 +746,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 0.25,
+          "swingTimer": 2,
           "templateId": "forest_wolf",
-          "wanderTimer": 3.304453,
+          "wanderTimer": 7.498628,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -759,11 +761,11 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 421,
-      "state": "fc05b6b3",
+      "state": "b4e21570",
       "events": "741638a5",
       "rng": {
-        "draws": 260,
-        "digest": "c62aea8c"
+        "draws": 255,
+        "digest": "a0d9f450"
       },
       "label": "final",
       "players": [
@@ -782,7 +784,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1382
+            "damageTaken": 1357
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -835,19 +837,25 @@
             }
           ],
           "jobLevel": 1,
-          "lifetimeXp": 3337,
+          "jobTrack": "base",
+          "lifetimeXp": 110285,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 30,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 6,
+          "attackPower": 23,
           "auras": [
             {
               "duration": 3600,
@@ -857,16 +865,6 @@
               "remaining": 3596.8,
               "school": "physical",
               "sourceId": 414
-            },
-            {
-              "duration": 10,
-              "id": "heal_absorb_gravecaller_summoner",
-              "kind": "heal_absorb",
-              "name": "Grave Blight",
-              "remaining": 8.85,
-              "school": "shadow",
-              "sourceId": 417,
-              "value": 120
             },
             {
               "duration": 1,
@@ -890,15 +888,6 @@
               "value": 2
             },
             {
-              "duration": 3,
-              "id": "ensnare_webwood_spider",
-              "kind": "root",
-              "name": "Sticky Web",
-              "remaining": 2.3,
-              "school": "nature",
-              "sourceId": 416
-            },
-            {
               "duration": 4,
               "id": "silence_gravecaller_summoner",
               "kind": "silence",
@@ -906,6 +895,16 @@
               "remaining": 3.3,
               "school": "shadow",
               "sourceId": 417
+            },
+            {
+              "duration": 10,
+              "id": "heal_absorb_gravecaller_summoner",
+              "kind": "heal_absorb",
+              "name": "Grave Blight",
+              "remaining": 9.3,
+              "school": "shadow",
+              "sourceId": 417,
+              "value": 120
             }
           ],
           "blockChance": 0.05,
@@ -919,7 +918,7 @@
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102.2,
-          "flee": 16,
+          "flee": 20,
           "hit": 43,
           "hp": 1000000,
           "id": 414,
@@ -927,7 +926,7 @@
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 542,
+          "maxHp": 585,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -941,7 +940,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 84.455556,
+          "resource": 82.927778,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -951,19 +950,19 @@
           },
           "spellPower": 6,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1028,7 +1027,7 @@
               1
             ]
           ],
-          "wanderTimer": 3.676551,
+          "wanderTimer": 7.387893,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -1228,7 +1227,6 @@
           "flee": 9,
           "hit": 61,
           "id": 419,
-          "inCombat": true,
           "kind": "mob",
           "level": 8,
           "lootFfaTimer": "Infinity",
@@ -1260,7 +1258,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 0.05,
+          "swingTimer": 1.8,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -1270,7 +1268,7 @@
         },
         {
           "aiState": "idle",
-          "combatTimer": 0.7,
+          "combatTimer": 0.95,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1314,9 +1312,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 0.25,
+          "swingTimer": 2,
           "templateId": "forest_wolf",
-          "wanderTimer": 3.104453,
+          "wanderTimer": 7.298628,
           "weapon": {
             "max": 12,
             "min": 9,

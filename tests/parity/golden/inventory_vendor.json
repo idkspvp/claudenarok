@@ -35,7 +35,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "58afa0f8",
+      "state": "ede23c1e",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -88,17 +88,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -121,14 +127,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -151,19 +157,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -174,7 +180,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "7274434b",
+      "state": "58792cfd",
       "events": "a7437bc3",
       "rng": {
         "draws": 0,
@@ -237,17 +243,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -270,14 +282,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -300,19 +312,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -323,7 +335,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "c78f9c81",
+      "state": "46b19f47",
       "events": "2f90915c",
       "rng": {
         "draws": 0,
@@ -393,17 +405,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -426,14 +444,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -456,19 +474,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 3,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -479,7 +497,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "5a2f016b",
+      "state": "15908e01",
       "events": "0327d8d2",
       "rng": {
         "draws": 0,
@@ -549,17 +567,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -582,19 +606,19 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "stun": 0.1
             }
           },
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -617,19 +641,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 3,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -640,7 +664,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "f7dd9009",
+      "state": "854c17b3",
       "events": "05a2e7ef",
       "rng": {
         "draws": 0,
@@ -713,17 +737,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -746,14 +776,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -776,19 +806,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -799,7 +829,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "eee1c263",
+      "state": "b0da0cbb",
       "events": "50476f57",
       "rng": {
         "draws": 0,
@@ -872,17 +902,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -917,14 +953,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -948,19 +984,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -971,7 +1007,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "f6c1b08a",
+      "state": "dd829586",
       "events": "48d62b08",
       "rng": {
         "draws": 0,
@@ -1040,17 +1076,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1085,14 +1127,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1116,19 +1158,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1139,7 +1181,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "646f5e6c",
+      "state": "c8daaedb",
       "events": "23108065",
       "rng": {
         "draws": 0,
@@ -1209,17 +1251,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1264,14 +1312,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1295,19 +1343,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1318,7 +1366,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "6a9ffaed",
+      "state": "7ee8f5ce",
       "events": "40a1b1bf",
       "rng": {
         "draws": 0,
@@ -1392,17 +1440,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1447,14 +1501,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1478,19 +1532,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1501,7 +1555,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "e16d5ad2",
+      "state": "33d568bd",
       "events": "33dada5a",
       "rng": {
         "draws": 0,
@@ -1580,17 +1634,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1635,14 +1695,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1666,19 +1726,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1689,7 +1749,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "e497c965",
+      "state": "affc29e0",
       "events": "2aef6bf0",
       "rng": {
         "draws": 0,
@@ -1768,10 +1828,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -1784,7 +1850,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1829,14 +1895,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1860,19 +1926,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1883,7 +1949,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "ef8dffd6",
+      "state": "67265c1b",
       "events": "b625c321",
       "rng": {
         "draws": 0,
@@ -1963,10 +2029,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -1983,7 +2055,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -2028,14 +2100,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2059,19 +2131,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -2082,7 +2154,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "1badd37f",
+      "state": "23ef2e3c",
       "events": "b41bba55",
       "rng": {
         "draws": 0,
@@ -2162,10 +2234,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -2178,7 +2256,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -2223,14 +2301,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2254,19 +2332,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -2277,7 +2355,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "1badd37f",
+      "state": "23ef2e3c",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2357,10 +2435,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {},
           "vendorBuyback": [
             {
@@ -2373,7 +2457,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -2418,14 +2502,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 239,
+          "hp": 256,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 239,
+          "maxHp": 256,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2449,19 +2533,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 13
+            "str": 12,
+            "vit": 21
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }

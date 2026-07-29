@@ -31,7 +31,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "578ebe52",
+      "state": "d79a95d2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -83,10 +83,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -132,10 +138,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -185,17 +197,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -218,7 +236,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -247,26 +265,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -277,8 +295,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -292,7 +310,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -313,14 +331,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -328,14 +346,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -345,20 +363,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -369,7 +387,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -377,12 +395,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -396,7 +414,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -471,7 +489,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "33076ef1",
+      "state": "3a887253",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -523,10 +541,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -572,10 +596,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -625,17 +655,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -658,7 +694,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -687,26 +723,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -717,8 +753,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -732,7 +768,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -753,14 +789,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -768,14 +804,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -785,20 +821,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -809,7 +845,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -817,12 +853,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -836,7 +872,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -911,7 +947,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "12659237",
+      "state": "5bb72c5d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -963,10 +999,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -1012,10 +1054,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -1065,17 +1113,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1098,7 +1152,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -1127,26 +1181,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1157,8 +1211,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -1172,7 +1226,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -1193,14 +1247,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -1208,14 +1262,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1225,20 +1279,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1249,7 +1303,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1257,12 +1311,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -1276,7 +1330,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1351,7 +1405,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "52fc0612",
+      "state": "3594fdcc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1403,10 +1457,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -1452,10 +1512,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -1505,17 +1571,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1538,7 +1610,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -1567,26 +1639,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1597,8 +1669,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -1612,7 +1684,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -1633,14 +1705,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -1648,14 +1720,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1665,20 +1737,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1689,7 +1761,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1697,12 +1769,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -1716,7 +1788,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1791,7 +1863,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "18854417",
+      "state": "19c0efdd",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1843,10 +1915,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -1892,10 +1970,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -1945,17 +2029,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -1978,7 +2068,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -2007,26 +2097,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2037,8 +2127,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -2052,7 +2142,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2073,14 +2163,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -2088,14 +2178,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2105,20 +2195,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2129,7 +2219,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2137,12 +2227,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -2156,7 +2246,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2233,7 +2323,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "1b1b429b",
+      "state": "fe00009d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2285,10 +2375,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -2334,10 +2430,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -2387,17 +2489,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -2420,7 +2528,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -2449,26 +2557,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2479,8 +2587,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -2494,7 +2602,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2515,14 +2623,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -2530,14 +2638,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2547,20 +2655,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2571,7 +2679,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2579,12 +2687,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -2598,7 +2706,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2675,7 +2783,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "a380fa6d",
+      "state": "85b8c34d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -2727,10 +2835,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -2776,10 +2890,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -2829,17 +2949,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -2862,7 +2988,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -2891,26 +3017,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2921,8 +3047,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -2936,7 +3062,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2957,14 +3083,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -2972,14 +3098,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2989,20 +3115,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3013,7 +3139,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3021,12 +3147,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -3040,7 +3166,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3116,7 +3242,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "57d4efbd",
+      "state": "560363e7",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3168,10 +3294,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -3217,10 +3349,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -3270,17 +3408,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -3303,7 +3447,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -3332,26 +3476,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3362,8 +3506,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -3377,7 +3521,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -3398,14 +3542,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -3413,14 +3557,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3430,20 +3574,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3454,7 +3598,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3462,12 +3606,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -3481,7 +3625,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3557,7 +3701,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "08c287ac",
+      "state": "5b90a2b2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -3609,10 +3753,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -3658,10 +3808,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -3711,17 +3867,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -3744,7 +3906,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -3773,26 +3935,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3803,8 +3965,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -3818,7 +3980,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -3839,14 +4001,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -3854,14 +4016,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3871,20 +4033,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3895,7 +4057,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3903,12 +4065,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -3922,7 +4084,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3983,7 +4145,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "08c287ac",
+      "state": "5b90a2b2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -4035,10 +4197,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -4084,10 +4252,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         },
         {
@@ -4137,17 +4311,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -4170,7 +4350,7 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
           "hp": 50000,
           "id": 414,
@@ -4199,26 +4379,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -4229,8 +4409,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 50000,
           "id": 415,
           "kind": "player",
@@ -4244,7 +4424,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -4265,14 +4445,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -4280,14 +4460,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -4297,20 +4477,20 @@
           "elementLevel": 1,
           "fallStartY": 1.601203,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4321,7 +4501,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4329,12 +4509,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -4348,7 +4528,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

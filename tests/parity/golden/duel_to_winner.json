@@ -29,7 +29,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "6c7fe497",
+      "state": "9bafdf03",
       "events": "0f6e61a9",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "2f6cda10",
+      "state": "fbe09226",
       "events": "f889c754",
       "rng": {
         "draws": 0,
@@ -51,7 +51,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "b6bcfe39",
+      "state": "20529a95",
       "events": "fae6ac02",
       "rng": {
         "draws": 71,
@@ -62,7 +62,7 @@
       "tick": 61,
       "time": 3.05,
       "nextId": 416,
-      "state": "021af5ee",
+      "state": "53325eb4",
       "events": "9a22fc95",
       "rng": {
         "draws": 78,
@@ -118,10 +118,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -175,17 +181,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -208,14 +220,14 @@
           "elementLevel": 1,
           "fallStartY": 2.242568,
           "fiveSecondRule": 102.05,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -237,26 +249,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 102.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -266,20 +278,20 @@
           "elementLevel": 1,
           "fallStartY": 2.139867,
           "fiveSecondRule": 102.05,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 213,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -291,7 +303,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -299,12 +311,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -318,7 +330,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -329,7 +341,7 @@
       "tick": 61,
       "time": 3.05,
       "nextId": 416,
-      "state": "49825cff",
+      "state": "42d7c335",
       "events": "6da21470",
       "rng": {
         "draws": 78,
@@ -388,10 +400,16 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -447,17 +465,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -480,14 +504,14 @@
           "elementLevel": 1,
           "fallStartY": 2.242568,
           "fiveSecondRule": 102.05,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -509,26 +533,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 102.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -538,20 +562,20 @@
           "elementLevel": 1,
           "fallStartY": 2.139867,
           "fiveSecondRule": 102.05,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 1,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 213,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -563,7 +587,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -571,12 +595,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -590,7 +614,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -601,7 +625,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 416,
-      "state": "e2de22d4",
+      "state": "9e850a84",
       "events": "0fec75cf",
       "rng": {
         "draws": 150,
@@ -612,7 +636,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 416,
-      "state": "33d26323",
+      "state": "833805f1",
       "events": "741638a5",
       "rng": {
         "draws": 262,
@@ -623,7 +647,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 416,
-      "state": "2c1ac366",
+      "state": "13025d2a",
       "events": "741638a5",
       "rng": {
         "draws": 263,
@@ -688,11 +712,17 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 5,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         },
         {
@@ -754,18 +784,24 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 5,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -788,14 +824,14 @@
           "elementLevel": 1,
           "fallStartY": 2.242568,
           "fiveSecondRule": 104.05,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -817,26 +853,26 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 104.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -846,20 +882,20 @@
           "elementLevel": 1,
           "fallStartY": 2.139867,
           "fiveSecondRule": 104.05,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 3,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 213,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -871,7 +907,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -879,12 +915,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -898,7 +934,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "1f99bed4",
+      "state": "21e1dbf2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -67,17 +67,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -88,8 +94,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 213,
           "id": 414,
           "kind": "player",
@@ -103,7 +109,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -125,14 +131,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -140,7 +146,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -151,8 +157,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "f56998dd",
-      "events": "ff3db887",
+      "state": "496f4ea6",
+      "events": "e9ad2f86",
       "rng": {
         "draws": 11,
         "digest": "3608c2ea"
@@ -162,8 +168,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "c42bb610",
-      "events": "e010ee8c",
+      "state": "e18708e0",
+      "events": "74b4e082",
       "rng": {
         "draws": 20,
         "digest": "719ced8c"
@@ -173,8 +179,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "1e01ae6a",
-      "events": "97b8129c",
+      "state": "72d8099f",
+      "events": "32add4db",
       "rng": {
         "draws": 97,
         "digest": "65658183"
@@ -184,8 +190,8 @@
       "tick": 72,
       "time": 3.6,
       "nextId": 416,
-      "state": "6e1d9f53",
-      "events": "de021f1c",
+      "state": "cb853610",
+      "events": "2e6f26f4",
       "rng": {
         "draws": 159,
         "digest": "7892bae0"
@@ -207,14 +213,14 @@
           "cls": "thief",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 111,
+            "damageDealt": 252,
             "damageTaken": 20
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 111
+              "damageDealt": 252
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -258,21 +264,27 @@
             }
           ],
           "jobLevel": 1,
-          "lifetimeXp": 670,
+          "jobTrack": "base",
+          "lifetimeXp": 20343,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 4,
+          "attackPower": 18,
           "autoAttack": true,
-          "combatTimer": 0.4,
+          "combatTimer": 0.6,
           "comboPoints": 3,
           "comboUntil": 32.4,
           "critChance": 0.013333,
@@ -284,8 +296,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "flee": 10,
-          "hit": 37,
+          "flee": 16,
+          "hit": 53,
           "hp": 49980,
           "id": 414,
           "inCombat": true,
@@ -296,12 +308,12 @@
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
-          "offhandSwingTimer": 1.25,
+          "offhandSwingTimer": 0.95,
           "offhandWeapon": {
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -323,24 +335,24 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 6,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
-          "swingTimer": 1.25,
+          "swingTimer": 0.95,
           "targetId": 415,
           "templateId": "thief",
           "weapon": {
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -348,7 +360,7 @@
         {
           "aggroTargetId": 414,
           "aiState": "attack",
-          "combatTimer": 0.4,
+          "combatTimer": 0.6,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -361,7 +373,7 @@
           "flee": 6,
           "hit": 58,
           "hostile": true,
-          "hp": 8889,
+          "hp": 8748,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -405,7 +417,7 @@
           "threat": [
             [
               414,
-              112
+              253
             ]
           ],
           "weapon": {

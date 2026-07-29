@@ -15,7 +15,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "ed8d0670",
+      "state": "4078c4aa",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -71,17 +71,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -91,20 +97,20 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 28,
+          "hit": 44,
           "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 213,
-          "maxResource": 51,
+          "maxResource": 56,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -116,7 +122,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 51,
+          "resource": 56,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -124,12 +130,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 4,
+          "spellPower": 22,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -143,7 +149,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -154,7 +160,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "11d98f0c",
+      "state": "c4e15f33",
       "events": "5d94fe51",
       "rng": {
         "draws": 3,
@@ -165,7 +171,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "cc04c84a",
+      "state": "5d784c26",
       "events": "3f7ec878",
       "rng": {
         "draws": 3,
@@ -176,8 +182,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "371219e4",
-      "events": "6e53bdb1",
+      "state": "20aad795",
+      "events": "2a40e532",
       "rng": {
         "draws": 76,
         "digest": "c74457d4"
@@ -187,7 +193,7 @@
       "tick": 80,
       "time": 4,
       "nextId": 416,
-      "state": "715bc17f",
+      "state": "470ba86e",
       "events": "741638a5",
       "rng": {
         "draws": 164,
@@ -198,7 +204,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 416,
-      "state": "befddaa1",
+      "state": "09cc0e39",
       "events": "a6d097d6",
       "rng": {
         "draws": 268,
@@ -209,8 +215,8 @@
       "tick": 120,
       "time": 6,
       "nextId": 416,
-      "state": "e63a7a8e",
-      "events": "8b6c38ac",
+      "state": "62273259",
+      "events": "f22caea0",
       "rng": {
         "draws": 388,
         "digest": "3c157d72"
@@ -220,7 +226,7 @@
       "tick": 128,
       "time": 6.4,
       "nextId": 416,
-      "state": "26496e71",
+      "state": "64b8fffc",
       "events": "8db8dc68",
       "rng": {
         "draws": 428,
@@ -243,14 +249,14 @@
           "cls": "mage",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 60,
+            "damageDealt": 90,
             "damageTaken": 20
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 60
+              "damageDealt": 90
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -295,19 +301,25 @@
             }
           ],
           "jobLevel": 1,
-          "lifetimeXp": 670,
+          "jobTrack": "base",
+          "lifetimeXp": 20343,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 8,
+            "int": 11
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 4,
+          "attackPower": 6,
           "auras": [
             {
               "duration": 30,
@@ -334,14 +346,14 @@
           "facing": -0.10184,
           "fallStartY": 59.40092,
           "fiveSecondRule": 1.55,
-          "flee": 10,
+          "flee": 14,
           "gcdRemaining": 0.7,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 37,
+          "hit": 53,
           "hp": 320,
           "id": 414,
           "inCombat": true,
@@ -349,7 +361,7 @@
           "level": 10,
           "lootFfaTimer": "Infinity",
           "maxHp": 331,
-          "maxResource": 97,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -360,7 +372,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 97,
+          "resource": 107,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -368,12 +380,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 6,
+          "spellPower": 24,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 2,
+            "dex": 9,
+            "int": 13,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -388,7 +400,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.2,
+            "speed": 1.14,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -433,7 +445,7 @@
           "flee": 6,
           "hit": 58,
           "hostile": true,
-          "hp": 8940,
+          "hp": 8910,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -475,7 +487,7 @@
           "threat": [
             [
               414,
-              61
+              91
             ]
           ],
           "wanderTimer": 2.387434,

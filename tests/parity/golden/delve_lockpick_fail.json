@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "1f99bed4",
+      "state": "21e1dbf2",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -68,17 +68,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 16,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -89,8 +95,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 7,
+          "hit": 44,
           "hp": 213,
           "id": 414,
           "kind": "player",
@@ -104,7 +110,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -126,14 +132,14 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -141,7 +147,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -152,8 +158,8 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 426,
-      "state": "1e2e73ee",
-      "events": "af5307d4",
+      "state": "e2b1b661",
+      "events": "c179c3ac",
       "rng": {
         "draws": 3,
         "digest": "ad960248"
@@ -163,7 +169,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 426,
-      "state": "8d148564",
+      "state": "5e8449e9",
       "events": "16fc0e70",
       "rng": {
         "draws": 3,
@@ -174,7 +180,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 426,
-      "state": "dcabd9e6",
+      "state": "9d3bf70b",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -185,7 +191,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 426,
-      "state": "786e6798",
+      "state": "1b908435",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -196,7 +202,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 426,
-      "state": "3e2080fe",
+      "state": "8259bbe3",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -207,7 +213,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 426,
-      "state": "0013d024",
+      "state": "38d003b5",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -218,7 +224,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 427,
-      "state": "251658e6",
+      "state": "5709c443",
       "events": "d5c92015",
       "rng": {
         "draws": 3,
@@ -243,7 +249,6 @@
           "counters": {
             "damageDealt": 636,
             "kills": 1,
-            "levelUps": 5,
             "xpGained": 1126
           },
           "craftSkills": {},
@@ -267,10 +272,6 @@
             ],
             [
               "dlv_varric_ringers",
-              ""
-            ],
-            [
-              "prog_double_digits",
               ""
             ],
             [
@@ -300,22 +301,27 @@
             }
           ],
           "jobLevel": 2,
+          "jobTrack": "base",
           "jobXp": 29,
-          "lifetimeXp": 1321,
+          "lifetimeXp": 6916,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 35,
-          "skillPoints": 1,
-          "statAllocation": {},
+          "renown": 25,
+          "skillPoints": 2,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {},
-          "xp": 63
+          "xp": 1126
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 5,
+          "attackPower": 17,
           "combatTimer": 3.45,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -325,15 +331,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.45,
-          "flee": 12,
-          "hit": 39,
-          "hp": 390,
+          "flee": 13,
+          "hit": 50,
+          "hp": 50000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
-          "level": 12,
+          "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 390,
+          "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -341,7 +347,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -364,12 +370,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -377,7 +383,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -426,7 +432,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 427,
-      "state": "825ef102",
+      "state": "3401831b",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -437,7 +443,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 427,
-      "state": "77d975ee",
+      "state": "69a36613",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -462,7 +468,6 @@
           "counters": {
             "damageDealt": 636,
             "kills": 1,
-            "levelUps": 5,
             "xpGained": 1126
           },
           "craftSkills": {},
@@ -486,10 +491,6 @@
             ],
             [
               "dlv_varric_ringers",
-              ""
-            ],
-            [
-              "prog_double_digits",
               ""
             ],
             [
@@ -519,22 +520,27 @@
             }
           ],
           "jobLevel": 2,
+          "jobTrack": "base",
           "jobXp": 29,
-          "lifetimeXp": 1321,
+          "lifetimeXp": 6916,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "renown": 35,
-          "skillPoints": 1,
-          "statAllocation": {},
+          "renown": 25,
+          "skillPoints": 2,
+          "statAllocation": {
+            "agi": 11,
+            "dex": 8,
+            "str": 8
+          },
           "townFocus": {},
-          "xp": 63
+          "xp": 1126
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 5,
+          "attackPower": 17,
           "combatTimer": 3.55,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -544,15 +550,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.55,
-          "flee": 12,
-          "hit": 39,
-          "hp": 390,
+          "flee": 13,
+          "hit": 50,
+          "hp": 50000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
-          "level": 12,
+          "level": 7,
           "lootFfaTimer": "Infinity",
-          "maxHp": 390,
+          "maxHp": 50000,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -560,7 +566,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -583,12 +589,12 @@
           },
           "spellPower": 5,
           "stats": {
-            "agi": 1,
+            "agi": 12,
             "armor": 1,
-            "dex": 1,
+            "dex": 9,
             "int": 1,
             "luk": 1,
-            "str": 1,
+            "str": 9,
             "vit": 1
           },
           "templateId": "thief",
@@ -596,7 +602,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.6,
+            "speed": 1.5,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }

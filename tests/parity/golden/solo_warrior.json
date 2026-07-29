@@ -10,14 +10,14 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 180,
-  "drawDigest": "09d3b32d",
+  "draws": 185,
+  "drawDigest": "65f41cc6",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "b4b133fc",
+      "state": "a409c5bc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -70,17 +70,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 19,
           "auras": [
             {
               "duration": 3600,
@@ -103,14 +109,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
+          "flee": 5,
           "hit": 28,
-          "hp": 213,
+          "hp": 230,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 213,
+          "maxHp": 230,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -133,19 +139,19 @@
           },
           "spellPower": 2,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -156,8 +162,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "4763c7ed",
-      "events": "01962060",
+      "state": "7b49bb21",
+      "events": "1e406899",
       "rng": {
         "draws": 7,
         "digest": "101398c0"
@@ -167,8 +173,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "58b7ae87",
-      "events": "22689ed8",
+      "state": "47657f37",
+      "events": "b7227123",
       "rng": {
         "draws": 11,
         "digest": "e9d57643"
@@ -178,22 +184,22 @@
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "5ecf3ea9",
-      "events": "5d3f3c43",
+      "state": "06f58aaa",
+      "events": "8d185f10",
       "rng": {
-        "draws": 106,
-        "digest": "6b6abe3e"
+        "draws": 102,
+        "digest": "93535ed3"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 416,
-      "state": "647dc156",
-      "events": "e4048750",
+      "state": "50d9998f",
+      "events": "6e1b7f05",
       "rng": {
-        "draws": 164,
-        "digest": "2a45d366"
+        "draws": 163,
+        "digest": "3a2585bb"
       },
       "label": "kill",
       "players": [
@@ -212,7 +218,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7119,
+            "damageDealt": 7197,
             "damageTaken": 11,
             "kills": 1
           },
@@ -220,7 +226,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7119,
+              "damageDealt": 7197,
               "kills": 1
             },
             "dungeonClears": {},
@@ -266,20 +272,26 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "jobXp": 2,
-          "lifetimeXp": 670,
+          "lifetimeXp": 20343,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 4,
+          "attackPower": 21,
           "auras": [
             {
               "duration": 3600,
@@ -302,7 +314,7 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "flee": 10,
+          "flee": 14,
           "hit": 37,
           "hp": 49989,
           "id": 414,
@@ -334,21 +346,21 @@
           },
           "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
-          "swingTimer": 0.85,
+          "swingTimer": 0.81,
           "targetId": 415,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -379,11 +391,15 @@
           },
           "level": 2,
           "loot": {
-            "copper": 8,
+            "copper": 11,
             "items": [
               {
                 "count": 1,
                 "itemId": "wolf_fang"
+              },
+              {
+                "count": 1,
+                "itemId": "milepost_boots"
               }
             ]
           },
@@ -435,11 +451,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 416,
-      "state": "53b06f43",
+      "state": "38aa12a6",
       "events": "f550d811",
       "rng": {
-        "draws": 180,
-        "digest": "09d3b32d"
+        "draws": 185,
+        "digest": "65f41cc6"
       },
       "label": "final",
       "players": [
@@ -458,7 +474,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7119,
+            "damageDealt": 7197,
             "damageTaken": 11,
             "kills": 1
           },
@@ -466,7 +482,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7119,
+              "damageDealt": 7197,
               "kills": 1
             },
             "dungeonClears": {},
@@ -516,20 +532,26 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "jobXp": 2,
-          "lifetimeXp": 670,
+          "lifetimeXp": 20343,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 25,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "str": 11,
+            "vit": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 4,
+          "attackPower": 21,
           "auras": [
             {
               "duration": 3600,
@@ -553,7 +575,7 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.8,
-          "flee": 10,
+          "flee": 14,
           "hit": 37,
           "hp": 49989,
           "id": 414,
@@ -585,21 +607,21 @@
           },
           "spellPower": 4,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 2,
             "dex": 1,
             "int": 1,
             "luk": 1,
-            "str": 1,
-            "vit": 1
+            "str": 12,
+            "vit": 9
           },
-          "swingTimer": 0.65,
+          "swingTimer": 0.61,
           "targetId": 415,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.1,
+            "speed": 1.06,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -630,11 +652,15 @@
           },
           "level": 2,
           "loot": {
-            "copper": 8,
+            "copper": 11,
             "items": [
               {
                 "count": 1,
                 "itemId": "wolf_fang"
+              },
+              {
+                "count": 1,
+                "itemId": "milepost_boots"
               }
             ]
           },

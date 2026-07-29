@@ -8,14 +8,14 @@
     "updateRangedPetAttack friendly pet arm (~8093/8217)",
     "updateRangedPetAttack hostile-mob arm (~6776)"
   ],
-  "draws": 411,
-  "drawDigest": "7951e481",
+  "draws": 410,
+  "drawDigest": "64ad67d4",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "71866e65",
+      "state": "913a510d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -71,17 +71,23 @@
             }
           ],
           "jobLevel": 1,
+          "jobTrack": "base",
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 11,
+            "int": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 2,
+          "attackPower": 4,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -91,15 +97,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 1,
-          "hit": 28,
+          "flee": 5,
+          "hit": 50,
           "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
           "maxHp": 213,
-          "maxResource": 51,
+          "maxResource": 55,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -111,8 +117,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 2,
-          "resource": 51,
+          "rangedPower": 13,
+          "resource": 55,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -120,12 +126,12 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 16,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 1,
+            "dex": 12,
+            "int": 9,
             "luk": 1,
             "str": 1,
             "vit": 1
@@ -138,7 +144,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.4,
+            "speed": 1.34,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -149,8 +155,8 @@
       "tick": 20,
       "time": 1,
       "nextId": 418,
-      "state": "d5c39c1d",
-      "events": "b9cc5fe3",
+      "state": "88dd1aef",
+      "events": "1403a2cc",
       "rng": {
         "draws": 9,
         "digest": "381f4473"
@@ -160,8 +166,8 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "36a837b4",
-      "events": "7f446580",
+      "state": "c9b32aeb",
+      "events": "c6d17f88",
       "rng": {
         "draws": 12,
         "digest": "716c6dc8"
@@ -171,55 +177,55 @@
       "tick": 60,
       "time": 3,
       "nextId": 418,
-      "state": "db957b2e",
-      "events": "1fd9e9c8",
+      "state": "4f95c449",
+      "events": "b1a7b60d",
       "rng": {
-        "draws": 103,
-        "digest": "45584030"
+        "draws": 106,
+        "digest": "180f7ea4"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 418,
-      "state": "28893c9a",
-      "events": "9b4409db",
+      "state": "2ac9b78c",
+      "events": "741638a5",
       "rng": {
-        "draws": 200,
-        "digest": "5ea90cb4"
+        "draws": 199,
+        "digest": "c348e7ab"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 418,
-      "state": "61eced16",
-      "events": "bb6581b3",
+      "state": "13a76425",
+      "events": "48f055e6",
       "rng": {
-        "draws": 305,
-        "digest": "14b3dbf1"
+        "draws": 300,
+        "digest": "5cbb27be"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "08aa62b9",
-      "events": "c33bee8c",
+      "state": "e2b72bd9",
+      "events": "0125b3c1",
       "rng": {
-        "draws": 411,
-        "digest": "7951e481"
+        "draws": 410,
+        "digest": "64ad67d4"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 418,
-      "state": "08aa62b9",
+      "state": "e2b72bd9",
       "events": "741638a5",
       "rng": {
-        "draws": 411,
-        "digest": "7951e481"
+        "draws": 410,
+        "digest": "64ad67d4"
       },
       "label": "final",
       "players": [
@@ -238,14 +244,14 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 14,
-            "damageTaken": 38
+            "damageDealt": 64,
+            "damageTaken": 20
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 14
+              "damageDealt": 64
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -293,21 +299,27 @@
             }
           ],
           "jobLevel": 1,
-          "lifetimeXp": 1258,
+          "jobTrack": "base",
+          "lifetimeXp": 38331,
           "mailWelcomed": true,
           "nodeHarvestReadyAt": {},
           "recipesGrandfathered": true,
           "renown": 20,
-          "statAllocation": {},
+          "skillPoints": 1,
+          "statAllocation": {
+            "agi": 8,
+            "dex": 11,
+            "int": 8
+          },
           "townFocus": {}
         }
       ],
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 5,
+          "attackPower": 7,
           "autoAttack": true,
-          "combatTimer": 0.15,
+          "combatTimer": 0.35,
           "comboUntil": -1,
           "critChance": 0.013333,
           "detonateTimer": "Infinity",
@@ -316,19 +328,19 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 105,
-          "flee": 12,
-          "hit": 39,
-          "hp": 49962,
+          "flee": 16,
+          "hit": 61,
+          "hp": 49980,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 106,
+          "maxResource": 114,
           "moveSpeed": 7,
           "onGround": true,
-          "overpowerUntil": 10.9,
+          "overpowerUntil": 5.3,
           "petMode": "defensive",
           "pos": {
             "x": 2,
@@ -337,8 +349,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 4,
-          "resource": 106,
+          "rangedPower": 16,
+          "resource": 114,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -346,17 +358,17 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 5,
+          "spellPower": 19,
           "stats": {
-            "agi": 1,
+            "agi": 9,
             "armor": 1,
-            "dex": 1,
-            "int": 1,
+            "dex": 12,
+            "int": 9,
             "luk": 1,
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 1.3,
+          "swingTimer": 1.04,
           "targetId": 416,
           "templateId": "archer",
           "weapon": {
@@ -366,7 +378,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.4,
+            "speed": 1.34,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -386,7 +398,7 @@
           "fiveSecondRule": 99,
           "flee": 13,
           "hit": 65,
-          "hp": 475,
+          "hp": 477,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -428,9 +440,9 @@
           }
         },
         {
-          "aggroTargetId": 415,
+          "aggroTargetId": 414,
           "aiState": "attack",
-          "combatTimer": 0.15,
+          "combatTimer": 0.35,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -443,7 +455,7 @@
           "flee": 9,
           "hit": 61,
           "hostile": true,
-          "hp": 49937,
+          "hp": 49886,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -460,7 +472,7 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 7,
+            "x": 5.8,
             "y": 1.5,
             "z": -2
           },
@@ -487,11 +499,11 @@
           "threat": [
             [
               414,
-              14
+              64
             ],
             [
               415,
-              49
+              50
             ]
           ],
           "weapon": {
