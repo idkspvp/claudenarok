@@ -6,9 +6,18 @@ design weight. Read this before reading the numbers; the formulas are in
 
 The load-bearing observation: **almost every value in the game is expressed as
 `{stat, base, per, q}`**, where `stat` names an entry in the 219-key StatType
-catalog (`data/spiritvale-stat-catalog.tsv`), `base` is the level-1 value, `per`
-is the per-level step, and `q` is an optional qualifier naming the skill or
-status the line applies to. Items, cards, gems, artifacts, sets, statuses,
+catalog (`data/spiritvale-stat-catalog.tsv`), `base` is the value at level ZERO
+(i.e. unlearned), `per` is the per-level step, and `q` is an optional qualifier
+naming the skill or status the line applies to. The value at level L is
+
+    value(L) = base + per * L
+
+and NOT `base + per * (L - 1)`. This line said "base is the level-1 value" until
+the phase-4 conversion checked it: 105 of the 279 published skills carry
+`dmg = {base: 0, per: > 0}`, and under that reading every one of them deals
+exactly zero damage at skill level 1. `src/sim/skills/scaling.ts` owns the
+arithmetic and its header carries all four proofs. On a STACKABLE status the two
+fields mean something different again: `base` is the per-STACK amount. Items, cards, gems, artifacts, sets, statuses,
 passives and summons all use it. One vocabulary, one shape, seven consumers.
 That is the single biggest structural idea in the data, and it is worth copying
 whether or not any individual number is.
