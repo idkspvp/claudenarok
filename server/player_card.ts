@@ -76,7 +76,11 @@ export const PUBLIC_CARD_LOCALES = [
 ] as const;
 export type PublicCardLocale = (typeof PUBLIC_CARD_LOCALES)[number];
 
-type PlayerClassKey = 'swordman' | 'mage' | 'archer' | 'acolyte' | 'thief';
+// Deliberately its own union rather than an import of PlayerClass: this table
+// carries a NAME PER LOCALE for every class, so a new class must be a compile
+// error here until someone writes those names, not a silent 'Adventurer' on a
+// shared card. Keep it in step with PlayerClass in src/sim/types.ts.
+type PlayerClassKey = 'swordman' | 'knight' | 'thief' | 'acolyte' | 'archer' | 'summoner' | 'mage';
 
 export interface PublicCardCopy {
   gameName: string;
@@ -92,9 +96,11 @@ export interface PublicCardCopy {
 }
 
 const EN_CLASSES: Record<PlayerClassKey, string> = {
-  swordman: 'Swordman',
-  archer: 'Archer',
-  thief: 'Thief',
+  swordman: 'Warrior',
+  knight: 'Knight',
+  summoner: 'Summoner',
+  archer: 'Scout',
+  thief: 'Rogue',
   acolyte: 'Acolyte',
   mage: 'Mage',
 };
@@ -128,6 +134,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Pícaro',
       acolyte: 'Sacerdote',
       mage: 'Mago',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   es_ES: {
@@ -146,6 +154,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Pícaro',
       acolyte: 'Sacerdote',
       mage: 'Mago',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   fr_FR: {
@@ -164,6 +174,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Voleur',
       acolyte: 'Prêtre',
       mage: 'Mage',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   fr_CA: {
@@ -182,6 +194,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Voleur',
       acolyte: 'Prêtre',
       mage: 'Mage',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   en_CA: {
@@ -212,6 +226,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Ladro',
       acolyte: 'Sacerdote',
       mage: 'Mago',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   de_DE: {
@@ -230,6 +246,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Schurke',
       acolyte: 'Priester',
       mage: 'Magier',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   zh_CN: {
@@ -248,6 +266,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: '潜行者',
       acolyte: '牧师',
       mage: '法师',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   zh_TW: {
@@ -266,6 +286,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: '潛行者',
       acolyte: '牧師',
       mage: '法師',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   ko_KR: {
@@ -285,6 +307,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: '도적',
       acolyte: '사제',
       mage: '마법사',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   ja_JP: {
@@ -303,6 +327,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'ローグ',
       acolyte: 'プリースト',
       mage: 'メイジ',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   pt_BR: {
@@ -321,6 +347,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Ladino',
       acolyte: 'Sacerdote',
       mage: 'Mago',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   ru_RU: {
@@ -339,6 +367,8 @@ export const PUBLIC_CARD_COPY: Record<PublicCardLocale, PublicCardCopy> = {
       thief: 'Разбойник',
       acolyte: 'Жрец',
       mage: 'Маг',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   ...PLAYERCARD_NEW,

@@ -254,7 +254,7 @@ export function attackReadout(ctx: SimContext, p: Entity, meta: PlayerMeta): str
 // a 5s window (overpowerUntil = time + 5) in which the ability becomes usable.
 // It is neither an aura nor a normal cooldown, so no other readout exposes it.
 export function overpowerReadout(ctx: SimContext, e: Entity, meta: PlayerMeta): string {
-  if (meta.cls !== 'swordman') return 'Overpower is a swordman ability; your class cannot use it.';
+  if (meta.cls !== 'swordman') return 'Overpower is a Warrior ability; your class cannot use it.';
   const remaining = Math.ceil(e.overpowerUntil - ctx.time);
   if (remaining > 0) {
     return `Overpower is ready — strike within ${remaining}s (an enemy dodged your attack).`;

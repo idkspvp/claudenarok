@@ -12,9 +12,7 @@
 import { describe, expect, it } from 'vitest';
 import { meleeSwing } from '../src/sim/combat/auto_attack';
 import {
-  ATTACKER_FLAT_LEAD,
   BASE_HIT_PERCENT,
-  EVEN_FIGHT_PERCENT,
   fleeRating,
   hitChance,
   hitRating,
@@ -39,20 +37,18 @@ describe('the two ratings', () => {
     // hands every attacker a flat 25 that the defender has no answer to, so an
     // unbuilt attacker is 25 points ahead of an unbuilt defender of the same
     // level before either has spent anything.
-    expect(hitRating(1, 0, 0) - fleeRating(1, 0)).toBe(ATTACKER_FLAT_LEAD);
-    // The contest's base was recalibrated from 80 to 55 to absorb exactly that
-    // lead, so an UNBUILT pair still trades at 80% and one swing in five misses.
+    expect(hitRating(1, 0, 0)).toBeGreaterThan(fleeRating(1, 0));
+    // And with the base at 100, being ahead at all is enough to land every
+    // blow. An unbuilt pair does NOT trade at some tuned percentage: the
+    // attacker simply connects, which is what the reference's own arithmetic
+    // does and what a base of 100 means.
     for (const lv of [1, 20, 50, 99]) {
-      expect(hitChance(hitRating(lv, 0, 0), fleeRating(lv, 0)), `level ${lv}`).toBeCloseTo(
-        EVEN_FIGHT_PERCENT / 100,
-        10,
-      );
+      expect(hitChance(hitRating(lv, 0, 0), fleeRating(lv, 0)), `level ${lv}`).toBe(MAX_HIT_CHANCE);
     }
-    // Once both sides SPEND, the attacker pulls ahead: Dexterity buys two
-    // accuracy where Agility buys half an evasion. That asymmetry is deliberate.
-    const bothSpent = hitChance(hitRating(20, 10, 0), fleeRating(20, 10));
-    expect(bothSpent).toBeGreaterThan(EVEN_FIGHT_PERCENT / 100);
-    expect(bothSpent).toBeLessThanOrEqual(MAX_HIT_CHANCE);
+    // Spending only widens it, so it stays pinned. Dexterity buys two accuracy
+    // where Agility buys half an evasion, and the attacker out-runs an equally
+    // invested defender.
+    expect(hitChance(hitRating(20, 10, 0), fleeRating(20, 10))).toBe(MAX_HIT_CHANCE);
   });
 
   it('pays TWO accuracy per DEX and HALF an evasion per AGI', () => {
@@ -92,13 +88,38 @@ describe('the two ratings', () => {
 });
 
 describe('the contest', () => {
-  it('sits at the base percentage when the two ratings are equal', () => {
-    expect(hitChance(200, 200)).toBeCloseTo(BASE_HIT_PERCENT / 100, 10);
+  it('is clamp(5, 100, 100 + hit - flee), transcribed', () => {
+    // Pinned against the literal arithmetic, not against the implementation.
+    const expected = (hit: number, flee: number) =>
+      Math.max(5, Math.min(100, 100 + hit - flee)) / 100;
+    for (const [hit, flee] of [
+      [0, 0],
+      [200, 200],
+      [200, 210],
+      [210, 200],
+      [0, 300],
+      [300, 0],
+      [50, 145],
+      [50, 146],
+    ] as const) {
+      expect(hitChance(hit, flee), `${hit} vs ${flee}`).toBeCloseTo(expected(hit, flee), 10);
+    }
+    expect(BASE_HIT_PERCENT).toBe(100);
   });
 
-  it('moves one point of chance per point of advantage', () => {
-    expect(hitChance(200, 210)).toBeCloseTo((BASE_HIT_PERCENT - 10) / 100, 10);
-    expect(hitChance(210, 200)).toBeCloseTo((BASE_HIT_PERCENT + 10) / 100, 10);
+  it('lands every blow when the ratings merely TIE', () => {
+    // The property that makes the base 100 rather than a tuned number: parity is
+    // already a win for the attacker, and a defender has to get genuinely ahead
+    // before anything comes off.
+    expect(hitChance(200, 200)).toBe(MAX_HIT_CHANCE);
+    expect(hitChance(200, 201)).toBeLessThan(MAX_HIT_CHANCE);
+  });
+
+  it('moves one point of chance per point of DEFENDER advantage', () => {
+    expect(hitChance(200, 210)).toBeCloseTo(0.9, 10);
+    expect(hitChance(200, 250)).toBeCloseTo(0.5, 10);
+    // Attacker advantage buys nothing: it is already at the ceiling.
+    expect(hitChance(210, 200)).toBe(hitChance(200, 200));
   });
 
   it('never reaches certainty in either direction', () => {

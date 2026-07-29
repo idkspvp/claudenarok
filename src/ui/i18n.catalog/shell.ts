@@ -265,11 +265,11 @@ export const shellStrings = {
       },
       lore: {
         swordman:
-          'Swordmen are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.',
+          'Warriors are battle-hardened melee fighters who build Rage as they deal or take damage. They absorb heavy hits or crush foes with powerful weapons.',
         archer:
-          'Archers are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.',
+          'Scouts are ranged specialists who fight beside a tamed beast, peppering enemies with aimed and rapid shots, slowing them with stings and concussive fire, and shifting aspects to suit the moment.',
         thief:
-          'Thieves are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.',
+          'Rogues are stealthy assassins who spend Energy and Combo Points on backstabs and finishing moves from the shadows.',
         acolyte:
           'Acolytes call on Mending Light to heal and shield allies, while Shadow magic lets them drain the life of their enemies.',
         mage: 'Mages bend Fire, Frost, and arcane force to destroy enemies, summon water, and freeze threats in place.',

@@ -226,14 +226,12 @@ export function localizeAdminError(message: string): string {
 // game client. Unknown ids fall back to the raw id.
 const CLASS_LABEL_IDS = new Set([
   'swordman',
-  'paladin',
-  'archer',
+  'knight',
   'thief',
   'acolyte',
-  'shaman',
+  'archer',
+  'summoner',
   'mage',
-  'warlock',
-  'druid',
 ]);
 export function classLabel(classId: string): string {
   return CLASS_LABEL_IDS.has(classId) ? t(`class.${classId}`) : classId;

@@ -10,10 +10,14 @@ import {
 
 type WeaponArchetype = 'swordman' | 'caster' | 'thief';
 
-const MAIL_CLASSES = new Set<PlayerClass>(['swordman']);
+// A membership list, NOT a Record, so tsc cannot tell you a class is missing
+// from every group. Widening PlayerClass once left the Knight in none of them,
+// reading as cloth while the character-select screen advertised chainmail.
+// tests/equipment_rules.test.ts pins that every class lands in an armour tier.
+const MAIL_CLASSES = new Set<PlayerClass>(['swordman', 'knight']);
 const LEATHER_CLASSES = new Set<PlayerClass>(['thief', 'archer']);
-const WARRIOR_WEAPON_CLASSES = new Set<PlayerClass>(['swordman', 'thief', 'archer']);
-const CASTER_WEAPON_CLASSES = new Set<PlayerClass>(['mage', 'acolyte']);
+const WARRIOR_WEAPON_CLASSES = new Set<PlayerClass>(['swordman', 'knight', 'thief', 'archer']);
+const CASTER_WEAPON_CLASSES = new Set<PlayerClass>(['mage', 'acolyte', 'summoner']);
 const ROGUE_WEAPON_CLASSES = new Set<PlayerClass>(['thief', 'archer']);
 
 const ARMOR_RANK: Record<ArmorType, number> = {

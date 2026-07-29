@@ -168,6 +168,12 @@ export type PlayerClass =
 // the Warrior and the Rogue here: its whole published kit is spear and shield.
 export const MELEE_CLASSES: ReadonlySet<PlayerClass> = new Set(['swordman', 'knight', 'thief']);
 
+// Classes that mitigate with a shield and a parry. Its own set rather than a
+// bare `cls === 'swordman'` at each site, because there were two such sites and
+// widening the union silently left the Knight, the reference's dedicated tank,
+// holding a shield that granted nothing.
+export const SHIELD_DEFENCE_CLASSES: ReadonlySet<PlayerClass> = new Set(['swordman', 'knight']);
+
 // Classes that command a persistent pet (the Scout's beast, the frost Mage's
 // Water Elemental, and the Summoner, whose entire identity is its pets: four of
 // its nineteen published skills call one). Pure predicate, here so the

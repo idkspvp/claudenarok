@@ -1,8 +1,11 @@
-// Warrior-only melee defense folded into the existing one-roll hit tables.
-// The class check is deliberate: the redesigned Warrior gains parry and shield
-// block without changing any of the eight other classes or their RNG order.
-import type { Entity } from '../types';
-import { angleTo, normAngle } from '../types';
+// Shield-and-parry melee defense folded into the existing one-roll hit tables.
+// The class check is deliberate: only the classes that fight behind a shield get
+// parry and block, without changing any other class or its RNG order. That is
+// the Warrior and, since the conversion, the Knight: the reference gives the
+// Knight a spear-and-shield kit and makes it the dedicated tank, so gating this
+// on a single class id left it holding a shield that granted nothing.
+import type { Entity, PlayerClass } from '../types';
+import { angleTo, normAngle, SHIELD_DEFENCE_CLASSES } from '../types';
 
 const WARRIOR_PARRY_BASE = 0.05;
 const WARRIOR_PARRY_PER_STRENGTH = 0.0005;
@@ -21,7 +24,10 @@ export function warriorParryChance(str: number): number {
 }
 
 export function warriorMeleeDefense(defender: Entity, attacker: Entity): WarriorMeleeDefense {
-  if (defender.kind !== 'player' || defender.templateId !== 'swordman') {
+  if (
+    defender.kind !== 'player' ||
+    !SHIELD_DEFENCE_CLASSES.has(defender.templateId as PlayerClass)
+  ) {
     return { parryChance: 0, blockChance: 0 };
   }
   const inFront =

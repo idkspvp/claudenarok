@@ -60,36 +60,34 @@ export function fleeRating(level: number, agi: number, attackerCount = 1): numbe
 export const MIN_HIT_CHANCE = 0.05;
 export const MAX_HIT_CHANCE = 1;
 
-/** The contest's base, RECALIBRATED with the new ratings.
+/** The contest's base. TRANSCRIBED, not calibrated.
  *
- *  This is a stand-in, not a transcription: SpiritVale publishes Hit and Flee as
- *  ratings and says nothing about how they meet, so the relationship
- *  `clamp(5, 100, BASE + HIT - FLEE)` is the one this game already used and is
- *  kept rather than invented (recorded in docs/design/spiritvale-coverage.md).
+ *  `Formula.HitChance(int hit, int flee)` is thirty bytes of arithmetic and it
+ *  reads, in full:
  *
- *  The CONSTANT had to move, though, and leaving it at 80 would have been the
- *  real mistake. The old ratings were symmetric: two unbuilt characters of the
- *  same level had identical Hit and Flee, so the base WAS the even-fight chance.
- *  SpiritVale's are not. Hit carries a flat +25 that Flee has no answer to, so
- *  an unbuilt attacker is 25 points ahead before anyone spends a point, and
- *  `80 + HIT - FLEE` sends every swing straight to the 100% ceiling: at level 20
- *  with ten Dexterity each, the contest reads 80 + 65 - 25 = 120.
+ *      v = hit - flee + 100
+ *      if (v < 5)   return 5
+ *      if (v <= 100) return v
+ *      return 100
  *
- *  55 restores the property the stand-in was chosen for, that an unbuilt pair of
- *  the same level trades at 80% and one swing in five misses. It is our own
- *  calibration constant re-derived to keep its own invariant, not a balance
- *  number taken from anywhere.
+ *  So the contest is `clamp(5, 100, 100 + HIT - FLEE)`, and the base is 100.
  *
- *  What deliberately does NOT come back is symmetry once both sides spend:
- *  Dexterity buys two accuracy and Agility buys half an evasion, so an attacker
- *  who invests out-runs a defender who invests equally. That asymmetry is
- *  SpiritVale's and is meant to show. */
-export const BASE_HIT_PERCENT = 55;
-/** The flat lead SpiritVale's Hit formula gives every attacker. BASE_HIT_PERCENT
- *  is 80 minus this, which is what puts an unbuilt pair back at 80%. */
-export const ATTACKER_FLAT_LEAD = 25;
-/** The even-fight chance the calibration above preserves. */
-export const EVEN_FIGHT_PERCENT = 80;
+ *  THIS CORRECTS A NUMBER THIS FILE INVENTED. The shape was already right, but
+ *  the constant had been recalibrated to 55 to preserve a property chosen here
+ *  rather than there: that an unbuilt pair of the same level trades at 80%. The
+ *  reference has no such property. An attacker whose Hit merely MATCHES a
+ *  defender's Flee lands every blow, and only a defender who is actually ahead
+ *  on the contest takes anything off that.
+ *
+ *  The consequence is the one previously logged as a defect to be fixed: hit
+ *  chance reaching 100% once accuracy out-scales evasion. That is not a defect
+ *  and it does not want a different shape. Dexterity buys two accuracy where
+ *  Agility buys half an evasion, so an attacker who invests DOES out-run a
+ *  defender who invests equally, and pinning at the ceiling is what the
+ *  reference's own arithmetic does. Evasion in SpiritVale is bought by getting
+ *  far enough ahead on Flee to push the subtraction negative, not by chipping at
+ *  a base. */
+export const BASE_HIT_PERCENT = 100;
 
 /** Chance this attack gets past FLEE, as a fraction. */
 export function hitChance(hit: number, flee: number): number {

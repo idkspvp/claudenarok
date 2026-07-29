@@ -38,6 +38,7 @@ import {
   hasteFractionFromRating,
   hitFractionFromRating,
   SHIELD_BLOCK_BASE,
+  SHIELD_DEFENCE_CLASSES,
   STATUS_STATS,
   type StatAllocation,
 } from './types';
@@ -635,7 +636,7 @@ export function recalcPlayerStats(
       meetsLevelRequirement(lvl, mainhand)) ||
       (offhand?.kind === 'weapon' && offhand.hand === 'twohand'));
   const activeShield =
-    cls === 'swordman' && isShieldItem(offhand) && meetsLevelRequirement(lvl, offhand);
+    SHIELD_DEFENCE_CLASSES.has(cls) && isShieldItem(offhand) && meetsLevelRequirement(lvl, offhand);
   e.blockChance = activeShield ? SHIELD_BLOCK_BASE : 0;
   e.blockValue = activeShield ? (offhand.blockValue ?? 0) : 0;
   // The equipped mainhand item id: drives the held weapon model on the client

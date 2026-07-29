@@ -21,6 +21,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Slyngel',
       acolyte: 'Præst',
       mage: 'Magiker',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   id_ID: {
@@ -40,6 +42,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Penyamun',
       acolyte: 'Pendeta',
       mage: 'Penyihir',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   nl_NL: {
@@ -58,6 +62,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Schurk',
       acolyte: 'Priester',
       mage: 'Magiër',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   pl_PL: {
@@ -76,6 +82,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Łotrzyk',
       acolyte: 'Kapłan',
       mage: 'Mag',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   sv_SE: {
@@ -94,6 +102,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Skurk',
       acolyte: 'Präst',
       mage: 'Magiker',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   tr_TR: {
@@ -112,6 +122,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Hırsız',
       acolyte: 'Rahip',
       mage: 'Büyücü',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
   vi_VN: {
@@ -131,6 +143,8 @@ export const PLAYERCARD_NEW: Record<
       thief: 'Đạo Tặc',
       acolyte: 'Tu Sĩ',
       mage: 'Pháp Sư',
+      knight: 'Knight',
+      summoner: 'Summoner',
     },
   },
 };
