@@ -28,68 +28,18 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { Document, NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
-import { dedup, meshopt, prune } from '@gltf-transform/functions';
+import { dedup, dequantize, meshopt, prune } from '@gltf-transform/functions';
 import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
+import { applyDir, applyMat, matMul, normalMatrix, trs } from './transform_math.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] : d);
 const VALUED = new Set(['--chunk', '--maps', '--max-tris', '--limit']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 
-/** Quaternion (xyzw) + translation + scale to a column-major 4x4, the layout
- *  glTF and Three both use. Written out rather than pulled from a matrix library
- *  so this script stays dependency-light and the maths is auditable. */
-function trs(pos, rot, scl) {
-  const [x, y, z, w] = rot;
-  const [sx, sy, sz] = scl;
-  const x2 = x + x;
-  const y2 = y + y;
-  const z2 = z + z;
-  const xx = x * x2;
-  const xy = x * y2;
-  const xz = x * z2;
-  const yy = y * y2;
-  const yz = y * z2;
-  const zz = z * z2;
-  const wx = w * x2;
-  const wy = w * y2;
-  const wz = w * z2;
-  return [
-    (1 - (yy + zz)) * sx,
-    (xy + wz) * sx,
-    (xz - wy) * sx,
-    0,
-    (xy - wz) * sy,
-    (1 - (xx + zz)) * sy,
-    (yz + wx) * sy,
-    0,
-    (xz + wy) * sz,
-    (yz - wx) * sz,
-    (1 - (xx + yy)) * sz,
-    0,
-    pos[0],
-    pos[1],
-    pos[2],
-    1,
-  ];
-}
-
-const applyMat = (m, x, y, z) => [
-  m[0] * x + m[4] * y + m[8] * z + m[12],
-  m[1] * x + m[5] * y + m[9] * z + m[13],
-  m[2] * x + m[6] * y + m[10] * z + m[14],
-];
-/** Directions ignore translation. Not the inverse-transpose: these transforms are
- *  rotation plus a uniform-or-near-uniform scale, and renormalising covers it. */
-const applyDir = (m, x, y, z) => {
-  const v = [
-    m[0] * x + m[4] * y + m[8] * z,
-    m[1] * x + m[5] * y + m[9] * z,
-    m[2] * x + m[6] * y + m[10] * z,
-  ];
-  const len = Math.hypot(v[0], v[1], v[2]) || 1;
-  return [v[0] / len, v[1] / len, v[2] / len];
-};
+// The 4x4 maths lives in its own tested module: it is shared with the prefab
+// extractor and every defect it guards against was silent, so it is pinned by
+// tests/asset_transform_math.test.ts rather than trusted in place.
 
 const invokedDirectly =
   Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href;
@@ -113,23 +63,96 @@ if (invokedDirectly) {
     .registerExtensions(ALL_EXTENSIONS)
     .registerDependencies({ 'meshopt.encoder': MeshoptEncoder, 'meshopt.decoder': MeshoptDecoder });
 
-  /** Prop geometry, read once and reused across every map that places it. */
+  /** Prop geometry, read once and reused across every map that places it.
+   *
+   *  THE GEOMETRY IS DEQUANTIZED, AND NONE OF THAT IS OPTIONAL. These GLBs carry
+   *  KHR_mesh_quantization, so an accessor reads back as the raw integer it is
+   *  stored as and the compensating scale lives on the NODE. Read naively, a wall
+   *  came out 65,534 units across and a baked map measured 255 kilometres instead
+   *  of 343 metres, with nothing erroring: the geometry is simply enormous.
+   *
+   *  The hand-rolled version of this hard-coded a /32767 divisor and a stride of
+   *  3, and BOTH are wrong for normals. NORMAL is quantized to int8, so the
+   *  divisor is 127, and it is stored as VEC4 on 3,120 of the props because Unity
+   *  pads float16 normals to four components. A stride-3 walk over a 4-wide array
+   *  reads a different lane on every vertex after the first: measured mean error
+   *  73 to 94 degrees on real props, on 46% of the placements in a single map.
+   *  gltf-transform's own dequantize() knows every component type and divisor, so
+   *  the strides are read from the accessors and the arithmetic is not repeated
+   *  here. */
   const propCache = new Map();
+  const ELEMENTS = { SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4 };
+
   async function loadProp(name) {
     if (propCache.has(name)) return propCache.get(name);
     const file = path.join(propDir, `${name}.glb`);
     let geo = null;
     try {
       const doc = await io.read(file);
-      const prim = doc.getRoot().listMeshes()[0]?.listPrimitives()[0];
+      await doc.transform(dequantize());
+      const root = doc.getRoot();
+      const mesh = root.listMeshes()[0];
+      const prim = mesh?.listPrimitives()[0];
       if (prim) {
-        geo = {
-          position: prim.getAttribute('POSITION')?.getArray(),
-          normal: prim.getAttribute('NORMAL')?.getArray(),
-          uv: prim.getAttribute('TEXCOORD_0')?.getArray(),
-          indices: prim.getIndices()?.getArray(),
-        };
-        if (!geo.position || !geo.indices) geo = null;
+        // The node carrying the mesh holds the compensating transform. Its own
+        // parents count too: a converter that emits a scene graph (the Synty FBX
+        // path does) puts part of the scale on a parent node.
+        const node = root.listNodes().find((n) => n.getMesh() === mesh);
+        const local = node
+          ? trs(node.getTranslation(), node.getRotation(), node.getScale())
+          : trs([0, 0, 0], [0, 0, 0, 1], [1, 1, 1]);
+        let nodeMat = local;
+        let up = node?.getParentNode?.() ?? null;
+        let guard = 0;
+        while (up && guard++ < 32) {
+          nodeMat = matMul(trs(up.getTranslation(), up.getRotation(), up.getScale()), nodeMat);
+          up = up.getParentNode?.() ?? null;
+        }
+        const nodeNrm = normalMatrix(nodeMat);
+
+        const posAttr = prim.getAttribute('POSITION');
+        const nrmAttr = prim.getAttribute('NORMAL');
+        const uvAttr = prim.getAttribute('TEXCOORD_0');
+        const idx = prim.getIndices()?.getArray();
+        if (posAttr && idx) {
+          const rawPos = posAttr.getArray();
+          const ps = ELEMENTS[posAttr.getType()] ?? 3;
+          const count = Math.floor(rawPos.length / ps);
+          const position = new Float32Array(count * 3);
+          for (let v = 0; v < count; v++) {
+            const w = applyMat(nodeMat, rawPos[v * ps], rawPos[v * ps + 1], rawPos[v * ps + 2]);
+            position[v * 3] = w[0];
+            position[v * 3 + 1] = w[1];
+            position[v * 3 + 2] = w[2];
+          }
+
+          let normal = null;
+          if (nrmAttr) {
+            const rawNrm = nrmAttr.getArray();
+            const ns = ELEMENTS[nrmAttr.getType()] ?? 3;
+            normal = new Float32Array(count * 3);
+            for (let v = 0; v < count; v++) {
+              const o = v * ns;
+              if (o + 2 >= rawNrm.length) break;
+              const n = applyDir(nodeNrm, rawNrm[o], rawNrm[o + 1], rawNrm[o + 2]);
+              normal[v * 3] = n[0];
+              normal[v * 3 + 1] = n[1];
+              normal[v * 3 + 2] = n[2];
+            }
+          }
+
+          let uv = null;
+          if (uvAttr) {
+            const rawUv = uvAttr.getArray();
+            const us = ELEMENTS[uvAttr.getType()] ?? 2;
+            uv = new Float32Array(count * 2);
+            for (let v = 0; v < count; v++) {
+              uv[v * 2] = rawUv[v * us] ?? 0;
+              uv[v * 2 + 1] = rawUv[v * us + 1] ?? 0;
+            }
+          }
+          geo = { position, normal, uv, indices: idx };
+        }
       }
     } catch {
       geo = null;
@@ -153,7 +176,15 @@ if (invokedDirectly) {
     for (const p of layout.props) {
       if (p.inactive) continue;
       const g = (p.group ?? '').toLowerCase();
+      const n = p.name.toLowerCase();
+      // Skydome-scale scenery is excluded by NAME as well as by group, because
+      // the group is where the designer filed it and the name is what it is:
+      // BackdropMountains sits under the ordinary "World" group yet spans two
+      // kilometres, so it swallowed a 64m cell whole and stretched the baked map
+      // from 343 metres to 2032. A web renderer draws its own distant horizon.
       if (g === 'lighting' || g === 'fog' || g === 'backdropmountains') continue;
+      if (/backdrop|skyline|skydome|skybox|colormap|horizon/.test(n) || /backdrop|skyline/.test(g))
+        continue;
       const key = `${Math.floor(p.pos[0] / chunkSize)}_${Math.floor(p.pos[2] / chunkSize)}`;
       const list = cells.get(key);
       if (list) list.push(p);
@@ -176,7 +207,6 @@ if (invokedDirectly) {
       let idx = [];
       let base = 0;
       let tris = 0;
-      let part = 0;
 
       const flush = () => {
         if (!idx.length) return;
@@ -192,7 +222,14 @@ if (invokedDirectly) {
       for (const p of placements) {
         const geo = await loadProp(p.name.replace(/[^A-Za-z0-9_-]/g, '_'));
         if (!geo) continue;
-        const m = trs([p.pos[0] - originX, p.pos[1], p.pos[2] - originZ], p.rot, p.scale);
+        // `mat` overrides the TRS triple where the layout carried one: a rotated
+        // child under a non-uniformly scaled parent composes to a SHEARED matrix
+        // that no position/rotation/scale triple can express. Six props in the
+        // whole corpus, but silently wrong without this.
+        const m = p.mat
+          ? [...p.mat.slice(0, 12), p.mat[12] - originX, p.mat[13], p.mat[14] - originZ, p.mat[15]]
+          : trs([p.pos[0] - originX, p.pos[1], p.pos[2] - originZ], p.rot, p.scale);
+        const nm = normalMatrix(m);
         const count = geo.position.length / 3;
         for (let v = 0; v < count; v++) {
           const w = applyMat(
@@ -203,7 +240,7 @@ if (invokedDirectly) {
           );
           pos.push(w[0], w[1], w[2]);
           if (geo.normal) {
-            const n = applyDir(m, geo.normal[v * 3], geo.normal[v * 3 + 1], geo.normal[v * 3 + 2]);
+            const n = applyDir(nm, geo.normal[v * 3], geo.normal[v * 3 + 1], geo.normal[v * 3 + 2]);
             nrm.push(n[0], n[1], n[2]);
           } else nrm.push(0, 1, 0);
           uv.push(geo.uv ? geo.uv[v * 2] : 0, geo.uv ? geo.uv[v * 2 + 1] : 0);
@@ -216,7 +253,6 @@ if (invokedDirectly) {
         // against a 250k budget, so this is a real case, not a guard rail.
         if (tris >= maxTris) {
           flush();
-          part++;
         }
       }
       flush();
@@ -248,7 +284,11 @@ if (invokedDirectly) {
         doc
           .createScene()
           .addChild(doc.createNode(name).setMesh(doc.createMesh(name).addPrimitive(prim)));
-        await doc.transform(prune(), dedup(), meshopt({ encoder: MeshoptEncoder, level: 'high' }));
+        await doc.transform(
+          prune({ keepAttributes: true }),
+          dedup(),
+          meshopt({ encoder: MeshoptEncoder, level: 'high' }),
+        );
         const outFile = path.join(mapOut, `${name}.glb`);
         await io.write(outFile, doc);
         chunkIndex.push({
