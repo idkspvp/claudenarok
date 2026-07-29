@@ -8,6 +8,7 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  batchesNear,
   DEFAULT_EXCLUDED_GROUPS,
   drawCallCost,
   type MapLayout,
@@ -158,5 +159,81 @@ describe('an empty map', () => {
     const plan = planMap(layout([]), hasAll);
     expect(plan.batches).toEqual([]);
     expect(drawCallCost(plan)).toEqual({ calls: 0, placements: 0, ratio: 0 });
+  });
+});
+
+describe('spatial chunking', () => {
+  it('splits one mesh across cells, raising batch count to lower submitted count', () => {
+    // Chunking makes the TOTAL worse on purpose. What it buys is that a frame
+    // submits only the cells in view, and that trade is the whole point.
+    const props = [at('Tile', 0), at('Tile', 10), at('Tile', 200), at('Tile', 210)];
+    const flat = planMap(layout(props), hasAll);
+    const chunked = planMap(layout(props), { ...hasAll, chunkSize: 32 });
+    expect(flat.batches).toHaveLength(1);
+    expect(chunked.batches).toHaveLength(2);
+    expect(chunked.batches.every((b) => b.mesh === 'Tile')).toBe(true);
+    expect(new Set(chunked.batches.map((b) => b.chunk)).size).toBe(2);
+  });
+
+  it('gives every chunked batch bounds that contain its instances', () => {
+    const plan = planMap(layout([at('T', 5), at('T', 12), at('T', 20)]), {
+      ...hasAll,
+      chunkSize: 64,
+    });
+    const b = plan.batches[0];
+    expect(b.bounds).toBeDefined();
+    const [minX, , , maxX] = b.bounds as readonly number[];
+    for (const i of b.instances) {
+      expect(i.pos[0]).toBeGreaterThanOrEqual(minX);
+      expect(i.pos[0]).toBeLessThanOrEqual(maxX);
+    }
+  });
+
+  it('leaves an unchunked plan without chunk or bounds', () => {
+    const plan = planMap(layout([at('T', 0)]), hasAll);
+    expect(plan.batches[0].chunk).toBeUndefined();
+    expect(plan.batches[0].bounds).toBeUndefined();
+  });
+
+  it('never loses or duplicates a placement when chunking', () => {
+    const props = Array.from({ length: 300 }, (_, i) => at(i % 3 === 0 ? 'A' : 'B', i * 7));
+    const flat = planMap(layout(props), hasAll);
+    const chunked = planMap(layout(props), { ...hasAll, chunkSize: 32 });
+    expect(chunked.counts.drawn).toBe(flat.counts.drawn);
+    expect(chunked.counts.drawn).toBe(300);
+  });
+
+  it('treats a zero or negative chunk size as no chunking', () => {
+    for (const size of [0, -1]) {
+      const plan = planMap(layout([at('T', 0), at('T', 999)]), { ...hasAll, chunkSize: size });
+      expect(plan.batches, `chunkSize ${size}`).toHaveLength(1);
+    }
+  });
+});
+
+describe('batchesNear', () => {
+  it('submits only the cells within the radius', () => {
+    const plan = planMap(layout([at('T', 0), at('T', 5), at('T', 500), at('T', 505)]), {
+      ...hasAll,
+      chunkSize: 32,
+    });
+    expect(plan.batches).toHaveLength(2);
+    const near = batchesNear(plan, 0, 0, 50);
+    expect(near).toHaveLength(1);
+    expect(near[0].instances.map((i) => i.pos[0])).toEqual([0, 5]);
+  });
+
+  it('measures to the batch box, not its centre, so a wide batch still counts', () => {
+    const plan = planMap(layout([at('T', 0), at('T', 300)]), { ...hasAll, chunkSize: 4096 });
+    // One batch spanning 0..300. Standing at 290 is inside it even though the
+    // midpoint is 150 away.
+    expect(plan.batches).toHaveLength(1);
+    expect(batchesNear(plan, 290, 0, 5)).toHaveLength(1);
+  });
+
+  it('returns everything for an UNCHUNKED plan rather than pretending to cull', () => {
+    // Quietly returning less would hide that the plan was never chunked.
+    const plan = planMap(layout([at('T', 0), at('T', 9999)]), hasAll);
+    expect(batchesNear(plan, 0, 0, 1)).toHaveLength(plan.batches.length);
   });
 });
