@@ -28,16 +28,41 @@ function abToB64(ab) {
   return btoa(bin);
 }
 
+/** Triangles one node draws, the single place that per-mesh math lives. */
+function meshTriangles(o) {
+  const g = o.isMesh ? o.geometry : null;
+  if (!g) return 0;
+  return g.index ? g.index.count / 3 : (g.attributes.position?.count ?? 0) / 3;
+}
+
 /** Triangles in an object tree, so the caller can enforce a budget per prop. */
 function countTriangles(root) {
   let tris = 0;
   root.traverse((o) => {
-    if (!o.isMesh || !o.geometry) return;
-    const g = o.geometry;
-    tris += g.index ? g.index.count / 3 : (g.attributes.position?.count ?? 0) / 3;
+    tris += meshTriangles(o);
   });
   return tris;
 }
+
+/**
+ * Meshes that will actually draw.
+ *
+ * A tree with none of these still exports as a structurally valid GLB, just an
+ * empty one, so the driver needs this number to tell a real prop from a prop
+ * that pruning hollowed out.
+ */
+function countDrawables(root) {
+  let n = 0;
+  root.traverse((o) => {
+    if (meshTriangles(o) > 0) n++;
+  });
+  return n;
+}
+
+// Editor-only NODE names. Every alternative is anchored, because these are
+// matched as substrings of a lowercased node name: an unanchored fragment eats
+// any prop whose name merely contains it.
+const EDITOR_ONLY_NODE = /_lod[1-9]\b|collider|collision|_ref\b/;
 
 /**
  * Strip everything a web renderer will not use.
@@ -47,12 +72,22 @@ function countTriangles(root) {
  * nodes per prop. LOD1/LOD2 go too: the game draws one level and picks detail
  * with its own graphics tier, so shipping three copies of every rock triples the
  * payload for nothing.
+ *
+ * Lights and cameras are matched by TYPE, never by name. FBXLoader builds a real
+ * THREE.Light or THREE.Camera for an FBX light/camera attribute, so the type is
+ * authoritative and the name is not. Matching the bare substring 'light' emptied
+ * every lamp in the pack (Gen_Prop_Light_Roof_01 and its siblings are ordinary
+ * geometry, not light sources) and silently amputated the lit panel node off
+ * Gen_Prop_Keypad_01 while its triangle count still looked healthy.
  */
 function prune(root) {
   const doomed = [];
   root.traverse((o) => {
-    const n = (o.name || '').toLowerCase();
-    if (/_lod[1-9]\b|collider|collision|_ref\b|camera|light/.test(n)) doomed.push(o);
+    if (o.isLight || o.isCamera) {
+      doomed.push(o);
+      return;
+    }
+    if (EDITOR_ONLY_NODE.test((o.name || '').toLowerCase())) doomed.push(o);
   });
   for (const o of doomed) o.parent?.remove(o);
   return root;
@@ -107,12 +142,13 @@ globalThis.__convertProp = async (fbxB64) => {
   group.updateMatrixWorld(true);
 
   const tris = countTriangles(group);
+  const drawables = countDrawables(group);
 
   const exporter = new GLTFExporter();
   const glb = await new Promise((resolve, reject) => {
     exporter.parse(group, resolve, reject, { binary: true, onlyVisible: true });
   });
-  return { glb: abToB64(glb), tris };
+  return { glb: abToB64(glb), tris, drawables };
 };
 
 globalThis.__ready = true;

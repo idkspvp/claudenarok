@@ -34,6 +34,8 @@
 //   --scale <n>      uniform scale applied to positions (default 1)
 //   --force          rebuild even when the output is newer than the source
 //   --no-meshopt     skip compression
+//   --keep-tangents  keep TANGENT (only useful with a normal map)
+//   --keep-skinning  keep JOINTS_0/WEIGHTS_0 (dead payload until a skin is exported)
 //   -h, --help
 
 import { existsSync, mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
@@ -47,12 +49,6 @@ import { MeshoptDecoder, MeshoptEncoder } from 'meshoptimizer';
 const argv = process.argv.slice(2);
 const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] : d);
 const has = (n) => argv.includes(n);
-if (has('-h') || has('--help') || argv.length < 2) {
-  console.log(
-    'usage: node scripts/assets/unity_mesh_to_glb.mjs <meshDir> <outDir> [--limit n] [--scale n]',
-  );
-  process.exit(argv.length < 2 ? 1 : 0);
-}
 const VALUED = new Set(['--include', '--exclude', '--limit', '--scale']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 const [meshDir, outDir] = positional;
@@ -62,6 +58,8 @@ const limit = Number(flag('--limit', '0'));
 const scale = Number(flag('--scale', '1'));
 const force = has('--force');
 const compress = !has('--no-meshopt');
+const keepTangents = has('--keep-tangents');
+const keepSkinning = has('--keep-skinning');
 
 // Unity VertexAttributeFormat -> [bytes per component, reader name].
 const FORMAT = {
@@ -81,16 +79,98 @@ const FORMAT = {
 
 // Unity VertexAttribute index -> what we call it. Only the ones a web renderer
 // consumes; the rest are decoded and dropped.
+//
+// TANGENT and TEXCOORD_1 are deliberately absent. Tangents exist to orient a
+// NORMAL MAP, and the prop atlases carry none, so they were 18.7% of the vertex
+// payload doing nothing. TEXCOORD_1 is Unity's lightmap channel, which a web
+// renderer that lights in real time never reads. COLOR_0 is KEPT: it was checked
+// and genuinely varies on every mesh that has it (Synty shades with it), so
+// dropping it would flatten the art.
+//
+// WEIGHTS_0 and JOINTS_0 are absent for a harder reason: this exporter writes no
+// skins array and no joint nodes at all, so a skinning attribute is payload
+// nothing downstream can consume, and 1,726 of the 3,994 source meshes that
+// carry one carry BlendIndices ALONE, which glTF rejects outright.
+// --keep-skinning brings them back, spec-shaped, for when the character
+// pipeline lands and actually exports a skin.
 const ATTR = {
   0: 'POSITION',
   1: 'NORMAL',
-  2: 'TANGENT',
   3: 'COLOR_0',
   4: 'TEXCOORD_0',
-  5: 'TEXCOORD_1',
-  12: 'WEIGHTS_0',
-  13: 'JOINTS_0',
 };
+/** Only read when --keep-tangents asks for it. */
+const OPTIONAL_ATTR = { 2: 'TANGENT' };
+/** Only read when --keep-skinning asks for it. */
+const SKIN_ATTR = { 12: 'WEIGHTS_0', 13: 'JOINTS_0' };
+
+// glTF 2.0 fixes the component count PER SEMANTIC; Unity's channel width does
+// not, so the raw dimension must never be mapped straight to an accessor type.
+// That mismatch was live: Unity pads float16 normals to 4 components, so NORMAL
+// went out as VEC4 on 3,120 meshes, and BlendIndices came through as SCALAR or
+// VEC2 where glTF demands VEC4. It is not a paperwork problem. Readers trust the
+// spec instead of the header: build_map_chunks.mjs walks NORMAL at a hard stride
+// of 3 and, handed a VEC4 array, reads misaligned from the second vertex on,
+// which measured 73 to 94 degrees of mean angular error on real props.
+//
+// So the width is re-strided, not relabelled: relabelling a 4-wide array as VEC3
+// would shear every vertex after the first. Truncation is provably free on the
+// only case that hits it, the padded normals: their 4th component is exactly 0
+// on every one of the 3,120 meshes, global max |w| = 0 over the whole corpus.
+// Unity even says so in the field this parser already reads: the high nibble of
+// `dimension`, masked off above, holds the SEMANTIC count 3 on exactly those
+// rows and 0 on every other row in the corpus.
+//
+// `pad` is what a MISSING component means, never a blind zero: TANGENT w is the
+// handedness sign and COLOR_0 alpha is opaque.
+const ACCESSOR_TYPE = { 1: 'SCALAR', 2: 'VEC2', 3: 'VEC3', 4: 'VEC4' };
+const SEMANTIC_SHAPE = {
+  POSITION: { want: 3 },
+  NORMAL: { want: 3 },
+  TANGENT: { want: 4, pad: (d) => (d === 3 ? 1 : 0) },
+  COLOR_0: { want: 4, allow: [3, 4], pad: (d) => (d === 3 ? 1 : 0) },
+  TEXCOORD_0: { want: 2 },
+  JOINTS_0: { want: 4 },
+  WEIGHTS_0: { want: 4 },
+};
+
+/** Re-stride one decoded attribute to the width its semantic is allowed to have. */
+export function conformAttribute(semantic, data, dimension) {
+  const shape = SEMANTIC_SHAPE[semantic];
+  // Fail CLOSED. Passing an unlisted semantic through at Unity's raw width is
+  // exactly the bug this function exists to close, so adding a row to ATTR
+  // without one here must break loudly rather than quietly reintroduce it. The
+  // corpus already carries dimension-4 TEXCOORD_2 and TEXCOORD_3 rows waiting to
+  // do so.
+  if (!shape) throw new Error(`conformAttribute: no glTF shape declared for ${semantic}`);
+  if ((shape.allow ?? [shape.want]).includes(dimension)) return { data, dimension };
+  const want = shape.want;
+  const count = data.length / dimension;
+  const out = new data.constructor(count * want);
+  for (let v = 0; v < count; v++) {
+    for (let d = 0; d < want; d++) {
+      out[v * want + d] = d < dimension ? data[v * dimension + d] : (shape.pad?.(d) ?? 0);
+    }
+  }
+  return { data: out, dimension: want };
+}
+
+/** glTF forbids either half of the JOINTS_0/WEIGHTS_0 pair on its own, and the
+ *  corpus is full of exactly that: BlendIndices at dimension 1 with no
+ *  BlendWeight channel anywhere, which is Unity rigid single-bone bind data, not
+ *  a weighted skin. The implied weight is 1 on the bound bone, so fill the
+ *  missing half rather than dropping the pair; --keep-skinning output then keeps
+ *  its meaning AND validates. */
+function pairSkinning(attributes, vertexCount) {
+  if (attributes.JOINTS_0 && !attributes.WEIGHTS_0) {
+    const weights = new Float32Array(vertexCount * 4);
+    for (let v = 0; v < vertexCount; v++) weights[v * 4] = 1;
+    attributes.WEIGHTS_0 = { data: weights, dimension: 4 };
+  }
+  if (attributes.WEIGHTS_0 && !attributes.JOINTS_0) {
+    attributes.JOINTS_0 = { data: new Uint16Array(vertexCount * 4), dimension: 4 };
+  }
+}
 
 /** IEEE half-precision to float. Unity stores UVs this way. */
 function f16(u) {
@@ -133,6 +213,46 @@ function parseChannels(text) {
 }
 
 /** Decode one Unity mesh into plain typed arrays. Throws rather than guessing. */
+/** How far outside [0,1] a texcoord may sit and still count as noise rather than
+ *  intent. Well past a float32 rounding error, well short of a second tile. */
+export const UV_DUST_EPSILON = 1e-3;
+
+/** Snap texcoords that miss [0,1] by rounding error, and LEAVE REAL TILING ALONE.
+ *
+ *  The quantizer refuses a texcoord set that strays outside [0,1] and silently
+ *  keeps the whole attribute as float32, which is how TEXCOORD_0 came to be 24%
+ *  of the vertex payload. An earlier version of this bought that back by clamping
+ *  every UV unconditionally, on a stated measurement that the corpus maximum was
+ *  1.0 and the strays were floating-point dust.
+ *
+ *  That measurement was wrong, and wrong in the way that is hardest to notice: it
+ *  was taken by decoding through the clamp itself, so it could only ever report
+ *  [0,1]. Measured on the raw channel the corpus runs -69.34 to 164.36, and 543
+ *  meshes tile by a real margin: river surfaces at 164 repeats, fountain water,
+ *  gold piles, bridges, stairs, tower walls. Clamping those collapses every
+ *  repeat onto the atlas edge, which is not a size trade, it is destroyed texture
+ *  mapping that no later stage can recover.
+ *
+ *  So the decision is per mesh. A mesh that only overshoots by dust is snapped
+ *  and quantises; a mesh that genuinely tiles keeps its float32 texcoords and
+ *  costs the bytes. */
+export function snapTexcoordDust(attr, epsilon = UV_DUST_EPSILON) {
+  if (!attr) return false;
+  const uv = attr.data;
+  let min = Number.POSITIVE_INFINITY;
+  let max = Number.NEGATIVE_INFINITY;
+  for (let i = 0; i < uv.length; i++) {
+    if (uv[i] < min) min = uv[i];
+    if (uv[i] > max) max = uv[i];
+  }
+  if (min < -epsilon || max > 1 + epsilon) return false;
+  for (let i = 0; i < uv.length; i++) {
+    if (uv[i] < 0) uv[i] = 0;
+    else if (uv[i] > 1) uv[i] = 1;
+  }
+  return true;
+}
+
 export function decodeUnityMesh(text) {
   const name = text.match(/^\s*m_Name: (.*)$/m)?.[1]?.trim() ?? 'mesh';
   const vertexCount = num(text, 'm_VertexCount');
@@ -205,7 +325,10 @@ export function decodeUnityMesh(text) {
   const attributes = {};
   for (const [i, c] of parseChannels(text).entries()) {
     if (!c.dimension) continue;
-    const semantic = ATTR[i];
+    const semantic =
+      ATTR[i] ??
+      (keepTangents ? OPTIONAL_ATTR[i] : undefined) ??
+      (keepSkinning ? SKIN_ATTR[i] : undefined);
     if (!semantic) continue;
     const [bytes] = FORMAT[c.format];
     const stride = strides.get(c.stream);
@@ -219,10 +342,13 @@ export function decodeUnityMesh(text) {
       for (let d = 0; d < c.dimension; d++)
         out[v * c.dimension + d] = read(c.format, blob, at + d * bytes);
     }
-    attributes[semantic] = { data: out, dimension: c.dimension };
+    attributes[semantic] = conformAttribute(semantic, out, c.dimension);
   }
 
   if (!attributes.POSITION) throw new Error(`${name}: no POSITION channel`);
+  if (keepSkinning) pairSkinning(attributes, vertexCount);
+
+  snapTexcoordDust(attributes.TEXCOORD_0);
   if (scale !== 1)
     for (let i = 0; i < attributes.POSITION.data.length; i++) attributes.POSITION.data[i] *= scale;
 
@@ -246,6 +372,16 @@ export function decodeUnityMesh(text) {
 const invokedDirectly =
   Boolean(process.argv[1]) && import.meta.url === pathToFileURL(process.argv[1]).href;
 if (invokedDirectly) {
+  // Argument checking belongs INSIDE this guard. At module top level it ran on
+  // import too, so `import { decodeUnityMesh }` from a test or a sibling script
+  // printed the usage line and called process.exit before the importer's first
+  // statement. That is why this file had no test.
+  if (has('-h') || has('--help') || argv.length < 2) {
+    console.log(
+      'usage: node scripts/assets/unity_mesh_to_glb.mjs <meshDir> <outDir> [--limit n] [--scale n]',
+    );
+    process.exit(argv.length < 2 ? 1 : 0);
+  }
   let files = readdirSync(meshDir)
     .filter((f) => f.endsWith('.asset'))
     .sort();
@@ -285,7 +421,7 @@ if (invokedDirectly) {
     const buffer = doc.createBuffer();
     const prim = doc.createPrimitive().setMode(4);
     for (const [semantic, { data, dimension }] of Object.entries(mesh.attributes)) {
-      const type = { 1: 'SCALAR', 2: 'VEC2', 3: 'VEC3', 4: 'VEC4' }[dimension];
+      const type = ACCESSOR_TYPE[dimension];
       if (!type) continue;
       prim.setAttribute(
         semantic,
@@ -301,7 +437,11 @@ if (invokedDirectly) {
 
     if (compress) {
       try {
-        await doc.transform(prune(), dedup(), meshopt({ encoder: MeshoptEncoder, level: 'high' }));
+        await doc.transform(
+          prune({ keepAttributes: true }),
+          dedup(),
+          meshopt({ encoder: MeshoptEncoder, level: 'high' }),
+        );
       } catch (err) {
         console.error(`  optimize failed for ${name}: ${String(err).slice(0, 100)}`);
       }
