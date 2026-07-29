@@ -12,7 +12,7 @@ Spec: `spiritvale-conversion-plan.md`. Systems and UI: `spiritvale-systems-and-u
 |---|---|---|---|
 | 0 | Finish what is half-done: cut card duel, finish talent removal, simple aggro | DONE | 6a55c74..34da7ce |
 | 1 | The stat core: six pure modules, no call sites | DONE | 6214a89..daa4ebd |
-| 2 | Wire the stat core, retire the Ragnarok one | IN PROGRESS | 1 of 5 formulas: 097b2ce |
+| 2 | Wire the stat core, retire the Ragnarok one | DONE | 097b2ce..dfc8c58 |
 | 3 | Progression: cap 150, attribute ladder, job pools, refund | NOT STARTED | |
 | 4 | The seven base classes and the skill-tree window | NOT STARTED | |
 | 5 | Statuses and passives as data | NOT STARTED | |
@@ -92,30 +92,45 @@ Notes phase 2 needs:
   caller's business.
 
 ### Phase 2
-Formula 1 of 5 landed: DEFENCE (097b2ce). Physical and magic both run
-damageTaken = 100/(DEF + 100); combat/defence.ts and combat/magic_defence.ts are
-deleted; the character sheet's reduction cell reads the curve.
+All five formulas wired (097b2ce..dfc8c58). Before/after numbers, measured on
+both sides, are in `spiritvale-phase2-damage-table.md`.
 
-Still to wire, in this order: attack, accuracy, attack speed, resources. Attack
-speed last because it retimes every existing encounter.
+  defence      097b2ce   one curve, physical and magic; combat/defence.ts and
+                         combat/magic_defence.ts deleted
+  attack       a0c06d3   melee, ranged and magic; the three RO helpers deleted
+  accuracy     b00ee2f   Hit and Flee ratings; the CONTEST is a stand-in
+  attack speed 4a67d2c   per-weapon column; combat/aspd.ts and job_aspd.ts deleted
+  resources    a23d304   health, spell points; job_vitals.ts deleted
+  goldens      dfc8c58   one regenerate, last
 
-What the next step needs to know:
+TWO MAPPING MODULES ARE OURS, NOT TRANSCRIBED, and live in their own files with
+their own tests so a judgement call cannot hide inside transcribed data:
+combat/weapon_speed_map.ts (knuckle to Unarmed, whip to Instrument; neither is
+reachable, no item carries them) and combat/class_health_map.ts (our five
+classes onto the reference's multipliers, one to one, no invention needed).
 
-- The soft-defence rng draw is GONE from resolvePhysical. Parity is red and
-  stays red until the phase's final regenerate. Do not regenerate per formula:
-  one reviewed commit at the end, per the plan.
-- Vitality currently buys NOTHING defensively. That is correct for the target
-  but the compensation (the health pool) does not arrive until the resources
-  formula, so the intermediate commits describe a game where Vitality is weak.
-  Finish the phase before judging any balance number.
-- tests/heroic_difficulty_floors.test.ts is red and was red BEFORE this phase
-  started (a swing floor and a health pin both drifted). The curve changed which
-  mob sits lowest, not whether the file passes. Phase 7 owns it, when monster
-  stats are re-derived from the reference. Do not bump its pins to hide it.
-- The probe pattern that worked elsewhere in this repo (a throwaway test that
-  console.logs) produces no visible output under this vitest config. Use a
-  deliberately failing assertion, or read the numbers out of a real failure
-  message, when you need to see an intermediate value.
+THE ONE THING PHASE 3 OR LATER MUST FIX, and it is a design decision, not a bug:
+
+  Hit chance reaches 100% by level 50 on an even build and stays there.
+
+The RATINGS are transcribed and correct. Accuracy pays two per Dexterity and
+evasion half per Agility, a four-to-one split that is the reference's. The
+CONTEST is not: SpiritVale publishes none, so clamp(5, 100, BASE + HIT - FLEE)
+was kept as a stand-in and its base recalibrated from 80 to 55 so an unbuilt
+pair still trades at 80%. A linear contest cannot absorb a four-to-one split
+across a 1-to-150 range; it needs a different SHAPE, most likely a ratio. There
+is no published answer, so it must be decided deliberately rather than invented.
+Recorded in spiritvale-coverage.md as open unknown 5.
+
+Also newly recorded there: unknown 6, whether LUK/5 in the Hit formula is
+integer division. The published expression and the prose note beside it
+disagree; we follow the expression.
+
+Still deliberately NOT converted, both labelled as stand-ins in the code:
+perfect dodge (SpiritVale reads a plain gear stat; no item grants it until phase
+6, and switching now would delete the mechanic) and the resource TYPE branch
+(rage and energy still cap at 100; SpiritVale is all spell points, which is
+phase 4's business with the skills).
 
 ## Decisions taken mid-run
 
