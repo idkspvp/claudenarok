@@ -33,11 +33,17 @@ const flag = (n, d = null) => (argv.indexOf(n) >= 0 ? argv[argv.indexOf(n) + 1] 
 const VALUED = new Set(['--skills']);
 const positional = argv.filter((a, i) => !a.startsWith('--') && !VALUED.has(argv[i - 1]));
 
-/** The MonoBehaviour script guid that marks an asset as a SkillConfig. Taken
- *  from a known-good SkillConfig rather than assumed. */
+/** The MonoBehaviour script guids, taken from known-good assets rather than
+ *  assumed. Both were found by scanning for scripts that carry Effect* fields,
+ *  which is also how it became clear they are two DIFFERENT shapes. */
 const SKILL_CONFIG_SCRIPT = 'eaf36c6c278fdd22161139bea71de573';
+const STATUS_CONFIG_SCRIPT = 'a0b4d02172';
 
 const EFFECT_SLOTS = ['EffectCast', 'EffectInstance', 'EffectComplete', 'EffectHit', 'EffectBolt'];
+/** A status carries its own three, and this is where a BUFF's visual lives: a
+ *  skill like Inner Focus has all five of its own slots empty because the thing
+ *  a player sees belongs to the status it applies, not to the cast. */
+const STATUS_SLOTS = ['EffectDisplay', 'EffectApply', 'EffectRemove'];
 
 const scalar = (text, key) =>
   text.match(new RegExp(`^\\s*${key}: (.*)$`, 'm'))?.[1]?.trim() ?? null;
@@ -176,6 +182,40 @@ if (invokedDirectly) {
   const monoDir = path.join(assetsDir, 'MonoBehaviour');
   const files = readdirSync(monoDir).filter((f) => f.endsWith('.asset'));
 
+  /** Resolve one slot's guid to a prefab plus its emitters. */
+  const resolveSlot = (text, slot) => {
+    const guid = guidOf(text, slot);
+    if (!guid) return null;
+    const target = guidMap[guid];
+    if (!target) return { unresolved: guid };
+    const prefabPath = path.join(assetsDir, target.path);
+    const entry = { prefab: target.name };
+    if (existsSync(prefabPath)) {
+      try {
+        entry.emitters = readParticleSystems(readFileSync(prefabPath, 'utf8'));
+      } catch (err) {
+        entry.error = String(err.message).slice(0, 120);
+      }
+    }
+    return entry;
+  };
+
+  // Statuses first, so a skill can point at the visual its buff owns.
+  const statuses = [];
+  for (const f of files) {
+    const text = readFileSync(path.join(monoDir, f), 'utf8');
+    if (!text.includes(STATUS_CONFIG_SCRIPT)) continue;
+    const id = scalar(text, 'Id');
+    if (!id) continue;
+    const effects = {};
+    for (const slot of STATUS_SLOTS) {
+      const e = resolveSlot(text, slot);
+      if (e) effects[slot] = e;
+    }
+    statuses.push({ id, displayName: scalar(text, 'DisplayName'), effects });
+  }
+  const statusById = new Map(statuses.map((s) => [s.id, s]));
+
   const skills = [];
   let scanned = 0;
   for (const f of files) {
@@ -190,28 +230,17 @@ if (invokedDirectly) {
 
     const effects = {};
     for (const slot of EFFECT_SLOTS) {
-      const guid = guidOf(text, slot);
-      if (!guid) continue;
-      const target = guidMap[guid];
-      if (!target) {
-        effects[slot] = { unresolved: guid };
-        continue;
-      }
-      const prefabPath = path.join(assetsDir, target.path);
-      const entry = { prefab: target.name };
-      if (existsSync(prefabPath)) {
-        try {
-          entry.emitters = readParticleSystems(readFileSync(prefabPath, 'utf8'));
-        } catch (err) {
-          entry.error = String(err.message).slice(0, 120);
-        }
-      }
-      effects[slot] = entry;
+      const e = resolveSlot(text, slot);
+      if (e) effects[slot] = e;
     }
 
+    // A buff's visual belongs to the status it applies. Recorded as a POINTER
+    // rather than copied in, so the status table stays the single definition.
+    const ownStatus = statusById.get(id);
     skills.push({
       id,
       displayName: scalar(text, 'DisplayName'),
+      ...(ownStatus && Object.keys(ownStatus.effects).length ? { statusEffects: id } : {}),
       spriteId: scalar(text, 'SpriteId'),
       centerOnSelf: scalar(text, 'EffectCenterOnSelf') === '1',
       attached: scalar(text, 'EffectAttached') === '1',
@@ -221,15 +250,20 @@ if (invokedDirectly) {
   }
 
   skills.sort((a, b) => a.id.localeCompare(b.id));
-  writeFileSync(outPath, `${JSON.stringify(skills, null, argv.includes('--pretty') ? 2 : 0)}\n`);
+  statuses.sort((a, b) => a.id.localeCompare(b.id));
+  const payload = { skills, statuses };
+  writeFileSync(outPath, `${JSON.stringify(payload, null, argv.includes('--pretty') ? 2 : 0)}\n`);
 
-  const withFx = skills.filter((s) => Object.keys(s.effects).length > 0).length;
-  const emitters = skills.reduce(
-    (n, s) => n + Object.values(s.effects).reduce((m, e) => m + (e.emitters?.length ?? 0), 0),
-    0,
-  );
+  const countEmitters = (rows) =>
+    rows.reduce(
+      (n, s) => n + Object.values(s.effects).reduce((m, e) => m + (e.emitters?.length ?? 0), 0),
+      0,
+    );
+  const skillFx = skills.filter((s) => Object.keys(s.effects).length > 0 || s.statusEffects).length;
+  const statusFx = statuses.filter((s) => Object.keys(s.effects).length > 0).length;
   console.log(
-    `unity_skill_fx: ${scanned} SkillConfigs scanned, ${skills.length} emitted, ` +
-      `${withFx} with at least one effect, ${emitters} emitters total`,
+    `unity_skill_fx: ${scanned} skills (${skillFx} with an effect, own or via status), ` +
+      `${statuses.length} statuses (${statusFx} with an effect), ` +
+      `${countEmitters(skills) + countEmitters(statuses)} emitters total`,
   );
 }
