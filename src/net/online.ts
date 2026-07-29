@@ -31,9 +31,19 @@ import { normalizeMoveFacing, sanitizeMoveInput } from '../sim/move_input';
 import { getArchetypeTitle, getHobbyCraft } from '../sim/professions/archetype';
 import type { MaterialRarity } from '../sim/professions/gathering';
 import { emptyCraftSkills } from '../sim/professions/wheel';
-import { type JobProgress, jobXpToNext as jobXpToNextImpl } from '../sim/progression/job_level';
+import {
+  type JobProgress,
+  type JobTrack,
+  jobXpToNext as jobXpToNextImpl,
+  SKILL_POINTS_PER_JOB_LEVEL,
+} from '../sim/progression/job_level';
 import type { ResolvedAbility } from '../sim/sim';
-import { raiseCost, sanitizeStatAllocation, unspentStatusPoints } from '../sim/status_points';
+import {
+  lowerRefund,
+  raiseCost,
+  sanitizeStatAllocation,
+  unspentStatusPoints,
+} from '../sim/status_points';
 import {
   type Aura,
   cloneItemInstancePayload,
@@ -2805,15 +2815,21 @@ export class ClientWorld implements IWorld {
       // the client mirror is display state, and a malformed field must degrade to
       // an unspent character rather than render nonsense next to a spend button.
       if (Array.isArray(s.job)) {
-        const [lvl, xp, pts] = s.job as unknown[];
+        const [lvl, xp, pts, track, adv] = s.job as unknown[];
+        this.jobTrackMirror = track === 'advanced' ? 'advanced' : 'base';
         this.jobLevelMirror = Math.max(1, Math.floor(Number(lvl) || 1));
         this.jobXpMirror = Math.max(0, Math.floor(Number(xp) || 0));
-        this.skillPointsMirror = Math.max(0, Math.floor(Number(pts) || 0));
+        // Floored at the point job level 1 grants, matching the sim's own load
+        // path: a mirror reading zero would grey out a skill the server would
+        // happily sell.
+        this.skillPointsMirror = Math.max(SKILL_POINTS_PER_JOB_LEVEL, Math.floor(Number(pts) || 0));
+        this.advancedSkillPointsMirror = Math.max(0, Math.floor(Number(adv) || 0));
       }
       if (s.salloc !== undefined)
         this.statAllocation = sanitizeStatAllocation(
           s.salloc as Record<string, unknown>,
           this.entities.get(this.playerId)?.level ?? 1,
+          this.ownPlayerClass,
         );
       if (s.milestones !== undefined) this.unlockedMilestones = s.milestones;
       // IWorldInventory facet (W2) self-decode: copper rides every self-frame (?? 0);
@@ -4195,28 +4211,32 @@ export class ClientWorld implements IWorld {
   // to-next cost re-derived with the SAME table the server banks against. ---
   jobLevelMirror = 1;
   jobXpMirror = 0;
-  skillPointsMirror = 0;
+  skillPointsMirror = SKILL_POINTS_PER_JOB_LEVEL;
+  jobTrackMirror: JobTrack = 'base';
+  advancedSkillPointsMirror = 0;
 
   jobProgress(): JobProgress {
     return {
+      track: this.jobTrackMirror,
       jobLevel: this.jobLevelMirror,
       jobXp: this.jobXpMirror,
       skillPoints: this.skillPointsMirror,
+      advancedSkillPoints: this.advancedSkillPointsMirror,
     };
   }
 
   jobXpToNext(): number | null {
-    return jobXpToNextImpl(this.jobLevelMirror);
+    return jobXpToNextImpl(this.jobLevelMirror, this.jobTrackMirror);
   }
 
   statusPoints(): number {
     const level = this.entities.get(this.playerId)?.level ?? 1;
-    return unspentStatusPoints(this.statAllocation, level);
+    return unspentStatusPoints(this.statAllocation, level, this.ownPlayerClass);
   }
 
   statRaiseCost(stat: StatusStat): number | null {
     const level = this.entities.get(this.playerId)?.level ?? 1;
-    return raiseCost(this.statAllocation, level, stat);
+    return raiseCost(this.statAllocation, level, stat, this.ownPlayerClass);
   }
 
   raiseStat(stat: StatusStat): void {
@@ -4225,6 +4245,14 @@ export class ClientWorld implements IWorld {
 
   resetStats(): void {
     this.cmd({ cmd: 'resetStats' });
+  }
+
+  statLowerRefund(stat: StatusStat): number | null {
+    return lowerRefund(this.statAllocation, stat, this.ownPlayerClass);
+  }
+
+  lowerStat(stat: StatusStat): void {
+    this.cmd({ cmd: 'lowerStat', stat });
   }
 
   // legacy aliases kept for older scripts

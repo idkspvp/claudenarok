@@ -92,7 +92,14 @@ describe('stat tooltip math reconciles with recalcPlayerStats', () => {
           level,
           attributes: { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 },
         });
-        expect(strAp + dexAp + lukAp + levelTerm).toBeCloseTo(p.attackPower, 0);
+        // Within one rounding step, not exactly: the sheet is Math.round of the
+        // formula, and a class opening block puts real numbers in STR/DEX/LUK, so
+        // the unrounded breakdown can land exactly on a .5 boundary. Asserted as
+        // an inclusive bound rather than toBeCloseTo, whose precision-0 tolerance
+        // is exclusive and reds on exactly that boundary.
+        expect(Math.abs(strAp + dexAp + lukAp + levelTerm - p.attackPower)).toBeLessThanOrEqual(
+          0.5,
+        );
         // And the level term is real: it is exactly a quarter of the level.
         expect(levelTerm).toBeCloseTo(level / 4, 10);
       });

@@ -25,6 +25,7 @@ import {
 } from '../src/sim/combat/hit_flee';
 import { MOBS } from '../src/sim/data';
 import { createMob, recalcPlayerStats } from '../src/sim/entity';
+import { CLASS_OPENING_ATTRIBUTES } from '../src/sim/progression/class_blocks';
 import { Sim } from '../src/sim/sim';
 import type { StatAllocation } from '../src/sim/types';
 import { BASE_STAT, emptyStatAllocation } from '../src/sim/types';
@@ -206,11 +207,16 @@ describe('the contest reaches a real swing', () => {
     const p = sim.player;
     expect(p.hit).toBe(hitRating(40, p.stats.dex) + Math.round(p.hitBonus * 100));
     expect(p.flee).toBe(fleeRating(40, p.stats.agi));
-    // A fresh character spends none of their own points, so both ratings are
-    // level plus 1: the game hands the budget over and the player decides where
-    // accuracy and evasion actually come from.
+    // A fresh character has spent none of its EARNED points, but it is not a
+    // blank slate: the class opening block is already in place, and for a Scout
+    // that block leads on Dexterity. So accuracy starts ahead of evasion for
+    // this class specifically, which is the class saying what it is.
     const fresh = new Sim({ seed: 3, playerClass: 'archer' });
-    expect(fresh.player.stats.dex).toBe(BASE_STAT);
-    expect(fresh.player.stats.agi).toBe(BASE_STAT);
+    const opening = CLASS_OPENING_ATTRIBUTES.archer;
+    expect(fresh.player.stats.dex).toBe(opening.dex);
+    expect(fresh.player.stats.agi).toBe(opening.agi);
+    expect(opening.dex).toBeGreaterThan(opening.agi);
+    // …and none of the six is below the base a blank character would carry.
+    for (const v of Object.values(opening)) expect(v).toBeGreaterThanOrEqual(BASE_STAT);
   });
 });

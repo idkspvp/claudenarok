@@ -1809,6 +1809,7 @@ itemStrings.fr_CA = itemStrings.fr_FR as unknown as typeof itemStrings.en;
 
 const ITEM_ENTITY_IDS = [
   'worn_sword',
+  'worn_shortbow',
   'gnarled_staff',
   'rusty_dagger',
   'training_mace',
@@ -2261,6 +2262,7 @@ const itemNamesEn = {
     ...classAbilityNamesEn.entities,
     items: itemTranslationsEn([
       'Pitted Shortsword',
+      'Worn Shortbow',
       'Bogoak Staff',
       'Rusty Dagger',
       'Training Mace',
@@ -2688,6 +2690,7 @@ export const itemNames = {
       ...classAbilityNames.es.entities,
       items: itemTranslations([
         'Espada corta desgastada',
+        'Worn Shortbow',
         'Bastón nudoso',
         'Daga oxidada',
         'Maza de entrenamiento',
@@ -3113,6 +3116,7 @@ export const itemNames = {
       ...classAbilityNames.fr_FR.entities,
       items: itemTranslations([
         'Épée courte usée',
+        'Worn Shortbow',
         'Bâton noueux',
         'Dague rouillée',
         "Masse d'entraînement",
@@ -3539,6 +3543,7 @@ export const itemNames = {
       ...classAbilityNames.it_IT.entities,
       items: itemTranslations([
         'Spada corta logora',
+        'Worn Shortbow',
         'Bastone nodoso',
         'Pugnale arrugginito',
         'Mazza da addestramento',
@@ -3963,6 +3968,7 @@ export const itemNames = {
       ...classAbilityNames.de_DE.entities,
       items: itemTranslations([
         'Abgenutztes Kurzschwert',
+        'Worn Shortbow',
         'Knorriger Stab',
         'Rostiger Dolch',
         'Übungsstreitkolben',
@@ -4387,6 +4393,7 @@ export const itemNames = {
       ...classAbilityNames.zh_CN.entities,
       items: itemTranslations([
         '破旧短剑',
+        'Worn Shortbow',
         '多节法杖',
         '生锈匕首',
         '训练钉锤',
@@ -4811,6 +4818,7 @@ export const itemNames = {
       ...classAbilityNames.zh_TW.entities,
       items: itemTranslations([
         '破舊短劍',
+        'Worn Shortbow',
         '多節法杖',
         '生鏽匕首',
         '訓練釘錘',
@@ -5235,6 +5243,7 @@ export const itemNames = {
       ...classAbilityNames.ko_KR.entities,
       items: itemTranslations([
         '낡은 쇼트소드',
+        'Worn Shortbow',
         '옹이진 지팡이',
         '녹슨 단검',
         '훈련용 철퇴',
@@ -5659,6 +5668,7 @@ export const itemNames = {
       ...classAbilityNames.ja_JP.entities,
       items: itemTranslations([
         '擦り切れたショートソード',
+        'Worn Shortbow',
         '節くれだった杖',
         '錆びたダガー',
         '訓練用メイス',
@@ -6083,6 +6093,7 @@ export const itemNames = {
       ...classAbilityNames.pt_BR.entities,
       items: itemTranslations([
         'Espada curta gasta',
+        'Worn Shortbow',
         'Cajado nodoso',
         'Adaga enferrujada',
         'Maça de treino',
@@ -6507,6 +6518,7 @@ export const itemNames = {
       ...classAbilityNames.ru_RU.entities,
       items: itemTranslations([
         'Изношенный короткий меч',
+        'Worn Shortbow',
         'Сучковатый посох',
         'Ржавый кинжал',
         'Учебная булава',

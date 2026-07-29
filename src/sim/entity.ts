@@ -11,6 +11,7 @@ import { aggregateSetBonuses, CLASSES, ITEMS, MOBS, type NpcDef } from './data';
 import { canDualWield, isShieldItem } from './equipment_rules';
 import { meetsLevelRequirement } from './item_level_req';
 import type { PlayerModifiers } from './player_modifiers';
+import { openingAllocation } from './progression/class_blocks';
 import { pvpFractionsFromRatings } from './pvp';
 import { magicAttack, meleeAttack, rangedAttack } from './stats/attack';
 import { attackDelaySeconds, attackSpeed, DUAL_WIELD_MULTIPLIER } from './stats/attack_speed';
@@ -859,9 +860,11 @@ export function characterDerivedStats(
   equipment: PlayerEquipment,
   mods?: PlayerModifiers,
   equipmentInstance?: Partial<Record<EquipSlot, ItemInstancePayload>>,
-  // The character's stored allocation. Omitting it does NOT mean "no allocation":
-  // it means the sheet would report 1 in every attribute for a character who is
-  // nothing of the sort, so a caller with the save in hand must pass it.
+  // The character's stored allocation. Omitting it falls back to the CLASS
+  // OPENING BLOCK, matching what the load path gives a save that carries no
+  // allocation (status_points.ts sanitizeStatAllocation). It does NOT mean "no
+  // allocation": a caller with the save in hand must still pass it, or the sheet
+  // reports a brand new character's attributes for one that has spent 300 points.
   alloc?: StatAllocation,
 ): DerivedCharacterStats {
   const e = createPlayer(0, cls, { x: 0, y: 0, z: 0 }, '');
@@ -872,7 +875,7 @@ export function characterDerivedStats(
     equipment,
     mods,
     equipmentInstance ?? {},
-    alloc ?? emptyStatAllocation(),
+    alloc ?? openingAllocation(cls),
   );
   return {
     stats: e.stats,

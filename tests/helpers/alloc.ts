@@ -1,15 +1,21 @@
 // A status-point allocation for tests that need a character with real
-// attributes rather than the six 1s a fresh character actually carries.
+// attributes rather than the class opening block a fresh character carries.
 //
-// This is deliberately TEST-ONLY. The game spends none of a character's points
-// for them (Ragnarok hands them over and the player decides), so there is no
-// production equivalent to import; a suite that wants a level-50 body with
-// numbers on it has to say so itself.
+// This is deliberately TEST-ONLY. The game spends none of a character's EARNED
+// points for them (the player decides), so there is no production equivalent to
+// import; a suite that wants a level-50 body with numbers on it has to say so
+// itself.
 //
-// It spends the level's whole budget round-robin across the six, which is not a
-// build anyone would choose and is not meant to be. Tests that care about a
-// SPECIFIC attribute should pass their own allocation instead.
+// It spends the level's whole earned budget round-robin across the six, which is
+// not a build anyone would choose and is not meant to be. Tests that care about
+// a SPECIFIC attribute should pass their own allocation instead.
+//
+// Pass a CLASS wherever the other side of the comparison goes through
+// sanitizeStatAllocation: that path repairs anything below the class opening
+// block upward, so a blank-seeded spread would disagree with it on the class's
+// own lead attributes and on nothing else, which is a maddening way to find out.
 
+import { openingAllocation } from '../../src/sim/progression/class_blocks';
 import type { PlayerClass } from '../../src/sim/types';
 import {
   BASE_STAT,
@@ -21,9 +27,12 @@ import {
   totalStatusPointsAt,
 } from '../../src/sim/types';
 
-/** An even spread of everything a character at `level` has ever been granted. */
-export function spreadAllocation(level: number): StatAllocation {
-  const alloc: StatAllocation = { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
+/** An even spread of everything a character at `level` has EARNED, on top of
+ *  its class opening block when a class is given. */
+export function spreadAllocation(level: number, cls?: PlayerClass): StatAllocation {
+  const alloc: StatAllocation = cls
+    ? openingAllocation(cls)
+    : { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
   let budget = totalStatusPointsAt(level);
   // Round-robin so the six stay within one point of each other and no single
   // attribute runs away into the expensive bands early.
@@ -58,7 +67,7 @@ export function levelWithStats(
   const id = pid ?? sim.player.id;
   const meta = sim.players.get(id);
   if (!meta) throw new Error(`no player meta for ${id}`);
-  meta.statAllocation = spreadAllocation(level);
+  meta.statAllocation = spreadAllocation(level, meta.cls);
   sim.recalcPlayer(sim.entities.get(id));
 }
 
@@ -85,7 +94,7 @@ const CLASS_PRIORITY: Readonly<Record<PlayerClass, readonly StatusStat[]>> = {
 /** Spend the level's whole budget into the job's primary attributes, in order,
  *  so a Mage reads as a caster and a Thief does not. */
 export function classAllocation(cls: PlayerClass, level: number): StatAllocation {
-  const alloc: StatAllocation = { str: 0, agi: 0, vit: 0, int: 0, dex: 0, luk: 0 };
+  const alloc: StatAllocation = openingAllocation(cls);
   const priority = CLASS_PRIORITY[cls];
   let budget = totalStatusPointsAt(level);
   let progress = true;

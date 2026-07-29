@@ -107,7 +107,7 @@ describe('characterSheet: owner variant', () => {
     // and a character now starts with every point UNSPENT, so leaving it off the
     // state compared a 1-in-everything sheet against a spent reference and the
     // case said nothing about whether the two derivations agree.
-    const allocation = spreadAllocation(level);
+    const allocation = spreadAllocation(level, cls);
     const sheet = characterSheet(
       input({
         row: makeRow(cls, level, makeState({ level, equipment: {}, statAllocation: allocation })),

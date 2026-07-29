@@ -9,19 +9,35 @@
 
 import { describe, expect, it } from 'vitest';
 import {
+  advanceJob,
   applyJobXp,
+  CAREER_SKILL_POINTS,
+  canAdvanceJob,
+  freshJobProgress,
   JOB_XP_TABLE,
   type JobProgress,
   jobXpToNext,
   jobXpToReachLevel,
-  MAX_JOB_LEVEL,
+  MAX_ADVANCED_JOB_LEVEL,
+  MAX_BASE_JOB_LEVEL as MAX_JOB_LEVEL,
+  maxJobLevel,
   SKILL_POINTS_PER_JOB_LEVEL,
 } from '../src/sim/progression/job_level';
 
-const fresh = (): JobProgress => ({ jobLevel: 1, jobXp: 0, skillPoints: 0 });
+// A character at job 1 with nothing banked. NOT the level-1 skill point: these
+// cases pin the banking arithmetic, so they start the counter at zero and let
+// each assertion say what it added. freshJobProgress() carries the grant, and
+// its own case below pins that.
+const fresh = (): JobProgress => ({
+  track: 'base',
+  jobLevel: 1,
+  jobXp: 0,
+  skillPoints: 0,
+  advancedSkillPoints: 0,
+});
 
 describe('the table', () => {
-  it('carries one step short of the cap', () => {
+  it('carries one step short of the BASE cap', () => {
     // Forty-nine steps for fifty levels. The reference's fiftieth row is a
     // cannot-advance sentinel, not a requirement, and copying it would put a
     // billion-point step on the ladder.
@@ -81,12 +97,12 @@ describe('the total banked to a level', () => {
 
 describe('banking experience', () => {
   it('takes exactly one level and one skill point at the threshold', () => {
-    expect(applyJobXp(fresh(), 30)).toEqual({ jobLevel: 2, jobXp: 0, skillPoints: 1 });
+    expect(applyJobXp(fresh(), 30)).toEqual({ ...fresh(), jobLevel: 2, skillPoints: 1 });
     expect(SKILL_POINTS_PER_JOB_LEVEL).toBe(1);
   });
 
   it('holds short of the threshold without touching the level', () => {
-    expect(applyJobXp(fresh(), 29)).toEqual({ jobLevel: 1, jobXp: 29, skillPoints: 0 });
+    expect(applyJobXp(fresh(), 29)).toEqual({ ...fresh(), jobXp: 29 });
   });
 
   it('buys ONE level from an enormous kill and discards the rest', () => {
@@ -103,24 +119,24 @@ describe('banking experience', () => {
   });
 
   it('keeps the points already earned', () => {
-    const carried = { jobLevel: 4, jobXp: 0, skillPoints: 3 };
+    const carried = { ...fresh(), jobLevel: 4, skillPoints: 3 };
     expect(applyJobXp(carried, 0).skillPoints).toBe(3);
     expect(applyJobXp(carried, 76).skillPoints).toBe(4);
   });
 
   it('stops dead at the cap and leaves the bar empty', () => {
-    const capped = { jobLevel: MAX_JOB_LEVEL, jobXp: 0, skillPoints: 49 };
+    const capped = { ...fresh(), jobLevel: MAX_JOB_LEVEL, skillPoints: 49 };
     const after = applyJobXp(capped, 10_000_000);
-    expect(after).toEqual({ jobLevel: MAX_JOB_LEVEL, jobXp: 0, skillPoints: 49 });
+    expect(after).toEqual(capped);
   });
 
   it('ignores a negative or fractional grant instead of taking a level back', () => {
     expect(applyJobXp(fresh(), -500)).toEqual(fresh());
-    expect(applyJobXp(fresh(), 29.9)).toEqual({ jobLevel: 1, jobXp: 29, skillPoints: 0 });
+    expect(applyJobXp(fresh(), 29.9)).toEqual({ ...fresh(), jobXp: 29 });
   });
 
   it('repairs a corrupt saved level rather than reading off the table', () => {
-    const broken = { jobLevel: 0, jobXp: -5, skillPoints: 0 };
+    const broken = { ...fresh(), jobLevel: 0, jobXp: -5 };
     const after = applyJobXp(broken, 30);
     expect(after.jobLevel).toBe(2);
     expect(after.jobXp).toBe(0);
@@ -129,6 +145,112 @@ describe('banking experience', () => {
   it('never mutates what it was given', () => {
     const before = fresh();
     applyJobXp(before, 5_000);
-    expect(before).toEqual({ jobLevel: 1, jobXp: 0, skillPoints: 0 });
+    expect(before).toEqual(fresh());
+  });
+});
+
+describe('the two segments', () => {
+  it('caps a base class at 50 and an advanced one at 70', () => {
+    expect(maxJobLevel('base')).toBe(50);
+    expect(maxJobLevel('advanced')).toBe(70);
+    expect(MAX_ADVANCED_JOB_LEVEL).toBe(70);
+    // 50 + 70. The reference's career total, and the number every skill budget
+    // is measured against.
+    expect(CAREER_SKILL_POINTS).toBe(120);
+  });
+
+  it('grants the level-1 point to a brand new character', () => {
+    // The reference counts the point granted at job level 1 inside its 50, so a
+    // character that has killed nothing already holds one.
+    const start = freshJobProgress();
+    expect(start.jobLevel).toBe(1);
+    expect(start.skillPoints).toBe(SKILL_POINTS_PER_JOB_LEVEL);
+    expect(start.advancedSkillPoints).toBe(0);
+    expect(start.track).toBe('base');
+  });
+
+  it('prices the advanced levels the base table does not reach', () => {
+    // The published table stops at the base cap. The advanced segment runs
+    // twenty levels further and reuses the last requirement rather than
+    // extrapolating a curve nobody wrote down: flat, and obviously a stand-in.
+    const last = JOB_XP_TABLE[JOB_XP_TABLE.length - 1];
+    expect(jobXpToNext(MAX_JOB_LEVEL, 'advanced')).toBe(last);
+    expect(jobXpToNext(MAX_ADVANCED_JOB_LEVEL - 1, 'advanced')).toBe(last);
+    expect(jobXpToNext(MAX_ADVANCED_JOB_LEVEL, 'advanced')).toBeNull();
+    // The base track still stops where it always did.
+    expect(jobXpToNext(MAX_JOB_LEVEL, 'base')).toBeNull();
+  });
+
+  it('banks advanced levels into the advanced pool, never the base one', () => {
+    const adv: JobProgress = {
+      track: 'advanced',
+      jobLevel: 1,
+      jobXp: 0,
+      skillPoints: 12,
+      advancedSkillPoints: 1,
+    };
+    const after = applyJobXp(adv, 30);
+    expect(after.jobLevel).toBe(2);
+    expect(after.advancedSkillPoints).toBe(2);
+    // The base pool is untouched. This is the separation, in one assertion.
+    expect(after.skillPoints).toBe(12);
+  });
+
+  it('lets an advanced character run past the base cap', () => {
+    let p: JobProgress = {
+      track: 'advanced',
+      jobLevel: MAX_JOB_LEVEL,
+      jobXp: 0,
+      skillPoints: 0,
+      advancedSkillPoints: 0,
+    };
+    for (let i = 0; i < 40; i++) p = applyJobXp(p, 10_000_000);
+    expect(p.jobLevel).toBe(MAX_ADVANCED_JOB_LEVEL);
+    expect(p.advancedSkillPoints).toBe(MAX_ADVANCED_JOB_LEVEL - MAX_JOB_LEVEL);
+  });
+});
+
+describe('advancing', () => {
+  it('refuses until the base segment is finished', () => {
+    expect(canAdvanceJob(fresh())).toBe(false);
+    expect(advanceJob(fresh())).toBeNull();
+    const nearly = { ...fresh(), jobLevel: MAX_JOB_LEVEL - 1 };
+    expect(canAdvanceJob(nearly)).toBe(false);
+    expect(advanceJob(nearly)).toBeNull();
+  });
+
+  it('restarts the bar at job 1 and opens the advanced pool', () => {
+    const done = { ...fresh(), jobLevel: MAX_JOB_LEVEL, jobXp: 500, skillPoints: 50 };
+    expect(canAdvanceJob(done)).toBe(true);
+    const after = advanceJob(done) as JobProgress;
+    expect(after.track).toBe('advanced');
+    expect(after.jobLevel).toBe(1);
+    expect(after.jobXp).toBe(0);
+    expect(after.advancedSkillPoints).toBe(SKILL_POINTS_PER_JOB_LEVEL);
+  });
+
+  it('carries UNSPENT base points across, still as base points', () => {
+    // The case a shared budget would get wrong. A character that hoarded its
+    // base points keeps them, and they are still base points: advancement is
+    // not a laundering route into the advanced tree.
+    const hoarded = { ...fresh(), jobLevel: MAX_JOB_LEVEL, skillPoints: 50 };
+    const after = advanceJob(hoarded) as JobProgress;
+    expect(after.skillPoints).toBe(50);
+    expect(after.advancedSkillPoints).toBe(SKILL_POINTS_PER_JOB_LEVEL);
+  });
+
+  it('refuses a second advancement', () => {
+    const done = { ...fresh(), jobLevel: MAX_JOB_LEVEL, skillPoints: 50 };
+    const once = advanceJob(done) as JobProgress;
+    const capped = { ...once, jobLevel: MAX_ADVANCED_JOB_LEVEL };
+    expect(canAdvanceJob(capped)).toBe(false);
+    expect(advanceJob(capped)).toBeNull();
+  });
+
+  it('never mutates what it was given', () => {
+    const done = { ...fresh(), jobLevel: MAX_JOB_LEVEL, skillPoints: 50 };
+    advanceJob(done);
+    expect(done.track).toBe('base');
+    expect(done.jobLevel).toBe(MAX_JOB_LEVEL);
   });
 });

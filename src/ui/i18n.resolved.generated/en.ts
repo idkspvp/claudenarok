@@ -7825,6 +7825,9 @@ export const en: EnTranslations = {
       "worn_sword": {
         "name": "Pitted Shortsword"
       },
+      "worn_shortbow": {
+        "name": "Worn Shortbow"
+      },
       "gnarled_staff": {
         "name": "Bogoak Staff"
       },

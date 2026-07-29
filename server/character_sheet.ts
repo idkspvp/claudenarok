@@ -257,9 +257,7 @@ export function characterSheet(input: CharacterSheetInput): CharacterSheet {
       // predating the conversion has none, and falls back to the suggested spread
       // exactly as the sim's own load path does, so the sheet and the live
       // character never disagree about who that character is.
-      state.statAllocation
-        ? sanitizeStatAllocation(state.statAllocation, level)
-        : emptyStatAllocation(),
+      sanitizeStatAllocation(state.statAllocation, level, cls),
     );
     sheet.stats = { ...derived.stats };
     sheet.vitals = {

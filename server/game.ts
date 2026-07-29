@@ -4793,6 +4793,17 @@ export class GameServer {
         }
         break;
       }
+      // The mirror of raiseStat, and validated the same way. Lowering is free
+      // and unlimited, but it stops at the class opening block, so a forged
+      // lower cannot mine the 27 pre-spent points for a respec.
+      case 'lowerStat': {
+        const stat = STATUS_STATS.find((s) => s === msg.stat);
+        if (stat) {
+          sim.lowerStat(stat, pid);
+          session.selfHeavyDirty = true;
+        }
+        break;
+      }
       case 'resetStats':
         sim.resetStats(pid);
         session.selfHeavyDirty = true;
@@ -5832,7 +5843,13 @@ export class GameServer {
       // The job track. One packed triple rather than three fields: the three
       // always move together, and `maybe` only re-sends a self field that
       // actually changed.
-      maybe('job', [meta.jobLevel, meta.jobXp, meta.skillPoints]);
+      maybe('job', [
+        meta.jobLevel,
+        meta.jobXp,
+        meta.skillPoints,
+        meta.jobTrack,
+        meta.advancedSkillPoints,
+      ]);
       maybe('milestones', [...meta.unlockedMilestones]);
       // Book of Deeds: the earned map (deed id -> utcDay) and the COMPLETE
       // lifetime stat block. Maps and Sets do not survive JSON.stringify, so

@@ -31,11 +31,15 @@ const repoRoot = fileURLToPath(new URL('..', import.meta.url));
 // place_mobile_station, train_recipe, the three enchanting actions
 // (disenchant_item, apply_enchant, salvage_item), and unbind_item (the
 // Maker's Bond unbind service).
-// Plus the two status-point commands the Ragnarok conversion added, raise_stat
-// and reset_stats: a character's attributes are the player's to spend now, so
-// both spend verbs cross the wire and the server owns the budget check.
-const EXPECTED_SEND_COUNT = 151;
-const EXPECTED_DISPATCH_COUNT = 158;
+// Plus the three status-point commands the conversion added, raiseStat,
+// lowerStat and resetStats: a character's attributes are the player's to spend
+// now, so every spend verb crosses the wire and the server owns the budget
+// check. lowerStat joined when the free refund landed (the reference lowers on
+// shift or right click, at no cost), and it is a wire command rather than a
+// client-side edit for exactly the same reason the raise is: the server holds
+// the class, and the class is what sets the floor a lower may not cross.
+const EXPECTED_SEND_COUNT = 152;
+const EXPECTED_DISPATCH_COUNT = 159;
 const EXPECTED_DISPATCH_ONLY_COUNT = 7;
 
 // The chat sub-channel routing switch (server/game.ts `switch

@@ -1343,12 +1343,19 @@ export function grantJobXp(ctx: SimContext, amount: number, meta: PlayerMeta): v
   if (amount <= 0) return;
   const before = meta.jobLevel;
   const after = applyJobXp(
-    { jobLevel: meta.jobLevel, jobXp: meta.jobXp, skillPoints: meta.skillPoints },
+    {
+      track: meta.jobTrack,
+      jobLevel: meta.jobLevel,
+      jobXp: meta.jobXp,
+      skillPoints: meta.skillPoints,
+      advancedSkillPoints: meta.advancedSkillPoints,
+    },
     amount,
   );
   meta.jobLevel = after.jobLevel;
   meta.jobXp = after.jobXp;
   meta.skillPoints = after.skillPoints;
+  meta.advancedSkillPoints = after.advancedSkillPoints;
   if (after.jobLevel > before) {
     ctx.emit({ type: 'jobLevelUp', pid: meta.entityId, jobLevel: after.jobLevel });
   }

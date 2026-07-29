@@ -2205,6 +2205,7 @@ export type TranslationKeyFlat =
   | 'entities.items.windguard_leggings.name'
   | 'entities.items.wolf_fang.name'
   | 'entities.items.wolfhide_satchel.name'
+  | 'entities.items.worn_shortbow.name'
   | 'entities.items.worn_sword.name'
   | 'entities.items.woven_robe.name'
   | 'entities.items.wraithfire_orb.name'

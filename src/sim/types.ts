@@ -6,6 +6,13 @@ import type { Element, ElementLevel, Race, Size } from './combat/elements';
 import type { AggregatedGearEffects, GearEffects } from './combat/gear_effects';
 import type { GatheringProfessionId } from './content/professions';
 import type { LockSession, LootTier, PickAction, StepResult, VisibleCell } from './lockpick';
+import {
+  attributePointsForLevel,
+  attributeRaiseCost,
+  CREATION_ALLOCATED_POINTS,
+  earnedAttributePointsAt,
+} from './progression/attributes';
+import { SPIRITVALE_MAX_LEVEL, SPIRITVALE_XP_CURVE } from './progression/xp_curve';
 
 export const TICK_RATE = 20; // sim ticks per second
 export const DT = 1 / TICK_RATE;
@@ -550,54 +557,41 @@ export type StatusStat = (typeof STATUS_STATS)[number];
 /** Points spent per attribute. Every attribute starts at BASE_STAT. */
 export type StatAllocation = Record<StatusStat, number>;
 
-// Every character starts with 1 in each of the six and 48 points to place, and
-// no attribute climbs past 99. Ragnarok's numbers, and the reason the nine
-// per-class starting blocks this game shipped with are gone: a job's identity
-// lives in its skills, not in a stat block handed out at creation.
+// Every attribute starts at 1 and none climbs past 99. A character does NOT
+// open as a blank slate: its class block (progression/class_blocks.ts) is
+// already spent at creation, and is not reallocatable. The class is the block.
 export const BASE_STAT = 1;
 export const MAX_STAT = 99;
-export const CREATION_STATUS_POINTS = 48;
+/** Pre-spent into the class block at creation, not reallocatable. */
+export const CREATION_STATUS_POINTS = CREATION_ALLOCATED_POINTS;
 
-/** Points granted for LEAVING `level`, that is, for the step from `level` to
- *  `level + 1`. The distinction is not cosmetic: reading it as the level being
- *  REACHED puts the 1-to-99 total at 1,244 instead of Ragnarok's 1,225. */
+/** Points granted for REACHING `level`: 3 through 100, 2 through 130, 1
+ *  through 150. Level 1 grants none through here; its 27 arrive pre-spent in the
+ *  class block. Transcribed in progression/attributes.ts. */
 export function statusPointsForLevel(level: number): number {
-  return Math.floor(level / 5) + 3;
+  return attributePointsForLevel(level);
 }
 
-/** What raising an attribute from `current` by one costs. 2 to take it anywhere
- *  through 10, 3 through 20, 4 through 30, and so on: the cost step is what makes
- *  a 99 in anything a commitment rather than a cap you drift into.
+/** What raising an attribute from `current` by one costs: 1 through 50, 2
+ *  through 98, and 3 for the last step to 99.
  *
- *  The band boundary sits ABOVE the round number: raising FROM 10 still costs 2,
- *  and 3 does not start until 11. Ragnarok writes this as
- *  `1 + (current + 9) / 10` in integer arithmetic (`PC_STATUS_POINT_COST`,
- *  `pc.cpp`); the form below is the same function.
- *
- *  This shipped wrong, one point too expensive at every multiple of ten, and the
- *  comment that used to sit here asserted the error as the fix. The consequence
- *  was not cosmetic: it put two capped attributes at 1,274 points against the
- *  1,273 a character is ever granted, one short, and a whole paragraph of design
- *  reasoning was built on that near-miss. The real numbers are 1,256 against
- *  1,273, so Ragnarok leaves 17 points spare and the near-miss never existed. */
+ *  The ladder this replaces charged `2 + (current-1)/10` and reached 11 points
+ *  per point near the cap, which made a 99 an enormous commitment. Same
+ *  escalating idea, one third the punishment at the top, and the practical
+ *  effect is that spreading points is now a reasonable build rather than a
+ *  mistake. */
 export function statRaiseCost(current: number): number {
-  return 2 + Math.floor((Math.max(1, current) - 1) / 10);
+  return attributeRaiseCost(current);
 }
 
-/** Total points a character has ever been granted at `level`, creation included.
+/** Total points a character has EARNED by `level`. 377 at the cap of 150.
  *
- *  At base level 99 this is 1,273: Ragnarok's 1,225 earned plus the 48 handed out
- *  at creation, all 48 of which arrive at level 1 rather than trickling in.
- *
- *  Two capped attributes cost 1,256, so a level-99 character can buy both and
- *  keep 17 points over. An earlier version of `statRaiseCost` overcharged by a
- *  point at every multiple of ten and made that 1,274, one MORE than a character
- *  is ever granted; the design note that used to sit here treated the near-miss
- *  as intentional. It was arithmetic. */
+ *  Creation is deliberately not counted here: those 27 are already spent into
+ *  the class block and are not reallocatable, so folding them into the earned
+ *  pool would let a player move them. The lifetime figure the source quotes,
+ *  404, is this plus those 27. */
 export function totalStatusPointsAt(level: number): number {
-  let total = CREATION_STATUS_POINTS;
-  for (let l = 1; l < level; l++) total += statusPointsForLevel(l);
-  return total;
+  return earnedAttributePointsAt(level);
 }
 
 /** Points already spent on an allocation (each attribute costed step by step). */
@@ -4562,75 +4556,14 @@ export function normAngle(a: number): number {
 // Classic progression formulas
 // ---------------------------------------------------------------------------
 
-// The whole 1..99 ladder runs on classic Ragnarok's pacing, including the first
-// twenty levels. An earlier pass kept this game's original 1..20 steps because the
-// abilities, mobs and quests were tuned against them; quests are gone and the
-// ability ladder is being re-authored with the job tree, so nothing is left holding
-// the old numbers in place.
-//
-// The first twenty levels are now nearly free (about 7,700 XP end to end, where the
-// old curve charged 107,795). That is not a mistake and it is not a scale error: in
-// Ragnarok the early levels take minutes, and the game's whole difficulty budget
-// sits in the last fifteen. Mob XP values are still tuned to the old curve and will
-// blow through these levels; retuning them belongs with the content pass.
-//
-// The per-level growth below is what the published pre-renewal base-EXP anchors
-// imply, divided out band by band. Twenty-five anchors, taken from the "Base Normal"
-// table at dbc.reborn.cz: leaving level 1 costs 9, level 9 costs 200, then 19: 1,260
-// · 24: 2,240 · 29: 4,474 · 34: 11,748 · 39: 21,773 · 44: 46,323 · 49: 75,973 ·
-// 54: 157,528 · 59: 255,341 · 64: 482,590 · 69: 740,988 · 74: 1,848,355 ·
-// 79: 2,713,878 · 84: 4,744,680 · 89: 7,121,664 · 91: 9,738,720 · 92: 11,649,960 ·
-// 93: 13,643,520 · 94: 18,339,300 · 95: 23,836,800 · 96: 35,658,000 ·
-// 97: 48,687,000 · 98: 58,135,000. Anchoring every five levels rather than every ten
-// matters: the curve is not smooth between them, and a coarse fit flattens the
-// mid-game the shape depends on.
-//
-// We take the curve and generate our own values from it rather than copying the
-// table. A difficulty curve is a design decision; the 99 numbers Gravity chose to
-// express it are their data. Our base is 10 rather than their 9, and the result
-// tracks their per-level cost within about 11% the whole way up. See
-// docs/design/ro-classic-conversion.md.
-const XP_BASE_STEP = 10;
-const XP_GROWTH_BANDS: ReadonlyArray<readonly [throughLevel: number, growth: number]> = [
-  [8, 1.4735],
-  [18, 1.2021],
-  [23, 1.122],
-  [28, 1.1484],
-  [33, 1.213],
-  [38, 1.1313],
-  [43, 1.163],
-  [48, 1.104],
-  [53, 1.157],
-  [58, 1.1014],
-  [63, 1.1358],
-  [68, 1.0895],
-  [73, 1.2006],
-  [78, 1.0798],
-  [83, 1.1182],
-  [88, 1.0846],
-  [90, 1.1694],
-  [91, 1.1963],
-  [92, 1.1711],
-  [93, 1.3442],
-  [94, 1.2998],
-  [95, 1.4959],
-  [96, 1.3654],
-  [97, 1.1941],
-];
-
 // XP required to go from level L to L+1, indexed by L-1. The last entry is the
 // step out of the cap, which no character takes: it is the post-cap prestige unit.
-export const XP_TABLE: readonly number[] = (() => {
-  const table: number[] = [];
-  let step = XP_BASE_STEP;
-  for (let lvl = 1; lvl <= 99; lvl++) {
-    table.push(Math.round(step));
-    const band = XP_GROWTH_BANDS.find(([through]) => lvl <= through);
-    step *= band ? band[1] : XP_GROWTH_BANDS[XP_GROWTH_BANDS.length - 1][1];
-  }
-  return table;
-})();
-export const MAX_LEVEL = 99;
+//
+// Transcribed rather than constructed now (progression/xp_curve.ts). The table
+// this replaces fitted a base step through twenty-odd growth multipliers to
+// approximate a shape; the reference publishes the shape, so it is read directly.
+export const XP_TABLE: readonly number[] = SPIRITVALE_XP_CURVE;
+export const MAX_LEVEL = SPIRITVALE_MAX_LEVEL;
 
 // The cap the First Era shipped with, frozen as history. The `feat_era_cap` deed
 // commemorates reaching it, so it must keep meaning 20 no matter where the live

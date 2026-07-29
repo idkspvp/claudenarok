@@ -14,13 +14,15 @@
 // rather than as a vague feeling that combat is off.
 //
 // Sources for the figures below, all cited so a later reader can re-derive them:
-//   - 1,225 status points earned across base levels 1 to 99, and the 48 handed
-//     out at creation, are the standard pre-renewal totals.
-//   - VIT +1% MaxHP, INT +1% MaxSP, LUK +0.3% crit are stated directly by the
-//     Revo-Classic and Landverse stat references.
-//   - The squared ATK/MATK terms are pre-renewal ONLY: both of those references
-//     describe them as "no longer applied", which is what dates them to classic.
-//     Revo-Classic and Renewal both dropped them; we are neither.
+//   - The three attribute-grant bands, the three-step cost ladder and the 27
+//     pre-spent at creation come from docs/design/spiritvale-engine-formulas.md
+//     (Progression), which took them from a community wiki.
+//   - The attack, accuracy and pool formulas come from the same document's
+//     transcription of the engine methods.
+//
+// Where an assertion pins a DIFFERENCE from pre-renewal Ragnarok it says so in
+// place, because those are the numbers a reader is most likely to expect and
+// most likely to "fix" back.
 
 import { describe, expect, it } from 'vitest';
 import { fleeRating, hitRating, perfectDodgeChance } from '../src/sim/combat/hit_flee';
@@ -37,53 +39,68 @@ import {
   MAX_LEVEL,
   MAX_STAT,
   statRaiseCost,
+  statusPointsForLevel,
   totalStatusPointsAt,
 } from '../src/sim/types';
 
-describe('the status-point budget matches Ragnarok', () => {
-  it('earns exactly 1,225 points across base levels 1 to 99', () => {
-    expect(totalStatusPointsAt(MAX_LEVEL) - CREATION_STATUS_POINTS).toBe(1225);
+describe('the status-point budget follows SpiritVale', () => {
+  it('earns 377 across base levels 1 to 150, in three bands', () => {
+    expect(MAX_LEVEL).toBe(150);
+    expect(totalStatusPointsAt(MAX_LEVEL)).toBe(377);
+    expect(totalStatusPointsAt(100)).toBe(297);
+    expect(totalStatusPointsAt(130)).toBe(297 + 60);
   });
 
-  it('hands out 48 at creation, for 1,273 at the cap', () => {
-    expect(CREATION_STATUS_POINTS).toBe(48);
-    expect(totalStatusPointsAt(MAX_LEVEL)).toBe(1273);
+  it('pre-spends 27 at creation rather than handing out a free pool', () => {
+    // This is the change with the largest practical effect on a new character.
+    // The model it replaces handed out 48 UNSPENT points at level 1, so a fresh
+    // character was a blank slate the player had to configure before playing.
+    // Here the 27 arrive already spent into a class block and cannot be moved,
+    // so the character is playable immediately and its class means something
+    // again.
+    expect(CREATION_STATUS_POINTS).toBe(27);
+    // And they are NOT in the earned pool, which is what stops a player
+    // reclaiming them.
+    expect(totalStatusPointsAt(1)).toBe(0);
   });
 
-  it('grants on the level being LEFT, which is what makes the total 1,225', () => {
-    // Reading the grant as the level REACHED instead lands on 1,244. The two
-    // differ by one step of the curve, and only one of them is Ragnarok's.
-    let earnedAsReached = 0;
-    for (let l = 2; l <= MAX_LEVEL; l++) earnedAsReached += Math.floor(l / 5) + 3;
-    expect(earnedAsReached).toBe(1244);
-    expect(totalStatusPointsAt(MAX_LEVEL) - CREATION_STATUS_POINTS).not.toBe(earnedAsReached);
+  it('grants on the level being REACHED, and the bands make that unambiguous', () => {
+    // The old curve had to distinguish reached from left, because a continuous
+    // floor(level/5)+3 differs by one step either way. Flat bands do not: every
+    // level inside a band grants the same amount, so only the two boundaries
+    // could disagree and both are stated as inclusive ranges.
+    let asReached = 0;
+    for (let l = 2; l <= MAX_LEVEL; l++) asReached += statusPointsForLevel(l);
+    expect(asReached).toBe(totalStatusPointsAt(MAX_LEVEL));
   });
 
-  it('lets a capped character buy two 99s and keep change', () => {
-    // 1,256 to buy two attributes to 99 against the 1,273 the game grants, so a
-    // level-99 character affords both and keeps 17 over.
-    //
-    // This used to assert the opposite, that two 99s cost one point MORE than a
-    // character is ever given, and a design note was written around the
-    // near-miss. It came from statRaiseCost charging a point too much at every
-    // multiple of ten; Ragnarok's PC_STATUS_POINT_COST does not, and the
-    // knife-edge never existed.
+  it('lets a capped character buy two 99s and keep 81 over', () => {
+    // 148 per attribute against 377 earned. Compare the model this replaces: 628
+    // per attribute against 1,273, which left 17. Both afford two caps; this one
+    // leaves four times the change, which is the whole point of the gentler
+    // ladder.
     let oneStatTo99 = 0;
     for (let v = BASE_STAT; v < MAX_STAT; v++) oneStatTo99 += statRaiseCost(v);
-    expect(oneStatTo99).toBe(628);
-    expect(oneStatTo99 * 2).toBe(1256);
-    expect(totalStatusPointsAt(MAX_LEVEL) - oneStatTo99 * 2).toBe(17);
+    expect(oneStatTo99).toBe(148);
+    expect(oneStatTo99 * 2).toBe(296);
+    expect(totalStatusPointsAt(MAX_LEVEL) - oneStatTo99 * 2).toBe(81);
   });
 
-  it('charges 2 up to and including 10, and 3 only from 11', () => {
-    // The band boundary sits ABOVE the round number. Getting this off by one is
-    // exactly what shipped, and it is invisible in any single raise.
-    expect(statRaiseCost(1)).toBe(2);
-    expect(statRaiseCost(9)).toBe(2);
-    expect(statRaiseCost(10)).toBe(2);
-    expect(statRaiseCost(11)).toBe(3);
-    expect(statRaiseCost(20)).toBe(3);
-    expect(statRaiseCost(21)).toBe(4);
+  it('charges 1 through 50, 2 through 98, and 3 for the last step', () => {
+    // The band is read off the value moved INTO, so 50 to 51 leaves the cheap
+    // band and is charged at 2. Getting this off by one is invisible in any
+    // single raise and shows up only as a budget that does not add up.
+    expect(statRaiseCost(1)).toBe(1);
+    expect(statRaiseCost(49)).toBe(1);
+    expect(statRaiseCost(50)).toBe(2);
+    expect(statRaiseCost(97)).toBe(2);
+    expect(statRaiseCost(98)).toBe(3);
+  });
+
+  it('never charges more than 3, where the old ladder reached 11', () => {
+    for (let v = BASE_STAT; v < MAX_STAT; v++) {
+      expect(statRaiseCost(v), `raising from ${v}`).toBeLessThanOrEqual(3);
+    }
   });
 });
 

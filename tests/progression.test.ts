@@ -174,23 +174,40 @@ describe('xp curve shape', () => {
 
   it('reaches the level cap', () => {
     expect(XP_TABLE.length).toBeGreaterThanOrEqual(MAX_LEVEL);
-    expect(MAX_LEVEL).toBe(99);
+    expect(MAX_LEVEL).toBe(150);
   });
 
-  it('opens with the near-free early levels of the RO curve', () => {
-    // Levels 1 to 20 are minutes of play there, not the hours the old 107,795-XP
-    // curve charged. If this creeps back into five figures the early game has
-    // silently become a grind again.
-    expect(XP_TABLE[0]).toBe(10);
+  it('opens with near-free early levels', () => {
+    // The first step is 40 experience, published. Levels 1 to 20 stay minutes of
+    // play rather than the hours the pre-conversion 107,795-XP curve charged; if
+    // this creeps into six figures the early game has silently become a grind.
+    expect(XP_TABLE[0]).toBe(40);
     const throughTwenty = XP_TABLE.slice(0, 19).reduce((a, b) => a + b, 0);
-    expect(throughTwenty).toBeLessThan(10_000);
+    expect(throughTwenty).toBeLessThan(300_000);
     expect(throughTwenty / total).toBeLessThan(0.001);
   });
 
-  it('puts the difficulty budget in the last fifteen levels', () => {
-    const lastFifteen = XP_TABLE.slice(84, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
-    expect(lastFifteen / total).toBeGreaterThan(0.6);
-    expect(lastFifteen / total).toBeLessThan(0.95);
+  it('puts most of the difficulty budget in the last fifteen levels', () => {
+    // 56% of the whole curve sits in the last fifteen levels. The band moved:
+    // the fitted curve this replaces carried over 60% there, so the published
+    // one is slightly LESS back-loaded and the mid-game costs a little more of
+    // the total. Still decisively back-loaded, which is what the assertion is
+    // for; the exact share is the reference's and not ours to tune.
+    const lastFifteen = XP_TABLE.slice(MAX_LEVEL - 16, MAX_LEVEL - 1).reduce((a, b) => a + b, 0);
+    expect(lastFifteen / total).toBeGreaterThan(0.5);
+    expect(lastFifteen / total).toBeLessThan(0.65);
+  });
+
+  it('gets HARDER again over the last twenty levels, not just bigger', () => {
+    // The published curve's per-level ratio falls smoothly to about 1.047 by
+    // level 130 and then climbs back to roughly 1.16 by 150. That reversal is
+    // real and lines up with the attribute bands paying LESS over the same
+    // stretch, so the endgame costs more and gives less. Pinned so a future
+    // smoothing pass cannot quietly flatten it away.
+    const ratioAt = (level: number) => XP_TABLE[level - 1] / XP_TABLE[level - 2];
+    expect(ratioAt(130)).toBeLessThan(1.06);
+    expect(ratioAt(150)).toBeGreaterThan(1.1);
+    expect(ratioAt(150)).toBeGreaterThan(ratioAt(130));
   });
 
   it('spans six orders of magnitude from the first level to the last', () => {

@@ -328,10 +328,14 @@ import {
   gainCraftSkill,
   normalizeCraftSkills,
 } from './professions/wheel';
+import { openingAllocation } from './progression/class_blocks';
 import {
+  freshJobProgress,
   type JobProgress,
+  type JobTrack,
   jobXpToNext as jobXpToNextImpl,
-  MAX_JOB_LEVEL,
+  maxJobLevel,
+  SKILL_POINTS_PER_JOB_LEVEL,
 } from './progression/job_level';
 import { prestige as prestigeImpl, updateRested } from './progression/xp';
 import { advancePendingProjectiles, type PendingProjectile } from './projectile_travel';
@@ -428,6 +432,8 @@ import { createVcState, type VcState } from './social/vale_cup';
 import * as valeCupBotsMod from './social/vale_cup_bots';
 import { SpatialGrid } from './spatial';
 import {
+  lowerRefund,
+  lowerStat as lowerStatAlloc,
   raiseCost,
   raiseStat,
   resetStatAllocation,
@@ -980,6 +986,11 @@ export interface PlayerMeta {
   jobLevel: number;
   jobXp: number;
   skillPoints: number;
+  // Which segment the job bar runs, and the SEPARATE pool the second one fills.
+  // Base points buy base-tree skills, advanced points advanced-tree ones; they
+  // never cross (src/sim/progression/skill_points.ts).
+  jobTrack: JobTrack;
+  advancedSkillPoints: number;
   // Soulbound PvP currency. honor is spendable; lifetimeHonor is monotonic.
   honor: number;
   lifetimeHonor: number;
@@ -1251,6 +1262,8 @@ export interface CharacterState {
   jobLevel?: number;
   jobXp?: number;
   skillPoints?: number;
+  jobTrack?: JobTrack;
+  advancedSkillPoints?: number;
   // Soulbound PvP progression. Optional so pre-honor saves load at zero.
   honor?: number;
   lifetimeHonor?: number;
@@ -2173,7 +2186,11 @@ export class Sim {
       lifetimeXp: 0,
       jobLevel: 1,
       jobXp: 0,
-      skillPoints: 0,
+      // Job level 1 grants its skill point, so a brand new character already
+      // holds one. The reference counts the level-1 point in its 50.
+      skillPoints: SKILL_POINTS_PER_JOB_LEVEL,
+      jobTrack: 'base',
+      advancedSkillPoints: 0,
       honor: 0,
       lifetimeHonor: 0,
       prestigeRank: 0,
@@ -2189,13 +2206,13 @@ export class Sim {
       lastDisenchantResult: null,
       lastEnchantResult: null,
       known: [],
-      // A new character starts on the class's suggested spread rather than at 1 in
-      // all six. Ragnarok hands a Novice 48 unspent points, but it also assumes the
-      // player places them before doing anything; here an unallocated character is
-      // simply unable to fight, and the points are the FIRST thing a new player
-      // would have to understand. The spread is a starting build, not a lock: every
-      // point of it is refunded by Reset and re-spendable however they like.
-      statAllocation: emptyStatAllocation(),
+      // A new character opens with its CLASS BLOCK already spent, not at 1 in
+      // all six. That block IS the class mechanically, and it is not
+      // reallocatable: Reset returns the earned points and leaves it standing
+      // (progression/class_blocks.ts). An unallocated character would simply be
+      // unable to fight, and would make placing points the first thing a new
+      // player had to understand before they could play at all.
+      statAllocation: openingAllocation(cls),
       counters: freshCounters(),
       autoEquip: opts?.autoEquip ?? false,
       joinedAt: this.time,
@@ -2282,9 +2299,7 @@ export class Sim {
       // stored: those characters were built under a model where the class supplied
       // the stats, and handing them back a level-20 body with 1 in every attribute
       // would be a silent, unexplained gutting of a character someone played.
-      meta.statAllocation = s.statAllocation
-        ? sanitizeStatAllocation(s.statAllocation, player.level)
-        : emptyStatAllocation();
+      meta.statAllocation = sanitizeStatAllocation(s.statAllocation, player.level, meta.cls);
       player.facing = s.facing;
       player.prevFacing = s.facing;
       meta.xp = s.xp;
@@ -2292,9 +2307,20 @@ export class Sim {
       // plus their current bar progress, so the leaderboard is meaningful for
       // existing characters from day one.
       meta.lifetimeXp = s.lifetimeXp ?? xpToReachLevel(player.level) + Math.max(0, s.xp);
-      meta.jobLevel = Math.max(1, Math.min(MAX_JOB_LEVEL, Math.floor(s.jobLevel ?? 1)));
+      meta.jobTrack = s.jobTrack === 'advanced' ? 'advanced' : 'base';
+      meta.jobLevel = Math.max(
+        1,
+        Math.min(maxJobLevel(meta.jobTrack), Math.floor(s.jobLevel ?? 1)),
+      );
       meta.jobXp = Math.max(0, Math.floor(s.jobXp ?? 0));
-      meta.skillPoints = Math.max(0, Math.floor(s.skillPoints ?? 0));
+      // A save from before the level-1 grant existed stored 0. Floor it at the
+      // one point the reference grants on reaching job 1, so an old character
+      // is not a point behind a new one for having been made earlier.
+      meta.skillPoints = Math.max(
+        SKILL_POINTS_PER_JOB_LEVEL,
+        Math.floor(s.skillPoints ?? SKILL_POINTS_PER_JOB_LEVEL),
+      );
+      meta.advancedSkillPoints = Math.max(0, Math.floor(s.advancedSkillPoints ?? 0));
       meta.honor = honorMod.normalizeHonorCounter(s.honor);
       meta.lifetimeHonor = Math.max(
         meta.honor,
@@ -2932,8 +2958,14 @@ export class Sim {
       lifetimeXp: meta.lifetimeXp,
       // Only written once the character has actually advanced, so a save made
       // before the job track existed stays byte-equal.
-      ...(meta.jobLevel > 1 || meta.jobXp > 0 || meta.skillPoints > 0
-        ? { jobLevel: meta.jobLevel, jobXp: meta.jobXp, skillPoints: meta.skillPoints }
+      ...(meta.jobLevel > 1 || meta.jobXp > 0 || meta.advancedSkillPoints > 0
+        ? {
+            jobLevel: meta.jobLevel,
+            jobXp: meta.jobXp,
+            skillPoints: meta.skillPoints,
+            jobTrack: meta.jobTrack,
+            advancedSkillPoints: meta.advancedSkillPoints,
+          }
         : {}),
       ...(meta.honor || meta.lifetimeHonor
         ? { honor: meta.honor, lifetimeHonor: meta.lifetimeHonor }
@@ -4227,28 +4259,35 @@ export class Sim {
   // a separate command once the skill tree lands. ---
   jobProgress(pid?: number): JobProgress {
     const r = this.resolve(pid);
-    if (!r) return { jobLevel: 1, jobXp: 0, skillPoints: 0 };
-    return { jobLevel: r.meta.jobLevel, jobXp: r.meta.jobXp, skillPoints: r.meta.skillPoints };
+    if (!r) return freshJobProgress();
+    return {
+      track: r.meta.jobTrack,
+      jobLevel: r.meta.jobLevel,
+      jobXp: r.meta.jobXp,
+      skillPoints: r.meta.skillPoints,
+      advancedSkillPoints: r.meta.advancedSkillPoints,
+    };
   }
 
   jobXpToNext(pid?: number): number | null {
-    return jobXpToNextImpl(this.jobProgress(pid).jobLevel);
+    const p = this.jobProgress(pid);
+    return jobXpToNextImpl(p.jobLevel, p.track);
   }
 
   statusPoints(pid?: number): number {
     const r = this.resolve(pid);
-    return r ? unspentStatusPoints(r.meta.statAllocation, r.e.level) : 0;
+    return r ? unspentStatusPoints(r.meta.statAllocation, r.e.level, r.meta.cls) : 0;
   }
 
   statRaiseCost(stat: StatusStat, pid?: number): number | null {
     const r = this.resolve(pid);
-    return r ? raiseCost(r.meta.statAllocation, r.e.level, stat) : null;
+    return r ? raiseCost(r.meta.statAllocation, r.e.level, stat, r.meta.cls) : null;
   }
 
   raiseStat(stat: StatusStat, pid?: number): void {
     const r = this.resolve(pid);
     if (!r) return;
-    const next = raiseStat(r.meta.statAllocation, r.e.level, stat);
+    const next = raiseStat(r.meta.statAllocation, r.e.level, stat, r.meta.cls);
     if (!next) return;
     r.meta.statAllocation = next;
     this.refreshPlayerStats(r.meta);
@@ -4257,7 +4296,26 @@ export class Sim {
   resetStats(pid?: number): void {
     const r = this.resolve(pid);
     if (!r) return;
-    r.meta.statAllocation = resetStatAllocation();
+    r.meta.statAllocation = resetStatAllocation(r.meta.cls);
+    this.refreshPlayerStats(r.meta);
+  }
+
+  /** What lowering `stat` by one gives back, or null when it cannot be lowered
+   *  (it already sits at the class opening block). */
+  statLowerRefund(stat: StatusStat, pid?: number): number | null {
+    const r = this.resolve(pid);
+    return r ? lowerRefund(r.meta.statAllocation, stat, r.meta.cls) : null;
+  }
+
+  /** Give one point back. Free and unlimited: the reference's own build UI
+   *  lowers on shift or right click with no cost, so a player experiments by
+   *  clicking rather than by paying a respec vendor. */
+  lowerStat(stat: StatusStat, pid?: number): void {
+    const r = this.resolve(pid);
+    if (!r) return;
+    const next = lowerStatAlloc(r.meta.statAllocation, stat, r.meta.cls);
+    if (!next) return;
+    r.meta.statAllocation = next;
     this.refreshPlayerStats(r.meta);
   }
 

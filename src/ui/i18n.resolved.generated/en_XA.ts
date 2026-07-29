@@ -7825,6 +7825,9 @@ export const en_XA: EnTranslations = {
       "worn_sword": {
         "name": "[Þíţţéð Šĥóŕţšŵóŕð]"
       },
+      "worn_shortbow": {
+        "name": "[Ŵóŕñ Šĥóŕţƀóŵ]"
+      },
       "gnarled_staff": {
         "name": "[Ɓóĝóáķ Šţáƒƒ]"
       },

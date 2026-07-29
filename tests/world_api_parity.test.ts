@@ -64,6 +64,7 @@ import type { IWorldPet } from '../src/world_api/pet';
 import type { IWorldProfessions } from '../src/world_api/professions';
 import type { IWorldProgressionXp } from '../src/world_api/progression_xp';
 import type { IWorldSocialGraph } from '../src/world_api/social_graph';
+import type { IWorldStatusPoints } from '../src/world_api/status_points';
 import type { IWorldTargeting } from '../src/world_api/targeting';
 import type { IWorldTelemetry } from '../src/world_api/telemetry';
 import type { IWorldTrade } from '../src/world_api/trade';
@@ -98,6 +99,15 @@ export const IWORLD_MEMBERS = [
   // The job track: read-only from the client, so both are methods.
   { name: 'jobProgress', kind: 'method' },
   { name: 'jobXpToNext', kind: 'method' },
+  // The status attributes: one stored allocation the client reads, and the
+  // spend/refund verbs, which are server-authoritative and re-validated there.
+  { name: 'statAllocation', kind: 'data' },
+  { name: 'statusPoints', kind: 'method' },
+  { name: 'statRaiseCost', kind: 'method' },
+  { name: 'raiseStat', kind: 'method' },
+  { name: 'statLowerRefund', kind: 'method' },
+  { name: 'lowerStat', kind: 'method' },
+  { name: 'resetStats', kind: 'method' },
   { name: 'prestigeRank', kind: 'data' },
   { name: 'unlockedMilestones', kind: 'data' },
   { name: 'restedXp', kind: 'data' },
@@ -441,9 +451,12 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
     // second progression track.
     // Down five more (one data + four methods) with the card-duel removal:
     // the whole IWorldCardMinigame facet went with the minigame.
-    expect(IWORLD_MEMBERS.length).toBe(229);
-    expect(DATA_MEMBERS.length).toBe(61);
-    expect(METHOD_MEMBERS.length).toBe(168);
+    // Up seven with the IWorldStatusPoints back-fill: the facet existed
+    // unpinned, and adding statLowerRefund/lowerStat to it is the reviewed edit
+    // its own note asked for, so all seven of its members land here at once.
+    expect(IWORLD_MEMBERS.length).toBe(236);
+    expect(DATA_MEMBERS.length).toBe(62);
+    expect(METHOD_MEMBERS.length).toBe(174);
   });
   it('has no duplicate member names', () => {
     const names = IWORLD_MEMBERS.map((m) => m.name);
@@ -588,6 +601,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'lockpickState',
       'lootCorpse',
       'lootRollGroupStatus',
+      'lowerStat',
       'mailDelete',
       'mailInfo',
       'mailMarkRead',
@@ -625,6 +639,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'prestigeRank',
       'professionsState',
       'raidLockouts',
+      'raiseStat',
       'readyCheckRespond',
       'realm',
       'recipeList',
@@ -633,6 +648,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'renamePet',
       'renown',
       'reportTelemetry',
+      'resetStats',
       'respondToResurrection',
       'restedXp',
       'resurrectAtCorpse',
@@ -653,7 +669,11 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setTownFocus',
       'socialInfo',
       'startAutoAttack',
+      'statAllocation',
+      'statLowerRefund',
+      'statRaiseCost',
       'stationPlacements',
+      'statusPoints',
       'stopAutoAttack',
       'submitLootRoll',
       'tabTarget',
@@ -743,6 +763,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'renown',
       'restedXp',
       'socialInfo',
+      'statAllocation',
       'stationPlacements',
       'townFocus',
       'tradeInfo',
@@ -848,6 +869,7 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'lockpickEngage',
       'lootCorpse',
       'lootRollGroupStatus',
+      'lowerStat',
       'mailDelete',
       'mailMarkRead',
       'mailSend',
@@ -875,11 +897,13 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'playEmote',
       'prestige',
       'raidLockouts',
+      'raiseStat',
       'readyCheckRespond',
       'releaseEmpoweredAbility',
       'releaseSpirit',
       'renamePet',
       'reportTelemetry',
+      'resetStats',
       'respondToResurrection',
       'resurrectAtCorpse',
       'resurrectAtSpiritHealer',
@@ -898,6 +922,9 @@ describe('IWORLD_MEMBERS is the pinned IWorld contract (anti-loosening)', () => 
       'setPetMode',
       'setTownFocus',
       'startAutoAttack',
+      'statLowerRefund',
+      'statRaiseCost',
+      'statusPoints',
       'stopAutoAttack',
       'submitLootRoll',
       'tabTarget',
@@ -1327,10 +1354,24 @@ type _ExhaustActionBar = AssertNever<
 >;
 
 // The facet partition, keyed by facet for legible failure messages.
-// The job track's read side. Note the neighbouring IWorldStatusPoints facet is
-// NOT pinned here: it landed after this list froze, and back-filling it is a
-// separate reviewed edit rather than a side effect of this one.
+// The job track's read side.
 const FACET_JOB_LEVEL = ['jobProgress', 'jobXpToNext'];
+
+// The status attributes. Back-filled when statLowerRefund/lowerStat joined the
+// facet: it had been left unpinned since it landed, and the note asking for a
+// reviewed back-fill is that edit.
+const FACET_STATUS_POINTS = [
+  'statAllocation',
+  'statusPoints',
+  'statRaiseCost',
+  'raiseStat',
+  'statLowerRefund',
+  'lowerStat',
+  'resetStats',
+] as const satisfies readonly (keyof IWorldStatusPoints)[];
+type _ExhaustStatusPoints = AssertNever<
+  Exclude<keyof IWorldStatusPoints, (typeof FACET_STATUS_POINTS)[number]>
+>;
 
 const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   entityRoster: FACET_ENTITY_ROSTER,
@@ -1359,12 +1400,13 @@ const FACET_MEMBER_ARRAYS: Readonly<Record<string, readonly string[]>> = {
   deeds: FACET_DEEDS,
   actionBar: FACET_ACTION_BAR,
   jobLevel: FACET_JOB_LEVEL,
+  statusPoints: FACET_STATUS_POINTS,
 };
 
 describe('W1: aggregate IWorld member set equals the disjoint union of the 27 facets', () => {
   it('pins the facet count at 27', () => {
-    // 28 before the quest facet went.
-    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(26);
+    // 28 before the quest facet went, 26 while IWorldStatusPoints sat unpinned.
+    expect(Object.keys(FACET_MEMBER_ARRAYS).length).toBe(27);
   });
 
   it('each facet array is non-empty and internally duplicate-free', () => {
@@ -1392,8 +1434,8 @@ describe('W1: aggregate IWorld member set equals the disjoint union of the 27 fa
 
   it('the union of the facets equals the pinned IWORLD_MEMBERS set', () => {
     const union = Object.values(FACET_MEMBER_ARRAYS).flatMap((arr) => [...arr]);
-    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(229);
-    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(229);
+    expect(union.length, 'union size before dedup (catches a duplicated member)').toBe(236);
+    expect(new Set(union).size, 'union size after dedup (catches a duplicated member)').toBe(236);
     const sortedUnion = [...union].sort();
     const pinned = IWORLD_MEMBERS.map((m) => m.name).sort();
     expect(sortedUnion).toEqual(pinned);

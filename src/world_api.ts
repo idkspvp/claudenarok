@@ -352,6 +352,7 @@ export const COMMAND_NAMES = [
   'arena_augment',
   'prestige',
   'raiseStat',
+  'lowerStat',
   'resetStats',
   'market_search',
   'market_list',

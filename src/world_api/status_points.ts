@@ -11,6 +11,12 @@ export interface IWorldStatusPoints {
   statRaiseCost(stat: StatusStat): number | null;
   /** Spend one point. A rejected spend changes nothing. */
   raiseStat(stat: StatusStat): void;
-  /** Return every spent point to the pool. */
+  /** What lowering this attribute by one gives back, or null when it sits at
+   *  the class opening block and cannot be lowered. */
+  statLowerRefund(stat: StatusStat): number | null;
+  /** Give one point back. Free and unlimited, and it stops at the class opening
+   *  block: those 27 points were never the player's to move. */
+  lowerStat(stat: StatusStat): void;
+  /** Return every EARNED point to the pool, leaving the class opening block. */
   resetStats(): void;
 }
