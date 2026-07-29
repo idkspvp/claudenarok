@@ -9,14 +9,14 @@
     "updateDelveCompanion heel arm: moveToward owner past DELVE_COMPANION_FOLLOW, then warp + rebucket past PET_TELEPORT_DISTANCE",
     "combat_start/low_hp barks via maybeCompanionBark (stays on Sim)"
   ],
-  "draws": 15,
-  "drawDigest": "748cab74",
+  "draws": 12,
+  "drawDigest": "3de539dc",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "22cd1b7d",
+      "state": "b4b133fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -79,7 +79,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -102,14 +102,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -130,7 +130,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -144,7 +144,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -155,99 +155,99 @@
       "tick": 5,
       "time": 0.25,
       "nextId": 424,
-      "state": "acb5bf16",
-      "events": "1557dd5c",
+      "state": "2c6a4055",
+      "events": "5b47ccb6",
       "rng": {
-        "draws": 9,
-        "digest": "9aada9c8"
+        "draws": 7,
+        "digest": "5dd8bdd5"
       }
     },
     {
       "tick": 10,
       "time": 0.5,
       "nextId": 424,
-      "state": "0cc01ca2",
+      "state": "5c577a4d",
       "events": "741638a5",
       "rng": {
-        "draws": 9,
-        "digest": "9aada9c8"
+        "draws": 7,
+        "digest": "5dd8bdd5"
       }
     },
     {
       "tick": 15,
       "time": 0.75,
       "nextId": 424,
-      "state": "3a4809ec",
+      "state": "6efd120b",
       "events": "741638a5",
       "rng": {
-        "draws": 9,
-        "digest": "9aada9c8"
+        "draws": 7,
+        "digest": "5dd8bdd5"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 424,
-      "state": "93f1c889",
+      "state": "c625a7ee",
       "events": "16fc0e70",
       "rng": {
-        "draws": 9,
-        "digest": "9aada9c8"
+        "draws": 7,
+        "digest": "5dd8bdd5"
       }
     },
     {
       "tick": 25,
       "time": 1.25,
       "nextId": 424,
-      "state": "807398a7",
+      "state": "828f00c8",
       "events": "741638a5",
       "rng": {
-        "draws": 9,
-        "digest": "9aada9c8"
+        "draws": 7,
+        "digest": "5dd8bdd5"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 424,
-      "state": "f76fb2f2",
-      "events": "eda2e4a1",
+      "state": "684e0641",
+      "events": "21437cc2",
       "rng": {
-        "draws": 13,
-        "digest": "ff1d6f7e"
+        "draws": 10,
+        "digest": "88e18b82"
       }
     },
     {
       "tick": 35,
       "time": 1.75,
       "nextId": 424,
-      "state": "9cfc7658",
+      "state": "e63707d7",
       "events": "741638a5",
       "rng": {
-        "draws": 13,
-        "digest": "ff1d6f7e"
+        "draws": 10,
+        "digest": "88e18b82"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "204f160c",
+      "state": "b2cd74a9",
       "events": "741638a5",
       "rng": {
-        "draws": 13,
-        "digest": "ff1d6f7e"
+        "draws": 10,
+        "digest": "88e18b82"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "204f160c",
+      "state": "b2cd74a9",
       "events": "741638a5",
       "rng": {
-        "draws": 13,
-        "digest": "ff1d6f7e"
+        "draws": 10,
+        "digest": "88e18b82"
       },
       "label": "combat",
       "players": [
@@ -320,7 +320,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -342,8 +342,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101,
-          "flee": 8,
-          "hit": 8,
+          "flee": 7,
+          "hit": 34,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -370,7 +370,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -385,7 +385,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -401,9 +401,9 @@
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 25,
-          "hit": 22,
-          "hp": 140,
+          "flee": 15,
+          "hit": 65,
+          "hp": 128,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -457,10 +457,10 @@
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 109,
-          "hit": 109,
+          "flee": 59,
+          "hit": 234,
           "hostile": true,
-          "hp": 39955,
+          "hp": 39954,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -498,7 +498,7 @@
           "threat": [
             [
               419,
-              46
+              47
             ]
           ],
           "weapon": {
@@ -513,11 +513,11 @@
       "tick": 41,
       "time": 2.05,
       "nextId": 424,
-      "state": "8ec33b05",
+      "state": "4b86151a",
       "events": "dfe273f4",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       },
       "label": "heal",
       "players": [
@@ -590,7 +590,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -613,8 +613,8 @@
           "elementLevel": 1,
           "fallStartY": 55.720563,
           "fiveSecondRule": 101.05,
-          "flee": 8,
-          "hit": 8,
+          "flee": 7,
+          "hit": 34,
           "hp": 29000,
           "id": 414,
           "inCombat": true,
@@ -641,7 +641,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -656,7 +656,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -672,9 +672,9 @@
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 25,
-          "hit": 22,
-          "hp": 140,
+          "flee": 15,
+          "hit": 65,
+          "hp": 128,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -728,10 +728,10 @@
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 109,
-          "hit": 109,
+          "flee": 59,
+          "hit": 234,
           "hostile": true,
-          "hp": 39955,
+          "hp": 39954,
           "id": 420,
           "inCombat": true,
           "kind": "mob",
@@ -769,7 +769,7 @@
           "threat": [
             [
               419,
-              46
+              47
             ]
           ],
           "weapon": {
@@ -784,22 +784,22 @@
       "tick": 45,
       "time": 2.25,
       "nextId": 424,
-      "state": "e91ab997",
+      "state": "ee13dff7",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       }
     },
     {
       "tick": 49,
       "time": 2.45,
       "nextId": 424,
-      "state": "f46ee77c",
+      "state": "2ce47d08",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       },
       "label": "heel-walk",
       "players": [
@@ -872,7 +872,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -895,8 +895,8 @@
           "elementLevel": 1,
           "fallStartY": 55.2043,
           "fiveSecondRule": 101.45,
-          "flee": 8,
-          "hit": 8,
+          "flee": 7,
+          "hit": 34,
           "hp": 29000,
           "id": 414,
           "kind": "player",
@@ -922,7 +922,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -936,7 +936,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -952,9 +952,9 @@
           "elementLevel": 1,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 25,
-          "hit": 22,
-          "hp": 140,
+          "flee": 15,
+          "hit": 65,
+          "hp": 128,
           "id": 419,
           "kind": "mob",
           "level": 5,
@@ -1001,22 +1001,22 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 424,
-      "state": "e73a405a",
+      "state": "ebd41226",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       }
     },
     {
       "tick": 51,
       "time": 2.55,
       "nextId": 424,
-      "state": "8d8e4219",
+      "state": "9bfdb9eb",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       },
       "label": "heel-teleport",
       "players": [
@@ -1089,7 +1089,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -1112,8 +1112,8 @@
           "elementLevel": 1,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
-          "flee": 8,
-          "hit": 8,
+          "flee": 7,
+          "hit": 34,
           "hp": 29000,
           "id": 414,
           "kind": "player",
@@ -1139,7 +1139,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1153,7 +1153,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1169,9 +1169,9 @@
           "elementLevel": 1,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 25,
-          "hit": 22,
-          "hp": 140,
+          "flee": 15,
+          "hit": 65,
+          "hp": 128,
           "id": 419,
           "kind": "mob",
           "level": 5,
@@ -1219,11 +1219,11 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 424,
-      "state": "8d8e4219",
+      "state": "9bfdb9eb",
       "events": "741638a5",
       "rng": {
-        "draws": 15,
-        "digest": "748cab74"
+        "draws": 12,
+        "digest": "3de539dc"
       },
       "label": "final",
       "players": [
@@ -1296,7 +1296,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -1319,8 +1319,8 @@
           "elementLevel": 1,
           "fallStartY": 60.199709,
           "fiveSecondRule": 101.55,
-          "flee": 8,
-          "hit": 8,
+          "flee": 7,
+          "hit": 34,
           "hp": 29000,
           "id": 414,
           "kind": "player",
@@ -1346,7 +1346,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1360,7 +1360,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1376,9 +1376,9 @@
           "elementLevel": 1,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 25,
-          "hit": 22,
-          "hp": 140,
+          "flee": 15,
+          "hit": 65,
+          "hp": 128,
           "id": 419,
           "kind": "mob",
           "level": 5,

@@ -21,7 +21,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "22cd1b7d",
+      "state": "b4b133fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -84,7 +84,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -107,14 +107,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -135,7 +135,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -149,7 +149,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -160,7 +160,7 @@
       "tick": 51,
       "time": 2.55,
       "nextId": 415,
-      "state": "50d9e435",
+      "state": "879f73d2",
       "events": "f2976fd7",
       "rng": {
         "draws": 2,
@@ -271,7 +271,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -295,14 +295,14 @@
           "elementLevel": 1,
           "fallStartY": -1.407651,
           "fiveSecondRule": 101.55,
-          "flee": 3,
-          "hit": 3,
-          "hp": 46,
+          "flee": 2,
+          "hit": 29,
+          "hp": 226,
           "id": 414,
           "kind": "player",
           "level": 2,
           "lootFfaTimer": "Infinity",
-          "maxHp": 46,
+          "maxHp": 226,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -323,7 +323,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -337,7 +337,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -348,7 +348,7 @@
       "tick": 104,
       "time": 5.2,
       "nextId": 415,
-      "state": "b66840f7",
+      "state": "34a303fb",
       "events": "e53c5021",
       "rng": {
         "draws": 4,
@@ -479,7 +479,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 3,
           "auras": [
             {
               "duration": 3600,
@@ -503,14 +503,14 @@
           "elementLevel": 1,
           "fallStartY": -2.328903,
           "fiveSecondRule": 104.2,
-          "flee": 4,
-          "hit": 4,
-          "hp": 54,
+          "flee": 3,
+          "hit": 30,
+          "hp": 240,
           "id": 414,
           "kind": "player",
           "level": 3,
           "lootFfaTimer": "Infinity",
-          "maxHp": 54,
+          "maxHp": 240,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -531,7 +531,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 3,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -545,7 +545,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -556,7 +556,7 @@
       "tick": 500,
       "time": 25,
       "nextId": 415,
-      "state": "09e5165f",
+      "state": "d09a9c77",
       "events": "d2009818",
       "rng": {
         "draws": 18,
@@ -567,7 +567,7 @@
       "tick": 1000,
       "time": 50,
       "nextId": 415,
-      "state": "da526cdb",
+      "state": "ae0857e1",
       "events": "845a96b8",
       "rng": {
         "draws": 38,
@@ -578,7 +578,7 @@
       "tick": 1500,
       "time": 75,
       "nextId": 415,
-      "state": "67b29516",
+      "state": "f851e6ee",
       "events": "f6f8de8d",
       "rng": {
         "draws": 58,
@@ -589,7 +589,7 @@
       "tick": 2000,
       "time": 100,
       "nextId": 415,
-      "state": "caa4cd79",
+      "state": "42a61797",
       "events": "9c13990f",
       "rng": {
         "draws": 78,
@@ -600,7 +600,7 @@
       "tick": 2500,
       "time": 125,
       "nextId": 415,
-      "state": "37cb4d39",
+      "state": "181c299d",
       "events": "def5fdc4",
       "rng": {
         "draws": 96,
@@ -611,7 +611,7 @@
       "tick": 3000,
       "time": 150,
       "nextId": 415,
-      "state": "bd5ea79e",
+      "state": "a69ebb30",
       "events": "3300f1e5",
       "rng": {
         "draws": 116,
@@ -622,7 +622,7 @@
       "tick": 3500,
       "time": 175,
       "nextId": 415,
-      "state": "d8ce66d5",
+      "state": "29a03d77",
       "events": "0d678baf",
       "rng": {
         "draws": 136,
@@ -633,7 +633,7 @@
       "tick": 4000,
       "time": 200,
       "nextId": 415,
-      "state": "39ad21ba",
+      "state": "916fee84",
       "events": "a86cecb1",
       "rng": {
         "draws": 156,
@@ -644,7 +644,7 @@
       "tick": 4500,
       "time": 225,
       "nextId": 415,
-      "state": "50b096bc",
+      "state": "97cdcea8",
       "events": "34357faf",
       "rng": {
         "draws": 176,
@@ -655,7 +655,7 @@
       "tick": 5000,
       "time": 250,
       "nextId": 415,
-      "state": "a5a2dc15",
+      "state": "a3ab47c9",
       "events": "c1958d2f",
       "rng": {
         "draws": 194,
@@ -666,7 +666,7 @@
       "tick": 5206,
       "time": 260.3,
       "nextId": 415,
-      "state": "08519840",
+      "state": "6d5413d4",
       "events": "21da9fb2",
       "rng": {
         "draws": 204,
@@ -822,7 +822,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -846,14 +846,14 @@
           "elementLevel": 1,
           "fallStartY": -5.25,
           "fiveSecondRule": 359.3,
-          "flee": 10,
-          "hit": 10,
-          "hp": 112,
+          "flee": 9,
+          "hit": 36,
+          "hp": 352,
           "id": 414,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 112,
+          "maxHp": 352,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -874,7 +874,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -888,7 +888,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -899,7 +899,7 @@
       "tick": 5208,
       "time": 260.4,
       "nextId": 415,
-      "state": "955c67c9",
+      "state": "29b63a9f",
       "events": "741638a5",
       "rng": {
         "draws": 204,
@@ -1055,7 +1055,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -1079,14 +1079,14 @@
           "elementLevel": 1,
           "fallStartY": -5.25,
           "fiveSecondRule": 359.4,
-          "flee": 10,
-          "hit": 10,
-          "hp": 112,
+          "flee": 9,
+          "hit": 36,
+          "hp": 352,
           "id": 414,
           "kind": "player",
           "level": 9,
           "lootFfaTimer": "Infinity",
-          "maxHp": 112,
+          "maxHp": 352,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1107,7 +1107,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1121,7 +1121,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }

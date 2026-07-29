@@ -13,8 +13,8 @@
     "Final Stand enrage at 5% + grantNythraxisLockout (raidLockouts) + onBossDeath death dialogue",
     "class:swordman"
   ],
-  "draws": 3321,
-  "drawDigest": "f4da82d5",
+  "draws": 3247,
+  "drawDigest": "330fea73",
   "frames": [
     {
       "tick": 0,
@@ -34,11 +34,11 @@
       "tick": 1,
       "time": 0.05,
       "nextId": 424,
-      "state": "32cd9e44",
-      "events": "01240d23",
+      "state": "0a37996c",
+      "events": "4f006958",
       "rng": {
-        "draws": 5,
-        "digest": "8541dce9"
+        "draws": 4,
+        "digest": "9c74b095"
       },
       "label": "engage",
       "players": [
@@ -56,7 +56,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 2101
+            "damageTaken": 2102
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -615,7 +615,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -636,8 +636,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 99.05,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -665,7 +665,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -679,14 +679,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -695,20 +695,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 99.05,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -719,7 +719,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -727,7 +727,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -746,14 +746,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -762,20 +762,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 99.05,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -786,7 +786,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -794,7 +794,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -813,14 +813,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -829,20 +829,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 99.05,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -853,7 +853,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -861,7 +861,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -880,14 +880,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -896,20 +896,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 99.05,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -920,7 +920,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -928,7 +928,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -947,7 +947,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -963,8 +963,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 120000,
           "id": 419,
@@ -1025,55 +1025,55 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 424,
-      "state": "976bf7ee",
+      "state": "ee85b4fc",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "8541dce9"
+        "draws": 4,
+        "digest": "9c74b095"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 424,
-      "state": "8037ccc3",
+      "state": "ef8cf897",
       "events": "612b2db0",
       "rng": {
-        "draws": 5,
-        "digest": "8541dce9"
+        "draws": 4,
+        "digest": "9c74b095"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 424,
-      "state": "9fcf4df3",
+      "state": "33692d95",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "8541dce9"
+        "draws": 4,
+        "digest": "9c74b095"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 424,
-      "state": "2aa3d670",
+      "state": "92327590",
       "events": "741638a5",
       "rng": {
-        "draws": 5,
-        "digest": "8541dce9"
+        "draws": 4,
+        "digest": "9c74b095"
       }
     },
     {
       "tick": 42,
       "time": 2.1,
       "nextId": 426,
-      "state": "e18f0cfb",
+      "state": "67e7d1f9",
       "events": "bb7a63fb",
       "rng": {
-        "draws": 11,
-        "digest": "45e91248"
+        "draws": 10,
+        "digest": "2c0596f1"
       },
       "label": "phase1-adds",
       "players": [
@@ -1091,7 +1091,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 2101
+            "damageTaken": 2102
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1650,7 +1650,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -1672,8 +1672,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.1,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -1701,7 +1701,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1715,14 +1715,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 101.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1731,20 +1731,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.1,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1755,7 +1755,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1763,7 +1763,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1782,14 +1782,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 101.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1798,20 +1798,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.1,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1822,7 +1822,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1830,7 +1830,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1849,14 +1849,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 101.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1865,20 +1865,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.1,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1889,7 +1889,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1897,7 +1897,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1916,14 +1916,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 101.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1932,20 +1932,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.1,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1956,7 +1956,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1964,7 +1964,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1983,7 +1983,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2000,8 +2000,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 120000,
           "id": 419,
@@ -2073,8 +2073,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 424,
@@ -2138,8 +2138,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 425,
@@ -2197,11 +2197,11 @@
       "tick": 43,
       "time": 2.15,
       "nextId": 427,
-      "state": "f167ac9f",
+      "state": "1d0ba7b1",
       "events": "1c770812",
       "rng": {
-        "draws": 15,
-        "digest": "6407bd16"
+        "draws": 14,
+        "digest": "54cd818c"
       },
       "label": "transition",
       "players": [
@@ -2219,7 +2219,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 2101
+            "damageTaken": 2102
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2778,7 +2778,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -2810,8 +2810,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.15,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -2839,7 +2839,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -2853,14 +2853,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 26,
@@ -2881,20 +2881,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2905,7 +2905,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2913,7 +2913,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2932,14 +2932,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 26,
@@ -2960,20 +2960,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2984,7 +2984,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2992,7 +2992,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3011,14 +3011,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 26,
@@ -3039,20 +3039,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3063,7 +3063,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3071,7 +3071,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3090,14 +3090,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 26,
@@ -3118,20 +3118,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3142,7 +3142,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3150,7 +3150,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3169,7 +3169,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3197,8 +3197,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 82800,
           "id": 419,
@@ -3431,8 +3431,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 424,
@@ -3508,8 +3508,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 425,
@@ -3605,187 +3605,187 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 427,
-      "state": "8318af4c",
+      "state": "e03c803a",
       "events": "741638a5",
       "rng": {
-        "draws": 37,
-        "digest": "251bfaf8"
+        "draws": 36,
+        "digest": "0671d8d9"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 427,
-      "state": "efe0dfe0",
+      "state": "e628199c",
       "events": "741638a5",
       "rng": {
-        "draws": 76,
-        "digest": "09373653"
+        "draws": 74,
+        "digest": "4965f9b0"
       }
     },
     {
       "tick": 70,
       "time": 3.5,
       "nextId": 427,
-      "state": "6362c745",
+      "state": "4cea97fb",
       "events": "741638a5",
       "rng": {
-        "draws": 113,
-        "digest": "a19ecaaf"
+        "draws": 116,
+        "digest": "ce0ca413"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 427,
-      "state": "f4247751",
-      "events": "6321cebb",
+      "state": "590d0eac",
+      "events": "1ae6af12",
       "rng": {
-        "draws": 167,
-        "digest": "797877b8"
+        "draws": 169,
+        "digest": "b9bf1b26"
       }
     },
     {
       "tick": 90,
       "time": 4.5,
       "nextId": 427,
-      "state": "7ae34bb6",
-      "events": "caa7d2de",
+      "state": "45bd2654",
+      "events": "8949a032",
       "rng": {
-        "draws": 225,
-        "digest": "ed85429f"
+        "draws": 215,
+        "digest": "bad5b394"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 427,
-      "state": "5ebd703b",
+      "state": "55c9e26c",
       "events": "741638a5",
       "rng": {
-        "draws": 282,
-        "digest": "2ad85fc3"
+        "draws": 272,
+        "digest": "764582d6"
       }
     },
     {
       "tick": 110,
       "time": 5.5,
       "nextId": 427,
-      "state": "d6d292f2",
+      "state": "62b1b8ec",
       "events": "741638a5",
       "rng": {
-        "draws": 340,
-        "digest": "a0717b3f"
+        "draws": 329,
+        "digest": "99d6df17"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 427,
-      "state": "f6322bc1",
+      "state": "2b600704",
       "events": "741638a5",
       "rng": {
-        "draws": 391,
-        "digest": "861540af"
+        "draws": 385,
+        "digest": "d5a0570a"
       }
     },
     {
       "tick": 130,
       "time": 6.5,
       "nextId": 427,
-      "state": "f9c9c076",
-      "events": "5c08a422",
+      "state": "4d86b6b9",
+      "events": "9738f0a0",
       "rng": {
-        "draws": 456,
-        "digest": "ced55ac4"
+        "draws": 448,
+        "digest": "c33c9330"
       }
     },
     {
       "tick": 140,
       "time": 7,
       "nextId": 427,
-      "state": "5faae4d1",
-      "events": "1f6f3802",
+      "state": "78bd5337",
+      "events": "b80cd9ec",
       "rng": {
-        "draws": 520,
-        "digest": "27e42216"
+        "draws": 512,
+        "digest": "e05cb1cf"
       }
     },
     {
       "tick": 150,
       "time": 7.5,
       "nextId": 427,
-      "state": "793226a5",
+      "state": "1bcf3ca3",
       "events": "741638a5",
       "rng": {
-        "draws": 556,
-        "digest": "70d7f277"
+        "draws": 547,
+        "digest": "11cb75e9"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 427,
-      "state": "6467ee07",
+      "state": "761f9eb6",
       "events": "741638a5",
       "rng": {
-        "draws": 609,
-        "digest": "7d1ec2db"
+        "draws": 604,
+        "digest": "8ce7008e"
       }
     },
     {
       "tick": 170,
       "time": 8.5,
       "nextId": 427,
-      "state": "f205c785",
-      "events": "d2617c81",
+      "state": "dcbbe44b",
+      "events": "cec65e91",
       "rng": {
-        "draws": 690,
-        "digest": "3cb16c2d"
+        "draws": 675,
+        "digest": "ec94d61b"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 427,
-      "state": "cbe61a3a",
-      "events": "ab1aa02c",
+      "state": "4c768dee",
+      "events": "5be4f9ef",
       "rng": {
-        "draws": 775,
-        "digest": "cc8b6035"
+        "draws": 764,
+        "digest": "7deea2e2"
       }
     },
     {
       "tick": 190,
       "time": 9.5,
       "nextId": 427,
-      "state": "36539c95",
-      "events": "6610ae2b",
+      "state": "a1a8b6e7",
+      "events": "b77518b0",
       "rng": {
-        "draws": 857,
-        "digest": "881b19b6"
+        "draws": 844,
+        "digest": "86a25d1e"
       }
     },
     {
       "tick": 200,
       "time": 10,
       "nextId": 427,
-      "state": "bcb52611",
+      "state": "873699b7",
       "events": "741638a5",
       "rng": {
-        "draws": 922,
-        "digest": "0526ef12"
+        "draws": 908,
+        "digest": "e35e96f9"
       }
     },
     {
       "tick": 203,
       "time": 10.15,
       "nextId": 427,
-      "state": "2d44f310",
+      "state": "528ddfb4",
       "events": "741638a5",
       "rng": {
-        "draws": 929,
-        "digest": "6d9e6405"
+        "draws": 916,
+        "digest": "823188c0"
       },
       "label": "phase2",
       "players": [
@@ -3803,7 +3803,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 10825
+            "damageTaken": 10856
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -4362,7 +4362,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -4378,7 +4378,7 @@
               "id": "revenge_free",
               "kind": "revenge_free",
               "name": "Revenge!",
-              "remaining": 8.65,
+              "remaining": 6.45,
               "school": "physical",
               "sourceId": 414
             }
@@ -4393,8 +4393,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.15,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -4422,7 +4422,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -4436,25 +4436,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
-          "auras": [
-            {
-              "duration": 8,
-              "id": "nythraxis_soul_rend",
-              "kind": "vulnerability",
-              "name": "Soul Rend",
-              "remaining": 6.05,
-              "school": "shadow",
-              "sourceId": 419
-            }
-          ],
+          "attackPower": 27,
           "combatTimer": 109.15,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -4463,20 +4452,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4487,7 +4476,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4495,7 +4484,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -4514,14 +4503,25 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
+          "auras": [
+            {
+              "duration": 8,
+              "id": "nythraxis_soul_rend",
+              "kind": "vulnerability",
+              "name": "Soul Rend",
+              "remaining": 6.05,
+              "school": "shadow",
+              "sourceId": 419
+            }
+          ],
           "combatTimer": 109.15,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -4530,20 +4530,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4554,7 +4554,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4562,7 +4562,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -4581,14 +4581,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 8,
@@ -4608,20 +4608,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4632,7 +4632,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4640,7 +4640,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -4659,14 +4659,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 8,
@@ -4686,20 +4686,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.15,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4710,7 +4710,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4718,7 +4718,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -4737,7 +4737,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -4754,8 +4754,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 82800,
           "id": 419,
@@ -4778,15 +4778,15 @@
             "raiseFallenTimer": 30,
             "soulRendMarks": [
               {
-                "playerId": 417,
-                "remaining": 6.05
-              },
-              {
-                "playerId": 415,
+                "playerId": 416,
                 "remaining": 6.05
               },
               {
                 "playerId": 418,
+                "remaining": 6.05
+              },
+              {
+                "playerId": 417,
                 "remaining": 6.05
               }
             ],
@@ -4990,8 +4990,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 424,
@@ -5047,7 +5047,7 @@
         {
           "aggroTargetId": 414,
           "aiState": "attack",
-          "combatTimer": 3.55,
+          "combatTimer": 1.35,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -5056,8 +5056,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 425,
@@ -5154,11 +5154,11 @@
       "tick": 204,
       "time": 10.2,
       "nextId": 427,
-      "state": "1d5a2757",
+      "state": "4d795480",
       "events": "af681ac1",
       "rng": {
-        "draws": 932,
-        "digest": "fdaae409"
+        "draws": 924,
+        "digest": "91a42f8b"
       },
       "label": "soulrend",
       "players": [
@@ -5176,7 +5176,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 10825
+            "damageTaken": 10856
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -5735,7 +5735,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -5751,7 +5751,7 @@
               "id": "revenge_free",
               "kind": "revenge_free",
               "name": "Revenge!",
-              "remaining": 8.6,
+              "remaining": 6.4,
               "school": "physical",
               "sourceId": 414
             }
@@ -5766,8 +5766,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.2,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -5795,7 +5795,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -5809,14 +5809,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 8,
@@ -5836,20 +5836,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.2,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -5860,7 +5860,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -5868,7 +5868,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -5887,14 +5887,25 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
+          "auras": [
+            {
+              "duration": 8,
+              "id": "nythraxis_soul_rend",
+              "kind": "vulnerability",
+              "name": "Soul Rend",
+              "remaining": 6,
+              "school": "shadow",
+              "sourceId": 419
+            }
+          ],
           "combatTimer": 109.2,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -5903,20 +5914,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.2,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -5927,7 +5938,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -5935,7 +5946,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -5954,14 +5965,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 8,
@@ -5981,20 +5992,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.2,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6005,7 +6016,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -6013,7 +6024,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -6032,14 +6043,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 8,
@@ -6059,20 +6070,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 109.2,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -6083,7 +6094,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -6091,7 +6102,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -6110,7 +6121,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -6127,8 +6138,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 82800,
           "id": 419,
@@ -6363,8 +6374,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 424,
@@ -6420,7 +6431,7 @@
         {
           "aggroTargetId": 414,
           "aiState": "attack",
-          "combatTimer": 3.6,
+          "combatTimer": 1.4,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -6429,8 +6440,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "hp": 3137,
           "id": 425,
@@ -6527,209 +6538,209 @@
       "tick": 210,
       "time": 10.5,
       "nextId": 427,
-      "state": "bffff739",
+      "state": "90a059be",
       "events": "741638a5",
       "rng": {
-        "draws": 946,
-        "digest": "e69c476c"
+        "draws": 949,
+        "digest": "0fa63156"
       }
     },
     {
       "tick": 220,
       "time": 11,
       "nextId": 427,
-      "state": "56ff5d1a",
-      "events": "ef87846d",
+      "state": "b1a067e9",
+      "events": "50ccd18d",
       "rng": {
-        "draws": 1003,
-        "digest": "5853b774"
+        "draws": 997,
+        "digest": "6b2ecbfa"
       }
     },
     {
       "tick": 230,
       "time": 11.5,
       "nextId": 427,
-      "state": "cf61f0e5",
+      "state": "a5758358",
       "events": "741638a5",
       "rng": {
-        "draws": 1048,
-        "digest": "49816d3f"
+        "draws": 1028,
+        "digest": "90fc0450"
       }
     },
     {
       "tick": 240,
       "time": 12,
       "nextId": 427,
-      "state": "1cd909bb",
-      "events": "48a2b80a",
+      "state": "3eaee811",
+      "events": "894524d4",
       "rng": {
-        "draws": 1103,
-        "digest": "6c857d17"
+        "draws": 1076,
+        "digest": "68c0465c"
       }
     },
     {
       "tick": 250,
       "time": 12.5,
       "nextId": 427,
-      "state": "0a942f9f",
+      "state": "63c3b945",
       "events": "741638a5",
       "rng": {
-        "draws": 1146,
-        "digest": "57123ef7"
+        "draws": 1109,
+        "digest": "bd8ab841"
       }
     },
     {
       "tick": 260,
       "time": 13,
       "nextId": 427,
-      "state": "faeee004",
+      "state": "dbeb0d19",
       "events": "741638a5",
       "rng": {
-        "draws": 1187,
-        "digest": "52526ac1"
+        "draws": 1152,
+        "digest": "5d8031f8"
       }
     },
     {
       "tick": 270,
       "time": 13.5,
       "nextId": 427,
-      "state": "53ad653b",
-      "events": "0c29aff0",
+      "state": "e53b40fd",
+      "events": "83ec429d",
       "rng": {
-        "draws": 1239,
-        "digest": "08dbea09"
+        "draws": 1194,
+        "digest": "e30c6c12"
       }
     },
     {
       "tick": 280,
       "time": 14,
       "nextId": 427,
-      "state": "3ac2442b",
+      "state": "c8a87dd5",
       "events": "741638a5",
       "rng": {
-        "draws": 1306,
-        "digest": "5de48cc0"
+        "draws": 1247,
+        "digest": "e2f3dd3c"
       }
     },
     {
       "tick": 290,
       "time": 14.5,
       "nextId": 427,
-      "state": "00927a73",
-      "events": "cc8de471",
+      "state": "e2cc4489",
+      "events": "059afb50",
       "rng": {
-        "draws": 1370,
-        "digest": "484a53fa"
+        "draws": 1306,
+        "digest": "5de48cc0"
       }
     },
     {
       "tick": 300,
       "time": 15,
       "nextId": 427,
-      "state": "f074d2cf",
+      "state": "e1c0f0a9",
       "events": "741638a5",
       "rng": {
-        "draws": 1416,
-        "digest": "0d1ef0bd"
+        "draws": 1349,
+        "digest": "89123ade"
       }
     },
     {
       "tick": 310,
       "time": 15.5,
       "nextId": 427,
-      "state": "789ce102",
-      "events": "6060ff9c",
+      "state": "bc066b7d",
+      "events": "cbf7bd85",
       "rng": {
-        "draws": 1465,
-        "digest": "7d8deffc"
+        "draws": 1404,
+        "digest": "8aeea021"
       }
     },
     {
       "tick": 320,
       "time": 16,
       "nextId": 427,
-      "state": "8204e548",
+      "state": "71050664",
       "events": "741638a5",
       "rng": {
-        "draws": 1513,
-        "digest": "5b7a4396"
+        "draws": 1456,
+        "digest": "88735ee3"
       }
     },
     {
       "tick": 330,
       "time": 16.5,
       "nextId": 427,
-      "state": "3cdda01f",
-      "events": "741638a5",
+      "state": "9bad4991",
+      "events": "1f984f0b",
       "rng": {
-        "draws": 1551,
-        "digest": "812ab967"
+        "draws": 1498,
+        "digest": "7dfb9050"
       }
     },
     {
       "tick": 340,
       "time": 17,
       "nextId": 427,
-      "state": "5ae22cb2",
-      "events": "b0868f3d",
+      "state": "e5fa96e9",
+      "events": "e3cd5eb1",
       "rng": {
-        "draws": 1607,
-        "digest": "27ff64fd"
+        "draws": 1560,
+        "digest": "0c524abe"
       }
     },
     {
       "tick": 350,
       "time": 17.5,
       "nextId": 427,
-      "state": "1f67e2da",
+      "state": "45a06d11",
       "events": "741638a5",
       "rng": {
-        "draws": 1663,
-        "digest": "8b98aadc"
+        "draws": 1609,
+        "digest": "0bbe328e"
       }
     },
     {
       "tick": 360,
       "time": 18,
       "nextId": 427,
-      "state": "593842f3",
-      "events": "531b37d2",
+      "state": "63b6292f",
+      "events": "43f4b686",
       "rng": {
-        "draws": 1713,
-        "digest": "06ef0aff"
+        "draws": 1657,
+        "digest": "b2be08cb"
       }
     },
     {
       "tick": 370,
       "time": 18.5,
       "nextId": 427,
-      "state": "fc7e5cda",
+      "state": "3b4d3b5d",
       "events": "c21dfced",
       "rng": {
-        "draws": 1761,
-        "digest": "3e07c300"
+        "draws": 1712,
+        "digest": "9723b667"
       }
     },
     {
       "tick": 380,
       "time": 19,
       "nextId": 427,
-      "state": "f8e5e3b7",
-      "events": "03fb8f2c",
+      "state": "ab62e949",
+      "events": "741638a5",
       "rng": {
-        "draws": 1814,
-        "digest": "b5b46af9"
+        "draws": 1761,
+        "digest": "3e07c300"
       }
     },
     {
       "tick": 386,
       "time": 19.3,
       "nextId": 427,
-      "state": "e9a39c1f",
+      "state": "674ff49f",
       "events": "88834288",
       "rng": {
-        "draws": 1848,
-        "digest": "894f9941"
+        "draws": 1788,
+        "digest": "947d5478"
       },
       "label": "deathless-start",
       "players": [
@@ -6748,7 +6759,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 24080,
+            "damageTaken": 23961,
             "kills": 2
           },
           "craftSkills": {},
@@ -7330,7 +7341,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -7352,8 +7363,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 118.3,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -7381,7 +7392,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -7395,14 +7406,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 1.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -7411,13 +7422,13 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 118.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "inCombat": true,
@@ -7425,7 +7436,7 @@
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7436,7 +7447,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -7444,7 +7455,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -7463,14 +7474,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 118.3,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -7479,20 +7490,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 118.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7503,7 +7514,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -7511,7 +7522,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -7530,14 +7541,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 1.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -7546,13 +7557,13 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 118.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "inCombat": true,
@@ -7560,7 +7571,7 @@
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7571,7 +7582,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -7579,7 +7590,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -7598,14 +7609,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 1.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -7614,13 +7625,13 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 118.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "inCombat": true,
@@ -7628,7 +7639,7 @@
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -7639,7 +7650,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -7647,7 +7658,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -7666,7 +7677,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -7686,8 +7697,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 82800,
           "id": 419,
@@ -7925,8 +7936,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -7993,8 +8004,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -8093,62 +8104,73 @@
       "tick": 390,
       "time": 19.5,
       "nextId": 427,
-      "state": "9e3ceb1d",
+      "state": "d9c9007b",
       "events": "db304e37",
       "rng": {
-        "draws": 1870,
-        "digest": "08890323"
+        "draws": 1816,
+        "digest": "8363beeb"
       }
     },
     {
       "tick": 400,
       "time": 20,
       "nextId": 427,
-      "state": "a00f1d1b",
+      "state": "0817d30f",
       "events": "66c12141",
       "rng": {
-        "draws": 1914,
-        "digest": "da4e6ccc"
+        "draws": 1870,
+        "digest": "08890323"
       }
     },
     {
       "tick": 410,
       "time": 20.5,
       "nextId": 427,
-      "state": "5d38ed36",
+      "state": "9f082724",
       "events": "66c12141",
       "rng": {
-        "draws": 1958,
-        "digest": "d0926de3"
+        "draws": 1928,
+        "digest": "3b2959c4"
       }
     },
     {
       "tick": 420,
       "time": 21,
       "nextId": 427,
-      "state": "0b63c0e4",
+      "state": "862d9cb4",
       "events": "66c12141",
       "rng": {
-        "draws": 2015,
-        "digest": "f3ec8feb"
+        "draws": 1961,
+        "digest": "3df79593"
       }
     },
     {
       "tick": 430,
       "time": 21.5,
       "nextId": 427,
-      "state": "26b19362",
+      "state": "3c18a72e",
       "events": "66c12141",
       "rng": {
-        "draws": 2060,
-        "digest": "5b9d5da3"
+        "draws": 2002,
+        "digest": "87f1c4fb"
       }
     },
     {
       "tick": 440,
       "time": 22,
       "nextId": 427,
-      "state": "69dfee38",
+      "state": "b7c11cd2",
+      "events": "66c12141",
+      "rng": {
+        "draws": 2048,
+        "digest": "715dff1d"
+      }
+    },
+    {
+      "tick": 450,
+      "time": 22.5,
+      "nextId": 427,
+      "state": "9128ce20",
       "events": "66c12141",
       "rng": {
         "draws": 2107,
@@ -8156,80 +8178,69 @@
       }
     },
     {
-      "tick": 450,
-      "time": 22.5,
-      "nextId": 427,
-      "state": "f6782e26",
-      "events": "66c12141",
-      "rng": {
-        "draws": 2144,
-        "digest": "7096dde0"
-      }
-    },
-    {
       "tick": 460,
       "time": 23,
       "nextId": 427,
-      "state": "042ea444",
+      "state": "f2650188",
       "events": "66c12141",
       "rng": {
-        "draws": 2197,
-        "digest": "71fc5d5d"
+        "draws": 2147,
+        "digest": "5fc95de9"
       }
     },
     {
       "tick": 470,
       "time": 23.5,
       "nextId": 427,
-      "state": "97dc7b05",
+      "state": "bfb044e5",
       "events": "66c12141",
       "rng": {
-        "draws": 2233,
-        "digest": "83911fff"
+        "draws": 2200,
+        "digest": "5f6b9c3d"
       }
     },
     {
       "tick": 480,
       "time": 24,
       "nextId": 427,
-      "state": "957cd3ff",
+      "state": "fe56f2b9",
       "events": "66c12141",
       "rng": {
-        "draws": 2271,
-        "digest": "97389393"
+        "draws": 2239,
+        "digest": "1e9b3723"
       }
     },
     {
       "tick": 490,
       "time": 24.5,
       "nextId": 427,
-      "state": "977410dc",
+      "state": "c2f16832",
       "events": "dace0e52",
       "rng": {
-        "draws": 2331,
-        "digest": "5ad07f5d"
+        "draws": 2294,
+        "digest": "2d91d229"
       }
     },
     {
       "tick": 500,
       "time": 25,
       "nextId": 427,
-      "state": "fd375c43",
+      "state": "a888beaf",
       "events": "741638a5",
       "rng": {
-        "draws": 2384,
-        "digest": "e9f8663f"
+        "draws": 2328,
+        "digest": "f894357a"
       }
     },
     {
       "tick": 506,
       "time": 25.3,
       "nextId": 427,
-      "state": "c3022260",
+      "state": "9aee9f8e",
       "events": "741638a5",
       "rng": {
-        "draws": 2404,
-        "digest": "fd02775d"
+        "draws": 2360,
+        "digest": "810b65f6"
       },
       "label": "deathless-interrupt",
       "players": [
@@ -8248,7 +8259,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 24080,
+            "damageTaken": 23961,
             "kills": 2
           },
           "craftSkills": {},
@@ -8830,7 +8841,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -8852,8 +8863,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 124.3,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -8881,7 +8892,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -8895,14 +8906,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 7.05,
           "comboUntil": -1,
@@ -8912,20 +8923,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 124.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -8936,7 +8947,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -8944,7 +8955,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -8963,14 +8974,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 124.3,
           "comboUntil": -1,
@@ -8980,20 +8991,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 124.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9004,7 +9015,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -9012,7 +9023,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -9031,14 +9042,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 7.05,
           "comboUntil": -1,
@@ -9048,20 +9059,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 124.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9072,7 +9083,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -9080,7 +9091,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -9099,14 +9110,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 7.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -9115,20 +9126,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 124.3,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -9139,7 +9150,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -9147,7 +9158,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -9166,7 +9177,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -9194,8 +9205,8 @@
           "elementLevel": 3,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 82800,
           "id": 419,
@@ -9436,8 +9447,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -9504,8 +9515,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -9604,18 +9615,29 @@
       "tick": 510,
       "time": 25.5,
       "nextId": 427,
-      "state": "a042a08d",
+      "state": "c65359ad",
       "events": "741638a5",
       "rng": {
-        "draws": 2431,
-        "digest": "5430aa1d"
+        "draws": 2385,
+        "digest": "929c7a86"
       }
     },
     {
       "tick": 520,
       "time": 26,
       "nextId": 427,
-      "state": "058995ca",
+      "state": "c8f0e964",
+      "events": "741638a5",
+      "rng": {
+        "draws": 2433,
+        "digest": "9259b269"
+      }
+    },
+    {
+      "tick": 530,
+      "time": 26.5,
+      "nextId": 427,
+      "state": "6875712c",
       "events": "741638a5",
       "rng": {
         "draws": 2475,
@@ -9623,124 +9645,113 @@
       }
     },
     {
-      "tick": 530,
-      "time": 26.5,
-      "nextId": 427,
-      "state": "b324b0ea",
-      "events": "741638a5",
-      "rng": {
-        "draws": 2519,
-        "digest": "0d389afd"
-      }
-    },
-    {
       "tick": 540,
       "time": 27,
       "nextId": 427,
-      "state": "af13c091",
+      "state": "7ea24be1",
       "events": "741638a5",
       "rng": {
-        "draws": 2560,
-        "digest": "fe4bd4d0"
+        "draws": 2532,
+        "digest": "0ad59107"
       }
     },
     {
       "tick": 550,
       "time": 27.5,
       "nextId": 427,
-      "state": "8f1db4b3",
+      "state": "0d1377ef",
       "events": "741638a5",
       "rng": {
-        "draws": 2598,
-        "digest": "b8a32132"
+        "draws": 2577,
+        "digest": "7537a1bf"
       }
     },
     {
       "tick": 560,
       "time": 28,
       "nextId": 427,
-      "state": "5cf31740",
+      "state": "74be813e",
       "events": "741638a5",
       "rng": {
-        "draws": 2651,
-        "digest": "eb3d8127"
+        "draws": 2611,
+        "digest": "7a1180fc"
       }
     },
     {
       "tick": 570,
       "time": 28.5,
       "nextId": 427,
-      "state": "d29901c4",
+      "state": "98585b5c",
       "events": "741638a5",
       "rng": {
-        "draws": 2718,
-        "digest": "ec36ecc3"
+        "draws": 2670,
+        "digest": "2ae78825"
       }
     },
     {
       "tick": 580,
       "time": 29,
       "nextId": 427,
-      "state": "16547341",
+      "state": "b1a403cb",
       "events": "741638a5",
       "rng": {
-        "draws": 2758,
-        "digest": "ca59b0c3"
+        "draws": 2720,
+        "digest": "2510a677"
       }
     },
     {
       "tick": 590,
       "time": 29.5,
       "nextId": 427,
-      "state": "b2c120c5",
+      "state": "da0c2319",
       "events": "5d7bc234",
       "rng": {
-        "draws": 2807,
-        "digest": "84dc7347"
+        "draws": 2763,
+        "digest": "b7f68668"
       }
     },
     {
       "tick": 600,
       "time": 30,
       "nextId": 427,
-      "state": "6af226df",
-      "events": "0cddae81",
+      "state": "08c233c1",
+      "events": "ae16002f",
       "rng": {
-        "draws": 2861,
-        "digest": "87a754df"
+        "draws": 2820,
+        "digest": "0984315e"
       }
     },
     {
       "tick": 610,
       "time": 30.5,
       "nextId": 427,
-      "state": "d21a3968",
+      "state": "9f551cae",
       "events": "741638a5",
       "rng": {
-        "draws": 2909,
-        "digest": "89ab3635"
+        "draws": 2865,
+        "digest": "ced223cb"
       }
     },
     {
       "tick": 620,
       "time": 31,
       "nextId": 427,
-      "state": "d4b33017",
+      "state": "831d87e5",
       "events": "741638a5",
       "rng": {
-        "draws": 2955,
-        "digest": "ac093d87"
+        "draws": 2923,
+        "digest": "55cfb4a2"
       }
     },
     {
       "tick": 627,
       "time": 31.35,
       "nextId": 427,
-      "state": "70a76068",
+      "state": "8fddba7c",
       "events": "bd7c90b3",
       "rng": {
-        "draws": 2986,
-        "digest": "58ae2efc"
+        "draws": 2958,
+        "digest": "2a1e7bd3"
       },
       "label": "finalstand",
       "players": [
@@ -9759,7 +9770,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 6276,
-            "damageTaken": 26080,
+            "damageTaken": 26007,
             "kills": 2
           },
           "craftSkills": {},
@@ -10341,7 +10352,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -10363,8 +10374,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.35,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -10392,7 +10403,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -10406,14 +10417,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 13.1,
           "comboUntil": -1,
@@ -10423,20 +10434,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.35,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10447,7 +10458,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -10455,7 +10466,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -10474,14 +10485,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 130.35,
           "comboUntil": -1,
@@ -10491,20 +10502,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.35,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10515,7 +10526,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -10523,7 +10534,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -10542,14 +10553,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 13.1,
           "comboUntil": -1,
@@ -10559,20 +10570,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.35,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10583,7 +10594,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -10591,7 +10602,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -10610,14 +10621,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 13.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -10626,20 +10637,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.35,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -10650,7 +10661,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -10658,7 +10669,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -10677,7 +10688,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -10707,8 +10718,8 @@
           "enraged": true,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "hp": 4800,
           "id": 419,
@@ -10948,8 +10959,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -11016,8 +11027,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -11116,11 +11127,11 @@
       "tick": 628,
       "time": 31.4,
       "nextId": 427,
-      "state": "db3b53a7",
+      "state": "429ab381",
       "events": "9863bdcc",
       "rng": {
-        "draws": 2996,
-        "digest": "102d9ae7"
+        "draws": 2971,
+        "digest": "a9743439"
       },
       "label": "death",
       "players": [
@@ -11139,7 +11150,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 11076,
-            "damageTaken": 26080,
+            "damageTaken": 26007,
             "kills": 3
           },
           "craftSkills": {},
@@ -11826,7 +11837,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -11848,8 +11859,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.4,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -11877,7 +11888,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -11891,14 +11902,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 13.15,
           "comboUntil": -1,
@@ -11908,20 +11919,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -11932,7 +11943,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -11940,7 +11951,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -11959,14 +11970,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 130.4,
           "comboUntil": -1,
@@ -11976,20 +11987,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -12000,7 +12011,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -12008,7 +12019,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -12027,14 +12038,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 13.15,
           "comboUntil": -1,
@@ -12044,20 +12055,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -12068,7 +12079,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -12076,7 +12087,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -12095,14 +12106,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 13.15,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -12111,20 +12122,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 130.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -12135,7 +12146,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -12143,7 +12154,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -12162,7 +12173,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -12180,8 +12191,8 @@
           "enraged": true,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "id": 419,
           "inCombat": true,
@@ -12192,7 +12203,7 @@
           },
           "level": 20,
           "loot": {
-            "copper": 110452,
+            "copper": 163670,
             "items": [
               {
                 "count": 1,
@@ -12200,15 +12211,15 @@
               },
               {
                 "count": 1,
-                "itemId": "crownforged_warspaulders"
-              },
-              {
-                "count": 1,
                 "itemId": "soulflame_mantle"
               },
               {
                 "count": 1,
-                "itemId": "stormcallers_spaulders"
+                "itemId": "wraithfire_orb"
+              },
+              {
+                "count": 1,
+                "itemId": "direfang_greatblade"
               }
             ]
           },
@@ -12450,8 +12461,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -12518,8 +12529,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 425,
           "inCombat": true,
@@ -12618,77 +12629,77 @@
       "tick": 630,
       "time": 31.5,
       "nextId": 427,
-      "state": "d8e3483b",
+      "state": "2e3ac7e9",
       "events": "741638a5",
       "rng": {
-        "draws": 3000,
-        "digest": "222f9bff"
+        "draws": 2978,
+        "digest": "98387346"
       }
     },
     {
       "tick": 640,
       "time": 32,
       "nextId": 427,
-      "state": "9224e07f",
+      "state": "09443585",
       "events": "741638a5",
       "rng": {
-        "draws": 3046,
-        "digest": "a5e5415c"
+        "draws": 3019,
+        "digest": "680382e6"
       }
     },
     {
       "tick": 650,
       "time": 32.5,
       "nextId": 427,
-      "state": "b8e60955",
+      "state": "a61914ef",
       "events": "741638a5",
       "rng": {
-        "draws": 3084,
-        "digest": "8f49b28a"
+        "draws": 3062,
+        "digest": "2683ddd4"
       }
     },
     {
       "tick": 660,
       "time": 33,
       "nextId": 427,
-      "state": "7f61f211",
+      "state": "e28b1467",
       "events": "741638a5",
       "rng": {
-        "draws": 3150,
-        "digest": "0208e816"
+        "draws": 3109,
+        "digest": "74212283"
       }
     },
     {
       "tick": 670,
       "time": 33.5,
       "nextId": 427,
-      "state": "981225e7",
+      "state": "967bf015",
       "events": "741638a5",
       "rng": {
-        "draws": 3216,
-        "digest": "03d98271"
+        "draws": 3163,
+        "digest": "ca550401"
       }
     },
     {
       "tick": 680,
       "time": 34,
       "nextId": 427,
-      "state": "2e1da743",
+      "state": "42686a19",
       "events": "741638a5",
       "rng": {
-        "draws": 3273,
-        "digest": "dfdd9394"
+        "draws": 3203,
+        "digest": "0590579f"
       }
     },
     {
       "tick": 688,
       "time": 34.4,
       "nextId": 427,
-      "state": "99f616d1",
+      "state": "dbc50045",
       "events": "6e42ceee",
       "rng": {
-        "draws": 3321,
-        "digest": "f4da82d5"
+        "draws": 3247,
+        "digest": "330fea73"
       },
       "label": "final",
       "players": [
@@ -12707,7 +12718,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 11076,
-            "damageTaken": 26080,
+            "damageTaken": 26007,
             "kills": 3
           },
           "craftSkills": {},
@@ -13394,7 +13405,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "auras": [
             {
               "duration": 3600,
@@ -13416,8 +13427,8 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 133.4,
-          "flee": 100,
-          "hit": 100,
+          "flee": 99,
+          "hit": 126,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -13445,7 +13456,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 27,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -13459,14 +13470,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 16.15,
           "comboUntil": -1,
@@ -13476,20 +13487,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 133.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 415,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -13500,7 +13511,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -13508,7 +13519,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -13527,14 +13538,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 133.4,
           "comboUntil": -1,
@@ -13544,20 +13555,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 133.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 416,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -13568,7 +13579,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -13576,7 +13587,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -13595,14 +13606,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "channelTickTimer": -5.05,
           "combatTimer": 16.15,
           "comboUntil": -1,
@@ -13612,20 +13623,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 133.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 417,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -13636,7 +13647,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -13644,7 +13655,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -13663,14 +13674,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 27,
           "combatTimer": 16.15,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -13679,20 +13690,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 133.4,
-          "flee": 100,
+          "flee": 99,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 100,
+          "hit": 126,
           "hp": 50000,
           "id": 418,
           "kind": "player",
           "level": 99,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 616,
+          "maxResource": 551,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -13703,7 +13714,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 616,
+          "resource": 551,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -13711,7 +13722,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 28,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -13730,7 +13741,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -13748,8 +13759,8 @@
           "enraged": true,
           "facing": 3.141593,
           "fiveSecondRule": 99,
-          "flee": 120,
-          "hit": 120,
+          "flee": 70,
+          "hit": 245,
           "hostile": true,
           "id": 419,
           "inCombat": true,
@@ -13760,7 +13771,7 @@
           },
           "level": 20,
           "loot": {
-            "copper": 110452,
+            "copper": 163670,
             "items": [
               {
                 "count": 1,
@@ -13768,15 +13779,15 @@
               },
               {
                 "count": 1,
-                "itemId": "crownforged_warspaulders"
-              },
-              {
-                "count": 1,
                 "itemId": "soulflame_mantle"
               },
               {
                 "count": 1,
-                "itemId": "stormcallers_spaulders"
+                "itemId": "wraithfire_orb"
+              },
+              {
+                "count": 1,
+                "itemId": "direfang_greatblade"
               }
             ]
           },
@@ -14018,8 +14029,8 @@
           "elementLevel": 2,
           "facing": 2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -14086,8 +14097,8 @@
           "elementLevel": 2,
           "facing": -2.642246,
           "fiveSecondRule": 99,
-          "flee": 40,
-          "hit": 58,
+          "flee": 30,
+          "hit": 127,
           "hostile": true,
           "id": 425,
           "inCombat": true,

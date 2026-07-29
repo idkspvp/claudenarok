@@ -29,7 +29,7 @@
       "tick": 25,
       "time": 1.25,
       "nextId": 418,
-      "state": "ba7c3e8a",
+      "state": "ca2153a6",
       "events": "de305c1d",
       "rng": {
         "draws": 0,
@@ -40,7 +40,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 418,
-      "state": "0c27ec4f",
+      "state": "5e7a3425",
       "events": "81242e71",
       "rng": {
         "draws": 54,
@@ -51,7 +51,7 @@
       "tick": 75,
       "time": 3.75,
       "nextId": 418,
-      "state": "795e1807",
+      "state": "9b89cecf",
       "events": "396e5c81",
       "rng": {
         "draws": 152,
@@ -62,7 +62,7 @@
       "tick": 100,
       "time": 5,
       "nextId": 418,
-      "state": "68dc774a",
+      "state": "6f97817c",
       "events": "c3d0c2d1",
       "rng": {
         "draws": 276,
@@ -73,7 +73,7 @@
       "tick": 101,
       "time": 5.05,
       "nextId": 418,
-      "state": "b935ae9b",
+      "state": "8e0c663b",
       "events": "705896b5",
       "rng": {
         "draws": 280,
@@ -290,7 +290,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -312,14 +312,14 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -339,7 +339,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -353,14 +353,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -369,20 +369,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.05,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -393,7 +393,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 16,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -401,7 +401,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -420,14 +420,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -438,14 +438,14 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -453,7 +453,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -474,7 +474,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -489,14 +489,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -506,20 +506,20 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.05,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 417,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -530,7 +530,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 15,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -538,7 +538,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -557,7 +557,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.194,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -568,8 +568,8 @@
       "tick": 102,
       "time": 5.1,
       "nextId": 418,
-      "state": "7cca7f3c",
-      "events": "524a6c37",
+      "state": "fbc6edee",
+      "events": "f997cd07",
       "rng": {
         "draws": 281,
         "digest": "9090c1ff"
@@ -594,7 +594,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 40
+              "damageDealt": 213
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -798,7 +798,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -820,14 +820,14 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.1,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -847,7 +847,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -861,14 +861,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -877,20 +877,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.1,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -901,7 +901,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 16,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -909,7 +909,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -928,14 +928,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -947,13 +947,13 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.1,
-          "flee": 2,
-          "hit": 2,
+          "flee": 1,
+          "hit": 28,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -961,7 +961,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -982,7 +982,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -997,14 +997,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1014,20 +1014,20 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.1,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 417,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1038,7 +1038,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 15,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1046,7 +1046,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1065,7 +1065,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.194,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1076,8 +1076,8 @@
       "tick": 103,
       "time": 5.15,
       "nextId": 418,
-      "state": "4a4e6c6c",
-      "events": "737c7aa3",
+      "state": "c6bdd064",
+      "events": "2fd509d3",
       "rng": {
         "draws": 284,
         "digest": "22941d42"
@@ -1103,7 +1103,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 80
+              "damageDealt": 426
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -1369,7 +1369,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -1391,14 +1391,14 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.15,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1418,7 +1418,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1432,14 +1432,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.05,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1448,20 +1448,20 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 104.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1472,7 +1472,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 16,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1480,7 +1480,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1499,14 +1499,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1518,13 +1518,13 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.15,
-          "flee": 2,
-          "hit": 2,
+          "flee": 1,
+          "hit": 28,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -1532,7 +1532,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -1553,7 +1553,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1568,14 +1568,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99.1,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1586,19 +1586,19 @@
           "elementLevel": 1,
           "facing": 3.141593,
           "fiveSecondRule": 104.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
+          "hit": 28,
           "id": 417,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1609,7 +1609,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 15,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1617,7 +1617,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1636,7 +1636,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.194,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -1647,7 +1647,7 @@
       "tick": 125,
       "time": 6.25,
       "nextId": 418,
-      "state": "f23c621a",
+      "state": "2c655c7e",
       "events": "741638a5",
       "rng": {
         "draws": 411,
@@ -1658,7 +1658,7 @@
       "tick": 150,
       "time": 7.5,
       "nextId": 418,
-      "state": "813542d0",
+      "state": "0cccc94a",
       "events": "741638a5",
       "rng": {
         "draws": 548,
@@ -1669,7 +1669,7 @@
       "tick": 175,
       "time": 8.75,
       "nextId": 418,
-      "state": "58e92509",
+      "state": "ce541677",
       "events": "741638a5",
       "rng": {
         "draws": 704,
@@ -1680,7 +1680,7 @@
       "tick": 200,
       "time": 10,
       "nextId": 418,
-      "state": "ee87c5c7",
+      "state": "0beee855",
       "events": "741638a5",
       "rng": {
         "draws": 898,
@@ -1691,7 +1691,7 @@
       "tick": 225,
       "time": 11.25,
       "nextId": 418,
-      "state": "4e8fa4fa",
+      "state": "47a380e0",
       "events": "d5279dc2",
       "rng": {
         "draws": 1011,
@@ -1702,7 +1702,7 @@
       "tick": 243,
       "time": 12.15,
       "nextId": 418,
-      "state": "6b629189",
+      "state": "394c4891",
       "events": "741638a5",
       "rng": {
         "draws": 1087,
@@ -1729,7 +1729,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 80
+              "damageDealt": 426
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2007,7 +2007,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -2030,14 +2030,14 @@
           "elementLevel": 1,
           "fallStartY": 3.238738,
           "fiveSecondRule": 111.15,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2057,7 +2057,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -2071,14 +2071,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2088,20 +2088,20 @@
           "elementLevel": 1,
           "fallStartY": 3.09695,
           "fiveSecondRule": 111.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2113,7 +2113,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 16,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2121,7 +2121,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2140,14 +2140,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2158,14 +2158,14 @@
           "elementLevel": 1,
           "fallStartY": 2.656939,
           "fiveSecondRule": 111.15,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -2173,7 +2173,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2195,7 +2195,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2210,14 +2210,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2227,20 +2227,20 @@
           "elementLevel": 1,
           "fallStartY": 1.893785,
           "fiveSecondRule": 111.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 417,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2252,7 +2252,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 15,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2260,7 +2260,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2279,7 +2279,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.194,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2290,7 +2290,7 @@
       "tick": 243,
       "time": 12.15,
       "nextId": 418,
-      "state": "6b629189",
+      "state": "394c4891",
       "events": "741638a5",
       "rng": {
         "draws": 1087,
@@ -2317,7 +2317,7 @@
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 80
+              "damageDealt": 426
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -2595,7 +2595,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -2618,14 +2618,14 @@
           "elementLevel": 1,
           "fallStartY": 3.238738,
           "fiveSecondRule": 111.15,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2645,7 +2645,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -2659,14 +2659,14 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2676,20 +2676,20 @@
           "elementLevel": 1,
           "fallStartY": 3.09695,
           "fiveSecondRule": 111.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 415,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 16,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2701,7 +2701,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 16,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2709,7 +2709,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2728,14 +2728,14 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2746,14 +2746,14 @@
           "elementLevel": 1,
           "fallStartY": 2.656939,
           "fiveSecondRule": 111.15,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 416,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -2761,7 +2761,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -2783,7 +2783,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2798,14 +2798,14 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2815,20 +2815,20 @@
           "elementLevel": 1,
           "fallStartY": 1.893785,
           "fiveSecondRule": 111.15,
-          "flee": 2,
+          "flee": 1,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 2,
-          "hp": 40,
+          "hit": 28,
+          "hp": 213,
           "id": 417,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 15,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2840,7 +2840,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 15,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2848,7 +2848,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2867,7 +2867,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.194,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }

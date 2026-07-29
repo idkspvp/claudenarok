@@ -16,14 +16,14 @@
     "petTaunt -> applyTaunt manual arm + PET_GROWL_INTERVAL cooldown",
     "stowPetForDelve/restorePetFromDelveStash (serializePet/restorePet round-trip)"
   ],
-  "draws": 151,
-  "drawDigest": "f527e679",
+  "draws": 158,
+  "drawDigest": "878ecdcb",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "43f9a939",
+      "state": "71866e65",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -89,7 +89,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -99,15 +99,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 12,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -119,8 +119,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 12,
+          "rangedPower": 2,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -128,7 +128,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -146,7 +146,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -157,7 +157,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "45d36ebf",
+      "state": "eed04ad6",
       "events": "82a1c078",
       "rng": {
         "draws": 0,
@@ -224,7 +224,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -234,15 +234,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -254,8 +254,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -263,7 +263,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -281,7 +281,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -297,8 +297,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hp": 60,
           "id": 416,
           "kind": "mob",
@@ -344,7 +344,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "168a58ad",
+      "state": "306338d0",
       "events": "7dee3634",
       "rng": {
         "draws": 0,
@@ -411,7 +411,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -421,15 +421,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -441,8 +441,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -450,7 +450,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -468,7 +468,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -498,8 +498,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hp": 30,
           "id": 416,
           "kind": "mob",
@@ -545,7 +545,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "57b95302",
+      "state": "c22e82dd",
       "events": "efbb18a3",
       "rng": {
         "draws": 0,
@@ -556,7 +556,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "47c3bc0f",
+      "state": "5d4b944c",
       "events": "9cdbac39",
       "rng": {
         "draws": 0,
@@ -567,7 +567,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "9e15f689",
+      "state": "5f0e6d9d",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -652,7 +652,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -662,15 +662,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -682,8 +682,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -691,7 +691,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -709,7 +709,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -739,8 +739,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hp": 57,
           "id": 416,
           "inCombat": true,
@@ -793,10 +793,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -859,7 +859,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 418,
-      "state": "82c187ac",
+      "state": "ab19ec43",
       "events": "7cf6218f",
       "rng": {
         "draws": 0,
@@ -944,7 +944,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -954,15 +954,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -974,8 +974,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -983,7 +983,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1001,7 +1001,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1017,10 +1017,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -1079,7 +1079,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "e3cac55e",
+      "state": "33f5a39c",
       "events": "c55a3bae",
       "rng": {
         "draws": 0,
@@ -1164,7 +1164,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1174,15 +1174,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1194,8 +1194,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1203,7 +1203,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1221,7 +1221,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1237,10 +1237,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -1305,8 +1305,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "id": 419,
           "kind": "mob",
           "level": 12,
@@ -1351,7 +1351,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "23f8996d",
+      "state": "8b64f7b7",
       "events": "c6ff73b1",
       "rng": {
         "draws": 0,
@@ -1436,7 +1436,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1446,15 +1446,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1466,8 +1466,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1475,7 +1475,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1493,7 +1493,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1509,10 +1509,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -1576,8 +1576,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hp": 21,
           "id": 419,
           "kind": "mob",
@@ -1623,7 +1623,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 420,
-      "state": "82c187ac",
+      "state": "ab19ec43",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1708,7 +1708,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1718,15 +1718,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1738,8 +1738,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1747,7 +1747,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1765,7 +1765,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -1781,10 +1781,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -1843,7 +1843,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "82c187ac",
+      "state": "ab19ec43",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -1928,7 +1928,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -1938,15 +1938,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -1958,8 +1958,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -1967,7 +1967,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -1985,7 +1985,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2001,10 +2001,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -2063,7 +2063,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 423,
-      "state": "a5b23821",
+      "state": "7ef41dc4",
       "events": "eeabb483",
       "rng": {
         "draws": 0,
@@ -2202,7 +2202,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 101,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2212,15 +2212,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2232,8 +2232,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2241,7 +2241,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2259,7 +2259,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2275,10 +2275,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 3,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 417,
@@ -2333,7 +2333,7 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "castRemaining": 5,
           "castTotal": 5,
           "castingAbility": "demon_heal",
@@ -2348,21 +2348,21 @@
           "element": "neutral",
           "elementLevel": 1,
           "fallStartY": 0.098164,
-          "flee": 13,
+          "flee": 12,
           "gcdRemaining": 1.5,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 13,
+          "hit": 39,
           "hp": 50000,
           "id": 421,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 84,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2374,7 +2374,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29,
+          "resource": 52,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2382,7 +2382,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2401,7 +2401,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2417,8 +2417,8 @@
           "elementLevel": 1,
           "fallStartY": -0.525705,
           "fiveSecondRule": 99,
-          "flee": 43,
-          "hit": 100,
+          "flee": 27,
+          "hit": 217,
           "hp": 871,
           "id": 422,
           "kind": "mob",
@@ -2465,8 +2465,8 @@
       "tick": 60,
       "time": 3,
       "nextId": 423,
-      "state": "49ad8b77",
-      "events": "ff80728b",
+      "state": "b02327b7",
+      "events": "3ebd0c7c",
       "rng": {
         "draws": 82,
         "digest": "e2e5902a"
@@ -2476,22 +2476,22 @@
       "tick": 80,
       "time": 4,
       "nextId": 423,
-      "state": "4dc5e7a6",
+      "state": "71969eb4",
       "events": "8af28589",
       "rng": {
-        "draws": 151,
-        "digest": "f527e679"
+        "draws": 158,
+        "digest": "878ecdcb"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 423,
-      "state": "4dc5e7a6",
+      "state": "71969eb4",
       "events": "741638a5",
       "rng": {
-        "draws": 151,
-        "digest": "f527e679"
+        "draws": 158,
+        "digest": "878ecdcb"
       },
       "label": "demon-heal-tick",
       "players": [
@@ -2643,7 +2643,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -2653,8 +2653,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 49989,
           "id": 414,
           "inCombat": true,
@@ -2662,7 +2662,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2674,8 +2674,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2683,7 +2683,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2701,7 +2701,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -2719,12 +2719,12 @@
           "facing": -1.892547,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 1,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
-          "hp": 50000,
+          "hp": 49989,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -2762,12 +2762,17 @@
             "vit": 3
           },
           "swingTimer": 0.05,
+          "tappedById": 414,
           "targetId": 416,
           "templateId": "forest_wolf",
           "threat": [
             [
               414,
               30
+            ],
+            [
+              420,
+              11
             ]
           ],
           "weapon": {
@@ -2778,7 +2783,7 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "castRemaining": 3,
           "castTotal": 5,
           "castingAbility": "demon_heal",
@@ -2794,20 +2799,20 @@
           "elementLevel": 1,
           "fallStartY": 0.098164,
           "fiveSecondRule": 2,
-          "flee": 13,
+          "flee": 12,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 13,
+          "hit": 39,
           "hp": 50000,
           "id": 421,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 84,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -2819,7 +2824,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29,
+          "resource": 52,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -2827,7 +2832,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -2846,7 +2851,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -2862,8 +2867,8 @@
           "elementLevel": 1,
           "fallStartY": -0.525705,
           "fiveSecondRule": 99,
-          "flee": 43,
-          "hit": 100,
+          "flee": 27,
+          "hit": 217,
           "hp": 1265,
           "id": 422,
           "kind": "mob",
@@ -2910,11 +2915,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 425,
-      "state": "24de796a",
+      "state": "5e4f1c32",
       "events": "03718308",
       "rng": {
-        "draws": 151,
-        "digest": "f527e679"
+        "draws": 158,
+        "digest": "878ecdcb"
       },
       "label": "demon-resummoned",
       "players": [
@@ -3066,7 +3071,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3076,8 +3081,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 49989,
           "id": 414,
           "inCombat": true,
@@ -3085,7 +3090,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3097,8 +3102,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3106,7 +3111,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3124,7 +3129,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -3142,12 +3147,12 @@
           "facing": -1.892547,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 1,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
-          "hp": 50000,
+          "hp": 49989,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -3185,12 +3190,17 @@
             "vit": 3
           },
           "swingTimer": 0.05,
+          "tappedById": 414,
           "targetId": 416,
           "templateId": "forest_wolf",
           "threat": [
             [
               414,
               30
+            ],
+            [
+              420,
+              11
             ]
           ],
           "weapon": {
@@ -3201,7 +3211,7 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "castRemaining": 3,
           "castTotal": 5,
           "castingAbility": "demon_heal",
@@ -3217,20 +3227,20 @@
           "elementLevel": 1,
           "fallStartY": 0.098164,
           "fiveSecondRule": 2,
-          "flee": 13,
+          "flee": 12,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 13,
+          "hit": 39,
           "hp": 50000,
           "id": 421,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 84,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3242,7 +3252,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29,
+          "resource": 52,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3250,7 +3260,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3269,7 +3279,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3285,8 +3295,8 @@
           "elementLevel": 1,
           "fallStartY": -0.525705,
           "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 102,
+          "flee": 16,
+          "hit": 218,
           "hp": 3040,
           "id": 424,
           "kind": "mob",
@@ -3331,11 +3341,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 427,
-      "state": "dde57d65",
+      "state": "a04561ed",
       "events": "bdc11fd9",
       "rng": {
-        "draws": 151,
-        "digest": "f527e679"
+        "draws": 158,
+        "digest": "878ecdcb"
       },
       "label": "demon-despawned",
       "players": [
@@ -3487,7 +3497,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3497,8 +3507,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 49989,
           "id": 414,
           "inCombat": true,
@@ -3506,7 +3516,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3518,8 +3528,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3527,7 +3537,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3545,7 +3555,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -3563,12 +3573,12 @@
           "facing": -1.892547,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 1,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
-          "hp": 50000,
+          "hp": 49989,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -3606,12 +3616,17 @@
             "vit": 3
           },
           "swingTimer": 0.05,
+          "tappedById": 414,
           "targetId": 416,
           "templateId": "forest_wolf",
           "threat": [
             [
               414,
               30
+            ],
+            [
+              420,
+              11
             ]
           ],
           "weapon": {
@@ -3622,7 +3637,7 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "castRemaining": 3,
           "castTotal": 5,
           "castingAbility": "demon_heal",
@@ -3638,20 +3653,20 @@
           "elementLevel": 1,
           "fallStartY": 0.098164,
           "fiveSecondRule": 2,
-          "flee": 13,
+          "flee": 12,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 13,
+          "hit": 39,
           "hp": 50000,
           "id": 421,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 84,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3663,7 +3678,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29,
+          "resource": 52,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3671,7 +3686,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3690,7 +3705,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -3707,8 +3722,8 @@
           "elementLevel": 1,
           "fallStartY": -0.525705,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 426,
@@ -3762,11 +3777,11 @@
       "tick": 80,
       "time": 4,
       "nextId": 427,
-      "state": "dde57d65",
+      "state": "a04561ed",
       "events": "741638a5",
       "rng": {
-        "draws": 151,
-        "digest": "f527e679"
+        "draws": 158,
+        "digest": "878ecdcb"
       },
       "label": "final",
       "players": [
@@ -3918,7 +3933,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 1.95,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -3928,8 +3943,8 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 103,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 49989,
           "id": 414,
           "inCombat": true,
@@ -3937,7 +3952,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -3949,8 +3964,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -3958,7 +3973,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -3976,7 +3991,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -3994,12 +4009,12 @@
           "facing": -1.892547,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetId": 416,
           "forcedTargetTimer": 1,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
-          "hp": 50000,
+          "hp": 49989,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -4037,12 +4052,17 @@
             "vit": 3
           },
           "swingTimer": 0.05,
+          "tappedById": 414,
           "targetId": 416,
           "templateId": "forest_wolf",
           "threat": [
             [
               414,
               30
+            ],
+            [
+              420,
+              11
             ]
           ],
           "weapon": {
@@ -4053,7 +4073,7 @@
         },
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "castRemaining": 3,
           "castTotal": 5,
           "castingAbility": "demon_heal",
@@ -4069,20 +4089,20 @@
           "elementLevel": 1,
           "fallStartY": 0.098164,
           "fiveSecondRule": 2,
-          "flee": 13,
+          "flee": 12,
           "gearEffects": {
             "resist": {
               "blind": 0.05
             }
           },
-          "hit": 13,
+          "hit": 39,
           "hp": 50000,
           "id": 421,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 84,
+          "maxResource": 107,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -4094,7 +4114,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29,
+          "resource": 52,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -4102,7 +4122,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 2,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -4121,7 +4141,7 @@
               "school": "arcane",
               "wand": true
             },
-            "speed": 1.394,
+            "speed": 1.2,
             "weaponLevel": 1,
             "weaponType": "rod"
           }
@@ -4138,8 +4158,8 @@
           "elementLevel": 1,
           "fallStartY": -0.525705,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
           "hp": 50000,
           "id": 426,

@@ -10,14 +10,14 @@
     "base mobSwing (mob swings the player)",
     "rollLoot via mob death (L1, ~5876/6036)"
   ],
-  "draws": 188,
-  "drawDigest": "21b7e941",
+  "draws": 180,
+  "drawDigest": "09d3b32d",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "22cd1b7d",
+      "state": "b4b133fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -80,7 +80,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -103,14 +103,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -131,7 +131,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -145,7 +145,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -156,44 +156,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 416,
-      "state": "0f6418f5",
-      "events": "e5428c71",
+      "state": "4763c7ed",
+      "events": "01962060",
       "rng": {
-        "draws": 9,
-        "digest": "c2dae474"
+        "draws": 7,
+        "digest": "101398c0"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 416,
-      "state": "3240694c",
+      "state": "58b7ae87",
       "events": "22689ed8",
       "rng": {
-        "draws": 14,
-        "digest": "b57cc633"
+        "draws": 11,
+        "digest": "e9d57643"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 416,
-      "state": "ab72b6a3",
-      "events": "40756907",
+      "state": "5ecf3ea9",
+      "events": "5d3f3c43",
       "rng": {
-        "draws": 112,
-        "digest": "da0142a7"
+        "draws": 106,
+        "digest": "6b6abe3e"
       }
     },
     {
       "tick": 72,
       "time": 3.6,
       "nextId": 416,
-      "state": "08b73929",
-      "events": "ee4c091a",
+      "state": "647dc156",
+      "events": "e4048750",
       "rng": {
-        "draws": 169,
-        "digest": "cd390af7"
+        "draws": 164,
+        "digest": "2a45d366"
       },
       "label": "kill",
       "players": [
@@ -212,15 +212,15 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7098,
-            "damageTaken": 15,
+            "damageDealt": 7119,
+            "damageTaken": 11,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7098,
+              "damageDealt": 7119,
               "kills": 1
             },
             "dungeonClears": {},
@@ -279,7 +279,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -302,9 +302,9 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.6,
-          "flee": 11,
-          "hit": 11,
-          "hp": 49985,
+          "flee": 10,
+          "hit": 37,
+          "hp": 49989,
           "id": 414,
           "inCombat": true,
           "kind": "player",
@@ -332,7 +332,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -342,13 +342,13 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.846,
+          "swingTimer": 0.85,
           "targetId": 415,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -366,8 +366,8 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hostile": true,
           "id": 415,
           "inCombat": true,
@@ -379,7 +379,13 @@
           },
           "level": 2,
           "loot": {
-            "copper": 9
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "wolf_fang"
+              }
+            ]
           },
           "lootFfaTimer": 60,
           "lootRecipientIds": [
@@ -429,11 +435,11 @@
       "tick": 76,
       "time": 3.8,
       "nextId": 416,
-      "state": "623c8142",
+      "state": "53b06f43",
       "events": "f550d811",
       "rng": {
-        "draws": 188,
-        "digest": "21b7e941"
+        "draws": 180,
+        "digest": "09d3b32d"
       },
       "label": "final",
       "players": [
@@ -452,15 +458,15 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 7098,
-            "damageTaken": 15,
+            "damageDealt": 7119,
+            "damageTaken": 11,
             "kills": 1
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 7098,
+              "damageDealt": 7119,
               "kills": 1
             },
             "dungeonClears": {},
@@ -523,7 +529,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 4,
           "auras": [
             {
               "duration": 3600,
@@ -547,9 +553,9 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 102.8,
-          "flee": 11,
-          "hit": 11,
-          "hp": 49985,
+          "flee": 10,
+          "hit": 37,
+          "hp": 49989,
           "id": 414,
           "inCombat": true,
           "kind": "player",
@@ -577,7 +583,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 4,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -587,13 +593,13 @@
             "str": 1,
             "vit": 1
           },
-          "swingTimer": 0.646,
+          "swingTimer": 0.65,
           "targetId": 415,
           "templateId": "swordman",
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -611,8 +617,8 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 5,
-          "hit": 10,
+          "flee": 3,
+          "hit": 55,
           "hostile": true,
           "id": 415,
           "inCombat": true,
@@ -624,7 +630,13 @@
           },
           "level": 2,
           "loot": {
-            "copper": 9
+            "copper": 8,
+            "items": [
+              {
+                "count": 1,
+                "itemId": "wolf_fang"
+              }
+            ]
           },
           "lootFfaTimer": 59.8,
           "lootRecipientIds": [

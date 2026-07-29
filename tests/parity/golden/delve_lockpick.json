@@ -9,14 +9,14 @@
     "lockpick minigame (flawless solve)",
     "reward chest + delve marks"
   ],
-  "draws": 16,
-  "drawDigest": "88fdc798",
+  "draws": 13,
+  "drawDigest": "ded57bf5",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "5a72d337",
+      "state": "1f99bed4",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -78,7 +78,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -89,14 +89,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -104,7 +104,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -126,7 +126,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -141,7 +141,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -152,44 +152,44 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 428,
-      "state": "4f6addf2",
-      "events": "ca9fedc7",
+      "state": "442e1106",
+      "events": "299e6a64",
       "rng": {
-        "draws": 9,
-        "digest": "1540b9da"
+        "draws": 7,
+        "digest": "30365ad3"
       }
     },
     {
       "tick": 20,
       "time": 1,
       "nextId": 428,
-      "state": "891ee0e2",
+      "state": "178378d6",
       "events": "16fc0e70",
       "rng": {
-        "draws": 9,
-        "digest": "1540b9da"
+        "draws": 7,
+        "digest": "30365ad3"
       }
     },
     {
       "tick": 30,
       "time": 1.5,
       "nextId": 428,
-      "state": "5a5afea6",
+      "state": "61cace2e",
       "events": "08efc866",
       "rng": {
-        "draws": 13,
-        "digest": "ded57bf5"
+        "draws": 10,
+        "digest": "06665a19"
       }
     },
     {
       "tick": 38,
       "time": 1.9,
       "nextId": 430,
-      "state": "9e86319e",
+      "state": "af0d7d64",
       "events": "06d77819",
       "rng": {
-        "draws": 16,
-        "digest": "88fdc798"
+        "draws": 13,
+        "digest": "ded57bf5"
       },
       "label": "delve-end",
       "players": [
@@ -207,7 +207,7 @@
           "bank": {},
           "cls": "thief",
           "companionUpgrades": {},
-          "copper": 24,
+          "copper": 25,
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
@@ -302,7 +302,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 0.4,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -312,15 +312,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 100.9,
-          "flee": 14,
-          "hit": 14,
-          "hp": 149,
+          "flee": 13,
+          "hit": 40,
+          "hp": 411,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 149,
+          "maxHp": 411,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -328,7 +328,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -349,7 +349,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -365,7 +365,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -381,9 +381,9 @@
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 21,
-          "hp": 140,
+          "flee": 14,
+          "hit": 64,
+          "hp": 121,
           "id": 423,
           "kind": "mob",
           "level": 4,
@@ -436,8 +436,8 @@
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 109,
-          "hit": 109,
+          "flee": 59,
+          "hit": 234,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -448,7 +448,7 @@
           },
           "level": 9,
           "loot": {
-            "copper": 257
+            "copper": 434
           },
           "lootFfaTimer": 59.6,
           "lootRecipientIds": [
@@ -531,22 +531,22 @@
       "tick": 40,
       "time": 2,
       "nextId": 430,
-      "state": "d948209a",
+      "state": "57eb6d54",
       "events": "741638a5",
       "rng": {
-        "draws": 16,
-        "digest": "88fdc798"
+        "draws": 13,
+        "digest": "ded57bf5"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 430,
-      "state": "d948209a",
+      "state": "57eb6d54",
       "events": "741638a5",
       "rng": {
-        "draws": 16,
-        "digest": "88fdc798"
+        "draws": 13,
+        "digest": "ded57bf5"
       },
       "label": "final",
       "players": [
@@ -564,7 +564,7 @@
           "bank": {},
           "cls": "thief",
           "companionUpgrades": {},
-          "copper": 24,
+          "copper": 25,
           "counters": {
             "damageDealt": 1635,
             "kills": 1,
@@ -659,7 +659,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -669,15 +669,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 101,
-          "flee": 14,
-          "hit": 14,
-          "hp": 149,
+          "flee": 13,
+          "hit": 40,
+          "hp": 411,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 149,
+          "maxHp": 411,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -685,7 +685,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -706,7 +706,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -722,7 +722,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -738,9 +738,9 @@
           "elementLevel": 1,
           "facing": -1.570796,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 21,
-          "hp": 140,
+          "flee": 14,
+          "hit": 64,
+          "hp": 121,
           "id": 423,
           "kind": "mob",
           "level": 4,
@@ -793,8 +793,8 @@
           "elementLevel": 3,
           "facing": 1.570796,
           "fiveSecondRule": 99,
-          "flee": 109,
-          "hit": 109,
+          "flee": 59,
+          "hit": 234,
           "hostile": true,
           "id": 424,
           "inCombat": true,
@@ -805,7 +805,7 @@
           },
           "level": 9,
           "loot": {
-            "copper": 257
+            "copper": 434
           },
           "lootFfaTimer": 59.5,
           "lootRecipientIds": [

@@ -16,7 +16,7 @@
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "5a72d337",
+      "state": "1f99bed4",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -78,7 +78,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -89,14 +89,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -104,7 +104,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -126,7 +126,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -141,7 +141,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -152,7 +152,7 @@
       "tick": 10,
       "time": 0.5,
       "nextId": 426,
-      "state": "4c175461",
+      "state": "1e2e73ee",
       "events": "af5307d4",
       "rng": {
         "draws": 3,
@@ -163,7 +163,7 @@
       "tick": 20,
       "time": 1,
       "nextId": 426,
-      "state": "f84e866f",
+      "state": "8d148564",
       "events": "16fc0e70",
       "rng": {
         "draws": 3,
@@ -174,7 +174,7 @@
       "tick": 30,
       "time": 1.5,
       "nextId": 426,
-      "state": "a660b021",
+      "state": "dcabd9e6",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -185,7 +185,7 @@
       "tick": 40,
       "time": 2,
       "nextId": 426,
-      "state": "9a3c3e5b",
+      "state": "786e6798",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -196,7 +196,7 @@
       "tick": 50,
       "time": 2.5,
       "nextId": 426,
-      "state": "566e8f19",
+      "state": "3e2080fe",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -207,7 +207,7 @@
       "tick": 60,
       "time": 3,
       "nextId": 426,
-      "state": "de7874cf",
+      "state": "0013d024",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -218,7 +218,7 @@
       "tick": 69,
       "time": 3.45,
       "nextId": 427,
-      "state": "429fd681",
+      "state": "251658e6",
       "events": "d5c92015",
       "rng": {
         "draws": 3,
@@ -315,7 +315,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 3.45,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -325,15 +325,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.45,
-          "flee": 13,
-          "hit": 13,
-          "hp": 137,
+          "flee": 12,
+          "hit": 39,
+          "hp": 390,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 137,
+          "maxHp": 390,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -341,7 +341,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -362,7 +362,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -377,7 +377,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }
@@ -426,7 +426,7 @@
       "tick": 70,
       "time": 3.5,
       "nextId": 427,
-      "state": "1d0f6015",
+      "state": "825ef102",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -437,7 +437,7 @@
       "tick": 71,
       "time": 3.55,
       "nextId": 427,
-      "state": "2d696d19",
+      "state": "77d975ee",
       "events": "741638a5",
       "rng": {
         "draws": 3,
@@ -534,7 +534,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "combatTimer": 3.55,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -544,15 +544,15 @@
           "element": "neutral",
           "elementLevel": 1,
           "fiveSecondRule": 102.55,
-          "flee": 13,
-          "hit": 13,
-          "hp": 137,
+          "flee": 12,
+          "hit": 39,
+          "hp": 390,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
-          "maxHp": 137,
+          "maxHp": 390,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "rusty_dagger",
@@ -560,7 +560,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           },
@@ -581,7 +581,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -596,7 +596,7 @@
             "dagger": true,
             "max": 41,
             "min": 31,
-            "speed": 1.394,
+            "speed": 1.6,
             "weaponLevel": 1,
             "weaponType": "dagger"
           }

@@ -9,14 +9,14 @@
     "applyTaunt player-cast arm (taunt ability, ~4279)",
     "class:swordman"
   ],
-  "draws": 83,
-  "drawDigest": "50681192",
+  "draws": 77,
+  "drawDigest": "168312fc",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "22cd1b7d",
+      "state": "b4b133fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -79,7 +79,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -102,14 +102,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -130,7 +130,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -144,7 +144,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -155,33 +155,33 @@
       "tick": 20,
       "time": 1,
       "nextId": 417,
-      "state": "d958d05f",
-      "events": "2535c781",
+      "state": "7acf01b4",
+      "events": "37f90295",
       "rng": {
-        "draws": 21,
-        "digest": "b3b13ee2"
+        "draws": 17,
+        "digest": "0d655f92"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 417,
-      "state": "a3476a86",
-      "events": "4d765d37",
+      "state": "61651933",
+      "events": "d99cdf5b",
       "rng": {
-        "draws": 39,
-        "digest": "8a221774"
+        "draws": 34,
+        "digest": "14849c77"
       }
     },
     {
       "tick": 50,
       "time": 2.5,
       "nextId": 417,
-      "state": "78eada8c",
-      "events": "261df6f7",
+      "state": "da7ac118",
+      "events": "547acf85",
       "rng": {
-        "draws": 69,
-        "digest": "06160935"
+        "draws": 63,
+        "digest": "72fec67c"
       },
       "label": "taunt",
       "players": [
@@ -201,7 +201,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 352
+            "damageTaken": 358
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -264,7 +264,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "auras": [
             {
               "duration": 3600,
@@ -304,15 +304,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.5,
-          "flee": 14,
-          "hit": 14,
-          "hp": 120,
+          "flee": 13,
+          "hit": 40,
+          "hp": 403,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 165,
+          "maxHp": 453,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -326,7 +326,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 31.688462,
+          "resource": 34.1,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -334,7 +334,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -349,7 +349,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -381,10 +381,10 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 7,
+          "flee": 5,
           "forcedTargetId": 414,
           "forcedTargetTimer": 3,
-          "hit": 15,
+          "hit": 55,
           "hostile": true,
           "hp": 59800,
           "id": 415,
@@ -452,8 +452,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 28,
-          "hit": 48,
+          "flee": 20,
+          "hit": 109,
           "hostile": true,
           "hp": 60000,
           "id": 416,
@@ -499,11 +499,11 @@
       "tick": 54,
       "time": 2.7,
       "nextId": 417,
-      "state": "2752b097",
+      "state": "5789d81f",
       "events": "741638a5",
       "rng": {
-        "draws": 83,
-        "digest": "50681192"
+        "draws": 77,
+        "digest": "168312fc"
       },
       "label": "final",
       "players": [
@@ -523,7 +523,7 @@
           "companionUpgrades": {},
           "counters": {
             "damageDealt": 200,
-            "damageTaken": 352
+            "damageTaken": 358
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -586,7 +586,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "auras": [
             {
               "duration": 3600,
@@ -627,15 +627,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 101.7,
-          "flee": 14,
-          "hit": 14,
-          "hp": 120,
+          "flee": 13,
+          "hit": 40,
+          "hp": 403,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 13,
           "lootFfaTimer": "Infinity",
-          "maxHp": 165,
+          "maxHp": 453,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -649,7 +649,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 31.688462,
+          "resource": 34.1,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -657,7 +657,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -672,7 +672,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -705,10 +705,10 @@
           "facing": -1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 7,
+          "flee": 5,
           "forcedTargetId": 414,
           "forcedTargetTimer": 2.8,
-          "hit": 15,
+          "hit": 55,
           "hostile": true,
           "hp": 59800,
           "id": 415,
@@ -776,8 +776,8 @@
           "facing": 1.570796,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 28,
-          "hit": 48,
+          "flee": 20,
+          "hit": 109,
           "hostile": true,
           "hp": 60000,
           "id": 416,

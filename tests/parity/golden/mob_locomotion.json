@@ -11,8 +11,8 @@
     "evade arm arrival -> resetEvadingMob (rng.range(2,8), full-heal, clearThreat, telegraph re-arm)",
     "cowardly flee: maybeFlee at FLEE_HP_THRESHOLD -> flee arm (fleeMoveSpeed run-away)"
   ],
-  "draws": 19,
-  "drawDigest": "09116872",
+  "draws": 16,
+  "drawDigest": "4b7ddb75",
   "frames": [
     {
       "tick": 0,
@@ -32,11 +32,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 416,
-      "state": "ed85f653",
-      "events": "70dde1a5",
+      "state": "f9dd6a83",
+      "events": "3aa0a84e",
       "rng": {
-        "draws": 5,
-        "digest": "14a06892"
+        "draws": 4,
+        "digest": "65f0173a"
       },
       "label": "aoe-pulse",
       "players": [
@@ -54,7 +54,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 66
+            "damageTaken": 65
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -96,7 +96,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -118,15 +118,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 999934,
+          "flee": 1,
+          "hit": 28,
+          "hp": 999935,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -140,7 +140,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 12.1,
+          "resource": 11.916667,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -148,7 +148,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -162,7 +162,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -178,8 +178,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -227,11 +227,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 417,
-      "state": "e626fcd8",
-      "events": "713b24b2",
+      "state": "d602060d",
+      "events": "8ed5b744",
       "rng": {
-        "draws": 10,
-        "digest": "cb383715"
+        "draws": 8,
+        "digest": "284b8111"
       },
       "label": "war-stomp",
       "players": [
@@ -249,7 +249,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 191
+            "damageTaken": 208
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -291,7 +291,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -322,15 +322,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 999875,
+          "flee": 1,
+          "hit": 28,
+          "hp": 999857,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -344,7 +344,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 18.975,
+          "resource": 19.781667,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -352,7 +352,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -366,7 +366,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -382,8 +382,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -436,8 +436,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -488,11 +488,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 418,
-      "state": "b3befbde",
-      "events": "4c832975",
+      "state": "44326ca7",
+      "events": "f429f62f",
       "rng": {
-        "draws": 16,
-        "digest": "4b7ddb75"
+        "draws": 13,
+        "digest": "06ceb9a6"
       },
       "label": "terrify",
       "players": [
@@ -510,7 +510,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -552,7 +552,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -581,7 +581,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -594,15 +594,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 999880,
+          "flee": 1,
+          "hit": 28,
+          "hp": 999881,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -616,7 +616,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -624,7 +624,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -638,7 +638,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -654,8 +654,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -708,8 +708,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -765,8 +765,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -815,11 +815,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 419,
-      "state": "5fd68fe2",
+      "state": "8b755961",
       "events": "741638a5",
       "rng": {
-        "draws": 18,
-        "digest": "a4de5f4d"
+        "draws": 15,
+        "digest": "5adac73c"
       },
       "label": "idle-wander",
       "players": [
@@ -837,7 +837,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -879,7 +879,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -908,7 +908,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -921,15 +921,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 999880,
+          "flee": 1,
+          "hit": 28,
+          "hp": 999881,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -943,7 +943,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -951,7 +951,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -965,7 +965,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -981,8 +981,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -1035,8 +1035,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -1092,8 +1092,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -1145,11 +1145,11 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": 1.176271,
+          "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 418,
@@ -1162,9 +1162,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 300.129245,
-            "y": 58.189961,
-            "z": 300.053812
+            "x": 299.968616,
+            "y": 58.180156,
+            "z": 300.136437
           },
           "potionCooldownUntil": -1,
           "race": "brute",
@@ -1184,9 +1184,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 307.860336,
-            "y": 57.610008,
-            "z": 303.272689
+            "x": 298.918529,
+            "y": 57.734603,
+            "z": 304.70153
           },
           "wanderTimer": 30,
           "weapon": {
@@ -1201,11 +1201,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 420,
-      "state": "fed2fc5e",
+      "state": "c033908f",
       "events": "741638a5",
       "rng": {
-        "draws": 19,
-        "digest": "09116872"
+        "draws": 16,
+        "digest": "4b7ddb75"
       },
       "label": "evade-reset",
       "players": [
@@ -1223,7 +1223,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1265,7 +1265,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -1294,7 +1294,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -1307,15 +1307,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 999880,
+          "flee": 1,
+          "hit": 28,
+          "hp": 999881,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1329,7 +1329,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1337,7 +1337,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1351,7 +1351,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1367,8 +1367,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -1421,8 +1421,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -1478,8 +1478,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -1531,11 +1531,11 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": 1.176271,
+          "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 418,
@@ -1548,9 +1548,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 300.129245,
-            "y": 58.189961,
-            "z": 300.053812
+            "x": 299.968616,
+            "y": 58.180156,
+            "z": 300.136437
           },
           "potionCooldownUntil": -1,
           "race": "brute",
@@ -1570,9 +1570,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 307.860336,
-            "y": 57.610008,
-            "z": 303.272689
+            "x": 298.918529,
+            "y": 57.734603,
+            "z": 304.70153
           },
           "wanderTimer": 30,
           "weapon": {
@@ -1592,8 +1592,8 @@
           "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 419,
@@ -1627,7 +1627,7 @@
             "vit": 3
           },
           "templateId": "forest_wolf",
-          "wanderTimer": 5.210456,
+          "wanderTimer": 7.771505,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -1640,11 +1640,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "cdf63352",
+      "state": "1dd393e0",
       "events": "244ebd09",
       "rng": {
-        "draws": 19,
-        "digest": "09116872"
+        "draws": 16,
+        "digest": "4b7ddb75"
       },
       "label": "flee-panic",
       "players": [
@@ -1662,7 +1662,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -1704,7 +1704,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -1733,7 +1733,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -1746,15 +1746,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 1,
+          "hit": 28,
           "hp": 1000000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -1768,7 +1768,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -1776,7 +1776,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -1790,7 +1790,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -1806,8 +1806,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -1860,8 +1860,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -1917,8 +1917,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -1970,11 +1970,11 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": 1.176271,
+          "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 418,
@@ -1987,9 +1987,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 300.129245,
-            "y": 58.189961,
-            "z": 300.053812
+            "x": 299.968616,
+            "y": 58.180156,
+            "z": 300.136437
           },
           "potionCooldownUntil": -1,
           "race": "brute",
@@ -2009,9 +2009,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 307.860336,
-            "y": 57.610008,
-            "z": 303.272689
+            "x": 298.918529,
+            "y": 57.734603,
+            "z": 304.70153
           },
           "wanderTimer": 30,
           "weapon": {
@@ -2031,8 +2031,8 @@
           "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 419,
@@ -2066,7 +2066,7 @@
             "vit": 3
           },
           "templateId": "forest_wolf",
-          "wanderTimer": 5.210456,
+          "wanderTimer": 7.771505,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -2085,10 +2085,10 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
+          "flee": 9,
           "fleeTimer": 5,
           "hasFled": true,
-          "hit": 17,
+          "hit": 53,
           "hostile": true,
           "hp": 20,
           "id": 420,
@@ -2133,11 +2133,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "81af4fef",
+      "state": "7b25e745",
       "events": "741638a5",
       "rng": {
-        "draws": 19,
-        "digest": "09116872"
+        "draws": 16,
+        "digest": "4b7ddb75"
       },
       "label": "flee-run",
       "players": [
@@ -2155,7 +2155,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2197,7 +2197,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -2226,7 +2226,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -2239,15 +2239,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 1,
+          "hit": 28,
           "hp": 1000000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2261,7 +2261,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2269,7 +2269,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -2283,7 +2283,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -2299,8 +2299,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -2353,8 +2353,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -2410,8 +2410,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -2463,11 +2463,11 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": 1.176271,
+          "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 418,
@@ -2480,9 +2480,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 300.129245,
-            "y": 58.189961,
-            "z": 300.053812
+            "x": 299.968616,
+            "y": 58.180156,
+            "z": 300.136437
           },
           "potionCooldownUntil": -1,
           "race": "brute",
@@ -2502,9 +2502,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 307.860336,
-            "y": 57.610008,
-            "z": 303.272689
+            "x": 298.918529,
+            "y": 57.734603,
+            "z": 304.70153
           },
           "wanderTimer": 30,
           "weapon": {
@@ -2524,8 +2524,8 @@
           "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 419,
@@ -2559,7 +2559,7 @@
             "vit": 3
           },
           "templateId": "forest_wolf",
-          "wanderTimer": 5.210456,
+          "wanderTimer": 7.771505,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -2579,10 +2579,10 @@
           "facing": 0.785398,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
+          "flee": 9,
           "fleeTimer": 4.95,
           "hasFled": true,
-          "hit": 17,
+          "hit": 53,
           "hostile": true,
           "hp": 20,
           "id": 420,
@@ -2627,11 +2627,11 @@
       "tick": 0,
       "time": 0,
       "nextId": 421,
-      "state": "81af4fef",
+      "state": "7b25e745",
       "events": "741638a5",
       "rng": {
-        "draws": 19,
-        "digest": "09116872"
+        "draws": 16,
+        "digest": "4b7ddb75"
       },
       "label": "final",
       "players": [
@@ -2649,7 +2649,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 311
+            "damageTaken": 327
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -2691,7 +2691,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -2720,7 +2720,7 @@
               "remaining": 3,
               "school": "shadow",
               "sourceId": 417,
-              "value": 2.902313
+              "value": 2.042434
             }
           ],
           "blockChance": 0.05,
@@ -2733,15 +2733,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
+          "flee": 1,
+          "hit": 28,
           "hp": 1000000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -2755,7 +2755,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 29.975,
+          "resource": 30.69,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -2763,7 +2763,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -2777,7 +2777,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -2793,8 +2793,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
-          "hit": 17,
+          "flee": 9,
+          "hit": 53,
           "hostile": true,
           "hp": 1357,
           "id": 415,
@@ -2847,8 +2847,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 35,
-          "hit": 55,
+          "flee": 27,
+          "hit": 115,
           "hostile": true,
           "hp": 2171,
           "id": 416,
@@ -2904,8 +2904,8 @@
           "elementLevel": 2,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 48,
+          "flee": 18,
+          "hit": 112,
           "hostile": true,
           "hp": 2277,
           "id": 417,
@@ -2957,11 +2957,11 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": 1.176271,
+          "facing": -0.226092,
           "fallStartY": 58.188532,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 418,
@@ -2974,9 +2974,9 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 300.129245,
-            "y": 58.189961,
-            "z": 300.053812
+            "x": 299.968616,
+            "y": 58.180156,
+            "z": 300.136437
           },
           "potionCooldownUntil": -1,
           "race": "brute",
@@ -2996,9 +2996,9 @@
           },
           "templateId": "forest_wolf",
           "wanderTarget": {
-            "x": 307.860336,
-            "y": 57.610008,
-            "z": 303.272689
+            "x": 298.918529,
+            "y": 57.734603,
+            "z": 304.70153
           },
           "wanderTimer": 30,
           "weapon": {
@@ -3018,8 +3018,8 @@
           "elementLevel": 1,
           "fallStartY": 57.211832,
           "fiveSecondRule": 99,
-          "flee": 8,
-          "hit": 13,
+          "flee": 6,
+          "hit": 58,
           "hostile": true,
           "hp": 60,
           "id": 419,
@@ -3053,7 +3053,7 @@
             "vit": 3
           },
           "templateId": "forest_wolf",
-          "wanderTimer": 5.210456,
+          "wanderTimer": 7.771505,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -3073,10 +3073,10 @@
           "facing": 0.785398,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 12,
+          "flee": 9,
           "fleeTimer": 4.95,
           "hasFled": true,
-          "hit": 17,
+          "hit": 53,
           "hostile": true,
           "hp": 20,
           "id": 420,

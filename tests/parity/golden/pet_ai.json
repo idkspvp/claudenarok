@@ -10,14 +10,14 @@
     "updatePet melee arm: close + auto-taunt + mobSwing (PET_COMBAT_LINGER owner inCombat)",
     "petFollow heel transition (pets return to a moved owner)"
   ],
-  "draws": 779,
-  "drawDigest": "a693adf3",
+  "draws": 794,
+  "drawDigest": "49b821a0",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "43f9a939",
+      "state": "71866e65",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -83,7 +83,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "combatTimer": 99,
           "comboUntil": -1,
           "critChance": 0.013333,
@@ -93,15 +93,15 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
-          "maxResource": 12,
+          "maxHp": 213,
+          "maxResource": 51,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -113,8 +113,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 12,
+          "rangedPower": 2,
+          "resource": 51,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -122,7 +122,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -140,7 +140,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -151,77 +151,77 @@
       "tick": 20,
       "time": 1,
       "nextId": 419,
-      "state": "9732ba3c",
-      "events": "7f763df3",
+      "state": "7b438926",
+      "events": "a6867a4b",
       "rng": {
-        "draws": 17,
-        "digest": "250a33eb"
+        "draws": 16,
+        "digest": "afb8b62c"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 419,
-      "state": "066b36de",
+      "state": "8a14fe3d",
       "events": "741638a5",
       "rng": {
-        "draws": 17,
-        "digest": "250a33eb"
+        "draws": 16,
+        "digest": "afb8b62c"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 419,
-      "state": "53f207b6",
-      "events": "acafd9a2",
+      "state": "bb527ccc",
+      "events": "41082f2c",
       "rng": {
-        "draws": 112,
-        "digest": "b6fc5cb4"
+        "draws": 113,
+        "digest": "aab67353"
       }
     },
     {
       "tick": 80,
       "time": 4,
       "nextId": 419,
-      "state": "b3bb19da",
+      "state": "cec4362e",
       "events": "741638a5",
       "rng": {
-        "draws": 197,
-        "digest": "8d68d4e6"
+        "draws": 194,
+        "digest": "1760f14a"
       }
     },
     {
       "tick": 100,
       "time": 5,
       "nextId": 419,
-      "state": "0fc8062b",
-      "events": "5a296e57",
+      "state": "ad6646b8",
+      "events": "903817c1",
       "rng": {
-        "draws": 308,
-        "digest": "42a6ff31"
+        "draws": 309,
+        "digest": "1aad11a3"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "803908bc",
+      "state": "5aa7368d",
       "events": "741638a5",
       "rng": {
-        "draws": 432,
-        "digest": "731b5cc8"
+        "draws": 420,
+        "digest": "4f65f591"
       }
     },
     {
       "tick": 120,
       "time": 6,
       "nextId": 419,
-      "state": "51bd20a8",
+      "state": "4d833511",
       "events": "741638a5",
       "rng": {
-        "draws": 432,
-        "digest": "731b5cc8"
+        "draws": 420,
+        "digest": "4f65f591"
       },
       "label": "heel",
       "players": [
@@ -240,13 +240,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 21
+            "damageDealt": 27
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 21
+              "damageDealt": 27
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -303,7 +303,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "autoAttack": true,
           "combatTimer": 5.7,
           "comboUntil": -1,
@@ -314,8 +314,8 @@
           "elementLevel": 1,
           "fallStartY": 57.44792,
           "fiveSecondRule": 105,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "inCombat": true,
@@ -323,7 +323,7 @@
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -335,8 +335,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -344,7 +344,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -363,7 +363,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -380,9 +380,9 @@
           "facing": 1.458652,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 43,
-          "hit": 100,
-          "hp": 2179,
+          "flee": 27,
+          "hit": 217,
+          "hp": 2162,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -437,10 +437,10 @@
           "facing": -1.68294,
           "fallStartY": 55.166507,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
-          "hp": 49390,
+          "hp": 49391,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -483,7 +483,7 @@
           "threat": [
             [
               415,
-              611
+              610
             ]
           ],
           "wanderTarget": {
@@ -510,9 +510,9 @@
           "facing": -1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 102,
-          "hp": 3038,
+          "flee": 16,
+          "hit": 218,
+          "hp": 3032,
           "id": 417,
           "inCombat": true,
           "kind": "mob",
@@ -557,7 +557,7 @@
         {
           "aggroTargetId": 417,
           "aiState": "attack",
-          "combatTimer": 1.65,
+          "combatTimer": 1.6,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -567,11 +567,11 @@
           "facing": 1.570796,
           "fallStartY": 57.351926,
           "fiveSecondRule": 99,
-          "flee": 11,
+          "flee": 9,
           "forcedTargetTimer": -0.05,
-          "hit": 16,
+          "hit": 61,
           "hostile": true,
-          "hp": 49878,
+          "hp": 49862,
           "id": 418,
           "inCombat": true,
           "kind": "mob",
@@ -615,11 +615,11 @@
           "threat": [
             [
               414,
-              21
+              27
             ],
             [
               417,
-              122
+              138
             ]
           ],
           "weapon": {
@@ -634,44 +634,44 @@
       "tick": 140,
       "time": 7,
       "nextId": 419,
-      "state": "c159d8bb",
+      "state": "3f00f8f8",
       "events": "741638a5",
       "rng": {
-        "draws": 523,
-        "digest": "c77ca90b"
+        "draws": 518,
+        "digest": "b8f50a3d"
       }
     },
     {
       "tick": 160,
       "time": 8,
       "nextId": 419,
-      "state": "b2e09cef",
+      "state": "98d7eb22",
       "events": "741638a5",
       "rng": {
-        "draws": 637,
-        "digest": "21e10cd8"
+        "draws": 648,
+        "digest": "6ad91b19"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 419,
-      "state": "be9b6d00",
+      "state": "93a967db",
       "events": "741638a5",
       "rng": {
-        "draws": 779,
-        "digest": "a693adf3"
+        "draws": 794,
+        "digest": "49b821a0"
       }
     },
     {
       "tick": 180,
       "time": 9,
       "nextId": 419,
-      "state": "be9b6d00",
+      "state": "93a967db",
       "events": "741638a5",
       "rng": {
-        "draws": 779,
-        "digest": "a693adf3"
+        "draws": 794,
+        "digest": "49b821a0"
       },
       "label": "final",
       "players": [
@@ -690,13 +690,13 @@
           "cls": "archer",
           "companionUpgrades": {},
           "counters": {
-            "damageDealt": 21
+            "damageDealt": 27
           },
           "craftSkills": {},
           "craftThrottle": {},
           "deedStats": {
             "counters": {
-              "damageDealt": 21
+              "damageDealt": 27
             },
             "dungeonClears": {},
             "itemsDiscovered": [
@@ -753,7 +753,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 5,
           "autoAttack": true,
           "combatTimer": 8.7,
           "comboUntil": -1,
@@ -764,15 +764,15 @@
           "elementLevel": 1,
           "fallStartY": 57.44792,
           "fiveSecondRule": 108,
-          "flee": 13,
-          "hit": 13,
+          "flee": 12,
+          "hit": 39,
           "hp": 50000,
           "id": 414,
           "kind": "player",
           "level": 12,
           "lootFfaTimer": "Infinity",
           "maxHp": 50000,
-          "maxResource": 34,
+          "maxResource": 106,
           "moveSpeed": 7,
           "onGround": true,
           "overpowerUntil": -1,
@@ -784,8 +784,8 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "rangedPower": 1,
-          "resource": 34,
+          "rangedPower": 4,
+          "resource": 106,
           "resourceType": "mana",
           "size": "medium",
           "spawnPos": {
@@ -793,7 +793,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 5,
           "stats": {
             "agi": 1,
             "armor": 1,
@@ -812,7 +812,7 @@
               "maxRange": 35,
               "minRange": 8
             },
-            "speed": 1.394,
+            "speed": 1.4,
             "weaponLevel": 1,
             "weaponType": "bow"
           }
@@ -829,8 +829,8 @@
           "facing": 1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 43,
-          "hit": 100,
+          "flee": 27,
+          "hit": 217,
           "hp": 2179,
           "id": 415,
           "kind": "mob",
@@ -883,10 +883,10 @@
           "facing": -1.570796,
           "fallStartY": 55.166507,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
-          "hp": 49390,
+          "hp": 49391,
           "id": 416,
           "inCombat": true,
           "kind": "mob",
@@ -945,8 +945,8 @@
           "facing": 1.570796,
           "fallStartY": 62.280921,
           "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 102,
+          "flee": 16,
+          "hit": 218,
           "hp": 3040,
           "id": 417,
           "kind": "mob",
@@ -995,7 +995,7 @@
         },
         {
           "aiState": "evade",
-          "combatTimer": 4.65,
+          "combatTimer": 4.6,
           "comboUntil": -1,
           "critChance": 0.05,
           "detonateTimer": "Infinity",
@@ -1005,10 +1005,10 @@
           "facing": -1.665748,
           "fallStartY": 57.351926,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
-          "hp": 49878,
+          "hp": 49862,
           "id": 418,
           "inCombat": true,
           "kind": "mob",

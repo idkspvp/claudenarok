@@ -10,14 +10,14 @@
     "mobSwing affix cascade: rampage stacking buff_ap (warlord_drogmar self-buff)",
     "friendly-pet mobSwing: mob.hostile=false short-circuits every proc (no debuff on its target)"
   ],
-  "draws": 293,
-  "drawDigest": "fe7d8afe",
+  "draws": 260,
+  "drawDigest": "c62aea8c",
   "frames": [
     {
       "tick": 0,
       "time": 0,
       "nextId": 415,
-      "state": "22cd1b7d",
+      "state": "b4b133fc",
       "events": "741638a5",
       "rng": {
         "draws": 0,
@@ -80,7 +80,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 2,
           "auras": [
             {
               "duration": 3600,
@@ -103,14 +103,14 @@
           "elementLevel": 1,
           "fallStartY": 1.5,
           "fiveSecondRule": 99,
-          "flee": 2,
-          "hit": 2,
-          "hp": 40,
+          "flee": 1,
+          "hit": 28,
+          "hp": 213,
           "id": 414,
           "kind": "player",
           "level": 1,
           "lootFfaTimer": "Infinity",
-          "maxHp": 40,
+          "maxHp": 213,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -131,7 +131,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 2,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -145,7 +145,7 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
@@ -156,44 +156,44 @@
       "tick": 20,
       "time": 1,
       "nextId": 421,
-      "state": "a4bb3a84",
-      "events": "05091de0",
+      "state": "b0f3b150",
+      "events": "911cb010",
       "rng": {
-        "draws": 72,
-        "digest": "3a0168ee"
+        "draws": 64,
+        "digest": "e3196e8b"
       }
     },
     {
       "tick": 40,
       "time": 2,
       "nextId": 421,
-      "state": "b6678812",
-      "events": "703225f5",
+      "state": "1885c6ca",
+      "events": "4bd92602",
       "rng": {
-        "draws": 128,
-        "digest": "f58195cc"
+        "draws": 109,
+        "digest": "bfc0b463"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "64f2fab5",
-      "events": "877f5d47",
+      "state": "2f5954dd",
+      "events": "1a410c4c",
       "rng": {
-        "draws": 272,
-        "digest": "fd62b7bf"
+        "draws": 238,
+        "digest": "b8f73495"
       }
     },
     {
       "tick": 60,
       "time": 3,
       "nextId": 421,
-      "state": "1e6aebe1",
+      "state": "7e519673",
       "events": "741638a5",
       "rng": {
-        "draws": 272,
-        "digest": "fd62b7bf"
+        "draws": 238,
+        "digest": "b8f73495"
       },
       "label": "affixes",
       "players": [
@@ -212,7 +212,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1378
+            "damageTaken": 1382
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -277,7 +277,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 6,
           "auras": [
             {
               "duration": 3600,
@@ -293,7 +293,7 @@
               "id": "heal_absorb_gravecaller_summoner",
               "kind": "heal_absorb",
               "name": "Grave Blight",
-              "remaining": 7.5,
+              "remaining": 9.05,
               "school": "shadow",
               "sourceId": 417,
               "value": 120
@@ -349,15 +349,15 @@
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102,
-          "flee": 17,
-          "hit": 17,
+          "flee": 16,
+          "hit": 43,
           "hp": 1000000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 212,
+          "maxHp": 542,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -371,7 +371,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 84.211111,
+          "resource": 84.455556,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -379,7 +379,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -393,13 +393,13 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
-          "aggroTargetId": 419,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 0.5,
           "comboUntil": -1,
@@ -411,10 +411,10 @@
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 29,
+          "flee": 21,
+          "hit": 65,
           "hostile": true,
-          "hp": 199984,
+          "hp": 200000,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -449,16 +449,16 @@
             "dex": 11,
             "vit": 6
           },
-          "swingTimer": 1.05,
-          "tappedById": 414,
+          "swingTimer": 1.2,
           "targetId": 414,
           "templateId": "mogger_lackey",
           "threat": [
             [
-              419,
-              16
+              414,
+              1
             ]
           ],
+          "wanderTimer": 3.676551,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -478,8 +478,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 25,
+          "flee": 19,
+          "hit": 58,
           "hostile": true,
           "hp": 200000,
           "id": 416,
@@ -531,8 +531,8 @@
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 30,
-          "hit": 54,
+          "flee": 24,
+          "hit": 118,
           "hostile": true,
           "hp": 200000,
           "id": 417,
@@ -600,8 +600,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 118,
-          "hit": 118,
+          "flee": 68,
+          "hit": 243,
           "hostile": true,
           "hp": 200000,
           "id": 418,
@@ -643,11 +643,11 @@
           }
         },
         {
-          "aggroTargetId": 415,
-          "aiState": "idle",
-          "combatTimer": 0.5,
+          "aiState": "dead",
           "comboUntil": -1,
+          "corpseTimer": "Infinity",
           "critChance": 0.05,
+          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.07,
           "element": "neutral",
@@ -655,9 +655,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
-          "hp": 8,
+          "flee": 9,
+          "hit": 61,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -676,6 +675,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "brute",
+          "respawnTimer": "Infinity",
           "size": "medium",
           "spawnPos": {
             "x": 3,
@@ -690,7 +690,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 1.05,
+          "swingTimer": 0.05,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -699,8 +699,7 @@
           }
         },
         {
-          "aggroTargetId": 419,
-          "aiState": "attack",
+          "aiState": "idle",
           "combatTimer": 0.5,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -708,21 +707,15 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": -1.570796,
+          "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
-          "hp": 199965,
+          "hp": 200000,
           "id": 420,
-          "inCombat": true,
           "kind": "mob",
-          "leashAnchor": {
-            "x": 7,
-            "y": 1.209107,
-            "z": -21
-          },
           "level": 8,
           "lootFfaTimer": "Infinity",
           "maxHp": 200000,
@@ -731,8 +724,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 7,
-            "y": 1.209107,
+            "x": 10.84,
+            "y": 0.938871,
             "z": -21
           },
           "potionCooldownUntil": -1,
@@ -751,15 +744,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 1.25,
-          "tappedById": 414,
+          "swingTimer": 0.25,
           "templateId": "forest_wolf",
-          "threat": [
-            [
-              419,
-              36
-            ]
-          ],
+          "wanderTimer": 3.304453,
           "weapon": {
             "max": 12,
             "min": 9,
@@ -772,11 +759,11 @@
       "tick": 64,
       "time": 3.2,
       "nextId": 421,
-      "state": "d720d13c",
+      "state": "fc05b6b3",
       "events": "741638a5",
       "rng": {
-        "draws": 293,
-        "digest": "fe7d8afe"
+        "draws": 260,
+        "digest": "c62aea8c"
       },
       "label": "final",
       "players": [
@@ -795,7 +782,7 @@
           "cls": "swordman",
           "companionUpgrades": {},
           "counters": {
-            "damageTaken": 1378
+            "damageTaken": 1382
           },
           "craftSkills": {},
           "craftThrottle": {},
@@ -860,7 +847,7 @@
       "entities": [
         {
           "aiState": "idle",
-          "attackPower": 1,
+          "attackPower": 6,
           "auras": [
             {
               "duration": 3600,
@@ -876,7 +863,7 @@
               "id": "heal_absorb_gravecaller_summoner",
               "kind": "heal_absorb",
               "name": "Grave Blight",
-              "remaining": 7.3,
+              "remaining": 8.85,
               "school": "shadow",
               "sourceId": 417,
               "value": 120
@@ -932,15 +919,15 @@
           "elementLevel": 1,
           "fallStartY": 1.353318,
           "fiveSecondRule": 102.2,
-          "flee": 17,
-          "hit": 17,
+          "flee": 16,
+          "hit": 43,
           "hp": 1000000,
           "id": 414,
           "inCombat": true,
           "kind": "player",
           "level": 16,
           "lootFfaTimer": "Infinity",
-          "maxHp": 212,
+          "maxHp": 542,
           "maxResource": 100,
           "moveSpeed": 7,
           "offhandItemId": "eastbrook_buckler",
@@ -954,7 +941,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "demihuman",
-          "resource": 84.211111,
+          "resource": 84.455556,
           "resourceType": "rage",
           "size": "medium",
           "spawnPos": {
@@ -962,7 +949,7 @@
             "y": 1.5,
             "z": -2
           },
-          "spellPower": 1,
+          "spellPower": 6,
           "stats": {
             "agi": 1,
             "armor": 2,
@@ -976,13 +963,13 @@
           "weapon": {
             "max": 54,
             "min": 41,
-            "speed": 1.096,
+            "speed": 1.1,
             "weaponLevel": 1,
             "weaponType": "sword"
           }
         },
         {
-          "aggroTargetId": 419,
+          "aggroTargetId": 414,
           "aiState": "attack",
           "combatTimer": 0.7,
           "comboUntil": -1,
@@ -994,10 +981,10 @@
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 24,
-          "hit": 29,
+          "flee": 21,
+          "hit": 65,
           "hostile": true,
-          "hp": 199984,
+          "hp": 200000,
           "id": 415,
           "inCombat": true,
           "kind": "mob",
@@ -1032,16 +1019,16 @@
             "dex": 11,
             "vit": 6
           },
-          "swingTimer": 0.85,
-          "tappedById": 414,
+          "swingTimer": 1,
           "targetId": 414,
           "templateId": "mogger_lackey",
           "threat": [
             [
-              419,
-              16
+              414,
+              1
             ]
           ],
+          "wanderTimer": 3.676551,
           "weapon": {
             "max": 50,
             "min": 32,
@@ -1061,8 +1048,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 20,
-          "hit": 25,
+          "flee": 19,
+          "hit": 58,
           "hostile": true,
           "hp": 200000,
           "id": 416,
@@ -1114,8 +1101,8 @@
           "facing": -1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 30,
-          "hit": 54,
+          "flee": 24,
+          "hit": 118,
           "hostile": true,
           "hp": 200000,
           "id": 417,
@@ -1183,8 +1170,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 118,
-          "hit": 118,
+          "flee": 68,
+          "hit": 243,
           "hostile": true,
           "hp": 200000,
           "id": 418,
@@ -1226,11 +1213,11 @@
           }
         },
         {
-          "aggroTargetId": 415,
-          "aiState": "idle",
-          "combatTimer": 0.7,
+          "aiState": "dead",
           "comboUntil": -1,
+          "corpseTimer": "Infinity",
           "critChance": 0.05,
+          "dead": true,
           "detonateTimer": "Infinity",
           "dodgeChance": 0.07,
           "element": "neutral",
@@ -1238,9 +1225,8 @@
           "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
-          "hp": 8,
+          "flee": 9,
+          "hit": 61,
           "id": 419,
           "inCombat": true,
           "kind": "mob",
@@ -1259,6 +1245,7 @@
           },
           "potionCooldownUntil": -1,
           "race": "brute",
+          "respawnTimer": "Infinity",
           "size": "medium",
           "spawnPos": {
             "x": 3,
@@ -1273,7 +1260,7 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 0.85,
+          "swingTimer": 0.05,
           "templateId": "forest_wolf",
           "weapon": {
             "max": 12,
@@ -1282,8 +1269,7 @@
           }
         },
         {
-          "aggroTargetId": 419,
-          "aiState": "attack",
+          "aiState": "idle",
           "combatTimer": 0.7,
           "comboUntil": -1,
           "critChance": 0.05,
@@ -1291,21 +1277,15 @@
           "dodgeChance": 0.07,
           "element": "neutral",
           "elementLevel": 1,
-          "facing": -1.570796,
+          "facing": 1.570796,
           "fallStartY": 1.359999,
           "fiveSecondRule": 99,
-          "flee": 11,
-          "hit": 16,
+          "flee": 9,
+          "hit": 61,
           "hostile": true,
-          "hp": 199965,
+          "hp": 200000,
           "id": 420,
-          "inCombat": true,
           "kind": "mob",
-          "leashAnchor": {
-            "x": 7,
-            "y": 1.209107,
-            "z": -21
-          },
           "level": 8,
           "lootFfaTimer": "Infinity",
           "maxHp": 200000,
@@ -1314,8 +1294,8 @@
           "overpowerUntil": -1,
           "petMode": "defensive",
           "pos": {
-            "x": 7,
-            "y": 1.209107,
+            "x": 10.84,
+            "y": 0.938871,
             "z": -21
           },
           "potionCooldownUntil": -1,
@@ -1334,15 +1314,9 @@
             "mdef": 20,
             "vit": 3
           },
-          "swingTimer": 1.05,
-          "tappedById": 414,
+          "swingTimer": 0.25,
           "templateId": "forest_wolf",
-          "threat": [
-            [
-              419,
-              36
-            ]
-          ],
+          "wanderTimer": 3.104453,
           "weapon": {
             "max": 12,
             "min": 9,
