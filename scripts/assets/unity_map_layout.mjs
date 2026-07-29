@@ -23,9 +23,18 @@
 // The three classes that matter:
 //   1   GameObject  -> m_Name, m_Component list, m_IsActive
 //   4   Transform   -> m_LocalPosition/Rotation/Scale, m_Father, m_GameObject
-//   33  MeshFilter, 23 MeshRenderer -> marks a node as REAL geometry
+//   33  MeshFilter  -> m_Mesh, the AUTHORITATIVE mesh reference
+//   23  MeshRenderer -> marks a node as drawn
 // A Transform points at its GameObject and its parent, so the tree is rebuilt by
 // following m_Father and the group name is the nearest named ancestor.
+//
+// THE MESH IS RESOLVED BY GUID, NEVER BY THE GAMEOBJECT'S NAME. A scene node's
+// name is an arbitrary label a level designer typed; the MeshFilter's guid is
+// what actually gets drawn, and the two disagree often. One real case:
+// a node named SM_Env_Railing_15 draws SM_Env_Railing_04, and no asset called
+// SM_Env_Railing_15 exists anywhere in the project. Matching on the name both
+// loses those props AND silently mis-binds the ones whose names happen to
+// collide with a real mesh.
 
 import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -68,12 +77,13 @@ const ref = (body, key) => body.match(new RegExp(`${key}: \\{fileID: (\\d+)`))?.
 /** Round to 4 decimals so the JSON is stable and small; a map is metres, not microns. */
 const r4 = (a) => a.map((n) => Math.round(n * 1e4) / 1e4);
 
-export function extractMapLayout(text, mapName) {
+export function extractMapLayout(text, mapName, guidMap = null) {
   const docs = splitDocuments(text);
 
   const gameObjects = new Map(); // anchor -> { name, active, components[] }
   const transforms = new Map(); // anchor -> { go, parent, pos, rot, scale }
   const geometryOwners = new Set(); // GameObject anchors that own a MeshFilter/Renderer
+  const meshGuidOf = new Map(); // GameObject anchor -> the guid its MeshFilter draws
   const componentOwner = new Map(); // component anchor -> GameObject anchor
 
   for (const d of docs) {
@@ -95,8 +105,14 @@ export function extractMapLayout(text, mapName) {
         rot: vec(d.body, 'm_LocalRotation'),
         scale: vec(d.body, 'm_LocalScale'),
       });
-    } else if (d.classId === 33 || d.classId === 23) {
-      // MeshFilter / MeshRenderer: this GameObject draws something.
+    } else if (d.classId === 33) {
+      // MeshFilter: this GameObject draws something, and m_Mesh says WHAT.
+      const owner = ref(d.body, 'm_GameObject');
+      if (!owner) continue;
+      geometryOwners.add(owner);
+      const guid = d.body.match(/m_Mesh: \{fileID: \d+, guid: ([0-9a-f]{32})/)?.[1];
+      if (guid) meshGuidOf.set(owner, guid);
+    } else if (d.classId === 23) {
       const owner = ref(d.body, 'm_GameObject');
       if (owner) geometryOwners.add(owner);
     }
@@ -131,8 +147,14 @@ export function extractMapLayout(text, mapName) {
     if (!t.go || !t.pos) continue;
     const go = gameObjects.get(t.go);
     if (!go || !go.name) continue;
+    // The mesh a guid resolves to, which is the thing actually drawn. Falls back
+    // to the node name only when there is no guid map, so a caller running
+    // without one still gets a usable (if approximate) answer.
+    const guid = meshGuidOf.get(t.go);
+    const resolved = guid && guidMap ? guidMap[guid]?.name : null;
     const entry = {
-      name: go.name,
+      name: resolved ?? go.name,
+      ...(resolved && resolved !== go.name ? { node: go.name } : {}),
       pos: r4(t.pos),
       rot: t.rot ? r4(t.rot) : [0, 0, 0, 1],
       scale: t.scale ? r4(t.scale) : [1, 1, 1],
@@ -175,6 +197,13 @@ if (invokedDirectly) {
     process.exit(1);
   }
   const limit = Number(flag('--limit', '0'));
+  // Optional but strongly recommended: without it, props are named by their scene
+  // node rather than by the mesh they draw.
+  const guidMapPath = flag('--guid-map');
+  const guidMap = guidMapPath ? JSON.parse(readFileSync(guidMapPath, 'utf8')) : null;
+  if (!guidMap) {
+    console.error('warning: no --guid-map, falling back to node names (see the header)');
+  }
 
   /** Every `_Maps/**\/*.prefab` under the ripped bundle tree. */
   const found = [];
@@ -202,7 +231,7 @@ if (invokedDirectly) {
     const mapName = path.basename(file, '.prefab');
     let layout;
     try {
-      layout = extractMapLayout(readFileSync(file, 'utf8'), mapName);
+      layout = extractMapLayout(readFileSync(file, 'utf8'), mapName, guidMap);
     } catch (err) {
       console.error(`  FAIL ${mapName}: ${String(err.message).slice(0, 140)}`);
       continue;
