@@ -272,7 +272,33 @@ export function readSerializedFile(buf) {
     objects.push({ pathId, byteStart, byteSize, typeIndex });
   }
 
-  return { version, unityVersion, dataOffset, types, objects, buf };
+  // Script types, then the EXTERNALS table. A PPtr's m_FileID is an index into
+  // that table (1-based; 0 means this file), so without it a reference to
+  // another asset is just a number. The terrain's four ground layers are exactly
+  // that kind of reference.
+  const externals = [];
+  try {
+    const scriptCount = c.u32();
+    c.pos += scriptCount * (4 + 8); // localSerializedFileIndex + localIdentifierInFile
+    const externalCount = c.u32();
+    for (let i = 0; i < externalCount && i < 4096; i++) {
+      cstr(); // tempEmpty
+      const guidBytes = c.bytes(16);
+      const type = c.i32();
+      const pathName = cstr();
+      // Unity writes the guid as 16 raw bytes, nibble-swapped per byte relative
+      // to how the text form reads.
+      let guid = '';
+      for (const b of guidBytes)
+        guid += (((b & 0x0f) << 4) | (b >> 4)).toString(16).padStart(2, '0');
+      externals.push({ guid, type, pathName });
+    }
+  } catch {
+    // A file without a usable externals table still yields its own objects.
+    externals.length = 0;
+  }
+
+  return { version, unityVersion, dataOffset, types, objects, externals, buf };
 }
 
 function readType(c) {
